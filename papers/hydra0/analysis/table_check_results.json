@@ -1,0 +1,102 @@
+{
+ "paper_vs_page_mismatches": [],
+ "average_row_off_by_more_than_rounding": [
+  {
+   "cell": "Ours (Cosmos 2.5 2B)/SSIM",
+   "reported": 0.725,
+   "recomputed": 0.726,
+   "abs_diff": 0.001,
+   "reported_se": 0.003,
+   "recomputed_se": 0.003
+  },
+  {
+   "cell": "Ours (Wan2.2 A14B 4-step)/SSIM",
+   "reported": 0.83,
+   "recomputed": 0.831,
+   "abs_diff": 0.001,
+   "reported_se": 0.002,
+   "recomputed_se": 0.002
+  }
+ ],
+ "average_se_off": [],
+ "headline": {
+  "grip_EPE_reduction_best_vs_Cosmos2.5": 90.4,
+  "obj_EPE_reduction_best_vs_Cosmos2.5": 60.17,
+  "controlled_same_backbone_grip": 59.74,
+  "controlled_same_backbone_obj": 52.61,
+  "best_vs_zero_shot_ATI_grip": 28.79,
+  "best_vs_zero_shot_ATI_obj": 77.27,
+  "best_vs_zero_shot_WanMove_obj": 75.52,
+  "Cosmos2.5_baseline_grip_vs_ATI_ratio": 7.42
+ },
+ "controlled_claim_violations": [],
+ "4step_best_cells": "33/34",
+ "4step_minus_teacher_z_on_Average": {
+  "PSNR": 6.6,
+  "SSIM": 6.9,
+  "ObjEPE": -1.4,
+  "GripEPE": -3.3,
+  "VLM": 3.9
+ },
+ "robolab": {
+  "reference_successes": 80,
+  "simulated_successes": 79,
+  "agreement": 0.93,
+  "cohen_kappa": 0.82,
+  "sim_rate": 0.2633,
+  "ref_rate": 0.2667,
+  "always_fail_baseline_accuracy": 0.733,
+  "abs_count_diff_sum_T_compatible_with_MAE": [
+   17
+  ],
+  "note": "에피소드 불일치 수 ≥ T (쌍 안에서 FP와 FN이 상쇄될 수 있으므로)",
+  "pearson_r_0.96_CI_n30": [
+   0.917,
+   0.981
+  ],
+  "pearson_r_0.96_CI_n5": [
+   0.508,
+   0.997
+  ],
+  "sensitivity(TP/ref_pos)": 0.863,
+  "precision(TP/sim_pos)": 0.873
+ },
+ "corpus_hours": {
+  "DROID": {
+   "recomputed_h": 313.7,
+   "reported_h": 313.7,
+   "share_pct": 14.2
+  },
+  "ABC-130k": {
+   "recomputed_h": 1474.7,
+   "reported_h": 1474.7,
+   "share_pct": 67.0
+  },
+  "MolmoAct2": {
+   "recomputed_h": 177.7,
+   "reported_h": 177.7,
+   "share_pct": 8.1
+  },
+  "EgoDex": {
+   "recomputed_h": 125.7,
+   "reported_h": 125.7,
+   "share_pct": 5.7
+  },
+  "Deform360": {
+   "recomputed_h": 84.8,
+   "reported_h": 84.8,
+   "share_pct": 3.9
+  },
+  "XVLA-Soft-Fold": {
+   "recomputed_h": 25.0,
+   "reported_h": 25.0,
+   "share_pct": 1.1
+  },
+  "H1-Fold-Clothes": {
+   "recomputed_h": 0.1,
+   "reported_h": 0.1,
+   "share_pct": 0.0
+  }
+ },
+ "corpus_total_h": 2201.7
+}

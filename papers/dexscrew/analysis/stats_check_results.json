@@ -1,0 +1,363 @@
+{
+  "nut_reconstruction": {
+    "none/square": {
+      "step_pct": 12.5,
+      "n_solutions": 24,
+      "example": [
+        0.0,
+        12.5,
+        50.0,
+        62.5,
+        75.0,
+        87.5,
+        87.5,
+        87.5,
+        87.5,
+        87.5
+      ]
+    },
+    "none/triangular": {
+      "step_pct": 12.5,
+      "n_solutions": 4,
+      "example": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        62.5,
+        62.5,
+        87.5,
+        87.5
+      ]
+    },
+    "none/hexagonal": {
+      "step_pct": 12.5,
+      "n_solutions": 9,
+      "example": [
+        0.0,
+        50.0,
+        75.0,
+        87.5,
+        87.5,
+        87.5,
+        87.5,
+        87.5,
+        87.5,
+        100.0
+      ]
+    },
+    "none/cross": {
+      "step_pct": 12.5,
+      "n_solutions": 24,
+      "example": [
+        0.0,
+        12.5,
+        50.0,
+        62.5,
+        75.0,
+        87.5,
+        87.5,
+        87.5,
+        87.5,
+        87.5
+      ]
+    },
+    "tactile/square": {
+      "step_pct": 12.5,
+      "n_solutions": 29,
+      "example": [
+        0.0,
+        0.0,
+        62.5,
+        75.0,
+        75.0,
+        75.0,
+        75.0,
+        87.5,
+        87.5,
+        87.5
+      ]
+    },
+    "tactile/triangular": {
+      "step_pct": 12.5,
+      "n_solutions": 29,
+      "example": [
+        0.0,
+        37.5,
+        62.5,
+        75.0,
+        75.0,
+        75.0,
+        75.0,
+        87.5,
+        87.5,
+        87.5
+      ]
+    },
+    "tactile/hexagonal": {
+      "step_pct": 12.5,
+      "n_solutions": 8,
+      "example": [
+        37.5,
+        62.5,
+        62.5,
+        75.0,
+        75.0,
+        87.5,
+        87.5,
+        87.5,
+        87.5,
+        87.5
+      ]
+    },
+    "tactile/cross": {
+      "step_pct": 12.5,
+      "n_solutions": 3,
+      "example": [
+        62.5,
+        62.5,
+        87.5,
+        87.5,
+        87.5,
+        87.5,
+        87.5,
+        87.5,
+        87.5,
+        87.5
+      ]
+    },
+    "hist/square": {
+      "step_pct": 12.5,
+      "n_solutions": 3,
+      "example": [
+        37.5,
+        75.0,
+        75.0,
+        87.5,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    },
+    "hist/triangular": {
+      "step_pct": 12.5,
+      "n_solutions": 3,
+      "example": [
+        0.0,
+        50.0,
+        75.0,
+        75.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    },
+    "hist/hexagonal": {
+      "step_pct": 12.5,
+      "n_solutions": 2,
+      "example": [
+        0.0,
+        62.5,
+        87.5,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    },
+    "hist/cross": {
+      "step_pct": 12.5,
+      "n_solutions": 1,
+      "example": [
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    },
+    "tactile+hist/square": {
+      "step_pct": 12.5,
+      "n_solutions": 1,
+      "example": [
+        75.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    },
+    "tactile+hist/triangular": {
+      "step_pct": 12.5,
+      "n_solutions": 1,
+      "example": [
+        75.0,
+        87.5,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    },
+    "tactile+hist/hexagonal": {
+      "step_pct": 12.5,
+      "n_solutions": 1,
+      "example": [
+        75.0,
+        75.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    },
+    "tactile+hist/cross": {
+      "step_pct": 12.5,
+      "n_solutions": 1,
+      "example": [
+        87.5,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    }
+  },
+  "nut_tests": {
+    "square: tactile+hist vs hist": {
+      "welch_t": 1.445,
+      "welch_p": 0.1749
+    },
+    "square: tactile vs none": {
+      "welch_t": -0.084,
+      "welch_p": 0.9343
+    },
+    "square: hist vs none": {
+      "welch_t": 1.933,
+      "welch_p": 0.0723
+    },
+    "triangular: tactile+hist vs hist": {
+      "welch_t": 1.512,
+      "welch_p": 0.1608
+    },
+    "triangular: tactile vs none": {
+      "welch_t": 2.372,
+      "welch_p": 0.0305
+    },
+    "triangular: hist vs none": {
+      "welch_t": 3.07,
+      "welch_p": 0.0068
+    },
+    "hexagonal: tactile+hist vs hist": {
+      "welch_t": 0.934,
+      "welch_p": 0.3705
+    },
+    "hexagonal: tactile vs none": {
+      "welch_t": 0.0,
+      "welch_p": 1.0
+    },
+    "hexagonal: hist vs none": {
+      "welch_t": 0.725,
+      "welch_p": 0.4779
+    },
+    "cross: tactile+hist vs hist": {
+      "welch_t": -1.001,
+      "welch_p": 0.3431,
+      "perm_p(유일 재구성)": 1.0
+    },
+    "cross: tactile vs none": {
+      "welch_t": 1.709,
+      "welch_p": 0.1159
+    },
+    "cross: hist vs none": {
+      "welch_t": 3.468,
+      "welch_p": 0.0071
+    },
+    "4종 합산: 진행률 75% 미만 시행 수 (촉각+히스토리 vs 히스토리)": {
+      "tactile+hist": [
+        0
+      ],
+      "hist": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "fisher_p_range": [
+        0.0053,
+        0.0547
+      ]
+    },
+    "4종 합산 (n=40): tactile+hist vs hist": {
+      "mean_a": 96.88,
+      "mean_b": 88.12,
+      "n_reconstruction_combos": 18,
+      "perm_p_range": [
+        0.0419,
+        0.0464
+      ],
+      "mannwhitney_p_range": [
+        0.0956,
+        0.3561
+      ]
+    }
+  },
+  "screw_tests": {
+    "tactile+hist vs hist": {
+      "welch_t": 1.038,
+      "welch_p": 0.3143
+    },
+    "hist vs none": {
+      "welch_t": 1.452,
+      "welch_p": 0.1691
+    },
+    "tactile vs none": {
+      "welch_t": -0.099,
+      "welch_p": 0.9222
+    },
+    "none vs expert_replay": {
+      "welch_t": 1.448,
+      "welch_p": 0.1696
+    }
+  },
+  "power_n_per_group": {
+    "sigma=20, delta=10": 63,
+    "sigma=15, delta=10": 36,
+    "sigma=20, delta=7.5": 112,
+    "sigma=13, delta=7.5": 48
+  }
+}
