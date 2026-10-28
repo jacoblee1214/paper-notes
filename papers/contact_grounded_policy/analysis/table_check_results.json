@@ -1,0 +1,375 @@
+{
+  "C1_table2_integer_counts": {
+    "sim/in_hand_box_flipping": {
+      "counts": [
+        165,
+        145,
+        133
+      ],
+      "integer": true
+    },
+    "sim/fragile_egg_grasping": {
+      "counts": [
+        187,
+        175,
+        133
+      ],
+      "integer": true
+    },
+    "sim/dish_wiping": {
+      "counts": [
+        146,
+        109,
+        106
+      ],
+      "integer": true
+    },
+    "real/jar_opening": {
+      "counts": [
+        14,
+        10,
+        11
+      ],
+      "integer": true
+    },
+    "real/in_hand_box_flipping": {
+      "counts": [
+        12,
+        9,
+        9
+      ],
+      "integer": true
+    }
+  },
+  "C2_ci_and_tests": {
+    "sim/in_hand_box_flipping": {
+      "CGP": [
+        165,
+        250,
+        [
+          0.599,
+          0.716
+        ]
+      ],
+      "best_baseline": [
+        "Visuotactile DP",
+        145,
+        [
+          0.518,
+          0.64
+        ]
+      ],
+      "gain_pp": 8.0,
+      "fisher_p_two_sided": 0.0799
+    },
+    "sim/fragile_egg_grasping": {
+      "CGP": [
+        187,
+        250,
+        [
+          0.691,
+          0.798
+        ]
+      ],
+      "best_baseline": [
+        "Visuotactile DP",
+        175,
+        [
+          0.641,
+          0.753
+        ]
+      ],
+      "gain_pp": 4.8,
+      "fisher_p_two_sided": 0.2711
+    },
+    "sim/dish_wiping": {
+      "CGP": [
+        146,
+        250,
+        [
+          0.522,
+          0.643
+        ]
+      ],
+      "best_baseline": [
+        "Visuotactile DP",
+        109,
+        [
+          0.376,
+          0.498
+        ]
+      ],
+      "gain_pp": 14.8,
+      "fisher_p_two_sided": 0.0013
+    },
+    "real/jar_opening": {
+      "CGP": [
+        14,
+        15,
+        [
+          0.702,
+          0.988
+        ]
+      ],
+      "best_baseline": [
+        "Visuomotor DP",
+        11,
+        [
+          0.48,
+          0.891
+        ]
+      ],
+      "gain_pp": 20.0,
+      "fisher_p_two_sided": 0.3295
+    },
+    "real/in_hand_box_flipping": {
+      "CGP": [
+        12,
+        15,
+        [
+          0.548,
+          0.93
+        ]
+      ],
+      "best_baseline": [
+        "Visuotactile DP",
+        9,
+        [
+          0.357,
+          0.802
+        ]
+      ],
+      "gain_pp": 20.0,
+      "fisher_p_two_sided": 0.427
+    },
+    "MH_sim_CGP_vs_best": {
+      "common_OR": 1.5,
+      "chi2": 13.47,
+      "p": 0.000243
+    },
+    "MH_real_CGP_vs_best": {
+      "common_OR": 3.37,
+      "chi2": 2.31,
+      "p": 0.129
+    },
+    "note": "sim 250회는 한 학습 실행의 마지막 5개 체크포인트 × 50회라 독립이 아님. 구간은 낙관적"
+  },
+  "C3_table3": {
+    "residual_S+T_vs_S_only_reduction": 0.442,
+    "residual_S+T_vs_T_only_reduction": 0.511,
+    "residual_vs_absolute_reduction": {
+      "S+T/ResNet1D": 0.325,
+      "S+T/MLP": 0.334,
+      "S+T/Transformer": 0.334,
+      "S/-": 0.337,
+      "T/ResNet1D": 0.662,
+      "T/MLP": 0.655,
+      "T/Transformer": 0.661
+    },
+    "welch_residual_S+T_vs_S_only": {
+      "t": -18.96,
+      "p": 0.0003
+    },
+    "welch_residual_S+T_vs_T_only": {
+      "t": -38.03,
+      "p": 2.9e-06
+    },
+    "best_MAE_deg": 0.34,
+    "missing_baseline": "a = x (잔차 0) 기준선과 평균 |a − x| 크기가 보고되지 않음"
+  },
+  "C4_active_fraction_upper_bound": {
+    "MLP (w/ KL)": {
+      "box": 0.112,
+      "egg": 0.115,
+      "dish": 0.229
+    },
+    "MLP (w/o KL)": {
+      "box": 0.113,
+      "egg": 0.12,
+      "dish": 0.226
+    },
+    "ResNet1D (w/ KL)": {
+      "box": 0.104,
+      "egg": 0.116,
+      "dish": 0.226
+    },
+    "ResNet1D (w/o KL)": {
+      "box": 0.098,
+      "egg": 0.115,
+      "dish": 0.227
+    },
+    "Transformer (w/ KL)": {
+      "box": 0.112,
+      "egg": 0.149,
+      "dish": 0.235
+    },
+    "Transformer (w/o KL)": {
+      "box": 0.116,
+      "egg": 0.13,
+      "dish": 0.242
+    }
+  },
+  "C4_kl_ratio_wo_over_w": {
+    "MLP": {
+      "box": 2.8,
+      "egg": 2.7,
+      "dish": 2.8
+    },
+    "ResNet1D": {
+      "box": 6.1,
+      "egg": 2.0,
+      "dish": 1.9
+    },
+    "Transformer": {
+      "box": 5.1,
+      "egg": 2.2,
+      "dish": 2.5
+    }
+  },
+  "C5_psnr_vs_mae": {
+    "80/w/ KL/box": {
+      "rmse": 0.0174,
+      "rmse_over_mae": 1.93
+    },
+    "80/w/ KL/jar": {
+      "rmse": 0.016,
+      "rmse_over_mae": 1.97
+    },
+    "80/w/o KL/box": {
+      "rmse": 0.0095,
+      "rmse_over_mae": 2.08
+    },
+    "80/w/o KL/jar": {
+      "rmse": 0.0071,
+      "rmse_over_mae": 1.83
+    },
+    "160/w/ KL/box": {
+      "rmse": 0.0172,
+      "rmse_over_mae": 1.83
+    },
+    "160/w/ KL/jar": {
+      "rmse": 0.0149,
+      "rmse_over_mae": 1.77
+    },
+    "160/w/o KL/box": {
+      "rmse": 0.0095,
+      "rmse_over_mae": 2.03
+    },
+    "160/w/o KL/jar": {
+      "rmse": 0.0071,
+      "rmse_over_mae": 1.8
+    },
+    "320/w/ KL/box": {
+      "rmse": 0.0172,
+      "rmse_over_mae": 1.91
+    },
+    "320/w/ KL/jar": {
+      "rmse": 0.0156,
+      "rmse_over_mae": 1.89
+    },
+    "320/w/o KL/box": {
+      "rmse": 0.0094,
+      "rmse_over_mae": 2.07
+    },
+    "320/w/o KL/jar": {
+      "rmse": 0.007,
+      "rmse_over_mae": 1.83
+    }
+  },
+  "C5_digit360_compression": {
+    "values_per_sensor": 15552,
+    "latent_per_sensor": 20,
+    "ratio": 777.6,
+    "tactile_array_values": 2244,
+    "tactile_array_latent": 32,
+    "tactile_array_ratio": 70.1
+  },
+  "C6_dimensions": {
+    "sim_action_3+6+20": 29,
+    "sim_state_3+4+20": 27,
+    "real_action_3+6+16": 25,
+    "real_state_3+4+16": 23,
+    "diffusion_output_dim": {
+      "sim_CGP_T*(27+32)": 944,
+      "sim_DP_T*29": 464,
+      "real_CGP_T*(23+80)": 1648,
+      "real_DP_T*25": 400
+    },
+    "ratio_CGP_over_DP": {
+      "sim": 2.03,
+      "real": 4.12
+    }
+  },
+  "C7_fig7_kl_ablation": {
+    "box": {
+      "w_kl": 66,
+      "wo_kl": 62,
+      "diff_pp": 4,
+      "fisher_p_if_250_each": 0.4018
+    },
+    "egg": {
+      "w_kl": 75,
+      "wo_kl": 64,
+      "diff_pp": 11,
+      "fisher_p_if_250_each": 0.0086
+    }
+  },
+  "C7_fig8_inference_ms": {
+    "tactile_array": {
+      "Visuomotor": {
+        "total": 93,
+        "mapping_share": 0.0
+      },
+      "Visuotactile": {
+        "total": 97,
+        "mapping_share": 0.0
+      },
+      "CGP": {
+        "total": 112,
+        "mapping_share": 0.107
+      }
+    },
+    "digit360": {
+      "Visuomotor": {
+        "total": 96,
+        "mapping_share": 0.0
+      },
+      "Visuotactile": {
+        "total": 133,
+        "mapping_share": 0.0
+      },
+      "CGP": {
+        "total": 134,
+        "mapping_share": 0.022
+      }
+    }
+  },
+  "C7_fig13_noise": {
+    "S+T_residual_increase_at_50pct": 0.67,
+    "state_only_residual_table3": 10.64,
+    "tactile_benefit_remaining_at_50pct": 0.14,
+    "noise_pct_where_S+T_equals_state_only_linear_extrapolation": 58.0
+  },
+  "C8_timing": {
+    "A_5Hz_is_action_step": {
+      "step_s": 0.2,
+      "replan_every_s": 1.6,
+      "horizon_s": 3.2
+    },
+    "B_5Hz_is_inference_rate": {
+      "inference_period_s": 0.2,
+      "action_step_s": 0.025,
+      "max_inference_s_A100": 0.134,
+      "budget_used": 0.67
+    },
+    "note": "논문은 '5 Hz rollout'과 Ta = 8만 밝힘. 어느 해석이든 tactile 피드백은 재계획 때만 정책에 들어감"
+  },
+  "C9_misc": {
+    "hand_config_frames_per_episode": 27.4,
+    "hand_config_train_episodes_1to1": 75,
+    "real_trials": 15,
+    "real_min_detectable_gap_pp_at_alpha_0.05": "15 vs 15에서 p < 0.05가 되려면 대략 14/15 vs 8/15 (40%p) 이상",
+    "fisher_14v8": 0.0352,
+    "fisher_14v9": 0.0801
+  }
+}

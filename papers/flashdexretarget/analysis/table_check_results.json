@@ -1,0 +1,330 @@
+{
+  "C1_compute_ratio_chord_over_fdr": {
+    "xhand": 98.2,
+    "sharpa": 75.3,
+    "claim": "approximately 100x lower training compute (Abstract, Sec. I)"
+  },
+  "C2_spider_gain_vs_chord_pp": {
+    "xhand": 44,
+    "sharpa": 36,
+    "claim": "44-percentage-point improvement (Abstract)"
+  },
+  "C3_min_spider_gain_vs_any_baseline_pp_xhand": {
+    "value": 42,
+    "claim": "at least a 40-percentage-point higher success rate than the baselines (Sec. IV-B)"
+  },
+  "C4_compute_ratio_doasido_over_fdr": {
+    "xhand": 2.28,
+    "sharpa": 1.41,
+    "claim": "approximately 2x less compute than Do as I Do (Sec. IV-B, XHand)"
+  },
+  "C5_fdr_less_compute_than_all_baselines": {
+    "xhand": true,
+    "sharpa": true
+  },
+  "C6_sharpa_text_values": {
+    "SR_SPIDER": [
+      0.86,
+      0.64,
+      0.5
+    ],
+    "SR_MT": [
+      0.8,
+      0.1,
+      0.0
+    ],
+    "claim": "86% vs 64% / 50% under SR_SPIDER; 80% vs 10% / 0% under SR_MT (Sec. IV-B)"
+  },
+  "C7_internal_consistency": {
+    "xhand/Do as I Do": {
+      "counts": [
+        18,
+        2,
+        0
+      ],
+      "integer": true,
+      "MT_le_MTObj": true
+    },
+    "xhand/DexMachina": {
+      "counts": [
+        24,
+        16,
+        6
+      ],
+      "integer": true,
+      "MT_le_MTObj": true
+    },
+    "xhand/CHORD": {
+      "counts": [
+        23,
+        1,
+        0
+      ],
+      "integer": true,
+      "MT_le_MTObj": true
+    },
+    "xhand/FlashDexRetarget": {
+      "counts": [
+        45,
+        43,
+        43
+      ],
+      "integer": true,
+      "MT_le_MTObj": true
+    },
+    "sharpa/Do as I Do": {
+      "counts": [
+        32,
+        5,
+        5
+      ],
+      "integer": true,
+      "MT_le_MTObj": true
+    },
+    "sharpa/CHORD": {
+      "counts": [
+        25,
+        11,
+        0
+      ],
+      "integer": true,
+      "MT_le_MTObj": true
+    },
+    "sharpa/FlashDexRetarget": {
+      "counts": [
+        43,
+        40,
+        40
+      ],
+      "integer": true,
+      "MT_le_MTObj": true
+    }
+  },
+  "C8_ci_and_tests": {
+    "xhand/SR_SPIDER": {
+      "fdr": [
+        45,
+        [
+          0.786,
+          0.957
+        ]
+      ],
+      "best_baseline": [
+        "DexMachina",
+        24,
+        [
+          0.348,
+          0.615
+        ]
+      ],
+      "fisher_p": 8.57e-06
+    },
+    "xhand/SR_MT-Obj": {
+      "fdr": [
+        43,
+        [
+          0.738,
+          0.93
+        ]
+      ],
+      "best_baseline": [
+        "DexMachina",
+        16,
+        [
+          0.208,
+          0.458
+        ]
+      ],
+      "fisher_p": 5.27e-08
+    },
+    "xhand/SR_MT": {
+      "fdr": [
+        43,
+        [
+          0.738,
+          0.93
+        ]
+      ],
+      "best_baseline": [
+        "DexMachina",
+        6,
+        [
+          0.056,
+          0.238
+        ]
+      ],
+      "fisher_p": 3.28e-14
+    },
+    "sharpa/SR_SPIDER": {
+      "fdr": [
+        43,
+        [
+          0.738,
+          0.93
+        ]
+      ],
+      "best_baseline": [
+        "Do as I Do",
+        32,
+        [
+          0.501,
+          0.759
+        ]
+      ],
+      "fisher_p": 0.0198
+    },
+    "sharpa/SR_MT-Obj": {
+      "fdr": [
+        40,
+        [
+          0.67,
+          0.888
+        ]
+      ],
+      "best_baseline": [
+        "CHORD",
+        11,
+        [
+          0.128,
+          0.352
+        ]
+      ],
+      "fisher_p": 8.31e-09
+    },
+    "sharpa/SR_MT": {
+      "fdr": [
+        40,
+        [
+          0.67,
+          0.888
+        ]
+      ],
+      "best_baseline": [
+        "Do as I Do",
+        5,
+        [
+          0.043,
+          0.214
+        ]
+      ],
+      "fisher_p": 7.28e-13
+    }
+  },
+  "C9_gpu_hours_per_success": {
+    "xhand/Do as I Do": {
+      "SR_SPIDER": 3.67,
+      "SR_MT-Obj": 33.0,
+      "SR_MT": null,
+      "per_motion_attempt": 1.32
+    },
+    "xhand/DexMachina": {
+      "SR_SPIDER": 18.62,
+      "SR_MT-Obj": 27.94,
+      "SR_MT": 74.5,
+      "per_motion_attempt": 8.94
+    },
+    "xhand/CHORD": {
+      "SR_SPIDER": 123.78,
+      "SR_MT-Obj": 2847.0,
+      "SR_MT": null,
+      "per_motion_attempt": 56.94
+    },
+    "xhand/FlashDexRetarget": {
+      "SR_SPIDER": 0.64,
+      "SR_MT-Obj": 0.67,
+      "SR_MT": 0.67,
+      "per_motion_attempt": 0.58
+    },
+    "sharpa/Do as I Do": {
+      "SR_SPIDER": 1.94,
+      "SR_MT-Obj": 12.4,
+      "SR_MT": 12.4,
+      "per_motion_attempt": 1.24
+    },
+    "sharpa/CHORD": {
+      "SR_SPIDER": 132.56,
+      "SR_MT-Obj": 301.27,
+      "SR_MT": null,
+      "per_motion_attempt": 66.28
+    },
+    "sharpa/FlashDexRetarget": {
+      "SR_SPIDER": 1.02,
+      "SR_MT-Obj": 1.1,
+      "SR_MT": 1.1,
+      "per_motion_attempt": 0.88
+    }
+  },
+  "C10_throughput_and_memory": {
+    "env_steps_per_s": {
+      "xhand": 2874,
+      "sharpa": 2525
+    },
+    "iterations_per_s_at_2048_envs": {
+      "xhand": 1.4,
+      "sharpa": 1.23
+    },
+    "replay_buffer_gb": {
+      "50M_rows": 88.0,
+      "10M_rows_default_flashsac": 17.6,
+      "source": "docs/guide/flashdexretarget.md: 1.76 GB per million rows; ~16 GB GPU besides the buffer"
+    },
+    "rtx3090_vram_gb": 24,
+    "note": "50M 행 버퍼는 3090 VRAM에 들어가지 않으므로 buffer_device_type=cpu(호스트 RAM 약 100 GB)가 필요"
+  },
+  "C11_scaling_efficiency": {
+    "50_motion_xhand_successes_per_gpu_hour": 1.48,
+    "1000_motion_successes_per_gpu_hour_lower_bound": 10.0,
+    "ratio": 6.7,
+    "caveat": "1,000개 실험은 600M step 중 처음 60 GPU-h 구간, 50개 실험은 300M step 전체. 성공률도 60%대 vs 86%",
+    "hours_for_600M_steps_at_xhand_throughput": 58.0
+  },
+  "C12_mope_more_subset_sizes": {
+    "xhand/Do as I Do": {
+      "n_spider_success": 18,
+      "MOPE_mm": 47.32,
+      "MORE_rad": 0.28
+    },
+    "xhand/DexMachina": {
+      "n_spider_success": 24,
+      "MOPE_mm": 37.49,
+      "MORE_rad": 0.29
+    },
+    "xhand/CHORD": {
+      "n_spider_success": 23,
+      "MOPE_mm": 55.7,
+      "MORE_rad": 0.16
+    },
+    "xhand/FlashDexRetarget": {
+      "n_spider_success": 45,
+      "MOPE_mm": 10.95,
+      "MORE_rad": 0.25
+    },
+    "sharpa/Do as I Do": {
+      "n_spider_success": 32,
+      "MOPE_mm": 58.33,
+      "MORE_rad": 0.24
+    },
+    "sharpa/CHORD": {
+      "n_spider_success": 25,
+      "MOPE_mm": 60.07,
+      "MORE_rad": 0.19
+    },
+    "sharpa/FlashDexRetarget": {
+      "n_spider_success": 43,
+      "MOPE_mm": 16.45,
+      "MORE_rad": 0.32
+    }
+  },
+  "C13_reference_length_vs_budget": {
+    "benchmark_frames": {
+      "taco": 3170,
+      "oakink2": 12852,
+      "hot3d": 10365
+    },
+    "total_frames": 26387,
+    "total_minutes_at_60hz": 7.33,
+    "mean_clip_seconds": 8.8,
+    "env_steps_per_reference_frame_xhand": 11369,
+    "gpu_seconds_per_reference_second_xhand": 237
+  }
+}

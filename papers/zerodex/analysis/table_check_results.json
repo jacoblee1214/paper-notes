@@ -1,0 +1,430 @@
+{
+  "C1_internal_consistency": {
+    "all_is_mean_of_conditions": {
+      "MOKA": true,
+      "ReKep": true,
+      "Ours": true
+    },
+    "table2_failures_match": {
+      "MOKA": {
+        "failures_from_T1": 12,
+        "sum_T2": 12,
+        "ok": true
+      },
+      "ReKep": {
+        "failures_from_T1": 9,
+        "sum_T2": 9,
+        "ok": true
+      },
+      "Ours": {
+        "failures_from_T1": 3,
+        "sum_T2": 3,
+        "ok": true
+      }
+    },
+    "table3_ik_le_clear": {
+      "tool_off": true,
+      "tool_on": true,
+      "pp_off": true,
+      "pp_on": true
+    },
+    "table4_ik_equals_table3_on": {
+      "tool": true,
+      "pp": true
+    }
+  },
+  "C2_ci_and_tests": {
+    "standard/Ours_vs_MOKA": {
+      "ours": [
+        9,
+        10,
+        [
+          0.596,
+          0.982
+        ]
+      ],
+      "MOKA": [
+        6,
+        10,
+        [
+          0.313,
+          0.832
+        ]
+      ],
+      "fisher_p": 0.303
+    },
+    "standard/Ours_vs_ReKep": {
+      "ours": [
+        9,
+        10,
+        [
+          0.596,
+          0.982
+        ]
+      ],
+      "ReKep": [
+        5,
+        10,
+        [
+          0.237,
+          0.763
+        ]
+      ],
+      "fisher_p": 0.141
+    },
+    "cluttered_precise/Ours_vs_MOKA": {
+      "ours": [
+        8,
+        10,
+        [
+          0.49,
+          0.943
+        ]
+      ],
+      "MOKA": [
+        2,
+        10,
+        [
+          0.057,
+          0.51
+        ]
+      ],
+      "fisher_p": 0.023
+    },
+    "cluttered_precise/Ours_vs_ReKep": {
+      "ours": [
+        8,
+        10,
+        [
+          0.49,
+          0.943
+        ]
+      ],
+      "ReKep": [
+        6,
+        10,
+        [
+          0.313,
+          0.832
+        ]
+      ],
+      "fisher_p": 0.628
+    },
+    "all/Ours_vs_MOKA": {
+      "ours": [
+        17,
+        20,
+        [
+          0.64,
+          0.948
+        ]
+      ],
+      "MOKA": [
+        8,
+        20,
+        [
+          0.219,
+          0.613
+        ]
+      ],
+      "fisher_p": 0.00791
+    },
+    "all/Ours_vs_ReKep": {
+      "ours": [
+        17,
+        20,
+        [
+          0.64,
+          0.948
+        ]
+      ],
+      "ReKep": [
+        11,
+        20,
+        [
+          0.342,
+          0.742
+        ]
+      ],
+      "fisher_p": 0.0824
+    },
+    "vla_approach/Ours_vs_GR00T": {
+      "ours": [
+        20,
+        20
+      ],
+      "GR00T": [
+        19,
+        20
+      ],
+      "fisher_p": 1.0
+    },
+    "vla_approach/Ours_vs_Being-H0": {
+      "ours": [
+        20,
+        20
+      ],
+      "Being-H0": [
+        20,
+        20
+      ],
+      "fisher_p": 1.0
+    },
+    "vla_grasp/Ours_vs_GR00T": {
+      "ours": [
+        19,
+        20
+      ],
+      "GR00T": [
+        7,
+        20
+      ],
+      "fisher_p": 0.000137
+    },
+    "vla_grasp/Ours_vs_Being-H0": {
+      "ours": [
+        19,
+        20
+      ],
+      "Being-H0": [
+        1,
+        20
+      ],
+      "fisher_p": 5.82e-09
+    },
+    "vla_success/Ours_vs_GR00T": {
+      "ours": [
+        19,
+        20
+      ],
+      "GR00T": [
+        6,
+        20
+      ],
+      "fisher_p": 3.93e-05
+    },
+    "vla_success/Ours_vs_Being-H0": {
+      "ours": [
+        19,
+        20
+      ],
+      "Being-H0": [
+        0,
+        20
+      ],
+      "fisher_p": 3.05e-10
+    },
+    "table3_tool_affordance_on_vs_off": {
+      "on": "7/10",
+      "off": "2/10",
+      "fisher_p": 0.0698
+    },
+    "table5_retry_vs_no_retry_organize": {
+      "retry": "8/10",
+      "no_retry": "6/10",
+      "fisher_p": 0.628
+    },
+    "vla_success_given_grasp": {
+      "GR00T": "6/7",
+      "Being-H0": "0/1",
+      "Ours": "19/19"
+    }
+  },
+  "C3_table3_rounding": {
+    "tool_off": {
+      "possible_total_candidates": [
+        108
+      ],
+      "feasible_per_scene": 3.6,
+      "examples": [
+        [
+          108,
+          [
+            18
+          ],
+          [
+            18
+          ]
+        ]
+      ],
+      "consistent": true
+    },
+    "tool_on": {
+      "possible_total_candidates": [
+        80
+      ],
+      "feasible_per_scene": 5.6,
+      "examples": [
+        [
+          80,
+          [
+            77
+          ],
+          [
+            28
+          ]
+        ]
+      ],
+      "consistent": true
+    },
+    "pp_off": {
+      "possible_total_candidates": [
+        691,
+        692,
+        693
+      ],
+      "feasible_per_scene": 3.9,
+      "examples": [
+        [
+          691,
+          [
+            162
+          ],
+          [
+            39
+          ]
+        ],
+        [
+          692,
+          [
+            162
+          ],
+          [
+            39
+          ]
+        ],
+        [
+          693,
+          [
+            162
+          ],
+          [
+            39
+          ]
+        ]
+      ],
+      "consistent": true
+    },
+    "pp_on": {
+      "possible_total_candidates": [
+        274
+      ],
+      "feasible_per_scene": 10.2,
+      "examples": [
+        [
+          274,
+          [
+            263
+          ],
+          [
+            102
+          ]
+        ]
+      ],
+      "consistent": true
+    }
+  },
+  "C4_table4": {
+    "repeatability_ratio_sigma": 3.24,
+    "repeatability_ratio_delta_max": 16.6,
+    "worst_scene_lower_bound_mm": {
+      "tool/MOKA": {
+        "mean_P_max": 20.4,
+        "lower_bound_on_max_scene_P_max": 95.4,
+        "share_of_total_P_max_mass": 0.94
+      },
+      "tool/Ours": {
+        "mean_P_max": 20.3,
+        "lower_bound_on_max_scene_P_max": 67.4,
+        "share_of_total_P_max_mass": 0.66
+      },
+      "pp/MOKA": {
+        "mean_P_max": 37.2,
+        "lower_bound_on_max_scene_P_max": 36.2,
+        "share_of_total_P_max_mass": 0.1
+      },
+      "pp/Ours": {
+        "mean_P_max": 32.6,
+        "lower_bound_on_max_scene_P_max": 88.1,
+        "share_of_total_P_max_mass": 0.27
+      }
+    },
+    "sigma_outlier_dependence": {
+      "MOKA": {
+        "A_other9_mean_sigma_mm": 1.79,
+        "B_worst_scene_sigma_ge_mm": 24.5,
+        "B_other9_mean_sigma_le_mm": 6.27
+      },
+      "Ours": {
+        "A_other9_mean_sigma_mm": 2.34,
+        "B_worst_scene_sigma_ge_mm": 1.5,
+        "B_other9_mean_sigma_le_mm": 2.61
+      }
+    }
+  },
+  "C5_table5": {
+    "Organize Objects": {
+      "retry": {
+        "chain_ok": true,
+        "e2e_equals_last_step": true,
+        "e2e": "8/10",
+        "wilson": [
+          0.49,
+          0.943
+        ]
+      },
+      "no_retry": {
+        "chain_ok": true,
+        "e2e_equals_last_step": true,
+        "e2e": "6/10",
+        "wilson": [
+          0.313,
+          0.832
+        ]
+      }
+    },
+    "Cooking": {
+      "retry": {
+        "chain_ok": true,
+        "e2e_equals_last_step": true,
+        "e2e": "9/10",
+        "wilson": [
+          0.596,
+          0.982
+        ]
+      },
+      "no_retry": {
+        "chain_ok": true,
+        "e2e_equals_last_step": true,
+        "e2e": "6/10",
+        "wilson": [
+          0.313,
+          0.832
+        ]
+      }
+    }
+  },
+  "C6_runtime_and_calls": {
+    "grounding_sum_s": 19.4,
+    "reported_grounding_s": 19.4,
+    "motion_s": 14.2,
+    "per_subtask_without_grasp_sim_s": 33.6,
+    "vlm_calls_per_subtask_estimate": {
+      "pick_and_place (3 keypoints)": 19,
+      "tool_use (grasp 2 + apply 1 + terminal 1 keypoints)": 23
+    },
+    "note": "9.6 s가 키포인트 하나의 4개 시점 질의인지, 전체인지 본문이 명시하지 않음"
+  },
+  "C7_version_changes_v1_to_v3": {
+    "method": "v1 Eq. 5–6의 reference-view ray voting(삼각측량 합의가 τ_tri 미만이면 대체)이 v3에서 사라지고 삼각측량 합의만 남음. 프로젝트 페이지 초록은 아직 ray voting을 설명",
+    "robots": "v1 xArm만 → v3 Franka(zero-shot 기준선 비교) + xArm(VLA 비교)",
+    "zero_shot_baselines": "v1 단일 시점 RGB-D 기준선 1개 → v3 MOKA, ReKep",
+    "table1_trials": "v1 과제별 n=5 (Ours 5/5, 4/5, 4/5 vs RGB-D 4/5, 4/5, 2/5) → v3 조건별 n=10, 합계 n=20",
+    "vla_demos": "v1 과제당 30개 시연, GR00T·Being-H0 모두 0/5(두 과제) → v3 100개 시연, GR00T 0.30, Being-H0 0.00 (한 과제, n=20)",
+    "grounding_metric": "v1 정확도(L_grasp: RGB-D 16.43 cm vs Ours 4.58 cm)와 침투 오차(9.91 vs 9.81) → v3 반복성 σ·δ_max와 P_max·P_avg·Coll%",
+    "views": "v1 2·3·5 시점 ablation(시점 수 효과가 작음) → v3 '모든 실험 4시점', 시점 수 ablation 없음",
+    "long_horizon": "v1 Organize 4/6, Cooking 1/3 (retry 포함) → v3 8/10, 9/10 (retry 1회), 6/10, 6/10 (retry 없음)",
+    "motion_generator": "v1 [54] 하나 → v3 cuRobo v2 [52] + Natural functional gradients [53] (Korea Univ. 공저자 추가)",
+    "v1_collision_finding": "v1에서는 침투 오차가 RGB-D와 거의 같았음(9.91 vs 9.81) — v3 Table IV의 큰 차이(Coll% 100 vs 17)와 지표·기준선이 다름"
+  }
+}

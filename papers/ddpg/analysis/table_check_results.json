@@ -1,0 +1,245 @@
+{
+  "C1_summary": {
+    "n_tasks": 26,
+    "av_lowd": {
+      "mean": 0.718,
+      "median": 0.712,
+      "min": 0.272,
+      "max": 1.311
+    },
+    "best_lowd": {
+      "mean": 1.078,
+      "median": 0.992,
+      "min": 0.705,
+      "max": 1.99
+    },
+    "av_pix": {
+      "mean": 0.498,
+      "median": 0.455,
+      "min": -0.285,
+      "max": 1.204
+    },
+    "best_pix": {
+      "mean": 0.932,
+      "median": 0.923,
+      "min": 0.119,
+      "max": 2.225
+    },
+    "av_cntrl": {
+      "mean": 0.217,
+      "median": 0.201,
+      "min": -0.468,
+      "max": 1.01
+    },
+    "best_cntrl": {
+      "mean": 0.861,
+      "median": 0.867,
+      "min": 0.158,
+      "max": 1.411
+    }
+  },
+  "C2_beats_planner": {
+    "av_lowd": [
+      "blockworld1",
+      "hardCheetah"
+    ],
+    "best_lowd": [
+      "blockworld1",
+      "canada",
+      "cart",
+      "cartpole",
+      "cheetah",
+      "fixedReacher",
+      "hardCheetah",
+      "pendulum",
+      "reacherSingle",
+      "walker2d"
+    ],
+    "av_pix": [
+      "cart",
+      "hardCheetah"
+    ],
+    "best_pix": [
+      "blockworld1",
+      "blockworld3da",
+      "cart",
+      "cartpole",
+      "hardCheetah",
+      "pendulum",
+      "reacherSingle",
+      "walker2d"
+    ],
+    "av_cntrl": [
+      "reacherSingle"
+    ],
+    "best_cntrl": [
+      "blockworld1",
+      "canada",
+      "cart",
+      "hardCheetah",
+      "reacherSingle",
+      "walker2d"
+    ]
+  },
+  "C2_counts": {
+    "av_lowd": 2,
+    "best_lowd": 10,
+    "av_pix": 2,
+    "best_pix": 8,
+    "av_cntrl": 1,
+    "best_cntrl": 6
+  },
+  "C3_paired": {
+    "lowd_vs_cntrl_av (표적망 + BN vs BN만)": {
+      "a_gt_b": 25,
+      "n": 26,
+      "mean_diff": 0.501,
+      "wilcoxon_p": 5.96e-08
+    },
+    "lowd_vs_cntrl_best": {
+      "a_gt_b": 26,
+      "n": 26,
+      "mean_diff": 0.217,
+      "wilcoxon_p": 2.98e-08
+    },
+    "pix_vs_lowd_av": {
+      "a_gt_b": 5,
+      "n": 26,
+      "mean_diff": -0.22,
+      "wilcoxon_p": 0.000745
+    },
+    "tasks_where_pix_av_ge_lowd_av": [
+      "blockworld3da",
+      "cart",
+      "movingGripper",
+      "reacherSingle",
+      "walker2d"
+    ],
+    "tasks_where_cntrl_av_ge_lowd_av": [
+      "reacherSingle"
+    ]
+  },
+  "C4_seed_spread_lower_bound_lowd": {
+    "std_lower_bound": {
+      "canada": 0.8,
+      "walker2d": 0.485,
+      "hardCheetah": 0.38,
+      "canada2d": 0.323,
+      "movingGripper": 0.258,
+      "cartpoleSerialDouble": 0.25,
+      "cart": 0.222,
+      "blockworld3da": 0.204
+    },
+    "tasks_with_lb_over_0.3": 4,
+    "median_lb": 0.174,
+    "assumption": "R_best가 R_av를 만든 같은 5개 최종 점수 중 최댓값일 때. 학습 중 최고 체크포인트라면 하한이 아님"
+  },
+  "C5_env_lists": {
+    "table2_n": 32,
+    "table1_n": 26,
+    "in_table2_not_table1": [
+      "cartpoleParallelTriple",
+      "hardCheetahNice",
+      "hyqKick",
+      "movingGripperRandom",
+      "reacherDouble",
+      "reacherObstacle"
+    ],
+    "in_table1_not_table2": []
+  },
+  "C6_lowd_params_400_300": {
+    "actor_range": [
+      122201,
+      164209
+    ],
+    "critic_range": [
+      122501,
+      164501
+    ],
+    "cheetah": [
+      129306,
+      129601
+    ],
+    "pendulum": [
+      122201,
+      122501
+    ],
+    "reading": "약 13만은 actor·critic 각각의 크기 (두 망 합계가 아님). BN 파라미터는 수천 개 수준"
+  },
+  "C7_pixel_net_closest_uniform_configs": {
+    "closest": [
+      {
+        "k": 2,
+        "s": 2,
+        "pad": "valid",
+        "out": 8,
+        "actor": 460646,
+        "critic": 460841
+      },
+      {
+        "k": 2,
+        "s": 2,
+        "pad": "same",
+        "out": 8,
+        "actor": 460646,
+        "critic": 460841
+      },
+      {
+        "k": 3,
+        "s": 2,
+        "pad": "same",
+        "out": 8,
+        "actor": 472326,
+        "critic": 472521
+      },
+      {
+        "k": 3,
+        "s": 2,
+        "pad": "valid",
+        "out": 7,
+        "actor": 376326,
+        "critic": 376521
+      }
+    ],
+    "best_rel_error": 0.071,
+    "reading": "같은 커널·stride 세 층으로는 430k(±7%)를 만들 수 없음. 층마다 다른 설정이었을 것으로 보이며, 논문만으로는 픽셀 망을 복원할 수 없음"
+  },
+  "C8_dqn_comparison": {
+    "claimed_ratio": 20,
+    "dqn_frames_over_ddpg_steps": 20.0,
+    "agent_steps_ratio": 5.0,
+    "sim_frames_ratio_pixel_tasks": 6.7
+  },
+  "C9_ou_noise": {
+    "dt=1.0": {
+      "dt": 1.0,
+      "stationary_std": 0.3797,
+      "lag1_autocorr": 0.85,
+      "corr_time_steps": 6.2,
+      "half_life_steps": 4.3
+    },
+    "dt=0.1": {
+      "dt": 0.1,
+      "stationary_std": 0.3665,
+      "lag1_autocorr": 0.985,
+      "corr_time_steps": 66.2,
+      "half_life_steps": 45.9
+    },
+    "dt=0.01": {
+      "dt": 0.01,
+      "stationary_std": 0.3653,
+      "lag1_autocorr": 0.9985,
+      "corr_time_steps": 666.2,
+      "half_life_steps": 461.8
+    }
+  },
+  "C9_note": "논문은 θ, σ만 주고 dt를 주지 않음. rllab은 dt = 1, OpenAI baselines·SB3는 dt = 0.01이 기본",
+  "C10_torcs": {
+    "av_lowd": -393.385,
+    "best_lowd": 1840.036,
+    "av_pix": -401.911,
+    "best_pix": 1876.284,
+    "av_cntrl": -911.034,
+    "best_cntrl": 1961.6
+  }
+}

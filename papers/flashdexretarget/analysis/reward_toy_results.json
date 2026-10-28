@@ -1,0 +1,105 @@
+{
+  "V1_chord_at_rho_30deg_cm": 3.002,
+  "V2_shape_and_axis_dependence": {
+    "sphere_r4cm": {
+      "worst3_cm": {
+        "min": 3.0,
+        "median": 3.0,
+        "max": 3.0
+      },
+      "share_below_2cm": 0.0,
+      "mean_all_points_cm_median": 2.36,
+      "reward_at_median": 0.741
+    },
+    "cube_8cm": {
+      "worst3_cm": {
+        "min": 2.46,
+        "median": 2.79,
+        "max": 2.96
+      },
+      "share_below_2cm": 0.0,
+      "mean_all_points_cm_median": 1.75,
+      "reward_at_median": 0.757
+    },
+    "stick_20x3x3cm": {
+      "worst3_cm": {
+        "min": 0.64,
+        "median": 2.76,
+        "max": 2.99
+      },
+      "share_below_2cm": 0.16,
+      "mean_all_points_cm_median": 1.48,
+      "reward_at_median": 0.759,
+      "long_axis_roll_30deg_cm": 0.62,
+      "long_axis_roll_90deg_cm": 1.7,
+      "angle_for_3cm_on_long_axis_deg": null
+    },
+    "plate_16x16x1cm": {
+      "worst3_cm": {
+        "min": 2.13,
+        "median": 2.8,
+        "max": 2.97
+      },
+      "share_below_2cm": 0.0,
+      "mean_all_points_cm_median": 1.31,
+      "reward_at_median": 0.756,
+      "normal_axis_spin_30deg_cm": 2.97
+    },
+    "offset_origin_cube": {
+      "worst3_cm": {
+        "min": 1.44,
+        "median": 2.85,
+        "max": 2.96
+      },
+      "share_below_2cm": 0.045,
+      "mean_all_points_cm_median": 1.67,
+      "reward_at_median": 0.752
+    },
+    "no_normalization_30deg_random_axis_median_cm": {
+      "sphere_r4cm": 2.07,
+      "cube_8cm": 3.31,
+      "stick_20x3x3cm": 4.9,
+      "plate_16x16x1cm": 5.46,
+      "offset_origin_cube": 4.41
+    }
+  },
+  "V3_reward_conversions": {
+    "r_obj_at_3cm": 0.741,
+    "r_obj_at_10cm": 0.368,
+    "early_reset_reward_0.6_means_error_cm": 5.11,
+    "translation_equivalent_of_1rad_on_rho_cm": 5.56,
+    "r_int_per_tip_at_excess_5mm": 0.607,
+    "r_int_per_tip_at_excess_2cm": 0.135
+  },
+  "V4_ref_distance_vertex_slack": {
+    "sphere_r4cm_500_verts": {
+      "slack_mm_mean": 3.17,
+      "slack_mm_p95": 6.07,
+      "slack_over_sigma_int_p95": 0.61
+    },
+    "sphere_r4cm_2000_verts": {
+      "slack_mm_mean": 1.59,
+      "slack_mm_p95": 3.15,
+      "slack_over_sigma_int_p95": 0.31
+    },
+    "sphere_r4cm_8000_verts": {
+      "slack_mm_mean": 0.78,
+      "slack_mm_p95": 1.5,
+      "slack_over_sigma_int_p95": 0.15
+    },
+    "sphere_r4cm_32000_verts": {
+      "slack_mm_mean": 0.4,
+      "slack_mm_p95": 0.79,
+      "slack_over_sigma_int_p95": 0.08
+    }
+  },
+  "V4b_self_gating_example": {
+    "ref_tip_far_5cm_robot_at_3cm_reward": 1.0,
+    "ref_tip_touch_0mm_robot_at_1cm_reward": 0.368
+  },
+  "V5_sdf_grid": {
+    "voxel_mm": 4.72,
+    "trilinear_error_mm_p99_sphere_r4cm": 0.232,
+    "note": "매끈한 형상에서는 보간 오차가 sigma_int(10 mm)보다 훨씬 작음. 얇은 벽(<1 voxel)은 별도 문제"
+  }
+}
