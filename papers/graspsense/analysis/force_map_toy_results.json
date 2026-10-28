@@ -1,0 +1,169 @@
+{
+  "T1_ranking_invariance": {
+    "no_bonus_n1": {
+      "same_choice_across_k_m": {
+        "alpha0": 1.0,
+        "alpha0.01": 0.655,
+        "alpha0.1": 0.568,
+        "alpha1": 0.94
+      },
+      "agree_with_max_min_thickness_k_m1": {
+        "alpha0": 1.0,
+        "alpha0.01": 0.958,
+        "alpha0.1": 0.64,
+        "alpha1": 0.438
+      }
+    },
+    "no_bonus_n2": {
+      "same_choice_across_k_m": {
+        "alpha0": 1.0,
+        "alpha0.01": 0.54,
+        "alpha0.1": 0.767,
+        "alpha1": 0.975
+      },
+      "agree_with_max_min_thickness_k_m1": {
+        "alpha0": 1.0,
+        "alpha0.01": 0.772,
+        "alpha0.1": 0.482,
+        "alpha1": 0.417
+      }
+    },
+    "no_bonus_n3": {
+      "same_choice_across_k_m": {
+        "alpha0": 1.0,
+        "alpha0.01": 0.645,
+        "alpha0.1": 0.895,
+        "alpha1": 0.98
+      },
+      "agree_with_max_min_thickness_k_m1": {
+        "alpha0": 1.0,
+        "alpha0.01": 0.64,
+        "alpha0.1": 0.443,
+        "alpha1": 0.443
+      }
+    },
+    "with_bonus_n1": {
+      "same_choice_across_k_m": {
+        "alpha0": 1.0,
+        "alpha0.01": 0.865,
+        "alpha0.1": 0.512,
+        "alpha1": 0.598
+      },
+      "agree_with_max_min_thickness_k_m1": {
+        "alpha0": 0.455,
+        "alpha0.01": 0.46,
+        "alpha0.1": 0.435,
+        "alpha1": 0.315
+      }
+    },
+    "with_bonus_n2": {
+      "same_choice_across_k_m": {
+        "alpha0": 1.0,
+        "alpha0.01": 0.73,
+        "alpha0.1": 0.477,
+        "alpha1": 0.623
+      },
+      "agree_with_max_min_thickness_k_m1": {
+        "alpha0": 0.477,
+        "alpha0.01": 0.465,
+        "alpha0.1": 0.417,
+        "alpha1": 0.35
+      }
+    },
+    "with_bonus_n3": {
+      "same_choice_across_k_m": {
+        "alpha0": 1.0,
+        "alpha0.01": 0.632,
+        "alpha0.1": 0.417,
+        "alpha1": 0.672
+      },
+      "agree_with_max_min_thickness_k_m1": {
+        "alpha0": 0.458,
+        "alpha0.01": 0.427,
+        "alpha0.1": 0.372,
+        "alpha1": 0.3
+      }
+    }
+  },
+  "T2_lookup_mismatch": {
+    "spacing_0.5mm": {
+      "median_rel_diff": 0.0,
+      "p95_rel_diff": 0.154,
+      "share_nn_over_1.5x_bary": 0.0
+    },
+    "spacing_1mm": {
+      "median_rel_diff": 0.0,
+      "p95_rel_diff": 0.285,
+      "share_nn_over_1.5x_bary": 0.0
+    },
+    "spacing_2mm": {
+      "median_rel_diff": 0.029,
+      "p95_rel_diff": 0.61,
+      "share_nn_over_1.5x_bary": 0.004
+    },
+    "spacing_5mm": {
+      "median_rel_diff": 0.0,
+      "p95_rel_diff": 3.041,
+      "share_nn_over_1.5x_bary": 0.062
+    },
+    "spacing_10mm": {
+      "median_rel_diff": 0.5,
+      "p95_rel_diff": 2.26,
+      "share_nn_over_1.5x_bary": 0.102
+    }
+  },
+  "T3_implied_thickness": {
+    "paper cup": {
+      "rim": [
+        0.91,
+        1.17
+      ],
+      "wall": [
+        0.31,
+        0.4
+      ],
+      "base": [
+        1.33,
+        1.72
+      ],
+      "zone1_over_zone2_force": 8.58,
+      "implied_thickness_ratio_n2": 2.93,
+      "implied_thickness_ratio_n3": 2.05
+    },
+    "plastic cup": {
+      "rim": [
+        0.33,
+        0.38
+      ],
+      "wall": [
+        0.09,
+        0.11
+      ],
+      "base": [
+        0.48,
+        0.57
+      ],
+      "zone1_over_zone2_force": 12.33,
+      "implied_thickness_ratio_n2": 3.51,
+      "implied_thickness_ratio_n3": 2.31
+    },
+    "glass goblet": {
+      "bowl": [
+        1.17,
+        1.52
+      ],
+      "stem": [
+        3.36,
+        4.34
+      ],
+      "base": [
+        4.45,
+        5.74
+      ],
+      "zone1_over_zone2_force": 0.12,
+      "implied_thickness_ratio_n2": 0.35,
+      "implied_thickness_ratio_n3": 0.5
+    },
+    "unit": "mm, [sigma_hi, sigma_lo] 범위, C = 1"
+  }
+}

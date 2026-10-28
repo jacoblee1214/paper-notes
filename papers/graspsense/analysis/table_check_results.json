@@ -1,0 +1,141 @@
+{
+  "C1_fmin_improvement": {
+    "paper cup": 8.58,
+    "plastic cup": 12.33,
+    "glass goblet": 8.19,
+    "claim": "8.6x, 12.3x, 8.2x (Sec. IV-A 1)"
+  },
+  "C2_table2_backcalc": {
+    "paper cup/Baseline": {
+      "zone": "wall",
+      "f_max_implied_N": 3.429,
+      "grip_over_weight": 46.0,
+      "violations": "1/5",
+      "margin_gt_1_but_violation": true
+    },
+    "paper cup/Ours": {
+      "zone": "rim",
+      "f_max_implied_N": 5.282,
+      "grip_over_weight": 70.8,
+      "violations": "0/5",
+      "margin_gt_1_but_violation": false
+    },
+    "plastic cup/Baseline": {
+      "zone": "wall",
+      "f_max_implied_N": 0.25,
+      "grip_over_weight": 13.4,
+      "violations": "2/5",
+      "margin_gt_1_but_violation": true
+    },
+    "plastic cup/Ours": {
+      "zone": "rim",
+      "f_max_implied_N": 0.627,
+      "grip_over_weight": 33.6,
+      "violations": "0/5",
+      "margin_gt_1_but_violation": false
+    },
+    "glass goblet/Baseline": {
+      "zone": "bowl",
+      "f_max_implied_N": 32.857,
+      "grip_over_weight": 21.6,
+      "violations": "1/5",
+      "margin_gt_1_but_violation": true
+    },
+    "glass goblet/Ours": {
+      "zone": "stem",
+      "f_max_implied_N": 45.565,
+      "grip_over_weight": 30.0,
+      "violations": "0/5",
+      "margin_gt_1_but_violation": false
+    }
+  },
+  "C3_table3": {
+    "Under-stiffness (0.3 K_base)": {
+      "margin_recomputed": 3.75,
+      "reported": null,
+      "overload_factor": 0.27
+    },
+    "Over-stiffness (2.0 K_base)": {
+      "margin_recomputed": 0.405,
+      "reported": 0.41,
+      "overload_factor": 2.47
+    },
+    "Ours (lambda=0.7)": {
+      "margin_recomputed": 1.429,
+      "reported": 1.43,
+      "overload_factor": 0.7
+    },
+    "claim": "over-stiffness exceeds the admissible load by 2.5x"
+  },
+  "C4_table4_margin_is_inverse_lambda": {
+    "Gently": {
+      "f_over_lambdaF": 1.0,
+      "margin_times_lambda": 0.999,
+      "margin_recomputed": 3.333
+    },
+    "Default": {
+      "f_over_lambdaF": 1.0,
+      "margin_times_lambda": 1.001,
+      "margin_recomputed": 1.429
+    },
+    "Firmly": {
+      "f_over_lambdaF": 0.967,
+      "margin_times_lambda": 1.03,
+      "margin_recomputed": 1.034
+    }
+  },
+  "C5_exp1_vs_exp2_plastic_ours": {
+    "exp1_reference_F_N": 3.7,
+    "exp1_zone": "rim",
+    "exp1_f_max_N": 0.627,
+    "exp2_reference_F_N": 0.3,
+    "exp2_f_max_N": 0.21,
+    "exp2_over_stiffness_vs_rim_admissible": 0.2,
+    "note": "실험 2는 '힘 지도로 고른 파지를 고정'한다고 하지만 기준값은 벽(0.3 N)이고 Fig. 4의 손끝도 벽에 있음. 실험 1의 선택 결과는 테두리(3.7 N). 테두리 기준이면 over-stiffness 0.74 N도 위반이 아님"
+  },
+  "C6_friction_hold": {
+    "paper cup": {
+      "weight_N": 0.0746,
+      "f_per_finger_N_mu0.3_n2": 0.1243,
+      "f_per_finger_N_mu0.3_n5": 0.0497,
+      "f_per_finger_N_mu0.6_n2": 0.0621,
+      "f_per_finger_N_mu0.6_n5": 0.0249
+    },
+    "plastic cup": {
+      "weight_N": 0.0186,
+      "f_per_finger_N_mu0.3_n2": 0.0311,
+      "f_per_finger_N_mu0.3_n5": 0.0124,
+      "f_per_finger_N_mu0.6_n2": 0.0155,
+      "f_per_finger_N_mu0.6_n5": 0.0062
+    },
+    "glass goblet": {
+      "weight_N": 1.5206,
+      "f_per_finger_N_mu0.3_n2": 2.5343,
+      "f_per_finger_N_mu0.3_n5": 1.0137,
+      "f_per_finger_N_mu0.6_n2": 1.2671,
+      "f_per_finger_N_mu0.6_n5": 0.5069
+    },
+    "plastic_under_stiffness_f_max_N": 0.08,
+    "plastic_under_stiffness_ratio_to_need_mu0.3_n2": 2.57,
+    "note": "공식 코드 기본 마찰계수: 정지 0.6, 동 0.4 (scripts/convert_mesh_to_usd_isaaclab.py)"
+  },
+  "C7_success_boundary": {
+    "under_stiffness_f_max_N": 0.08,
+    "gently_f_max_N": 0.09,
+    "relative_gap": 0.125,
+    "stiffness_factor_under": 0.3,
+    "stiffness_factor_gently_if_Fk_eq_Fmax": 0.3,
+    "note": "실험 2의 제안 제어기 K_k = K_base * F*_k / F_max * lambda. F*_k = F_max이면 gently(λ=0.3)와 under-stiffness(0.3 K_base)는 같은 강성. F_max는 정의되지 않음"
+  },
+  "C8_trials": {
+    "exp1_rollouts": 6,
+    "exp2_rollouts": 5,
+    "denominator_5_means": "fingers of one grasp (Table II caption: fingers with f_k > F*_k)"
+  },
+  "C9_dexgraspnet_dims": {
+    "paper_eq1_theta": 24,
+    "dexgraspnet_n_dofs": 22,
+    "paper_g_dim": 33,
+    "dexgraspnet_hand_pose_dim": 31
+  }
+}

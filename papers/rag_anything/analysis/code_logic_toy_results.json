@@ -1,0 +1,128 @@
+{
+  "E_fallback": [
+    {
+      "response": "The generated answer is incorrect.",
+      "intended": 0,
+      "scored": 1
+    },
+    {
+      "response": "Incorrect: the expected value is DKK 26,778 million, not 11,503 million.",
+      "intended": 0,
+      "scored": 1
+    },
+    {
+      "response": "The answer does not match the expected answer (mismatch in the year).",
+      "intended": 0,
+      "scored": 1
+    },
+    {
+      "response": "Not accurate; the model chose the VAE panel.",
+      "intended": 0,
+      "scored": 1
+    },
+    {
+      "response": "This is wrong.",
+      "intended": 0,
+      "scored": 0
+    },
+    {
+      "response": "The generated answer is correct.",
+      "intended": 1,
+      "scored": 1
+    },
+    {
+      "response": "{\"accuracy\": 1, \"reasoning\": \"matches\"",
+      "intended": 1,
+      "scored": 1
+    },
+    {
+      "response": "{\"accuracy\": 0, \"reasoning\": \"contradicts\"",
+      "intended": 0,
+      "scored": 0
+    },
+    {
+      "response": "Accuracy: 0 because the panel is wrong",
+      "intended": 0,
+      "scored": 0
+    }
+  ],
+  "G_bridge": [
+    {
+      "p_match": 0.05,
+      "m": 2,
+      "reachable_frac": 0.104,
+      "closed_form": 0.098
+    },
+    {
+      "p_match": 0.05,
+      "m": 5,
+      "reachable_frac": 0.231,
+      "closed_form": 0.226
+    },
+    {
+      "p_match": 0.05,
+      "m": 10,
+      "reachable_frac": 0.395,
+      "closed_form": 0.401
+    },
+    {
+      "p_match": 0.1,
+      "m": 2,
+      "reachable_frac": 0.197,
+      "closed_form": 0.19
+    },
+    {
+      "p_match": 0.1,
+      "m": 5,
+      "reachable_frac": 0.426,
+      "closed_form": 0.41
+    },
+    {
+      "p_match": 0.1,
+      "m": 10,
+      "reachable_frac": 0.664,
+      "closed_form": 0.651
+    },
+    {
+      "p_match": 0.2,
+      "m": 2,
+      "reachable_frac": 0.38,
+      "closed_form": 0.36
+    },
+    {
+      "p_match": 0.2,
+      "m": 5,
+      "reachable_frac": 0.693,
+      "closed_form": 0.672
+    },
+    {
+      "p_match": 0.2,
+      "m": 10,
+      "reachable_frac": 0.901,
+      "closed_form": 0.893
+    },
+    {
+      "p_match": 0.4,
+      "m": 2,
+      "reachable_frac": 0.652,
+      "closed_form": 0.64
+    },
+    {
+      "p_match": 0.4,
+      "m": 5,
+      "reachable_frac": 0.927,
+      "closed_form": 0.922
+    },
+    {
+      "p_match": 0.4,
+      "m": 10,
+      "reachable_frac": 0.993,
+      "closed_form": 0.994
+    }
+  ],
+  "E_summary": {
+    "cases": 9,
+    "misscored": 4,
+    "cause": "양성 키워드를 먼저 부분 문자열로 검사: 'incorrect'⊃'correct', 'mismatch'⊃'match', 'not accurate'⊃'accurate'"
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "C1_overall_vs_weighted_domains": {
+    "T2/GPT-4o-mini": {
+      "reported": 51.2,
+      "domain_weighted": 51.22,
+      "domain_unweighted": 53.54
+    },
+    "T2/LightRAG": {
+      "reported": 58.4,
+      "domain_weighted": 58.44,
+      "domain_unweighted": 59.4
+    },
+    "T2/MMGraphRAG": {
+      "reported": 61.0,
+      "domain_weighted": 56.73,
+      "domain_unweighted": 56.7
+    },
+    "T2/RAGAnything": {
+      "reported": 63.4,
+      "domain_weighted": 63.43,
+      "domain_unweighted": 63.28
+    },
+    "T3/GPT-4o-mini": {
+      "reported": 33.5,
+      "domain_weighted": 34.05,
+      "domain_unweighted": 34.94
+    },
+    "T3/LightRAG": {
+      "reported": 38.9,
+      "domain_weighted": 38.92,
+      "domain_unweighted": 39.17
+    },
+    "T3/MMGraphRAG": {
+      "reported": 37.7,
+      "domain_weighted": 37.64,
+      "domain_unweighted": 37.49
+    },
+    "T3/RAGAnything": {
+      "reported": 42.8,
+      "domain_weighted": 42.81,
+      "domain_unweighted": 42.29
+    },
+    "T4/Chunk-only": {
+      "reported": 60.0,
+      "domain_weighted": 60.0
+    },
+    "T4/w/o Reranker": {
+      "reported": 62.4,
+      "domain_weighted": 62.38
+    },
+    "T4/RAGAnything": {
+      "reported": 63.4,
+      "domain_weighted": 63.43
+    }
+  },
+  "C1_question_totals": {
+    "DocBench": 1102,
+    "MMLongBench": 1082,
+    "DocBench_docs": 229,
+    "MMLongBench_docs": 135
+  },
+  "C2_type_counts_fit": {
+    "share_txt_mm_una": [
+      0.235,
+      0.277,
+      0.488
+    ],
+    "counts_txt_mm_una": [
+      259,
+      305,
+      538
+    ],
+    "residual_pp_per_row": {
+      "GPT-4o-mini": -0.52,
+      "LightRAG": 0.95,
+      "MMGraphRAG": 2.69,
+      "RAGAnything": 0.15,
+      "abl/Chunk-only": -1.26,
+      "abl/w/o Reranker": -0.36,
+      "abl/RAGAnything": 0.15
+    },
+    "max_abs_residual_pp": 2.69,
+    "note": "세 유형만으로 7개 행의 Overall을 동시에 맞출 수 있는지 확인. 잔차가 크면 표에 없는 유형이 Overall에 섞여 있을 가능성"
+  },
+  "C3_sampling_error": {
+    "DocBench": {
+      "RAGAnything_ci95": [
+        60.5,
+        66.2
+      ],
+      "vs_GPT-4o-mini": {
+        "diff_pp": 12.2,
+        "p_unpaired": 7.06e-09
+      },
+      "vs_LightRAG": {
+        "diff_pp": 5.0,
+        "p_unpaired": 0.0162
+      },
+      "vs_MMGraphRAG": {
+        "diff_pp": 2.4,
+        "p_unpaired": 0.245
+      }
+    },
+    "MMLongBench": {
+      "RAGAnything_ci95": [
+        39.9,
+        45.8
+      ],
+      "vs_GPT-4o-mini": {
+        "diff_pp": 9.3,
+        "p_unpaired": 8.46e-06
+      },
+      "vs_LightRAG": {
+        "diff_pp": 3.9,
+        "p_unpaired": 0.065
+      },
+      "vs_MMGraphRAG": {
+        "diff_pp": 5.1,
+        "p_unpaired": 0.0156
+      }
+    },
+    "DocBench_ablation": {
+      "Chunk-only": {
+        "diff_pp_vs_full": 3.4,
+        "p_unpaired": 0.101
+      },
+      "w/o Reranker": {
+        "diff_pp_vs_full": 1.0,
+        "p_unpaired": 0.627
+      }
+    }
+  },
+  "C4_avg_pages": {
+    "DocBench": {
+      "table1": 66,
+      "by_docs_table5": 61.0,
+      "by_questions_table5": 72.7,
+      "rounding_band": [
+        60.5,
+        61.5
+      ]
+    },
+    "MMLongBench": {
+      "table1": 47.5,
+      "by_docs_table6": 48.3,
+      "by_questions_table6": 49.0,
+      "rounding_band": [
+        47.8,
+        48.8
+      ]
+    }
+  },
+  "C5_fig2_pixel_read": {
+    "DocBench": {
+      "count_sum_read": 1079,
+      "table_total": 1102,
+      "RAGAnything_weighted_by_fig_counts": 63.18,
+      "MMGraphRAG_weighted_by_fig_counts": 60.93,
+      "reported_overall": {
+        "RAGAnything": 63.4,
+        "MMGraphRAG": 61.0
+      },
+      "small_bins": {},
+      "gaps_pp": [
+        -2.9,
+        -0.4,
+        2.4,
+        13.6,
+        13.8
+      ]
+    },
+    "MMLongBench": {
+      "count_sum_read": 971,
+      "table_total": 1082,
+      "RAGAnything_weighted_by_fig_counts": 42.55,
+      "MMGraphRAG_weighted_by_fig_counts": 37.7,
+      "reported_overall": {
+        "RAGAnything": 42.8,
+        "MMGraphRAG": 37.7
+      },
+      "small_bins": {
+        "1-10": {
+          "n_candidates": [
+            16,
+            32,
+            33,
+            39
+          ],
+          "n_used": 16,
+          "RAGAnything_correct": 3,
+          "MMGraphRAG_correct": 2,
+          "RAGAnything_ci95": [
+            6.6,
+            43.0
+          ],
+          "MMGraphRAG_ci95": [
+            3.5,
+            36.0
+          ],
+          "fisher_p": 1.0
+        },
+        "200+": {
+          "n_candidates": [
+            5,
+            10,
+            15,
+            20,
+            25,
+            30
+          ],
+          "n_used": 5,
+          "RAGAnything_correct": 3,
+          "MMGraphRAG_correct": 2,
+          "RAGAnything_ci95": [
+            23.1,
+            88.2
+          ],
+          "MMGraphRAG_ci95": [
+            11.8,
+            76.9
+          ],
+          "fisher_p": 1.0
+        }
+      },
+      "gaps_pp": [
+        6.3,
+        3.4,
+        9.2,
+        7.9,
+        20.0
+      ]
+    },
+    "text_claims": {
+      "DocBench 101-200": [
+        68.2,
+        54.6
+      ],
+      "DocBench 200+": [
+        68.8,
+        55.0
+      ],
+      "MMLongBench gain 11-50": 3.4,
+      "MMLongBench gain 51-100": 9.3,
+      "MMLongBench gain 101-200": 7.9
+    }
+  },
+  "C6_gpt4omini_visible_fraction": {
+    "DocBench": {
+      "Aca": 1.0,
+      "Fin": 0.26,
+      "Gov": 0.72,
+      "Law": 0.86,
+      "News": 1.0
+    },
+    "MMLongBench": {
+      "Res": 1.0,
+      "Tut": 0.86,
+      "Acad": 1.0,
+      "Guid": 0.64,
+      "Broch": 1.0,
+      "Admin": 1.0,
+      "Fin": 0.57
+    },
+    "note": "영역 평균 쪽수로 계산한 근사. 50쪽을 넘는 문서는 앞 50쪽만 이미지로 들어간다는 Sec. 3.1 설명을 따름"
+  },
+  "C7_vs_MMGraphRAG_docbench": {
+    "domain_gap_pp": {
+      "Aca": -2.9,
+      "Fin": 14.2,
+      "Gov": -3.4,
+      "Law": 20.2,
+      "News": 4.8
+    },
+    "type_gap_pp": {
+      "Txt": 17.4,
+      "Mm": 10.3,
+      "Una": -14.5
+    },
+    "domain_contrib_pp": {
+      "Aca": -0.8,
+      "Fin": 3.71,
+      "Gov": -0.46,
+      "Law": 3.5,
+      "News": 0.75
+    },
+    "vs_LightRAG_type_gap_pp": {
+      "Txt": 0.0,
+      "Mm": 16.6,
+      "Una": -0.8
+    }
+  },
+  "C8_cost_order_of_magnitude": {
+    "prices_usd_assumed": {
+      "gpt4omini_in_per_M": 0.15,
+      "gpt4omini_out_per_M": 0.6,
+      "emb3large_per_M": 0.13
+    },
+    "estimate": {
+      "DocBench": {
+        "doc_tokens_M": 10.6,
+        "llm_in_M": 88.6,
+        "llm_out_M": 10.6,
+        "emb_M": 15.9,
+        "usd_text_only": 21.7
+      },
+      "MMLongBench": {
+        "doc_tokens_M": 2.9,
+        "llm_in_M": 52.9,
+        "llm_out_M": 2.9,
+        "emb_M": 4.3,
+        "usd_text_only": 10.2
+      }
+    },
+    "excluded": "그림·표·수식마다 부르는 VLM 호출과 이미지 토큰, 재시도, reranker 비용. 문서당 그림 수가 논문에 없어 추정하지 않음"
+  }
+}
