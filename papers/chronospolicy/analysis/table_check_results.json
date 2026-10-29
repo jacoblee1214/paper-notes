@@ -1,0 +1,2305 @@
+{
+ "checks": {
+  "sim_table_vs_site_mismatches": [],
+  "real_issues": []
+ },
+ "claims": [
+  {
+   "id": "B1-DP",
+   "text": "conveyor DP 교란 5조건 평균 (§4.3)",
+   "stated": 6.3,
+   "computed": 6.31,
+   "ok": true,
+   "computed_from_rounded": 6.32
+  },
+  {
+   "id": "B1-DP + rand.",
+   "text": "conveyor DP + rand. 교란 5조건 평균 (§4.3)",
+   "stated": 26.9,
+   "computed": 26.89,
+   "ok": true,
+   "computed_from_rounded": 26.88
+  },
+  {
+   "id": "B1-RoPE w/o rand.",
+   "text": "conveyor RoPE w/o rand. 교란 5조건 평균 (§4.3)",
+   "stated": 48.8,
+   "computed": 48.76,
+   "ok": true,
+   "computed_from_rounded": 48.74
+  },
+  {
+   "id": "B1-RoPE (ours)",
+   "text": "conveyor RoPE (ours) 교란 5조건 평균 (§4.3)",
+   "stated": 63.1,
+   "computed": 63.07,
+   "ok": true,
+   "computed_from_rounded": 63.08
+  },
+  {
+   "id": "B1-AddTime",
+   "text": "conveyor AddTime 교란 5조건 평균 (§4.3)",
+   "stated": 51.5,
+   "computed": 51.47,
+   "ok": true,
+   "computed_from_rounded": 51.48
+  },
+  {
+   "id": "B2-DP",
+   "text": "pivoting DP 교란 5조건 평균 (§4.3)",
+   "stated": 48.4,
+   "computed": 48.44,
+   "ok": true,
+   "computed_from_rounded": 48.46
+  },
+  {
+   "id": "B2-DP + rand.",
+   "text": "pivoting DP + rand. 교란 5조건 평균 (§4.3)",
+   "stated": 21.6,
+   "computed": 21.6,
+   "ok": true,
+   "computed_from_rounded": 21.6
+  },
+  {
+   "id": "B2-RoPE w/o rand.",
+   "text": "pivoting RoPE w/o rand. 교란 5조건 평균 (§4.3)",
+   "stated": 33.3,
+   "computed": 33.33,
+   "ok": true,
+   "computed_from_rounded": 33.32
+  },
+  {
+   "id": "B2-RoPE (ours)",
+   "text": "pivoting RoPE (ours) 교란 5조건 평균 (§4.3)",
+   "stated": 55.3,
+   "computed": 55.33,
+   "ok": true,
+   "computed_from_rounded": 55.32
+  },
+  {
+   "id": "B2-AddTime",
+   "text": "pivoting AddTime 교란 5조건 평균 (§4.3)",
+   "stated": 33.5,
+   "computed": 33.47,
+   "ok": true,
+   "computed_from_rounded": 33.48
+  },
+  {
+   "id": "A1",
+   "text": "Conveyor nominal DP→Chronos 73.1→82.0 (§4.2)",
+   "stated": [
+    73.1,
+    82.0
+   ],
+   "computed": [
+    73.1,
+    82.0
+   ],
+   "ok": true
+  },
+  {
+   "id": "A2",
+   "text": "Conveyor small obs 15.6 vs 77.6",
+   "stated": [
+    15.6,
+    77.6
+   ],
+   "computed": [
+    15.6,
+    77.6
+   ],
+   "ok": true
+  },
+  {
+   "id": "A3",
+   "text": "Conveyor delay 0–200 ms 1.8 vs 76.4",
+   "stated": [
+    1.8,
+    76.4
+   ],
+   "computed": [
+    1.8,
+    76.4
+   ],
+   "ok": true
+  },
+  {
+   "id": "A4",
+   "text": "Conveyor combined 0 vs 32.7",
+   "stated": [
+    0.0,
+    32.7
+   ],
+   "computed": [
+    0.0,
+    32.7
+   ],
+   "ok": true
+  },
+  {
+   "id": "A5",
+   "text": "Pivoting delay 0–200 51.3→60.2, combined 19.6→38.4",
+   "stated": [
+    51.3,
+    60.2,
+    19.6,
+    38.4
+   ],
+   "computed": [
+    51.3,
+    60.2,
+    19.6,
+    38.4
+   ],
+   "ok": true
+  },
+  {
+   "id": "A6",
+   "text": "Conveyor에서 AddTime이 RoPE보다 나은 조건은 nominal뿐 (§4.3)",
+   "stated": 1,
+   "computed": 1,
+   "ok": true
+  },
+  {
+   "id": "A7",
+   "text": "Pivoting에서 RoPE가 AddTime보다 모든 조건에서 나음",
+   "stated": 0,
+   "computed": 0,
+   "ok": true
+  },
+  {
+   "id": "A8",
+   "text": "표준 6과제 교란 평균 59.7→73.4 (§4.4)",
+   "stated": [
+    59.7,
+    73.4
+   ],
+   "computed": [
+    59.67,
+    73.36
+   ],
+   "ok": true
+  },
+  {
+   "id": "F4c-DP",
+   "text": "Fig. 4c 표준 6과제 조건별 평균 (DP)",
+   "stated": [
+    76.4,
+    71.8,
+    43.9,
+    75.3,
+    68.1,
+    39.2
+   ],
+   "computed": [
+    76.44,
+    71.78,
+    43.89,
+    75.33,
+    68.11,
+    39.22
+   ],
+   "ok": true
+  },
+  {
+   "id": "F4c-Chronos Policy",
+   "text": "Fig. 4c 표준 6과제 조건별 평균 (Chronos Policy)",
+   "stated": [
+    77.1,
+    75.7,
+    70.9,
+    76.0,
+    76.4,
+    67.8
+   ],
+   "computed": [
+    77.11,
+    75.67,
+    70.89,
+    76.0,
+    76.44,
+    67.78
+   ],
+   "ok": true
+  },
+  {
+   "id": "A9",
+   "text": "실제 로봇 12개 조건 모두 Chronos 최고 점수 (§4.5)",
+   "stated": 12,
+   "computed": 12,
+   "ok": true
+  },
+  {
+   "id": "A10",
+   "text": "RTC가 추론 지연에서 DP보다 나음 (3과제 중)",
+   "stated": 3,
+   "computed": 3,
+   "ok": true
+  },
+  {
+   "id": "A11",
+   "text": "B.3: Conveyor DP+rand nominal 73.1→53.6, Pivoting 61.6→29.8",
+   "stated": [
+    73.1,
+    53.6,
+    61.6,
+    29.8
+   ],
+   "computed": [
+    73.1,
+    53.6,
+    61.6,
+    29.8
+   ],
+   "ok": true
+  }
+ ],
+ "seeds": {
+  "n_ep_per_seed": {
+   "conveyor/pivoting": 150,
+   "standard": 50
+  },
+  "unique": 90,
+  "multiple": 42,
+  "none": 0,
+  "solutions": {
+   "conveyor|DP|nominal": [
+    [
+     102,
+     105,
+     122
+    ]
+   ],
+   "conveyor|DP|small_obs": [
+    [
+     22,
+     23,
+     25
+    ]
+   ],
+   "conveyor|DP|wide_sensors": [
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "conveyor|DP|delay_100": [
+    [
+     18,
+     20,
+     26
+    ]
+   ],
+   "conveyor|DP|delay_200": [
+    [
+     0,
+     4,
+     4
+    ]
+   ],
+   "conveyor|DP|combined": [
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "conveyor|DP + rand.|nominal": [
+    [
+     77,
+     80,
+     84
+    ]
+   ],
+   "conveyor|DP + rand.|small_obs": [
+    [
+     87,
+     89,
+     98
+    ]
+   ],
+   "conveyor|DP + rand.|wide_sensors": [
+    [
+     6,
+     11,
+     12
+    ]
+   ],
+   "conveyor|DP + rand.|delay_100": [
+    [
+     67,
+     72,
+     74
+    ],
+    [
+     68,
+     70,
+     75
+    ]
+   ],
+   "conveyor|DP + rand.|delay_200": [
+    [
+     25,
+     30,
+     33
+    ],
+    [
+     27,
+     27,
+     34
+    ]
+   ],
+   "conveyor|DP + rand.|combined": [
+    [
+     0,
+     0,
+     1
+    ]
+   ],
+   "conveyor|RoPE w/o rand.|nominal": [
+    [
+     116,
+     116,
+     127
+    ]
+   ],
+   "conveyor|RoPE w/o rand.|small_obs": [
+    [
+     96,
+     100,
+     106
+    ]
+   ],
+   "conveyor|RoPE w/o rand.|wide_sensors": [
+    [
+     29,
+     31,
+     31
+    ]
+   ],
+   "conveyor|RoPE w/o rand.|delay_100": [
+    [
+     104,
+     111,
+     129
+    ]
+   ],
+   "conveyor|RoPE w/o rand.|delay_200": [
+    [
+     99,
+     105,
+     108
+    ],
+    [
+     100,
+     103,
+     109
+    ]
+   ],
+   "conveyor|RoPE w/o rand.|combined": [
+    [
+     15,
+     16,
+     17
+    ]
+   ],
+   "conveyor|AddTime|nominal": [
+    [
+     116,
+     132,
+     138
+    ]
+   ],
+   "conveyor|AddTime|small_obs": [
+    [
+     107,
+     110,
+     120
+    ]
+   ],
+   "conveyor|AddTime|wide_sensors": [
+    [
+     34,
+     36,
+     38
+    ]
+   ],
+   "conveyor|AddTime|delay_100": [
+    [
+     111,
+     120,
+     124
+    ],
+    [
+     114,
+     115,
+     126
+    ]
+   ],
+   "conveyor|AddTime|delay_200": [
+    [
+     103,
+     107,
+     113
+    ]
+   ],
+   "conveyor|AddTime|combined": [
+    [
+     9,
+     11,
+     15
+    ]
+   ],
+   "conveyor|RoPE (ours)|nominal": [
+    [
+     117,
+     126,
+     126
+    ],
+    [
+     120,
+     120,
+     129
+    ]
+   ],
+   "conveyor|RoPE (ours)|small_obs": [
+    [
+     112,
+     116,
+     121
+    ]
+   ],
+   "conveyor|RoPE (ours)|wide_sensors": [
+    [
+     58,
+     61,
+     86
+    ]
+   ],
+   "conveyor|RoPE (ours)|delay_100": [
+    [
+     120,
+     126,
+     128
+    ]
+   ],
+   "conveyor|RoPE (ours)|delay_200": [
+    [
+     110,
+     114,
+     120
+    ]
+   ],
+   "conveyor|RoPE (ours)|combined": [
+    [
+     40,
+     50,
+     57
+    ],
+    [
+     41,
+     48,
+     58
+    ]
+   ],
+   "pivoting|DP|nominal": [
+    [
+     78,
+     88,
+     111
+    ]
+   ],
+   "pivoting|DP|small_obs": [
+    [
+     80,
+     102,
+     106
+    ],
+    [
+     82,
+     96,
+     110
+    ],
+    [
+     86,
+     90,
+     112
+    ]
+   ],
+   "pivoting|DP|wide_sensors": [
+    [
+     49,
+     68,
+     79
+    ]
+   ],
+   "pivoting|DP|delay_100": [
+    [
+     90,
+     91,
+     106
+    ]
+   ],
+   "pivoting|DP|delay_200": [
+    [
+     59,
+     79,
+     93
+    ],
+    [
+     61,
+     75,
+     95
+    ]
+   ],
+   "pivoting|DP|combined": [
+    [
+     3,
+     42,
+     43
+    ],
+    [
+     9,
+     25,
+     54
+    ]
+   ],
+   "pivoting|DP + rand.|nominal": [
+    [
+     20,
+     53,
+     61
+    ],
+    [
+     25,
+     41,
+     68
+    ]
+   ],
+   "pivoting|DP + rand.|small_obs": [
+    [
+     27,
+     51,
+     57
+    ],
+    [
+     33,
+     39,
+     63
+    ]
+   ],
+   "pivoting|DP + rand.|wide_sensors": [
+    [
+     11,
+     33,
+     37
+    ],
+    [
+     13,
+     27,
+     41
+    ],
+    [
+     17,
+     21,
+     43
+    ]
+   ],
+   "pivoting|DP + rand.|delay_100": [
+    [
+     28,
+     50,
+     53
+    ],
+    [
+     29,
+     46,
+     56
+    ]
+   ],
+   "pivoting|DP + rand.|delay_200": [
+    [
+     10,
+     38,
+     51
+    ],
+    [
+     15,
+     28,
+     56
+    ]
+   ],
+   "pivoting|DP + rand.|combined": [
+    [
+     4,
+     17,
+     19
+    ]
+   ],
+   "pivoting|RoPE w/o rand.|nominal": [
+    [
+     84,
+     91,
+     99
+    ],
+    [
+     87,
+     87,
+     100
+    ]
+   ],
+   "pivoting|RoPE w/o rand.|small_obs": [
+    [
+     64,
+     87,
+     92
+    ],
+    [
+     70,
+     75,
+     98
+    ]
+   ],
+   "pivoting|RoPE w/o rand.|wide_sensors": [
+    [
+     0,
+     18,
+     23
+    ]
+   ],
+   "pivoting|RoPE w/o rand.|delay_100": [
+    [
+     70,
+     77,
+     92
+    ]
+   ],
+   "pivoting|RoPE w/o rand.|delay_200": [
+    [
+     52,
+     71,
+     85
+    ]
+   ],
+   "pivoting|RoPE w/o rand.|combined": [
+    [
+     0,
+     6,
+     13
+    ]
+   ],
+   "pivoting|AddTime|nominal": [
+    [
+     56,
+     61,
+     110
+    ]
+   ],
+   "pivoting|AddTime|small_obs": [
+    [
+     28,
+     84,
+     96
+    ],
+    [
+     36,
+     64,
+     108
+    ]
+   ],
+   "pivoting|AddTime|wide_sensors": [
+    [
+     12,
+     35,
+     59
+    ]
+   ],
+   "pivoting|AddTime|delay_100": [
+    [
+     28,
+     57,
+     99
+    ]
+   ],
+   "pivoting|AddTime|delay_200": [
+    [
+     17,
+     76,
+     87
+    ],
+    [
+     19,
+     68,
+     93
+    ],
+    [
+     27,
+     52,
+     101
+    ],
+    [
+     33,
+     44,
+     103
+    ]
+   ],
+   "pivoting|AddTime|combined": [
+    [
+     4,
+     33,
+     38
+    ],
+    [
+     12,
+     17,
+     46
+    ]
+   ],
+   "pivoting|RoPE (ours)|nominal": [
+    [
+     93,
+     109,
+     110
+    ],
+    [
+     94,
+     105,
+     113
+    ],
+    [
+     95,
+     103,
+     114
+    ],
+    [
+     98,
+     99,
+     115
+    ]
+   ],
+   "pivoting|RoPE (ours)|small_obs": [
+    [
+     80,
+     105,
+     107
+    ],
+    [
+     83,
+     96,
+     113
+    ]
+   ],
+   "pivoting|RoPE (ours)|wide_sensors": [
+    [
+     45,
+     82,
+     89
+    ],
+    [
+     47,
+     75,
+     94
+    ],
+    [
+     50,
+     69,
+     97
+    ],
+    [
+     55,
+     62,
+     99
+    ]
+   ],
+   "pivoting|RoPE (ours)|delay_100": [
+    [
+     85,
+     104,
+     104
+    ],
+    [
+     89,
+     94,
+     110
+    ]
+   ],
+   "pivoting|RoPE (ours)|delay_200": [
+    [
+     76,
+     92,
+     103
+    ],
+    [
+     82,
+     83,
+     106
+    ]
+   ],
+   "pivoting|RoPE (ours)|combined": [
+    [
+     28,
+     65,
+     80
+    ],
+    [
+     29,
+     62,
+     82
+    ]
+   ],
+   "Threading|DP|nominal": [
+    [
+     40,
+     46,
+     48
+    ]
+   ],
+   "Threading|DP|small_obs": [
+    [
+     42,
+     44,
+     47
+    ]
+   ],
+   "Threading|DP|wide_sensors": [
+    [
+     33,
+     42,
+     43
+    ],
+    [
+     34,
+     39,
+     45
+    ]
+   ],
+   "Threading|DP|delay_100": [
+    [
+     41,
+     46,
+     48
+    ],
+    [
+     42,
+     44,
+     49
+    ]
+   ],
+   "Threading|DP|delay_200": [
+    [
+     37,
+     40,
+     42
+    ]
+   ],
+   "Threading|DP|combined": [
+    [
+     34,
+     41,
+     41
+    ],
+    [
+     35,
+     38,
+     43
+    ]
+   ],
+   "Threading|Chronos Policy|nominal": [
+    [
+     43,
+     44,
+     46
+    ]
+   ],
+   "Threading|Chronos Policy|small_obs": [
+    [
+     44,
+     45,
+     46
+    ]
+   ],
+   "Threading|Chronos Policy|wide_sensors": [
+    [
+     37,
+     39,
+     40
+    ]
+   ],
+   "Threading|Chronos Policy|delay_100": [
+    [
+     40,
+     42,
+     45
+    ]
+   ],
+   "Threading|Chronos Policy|delay_200": [
+    [
+     42,
+     43,
+     45
+    ]
+   ],
+   "Threading|Chronos Policy|combined": [
+    [
+     30,
+     32,
+     33
+    ]
+   ],
+   "Assembly|DP|nominal": [
+    [
+     34,
+     38,
+     41
+    ]
+   ],
+   "Assembly|DP|small_obs": [
+    [
+     34,
+     37,
+     39
+    ]
+   ],
+   "Assembly|DP|wide_sensors": [
+    [
+     3,
+     8,
+     9
+    ]
+   ],
+   "Assembly|DP|delay_100": [
+    [
+     32,
+     38,
+     39
+    ]
+   ],
+   "Assembly|DP|delay_200": [
+    [
+     36,
+     36,
+     37
+    ]
+   ],
+   "Assembly|DP|combined": [
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "Assembly|Chronos Policy|nominal": [
+    [
+     34,
+     34,
+     35
+    ]
+   ],
+   "Assembly|Chronos Policy|small_obs": [
+    [
+     36,
+     36,
+     38
+    ]
+   ],
+   "Assembly|Chronos Policy|wide_sensors": [
+    [
+     29,
+     31,
+     32
+    ]
+   ],
+   "Assembly|Chronos Policy|delay_100": [
+    [
+     33,
+     35,
+     39
+    ]
+   ],
+   "Assembly|Chronos Policy|delay_200": [
+    [
+     32,
+     37,
+     38
+    ]
+   ],
+   "Assembly|Chronos Policy|combined": [
+    [
+     26,
+     27,
+     33
+    ]
+   ],
+   "Transport|DP|nominal": [
+    [
+     39,
+     43,
+     44
+    ],
+    [
+     40,
+     41,
+     45
+    ]
+   ],
+   "Transport|DP|small_obs": [
+    [
+     38,
+     41,
+     43
+    ]
+   ],
+   "Transport|DP|wide_sensors": [
+    [
+     36,
+     40,
+     41
+    ],
+    [
+     37,
+     38,
+     42
+    ]
+   ],
+   "Transport|DP|delay_100": [
+    [
+     38,
+     46,
+     47
+    ]
+   ],
+   "Transport|DP|delay_200": [
+    [
+     38,
+     44,
+     45
+    ]
+   ],
+   "Transport|DP|combined": [
+    [
+     32,
+     39,
+     39
+    ],
+    [
+     33,
+     36,
+     41
+    ]
+   ],
+   "Transport|Chronos Policy|nominal": [
+    [
+     40,
+     44,
+     47
+    ]
+   ],
+   "Transport|Chronos Policy|small_obs": [
+    [
+     35,
+     41,
+     46
+    ],
+    [
+     37,
+     38,
+     47
+    ]
+   ],
+   "Transport|Chronos Policy|wide_sensors": [
+    [
+     36,
+     38,
+     42
+    ]
+   ],
+   "Transport|Chronos Policy|delay_100": [
+    [
+     38,
+     43,
+     47
+    ]
+   ],
+   "Transport|Chronos Policy|delay_200": [
+    [
+     39,
+     42,
+     45
+    ]
+   ],
+   "Transport|Chronos Policy|combined": [
+    [
+     29,
+     38,
+     38
+    ],
+    [
+     32,
+     32,
+     41
+    ]
+   ],
+   "Coffee|DP|nominal": [
+    [
+     21,
+     23,
+     27
+    ]
+   ],
+   "Coffee|DP|small_obs": [
+    [
+     14,
+     18,
+     20
+    ]
+   ],
+   "Coffee|DP|wide_sensors": [
+    [
+     7,
+     7,
+     8
+    ]
+   ],
+   "Coffee|DP|delay_100": [
+    [
+     13,
+     22,
+     27
+    ]
+   ],
+   "Coffee|DP|delay_200": [
+    [
+     11,
+     12,
+     18
+    ]
+   ],
+   "Coffee|DP|combined": [
+    [
+     0,
+     1,
+     3
+    ]
+   ],
+   "Coffee|Chronos Policy|nominal": [
+    [
+     19,
+     25,
+     33
+    ]
+   ],
+   "Coffee|Chronos Policy|small_obs": [
+    [
+     22,
+     32,
+     33
+    ],
+    [
+     25,
+     26,
+     36
+    ]
+   ],
+   "Coffee|Chronos Policy|wide_sensors": [
+    [
+     24,
+     29,
+     33
+    ]
+   ],
+   "Coffee|Chronos Policy|delay_100": [
+    [
+     21,
+     23,
+     35
+    ]
+   ],
+   "Coffee|Chronos Policy|delay_200": [
+    [
+     24,
+     25,
+     37
+    ]
+   ],
+   "Coffee|Chronos Policy|combined": [
+    [
+     27,
+     31,
+     32
+    ],
+    [
+     28,
+     29,
+     33
+    ]
+   ],
+   "Drawer Cleanup|DP|nominal": [
+    [
+     39,
+     41,
+     45
+    ]
+   ],
+   "Drawer Cleanup|DP|small_obs": [
+    [
+     39,
+     40,
+     43
+    ]
+   ],
+   "Drawer Cleanup|DP|wide_sensors": [
+    [
+     35,
+     38,
+     42
+    ]
+   ],
+   "Drawer Cleanup|DP|delay_100": [
+    [
+     39,
+     41,
+     43
+    ]
+   ],
+   "Drawer Cleanup|DP|delay_200": [
+    [
+     40,
+     40,
+     41
+    ]
+   ],
+   "Drawer Cleanup|DP|combined": [
+    [
+     35,
+     40,
+     44
+    ]
+   ],
+   "Drawer Cleanup|Chronos Policy|nominal": [
+    [
+     40,
+     45,
+     46
+    ]
+   ],
+   "Drawer Cleanup|Chronos Policy|small_obs": [
+    [
+     32,
+     43,
+     44
+    ],
+    [
+     34,
+     38,
+     47
+    ]
+   ],
+   "Drawer Cleanup|Chronos Policy|wide_sensors": [
+    [
+     33,
+     43,
+     47
+    ],
+    [
+     35,
+     39,
+     49
+    ]
+   ],
+   "Drawer Cleanup|Chronos Policy|delay_100": [
+    [
+     38,
+     45,
+     45
+    ],
+    [
+     39,
+     42,
+     47
+    ]
+   ],
+   "Drawer Cleanup|Chronos Policy|delay_200": [
+    [
+     38,
+     43,
+     46
+    ],
+    [
+     40,
+     40,
+     47
+    ]
+   ],
+   "Drawer Cleanup|Chronos Policy|combined": [
+    [
+     35,
+     40,
+     43
+    ],
+    [
+     37,
+     37,
+     44
+    ]
+   ],
+   "Pouring|DP|nominal": [
+    [
+     23,
+     46,
+     50
+    ]
+   ],
+   "Pouring|DP|small_obs": [
+    [
+     14,
+     43,
+     50
+    ]
+   ],
+   "Pouring|DP|wide_sensors": [
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "Pouring|DP|delay_100": [
+    [
+     22,
+     46,
+     50
+    ]
+   ],
+   "Pouring|DP|delay_200": [
+    [
+     12,
+     36,
+     48
+    ]
+   ],
+   "Pouring|DP|combined": [
+    [
+     1,
+     1,
+     2
+    ]
+   ],
+   "Pouring|Chronos Policy|nominal": [
+    [
+     36,
+     41,
+     42
+    ]
+   ],
+   "Pouring|Chronos Policy|small_obs": [
+    [
+     32,
+     38,
+     38
+    ],
+    [
+     34,
+     34,
+     40
+    ]
+   ],
+   "Pouring|Chronos Policy|wide_sensors": [
+    [
+     33,
+     36,
+     36
+    ],
+    [
+     34,
+     34,
+     37
+    ]
+   ],
+   "Pouring|Chronos Policy|delay_100": [
+    [
+     36,
+     39,
+     40
+    ]
+   ],
+   "Pouring|Chronos Policy|delay_200": [
+    [
+     37,
+     37,
+     38
+    ]
+   ],
+   "Pouring|Chronos Policy|combined": [
+    [
+     36,
+     39,
+     41
+    ]
+   ]
+  }
+ },
+ "stats": {
+  "overdispersion_ratio_median": 1.2924606552829938,
+  "overdispersion_ratio_iqr": [
+   0.8928550913228045,
+   2.3311233710660577
+  ],
+  "sim_tests": [
+   {
+    "task": "conveyor",
+    "vs": "DP",
+    "cond": "nominal",
+    "chronos": 82.0,
+    "other": 73.1,
+    "welch_p_seed": 0.1531,
+    "fisher_p_episode": 0.0017909218718158732
+   },
+   {
+    "task": "conveyor",
+    "vs": "DP",
+    "cond": "small_obs",
+    "chronos": 77.6,
+    "other": 15.6,
+    "welch_p_seed": 0.0002,
+    "fisher_p_episode": 6.3434022646895735e-83
+   },
+   {
+    "task": "conveyor",
+    "vs": "DP",
+    "cond": "wide_sensors",
+    "chronos": 45.6,
+    "other": 0.0,
+    "welch_p_seed": 0.0165,
+    "fisher_p_episode": 2.1776603777463788e-75
+   },
+   {
+    "task": "conveyor",
+    "vs": "DP",
+    "cond": "delay_100",
+    "chronos": 83.1,
+    "other": 14.2,
+    "welch_p_seed": 0.0,
+    "fisher_p_episode": 1.6252760478121724e-103
+   },
+   {
+    "task": "conveyor",
+    "vs": "DP",
+    "cond": "delay_200",
+    "chronos": 76.4,
+    "other": 1.8,
+    "welch_p_seed": 0.0001,
+    "fisher_p_episode": 1.6256879331855157e-138
+   },
+   {
+    "task": "conveyor",
+    "vs": "DP",
+    "cond": "combined",
+    "chronos": 32.7,
+    "other": 0.0,
+    "welch_p_seed": 0.01,
+    "fisher_p_episode": 6.68395243046266e-51
+   },
+   {
+    "task": "conveyor",
+    "vs": "AddTime",
+    "cond": "nominal",
+    "chronos": 82.0,
+    "other": 85.8,
+    "welch_p_seed": 0.4935,
+    "fisher_p_episode": 0.14667703243299163
+   },
+   {
+    "task": "conveyor",
+    "vs": "AddTime",
+    "cond": "small_obs",
+    "chronos": 77.6,
+    "other": 74.9,
+    "welch_p_seed": 0.4507,
+    "fisher_p_episode": 0.3891127890918355
+   },
+   {
+    "task": "conveyor",
+    "vs": "AddTime",
+    "cond": "wide_sensors",
+    "chronos": 45.6,
+    "other": 24.0,
+    "welch_p_seed": 0.0655,
+    "fisher_p_episode": 1.3904462910873617e-11
+   },
+   {
+    "task": "conveyor",
+    "vs": "AddTime",
+    "cond": "delay_100",
+    "chronos": 83.1,
+    "other": 78.9,
+    "welch_p_seed": 0.2477,
+    "fisher_p_episode": 0.12599218332104828
+   },
+   {
+    "task": "conveyor",
+    "vs": "AddTime",
+    "cond": "delay_200",
+    "chronos": 76.4,
+    "other": 71.8,
+    "welch_p_seed": 0.1637,
+    "fisher_p_episode": 0.12791046160827366
+   },
+   {
+    "task": "conveyor",
+    "vs": "AddTime",
+    "cond": "combined",
+    "chronos": 32.7,
+    "other": 7.8,
+    "welch_p_seed": 0.0101,
+    "fisher_p_episode": 2.5654939899007533e-21
+   },
+   {
+    "task": "conveyor",
+    "vs": "RoPE w/o rand.",
+    "cond": "nominal",
+    "chronos": 82.0,
+    "other": 79.8,
+    "welch_p_seed": 0.5219,
+    "fisher_p_episode": 0.44551636259465843
+   },
+   {
+    "task": "conveyor",
+    "vs": "RoPE w/o rand.",
+    "cond": "small_obs",
+    "chronos": 77.6,
+    "other": 67.1,
+    "welch_p_seed": 0.0163,
+    "fisher_p_episode": 0.0005936888912645235
+   },
+   {
+    "task": "conveyor",
+    "vs": "RoPE w/o rand.",
+    "cond": "wide_sensors",
+    "chronos": 45.6,
+    "other": 20.2,
+    "welch_p_seed": 0.0497,
+    "fisher_p_episode": 5.813746060795958e-16
+   },
+   {
+    "task": "conveyor",
+    "vs": "RoPE w/o rand.",
+    "cond": "delay_100",
+    "chronos": 83.1,
+    "other": 76.4,
+    "welch_p_seed": 0.3104,
+    "fisher_p_episode": 0.015946491900681117
+   },
+   {
+    "task": "conveyor",
+    "vs": "RoPE w/o rand.",
+    "cond": "delay_200",
+    "chronos": 76.4,
+    "other": 69.3,
+    "welch_p_seed": 0.0538,
+    "fisher_p_episode": 0.019992120997244695
+   },
+   {
+    "task": "conveyor",
+    "vs": "RoPE w/o rand.",
+    "cond": "combined",
+    "chronos": 32.7,
+    "other": 10.7,
+    "welch_p_seed": 0.0204,
+    "fisher_p_episode": 6.776275818461671e-16
+   },
+   {
+    "task": "pivoting",
+    "vs": "DP",
+    "cond": "nominal",
+    "chronos": 69.3,
+    "other": 61.6,
+    "welch_p_seed": 0.3713,
+    "fisher_p_episode": 0.017093892901762196
+   },
+   {
+    "task": "pivoting",
+    "vs": "DP",
+    "cond": "small_obs",
+    "chronos": 64.9,
+    "other": 64.0,
+    "welch_p_seed": 0.916,
+    "fisher_p_episode": 0.8345405163594575
+   },
+   {
+    "task": "pivoting",
+    "vs": "DP",
+    "cond": "wide_sensors",
+    "chronos": 48.0,
+    "other": 43.6,
+    "welch_p_seed": 0.7056,
+    "fisher_p_episode": 0.20362875562850064
+   },
+   {
+    "task": "pivoting",
+    "vs": "DP",
+    "cond": "delay_100",
+    "chronos": 65.1,
+    "other": 63.8,
+    "welch_p_seed": 0.8193,
+    "fisher_p_episode": 0.7277352439426938
+   },
+   {
+    "task": "pivoting",
+    "vs": "DP",
+    "cond": "delay_200",
+    "chronos": 60.2,
+    "other": 51.3,
+    "welch_p_seed": 0.3525,
+    "fisher_p_episode": 0.00881795546399831
+   },
+   {
+    "task": "pivoting",
+    "vs": "DP",
+    "cond": "combined",
+    "chronos": 38.4,
+    "other": 19.6,
+    "welch_p_seed": 0.237,
+    "fisher_p_episode": 5.249341865711847e-10
+   },
+   {
+    "task": "pivoting",
+    "vs": "AddTime",
+    "cond": "nominal",
+    "chronos": 69.3,
+    "other": 50.4,
+    "welch_p_seed": 0.2368,
+    "fisher_p_episode": 9.887534843128628e-09
+   },
+   {
+    "task": "pivoting",
+    "vs": "AddTime",
+    "cond": "small_obs",
+    "chronos": 64.9,
+    "other": 46.2,
+    "welch_p_seed": 0.3147,
+    "fisher_p_episode": 2.3468039313610496e-08
+   },
+   {
+    "task": "pivoting",
+    "vs": "AddTime",
+    "cond": "wide_sensors",
+    "chronos": 48.0,
+    "other": 23.6,
+    "welch_p_seed": 0.1295,
+    "fisher_p_episode": 2.249814381895222e-14
+   },
+   {
+    "task": "pivoting",
+    "vs": "AddTime",
+    "cond": "delay_100",
+    "chronos": 65.1,
+    "other": 40.9,
+    "welch_p_seed": 0.214,
+    "fisher_p_episode": 4.21947303770887e-13
+   },
+   {
+    "task": "pivoting",
+    "vs": "AddTime",
+    "cond": "delay_200",
+    "chronos": 60.2,
+    "other": 40.0,
+    "welch_p_seed": 0.2963,
+    "fisher_p_episode": 1.7469477393608265e-09
+   },
+   {
+    "task": "pivoting",
+    "vs": "AddTime",
+    "cond": "combined",
+    "chronos": 38.4,
+    "other": 16.7,
+    "welch_p_seed": 0.1654,
+    "fisher_p_episode": 2.672395378708371e-13
+   },
+   {
+    "task": "pivoting",
+    "vs": "RoPE w/o rand.",
+    "cond": "nominal",
+    "chronos": 69.3,
+    "other": 60.9,
+    "welch_p_seed": 0.1489,
+    "fisher_p_episode": 0.009608956718644736
+   },
+   {
+    "task": "pivoting",
+    "vs": "RoPE w/o rand.",
+    "cond": "small_obs",
+    "chronos": 64.9,
+    "other": 54.0,
+    "welch_p_seed": 0.2529,
+    "fisher_p_episode": 0.0011062573746107322
+   },
+   {
+    "task": "pivoting",
+    "vs": "RoPE w/o rand.",
+    "cond": "wide_sensors",
+    "chronos": 48.0,
+    "other": 9.1,
+    "welch_p_seed": 0.0323,
+    "fisher_p_episode": 2.6263473955588967e-40
+   },
+   {
+    "task": "pivoting",
+    "vs": "RoPE w/o rand.",
+    "cond": "delay_100",
+    "chronos": 65.1,
+    "other": 53.1,
+    "welch_p_seed": 0.1182,
+    "fisher_p_episode": 0.00032063199257132893
+   },
+   {
+    "task": "pivoting",
+    "vs": "RoPE w/o rand.",
+    "cond": "delay_200",
+    "chronos": 60.2,
+    "other": 46.2,
+    "welch_p_seed": 0.1674,
+    "fisher_p_episode": 3.349749896567236e-05
+   },
+   {
+    "task": "pivoting",
+    "vs": "RoPE w/o rand.",
+    "cond": "combined",
+    "chronos": 38.4,
+    "other": 4.2,
+    "welch_p_seed": 0.0725,
+    "fisher_p_episode": 1.4545026730232679e-39
+   }
+  ],
+  "standard_tests": [
+   {
+    "task": "Threading",
+    "cond": "nominal",
+    "dp": 89.3,
+    "chronos": 88.7,
+    "welch_p_seed": 0.9061
+   },
+   {
+    "task": "Threading",
+    "cond": "small_obs",
+    "dp": 88.7,
+    "chronos": 90.0,
+    "welch_p_seed": 0.7024
+   },
+   {
+    "task": "Threading",
+    "cond": "wide_sensors",
+    "dp": 78.7,
+    "chronos": 77.3,
+    "welch_p_seed": 0.8563
+   },
+   {
+    "task": "Threading",
+    "cond": "delay_100",
+    "dp": 90.0,
+    "chronos": 84.7,
+    "welch_p_seed": 0.3593
+   },
+   {
+    "task": "Threading",
+    "cond": "delay_200",
+    "dp": 79.3,
+    "chronos": 86.7,
+    "welch_p_seed": 0.1117
+   },
+   {
+    "task": "Threading",
+    "cond": "combined",
+    "dp": 77.3,
+    "chronos": 63.3,
+    "welch_p_seed": 0.081
+   },
+   {
+    "task": "Assembly",
+    "cond": "nominal",
+    "dp": 75.3,
+    "chronos": 68.7,
+    "welch_p_seed": 0.2399
+   },
+   {
+    "task": "Assembly",
+    "cond": "small_obs",
+    "dp": 73.3,
+    "chronos": 73.3,
+    "welch_p_seed": 1.0
+   },
+   {
+    "task": "Assembly",
+    "cond": "wide_sensors",
+    "dp": 13.3,
+    "chronos": 61.3,
+    "welch_p_seed": 0.0017
+   },
+   {
+    "task": "Assembly",
+    "cond": "delay_100",
+    "dp": 72.7,
+    "chronos": 71.3,
+    "welch_p_seed": 0.8245
+   },
+   {
+    "task": "Assembly",
+    "cond": "delay_200",
+    "dp": 72.7,
+    "chronos": 71.3,
+    "welch_p_seed": 0.7556
+   },
+   {
+    "task": "Assembly",
+    "cond": "combined",
+    "dp": 0.0,
+    "chronos": 57.3,
+    "welch_p_seed": 0.0058
+   },
+   {
+    "task": "Transport",
+    "cond": "nominal",
+    "dp": 84.0,
+    "chronos": 87.3,
+    "welch_p_seed": 0.5499
+   },
+   {
+    "task": "Transport",
+    "cond": "small_obs",
+    "dp": 81.3,
+    "chronos": 81.3,
+    "welch_p_seed": 1.0
+   },
+   {
+    "task": "Transport",
+    "cond": "wide_sensors",
+    "dp": 78.0,
+    "chronos": 77.3,
+    "welch_p_seed": 0.8934
+   },
+   {
+    "task": "Transport",
+    "cond": "delay_100",
+    "dp": 87.3,
+    "chronos": 85.3,
+    "welch_p_seed": 0.8084
+   },
+   {
+    "task": "Transport",
+    "cond": "delay_200",
+    "dp": 84.7,
+    "chronos": 84.0,
+    "welch_p_seed": 0.9109
+   },
+   {
+    "task": "Transport",
+    "cond": "combined",
+    "dp": 73.3,
+    "chronos": 70.0,
+    "welch_p_seed": 0.6849
+   },
+   {
+    "task": "Coffee",
+    "cond": "nominal",
+    "dp": 47.3,
+    "chronos": 51.3,
+    "welch_p_seed": 0.6846
+   },
+   {
+    "task": "Coffee",
+    "cond": "small_obs",
+    "dp": 34.7,
+    "chronos": 58.0,
+    "welch_p_seed": 0.0604
+   },
+   {
+    "task": "Coffee",
+    "cond": "wide_sensors",
+    "dp": 14.7,
+    "chronos": 57.3,
+    "welch_p_seed": 0.0135
+   },
+   {
+    "task": "Coffee",
+    "cond": "delay_100",
+    "dp": 41.3,
+    "chronos": 52.7,
+    "welch_p_seed": 0.398
+   },
+   {
+    "task": "Coffee",
+    "cond": "delay_200",
+    "dp": 27.3,
+    "chronos": 57.3,
+    "welch_p_seed": 0.0496
+   },
+   {
+    "task": "Coffee",
+    "cond": "combined",
+    "dp": 2.7,
+    "chronos": 60.0,
+    "welch_p_seed": 0.0003
+   },
+   {
+    "task": "Drawer Cleanup",
+    "cond": "nominal",
+    "dp": 83.3,
+    "chronos": 87.3,
+    "welch_p_seed": 0.4785
+   },
+   {
+    "task": "Drawer Cleanup",
+    "cond": "small_obs",
+    "dp": 81.3,
+    "chronos": 79.3,
+    "welch_p_seed": 0.8237
+   },
+   {
+    "task": "Drawer Cleanup",
+    "cond": "wide_sensors",
+    "dp": 76.7,
+    "chronos": 82.0,
+    "welch_p_seed": 0.6064
+   },
+   {
+    "task": "Drawer Cleanup",
+    "cond": "delay_100",
+    "dp": 82.0,
+    "chronos": 85.3,
+    "welch_p_seed": 0.5687
+   },
+   {
+    "task": "Drawer Cleanup",
+    "cond": "delay_200",
+    "dp": 80.7,
+    "chronos": 84.7,
+    "welch_p_seed": 0.4825
+   },
+   {
+    "task": "Drawer Cleanup",
+    "cond": "combined",
+    "dp": 79.3,
+    "chronos": 78.7,
+    "welch_p_seed": 0.9287
+   },
+   {
+    "task": "Pouring",
+    "cond": "nominal",
+    "dp": 79.3,
+    "chronos": 79.3,
+    "welch_p_seed": 1.0
+   },
+   {
+    "task": "Pouring",
+    "cond": "small_obs",
+    "dp": 71.3,
+    "chronos": 72.0,
+    "welch_p_seed": 0.9788
+   },
+   {
+    "task": "Pouring",
+    "cond": "wide_sensors",
+    "dp": 2.0,
+    "chronos": 70.0,
+    "welch_p_seed": 0.0001
+   },
+   {
+    "task": "Pouring",
+    "cond": "delay_100",
+    "dp": 78.7,
+    "chronos": 76.7,
+    "welch_p_seed": 0.9198
+   },
+   {
+    "task": "Pouring",
+    "cond": "delay_200",
+    "dp": 64.0,
+    "chronos": 74.7,
+    "welch_p_seed": 0.6644
+   },
+   {
+    "task": "Pouring",
+    "cond": "combined",
+    "dp": 2.7,
+    "chronos": 77.3,
+    "welch_p_seed": 0.0009
+   }
+  ],
+  "real_tests": [
+   {
+    "task": "dynamic_cup",
+    "vs": "DP",
+    "pooled_diff": 27.5,
+    "pooled_p": 0.0175,
+    "n_per_policy": 40,
+    "cells": [
+     {
+      "cond": "nominal",
+      "diff": 30.0,
+      "p": 0.352
+     },
+     {
+      "cond": "obs_change",
+      "diff": 30.0,
+      "p": 0.252
+     },
+     {
+      "cond": "inference_latency",
+      "diff": 25.0,
+      "p": 0.372
+     },
+     {
+      "cond": "combined",
+      "diff": 25.0,
+      "p": 0.368
+     }
+    ]
+   },
+   {
+    "task": "dynamic_cup",
+    "vs": "DP + RTC",
+    "pooled_diff": 22.5,
+    "pooled_p": 0.0412,
+    "n_per_policy": 40,
+    "cells": [
+     {
+      "cond": "nominal",
+      "diff": 20.0,
+      "p": 0.63
+     },
+     {
+      "cond": "obs_change",
+      "diff": 25.0,
+      "p": 0.354
+     },
+     {
+      "cond": "inference_latency",
+      "diff": 15.0,
+      "p": 0.644
+     },
+     {
+      "cond": "combined",
+      "diff": 30.0,
+      "p": 0.249
+     }
+    ]
+   },
+   {
+    "task": "peg",
+    "vs": "DP",
+    "pooled_diff": 16.2,
+    "pooled_p": 0.0882,
+    "n_per_policy": 40,
+    "cells": [
+     {
+      "cond": "nominal",
+      "diff": 5.0,
+      "p": 1.0
+     },
+     {
+      "cond": "obs_change",
+      "diff": 10.0,
+      "p": 0.782
+     },
+     {
+      "cond": "inference_latency",
+      "diff": 30.0,
+      "p": 0.242
+     },
+     {
+      "cond": "combined",
+      "diff": 20.0,
+      "p": 0.465
+     }
+    ]
+   },
+   {
+    "task": "peg",
+    "vs": "DP + RTC",
+    "pooled_diff": 25.0,
+    "pooled_p": 0.0131,
+    "n_per_policy": 40,
+    "cells": [
+     {
+      "cond": "nominal",
+      "diff": 15.0,
+      "p": 0.475
+     },
+     {
+      "cond": "obs_change",
+      "diff": 35.0,
+      "p": 0.165
+     },
+     {
+      "cond": "inference_latency",
+      "diff": 20.0,
+      "p": 0.475
+     },
+     {
+      "cond": "combined",
+      "diff": 30.0,
+      "p": 0.248
+     }
+    ]
+   },
+   {
+    "task": "pivoting",
+    "vs": "DP",
+    "pooled_diff": 28.1,
+    "pooled_p": 0.0002,
+    "n_per_policy": 80,
+    "cells": [
+     {
+      "cond": "nominal",
+      "diff": 22.5,
+      "p": 0.176
+     },
+     {
+      "cond": "obs_change",
+      "diff": 30.0,
+      "p": 0.075
+     },
+     {
+      "cond": "inference_latency",
+      "diff": 37.5,
+      "p": 0.022
+     },
+     {
+      "cond": "combined",
+      "diff": 22.5,
+      "p": 0.174
+     }
+    ]
+   },
+   {
+    "task": "pivoting",
+    "vs": "DP + RTC",
+    "pooled_diff": 20.0,
+    "pooled_p": 0.0075,
+    "n_per_policy": 80,
+    "cells": [
+     {
+      "cond": "nominal",
+      "diff": 17.5,
+      "p": 0.31
+     },
+     {
+      "cond": "obs_change",
+      "diff": 22.5,
+      "p": 0.188
+     },
+     {
+      "cond": "inference_latency",
+      "diff": 12.5,
+      "p": 0.479
+     },
+     {
+      "cond": "combined",
+      "diff": 27.5,
+      "p": 0.096
+     }
+    ]
+   }
+  ]
+ },
+ "standard": {
+  "nominal_avg": {
+   "DP": 76.44444444444444,
+   "Chronos": 77.11111111111111
+  },
+  "perturbed_avg": {
+   "DP": 59.666666666666664,
+   "Chronos": 73.35555555555555
+  },
+  "perturbed_avg_without_assembly_coffee_pouring": {
+   "DP": 81.24444444444445,
+   "Chronos": 80.66666666666667
+  },
+  "cells_chronos_lower": [
+   [
+    "Threading",
+    "nominal",
+    89.33333333333333,
+    88.66666666666667
+   ],
+   [
+    "Threading",
+    "wide_sensors",
+    78.66666666666667,
+    77.33333333333333
+   ],
+   [
+    "Threading",
+    "delay_100",
+    90.0,
+    84.66666666666667
+   ],
+   [
+    "Threading",
+    "combined",
+    77.33333333333333,
+    63.333333333333336
+   ],
+   [
+    "Assembly",
+    "nominal",
+    75.33333333333333,
+    68.66666666666667
+   ],
+   [
+    "Assembly",
+    "delay_100",
+    72.66666666666667,
+    71.33333333333333
+   ],
+   [
+    "Assembly",
+    "delay_200",
+    72.66666666666667,
+    71.33333333333333
+   ],
+   [
+    "Transport",
+    "wide_sensors",
+    78.0,
+    77.33333333333333
+   ],
+   [
+    "Transport",
+    "delay_100",
+    87.33333333333333,
+    85.33333333333333
+   ],
+   [
+    "Transport",
+    "delay_200",
+    84.66666666666667,
+    84.0
+   ],
+   [
+    "Transport",
+    "combined",
+    73.33333333333333,
+    70.0
+   ],
+   [
+    "Drawer Cleanup",
+    "small_obs",
+    81.33333333333333,
+    79.33333333333333
+   ],
+   [
+    "Drawer Cleanup",
+    "combined",
+    79.33333333333333,
+    78.66666666666667
+   ],
+   [
+    "Pouring",
+    "delay_100",
+    78.66666666666667,
+    76.66666666666667
+   ]
+  ]
+ }
+}

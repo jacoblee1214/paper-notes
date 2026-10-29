@@ -1,0 +1,140 @@
+{
+ "N1": {
+  "P_pre(sigma>0.9)": 0.9545,
+  "P_pre(sigma>0.95)": 0.8044,
+  "P_uniform(sigma>0.9)": 0.3574,
+  "P_q(sigma>0.9)": 0.6556,
+  "median_sigma": {
+   "pre": 0.9794,
+   "uniform": 0.8333,
+   "q": 0.9512
+  }
+ },
+ "N2": {
+  "max_w_v": 1.7502,
+  "max_w_g": 2.0,
+  "min_w_g": 0.2498,
+  "bound_1/alpha": 2.0,
+  "bound_1/(1-alpha)": 2.0,
+  "clip": 4.0,
+  "clip_ever_active": false,
+  "u_range_where_w_g_eq_2 (p_pre=0)": [
+   0.999,
+   1.0
+  ]
+ },
+ "N3": {
+  "sigma": {
+   "video_target(pre)": 0.9688,
+   "video_weighted_unnorm": 0.9685,
+   "video_weighted_norm_B6": 0.9677,
+   "guidance_target(uniform)": 0.747,
+   "guidance_weighted_unnorm": 0.7471,
+   "guidance_weighted_norm_B6": 0.7586,
+   "unweighted_q": 0.8578
+  },
+  "(1-sigma)^2": {
+   "video_target(pre)": 0.0021,
+   "video_weighted_unnorm": 0.0021,
+   "video_weighted_norm_B6": 0.0022,
+   "guidance_target(uniform)": 0.1236,
+   "guidance_weighted_unnorm": 0.1237,
+   "guidance_weighted_norm_B6": 0.1166,
+   "unweighted_q": 0.0629
+  },
+  "1[sigma<0.7]": {
+   "video_target(pre)": 0.0003,
+   "video_weighted_unnorm": 0.0003,
+   "video_weighted_norm_B6": 0.0004,
+   "guidance_target(uniform)": 0.3184,
+   "guidance_weighted_unnorm": 0.3185,
+   "guidance_weighted_norm_B6": 0.3005,
+   "unweighted_q": 0.1594
+  },
+  "ESS_fraction_B6": {
+   "video": 0.69,
+   "guidance": 0.705
+  }
+ },
+ "N4": {
+  "4": {
+   "sigmas_read_by_action": [
+    1.0,
+    0.938,
+    0.833,
+    0.625
+   ],
+   "min_sigma_read": 0.625,
+   "share_of_steps_sigma>0.9": 0.5
+  },
+  "10": {
+   "sigmas_read_by_action": [
+    1.0,
+    0.978,
+    0.952,
+    0.921,
+    0.882,
+    0.833,
+    0.769,
+    0.682,
+    0.556,
+    0.357
+   ],
+   "min_sigma_read": 0.357,
+   "share_of_steps_sigma>0.9": 0.4
+  },
+  "20": {
+   "sigmas_read_by_action": [
+    1.0,
+    "...",
+    0.208
+   ],
+   "min_sigma_read": 0.208,
+   "share_of_steps_sigma>0.9": 0.4
+  },
+  "40": {
+   "sigmas_read_by_action": [
+    1.0,
+    "...",
+    0.114
+   ],
+   "min_sigma_read": 0.114,
+   "share_of_steps_sigma>0.9": 0.375
+  }
+ },
+ "N5": {
+  "4": {
+   "inference_sigma_range": [
+    0.625,
+    1.0
+   ],
+   "P_pre(sigma in range)": 0.9999,
+   "P_q(sigma in range)": 0.8747,
+   "P_uniform(sigma in range)": 0.7499,
+   "P_pre(sigma<0.7)": 0.0003,
+   "P_uniform(sigma<0.7)": 0.3184
+  },
+  "10": {
+   "inference_sigma_range": [
+    0.357,
+    1.0
+   ],
+   "P_pre(sigma in range)": 1.0,
+   "P_q(sigma in range)": 0.9499,
+   "P_uniform(sigma in range)": 0.8999,
+   "P_pre(sigma<0.7)": 0.0003,
+   "P_uniform(sigma<0.7)": 0.3184
+  },
+  "20": {
+   "inference_sigma_range": [
+    0.208,
+    1.0
+   ],
+   "P_pre(sigma in range)": 1.0,
+   "P_q(sigma in range)": 0.9749,
+   "P_uniform(sigma in range)": 0.9499,
+   "P_pre(sigma<0.7)": 0.0003,
+   "P_uniform(sigma<0.7)": 0.3184
+  }
+ }
+}
