@@ -4,6 +4,7 @@
 
 | 날짜 | 글 | 요약 |
 |---|---|---|
+| 2026-10-29 | [Dust 읽기: 역전파 없이 Transformer를 학습한다, 그런데 무엇과 비교했나](papers/dust/) | 활성값을 토큰마다 흔들어 forward만으로 gradient를 추정하는 Dust를, 부록 표 재계산, 연산량 환산, 공식 코드 대조, numpy toy로 읽었습니다. |
 | 2026-10-29 | [AW-0 읽기: 코드로 계획하는 World Action Model, 그런데 이득은 어디서 오는가](papers/agentic_wam/) | 코드·미래 영상·행동을 한 번에 denoise하는 AW-0를 표 재계산, RoboTwin 공식 리더보드 대조, 공개 코드 대조로 읽었습니다. |
 | 2026-10-28 | [ZeroDex 읽기: 시연 없이 dexterous 손을 움직이는 다시점 VLM 그라운딩, 숫자는 어디서 나왔나](papers/zerodex/) | VLM의 2D 키포인트를 여러 보정 시점의 합의로 3D에 올려 dexterous 손을 zero-shot으로 움직이는 ZeroDex를, 표를 재계산하고 핵심 식을 toy로 구현하며 v1과 대조해 읽었습니다. |
 | 2026-10-28 | [RAG-Anything 읽기: 표를 검산하고 코드를 열어 보니](papers/rag_anything/) | 그림·표·수식까지 지식 그래프에 넣는 멀티모달 문서 RAG인 RAG-Anything을, 표를 다시 계산하고 공개 코드와 대조하며 읽었습니다. |

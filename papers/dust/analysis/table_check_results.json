@@ -1,0 +1,410 @@
+{
+ "V1_claims": [
+  {
+   "claim": "§3.2 100k: Dust below backprop from a few hundred draws",
+   "ok": true,
+   "values": [
+    [
+     7.24,
+     7.165
+    ],
+    7.216
+   ]
+  },
+  {
+   "claim": "§3.2 1M: Dust below backprop from 1k draws",
+   "ok": true
+  },
+  {
+   "claim": "§3.2 10M: fitted limit just above backprop",
+   "ok": true,
+   "gap": 0.024
+  },
+  {
+   "claim": "§3.2 20M: limit 4.431 below backprop 4.633, measured 16k still above",
+   "ok": true,
+   "gap_16k": 0.169
+  },
+  {
+   "claim": "§3.2 EGGROLL@16k vs Dust@64: within 0.02 at 100k, 0.4–0.6 above elsewhere",
+   "ok": true,
+   "gaps": {
+    "100k": 0.023,
+    "1M": 0.418,
+    "10M": 0.636,
+    "20M": 0.6
+   }
+  },
+  {
+   "claim": "§4.1 from 256 up loss falls 2M→7M→38M",
+   "ok": true
+  },
+  {
+   "claim": "§4.1 243M ≈ 2M at 64 draws and better at every other population",
+   "ok": true,
+   "diff_64": 0.014
+  },
+  {
+   "claim": "§4.1 past 1k draws, 38M/243M gain ~30% more than 2M/7M",
+   "ok": true,
+   "ratio": 1.316,
+   "gains": [
+    0.094,
+    0.096,
+    0.122,
+    0.128
+   ]
+  },
+  {
+   "claim": "§4.1 gap to backprop grows with size but barely (본문)",
+   "ok": true,
+   "gap_by_pop": {
+    "64": [
+     0.525,
+     0.49,
+     0.543,
+     0.671
+    ],
+    "256": [
+     0.306,
+     0.296,
+     0.343,
+     0.371
+    ],
+    "1024": [
+     0.085,
+     0.095,
+     0.143,
+     0.166
+    ],
+    "4096": [
+     0.009,
+     0.029,
+     0.038,
+     0.076
+    ],
+    "16384": [
+     -0.009,
+     -0.001,
+     0.021,
+     0.038
+    ]
+   },
+   "note": "64 draws에서 2M 0.525 → 243M 0.671. 16k에서는 −0.009 → +0.038"
+  },
+  {
+   "claim": "§4.1 243M is worse than 38M at every population (본문 'only slightly worse')",
+   "ok": true,
+   "note": "backprop도 243M(5.048)이 38M(5.015)보다 나쁨"
+  },
+  {
+   "claim": "§4.2 fits RMSE below 0.06, 0.0032–0.0367 at 100M",
+   "ok": true
+  },
+  {
+   "claim": "부록 A: 37.7M parameters (아래 R2의 근사 계산과 비교)",
+   "ok": true
+  }
+ ],
+ "V2_refits": {
+  "100k": {
+   "reported_limit": 7.161,
+   "refit_limit": 7.162,
+   "alpha": 2.496,
+   "limits_leave_one_out(64,256,1k,4k,16k)": [
+    36.756,
+    7.162,
+    7.166,
+    7.161,
+    7.158
+   ],
+   "backprop": 7.216
+  },
+  "1M": {
+   "reported_limit": 5.892,
+   "refit_limit": 5.892,
+   "alpha": 0.668,
+   "limits_leave_one_out(64,256,1k,4k,16k)": [
+    5.912,
+    5.911,
+    5.893,
+    5.896,
+    5.862
+   ],
+   "backprop": 5.959
+  },
+  "10M": {
+   "reported_limit": 5.013,
+   "refit_limit": 5.013,
+   "alpha": 0.45,
+   "limits_leave_one_out(64,256,1k,4k,16k)": [
+    5.041,
+    5.033,
+    5.004,
+    5.013,
+    4.992
+   ],
+   "backprop": 4.989
+  },
+  "20M": {
+   "reported_limit": 4.431,
+   "refit_limit": 4.434,
+   "alpha": 0.146,
+   "limits_leave_one_out(64,256,1k,4k,16k)": [
+    4.679,
+    4.599,
+    2.567,
+    4.463,
+    4.608
+   ],
+   "backprop": 4.633
+  },
+  "note": "시드 평균으로 적합(논문도 Fig. 2에서 같은 방식). 20M의 16k 칸은 자기만의 상수로 따로 튜닝되었고(부록 F), 손실 보상 draw도 14,336개라 사다리의 다른 칸과 조건이 다름"
+ },
+ "V3_eggroll_extrapolation": {
+  "1M": {
+   "power_all": {
+    "recomputed": 23000.0,
+    "reported": 23000
+   },
+   "line_top3": {
+    "recomputed": 8200.0,
+    "reported": 8200
+   },
+   "line_top2": {
+    "recomputed": 6000.0,
+    "reported": 6000
+   }
+  },
+  "10M": {
+   "power_all": {
+    "recomputed": 10200.0,
+    "reported": 16000
+   },
+   "line_top3": {
+    "recomputed": 3700.0,
+    "reported": 3700
+   },
+   "line_top2": {
+    "recomputed": 4100.0,
+    "reported": 4100
+   }
+  },
+  "20M": {
+   "power_all": {
+    "recomputed": 5700.0,
+    "reported": 8100
+   },
+   "line_top3": {
+    "recomputed": 3300.0,
+    "reported": 3300
+   },
+   "line_top2": {
+    "recomputed": 3100.0,
+    "reported": 3100
+   }
+  }
+ },
+ "V4_code_allocation": {
+  "match": {
+   "writers": true,
+   "hubs": true,
+   "embedding": true,
+   "local(q,v,gate,k,ve)": true,
+   "head": true,
+   "10M@16k writers": true,
+   "10M@16k hubs": true,
+   "10M@16k gamma": true
+  },
+  "K_1M": 16384,
+  "K_10M@16k": 16384,
+  "alloc": {
+   "writers": [
+    2432,
+    2048,
+    1024,
+    640,
+    384,
+    256,
+    128,
+    128
+   ],
+   "hubs": [
+    384,
+    384,
+    256,
+    128,
+    128,
+    128,
+    128,
+    128
+   ],
+   "embedding": 640,
+   "local(q,v,gate,k,ve)": [
+    128,
+    1280,
+    384,
+    768,
+    512
+   ],
+   "head": 65536,
+   "10M@16k writers": [
+    2176,
+    1792,
+    896,
+    512,
+    384,
+    256,
+    128,
+    128
+   ],
+   "10M@16k hubs": [
+    768,
+    640,
+    512,
+    256,
+    256,
+    256,
+    256,
+    256
+   ],
+   "10M@16k gamma": 0.99
+  }
+ },
+ "R1_regime": {
+  "100k": {
+   "steps": 6.1,
+   "tokens_per_param": 0.0027,
+   "backprop_loss": 7.216,
+   "uniform_loss_lnV": 8.318,
+   "frac_of_ln V removed by backprop": 0.132
+  },
+  "1M": {
+   "steps": 61.0,
+   "tokens_per_param": 0.0265,
+   "backprop_loss": 5.959,
+   "uniform_loss_lnV": 8.318,
+   "frac_of_ln V removed by backprop": 0.284
+  },
+  "10M": {
+   "steps": 610.4,
+   "tokens_per_param": 0.2653,
+   "backprop_loss": 4.989,
+   "uniform_loss_lnV": 8.318,
+   "frac_of_ln V removed by backprop": 0.4
+  },
+  "20M": {
+   "steps": 1220.7,
+   "tokens_per_param": 0.5305,
+   "backprop_loss": 4.633,
+   "uniform_loss_lnV": 8.318,
+   "frac_of_ln V removed by backprop": 0.443
+  },
+  "chinchilla_tokens_for_37.7M(≈20 tok/param)": 754000000.0,
+  "243M model at 10M tokens: tokens_per_param": 0.0412
+ },
+ "R2_compute": {
+  "forward_MAC_per_token(M)": 34.1,
+  "head_share_of_forward": 0.062,
+  "direct_draws_forward_equiv": 13472.0,
+  "local_draws_forward_equiv": 76.8,
+  "residual_scalars_forward_equiv": 16,
+  "total_forward_equiv_per_update": 13565.0,
+  "per_K_draw": 0.822,
+  "x_backprop_step(3 forwards)": 4522.0,
+  "by_population": {
+   "256": {
+    "forward_equiv": 229,
+    "x_backprop": 76,
+    "vs_EGGROLL_same_pop": 0.893
+   },
+   "1024": {
+    "forward_equiv": 864,
+    "x_backprop": 288,
+    "vs_EGGROLL_same_pop": 0.844
+   },
+   "4096": {
+    "forward_equiv": 3404,
+    "x_backprop": 1135,
+    "vs_EGGROLL_same_pop": 0.831
+   },
+   "16384": {
+    "forward_equiv": 13565,
+    "x_backprop": 4522,
+    "vs_EGGROLL_same_pop": 0.828
+   }
+  },
+  "compute_matched_backprop_tokens_for_Dust16k@1M": "4.52e+09"
+ },
+ "R3_cosine_16k": {
+  "MLP out": {
+   "cos@16k": 0.513,
+   "c_max": 0.8779,
+   "K_for_90%_of_cmax": 7418,
+   "K_for_cos_0.8": 154839
+  },
+  "MLP in": {
+   "cos@16k": 0.431,
+   "c_max": 0.8577,
+   "K_for_90%_of_cmax": 11357,
+   "K_for_cos_0.8": 323964
+  },
+  "Attn out": {
+   "cos@16k": 0.573,
+   "c_max": 0.8729,
+   "K_for_90%_of_cmax": 5073,
+   "K_for_cos_0.8": 113496
+  },
+  "Attn Q": {
+   "cos@16k": 0.419,
+   "c_max": 1.0,
+   "K_for_90%_of_cmax": 18000,
+   "K_for_cos_0.8": 136420
+  },
+  "Attn K": {
+   "cos@16k": 0.161,
+   "c_max": 1.0,
+   "K_for_90%_of_cmax": 144633,
+   "K_for_cos_0.8": 1096169
+  },
+  "Attn V": {
+   "cos@16k": 0.258,
+   "c_max": 0.8776,
+   "K_for_90%_of_cmax": 40763,
+   "K_for_cos_0.8": 854338
+  },
+  "Value gate": {
+   "cos@16k": 0.336,
+   "c_max": 0.6657,
+   "K_for_90%_of_cmax": 11227,
+   "K_for_cos_0.8": "도달 불가"
+  },
+  "Value emb": {
+   "cos@16k": 0.179,
+   "c_max": 1.0,
+   "K_for_90%_of_cmax": 116217,
+   "K_for_cos_0.8": 880800
+  },
+  "Token emb": {
+   "cos@16k": 0.494,
+   "c_max": 0.7318,
+   "K_for_90%_of_cmax": 4574,
+   "K_for_cos_0.8": "도달 불가"
+  },
+  "LM head": {
+   "cos@16k": 0.978,
+   "c_max": 1.0,
+   "K_for_90%_of_cmax": 178,
+   "K_for_cos_0.8": 1349
+  }
+ },
+ "param_count": {
+  "blocks": 25165824,
+  "token_emb": 2097152,
+  "head": 2097152,
+  "value_emb": 8388608,
+  "gates": 1024,
+  "total(M)": 37.75,
+  "reported(M)": 37.7
+ }
+}
