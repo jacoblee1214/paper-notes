@@ -1,0 +1,226 @@
+{
+  "C1_fig3": {
+    "n_total": 790,
+    "share_le5_contacts": 0.344,
+    "feedforward_overall": {
+      "k": 511,
+      "rate": 0.647,
+      "wilson": [
+        0.613,
+        0.679
+      ]
+    },
+    "impedance_overall": {
+      "k": 553,
+      "rate": 0.7,
+      "wilson": [
+        0.667,
+        0.731
+      ]
+    },
+    "ours_overall": {
+      "k": 729,
+      "rate": 0.923,
+      "wilson": [
+        0.902,
+        0.939
+      ]
+    },
+    "counts_per_bin": {
+      "feedforward": [
+        3,
+        15,
+        25,
+        42,
+        [
+          99,
+          100
+        ],
+        88,
+        96,
+        88,
+        55
+      ],
+      "impedance": [
+        6,
+        16,
+        37,
+        55,
+        [
+          107,
+          108
+        ],
+        [
+          90,
+          91
+        ],
+        96,
+        91,
+        55
+      ],
+      "ours": [
+        19,
+        37,
+        65,
+        93,
+        130,
+        114,
+        116,
+        100,
+        55
+      ]
+    },
+    "all_values_attainable": true,
+    "text_claim_3to5": {
+      "baselines_range": [
+        32,
+        56
+      ],
+      "ours_range": [
+        82,
+        95
+      ],
+      "claim": "32–56% versus 82–95% (Sec. IV-A.2)"
+    },
+    "bins3to5_ours_vs_impedance": {
+      "ours": [
+        195,
+        221
+      ],
+      "impedance": [
+        108,
+        221
+      ],
+      "fisher_p": 1.39e-19
+    }
+  },
+  "C2_fig4": {
+    "Ours": {
+      "0deg_on_2pct_grid(50 grasps)": true,
+      "30to90_nearest_0.2_grid(500 trials)": [
+        96.4,
+        93.2,
+        88.6
+      ],
+      "mean_30_60_90": 92.73
+    },
+    "Fingertip-only": {
+      "0deg_on_2pct_grid(50 grasps)": true,
+      "30to90_nearest_0.2_grid(500 trials)": [
+        81.8,
+        78.4,
+        72.4
+      ],
+      "mean_30_60_90": 77.53
+    },
+    "Feedforward": {
+      "0deg_on_2pct_grid(50 grasps)": true,
+      "30to90_nearest_0.2_grid(500 trials)": [
+        68.2,
+        64.0,
+        59.2
+      ],
+      "mean_30_60_90": 63.83
+    },
+    "Impedance": {
+      "0deg_on_2pct_grid(50 grasps)": true,
+      "30to90_nearest_0.2_grid(500 trials)": [
+        65.2,
+        60.8,
+        56.8
+      ],
+      "mean_30_60_90": 60.97
+    },
+    "fig7_K5_success_reported": 93.2,
+    "ours_90deg_vs_fingertip_fisher_unpaired": 1.04e-10,
+    "note": "Fig. 7(K=5)은 같은 50 grasp·세 각도·5회 반복. Fig. 4 Ours 세 각도 평균과 0.5%p 안에서 일치"
+  },
+  "C3_trial_grids": {
+    "fig7_K1": [
+      682
+    ],
+    "fig7_K5": [
+      699
+    ],
+    "fig7_K7": [
+      689
+    ],
+    "precision_68_grasps_single_trial_possible": false,
+    "precision_trials_per_grasp_m_that_work": {
+      "5": {
+        "k_without": [
+          131
+        ],
+        "k_with": [
+          143
+        ]
+      },
+      "10": {
+        "k_without": [
+          262
+        ],
+        "k_with": [
+          286
+        ]
+      }
+    },
+    "precision_m5_fisher_p_unpaired": 0.39,
+    "fig7_K1_vs_K5_fisher_p_unpaired": 0.126
+  },
+  "C4_table1": {
+    "duration_s": 201,
+    "perturbations": 78,
+    "losses": 8,
+    "recovered": 6,
+    "text": "78 perturbations over about 200 s; eight losses; six recovered (Sec. IV-C.3)",
+    "loss_per_perturbation": [
+      0.103,
+      [
+        0.053,
+        0.19
+      ]
+    ],
+    "recovery_all_losses": [
+      0.75,
+      [
+        0.409,
+        0.929
+      ]
+    ],
+    "recovery_excluding_workspace_exits": [
+      6,
+      6
+    ],
+    "per_object_loss_rate": {
+      "Pringles": 0.188,
+      "Small box": 0.065,
+      "Large box": 0.097
+    },
+    "perturbations_per_minute": 23.3
+  },
+  "C5_compute": {
+    "ms_at_K1": 4.41,
+    "ms_at_K7": 15.15,
+    "fit_ms": {
+      "intercept": 2.45,
+      "per_contact": 0.1396
+    },
+    "K5_contacts_if_linear_in_K": 65.3,
+    "K5_rate_pred_Hz": 86.4,
+    "project_page_rate_Hz": 84,
+    "contacts_implied_by_84Hz": 67.7,
+    "qp_vars_at_K5": 196,
+    "hardware_loop_Hz": 30,
+    "note": "실물에서는 추적 자세가 올 때마다(30 Hz) 접점 추정과 QP를 돈다(Sec. IV-C.1)"
+  },
+  "C6_load_vs_capacity": {
+    "friction_capacity_N(mu*fn_min)": 7.0,
+    "mass_where_0.1mg_equals_capacity_kg": 7.14,
+    "pyramid_vs_cone_min_ratio": 0.707,
+    "fig5_residual_N": 0.428,
+    "mass_where_residual_equals_0.1mg_kg": 0.436,
+    "mass_where_residual_equals_weight_kg": 0.044,
+    "hand_surface_area_cm2_implied(3000 pts / 2 per cm2)": 1500,
+    "note": "중력이 꺼진 시험 하중은 마찰 용량의 수십분의 일 이하. Fig. 5의 자기 잔차가 0.44 kg 미만 물체에서는 시험 하중보다 크다"
+  }
+}

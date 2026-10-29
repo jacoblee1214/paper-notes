@@ -1,0 +1,595 @@
+{
+  "C1_table6_recompute": {
+    "Diffusion Policy": {
+      "macro": 32.78,
+      "micro": 36.67,
+      "reported": [
+        32.8,
+        36.7
+      ],
+      "fig1_ID_OOD_task_mean": [
+        48.9,
+        16.7
+      ],
+      "fig1_reported": [
+        48.9,
+        16.7
+      ],
+      "ID_pooled": [
+        31,
+        60
+      ],
+      "OOD_pooled": [
+        13,
+        60
+      ]
+    },
+    "MolmoAct2": {
+      "macro": 62.22,
+      "micro": 60.0,
+      "reported": [
+        62.2,
+        60.0
+      ],
+      "fig1_ID_OOD_task_mean": [
+        77.8,
+        46.7
+      ],
+      "fig1_reported": [
+        77.8,
+        46.7
+      ],
+      "ID_pooled": [
+        47,
+        60
+      ],
+      "OOD_pooled": [
+        25,
+        60
+      ]
+    },
+    "LaWAM": {
+      "macro": 45.56,
+      "micro": 44.17,
+      "reported": [
+        45.6,
+        44.2
+      ],
+      "fig1_ID_OOD_task_mean": [
+        46.7,
+        44.4
+      ],
+      "fig1_reported": [
+        46.7,
+        44.4
+      ],
+      "ID_pooled": [
+        29,
+        60
+      ],
+      "OOD_pooled": [
+        24,
+        60
+      ]
+    },
+    "ThinkWorld": {
+      "macro": 94.44,
+      "micro": 93.33,
+      "reported": [
+        94.4,
+        93.3
+      ],
+      "fig1_ID_OOD_task_mean": [
+        100.0,
+        88.9
+      ],
+      "fig1_reported": [
+        100.0,
+        88.9
+      ],
+      "ID_pooled": [
+        60,
+        60
+      ],
+      "OOD_pooled": [
+        52,
+        60
+      ]
+    }
+  },
+  "C2_real_robot_tests": {
+    "MolmoAct2": {
+      "all_120": {
+        "thinkworld": [
+          112,
+          [
+            87.4,
+            96.6
+          ]
+        ],
+        "baseline": [
+          72,
+          [
+            51.1,
+            68.3
+          ]
+        ],
+        "fisher_p": 6.42e-10
+      },
+      "ID_60": {
+        "thinkworld": 60,
+        "baseline": 47,
+        "fisher_p": 0.000118
+      },
+      "OOD_60": {
+        "thinkworld": 52,
+        "baseline": 25,
+        "fisher_p": 3.88e-07
+      },
+      "per_setting_p": [
+        0.0237,
+        7.29e-05,
+        0.0996,
+        1.0,
+        0.224,
+        0.000679
+      ]
+    },
+    "LaWAM": {
+      "all_120": {
+        "thinkworld": [
+          112,
+          [
+            87.4,
+            96.6
+          ]
+        ],
+        "baseline": [
+          53,
+          [
+            35.6,
+            53.1
+          ]
+        ],
+        "fisher_p": 2.52e-17
+      },
+      "ID_60": {
+        "thinkworld": 60,
+        "baseline": 29,
+        "fisher_p": 4.64e-12
+      },
+      "OOD_60": {
+        "thinkworld": 52,
+        "baseline": 24,
+        "fisher_p": 1.53e-07
+      },
+      "per_setting_p": [
+        1.68e-05,
+        7.29e-05,
+        0.0169,
+        0.224,
+        5e-05,
+        0.00251
+      ]
+    },
+    "Diffusion Policy": {
+      "all_120": {
+        "thinkworld": [
+          112,
+          [
+            87.4,
+            96.6
+          ]
+        ],
+        "baseline": [
+          44,
+          [
+            28.6,
+            45.6
+          ]
+        ],
+        "fisher_p": 1.42e-21
+      },
+      "ID_60": {
+        "thinkworld": 60,
+        "baseline": 31,
+        "fisher_p": 4.09e-11
+      },
+      "OOD_60": {
+        "thinkworld": 52,
+        "baseline": 13,
+        "fisher_p": 4.31e-13
+      },
+      "per_setting_p": [
+        0.000124,
+        0.00143,
+        0.0169,
+        2.06e-07,
+        5e-05,
+        2.19e-05
+      ]
+    },
+    "note": "시행은 독립으로 가정(설정당 5회 묶음, 체크포인트 1개). Appendix D: 학습 seed 1개"
+  },
+  "C3_ood_drop_check": {
+    "Diffusion Policy": {
+      "color_ID_to_OOD": -23.3,
+      "cup_ID_to_OOD": -53.3,
+      "sort_ID_to_OOD": -20.0
+    },
+    "MolmoAct2": {
+      "color_ID_to_OOD": -53.3,
+      "cup_ID_to_OOD": 20.0,
+      "sort_ID_to_OOD": -60.0
+    },
+    "LaWAM": {
+      "color_ID_to_OOD": -26.7,
+      "cup_ID_to_OOD": 20.0,
+      "sort_ID_to_OOD": 0.0
+    },
+    "ThinkWorld": {
+      "color_ID_to_OOD": -20.0,
+      "cup_ID_to_OOD": 0.0,
+      "sort_ID_to_OOD": -13.3
+    },
+    "claim": "Fig. 3 캡션: 'despite substantial drops for the baselines' / Sec. 4.2: 'perform similarly in-domain'"
+  },
+  "C4_table1": {
+    "LIBERO_avg": {
+      "OpenVLA": {
+        "recomputed": 76.5,
+        "reported": 76.5
+      },
+      "pi0": {
+        "recomputed": 94.15,
+        "reported": 94.2
+      },
+      "pi0.5": {
+        "recomputed": 96.85,
+        "reported": 96.9
+      },
+      "MolmoAct": {
+        "recomputed": 86.8,
+        "reported": 86.6
+      },
+      "VLA-JEPA": {
+        "recomputed": 97.2,
+        "reported": 97.2
+      },
+      "ThinkWorld": {
+        "recomputed": 97.25,
+        "reported": 97.3
+      }
+    },
+    "LIBERO_PRO_avg": {
+      "OpenVLA": {
+        "recomputed": 51.66,
+        "n_axes": 5,
+        "reported": 51.7
+      },
+      "pi0": {
+        "recomputed": 43.96,
+        "n_axes": 5,
+        "reported": 44.0
+      },
+      "pi0.5": {
+        "recomputed": 53.24,
+        "n_axes": 5,
+        "reported": 53.2
+      },
+      "MolmoAct": {
+        "recomputed": 41.2,
+        "n_axes": 4,
+        "reported": 41.2
+      },
+      "VLA-JEPA": {
+        "recomputed": 48.58,
+        "n_axes": 5,
+        "reported": 48.5
+      },
+      "ThinkWorld": {
+        "recomputed": 55.64,
+        "n_axes": 5,
+        "reported": 55.6
+      }
+    },
+    "LIBERO_PRO_axis_rank": {
+      "Object": {
+        "best": [
+          96.0,
+          "pi0.5"
+        ],
+        "thinkworld_rank": 6,
+        "n": 6
+      },
+      "Position": {
+        "best": [
+          20.8,
+          "pi0.5"
+        ],
+        "thinkworld_rank": 2,
+        "n": 6
+      },
+      "Semantic": {
+        "best": [
+          97.3,
+          "OpenVLA"
+        ],
+        "thinkworld_rank": 4,
+        "n": 6
+      },
+      "Task": {
+        "best": [
+          31.9,
+          "ThinkWorld"
+        ],
+        "thinkworld_rank": 1,
+        "n": 6
+      },
+      "Environment": {
+        "best": [
+          68.0,
+          "OpenVLA"
+        ],
+        "thinkworld_rank": 2,
+        "n": 5
+      }
+    },
+    "official_leaderboard_match": {
+      "OpenVLA": {
+        "official_4suite_mean": [
+          93.0,
+          0.0,
+          97.25,
+          0.0,
+          68.0
+        ],
+        "table1": [
+          93.0,
+          0.0,
+          97.3,
+          0.0,
+          68.0
+        ],
+        "max_abs_diff": 0.05
+      },
+      "pi0": {
+        "official_4suite_mean": [
+          90.5,
+          0.0,
+          90.5,
+          0.0,
+          38.75
+        ],
+        "table1": [
+          90.5,
+          0.0,
+          90.5,
+          0.0,
+          38.8
+        ],
+        "max_abs_diff": 0.05
+      },
+      "pi0.5": {
+        "official_4suite_mean": [
+          96.0,
+          20.75,
+          95.75,
+          0.75,
+          52.75
+        ],
+        "table1": [
+          96.0,
+          20.8,
+          95.8,
+          0.8,
+          52.8
+        ],
+        "max_abs_diff": 0.05
+      },
+      "MolmoAct": {
+        "official_4suite_mean": [
+          76.0,
+          1.5,
+          85.75,
+          1.5,
+          null
+        ],
+        "table1": [
+          76.0,
+          1.5,
+          85.8,
+          1.5,
+          null
+        ],
+        "max_abs_diff": 0.05
+      }
+    },
+    "margin_vs_VLA_JEPA_LIBERO": 0.05,
+    "margin_vs_pi05_LIBERO_PRO": 2.4
+  },
+  "C5_table3": {
+    "avg": {
+      "Qwen baseline": {
+        "recomputed": 40.16,
+        "reported": 40.1
+      },
+      "+ History": {
+        "recomputed": 40.68,
+        "reported": 40.7
+      },
+      "+ Future prediction": {
+        "recomputed": 50.4,
+        "reported": 50.4
+      },
+      "+ CoD": {
+        "recomputed": 54.38,
+        "reported": 54.4
+      },
+      "+ RL": {
+        "recomputed": 55.64,
+        "reported": 55.6
+      }
+    },
+    "step_gain": {
+      "+ History": {
+        "avg": 0.52,
+        "per_axis": [
+          1.8,
+          3.0,
+          0.2,
+          5.6,
+          -8.0
+        ]
+      },
+      "+ Future prediction": {
+        "avg": 9.72,
+        "per_axis": [
+          8.7,
+          7.0,
+          4.8,
+          3.5,
+          24.6
+        ]
+      },
+      "+ CoD": {
+        "avg": 3.98,
+        "per_axis": [
+          4.5,
+          5.0,
+          5.0,
+          3.4,
+          2.0
+        ]
+      },
+      "+ RL": {
+        "avg": 1.26,
+        "per_axis": [
+          -1.2,
+          1.3,
+          -0.5,
+          2.2,
+          4.5
+        ]
+      }
+    },
+    "share_of_total_gain": {
+      "+ History": 0.034,
+      "+ Future prediction": 0.628,
+      "+ CoD": 0.257,
+      "+ RL": 0.081
+    }
+  },
+  "C6_table2_rounding": {
+    "all_patches_CoD_on_interval": [
+      0.735,
+      0.739,
+      true
+    ],
+    "top25_CoD_on_interval": [
+      0.616,
+      0.624,
+      true
+    ]
+  },
+  "C7_table4": {
+    "sums_EP_K_frames_M_hours": [
+      769.0,
+      390.4,
+      4276.2
+    ],
+    "reported_totals": [
+      769.1,
+      390.3,
+      4276.1
+    ],
+    "implied_Hz": {
+      "YAM": 29.98,
+      "DROID": 15.03,
+      "RoboCOIN": 30.27,
+      "Bridge": 5.02,
+      "RT-1": 3.01,
+      "BC-Z": 10.05,
+      "EgoVerse": 30.0,
+      "EgoDex": 30.01
+    },
+    "human_share": {
+      "episodes": 0.482,
+      "frames": 0.52,
+      "hours": 0.44
+    },
+    "note": "사람 데이터도 'One-second 6D/12D motion tokens'(손목 자세 주석)를 정답으로 씀 → 'no action labels'가 아님"
+  },
+  "C8_libero_plus": {
+    "estimated_dim_weights": [
+      0.157,
+      0.1583,
+      0.1655,
+      0.1143,
+      0.113,
+      0.1613,
+      0.1306
+    ],
+    "fit_rmse_on_leaderboard": 0.125,
+    "table8": {
+      "OpenVLA-OFT": {
+        "uniform_mean": 71.4,
+        "weighted_by_estimate": 69.66,
+        "reported": 69.6
+      },
+      "pi0-FAST": {
+        "uniform_mean": 62.47,
+        "weighted_by_estimate": 61.36,
+        "reported": 61.6
+      },
+      "DreamVLA": {
+        "uniform_mean": 70.93,
+        "weighted_by_estimate": 69.66,
+        "reported": 69.9
+      },
+      "ThinkWorld": {
+        "uniform_mean": 73.41,
+        "weighted_by_estimate": 71.73,
+        "reported": 71.7
+      }
+    },
+    "leaderboard_rows_not_in_table8": [
+      "OpenVLA",
+      "OpenVLA-OFT_w",
+      "NORA",
+      "WorldVLA",
+      "UniVLA",
+      "pi0",
+      "RIPT-VLA",
+      "OpenVLA-OFT_m",
+      "OpenVLA-OFT+"
+    ],
+    "thinkworld_worst_dims": "Camera 46.9, Noise 62.7 (표의 4개 방법 중 최하)"
+  },
+  "C9_latency": {
+    "MolmoAct2": {
+      "wall_per_call_ms": 368.8,
+      "p50": 335.07,
+      "p95": 467.96
+    },
+    "MolmoAct2-Think": {
+      "wall_per_call_ms": 935.2,
+      "p50": 879.37,
+      "p95": 1014.47
+    },
+    "ThinkWorld": {
+      "wall_per_call_ms": 326.2,
+      "p50": 324.84,
+      "p95": 333.09
+    }
+  },
+  "C10_training_scale": {
+    "VLM_SFT_samples": 19200000,
+    "action_SFT_samples": 6400000,
+    "RL_prompts": 256000,
+    "RL_CoD_samples(K=4)": 1024000,
+    "RL_iters_over_SFT_iters": 0.0133,
+    "RL_avg_gain_pp(Table3)": 1.26,
+    "frames_per_SFT_sample": 20.3
+  }
+}

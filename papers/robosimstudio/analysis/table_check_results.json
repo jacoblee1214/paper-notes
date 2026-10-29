@@ -1,0 +1,156 @@
+{
+  "C1_table1_tally": {
+    "tally": {
+      "MuJoCo": {
+        "Y": 3,
+        "P": 1,
+        "N": 4,
+        "C": 2
+      },
+      "IsaacLab": {
+        "Y": 4,
+        "P": 2,
+        "N": 2,
+        "C": 2
+      },
+      "ManiSkill3": {
+        "Y": 2,
+        "P": 2,
+        "N": 4,
+        "C": 2
+      },
+      "Genesis": {
+        "Y": 4,
+        "P": 1,
+        "N": 3,
+        "C": 2
+      },
+      "Newton": {
+        "Y": 3,
+        "P": 2,
+        "N": 3,
+        "C": 2
+      },
+      "RoboSimStudio": {
+        "Y": 10,
+        "P": 0,
+        "N": 0,
+        "C": 0
+      }
+    },
+    "rows_only_rss_full_support": [
+      "Structured feedback for coding agents",
+      "Shared human-agent refinement",
+      "Video-driven agentic Real2Sim",
+      "Force-feedback Real2Sim",
+      "Failure-driven simulation refinement"
+    ],
+    "n_rows": 10,
+    "note": "RSS만 ✓인 5행은 모두 이 논문이 정의한 워크플로(구조화 피드백, 공동 정제, 영상·힘·실패 기반 Real2Sim)"
+  },
+  "C2_gap_curve_denominators": {
+    "values": {
+      "0": 0,
+      "9": 29,
+      "11": 71,
+      "14": 100
+    },
+    "consistent_n_upto_60": [
+      7,
+      14,
+      17,
+      21,
+      24,
+      28,
+      31,
+      34,
+      35,
+      38,
+      41,
+      42,
+      45,
+      48,
+      49,
+      51,
+      52,
+      55,
+      56,
+      58,
+      59
+    ],
+    "n_layouts_30_consistent": false,
+    "k_over_30_near_29_71": [
+      26.7,
+      30.0,
+      70.0,
+      73.3
+    ],
+    "axis_labels": {
+      "Fig. 1": "completion rate",
+      "Sec. 4.3 / Fig. 7f": "simulated wiped area"
+    },
+    "note": "30개 배치의 성공 비율이라면 29%·71%가 나올 수 없음 → 닦인 면적 같은 연속량이거나 다른 분모"
+  },
+  "C3_agent_timeline_min": {
+    "timeline": {
+      "arms, bar": 14,
+      "first wipe": 42,
+      "scenery": 51,
+      "verified": 56
+    },
+    "first_wipe_share_of_total": 0.75,
+    "claim": "approximately one hour (Sec. 4.3, 두 에이전트 모두), 56분은 한 에이전트만 보고"
+  },
+  "C4_demo_latch_effect": {
+    "latch_mean": 0.9577,
+    "no_latch_mean": 0.724,
+    "diff_pp": 23.4,
+    "welch_p": 0.00806,
+    "no_latch_slide_mm": [
+      69,
+      226,
+      218
+    ],
+    "extra_takes_none_under_10mm": 30,
+    "note": "공식 twin은 friction만으로 스펀지를 잡지 못해 패드 주변 폼 노드 106개를 손에 고정(latch)한다"
+  },
+  "C5_preston_check": {
+    "face_mean_pressure_Pa": 1066.7,
+    "time_to_clear_at_30mm_s_face_mean_s": 2.34,
+    "claim": "a 4 N, 30 mm/s stroke clears a cell in ~2 s (bar.py)",
+    "time_to_clear_at_peak_84kPa_s": 0.03,
+    "wear_per_stroke_at_face_mean": 0.96,
+    "pressure_needed_one_stroke_clean_Pa": 1000.0,
+    "p_min_Pa": 300.0,
+    "note": "Preston 법칙에서 한 스트로크의 마모 = k_p·p·L이라 스트로크 속도와 무관. 측정 첫 스트로크 0.91과 같은 자릿수"
+  },
+  "C6_sponge_squeeze_linear": {
+    "twin_strain": 0.09,
+    "implied_pad_area_cm2": 12.15,
+    "predicted_strain": {
+      "6kPa": 1.2,
+      "20kPa": 0.36,
+      "100kPa": 0.072,
+      "80kPa": 0.09
+    },
+    "observed": "20 kPa(영상의 부엌 스펀지)는 패드 사이로 흘러나가 집게가 맞닿음; 80 kPa로 바꿔서 잡힘 (bar.py FOAM 주석)",
+    "note": "Fig. 7e의 6·20·100 kPa 중 6·20 kPa는 공개 twin의 집게 조건에서 잡히지 않는 범위"
+  },
+  "C7_v1_v2": {
+    "pages": {
+      "v1": 13,
+      "v2": 14
+    },
+    "word_count_pdftotext": {
+      "v1": 5994,
+      "v2": 6382
+    },
+    "word_sequence_ratio": 0.8722,
+    "changes": [
+      "Fig. 1 라벨 교체(Simulation Variation → Agentic Parameter Tuning 등)",
+      "관련 연구에 MAESTRO·ASPIRE·ENPIRE·DexAgent·RPG·Push-T 추가 (참고문헌 51 → 58개)",
+      "Real2Sim 절: frontier 모델(Claude Fable 5.1, GPT-6 Astra, Gemini 4 Argon)의 시각 재구성 한계 문단 추가",
+      "v1 Fig. 1 캡션의 'real rollout can be further provided' 문장 삭제"
+    ]
+  }
+}

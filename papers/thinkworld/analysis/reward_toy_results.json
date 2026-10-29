@@ -1,0 +1,96 @@
+{
+  "R1_weight_shares": {
+    "by_distribution": {
+      "lognormal": {
+        "motion_term_top10": 0.249,
+        "motion_term_top25": 0.531,
+        "motion_term_bottom50": 0.257
+      },
+      "uniform": {
+        "motion_term_top10": 0.22,
+        "motion_term_top25": 0.517,
+        "motion_term_bottom50": 0.227
+      },
+      "exponential": {
+        "motion_term_top10": 0.242,
+        "motion_term_top25": 0.529,
+        "motion_term_bottom50": 0.25
+      }
+    },
+    "total_reward_share": {
+      "top10": 0.174,
+      "top25": 0.39,
+      "bottom50": 0.378
+    },
+    "uniform_reference": {
+      "top10": 0.1,
+      "top25": 0.25,
+      "bottom50": 0.5
+    }
+  },
+  "R2_reward_gap_from_table2": {
+    "Shuffle": {
+      "delta_rest_patches": 0.0083,
+      "delta_motion_weighted": 0.0416,
+      "reward_gap_eq6": 0.0328
+    },
+    "Empty": {
+      "delta_rest_patches": 0.0003,
+      "delta_motion_weighted": 0.0421,
+      "reward_gap_eq6": 0.0311
+    },
+    "CoD off": {
+      "delta_rest_patches": 0.0003,
+      "delta_motion_weighted": 0.0379,
+      "reward_gap_eq6": 0.0279
+    }
+  },
+  "R3_malformed_penalty": {
+    "malformed_penalty": 0.05,
+    "mean_gap_CoD_vs_noCoD": 0.0306,
+    "penalty_over_gap": 1.63,
+    "valid_spread=0.25x_gap": {
+      "adv_range_valid_no_malformed": 2.582,
+      "adv_range_valid_with_1_malformed": 0.499,
+      "shrink_ratio": 0.193
+    },
+    "valid_spread=0.5x_gap": {
+      "adv_range_valid_no_malformed": 2.579,
+      "adv_range_valid_with_1_malformed": 0.839,
+      "shrink_ratio": 0.325
+    },
+    "valid_spread=1.0x_gap": {
+      "adv_range_valid_no_malformed": 2.58,
+      "adv_range_valid_with_1_malformed": 1.254,
+      "shrink_ratio": 0.486
+    }
+  },
+  "R4_group_standardization": {
+    "noise/spread=0.0": {
+      "corr_adv_quality": 1.0,
+      "P(top_adv_is_truly_best)": 1.0
+    },
+    "noise/spread=0.25": {
+      "corr_adv_quality": 0.949,
+      "P(top_adv_is_truly_best)": 0.86
+    },
+    "noise/spread=0.5": {
+      "corr_adv_quality": 0.846,
+      "P(top_adv_is_truly_best)": 0.743
+    },
+    "noise/spread=1.0": {
+      "corr_adv_quality": 0.641,
+      "P(top_adv_is_truly_best)": 0.583
+    },
+    "noise/spread=2.0": {
+      "corr_adv_quality": 0.383,
+      "P(top_adv_is_truly_best)": 0.431
+    },
+    "noise/spread=4.0": {
+      "corr_adv_quality": 0.206,
+      "P(top_adv_is_truly_best)": 0.339
+    },
+    "chance_P_best": 0.25,
+    "note": "그룹 표준화는 보상 차이의 절대 크기를 지우므로, 잡음/차이 비율만이 신호 품질을 정한다"
+  }
+}

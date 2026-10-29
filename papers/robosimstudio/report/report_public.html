@@ -1,0 +1,904 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>RoboSimStudio 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="identifiability"] { max-width: 80%; }
+img[src*="table1_tally"] { max-width: 80%; }
+img[src*="paper_fig7"] { max-width: 82%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>RoboSimStudio: 분석 리포트</h1>
+<p class="meta">게시용 버전 · 원문 https://arxiv.org/abs/2610.18835 · arXiv:2610.18835v2 · UC Berkeley, NVIDIA (Chen, Xie, Yoo, Zhu, Magner, Zhu, Kim, Heiden, Coumans, Macklin, Huang, Goldberg) · 코드 robosimstudio/robosimstudio @ 81f57c9 (Apache-2.0) · 분석일 2026-10-29 · 논문 그림 © 저자, CC BY 4.0</p>
+<p><img src="figures/paper_fig1_overview.png" alt="Fig. 1" /></p>
+<p class="cap">논문 Fig. 1: 스마트폰 영상 → 코딩 에이전트 + RoboSimStudio로 다중 물리 시뮬레이션 → 물성·배치 변형 → GaP 정책 개선 → 실제 로봇.</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇인가:</strong> Newton 위에 solver·접촉 모델·물성을 편집 가능한 항목으로 드러낸 Real2Sim 도구다. 사람은 브라우저 studio와 힘 피드백 리더 암으로, 코딩 에이전트는 저장하면 다시 빌드되는 live 페이지와 CLI로 같은 장면을 고친다.</li>
+<li><strong>논문보다 저장소가 실체다:</strong> 정량 결과가 거의 없고, Table 1은 RSS가 10/10인 기능 목록이다. 반면 공식 저장소(Apache-2.0)는 설치 문서, 예제, 테스트, CPU 경로까지 갖춘 쓸 수 있는 도구다.</li>
+<li><strong>핵심 자산은 비공개다:</strong> Fig. 5의 18개 과제 정의, GaP 닦기 정책과 30개 배치, UR5e, 실제 로봇 코드가 공개 저장소에 없다. 논문 결과는 재현할 수 없다.</li>
+<li><strong>공개 twin은 물리적 잡기를 우회한다:</strong> 마찰만으로는 스펀지가 69–226 mm 미끄러져 닦인 비율이 0.72에 그친다. 그래서 폼 노드 106개를 손에 고정(latch)해 0.96을 얻는다. 영상 속 20 kPa 스펀지 대신 80 kPa 폼도 쓴다. 같은 저장소의 에이전트 규칙은 latch를 금지한다.</li>
+<li><strong>영상만으로는 물성이 정해지지 않는다:</strong> toy로 계산하면 1080p 영상에서 E &gt; 100 kPa는 사실상 식별 불가하고, 80 vs 100 kPa는 0.36σ 차이다. 힘 관측은 오차가 일정하다(0.4 kPa). 강성을 &quot;맞추기&quot;보다 &quot;변형&quot;한 선택과 힘 피드백의 동기를 뒷받침한다.</li>
+<li><strong>GaP 곡선의 29%·71%는 30개 배치의 성공률로 나올 수 없는 값이다.</strong> 닦인 면적 같은 연속량으로 읽어야 한다.</li>
+<li><strong>구현 가능성:</strong> Linux x86-64 + Python 3.12가 기준이다. 이 맥에서는 CPU 경로로 강체 장면과 에이전트 루프를 시험할 수 있어 보이지만, 설치 승인이 필요하다. 변형체 대부분, 경로 추적 렌더러, GaP·cuRobo는 NVIDIA GPU가 필요하다.</li>
+</ol>
+<p><img src="figures/paper_fig5_tasks.png" alt="Fig. 5" /></p>
+<p class="cap">논문 Fig. 5: RoboSimStudio로 만든 contact-rich 과제 18개. 공개 저장소에는 이 중 3개(스펀지 닦기, 케이블 배선, 수건 접기)의 데모만 있다.</p>
+</section>
+<section class="chapter"><h1>01. 논문 분석: RoboSimStudio (arXiv:2610.18835)</h1>
+<ul>
+<li>제목: <em>RoboSimStudio: An Interactive Toolkit for Human and Agent Rapid Real2Sim of Robot Manipulation Tasks</em> (PDF 표지 제목은 &quot;An Interactive Toolkit for Rapid Real2Sim of Robot Manipulation Tasks&quot;)</li>
+<li>저자: Kaiyuan Chen*, Shuangyu Xie*, Uksang Yoo, Xinyue Zhu, Cael Magner, Alvin Zhu, Daehwa Kim, Eric Heiden, Erwin Coumans, Miles Macklin, Spencer Huang, Ken Goldberg (UC Berkeley, NVIDIA)</li>
+<li>공개: arXiv v1 2026-10-13, <strong>v2 2026-10-14</strong> (14쪽) · 코드 https://github.com/robosimstudio/robosimstudio (Apache-2.0, 확인 커밋 <code>81f57c9</code> 2026-10-28, 논문 시점 첫 커밋 <code>73739ab</code> 2026-10-14) · 프로젝트 https://robosimstudio.github.io</li>
+<li>라이선스: 논문 <strong>CC BY 4.0</strong> (arXiv abs 페이지 확인)</li>
+<li>분석 범위: 본문 9쪽과 참고문헌(v2), v1과의 텍스트 대조, 프로젝트 페이지, 공식 저장소 전체(코드·예제·설치 문서·테스트)</li>
+</ul>
+<hr />
+<h2>1. Abstract (한 줄 요약과 주장)</h2>
+<p><strong>한 줄 요약:</strong> 시뮬레이터의 <strong>solver, 접촉 모델, 물성 값을 명시적으로 드러내고 바로 고칠 수 있게</strong> 만든 Newton 기반 도구입니다. 사람(브라우저 화면, 슬라이더, 힘 피드백 리더 암)과 코딩 에이전트(Claude Code, Codex)가 같은 장면을 고쳐 가며, 실제 영상과 비슷하게 움직이는 다중 물리 시뮬레이션(Real2Sim)을 빠르게 만들게 하려는 것입니다.</p>
+<p>기여는 세 가지입니다(Sec. 1).</p>
+<ol>
+<li>접촉 모델과 물성을 바꿀 수 있는 contact-rich 조작용 시뮬레이션 도구 RoboSimStudio(RSS)</li>
+<li>사람과 코딩 에이전트가 함께 쓰는 Real2Sim 인터페이스</li>
+<li>시각·힘 피드백으로 만든 조작 과제 18개, 그리고 스마트폰 영상에서 코딩 에이전트가 다중 물리 시뮬레이션을 만든 Real2Sim2Real 파일럿 1건</li>
+</ol>
+<p>논문은 스스로를 &quot;개발 중인 시스템과 파일럿 연구&quot;라고 부릅니다(Sec. 5). 정량 실험은 거의 없고, 대부분의 결과는 정성적 시연입니다.</p>
+<hr />
+<h2>2. Method</h2>
+<h3>2.1 구조 (Fig. 2, Sec. 3)</h3>
+<pre><code>영상·사진 (사람·로봇 시연, 스마트폰)
+        │  사람: 브라우저 studio (Viser) — 선택·드래그·인스펙터 슬라이더
+        │  코딩 에이전트: scene.py를 고치고 실행·관찰하는 반복 루프
+        ▼
+장면 = 로봇 + 물체 + 물리 배치(arrangement)
+   물체는 &quot;무엇인지&quot;(강체, 관절, 천, 케이블, 스펀지 …)만 선언
+   장면이 &quot;어느 solver가 어떤 물리를 맡는지&quot; 선언 → 바꿔도 과제 코드는 그대로
+        ▼
+Newton (Warp)  ─ 관절·강체: MuJoCo-Warp   ─ 천·케이블: VBD
+        └─ 외부 엔진 co-sim: SuperDex(FEM 스펀지), Genesis   ← 접촉력·자세·wrench 교환
+        ▼
+변형(물성 E, 공간 배치) → Graph-as-Policy(GaP)로 정책 개선 → 실제 로봇
+</code></pre>
+<p><img src="figures/paper_fig2_architecture.png" alt="paper_fig2_architecture.png" /></p>
+<p class="cap">논문 Fig. 2: 자산 처리, 로봇 인터페이스, Newton 다중 물리 백엔드와 외부 solver(Genesis, SuperDex).</p>
+<h3>2.2 로봇 인터페이스</h3>
+<p>Franka Panda, UR5e, 단팔·양팔 YAM의 공통 인터페이스가 있습니다(Sec. 3). IK는 PyRoKi 같은 solver를 바꿔 끼울 수 있고, 계획은 cuRobo를 씁니다. 정책은 관절 공간이나 엔드이펙터 공간으로 명령합니다. <strong>조작 물체의 privileged 상태는 로봇이 볼 수 있는 관측과 분리</strong>합니다.</p>
+<h3>2.3 다중 물리와 결합</h3>
+<p>기본값은 다음과 같습니다. 관절 로봇은 MuJoCo-Warp, 케이블과 천은 Vertex Block Descent(VBD), 연성체는 외부 엔진(SuperDex, Genesis)과 co-sim입니다. Newton 내부 solver끼리는 접촉력을, 외부 엔진과는 자세와 접촉 wrench를 주고받아 결합합니다. solver, 결합 방식, 접촉 모델, 재료 값은 장면의 명시적 항목이라 과제를 다시 쓰지 않고 바꿀 수 있습니다(Fig. 3).</p>
+<p><img src="figures/paper_fig3_multiphysics.png" alt="paper_fig3_multiphysics.png" /></p>
+<p class="cap">논문 Fig. 3: 다섯 과제의 solver 배치. MuJoCo-Warp(보라), FEM(청록), VBD(주황).</p>
+<h3>2.4 사람용 인터페이스 (Fig. 4)</h3>
+<p>Viser 기반 브라우저 studio입니다. 물체를 선택·드래그·검사하고 로봇 팔을 직접 움직일 수 있습니다. 인스펙터는 물성을 <strong>단위·범위와 함께</strong> 보여 주고, 실행 중 바꿀 수 있는 값과 장면을 다시 만들어야 하는 값을 구분해 표시합니다.</p>
+<p><img src="figures/paper_fig4_interface.png" alt="paper_fig4_interface.png" /></p>
+<p class="cap">논문 Fig. 4: 수건 인스펙터와 휨·늘어남 강성 네 조합의 같은 접기.</p>
+<h3>2.5 에이전트용 인터페이스</h3>
+<p>코딩 에이전트는 사람과 같은 루프를 돕니다. 장면을 고치고, 행동을 실행하고, 결과를 관찰합니다. RSS는 rollout을 로봇 동작 primitive로 나누고, 시뮬레이터 상태를 <strong>시공간 텍스트 피드백</strong>으로 바꿔 줍니다. 피드백에는 목표 오차, 물체 움직임, 접촉 사건, 잡기·미끄러짐, 과제 진행도가 들어갑니다. 사람은 에이전트가 작업하는 동안 비동기로 같은 화면을 보며 값을 고치거나 지시할 수 있습니다(human-in-the-loop).</p>
+<hr />
+<h2>3. 사례 연구 (Sec. 4)</h2>
+<h3>3.1 시각 피드백으로 하는 사람 Real2Sim (Sec. 4.1, Fig. 5)</h3>
+<p>사용자가 자산을 고르고 배치하고 물리 모델을 고른 뒤, 실제 거동과 시뮬레이션이 <strong>정성적으로</strong> 맞을 때까지 접촉·재료 값을 조정했습니다. 이렇게 과제 18개를 만들었습니다. 예로 든 것은 세 가지입니다.</p>
+<ul>
+<li><strong>커넥터 삽입:</strong> USB-C를 1 mm 미만 여유로 꽂으려고 메쉬 기반 접촉과 충돌 해상도를 조정했습니다.</li>
+<li><strong>잎 누르기:</strong> 쉘 시뮬레이션으로 얇은 잎의 휨과 회복을 표현했습니다.</li>
+<li><strong>띠 연마:</strong> 접촉력에서 Preston 식으로 재료 제거량을 계산했습니다.</li>
+</ul>
+<p>본문은 한 문장 안에서 &quot;세 과제&quot;와 &quot;다섯 예&quot;를 함께 쓰고, 실제로는 셋만 나열합니다. 편집 흔적으로 보입니다.</p>
+<h3>3.2 힘 피드백으로 하는 사람 Real2Sim (Sec. 4.2, Fig. 6)</h3>
+<p>저가 리더 암(논문은 GELLO[58] 인용)으로 시뮬레이션 로봇을 조종하고, 시뮬레이션 접촉을 리더 모터 토크로 되돌려 줍니다. 명령 자세와 시뮬레이션 자세의 차이가 피드백 신호입니다. 시뮬레이션 지연을 접촉으로 착각하지 않도록 속도 의존 deadband를 두고, 시뮬레이션이 멈추거나 뒤처지면 피드백을 끕니다. 그리퍼는 명령값이 아니라 측정된 열림을 씁니다. 공구 걸기 과제를 시연했지만 정량 결과는 없습니다.</p>
+<h3>3.3 에이전트 Real2Sim2Real (Sec. 4.3, Fig. 7)</h3>
+<p>양팔 스펀지 닦기 과제입니다. 한 팔이 막대를 잡고 다른 팔이 폼 스펀지로 마커 줄을 지웁니다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>보고 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>구축</td>
+<td>CAD도 보정 카메라도 없는 스마트폰 영상 하나로 Claude Fable 5.1(Claude Code)과 GPT-6 Astra(Codex)가 각자 &quot;약 1시간&quot;에 다중 물리 시뮬레이션을 만듦. 한 에이전트는 56분에 검증 완료(14분 팔·막대, 42분 첫 닦기, 51분 배경, 56분 검증)</td>
+</tr>
+<tr>
+<td>물리</td>
+<td>MuJoCo-Warp(Newton) + SuperDex(스펀지 FEM). 접촉력과 압력 분포 확인</td>
+</tr>
+<tr>
+<td>변형</td>
+<td>스펀지 강성 6·20·100 kPa, 막대·스펀지 배치 30개</td>
+</tr>
+<tr>
+<td>정책</td>
+<td>GaP가 14번 반복으로 시뮬레이션에서 닦인 면적을 0% → 100%로 올림(반복 9: 29%, 11: 71%)</td>
+</tr>
+<tr>
+<td>실제</td>
+<td>개선된 정책을 실제 로봇에서 실행해 닦기 완료. 한 rollout에서는 시뮬레이션에서 고정했던 막대 받침이 밀려나 실패</td>
+</tr>
+<tr>
+<td>정제</td>
+<td>실패 영상과 설명을 받은 에이전트가 고정 제약을 자유 강체로 바꿈 → 수정된 시뮬레이션은 막대가 밀리고 기우는 현상을 재현</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><img src="figures/paper_fig7_sponge.png" alt="paper_fig7_sponge.png" /></p>
+<p class="cap">논문 Fig. 7: 스펀지 닦기 Real2Sim2Real. (c) 에이전트 구축, (e) 강성·배치 변형, (f) GaP 개선, (h) 실제 실패, (i) 시뮬레이션 수정.</p>
+<h2>4. 해석</h2>
+<ul>
+<li><strong>이 논문의 실체는 도구입니다.</strong> 성능 표가 없고, Table 1은 다른 프레임워크와의 기능 비교입니다. 그런데 이 표에서 RSS는 10개 행이 모두 ✓이고, RSS만 ✓인 5행은 전부 이 논문이 정의한 워크플로입니다(<code>04</code> C1). 비교라기보다 기능 목록에 가깝습니다.</li>
+<li><strong>GaP 곡선의 단위가 그림마다 다릅니다.</strong> Fig. 1은 y축을 &quot;completion rate&quot;라고 쓰고, 본문과 Fig. 7f는 &quot;simulated wiped area&quot;라고 씁니다. 29%와 71%는 30개 배치의 성공 비율로는 나올 수 없는 값입니다(k/30 = 26.7, 30.0, 70.0, 73.3%). 따라서 닦인 면적 같은 연속량이거나 다른 분모입니다(<code>04</code> C2).</li>
+<li><strong>실제 로봇 결과는 시행 횟수가 없습니다.</strong> &quot;실제 로봇에서 닦기를 완료했다&quot;와 &quot;한 rollout이 실패했다&quot;만 있습니다. 시뮬레이션-실제 일치도는 &quot;주로 정성적 관찰&quot;이라고 저자들도 씁니다(Sec. 5).</li>
+<li><strong>공식 저장소가 논문보다 훨씬 구체적입니다.</strong> 다음 사실은 저장소에서만 드러납니다.
+<ul>
+<li>공개 twin의 스펀지는 friction만으로 잡히지 않습니다. 그래서 패드 주변 폼 노드 106개를 손에 고정(latch)하고, 영상의 부엌 스펀지(약 20 kPa) 대신 80 kPa 폼을 씁니다(<code>04</code> D3·D4).</li>
+<li>18개 과제 대부분과 UR5e, GaP 닦기 정책, 30개 배치는 공개 저장소에 없습니다(<code>04</code> D1·D2·D6).</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2>5. Limitations</h2>
+<h3>5.1 저자가 밝힌 한계 (Sec. 5)</h3>
+<ul>
+<li>개발 중인 시스템이고 파일럿 연구입니다.</li>
+<li>에이전트의 시뮬레이션 구축은 RSS가 제공하는 재료 모델, 물리 결합, 로봇 자산에 의존합니다.</li>
+<li>외부 엔진 co-sim은 계산 부담이 있습니다.</li>
+<li>sim-to-real은 과제 하나로만 평가했고, 일치도는 주로 정성적입니다.</li>
+<li>향후 과제로 시뮬레이션 정확도, 접촉력, 물체 궤적, 구축 시간, 실제 성공률의 체계적 정량 평가를 들었습니다.</li>
+</ul>
+<h3>5.2 분석하면서 추가로 발견한 한계와 의문점</h3>
+<ol>
+<li><strong>&quot;영상과 맞을 때까지&quot;의 판정 기준이 없습니다.</strong> 맞았다는 판단이 눈으로 하는 정성 비교입니다. 영상만으로는 강성 같은 값이 잘 정해지지 않습니다. toy로 계산하면 1080p 영상에서 판독 잡음이 0.5 px만 있어도, E가 약 100 kPa를 넘으면 E 추정의 상대 표준오차가 50%를 넘습니다. 80 kPa와 100 kPa는 0.4σ 차이라 구분되지 않습니다(<code>03</code> §2). 논문이 강성을 &quot;맞추기&quot;보다 6–100 kPa로 &quot;변형&quot;한 이유로 읽을 수 있습니다.</li>
+<li><strong>공개 twin은 물리적 잡기를 우회합니다.</strong> 마찰만으로는 세 take 모두 폼이 손에서 69–226 mm 미끄러졌고, 닦인 비율도 0.69–0.76에 그쳤습니다. 30회를 더 시도해도 미끄럼을 10 mm 아래로 줄이지 못했습니다(<code>04</code> C4). 같은 저장소의 에이전트 작업 규칙은 latch·weld·attachment를 금지합니다(<code>examples/live/AGENTS.md</code>, 2026-10-22 추가). 즉 논문 시점의 데모가 이후 규칙을 어깁니다.</li>
+<li><strong>강성 변형 범위가 실제 잡기 가능 범위와 겹치지 않습니다.</strong> Fig. 7e의 6·20 kPa는 공개 twin의 집게 조건에서 스펀지가 패드 사이로 흘러나가는 범위입니다(<code>04</code> C6). GaP가 이 범위에서 어떻게 닦았는지는 공개 자료로 알 수 없습니다.</li>
+<li><strong>에이전트의 기여와 사람의 기여가 분리되지 않았습니다.</strong> &quot;human-in-the-loop&quot;를 강조하지만, 56분 동안 사람이 몇 번 개입했는지 기록이 없습니다. 저장소 README의 팁(&quot;가끔 물리와 기하를 재구성하라고 상기시켜라&quot;)은 개입이 필요했다는 뜻입니다.</li>
+<li><strong>재현에 필요한 자산 상당수가 비공개입니다.</strong> 18개 과제의 정의(테스트 코드가 <code>vabar</code> 컬렉션이라고 부르는 것), UR5e, 실제 로봇 실행 코드, GaP 닦기 그래프가 없습니다. 논문 시점에는 CPU 실행도 지원되지 않았습니다(2026-10-18 추가).</li>
+</ol>
+</section>
+<section class="chapter"><h1>03. 수치 재계산과 toy 해석</h1>
+<p>스크립트는 <code>analysis/table_check.py</code>(결과 <code>table_check_results.json</code>)와 <code>analysis/identifiability_toy.py</code>(결과 <code>identifiability_toy_results.json</code>)입니다. 모두 numpy·scipy로 단일 스레드에서 1초 안에 끝납니다. 공식 데모 수치는 저장소 <code>examples/08_demos/wipe_the_bar/</code>(커밋 <code>81f57c9</code>)의 README와 <code>bar.py</code>에서 옮겼습니다.</p>
+<h2>1. Preston 마모: 공개 twin의 마커 줄 지우기 (C5)</h2>
+<p>공개 twin은 마커 줄을 2.5 mm 셀로 나누고, 각 셀의 잉크를 Preston 법칙으로 줄입니다.</p>
+<pre><code>d(ink)/dt = − k_p · p · v      (k_p = 1.2×10⁻² 1/(Pa·m), p &lt; 300 Pa이면 마모 없음, ink ≤ 0.1이면 &quot;clean&quot;)
+</code></pre>
+<ul>
+<li><strong>주석 검산:</strong> <code>bar.py</code>는 &quot;4 N, 30 mm/s 스트로크면 셀 하나를 약 2초에 지운다&quot;고 적었습니다. 4 N을 스펀지 면(50 × 75 mm)에 고르게 나누면 평균 압력이 1,067 Pa이고, 잉크 0.9를 지우는 데 0.9 / (k_p · p · v) = <strong>2.34 s</strong>가 걸립니다. 주석과 맞습니다.</li>
+<li><strong>한 스트로크의 마모는 속도와 무관합니다.</strong> 스펀지 긴 변 L(75 mm)이 셀을 지나는 시간은 L / v이므로, 한 번 지날 때 마모량은 k_p · p · L입니다. 평균 압력이면 <strong>0.96</strong>이라 한 스트로크로 거의 지워집니다. 측정된 첫 스트로크 0.91과 같은 자릿수입니다.</li>
+<li><strong>최대 압력은 평균과 두 자릿수 차이가 납니다.</strong> 측정 최대 압력은 84 kPa로 평균의 약 80배이고, 이 압력이면 셀 하나가 0.03초에 지워집니다. &quot;닦인 비율&quot;은 압력이 몰린 곳과 300 Pa 문턱 아래 띠의 비율에 따라 정해지는 지표입니다.</li>
+<li><strong>함의:</strong> 네 번 닦아도 0.955–0.959에 머무는 것은 문턱 아래 띠와 접촉이 끊기는 셀 때문으로 보입니다(가설). 논문의 &quot;닦인 면적 100%&quot;는 GaP가 만든 다른 rollout의 값이라 직접 비교할 수 없습니다. 다만 같은 법칙과 문턱을 쓴다면 100%는 문턱 아래 셀이 하나도 없어야 나오는 값입니다.</li>
+</ul>
+<h2>2. 영상만으로 강성을 맞출 수 있는가 (식별성 toy)</h2>
+<p>논문은 사람이나 에이전트가 영상과 시뮬레이션을 <strong>눈으로</strong> 비교해 물성 값을 고친다고 씁니다(Sec. 4.1, 4.3). 가장 단순한 모델로 그 비교의 해상도를 계산했습니다.</p>
+<ul>
+<li><strong>모델:</strong> 스펀지 면을 4 N으로 누를 때 선형 압축 δ = F h / (E A)입니다(A = 50 × 75 mm, h = 30 mm).</li>
+<li><strong>시각 관측:</strong> 화면 폭이 0.6 m인 영상에서 δ를 픽셀로 읽습니다. 판독 잡음은 0.5 px와 2 px 두 경우입니다.</li>
+<li><strong>힘 관측:</strong> 알려진 2 mm 압입에서 힘을 0.1 N 잡음으로 읽습니다.</li>
+<li><strong>표준오차:</strong> 해석식은 SE_vision(E) = σ_δ · E² · A / (F h), SE_force = σ_F · h / (A · δ_c)이고, Monte Carlo로 확인했습니다. 20 kPa에서 해석 1.95 kPa, Monte Carlo 1.96 kPa입니다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>E</th>
+<th>압축 δ</th>
+<th>1080p에서</th>
+<th>4K에서</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6 kPa</td>
+<td>5.33 mm</td>
+<td>17.1 px</td>
+<td>34.1 px</td>
+</tr>
+<tr>
+<td>20 kPa</td>
+<td>1.60 mm</td>
+<td>5.1 px</td>
+<td>10.2 px</td>
+</tr>
+<tr>
+<td>80 kPa (공개 twin)</td>
+<td>0.40 mm</td>
+<td>1.3 px</td>
+<td>2.6 px</td>
+</tr>
+<tr>
+<td>100 kPa</td>
+<td>0.32 mm</td>
+<td>1.0 px</td>
+<td>2.0 px</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/identifiability.png" alt="식별성" /></p>
+<ul>
+<li><strong>영상으로는 E가 약 100 kPa를 넘으면 사실상 정해지지 않습니다.</strong> 상대 SE가 50%를 넘는 경계는 1080p·0.5 px에서 104 kPa, 1080p·2 px에서 26 kPa, 4K·0.5 px에서 206 kPa입니다.</li>
+<li><strong>영상에서 구분되는 차이와 구분되지 않는 차이가 있습니다.</strong> Fig. 7e의 20 kPa와 100 kPa는 1080p·0.5 px에서 5.8σ 차이라 구분됩니다. 반면 공개 twin의 80 kPa와 100 kPa는 0.36σ 차이라 영상으로는 같습니다.</li>
+<li><strong>힘 관측은 오차가 E와 무관하게 일정합니다(0.4 kPa).</strong> 그래서 단단한 물체일수록 힘 관측이 유리하고, 무른 물체(10 kPa 미만)에서는 오히려 영상이 낫습니다.</li>
+<li><strong>해석:</strong> 논문이 힘 피드백을 따로 둔 동기(Sec. 4.2 &quot;관찰만으로는 접촉을 판단하기 어렵다&quot;)와 강성을 맞추는 대신 넓게 변형한 선택(Fig. 7e)을 정량적으로 뒷받침합니다. 반대로, 에이전트가 &quot;영상과 맞는 시뮬레이션&quot;을 만들었다는 주장은 기하와 운동에는 강하고 물성에는 약하다는 뜻입니다.</li>
+<li><strong>한계:</strong> 선형 일축 압축, 고정 시야, 판독 잡음은 모두 가정입니다. 실제 영상의 원근, 가림, 흐림은 이보다 나쁩니다.</li>
+</ul>
+<h2>3. 강성과 잡기: 공개 twin이 80 kPa를 쓴 이유 (C6)</h2>
+<p><code>bar.py</code>의 FOAM 주석에 따르면, 80 kPa 폼은 패드당 8.6–8.9 N으로 50 mm에서 45.5 mm로 눌립니다(변형률 9%). 이를 선형 탄성으로 보면 유효 패드 면적은 약 12 cm²입니다. 같은 조건에서 각 강성의 예상 변형률은 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>E</th>
+<th>예상 변형률</th>
+<th>저장소의 관찰</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6 kPa</td>
+<td>120% (불가능, 완전히 눌림)</td>
+<td>–</td>
+</tr>
+<tr>
+<td>20 kPa (영상 속 부엌 스펀지)</td>
+<td>36%</td>
+<td>&quot;패드 사이로 흘러나가 집게가 맞닿았다&quot;</td>
+</tr>
+<tr>
+<td>80 kPa (공개 twin)</td>
+<td>9%</td>
+<td>잡히지만 마찰만으로는 닦는 동안 미끄러짐 → latch</td>
+</tr>
+<tr>
+<td>100 kPa</td>
+<td>7%</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<p>선형 추정은 20 kPa에서도 잡힐 것처럼 보이지만, 실제 FEM에서는 큰 변형 때문에 폼이 흘러나갔습니다. 어느 쪽이든 <strong>Fig. 7e의 6·20 kPa는 공개 twin의 집게 조건으로 스펀지를 들 수 없는 범위</strong>입니다. GaP가 이 강성 변형에서 어떻게 닦았는지(latch를 썼는지)는 공개 자료로 알 수 없습니다.</p>
+<h2>4. GaP 곡선의 분모 (C2)</h2>
+<p>Fig. 1과 Fig. 7f의 값은 반복 0·9·11·14에서 0·29·71·100%입니다. 이 네 값이 k/n을 정수 %로 반올림해서 나오는 n을 60까지 찾으면 다음과 같습니다.</p>
+<pre><code>n = 7, 14, 17, 21, 24, 28, 31, 34, 35, 38, 41, 42, 45, 48, 49, 51, 52, 55, 56, 58, 59
+</code></pre>
+<p><strong>30은 없습니다.</strong> 30개 배치의 성공 비율이라면 29% 대신 26.7%나 30.0%, 71% 대신 70.0%나 73.3%가 나와야 합니다. 따라서 이 곡선은 본문 말대로 닦인 면적 같은 연속량이거나, 30개가 아닌 다른 개수에 대한 비율입니다. Fig. 1의 y축 이름 &quot;completion rate&quot;는 성공률로 읽히기 쉬워서 오해의 여지가 있습니다.</p>
+<h2>5. Table 1의 구조 (C1)</h2>
+<p><img src="figures/table1_tally.png" alt="Table 1 집계" /></p>
+<p>RSS는 10개 행이 모두 ✓입니다. 다른 다섯 프레임워크는 2–4개입니다. RSS만 ✓인 행은 5개입니다(구조화된 에이전트 피드백, 사람-에이전트 공동 정제, 영상 기반·힘 피드백·실패 기반 Real2Sim). 모두 이 논문이 정의하고 구현한 워크플로입니다. 나머지 물리 기능 5행에서 RSS의 ✓는 대부분 Newton 위에서 물려받은 것입니다. 예를 들어 Newton 자체도 강체·변형체는 ✓이고 결합은 ∼입니다.</p>
+</section>
+<section class="chapter"><h1>04. 코드 검증: 논문 ↔ 구현 대조, 수치 재계산, 구현 가능성</h1>
+<ul>
+<li><strong>대상:</strong> <code>robosimstudio/robosimstudio</code> @ <code>81f57c9</code> (2026-10-28, HEAD, shallow clone). 논문 시점 상태는 첫 커밋 <code>73739ab</code>(2026-10-14, v2와 같은 날)의 파일 트리로 확인했습니다. 저장소에는 커밋이 12개뿐이고, 첫 커밋 하나에 대부분이 들어 있습니다.</li>
+<li><strong>범위:</strong> 코드·문서·테스트 읽기, PyPI 메타데이터 조회(macOS arm64 wheel 여부), CPU 재계산만 했습니다. 설치·실행은 하지 않았습니다.</li>
+</ul>
+<h2>1. 모듈 매핑</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>구현 위치</th>
+<th>일치 여부</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>물체는 &quot;무엇인지&quot;, 장면은 &quot;어느 solver인지&quot; 선언 (Sec. 3)</td>
+<td><code>robosimstudio/specs/physics.py</code>(ArrangementSpec: 영역별 backend, coupler, 충돌 정책), <code>specs/arrangement.py</code></td>
+<td>✅ 데이터로 정의된 배치(arrangement)를 이름으로 고릅니다</td>
+</tr>
+<tr>
+<td>기본 solver: 관절 MuJoCo-Warp, 천·케이블 VBD, 연성체 외부 엔진</td>
+<td><code>specs/arrangement.py: GENERIC</code> — articulated <code>mujoco</code>, soft <code>superdex</code>(substeps 2), 입자 재료 <code>mpm</code>, 그 밖 <code>vbd</code>, coupler <code>proxy</code></td>
+<td>✅ 논문 이후 MPM(알갱이·액체·반죽)이 추가됐습니다</td>
+</tr>
+<tr>
+<td>외부 엔진과 자세·접촉 wrench 교환</td>
+<td><code>engines/cosim.py</code>(CosimRig: 자세 읽기 → 외부 엔진 substep → 반력 수확 → Newton에 기록), <code>engines/feedback.py</code>(WrenchAccumulator)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>인스펙터: 단위·범위, 실행 중 변경 vs 재빌드 표시</td>
+<td><code>specs/physics.py</code>의 ParamSchema(&quot;단위, 범위, 변경 비용 tier&quot;), <code>robosimstudio_studio/inspector.py</code>, <code>tuning/</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>에이전트 반복 인터페이스</td>
+<td><code>robosimstudio_real2sim_agent/</code>: 저장할 때마다 <code>scene.py</code>를 다시 빌드하는 live 페이지 + Unix socket CLI(<code>./ctl</code>), <code>compare.py</code>(사진 대비 크기·위치 수치), <code>checks.py</code>(take ↔ 영상 timeline, gate: 빌드·유한성·카메라·가라앉음·표류), <code>frames.py</code>(영상에서 시각이 찍힌 정지 화면)</td>
+<td>⚠️ D5</td>
+</tr>
+<tr>
+<td>힘 피드백 원격 조종: 속도 의존 deadband, 멈춤·지연 시 해제, 측정 열림 사용</td>
+<td><code>robots/teleop/force_feedback.py</code>(<code>deadband</code>, <code>velocity_deadband</code>, stale 샘플이면 disarm, &quot;measured jaw&quot; 사용), 리더별 100 Hz 스레드</td>
+<td>✅ 논문 서술과 일치합니다. 리더 하드웨어는 D7</td>
+</tr>
+<tr>
+<td>로봇: Panda, UR5e, 단팔·양팔 YAM</td>
+<td><code>robots/embodiments/</code>: panda, yam_bimanual, yam_i2rt 등</td>
+<td>⚠️ D6 (UR5e 없음)</td>
+</tr>
+<tr>
+<td>IK PyRoKi, 계획 cuRobo</td>
+<td><code>pyproject.toml</code>: pyroki를 <code>95afccc</code>에 고정, cuRobo는 <code>curobo</code> extra(cu12)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>privileged 상태와 관측 분리</td>
+<td><code>robosimstudio_policy_agent/sim_tools.py</code>(&quot;in-process 모드에서만&quot; 등록), <code>examples/07_policies/02_without_privilege.py</code></td>
+<td>✅ 구조적으로 분리되어 있습니다</td>
+</tr>
+<tr>
+<td>GaP 정책 개선</td>
+<td><code>robosimstudio_policy_agent/</code>(GaP 런타임 facade, 도구), GaP 런타임 <code>KeplerC/graph-as-policy@09e45f8</code></td>
+<td>⚠️ D2 (닦기 그래프 없음)</td>
+</tr>
+<tr>
+<td>스펀지 닦기 twin, Preston 마모</td>
+<td><code>examples/08_demos/wipe_the_bar/</code>(<code>bar.py</code>, <code>routine.py</code>), <code>engines/superdex/bridge.py</code>(접촉 patch별 압력)</td>
+<td>⚠️ D3, D4</td>
+</tr>
+<tr>
+<td>18개 과제 (Fig. 5)</td>
+<td>공개 저장소에는 데모 3개(wipe, cable, towel)와 재료별 채점 예제 11개</td>
+<td>❌ D1</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 불일치와 논문에 적히지 않은 구현 요소</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>내용</th>
+<th>영향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td><strong>Fig. 5의 18개 과제 정의가 공개 저장소에 없습니다.</strong> 과제는 <code>tasks/</code> 디렉터리(&quot;root&quot;)에서 읽는데, 저장소에 그 디렉터리가 없습니다. 테스트는 <code>vabar/assets/vab_tool_sort</code>를 &quot;컬렉션 없이 설치하면 없음&quot;이라고 부릅니다(<code>tests/test_panda_vendored.py</code>). 공개된 것은 양팔 YAM 데모 3개(<code>08_demos</code>)와 재료별 채점 예제(<code>06_tasks</code>)입니다. 프로젝트 페이지도 &quot;More Real2Sim Examples Coming Soon&quot;이라고 씁니다.</td>
+<td>18개 과제를 다시 만들 수 없습니다. Sec. 4.1의 결과는 확인할 수 없습니다.</td>
+</tr>
+<tr>
+<td>D2</td>
+<td><strong>GaP 닦기 정책, 30개 배치, 강성 변형 스윕, 실제 로봇 실행 코드가 없습니다.</strong> 공개된 policy 예제는 pick-and-place 그래프뿐입니다.</td>
+<td>Fig. 7e–h를 재현할 수 없습니다.</td>
+</tr>
+<tr>
+<td>D3</td>
+<td><strong>공개 twin은 스펀지를 손에 고정(latch)합니다.</strong> 잡기가 안정되면 패드 근처 폼 노드 106개를 손에 고정하고 <strong>Open</strong>에서 풉니다. 마찰만으로는 세 take에서 폼이 69·226·218 mm 미끄러졌고, 닦인 비율은 0.761·0.724·0.687였습니다. 30회 더 바꿔 시도했지만(마찰, 그립 12 N, 누름 1.5–4 N, 기울기, 속도, 볼록 분해) 미끄럼을 10 mm 아래로 줄인 경우는 없었습니다(README &quot;Why a latch&quot;). 막대도 블록에 용접(weld)되어 있습니다.</td>
+<td>논문은 latch를 언급하지 않습니다. 같은 저장소의 에이전트 작업 규칙(<code>examples/live/AGENTS.md</code>, 2026-10-22 추가)은 &quot;latch, weld, attachment 금지, 손가락 접촉으로만 움직일 것&quot;을 완성 조건으로 둡니다. 논문 시점 데모가 이 규칙을 지키지 않습니다.</td>
+</tr>
+<tr>
+<td>D4</td>
+<td><strong>공개 twin의 스펀지는 영상 속 스펀지보다 4배 단단합니다.</strong> <code>bar.py</code>는 &quot;영상의 부드러운 부엌 폼(20 kPa)은 8 N 집게에서 패드 사이로 흘러나가 들리지 않아&quot; 80 kPa 폼으로 바꿨다고 적었습니다.</td>
+<td>영상과 &quot;맞춘&quot; twin이 물성에서는 영상과 다릅니다. Fig. 7e의 6·20 kPa 변형은 이 집게 조건에서 잡을 수 없는 범위입니다(<code>03</code> §3).</td>
+</tr>
+<tr>
+<td>D5</td>
+<td><strong>에이전트용 &quot;시공간 피드백&quot;의 실체는 시각 비교 수치와 gate입니다.</strong> <code>compare.py</code>는 사진 대비 크기 비율과 픽셀 위치 차이를, <code>checks.py</code>는 take의 물체 이동과 영상 timeline 대비, 빌드·유한성·가라앉음·표류 검사를 줍니다. 논문이 나열한 &quot;접촉 사건, 잡기·미끄러짐&quot; 텍스트 피드백을 만드는 전용 모듈은 찾지 못했습니다.</td>
+<td>에이전트가 접촉 문제를 풀려면 <code>./ctl eval</code>로 시뮬레이터 상태를 직접 읽어야 합니다(Python 실행). 기능은 있지만 논문 서술보다 원시적입니다.</td>
+</tr>
+<tr>
+<td>D6</td>
+<td><strong>UR5e가 공개 저장소에 없습니다.</strong> 레지스트리는 &quot;콘텐츠로 배포되는 로봇은 벤치마크 계층을 import해야 등록된다&quot;고 안내합니다. 공개된 것은 Panda, YAM 계열, Robotiq 2F-85 그리퍼입니다.</td>
+<td>Fig. 5에서 UR 계열 팔이 보이는 과제는 공개 자산으로 만들 수 없습니다.</td>
+</tr>
+<tr>
+<td>D7</td>
+<td><strong>힘 피드백 리더 암은 GELLO가 아니라 YAM 리더입니다.</strong> Feetech STS3215 서보, CH340 USB 어댑터, <code>lerobot</code> 버스 드라이버, udev 규칙과 보정 파일을 씁니다. 공개 예제의 힘 피드백 장면은 패널과 상자이고, 공구 걸기(Fig. 6)가 아닙니다.</td>
+<td>논문의 GELLO 인용은 개념 출처로 읽어야 합니다. 하드웨어 목록은 저장소 README가 정확합니다.</td>
+</tr>
+<tr>
+<td>D8</td>
+<td><strong>CPU 실행은 논문 이후에 추가됐습니다</strong>(2026-10-18, 커밋 <code>a2fe723</code>). CPU에서는 MuJoCo C가 팔·강체를, SuperDex가 천·가방·로프·연성체를 맡습니다. 종이·테이프·붓·MPM·물은 거부됩니다. 로프는 단방향(케이블이 닿은 것을 밀지 않음)이고, SDF·hydroelastic 접촉과 다중 world도 쓸 수 없습니다(<code>examples/install.md</code>).</td>
+<td>논문의 VBD 기반 장면(케이블, 필름, 수건, 열전사)은 CPU에서 다른 물리로 대체되거나 거부됩니다.</td>
+</tr>
+<tr>
+<td>D9</td>
+<td><strong>렌더러가 플랫폼에 따라 다릅니다.</strong> 경로 추적 렌더러 OVRTX(1.8 GB)는 RT core가 있는 NVIDIA GPU와 Linux·Windows에서만 씁니다. 그 밖에는 Newton의 tiled 렌더러가 <strong>collider만</strong> 그립니다.</td>
+<td>에이전트가 사진과 렌더를 비교하는 루프(<code>compare_still</code>)는 RT GPU가 없으면 질감 없는 collider 그림으로 비교하게 됩니다. A100·H100·B200도 RT core가 없어 같습니다.</td>
+</tr>
+<tr>
+<td>D10</td>
+<td>공식 테스트 기록(README &quot;Measured&quot;)은 RTX PRO 6000 Blackwell에서 했습니다. 닦기 데모 README는 &quot;superdex extra와 GPU가 필요하다&quot;고 쓰지만, 설치 문서는 SuperDex 스펀지가 CPU에서 돈다고 씁니다.</td>
+<td>문서끼리 다릅니다. 이 맥에서 닦기 twin이 도는지는 실행해 봐야 알 수 있습니다.</td>
+</tr>
+<tr>
+<td>D11</td>
+<td>논문 표지(v2)의 소속 번호는 NVIDIA 1, Berkeley 2이고, 프로젝트 페이지는 Berkeley 1, NVIDIA 2입니다. arXiv 제목에는 &quot;for Human and Agent&quot;가 있고 PDF 제목에는 없습니다.</td>
+<td>사소한 표기 차이입니다.</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/latch_effect.png" alt="latch_effect.png" /></p>
+<p class="cap">우리 분석: 공식 wipe_the_bar 데모의 latch 유무별 닦인 비율과 미끄럼(저장소 README 수치).</p>
+<h2>3. 수치 재계산 (<code>analysis/table_check.py</code>, <code>analysis/identifiability_toy.py</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>대상 (출처)</th>
+<th>재계산</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>Table 1</td>
+<td>RSS 10/10 ✓, 다른 프레임워크 ✓ 2–4개. RSS만 ✓인 5행은 모두 이 논문의 워크플로</td>
+<td>기능 목록에 가까움</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>GaP 곡선 0·29·71·100% (Fig. 1, 7f)</td>
+<td>k/n 반올림으로 나오는 n은 7, 14, 17, 21, 24 …이고 <strong>30은 아님</strong></td>
+<td>30개 배치의 성공률이 아님. Fig. 1 y축 이름 &quot;completion rate&quot;는 오해 소지</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>에이전트 구축 시간 (Fig. 7c)</td>
+<td>첫 닦기까지 42분(전체 56분의 75%). 56분은 한 에이전트만 보고됨</td>
+<td>두 번째 에이전트 시간 없음</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>latch 효과 (저장소 README)</td>
+<td>latch 0.958 vs 마찰만 0.724, 차이 23.4%p, Welch p = 0.008(n = 3)</td>
+<td>공개 twin의 닦기 성능은 latch가 만듦</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>Preston 주석 &quot;4 N, 30 mm/s면 셀 하나에 약 2초&quot; (<code>bar.py</code>)</td>
+<td>면 평균 압력 1,067 Pa → 2.34 s. 한 스트로크 마모 = k_p·p·L = 0.96(속도 무관)</td>
+<td>✅ 주석과 측정 첫 스트로크(0.91)와 맞음</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>강성과 잡기 (<code>bar.py</code> FOAM 주석)</td>
+<td>80 kPa에서 변형률 9% → 유효 패드 면적 12 cm². 선형 예측 6 kPa 120%, 20 kPa 36%</td>
+<td>Fig. 7e 범위의 절반은 잡을 수 없는 강성</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>v1 ↔ v2</td>
+<td>13쪽 → 14쪽, 참고문헌 51 → 58개, 단어열 유사도 0.87. Fig. 1 라벨, 관련 연구(MAESTRO, ASPIRE, ENPIRE, DexAgent, RPG, Push-T), Real2Sim 문단(frontier 모델의 시각 재구성 한계) 추가</td>
+<td>방법·결과 수치는 그대로</td>
+</tr>
+<tr>
+<td>V1</td>
+<td>영상만으로 E 식별 (toy)</td>
+<td>1080p·0.5 px에서 E &gt; 104 kPa면 상대 SE &gt; 50%. 80 vs 100 kPa는 0.36σ. 힘 관측 SE는 0.4 kPa로 일정</td>
+<td><code>03</code> §2</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 구현 가능성 판단</h2>
+<h3>4.1 공식 코드를 그대로 쓰는 경우</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>요구 사항</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS / Python</td>
+<td>Linux x86-64 + Python 3.12 (개발·테스트 플랫폼). &quot;macOS와 Windows는 테스트하지 않음&quot;</td>
+<td>이 맥에는 Python 3.12.7이 있고 <code>uv</code>는 없습니다</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>선택. NVIDIA GPU가 있으면 Warp CUDA, MuJoCo-Warp, VBD, MPM, CUDA graph를 씁니다. 없으면 CPU 경로(D8)</td>
+<td>경로 추적 렌더러는 RT core GPU + Linux·Windows만</td>
+</tr>
+<tr>
+<td>주요 의존성</td>
+<td>newton[sim] 1.7, warp 1.18, mujoco 3.15, viser, coacd 1.0.11, pyroki(git, jax), imageio[ffmpeg]. 선택: superdex(cpu), genesis(+torch), curobo(cu12), gap(torch, cuRobo, transformers), lerobot-feetech</td>
+<td>PyPI 조회 결과 warp·coacd·superdex는 macOS arm64 wheel이 있고, newton·mujoco-warp·viser는 순수 Python입니다</td>
+</tr>
+<tr>
+<td>용량</td>
+<td>저장소 checkout 약 210 MB(로봇 자산 포함). rtx 그룹 1.8 GB(Linux·Windows만)</td>
+<td></td>
+</tr>
+<tr>
+<td>코딩 에이전트</td>
+<td>Claude Code나 Codex(유료 구독 또는 API). 영상·사진이 공급자 서버로 갑니다</td>
+<td>논문의 &quot;약 1시간&quot;은 이 비용과 사람 감독 시간을 포함하지 않습니다</td>
+</tr>
+<tr>
+<td>하드웨어 (선택)</td>
+<td>힘 피드백: Feetech STS3215 YAM 리더 암 + CH340 어댑터. 실제 로봇: 양팔 YAM</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>판단:</strong> 도구 자체는 <strong>설치해서 쓸 수 있는 수준으로 공개</strong>되어 있습니다(Apache-2.0, 설치 문서, 예제, 테스트). 논문의 결과(18개 과제, GaP 닦기, 실제 로봇)는 핵심 자산이 비공개라 <strong>재현할 수 없습니다</strong>(D1, D2, D6).</p>
+<h3>4.2 이 맥(Apple M4 Pro, CUDA 없음)에서</h3>
+<p>공식 문서의 CPU 매트릭스(<code>examples/install.md</code>)와 Fig. 3의 solver 표시를 합쳐 18개 과제를 추정했습니다. 과제 정의가 비공개라 재료 종류는 이름에서 짐작한 것입니다.</p>
+<table>
+<thead>
+<tr>
+<th>과제 (Fig. 5)</th>
+<th>추정 재료</th>
+<th>이 맥(CPU)에서</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>공구 정리, 주사기 폐기, 바구니 담기, 공구 걸기, 접시 꽂기, 서랍 열기, 상자 뒤집기</td>
+<td>강체·관절</td>
+<td>가능(MuJoCo C). 단 UR5e 과제는 자산 없음</td>
+</tr>
+<tr>
+<td>기어 맞물림, 커넥터 삽입</td>
+<td>강체 + 정밀 메쉬 접촉</td>
+<td>어려움: CPU에는 SDF·hydroelastic 접촉이 없음</td>
+</tr>
+<tr>
+<td>케이블 배선, 도관 통과</td>
+<td>로프(논문은 VBD)</td>
+<td>다른 물리로 가능: SuperDex 로프, 단방향</td>
+</tr>
+<tr>
+<td>수건 접기, 잎 누르기</td>
+<td>천·쉘(논문은 VBD)</td>
+<td>다른 물리로 가능: SuperDex 천</td>
+</tr>
+<tr>
+<td>필름 벗기기, 박스 테이프 자르기</td>
+<td>테이프·절단(VBD)</td>
+<td>테이프는 거부, 절단은 느리게 가능(1–2 s/step)</td>
+</tr>
+<tr>
+<td>스펀지 닦기</td>
+<td>FEM(SuperDex)</td>
+<td>가능해 보임(macOS arm64 wheel 있음). 데모 README는 GPU 필요라고 씀(D10)</td>
+</tr>
+<tr>
+<td>띠 연마, 열전사</td>
+<td>접촉 + 표면 법칙, 필름(VBD)</td>
+<td>띠 연마는 가능해 보임, 열전사는 불확실</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>할 수 있는 것:</strong> <code>examples/</code>의 강체·관절 장면, Viser studio, <code>./ctl</code> 기반 에이전트 루프(Unix socket은 macOS에서 동작), CPU 데모 기록. 설치에는 승인이 필요하고, 실제 동작은 확인하지 않았습니다.</li>
+<li><strong>할 수 없는 것:</strong> CUDA 경로 전체(MuJoCo-Warp, VBD, MPM, cuRobo 계획), 경로 추적 렌더러, 다중 world, GaP 런타임(torch + cuRobo, cuRobo가 CUDA 전용이라 불가로 추정). Apple GPU(MPS)는 이 스택이 쓰지 않습니다. 저장소가 고르는 장치는 <code>cpu</code>와 <code>cuda</code>뿐입니다(<code>robosimstudio/machine.py</code>).</li>
+<li><strong>속도:</strong> 공식 문서 기준 CPU 한 스레드에서 VBD 수건(1,922 입자)은 실시간의 0.003배, 절단은 GPU 7.6 ms 대비 step당 1–2 s입니다. 맥에서는 &quot;보고 만지는&quot; 용도로는 쓸 수 있지만, 데이터 생성이나 정책 개선 루프에는 비현실적입니다.</li>
+</ul>
+<h3>4.3 아이디어만 가져와 재구현하는 경우</h3>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>난이도</th>
+<th>메모</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;물성·solver를 편집 가능한 항목으로&quot; 장면 기술</td>
+<td>중간</td>
+<td>이미 쓰는 시뮬레이터(MuJoCo, Isaac Lab) 위에 인스펙터와 파라미터 schema(단위·범위·재빌드 여부)를 얹는 일</td>
+</tr>
+<tr>
+<td>에이전트 루프(저장하면 다시 빌드, 사진 비교 수치, gate)</td>
+<td>낮음–중간</td>
+<td><code>robosimstudio_real2sim_agent</code>의 구조(live 페이지, socket, compare, gate, log.jsonl)가 짧고 독립적이라 옮기기 쉽습니다</td>
+</tr>
+<tr>
+<td>힘 피드백 원격 조종</td>
+<td>중간</td>
+<td>리더 암 하드웨어가 필요합니다. deadband·stale 처리 같은 안전 로직은 <code>force_feedback.py</code>에서 가져올 수 있습니다</td>
+</tr>
+<tr>
+<td>다중 물리 co-sim(강체 + FEM)</td>
+<td>높음</td>
+<td>Newton과 SuperDex를 직접 쓰는 것이 현실적입니다. 직접 결합을 짜는 것은 권하지 않습니다</td>
+</tr>
+</tbody>
+</table>
+<p><strong>요약:</strong> RSS는 논문이라기보다 <strong>바로 쓸 수 있는 오픈소스 도구</strong>입니다. 다만 논문의 성과를 판단하려면 비공개 자산이 필요합니다. 이 맥에서는 강체 장면과 에이전트 루프를 시험해 볼 수 있지만, 변형체와 정책 개선은 NVIDIA GPU 서버가 필요합니다.</p>
+</section>
+<section class="chapter"><h1>02. 선행연구와 계보</h1>
+<p>번호 [n]은 논문(v2)의 참고문헌 번호입니다. GitHub 정보는 2026-10-29에 <code>gh api</code>로 확인했고, 공식 저장소는 코드를 직접 읽었습니다. 나머지 논문은 따로 열어 검증하지 않았습니다.</p>
+<h2>1. 계보도</h2>
+<pre><code>[시뮬레이터]  MuJoCo [9] → Isaac Gym / Isaac Lab [10–12], ManiSkill3 [13], MuJoCo Playground [14], Genesis [6]
+              Warp [16] → Newton [3] (MuJoCo-Warp [17], VBD [18], XPBD [19] 통합) · SuperDex [4] (암시적 FEM, 외부 엔진)
+                                         │
+[Real2Sim]   digital twin / cousin: RialTo [44], URDFormer [45], Digital Cousins [46], Articulate-Anything [47],
+             SIMPLER [48], SplatSim [49]  ·  생성형: GenSim [31, 32], RoboGen [50], Holodeck [51], Video2Policy [33]
+                                         │
+[에이전트 로보틱스]  SayCan [20], Code as Policies [21], VoxPoser [23] → Eureka [27], DrEureka [30]
+             → 범용 코딩 에이전트(ReAct [7], Claude Code [1], Codex [2]) → CaP-X [36], GaP [5], ASPIRE [38], ENPIRE [39]
+                                         │
+                    ★ RoboSimStudio: 시뮬레이터의 모델 선택을 &quot;편집 가능한 항목&quot;으로 노출해 사람·에이전트 공동 Real2Sim
+</code></pre>
+<p><strong>차별점:</strong> 기존 Real2Sim 연구는 대부분 재구성이나 생성 파이프라인 하나를 제안합니다. RSS는 파이프라인이 아니라 <strong>작업대</strong>입니다. solver·접촉 모델·물성을 바꾸고 결과를 보는 루프를 사람과 코딩 에이전트에게 함께 제공하는 것이 핵심입니다. 같은 그룹(Goldberg lab)의 GaP [5], CaP-X [36], Push-T 에이전트 연구 [42]와 이어지는 &quot;코딩 에이전트가 로봇 문제를 직접 실험하며 푼다&quot;는 흐름의 시뮬레이션 쪽 기반이기도 합니다.</p>
+<h2>2. 구성 요소별 출처</h2>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>출처</th>
+<th>이 논문에서의 쓰임</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>물리 백본</td>
+<td>Newton [3] (Warp [16] 위)</td>
+<td>장면 조립, 결합, 렌더링</td>
+</tr>
+<tr>
+<td>관절·강체 solver</td>
+<td>MuJoCo-Warp [17] (CPU에서는 MuJoCo C)</td>
+<td>로봇 팔, 강체</td>
+</tr>
+<tr>
+<td>천·케이블 solver</td>
+<td>VBD [18]</td>
+<td>기본 &quot;그 밖의 영역&quot; solver</td>
+</tr>
+<tr>
+<td>연성체 FEM</td>
+<td>SuperDex [4] (<code>facebookresearch/project_superdex</code>)</td>
+<td>스펀지, 가방. CPU에서는 천·로프도 담당</td>
+</tr>
+<tr>
+<td>두 번째 외부 엔진</td>
+<td>Genesis [6]</td>
+<td>IPC 천·연성체, SPH 물(선택)</td>
+</tr>
+<tr>
+<td>브라우저 화면</td>
+<td>Viser [8]</td>
+<td>studio, 인스펙터, 기즈모</td>
+</tr>
+<tr>
+<td>IK / 계획</td>
+<td>PyRoKi [55] / cuRobo [56]</td>
+<td>팔 IK(기본), 충돌 회피 계획(<code>motion=&quot;plan&quot;</code>, CUDA)</td>
+</tr>
+<tr>
+<td>정책 개선</td>
+<td>Graph-as-Policy [5] (<code>KeplerC/graph-as-policy</code>)</td>
+<td>스펀지 닦기 정책을 시뮬레이션 피드백으로 개선</td>
+</tr>
+<tr>
+<td>리더 암</td>
+<td>GELLO [58] (논문 인용) · 저장소는 Feetech STS3215 서보의 YAM 리더 + <code>lerobot</code> 버스 드라이버</td>
+<td>힘 피드백 원격 조종</td>
+</tr>
+<tr>
+<td>마모 모델</td>
+<td>Preston [57]</td>
+<td>띠 연마, 마커 줄 지우기</td>
+</tr>
+<tr>
+<td>에이전트 루프</td>
+<td>ReAct [7], SWE-agent [43]</td>
+<td>&quot;고치고-실행하고-관찰&quot; 루프의 근거</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Do as I Do</strong> (<code>do_as_i_do/</code>)</td>
+<td>둘 다 &quot;일상 영상 → 물리 시뮬레이션&quot;입니다. Do as I Do는 영상에서 손·물체 4D 궤적과 SAM 3D 메쉬를 자동으로 복원한 뒤 MuJoCo Warp sampling으로 리타겟팅합니다. RSS는 장면 자체를 코딩 에이전트가 손으로 짓습니다. Do as I Do가 다루지 못한 <strong>변형 물체와 접촉 모델 선택</strong>을 RSS가 채우고, RSS가 수작업으로 하는 <strong>기하 복원</strong>을 Do as I Do가 자동화합니다. 서로 보완하는 관계입니다.</td>
+</tr>
+<tr>
+<td><strong>FlashDexRetarget</strong> (<code>flashdexretarget/</code>)</td>
+<td>FlashDexRetarget은 Isaac Sim 강체 장면에서 리타겟팅합니다. 둘 다 <strong>물리적이지 않은 보조</strong>를 씁니다. FlashDexRetarget은 물체를 레퍼런스로 끄는 PD 힘을 학습 중에만 쓰고 평가에서는 끕니다. RSS 공개 twin은 스펀지를 손에 고정하는 latch를 과제 내내 씁니다(<code>04</code> D3). 보조를 평가에서 빼는지가 결과의 물리적 타당성을 가릅니다.</td>
+</tr>
+<tr>
+<td><strong>GraspSense</strong> (<code>graspsense/</code>)</td>
+<td>GraspSense는 SAM 3D 메쉬로 Isaac Lab 장면을 만들고 힘 지도로 파지를 고르지만, 코드상 물체는 강체였습니다. RSS의 SuperDex FEM은 GraspSense가 검증하지 못한 &quot;벽 변형·손상&quot; 주장을 실제 변형체로 확인할 수 있는 도구입니다.</td>
+</tr>
+<tr>
+<td><strong>AlphaNIST</strong> (<code>alphanist/</code>)</td>
+<td>AlphaNIST는 Isaac Lab에서 NIST 조립 보드를 학습합니다. RSS의 커넥터 삽입(1 mm 미만 여유)과 같은 접촉 정밀도 문제를 다룹니다. RSS는 CPU에서 SDF·hydroelastic 접촉을 쓸 수 없어, 이런 과제는 GPU가 필요합니다(<code>04</code> §4).</td>
+</tr>
+<tr>
+<td><strong>Contact-Grounded Policy</strong> (<code>contact_grounded_policy/</code>)</td>
+<td>CGP는 Meta 내부 FEM 시뮬레이터로 visuotactile 정책을 학습했습니다. RSS가 쓰는 SuperDex는 Meta의 공개 암시적 FEM 엔진입니다(<code>facebookresearch</code>). 같은 계열인지는 확인하지 못했습니다(가설).</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 논문이 다루지 않았지만 관련 있는 연구 (내 판단)</h2>
+<table>
+<thead>
+<tr>
+<th>주제</th>
+<th>관련성</th>
+<th>근거 수준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>시스템 식별(system identification)·베이지안 보정</strong></td>
+<td>&quot;영상과 맞을 때까지 값을 고친다&quot;는 문제는 고전적인 물성 식별 문제입니다. 관측 가능성과 식별성 분석 없이 눈으로 맞추면 여러 값이 똑같이 그럴듯해 보입니다(<code>03</code> §2).</td>
+<td>내 해석</td>
+</tr>
+<tr>
+<td><strong>미분 가능한 시뮬레이션으로 물성 추정</strong></td>
+<td>같은 Warp·Newton 위에서 경사 기반으로 물성을 맞추는 방법은 에이전트의 시행착오를 줄일 수 있습니다.</td>
+<td>내 사전 지식. 서지 확인 필요</td>
+</tr>
+<tr>
+<td><strong>도메인 랜덤화</strong> (Tobin et al. 2017 등)</td>
+<td>Fig. 7e의 강성·배치 변형은 고전적 도메인 랜덤화입니다. 식별할 수 없는 값을 랜덤화로 처리하는 것은 합리적이지만, 범위가 물리적으로 의미 있어야 합니다(<code>04</code> C6).</td>
+<td>내 사전 지식</td>
+</tr>
+</tbody>
+</table>
+<h2>5. GitHub 정리 (2026-10-29 <code>gh api</code> 기준)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>★</th>
+<th>마지막 push</th>
+<th>확인한 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/robosimstudio/robosimstudio">robosimstudio/robosimstudio</a></td>
+<td>이 논문의 도구 전체(라이브러리, studio, 에이전트 페이지, 벤치마크, GaP 연결)</td>
+<td><strong>공식</strong></td>
+<td>Apache-2.0 (로봇 자산은 MIT·BSD)</td>
+<td>270</td>
+<td>2026-10-28</td>
+<td><code>81f57c9</code> (HEAD, clone), <code>73739ab</code> (논문 시점 첫 커밋, 트리만)</td>
+</tr>
+<tr>
+<td>robosimstudio/robosimstudio.github.io</td>
+<td>프로젝트 페이지</td>
+<td>공식</td>
+<td>표기 없음</td>
+<td>0</td>
+<td>2026-10-15</td>
+<td><code>47b0796</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/newton-physics/newton">newton-physics/newton</a></td>
+<td>물리 백본 (Linux Foundation 프로젝트)</td>
+<td>의존성</td>
+<td>Apache-2.0</td>
+<td>5,861</td>
+<td>2026-10-28</td>
+<td><code>23638bf</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/NVIDIA/warp">NVIDIA/warp</a></td>
+<td>GPU/CPU 커널 언어</td>
+<td>의존성</td>
+<td>Apache-2.0</td>
+<td>7,253</td>
+<td>2026-10-29</td>
+<td>메타데이터만</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google-deepmind/mujoco_warp">google-deepmind/mujoco_warp</a></td>
+<td>MuJoCo GPU판</td>
+<td>의존성</td>
+<td>Apache-2.0</td>
+<td>1,592</td>
+<td>2026-10-28</td>
+<td>메타데이터만</td>
+</tr>
+<tr>
+<td><a href="https://github.com/facebookresearch/project_superdex">facebookresearch/project_superdex</a></td>
+<td>암시적 FEM 엔진 (스펀지·가방)</td>
+<td>의존성</td>
+<td>Apache-2.0</td>
+<td>770</td>
+<td>2026-10-29</td>
+<td><code>353abe6</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/viser-project/viser">viser-project/viser</a></td>
+<td>브라우저 3D 화면</td>
+<td>의존성</td>
+<td>Apache-2.0</td>
+<td>2,838</td>
+<td>2026-09-25</td>
+<td><code>56712d3</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/chungmin99/pyroki">chungmin99/pyroki</a></td>
+<td>IK (jax)</td>
+<td>의존성</td>
+<td>MIT</td>
+<td>1,812</td>
+<td>2026-04-01</td>
+<td>RSS가 <code>95afccc</code>에 고정</td>
+</tr>
+<tr>
+<td><a href="https://github.com/NVlabs/curobo">NVlabs/curobo</a></td>
+<td>충돌 회피 계획 (CUDA)</td>
+<td>선택 의존성</td>
+<td>Apache-2.0</td>
+<td>1,943</td>
+<td>2026-09-10</td>
+<td>RSS가 <code>v0.8.0</code>에 고정</td>
+</tr>
+<tr>
+<td><a href="https://github.com/KeplerC/graph-as-policy">KeplerC/graph-as-policy</a></td>
+<td>GaP 런타임 [5]</td>
+<td>같은 1저자, 선택 의존성</td>
+<td>Apache-2.0</td>
+<td>1</td>
+<td>2026-10-24</td>
+<td>RSS가 <code>09e45f8</code>에 고정</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Genesis-Embodied-AI/genesis-world">Genesis-Embodied-AI/genesis-world</a></td>
+<td>두 번째 외부 엔진</td>
+<td>선택 의존성</td>
+<td>Apache-2.0</td>
+<td>30,136</td>
+<td>2026-10-28</td>
+<td>메타데이터만</td>
+</tr>
+<tr>
+<td><a href="https://github.com/wuphilipp/gello_software">wuphilipp/gello_software</a></td>
+<td>GELLO 리더 암 [58]</td>
+<td>관련(논문 인용, 저장소는 YAM 리더 사용)</td>
+<td>MIT</td>
+<td>561</td>
+<td>2026-09-14</td>
+<td>메타데이터만</td>
+</tr>
+<tr>
+<td><a href="https://github.com/i2rt-robotics/i2rt">i2rt-robotics/i2rt</a></td>
+<td>YAM 로봇 모델 출처</td>
+<td>자산 출처</td>
+<td>MIT</td>
+<td>178</td>
+<td>2026-10-28</td>
+<td>메타데이터만</td>
+</tr>
+<tr>
+<td><a href="https://github.com/KeplerC/microduck-with-rss">KeplerC/microduck-with-rss</a></td>
+<td>사진 한 장 Real2Sim 데모(README 소식)</td>
+<td>같은 1저자</td>
+<td>Apache-2.0</td>
+<td>2</td>
+<td>2026-10-26</td>
+<td>메타데이터만</td>
+</tr>
+</tbody>
+</table>
+<p><strong>한계:</strong> 4절의 서지는 내 사전 지식입니다. 블로그나 git에 올리기 전에 원문을 확인해야 합니다.</p>
+</section></body></html>

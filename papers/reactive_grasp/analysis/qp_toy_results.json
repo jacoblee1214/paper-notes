@@ -1,0 +1,267 @@
+{
+  "E3_actuation_consistency": {
+    "K=1": {
+      "contacts": 16,
+      "actuated_contacts": 15,
+      "rank_J_act": 20,
+      "null_dim": 25,
+      "eps_sqrt_d_N": 2.5,
+      "without_AC": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 12.993,
+        "max_fn_N": 1.479,
+        "invisible_fraction_of_actuated_force": 0.632,
+        "realized_residual_force_N": 0.518,
+        "realized_residual_torque_Nm": 0.0121,
+        "max_violation": 0.0
+      },
+      "with_AC": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 12.445,
+        "max_fn_N": 1.72,
+        "invisible_fraction_of_actuated_force": 0.441,
+        "realized_residual_force_N": 0.569,
+        "realized_residual_torque_Nm": 0.0144,
+        "max_violation": 0.0
+      }
+    },
+    "K=3": {
+      "contacts": 48,
+      "actuated_contacts": 45,
+      "rank_J_act": 20,
+      "null_dim": 115,
+      "eps_sqrt_d_N": 5.36,
+      "without_AC": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 14.773,
+        "max_fn_N": 0.56,
+        "invisible_fraction_of_actuated_force": 0.673,
+        "realized_residual_force_N": 0.683,
+        "realized_residual_torque_Nm": 0.0145,
+        "max_violation": 0.0
+      },
+      "with_AC": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 14.579,
+        "max_fn_N": 0.567,
+        "invisible_fraction_of_actuated_force": 0.604,
+        "realized_residual_force_N": 0.735,
+        "realized_residual_torque_Nm": 0.0149,
+        "max_violation": 0.0
+      }
+    },
+    "K=5": {
+      "contacts": 80,
+      "actuated_contacts": 75,
+      "rank_J_act": 20,
+      "null_dim": 205,
+      "eps_sqrt_d_N": 7.16,
+      "without_AC": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 15.22,
+        "max_fn_N": 0.349,
+        "invisible_fraction_of_actuated_force": 0.687,
+        "realized_residual_force_N": 0.738,
+        "realized_residual_torque_Nm": 0.0156,
+        "max_violation": 0.0
+      },
+      "with_AC": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 15.097,
+        "max_fn_N": 0.362,
+        "invisible_fraction_of_actuated_force": 0.621,
+        "realized_residual_force_N": 0.785,
+        "realized_residual_torque_Nm": 0.0162,
+        "max_violation": 0.0
+      }
+    }
+  },
+  "E3b_precision_and_eps": {
+    "power_K5": {
+      "contacts": 80,
+      "rank_J_act": 20,
+      "null_dim": 205,
+      "no_AC": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 15.22,
+        "max_fn_N": 0.349,
+        "invisible_fraction_of_actuated_force": 0.687,
+        "realized_residual_force_N": 0.738,
+        "realized_residual_torque_Nm": 0.0156,
+        "max_violation": 0.0
+      },
+      "eps=0.5": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 15.097,
+        "max_fn_N": 0.362,
+        "invisible_fraction_of_actuated_force": 0.621,
+        "realized_residual_force_N": 0.785,
+        "realized_residual_torque_Nm": 0.0162,
+        "max_violation": 0.0
+      },
+      "eps=0.1": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 14.823,
+        "max_fn_N": 0.5,
+        "invisible_fraction_of_actuated_force": 0.532,
+        "realized_residual_force_N": 1.084,
+        "realized_residual_torque_Nm": 0.0116,
+        "max_violation": 0.0
+      },
+      "eps=0.02": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 13.819,
+        "max_fn_N": 1.155,
+        "invisible_fraction_of_actuated_force": 0.153,
+        "realized_residual_force_N": 0.362,
+        "realized_residual_torque_Nm": 0.0151,
+        "max_violation": 0.0
+      }
+    },
+    "precision_3finger_K5": {
+      "contacts": 15,
+      "rank_J_act": 10,
+      "null_dim": 35,
+      "no_AC": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 12.799,
+        "max_fn_N": 1.331,
+        "invisible_fraction_of_actuated_force": 0.385,
+        "realized_residual_force_N": 3.052,
+        "realized_residual_torque_Nm": 0.1144,
+        "max_violation": 0.0
+      },
+      "eps=0.5": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 12.165,
+        "max_fn_N": 1.272,
+        "invisible_fraction_of_actuated_force": 0.393,
+        "realized_residual_force_N": 2.909,
+        "realized_residual_torque_Nm": 0.1087,
+        "max_violation": 0.0
+      },
+      "eps=0.1": {
+        "obj_residual_N": 0.0157,
+        "sum_fn_N": 10.0,
+        "max_fn_N": 1.196,
+        "invisible_fraction_of_actuated_force": 0.169,
+        "realized_residual_force_N": 0.63,
+        "realized_residual_torque_Nm": 0.0241,
+        "max_violation": 0.0001
+      },
+      "eps=0.02": {
+        "obj_residual_N": 0.2059,
+        "sum_fn_N": 10.0,
+        "max_fn_N": 1.24,
+        "invisible_fraction_of_actuated_force": 0.031,
+        "realized_residual_force_N": 0.127,
+        "realized_residual_torque_Nm": 0.0048,
+        "max_violation": 0.0096
+      }
+    }
+  },
+  "E1_non_uniqueness": {
+    "cold_start": {
+      "obj_residual_N": 0.0,
+      "sum_fn_N": 14.579,
+      "max_fn_N": 0.567,
+      "invisible_fraction_of_actuated_force": 0.604,
+      "realized_residual_force_N": 0.735,
+      "realized_residual_torque_Nm": 0.0149
+    },
+    "random_starts": [
+      {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 29.698,
+        "max_fn_N": 2.35,
+        "invisible_fraction_of_actuated_force": 0.568,
+        "realized_residual_force_N": 3.943,
+        "realized_residual_torque_Nm": 0.0174,
+        "rel_diff_from_cold": 1.849
+      },
+      {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 37.554,
+        "max_fn_N": 3.389,
+        "invisible_fraction_of_actuated_force": 0.503,
+        "realized_residual_force_N": 5.093,
+        "realized_residual_torque_Nm": 0.007,
+        "rel_diff_from_cold": 2.847
+      },
+      {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 39.06,
+        "max_fn_N": 3.664,
+        "invisible_fraction_of_actuated_force": 0.491,
+        "realized_residual_force_N": 5.211,
+        "realized_residual_torque_Nm": 0.0132,
+        "rel_diff_from_cold": 3.014
+      },
+      {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 35.501,
+        "max_fn_N": 3.544,
+        "invisible_fraction_of_actuated_force": 0.536,
+        "realized_residual_force_N": 5.621,
+        "realized_residual_torque_Nm": 0.0134,
+        "rel_diff_from_cold": 2.61
+      },
+      {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 35.895,
+        "max_fn_N": 3.014,
+        "invisible_fraction_of_actuated_force": 0.528,
+        "realized_residual_force_N": 5.544,
+        "realized_residual_torque_Nm": 0.0068,
+        "rel_diff_from_cold": 2.652
+      },
+      {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 37.937,
+        "max_fn_N": 4.405,
+        "invisible_fraction_of_actuated_force": 0.52,
+        "realized_residual_force_N": 4.863,
+        "realized_residual_torque_Nm": 0.0125,
+        "rel_diff_from_cold": 2.992
+      },
+      {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 32.337,
+        "max_fn_N": 2.649,
+        "invisible_fraction_of_actuated_force": 0.579,
+        "realized_residual_force_N": 4.973,
+        "realized_residual_torque_Nm": 0.0078,
+        "rel_diff_from_cold": 2.158
+      },
+      {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 31.893,
+        "max_fn_N": 3.007,
+        "invisible_fraction_of_actuated_force": 0.555,
+        "realized_residual_force_N": 4.635,
+        "realized_residual_torque_Nm": 0.024,
+        "rel_diff_from_cold": 2.168
+      }
+    ],
+    "note": "목적함수(물체 잔차)는 모두 0 근처인데 Σf_n·최대 접점 힘·분포가 시작점마다 다르다"
+  },
+  "E2_continuity_1mm_jitter": {
+    "ridge=0.0": {
+      "median_rel_change": 0.018,
+      "max_rel_change": 0.022
+    },
+    "ridge=0.001": {
+      "median_rel_change": 0.013,
+      "max_rel_change": 0.015
+    },
+    "geometry_rel_change": 0.025
+  },
+  "E4_unit_weights": {
+    "torque_residual_effective_weight_vs_force_at_r": {
+      "3cm": 0.0009,
+      "5cm": 0.0025,
+      "10cm": 0.01
+    },
+    "note": "같은 크기의 접선 힘 불균형 1 N이 반지름 r에서 만드는 토크 r N·m는 비용에서 r²배로만 벌점을 받는다"
+  }
+}
