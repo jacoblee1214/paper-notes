@@ -7,6 +7,7 @@
 | 2026-10-29 | [손 전체 접점의 실시간 힘 조절 읽기: 촉각 없이 잡는다는 것, 그리고 시험이 실제로 잰 것](papers/reactive_grasp/) | 물체 메쉬와 관절각만으로 손 전체 링크의 접점을 구하고 매 주기 접촉력 QP를 다시 푸는 파지 제어기를, 그림 수치를 재계산하고 QP 구조를 toy로 뜯어 보며 같은 연구실 공개 코드와 대조해 읽었습니다. |
 | 2026-10-29 | [ThinkWorld 읽기: 이득의 대부분은 '추론'이 아니라 미래 예측 보조 손실에서 나왔다](papers/thinkworld/) | 손목 움직임 토큰으로 미래를 상상하고 그 일치로 VLA를 강화하는 ThinkWorld를, 표를 재계산하고 공개 리더보드와 대조하며 읽었습니다. |
 | 2026-10-29 | [RoboSimStudio 읽기: 쓸 만한 Real2Sim 도구, 그런데 스펀지는 손에 붙어 있었다](papers/robosimstudio/) | 사람과 코딩 에이전트가 함께 시뮬레이션 물성을 고치는 Real2Sim 도구 RoboSimStudio를, 공식 저장소와 대조하고 데모 수치를 다시 계산하며 읽었습니다. |
+| 2026-10-29 | [GPT-as-Tactile-Policy 읽고 직접 돌려 보기: 촉각을 이해하는가, 증류된 규칙을 따르는가](papers/gpt6_astra_tactile/) | GPT-6-Astra를 촉각 정책으로 쓴 논문을 표 재계산으로 검토하고, 같은 구조를 재구현해 UniVTAC 폐루프에서 2×2 실험과 반사실 촉각 실험으로 메커니즘을 떼어 봤습니다. |
 | 2026-10-29 | [Dust 읽기: 역전파 없이 Transformer를 학습한다, 그런데 무엇과 비교했나](papers/dust/) | 활성값을 토큰마다 흔들어 forward만으로 gradient를 추정하는 Dust를, 부록 표 재계산, 연산량 환산, 공식 코드 대조, numpy toy로 읽었습니다. |
 | 2026-10-29 | [AW-0 읽기: 코드로 계획하는 World Action Model, 그런데 이득은 어디서 오는가](papers/agentic_wam/) | 코드·미래 영상·행동을 한 번에 denoise하는 AW-0를 표 재계산, RoboTwin 공식 리더보드 대조, 공개 코드 대조로 읽었습니다. |
 | 2026-10-28 | [ZeroDex 읽기: 시연 없이 dexterous 손을 움직이는 다시점 VLM 그라운딩, 숫자는 어디서 나왔나](papers/zerodex/) | VLM의 2D 키포인트를 여러 보정 시점의 합의로 3D에 올려 dexterous 손을 zero-shot으로 움직이는 ZeroDex를, 표를 재계산하고 핵심 식을 toy로 구현하며 v1과 대조해 읽었습니다. |

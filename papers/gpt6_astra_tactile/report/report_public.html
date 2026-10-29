@@ -1,0 +1,3957 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GPT-as-Tactile-Policy 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="chart_"] { max-width: 82%; }
+img[src*="fig1"] { max-width: 88%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>GPT-as-Tactile-Policy: 분석 리포트</h1>
+<p class="meta">게시용 버전 · 원문 https://arxiv.org/abs/2610.28457 · arXiv:2610.28457v1 · Sun Yat-sen University, X-Era AI Lab, PolyU (Wang, Lin, Huang, Lin, Zhang, Wang) · 공식 코드 미공개 · 이 저장소에서 재구현(`code/`)과 UniVTAC 실험 · 분석 2026-10-23, 형식 정리 2026-10-29 · 논문 그림은 라이선스(CC BY 아님) 때문에 싣지 않음</p>
+
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 파라미터가 고정된 GPT-6-Astra를 단독 정책으로 쓴다. 데모 40개를 같은 모델이 요약해 텍스트 Task Skill과 촉각 reference를 만들고, 폐루프에서 RGB·양손가락 촉각·자세를 받아 EEF 목표를 직접 낸다.</li>
+<li><strong>제목 주장은 데이터와 맞지 않는다:</strong> 5-task 평균 93.8 대 N0-VTLA 96.2(−2.4%p)로 &quot;Outperform&quot;과 반대 방향이다. &quot;comparable&quot;은 ±5%p 마진에서만 방어된다. baseline 값은 출처 논문 표에서 옮겨 온 것이다.</li>
+<li><strong>촉각 ablation 99 대 31은 교란되어 있다:</strong> 촉각 관측, 촉각 reference, Task Skill이 함께 바뀌었고 태스크도 하나다.</li>
+<li><strong>우리 0단계 probe(Claude Opus 5.5, 실제 UniVTAC 데모):</strong> reference가 있으면 100%지만 1-NN도 96%다. reference가 없으면 62%이고, 센서 좌표 정보만 주면 92%다. reference 라벨을 뒤집으면 좌표 정보가 있어도 48/48 뒤집힌 라벨을 따른다.</li>
+<li><strong>우리 폐루프 2×2(카메라 없음, 조건당 20 ep):</strong> 촉각+Skill 17/20, Skill만 7/20, 촉각만 12/20, 둘 다 없음 9/20. 촉각 효과는 Skill이 있을 때만 유의하다(+50%p, McNemar p = 0.0063). 숨은 결정(−x seed)은 촉각+Skill만 풀었다(6/7).</li>
+<li><strong>반사실 촉각:</strong> 촉각 프레임만 거울 반전하면 첫 이동 20/20이 반대쪽, 성공 1/20. &quot;촉각을 이해한다&quot;는 &quot;증류된 촉각 규칙을 따른다&quot;로 좁혀 써야 하고, 규칙이 틀렸을 때 폐루프에서 고치지 못했다.</li>
+<li><strong>구현 가능성:</strong> 아이디어는 이미 이 저장소에서 재구현해 돌렸다(테스트 123개, UniVTAC 폐루프). 원문 수치 재현은 GPT-6-Astra와 원문 프롬프트가 없어 불가능하다. 결정당 약 30초(0.03 Hz)라 실시간 제어와는 거리가 멀다.</li>
+</ol>
+<p><img src="figures/chart_2x2.png" alt="2×2 결과" /></p>
+<p class="cap">우리 실험: UniVTAC Insert Hole 폐루프 2×2(Task Skill × 촉각), 조건당 20 episode. code/results/univtac51_2x2/.</p>
+</section>
+<section class="chapter"><h1>01. 논문 분석 및 리버스 엔지니어링</h1>
+<ul>
+<li>대상: Wang, Lin, Huang, Lin, Zhang, Wang, &quot;GPT-6-Astra Understands Touch and Outperform Vision–Tactile–Language–Action Models&quot;, arXiv:2610.28457v1 [cs.RO], 2026-10-20 (Sun Yat-sen University, X-Era AI Lab, The Hong Kong Polytechnic University). 프로젝트 페이지: https://gpt-as-tactile-policy.github.io/ (이 문서에서는 접속하지 않았으므로 내용은 미확인입니다).</li>
+<li>근거 자료: <code>paper/paper.txt</code> 전문과 <code>paper/page-01.png</code>, <code>page-03.png</code>, <code>page-10.png</code>, <code>page-11.png</code> 렌더 이미지를 직접 확인했습니다.</li>
+<li>표기 규칙: 원문 위치는 <code>[§3.2]</code>, <code>[Tab.2]</code>, <code>[Fig.2]</code>처럼 표기합니다. 원문에 없는 내용을 추정한 경우에는 반드시 &quot;추정&quot;이라고 쓰고, 확인할 수 없는 사실은 &quot;미확인&quot;으로 표시합니다.</li>
+<li>인용된 선행연구의 서지 정보는 이 논문의 참고문헌 목록에서 가져왔습니다. 해당 논문들의 본문 내용은 이 문서 작성 과정에서 직접 검증하지 않았으므로, 본문 수준의 세부 사항을 언급할 때에는 미확인으로 표시합니다.</li>
+</ul>
+<hr />
+<h2>1. Abstract (요약과 핵심 주장)</h2>
+<p>이 논문은 &quot;범용 멀티모달 모델이 물리 상호작용을 이해하고 그 이해를 행동 결정에 활용할 수 있는가&quot;라는 질문을, contact-rich manipulation과 촉각 이해라는 구체적인 사례로 검증하려 합니다 [Abstract, §1]. 제안 시스템인 <strong>GPT-as-Tactile-Policy</strong>는 파라미터가 고정된 GPT-6-Astra를 단독 action policy로 사용하며, 다음 두 단계로 구성됩니다.</p>
+<ol>
+<li><strong>Offline</strong>: 같은 GPT-6-Astra가 expert demonstration(태스크당 40개)을 분석하여 텍스트 형태의 Task Skill <code>K_τ</code>와 대표 촉각 reference 집합 <code>E_τ^tac</code>을 만듭니다 [§3.2, §4.1].</li>
+<li><strong>Online</strong>: scene/wrist RGB, 양손가락 촉각(이미지, 압입 깊이 통계, 마커 변위), proprioception, 에피소드 내 history를 입력으로 받아 EEF 목표 pose, gripper 목표값, 1–5 step의 실행 horizon을 출력하고, 일반 IK 제어기가 이를 실행합니다 [§3.1, §3.4].</li>
+</ol>
+<p>저자가 내세우는 핵심 수치는 다음과 같습니다.</p>
+<ul>
+<li>UniVTAC 5개 태스크에서 평균 성공률 93.8%를 달성했습니다. 비교 대상인 N0-VTLA는 96.2%, N0-TWAM은 84.6%입니다 [Tab.2].</li>
+<li>Insert Hole에서 촉각을 제거하면 성공률이 99%에서 31%로 떨어집니다 [Tab.3].</li>
+<li>추가 robotics-specific pretraining과 태스크별 파라미터 업데이트가 없습니다 [Tab.1].</li>
+</ul>
+<p>제목은 &quot;Outperform VTLA Models&quot;라고 주장하지만, 평균 기준으로는 N0-VTLA(96.2%)보다 낮습니다. 따라서 제목의 주장은 본문 결과보다 강하게 표현되어 있습니다(§4.2 참조).</p>
+<hr />
+<h2>2. Method</h2>
+<h3>2.1 상위 패러다임: GPT-as-Policy</h3>
+<p>이 논문은 같은 연구 계열의 선행 연구인 GPT-as-Policy(&quot;Systematically exploring the capabilities of GPT-6 Astra as embodied policies&quot;, Team et al., arXiv:2609.38537)의 direct-control 정식화를 그대로 계승합니다 [§2.1, §3.1]. 해당 정식화에서 GPT는 수치형 EEF/gripper 목표를 직접 생성하고, generic IK 제어기가 이를 관절 명령으로 바꾸며, 실행 후 새로운 관측이 다시 모델로 돌아갑니다. 이 논문의 기여는 그 루프에 (i) 양손가락 촉각 관측과 (ii) 데모로부터 증류한 고정 컨텍스트 <code>C_τ</code>를 추가한 것입니다. 액션 포맷, 프롬프트 구조, 출력 파싱 방식 등 세부 구현은 상위 논문에 있을 것으로 보이지만, 이 문서에서는 arXiv:2609.38537 본문을 확인하지 못했으므로 미확인입니다.</p>
+<h3>2.2 식 (1): 조건부 액션 생성</h3>
+<pre><code>a_t ~ π_θ(· | ℓ, C_τ, o_t, H_t),   o_t = (V_t, s_t, T_t)            (1)
+</code></pre>
+<ul>
+<li><code>ℓ</code>: 자연어 태스크 지시입니다.</li>
+<li><code>C_τ</code>: 태스크 τ에 대해 고정된 컨텍스트(식 2)입니다. 평가 전에 고정되며 같은 태스크의 모든 테스트 에피소드에서 공유됩니다 [§4.1].</li>
+<li><code>o_t</code>: <code>V_t</code>(scene RGB와 wrist RGB), <code>s_t</code>(proprioception), <code>T_t</code>(양손가락 촉각, 식 3)로 구성됩니다.</li>
+<li><code>H_t</code>: 에피소드 내의 이전 관측, 액션, &quot;execution feedback&quot;입니다. 에피소드마다 독립된 모델 세션을 시작하므로 에피소드 사이에 history가 리셋됩니다 [§4.1].</li>
+<li><code>a_t</code>: 목표 EEF pose, gripper position, 짧은 실행 horizon(1–5 control step)으로 이루어집니다 [§3.1, §3.4].</li>
+<li><code>θ</code>: offline 요약과 online 실행 모두에서 고정됩니다.</li>
+</ul>
+<p>해설하면 식 (1)은 학습 대상 정책을 정의하는 식이 아니라, <strong>in-context conditioning 구조를 선언하는 식</strong>입니다. <code>π_θ</code>는 확률적 정책으로 표기되어 있지만, 샘플링 온도나 seed 같은 디코딩 설정은 보고되지 않았습니다(미확인). reasoning effort가 <code>xhigh</code>로 고정되었다는 사실만 명시되어 있습니다 [§4.1]. 결국 식 (1)이 의미하는 바는 &quot;정책 개선이 파라미터 공간이 아니라 컨텍스트 공간(<code>C_τ</code>, <code>H_t</code>)에서 일어난다&quot;는 것이며, 이것이 논문이 주장하는 &quot;no parameter updates&quot;의 실체입니다.</p>
+<h3>2.3 식 (2): 고정 태스크 컨텍스트</h3>
+<pre><code>C_τ = { K_τ, E_τ^tac }                                               (2)
+</code></pre>
+<ul>
+<li><code>K_τ</code>(Task Skill)은 텍스트입니다. 원문에 따르면 Task Skill은 (a) task objectives, (b) manipulation principles, (c) stage transition의 근거(evidence), (d) 장애물 상황에서의 corrective strategies로 구성되며, &quot;어떤 관측을 살펴보고 그것이 이후 행동에 어떻게 반영되어야 하는지&quot;를 명시합니다 [§3.2]. 원문이 제시한 유일한 구체 예시는 &quot;삽입 중 deformation은 증가하는데 물체가 전진하지 않으면 후퇴하여 접촉을 해소하고, 이어서 위치 또는 각도를 조정한 뒤 후속 피드백으로 그 효과를 평가한다&quot;입니다 [§3.2].</li>
+<li><code>E_τ^tac</code>은 데모에서 GPT-6-Astra가 직접 골라낸 대표 촉각 관측이며, &quot;양손가락 접촉 분포와 국소 변형 패턴을 보존한다&quot;고만 설명되어 있습니다 [§3.2, §4.1]. 몇 장을 고르는지, 어떤 기준으로 고르는지, 이미지 형태인지 descriptor 형태인지는 보고되지 않았습니다(미확인).</li>
+</ul>
+<p>해설하면 <code>K_τ</code>는 촉각 신호에 **조작적 의미(operational meaning)**를 부여하는 규칙집 역할을 하고, <code>E_τ^tac</code>은 그 규칙을 지각적으로 grounding하는 few-shot exemplar 역할을 합니다. 구조적으로 보면 이 설계는 REFLECT(Liu et al., arXiv:2306.15724)처럼 경험을 언어로 요약하는 접근과, VLM에 few-shot 시각 예시를 주는 in-context imitation을 결합한 형태입니다.</p>
+<h3>2.4 식 (3): 촉각 관측 표현</h3>
+<pre><code>T_t = { I_t^f, D_t^f, M_t^f }_{f ∈ {L, R}}                          (3)
+</code></pre>
+<ul>
+<li><code>I_t^f</code>: 손가락 f의 촉각 이미지입니다. [Fig.1A]와 [Fig.3]으로 보면 GelSight 계열의 마커 격자가 있는 RGB 이미지이며, 육안으로 대략 10×8 규모의 마커 격자가 보입니다(정확한 개수는 미확인).</li>
+<li><code>D_t^f</code>: gel 압입(indentation) 맵을 공간적으로 pooling한 뒤 계산한 통계입니다. 원문에 명시된 항목은 mean indentation, peak indentation, contact region, centroid입니다 [§3.3].</li>
+<li><code>M_t^f</code>: reference 위치 대비 마커의 2D 변위입니다 [§3.3]. [Fig.4]에서는 흰 배경 위의 quiver 형태로 시각화되어 있으며, [Fig.1A]에는 &quot;Indentation&quot; 히트맵과 &quot;Marker motion&quot; quiver가 별도의 패널로 그려져 있습니다. 따라서 모델이 마커 변위를 수치로 받는지, 렌더링된 quiver 이미지로 받는지, 혹은 둘 다 받는지는 확정할 수 없습니다(미확인이며, 리버스 엔지니어링 (d)에서 추정합니다).</li>
+<li>두 손가락의 정보는 분리된 채로 유지되어, 모델이 좌우 접촉 차이와 그 변화를 비교할 수 있도록 합니다 [§3.3].</li>
+</ul>
+<p>해설하면, 이미지(<code>I</code>)는 국소 디테일을 보존하고 descriptor(<code>D</code>, <code>M</code>)는 시점 간 정량 비교를 쉽게 만드는 이중 표현입니다. LLM은 이미지 두 장 사이의 미세한 차이를 수치적으로 비교하는 데 약하므로, 이 이중 표현은 합리적인 설계입니다. 다만 <code>D</code>는 시뮬레이터가 제공하는 정답 압입 깊이에 의존할 가능성이 높습니다. 실제 GelSight 센서에서는 photometric stereo 등으로 depth를 복원해야 하므로 sim-to-real 간극이 생깁니다(Limitations L5 참조).</p>
+<p>또한 저자는 &quot;연속된 관측 사이의 indentation 분포와 마커 변위를 같은 구간의 EEF/gripper 실측 이동량과 함께 비교한다&quot;고 서술합니다 [§3.3]. 즉 모델 입력에는 <strong>액션 전후의 차분 정보</strong>가 포함되어야 합니다. 이 차분을 시스템이 미리 계산해서 주는지, 모델이 history에서 직접 비교하는지는 미확인입니다.</p>
+<h3>2.5 Offline 지식 구성 데이터 흐름</h3>
+<pre><code>UniVTAC expert demos (태스크당 50개)
+  ├─ 40개: knowledge construction
+  │     └─ GPT-6-Astra(θ 고정)가 &quot;액션 전후의 접촉 변화 + 물체 이동 + 태스크 진행&quot;을 함께 분석
+  │           ├─ K_τ : Task Skill 텍스트 (objectives / principles / stage evidence / corrective strategies)
+  │           └─ E_τ^tac : 대표 촉각 reference
+  └─ 10개: &quot;offline validation&quot; (용도는 서술되지 않음)
+→ C_τ = {K_τ, E_τ^tac} 를 평가 전에 고정하고, 해당 태스크의 100개 테스트 에피소드 전체에서 재사용
+</code></pre>
+<p>근거는 [§3.2]와 [§4.1]입니다. 40개 데모 전체를 한 번의 컨텍스트에 넣었는지, 데모별로 분석한 뒤 집계(map-reduce)했는지, 사람이 결과를 검수하거나 수정했는지는 보고되지 않았습니다(미확인). 10개 validation 데모가 Task Skill을 반복적으로 수정하는 데 쓰였다면, 이는 사실상 사람이 수행하는 prompt optimization에 해당합니다(L1 참조).</p>
+<h3>2.6 Online 폐루프 데이터 흐름</h3>
+<pre><code>for t = 0, 1, ...:
+  o_t ← (scene RGB, wrist RGB, s_t, {I, D, M}_{L,R})
+  a_t ← GPT-6-Astra(xhigh)(ℓ, C_τ, o_t, H_t)          # 목표 EEF pose, gripper, horizon h ∈ {1..5}
+  bound/format 검사 → 통과하면 IK 제어기가 h control step 동안 실행
+  o_{t+1} 획득, H_{t+1} ← H_t ∪ {o_t, a_t, feedback}
+  (다음 호출에서) o_t와 o_{t+1}을 비교하여 진행 여부 판단 → 전진 / probing / 교정 선택
+종료: 환경의 native success 조건을 만족하거나, 실행 예산을 소진하면 종료합니다(후자는 실패로 처리).
+</code></pre>
+<p>근거는 [§3.4]와 [§4.1]입니다. 원문은 액션을 &quot;최신 측정 로봇 상태로부터 구성한다&quot;고 서술합니다 [§3.4]. 이는 모델이 현재 실측 pose를 기준으로 목표를 계산한다는 뜻이며, 액션이 절대 목표 pose이더라도 그 값이 사실상 &quot;현재 pose + 증분&quot;으로 만들어진다는 점을 시사합니다. 불확실한 상황에서는 작은 병진, 자세 조정, gripper 개도 변경 같은 탐색 액션을 수행하고, 그 결과가 <code>H_t</code>에 누적됩니다 [§3.4]. [Fig.4]는 같은 에피소드 안에서 near-vertical(step 30→35→40), leftward(119→124→127), rightward(191→194→199) 방향의 probing을 차례로 시도하는 모습을 보여줍니다.</p>
+<h3>2.7 [Fig.1A] 구성요소 매핑</h3>
+<table>
+<thead>
+<tr>
+<th>Fig.1A 구성요소</th>
+<th>식/기호</th>
+<th>원문 근거</th>
+<th>구현상 대응 (추정 포함)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scene RGB, Wrist RGB</td>
+<td><code>V_t</code></td>
+<td>§3.1</td>
+<td>시뮬레이터 카메라 2대의 프레임</td>
+</tr>
+<tr>
+<td>L/R touch</td>
+<td><code>I_t^{L,R}</code></td>
+<td>§3.3</td>
+<td>마커가 있는 GelSight형 촉각 이미지</td>
+</tr>
+<tr>
+<td>Indentation</td>
+<td><code>D_t^f</code></td>
+<td>§3.3</td>
+<td>압입 맵을 pooling한 통계 (텍스트/JSON, 추정)</td>
+</tr>
+<tr>
+<td>Marker motion</td>
+<td><code>M_t^f</code></td>
+<td>§3.3</td>
+<td>마커 변위 벡터장 (수치 및/또는 quiver 이미지, 추정)</td>
+</tr>
+<tr>
+<td>Expert demos <code>D_expert</code> → Offline analysis</td>
+<td>—</td>
+<td>§3.2</td>
+<td>GPT-6-Astra 분석 호출 (오프라인 배치)</td>
+</tr>
+<tr>
+<td>Frozen context: Knowledge <code>K_τ</code>, Touch refs <code>E_τ</code></td>
+<td><code>C_τ</code> (식 2)</td>
+<td>§3.2</td>
+<td>시스템 프롬프트 + reference 이미지 블록 (추정)</td>
+</tr>
+<tr>
+<td>Instruction <code>ℓ</code></td>
+<td><code>ℓ</code></td>
+<td>§3.1</td>
+<td>태스크 지시 문자열</td>
+</tr>
+<tr>
+<td>Observation <code>o_t</code> (Vision, touch, state)</td>
+<td><code>o_t</code></td>
+<td>§3.1</td>
+<td>스텝별 user 메시지 (추정)</td>
+</tr>
+<tr>
+<td>History <code>H_t</code></td>
+<td><code>H_t</code></td>
+<td>§3.1, §4.1</td>
+<td>에피소드 단위 세션의 대화 맥락 (추정)</td>
+</tr>
+<tr>
+<td>GPT-6-Astra Policy <code>π_θ</code></td>
+<td><code>π_θ</code></td>
+<td>§3.1, §4.1</td>
+<td>reasoning effort xhigh</td>
+</tr>
+<tr>
+<td>Action <code>a_t</code>: EEF pose, Gripper, Steps</td>
+<td><code>a_t</code></td>
+<td>§3.1, §3.4</td>
+<td>구조화된 출력 (JSON, 추정)</td>
+</tr>
+<tr>
+<td>IK + execute</td>
+<td>—</td>
+<td>§3.4</td>
+<td>bound/format 검사 → generic IK → h step 실행</td>
+</tr>
+<tr>
+<td>New input <code>o_{t+1}, H_{t+1}</code></td>
+<td>—</td>
+<td>§3.4</td>
+<td>다음 호출의 입력</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Experiments</h2>
+<h3>3.1 설정 요약</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>벤치마크</td>
+<td>UniVTAC (Chen et al., arXiv:2602.10093): 시뮬레이션 전용</td>
+<td>§4.1</td>
+</tr>
+<tr>
+<td>태스크</td>
+<td>Insert Hole, Lift Can, Grasp Classify, Lift Bottle, Pull-out Key</td>
+<td>§4.1</td>
+</tr>
+<tr>
+<td>데모</td>
+<td>태스크당 50개 = 40개(knowledge construction) + 10개(offline validation)</td>
+<td>§4.1</td>
+</tr>
+<tr>
+<td>정책</td>
+<td>GPT-6-Astra, reasoning effort xhigh, 모든 태스크에서 동일 설정</td>
+<td>§4.1</td>
+</tr>
+<tr>
+<td>세션</td>
+<td>에피소드마다 독립 세션, history는 에피소드 내에서만 유지</td>
+<td>§4.1</td>
+</tr>
+<tr>
+<td>평가</td>
+<td>태스크당 고정 테스트 에피소드 100개, 총 500개. 환경의 native success 기준 사용. 태스크 단순 평균</td>
+<td>§4.1</td>
+</tr>
+<tr>
+<td>실행 예산</td>
+<td>수치는 보고되지 않음. [Fig.2]의 w/o tactile 실패 에피소드가 step 300에서 끝나므로 Insert Hole의 상한은 300 control step으로 추정</td>
+<td>Fig.2 (추정)</td>
+</tr>
+</tbody>
+</table>
+<h3>3.2 [Tab.1] 학습 비용 비교 (원문 재정리)</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Specialized pretraining</th>
+<th>Per-task training</th>
+<th>Knowledge-guided probing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACT + UniVTAC</td>
+<td>Tactile encoder</td>
+<td>50 demos; 4,000 steps</td>
+<td>×</td>
+</tr>
+<tr>
+<td>N0-VTLA</td>
+<td>Multi-node cluster</td>
+<td>One policy per task</td>
+<td>×</td>
+</tr>
+<tr>
+<td>N0-TWAM</td>
+<td>128×H800; 8×A100</td>
+<td>One policy/task; 1k steps</td>
+<td>×</td>
+</tr>
+<tr>
+<td>Ours</td>
+<td>No additional pretraining</td>
+<td>No parameter updates</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p>이 표는 <strong>학습 비용만</strong> 비교하고 <strong>추론 비용</strong>(호출 수, 토큰, 지연시간)은 다루지 않습니다. 또한 GPT-6-Astra 자체의 사전학습 비용과 학습 데이터 구성도 공개되지 않았으므로 &quot;No additional pretraining&quot;이라는 비교 기준은 비대칭입니다(L2 참조).</p>
+<h3>3.3 [Tab.2] 주 결과 재정리와 통계적 해석</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Insert Hole</th>
+<th>Lift Can</th>
+<th>Grasp Classify</th>
+<th>Lift Bottle</th>
+<th>Pull-out Key</th>
+<th>Mean</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACT + UniVTAC Encoder</td>
+<td>24.0</td>
+<td>29.0</td>
+<td>99.0</td>
+<td>71.0</td>
+<td>46.0</td>
+<td>53.8</td>
+</tr>
+<tr>
+<td>π0.5</td>
+<td>25.0</td>
+<td>6.0</td>
+<td>49.0</td>
+<td><strong>100.0</strong></td>
+<td>35.0</td>
+<td>43.0</td>
+</tr>
+<tr>
+<td>N0-VTLA</td>
+<td>95.0</td>
+<td>88.0</td>
+<td><strong>100.0</strong></td>
+<td>99.0</td>
+<td><strong>99.0</strong></td>
+<td><strong>96.2</strong></td>
+</tr>
+<tr>
+<td>N0-TWAM</td>
+<td><strong>99.0</strong></td>
+<td>93.0</td>
+<td>94.0</td>
+<td>58.0</td>
+<td>79.0</td>
+<td>84.6</td>
+</tr>
+<tr>
+<td>Ours</td>
+<td><strong>99.0</strong></td>
+<td><strong>95.0</strong></td>
+<td>98.0</td>
+<td>93.0</td>
+<td>84.0</td>
+<td>93.8</td>
+</tr>
+</tbody>
+</table>
+<p>[Fig.1C]의 막대그래프 수치는 [Tab.2]와 일치합니다(page-01.png에서 직접 대조했습니다).</p>
+<p>아래 통계는 이 문서에서 직접 계산한 것입니다. 각 셀을 n=100 Bernoulli 시행으로 가정했고, baseline도 n=100이라고 가정했습니다. baseline의 실제 시행 수와 seed 구성은 미확인입니다.</p>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>차이</th>
+<th>검정 결과 (two-proportion z, 양측)</th>
+<th>해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert Hole: Ours 99 vs N0-VTLA 95</td>
+<td>+4pp</td>
+<td>z=1.66, p≈0.10</td>
+<td>유의하지 않음</td>
+</tr>
+<tr>
+<td>Lift Can: Ours 95 vs N0-VTLA 88</td>
+<td>+7pp</td>
+<td>z=1.77, p≈0.08</td>
+<td>유의하지 않음</td>
+</tr>
+<tr>
+<td>Lift Can: Ours 95 vs N0-TWAM 93</td>
+<td>+2pp</td>
+<td>z=0.60, p≈0.55</td>
+<td>유의하지 않음</td>
+</tr>
+<tr>
+<td>Grasp Classify: Ours 98 vs N0-VTLA 100</td>
+<td>−2pp</td>
+<td>p≈0.16</td>
+<td>유의하지 않음</td>
+</tr>
+<tr>
+<td>Lift Bottle: Ours 93 vs N0-VTLA 99</td>
+<td>−6pp</td>
+<td>z=−2.17, p≈0.03</td>
+<td>유의하게 열세</td>
+</tr>
+<tr>
+<td>Pull-out Key: Ours 84 vs N0-VTLA 99</td>
+<td>−15pp</td>
+<td>z=−3.80, p&lt;0.001</td>
+<td>유의하게 열세</td>
+</tr>
+<tr>
+<td>Mean: Ours 93.8 vs N0-VTLA 96.2</td>
+<td>−2.4pp</td>
+<td>SE≈1.34pp, z≈−1.79, p≈0.07</td>
+<td>경계선, 수치상 열세</td>
+</tr>
+<tr>
+<td>Insert Hole 촉각 ablation: 99 vs 31</td>
+<td>+68pp</td>
+<td>Wilson 95% CI: [94.6, 99.8] vs [22.8, 40.6]</td>
+<td>매우 유의함</td>
+</tr>
+</tbody>
+</table>
+<p>Wilson 95% 신뢰구간(Ours 기준)은 Insert Hole [94.6, 99.8], Lift Can [88.8, 97.8], Grasp Classify [93.0, 99.4], Lift Bottle [86.3, 96.6], Pull-out Key [75.6, 89.9]입니다.</p>
+<p>해석하면, 저자가 &quot;우위&quot;로 제시한 항목(Insert Hole에서 N0-VTLA보다 높음, Lift Can 최고치)은 모두 통계적으로 유의하지 않습니다. 반면 열세인 항목(Pull-out Key, Lift Bottle에서 N0-VTLA보다 낮음)은 유의합니다. 따라서 &quot;comparable to SOTA&quot;라는 본문 표현은 대체로 방어할 수 있지만, 제목의 &quot;Outperform VTLA Models&quot;는 데이터가 지지하지 않습니다. 반면 &quot;N0-TWAM과 모든 태스크에서 동등하거나 그 이상&quot;이라는 주장 [§4.2]은 수치상 사실이며, 특히 Lift Bottle(93 vs 58)에서 차이가 큽니다.</p>
+<h3>3.4 [Tab.3] 촉각 ablation (Insert Hole 전용)</h3>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>Online 관측</th>
+<th>성공률</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ours</td>
+<td>V+P+T</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td>w/o tactile</td>
+<td>V+P</td>
+<td>31.0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>w/o tactile 조건에서는 촉각 관측과 촉각 reference를 모두 제거하고, <strong>&quot;사용 가능한 관측에 맞춘&quot; 별도의 고정 Task Skill</strong>을 사용합니다 [§4.3]. 두 조건은 같은 100개 테스트 설정, 같은 초기화, 같은 저수준 제어기와 실행 예산을 공유합니다 [§4.3].</li>
+<li>[Fig.2]의 대표 에피소드에서 w/ tactile 조건은 튜브 축을 약 30° 바꾸고 측면으로 약 40mm 이동한 뒤 step 191에 삽입을 완료합니다. w/o tactile 조건은 축 변화가 5° 미만에 머물고 측면 변위가 거의 0인 채로 step 300에 실패합니다.</li>
+<li>주의할 점이 있습니다. [Fig.3D]의 keyframe(&quot;Rock to align&quot;, &quot;Correct alignment&quot;)과 [Fig.2]의 약 30° 축 변화로 보면, Insert Hole의 구멍은 기울어진 형상일 가능성이 높습니다. 그렇다면 필요한 교정량은 &quot;local pose error&quot;라고 부르기에는 상당히 큽니다. 또한 vision-only 조건이 31%에 그친 원인이 촉각 정보의 부재인지, 촉각 없이 증류된 Task Skill에 &quot;기울여서 정렬한다&quot;는 교정 전략이 빠졌기 때문인지를 이 실험으로는 구분할 수 없습니다(L7 참조).</li>
+</ul>
+<h3>3.5 Baseline 설명</h3>
+<table>
+<thead>
+<tr>
+<th>Baseline</th>
+<th>정체</th>
+<th>출처</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACT + UniVTAC Encoder</td>
+<td>ACT(Action Chunking Transformer) 정책에 UniVTAC의 사전학습 visuo-tactile 인코더를 결합한 정책입니다. 태스크당 50 demo, 4,000 step으로 학습합니다 [Tab.1].</td>
+<td>Chen et al., UniVTAC, arXiv:2602.10093</td>
+<td>ACT 원 논문(Zhao et al., &quot;Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware&quot;, RSS 2023, arXiv:2304.13705)은 이 논문의 참고문헌에 없습니다.</td>
+</tr>
+<tr>
+<td>π0.5</td>
+<td>Physical Intelligence의 VLA입니다. 이 논문에서는 vision-only baseline으로 사용됩니다.</td>
+<td>Intelligence et al., arXiv:2504.16054</td>
+<td>UniVTAC 태스크에 어떻게 fine-tuning했는지는 미확인입니다.</td>
+</tr>
+<tr>
+<td>E0</td>
+<td>Tweedie discrete diffusion 기반의 이산 액션 VLA입니다. 원문에서 vision-only baseline으로 언급됩니다 [§4.1].</td>
+<td>Zhan et al., NeurIPS 2026</td>
+<td><strong>[Tab.2]와 [Fig.1C]에 결과가 없습니다.</strong> 본문 언급과 결과 표가 서로 불일치합니다. 또한 E0의 저자 중 L. Lin과 G. Wang은 이 논문의 저자이기도 합니다.</td>
+</tr>
+<tr>
+<td>N0-VTLA</td>
+<td>latent tactile token을 예측하는 경로를 가진 대규모 visuo-tactile 사전학습 VTLA이며, 저장된 배포 데이터로 offline policy improvement를 수행합니다 [§2.2].</td>
+<td>Team et al., arXiv:2607.23782</td>
+<td>태스크별로 정책을 하나씩 학습합니다 [Tab.1].</td>
+</tr>
+<tr>
+<td>N0-TWAM</td>
+<td>미래의 vision, touch, action을 함께 예측하는 tactile-native world-action model입니다. 통합된 force 기반 촉각 표현과 contact-event 기반 태스크 staging을 사용합니다 [§2.2].</td>
+<td>Team et al., arXiv:2607.23783</td>
+<td>사전학습에 128×H800과 8×A100을 사용했고, 태스크별로 1k step을 학습합니다 [Tab.1].</td>
+</tr>
+</tbody>
+</table>
+<p>원문은 &quot;previously evaluated on UniVTAC&quot;인 baseline <strong>4개</strong>와 비교한다고 쓰면서 실제로는 <strong>5개</strong>(E0, π0.5, ACT+UniVTAC, N0-VTLA, N0-TWAM)를 나열합니다 [§4.1]. baseline 수치를 저자가 직접 재실행했는지, 기존 논문에서 가져왔는지도 명시되어 있지 않습니다. &quot;previously evaluated&quot;라는 표현으로 보아 기존 보고치를 인용했을 가능성이 높으며(확실도: 중간), 그렇다면 테스트 seed, 에피소드 예산, 성공 판정이 완전히 같다는 보장이 없습니다.</p>
+<h3>3.6 정성 결과</h3>
+<ul>
+<li>[Fig.3]: Grasp Classify(목표 근처에서 위치 미세조정), Pull-out Key(시험 당김 → 각도 조정 → 인출), Lift Bottle(파지 → 들고 기울임 → 세움 → 놓음), Insert Hole(하강이 막힘 → 흔들어 정렬 → 전진)의 성공 사례를 보여줍니다.</li>
+<li>[Fig.4]: Insert Hole의 한 에피소드에서 세 방향으로 probing을 시도합니다. 전진 중 마커 변위가 커지면 후퇴하고, 변위가 작으면 계속 전진하는 패턴이 나타납니다. 이 패턴은 [§3.2]의 Task Skill 예시 규칙과 정확히 일치합니다. 그러므로 이 결과는 &quot;모델이 촉각 물리를 이해한다&quot;는 증거라기보다 &quot;모델이 증류된 규칙을 충실히 따른다&quot;는 증거로 해석하는 편이 보수적입니다.</li>
+<li>사소한 불일치도 있습니다. [Fig.2]의 w/ tactile 에피소드는 step 191에 완료되는데, [Fig.4]의 에피소드는 step 191에서 rightward probing을 시작합니다. 따라서 두 그림은 서로 다른 에피소드입니다. 원문은 [Fig.4]를 &quot;a single Insert Hole episode&quot;라고만 설명하므로 모순은 아니지만, 독자가 혼동할 수 있습니다.</li>
+</ul>
+<hr />
+<h2>4. Limitations (비판적 검토)</h2>
+<p>저자는 별도의 Limitations 절을 두지 않았습니다. 아래는 원문에 근거한 비판이며, 각 항목에 근거 위치를 붙였습니다.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>한계</th>
+<th>근거 위치</th>
+<th>영향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1</td>
+<td><strong>&quot;Training-free&quot; 표기와 실제 데이터 사용의 괴리.</strong> [Fig.1C] 범례는 &quot;Ours (Training-free)&quot;라고 표기하지만, 태스크당 40개 데모를 in-context로 증류하고 10개를 &quot;offline validation&quot;에 사용합니다. validation이 Task Skill을 반복 수정하는 데 쓰였다면, 이는 사람 또는 모델이 수행하는 prompt-level optimization입니다. 데이터 사용량(50 demo)은 ACT+UniVTAC(50 demo)와 같은 수준입니다.</td>
+<td>Fig.1C, §4.1, Tab.1</td>
+<td>주장 과장. &quot;parameter-free adaptation&quot;이 더 정확한 표현입니다.</td>
+</tr>
+<tr>
+<td>L2</td>
+<td><strong>비대칭적인 비용 비교.</strong> [Tab.1]은 baseline의 사전학습 비용(128×H800 등)을 나열하지만, GPT-6-Astra의 사전학습 비용과 데이터(로보틱스나 촉각 데이터 포함 여부)는 공개되지 않았습니다. &quot;No additional robotics-specific pretraining&quot;은 검증할 수 없는 주장입니다. UniVTAC 유사 데이터가 사전학습에 섞였을 가능성(contamination)도 배제할 수 없습니다(미확인).</td>
+<td>Tab.1, Abstract</td>
+<td>비교의 공정성</td>
+</tr>
+<tr>
+<td>L3</td>
+<td><strong>추론 비용과 지연시간을 보고하지 않음.</strong> reasoning effort가 xhigh이고, 1–5 step마다 한 번씩 호출하며, 에피소드는 약 191–300 step입니다. 에피소드당 수십에서 백 회 이상의 호출이 필요할 것으로 추정되지만(리버스 엔지니어링 (g) 참조), 토큰 수, API 비용, 호출당 지연, 에피소드 wall-clock 시간이 모두 빠져 있습니다.</td>
+<td>§4.1, §3.4, Fig.2</td>
+<td>실시간 제어 가능성과 실용성을 평가할 수 없습니다.</td>
+</tr>
+<tr>
+<td>L4</td>
+<td><strong>시뮬레이션 전용 평가.</strong> 5개 태스크 모두 UniVTAC 시뮬레이션에서만 평가했습니다. 시뮬레이션은 LLM 호출 동안 시간을 멈출 수 있지만, 실제 로봇에서는 수십 초 단위의 지연 동안 접촉 상태가 유지된다는 보장이 없습니다.</td>
+<td>§4.1</td>
+<td>실세계 일반화 미검증</td>
+</tr>
+<tr>
+<td>L5</td>
+<td><strong>촉각 descriptor가 시뮬레이터의 특권 정보에 의존할 가능성.</strong> <code>D_t</code>는 &quot;gel indentation map&quot;에서 계산합니다. 시뮬레이터에서는 정답 depth를 쉽게 얻지만, 실제 GelSight에서는 photometric stereo로 복원해야 하며 노이즈가 큽니다. 마커 변위 역시 실제 센서에서는 마커 추적 오차가 생깁니다.</td>
+<td>§3.3</td>
+<td>sim-to-real 간극</td>
+</tr>
+<tr>
+<td>L6</td>
+<td><strong>단일 run이며 신뢰구간이 없음.</strong> 각 설정을 100 에피소드로 한 번만 실행했고, CI, seed 분산, 반복 실행 결과가 없습니다. 3.3절의 계산에 따르면 저자가 강조한 우위는 유의하지 않고, 열세(Pull-out Key, Lift Bottle)는 유의합니다. closed model은 같은 입력에도 출력이 달라질 수 있어 run 간 분산을 보고하는 것이 특히 중요합니다.</td>
+<td>Tab.2, Tab.3, §4.1</td>
+<td>결론의 통계적 강도 부족</td>
+</tr>
+<tr>
+<td>L7</td>
+<td><strong>촉각 ablation의 confound.</strong> w/o tactile 조건은 촉각 관측만 제거한 것이 아니라 Task Skill 자체를 촉각 없이 다시 증류했습니다(&quot;fixed Task Skill matched to its available observations&quot;). 따라서 99→31의 차이에는 (i) online 촉각 관측의 효과, (ii) offline 증류 단계에서 촉각을 본 효과, (iii) 촉각 reference의 효과가 섞여 있습니다. 이를 분리하려면 2×2(또는 2×2×2) 설계가 필요합니다. 예를 들어 촉각 기반 Task Skill을 유지한 채 online 촉각만 제거하는 조건이 필요합니다.</td>
+<td>§4.3</td>
+<td>인과 귀속 불가</td>
+</tr>
+<tr>
+<td>L8</td>
+<td><strong>구성요소 ablation 부재.</strong> Task Skill 유무(zero-shot), 촉각 reference 유무, descriptor(<code>D</code>,<code>M</code>)와 이미지(<code>I</code>)의 상대 기여, history 길이와 truncation, horizon 상한(1–5) 고정 대비 가변, reasoning effort(xhigh 대비 low/medium), 데모 수(40 대비 5/10/20)에 대한 ablation이 하나도 없습니다. 특히 &quot;모델이 촉각을 이해한다&quot;는 제목의 주장을 검증하려면 Task Skill 없는 조건이 핵심인데 이 조건이 빠져 있습니다.</td>
+<td>§4.3 (ablation 1종)</td>
+<td>메커니즘 주장 근거 부족</td>
+</tr>
+<tr>
+<td>L9</td>
+<td><strong>ablation이 Insert Hole 하나뿐임.</strong> 나머지 4개 태스크에서 촉각의 기여는 측정되지 않았습니다. Grasp Classify는 &quot;tactile classification&quot;을 포함한다고 설명되지만 [§4.1] 촉각 제거 결과가 없습니다.</td>
+<td>§4.1, §4.3</td>
+<td>일반화 불가</td>
+</tr>
+<tr>
+<td>L10</td>
+<td><strong>closed model 재현성.</strong> GPT-6-Astra의 버전이나 스냅샷, 날짜, 디코딩 설정(temperature 등), 프롬프트 원문, Task Skill 원문, reference 선택 결과가 공개되지 않았습니다(프로젝트 페이지 내용은 미확인). 모델이 업데이트되면 결과를 재현할 수 없습니다.</td>
+<td>§4.1</td>
+<td>재현성</td>
+</tr>
+<tr>
+<td>L11</td>
+<td><strong>&quot;이해(understands)&quot;라는 주장의 범위.</strong> 관찰된 행동([Fig.4]: 변위가 크면 후퇴하고 작으면 전진)은 [§3.2]에 명시된 Task Skill 규칙과 동형입니다. 규칙 추종과 물리 이해를 구분하는 실험(규칙에 없는 새로운 접촉 상황, 반사실적 촉각 입력, Task Skill 없는 조건)이 없습니다.</td>
+<td>Title, §3.2, §4.4</td>
+<td>제목 과장</td>
+</tr>
+<tr>
+<td>L12</td>
+<td><strong>실패 분석 부재.</strong> Pull-out Key(84%)와 Lift Bottle(93%)에서 N0-VTLA보다 유의하게 낮은 원인(지연, horizon 제약, 동적 동작, 파싱 실패 등)을 분석하지 않았습니다. 형식 오류나 bound 위반 시 재시도 정책도 서술되지 않았습니다 [§3.4].</td>
+<td>Tab.2, §3.4</td>
+<td>약점 파악 불가</td>
+</tr>
+<tr>
+<td>L13</td>
+<td><strong>baseline 프로토콜의 불확실성.</strong> baseline 수치의 출처(재실행인지 인용인지)와 seed 일치 여부가 명시되지 않았습니다. E0는 baseline으로 언급되었지만 결과가 없으며, &quot;4개 baseline&quot;이라고 쓰고 5개를 나열합니다.</td>
+<td>§4.1, Tab.2</td>
+<td>비교 신뢰도</td>
+</tr>
+<tr>
+<td>L14</td>
+<td><strong>데이터 누설 가능성.</strong> 50개 expert 데모의 초기 설정과 100개 테스트 seed가 분리되어 있는지 명시되지 않았습니다. 촉각 reference가 테스트와 같은 초기 조건에서 나왔다면 사실상 테스트 정보를 참조하는 셈이 됩니다(미확인).</td>
+<td>§4.1</td>
+<td>일반화 과대평가 가능성</td>
+</tr>
+<tr>
+<td>L15</td>
+<td><strong>명칭과 서술의 비일관성.</strong> GPT-as-Tactile-Policy와 GPT-as-Policy를 혼용합니다([§4.2], [Fig.2] 캡션). 제목의 문법(&quot;Outperform&quot;)도 어색합니다. 결과에는 영향이 없지만 원고 완성도가 낮다는 신호입니다.</td>
+<td>Title, §4.2, Fig.2</td>
+<td>경미</td>
+</tr>
+<tr>
+<td>L16</td>
+<td><strong>안전과 힘 제어 부재.</strong> 위치 목표만 출력하며 힘이나 임피던스 제어, 접촉력 상한을 서술하지 않습니다. 시뮬레이션에서는 과도한 압입이 문제가 되지 않지만, 실제 환경에서는 센서나 물체 손상 위험이 있습니다. Tactile-VLA(Huang et al., arXiv:2507.09160)의 hybrid position-force control과 대조됩니다.</td>
+<td>§3.1, §3.4</td>
+<td>실세계 적용성</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>5. Reverse Engineering</h2>
+<p>각 항목에 **확실도(높음/중간/낮음)**와 근거를 붙였습니다. &quot;높음&quot;은 원문에 직접 근거가 있는 경우, &quot;중간&quot;은 원문의 복수 단서에서 강하게 추론되는 경우, &quot;낮음&quot;은 합리적인 설계 추정에 불과한 경우를 뜻합니다. 아래의 프롬프트와 스키마는 재구현을 위한 <strong>초안</strong>이며, 저자의 실제 프롬프트가 아닙니다.</p>
+<h3>(a) Task Skill 생성 프롬프트와 출력 구조</h3>
+<p><strong>출력 구조 (확실도: 높음, 4개 상위 필드)</strong>
+근거: [§3.2]가 objectives, principles, stage-transition evidence, corrective strategies를 명시합니다.</p>
+<p><strong>하위 필드와 생성 절차 (확실도: 낮음–중간)</strong>
+근거: 40개 데모를 각각 수백 step 길이로 통째로 넣기는 컨텍스트 한계상 어렵습니다. 그래서 (1) 데모별로 키프레임을 subsampling하고 분석한 뒤 (2) 집계하는 2단계 map-reduce 방식이 현실적입니다. 키프레임 선택은 촉각 이벤트(접촉 시작, 압입 급증, 미끄러짐)를 기준으로 했을 가능성이 높습니다.</p>
+<pre><code class="language-yaml"># K_τ 출력 스키마 초안 (YAML)
+task: insert_hole
+objectives:
+  - &quot;튜브를 블록의 기울어진 구멍에 끝까지 삽입한다&quot;
+stages:                      # stage-transition evidence
+  - name: approach
+    exit_evidence: [&quot;양손가락 indentation 변화 없음&quot;, &quot;튜브 끝이 구멍 입구 위에 위치(scene RGB)&quot;]
+  - name: contact
+    exit_evidence: [&quot;하강 중 peak indentation 증가&quot;, &quot;마커 변위가 축방향 shear로 나타남&quot;]
+  - name: align
+    exit_evidence: [&quot;전진 시 마커 변위 증가폭이 작음&quot;, &quot;튜브가 실제로 하강(wrist RGB/EEF z)&quot;]
+  - name: insert
+    exit_evidence: [&quot;EEF가 목표 깊이에 도달&quot;, &quot;변위 안정&quot;]
+principles:
+  - &quot;한 번에 하나의 자유도만 조정하고, 다음 관측으로 효과를 평가한다&quot;
+  - &quot;좌우 indentation 비대칭은 튜브의 기울어짐/미끄러짐 신호로 해석한다&quot;
+corrective_strategies:
+  - trigger: &quot;deformation 증가 + EEF/물체 전진 없음&quot;
+    action: &quot;2–5mm 후퇴 → 측면 1–3mm 또는 축 3–5° 조정 → 재전진&quot;
+    evaluate: &quot;재전진 시 마커 변위 크기 비교&quot;
+  - trigger: &quot;좌우 centroid가 반대 방향으로 이동&quot;
+    action: &quot;gripper 재파지 또는 roll 보정&quot;
+action_guidelines:
+  step_size: {pos_mm: [1, 5], rot_deg: [2, 5]}
+  horizon: &quot;접촉 중 1–2, 자유공간 3–5&quot;
+</code></pre>
+<pre><code class="language-text"># 오프라인 Stage 1 (데모 단위 분석) 프롬프트 초안
+[SYSTEM] 너는 로봇 조작 전문가다. 아래 expert demonstration의 키프레임을 시간순으로 분석하라.
+각 키프레임에는 scene/wrist RGB, 좌/우 촉각 이미지, indentation 통계(mean/peak/area/centroid),
+marker displacement 요약, EEF pose, gripper 값, expert action이 포함된다.
+[USER] 태스크: {instruction}
+데모 #{k} 키프레임 {N}개: {frames...}
+다음을 JSON으로 답하라:
+1) 단계 분할과 각 단계 전이 시점의 관측 증거
+2) 접촉 변화(좌우 비대칭, 변위 방향)와 직전 expert action의 관계
+3) 막힘(obstruction)이 발생한 구간과 expert의 교정 방식, 그 효과
+4) 이 데모에서 대표성이 높은 촉각 프레임 후보(인덱스와 이유)
+
+# 오프라인 Stage 2 (집계) 프롬프트 초안
+[USER] 아래는 데모 40개의 분석 결과다. 공통 패턴을 추출하여 Task Skill을
+{objectives, stages(exit_evidence), principles, corrective_strategies}로 작성하라.
+규칙은 관측 가능한 신호(촉각 통계·마커 변위·EEF 이동·물체 이동)에 근거해야 하며,
+수치 임계값은 데모에서 관찰된 범위로 제시하라. 또한 대표 촉각 reference를 단계별로 선택하라.
+</code></pre>
+<h3>(b) 온라인 정책 시스템/유저 프롬프트 템플릿 초안</h3>
+<p><strong>구조 (확실도: 중간)</strong>
+근거: 고정 컨텍스트(<code>ℓ</code>, <code>C_τ</code>)와 가변 입력(<code>o_t</code>, <code>H_t</code>)이 분리되어 있고 [§3.1, §3.2], 에피소드 단위 &quot;session&quot;이 존재합니다 [§4.1]. 고정 부분을 system 또는 첫 메시지에 두고 스텝마다 user 메시지를 추가하는 구조가 가장 자연스럽고, prompt caching에도 유리합니다.</p>
+<pre><code class="language-text">[SYSTEM]
+너는 7-DoF 로봇팔과 평행 그리퍼(양 손가락에 GelSight형 촉각 센서)를 제어하는 정책이다.
+태스크: {ℓ}
+== Task Skill ==
+{K_τ}
+== Tactile references ==
+{E_τ^tac: 단계 라벨 + 좌/우 촉각 이미지 + 해당 descriptor}
+== 관측 정의 ==
+- indentation: mean/peak (mm), contact_area (px 비율), centroid (u,v ∈ [0,1])
+- marker: mean_disp (px), max_disp, dominant_dir (deg), [선택] divergence, curl
+== 행동 규칙 ==
+- 매 스텝 직전 액션의 효과를 먼저 평가하라(EEF 이동, 물체 반응, 촉각 변화).
+- 방향이 불확실하면 작은 탐색 액션(평행이동/회전/그리퍼 개도)을 선택하라.
+- 출력은 지정된 JSON 스키마만 사용하라. 이동량 한계: |Δp| ≤ 10mm, |Δθ| ≤ 10°/step.
+
+[USER @ step t]
+step: {t}  /  budget: {T_max}
+proprio: eef_pos={x,y,z} eef_quat={qx,qy,qz,qw} gripper={g}
+Δ since last action: eef_Δp={...} eef_Δrot={...} gripper_Δ={...}
+tactile L: indentation={...} marker={...}   Δ vs prev: {...}
+tactile R: indentation={...} marker={...}   Δ vs prev: {...}
+images: [scene_rgb] [wrist_rgb] [tactile_L] [tactile_R] ([marker_quiver_L] [marker_quiver_R])
+last_action: {a_{t-1}}   exec_feedback: {ok | clipped | ik_fail | format_error}
+→ 다음 액션을 JSON으로 출력하라.
+</code></pre>
+<h3>(c) Action JSON 스키마</h3>
+<ul>
+<li>필드 구성(EEF pose, gripper, horizon 1–5): <strong>확실도 높음</strong>. 근거는 [§3.1], [§3.4], [Fig.1A] &quot;EEF pose / Gripper / Steps&quot;입니다.</li>
+<li>절대 목표 pose와 델타 중 어느 쪽인지: <strong>확실도 중간</strong>. &quot;target end-effector pose&quot;라는 표현 [§3.1]과 IK 입력이라는 점은 절대 목표를 시사합니다. 반면 &quot;constructs a_t from the latest measured robot state&quot; [§3.4]는 모델이 실측 pose에 증분을 더해 절대값을 만든다는 뜻으로 읽힙니다. 따라서 <strong>출력은 절대값, 모델 내부 추론은 델타</strong>일 가능성이 가장 높습니다.</li>
+<li>회전 표현(quaternion, Euler): <strong>확실도 낮음</strong>. LLM이 quaternion을 산술적으로 다루는 데 약하다는 점을 고려하면, RPY(deg)나 axis-angle 델타가 더 다루기 쉽습니다. 재구현에서는 모델에게 델타 RPY를 받고 시스템이 quaternion으로 합성하는 방식을 권장합니다.</li>
+<li><code>done</code>, <code>stage</code>, <code>rationale</code> 필드: <strong>확실도 낮음</strong>. 종료는 환경의 native success 조건이 판정하므로 [§4.1] <code>done</code> 필드는 필수가 아닙니다. 다만 stage 라벨은 Task Skill의 stage-transition evidence와 맞물리므로 포함했을 가능성이 있습니다.</li>
+</ul>
+<pre><code class="language-json">{
+  &quot;stage&quot;: &quot;align&quot;,
+  &quot;assessment&quot;: &quot;전진 시 좌측 marker 변위 증가, EEF z 정체 → 막힘&quot;,
+  &quot;eef_target&quot;: {
+    &quot;frame&quot;: &quot;base&quot;,
+    &quot;position_m&quot;: [0.512, -0.034, 0.181],
+    &quot;rpy_deg&quot;: [178.0, 4.5, 90.0]
+  },
+  &quot;gripper&quot;: 0.012,
+  &quot;horizon&quot;: 2
+}
+</code></pre>
+<p>검증 로직(확실도: 높음, &quot;checks on command bounds and format&quot; [§3.4])의 내용은 다음과 같습니다. JSON 파싱, 필드 타입 확인, workspace 범위 clip, step당 최대 이동량 제한, horizon ∈ {1..5}, gripper ∈ [0, g_max]. 위반 시 재요청할지 clip할지는 미확인입니다.</p>
+<h3>(d) 촉각 descriptor 계산 방법 후보</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>계산 후보</th>
+<th>확실도</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mean indentation</td>
+<td>contact mask 내부 depth 평균 (또는 전체 평균)</td>
+<td>높음(항목 존재) / 낮음(정의)</td>
+<td>§3.3</td>
+</tr>
+<tr>
+<td>peak indentation</td>
+<td>depth 최댓값 또는 상위 1% 분위수</td>
+<td>높음 / 중간</td>
+<td>§3.3</td>
+</tr>
+<tr>
+<td>contact region</td>
+<td><code>depth &gt; δ</code>(예: 0.05mm) 픽셀 비율, 연결 성분 수, bbox</td>
+<td>높음 / 낮음</td>
+<td>§3.3 &quot;contact regions&quot;</td>
+</tr>
+<tr>
+<td>centroid</td>
+<td>depth 가중 무게중심 (u, v), 정규화 좌표</td>
+<td>높음 / 중간</td>
+<td>§3.3</td>
+</tr>
+<tr>
+<td>spatial pooling</td>
+<td>depth 맵을 3×3 또는 4×4 격자로 평균 pooling한 표</td>
+<td>중간 / 낮음(격자 크기)</td>
+<td>§3.3 &quot;spatially pool&quot;</td>
+</tr>
+<tr>
+<td>접촉 패치 형상</td>
+<td>2차 모멘트로 계산한 주축 방향과 이심률 (튜브/키의 기울기 단서)</td>
+<td>낮음</td>
+<td>원문에 없음. 설계 제안</td>
+</tr>
+<tr>
+<td>marker 평균/최대 변위</td>
+<td>마커별 ‖d_i‖의 평균과 최대, 평균 벡터 방향</td>
+<td>중간</td>
+<td>§3.3, Fig.4 (변위 크기로 판단)</td>
+</tr>
+<tr>
+<td>marker divergence/curl</td>
+<td>격자 보간 후 ∇·d (법선 압력), ∇×d (비틀림 토크)</td>
+<td>낮음</td>
+<td>원문에 없음. 설계 제안</td>
+</tr>
+<tr>
+<td>L/R 차분</td>
+<td>ΔL−R의 peak, centroid 차이, 변위 방향 차이</td>
+<td>중간</td>
+<td>§3.3 &quot;bilateral contact differences&quot;</td>
+</tr>
+<tr>
+<td>시간 차분</td>
+<td>t−1 대비 위 통계의 변화량</td>
+<td>중간</td>
+<td>§3.3 &quot;across successive observations&quot;</td>
+</tr>
+<tr>
+<td>marker quiver 이미지</td>
+<td>변위를 확대한 화살표 플롯을 이미지로 제공</td>
+<td>중간</td>
+<td>Fig.1A, Fig.4의 시각화 형식</td>
+</tr>
+</tbody>
+</table>
+<h3>(e) 대표 tactile reference 선택 방법 후보</h3>
+<table>
+<thead>
+<tr>
+<th>후보</th>
+<th>설명</th>
+<th>확실도</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E1. GPT 직접 선택</td>
+<td>Stage 1 분석에서 모델이 &quot;대표 프레임&quot;을 지목하고, Stage 2에서 단계별로 정리합니다.</td>
+<td>중간–높음</td>
+<td>§3.2 &quot;GPT-6-Astra also extracts representative tactile observations&quot;</td>
+</tr>
+<tr>
+<td>E2. 단계 정렬 exemplar</td>
+<td>stage(무접촉/첫 접촉/막힘/정렬 후 미끄러짐/완료)마다 1–2쌍(L/R)을 선택하고 단계 라벨을 붙입니다.</td>
+<td>중간</td>
+<td>Task Skill의 stage-transition evidence와 짝을 이루어야 grounding이 가능합니다 [§3.2].</td>
+</tr>
+<tr>
+<td>E3. 규칙 기반 사전 필터 + GPT 선택</td>
+<td>indentation 급변 시점(contact event)을 자동 검출해 후보를 줄인 뒤 GPT가 최종 선택합니다.</td>
+<td>낮음</td>
+<td>원문에 없음. 컨텍스트 비용 관점의 추정</td>
+</tr>
+<tr>
+<td>E4. descriptor 군집화</td>
+<td>40개 데모의 촉각 descriptor를 k-medoids로 군집화하고 medoid를 reference로 사용합니다.</td>
+<td>낮음</td>
+<td>&quot;preserving bilateral contact distributions&quot;를 충실히 구현하는 방식</td>
+</tr>
+<tr>
+<td>reference 개수</td>
+<td>태스크당 4–12개(L/R 쌍 2–6개)</td>
+<td>낮음</td>
+<td>컨텍스트 예산 추정</td>
+</tr>
+</tbody>
+</table>
+<h3>(f) History 관리</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>추정</th>
+<th>확실도</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>범위</td>
+<td>에피소드 내부에서만 유지하고 에피소드 사이에서는 리셋합니다.</td>
+<td>높음</td>
+<td>§4.1</td>
+</tr>
+<tr>
+<td>구현 형태</td>
+<td>대화 세션(multi-turn)에 스텝 메시지를 누적합니다.</td>
+<td>중간</td>
+<td>§4.1 &quot;independent model session&quot;</td>
+</tr>
+<tr>
+<td>내용</td>
+<td>이전 관측, 액션, execution feedback(bound/IK 결과)을 담습니다.</td>
+<td>높음</td>
+<td>§3.1</td>
+</tr>
+<tr>
+<td>이미지 보존</td>
+<td>최근 K(2–5) 스텝만 이미지를 유지하고, 그 이전은 텍스트 descriptor와 액션 로그로 압축합니다.</td>
+<td>낮음–중간</td>
+<td>191 step / h≈3이면 약 64회 호출이 필요하고, 호출당 이미지 4–6장이 전부 누적되면 이미지가 300장을 넘어 컨텍스트 비용이 2차적으로 증가합니다. 원문은 truncation을 언급하지 않습니다.</td>
+</tr>
+<tr>
+<td>탐색 기억</td>
+<td>시도한 방향과 결과 요약(예: &quot;near-vertical: 막힘, leftward: 막힘&quot;)을 유지합니다.</td>
+<td>중간</td>
+<td>Fig.4에서 같은 방향을 반복하지 않고 다른 방향을 순차적으로 시도합니다. §4.4 &quot;responses retained in H_t&quot;</td>
+</tr>
+<tr>
+<td>reasoning 토큰</td>
+<td>이전 턴의 reasoning은 history에 포함되지 않습니다(일반적인 API 동작 가정).</td>
+<td>낮음</td>
+<td>미확인</td>
+</tr>
+</tbody>
+</table>
+<h3>(g) 호출 수, 에피소드 길이, 비용 추정</h3>
+<p><strong>에피소드 길이 단서 (확실도: 중간)</strong></p>
+<ul>
+<li>[Fig.2]: w/ tactile 성공은 step 191, w/o tactile 실패는 step 300(예산 상한으로 추정)입니다.</li>
+<li>[Fig.4]: 표시된 시점 간격이 30→35→40, 119→124→127, 191→194→199로 3–5 step입니다. 이 시점들이 의사결정 경계와 일치한다면, 탐색 중 평균 horizon은 약 4입니다. 따라서 &quot;step&quot;은 LLM 호출 단위가 아니라 <strong>control step</strong>이며, 한 호출이 1–5 control step을 실행한다고 해석하는 것이 일관적입니다.</li>
+</ul>
+<p><strong>호출 수 추정 (확실도: 낮음–중간)</strong></p>
+<p><code>N_calls/episode ≈ L / h̄</code>이고 h̄ ∈ [2, 4]로 가정합니다.</p>
+<table>
+<thead>
+<tr>
+<th>시나리오</th>
+<th>L (control step)</th>
+<th>h̄=2</th>
+<th>h̄=3</th>
+<th>h̄=4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert Hole 성공 (Fig.2)</td>
+<td>191</td>
+<td>96</td>
+<td>64</td>
+<td>48</td>
+</tr>
+<tr>
+<td>예산 소진 실패</td>
+<td>300</td>
+<td>150</td>
+<td>100</td>
+<td>75</td>
+</tr>
+<tr>
+<td>다른 태스크 (길이 미보고, 150–250 가정)</td>
+<td>200</td>
+<td>100</td>
+<td>67</td>
+<td>50</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>주 평가 500 에피소드 × 50–100회 ≈ <strong>25k–50k회 호출</strong>입니다.</li>
+<li>Tab.3 ablation 100 에피소드(31개 성공 약 200 step, 69개 실패 300 step, 평균 약 270 step) ÷ h̄ ≈ 68–135회이므로, 합계 <strong>약 7k–13k회</strong>입니다.</li>
+<li>Offline 증류: 태스크당 40개 데모 분석과 집계 호출로, 5개 태스크 합계 <strong>수백 회 수준</strong>이며 무시할 수 있는 규모입니다.</li>
+<li>총합은 <strong>약 3만–6만 회의 xhigh 호출</strong>입니다. 실험 중 prompt를 반복 수정했다면 이 수치는 더 커집니다.</li>
+</ul>
+<p><strong>호출당 토큰 추정 (확실도: 낮음)</strong>
+GPT-6-Astra의 이미지 토큰화 방식과 가격은 미확인입니다. 아래는 매개변수화한 추정입니다.</p>
+<table>
+<thead>
+<tr>
+<th>구성</th>
+<th>추정 토큰</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>고정 prefix (system + K_τ 2–6k + reference 이미지 4–12장)</td>
+<td>5k–15k (cache 가능)</td>
+</tr>
+<tr>
+<td>현재 관측 (이미지 4–6장 + descriptor/proprio 텍스트)</td>
+<td>2k–6k</td>
+</tr>
+<tr>
+<td>history (최근 K스텝 이미지 + 압축 텍스트 로그)</td>
+<td>3k–20k (스텝에 따라 증가)</td>
+</tr>
+<tr>
+<td>입력 합계</td>
+<td><strong>10k–40k</strong></td>
+</tr>
+<tr>
+<td>출력 (xhigh reasoning + action JSON)</td>
+<td><strong>2k–20k</strong> (reasoning 토큰 양은 미확인)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>비용 공식</strong></p>
+<pre><code>Cost ≈ N_calls × ( T_in,uncached·p_in + T_in,cached·p_cache + T_out·p_out )
+</code></pre>
+<p>예시로 <strong>가상 단가</strong> p_in=$5/M, p_cache=$0.5/M, p_out=$30/M(실제 GPT-6-Astra 가격 아님, 미확인)를 적용하고, 호출당 입력 20k(그중 15k cached), 출력 10k를 가정하면 다음과 같습니다.</p>
+<ul>
+<li>호출당 비용 ≈ 5k×5e-6 + 15k×0.5e-6 + 10k×30e-6 ≈ $0.33</li>
+<li>4만 회 기준 약 <strong>$13k</strong>이고, 가정 범위 전체로는 <strong>$2k–$60k</strong>입니다. 비용은 출력(reasoning) 토큰이 지배합니다.</li>
+</ul>
+<p><strong>지연 (확실도: 낮음)</strong>
+xhigh reasoning의 호출당 지연을 10–90초로 가정하면, 에피소드당 50–100회 호출에 <strong>약 8분–2.5시간</strong>이 걸립니다. 600 에피소드를 순차 실행하면 수백에서 천 시간 이상이 필요하므로 대규모 병렬화가 필수였을 것입니다. 이 지연 수준에서는 실제 로봇의 폐루프 제어가 사실상 불가능하므로, L3과 L4를 정량적으로 뒷받침합니다.</p>
+<h3>(h) 재구현 시 대체 전략 (참고)</h3>
+<p>이 환경에는 torch와 LLM SDK가 없고 GPT-6-Astra에 접근할 수 없습니다. 따라서 재구현은 (1) 정책 인터페이스(<code>ℓ, C_τ, o_t, H_t → a_t</code>)를 추상화하고, (2) mock/규칙 기반 정책으로 루프, descriptor, 스키마, 검증기를 먼저 검증한 뒤, (3) 실제 VLM 백엔드(사용 가능한 closed/open 모델)를 교체해 넣는 순서가 현실적입니다. 아래 ablation을 기본 실험 계획에 포함할 것을 권장합니다. 대상은 L7과 L8에서 지적한 2×2 촉각 ablation(offline 증류 시 촉각 사용 여부 × online 촉각 사용 여부), Task Skill 제거, reference 제거, history 길이, horizon 상한, reasoning effort입니다.</p>
+<hr />
+<h2>6. 미해결 이슈 (원문만으로 확인할 수 없는 것)</h2>
+<ol>
+<li>GPT-6-Astra의 정확한 버전과 스냅샷, 디코딩 설정, 이미지 토큰화 방식, 가격을 확인할 수 없습니다.</li>
+<li>상위 논문 GPT-as-Policy(arXiv:2609.38537)의 액션 포맷과 프롬프트 세부 사항을 확인하지 못했습니다.</li>
+<li>프로젝트 페이지에 프롬프트, Task Skill 원문, 코드가 공개되어 있는지 확인하지 못했습니다.</li>
+<li>UniVTAC(arXiv:2602.10093)의 센서 모델(depth/marker 제공 방식), control 주기, 태스크별 step 예산, success 조건을 확인하지 못했습니다.</li>
+<li>baseline 수치가 재실행 결과인지 인용인지, seed가 일치하는지 알 수 없습니다. E0 결과가 누락된 이유도 알 수 없습니다.</li>
+<li>10개 &quot;offline validation&quot; 데모의 실제 용도를 알 수 없습니다.</li>
+<li>데모의 초기 설정과 테스트 seed가 분리되어 있는지 알 수 없습니다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>07. 추가 실험: 실제 LLM 촉각 probe와 UniVTAC 폐루프 2×2</h1>
+<p>이 문서는 통합 리포트 <code>report/report.html</code>의 §9(0단계 probe)와 §10(폐루프 2×2, 반사실 촉각)을 따로 정리한 것입니다. 원문 결과 파일은 <code>code/results/stage0/</code>, <code>code/results/univtac51_2x2/</code>, <code>code/results/univtac51_cf/</code>에 있습니다.</p>
+<p><strong>이 실험이 원문 재현은 아닙니다.</strong> GPT-6-Astra를 쓸 수 없어서 Claude Opus 5.5(effort xhigh)를 같은 자리에 넣었습니다. 목표는 원문 수치를 다시 내는 것이 아니라, 원문 주장 &quot;Understands touch&quot;의 메커니즘을 떼어 보는 것입니다. 원문 Tab.3의 촉각 ablation은 촉각 관측, 촉각 reference, Task Skill(재증류)이 한꺼번에 바뀐 비교라서(<code>05_claim_verification.md</code> §3.4), 세 요인을 분리하도록 실험을 설계했습니다. §2와 §3의 2×2와 거울 반전은 원문에 없는 실험입니다.</p>
+<hr />
+<h2>1. 0단계: 단일 판단 probe (시뮬레이터 없음)</h2>
+<h3>1.1 설정</h3>
+<ul>
+<li><strong>데이터:</strong> UniVTAC 공개 데모(HF <code>byml/UniVTAC</code>, isaac45/insert_hole, 에피소드 0–49).</li>
+<li><strong>과제:</strong> Insert Hole expert는 (1) 약 30 mm 내려가 구멍 입구에 막히고, (2) x로 ±40 mm 이동하며 peg를 약 26° 기울인 뒤, (3) 기울어진 축으로 넣습니다. 숨은 결정은 (2)의 부호 하나입니다(slot yaw 0°/180°가 정함).</li>
+<li><strong>질의:</strong> 각 데모를 (1)의 마지막 프레임(첫 막힘 접촉)에서 멈추고 +x/−x를 묻습니다. 에피소드 2–49의 48개이고, +x 30개, −x 18개라 다수 클래스가 62.5%입니다. reference를 쓰는 조건은 에피소드 0(+x)과 1(−x)을 라벨과 함께 보여 줍니다. 원문 E_τ^tac에 해당합니다.</li>
+<li><strong>조건:</strong> V = head·wrist RGB, T = 양손가락 marker overlay 이미지 + descriptor(압입 D, marker 변위 M), Ti = 이미지만, Td = descriptor만, VT = V+T. 모든 조건에 EEF pose를 넣습니다.</li>
+<li><strong>추가 조건:</strong> 0b는 reference 없이 센서 장착 정보(이미지 u/v ↔ 로봇 축)를 시스템 프롬프트에 넣습니다. 0c는 reference 두 개의 라벨을 뒤집어 보여 줍니다.</li>
+<li><strong>센서 좌표 보정:</strong> 정답 라벨을 쓰지 않았습니다. peg가 손 안에서 미끄러지기 전(정지 마찰) 구간에서 peg–센서 실제 상대 이동과 marker 평균 이동의 부호를 대조했습니다. u = +local X가 50/50, v = +local Y가 47/50(왼쪽)·44/50(오른쪽)이었습니다. 결과는 왼쪽 +u = −z, 오른쪽 +u = +z, 양쪽 +v = −x입니다. zero-shot에서 모델이 흔히 가정한 &quot;v = 위쪽&quot;은 틀린 가정이었습니다.</li>
+<li><strong>기준선과 통계:</strong> 비LLM 기준선은 같은 reference 두 개에 대한 1-NN(marker 평균 변위 + 접촉 중심)입니다. 통계는 Wilson 95% CI, 예측 × 정답 Fisher 양측 검정, balanced accuracy입니다.</li>
+</ul>
+<h3>1.2 결과</h3>
+<table>
+<thead>
+<tr>
+<th>reference</th>
+<th>조건</th>
+<th>n</th>
+<th>정답률 [95% CI]</th>
+<th>bal. acc</th>
+<th>+x 예측 비율</th>
+<th>Fisher p</th>
+<th>평균 지연 s</th>
+<th>출력 토큰</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>V</td>
+<td>48</td>
+<td>0.71 [0.57, 0.82]</td>
+<td>0.62</td>
+<td>0.88</td>
+<td>0.022</td>
+<td>44.3</td>
+<td>3,754</td>
+</tr>
+<tr>
+<td>0</td>
+<td>T</td>
+<td>48</td>
+<td>0.62 [0.48, 0.75]</td>
+<td>0.60</td>
+<td>0.62</td>
+<td>0.22</td>
+<td>70.4</td>
+<td>6,422</td>
+</tr>
+<tr>
+<td>0</td>
+<td>VT</td>
+<td>47</td>
+<td>0.60 [0.45, 0.72]</td>
+<td>0.56</td>
+<td>0.68</td>
+<td>0.52</td>
+<td>93.8</td>
+<td>8,400</td>
+</tr>
+<tr>
+<td>0</td>
+<td>T + 센서 좌표 (0b)</td>
+<td>48</td>
+<td><strong>0.92</strong> [0.80, 0.97]</td>
+<td>0.90</td>
+<td>0.67</td>
+<td>1.1×10⁻⁸</td>
+<td>37.4</td>
+<td>2,781</td>
+</tr>
+<tr>
+<td>2</td>
+<td>V</td>
+<td>48</td>
+<td>0.54 [0.40, 0.67]</td>
+<td>0.49</td>
+<td>0.71</td>
+<td>1</td>
+<td>19.2</td>
+<td>1,618</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ti</td>
+<td>48</td>
+<td>0.79 [0.66, 0.88]</td>
+<td>0.79</td>
+<td>0.58</td>
+<td>1.8×10⁻⁴</td>
+<td>16.2</td>
+<td>1,379</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Td</td>
+<td>48</td>
+<td>1.00 [0.93, 1.00]</td>
+<td>1.00</td>
+<td>0.62</td>
+<td>1.4×10⁻¹³</td>
+<td>6.6</td>
+<td>366</td>
+</tr>
+<tr>
+<td>2</td>
+<td>T</td>
+<td>48</td>
+<td>1.00 [0.93, 1.00]</td>
+<td>1.00</td>
+<td>0.62</td>
+<td>1.4×10⁻¹³</td>
+<td>6.5</td>
+<td>412</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1-NN (비LLM)</td>
+<td>48</td>
+<td>0.96 [0.86, 0.99]</td>
+<td>0.97</td>
+<td>0.58</td>
+<td>2.6×10⁻¹¹</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>2</td>
+<td>T, 라벨 뒤집음 (0c)</td>
+<td>48</td>
+<td><strong>0.00</strong> [0.00, 0.07]</td>
+<td>0.00</td>
+<td>0.38</td>
+<td>1.4×10⁻¹³</td>
+<td>6.8</td>
+<td>406</td>
+</tr>
+<tr>
+<td>2</td>
+<td>T + 좌표, 라벨 뒤집음 (0c)</td>
+<td>48</td>
+<td><strong>0.00</strong> [0.00, 0.07]</td>
+<td>0.00</td>
+<td>0.38</td>
+<td>1.4×10⁻¹³</td>
+<td>8.7</td>
+<td>555</td>
+</tr>
+</tbody>
+</table>
+<p>LLM 호출은 479회였고, 집계 대상 중 실패는 없습니다. zero-shot VT의 1건은 600 s 타임아웃이라 뺐습니다(n = 47). API 가격으로 환산한 비용은 합계 $35.41입니다. 0c의 Fisher p가 작은 것은 예측이 정답과 정반대로 완벽하게 연관되었기 때문입니다.</p>
+<p><img src="figures/chart_stage0.png" alt="0단계 조건별 정답률" /></p>
+<h3>1.3 해석</h3>
+<ol>
+<li><strong>reference가 있으면 완벽히 맞히지만, 대조만으로도 되는 수준입니다.</strong> descriptor 수치만 준 Td가 100%이고, 같은 특징으로 만든 1-NN도 96%입니다. 출력 토큰은 zero-shot의 약 1/15입니다(412 vs 6,422).</li>
+<li><strong>reference가 없을 때의 병목은 물리 추론이 아니라 좌표계 정보였습니다.</strong> zero-shot T는 62%(p = 0.22)이고, 근거 문장 48개 중 38개가 센서 장착 방향을 &quot;가정&quot;했습니다. 데이터로 보정한 장착 정보 다섯 줄을 넣자 92%(p = 1.1×10⁻⁸)로 올랐습니다. 다만 장착 정보에 &quot;marker 이동 = 접촉면이 끌려간 방향&quot;이라는 센서 원리 설명이 들어 있어서, 남은 추론은 한 단계입니다.</li>
+<li><strong>reference가 있으면 모델은 자기 해석보다 reference를 따릅니다.</strong> 라벨을 뒤집은 0c에서 48/48이 뒤집힌 라벨을 따랐고, 좌표 정보를 함께 줘도 0%였습니다. 근거 문장에서 &quot;+x 방향 전단&quot;이라고 맞게 읽고도 &quot;reference 1(−x)과 일치&quot;를 이유로 −x를 답했습니다.</li>
+<li><strong>원문에 주는 함의:</strong> 원문 Tab.3의 99 vs 31은 (i) 텍스트로 촉각을 물리적으로 해석하는 경로와 (ii) reference를 대조하는 경로 가운데 어느 쪽에서 나왔는지 원문 실험만으로는 구분할 수 없습니다. 두 경로가 충돌하면 (ii)가 이깁니다.</li>
+</ol>
+<p><strong>한계:</strong> 태스크 1개, 이진 판단 1회, 프레임 1개, 질의 48개입니다. reference는 에피소드 0·1로 고정했고, 조건당 1회만 호출했습니다. 압입 descriptor는 사후에 오류를 발견했습니다. depth는 젤까지의 거리라 정적 형상이 섞여 있습니다. 판단 근거가 된 marker 전단과 좌표 보정에는 영향이 없습니다.</p>
+<hr />
+<h2>2. 본실험: UniVTAC 폐루프 2×2 (Task Skill × 촉각)</h2>
+<h3>2.1 설정</h3>
+<ul>
+<li><strong>시뮬레이터:</strong> UniVTAC Insert Hole, Isaac Sim 5.1(물리 120 Hz, 평가 60 Hz), GelSight Mini 양손가락. 시뮬레이터는 NVIDIA GPU 서버에서 env server로 띄우고, 정책 프로세스와 네트워크로 연결했습니다.</li>
+<li><strong>모델과 행동:</strong> Claude Opus 5.5, effort xhigh, JSON schema로 행동 형식을 강제했습니다. 행동은 EEF 목표 변위(축당 최대 20 mm, 회전 10°), gripper, horizon입니다.</li>
+<li><strong>관측:</strong> 카메라는 쓰지 않았습니다. 0단계에서 RGB가 판단에 기여한 근거가 없었고, 촉각 효과를 분리하기 위해서입니다. 자세(P)는 모든 조건에 줍니다. 촉각 조건(T)에는 marker overlay 이미지, 압입·전단 descriptor, 이전 결정 대비 변화, 데이터로 보정한 센서 장착 정보를 줍니다.</li>
+<li><strong>Task Skill:</strong> 조건마다 같은 모델이 데모 40개로 증류하고 10개로 검증했습니다. 촉각 Skill은 촉각 reference 7개를 함께 만듭니다. &quot;noskill&quot; 조건은 지시문과 공통 규약만 받습니다.</li>
+<li><strong>평가:</strong> 조건당 20 episode, 네 조건 모두 같은 seed 1000000–1000019입니다. 성공 기준은 구멍 축 기준 xy 1 cm 이내, 4 cm 이상 삽입, 축 정렬 cos &gt; 0.99입니다. 실패는 전부 early_stop(시험관이 손 안에서 4 cm 넘게 밀림)이었습니다.</li>
+<li><strong>통계:</strong> 같은 seed끼리 짝지은 McNemar 정확검정을 썼습니다. 상호작용은 seed별 diff-in-diff에 seed bootstrap 10,000회로 계산했습니다.</li>
+</ul>
+<h3>2.2 결과</h3>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>성공</th>
+<th>95% CI</th>
+<th>결정 수</th>
+<th>API 시간(분)</th>
+<th>출력 토큰</th>
+<th>API 환산 $</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P+T skill (원문 V+P+T에 해당, 카메라 제외)</td>
+<td><strong>17/20</strong></td>
+<td>0.64–0.95</td>
+<td>16.6</td>
+<td>8.2</td>
+<td>46,215</td>
+<td>2.80</td>
+</tr>
+<tr>
+<td>P skill (원문 V+P에 해당)</td>
+<td>7/20</td>
+<td>0.18–0.57</td>
+<td>8.8</td>
+<td>1.0</td>
+<td>5,270</td>
+<td>0.45</td>
+</tr>
+<tr>
+<td>P+T noskill</td>
+<td>12/20</td>
+<td>0.39–0.78</td>
+<td>5.2</td>
+<td>1.1</td>
+<td>5,837</td>
+<td>0.26</td>
+</tr>
+<tr>
+<td>P noskill</td>
+<td>9/20</td>
+<td>0.26–0.66</td>
+<td>4.5</td>
+<td>0.4</td>
+<td>1,881</td>
+<td>0.09</td>
+</tr>
+</tbody>
+</table>
+<p>결정 수 이하 열은 episode 평균입니다. LLM 호출은 701회였고, parse 실패는 없습니다.</p>
+<table>
+<thead>
+<tr>
+<th>효과 (같은 seed 짝)</th>
+<th>전체 20 seed</th>
+<th>McNemar p</th>
+<th>−x seed 7개</th>
+<th>McNemar p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>촉각 효과, Skill 있음</td>
+<td><strong>+50%p</strong> (11 / 1)</td>
+<td>0.0063</td>
+<td>+86%p (6/7 vs 0/7)</td>
+<td>0.031</td>
+</tr>
+<tr>
+<td>촉각 효과, Skill 없음</td>
+<td>+15%p (3 / 0)</td>
+<td>0.25</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Skill 효과, 촉각 있음</td>
+<td>+25%p (7 / 2)</td>
+<td>0.18</td>
+<td>+86%p</td>
+<td>0.031</td>
+</tr>
+<tr>
+<td>Skill 효과, 촉각 없음</td>
+<td>−10%p (3 / 5)</td>
+<td>0.73</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>상호작용 (diff-in-diff)</td>
+<td>+35%p, bootstrap 95% CI [0, 65]</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<p>단순효과 4개를 Holm 보정해도 &quot;촉각 효과, Skill 있음&quot;은 유의합니다(0.025). 상호작용은 CI 하한이 0이라 경계 수준입니다.</p>
+<p><img src="figures/chart_2x2.png" alt="2×2 결과" /></p>
+<h3>2.3 숨은 결정(구멍 기울기 방향)별 분석</h3>
+<p>UniVTAC는 reset에서 seed의 첫 난수로 구멍 방향을 정합니다. 이를 이용해 seed별 정답 방향을 복원했습니다(+x 13개, −x 7개). P+T skill 성공 17건의 최종 x 부호와 모두 일치합니다.</p>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>+x seed 성공</th>
+<th>−x seed 성공</th>
+<th>선택한 방향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P+T skill</td>
+<td>11/13</td>
+<td><strong>6/7</strong></td>
+<td>20개 모두 정답 방향</td>
+</tr>
+<tr>
+<td>P skill</td>
+<td>7/13</td>
+<td>0/7</td>
+<td>20개 모두 +x (데모 다수 방향)</td>
+</tr>
+<tr>
+<td>P+T noskill</td>
+<td>12/13</td>
+<td>0/7</td>
+<td>측방 이동 없음</td>
+</tr>
+<tr>
+<td>P noskill</td>
+<td>9/13</td>
+<td>0/7</td>
+<td>측방 이동 없음</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/chart_2x2_direction.png" alt="숨은 결정별 성공률" /></p>
+<h3>2.4 해석</h3>
+<ol>
+<li><strong>촉각 효과는 Skill이 있을 때만 나타납니다.</strong> 촉각만 있고 Skill이 없으면 모델은 측방 이동을 한 번도 시도하지 않았습니다. 촉각 신호는 받았지만, &quot;구멍이 기울어 있고 전단 방향이 기울기를 알려 준다&quot;는 지식이 없었습니다.</li>
+<li><strong>방향 결정은 증류된 규칙을 촉각에 적용한 결과입니다.</strong>
+<ul>
+<li>근거 문장이 Skill 규칙을 그대로 인용합니다. 예: &quot;Shear y is positive on both pads …, which per the skill means the hole inclines toward −x.&quot;</li>
+<li>규칙은 증류 단계에서 같은 모델이 데모 촉각 데이터로 찾아냈습니다(Skill 원문: &quot;Both y negative → move +x. This held in 26/26&quot;).</li>
+</ul>
+</li>
+<li><strong>촉각 없는 Skill은 다수 방향으로 찍고 사후에 합리화했습니다.</strong> 막힘이 없자 &quot;방향이 맞았다&quot;고 결론 내렸지만, 시뮬레이터에서는 반대로 가도 자세에 막힘 신호가 나타나지 않습니다. CoT 근거가 실제 결정 요인과 다른 unfaithful explanation의 사례입니다(Turpin et al., arXiv:2305.04388).</li>
+<li><strong>전체 성공률에는 과제 수준의 지름길이 섞여 있습니다.</strong> 수직으로 밀기만 해도 +x seed는 9/13, 12/13이 성공했지만, −x seed는 0/7입니다. 촉각 효과는 숨은 변수별로 층화해야 보입니다.</li>
+<li><strong>비용:</strong> P+T skill은 결정당 약 30초(약 0.03 Hz), episode당 출력 토큰 약 46k입니다. 실시간 제어와는 거리가 멉니다. 원문은 비용과 지연을 보고하지 않았습니다.</li>
+</ol>
+<p>원문 형태의 비교(P+T skill vs P skill)는 85% 대 35%로, 원문 99% 대 31%와 방향과 크기가 비슷합니다. 그러나 2×2로 나눠 보면 이 차이는 &quot;촉각 관측&quot; 하나의 효과가 아닙니다. 촉각과 증류된 Skill의 상호작용(+35%p)에, Skill 없이도 되는 수직 삽입 지름길이 더해진 것입니다.</p>
+<hr />
+<h2>3. 반사실 촉각: 정말 규칙대로 움직이는가</h2>
+<p>§2.4의 해석은 &quot;근거 문장이 규칙을 인용하고 행동이 규칙과 맞았다&quot;는 상관에 기대고 있습니다. 원인인지 확인하려면 입력에 개입해야 합니다. 같은 Task Skill과 seed로 <strong>촉각 프레임만 v축으로 거울 반전</strong>했습니다. 그러면 전단 y와 curl의 부호, 접촉 중심 v, 이미지 상하가 바뀌고, 나머지 물리와 자세는 그대로입니다. 전단 y 숫자만 뒤집으면 다른 촉각 특징과 모순되지만, 거울 반전은 &quot;구멍이 반대쪽으로 기운 세계&quot;에서 나올 법한 일관된 관측을 만듭니다. 예측은 실행 전에 등록했습니다.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>실제 촉각 + Skill</th>
+<th>거울 반전 촉각 + Skill</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>성공 (Wilson 95% CI)</td>
+<td>17/20 (0.64–0.95)</td>
+<td><strong>1/20</strong> (0.01–0.24)</td>
+</tr>
+<tr>
+<td>첫 측방 이동이 구멍 쪽</td>
+<td>20/20</td>
+<td><strong>0/20</strong></td>
+</tr>
+<tr>
+<td>첫 측방 이동이 제시된 전단 단서(규칙)와 같은 방향</td>
+<td>20/20</td>
+<td>20/20</td>
+</tr>
+<tr>
+<td>결정 수 / 출력 토큰 / API 환산 (episode 평균)</td>
+<td>16.6 / 46k / $2.80</td>
+<td>14.7 / 66k / $2.97</td>
+</tr>
+</tbody>
+</table>
+<p>같은 seed 짝 McNemar 결과는 첫 이동 방향 p = 1.9×10⁻⁶, 성공 p = 3.1×10⁻⁵입니다.</p>
+<p><img src="figures/chart_cf_traj.png" alt="반사실 촉각 손끝 경로" /></p>
+<ul>
+<li><strong>방향 결정의 원인은 전단 y 부호입니다.</strong> +x seed와 −x seed에서 똑같이 뒤집혔으므로, 데모 다수 방향으로 치우친 결과가 아닙니다.</li>
+<li><strong>틀린 방향을 알려 주는 신호도 규칙의 틀 안에서 읽었습니다.</strong> 옆으로 움직이면 방향과 관계없이 축 방향 하중이 풀리는데, 모델은 이를 반대 방향에서도 &quot;구멍 축 위에 있다&quot;는 진행 증거로 읽었습니다. 방향 자체를 의심한 근거 문장은 없었습니다(키워드 검색 + 일부 직접 판독).</li>
+<li><strong>유일한 성공은 우연입니다.</strong> 시험관을 놓친 뒤 빈 손으로 탐색하던 중 성공 판정이 났습니다.</li>
+<li><strong>뜻하는 바:</strong> 데모에서 규칙을 스스로 찾아낸 것은 모델의 능력입니다. 그러나 폐루프에서 그 규칙이 틀렸을 때 물리 피드백으로 가설을 고치지는 못했습니다. 0단계 0c(&quot;reference를 뒤집으면 따른다&quot;, 48/48)가 폐루프에서도 재현된 것입니다. 다만 거울 반전 관측은 물리적으로 일관되므로, 물리를 이해하는 정책이라도 첫 이동은 틀릴 수 있습니다. 둘을 가르는 것은 그 뒤에 고치는지이고, 이번 결과는 &quot;고치지 못했다&quot;입니다.</li>
+</ul>
+<hr />
+<h2>4. 이 실험들의 한계</h2>
+<ul>
+<li>모델이 원문과 다릅니다(Opus 5.5 vs GPT-6-Astra). 카메라를 뺐으므로 원문 V+P+T 조건 자체의 재현이 아니고, 나머지 4개 태스크는 돌리지 않았습니다.</li>
+<li>과제 1개, 조건당 20 episode, seed당 1회 실행입니다. 파일럿에서 같은 seed의 결과가 바뀐 사례가 있습니다.</li>
+<li>센서 장착 정보는 촉각 조건에만 들어가므로, 여기서 &quot;촉각&quot; 요인은 촉각 관측과 그 해석 정보를 함께 뜻합니다.</li>
+<li>P skill의 Skill 텍스트가 실행 조건에 없는 카메라 단서를 참조했습니다. 증류 프롬프트의 결함일 수 있습니다.</li>
+<li>구멍 방향 복원은 UniVTAC의 난수 소비 순서에 의존하며, P+T skill 성공 17건과의 일치로만 검증했습니다.</li>
+<li>같은 seed라도 reset 직후의 파지 상태가 실행마다 조금 다를 수 있습니다. 성공률 비교에는 이 변동이 섞이지만, 반사실 실험의 주 지표(첫 이동 방향)에는 영향이 없습니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>05. 주장·수치 검증 (회의적 리뷰어 관점)</h1>
+<ul>
+<li>대상: Wang et al., &quot;GPT-6-Astra Understands Touch and Outperform Vision–Tactile–Language–Action Models&quot;, arXiv:2610.28457v1 (2026-10-20)</li>
+<li>작성: 결과 검증 에이전트, 2026-10-23</li>
+<li>검증 근거
+<ul>
+<li>원문: <code>paper/paper.txt</code> 전문, <code>page-01.png</code>(Fig.1C를 3배 확대해 막대 라벨 판독), <code>page-03.png</code>(Fig.2), <code>page-11.png</code>(Fig.4)</li>
+<li>교차검토 대상: <code>01_paper_analysis.md</code>, <code>02_prior_work.md</code>, <code>03_derivations.md</code> §0.2</li>
+<li>이번에 직접 확인한 웹 출처(spot-check, 2026-10-23)
+<ul>
+<li>N0-VTLA (arXiv:2607.23782) HTML Table 1 (UniVTAC 8-task)</li>
+<li>N0-TWAM (arXiv:2607.23783) HTML Table 2와 평가 프로토콜</li>
+<li>GPT-as-Policy (arXiv:2609.38537) HTML Appendix H와 Appendix C Table 17</li>
+<li>UniVTAC <code>envs/insert_hole.py</code> (github.com/univtac/UniVTAC, main 브랜치 raw)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>재실행: <code>python3 analysis/stats_check.py --json analysis/stats_check_results.json</code>. numpy와 표준 라이브러리만 쓰고 scipy는 쓰지 않는다. 스크립트가 Tab.2 평균, Fig.1C, 출처 표가 서로 일치하는지 assert로 검사한다.</li>
+<li>통계 가정. 이 문서의 p값과 CI는 모두 이 가정에 조건부다.
+<ol>
+<li>모든 셀은 n=100 독립 Bernoulli 시행으로 본다. Ours는 [§4.1]에 &quot;100 fixed test episodes per task&quot;로 명시되어 있다. N0-TWAM은 원 논문에 &quot;Each simulation task is evaluated over 100 trials&quot;로 명시되어 있다. N0-VTLA, π0.5, ACT+UniVTAC의 시행 수는 출처 표에 적혀 있지 않아 <strong>미확인</strong>이다.</li>
+<li>Ours와 baseline은 비짝(unpaired) 비교로 다룬다. baseline 수치는 다른 논문 표를 그대로 옮긴 값이고 seed가 같은지는 미확인이기 때문이다.</li>
+<li>Tab.3은 원문에 따르면 같은 100개 설정을 쓴 짝 비교다. 하지만 에피소드별 결과가 공개되지 않아 McNemar 검정은 상·하한만 계산했다.</li>
+</ol>
+</li>
+</ul>
+<hr />
+<h2>0. 결론 요약</h2>
+<ol>
+<li><strong>수치 산술은 모두 맞다.</strong> Tab.2의 5개 행 평균을 다시 계산해도 같다. Fig.1C의 30개 막대 라벨도 Tab.2와 모두 같다. Tab.3의 +68pp와 Tab.2/Tab.3의 Insert Hole 99%도 일치한다. baseline 20개 task 셀은 출처 논문 표와 같다. N0-VTLA와 N0-TWAM 행은 이번에 직접 대조했다.</li>
+<li><strong>제목의 &quot;Outperform VTLA Models&quot;는 데이터와 모순된다.</strong> 비교 대상 가운데 VTLA는 N0-VTLA 하나다. 5-task 평균은 N0-VTLA가 96.2, Ours가 93.8로 Ours가 낮다. 차이는 −2.4pp, SE는 1.34pp이고 양측 p=0.073이다. 방향을 정하면 오히려 &quot;Ours가 낮다&quot;는 쪽의 단측 p가 0.037이고, Jeffreys 사후확률로 계산한 P(Ours &gt; N0-VTLA)는 0.042다. Pull-out Key에서는 Ours가 15pp 낮고, 이 차이는 Holm 보정 후에도 유의하다(p=0.0008).</li>
+<li><strong>&quot;comparable to SOTA&quot;는 조건부로만 지지된다.</strong> task를 고정하고 에피소드 수준에서 보면 ±5pp 동등성 TOST가 p=0.026으로 성립한다. ±3pp 기준(p=0.33)이나 ±2pp 기준에서는 성립하지 않는다. task를 표본으로 보는 수준에서는 df=4라 95% CI가 [−13.2, +8.4]pp로 넓어 동등성이든 우열이든 판정할 수 없다.</li>
+<li><strong>저자가 내세운 우위는 모두 통계적으로 유의하지 않다.</strong> Insert Hole에서 N0-VTLA를 앞선다는 주장은 Fisher p=0.21이다. Lift Can 최고치는 N0-TWAM 93 대비 p=0.77이다. 게다가 n=100에서는 기준 성공률이 95%일 때 Ours가 100%를 찍어도 검출력 80%에 도달하지 못한다. 실험 설계 단계에서 이미 우위를 입증할 수 없는 구조다.</li>
+<li><strong>N0-TWAM 대비 평균 우위(+9.2pp)는 Lift Bottle 한 task에서 거의 다 나온다.</strong> Lift Bottle은 93 vs 58로 +35pp다. Lift Bottle을 빼면 평균 차이는 +2.75pp이고, 나머지 4개 task는 하나도 유의하지 않다. task 수준 paired t는 p=0.23이다.</li>
+<li><strong>촉각 ablation은 효과 크기 자체는 확실하다.</strong> 99 vs 31, Fisher p=1.3e−27, 짝 McNemar p≤1.2e−19다. 그러나 w/o tactile 조건에서 Task Skill을 다시 증류했고 촉각 reference도 함께 뺐다. 따라서 이 결과는 &quot;online 촉각 피드백의 효과&quot;가 아니라 &quot;촉각 파이프라인 전체의 효과&quot;로 읽어야 한다. task도 하나뿐이다.</li>
+<li><strong>내부 불일치는 세 가지다.</strong> (a) &quot;four methods&quot;라고 쓰고 5개를 나열한다. (b) E0를 baseline으로 언급하지만 결과가 없다. (c) 제목(&quot;Outperform&quot;)과 초록(&quot;comparable&quot;)이 서로 다른 주장을 한다.</li>
+<li><strong>분석 문서 정정이 필요하다.</strong> 01은 Lift Bottle을 &quot;유의하게 열세&quot;라고 했지만 Fisher로는 p=0.065라 정정이 필요하다. 01의 Fig.2 판독(w/o tactile에서 &quot;&lt;5° 유지&quot;)과 01 (g)의 &quot;비용은 출력 토큰이 지배&quot; 가정도 고쳐야 한다. 02에는 인용 건수와 셀 수 집계 오류가 있고, Insert Hole을 &quot;이진 선택&quot;으로 본 것은 과장이다. 03은 GPT-as-Policy를 &quot;미확인&quot;으로 남겨 02와 충돌한다. 상세는 §5에 정리했다.</li>
+</ol>
+<hr />
+<h2>1. 내부 일관성 점검</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>점검 항목</th>
+<th>결과</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I1</td>
+<td>Tab.2 행 평균 재계산</td>
+<td><strong>5/5 일치</strong>: ACT+UniVTAC 53.8, π0.5 43.0, N0-VTLA 96.2, N0-TWAM 84.6, Ours 93.8</td>
+<td><code>stats_check.py</code> §1</td>
+</tr>
+<tr>
+<td>I2</td>
+<td>Fig.1C 막대 라벨과 Tab.2 비교 (5 task + Avg, 5개 방법)</td>
+<td><strong>30/30 일치</strong>. Fig.1C는 N0-TWAM을 N0-VTLA보다 먼저 놓아 Tab.2와 순서만 다르며, 결과에는 영향이 없다</td>
+<td>page-01.png 확대 판독</td>
+</tr>
+<tr>
+<td>I3</td>
+<td>Tab.2(Insert Hole Ours 99)와 Tab.3(Ours 99)</td>
+<td>일치</td>
+<td>Tab.2, Tab.3</td>
+</tr>
+<tr>
+<td>I4</td>
+<td>Tab.3의 &quot;improvement of 68 percentage points&quot;</td>
+<td>99−31=68, 일치</td>
+<td>§4.3</td>
+</tr>
+<tr>
+<td>I5</td>
+<td>초록의 93.8%와 &quot;31% to 99%&quot;</td>
+<td>일치</td>
+<td>Abstract</td>
+</tr>
+<tr>
+<td>I6</td>
+<td>Baselines 절: &quot;four methods&quot;라고 쓰고 E0, π0.5, ACT+UniVTAC, N0-VTLA, N0-TWAM 5개를 나열</td>
+<td><strong>불일치</strong>. Tab.2, §4.2, Fig.1C에는 4개만 있다. 즉 &quot;four&quot;는 표와 맞고, E0만 결과 없이 들어가 있다</td>
+<td>§4.1 vs Tab.2</td>
+</tr>
+<tr>
+<td>I7</td>
+<td>E0를 vision-only baseline으로 언급</td>
+<td><strong>결과 없음</strong>. 02에 따르면 출처 표에도 E0의 UniVTAC 수치가 없다. 인용 서지(제목, 학회)도 실제와 다르고 자기 인용이다</td>
+<td>§4.1, 02 §1 #23</td>
+</tr>
+<tr>
+<td>I8</td>
+<td>제목 &quot;Outperform&quot;과 초록·결론 &quot;comparable ... higher success on selected tasks&quot;</td>
+<td><strong>불일치</strong>. 본문은 스스로 &quot;approaches the 96.2%&quot;라고 쓴다 [§4.2]</td>
+<td>Title, Abstract, §4.2, §5</td>
+</tr>
+<tr>
+<td>I9</td>
+<td>Contribution 3 &quot;100 seeds per task&quot;와 §4.1 &quot;100 fixed test episodes&quot;</td>
+<td>일치</td>
+<td>§1, §4.1</td>
+</tr>
+<tr>
+<td>I10</td>
+<td>Tab.3 &quot;Online observations: V+P vs V+P+T&quot;</td>
+<td><strong>표기가 차이를 축소한다</strong>. 본문에 따르면 w/o tactile에서는 촉각 reference를 제거하고 Task Skill도 다시 만들었다. 표는 online 관측 차이만 보여 준다</td>
+<td>§4.3</td>
+</tr>
+<tr>
+<td>I11</td>
+<td>Tab.1의 Ours 행 &quot;No parameter updates&quot;와 Fig.1C의 &quot;Ours (Training-free)&quot;</td>
+<td><strong>비대칭 표기</strong>. ACT+UniVTAC 행에는 &quot;50 demos&quot;를 적었지만, Ours도 task당 50 demo(지식 구성 40, validation 10)를 쓰는데 그 사실을 Tab.1에 적지 않았다</td>
+<td>Tab.1, §4.1</td>
+</tr>
+<tr>
+<td>I12</td>
+<td>Fig.2(w/ tactile, step 191에서 성공)와 Fig.4(step 191에서 rightward probing 시작)</td>
+<td>서로 다른 에피소드다. 원문은 Fig.4를 &quot;a single Insert Hole episode&quot;라고만 해서 모순은 아니다. 01의 지적이 맞다</td>
+<td>page-03, page-11</td>
+</tr>
+<tr>
+<td>I13</td>
+<td>명칭: Fig.2 캡션과 §4.2는 &quot;GPT-as-Policy&quot;, 나머지는 &quot;GPT-as-Tactile-Policy&quot;</td>
+<td>혼용. 경미</td>
+<td>Fig.2, §4.2</td>
+</tr>
+<tr>
+<td>I14</td>
+<td>§4.1 &quot;tasks cover ... tactile classification&quot;(Grasp Classify)</td>
+<td>그런데 Grasp Classify의 촉각 ablation이 없다. 98%가 촉각 덕분인지 판단할 수 없다</td>
+<td>§4.1, §4.3</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. 주장별 판정표</h2>
+<p>판정 기준은 다음과 같다.</p>
+<ul>
+<li><strong>지지</strong>: 원문 데이터로 주장이 성립한다.</li>
+<li><strong>부분지지</strong>: 수치상으로는 맞지만 통계, 교란, 범위 때문에 표현이 과하다.</li>
+<li><strong>불충분</strong>: 주장을 판정할 데이터가 없다.</li>
+<li><strong>모순</strong>: 원문 데이터와 반대다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장 (원문 요지)</th>
+<th>위치</th>
+<th>판정</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>&quot;GPT-6-Astra <strong>Understands</strong> Touch&quot;</td>
+<td>Title, Abstract 첫 문단</td>
+<td><strong>불충분</strong></td>
+<td>관찰된 행동(변위가 크면 후퇴하고 작으면 전진, Fig.4)은 §3.2에 있는 Task Skill 예시 규칙과 구조가 같다. Task Skill을 뺀 조건, 반사실적 촉각 입력, 규칙에 없는 접촉 상황 실험이 없어서 &quot;이해&quot;와 &quot;규칙 추종&quot;을 구분할 수 없다</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>&quot;<strong>Outperform</strong> Vision–Tactile–Language–Action Models&quot;</td>
+<td>Title</td>
+<td><strong>모순</strong></td>
+<td>비교 대상 중 VTLA는 N0-VTLA뿐이다. N0-TWAM은 world-action model이고, ACT+UniVTAC와 π0.5는 VTLA가 아니다. N0-VTLA 대비 평균은 −2.4pp(단측 p=0.037, 불리한 방향), task 우열은 2승 3패, Pull-out Key는 유의한 열세(Holm p=0.0008)다</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>&quot;93.8% mean success across five UniVTAC tasks&quot;</td>
+<td>Abstract</td>
+<td><strong>지지</strong>(산술)</td>
+<td>469/500. Wilson 95% CI는 [91.3, 95.6]이다. 다만 UniVTAC 8개 task 중 5개만 썼고, 선정 기준은 적혀 있지 않다</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>&quot;Overall performance is comparable to state-of-the-art policies&quot;</td>
+<td>Abstract, §1, §5</td>
+<td><strong>부분지지</strong></td>
+<td>task 고정, 에피소드 수준 TOST로 보면 ±5pp에서는 동등(p=0.026), ±3pp에서는 동등하지 않음(p=0.33)이다. task를 표본으로 보면 판정할 수 없다(95% CI [−13.2, +8.4]). &quot;comparable&quot;은 &quot;5pp 안쪽&quot;이라는 뜻으로만 방어된다</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>&quot;higher success on selected tasks&quot;</td>
+<td>Abstract, §1</td>
+<td><strong>부분지지</strong></td>
+<td>수치상 Ours가 단독 1위인 task는 Lift Can 하나다. Insert Hole은 N0-TWAM과 공동 1위다. 1위인 baseline과 비교하면 어느 쪽도 유의하지 않다(LC vs N0-TWAM p=0.77, IH는 동률)</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>&quot;SOTA-level performance without policy fine-tuning ... over 100 seeds per task following the benchmark protocol&quot;</td>
+<td>§1 Contribution 3</td>
+<td><strong>부분지지</strong></td>
+<td>평균 순위는 2/5이고 SOTA(N0-VTLA)보다 낮다. 100 trial 프로토콜은 N0-TWAM 원 논문과 같다. 하지만 baseline과 seed가 같은지는 미확인이고, baseline 수치는 직접 돌린 값이 아니라 옮겨 온 값이다</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>&quot;On Insert Hole, tactile feedback improves success from 31% to 99%&quot;</td>
+<td>Abstract, Tab.3, §4.3</td>
+<td><strong>부분지지</strong></td>
+<td>차이 자체는 매우 확실하다(Newcombe 95% CI [+57.4, +76.3]pp, McNemar p≤1.2e−19). 그러나 비교에서 바뀐 것이 셋이다. ① online 촉각, ② 촉각 reference, ③ 다시 증류한 Task Skill. &quot;tactile feedback&quot;만의 효과로 귀속할 수 없다. 단일 task, 단일 run이다</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>&quot;Mean 93.8% approaches the 96.2% of N0-VTLA and exceeds the 84.6% of N0-TWAM&quot;</td>
+<td>§4.2</td>
+<td><strong>지지</strong></td>
+<td>N0-TWAM 대비 +9.2pp. 에피소드 수준에서 z=5.09, CMH p=1.7e−6이다. 단, 이 우위의 대부분은 Lift Bottle(+35pp)에서 나온다. task 수준 t는 p=0.23, sign test는 p=0.125다</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>&quot;On Insert Hole, 99%, matching N0-TWAM and outperforming N0-VTLA&quot;</td>
+<td>§4.2</td>
+<td><strong>부분지지</strong></td>
+<td>N0-TWAM과 같다는 부분은 맞다(99 vs 99). N0-VTLA를 앞선다는 부분은 유의하지 않다(+4pp, Fisher p=0.21, CI [−1.3, +10.2]). 이를 입증하려면 arm당 약 285 에피소드가 필요하다</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>&quot;On Lift Can, 95%, the highest success rate among the compared methods&quot;</td>
+<td>§4.2</td>
+<td><strong>부분지지</strong></td>
+<td>수치상 최고는 맞다. 출처 표에 있지만 이 논문이 빠뜨린 InternVLA-A1(90)을 포함해도 최고다. 하지만 N0-TWAM 93과 통계적으로 구분되지 않는다(p=0.77, 검출에 arm당 약 2,213 필요)</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>&quot;Across all five tasks, it matches or outperforms N0-TWAM, demonstrating consistent performance&quot;</td>
+<td>§4.2</td>
+<td><strong>부분지지</strong></td>
+<td>수치상으로는 5/5 성립한다(0, +2, +4, +35, +5). 개별 task에서 유의한 것은 Lift Bottle 하나다(나머지 p≥0.28). &quot;consistent&quot;라는 근거는 Ours의 성공률 범위가 84–99로 좁다는 정도다</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>&quot;matching or exceeding the compared methods on selected tasks&quot;</td>
+<td>§5</td>
+<td><strong>지지</strong>(수치)</td>
+<td>IH 공동 1위, LC 1위. 통계적 우위는 아니다</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>Baselines &quot;previously evaluated on UniVTAC&quot;</td>
+<td>§4.1</td>
+<td><strong>지지</strong>(출처), <strong>불충분</strong>(공정성)</td>
+<td>20개 task 셀이 출처 표와 같다. 같은 출처 표에 있는 더 강한 행(InternVLA-A1의 IH 93과 LC 90, Xiaomi-Robotics-0의 IH 96)은 이 논문에 실리지 않았다. 이 행들을 넣어도 Ours의 task별 순위는 바뀌지 않는다. seed와 시행 수가 같은지는 미확인이다</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>E0를 vision-only baseline으로 비교</td>
+<td>§4.1</td>
+<td><strong>모순</strong></td>
+<td>결과가 없다(I6, I7)</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>&quot;Without additional robotics-specific pretraining or per-task policy fine-tuning&quot;</td>
+<td>Abstract, Tab.1</td>
+<td><strong>부분지지</strong></td>
+<td>파라미터를 갱신하지 않는 것은 설계상 참이다. 그러나 ① GPT-6-Astra의 사전학습 데이터가 공개되지 않아 &quot;robotics-specific pretraining 없음&quot;은 검증할 수 없다. ② task별로 데모 50개를 쓰고 Task Skill을 증류하며 10개 validation을 한다. 이 validation이 반복 튜닝이었는지는 미확인이고, 사실상 task별 적응 단계다</td>
+</tr>
+<tr>
+<td>C16</td>
+<td>Tab.1 &quot;Knowledge-guided probing ✓&quot; (Ours만)</td>
+<td>Tab.1</td>
+<td><strong>불충분</strong></td>
+<td>저자가 직접 정의한 정성 열이다. 측정 지표가 없다</td>
+</tr>
+<tr>
+<td>C17</td>
+<td>&quot;Execution analysis further demonstrates contact-guided probing and correction&quot;</td>
+<td>Abstract, §4.4</td>
+<td><strong>불충분</strong></td>
+<td>근거는 선택된 에피소드 1–2개(Fig.2, Fig.4)뿐이다. probing 빈도나 성공 기여 같은 집계 통계가 없다. &quot;demonstrates&quot;보다 &quot;illustrates&quot;가 맞다. 원문 §4.4 본문도 스스로 &quot;illustrate&quot;라고 쓴다</td>
+</tr>
+<tr>
+<td>C18</td>
+<td>Fig.2: &quot;w/o tactile ... orientation and lateral adjustments remain limited&quot;</td>
+<td>§1, §4.3, Fig.2</td>
+<td><strong>부분지지</strong>(n=1)</td>
+<td>그림 곡선을 보면 w/o tactile의 측면 변위는 약 0mm다. 축 변화는 step 50–90 사이에 약 10–12°까지 갔다가 약 5°로 돌아온다. 단일 에피소드라 일반화할 수 없다</td>
+</tr>
+<tr>
+<td>C19</td>
+<td>&quot;These results establish ... an effective route to <strong>efficient</strong> contact-rich manipulation&quot;</td>
+<td>§5</td>
+<td><strong>불충분</strong></td>
+<td>추론 비용, 지연, 토큰을 하나도 보고하지 않았다. 같은 프로토콜인 GPT-as-Policy는 RoboDojo Direct 50 instance에서 1.13B 토큰을 썼다(arXiv:2609.38537 Tab.17). &quot;efficient&quot;는 학습 비용에만 해당한다</td>
+</tr>
+<tr>
+<td>C20</td>
+<td>Direct-control 프로토콜: xhigh, IK, 1–5 step, 에피소드별 세션</td>
+<td>§3.4, §4.1</td>
+<td><strong>지지</strong>(계보)</td>
+<td>GPT-as-Policy Appendix H와 같다: &quot;gpt-6-astra with xhigh reasoning through the Responses API&quot;, repeat count 1–5(각 0.05s control step), &quot;one model thread for the physical episode&quot;. 이번에 직접 확인했다. UniVTAC에서 control step 주기가 같은지는 미확인이다</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. 통계 표</h2>
+<h3>3.1 Wilson 95% CI (n=100 가정, %)</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Insert Hole</th>
+<th>Lift Can</th>
+<th>Grasp Classify</th>
+<th>Lift Bottle</th>
+<th>Pull-out Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACT + UniVTAC Encoder</td>
+<td>24 [16.7, 33.2]</td>
+<td>29 [21.0, 38.5]</td>
+<td>99 [94.6, 99.8]</td>
+<td>71 [61.5, 79.0]</td>
+<td>46 [36.6, 55.7]</td>
+</tr>
+<tr>
+<td>π0.5</td>
+<td>25 [17.5, 34.3]</td>
+<td>6 [2.8, 12.5]</td>
+<td>49 [39.4, 58.7]</td>
+<td>100 [96.3, 100.0]</td>
+<td>35 [26.4, 44.7]</td>
+</tr>
+<tr>
+<td>N0-VTLA</td>
+<td>95 [88.8, 97.8]</td>
+<td>88 [80.2, 93.0]</td>
+<td>100 [96.3, 100.0]</td>
+<td>99 [94.6, 99.8]</td>
+<td>99 [94.6, 99.8]</td>
+</tr>
+<tr>
+<td>N0-TWAM</td>
+<td>99 [94.6, 99.8]</td>
+<td>93 [86.3, 96.6]</td>
+<td>94 [87.5, 97.2]</td>
+<td>58 [48.2, 67.2]</td>
+<td>79 [70.0, 85.8]</td>
+</tr>
+<tr>
+<td><strong>Ours</strong></td>
+<td>99 [94.6, 99.8]</td>
+<td>95 [88.8, 97.8]</td>
+<td>98 [93.0, 99.4]</td>
+<td>93 [86.3, 96.6]</td>
+<td>84 [75.6, 89.9]</td>
+</tr>
+<tr>
+<td>Tab.3 w/o tactile</td>
+<td>31 [22.8, 40.6]</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<h3>3.2 Ours vs N0-VTLA, N0-TWAM (task별, 비짝)</h3>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>Task</th>
+<th>Ours</th>
+<th>Base</th>
+<th>차이(pp)</th>
+<th>Newcombe 95% CI</th>
+<th>z</th>
+<th>p (z)</th>
+<th>p (Fisher)</th>
+<th>Holm (Fisher, 5 task)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vs N0-VTLA</td>
+<td>Insert Hole</td>
+<td>99</td>
+<td>95</td>
+<td>+4</td>
+<td>[−1.3, +10.2]</td>
+<td>+1.66</td>
+<td>0.097</td>
+<td>0.212</td>
+<td>0.423</td>
+</tr>
+<tr>
+<td></td>
+<td>Lift Can</td>
+<td>95</td>
+<td>88</td>
+<td>+7</td>
+<td>[−0.9, +15.3]</td>
+<td>+1.77</td>
+<td>0.076</td>
+<td>0.126</td>
+<td>0.379</td>
+</tr>
+<tr>
+<td></td>
+<td>Grasp Classify</td>
+<td>98</td>
+<td>100</td>
+<td>−2</td>
+<td>[−7.0, +2.0]</td>
+<td>−1.42</td>
+<td>0.155</td>
+<td>0.497</td>
+<td>0.497</td>
+</tr>
+<tr>
+<td></td>
+<td>Lift Bottle</td>
+<td>93</td>
+<td>99</td>
+<td>−6</td>
+<td>[−12.8, −0.3]</td>
+<td>−2.17</td>
+<td>0.030</td>
+<td><strong>0.065</strong></td>
+<td>0.259</td>
+</tr>
+<tr>
+<td></td>
+<td>Pull-out Key</td>
+<td>84</td>
+<td>99</td>
+<td>−15</td>
+<td>[−23.5, −7.6]</td>
+<td>−3.80</td>
+<td>1.4e−4</td>
+<td><strong>1.5e−4</strong></td>
+<td><strong>7.7e−4</strong></td>
+</tr>
+<tr>
+<td>vs N0-TWAM</td>
+<td>Insert Hole</td>
+<td>99</td>
+<td>99</td>
+<td>0</td>
+<td>[−4.5, +4.5]</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>Lift Can</td>
+<td>95</td>
+<td>93</td>
+<td>+2</td>
+<td>[−5.1, +9.3]</td>
+<td>+0.60</td>
+<td>0.55</td>
+<td>0.77</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>Grasp Classify</td>
+<td>98</td>
+<td>94</td>
+<td>+4</td>
+<td>[−1.9, +10.6]</td>
+<td>+1.44</td>
+<td>0.15</td>
+<td>0.28</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>Lift Bottle</td>
+<td>93</td>
+<td>58</td>
+<td>+35</td>
+<td>[+23.6, +45.4]</td>
+<td>+5.75</td>
+<td>8.7e−9</td>
+<td><strong>6.7e−9</strong></td>
+<td><strong>3.3e−8</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>Pull-out Key</td>
+<td>84</td>
+<td>79</td>
+<td>+5</td>
+<td>[−5.8, +15.7]</td>
+<td>+0.91</td>
+<td>0.36</td>
+<td>0.47</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>참고로 ACT+UniVTAC, π0.5와의 비교도 스크립트 §3에 있다. 눈여겨볼 결과가 둘 있다. 첫째, Lift Bottle에서 <strong>vision-only π0.5(100)가 Ours(93)보다 유의하게 높다</strong>(Fisher p=0.014, Holm p=0.014). 촉각을 쓰는 방법이 시각 전용 VLA에 지는 task가 있다는 뜻인데, 원문은 이를 논의하지 않는다. 둘째, Grasp Classify에서는 ACT+UniVTAC(99)와 차이가 없다(p=1).</p>
+<p>방법론 메모를 덧붙인다. 성공률이 0.93–1.00 경계에 몰려 있어 기대 실패 수가 5보다 작은 셀이 많다. 그래서 z 검정(Wald 또는 pooled)은 반보수적이고, Fisher exact를 기준으로 삼아야 한다. Lift Bottle은 z 검정으로는 p=0.030이지만 Fisher로는 0.065라 유의성 판정이 뒤집힌다.</p>
+<h3>3.3 5-task 평균 비교</h3>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>Ours vs N0-VTLA (93.8 vs 96.2)</th>
+<th>Ours vs N0-TWAM (93.8 vs 84.6)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(A) 에피소드 수준, task 고정: 차이, SE</td>
+<td>−2.4pp, SE 1.34</td>
+<td>+9.2pp, SE 1.81</td>
+</tr>
+<tr>
+<td>양측 p / 95% CI</td>
+<td>0.073 / [−5.0, +0.2]</td>
+<td>5e−7 / [+5.7, +12.7]</td>
+</tr>
+<tr>
+<td>단측 p (Ours &lt; base) / 90% CI</td>
+<td><strong>0.037</strong> / [−4.6, −0.2]</td>
+<td>–</td>
+</tr>
+<tr>
+<td>(A′) TOST 동등성 p (±2 / ±3 / ±5pp)</td>
+<td>0.62 / 0.33 / <strong>0.026</strong></td>
+<td>동등하지 않음</td>
+</tr>
+<tr>
+<td>(B) task 수준 paired t (df=4)</td>
+<td>d=[+4, +7, −2, −6, −15], t=−0.62, p=0.57, 95% CI [−13.2, +8.4]</td>
+<td>d=[0, +2, +4, +35, +5], t=+1.41, p=0.23, 95% CI [−8.9, +27.3]</td>
+</tr>
+<tr>
+<td>sign test</td>
+<td>2/5 양(+), p=1.0</td>
+<td>4/4 양(+), 동률 1, p=0.125</td>
+</tr>
+<tr>
+<td>(C) CMH (task 층화)</td>
+<td>χ²=2.58, p=0.108, MH OR=0.60</td>
+<td>χ²=22.9, p=1.7e−6, MH OR=2.90</td>
+</tr>
+<tr>
+<td>(D) pooled Fisher 469/500 vs base/500</td>
+<td>p=0.11</td>
+<td>p=3.4e−6</td>
+</tr>
+<tr>
+<td>(E) Jeffreys Beta MC, 2×10⁵ draws</td>
+<td>P(Ours &gt; VTLA)=<strong>0.042</strong>, 95% CrI [−5.1, +0.3]</td>
+<td>P(Ours &gt; TWAM)≈1.000, CrI [+5.5, +12.7]</td>
+</tr>
+</tbody>
+</table>
+<p>(A)와 (B)는 서로 다른 질문에 답한다. (A)는 이 5개 task에 대한 조건부 추론이고 에피소드 수준 잡음만 반영한다. (B)는 task를 모집단에서 뽑은 표본으로 보는 추론이며, &quot;다른 contact-rich task에서도 그럴까&quot;라는 일반화 질문에 해당한다. 제목과 초록의 일반 주장은 (B)의 질문인데, df=4에서는 어느 방향으로도 결론이 나지 않는다. 또 N0-VTLA의 100% 셀은 binomial 분산이 0이라 (A)의 SE를 약간 과소추정한다. 이를 보정한 (E)도 같은 결론을 낸다.</p>
+<h3>3.4 Tab.3 촉각 ablation</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>99 vs 31, 차이 Newcombe 95% CI</td>
+<td>+68pp [+57.4, +76.3]</td>
+</tr>
+<tr>
+<td>비짝 Fisher</td>
+<td>p=1.3e−27</td>
+</tr>
+<tr>
+<td>짝 McNemar(exact). Ours 실패 1건이므로 불일치쌍 c∈{0,1}, b=68+c</td>
+<td>c=0: p=6.8e−21, c=1: p=1.2e−19</td>
+</tr>
+<tr>
+<td>해석</td>
+<td>통계적으로는 의심할 여지가 없다. 남는 문제는 <strong>인과 귀속</strong>(Task Skill 재증류, reference 제거)과 <strong>외적 타당성</strong>(1개 task)이다</td>
+</tr>
+</tbody>
+</table>
+<h3>3.5 검출력(power): 이 실험이 원리적으로 판정할 수 있는 범위</h3>
+<p>조건은 α=0.05(양측), power=0.8, 정규근사다.</p>
+<table>
+<thead>
+<tr>
+<th>대상</th>
+<th>필요 표본</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IH 99 vs 95</td>
+<td>arm당 285</td>
+</tr>
+<tr>
+<td>LC 95 vs 88</td>
+<td>arm당 248</td>
+</tr>
+<tr>
+<td>LC 95 vs 93</td>
+<td>arm당 2,213</td>
+</tr>
+<tr>
+<td>LB 93 vs 99</td>
+<td>arm당 167</td>
+</tr>
+<tr>
+<td>평균 93.8 vs 96.2 (task 층화 분산)</td>
+<td><strong>task당 245</strong>, arm당 약 1,225</td>
+</tr>
+<tr>
+<td>평균 93.8 vs 96.2 (pooled 비율 근사, 03 §0.2의 방식)</td>
+<td>arm 전체 1,294 (task당 약 259)</td>
+</tr>
+<tr>
+<td>n=100에서 기준 95%보다 <strong>높은</strong> 쪽의 MDE</td>
+<td><strong>계산 불가</strong>. Ours=100%여도 power가 0.8에 못 미친다</td>
+</tr>
+<tr>
+<td>n=100에서 기준 95% / 99%보다 낮은 쪽의 MDE</td>
+<td>−12.4pp / −9.0pp</td>
+</tr>
+</tbody>
+</table>
+<p>결론적으로 상한에 가까운 baseline을 상대로 &quot;outperform&quot;을 입증하는 것은 n=100 설계에서 원리적으로 불가능하다. 우위를 주장하려면 task당 수백 에피소드가 필요하다.</p>
+<h3>3.6 UniVTAC 8-task 시나리오 (제외 task: Put Bottle, Insert HDMI, Insert Tube)</h3>
+<table>
+<thead>
+<tr>
+<th>Baseline</th>
+<th>8-task 평균 (출처)</th>
+<th>제외 3개 평균</th>
+<th>Ours가 이 baseline의 8-task 평균과 같아지려면 제외 3개에서 필요한 평균</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N0-VTLA</td>
+<td>83.1</td>
+<td>61.3</td>
+<td><strong>≥65.3%</strong></td>
+</tr>
+<tr>
+<td>N0-TWAM</td>
+<td>84.5</td>
+<td>84.3</td>
+<td><strong>≥69.0%</strong></td>
+</tr>
+<tr>
+<td>ACT+UniVTAC</td>
+<td>48.0</td>
+<td>38.3</td>
+<td>제외 task에서 0%여도 Ours가 앞선다</td>
+</tr>
+<tr>
+<td>π0.5</td>
+<td>41.4</td>
+<td>38.7</td>
+<td>제외 task에서 0%여도 Ours가 앞선다</td>
+</tr>
+</tbody>
+</table>
+<p>5-task 부분집합을 고르면 N0-VTLA는 크게 유리해지고(+13.1pp) N0-TWAM은 거의 영향이 없다. 따라서 &quot;5-task 선택이 Ours에 유리하게 체리피킹됐다&quot;는 증거는 <strong>없다</strong>. 다만 Ours가 제외된 3개 task에서 몇 %를 내는지 모르기 때문에(미확인) 8-task 순위는 판정할 수 없다.</p>
+<hr />
+<h2>4. 계산 코드 (핵심부 인라인)</h2>
+<p>전체 코드는 <code>analysis/stats_check.py</code>에 있다. 아래는 판정에 직접 쓰인 함수만 옮긴 것이다.</p>
+<pre><code class="language-python">import math, numpy as np
+N = 100
+def norm_cdf(x): return 0.5 * math.erfc(-x / math.sqrt(2))
+
+def wilson(k, n=N, z=1.959964):
+    p = k / n; den = 1 + z*z/n
+    c = (p + z*z/(2*n)) / den
+    h = z * math.sqrt(p*(1-p)/n + z*z/(4*n*n)) / den
+    return max(0, c-h), min(1, c+h)
+
+def newcombe_diff_ci(k1, k2, n1=N, n2=N):           # Newcombe (1998) method 10
+    p1, p2 = k1/n1, k2/n2; (l1, u1), (l2, u2) = wilson(k1, n1), wilson(k2, n2)
+    d = p1 - p2
+    return d - math.hypot(p1-l1, u2-p2), d + math.hypot(u1-p1, p2-l2)
+
+def _lchoose(n, k): return math.lgamma(n+1) - math.lgamma(k+1) - math.lgamma(n-k+1)
+def fisher_two_sided(k1, k2, n1=N, n2=N):          # sum of P(table) &lt;= P(observed)
+    K, M = k1+k2, n1+n2
+    lp = {x: _lchoose(n1, x) + _lchoose(n2, K-x) - _lchoose(M, K)
+          for x in range(max(0, K-n2), min(K, n1)+1)}
+    return min(1.0, sum(math.exp(v) for v in lp.values() if v &lt;= lp[k1] + 1e-9))
+
+def stratified_mean_diff(ours, base, n=N):         # equal-weight task mean, tasks fixed
+    d = np.mean(ours) - np.mean(base)
+    var = sum(a/n*(1-a/n)/n + c/n*(1-c/n)/n for a, c in zip(ours, base)) / len(ours)**2
+    se = math.sqrt(var) * 100; z = d / se
+    return d, se, z, 2*(1-norm_cdf(abs(z))), norm_cdf(z)   # diff, SE, z, p_two, p(ours&lt;base)
+
+def tost(d, se, m): return max(1-norm_cdf((d+m)/se), norm_cdf((d-m)/se))
+
+def cmh(ours, base, n=N):                          # Cochran–Mantel–Haenszel, cc=0.5
+    dev = var = 0.0
+    for a, c in zip(ours, base):
+        b, d = n-a, n-c; t = a+b+c+d
+        dev += a - (a+b)*(a+c)/t
+        var += (a+b)*(c+d)*(a+c)*(b+d) / (t*t*(t-1))
+    chi2 = (abs(dev)-0.5)**2 / var
+    return chi2, math.erfc(math.sqrt(chi2/2))
+
+ours = [99, 95, 98, 93, 84]; vtla = [95, 88, 100, 99, 99]; twam = [99, 93, 94, 58, 79]
+print(stratified_mean_diff(ours, vtla))   # (-2.4, 1.34, -1.79, 0.073, 0.037)
+print(fisher_two_sided(93, 99))           # 0.0649  (Lift Bottle; z-test gives 0.030)
+print(cmh(ours, twam))                    # (22.9, 1.7e-06)
+</code></pre>
+<p>이 밖에 스크립트에 들어 있는 것은 다음과 같다.</p>
+<ul>
+<li>task 수준 paired t: 불완전 베타 함수로 t-CDF를 직접 구현했고, df=4 닫힌형과 소수 15자리까지 일치하는 것을 확인했다.</li>
+<li>정확 sign test, Holm 보정, Jeffreys Beta Monte Carlo(seed 0)</li>
+<li>검출력/MDE 계산, 8-task 시나리오</li>
+<li>일치성 assert: Tab.2 평균, Fig.1C, 출처 표 셀</li>
+</ul>
+<hr />
+<h2>5. 분석 문서에 대한 정정 사항</h2>
+<h3>5.1 <code>01_paper_analysis.md</code></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>위치</th>
+<th>원 서술</th>
+<th>정정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K1</td>
+<td>§3.3 표, L6</td>
+<td>Lift Bottle 93 vs 99: &quot;z=−2.17, p≈0.03, <strong>유의하게 열세</strong>&quot;</td>
+<td>기대 실패 수가 5보다 작아 z 검정은 부적절하다. <strong>Fisher p=0.065, Holm 보정 p=0.26으로 유의하지 않다.</strong> 여러 검정에서 일관되게 유의한 열세는 Pull-out Key 하나뿐이다(Holm p=0.0008). L6의 &quot;열세(Pull-out Key, Lift Bottle)는 유의&quot;도 같은 방식으로 고쳐야 한다</td>
+</tr>
+<tr>
+<td>K2</td>
+<td>§3.3</td>
+<td>Lift Can vs N0-VTLA &quot;p≈0.08&quot;, Insert Hole &quot;p≈0.10&quot;</td>
+<td>z 검정 값으로는 맞다. Fisher로는 각각 0.13과 0.21이다. 결론(&quot;유의하지 않음&quot;)은 그대로다</td>
+</tr>
+<tr>
+<td>K3</td>
+<td>§3.3</td>
+<td>평균 &quot;p≈0.07, 경계선&quot;</td>
+<td>양측 p는 맞다. 다만 단측(Ours가 낮음) p=0.037, P(Ours&gt;VTLA)=0.042, ±5pp TOST 동등 p=0.026을 함께 적어야 한다. task 수준 CI [−13.2, +8.4]도 병기해야 한다. &quot;comparable&quot;은 5pp 마진에서만 지지된다</td>
+</tr>
+<tr>
+<td>K4</td>
+<td>§3.3 마지막 문단</td>
+<td>&quot;N0-TWAM과 모든 태스크에서 동등하거나 그 이상은 수치상 사실&quot;</td>
+<td>맞다. 다만 유의한 우위는 Lift Bottle 하나이고, LB를 빼면 평균 차이는 +2.75pp라는 점을 덧붙여야 한다</td>
+</tr>
+<tr>
+<td>K5</td>
+<td>§3.4</td>
+<td>Fig.2: &quot;w/o tactile 조건은 축 변화가 5° 미만에 머물고&quot;</td>
+<td><strong>그림과 다르다.</strong> w/o tactile 곡선은 step 50–90 사이에 약 10–12°까지 올라갔다가(&quot;Recover&quot;) 약 5°로 끝난다. &quot;&lt;5°&quot;는 step 165 keyframe에 붙은 라벨이다. w/ tactile의 측면 변위는 &quot;Align&quot;에서 최대 약 43mm, &quot;Success&quot; 시점에 약 33mm다. 그림 판독 오차는 ±3 정도다</td>
+</tr>
+<tr>
+<td>K6</td>
+<td>§3.5</td>
+<td>baseline 수치는 &quot;기존 보고치 인용 가능성 높음(확실도: 중간)&quot;</td>
+<td><strong>확인됨으로 올린다.</strong> 02의 대조와 이번 spot-check(arXiv:2607.23782 Tab.1, 2607.23783 Tab.2)에서 셀 단위로 일치했다</td>
+</tr>
+<tr>
+<td>K7</td>
+<td>§2.4</td>
+<td>마커 격자 &quot;대략 10×8&quot;</td>
+<td>Fig.4 quiver를 판독하면 약 9열×7행으로 보인다. 렌더 해상도가 낮아 확정할 수 없으니 미확인으로 두는 것이 맞다. 경미하다</td>
+</tr>
+<tr>
+<td>K8</td>
+<td>§5(g)</td>
+<td>&quot;비용은 출력(reasoning) 토큰이 지배&quot;, 호출당 출력 2k–20k</td>
+<td><strong>유일한 외부 근거와 충돌한다.</strong> GPT-as-Policy(같은 프로토콜) Tab.17에 따르면 RoboDojo Direct 50 instance의 총 1,132.3M 토큰 가운데 cached input이 1,107.3M(97.8%), output이 2.09M(0.18%)이다. instance당 output은 약 42k이고 cached input은 약 22.1M이다. 01과 같은 가상 단가를 적용하면 instance당 약 $14.6이고, 그중 cached input이 약 $11.1로 <strong>입력이 지배</strong>한다. 단, Tab.17의 &quot;output&quot;에 reasoning 토큰이 포함되는지는 미확인이다. 결론적으로 01의 토큰 구성 가정은 근거가 약하다. 대표값 $13k는 외부 근거로 지지되지 않는다. instance당 $2–15 수준의 외부 근거(Astranomy 약 $1.96, 02와 03 인용, 직접 미확인)를 쓰면 600 에피소드에 약 $1.2k–$9k다</td>
+</tr>
+<tr>
+<td>K9</td>
+<td>§5(g)</td>
+<td>Fig.4 시점 간격으로 &quot;평균 horizon ≈4&quot; 추정</td>
+<td>keyframe 간격(3–5)은 horizon ≤5와 <strong>모순되지 않을</strong> 뿐이다. 두 keyframe 사이에 호출이 여러 번 있었을 수도 있으므로 horizon을 식별할 근거는 아니다. 확실도를 &quot;낮음&quot;으로 내려야 한다. 참고로 GPT-as-Policy의 control step은 0.05s이고, UniVTAC에서도 같은지는 미확인이다</td>
+</tr>
+<tr>
+<td>K10</td>
+<td>L4</td>
+<td>&quot;시뮬레이션은 LLM 호출 동안 시간을 멈출 수 있지만&quot;</td>
+<td>이 논문은 정지 여부를 서술하지 않는다(<strong>미확인</strong>). GPT-as-Policy도 Appendix H(direct)에서는 언급하지 않는다. Appendix G의 RoboDojo Hybrid에서만 &quot;Simulation time pauses while Astra deliberates&quot;라고 쓴다</td>
+</tr>
+<tr>
+<td>K11</td>
+<td>L1, Tab.1 해설</td>
+<td>데이터 사용량 비교</td>
+<td>덧붙일 점이 있다. Tab.1은 ACT 행에만 &quot;50 demos&quot;를 적고 Ours 행에는 task당 50 demo 사용을 적지 않았다(I11)</td>
+</tr>
+</tbody>
+</table>
+<h3>5.2 <code>02_prior_work.md</code></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>위치</th>
+<th>원 서술</th>
+<th>정정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td>§0-1, §1 각주</td>
+<td>&quot;References 22건 중 19건 일치&quot;, &quot;인용 23건(서지 22개에 SayCan arXiv ID를 보충해 셈)&quot;</td>
+<td><strong>집계 오류다.</strong> 원문 참고문헌은 <strong>23건</strong>이고 SayCan(Brohan et al.)도 그중 하나다. 정확한 집계는 23건 중 20건 일치, 3건 불일치 또는 부분 확인이다</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>요약, §2.3</td>
+<td>&quot;Table 2의 baseline 25개 셀 모두 일치&quot;</td>
+<td>Tab.2의 baseline 셀은 4행×5 task = <strong>20개</strong>이고, 평균까지 넣으면 24개다. 일치한다는 결론은 맞다</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>요약 7, §5.3</td>
+<td>Insert Hole은 &quot;사실상 이진 선택&quot;</td>
+<td><strong>과장이다.</strong> 기울기 부호는 이진이다(<code>rotate ∈ {0, π}</code>, ±π/6, 소스에서 확인). 하지만 <code>base_offset = create_noise([0.02, 0.03, 0.0])</code>로 슬롯 위치에 연속 노이즈가 들어가고(분포 형태는 미확인), 성공하려면 target 기준 |x|,|y|&lt;1cm, 축 정렬 dot&gt;0.99(약 8.1° 이내), z&lt;−4cm를 모두 만족해야 한다. 그래서 방향 선택 뒤에도 연속 정렬 문제가 남는다. Fig.4의 정책이 맨 처음 near-vertical 방향을 probing한 것도 눈여겨볼 만하다. 기울기가 ±30°뿐이라면 수직은 절대 정답이 될 수 없으므로, 이 행동은 &quot;Task Skill이 ±30° 이진 사전지식을 담았다&quot;는 02의 추정과 <strong>긴장 관계</strong>에 있다. 근거는 에피소드 하나라 약하다</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>§5.3</td>
+<td>&quot;w/o tactile 31%는 무작위 방향 선택의 기대치 약 50%보다 낮음&quot;</td>
+<td>비교 기준이 성립하지 않는다. 방향을 맞혀도 위치·축 정렬과 삽입 조건이 남으므로 50%는 상한도 기준선도 아니다. 삭제하거나 &quot;참고용&quot;으로 낮춰야 한다</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>§4 표</td>
+<td>Unexpected Robot Policy(2609.24170)를 &quot;반대 증거&quot;로 서술</td>
+<td>설정이 다르다. one-shot 원시 데모, RoboDojo, 촉각 없음이다. 본 논문은 40개 데모를 요약한 Task Skill을 쓴다. &quot;간접적인 상반 사례&quot; 정도로 낮춰야 한다</td>
+</tr>
+<tr>
+<td>P6</td>
+<td>작업 요약</td>
+<td>&quot;인용 23건을 웹으로 검증&quot;</td>
+<td>본문 스스로 SayCan arXiv ID와 Inner Monologue/VoxPoser 학회는 &quot;지식 기반&quot;이라고 적었다. &quot;웹 검증과 일부 지식 기반 확인&quot;으로 고쳐야 한다</td>
+</tr>
+<tr>
+<td>P7</td>
+<td>§2.3, §5.2</td>
+<td>baseline 선정에 대한 언급</td>
+<td>빠진 내용이 있다. 출처 표(N0-VTLA Tab.1, N0-TWAM Tab.2)에는 StarVLA-α, InternVLA-A1(IH 93, LC 90, GC 86), Xiaomi-Robotics-0(IH 96, PK 80), GigaWorld-Policy, LingBot-VA, FastWAM, ACT(vision only), VITaL 행도 있는데 본 논문은 4개만 골랐다. 이 행들을 넣어도 Ours의 task별 순위는 바뀌지 않는다. 그래도 선정 기준이 적혀 있지 않다</td>
+</tr>
+<tr>
+<td>P8</td>
+<td>§5.2</td>
+<td>N0-VTLA의 UniVTAC rollout 수 미확인</td>
+<td>이번 확인에서도 N0-VTLA HTML 앞부분 100k자에는 적혀 있지 않았다(미확인 유지). N0-TWAM은 &quot;100 trials per simulation task&quot;로 확인됐다. N0-TWAM의 기본 촉각 입력이 &quot;clean&quot; Taxim GelSight render이고 gel-rendered에서는 82.4라는 점도 확인했다</td>
+</tr>
+</tbody>
+</table>
+<p>02에서 이번에 재확인해 <strong>맞다고 확인된</strong> 서술은 다음과 같다.</p>
+<ul>
+<li>baseline 셀 출처</li>
+<li>N0-VTLA 8-task 평균 83.1, N0-TWAM 84.5, π0.5 41.4</li>
+<li>GPT-as-Policy Appendix H의 프로토콜(xhigh, Responses API, schema tool call, repeat 1–5, 에피소드당 thread 하나)</li>
+<li>RoboDojo Direct 1,132.3M 토큰</li>
+<li>Insert Hole의 ±π/6 이진 기울기와 <code>check_success</code> 조건</li>
+</ul>
+<h3>5.3 <code>03_derivations.md</code>와 다른 문서 사이의 충돌</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>위치</th>
+<th>문제</th>
+<th>정정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X1</td>
+<td>03 G11, §미해결 4</td>
+<td>&quot;GPT-as-Policy arXiv:2609.38537은 확인하지 못했다&quot;</td>
+<td>02와 이번 확인에서 <strong>존재가 확인됐다</strong>: Galbot Team, &quot;Systematically Exploring the Capabilities of GPT-6 Astra as Embodied Policies&quot;, Appendix H가 있다. 03을 고쳐야 한다</td>
+</tr>
+<tr>
+<td>X2</td>
+<td>03 §0.2</td>
+<td>&quot;arm당 약 1,293 episode&quot;</td>
+<td>5개 task를 합친 pooled 비율 근사값이다(task당 약 259). task 층화 분산으로 계산하면 task당 245, arm당 약 1,225다. 단위를 분명히 적어야 한다</td>
+</tr>
+<tr>
+<td>X3</td>
+<td>03 D2 구조 행</td>
+<td>&quot;(원문과 SenseNova는 사고 중 시뮬 정지)&quot;</td>
+<td>본 논문 원문에는 시뮬레이션 정지에 대한 서술이 없다. &quot;원문&quot; 부분을 &quot;미확인&quot;으로 고쳐야 한다(K10과 같은 문제)</td>
+</tr>
+<tr>
+<td>X4</td>
+<td>03 §0.2 표</td>
+<td>Fisher p값</td>
+<td>이 문서와 일치한다: IH 0.21, LC 0.13, GC 0.50, LB 0.065, PK 0.0002, pooled 0.11, ablation 1.3e−27. 정정할 것은 없다. 다만 03이 Lift Bottle을 유의하지 않다고 본 판단(p=0.065)이 맞고, 01이 틀렸다(K1)</td>
+</tr>
+<tr>
+<td>X5</td>
+<td>02 §2.2 vs 03 §(리소스)</td>
+<td>UniVTAC 센서: 02는 &quot;데이터 수집은 GelSight Mini만 지원(README)&quot;, 03은 &quot;실험은 ViTai GF225&quot;</td>
+<td>논문과 repo의 차이일 수 있어 모순이라고 단정하지 않는다. 다만 재구현 에이전트가 어느 센서 설정을 쓸지 정해야 하므로 <strong>미확인</strong>으로 남긴다</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. 미해결 이슈</h2>
+<ol>
+<li>N0-VTLA, π0.5, ACT+UniVTAC의 UniVTAC 시행 수와 seed는 미확인이다. §3의 p값은 모두 n=100 가정에 조건부다. seed가 같다면 짝 검정(McNemar)으로 검정력이 높아질 수 있지만, 에피소드 단위 결과가 공개되지 않아 할 수 없다.</li>
+<li>Ours가 제외된 3개 task(Put Bottle, Insert HDMI, Insert Tube)에서 얼마를 내는지 미확인이라 8-task 순위를 판정할 수 없다. 제외 task 평균이 65.3% 이상이면 N0-VTLA, 69.0% 이상이면 N0-TWAM과 같아진다.</li>
+<li>GPT-as-Policy Tab.17의 &quot;output&quot; 토큰에 reasoning 토큰이 들어가는지 미확인이다. 그래서 K8의 비용 구조 정정에도 불확실성이 남는다. 본 논문에 맞는 토큰과 지연 수치는 여전히 없다.</li>
+<li>UniVTAC의 <code>create_noise</code>가 어떤 분포인지(균등 ±인지 등), 다른 4개 task의 <code>check_success</code> 원문, step_lim이 control step 기준인지는 이번에 확인하지 못했다(insert_hole.py만 확인).</li>
+<li>Astranomy의 호출당 18.56s와 episode당 $1.96, GPT-as-Policy의 호출당 39.86s(locomotion)는 02와 03의 보고를 옮긴 것이고 이번에 직접 확인하지 않았다.</li>
+<li>Fig.2 곡선 수치(약 10–12°, 약 43/33mm)는 렌더 이미지(910×1287)를 눈으로 읽은 값이라 ±3 정도의 오차가 있다.</li>
+<li>w/o tactile 조건의 Task Skill 원문, 10개 validation 데모의 용도, Task Skill을 몇 번 수정했는지는 공개되지 않았다. 그래서 C7과 C15의 판정을 더 진전시킬 수 없다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>06. 재구현 코드 검증 및 통합 보고</h1>
+<ul>
+<li>작성 역할: 코드 검증/통합 에이전트 (결과 검증용)</li>
+<li>작성일: 2026-10-23</li>
+<li>대상 코드: <code>code/</code> (<code>tactile_gpt_policy</code> 0.1.0). 재구현 대상 논문은 Wang et al., &quot;GPT-6-Astra Understands Touch and Outperform Vision–Tactile–Language–Action Models&quot;, arXiv:2610.28457v1, 2026-10-20 (이하 &quot;논문&quot;)</li>
+<li>검증 범위: numpy 기반 toy 환경 <code>mock_insert_hole</code>과 오프라인 규칙 정책 <code>MockHeuristicBackend</code>. 실제 UniVTAC(arXiv:2602.10093) 시뮬레이터와 실제 LLM(GPT-6-Astra, Claude 등)은 <strong>한 번도 실행하지 않았다.</strong> 이 문서의 수치는 모두 toy에서 나온 것이므로 논문 수치와 비교할 수 없다.</li>
+<li>실행 환경: Python 3.12, numpy, pyyaml, pytest. openai, anthropic, wandb, mlflow, torch, h5py, isaaclab은 설치되어 있지 않다(<code>importlib.util.find_spec</code>으로 확인). 패키지를 새로 설치하지 않았고 git commit도 하지 않았다.</li>
+<li>모든 명령은 <code>code/</code> 디렉터리에서 실행했다.</li>
+</ul>
+<hr />
+<h2>0. 요약</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>단위·통합 테스트</td>
+<td><code>python3 -m pytest</code> → <strong>113 passed in 17.6 s</strong>. 실패 0건, 수정 전후 모두 통과</td>
+</tr>
+<tr>
+<td>증류 (40 demo 구성 / 10 demo 검증)</td>
+<td>V+P+T: E_tac 8개, 필수 헤더 누락 없음. V+P: E_tac 0개, Contact interpretation 헤더 제외</td>
+</tr>
+<tr>
+<td>run_eval, V+P+T, 100 seed</td>
+<td><strong>100/100 = 100.0%, Wilson 95% CI [96.3, 100.0]</strong>, 평균 32.9 step, 결정 14.9회, LLM 호출 14.9회</td>
+</tr>
+<tr>
+<td>run_ablation, V+P, 같은 100 seed</td>
+<td><strong>21/100 = 21.0%, CI [14.2, 30.0]</strong>, 평균 270.6 step, 결정 102.4회. 실패 79건은 모두 step_limit</td>
+</tr>
+<tr>
+<td>차이 (V+P+T − V+P)</td>
+<td><strong>+79.0 pp, Newcombe 95% CI [69.3, 85.8]</strong>. 두 조건의 seed 목록이 같음을 확인</td>
+</tr>
+<tr>
+<td>판정</td>
+<td>촉각 유무에 따른 차이는 분명하다. 다만 V+P+T가 천장(100%)에 닿아 있고, 차이의 크기는 mock 설계와 휴리스틱의 탐색 범위로 정해진다(§3.3). 파이프라인이 제대로 연결됐다는 증거일 뿐, LLM이 촉각을 이해한다는 증거는 아니다</td>
+</tr>
+<tr>
+<td>정적 점검</td>
+<td>SDK lazy import, 액션 bounds/format 검사, seed 결정성, 에피소드 사이 history·backend 세션 초기화, V+P 프롬프트에 촉각·privileged가 섞이지 않음: 모두 통과 (§4)</td>
+</tr>
+<tr>
+<td>수정한 버그</td>
+<td>1건. V+P 조건의 mock K_τ 텍스트에 촉각 용어(&quot;deformation increases&quot;)가 남아 있었다 (§5.1)</td>
+</tr>
+</tbody>
+</table>
+<p>논문 Table 3은 Insert Hole에서 V+P+T 99%, V+P 31%를 보고한다(arXiv:2610.28457, Tab.3). 이번 toy 결과(100% 대 21%)도 방향은 같다. 하지만 toy는 SPEC §5.5(MockHeuristicBackend 항목)에서 &quot;V+P+T ≥ 0.9, V+P ≤ 0.6&quot;을 calibration 목표로 정하고 만든 것이다. 따라서 방향이 같다는 사실은 논문 주장을 뒷받침하는 근거가 되지 못한다.</p>
+<hr />
+<h2>1. 산출물 위치</h2>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code/results/configs/insert_hole_mock.yaml</code></td>
+<td><code>configs/tasks/insert_hole_mock.yaml</code>을 복사하고 <code>context_dir</code>만 <code>results/contexts/...</code>로 바꾼 것</td>
+</tr>
+<tr>
+<td><code>code/results/configs/eval_mock_100.yaml</code></td>
+<td>V+P+T, 100 seed, <code>distill_if_missing: false</code>(고정된 context만 사용), <code>resume: false</code></td>
+</tr>
+<tr>
+<td><code>code/results/configs/ablation_mock_100.yaml</code></td>
+<td>V+P+T와 V+P, 같은 seed, 조건별 context 사용</td>
+</tr>
+<tr>
+<td><code>code/results/contexts/insert_hole_mock/{V+P+T,V+P}/</code></td>
+<td>증류한 C_τ: <code>skill.md</code>, <code>context.json</code>, <code>tactile_refs.npz</code></td>
+</tr>
+<tr>
+<td><code>code/results/eval_vpt/</code></td>
+<td>run_eval 결과: <code>benchmark_V+P+T.json</code>, <code>insert_hole/V+P+T/{episodes.jsonl, summary.json, steps/*.jsonl}</code>, <code>run_config.json</code></td>
+</tr>
+<tr>
+<td><code>code/results/ablation/</code></td>
+<td>run_ablation 결과: <code>ablation_insert_hole.json</code>, 조건별 <code>episodes.jsonl</code>, <code>summary.json</code>, <code>steps/</code></td>
+</tr>
+<tr>
+<td><code>code/results/verify_static.py</code></td>
+<td>§4의 결정성, reset, bounds, 누출, eval과 ablation 일치 여부를 점검하는 스크립트</td>
+</tr>
+<tr>
+<td><code>code/results/static_checks.json</code></td>
+<td>위 스크립트의 출력</td>
+</tr>
+<tr>
+<td><code>code/results/rerun_verification.sh</code></td>
+<td>이 문서의 모든 결과를 다시 만드는 스크립트</td>
+</tr>
+<tr>
+<td><code>code/results/*.log</code></td>
+<td>pytest, distill, run_eval, run_ablation, verify_static의 원본 로그</td>
+</tr>
+</tbody>
+</table>
+<p>디렉터리 이름이 <code>insert_hole_mock</code>인 이유는 task yaml이 <code>${task}_mock/${condition}</code> 템플릿을 쓰고 task 이름이 <code>insert_hole</code>이기 때문이다. 결과 디렉터리 전체 크기는 약 39 MB이며, 대부분 step 단위 JSONL이다.</p>
+<hr />
+<h2>2. 단위·통합 테스트</h2>
+<pre><code>$ python3 -m pytest
+113 passed in 17.60s
+</code></pre>
+<p>파일별 테스트 수: test_action_parser 20, test_mock_env 14, test_descriptors 11, test_distill 11, test_backends 9, test_delta 7, test_runner 7, test_types 7, test_prompt_builder 6, test_render 6, test_policy 5, test_univtac_adapter 5, test_history 4, test_e2e_mock 1.</p>
+<ul>
+<li>처음 실행했을 때부터 113개가 모두 통과했다. §5.1의 수정을 적용한 뒤 다시 실행해도 113개가 통과했다.</li>
+<li><code>pyproject.toml</code>의 <code>addopts = &quot;-q&quot;</code> 위에 <code>-q</code>를 한 번 더 주면 <code>-qq</code>가 되어 요약 줄이 출력되지 않는다. 재실행 스크립트에서는 <code>-q</code>를 빼고 실행한다. 동작에는 영향이 없다.</li>
+<li>computed task 지시서에 나온 테스트 파일명(test_tactile.py, test_env.py, test_eval.py, test_knowledge.py, test_parser.py)은 실제로 존재하지 않는다. 구현자 A와 B는 SPEC §11의 이름을 따랐다. 검증 범위는 SPEC §11 표와 맞으므로 이름 차이는 문제로 보지 않았다.</li>
+</ul>
+<hr />
+<h2>3. 통합 E2E (MockHeuristicBackend + mock_insert_hole)</h2>
+<h3>3.1 실행 명령과 출력</h3>
+<p><strong>(i) 오프라인 증류 (논문 §3.2, §4.1의 40 demo 구성 + 10 demo 검증 재현)</strong></p>
+<pre><code>$ python3 scripts/distill_task_skill.py --task-config results/configs/insert_hole_mock.yaml \
+    --backend-config configs/backend.yaml --condition V+P+T --out results/contexts/insert_hole_mock/V+P+T
+{&quot;n_refs&quot;: 8, &quot;missing_headers&quot;: [], &quot;validation&quot;: {&quot;n_points&quot;: 46, &quot;intent_agreement&quot;: 0.652,
+ &quot;direction_agreement&quot;: 0.717, &quot;event_coverage&quot;: 1.0}}          # 약 10 s
+$ ... --condition V+P ...
+{&quot;n_refs&quot;: 0, &quot;missing_headers&quot;: [], &quot;validation&quot;: {... 같은 값 ...}}  # 약 0.8 s
+</code></pre>
+<ul>
+<li>데모 seed 0–49는 40/10으로 나뉘고, 테스트 seed 100000–100099와 겹치지 않는다.</li>
+<li>이벤트 수(구성 데모 40개 합계): blocked 75, deform_up_no_advance 75(V+P+T만 해당), retract 75, realign 86, advance 80, success 40. contact_onset은 0이다. mock에서는 물체를 이미 쥔 상태로 시작하기 때문이다(A와 B가 보고한 내용과 같다).</li>
+<li>V+P+T의 mock calibration은 촉각 단서 4개를 축방향 전단으로 정규화한 뒤 expert 보정량으로 ridge 회귀한다. R²는 [0.934, 0.954, 0.931, 0.941]이고, 사용한 쌍은 51개다.</li>
+<li>검증 지표(intent 0.652, direction 0.717)는 두 조건에서 완전히 같다. mock <code>validate_act</code>가 관측을 보지 않고 매 질의마다 상태를 초기화한 채 &quot;advance&quot;를 기본으로 답하기 때문이다(<code>context.json</code>의 <code>validation.failures</code> 16건이 모두 &quot;expert adjust vs model advance&quot;). <strong>따라서 이 지표로는 증류 품질을 판단할 수 없다.</strong></li>
+</ul>
+<p><strong>(ii) run_eval, V+P+T, 100 seed</strong></p>
+<pre><code>$ python3 scripts/run_eval.py --eval-config results/configs/eval_mock_100.yaml \
+    --backend-config configs/backend.yaml --out results/eval_vpt --no-resume
+insert_hole      V+P+T  100/100 = 100.0%  CI95 [96.3, 100.0]  decisions/ep 14.9
+{&quot;condition&quot;: &quot;V+P+T&quot;, &quot;mean_success&quot;: 1.0, &quot;out_dir&quot;: &quot;results/eval_vpt&quot;}
+real 0m48s
+</code></pre>
+<p><strong>(iii) run_ablation, V+P+T와 V+P, 같은 100 seed</strong></p>
+<pre><code>$ python3 scripts/run_ablation.py --ablation-config results/configs/ablation_mock_100.yaml \
+    --backend-config configs/backend.yaml --out results/ablation
+insert_hole      V+P+T  100/100 = 100.0%  CI95 [96.3, 100.0]  steps 33
+insert_hole      V+P     21/100 =  21.0%  CI95 [14.2, 30.0]  steps 271
+[{&quot;a&quot;: &quot;V+P+T&quot;, &quot;b&quot;: &quot;V+P&quot;, &quot;diff_pp&quot;: 79.0, &quot;diff_ci95_pp&quot;: [69.29, 85.83], &quot;wilson_overlap&quot;: false, &quot;same_seeds&quot;: true}]
+real 1m02s
+</code></pre>
+<h3>3.2 수치 요약</h3>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>성공</th>
+<th>성공률 (Wilson 95% CI)</th>
+<th>평균 step</th>
+<th>평균 결정 수</th>
+<th>평균 LLM 호출</th>
+<th>parse 실패율</th>
+<th>종료 사유</th>
+<th>입력/출력 토큰/ep (mock 추정)</th>
+<th>wall/ep</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V+P+T</td>
+<td>100/100</td>
+<td>100.0% [96.3, 100.0]</td>
+<td>32.9 (최소 26, 최대 35)</td>
+<td>14.9 (최대 16)</td>
+<td>14.9</td>
+<td>0</td>
+<td>success 100</td>
+<td>88.0k / 0.81k</td>
+<td>0.48 s</td>
+</tr>
+<tr>
+<td>V+P</td>
+<td>21/100</td>
+<td>21.0% [14.2, 30.0]</td>
+<td>270.6 (중앙값 300)</td>
+<td>102.4</td>
+<td>102.4</td>
+<td>0</td>
+<td>success 21, step_limit 79</td>
+<td>329.9k / 5.86k</td>
+<td>0.14 s</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>차이: +79.0 pp, Newcombe hybrid-score 95% CI [69.3, 85.8]. 두 조건의 Wilson CI는 겹치지 않는다. CI 계산법의 출처는 Wilson(1927, JASA 22:209–212)과 Newcombe(1998, Stat. Med. 17:873–890)이다. runner의 Wilson 값은 99/100에서 [94.55, 99.82], 31/100에서 [22.78, 40.63]으로, <code>test_runner.py</code>에서 손으로 계산한 값과 일치함을 확인했다.</li>
+<li>run_eval의 V+P+T 결과와 ablation의 V+P+T 결과는 서로 다른 프로세스에서 실행됐지만 100개 seed 모두에서 (success, steps, n_decisions)가 같았다(<code>static_checks.json</code>의 <code>eval_vs_ablation.identical_per_seed = true</code>).</li>
+<li>V+P+T 에피소드의 의도(intent) 분포는 advance 1130, retract 180, adjust 180이고, 에피소드당 blocked는 평균 2.3회다. 정리하면 &quot;하강 → 막힘 → 2 mm 후퇴 → 촉각 기반 보정&quot;을 1–2회 반복하고 성공한다. V+P는 advance 3652, retract 3294, adjust 3294로, 격자 탐색이 끝없이 반복되는 패턴이다.</li>
+<li>평균 LLM 호출 수가 결정 수와 같다. mock backend가 항상 올바른 형식으로 답하기 때문에 E2E에서는 format 재질의 경로가 한 번도 실행되지 않았다. 이 경로는 <code>test_policy.py::test_format_retry_then_success</code>와 <code>test_format_failure_and_refusal_hold</code>에서만 검증된다.</li>
+<li>토큰 수는 mock이 텍스트 문자 수를 4로 나눠 추정한 값이고 이미지 토큰은 빠져 있다(<code>backends.py:374</code>). 실제 API 비용을 추정하는 데 쓰면 안 된다. 그래도 규모를 가늠하는 데는 쓸 수 있다. V+P는 결정 수가 약 7배 많아서, 실제 LLM으로 실행하면 실패 에피소드 하나가 300 step 동안 약 100회를 호출하게 된다. 논문은 호출 수나 비용을 보고하지 않는다(미확인).</li>
+</ul>
+<h3>3.3 해석: 차이는 있지만 mock 구조가 만든 차이다</h3>
+<p>결과는 &quot;100% 대 0%&quot;처럼 극단으로 갈리지 않았다. 그러나 다음 세 가지 이유로 차이의 크기를 의미 있게 해석할 수 없다.</p>
+<ol>
+<li>
+<p><strong>V+P+T는 천장에 닿아 있다.</strong> step 수가 26–35로 좁게 몰려 있고 실패가 하나도 없다. mock 환경은 숨은 4자유도 오차(측방 2D, 축 각도 2D)를 촉각 단서 4개에 일대일로, 거의 선형으로 대응시킨다(A의 설계 메모). mock 정책은 이 대응을 데모에서 ridge 회귀로 학습한다(R² 약 0.93–0.95). 그러므로 V+P+T 조건은 사실상 &quot;역함수를 학습한 뒤 한두 번 보정하는&quot; 문제이며, LLM이 촉각을 해석하는 능력과는 관계가 없다.</p>
+</li>
+<li>
+<p><strong>V+P의 21%는 휴리스틱의 탐색 범위가 상한을 정한다.</strong> V+P mock 정책은 측방 {0, 0.5, 1.0}×<code>lateral_range_mm</code>(2.67 mm)와 기울기 {0, 0.5, 1.0}×<code>angle_range_deg</code>(5.27°)를 8방향으로 조합한 288개 후보를 seed별 무작위 순서로 시도한다(<code>backends.py::_search_candidate</code>). 진입 조건은 |e|&lt;1 mm 그리고 θ&lt;3°다. 따라서 각도 오차가 약 8.3°를 넘으면 원리상 맞출 수 없다. 실측에서도 그렇게 나왔다. 숨은 오차 크기별 V+P 성공은 다음과 같다(같은 100 seed, <code>default_rng(seed)</code>에서 다시 샘플링).</p>
+<table>
+<thead>
+<tr>
+<th>숨은 각도 오차</th>
+<th>n</th>
+<th>V+P 성공</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4–6°</td>
+<td>39</td>
+<td>14 (35.9%)</td>
+</tr>
+<tr>
+<td>6–8°</td>
+<td>30</td>
+<td>7 (23.3%)</td>
+</tr>
+<tr>
+<td>8–10°</td>
+<td>31</td>
+<td><strong>0 (0%)</strong></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>숨은 측방 오차</th>
+<th>n</th>
+<th>V+P 성공</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.5–2.3 mm</td>
+<td>36</td>
+<td>13</td>
+</tr>
+<tr>
+<td>2.3–3.1 mm</td>
+<td>29</td>
+<td>6</td>
+</tr>
+<tr>
+<td>3.1–4.0 mm</td>
+<td>35</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>결국 V+P 성공률은 &quot;격자 범위와 300 step 예산 안에서 운 좋게 맞는 비율&quot;이다. 탐색 전략을 바꾸면 크게 달라진다. A의 단순 격자 탐색은 약 2%였고, 같은 mock에서 B의 20 seed 실행은 25%였다. 논문의 31%와 가까운 것은 우연이다.</p>
+</li>
+<li>
+<p><strong>calibration 목표가 미리 정해져 있었다.</strong> SPEC §5.5(MockHeuristicBackend 항목)는 mock에서 &quot;V+P+T ≥ 0.9, V+P ≤ 0.6&quot;이 나오도록 설계하라고 명시한다. 이번 결과는 그 목표를 만족한다는 확인일 뿐이다.</p>
+</li>
+</ol>
+<p>이번 E2E가 실제로 보여 주는 것은 다음과 같다. (a) 증류, 고정 context, 폐루프 평가, 집계, ablation이 끊김 없이 이어진다. (b) V+P 조건에서 촉각 정보가 정책에 실제로 차단된다. 차단되지 않았다면 두 조건의 결과가 같았을 것이다. (c) 같은 seed와 같은 context에서 결과가 결정적으로 재현된다. 논문의 핵심 주장, 즉 범용 멀티모달 모델이 촉각 표현을 보고 접촉 상태를 추론한다는 주장은 이 실험으로 <strong>검증되지 않았다.</strong></p>
+<hr />
+<h2>4. 정적·행동 점검</h2>
+<p><code>python3 results/verify_static.py</code> → <code>results/static_checks.json</code> (약 6 s)</p>
+<h3>4.1 SDK lazy import</h3>
+<pre><code>$ python3 -I -c &quot;import tactile_gpt_policy.policy.backends&quot;
+ModuleNotFoundError: No module named 'tactile_gpt_policy'
+</code></pre>
+<p>지시서에 적힌 명령을 그대로 실행하면 실패한다. 하지만 코드 결함은 아니다. <code>-I</code>(isolated mode)는 cwd를 <code>sys.path</code>에서 빼고 <code>PYTHONPATH</code>도 무시한다. 그리고 패키지를 설치하는 것(<code>pip install -e .</code>)은 금지되어 있다. 같은 의도로 경로만 명시해서 다시 확인했다.</p>
+<pre><code>$ python3 -I -c &quot;import sys; sys.path.insert(0,'.'); import tactile_gpt_policy, ...backends, ...policy, ...eval.runner, ...knowledge.distill, ...envs.univtac_adapter, ...tactile.render; ...&quot;
+loaded heavy: []
+OpenAIBackend ImportError: OpenAIBackend requires the OpenAI SDK: pip install openai (API key via OPENAI_API_KEY)
+AnthropicBackend ImportError: AnthropicBackend requires the Anthropic SDK: pip install anthropic (API key via ANTHROPIC_API_KEY)
+</code></pre>
+<p>패키지 전체를 import한 뒤에도 openai, anthropic, wandb, mlflow, torch, h5py, matplotlib, isaaclab, PIL 중 어느 것도 <code>sys.modules</code>에 올라오지 않는다. 실제 backend는 생성자를 호출하는 시점에 SDK를 import하며, SDK가 없으면 설치 방법을 안내하는 ImportError를 낸다. <code>test_runner.py::test_runner_import_has_no_sdk_side_effects</code>도 같은 내용을 검사한다.</p>
+<h3>4.2 액션 bounds와 format 검사 (논문 §3.4의 &quot;checks on command bounds and format&quot;)</h3>
+<p>입력 <code>{&quot;dpos_mm&quot;:[35,-1,50], &quot;drot_deg&quot;:[30,0,0], &quot;gripper&quot;:1.7, &quot;horizon&quot;:9}</code>(코드 펜스 포함), EEF z=0.59 m:</p>
+<pre><code>dpos_mm → [20.0, -1.0, 10.0]   drot_deg → [10, 0, 0]   gripper → 1.0   horizon → 5   target z → 0.600 m
+warnings: clipped dpos_mm[0]: 35.0 -&gt; 20.0 / clipped dpos_mm[2]: 50.0 -&gt; 20.0 / clipped drot_deg norm: 30.0 -&gt; 10.0 /
+          clipped gripper: 1.7 -&gt; 1.0 / clipped horizon: 9 -&gt; 5 / clipped target_pos_mm[2]: 610.0 -&gt; 600.0
+</code></pre>
+<p>범위를 넘는 값은 축별 clip(dpos), 노름 clip(drot), workspace clip 순서로 처리된다. workspace clip이 적용되면 dpos가 다시 계산된다(z 20 → 10 mm). 아래 입력은 모두 <code>ActionParseError</code>로 거부된다: 키 누락, 여분 키, enum에 없는 intent, horizon 2.5, NaN, JSON이 아닌 텍스트. clip을 쓸지 reject를 쓸지는 논문에 나와 있지 않으므로 [가정]이다(action_parser docstring에 명시됨).</p>
+<h3>4.3 seed 결정성</h3>
+<p>조건마다 seed 100000, 100007, 100042를 env와 policy를 새로 만들어 두 번씩 실행했다. 두 번의 실행은 reset 이미지 바이트, 모든 결정의 LLM 원문 텍스트, 목표 위치, 성공 여부, step 수까지 <strong>6건 모두 동일</strong>했다. 프로세스를 달리한 run_eval과 ablation의 V+P+T 결과도 100 seed 모두 같았다(§3.2).</p>
+<h3>4.4 에피소드 사이 초기화</h3>
+<p>runner는 env와 backend 객체를 에피소드 사이에 재사용한다(<code>_factories</code>가 backend를 한 번만 만든다). 따라서 상태가 넘어가는지 직접 확인했다. 같은 env, backend, policy 객체로 seed 100003을 실행한 뒤 seed 100011을 실행한 결과를, 새 객체로 seed 100011만 실행한 결과와 비교했다.</p>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>결과 동일</th>
+<th>첫 에피소드 뒤 history 길이</th>
+<th>두 번째 에피소드 뒤 history 길이</th>
+<th>두 번째 에피소드 결정 수</th>
+<th>두 번째 에피소드 첫 record t</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V+P+T</td>
+<td>true</td>
+<td>15</td>
+<td>13</td>
+<td>13</td>
+<td>0</td>
+</tr>
+<tr>
+<td>V+P</td>
+<td>true</td>
+<td>81</td>
+<td>113</td>
+<td>113</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><code>TactileGPTPolicy.reset()</code>은 <code>HistoryBuffer.reset()</code>과 <code>backend.new_session(episode_id)</code>를 호출한다. <code>new_session</code>은 MockHeuristicBackend의 mode, pending, candidates, gain 같은 에피소드 상태와 rng를 <code>(seed, crc32(episode_id))</code>로 다시 만든다. 따라서 결과는 에피소드 실행 순서와 무관하다. 논문 §4.1의 &quot;episode별 독립 세션&quot;과 일치한다.</p>
+<h3>4.5 V+P 프롬프트 누출 점검</h3>
+<p>V+P 조건에서 처음 3번의 결정 요청을 가로채 텍스트와 이미지를 확인했다.</p>
+<ul>
+<li>이미지는 <code>scene_rgb</code>, <code>wrist_rgb</code>만 있고 촉각 이미지와 E_tac 이미지는 없다.</li>
+<li>텍스트에서 <code>indentation</code>, <code>marker</code>, <code>shear</code>, <code>curl</code>, <code>tactile_l/r</code>, <code>e_tac</code>은 한 번도 나오지 않는다.</li>
+<li>privileged 키 10개(<code>hole_center_m</code>, <code>lateral_err_mm</code>, <code>angle_err_deg</code>, <code>contact_force</code>, <code>seed</code> 등) 가운데 <code>blocked</code>만 15회 나온다. 이 단어는 privileged 값이 아니다. proprio의 tracking error로 계산한 delta flag(<code>tracking_error_mm &gt; 2</code>)와 K_τ 본문에 쓰인 같은 단어다. V+P에서도 쓸 수 있는 정보이므로 누출이 아니다. 한편 <code>test_prompt_builder.py</code>는 privileged에 sentinel 문자열을 넣어 누출 여부를 별도로 검사한다.</li>
+</ul>
+<hr />
+<h2>5. 발견한 문제</h2>
+<h3>5.1 수정함: V+P 조건의 K_τ에 촉각 용어가 남음</h3>
+<ul>
+<li>위치: <code>code/tactile_gpt_policy/policy/mock_skill.py</code>, &quot;Corrective strategies for obstructions&quot; 줄.</li>
+<li>증상: V+P 조건으로 증류한 <code>skill.md</code>에 &quot;Condition: blocked or <strong>deformation increases</strong> without advancement&quot;라는 문장이 들어 있었다. V+P 정책은 변형(deformation)을 관측할 수 없다. SPEC §6.1(&quot;V+P이면 촉각 플래그를 쓰지 않는다&quot;)과 §6.2(V+P에서는 Contact interpretation 제외)의 의도에도 어긋난다.</li>
+<li>영향: mock 정책은 K_τ의 <code>mock_calibration</code> 블록만 읽기 때문에 수치에는 영향이 없다(수정 전과 후 모두 V+P 21/100). 그러나 실제 LLM으로 V+P ablation을 할 때 mock 증류 결과를 K_τ 템플릿으로 재사용하면, 정책이 볼 수 없는 신호를 기준으로 쓰라는 지시가 들어가 V+P 성능이 왜곡될 수 있다.</li>
+<li>수정(최소 변경): <code>has_tac</code>가 False일 때는 &quot;blocked (commanded advance not achieved)&quot;를 쓰도록 바꿨다. V+P+T의 <code>skill.md</code>는 수정 전후 바이트 단위로 같음을 diff로 확인했다. 수정 뒤 두 context를 다시 증류하고 eval과 ablation을 다시 실행했으며, 수치는 같았다. pytest도 113개 모두 통과했다.</li>
+</ul>
+<h3>5.2 수정하지 않음: 관찰과 권고</h3>
+<ol>
+<li><strong><code>context_dir</code>가 cwd 기준 상대경로다.</strong> task yaml에 있는 <code>outputs/contexts/${task}_mock/${condition}</code>은 <code>--out</code>과 관계없이 cwd 아래에 캐시된다. 프롬프트나 증류 코드를 바꿔도 이전 캐시가 조용히 재사용될 수 있어 위험하다. 이번 검증에서는 결과 전용 yaml을 따로 두고, <code>distill_if_missing: false</code>로 고정 context만 쓰도록 했다. 기존 <code>code/outputs/contexts/insert_hole_mock/</code>(A와 B의 이전 실행에서 생긴 것)는 지우지 않고 그대로 두었다. 권고: 상대경로는 out_dir을 기준으로 해석하고, context에 코드나 프롬프트 해시를 기록해 불일치하면 경고하도록 한다.</li>
+<li><strong>증류 검증 지표가 실제로는 아무것도 측정하지 않는다</strong>(§3.1). mock <code>validate_act</code>는 관측과 상관없이 같은 답을 낸다. 실제 LLM을 붙이기 전에 최소한 &quot;막힘 직후에는 retract나 adjust를 기대한다&quot; 같은 규칙 기반 baseline과 비교하는 기준이 필요하다.</li>
+<li><strong>K_τ의 &quot;Events per demo&quot; 수치가 <code>n_events</code>와 맞지 않는다.</strong> V+P+T 텍스트에는 blocked 1.7, retract 1.0이 적혀 있지만, <code>n_events</code>로 계산하면 blocked 75/40=1.9, retract 75/40=1.9다. V+P 텍스트에는 1.9, 1.9로 적혀 있다. 구간 병합 기준이 조건마다 다른 것으로 보이지만 원인은 추적하지 않았다(미확인). mock 동작에는 영향이 없다.</li>
+<li><strong>V+P 정책의 탐색 범위를 데모 보정량의 분포에서 가져온다</strong>(§3.3). 숨은 오차의 분포 범위(각도 4–10°)보다 좁아서 큰 오차는 원리상 해결할 수 없다. &quot;V+P 성능&quot;이라기보다 &quot;이 휴리스틱의 성능&quot;이다. 숫자를 인용할 때는 반드시 이 점을 같이 적어야 한다.</li>
+<li><strong>SPEC과 지시서의 파일명 차이</strong>(테스트, 프롬프트). 구현은 SPEC을 따랐고 기능 범위는 SPEC §11과 같다.</li>
+</ol>
+<hr />
+<h2>6. 남은 한계 (검증하지 못한 것)</h2>
+<ol>
+<li><strong>실제 UniVTAC(arXiv:2602.10093)에서는 실행하지 않았다.</strong> Isaac Sim과 isaaclab이 없다. <code>UniVTACEnv</code>는 Isaac이 없으면 명확한 RuntimeError를 내는 것까지만 테스트됐다. 어댑터에 TODO(unverified)로 남은 항목은 모두 미확인이다: depth 단위와 부호, marker (2,63,2)의 축 의미, gripper 방향, 'ee' 액션의 batch 차원, HDF5 레이아웃, instruction 문구 등(A의 open issue). 논문 Table 2와 3의 수치를 재현했는지 여부도 당연히 미확인이다.</li>
+<li><strong>실제 LLM으로는 실행하지 않았다.</strong> OpenAI와 Anthropic backend는 SDK와 API 키가 없어서 메시지 직렬화 단위 테스트(mock client)만 거쳤다. 다음 항목은 미확인이다: GPT-6-Astra의 공개 model id(현재 placeholder <code>gpt-6-astra</code>), Responses API의 <code>reasoning.effort=&quot;xhigh&quot;</code> 지원 여부, Anthropic SDK에서 <code>output_config</code>와 fallbacks를 지원하는 최소 버전.</li>
+<li><strong>평가 프로토콜 차이</strong>: UniVTAC의 <code>eval_policy.py</code>는 예외가 난 에피소드를 집계에서 빼고 <code>seeds.json</code>으로 seed를 건너뛴다. 이 runner는 논문 §4.1에 따라 모든 종료를 실패로 센다. seed_base도 100000으로, UniVTAC의 1e6과 다르다. 논문 수치와 비교하려면 이 둘을 맞춰야 한다.</li>
+<li><strong>mock은 UniVTAC Insert Hole의 ±30° 구멍 기울기를 운동학에 반영하지 않는다</strong>(A의 open issue). 그래서 논문 Fig. 2에 나오는 &quot;~30° 축 탐색&quot; 현상은 재현되지 않고, 4–10° 범위의 숨은 보정만 재현된다.</li>
+<li><strong>비용과 지연 시간</strong>: 실제 API 기준 비용(<code>cost_usd</code>)은 단가를 알 수 없어 null이다. 논문은 호출당 지연 시간과 에피소드 wall-clock을 보고하지 않는다(미확인). 실제 LLM으로 V+P를 실행하면 실패 에피소드마다 약 100회 호출이 필요하므로, 파일럿은 <code>--n-episodes 5–10</code>부터 시작하기를 권한다.</li>
+<li><strong>나머지 4개 태스크</strong>(lift_can, grasp_classify, lift_bottle, pull_out_key)는 yaml만 있고 mock 환경이 없다. 이 태스크들의 파이프라인은 E2E로 실행해 보지 않았다.</li>
+</ol>
+<hr />
+<h2>7. 재실행 방법</h2>
+<pre><code class="language-bash">cd code
+bash results/rerun_verification.sh      # pytest → 증류 2회 → run_eval 100 → ablation 100×2 → verify_static → lazy-import 확인
+</code></pre>
+<p>오프라인에서 약 3분 걸리고, 네트워크와 API 키가 필요 없다. 단계별로 실행하려면 다음과 같이 한다.</p>
+<pre><code class="language-bash">python3 -m pytest
+python3 scripts/distill_task_skill.py --task-config results/configs/insert_hole_mock.yaml \
+  --backend-config configs/backend.yaml --condition V+P+T --out results/contexts/insert_hole_mock/V+P+T
+python3 scripts/distill_task_skill.py --task-config results/configs/insert_hole_mock.yaml \
+  --backend-config configs/backend.yaml --condition V+P   --out results/contexts/insert_hole_mock/V+P
+python3 scripts/run_eval.py --eval-config results/configs/eval_mock_100.yaml \
+  --backend-config configs/backend.yaml --out results/eval_vpt --no-resume
+python3 scripts/run_ablation.py --ablation-config results/configs/ablation_mock_100.yaml \
+  --backend-config configs/backend.yaml --out results/ablation
+python3 results/verify_static.py
+</code></pre>
+<p>실제 LLM으로 바꾸려면 <code>--backend-config configs/backend_openai.yaml</code> 또는 <code>configs/backend_anthropic.yaml</code>을 쓰고(SDK 설치와 API 키 필요), 프롬프트나 backend를 바꿀 때마다 <code>results/contexts/</code>를 지워 다시 증류해야 한다. 실험 추적은 <code>--logging wandb</code> 또는 <code>--logging mlflow</code>로 켤 수 있다(run_eval만 지원하며 SDK가 설치되어 있어야 한다. SDK가 없으면 경고를 내고 none으로 대체된다). UniVTAC에서 실행하는 절차는 <code>code/README.md</code>의 1안과 2안을 참고하라. 두 안 모두 아직 검증하지 않았다.</p>
+</section>
+<section class="chapter"><h1>04. 시스템 아키텍처: GPT-as-Tactile-Policy 재구현</h1>
+<ul>
+<li>대상: <em>GPT-6-Astra Understands Touch and Outperform Vision–Tactile–Language–Action Models</em>, Wang et al., arXiv:2610.28457v1 (2026-10-20). 이하 &quot;논문&quot;.</li>
+<li>벤치마크: <em>UniVTAC</em>, Chen et al., arXiv:2602.10093, https://github.com/univtac/UniVTAC</li>
+<li>인터페이스 원본: <code>code/SPEC.md</code>(진실의 원천), <code>code/tactile_gpt_policy/types.py</code></li>
+<li>표기: <strong>[논문 §x]</strong> 원문 근거 / <strong>[UniVTAC 확인]</strong> 공개 repo 문서·코드로 확인(2026-10-23) / <strong>[가정]</strong> 재구현 결정 / <strong>[미확인]</strong> 확인하지 못함</li>
+</ul>
+<hr />
+<h2>1. 한 줄 요약</h2>
+<p>논문의 정책은 <strong>파라미터를 고정한 범용 멀티모달 LLM</strong> 하나다. 이 LLM이 (1) 오프라인에서 전문가 데모 40개를 분석해 텍스트 Task Skill <code>K_τ</code>와 촉각 레퍼런스 <code>E_τ^tac</code>를 만들고 [논문 §3.2, §4.1], (2) 온라인에서는 <code>ℓ, C_τ, o_t, H_t</code>를 받아 EEF 목표 pose, 그리퍼, 1–5 step horizon을 직접 출력하는 폐루프 정책 역할을 한다 [논문 식(1), §3.4]. 학습되는 파라미터가 없으므로, 재구현의 핵심은 모델이 아니라 <strong>관측 표현(식 3), 컨텍스트 증류, 프롬프트와 액션 계약, 평가 하네스</strong>다. 아래 구조는 이 네 가지를 모듈로 나누고, 실제 LLM이나 시뮬레이터 없이도 끝까지 검증할 수 있도록 mock 경로를 함께 둔다.</p>
+<hr />
+<h2>2. 전체 구성도</h2>
+<pre><code class="language-mermaid">flowchart LR
+  subgraph OFF[&quot;오프라인: 컨텍스트 증류 (§3.2, §4.1)&quot;]
+    D50[&quot;전문가 데모 50개&lt;br/&gt;(mock 생성 또는 UniVTAC HDF5)&quot;] --&gt; SPLIT[&quot;episode 단위 분할&lt;br/&gt;40 구성 / 10 검증&quot;]
+    SPLIT --&gt; EV[&quot;이벤트 검출&lt;br/&gt;knowledge.distill.detect_events&quot;]
+    EV --&gt; SUM[&quot;데모 요약 표&lt;br/&gt;summarize_demo&quot;]
+    SUM --&gt; LLM1[&quot;LLM: REQUEST_KIND=distill_skill&quot;]
+    LLM1 --&gt; K[&quot;K_τ Task Skill (Markdown)&quot;]
+    EV --&gt; REF[&quot;후보 생성 + k-medoids&lt;br/&gt;tactile_refs.select_tactile_refs&quot;]
+    REF --&gt; LLM2[&quot;LLM: label_refs (선택)&quot;]
+    LLM2 --&gt; E[&quot;E_τ^tac&quot;]
+    K --&gt; VAL[&quot;오프라인 검증 (10 demo)&lt;br/&gt;validate_task_skill&quot;]
+    E --&gt; VAL
+    VAL --&gt; CTX[(&quot;TaskContext C_τ&lt;br/&gt;context.json · skill.md · tactile_refs.npz&lt;br/&gt;평가 전 동결&quot;)]
+  end
+
+  subgraph ON[&quot;온라인: 폐루프 (§3.1, §3.3, §3.4)&quot;]
+    ENV[&quot;Env&lt;br/&gt;MockInsertHoleEnv / UniVTACEnv&quot;] --&gt;|o_t| DESC[&quot;촉각 descriptor·delta&lt;br/&gt;tactile.descriptors / delta&quot;]
+    DESC --&gt; PB[&quot;prompt_builder&lt;br/&gt;ℓ, C_τ, o_t, H_t → messages&quot;]
+    CTX --&gt; PB
+    HIST[(&quot;HistoryBuffer H_t&quot;)] --&gt; PB
+    PB --&gt; BE[&quot;LLMBackend&lt;br/&gt;OpenAI · Anthropic · MockHeuristic&quot;]
+    BE --&gt; AP[&quot;action_parser&lt;br/&gt;format + bounds check&quot;]
+    AP --&gt;|a_t, horizon 1..5| ENV
+    ENV --&gt;|StepResult| UPD[&quot;policy.update → StepRecord&quot;]
+    UPD --&gt; HIST
+  end
+
+  subgraph EVAL[&quot;평가 하네스 (§4.1, §4.3)&quot;]
+    RUN[&quot;eval.runner&lt;br/&gt;100 fixed seeds/task&quot;] --&gt; ON
+    RUN --&gt; LOG[(&quot;JSONL · summary.json&lt;br/&gt;wandb / mlflow 선택&quot;)]
+    RUN --&gt; STAT[&quot;Wilson 95% CI&lt;br/&gt;5-task 균등평균&lt;br/&gt;V+P vs V+P+T&quot;]
+  end
+</code></pre>
+<hr />
+<h2>3. 오프라인 증류 파이프라인</h2>
+<pre><code class="language-mermaid">flowchart TB
+  A[&quot;Demo (obs[T], actions[T-1])&quot;] --&gt; B[&quot;describe_frame: D_t^f, M_t^f 채움&quot;]
+  B --&gt; C[&quot;compute_delta(o_i, o_i+1, a_i)&lt;br/&gt;flags: contact_onset, blocked,&lt;br/&gt;deform_up_no_advance, advance, ...&quot;]
+  C --&gt; D[&quot;detect_events: flags + expert 액션 분류&lt;br/&gt;retract / realign / advance / success, 연속 구간 병합&quot;]
+  D --&gt; E1[&quot;summarize_demo: 이벤트 시간순 표&lt;br/&gt;step | event | expert action | measured motion | tactile change | progress&quot;]
+  E1 --&gt; F[&quot;build_distill_messages&lt;br/&gt;prompts/distill_skill.md&quot;]
+  F --&gt; G{&quot;데모 요약 총량 ≤ 컨텍스트 한도?&quot;}
+  G -- yes --&gt; H[&quot;단일 호출 → K_τ&quot;]
+  G -- no --&gt; H2[&quot;배치 요약 → merge 호출 → K_τ [가정]&quot;]
+  D --&gt; R1[&quot;이벤트별 후보 tactile frame (+ 비접촉 baseline)&quot;]
+  R1 --&gt; R2[&quot;tactile_feature_vector (26-d) → z-score → k-medoids&quot;]
+  R2 --&gt; R3[&quot;우선순위 정렬 후 max_refs개로 자름&lt;br/&gt;blocked &gt; deform_up_no_advance &gt; contact_onset &gt; ...&quot;]
+  R3 --&gt; R4[&quot;label_refs_with_llm (선택)&quot;]
+  H --&gt; V[&quot;validate_task_skill (검증 10 demo)&lt;br/&gt;intent / direction agreement, event coverage&quot;]
+  H2 --&gt; V
+  R4 --&gt; V
+  V --&gt; S[&quot;TaskContext.save()&quot;]
+</code></pre>
+<p>설계 포인트</p>
+<ul>
+<li><strong>이벤트 요약 기반 입력</strong> [가정]. 논문은 GPT-6-Astra가 데모를 &quot;jointly analyzes … relating contact changes and object motion before and after actions&quot;라고만 쓴다 [논문 §3.2]. 40개 데모의 원시 프레임을 모두 넣으면 토큰 비용이 감당되지 않는다. 그래서 REFLECT(<em>Summarizing robot experiences for failure explanation and correction</em>, arXiv:2306.15724)의 계층적 경험 요약처럼, 촉각과 운동 변화를 이벤트로 압축한 표를 LLM 입력으로 쓴다. 원시 이미지를 포함한 변형은 비교 실험 대상으로 남긴다.</li>
+<li><strong>K_τ 섹션 고정</strong>. 논문이 열거한 구성 요소 &quot;task objectives, manipulation principles, evidence for stage transitions, corrective strategies for obstructions&quot;[§3.2]를 Markdown 헤더로 강제한다. 여기에 촉각 해석과 액션 크기 섹션을 더했다.</li>
+<li><strong>E_tac 선택</strong>. 논문은 &quot;bilateral contact distributions and local deformation patterns를 보존하는 대표 촉각&quot;이라고만 쓴다 [§3.2]. 재구현은 좌우 finger를 분리한 26차원 descriptor 공간에서 이벤트별 k-medoids로 고른다. medoid는 실제 관측 프레임이므로 이미지 레퍼런스로 그대로 쓸 수 있다.</li>
+<li><strong>ablation용 별도 컨텍스트</strong>. &quot;Each configuration uses a fixed Task Skill matched to its available observations&quot;[§4.3]에 따라, V+P 조건은 촉각 플래그 없이 이벤트를 검출하고 K_τ를 따로 증류하며 E_tac은 비운다.</li>
+</ul>
+<hr />
+<h2>4. 온라인 폐루프</h2>
+<pre><code class="language-mermaid">sequenceDiagram
+  autonumber
+  participant R as eval.runner
+  participant E as Env (Mock / UniVTAC)
+  participant P as TactileGPTPolicy
+  participant T as tactile.descriptors/delta
+  participant B as prompt_builder + HistoryBuffer
+  participant L as LLMBackend
+  participant A as action_parser
+
+  R-&gt;&gt;E: reset(seed)
+  E--&gt;&gt;R: o_0
+  R-&gt;&gt;P: reset(episode_id) → H_t 초기화, backend.new_session
+  loop until done (success / step_limit 300 / safety / error)
+    R-&gt;&gt;P: decide(o_t)
+    P-&gt;&gt;T: describe_frame(T_t) (V+P면 tactile 제거)
+    P-&gt;&gt;T: compute_delta(o_{t-1}, o_t, a_{t-1})
+    P-&gt;&gt;B: build_act_messages(ℓ, C_τ, o_t, H_t, delta)
+    B--&gt;&gt;P: [system, user(ℓ | K_τ | E_tac | H_t | images | obs JSON | REQUEST_KIND)]
+    P-&gt;&gt;L: complete(messages, schema)
+    L--&gt;&gt;P: JSON text
+    P-&gt;&gt;A: parse_action(text, s_t, bounds)
+    alt format error (≤2회)
+      P-&gt;&gt;L: + assistant(raw) + user(FORMAT_ERROR)
+    else 재시도 실패
+      P--&gt;&gt;P: Action.hold(horizon=1), parse_ok=False
+    end
+    A--&gt;&gt;P: a_t (절대 목표 pose, gripper, horizon, warnings)
+    P--&gt;&gt;R: a_t
+    R-&gt;&gt;E: step(a_t): 목표 유지하며 k ≤ horizon control step 실행
+    E--&gt;&gt;R: StepResult(o_{t+1}, done, success)
+    R-&gt;&gt;P: update(a_t, result) → StepRecord(delta o_t→o_{t+1})
+    P-&gt;&gt;B: H_{t+1} = H_t + StepRecord
+  end
+  R-&gt;&gt;R: EpisodeResult → episodes.jsonl
+</code></pre>
+<p>설계 포인트</p>
+<ul>
+<li><strong>상대 명령 JSON을 절대 목표로 변환</strong> [가정]. 논문은 &quot;a_t specifies the target end-effector pose, gripper position, and a short execution horizon&quot;[§3.1]과 &quot;constructs action a_t from the latest measured robot state&quot;[§3.4]를 모두 쓴다. 모델은 base frame의 <code>dpos_mm</code>와 <code>drot_deg</code>(rotation vector)를 내고, parser가 최신 측정 상태를 기준으로 절대 목표(m, quat wxyz)로 바꾼다. LLM이 쿼터니언을 직접 다루지 않게 하려는 선택이다. 대가로 &quot;상대 vs 절대&quot; 자체가 재현 오차의 원인이 될 수 있다(미확인 항목 3).</li>
+<li><strong>Bounds와 format 체크</strong> [논문 §3.4]. format 위반은 재질의(최대 2회) 후 hold로 처리하고, bounds 위반은 clip한 뒤 warning을 다음 prompt에 피드백한다. 논문은 위반 시 처리를 밝히지 않았다.</li>
+<li><strong>stateless 재직렬화</strong> [가정]. &quot;independent model session per episode, H_t updated within the episode&quot;[§4.1]를 만족하면서 비용을 통제하기 위해, H_t는 텍스트(최근 20개는 상세, 이전은 압축, 막힘과 접촉 이벤트는 보존)로 넣고 이미지는 현재 시점과 직전 결정 시점의 촉각 패널만 넣는다. part 순서를 고정해 앞쪽(ℓ, K_τ, E_tac)이 에피소드 내내 바이트 동일하게 유지되므로 prompt caching이 가능하다.</li>
+<li><strong>delta 플래그는 Task Skill의 어휘다</strong>. <code>deform_up_no_advance</code>는 논문 §3.2의 예시(&quot;increasing deformation without object advancement during insertion prompts retraction&quot;)를 그대로 관측 플래그로 만든 것이다. 같은 flag 어휘가 오프라인 이벤트 검출, K_τ 텍스트, 온라인 관측 JSON에 공통으로 쓰여서 증류된 지식과 현재 관측이 같은 언어로 연결된다.</li>
+<li><strong>privileged 차단</strong>. 시뮬레이터 정답 상태는 <code>Observation.privileged</code>에만 두고, prompt와 mock 정책에 들어가지 않음을 테스트로 강제한다. mock 결과가 정답 누출로 부풀려지는 것을 막기 위해서다.</li>
+</ul>
+<hr />
+<h2>5. 평가 하네스</h2>
+<pre><code class="language-mermaid">flowchart LR
+  CFG[&quot;configs/eval.yaml · ablation.yaml&lt;br/&gt;tasks/*.yaml · backend.yaml&quot;] --&gt; RUNNER[&quot;eval.runner&quot;]
+  RUNNER --&gt; CTXCHK{&quot;context_dir 존재?&quot;}
+  CTXCHK -- no &amp; distill_if_missing --&gt; DIST[&quot;scripts/distill_task_skill&quot;]
+  CTXCHK -- yes --&gt; LOOP
+  DIST --&gt; LOOP[&quot;task × condition × seed (seed_base+i, i&lt;100)&quot;]
+  LOOP --&gt; EP[&quot;run_episode&lt;br/&gt;(새 세션, H_t reset)&quot;]
+  EP --&gt; J1[(&quot;steps/{episode_id}.jsonl&quot;)]
+  EP --&gt; J2[(&quot;episodes.jsonl (resume 지원)&quot;)]
+  J2 --&gt; AGG[&quot;TaskEvalResult&lt;br/&gt;success rate, Wilson 95% CI,&lt;br/&gt;mean steps/decisions, parse-fail rate, tokens&quot;]
+  AGG --&gt; BM[&quot;BenchmarkResult: 5-task 균등평균&quot;]
+  AGG --&gt; AB[&quot;Ablation: V+P+T vs V+P&lt;br/&gt;동일 seed, Δpp&quot;]
+  AGG -.-&gt; TRK[&quot;wandb / mlflow (lazy)&quot;]
+</code></pre>
+<ul>
+<li>프로토콜 [논문 §4.1]: 태스크당 고정 100 에피소드, 환경 고유 성공 기준, 종료됐지만 성공하지 못한 에피소드는 실패, 5-task 균등 평균. ablation은 같은 100개 설정, 같은 초기화, 같은 저수준 제어와 예산을 쓴다 [§4.3].</li>
+<li>통계: n=100이면 Wilson 95% CI 폭이 크다. 99/100은 [0.946, 0.998], 95/100은 [0.888, 0.979]다. Table 2의 Insert Hole 99(Ours) vs 95(N0-VTLA), Lift Can 95 vs 93(N0-TWAM)은 통계적으로 구분되지 않는다. 반면 ablation 99 vs 31(31/100 → [0.228, 0.406])은 CI가 겹치지 않는다. 하네스는 CI를 항상 함께 출력한다.</li>
+<li>비용 통제: <code>resume</code>(완료된 episode_id는 건너뜀), <code>--n-episodes</code> 파일럿, 토큰 사용량 집계.</li>
+</ul>
+<hr />
+<h2>6. 모듈 의존 그래프와 소유자</h2>
+<pre><code class="language-mermaid">flowchart BT
+  types[&quot;types.py (아키텍트)&quot;]
+  tactile[&quot;tactile/ (A)&lt;br/&gt;descriptors · delta · render&quot;]
+  envs[&quot;envs/ (A)&lt;br/&gt;base · mock_insert_hole · univtac_adapter&quot;]
+  policy[&quot;policy/ (B)&lt;br/&gt;backends · prompt_builder · action_parser · history · policy&quot;]
+  knowledge[&quot;knowledge/ (B)&lt;br/&gt;distill · tactile_refs · prompts&quot;]
+  evalm[&quot;eval/runner (A)&quot;]
+  scripts[&quot;scripts/ (A: run_eval, run_ablation · B: distill)&quot;]
+  tactile --&gt; types
+  envs --&gt; tactile
+  envs --&gt; types
+  policy --&gt; tactile
+  policy --&gt; types
+  knowledge --&gt; policy
+  knowledge --&gt; tactile
+  evalm --&gt; envs
+  evalm --&gt; policy
+  evalm --&gt; knowledge
+  scripts --&gt; evalm
+  scripts --&gt; knowledge
+</code></pre>
+<p>A(관측, 환경, 평가)와 B(지식, 정책, LLM)의 접점은 <code>types.py</code>와 SPEC §3(tactile 함수 시그니처), §4.1(Env), §7.3(policy·run_episode) 세 곳뿐이다. B는 A의 <code>describe_frame</code>, <code>compute_delta</code>, <code>render_tactile_panel</code>, <code>image_part</code>를 시그니처만 보고 호출한다. A의 runner는 B의 <code>TactileGPTPolicy</code>, <code>run_episode</code>, <code>make_backend</code>, <code>distill_task_skill</code>를 시그니처만 보고 호출한다.</p>
+<hr />
+<h2>7. 컴포넌트 설명</h2>
+<table>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>책임</th>
+<th>핵심 결정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>types.py</code></td>
+<td>o_t, a_t, H_t, C_τ 데이터 계약, 기하 헬퍼, 직렬화</td>
+<td>EEF는 xyz(m)+quat wxyz(UniVTAC <code>Pose</code>와 동일), RPY는 표시용 extrinsic XYZ, 그리퍼는 <a href="1=open">0,1</a>, depth는 mm(≥0)</td>
+</tr>
+<tr>
+<td><code>tactile/descriptors.py</code></td>
+<td>식(3)의 D_t^f(mean·peak·contact area·centroid·bbox·pooled grid), M_t^f(mean vector·magnitude·주방향·coherence·divergence·curl·pooled field)</td>
+<td>divergence와 curl을 넣어 &quot;누름 / 전단 / 비틀림&quot;을 숫자로 구분한다 [가정]</td>
+</tr>
+<tr>
+<td><code>tactile/delta.py</code></td>
+<td>o_t→o_{t+1} 변화 + 측정·명령 EEF 이동, flag 어휘</td>
+<td><code>blocked</code>(추종 오차), <code>deform_up_no_advance</code>(§3.2 예시) 등 결정적 규칙</td>
+</tr>
+<tr>
+<td><code>tactile/render.py</code></td>
+<td>marker field(Fig.4 스타일)와 indentation 렌더, PNG 인코딩(순수 zlib)</td>
+<td>matplotlib 의존 없음</td>
+</tr>
+<tr>
+<td><code>envs/mock_insert_hole.py</code></td>
+<td>numpy toy 삽입 시뮬레이터, 스크립트 전문가</td>
+<td>촉각이 숨은 오차의 <strong>부호</strong>를 담고 시각과 proprio는 담지 않도록 설계(P1–P4). 논문 수치 재현 목적이 아님</td>
+</tr>
+<tr>
+<td><code>envs/univtac_adapter.py</code></td>
+<td>UniVTAC 관측·액션 변환, task 구동, HDF5 데모 로딩</td>
+<td>확인된 키·shape만 고정하고 단위·의미가 미확인인 항목은 config와 TODO로 둠</td>
+</tr>
+<tr>
+<td><code>knowledge/distill.py</code></td>
+<td>40/10 분할, 이벤트 검출, 요약, K_τ 생성, 검증</td>
+<td>이벤트 요약 입력, K_τ 섹션 강제</td>
+</tr>
+<tr>
+<td><code>knowledge/tactile_refs.py</code></td>
+<td>E_tac 후보, k-medoids, LLM 라벨링</td>
+<td>이벤트별 medoid, 우선순위 컷</td>
+</tr>
+<tr>
+<td><code>policy/backends.py</code></td>
+<td>OpenAI(Responses, reasoning effort) / Anthropic(Messages, adaptive thinking, <code>output_config.effort</code>) / Mock</td>
+<td>SDK lazy import, payload 변환을 순수 함수로 분리해 테스트</td>
+</tr>
+<tr>
+<td><code>policy/prompt_builder.py</code></td>
+<td>식(1)의 입력을 메시지로 직렬화</td>
+<td>고정 순서와 캐시 친화 구조, <code>REQUEST_KIND</code> 마커</td>
+</tr>
+<tr>
+<td><code>policy/action_parser.py</code></td>
+<td>JSON 추출, 스키마·bounds 검사, 상대→절대 변환</td>
+<td>format은 재질의, bounds는 clip+피드백</td>
+</tr>
+<tr>
+<td><code>policy/history.py</code></td>
+<td>H_t 관리, 길이 정책</td>
+<td>최근 상세 + 과거 압축 + 이벤트 보존</td>
+</tr>
+<tr>
+<td><code>policy/policy.py</code></td>
+<td>decide / update / run_episode</td>
+<td>직전 결정 시점 대비 delta, backend 오류 3연속이면 실패</td>
+</tr>
+<tr>
+<td><code>eval/runner.py</code></td>
+<td>seed, 집계, CI, ablation, 로깅</td>
+<td>조건 간 동일 seed, resume, wandb/mlflow 선택</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>8. 논문 대비 매핑표</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>내용</th>
+<th>모듈 / 심볼</th>
+<th>근거 수준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>식(1) `a_t ~ π_θ(·</td>
+<td>ℓ, C_τ, o_t, H_t)`</td>
+<td>조건부 액션 생성</td>
+<td><code>TactileGPTPolicy.decide</code>, <code>build_act_messages</code>, <code>LLMBackend.complete</code></td>
+</tr>
+<tr>
+<td>§3.1 &quot;numerical EEF and gripper targets → generic IK&quot;</td>
+<td>액션 의미</td>
+<td><code>Action</code>, <code>Env.step</code>, <code>action_to_univtac</code>(<code>take_action(..., 'ee')</code>)</td>
+<td>논문 + UniVTAC 확인(<code>'ee'</code> 8-d). IK 구현 동일성은 미확인</td>
+</tr>
+<tr>
+<td>§3.1 θ 고정</td>
+<td>학습 없음</td>
+<td>전 모듈(학습 코드 없음)</td>
+<td>논문</td>
+</tr>
+<tr>
+<td>식(2) <code>C_τ = (K_τ, E_τ^tac)</code></td>
+<td>고정 태스크 컨텍스트</td>
+<td><code>TaskContext</code>(save/load, 평가 중 읽기 전용)</td>
+<td>논문</td>
+</tr>
+<tr>
+<td>§3.2 K_τ 구성(objectives, principles, transition evidence, corrective strategies)</td>
+<td>Task Skill 형식</td>
+<td><code>prompts/distill_skill.md</code>, SPEC §6.2 헤더</td>
+<td>논문 + 형식은 가정</td>
+</tr>
+<tr>
+<td>§3.2 &quot;deformation ↑ without advancement → retract, then adjust&quot;</td>
+<td>대표 교정 규칙</td>
+<td>flag <code>deform_up_no_advance</code>, Mock 정책 규칙</td>
+<td>논문 예시를 규칙화</td>
+</tr>
+<tr>
+<td>§3.2 E_τ^tac(bilateral distribution, local deformation 보존)</td>
+<td>촉각 레퍼런스</td>
+<td><code>select_tactile_refs</code>, <code>kmedoids</code>, <code>label_refs_with_llm</code></td>
+<td>논문 + 선택 절차는 가정</td>
+</tr>
+<tr>
+<td>§4.1 50 demo = 40 구성 + 10 검증(episode 단위)</td>
+<td>데이터 분할</td>
+<td><code>split_demos</code>, <code>DistillConfig(n_construct=40, n_val=10)</code></td>
+<td>논문</td>
+</tr>
+<tr>
+<td>§4.1 10 demo offline validation</td>
+<td>검증 절차</td>
+<td><code>validate_task_skill</code></td>
+<td>절차는 가정(논문 미기재)</td>
+</tr>
+<tr>
+<td>식(3) <code>T_t = {I, D, M}_{L,R}</code></td>
+<td>촉각 관측</td>
+<td><code>TactileFrame(L, R)</code>, <code>FingerTactile(image, depth_mm, marker_*, D, M)</code></td>
+<td>논문</td>
+</tr>
+<tr>
+<td>§3.3 D: pooling, mean, peak, contact region, centroid</td>
+<td>압입 descriptor</td>
+<td><code>compute_indentation_descriptor</code></td>
+<td>논문 + 세부(threshold, grid)는 가정</td>
+</tr>
+<tr>
+<td>§3.3 M: 2D marker displacement vs reference</td>
+<td>marker descriptor</td>
+<td><code>compute_marker_descriptor</code>(+ divergence/curl은 가정)</td>
+<td>논문</td>
+</tr>
+<tr>
+<td>§3.3 L/R 분리 유지</td>
+<td>양측 비교</td>
+<td>JSON <code>{&quot;L&quot;:…, &quot;R&quot;:…}</code>, flag <code>bilateral_asymmetry</code></td>
+<td>논문</td>
+</tr>
+<tr>
+<td>§3.3 연속 관측 + 같은 구간 EEF·그리퍼 이동</td>
+<td>변화 결합</td>
+<td><code>compute_delta</code>, <code>ObservationDelta</code></td>
+<td>논문</td>
+</tr>
+<tr>
+<td>§3.3 tactile images + structured descriptions</td>
+<td>이미지와 텍스트 병행</td>
+<td><code>render_tactile_panel</code> + <code>frame_to_prompt_dict</code></td>
+<td>논문 + 렌더 형식은 가정(Fig.4 참고)</td>
+</tr>
+<tr>
+<td>§3.4 bounds·format 체크 후 1–5 step 실행</td>
+<td>실행 계약</td>
+<td><code>parse_action</code>, <code>ActionBounds</code>, <code>Action.horizon ∈ [1,5]</code>, <code>Env.step</code></td>
+<td>논문 + 위반 처리는 가정</td>
+</tr>
+<tr>
+<td>§3.4 o_t vs o_{t+1} 비교로 효과 평가</td>
+<td>피드백</td>
+<td><code>StepRecord.delta</code>, H_t 렌더</td>
+<td>논문</td>
+</tr>
+<tr>
+<td>§3.4 불확실할 때 능동 탐색(작은 병진·회전·그리퍼 변화)</td>
+<td>탐색 액션</td>
+<td><code>intent ∈ {probe, adjust, retract}</code>, 소형 bounds</td>
+<td>논문 + 어휘는 가정</td>
+</tr>
+<tr>
+<td>§4.1 GPT-6-Astra, reasoning effort xhigh, 전 태스크 동일</td>
+<td>모델 설정</td>
+<td><code>OpenAIBackend(effort=&quot;xhigh&quot;)</code>, <code>backend.yaml</code></td>
+<td>논문. model id는 미확인</td>
+</tr>
+<tr>
+<td>§4.1 에피소드마다 독립 세션, H_t reset</td>
+<td>세션</td>
+<td><code>policy.reset(episode_id)</code>, <code>backend.new_session</code></td>
+<td>논문</td>
+</tr>
+<tr>
+<td>§4.1 100 fixed episodes/task, native success, 균등 평균</td>
+<td>프로토콜</td>
+<td><code>fixed_seeds</code>, <code>evaluate_task</code>, <code>BenchmarkResult.mean_success</code></td>
+<td>논문. seed 목록은 미확인</td>
+</tr>
+<tr>
+<td>§4.3 V+P vs V+P+T, 촉각과 레퍼런스 제거, 관측에 맞춘 Task Skill</td>
+<td>ablation</td>
+<td><code>run_ablation</code>, <code>separate_context: true</code>, <code>use_tactile</code> 주입</td>
+<td>논문</td>
+</tr>
+<tr>
+<td>Fig.2 step 300에서 실패</td>
+<td>step 한도</td>
+<td><code>max_steps=300</code></td>
+<td>UniVTAC 확인(<code>step_lim=300</code>)</td>
+</tr>
+<tr>
+<td>Fig.4 marker-displacement field</td>
+<td>촉각 시각화</td>
+<td><code>render_marker_field</code>, 63 markers(7×9)</td>
+<td>UniVTAC 확인(63), 7×9 배치는 가정</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>9. UniVTAC 연동 사실관계 (2026-10-23 조회)</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>시뮬레이터</td>
+<td>Isaac Sim 4.5 + Isaac Lab 2.1.1 + TacEx(libuipc) + cuRobo, conda env Python 3.10. <code>isaac51</code> 브랜치는 Isaac Sim 5.1</td>
+<td>확인(README, arXiv:2602.10093)</td>
+</tr>
+<tr>
+<td>로봇</td>
+<td>Franka Panda, finger qpos 0..0.039 m</td>
+<td>확인(<code>envs/robot/robot.py</code>)</td>
+</tr>
+<tr>
+<td>촉각 센서</td>
+<td>GelSight Mini / ViTai GF225 / Xense WS. 수집·평가는 현재 gsmini만</td>
+<td>확인(README)</td>
+</tr>
+<tr>
+<td>관측 키·shape</td>
+<td>head/wrist rgb 270×480×3. tactile <code>depth 240×320</code>, <code>marker 2×63×2</code>, <code>rgb</code>/<code>rgb_marker 240×320×3</code>, <code>pose 7</code>. embodiment <code>ee 7</code>, <code>joint 9</code></td>
+<td>확인(<code>docs/Collection.md</code>, <code>_base_task.py</code>)</td>
+</tr>
+<tr>
+<td>액션 API</td>
+<td><code>take_action(action, action_type ∈ {'qpos','ee','delta_ee'})</code>. <code>'ee'</code>는 <code>[p(3), q(4), gripper]</code></td>
+<td>확인(<code>_base_task.py</code>). docstring과 코드의 길이가 불일치</td>
+</tr>
+<tr>
+<td>쿼터니언 순서</td>
+<td>wxyz(<code>Pose</code> 기본 q=(1,0,0,0), transforms3d)</td>
+<td>확인(간접 근거)</td>
+</tr>
+<tr>
+<td>step 한도 / dt</td>
+<td><code>step_lim=300</code>, dt=1/120</td>
+<td>확인</td>
+</tr>
+<tr>
+<td>Insert Hole 성공 조건</td>
+<td>xy &lt; 1 cm, z &lt; −0.04, 축 정렬 dot &gt; 0.99, 손 안 높이 변화 &lt; 0.04. 구멍은 y축 기준 ±30° 기울어짐, 위치 노이즈</td>
+<td>확인(<code>envs/insert_hole.py</code>)</td>
+</tr>
+<tr>
+<td>정책 플러그인</td>
+<td><code>policy/&lt;Name&gt;/deploy_policy.py</code>: <code>Policy(BasePolicy)</code>의 <code>encode_obs</code>, <code>eval(task, observation)</code>, <code>reset</code>. 실행은 <code>eval_policy.sh</code></td>
+<td>확인(<code>docs/Deploy.md</code>)</td>
+</tr>
+<tr>
+<td>depth 단위·부호, marker 첫 축 의미, gripper open 방향, 평가 seed, instruction 문구, <code>'ee'</code>의 IK 방식</td>
+<td>—</td>
+<td><strong>미확인</strong>. 어댑터 config와 <code>TODO(unverified)</code>로 둠</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>10. 검증 전략 (검증 에이전트용 체크포인트)</h2>
+<ol>
+<li><strong>계약 테스트</strong>: <code>pytest</code>로 SPEC §11의 전 항목을 확인한다. 네트워크, API 키, GPU는 쓰지 않는다.</li>
+<li><strong>누출 테스트</strong>: privileged sentinel이 어떤 prompt part에도 나타나지 않아야 한다.</li>
+<li><strong>인과 sanity</strong>: mock env에서 V+P+T가 V+P보다 성공률이 높아야 한다. mock env는 촉각만 오차 부호를 담도록 만들었으므로, 이 차이가 없다면 descriptor, prompt, 정책 중 하나에서 촉각 경로가 끊긴 것이다. 이 결과는 논문의 31%→99%를 <strong>재현하는 것이 아니다</strong>. 논문 주장이 성립하려면 필요한 정보 흐름이 구현에 존재하는지를 보는 것이다.</li>
+<li><strong>실제 재현(선택)</strong>: UniVTAC + 실제 LLM backend로 Insert Hole 파일럿 20 에피소드를 돌린 뒤 100 에피소드로 확장한다. 논문 Table 2·3과 비교할 때는 Wilson CI를 함께 보고한다.</li>
+</ol>
+<hr />
+<h2>11. 미해결 이슈</h2>
+<ol>
+<li>GPT-6-Astra API model id와 <code>xhigh</code> 파라미터명 미확인. 기본값은 placeholder.</li>
+<li>논문의 실제 프롬프트, K_τ 원문, E_tac 크기와 선택 절차, 오프라인 검증 절차가 비공개다. 모두 가정으로 역설계했다.</li>
+<li>액션 절대·상대 표현, H_t 유지 방식(서버 대화 vs 재직렬화), 이미지 히스토리 길이 미확인.</li>
+<li>UniVTAC 세부(§9의 미확인 행). 특히 depth 단위와 marker 배열 의미는 descriptor 수치 스케일에 직접 영향을 준다. 실제 HDF5 한 개로 확인해야 한다.</li>
+<li>Grasp Classify처럼 분류 결과를 행동(place 위치)으로 표현하는 태스크에서 액션 스키마로 충분한지 미검증.</li>
+<li>평가 비용: 최대 약 5만 결정(5 task × 100 ep × 300 step / horizon 약 3). 실제 API 평가 전 예산 승인 필요.</li>
+<li>논문 Fig.1/Table 2의 baseline 수치는 UniVTAC 및 각 원 논문(N0-VTLA arXiv:2607.23782, N0-TWAM arXiv:2607.23783, π0.5 arXiv:2504.16054)에서 가져온 것으로 보인다. 같은 seed와 설정인지는 미확인이므로 직접 비교의 공정성은 별도 검증 대상이다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>02. 선행연구 조사 및 인용 검증 — GPT-6-Astra Understands Touch (arXiv:2610.28457v1)</h1>
+<ul>
+<li>작성 역할: 선행연구 조사 에이전트</li>
+<li>작성일: 2026-10-23</li>
+<li>대상: Wang et al., &quot;GPT-6-Astra Understands Touch and Outperform Vision–Tactile–Language–Action Models&quot;, arXiv:2610.28457v1 (2026-10-20), SYSU / X-Era AI Lab / PolyU. 프로젝트 페이지 https://gpt-as-tactile-policy.github.io/ (&quot;Code Coming soon&quot;, 2026-10-23 기준 코드·프롬프트·Task Skill 원문 미공개)</li>
+<li>검증 방법: arXiv abs/HTML 페이지, GitHub README/소스, 프로젝트 페이지를 WebFetch로 직접 열람. arXiv API는 HTTP 429로 막혀 abs 페이지를 하나씩 확인함. 아래 &quot;확인됨&quot;은 제목과 1저자(가능한 범위에서 저자 목록 전체)가 원 출처와 일치한다는 뜻임. &quot;지식 기반&quot;은 웹으로 다시 확인하지 않고 모델 지식으로만 확인한 항목.</li>
+</ul>
+<hr />
+<h2>0. 요약 (핵심 결론)</h2>
+<ol>
+<li><strong>References 22건 중 19건은 제목·저자·ID가 일치함.</strong> 불일치는 3건: E0(제목이 다르고 NeurIPS 2026 채택을 확인하지 못함, 저자 표기 오류), VLA-Touch(저자 &quot;M. S. Zheng&quot;는 실제로 &quot;Mike Zheng Shou&quot;), VITaL Pretraining(arXiv 프리프린트 제목은 다르고 ICRA 2025 판 제목은 일치함, IEEE Xplore 원문은 직접 확인하지 못함). 존재하지 않는 인용은 없었음.</li>
+<li><strong>Table 2의 baseline 수치는 모두 다른 논문에서 가져온 것이고, 저자들이 다시 돌린 결과가 아님.</strong> ACT+UniVTAC는 UniVTAC 원 논문(arXiv:2602.10093) 표, π0.5와 N0-VTLA는 N0-VTLA 논문(arXiv:2607.23782) 표, N0-TWAM은 N0-TWAM 논문(arXiv:2607.23783) Table 2의 값과 숫자 단위로 같음. 본문에는 &quot;previously evaluated on UniVTAC&quot;라고만 적혀 있고 &quot;가져왔다&quot;는 명시가 없으며, seed와 episode가 같은지도 밝히지 않음.</li>
+<li><strong>UniVTAC는 8개 task인데 논문은 5개만 보고함.</strong> Insert HDMI, Insert Tube, Put Bottle in Shelf가 빠졌고 제외한 이유는 적혀 있지 않음. 다만 이 3개를 넣으면 N0-VTLA 평균이 96.2에서 83.1로 떨어지므로, 5-task 부분집합은 오히려 N0-VTLA에 유리함. 제외된 3개 task에서 본 방법이 얼마나 나오는지는 미확인임. 그래서 체리피킹 여부는 판정할 수 없지만 선정 기준이 공개되지 않은 것은 문제임.</li>
+<li><strong>제목의 &quot;Outperform&quot;은 결과와 맞지 않음.</strong> 5-task 평균 93.8은 N0-VTLA의 96.2보다 낮음(각 task 100 episode를 가정하면 차이 −2.4pp, SE 약 1.3pp). N0-TWAM의 84.6보다는 높음(+9.2pp, SE 약 1.8pp). 결국 &quot;N0-TWAM과 일부 task에서 앞선다&quot;가 정확한 표현임.</li>
+<li><strong>E0는 Baselines 절에 이름이 나오지만 Table 2와 Fig. 1C에는 없음.</strong> 본문은 &quot;four methods&quot;라고 쓰면서 다섯 개를 나열함. E0는 교신저자 Guangrun Wang과 Liang Lin이 공저자인 자기 인용이고, 우리가 확인한 UniVTAC·N0 계열 표에는 E0의 UniVTAC 결과가 없음.</li>
+<li><strong>계보상 본 논문은 GPT-as-Policy(Galbot, arXiv:2609.38537)의 direct-control 정식화를 그대로 쓰고 tactile을 확장한 것임.</strong> &quot;IK 컨트롤러로 1–5 control step 실행&quot;, &quot;xhigh reasoning&quot;까지 같음. 2026년 9–10월에 GPT-6 Astra를 정책으로 평가한 논문이 최소 4편 더 확인됨(아래 4절). 그러나 촉각을 넣은 것은 본 논문이 처음으로 보이며, 이는 우리가 찾은 범위 안에서의 판단임.</li>
+<li><strong>재구현에 중요한 발견.</strong> UniVTAC 소스(<code>envs/insert_hole.py</code>)를 보면 Insert Hole 구멍의 기울기는 ±30°(π/6) 두 가지 중 하나로만 정해짐(<code>rotate ∈ {0, π}</code>). 그러니 &quot;probing으로 방향을 찾는&quot; 문제는 사실상 이진 선택에 가깝고, Fig. 2의 &quot;~30° Success&quot;도 여기서 나옴. episode 상한은 <code>step_lim = 300</code>으로, Fig. 2의 &quot;step 300 Failed&quot;와 맞음.</li>
+</ol>
+<hr />
+<h2>1. References 전수 검증표</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>논문 인용(약칭)</th>
+<th>인용상 ID/학회</th>
+<th>실제 확인 결과</th>
+<th>판정</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Bi et al., VLA-Touch</td>
+<td>IEEE RA-L 2026</td>
+<td>arXiv:2507.17294, &quot;VLA-Touch: Enhancing Vision-Language-Action Models with Dual-Level Tactile Feedback&quot;, Jianxin Bi, Kevin Yuchen Ma, Ce Hao, <strong>Mike Zheng Shou</strong>, Harold Soh. GitHub README에 &quot;RA-L 2026 accepted&quot;(github.com/jxbi1010/VLA-Touch)</td>
+<td><strong>부분 불일치</strong></td>
+<td>인용 저자 &quot;M. S. Zheng&quot;는 오기(실제 M. Z. Shou). base VLA는 RDT-1B, tactile-language 모듈은 Octopi. arXiv에는 journal-ref 없음</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Brohan et al., SayCan</td>
+<td>CoRL, PMLR pp.287–318, 2023</td>
+<td>&quot;Do As I Can, Not As I Say&quot;, CoRL 2022(PMLR v205 proceedings는 2023년 발행), pp.287–318. arXiv:2204.01691</td>
+<td>확인됨</td>
+<td>쪽수는 다른 논문의 인용 목록으로 교차 확인. arXiv ID는 지식 기반</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Chen et al., UniVTAC</td>
+<td>arXiv:2602.10093</td>
+<td>제목·저자(Baijun Chen, Weijie Wan, Tianxing Chen, Xianda Guo, Congsheng Xu, Yuanyang Qi, Haojie Zhang, Longyan Wu, Tianling Xu, Zixuan Li, …, Yao Mu) 일치. 2026-02-10</td>
+<td>확인됨</td>
+<td>상세 내용은 2절</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Chen et al., RoboScript</td>
+<td>arXiv:2402.14623</td>
+<td>제목·저자(Junting Chen, Yao Mu, Qiaojun Yu, …) 일치</td>
+<td>확인됨</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Cheng et al., OmniVTLA</td>
+<td>IEEE RA-L 2026</td>
+<td>arXiv:2508.08706, 저자 8인이 인용 순서와 일치(v3). arXiv comments에 &quot;Accepted by IEEE RA-L&quot;</td>
+<td>확인됨</td>
+<td>journal-ref 필드는 없음</td>
+</tr>
+<tr>
+<td>6</td>
+<td>George et al., VITaL Pretraining</td>
+<td>ICRA 2025, pp.258–264</td>
+<td>여러 논문의 인용 목록에서 같은 제목·학회·쪽수 확인. arXiv 프리프린트(2403.11898)는 &quot;Visuo-tactile pretraining for cable plugging&quot;으로 제목이 다름</td>
+<td><strong>부분 확인</strong></td>
+<td>IEEE Xplore 원문은 직접 확인 못 함. 2506.13762(Zhao et al.의 ViTaL)와 이름만 같은 다른 연구이므로 혼동 주의</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Higuera et al., Visuo-Tactile World Models</td>
+<td>arXiv:2602.06001</td>
+<td>제목·저자 6인 일치, 2026-02-05</td>
+<td>확인됨</td>
+<td>학회 미기재</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Huang et al., 3D-ViTac</td>
+<td>arXiv:2410.24091</td>
+<td>일치. CoRL 2024 채택</td>
+<td>확인됨</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Huang et al., Tactile-VLA</td>
+<td>arXiv:2507.09160</td>
+<td>일치(Jialei Huang, Shuo Wang, Fanqi Lin, Yihang Hu, Chuan Wen, Yang Gao)</td>
+<td>확인됨</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Huang et al., Instruct2Act</td>
+<td>arXiv:2305.11176</td>
+<td>일치</td>
+<td>확인됨</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Huang et al., Inner Monologue</td>
+<td>arXiv:2207.05608</td>
+<td>일치</td>
+<td>확인됨</td>
+<td>학회 표기 없음(CoRL 2022 게재는 지식 기반)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Huang et al., VoxPoser</td>
+<td>arXiv:2307.05973</td>
+<td>일치</td>
+<td>확인됨</td>
+<td>(CoRL 2023, 지식 기반)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Intelligence et al., π0.5</td>
+<td>arXiv:2504.16054</td>
+<td>일치</td>
+<td>확인됨</td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Liang et al., Code as Policies</td>
+<td>ICRA 2023, pp.9493–9500</td>
+<td>일치(IEEE 레코드 미러, DOI 10.1109/ICRA48891.2023.10160591). arXiv:2209.07753</td>
+<td>확인됨</td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Liu et al., REFLECT</td>
+<td>arXiv:2306.15724</td>
+<td>일치. CoRL 2023</td>
+<td>확인됨</td>
+<td></td>
+</tr>
+<tr>
+<td>16</td>
+<td>Mikami et al., NL as Policies</td>
+<td>arXiv:2403.13801</td>
+<td>일치</td>
+<td>확인됨</td>
+<td></td>
+</tr>
+<tr>
+<td>17</td>
+<td>Team et al., GPT-as-Policy</td>
+<td>arXiv:2609.38537</td>
+<td>&quot;Systematically Exploring the Capabilities of GPT-6 Astra as Embodied Policies&quot;, <strong>Galbot Team</strong>(Xuchuan Chen, Xiaoqian Cheng, Yu Deng, Lihe Ding, …, He Wang, Li Yi, …), 2026-09-29</td>
+<td>확인됨</td>
+<td>코드 링크 없음. 본 논문 저자들과 다른 그룹</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Team et al., N0-TWAM</td>
+<td>arXiv:2607.23783</td>
+<td>일치. NeoteAI Team &amp; Fudan TEAI Team, 2026-07-26</td>
+<td>확인됨</td>
+<td>코드 github.com/neoteai/N0-TWAM(공개 예정)</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Team et al., N0-VTLA</td>
+<td>arXiv:2607.23782</td>
+<td>일치. 같은 팀, 2026-07-26</td>
+<td>확인됨</td>
+<td>코드 github.com/neoteai/N0-VTLA</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Tian et al., VT-WAM</td>
+<td>arXiv:2607.02503</td>
+<td>저자 10인 일치, 2026-07-02</td>
+<td>확인됨</td>
+<td>프로젝트 vt-wam.github.io</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Wu et al., Tactile-WAM</td>
+<td>arXiv:2606.26663</td>
+<td>저자 일치(인용의 &quot;H. Kaixiang, C. Yonghang&quot;는 성·이름 순서가 뒤집힌 표기). RSS 2026 Workshop(Tactile for FM) 투고</td>
+<td>확인됨</td>
+<td>평가는 ManiFeel과 실로봇 5 task. UniVTAC 결과 없음</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Xue et al., Reactive Diffusion Policy</td>
+<td>arXiv:2503.02881</td>
+<td>일치. RSS 2025</td>
+<td>확인됨</td>
+<td></td>
+</tr>
+<tr>
+<td>23</td>
+<td>Zhan et al., E0</td>
+<td>NeurIPS 2026, 제목 &quot;Expressive fine-grained discrete action prediction for VLA via tweedie discrete diffusion&quot;</td>
+<td>실제는 arXiv:2511.21542, &quot;<strong>E0: Enhancing Generalization and Fine-Grained Control in VLA Models via Tweedie Discrete Diffusion</strong>&quot;(v2, 2026-03-25. v1 제목은 &quot;Continuized Discrete Diffusion&quot;). 저자 13인(… Liang Lin, Guangrun Wang)</td>
+<td><strong>불일치</strong></td>
+<td>① 인용된 제목과 실제 제목이 다름 ② NeurIPS 2026 채택을 찾지 못함(arXiv comments에 학회 표기 없음, 검색 결과도 없음) ③ &quot;Q. Lyu&quot;는 실제 &quot;Qinhan Lv&quot;, &quot;W. Li, J. Zhang&quot;은 실제 순서가 &quot;Jusheng Zhang, Weizheng Li&quot; ④ 자기 인용</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>정리하면 인용 23건(본문에 쓰인 서지 22개에 SayCan arXiv ID를 보충해 셈) 가운데 존재하지 않는 문헌은 0건임. 서지 정보가 틀린 것은 E0 1건(심각), VLA-Touch 1건(경미), VITaL 1건(제목 버전 차이).</p>
+</blockquote>
+<hr />
+<h2>2. 핵심 의존 연구 상세</h2>
+<h3>2.1 GPT-as-Policy (Galbot Team, arXiv:2609.38537)</h3>
+<ul>
+<li><strong>내용.</strong> GPT-6 Astra를 6개 domain(gripper, dexterous in-hand, mobile manipulation, navigation, locomotion, humanoid WBC)에서 direct 정책과 hybrid 정책으로 평가함. 보고 수치는 RoboDojo gripper hybrid 약 48%, dexterous hybrid 50%, RoboCasa365 mobile 38.7%, RxR 92%, HM3D 82%임. locomotion은 5번 모두 실패했고 HumanoidBench에서는 30개 중 13개 task에서 baseline보다 나았음.</li>
+<li><strong>본 논문이 그대로 가져온 것.</strong> Appendix H의 내용이 같음. <code>gpt-6-astra</code>를 <strong>xhigh reasoning</strong>으로 Responses API를 통해 호출하고, schema로 검증되는 tool call로 action vector와 <strong>1–5 repeat count</strong>를 받으며, episode마다 model thread 하나를 유지함. 본 논문 3.4절의 &quot;IK controller executes the target for one to five control steps&quot;와 4.1절의 &quot;reasoning effort fixed to xhigh&quot;, &quot;independent model session per episode&quot;는 이 프로토콜을 그대로 옮긴 것임.</li>
+<li><strong>지연 시간.</strong> locomotion 30초 롤아웃에 250번 호출, 호출당 평균 39.86초였고 그동안 physics를 멈춤. RoboDojo 50 instance에서 Direct 방식은 총 1,132.3M token을 썼음. <strong>본 논문은 latency, token, 비용을 하나도 보고하지 않음.</strong> 시뮬레이션을 멈추는 방식이라고 가정하면 &quot;실시간 촉각 반응&quot;이라는 주장은 RDP 같은 고주파 촉각 제어와 같은 선에서 비교할 수 없음.</li>
+<li><strong>촉각은 다루지 않음.</strong> in-hand task 입력이 &quot;images and state&quot;뿐이었음. 그러므로 촉각 확장이 본 논문의 실질적인 새 기여임.</li>
+<li>GPT-6 Astra 자체: GPT-as-Policy의 ref [32]는 OpenAI, &quot;GPT-6 Astra: A new generation of intelligence&quot;(openai.com/index/gpt-6-astra/, 2026)임. 해당 페이지는 HTTP 403이라 원문 미확인.</li>
+</ul>
+<h3>2.2 UniVTAC (Chen et al., arXiv:2602.10093)</h3>
+<ul>
+<li><strong>공개 여부.</strong> 코드는 https://github.com/univtac/UniVTAC (README 본문은 MIT, 사이드바는 Apache-2.0으로 표기가 엇갈림), 데이터는 HuggingFace <code>byml/UniVTAC</code>와 ModelScope <code>byml2024/UniVTAC</code>(task마다 100 episode, isaac45/isaac51 두 판), 그리고 <code>checkpoints/</code>(ACT policy와 공유 tactile encoder, Isaac Sim 4.5 데이터로만 학습)가 공개됨.</li>
+<li><strong>스택.</strong> Isaac Sim 4.5.0과 Isaac Lab 2.1.1(<code>main</code>) 또는 Isaac Sim 5.1(<code>isaac51</code> 브랜치), TacEx(libuipc IPC와 visuo-tactile renderer), cuRobo, Python 3.10. 논문은 GelSight Mini, ViTai GF225, Xense WS 세 센서를 시뮬레이션하지만 README 기준 데이터 수집은 현재 <strong>GelSight Mini만 지원</strong>함.</li>
+<li><strong>관측.</strong> 카메라 <code>head</code>와 <code>wrist</code>(rgb, depth), 촉각 <code>left_tactile</code>과 <code>right_tactile</code>(<code>rgb_marker</code>, <code>depth</code>, <code>marker_motion</code>). 논문 기준 출력은 I_marked, I_pure, dense depth D, marker 2D 투영 M, gelpad 기준 object pose임. 본 논문 식 (3)의 I(tactile image), D(indentation depth 통계), M(marker displacement)은 이 출력과 정확히 대응함.</li>
+<li><strong>Action.</strong> <code>take_action(action_type=qpos|ee|delta_ee)</code>. <code>ee</code>는 7-D pose에 gripper를 더한 형태임. 본 논문의 &quot;target EEF pose + gripper + short horizon&quot;은 <code>ee</code> 모드로 보임(추정).</li>
+<li><strong>Episode 상한.</strong> <code>_base_task.py</code>의 <code>step_lim = 300</code>.</li>
+<li><strong>5개 task의 정의와 성공 조건.</strong> 논문 Appendix Table V와 소스의 <code>check_success</code>를 함께 정리함. 소스는 WebFetch 요약을 거친 인용이므로 재구현 에이전트가 원문을 다시 확인하기를 권함.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>정의(논문)</th>
+<th>무작위화(소스)</th>
+<th><code>check_success</code>(소스)</th>
+<th>early stop(소스)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert Hole</td>
+<td>기울어진 구멍이 있는 cube(60° 또는 120°)에 test tube를 넣음</td>
+<td><code>rotate ∈ {0, π}</code>에 따라 target 기울기 −π/6 또는 +π/6(<strong>이진</strong>). slot base 위치 noise는 [0.02, 0.03, 0]</td>
+<td>target 기준 |x|,|y| &lt; 0.01, z &lt; −0.04, z축 정렬 dot &gt; 0.99, 손 안에서 높이 변화 &lt; 0.04</td>
+<td>손 안 높이 bias &gt; 0.04</td>
+</tr>
+<tr>
+<td>Lift Can</td>
+<td>지름 4, 5, 6 cm 중 하나인 캔이 누워 있음. 미끄러지지 않게 세워 올림</td>
+<td>크기 균등 선택, 위치 noise [0.02, 0.05, 0], grasp pitch noise</td>
+<td>can z &lt; 0.01, can x축과 수직축의 dot &gt; 0.99</td>
+<td>촉각 min depth &lt; 20, 또는 손 안 높이 변화 &gt; 0.05</td>
+</tr>
+<tr>
+<td>Grasp Classify</td>
+<td>외형은 비슷하고 texture만 다른 두 물체를 분류해 해당 영역에 놓음</td>
+<td>Rough/Plain prism <strong>이진</strong> 선택, 목표 pad 2개</td>
+<td>target 기준 |p| &lt; [0.02, 0.02, 0.01], 기울기 15° 이내</td>
+<td>(없음)</td>
+</tr>
+<tr>
+<td>Lift Bottle</td>
+<td>벽을 향해 누운 병을 잡아 세움. 최종 base가 벽에서 5 cm 이내</td>
+<td>위치 noise [0.01, 0.05, 0], yaw noise ≤ 10°, grasp pitch −15°~0°</td>
+<td>상대 x &gt; −0.02, |y| &lt; 0.1, |z| &lt; 0.001, 수직 정렬 &gt; 0.99</td>
+<td>300 step 초과 이후 자세 조건</td>
+</tr>
+<tr>
+<td>Pull-out Key</td>
+<td>slot에 꽂힌 key를 저항이 느껴질 때까지 돌린 뒤 뽑음</td>
+<td>key yaw를 slot 기준 U(−90°, −45°)에서 뽑고, 공통 yaw ±45°, base noise ±5 mm</td>
+<td>key z &gt; 0.09, 기울기 15° 이내, slot 정렬 유지, gripper와 key 거리 &lt; 0.14</td>
+<td>gripper–key 거리 ≥ 0.14, 또는 slot이 기울어짐</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>논문에 공통으로 적힌 무효 조건: 최대 penetration이 안전 임계치를 넘거나 gelpad와 물체 사이에 큰 상대 slip이 생기면 무효. 소스에서는 명시적인 임계치를 찾지 못했음(미확인).</li>
+<li><strong>UniVTAC 원 논문의 baseline 프로토콜.</strong> task마다 자동 수집 trajectory 50개, 4,000 step, batch 64, lr 1e-5, rollout 100회. seed 수는 보고하지 않음. π0과 π0.5는 원 논문에 <strong>없음</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>UniVTAC 원표(%)</th>
+<th>Lift Bottle</th>
+<th>Pull-out Key</th>
+<th>Lift Can</th>
+<th>Put Bottle</th>
+<th>Insert Hole</th>
+<th>Insert HDMI</th>
+<th>Insert Tube</th>
+<th>Grasp Classify</th>
+<th>Avg(8)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACT</td>
+<td>42</td>
+<td>28</td>
+<td>20</td>
+<td>28</td>
+<td>19</td>
+<td>15</td>
+<td>45</td>
+<td>50</td>
+<td>30.9</td>
+</tr>
+<tr>
+<td>VITaL</td>
+<td>72</td>
+<td>47</td>
+<td>8</td>
+<td>32</td>
+<td>25</td>
+<td>6</td>
+<td>34</td>
+<td>100</td>
+<td>40.5</td>
+</tr>
+<tr>
+<td>ACT+UniVTAC</td>
+<td>71</td>
+<td>46</td>
+<td>29</td>
+<td>31</td>
+<td>24</td>
+<td>28</td>
+<td>56</td>
+<td>99</td>
+<td>48.0</td>
+</tr>
+</tbody>
+</table>
+<h3>2.3 N0-VTLA (arXiv:2607.23782)과 N0-TWAM (arXiv:2607.23783), NeoteAI와 Fudan TEAI</h3>
+<ul>
+<li><strong>N0-VTLA.</strong> 학습은 세 단계임. NeoData로 visuo-tactile pretraining을 하고, latent tactile pathway를 붙이고, ALTER라는 advantage-conditioned offline improvement를 함. 하드웨어는 Appendix B에 &quot;multi-node distributed training at cluster scale&quot;라고만 적혀 있어 본 논문 Table 1의 &quot;Multi-node cluster&quot;와 맞음. task별 적응은 &quot;few hundred demonstrations&quot;로 SFT하며 task마다 정책을 하나씩 둠. UniVTAC에서 몇 개 demo를 썼는지는 적혀 있지 않음.</li>
+<li><strong>N0-TWAM.</strong> 6개 embodiment, 450개 task의 visuo-tactile 데이터로 pretraining함. NeoForce force representation, contact-event staging, 비대칭 MoT 구조. pretraining은 128×H800(FSDP2), NeoForce pretraining은 8×A100, post-training은 기본 1,000 step이라 Table 1과 맞음. UniVTAC는 task마다 100 trial로 평가함. <strong>촉각 입력은 기본이 &quot;simulator의 clean tactile output&quot;이고</strong>, gel-rendered 입력이면 82.4, gel-rendered에 NeoForce를 쓰면 88.1임.</li>
+<li><strong>두 논문의 UniVTAC 8-task 표.</strong> π0.5 행은 두 논문에서 같음.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>출처</th>
+<th>Method</th>
+<th>IH</th>
+<th>LC</th>
+<th>GC</th>
+<th>LB</th>
+<th>PK</th>
+<th>(Put Bottle)</th>
+<th>(HDMI)</th>
+<th>(Tube)</th>
+<th>5-task 평균</th>
+<th>8-task 평균</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N0-VTLA·N0-TWAM 표</td>
+<td>π0.5</td>
+<td>25</td>
+<td>6</td>
+<td>49</td>
+<td>100</td>
+<td>35</td>
+<td>34</td>
+<td>8</td>
+<td>74</td>
+<td>43.0</td>
+<td>41.4</td>
+</tr>
+<tr>
+<td>N0-VTLA 표</td>
+<td>N0-VTLA</td>
+<td>95</td>
+<td>88</td>
+<td>100</td>
+<td>99</td>
+<td>99</td>
+<td>60</td>
+<td>25</td>
+<td>99</td>
+<td>96.2</td>
+<td>83.1</td>
+</tr>
+<tr>
+<td>N0-TWAM 표</td>
+<td>N0-TWAM</td>
+<td>99</td>
+<td>93</td>
+<td>94</td>
+<td>58</td>
+<td>79</td>
+<td>87</td>
+<td>68</td>
+<td>98</td>
+<td>84.6</td>
+<td>84.5</td>
+</tr>
+</tbody>
+</table>
+<p>→ 본 논문 Table 2와 Fig. 1C의 baseline 25개 셀은 위 표들과 <strong>모두 일치</strong>함. 5-task 평균도 다시 계산하면 같음.</p>
+<h3>2.4 E0 (arXiv:2511.21542)</h3>
+<ul>
+<li>SYSU 그룹(Liang Lin, Guangrun Wang)의 discrete-diffusion VLA임. LIBERO, VLABench, ManiSkill, 실제 Franka에서 평가했음. <strong>UniVTAC 결과는 우리가 확인한 어떤 표에도 없음.</strong> 본 논문은 E0를 &quot;vision-only baseline&quot;으로 Baselines 절에 넣었지만 Table 2에는 수치가 없음. 실험 설정 초안에 남은 흔적이거나 편집 누락으로 보이며, 이는 추정임.</li>
+</ul>
+<h3>2.5 π0.5 (arXiv:2504.16054)</h3>
+<ul>
+<li>본 논문의 π0.5 수치는 π0.5 원 논문이 아니라 N0 계열 논문에서 가져온 것임. 그 논문들도 baseline을 다시 돌렸는지 가져왔는지 밝히지 않음. N0-VTLA는 NeoReal 실험에 대해서만 &quot;reproduced internally&quot;라고 적음.</li>
+</ul>
+<h3>2.6 나머지 직접 인용 연구 요약</h3>
+<table>
+<thead>
+<tr>
+<th>연구</th>
+<th>핵심 메커니즘</th>
+<th>학습 필요</th>
+<th>촉각 사용 방식</th>
+<th>본 논문과의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tactile-VLA (arXiv:2507.09160)</td>
+<td>VLA에 hybrid position-force control, CoT 변형으로 촉각 기반 실패 분석</td>
+<td>few-shot fine-tune</td>
+<td>촉각 토큰과 힘 목표</td>
+<td>&quot;촉각 CoT로 실패 분석&quot;을 학습된 VLA 안에서 수행. 본 논문은 이를 frozen LLM과 in-context로 대체함</td>
+</tr>
+<tr>
+<td>VLA-Touch (arXiv:2507.17294, RA-L 2026)</td>
+<td>base VLA(RDT-1B)는 고정, Octopi로 촉각을 언어화해 planner 갱신, diffusion refiner</td>
+<td>refiner 학습</td>
+<td>semantic feedback과 저수준 refinement</td>
+<td>&quot;base 모델 고정&quot;이라는 철학이 가장 가까움. 다만 저수준 촉각 보정을 학습된 refiner가 맡는다는 점이 결정적으로 다름</td>
+</tr>
+<tr>
+<td>OmniVTLA (arXiv:2508.08706, RA-L)</td>
+<td>π0 기반, dual-path tactile encoder(SA-ViT), ObjTac 데이터셋</td>
+<td>학습</td>
+<td>encoder 정렬</td>
+<td>학습형 VTLA 계열의 대표. 직접 비교는 없음</td>
+</tr>
+<tr>
+<td>3D-ViTac (arXiv:2410.24091, CoRL 2024)</td>
+<td>시각과 촉각을 3D point로 통합한 뒤 diffusion policy</td>
+<td>학습</td>
+<td>공간 표현</td>
+<td>표현 학습 계열</td>
+</tr>
+<tr>
+<td>RDP (arXiv:2503.02881, RSS 2025)</td>
+<td>slow latent chunk와 fast tactile feedback으로 나눈 계층</td>
+<td>학습</td>
+<td>고주파 반응 제어</td>
+<td>본 논문의 &quot;short horizon(1–5 step)과 재질의&quot;는 RDP의 fast loop를 LLM 호출 주기로 근사한 것이지만 주파수 차이가 매우 큼(latency 미보고)</td>
+</tr>
+<tr>
+<td>VITaL Pretraining (ICRA 2025)</td>
+<td>visuo-tactile pretraining이 촉각 없이 배포하는 정책에도 도움</td>
+<td>학습</td>
+<td>pretraining</td>
+<td>UniVTAC 표에서 VITaL 행의 출처</td>
+</tr>
+<tr>
+<td>Visuo-Tactile World Models (arXiv:2602.06001)</td>
+<td>촉각을 넣은 action-conditioned world model로 planning</td>
+<td>학습</td>
+<td>미래 예측</td>
+<td>WAM 계열의 기점</td>
+</tr>
+<tr>
+<td>Tactile-WAM (arXiv:2606.26663)</td>
+<td>tactile 비대칭 attention</td>
+<td>학습</td>
+<td>행동 경로에만 촉각 주입</td>
+<td>UniVTAC 결과 없음</td>
+</tr>
+<tr>
+<td>VT-WAM (arXiv:2607.02503)</td>
+<td>flow matching으로 vision, tactile deformation, action을 함께 예측. contact-gated attention guidance</td>
+<td>학습</td>
+<td>미래 촉각 예측</td>
+<td>실로봇 6 task 평균 71.67%. UniVTAC 결과 없음</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. 계보도</h2>
+<h3>3.1 LLM-as-policy 계열</h3>
+<pre><code class="language-mermaid">flowchart TD
+  SayCan[&quot;SayCan&lt;br/&gt;arXiv:2204.01691 · CoRL 2022&lt;br/&gt;skill 선택&quot;] --&gt; IM[&quot;Inner Monologue&lt;br/&gt;arXiv:2207.05608&lt;br/&gt;언어 피드백 재계획&quot;]
+  SayCan --&gt; CaP[&quot;Code as Policies&lt;br/&gt;arXiv:2209.07753 · ICRA 2023&lt;br/&gt;정책 코드 생성&quot;]
+  CaP --&gt; I2A[&quot;Instruct2Act&lt;br/&gt;arXiv:2305.11176&quot;]
+  CaP --&gt; RS[&quot;RoboScript&lt;br/&gt;arXiv:2402.14623&quot;]
+  CaP --&gt; VP[&quot;VoxPoser&lt;br/&gt;arXiv:2307.05973&lt;br/&gt;3D value map&quot;]
+  IM --&gt; REF[&quot;REFLECT&lt;br/&gt;arXiv:2306.15724 · CoRL 2023&lt;br/&gt;다감각 경험 요약·실패 설명&quot;]
+  PM[&quot;LLMs as General Pattern Machines*&lt;br/&gt;arXiv:2307.04721 · CoRL 2023&quot;] --&gt; PW[&quot;Prompt a Robot to Walk*&lt;br/&gt;arXiv:2309.09969 · CDC 2024&quot;]
+  PW --&gt; NLP[&quot;NL as Policies&lt;br/&gt;arXiv:2403.13801&lt;br/&gt;좌표 수준 직접 출력&quot;]
+  NLP --&gt; KAT[&quot;KAT*&lt;br/&gt;arXiv:2403.19578 · RSS 2024&lt;br/&gt;in-context imitation&quot;]
+  KAT --&gt; RP[&quot;RoboPrompt*&lt;br/&gt;arXiv:2410.12782 · ICRA 2025&lt;br/&gt;demo keyframe ICL&quot;]
+  REF --&gt; GaP
+  RP --&gt; GaP[&quot;GPT-as-Policy&lt;br/&gt;arXiv:2609.38537 (Galbot)&lt;br/&gt;GPT-6 Astra direct control&quot;]
+  NLP --&gt; GaP
+  GaP -.동시기.- URP[&quot;Unexpected Robot Policy*&lt;br/&gt;arXiv:2609.24170&quot;]
+  GaP -.동시기.- ICRL[&quot;In-Context Robot Learning w/ VLM Agents (GPT-Policy)*&lt;br/&gt;arXiv:2609.19138&quot;]
+  GaP -.동시기.- AST[&quot;Astranomy* (NVIDIA tech report, 2026-10-14)&quot;]
+  GaP -.동시기.- SN[&quot;Has GPT-6-Astra Achieved EI?*&lt;br/&gt;arXiv:2610.22471&quot;]
+  GaP --&gt; OURS[&quot;GPT-as-Tactile-Policy (본 논문)&lt;br/&gt;arXiv:2610.28457&quot;]
+  REF -. &quot;경험 요약 → Task Skill&quot; .-&gt; OURS
+</code></pre>
+<p><code>*</code> 표시는 본 논문이 인용하지 않은 연구(4절). 화살표는 개념상의 영향 관계를 정리한 것으로, 저자들이 직접 밝힌 영향 관계는 아님.</p>
+<h3>3.2 Visuo-tactile 학습 정책 및 tactile-language 계열</h3>
+<pre><code class="language-mermaid">flowchart TD
+  TVL[&quot;TVL*&lt;br/&gt;arXiv:2402.13232 · ICML 2024&quot;] --&gt; OCT[&quot;Octopi*&lt;br/&gt;arXiv:2405.02794 · RSS 2024&quot;]
+  SP[&quot;Sparsh*&lt;br/&gt;arXiv:2410.24090 · CoRL 2024&quot;]
+  VIT[&quot;VITaL Pretraining&lt;br/&gt;ICRA 2025 (arXiv:2403.11898)&quot;] --&gt; UNI
+  V3D[&quot;3D-ViTac&lt;br/&gt;arXiv:2410.24091 · CoRL 2024&quot;]
+  RDP[&quot;Reactive Diffusion Policy&lt;br/&gt;arXiv:2503.02881 · RSS 2025&quot;]
+  TLA[&quot;TLA*&lt;br/&gt;arXiv:2503.08548&quot;] --&gt; VTLA[&quot;VTLA*&lt;br/&gt;arXiv:2505.09577&quot;]
+  OCT --&gt; VLAT[&quot;VLA-Touch&lt;br/&gt;arXiv:2507.17294 · RA-L 2026&quot;]
+  PI05[&quot;π0.5&lt;br/&gt;arXiv:2504.16054&quot;] --&gt; TVLA
+  TVLA[&quot;Tactile-VLA&lt;br/&gt;arXiv:2507.09160&quot;] --&gt; N0V
+  OMNI[&quot;OmniVTLA&lt;br/&gt;arXiv:2508.08706 · RA-L&quot;] --&gt; N0V
+  TACSL[&quot;TacSL*&lt;br/&gt;arXiv:2408.06506 · T-RO&quot;] --&gt; UNI[&quot;UniVTAC&lt;br/&gt;arXiv:2602.10093&quot;]
+  UNI --&gt; N0V[&quot;N0-VTLA&lt;br/&gt;arXiv:2607.23782&quot;]
+  RATG[&quot;Representation-Aligned Tactile Grounding*&lt;br/&gt;arXiv:2607.14609&quot;] -.동시기.- N0V
+  N0V --&gt; OURS[&quot;본 논문 (비교 대상)&quot;]
+  VLAT -. &quot;base 고정 철학&quot; .-&gt; OURS
+  TVLA -. &quot;촉각 CoT 실패분석&quot; .-&gt; OURS
+</code></pre>
+<h3>3.3 Tactile world-action model 계열</h3>
+<pre><code class="language-mermaid">flowchart LR
+  VTWM[&quot;Visuo-Tactile World Models&lt;br/&gt;arXiv:2602.06001 (Meta 등)&quot;] --&gt; TWAM1[&quot;Tactile-WAM&lt;br/&gt;arXiv:2606.26663&quot;]
+  VTWM --&gt; VTWAM[&quot;VT-WAM&lt;br/&gt;arXiv:2607.02503&quot;]
+  TWAM1 --&gt; N0T[&quot;N0-TWAM&lt;br/&gt;arXiv:2607.23783&quot;]
+  VTWAM --&gt; N0T
+  N0T --&gt; OURS[&quot;본 논문 (비교 대상)&quot;]
+  OURS -. &quot;명시적 예측 모델 없음:&lt;br/&gt;LLM 내부 추론 + H_t로 대체&quot; .-&gt; N0T
+</code></pre>
+<hr />
+<h2>4. 논문이 인용하지 않은 관련 연구 (웹 검색으로 존재 확인)</h2>
+<table>
+<thead>
+<tr>
+<th>연구</th>
+<th>출처</th>
+<th>관련성</th>
+<th>본 논문이 빠뜨린 의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>In-Context Learning Enables Robot Action Prediction in LLMs (RoboPrompt)</td>
+<td>Yin et al., arXiv:2410.12782, ICRA 2025</td>
+<td>demo keyframe을 텍스트 ICL 예시로 써서 학습 없이 action을 예측</td>
+<td>본 논문의 &quot;expert demo → 고정 context&quot;를 가장 직접적으로 앞선 연구. 다만 RoboPrompt는 원시 demo를 그대로 넣고, 본 논문은 LLM이 요약한 Task Skill을 넣는다는 점이 다름. 원시 demo ICL과 요약 ICL을 비교하는 ablation이 없음</td>
+</tr>
+<tr>
+<td>Keypoint Action Tokens (KAT)</td>
+<td>Di Palo &amp; Johns, arXiv:2403.19578, RSS 2024</td>
+<td>demo 10개 이하로 GPT-4 Turbo가 in-context imitation</td>
+<td>같은 &quot;학습 없는 demo 활용&quot; 주장. 본 논문은 demo를 40개 씀</td>
+</tr>
+<tr>
+<td>LLMs as General Pattern Machines</td>
+<td>Mirchandani et al., arXiv:2307.04721, CoRL 2023</td>
+<td>LLM을 in-context sequence model로 써서 closed-loop 제어</td>
+<td>수치 제어 계열의 기원. latency 한계도 이미 지적했음</td>
+</tr>
+<tr>
+<td>Prompt a Robot to Walk with LLMs</td>
+<td>Wang et al., arXiv:2309.09969, IEEE CDC 2024</td>
+<td>LLM이 저수준 관절 목표를 직접 출력</td>
+<td>GPT-as-Policy는 인용했지만 본 논문은 빠뜨림</td>
+</tr>
+<tr>
+<td>In-Context Robot Learning with VLM Agents (&quot;GPT-Policy&quot;)</td>
+<td>Cheng et al., arXiv:2609.19138 (2026-09-16). 코드 github.com/cheng-haha/GPT-Policy</td>
+<td>context compiler, VLM, constrained controller. contact-sensitive task에서 aligned action reference가 효과를 보임</td>
+<td>거의 같은 시기의 경쟁 연구로 이름도 혼동될 수 있음(&quot;GPT-Policy&quot;와 &quot;GPT-as-Policy&quot;). 촉각은 없음</td>
+</tr>
+<tr>
+<td>An Unexpected Robot Policy: Early Evaluations of GPT-6 Astra on RoboDojo</td>
+<td>Zhang et al., arXiv:2609.24170 (2026-09-21)</td>
+<td>RoboDojo 42 task에서 평균 22.48%. one-shot demo가 집계상 이득이 없었음</td>
+<td><strong>&quot;demo를 context에 넣어도 이득 없음&quot;이라는 반대 증거.</strong> 본 논문의 demo 요약이 효과가 있다는 주장과 맞부딪히므로 논의가 필요함</td>
+</tr>
+<tr>
+<td>Astranomy: GPT-6 Astra as a native robot policy</td>
+<td>Yang, Khetan, Zhang, NVIDIA tech report, 2026-10-14 (arXiv 아님)</td>
+<td>Direct, Agentic, Orchestrated 비교. Direct는 호출당 18.56초, episode당 약 $1.96. 프롬프트에 기하 정보를 넣자 19.3%에서 72.7%로 상승</td>
+<td><strong>프롬프트 설계에 대한 민감도가 매우 큼.</strong> 본 논문이 Task Skill 원문을 공개하지 않아 재현성이 크게 떨어진다는 근거</td>
+</tr>
+<tr>
+<td>Has GPT-6-Astra Achieved Embodied Intelligence?</td>
+<td>SenseNova et al., arXiv:2610.22471 (2026-10-15)</td>
+<td>12개 벤치, ICL 허용 프로토콜, 시계를 계속 돌리는 평가를 제안</td>
+<td>latency를 포함한 평가를 주장함. 본 논문은 시계를 멈춘 평가로 추정됨</td>
+</tr>
+<tr>
+<td>Octopi</td>
+<td>Yu et al., arXiv:2405.02794, RSS 2024</td>
+<td>tactile-language model(GelSight, PhysiCLeAR)</td>
+<td>VLA-Touch의 구성 요소. 촉각 이미지를 LLM이 해석한 선례</td>
+</tr>
+<tr>
+<td>TVL</td>
+<td>Fu et al., arXiv:2402.13232, ICML 2024</td>
+<td>촉각·시각·언어 정렬. GPT-4V보다 12% 높다고 보고</td>
+<td><strong>범용 VLM의 촉각 이미지 이해가 약하다는 증거</strong>(GPT-4V 기준). 본 논문이 이미지 대신 구조화된 descriptor(D, M)를 함께 넣은 이유를 뒷받침함</td>
+</tr>
+<tr>
+<td>Sparsh</td>
+<td>Higuera et al., arXiv:2410.24090, CoRL 2024</td>
+<td>vision-based tactile SSL 표현</td>
+<td>학습형 tactile encoder의 기준선</td>
+</tr>
+<tr>
+<td>TLA / VTLA</td>
+<td>Hao et al., arXiv:2503.08548 / arXiv:2505.09577</td>
+<td>tactile-language-action 모델, peg-in-hole 삽입</td>
+<td>insertion을 다루는 VTLA 선행 연구</td>
+</tr>
+<tr>
+<td>TacSL</td>
+<td>Akinola et al., arXiv:2408.06506, IEEE T-RO</td>
+<td>GPU visuo-tactile 시뮬레이션</td>
+<td>UniVTAC/TacEx 계열 시뮬레이터의 선행 연구</td>
+</tr>
+<tr>
+<td>ManiSkill-ViTac 2025 / ManiFeel</td>
+<td>arXiv:2411.12503 / arXiv:2505.18472</td>
+<td>촉각 manipulation 벤치마크</td>
+<td>UniVTAC 말고도 평가 가능한 대안 벤치(Tactile-WAM이 ManiFeel 사용)</td>
+</tr>
+<tr>
+<td>Representation-Aligned Tactile Grounding</td>
+<td>Chen et al., arXiv:2607.14609</td>
+<td>VLA의 중간 action-expert feature에서 미래 촉각 예측</td>
+<td>N0-VTLA latent tactile 예측과 같은 계열</td>
+</tr>
+</tbody>
+</table>
+<p>찾으려 했지만 확인하지 못한 것: &quot;범용 VLM이 촉각 이미지를 입력받아 zero-shot으로 삽입 정책을 수행&quot;하는 선행 연구는 검색 범위 안에서 발견하지 못함. 따라서 &quot;frozen 범용 VLM을 촉각 직접 정책으로 쓴 첫 사례&quot;라는 판단은 <strong>검색 범위 안에서만 유효함</strong>.</p>
+<hr />
+<h2>5. 차별점 및 공정 비교 평가</h2>
+<h3>5.1 연구별 차별점</h3>
+<table>
+<thead>
+<tr>
+<th>비교 대상</th>
+<th>본 논문의 차별점</th>
+<th>그 차별점의 실제 무게</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-as-Policy</td>
+<td>촉각 관측(이미지, indentation 통계, marker 변위)과 expert demo를 요약한 Task Skill을 추가</td>
+<td>정식화는 동일하고 입력만 확장함. 방법론의 새로움은 &quot;LLM이 demo를 요약해 context를 만드는 단계&quot;와 &quot;촉각 descriptor 설계&quot; 두 가지</td>
+</tr>
+<tr>
+<td>RoboPrompt, KAT</td>
+<td>원시 demo 대신 LLM이 요약한 원칙과 대표 촉각 reference를 사용</td>
+<td>비교하는 ablation이 없어 요약의 효과가 검증되지 않음</td>
+</tr>
+<tr>
+<td>REFLECT</td>
+<td>실패 설명을 사후 재계획이 아니라 사전 Task Skill로 만들어 두고, 온라인 단계마다 반영</td>
+<td>개념상 REFLECT의 경험 요약을 offline으로 옮긴 것에 가까움</td>
+</tr>
+<tr>
+<td>Tactile-VLA, VLA-Touch, OmniVTLA, N0-VTLA</td>
+<td>파라미터 갱신이 전혀 없음</td>
+<td>대신 추론 비용과 latency가 매우 큼(미보고). 실로봇 실험 없음</td>
+</tr>
+<tr>
+<td>RDP</td>
+<td>반응 제어를 LLM 재질의로 대체</td>
+<td>실시간성 비교는 불가능함</td>
+</tr>
+<tr>
+<td>촉각 WAM 계열</td>
+<td>명시적인 미래 촉각 예측 모델 없이 H_t와 LLM 추론으로 결과를 비교</td>
+<td>예측 모델이 없으므로 &quot;anticipating contact&quot;는 주장하지 않음(정확한 위치 설정)</td>
+</tr>
+</tbody>
+</table>
+<h3>5.2 공정 비교 체크리스트</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>상태</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baseline 수치의 출처</td>
+<td><strong>모두 가져온 값이며 출처 표기가 불명확함</strong></td>
+<td>2.2와 2.3의 표와 셀 단위로 일치함. 본문은 &quot;previously evaluated on UniVTAC&quot;라고만 씀</td>
+</tr>
+<tr>
+<td>평가 seed와 episode가 같은지</td>
+<td>미확인</td>
+<td>본 논문은 &quot;100 fixed test episodes&quot;라고만 쓰고, UniVTAC 원 논문은 seed를 보고하지 않음. 소스에서는 <code>reset(seed)</code>로 seed별 재현이 가능함</td>
+</tr>
+<tr>
+<td>task 선정</td>
+<td><strong>8개 중 5개, 기준 미기재</strong></td>
+<td>제외된 3개 task에서 N0-VTLA는 평균 61.3, N0-TWAM은 84.3. 이 부분집합은 N0-VTLA에 유리하고 N0-TWAM에는 영향이 거의 없음. 본 방법이 제외 task에서 어떤지는 미확인</td>
+</tr>
+<tr>
+<td>촉각 입력 조건</td>
+<td>비대칭</td>
+<td>본 방법은 시뮬레이터의 dense depth D와 marker를 바로 사용함(실센서에서는 depth를 재구성해야 함). N0-TWAM 기본값은 &quot;clean simulator tactile&quot;임. ACT+UniVTAC의 입력 형식은 원 논문에서 세부 확인 못 함</td>
+</tr>
+<tr>
+<td>demo 수</td>
+<td>대체로 비슷함</td>
+<td>본 방법은 50개(지식 구성 40, offline validation 10), ACT+UniVTAC도 50개. N0 계열은 대규모 pretraining 위에 &quot;few hundred demos&quot;(UniVTAC에서의 수는 미확인)</td>
+</tr>
+<tr>
+<td>&quot;per-task training 없음&quot; 주장</td>
+<td>부분적으로 성립</td>
+<td>파라미터 갱신은 없음. 하지만 task별 Task Skill 생성과 10개 demo로 하는 &quot;offline validation&quot;은 사실상 task별 프롬프트 튜닝 단계일 수 있음. 반복 횟수와 사람의 개입 여부는 미기재</td>
+</tr>
+<tr>
+<td>통계적 유의성</td>
+<td>보고 없음</td>
+<td>n=100 Wilson 95% CI: Pull-out Key 84%는 [75.6, 89.9], Lift Bottle 93%는 [86.3, 96.6]. N0-VTLA 대비 평균 차이 −2.4pp(SE 약 1.3pp, n=100 가정)</td>
+</tr>
+<tr>
+<td>ablation 범위</td>
+<td>좁음</td>
+<td>촉각 ablation은 Insert Hole 한 task만 했고, w/o tactile 쪽 Task Skill을 따로 다시 만들었음. 요약 대 원시 demo, reasoning effort, 모델 교체 ablation은 없음</td>
+</tr>
+<tr>
+<td>E0</td>
+<td>내부 모순</td>
+<td>Baselines 절에는 있고 Table 2에는 없음. &quot;four methods&quot; 문구와 실제 나열 수(5)가 다름. 자기 인용</td>
+</tr>
+<tr>
+<td>제목 주장</td>
+<td>과장</td>
+<td>평균 기준으로 N0-VTLA를 넘지 못함</td>
+</tr>
+<tr>
+<td>비용과 latency</td>
+<td>미보고</td>
+<td>비교 근거: GPT-as-Policy 호출당 39.86초(locomotion), Astranomy Direct 호출당 18.56초</td>
+</tr>
+</tbody>
+</table>
+<h3>5.3 Insert Hole 결과 해석에 대한 주의</h3>
+<ul>
+<li>소스상 hole 기울기는 ±30° 두 가지로만 정해짐. 따라서 &quot;probing 방향 탐색&quot;은 사실상 좌우 이진 탐색에 가깝고, Fig. 4의 near-vertical, leftward, rightward 3방향 탐색과 rightward 성공은 이 구조와 잘 맞음.</li>
+<li>w/o tactile의 31%는 무작위로 한 방향을 고를 때 기대되는 약 50%보다 낮음. 시각만으로는 방향을 고른 뒤에도 정렬과 삽입을 완료하기 어렵다는 해석이 가능하지만 이것은 추정임.</li>
+<li>Task Skill이 &quot;구멍은 ±30° 중 하나&quot;라는 사실을 demo에서 뽑아 담았을 가능성이 높음. 그렇다면 99%는 일반적인 촉각 추론이라기보다 task 구조를 사전 지식으로 쓴 결과일 수 있음. Task Skill 원문이 공개되지 않아 확인할 수 없음.</li>
+</ul>
+<hr />
+<h2>6. 재구현 및 검증 에이전트에 넘길 사항</h2>
+<ol>
+<li>UniVTAC repo의 <code>envs/{insert_hole,lift_can,grasp_classify,lift_bottle,pull_out_key}.py</code>에 있는 <code>check_success</code>, <code>check_early_stop</code>와 <code>_base_task.py</code>의 <code>step_lim=300</code>, <code>take_action(action_type='ee')</code>를 그대로 따를 것. Isaac Sim 4.5와 RTX급 GPU가 필요하므로 현재 환경(torch 없음, 설치 금지)에서는 실제 실행이 불가능함. mock env로 프로토콜만 재현하는 것을 권장함.</li>
+<li>촉각 descriptor D와 M은 <code>left_tactile/right_tactile</code>의 <code>depth</code>와 <code>marker_motion</code>에서 mean, peak, contact area, centroid, 변위장 통계로 계산할 것. 정확한 pooling 크기와 임계치는 논문에 없으므로 미확인.</li>
+<li>LLM 호출 프로토콜은 GPT-as-Policy Appendix H를 기준으로 할 것: Responses API, xhigh, schema tool call(action, repeat 1–5, rationale), episode마다 thread 하나.</li>
+<li>검증 에이전트는 Table 2의 baseline 셀을 2.2와 2.3의 출처 표와 대조하고, n=100 binomial CI와 8-task로 외삽한 시나리오를 다시 계산할 것.</li>
+</ol>
+<hr />
+<h2>7. 출처 목록 (이번 조사에서 직접 열람)</h2>
+<ul>
+<li>arXiv abs/HTML: 2610.28457, 2609.38537(HTML, Appendix H 포함), 2602.10093(HTML), 2607.23782(HTML), 2607.23783(HTML), 2602.06001, 2607.02503, 2606.26663, 2507.09160, 2410.24091, 2503.02881, 2305.11176, 2207.05608, 2307.05973, 2504.16054, 2306.15724, 2403.13801, 2402.14623, 2511.21542, 2508.08706, 2507.17294, 2609.19138, 2607.14609, 2609.24170, 2610.22471, 2408.06506</li>
+<li>GitHub: https://github.com/univtac/UniVTAC (README, <code>envs/</code> 소스), https://github.com/jxbi1010/VLA-Touch</li>
+<li>프로젝트 페이지: https://univtac.github.io/, https://gpt-as-tactile-policy.github.io/, https://research.nvidia.com/labs/srl/projects/astranomy/</li>
+<li>웹 검색으로만 확인(abs 페이지 미열람): 2410.12782(RoboPrompt), 2403.19578(KAT), 2307.04721, 2405.02794, 2402.13232, 2410.24090, 2503.08548, 2505.09577, 2411.12503, 2505.18472, VITaL ICRA 2025 서지(인용 목록 교차 확인), SayCan과 CaP 쪽수</li>
+<li>열람 실패: openai.com/index/gpt-6-astra/ (HTTP 403), export.arxiv.org API (HTTP 429)</li>
+</ul>
+</section></body></html>
