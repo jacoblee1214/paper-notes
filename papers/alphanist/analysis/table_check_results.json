@@ -1,0 +1,210 @@
+{
+  "C1_compute_ratio": {
+    "separate_total_over_shared": 39.27,
+    "claim": "39.3x more device-hours (Sec. V-A)"
+  },
+  "C2_per_specialist": {
+    "gpu_h_each": 805.0,
+    "ratio_to_shared_run": 1.96,
+    "if_25K_iterations_like_shared": {
+      "total_gpu_h": 8200,
+      "ratio": 20.0
+    },
+    "note": "같은 64K env·같은 iteration이면 정책 하나당 비용이 공유 정책과 같아야 한다. 805 GPU-h는 약 2배라 분리 정책이 50K iteration(그림 6의 끝)까지 돌았을 때의 비용으로 보인다(가설: 비용이 iteration에 비례)."
+  },
+  "C3_fig5b_vs_fig6": {
+    "shared_sparse": {
+      "fig5b": 98.2,
+      "fig6_25K": 98.3,
+      "fig6_50K": 99.9,
+      "matches": "25K"
+    },
+    "separate_sparse": {
+      "fig5b": 81.4,
+      "fig6_25K": 81.4,
+      "fig6_50K": 88.1,
+      "matches": "25K"
+    },
+    "shared_dense": {
+      "fig5b": 17.8,
+      "fig6_25K": 17.9,
+      "fig6_50K": 18.2,
+      "matches": "25K"
+    },
+    "separate_dense": {
+      "fig5b": 78.3,
+      "fig6_25K": 70.9,
+      "fig6_50K": 78.3,
+      "matches": "50K"
+    }
+  },
+  "C3_reframed_comparison": {
+    "equal_25K_iterations": {
+      "shared": 98.2,
+      "separate_sparse": 81.4,
+      "separate_dense": 70.9,
+      "compute_ratio": 20.0
+    },
+    "separate_run_to_50K": {
+      "shared_at_25K": 98.2,
+      "separate_sparse_50K": 88.1,
+      "separate_dense_50K": 78.3,
+      "compute_ratio": 39.3
+    }
+  },
+  "C4_heatmap_vs_text": {
+    "row_means_digitized": {
+      "shared_sparse": 99.9,
+      "separate_sparse": 81.9,
+      "shared_dense": 17.1,
+      "separate_dense": 79.0
+    },
+    "fig5b_reported": {
+      "shared_sparse": 98.2,
+      "separate_sparse": 81.4,
+      "shared_dense": 17.8,
+      "separate_dense": 78.3
+    },
+    "separate_sparse_N4_R4_P4": {
+      "N4": 50.0,
+      "R4": 51.7,
+      "P4": 31.3
+    },
+    "text": "From randomly initialized states, separately-trained policies have <=0.3% success on M4 nut, 4 mm peg, rod insertion",
+    "reading": "heatmap은 모든 reset 종류의 평균이고 본문은 무작위 초기 상태만의 값으로 보인다. 그렇다면 이 세 과제의 reset bank 가운데 약 30–50%는 손에 쥔 상태·근접·부분 조립처럼 분리 정책도 풀 수 있는 쉬운 시작점이다."
+  },
+  "C5_separate_sparse_decomposition": {
+    "cells_below_60": {
+      "N4": 50.0,
+      "R4": 51.7,
+      "P4": 31.3,
+      "RJ": 56.9
+    },
+    "mean_of_rest": 90.4,
+    "n_rest": 16,
+    "shared_sparse_same_tasks": {
+      "N4": 99.4,
+      "R4": 100.0,
+      "P4": 100.0,
+      "RJ": 100.0
+    }
+  },
+  "C6_sd_plausibility": {
+    "shared_sparse": {
+      "mean": 98.2,
+      "sd": 0.986,
+      "n_trials_per_seed_implied": 182,
+      "binom_sd_if_640_trials": 0.53
+    },
+    "separate_sparse": {
+      "mean": 81.4,
+      "sd": 1.732,
+      "n_trials_per_seed_implied": 505,
+      "binom_sd_if_640_trials": 1.54
+    },
+    "shared_dense": {
+      "mean": 17.8,
+      "sd": 0.01,
+      "n_trials_per_seed_implied": 14631600,
+      "binom_sd_if_640_trials": 1.51
+    },
+    "separate_dense": {
+      "mean": 78.3,
+      "sd": 0.573,
+      "n_trials_per_seed_implied": 5175,
+      "binom_sd_if_640_trials": 1.63
+    }
+  },
+  "C6_note": "그림 7 기준(시드당 32 trial × 20 과제 = 640)이면 17.8%의 이항 SD는 1.5%다. 0.010%는 1,460만 trial이 필요해 단위 오기(0.010 = 1.0%)로 보인다(가설).",
+  "C7_throughput": {
+    "env_steps_64K_25K": "5.120e+10",
+    "gpus": 16,
+    "wall_clock_h": 25.6,
+    "env_steps_per_gpu_s": 34688,
+    "per_env_steps_per_s": 8.7,
+    "gpu_type": "본문에 없음"
+  },
+  "C8_fig7_compute_range": {
+    "1000": {
+      "gpus": 1,
+      "env_steps": "8.00e+08",
+      "gpu_h_if_linear": 26
+    },
+    "4000": {
+      "gpus": 1,
+      "env_steps": "3.20e+09",
+      "gpu_h_if_linear": 26
+    },
+    "8000": {
+      "gpus": 2,
+      "env_steps": "6.40e+09",
+      "gpu_h_if_linear": 51
+    },
+    "64000": {
+      "gpus": 16,
+      "env_steps": "5.12e+10",
+      "gpu_h_if_linear": 410
+    },
+    "256000": {
+      "gpus": 64,
+      "env_steps": "2.05e+11",
+      "gpu_h_if_linear": 1640
+    }
+  },
+  "C9_fig7_eval_noise": {
+    "trials_per_point": 3200,
+    "se_pp": {
+      "sparse_beta@1K": 0.86,
+      "sparse_beta@4K": 0.72,
+      "sparse_beta@8K": 0.6,
+      "sparse_beta@256K": 0.28,
+      "sparse_uniform@256K": 0.64,
+      "dense_beta@256K": 0.74,
+      "dense_uniform@256K": 0.84
+    },
+    "beta_minus_uniform_256K_sparse_pp": 13.1,
+    "note": "SD는 평가 시드 5개의 것이다. 학습 시드는 설정마다 하나로 보이며, 학습 재현성은 보고되지 않았다."
+  },
+  "C10_table1": {
+    "consecutive_ratios": [
+      0.98,
+      0.979,
+      0.979,
+      0.989,
+      0.978,
+      0.989,
+      0.978,
+      0.989,
+      0.977
+    ],
+    "per_pair_ratio_fit": 0.9825,
+    "independent_99_model_at_10": 90.4,
+    "extrapolate_20_pairs_fit": 70.8,
+    "two_groups_of_10": 70.6,
+    "episode_steps": {
+      "per_pair": 375,
+      "10_pairs": 3750
+    },
+    "missing": "시행 수, 표준편차, 활성 부품을 어떻게 골랐는지(고정·무작위)가 없다"
+  },
+  "C11_architecture": {
+    "proprio_per_frame": 30,
+    "history_frames_if_150": 5.0,
+    "trunk_input": 278,
+    "trunk_input_matches_fig3": true,
+    "actor_trunk_params": 1126152,
+    "critic_trunk_params": 1124353,
+    "point_encoder": "3 × n_pts → 256 → 128, n_pts 미기재 → 파라미터 수 미정"
+  },
+  "C12_independent_impl_consistency": {
+    "10K": {
+      "weighted_overall": 98.43,
+      "reported": 98.4
+    },
+    "12.5K": {
+      "weighted_overall": 98.69,
+      "reported": 98.7
+    }
+  },
+  "C13_independent_impl_note": "README의 'Original AlphaNIST 86.9'는 AlphaNIST 그림 7의 8K env 값이다. 시뮬레이터·자산·접촉 모델이 달라 직접 비교가 아니라고 README도 적었다."
+}

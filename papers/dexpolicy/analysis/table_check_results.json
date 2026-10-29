@@ -1,0 +1,544 @@
+{
+  "C1_overall_and_eight_object_means": {
+    "PPO/base": {
+      "mean_of_5": 32.0,
+      "reported": 32.0
+    },
+    "PPO/dex": {
+      "mean_of_5": 35.68,
+      "reported": 35.7
+    },
+    "GRPO/base": {
+      "mean_of_5": 14.06,
+      "reported": 14.1
+    },
+    "GRPO/dex": {
+      "mean_of_5": 45.44,
+      "reported": 45.4
+    },
+    "FPO/base": {
+      "mean_of_5": 49.38,
+      "reported": 49.4
+    },
+    "FPO/dex": {
+      "mean_of_5": 68.08,
+      "reported": 68.1
+    },
+    "PPO/base/eight_object": {
+      "if_other3_zero": 20.0,
+      "if_other3_at_0.34": 20.13,
+      "reported": 20.0
+    },
+    "PPO/dex/eight_object": {
+      "if_other3_zero": 22.3,
+      "if_other3_at_0.34": 22.43,
+      "reported": 22.3
+    },
+    "FPO/base/eight_object": {
+      "if_other3_zero": 30.86,
+      "if_other3_at_0.34": 30.99,
+      "reported": 30.9
+    },
+    "FPO/dex/eight_object": {
+      "if_other3_zero": 42.55,
+      "if_other3_at_0.34": 42.68,
+      "reported": 42.5
+    }
+  },
+  "C2_seed_level_values": {
+    "FPO mustard": {
+      "source": "Sec. V-B",
+      "base_mean_sd": [
+        51.67,
+        45.96
+      ],
+      "dex_mean_sd": [
+        100.0,
+        0.0
+      ],
+      "paired_up_tie_down": [
+        3,
+        0,
+        0
+      ]
+    },
+    "FPO tomato": {
+      "source": "Sec. V-B",
+      "base_mean_sd": [
+        62.33,
+        54.0
+      ],
+      "dex_mean_sd": [
+        92.67,
+        4.04
+      ],
+      "paired_up_tie_down": [
+        2,
+        1,
+        0
+      ]
+    },
+    "FPO mug": {
+      "source": "Sec. V-B",
+      "base_mean_sd": [
+        25.33,
+        34.79
+      ],
+      "dex_mean_sd": [
+        31.0,
+        53.69
+      ],
+      "paired_up_tie_down": [
+        1,
+        1,
+        1
+      ]
+    },
+    "GRPO mustard": {
+      "source": "Sec. V-C",
+      "base_mean_sd": [
+        30.83,
+        53.4
+      ],
+      "dex_mean_sd": [
+        34.5,
+        56.74
+      ],
+      "paired_up_tie_down": [
+        2,
+        0,
+        1
+      ]
+    },
+    "GRPO mustard seeds1_2": {
+      "base": 46.25,
+      "dex": 1.75,
+      "text": "46.25% → 1.75% (Sec. V-C)"
+    },
+    "FPO/base/overall_if_banana_sugar_constant": {
+      "per_seed": [
+        71.1,
+        34.9,
+        42.1
+      ],
+      "sd": 19.2,
+      "reported_sd": 21.5
+    },
+    "FPO/dex/overall_if_banana_sugar_constant": {
+      "per_seed": [
+        62.3,
+        60.9,
+        80.9
+      ],
+      "sd": 11.2,
+      "reported_sd": 11.4
+    }
+  },
+  "C3_table2_vs_text": {
+    "seeds12_sigma0": {
+      "mean_diff_table2": 21.9,
+      "text_diff": 21.9,
+      "text": [
+        15.3,
+        37.2
+      ]
+    },
+    "all_sigma003": {
+      "mean_diff_table2": 26.98,
+      "text_diff": 27.0,
+      "text": [
+        14.8,
+        41.8
+      ]
+    },
+    "all_sigma010": {
+      "mean_diff_table2": -7.4,
+      "text_diff": -7.4,
+      "text": [
+        16.1,
+        8.7
+      ]
+    },
+    "note": "seeds12_sigma0 행은 본문 'Excluding seed 0 ... 15.3% → 37.2%'와 대조"
+  },
+  "C4_hardware": {
+    "PPO": {
+      "Target": {
+        "mean_base_dex": [
+          8.3,
+          43.3
+        ],
+        "reported": [
+          8.3,
+          43.3
+        ],
+        "pooled": "5/60 vs 26/60",
+        "wilson_base": [
+          3.6,
+          18.1
+        ],
+        "wilson_dex": [
+          31.6,
+          55.9
+        ],
+        "pooled_fisher_p": 1.7e-05,
+        "per_object": [
+          {
+            "object": "tomato",
+            "base": "2/20",
+            "dex": "9/20",
+            "fisher_p": 0.031
+          },
+          {
+            "object": "sugar",
+            "base": "0/20",
+            "dex": "0/20",
+            "fisher_p": 1.0
+          },
+          {
+            "object": "mustard",
+            "base": "3/20",
+            "dex": "17/20",
+            "fisher_p": 1.9e-05
+          }
+        ]
+      },
+      "Lift": {
+        "mean_base_dex": [
+          38.3,
+          58.3
+        ],
+        "reported": [
+          38.3,
+          58.3
+        ],
+        "pooled": "23/60 vs 35/60",
+        "wilson_base": [
+          27.1,
+          51.0
+        ],
+        "wilson_dex": [
+          45.7,
+          69.9
+        ],
+        "pooled_fisher_p": 0.044,
+        "per_object": [
+          {
+            "object": "tomato",
+            "base": "7/20",
+            "dex": "14/20",
+            "fisher_p": 0.056
+          },
+          {
+            "object": "sugar",
+            "base": "1/20",
+            "dex": "2/20",
+            "fisher_p": 1.0
+          },
+          {
+            "object": "mustard",
+            "base": "15/20",
+            "dex": "19/20",
+            "fisher_p": 0.18
+          }
+        ]
+      }
+    },
+    "GRPO": {
+      "Target": {
+        "mean_base_dex": [
+          10.0,
+          63.3
+        ],
+        "reported": [
+          10.0,
+          63.3
+        ],
+        "pooled": "6/60 vs 38/60",
+        "wilson_base": [
+          4.7,
+          20.1
+        ],
+        "wilson_dex": [
+          50.7,
+          74.4
+        ],
+        "pooled_fisher_p": 1.1e-09,
+        "per_object": [
+          {
+            "object": "tomato",
+            "base": "1/20",
+            "dex": "11/20",
+            "fisher_p": 0.0012
+          },
+          {
+            "object": "sugar",
+            "base": "2/20",
+            "dex": "18/20",
+            "fisher_p": 5.3e-07
+          },
+          {
+            "object": "mustard",
+            "base": "3/20",
+            "dex": "9/20",
+            "fisher_p": 0.082
+          }
+        ]
+      },
+      "Lift": {
+        "mean_base_dex": [
+          46.7,
+          95.0
+        ],
+        "reported": [
+          46.7,
+          95.0
+        ],
+        "pooled": "28/60 vs 57/60",
+        "wilson_base": [
+          34.6,
+          59.1
+        ],
+        "wilson_dex": [
+          86.3,
+          98.3
+        ],
+        "pooled_fisher_p": 3.2e-09,
+        "per_object": [
+          {
+            "object": "tomato",
+            "base": "7/20",
+            "dex": "18/20",
+            "fisher_p": 0.00077
+          },
+          {
+            "object": "sugar",
+            "base": "15/20",
+            "dex": "20/20",
+            "fisher_p": 0.047
+          },
+          {
+            "object": "mustard",
+            "base": "6/20",
+            "dex": "19/20",
+            "fisher_p": 3.9e-05
+          }
+        ]
+      }
+    },
+    "FPO": {
+      "Target": {
+        "mean_base_dex": [
+          25.0,
+          85.0
+        ],
+        "reported": [
+          25.0,
+          85.0
+        ],
+        "pooled": "15/60 vs 51/60",
+        "wilson_base": [
+          15.8,
+          37.2
+        ],
+        "wilson_dex": [
+          73.9,
+          91.9
+        ],
+        "pooled_fisher_p": 3.1e-11,
+        "per_object": [
+          {
+            "object": "tomato",
+            "base": "5/20",
+            "dex": "16/20",
+            "fisher_p": 0.0012
+          },
+          {
+            "object": "sugar",
+            "base": "4/20",
+            "dex": "15/20",
+            "fisher_p": 0.0012
+          },
+          {
+            "object": "mustard",
+            "base": "6/20",
+            "dex": "20/20",
+            "fisher_p": 3.3e-06
+          }
+        ]
+      },
+      "Lift": {
+        "mean_base_dex": [
+          45.0,
+          93.3
+        ],
+        "reported": [
+          45.0,
+          93.3
+        ],
+        "pooled": "27/60 vs 56/60",
+        "wilson_base": [
+          33.1,
+          57.5
+        ],
+        "wilson_dex": [
+          84.1,
+          97.4
+        ],
+        "pooled_fisher_p": 7.4e-09,
+        "per_object": [
+          {
+            "object": "tomato",
+            "base": "6/20",
+            "dex": "19/20",
+            "fisher_p": 3.9e-05
+          },
+          {
+            "object": "sugar",
+            "base": "9/20",
+            "dex": "17/20",
+            "fisher_p": 0.019
+          },
+          {
+            "object": "mustard",
+            "base": "12/20",
+            "dex": "20/20",
+            "fisher_p": 0.0033
+          }
+        ]
+      }
+    },
+    "target_le_lift_all_rows": true
+  },
+  "C5_seed_level_tests": {
+    "PPO": {
+      "diff_pp": 3.7,
+      "welch_t": 0.97,
+      "df": 3.7,
+      "p_two_sided": 0.39,
+      "objects_up_tie_down": [
+        2,
+        1,
+        2
+      ],
+      "per_object_diff": [
+        10.7,
+        15.4,
+        -6.4,
+        0.0,
+        -1.3
+      ]
+    },
+    "GRPO": {
+      "diff_pp": 31.3,
+      "welch_t": 3.24,
+      "df": 3.2,
+      "p_two_sided": 0.043,
+      "objects_up_tie_down": [
+        5,
+        0,
+        0
+      ],
+      "per_object_diff": [
+        3.7,
+        16.4,
+        0.2,
+        83.8,
+        52.8
+      ]
+    },
+    "FPO": {
+      "diff_pp": 18.7,
+      "welch_t": 1.33,
+      "df": 3.0,
+      "p_two_sided": 0.274,
+      "objects_up_tie_down": [
+        5,
+        0,
+        0
+      ],
+      "per_object_diff": [
+        48.3,
+        5.7,
+        1.4,
+        7.7,
+        30.4
+      ]
+    },
+    "note": "seed별 Overall이 없어 비대응 Welch 근사. 대응(같은 seed) 검정은 계산 불가. 본문: PPO는 8개 물체 평균이 1/3 seed에서만 개선, FPO는 2/3 (Sec. V-B)"
+  },
+  "C6_budget_and_adam_bound": {
+    "grpo_rollout": 8192,
+    "phase_steps_over_rollout": {
+      "507904": 62.0,
+      "253952": 31.0
+    },
+    "total_continuation": 761856,
+    "tomato_total": 1015808,
+    "ppo_updates_per_5m": 1221,
+    "adam_steps_5m": 97656,
+    "max_log_std_change_lr1e-5": 0.977,
+    "observed_baseline_log_change": -0.085,
+    "needed_to_reach_0.04": -1.619,
+    "init_std_exp(-1.6)": 0.2019,
+    "grpo_phase_adam_steps": [
+      9920,
+      4960
+    ],
+    "grpo_max_log_std_change": 1.24,
+    "note": "Adam 한 step의 매개변수 변화는 대략 lr 이하(기울기 부호가 일정할 때 lr에 가까움). 근사적 상한"
+  },
+  "C7_table5_gate": {
+    "Uniform linear": {
+      "all_means_ge_95": false,
+      "reported_pass": "No"
+    },
+    "Continuous front-loaded": {
+      "all_means_ge_95": false,
+      "reported_pass": "No"
+    },
+    "No 2M jump": {
+      "all_means_ge_95": true,
+      "reported_pass": "Yes"
+    },
+    "No final drop": {
+      "all_means_ge_95": false,
+      "reported_pass": "No"
+    }
+  },
+  "C7_table7_rel_change": {
+    "reward_auc_0_10M": {
+      "recomputed": 30.7,
+      "reported": 30.7
+    },
+    "reward_auc_5_10M": {
+      "recomputed": 25.1,
+      "reported": 25.2
+    },
+    "reward_last20": {
+      "recomputed": 14.7,
+      "reported": 14.7
+    },
+    "contact_auc": {
+      "recomputed": 13.5,
+      "reported": 13.5
+    },
+    "lift_auc": {
+      "recomputed": 11.8,
+      "reported": 11.7
+    }
+  },
+  "C7_text_10M_reeval": {
+    "mean_reward": 11.2,
+    "paired_gain_mean": 6.96,
+    "lift": 2.7
+  },
+  "C8_single_model_lottery": {
+    "example": "FPO mug(시뮬레이션 seed 값)에서 baseline과 DexPolicy 모델을 하나씩 뽑을 때",
+    "P(dex>base)": 0.33,
+    "P(dex<base)": 0.44,
+    "P(tie)": 0.22,
+    "GRPO mustard P(dex>base)": 0.78,
+    "note": "하드웨어 정책은 별도 embodiment로 학습해서 이 분포와 같지 않다. 단일 모델 비교가 seed 운에 얼마나 열려 있는지 보는 예시"
+  }
+}

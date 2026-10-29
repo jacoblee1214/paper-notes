@@ -1,0 +1,383 @@
+{
+  "setup": {
+    "N_ENV": 16,
+    "T_ROLL": 512,
+    "GAMMA": 0.95,
+    "episode_len": [
+      120,
+      200
+    ],
+    "success_rate": 0.4,
+    "reps": 20
+  },
+  "summary": {
+    "complete_episodes": [
+      34.2,
+      33.0,
+      37.0
+    ],
+    "nonzero_steps_frac": [
+      0.655,
+      0.608,
+      0.702
+    ],
+    "pearson_r": [
+      0.735,
+      0.649,
+      0.796
+    ],
+    "sign_disagree_frac": [
+      0.076,
+      0.041,
+      0.136
+    ],
+    "outcome_match_age_0-20%_code": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "outcome_match_age_0-20%_eq5": [
+      0.849,
+      0.667,
+      0.914
+    ],
+    "outcome_match_age_20-40%_code": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "outcome_match_age_20-40%_eq5": [
+      0.95,
+      0.848,
+      1.0
+    ],
+    "outcome_match_age_40-60%_code": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "outcome_match_age_40-60%_eq5": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "outcome_match_age_60-100%_code": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "outcome_match_age_60-100%_eq5": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "format": "[평균, 최소, 최대] over 20 rollouts",
+    "discount_horizon": {
+      "1/(1-gamma)": 20.0,
+      "gamma^60": 0.0461,
+      "gamma^120": 0.00212
+    }
+  },
+  "per_rollout": [
+    {
+      "complete_episodes": 34,
+      "same_count": true,
+      "nonzero_steps_frac": 0.648,
+      "pearson_r": 0.7,
+      "sign_disagree_frac": 0.097,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.765,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.941,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 37,
+      "same_count": true,
+      "nonzero_steps_frac": 0.702,
+      "pearson_r": 0.769,
+      "sign_disagree_frac": 0.041,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.892,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 1.0,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 34,
+      "same_count": true,
+      "nonzero_steps_frac": 0.645,
+      "pearson_r": 0.783,
+      "sign_disagree_frac": 0.049,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.882,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 1.0,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 35,
+      "same_count": true,
+      "nonzero_steps_frac": 0.699,
+      "pearson_r": 0.752,
+      "sign_disagree_frac": 0.059,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.914,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.971,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 36,
+      "same_count": true,
+      "nonzero_steps_frac": 0.661,
+      "pearson_r": 0.796,
+      "sign_disagree_frac": 0.05,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.861,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.972,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 34,
+      "same_count": true,
+      "nonzero_steps_frac": 0.651,
+      "pearson_r": 0.752,
+      "sign_disagree_frac": 0.051,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.882,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 1.0,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 33,
+      "same_count": true,
+      "nonzero_steps_frac": 0.649,
+      "pearson_r": 0.686,
+      "sign_disagree_frac": 0.095,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.818,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.909,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 33,
+      "same_count": true,
+      "nonzero_steps_frac": 0.625,
+      "pearson_r": 0.692,
+      "sign_disagree_frac": 0.091,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.909,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.848,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 36,
+      "same_count": true,
+      "nonzero_steps_frac": 0.689,
+      "pearson_r": 0.696,
+      "sign_disagree_frac": 0.087,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.833,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.917,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 34,
+      "same_count": true,
+      "nonzero_steps_frac": 0.65,
+      "pearson_r": 0.787,
+      "sign_disagree_frac": 0.048,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.912,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 1.0,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 33,
+      "same_count": true,
+      "nonzero_steps_frac": 0.639,
+      "pearson_r": 0.698,
+      "sign_disagree_frac": 0.102,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.667,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.97,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 33,
+      "same_count": true,
+      "nonzero_steps_frac": 0.63,
+      "pearson_r": 0.649,
+      "sign_disagree_frac": 0.136,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.818,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.848,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 34,
+      "same_count": true,
+      "nonzero_steps_frac": 0.644,
+      "pearson_r": 0.768,
+      "sign_disagree_frac": 0.077,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.824,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 1.0,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 33,
+      "same_count": true,
+      "nonzero_steps_frac": 0.608,
+      "pearson_r": 0.751,
+      "sign_disagree_frac": 0.103,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.909,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.879,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 34,
+      "same_count": true,
+      "nonzero_steps_frac": 0.656,
+      "pearson_r": 0.725,
+      "sign_disagree_frac": 0.089,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.882,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.882,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 34,
+      "same_count": true,
+      "nonzero_steps_frac": 0.633,
+      "pearson_r": 0.778,
+      "sign_disagree_frac": 0.055,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.912,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.971,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 35,
+      "same_count": true,
+      "nonzero_steps_frac": 0.689,
+      "pearson_r": 0.711,
+      "sign_disagree_frac": 0.092,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.8,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.914,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 34,
+      "same_count": true,
+      "nonzero_steps_frac": 0.667,
+      "pearson_r": 0.752,
+      "sign_disagree_frac": 0.06,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.794,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 1.0,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 35,
+      "same_count": true,
+      "nonzero_steps_frac": 0.668,
+      "pearson_r": 0.744,
+      "sign_disagree_frac": 0.054,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.886,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 1.0,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    },
+    {
+      "complete_episodes": 33,
+      "same_count": true,
+      "nonzero_steps_frac": 0.657,
+      "pearson_r": 0.716,
+      "sign_disagree_frac": 0.082,
+      "outcome_match_age_0-20%_code": 1.0,
+      "outcome_match_age_0-20%_eq5": 0.818,
+      "outcome_match_age_20-40%_code": 1.0,
+      "outcome_match_age_20-40%_eq5": 0.97,
+      "outcome_match_age_40-60%_code": 1.0,
+      "outcome_match_age_40-60%_eq5": 1.0,
+      "outcome_match_age_60-100%_code": 1.0,
+      "outcome_match_age_60-100%_eq5": 1.0
+    }
+  ]
+}

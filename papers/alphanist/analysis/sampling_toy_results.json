@@ -1,0 +1,162 @@
+{
+  "S1_allocation_exact_p": {
+    "early(80% unsolved)": {
+      "uniform": {
+        "frontier_share": 0.2,
+        "signal_E_p1mp": 0.0364
+      },
+      "alphanist_eps1e-4": {
+        "frontier_share": 0.999,
+        "signal_E_p1mp": 0.1931
+      },
+      "alphanist_eps1e-2": {
+        "frontier_share": 0.915,
+        "signal_E_p1mp": 0.1766
+      },
+      "alphanist_eps1e-1": {
+        "frontier_share": 0.565,
+        "signal_E_p1mp": 0.108
+      },
+      "sgs_T2": {
+        "frontier_share": 0.616,
+        "signal_E_p1mp": 0.1158
+      },
+      "sgs_T1": {
+        "frontier_share": 0.912,
+        "signal_E_p1mp": 0.1763
+      }
+    },
+    "mid(30/30)": {
+      "uniform": {
+        "frontier_share": 0.4,
+        "signal_E_p1mp": 0.0733
+      },
+      "alphanist_eps1e-4": {
+        "frontier_share": 1.0,
+        "signal_E_p1mp": 0.1944
+      },
+      "alphanist_eps1e-2": {
+        "frontier_share": 0.966,
+        "signal_E_p1mp": 0.1877
+      },
+      "alphanist_eps1e-1": {
+        "frontier_share": 0.776,
+        "signal_E_p1mp": 0.1493
+      },
+      "sgs_T2": {
+        "frontier_share": 0.811,
+        "signal_E_p1mp": 0.1534
+      },
+      "sgs_T1": {
+        "frontier_share": 0.965,
+        "signal_E_p1mp": 0.1877
+      }
+    },
+    "late(95% mastered)": {
+      "uniform": {
+        "frontier_share": 0.05,
+        "signal_E_p1mp": 0.0092
+      },
+      "alphanist_eps1e-4": {
+        "frontier_share": 0.996,
+        "signal_E_p1mp": 0.1942
+      },
+      "alphanist_eps1e-2": {
+        "frontier_share": 0.695,
+        "signal_E_p1mp": 0.1354
+      },
+      "alphanist_eps1e-1": {
+        "frontier_share": 0.216,
+        "signal_E_p1mp": 0.0416
+      },
+      "sgs_T2": {
+        "frontier_share": 0.253,
+        "signal_E_p1mp": 0.0481
+      },
+      "sgs_T1": {
+        "frontier_share": 0.688,
+        "signal_E_p1mp": 0.1342
+      }
+    }
+  },
+  "S2_estimation_L50": {
+    "uniform": {
+      "share_on_true_frontier_0.05_0.95": 0.899,
+      "starved_entries_frac_of_p_0.9_1": 0.193,
+      "weight_ratio_starved_vs_p0.5": 1.0
+    },
+    "alphanist_eps1e-4": {
+      "share_on_true_frontier_0.05_0.95": 0.968,
+      "starved_entries_frac_of_p_0.9_1": 0.193,
+      "weight_ratio_starved_vs_p0.5": 0.0002
+    },
+    "alphanist_eps1e-2": {
+      "share_on_true_frontier_0.05_0.95": 0.967,
+      "starved_entries_frac_of_p_0.9_1": 0.193,
+      "weight_ratio_starved_vs_p0.5": 0.0196
+    },
+    "alphanist_eps1e-1": {
+      "share_on_true_frontier_0.05_0.95": 0.954,
+      "starved_entries_frac_of_p_0.9_1": 0.193,
+      "weight_ratio_starved_vs_p0.5": 0.1667
+    },
+    "sgs_T2": {
+      "share_on_true_frontier_0.05_0.95": 0.948,
+      "starved_entries_frac_of_p_0.9_1": 0.193,
+      "weight_ratio_starved_vs_p0.5": 0.1421
+    },
+    "sgs_T1": {
+      "share_on_true_frontier_0.05_0.95": 0.967,
+      "starved_entries_frac_of_p_0.9_1": 0.193,
+      "weight_ratio_starved_vs_p0.5": 0.0202
+    }
+  },
+  "S2_note": "실제 p = 0.95인 항목은 L = 50에서 p̂ = 1이 될 확률이 0.95^50 = 0.077다. 이때 ε만 받으므로 ε_q가 작으면 오래 다시 뽑히지 않는다. 다 익혔다고 본 상태를 잊어도 늦게 알아챈다.",
+  "S3_revisit_interval_late": {
+    "mean_episode_100_steps": {
+      "alphanist_eps1e-4": {
+        "iters_between_visits": 336.1,
+        "visits_in_25K_iters": 74.4
+      },
+      "alphanist_eps1e-2": {
+        "iters_between_visits": 5.0,
+        "visits_in_25K_iters": 5016.3
+      },
+      "alphanist_eps1e-1": {
+        "iters_between_visits": 1.9,
+        "visits_in_25K_iters": 12919.5
+      },
+      "sgs_T2": {
+        "iters_between_visits": 2.0,
+        "visits_in_25K_iters": 12310.0
+      },
+      "uniform": {
+        "iters_between_visits": 1.6,
+        "visits_in_25K_iters": 15625.0
+      }
+    },
+    "mean_episode_375_steps": {
+      "alphanist_eps1e-4": {
+        "iters_between_visits": 1264.8,
+        "visits_in_25K_iters": 19.8
+      },
+      "alphanist_eps1e-2": {
+        "iters_between_visits": 18.6,
+        "visits_in_25K_iters": 1346.3
+      },
+      "alphanist_eps1e-1": {
+        "iters_between_visits": 7.3,
+        "visits_in_25K_iters": 3446.4
+      },
+      "sgs_T2": {
+        "iters_between_visits": 7.6,
+        "visits_in_25K_iters": 3278.2
+      },
+      "uniform": {
+        "iters_between_visits": 6.0,
+        "visits_in_25K_iters": 4166.7
+      }
+    }
+  },
+  "S3_assumptions": "M = 32,768(SGS 조작 설정), 64K env, iteration당 32 step, 성공 시 조기 종료라 평균 episode 100–375 step으로 가정"
+}

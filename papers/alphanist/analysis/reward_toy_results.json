@@ -1,0 +1,165 @@
+{
+  "setup": {
+    "K": 60,
+    "T": 375,
+    "advance_prob": 0.9,
+    "min_steps_to_finish": 67
+  },
+  "H1_H2_optimal_policies": {
+    "gamma=0.99 | binary_only(AlphaNIST Eq.6, R=1) | hazard=0.0": {
+      "first_step_choosing_finish_at_K-1": 0,
+      "success_within_T": 1.0,
+      "median_completion_step": 66
+    },
+    "gamma=0.99 | binary_only(AlphaNIST Eq.6, R=1) | hazard=0.01": {
+      "first_step_choosing_finish_at_K-1": 0,
+      "success_within_T": 1.0,
+      "median_completion_step": 66
+    },
+    "gamma=0.99 | dense+terminate(AlphaNIST Eq.7, c2+c3=0.02, R=1) | hazard=0.0": {
+      "first_step_choosing_finish_at_K-1": 373,
+      "success_within_T": 0.989,
+      "median_completion_step": 374
+    },
+    "gamma=0.99 | dense+terminate(AlphaNIST Eq.7, c2+c3=0.02, R=1) | hazard=0.01": {
+      "first_step_choosing_finish_at_K-1": 370,
+      "success_within_T": 0.944,
+      "median_completion_step": 372
+    },
+    "gamma=0.99 | dense+terminate, R=0.04 (if R also scaled by dt=0.04) | hazard=0.0": {
+      "first_step_choosing_finish_at_K-1": 374,
+      "success_within_T": 0.901,
+      "median_completion_step": 375
+    },
+    "gamma=0.99 | dense+terminate, R=0.04 (if R also scaled by dt=0.04) | hazard=0.01": {
+      "first_step_choosing_finish_at_K-1": 374,
+      "success_within_T": 0.768,
+      "median_completion_step": 375
+    },
+    "gamma=0.99 | OmniReset-style (shaping 0.02/step, success 0.1/step, no termination) | hazard=0.0": {
+      "first_step_choosing_finish_at_K-1": 0,
+      "success_within_T": 1.0,
+      "median_completion_step": 66
+    },
+    "gamma=0.99 | OmniReset-style (shaping 0.02/step, success 0.1/step, no termination) | hazard=0.01": {
+      "first_step_choosing_finish_at_K-1": 0,
+      "success_within_T": 1.0,
+      "median_completion_step": 66
+    },
+    "gamma=0.995 | binary_only(AlphaNIST Eq.6, R=1) | hazard=0.0": {
+      "first_step_choosing_finish_at_K-1": 0,
+      "success_within_T": 1.0,
+      "median_completion_step": 66
+    },
+    "gamma=0.995 | binary_only(AlphaNIST Eq.6, R=1) | hazard=0.01": {
+      "first_step_choosing_finish_at_K-1": 0,
+      "success_within_T": 1.0,
+      "median_completion_step": 66
+    },
+    "gamma=0.995 | dense+terminate(AlphaNIST Eq.7, c2+c3=0.02, R=1) | hazard=0.0": {
+      "first_step_choosing_finish_at_K-1": 373,
+      "success_within_T": 0.989,
+      "median_completion_step": 374
+    },
+    "gamma=0.995 | dense+terminate(AlphaNIST Eq.7, c2+c3=0.02, R=1) | hazard=0.01": {
+      "first_step_choosing_finish_at_K-1": 372,
+      "success_within_T": 0.942,
+      "median_completion_step": 373
+    },
+    "gamma=0.995 | dense+terminate, R=0.04 (if R also scaled by dt=0.04) | hazard=0.0": {
+      "first_step_choosing_finish_at_K-1": 374,
+      "success_within_T": 0.901,
+      "median_completion_step": 375
+    },
+    "gamma=0.995 | dense+terminate, R=0.04 (if R also scaled by dt=0.04) | hazard=0.01": {
+      "first_step_choosing_finish_at_K-1": 374,
+      "success_within_T": 0.768,
+      "median_completion_step": 375
+    },
+    "gamma=0.995 | OmniReset-style (shaping 0.02/step, success 0.1/step, no termination) | hazard=0.0": {
+      "first_step_choosing_finish_at_K-1": 0,
+      "success_within_T": 1.0,
+      "median_completion_step": 66
+    },
+    "gamma=0.995 | OmniReset-style (shaping 0.02/step, success 0.1/step, no termination) | hazard=0.01": {
+      "first_step_choosing_finish_at_K-1": 0,
+      "success_within_T": 1.0,
+      "median_completion_step": 66
+    }
+  },
+  "H3_delay_condition": {
+    "gamma=0.99,s=0.005,R=1.0": {
+      "s_over_1mg": 0.5,
+      "delay_to_horizon_end": false
+    },
+    "gamma=0.99,s=0.005,R=0.04": {
+      "s_over_1mg": 0.5,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.99,s=0.01,R=1.0": {
+      "s_over_1mg": 1.0,
+      "delay_to_horizon_end": false
+    },
+    "gamma=0.99,s=0.01,R=0.04": {
+      "s_over_1mg": 1.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.99,s=0.02,R=1.0": {
+      "s_over_1mg": 2.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.99,s=0.02,R=0.04": {
+      "s_over_1mg": 2.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.995,s=0.005,R=1.0": {
+      "s_over_1mg": 1.0,
+      "delay_to_horizon_end": false
+    },
+    "gamma=0.995,s=0.005,R=0.04": {
+      "s_over_1mg": 1.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.995,s=0.01,R=1.0": {
+      "s_over_1mg": 2.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.995,s=0.01,R=0.04": {
+      "s_over_1mg": 2.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.995,s=0.02,R=1.0": {
+      "s_over_1mg": 4.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.995,s=0.02,R=0.04": {
+      "s_over_1mg": 4.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.999,s=0.005,R=1.0": {
+      "s_over_1mg": 5.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.999,s=0.005,R=0.04": {
+      "s_over_1mg": 5.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.999,s=0.01,R=1.0": {
+      "s_over_1mg": 10.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.999,s=0.01,R=0.04": {
+      "s_over_1mg": 10.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.999,s=0.02,R=1.0": {
+      "s_over_1mg": 20.0,
+      "delay_to_horizon_end": true
+    },
+    "gamma=0.999,s=0.02,R=0.04": {
+      "s_over_1mg": 20.0,
+      "delay_to_horizon_end": true
+    }
+  },
+  "H3_note": "완료 직전 칸의 보조 보상 s가 s/(1-γ) > R을 만족하면, 최적 정책은 완료를 horizon 끝까지 미룬다. OmniReset처럼 성공 상태에 머무는 동안 매 step 성공 보상을 주고 종료하지 않으면 이 유인이 없다. 보조 항의 실제 꼴, γ, 성공 보상 스케일이 논문에 없어 이 결과는 조건부다."
+}

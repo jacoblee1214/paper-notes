@@ -12,8 +12,10 @@
 | 2026-10-28 | [FlashDexRetarget 읽기: 시연 수백 개를 정책 하나로, 그런데 무엇이 성능을 만들었나](papers/flashdexretarget/) | 사람 손-물체 시연 모음을 RL 정책 하나로 로봇 궤적으로 바꾸는 FlashDexRetarget을, 표를 재계산하고 공개 코드와 대조하며 읽었습니다. |
 | 2026-10-28 | [Do as I Do 읽기: SAM 3D 추적은 사실 EMA 필터다](papers/do_as_i_do/) | 일상 영상에서 다지 로봇손 데이터를 만드는 Do as I Do를 코드까지 대조해 읽고, 핵심 추적 기법의 정체를 유도했습니다. |
 | 2026-10-28 | [DexScrew 읽기: 촉각은 평균이 아니라 꼬리를 바꾼다](papers/dexscrew/) | 불완전한 시뮬레이션으로 너트 조이기와 드라이버 돌리기를 배우는 DexScrew를, 표 수치 재계산과 코드 대조까지 해서 읽었습니다. |
+| 2026-10-28 | [DexPolicy 읽기: 잡음을 줄이면 나아진다, 그런데 무엇과 비교했나](papers/dexpolicy/) | PPO의 행동 잡음 σ를 학습 step에 따라 줄이는 DexPolicy를, 표를 재계산하고 공개 코드·기반 환경과 대조하며 toy로 다시 따져 읽었습니다. |
 | 2026-10-28 | [DDPG 다시 읽기: 표적망은 확실하고, 나머지는 구현마다 다르다](papers/ddpg/) | 연속 제어 off-policy RL의 출발점인 DDPG를 Table 1 재계산, 주요 구현 4종 대조, numpy toy로 다시 읽었습니다. |
 | 2026-10-28 | [Contact-Grounded Policy 읽기: 촉각을 예측해서 제어기 목표로 바꾸면 무엇이 달라지나](papers/contact_grounded_policy/) | 다지 손 visuotactile 정책 CGP를, 표를 재계산하고 핵심 사상을 물리식과 3-DoF 손가락 toy로 다시 유도하며 읽었습니다. |
 | 2026-10-28 | [Chronos Policy 읽기: 시간을 알려 주면 정책이 강해진다, 그런데 어디까지가 시간 덕인가](papers/chronospolicy/) | 관측 캡처 시각과 행동 실행 시각을 RoPE로 넣는 Chronos Policy를, 논문 표와 프로젝트 페이지 원값을 대조하고 시드별 성공 횟수까지 역산하며 읽었습니다. |
+| 2026-10-28 | [AlphaNIST 읽기: 이진 보상 하나로 조립 보드 20개 과제, 그런데 98.2%는 어디서 시작한 성공률인가](papers/alphanist/) | 이진 성공 보상과 PPO 정책 하나로 NIST 조립 보드 20개 과제를 푸는 AlphaNIST를, 그림을 픽셀로 판독하고 SGS·OmniReset 원본과 대조하며 읽었습니다. |
 
 각 폴더에는 블로그 글(`index.md`), 통합 리포트 PDF, 분석 문서, 검증 스크립트가 있습니다. 논문 그림은 원 논문 라이선스가 허용하는 경우에만 실었습니다.
