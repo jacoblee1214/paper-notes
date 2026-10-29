@@ -1,0 +1,224 @@
+{
+ "C1_simtoolreal_9B": {
+  "joint": 7.9,
+  "ours": 10.6,
+  "gain_pct": 34.2,
+  "claim": "34% more consecutive successes (Sec. 1)",
+  "n_seeds": 5
+ },
+ "C2_dextreme_2B": {
+  "joint": 8.8,
+  "ours": 12.3,
+  "gain_pct": 39.8,
+  "claim": "40% more in DeXtreme (Sec. 1)",
+  "n_seeds": 5
+ },
+ "C3_extended_60B_single_run": {
+  "joint": 4.9,
+  "eigen_residual": 12.0,
+  "ours": 14.1,
+  "ours_over_joint": 2.88,
+  "ours_over_residual_pct": 17.5,
+  "note": "방법마다 실행 1개(9B 시점 중앙값 seed를 이어 학습). v1은 Sec. 1에서 'larger gains in extended runs'로 내세웠고 v2에서 뺌"
+ },
+ "C4_real_dextreme": {
+  "mean": [
+   8.45,
+   11.9
+  ],
+  "gain_pct": 40.8,
+  "longest": [
+   32,
+   41
+  ],
+  "longest_gain_pct": 28.1,
+  "trials_per_method": 40,
+  "claim": "41%, 28% (Sec. 4.5.2)"
+ },
+ "C5_dexmachina_from_fig5": {
+  "task_only": {
+   "mean_joint": 0.504,
+   "mean_ours": 0.648,
+   "ratio_of_means_pct": 28.6,
+   "mean_of_ratios_pct": 26.2,
+   "per_cell_gain_pct": [
+    73.3,
+    24.9,
+    21.6,
+    6.5,
+    40.3,
+    25.6,
+    23.9,
+    -6.5
+   ]
+  },
+  "curriculum": {
+   "mean_joint": 0.761,
+   "mean_ours": 0.806,
+   "ratio_of_means_pct": 5.9,
+   "mean_of_ratios_pct": 7.5,
+   "per_cell_gain_pct": [
+    0.8,
+    3.5,
+    43.2,
+    -3.3,
+    0.0,
+    1.2,
+    6.5,
+    7.8
+   ]
+  },
+  "claim": "improves average object-tracking accuracy by 28% without contact reward shaping or curricula (Sec. 1)",
+  "digitize_check": {
+   "box/task_only/Allegro": {
+    "text": [
+     0.46,
+     0.8
+    ],
+    "read": [
+     0.46,
+     0.797
+    ],
+    "abs_err": [
+     0.0,
+     0.003
+    ]
+   },
+   "box/curriculum/Schunk": {
+    "text": [
+     0.59,
+     0.84
+    ],
+    "read": [
+     0.586,
+     0.839
+    ],
+    "abs_err": [
+     0.004,
+     0.001
+    ]
+   }
+  }
+ },
+ "C6_spider": {
+  "delta_cost_pct": [
+   25.4,
+   31.2,
+   21.5,
+   14.3,
+   3.5,
+   0.4
+  ],
+  "mean_delta_pct": 16.05,
+  "claim": "reduces retargeting cost by 16% on average across six hands (Sec. 1)",
+  "rank_corr_with_delta": {
+   "DoF": {
+    "spearman": 0.943,
+    "p": 0.005,
+    "values": [
+     22.0,
+     20.0,
+     16.0,
+     12.0,
+     9.0,
+     6.0
+    ]
+   },
+   "k90": {
+    "spearman": 0.812,
+    "p": 0.05,
+    "values": [
+     9.0,
+     9.0,
+     10.0,
+     6.0,
+     5.0,
+     3.0
+    ]
+   },
+   "d_minus_k": {
+    "spearman": 0.928,
+    "p": 0.008,
+    "values": [
+     13.0,
+     11.0,
+     6.0,
+     6.0,
+     4.0,
+     3.0
+    ]
+   },
+   "alignment_gain": {
+    "spearman": 0.6,
+    "p": 0.208,
+    "values": [
+     2.207,
+     2.226,
+     1.582,
+     1.79,
+     1.902,
+     1.614
+    ]
+   }
+  },
+  "text_rounding": {
+   "Schunk 3.5 → '4%'": true,
+   "Allegro 21.5 → '22%'": true
+  }
+ },
+ "C7_fig7b_sharpa_spider": {
+  "joint": 0.089,
+  "eigen_only_rho0.5": 0.126,
+  "combined_rho0.9": 0.066,
+  "combined_vs_joint_pct": -25.8,
+  "eigen_only_rho0.5_vs_joint_pct": 41.6,
+  "fig6_sharpa_pct": -25.4,
+  "claim": "25% below Joint-Space (Sec. 4.4)"
+ },
+ "C8_real_simtoolreal": {
+  "per_task_fig8": {
+   "hammering": [
+    0.42,
+    0.71
+   ],
+   "wiping": [
+    0.34,
+    0.92
+   ],
+   "scooping": [
+    0.2,
+    0.76
+   ],
+   "brushing": [
+    0.36,
+    0.9
+   ]
+  },
+  "mean_of_tasks": [
+   0.33,
+   0.8225
+  ],
+  "text_claim": "averaging 82% across tasks compared with 33% (Sec. 4.5.1)",
+  "project_page_hammer": [
+   0.42,
+   0.71
+  ],
+  "trials": "물체-궤적 조합당 10회, 정책은 방법마다 1개. 표준편차·검정 없음",
+  "note": "Joint-Space 정책은 원 SimToolReal 공개 체크포인트가 아니고, 120B의 절반인 60B 학습(Sec. 4.5.1)"
+ },
+ "C9_compute": {
+  "frames": {
+   "SimToolReal fixed (4 methods × 5 seeds × 9B)": "1.8e+11",
+   "SimToolReal extended (4 runs × 51B more)": "2.04e+11",
+   "DeXtreme (4 methods × 5 seeds × 2B)": "4e+10",
+   "DexMachina (4 hands × 2 tasks × 2 settings × 2 methods × 5 seeds × ~2B)": "3.2e+11",
+   "Appendix A delta variants (2 × 5 seeds × (9B + 2B))": "1.1e+11",
+   "Dataset ablation (2 extra priors × 5 seeds × 9B)": "9e+10"
+  },
+  "total_rl_frames": "9.44e+11",
+  "extended_run_frames_per_s": 99206,
+  "spider_runs_main": 1200,
+  "spider_runs_sweep_sharpa": 3600,
+  "note": "SimToolReal 연장 실행 1주(Sec. 4.1.1)로 처리량 환산. SPIDER sweep은 ρ 6개 × (eigen만/결합) × 과제 10 × seed 10 × 데이터셋 3으로 가정"
+ }
+}

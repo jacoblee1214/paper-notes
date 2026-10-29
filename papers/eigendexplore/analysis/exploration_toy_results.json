@@ -1,0 +1,179 @@
+{
+ "setup": {
+  "hand": "sharpa",
+  "d": 22,
+  "k": 9,
+  "top": "10%",
+  "trials": 300,
+  "N_T_s0": "영역 이름에 표기",
+  "note": "정규화 관절 좌표. 'eigen+iid'가 논문 서술(총 분산 맞춤), 'x2'가 공개 SimToolReal preset"
+ },
+ "T1_spider_like_final_cost_ratio_median": {
+  "noise_ok (N32,T4,s0=0.3)": {
+   "human": {
+    "iid": 1.0,
+    "eigen+iid": 0.877,
+    "eigen+iid x2": 1.316,
+    "eigen only": 0.942,
+    "random-corr+iid": 1.227,
+    "eigen+iid steep(λ)": 0.971
+   },
+   "mixed": {
+    "iid": 1.0,
+    "eigen+iid": 1.009,
+    "eigen+iid x2": 1.44,
+    "eigen only": 1.788,
+    "random-corr+iid": 1.209,
+    "eigen+iid steep(λ)": 1.067
+   },
+   "isotropic": {
+    "iid": 1.0,
+    "eigen+iid": 1.288,
+    "eigen+iid x2": 1.644,
+    "eigen only": 2.557,
+    "random-corr+iid": 1.279,
+    "eigen+iid steep(λ)": 1.339
+   }
+  },
+  "noise_too_small (N32,T8,s0=0.15)": {
+   "human": {
+    "iid": 1.0,
+    "eigen+iid": 0.668,
+    "eigen+iid x2": 0.362,
+    "eigen only": 0.953,
+    "random-corr+iid": 1.372,
+    "eigen+iid steep(λ)": 0.997
+   },
+   "mixed": {
+    "iid": 1.0,
+    "eigen+iid": 0.994,
+    "eigen+iid x2": 0.629,
+    "eigen only": 1.997,
+    "random-corr+iid": 1.389,
+    "eigen+iid steep(λ)": 1.208
+   },
+   "isotropic": {
+    "iid": 1.0,
+    "eigen+iid": 1.375,
+    "eigen+iid x2": 0.866,
+    "eigen only": 2.915,
+    "random-corr+iid": 1.38,
+    "eigen+iid steep(λ)": 1.556
+   }
+  }
+ },
+ "T1_vs_iid_win_rate": {
+  "noise_ok (N32,T4,s0=0.3)": {
+   "human": {
+    "eigen+iid": 0.64,
+    "eigen+iid x2": 0.24,
+    "eigen only": 0.533,
+    "random-corr+iid": 0.24,
+    "eigen+iid steep(λ)": 0.54
+   },
+   "mixed": {
+    "eigen+iid": 0.447,
+    "eigen+iid x2": 0.17,
+    "eigen only": 0.037,
+    "random-corr+iid": 0.257,
+    "eigen+iid steep(λ)": 0.4
+   },
+   "isotropic": {
+    "eigen+iid": 0.203,
+    "eigen+iid x2": 0.09,
+    "eigen only": 0.013,
+    "random-corr+iid": 0.227,
+    "eigen+iid steep(λ)": 0.183
+   }
+  },
+  "noise_too_small (N32,T8,s0=0.15)": {
+   "human": {
+    "eigen+iid": 0.863,
+    "eigen+iid x2": 0.997,
+    "eigen only": 0.563,
+    "random-corr+iid": 0.07,
+    "eigen+iid steep(λ)": 0.513
+   },
+   "mixed": {
+    "eigen+iid": 0.493,
+    "eigen+iid x2": 0.96,
+    "eigen only": 0.003,
+    "random-corr+iid": 0.083,
+    "eigen+iid steep(λ)": 0.273
+   },
+   "isotropic": {
+    "eigen+iid": 0.05,
+    "eigen+iid x2": 0.723,
+    "eigen only": 0.0,
+    "random-corr+iid": 0.04,
+    "eigen+iid steep(λ)": 0.013
+   }
+  }
+ },
+ "T2_hit_prob": {
+  "human": {
+   "iid": {
+    "P(<eps,u> >= 2.0)": 0.0228,
+    "P(<eps,u> >= 3.0)": 0.00135
+   },
+   "eigen+iid": {
+    "P(<eps,u> >= 2.0)": 0.0855,
+    "P(<eps,u> >= 3.0)": 0.0235
+   },
+   "eigen+iid x2": {
+    "P(<eps,u> >= 2.0)": 0.147,
+    "P(<eps,u> >= 3.0)": 0.0597
+   },
+   "random-corr+iid": {
+    "P(<eps,u> >= 2.0)": 0.0265,
+    "P(<eps,u> >= 3.0)": 0.00255
+   },
+   "eigen+iid_MC_check_a3": 0.0232
+  },
+  "isotropic": {
+   "iid": {
+    "P(<eps,u> >= 2.0)": 0.0228,
+    "P(<eps,u> >= 3.0)": 0.00135
+   },
+   "eigen+iid": {
+    "P(<eps,u> >= 2.0)": 0.0239,
+    "P(<eps,u> >= 3.0)": 0.00216
+   },
+   "eigen+iid x2": {
+    "P(<eps,u> >= 2.0)": 0.0775,
+    "P(<eps,u> >= 3.0)": 0.0178
+   },
+   "random-corr+iid": {
+    "P(<eps,u> >= 2.0)": 0.0242,
+    "P(<eps,u> >= 3.0)": 0.0023
+   },
+   "eigen+iid_MC_check_a3": 0.00256
+  }
+ },
+ "T3_reinforce": {
+  "human": {
+   "iid": {
+    "cos_batch_median": 0.417,
+    "mean_grad_cos_to_true": 0.987,
+    "mean_grad_norm_ratio": 0.96
+   },
+   "eigen+iid": {
+    "cos_batch_median": 0.297,
+    "mean_grad_cos_to_true": 0.975,
+    "mean_grad_norm_ratio": 1.043
+   }
+  },
+  "isotropic": {
+   "iid": {
+    "cos_batch_median": 0.438,
+    "mean_grad_cos_to_true": 0.985,
+    "mean_grad_norm_ratio": 1.054
+   },
+   "eigen+iid": {
+    "cos_batch_median": 0.334,
+    "mean_grad_cos_to_true": 0.969,
+    "mean_grad_norm_ratio": 1.053
+   }
+  }
+ }
+}

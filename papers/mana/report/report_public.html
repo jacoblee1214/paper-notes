@@ -1,0 +1,1137 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mana 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="chain_vs_table2"] { max-width: 72%; }
+img[src*="paper_fig2"], img[src*="paper_fig3"] { max-width: 80%; }
+img[src*="paper_fig1"], img[src*="paper_fig8_9"] { max-width: 70%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>Mana: 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 그림은 라이선스(arXiv 비독점 배포) 때문에 제외했습니다. 원문 https://arxiv.org/abs/2606.13677 · arXiv:2606.13677v1 · UC Berkeley, CMU, Stanford, Amazon FAR (Yin, Shi, Abbeel, Liu) · Mana 코드 미공개(Lightning Grasp만 공개, af43818) · 분석일 2026-10-29 · 논문 그림은 개인 학습용으로만 사용(논문 라이선스가 CC BY 아님)</p>
+
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 두께 1 cm 안팎의 관절형 도구를 Allegro 손으로 집어 작동시키는 문제를 애니메이션처럼 푼다. 절차적 파지 keyframe(Lightning Grasp+)을 대량으로 만들고, 접근은 motion planning, 접촉 구간만 짧은 RL로 채운 뒤, 성공 궤적으로 점군 diffusion 정책을 학습해 실물에 zero-shot으로 옮긴다.</li>
+<li><strong>&quot;약 70%&quot;는 정확하다:</strong> Table 1의 22칸 평균은 0.705다. 도구별로 합치면 open-loop보다 확실히 낫지만(p = 0.019–9×10⁻⁶), 칸 하나(n = 10)로는 22칸 중 3칸만 구분된다.</li>
+<li><strong>Table 2는 잡기 성공을 조건으로 한 값으로 보인다:</strong> 단계별 성공률을 잡기까지 곱하면 기대 15.2/40인데 관측은 23/40(p = 0.0095)이다. 잡기 이후만 곱하면 21.8/40으로 맞는다. 잡기부터 작동까지의 끝단 성공률은 0.30–0.56으로 추정된다.</li>
+<li><strong>Fig. 7 ablation은 경향만 확실하다:</strong> 세 곡선 모두 증가 경향은 유의(p ≈ 0.003–0.006)하지만 마지막 두 점은 구분되지 않는다. 끝점은 Table 1 값과 같다.</li>
+<li><strong>물리 주장은 toy로 확인된다:</strong> 0.7 Nm 토크로 낼 수 있는 손끝 힘은 자세에 따라 5–17 N(10 N 한계는 어림값)이다. dt = 1/200 s에서 명시적 Euler는 이 규모의 도구 스프링에서 대부분 발산하고, 암시적 Euler는 안정하다. 다만 도구 이득 랜덤화 ×1.5는 7 N 도구를 10.5 N으로 만들어 저자들이 말한 하드웨어 한계를 넘는다.</li>
+<li><strong>공개 코드는 LG뿐이다:</strong> Mana 데이터 생성기, LG+, RL 환경, 정책은 미공개다. 공개 LG는 IK에 침투 해소가 없고 지면 장애물 개념도 없어, 탁자 위 얇은 물체 파지(LG+)는 재현할 수 없다. CUDA 바이너리·Ubuntu·NVIDIA GPU 전용이고 비상업 라이선스다.</li>
+<li><strong>구현 가능성:</strong> 공식 재현은 불가능하다. 이 맥에서는 재계산과 toy, Algorithm 1의 numpy 평면 toy까지만 가능하다. 아이디어 재구현은 구조는 쉽지만, 도구 실측 모델·LG+·시뮬레이션 안정화·실리콘 손끝이 비용의 대부분이다.</li>
+</ol>
+
+</section>
+<section class="chapter"><h1>01. 논문 분석: Mana (arXiv:2606.13677)</h1>
+<ul>
+<li>제목: <em>Mana: Dexterous Manipulation of Articulated Tools</em></li>
+<li>저자: Zhao-Heng Yin, Guanya Shi†, Pieter Abbeel†, C. Karen Liu† (UC Berkeley, CMU, Stanford, Amazon FAR. †공동 교신저자)</li>
+<li>공개: arXiv v1 2026-06-11(v1만 있음), cs.RO · 프로젝트 https://zhaohengyin.github.io/mana · <strong>Mana 코드는 공개되지 않았습니다</strong>(2026-10-29 확인). 데이터 생성의 핵심 구성 요소인 Lightning Grasp는 <code>zhaohengyin/lightning-grasp</code>(@ <code>af43818</code>)로 공개되어 있습니다(<code>04</code> §2).</li>
+<li>라이선스: arXiv 비독점 배포(nonexclusive-distrib 1.0)로 <strong>CC BY가 아닙니다.</strong> PDF에 &quot;All rights reserved&quot; 같은 별도 권리 표기는 없습니다.</li>
+<li>분석 범위: 본문 8쪽, 참고문헌, 부록 A.1–A.7(총 16쪽), 프로젝트 페이지, Lightning Grasp 공개 코드</li>
+</ul>
+<hr />
+<h2>1. Abstract (한 줄 요약과 주장)</h2>
+<p><strong>한 줄 요약:</strong> 손잡이 두께가 1 cm 안팎인 관절형 도구(집게, 펜치, 빨래집게, 주사기)를 Allegro 손으로 탁자에서 집어 작동시키는 문제를, 컴퓨터 애니메이션처럼 <strong>keyframe을 먼저 만들고 그 사이를 채우는(inbetweening)</strong> 방식으로 풉니다. 파지 keyframe은 절차적으로 대량 생성하고, 접근은 motion planning, 접촉이 많은 짧은 구간만 RL로 만든 뒤, 성공한 시뮬레이션 궤적으로 점군 diffusion 정책을 학습해 실물에 zero-shot으로 옮깁니다.</p>
+<p>논문이 내세우는 기여는 다음과 같습니다(Sec. 1, Abstract).</p>
+<ol>
+<li>관절형 도구 조작을 coarse-to-fine 동작 합성 문제로 다시 정의한 데이터 생성 틀(Mana)입니다. 사람 입력은 도구당 1분 미만의 affordance 클릭뿐이라고 주장합니다.</li>
+<li>지면 위 얇은 물체의 파지를 만드는 collision-aware 운동학 최적화(Lightning Grasp+, 부록 A.1)입니다.</li>
+<li>네 종류 도구에서 잡기와 손안 조작 모두 zero-shot sim-to-real 전이에 성공했다고 보고합니다(약 70%, Table 1).</li>
+</ol>
+<hr />
+<h2>2. Method</h2>
+<h3>2.1 전체 구조 (Fig. 3)</h3>
+<pre><code>입력: 도구 메쉬 + 관절 모델(URDF) + affordance 클릭(손잡이·팔·플런저 영역, 도구당 &lt; 1분)
+   │
+   ▼  Grasp Generator: Lightning Grasp+ (contact field로 접촉 영역 → 손끝 위치·관절 최적화 → IsaacLab 안정성 필터)
+keyframe 그래프: pre-grasp ─ grasp ─ in-hand actuation(열림·닫힘·밀기 상태들), 도구 관절 상태 전반에 촘촘히 샘플
+   │
+   ▼  Trajectory Generator (구간마다 가장 단순한 방법)
+   pre-grasp   : GPU RRT-Connect + 경로 평활화 (RL 불필요)
+   grasp       : 법선 방향으로 조이는 절차적 닫기, 어려우면 짧은 RL
+   in-hand     : keyframe 사이 목표 도달 RL (PPO, 힘 관련 랜덤화)
+   │
+   ▼  성공한 시뮬레이션 궤적만 저장(단계 라벨: grasping·opening·closing 등)
+Student: 점군(512점, 손목 좌표) + 고유수용감각 → Perceiver(질의 4개) → transformer diffusion head → Δ손목 6D, Δ손 관절
+배포: D435 → SAM 3 분할 + Fast Foundation Stereo 깊이 → 점군, 약 10 Hz(RTX 4090 2장)
+</code></pre>
+
+<h3>2.2 Grasp Generator와 Lightning Grasp+ (Sec. 3.1, 부록 A.1)</h3>
+<ul>
+<li>사용자는 3D 화면에서 도구의 기준 자세와 기능 영역(펜치 손잡이, 집게 팔, 주사기 플런저와 몸통)을 표시합니다. 논문은 이 과정이 1분 미만이라고 씁니다.</li>
+<li>같은 저자의 Lightning Grasp[50]로 contact field를 질의해 표시 영역 위의 접촉 영역을 만들고, 손끝 접촉 위치와 손가락 관절을 최적화합니다. 결과는 IsaacLab에서 안정성으로 거릅니다.</li>
+<li>강체 파지와 달리, 앞으로 도구를 작동시킬 <strong>연속된 파지 사슬</strong>이 필요합니다. 그래서 기능 영역과 도구 관절 상태 전반에서 keyframe을 촘촘히 뽑습니다. 접촉 위치가 밀리미터만 달라도 힘 거동이 바뀌기 때문입니다.</li>
+<li><strong>LG+ (Algorithm 1):</strong> 원래 Lightning Grasp의 운동학 최적화는 충돌을 고려하지 않아, 지면에 놓인 얇은 물체에서는 손가락이 바닥이나 이웃 면을 뚫습니다(Fig. 8). LG+는 Levenberg–Marquardt IK 한 스텝마다 두 목표를 함께 풉니다. 손가락 표면점을 접촉점 쪽으로 끌고(LG와 같음), 침투가 있으면 침투 중심 p를 p + d(평균 분리 벡터)로 옮깁니다. CUDA로 병렬 구현했다고 적었습니다.</li>
+</ul>
+<h3>2.3 Trajectory Generator (Sec. 3.2)</h3>
+<ul>
+<li><strong>Pre-grasp:</strong> 힘이 필요 없는 구간이라 RL 없이 GPU RRT-Connect[52]와 경로 평활화를 씁니다. 최종 파지로 바로 계획하면 실물에서 얇은 물체와 일찍 부딪히므로, 손끝을 접촉점에서 국소 법선 방향으로 무작위 거리만큼 띄운 자세를 pre-grasp로 정의합니다.</li>
+<li><strong>Grasp:</strong> 대개 절차적으로 만듭니다. 손끝을 접촉 법선 안쪽으로 옮긴 &quot;조임 자세&quot;로 닫고 들어 올립니다. 얇은 물체나 법선이 안정화 힘과 어긋나는 형상에서는 짧은 RL로 pre-grasp와 grasp keyframe을 잇습니다.</li>
+<li><strong>In-hand actuation:</strong> 안정 파지 keyframe에서 시작해 무작위로 고른 목표 도구 상태(예: 열림 → 닫힘)에 도달하는 목표 도달 RL입니다. 보상은 r = r_tool + w₁·r_hand + w₂·r_contact(부록 A.2)이고, 목표 상태·자세에 임계값 안으로 들어오면 성공 종료합니다.</li>
+</ul>
+<h3>2.4 RL 설정 (부록 A.2–A.4)</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r_tool</td>
+<td>exp(−β₁₁‖q − q̃‖₁) + 0.3·exp(−100‖x − x̃‖ − 5‖log(RᵀR̃)‖). β₁₁ = 10(회전 관절), 50(주사기 직선 관절)</td>
+</tr>
+<tr>
+<td>r_hand</td>
+<td>exp(−10‖q_h − q̃_h‖₁), 잡기 단계에서는 + 10·exp(−50‖x_h − x̃_h‖ − 5‖log(RᵀR̃)‖)</td>
+</tr>
+<tr>
+<td>r_contact</td>
+<td>힘 &gt; ε인 손가락 링크–도구 링크 접촉 쌍의 개수</td>
+</tr>
+<tr>
+<td>가중치</td>
+<td>w₁ = 0.1, w₂ = 0.15. 목표 도달 +100, 낙하·이탈 −50(리셋). 전체 보상 × 0.1</td>
+</tr>
+<tr>
+<td>랜덤화</td>
+<td>행동 잡음 U[−0.1, 0.1], 로봇 PD 이득 ×U[0.8, 1.2], 도구 PD 이득 ×U[0.8, 1.5], 질량 ×U[0.8, 1.2], 마찰 ×U[0.5, 1.5], 물체 힘 섭동 σ = α·m·g (α ~ U[0.05, 0.2])</td>
+</tr>
+<tr>
+<td>PPO</td>
+<td>actor·critic MLP 512×4, privileged 상태 입력, γ = 0.99, ε = 0.2, λ = 0.95, 병렬 환경 4,096개, minibatch 8,192, 8 스텝마다 5 epoch, lr 1×10⁻⁴(KL 0.01 기반 조절)</td>
+</tr>
+</tbody>
+</table>
+
+<h3>2.5 Student 정책과 로봇 (Sec. 4, 부록 A.5–A.7)</h3>
+<ul>
+<li><strong>정책:</strong> 손목 좌표계 도구 점군 512점을 Perceiver(질의 토큰 4개, head 4개, 128차원)로 압축하고, 고유수용감각(손 관절과 직전 두 프레임의 목표)을 MLP로 128차원 토큰 하나로 만듭니다. transformer diffusion head(6층, head 2개, 256차원)가 <strong>다음 행동 하나</strong>(chunk 없음)를 냅니다. AdamW, 배치 128, 2×10⁵ step, EMA. 점군 잡음과 부분 가림 랜덤화로 sim-to-real을 돕습니다.</li>
+<li><strong>제어:</strong> 손목은 미분 IK, 손은 저수준 PD(τ = K_p e + K_d ė)입니다.</li>
+<li><strong>하드웨어:</strong> xArm7 + Allegro(16 DoF). 반구형 강체 손끝은 얇은 손잡이에서 점접촉이 되어 미끄러지므로, 평평하고 유연한 손끝을 직접 만들었습니다. PLA-CF 뼈대에 00-30 실리콘을 몰드로 부어 성형합니다(A.7, Fig. 5).</li>
+<li><strong>힘 시뮬레이션(A.6):</strong> 손은 시스템 식별로 힘 응답을 맞추고, 도구는 내부 스프링을 스프링–질량–댐퍼로 근사합니다. 전자 힘 게이지로 측정해 PD 제어기와 관절 마찰로 구현했습니다. 도구 강성과 힘이 커서 <strong>암시적 Euler 액추에이터</strong>를 써야 안정했다고 쓰고, dt = 1/200 s, position iteration 16–32, velocity iteration 4–6을 씁니다.</li>
+</ul>
+<hr />
+<h2>3. Experiments</h2>
+
+<h3>3.1 설정 (Sec. 5.1)</h3>
+<ul>
+<li>도구 네 종류 × 인스턴스 두 개입니다(Fig. 6). 두께는 0.8–1.5 cm이고, 작동에 3–7 N이 필요합니다. 메쉬와 URDF는 카메라 스캔으로 만들었습니다.</li>
+<li><strong>기준선:</strong>
+<ul>
+<li>Open-loop: 물체 자세를 손으로 맞춘 뒤 Mana가 만든 궤적을 그대로 재생합니다.</li>
+<li>원격조작: 같은 1저자의 GeoRT[10]로 사람이 조종하며, 1시간 연습 뒤 평가했습니다.</li>
+</ul>
+</li>
+<li><strong>평가 방식:</strong> 단계(잡기, 열기, 닫기, 사용)를 <strong>따로</strong> 평가하고, 각 단계는 그 단계의 안정된 초기 자세에서 시작합니다. 한 칸은 10회입니다.</li>
+</ul>
+<h3>3.2 주 결과 (Table 1)</h3>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>집게 잡기·열기·닫기</th>
+<th>펜치 잡기·열기·닫기</th>
+<th>빨래집게 잡기·열기·닫기</th>
+<th>주사기 잡기·사용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>원격조작(GeoRT)</td>
+<td>.3 .3 · .1 .2 · .3 .3</td>
+<td>.2 .1 · .1 .1 · .1 .0</td>
+<td>0 0 · 0 0 · 0 0</td>
+<td>0 0 · 0 0</td>
+</tr>
+<tr>
+<td>Ours (open-loop)</td>
+<td>.5 .6 · .6 .7 · .4 .6</td>
+<td>.4 .4 · .3 .4 · .3 .3</td>
+<td>.3 .2 · .2 .4 · .4 .3</td>
+<td>.1 .0 · .3 .3</td>
+</tr>
+<tr>
+<td>Ours</td>
+<td><strong>.8 .8 · .8 .8 · .7 .8</strong></td>
+<td><strong>.7 .6 · .7 .7 · .7 .7</strong></td>
+<td><strong>.8 .7 · .8 .7 · .6 .7</strong></td>
+<td><strong>.7 .5 · .6 .6</strong></td>
+</tr>
+</tbody>
+</table>
+<p>(칸마다 인스턴스 1, 2의 성공률. 각 10회)</p>
+<p><img src="figures/table1_ci.png" alt="table1_ci.png" /></p>
+<p class="cap">우리 분석: Table 1을 두 인스턴스 합(n = 20)으로 다시 그리고 Wilson 95% 구간을 붙였다.</p>
+<p>해석 (재계산은 <code>04_claim_verification.md</code>와 <code>analysis/table_check.py</code>):</p>
+<ul>
+<li><strong>&quot;약 70%&quot;는 정확합니다.</strong> 22칸 평균은 0.705이고, 잡기 8칸 0.700, 조작 14칸 0.707입니다. 원격조작 집게 평균은 0.25로 &quot;약 30%&quot;와 맞습니다.</li>
+<li><strong>도구 단위로 합치면 차이가 분명합니다.</strong> open-loop 대비 Fisher p는 집게 0.019, 펜치 5×10⁻⁴, 빨래집게 9×10⁻⁶, 주사기 2×10⁻⁴입니다. 전체 155/220 대 80/220은 p = 9×10⁻¹³입니다.</li>
+<li><strong>칸 하나로는 대부분 구분되지 않습니다.</strong> n = 10이면 8/10의 95% 구간이 [0.49, 0.94]입니다. open-loop와 유의하게 다른 칸은 22칸 중 3칸뿐입니다. 인스턴스 간 차이(예: 주사기 잡기 0.7 대 0.5)도 잡음 범위입니다.</li>
+<li><strong>기준선이 약합니다.</strong> open-loop는 학습 데이터 궤적을 재생하는 것이라 &quot;피드백의 가치&quot;를 보여 주지만, 다른 학습 방법과의 비교는 아닙니다. 원격조작은 위치 기반 인터페이스라는 점이 논문의 동기 자체입니다. RL 단독, 기존 관절형 도구 조작 연구[47, 48], LG와 LG+의 차이, MP와 RL의 역할 분담에 대한 비교는 없습니다.</li>
+</ul>
+<h3>3.3 Ablation (Fig. 7)</h3>
+<p>그림을 300 dpi로 렌더링해 읽으면 점이 모두 0.1 단위 격자에 정확히 놓입니다. 10회 시행과 정합합니다.</p>
+<table>
+<thead>
+<tr>
+<th>요인</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>집게 잡기 — 궤적 수 2k, 4k, 8k, 16k</td>
+<td>0.2</td>
+<td>0.4</td>
+<td>0.7</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>주사기 사용 — keyframe 수 1k, 2k, 4k, 8k</td>
+<td>0.0</td>
+<td>0.3</td>
+<td>0.3</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>펜치 조작 — 힘 랜덤화 0, 25, 50, 100%</td>
+<td>0.1</td>
+<td>0.2</td>
+<td>0.4</td>
+<td>0.7</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>세 곡선 모두 증가 경향은 유의합니다(Cochran–Armitage p = 0.003, 0.006, 0.003). 하지만 마지막 두 점끼리는 구분되지 않아(Fisher p = 1.0, 0.37, 0.37), 포화했는지는 알 수 없습니다.</li>
+<li>각 곡선의 마지막 점은 Table 1의 해당 칸과 같습니다(집게 잡기 0.8, 주사기 사용 0.6, 펜치 0.7). 즉 Table 1 설정이 곧 ablation의 최대 설정입니다.</li>
+<li>&quot;힘 랜덤화 100%&quot;가 부록 A.3의 어느 범위를 몇 배로 줄였는지는 정의되어 있지 않습니다. 요인마다 도구 하나만 측정했습니다.</li>
+</ul>
+<p><img src="figures/fig7_ci.png" alt="fig7_ci.png" /></p>
+<p class="cap">우리 분석: Fig. 7 판독값(10회 중 성공 수)과 Wilson 95% 구간.</p>
+<h3>3.4 도구 사용 과제 (Table 2)</h3>
+<p>손목 원격조작은 <strong>정책이 도구를 잡아 들어 올린 뒤에만</strong> 켭니다. 정밀한 도구–대상 정렬(예: 0.5 mm 전선)만 사람이 맡고, 손가락은 모두 정책이 움직입니다. 결과는 집게 집기 7/10, 펜치 자르기 5/10, 빨래집게 6/10, 주사기 주입 5/10입니다.</p>
+<ul>
+<li>단계별 성공률(Table 1)을 곱한 값과 비교해 보았습니다(<code>03</code> §2).
+<ul>
+<li>잡기까지 포함해 곱하면 네 과제 기대 합계는 15.2/40이고, 관측 23/40은 p = 0.0095로 이보다 높습니다.</li>
+<li>잡기 이후 단계만 곱하면 기대 21.8/40이고, 관측과 맞습니다(p = 0.41).</li>
+</ul>
+</li>
+<li>따라서 Table 2는 <strong>잡기에 성공한 시행만</strong> 센 조건부 성공률로 읽는 것이 자연스럽습니다. 잡기까지 넣은 끝단 성공률은 0.30–0.56으로 추정됩니다.</li>
+</ul>
+<hr />
+<p><img src="figures/chain_vs_table2.png" alt="chain_vs_table2.png" /></p>
+<p class="cap">우리 분석: 단계별 성공률을 곱한 예측과 Table 2 관측.</p>
+<h2>4. Limitations</h2>
+<h3>4.1 저자가 밝힌 한계 (Sec. 6)</h3>
+<ul>
+<li>모터 토크(최대 0.7 Nm)와 링크 길이(가장 긴 링크 0.06–0.07 m) 때문에 10 N이 넘는 도구(방아쇠 등)는 다루지 못합니다.</li>
+<li>정밀 파지만 다룹니다. Allegro가 사람 손의 2배 크기라 power grasp는 어렵습니다.</li>
+<li>가림 속 미끄러짐 감지와 아주 작은 도구에는 고주파 촉각·힘 감지가 필요합니다.</li>
+<li>단계 연결은 손목 원격조작으로 했고, 완전 자율 연결에는 추가 정책이 필요합니다.</li>
+</ul>
+<h3>4.2 분석하면서 추가로 발견한 한계와 의문점</h3>
+<ol>
+<li><strong>끝단 성공률이 보고되지 않았습니다.</strong> Table 1은 단계마다 안정된 시작 자세에서 따로 쟀고, Table 2는 잡기 이후 조건부로 보입니다(§3.4). 잡기부터 작동까지 이어진 자율 성공률은 0.3–0.56 수준으로 추정됩니다.</li>
+<li><strong>&quot;zero-shot&quot;과 &quot;1분 미만&quot; 주장의 범위가 좁습니다.</strong> 손목 이동(도구–대상 정렬)은 사람이 합니다. 도구마다 스캔한 메쉬, 관절 URDF, 힘 게이지로 측정한 스프링 계수가 필요한데, 1분은 affordance 클릭에만 해당합니다.</li>
+<li><strong>일반화를 시험하지 않았습니다.</strong> 도구 종류마다 인스턴스 두 개를 학습과 평가에 같이 씁니다. 처음 보는 인스턴스에 대한 성능이나, 정책을 도구별로 따로 학습했는지는 본문에 분명하지 않습니다.</li>
+<li><strong>계산 비용이 없습니다.</strong> 궤적 16k개, keyframe 8k개를 만드는 데 든 GPU 시간, RL 학습량, keyframe 사이 전이 수가 보고되지 않았습니다.</li>
+<li><strong>랜덤화 범위가 하드웨어 한계를 넘을 수 있습니다.</strong> 도구 PD 이득을 최대 1.5배로 키우면 7 N 도구는 10.5 N이 필요합니다. 이는 저자들이 말한 10 N 한계보다 큽니다(<code>03</code> §4). 시뮬레이션 손의 토크 상한이 실물과 같다면, 일부 학습 에피소드는 원리상 풀 수 없는 조건입니다(가설).</li>
+<li><strong>10 Hz, 행동 하나씩입니다.</strong> 지각(SAM 3 + 스테레오)이 RTX 4090 두 장에서 약 10 Hz이고, 정책은 chunk 없이 다음 행동 하나를 냅니다. 미끄러짐 같은 빠른 사건에 반응할 대역폭이 제한됩니다.</li>
+<li><strong>코드가 없습니다.</strong> Mana 데이터 생성기, LG+, RL 환경, 도구 모델, 정책이 모두 미공개입니다. 공개된 Lightning Grasp는 CUDA 바이너리만 있고(소스 미공개), 라이선스는 비상업(CC BY-NC)입니다(<code>04</code> §2).</li>
+</ol>
+</section>
+<section class="chapter"><h1>03. 수치 재계산과 물리 toy</h1>
+<p>스크립트는 <code>analysis/table_check.py</code>(Table 1·2, Fig. 7, 부록 산술 → <code>table_check_results.json</code>)와 <code>analysis/physics_toy.py</code>(손가락 힘 용량, 적분기 안정성, 랜덤화 크기 → <code>physics_toy_results.json</code>)입니다. 둘 다 numpy·scipy 단일 스레드로 수 초 안에 끝납니다. 그래프는 <code>analysis/plot_figures.py</code>가 그립니다.</p>
+<h2>1. Table 1: 평균은 맞고, 칸 하나는 잡음이 크다</h2>
+<p><img src="figures/table1_ci.png" alt="Table 1 재계산" /></p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>22칸 평균</th>
+<th>잡기 8칸</th>
+<th>조작 14칸</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ours</td>
+<td>0.705</td>
+<td>0.700</td>
+<td>0.707</td>
+</tr>
+<tr>
+<td>Ours (open-loop)</td>
+<td>0.364</td>
+<td>0.312</td>
+<td>0.393</td>
+</tr>
+<tr>
+<td>원격조작(GeoRT)</td>
+<td>0.095</td>
+<td>0.113</td>
+<td>0.086</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>&quot;약 70%&quot;(Sec. 5.2)는 세 집계 모두에서 맞습니다. 원격조작 집게 평균 0.25도 &quot;약 30%&quot;와 맞습니다.</li>
+<li><strong>도구별 합산 비교:</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>Ours</th>
+<th>open-loop</th>
+<th>원격조작</th>
+<th>Ours vs open-loop p</th>
+<th>칸 단위로 유의한 칸</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>집게</td>
+<td>47/60 [0.66, 0.87]</td>
+<td>34/60</td>
+<td>15/60</td>
+<td>0.019</td>
+<td>0/6</td>
+</tr>
+<tr>
+<td>펜치</td>
+<td>41/60 [0.56, 0.79]</td>
+<td>21/60</td>
+<td>6/60</td>
+<td>4.7×10⁻⁴</td>
+<td>0/6</td>
+</tr>
+<tr>
+<td>빨래집게</td>
+<td>43/60 [0.59, 0.82]</td>
+<td>18/60</td>
+<td>0/60</td>
+<td>9.0×10⁻⁶</td>
+<td>1/6</td>
+</tr>
+<tr>
+<td>주사기</td>
+<td>24/40 [0.45, 0.74]</td>
+<td>7/40</td>
+<td>0/40</td>
+<td>1.9×10⁻⁴</td>
+<td>2/4</td>
+</tr>
+</tbody>
+</table>
+<p>대괄호는 Wilson 95% 구간입니다. 도구 단위로는 넷 모두 유의합니다. 반면 칸(n = 10) 단위로는 22칸 중 3칸만 p &lt; 0.05입니다. 표에서 &quot;0.8 대 0.5&quot; 같은 칸 하나의 차이를 근거로 삼으면 안 됩니다. 8/10의 95% 구간은 [0.49, 0.94]입니다.</p>
+<ul>
+<li>비대응 Fisher 근사입니다. 같은 초기 조건을 쓴 짝 비교인지는 논문에 없습니다.</li>
+</ul>
+<h2>2. 단계별 평가와 Table 2의 관계</h2>
+<p><img src="figures/chain_vs_table2.png" alt="연쇄 성공 비교" /></p>
+<p>Table 1은 단계마다 <strong>그 단계의 안정된 시작 자세</strong>에서 따로 쟀습니다(Sec. 5.1). Table 2는 여러 단계가 이어진 과제입니다. 단계가 서로 독립이라고 보고 성공률을 곱해 Table 2와 비교했습니다. 단계별 값은 두 인스턴스 평균입니다.</p>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>단계 성공률</th>
+<th>모든 단계 곱</th>
+<th>잡기 이후만 곱</th>
+<th>Table 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>집게 집기</td>
+<td>0.80 · 0.80 · 0.75</td>
+<td>0.48</td>
+<td>0.60</td>
+<td>7/10</td>
+</tr>
+<tr>
+<td>펜치 자르기</td>
+<td>0.65 · 0.70 · 0.70</td>
+<td>0.32</td>
+<td>0.49</td>
+<td>5/10</td>
+</tr>
+<tr>
+<td>빨래집게</td>
+<td>0.75 · 0.75 · 0.65</td>
+<td>0.37</td>
+<td>0.49</td>
+<td>6/10</td>
+</tr>
+<tr>
+<td>주사기 주입</td>
+<td>0.60 · 0.60</td>
+<td>0.36</td>
+<td>0.60</td>
+<td>5/10</td>
+</tr>
+<tr>
+<td>합</td>
+<td></td>
+<td>기대 15.2</td>
+<td>기대 21.8</td>
+<td>23/40</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>모든 단계 곱을 기준으로 하면 관측 23/40은 P(합 ≥ 23) = 0.0095로 너무 높습니다(네 이항분포 합의 정확 분포).</li>
+<li>잡기 이후만 곱하면 P = 0.41로 자연스럽습니다.</li>
+<li>논문도 &quot;wrist teleoperation is enabled only after the object has been successfully grasped and lifted&quot;라고 씁니다(Sec. 5.4). 그래서 Table 2는 <strong>잡기 성공을 조건으로 한 성공률</strong>로 읽는 것이 맞아 보입니다. 다른 설명은 단계 간 양의 상관입니다(좋은 파지가 이후 단계도 쉽게 함). 두 경우 모두 &quot;잡기부터 작동까지 자율&quot;의 성공률은 Table 2보다 낮습니다. 조건부 해석을 따르면 Table 2 × 잡기 성공률 = 0.56 / 0.33 / 0.45 / 0.30입니다.</li>
+</ul>
+<h2>3. Fig. 7: 경향은 유의, 포화는 미확인</h2>
+<p><img src="figures/fig7_ci.png" alt="Fig. 7 판독" /></p>
+<table>
+<thead>
+<tr>
+<th>곡선</th>
+<th>10회 중 성공</th>
+<th>경향 검정 p</th>
+<th>끝점(1 vs 4) p</th>
+<th>마지막 두 점 p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>집게 잡기 vs 궤적 수</td>
+<td>2, 4, 7, 8</td>
+<td>0.0029</td>
+<td>0.023</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>주사기 사용 vs keyframe 수</td>
+<td>0, 3, 3, 6</td>
+<td>0.0055</td>
+<td>0.011</td>
+<td>0.37</td>
+</tr>
+<tr>
+<td>펜치 조작 vs 힘 랜덤화</td>
+<td>1, 2, 4, 7</td>
+<td>0.0030</td>
+<td>0.020</td>
+<td>0.37</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>&quot;데이터 양, 상태 다양성, 힘 랜덤화에 성능이 강하게 의존한다&quot;는 결론(Fig. 7 캡션)은 경향 검정으로 지지됩니다.</li>
+<li>다만 x축이 2배씩 늘어 마지막 구간은 16k, 8k, 100%입니다. 더 늘리면 계속 오르는지는 이 자료로 알 수 없습니다.</li>
+<li>끝점이 Table 1과 같으므로, 이 그림은 &quot;주 설정에서 빼면 얼마나 떨어지는가&quot;를 보여 줍니다.</li>
+</ul>
+<h2>4. 손가락 힘 용량과 랜덤화 범위 (toy)</h2>
+<p><img src="figures/physics.png" alt="물리 toy" /></p>
+<p><strong>P1 손가락 힘 용량.</strong> 링크 54/38/40 mm인 평면 3링크 손가락(Allegro 근사, 가정)에 관절 토크 상한 0.7 Nm(Sec. 6)을 주고, 원위 링크에 수직인 패드 방향으로 낼 수 있는 최대 힘을 31³개 자세에서 계산했습니다. 조건은 모든 관절에서 |J_iᵀ d|·f ≤ τ_max입니다.</p>
+<table>
+<thead>
+<tr>
+<th>양</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>한 관절 어림 τ/L (L = 0.06–0.07 m)</td>
+<td>10.0–11.7 N</td>
+</tr>
+<tr>
+<td>패드 방향 최대 힘 중앙값 / 90% 분위 / 최대</td>
+<td>9.7 / 15.2 / 17.5 N</td>
+</tr>
+<tr>
+<td>7 N 이상 낼 수 있는 자세 비율</td>
+<td>77%</td>
+</tr>
+<tr>
+<td>10 N 이상</td>
+<td>47%</td>
+</tr>
+<tr>
+<td>손가락을 편 자세</td>
+<td>5.3 N</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>저자들의 &quot;10 N 한계&quot;는 한 관절 어림값과 맞습니다. 실제 한계는 자세에 따라 5–17 N으로 넓게 퍼집니다.</li>
+<li>근위 관절에서 손끝까지 거리가 최대 0.13 m라, 손가락을 펼수록 낼 수 있는 힘이 줄어듭니다.</li>
+<li>그래서 3–7 N이 필요한 도구라도 <strong>어떤 접촉 자세를 고르느냐</strong>가 힘 여유를 정합니다. keyframe을 촘촘히 뽑아야 한다는 논문 관찰(Sec. 3.1, Fig. 7 가운데)을 힘 쪽에서도 설명할 수 있습니다(해석).</li>
+</ul>
+<p><strong>P3 랜덤화 범위(부록 A.3)를 힘으로 환산.</strong></p>
+<table>
+<thead>
+<tr>
+<th>랜덤화</th>
+<th>환산</th>
+<th>필요한 힘 3–7 N과 비교</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>물체 힘 섭동 σ = α·m·g (α 0.05–0.2)</td>
+<td>30 g 도구 0.015–0.06 N, 100 g 0.05–0.2 N, 200 g 0.1–0.39 N</td>
+<td>최대 13%, 보통 수 %</td>
+</tr>
+<tr>
+<td>도구 PD 이득 ×0.8–1.5</td>
+<td>작동력 2.4–10.5 N</td>
+<td>위쪽 끝이 10 N 한계를 넘음</td>
+</tr>
+<tr>
+<td>로봇 PD 이득 ×0.8–1.2</td>
+<td>같은 추적 오차에서 손끝 힘 ±20%</td>
+<td></td>
+</tr>
+<tr>
+<td>마찰 ×0.5–1.5 (기준 μ = 1 가정)</td>
+<td>마찰원뿔 반각 27°–56°</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>물체 섭동은 작동력보다 한 자릿수 작습니다. 힘 쪽 견고성은 주로 이득과 마찰 랜덤화에서 오는 것으로 보입니다(해석).</li>
+<li>도구 이득 1.5배 × 7 N = 10.5 N은 저자들이 말한 하드웨어 한계를 넘습니다. 스프링 강성이 PD 이득에 비례하고 시뮬레이션 손의 토크 상한이 실물과 같다면, 랜덤화된 일부 환경은 풀 수 없는 문제입니다(가설). 다만 P1에서 보듯 굽힌 자세에서는 10 N 이상도 가능하므로, 그런 환경에서는 특정 자세만 해가 됩니다.</li>
+</ul>
+<h2>5. 적분기 안정성 (toy)</h2>
+<p>부록 A.6은 &quot;도구 강성과 힘이 커서 명시적 Euler 대신 암시적 Euler가 결정적&quot;이라고 씁니다. 도구 관절을 감쇠 진동자 x'' + 2ζωx' + ω²x = 0로 두고 dt = 1/200 s 한 스텝의 증폭률(스펙트럼 반경)을 계산했습니다. 가정은 필요한 힘 3–7 N, 행정 1–2 cm, 유효 질량 5–50 g입니다. 그러면 k = F/s = 150–700 N/m, ω = 55–374 rad/s, ω·dt = 0.27–1.87입니다.</p>
+<table>
+<thead>
+<tr>
+<th>경우 (F, s, m)</th>
+<th>ω·dt</th>
+<th>명시적 (ζ = 0.2)</th>
+<th>반암시적</th>
+<th>암시적</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3 N, 1 cm, 5 g</td>
+<td>1.22</td>
+<td>1.42 (발산)</td>
+<td>0.71</td>
+<td>0.58</td>
+</tr>
+<tr>
+<td>3 N, 2 cm, 50 g</td>
+<td>0.27</td>
+<td>0.98</td>
+<td>0.94</td>
+<td>0.92</td>
+</tr>
+<tr>
+<td>7 N, 1 cm, 5 g</td>
+<td>1.87</td>
+<td>1.94 (발산)</td>
+<td>2.13 (발산)</td>
+<td>0.44</td>
+</tr>
+<tr>
+<td>7 N, 1 cm, 50 g</td>
+<td>0.59</td>
+<td>1.06 (발산)</td>
+<td>0.87</td>
+<td>0.79</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>명시적 Euler는 감쇠가 없으면 모든 경우에서, ζ = 0.2에서도 8가지 중 6가지에서 발산합니다. 안정하려면 dt &lt; 2ζ/ω(1–7 ms)가 필요합니다.</li>
+<li>7 N, 1 cm, 10 g 경우를 1초(200 스텝) 돌리면 진폭 배율이 명시적 4×10³⁴, 반암시적 2×10⁻³³, 암시적 3×10⁻⁵²입니다.</li>
+<li>반암시적(symplectic) Euler도 ω·dt &gt; 약 1.8이면 발산합니다. 암시적 Euler는 언제나 안정합니다(대신 수치 감쇠가 큽니다).</li>
+<li><strong>결론:</strong> A.6의 주장은 이 규모의 도구 스프링에서 정량적으로 맞습니다. 이 toy는 단일 자유도이고, 접촉과 PhysX 솔버 반복은 포함하지 않습니다.</li>
+</ul>
+<h2>6. 보상 스케일 (부록 A.2)</h2>
+<p>각 항이 절반(exp = 0.5)이 되는 오차는 ln 2 / β입니다.</p>
+<table>
+<thead>
+<tr>
+<th>항</th>
+<th>β</th>
+<th>절반 오차</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>도구 회전 관절 (L1)</td>
+<td>10 /rad</td>
+<td>0.069 rad (4.0°)</td>
+</tr>
+<tr>
+<td>도구 직선 관절(주사기)</td>
+<td>50 /m</td>
+<td>1.39 cm</td>
+</tr>
+<tr>
+<td>도구 위치</td>
+<td>100 /m</td>
+<td>6.9 mm</td>
+</tr>
+<tr>
+<td>도구 자세</td>
+<td>5 /rad</td>
+<td>0.139 rad (7.9°)</td>
+</tr>
+<tr>
+<td>손 관절 (16 DoF L1 합)</td>
+<td>10 /rad</td>
+<td>합 0.069 rad, 관절당 평균 4.3 mrad</td>
+</tr>
+<tr>
+<td>손바닥 위치(잡기)</td>
+<td>50 /m</td>
+<td>1.39 cm</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>손 관절 항은 사실상 꺼져 있습니다.</strong> L1 합에 β = 10을 쓰면 관절당 평균 4 mrad만 어긋나도 절반이 됩니다. 정규화라고 보기에는 너무 날카로워, 거의 항상 0 근처일 것입니다(해석).</li>
+<li><strong>접촉 개수 항은 상한이 없습니다.</strong> w₂·r_contact는 접촉 쌍 하나당 0.15이고, 9개면 r_tool 최댓값(1.3)과 같습니다. 접촉을 늘리는 쪽으로 강하게 밀어 주는 설계입니다. 얇은 도구에서 손가락 여러 마디를 대는 파지를 선호하게 만들 수 있습니다(해석).</li>
+<li>성공 보너스 +100은 dense 항의 수십~수백 스텝 합과 비슷한 크기입니다. 에피소드 길이가 논문에 없어 정확한 비율은 계산할 수 없습니다.</li>
+<li>PPO 한 번 업데이트에는 4,096 × 8 = 32,768 표본이 들어가고, 4개 minibatch × 5 epoch = 20 gradient step입니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>04. 주장 검증과 구현 가능성</h1>
+<ul>
+<li><strong>대상:</strong> Mana arXiv:2606.13677v1. Mana 자체 코드는 공개되지 않아, 주장은 표·그림·부록 수치로 검증했습니다(§1). 공개된 구성 요소인 Lightning Grasp <code>zhaohengyin/lightning-grasp</code> @ <code>af43818</code>(2026-06-12)는 Mana 서술과 대조했습니다(§2).</li>
+<li><strong>범위:</strong> GPU 실행 없이 CPU 재계산(<code>table_check.py</code>), 물리 toy(<code>physics_toy.py</code>), 코드 읽기만 했습니다.</li>
+</ul>
+<h2>1. 주장별 검증</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장 (출처)</th>
+<th>재계산·확인</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>잡기와 손안 조작 모두 약 70% (Sec. 5.2)</td>
+<td>22칸 평균 0.705, 잡기 0.700, 조작 0.707</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>원격조작은 집게에서 약 30% (Sec. 5.2)</td>
+<td>집게 6칸 평균 0.25, 빨래집게·주사기는 전부 0</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>기준선보다 낫다 (Table 1)</td>
+<td>도구별 합산 Fisher p = 0.019–9×10⁻⁶, 전체 155/220 대 80/220 p = 9×10⁻¹³. 칸 단위(n = 10)로는 22칸 중 3칸만 p &lt; 0.05</td>
+<td>✅ 합산 기준. 칸 단위 차이는 잡음 범위</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>데이터 양·상태 다양성·힘 랜덤화에 성능이 비례 (Fig. 7)</td>
+<td>판독값 2·4·7·8 / 0·3·3·6 / 1·2·4·7 (10회 중), 경향 p = 0.003–0.006. 마지막 두 점은 구분되지 않음(p = 0.37–1.0)</td>
+<td>✅ 경향. 포화 여부는 미확인</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>Fig. 7 최대 설정 = 주 설정</td>
+<td>끝점이 Table 1 칸과 정확히 같음(0.8, 0.6, 0.7)</td>
+<td>✅ (추론)</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>도구 사용 과제 5–7/10 (Table 2)</td>
+<td>단계별 곱(잡기 포함) 기대 15.2/40에 비해 관측 23/40은 p = 0.0095. 잡기 이후만 곱하면 기대 21.8, p = 0.41</td>
+<td>⚠️ 잡기 성공 조건부로 읽어야 정합. 끝단 성공률은 0.30–0.56으로 추정</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>사람 입력은 도구당 1분 미만 (Abstract, Sec. 3.1)</td>
+<td>affordance 클릭만 해당. 카메라 스캔 메쉬, 관절 URDF, 힘 게이지 스프링 식별(A.6)은 따로 필요</td>
+<td>⚠️ 범위가 좁음</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>zero-shot sim-to-real (Abstract)</td>
+<td>손가락과 잡기는 자율. 도구–대상 정렬 손목 이동은 원격조작(Fig. 1 캡션, Sec. 5.4)</td>
+<td>⚠️ 부분적</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>0.7 Nm, 링크 0.06–0.07 m라 10 N 초과 도구 불가 (Sec. 6)</td>
+<td>τ/L = 10.0–11.7 N. 평면 3링크 toy에서 패드 방향 최대 힘은 자세에 따라 5.3–17.5 N(중앙값 9.7 N)</td>
+<td>✅ 어림값으로는 맞음. 실제 한계는 자세 의존</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>암시적 Euler가 결정적 (A.6)</td>
+<td>dt = 1/200 s, 3–7 N·행정 1–2 cm·5–50 g에서 명시적 Euler는 ζ = 0.2라도 8가지 중 6가지 발산. 암시적은 모두 안정</td>
+<td>✅ (toy)</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>힘 랜덤화로 견고성 확보 (A.3, Fig. 7 오른쪽)</td>
+<td>물체 섭동 σ = αmg는 작동력의 수 %. 도구 이득 ×1.5는 7 N 도구를 10.5 N으로 만들어 C9의 한계를 넘음. &quot;100%&quot;의 정의 없음</td>
+<td>⚠️ 정의 누락, 범위 점검 필요</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>실시간 약 10 Hz (Sec. 4.1)</td>
+<td>RTX 4090 2장 기준. 정책은 chunk 없이 행동 하나</td>
+<td>참고</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>보상 설계 (A.2)</td>
+<td>손 관절 L1 β = 10은 관절당 평균 4.3 mrad에서 절반이 됨. 접촉 개수 항은 상한이 없어 접촉 9개면 r_tool 최대와 같음</td>
+<td>참고 (<code>03</code> §6)</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 공개 구성 요소 대조: Lightning Grasp (<code>af43818</code>)</h2>
+<p>Mana는 LG 위에 LG+를 만들었다고 씁니다(Sec. 3.1, 부록 A.1). 공개 LG 저장소(파일 42개, CUDA는 바이너리로만 배포)를 읽고 Mana의 서술과 맞춰 보았습니다.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>내용</th>
+<th>Mana 서술과의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>파이프라인은 다음 순서입니다(<code>demo.py</code>). 접촉 영역에서 접촉점 탐색(0차 최적화, wrench 점수) → 접촉 ID 샘플링 → 거친 IK(<code>batch_ik</code>, 접촉 위치·법선 정합, 재시도 10회, <code>err_thresh</code> 0.02로 필터) → 반복 투영 + IK 미세조정(<code>batch_contact_adjustment</code>, 기본값 4회 × 3스텝, 3스텝마다 재투영, 허용 오차 4 mm) → 자유 손가락 배치 + 충돌 필터.</td>
+<td>Sec. 3.1의 &quot;contact field 질의 → 접촉 영역 → 손끝 위치와 관절 최적화&quot;와 일치합니다.</td>
+</tr>
+<tr>
+<td>D2</td>
+<td><strong>IK에 침투 해소 항이 없습니다.</strong> 충돌은 마지막 단계에서 결과를 버리는 필터로만 씁니다(<code>collision.py</code>, <code>batch_assign_free_finger_and_filter</code>).</td>
+<td>Mana가 지적한 LG의 한계(&quot;kinematic optimization is not collision-aware&quot;, A.1)를 코드로 확인했습니다. 따라서 LG+의 핵심(Algorithm 1의 p → p + d 목표)은 공개 코드에 없습니다.</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>지면·탁자 같은 <strong>환경 장애물 개념이 없습니다.</strong> 물체 자세는 손 기준 표준 공간에서 샘플링하고, 손–물체·손–손 충돌만 검사합니다(<code>object_placement.py</code>).</td>
+<td>Sec. 3.1의 &quot;in the presence of environmental obstacles&quot;와 탁자 위 파지(Fig. 9)는 공개 LG만으로는 재현할 수 없습니다.</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>README가 &quot;hand–object 침투를 줄이는 position iteration을 운동학 미세조정에 넣은 판&quot;을 다음 릴리스로 예고합니다(2026-05-24 작성). 10월 말 기준 main에는 반영되지 않았습니다.</td>
+<td>LG+와 같은 기능으로 보입니다(추정).</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>CUDA 커널(<code>lygra/cpp/</code>)은 README뿐이고, <code>.so</code> 바이너리는 Releases에서 받아야 합니다. 지원 환경은 Ubuntu 22.04/24.04, NVIDIA GPU, CUDA 12, Python 3.8–3.10입니다.</td>
+<td>macOS·Apple GPU에서는 실행할 수 없습니다.</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>LICENSE는 &quot;CC-by-NC License, Copyright (c) Zhao-Heng Yin&quot;입니다(GitHub 자동 판별은 NOASSERTION). 소스 파일 머리글에는 &quot;All rights reserved&quot;가 있습니다.</td>
+<td>비상업 연구 사용만 가능합니다.</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>Allegro 설정(<code>lygra/robot/allegro.py</code>)이 이미 있습니다. 손과 물체 자산은 Releases에서 따로 받습니다.</td>
+<td>Mana의 손(Allegro)과 같아, LG+만 있으면 파지 keyframe 단계를 재현하는 출발점이 됩니다.</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 재현 정보 체크리스트</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>논문에 있음</th>
+<th>없음</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RL 보상·가중치·랜덤화·PPO 설정</td>
+<td>✅ 부록 A.2–A.4</td>
+<td>에피소드 길이, 목표 도달 임계값, ε(접촉 힘 문턱)</td>
+</tr>
+<tr>
+<td>정책 구조·학습 설정</td>
+<td>✅ 부록 A.5</td>
+<td>점군 랜덤화 크기, 도구별/공용 정책 여부</td>
+</tr>
+<tr>
+<td>데이터 규모</td>
+<td>궤적 16k, keyframe 8k (Fig. 7 최대 점)</td>
+<td>도구·전이별 분포, 생성 시간, GPU 시간</td>
+</tr>
+<tr>
+<td>도구 모델</td>
+<td>스캔 메쉬, 스프링–질량–댐퍼, 힘 게이지</td>
+<td>측정 강성·감쇠 값, URDF</td>
+</tr>
+<tr>
+<td>시뮬레이션</td>
+<td>dt 1/200, position iteration 16–32, velocity 4–6, 암시적 액추에이터</td>
+<td>손 시스템 식별 결과</td>
+</tr>
+<tr>
+<td>손끝</td>
+<td>제작 절차(A.7, Fig. 5)</td>
+<td>치수 파일, 실리콘 경도 외 사양</td>
+</tr>
+<tr>
+<td>평가</td>
+<td>10회, 단계별, 두 인스턴스</td>
+<td>단계 시작 자세 분포, Table 2 시행 정의</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 구현 가능성 판단</h2>
+<h3>4.1 공식 코드로 재현</h3>
+<p><strong>불가능합니다.</strong> Mana 코드(데이터 생성기, LG+, RL 환경, 도구 모델, 정책)가 공개되지 않았습니다. 공개된 것은 LG뿐이고, 그것도 지면 장애물과 침투 해소가 없는 판입니다(D2, D3).</p>
+<h3>4.2 공개 구성 요소로 다시 조립</h3>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>공개 여부</th>
+<th>필요한 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>파지 keyframe (LG)</td>
+<td>✅ (바이너리, 비상업)</td>
+<td>Ubuntu + NVIDIA GPU + CUDA 12</td>
+</tr>
+<tr>
+<td>LG+ (탁자 위 얇은 물체)</td>
+<td>❌</td>
+<td>Algorithm 1을 직접 구현. LG CUDA 소스가 없어 Python 쪽에 IK 목표를 추가해야 함</td>
+</tr>
+<tr>
+<td>MP (GPU RRT-Connect)</td>
+<td>일반 기법</td>
+<td>cuRobo 같은 공개 플래너로 대체 가능(추정)</td>
+</tr>
+<tr>
+<td>RL 전이 (IsaacLab PPO)</td>
+<td>틀은 공개</td>
+<td>도구별 URDF·스프링 식별, 보상·랜덤화는 부록 A.2–A.3대로</td>
+</tr>
+<tr>
+<td>점군 diffusion 정책</td>
+<td>구조만 공개</td>
+<td>구현은 표준(Perceiver + DDPM head)</td>
+</tr>
+<tr>
+<td>배포 지각 (SAM 3 + Fast-FoundationStereo)</td>
+<td>✅</td>
+<td>NVIDIA GPU(논문은 RTX 4090 2장)</td>
+</tr>
+<tr>
+<td>하드웨어</td>
+<td>—</td>
+<td>xArm7 + Allegro + D435, 실리콘 손끝 성형</td>
+</tr>
+</tbody>
+</table>
+<h3>4.3 이 맥(Apple M4 Pro GPU, CUDA 없음)에서</h3>
+<ul>
+<li><strong>완료한 것:</strong> 표·그림 재계산, 손가락 힘 용량·적분기·랜덤화 toy, LG 코드 읽기(모두 CPU, 설치 없음).</li>
+<li><strong>할 수 있어 보이는 것:</strong>
+<ul>
+<li>Algorithm 1(침투 해소 IK)을 numpy로 평면 toy에 구현해, 얇은 물체 지면 파지에서 효과를 보는 것(설치 없음).</li>
+<li>MuJoCo(CPU, 설치 필요)로 스프링 도구 관절의 적분기 비교를 실제 접촉 솔버에서 확인하는 것.</li>
+</ul>
+</li>
+<li><strong>불가능한 것:</strong> LG 실행(CUDA 바이너리), IsaacLab RL, SAM 3·스테레오 실시간 지각, 실물 실험.</li>
+</ul>
+<h3>4.4 아이디어만 재구현</h3>
+<ul>
+<li><strong>쉬운 부분:</strong> keyframe 그래프 + 구간별 MP/RL 분해, 보상 식, 점군 diffusion 정책은 수백 줄 수준입니다.</li>
+<li><strong>어려운 부분:</strong>
+<ul>
+<li>도구마다 관절 모델과 스프링 힘을 실측해 시뮬레이션에 맞추는 일.</li>
+<li>지면 근처 얇은 물체의 파지 합성(LG+).</li>
+<li>접촉이 강한 소형 물체의 시뮬레이션 안정성(암시적 액추에이터, 작은 dt, 많은 solver 반복).</li>
+<li>실물 손끝 제작.</li>
+</ul>
+</li>
+<li><strong>결론:</strong> 이 연구의 가치는 &quot;데이터 생성 공학&quot;에 있어서, 공개 코드 없이 같은 성능을 내기는 비용이 큽니다. LG+가 포함된 Lightning Grasp 다음 릴리스나 Mana 코드 공개를 기다리는 편이 현실적입니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>02. 선행연구와 계보</h1>
+<p>번호 [n]은 논문의 참고문헌 번호입니다. 별도 표기가 없는 서지는 논문 참고문헌 목록을 옮긴 것이고, 각 논문을 열어 검증하지는 않았습니다. GitHub 정보는 2026-10-29에 <code>gh api</code>로 확인했습니다.</p>
+<h2>1. 계보도</h2>
+<pre><code>[다지 파지 합성]  DexGraspNet [19] · UniDexGrasp++ [21] · Dexonomy [26] · SpringGrasp [17]
+        │
+        └─ Lightning Grasp [50] (같은 1저자, 절차적 파지 합성, contact field) ─┬─ DexterityGen [3]
+                                                                            └─ ★ LG+ (이 논문 부록 A.1, collision-aware IK)
+[sim-to-real 손안 조작 RL]  OpenAI [1], Rubik's Cube [35] · DeXtreme [11] · 촉각 회전 [12] · DexScrew [34]
+[장기 과제 연결]  Sequential Dexterity [13] (정책 사슬)
+[애니메이션식 접근]  Liu, &quot;Dextrous manipulation from a grasping pose&quot;, SIGGRAPH 2009 [14] (교신저자 C. K. Liu)
+[관절형 물체·도구]  DexArt [36] · 두 손 뚜껑 [37] · 문·노트북 등 큰 관절 물체 [36–42]
+                    공중·고정 초기 파지에서의 도구 조작: Xu et al. [47], Atar et al. [48]
+                    강체 도구 zero-shot: SimToolReal [5]
+[원격조작 데이터]  DexPilot [6] · Telekinesis [7] · Open-TeleVision [8] · Bunny-VisionPro [9] · GeoRT [10](같은 1저자)
+        ▼
+★ Mana: 탁자 위 얇은 관절형 도구의 잡기 → 작동 전체를, 절차적 파지 keyframe + MP/RL 사이 채우기 + 점군 diffusion 증류로
+</code></pre>
+<p><strong>차별점 요약:</strong> 가장 가까운 선행연구 [47, 48]은 손 안에 이미 안정적으로 쥔 상태에서 시작합니다. Mana는 탁자 위 두께 1 cm 도구를 <strong>집어 올리는 것부터</strong> 작동까지 다루고, 사람 시연 없이 시뮬레이션 데이터만 씁니다. 방법상으로는 긴 RL 탐색 문제를 &quot;파지 keyframe 그래프 + 짧은 전이&quot;로 쪼갠 것이 핵심입니다. 이는 애니메이션의 keyframe과 inbetweening, 그리고 교신저자 C. K. Liu의 2009년 &quot;파지 자세에서 출발하는 손 조작&quot;[14]의 연장선입니다.</p>
+<h2>2. 구성 요소별 출처</h2>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>출처</th>
+<th>이 논문에서의 쓰임</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>파지 합성</td>
+<td>Lightning Grasp [50] arXiv:2511.07418 (같은 1저자)</td>
+<td>contact field 질의 → 접촉 영역 → 손끝 위치·관절 최적화. 공개 코드 있음(§5)</td>
+</tr>
+<tr>
+<td>얇은 물체 파지</td>
+<td>LG+ (부록 A.1, 새로 제안)</td>
+<td>LM IK에 침투 해소 목표(p → p + d) 추가, CUDA. <strong>공개되지 않음</strong></td>
+</tr>
+<tr>
+<td>시뮬레이터</td>
+<td>IsaacLab [51] arXiv:2511.04831</td>
+<td>파지 안정성 필터, RL, 데이터 생성</td>
+</tr>
+<tr>
+<td>경로 계획</td>
+<td>RRT-Connect [52]</td>
+<td>GPU 병렬 구현으로 pre-grasp 접근</td>
+</tr>
+<tr>
+<td>RL</td>
+<td>PPO (부록 A.4)</td>
+<td>목표 도달형 전이, privileged 상태</td>
+</tr>
+<tr>
+<td>분할</td>
+<td>SAM 3 [53] arXiv:2511.16719</td>
+<td>배포 시 도구 마스크</td>
+</tr>
+<tr>
+<td>깊이</td>
+<td>Fast-FoundationStereo [54] arXiv:2512.11130</td>
+<td>스테레오(D435 좌우 IR) 깊이 → 점군</td>
+</tr>
+<tr>
+<td>점군 인코더</td>
+<td>Perceiver [55]</td>
+<td>질의 토큰 4개</td>
+</tr>
+<tr>
+<td>생성 정책</td>
+<td>DDPM [56]</td>
+<td>transformer diffusion head, 다음 행동 하나</td>
+</tr>
+<tr>
+<td>원격조작 기준선</td>
+<td>GeoRT [10] (같은 1저자)</td>
+<td>위치 기반 리타겟 원격조작</td>
+</tr>
+<tr>
+<td>상태 다양성의 근거</td>
+<td>&quot;Emergent dexterity via diverse resets&quot; [58] (ICLR 2026)</td>
+<td>keyframe을 촘촘히 뽑는 이유로 인용</td>
+</tr>
+<tr>
+<td>원격조작 한계의 근거</td>
+<td>DexJoCo [57] arXiv:2605.16257</td>
+<td>&quot;원격조작은 약 30%&quot; 관찰의 근거로 인용</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DexScrew</strong> (<code>dexscrew/</code>)</td>
+<td>Mana가 [34]로 인용합니다. 둘 다 &quot;힘이 필요한 손안 조작&quot;을 시뮬레이션 RL로 풉니다. DexScrew는 단순화한 시뮬레이션에서 RL 기술을 배우고, 그 기술을 텔레옵 버튼으로 써서 실물 촉각 데이터를 모읍니다. Mana는 시연 없이 시뮬레이션 데이터만으로 증류합니다. 그 대신 도구 스프링 시스템 식별과 큰 힘 랜덤화로 sim-to-real 간극을 메웁니다.</td>
+</tr>
+<tr>
+<td><strong>FlashDexRetarget</strong> (<code>flashdexretarget/</code>)</td>
+<td>둘 다 &quot;기준 자세 사이를 RL로 채우는&quot; 데이터 생성입니다. FlashDexRetarget은 사람 시연의 레퍼런스를 정책 하나로 추적하고, 물체 보조 힘 커리큘럼으로 탐색을 돕습니다. Mana는 사람 시연 대신 절차적 파지 keyframe을 쓰고, 긴 문제를 짧은 전이로 쪼개 탐색 부담을 줄입니다. 쪼갠 대가로 단계 연결은 원격조작에 맡깁니다(01 §4.2).</td>
+</tr>
+<tr>
+<td><strong>GraspSense</strong> (<code>graspsense/</code>)</td>
+<td>둘 다 &quot;접촉 위치에 따라 허용·필요한 힘이 달라진다&quot;를 다룹니다. GraspSense는 힘 지도를 명시적으로 계획하지만 강체 시뮬레이션이라 손상을 검증하지 못했습니다. Mana는 힘을 명시적으로 계획하지 않고, RL과 랜덤화로 마찰원뿔 안 힘 분배를 암묵적으로 배웁니다.</td>
+</tr>
+<tr>
+<td><strong>Reactive Grasp</strong> (<code>reactive_grasp/</code>)</td>
+<td>같은 문제의식(위치 기반 제어·원격조작으로는 힘을 못 맞춘다)에서 출발합니다. Reactive Grasp는 기하 접점 추정 + QP로 손 전체 power grasp의 힘을 실시간 조절합니다. Mana는 정밀 파지에서 학습 정책으로 힘을 냅니다. Mana의 한계(10 Hz, 촉각 없음, 미끄러짐 감지 불가)는 Reactive Grasp식 저수준 힘 조절 층과 결합할 자리로 보입니다(해석).</td>
+</tr>
+<tr>
+<td><strong>DexPolicy</strong> (<code>dexpolicy/</code>)</td>
+<td>둘 다 궤적·레퍼런스가 있는 dexterous RL의 탐색 문제를 다룹니다. DexPolicy는 탐색 잡음 σ의 스케줄로 풀고, Mana는 문제를 keyframe 사이 짧은 전이로 쪼개서 풉니다.</td>
+</tr>
+<tr>
+<td><strong>AlphaNIST</strong> (<code>alphanist/</code>)</td>
+<td>둘 다 &quot;다양한 시작 상태&quot;를 견고성의 핵심으로 봅니다. AlphaNIST는 OmniReset(arXiv:2603.15789, ICLR 2026)의 reset bank와 성공률 기반 시작 상태 샘플링을 씁니다. Mana는 [58] &quot;Emergent dexterity via diverse resets and large-scale RL&quot;(ICLR 2026)을 인용하며 keyframe 밀도를 늘립니다(Fig. 7 가운데). 저자·학회·주제로 보아 [58]은 OmniReset과 같은 논문으로 보입니다(추정, arXiv 번호 미확인).</td>
+</tr>
+<tr>
+<td><strong>Lightning Grasp</strong> (arXiv:2511.07418)</td>
+<td>Mana 데이터 생성의 &quot;동력원&quot;입니다(프로젝트 페이지 표현). Mana 본문에서 확인되는 의존 관계는 두 가지입니다. ① 기능 영역 위 파지를 LG로 생성하고(Sec. 3.1), ② 지면 근처 얇은 물체에서 LG의 운동학 최적화가 충돌을 고려하지 않는 한계를 LG+로 고쳤습니다(부록 A.1). 공개 LG 코드의 IK에는 침투 해소 항이 없고 충돌은 사후 필터로만 쓰입니다(<code>04</code> §2).</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 논문이 다루지 않았지만 관련 있는 연구 (내 판단)</h2>
+<table>
+<thead>
+<tr>
+<th>주제</th>
+<th>관련성</th>
+<th>근거 수준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DexMimicGen / MimicGen 계열</strong> (소수 시연을 대량 시뮬레이션 데이터로 늘리기)</td>
+<td>Mana도 &quot;시뮬레이션에서 대량 궤적 생성 → 정책 증류&quot;입니다. 시연 대신 절차적 keyframe을 쓴다는 점만 다릅니다. 비교 기준선으로 자연스럽습니다.</td>
+<td>내 사전 지식. 서지 확인 필요</td>
+</tr>
+<tr>
+<td><strong>Teacher–student 증류</strong> (privileged RL teacher → 시각 student)</td>
+<td>부록 A.3·A.4가 RL 정책을 &quot;(teacher)&quot;라고 부릅니다. 데이터 생성 RL이 teacher, 점군 diffusion이 student인 구조입니다. DAgger 같은 on-policy 증류 대신 성공 궤적만으로 오프라인 증류한 점이 차이입니다.</td>
+<td>논문 표현에서 확인. 해석</td>
+</tr>
+<tr>
+<td><strong>Hybrid position–force control, impedance control</strong></td>
+<td>논문은 &quot;precise hybrid position-force control&quot;이 필요하다고 쓰지만(Sec. 2), 제어는 관절 PD와 학습 정책입니다. 명시적 힘 제어 층을 두는 대안과 비교하지 않았습니다.</td>
+<td>내 해석</td>
+</tr>
+</tbody>
+</table>
+<p><strong>한계:</strong> 4절의 서지 정보는 내 사전 지식에 근거하므로, 게시 전에 원문을 확인해야 합니다.</p>
+<h2>5. 관련 GitHub 저장소</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>★</th>
+<th>마지막 push</th>
+<th>확인 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(Mana 코드)</td>
+<td>데이터 생성기, LG+, RL 환경, 정책</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td><strong>미공개</strong>. 프로젝트 페이지에 코드 링크가 없고, 1저자 공개 저장소 목록에도 없음</td>
+</tr>
+<tr>
+<td>zhaohengyin/lightning-grasp</td>
+<td>Lightning Grasp 공개 구현(Allegro, LEAP, Shadow, D'Claw 설정)</td>
+<td>같은 저자의 구성 요소 공식</td>
+<td>자체 LICENSE(CC BY-NC 문구, GitHub 표기 NOASSERTION)</td>
+<td>226</td>
+<td>2026-06-12</td>
+<td><code>af43818</code> (shallow clone, <code>repos/</code>)</td>
+</tr>
+<tr>
+<td>facebookresearch/GeoRT</td>
+<td>원격조작 기준선</td>
+<td>기준선 공식(같은 1저자)</td>
+<td>NOASSERTION</td>
+<td>236</td>
+<td>2025-09-02</td>
+<td><code>fb2075e</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>facebookresearch/sam3</td>
+<td>분할</td>
+<td>구성 요소</td>
+<td>NOASSERTION(자체 라이선스)</td>
+<td>12,139</td>
+<td>2026-10-23</td>
+<td><code>f1647e8</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>NVlabs/Fast-FoundationStereo</td>
+<td>스테레오 깊이</td>
+<td>구성 요소</td>
+<td>NOASSERTION(자체 라이선스)</td>
+<td>1,570</td>
+<td>2026-09-11</td>
+<td><code>476f424</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>isaac-sim/IsaacLab</td>
+<td>시뮬레이터</td>
+<td>구성 요소</td>
+<td>NOASSERTION(BSD-3 계열)</td>
+<td>8,511</td>
+<td>2026-10-29</td>
+<td><code>6d37745</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>tylerlum/simtoolreal</td>
+<td>SimToolReal [5] 공식 구현(강체 도구, 같은 교신저자 C. K. Liu)</td>
+<td>관련 연구 공식</td>
+<td>MIT</td>
+<td>424</td>
+<td>2026-09-21</td>
+<td><code>313d5ae</code> (메타데이터만)</td>
+</tr>
+</tbody>
+</table>
+<p>Lightning Grasp 저장소 README의 요점은 다음과 같습니다.</p>
+<ul>
+<li>&quot;Dexterity Gen과 앞으로 나올 연구를 움직이는 엔진&quot;이라고 소개합니다.</li>
+<li>CUDA 커널은 <strong>미리 컴파일된 바이너리만</strong> 배포하고, C++ 소스는 나중에 공개한다고 적었습니다.</li>
+<li>지원 환경은 Ubuntu 22.04/24.04, NVIDIA GPU, CUDA 12입니다.</li>
+<li>&quot;hand–object 침투를 줄이는 position iteration을 운동학 미세조정에 넣은 판&quot;을 2026-05-24에 다음 릴리스로 예고했습니다. 2026-10-29 기준 main에는 반영되지 않았습니다. LG+(부록 A.1)와 같은 기능일 가능성이 있습니다(추정).</li>
+</ul>
+</section></body></html>

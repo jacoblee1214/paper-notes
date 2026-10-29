@@ -1,0 +1,1228 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>EigenDEXplore 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig4"], img[src*="paper_fig9"] { max-width: 48%; }
+img[src*="pca_spectra"] { max-width: 78%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>EigenDEXplore: 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 그림은 라이선스(arXiv 비독점 배포) 때문에 제외했습니다. 원문 https://arxiv.org/abs/2610.07681 · arXiv:2610.07681v2 · Stanford (Gupta, Lum, Wang, Pan, Liu, Bohg, Song) · 코드 hgupt3/eigendexplore @ 5d57180 (MIT) · 분석일 2026-10-29</p>
+
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 사람 손 자세를 로봇으로 리타겟한 PCA 방향을 행동 공간이 아니라 <strong>탐색 잡음</strong>에만 넣는다. Σ = diag(σ_q²) + Eᵀdiag(σ_e²)E인 low-rank + 대각 Gaussian 하나이고, 정책과 배포는 그대로다. 공식 패키지는 torch <code>LowRankMultivariateNormal</code>로 이를 정확히 구현한다.</li>
+<li><strong>수치는 맞는다:</strong> +34%(SimToolReal), +40%(DeXtreme), 실물 33 → 82%(과제별 값으로 재계산), +41%, SPIDER −16%, DexMachina +28%(Fig. 5 판독, 과제 보상만)가 모두 재현된다. 공개 PCA 자산의 k(90%)도 여섯 손 모두 논문과 같다.</li>
+<li><strong>공개 SimToolReal 설정은 탐색 총량이 두 배다:</strong> 논문은 &quot;총 분산을 Joint-Space와 맞추고 반씩&quot;이라고 쓰지만, 공개 preset은 IID σ = 1을 그대로 두고 eigen 잡음을 더해 관절당 초기 분산이 2.0이다(스펙트럼도 λ^¼). 서술과 맞는 것은 DeXtreme뿐이고, SPIDER는 σ_e ∝ λ에 총량도 늘어난다. 헤드라인 SimToolReal·실물 결과는 구조와 크기가 섞였을 수 있다.</li>
+<li><strong>&quot;EgoSuite 사전 분포&quot;는 실제로 ARCTIC·GRAB·EgoSuite 혼합이다:</strong> 공개 기저 manifest의 가중치는 [0.6, 0.2, 0.2]이고, 원 시퀀스는 3,596개다. fitting 파이프라인과 코퍼스가 없어 데이터셋 비교(Fig. 7a)는 재현할 수 없다.</li>
+<li><strong>이득이 나는 조건이 분명하다:</strong> 표본 최적화에서는 Σ가 기울기를 전처리해 사람 방향 보폭이 2.2배가 되지만, PPO에서는 조밀 보상의 기대 기울기가 Σ와 무관하다. 그래서 이득은 희소한 성공의 발견에서 나오고, 커리큘럼·보조 보상이 있으면 +6%로 줄어든다(DexMachina 판독). 자유도가 적은 손에서는 이득이 거의 없다.</li>
+<li><strong>구현 가능성:</strong> 방법 패키지는 바로 쓸 수 있고(MIT, 손 6종 기저 포함), CPU 예제도 있다. 세 벤치마크는 고정 커밋과 패치로 재현 환경이 갖춰져 있지만 모두 NVIDIA GPU가 필요하고, DexMachina 실험과 다른 손의 기저 만들기는 공개되지 않았다.</li>
+</ol>
+
+</section>
+<section class="chapter"><h1>01. 논문 분석: EigenDEXplore (arXiv:2610.07681)</h1>
+<ul>
+<li>제목: <em>EigenDEXplore: Structured Exploration for Dexterous Manipulation with Human Priors</em></li>
+<li>저자: Harsh Gupta*, Tyler Ga Wei Lum*, Changhao Wang, Chuer Pan, C. Karen Liu, Jeannette Bohg, Shuran Song (Stanford University)</li>
+<li>공개: arXiv v1 2026-10-06, <strong>v2 2026-10-13</strong>(분석 기준, 15쪽: 본문 9쪽 + 참고문헌 + 부록 A–B) · 코드 https://github.com/hgupt3/eigendexplore (확인 커밋 <code>5d57180</code>, 2026-10-11 &quot;Initial release&quot;, MIT) · 프로젝트 https://eigendexplore.github.io</li>
+<li>라이선스: arXiv 비독점 배포(nonexclusive-distrib 1.0)라 <strong>CC BY가 아닙니다.</strong> PDF 안에 다른 권리 표기는 없습니다.</li>
+<li>분석 범위: v2 본문·부록 전체, v1 대조, 프로젝트 페이지, 공식 코드(패키지, 벤치마크 어댑터, 공개 PCA 자산, 고정된 외부 벤치마크 설정)</li>
+<li>v1 ↔ v2(문장 단위 diff): 수치·그림·표는 같습니다. 바뀐 것은 실험 조건을 밝히는 문장 네 곳입니다. (1) Sec. 1의 &quot;early SimToolReal training, larger gains in extended runs&quot;가 &quot;at a fixed training budget&quot;로 바뀌었습니다. (2) Sec. 4.1에서 &quot;under each benchmark's protocol&quot;이 빠지고 &quot;We adapt the training pipeline of SimToolReal&quot;과 &quot;원본과 달리 Sharpa 외전 관절의 전체 범위를 쓴다&quot;는 문장이 들어갔습니다. (3) 연장 학습은 &quot;방법마다 실행 하나&quot;라고 명시했습니다. (4) Sec. 4.5의 &quot;original ... hardware protocols&quot;가 &quot;hardware setups&quot;로 바뀌고, &quot;Joint-Space 정책은 공개 SimToolReal 체크포인트가 아니다&quot;라는 문장이 추가되었습니다.</li>
+</ul>
+<hr />
+<h2>1. Abstract (한 줄 요약과 주장)</h2>
+<p><strong>한 줄 요약:</strong> 사람 손 동작을 로봇 관절로 리타겟하고 PCA로 뽑은 &quot;협응 방향(eigenvector)&quot;을, <strong>행동 공간이 아니라 탐색 잡음에만</strong> 넣습니다. 정책은 그대로 관절 목표를 출력하고, 탐색 잡음만 IID 관절 잡음 + 사람 주성분 방향 잡음으로 바꿉니다(Eq. 2). 학습이 끝나면 기저는 버리고 평균 행동만 결정론적으로 실행합니다.</p>
+<p>논문이 내세우는 주장은 다음과 같습니다(Sec. 1).</p>
+<ol>
+<li>사람 동작 사전 분포의 이득은 &quot;협응 동작을 직접 명령하는 것&quot;이 아니라 <strong>상관된 탐색</strong>에서 나옵니다. 행동 공간을 줄이거나(Eigen-Space) 늘리면(Eigen-Residual) 오히려 손해가 생길 수 있습니다.</li>
+<li>같은 방법이 <strong>비구조 RL</strong>(SimToolReal, DeXtreme), <strong>레퍼런스 추적 RL</strong>(DexMachina), <strong>표본 기반 궤적 최적화</strong>(SPIDER), <strong>sim-to-real</strong> 모두에서 이깁니다. 손은 여섯 종입니다.</li>
+<li>헤드라인 수치는 다음과 같습니다.
+<ul>
+<li>SimToolReal 연속 성공 +34%, DeXtreme +40%</li>
+<li>실물 SimToolReal 과제 진행 33% → 82%, 실물 DeXtreme +41%</li>
+<li>DexMachina 추적 정확도 +28%(커리큘럼·보조 보상 없이)</li>
+<li>SPIDER 비용 −16%(여섯 손 평균)</li>
+</ul>
+</li>
+<li>이득은 자유도가 많은 손과 보상 설계가 적은 설정에서 가장 큽니다. 대규모 egocentric 영상(EgoSuite)으로 만든 사전 분포가 소규모 mocap(GRAB, ARCTIC)보다 낫습니다.</li>
+</ol>
+<hr />
+<h2>2. Method</h2>
+<h3>2.1 전체 구조 (Fig. 1–2, Sec. 3)</h3>
+<pre><code>사람 손 자세 (EgoSuite 영상 복원, 양손을 한쪽으로 거울 대칭해 합침)
+        │  ManipTrans식 운동학 리타겟 (손별 정렬·스케일·손가락 대응)
+        ▼
+로봇 관절각 → PCA → 분산 90%까지의 상위 k개 방향 E ∈ R^{k×d} (관절 반범위로 정규화한 좌표)
+        │                                       Sharpa k=9/22, XHand 6/12, Allegro 10/16, Inspire 3/6
+        ▼
+탐색 분포  q⋆ ~ N(μ_q, Σ),   Σ = diag(σ_q²) + Eᵀ diag(σ_e²) E          (Eq. 2)
+   RL(PPO):   μ_q = π_θ(o),  σ_q·σ_e 학습, E 고정, log-prob·entropy·KL은 이 분포로 계산 (Sec. 3.3)
+   궤적 최적화(SPIDER): 후보 섭동만 바꾸고, 하위 10% 가중 평균으로 갱신, σ 고정 (Eq. 3, Sec. 3.4)
+배포: μ_q만 실행, E와 탐색 파라미터는 버림
+</code></pre>
+<h3>2.2 네 가지 행동·잡음 설계 (Eq. 1)</h3>
+<table>
+<thead>
+<tr>
+<th>이름</th>
+<th>표본 관절 목표 q⋆</th>
+<th>행동 차원</th>
+<th>논문이 보는 문제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Joint-Space</td>
+<td>a_q + σ_q⊙η_q</td>
+<td>d</td>
+<td>관절을 따로 흔들어 부자연스러운 자세</td>
+</tr>
+<tr>
+<td>Eigen-Space</td>
+<td>Eᵀ(a_e + σ_e⊙η_e)</td>
+<td>k</td>
+<td>부분공간 밖을 표현할 수 없음</td>
+</tr>
+<tr>
+<td>Eigen-Residual</td>
+<td>a_q + σ_q⊙η_q + Eᵀ(a_e + σ_e⊙η_e)</td>
+<td>d + k</td>
+<td>표현은 되지만 행동 좌표가 중복됨</td>
+</tr>
+<tr>
+<td><strong>EigenDEXplore</strong></td>
+<td>a_q + σ_q⊙η_q + Eᵀ(σ_e⊙η_e)</td>
+<td>d</td>
+<td>행동은 그대로, 잡음만 구조화</td>
+</tr>
+</tbody>
+</table>
+<p>초기화 규칙(Sec. 3.2)은 σ_e,i ∝ √λ_i입니다. 그리고 EigenDEXplore는 &quot;관절 전체로 합한 초기 잡음 분산이 Joint-Space와 같고, 두 성분이 반씩 나누도록&quot; σ_q와 σ_e를 다시 조정한다고 적습니다. 이 규칙이 공개 설정에서 벤치마크마다 다르게 구현되어 있다는 점이 이 분석의 핵심 발견 중 하나입니다(<code>04</code> D1–D3).</p>
+<h3>2.3 사람 사전 분포 (Sec. 3.1, 4.4)</h3>
+<ul>
+<li>데이터: EgoSuite-Open100K(Lightwheel 2026, 영상 10만 시간, 1.5만 과제)</li>
+<li>비교 대상: GRAB(시퀀스 1,334개, 강체 51개), ARCTIC(시퀀스 339개, 관절 물체 11개)</li>
+<li>리타겟: ManipTrans[Li 2025]의 운동학 절차를 손별로 고쳐 씁니다.</li>
+<li>보존 분산 ρ = 0.9로 k를 정합니다. 이 값은 SPIDER sweep(Fig. 7b)으로 고른 것입니다.</li>
+</ul>
+<hr />
+<h2>3. Experiments</h2>
+<h3>3.1 행동 공간과 탐색 (Sec. 4.1, Fig. 3–4, 부록 A)</h3>
+<table>
+<thead>
+<tr>
+<th>벤치마크</th>
+<th>설정</th>
+<th>Joint-Space</th>
+<th>Eigen-Space</th>
+<th>Eigen-Residual</th>
+<th><strong>EigenDEXplore</strong></th>
+<th>출처</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SimToolReal (Sharpa 손-팔, 도구 재배치)</td>
+<td>9B frame, 허용 오차 6 cm·50° 고정, seed 5</td>
+<td>7.9</td>
+<td>개선</td>
+<td>개선</td>
+<td><strong>10.6</strong> (+34%)</td>
+<td>Fig. 3a</td>
+</tr>
+<tr>
+<td>SimToolReal 연장</td>
+<td>60B frame, 1 cm·8°로 조이는 커리큘럼, <strong>방법마다 실행 1개</strong></td>
+<td>4.9</td>
+<td>이점 사라짐</td>
+<td>12.0</td>
+<td><strong>14.1</strong></td>
+<td>Fig. 3b</td>
+</tr>
+<tr>
+<td>DeXtreme (Allegro 큐브 재배향, ADR)</td>
+<td>2B frame, seed 5</td>
+<td>8.8</td>
+<td>부진</td>
+<td>EigenDEXplore 조금 아래</td>
+<td><strong>12.3</strong> (+40%)</td>
+<td>Fig. 4</td>
+</tr>
+<tr>
+<td>부록 A (Δ 행동)</td>
+<td>Joint-Δ, Eigen-Residual-Δ</td>
+<td>SimToolReal에서 비슷, DeXtreme에서 크게 뒤짐</td>
+<td></td>
+<td></td>
+<td></td>
+<td>Fig. 10</td>
+</tr>
+</tbody>
+</table>
+<p>수치는 연속 성공(도달한 목표 자세 수)입니다. Eigen-Space와 Eigen-Residual의 9B 값은 그림에만 있습니다.</p>
+<h3>3.2 DexMachina: 레퍼런스 추적 양손 RL (Sec. 4.2, Fig. 5)</h3>
+<p>ARCTIC 상자·노트를 Allegro(16), XHand(12), Schunk(9), Inspire(6)로 추적합니다(seed 5, 약 2B frame, ADD-AUC). Fig. 5를 300 dpi로 판독했습니다(<code>03</code> §4, 본문 값 4개와 오차 0.004 이하).</p>
+<table>
+<thead>
+<tr>
+<th>설정</th>
+<th>Joint-Space 평균</th>
+<th>EigenDEXplore 평균</th>
+<th>향상</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>커리큘럼 + 보조 보상</td>
+<td>0.76</td>
+<td>0.81</td>
+<td>+6% (Schunk 상자 0.59 → 0.84만 큼)</td>
+</tr>
+<tr>
+<td>과제 보상만</td>
+<td>0.50</td>
+<td>0.65</td>
+<td><strong>+29%</strong> (Allegro 상자 0.46 → 0.80)</td>
+</tr>
+</tbody>
+</table>
+<p>본문의 &quot;28%&quot;는 과제 보상만 쓴 설정의 평균 비율(+28.6%)과 맞습니다. Inspire는 상자 +6.5%, 노트 −6.5%로 사실상 변화가 없습니다.</p>
+<p><img src="figures/dexmachina_gain.png" alt="DexMachina 판독" /></p>
+<h3>3.3 SPIDER: 표본 기반 리타겟 (Sec. 4.3, Fig. 6)</h3>
+<p>OakInk2 과제 10개, 손 여섯 종, 같은 초기 자세에서 cold start, commit당 16번 갱신, seed 10개로 비교합니다.</p>
+<table>
+<thead>
+<tr>
+<th>손 (DoF)</th>
+<th>Sharpa (22)</th>
+<th>Wuji (20)</th>
+<th>Allegro (16)</th>
+<th>XHand (12)</th>
+<th>Schunk (9)</th>
+<th>Inspire (6)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Δ 비용</td>
+<td>−25.4%</td>
+<td>−31.2%</td>
+<td>−21.5%</td>
+<td>−14.3%</td>
+<td>−3.5%</td>
+<td>−0.4%</td>
+</tr>
+</tbody>
+</table>
+<p>평균은 −16.05%입니다. DoF와의 Spearman 순위 상관은 0.94입니다(<code>04</code> C6). 저자들은 &quot;SPIDER는 잡음 크기를 학습하지 않으므로 이득은 표본 분포에서만 나온다&quot;고 해석합니다.</p>
+<h3>3.4 데이터셋과 탐색 설계 (Sec. 4.4, Fig. 7, 부록 B)</h3>
+<ul>
+<li><strong>데이터셋 비교(SimToolReal, 9B):</strong> EgoSuite 10.6, ARCTIC 9.8, GRAB 9.4, Joint 7.9입니다. 그림의 95% 구간은 EgoSuite와 ARCTIC이 겹칩니다(seed 5).</li>
+<li><strong>보존 분산 sweep(SPIDER, Sharpa):</strong>
+<ul>
+<li>Eigen 잡음만 쓰면 ρ = 0.5에서 0.126으로, Joint-Space 0.089보다 나쁩니다.</li>
+<li>IID와 합치면 ρ = 0.9에서 최소 0.066입니다(Joint 대비 −25.8%).</li>
+</ul>
+</li>
+<li><strong>무작위 방향 대조(App. B.2):</strong> 같은 고유값 스펙트럼을 무작위 정규직교 방향에 실으면 Joint-Space보다 나쁩니다. 저자들은 이를 근거로 &quot;상관 자체가 아니라 사람 방향이 이득의 원천&quot;이라고 결론짓습니다.</li>
+</ul>
+<h3>3.5 실물 (Sec. 4.5, Fig. 8–9)</h3>
+<ul>
+<li><strong>SimToolReal:</strong> Sharpa + KUKA로 망치질, 닦기, 뜨기, 솔질 4과제를 합니다. 과제(물체-궤적 조합)당 10회입니다.
+<ul>
+<li>과제별 평균(Fig. 8)은 망치질 0.42 → 0.71, 닦기 0.34 → 0.92, 뜨기 0.20 → 0.76, 솔질 0.36 → 0.90입니다. 네 과제 평균이 33% → 82%로 본문과 맞습니다(<code>04</code> C8). 정책은 방법마다 하나이고, 표준편차는 없습니다.</li>
+<li>정성 차이도 있습니다. 기준선은 가운데 손가락 패드와 검지·약지 등 사이에 도구를 끼우고, EigenDEXplore는 엄지·검지·중지 손끝으로 잡습니다.</li>
+</ul>
+</li>
+<li><strong>DeXtreme:</strong> 방법마다 40회입니다. 평균 연속 성공 8.45 → 11.90(+40.8%), 최장 32 → 41입니다.</li>
+</ul>
+<hr />
+<h2>4. Limitations</h2>
+<h3>4.1 저자가 밝힌 한계 (Sec. 5)</h3>
+<ul>
+<li>선형 기저가 고정되어 있어서, 데이터에 없는 협응이나 비선형 synergy는 IID 잡음으로 찾아야 합니다.</li>
+<li>사전 분포가 운동학 리타겟에 의존하므로, 사람 손과 형태가 크게 다른 손에서는 효과가 약할 수 있습니다.</li>
+<li>자유도가 적은 손에서는 이득이 작습니다.</li>
+<li>잡음이 시간적으로 독립입니다. 시간 상관 잡음(Raffin 2021, Eberhard 2023)을 사람 동작에서 끌어내는 것을 확장 방향으로 듭니다.</li>
+</ul>
+<h3>4.2 분석하면서 추가로 발견한 한계와 의문점</h3>
+<ol>
+<li><strong>공개 SimToolReal 설정은 탐색 분산이 기준선의 두 배입니다</strong>(<code>04</code> D1, <code>03</code> §2).
+<ul>
+<li>공개 preset은 IID σ를 기준선과 같은 1로 두고, eigen 잡음(RMS 1)을 그 위에 더합니다. 그래서 관절당 초기 분산이 2.0이 됩니다(Joint-Space 1.0). 스펙트럼 지수도 0.5라서 σ_e ∝ λ^¼입니다.</li>
+<li>논문 서술(&quot;총 분산을 맞추고 반씩 나눔, σ_e ∝ √λ&quot;)과 맞는 것은 DeXtreme preset뿐입니다.</li>
+<li>논문 실험이 이 preset으로 돌았다면, SimToolReal의 +34%와 실물 33 → 82%는 &quot;구조&quot;와 &quot;두 배 탐색&quot;이 섞인 결과입니다. toy에서는 탐색 크기만으로도 결과의 부호가 바뀌었습니다(<code>03</code> §3).</li>
+</ul>
+</li>
+<li><strong>SPIDER도 스펙트럼과 총량이 서술과 다릅니다</strong>(<code>04</code> D2).
+<ul>
+<li>코드 주석이 &quot;eigenvalue power 1&quot;이라고 밝히듯 σ_e ∝ λ입니다(√λ보다 가파름).</li>
+<li>기존 IID 잡음은 그대로 두고 eigen 잡음을 더하므로 총 분산이 늘어납니다(추정 약 1.35배).</li>
+<li>다만 SPIDER에는 같은 스펙트럼의 무작위 방향 대조군이 있어서, 크기만으로 이득을 설명할 수 없다는 근거는 이 벤치마크에서는 서 있습니다.</li>
+</ul>
+</li>
+<li><strong>공개된 &quot;EgoSuite 기저&quot;는 세 데이터셋의 가중 혼합입니다</strong>(<code>04</code> D4).
+<ul>
+<li>여섯 손 manifest 모두 <code>source_corpora</code>가 ARCTIC, GRAB, EgoSuite이고, <code>dataset_weights</code>가 [0.6, 0.2, 0.2]입니다(목록 순서대로 대응한다면 ARCTIC 0.6).</li>
+<li>원 시퀀스는 3,596개입니다. &quot;10만 시간 영상&quot;이라는 서술과 규모가 다릅니다.</li>
+<li>저장소 규칙상 기저는 하나뿐이고 fitting 파이프라인과 코퍼스가 없어서, Fig. 7a의 데이터셋 비교는 재현할 수 없습니다.</li>
+</ul>
+</li>
+<li><strong>SimToolReal 기준선이 원 설정보다 불리할 수 있습니다.</strong>
+<ul>
+<li>v2에서 추가된 문장대로, 원 SimToolReal은 Sharpa의 외전 관절 범위를 좁혔습니다. 이 논문은 모든 방법에 전체 범위를 씁니다. 범위를 좁히는 것 자체가 손으로 넣은 사전 지식이라, 그것을 뺀 Joint-Space는 원래보다 약할 수 있습니다.</li>
+<li>실물 기준선도 원 공개 체크포인트가 아니라, 이 파이프라인에서 120B의 절반인 60B만 학습한 정책입니다.</li>
+<li>공개 PCA로 계산하면 정규화 좌표에서 eigen 잡음이 가장 큰 관절이 바로 외전 관절입니다(소지 MCP_AA, 엄지 CMC_AA, <code>03</code> §2).</li>
+</ul>
+</li>
+<li><strong>가장 큰 격차는 표본이 가장 적은 곳에서 나옵니다.</strong> 연장 학습(4.9 대 14.1)과 실물 두 실험은 방법마다 정책 하나입니다. 9B·2B 결과도 seed 5개이고, 검정 통계는 없습니다. v1은 서론에서 &quot;연장 실행에서 더 큰 이득&quot;을 내세웠는데, v2는 이 문장을 &quot;같은 학습 예산에서&quot;로 바꿨습니다.</li>
+<li><strong>이득은 보상 설계가 적을 때로 한정됩니다.</strong> DexMachina에서 커리큘럼과 보조 보상이 있으면 평균 향상은 +6%이고, 한 칸(Schunk 상자)을 빼면 거의 0입니다. 정책 기울기에서 이차(조밀) 보상의 기대 기울기는 Σ와 무관하다는 점(<code>03</code> §5)과 맞는 그림입니다. 이득의 본질은 &quot;더 나은 기울기&quot;가 아니라 &quot;희소한 성공의 발견&quot;입니다.</li>
+<li><strong>DexMachina 실험은 공개 코드에 없습니다.</strong> README의 벤치마크는 DeXtreme, SimToolReal, SPIDER 셋뿐입니다(<code>04</code> D6).</li>
+<li><strong>README가 권하는 시간 상관 변형은 논문 밖입니다.</strong> AR(1), ρ = 0.94, 지속 약 16 step인 변형을 &quot;초기 시험에서 기본보다 나을 수 있다&quot;고 권하지만, 논문에 결과가 없습니다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>03. 핵심 식 해석과 CPU 검증</h1>
+<p>스크립트(모두 numpy, 단일 스레드, 각 수 초):</p>
+<ul>
+<li><code>analysis/pca_check.py</code>: 공개 PCA 자산 검산, 설정별 초기 공분산 → <code>pca_check_results.json</code></li>
+<li><code>analysis/exploration_toy.py</code>: 탐색 분포 toy → <code>exploration_toy_results.json</code></li>
+<li><code>analysis/fig_digitize.py</code>: Fig. 5 판독 → <code>fig_digitize_results.json</code></li>
+<li><code>analysis/table_check.py</code>: 본문 수치 재계산 → <code>table_check_results.json</code></li>
+</ul>
+<p>공개 PCA 자산(<code>pca.safetensors</code>)은 safetensors 형식을 numpy로 직접 읽었습니다. 기저 변환은 공식 <code>EigenDExplore.from_pca</code>(반범위로 나누고 RMS를 맞춤)를 줄 단위로 옮겼습니다.</p>
+<h2>1. Eq. 2가 만드는 탐색 예산</h2>
+<p>공분산 Σ = diag(σ_q²) + Eᵀdiag(σ_e²)E에서, 정규화 관절 좌표의 관절당 평균 분산은 다음과 같습니다.</p>
+<pre><code>tr(Σ)/d = mean(σ_q²) + RMS_e²        (RMS_e: eigen 잡음의 관절당 RMS)
+</code></pre>
+<p>논문 서술대로 Joint-Space(σ = 1)와 총량을 맞추고 반씩 나누면 σ_q² = RMS_e² = 0.5입니다. 이때 eigen 분산은 모두 k차원 부분공간 안에 있고, IID 분산은 차원마다 고르게 퍼집니다. 그래서 부분공간 안의 분산 비율은 다음과 같습니다.</p>
+<pre><code>share_in = (0.5·d + 0.5·k) / d = 0.5 + 0.5·k/d        (등방이면 k/d)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>손</th>
+<th>d</th>
+<th>k</th>
+<th>부분공간 비율 (등방 → EigenDEXplore)</th>
+<th>참여비 유효 차원</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sharpa</td>
+<td>22</td>
+<td>9</td>
+<td>41% → <strong>70%</strong></td>
+<td>22 → 11.2</td>
+</tr>
+<tr>
+<td>Wuji</td>
+<td>20</td>
+<td>9</td>
+<td>45% → 73%</td>
+<td>20 → 10.6</td>
+</tr>
+<tr>
+<td>Allegro</td>
+<td>16</td>
+<td>10</td>
+<td>63% → 81%</td>
+<td>16 → 11.4</td>
+</tr>
+<tr>
+<td>XHand</td>
+<td>12</td>
+<td>6</td>
+<td>50% → 75%</td>
+<td>12 → 6.9</td>
+</tr>
+<tr>
+<td>Schunk</td>
+<td>9</td>
+<td>5</td>
+<td>56% → 78%</td>
+<td>9 → 5.2</td>
+</tr>
+<tr>
+<td>Inspire</td>
+<td>6</td>
+<td>3</td>
+<td>50% → 75%</td>
+<td>6 → 3.8</td>
+</tr>
+</tbody>
+</table>
+<p>공개 자산에서 보존 분산 90%에 처음 닿는 k는 여섯 손 모두 논문·catalog와 같습니다. Inspire는 k = 3에서 93.4%입니다(본문 &quot;세 성분이 90%&quot;와 맞음).</p>
+<p><img src="figures/pca_spectra.png" alt="손별 누적 분산" /></p>
+<h2>2. 공개 preset은 이 예산을 지키지 않는다 (P2, P3)</h2>
+<table>
+<thead>
+<tr>
+<th>설정 (Sharpa)</th>
+<th>IID σ</th>
+<th>eigen RMS</th>
+<th>σ_e ∝</th>
+<th>관절당 평균 분산</th>
+<th>부분공간 비율</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Joint-Space (원 설정 sigma_init 0)</td>
+<td>1</td>
+<td>–</td>
+<td>–</td>
+<td>1.0</td>
+<td>41%</td>
+</tr>
+<tr>
+<td>논문 서술 = 공개 DeXtreme preset</td>
+<td>√0.5</td>
+<td>√0.5</td>
+<td>√λ</td>
+<td>1.0</td>
+<td>70%</td>
+</tr>
+<tr>
+<td><strong>공개 SimToolReal preset</strong></td>
+<td>1</td>
+<td>1</td>
+<td>λ^¼ (<code>spectrum_power 0.5</code>)</td>
+<td><strong>2.0</strong></td>
+<td>70%</td>
+</tr>
+<tr>
+<td>공개 SPIDER 설정</td>
+<td>기존 그대로</td>
+<td>0.235 rad</td>
+<td><strong>λ</strong></td>
+<td>기존 대비 약 1.35배(가정)</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>SimToolReal:</strong> 부분공간 집중도는 같지만 탐색 총량이 두 배입니다. 스펙트럼은 평평해서, 마지막 성분 σ_e가 첫 성분의 0.48배입니다(√λ면 0.23배).</li>
+<li><strong>SPIDER:</strong> σ_e ∝ λ라서 마지막/첫 비가 0.053으로 훨씬 가파릅니다. 총량 1.35배는 &quot;손가락 IID 잡음 = joint_noise_scale(0.1) × 스케줄(마지막 knot 4.0)&quot;이라고 가정하고 계산한 값입니다.</li>
+<li><strong>정규화 좌표의 부작용:</strong> 반범위로 나누므로 범위가 작은 관절에 정규화 잡음이 커집니다. Sharpa에서 eigen 잡음 σ가 가장 큰 관절은 소지 MCP_AA(1.01)와 엄지 CMC_AA(0.93)이고, 둘 다 반범위가 0.349 rad인 외전 관절입니다. 가장 작은 관절은 DIP와 IP(0.17)입니다. 원 SimToolReal이 좁혔던 바로 그 외전 범위를 이 논문은 넓혀서 썼습니다(<code>01</code> §4.2).</li>
+</ul>
+<p><img src="figures/noise_budget.png" alt="탐색 예산" /></p>
+<h2>3. 표본 최적화(SPIDER)에서 Σ는 보폭을 바꾼다</h2>
+<h3>3.1 유도</h3>
+<p>ε ~ N(0, Σ)로 평활화한 비용 J(μ) = E[f(μ+ε)]의 기울기는 ∇J = Σ⁻¹ E[f(μ+ε) ε]입니다. 그래서 다음이 성립합니다.</p>
+<pre><code>E[f(μ+ε) ε] = Σ ∇J
+</code></pre>
+<p>ES·CEM·MPPI 계열의 &quot;좋은 섭동의 가중 평균&quot;(Eq. 3)은 기대값으로 −Σ∇J 방향이고, **Σ가 기울기를 전처리(precondition)**합니다. 오차 방향 u로의 상대 보폭은 uᵀΣu / (trΣ/d)입니다. 사람 자세 분포에서 뽑은 방향과 등방 방향에서 이 값을 쟀습니다(P4).</p>
+<table>
+<thead>
+<tr>
+<th>손</th>
+<th>사람 방향 보폭</th>
+<th>등방 방향 보폭</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sharpa</td>
+<td><strong>2.21배</strong></td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>Wuji</td>
+<td>2.23배</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>Allegro</td>
+<td>1.58배</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>XHand</td>
+<td>1.79배</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>Schunk</td>
+<td>1.90배</td>
+<td>1.01</td>
+</tr>
+<tr>
+<td>Inspire</td>
+<td>1.61배</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<p>trace를 맞췄으므로 등방 방향은 평균적으로 손해가 없습니다. 다만 부분공간에 직교하는 최악 방향은 0.5배입니다.</p>
+<h3>3.2 toy (T1): 예산이 적은 SPIDER식 최적화</h3>
+<p>Sharpa 사람 공분산, 차원 22, 표본 N = 32, 하위 10% 가중 평균, 300회 쌍 비교, 수치는 IID 대비 최종 비용의 중앙값입니다.</p>
+<table>
+<thead>
+<tr>
+<th>분포</th>
+<th>(a) 기준 잡음 적당: 사람 목표 / 부분공간 밖 30% / 등방</th>
+<th>(b) 기준 잡음 작음: 같은 순서</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EigenDEXplore (총량 맞춤)</td>
+<td><strong>0.88</strong> / 1.01 / 1.29</td>
+<td><strong>0.67</strong> / 0.99 / 1.38</td>
+</tr>
+<tr>
+<td>EigenDEXplore (분산 2배)</td>
+<td>1.32 / 1.44 / 1.64</td>
+<td><strong>0.36</strong> / 0.63 / 0.87</td>
+</tr>
+<tr>
+<td>무작위 상관 (같은 스펙트럼)</td>
+<td>1.23 / 1.21 / 1.28</td>
+<td>1.37 / 1.39 / 1.38</td>
+</tr>
+<tr>
+<td>Eigen만</td>
+<td>0.94 / 1.79 / 2.56</td>
+<td>0.95 / 2.00 / 2.92</td>
+</tr>
+<tr>
+<td>가파른 스펙트럼 (σ_e ∝ λ)</td>
+<td>0.97 / 1.07 / 1.34</td>
+<td>1.00 / 1.21 / 1.56</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/toy_cost.png" alt="toy 비용 비" /></p>
+<p>해석:</p>
+<ul>
+<li><strong>방향이 맞을 때만 이깁니다.</strong> 사람 분포 목표에서는 이기고(쌍 승률 64%, 86%), 등방 목표에서는 집니다. 무작위 방향은 사람 목표에서도 IID보다 나쁩니다. 논문 App. B.2와 같은 결론입니다.</li>
+<li><strong>총량 2배는 영역에 따라 부호가 뒤집힙니다.</strong> 기준 잡음이 작은 영역에서는 구조보다 &quot;두 배 탐색&quot;의 효과가 더 큽니다(0.36 대 0.67, 쌍 승률 99.7%). 적당한 영역에서는 오히려 손해입니다(1.32). 따라서 탐색 총량이 다른 두 설정을 비교하면, 구조의 효과를 따로 읽을 수 없습니다. 공개 SimToolReal preset의 결과를 해석할 때 가장 중요한 점입니다.</li>
+<li><strong>Eigen만은 부분공간 밖 목표에서 실패합니다</strong>(1.8–2.9배). 논문의 Eigen-Space 결과(DeXtreme 부진, 연장 학습에서 이점 소실)와 같은 방향입니다.</li>
+</ul>
+<h2>4. DexMachina Fig. 5 판독</h2>
+<p>축 눈금 5개로 픽셀을 값으로 바꾸었습니다. 본문 값과 비교한 판독 오차는 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>칸</th>
+<th>본문</th>
+<th>판독</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allegro 상자, 과제 보상만</td>
+<td>0.46 / 0.80</td>
+<td>0.460 / 0.797</td>
+</tr>
+<tr>
+<td>Schunk 상자, 커리큘럼</td>
+<td>0.59 / 0.84</td>
+<td>0.586 / 0.839</td>
+</tr>
+</tbody>
+</table>
+<p>8칸 평균은 커리큘럼 0.761 → 0.806(+5.9%), 과제 보상만 0.504 → 0.648(+28.6%)입니다. &quot;28%&quot;는 과제 보상만 쓴 설정의 평균 비율입니다. 과제 보상만 쓴 설정의 칸별 향상은 Allegro 상자 +73%, 노트 +40%, Inspire 노트 −6.5%입니다.</p>
+<h2>5. 정책 기울기(PPO)에서는 Σ가 기대 기울기를 바꾸지 않는다</h2>
+<p>REINFORCE의 기대값은 E[R ∇_μ log π] = E[R Σ⁻¹(a−μ)] = ∇_μ E[R]입니다. 이차 보상 R = −‖a − q*‖²이면 E[R] = −‖μ − q*‖² − trΣ이므로, 기대 기울기 −2(μ − q*)는 <strong>Σ와 무관</strong>합니다. 3절의 ES와 달리 전처리가 없습니다.</p>
+<p>toy(T3, 배치 64, 200회)에서도 확인됩니다.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>평균 기울기 cos (참값 대비)</th>
+<th>배치 추정 cos 중앙값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IID, 사람 목표</td>
+<td>0.987</td>
+<td>0.417</td>
+</tr>
+<tr>
+<td>EigenDEXplore, 사람 목표</td>
+<td>0.975</td>
+<td><strong>0.297</strong></td>
+</tr>
+<tr>
+<td>IID, 등방 목표</td>
+<td>0.985</td>
+<td>0.438</td>
+</tr>
+<tr>
+<td>EigenDEXplore, 등방 목표</td>
+<td>0.969</td>
+<td>0.334</td>
+</tr>
+</tbody>
+</table>
+<p>조밀한 이차 보상에서 구조화 잡음은 기울기를 개선하지 않습니다. 오히려 Σ⁻¹이 부분공간 밖(분산 0.5)을 2배로 키워 추정 잡음을 늘립니다.</p>
+<p><strong>그러면 PPO에서 이득은 어디서 오는가: 희소한 성공의 발견(T2).</strong> 목표 방향 u로 IID σ의 a배 이상 나아갈 확률 P(⟨ε, u⟩ ≥ a)는 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>a = 2</th>
+<th>a = 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IID</td>
+<td>0.0228</td>
+<td>0.00135</td>
+</tr>
+<tr>
+<td>EigenDEXplore, 사람 방향</td>
+<td>0.0855</td>
+<td><strong>0.0235</strong> (17배)</td>
+</tr>
+<tr>
+<td>EigenDEXplore 2배, 사람 방향</td>
+<td>0.147</td>
+<td>0.0597 (44배)</td>
+</tr>
+<tr>
+<td>무작위 상관, 사람 방향</td>
+<td>0.0265</td>
+<td>0.00255</td>
+</tr>
+<tr>
+<td>EigenDEXplore, 등방 방향</td>
+<td>0.0239</td>
+<td>0.00216</td>
+</tr>
+<tr>
+<td>EigenDEXplore 2배, 등방 방향</td>
+<td>0.0775</td>
+<td>0.0178 (13배)</td>
+</tr>
+</tbody>
+</table>
+<p>몬테카를로로 확인한 값(a = 3, 사람 방향)은 0.0232로 해석값 0.0235와 맞습니다.</p>
+<p>정리하면 다음과 같습니다.</p>
+<ul>
+<li>조밀 보상에서는 기대 기울기가 같으므로 이득이 작습니다.</li>
+<li>희소 보상에서는 꼬리 확률이 크게 늘어 이득이 큽니다.</li>
+<li>이 구조는 논문의 관찰과 맞습니다. 커리큘럼·보조 보상이 있으면 비슷하고, 과제 보상만 있으면 크게 이깁니다.</li>
+<li>꼬리 확률은 구조보다 <strong>총량</strong>에 훨씬 민감합니다. 등방 방향에서도 2배 분산은 13배입니다. 그래서 2절의 SimToolReal preset 차이가 이 메커니즘에서는 특히 큰 교란입니다.</li>
+</ul>
+<h2>6. SPIDER 이득은 무엇과 함께 커지나</h2>
+<p>Δ비용(Fig. 6)과의 Spearman 순위 상관은 다음과 같습니다(손 6개).</p>
+<table>
+<thead>
+<tr>
+<th>설명 변수</th>
+<th>ρ</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DoF</td>
+<td>0.94</td>
+<td>0.005</td>
+</tr>
+<tr>
+<td>d − k (부분공간 밖 차원)</td>
+<td>0.93</td>
+<td>0.008</td>
+</tr>
+<tr>
+<td>k (90%)</td>
+<td>0.81</td>
+<td>0.05</td>
+</tr>
+<tr>
+<td>사람 방향 보폭 이득 (§3.1)</td>
+<td>0.60</td>
+<td>0.21</td>
+</tr>
+</tbody>
+</table>
+<p>보폭 이득만으로는 Inspire(1.61배인데 −0.4%)와 Schunk(1.90배인데 −3.5%)를 설명하지 못합니다. 작은 손에서는 IID만으로도 표본 16 × 1,024개가 공간을 충분히 덮어서, 전처리의 여지가 없는 것으로 보입니다(가설). 이득이 &quot;탐색 공간이 클 때&quot; 나온다는 저자 해석과 맞지만, 표본 수 대비 차원으로 설명하는 것이 더 정확합니다.</p>
+</section>
+<section class="chapter"><h1>04. 코드 검증: 논문 ↔ 구현 대조, 수치 재계산, 구현 가능성</h1>
+<ul>
+<li><strong>대상:</strong> <code>hgupt3/eigendexplore</code> @ <code>5d57180</code> (2026-10-11 &quot;Initial release&quot;, 커밋 1개, MIT). v1(10-06)과 v2(10-13) 사이에 공개되었습니다.</li>
+<li><strong>함께 확인한 것:</strong> 벤치마크가 고정해 쓰는 외부 설정을 <code>gh api</code>로 읽었습니다.
+<ul>
+<li>IsaacGymEnvs <code>aeed298</code>의 DeXtreme PPO 설정</li>
+<li><code>hgupt3/simtoolreal</code> <code>fddff74</code>의 SimToolReal PPO 설정</li>
+</ul>
+</li>
+<li><strong>범위:</strong> GPU 실행 없이 코드 읽기, 공개 PCA 자산 계산, CPU 재계산과 toy만 했습니다. 학습 결과·체크포인트·로그는 저장소에 없습니다.</li>
+</ul>
+<h2>1. 모듈 매핑</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>구현 위치</th>
+<th>일치 여부</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eq. 2 Σ = diag(σ_q²) + Eᵀdiag(σ_e²)E</td>
+<td><code>packages/eigendexplore/src/eigendexplore/distribution.py</code>: <code>LowRankMultivariateNormal(mean, Bᵀ·σ_e, σ_q²)</code></td>
+<td>✅ 정확히 같음. log-prob·entropy·KL(<code>policy_kl</code>)도 이 분포로 계산</td>
+</tr>
+<tr>
+<td>σ_q, σ_e 학습, E 고정 (Sec. 3.3)</td>
+<td><code>log_scale</code> 파라미터(eigen), 호스트 logstd(IID), <code>basis</code>는 buffer</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>관절 반범위 정규화 좌표</td>
+<td><code>from_pca(..., coordinate_scale=half_range)</code>: 기저를 반범위로 나눔</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>σ_e,i ∝ √λ_i 초기화</td>
+<td><code>spectrum_power</code> 인자(component_std의 거듭제곱)</td>
+<td>⚠️ 벤치마크마다 다름(D1, D2)</td>
+</tr>
+<tr>
+<td>총 분산을 Joint-Space와 맞추고 반씩</td>
+<td><code>eigen_rms</code>, <code>iid_sigma</code> 인자</td>
+<td>⚠️ DeXtreme과 README 기본값만 일치(D1)</td>
+</tr>
+<tr>
+<td>90% 보존 분산 k</td>
+<td><code>assets/catalog.yaml</code>(k: Sharpa 9, Wuji 9, Allegro 10, XHand 6, Schunk 5, Inspire 3), <code>spider/rank.py</code></td>
+<td>✅ 공개 자산으로 다시 계산해도 같음(<code>03</code> §1)</td>
+</tr>
+<tr>
+<td>양손 거울 합치기</td>
+<td>manifest <code>construction: mirrored_pair</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>rl_games PPO 통합</td>
+<td><code>eigendexplore/rl_games.py</code>, <code>third_party/patches/*-rl-games.patch</code> (eigen σ를 버퍼에 저장해 KL 계산)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>SPIDER: 후보 섭동만 교체, 하위 10% 가중 평균, σ 고정 (Eq. 3)</td>
+<td><code>benchmarks/spider/proposal.py</code>(SPIDER 기본 IID 표본에 eigen 섭동 더함), <code>sampling.py</code></td>
+<td>✅ 구조 일치. 스케일은 D2</td>
+</tr>
+<tr>
+<td>무작위 방향 대조 (App. B.2)</td>
+<td><code>sampling.random_orthonormal_rows</code>(고정 seed 20260820), <code>--set basis=random</code></td>
+<td>✅ SPIDER에만 있음(D8)</td>
+</tr>
+<tr>
+<td>네 가지 행동 공간 + Δ 변형 (Eq. 1, 4)</td>
+<td><code>action_spaces/runtime.py</code>, <code>settings.py</code></td>
+<td>⚠️ 세부가 다름(D7)</td>
+</tr>
+<tr>
+<td>벤치마크 3종 + 손 6종</td>
+<td>README: DeXtreme(Allegro), SimToolReal(Sharpa), SPIDER(여섯 손)</td>
+<td>⚠️ DexMachina 없음(D6)</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 불일치와 논문에 적히지 않은 구현 요소</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>내용</th>
+<th>영향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td><strong>SimToolReal preset의 탐색 총량이 두 배입니다.</strong> <code>presets/simtoolreal.yaml</code>은 <code>iid_sigma: 1.0, eigen_rms: 1.0, spectrum_power: 0.5</code>이고, 호스트 초기 σ는 1(<code>sigma_init val 0</code>)입니다. 그래서 IID 부분은 Joint-Space와 같고, 그 위에 eigen 잡음이 더해져 관절당 초기 분산이 2.0이 됩니다(Joint-Space 1.0). 스펙트럼도 σ_e ∝ λ^¼로 평평합니다. 반면 <code>presets/dextreme.yaml</code>(√0.5, √0.5, 1)과 README 기본값은 논문 서술(총량 맞춤, 반씩, √λ)과 같습니다. 팔 7채널은 IID σ 1이고 eigen 잡음이 없습니다.</td>
+<td>논문 실험이 이 preset으로 돌았다면 SimToolReal의 +34%, 연장 학습, 실물 33 → 82%는 &quot;구조&quot;와 &quot;두 배 탐색&quot;이 섞인 결과입니다. toy에서 총량 차이는 결과의 부호까지 바꿨습니다(<code>03</code> §3.2, §5). 논문은 이 차이를 언급하지 않습니다.</td>
+</tr>
+<tr>
+<td>D2</td>
+<td><strong>SPIDER의 스펙트럼은 σ_e ∝ λ입니다.</strong> <code>sampling._powered_component_scale</code>의 주석이 &quot;Spider's recorded convention uses eigenvalue power 1 (not std power 1)&quot;이라고 씁니다. eigen RMS는 손별 &quot;ARCTIC posture PCA의 full-rank joint RMS&quot;(Sharpa 0.235 rad, <code>configs/hands.yaml</code>)에 맞춥니다. 기존 IID는 <code>iid_scale 1.0</code>으로 그대로 두므로 총 분산이 늘어납니다(가정을 두고 약 1.35배, <code>03</code> §2). cold start 자세도 ARCTIC PCA 평균이고, 두 방법이 같이 씁니다.</td>
+<td>서술(√λ, 총량 맞춤)과 다릅니다. 다만 SPIDER에는 같은 스펙트럼의 무작위 방향 대조군이 있어서, &quot;크기만으로는 이득이 안 난다&quot;는 근거가 이 벤치마크에서는 성립합니다.</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>벤치마크마다 스펙트럼 지수가 다릅니다. DeXtreme √λ(마지막/첫 σ 비 0.23), SimToolReal λ^¼(0.48), SPIDER λ(0.053). 같은 &quot;EigenDEXplore&quot;라는 이름 아래 세 가지 분포가 쓰였습니다.</td>
+<td>데이터셋 비교(Fig. 7a, SimToolReal)와 ρ sweep(Fig. 7b, SPIDER)이 서로 다른 분포 위에서 이루어졌습니다. &quot;90% 설정&quot;이 다른 벤치마크로 그대로 옮겨진다는 근거가 약합니다.</td>
+</tr>
+<tr>
+<td>D4</td>
+<td><strong>공개된 &quot;EgoSuite 기저&quot;는 세 데이터셋의 가중 혼합입니다.</strong> 여섯 손 manifest 모두 <code>source_corpora</code>가 [ARCTIC, GRAB, EgoSuite], <code>dataset_weights</code>가 [0.6, 0.2, 0.2]입니다(목록 순서대로 대응한다고 가정). 원 시퀀스는 3,596개이고(fit 3,169개), 6 Hz, 계수 범위는 P1/P99입니다. 저장소 규칙(<code>AGENTS.md</code>)은 &quot;손마다 fitted EgoSuite basis 하나, 원 데이터·학습 코퍼스·producer workflow는 싣지 않음, dataset selector 없음&quot;입니다.</td>
+<td>논문은 &quot;EgoSuite(10만 시간) 사전 분포가 GRAB, ARCTIC보다 낫다&quot;(Fig. 7a)고 하는데, 공개 기저는 ARCTIC 비중이 가장 큰 혼합으로 보입니다. GRAB·ARCTIC 단독 기저가 없어 Fig. 7a, App. B.1은 재현할 수 없습니다. 다른 손에 쓰려면 리타겟과 PCA fitting을 직접 해야 합니다.</td>
+</tr>
+<tr>
+<td>D5</td>
+<td><strong>SimToolReal 공개 프로토콜이 Fig. 3a와 다릅니다.</strong> preset은 <code>success_tolerance: 0.075</code>, <code>curriculum_start_frames: 0</code>이고, 문서도 &quot;native curriculum이 처음부터 켜져 7.5 cm에서 1 cm·8°로 조인다&quot;고 씁니다. 논문 Fig. 3a는 9B frame 동안 6 cm·50°로 고정입니다. 패치에 <code>tolerance_curriculum_start_frames</code> 옵션이 있어서 바꿀 수는 있습니다. 병렬 환경 24,576개, SAPG 6그룹입니다.</td>
+<td>기본 실행으로는 Fig. 3a 수치를 재현할 수 없습니다.</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>DexMachina 실험 코드가 없습니다. README의 벤치마크 표는 DeXtreme, SimToolReal, SPIDER 셋입니다(&quot;the four benchmarks&quot;라고 쓰지만 표에는 셋뿐).</td>
+<td>Fig. 5와 서론의 &quot;+28%&quot;는 재현할 수 없습니다.</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>기준선 행동 공간에 논문에 없는 세부가 있습니다. Eigen-Space는 q⋆ = PCA 평균 + Eᵀc이고, 행동 [−1, 1]을 계수의 P1/P99 범위로 비대칭 사상합니다. Eigen-Residual은 관절 목표에 &quot;0.3 × (복원 자세 − 중심)&quot;을 더합니다. Δ 변형은 초당 3 범위입니다.</td>
+<td>Eq. 1과 다릅니다. Eigen-Space는 부분공간 안에서도 사람 범위 상자로 제한되고, Eigen-Residual의 eigen 기여는 0.3배로 줄어 있습니다. 기준선 결과를 해석할 때 필요합니다.</td>
+</tr>
+<tr>
+<td>D8</td>
+<td>무작위 방향 대조는 고정된 무작위 기저 <strong>하나</strong>이고, SPIDER에만 있습니다.</td>
+<td>&quot;사람 방향이 이득의 원천&quot;이라는 결론의 근거가 무작위 기저 한 개와 SPIDER 한 벤치마크입니다. RL 벤치마크에서는 검증되지 않았습니다.</td>
+</tr>
+<tr>
+<td>D9</td>
+<td>README가 시간 상관 변형(AR(1), <code>correlation=0.94</code>, 지속 약 16 step)을 &quot;기본보다 나을 수 있다&quot;고 권합니다. 논문에는 결과가 없고, 공개 벤치마크는 모두 0(논문 설정)을 씁니다.</td>
+<td>근거 없는 권고입니다. 쓰려면 직접 비교해야 합니다.</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 수치 재계산 (<code>table_check.py</code>, <code>pca_check.py</code>, <code>fig_digitize.py</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장 (출처)</th>
+<th>재계산</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>SimToolReal +34% (Sec. 1, Fig. 3a)</td>
+<td>10.6 / 7.9 = +34.2% (seed 5)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>DeXtreme +40% (Sec. 1)</td>
+<td>12.3 / 8.8 = +39.8% (seed 5)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>연장 학습 14.1 대 12.0 대 4.9 (Fig. 3b)</td>
+<td>Joint 대비 2.88배, Eigen-Residual 대비 +17.5%. 방법마다 실행 1개. v1의 &quot;larger gains in extended runs&quot;는 v2 서론에서 빠짐</td>
+<td>⚠️ 표본 1</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>실물 DeXtreme +41%, 최장 +28% (Sec. 4.5.2)</td>
+<td>8.45 → 11.90 = +40.8%, 32 → 41 = +28.1%. 방법마다 40회, 정책 1개, SD 미보고</td>
+<td>✅ (검정 불가)</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>DexMachina +28% (Sec. 1)</td>
+<td>Fig. 5 판독, 과제 보상만: 평균 0.504 → 0.648 = +28.6%(평균의 비) / +26.2%(비의 평균). 커리큘럼 있음: +5.9%</td>
+<td>✅ 과제 보상만에 한정</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>SPIDER 평균 −16% (Sec. 1, Fig. 6)</td>
+<td>여섯 손 평균 −16.05%. DoF와 Spearman 0.94 (p = 0.005)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>Fig. 7b: ρ = 0.9에서 Joint 대비 −25%</td>
+<td>0.066 / 0.089 = −25.8% (Fig. 6 Sharpa −25.4%와 반올림 범위에서 일치). ρ = 0.5 eigen만은 +41.6%</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>실물 SimToolReal 33% → 82% (Sec. 4.5.1)</td>
+<td>Fig. 8의 과제별 평균(0.42/0.71, 0.34/0.92, 0.20/0.76, 0.36/0.90)의 평균이 0.33 → 0.8225. 물체-궤적 조합당 10회, 정책 1개, SD 미보고</td>
+<td>✅ (검정 불가)</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>k = 9(Sharpa), 6(XHand), 10(Allegro), Inspire 세 성분 90%</td>
+<td>공개 자산에서 같은 k. Inspire k = 3 누적 93.4%</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>&quot;이득은 상관 자체가 아니라 사람 방향에서&quot; (Sec. 4.4, App. B.2)</td>
+<td>SPIDER, 무작위 기저 1개로만 검증. toy에서도 같은 스펙트럼의 무작위 방향은 IID보다 나쁨(<code>03</code> §3.2)</td>
+<td>⚠️ 범위 한정</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>계산 규모</td>
+<td>RL 실험 합계 약 9.4×10¹¹ frame(그림에 나온 조건만). 연장 실행 1주 = 약 99k frame/s</td>
+<td>참고</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 구현 가능성 판단</h2>
+<h3>4.1 공식 코드를 그대로 쓰는 경우</h3>
+<table>
+<thead>
+<tr>
+<th>대상</th>
+<th>요구 사항</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>방법 패키지 (<code>packages/eigendexplore</code>, 약 430줄)</td>
+<td>Python 3.10+, torch(README는 CPU wheel로 설치)</td>
+<td><strong>바로 사용 가능.</strong> 공개 손 6종은 PCA 자산 포함(MIT). 다른 손은 <code>from_pca</code>에 직접 만든 PCA를 넣으면 됨</td>
+</tr>
+<tr>
+<td>CPU 예제 (<code>examples/ppo.py</code>, <code>sampling.py</code>)</td>
+<td>torch CPU</td>
+<td>가능</td>
+</tr>
+<tr>
+<td>DeXtreme</td>
+<td>Linux, NVIDIA GPU, IsaacGym(Python 3.8), 환경 16,384개, 실행당 2B frame</td>
+<td>GPU 서버 필요</td>
+</tr>
+<tr>
+<td>SimToolReal</td>
+<td>Linux, NVIDIA GPU, Isaac Sim/IsaacLab 2.3.2, CUDA 12.6, 환경 24,576개. 9B frame은 약 25시간(1주 = 60B로 환산한 추정), 60B는 약 1주</td>
+<td>GPU 서버 필요. Fig. 3a를 재현하려면 프로토콜 수정 필요(D5)</td>
+</tr>
+<tr>
+<td>SPIDER</td>
+<td>Linux, NVIDIA GPU, MuJoCo Warp 3.7, CUDA. 과제 데이터(OakInk2 10과제, 32 MB)는 저장소에 포함</td>
+<td>GPU 서버 필요. 데이터 준비 부담은 작음</td>
+</tr>
+<tr>
+<td>DexMachina, 데이터셋 비교, 다른 손의 기저</td>
+<td>코드·코퍼스·fitting 파이프라인 없음</td>
+<td>불가(D4, D6)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>판단:</strong> 방법 자체는 바로 쓸 수 있는 형태로 공개되어 있습니다. 세 벤치마크도 고정 커밋과 패치로 재현 환경을 만들 수 있게 되어 있어서, 재현 정보는 좋은 편입니다. 다만 모두 NVIDIA GPU가 필요하고, SimToolReal은 기본 설정이 논문 서술과 달라서(D1, D5) 같은 수치를 기대하려면 설정부터 맞춰야 합니다.</p>
+<h3>4.2 이 맥(Apple M4 Pro, CUDA 없음)에서</h3>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>가능 여부</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>공개 PCA 자산 검산, 초기 공분산·toy·그림 판독</td>
+<td>✅ 완료</td>
+<td>numpy, 설치 없음, 각 수 초</td>
+</tr>
+<tr>
+<td>방법 패키지와 CPU 예제</td>
+<td>가능할 것으로 보임(torch 설치 승인 필요)</td>
+<td>README가 CPU wheel 설치를 안내함. MPS에서 <code>LowRankMultivariateNormal</code>(Cholesky 등)이 도는지는 확인하지 않음</td>
+</tr>
+<tr>
+<td>내 MuJoCo 과제에 EigenDEXplore 잡음을 붙인 표본 최적화</td>
+<td>가능할 것으로 보임(mujoco, torch 설치 승인 필요)</td>
+<td>공개 Allegro·XHand 등 기저를 그대로 쓸 수 있음. SPIDER 벤치마크 자체는 MuJoCo Warp·CUDA 그래프를 써서 불가</td>
+</tr>
+<tr>
+<td>DeXtreme, SimToolReal 학습</td>
+<td>❌</td>
+<td>IsaacGym·Isaac Sim은 CUDA 전용</td>
+</tr>
+</tbody>
+</table>
+<h3>4.3 아이디어만 다시 구현하는 경우</h3>
+<ul>
+<li><strong>난이도: 매우 쉬움.</strong> 핵심은 low-rank + 대각 Gaussian 하나입니다. torch에 <code>LowRankMultivariateNormal</code>이 있어서 수십 줄이면 되고, PPO의 log-prob·entropy·KL만 이 분포로 바꾸면 됩니다.</li>
+<li><strong>진짜 비용은 사전 분포입니다.</strong> 내 손에 맞는 기저를 만들려면 사람 손 데이터(GRAB·ARCTIC 라이선스, EgoSuite 이용 조건 확인 필요)와 손별 리타겟이 필요합니다. 공개 코드에는 이 파이프라인이 없습니다(D4). 대안으로 텔레옵 로그의 관절 PCA를 쓸 수 있습니다.</li>
+<li><strong>비교할 때 반드시 맞출 것:</strong> 탐색 총량(trΣ/d), 스펙트럼 지수, 그리고 같은 스펙트럼의 무작위 방향 대조군입니다. 공개 preset끼리도 이 셋이 달라서(D1–D3), 맞추지 않으면 결과를 구조의 효과로 읽을 수 없습니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>02. 선행연구와 계보</h1>
+<p>번호 대신 저자-연도로 적었습니다(논문 참고문헌 형식). arXiv ID는 논문 참고문헌에 적힌 값을 옮겼습니다. 이 문서의 각 논문을 따로 열어 검증하지는 않았고, GitHub 정보는 2026-10-29에 <code>gh api</code>로 확인했습니다.</p>
+<h2>1. 계보도</h2>
+<pre><code>[사람 손 synergy]  Santello et al. 1998 (자세 대부분을 소수 협응 패턴이 설명)
+        │
+[eigengrasp 계획]  Ciocarlie et al. 2007, Ciocarlie &amp; Allen 2009
+        │
+[협응을 행동 공간에]  DFG (Agarwal 2023) · DextrAH-G (Lum 2024) · VAE synergy (Dimou 2021, 2024)
+                     PCHands (Puang 2025) · Cross-embodiment grasping (Yuan 2025) · SAR (Berg 2024) · LAMP (Yang 2026)
+        │  한계: 저차원 행동은 미세 조정이 안 됨 (Lum 2024, Lee 2026 ADEPT, Gupta 2026a Grasp to Act)
+        ▼
+[잔차로 표현 복구]  LUCID (Gupta 2026b, arXiv:2606.11628): eigen 계수 + 관절 잔차 = Eigen-Residual-Δ
+        │  질문: 이득이 &quot;협응 명령&quot;인가 &quot;상관된 탐색&quot;인가?
+        ▼
+  ★ EigenDEXplore: 행동은 관절 그대로, 사람 방향은 탐색 잡음에만
+
+[구조화된 탐색 (사람 사전 없음)]  gSDE (Raffin 2021) · pink noise (Eberhard 2023) · colored noise PPO (Hollenstein 2024)
+                                Lattice (Chiappa 2023, 정책이 만든 actuator 간 상관)
+</code></pre>
+<p><strong>차별점 요약:</strong> 협응 사전 분포를 쓰는 선행연구는 그것을 <strong>행동 표현</strong>에 넣었습니다. 구조화된 탐색 연구는 <strong>사람 사전 없이</strong> 시간 상관이나 정책 유래 상관을 썼습니다. 이 논문은 둘을 갈라서 &quot;사람 사전 분포를 탐색 공분산에만 넣는다&quot;를 독립 변수로 만들었습니다. 비교 대상이 같은 저자 그룹의 선행 방법(DextrAH-G, Grasp to Act, LUCID)이고, 벤치마크도 같은 그룹 것(SimToolReal, DexMachina 공저)이 많습니다.</p>
+<h2>2. 구성 요소별 출처</h2>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>출처</th>
+<th>이 논문에서의 쓰임</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사람 자세 데이터</td>
+<td>EgoSuite-Open100K (Lightwheel 2026), GRAB (Taheri 2020), ARCTIC (Fan 2023)</td>
+<td>PCA 사전 분포. 공개 기저는 세 데이터 가중 혼합(<code>04</code> D4)</td>
+</tr>
+<tr>
+<td>운동학 리타겟</td>
+<td>ManipTrans (Li 2025, CVPR)</td>
+<td>사람 손 → 로봇 관절. 공개 코드에는 리타겟·fitting 파이프라인이 없음</td>
+</tr>
+<tr>
+<td>PPO</td>
+<td>Schulman 2017, rl_games</td>
+<td>log-prob·entropy·KL을 low-rank + diag Gaussian으로 계산</td>
+</tr>
+<tr>
+<td>비구조 RL 벤치마크</td>
+<td>SimToolReal (Kedia 2026, RSS), DeXtreme (Handa 2023, ICRA)</td>
+<td>행동 공간 비교, 실물</td>
+</tr>
+<tr>
+<td>레퍼런스 추적 RL</td>
+<td>DexMachina (Mandi 2026, ICML)</td>
+<td>커리큘럼 유무 비교</td>
+</tr>
+<tr>
+<td>표본 기반 리타겟</td>
+<td>SPIDER (Pan 2025, arXiv:2511.09484)</td>
+<td>후보 섭동만 교체</td>
+</tr>
+<tr>
+<td>리타겟 과제 데이터</td>
+<td>OakInk2 (Zhan 2024)</td>
+<td>SPIDER 과제 10개</td>
+</tr>
+<tr>
+<td>실물 자세 추정</td>
+<td>FoundationPose (Wen 2024), AprilCube (Park &amp; Agrawal 2026)</td>
+<td>도구 waypoint, 큐브 자세</td>
+</tr>
+<tr>
+<td>저차원 분포</td>
+<td><code>torch.distributions.LowRankMultivariateNormal</code></td>
+<td>Eq. 2를 그대로 구현(<code>04</code> §1)</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DexPolicy</strong> (<code>dexpolicy/</code>)</td>
+<td>가장 가까운 주제입니다. 둘 다 dexterous RL의 <strong>탐색 잡음</strong>만 바꾸고 행동 표현은 그대로 둡니다. DexPolicy는 σ의 <strong>크기</strong>를 시간에 따라 줄이고, EigenDEXplore는 σ의 <strong>모양</strong>(공분산 방향)을 바꿉니다. DexPolicy 분석에서는 학습되는 σ가 짧은 예산에서 거의 움직이지 않았습니다(0.202 → 0.185). EigenDEXplore도 σ_q와 σ_e를 학습하지만 초기값에서 크게 벗어나지 않을 수 있습니다. 그렇다면 <strong>초기 분산의 크기</strong>가 결과를 좌우하므로, 공개 SimToolReal preset의 두 배 분산(<code>04</code> D1)은 더 중요한 교란이 됩니다. 두 방법은 함께 쓸 수 있습니다(σ_q·σ_e를 따로 스케줄링).</td>
+</tr>
+<tr>
+<td><strong>DDPG</strong> (<code>ddpg/</code>)</td>
+<td>DDPG의 OU 잡음은 <strong>시간</strong> 상관, EigenDEXplore는 <strong>관절 간</strong> 상관입니다. README가 권하는 AR(1) 변형(ρ = 0.94, 지속 약 16 step)은 두 축을 합친 것입니다. DDPG 분석에서 OU의 dt가 빠져 상관 시간이 구현마다 100배 달랐던 것처럼, 이 변형도 지속 길이를 제어 주기·행동 청크와 함께 적어야 비교할 수 있습니다.</td>
+</tr>
+<tr>
+<td><strong>Do as I Do</strong> (<code>do_as_i_do/</code>)</td>
+<td>Do as I Do의 리타겟은 SPIDER 기반 annealed sampling MPC입니다. EigenDEXplore의 SPIDER 실험은 바로 그 표본 분포만 바꿔 cold start 비용을 25% 줄였으므로, Do as I Do 파이프라인에 그대로 꽂을 수 있는 후보입니다. 다만 Do as I Do의 이득 대부분은 warmup에서 나왔습니다(+41%p). 둘을 함께 비교한 실험은 없습니다.</td>
+</tr>
+<tr>
+<td><strong>FlashDexRetarget</strong> (<code>flashdexretarget/</code>)</td>
+<td>DexMachina식 물체 보조 커리큘럼을 쓰는 대규모 off-policy 리타겟입니다. EigenDEXplore의 DexMachina 결과(커리큘럼과 보조 보상이 있으면 이득이 +6%로 줄어듦)를 보면, FlashDexRetarget처럼 보조 장치가 많은 파이프라인에서는 구조화 탐색의 여지가 작을 것으로 예상됩니다. FlashSAC는 tanh-Gaussian 대각 정책이라, Eq. 2를 쓰려면 tanh 이전의 low-rank 공분산과 엔트로피 목표를 다시 정해야 합니다.</td>
+</tr>
+<tr>
+<td><strong>AlphaNIST</strong> (<code>alphanist/</code>)</td>
+<td>이진 보상과 성공률 기반 시작 상태 샘플링으로 탐색 문제를 푼 연구입니다. &quot;보상 설계가 적을수록 이득이 크다&quot;는 EigenDEXplore의 결론과 같은 방향의 문제의식입니다. 다만 AlphaNIST는 평행 그리퍼라 사람 손 사전 분포를 쓸 수 없습니다.</td>
+</tr>
+<tr>
+<td><strong>DexScrew</strong> (<code>dexscrew/</code>)</td>
+<td>IsaacGym PPO로 손가락 회전 기술을 배웁니다. 기술 하나를 배우는 설정이라, 이 논문의 DeXtreme 실험(재배향, +40%)과 가장 비슷한 조건입니다.</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 논문이 다루지 않았지만 관련 있는 연구 (내 판단)</h2>
+<table>
+<thead>
+<tr>
+<th>주제</th>
+<th>관련성</th>
+<th>근거 수준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CMA-ES·natural ES</strong></td>
+<td>표본 분포의 공분산을 온라인으로 적응시키는 고전 방법입니다. EigenDEXplore는 공분산을 사람 데이터로 <strong>미리 고정</strong>한 셈이고, 저자들이 한계로 든 &quot;학습 중 기저 적응&quot;이 바로 이 방향입니다. SPIDER 같은 표본 최적화에서는 CMA식 공분산 갱신과 비교해야 공정합니다.</td>
+<td>사전 지식, 서지 확인 필요</td>
+</tr>
+<tr>
+<td><strong>MPPI 공분산 학습 / 학습된 proposal</strong></td>
+<td>표본 MPC에서 proposal 분포를 학습하는 연구가 있습니다. 사람 사전 분포 대 과제에서 학습한 proposal 비교가 빠져 있습니다.</td>
+<td>사전 지식</td>
+</tr>
+<tr>
+<td><strong>SAC류 엔트로피 목표</strong></td>
+<td>대각 Gaussian의 엔트로피 목표(−d)를 low-rank 공분산에 그대로 쓰면 의미가 달라집니다. off-policy로 옮길 때 다시 정해야 할 부분입니다.</td>
+<td>내 해석</td>
+</tr>
+<tr>
+<td><strong>Action chunking 정책의 초기 잡음</strong></td>
+<td>flow·diffusion 정책은 행동 청크를 Gaussian 잡음에서 생성합니다. 이 초기 잡음 공분산을 사람 협응 공분산으로 바꾸는 것은 같은 아이디어의 생성 모델 버전입니다.</td>
+<td>내 해석</td>
+</tr>
+</tbody>
+</table>
+<h2>5. 관련 GitHub (2026-10-29 확인)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>★</th>
+<th>마지막 push</th>
+<th>확인한 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hgupt3/eigendexplore</td>
+<td>방법 패키지, 6개 손 PCA 자산, 벤치마크 어댑터·패치</td>
+<td>공식</td>
+<td>MIT</td>
+<td>53</td>
+<td>2026-10-11</td>
+<td><code>5d57180</code> (clone, 커밋 1개)</td>
+</tr>
+<tr>
+<td>eigendexplore/eigendexplore.github.io</td>
+<td>프로젝트 페이지</td>
+<td>공식</td>
+<td>표기 없음</td>
+<td>0</td>
+<td>2026-10-13</td>
+<td><code>5ee962b</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>hgupt3/simtoolreal</td>
+<td>SimToolReal 포크(Isaac Lab 포팅), 벤치마크가 고정해 씀</td>
+<td>공식 벤치마크 원본의 포크</td>
+<td>MIT</td>
+<td>0</td>
+<td>2026-09-21</td>
+<td><code>fddff74</code> (고정 커밋, 학습 설정 파일만 읽음)</td>
+</tr>
+<tr>
+<td>tylerlum/simtoolreal</td>
+<td>SimToolReal 공식 구현(위 포크의 원본)</td>
+<td>벤치마크 공식</td>
+<td>MIT</td>
+<td>424</td>
+<td>2026-09-21</td>
+<td>메타데이터만</td>
+</tr>
+<tr>
+<td>isaac-sim/IsaacGymEnvs</td>
+<td>DeXtreme 호스트</td>
+<td>벤치마크 공식</td>
+<td>기타(표준 아님)</td>
+<td>2,950</td>
+<td>2024-10-26</td>
+<td><code>aeed298</code> (고정 커밋, PPO 설정 파일만 읽음)</td>
+</tr>
+<tr>
+<td>facebookresearch/spider</td>
+<td>SPIDER 호스트</td>
+<td>벤치마크 공식</td>
+<td>기타(표준 아님)</td>
+<td>590</td>
+<td>2026-09-22</td>
+<td><code>7123845</code> (고정 커밋, 메타데이터만)</td>
+</tr>
+<tr>
+<td>Denys88/rl_games</td>
+<td>두 RL 벤치마크의 PPO</td>
+<td>의존성</td>
+<td>MIT</td>
+<td>1,407</td>
+<td>2026-10-29</td>
+<td>DeXtreme는 1.6.5, SimToolReal은 vendored <code>da1c321</code>(메타데이터만)</td>
+</tr>
+<tr>
+<td>mandizhao/dexmachina</td>
+<td>DexMachina (공개 벤치마크에는 없음)</td>
+<td>관련 공식</td>
+<td>MIT</td>
+<td>277</td>
+<td>2026-03-23</td>
+<td>메타데이터만</td>
+</tr>
+<tr>
+<td>DLR-RM/stable-baselines3</td>
+<td>gSDE (Raffin 2021) 구현</td>
+<td>관련</td>
+<td>MIT</td>
+<td>13,943</td>
+<td>2026-10-26</td>
+<td>메타데이터만</td>
+</tr>
+<tr>
+<td>martius-lab/pink-noise-rl</td>
+<td>pink noise 탐색 (Eberhard 2023)</td>
+<td>관련 공식</td>
+<td>MIT</td>
+<td>50</td>
+<td>2025-11-20</td>
+<td>메타데이터만</td>
+</tr>
+<tr>
+<td>amathislab/lattice</td>
+<td>Lattice 잠재 탐색 (Chiappa 2023)</td>
+<td>관련 공식</td>
+<td>MIT</td>
+<td>49</td>
+<td>2024-02-23</td>
+<td>메타데이터만</td>
+</tr>
+</tbody>
+</table>
+<p><strong>한계:</strong> 4절의 서지와 CMA-ES 계열 비교는 내 사전 지식에 근거합니다. 블로그나 git에 올리기 전에 원문을 직접 확인해야 합니다.</p>
+</section></body></html>

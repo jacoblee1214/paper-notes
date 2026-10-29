@@ -1,0 +1,325 @@
+{
+  "C1_means": {
+    "teleop": {
+      "all_22_cells": 0.095,
+      "grasp_8_cells": 0.113,
+      "manipulation_14_cells": 0.086
+    },
+    "openloop": {
+      "all_22_cells": 0.364,
+      "grasp_8_cells": 0.312,
+      "manipulation_14_cells": 0.393
+    },
+    "ours": {
+      "all_22_cells": 0.705,
+      "grasp_8_cells": 0.7,
+      "manipulation_14_cells": 0.707
+    }
+  },
+  "C1_teleop_tongs_mean": 0.25,
+  "C1_claim": "approximately 70% success rates for both grasping and in-hand manipulation; teleop around 30% on tongs (Sec. 5.2)",
+  "C2_tests": {
+    "tongs": {
+      "ours_pooled": [
+        47,
+        60,
+        [
+          0.664,
+          0.869
+        ]
+      ],
+      "openloop_pooled": [
+        34,
+        60,
+        [
+          0.441,
+          0.684
+        ]
+      ],
+      "teleop_pooled": [
+        15,
+        60,
+        [
+          0.158,
+          0.372
+        ]
+      ],
+      "p_ours_vs_openloop": 0.0188,
+      "p_ours_vs_teleop": 6.66e-09,
+      "cells_sig_vs_openloop_p<0.05": "0/6",
+      "cell_p_vs_openloop_min": 0.35
+    },
+    "pliers": {
+      "ours_pooled": [
+        41,
+        60,
+        [
+          0.558,
+          0.787
+        ]
+      ],
+      "openloop_pooled": [
+        21,
+        60,
+        [
+          0.242,
+          0.476
+        ]
+      ],
+      "teleop_pooled": [
+        6,
+        60,
+        [
+          0.047,
+          0.201
+        ]
+      ],
+      "p_ours_vs_openloop": 0.000468,
+      "p_ours_vs_teleop": 3.72e-11,
+      "cells_sig_vs_openloop_p<0.05": "0/6",
+      "cell_p_vs_openloop_min": 0.179
+    },
+    "clothespins": {
+      "ours_pooled": [
+        43,
+        60,
+        [
+          0.592,
+          0.815
+        ]
+      ],
+      "openloop_pooled": [
+        18,
+        60,
+        [
+          0.199,
+          0.425
+        ]
+      ],
+      "teleop_pooled": [
+        0,
+        60,
+        [
+          0.0,
+          0.06
+        ]
+      ],
+      "p_ours_vs_openloop": 8.95e-06,
+      "p_ours_vs_teleop": 1.02e-18,
+      "cells_sig_vs_openloop_p<0.05": "1/6",
+      "cell_p_vs_openloop_min": 0.023
+    },
+    "syringes": {
+      "ours_pooled": [
+        24,
+        40,
+        [
+          0.446,
+          0.737
+        ]
+      ],
+      "openloop_pooled": [
+        7,
+        40,
+        [
+          0.087,
+          0.319
+        ]
+      ],
+      "teleop_pooled": [
+        0,
+        40,
+        [
+          0.0,
+          0.088
+        ]
+      ],
+      "p_ours_vs_openloop": 0.000188,
+      "p_ours_vs_teleop": 7.75e-10,
+      "cells_sig_vs_openloop_p<0.05": "2/4",
+      "cell_p_vs_openloop_min": 0.02
+    }
+  },
+  "C2_all_cells_ours_vs_openloop": {
+    "ours": [
+      155,
+      220
+    ],
+    "openloop": [
+      80,
+      220
+    ],
+    "p": 9.2e-13
+  },
+  "C2_cell_ci_example": {
+    "0.8 (8/10)": [
+      0.49,
+      0.943
+    ],
+    "0.5 (5/10)": [
+      0.237,
+      0.763
+    ],
+    "0.7 (7/10)": [
+      0.397,
+      0.892
+    ]
+  },
+  "C3_phase_chain_vs_table2": {
+    "tongs": {
+      "phase_sr": [
+        0.8,
+        0.8,
+        0.75
+      ],
+      "product_all_phases": 0.48,
+      "product_after_grasp": 0.6,
+      "table2": "7/10",
+      "P(X>=k | all phases indep.)": 0.141,
+      "P(X>=k | after grasp)": 0.382,
+      "end_to_end_if_table2_is_conditional": 0.56
+    },
+    "pliers": {
+      "phase_sr": [
+        0.65,
+        0.7,
+        0.7
+      ],
+      "product_all_phases": 0.318,
+      "product_after_grasp": 0.49,
+      "table2": "5/10",
+      "P(X>=k | all phases indep.)": 0.184,
+      "P(X>=k | after grasp)": 0.598,
+      "end_to_end_if_table2_is_conditional": 0.325
+    },
+    "clothespins": {
+      "phase_sr": [
+        0.75,
+        0.75,
+        0.65
+      ],
+      "product_all_phases": 0.366,
+      "product_after_grasp": 0.487,
+      "table2": "6/10",
+      "P(X>=k | all phases indep.)": 0.115,
+      "P(X>=k | after grasp)": 0.347,
+      "end_to_end_if_table2_is_conditional": 0.45
+    },
+    "syringes": {
+      "phase_sr": [
+        0.6,
+        0.6
+      ],
+      "product_all_phases": 0.36,
+      "product_after_grasp": 0.6,
+      "table2": "5/10",
+      "P(X>=k | all phases indep.)": 0.271,
+      "P(X>=k | after grasp)": 0.834,
+      "end_to_end_if_table2_is_conditional": 0.3
+    },
+    "sum": {
+      "table2_total": "23/40",
+      "expected_all_phases": 15.2,
+      "expected_after_grasp": 21.8,
+      "P(total>=obs | all phases)": 0.0095,
+      "P(total>=obs | after grasp)": 0.4097
+    }
+  },
+  "C4_fig7": {
+    "tongs_grasp_vs_trajectories": {
+      "counts_of_10": [
+        2,
+        4,
+        7,
+        8
+      ],
+      "trend_p_cochran_armitage": 0.0029,
+      "endpoint_fisher_p": 0.023,
+      "adjacent_last_two_fisher_p": 1.0,
+      "max_point_ci": [
+        0.49,
+        0.943
+      ]
+    },
+    "syringe_use_vs_keyframes": {
+      "counts_of_10": [
+        0,
+        3,
+        3,
+        6
+      ],
+      "trend_p_cochran_armitage": 0.0055,
+      "endpoint_fisher_p": 0.0108,
+      "adjacent_last_two_fisher_p": 0.37,
+      "max_point_ci": [
+        0.313,
+        0.832
+      ]
+    },
+    "pliers_mani_vs_force_rand": {
+      "counts_of_10": [
+        1,
+        2,
+        4,
+        7
+      ],
+      "trend_p_cochran_armitage": 0.003,
+      "endpoint_fisher_p": 0.0198,
+      "adjacent_last_two_fisher_p": 0.37,
+      "max_point_ci": [
+        0.397,
+        0.892
+      ]
+    },
+    "matches_table1": {
+      "tongs_grasp_16k=0.8": [
+        0.8,
+        0.8
+      ],
+      "syringe_use_8k=0.6": [
+        0.6,
+        0.6
+      ],
+      "pliers_open/close_100%=0.7": [
+        [
+          0.7,
+          0.7
+        ],
+        [
+          0.7,
+          0.7
+        ]
+      ]
+    }
+  },
+  "C5_reward_scales": {
+    "half_reward_error": {
+      "b11_revolute_per_rad": 0.0693,
+      "b11_prismatic_per_m": 0.0139,
+      "b12_tool_pos_per_m": 0.0069,
+      "b13_tool_rot_per_rad": 0.1386,
+      "b21_hand_joint_L1_per_rad": 0.0693,
+      "b22_palm_pos_per_m": 0.0139,
+      "b23_palm_rot_per_rad": 0.1386
+    },
+    "half_reward_hand_L1_per_joint_avg_16dof_rad": 0.00433,
+    "max_dense_terms_inhand": {
+      "r_tool": 1.3,
+      "w1*r_hand": 0.1,
+      "w2*r_contact_per_contact": 0.15
+    },
+    "max_dense_terms_grasp": {
+      "w1*r_hand(with wrist)": 1.1
+    },
+    "contacts_to_match_r_tool_max": 8.7,
+    "success_bonus": 100,
+    "fail_penalty": -50,
+    "global_scale": 0.1,
+    "note": "r_contact는 접촉 쌍 개수라 상한이 없다. 접촉 9개면 r_tool 최대(1.3)와 같다"
+  },
+  "C6_ppo_batch": {
+    "samples_per_update": 32768,
+    "minibatches_per_epoch": 4,
+    "gradient_steps_per_update": 20
+  }
+}

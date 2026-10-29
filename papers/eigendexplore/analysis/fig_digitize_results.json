@@ -1,0 +1,169 @@
+{
+  "values": {
+    "box/curriculum": {
+      "Allegro": {
+        "joint": 0.868,
+        "ours": 0.875
+      },
+      "XHand": {
+        "joint": 0.826,
+        "ours": 0.855
+      },
+      "Schunk": {
+        "joint": 0.586,
+        "ours": 0.839
+      },
+      "Inspire": {
+        "joint": 0.871,
+        "ours": 0.842
+      },
+      "_tick_px": [
+        517.5,
+        594.5,
+        671.5,
+        748.5,
+        826.5
+      ]
+    },
+    "box/task_only": {
+      "Allegro": {
+        "joint": 0.46,
+        "ours": 0.797
+      },
+      "XHand": {
+        "joint": 0.586,
+        "ours": 0.732
+      },
+      "Schunk": {
+        "joint": 0.57,
+        "ours": 0.693
+      },
+      "Inspire": {
+        "joint": 0.353,
+        "ours": 0.376
+      },
+      "_tick_px": [
+        517.5,
+        594.5,
+        671.5,
+        748.5,
+        826.5
+      ]
+    },
+    "notebook/curriculum": {
+      "Allegro": {
+        "joint": 0.823,
+        "ours": 0.823
+      },
+      "XHand": {
+        "joint": 0.855,
+        "ours": 0.865
+      },
+      "Schunk": {
+        "joint": 0.645,
+        "ours": 0.687
+      },
+      "Inspire": {
+        "joint": 0.616,
+        "ours": 0.664
+      },
+      "_tick_px": [
+        1042.5,
+        1119.5,
+        1196.5,
+        1273.5,
+        1351.5
+      ]
+    },
+    "notebook/task_only": {
+      "Allegro": {
+        "joint": 0.603,
+        "ours": 0.846
+      },
+      "XHand": {
+        "joint": 0.629,
+        "ours": 0.79
+      },
+      "Schunk": {
+        "joint": 0.57,
+        "ours": 0.706
+      },
+      "Inspire": {
+        "joint": 0.263,
+        "ours": 0.246
+      },
+      "_tick_px": [
+        1042.5,
+        1119.5,
+        1196.5,
+        1273.5,
+        1351.5
+      ]
+    }
+  },
+  "text_check": {
+    "box/task_only/Allegro": {
+      "text": [
+        0.46,
+        0.8
+      ],
+      "read": [
+        0.46,
+        0.797
+      ],
+      "abs_err": [
+        0.0,
+        0.003
+      ]
+    },
+    "box/curriculum/Schunk": {
+      "text": [
+        0.59,
+        0.84
+      ],
+      "read": [
+        0.586,
+        0.839
+      ],
+      "abs_err": [
+        0.004,
+        0.001
+      ]
+    }
+  },
+  "summary": {
+    "curriculum": {
+      "mean_joint": 0.761,
+      "mean_ours": 0.806,
+      "ratio_of_means_pct": 5.9,
+      "mean_of_ratios_pct": 7.5,
+      "per_cell_gain_pct": [
+        0.8,
+        3.5,
+        43.2,
+        -3.3,
+        0.0,
+        1.2,
+        6.5,
+        7.8
+      ]
+    },
+    "task_only": {
+      "mean_joint": 0.504,
+      "mean_ours": 0.648,
+      "ratio_of_means_pct": 28.6,
+      "mean_of_ratios_pct": 26.2,
+      "per_cell_gain_pct": [
+        73.3,
+        24.9,
+        21.6,
+        6.5,
+        40.3,
+        25.6,
+        23.9,
+        -6.5
+      ]
+    }
+  },
+  "note": "8개 막대(손 4 × 과제 2)마다 판독. 오차막대는 판독하지 않음"
+}

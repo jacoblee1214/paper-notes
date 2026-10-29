@@ -1,0 +1,190 @@
+{
+  "params": {
+    "tau_max_Nm": 0.7,
+    "links_m": [
+      0.054,
+      0.0384,
+      0.04
+    ],
+    "longest_link_paper_m": [
+      0.06,
+      0.07
+    ],
+    "force_needed_N": [
+      3.0,
+      7.0
+    ],
+    "dt_s": 0.005,
+    "stroke_m": [
+      0.01,
+      0.02
+    ],
+    "eff_mass_kg": [
+      0.005,
+      0.05
+    ],
+    "tool_mass_kg": [
+      0.03,
+      0.1,
+      0.2
+    ]
+  },
+  "P1_force_capacity": {
+    "single_joint_bound_tau_over_L_N": [
+      11.7,
+      10.0
+    ],
+    "pad_normal_force_N": {
+      "median": 9.69,
+      "p90": 15.22,
+      "max": 17.5
+    },
+    "share_postures_pad_force_ge": {
+      "3N": 1.0,
+      "5N": 1.0,
+      "7N": 0.772,
+      "10N": 0.47
+    },
+    "share_postures_any_dir_ge_7N": 1.0,
+    "extended_finger_pad_force_N": 5.29,
+    "note": "한 관절의 레버암 τ/L는 상한일 뿐이다. 근위 관절은 손끝까지 거리가 최대 0.13 m라 펴진 자세에서는 패드 방향 힘이 5 N 남짓이다"
+  },
+  "P2_integrator": {
+    "cases": {
+      "F3N_s1cm_m5g": {
+        "k_N_per_m": 300,
+        "omega_rad_s": 244.9,
+        "omega_dt": 1.225,
+        "rho_explicit_zeta0.0": 1.5811,
+        "rho_explicit_zeta0.2": 1.4178,
+        "rho_semi_implicit_zeta0.0": 1.0,
+        "rho_semi_implicit_zeta0.2": 0.7142,
+        "rho_implicit_zeta0.0": 0.6325,
+        "rho_implicit_zeta0.2": 0.5783,
+        "explicit_stable_needs_dt_below_ms_zeta0.2": 1.63
+      },
+      "F3N_s1cm_m50g": {
+        "k_N_per_m": 300,
+        "omega_rad_s": 77.5,
+        "omega_dt": 0.387,
+        "rho_explicit_zeta0.0": 1.0724,
+        "rho_explicit_zeta0.2": 0.9975,
+        "rho_semi_implicit_zeta0.0": 1.0,
+        "rho_semi_implicit_zeta0.2": 0.9193,
+        "rho_implicit_zeta0.0": 0.9325,
+        "rho_implicit_zeta0.2": 0.8754,
+        "explicit_stable_needs_dt_below_ms_zeta0.2": 5.16
+      },
+      "F3N_s2cm_m5g": {
+        "k_N_per_m": 150,
+        "omega_rad_s": 173.2,
+        "omega_dt": 0.866,
+        "rho_explicit_zeta0.0": 1.3229,
+        "rho_explicit_zeta0.2": 1.1847,
+        "rho_semi_implicit_zeta0.0": 1.0,
+        "rho_semi_implicit_zeta0.2": 0.8084,
+        "rho_implicit_zeta0.0": 0.7559,
+        "rho_implicit_zeta0.2": 0.6907,
+        "explicit_stable_needs_dt_below_ms_zeta0.2": 2.31
+      },
+      "F3N_s2cm_m50g": {
+        "k_N_per_m": 150,
+        "omega_rad_s": 54.8,
+        "omega_dt": 0.274,
+        "rho_explicit_zeta0.0": 1.0368,
+        "rho_explicit_zeta0.2": 0.9826,
+        "rho_semi_implicit_zeta0.0": 1.0,
+        "rho_semi_implicit_zeta0.2": 0.9436,
+        "rho_implicit_zeta0.0": 0.9645,
+        "rho_implicit_zeta0.2": 0.9188,
+        "explicit_stable_needs_dt_below_ms_zeta0.2": 7.3
+      },
+      "F7N_s1cm_m5g": {
+        "k_N_per_m": 700,
+        "omega_rad_s": 374.2,
+        "omega_dt": 1.871,
+        "rho_explicit_zeta0.0": 2.1213,
+        "rho_explicit_zeta0.2": 1.9369,
+        "rho_semi_implicit_zeta0.0": 1.0,
+        "rho_semi_implicit_zeta0.2": 2.1302,
+        "rho_implicit_zeta0.0": 0.4714,
+        "rho_implicit_zeta0.2": 0.4365,
+        "explicit_stable_needs_dt_below_ms_zeta0.2": 1.07
+      },
+      "F7N_s1cm_m50g": {
+        "k_N_per_m": 700,
+        "omega_rad_s": 118.3,
+        "omega_dt": 0.592,
+        "rho_explicit_zeta0.0": 1.1619,
+        "rho_explicit_zeta0.2": 1.0552,
+        "rho_semi_implicit_zeta0.0": 1.0,
+        "rho_semi_implicit_zeta0.2": 0.8737,
+        "rho_implicit_zeta0.0": 0.8607,
+        "rho_implicit_zeta0.2": 0.7939,
+        "explicit_stable_needs_dt_below_ms_zeta0.2": 3.38
+      },
+      "F7N_s2cm_m5g": {
+        "k_N_per_m": 350,
+        "omega_rad_s": 264.6,
+        "omega_dt": 1.323,
+        "rho_explicit_zeta0.0": 1.6583,
+        "rho_explicit_zeta0.2": 1.4903,
+        "rho_semi_implicit_zeta0.0": 1.0,
+        "rho_semi_implicit_zeta0.2": 0.6862,
+        "rho_implicit_zeta0.0": 0.603,
+        "rho_implicit_zeta0.2": 0.5522,
+        "explicit_stable_needs_dt_below_ms_zeta0.2": 1.51
+      },
+      "F7N_s2cm_m50g": {
+        "k_N_per_m": 350,
+        "omega_rad_s": 83.7,
+        "omega_dt": 0.418,
+        "rho_explicit_zeta0.0": 1.084,
+        "rho_explicit_zeta0.2": 1.0038,
+        "rho_semi_implicit_zeta0.0": 1.0,
+        "rho_semi_implicit_zeta0.2": 0.9125,
+        "rho_implicit_zeta0.0": 0.9225,
+        "rho_implicit_zeta0.2": 0.8631,
+        "explicit_stable_needs_dt_below_ms_zeta0.2": 4.78
+      }
+    },
+    "one_second_amplitude_factor_F7N_s1cm_m10g_zeta0.2": {
+      "explicit": 4.49e+34,
+      "semi_implicit": 1.94e-33,
+      "implicit": 2.65e-52
+    },
+    "omega_for_that_case": 264.6
+  },
+  "P3_randomization": {
+    "object_force_sigma_N_alpha_0.05_to_0.2": {
+      "m30g": [
+        0.015,
+        0.059
+      ],
+      "m100g": [
+        0.049,
+        0.196
+      ],
+      "m200g": [
+        0.098,
+        0.392
+      ]
+    },
+    "sigma_over_actuation_force_max": 0.131,
+    "tool_gain_x0.8_1.5_actuation_range_N": [
+      2.4,
+      10.5
+    ],
+    "exceeds_10N_hardware_limit": true,
+    "robot_gain_x0.8_1.2_fingertip_force_scale": [
+      0.8,
+      1.2
+    ],
+    "friction_x0.5_1.5_cone_half_angle_deg_if_mu0=1": [
+      26.6,
+      56.3
+    ],
+    "action_noise_U(-0.1,0.1)_share_of_range": 0.1,
+    "note": "물체 섭동(σ = αmg)은 필요한 구동력의 수 % 수준이다. 힘 쪽 견고성은 주로 이득·마찰 랜덤화에서 온다(해석)"
+  }
+}
