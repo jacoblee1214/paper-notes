@@ -1,0 +1,84 @@
+{
+  "dense_GB_per_forward": 4.387,
+  "routed_GB_total": 17.0528,
+  "routed_GB_single_token": 0.437,
+  "GB_per_token_no_spec": 4.824,
+  "verify_cost": [
+    {
+      "B": 1,
+      "routing": "uniform",
+      "GB_per_forward": 4.824,
+      "relative_to_single": 1.0,
+      "mean_distinct_experts": 9.0
+    },
+    {
+      "B": 1,
+      "routing": "correlated",
+      "GB_per_forward": 4.824,
+      "relative_to_single": 1.0,
+      "mean_distinct_experts": 9
+    },
+    {
+      "B": 2,
+      "routing": "uniform",
+      "GB_per_forward": 5.249,
+      "relative_to_single": 1.088,
+      "mean_distinct_experts": 17.8
+    },
+    {
+      "B": 2,
+      "routing": "correlated",
+      "GB_per_forward": 4.824,
+      "relative_to_single": 1.0,
+      "mean_distinct_experts": 9
+    },
+    {
+      "B": 4,
+      "routing": "uniform",
+      "GB_per_forward": 6.064,
+      "relative_to_single": 1.257,
+      "mean_distinct_experts": 34.5
+    },
+    {
+      "B": 4,
+      "routing": "correlated",
+      "GB_per_forward": 4.824,
+      "relative_to_single": 1.0,
+      "mean_distinct_experts": 9
+    },
+    {
+      "B": 8,
+      "routing": "uniform",
+      "GB_per_forward": 7.566,
+      "relative_to_single": 1.568,
+      "mean_distinct_experts": 65.4
+    },
+    {
+      "B": 8,
+      "routing": "correlated",
+      "GB_per_forward": 4.824,
+      "relative_to_single": 1.0,
+      "mean_distinct_experts": 9
+    }
+  ],
+  "speedup_upper_bound_B8": {
+    "SPEED-Bench temp0 NVFP4 drafter (Table 5)": {
+      "uniform": 2.65,
+      "correlated": 3.9
+    },
+    "SPEED-Bench temp1 NVFP4 (Table 5)": {
+      "uniform": 2.4,
+      "correlated": 3.54
+    },
+    "AA AgentPerf natural (Table 6)": {
+      "uniform": 2.36,
+      "correlated": 3.49
+    }
+  },
+  "tps_bound_at_273GBps": {
+    "no_spec": 56.6,
+    "with_spec_uniform_AL4.18": 133.6,
+    "with_spec_correlated_AL4.18": 197.5,
+    "reported_TPS_RTX_Spark": 83.99
+  }
+}

@@ -4,6 +4,8 @@
 
 | 날짜 | 글 | 요약 |
 |---|---|---|
+| 2026-10-30 | [Nemotron 3.5 Super VL 기술 보고서 읽기: 120B-A12B 하이브리드 MoE를 공개 체크포인트로 검증하기](papers/nemotron35_super_vl/) | NVIDIA의 Nemotron 3.5 Super VL·Lightning 기술 보고서를, 공개 config와 safetensors 헤더로 구조를 확인하고 표·블로그 수치를 재계산하며 읽었습니다. |
+| 2026-10-30 | [Nemotron 3.5 Bolt 24GB 읽기: 이름의 24GB는 텍스트 전용이고, 속도는 2비트가 아니라 Mamba가 정한다](papers/nemotron35_bolt/) | 120B-A12B VLM을 2비트 74B-A9B로 줄여 24 GB에 넣은 Nemotron 3.5 Bolt를, 공개 config와 GGUF 헤더로 메모리 표를 대조하고 디코드 대역폭을 계산하며 읽었습니다. |
 | 2026-10-29 | [손 전체 접점의 실시간 힘 조절 읽기: 촉각 없이 잡는다는 것, 그리고 시험이 실제로 잰 것](papers/reactive_grasp/) | 물체 메쉬와 관절각만으로 손 전체 링크의 접점을 구하고 매 주기 접촉력 QP를 다시 푸는 파지 제어기를, 그림 수치를 재계산하고 QP 구조를 toy로 뜯어 보며 같은 연구실 공개 코드와 대조해 읽었습니다. |
 | 2026-10-29 | [ThinkWorld 읽기: 이득의 대부분은 '추론'이 아니라 미래 예측 보조 손실에서 나왔다](papers/thinkworld/) | 손목 움직임 토큰으로 미래를 상상하고 그 일치로 VLA를 강화하는 ThinkWorld를, 표를 재계산하고 공개 리더보드와 대조하며 읽었습니다. |
 | 2026-10-29 | [RoboSimStudio 읽기: 쓸 만한 Real2Sim 도구, 그런데 스펀지는 손에 붙어 있었다](papers/robosimstudio/) | 사람과 코딩 에이전트가 함께 시뮬레이션 물성을 고치는 Real2Sim 도구 RoboSimStudio를, 공식 저장소와 대조하고 데모 수치를 다시 계산하며 읽었습니다. |

@@ -1,0 +1,195 @@
+{
+  "C1": {
+    "weight_subtotal": 22.01,
+    "runtime_subtotal": 0.87,
+    "combined": 22.88,
+    "with_drafter": 23.84,
+    "with_drafter_and_vision": 25.52,
+    "24GiB_in_GB": 25.77,
+    "reduction_paper_22.1": 0.8507,
+    "reduction_table2_22.01": 0.8513,
+    "experts_share_of_weights": 0.7951,
+    "mamba_nvfp4_share_of_weights": 0.1122
+  },
+  "C2": {
+    "short_ctx_tokens_B": 72,
+    "total_tokens_B": 120,
+    "batch_tokens_8K": 16777216,
+    "batch_tokens_128K": 16777216,
+    "gpu_hours": 8192,
+    "tokens_per_gpu_s": 4069,
+    "jobs_hours": 64
+  },
+  "C3": {
+    "category_mean": [
+      4.7363,
+      4.2875,
+      4.6816,
+      4.2483
+    ],
+    "reported_overall": [
+      4.736,
+      4.288,
+      4.681,
+      4.248
+    ],
+    "overall_minus_mean": [
+      -0.0003,
+      0.0005,
+      -0.0006,
+      -0.0003
+    ],
+    "nvfp4_AL_change_t0": -0.0116,
+    "nvfp4_AL_change_t1": -0.0093,
+    "lilicorr_vs_dspark_AL": 0.1359,
+    "best_worst_category_t0": [
+      "coding",
+      "writing"
+    ]
+  },
+  "C4": {
+    "per_benchmark": {
+      "GDPVal-AA-V2": {
+        "bf16_to_2bit": -2.66,
+        "parent_to_2bit": -6.01
+      },
+      "Terminal-Bench 2.1": {
+        "bf16_to_2bit": -2.95,
+        "parent_to_2bit": -10.96
+      },
+      "Tau3 Banking": {
+        "bf16_to_2bit": 0.0,
+        "parent_to_2bit": -2.84
+      },
+      "HLE (no tools)": {
+        "bf16_to_2bit": -3.43,
+        "parent_to_2bit": -6.54
+      },
+      "AA-Omniscience accuracy": {
+        "bf16_to_2bit": -4.9,
+        "parent_to_2bit": -9.08
+      },
+      "SciCode": {
+        "bf16_to_2bit": -3.47,
+        "parent_to_2bit": -6.25
+      },
+      "GPQA Diamond": {
+        "bf16_to_2bit": -2.4,
+        "parent_to_2bit": -4.35
+      },
+      "AA-LCR": {
+        "bf16_to_2bit": -3.32,
+        "parent_to_2bit": -4.75
+      },
+      "AA-Omniscience non-hallucination": {
+        "bf16_to_2bit": 5.13,
+        "parent_to_2bit": -7.97
+      },
+      "PinchBench": {
+        "bf16_to_2bit": -2.53,
+        "parent_to_2bit": -2.43
+      },
+      "MCP-Atlas": {
+        "bf16_to_2bit": -3.4,
+        "parent_to_2bit": 1.0
+      },
+      "BrowseComp": {
+        "bf16_to_2bit": -3.25,
+        "parent_to_2bit": -4.75
+      },
+      "WebArena (vision)": {
+        "bf16_to_2bit": 0.61,
+        "parent_to_2bit": -6.54
+      },
+      "IFBench (instruction loose)": {
+        "bf16_to_2bit": -2.54,
+        "parent_to_2bit": -6.87
+      }
+    },
+    "bolt24_vs_competitors": {
+      "Qwen3.6": {
+        "wins": 11,
+        "losses": 3,
+        "ties": 0,
+        "lost_on": [
+          "AA-Omniscience accuracy",
+          "AA-Omniscience non-hallucination",
+          "PinchBench"
+        ]
+      },
+      "Gemma4": {
+        "wins": 11,
+        "losses": 2,
+        "ties": 0,
+        "lost_on": [
+          "AA-Omniscience accuracy",
+          "IFBench (instruction loose)"
+        ]
+      },
+      "Lightning": {
+        "wins": 11,
+        "losses": 2,
+        "ties": 0,
+        "lost_on": [
+          "AA-Omniscience non-hallucination",
+          "IFBench (instruction loose)"
+        ]
+      }
+    },
+    "mean_over_common_14_or_less": {
+      "n": 14,
+      "parent": 56.68,
+      "bolt_bf16": 53.17,
+      "bolt_24gb": 51.09
+    },
+    "quantized_better_than_bf16": [
+      "AA-Omniscience non-hallucination",
+      "WebArena (vision)"
+    ],
+    "pinchbench_rank_in_table7": [
+      [
+        90.35,
+        "Bolt BF16"
+      ],
+      [
+        90.25,
+        "Super 120B BF16"
+      ],
+      [
+        88.07,
+        "Qwen3.6 35B-A3B BF16"
+      ],
+      [
+        87.82,
+        "Bolt 24GB"
+      ],
+      [
+        83.43,
+        "Lightning 30B-A3B"
+      ],
+      [
+        80.36,
+        "Nemotron3 Super 120B BF16"
+      ],
+      [
+        74.7,
+        "Gemma4 26B-A4B"
+      ]
+    ],
+    "blog_claim": "Bolt 74B-A9B 24GB #1 open model in its class on PinchBench, #2 on BrowseComp (블로그). Table 7 안에서는 PinchBench에서 Qwen3.6 35B-A3B BF16(88.07)이 Bolt 24GB(87.82)보다 높음"
+  },
+  "C5": {
+    "Qwen3.6 35B-A3B Q4_K_M + MTP": {
+      "tps_ratio_bolt_over": 0.869,
+      "replay_ratio_bolt_over": 1.323
+    },
+    "Gemma4 26B-A4B Q4_K_M + MTP": {
+      "tps_ratio_bolt_over": 0.835,
+      "replay_ratio_bolt_over": 1.25
+    },
+    "Qwen3.8 27B Q4_K_M + DFlash": {
+      "tps_ratio_bolt_over": 2.972,
+      "replay_ratio_bolt_over": 0.576
+    }
+  }
+}

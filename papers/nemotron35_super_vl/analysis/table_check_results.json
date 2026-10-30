@@ -1,0 +1,401 @@
+{
+  "C1_abstract": {
+    "swe_pro_super_vs_ultra": [
+      51.78,
+      49.66,
+      2.12
+    ],
+    "active_ratio_ultra_over_super": 4.58,
+    "claim": "approximately 4.6× fewer active parameters",
+    "mtp_AL_gain_pct": {
+      "greedy": 10.05,
+      "sampling": 21.79,
+      "claim": "up to 21.8% under probabilistic draft sampling (T8)"
+    },
+    "nvfp4_vs_bf16_gb200_F10": 2.432,
+    "nvfp4_vs_bf16_h100_F10": 1.858,
+    "super_vs_qwen35_gb200_F11": 2.336,
+    "super_vs_qwen38_gb200_F11": 1.898,
+    "super_vs_qwen35_h100_F11": 2.327,
+    "super_vs_qwen38_h100_F11": 1.313,
+    "peak_4856_source": "T24 row: conc 64, MTP 5, ReplaySSM ON, 89.9 tok/s/user",
+    "throughput_numbers_differ": {
+      "abstract_T24": 4856,
+      "F10_NVFP4_GB200": 4324,
+      "F11_GB200": 4331.88,
+      "note": "같은 워크로드라도 ReplaySSM·MTP 길이·동시성 설정이 달라 세 값이 다름"
+    },
+    "ultra_vs_super_params": 0.218,
+    "blog_claim": "roughly one-fifth the parameter count"
+  },
+  "C2_indic": {
+    "T2_deltas_recomputed": [
+      5.42,
+      4.98,
+      8.66,
+      6.04,
+      9.82
+    ],
+    "T2_reported": [
+      5.42,
+      4.98,
+      8.66,
+      6.04,
+      9.82
+    ],
+    "T1_subtotals": {
+      "priority_native": 2273.8,
+      "reported": 2273.8,
+      "priority_roman": 224.6,
+      "reported_roman": 224.6,
+      "additional": 327.2,
+      "reported_additional": 327.2,
+      "grand_total": 2825.6,
+      "reported_total": 2825.6
+    },
+    "translation_cost_reduction_pct": 59.9,
+    "tokens_per_gpuh_ratio": 2.49,
+    "T3_monotonic_10_20_30": [
+      63.1,
+      64.6,
+      65.6
+    ]
+  },
+  "C3_midtraining_T5": {
+    "swe_verified_mean_gain_5_harness": 8.56,
+    "claim_verified": 8.6,
+    "terminal_bench_mean_gain_5_harness": 6.82,
+    "claim_tb": 6.8,
+    "openhands_changes": {
+      "Multilingual": -0.3,
+      "Pro": -0.4,
+      "Verified": 0.6,
+      "run_to_run": "약 1점 (§2.5)"
+    },
+    "ruler_1m": {
+      "after_LC": 79.9,
+      "after_midtraining": 33.5,
+      "after_recovery": 81.0
+    }
+  },
+  "C4_test_time_scaling": {
+    "terminal_bench": 9.2,
+    "deepswe": 9.9,
+    "browsecomp_subset": 8.3,
+    "reported": [
+      9.2,
+      9.9,
+      8.3
+    ]
+  },
+  "C5_decontamination": {
+    "removed_sum": 20671,
+    "reported": 20671,
+    "implied_post_training_samples_M": {
+      "at_0.085pct": 24.3,
+      "at_0.09pct": 23.0,
+      "at_0.095pct": 21.8
+    },
+    "implied_benchmark_questions": 30133,
+    "blog_claim": "post-trained with roughly 3.8 million samples (blog_announcement)"
+  },
+  "C6_T10": {
+    "super_vs_ultra": {
+      "wins": 17,
+      "losses": 10,
+      "ties": 0,
+      "rows": 27
+    },
+    "super_minus_ultra": {
+      "SWE-bench Verified": -2.83,
+      "SWE-bench Multilingual": -1.06,
+      "SWE-bench Pro": 2.12,
+      "Tau2 Retail": -4.44,
+      "Tau2 Airline": -3.25,
+      "Tau2 Telecom": -9.81,
+      "Tau3 Banking": 0.53,
+      "Terminal-Bench 2.1": 5.89,
+      "GDPVal-AA-v2 norm ELO": 0.03,
+      "BrowseComp": 11.06,
+      "BrowseComp (OpenCode)": 11.29,
+      "SciCode (subtask)": 5.17,
+      "SciCode (problem)": 1.64,
+      "LiveCodeBench v6": -0.99,
+      "GPQAD": 2.53,
+      "CritPt": 7.72,
+      "HLE (no tools, text)": 2.55,
+      "HLE (with tools, text)": 8.61,
+      "Apex-Shortlist": 13.36,
+      "AA-Omniscience Accuracy": 0.9,
+      "AA-Omniscience Non-Hallucination": -7.95,
+      "AA-LCR": -6.56,
+      "GraphWalks (<=1M)": 26.43,
+      "IFBench": -12.08,
+      "NV Chat Benchmark": 18.4,
+      "MMLU-ProX": -6.19,
+      "WMT24pp COMET": 2.74
+    },
+    "super_rank_among_available": {
+      "SWE-bench Verified": "7/7",
+      "SWE-bench Multilingual": "6/7",
+      "SWE-bench Pro": "5/7",
+      "Tau2 Retail": "6/7",
+      "Tau2 Airline": "5/7",
+      "Tau2 Telecom": "7/7",
+      "Tau3 Banking": "4/6",
+      "Terminal-Bench 2.1": "4/7",
+      "GDPVal-AA-v2 norm ELO": "5/7",
+      "BrowseComp": "4/7",
+      "BrowseComp (OpenCode)": "3/7",
+      "SciCode (subtask)": "4/7",
+      "SciCode (problem)": "4/7",
+      "LiveCodeBench v6": "5/7",
+      "GPQAD": "4/7",
+      "CritPt": "3/7",
+      "HLE (no tools, text)": "5/7",
+      "HLE (with tools, text)": "4/6",
+      "Apex-Shortlist": "3/7",
+      "AA-Omniscience Accuracy": "6/7",
+      "AA-Omniscience Non-Hallucination": "2/7",
+      "BabyVision": "4/5",
+      "CharXiv-RQ": "4/5",
+      "MathVision": "5/5",
+      "OCR-Reasoning": "2/5",
+      "OCRBench-v2 (EN)": "2/5",
+      "OCRBench-v2 (ZH)": "3/5",
+      "Video-MME-v2": "2/4",
+      "V*": "4/5",
+      "HLE (full)": "4/5",
+      "MMLongBench-Doc": "4/5",
+      "OSWorld": "3/4",
+      "AA-LCR": "7/7",
+      "GraphWalks (<=1M)": "1/7",
+      "IFBench": "5/7",
+      "NV Chat Benchmark": "3/7",
+      "MMLU-ProX": "7/7",
+      "WMT24pp COMET": "5/7"
+    },
+    "rows_where_super_is_best": [
+      "GraphWalks (<=1M)"
+    ],
+    "mean_rank": 4.24
+  },
+  "C7_T11_arena_overall_style": {
+    "N3-Ultra NVFP4": true,
+    "Qwen3.5": true,
+    "DS-V4": true,
+    "Inkling": true,
+    "GLM-5.3": false,
+    "Gemma-4 26B": true
+  },
+  "C8_quantization": {
+    "T23_all_rows": {
+      "rows": 37,
+      "rows_with_ratio": 37,
+      "median_recovery_pct": 99.7,
+      "min_recovery_pct": 93.58,
+      "verbosity_ratio_of_totals_pct": 0.43
+    },
+    "T23_tokens_dedup": {
+      "rows": 37,
+      "rows_with_ratio": 37,
+      "median_recovery_pct": 99.7,
+      "min_recovery_pct": 93.58,
+      "verbosity_ratio_of_totals_pct": 0.37
+    },
+    "T23_reported": {
+      "median": 99.62,
+      "verbosity": 0.44,
+      "benchmarks_claimed": 36
+    },
+    "same_release_other_numbers": {
+      "T18_fp8_kv_35_benchmarks": 99.52,
+      "T18_nvfp4_kv": 99.36,
+      "conclusion_§6": 99.52,
+      "abstract_§1_§4.1": 99.62,
+      "note": "같은 공개 NVFP4 + FP8 KV 구성인데 본문에 두 값이 있음"
+    },
+    "T23_rows_below_99": [
+      [
+        "SciCode (problem)",
+        93.58
+      ],
+      [
+        "Tau3 Banking",
+        94.17
+      ],
+      [
+        "MMLU-ProX",
+        95.9
+      ],
+      [
+        "ScreenSpot Pro",
+        97.06
+      ],
+      [
+        "NV Chat Benchmark",
+        98.6
+      ],
+      [
+        "AA-LCR",
+        98.64
+      ],
+      [
+        "AA-Omniscience Accuracy",
+        98.7
+      ],
+      [
+        "CharXiv (RQ)",
+        98.84
+      ],
+      [
+        "SciCode (subtask)",
+        98.9
+      ],
+      [
+        "HLE (text)",
+        98.9
+      ],
+      [
+        "SWE-Bench Multilingual",
+        98.94
+      ]
+    ],
+    "T22_lightning": {
+      "rows": 18,
+      "rows_with_ratio": 17,
+      "median_recovery_pct": 99.25,
+      "min_recovery_pct": 90.22,
+      "verbosity_ratio_of_totals_pct": -3.63
+    },
+    "T22_tokens_dedup": {
+      "rows": 18,
+      "rows_with_ratio": 17,
+      "median_recovery_pct": 99.25,
+      "min_recovery_pct": 90.22,
+      "verbosity_ratio_of_totals_pct": -3.66
+    },
+    "T22_reported": {
+      "median": 99.24,
+      "verbosity": -3.63
+    },
+    "T12_bpe_check": 4.82,
+    "kv_nvfp4_payload_saving_pct": 43.75
+  },
+  "C9_serving": {
+    "T24_tps_gain_pct": [
+      5.8,
+      6.1,
+      4.8,
+      4.7,
+      6.4
+    ],
+    "T24_user_gain_pct": [
+      7.2,
+      6.5,
+      8.3,
+      12.5,
+      10.0
+    ],
+    "T24_reported_range": "4.7–6.4% / 6.4–12.5%",
+    "T25_tps_gain_pct": 10.3,
+    "T25_user_gain_pct": 61.4,
+    "T25_ttft_ratio": 2.29
+  },
+  "C10_blog_claims": {
+    "26T_tokens": {
+      "blog": "about 26 trillion tokens across pretraining and continued pretraining",
+      "reconstruction_T": 26.209,
+      "note": "Nemotron 3 Super 사전학습 25T(arXiv:2604.12374 초록) + 3.5 단계(증류 1T, Indic 100B, LC 35B, 중간학습 65.4B, 회복 9B)"
+    },
+    "3.8M_samples": {
+      "blog": "post-trained with roughly 3.8 million samples",
+      "report": "오염 제거로 20,671개(약 0.09%)를 뺐다 → 사후학습 표본 약 23M (C5)",
+      "status": "보고서와 맞지 않거나 정의가 다름"
+    },
+    "5x_throughput": {
+      "blog": "up to 5x higher throughput ... compared to other open models in its size category",
+      "report": "F11: Qwen3.5 대비 2.34×, Qwen3.8 대비 1.90× (≥50 tok/s/user)",
+      "status": "보고서에 없음"
+    },
+    "8x_users_85pct": {
+      "blog": "Dynamo, 16 B200, 50 tok/s/user: 8x as many users, 85% lower TTFT",
+      "report": "§5.6/T25: VR200 11장, 분리 서빙 +10.3% tok/s/GPU, TTFT는 오히려 0.49→1.12 s",
+      "status": "보고서에 없음(다른 실험 조건)"
+    },
+    "hermes_langchain": {
+      "blog": "Hermes Bench 63.44 vs Ultra 56.33; LangChain Evals 87.05 vs 84.3",
+      "report": "해당 벤치마크 없음(T5의 Hermes는 하네스 이름)",
+      "status": "보고서에 없음"
+    },
+    "charxiv": {
+      "blog": "80.8%, Nano Omni 63%, with Python 84%",
+      "report_T10": 80.82,
+      "status": "80.8은 일치, 63%·84%는 보고서에 없음"
+    },
+    "lilicorr_2.3x": {
+      "blog": "up to 2.3x faster token generation (DGX Spark)",
+      "report": "§4.8: drafter 가중치 양자화로 +11%, lm_head로 +5% (Spark). 2.3×는 없음",
+      "status": "보고서에 없음"
+    },
+    "600_tps_baseten": {
+      "blog": "over 600 TPS on AA agentic tasks (Baseten)",
+      "status": "보고서에 없음"
+    },
+    "4x_task_completion": {
+      "blog": "4x faster task completion (Fig. 3, 10,000 coding tasks, B200)",
+      "report_F7_gpu_hours": {
+        "N3.5 Super NVFP4": [
+          51.3,
+          8.3
+        ],
+        "Qwen3.8 NVFP4": [
+          60.4,
+          37.1
+        ],
+        "DS-V4 Flash MXFP4": [
+          56.9,
+          40.4
+        ],
+        "Inkling Small NVFP4": [
+          56.5,
+          98.9
+        ]
+      },
+      "gpu_hour_ratio_vs": {
+        "Qwen3.8": 4.47,
+        "DS-V4": 4.87,
+        "Inkling": 11.92
+      },
+      "accuracy_gap_pp_vs": {
+        "Qwen3.8": -9.1,
+        "DS-V4": -5.6,
+        "Inkling": -5.2
+      },
+      "status": "F7(2,193 과제, B200 4장)에서 GPU-h 4.5–4.9배 적음. 단 정확도는 5–9%p 낮음. 블로그의 10,000 과제는 보고서에 없음"
+    },
+    "one_fifth_params": {
+      "blog": "comparable with Ultra at roughly one-fifth the parameter count",
+      "check": 0.218,
+      "T10_super_vs_ultra": "C6 참고"
+    }
+  },
+  "C11_harness_protocol": {
+    "swe_pro_T10_opencode": 51.78,
+    "swe_pro_F8_opencode": 41.04,
+    "gap_T10_minus_F8_opencode_pp": 10.74,
+    "swe_pro_F8_best": 49.45,
+    "ultra_T10": 49.66,
+    "F8_best_minus_ultra_T10_pp": -0.21,
+    "swe_pro_F7_nvfp4": 51.3,
+    "swe_pro_F8_mean_6": 46.54,
+    "tb_T10_terminus2": 60.67,
+    "tb_F8_best": 61.8,
+    "tb_F9_pass1": 62.7,
+    "tb_T23_bf16_nvfp4": [
+      60.67,
+      62.78
+    ],
+    "note": "F8: 하네스 기본 프롬프트, Git 기록 제거 + 부정행위 금지 지시, 731과제 × 2회, OpenCode v1.17.8. T10: NeMo Gym 레시피(고정 커밋 1e66890, 731과제 × 3회, OpenCode v1.17.11). 그 레시피도 apply_anti_cheating=True로 HEAD 조상 밖의 refs·reflog를 지우고 프롬프트에 부정행위 금지 규칙이 있음(paper/gym_recipe/). 10.7%p 차이는 보고서가 설명하지 않음."
+  }
+}

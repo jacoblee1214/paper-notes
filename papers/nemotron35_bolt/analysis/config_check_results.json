@@ -1,0 +1,254 @@
+{
+  "layers": {
+    "mamba": 40,
+    "moe": 40,
+    "attention": 8
+  },
+  "E_set": [
+    240,
+    304,
+    368,
+    432,
+    496
+  ],
+  "I_set": [
+    1536,
+    2048,
+    2304,
+    2560
+  ],
+  "I_hist": {
+    "1536": 1,
+    "2048": 11,
+    "2304": 15,
+    "2560": 13
+  },
+  "E_hist": {
+    "240": 12,
+    "304": 6,
+    "368": 9,
+    "432": 10,
+    "496": 3
+  },
+  "top_k": [
+    9
+  ],
+  "mean_E": 345.6,
+  "bolt_total_B": 74.043,
+  "bolt_total_by_component_B": {
+    "mamba_inout": 4.383,
+    "mamba_conv": 0.002,
+    "mamba_small": 0.0005,
+    "routed": 66.1442,
+    "shared": 1.7616,
+    "latent": 0.3355,
+    "router": 0.0566,
+    "norm": 0.0002,
+    "attention": 0.2852,
+    "embedding": 0.5369,
+    "lm_head": 0.5369
+  },
+  "bolt_active_B": 9.056,
+  "bolt_active_by_component_B": {
+    "mamba_inout": 4.383,
+    "mamba_conv": 0.002,
+    "mamba_small": 0.0005,
+    "routed": 1.694,
+    "shared": 1.7616,
+    "latent": 0.3355,
+    "router": 0.0566,
+    "norm": 0.0002,
+    "attention": 0.2852,
+    "embedding": 0.0,
+    "lm_head": 0.5369
+  },
+  "bolt_active_without_lm_head_B": 8.519,
+  "parent_total_B": 120.669,
+  "parent_active_B": 12.233,
+  "routed_kept_fraction": 0.5867,
+  "active_routed_fraction_vs_parent": 0.3497,
+  "gguf_total_params": 74042720848,
+  "formula_minus_gguf_params": -4176,
+  "kv_bytes_per_token": {
+    "FP8": 4096,
+    "F16": 8192
+  },
+  "kv_GB_at_ctx": {
+    "8K": {
+      "FP8": 0.034,
+      "F16": 0.067
+    },
+    "32K": {
+      "FP8": 0.134,
+      "F16": 0.268
+    },
+    "64K": {
+      "FP8": 0.268,
+      "F16": 0.537
+    },
+    "128K": {
+      "FP8": 0.537,
+      "F16": 1.074
+    },
+    "256K": {
+      "FP8": 1.074,
+      "F16": 2.147
+    }
+  },
+  "ssm_state_GB": {
+    "BF16 (Table 2 가정)": 0.0863,
+    "FP32 (config mamba_ssm_cache_dtype)": 0.1727
+  },
+  "table2_check": {
+    "KV_FP8_128K_table": 0.54,
+    "KV_FP8_128K_calc": 0.537,
+    "SSM_BF16_table": 0.08,
+    "SSM_BF16_calc": 0.0863
+  },
+  "bf16_size_GB": 148.09,
+  "mac": {
+    "ram_GB": 25.77,
+    "gpu_default_assumed_GB": 17.18,
+    "os_reserve_assumed_GB": 4.0,
+    "compute_buffer_assumed_GB": 0.5,
+    "vision_mmproj_GB": 1.7337,
+    "drafter_gguf_GB": 0.9982,
+    "rows": [
+      {
+        "file": "공식 24GB IQ2_XXS (main)",
+        "weights_GB": 22.0183,
+        "ctx": 8192,
+        "kv_f16_GB": 0.067,
+        "need_GB": 22.76,
+        "fits_gpu_default_2of3": false,
+        "fits_ram_minus_os": false
+      },
+      {
+        "file": "공식 24GB IQ2_XXS (main)",
+        "weights_GB": 22.0183,
+        "ctx": 32768,
+        "kv_f16_GB": 0.268,
+        "need_GB": 22.96,
+        "fits_gpu_default_2of3": false,
+        "fits_ram_minus_os": false
+      },
+      {
+        "file": "공식 24GB IQ2_XXS (main)",
+        "weights_GB": 22.0183,
+        "ctx": 131072,
+        "kv_f16_GB": 1.074,
+        "need_GB": 23.76,
+        "fits_gpu_default_2of3": false,
+        "fits_ram_minus_os": false
+      },
+      {
+        "file": "Unsloth UD-IQ1_M",
+        "weights_GB": 20.3075,
+        "ctx": 8192,
+        "kv_f16_GB": 0.067,
+        "need_GB": 21.05,
+        "fits_gpu_default_2of3": false,
+        "fits_ram_minus_os": true
+      },
+      {
+        "file": "Unsloth UD-IQ1_M",
+        "weights_GB": 20.3075,
+        "ctx": 32768,
+        "kv_f16_GB": 0.268,
+        "need_GB": 21.25,
+        "fits_gpu_default_2of3": false,
+        "fits_ram_minus_os": true
+      },
+      {
+        "file": "Unsloth UD-IQ1_M",
+        "weights_GB": 20.3075,
+        "ctx": 131072,
+        "kv_f16_GB": 1.074,
+        "need_GB": 22.05,
+        "fits_gpu_default_2of3": false,
+        "fits_ram_minus_os": false
+      },
+      {
+        "file": "Unsloth UD-IQ1_S",
+        "weights_GB": 18.5078,
+        "ctx": 8192,
+        "kv_f16_GB": 0.067,
+        "need_GB": 19.25,
+        "fits_gpu_default_2of3": false,
+        "fits_ram_minus_os": true
+      },
+      {
+        "file": "Unsloth UD-IQ1_S",
+        "weights_GB": 18.5078,
+        "ctx": 32768,
+        "kv_f16_GB": 0.268,
+        "need_GB": 19.45,
+        "fits_gpu_default_2of3": false,
+        "fits_ram_minus_os": true
+      },
+      {
+        "file": "Unsloth UD-IQ1_S",
+        "weights_GB": 18.5078,
+        "ctx": 131072,
+        "kv_f16_GB": 1.074,
+        "need_GB": 20.25,
+        "fits_gpu_default_2of3": false,
+        "fits_ram_minus_os": true
+      },
+      {
+        "file": "커뮤니티 REAP50 16GB",
+        "weights_GB": 13.38,
+        "ctx": 8192,
+        "kv_f16_GB": 0.067,
+        "need_GB": 14.12,
+        "fits_gpu_default_2of3": true,
+        "fits_ram_minus_os": true
+      },
+      {
+        "file": "커뮤니티 REAP50 16GB",
+        "weights_GB": 13.38,
+        "ctx": 32768,
+        "kv_f16_GB": 0.268,
+        "need_GB": 14.32,
+        "fits_gpu_default_2of3": true,
+        "fits_ram_minus_os": true
+      },
+      {
+        "file": "커뮤니티 REAP50 16GB",
+        "weights_GB": 13.38,
+        "ctx": 131072,
+        "kv_f16_GB": 1.074,
+        "need_GB": 15.13,
+        "fits_gpu_default_2of3": true,
+        "fits_ram_minus_os": true
+      },
+      {
+        "file": "E4B Q4_K_M (gemma4 계열)",
+        "weights_GB": 6.1804,
+        "ctx": 8192,
+        "kv_f16_GB": null,
+        "need_GB": 6.68,
+        "fits_gpu_default_2of3": true,
+        "fits_ram_minus_os": true
+      },
+      {
+        "file": "E4B Q4_K_M (gemma4 계열)",
+        "weights_GB": 6.1804,
+        "ctx": 32768,
+        "kv_f16_GB": null,
+        "need_GB": 6.68,
+        "fits_gpu_default_2of3": true,
+        "fits_ram_minus_os": true
+      },
+      {
+        "file": "E4B Q4_K_M (gemma4 계열)",
+        "weights_GB": 6.1804,
+        "ctx": 131072,
+        "kv_f16_GB": null,
+        "need_GB": 6.68,
+        "fits_gpu_default_2of3": true,
+        "fits_ram_minus_os": true
+      }
+    ]
+  }
+}

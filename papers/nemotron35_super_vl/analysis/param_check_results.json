@@ -1,0 +1,161 @@
+{
+  "P1_structure": {
+    "layers": {
+      "mamba": 40,
+      "moe": 40,
+      "attention": 8
+    },
+    "pattern": "MEMEMEM*EMEMEMEM*EMEMEMEM*EMEMEMEMEM*EMEMEMEMEM*EMEMEMEMEM*EMEMEMEMEM*EMEMEMEM*EMEMEMEME",
+    "routed_experts": 512,
+    "top_k": 22,
+    "latent_moe": "4096 → 1024 (latent) → expert 2688",
+    "attention": "32 q heads, 2 kv heads, head_dim 128",
+    "mamba": "128 heads × 64, state 128, groups 8",
+    "max_position_embeddings": 1048576,
+    "vision": {
+      "hidden_size": 1280,
+      "num_hidden_layers": 32,
+      "patch_size": 16,
+      "max_num_patches": 13312,
+      "projector_hidden_size": 20480,
+      "downsample_ratio": 0.5
+    }
+  },
+  "P2_params_B": {
+    "total_all": 124.453,
+    "report_N": 124.453,
+    "llm_without_mtp_vision": 120.669,
+    "mtp": 2.942,
+    "vision_encoder": 0.654,
+    "projector": 0.189,
+    "routed_experts_share_of_total": 0.9059,
+    "active_llm_per_token_incl_embedding": 12.77,
+    "active_llm_per_token_excl_embedding": 12.233,
+    "active_routed_per_token": 4.844,
+    "active_fraction_of_llm": 0.1058,
+    "active_breakdown_B": {
+      "routed_experts(top-22)": 4.844,
+      "mamba_in_out_proj": 4.383,
+      "shared_experts": 1.762,
+      "latent_proj+router": 0.419,
+      "attention_qkvo": 0.285,
+      "lm_head": 0.537
+    },
+    "automodel_doc": {
+      "claim": "120.7B trainable with vision tower frozen (99.31%), ~227 GB bf16, 63 shards",
+      "llm_without_mtp_vision_B": 120.669,
+      "share_of_model_without_mtp": 0.9931,
+      "total_minus_mtp_bf16_GiB": 226.3,
+      "index_files": 64,
+      "model_shards": 63
+    }
+  },
+  "P3_checkpoint": {
+    "bf16_GB": 248.91,
+    "bf16_GiB": 231.8,
+    "nvfp4_GB": 75.01,
+    "report_S_GB": 74.987,
+    "bpe_from_index": 4.822,
+    "bpe_from_report_S": 4.82,
+    "bf16_bits_per_param": 16.0,
+    "quant_tally": {
+      "kv_cache_quant_algo": "FP8",
+      "quantized_layers": {
+        "language_model.backbone.layers.#.mixer.in_proj :: FP8": 40,
+        "language_model.backbone.layers.#.mixer.out_proj :: FP8": 40,
+        "language_model.backbone.layers.#.mixer.experts.#.down_proj :: NVFP4": 20480,
+        "language_model.backbone.layers.#.mixer.experts.#.up_proj :: NVFP4": 20480,
+        "language_model.backbone.layers.#.mixer.shared_experts.down_proj :: NVFP4": 40,
+        "language_model.backbone.layers.#.mixer.shared_experts.up_proj :: NVFP4": 40,
+        "language_model.backbone.layers.#.mixer.k_proj :: FP8": 8,
+        "language_model.backbone.layers.#.mixer.o_proj :: FP8": 8,
+        "language_model.backbone.layers.#.mixer.q_proj :: FP8": 8,
+        "language_model.backbone.layers.#.mixer.v_proj :: FP8": 8,
+        "language_model.lm_head :: FP8": 1,
+        "language_model.mtp.layers.#.mixer.experts :: NVFP4": 1,
+        "language_model.mtp.layers.#.mixer.shared_experts.up_proj :: NVFP4": 1,
+        "language_model.mtp.layers.#.mixer.shared_experts.down_proj :: NVFP4": 1
+      },
+      "exclude_modules": {
+        "language_model.backbone.embeddings": 1,
+        "language_model.backbone.layers.#.mixer.conv1d": 40,
+        "language_model.backbone.layers.#.mixer.fc1_latent_proj": 40,
+        "language_model.backbone.layers.#.mixer.fc2_latent_proj": 40,
+        "language_model.backbone.layers.#.mixer.gate": 40,
+        "language_model.mtp.layers.#.eh_proj": 1,
+        "language_model.mtp.layers.#.mixer.k_proj": 1,
+        "language_model.mtp.layers.#.mixer.o_proj": 1,
+        "language_model.mtp.layers.#.mixer.q_proj": 1,
+        "language_model.mtp.layers.#.mixer.v_proj": 1,
+        "language_model.mtp.layers.#.mixer.fc1_latent_proj": 1,
+        "language_model.mtp.layers.#.mixer.fc2_latent_proj": 1,
+        "language_model.mtp.layers.#.mixer.gate": 1,
+        "mlp1.*": 1,
+        "vision_model.*": 1,
+        "vision_projector.*": 1
+      }
+    },
+    "nvfp4_config_ssm_cache_dtype": "float32",
+    "report_says_runtime_ssm_cache": "FP16 + stochastic rounding (Table 12 Aggressive, §4.5)"
+  },
+  "P4_state_memory": {
+    "kv_bytes_per_token": {
+      "BF16": 8192.0,
+      "FP8": 4096.0,
+      "NVFP4": 2304.0
+    },
+    "kv_GiB_at_1M_tokens": {
+      "BF16": 8.0,
+      "FP8": 4.0,
+      "NVFP4": 2.25
+    },
+    "ssm_state_MiB_per_request": {
+      "FP32": 160.0,
+      "FP16": 80.0
+    },
+    "conv_state_MiB_per_request_bf16": 2.34,
+    "tokens_per_mamba_page_check": {
+      "one_layer_ssm_fp16_bytes": 2097152,
+      "one_layer_kv_fp8_bytes_per_token": 512,
+      "tokens": 4096,
+      "report": "one Mamba cache page ≈ 4K tokens of Attention KV (§5.3)"
+    },
+    "crossover_tokens_ssm_fp16_vs_kv_fp8": 20480
+  },
+  "P5_local_fit": {
+    "assumptions": {
+      "mac_unified_GiB": 24.0,
+      "gpu_budget_GiB_assumed": 18.0
+    },
+    "sizes_GiB": {
+      "BF16 (공식)": 231.8,
+      "NVFP4 (공식)": 69.9,
+      "GGUF Q8_0 (ggml-org)": 119.7,
+      "GGUF Q4_K_M (lmstudio-community)": 65.3,
+      "GGUF Q4_0 (ggml-org)": 67.0,
+      "MLX 4bit (Duckets)": 64.6,
+      "MLX 3bit (rapid-mlx)": 39.8,
+      "참고: Lightning 30B-A3B GGUF Q4_0": 17.6
+    },
+    "fits_budget": {
+      "BF16 (공식)": false,
+      "NVFP4 (공식)": false,
+      "GGUF Q8_0 (ggml-org)": false,
+      "GGUF Q4_K_M (lmstudio-community)": false,
+      "GGUF Q4_0 (ggml-org)": false,
+      "MLX 4bit (Duckets)": false,
+      "MLX 3bit (rapid-mlx)": false,
+      "참고: Lightning 30B-A3B GGUF Q4_0": true
+    },
+    "min_bits_per_param_to_fit_weights_only": 1.24,
+    "decode_bs1_weight_read": {
+      "NVFP4_recipe_GB_per_token": 9.76,
+      "Q4_4.5bit_all_GB_per_token": 6.88,
+      "upper_bound_tok_s_at_273GBps": {
+        "NVFP4_recipe": 28.0,
+        "Q4_4.5bit_all": 39.7
+      },
+      "note": "273 GB/s = M4 Pro·DGX Spark 메모리 대역폭. KV·상태 읽기와 MTP 효과 제외, 들어간다고 가정한 상한"
+    }
+  }
+}

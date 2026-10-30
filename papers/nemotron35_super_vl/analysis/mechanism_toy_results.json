@@ -1,0 +1,88 @@
+{
+  "replay_closed_form": {
+    "window": 16,
+    "rel_err_prod_j_gt_i": 3.34331025502128e-16,
+    "rel_err_prod_j_gt_i_plus_1 (본문 표기)": 0.004691913285797129
+  },
+  "replay_fp16_error": {
+    "fast_heads": {
+      "neglog_alpha": [
+        0.01,
+        0.05
+      ],
+      "tokens": 4096,
+      "heads": 4,
+      "final_state_rel_err": {
+        "FP16 RN 매 토큰": 0.0008155115604792514,
+        "FP16 SR 매 토큰": 0.0011602177371994728,
+        "Replay L=16 + FP16 RN": 0.0002579534997804662,
+        "Replay L=16 + FP16 SR": 0.00036659504563882025
+      },
+      "mean_output_rel_err": {
+        "FP16 RN 매 토큰": 0.0008387223943311897,
+        "FP16 SR 매 토큰": 0.0011879610636757777,
+        "Replay L=16 + FP16 RN": 0.00020623313356677564,
+        "Replay L=16 + FP16 SR": 0.0002917085798441369
+      }
+    },
+    "slow_heads": {
+      "neglog_alpha": [
+        2e-05,
+        0.0002
+      ],
+      "tokens": 4096,
+      "heads": 4,
+      "final_state_rel_err": {
+        "FP16 RN 매 토큰": 0.008976797870766084,
+        "FP16 SR 매 토큰": 0.012266058717946674,
+        "Replay L=16 + FP16 RN": 0.002164287368494268,
+        "Replay L=16 + FP16 SR": 0.0030771557496746733
+      },
+      "mean_output_rel_err": {
+        "FP16 RN 매 토큰": 0.006130255653807391,
+        "FP16 SR 매 토큰": 0.008507429075621367,
+        "Replay L=16 + FP16 RN": 0.0015015927316481875,
+        "Replay L=16 + FP16 SR": 0.002133492445269175
+      }
+    }
+  },
+  "replay_traffic": {
+    "state_elems_per_layer": 1048576,
+    "buffer_elems_per_token": 9344,
+    "buffer_token_over_state": 0.0089,
+    "L": 16,
+    "by_draft_len": {
+      "T=1": {
+        "baseline_state_units": 2.0,
+        "replay_state_units": 1.143,
+        "reduction_x": 1.75
+      },
+      "T=3": {
+        "baseline_state_units": 4.0,
+        "replay_state_units": 1.161,
+        "reduction_x": 3.45
+      },
+      "T=5": {
+        "baseline_state_units": 6.0,
+        "replay_state_units": 1.178,
+        "reduction_x": 5.09
+      },
+      "T=7": {
+        "baseline_state_units": 8.0,
+        "replay_state_units": 1.196,
+        "reduction_x": 6.69
+      }
+    },
+    "paper_claim": "T+1 → 약 1+1/L (§5.4)",
+    "measured_T24": "출력 TPS +4.7–6.4%, 사용자당 +6.4–12.5%"
+  },
+  "mopd_proximal_teacher": {
+    "alpha": 0.2,
+    "log(1-alpha)": -0.2231435513142097,
+    "min_advantage_over_trials": -0.22314355130365326,
+    "bound_holds": true,
+    "median_KL(pS||pT)": 8.809603551629506,
+    "median_KL(pS||mix)": 0.16911851092066085,
+    "note": "단계 1(α=1)은 하한이 없음. 단계 2는 음의 신호를 −0.223으로 자르고 평균 신호 크기도 크게 줄인다"
+  }
+}
