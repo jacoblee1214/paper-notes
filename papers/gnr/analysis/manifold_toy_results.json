@@ -1,0 +1,274 @@
+{
+  "setup": {
+    "D": 24,
+    "eps": 0.45,
+    "latent_dim": 3,
+    "modes": 2,
+    "mpc_ns": 300,
+    "mpc_M": 10,
+    "mpc_budget": 3000
+  },
+  "seed_mpc": {
+    "pool": 1600,
+    "mpc_success_pct": 66.9,
+    "mean_samples_used_success": 1652.0,
+    "seeds_outside_holdout_disk": 930
+  },
+  "mpc_in_dist": {
+    "success_pct": 63.2,
+    "mean_samples": 2164.4
+  },
+  "mpc_interp_ood": {
+    "success_pct": 96.0,
+    "mean_samples": 1656.1
+  },
+  "mpc_extrap_ood": {
+    "success_pct": 4.5,
+    "mean_samples": 2962.2
+  },
+  "mpc_in_dist_budget192": {
+    "success_pct": 0.0
+  },
+  "gnr_proxy": {
+    "25": {
+      "in_dist/residual": {
+        "1": 21.0,
+        "4": 33.5,
+        "16": 39.8,
+        "64": 43.2,
+        "256": 47.2
+      },
+      "in_dist/residual_split_S256": {
+        "on_mpc_success": 73.1,
+        "on_mpc_failure": 2.7,
+        "n_mpc_failure": 147
+      },
+      "in_dist/absolute": {
+        "1": 5.2,
+        "4": 10.5,
+        "16": 16.5,
+        "64": 19.2,
+        "256": 21.8
+      },
+      "interp_ood/residual": {
+        "1": 20.5,
+        "4": 38.8,
+        "16": 56.5,
+        "64": 64.0,
+        "256": 69.8
+      },
+      "interp_ood/residual_split_S256": {
+        "on_mpc_success": 72.7,
+        "on_mpc_failure": 0.0,
+        "n_mpc_failure": 16
+      },
+      "interp_ood/absolute": {
+        "1": 0.2,
+        "4": 0.2,
+        "16": 0.8,
+        "64": 1.2,
+        "256": 2.2
+      },
+      "extrap_ood/residual": {
+        "1": 0.0,
+        "4": 0.0,
+        "16": 0.0,
+        "64": 0.0,
+        "256": 0.0
+      },
+      "extrap_ood/residual_split_S256": {
+        "on_mpc_success": 0.0,
+        "on_mpc_failure": 0.0,
+        "n_mpc_failure": 382
+      },
+      "extrap_ood/absolute": {
+        "1": 0.0,
+        "4": 0.0,
+        "16": 0.0,
+        "64": 0.0,
+        "256": 0.0
+      }
+    },
+    "100": {
+      "in_dist/residual": {
+        "1": 41.2,
+        "4": 61.0,
+        "16": 69.2,
+        "64": 73.0,
+        "256": 75.8
+      },
+      "in_dist/residual_split_S256": {
+        "on_mpc_success": 97.6,
+        "on_mpc_failure": 38.1,
+        "n_mpc_failure": 147
+      },
+      "in_dist/absolute": {
+        "1": 28.5,
+        "4": 42.8,
+        "16": 52.8,
+        "64": 58.2,
+        "256": 61.5
+      },
+      "interp_ood/residual": {
+        "1": 20.2,
+        "4": 38.8,
+        "16": 55.2,
+        "64": 68.5,
+        "256": 79.5
+      },
+      "interp_ood/residual_split_S256": {
+        "on_mpc_success": 80.7,
+        "on_mpc_failure": 50.0,
+        "n_mpc_failure": 16
+      },
+      "interp_ood/absolute": {
+        "1": 0.8,
+        "4": 2.5,
+        "16": 6.0,
+        "64": 12.5,
+        "256": 15.5
+      },
+      "extrap_ood/residual": {
+        "1": 0.0,
+        "4": 0.0,
+        "16": 0.0,
+        "64": 0.0,
+        "256": 0.0
+      },
+      "extrap_ood/residual_split_S256": {
+        "on_mpc_success": 0.0,
+        "on_mpc_failure": 0.0,
+        "n_mpc_failure": 382
+      },
+      "extrap_ood/absolute": {
+        "1": 0.0,
+        "4": 0.0,
+        "16": 0.0,
+        "64": 0.0,
+        "256": 0.0
+      }
+    },
+    "400": {
+      "in_dist/residual": {
+        "1": 54.8,
+        "4": 66.0,
+        "16": 71.8,
+        "64": 76.5,
+        "256": 80.0
+      },
+      "in_dist/residual_split_S256": {
+        "on_mpc_success": 99.6,
+        "on_mpc_failure": 46.3,
+        "n_mpc_failure": 147
+      },
+      "in_dist/absolute": {
+        "1": 53.8,
+        "4": 63.2,
+        "16": 68.2,
+        "64": 70.8,
+        "256": 73.2
+      },
+      "interp_ood/residual": {
+        "1": 28.2,
+        "4": 45.8,
+        "16": 61.5,
+        "64": 69.0,
+        "256": 74.0
+      },
+      "interp_ood/residual_split_S256": {
+        "on_mpc_success": 72.9,
+        "on_mpc_failure": 100.0,
+        "n_mpc_failure": 16
+      },
+      "interp_ood/absolute": {
+        "1": 18.0,
+        "4": 28.0,
+        "16": 37.5,
+        "64": 41.8,
+        "256": 45.5
+      },
+      "extrap_ood/residual": {
+        "1": 1.0,
+        "4": 2.0,
+        "16": 3.0,
+        "64": 3.2,
+        "256": 3.2
+      },
+      "extrap_ood/residual_split_S256": {
+        "on_mpc_success": 33.3,
+        "on_mpc_failure": 1.8,
+        "n_mpc_failure": 382
+      },
+      "extrap_ood/absolute": {
+        "1": 0.0,
+        "4": 0.2,
+        "16": 0.2,
+        "64": 0.8,
+        "256": 1.5
+      }
+    },
+    "930": {
+      "in_dist/residual": {
+        "1": 57.2,
+        "4": 73.5,
+        "16": 80.2,
+        "64": 83.5,
+        "256": 86.0
+      },
+      "in_dist/residual_split_S256": {
+        "on_mpc_success": 100.0,
+        "on_mpc_failure": 61.9,
+        "n_mpc_failure": 147
+      },
+      "in_dist/absolute": {
+        "1": 57.8,
+        "4": 71.0,
+        "16": 76.2,
+        "64": 79.2,
+        "256": 80.5
+      },
+      "interp_ood/residual": {
+        "1": 19.0,
+        "4": 33.5,
+        "16": 43.5,
+        "64": 52.8,
+        "256": 58.0
+      },
+      "interp_ood/residual_split_S256": {
+        "on_mpc_success": 56.2,
+        "on_mpc_failure": 100.0,
+        "n_mpc_failure": 16
+      },
+      "interp_ood/absolute": {
+        "1": 14.2,
+        "4": 22.2,
+        "16": 32.0,
+        "64": 37.0,
+        "256": 42.2
+      },
+      "extrap_ood/residual": {
+        "1": 1.8,
+        "4": 2.8,
+        "16": 3.5,
+        "64": 4.0,
+        "256": 4.5
+      },
+      "extrap_ood/residual_split_S256": {
+        "on_mpc_success": 44.4,
+        "on_mpc_failure": 2.6,
+        "n_mpc_failure": 382
+      },
+      "extrap_ood/absolute": {
+        "1": 1.2,
+        "4": 1.5,
+        "16": 2.2,
+        "64": 2.8,
+        "256": 3.0
+      }
+    }
+  },
+  "regression_to_mean": {
+    "success_pct": 0.0,
+    "half_mode_gap_over_eps": 4.44
+  }
+}

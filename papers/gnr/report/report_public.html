@@ -1,0 +1,1133 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GNR 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig1"], img[src*="paper_fig2"] { max-width: 82%; }
+img[src*="paper_fig3"] { max-width: 52%; }
+img[src*="paper_fig4"], img[src*="paper_fig5"] { max-width: 88%; }
+img[src*="paper_table2"] { max-width: 42%; }
+img[src*="scaling_fit"], img[src*="cost_per_success"] { max-width: 86%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>GNR: 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 그림은 라이선스(CC BY-NC-ND 4.0) 때문에 제외했습니다. 원문 https://arxiv.org/abs/2610.12440 · arXiv:2610.12440v1 · Meta Reality Labs Research (Gao, Yang, Abbatematteo, Godwin, Wang, Boldu, Man, Dou, Qin, Nakagome, Whitmire) · 공식 코드·데이터 미공개(2026-11-03 확인, YY-GX/GNR은 프로젝트 페이지 저장소) · 분석일 2026-11-03 · 논문 그림은 개인 학습용으로만 사용(논문 라이선스 CC BY-NC-ND 4.0)</p>
+
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> sampling MPC(DIAL-MPC)가 푼 리타겟팅 궤적으로, IK 기준 제어에 더할 잔차의 조건부 flow matching 모델을 학습한다. 새 시연에서는 후보 S개를 뽑아 시뮬레이터로 거르거나(pass@S), MPC 초기값으로 쓴다(GNR+MPC). HOT3D에서 223k 궤적과 접촉력 라벨을 만들었다.</li>
+<li><strong>&quot;56.2% vs 27.2%&quot;의 27.2%는 시험 집합의 분할 비율이다:</strong> 1,000개를 DIAL-MPC 성공 272개와 실패 728개로 골랐으므로 DIAL-MPC 행은 정의상 100%/0%다. Table 1은 정수 개수로 정확히 맞는다. 다시 돌린 기준선 중 최고는 iCEM 34.7%다.</li>
+<li><strong>이득은 거부 표집에서 나오고 꼬리가 무겁다:</strong> GNR S=1은 IK와 같다(18.1% 대 18.3%). MPC-failure의 pass@S를 Beta-혼합으로 맞추면 꼬리 지수 a ≈ 0.12–0.14라서, 표본을 두 배로 늘려도 실패가 8–9%만 준다. ShapeFilter는 a ≈ 0.8로 표본 몇 개면 된다.</li>
+<li><strong>&quot;시연&quot; 수는 최적화 시도 단위다:</strong> 기하 변형 쪽은 쌍 7,280개 × 시드 24개다. 쌍 단위 MPC 성공률 37.4%가 시도 단위로는 27.6%가 되고, MPC-failure의 13.8%는 다른 시드로 이미 푼 쌍이다. 궤적 수는 +133%지만 서로 다른 기하는 +19.7%다.</li>
+<li><strong>비용 수치는 출처가 섞였지만 결론은 유지된다:</strong> 7.6배(Table 1 단가)는 Table 14 단가로 9.9배다. 2.62배 시나리오는 비용의 78%가 MPC 시드라서 최대 3.36배까지만 줄일 수 있다. ShapeFilter &quot;CPU 비용 1.6%&quot;는 조기 종료할 때만 성립한다(64개를 다 쓰면 약 21%). NIST, 다중 embodiment, BC의 &quot;비슷하거나 나은 SR&quot;은 통계적으로 구분되지 않는다.</li>
+<li><strong>구현 가능성:</strong> 코드·가중치·데이터·데이터 엔진이 비공개라 논문 결과는 재현할 수 없다. SuperDex(Apache-2.0, FR3 + DG-5F 모델, macOS ARM 지원 표기)와 DIAL-MPC 원 구현, HOT3D는 공개되어 작은 규모 재구현은 가능하다. 이 맥에서는 재계산과 toy를 끝냈고, SuperDex·torch(MPS) 설치 승인 시 축소판을 시도할 수 있다.</li>
+</ol>
+<p><img src="figures/table1_split.png" alt="Fig. 2" /></p>
+<p class="cap">그림: Table 1을 MPC-success 272개와 MPC-failure 728개 안의 성공 수로 분해(직접 계산, `03` §1).</p>
+</section>
+<section class="chapter"><h1>01. 논문 분석: GNR (arXiv:2610.12440)</h1>
+<ul>
+<li>제목: <em>Generative Neural Retargeting for Human-to-Robot Dexterous Manipulation</em></li>
+<li>저자: Dechen Gao, Yue Yang(공동 1저자), Ben Abbatematteo, Nathan Godwin, Pengcheng Wang, Roger Boldu, Steven Man, Zhiyang Dou, Chuan Qin, Sho Nakagome, Eric Whitmire. 소속은 Meta Reality Labs Research이고, 일부 저자는 UC Davis, UNC Chapel Hill, UC Berkeley, MIT, CMU 소속입니다(Meta 재직 중 수행).</li>
+<li>공개: arXiv <strong>v1 2026-10-08</strong>(분석 대상, 40쪽: 본문 10쪽, 참고문헌, 부록 A–J). 프로젝트 페이지 https://yy-gx.github.io/GNR/</li>
+<li>코드: <strong>공개되지 않았습니다</strong>(2026-11-03 확인). <code>YY-GX/GNR</code>은 프로젝트 페이지 저장소이고, README에 &quot;Code and Dataset buttons are omitted until release&quot;라고 적혀 있습니다. 223k 데이터셋도 아직 공개되지 않았습니다.</li>
+<li>라이선스: arXiv abs 페이지 기준 <strong>CC BY-NC-ND 4.0</strong>. PDF 안에는 저작권 문구나 별도 권리 표기가 없습니다(<code>©</code>, copyright, rights, license 검색 0건, PDF 메타데이터 Creator는 arXiv GenPDF). CC BY가 아니므로 논문 그림은 개인용 리포트와 PPT에만 넣고, 게시본에서는 뺐습니다.</li>
+<li>분석 범위: 본문과 부록 전부, 프로젝트 페이지(2026-11-03 저장)</li>
+</ul>
+<hr />
+<h2>1. Abstract (한 줄 요약과 주장)</h2>
+<p><strong>한 줄 요약:</strong> 사람 시연을 로봇손 궤적으로 바꿀 때 시연마다 sampling MPC를 새로 돌리지 않습니다. 대신 MPC가 이미 푼 궤적으로 **IK 기준 제어에 더할 잔차의 조건부 생성 모델(flow matching)**을 학습하고, 새 시연에서는 후보 S개를 뽑아 시뮬레이터로 걸러 냅니다(pass@S). 정밀하고 긴 과제에서는 생성 결과를 MPC 초기값으로 씁니다.</p>
+<p>저자들의 가설은 &quot;동역학적으로 가능한 궤적은 시연들이 공유하는 저차원 manifold 근처에 모여 있다&quot;입니다(Abstract, Sec. 3.1). 기여로 내세우는 것은 두 가지입니다(Sec. 1).</p>
+<ol>
+<li><strong>리타겟팅을 생성 모델링으로 바꿈.</strong> HOT3D OOD 시험 1,000개에서 GNR(S=256)은 56.2%, DIAL-MPC는 27.2%이고, 표본은 MPC의 8.5%(256/3,000), 궤적당 CPU 비용은 7.6배 적다고 주장합니다. MPC가 실패한 시연의 42.6%를 풉니다(Table 1).</li>
+<li><strong>real-to-sim 데이터 엔진.</strong> HOT3D에서 223k 궤적, 3.3k 물체 기하, 시뮬레이션 접촉력 라벨을 만들었습니다. motion capture로 모은 정밀 과제 두 개(ShapeFilter 1.96 mm, NIST 1 mm·29초)에서 3.4k 궤적을 만들었습니다.</li>
+</ol>
+<hr />
+<h2>2. Method</h2>
+<h3>2.1 문제 설정 (Sec. 3.1)</h3>
+<p>리타겟팅은 IK로 얻은 운동학 레퍼런스 x̄_{0:T}(로봇·물체 상태)를 받아, 물리에서 이를 재현하는 제어열 u_{0:T−1}을 찾는 제약 최적화입니다. 정식화는 SPIDER(Pan et al., 2025)를 따릅니다.</p>
+<p>min_u J(u_{0:T−1})  s.t.  x_{t+1} = f(x_t, u_t),  x_{0:T} ∈ X,  u_{0:T−1} ∈ U</p>
+<p>접촉이 많아 J는 비볼록하고 불연속입니다. 그래서 MPPI, DIAL-MPC 같은 sampling 최적화가 표준인데, 저자들이 지적하는 문제는 두 가지입니다. 과제와 무관한 잡음으로 탐색해서 표본 효율이 낮고, <strong>시연마다 독립적으로 풀어서 앞 시연의 해가 다음 시연에 도움이 되지 않습니다</strong>.</p>
+<h3>2.2 생성 모델: 잔차 flow matching (Sec. 3.1, App. B.1)</h3>
+<ul>
+<li><strong>무엇을 생성하나:</strong> IK 기준 제어 ū에 대한 잔차 Δ = u − ū입니다. 조건은 c = (x̄_{0:T}, o)이고, o는 물체 기하(HOT3D: Point Transformer V3, 점 1,024개) 또는 물체 자세(ShapeFilter 본 실험, NIST)입니다.</li>
+<li><strong>학습:</strong> 표준 conditional flow matching입니다. z_τ = (1 − τ)z_0 + τΔ로 두고 ‖v_θ(z_τ, τ, c) − (Δ − z_0)‖²를 줄입니다. 학습 쌍 (Δ, c)는 DIAL-MPC가 성공한 궤적입니다.</li>
+<li><strong>추론:</strong> Euler 10단계로 z_0 → Δ̂를 적분하고 u = ū + Δ̂로 씁니다.</li>
+<li><strong>구조:</strong> temporal U-Net(폭 128·256·512) + FiLM 조건입니다. HOT3D 모델은 19.57M 파라미터이고, A100 한 장에서 28,480 에피소드를 bfloat16, 배치 128로 학습했습니다. 에폭과 학습률은 HOT3D에 대해서는 적혀 있지 않습니다. ShapeFilter와 NIST는 AdamW, 학습률 4×10⁻⁴, EMA 0.999로 100·200 에폭을 학습했습니다.</li>
+<li>잔차 예측이 절대 제어 예측보다 낫다는 근거는 App. E.4입니다(§3.5).</li>
+</ul>
+<h3>2.3 두 가지 배치 방식 (Sec. 3.2)</h3>
+<ol>
+<li><strong>Open-loop GNR:</strong> 같은 조건에서 잠재 변수 S개를 뽑아 후보 궤적 S개를 만들고, 각각 시뮬레이터에서 재생해 성공 기준(Table 4)으로 판정합니다. 하나라도 통과하면 성공이고, 이를 <strong>pass@S</strong>로 보고합니다. 결국 &quot;학습된 제안 분포 + 시뮬레이터 거부 표집&quot;입니다.</li>
+<li><strong>GNR+MPC:</strong> 생성한 궤적을 MPC 초기값으로 주고 MPC가 다듬습니다. 오차가 누적되는 긴 과제(NIST)를 위한 방식입니다.</li>
+</ol>
+<h3>2.4 데이터 엔진 (Sec. 4, Fig. 2, App. C)</h3>
+
+<ol>
+<li><strong>real-to-sim:</strong> 손 motion capture나 egocentric 복원(HOT3D)을 시뮬레이션 사람손(33-DoF)으로 옮기고, 손목 자세와 손끝 5개를 목표로 한 keypoint IK로 Tesollo DG-5F(26-D 관절 제어)에 리타겟합니다. 왼손 시연은 장면 전체를 시상면으로 뒤집어 오른손 모델로 처리합니다(App. C.1).</li>
+<li><strong>분할:</strong> HOT3D는 손가락 두 개 이상이 물체 표면 20 mm 안에 있는 연속 구간으로 자릅니다. 약 5,000개 구간이 나옵니다(App. C.2).</li>
+<li><strong>파지 재설정:</strong> 이미 쥔 상태로 시작하는 구간은 IK가 손바닥을 물체에 박아 넣을 수 있습니다. 그래서 물체를 고정하고 중력을 끈 채 손을 닫은 뒤, 약 12프레임 후 고정을 풉니다(App. C.3).</li>
+<li><strong>DIAL-MPC 최적화와 성공 판정 Γ:</strong> Γ = γ_track ∧ γ_pen ∧ γ_grasp ∧ γ_force. HOT3D 기준은 물체 위치 오차 150 mm·회전 40° 미만, 평균 캡슐 침투 5 mm 이하, 놓은 뒤 쥐는 힘 중앙값 1 N 이상, 손가락별 힘 95분위 100 N 이하입니다(Table 4, App. D.1).</li>
+<li><strong>접촉력 라벨:</strong> SDF penalty 접촉으로 접촉점마다 위치, 법선, 침투 깊이, 힘을 기록합니다. 접촉 강성은 시뮬레이터 기본값의 1/10이고, 짧은 median filter로 이상치를 지웁니다(App. C.4). 라벨 값은 이 강성 선택에 따라 달라집니다.</li>
+<li><strong>두 단계 확장(Sec. 4.2):</strong>
+<ul>
+<li><em>발견 단계:</em> 원래 조건과 단일 축 섭동 16개(위치 ±15 mm, 시작 시점 ±3·±5프레임, 크기 ×1.15·×1.30, 회전 ±10°, 마찰 ×0.5·×2)로 리타겟이 되는 구간을 찾습니다.</li>
+<li><em>확장 단계:</em> 성공한 구간의 물리(마찰, LLM이 추정한 밀도 범위로 정한 질량)와 기하(SAM 3D 재생성·가림 보완·회전 후 재생성, 변형, 늘이기; 물체당 200 변형)를 바꿔 다시 최적화합니다. 변형마다 <strong>최적화 시드 24개</strong>를 돌립니다(App. C.5).</li>
+</ul>
+</li>
+</ol>
+<p>시뮬레이터는 SuperDex Physics(Meta의 &quot;Mochi team&quot; 암시적 접촉 엔진)입니다. 비볼록 충돌 형상과 공간에 분포된 3D 접촉력을 지원합니다(Sec. 5.1).</p>
+<hr />
+<h2>3. Experiments</h2>
+<h3>3.1 설정 (Sec. 5.1, App. B)</h3>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>로봇</th>
+<th>시연</th>
+<th>학습/시험</th>
+<th>성공 기준 (Table 4)</th>
+<th>MPC 예산 (Table 5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOT3D</td>
+<td>DG-5F 손만 (26-D)</td>
+<td>사람 동작 780개 → 증강 360,150개, 약 2 s</td>
+<td>28,480 / 1,000</td>
+<td>150 mm, 40°, 침투 ≤ 5 mm, 쥐는 힘 ≥ 1 N, 손가락 힘 p95 ≤ 100 N</td>
+<td>300 × 10 = 3,000</td>
+</tr>
+<tr>
+<td>ShapeFilter</td>
+<td>FR3 + DG-5F (29-D)</td>
+<td>mocap 605개 → 자세 증강 3,037개, 11.0 s</td>
+<td>2,448 / 589</td>
+<td>십자 부품 중심이 삽입 영역(16 cm 상자) 안. 구멍 여유 1.96 mm</td>
+<td>500 × 6 = 3,000</td>
+</tr>
+<tr>
+<td>NIST</td>
+<td>양팔 FR3 + DG-5F (29-D)</td>
+<td>mocap 358개, 29 s</td>
+<td>294 / 64</td>
+<td>수평 오차 &lt; 1 mm, 8 mm 이상 체결, 축 오차 &lt; 0.003 rad</td>
+<td>3단계 합계 3,440</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>기준선은 MPPI, DIAL-MPC, iCEM, CMA-ES이고, 모두 같은 비용 J를 씁니다(App. B.3). ShapeFilter에는 CEM을 추가했습니다(Table 10).</li>
+<li>비용은 CPU core-s 또는 core-h입니다. GNR 추론과 시뮬레이션 재생을 포함합니다.</li>
+</ul>
+<h3>3.2 HOT3D: 다양성 축 (Sec. 5.2, Table 1, Fig. 3, App. D)</h3>
+
+<p><strong>시험 집합:</strong> 학습에 없던 물체(203), 학습에 없던 파지(338), 학습에 없던 기하 변형(459)으로 1,000개를 뽑았습니다. DIAL-MPC 기준으로 272개가 MPC-success, 728개가 MPC-failure입니다.</p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>S</th>
+<th>core-s</th>
+<th>전체 SR</th>
+<th>MPC-success SR</th>
+<th>MPC-failure SR</th>
+<th>MPC-failure E_pos (mm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IK</td>
+<td>1</td>
+<td>39.0</td>
+<td>18.3</td>
+<td>50.0</td>
+<td>6.5</td>
+<td>54.5</td>
+</tr>
+<tr>
+<td>DIAL-MPC</td>
+<td>3,000</td>
+<td>2,689</td>
+<td>27.2</td>
+<td>100</td>
+<td>0</td>
+<td>36.3</td>
+</tr>
+<tr>
+<td>MPPI</td>
+<td>3,000</td>
+<td>1,850</td>
+<td>27.7</td>
+<td>71.3</td>
+<td>11.4</td>
+<td>36.9</td>
+</tr>
+<tr>
+<td>iCEM</td>
+<td>3,000</td>
+<td>3,862</td>
+<td>34.7</td>
+<td>78.7</td>
+<td>18.3</td>
+<td>26.0</td>
+</tr>
+<tr>
+<td>CMA-ES</td>
+<td>3,000</td>
+<td>2,913</td>
+<td>32.0</td>
+<td>72.8</td>
+<td>16.8</td>
+<td>32.9</td>
+</tr>
+<tr>
+<td>GNR</td>
+<td>1</td>
+<td>48.9</td>
+<td>18.1</td>
+<td>48.2</td>
+<td>6.9</td>
+<td>54.5</td>
+</tr>
+<tr>
+<td>GNR</td>
+<td>64</td>
+<td>90.9</td>
+<td>49.6</td>
+<td>89.0</td>
+<td>34.9</td>
+<td>37.1</td>
+</tr>
+<tr>
+<td>GNR</td>
+<td>256</td>
+<td>354.1</td>
+<td>56.2</td>
+<td>92.6</td>
+<td>42.6</td>
+<td>36.2</td>
+</tr>
+</tbody>
+</table>
+<p>해석:</p>
+<ul>
+<li><strong>GNR S=1은 IK와 같습니다</strong>(18.1% 대 18.3%). 생성기 한 번의 출력이 IK보다 낫지 않고, 이득은 전부 표본을 늘리고 시뮬레이터로 거르는 데서 나옵니다. 이 구조는 <code>03</code> §2에서 다룹니다.</li>
+<li><strong>DIAL-MPC의 100%/0%는 정의입니다.</strong> 시험 집합을 DIAL-MPC 결과로 나눴으므로 이 행은 다시 돌린 결과가 아니라 분할 레이블입니다(<code>04</code> C4). 공정한 비교 대상은 MPPI, iCEM, CMA-ES이고, 그중 가장 좋은 iCEM이 34.7%입니다.</li>
+<li>추적 오차가 낮다고 성공하지는 않습니다. iCEM의 MPC-failure 쪽 E_pos 중앙값은 26 mm로 GNR보다 작지만 SR은 18%입니다. 저자들은 최적화가 추적 오차는 작지만 파지·접촉 조건을 어기는 국소해에 빠진다고 설명합니다.</li>
+<li><strong>OOD 부분집합(Fig. 3, App. D.3):</strong> S=1 → 256에서 물체 12.8 → 44.3%, 파지 10.1 → 42.9%, 기하 26.4 → 71.2%로 오릅니다. MPC-failure 중 31.9–58.4%를 풉니다. 역산하면 부분집합별 MPC-success 비율이 물체 18%, 파지 20%, 기하 36%로 크게 다릅니다(<code>04</code> C3).</li>
+</ul>
+<h3>3.3 데이터셋 확장과 비용 (Sec. 5.2, App. D.4, G)</h3>
+<ul>
+<li>DIAL-MPC는 360,150개 중 95,344개(26.47%)를 풀었고 390k core-h를 썼습니다(512코어로 31.7일).</li>
+<li>28k로 학습한 GNR을 MPC-failure 264,806개에 S=256으로 적용하면 127,136개(48.01%)를 더 풉니다. 성공한 표본에서 추출을 멈춥니다(D.4). 합치면 222,806개(Table 8에서는 222,480개)이고, 물체 기하는 2,756 → 3,298개입니다.</li>
+<li>같은 모델은 MPC-success 95k에서 89.30%, 그중 학습에 안 쓴 시연에서 88.91%를 냅니다.</li>
+<li><strong>실제 배치 시나리오(App. G.2):</strong> MPC로 시드 28,480개를 얻으려면 약 107,740번 시도해야 하고 116.1k core-h가 듭니다. 나머지 331,670개에 GNR(S=256, 354.1 core-s)을 쓰면 32.6k core-h입니다. 합계 148.7k core-h로 215,062개를 얻으므로, 전부 MPC로 돌린 경우보다 2.62배 쌉니다.</li>
+</ul>
+<h3>3.4 ShapeFilter와 NIST: 정밀도·긴 시간 축 (Sec. 5.3, Fig. 4–5, Table 2, App. E–F)</h3>
+
+<p><strong>ShapeFilter(십자 부품 삽입):</strong></p>
+<ul>
+<li>IK는 3.7%입니다. Open-loop GNR은 S=1에서 52.4%, S=64에서 97.4%, S=256에서 99.3%입니다. S=64에서 MPC(3,000표본, 92.9%)를 넘고, 이때 CPU 비용은 MPC의 1.6%라고 합니다.</li>
+<li>GNR+MPC는 M=1–6 반복에서 98.4–99.3%이고, 같은 M에서 IK로 시작한 MPC보다 항상 높습니다(Fig. 4a).</li>
+<li>시드 수 N을 줄여도 test-time scaling이 메웁니다. N=50으로 학습해도 S=1 11.5%에서 S=256 99.5%까지 오릅니다(Fig. 5a, Table 12).</li>
+<li>Table 2: MPC 2,500표본 93.7%, 10,124 core-s 대 GNR 77표본 94.7%, 678 core-s로 14.9배 차이입니다. 데이터셋 3,037개를 만드는 데 MPC는 8,541 core-h(93.7%), N=50 시드 + GNR S=77은 765.6 core-h(94.8%)로 11.2배 차이입니다.</li>
+</ul>
+<p><strong>NIST(M8 노브 체결, 29초):</strong></p>
+<ul>
+<li>Open-loop GNR은 S=256에서도 4.7%입니다(IK 0%). 긴 시간 동안 오차가 쌓이기 때문에 폐루프 보정이 필요합니다.</li>
+<li>GNR+MPC(N=294)는 MPC 표본 2,296개로 92.2%에 도달합니다. IK에서 시작한 MPC는 3,440개가 필요하므로 33.3% 적습니다. N=100이면 90.6%이고 38.8% 적습니다.</li>
+<li>Table 2: MPC 3,440표본 92.2%, 795,777 core-s 대 GNR+MPC 1,976표본 89.1%, 266,199 core-s로 3.0배 차이입니다. 데이터셋 기준으로는 79,136 대 44,517 core-h로 1.8배 차이입니다.</li>
+</ul>
+
+
+<h3>3.5 부록 실험 (App. E.4, H, I)</h3>
+<ul>
+<li><strong>조건 절제(Table 11):</strong> ShapeFilter에서 자세(State), 점군(Geometry), 둘 다를 조건으로 주어도 S=1 50.4 / 50.9 / 53.5%, S=256 99.3 / 99.5 / 99.3%로 거의 같습니다.</li>
+<li><strong>잔차 대 절대(Fig. 12):</strong> 학습 사분면 1·2·4개일 때 잔차 예측은 S=1에서 34.7 / 42.4 / 45.8%, S=128에서 92.2 / 96.1 / 94.9%입니다. 절대 예측 수치는 그림에만 있고, 차이는 S가 작을 때 크다고 씁니다.</li>
+<li><strong>다중 embodiment(Table 16):</strong> SPIDER 벤치마크의 손 5종(Ability, Allegro, Inspire, Schunk, XHand)에서 147개로 GNR 하나를 학습했습니다(52-D 공통 행동). 시험 100개에서 S=128·256·384로 90·93·95%이고, SPIDER(최적화당 최대 16,384–32,768표본)는 96%입니다.</li>
+<li><strong>행동 복제(App. I.1):</strong> 같은 크기(500 에피소드, 10.9 s)의 MPC, GNR+MPC, GNR 데이터로 203M 파라미터 MLP 정책을 학습했습니다. 체크포인트 10개 중 최고 SR이 37.5%, 43.75%, 43.75%입니다(시험 32회). 과제 이름은 적혀 있지 않지만 에피소드 길이로 보아 ShapeFilter입니다.</li>
+<li><strong>데이터 flywheel(App. I.2):</strong> ShapeFilter에서 시드 200개로 시작해, GNR이 실패한 시연을 MPC로 풀어 학습 집합에 더하기를 4회 반복했습니다(200 → 749개). 시험 256개에서 best-of-8은 55.2 → 74.4%, best-of-16은 68.4 → 84.8%입니다.</li>
+</ul>
+<hr />
+<h2>4. Limitations</h2>
+<h3>4.1 저자가 밝힌 한계</h3>
+<p>별도 한계 절은 없습니다. 결론에서 실물 전이(sim-to-real)를 향후 과제로 들고, NIST처럼 긴 과제에서는 open-loop 생성만으로 부족하다고 인정합니다(Sec. 5.3, 6). 모든 결과는 시뮬레이션이고 실물 로봇 실험은 없습니다.</p>
+<h3>4.2 분석하면서 추가로 발견한 한계와 의문점</h3>
+<ol>
+<li><strong>&quot;MPC 27.2%&quot;는 비교 결과가 아니라 시험 집합의 분할 비율입니다.</strong> 1,000개를 DIAL-MPC 성공 272개와 실패 728개로 골랐으므로 DIAL-MPC 행은 정의상 100%/0%입니다. 초록의 &quot;56.20% vs 27.20%&quot;는 같은 조건의 재실행 비교가 아닙니다. 독립적으로 다시 돌린 기준선 중 최고는 iCEM 34.7%입니다. 프로젝트 페이지의 Table 1 각주는 &quot;100% and 0% by construction&quot;이라고 밝히지만, 논문의 표 각주와 초록에는 이 설명이 없습니다(<code>04</code> C1, C4).</li>
+<li><strong>&quot;시연&quot; 수는 최적화 시도 단위입니다.</strong> 기하 변형 쪽 173,840개는 (동작, 변형) 쌍 7,280개 × 최적화 시드 24개입니다. 쌍 단위 MPC 성공률은 37.4%인데 시도 단위로는 27.6%입니다. MPC-failure 12.6만 개 중 1.7만 개(13.8%)는 다른 시드로 MPC가 이미 푼 쌍입니다. GNR에게는 시드가 다른 시도 24개가 같은 조건이므로, &quot;MPC가 실패한 127k개를 풀었다&quot;는 서로 다른 문제 127k개가 아닙니다. 223k 궤적을 기하 3.3k개와 사람 동작 780개에서 만들었다는 점도 같이 봐야 합니다. Table 3에서 다른 연구의 시연 수와 나란히 놓은 비교는 단위가 다릅니다(<code>04</code> C5, <code>03</code> §4).</li>
+<li><strong>이득은 거부 표집에서 나오고, 꼬리가 무겁습니다.</strong> S=1은 IK 수준입니다. MPC-failure 쪽 pass@S를 시연별 성공 확률 분포로 맞추면 Beta(a ≈ 0.12–0.14)입니다. 표본을 두 배로 늘려도 실패가 약 8%만 줄어들고, S=1024로 외삽해도 49–56%입니다(<code>03</code> §2).</li>
+<li><strong>비용 수치의 출처가 섞여 있습니다.</strong> 7.6배는 Table 1 단가이고 Table 14 단가로는 9.9배입니다. 2.62배는 MPC에 Table 14 단가를, GNR에 Table 1 단가를 썼습니다. 반대로 GNR 확장 비용은 조기 종료를 무시한 상한이라, 조기 종료를 반영하면 26.0k가 아니라 약 16.8k core-h로 추정됩니다(<code>04</code> C6, <code>03</code> §2.3).</li>
+<li><strong>ShapeFilter 수치의 분모와 판이 섞여 있습니다.</strong> Table 10의 일부 기준선은 64개에서만 정수 비율이 되고, S=1 값이 본문 52.4%, Table 11 50.42%로 다릅니다. Table 2의 GNR 행(77표본)은 2,448개가 아니라 N=50 모델입니다. &quot;CPU 비용 1.6%&quot;는 조기 종료를 할 때만 성립합니다. 표본 64개를 다 쓰면 약 21%입니다(<code>04</code> C7).</li>
+<li><strong>&quot;비슷한 SR&quot;의 근거가 약합니다.</strong> NIST Table 2는 59/64 대 57/64(p = 0.76)이고, 표본 수도 본문 2,296개가 아니라 1,976개입니다. 다중 embodiment는 GNR 95% 대 SPIDER 96%로 GNR이 이기지 못합니다. BC는 12/32 대 14/32(p = 0.80)이고 체크포인트 10개 중 최고값입니다(<code>04</code> C8–C10).</li>
+<li><strong>HOT3D 성공 기준이 느슨합니다.</strong> 위치 150 mm는 CHORD 관례입니다. MPC-failure 쪽 E_pos 중앙값이 26–55 mm라서 위치 조건은 거의 걸러 내지 못하고, 실제로는 침투·쥐는 힘·손가락 힘 조건이 성공을 가릅니다. ShapeFilter의 &quot;1.96 mm&quot;는 구멍 여유이고, 판정은 부품 중심이 16 cm 삽입 영역 안에 있는지입니다. Table 3의 &quot;Precision (mm)&quot; 열은 성격이 다른 기준을 한 줄에 놓았습니다(<code>04</code> C12).</li>
+<li><strong>접촉력 라벨은 시뮬레이터 설정의 산물입니다.</strong> 접촉 강성을 기본값의 1/10로 낮추고 median filter를 적용했습니다. 실물 힘과 대조한 결과는 없습니다(App. C.4).</li>
+<li><strong>생성기가 시드 생성기 밖으로 얼마나 나가는지는 열린 문제입니다.</strong> 학습 데이터는 모두 DIAL-MPC 성공 궤적이므로 GNR의 제안 분포는 DIAL-MPC 해의 분포를 닮습니다. MPC-failure를 푸는 이유가 &quot;MPC 예산·시드 운 부족&quot;인지 &quot;MPC가 못 가는 해&quot;인지는 구분되지 않았습니다. toy에서는 학습 범위 안 보간은 잘 되고 밖으로 외삽하면 실패했습니다(<code>03</code> §3).</li>
+<li><strong>더 단순한 기준선이 없습니다.</strong> 생성 모델이 꼭 필요한지 보려면 결정론적 회귀(잔차 MLP)나 최근접 시드 잔차 검색과 비교해야 하는데, 논문에는 둘 다 없습니다. toy에서는 최근접 시드 + 국소 보정만으로도 학습 범위 안에서 MPC를 넘었습니다(<code>03</code> §3).</li>
+<li><strong>코드, 가중치, 데이터, mocap 시연이 모두 공개되지 않았습니다.</strong> 시뮬레이터(SuperDex)와 DG-5F·FR3 모델은 공개되어 있습니다(<code>02</code> §5).</li>
+</ol>
+</section>
+<section class="chapter"><h1>03. 수치 재계산과 해석</h1>
+<p>GNR의 주장은 대부분 &quot;표본 S개 중 하나라도 통과하면 성공&quot;이라는 pass@S와 CPU 비용 회계에 기대고 있습니다. 이 문서는 (1) Table 1의 구조, (2) pass@S 곡선이 왜 그렇게 생겼는지, (3) &quot;가능한 해가 저차원 manifold 근처에 있다&quot;는 가설의 toy, (4) &quot;시연&quot; 단위, (5) 비용 회계를 다룹니다. 모든 계산은 CPU 단일 스레드 numpy·scipy이고 각 스크립트는 수 초에서 수십 초 걸립니다.</p>
+<table>
+<thead>
+<tr>
+<th>스크립트</th>
+<th>결과 파일</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>analysis/table_check.py</code></td>
+<td><code>table_check_results.json</code></td>
+<td>표·본문·부록 재계산 C1–C12 (<code>04</code> §1)</td>
+</tr>
+<tr>
+<td><code>analysis/scaling_toy.py</code></td>
+<td><code>scaling_toy_results.json</code></td>
+<td>pass@S 이질성 모델 적합, 조기 종료 비용</td>
+</tr>
+<tr>
+<td><code>analysis/manifold_toy.py</code></td>
+<td><code>manifold_toy_results.json</code></td>
+<td>manifold 가설 toy: 생성기 대용 대 annealed CEM</td>
+</tr>
+<tr>
+<td><code>analysis/plot_figures.py</code></td>
+<td><code>report/figures/*.png</code></td>
+<td>이 문서의 그래프 네 장</td>
+</tr>
+</tbody>
+</table>
+<h2>1. Table 1을 두 부분집합으로 다시 읽기 (<code>04</code> C2–C4)</h2>
+<p><img src="figures/table1_split.png" alt="Table 1 분해" /></p>
+<p class="cap">그림 1. (a) Table 1의 각 행을 MPC-success 272개와 MPC-failure 728개 안의 성공 수로 나눈 것. 9개 행 모두 정수 개수로 정확히 맞습니다. (b) Fig. 3과 부록 D.3에서 역산한 OOD 부분집합별 DIAL-MPC 성공 비율과 GNR S=256.</p>
+<ul>
+<li>전체 SR = 0.272 × SR_success + 0.728 × SR_failure가 9개 행 모두 반올림 안에서 맞고, 성공 수가 정수입니다(예: GNR S=256 = 252 + 310 = 562개).</li>
+<li><strong>DIAL-MPC 행은 분할 레이블입니다.</strong> 272/1,000 = 27.2%이고, MPC-success에서 100%, MPC-failure에서 0%는 정의입니다. 모집단 MPC 성공률은 26.47%(Table 8)라서 시험 집합은 무작위 추출과 비슷합니다. 다만 초록의 &quot;56.20% vs 27.20%&quot;는 &quot;같은 조건에서 MPC를 다시 돌린 결과&quot;와는 다릅니다. 같은 MPC를 다른 시드로 다시 돌리면 MPC-failure의 일부를 풉니다(§4). 프로젝트 페이지의 표 각주는 이 행이 정의상 100%/0%라고 밝히지만, 논문 Table 1에는 그 각주가 없습니다.</li>
+<li>독립적으로 다시 돌린 기준선(MPPI, iCEM, CMA-ES)은 MPC-success에서 71–79%만 다시 풉니다. 같은 계열 최적화기라도 시드와 잡음에 따라 결과가 크게 갈립니다. 이 사실은 MPC-failure가 &quot;풀 수 없는 문제&quot;가 아니라 상당수가 &quot;이번 실행에서 못 푼 문제&quot;라는 뜻입니다.</li>
+<li>OOD 부분집합 세 개의 MPC 성공 수를 역산하면 37·69·166개이고 합이 정확히 272입니다. 기하 변형 부분집합은 MPC도 36%를 풀 만큼 쉽고, 물체·파지 OOD는 18–20%로 어렵습니다. GNR의 OOD 성능(44·43·71%)도 같은 순서입니다. 즉 부분집합 간 차이는 GNR의 일반화보다 문제 난이도를 더 많이 반영합니다.</li>
+</ul>
+<p><img src="figures/cost_per_success.png" alt="성공 1건당 비용" /></p>
+<p class="cap">그림 2. HOT3D 시험 1,000개에서 시연 1개당 비용과 성공 1건당 비용(= 시연당 비용 / SR). GNR S=64는 성공 1건당 183 core-s로, DIAL-MPC 9,887 core-s의 1/54입니다.</p>
+<p>성공 1건당 비용으로 보면 차이가 더 큽니다. 비율로 계산되는 이 지표는 시험 집합 분할의 영향을 받지 않습니다. 다만 IK도 213 core-s로 매우 싸다는 점을 같이 봐야 합니다. GNR S=64(183 core-s)가 IK보다 싼 이유는 IK의 성공률이 낮아서입니다.</p>
+<h2>2. Test-time scaling의 구조</h2>
+<h3>2.1 유도</h3>
+<p>시연 i를 GNR이 표본 하나로 풀 확률을 p_i라고 합시다. 표본들이 조건부 독립이면 pass@S = 1 − E[(1 − p)^S]입니다. 모든 시연의 p가 같다면 S=1 성공률 p_1에서 곡선이 정해집니다. HOT3D MPC-failure는 p_1 = 6.87%이므로 pass@64가 98.9%여야 하는데, 실제로는 34.9%입니다. <strong>시연마다 p가 크게 다릅니다.</strong></p>
+<p>p의 분포를 &quot;아예 못 푸는 비율 π0 + 나머지는 Beta(a, b)&quot;로 두면 닫힌 꼴이 나옵니다.</p>
+<p>E[(1 − p)^S | Beta] = B(a, b + S) / B(a, b)</p>
+<p>pass@S = (1 − π0) · (1 − B(a, b + S) / B(a, b))</p>
+<p>S가 크면 B(a, b + S)/B(a, b) ≈ Γ(a + b)/Γ(b) · S^(−a)이므로 실패율이 <strong>S^(−a)의 거듭제곱 꼬리</strong>로 줄어듭니다. 표본을 두 배로 늘릴 때마다 (π0를 뺀) 실패가 2^(−a)배가 됩니다. a는 &quot;p가 0 근처에 얼마나 몰려 있는가&quot;를 나타내는 하나의 숫자입니다.</p>
+<p>조기 종료(성공하면 추출 중단)를 할 때 기대 표본 수는 다음과 같습니다.</p>
+<p>E[min(T, S)] = Σ_{k=0}^{S−1} P(처음 k개 모두 실패) = Σ_{k=0}^{S−1} [π0 + (1 − π0) · B(a, b + k)/B(a, b)]</p>
+<h3>2.2 적합 결과 (<code>scaling_toy.py</code>)</h3>
+<p><img src="figures/scaling_fit.png" alt="pass@S 적합" /></p>
+<p class="cap">그림 3. 논문 값(점)과 이질성 모델 적합(선). 주황 점선은 모든 시연의 p가 같다고 가정한 예측입니다. HOT3D MPC-failure는 a = 0.12라서 로그축에서도 거의 직선으로 천천히 오릅니다.</p>
+<table>
+<thead>
+<tr>
+<th>곡선 (출처)</th>
+<th>π0</th>
+<th>a</th>
+<th>b</th>
+<th>RMSE (%p)</th>
+<th>시연당 평균 p</th>
+<th>S=1024 외삽</th>
+<th>조기 종료 시 기대 표본 (S=256)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOT3D 시험 MPC-failure 728 (Table 1)</td>
+<td>0.21</td>
+<td>0.14</td>
+<td>1.46</td>
+<td>0.35</td>
+<td>0.069</td>
+<td>48.8%</td>
+<td>163</td>
+</tr>
+<tr>
+<td>HOT3D 360k MPC-failure (D.4)</td>
+<td>0.00</td>
+<td>0.12</td>
+<td>1.55</td>
+<td>0.18</td>
+<td>0.072</td>
+<td>55.8%</td>
+<td>151</td>
+</tr>
+<tr>
+<td>HOT3D 시험 MPC-success 272 (Table 1)</td>
+<td>0.04</td>
+<td>0.46</td>
+<td>0.46</td>
+<td>0.42</td>
+<td>0.48</td>
+<td>94.2%</td>
+<td>29</td>
+</tr>
+<tr>
+<td>HOT3D 360k MPC-success (D.4, 점 3개)</td>
+<td>0.05</td>
+<td>0.40</td>
+<td>0.48</td>
+<td>0</td>
+<td>0.43</td>
+<td>91.9%</td>
+<td>38</td>
+</tr>
+<tr>
+<td>ShapeFilter State (Table 11)</td>
+<td>0.00</td>
+<td>0.84</td>
+<td>0.81</td>
+<td>0.31</td>
+<td>0.51</td>
+<td>99.7%</td>
+<td>8</td>
+</tr>
+<tr>
+<td>ShapeFilter 시드 N=2,448 (Table 12 역산)</td>
+<td>0.00</td>
+<td>0.78</td>
+<td>0.70</td>
+<td>0.21</td>
+<td>0.53</td>
+<td>99.7%</td>
+<td>8</td>
+</tr>
+<tr>
+<td>ShapeFilter 시드 N=50 (Table 12 역산)</td>
+<td>0.00</td>
+<td>1.56</td>
+<td>15.2</td>
+<td>1.33</td>
+<td>0.09</td>
+<td>99.9%</td>
+<td>23</td>
+</tr>
+</tbody>
+</table>
+<p>읽는 법:</p>
+<ol>
+<li><strong>HOT3D MPC-failure의 꼬리 지수 a ≈ 0.12–0.14입니다.</strong> 표본을 두 배로 늘려도 실패가 8–9%만 줄어듭니다. S=256 → 1024(4배)로 외삽해도 49–56%입니다. 점이 4개뿐이라 π0(점근선)는 정해지지 않습니다. 시험 집합 적합은 π0 = 0.21, 360k 적합은 0이 나옵니다. 믿을 수 있는 것은 &quot;느린 거듭제곱 꼬리&quot;라는 모양이고, 점근선 값은 아닙니다.</li>
+<li><strong>ShapeFilter는 이질성이 작습니다</strong>(a ≈ 0.8). 두 배마다 실패가 약 42% 줄고, 조기 종료하면 평균 8개면 됩니다.</li>
+<li><strong>시드 N=50은 모양이 다릅니다.</strong> 평균 p는 0.09로 낮지만 a = 1.56, b = 15로 p가 모든 시연에 고르게 낮습니다. 그래서 S를 늘리면 빨리 99%에 닿습니다. 데이터가 적은 생성기는 &quot;모든 시연에 넓고 흐린 제안&quot;을 하고, 데이터가 많은 생성기는 &quot;대부분에 날카롭고 일부에 거의 0인 제안&quot;을 합니다. 논문의 &quot;test-time scaling이 data scaling을 보완한다&quot;(Sec. 5.3)는 ShapeFilter처럼 p가 0으로 몰리지 않는 과제에서만 성립합니다.</li>
+<li>MPC-failure의 무거운 꼬리는 두 가지로 해석할 수 있습니다. (i) 복원 오차나 embodiment 차이로 레퍼런스 자체가 실행 불가능한 시연이 섞여 있다. (ii) 생성기 분포가 해에 거의 닿지 않는다. 논문 데이터만으로는 구분할 수 없습니다. 실패 시연에 MPC 예산을 크게 늘려 보는 실험이 있으면 구분됩니다.</li>
+</ol>
+<p><strong>제안:</strong> pass@256 하나 대신 (a, 평균 p)를 함께 보고하면 &quot;표본을 더 쓰면 얼마나 오르는가&quot;를 예측할 수 있습니다.</p>
+<h3>2.3 조기 종료와 비용</h3>
+<p>Table 1의 비용은 S에 거의 비례합니다(S=64 → 128 → 256에서 표본당 1.37 core-s). 그래서 조기 종료 없이 잰 값으로 봅니다. 부록 D.4는 확장 실험에서 &quot;성공하면 추출을 멈춘다&quot;고 쓰지만, 비용 추정(App. G.2)은 &quot;모든 시연에 전체 예산을 쓴다&quot;고 명시하고 354.1 core-s를 그대로 곱했습니다. 즉 <strong>논문의 GNR 비용은 상한</strong>입니다.</p>
+<p>표본당 1.197 core-s, 고정 비용 47.7 core-s로 근사하고(S=1 → 256 기울기) 적합한 분포의 기대 표본을 쓰면 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>논문 (전체 예산)</th>
+<th>조기 종료 추정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MPC-failure 264,806개 확장</td>
+<td>26,047 core-h</td>
+<td>약 16,800 core-h</td>
+</tr>
+<tr>
+<td>실제 배치 시나리오의 GNR 부분 (331,670개)</td>
+<td>32,623 core-h</td>
+<td>약 18,600 core-h</td>
+</tr>
+<tr>
+<td>실제 배치 시나리오 전체 대비 MPC 절감</td>
+<td>2.62배</td>
+<td>약 2.90배</td>
+</tr>
+</tbody>
+</table>
+<p>반대로 이 시나리오에서 MPC 시드 비용(116.1k core-h)이 전체의 78%입니다. GNR 비용이 0이어도 절감은 390.0 / 116.1 = 3.36배를 넘지 못합니다. 더 줄이려면 시드 수를 줄여야 하고, 그 대가는 §2.2의 a가 작아지는 것(무거운 꼬리)으로 나타날 가능성이 큽니다.</p>
+<h2>3. manifold 가설 toy (<code>manifold_toy.py</code>)</h2>
+<p><strong>질문:</strong> 가능한 해가 조건 c에 매끄럽게 의존하는 저차원 집합 근처에 있으면, 풀린 시연에서 배운 조건부 생성기가 시연마다 처음부터 찾는 sampling 최적화보다 적은 표본으로 푸는가? 그 이득은 어디까지 유지되는가?</p>
+<p><strong>설정:</strong> 물리 시뮬레이션이 아니라 기하만 남긴 장난감입니다.</p>
+<ul>
+<li>조건 c ∈ [−1, 1]²(물체 크기, 접근 각 같은 시연 요약). IK 기준 ū(c) ∈ R²⁴는 c에 따라 크게 변합니다.</li>
+<li>가능한 잔차는 3차원 잠재 구조 Δ*(c) = A·h(c)에 <strong>두 가지 파지 모드</strong>(오프셋 B)를 더한 것입니다. 어느 모드든 ‖Δ − Δ*_m(c)‖ &lt; 0.45이면 성공입니다. 표본 하나를 평가하는 것이 시뮬레이션 롤아웃 한 번입니다.</li>
+<li>MPC: Δ = 0(IK)에서 시작하는 annealed CEM, 300표본 × 10반복 = 3,000표본, 첫 성공에서 멈춤.</li>
+<li>시드: 조건 1,600개를 MPC로 풀어 성공한 것만 씁니다(66.9%). 보간 OOD 시험을 위해 원판(중심 (0.3, −0.2), 반지름 0.35) 안의 시드는 뺐고, 930개가 남았습니다.</li>
+<li>생성기 대용: k-최근접 시드(k=12)를 모드별로 나누고, 모드마다 국소 선형 회귀로 대상 조건의 해를 예측한 뒤 잡음(σ = 0.06)을 더해 S개를 뽑습니다. <strong>flow matching이 아니라 가장 단순한 비모수 조건부 생성기</strong>입니다. 절대 제어 버전은 같은 일을 u = ū + Δ 공간에서 합니다.</li>
+</ul>
+<p><img src="figures/manifold_toy.png" alt="manifold toy" /></p>
+<p class="cap">그림 4. 생성기 대용의 pass@S. (a) 학습 범위 안, (b) 학습 범위 안의 빈 원판(보간 OOD). 주황 선은 MPC 3,000표본. 학습 범위 밖 외삽(c1 ∈ [1, 1.6])은 MPC 4.5%, 생성기 4.5% 이하라 그리지 않았습니다.</p>
+<table>
+<thead>
+<tr>
+<th>시드 수 N</th>
+<th>범위 안 pass@1 / @16 / @256 (잔차)</th>
+<th>범위 안 @256 (절대)</th>
+<th>빈 원판 @256 잔차 / 절대</th>
+<th>범위 밖 @256</th>
+<th>MPC-failure 147개 중 생성기가 푼 비율 (@256)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>25</td>
+<td>21.0 / 39.8 / 47.2</td>
+<td>21.8</td>
+<td>69.8 / 2.2</td>
+<td>0</td>
+<td>2.7%</td>
+</tr>
+<tr>
+<td>100</td>
+<td>41.2 / 69.2 / 75.8</td>
+<td>61.5</td>
+<td>79.5 / 15.5</td>
+<td>0</td>
+<td>38.1%</td>
+</tr>
+<tr>
+<td>400</td>
+<td>54.8 / 71.8 / 80.0</td>
+<td>73.2</td>
+<td>74.0 / 45.5</td>
+<td>3.2</td>
+<td>46.3%</td>
+</tr>
+<tr>
+<td>930</td>
+<td>57.2 / 80.2 / 86.0</td>
+<td>80.5</td>
+<td>58.0 / 42.2</td>
+<td>4.5</td>
+<td>61.9%</td>
+</tr>
+<tr>
+<td>MPC 3,000표본</td>
+<td>63.2</td>
+<td></td>
+<td>96.0</td>
+<td>4.5</td>
+<td>(정의상 0%)</td>
+</tr>
+</tbody>
+</table>
+<p>해석:</p>
+<ol>
+<li><strong>범위 안에서는 상각이 작동합니다.</strong> N=930이면 표본 4개(73.5%)로 MPC 3,000표본(63.2%)을 넘습니다. 같은 CEM을 192표본으로 줄이면 0%입니다. 논문의 &quot;MPC 표본의 8.5%로 MPC보다 높다&quot;와 같은 방향입니다.</li>
+<li><strong>&quot;MPC가 못 푼 문제를 푼다&quot;는 MPC 밖의 해를 찾았다는 뜻이 아닐 수 있습니다.</strong> toy의 모든 조건에는 해가 있으므로 MPC 실패는 전부 예산·국소 탐색 실패입니다. 생성기는 이웃 시드에서 해를 옮겨 와서 이 중 62%를 풉니다. 논문의 MPC-failure 42.6%도 같은 메커니즘(주변 시연의 해를 옮겨 옴)으로 설명할 수 있습니다.</li>
+<li><strong>잔차 예측이 절대 예측보다 낫고, 데이터가 적거나 보간 OOD일 때 차이가 큽니다</strong>(N=100 빈 원판에서 79.5% 대 15.5%). ū(c)가 c에 따른 큰 변화를 이미 담고 있어서, 잔차가 남기는 부분이 더 작고 매끄럽기 때문입니다. App. E.4와 같은 방향입니다.</li>
+<li><strong>학습 범위 밖 외삽은 실패합니다</strong>(4.5% 이하). 생성기는 시드의 지지 집합 밖으로 나가지 못합니다. 논문의 OOD(새 물체·파지·기하)는 이 toy의 &quot;빈 원판&quot;에 가까운 보간일 가능성이 큽니다. 물체·파지 OOD에서도 MPC 성공 비율이 18–20%로 낮지 않습니다(§1).</li>
+<li><strong>두 모드의 평균을 내는 결정론적 회귀는 0%입니다</strong>(모드 간격의 절반이 ε의 4.4배). 해 집합이 여러 모드일 때 생성 모델이 필요한 이유입니다. 그런데 <strong>논문에는 결정론적 회귀나 최근접 시드 검색 같은 더 단순한 기준선이 없습니다.</strong> 이 toy의 생성기 대용이 바로 &quot;최근접 시드 잔차 + 국소 보정&quot; 검색 기준선인데, 범위 안에서는 MPC를 넘었습니다. flow matching이 검색보다 얼마나 나은지는 논문만으로 알 수 없습니다.</li>
+<li><strong>한계:</strong> 빈 원판에서는 N=400(74.0%)보다 N=930(58.0%)이 낮습니다. 데이터가 촘촘해지면 k=12 이웃이 원판 가장자리 한쪽에 몰려 국소 선형 외삽이 나빠지는 kNN 특유의 현상입니다. 따라서 N에 대한 정량 결론은 이 toy로 내리지 않습니다. MPC가 빈 원판에서 96%를 내는 것도 이 영역이 쉬워서입니다.</li>
+</ol>
+<h2>4. &quot;시연&quot; 단위와 데이터셋 크기 (<code>04</code> C5)</h2>
+<p>부록 C.5와 Table 8을 맞춰 보면, 기하 변형 쪽 &quot;시연&quot;은 (사람 동작, 기하 변형) 쌍에 최적화 시드를 곱한 <strong>최적화 시도</strong>입니다.</p>
+<table>
+<thead>
+<tr>
+<th>단위</th>
+<th>개수</th>
+<th>MPC 성공</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>동작-변형 쌍</td>
+<td>728 × 10 = 7,280</td>
+<td>2,723쌍 (37.4%)</td>
+</tr>
+<tr>
+<td>시도 = 쌍 × 시드 24</td>
+<td>174,720 (평가 173,840, 880개 누락)</td>
+<td>47,918 (27.6%)</td>
+</tr>
+<tr>
+<td>MPC가 푼 쌍 안의 시도</td>
+<td>2,723 × 24 = 65,352</td>
+<td>47,918 (73.3%)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>기하 변형 쪽 MPC-failure 125,922개 중 <strong>17,434개(13.8%)는 다른 시드로 MPC가 이미 푼 쌍</strong>입니다.</li>
+<li>GNR의 조건 c = (x̄, o)는 최적화 시드와 상관이 없습니다. 같은 쌍의 시도 24개는 GNR에게 같은 문제를 24번(S=256씩) 푸는 것입니다. 기하 변형 쪽에서 GNR이 더 푼 52,745개는 서로 다른 문제 52,745개가 아닙니다.</li>
+<li>원래 기하 쪽 186,310개도 사람 동작 780개에서 나왔습니다(동작당 평균 239개: 자세·시점·질량·마찰 증강과 시드).</li>
+<li>궤적 수는 95,344 → 222,480개(+133%)로 늘지만, 서로 다른 물체 기하는 2,755 → 3,298개(+19.7%)이고 사람 동작은 780개 그대로입니다.</li>
+</ul>
+<p><strong>정리:</strong> &quot;223k 시연, 3.3k 기하&quot;는 사실이지만, 다양성의 실제 단위는 사람 동작 780개 × 기하 3.3k개입니다. Table 3에서 DexTrack 3,585개, SPIDER 2,885개 같은 수와 나란히 놓으면 단위가 다릅니다. 본문(222,806개, 기하 2,756개, MPC 성공률 26.43%)과 Table 8(222,480개, 2,755개, 26.47%)도 조금씩 다릅니다.</p>
+<h2>5. 비용 회계 (<code>04</code> C6, C7)</h2>
+<ul>
+<li><strong>단가 출처:</strong> 같은 방법의 Table 14 단가(core-h/에피소드)가 Table 1(core-s)보다 1.11–1.52배 큽니다. DIAL-MPC/GNR 비는 Table 1로 7.6배, Table 14로 9.9배입니다. 2.62배(App. G.2)는 MPC에 Table 14, GNR에 Table 1을 썼습니다. Table 14로 통일하면 2.56배입니다. 어느 쪽이든 결론은 같고, 차이는 작습니다.</li>
+<li><strong>ShapeFilter &quot;1.6%&quot;:</strong> Table 12의 비용은 조기 종료 비용입니다. S가 커지면 증분이 포화합니다. N=2,448에서 S=1 → 2 증분(18.3 core-s)을 S=1 실패율(47.4%)로 나누면 GNR 표본 하나는 약 38.6 core-s입니다. MPC 롤아웃 하나(3.84 core-s, 20스텝 구간)의 약 10배이고, GNR 표본이 전체 에피소드를 재생하기 때문으로 보입니다. 따라서 S=64의 비용은 다음과 같습니다.
+<ul>
+<li>조기 종료: 38.6 + 171.1 ≈ 210 core-s → MPC 3,000표본(11,520 core-s)의 <strong>약 1.8%</strong>. 논문 1.6%와 비슷합니다.</li>
+<li>조기 종료 없이 64개를 모두 쓰면: 64 × 38.6 ≈ 2,470 core-s → <strong>약 21%</strong>.</li>
+<li>&quot;1.6%&quot;는 대부분의 시연이 처음 몇 개 표본에서 풀리기 때문에 나오는 수치입니다. ShapeFilter의 a ≈ 0.8(§2.2)이 이를 뒷받침합니다.</li>
+</ul>
+</li>
+<li><strong>학습 비용:</strong> ShapeFilter·NIST의 GPU 학습은 H100으로 0.01–0.5 GPU-h라 무시할 만합니다(App. G.1). HOT3D 모델(19.57M, A100)의 학습 시간은 보고되지 않았습니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>04. 주장 검증: 수치 재계산, 재현 정보, 구현 가능성</h1>
+<ul>
+<li><strong>대상:</strong> arXiv:2610.12440 v1(2026-10-08, 40쪽), 프로젝트 페이지(2026-11-03 저장, 저장소 <code>YY-GX/GNR</code> @ <code>d6cf09e</code>)</li>
+<li><strong>코드:</strong> 공식 코드, 가중치, 데이터가 공개되지 않아(2026-11-03 확인) 코드 대조는 하지 않았습니다. 본문·표·부록 수치를 서로 대조해 다시 계산했습니다. 프로젝트 페이지 수치는 논문과 같습니다(README: &quot;Numbers mirror the paper verbatim&quot;).</li>
+<li><strong>스크립트:</strong> <code>analysis/table_check.py</code>(C1–C12), <code>analysis/scaling_toy.py</code>(pass@S·조기 종료), <code>analysis/manifold_toy.py</code>(가설 toy). 모두 CPU 단일 스레드이고 수 초에서 수십 초 걸립니다.</li>
+</ul>
+<h2>1. 수치 재계산</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장 (출처)</th>
+<th>재계산</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>MPC 표본의 8.5%로 56.20% 대 27.20%, 궤적당 CPU 비용 7.6배 감소 (Abstract, Sec. 5.2)</td>
+<td>256/3,000 = 8.53%. 2,689.3/354.1 = 7.59배(Table 1 단가)</td>
+<td>산술 ✅. 27.20%는 C4</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>Table 1 전체 SR (Table 1)</td>
+<td>전체 = 0.272 × MPC-success + 0.728 × MPC-failure가 9개 행 모두 맞고, 성공 수가 정수(GNR S=256 = 252 + 310)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>OOD 부분집합, MPC-success 평균 46.2 → 93.2%, MPC-failure 31.9–58.4% (Fig. 3, App. D.3)</td>
+<td>부분집합별 MPC 성공 수 역산 37·69·166 = 272. 가중 평균이 Table 1의 S=1 18.1%, S=256 56.2%와 일치. MPC-success 평균 93.17%</td>
+<td>✅. 부분집합 난이도 차이가 큼(MPC 성공 18·20·36%)</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>DIAL-MPC 27.20% (Table 1)</td>
+<td>272/1,000 = 시험 집합의 MPC-success 비율 자체. 행의 100%/0%는 정의. 모집단 비율 26.47%(Table 8)</td>
+<td>⚠️ 비교 결과가 아니라 분할 레이블. 프로젝트 페이지 각주에만 설명 있음</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>223k 시연, MPC-failure 127,136개 해결 (Sec. 5.2, App. C.5, D.4, Table 8)</td>
+<td>기하 변형 쪽 시연 = 쌍 7,280 × 시드 24 = 174,720(평가 173,840). 쌍 단위 MPC 성공 37.4%, 시도 단위 27.6%. MPC-failure 중 17,434개(13.8%)는 MPC가 다른 시드로 푼 쌍. 본문 222,806 / 2,756 / 26.43% 대 Table 8 222,480 / 2,755 / 26.47%</td>
+<td>⚠️ 시도 단위 계산. 본문·표 불일치(작음)</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>실제 배치 2.62배 감소 (Sec. 5.2, App. G.2)</td>
+<td>390.043 / 148.735 = 2.62 ✅. 단, MPC 시드는 Table 14 단가, GNR은 Table 1 단가. Table 14로 통일하면 2.56배. Table 14/Table 1 단가 비는 1.11–1.52. DIAL/GNR 비는 Table 14 기준 9.85배. 확장 비용은 조기 종료를 무시한 상한(App. G.2에 명시). 조기 종료 반영 추정 2.90배(<code>03</code> §2.3)</td>
+<td>✅ 결론 유지. 단가 출처 혼용</td>
+</tr>
+<tr>
+<td>C7a</td>
+<td>ShapeFilter Table 10</td>
+<td>DIAL-MPC 32×6(48.4)·CEM·iCEM·CMA-ES 값은 n=64에서 정수 비율. DIAL-MPC 500×6(92.9)은 589에서만. GNR 행(87.23, 92.26, 95.44, 97.37)은 64도 589도 아님</td>
+<td>⚠️ 한 표 안에 분모가 섞임</td>
+</tr>
+<tr>
+<td>C7b</td>
+<td>S=1에서 52.4% (Sec. 5.3)</td>
+<td>Table 11 State 50.42%, Table 12 N=2,448에서 역산 52.56%</td>
+<td>⚠️ 같은 설정의 값이 표마다 다름</td>
+</tr>
+<tr>
+<td>C7c</td>
+<td>14.9배, 11.2배 (Table 2, App. G.2)</td>
+<td>10,124/678 = 14.93. 8,541.0/765.6 = 11.16 ✅. Table 2의 GNR(77표본, 94.7%)은 2,448개 모델이 아니라 N=50 모델. MPC 2,500표본 93.7%(Table 2)와 3,000표본 92.9%(Table 10)가 따로 있음</td>
+<td>✅ 산술. 비교 대상 설정 확인 필요</td>
+</tr>
+<tr>
+<td>C7d</td>
+<td>S=64에서 MPC 3,000표본 CPU 비용의 1.6% (Sec. 5.3)</td>
+<td>Table 12는 조기 종료 비용. GNR 표본 단가 역산 38.6 core-s(MPC 롤아웃의 약 10배). S=64는 조기 종료 시 약 1.8%, 64개를 다 쓰면 약 21%</td>
+<td>✅ 조기 종료 조건에서만</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>NIST: GNR+MPC 92.2%를 33.3% 적은 표본으로, 3.0배, 1.8배 (Sec. 5.3, Table 2, App. F, G)</td>
+<td>(3,440 − 2,296)/3,440 = 33.26% ✅. Table 2의 GNR+MPC는 1,976표본(42.6% 적음), 89.1% = 57/64, MPC 92.2% = 59/64. Fisher p = 0.76. Wilson [79.1, 94.6] 대 [83.0, 96.6]. 795,777/266,199 = 2.99 ✅. 79,136/44,517 = 1.78 ✅. 데이터셋 성공 (100 + 258 × 0.891)/358 = 92.12% ✅</td>
+<td>✅ 산술. &quot;비슷한 SR&quot;은 표본 64개 수준의 비교</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>다중 embodiment (Table 16)</td>
+<td>Wilson 구간 4개 모두 재현. GNR S=384 95/100 대 SPIDER 96/100, Fisher p = 1.0</td>
+<td>✅. GNR이 SPIDER를 넘지는 않음. 표본 수 단위도 다름(시연당 대 최적화당)</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>BC 정책 37.5% 대 43.75% (App. I.1)</td>
+<td>12/32 대 14/32, Fisher p = 0.80. 체크포인트 10개 중 같은 시험 32회로 고른 최고값</td>
+<td>&quot;쓸 수 있다&quot;는 ✅, 우위 주장 근거는 없음</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>flywheel 55.2 → 74.4%, 68.4 → 84.8% (App. I.2)</td>
+<td>시험 256개. 68.4·84.8은 정수 k/256으로 반올림 일치, 55.2·74.4는 불가(가장 가까운 값 55.08/55.47, 74.22/74.61)</td>
+<td>⚠️ 작은 불일치. 평균값이거나 다른 시험 수일 가능성</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>성공 기준과 &quot;정밀도&quot; (Table 3, Table 4, App. D.1, E.1)</td>
+<td>HOT3D 위치 150 mm(CHORD 관례). MPC-failure 쪽 E_pos 중앙값 26–55 mm라서 위치 조건은 거의 걸러 내지 않음. ShapeFilter &quot;1.96 mm&quot;는 구멍 여유이고 판정은 부품 중심이 16 cm 삽입 영역 안인지. NIST 1 mm는 실제 판정 기준</td>
+<td>⚠️ Table 3의 Precision 열은 성격이 다른 기준을 함께 놓음</td>
+</tr>
+</tbody>
+</table>
+<p>추가 대조:</p>
+<ul>
+<li>**초록·서론의 &quot;42.6%&quot;**는 Table 1 MPC-failure 42.58%(310/728)입니다 ✅.</li>
+<li><strong>D.4의 360k 전체 58.94%</strong> = (85,143 + 127,136)/360,150 ✅.</li>
+<li><strong>App. G.2의 시드 시도 수</strong> 28,480/0.2643 = 107,756(논문 107,740) ✅. 2.62배의 분모 148.735k = 116.112k + 32.623k ✅.</li>
+</ul>
+<h2>2. 재현 정보 체크리스트</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>공개 여부</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GNR 학습·추론 코드</td>
+<td>✗</td>
+<td>프로젝트 페이지에 &quot;until release&quot;</td>
+</tr>
+<tr>
+<td>학습된 가중치</td>
+<td>✗</td>
+<td></td>
+</tr>
+<tr>
+<td>223k HOT3D 리타겟 데이터셋, 접촉력 라벨</td>
+<td>✗</td>
+<td></td>
+</tr>
+<tr>
+<td>ShapeFilter·NIST mocap 시연</td>
+<td>✗</td>
+<td>OptiTrack 15대 + 외골격</td>
+</tr>
+<tr>
+<td>데이터 엔진(real-to-sim, 분할, 파지 재설정, 증강)</td>
+<td>✗</td>
+<td>절차는 App. C에 문장으로 있음</td>
+</tr>
+<tr>
+<td>시뮬레이터 SuperDex</td>
+<td>✓</td>
+<td>Apache-2.0, FR3 + DG-5F 모델 포함, macOS(ARM) 지원 표기</td>
+</tr>
+<tr>
+<td>DIAL-MPC</td>
+<td>△</td>
+<td>원 구현은 JAX + Brax(MuJoCo). SuperDex 위 구현은 비공개. 하이퍼파라미터는 Table 5에 있음</td>
+</tr>
+<tr>
+<td>HOT3D</td>
+<td>✓</td>
+<td>projectaria.com 배포(약관 확인 필요)</td>
+</tr>
+<tr>
+<td>SAM 3D, Point Transformer V3</td>
+<td>✓</td>
+<td>SAM License, CC BY-NC 4.0</td>
+</tr>
+<tr>
+<td>모델 구조</td>
+<td>△</td>
+<td>U-Net 폭, 임베딩 차원, Euler 10단계(B.1). HOT3D의 에폭·학습률·잡음 일정은 없음</td>
+</tr>
+<tr>
+<td>성공 기준 Γ</td>
+<td>✓</td>
+<td>Table 4</td>
+</tr>
+<tr>
+<td>접촉 모델</td>
+<td>△</td>
+<td>강성 &quot;기본값의 1/10&quot;, median filter 길이 미기재</td>
+</tr>
+<tr>
+<td>기하 변형 200개/물체</td>
+<td>△</td>
+<td>종류와 개수(Table 7)는 있음. SAM 3D 입력 이미지, 변형 크기는 없음</td>
+</tr>
+<tr>
+<td>기준선 설정</td>
+<td>✓</td>
+<td>Table 5, 6</td>
+</tr>
+<tr>
+<td>시험 분할 목록</td>
+<td>✗</td>
+<td>1,000개 ID 없음</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 프로젝트 페이지와 논문</h2>
+<p>프로젝트 페이지의 수치는 논문과 같습니다. 차이는 Table 1 각주 하나입니다. 페이지는 &quot;DIAL-MPC generates GNR's training data and defines the MPC-success and MPC-failure splits, so its split success rates are 100% and 0% by construction&quot;이라고 적었고, 논문에는 이 설명이 없습니다(C4). 저장소 마지막 커밋 메시지는 &quot;Clarify GNR manifold and scaling copy and remove coming-soon links&quot;(2026-10-30)입니다. 코드·데이터 버튼은 공개 전까지 숨겨 두었습니다.</p>
+<h2>4. 구현 가능성 판단</h2>
+<p><strong>결론:</strong> 논문 결과는 <strong>그대로 재현할 수 없습니다</strong>. GNR 코드, 가중치, 데이터, 데이터 엔진이 모두 비공개입니다. 시뮬레이터(SuperDex)와 로봇 모델(FR3 + DG-5F), HOT3D, DIAL-MPC 원 구현은 공개되어 있습니다. 그래서 <strong>방법을 작은 규모로 다시 구현하는 것은 가능</strong>합니다. 어려운 부분은 생성 모델이 아니라 시드 데이터를 만드는 물리 리타겟팅 파이프라인입니다. 이 맥에서는 재계산과 toy를 끝냈습니다. SuperDex와 torch(MPS)를 설치하면 작은 규모의 재구현을 해 볼 수 있습니다(둘 다 설치 승인 필요).</p>
+<h3>4.1 논문 그대로 재현</h3>
+<p>불가능합니다.</p>
+<ul>
+<li>코드·가중치·데이터·mocap 시연이 없습니다.</li>
+<li>데이터 엔진(HOT3D → SuperDex 장면, keypoint IK, 파지 재설정, SuperDex 위 DIAL-MPC, Γ 판정, 증강)을 처음부터 다시 만들어야 합니다.</li>
+<li>계산량이 큽니다. 전부 MPC로 돌리면 390k CPU core-h(512코어 31.7일)이고, 실제 배치 시나리오도 148.7k core-h입니다. HOT3D 모델 학습은 A100 1장입니다(시간 미보고).</li>
+</ul>
+<h3>4.2 이 맥에서 할 수 있는 것 (Apple M4 Pro, 통합 메모리 약 24 GiB, MPS, CUDA 없음)</h3>
+<table>
+<thead>
+<tr>
+<th>작업</th>
+<th>가능 여부</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>표·부록 수치 재계산, pass@S 이질성 적합, manifold toy</td>
+<td><strong>완료</strong></td>
+<td><code>table_check.py</code>, <code>scaling_toy.py</code>, <code>manifold_toy.py</code></td>
+</tr>
+<tr>
+<td>SuperDex 설치, FR3 + DG-5F 모델 로드, 궤적 재생</td>
+<td>조건부</td>
+<td><code>uv pip install superdex</code>. macOS(ARM)가 지원 OS로 적혀 있지만 이 기기에서 시험하지 않았음. 설치 승인 필요</td>
+</tr>
+<tr>
+<td>SuperDex 위 numpy annealed sampling MPC(DIAL-MPC 축소판), 단순 과제 하나</td>
+<td>조건부</td>
+<td>위 설치 뒤. CPU 롤아웃 속도는 미확인. 시연 수십 개 규모면 가능해 보임</td>
+</tr>
+<tr>
+<td>작은 잔차 flow matching(1D temporal U-Net, 자세 조건) 학습</td>
+<td>조건부</td>
+<td>torch 설치(MPS). 19.57M 모델도 메모리상 가능. 데이터 수천 개 규모</td>
+</tr>
+<tr>
+<td>Point Transformer V3 기하 인코더</td>
+<td>조건부</td>
+<td>2026-10부터 pip 패키지 <code>point-transformer-v3</code>가 spconv·FlashAttention 없이 CPU·MPS에서 돈다고 README에 적혀 있음(미시험, CC BY-NC 4.0). 처음에는 자세 조건(ShapeFilter 본 실험 방식)으로 시작하는 편이 쉬움</td>
+</tr>
+<tr>
+<td>HOT3D 다운로드와 전처리</td>
+<td>조건부</td>
+<td>약관 동의와 큰 다운로드 필요</td>
+</tr>
+<tr>
+<td>논문 규모 재현</td>
+<td>불가</td>
+<td>수십만 core-h, A100·H100 학습</td>
+</tr>
+</tbody>
+</table>
+<h3>4.3 아이디어만 옮기는 경우</h3>
+<ul>
+<li><strong>생성기 자체는 쉽습니다.</strong> IK 기준에 대한 잔차 Δ를 조건부 flow matching으로 학습하고, Euler 10단계로 S개 뽑아 시뮬레이터에서 거르는 것은 수백 줄입니다.</li>
+<li><strong>비용의 대부분은 시드 생성기와 판정기입니다.</strong> 접촉 많은 시뮬레이터에서 sampling MPC가 어느 정도 풀어야 하고(HOT3D 26%, 시드 시도당 1 core-h), Γ 같은 판정 기준을 신중하게 정해야 합니다. 판정이 느슨하면(C12) 성공률이 부풀려집니다.</li>
+<li><strong>먼저 할 기준선:</strong> 최근접 시드 잔차 검색과 결정론적 회귀를 같은 거부 표집 틀에 넣어 비교해야 합니다. toy에서는 검색만으로도 범위 안에서 MPC를 넘었습니다(<code>03</code> §3).</li>
+<li><strong>보고 방식:</strong> pass@S와 함께 조기 종료 기대 표본, 꼬리 지수 a, 쌍(문제) 단위 성공률을 같이 보고하는 편이 정확합니다(<code>03</code> §2, §4).</li>
+</ul>
+</section>
+<section class="chapter"><h1>02. 선행연구와 계보</h1>
+<p>GNR은 물리 기반 리타겟팅의 &quot;시연마다 최적화&quot; 비용을, 풀린 궤적으로 학습한 조건부 생성기로 상각(amortize)하려는 연구입니다. 아래 서지는 논문 참고문헌에서 가져왔습니다. §4의 &quot;논문이 인용하지 않은 연구&quot;는 내 판단이고, 서지 일부는 원문을 다시 확인하지 않았습니다(해당 항목에 표시).</p>
+<h2>1. 계보도</h2>
+<pre><code>[운동학 리타겟팅]  keypoint·손끝 IK
+  DexPilot(Handa 2020) · AnyTeleop(Qin 2023) · GeoRT(Yin 2025, 신경망 IK)
+        │  동역학 무시 → 물리에서 실행 불가 (HOT3D에서 IK 18.3%)
+        ▼
+[물리 기반 리타겟팅]
+  ├─ RL: DexTrack(Liu 2025) · ManipTrans(Li 2025) · DexMachina(Mandi 2025) · CHORD(Zhu 2026)
+  │        시연(또는 모음)마다 정책 학습, 보상 설계
+  └─ sampling MPC: MPPI(Williams 2017) · iCEM(Pinneri 2021) · CMA-ES · DIAL-MPC(Xue 2024)
+           → SPIDER(Pan 2025, annealed sampling + 접촉 유도) → Do as I Do(Paliwal 2026)
+           시연마다 독립 최적화, 해가 다음 시연으로 옮겨 가지 않음
+        │
+        ▼  &quot;풀린 궤적에서 배워 다음 시연을 싸게&quot;
+[상각]
+  Generative Predictive Control(Kurtz &amp; Burdick 2025): 과제별로 MPC를 flow matching 정책으로 증류
+  GNR(2026): 시연(IK 레퍼런스 + 기하)을 조건으로 잔차 궤적을 생성
+             open-loop pass@S  또는  MPC 초기값(GNR+MPC)
+</code></pre>
+<h2>2. 구성 요소별 출처</h2>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>출처</th>
+<th>GNR에서의 역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>리타겟팅 정식화 (제약 최적화, 비용 J)</td>
+<td>SPIDER (Pan et al., 2025)</td>
+<td>Sec. 3.1의 문제 정의</td>
+</tr>
+<tr>
+<td>시드 생성기, 기준선</td>
+<td>DIAL-MPC (Xue et al., 2024)</td>
+<td>HOT3D 300×10, ShapeFilter 500×6, NIST 3단계 (Table 5)</td>
+</tr>
+<tr>
+<td>생성 모델</td>
+<td>Flow matching (Lipman et al., 2022)</td>
+<td>잔차 Δ의 조건부 생성, Euler 10단계</td>
+</tr>
+<tr>
+<td>백본</td>
+<td>Temporal U-Net (Ronneberger 2015), FiLM (Perez 2018)</td>
+<td>19.57M 파라미터 (HOT3D)</td>
+</tr>
+<tr>
+<td>기하 인코더</td>
+<td>Point Transformer V3 (Wu et al., 2024)</td>
+<td>점 1,024개</td>
+</tr>
+<tr>
+<td>시뮬레이터</td>
+<td>SuperDex Physics (The Mochi Team, 2026)</td>
+<td>암시적 접촉, 분포 접촉력, 비볼록 충돌</td>
+</tr>
+<tr>
+<td>사람 시연</td>
+<td>HOT3D (Banerjee et al., 2025), OptiTrack 15대 + 착용형 외골격</td>
+<td>다양성 축, 정밀도 축</td>
+</tr>
+<tr>
+<td>기하 변형</td>
+<td>SAM 3D (Chen et al., 2026b)</td>
+<td>재생성, 가림 보완, 회전 후 재생성</td>
+</tr>
+<tr>
+<td>성공 기준 150 mm</td>
+<td>CHORD (Zhu et al., 2026)</td>
+<td>HOT3D γ_track</td>
+</tr>
+<tr>
+<td>정밀 과제</td>
+<td>NIST assembly board (Lian et al., 2021)</td>
+<td>M8 노브 체결</td>
+</tr>
+<tr>
+<td>다중 embodiment 벤치마크</td>
+<td>SPIDER 공개 벤치마크</td>
+<td>손 5종, Table 16</td>
+</tr>
+<tr>
+<td>pass@S</td>
+<td>LLM 코드 생성의 pass@k 관례 (논문은 출처를 밝히지 않음)</td>
+<td>성공 지표</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<h3>3.1 세 가지 리타겟팅 방식 비교</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>운동학 (IK, GeoRT)</th>
+<th>물리 기반 최적화 (RL, sampling MPC)</th>
+<th>생성 (GNR)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>출력</td>
+<td>관절 자세 열</td>
+<td>물리에서 검증된 제어열</td>
+<td>제어열 후보 S개 (시뮬레이터로 거름)</td>
+</tr>
+<tr>
+<td>시연 하나당 비용</td>
+<td>ms 단위 (GNR 표의 IK 39 core-s는 시뮬레이터 재생 포함)</td>
+<td>HOT3D DIAL-MPC 2,689 core-s, RL은 GPU-h 단위</td>
+<td>HOT3D S=256에서 354 core-s, 별도 학습 비용</td>
+</tr>
+<tr>
+<td>시연 사이 지식 전이</td>
+<td>없음(규칙 고정)</td>
+<td>MPC는 없음. 다중 레퍼런스 RL은 정책 안에서 공유</td>
+<td>생성기가 공유</td>
+</tr>
+<tr>
+<td>물리 실현 가능성</td>
+<td>보장 없음</td>
+<td>최적화 목표에 포함</td>
+<td>생성 후 시뮬레이터 거부 표집으로 확보</td>
+</tr>
+<tr>
+<td>전형적 실패</td>
+<td>침투, 접촉 누락, 물체 낙하</td>
+<td>국소해, 예산 부족, 보상 해킹</td>
+<td>학습 분포 밖 외삽, 무거운 꼬리 (<code>03</code> §2–3)</td>
+</tr>
+<tr>
+<td>필요한 것</td>
+<td>손 모델</td>
+<td>시뮬레이터, 비용·보상</td>
+<td>시뮬레이터 + <strong>시드 최적화기</strong> + 학습 GPU</td>
+</tr>
+</tbody>
+</table>
+<p>GNR은 물리 기반 최적화를 대체하지 않고 그 위에 얹습니다. 시드 데이터는 DIAL-MPC가 만들고, GNR은 그 해의 분포를 배워 제안 분포로 씁니다. 그래서 &quot;생성 리타겟팅&quot;보다 <strong>학습된 제안 분포를 쓰는 sampling 리타겟팅</strong>이라고 부르는 편이 정확합니다. 논문 제목의 &quot;neural retargeting&quot;은 GeoRT 같은 신경망 운동학 리타겟팅과 이름이 겹치지만, 출력이 물리 검증된 제어열이라는 점이 다릅니다.</p>
+<h3>3.2 개별 논문</h3>
+<table>
+<thead>
+<tr>
+<th>논문 (폴더)</th>
+<th>관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FlashDexRetarget</strong> (<code>flashdexretarget/</code>)</td>
+<td>목표가 같습니다. 둘 다 &quot;시연마다 최적화&quot;의 선형 비용을 없애려고 합니다. FDR은 레퍼런스 조건부 RL 정책 하나로 시연 모음 전체를 추적하고(폐루프, Isaac Sim, GPU-h), GNR은 MPC 해로 학습한 생성기에서 open-loop 후보를 뽑습니다(CPU core-h). 둘 다 HOT3D를 쓰지만, FDR의 엄격한 기준 SR_MT-Obj는 물체 3 cm / 30°이고 GNR HOT3D 기준은 150 mm / 40°입니다. 성공률을 직접 비교하면 안 됩니다. GNR은 FDR을 인용하지 않습니다(FDR v1 2026-10-01, GNR v1 2026-10-08 공개). FDR은 RL 학습 비용을 한 번 치르고, GNR은 MPC 시드 비용을 치릅니다. 두 방식 모두 &quot;어떤 시연에서 실패하는가&quot;는 비슷한 꼬리 문제를 보입니다(FDR 1,000개에서 변환 비율 61%, GNR MPC-failure 48%).</td>
+</tr>
+<tr>
+<td><strong>Do as I Do</strong> (<code>do_as_i_do/</code>)</td>
+<td>GNR이 대체하려는 쪽입니다. SPIDER식 annealed sampling MPC(MuJoCo Warp, 1,024표본)로 단안 영상 복원 레퍼런스를 시연마다 따로 리타겟합니다. GNR Table 3에도 500개, 100 mm 기준으로 실렸습니다. Do as I Do의 transition reward처럼 비용을 고치는 방향과, GNR처럼 초기값·제안 분포를 고치는 방향은 함께 쓸 수 있습니다.</td>
+</tr>
+<tr>
+<td><strong>DexForce</strong> (<code>dexforce/</code>)</td>
+<td>둘 다 &quot;힘 라벨이 붙은 손 조작 데이터&quot;를 만듭니다. DexForce는 손끝 6축 센서로 kinesthetic 시연의 <strong>실측 힘</strong>을 얻고(소규모), GNR은 시뮬레이터에서 <strong>계산한 접촉력</strong>을 대규모로 얻습니다. GNR 라벨은 접촉 강성(기본값의 1/10)에 의존하고 실측과 대조하지 않았습니다. DexForce의 x_f = x_o + k_f f 같은 힘 기반 행동을 GNR 데이터로 만들 수 있을지가 둘을 잇는 질문입니다.</td>
+</tr>
+<tr>
+<td><strong>Mana</strong>, <strong>Lightning Grasp</strong> (<code>mana/</code>, <code>lightning_grasp/</code>)</td>
+<td>Zhao-Heng Yin 계열입니다. GNR이 운동학 리타겟팅의 예로 인용한 GeoRT의 저자이기도 합니다. Mana는 절차적 파지 keyframe 사이를 motion planning과 짧은 RL로 채우고, Lightning Grasp는 contact field로 파지를 빠르게 합성합니다. 둘 다 사람 시연 없이 파지를 만드는 쪽이고, GNR은 사람 시연을 물리로 옮기는 쪽입니다. GNR의 파지 재설정 단계(App. C.3)는 Lightning Grasp류 합성 파지로 바꿀 수 있는 자리입니다.</td>
+</tr>
+<tr>
+<td><strong>GraspSense</strong> (<code>graspsense/</code>)</td>
+<td>둘 다 SAM 3D로 물체 메쉬를 만듭니다. GraspSense는 인식용이고, GNR은 같은 물체의 기하 변형(물체당 200개)을 만드는 데이터 증강에 씁니다. SAM 3D 메쉬의 물리 타당성을 검증하지 않는다는 점이 공통 약점입니다.</td>
+</tr>
+<tr>
+<td><strong>RoboSimStudio</strong> (<code>robosimstudio/</code>)</td>
+<td>같은 SuperDex(<code>facebookresearch/project_superdex</code>)를 씁니다. RSS는 FEM 변형체용으로, GNR은 강체 손 조작 시뮬레이터로 씁니다.</td>
+</tr>
+<tr>
+<td><strong>Contact-Grounded Policy</strong> (<code>contact_grounded_policy/</code>)</td>
+<td>같은 Meta Reality Labs Research입니다. CGP는 내부 FEM 시뮬레이터로 촉각 정책을 학습했습니다. GNR의 시뮬레이션 접촉력 라벨은 CGP 같은 접촉 기반 정책의 학습 데이터가 될 수 있습니다. 두 시뮬레이터가 같은 계열인지는 확인하지 못했습니다(가설).</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 논문이 다루지 않았지만 관련 있는 연구 (내 판단)</h2>
+<ul>
+<li><strong>FlashDexRetarget (arXiv:2610.01849):</strong> §3.2. 같은 문제를 RL 쪽에서 상각합니다. 같은 HOT3D 클립과 같은 기준으로 비교하면 &quot;생성기 + 거부 표집&quot;과 &quot;다중 레퍼런스 정책&quot; 중 어느 쪽이 싼지 알 수 있습니다.</li>
+<li><strong>학습된 warm start로 궤적 최적화 가속:</strong> Memory of Motion(Lembono et al., ICRA 2020)처럼, 풀린 문제에서 초기값 분포를 배워 최적화를 빠르게 하는 연구가 있습니다. GNR+MPC는 이 계열의 접촉 많은 손 조작 버전입니다. 논문은 이 계열을 인용하지 않습니다(서지는 다시 확인하지 않았음).</li>
+<li><strong>LLM의 test-time scaling과 검증기:</strong> pass@k와 &quot;많이 뽑고 실행해서 거르기&quot;는 코드 생성에서 온 방식입니다(Codex, Chen et al., 2021). 무거운 꼬리 때문에 수익이 줄어드는 현상도 같은 구조입니다(<code>03</code> §2). 논문은 출처를 밝히지 않습니다.</li>
+<li><strong>잔차 학습:</strong> IK 기준에 잔차를 더하는 설계는 FDR의 손목 잔차 행동, residual policy learning과 같은 발상입니다. App. E.4의 잔차 대 절대 비교는 이 선택을 뒷받침합니다.</li>
+</ul>
+<h2>5. GitHub 정리 (2026-11-03 <code>gh search repos</code>, <code>gh api</code> 확인)</h2>
+<p>공식 코드는 없습니다. 논문 제목, &quot;GNR retargeting&quot;, 저자 계정(<code>YY-GX</code>, <code>gaodechen</code>)을 검색했고, 프로젝트 페이지 링크와 논문 본문에도 코드 주소는 없습니다.</p>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>★</th>
+<th>마지막 push</th>
+<th>확인 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/YY-GX/GNR">YY-GX/GNR</a></td>
+<td>프로젝트 페이지 정적 사이트(영상, 그림, 스크립트). 코드·데이터 없음. README: &quot;Code and Dataset buttons are omitted until release&quot;</td>
+<td>공식(2저자 계정)</td>
+<td>표기 없음</td>
+<td>0</td>
+<td>2026-10-30</td>
+<td><code>d6cf09e</code> (README와 파일 목록)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/facebookresearch/project_superdex">facebookresearch/project_superdex</a></td>
+<td>SuperDex 엔진·Studio·Teleop. <code>assets/bots/arm_hand_combos/fr3_dg5f_*</code>에 FR3 + DG-5F 모델이 있음. 지원 OS에 macOS(ARM) 표기</td>
+<td>논문이 쓴 시뮬레이터(GNR 코드 아님)</td>
+<td>Apache-2.0</td>
+<td>807</td>
+<td>2026-11-03</td>
+<td><code>156fe13</code> (README와 파일 목록만)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LeCAR-Lab/dial-mpc">LeCAR-Lab/dial-mpc</a></td>
+<td>DIAL-MPC 원 구현. JAX + Brax(MuJoCo) 기반, CUDA 권장</td>
+<td>시드 생성기 원본(GNR은 SuperDex 위에 다시 구현한 것으로 보임)</td>
+<td>Apache-2.0</td>
+<td>1,012</td>
+<td>2025-05-28</td>
+<td><code>871c84f</code> (README만)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/facebookresearch/spider">facebookresearch/spider</a></td>
+<td>SPIDER 물리 기반 리타겟팅, 다중 embodiment 벤치마크</td>
+<td>비교 기준선</td>
+<td>CC BY-NC 4.0 (LICENSE 파일)</td>
+<td>592</td>
+<td>2026-09-22</td>
+<td><code>4471700</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/facebookresearch/hot3d">facebookresearch/hot3d</a></td>
+<td>HOT3D 데이터 API. 데이터는 projectaria.com·Hugging Face 배포(약관 확인 필요)</td>
+<td>데이터</td>
+<td>Apache-2.0 (코드)</td>
+<td>292</td>
+<td>2026-06-16</td>
+<td><code>146b34a</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Pointcept/PointTransformerV3">Pointcept/PointTransformerV3</a></td>
+<td>기하 인코더</td>
+<td>구성 요소</td>
+<td>CC BY-NC 4.0 (LICENSE 파일)</td>
+<td>1,986</td>
+<td>2026-10-31</td>
+<td><code>4e277e6</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/facebookresearch/sam-3d-objects">facebookresearch/sam-3d-objects</a></td>
+<td>기하 변형 생성</td>
+<td>구성 요소</td>
+<td>SAM License</td>
+<td>7,626</td>
+<td>2026-06-02</td>
+<td><code>f91db41</code> (메타데이터만)</td>
+</tr>
+</tbody>
+</table>
+<p>clone한 저장소는 없습니다. GNR 코드가 없어서 코드 대조(04_code_verification) 대신 주장 검증(<code>04_claim_verification.md</code>)을 했습니다.</p>
+</section></body></html>

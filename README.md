@@ -4,6 +4,7 @@
 
 | 날짜 | 글 | 요약 |
 |---|---|---|
+| 2026-11-03 | [GNR 읽기: MPC가 푼 궤적으로 배운 생성기, 그 이득은 어디서 오나](papers/gnr/) | 사람 시연을 로봇손 궤적으로 옮기는 물리 기반 리타겟팅을 조건부 flow matching으로 상각한 GNR을, 표를 다시 계산하고 pass@S 곡선의 구조를 맞추고 toy로 가설을 시험하며 읽었습니다. |
 | 2026-10-30 | [Nemotron 3.5 Super VL 기술 보고서 읽기: 120B-A12B 하이브리드 MoE를 공개 체크포인트로 검증하기](papers/nemotron35_super_vl/) | NVIDIA의 Nemotron 3.5 Super VL·Lightning 기술 보고서를, 공개 config와 safetensors 헤더로 구조를 확인하고 표·블로그 수치를 재계산하며 읽었습니다. |
 | 2026-10-30 | [Nemotron 3.5 Bolt 24GB 읽기: 이름의 24GB는 텍스트 전용이고, 속도는 2비트가 아니라 Mamba가 정한다](papers/nemotron35_bolt/) | 120B-A12B VLM을 2비트 74B-A9B로 줄여 24 GB에 넣은 Nemotron 3.5 Bolt를, 공개 config와 GGUF 헤더로 메모리 표를 대조하고 디코드 대역폭을 계산하며 읽었습니다. |
 | 2026-10-29 | [손 전체 접점의 실시간 힘 조절 읽기: 촉각 없이 잡는다는 것, 그리고 시험이 실제로 잰 것](papers/reactive_grasp/) | 물체 메쉬와 관절각만으로 손 전체 링크의 접점을 구하고 매 주기 접촉력 QP를 다시 푸는 파지 제어기를, 그림 수치를 재계산하고 QP 구조를 toy로 뜯어 보며 같은 연구실 공개 코드와 대조해 읽었습니다. |

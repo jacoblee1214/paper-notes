@@ -1,0 +1,572 @@
+{
+  "C1_abstract": {
+    "sample_fraction_pct": 8.53,
+    "cost_ratio_table1": 7.59,
+    "claim": "8.5% of the samples; 56.20% vs 27.20%; 7.6x lower CPU cost per trajectory"
+  },
+  "C2_table1_decomposition": {
+    "IK": {
+      "recomputed_overall": 18.3,
+      "reported": 18.3,
+      "k_success": 136.0,
+      "k_failure": 47.03,
+      "integer": true
+    },
+    "DIAL-MPC": {
+      "recomputed_overall": 27.2,
+      "reported": 27.2,
+      "k_success": 272.0,
+      "k_failure": 0.0,
+      "integer": true
+    },
+    "MPPI": {
+      "recomputed_overall": 27.7,
+      "reported": 27.7,
+      "k_success": 193.99,
+      "k_failure": 82.99,
+      "integer": true
+    },
+    "iCEM": {
+      "recomputed_overall": 34.7,
+      "reported": 34.7,
+      "k_success": 214.01,
+      "k_failure": 133.01,
+      "integer": true
+    },
+    "CMA-ES": {
+      "recomputed_overall": 32.0,
+      "reported": 32.0,
+      "k_success": 197.99,
+      "k_failure": 122.01,
+      "integer": true
+    },
+    "GNR S=1": {
+      "recomputed_overall": 18.1,
+      "reported": 18.1,
+      "k_success": 131.0,
+      "k_failure": 50.01,
+      "integer": true
+    },
+    "GNR S=64": {
+      "recomputed_overall": 49.6,
+      "reported": 49.6,
+      "k_success": 242.0,
+      "k_failure": 254.0,
+      "integer": true
+    },
+    "GNR S=128": {
+      "recomputed_overall": 52.2,
+      "reported": 52.2,
+      "k_success": 244.99,
+      "k_failure": 277.0,
+      "integer": true
+    },
+    "GNR S=256": {
+      "recomputed_overall": 56.2,
+      "reported": 56.2,
+      "k_success": 252.01,
+      "k_failure": 309.98,
+      "integer": true
+    }
+  },
+  "C3_ood_subsets": {
+    "OOD object": {
+      "n": 203,
+      "n_mpc_success_est": 37.05,
+      "mpc_success_rate_pct": 18.2
+    },
+    "OOD grasp": {
+      "n": 338,
+      "n_mpc_success_est": 68.86,
+      "mpc_success_rate_pct": 20.4
+    },
+    "OOD geometry": {
+      "n": 459,
+      "n_mpc_success_est": 165.55,
+      "mpc_success_rate_pct": 36.2
+    },
+    "sum_mpc_success": 272.0,
+    "weighted_S1_vs_table1": [
+      18.1,
+      18.1
+    ],
+    "weighted_S256_vs_table1": [
+      56.2,
+      56.2
+    ],
+    "mean_mpc_success_subsets_S256": 93.17
+  },
+  "C4_dialmpc_is_split_label": {
+    "dialmpc_sr": 27.2,
+    "mpc_success_share_of_test": 27.2,
+    "population_mpc_success_pct": 26.47,
+    "note": "DIAL-MPC 행은 다시 돌린 결과가 아니라 시험 집합을 MPC-success/failure로 나눈 레이블 그 자체(100%/0%)"
+  },
+  "C5_seed_level_accounting": {
+    "trials_pairs_x_seeds": 174720,
+    "evaluated_modified_geometry_demos": 173840,
+    "missing": 880,
+    "attempt_level_mpc_success_pct": 27.6,
+    "pair_level_mpc_success_pct": 37.4,
+    "seed_success_given_solvable_pair_pct": 73.3,
+    "mpc_failures_in_mpc_solvable_pairs": 17434,
+    "share_of_modified_mpc_failures_pct": 13.8,
+    "gnr_added_successes_modified": 52745,
+    "new_geometries": 543,
+    "gnr_successes_per_new_geometry_upper": 97.1,
+    "original_geometry_demos_per_source_motion": 238.9,
+    "counts_text_vs_table8": {
+      "total_text": 222806,
+      "total_table8": 222480,
+      "geoms_mpc_text": 2756,
+      "geoms_mpc_table8": 2755,
+      "pairs_ok_text": 2723,
+      "geoms_modified_mpc_table8": 2722,
+      "mpc_rate_text_pct": 26.43,
+      "mpc_rate_table8_pct": 26.47,
+      "coverage_text_pct": 61.56,
+      "coverage_222806_pct": 61.86,
+      "coverage_222480_pct": 61.77
+    }
+  },
+  "C6_compute_accounting": {
+    "table14_over_table1": {
+      "DIAL-MPC": 1.443,
+      "iCEM": 1.325,
+      "CMA-ES": 1.517,
+      "GNR S=256": 1.112
+    },
+    "cost_ratio_dial_vs_gnr": {
+      "table1": 7.59,
+      "table14": 9.85
+    },
+    "core_s_per_success_test": {
+      "IK": 213.1,
+      "DIAL-MPC": 9887.1,
+      "MPPI": 6677.3,
+      "iCEM": 11130.0,
+      "CMA-ES": 9102.2,
+      "GNR S=64": 183.3,
+      "GNR S=256": 630.1
+    },
+    "practical_deployment": {
+      "seed_attempts": 107756,
+      "mpc_seed_core_h": 116129,
+      "gnr_core_h_table1_rate": 32623,
+      "gnr_core_h_table14_rate": 36285,
+      "total_reported_k": 148.735,
+      "ratio_reported": 2.622,
+      "ratio_if_table14_for_gnr": 2.559,
+      "trajectories": 215065,
+      "core_h_per_success_mpc": 4.091,
+      "core_h_per_success_gnr_deploy": 0.692
+    }
+  },
+  "C7_shapefilter": {
+    "table10_denominators": {
+      "DIAL-MPC 32x6": {
+        "value": 48.4,
+        "fits_64": true,
+        "fits_589": true,
+        "smallest": [
+          31,
+          62,
+          64,
+          91
+        ]
+      },
+      "DIAL-MPC 500x6": {
+        "value": 92.9,
+        "fits_64": false,
+        "fits_589": true,
+        "smallest": [
+          14,
+          28,
+          42,
+          56
+        ]
+      },
+      "CEM 32x6": {
+        "value": 50.0,
+        "fits_64": true,
+        "fits_589": false,
+        "smallest": [
+          2,
+          4,
+          6,
+          8
+        ]
+      },
+      "CEM 500x6": {
+        "value": 82.8,
+        "fits_64": true,
+        "fits_589": false,
+        "smallest": [
+          29,
+          58,
+          64,
+          87
+        ]
+      },
+      "iCEM 32x6": {
+        "value": 65.6,
+        "fits_64": true,
+        "fits_589": false,
+        "smallest": [
+          32,
+          61,
+          64,
+          90
+        ]
+      },
+      "CMA-ES 32x6": {
+        "value": 40.6,
+        "fits_64": true,
+        "fits_589": true,
+        "smallest": [
+          32,
+          64,
+          69,
+          96
+        ]
+      },
+      "GNR S=8": {
+        "value": 87.23,
+        "fits_64": false,
+        "fits_589": false,
+        "smallest": [
+          47,
+          94,
+          141,
+          188
+        ]
+      },
+      "GNR S=16": {
+        "value": 92.26,
+        "fits_64": false,
+        "fits_589": false,
+        "smallest": [
+          155,
+          168,
+          297,
+          310
+        ]
+      },
+      "GNR S=32": {
+        "value": 95.44,
+        "fits_64": false,
+        "fits_589": false,
+        "smallest": [
+          241,
+          263,
+          285,
+          307
+        ]
+      },
+      "GNR S=64": {
+        "value": 97.37,
+        "fits_64": false,
+        "fits_589": false,
+        "smallest": [
+          38,
+          76,
+          114,
+          152
+        ]
+      }
+    },
+    "table11_state_k_of_589": {
+      "1": 296.97,
+      "2": 394.98,
+      "4": 462.01,
+      "8": 513.02,
+      "16": 544.0,
+      "32": 565.03,
+      "64": 573.98,
+      "128": 579.99,
+      "256": 584.99
+    },
+    "S1_text_vs_table11": {
+      "text_sec5_3": 52.4,
+      "table11_state": 50.42,
+      "table12_N2448_implied": 52.56
+    },
+    "table2_ratio": 14.93,
+    "mpc_core_s": {
+      "table2_2500_samples": 10124,
+      "table14_3000_samples": 11520,
+      "per_sample_table2": 4.05,
+      "per_sample_table14": 3.84
+    },
+    "mpc_sr_2500_vs_3000": {
+      "table2_2500": 93.7,
+      "table10_3000": 92.9
+    },
+    "table12_gnr_incremental_core_s_per_demo": {
+      "50": {
+        "1": 0.0,
+        "2": 33.7,
+        "4": 94.0,
+        "8": 186.8,
+        "16": 320.6,
+        "32": 472.4,
+        "64": 608.6,
+        "128": 719.5,
+        "256": 789.4
+      },
+      "100": {
+        "1": 0.0,
+        "2": 30.6,
+        "4": 80.9,
+        "8": 149.5,
+        "16": 230.4,
+        "32": 306.4,
+        "64": 376.3,
+        "128": 430.2,
+        "256": 478.0
+      },
+      "200": {
+        "1": 0.0,
+        "2": 27.9,
+        "4": 69.8,
+        "8": 128.2,
+        "16": 205.6,
+        "32": 302.0,
+        "64": 406.1,
+        "128": 507.6,
+        "256": 593.9
+      },
+      "500": {
+        "1": 0.0,
+        "2": 22.7,
+        "4": 58.2,
+        "8": 107.8,
+        "16": 177.4,
+        "32": 269.6,
+        "64": 381.7,
+        "128": 505.2,
+        "256": 659.8
+      },
+      "1000": {
+        "1": 0.0,
+        "2": 21.2,
+        "4": 51.3,
+        "8": 91.9,
+        "16": 146.7,
+        "32": 212.1,
+        "64": 288.1,
+        "128": 371.1,
+        "256": 482.5
+      },
+      "2448": {
+        "1": 0.0,
+        "2": 18.3,
+        "4": 36.7,
+        "8": 61.1,
+        "16": 91.7,
+        "32": 128.4,
+        "64": 171.1,
+        "128": 220.0,
+        "256": 268.9
+      }
+    },
+    "table12_test_sr_implied": {
+      "50": [
+        11.5,
+        15.8,
+        32.3,
+        46.5,
+        65.8,
+        82.8,
+        93.1,
+        96.6,
+        99.5
+      ],
+      "100": [
+        18.3,
+        28.1,
+        45.7,
+        65.6,
+        80.7,
+        90.8,
+        96.3,
+        98.7,
+        99.3
+      ],
+      "200": [
+        28.7,
+        40.4,
+        54.7,
+        69.9,
+        78.6,
+        88.3,
+        94.5,
+        96.6,
+        98.9
+      ],
+      "500": [
+        38.0,
+        50.2,
+        62.7,
+        72.8,
+        81.0,
+        87.8,
+        92.8,
+        95.9,
+        97.1
+      ],
+      "1000": [
+        43.6,
+        55.4,
+        70.2,
+        77.5,
+        86.4,
+        91.7,
+        95.2,
+        97.3,
+        98.1
+      ],
+      "2448": [
+        52.6,
+        68.0,
+        79.4,
+        87.1,
+        92.3,
+        95.4,
+        97.4,
+        98.5,
+        99.5
+      ]
+    },
+    "claim_1_6_percent": {
+      "gnr_S64_incremental_core_s_mean_over_N": 372.0,
+      "pct_of_table14_mpc": 3.23,
+      "pct_of_table2_mpc": 3.67,
+      "table2_gnr_S77_core_s": 678,
+      "pct_S77_of_table2_mpc": 6.7,
+      "note": "Table 12 비용은 성공하면 표본 추출을 멈추는 조기 종료 비용이다(증분이 S에 따라 포화). 아래 단가 역산으로 N=2448, S=64는 MPC 3,000표본의 약 1.8%이고, 조기 종료가 없으면 약 21%",
+      "gnr_core_s_per_sample_N2448": 38.6,
+      "S64_cost_early_stop_core_s": 209.7,
+      "S64_pct_of_mpc3000_early_stop": 1.82,
+      "S64_pct_of_mpc3000_no_early_stop": 21.4
+    },
+    "table15_seed_cost": {
+      "reported_core_h": 203,
+      "seeds_at_93_7_pct_x_table2": 150.1,
+      "implied_attempts_table2_rate": 72.2,
+      "implied_attempts_table14_rate": 63.4
+    },
+    "reduction_11_2x": 11.16
+  },
+  "C8_nist": {
+    "k_of_64": {
+      "GNR open-loop 4.7": 3.01,
+      "MPC 92.2": 59.01,
+      "GNR+MPC 89.1": 57.02,
+      "54.7": 35.01,
+      "90.6": 57.98
+    },
+    "mpc59_vs_gnrmpc57_fisher_p": 0.763,
+    "wilson_59_64": [
+      83.0,
+      96.6
+    ],
+    "wilson_57_64": [
+      79.1,
+      94.6
+    ],
+    "sample_reduction_2296": 33.26,
+    "sample_reduction_1976": 42.56,
+    "cost_ratio_table2": 2.99,
+    "per_demo_core_h": {
+      "mpc": 221.05,
+      "gnr_mpc": 73.94
+    },
+    "dataset_cost": {
+      "mpc_358_x_221.05": 79136,
+      "reported": 79136,
+      "ratio_reported": 1.78
+    },
+    "seed_cost_100": {
+      "reported_core_h": 25439,
+      "implied_attempts": 115.1,
+      "attempts_at_92_2_pct": 108.5
+    },
+    "dataset_sr_check": 92.14
+  },
+  "C9_multi_embodiment": {
+    "wilson": {
+      "GNR 128": [
+        82.6,
+        94.5
+      ],
+      "GNR 256": [
+        86.3,
+        96.6
+      ],
+      "GNR 384": [
+        88.8,
+        97.8
+      ],
+      "SPIDER": [
+        90.2,
+        98.4
+      ]
+    },
+    "gnr384_vs_spider_fisher_p": 1.0
+  },
+  "C10_bc": {
+    "k": {
+      "MPC": 12.0,
+      "GNR": 14.0
+    },
+    "fisher_p": 0.799,
+    "note": "10개 체크포인트 중 최고값 선택, 같은 32개 시험으로 고름"
+  },
+  "C11_flywheel": {
+    "55.2": {
+      "k": 141.31,
+      "nearest": [
+        55.08,
+        55.47
+      ],
+      "integer_k_rounds_to_value": false
+    },
+    "74.4": {
+      "k": 190.46,
+      "nearest": [
+        74.22,
+        74.61
+      ],
+      "integer_k_rounds_to_value": false
+    },
+    "68.4": {
+      "k": 175.1,
+      "nearest": [
+        68.36,
+        68.75
+      ],
+      "integer_k_rounds_to_value": true
+    },
+    "84.8": {
+      "k": 217.09,
+      "nearest": [
+        84.77,
+        85.16
+      ],
+      "integer_k_rounds_to_value": true
+    }
+  },
+  "C12_criterion": {
+    "hot3d_pos_mm": 150,
+    "hot3d_rot_deg": 40,
+    "ik_sr": 18.3,
+    "gnr_S1_sr": 18.1,
+    "mpc_failure_median_epos_mm": {
+      "IK": 54.52,
+      "GNR S=256": 36.18,
+      "iCEM": 26.04
+    },
+    "note": "150 mm·40°는 CHORD 관례. Epos 중앙값(26–55 mm)이 기준보다 한참 작아 성공을 가르는 것은 주로 침투·쥐는 힘·손가락 힘 조건"
+  }
+}
