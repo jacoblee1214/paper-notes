@@ -1,0 +1,695 @@
+{
+ "C1_param_counts": {
+  "exp1 500-32-32-5": 17253,
+  "exp2 160-64-64-144": 23824,
+  "exp4 679-128x6-16": 171664,
+  "exp5 600-32-32-6": 20486,
+  "exp6 243-512x6-82": 1480274
+ },
+ "C2_exp1_exp2": {
+  "exp1_correct": 4,
+  "exp1_n": 4,
+  "exp2_correct": 3,
+  "exp2_n": 3
+ },
+ "C3_exp3": {
+  "copy_heads": {
+   "python_L4_H6_d384_s0": {
+    ">0.2": [
+     "L2H1",
+     "L3H1",
+     "L3H5"
+    ],
+    ">0.3": [
+     "L3H5"
+    ],
+    "max_other": 0.019
+   },
+   "romaji_L4_H6_d384_s0": {
+    ">0.2": [
+     "L3H3"
+    ],
+    ">0.3": [],
+    "max_other": 0.017
+   },
+   "english_L4_H6_d384_s0": {
+    ">0.2": [
+     "L3H1"
+    ],
+    ">0.3": [
+     "L3H1"
+    ],
+    "max_other": 0.018
+   }
+  },
+  "mean_p_true": 0.552,
+  "logloss": 0.598,
+  "logloss_uniform": 1.099,
+  "note": "보기 3개가 주어진 문제. 균등 추측의 log loss는 ln 3"
+ },
+ "C4_exp4": {
+  "reported_changed": 6073,
+  "entries": 171664,
+  "frac_changed": 0.0354,
+  "reported_rel_change": 25.66,
+  "recomputed_rel_change_fro": 25.66,
+  "per_tensor_rel_change": {
+   "embed.W": 0.16,
+   "embed.b": 101.51,
+   "actor0.W": 10.88,
+   "actor0.b": 3736.85,
+   "actor1.W": 1.37,
+   "actor1.b": 46.43,
+   "actor2.W": 1.45,
+   "actor2.b": 41.54,
+   "actor3.W": 0.67,
+   "actor3.b": 0.13,
+   "actor4.W": 0.66,
+   "actor4.b": 0.1,
+   "actor_head.W": 54.62,
+   "actor_head.b": 937.85
+  },
+  "max_abs": {
+   "embed.W": {
+    "max_abs_base": 2.37,
+    "max_abs_edited": 2.37
+   },
+   "embed.b": {
+    "max_abs_base": 0.029,
+    "max_abs_edited": 11.0
+   },
+   "actor_head.W": {
+    "max_abs_base": 0.985,
+    "max_abs_edited": 200.0
+   },
+   "actor_head.b": {
+    "max_abs_base": 0.194,
+    "max_abs_edited": 199.969
+   },
+   "actor0.W": {
+    "max_abs_base": 0.573,
+    "max_abs_edited": 80.0
+   },
+   "actor0.b": {
+    "max_abs_base": 0.094,
+    "max_abs_edited": 876.0
+   },
+   "actor1.W": {
+    "max_abs_base": 0.79,
+    "max_abs_edited": 10.0
+   },
+   "actor1.b": {
+    "max_abs_base": 0.17,
+    "max_abs_edited": 30.0
+   },
+   "actor2.W": {
+    "max_abs_base": 0.847,
+    "max_abs_edited": 20.0
+   },
+   "actor2.b": {
+    "max_abs_base": 0.194,
+    "max_abs_edited": 30.0
+   },
+   "actor3.W": {
+    "max_abs_base": 0.667,
+    "max_abs_edited": 10.0
+   },
+   "actor3.b": {
+    "max_abs_base": 0.201,
+    "max_abs_edited": 0.201
+   },
+   "actor4.W": {
+    "max_abs_base": 0.759,
+    "max_abs_edited": 10.0
+   },
+   "actor4.b": {
+    "max_abs_base": 0.276,
+    "max_abs_edited": 0.276
+   }
+  },
+  "test": 1.0
+ },
+ "C5_exp5": {
+  "breakout": {
+   "hand_mean": 517.411,
+   "hand_se": 7.42,
+   "hand_mean_len": 7417.202,
+   "hand_len_vs_cap": 0.742,
+   "ppo100_best": 15.779,
+   "ppo100_median": 6.6195,
+   "ppo100_n": 10,
+   "ppo500_best": 25.344,
+   "ppo500_median": 19.82,
+   "ppo500_n": 3,
+   "ppo500_best_mean_len": 281.852,
+   "hand_nonzero_weights": 815
+  },
+  "seaquest": {
+   "hand_mean": 53.11,
+   "hand_se": 1.36,
+   "hand_mean_len": 1411.613,
+   "hand_len_vs_cap": 0.141,
+   "ppo100_best": 5.617,
+   "ppo100_median": 4.421,
+   "ppo100_n": 3,
+   "ppo500_best": 88.884,
+   "ppo500_median": 7.493,
+   "ppo500_n": 3,
+   "ppo500_best_mean_len": 1212.106,
+   "hand_nonzero_weights": 803
+  },
+  "asterix": {
+   "hand_mean": 53.178,
+   "hand_se": 1.02,
+   "hand_mean_len": 858.045,
+   "hand_len_vs_cap": 0.086,
+   "ppo100_best": 25.82,
+   "ppo100_median": 17.0685,
+   "ppo100_n": 10,
+   "ppo500_best": 55.204,
+   "ppo500_median": 46.879,
+   "ppo500_n": 3,
+   "ppo500_best_mean_len": 877.449,
+   "hand_nonzero_weights": 637
+  }
+ },
+ "C6_exp6": {
+  "budget_0": {
+   "ppo_s0": {
+    "score": 0.5415,
+    "games": 2000,
+    "wilson95": [
+     0.5196,
+     0.5632
+    ]
+   },
+   "ppo_s2": {
+    "score": 0.549,
+    "games": 2000,
+    "wilson95": [
+     0.5271,
+     0.5707
+    ]
+   },
+   "other_opponents": {
+    "reinforce_s0": 0.988,
+    "reinforce_s2": 0.997,
+    "random": 0.9955
+   }
+  },
+  "budget_10": {
+   "ppo_s0": {
+    "score": 0.7285,
+    "games": 2000,
+    "wilson95": [
+     0.7086,
+     0.7475
+    ]
+   },
+   "ppo_s2": {
+    "score": 0.5995,
+    "games": 2000,
+    "wilson95": [
+     0.5779,
+     0.6208
+    ]
+   },
+   "other_opponents": {
+    "reinforce_s0": 0.99,
+    "reinforce_s2": 0.999,
+    "random": 0.9955
+   }
+  },
+  "budget_25": {
+   "ppo_s0": {
+    "score": 0.76,
+    "games": 2000,
+    "wilson95": [
+     0.7408,
+     0.7782
+    ]
+   },
+   "ppo_s2": {
+    "score": 0.6225,
+    "games": 2000,
+    "wilson95": [
+     0.601,
+     0.6435
+    ]
+   },
+   "other_opponents": {
+    "reinforce_s0": 0.9805,
+    "reinforce_s2": 0.981,
+    "random": 0.9875
+   }
+  },
+  "budget_50": {
+   "ppo_s0": {
+    "score": 0.84,
+    "games": 2000,
+    "wilson95": [
+     0.8233,
+     0.8554
+    ]
+   },
+   "ppo_s2": {
+    "score": 0.808,
+    "games": 2000,
+    "wilson95": [
+     0.7902,
+     0.8247
+    ]
+   },
+   "other_opponents": {
+    "reinforce_s0": 0.9985,
+    "reinforce_s2": 0.999,
+    "random": 1.0
+   }
+  },
+  "h2h_same_size": {
+   "v1_b0_vs_lr1e-4": 0.509,
+   "v1_b50_vs_lr1e-4": 0.8335,
+   "v1_b0_vs_lr3e-5": 0.4255,
+   "v1_b50_vs_lr3e-5": 0.7415,
+   "v1_b0_vs_lr3e-5_s1": 0.263,
+   "v1_b50_vs_lr3e-5_s1": 0.6995,
+   "v1_b0_vs_lr3e-5_s2": 0.3625,
+   "v1_b50_vs_lr3e-5_s2": 0.7855
+  }
+ },
+ "C7_exp7": {
+  "weights_only": "4번 모두 판단 실패(블로그)",
+  "attention_tool_correct": "3/3",
+  "chance_3_of_3_binary": 0.125,
+  "note": "쌍 3개, A/B 동전 던지기. 우연히 다 맞힐 확률 12.5%"
+ },
+ "C8_exp8": {
+  "math500": {
+   "p10c": {
+    "n": 500,
+    "base": 7.9,
+    "edited": 12.35,
+    "diff_pp": 4.45,
+    "ci95_pp": [
+     2.8,
+     6.15
+    ],
+    "improved_problems": 87,
+    "worse_problems": 29
+   },
+   "p25c": {
+    "n": 500,
+    "base": 7.9,
+    "edited": 14.1,
+    "diff_pp": 6.2,
+    "ci95_pp": [
+     4.55,
+     7.85
+    ],
+    "improved_problems": 98,
+    "worse_problems": 21
+   },
+   "p50c": {
+    "n": 500,
+    "base": 7.9,
+    "edited": 48.1,
+    "diff_pp": 40.2,
+    "ci95_pp": [
+     36.85,
+     43.55
+    ],
+    "improved_problems": 306,
+    "worse_problems": 0
+   }
+  },
+  "gsm8k": {
+   "p10c": {
+    "n": 1319,
+    "base": 13.84,
+    "edited": 25.74,
+    "diff_pp": 11.9,
+    "ci95_pp": [
+     9.89,
+     13.84
+    ],
+    "improved_problems": 358,
+    "worse_problems": 112
+   },
+   "p25c": {
+    "n": 1319,
+    "base": 13.84,
+    "edited": 25.06,
+    "diff_pp": 11.22,
+    "ci95_pp": [
+     9.48,
+     13.04
+    ],
+    "improved_problems": 338,
+    "worse_problems": 97
+   },
+   "p50c": {
+    "n": 1319,
+    "base": 13.84,
+    "edited": 67.1,
+    "diff_pp": 53.26,
+    "ci95_pp": [
+     51.02,
+     55.5
+    ],
+    "improved_problems": 916,
+    "worse_problems": 4
+   }
+  },
+  "ifeval": {
+   "p10c": {
+    "n": 541,
+    "base": 20.98,
+    "edited": 48.98,
+    "diff_pp": 28.0,
+    "ci95_pp": [
+     24.31,
+     31.7
+    ],
+    "improved_problems": 253,
+    "worse_problems": 43
+   },
+   "p25c": {
+    "n": 541,
+    "base": 20.98,
+    "edited": 39.93,
+    "diff_pp": 18.95,
+    "ci95_pp": [
+     15.8,
+     22.18
+    ],
+    "improved_problems": 199,
+    "worse_problems": 40
+   },
+   "p50c": {
+    "n": 541,
+    "base": 20.98,
+    "edited": 62.29,
+    "diff_pp": 41.31,
+    "ci95_pp": [
+     37.34,
+     45.19
+    ],
+    "improved_problems": 327,
+    "worse_problems": 32
+   }
+  },
+  "amc23": {
+   "p10c": {
+    "n": 40,
+    "base": 0.47,
+    "edited": 1.09,
+    "diff_pp": 0.62,
+    "ci95_pp": [
+     -0.16,
+     1.88
+    ],
+    "improved_problems": 3,
+    "worse_problems": 1
+   },
+   "p25c": {
+    "n": 40,
+    "base": 0.47,
+    "edited": 1.09,
+    "diff_pp": 0.62,
+    "ci95_pp": [
+     -0.47,
+     2.34
+    ],
+    "improved_problems": 2,
+    "worse_problems": 2
+   },
+   "p50c": {
+    "n": 40,
+    "base": 0.47,
+    "edited": 23.44,
+    "diff_pp": 22.97,
+    "ci95_pp": [
+     13.12,
+     33.91
+    ],
+    "improved_problems": 21,
+    "worse_problems": 0
+   }
+  },
+  "minerva": {
+   "p10c": {
+    "n": 272,
+    "base": 1.47,
+    "edited": 3.86,
+    "diff_pp": 2.39,
+    "ci95_pp": [
+     1.1,
+     3.77
+    ],
+    "improved_problems": 22,
+    "worse_problems": 6
+   },
+   "p25c": {
+    "n": 272,
+    "base": 1.47,
+    "edited": 3.49,
+    "diff_pp": 2.02,
+    "ci95_pp": [
+     0.64,
+     3.49
+    ],
+    "improved_problems": 20,
+    "worse_problems": 6
+   },
+   "p50c": {
+    "n": 272,
+    "base": 1.47,
+    "edited": 25.37,
+    "diff_pp": 23.9,
+    "ci95_pp": [
+     19.58,
+     28.22
+    ],
+    "improved_problems": 98,
+    "worse_problems": 1
+   }
+  },
+  "olympiad": {
+   "p10c": {
+    "n": 674,
+    "base": 1.34,
+    "edited": 2.37,
+    "diff_pp": 1.04,
+    "ci95_pp": [
+     0.37,
+     1.71
+    ],
+    "improved_problems": 35,
+    "worse_problems": 14
+   },
+   "p25c": {
+    "n": 674,
+    "base": 1.34,
+    "edited": 3.93,
+    "diff_pp": 2.6,
+    "ci95_pp": [
+     1.74,
+     3.49
+    ],
+    "improved_problems": 56,
+    "worse_problems": 10
+   },
+   "p50c": {
+    "n": 674,
+    "base": 1.34,
+    "edited": 21.81,
+    "diff_pp": 20.47,
+    "ci95_pp": [
+     17.95,
+     23.03
+    ],
+    "improved_problems": 222,
+    "worse_problems": 0
+   }
+  },
+  "mmlupro1k": {
+   "p10c": {
+    "n": 1000,
+    "base": 40.3,
+    "edited": 40.0,
+    "diff_pp": -0.3,
+    "ci95_pp": [
+     -3.2,
+     2.5
+    ],
+    "improved_problems": 109,
+    "worse_problems": 112
+   },
+   "p25c": {
+    "n": 1000,
+    "base": 40.3,
+    "edited": 44.7,
+    "diff_pp": 4.4,
+    "ci95_pp": [
+     1.5,
+     7.4
+    ],
+    "improved_problems": 133,
+    "worse_problems": 89
+   },
+   "p50c": {
+    "n": 1000,
+    "base": 40.3,
+    "edited": 45.5,
+    "diff_pp": 5.2,
+    "ci95_pp": [
+     2.3,
+     8.2
+    ],
+    "improved_problems": 136,
+    "worse_problems": 84
+   }
+  },
+  "gpqa": {
+   "p10c": {
+    "n": 198,
+    "base": 22.73,
+    "edited": 29.42,
+    "diff_pp": 6.69,
+    "ci95_pp": [
+     2.53,
+     10.98
+    ],
+    "improved_problems": 75,
+    "worse_problems": 40
+   },
+   "p25c": {
+    "n": 198,
+    "base": 22.73,
+    "edited": 30.05,
+    "diff_pp": 7.32,
+    "ci95_pp": [
+     3.16,
+     11.36
+    ],
+    "improved_problems": 71,
+    "worse_problems": 44
+   },
+   "p50c": {
+    "n": 198,
+    "base": 22.73,
+    "edited": 36.62,
+    "diff_pp": 13.89,
+    "ci95_pp": [
+     9.22,
+     18.43
+    ],
+    "improved_problems": 89,
+    "worse_problems": 35
+   }
+  },
+  "reported_merged": {
+   "unedited": {
+    "math500": 7.9,
+    "gsm8k": 13.8,
+    "ifeval": 21.0,
+    "math500_cut_share": 93.0
+   },
+   "p10c": {
+    "math500": 12.3,
+    "gsm8k": 25.7,
+    "ifeval": 49.0,
+    "math500_cut_share": 87.2
+   },
+   "p25c": {
+    "math500": 14.1,
+    "gsm8k": 25.1,
+    "ifeval": 39.9,
+    "math500_cut_share": 86.4
+   },
+   "p50c": {
+    "math500": 48.1,
+    "gsm8k": 67.1,
+    "ifeval": 62.3,
+    "math500_cut_share": 33.1
+   }
+  },
+  "p50c_edit": {
+   "tensors": [
+    "model.language_model.layers.15.mlp.down_proj.weight",
+    "model.language_model.layers.19.mlp.down_proj.weight"
+   ],
+   "changed_entries_bf16": 130188,
+   "touched": 131072,
+   "hidden_size": 1024,
+   "frac_of_0.8B": 0.0164,
+   "relative_change": [
+    0.106,
+    0.081
+   ]
+  },
+  "gemma_strict_paired": {
+   "g05b": {
+    "n": 500,
+    "base": 2.75,
+    "edited": 3.55,
+    "diff_pp": 0.8,
+    "ci95_pp": [
+     -0.15,
+     1.75
+    ],
+    "improved_problems": 38,
+    "worse_problems": 25
+   },
+   "g10b": {
+    "n": 500,
+    "base": 2.75,
+    "edited": 3.1,
+    "diff_pp": 0.35,
+    "ci95_pp": [
+     -0.45,
+     1.2
+    ],
+    "improved_problems": 27,
+    "worse_problems": 24
+   },
+   "g25b": {
+    "n": 500,
+    "base": 2.75,
+    "edited": 3.75,
+    "diff_pp": 1.0,
+    "ci95_pp": [
+     0.2,
+     1.85
+    ],
+    "improved_problems": 32,
+    "worse_problems": 18
+   },
+   "g50b": {
+    "n": 500,
+    "base": 2.75,
+    "edited": 2.6,
+    "diff_pp": -0.15,
+    "ci95_pp": [
+     -1.0,
+     0.7
+    ],
+    "improved_problems": 28,
+    "worse_problems": 32
+   }
+  },
+  "run_selection_qwen": {
+   "note": "RESULTS_excerpt.md 표의 Qwen 편집 실행(값이 있는 것). 블로그는 v3의 10·25·50 패스 3개만 보고",
+   "runs": {
+    "v2_0pass": "no edit",
+    "v3_5pass": "no edit submitted",
+    "v3_10pass": "12.3",
+    "v3_25pass": "14.1",
+    "v3_50pass": "48.1",
+    "v4_10pass": "no edit submitted",
+    "v4_25pass": "14.1",
+    "v5_*": "미완(…)"
+   }
+  }
+ }
+}
