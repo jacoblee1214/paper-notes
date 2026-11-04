@@ -1,0 +1,1054 @@
+{
+ "C1_table4": {
+  "rows": [
+   {
+    "source": "Ego (WorldEngine, 비공개)",
+    "fps": 30,
+    "full_hours_from_frames": 6897.2,
+    "full_hours_table": 6897,
+    "curated_hours_from_frames": 1441.7,
+    "curated_hours_table": 1442,
+    "config_total_hours": 1439.03,
+    "config_frames_M": 155.41,
+    "share_from_frames_pct": 30.03,
+    "share_table_pct": 30.1
+   },
+   {
+    "source": "AgiBotWorld-Beta",
+    "fps": 15,
+    "full_hours_from_frames": 2305.6,
+    "full_hours_table": 2306,
+    "curated_hours_from_frames": 1794.4,
+    "curated_hours_table": 1794,
+    "config_total_hours": 1793.8,
+    "config_frames_M": 96.87,
+    "share_from_frames_pct": 18.69,
+    "share_table_pct": 18.6
+   },
+   {
+    "source": "RoboCOIN",
+    "fps": 30,
+    "full_hours_from_frames": 967.6,
+    "full_hours_table": 956,
+    "curated_hours_from_frames": 686.1,
+    "curated_hours_table": 686,
+    "config_total_hours": 686.12,
+    "config_frames_M": 74.1,
+    "share_from_frames_pct": 14.29,
+    "share_table_pct": 14.3
+   },
+   {
+    "source": "DROID",
+    "fps": 10,
+    "full_hours_from_frames": 1286.1,
+    "full_hours_table": 1285,
+    "curated_hours_from_frames": 1008.3,
+    "curated_hours_table": 1007,
+    "config_total_hours": 1007.05,
+    "config_frames_M": 36.25,
+    "share_from_frames_pct": 7.0,
+    "share_table_pct": 7.0
+   },
+   {
+    "source": "InternData-A1",
+    "fps": 30,
+    "full_hours_from_frames": 2904.6,
+    "full_hours_table": 2904,
+    "curated_hours_from_frames": 1439.8,
+    "curated_hours_table": 1440,
+    "config_total_hours": 1439.03,
+    "config_frames_M": 155.41,
+    "share_from_frames_pct": 29.99,
+    "share_table_pct": 30.0
+   }
+  ],
+  "totals_recomputed": [
+   1333.9,
+   14348,
+   518.5,
+   6369
+  ],
+  "totals_table": [
+   1333.9,
+   14348,
+   518.5,
+   6369
+  ],
+  "frame_split_pct": {
+   "ego": 30.03,
+   "real_robot": 39.98,
+   "synthetic": 29.99
+  },
+  "real_robot_split_within_40pct": {
+   "AgiBotWorld-Beta": 46.74,
+   "RoboCOIN": 35.75,
+   "DROID": 17.51
+  },
+  "config_total_hours_sum": 6365.0,
+  "note": "Ego와 InternData-A1 config 시간이 1439.0268로 완전히 같다(둘 다 30% 프레임 목표 = 같은 프레임 수, 같은 30 fps)."
+ },
+ "C2_table9_compute": {
+  "clips_seen": 478808064,
+  "clips_seen_M": 478.8,
+  "curated_frames_M": 518.5,
+  "clips_per_frame": 0.923,
+  "released_checkpoint_step": 154000,
+  "released_fraction_of_epoch": 0.9881,
+  "gpu_hours": 21504,
+  "sec_per_step": 3.88,
+  "clips_per_sec_per_gpu": 6.18,
+  "assumed_tokens": {
+   "video": 360,
+   "action": 32
+  },
+  "dit_matmul_flops_total": 5.26e+21,
+  "mfu_dit_only_pct": 6.9,
+  "note": "창 stride 1이고 에피소드 끝은 마지막 프레임 반복으로 채우므로(robotwin.py 등) 창 수 ≈ 프레임 수다. 478.8M 클립은 518.5M 프레임보다 7.7% 적다. 1 epoch의 정의(창 수 계산)가 논문에 없다. MFU는 주의 연산·umT5·VAE 인코딩을 빼고 DiT·ActionDiT 행렬곱만 센 하한 추정이다."
+ },
+ "C3_params": {
+  "total_B": 12.407,
+  "bytes_bf16_GB": 24.81,
+  "file_size_GB": 24.81,
+  "by_group_B": {
+   "video_backbone.text_encoder": 5.6809,
+   "video_backbone.dit": 4.9998,
+   "action_backbone": 1.021,
+   "video_backbone.vae": 0.7047,
+   "proprio_encoder": 0.0003
+  },
+  "trainable_B": 6.021,
+  "frozen_B": 6.386,
+  "inference_without_text_encoder_GB_bf16": 13.45,
+  "note": "논문 '5B DiT + 1B ActionDiT'와 맞는다. 모든 SFT 체크포인트도 같은 24.81 GB로, 고정된 umT5(5.68B)와 VAE까지 들어 있다."
+ },
+ "C4_sft_checkpoints": {
+  "all_match_table10": true,
+  "sft_clips_M": {
+   "LIBERO": 2.74,
+   "VLABench": 1.18,
+   "RoboTwin-Full": 30.38,
+   "RoboTwin-Clean2Random": 2.75,
+   "RoboDojo": 15.36,
+   "RoboCasa365": 61.44,
+   "EBench": 25.6,
+   "RoboCasa-GR1": 25.6,
+   "Real-Single-Arm-Franka": 2.52,
+   "Real-RoboDojo (3 embodiment)": 7.68,
+   "Real-Dexterous-Hand-Wuji": 2.8
+  },
+  "robotwin_full_sft_vs_pretrain": 0.0634,
+  "pretrain_step_hf_vs_table9": [
+   154000,
+   155862
+  ]
+ },
+ "C5_section4_consistency": {
+  "table1_2_average_minus_mean": {
+   "Single Vanilla": 0.0,
+   "Single MoE": 0.0,
+   "Dual JSA": 0.0,
+   "Dual JCA": 0.0,
+   "Dual Detached CA": 0.0,
+   "Dual IDM": 0.0,
+   "Tri JSA": 0.0,
+   "Isolated": 0.0,
+   "Video Sees Action": 0.0,
+   "Action Sees Video": 0.0,
+   "Mutual": 0.0
+  },
+  "fig6_slope_pp_per_e_fold_params": 1.4,
+  "fig6_14B_minus_5B": 1.4,
+  "fig6_vs_table2_ASV": [
+   92.39,
+   92.39
+  ],
+  "fig7_pretrained_init_gain_pp": 2.09,
+  "fig11_mutual_values": {
+   "From Scratch · Full": 92.15,
+   "Pretrained · Full": 92.5,
+   "Pretrained · C2R ID": 87.68,
+   "Pretrained · C2R OOD": 26.42
+  },
+  "fig11_vs_fig10_cotrain": {
+   "ID": [
+    87.68,
+    87.68
+   ],
+   "OOD": [
+    26.42,
+    26.62
+   ]
+  },
+  "fig11_from_scratch_vs_table2": [
+   92.15,
+   92.15
+  ],
+  "same_nominal_config_spread": {
+   "Table1 Dual JSA": 92.36,
+   "Table2 Mutual": 92.15,
+   "Table2 ASV": 92.39,
+   "Fig9 sync (mutual, 독립 noise)": 93.0
+  },
+  "note": "Fig. 11의 pretrained C2R OOD Mutual = 25.70 + 0.72 = 26.42로, 같은 설정이어야 할 Fig. 10 co-train OOD 26.62와 0.20 다르다. ID는 87.68로 일치한다. Table 1의 Dual JSA 마스크는 명시되지 않았다."
+ },
+ "C6_significance_robotwin": {
+  "assumption": "공식 RoboTwin README: 과제당 100 episode, seed 0, 50과제. 조건 하나 N = 5,000, 평균 N = 10,000. 이항 SE는 과제 고정 시 episode 표본 오차의 상한이다. 학습 seed 분산(실행 1회)은 포함되지 않는다.",
+  "tests": {
+   "T1 Dual JSA vs Single Vanilla (avg)": {
+    "diff_pp": 6.86,
+    "se_pp": 0.44,
+    "z": 15.46,
+    "p": 6.45e-54
+   },
+   "T1 Tri JSA vs Dual JSA (avg)": {
+    "diff_pp": 0.24,
+    "se_pp": 0.37,
+    "z": 0.64,
+    "p": 0.52
+   },
+   "T1 Dual JSA vs Detached CA (avg)": {
+    "diff_pp": 0.51,
+    "se_pp": 0.38,
+    "z": 1.34,
+    "p": 0.181
+   },
+   "T2 ASV vs Isolated (avg)": {
+    "diff_pp": 4.98,
+    "se_pp": 0.43,
+    "z": 11.69,
+    "p": 1.5e-31
+   },
+   "T2 ASV vs Mutual (avg)": {
+    "diff_pp": 0.24,
+    "se_pp": 0.38,
+    "z": 0.64,
+    "p": 0.525
+   },
+   "Fig6 14B vs 5B (avg)": {
+    "diff_pp": 1.4,
+    "se_pp": 0.36,
+    "z": 3.9,
+    "p": 9.49e-05
+   },
+   "Fig7 Wan VAE scratch vs DINOv3 SVAE (avg)": {
+    "diff_pp": 0.12,
+    "se_pp": 0.42,
+    "z": 0.29,
+    "p": 0.775
+   },
+   "Fig7 pretrained 5B vs scratch 5B (avg)": {
+    "diff_pp": 2.09,
+    "se_pp": 0.4,
+    "z": 5.26,
+    "p": 1.47e-07
+   },
+   "Fig9 sync vs best async LO action o=0.6 (avg)": {
+    "diff_pp": 0.7,
+    "se_pp": 0.37,
+    "z": 1.9,
+    "p": 0.0579
+   },
+   "Fig9 sync vs VS action α=32 (avg)": {
+    "diff_pp": 4.5,
+    "se_pp": 0.41,
+    "z": 10.98,
+    "p": 4.64e-28
+   },
+   "Fig9 VS video α=16 vs VS action α=4 (avg)": {
+    "diff_pp": 0.9,
+    "se_pp": 0.4,
+    "z": 2.28,
+    "p": 0.0229
+   },
+   "Fig10 ID Robot Only vs Scratch": {
+    "diff_pp": 1.5,
+    "se_pp": 0.66,
+    "z": 2.29,
+    "p": 0.0222
+   },
+   "Fig10 ID co-train vs Scratch": {
+    "diff_pp": 0.68,
+    "se_pp": 0.67,
+    "z": 1.02,
+    "p": 0.307
+   },
+   "Fig10 OOD Robot Only vs Scratch": {
+    "diff_pp": 9.3,
+    "se_pp": 0.79,
+    "z": 11.82,
+    "p": 3.17e-32
+   },
+   "Fig10 OOD co-train vs Robot Only": {
+    "diff_pp": 2.82,
+    "se_pp": 0.87,
+    "z": 3.25,
+    "p": 0.00117
+   },
+   "Fig10 OOD co-train vs 2단계": {
+    "diff_pp": 0.12,
+    "se_pp": 0.88,
+    "z": 0.14,
+    "p": 0.892
+   },
+   "Fig11 Pretrained Full Mutual-ASV": {
+    "diff_pp": 0.16,
+    "se_pp": 0.37,
+    "z": 0.43,
+    "p": 0.669
+   },
+   "Fig11 C2R ID Mutual-ASV": {
+    "diff_pp": 0.7,
+    "se_pp": 0.67,
+    "z": 1.05,
+    "p": 0.293
+   },
+   "Fig11 C2R OOD Mutual-ASV": {
+    "diff_pp": 0.72,
+    "se_pp": 0.88,
+    "z": 0.82,
+    "p": 0.412
+   },
+   "T16 ABot-M0.5 vs OpenWAM (Full avg)": {
+    "diff_pp": 0.5,
+    "se_pp": 0.34,
+    "z": 1.47,
+    "p": 0.141
+   }
+  },
+  "se_pp_at_92pct": {
+   "one_condition": 0.38,
+   "average": 0.27
+  }
+ },
+ "C7_appendixD": {
+  "LIBERO_avg_minus_mean": {
+   "OpenVLA": 0.0,
+   "π0": 0.0,
+   "StarVLA": 0.0,
+   "π0.5": -0.05,
+   "GR00T-N1.6": 0.025,
+   "OpenVLA-OFT": 0.0,
+   "X-VLA": -0.05,
+   "ABot-M0": -0.05,
+   "Being-H0.5": 0.0,
+   "Fast-WAM": 0.0,
+   "Motus": -0.0,
+   "ImageWAM": 0.0,
+   "LingBot-VA": -0.05,
+   "ABot-M0.5": 0.0,
+   "OpenWAM-α": 0.0
+  },
+  "LIBERO_rank": {
+   "rank": 2,
+   "of": 18,
+   "best": "ABot-M0.5",
+   "best_value": 99.4,
+   "gap_to_best": -0.1
+  },
+  "LIBERO_Plus_weight_fit": {
+   "weights": [
+    0.1159,
+    0.1758,
+    0.2568,
+    0.0958,
+    0.07,
+    0.2171,
+    0.0686
+   ],
+   "rmse": 0.489,
+   "simple_mean_rmse": 1.523,
+   "thinkworld_weights_rmse": 0.697,
+   "openwam_simple_mean": 71.33,
+   "openwam_weighted": 69.39
+  },
+  "LIBERO_Plus_rank": {
+   "rank": 11,
+   "of": 13,
+   "best": "Qwen-RobotManip",
+   "best_value": 89.0,
+   "gap_to_best": -19.8
+  },
+  "VLABench_avg_recomputed_vs_table": {
+   "π0": {
+    "SR": [
+     29.36,
+     29.4
+    ],
+    "PS": [
+     44.1,
+     44.1
+    ],
+    "IS": [
+     55.06,
+     55.0
+    ]
+   },
+   "π0.5": {
+    "SR": [
+     48.12,
+     48.1
+    ],
+    "PS": [
+     62.26,
+     62.3
+    ],
+    "IS": [
+     64.88,
+     64.9
+    ]
+   },
+   "ERVLA": {
+    "SR": [
+     53.22,
+     53.2
+    ],
+    "PS": [
+     65.92,
+     65.9
+    ],
+    "IS": [
+     70.44,
+     70.4
+    ]
+   },
+   "Xiaomi-Robotics-1": {
+    "SR": [
+     59.08,
+     59.1
+    ],
+    "PS": [
+     70.32,
+     70.3
+    ],
+    "IS": [
+     69.88,
+     69.9
+    ]
+   },
+   "Bridge-WA": {
+    "SR": [
+     52.82,
+     52.8
+    ],
+    "PS": [
+     63.92,
+     64.0
+    ],
+    "IS": [
+     71.24,
+     71.2
+    ]
+   },
+   "OpenWAM-α": {
+    "SR": [
+     58.94,
+     58.9
+    ],
+    "PS": [
+     67.2,
+     67.2
+    ],
+    "IS": [
+     63.42,
+     63.5
+    ]
+   }
+  },
+  "VLABench_SR_rank": {
+   "rank": 2,
+   "of": 6,
+   "best": "Xiaomi-Robotics-1",
+   "best_value": 59.1,
+   "gap_to_best": -0.2
+  },
+  "VLABench_IS_rank_openwam": 5,
+  "RoboTwin_C2R_avg_check": {
+   "StarVLA": -0.05,
+   "GR00T-N1.7": -0.05,
+   "X-VLA": -0.05,
+   "Spatial Forcing": -0.05,
+   "ABot-M0": -0.05,
+   "π0.5": -0.05,
+   "GigaBrain-0.7": -0.05,
+   "Qwen-RobotManip": -0.05,
+   "AHA-WAM": -0.05,
+   "Fast-WAM": -0.05,
+   "X-WAM": 0.0,
+   "4D-WAM": -0.05,
+   "OpenWAM-α": 0.05
+  },
+  "RoboTwin_C2R_rank": {
+   "rank": 2,
+   "of": 13,
+   "best": "Qwen-RobotManip",
+   "best_value": 77.1,
+   "gap_to_best": -8.1
+  },
+  "RoboTwin_C2R_best_other_WAM": "4D-WAM 61.7",
+  "RoboTwin_Full_avg_check": {
+   "X-VLA": 0.0,
+   "π0.5": 0.0,
+   "ABot-M0": 0.0,
+   "Qwen-VLA": 0.0,
+   "StarVLA": 0.0,
+   "Galaxea G0.5": 0.0,
+   "Qwen-RobotManip": 0.0,
+   "Motus": 0.0,
+   "Fast-WAM": 0.0,
+   "LingBot-VA": 0.0,
+   "ImageWAM": 0.0,
+   "LingBot-VA 2.0": 0.0,
+   "ABot-M0.5": 0.0,
+   "OpenWAM-α": 0.0
+  },
+  "RoboTwin_Full_rank": {
+   "rank": 4,
+   "of": 14,
+   "best": "ABot-M0.5",
+   "best_value": 94.1,
+   "gap_to_best": -0.5
+  },
+  "RoboDojo_avg": {
+   "StarVLA-α": {
+    "avg_5dim_merged_gen": 3.27,
+    "avg_6col": 3.142,
+    "table": 3.24
+   },
+   "X-VLA": {
+    "avg_5dim_merged_gen": 6.462,
+    "avg_6col": 6.468,
+    "table": 6.52
+   },
+   "π0.5": {
+    "avg_5dim_merged_gen": 6.88,
+    "avg_6col": 7.067,
+    "table": 6.91
+   },
+   "Spatial Forcing": {
+    "avg_5dim_merged_gen": 8.07,
+    "avg_6col": 8.308,
+    "table": 8.04
+   },
+   "Hy-Embodied-0.5-VLA": {
+    "avg_5dim_merged_gen": 8.822,
+    "avg_6col": 8.768,
+    "table": 8.8
+   },
+   "Xiaomi-Robotics-1": {
+    "avg_5dim_merged_gen": 13.928,
+    "avg_6col": 14.44,
+    "table": 13.93
+   },
+   "Galaxea G0.5": {
+    "avg_5dim_merged_gen": 14.916,
+    "avg_6col": 14.597,
+    "table": 14.88
+   },
+   "DM0.5": {
+    "avg_5dim_merged_gen": 19.354,
+    "avg_6col": 17.962,
+    "table": 19.34
+   },
+   "Fast-WAM": {
+    "avg_5dim_merged_gen": 2.006,
+    "avg_6col": 1.838,
+    "table": 2.03
+   },
+   "AHA-WAM": {
+    "avg_5dim_merged_gen": 2.34,
+    "avg_6col": 2.45,
+    "table": 2.39
+   },
+   "GigaWorld-Policy": {
+    "avg_5dim_merged_gen": 3.294,
+    "avg_6col": 3.245,
+    "table": 3.27
+   },
+   "X-WAM": {
+    "avg_5dim_merged_gen": 3.766,
+    "avg_6col": 3.638,
+    "table": 3.83
+   },
+   "OpenWAM-α": {
+    "avg_5dim_merged_gen": 11.921,
+    "avg_6col": 12.407,
+    "table": 11.92
+   }
+  },
+  "RoboDojo_rank": {
+   "rank": 4,
+   "of": 13,
+   "best": "DM0.5",
+   "best_value": 19.34,
+   "gap_to_best": -7.42
+  },
+  "EBench_family_weighted_vs_table": {
+   "π0": {
+    "SR": [
+     23.57,
+     23.6
+    ],
+    "Score": [
+     37.27,
+     37.0
+    ]
+   },
+   "X-VLA": {
+    "SR": [
+     23.69,
+     23.7
+    ],
+    "Score": [
+     35.88,
+     36.0
+    ]
+   },
+   "InternVLA-A1": {
+    "SR": [
+     23.89,
+     23.9
+    ],
+    "Score": [
+     36.96,
+     36.0
+    ]
+   },
+   "π0.5": {
+    "SR": [
+     27.05,
+     27.1
+    ],
+    "Score": [
+     41.35,
+     41.0
+    ]
+   },
+   "Qwen-RobotManip": {
+    "SR": [
+     45.54,
+     45.6
+    ],
+    "Score": [
+     60.96,
+     60.0
+    ]
+   },
+   "OpenWAM-α": {
+    "SR": [
+     49.37,
+     49.4
+    ],
+    "Score": [
+     64.72,
+     64.7
+    ]
+   }
+  },
+  "EBench_rank": {
+   "rank": 1,
+   "of": 6,
+   "best": "OpenWAM-α",
+   "best_value": 49.4,
+   "gap_to_best": 0.0
+  },
+  "RoboCasa365_weight_fit": {
+   "weights": [
+    0.3606,
+    0.3181,
+    0.3213
+   ],
+   "task_weights_18_16_16": [
+    0.36,
+    0.32,
+    0.32
+   ],
+   "rmse_fit": 0.025,
+   "rmse_task_weights": 0.029,
+   "simple_mean_rmse": 1.118
+  },
+  "RoboCasa365_rank": {
+   "rank": 3,
+   "of": 10,
+   "best": "Xiaomi-Robotics-1",
+   "best_value": 57.4,
+   "gap_to_best": -19.2
+  },
+  "RoboCasa_GR1_rank": {
+   "rank": 2,
+   "of": 15,
+   "best": "PhysBrain 1.0",
+   "best_value": 64.5,
+   "gap_to_best": -4.0
+  },
+  "top_tier_claim_gaps_pp": {
+   "LIBERO": -0.1,
+   "VLABench SR": -0.2,
+   "RoboTwin-Full": -0.5,
+   "RoboCasa365": -19.2,
+   "RoboCasa-GR1": -4.0
+  }
+ },
+ "C8_robodojo_seeds": {
+  "dims": {
+   "generalization_standard": {
+    "sr_mean": 25.56,
+    "sr_seed_sd": 1.84,
+    "sr_seeds": [
+     25.67,
+     27.33,
+     23.67
+    ],
+    "score_mean": 33.16,
+    "published": {
+     "sr": 25.56,
+     "score": 33.16
+    }
+   },
+   "generalization_random": {
+    "sr_mean": 4.11,
+    "sr_seed_sd": 1.07,
+    "sr_seeds": [
+     3.33,
+     3.67,
+     5.33
+    ],
+    "score_mean": 8.26,
+    "published": {
+     "sr": 4.11,
+     "score": 8.26
+    }
+   },
+   "generalization_merged": {
+    "sr_mean": 14.83,
+    "sr_seed_sd": 0.58,
+    "sr_seeds": [
+     14.5,
+     15.5,
+     14.5
+    ],
+    "score_mean": 20.71,
+    "published": {
+     "sr": 14.83,
+     "score": 20.71
+    }
+   },
+   "precision": {
+    "sr_mean": 9.25,
+    "sr_seed_sd": 0.66,
+    "sr_seeds": [
+     8.75,
+     9.0,
+     10.0
+    ],
+    "score_mean": 18.45,
+    "published": {
+     "sr": 9.25,
+     "score": 18.45
+    }
+   },
+   "long_horizon": {
+    "sr_mean": 25.33,
+    "sr_seed_sd": 1.28,
+    "sr_seeds": [
+     25.0,
+     24.25,
+     26.75
+    ],
+    "score_mean": 34.93,
+    "published": {
+     "sr": 25.33,
+     "score": 34.93
+    }
+   },
+   "memory": {
+    "sr_mean": 9.11,
+    "sr_seed_sd": 0.77,
+    "sr_seeds": [
+     10.0,
+     8.67,
+     8.67
+    ],
+    "score_mean": 10.41,
+    "published": {
+     "sr": 9.11,
+     "score": 10.41
+    }
+   },
+   "open": {
+    "sr_mean": 1.08,
+    "sr_seed_sd": 0.38,
+    "sr_seeds": [
+     0.75,
+     1.0,
+     1.5
+    ],
+    "score_mean": 1.41,
+    "published": {
+     "sr": 1.08,
+     "score": 1.41
+    }
+   },
+   "average": {
+    "sr_mean": 11.92,
+    "sr_seed_sd": 0.32,
+    "sr_seeds": [
+     11.8,
+     11.68,
+     12.28
+    ],
+    "score_mean": 17.18,
+    "published": {
+     "sr": 11.92,
+     "score": 17.18
+    }
+   }
+  },
+  "n_tasks": 42,
+  "tasks_zero_sr_all_seeds": 14,
+  "episodes_per_task_per_seed": 50,
+  "gap_to_DM0.5_in_seed_sd": 23.2
+ },
+ "C9_real_robot": {
+  "T6_sums": {
+   "π0.5": {
+    "sum": 66,
+    "of": 120
+   },
+   "LingBot-VA": {
+    "sum": 93,
+    "of": 120
+   },
+   "OpenWAM-α": {
+    "sum": 99,
+    "of": 120
+   }
+  },
+  "T6_fisher_vs_LingBot": 0.42,
+  "T6_fisher_vs_pi05": 6.55e-06,
+  "T6_task_wins_vs_LingBot": 4,
+  "T6_task_ties_vs_LingBot": 1,
+  "T7": {
+   "X-VLA": {
+    "emb_avg": [
+     [
+      6.8,
+      1.7
+     ],
+     [
+      15.9,
+      8.3
+     ],
+     [
+      0.1,
+      0.0
+     ]
+    ],
+    "overall": [
+     7.59,
+     3.33
+    ],
+    "table": [
+     7.6,
+     3.3
+    ],
+    "sr_successes_of_180": 6
+   },
+   "Xiaomi-Robotics-0": {
+    "emb_avg": [
+     [
+      15.0,
+      8.3
+     ],
+     [
+      7.6,
+      3.3
+     ],
+     [
+      1.2,
+      0.0
+     ]
+    ],
+    "overall": [
+     7.95,
+     3.89
+    ],
+    "table": [
+     7.9,
+     3.9
+    ],
+    "sr_successes_of_180": 7
+   },
+   "GalaxeaVLA (G0)": {
+    "emb_avg": [
+     [
+      3.4,
+      0.0
+     ],
+     [
+      22.0,
+      13.3
+     ],
+     [
+      1.7,
+      0.0
+     ]
+    ],
+    "overall": [
+     9.02,
+     4.44
+    ],
+    "table": [
+     9.0,
+     4.4
+    ],
+    "sr_successes_of_180": 8
+   },
+   "InternVLA-A1": {
+    "emb_avg": [
+     [
+      10.0,
+      3.3
+     ],
+     [
+      23.2,
+      18.3
+     ],
+     [
+      2.7,
+      0.0
+     ]
+    ],
+    "overall": [
+     11.96,
+     7.22
+    ],
+    "table": [
+     12.0,
+     7.2
+    ],
+    "sr_successes_of_180": 13
+   },
+   "π0.5": {
+    "emb_avg": [
+     [
+      27.7,
+      13.3
+     ],
+     [
+      32.0,
+      21.7
+     ],
+     [
+      9.1,
+      3.3
+     ]
+    ],
+    "overall": [
+     22.93,
+     12.78
+    ],
+    "table": [
+     22.9,
+     12.8
+    ],
+    "sr_successes_of_180": 23
+   },
+   "OpenWAM-α": {
+    "emb_avg": [
+     [
+      39.0,
+      23.3
+     ],
+     [
+      46.7,
+      36.7
+     ],
+     [
+      27.2,
+      13.3
+     ]
+    ],
+    "overall": [
+     37.61,
+     24.44
+    ],
+    "table": [
+     37.6,
+     24.4
+    ],
+    "sr_successes_of_180": 44
+   }
+  },
+  "T7_openwam_best_score_tasks_of_18": 13,
+  "T7_openwam_best_or_tied_sr_of_18": 15,
+  "T7_openwam_strict_best_sr_of_18": 8,
+  "T7_fisher_sr_vs_pi05": 0.00647,
+  "T8_per_task": {
+   "Stack Toy Tower": {
+    "ID_fisher_p": 0.303,
+    "OOD_fisher_p": 0.582,
+    "OOD_score_denominators": [
+     30,
+     30
+    ]
+   },
+   "Collect Shuttlecocks": {
+    "ID_fisher_p": 0.17,
+    "OOD_fisher_p": 1.0,
+    "OOD_score_denominators": [
+     54,
+     57
+    ]
+   },
+   "Put Away Clothes": {
+    "ID_fisher_p": 0.0867,
+    "OOD_fisher_p": 0.0187,
+    "OOD_score_denominators": [
+     60,
+     60
+    ]
+   },
+   "Twist off Bottle Cap": {
+    "ID_fisher_p": 0.179,
+    "OOD_fisher_p": 0.00364,
+    "OOD_score_denominators": [
+     20,
+     20
+    ]
+   }
+  },
+  "T8_pooled": {
+   "ID": [
+    "27/40",
+    "12/40",
+    0.00157
+   ],
+   "OOD": [
+    "40/65",
+    "19/65",
+    0.000384
+   ]
+  }
+ },
+ "C10_text_claims": {
+  "17_physical_platforms": 17,
+  "21_robot_embodiments": 21,
+  "frames_518M_hours_6400": [
+   518.5,
+   6369
+  ],
+  "raw_1.33B_14300h": [
+   1333.9,
+   14348
+  ],
+  "speedup_fig4_RTX5090_ms": {
+   "Vanilla": 149,
+   "MoE": 156,
+   "Dual JSA": 175,
+   "Dual JCA": 180,
+   "IDM": 251,
+   "Tri JSA": 216
+  },
+  "alpha_170ms_vs_dual_jsa_175ms": true
+ }
+}

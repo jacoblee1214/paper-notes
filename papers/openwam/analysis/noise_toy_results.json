@@ -1,0 +1,1417 @@
+{
+ "A_training_distribution": {
+  "sigma_grid_note": "u = index/1000 균등, σ = f5(1 − u). index 쌍 (i_v, i_a)는 1000×1000 격자 위에서 균등",
+  "marginal": {
+   "σ∈[0.9,1]": {
+    "sample_frac": 0.358,
+    "weighted_frac": 0.10112673606724894
+   },
+   "σ∈[0.5,0.9]": {
+    "sample_frac": 0.476,
+    "weighted_frac": 0.6507752678671977
+   },
+   "σ∈[0.1,0.5]": {
+    "sample_frac": 0.145,
+    "weighted_frac": 0.24115091075941486
+   },
+   "σ∈[0.0,0.1]": {
+    "sample_frac": 0.021,
+    "weighted_frac": 0.006947085306138345
+   }
+  },
+  "weight_at_sigma": {
+   "1.0": 0.0,
+   "0.95": 0.3189845108384673,
+   "0.9": 0.6312463022828965,
+   "0.833": 1.0267389267698757,
+   "0.5": 2.076396472999657,
+   "0.2": 1.2070806463252728,
+   "0.05": 0.3189776008081966,
+   "0.005": 0.03200655966037063
+  },
+  "diagonal_band_mass_du_0.05": 0.09750000000000003
+ },
+ "B_gmm_ideal_denoiser": {
+  "tight (s=0.10)": {
+   "per_schedule": {
+    "sync": {
+     "action_valid": 0.8952,
+     "action_video_same_mode": 0.999,
+     "mode_freq_max_dev": 0.012350000000000028,
+     "action_dist_to_mode_sd": 1.3891029352377224
+    },
+    "VS action-lead α=4": {
+     "action_valid": 0.98535,
+     "action_video_same_mode": 0.99985,
+     "mode_freq_max_dev": 0.011050000000000004,
+     "action_dist_to_mode_sd": 1.2871744990458278
+    },
+    "VS action-lead α=8": {
+     "action_valid": 0.9867,
+     "action_video_same_mode": 0.99995,
+     "mode_freq_max_dev": 0.01319999999999999,
+     "action_dist_to_mode_sd": 1.5678028887751578
+    },
+    "VS action-lead α=16": {
+     "action_valid": 0.97995,
+     "action_video_same_mode": 1.0,
+     "mode_freq_max_dev": 0.015550000000000008,
+     "action_dist_to_mode_sd": 1.7703377325368328
+    },
+    "VS action-lead α=32": {
+     "action_valid": 0.9615,
+     "action_video_same_mode": 1.0,
+     "mode_freq_max_dev": 0.023349999999999982,
+     "action_dist_to_mode_sd": 1.9563416285294002
+    },
+    "VS video-lead α=4": {
+     "action_valid": 0.9927,
+     "action_video_same_mode": 1.0,
+     "mode_freq_max_dev": 0.0121,
+     "action_dist_to_mode_sd": 1.2932052642652447
+    },
+    "VS video-lead α=8": {
+     "action_valid": 0.9946,
+     "action_video_same_mode": 0.99995,
+     "mode_freq_max_dev": 0.01545000000000002,
+     "action_dist_to_mode_sd": 1.4474930523176923
+    },
+    "VS video-lead α=16": {
+     "action_valid": 0.9917,
+     "action_video_same_mode": 1.0,
+     "mode_freq_max_dev": 0.02460000000000001,
+     "action_dist_to_mode_sd": 1.571808021593919
+    },
+    "VS video-lead α=32": {
+     "action_valid": 0.9796,
+     "action_video_same_mode": 0.99995,
+     "mode_freq_max_dev": 0.04135,
+     "action_dist_to_mode_sd": 1.766306380542157
+    },
+    "LO action-lead o=0.2": {
+     "action_valid": 0.8489,
+     "action_video_same_mode": 0.99905,
+     "mode_freq_max_dev": 0.015050000000000008,
+     "action_dist_to_mode_sd": 1.687566413118353
+    },
+    "LO action-lead o=0.4": {
+     "action_valid": 0.78935,
+     "action_video_same_mode": 0.9991,
+     "mode_freq_max_dev": 0.014649999999999996,
+     "action_dist_to_mode_sd": 2.080924480015447
+    },
+    "LO action-lead o=0.6": {
+     "action_valid": 0.72225,
+     "action_video_same_mode": 0.9988,
+     "mode_freq_max_dev": 0.01605000000000001,
+     "action_dist_to_mode_sd": 2.5575296581285656
+    },
+    "LO action-lead o=0.8": {
+     "action_valid": 0.67275,
+     "action_video_same_mode": 0.9996,
+     "mode_freq_max_dev": 0.015550000000000008,
+     "action_dist_to_mode_sd": 2.884582868596706
+    },
+    "LO video-lead o=0.2": {
+     "action_valid": 0.87795,
+     "action_video_same_mode": 0.9991,
+     "mode_freq_max_dev": 0.014149999999999996,
+     "action_dist_to_mode_sd": 1.4883752369049597
+    },
+    "LO video-lead o=0.4": {
+     "action_valid": 0.8585,
+     "action_video_same_mode": 0.99925,
+     "mode_freq_max_dev": 0.013900000000000023,
+     "action_dist_to_mode_sd": 1.6166384055499412
+    },
+    "LO video-lead o=0.6": {
+     "action_valid": 0.84625,
+     "action_video_same_mode": 0.9993,
+     "mode_freq_max_dev": 0.014050000000000007,
+     "action_dist_to_mode_sd": 1.6827252124411636
+    },
+    "LO video-lead o=0.8": {
+     "action_valid": 0.8366,
+     "action_video_same_mode": 0.9995,
+     "mode_freq_max_dev": 0.016749999999999987,
+     "action_dist_to_mode_sd": 1.751753783028081
+    }
+   },
+   "sync_400step": {
+    "action_valid": 0.9935,
+    "action_video_same_mode": 1.0,
+    "mode_freq_max_dev": 0.004599999999999993,
+    "action_dist_to_mode_sd": 1.8097032746833768
+   },
+   "action_lead_a32_400step": {
+    "action_valid": 0.9897,
+    "action_video_same_mode": 1.0,
+    "mode_freq_max_dev": 0.003700000000000009,
+    "action_dist_to_mode_sd": 1.8787352406991333
+   },
+   "spearman_valid_vs_fig9": {
+    "rho": -0.478,
+    "p": 0.0525,
+    "n": 17
+   }
+  },
+  "base (s=0.15)": {
+   "per_schedule": {
+    "sync": {
+     "action_valid": 0.94895,
+     "action_video_same_mode": 0.99725,
+     "mode_freq_max_dev": 0.012500000000000011,
+     "action_dist_to_mode_sd": 1.352724147887628
+    },
+    "VS action-lead α=4": {
+     "action_valid": 0.9835,
+     "action_video_same_mode": 0.99895,
+     "mode_freq_max_dev": 0.011050000000000004,
+     "action_dist_to_mode_sd": 1.4994322296496547
+    },
+    "VS action-lead α=8": {
+     "action_valid": 0.98615,
+     "action_video_same_mode": 0.99965,
+     "mode_freq_max_dev": 0.013149999999999995,
+     "action_dist_to_mode_sd": 1.6844098576900135
+    },
+    "VS action-lead α=16": {
+     "action_valid": 0.98035,
+     "action_video_same_mode": 0.9996,
+     "mode_freq_max_dev": 0.015500000000000014,
+     "action_dist_to_mode_sd": 1.815221244102993
+    },
+    "VS action-lead α=32": {
+     "action_valid": 0.9673,
+     "action_video_same_mode": 0.9998,
+     "mode_freq_max_dev": 0.023249999999999993,
+     "action_dist_to_mode_sd": 1.9490383530978004
+    },
+    "VS video-lead α=4": {
+     "action_valid": 0.9918,
+     "action_video_same_mode": 0.9994,
+     "mode_freq_max_dev": 0.011900000000000022,
+     "action_dist_to_mode_sd": 1.4070068834195808
+    },
+    "VS video-lead α=8": {
+     "action_valid": 0.99435,
+     "action_video_same_mode": 0.9996,
+     "mode_freq_max_dev": 0.015249999999999986,
+     "action_dist_to_mode_sd": 1.4949729351935392
+    },
+    "VS video-lead α=16": {
+     "action_valid": 0.99275,
+     "action_video_same_mode": 0.99955,
+     "mode_freq_max_dev": 0.024550000000000016,
+     "action_dist_to_mode_sd": 1.5750114935851098
+    },
+    "VS video-lead α=32": {
+     "action_valid": 0.9845,
+     "action_video_same_mode": 0.99925,
+     "mode_freq_max_dev": 0.04139999999999999,
+     "action_dist_to_mode_sd": 1.7201282026005156
+    },
+    "LO action-lead o=0.2": {
+     "action_valid": 0.927,
+     "action_video_same_mode": 0.9972,
+     "mode_freq_max_dev": 0.014850000000000002,
+     "action_dist_to_mode_sd": 1.4835739109765986
+    },
+    "LO action-lead o=0.4": {
+     "action_valid": 0.89705,
+     "action_video_same_mode": 0.99735,
+     "mode_freq_max_dev": 0.014500000000000013,
+     "action_dist_to_mode_sd": 1.663419907157173
+    },
+    "LO action-lead o=0.6": {
+     "action_valid": 0.86135,
+     "action_video_same_mode": 0.997,
+     "mode_freq_max_dev": 0.016199999999999992,
+     "action_dist_to_mode_sd": 1.9079757429725865
+    },
+    "LO action-lead o=0.8": {
+     "action_valid": 0.83225,
+     "action_video_same_mode": 0.9988,
+     "mode_freq_max_dev": 0.015699999999999992,
+     "action_dist_to_mode_sd": 2.083003304617495
+    },
+    "LO video-lead o=0.2": {
+     "action_valid": 0.9417,
+     "action_video_same_mode": 0.9978,
+     "mode_freq_max_dev": 0.014149999999999996,
+     "action_dist_to_mode_sd": 1.3921302680351246
+    },
+    "LO video-lead o=0.4": {
+     "action_valid": 0.93025,
+     "action_video_same_mode": 0.9978,
+     "mode_freq_max_dev": 0.014100000000000001,
+     "action_dist_to_mode_sd": 1.453295589206527
+    },
+    "LO video-lead o=0.6": {
+     "action_valid": 0.9264,
+     "action_video_same_mode": 0.999,
+     "mode_freq_max_dev": 0.014400000000000024,
+     "action_dist_to_mode_sd": 1.4801798331650913
+    },
+    "LO video-lead o=0.8": {
+     "action_valid": 0.9172,
+     "action_video_same_mode": 0.9991,
+     "mode_freq_max_dev": 0.016849999999999976,
+     "action_dist_to_mode_sd": 1.5145396733424463
+    }
+   },
+   "sync_400step": {
+    "action_valid": 0.99285,
+    "action_video_same_mode": 0.9995,
+    "mode_freq_max_dev": 0.004599999999999993,
+    "action_dist_to_mode_sd": 1.831844025372557
+   },
+   "action_lead_a32_400step": {
+    "action_valid": 0.9897,
+    "action_video_same_mode": 0.9998,
+    "mode_freq_max_dev": 0.003700000000000009,
+    "action_dist_to_mode_sd": 1.8788057919900871
+   },
+   "spearman_valid_vs_fig9": {
+    "rho": -0.448,
+    "p": 0.0712,
+    "n": 17
+   }
+  },
+  "loose (s=0.25)": {
+   "per_schedule": {
+    "sync": {
+     "action_valid": 0.98235,
+     "action_video_same_mode": 0.99,
+     "mode_freq_max_dev": 0.012050000000000005,
+     "action_dist_to_mode_sd": 1.415826053660881
+    },
+    "VS action-lead α=4": {
+     "action_valid": 0.99165,
+     "action_video_same_mode": 0.99005,
+     "mode_freq_max_dev": 0.010649999999999993,
+     "action_dist_to_mode_sd": 1.6366543426503417
+    },
+    "VS action-lead α=8": {
+     "action_valid": 0.99175,
+     "action_video_same_mode": 0.99085,
+     "mode_freq_max_dev": 0.012800000000000006,
+     "action_dist_to_mode_sd": 1.7377852511914578
+    },
+    "VS action-lead α=16": {
+     "action_valid": 0.989,
+     "action_video_same_mode": 0.9913,
+     "mode_freq_max_dev": 0.015149999999999997,
+     "action_dist_to_mode_sd": 1.804706142616189
+    },
+    "VS action-lead α=32": {
+     "action_valid": 0.9837,
+     "action_video_same_mode": 0.98905,
+     "mode_freq_max_dev": 0.0232,
+     "action_dist_to_mode_sd": 1.8746645698533404
+    },
+    "VS video-lead α=4": {
+     "action_valid": 0.99735,
+     "action_video_same_mode": 0.9916,
+     "mode_freq_max_dev": 0.011149999999999993,
+     "action_dist_to_mode_sd": 1.4836850733977447
+    },
+    "VS video-lead α=8": {
+     "action_valid": 0.998,
+     "action_video_same_mode": 0.9916,
+     "mode_freq_max_dev": 0.015100000000000002,
+     "action_dist_to_mode_sd": 1.5209459253105397
+    },
+    "VS video-lead α=16": {
+     "action_valid": 0.99745,
+     "action_video_same_mode": 0.98945,
+     "mode_freq_max_dev": 0.02460000000000001,
+     "action_dist_to_mode_sd": 1.5537657895583354
+    },
+    "VS video-lead α=32": {
+     "action_valid": 0.9957,
+     "action_video_same_mode": 0.98775,
+     "mode_freq_max_dev": 0.04189999999999999,
+     "action_dist_to_mode_sd": 1.6308797753273718
+    },
+    "LO action-lead o=0.2": {
+     "action_valid": 0.97235,
+     "action_video_same_mode": 0.99015,
+     "mode_freq_max_dev": 0.014800000000000008,
+     "action_dist_to_mode_sd": 1.4374024124339733
+    },
+    "LO action-lead o=0.4": {
+     "action_valid": 0.9649,
+     "action_video_same_mode": 0.98915,
+     "mode_freq_max_dev": 0.014600000000000002,
+     "action_dist_to_mode_sd": 1.4632973181360975
+    },
+    "LO action-lead o=0.6": {
+     "action_valid": 0.95145,
+     "action_video_same_mode": 0.99075,
+     "mode_freq_max_dev": 0.01580000000000001,
+     "action_dist_to_mode_sd": 1.5226010506341328
+    },
+    "LO action-lead o=0.8": {
+     "action_valid": 0.94465,
+     "action_video_same_mode": 0.99565,
+     "mode_freq_max_dev": 0.015550000000000008,
+     "action_dist_to_mode_sd": 1.5698454876111794
+    },
+    "LO video-lead o=0.2": {
+     "action_valid": 0.9783,
+     "action_video_same_mode": 0.99085,
+     "mode_freq_max_dev": 0.014000000000000012,
+     "action_dist_to_mode_sd": 1.4101531182448344
+    },
+    "LO video-lead o=0.4": {
+     "action_valid": 0.97435,
+     "action_video_same_mode": 0.99155,
+     "mode_freq_max_dev": 0.013849999999999973,
+     "action_dist_to_mode_sd": 1.4197734566792892
+    },
+    "LO video-lead o=0.6": {
+     "action_valid": 0.974,
+     "action_video_same_mode": 0.99495,
+     "mode_freq_max_dev": 0.013900000000000023,
+     "action_dist_to_mode_sd": 1.4159089465462635
+    },
+    "LO video-lead o=0.8": {
+     "action_valid": 0.9696,
+     "action_video_same_mode": 0.99795,
+     "mode_freq_max_dev": 0.016849999999999976,
+     "action_dist_to_mode_sd": 1.4227923511397014
+    }
+   },
+   "sync_400step": {
+    "action_valid": 0.9928,
+    "action_video_same_mode": 0.9838,
+    "mode_freq_max_dev": 0.004399999999999987,
+    "action_dist_to_mode_sd": 1.84506642819286
+   },
+   "action_lead_a32_400step": {
+    "action_valid": 0.9908,
+    "action_video_same_mode": 0.9824,
+    "mode_freq_max_dev": 0.0036499999999999866,
+    "action_dist_to_mode_sd": 1.8737853800230062
+   },
+   "spearman_valid_vs_fig9": {
+    "rho": -0.448,
+    "p": 0.0712,
+    "n": 17
+   }
+  }
+ },
+ "path_stats": {
+  "sync": {
+   "fig9": 93.0,
+   "action_updates": 10,
+   "max_action_du": 0.1,
+   "first_action_step_sigma": [
+    1.0,
+    0.978
+   ],
+   "video_sigma_when_action_half": 0.357,
+   "mean_action_loss_weight_on_updates": 0.972,
+   "max_u_gap_between_streams": 0.0
+  },
+  "VS action-lead α=4": {
+   "fig9": 91.0,
+   "action_updates": 10,
+   "max_action_du": 0.308,
+   "first_action_step_sigma": [
+    1.0,
+    0.918
+   ],
+   "video_sigma_when_action_half": 0.769,
+   "mean_action_loss_weight_on_updates": 1.296,
+   "max_u_gap_between_streams": 0.332
+  },
+  "VS action-lead α=8": {
+   "fig9": 90.7,
+   "action_updates": 10,
+   "max_action_du": 0.471,
+   "first_action_step_sigma": [
+    1.0,
+    0.849
+   ],
+   "video_sigma_when_action_half": 0.882,
+   "mean_action_loss_weight_on_updates": 1.271,
+   "max_u_gap_between_streams": 0.474
+  },
+  "VS action-lead α=16": {
+   "fig9": 89.7,
+   "action_updates": 10,
+   "max_action_du": 0.64,
+   "first_action_step_sigma": [
+    1.0,
+    0.738
+   ],
+   "video_sigma_when_action_half": 0.921,
+   "mean_action_loss_weight_on_updates": 1.118,
+   "max_u_gap_between_streams": 0.6
+  },
+  "VS action-lead α=32": {
+   "fig9": 88.5,
+   "action_updates": 10,
+   "max_action_du": 0.78,
+   "first_action_step_sigma": [
+    1.0,
+    0.584
+   ],
+   "video_sigma_when_action_half": 0.952,
+   "mean_action_loss_weight_on_updates": 0.881,
+   "max_u_gap_between_streams": 0.689
+  },
+  "VS video-lead α=4": {
+   "fig9": 91.8,
+   "action_updates": 10,
+   "max_action_du": 0.1,
+   "first_action_step_sigma": [
+    1.0,
+    0.978
+   ],
+   "video_sigma_when_action_half": 0.122,
+   "mean_action_loss_weight_on_updates": 0.972,
+   "max_u_gap_between_streams": 0.332
+  },
+  "VS video-lead α=8": {
+   "fig9": 91.1,
+   "action_updates": 10,
+   "max_action_du": 0.1,
+   "first_action_step_sigma": [
+    1.0,
+    0.978
+   ],
+   "video_sigma_when_action_half": 0.065,
+   "mean_action_loss_weight_on_updates": 0.972,
+   "max_u_gap_between_streams": 0.474
+  },
+  "VS video-lead α=16": {
+   "fig9": 91.9,
+   "action_updates": 10,
+   "max_action_du": 0.1,
+   "first_action_step_sigma": [
+    1.0,
+    0.978
+   ],
+   "video_sigma_when_action_half": 0.034,
+   "mean_action_loss_weight_on_updates": 0.972,
+   "max_u_gap_between_streams": 0.6
+  },
+  "VS video-lead α=32": {
+   "fig9": 91.5,
+   "action_updates": 10,
+   "max_action_du": 0.1,
+   "first_action_step_sigma": [
+    1.0,
+    0.978
+   ],
+   "video_sigma_when_action_half": 0.017,
+   "mean_action_loss_weight_on_updates": 0.972,
+   "max_u_gap_between_streams": 0.689
+  },
+  "LO action-lead o=0.2": {
+   "fig9": 92.2,
+   "action_updates": 10,
+   "max_action_du": 0.1,
+   "first_action_step_sigma": [
+    1.0,
+    0.978
+   ],
+   "video_sigma_when_action_half": 0.417,
+   "mean_action_loss_weight_on_updates": 0.972,
+   "max_u_gap_between_streams": 0.2
+  },
+  "LO action-lead o=0.4": {
+   "fig9": 92.0,
+   "action_updates": 10,
+   "max_action_du": 0.1,
+   "first_action_step_sigma": [
+    1.0,
+    0.978
+   ],
+   "video_sigma_when_action_half": 0.5,
+   "mean_action_loss_weight_on_updates": 0.972,
+   "max_u_gap_between_streams": 0.4
+  },
+  "LO action-lead o=0.6": {
+   "fig9": 92.3,
+   "action_updates": 10,
+   "max_action_du": 0.1,
+   "first_action_step_sigma": [
+    1.0,
+    0.978
+   ],
+   "video_sigma_when_action_half": 0.625,
+   "mean_action_loss_weight_on_updates": 0.972,
+   "max_u_gap_between_streams": 0.6
+  },
+  "LO action-lead o=0.8": {
+   "fig9": 92.3,
+   "action_updates": 10,
+   "max_action_du": 0.1,
+   "first_action_step_sigma": [
+    1.0,
+    0.978
+   ],
+   "video_sigma_when_action_half": 0.833,
+   "mean_action_loss_weight_on_updates": 0.972,
+   "max_u_gap_between_streams": 0.8
+  },
+  "LO video-lead o=0.2": {
+   "fig9": 91.7,
+   "action_updates": 8,
+   "max_action_du": 0.125,
+   "first_action_step_sigma": [
+    1.0,
+    1.0
+   ],
+   "video_sigma_when_action_half": 0.357,
+   "mean_action_loss_weight_on_updates": 0.956,
+   "max_u_gap_between_streams": 0.2
+  },
+  "LO video-lead o=0.4": {
+   "fig9": 91.1,
+   "action_updates": 6,
+   "max_action_du": 0.167,
+   "first_action_step_sigma": [
+    1.0,
+    1.0
+   ],
+   "video_sigma_when_action_half": 0.357,
+   "mean_action_loss_weight_on_updates": 0.923,
+   "max_u_gap_between_streams": 0.4
+  },
+  "LO video-lead o=0.6": {
+   "fig9": 91.5,
+   "action_updates": 4,
+   "max_action_du": 0.25,
+   "first_action_step_sigma": [
+    1.0,
+    1.0
+   ],
+   "video_sigma_when_action_half": 0.0,
+   "mean_action_loss_weight_on_updates": 0.834,
+   "max_u_gap_between_streams": 0.6
+  },
+  "LO video-lead o=0.8": {
+   "fig9": 91.2,
+   "action_updates": 2,
+   "max_action_du": 0.5,
+   "first_action_step_sigma": [
+    1.0,
+    1.0
+   ],
+   "video_sigma_when_action_half": 0.0,
+   "mean_action_loss_weight_on_updates": 0.512,
+   "max_u_gap_between_streams": 0.8
+  }
+ },
+ "spearman_path_stat_vs_fig9": {
+  "action_updates": {
+   "rho": 0.15,
+   "p": 0.565
+  },
+  "max_action_du": {
+   "rho": -0.815,
+   "p": 6.76e-05
+  },
+  "video_sigma_when_action_half": {
+   "rho": -0.233,
+   "p": 0.367
+  },
+  "mean_action_loss_weight_on_updates": {
+   "rho": -0.032,
+   "p": 0.903
+  },
+  "max_u_gap_between_streams": {
+   "rho": -0.233,
+   "p": 0.368
+  }
+ },
+ "paths_sigma": {
+  "sync": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.9783,
+    0.9783
+   ],
+   [
+    0.9524,
+    0.9524
+   ],
+   [
+    0.9211,
+    0.9211
+   ],
+   [
+    0.8824,
+    0.8824
+   ],
+   [
+    0.8333,
+    0.8333
+   ],
+   [
+    0.7692,
+    0.7692
+   ],
+   [
+    0.6818,
+    0.6818
+   ],
+   [
+    0.5556,
+    0.5556
+   ],
+   [
+    0.3571,
+    0.3571
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "VS action-lead α=4": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.9783,
+    0.9184
+   ],
+   [
+    0.9524,
+    0.8333
+   ],
+   [
+    0.9211,
+    0.7447
+   ],
+   [
+    0.8824,
+    0.6522
+   ],
+   [
+    0.8333,
+    0.5556
+   ],
+   [
+    0.7692,
+    0.4545
+   ],
+   [
+    0.6818,
+    0.3488
+   ],
+   [
+    0.5556,
+    0.2381
+   ],
+   [
+    0.3571,
+    0.122
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "VS action-lead α=8": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.9783,
+    0.8491
+   ],
+   [
+    0.9524,
+    0.7143
+   ],
+   [
+    0.9211,
+    0.5932
+   ],
+   [
+    0.8824,
+    0.4839
+   ],
+   [
+    0.8333,
+    0.3846
+   ],
+   [
+    0.7692,
+    0.2941
+   ],
+   [
+    0.6818,
+    0.2113
+   ],
+   [
+    0.5556,
+    0.1351
+   ],
+   [
+    0.3571,
+    0.0649
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "VS action-lead α=16": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.9783,
+    0.7377
+   ],
+   [
+    0.9524,
+    0.5556
+   ],
+   [
+    0.9211,
+    0.4217
+   ],
+   [
+    0.8824,
+    0.3191
+   ],
+   [
+    0.8333,
+    0.2381
+   ],
+   [
+    0.7692,
+    0.1724
+   ],
+   [
+    0.6818,
+    0.1181
+   ],
+   [
+    0.5556,
+    0.0725
+   ],
+   [
+    0.3571,
+    0.0336
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "VS action-lead α=32": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.9783,
+    0.5844
+   ],
+   [
+    0.9524,
+    0.3846
+   ],
+   [
+    0.9211,
+    0.2672
+   ],
+   [
+    0.8824,
+    0.1899
+   ],
+   [
+    0.8333,
+    0.1351
+   ],
+   [
+    0.7692,
+    0.0943
+   ],
+   [
+    0.6818,
+    0.0628
+   ],
+   [
+    0.5556,
+    0.0376
+   ],
+   [
+    0.3571,
+    0.0171
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "VS video-lead α=4": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.9184,
+    0.9783
+   ],
+   [
+    0.8333,
+    0.9524
+   ],
+   [
+    0.7447,
+    0.9211
+   ],
+   [
+    0.6522,
+    0.8824
+   ],
+   [
+    0.5556,
+    0.8333
+   ],
+   [
+    0.4545,
+    0.7692
+   ],
+   [
+    0.3488,
+    0.6818
+   ],
+   [
+    0.2381,
+    0.5556
+   ],
+   [
+    0.122,
+    0.3571
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "VS video-lead α=8": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.8491,
+    0.9783
+   ],
+   [
+    0.7143,
+    0.9524
+   ],
+   [
+    0.5932,
+    0.9211
+   ],
+   [
+    0.4839,
+    0.8824
+   ],
+   [
+    0.3846,
+    0.8333
+   ],
+   [
+    0.2941,
+    0.7692
+   ],
+   [
+    0.2113,
+    0.6818
+   ],
+   [
+    0.1351,
+    0.5556
+   ],
+   [
+    0.0649,
+    0.3571
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "VS video-lead α=16": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.7377,
+    0.9783
+   ],
+   [
+    0.5556,
+    0.9524
+   ],
+   [
+    0.4217,
+    0.9211
+   ],
+   [
+    0.3191,
+    0.8824
+   ],
+   [
+    0.2381,
+    0.8333
+   ],
+   [
+    0.1724,
+    0.7692
+   ],
+   [
+    0.1181,
+    0.6818
+   ],
+   [
+    0.0725,
+    0.5556
+   ],
+   [
+    0.0336,
+    0.3571
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "VS video-lead α=32": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.5844,
+    0.9783
+   ],
+   [
+    0.3846,
+    0.9524
+   ],
+   [
+    0.2672,
+    0.9211
+   ],
+   [
+    0.1899,
+    0.8824
+   ],
+   [
+    0.1351,
+    0.8333
+   ],
+   [
+    0.0943,
+    0.7692
+   ],
+   [
+    0.0628,
+    0.6818
+   ],
+   [
+    0.0376,
+    0.5556
+   ],
+   [
+    0.0171,
+    0.3571
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "LO action-lead o=0.2": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    1.0,
+    0.9783
+   ],
+   [
+    1.0,
+    0.9524
+   ],
+   [
+    0.9722,
+    0.9211
+   ],
+   [
+    0.9375,
+    0.8824
+   ],
+   [
+    0.8929,
+    0.8333
+   ],
+   [
+    0.8333,
+    0.7692
+   ],
+   [
+    0.75,
+    0.6818
+   ],
+   [
+    0.625,
+    0.5556
+   ],
+   [
+    0.4167,
+    0.3571
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "LO action-lead o=0.4": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    1.0,
+    0.9783
+   ],
+   [
+    1.0,
+    0.9524
+   ],
+   [
+    1.0,
+    0.9211
+   ],
+   [
+    1.0,
+    0.8824
+   ],
+   [
+    0.9615,
+    0.8333
+   ],
+   [
+    0.9091,
+    0.7692
+   ],
+   [
+    0.8333,
+    0.6818
+   ],
+   [
+    0.7143,
+    0.5556
+   ],
+   [
+    0.5,
+    0.3571
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "LO action-lead o=0.6": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    1.0,
+    0.9783
+   ],
+   [
+    1.0,
+    0.9524
+   ],
+   [
+    1.0,
+    0.9211
+   ],
+   [
+    1.0,
+    0.8824
+   ],
+   [
+    1.0,
+    0.8333
+   ],
+   [
+    1.0,
+    0.7692
+   ],
+   [
+    0.9375,
+    0.6818
+   ],
+   [
+    0.8333,
+    0.5556
+   ],
+   [
+    0.625,
+    0.3571
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "LO action-lead o=0.8": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    1.0,
+    0.9783
+   ],
+   [
+    1.0,
+    0.9524
+   ],
+   [
+    1.0,
+    0.9211
+   ],
+   [
+    1.0,
+    0.8824
+   ],
+   [
+    1.0,
+    0.8333
+   ],
+   [
+    1.0,
+    0.7692
+   ],
+   [
+    1.0,
+    0.6818
+   ],
+   [
+    1.0,
+    0.5556
+   ],
+   [
+    0.8333,
+    0.3571
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "LO video-lead o=0.2": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.9783,
+    1.0
+   ],
+   [
+    0.9524,
+    1.0
+   ],
+   [
+    0.9211,
+    0.9722
+   ],
+   [
+    0.8824,
+    0.9375
+   ],
+   [
+    0.8333,
+    0.8929
+   ],
+   [
+    0.7692,
+    0.8333
+   ],
+   [
+    0.6818,
+    0.75
+   ],
+   [
+    0.5556,
+    0.625
+   ],
+   [
+    0.3571,
+    0.4167
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "LO video-lead o=0.4": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.9783,
+    1.0
+   ],
+   [
+    0.9524,
+    1.0
+   ],
+   [
+    0.9211,
+    1.0
+   ],
+   [
+    0.8824,
+    1.0
+   ],
+   [
+    0.8333,
+    0.9615
+   ],
+   [
+    0.7692,
+    0.9091
+   ],
+   [
+    0.6818,
+    0.8333
+   ],
+   [
+    0.5556,
+    0.7143
+   ],
+   [
+    0.3571,
+    0.5
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "LO video-lead o=0.6": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.9783,
+    1.0
+   ],
+   [
+    0.9524,
+    1.0
+   ],
+   [
+    0.9211,
+    1.0
+   ],
+   [
+    0.8824,
+    1.0
+   ],
+   [
+    0.8333,
+    1.0
+   ],
+   [
+    0.7692,
+    1.0
+   ],
+   [
+    0.6818,
+    0.9375
+   ],
+   [
+    0.5556,
+    0.8333
+   ],
+   [
+    0.3571,
+    0.625
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "LO video-lead o=0.8": [
+   [
+    1.0,
+    1.0
+   ],
+   [
+    0.9783,
+    1.0
+   ],
+   [
+    0.9524,
+    1.0
+   ],
+   [
+    0.9211,
+    1.0
+   ],
+   [
+    0.8824,
+    1.0
+   ],
+   [
+    0.8333,
+    1.0
+   ],
+   [
+    0.7692,
+    1.0
+   ],
+   [
+    0.6818,
+    1.0
+   ],
+   [
+    0.5556,
+    1.0
+   ],
+   [
+    0.3571,
+    0.8333
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ]
+ }
+}

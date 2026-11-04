@@ -4,6 +4,7 @@
 
 | 날짜 | 글 | 요약 |
 |---|---|---|
+| 2026-11-04 | [OpenWAM 읽기: World–Action Model을 부품으로 쪼개 보니, 추론 때 미래 영상은 거의 쓰이지 않았다](papers/openwam/) | WAM의 설계 선택을 같은 조건에서 비교하고 5B+1B 모델을 사전학습한 OpenWAM을, 표를 재계산하고 공개 코드·체크포인트 메타데이터와 대조하며 읽었습니다. |
 | 2026-11-03 | [Weight-Space Programming 읽기: LLM이 가중치를 읽고 쓴다는 주장을 로그로 확인하기](papers/weight_space_programming/) | GPT-6 Astra가 경사하강 없이 신경망 가중치를 읽고, 고치고, 처음부터 쓴다는 MIT CSAIL 블로그를 공개 로그로 다시 계산하며 읽었습니다. 수치는 모두 맞고, 해석에는 단서가 필요합니다. |
 | 2026-11-03 | [GNR 읽기: MPC가 푼 궤적으로 배운 생성기, 그 이득은 어디서 오나](papers/gnr/) | 사람 시연을 로봇손 궤적으로 옮기는 물리 기반 리타겟팅을 조건부 flow matching으로 상각한 GNR을, 표를 다시 계산하고 pass@S 곡선의 구조를 맞추고 toy로 가설을 시험하며 읽었습니다. |
 | 2026-10-30 | [Nemotron 3.5 Super VL 기술 보고서 읽기: 120B-A12B 하이브리드 MoE를 공개 체크포인트로 검증하기](papers/nemotron35_super_vl/) | NVIDIA의 Nemotron 3.5 Super VL·Lightning 기술 보고서를, 공개 config와 safetensors 헤더로 구조를 확인하고 표·블로그 수치를 재계산하며 읽었습니다. |
