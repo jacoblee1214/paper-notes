@@ -1,0 +1,406 @@
+{
+ "config": {
+  "mu": 0.1,
+  "edges": 8,
+  "num_basis": 512,
+  "tolerance": 0.1,
+  "var": 0.1,
+  "box_half_extent_m": [
+   0.1,
+   0.075,
+   0.05
+  ],
+  "rc_m": 0.1346,
+  "location_sigma_m": 0.02,
+  "cone_half_angle_deg": 5.71
+ },
+ "W1_normal_rotation_same_location": [
+  {
+   "normal_err_deg": 0,
+   "location": 1.0,
+   "code": 1.0,
+   "eq3": 1.0,
+   "missed_frac": 0.0
+  },
+  {
+   "normal_err_deg": 5,
+   "location": 1.0,
+   "code": 0.9832,
+   "eq3": 0.4518,
+   "missed_frac": 0.0143
+  },
+  {
+   "normal_err_deg": 10,
+   "location": 1.0,
+   "code": 0.9542,
+   "eq3": 0.004,
+   "missed_frac": 0.0286
+  },
+  {
+   "normal_err_deg": 15,
+   "location": 1.0,
+   "code": 0.9086,
+   "eq3": 0.0,
+   "missed_frac": 0.0464
+  },
+  {
+   "normal_err_deg": 20,
+   "location": 1.0,
+   "code": 0.8477,
+   "eq3": 0.0,
+   "missed_frac": 0.075
+  },
+  {
+   "normal_err_deg": 30,
+   "location": 1.0,
+   "code": 0.7317,
+   "eq3": 0.0,
+   "missed_frac": 0.1214
+  },
+  {
+   "normal_err_deg": 45,
+   "location": 1.0,
+   "code": 0.5817,
+   "eq3": 0.0,
+   "missed_frac": 0.1714
+  },
+  {
+   "normal_err_deg": 60,
+   "location": 1.0,
+   "code": 0.4624,
+   "eq3": 0.0,
+   "missed_frac": 0.2464
+  },
+  {
+   "normal_err_deg": 75,
+   "location": 1.0,
+   "code": 0.3868,
+   "eq3": 0.0,
+   "missed_frac": 0.325
+  },
+  {
+   "normal_err_deg": 90,
+   "location": 1.0,
+   "code": 0.3291,
+   "eq3": 0.0,
+   "missed_frac": 0.4179
+  }
+ ],
+ "W1_note": "90도에서 n_r = -x (앞면을 안쪽으로 밂). 위치 보상은 1.0 그대로, wrench 보상만 법선 차이를 잡는다",
+ "W2_location_offset_same_normal": [
+  {
+   "offset_cm": 0,
+   "location": 1.0,
+   "code": 1.0,
+   "eq3": 1.0
+  },
+  {
+   "offset_cm": 0.5,
+   "location": 0.9394,
+   "code": 0.9892,
+   "eq3": 0.9428
+  },
+  {
+   "offset_cm": 1,
+   "location": 0.7788,
+   "code": 0.974,
+   "eq3": 0.6274
+  },
+  {
+   "offset_cm": 2,
+   "location": 0.3679,
+   "code": 0.9402,
+   "eq3": 0.0251
+  },
+  {
+   "offset_cm": 3,
+   "location": 0.1054,
+   "code": 0.9131,
+   "eq3": 0.0
+  },
+  {
+   "offset_cm": 5,
+   "location": 0.0019,
+   "code": 0.8289,
+   "eq3": 0.0
+  }
+ ],
+ "W2_note": "토크는 p x f / rc(rc = 0.135 m)라서 1 cm 이동은 토크 성분을 약 0.074만 바꾼다",
+ "W3_force_magnitude_invariance": [
+  {
+   "force_scale": 0.1,
+   "max_abs_support_diff": 1.1102230246251565e-16
+  },
+  {
+   "force_scale": 1.0,
+   "max_abs_support_diff": 0.0
+  },
+  {
+   "force_scale": 10.0,
+   "max_abs_support_diff": 0.0
+  }
+ ],
+ "W4_friction_sensitivity": [
+  {
+   "mu": 0.1,
+   "cone_half_angle_deg": 5.7,
+   "code@5deg": 0.9832,
+   "code@10deg": 0.9542,
+   "code@20deg": 0.8477,
+   "code@30deg": 0.7317
+  },
+  {
+   "mu": 0.3,
+   "cone_half_angle_deg": 16.7,
+   "code@5deg": 0.9825,
+   "code@10deg": 0.9587,
+   "code@20deg": 0.8855,
+   "code@30deg": 0.799
+  },
+  {
+   "mu": 0.5,
+   "cone_half_angle_deg": 26.6,
+   "code@5deg": 0.9864,
+   "code@10deg": 0.9562,
+   "code@20deg": 0.8897,
+   "code@30deg": 0.814
+  },
+  {
+   "mu": 1.0,
+   "cone_half_angle_deg": 45.0,
+   "code@5deg": 0.9932,
+   "code@10deg": 0.9626,
+   "code@20deg": 0.8995,
+   "code@30deg": 0.836
+  }
+ ],
+ "W5_eq3_vs_code_pinch": [
+  {
+   "normal_err_deg": 0,
+   "code": 1.0,
+   "eq3": 1.0,
+   "sum_sq_violation": 0.0,
+   "frac_dirs_violating": 0.0
+  },
+  {
+   "normal_err_deg": 2,
+   "code": 0.9998,
+   "eq3": 0.897901,
+   "sum_sq_violation": 0.0108,
+   "frac_dirs_violating": 0.1504
+  },
+  {
+   "normal_err_deg": 5,
+   "code": 0.995,
+   "eq3": 0.074697,
+   "sum_sq_violation": 0.2594,
+   "frac_dirs_violating": 0.4531
+  },
+  {
+   "normal_err_deg": 10,
+   "code": 0.9607,
+   "eq3": 0.0,
+   "sum_sq_violation": 1.7722,
+   "frac_dirs_violating": 0.666
+  },
+  {
+   "normal_err_deg": 15,
+   "code": 0.8935,
+   "eq3": 0.0,
+   "sum_sq_violation": 4.7597,
+   "frac_dirs_violating": 0.7676
+  },
+  {
+   "normal_err_deg": 20,
+   "code": 0.8133,
+   "eq3": 0.0,
+   "sum_sq_violation": 8.9171,
+   "frac_dirs_violating": 0.8262
+  },
+  {
+   "normal_err_deg": 30,
+   "code": 0.6611,
+   "eq3": 0.0,
+   "sum_sq_violation": 19.8682,
+   "frac_dirs_violating": 0.8613
+  }
+ ],
+ "W6_force_closure": [
+  {
+   "contacts": "1 contact (-z)",
+   "mu": 0.1,
+   "face_centers": true,
+   "r_fc(eps=0.01)": 0.543,
+   "ferrari_canny_min_support": 0.0
+  },
+  {
+   "contacts": "1 contact (-z)",
+   "mu": 0.1,
+   "face_centers": false,
+   "r_fc(eps=0.01)": 0.5605,
+   "ferrari_canny_min_support": 0.0
+  },
+  {
+   "contacts": "1 contact (-z)",
+   "mu": 0.5,
+   "face_centers": true,
+   "r_fc(eps=0.01)": 0.7168,
+   "ferrari_canny_min_support": 0.0
+  },
+  {
+   "contacts": "1 contact (-z)",
+   "mu": 0.5,
+   "face_centers": false,
+   "r_fc(eps=0.01)": 0.7148,
+   "ferrari_canny_min_support": 0.0
+  },
+  {
+   "contacts": "2 antipodal (x)",
+   "mu": 0.1,
+   "face_centers": true,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.0534
+  },
+  {
+   "contacts": "2 antipodal (x)",
+   "mu": 0.1,
+   "face_centers": false,
+   "r_fc(eps=0.01)": 0.9336,
+   "ferrari_canny_min_support": 0.0
+  },
+  {
+   "contacts": "2 antipodal (x)",
+   "mu": 0.5,
+   "face_centers": true,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.2062
+  },
+  {
+   "contacts": "2 antipodal (x)",
+   "mu": 0.5,
+   "face_centers": false,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.0543
+  },
+  {
+   "contacts": "3 (x pair + -z)",
+   "mu": 0.1,
+   "face_centers": true,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.0556
+  },
+  {
+   "contacts": "3 (x pair + -z)",
+   "mu": 0.1,
+   "face_centers": false,
+   "r_fc(eps=0.01)": 0.9707,
+   "ferrari_canny_min_support": 0.0
+  },
+  {
+   "contacts": "3 (x pair + -z)",
+   "mu": 0.5,
+   "face_centers": true,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.2253
+  },
+  {
+   "contacts": "3 (x pair + -z)",
+   "mu": 0.5,
+   "face_centers": false,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.0982
+  },
+  {
+   "contacts": "4 (x pair + z pair)",
+   "mu": 0.1,
+   "face_centers": true,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.1032
+  },
+  {
+   "contacts": "4 (x pair + z pair)",
+   "mu": 0.1,
+   "face_centers": false,
+   "r_fc(eps=0.01)": 0.998,
+   "ferrari_canny_min_support": 0.0
+  },
+  {
+   "contacts": "4 (x pair + z pair)",
+   "mu": 0.5,
+   "face_centers": true,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.2253
+  },
+  {
+   "contacts": "4 (x pair + z pair)",
+   "mu": 0.5,
+   "face_centers": false,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.2008
+  },
+  {
+   "contacts": "6 face centers",
+   "mu": 0.1,
+   "face_centers": true,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.1566
+  },
+  {
+   "contacts": "6 face centers",
+   "mu": 0.1,
+   "face_centers": false,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.1819
+  },
+  {
+   "contacts": "6 face centers",
+   "mu": 0.5,
+   "face_centers": true,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.3059
+  },
+  {
+   "contacts": "6 face centers",
+   "mu": 0.5,
+   "face_centers": false,
+   "r_fc(eps=0.01)": 1.0,
+   "ferrari_canny_min_support": 0.3058
+  }
+ ],
+ "W6_note": "면 중앙 접촉은 p x n = 0이라 순수 토크 방향을 만들지 못한다. 위치를 면 위에서 옮기면(shifted) 토크가 생긴다. min support > 0이면 이 기저에서 force closure",
+ "W7_basis_seed_spread": {
+  "code_W1_30deg": {
+   "mean": 0.7207,
+   "std": 0.0133,
+   "min": 0.6869,
+   "max": 0.7413
+  },
+  "code_W5_10deg": {
+   "mean": 0.9583,
+   "std": 0.0049,
+   "min": 0.9513,
+   "max": 0.9667
+  }
+ },
+ "W8_extra_contact_same_body": {
+  "code_reward_single": 1.0,
+  "code_reward_with_extra_side_contact": 0.8717,
+  "eq3_with_extra": 0.0,
+  "dirs_human_zero_robot_positive": 138,
+  "frac_human_active_dirs": 0.5527
+ },
+ "W8_note": "사람 지지값이 0인 방향에서 로봇 지지값이 생겨도 코드 보상은 그 방향을 세지 않는다. unintended 벌칙은 사람 접촉이 없는 body에만 걸린다. 사람 활성 방향에서 지지값이 (1+tol)배를 넘으면 too_large로 깎인다",
+ "W9_sampled_epsilon_vs_true": {
+  "antipodal_tau_x_component_max_abs": 0.0,
+  "support_at_exact_tau_x": 0.0,
+  "support_at_exact_minus_tau_x": 0.0,
+  "sampled_min_support_512": 0.0534,
+  "nearest_basis_angle_to_tau_x_deg": 15.8,
+  "basis_covering_angle_deg": {
+   "median": 22.1,
+   "p95": 29.8,
+   "max_of_20000": 38.0
+  }
+ },
+ "W9_note": "두 점접촉은 x축 토크 방향의 지지값이 정확히 0(force closure 아님)인데, 512개 무작위 방향의 최솟값은 양수라 r_fc = 1, 표본 epsilon > 0이 된다. 6차원에서 512개 방향은 가장 가까운 방향까지 보통 수십 도 떨어져 있다"
+}

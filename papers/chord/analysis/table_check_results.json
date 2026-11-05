@@ -1,0 +1,280 @@
+{
+ "C1_1831_tasks": {
+  "n_sum": 1831,
+  "fig5_weighted_mean_completion": 0.7811,
+  "fig5_unweighted_mean": 0.801,
+  "abstract_claim": 0.8212,
+  "claim_x1831": 1503.62,
+  "nearest_task_fractions": [
+   "1503/1831 = 82.0863%",
+   "1504/1831 = 82.1409%"
+  ],
+  "if_3_seeds_x1831": "4511/5493 = 82.1227%",
+  "hot3d_share_of_eval": 0.6996,
+  "eval_share_of_4739": 0.3864,
+  "hot3d_clips_share_of_4739": 0.8536,
+  "note": "Fig. 5의 막대는 완료율 평균(0.781). 82.12%는 '완료율 > 0.7인 과제 비율'로 읽어야 하며, 1,831로는 정수가 안 되고 시드 3개(5,493)면 맞는다"
+ },
+ "C2_whole_body": {
+  "n_sum": 17,
+  "fig5_right_weighted_mean": 0.9077,
+  "abstract_claim": 0.9077,
+  "table3_overall_chord_recomputed": 0.9247,
+  "table3_overall_chord_reported": 0.925,
+  "table3_overall_posonly_recomputed": 0.2173,
+  "table3_overall_posonly_reported": 0.217,
+  "fig5_std_vs_table3_std": {
+   "rigid": [
+    0.038,
+    0.008
+   ],
+   "articulated": [
+    0.14,
+    0.107
+   ],
+   "multi": [
+    0.17,
+    0.129
+   ]
+  },
+  "note": "90.77%는 손만 12개 + TPV 5개 = 17개 가중평균과 정확히 맞는다. Table 3(n = 12)은 TPV를 뺀 값. 같은 과제인데 Fig. 5와 Table 3의 표준편차가 다르다"
+ },
+ "C3_table1": {
+  "AUC": {
+   "best_baseline": "SP",
+   "chord": 0.918,
+   "baseline": 0.804,
+   "gap": 0.114,
+   "t": 4.15,
+   "p_two_sided": 0.0321
+  },
+  "SP-SR": {
+   "best_baseline": "SP",
+   "chord": 0.926,
+   "baseline": 0.911,
+   "gap": 0.015,
+   "t": 0.58,
+   "p_two_sided": 0.6006
+  },
+  "MP-SR": {
+   "best_baseline": "SP",
+   "chord": 0.894,
+   "baseline": 0.789,
+   "gap": 0.105,
+   "t": 3.2,
+   "p_two_sided": 0.0394
+  },
+  "JPE": {
+   "best_baseline": "H2S2R",
+   "chord": 4.34,
+   "baseline": 11.8,
+   "gap": -7.46,
+   "t": -8.5,
+   "p_two_sided": 0.0115
+  },
+  "RPE": {
+   "best_baseline": "SP",
+   "chord": 5.14,
+   "baseline": 6.99,
+   "gap": -1.85,
+   "t": -1.94,
+   "p_two_sided": 0.1669
+  },
+  "MPPE": {
+   "best_baseline": "SP",
+   "chord": 5.11,
+   "baseline": 14.28,
+   "gap": -9.17,
+   "t": -5.64,
+   "p_two_sided": 0.0275
+  },
+  "SP-SR_x180": 166.68,
+  "note": "SP-SR은 CHORD 0.926 vs SPIDER 0.911로 시드 3개 기준 차이가 유의하지 않다. SP-SR x 180이 정수가 아니므로 과제 성공 비율이 아니라 과제별 성공률의 평균으로 보인다"
+ },
+ "C4_table2": {
+  "Pos. Only": {
+   "AUC": {
+    "gap": 0.056,
+    "t": 3.71,
+    "p_two_sided": 0.0208
+   },
+   "SP-SR": {
+    "gap": 0.07,
+    "t": 3.4,
+    "p_two_sided": 0.0296
+   },
+   "MP-SR": {
+    "gap": 0.114,
+    "t": 3.74,
+    "p_two_sided": 0.0227
+   },
+   "JPE": {
+    "gap": -2.07,
+    "t": -7.08,
+    "p_two_sided": 0.0048
+   },
+   "RPE": {
+    "gap": -2.67,
+    "t": -5.52,
+    "p_two_sided": 0.0057
+   },
+   "MPPE": {
+    "gap": -2.52,
+    "t": -11.06,
+    "p_two_sided": 0.0068
+   }
+  },
+  "No Cont.": {
+   "AUC": {
+    "gap": 0.144,
+    "t": 6.2,
+    "p_two_sided": 0.009
+   },
+   "SP-SR": {
+    "gap": 0.17,
+    "t": 4.68,
+    "p_two_sided": 0.0264
+   },
+   "MP-SR": {
+    "gap": 0.282,
+    "t": 7.68,
+    "p_two_sided": 0.0036
+   },
+   "JPE": {
+    "gap": -5.47,
+    "t": -12.28,
+    "p_two_sided": 0.0029
+   },
+   "RPE": {
+    "gap": -5.77,
+    "t": -7.39,
+    "p_two_sided": 0.007
+   },
+   "MPPE": {
+    "gap": -9.27,
+    "t": -7.09,
+    "p_two_sided": 0.0164
+   }
+  },
+  "share_of_gain_SP-SR": {
+   "no_contact_to_position": 0.1,
+   "position_to_wrench": 0.07,
+   "wrench_share_of_total": 0.412
+  },
+  "table2_chord_row_equals_table1": true
+ },
+ "C5_real_world": {
+  "open_loop_total": "23/25",
+  "rate": 0.92,
+  "wilson95": [
+   0.75,
+   0.978
+  ],
+  "plate_reorientation_wilson95": [
+   0.231,
+   0.882
+  ],
+  "box_open_vs_closed": "6/7 vs 7/7",
+  "fisher_p": 1.0
+ },
+ "C6_fig6": {
+  "r": 0.798,
+  "r2": 0.637,
+  "claim": "roughly two-thirds of the variance",
+  "fit": "y = 1.112x + 0.057",
+  "x_where_fit_hits_1": 0.848
+ },
+ "C7_budget": {
+  "ppo_transitions_per_iter": 98304,
+  "ppo_voc_zero_from_iter": 12500,
+  "ppo_voc_zero_transitions": 1228800000,
+  "ppo_max_iter_transitions": 1966080000,
+  "flash_first9_thresholds_equal_ppo_div10": true,
+  "flash_extra_stages": "200.0M부터 reset_to_first_frame 0.5 단계, 마지막 250.0M 임계값은 학습 끝과 같음",
+  "flash_voc_zero_transitions": 122880000,
+  "flash_total_transitions": 250003456,
+  "ppo_over_flash_transitions": 7.86,
+  "flash_throughput_if_2h": 34723,
+  "fdr_gpu_h_per_motion": {
+   "XHand": 56.9,
+   "Sharpa": 66.3
+  },
+  "fdr_implied_throughput_if_full_ppo": {
+   "XHand": 9591,
+   "Sharpa": 8240
+  },
+  "fdr_per_motion_over_chord_paper_2h": {
+   "XHand": 28.5,
+   "Sharpa": 33.1
+  },
+  "hypothetical_chord_flashsac_50_motions_gpu_h": 100,
+  "fdr_flashdexretarget_gpu_h": {
+   "XHand": 29,
+   "Sharpa": 44
+  },
+  "ratio_hypothetical_vs_fdr": {
+   "XHand": 3.45,
+   "Sharpa": 2.27
+  },
+  "paper_per_task_hours": {
+   "CHORD": 2,
+   "DexMachina": 10,
+   "ManipTrans": 20,
+   "Spider": 4
+  },
+  "note": "FDR이 돌린 PPO 기본 설정은 2.0B 전이(VOC는 1.23B부터 0), 논문 v2의 FlashSAC 설정은 0.25B(VOC는 0.123B부터 0). FDR의 모션당 57–66 GPU-h(RTX 3090)는 논문의 2시간(L40S)보다 28–33배 크다. 전이 수 7.9배와 처리량 차이로 설명되지만, 처리량(3090에서 약 9.6k/s)은 이 산술로 역산한 값이라 독립 검증이 아니다. 하드웨어가 달라 GPU-h 비율은 참고값"
+ },
+ "C8_settings": {
+  "termination_paper": {
+   "object_pos_m": 0.15,
+   "object_rot_deg": 40
+  },
+  "termination_ppo_code": {
+   "wrist_m": 0.2,
+   "object_pos_m": 0.2,
+   "object_rot_rad": 0.7,
+   "object_rot_deg": 40.1
+  },
+  "termination_flashchord_code": {
+   "wrist_m": 0.15,
+   "object_pos_m": 0.1,
+   "object_rot_rad": 0.5,
+   "object_rot_deg": 28.6
+  },
+  "envs_paper_appB": 2048,
+  "envs_table2_caption": 4096,
+  "world_count_code": 4096,
+  "seeds_table1": 3,
+  "seeds_appG_dexmachina_spider": 5,
+  "friction_mu_code": 0.1,
+  "friction_cone_half_angle_deg": 5.71,
+  "edges_per_contact_code": "8 + normal = 9",
+  "basis_directions": 512,
+  "motion_speed_code": 0.5
+ },
+ "C9_v1_table1": {
+  "DM_suite_AUC": {
+   "DexMachina": "0.232±0.214",
+   "Ours": "0.687±0.358"
+  },
+  "MT_suite_SR": {
+   "ManipTrans": 0.428,
+   "Ours": 0.639
+  },
+  "SP_suite_SR": {
+   "Spider": "0.333±0.488",
+   "Ours": "0.359±0.482"
+  },
+  "Ours-1": {
+   "AUC": 0.211,
+   "AUC_ours": 0.895,
+   "SP-SR": 0.133,
+   "SP-SR_ours": 0.999
+  },
+  "Ours-2_SP-SR": {
+   "Spider": 0.533,
+   "Ours": 0.982
+  },
+  "note": "v1은 기준선마다 자기 과제 묶음·자기 지표로 비교했고 표준편차가 평균과 비슷하게 컸다. v2는 60개 과제 x 시드 3개, 지표 6개, H2S2R 추가"
+ }
+}

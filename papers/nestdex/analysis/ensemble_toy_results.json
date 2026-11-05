@@ -1,0 +1,86 @@
+{
+  "setup": {
+    "hz": 100,
+    "chunk": 30,
+    "seeds": 20,
+    "contact_at_s": 1.1,
+    "stop_level": 0.6,
+    "noise": "질의마다 오프셋 N(0,0.02) + 기울기 N(0,0.15)/s + 백색 N(0,0.006)"
+  },
+  "E1_weights": {
+    "m=0.0": {
+      "mean_age_steps": 14.5,
+      "mean_age_ms": 145.0,
+      "newest_weight": 0.0333,
+      "oldest_weight": 0.0333
+    },
+    "m=0.01": {
+      "mean_age_steps": 15.25,
+      "mean_age_ms": 152.5,
+      "newest_weight": 0.0287,
+      "oldest_weight": 0.0384
+    },
+    "m=0.05": {
+      "mean_age_steps": 18.11,
+      "mean_age_ms": 181.1,
+      "newest_weight": 0.0147,
+      "oldest_weight": 0.0628
+    },
+    "m=0.1": {
+      "mean_age_steps": 21.06,
+      "mean_age_ms": 210.6,
+      "newest_weight": 0.0055,
+      "oldest_weight": 0.1001
+    },
+    "m=0.3": {
+      "mean_age_steps": 26.15,
+      "mean_age_ms": 261.5,
+      "newest_weight": 0.0,
+      "oldest_weight": 0.2592
+    },
+    "m=1.0": {
+      "mean_age_steps": 28.42,
+      "mean_age_ms": 284.2,
+      "newest_weight": 0.0,
+      "oldest_weight": 0.6321
+    }
+  },
+  "E2_jerk_and_response": {
+    "no_ensemble": {
+      "p95_jerk_median": 313.8,
+      "settle_after_contact_ms_noise_free": 80.0,
+      "overshoot_past_stop_noise_free": 0.0,
+      "steady_jitter_std": 0.0205,
+      "jerk_ratio_vs_no_ensemble": 1.0
+    },
+    "ensemble_m=0.01": {
+      "p95_jerk_median": 100.7,
+      "settle_after_contact_ms_noise_free": 300.0,
+      "overshoot_past_stop_noise_free": 0.0521,
+      "steady_jitter_std": 0.0058,
+      "jerk_ratio_vs_no_ensemble": 3.12
+    },
+    "ensemble_m=0.05": {
+      "p95_jerk_median": 134.2,
+      "settle_after_contact_ms_noise_free": 300.0,
+      "overshoot_past_stop_noise_free": 0.0713,
+      "steady_jitter_std": 0.0075,
+      "jerk_ratio_vs_no_ensemble": 2.34
+    },
+    "ensemble_m=0.1": {
+      "p95_jerk_median": 205.8,
+      "settle_after_contact_ms_noise_free": 300.0,
+      "overshoot_past_stop_noise_free": 0.0948,
+      "steady_jitter_std": 0.0097,
+      "jerk_ratio_vs_no_ensemble": 1.52
+    },
+    "ensemble_m=0.3": {
+      "p95_jerk_median": 446.4,
+      "settle_after_contact_ms_noise_free": 300.0,
+      "overshoot_past_stop_noise_free": 0.1536,
+      "steady_jitter_std": 0.018,
+      "jerk_ratio_vs_no_ensemble": 0.7
+    }
+  },
+  "reading": "앙상블은 jerk를 줄이지만, 가장 오래된 예측에 가장 큰 가중을 주므로 접촉 뒤 새 정보 반영이 늦어진다. m은 논문에 없다."
+}

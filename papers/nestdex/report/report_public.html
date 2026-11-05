@@ -1,0 +1,801 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>NestDex 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig1"] { max-width: 58%; }
+img[src*="paper_fig5"] { max-width: 58%; }
+img[src*="paper_fig7"] { max-width: 60%; }
+img[src*="effort_public"] { max-width: 82%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>NestDex: 분석 리포트</h1>
+<p class="meta">게시용 버전 · 원문 https://arxiv.org/abs/2608.13362 · arXiv:2608.13362v1 · University of Sydney, Vanderbilt University (Zhao, Tang, Ba, Zhi) · 코드 미공개(웹사이트 저장소 cheese-zj/nestdex-site @ 63f96e6의 공개 데이터 사용) · 분석일 2026-11-05 · 논문 그림 © 저자, CC BY 4.0</p>
+<p><img src="figures/paper_fig1_overview.png" alt="Fig. 1" /></p>
+<p class="cap">논문 Fig. 1: 자율 outer policy(위 왼쪽), 여러 물체에 쓰는 inner 손 기술(위 오른쪽), 양팔 과제의 copilot 수집(아래).</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 다지 손 텔레옵에서 사람은 팔과 1-DoF 클러치만 조종하고, 손가락은 리타겟팅 시연 10개로 학습한 proprio 손 기술(inner policy)이 만든다. VLM이 단계마다 기술을 고르고, 이렇게 모은 시연으로 inner policy 없이 배포하는 visuomotor 정책(outer policy, H-VAE 손 latent)을 학습한다.</li>
+<li><strong>수집 성공률 차이는 확실하다:</strong> 6과제 모두 20/20 대 AnyTeleop 0–15/20. Ingredient(p = 0.047)를 빼면 Fisher p ≤ 4×10⁻⁴.</li>
+<li><strong>&quot;더 빠르다&quot;는 덜 실패해서다:</strong> 성공 1건당 시간 × 성공률로 구한 시행 1회당 시간은 두 방식이 0.96–1.07배로 같다. 작업자 부담을 직접 잰 지표는 없고 작업자는 한 명이다.</li>
+<li><strong>H-VAE와 수집 방식 효과는 방향은 일관되지만 과제별로는 약하다:</strong> H-VAE는 4과제 합산 p = 0.0018이지만 과제별 유의는 Tongs뿐. 양팔 과제의 자율 정책 결과와 AnyTeleop + H-VAE 칸이 없다.</li>
+<li><strong>공개 데이터로 Fig. 9–10이 재현된다:</strong> p 여섯 개가 모두 일치하고, 닫힘 뒤 유지 노력 하나로 성공을 AUC 0.91로 가른다. 다만 조건 id가 'online_rtc'라 본문의 Eq. 2(ACT식 앙상블)와 이름이 다르고, 시행은 조건별 블록으로 진행됐다.</li>
+<li><strong>앙상블은 부드럽지만 늦다(toy):</strong> ACT식 가중은 가장 오래된 예측에 가장 큰 무게를 두어, 접촉 뒤 chunk 길이(0.3 s)만큼 이전 예측이 섞인다. m 값은 논문에 없다.</li>
+<li><strong>구현 가능성:</strong> 코드·데이터 미공개라 재현은 불가능하다. 계산 규모는 작아서 장벽은 GPU가 아니라 하드웨어와 기술 시연 장비다. 클러치·앙상블·손 VAE는 수십~수백 줄로 다시 만들 수 있다.</li>
+</ol>
+<p><img src="figures/paper_fig2_system.png" alt="Fig. 2" /></p>
+<p class="cap">논문 Fig. 2: 리타겟팅한 손 기술 시연으로 inner policy를 학습하고(왼쪽 위), copilot 텔레옵으로 모은 시연으로 outer policy를 학습한다.</p>
+</section>
+<section class="chapter"><h1>01. 논문 분석: NestDex (arXiv:2608.13362)</h1>
+<ul>
+<li>제목: <em>NestDex: Nested Policy Learning with Copilot Assisted Teleoperation for Dexterous Manipulation</em></li>
+<li>저자: James Zhao†, Jinhe Tang†, Mingyuan Ba, Weiming Zhi* (University of Sydney 컴퓨터과학부·Australian Centre for Robotics, Vanderbilt University)</li>
+<li>공개: arXiv v1 2026-08-13(v1만 있음), 9쪽(본문 8쪽 + 참고문헌) · 프로젝트 https://aus.bot/research/nestdex (PAIR Lab)</li>
+<li>라이선스: <strong>CC BY 4.0</strong>(arXiv abs 페이지). PDF 안에는 이와 다른 권리 표기가 없습니다(&quot;IEEE&quot;는 참고문헌에만 나옴).</li>
+<li>코드: <strong>공개되지 않았습니다.</strong> 공개된 것은 프로젝트 웹사이트 저장소(<code>cheese-zj/nestdex-site</code> @ <code>63f96e6</code>)뿐이고, 그 안에 Fig. 9–10의 시행별 데이터 파일(<code>data/inner-policy-effort.json</code>)이 있습니다(<code>04</code> C5).</li>
+<li>분석 범위: 본문 전체, 프로젝트 페이지 번들과 공개 데이터 파일</li>
+</ul>
+<hr />
+<h2>1. Abstract (한 줄 요약과 주장)</h2>
+<p><strong>한 줄 요약:</strong> 다지 손 텔레옵에서 사람은 <strong>팔과 1-DoF 클러치만</strong> 조종하고, 손가락은 미리 학습한 **고유수용감각 기반 &quot;손 기술&quot; 정책(inner policy)**이 만든다. VLM이 과제 단계마다 쓸 기술을 고른다. 이렇게 모은 시연으로 <strong>배포 때는 inner policy 없이</strong> 팔과 손을 함께 제어하는 visuomotor 정책(outer policy)을 학습한다.</p>
+<p>논문의 기여는 세 가지입니다(Sec. I).</p>
+<ol>
+<li><strong>Copilot 보조 시연 수집:</strong> 되돌릴 수 있는 클러치로 기술의 진행도를 조절하고, 단계마다 기술을 자동으로 고른다.</li>
+<li><strong>중첩(nested) 수집과 자율 배포:</strong> inner policy는 수집에만 쓰고, outer policy는 그 시연으로 따로 학습해 혼자 실행한다.</li>
+<li><strong>실물 수집→자율 평가:</strong> 6개 과제에서 수집 신뢰성·효율, 자율 정책 학습, 압축 손 행동 표현(H-VAE), 온라인 접촉 반응 실행을 평가한다.</li>
+</ol>
+<hr />
+<h2>2. Method</h2>
+<h3>2.1 전체 구조 (Fig. 2, Sec. IV)</h3>
+<pre><code>[inner 학습]  여러 카메라로 사람 손 3D 재구성 → AnyTeleop식 벡터 리타겟팅(Huber, Eq. 3) → 로봇 손 실행
+             기록 (q_t, e_t) = 손 관절 위치 20 + 관절 effort 20 → 기술마다 시연 10개 → 기술마다 inner policy 하나
+             proprio Transformer(enc 4, dec 1): 최근 30스텝 (q, e) → 다음 30스텝 관절 위치 chunk (Eq. 4)
+                     ▼
+[copilot 수집] leader 팔 관절 → follower 팔 관절 (직접 대응)
+             leader 클러치 c_t → 진행도 p_t (Eq. 6) → 목표 index s_t (Eq. 7) → 현재 index r_t를 한 칸씩 따라감 (Eq. 8)
+             r 증가: inner policy를 최신 proprio로 질의 + temporal ensembling(Eq. 2) / r 감소: 버퍼의 이전 명령 재생
+             r = 0까지 되돌리면 VLM(손목 카메라 + 기술 설명 목록)이 다음 기술을 고름
+                     ▼
+[outer 학습]  과제당 시연 20개 → H-VAE(20 → 10, [128, 64], 과제별) → 행동 = [팔 관절 7, 손 latent 10]
+             visuomotor Transformer(enc 4, dec 1) + DINOv3 임베딩, 256×256 RGB → 100스텝 chunk, BC (Eq. 10)
+             배포: 매 스텝 질의 + temporal ensembling, 손 latent는 H-VAE decoder로 관절 명령
+</code></pre>
+<h3>2.2 Inner policy (Sec. IV-A)</h3>
+<ul>
+<li><strong>기술 시연:</strong> 보정된 여러 카메라로 손 keypoint를 삼각측량해 단일 시점의 깊이 모호성과 가림을 줄이고, AnyTeleop [4]의 벡터 리타겟팅 잔차를 Huber 벌칙으로 바꿨습니다(Eq. 3).</li>
+<li><strong>학습:</strong> 기술마다 시연 N = 10개, 모든 유효 sliding window를 씁니다. 입력은 관절 위치와 effort뿐이고, 이미지나 물체 정체는 받지 않습니다(Fig. 3).</li>
+<li><strong>설정:</strong> AdamW, 20,000 step, batch 256, lr 10⁻⁵ (Sec. V Training setup).</li>
+</ul>
+<p><img src="figures/paper_fig4_switching.png" alt="paper_fig4_switching.png" /></p>
+<p class="cap">논문 Fig. 4: Toast·Binder 과제의 copilot 수집 순서. 색 테두리는 활성 기술, SWITCH는 index가 0으로 돌아간 뒤의 자동 재선택.</p>
+<h3>2.3 클러치와 기술 선택 (Sec. IV-B, Eq. 5–8)</h3>
+<ul>
+<li>T_max = 시연 중 가장 긴 길이(Eq. 5). 클러치 값을 [c_start, c_end]로 정규화해 p_t ∈ [0, 1]을 얻고(Eq. 6), s_t = ⌊p_t (T_max − 1)⌋(Eq. 7).</li>
+<li>실행 index r_t는 제어 주기마다 <strong>최대 한 칸</strong>씩 s_t를 따라갑니다(Eq. 8). 앞으로 가면 정책을 다시 질의하고, 뒤로 가면 버퍼의 이전 명령을 실행하고 지웁니다. 되돌릴 때는 앙상블 예측을 비우고 버퍼는 남깁니다.</li>
+<li><strong>VLM 선택:</strong> 시작할 때와 사용자가 클러치를 끝까지 되돌려 r = 0이 될 때만 호출합니다. 그래서 기술 실행 중에는 기술이 바뀌지 않습니다. 어떤 VLM인지는 논문에 없습니다.</li>
+</ul>
+<h3>2.4 Outer policy와 H-VAE (Sec. IV-C)</h3>
+<ul>
+<li>H-VAE는 손 관절 명령 20차원만 10차원으로 압축하고, 팔 명령은 관절 공간 그대로 둡니다. 학습 뒤에는 posterior 평균 μ_φ를 목표로 써서 샘플링 잡음을 없앱니다(Eq. 9).</li>
+<li>outer policy는 (v_t, s_t) → 100스텝 chunk를 BC로 학습합니다(Eq. 10). 설정은 AdamW, 50,000 step, batch 8, lr 10⁻⁵입니다.</li>
+</ul>
+<p><img src="figures/paper_fig5_hvae.png" alt="paper_fig5_hvae.png" /></p>
+<p class="cap">논문 Fig. 5: (a) H-VAE가 손 명령 20차원을 latent로 압축, (b) outer policy가 팔 명령 + 손 latent chunk를 예측.</p>
+<h3>2.5 Temporal ensembling (Sec. III, Eq. 2)</h3>
+<ul>
+<li>ACT [27]와 같은 식입니다. 같은 실행 시각에 대한 예측들을 오래된 것부터 i = 0, 1, …로 놓고 w_i = exp(−m i)로 가중 평균합니다. <strong>가장 오래된 예측의 가중치가 가장 큽니다.</strong> m 값은 논문에 없습니다(<code>03</code> §3).</li>
+</ul>
+<hr />
+<h2>3. Experiments</h2>
+<h3>3.1 설정 (Sec. V)</h3>
+<ul>
+<li><strong>하드웨어:</strong> 팔·손 한 쌍마다 leader(7-DoF Piper Nero 팔 + 1-DoF 클러치)와 follower(같은 팔 + 20-DoF WujiHand I + 손목 카메라). inner policy는 100 Hz로 실행합니다. outer policy의 제어 주기는 적혀 있지 않습니다.</li>
+<li><strong>과제 6개(Table I):</strong> 단일 팔 4개(Tongs Transfer, Bottle Disposal, Dual-Object Transfer, Ingredient and Pot Transfer), 양팔 2개(Toast Preparation, Binder Filing).</li>
+<li><strong>기준선:</strong> 같은 플랫폼에서 AnyTeleop [4](카메라로 사람 손 자세를 로봇 손에 매핑). 같은 작업자가 두 인터페이스에 익숙해진 뒤 수행했습니다.</li>
+<li><strong>지표:</strong> 과제 설명의 모든 단계를 끝내야 성공. 성공 1건당 시간 = (성공·실패 시행 전체 시간) / 성공 수. NestDex는 기술마다 시연 10개를 모은 시간을 성공 시연 수로 나눠 더합니다.</li>
+</ul>
+<h3>3.2 Q1: 시연 수집 (Table II)</h3>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>Copilot 시간(s) / 성공</th>
+<th>AnyTeleop 시간(s) / 성공</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tongs Transfer</td>
+<td>44.33 / 20/20</td>
+<td>N/A / 0/20</td>
+</tr>
+<tr>
+<td>Bottle Disposal</td>
+<td>41.37 / 20/20</td>
+<td>88.88 / 10/20</td>
+</tr>
+<tr>
+<td>Dual-Object Transfer</td>
+<td>36.19 / 20/20</td>
+<td>121.63 / 6/20</td>
+</tr>
+<tr>
+<td>Ingredient and Pot Transfer</td>
+<td>43.26 / 20/20</td>
+<td>55.29 / 15/20</td>
+</tr>
+<tr>
+<td>Toast Preparation</td>
+<td>327.46 / 20/20</td>
+<td>N/A / 0/20</td>
+</tr>
+<tr>
+<td>Binder Filing</td>
+<td>221.80 / 20/20</td>
+<td>N/A / 0/20</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>성공률 차이는 Ingredient를 빼면 확실합니다.</strong> Fisher p는 Tongs·Toast·Binder 1.5×10⁻¹¹, Dual-Object 3.3×10⁻⁶, Bottle 4.4×10⁻⁴, Ingredient 0.047입니다(<code>04</code> C1).</li>
+<li><strong>&quot;더 빠르다&quot;는 시행이 빨라서가 아니라 덜 실패해서입니다.</strong> 성공 1건당 시간 × 성공률로 시행 1회당 시간을 구하면 AnyTeleop 44.4 / 36.5 / 41.5 s, Copilot 41.4 / 36.2 / 43.3 s로 0.96–1.07배입니다. 시간 이득은 거의 전부 성공률에서 나옵니다(<code>03</code> §1). 실패 시행과 성공 시행의 길이가 같다는 가정이 필요하고, Copilot 쪽은 기술 시연 수집 상각분까지 포함한 값입니다.</li>
+</ul>
+<h3>3.3 Q2·Q3: 자율 정책 (Table III, 단일 팔 4과제, 20 rollout)</h3>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>Tongs</th>
+<th>Bottle</th>
+<th>Dual-Object</th>
+<th>Ingredient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copilot, no H-VAE</td>
+<td>65%</td>
+<td>60%</td>
+<td>80%</td>
+<td>85%</td>
+</tr>
+<tr>
+<td>Copilot, H-VAE</td>
+<td><strong>100%</strong></td>
+<td><strong>75%</strong></td>
+<td><strong>90%</strong></td>
+<td><strong>100%</strong></td>
+</tr>
+<tr>
+<td>AnyTeleop, no H-VAE</td>
+<td>N/A</td>
+<td>40%</td>
+<td>20%</td>
+<td>75%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>H-VAE 효과는 합치면 유의하지만 과제별로는 하나만 유의합니다.</strong> 4과제 합산 73/80 대 58/80, Mantel–Haenszel p = 0.0018(OR 4.3)입니다. 과제별로는 Tongs만 유의하고(13/20 → 20/20, Holm p = 0.033), 나머지는 p = 0.23–0.66입니다. 본문의 &quot;consistently improves&quot;는 방향이 일관적이라는 뜻으로만 맞습니다(<code>04</code> C3).</li>
+<li><strong>수집 방식 효과(H-VAE 없이)도 Dual-Object에서만 유의합니다.</strong> 16/20 대 4/20, p = 3.6×10⁻⁴. Bottle 12 대 8(p = 0.34), Ingredient 17 대 15(p = 0.70)입니다. 3과제 합산 MH p = 5×10⁻⁴입니다.</li>
+<li><strong>빈 칸이 있습니다.</strong> AnyTeleop + H-VAE 조건이 없어서 &quot;H-VAE가 어떤 데이터에서도 돕는가&quot;는 알 수 없습니다. <strong>양팔 2과제는 자율 정책 결과가 없습니다.</strong> Fig. 1과 Fig. 4의 양팔 과제는 수집만 보여 줍니다.</li>
+</ul>
+<p><img src="figures/paper_fig6_rollouts.png" alt="paper_fig6_rollouts.png" /></p>
+<p class="cap">논문 Fig. 6: copilot 시연으로 학습한 outer policy의 자율 실행(Tongs Transfer, Dual-Object Transfer).</p>
+<h3>3.4 Q4: 온라인 실행 (Fig. 7, 9, 10)</h3>
+<ul>
+<li>같은 inner policy로 물병 잡기를 세 조건에서 10회씩 시험했습니다. 고정 명령 재생 3/10, 닫힌 루프·앙상블 없음 7/10, 닫힌 루프·앙상블 9/10입니다.</li>
+<li>본문의 p = 0.0198은 고정 재생 대 앙상블의 양측 Fisher 정확검정 값과 정확히 같습니다(0.01977). 다만 세 쌍을 비교했으므로 Holm 보정하면 0.059입니다. 닫힌 루프 두 조건의 차이(7/10 대 9/10)는 p = 0.58로 구분되지 않는다고 저자들도 씁니다(<code>04</code> C4).</li>
+<li>앙상블 없음의 P95 jerk가 2.30배 크다는 값(p = 1.8×10⁻⁴)은 Fig. 7(c)의 0.21 s 창 값과 맞습니다. 창을 0.11, 0.31 s로 바꾸면 1.94, 2.03배이고, 명령 제한 전 기준으로는 2.84–3.62배입니다.</li>
+<li><strong>공개 데이터로 다시 계산했습니다.</strong> 시행별 유지 노력 중앙값과 정확 Mann–Whitney p(0.117, 0.017, 0.400, 성공끼리 비교 0.0012)가 모두 재현됩니다. 30회를 합치면 <strong>닫힘 뒤 유지 노력 하나로 성공을 AUC 0.91로 가를 수 있습니다</strong>(문턱 0.45에서 90% 정확). 실패 11회 중 9회가 문턱 아래, 즉 대부분 쥐는 힘이 떨어지는 시행입니다(<code>03</code> §4).</li>
+</ul>
+<p><img src="figures/paper_fig9_effort.png" alt="paper_fig9_effort.png" /></p>
+<p class="cap">논문 Fig. 9: 물병 잡기 30회의 닫힘 정렬 손 전체 노력. 공개 데이터로 재현한 그림이 03 §4에 있다.</p>
+<h3>3.5 Q5·Q6: 정성 평가</h3>
+<ul>
+<li><strong>Q5(Fig. 3):</strong> 하나의 잡기 정책이 학습에 쓴 물체 4개에서 서로 다른 손 모양을 만듭니다. 저자들도 &quot;처음 보는 물체로의 일반화가 아니라 학습한 접촉 조건 사이의 적응&quot;이라고 한정합니다. 시연 10개를 20,000 step × 256으로 학습하면 500–3,600 epoch(시연 길이 2–10 s 가정)라서, 사실상 암기 영역입니다(<code>03</code> §5).</li>
+<li><strong>Q6(Fig. 4, 11):</strong> Toast와 Binder에서 선택기가 단계에 맞는 기술을 고르고, 이미 쓴 기술을 다시 씁니다. 선택 정확도나 잘못 고른 횟수는 보고하지 않습니다.</li>
+</ul>
+<hr />
+<h2>4. Limitations</h2>
+<h3>4.1 저자가 밝힌 한계</h3>
+<p>Q5는 학습 물체 4개 안에서의 적응이고 새 물체 일반화가 아니라고 밝힙니다(Sec. V-C). 닫힌 루프 두 조건의 성공률 차이는 현재 표본으로 확정할 수 없다고 씁니다. 그 밖의 한계 절은 없습니다.</p>
+<h3>4.2 분석하면서 추가로 발견한 한계와 의문점</h3>
+<ol>
+<li><strong>효율 이득의 정체는 신뢰성입니다.</strong> 시행 1회당 시간은 두 방식이 거의 같습니다(0.96–1.07배). &quot;작업자 부담을 줄인다&quot;는 주장을 직접 재는 지표(작업 부하 설문, 작업자 여러 명)는 없습니다. 작업자는 한 명입니다.</li>
+<li><strong>기준선이 하나뿐입니다.</strong> 가장 가까운 선행 연구인 shared autonomy [12](VR 텔레옵 + 자율 손 VLA)를 인용만 하고 비교하지 않았습니다. 장갑·VR 기반이나 RL 기술 버튼(DexScrew식) 비교도 없습니다(<code>02</code> §3).</li>
+<li><strong>자율 정책 평가가 단일 팔 4과제뿐입니다.</strong> 양팔 과제의 &quot;collection-to-autonomy&quot;는 시연되지 않았습니다. AnyTeleop + H-VAE 칸도 없습니다.</li>
+<li><strong>작은 표본의 과제별 주장이 많습니다.</strong> H-VAE &quot;일관된 개선&quot;은 4과제 중 1과제만 유의하고, Q4는 조건당 10회입니다.</li>
+<li><strong>재현에 필요한 값이 빠져 있습니다.</strong> temporal ensembling의 m, VLM 모델 이름, outer policy 제어 주기, 단일 팔 과제마다 쓴 기술 수, H-VAE 복원 오차, 기술 시연 길이(T_max), 추론 지연이 없습니다.</li>
+<li><strong>공개 데이터의 조건 이름이 본문과 다릅니다.</strong> 앙상블 조건의 id가 <code>online_rtc</code>, 앙상블 없음이 <code>online_no_rtc</code>입니다. 본문은 RTC(Real-Time Chunking)가 아니라 ACT식 지수 가중 평균(Eq. 2)을 썼다고 씁니다. 이름만의 문제인지 다른 알고리즘인지는 코드가 없어 확인할 수 없습니다(<code>04</code> C6).</li>
+<li><strong>Q4 시행은 조건별 블록으로 진행됐습니다.</strong> 공개 데이터의 episode 번호를 보면 조건이 2–4회씩 묶여 번갈아 진행됐고(10–13 고정 재생, 15–18 앙상블 없음, 19–22 앙상블 …), 번호 14, 24, 30, 31, 40은 빠져 있습니다. 무작위 순서가 아니라서 시간에 따른 변화(손 온도, 물병 상태 등)와 조건이 섞일 수 있습니다(<code>04</code> C5).</li>
+<li><strong>클러치는 기술을 시연 속도보다 빠르게 실행할 수 없습니다.</strong> 실행 index가 제어 주기마다 한 칸만 움직이므로(Eq. 8), 기술 하나에 최소 T_max / 100 s가 걸립니다. 작업자는 기술을 늦추거나 되돌릴 수만 있습니다(<code>03</code> §2).</li>
+</ol>
+</section>
+<section class="chapter"><h1>03. 핵심 식 해석과 재계산</h1>
+<p>스크립트는 <code>analysis/table_check.py</code>(표·공개 데이터·학습 규모, 결과 <code>table_check_results.json</code>)와 <code>analysis/ensemble_toy.py</code>(Eq. 2 toy, 결과 <code>ensemble_toy_results.json</code>)입니다. 둘 다 numpy 단일 스레드로 몇 초 안에 끝납니다.</p>
+<h2>1. &quot;성공 1건당 시간&quot;을 시행 1회당 시간으로 나누면 (Table II)</h2>
+<p>성공 1건당 시간 = 전체 시행 시간 / 성공 수이므로, 성공률 ρ를 곱하면 시행 1회당 평균 시간이 됩니다.</p>
+<pre><code>t_attempt = t_per_success × ρ
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>Copilot (ρ = 1)</th>
+<th>AnyTeleop</th>
+<th>비 (AnyTeleop / Copilot)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bottle Disposal</td>
+<td>41.37 s</td>
+<td>88.88 × 0.50 = <strong>44.44 s</strong></td>
+<td>1.07</td>
+</tr>
+<tr>
+<td>Dual-Object Transfer</td>
+<td>36.19 s</td>
+<td>121.63 × 0.30 = <strong>36.49 s</strong></td>
+<td>1.01</td>
+</tr>
+<tr>
+<td>Ingredient and Pot Transfer</td>
+<td>43.26 s</td>
+<td>55.29 × 0.75 = <strong>41.47 s</strong></td>
+<td>0.96</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/time_decomposition.png" alt="시간 분해" /></p>
+<p><strong>해석:</strong> 한 번 시도하는 데 걸리는 시간은 두 방식이 거의 같습니다. 성공 1건당 시간 차이(1.28–3.36배)는 전부 실패 횟수에서 나옵니다. Copilot 값에는 기술 시연 수집의 상각분이 들어 있으므로, 실제 텔레옵 시행은 이보다 조금 더 짧습니다. 이 계산에는 실패 시행과 성공 시행의 길이가 같다는 가정이 필요합니다. 실패를 일찍 포기했다면 AnyTeleop 시행은 실제로 더 길었을 수 있습니다. 논문은 시행별 시간을 주지 않습니다.</p>
+<h2>2. 클러치 동역학 (Eq. 6–8)</h2>
+<ul>
+<li><strong>속도 상한:</strong> r_{t+1} = r_t + clip(s_t − r_t, −1, 1)이라 실행 index는 제어 주기마다 최대 한 칸 움직입니다. 100 Hz면 기술 하나를 끝까지 실행하는 데 <strong>최소 T_max / 100 s</strong>가 걸립니다. 클러치를 한 번에 끝까지 당겨도 시연보다 빨라지지 않습니다. 작업자가 할 수 있는 것은 늦추기, 멈추기, 되돌리기입니다.</li>
+<li><strong>앞뒤의 비대칭:</strong> 앞으로 갈 때는 정책을 최신 proprio로 다시 질의하는 닫힌 루프입니다. 뒤로 갈 때는 버퍼에 저장된 명령을 그대로 재생하는 열린 루프입니다. 그래서 되돌리는 동안 접촉 상태가 바뀌어도 반응하지 않습니다.</li>
+<li><strong>T_max와 짧은 시연:</strong> T_max는 가장 긴 시연의 길이입니다. 이보다 짧게 끝난 시연의 마지막 상태 너머로는 학습 window가 없습니다(window는 t ≤ T_n − H_in − 1). 클러치 끝 근처에서는 정책이 학습 분포 밖을 외삽하거나 정지 자세를 내야 합니다. 논문은 이 구간을 다루지 않습니다.</li>
+<li><strong>조작 차원:</strong> 작업자는 손 20-DoF 대신 스칼라 하나(진행도)와 팔 7-DoF를 다룹니다. 대신 손 동작의 <strong>모양</strong>은 기술 10개 시연이 정한 범위 안에 갇힙니다.</li>
+</ul>
+<h2>3. Temporal ensembling (Eq. 2)</h2>
+<h3>3.1 가중치와 평균 나이</h3>
+<p>예측 K개를 오래된 것부터 i = 0, …, K − 1로 놓고 w_i = exp(−m i)입니다. 가장 오래된 예측의 가중치가 가장 크고, m이 클수록 오래된 쪽에 더 쏠립니다. 본문의 &quot;작은 m이 최근 관측 기반 예측에 상대적으로 더 큰 가중&quot;은 맞지만, m → 0에서도 가중은 균등까지만 갑니다. <strong>최신 예측이 가장 큰 가중을 받는 경우는 없습니다.</strong></p>
+<p>K = 30(inner chunk, 100 Hz)일 때 실행되는 명령의 평균 나이는 다음과 같습니다(<code>ensemble_toy.py</code> E1).</p>
+<table>
+<thead>
+<tr>
+<th>m</th>
+<th>평균 나이</th>
+<th>최신 예측의 몫</th>
+<th>가장 오래된 예측의 몫</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 (균등)</td>
+<td>145 ms</td>
+<td>3.3%</td>
+<td>3.3%</td>
+</tr>
+<tr>
+<td>0.01 (ACT 기본값으로 알려진 값)</td>
+<td>153 ms</td>
+<td>2.9%</td>
+<td>3.8%</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td>211 ms</td>
+<td>0.6%</td>
+<td>10.0%</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>284 ms</td>
+<td>0.0%</td>
+<td>63.2%</td>
+</tr>
+</tbody>
+</table>
+<p>논문은 m을 적지 않았습니다.</p>
+<h3>3.2 toy: 부드러움과 반응 지연의 교환</h3>
+<p>닫기 궤적(0 → 1)을 따라가는 chunk 정책을 만들고, 1.1 s에 물체에 막혀 0.6에서 멈추게 했습니다. 정책은 접촉이 일어난 뒤의 질의에서만 그 사실을 압니다. 예측 잡음은 질의마다 독립인 오프셋 + 기울기 + 백색 잡음이고, 실제 정책의 오차 구조는 모릅니다.</p>
+<table>
+<thead>
+<tr>
+<th>실행 방식</th>
+<th>P95 jerk 감소</th>
+<th>접촉 뒤 목표 초과(잡음 없음)</th>
+<th>정지 수준에 머물기까지(잡음 없음)</th>
+<th>정상 상태 흔들림</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>앙상블 없음(새 chunk의 첫 행동)</td>
+<td>1.00×</td>
+<td>0.000</td>
+<td>80 ms</td>
+<td>0.021</td>
+</tr>
+<tr>
+<td>앙상블 m = 0.01</td>
+<td>3.12×</td>
+<td>0.052</td>
+<td>300 ms</td>
+<td>0.006</td>
+</tr>
+<tr>
+<td>앙상블 m = 0.05</td>
+<td>2.34×</td>
+<td>0.071</td>
+<td>300 ms</td>
+<td>0.008</td>
+</tr>
+<tr>
+<td>앙상블 m = 0.1</td>
+<td>1.52×</td>
+<td>0.095</td>
+<td>300 ms</td>
+<td>0.010</td>
+</tr>
+<tr>
+<td>앙상블 m = 0.3</td>
+<td>0.70×</td>
+<td>0.154</td>
+<td>300 ms</td>
+<td>0.018</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/ensemble_tradeoff.png" alt="앙상블 trade-off" /></p>
+<p><strong>해석:</strong></p>
+<ul>
+<li>앙상블은 서로 독립인 예측 오차를 평균해 jerk를 줄입니다. 논문의 2.30배와 같은 방향입니다(toy의 배수 자체는 잡음 가정에 달려 있어 비교 대상이 아닙니다).</li>
+<li>대신 접촉 <strong>전에</strong> 만든 예측이 chunk 길이(30스텝 = 0.3 s) 동안 계속 섞입니다. 그래서 명령이 물체 너머까지 계속 닫히려 하고(목표 초과), 정지 수준으로 돌아오는 데 m과 무관하게 0.3 s가 걸립니다.</li>
+<li>m이 크면 오래된 예측에 거의 모든 가중을 주어, 사실상 chunk를 끝까지 열린 루프로 실행하는 것과 비슷해집니다. 이때는 jerk도 오히려 커집니다.</li>
+<li>실물에서는 관절 위치 명령이 물체 너머까지 가면 더 세게 쥐게 됩니다. 그런데 공개 데이터에서는 앙상블 조건의 성공 시행이 <strong>더 약하게</strong> 쥡니다(§4). toy의 목표 초과가 실물에서 그대로 나타나지는 않는다는 뜻이고, 명령 제한과 손의 관절 제어기가 사이에 있기 때문으로 보입니다(가설).</li>
+</ul>
+<h2>4. 공개 데이터 재분석 (Fig. 9–10)</h2>
+<p>프로젝트 사이트의 <code>data/inner-policy-effort.json</code>에는 30회 시행 각각의 손 전체 노력 RMS 곡선(0.04 s 간격, −2–6 s)과 유지 구간(0.5–5.5 s) 중앙값이 들어 있습니다.</p>
+<ul>
+<li><strong>정합성:</strong> 곡선에서 다시 낸 유지 구간 중앙값이 파일 값과 최대 0.003 차이 안에서 맞습니다. 정확 Mann–Whitney p 여섯 개(조건 안 3개, 성공끼리 3개)가 소수 넷째 자리까지 일치합니다.</li>
+<li><strong>성공은 유지 노력 하나로 대부분 갈립니다.</strong> 30회를 합치면 유지 노력 중앙값의 성공 판별 AUC가 0.91이고, 문턱 0.45에서 30회 중 27회(90%)가 맞습니다. 실패 11회 중 9회가 문턱 아래이고, 그중 6회는 0.17 이하입니다(고정 재생 4회, 앙상블 없음 2회). 닫힌 뒤 쥐는 힘이 사라지는 시행이 실패의 대부분입니다. 다만 고정 재생 실패 중 2회(0.48, 0.59)는 성공과 같은 수준의 힘을 유지했으므로, 모든 실패가 힘 부족은 아닙니다.</li>
+<li><strong>최소 달성 가능 p:</strong> 조건 안 비교의 p = 0.017은 성공 7, 실패 3에서 나올 수 있는 가장 작은 값입니다(완전 분리). 앙상블 조건(성공 9, 실패 1)은 가장 작아도 p = 0.2라서 원리상 유의할 수 없습니다.</li>
+<li><strong>성공끼리 비교:</strong> 앙상블 없음 0.754 대 앙상블 0.484, p = 0.0012입니다. 본문의 &quot;앙상블 없음이 더 큰 노력을 유지한다&quot;는 공개 데이터로 확인됩니다.</li>
+<li><strong>진행 순서:</strong> episode 10–44 가운데 30개가 쓰였고, 조건이 2–4회씩 블록으로 번갈아 진행됐습니다. 빠진 번호는 14, 24, 30, 31, 40입니다.</li>
+</ul>
+<p><img src="figures/effort_public_data.png" alt="공개 데이터 노력값" /></p>
+<h2>5. 학습 규모 산술</h2>
+<ul>
+<li><strong>inner policy:</strong> 시연 10개, history 30, chunk 30이면 window는 10 × (T − 59)개입니다. 20,000 step × batch 256 = 512만 표본을 봅니다. 시연이 2 / 3 / 5 / 10 s(100 Hz)면 <strong>3,631 / 2,124 / 1,161 / 544 epoch</strong>입니다. 같은 window를 수백–수천 번 봅니다. Fig. 3의 물체별 적응이 &quot;학습한 접촉 조건 안&quot;이라는 저자의 한정과 맞습니다.</li>
+<li><strong>outer policy:</strong> 시연 20개, chunk 100, 50,000 step × batch 8 = 40만 표본입니다. 제어 주기가 적혀 있지 않아서 Bottle Disposal(성공 1건당 41 s)을 예로 계산하면 10 / 30 / 100 Hz에서 63.9 / 17.5 / 5.0 epoch입니다. 100 Hz면 chunk 100은 1 s이고, 10 Hz면 10 s입니다. chunk가 몇 초를 덮는지는 정책의 반응성을 크게 바꾸지만 논문만으로는 알 수 없습니다.</li>
+</ul>
+<h2>6. Table III 통계</h2>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H-VAE 유무(Copilot, 4과제)</td>
+<td>합산 73/80 대 58/80, MH p = 0.0018, OR 4.3. 과제별 유의는 Tongs뿐(Holm p = 0.033), 나머지 p = 0.23–0.66</td>
+</tr>
+<tr>
+<td>수집 방식(H-VAE 없음, 3과제)</td>
+<td>합산 MH p = 5.4×10⁻⁴, OR 3.9. 과제별 유의는 Dual-Object뿐(p = 3.6×10⁻⁴)</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/outer_policy_ci.png" alt="자율 정책 성공률" /></p>
+<p>정리하면, 효과의 방향은 모든 과제에서 같지만 과제 하나하나를 구분할 만큼 시행이 많지는 않습니다. 합산 검정은 과제별 효과가 같은 방향이라는 가정 위에서만 의미가 있습니다.</p>
+</section>
+<section class="chapter"><h1>04. 주장 검증: 표·공개 데이터 재계산, 구현 가능성</h1>
+<ul>
+<li><strong>대상:</strong> arXiv:2608.13362v1, 프로젝트 페이지(https://aus.bot/research/nestdex)와 웹사이트 저장소 <code>cheese-zj/nestdex-site</code> @ <code>63f96e6</code>의 공개 데이터 <code>data/inner-policy-effort.json</code>(2026-08-17 수정).</li>
+<li><strong>코드:</strong> 공개되지 않아 논문 ↔ 코드 대조(D 항목)는 할 수 없습니다. 대신 표 재계산과 공개 데이터 재분석을 했습니다(<code>analysis/table_check.py</code>, <code>analysis/ensemble_toy.py</code>).</li>
+</ul>
+<h2>1. 재계산 결과</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장 (출처)</th>
+<th>재계산</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>NestDex가 모든 과제에서 수집 성공률이 더 높다 (Table II)</td>
+<td>20/20 대 0, 10, 6, 15, 0, 0 (20회). Fisher p: 1.5×10⁻¹¹ (세 과제), 4.4×10⁻⁴, 3.3×10⁻⁶, <strong>0.047</strong>. Holm 뒤에도 모두 0.05 이하</td>
+<td>✅ (Ingredient는 경계)</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>직접 비교 가능한 모든 과제에서 성공 1건당 시간이 더 짧다 (Table II)</td>
+<td>맞지만, 시행 1회당 시간은 0.96–1.07배로 같음. 시간 이득은 성공률에서 나옴</td>
+<td>✅ 수치 / ⚠️ 해석 (<code>03</code> §1)</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>H-VAE가 4과제 모두에서 일관되게 개선한다 (Table III, Q3)</td>
+<td>방향은 4/4. 과제별 유의는 Tongs뿐(13/20 → 20/20, Holm p = 0.033). 합산 MH p = 0.0018</td>
+<td>⚠️ 과제별로는 미확정</td>
+</tr>
+<tr>
+<td>C3b</td>
+<td>Copilot 시연이 AnyTeleop 시연보다 자율 정책을 낫게 만든다 (Table III, Q2)</td>
+<td>과제별 유의는 Dual-Object뿐(16/20 대 4/20). 합산 MH p = 5.4×10⁻⁴. AnyTeleop + H-VAE 칸 없음</td>
+<td>⚠️ 부분</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>고정 재생 대 앙상블 p = 0.0198 (Sec. V-C)</td>
+<td>양측 Fisher 정확검정 0.01977로 일치. 3쌍 Holm 보정 시 0.059</td>
+<td>✅ 수치 / ⚠️ 다중비교</td>
+</tr>
+<tr>
+<td>C4b</td>
+<td>앙상블 없음의 jerk가 2.30배 (Fig. 7)</td>
+<td>Fig. 7(c)의 0.21 s 창 값과 같음. 0.11 / 0.31 s 창에서 1.94 / 2.03배, 제한 전 2.84–3.62배</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>Fig. 9–10 노력 분석 (within-condition p 0.117, 0.017, 0.400)</td>
+<td>공개 데이터로 유지 중앙값(최대 오차 0.003)과 정확 Mann–Whitney p 6개가 모두 재현됨. 성공끼리 앙상블 없음 &gt; 앙상블(p = 0.0012)도 확인</td>
+<td>✅ (<code>03</code> §4)</td>
+</tr>
+<tr>
+<td>C5b</td>
+<td>(재분석) 유지 노력으로 성공을 가를 수 있는가</td>
+<td>30회 합산 AUC 0.91, 문턱 0.45에서 90% 정확</td>
+<td>새 관찰</td>
+</tr>
+<tr>
+<td>C5c</td>
+<td>(재분석) 시행 순서</td>
+<td>조건별 2–4회 블록, 번호 14·24·30·31·40 누락</td>
+<td>⚠️ 무작위화 안 됨</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>앙상블은 Eq. 2(ACT식 지수 가중 평균)다</td>
+<td>공개 데이터의 조건 id가 <code>online_rtc</code> / <code>online_no_rtc</code>. RTC(Real-Time Chunking)를 가리키는 이름일 수 있음</td>
+<td>❓ 확인 불가</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>하나의 잡기 정책이 물체 4개에서 다른 접촉 형태를 만든다 (Fig. 3)</td>
+<td>정성 결과. 시연 10개를 500–3,600 epoch 학습(<code>03</code> §5). 저자도 학습 조건 안 적응이라고 한정</td>
+<td>✅ (범위 좁음)</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>선택기가 단계마다 맞는 기술을 고른다 (Q6)</td>
+<td>정성 예시 2개. 선택 정확도, 오선택 횟수, VLM 이름 없음</td>
+<td>❓ 정량 근거 없음</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>같은 플랫폼 비교로 하드웨어 교란을 없앴다 (Sec. V)</td>
+<td>하드웨어는 같지만 작업자 1명, 기준선 1개(AnyTeleop), 시행 순서 정보 없음</td>
+<td>⚠️</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 재현에 필요한데 논문에 없는 정보</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>영향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>temporal ensembling의 m</td>
+<td>지연과 jerk가 m에 따라 크게 달라짐(<code>03</code> §3)</td>
+</tr>
+<tr>
+<td>VLM 모델과 프롬프트</td>
+<td>선택 정확도·지연을 재현할 수 없음</td>
+</tr>
+<tr>
+<td>outer policy 제어 주기</td>
+<td>chunk 100이 몇 초인지 모름(1–10 s)</td>
+</tr>
+<tr>
+<td>과제별 inner 기술 수와 기술 시연 길이(T_max)</td>
+<td>상각 시간, 클러치 속도 상한, 학습 epoch를 모름</td>
+</tr>
+<tr>
+<td>H-VAE 복원 오차, KL 가중치</td>
+<td>손 명령 정확도 상한을 모름</td>
+</tr>
+<tr>
+<td>추론 지연(outer, 매 스텝 질의)</td>
+<td>100스텝 앙상블이 실시간인지 모름</td>
+</tr>
+<tr>
+<td>작업자 수, 시행 순서, 실패 시행 길이</td>
+<td>C2 해석과 C9 공정성 판단에 필요</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 공개 데이터 파일의 구조</h2>
+<p><code>inner-policy-effort.json</code>(46 KB)에는 <code>time</code>(201점, −2–6 s), <code>holdWindowSec</code> [0.5, 5.5], 조건 3개 × 시행 10개(<code>episode</code>, <code>outcome</code>, <code>holdMedian</code>, <code>effort</code> 201점), 조건별·성공끼리 정확 Mann–Whitney 결과가 들어 있습니다. 정렬 기준은 &quot;공통 위상 규칙의 95% 닫힘 명령 시점&quot;이고, 본문은 &quot;full closure&quot;라고 씁니다.</p>
+<h2>4. 구현할 수 있는지</h2>
+<h3>4.1 공식 코드로 재현</h3>
+<p><strong>불가능합니다.</strong> 코드, 학습된 inner·outer policy, H-VAE, 시연 데이터가 공개되지 않았습니다. 하드웨어도 특정 조합입니다(Piper Nero 7-DoF leader·follower 팔, 1-DoF 클러치, 20-DoF WujiHand I, 손목 카메라, 기술 시연용 보정 다중 카메라).</p>
+<h3>4.2 이 맥(Apple M4 Pro, 통합 메모리 약 24 GiB, MPS, CUDA 없음)에서</h3>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>표·공개 데이터 재계산, 앙상블 toy</td>
+<td>✅ 완료(numpy, 몇 초)</td>
+</tr>
+<tr>
+<td>클러치(Eq. 6–8) + 앙상블(Eq. 2) 시뮬레이션</td>
+<td>✅ 설치 없이 가능. toy를 확장하면 됨</td>
+</tr>
+<tr>
+<td>inner policy(작은 proprio Transformer, 입력 30 × 40, 출력 30 × 20) 학습</td>
+<td>조건부. 규모가 작아 torch(MPS 또는 CPU)로 충분할 것으로 보이지만 torch 설치 승인이 필요하고, 손 시연 데이터가 없음(시뮬레이터 손으로 대체해야 함)</td>
+</tr>
+<tr>
+<td>H-VAE(20 → 10, [128, 64])</td>
+<td>조건부. 위와 같음. 공개 손 자세 데이터로 시험 가능</td>
+</tr>
+<tr>
+<td>outer policy(DINOv3 + Transformer, 256×256, chunk 100)</td>
+<td>조건부. 추론은 MPS로 될 수 있지만 DINOv3 가중치 다운로드(라이선스 동의)와 시연 데이터가 필요</td>
+</tr>
+<tr>
+<td>실물 파이프라인</td>
+<td>불가. 하드웨어 필요</td>
+</tr>
+</tbody>
+</table>
+<p>CUDA 전용 요소는 논문에 드러나지 않습니다. 계산 규모는 작은 편입니다(inner 20,000 step × 256, outer 50,000 step × 8). 그래서 장벽은 GPU가 아니라 <strong>하드웨어와 시연 데이터</strong>입니다.</p>
+<h3>4.3 아이디어만 다시 구현</h3>
+<p><strong>쉽습니다.</strong> 핵심은 세 부분입니다.</p>
+<ul>
+<li>클러치 진행도 → 실행 index(한 칸씩) → 앞으로 갈 때만 정책 질의, 뒤로 갈 때는 버퍼 재생: 수십 줄</li>
+<li>proprio chunk 정책 + ACT식 앙상블: 수백 줄</li>
+<li>손 명령 VAE: 수십 줄</li>
+</ul>
+<p>어려운 것은 <strong>기술 시연을 모을 수단</strong>(리타겟팅 장비나 장갑)과 <strong>기술 목록 설계</strong>(과제를 몇 개의 손 기술로 나눌지)입니다. 기존 다지 손 텔레옵 설비가 있다면 &quot;손은 기술이, 팔은 사람이&quot; 구조는 바로 옮길 수 있습니다. 비교 실험을 할 때는 시행 1회당 시간, 작업자 여러 명, 무작위 순서를 함께 넣어야 이 논문의 빈칸을 채울 수 있습니다.</p>
+</section>
+<section class="chapter"><h1>02. 선행연구와 계보</h1>
+<p>번호 [n]은 논문의 참고문헌 번호입니다. arXiv ID는 논문 참고문헌 목록에 적힌 값을 옮겼습니다. 각 논문을 따로 열어 검증하지는 않았습니다(§2의 ACT 가중치 규약은 예외로 아래에 적었습니다).</p>
+<h2>1. 계보도</h2>
+<pre><code>[다지 손 텔레옵: 사람이 손가락까지 직접 지정]
+  모션캡처 장갑 DexMV/Rajeswaran [7], DexCap [8], DOGlove [9]
+  카메라 손 자세 추정 DexPilot [10], Robotic Telekinesis [11], AnyTeleop [4] ← 이 논문의 기준선이자 리타겟팅 출발점
+        │
+[손은 정책이, 팔은 사람이: shared autonomy]
+  Cui et al. [12] arXiv:2511.00139 — VR 팔 텔레옵 + 자율 손 VLA로 데이터 수집   ← 가장 가까운 선행 연구(비교 없음)
+        │
+[기술 기반 계층 정책]
+  options [13], 잠재 기술 공간 [14]–[16], SayCan [18], 교차 모달 지시 [19]
+        │
+  ★ NestDex: proprio 손 기술(BC) + 1-DoF 클러치 진행도 + VLM 기술 선택으로 수집
+            → 수집 장치를 모두 뺀 outer visuomotor 정책(H-VAE 손 latent)으로 배포
+</code></pre>
+<p><strong>차별점 요약:</strong> shared autonomy [12]처럼 손을 정책에 맡기지만, (1) 작업자가 1-DoF 클러치로 기술의 <strong>진행도를 앞뒤로</strong> 조절하고, (2) 단계 전환을 <strong>VLM</strong>이 고르며, (3) 그 장치들은 <strong>배포에서 빠진다</strong>는 점이 다릅니다. 계층 정책 연구 [13]–[19]에서는 선택기와 기술이 배포에도 남는데, NestDex는 수집에만 씁니다.</p>
+<h2>2. 구성 요소별 출처</h2>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>출처</th>
+<th>이 논문에서의 쓰임</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>손 리타겟팅</td>
+<td>AnyTeleop [4] 벡터 리타겟팅</td>
+<td>잔차를 Huber [28]로 바꾸고 여러 카메라 삼각측량을 더함(Eq. 3)</td>
+</tr>
+<tr>
+<td>action chunk + temporal ensembling</td>
+<td>ACT [27] (Zhao et al., RSS 2023)</td>
+<td>Eq. 1–2. 가중치 w_i = exp(−m i), i = 0이 가장 오래된 예측으로 ACT 규약과 같음(ACT 원 논문의 서술과 대조, 내 사전 지식)</td>
+</tr>
+<tr>
+<td>잠재 행동</td>
+<td>VAE [26]; 관련 PLAS [20], LASER [21], VQ-ACE [22], BeT [23], VQ-BeT [24], Liconti et al. [25]</td>
+<td>손 명령 20 → 10차원(H-VAE), posterior 평균을 목표로 사용</td>
+</tr>
+<tr>
+<td>시각 표현</td>
+<td>DINOv3 [30] arXiv:2508.10104</td>
+<td>outer policy 입력 임베딩</td>
+</tr>
+<tr>
+<td>BC</td>
+<td>ALVINN [29]</td>
+<td>Eq. 10</td>
+</tr>
+<tr>
+<td>하드웨어</td>
+<td>Piper Nero 7-DoF 팔, WujiHand I 20-DoF 손</td>
+<td>leader-follower 플랫폼</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DexScrew</strong> (<code>dexscrew/</code>)</td>
+<td><strong>가장 가까운 아이디어입니다.</strong> 둘 다 &quot;작업자는 팔(손목)을 조종하고 손가락은 학습된 기술이 맡는&quot; 텔레옵으로 데이터를 모은 뒤, 그 데이터로 팔·손을 함께 제어하는 BC 정책을 학습합니다. 다른 점: DexScrew의 기술은 <strong>시뮬레이션 RL</strong>(회전 gait)이고 트리거로 켜고 끕니다. NestDex의 기술은 <strong>리타겟팅한 사람 시연의 BC</strong>(시연 10개)이고, 클러치로 진행도를 앞뒤로 조절하며, VLM이 여러 기술 중 하나를 고릅니다. DexScrew는 촉각을, NestDex는 관절 effort를 기술의 입력으로 씁니다.</td>
+</tr>
+<tr>
+<td><strong>Contact-Grounded Policy</strong> (<code>contact_grounded_policy/</code>)</td>
+<td>CGP는 촉각을 예측해 compliance 목표로 바꿉니다. NestDex는 effort를 <strong>inner policy 입력</strong>으로만 쓰고, outer policy의 목표는 관절 위치입니다. 접촉력을 목표로 삼지는 않습니다. 공개 데이터에서 유지 노력이 성공을 거의 가른다는 결과(<code>03</code> §4)는 CGP처럼 힘을 목표에 넣는 방향의 근거가 됩니다.</td>
+</tr>
+<tr>
+<td><strong>DexForce</strong> (<code>dexforce/</code>)</td>
+<td>DexForce는 kinesthetic 시연의 힘으로 &quot;force-informed&quot; 행동 목표를 만듭니다. NestDex는 effort를 기록하지만 행동 목표에 반영하지 않습니다. 두 방법을 합치면, 클러치 수집 시연의 effort로 목표 관절 위치를 보정하는 실험이 가능합니다.</td>
+</tr>
+<tr>
+<td><strong>GPT-as-Tactile-Policy</strong> (<code>gpt6_astra_tactile/</code>)</td>
+<td>둘 다 접촉 신호(촉각/effort)를 정책 입력으로 씁니다. GPT-as-Tactile-Policy는 LLM이 정책이고, NestDex는 VLM을 <strong>기술 선택기</strong>로만 씁니다.</td>
+</tr>
+<tr>
+<td><strong>PaceVLA</strong> (<code>pacevla/</code>)</td>
+<td>둘 다 action chunk를 어떻게 실행하느냐가 성능을 바꾼다는 문제를 다룹니다. NestDex는 temporal ensembling(Eq. 2)으로 부드럽게 하고, PaceVLA는 시간 양자화로 빠르게 합니다. NestDex의 앙상블은 오래된 예측에 가중을 두므로 접촉 뒤 반응이 늦어질 수 있습니다(<code>03</code> §3).</td>
+</tr>
+<tr>
+<td><strong>GNR, FlashDexRetarget</strong> (<code>gnr/</code>, <code>flashdexretarget/</code>)</td>
+<td>사람 손 → 로봇 손 리타겟팅 계열입니다. NestDex는 운동학 리타겟팅(AnyTeleop식)을 <strong>기술 시연 수집</strong>에만 쓰고, 물리 기반 리타겟팅은 쓰지 않습니다. 대신 실물 로봇에서 실행한 결과를 기록하므로 물리 정합성이 자동으로 보장됩니다.</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 논문이 다루지 않았지만 관련 있는 연구 (내 판단)</h2>
+<table>
+<thead>
+<tr>
+<th>주제</th>
+<th>관련성</th>
+<th>근거 수준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Real-Time Chunking(RTC, Physical Intelligence)</td>
+<td>공개 데이터의 조건 id가 <code>online_rtc</code>입니다. chunk 경계를 inpainting으로 잇는 방법이라 ACT식 평균과 다릅니다. 어느 쪽을 썼는지 확인이 필요합니다</td>
+<td>공개 데이터 id + 내 사전 지식</td>
+</tr>
+<tr>
+<td>공유 자율의 arbitration(사람·정책 명령 혼합) 연구</td>
+<td>클러치 진행도는 &quot;사람이 정책의 시간축을 쥐는&quot; 특수한 arbitration입니다</td>
+<td>내 해석</td>
+</tr>
+<tr>
+<td>작업 부하 평가(NASA-TLX 등)</td>
+<td>&quot;작업자 부담 감소&quot; 주장을 직접 재는 표준 도구입니다. 논문에 없습니다</td>
+<td>내 사전 지식</td>
+</tr>
+</tbody>
+</table>
+<p><strong>한계:</strong> 4절과 ACT 가중치 규약은 내 사전 지식에 근거합니다. 게시 전에 원문을 직접 확인해야 합니다.</p>
+<h2>5. GitHub와 공개 자료 (2026-11-05 확인)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>★</th>
+<th>마지막 push</th>
+<th>확인 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(NestDex 코드)</td>
+<td>inner·outer policy, 클러치, H-VAE</td>
+<td>미공개</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>프로젝트 페이지·논문에 코드 링크 없음</td>
+</tr>
+<tr>
+<td>cheese-zj/nestdex-site</td>
+<td>프로젝트 웹사이트(React 정적 사이트, 영상, <code>paper.pdf</code>, 공개 데이터 <code>public/data/inner-policy-effort.json</code>)</td>
+<td>공식(웹사이트)</td>
+<td>표기 없음</td>
+<td>0</td>
+<td>2026-08-17</td>
+<td><code>63f96e6</code></td>
+</tr>
+<tr>
+<td>dexsuite/dex-retargeting</td>
+<td>AnyTeleop 리타겟팅 구현(Eq. 3의 출발점, 기준선)</td>
+<td>기준선 구성 요소</td>
+<td>MIT</td>
+<td>1,311</td>
+<td>2025-08-21</td>
+<td><code>3f56141</code></td>
+</tr>
+<tr>
+<td>tonyzhaozh/act</td>
+<td>ACT, temporal ensembling(Eq. 2) 원 구현</td>
+<td>구성 요소 출처</td>
+<td>MIT</td>
+<td>2,323</td>
+<td>2024-07-23</td>
+<td><code>742c753</code></td>
+</tr>
+<tr>
+<td>facebookresearch/dinov3</td>
+<td>시각 임베딩</td>
+<td>구성 요소</td>
+<td>DINOv3 License(GitHub 표기 NOASSERTION)</td>
+<td>11,682</td>
+<td>2026-11-02</td>
+<td><code>6876159</code></td>
+</tr>
+<tr>
+<td>wuji-technology/wujihandpy</td>
+<td>WujiHand SDK(C++ + Python)</td>
+<td>하드웨어</td>
+<td>MIT</td>
+<td>40</td>
+<td>2026-08-24</td>
+<td><code>468e169</code></td>
+</tr>
+<tr>
+<td>agilexrobotics/piper_sdk</td>
+<td>Piper 팔 SDK(Nero 전용 SDK는 찾지 못함)</td>
+<td>하드웨어</td>
+<td>MIT</td>
+<td>420</td>
+<td>2026-10-14</td>
+<td><code>b847e53</code></td>
+</tr>
+</tbody>
+</table>
+<p>가장 가까운 선행 연구인 [12] arXiv:2511.00139의 코드 저장소는 abs 페이지와 검색에서 찾지 못했습니다.</p>
+</section></body></html>

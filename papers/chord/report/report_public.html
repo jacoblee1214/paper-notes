@@ -1,0 +1,1523 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CHORD 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig1"] { max-width: 88%; }
+img[src*="paper_table"] { max-width: 92%; }
+img[src*="paper_fig6"] { max-width: 60%; }
+img[src*="paper_fig10"] { max-width: 62%; }
+img[src*="paper_fig7"] { max-width: 84%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>CHORD: 분석 리포트</h1>
+<p class="meta">게시용 버전 · 원문 https://arxiv.org/abs/2607.00033 · arXiv:2607.00033v2 · NVIDIA (Zhu, Liu, Jain 외, 교신 Yan Chang) · CoRL 2026 · 코드 nvidia-isaac/video_to_data @ 9cad120 (Apache-2.0) · 분석일 2026-11-05 · 논문 그림 © 저자 · arXiv 라이선스는 CC BY 4.0이지만 PDF에 "© 2026 NVIDIA. All rights reserved."가 함께 있어 게시본에서는 논문 그림을 뺌</p>
+
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 사람 접촉점·법선으로 마찰원뿔 wrench 행렬을 만들고, 512개 방향의 지지 함수로 로봇 접촉과 비교하는 보상을 RL에 넣는다. 시연 하나당 정책 하나를 학습한다.</li>
+<li><strong>보상은 위치가 아니라 미는 방향을 본다:</strong> 같은 접촉점에서 법선만 90° 틀면 위치 보상은 1.00, 코드 보상은 0.33이다. 반대로 법선이 같으면 2 cm 이동에도 0.94다. 위치 보상을 대체하기보다 다른 축을 보완한다. 힘의 크기는 보지 않는다.</li>
+<li><strong>논문 식과 코드 식이 다르다:</strong> Eq. 3(512방향 위반 합의 exp)은 법선 10°에서 0.004이고, 코드(방향별 exp 평균)는 0.95다. 논문 식대로 구현하면 보상이 거의 항상 0이다.</li>
+<li><strong>&quot;r_fc 최대화 = force closure&quot;는 512개 표본에서 성립하지 않는다:</strong> 축 둘레 토크를 못 만드는 두 점 집기도 r_fc = 1, 표본 ε = 0.053이다. App. D의 ε 통계는 상한이다.</li>
+<li><strong>헤드라인 수치는 맞지만 읽는 법이 필요하다:</strong> 90.77%는 17개 가중 평균과 정확히 맞는다. 82.12%는 Fig. 5 막대의 가중 평균(0.781)이 아니라 과제 성공 비율이고, 1,831로는 정수가 안 된다. Table 1에서 SPIDER 대비 SP-SR 차이는 유의하지 않다(t = 0.58).</li>
+<li><strong>FlashDexRetarget과의 정합:</strong> FDR이 돌린 것은 PPO 공개 경로(19.7억 전이, 모션당 57–66 RTX 3090 GPU-h)이고, CHORD v2가 주장하는 것은 FlashSAC 경로(2.5억 전이, 과제당 약 2 L40S-h, VOC 일정 정확히 1/10)다. 같은 FlashSAC끼리면 격차는 2–3배 수준이다. 다만 82.12%와 그림은 v1과 바이트 단위로 같아서, 대규모 결과가 어느 레시피에서 나왔는지는 밝혀져 있지 않다.</li>
+<li><strong>구현 가능성:</strong> 코드·데이터는 공개되어 있지만 공식 학습은 NVIDIA GPU가 필요하다(FlashCHORD는 48 GiB). 이 맥에서는 불가. 핵심 보상은 numpy 80줄로 옮겼고 어느 시뮬레이터에도 붙일 수 있다.</li>
+</ol>
+
+</section>
+<section class="chapter"><h1>01. 논문 분석: CHORD (arXiv:2607.00033)</h1>
+<ul>
+<li>제목: <em>Learning Dexterous Manipulation Using Contact Wrench Guidance From Human Demonstration</em> (CHORD: Contact Wrench Guidance from Human Demonstration in Robotic Dexterous Manipulation)</li>
+<li>저자: Xinghao Zhu*‡, Zixi Liu*, Shalin Jain*, Chenran Li†, Milad Noori†, Michael Andres Lin† 외 15명, Yan Chang‡ (NVIDIA). * 공동 1저자, † core contributor, ‡ 프로젝트 리드·교신저자</li>
+<li>공개: arXiv v1 2026-06-22, <strong>v2 2026-08-14 (분석 대상)</strong> · 프로젝트 페이지 https://nvidia-isaac.github.io/video_to_data/chord/ (CoRL 2026으로 표기) · 코드 https://github.com/nvidia-isaac/video_to_data 의 <code>robotic_grounding/</code> (확인 커밋 <code>9cad120</code>, 2026-11-02)</li>
+<li>라이선스: arXiv abs 페이지는 <strong>CC BY 4.0</strong>입니다. PDF 첫 쪽 아래에는 &quot;© 2026 NVIDIA. All rights reserved.&quot;가 있습니다. 표기가 충돌하므로 thinkworld와 같이 보수적으로 판단해 <strong>논문 그림은 개인용 리포트·PPT에만</strong> 넣었습니다.</li>
+<li>원문 대조: 프로젝트 페이지의 <code>chord.pdf</code>(42.1 MB)와 arXiv v2(41.8 MB)는 단어 12,075개 중 머리글 날짜(2026-8-14 vs 2026-8-17)와 arXiv 세로 도장만 다릅니다. 본문은 같습니다.</li>
+<li>분석 범위: 본문 12쪽, 부록 A–G(24쪽까지), 프로젝트 페이지, 공식 코드(Isaac Lab PPO 경로와 FlashCHORD 경로). v1 ↔ v2 차이는 §5에 정리했습니다.</li>
+</ul>
+<hr />
+<h2>1. Abstract (한 줄 요약과 주장)</h2>
+<p><strong>한 줄 요약:</strong> 사람 시연의 접촉을 **&quot;물체에 줄 수 있는 힘·토크의 집합(wrench space)&quot;**으로 바꾸고, 로봇 접촉이 만드는 집합과 512개 방향의 지지값(support function)으로 비교하는 보상을 만들어, 시연 하나당 정책 하나를 RL로 학습합니다. 접촉 위치가 같아도 미는 방향이 다르면 다른 보상을 받습니다.</p>
+<p>논문이 내세우는 기여는 세 가지입니다(Sec. 1).</p>
+<ol>
+<li><strong>CHORD:</strong> 물체 중심 접촉 wrench 지도 보상과, 이를 받치는 학습 장치(레퍼런스 위 임의 시점 리셋, 물체 보조 VOC 커리큘럼, 사람 wrench에서 뽑은 교란, 잔차 행동)입니다.</li>
+<li><strong>벤치마크:</strong> 모션캡처 데이터 7종과 사내 영상 복원으로 양손 조작 과제 4,739개를 Isaac Lab 환경으로 만들었습니다. 데이터는 Hugging Face에 CC BY 4.0으로 공개되었습니다.</li>
+<li><strong>검증:</strong> 1,831개 과제 평균 성공률 82.12%, 전신(G1 + Dex3) 90.77%, 실물(Dexmate + Sharpa 양손) open-loop·closed-loop 전이를 보고합니다.</li>
+</ol>
+<hr />
+<h2>2. Method</h2>
+<h3>2.1 전체 구조 (Fig. 2, Sec. 3)</h3>
+<pre><code>사람 시연 τ_ref = {x_human_t, x_object_t}  (MANO 손 + 물체 부품 K개의 SE(3) 자세)
+   │  QP 미분 IK로 로봇 관절 레퍼런스 x_robot_t (App. D, 프레임당 최대 200회 반복)
+   │  프레임마다 손-부품 접촉점 p, 법선 n 추출 → 사람 wrench 행렬 𝒲_h,k (Eq. 1)
+   ▼
+시퀀스 하나 = 정책 하나 (Isaac Lab, Sharpa Wave 양손, 손목 6-DoF 부유)
+   π(a | o_robot, o_object, x_robot_ref, x_object_ref)   잔차 행동: 레퍼런스 + Δ
+   보상 r = r_task(+ r_relative) + r_imit + r_contact
+            r_contact = r_cws(Eq. 3) − r_unintend − r_miss
+   학습 장치: 임의 시점 리셋 + VOC 20스텝 고정 → 커리큘럼 감쇠, 사람 𝒲에서 뽑은 교란 wrench
+   ▼
+평가: 물체 15 cm / 40° 이탈 시 실패, 완료율 &gt; 0.7이면 과제 성공 (Sec. 4.1)
+</code></pre>
+<h3>2.2 과제·모방 보상 (Sec. 3.1, App. B)</h3>
+<ul>
+<li>r_task = exp(−Σ_k ‖x_obj,k ⊖ s_obj,k‖² / var_obj) + r_relative. ⊖는 SE(3) 자세 차이입니다.</li>
+<li>r_relative = m(t)·exp(−e_p·e_R / var_rel)은 두 물체의 상대 자세 보상입니다. 삽입·붓기·뜨기처럼 물체끼리의 기하가 중요한 과제를 위해 넣었습니다. m(t)는 <strong>시연의</strong> 물체 간 거리로만 켜서, 정책이 물체를 떨어뜨려 보상을 피하지 못하게 했습니다(App. B &quot;Relative Task Reward&quot;). 곱 형태라 위치와 회전이 둘 다 맞아야 보상이 높습니다.</li>
+<li>r_imit = exp(−‖x_robot − s_robot‖² / var_imit)는 리타겟된 사람 동작 쪽으로 정규화합니다.</li>
+</ul>
+<h3>2.3 접촉 wrench 행렬과 지지 함수 (Eq. 1–2)</h3>
+<ul>
+<li>부품 k의 사람 접촉점 c개에서 마찰원뿔을 <strong>단위 크기 모서리 d개</strong>의 다면체로 근사합니다. 모서리 힘 f마다 primitive wrench w = [f, p × f] ∈ R⁶를 만들고, 모두 모아 𝒲_h,k ∈ R^(6×cd)를 만듭니다(Eq. 1).</li>
+<li>사람 손과 로봇 손은 접촉 수와 열 순서가 달라 행렬을 직접 비교할 수 없습니다. 그래서 미리 뽑은 단위 방향 b개 ℬ ∈ R^(6×b)에 대해 <strong>지지 함수 σ = max_col(ℬᵀ𝒲) ∈ R^b</strong>를 계산해 비교합니다(Eq. 2). σ의 각 칸은 &quot;그 방향으로 이 접촉들이 낼 수 있는 최대 wrench 성분&quot;입니다.</li>
+<li>논문은 μ, d, b를 적지 않았습니다. 코드는 μ = 0.1, d = 8(+ 법선 1개), b = 512, 토크는 물체 경계 구 반지름으로 나눕니다(<code>04</code> D4).</li>
+</ul>
+<h3>2.4 접촉 wrench-space 보상과 벌칙 (Eq. 3)</h3>
+<p>$$r^k_{cws} = \exp\Big(-\frac{|\max(0,(1-\beta)\sigma_{h,k}-\sigma_{r,k})|^2}{v_{cws}} - \frac{|\max(0,\sigma_{r,k}-(1+\beta)\sigma_{h,k})|^2}{v_{cws}}\Big)$$</p>
+<ul>
+<li>로봇 지지값이 사람 지지값의 [(1−β), (1+β)] 띠 안에 있으면 벌점이 없습니다. 아래로 벗어나면 &quot;덜 미는 것&quot;, 위로 벗어나면 &quot;필요 이상으로 미는 것&quot;입니다.</li>
+<li>exp 커널은 항상 양수라서 접촉 불일치 벌칙을 따로 둡니다. 사람 지지값이 0인데 로봇이 양수이면 r_unintend, 반대면 r_miss입니다.</li>
+<li>v2에 추가된 단서(Sec. 3.1 끝): <strong>물리적으로 정확한 다중 접촉 순 wrench 다면체를 복원하지 않습니다.</strong> 접촉별 방향 능력을 정의하고 지지값을 비교하는 &quot;지도 신호&quot;이며, 실제 구동 가능성은 시뮬레이터가 보장합니다.</li>
+<li>오른쪽 그림의 상자 뚜껑 예시가 동기입니다. 위치 기반 보상으로 최적화한 접촉은 사람 엄지와 가깝지만 법선이 거의 수직이라 뚜껑을 들지 못합니다. wrench 보상은 같은 물체 운동을 만드는 접촉을 고릅니다. 이 예시를 toy로 다시 만들었습니다(<code>03</code> §2).</li>
+</ul>
+<h3>2.5 학습 장치 (Sec. 3.2, App. B)</h3>
+<table>
+<thead>
+<tr>
+<th>장치</th>
+<th>내용</th>
+<th>출처</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>임의 시점 리셋</td>
+<td>레퍼런스 위 무작위 프레임에서 시작. 손가락은 레퍼런스 자세와 펼친 자세 사이를 [0, 0.7]로 보간</td>
+<td>App. B Termination and Reset</td>
+</tr>
+<tr>
+<td>VOC 안정화 창</td>
+<td>리셋 직후 VOC 배율 1.0으로 20스텝 유지, 그 뒤 커리큘럼 값</td>
+<td>App. B</td>
+</tr>
+<tr>
+<td>VOC 커리큘럼</td>
+<td>물체마다 정책 행동 차원이 없는 가상 물체 제어 항이 PD wrench를 걸고, 커리큘럼으로 줄임. DexMachina[1]의 장치</td>
+<td>Sec. 3.2</td>
+</tr>
+<tr>
+<td>교란</td>
+<td>사람 접촉 wrench 행렬 𝒲_h,k에서 뽑은 wrench로 물체를 밀어, 시연한 접촉 역학과 맞는 교란을 줌</td>
+<td>Sec. 3.2</td>
+</tr>
+<tr>
+<td>잔차 행동</td>
+<td>손목 위치 0.05 m, 손목 회전 0.15 rad, 손가락 관절 0.15 rad 배율, EMA 0.3. 손목은 힘/토크 추종 제어기</td>
+<td>App. B Action Space, ManipTrans[2] 방식</td>
+</tr>
+<tr>
+<td>관측</td>
+<td>손목 자세·속도, 손가락 관절, 모든 물체 자세, 손목·손가락·물체 명령 delta, 이전 행동, <strong>손목 좌표계의 접촉 위치·힘 방향</strong></td>
+<td>App. B Observation Space</td>
+</tr>
+<tr>
+<td>종료</td>
+<td>시간 초과, 손목 이탈, 물체 위치·회전 이탈</td>
+<td>App. B</td>
+</tr>
+</tbody>
+</table>
+<p>관측 잡음은 대규모 실험에서는 끄고, 실물 closed-loop 정책 학습에서만 켰다고 적었습니다.</p>
+<p><strong>학습 설정 (App. B &quot;Training Details&quot;, v2에서 추가):</strong> FlashSAC, 환경 2,048개, 시퀀스별 정책을 L40S 한 장에서 약 2시간에 학습합니다. &quot;과제 간 일반화가 아니라 학습 레시피의 확장성&quot;을 보인 것이라고 스스로 한정했습니다. 비교로 DexMachina, ManipTrans, Spider는 과제당 약 10, 20, 4시간이 걸린다고 적었습니다. 이 단락은 v1에 없습니다(§5).</p>
+<h3>2.6 잡음 있는 시연: 축소 force-closure 보상 (Sec. 3.2)</h3>
+<p>영상 복원처럼 손-물체 정렬이 부정확하면 사람 wrench를 그대로 맞추는 것이 위험합니다. 이때는 r_fc = (1/B) Σ_b 1[σ_r,k,b &gt; ε]로 바꿉니다. 로봇 지지값이 모든 기저 방향에서 양수가 되도록 장려하고, &quot;최대화하면 force closure와 같다&quot;고 적었습니다. 이 동치는 방향이 촘촘할 때만 성립합니다. 512개 무작위 방향에서는 force closure가 아닌 두 점 집기도 r_fc = 1이 됩니다(<code>03</code> §4).</p>
+<h3>2.7 전신 확장 (Sec. 3.2, App. E)</h3>
+<ul>
+<li><strong>손만 있는 시연(자기중심 영상):</strong> 손목 궤적에서 전신 동작을 만드는 inpainting 모듈을 MotionBricks[37] 구조로 BONES Seed 데이터에 학습합니다. 그 전신 레퍼런스를 SONIC[20] 전신 제어기로 추종하고, CHORD가 그 위에 잔차를 배웁니다(비손가락 관절 배율 0.5, 손가락 0.15).</li>
+<li><strong>전신 시연(3인칭 영상, TPV):</strong> 전신은 있지만 손가락 복원이 부정확해서[38] r_fc를 씁니다.</li>
+<li>리셋 때 G1 어깨 yaw 관절을 0.5만큼 벌려 팔을 물체에서 떼어 두고, 정책이 물체 쪽으로 회복하게 합니다. 전신 관측에서는 접촉 관측을 뺐습니다.</li>
+</ul>
+<h3>2.8 벤치마크 구성 (Sec. 3.3, App. D)</h3>
+<ul>
+<li><strong>원천:</strong> ARCTIC, TACO, HOT3D, OakInk2, DexYCB, GRAB, H2O의 MANO 손과 물체 6-DoF 궤적을 통일된 형식(손목 자세, MANO 관절 21개, 링크별 접촉, 물체 자세)으로 변환합니다.</li>
+<li><strong>HOT3D 분할:</strong> 긴 자기중심 녹화를 손끝-물체 거리 2 cm 기준으로 접촉 구간을 나누고, 15프레임 이하의 끊김은 잇고, 프레임별 다수결로 주 물체를 정합니다. 약 294개 녹화가 약 4,045개 클립이 됩니다. <strong>4,739개 중 약 85%가 HOT3D</strong>입니다(<code>04</code> C1).</li>
+<li><strong>품질 검사:</strong> 손을 캡슐로 모델링해 손-물체(볼록 껍질 기준), 손-손 침투가 어느 프레임에서든 2 cm를 넘으면 버립니다. 볼록 껍질/메쉬 부피비가 3을 넘는 오목한 물체(머그, AR 안경)는 손-물체 검사에서 뺍니다. Isaac Lab에서 300스텝 재생이 끝나고 영상이 저장되어야 통과합니다.</li>
+<li><strong>통계(Fig. 3):</strong> 시간 길이, 접촉 이벤트 수, Ferrari–Canny ε를 DexMachina·ManipTrans·Spider 과제 묶음과 비교합니다. ε는 512개 기저 방향 지지값의 최솟값으로 계산합니다. 이 값은 진짜 ε의 상한입니다(<code>03</code> §4).</li>
+</ul>
+<hr />
+<h2>3. Experiments</h2>
+<h3>3.1 평가 설정 (Sec. 4.1)</h3>
+<ul>
+<li>로봇은 Sharpa Wave 양손이고 시뮬레이터는 Isaac Lab입니다. 모든 과제에서 VOC 이득, 커리큘럼, 보상 가중치를 같게 썼습니다.</li>
+<li>rollout이 물체 위치 15 cm 또는 회전 40°를 넘지 않고 끝나면 성공입니다. 완료율(성공 rollout / 전체 rollout)이 0.7을 넘으면 과제 성공으로 셉니다. 0.7은 경험적 기준이라 세밀한 차이를 다 담지 못한다고 v2에서 덧붙였습니다.</li>
+<li>코드의 종료 임계값은 논문과 다릅니다(PPO 경로 물체 0.2 m / 0.7 rad, FlashCHORD 경로 물체 0.10 m / 0.50 rad, 손목 0.15 m). 완료율 0.7 규칙은 공개 코드에서 찾지 못했습니다(<code>04</code> D3).</li>
+</ul>
+<h3>3.2 1,831개 대규모 평가 (Fig. 5 왼쪽)</h3>
+<table>
+<thead>
+<tr>
+<th>데이터</th>
+<th>종류</th>
+<th>n</th>
+<th>성공률 (그림 숫자)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOT3D-1Obj</td>
+<td>강체</td>
+<td>1,131</td>
+<td>0.772 ± 0.012</td>
+</tr>
+<tr>
+<td>OakInk2-1Obj</td>
+<td>강체</td>
+<td>147</td>
+<td>0.786 ± 0.132</td>
+</tr>
+<tr>
+<td>OakInk2-2Obj</td>
+<td>강체</td>
+<td>130</td>
+<td>0.746 ± 0.038</td>
+</tr>
+<tr>
+<td>ARCTIC</td>
+<td>관절</td>
+<td>196</td>
+<td>0.814 ± 0.028</td>
+</tr>
+<tr>
+<td>TACO</td>
+<td>다물체</td>
+<td>77</td>
+<td>0.935 ± 0.028</td>
+</tr>
+<tr>
+<td>HOT3D-2Obj</td>
+<td>다물체</td>
+<td>150</td>
+<td>0.753 ± 0.035</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>n의 합은 정확히 1,831입니다. <strong>n 가중 평균은 0.781</strong>이고 단순 평균은 0.801입니다. 둘 다 초록의 82.12%가 아닙니다. 막대는 완료율 평균이고, 82.12%는 &quot;완료율 &gt; 0.7인 과제 비율&quot;로 읽어야 맞습니다. 그런데 82.12% × 1,831 = 1,503.6이라 과제 수로 나누어떨어지지 않습니다. 시드 3개(5,493)로 보면 4,511/5,493 = 82.123%가 맞습니다. 집계 방식은 논문에 없습니다(<code>04</code> C1).</li>
+<li>평가 과제의 70%(1,281개)가 HOT3D입니다.</li>
+<li>어려운 과제일수록 VOC를 줄이기 전에 접촉 wrench 보상이 먼저 수렴해야 안정적이라고 적었습니다.</li>
+</ul>
+<h3>3.3 기준선 비교 (Table 1, v2에서 새로 만듦)</h3>
+<p>60개 과제(강체 17, 관절 24, 다물체 19), 시드 3개입니다. 기준선은 모두 Sharpa 손으로 다시 구현했습니다(App. G).</p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>AUC ↑</th>
+<th>SP-SR ↑</th>
+<th>MP-SR ↑</th>
+<th>JPE (°) ↓</th>
+<th>RPE (cm) ↓</th>
+<th>MPPE (cm) ↓</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DexMachina</td>
+<td>0.737 ± 0.053</td>
+<td>0.690 ± 0.068</td>
+<td>0.569 ± 0.097</td>
+<td>13.10 ± 2.31</td>
+<td>9.92 ± 1.64</td>
+<td>15.88 ± 0.70</td>
+</tr>
+<tr>
+<td>ManipTrans</td>
+<td>0.506 ± 0.006</td>
+<td>0.423 ± 0.011</td>
+<td>0.323 ± 0.003</td>
+<td>30.07 ± 0.61</td>
+<td>9.91 ± 0.42</td>
+<td>21.24 ± 6.19</td>
+</tr>
+<tr>
+<td>SPIDER</td>
+<td>0.804 ± 0.044</td>
+<td>0.911 ± 0.039</td>
+<td>0.789 ± 0.047</td>
+<td>41.35 ± 2.44</td>
+<td>6.99 ± 1.56</td>
+<td>14.28 ± 2.79</td>
+</tr>
+<tr>
+<td>Human2Sim2Robot</td>
+<td>0.730 ± 0.056</td>
+<td>0.686 ± 0.068</td>
+<td>0.569 ± 0.085</td>
+<td>11.80 ± 1.50</td>
+<td>9.78 ± 1.03</td>
+<td>16.59 ± 0.51</td>
+</tr>
+<tr>
+<td><strong>CHORD</strong></td>
+<td><strong>0.918 ± 0.018</strong></td>
+<td><strong>0.926 ± 0.022</strong></td>
+<td><strong>0.894 ± 0.032</strong></td>
+<td><strong>4.34 ± 0.25</strong></td>
+<td><strong>5.14 ± 0.54</strong></td>
+<td><strong>5.11 ± 0.39</strong></td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/table1_bars.png" alt="Table 1·2 막대그래프" /></p>
+<p>해석 (재계산은 <code>04</code> C3):</p>
+<ul>
+<li><strong>SPIDER 지표에서는 사실상 동률입니다.</strong> SP-SR 0.926 vs 0.911, Welch t = 0.58(p = 0.60, 시드 3개)입니다. 차이가 뚜렷한 것은 AUC(t = 4.2), MP-SR(t = 3.2), 관절 오차 JPE(t = −8.5), MPPE(t = −5.6)입니다. SP-SR은 위치를 궤적 평균으로 중심화하는 관대한 지표라서(<code>flashdexretarget/04</code> D3) 차이가 묻히는 것과 맞습니다.</li>
+<li>SPIDER는 물체는 잘 따라가지만 관절 오차가 41°로 가장 큽니다. 샘플링 최적화가 사람 손 모양과 무관한 자세를 찾는다는 뜻입니다. CHORD는 4.3°입니다.</li>
+<li>기준선 재현은 공정성을 신경 썼습니다. DexMachina는 변형 4개 × 시드 5개 중 가장 좋은 것(원래 이득 + hybrid 행동)을, ManipTrans는 Inspire 손에서 원 논문 경향(한 손 64.1%, 양손 29.7%)을 먼저 재현한 뒤 Sharpa로 옮겼습니다. SPIDER는 CHORD의 IK를 썼습니다. 공동 1저자 Zixi Liu는 SPIDER의 공저자이기도 합니다.</li>
+<li>다만 App. G는 DexMachina와 SPIDER를 <strong>시드 5개</strong>로 돌렸다고 쓰고, Table 1 캡션은 시드 3개라고 씁니다. 어느 쪽이 표에 들어갔는지 확인할 수 없습니다.</li>
+</ul>
+<h3>3.4 접촉 지도 ablation (Table 2)</h3>
+<table>
+<thead>
+<tr>
+<th>변형</th>
+<th>AUC</th>
+<th>SP-SR</th>
+<th>MP-SR</th>
+<th>JPE</th>
+<th>RPE</th>
+<th>MPPE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CHORD (wrench)</td>
+<td>0.918</td>
+<td>0.926</td>
+<td>0.894</td>
+<td>4.34</td>
+<td>5.14</td>
+<td>5.11</td>
+</tr>
+<tr>
+<td>Position Only (DexMachina식 위치 보상)</td>
+<td>0.862 ± 0.019</td>
+<td>0.856 ± 0.028</td>
+<td>0.780 ± 0.042</td>
+<td>6.41 ± 0.44</td>
+<td>7.81 ± 0.64</td>
+<td>7.63 ± 0.06</td>
+</tr>
+<tr>
+<td>No Contact</td>
+<td>0.774 ± 0.036</td>
+<td>0.756 ± 0.059</td>
+<td>0.612 ± 0.055</td>
+<td>9.81 ± 0.73</td>
+<td>10.91 ± 1.24</td>
+<td>14.38 ± 2.23</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>세 변형은 접촉 보상 형태만 다르고 나머지 보상은 같습니다. CHORD 행은 Table 1과 숫자가 같으므로 같은 실행을 다시 쓴 것입니다.</li>
+<li>SP-SR 기준으로 접촉 보상이 없을 때 대비 이득 0.170 중 위치 보상이 0.100, wrench로 바꾼 몫이 0.070(41%)입니다. Position Only 대비 모든 지표에서 p &lt; 0.03입니다(Welch, 시드 3개).</li>
+<li>캡션은 &quot;시드당 환경 4,096개&quot;라고 씁니다. App. B의 FlashSAC 2,048개와 다릅니다(<code>04</code> D6).</li>
+</ul>
+<h3>3.5 보상-성공 상관 (Fig. 6)</h3>
+<p>1,831개 실행에서 정규화한 CWS 보상과 완료율의 Pearson r = 0.798(데이터별 0.76–0.89)입니다. r² = 0.637이라 &quot;분산의 약 2/3&quot;와 맞습니다. 관계가 단조지만 포화형이라 직선 적합(y = 1.112x + 0.057)은 높은 보상 구간을 과소평가한다고 스스로 적었습니다. 직선은 x = 0.85에서 1에 닿습니다. 이 상관은 같은 정책이 보상과 성공을 함께 만든 결과라서, 보상이 원인이라는 증거는 아닙니다. 쉬운 과제가 둘 다 높을 수 있습니다.</p>
+<h3>3.6 긴 시퀀스 (Fig. 7)</h3>
+<p>DexMachina ADD-AUC로 시퀀스별 추적 정확도를 시간 길이에 따라 그렸습니다. CHORD는 40–48초 시퀀스에서도 대부분 0.85–0.98을 유지하고, DexMachina와 ManipTrans는 길이가 늘수록 떨어집니다. 시드 최대 5개의 평균입니다. 코드의 <code>motion_speed</code>가 0.5라서 정책은 시연을 절반 속도로 재생합니다(<code>04</code> D9). 그림의 초가 원본 시간인지 재생 시간인지는 적혀 있지 않습니다.</p>
+<h3>3.7 전신 (Fig. 5 오른쪽, Table 3, Fig. 8)</h3>
+<table>
+<thead>
+<tr>
+<th>범주</th>
+<th>n</th>
+<th>CHORD</th>
+<th>Position Only</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>강체</td>
+<td>4</td>
+<td>0.994 ± 0.008</td>
+<td>0.460 ± 0.487</td>
+</tr>
+<tr>
+<td>관절</td>
+<td>4</td>
+<td>0.914 ± 0.107</td>
+<td>0.000 ± 0.000</td>
+</tr>
+<tr>
+<td>다물체</td>
+<td>4</td>
+<td>0.866 ± 0.129</td>
+<td>0.192 ± 0.166</td>
+</tr>
+<tr>
+<td>전체</td>
+<td>12</td>
+<td>0.925 ± 0.104</td>
+<td>0.217 ± 0.333</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>초록의 90.77%는 손만 있는 12개와 TPV 5개(0.867)를 합친 17개의 가중 평균과 정확히 맞습니다. Table 3은 TPV를 뺀 12개입니다(<code>04</code> C2).</li>
+<li>Position Only가 무너지는 폭(0.925 → 0.217)이 손 시뮬레이션(0.926 → 0.856)보다 훨씬 큽니다. 다섯 손가락 사람 손 → 세 손가락 Dex3처럼 형태가 다르면 위치 대응이 성립하지 않고, wrench는 &quot;물체에 미치는 효과&quot;로 비교하므로 형태 차이를 넘는다는 해석입니다. 저자 주장의 가장 강한 근거입니다. 다만 과제당 4개, 시드 4개라 표본이 작습니다.</li>
+<li>Fig. 5와 Table 3은 같은 과제인데 표준편차가 다릅니다(강체 0.038 vs 0.008). 하나는 과제 간, 하나는 시드 간일 가능성이 큽니다.</li>
+</ul>
+<h3>3.8 실물 (Sec. 4.6, App. F)</h3>
+<ul>
+<li>Dexmate 로봇 + Sharpa 양손, Vicon으로 로봇과 물체 자세를 추적합니다. 61차원 관절 벡터를 20 Hz ONNX 정책으로 냅니다.</li>
+<li>open-loop 행동 청크 실행: 그릇 건네기 5/5, 손 안 접시 회전 3/5, 그릇-접시 쌓기 5/5, 믹서 열고 닫기 5/5, 캡슐 머신 집어 놓기 5/5. 합계 23/25(Wilson 95% [0.75, 0.98])입니다.</li>
+<li>상자 집어 놓기는 open-loop 6/7, closed-loop 7/7입니다(Fisher p = 1). closed-loop 정책도 고정된 시연 레퍼런스를 따라가며 다시 계획하지 않는다고 분명히 했습니다.</li>
+<li>실패 원인은 초기 물체 배치와 접촉 전환에서의 sim-to-real 차이입니다.</li>
+</ul>
+<h3>3.9 원격조종 비교 (Sec. 4.7)</h3>
+<p>같은 과제를 원격조종으로 재현하는 소규모 정성 연구입니다. 상자 들기가 특히 어려웠고, 원인으로 IK가 손가락 배치를 보존하지 못함, 촉각·접촉 피드백 부재, 관절 토크를 직접 제어할 수 없음을 들었습니다. 믹서와 와플 기계는 연습하면 물체 궤적은 비슷해지지만 접촉이 달라 쥐는 힘이 약했다고 합니다. 수치는 없습니다.</p>
+<h3>3.10 부록 실험</h3>
+<ul>
+<li><strong>시연 잡음 (App. A, Fig. 10):</strong> 손목 위치 10–60 mm, 회전 5–30°, 접촉 위치 5–30 mm, 법선 5–30°의 random walk 잡음 6단계(Table 4). AUC가 1단계에서도 0.5–0.6이라 Table 1의 0.918보다 훨씬 낮습니다. 과제 묶음이 적혀 있지 않고, 잡음 없는 기준점도 없습니다. 그림에서 읽으면 손 잡음만 있을 때 0.60 → 0.54, 손+접촉 잡음 0.61 → 0.33(5단계) → 0.48, force-closure 보상 0.52 → 0.50으로 띠가 크게 겹칩니다. &quot;높은 잡음에서는 force closure가 낫지만 정교함이 줄어든다&quot;는 결론은 경향 수준입니다.</li>
+<li><strong>사람 영상 끝단 검증 (App. C):</strong> 단안 RGB + 물체 이름으로 MoGe(깊이), Grounding DINO·SAM2·SAM3D(물체), FoundationPose(추적), ViPE + Dyn-HaMR(손), Gaussian splat + DROID-SLAM(공동 정제)을 거쳐 붓 과제 하나를 복원하고 AUC 0.647을 얻었습니다. 과제 하나의 결과입니다.</li>
+</ul>
+<hr />
+<h2>4. Limitations</h2>
+<h3>4.1 저자가 밝힌 한계 (Sec. 6)</h3>
+<ol>
+<li>실물 배포가 상태 기반 관측(Vicon)에 의존합니다.</li>
+<li>접촉 지도에는 비교적 깨끗한 시연이 필요합니다. 잡음이 크면 force closure 가정에 기대야 합니다.</li>
+<li>물체 자세 오차는 불완전한 평가 지표입니다. 어떤 과제는 정확한 배치가 필요 없고, 어떤 과제는 작은 오차로도 기능이 실패합니다.</li>
+</ol>
+<h3>4.2 분석하며 확인한 한계</h3>
+<ol>
+<li><strong>대규모 수치와 학습 레시피의 시점이 어긋납니다.</strong> 82.12%, 90.77%와 Fig. 5–9의 그림 파일은 v1과 v2가 바이트 단위로 같습니다. FlashSAC로 2시간에 학습한다는 단락은 v2에만 있고, FlashSAC 코드(FlashCHORD)는 2026-09-23에야 공개되었습니다. 1,831개 평가가 어느 레시피로 학습되었는지 논문은 밝히지 않습니다(<code>04</code> D2).</li>
+<li><strong>Eq. 3과 코드 보상이 다른 함수입니다.</strong> 논문은 512방향 오차 제곱합의 exp이고, 코드는 방향별 exp의 평균이며 양쪽 지지값이 모두 양수인 칸만 셉니다. toy에서 Eq. 3은 법선 오차 10°에서 0이 되지만 코드 보상은 0.95입니다(<code>03</code> §2).</li>
+<li><strong>&quot;force closure와 동치&quot;는 512개 무작위 방향에서 성립하지 않습니다.</strong> 두 점 집기는 축 둘레 토크를 못 만들어 force closure가 아닌데, 표본 최솟값은 0.053이고 r_fc = 1입니다(<code>03</code> §4). App. D의 ε 통계도 상한입니다.</li>
+<li><strong>wrench 보상은 힘의 크기를 보지 않습니다.</strong> 코드는 접촉력의 방향만 쓰고 모서리를 단위 길이로 만듭니다. &quot;힘·토크로 비교한다&quot;는 설명과 달리, 실제로는 접촉 위치와 법선(방향 능력)만 비교합니다(<code>03</code> §3, <code>04</code> D7).</li>
+<li><strong>위치 오차에는 오히려 둔감합니다.</strong> 법선이 맞으면 접촉점이 2 cm 밀려도 코드 보상은 0.94입니다(위치 보상은 0.37). 토크를 경계 구 반지름으로 나누기 때문입니다. wrench 보상은 위치 보상보다 &quot;엄격한&quot; 것이 아니라 &quot;다른 축을 보는&quot; 보상입니다.</li>
+<li><strong>SPIDER와의 차이는 SPIDER 지표에서 유의하지 않습니다</strong>(SP-SR t = 0.58).</li>
+<li><strong>설정값이 논문과 코드에서 다릅니다.</strong> 종료 임계값, 환경 수(2,048 vs 4,096), 시드 수(3 vs 5), μ = 0.1 미기재, 시연 절반 속도 재생(<code>04</code> D3–D9).</li>
+<li><strong>시퀀스 하나에 정책 하나입니다.</strong> 저자도 &quot;과제 간 일반화가 아니다&quot;라고 했습니다. 4,739개를 다 쓰려면 4,739번 학습해야 합니다. FlashDexRetarget이 정확히 이 지점을 공략했습니다(<code>02</code> §3).</li>
+<li><strong>평가가 HOT3D에 쏠려 있습니다.</strong> 1,831개 중 70%, 4,739개 중 85%입니다. HOT3D 분할 클립은 짧은 원자 상호작용이 많습니다.</li>
+<li><strong>실물 표본이 작습니다.</strong> 과제당 5회, 상자 open/closed-loop 비교는 7회씩입니다.</li>
+</ol>
+<hr />
+<h2>5. v1 ↔ v2 차이</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>v1 (2026-06-22)</th>
+<th>v2 (2026-08-14)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Table 1</td>
+<td>기준선마다 자기 과제 묶음·자기 지표. DM 묶음 AUC 0.232 vs 0.687, MT 묶음 MT-SR 0.428 vs 0.639, SP 묶음 SP-SR 0.333 ± 0.488 vs 0.359 ± 0.482, 자체 9개 과제(Ours-1·2)에서 DM AUC 0.211 vs 0.895, SP-SR 0.133 vs 0.999, 0.533 vs 0.982</td>
+<td>60개 과제 × 시드 3개, 지표 6개를 모든 방법에 같이 적용. Human2Sim2Robot 추가</td>
+</tr>
+<tr>
+<td>Table 2</td>
+<td>ARCTIC 두 시퀀스: box grab 0.702 / 0.334 / 0.384, mixer use 0.894 / 0.624 / 0.423 (CHORD / 위치 / 없음)</td>
+<td>60개 과제, 지표 6개</td>
+</tr>
+<tr>
+<td>학습 설정</td>
+<td>없음</td>
+<td>&quot;FlashSAC, 환경 2,048개, L40S 한 장 약 2시간&quot;, 기준선 10/20/4시간</td>
+</tr>
+<tr>
+<td>방법 단서</td>
+<td>없음</td>
+<td>&quot;정확한 순 wrench 다면체를 복원하지 않는다&quot;</td>
+</tr>
+<tr>
+<td>평가 단서</td>
+<td>0.7 기준만</td>
+<td>0.7이 세밀한 차이를 담지 못한다는 단서, &quot;Evaluation Tasks&quot; 단락</td>
+</tr>
+<tr>
+<td>실물</td>
+<td>정성 서술 위주</td>
+<td>과제별 시도 수(5/5, 3/5 …), 상자 6/7 vs 7/7</td>
+</tr>
+<tr>
+<td>그 밖</td>
+<td>—</td>
+<td>참고문헌을 등장 순서로 재번호, 저자 목록 조정(Mrinal Verghese 추가, Michael Andres Lin †), H2S2R 인용 [43] 추가</td>
+</tr>
+<tr>
+<td>변하지 않은 것</td>
+<td>초록 수치 82.12%, 90.77%, 4,739, 1,831</td>
+<td>같음. <strong>본문 2–12쪽의 래스터 그림 11개가 바이트 단위로 같음</strong>(Fig. 2, 4–9)</td>
+</tr>
+</tbody>
+</table>
+<p>v1의 Table 1은 SP 묶음에서 0.359 vs 0.333(표준편차 0.48)처럼 사실상 차이가 없는 비교를 &quot;matching or outperforming&quot;으로 묶었습니다. v2는 비교를 통일해 훨씬 해석 가능해졌습니다. 다만 그림과 초록 수치가 그대로라서, v2의 새 학습 설정 단락이 대규모 결과에도 적용되는지는 알 수 없습니다.</p>
+</section>
+<section class="chapter"><h1>03. 유도와 재계산: 지지 함수, 보상 식, force closure, 예산</h1>
+<p>수치는 <code>analysis/wrench_toy.py</code>(→ <code>wrench_toy_results.json</code>)와 <code>analysis/table_check.py</code>(→ <code>table_check_results.json</code>)가 만듭니다. 둘 다 numpy·scipy, 단일 스레드, 1초 안에 끝납니다. toy는 공식 코드 <code>video_to_data @ 9cad120</code>의 함수를 그대로 옮겼습니다(<code>04</code> §1).</p>
+<h2>1. 지지 함수가 비교하는 것</h2>
+<p>wrench 행렬 𝒲의 열 w_j는 접촉 하나의 마찰원뿔 모서리 하나가 만드는 [f, p × f / r_c]입니다(코드는 토크를 물체 경계 구 반지름 r_c로 나눔). 지지 함수 σ(b) = max_j bᵀw_j는 <strong>열들의 볼록 껍질 conv(𝒲)의 지지 함수</strong>와 같습니다. 여기서 몇 가지가 바로 나옵니다.</p>
+<ol>
+<li><strong>열 순서와 개수에 무관합니다.</strong> 사람 손(접촉 c_h개)과 로봇 손(c_r개)을 같은 길이 b의 벡터로 비교할 수 있는 이유입니다. 논문이 지지 함수를 쓴 동기(Sec. 3.1)와 맞습니다.</li>
+<li><strong>접촉을 더하면 지지값은 줄지 않습니다.</strong> max에 열이 추가될 뿐입니다. 그래서 로봇이 사람보다 많이 닿으면 σ_r &gt; (1 + β)σ_h인 방향이 생기고, too_large 항이 이를 깎습니다(§2.4).</li>
+<li><strong>0 아래는 잘립니다</strong>(코드 <code>clamp(min=0)</code>). 원점이 conv(𝒲) 밖에 있으면 일부 방향의 지지값이 음수인데, 이를 0으로 만들어 &quot;그 방향으로는 못 민다&quot;로 통일합니다.</li>
+<li><strong>크기가 없습니다.</strong> 열은 단위 모서리이므로 σ는 &quot;어느 방향으로 밀 수 있는가&quot;의 기하만 담습니다. 힘의 크기는 들어가지 않습니다(§3).</li>
+<li><strong>원점이 conv(𝒲) 내부에 있으면 force closure이고</strong>, 그때 모든 방향의 σ는 양수입니다. min_b σ(b)는 원점에서 껍질 면까지의 최단 거리, 즉 Ferrari–Canny ε입니다. 단, <strong>모든</strong> 단위 방향에 대한 최솟값일 때만 그렇습니다(§4).</li>
+</ol>
+<h2>2. Eq. 3과 코드 보상</h2>
+<h3>2.1 두 식</h3>
+<ul>
+<li><strong>논문 Eq. 3:</strong> r = exp(−(‖max(0, (1−β)σ_h − σ_r)‖² + ‖max(0, σ_r − (1+β)σ_h)‖²) / v). 512개 방향의 위반을 <strong>모두 더한 뒤</strong> exp를 씌웁니다.</li>
+<li><strong>코드</strong> <code>contact_wrench_support_reward_jit</code>: 방향마다 loss_b = (위반)²를 계산하고, r = (1/N_cmd) Σ_b 1[σ_h,b &gt; 10⁻³ ∧ σ_r,b &gt; 10⁻³] · exp(−loss_b / v). <strong>방향별 exp의 평균</strong>이고, 로봇 지지값이 0인 방향은 0점, 사람 지지값이 0인 방향은 아예 세지 않습니다. 그 뒤 body 평균, 손 평균을 냅니다.</li>
+</ul>
+<p>β = 0.1, v = 0.1(코드 기본값)에서 두 식은 전혀 다르게 움직입니다. Eq. 3은 지수 안의 합이 위반 방향 수에 비례해 커지므로, 몇 도만 틀려도 거의 0이 되는 사실상 이진 보상입니다. 코드 보상은 &quot;띠 안에 들어온 방향의 비율&quot;에 가까운 완만한 보상입니다.</p>
+<h3>2.2 상자 뚜껑: 같은 위치, 법선만 회전 (W1)</h3>
+<p>Sec. 3.1 오른쪽 그림을 그대로 만들었습니다. 상자(반치수 10 × 7.5 × 5 cm, r_c = 13.5 cm)의 앞면 위쪽, 뚜껑 턱 아래에 사람 엄지가 위로 밉니다(법선 +z). 로봇은 같은 점에서 법선을 앞면 안쪽(−x) 방향으로 돌립니다.</p>
+<table>
+<thead>
+<tr>
+<th>법선 오차</th>
+<th>위치 보상 (σ = 2 cm 가정)</th>
+<th>코드 보상</th>
+<th>Eq. 3</th>
+<th>놓친 방향 비율</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0°</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.00</td>
+</tr>
+<tr>
+<td>5°</td>
+<td>1.00</td>
+<td>0.98</td>
+<td>0.45</td>
+<td>0.01</td>
+</tr>
+<tr>
+<td>10°</td>
+<td>1.00</td>
+<td>0.95</td>
+<td>0.004</td>
+<td>0.03</td>
+</tr>
+<tr>
+<td>20°</td>
+<td>1.00</td>
+<td>0.85</td>
+<td>0.00</td>
+<td>0.08</td>
+</tr>
+<tr>
+<td>45°</td>
+<td>1.00</td>
+<td>0.58</td>
+<td>0.00</td>
+<td>0.17</td>
+</tr>
+<tr>
+<td>90°</td>
+<td>1.00</td>
+<td>0.33</td>
+<td>0.00</td>
+<td>0.42</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>위치 보상은 법선을 전혀 보지 못합니다. 논문이 말한 실패 방식이 정확히 재현됩니다.</li>
+<li>코드 보상은 90°(완전히 다른 방향으로 미는 접촉)에서도 0.33을 줍니다. 단일 접촉의 지지값은 6차원 방향의 절반 남짓에서 양수이고, 그중 상당수는 법선을 바꿔도 비슷하기 때문입니다. 놓친 방향 비율 0.42는 r_miss(가중치 −1)로 따로 벌합니다.</li>
+</ul>
+<p><img src="figures/reward_curves.png" alt="법선 오차와 위치 이동에 따른 세 보상" /></p>
+<h3>2.3 법선은 같고 위치만 이동 (W2)</h3>
+<table>
+<thead>
+<tr>
+<th>이동</th>
+<th>위치 보상</th>
+<th>코드 보상</th>
+<th>Eq. 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.5 cm</td>
+<td>0.94</td>
+<td>0.99</td>
+<td>0.94</td>
+</tr>
+<tr>
+<td>1 cm</td>
+<td>0.78</td>
+<td>0.97</td>
+<td>0.63</td>
+</tr>
+<tr>
+<td>2 cm</td>
+<td>0.37</td>
+<td>0.94</td>
+<td>0.03</td>
+</tr>
+<tr>
+<td>5 cm</td>
+<td>0.00</td>
+<td>0.83</td>
+<td>0.00</td>
+</tr>
+</tbody>
+</table>
+<p>토크 성분이 p × f / r_c라서 1 cm 이동은 토크를 약 0.074만 바꿉니다. <strong>코드 보상은 위치 오차에 위치 보상보다 훨씬 관대합니다.</strong> wrench 보상은 위치 보상을 &quot;더 엄격하게&quot; 만든 것이 아니라, 법선에 민감하고 위치에 둔감한 <strong>다른 축의 보상</strong>입니다. 위치는 손 keypoint·관절 추적 보상과 물체 추적 보상이 따로 붙잡습니다. Table 2에서 Position Only가 위치 오차(RPE, MPPE)까지 CHORD보다 나쁜 것은, 위치 보상이 위치를 직접 맞춰도 물체가 맞게 움직이지 않으면 물체 오차가 커진다는 뜻으로 읽힙니다.</p>
+<h3>2.4 오차가 여러 방향에 퍼질 때와 추가 접촉 (W5, W8)</h3>
+<ul>
+<li>양쪽 면을 잡는 두 손가락 집기에서 두 법선을 같은 각도로 틀면, 2°에서 이미 15%의 방향이 띠를 벗어납니다. Eq. 3은 5°에서 0.07, 10°에서 0이고, 코드는 0.995, 0.96입니다. <strong>논문 식 그대로 구현하면 학습 초기에 보상이 거의 항상 0이라 신호가 없었을 것입니다.</strong> 코드가 방향별 평균으로 바꾼 것은 합리적이지만 논문에 적혀 있지 않습니다(<code>04</code> D1).</li>
+<li>사람이 아랫면 하나만 받치는데 로봇이 옆면에도 닿으면, 사람 지지값이 0인 138개 방향(27%)에서 로봇 지지값이 생깁니다. 코드는 이 방향을 세지 않습니다. 사람 활성 방향에서 (1+β)배를 넘는 부분만 too_large로 깎여 0.87이 됩니다. Eq. 3은 0입니다. 코드의 r_unintend는 <strong>사람 접촉이 없는 body</strong>에만 걸리므로, 같은 물체 위의 추가 접촉은 약하게만 벌합니다.</li>
+</ul>
+<h3>2.5 마찰계수 (W4)</h3>
+<p>코드는 μ = 0.1(원뿔 반각 5.7°)입니다. 논문에는 값이 없습니다. μ를 1.0(45°)까지 올려도 법선 30° 오차에서 코드 보상은 0.73 → 0.84로 조금 관대해질 뿐입니다. 보상 모양은 μ보다 접촉 기하에 더 크게 좌우됩니다. μ = 0.1은 사실상 &quot;법선 방향으로만 미는 접촉&quot;을 가정한 것이라, 실제 마찰로 버티는 집기를 사람 쪽에서 과소평가합니다(내 판단).</p>
+<h2>3. 힘 크기 불변성 (W3)</h2>
+<p>로봇 쪽 &quot;법선&quot;은 시뮬레이터 접촉력의 방향입니다(<code>wrench_preprocess_jit</code>). <code>compute_wrench_space</code>가 이를 정규화하므로, 접촉력을 0.1배, 1배, 10배로 바꿔도 지지값 차이는 최대 1.1 × 10⁻¹⁶입니다. 즉 CHORD 보상은 <strong>접촉 위치와 미는 방향</strong>만 비교합니다. 논문 초록의 &quot;forces and torques they can induce&quot;는 크기가 아니라 방향 능력입니다. 쥐는 힘이 약해 물체가 미끄러지는 실패는 물체 추적 보상과 종료 조건이 막아야 합니다. DexForce와의 차이(<code>02</code> §4)가 여기서 나옵니다.</p>
+<h2>4. 512개 표본 방향과 force closure (W6, W9)</h2>
+<p>App. D는 Ferrari–Canny ε를 &quot;512개 기저 방향 지지값의 최솟값&quot;으로 계산하고, Sec. 3.2는 r_fc = (1/B) Σ 1[σ_b &gt; ε]를 &quot;최대화하면 force closure와 같다&quot;고 썼습니다.</p>
+<ul>
+<li><strong>반례:</strong> 마찰 있는 점접촉 두 개로 양쪽 면을 집으면(antipodal), 두 점을 잇는 x축 둘레 토크를 만들 수 없습니다(p × f의 x성분이 모든 열에서 정확히 0). 진짜 ε는 0이고 force closure가 아닙니다. 그런데 512개 무작위 방향의 최솟값은 <strong>0.053</strong>이고 <strong>r_fc = 1.0</strong>입니다. 순수 τ_x 방향에서 가장 가까운 표본 방향까지 15.8° 떨어져 있어서, 그 표본은 다른 성분 덕분에 양수 지지값을 얻습니다.</li>
+<li><strong>덮는 정도:</strong> 6차원 단위 구에서 512개 무작위 방향은 임의의 방향에서 가장 가까운 표본까지 중앙값 22.1°, 95% 분위 29.8°, 최대 38°입니다(시험 방향 20,000개). 얇은 축 하나가 빠진 집합을 잡아내기에는 성깁니다.</li>
+<li><strong>결과:</strong> App. D의 ε 통계(Fig. 3)는 진짜 ε의 상한이고, r_fc = 1은 force closure의 필요조건일 뿐입니다. μ = 0.1에서 면 중앙 4개 접촉의 표본 ε는 0.103, 6개는 0.157입니다. 표본 방향을 늘리거나, 방향 대신 LP로 원점 포함 여부를 직접 검사하면 고칠 수 있습니다.</li>
+<li><strong>코드의 r_fc는 손마다 따로입니다.</strong> body 축을 amax로 합치고, 손 하나의 지지값만으로 비율을 계산합니다(<code>rewards.py: force_closure_reward</code>). 양손으로 잡아야 force closure가 되는 큰 물체는 손별 r_fc가 1에 닿지 못할 수 있습니다. 기본 가중치는 0(꺼짐)이고 TPV 전신 과제에서만 켭니다.</li>
+<li>기저 표본 seed에 따른 흔들림은 작습니다. 같은 장면에서 seed 20개의 코드 보상 표준편차는 0.013(30° 법선 오차), 0.005(집기 10°)입니다(W7).</li>
+</ul>
+<h2>5. 학습 예산 산술 (C7)</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>PPO 공개 경로 (Isaac Lab)</th>
+<th>FlashCHORD 경로 (FlashSAC)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>병렬 환경</td>
+<td>4,096</td>
+<td>4,096 (논문 App. B는 2,048)</td>
+</tr>
+<tr>
+<td>총 전이</td>
+<td>4,096 × 24 × 20,000 = 19.66억</td>
+<td>2.50억</td>
+</tr>
+<tr>
+<td>VOC = 0 시작</td>
+<td>iteration 12,500 = 12.29억</td>
+<td>1.229억 (PPO의 정확히 1/10)</td>
+</tr>
+<tr>
+<td>물체 keypoint 가중치</td>
+<td>0 → 0.1 → … → 1 → 20 (커리큘럼)</td>
+<td>처음부터 20</td>
+</tr>
+<tr>
+<td>마지막 단계</td>
+<td>—</td>
+<td>2.0억부터 리셋의 절반을 첫 프레임에서 시작</td>
+</tr>
+<tr>
+<td>모션당 시간</td>
+<td>FDR 측정 56.9 h(XHand), 66.3 h(Sharpa), RTX 3090</td>
+<td>논문 약 2 h, L40S</td>
+</tr>
+<tr>
+<td>역산 처리량</td>
+<td>9.6k·8.2k 전이/s (20,000 iteration 가정)</td>
+<td>34.7k 전이/s</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/budget.png" alt="VOC 일정과 모션당 GPU-h" /></p>
+<ul>
+<li>FlashCHORD 임계값 처음 9개는 PPO 일정 × 98,304 / 10과 정확히 같습니다(<code>table_check.py</code>의 <code>flash_first9_thresholds_equal_ppo_div10 = true</code>).</li>
+<li>커리큘럼은 <code>bisect_right</code>라서 VOC가 0이 되는 것은 표의 9번째 값(14,000)이 아니라 8번째 값(12,500)부터입니다. 처음 정리할 때 14,000으로 잘못 읽었다가 코드를 다시 보고 고쳤습니다.</li>
+<li>FDR 50개 모션의 비교 함의는 <code>02</code> §3에 정리했습니다.</li>
+</ul>
+<h2>6. 표 수치 재계산 요약</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>대상</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>82.12% (1,831개)</td>
+<td>Fig. 5 n 합 = 1,831 ✅. 그림 막대의 n 가중 평균은 0.781로 82.12%와 다름 → &quot;과제 성공 비율&quot;로 읽어야 함. 1,831로는 정수 불가, 시드 3개면 4,511/5,493 = 82.12%</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>90.77% (전신)</td>
+<td>Fig. 5 오른쪽 17개 가중 평균 = 0.9077 ✅. Table 3 전체 0.925 = 손만 12개 평균 ✅</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>Table 1</td>
+<td>CHORD vs SPIDER: SP-SR t = 0.58(유의하지 않음), AUC t = 4.2, MP-SR t = 3.2, JPE t = −8.5, RPE t = −1.9(유의하지 않음)</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>Table 2</td>
+<td>Position Only 대비 6개 지표 모두 p &lt; 0.03. SP-SR 이득의 41%가 wrench로 바꾼 몫</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>실물</td>
+<td>23/25, Wilson [0.75, 0.98]. 상자 6/7 vs 7/7, Fisher p = 1</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>Fig. 6</td>
+<td>r² = 0.637 ≈ &quot;약 2/3&quot; ✅</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="chapter"><h1>04. 코드 검증: 논문 ↔ 구현 대조, 수치 재계산, 구현 가능성</h1>
+<ul>
+<li><strong>대상:</strong> <code>nvidia-isaac/video_to_data</code> @ <code>9cad120da522d4086b47052207d7a79ae06a6893</code> (2026-11-02)의 <code>robotic_grounding/</code>. 미디어(mp4 등)를 뺀 sparse clone이고 <code>repo/</code>에 있습니다(git 제외). 두 학습 경로를 모두 읽었습니다.
+<ul>
+<li><strong>PPO 경로:</strong> Isaac Lab + rsl_rl. <code>source/robotic_grounding/robotic_grounding/tasks/v2d/</code> (이하 <code>v2d/</code>), <code>scripts/rsl_rl/train.py --task Sharpa-V2D-v0</code></li>
+<li><strong>FlashCHORD 경로:</strong> Newton + Warp + JAX, PPO와 FlashSAC. <code>flash_chord/src/flash_chord/</code> (이하 <code>fc/</code>)</li>
+</ul>
+</li>
+<li><strong>범위:</strong> GPU 실행 없이 코드 읽기, 설정 대조, CPU 재계산만 했습니다. 공개 저장소에는 1,831개 결과의 rollout·학습 로그·체크포인트가 없어서 Fig. 5나 Table 1을 결과 파일로 재계산할 수는 없습니다.</li>
+</ul>
+<h2>1. 모듈 매핑</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>구현 위치</th>
+<th>일치 여부</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>마찰원뿔 다면체, 단위 모서리 d개 (Eq. 1)</td>
+<td><code>v2d/mdp/utils.py: compute_friction_cone_edges</code> (n + μ(cos θ t₁ + sin θ t₂) 정규화, 법선 추가)</td>
+<td>✅ 모서리 8개 + 법선 1개 = 9개, μ = 0.1 (D4)</td>
+</tr>
+<tr>
+<td>primitive wrench [f, p × f] (Eq. 1)</td>
+<td><code>utils.py: compute_wrench_space</code></td>
+<td>✅ 토크를 경계 구 반지름 r_c로 나눔. 논문 식에는 r_c 없음</td>
+</tr>
+<tr>
+<td>미리 뽑은 단위 방향 b개</td>
+<td><code>utils.py: sample_wrench_space_basis_scaled(512, rc=1.0)</code> (<code>hand_object_commands.py:751–752</code>), <code>fc/configs/objective/tracking.yaml: wrench_basis_seed 0</code></td>
+<td>✅ 6차원 가우시안 정규화 = 단위 구 균일. body마다 다른 기저</td>
+</tr>
+<tr>
+<td>지지 함수 σ = max_col(ℬᵀ𝒲) (Eq. 2)</td>
+<td><code>utils.py: compute_wrench_space_support_function</code></td>
+<td>✅ 0 아래는 잘라냄</td>
+</tr>
+<tr>
+<td>사람 쪽 σ_h</td>
+<td><code>hand_object_commands.py: _precompute_contact_wrench_support_values</code> (리타겟 데이터의 접촉 위치·링크 법선, 프레임별 미리 계산)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>로봇 쪽 σ_r</td>
+<td><code>utils_jit.py: wrench_preprocess_jit</code> → <code>wrench_support_one_body_jit</code> (시뮬레이터 접촉력 방향을 법선으로)</td>
+<td>✅ 힘 크기는 정규화로 사라짐 (D7)</td>
+</tr>
+<tr>
+<td>접촉 wrench-space 보상 (Eq. 3), β, v</td>
+<td><code>utils_jit.py: contact_wrench_support_reward_jit</code>, <code>tolerance 0.1</code>, <code>var 0.1</code>, 가중치 10 (<code>v2d_hand_env_cfg.py:251–258</code>)</td>
+<td>⚠️ 식이 다름 (D1)</td>
+</tr>
+<tr>
+<td>r_unintend, r_miss</td>
+<td><code>unintended_contact_penalty_jit</code>(가중치 −10), <code>missed_contact_penalty_jit</code>(−1)</td>
+<td>✅ unintended는 body 단위 (D10)</td>
+</tr>
+<tr>
+<td>r_fc (Sec. 3.2)</td>
+<td><code>v2d/mdp/rewards.py: force_closure_reward(min_support=0.01)</code>, 가중치 0</td>
+<td>⚠️ 손별 계산, 기본 꺼짐 (D8)</td>
+</tr>
+<tr>
+<td>r_task (물체 자세 exp)</td>
+<td><code>object_keypoints_tracking_exp</code> (var 0.1)</td>
+<td>✅ SE(3) ⊖ 대신 keypoint 거리</td>
+</tr>
+<tr>
+<td>r_relative (두 물체 상대 자세, App. B)</td>
+<td><code>rewards.py: relative_object_pose_reward</code> 등 정의만 있음</td>
+<td>❌ 기본 보상 설정 어디에도 등록되지 않음 (D11)</td>
+</tr>
+<tr>
+<td>r_imit</td>
+<td><code>hand_keypoints_tracking_exp</code>(0.25), <code>hand_joint_pos_tracking_exp</code>(0.25)</td>
+<td>✅ keypoint에 포화 임계값 있음</td>
+</tr>
+<tr>
+<td>VOC 커리큘럼</td>
+<td><code>v2d/mdp/curriculum.py: FixedTimestepCurriculum</code>, <code>fc/lifecycle/curriculum.py: FixedCurriculum</code></td>
+<td>✅ 같은 <code>bisect_right</code> 의미, FlashCHORD는 10배 빠름 (C7)</td>
+</tr>
+<tr>
+<td>리셋: 임의 프레임, 손가락 [0, 0.7] 보간, VOC 20스텝</td>
+<td><code>v2d_hand_env_cfg.py:63–67</code> (<code>reset_finger_openness 0.7</code>, <code>virtual_object_control_decay_steps 20</code>)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>행동 배율 0.05 m, 0.15 rad, 0.15 rad, EMA 0.3</td>
+<td><code>v2d/mdp/actions/actions_cfg.py:39–57</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>제어 20 Hz</td>
+<td><code>decimation = 5</code>, <code>sim.dt = 0.01</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>FlashSAC, 환경 2,048개, L40S 약 2시간</td>
+<td><code>fc/configs/experiment/sharpa_flash_sac.yaml</code> (<code>world_count 4096</code>, 2.5억 전이)</td>
+<td>⚠️ 환경 수 다름 (D6), 시간은 확인 불가</td>
+</tr>
+<tr>
+<td>성공: 15 cm / 40° 이탈 없이 끝까지, 완료율 &gt; 0.7</td>
+<td><code>fc/evaluation/metrics.py: chord_success</code>, <code>evaluation/harness.py: evaluation_thresholds</code></td>
+<td>⚠️ 임계값 다름, 0.7 규칙 없음 (D3)</td>
+</tr>
+<tr>
+<td>전신 확장</td>
+<td><code>v2d_whole_body/</code>, <code>fc/configs/experiment/g1_recon_body_*.yaml</code></td>
+<td>읽기만 함(세부 대조 안 함)</td>
+</tr>
+<tr>
+<td>GR00T 후속 학습</td>
+<td><code>groot_finetune/</code> (전문가 rollout → LeRobot → GR00T)</td>
+<td>논문에 없는 부분</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 불일치와 논문에 적히지 않은 구현 요소</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>내용</th>
+<th>영향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td><strong>보상 식이 Eq. 3과 다릅니다.</strong> 코드는 방향별 loss_b를 따로 exp한 뒤, 사람·로봇 지지값이 모두 10⁻³ 초과인 칸만 더해 사람 활성 방향 수로 나눕니다(<code>utils_jit.py:472–526</code>). 그 뒤 body 평균, 손 평균입니다. Eq. 3은 512방향 위반 합의 exp입니다.</td>
+<td>toy에서 Eq. 3은 법선 10°에서 0.004, 코드는 0.95입니다(<code>03</code> §2). 논문 식대로 재구현하면 보상이 거의 0이라 학습이 안 될 수 있습니다.</td>
+</tr>
+<tr>
+<td>D2</td>
+<td><strong>공개 순서와 논문 주장의 시점이 어긋납니다.</strong> 첫 학습 코드 v0.2.0(<code>cbee067</code>, 2026-08-14)은 PPO 경로만 있습니다. FlashCHORD는 v0.4.0(<code>33129dd</code>, 2026-09-23)에 처음 들어왔습니다. 논문 v2(2026-08-14)는 FlashSAC으로 2시간이라고 적었습니다. 82.12%·90.77%와 그림 파일은 v1과 같습니다. FlashCHORD의 <code>reference_curriculum()</code>은 &quot;W&amp;B 실행 <code>sizirwre</code>에서 복사&quot;이고 값이 PPO 설정과 같습니다.</td>
+<td>FDR이 PPO 경로로 CHORD를 돌린 것은 당시 공개 상태와 맞습니다(<code>02</code> §3). 1,831개 결과가 어느 경로에서 나왔는지는 밝혀져 있지 않습니다.</td>
+</tr>
+<tr>
+<td>D3</td>
+<td><strong>종료·성공 임계값이 세 가지입니다.</strong> 논문: 물체 15 cm / 40°. PPO 경로: 손목 0.2 m, 물체 0.2 m / 0.7 rad(40.1°) (<code>v2d_hand_env_cfg.py:303–318</code>). FlashCHORD: 손목 0.15 m, 물체 0.10 m / 0.50 rad(28.6°) (<code>fc/configs/termination/tracking.yaml</code>). FlashCHORD 평가는 체크포인트 설정의 종료 임계값을 그대로 성공 판정에 씁니다(<code>harness.py: evaluation_thresholds</code>). 완료율 &gt; 0.7을 과제 성공으로 세는 코드는 찾지 못했습니다.</td>
+<td>논문의 40°는 PPO의 0.7 rad, 15 cm는 FlashCHORD의 손목 값과 숫자가 맞습니다. GNR이 &quot;CHORD 관례&quot;로 쓴 HOT3D 150 mm는 논문 숫자입니다. 코드로 같은 판정을 재현하려면 임계값을 직접 맞춰야 합니다.</td>
+</tr>
+<tr>
+<td>D4</td>
+<td><strong>μ = 0.1, 모서리 8 + 법선 1, 방향 512개, 토크/r_c는 논문에 없습니다</strong>(<code>commands_cfg.py:107–113</code>, <code>fc/configs/objective/tracking.yaml:62–65</code>). μ = 0.1은 원뿔 반각 5.7°입니다.</td>
+<td>재구현에 꼭 필요한 값입니다. μ에 대한 보상 민감도는 작습니다(<code>03</code> §2.5).</td>
+</tr>
+<tr>
+<td>D5</td>
+<td><strong>추적 가중치 일정이 두 경로에서 다릅니다.</strong> PPO: 물체 keypoint 가중치 0 → 0.1 → 0.25 → … → 1 → 20(마지막 단계), 손 keypoint·관절 0.25. FlashCHORD: 물체 keypoint 20을 처음부터. 논문에는 가중치가 없습니다.</td>
+<td>PPO 경로는 학습 초반에 물체 추적 보상이 없고 wrench 보상(가중치 10)만으로 접촉을 배웁니다. 논문의 &quot;VOC를 줄이기 전에 wrench 보상이 먼저 수렴해야 한다&quot;(Sec. 4.1)는 이 일정과 맞습니다.</td>
+</tr>
+<tr>
+<td>D6</td>
+<td><strong>환경 수:</strong> 논문 App. B는 2,048개, Table 2 캡션은 &quot;시드당 4,096개&quot;, 코드는 두 경로 모두 4,096개(<code>v2d_hand_env_cfg.py:386</code>, <code>sharpa_flash_sac.yaml:26</code>).</td>
+<td>2시간 주장이 어느 설정인지 불분명합니다.</td>
+</tr>
+<tr>
+<td>D7</td>
+<td><strong>힘 크기를 보지 않습니다.</strong> 로봇 쪽 법선은 접촉력 방향이고(<code>wrench_preprocess_jit</code>), <code>compute_wrench_space</code>가 정규화합니다. 모서리도 단위 길이입니다.</td>
+<td>0.1–10배 힘에서 지지값이 같습니다(<code>03</code> §3). DexForce와의 핵심 차이입니다(<code>02</code> §4).</td>
+</tr>
+<tr>
+<td>D8</td>
+<td><strong>r_fc는 손별이고 기본 꺼짐입니다.</strong> body를 amax로 합친 뒤 손 하나의 지지값으로 비율을 계산하고, 참조 접촉 레이블로만 켭니다. 가중치 0이며 &quot;잡음 있는 레퍼런스에서는 켜고 접촉 항 셋을 0으로 하라&quot;는 주석이 있습니다(<code>v2d_hand_env_cfg.py:276–285</code>, <code>rewards.py:627</code>).</td>
+<td>양손으로만 force closure가 되는 물체는 손별 r_fc가 1에 닿지 못합니다. 512개 표본이라 force closure의 필요조건일 뿐입니다(<code>03</code> §4).</td>
+</tr>
+<tr>
+<td>D9</td>
+<td><strong>시연을 절반 속도로 재생합니다.</strong> <code>motion_speed 0.5</code>(<code>commands_cfg.py:64</code>, <code>v2d_hand_env_cfg.py:63</code>, <code>fc/configs/task/default.yaml:4</code>, <code>sharpa_flash_sac.yaml:20</code>). 전신 G1 설정은 1.0입니다.</td>
+<td>논문에 없습니다. Fig. 7의 &quot;40–48초&quot;가 원본 시간인지 알 수 없고, 실물 재생 속도에도 영향을 줍니다. Do as I Do도 실물을 약 0.5배속으로 재생했습니다(<code>do_as_i_do/01</code> §2).</td>
+</tr>
+<tr>
+<td>D10</td>
+<td><strong>같은 body 위의 추가 접촉은 약하게만 벌합니다.</strong> 보상은 사람 지지값이 0인 방향을 세지 않고, r_unintend는 사람 접촉이 없는 body에만 걸립니다.</td>
+<td>toy에서 옆면 추가 접촉은 보상 1.00 → 0.87로만 떨어집니다(<code>03</code> §2.4).</td>
+</tr>
+<tr>
+<td>D11</td>
+<td><strong>r_relative가 꺼져 있습니다.</strong> 함수는 있지만(<code>rewards.py:487–560</code>) 기본 RewardsCfg와 FlashCHORD 목적 함수 어디에도 등록되지 않았습니다. 커리큘럼 인자 기본값도 0입니다(<code>curriculum.py:132–133</code>).</td>
+<td>논문이 다물체 과제(삽입·붓기)의 핵심으로 설명한 항입니다. 공개 설정으로는 Table 1의 다물체 19개 결과가 이 항 없이 나온 것인지 알 수 없습니다.</td>
+</tr>
+<tr>
+<td>D12</td>
+<td><strong>시드 수:</strong> Table 1 캡션은 3개, App. G는 DexMachina·SPIDER 시드 5개.</td>
+<td>표 오차 막대의 의미가 기준선마다 다를 수 있습니다.</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 주장별 재계산</h2>
+<p><code>table_check.py</code>, <code>wrench_toy.py</code> 결과입니다. 자세한 해설은 <code>03</code>에 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장 (출처)</th>
+<th>재계산</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>1,831개 평균 82.12% (Abstract, Fig. 5)</td>
+<td>n 합 1,831. 막대 n 가중 평균 0.781, 단순 평균 0.801. 82.12% × 1,831 = 1,503.6(정수 아님), 4,511/5,493 = 82.12%(시드 3개면 맞음). 평가의 70%가 HOT3D</td>
+<td>⚠️ 집계 방식 미기재</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>전신 90.77% (Abstract, Fig. 5 오른쪽, Table 3)</td>
+<td>17개 가중 평균 0.9077, Table 3 전체 = 손만 12개 평균 0.925</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>모든 지표에서 기준선보다 낫다 (Table 1)</td>
+<td>SPIDER 대비 SP-SR t = 0.58(p = 0.60), RPE t = −1.9(p = 0.17)는 유의하지 않음. AUC·MP-SR·JPE·MPPE는 p &lt; 0.05</td>
+<td>⚠️ SPIDER 지표에서는 동률</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>접촉 지도가 풍부할수록 좋다 (Table 2)</td>
+<td>Position Only 대비 6개 지표 모두 p &lt; 0.03, SP-SR 이득의 41%가 wrench 몫. CHORD 행은 Table 1과 같은 실행</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>실물 전이 (Sec. 4.6)</td>
+<td>23/25, Wilson [0.75, 0.98]. 상자 open 6/7 vs closed 7/7, Fisher p = 1</td>
+<td>✅ (표본 작음)</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>CWS 보상이 성공과 상관 (Fig. 6)</td>
+<td>r² = 0.637 ≈ 2/3</td>
+<td>✅ (인과 아님)</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>과제당 약 2시간, 기준선 4–20시간 (App. B)</td>
+<td>FlashCHORD 2.5억 전이 = 2시간이면 34.7k/s. PPO 경로는 19.7억 전이. FDR 측정 PPO 모션당 57–66 GPU-h</td>
+<td>⚠️ PPO 경로에는 해당 안 됨</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>15 cm / 40° 성공 판정 (Sec. 4.1)</td>
+<td>코드 PPO 0.2 m / 0.7 rad, FlashCHORD 0.10 m / 0.50 rad</td>
+<td>❌ 코드와 다름 (D3)</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>지지 함수 비교가 위치 보상보다 접촉을 잘 구분 (Sec. 3.1 그림)</td>
+<td>같은 위치, 법선 90° 차이: 위치 보상 1.00, 코드 보상 0.33</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>r_fc 최대화 = force closure (Sec. 3.2)</td>
+<td>두 점 집기(force closure 아님)에서 r_fc = 1, 표본 ε = 0.053</td>
+<td>❌ 512개 표본에서는 필요조건일 뿐</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>Ferrari–Canny ε = min 지지값 (App. D)</td>
+<td>512개 방향의 덮는 각도 중앙값 22°, 최대 38°. 표본 최솟값은 진짜 ε의 상한</td>
+<td>⚠️ Fig. 3 ε 분포는 상한</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>wrench는 힘·토크로 비교 (Abstract)</td>
+<td>힘 크기 0.1–10배에서 지지값 동일</td>
+<td>⚠️ 방향만 비교</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>v1 ↔ v2</td>
+<td>그림 11개 바이트 동일, 초록 수치 동일, Table 1·2와 학습 설정 단락은 v2에서 새로 씀 (<code>01</code> §5)</td>
+<td>기록</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>프로젝트 페이지 <code>chord.pdf</code> = arXiv v2</td>
+<td>단어 12,075개 중 날짜 도장만 다름</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 구현할 수 있는지</h2>
+<h3>4.1 공식 재현: 이 맥에서는 불가, NVIDIA GPU가 있으면 가능</h3>
+<ul>
+<li><strong>이 맥(Apple M4 Pro, 메모리 약 24 GiB, MPS, CUDA 없음):</strong> 두 경로 모두 실행할 수 없습니다. Isaac Lab 경로는 Docker + NVIDIA Container Toolkit + 드라이버 580(CUDA 13 권장)이 전제입니다(<code>robotic_grounding/README.md</code>). FlashCHORD는 Linux, 드라이버 580 이상, 전체 학습에 <strong>48 GiB GPU와 여유 46,000 MiB 이상</strong>을 요구합니다(<code>flash_chord/README.md</code>). Newton·Warp에 CPU 장치가 있지만 FlashCHORD는 Docker·NVIDIA 전제로 짜여 있어 맥 CPU 실행은 공식 경로가 아닙니다(시도하지 않음).</li>
+<li><strong>NVIDIA GPU가 있으면:</strong> 코드(Apache-2.0)와 과제 라이브러리(Hugging Face, CC BY 4.0)가 공개되어 있습니다. <code>tissue_box_simple</code> 시퀀스 하나는 리타겟까지 끝난 상태로 들어 있어 바로 학습해 볼 수 있습니다. 원천 데이터셋과 MANO는 각자 라이선스 동의 후 직접 받아야 합니다.</li>
+<li><strong>비용 견적:</strong> FlashCHORD 논문 기준 과제당 약 2 L40S-h이면 Table 1(60개 × 시드 3) = 360 GPU-h, 1,831개 한 번 = 약 3,700 GPU-h입니다. PPO 경로는 FDR 측정 기준 모션당 57–66 RTX 3090 GPU-h입니다. 24 GiB 소비자 GPU는 FlashCHORD 전체 학습 요구(48 GiB)를 채우지 못하고, PPO 경로는 가능합니다(FDR이 RTX 3090으로 돌림).</li>
+<li><strong>재현 시 맞춰야 할 것:</strong> 종료·성공 임계값(D3), 완료율 0.7 집계(C1), r_relative 활성화(D11), 환경 수(D6), 시드 수(D12). 이것들이 논문과 코드에서 달라서 &quot;공식 코드를 그대로 돌리면 논문 수치가 나온다&quot;고 기대하기 어렵습니다.</li>
+</ul>
+<h3>4.2 아이디어 재구현: 쉽고, 이미 핵심은 numpy로 옮겼음</h3>
+<ul>
+<li>핵심 보상(마찰원뿔 → wrench 행렬 → 지지 함수 → 보상·벌칙)은 numpy로 약 80줄입니다(<code>analysis/wrench_toy.py</code>). torch로 옮기면 어느 시뮬레이터의 접촉점·접촉력 출력에도 붙일 수 있습니다. MuJoCo의 <code>mj_contactForce</code>나 MJX가 주는 접촉점·힘 방향이면 충분합니다.</li>
+<li>재구현 시 권장: Eq. 3이 아니라 코드식(방향별 exp 평균)을 쓰고, μ·기저 개수·r_c 정규화를 명시하고, force closure 판정은 표본 최솟값 대신 LP나 더 많은 방향으로 확인합니다.</li>
+<li>정책 학습까지 포함한 축소판(한 손 + 상자 뚜껑, MuJoCo CPU)은 이 맥에서도 가능합니다. mujoco 설치가 필요하고, 정책 학습은 numpy CEM이나 torch(MPS)로 할 수 있습니다.</li>
+</ul>
+<h3>4.3 이 맥에서 이미 한 것과 할 수 있는 것</h3>
+<table>
+<thead>
+<tr>
+<th>작업</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>표·그림 재계산(C1–C6, C13–C14), v1 ↔ v2 단어·그림 대조</td>
+<td>완료</td>
+</tr>
+<tr>
+<td>공식 보상 함수 numpy 이식, 상자 뚜껑·위치 이동·힘 크기·μ·force closure toy(W1–W9)</td>
+<td>완료</td>
+</tr>
+<tr>
+<td>학습 예산 산술과 FDR 수치 정합(C7, <code>02</code> §3)</td>
+<td>완료</td>
+</tr>
+<tr>
+<td>공개 과제 라이브러리 일부(수 MB)를 받아 접촉 지지값 분포·표본 ε 상한 효과 측정</td>
+<td>가능(다운로드 승인 필요)</td>
+</tr>
+<tr>
+<td>MuJoCo 한 손 축소 실험</td>
+<td>가능(mujoco 설치 승인 필요)</td>
+</tr>
+<tr>
+<td>공식 학습 재현</td>
+<td>불가(NVIDIA GPU 필요)</td>
+</tr>
+</tbody>
+</table>
+<h2>5. 재현 정보 체크리스트</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>논문</th>
+<th>코드</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>보상 가중치</td>
+<td>없음</td>
+<td>있음(D5)</td>
+</tr>
+<tr>
+<td>β, v</td>
+<td>기호만</td>
+<td>0.1, 0.1</td>
+</tr>
+<tr>
+<td>μ, 모서리 수, 방향 수</td>
+<td>없음</td>
+<td>0.1, 8 + 1, 512</td>
+</tr>
+<tr>
+<td>환경 수</td>
+<td>2,048 / 4,096 혼재</td>
+<td>4,096</td>
+</tr>
+<tr>
+<td>총 학습량</td>
+<td>&quot;약 2시간&quot;</td>
+<td>PPO 19.7억, FlashCHORD 2.5억 전이</td>
+</tr>
+<tr>
+<td>종료 임계값</td>
+<td>15 cm / 40°</td>
+<td>0.2 m / 0.7 rad 또는 0.10 m / 0.50 rad</td>
+</tr>
+<tr>
+<td>과제 목록(1,831개, 60개)</td>
+<td>없음</td>
+<td>없음(데이터셋에 과제 전체는 있음)</td>
+</tr>
+<tr>
+<td>학습 로그·체크포인트</td>
+<td>없음</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>시드</td>
+<td>3(Table 1) / 5(App. G)</td>
+<td>설정 인자</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="chapter"><h1>02. 선행연구와 관련 연구</h1>
+<p>출처 표기: [n]은 CHORD v2 참고문헌 번호입니다. &quot;내 판단&quot;이라고 쓴 곳은 논문에 없는 해석입니다.</p>
+<h2>1. 계보도</h2>
+<pre><code>사람 손-물체 시연 → 로봇손 정책 (물리 시뮬레이션에서 추적)
+  ├─ 운동학 리타겟 + 잔차 RL: ManipTrans [2] (CVPR 2025, 사전학습 imitator + 잔차)
+  ├─ 물체 보조 커리큘럼 RL: DexMachina [1] (ICML 2026, VOC·위치 기반 접촉 보상·ADD-AUC)
+  ├─ sampling 최적화: SPIDER [3] (MPPI식 annealing, SP-SR 지표) → Do as I Do (단안 영상 + SPIDER, 이 저장소 do_as_i_do/)
+  ├─ 사람 시연 1개 + sim-to-real RL: Human2Sim2Robot [43]
+  └─ 접촉 wrench로 지도: CHORD (이 논문, 2026-06)
+        └─ 같은 데이터·전처리로 다중 레퍼런스 off-policy: FlashDexRetarget (arXiv:2610.01849, 이 저장소 flashdexretarget/)
+
+접촉 wrench 공간·파지 품질
+  Ferrari–Canny [32] → wrench 기반 파지 보상 RL [33–36] (정적 안정성 최적화)
+  → CHORD: 정적 안정성이 아니라 &quot;사람 접촉과 같은 물체 운동을 만드는 능력&quot;을 비교 (Sec. 2)
+
+전신 확장 (NVIDIA 같은 그룹)
+  SONIC [20] (전신 추적 제어기) + MotionBricks [37] (모션 생성) + CARI4D [38] (3인칭 손-물체 복원)
+</code></pre>
+<h2>2. 구성 요소별 출처</h2>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>출처</th>
+<th>이 논문에서의 역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VOC(가상 물체 제어) 커리큘럼, 위치 기반 접촉 보상, ADD-AUC</td>
+<td>DexMachina [1]</td>
+<td>학습 보조와 &quot;Position Only&quot; ablation, AUC 지표</td>
+</tr>
+<tr>
+<td>잔차 행동 공간, MP-SR 지표</td>
+<td>ManipTrans [2]</td>
+<td>리타겟 동작을 사전으로 쓰는 잔차 정책</td>
+</tr>
+<tr>
+<td>SP-SR 지표</td>
+<td>SPIDER [3], <code>spider/postprocess/get_success_rate.py</code></td>
+<td>양손 모드에서 궤적 평균을 빼는 관대한 지표(<code>flashdexretarget/04</code> D3)</td>
+</tr>
+<tr>
+<td>시뮬레이터</td>
+<td>Isaac Lab [42] (PPO 경로), Newton + Warp + JAX (FlashCHORD 경로)</td>
+<td>코드에 두 경로가 함께 있음(<code>04</code> §1)</td>
+</tr>
+<tr>
+<td>PPO 구현</td>
+<td>rsl_rl (<code>scripts/rsl_rl/train.py</code>)</td>
+<td>공개 첫 학습 경로</td>
+</tr>
+<tr>
+<td>FlashSAC</td>
+<td>FlashSAC (Holiday Robotics·KAIST)</td>
+<td>v2 App. B가 말하는 학습기. FlashCHORD에 JAX로 들어 있음</td>
+</tr>
+<tr>
+<td>데이터</td>
+<td>ARCTIC, TACO, HOT3D, OakInk2, DexYCB, GRAB, H2O [13–16, 39–41]</td>
+<td>4,739개 과제의 원천</td>
+</tr>
+<tr>
+<td>영상 복원</td>
+<td>MoGe, Grounding DINO, SAM2, SAM3D, FoundationPose, ViPE, Dyn-HaMR, Gaussian splat, DROID-SLAM [45–53]</td>
+<td>App. C 붓 과제 한 건</td>
+</tr>
+<tr>
+<td>전신</td>
+<td>SONIC [20], MotionBricks [37], CARI4D [38]</td>
+<td>잔차를 얹을 전신 제어기와 손 → 전신 inpainting</td>
+</tr>
+<tr>
+<td>파지 품질</td>
+<td>Ferrari–Canny ε [32]</td>
+<td>벤치마크 통계(Fig. 3), r_fc의 근거</td>
+</tr>
+</tbody>
+</table>
+<h2>3. FlashDexRetarget과의 정합: CHORD 자신의 논문은 FDR이 돌린 CHORD와 맞는가</h2>
+<p><code>flashdexretarget/</code>에서 CHORD는 주 기준선이었습니다. XHand 50개 모션에서 SR_SPIDER 0.46, 2,847 GPU-h(RTX 3090), Sharpa에서 0.50, 3,314 GPU-h였고, FDR은 이를 근거로 &quot;약 100배 적은 계산량, 44%p 높은 성공률&quot;을 주장했습니다(FDR Table I, <code>flashdexretarget/01</code> §3.2). CHORD 논문과 코드로 이 비교를 다시 보면 다음과 같습니다.</p>
+<h3>3.1 FDR이 돌린 것은 CHORD의 PPO 공개 경로입니다</h3>
+<ul>
+<li>FDR Fig. 1 캡션과 Sec. IV-A는 &quot;CHORD 결과는 공개 구현으로 얻었고, PPO로 학습한다&quot;고 적었습니다. FDR v1은 2026-10-01에 올라왔고, video_to_data의 첫 학습 코드 공개(v0.2.0)는 2026-08-14, FlashSAC 경로(FlashCHORD, v0.4.0)는 2026-09-23입니다. FDR의 기준선 실험은 PPO 경로만 있던 시기에 돌았을 가능성이 큽니다(실험 날짜는 FDR에 없음).</li>
+<li>PPO 공개 설정은 환경 4,096개 × 24스텝 × 최대 20,000 iteration = <strong>약 19.7억 전이</strong>이고, VOC는 iteration 12,500(약 12.3억 전이)부터 0입니다(<code>04</code> C7, <code>curriculum.py</code>의 <code>bisect_right</code> 의미로 계산).</li>
+<li>FDR이 잰 모션당 비용은 2,847/50 = 56.9 GPU-h(XHand), 3,314/50 = 66.3 GPU-h(Sharpa)입니다. 20,000 iteration을 다 돌렸다고 가정하면 RTX 3090에서 초당 약 9.6k·8.2k 전이입니다. Isaac Lab에서 양손 접촉 센서와 wrench 계산을 매 스텝 하는 설정으로는 그럴듯한 값입니다. 다만 이 처리량은 GPU-h에서 거꾸로 계산한 값이라 독립적인 확인은 아닙니다.</li>
+</ul>
+<h3>3.2 CHORD v2가 주장하는 레시피는 FlashSAC이고, 10배 짧습니다</h3>
+<ul>
+<li>App. B: FlashSAC, 환경 2,048개, L40S 한 장에서 과제당 약 2시간. FlashCHORD 설정은 2.5억 전이이고(<code>sharpa_flash_sac.yaml</code>), VOC 임계값 9개가 PPO 일정을 정확히 1/10로 줄인 값입니다. 설정 파일 주석도 &quot;검증된 10배 VOC 일정을 유지한다&quot;입니다. 2시간에 2.5억이면 초당 약 34.7k 전이입니다.</li>
+<li>FDR이 잰 모션당 57–66 GPU-h는 논문의 2시간보다 <strong>28–33배</strong> 큽니다. 전이 수 비율(19.7억 / 2.5억 = 7.9배)과 처리량 차이(3090 + PhysX vs L40S + Newton/Warp, 약 3.6–4.2배)를 곱하면 이 간극이 설명됩니다.</li>
+<li>가정으로 CHORD-FlashSAC을 50개 모션에 돌리면 약 100 L40S GPU-h입니다. FDR의 29(XHand)·44(Sharpa) RTX 3090 GPU-h와 비교하면 <strong>2.3–3.4배</strong>입니다. 하드웨어가 달라 정확한 비율은 아니지만, FDR의 &quot;약 100배&quot;는 주로 PPO 대 off-policy, 그리고 PPO 경로의 긴 기본 일정에서 나온 것입니다. 같은 FlashSAC을 쓰는 CHORD와 비교했다면 격차는 한 자릿수였을 것입니다. FDR 저자는 FlashSAC 저자와 같은 그룹이라, FlashCHORD가 FlashSAC을 쓴다는 점이 이 해석과 맞물립니다.</li>
+</ul>
+<h3>3.3 그런데 CHORD의 대규모 수치 자체가 어느 레시피에서 나왔는지는 불분명합니다</h3>
+<ul>
+<li>82.12%(1,831개), 90.77%(전신), Fig. 5–9의 그림 파일은 v1(2026-06-22)과 v2가 <strong>바이트 단위로 같습니다</strong>. FlashSAC 학습 단락은 v2에서 처음 나옵니다. 1,831개 평가가 PPO로 학습되었다면, FDR이 돌린 PPO 경로는 오히려 CHORD 자신의 대규모 결과를 만든 레시피에 가깝습니다. FlashSAC으로 학습되었다면 FDR의 비교는 CHORD의 최신 레시피를 반영하지 못한 것입니다. 논문은 어느 쪽인지 밝히지 않습니다.</li>
+<li>FlashCHORD의 <code>reference_curriculum()</code>은 &quot;W&amp;B 실행 <code>sizirwre</code>에서 복사&quot;했다고 적혀 있고, 그 값이 PPO 설정과 같습니다. PPO 일정이 먼저 검증되고 FlashSAC으로 옮겨졌다는 정황입니다(내 판단).</li>
+</ul>
+<h3>3.4 성공률 차이: 과제·로봇·지표가 모두 다릅니다</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>CHORD 논문 Table 1</th>
+<th>FDR Table I의 CHORD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>과제</td>
+<td>자체 60개(강체 17, 관절 24, 다물체 19)</td>
+<td>FDR 50개(HOT3D 25, TACO 10, OakInk2 15)</td>
+</tr>
+<tr>
+<td>로봇</td>
+<td>Sharpa Wave(CHORD 기본 손)</td>
+<td>XHand(CHORD 기본 손이 아님), Sharpa Wave</td>
+</tr>
+<tr>
+<td>학습</td>
+<td>논문은 FlashSAC이라고 함</td>
+<td>PPO 공개 경로</td>
+</tr>
+<tr>
+<td>SPIDER 지표</td>
+<td>SP-SR <strong>0.926</strong></td>
+<td>SR_SPIDER <strong>0.46</strong>(XHand), <strong>0.50</strong>(Sharpa)</td>
+</tr>
+<tr>
+<td>엄격한 지표</td>
+<td>MP-SR 0.894 (ManipTrans식)</td>
+<td>SR_MT 0.00, SR_MT-Obj 0.02(XHand)·0.22(Sharpa)</td>
+</tr>
+<tr>
+<td>판정</td>
+<td>완료율 &gt; 0.7 (rollout 여러 개의 비율)</td>
+<td>FDR 쪽 판정(첫 성공에서 멈추고 실패 모션은 전체 비용 합산)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>같은 Sharpa 손, 같은 SPIDER 지표에서도 0.926 vs 0.50입니다. 과제 묶음, 학습 레시피, 성공 판정(완료율 &gt; 0.7 vs FDR의 rollout 판정)이 모두 달라서 둘 중 하나가 틀렸다고 할 수는 없습니다.</li>
+<li>가장 큰 불일치는 엄격한 지표입니다. CHORD 자신은 MP-SR 0.894를 보고했는데, FDR에서는 SR_MT가 0입니다. FDR의 SR_MT는 손끝 6 cm, 관절 8 cm 조건까지 요구하고(<code>flashdexretarget/01</code> §3.1), CHORD의 MP-SR이 이 손 조건을 포함하는지는 논문에 적혀 있지 않습니다. 같은 이름의 지표라도 구현이 다를 수 있습니다.</li>
+<li>FDR 쪽의 불리한 요인: XHand는 CHORD의 기본 손이 아니므로 접촉 링크 대응, 마찰원뿔(μ = 0.1), 보상 가중치를 다시 맞춰야 했을 수 있습니다. FDR이 XHand용으로 튜닝했는지는 알 수 없습니다(<code>flashdexretarget/01</code> §3.2 &quot;기준선이 모두 공개 구현 그대로&quot;).</li>
+<li>CHORD 쪽의 유리한 요인: Table 1의 60개 과제는 1,831개에서 고른 것이고 선택 기준이 없습니다. 기준선은 모두 CHORD 팀이 Sharpa로 옮겨 다시 구현했습니다.</li>
+</ul>
+<p><strong>결론:</strong> 두 논문은 모순되지 않지만, 서로의 수치를 옮겨 쓸 수 없습니다. FDR의 &quot;100배&quot;는 &quot;CHORD의 PPO 공개 경로 대비&quot;로 읽어야 합니다. CHORD의 &quot;과제당 2시간&quot;은 FlashCHORD 경로의 주장이고, 그 경로로 1,831개 결과를 만들었다는 증거는 논문에 없습니다. 공정한 비교는 FlashCHORD 경로로 FDR의 50개 모션을 Sharpa에서 돌리는 것입니다.</p>
+<h2>4. 접촉 보상 세 가지 비교: CHORD wrench, FDR 거리·점군, DexForce 힘 목표</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>CHORD (이 논문)</th>
+<th>FlashDexRetarget</th>
+<th>DexForce</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>접촉 정보의 출처</td>
+<td>사람 MANO 접촉점·법선(시연에서 추출)</td>
+<td>사람 손끝-물체 최근접 꼭짓점 거리</td>
+<td>손끝 6축 F/T 센서로 잰 실제 힘</td>
+</tr>
+<tr>
+<td>무엇을 맞추나</td>
+<td>512방향 wrench 지지값(접촉 위치·법선이 만드는 힘·토크 방향 능력)</td>
+<td>손끝-물체 거리의 한쪽 상한(Eq. 7) + 물체 점군 worst-k 정합(Eq. 6)</td>
+<td>위치 목표 x_f = x_o + k_f f (힘을 위치 오프셋으로 환산)</td>
+</tr>
+<tr>
+<td>쓰는 곳</td>
+<td>RL 보상(시뮬레이션)</td>
+<td>RL 보상·관측(시뮬레이션)</td>
+<td>모방학습 행동 목표 + 임피던스 제어(실물)</td>
+</tr>
+<tr>
+<td>힘의 크기</td>
+<td><strong>보지 않음.</strong> 접촉력 방향만 쓰고 모서리를 단위 길이로 만듦(<code>04</code> D7)</td>
+<td>보지 않음(거리만)</td>
+<td><strong>핵심.</strong> 힘 크기가 목표 오프셋을 정함</td>
+</tr>
+<tr>
+<td>법선 방향</td>
+<td>핵심. 법선이 다르면 보상 하락</td>
+<td>보지 않음(SDF 법선은 관측으로만)</td>
+<td>센서가 잰 힘 방향으로 간접 반영</td>
+</tr>
+<tr>
+<td>위치 오차</td>
+<td>둔감(2 cm 이동에도 0.94, <code>03</code> §2)</td>
+<td>직접 벌함(거리 커널 σ = 1 cm)</td>
+<td>관측 위치 그대로</td>
+</tr>
+<tr>
+<td>사람 시연 잡음</td>
+<td>약함. 그래서 r_fc 대안을 둠</td>
+<td>한쪽 거리 상한이라 비교적 관대</td>
+<td>시연 자체가 로봇손 kinesthetic이라 잡음 작음</td>
+</tr>
+</tbody>
+</table>
+<p>내 판단:</p>
+<ul>
+<li>세 방법은 같은 축의 강약이 아니라 <strong>다른 축</strong>을 봅니다. CHORD는 &quot;어느 방향으로 밀 수 있는가&quot;, FDR은 &quot;어디에 닿아 있는가와 물체가 맞게 움직였는가&quot;, DexForce는 &quot;얼마나 세게 미는가&quot;입니다.</li>
+<li>CHORD 보상이 힘 크기를 보지 않는다는 점이 DexForce와의 가장 큰 차이입니다. 시뮬레이션에서는 크기를 물리 엔진과 물체 추적 보상이 정해 주므로 문제가 덜하지만, 실물에서 쥐는 힘이 약해 떨어뜨리는 실패(Sec. 4.7 원격조종의 &quot;fragile grasp&quot;)를 wrench 지지값만으로는 막지 못합니다.</li>
+<li>결합 가능성: CHORD의 지지값 비교에 DexForce식 크기 항(사람 쪽 힘 추정이나 센서 측정치)을 곱하면 &quot;방향 + 크기&quot; 보상이 됩니다. FDR의 점군 정합은 물체 결과를, CHORD의 wrench는 접촉 원인을 맞추므로 둘은 보완 관계입니다. FDR ablation에서 상호작용 보상을 빼면 −7개였는데, 그 자리에 wrench 보상을 넣는 실험은 두 논문 모두 하지 않았습니다.</li>
+</ul>
+<h2>5. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FlashDexRetarget</strong> (<code>flashdexretarget/</code>)</td>
+<td>§3에서 정리했습니다. FDR은 CHORD의 전처리(TACO·OakInk2·HOT3D)를 그대로 쓰고, CHORD를 주 기준선으로 삼았습니다. CHORD가 &quot;시퀀스 하나에 정책 하나&quot;로 남긴 비용 문제를 다중 레퍼런스 정책 하나로 풀었습니다. 두 방법 모두 FlashSAC을 쓰게 되면서 남는 차이는 보상(wrench vs 거리·점군)과 정책 구조(시퀀스별 vs 공동)입니다.</td>
+</tr>
+<tr>
+<td><strong>Do as I Do</strong> (<code>do_as_i_do/</code>)</td>
+<td>같은 Sharpa Wave 손, 같은 &quot;사람 영상 → 로봇 궤적&quot; 문제입니다. Do as I Do는 SPIDER식 sampling MPC에 warmup·교란·전이 보상을 더했고, CHORD는 RL에 wrench 보상과 VOC를 썼습니다. 두 논문 모두 &quot;레퍼런스가 잡음일 때 접촉 사건을 어떻게 유도하나&quot;를 다루는데, Do as I Do는 접촉 유무의 상수 벌칙, CHORD는 r_miss·r_unintend와 r_fc로 답했습니다. CHORD Table 1에서 SPIDER가 관절 오차 41°였다는 결과는 sampling 계열이 사람 손 모양을 보존하지 않는다는 점을 보여 주고, 이는 Do as I Do에도 해당할 수 있습니다(내 판단).</td>
+</tr>
+<tr>
+<td><strong>DexForce</strong> (<code>dexforce/</code>)</td>
+<td>§4에서 비교했습니다. 접촉의 &quot;방향&quot;(CHORD)과 &quot;크기&quot;(DexForce)가 서로 빠진 부분입니다. DexForce에서 force-informed 목표 대신 관측 위치를 그대로 행동으로 쓰면 성공률이 거의 0%였던 결과(<code>dexforce/01</code> §1)와 CHORD 원격조종 실험의 &quot;쥐는 힘이 약해 실패&quot;(Sec. 4.7)는 같은 현상을 다른 쪽에서 본 것입니다.</td>
+</tr>
+<tr>
+<td><strong>Contact-Grounded Policy</strong> (<code>contact_grounded_policy/</code>)</td>
+<td>CGP는 촉각과 실제 상태를 예측해 compliance 제어기 목표로 바꾸고, CHORD는 시뮬레이션에서 접촉 wrench를 맞춥니다. CHORD 실물 배포는 Vicon 상태만 쓰고 촉각이 없습니다(저자 한계 1). CHORD 정책 관측에 이미 &quot;손목 좌표계 접촉 위치·힘 방향&quot;이 있으므로(App. B), 실물에서 이 관측을 촉각 센서로 대신하는 것이 CGP와 이어지는 자연스러운 다음 단계입니다.</td>
+</tr>
+<tr>
+<td><strong>GNR</strong> (<code>gnr/</code>)</td>
+<td>GNR은 HOT3D 성공 기준으로 위치 150 mm를 &quot;CHORD 관례&quot;로 썼습니다(<code>gnr/04</code> C12). 그 값은 CHORD 논문의 15 cm이고, CHORD 코드는 PPO 경로 0.2 m, FlashCHORD 경로 0.10 m라서 코드 기준으로는 같은 관례가 아닙니다(<code>04</code> D3). GNR(샘플링 MPC 궤적으로 학습한 생성 잔차)과 CHORD(시퀀스별 RL)는 같은 HOT3D 데이터에서 &quot;새 시연마다 얼마나 계산하나&quot;의 반대쪽 끝입니다.</td>
+</tr>
+<tr>
+<td><strong>Hydra-0</strong> (<code>hydra0/</code>)</td>
+<td>같은 NVIDIA의 &quot;로봇 데이터 부족&quot; 해법이지만 경로가 다릅니다. Hydra-0은 생성 world model로, CHORD는 물리 시뮬레이션으로 검증된 궤적으로 접근합니다. CHORD 산출물은 Hugging Face에 LeRobot 형식 로봇 데이터로 공개되어 있고, 코드에 GR00T 후속 학습 경로(<code>groot_finetune/</code>)가 있습니다. 이 데이터가 Hydra-0 같은 world model의 학습 데이터가 될 수 있습니다(내 판단).</td>
+</tr>
+</tbody>
+</table>
+<h2>6. 논문이 다루지 않았지만 관련 있는 연구 (내 판단)</h2>
+<table>
+<thead>
+<tr>
+<th>연구</th>
+<th>관련성</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Task wrench space (Li &amp; Sastry 1988), 과제 지향 파지 품질</strong></td>
+<td>CHORD의 &quot;사람 wrench 집합과 같은 집합&quot;은 과제 wrench 공간을 시연에서 얻는 방식입니다. 과제 wrench를 포함하는지(⊇)만 보는 고전 지표와 달리 CHORD는 위로도 벌합니다(too_large).</td>
+<td>내 사전 지식. 서지 확인 필요</td>
+</tr>
+<tr>
+<td><strong>Soft-finger·비틀림 마찰 모델</strong></td>
+<td>코드는 점접촉 마찰원뿔만 씁니다. 두 점 집기의 축 둘레 토크(<code>03</code> §4)는 soft finger 모델이면 생깁니다. 사람 손가락 패드는 soft finger에 가깝습니다.</td>
+<td>내 사전 지식</td>
+</tr>
+<tr>
+<td><strong>준균일 방향 집합(Fibonacci·Sobol 구면 점)</strong></td>
+<td>512개 가우시안 무작위 방향 대신 준균일 점을 쓰면 같은 개수로 덮는 각도가 줄어듭니다. 6차원에서 512개 무작위 방향은 가장 가까운 방향까지 중앙값 22°입니다(<code>03</code> §4).</td>
+<td>내 판단</td>
+</tr>
+<tr>
+<td><strong>DexTrack, PHC류 다중 모션 추적</strong></td>
+<td>시퀀스별 정책을 증류하거나 하나로 합치는 계보입니다. CHORD 4,739개를 데이터로 쓰려면 결국 이 단계가 필요합니다.</td>
+<td>GNR 계보도(<code>gnr/02</code> §1)에도 있음</td>
+</tr>
+</tbody>
+</table>
+<h2>7. GitHub 정리 (2026-11-05 <code>gh api</code> 확인)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>★</th>
+<th>마지막 push</th>
+<th>확인 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nvidia-isaac/video_to_data</td>
+<td>CHORD 코드(<code>robotic_grounding/</code>: Isaac Lab PPO 경로 + <code>flash_chord/</code> FlashSAC 경로), 영상 복원, GR00T 후속 학습</td>
+<td><strong>공식</strong></td>
+<td>코드 Apache-2.0 + 문서 CC BY 4.0 (GitHub 표시는 NOASSERTION)</td>
+<td>943</td>
+<td>2026-11-02</td>
+<td><code>9cad120</code> (<code>robotic_grounding/</code>만 sparse clone, 미디어 제외)</td>
+</tr>
+<tr>
+<td>Hugging Face <code>nvidia/video-to-data-robot-dexterity-task-library-and-dataset</code></td>
+<td>4,739개 과제 라이브러리와 LeRobot 형식 로봇 데이터</td>
+<td>공식 데이터</td>
+<td>CC BY 4.0</td>
+<td>—</td>
+<td>2026-08-21</td>
+<td><code>2376c2e</code> (메타데이터만, 파일 목록 API 상한 10만 개)</td>
+</tr>
+<tr>
+<td>MandiZhao/dexmachina</td>
+<td>DexMachina [1] 기준선</td>
+<td>기준선 공식</td>
+<td>MIT</td>
+<td>280</td>
+<td>2026-03-23</td>
+<td><code>adae5bf</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>ManipTrans/ManipTrans</td>
+<td>ManipTrans [2] 기준선</td>
+<td>기준선 공식</td>
+<td>GPL-3.0</td>
+<td>349</td>
+<td>2025-10-10</td>
+<td><code>a3d08cf</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>facebookresearch/spider</td>
+<td>SPIDER [3] 기준선, SP-SR 스크립트</td>
+<td>기준선 공식</td>
+<td>CC BY-NC (LICENSE 본문, GitHub 표시 NOASSERTION)</td>
+<td>595</td>
+<td>2026-09-22</td>
+<td><code>4471700</code> (<code>flashdexretarget/</code>에서 지표 스크립트 확인)</td>
+</tr>
+<tr>
+<td>tylerlum/human2sim2robot</td>
+<td>Human2Sim2Robot [43] 기준선</td>
+<td>기준선 공식</td>
+<td>MIT</td>
+<td>161</td>
+<td>2026-08-27</td>
+<td><code>894eae2</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>Holiday-Robot/FlashSAC</td>
+<td>FlashSAC 학습기 (FlashCHORD가 쓰는 알고리즘)</td>
+<td>구성 요소</td>
+<td>MIT</td>
+<td>505</td>
+<td>2026-04-09</td>
+<td><code>87edc90</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>Holiday-Robot/FlashDexRetarget</td>
+<td>CHORD를 기준선으로 쓴 후속 연구</td>
+<td>관련 연구 공식</td>
+<td>MIT</td>
+<td>70</td>
+<td>2026-10-20</td>
+<td><code>6f95e13</code> (<code>flashdexretarget/</code>에서 대조)</td>
+</tr>
+<tr>
+<td>leggedrobotics/rsl_rl</td>
+<td>PPO 구현 (Isaac Lab 경로)</td>
+<td>구성 요소</td>
+<td>BSD-3 계열 (LICENSE 본문, GitHub 표시 NOASSERTION)</td>
+<td>3,119</td>
+<td>2026-10-28</td>
+<td><code>1156331</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>isaac-sim/IsaacLab</td>
+<td>시뮬레이션 프레임워크 [42]</td>
+<td>구성 요소</td>
+<td>BSD-3-Clause (LICENSE 본문, GitHub 표시 NOASSERTION)</td>
+<td>8,569</td>
+<td>2026-11-05</td>
+<td><code>f644e1f</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>newton-physics/newton</td>
+<td>FlashCHORD의 물리 엔진</td>
+<td>구성 요소</td>
+<td>Apache-2.0</td>
+<td>5,887</td>
+<td>2026-11-05</td>
+<td><code>1abe073</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>NVlabs/GR00T-WholeBodyControl</td>
+<td>SONIC [20] 전신 제어기</td>
+<td>구성 요소(같은 그룹)</td>
+<td>코드 Apache-2.0 + 가중치 NVIDIA Open Model License</td>
+<td>3,883</td>
+<td>2026-11-03</td>
+<td><code>1e1ec4f</code> (메타데이터만)</td>
+</tr>
+<tr>
+<td>NVlabs/motionbricks</td>
+<td>MotionBricks [37] inpainting 구조</td>
+<td>구성 요소(같은 그룹)</td>
+<td>코드 Apache-2.0 + 문서·자산 CC BY 4.0</td>
+<td>905</td>
+<td>2026-10-26</td>
+<td><code>54fc563</code> (메타데이터만)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>video_to_data의 LICENSE 첫 줄은 &quot;Copyright (c) 2026 NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.&quot;이고, 이어서 &quot;문서·skill은 CC BY 4.0, 소스 코드는 Apache-2.0의 이중 라이선스&quot;라고 적었습니다. 코드 자체는 쓸 수 있습니다. MANO와 원천 데이터셋(ARCTIC, HOT3D 등)은 각자의 라이선스를 따로 받아야 합니다(<code>robotic_grounding/README.md</code>).</li>
+<li>저장소 이력: 첫 커밋 2026-06-23(arXiv v1 다음 날), 학습 코드 공개 v0.2.0 <code>cbee067</code>(2026-08-14, arXiv v2와 같은 날), v0.3.0 <code>dd395a7</code>(2026-09-17), FlashCHORD가 처음 들어온 v0.4.0 <code>33129dd</code>(2026-09-23), 그 뒤 <code>aee95f2</code>(09-28), <code>8c778f9</code>(09-29)에서 FlashCHORD를 다듬었습니다.</li>
+</ul>
+</section></body></html>
