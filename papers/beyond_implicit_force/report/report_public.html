@@ -1,0 +1,1119 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Beyond Implicit Force 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig1"] { max-width: 52%; }
+img[src*="paper_fig2"] { max-width: 50%; }
+img[src*="paper_fig3"] { max-width: 56%; }
+img[src*="paper_table4"] { max-width: 78%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>Beyond Implicit Force: 분석 리포트</h1>
+<p class="meta">게시용 버전 · 원문 https://arxiv.org/abs/2607.14578 · arXiv:2607.14578v1 · IROS 2026 · Australian Institute for Machine Learning, Adelaide University (Wong, Liu, Dayoub) · 코드 미공개(기반: tonyzhaozh/act @ 742c753, tonyzhaozh/aloha @ 06369f0) · 분석일 2026-11-09 · 논문 그림 © 저자, CC BY 4.0</p>
+<p><img src="figures/paper_fig1_summary.png" alt="Fig. 1" /></p>
+<p class="cap">논문 Fig. 1: 저자의 정성 요약. 목표를 follower로 바꾼 ACT-o는 모든 항목에서 실패하고, 토크를 넣으면 회복된다.</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> ALOHA식 원격조작 데이터로 학습한 ACT의 &quot;힘을 아는 듯한&quot; 행동이 leader–follower 관절각 차이 δ에서 나오는지 보려고, 목표를 follower 미래 상태로 바꾼 ACT-o로 δ를 지우고, 서보 전류 토크 τ = k_t I를 입력에 붙여 회복되는지를 실물 과제 4개(목표 × 입력 2×2)로 시험했다.</li>
+<li><strong>단서 제거와 토크 회복은 확실하다:</strong> Base → ACT-o는 3과제 합산 p = 2.8×10⁻⁴(Wipe 12/20 → 3/20), ACT-o → ACT-o + τ는 세 과제 모두 유의(합산 p = 3.4×10⁻¹⁰).</li>
+<li><strong>&quot;토크가 Base ACT도 개선한다&quot;는 합산으로만 유의하다:</strong> 과제별 Fisher p = 0.065–0.33, 합산 MH p = 0.0034. 단단한 병만은 0/10 → 8/10(p = 0.0007). ACT + τ와 ACT-o + τ는 구분되지 않는다(p ≥ 0.65).</li>
+<li><strong>δ는 감지가 아니라 구동이다:</strong> ACT 입력은 현재 qpos 한 프레임뿐이라 δ를 보지 못한다. ALOHA follower는 P 게인만 쓰는 위치 서보(I 게인 0)라 접촉력 ≈ K_p δ이고, leader 목표가 그 여유를 담는다. toy에서 follower 목표 재생 힘은 시연의 0.25–0.46배이고 대부분 중력 처짐이다. DexForce의 force-informed target과 같은 구조다.</li>
+<li><strong>토크는 δ가 주지 않던 감지 정보를 보탠다:</strong> 같은 높이에서 강성을 가르는 정확도는 qpos 한 프레임 0.51, 토크 1.00, qpos 5프레임 0.96(toy). Base ACT의 단단한 병 0/10, Youden J = 0과 맞는다.</li>
+<li><strong>전류 대리값은 수 N 사건에는 충분하고 1 N 아래는 약하다:</strong> 기어 정지 마찰 0.25 N·m 가정에서 검출률 0.5 N 32%, 1 N 62%, 2 N 이상 ≈ 100%. 중력은 자세 회귀로 빼면 쉽게 정리된다.</li>
+<li><strong>빈칸:</strong> ACT-o + τ가 follower 목표로 어떻게 누르는지(접촉력 미보고), 시연·시드 수, effort 정규화, temporal ensembling, Plug 재시도 규칙(토크 변형 이득 +30–40%p), 중력 미보상 Fig. 4.</li>
+</ol>
+<p><strong>구현 가능성:</strong> 공식 재현은 불가능하다(코드·데이터 미공개, ALOHA Solo 필요). 아이디어는 ACT·LeRobot에서 입력 차원과 목표 열만 바꾸면 되므로 쉽다. 이 맥에서는 표·toy 재계산까지 끝났고, 시뮬레이션 학습은 torch·mujoco 설치 승인과 원조 ACT의 <code>.cuda()</code> 수정이 필요하다.</p>
+</section>
+<section class="chapter"><h1>01. 논문 분석: Beyond Implicit Force (arXiv:2607.14578)</h1>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>제목</td>
+<td>Beyond Implicit Force: Evaluating Explicit Force-Torque Proxies in Action Chunking with Transformers</td>
+</tr>
+<tr>
+<td>저자</td>
+<td>King Hang Wong, Lingqiao Liu, Feras Dayoub (Australian Institute for Machine Learning, Adelaide University)</td>
+</tr>
+<tr>
+<td>버전</td>
+<td>arXiv:2607.14578<strong>v1</strong> (2026-07-16 제출, cs.RO), 8쪽</td>
+</tr>
+<tr>
+<td>학회</td>
+<td><strong>IROS 2026</strong> 채택 (arXiv comments: &quot;Accepted to IROS 2026&quot;)</td>
+</tr>
+<tr>
+<td>라이선스</td>
+<td><strong>CC BY 4.0</strong> (arXiv abs 페이지). PDF 안에 다른 권리 표기 없음</td>
+</tr>
+<tr>
+<td>코드·데이터</td>
+<td>공개되지 않음(2026-11-09 확인). 기반 코드는 ACT·ALOHA 공개 저장소(<code>02</code> §5)</td>
+</tr>
+<tr>
+<td>분석일</td>
+<td>2026-11-09</td>
+</tr>
+</tbody>
+</table>
+<h2>1. Abstract (한 줄 요약과 주장)</h2>
+<p><strong>한 줄 요약:</strong> ALOHA식 leader-follower 원격조작으로 모은 데이터에서 ACT가 보이는 &quot;힘을 아는 듯한&quot; 행동은, 학습 목표인 leader 관절각과 실제 follower 관절각의 차이 δ = q_leader − q_follower에서 나온다고 보고, (1) 목표를 follower의 미래 상태로 바꾼 <strong>ACT-o</strong>로 이 단서를 지우면 접촉 과제가 무너지는지, (2) 모터 전류로 만든 관절 토크 대리값 τ = k_t I를 입력에 넣으면 되살아나는지를 실물 ALOHA Solo의 과제 4개로 시험한 연구입니다.</p>
+<p>주장(Sec. I 기여 목록, Abstract):</p>
+<ol>
+<li><strong>암묵적 단서의 분리:</strong> ACT-o로 원격조작이 만든 불일치 신호를 없애면 접촉 과제 성능이 무너진다.</li>
+<li><strong>명시적 토크 대리값:</strong> 외부 F/T 센서 없이 전류 기반 토크만으로 접촉 행동을 회복한다.</li>
+<li><strong>과제 수준 분석:</strong> 표면 추종, 삽입, 강성 판별, 힘 기반 정지에서 반응성과 안정성을 정량·정성으로 보고하고, 토크 대리값을 ACT에 넣는 실용 지침을 준다.</li>
+</ol>
+<p>결론 문장은 &quot;토크 신호가 있으면 단순한 대리값이 암묵적 단서와 같거나, 넘어서거나, 더 강화한다(matches, surpasses, or further enhances)&quot;입니다(Abstract).</p>
+<h2>2. Method</h2>
+<p><img src="figures/paper_fig2_aloha_solo.png" alt="paper_fig2_aloha_solo.png" /></p>
+<p class="cap">논문 Fig. 2: ALOHA Solo의 WidowX-250s leader(왼쪽)와 ViperX-300s follower(오른쪽). 관절 공간 1:1 대응. © 저자, CC BY 4.0.</p>
+<h3>2.1 문제 설정: 암묵적 상호작용 단서 (Sec. III-A)</h3>
+<p>ALOHA에서는 사람이 leader 팔을 움직이고, follower 팔이 위치 제어로 leader 관절각을 따라갑니다. 기록되는 행동은 leader 관절각, 관측은 follower 관절각입니다. 접촉 중 follower가 막히면 둘 사이에 위치 차이가 생기는데, 논문은 이를 **암묵적 상호작용 단서(implicit interaction cue)**라 부릅니다. 단서는 &quot;명시적 힘 모델은 아니지만 자유 공간 운동과 큰 하중 접촉을 가르는 잠재 신호&quot;입니다(Sec. I).</p>
+<p>이 단서가 없는 수집 방식으로 kinesthetic teaching(사람이 로봇을 직접 잡고 움직임, leader가 없음)과 추종 오차를 줄인 고투명 인터페이스를 듭니다(Sec. I, III-A). 질문은 &quot;ACT의 접촉 성능은 이 단서에 얼마나 기대는가, F/T 센서 없는 플랫폼에서 내장 토크 신호가 그것을 대신할 수 있는가&quot;입니다.</p>
+<h3>2.2 ACT (Sec. III-B, Eq. 1)</h3>
+<p>CVAE encoder E_φ가 현재 상태와 목표 행동 열을 latent z로 보내고, Transformer decoder D_θ가 z와 현재 관측으로 행동 chunk를 복원합니다.</p>
+<pre><code>L_ACT = E_z~Q [ ‖a_{t:t+n} − â_{t:t+n}‖² ] + β D_KL( Q(z | s_t, a_{t:t+n}) ‖ P(z | s_t) )      (Eq. 1)
+</code></pre>
+<p>표준 ACT의 목표는 leader 관절각 A = {q_leader,t, …, q_leader,t+n}이고, 이 목표가 δ를 품고 있다는 것이 논문의 출발점입니다(Sec. III-B &quot;Implicit Force via Joint Discrepancy&quot;).</p>
+<h3>2.3 ACT-o: 목표를 follower 미래 상태로 (Sec. IV-A, Eq. 3)</h3>
+<p>decoder 목표를 follower의 미래 관절각 Q = {q_follower,t+1, …, q_follower,t+n}으로 바꾸고, CVAE encoder도 leader 행동 대신 Q를 받습니다(Sec. IV-C).</p>
+<pre><code>L_rec = E_{z,O,Q} [ ‖Q − Q̂(z, O)‖² ]                                                (Eq. 3)
+L_CVAE = L_rec + β D_KL[ q(z | Q, [τ]) ‖ p(z) ]                                       (Eq. 5)
+</code></pre>
+<p>[τ]는 토크 변형에서만 들어가는 항입니다. 실행할 때는 예측한 follower 관절각을 그대로 위치 명령으로 보냅니다(Table I, II).</p>
+<h3>2.4 명시적 토크 대리값 (Sec. III-C, IV-B, Eq. 2, 4)</h3>
+<p>ViperX follower의 서보가 주는 effort(전류)를 제조사 토크 상수로 바꿔 τ = k_t I를 씁니다(Sec. V-A). 관절 토크와 말단 외력의 관계는 다음과 같습니다.</p>
+<pre><code>τ = J(q)ᵀ F_ext + τ_dyn(q, q̇, …)                                                    (Eq. 2)
+τ_total = M(q) q̈ + C(q, q̇) q̇ + G(q) + τ_ext                                         (Eq. 4)
+</code></pre>
+<p>준정적(|q̈|, |q̇| → 0)이면 G(q)와 τ_ext만 남습니다. 논문은 중력·마찰 보상 모델 없이 <strong>τ_total을 그대로 입력</strong>하고, 정책이 G(q)를 암묵적으로 보정하기를 기대합니다(Sec. IV-B). &quot;τ_dyn을 따로 계산할 필요가 없다&quot;는 것도 주장입니다(Sec. III-C).</p>
+<p><strong>주입 방식(Sec. IV-B &quot;Injection Method&quot;):</strong> 관절각 7개와 effort 7개를 이어 붙인 14차원 벡터를 공유 임베딩 ℝ¹⁴ → ℝ^{d_hidden}으로 투영해 CVAE encoder와 Transformer encoder에 넣습니다(Fig. 3). 공개 ACT 코드는 양팔 ALOHA용으로 상태 차원 14를 하드코딩해 두었으므로(<code>detr/models/detr_vae.py:230</code>, <code>state_dim = 14 # TODO hardcode</code>), 한 팔 7 + effort 7은 구조 변경 없이 같은 자리에 들어갑니다(<code>04</code> D3, 추정).</p>
+<p><img src="figures/paper_fig3_architecture.png" alt="논문 Fig. 3" /></p>
+<p class="cap">논문 Fig. 3: 토크 변형의 CVAE encoder(위)와 Transformer(아래). q_t; [τ_t]가 같은 토큰으로 들어간다. © 저자, CC BY 4.0.</p>
+<h3>2.5 네 변형 (Table II)</h3>
+<table>
+<thead>
+<tr>
+<th>변형</th>
+<th>목표</th>
+<th>힘 정보</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base ACT</td>
+<td>leader (A)</td>
+<td>암묵적(δ)</td>
+</tr>
+<tr>
+<td>ACT-o</td>
+<td>follower (Q)</td>
+<td>없음(δ 제거)</td>
+</tr>
+<tr>
+<td>ACT + τ</td>
+<td>leader (A)</td>
+<td>혼합(δ + τ)</td>
+</tr>
+<tr>
+<td>ACT-o + τ</td>
+<td>follower (Q)</td>
+<td>명시적(τ만)</td>
+</tr>
+</tbody>
+</table>
+<h2>3. Experiments</h2>
+<h3>3.1 설정 (Sec. V-A, V-E, Table III)</h3>
+<ul>
+<li><strong>하드웨어:</strong> ALOHA Solo, Interbotix ViperX-300s follower + WidowX-250s leader(각 6-DoF + 그리퍼). 카메라 3대(높은 각도의 BEV, 낮은 측면, follower 손목). 데이터 수집과 추론은 모두 <strong>50 Hz</strong>, 관절 공간 제어.</li>
+<li><strong>학습:</strong> RTX 4090, A6000, A5000에 나눠 학습, 추론은 RTX 4090. 하이퍼파라미터는 epoch 8,000, chunk 100, batch 16, lr 2×10⁻⁵, d_ff 3,200, d_hidden 512, KL β 10(Table III). ACT 공개 README의 예시 값과 비교하면 batch(8 → 16), epoch(2,000 → 8,000), lr(1×10⁻⁵ → 2×10⁻⁵)이 다릅니다(<code>03</code> §8).</li>
+<li><strong>초기 배치:</strong> 제한된 영역 안에서 물체 시작 자세를 SE(2)로 무작위화하고, 위에서 본 오버레이로 분포 안 평가를 확인(Sec. V-E).</li>
+<li><strong>하이퍼파라미터 확인 방식:</strong> &quot;과제마다 적어도 한 변형이 꾸준히 눈으로 보기에 성공하는 rollout을 만드는지&quot;로 확인했다고 적었습니다(Sec. V-E). 평가 과제로 설정을 고른 셈입니다.</li>
+<li><strong>시연 수, 학습 시드, 평가 순서는 적혀 있지 않습니다.</strong></li>
+</ul>
+<h3>3.2 과제 (Sec. V-C, V-E, Fig. 5–8)</h3>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>시험하는 것</th>
+<th>성공 기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Board Wipe (Fig. 5)</td>
+<td>표면 추종 + 수직력</td>
+<td>표시가 완전히 지워지거나, 지나간 자리에 눈에 보이는 줄무늬가 남음</td>
+</tr>
+<tr>
+<td>Plug Insert (Fig. 7)</td>
+<td>기울어진 플러그를 톡톡 쳐서 세운 뒤 수직으로 눌러 꽂기</td>
+<td>꽂힘. 첫 시도가 플러그에 닿고 실패하면 두 번째 시도를 허용하고 두 번을 한 rollout으로 셈(Table IV 캡션)</td>
+</tr>
+<tr>
+<td>Soft Bottle Press (Fig. 6)</td>
+<td>같은 모양 병의 두 상태: 잠김(High-Stiffness), 열림(Low-Stiffness)</td>
+<td>열린 병은 끝까지 누르고, 잠긴 병은 저항을 느끼면 물러남</td>
+</tr>
+<tr>
+<td>Foam Stop (Fig. 8)</td>
+<td>무늬 없는 검은 폼에 가볍게 닿으면 멈춤, 폼 높이 3단</td>
+<td>성공률 대신 말단 F_x 곡선(Fig. 4)</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/paper_fig5_board_wipe.png" alt="논문 Fig. 5" /></p>
+<p class="cap">논문 Fig. 5: Board Wipe. 지우개를 잡고 들어 옮긴 뒤 아래로 누르며 옆으로 닦는다. © 저자, CC BY 4.0.</p>
+<p><img src="figures/paper_fig6_bottle.png" alt="논문 Fig. 6" /></p>
+<p class="cap">논문 Fig. 6: Soft Bottle Press. 첫 접촉 뒤 잠긴 병이면 물러나고(c), 열린 병이면 끝까지 누른다(d). © 저자, CC BY 4.0.</p>
+<p><img src="figures/paper_fig7_plug.png" alt="paper_fig7_plug.png" /></p>
+<p class="cap">논문 Fig. 7: Plug Insert. 기울어진 플러그를 톡톡 쳐서 세운 뒤 아래로 눌러 꽂는다. © 저자, CC BY 4.0.</p>
+<h3>3.3 결과 (Table IV)</h3>
+<table>
+<thead>
+<tr>
+<th>변형</th>
+<th>Bottle 전체</th>
+<th>무른 병</th>
+<th>단단한 병</th>
+<th>Plug 1회</th>
+<th>Plug 1 or 2회</th>
+<th>Wipe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base ACT</td>
+<td>50%</td>
+<td><strong>100%</strong></td>
+<td>0%</td>
+<td>20%</td>
+<td>30%</td>
+<td>60%</td>
+</tr>
+<tr>
+<td>ACT + τ</td>
+<td>70%</td>
+<td>60%</td>
+<td><strong>80%</strong></td>
+<td><strong>40%</strong></td>
+<td><strong>70%</strong></td>
+<td>90%</td>
+</tr>
+<tr>
+<td>ACT-o</td>
+<td>25%</td>
+<td>50%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>ACT-o + τ</td>
+<td><strong>75%</strong></td>
+<td>80%</td>
+<td>70%</td>
+<td>10%</td>
+<td>50%</td>
+<td><strong>95%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>시행 수는 Bottle 모드마다 10회(변형당 20), Plug 10회, Wipe 20회입니다(Table IV 머리글·캡션). 이 표를 Fisher 정확검정, Holm 보정, 과제 합산 Mantel–Haenszel 검정으로 다시 본 결과는 <code>03</code> §6에 있습니다. 요약하면 <strong>단서 제거(Base → ACT-o)와 토크 회복(ACT-o → ACT-o + τ)은 통계적으로 뚜렷하고, 토크가 Base ACT를 개선한다는 주장은 과제 하나씩으로는 유의하지 않으며 세 과제를 합쳐야 유의합니다.</strong></p>
+<p><img src="figures/table4_ci.png" alt="Table IV 다시 그리기" /></p>
+<p class="cap">직접 그림: Table IV 성공률과 Wilson 95% 구간. Bottle은 모드별로 나눠 그렸다.</p>
+<p><img src="figures/paper_table4.png" alt="paper_table4.png" /></p>
+<p class="cap">논문 Table IV 원본. 칸마다 시행 10–20회. © 저자, CC BY 4.0.</p>
+<h3>3.4 Foam Stop (Fig. 4)</h3>
+<p>Fig. 4는 변형마다 10 rollout × 높이 3단(총 120회)의 말단 F_x(effort 단위) 평균 곡선입니다. 저자는 &quot;모든 모델이 폼을 뚫거나 뜨지 않고 대략 맞는 높이에서 멈췄고, 토크 변형이 시연의 평형 F_x에 더 가깝게 수렴했다&quot;고 씁니다(Sec. VI-B4). 그림을 눈으로 읽으면(±50 effort) 끝 구간(t ≈ 300)에서 시연과의 차이 평균은 토크 변형이 더 작지만, 높이 1에서는 ACT-o가 시연에 가장 가깝습니다. 신뢰 띠는 ±200 정도로 겹칩니다(<code>03</code> §7). F_x는 중력을 보상하지 않은 effort에서 J(θ)로 환산한 값이라(Sec. V-D), 멈춘 자세가 다르면 접촉력이 같아도 값이 달라집니다.</p>
+<p><img src="figures/paper_fig8_foam.png" alt="paper_fig8_foam.png" /></p>
+<p class="cap">논문 Fig. 8: Foam Stop. 무늬 없는 검은 폼에 가볍게 닿으면 멈춘다. 폼 높이 3단. © 저자, CC BY 4.0.</p>
+<h3>3.5 정성 관찰 (Sec. VI-A, VI-B)</h3>
+<ul>
+<li><strong>ACT-o:</strong> 닦기에서 아래로 누르지 못하고 떠 있는 &quot;hovering&quot;, 병과 플러그에서 멈칫하거나 아예 시작하지 않는 &quot;hesitant&quot; 궤적.</li>
+<li><strong>Base ACT:</strong> 병 강성을 구분하지 못하고 무른 병 행동(끝까지 누름)에 과적합. 플러그에서는 정렬은 하지만 충분히 누르지 못하거나 닿자마자 굳음.</li>
+<li><strong>토크 변형:</strong> 플러그에서 부드러운 &quot;adjustment-tap&quot;을 여러 번 하며, 이 탭이 두 시도에 걸쳐 완성되는 경우가 많음(Sec. VI-B3).</li>
+</ul>
+<h2>4. Limitations</h2>
+<h3>4.1 저자가 밝힌 한계 (Sec. VIII)</h3>
+<ul>
+<li>관절 쪽 토크 추정과 모터 전류만 썼고, 6축 F/T나 광학 촉각의 고주파 해상도가 없다.</li>
+<li>저데이터 영역만 봤고, 데이터 규모를 키웠을 때 대리값의 효용과 안정성은 다루지 않았다.</li>
+<li>향후: 정규화한 토크 대리값의 플랫폼 간 전이, VLM 계획 + 힘 ACT 헤드, 일부러 두드려 보는 능동 감지.</li>
+</ul>
+<h3>4.2 분석하면서 추가로 발견한 한계와 의문점</h3>
+<ol>
+<li><strong>δ의 역할을 &quot;감지&quot;와 &quot;구동&quot;으로 나누지 않았습니다.</strong> Base ACT의 입력에는 δ가 없습니다. ACT는 현재 follower 관절각 한 프레임과 이미지만 받습니다(공개 코드 <code>imitate_episodes.py</code>, <code>04</code> D2). δ는 <strong>목표에만</strong> 들어 있고, P 게인만 쓰는 위치 서보(공개 ALOHA 코드의 Position P gain 800, I gain 0, <code>04</code> D1)에서는 δ가 곧 누르는 힘을 만드는 명령 여유입니다(<code>03</code> §1). ACT-o의 실패는 &quot;힘을 감지하지 못해서&quot;보다 &quot;누르는 명령을 낼 수 없어서&quot;로 더 직접 설명됩니다.</li>
+<li><strong>ACT-o + τ가 어떻게 누르는지 설명이 없습니다.</strong> 목표가 follower 위치라면, 시연에서 follower가 실제로 있었던 위치보다 깊은 명령은 학습 목표에 없습니다. P 서보에서 이 범위의 명령은 중력 처짐과 표면 변형만큼의 힘만 냅니다(<code>03</code> §5). Wipe 95%는 성공 기준(줄무늬가 보이면 성공)이 약한 접촉으로도 채워졌을 가능성이 있는데, 접촉력은 보고되지 않았습니다.</li>
+<li><strong>&quot;토크가 Base ACT를 개선한다&quot;는 과제별로는 유의하지 않습니다.</strong> Wipe 18/20 vs 12/20(Fisher p = 0.065), Plug 7/10 vs 3/10(p = 0.18), Bottle 14/20 vs 10/20(p = 0.33). 세 과제 합산 MH p = 0.0034입니다. 단단한 병만 보면 8/10 vs 0/10(p = 0.0007)로 뚜렷합니다(<code>03</code> §6).</li>
+<li><strong>ACT + τ와 ACT-o + τ는 구분되지 않습니다</strong>(모든 과제 p ≥ 0.65). &quot;혼합이 명시적보다 낫다&quot;는 증거는 없습니다.</li>
+<li><strong>Plug의 두 번째 시도 규칙이 토크 변형에 유리합니다.</strong> 재시도로 얻은 점수는 Base +10%p, ACT + τ +30%p, ACT-o + τ +40%p입니다(<code>03</code> §6). 저자가 말한 &quot;두 시도에 걸친 adjustment-tap&quot;을 성공으로 세는 규칙입니다. 1회 기준으로는 ACT-o + τ(10%)가 Base(20%)보다 낮습니다.</li>
+<li><strong>Soft Bottle Press의 &quot;전체 50%&quot;는 판별 능력 0입니다.</strong> Base ACT는 무른 병 100%, 단단한 병 0%로, 항상 누르는 정책과 같습니다(Youden J = 0). 전체 성공률보다 판별 지표가 맞습니다(<code>03</code> §6).</li>
+<li><strong>동기로 든 상황을 시험하지 않았습니다.</strong> kinesthetic teaching과 고투명 인터페이스가 동기지만, 실험은 모두 같은 leader-follower 데이터에서 목표만 바꾼 것입니다. ACT-o는 &quot;단서가 없는 데이터&quot;의 대용인데, 사람이 저항을 느끼며 조작한 흔적(속도 변화, 멈춤)은 follower 궤적에 그대로 남아 있습니다.</li>
+<li><strong>재현 정보가 빠졌습니다.</strong> 시연 수, 학습 시드 수, effort 정규화, temporal ensembling 사용 여부, chunk 실행 방식, 평가 순서, Foam Stop의 J(θ) 계산 세부, F_x 중력 기준값이 없습니다(<code>04</code> §3).</li>
+<li><strong>Fig. 1의 체크 표는 정성 요약입니다.</strong> &quot;Policy Expressivity&quot;나 &quot;Force Precision&quot;을 재는 지표는 본문에 없습니다.</li>
+<li><strong>사소한 서술 오류:</strong> &quot;kinematically identical leader-follower&quot;(Fig. 2, Sec. III-C)라 했지만 WidowX-250s와 ViperX-300s는 관절 구성은 같고 링크 길이가 다릅니다. 관절 공간 1:1 대응이라는 뜻으로 읽어야 합니다(내 사전 지식).</li>
+</ol>
+</section>
+<section class="chapter"><h1>03. 물리 해석과 재계산</h1>
+<p>스크립트는 <code>analysis/table_check.py</code>(Table IV·하이퍼파라미터 재계산, 결과 <code>table_check_results.json</code>), <code>analysis/force_proxy_toy.py</code>(1-DoF 물리 toy T1–T4, 결과 <code>force_proxy_toy_results.json</code>), <code>analysis/plot_figures.py</code>(그래프 4장)입니다. 모두 numpy·scipy, 단일 스레드, CPU에서 1–2초 안에 끝납니다. toy의 강성·질량·마찰 값은 <strong>가정</strong>이므로, 절대값이 아니라 비와 경향으로 읽어야 합니다.</p>
+<h2>1. δ는 감지 신호이기 전에 구동 명령이다</h2>
+<h3>1.1 P 게인만 쓰는 위치 서보의 정상상태</h3>
+<p>공개 ALOHA 코드는 follower 서보를 Position P gain 800, I gain 0으로 설정합니다(<code>aloha_scripts/robot_utils.py:174-175</code>, <code>04</code> D1). 적분항이 없으면 하중이 걸린 정상상태에서 오차가 0으로 가지 않습니다. 관절 하나를 말단 등가 강성 K_p로 근사하면, 명령 q_cmd를 받은 follower의 준정적 평형은 다음과 같습니다.</p>
+<pre><code>K_p (q_cmd − q) + m g = F_contact            (아래 방향 +, 1-DoF)
+접촉면 강성 k_e:  F_contact = k_e · max(q − q_surface, 0)
+</code></pre>
+<p>ALOHA 원격조작에서 q_cmd = q_leader이므로 <strong>K_p δ = F_contact − m g</strong>입니다. 사람이 &quot;충분히 눌렀다&quot;고 느낄 때까지 leader를 밀면, 그 leader 위치에는 시연 접촉력이 K_p로 나뉜 만큼의 여유가 들어갑니다. 학습된 Base ACT가 leader 목표를 재생하면 같은 δ가 다시 생기고, 같은 힘이 다시 나옵니다. <strong>δ는 정책이 읽는 입력이 아니라, 정책이 내보내는 명령 속에 들어 있습니다.</strong> ACT의 입력은 현재 follower 관절각 한 프레임과 이미지뿐이라(<code>04</code> D2) δ를 볼 수 없습니다.</p>
+<h3>1.2 DexForce의 force-informed target과 같은 구조</h3>
+<p>DexForce(arXiv:2501.10356)는 kinesthetic 시연에서 관측 위치 x_o에 측정 힘을 더한 목표 x_f = x_o + k_f f를 행동으로 씁니다. 재생 힘 배율은 G(k_f, k_e) = (1/k_e + k_f)/(1/k_p + 1/k_e)이고, k_f = 1/k_p일 때 G = 1, k_f = 0(관측 위치 그대로)이면 G = k_p/(k_p + k_e) ≈ 0입니다(<code>dexforce/analysis/03_analysis.md</code> §1).</p>
+<p>leader-follower 원격조작은 이 목표를 <strong>센서 없이 자동으로</strong> 만듭니다. q_leader = q_follower + (F − m g)/K_p이므로, Base ACT의 목표는 k_f = 1/K_p인 force-informed target과 같습니다(사람이 직접 맞췄으니 G = 1). ACT-o의 목표는 k_f = 0인 경우입니다.</p>
+<h3>1.3 toy T1: leader 목표 vs follower 목표</h3>
+<p>가정: K_p = 800 N/m(말단 등가값, P gain 레지스터 800을 환산한 값이 아님), 유효 중력 1.5 N(I 게인 0이라 처짐 1.9 mm), 시연 접촉력 6 N, 닦기에 필요한 최소 힘 2 N.</p>
+<table>
+<thead>
+<tr>
+<th>표면 강성 k_e (N/m)</th>
+<th>follower 위치 (mm)</th>
+<th>leader 위치 (mm)</th>
+<th>여유 δ (mm)</th>
+<th>follower 목표 재생 힘</th>
+<th>시연 대비</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2,000 (무른 패드)</td>
+<td>3.00</td>
+<td>8.62</td>
+<td>5.63</td>
+<td>2.79 N</td>
+<td>0.46</td>
+</tr>
+<tr>
+<td>20,000 (지우개 + 보드)</td>
+<td>0.30</td>
+<td>5.93</td>
+<td>5.63</td>
+<td>1.67 N</td>
+<td>0.28</td>
+</tr>
+<tr>
+<td>200,000 (거의 강체)</td>
+<td>0.03</td>
+<td>5.66</td>
+<td>5.63</td>
+<td>1.52 N</td>
+<td>0.25</td>
+</tr>
+</tbody>
+</table>
+<p>leader 목표 재생은 모든 경우 6.0 N입니다. follower 목표의 힘은 거의 <strong>중력 처짐</strong>에서 나옵니다. 중력을 빼면 k_e = 20,000에서 0.23 N(DexForce의 G(0) = 800/20,800 = 0.038)입니다. 수직으로 누르는 과제라 중력이 ACT-o를 돕는 방향이고, 옆이나 위로 미는 과제에서는 이 도움도 없습니다.</p>
+<p>정책의 위치 예측에 오차 σ가 있을 때(k_e = 20,000):</p>
+<table>
+<thead>
+<tr>
+<th>σ (mm)</th>
+<th>0.5</th>
+<th>1</th>
+<th>2</th>
+<th>4</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>leader 목표: 힘 ≥ 2 N</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.995</td>
+<td>0.90</td>
+<td>0.74</td>
+</tr>
+<tr>
+<td>follower 목표: 힘 ≥ 2 N</td>
+<td>0.20</td>
+<td>0.34</td>
+<td>0.42</td>
+<td>0.46</td>
+<td>0.48</td>
+</tr>
+<tr>
+<td>follower 목표: 접촉만</td>
+<td>1.00</td>
+<td>0.98</td>
+<td>0.86</td>
+<td>0.70</td>
+<td>0.60</td>
+</tr>
+</tbody>
+</table>
+<p>leader 목표는 여유 δ ≈ 5.6 mm 덕분에 예측이 몇 mm 틀려도 누르는 힘을 유지합니다. follower 목표는 접촉 여부부터 예측 오차에 좌우되고, 위로 틀리면 떠 버립니다. 논문이 본 ACT-o의 &quot;hovering&quot;(Sec. VI-B1)과 같은 모양입니다.</p>
+<p><img src="figures/actuation_toy.png" alt="구동 toy" /></p>
+<p class="cap">직접 그림(T1): 왼쪽은 명령 깊이와 정상상태 접촉력, 오른쪽은 위치 예측 오차에 따른 힘 유지 확률.</p>
+<h2>2. 감지: 한 프레임 관절각으로는 강성을 가를 수 없다</h2>
+<p>ACT는 현재 시점의 qpos 하나만 받습니다(속도·이력 없음, <code>04</code> D2). 무른 병과 단단한 병을 같은 속도로 누르면, 단단한 병에서는 follower가 멈추고 무른 병에서는 계속 내려갑니다. 하지만 <strong>같은 높이</strong>를 지나는 순간만 보면 두 경우의 qpos는 같습니다.</p>
+<p>toy T2(20 mm/s 하강, 무른 병 150 N/m, 단단한 병 3,000 N/m, qpos 잡음 0.2 mm, 토크 잡음 0.15 N, 단단한 병이 멈춘 높이 이하 구간 2,965프레임):</p>
+<table>
+<thead>
+<tr>
+<th>특징</th>
+<th>균형 정확도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qpos 한 프레임</td>
+<td>0.51 (우연 수준)</td>
+</tr>
+<tr>
+<td>qpos 5프레임 차이(속도에 해당)</td>
+<td>0.96</td>
+</tr>
+<tr>
+<td>토크 한 프레임</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<p>Base ACT가 단단한 병에서 0/10인 것(Table IV)과 맞습니다. Base ACT는 leader 목표로 누르는 힘은 낼 수 있지만, 지금 누르는 병이 어느 쪽인지는 입력에서 알 수 없습니다. 그래서 다수 모드(끝까지 누름)로 갑니다. 토크를 입력에 넣으면 이 정보가 한 프레임에 들어옵니다. <strong>토크는 δ를 &quot;대신&quot;한다기보다, δ가 원래 주지 않던 감지 정보를 보탭니다.</strong> 다만 이 toy는 이력을 넣은 qpos(0.96)도 거의 같은 정보를 준다는 것을 보여 줍니다. 논문에는 &quot;qpos 이력&quot; 대조군이 없습니다.</p>
+<h2>3. 전류 토크 대리값의 물리</h2>
+<h3>3.1 전류에서 관절 토크까지</h3>
+<pre><code>τ_motor = k_t I
+τ_joint = N η k_t I − τ_friction(q̇, 부하)            (N: 감속비, η: 기어 효율)
+τ_joint = J(q)ᵀ F_ext + G(q) + M(q) q̈ + C(q, q̇) q̇     (Eq. 2, 4)
+</code></pre>
+<p>논문은 τ = k_t I(Sec. V-A)만 쓰고 기어 손실과 마찰을 다루지 않습니다. 이 식에서 대리값의 오차원은 셋입니다.</p>
+<ul>
+<li><strong>정지 마찰 띠:</strong> 멈춰 있을 때 마찰은 [−τ_c, τ_c] 안의 아무 값이나 될 수 있어서, 같은 접촉력에서 전류가 이력(hysteresis)을 가집니다. 최소 검출 힘은 대략 τ_c / L(L: 관절에서 접촉점까지 거리)입니다.</li>
+<li><strong>중력 G(q):</strong> 보상하지 않으면 자세에 따라 수 N·m가 더해집니다. 논문은 정책이 G(q)를 암묵적으로 배우게 둡니다(Sec. IV-B).</li>
+<li><strong>동역학·점성 마찰:</strong> 움직이는 동안의 M q̈, C q̇, 점성 마찰. ACT 입력에는 qvel이 없어서, 정책은 빠르게 닦을 때의 점성 마찰과 접촉을 구분할 단서가 qpos·이미지뿐입니다.</li>
+</ul>
+<h3>3.2 toy T3: 마찰과 중력 속에서 잡히는 최소 힘</h3>
+<p>가정: 지렛대 0.30 m, 기어 정지 마찰 0.25 N·m(균일 분포), 전류 잡음 0.05 N·m, 오경보 5% 문턱.</p>
+<table>
+<thead>
+<tr>
+<th>접촉력 (N)</th>
+<th>0.5</th>
+<th>1</th>
+<th>2</th>
+<th>4</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>검출률</td>
+<td>0.32</td>
+<td>0.62</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<p>정지 마찰 띠는 약 0.83 N입니다. <strong>수 N 이상의 사건(병 저항, 닦기 압력)은 전류로 충분히 잡히고, 1 N 아래의 가벼운 닿음은 잘 잡히지 않습니다.</strong> Foam Stop은 시연자가 &quot;가벼운 저항&quot;에서 멈추는 과제라 이 띠 근처에 있을 가능성이 큽니다. 모든 변형이 대략 맞는 높이에서 멈췄다는 결과(Sec. VI-B4)는 토크보다 시각·운동학이 높이를 알려 줬다는 해석과도 맞습니다.</p>
+<p>중력: 자세가 −1 ~ 1 rad로 바뀌는 관절(τ_g = 2 cos q + 0.6 sin 2q)에서 접촉 토크 0.6–2.4 N·m를 같은 규칙으로 가르면, 보상 없이 검출률 0.84, 비접촉 구간으로 자세 특징(cos q, sin q, cos 2q, sin 2q)을 선형 회귀해 빼면 1.00입니다. 정책이 G(q)를 암묵적으로 배울 수 있다는 논문의 가정은 원리상 가능하지만, 그만큼의 표현력과 데이터를 쓰게 됩니다. 명시적으로 빼는 쪽이 싸고, 저자가 향후 과제로 든 &quot;정규화된 대리값의 플랫폼 간 전이&quot;에도 필요합니다.</p>
+<h2>4. δ ∝ 접촉력은 준정적 접촉에서만 성립한다</h2>
+<p>논문은 추종 오차가 &quot;접촉 시작, 제약 위반, 외부 저항과 상관한다&quot;고 씁니다(Sec. I). toy T4는 공중 왕복(0–2 s) → 접근(2–3 s) → 누르며 닦기(3–6 s) 궤적을 1차 지연 서보(대역폭 12 rad/s)로 따라가게 했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>지표</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>접촉 구간만 δ–힘 R²</td>
+<td>0.995, 기울기 0.807 N/mm(≈ K_p)</td>
+</tr>
+<tr>
+<td>전체 구간 δ–힘 R²</td>
+<td>0.874</td>
+</tr>
+<tr>
+<td>자유 운동 중 최대 |δ|</td>
+<td>5.75 mm</td>
+</tr>
+<tr>
+<td>접촉 중 δ 중앙값</td>
+<td>9.54 mm</td>
+</tr>
+</tbody>
+</table>
+<p>빠른 자유 운동의 추종 지연과 중력 처짐도 δ를 만듭니다. 이 toy에서 자유 운동 δ(최대 5.8 mm)는 접촉 δ(중앙값 9.5 mm)의 절반이 넘습니다. 그래서 δ는 &quot;힘 + 속도 지연 + 중력&quot;의 혼합이고, 힘 신호로 깨끗하지 않습니다. 이 점에서도 δ는 감지 신호보다 구동 여유로 읽는 편이 맞습니다.</p>
+<p><img src="figures/sensing_toy.png" alt="감지 toy" /></p>
+<p class="cap">직접 그림: T2 강성 판별, T3 마찰 속 검출률, T4 δ와 접촉력.</p>
+<h2>5. 풀리지 않은 질문: ACT-o + τ는 어떻게 누르는가</h2>
+<p>ACT-o + τ의 목표도 follower 위치입니다. 학습 목표 안에는 시연에서 follower가 실제로 도달한 위치보다 깊은 명령이 없습니다. §1의 식으로 보면, 명령이 시연 follower 위치 범위 안에 있는 한 정상상태 힘은 follower 목표 재생 힘(T1에서 시연의 0.25–0.46배, 대부분 중력)을 넘지 못합니다. 토크 입력이 할 수 있는 일은 두 가지로 보입니다.</p>
+<ol>
+<li><strong>접촉 찾기:</strong> 떠 있을 때 토크가 낮으면, 시연의 접근 구간(토크 낮음 → 다음 위치는 더 아래)과 비슷한 상태가 되어 계속 내려갑니다. hovering을 고치는 데는 충분합니다.</li>
+<li><strong>모드 고르기:</strong> 단단한 병에서 토크가 튀면 물러나는 모드를 고릅니다.</li>
+</ol>
+<p>둘 다 시연 수준의 힘을 만들 필요는 없습니다. 그래서 Board Wipe의 95%는 &quot;줄무늬가 보이면 성공&quot;(Sec. V-E)이라는 기준이 약한 접촉으로도 채워졌기 때문일 수 있습니다. 대안 설명은 (a) 지우개·보드의 변형이 커서 follower 위치에 힘이 이미 들어 있거나(k_e가 작으면 0.46배까지), (b) 정책이 학습 범위 밖으로 더 깊은 위치를 외삽하는 경우입니다. <strong>논문은 닦기 중 접촉력을 보고하지 않아서 어느 쪽인지 알 수 없습니다.</strong> 검증 가능한 예측은 &quot;같은 과제에서 ACT-o + τ의 닦기 수직 effort가 Base ACT보다 작다&quot;입니다.</p>
+<h2>6. Table IV 통계</h2>
+<p>과제별 성공 수(Bottle은 두 모드 합산 n = 20, Plug은 &quot;1 or 2회&quot; n = 10, Wipe n = 20)로 Fisher 정확검정을 하고, 비교마다 과제 3개에 Holm 보정을, 과제를 층으로 한 Mantel–Haenszel(MH) 검정을 했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>Bottle</th>
+<th>Plug</th>
+<th>Wipe</th>
+<th>MH 합산 p (공통 OR)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>단서 제거: Base vs ACT-o</td>
+<td>10 vs 5, p = 0.19</td>
+<td>3 vs 0, p = 0.21</td>
+<td>12 vs 3, <strong>p = 0.0079</strong> (Holm 0.024)</td>
+<td><strong>2.8×10⁻⁴</strong> (5.6)</td>
+</tr>
+<tr>
+<td>토크 회복: ACT-o + τ vs ACT-o</td>
+<td>15 vs 5, <strong>p = 0.0039</strong></td>
+<td>5 vs 0, <strong>p = 0.033</strong></td>
+<td>19 vs 3, <strong>p = 4.1×10⁻⁷</strong></td>
+<td><strong>3.4×10⁻¹⁰</strong> (23.1)</td>
+</tr>
+<tr>
+<td>Base 개선: ACT + τ vs Base</td>
+<td>14 vs 10, p = 0.33</td>
+<td>7 vs 3, p = 0.18</td>
+<td>18 vs 12, p = 0.065 (Holm 0.19)</td>
+<td><strong>0.0034</strong> (3.8)</td>
+</tr>
+<tr>
+<td>명시적만 vs Base: ACT-o + τ vs Base</td>
+<td>15 vs 10, p = 0.19</td>
+<td>5 vs 3, p = 0.65</td>
+<td>19 vs 12, p = 0.020 (Holm 0.059)</td>
+<td><strong>0.0027</strong> (4.0)</td>
+</tr>
+<tr>
+<td>혼합 vs 명시적: ACT + τ vs ACT-o + τ</td>
+<td>14 vs 15, p = 1.0</td>
+<td>7 vs 5, p = 0.65</td>
+<td>18 vs 19, p = 1.0</td>
+<td>1.0 (1.0)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>단단한 병만 보면 ACT + τ vs Base 8/10 vs 0/10(p = 0.0007), ACT-o + τ vs ACT-o 7/10 vs 0/10(p = 0.0031)입니다.</li>
+<li>&quot;토크가 Base ACT를 개선한다&quot;는 <strong>방향은 세 과제 모두 같지만</strong> 과제 하나로는 Holm 뒤에 유의하지 않습니다. 과제를 합치면 유의합니다. 시드가 하나인지 여럿인지 모르므로, 이 p는 정책 학습의 분산을 포함하지 않습니다.</li>
+</ul>
+<p><img src="figures/pairwise_tests.png" alt="쌍별 검정" /></p>
+<p class="cap">직접 그림: 비교별 과제 Fisher p(파란 점)와 3과제 합산 MH p(주황 마름모).</p>
+<p><strong>2×2로 보면 δ와 τ는 서로를 대신한다.</strong> 실험은 목표(leader/follower) × 입력(q/q + τ)의 2×2입니다. 성공률 차이(%p)로 효과를 나누면 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>τ 효과 (leader 목표)</th>
+<th>τ 효과 (follower 목표)</th>
+<th>목표 효과 (τ 없음)</th>
+<th>목표 효과 (τ 있음)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bottle</td>
+<td>+20</td>
+<td>+50</td>
+<td>+25</td>
+<td>−5</td>
+</tr>
+<tr>
+<td>Plug (1 or 2회)</td>
+<td>+40</td>
+<td>+50</td>
+<td>+30</td>
+<td>+20</td>
+</tr>
+<tr>
+<td>Wipe</td>
+<td>+30</td>
+<td>+80</td>
+<td>+45</td>
+<td>−5</td>
+</tr>
+</tbody>
+</table>
+<p>leader 목표(δ)는 τ가 없을 때만 25–45%p를 벌어 주고, τ가 있으면 차이가 거의 사라집니다. τ의 효과도 δ가 없을 때 더 큽니다. 두 신호가 겹치는 정보를 준다는 뜻이고, 저자 결론(&quot;proxy matches, surpasses, or further enhances&quot;)과 맞습니다. 다만 칸마다 10–20회라 상호작용 자체를 검정할 힘은 없습니다(서술 통계).</p>
+<p><strong>Soft Bottle Press를 판별 문제로:</strong> 무른 병에서는 누르고 단단한 병에서는 물러나야 성공이므로, 항상 누르는 정책의 전체 성공률은 50%입니다. Youden J = (무른 병 성공률) + (단단한 병 성공률) − 1로 바꾸면 Base ACT 0(항상 누르는 정책과 같음), ACT-o −0.5, ACT + τ 0.4, ACT-o + τ 0.5입니다. Base ACT의 &quot;전체 50%&quot;는 판별 능력 0이라는 뜻입니다.</p>
+<p><strong>Plug의 두 번째 시도:</strong> 1회 → 1 or 2회로 얻은 점수는 Base +10%p, ACT + τ +30%p, ACT-o 0, ACT-o + τ +40%p입니다. 토크 변형의 이득 상당 부분이 재시도 규칙에서 나옵니다. 1회 기준으로 ACT + τ vs Base는 4/10 vs 2/10(Fisher p = 0.63)입니다.</p>
+<h2>7. Fig. 4 판독 (Foam Stop)</h2>
+<p>끝 구간(t ≈ 300 스텝 = 6 s) 평균 F_x를 눈으로 읽었습니다(±50 effort, 픽셀 판독 아님).</p>
+<table>
+<thead>
+<tr>
+<th>높이</th>
+<th>시연</th>
+<th>ACT</th>
+<th>ACT + τ</th>
+<th>ACT-o</th>
+<th>ACT-o + τ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base</td>
+<td>−70</td>
+<td>−110</td>
+<td>−10</td>
+<td>−250</td>
+<td>−60</td>
+</tr>
+<tr>
+<td>Height 1</td>
+<td>−150</td>
+<td>−320</td>
+<td>−100</td>
+<td>−150</td>
+<td>−60</td>
+</tr>
+<tr>
+<td>Height 2</td>
+<td>−20</td>
+<td>−100</td>
+<td>−70</td>
+<td>−280</td>
+<td>−50</td>
+</tr>
+<tr>
+<td>시연과 차이 평균</td>
+<td>—</td>
+<td>약 100</td>
+<td>약 55</td>
+<td>약 150</td>
+<td>약 45</td>
+</tr>
+</tbody>
+</table>
+<p>평균으로는 토크 변형이 시연에 더 가깝습니다. 하지만 Height 1에서는 ACT-o가 시연과 거의 같고, ACT-o + τ는 90 정도 벗어납니다. 신뢰 띠(±200 정도)도 크게 겹칩니다. 더 중요한 점은 F_x가 <strong>중력을 보상하지 않은 effort</strong>를 J(θ)로 환산한 값이라는 것입니다(Sec. V-D). 시연이 0이 아닌 값에 머무는 것(캡션 &quot;settles into a steady, non-zero value&quot;)도 이 때문으로 보입니다. 멈춘 자세가 몇 cm만 달라도 중력 성분이 달라지므로, 이 그림은 접촉력 비교로는 깨끗하지 않습니다.</p>
+<p><img src="figures/paper_fig4_foam_stop.png" alt="논문 Fig. 4" /></p>
+<p class="cap">논문 Fig. 4: Foam Stop 말단 F_x(effort 단위) 평균, 높이 3단. © 저자, CC BY 4.0.</p>
+<h2>8. 하이퍼파라미터와 chunk 실행</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>ACT 공개 README 예시</th>
+<th>논문 Table III</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KL β, chunk, d_hidden, d_ff</td>
+<td>10, 100, 512, 3,200</td>
+<td>같음</td>
+</tr>
+<tr>
+<td>batch</td>
+<td>8</td>
+<td>16</td>
+</tr>
+<tr>
+<td>epoch</td>
+<td>2,000</td>
+<td>8,000</td>
+</tr>
+<tr>
+<td>lr</td>
+<td>1×10⁻⁵</td>
+<td>2×10⁻⁵</td>
+</tr>
+</tbody>
+</table>
+<p>chunk 100은 50 Hz에서 <strong>2.0 s</strong>입니다. 논문은 temporal ensembling 사용 여부를 적지 않았습니다. 쓰지 않으면 chunk를 끝까지 실행하는 동안 최대 2 s가 열린 루프입니다. 쓰면 공개 코드의 가중(w_i = exp(−0.01 i), i = 0이 가장 오래된 예측, <code>imitate_episodes.py:255</code>)에서 실행 명령의 평균 나이가 <strong>1.15 s</strong>입니다. 어느 쪽이든 단단한 병의 토크 스파이크에 반응해 물러나는 데는 수백 ms 이상의 지연이 생길 수 있습니다. 반응 지연은 판별 성공률에 직접 영향을 주는데 보고되지 않았습니다.</p>
+</section>
+<section class="chapter"><h1>04. 주장 검증: 공개 기반 코드 대조, 표 재계산, 물리 toy, 구현 가능성</h1>
+<p>논문의 공식 코드와 데이터는 공개되지 않았습니다(2026-11-09, arXiv 페이지·논문 본문·GitHub 검색으로 확인, <code>02</code> §5). 그래서 코드 대조 대신 (1) 논문이 기반으로 삼은 ACT·ALOHA 공개 저장소에서 논문 해석에 필요한 사실을 확인하고, (2) Table IV를 다시 계산하고, (3) 핵심 물리 주장을 numpy toy로 점검했습니다.</p>
+<h2>1. 기반 코드에서 확인한 사실</h2>
+<p>대조한 저장소: <code>tonyzhaozh/act</code> @ <code>742c753</code>(2024-01-28), <code>tonyzhaozh/aloha</code> @ <code>06369f0</code>(2024-04-19). 논문의 ALOHA Solo는 Trossen이 낸 별도 소프트웨어를 썼을 수 있으므로, 아래는 &quot;원조 ALOHA·ACT 기준&quot;입니다.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>확인한 것</th>
+<th>위치</th>
+<th>논문 해석에 주는 의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>follower 팔 서보는 Position P gain 800, <strong>I gain 0</strong></td>
+<td><code>aloha/aloha_scripts/robot_utils.py:174-175</code></td>
+<td>하중이 있으면 정상상태 오차가 남음. 접촉 중 δ가 곧 누르는 힘(<code>03</code> §1)</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>ACT 정책 입력은 <strong>현재 qpos 한 프레임 + 카메라 이미지</strong>. qvel·effort는 데이터에서 읽지만 쓰지 않음. <code>qpos_history</code>는 저장만 함</td>
+<td><code>act/utils.py:37-38, 74</code>, <code>act/imitate_episodes.py:221, 240-249</code></td>
+<td>δ는 입력이 아니라 목표에만 있음. 한 프레임으로는 강성 판별이 안 됨(<code>03</code> §2)</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>상태 차원 14 하드코딩(양팔 2 × 7), <code>nn.Linear(14, hidden_dim)</code></td>
+<td><code>act/detr/models/detr_vae.py:58, 61, 69-70, 230, 258</code></td>
+<td>한 팔 7 + effort 7 = 14가 구조 변경 없이 들어감. 논문의 &quot;14차원 공유 임베딩&quot;(Sec. IV-B)과 맞음(추정)</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>ALOHA 수집 스크립트는 <strong>effort를 이미 기록</strong>(<code>/observations/effort</code>, 14차원)</td>
+<td><code>aloha/aloha_scripts/record_episodes.py:130, 142, 160</code>, <code>real_env.py:75-80</code></td>
+<td>기존 ALOHA 데이터에도 토크 대리값이 있음. 새 센서 없이 ACT + τ를 학습할 수 있음</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>기록되는 행동은 <strong>leader(master) 관절각</strong></td>
+<td><code>aloha/aloha_scripts/real_env.py:140-149</code></td>
+<td>Base ACT 목표 = leader. 논문 Table II와 같음</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>temporal ensembling k = 0.01, i = 0이 가장 오래된 예측, 켜면 매 스텝 질의</td>
+<td><code>act/imitate_episodes.py:191-193, 255-257</code></td>
+<td>평균 명령 나이 1.15 s(chunk 100, 50 Hz). 논문은 사용 여부를 적지 않음(<code>03</code> §8)</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>README 예시: kl 10, chunk 100, hidden 512, batch 8, d_ff 3,200, epoch 2,000, lr 1e-5</td>
+<td><code>act/README.md:76-77</code></td>
+<td>논문은 batch·epoch·lr만 다름</td>
+</tr>
+<tr>
+<td>D8</td>
+<td>학습·추론 코드에 <code>.cuda()</code>가 8곳 하드코딩</td>
+<td><code>act/imitate_episodes.py</code></td>
+<td>이 맥(CUDA 없음)에서는 수정하거나 LeRobot 구현을 써야 함(§4)</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 주장별 검증</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장 (출처)</th>
+<th>검증 방법</th>
+<th>결과</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>Table IV 수치 (Table IV)</td>
+<td>내부 일관성: Bottle 전체 = 두 모드 평균, 성공 수 정수, n_total 산술</td>
+<td>4개 변형 모두 일관. n_total 80/40/80/120과 일치</td>
+<td>맞음</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>δ를 지우면 접촉 과제가 무너진다 (Abstract, Sec. VI-A)</td>
+<td>Fisher·Holm·MH</td>
+<td>Wipe 12/20 → 3/20(Holm p = 0.024). Bottle·Plug는 과제별 비유의. 합산 MH p = 2.8×10⁻⁴</td>
+<td>맞음(Wipe가 주도)</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>토크가 ACT-o의 접촉 행동을 회복한다 (Sec. VI-A)</td>
+<td>같음</td>
+<td>세 과제 모두 유의(p ≤ 0.033), 합산 p = 3.4×10⁻¹⁰</td>
+<td>맞음</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>토크가 Base ACT도 개선한다 (Abstract &quot;improve the base ACT policy&quot;)</td>
+<td>같음</td>
+<td>과제별 p = 0.065–0.33(Holm 0.19–0.36), 합산 p = 0.0034. 단단한 병만은 p = 0.0007</td>
+<td>합산으로만 유의. 과제별로는 미확정</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>ACT-o의 실패는 암묵적 힘 인지가 사라졌기 때문 (Sec. VII)</td>
+<td>P 서보 정상상태 해석 + toy T1</td>
+<td>follower 목표 재생 힘은 시연의 0.25–0.46배이고 대부분 중력 처짐. 실패는 &quot;감지 상실&quot;보다 &quot;구동 여유 상실&quot;로 더 직접 설명됨</td>
+<td>해석 보완 필요</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>토크가 시각적으로 같은 강성 상태를 구분하게 한다 (Sec. VI-A)</td>
+<td>toy T2 + Youden J</td>
+<td>같은 높이에서 qpos 한 프레임 0.51, 토크 1.00, qpos 5프레임 0.96. J: Base 0, ACT + τ 0.4, ACT-o + τ 0.5</td>
+<td>맞음. 다만 qpos 이력 대조군 없음</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>전류 기반 τ = k_t I가 중력·마찰 보상 없이 충분하다 (Sec. III-C, IV-B)</td>
+<td>toy T3</td>
+<td>정지 마찰 띠(가정 0.83 N) 아래 힘은 검출률 0.32–0.62, 2 N 이상은 ≈ 1. 중력 미보상 시 검출률 0.84 → 자세 회귀 후 1.00</td>
+<td>수 N 이상 사건에는 맞음. 1 N 미만은 근거 약함</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>토크 변형이 Foam Stop 평형 F_x에 더 가깝게 수렴 (Sec. VI-B4, Fig. 4)</td>
+<td>그림 판독(±50)</td>
+<td>평균 차이는 토크 변형이 작지만(약 45–55 vs 100–150), Height 1에서는 ACT-o가 가장 가깝고 띠가 겹침. F_x는 중력 미보상</td>
+<td>부분적. 정량 근거 약함</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>토크 변형이 Plug에서 더 정확한 &quot;adjustment-tap&quot;을 배운다 (Sec. VI-B3)</td>
+<td>재시도 이득 계산</td>
+<td>이득: Base +10, ACT + τ +30, ACT-o + τ +40%p. 1회 기준 ACT + τ vs Base 4/10 vs 2/10(p = 0.63)</td>
+<td>재시도 규칙에 크게 의존</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>혼합(δ + τ)이 명시적(τ만)보다 낫다는 암시 (Fig. 1의 이중 체크)</td>
+<td>Fisher·MH</td>
+<td>모든 과제 p ≥ 0.65, 합산 p = 1.0</td>
+<td>근거 없음</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>동기: kinesthetic·고투명 인터페이스 데이터에서도 τ가 단서를 대신 (Sec. I, III-A)</td>
+<td>실험 설계 검토</td>
+<td>실제 실험은 같은 leader-follower 데이터에서 목표만 바꿈. 다른 수집 방식은 시험하지 않음</td>
+<td>시험되지 않음</td>
+</tr>
+</tbody>
+</table>
+<p>검산 스크립트: <code>analysis/table_check.py</code>(C1–C4, C6의 J, C9, 하이퍼파라미터), <code>analysis/force_proxy_toy.py</code>(C5–C7). 결과는 각각 <code>table_check_results.json</code>, <code>force_proxy_toy_results.json</code>입니다.</p>
+<h2>3. 재현에 필요한데 논문에 없는 정보</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>과제별 시연 수, 시연자 수</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>학습 시드 수, 변형마다 몇 번 학습했는지</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>effort 단위(원시 전류 단위인지 N·m인지)와 정규화</td>
+<td>&quot;raw effort values&quot;(Sec. IV-B)라고만 함. k_t 값 없음</td>
+</tr>
+<tr>
+<td>행동 차원 처리(한 팔 7차원을 14 슬롯에 어떻게 넣었는지)</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>temporal ensembling 사용 여부, chunk 실행 방식</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>평가 순서(변형별 블록인지 섞었는지), 실패 판정 시간 한도</td>
+<td>&quot;predefined time horizon&quot;이라고만 함(Sec. V-D)</td>
+</tr>
+<tr>
+<td>Board Wipe 성공의 &quot;줄무늬&quot; 판정 기준, 닦기 중 접촉력</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>Foam Stop의 J(θ) 계산, F_x 중력 기준값, 성공 판정</td>
+<td>그림만 있음</td>
+</tr>
+<tr>
+<td>ALOHA Solo 서보 게인(P, I, D)과 소프트웨어 버전</td>
+<td>없음(원조 ALOHA 기준 D1로 추정)</td>
+</tr>
+<tr>
+<td>하이퍼파라미터 선택 과정</td>
+<td>&quot;적어도 한 변형이 성공 rollout을 내는지 눈으로 확인&quot;(Sec. V-E)</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 구현할 수 있는지</h2>
+<h3>4.1 공식 코드로 재현</h3>
+<p><strong>불가능합니다.</strong> 공식 코드·데이터·체크포인트가 없습니다. 하드웨어도 필요합니다: ALOHA Solo(Interbotix ViperX-300s follower + WidowX-250s leader), 카메라 3대(BEV, 측면, 손목), 과제 소품(지우개·보드, 잠금식 접이 병, 멀티탭과 플러그, 검은 폼). 논문은 학습에 RTX 4090·A6000·A5000, 추론에 RTX 4090을 썼습니다(Sec. V-A).</p>
+<h3>4.2 이 맥(Apple M4 Pro, 통합 메모리 약 24 GiB, MPS, CUDA 없음)에서</h3>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Table IV 재계산, 물리 toy(T1–T4), 그래프</td>
+<td>✅ 완료(numpy·scipy, 1–2초)</td>
+</tr>
+<tr>
+<td>1-DoF 폐루프 toy 확장(시연 생성 → 간단한 회귀 정책 4종 → P 서보에서 재생)</td>
+<td>✅ 설치 없이 가능(numpy, 수 분)</td>
+</tr>
+<tr>
+<td>공개 ALOHA 데이터(LeRobot 허브)의 effort·action·qpos로 δ–effort 관계와 접촉 검출 분석</td>
+<td>조건부. CPU로 충분하지만 데이터 다운로드 승인 필요</td>
+</tr>
+<tr>
+<td>시뮬레이션(MuJoCo, gym-aloha 계열)에서 ACT 네 변형 학습</td>
+<td>조건부. ACT는 작아서(hidden 512, ResNet18 백본) MPS로 학습 가능해 보이지만 torch·mujoco 설치 승인이 필요하고, 원조 ACT 코드는 <code>.cuda()</code> 하드코딩(D8)이라 수정하거나 LeRobot 구현을 써야 함. 8,000 epoch 전체 재현은 수 시간–하루 이상으로 예상(미측정)</td>
+</tr>
+<tr>
+<td>실물 재현</td>
+<td>불가. ALOHA Solo 하드웨어 필요</td>
+</tr>
+</tbody>
+</table>
+<p>장벽은 GPU보다 <strong>하드웨어와 접촉 과제 데이터</strong>입니다. ACT 자체는 작은 모델이라 GPU가 결정적이지 않습니다. 다만 시뮬레이터의 접촉·서보 모델이 실물 Dynamixel의 전류·마찰과 다르므로, 시뮬레이션 결과로 &quot;전류 대리값이 충분하다&quot;를 확인할 수는 없습니다.</p>
+<h3>4.3 아이디어만 다시 구현</h3>
+<p><strong>쉽습니다.</strong> 기존 ACT·LeRobot 파이프라인에서 세 줄짜리 변경입니다.</p>
+<ul>
+<li><strong>ACT + τ:</strong> proprio 입력에 effort를 이어 붙임(정규화 통계만 추가). ALOHA 데이터에는 effort가 이미 있음(D4).</li>
+<li><strong>ACT-o:</strong> 목표를 <code>action</code> 대신 미래 <code>qpos</code>로 바꿈.</li>
+<li><strong>ACT-o + τ:</strong> 둘 다.</li>
+</ul>
+<p>어려운 부분은 구현이 아니라 <strong>평가</strong>입니다. 이 논문의 빈칸을 채우려면 (1) 닦기 중 실제 접촉력(외부 F/T나 effort 로그), (2) qpos 이력·qvel 입력 대조군, (3) 여러 시드, (4) 판별 과제의 Youden J, (5) 재시도 없는 1회 성공률을 함께 보고해야 합니다. 그리고 <code>03</code> §1의 해석대로라면, leader가 없는 데이터에서 Base ACT식 구동 여유를 되살리는 방법은 τ를 입력에 넣는 것보다 <strong>목표에 넣는 것</strong>(q_target = q_follower + K_p⁻¹(τ − τ_g(q)), DexForce식)이 더 직접적입니다.</p>
+</section>
+<section class="chapter"><h1>02. 선행연구와 계보</h1>
+<p>번호 [n]은 논문의 참고문헌 번호입니다. 각 참고문헌을 따로 열어 검증하지는 않았습니다. &quot;내 사전 지식&quot;이라고 적은 항목은 논문 밖의 정보라 확인이 더 필요합니다.</p>
+<h2>1. 계보도</h2>
+<pre><code>[저비용 양팔 원격조작 + action chunk 모방학습]
+  ACT·ALOHA [1] (RSS 2023) → Mobile ALOHA [15] (CoRL 2024) → ALOHA Unleashed [16] (CoRL 2024)
+  ↳ leader 관절각을 행동으로 기록, follower는 P 위치 서보로 추종 → δ = q_leader − q_follower가 데이터에 자연히 생김
+        │
+[힘 정보를 모방학습에 넣는 두 갈래]
+  (a) 전용 센서: F/T few-shot IL [6] (RA-L 2025), CoinFT [12], UMI-FT [13] (ICRA 2026)
+  (b) 대형 모델에 힘·토크 융합: TA-VLA [7] (CoRL 2025), ForceVLA [8] (NeurIPS 2025)
+        │
+[원격조작 방식 자체로 힘을 다루기]
+  양방향(bilateral) 제어 + ACT: Bi-ACT [9] (AIM 2024), Bi-LAT [10] (RO-MAN 2025)
+  햅틱 피드백 원격조작 + 가변 컴플라이언스 학습 [11] (IROS 2024)
+        │
+  ★ Beyond Implicit Force: 비양방향 leader-follower 데이터에서
+      (1) 목표를 follower 상태로 바꿔 δ를 지우고(ACT-o),
+      (2) 서보 전류 토크를 proprio 입력에 붙여(+τ) 회복되는지를 실물 2×2로 비교
+</code></pre>
+<p><strong>차별점 요약:</strong> [6]–[8], [12]–[13]은 전용 센서나 대규모 모델을 전제하고, [9]–[11]은 원격조작 장치를 바꿉니다. 이 논문은 장치를 바꾸지 않고, 이미 있는 데이터의 <strong>학습 목표</strong>와 <strong>입력 채널</strong>만 바꿔서 암묵적 단서와 명시적 대리값을 분리합니다. 실험 설계는 목표(leader/follower) × 입력(q/q + τ)의 2×2 요인 설계입니다.</p>
+<h2>2. 구성 요소별 출처</h2>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>출처</th>
+<th>이 논문에서의 쓰임</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>정책 구조</td>
+<td>ACT [1] (CVAE + Transformer, chunk)</td>
+<td>그대로. 목표와 입력 차원만 바꿈(Eq. 1, 3, 5)</td>
+</tr>
+<tr>
+<td>하드웨어</td>
+<td>ALOHA Solo, Interbotix ViperX-300s / WidowX-250s [14]</td>
+<td>한 팔 leader-follower, 카메라 3대, 50 Hz</td>
+</tr>
+<tr>
+<td>토크 대리값</td>
+<td>Dynamixel 서보 전류 × 토크 상수(τ = k_t I)</td>
+<td>보상 없이 입력. Foam Stop 분석에만 J(θ)로 말단 렌치 환산(Eq. 2, 4)</td>
+</tr>
+<tr>
+<td>평가 지표</td>
+<td>과제 성공률 [9]–[11]</td>
+<td>Table IV, Foam Stop만 F_x 곡선</td>
+</tr>
+<tr>
+<td>비교 기준선</td>
+<td>Diffusion Policy [5]는 언급만, VLA [2]–[4]는 동기</td>
+<td>실험 비교는 ACT 변형끼리만</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>연결점</th>
+<th>이 논문을 읽는 데 주는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DexForce</strong> (<code>dexforce/</code>, arXiv:2501.10356)</td>
+<td>관측 위치에 측정 힘을 더한 force-informed 목표 x_f = x_o + k_f f, 재생 힘 배율 G(k_f, k_e)</td>
+<td>leader-follower 원격조작은 k_f = 1/K_p인 force-informed 목표를 <strong>센서 없이</strong> 만든다. Base ACT = G ≈ 1, ACT-o = G(0) ≈ 0(+ 중력). ACT-o의 붕괴는 DexForce가 &quot;관측 위치만 쓰면 누르지 못한다&quot;고 보인 것과 같은 현상(<code>03</code> §1.2)</td>
+</tr>
+<tr>
+<td><strong>Contact-Grounded Policy</strong> (<code>contact_grounded_policy/</code>, arXiv:2603.05687)</td>
+<td>미래의 <strong>실제 로봇 상태</strong>와 촉각을 예측하고, 학습된 contact-consistency mapping M_φ(x, u)로 compliance 제어기 목표(â = x̂ + Δ)를 만든다</td>
+<td>ACT-o + τ는 CGP에서 M_φ를 뺀 형태다. follower 상태를 예측하고 힘 신호를 보지만, 그것을 명령 여유로 바꾸는 단계가 없다. <code>03</code> §5의 &quot;ACT-o + τ는 어떻게 누르는가&quot; 질문에 CGP가 구조적 답을 준다</td>
+</tr>
+<tr>
+<td><strong>NestDex</strong> (<code>nestdex/</code>, arXiv:2608.13362)</td>
+<td>leader-follower 팔 + ACT식 chunk·temporal ensembling. inner 손 정책 입력이 <strong>30스텝 × [관절 위치, 관절 effort]</strong></td>
+<td>NestDex는 effort를 <strong>이력과 함께</strong> 넣었다. 이 논문은 한 프레임만 넣었다(<code>03</code> §2의 qpos 이력 대조군과 같은 축). NestDex 공개 데이터에서 유지 effort가 잡기 성공을 AUC 0.91로 갈랐던 것은 전류 대리값이 수 N 수준 사건에는 충분하다는 이 논문의 결과와 맞다</td>
+</tr>
+<tr>
+<td><strong>Real-Time Force Regulation</strong> (<code>reactive_grasp/</code>, arXiv:2609.30082)</td>
+<td>촉각 없이 관절 토크로 접촉력을 분배하는 QP. 명령 토크 τ = Jᵀ f는 Jᵀ의 null space 성분을 담지 못한다</td>
+<td>반대 방향(측정 토크 → 말단 힘)에도 같은 사영 문제가 있다. Foam Stop의 F_x는 J(θ)⁻ᵀ 환산이라 특이 자세 근처에서 잡음이 커지고, 중력 G(q)를 빼지 않으면 자세 차이가 힘 차이로 보인다(<code>03</code> §7)</td>
+</tr>
+<tr>
+<td><strong>GPT-as-Tactile-Policy</strong> (<code>gpt6_astra_tactile/</code>, arXiv:2610.28457)</td>
+<td>지식 × 관측 2×2 요인 설계와 반사실 입력 개입으로 &quot;정말 촉각을 쓰는가&quot;를 가림</td>
+<td>이 논문도 목표 × 입력 2×2다. 상호작용을 계산하면 τ의 효과는 δ가 없을 때 훨씬 크다(Wipe: leader 목표에서 +30%p, follower 목표에서 +80%p, <code>03</code> §6). 반사실 개입(무른 병에 단단한 병의 토크를 넣기)은 하지 않아서, 정책이 τ를 &quot;따르는지&quot;는 아직 모른다</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 논문이 다루지 않았지만 관련 있는 연구 (내 판단)</h2>
+<table>
+<thead>
+<tr>
+<th>연구</th>
+<th>관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DexForce (arXiv:2501.10356)</td>
+<td>§3. 힘을 입력이 아니라 <strong>목표</strong>에 넣는 대안. 논문은 인용하지 않음</td>
+</tr>
+<tr>
+<td>Contact-Grounded Policy (arXiv:2603.05687)</td>
+<td>§3. 상태 예측 + 명령 변환</td>
+</tr>
+<tr>
+<td>Adaptive Compliance Policy (Hou et al., 2024, 내 사전 지식)</td>
+<td>6축 F/T로 목표 자세와 함께 강성을 예측. 위치 서보의 고정 K_p 대신 컴플라이언스를 정책이 고르는 방향</td>
+</tr>
+<tr>
+<td>FACTR (Liu et al., 2025, 내 사전 지식)</td>
+<td>leader-follower에 힘 피드백을 주고 외부 관절 토크를 정책 입력으로 쓰는 커리큘럼. 이 논문의 ACT + τ와 가장 가까운데 인용되지 않음</td>
+</tr>
+<tr>
+<td>Reactive Diffusion Policy (Xue et al., RSS 2025, 내 사전 지식)</td>
+<td>느린 정책 + 빠른 촉각·힘 반응 루프. 이 논문의 chunk 2 s 열린 루프 문제(<code>03</code> §8)에 대한 구조적 해법</td>
+</tr>
+<tr>
+<td>LeRobot ACT 구현 (<code>huggingface/lerobot</code>)</td>
+<td>공개 ALOHA 데이터셋과 ACT 구현을 함께 제공. 이 논문 변형을 재구현할 가장 쉬운 기반(<code>04</code> §4)</td>
+</tr>
+</tbody>
+</table>
+<h2>5. GitHub와 공개 자료 (2026-11-09 확인)</h2>
+<p>논문의 공식 코드, 데이터, 프로젝트 페이지는 찾지 못했습니다(arXiv abs 페이지에 링크 없음, 본문에 링크 없음, <code>gh search repos</code>로 제목·저자 검색). 아래는 기반·관련 저장소입니다. 별 수와 마지막 push는 GitHub API 값입니다.</p>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>관계</th>
+<th>라이선스</th>
+<th>★</th>
+<th>마지막 push</th>
+<th>대조 commit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tonyzhaozh/act</code></td>
+<td>ACT 원조 구현 [1]. 논문의 기반</td>
+<td>MIT</td>
+<td>2,330</td>
+<td>2024-07-23</td>
+<td><code>742c753</code> (2024-01-28)</td>
+</tr>
+<tr>
+<td><code>tonyzhaozh/aloha</code></td>
+<td>ALOHA 원조 수집·제어 코드(서보 게인, effort 기록)</td>
+<td>MIT</td>
+<td>2,362</td>
+<td>2024-04-19</td>
+<td><code>06369f0</code> (2024-04-19)</td>
+</tr>
+<tr>
+<td><code>MarkFzp/act-plus-plus</code></td>
+<td>Mobile ALOHA [15]의 ACT·Diffusion Policy 구현</td>
+<td>MIT</td>
+<td>3,674</td>
+<td>2024-05-15</td>
+<td>대조 안 함</td>
+</tr>
+<tr>
+<td><code>huggingface/lerobot</code></td>
+<td>ACT 구현 + 공개 ALOHA 데이터셋</td>
+<td>Apache-2.0</td>
+<td>28,764</td>
+<td>2026-11-08</td>
+<td>대조 안 함</td>
+</tr>
+<tr>
+<td><code>Interbotix/interbotix_ros_manipulators</code></td>
+<td>ViperX·WidowX ROS 드라이버 [14]</td>
+<td>BSD-3-Clause</td>
+<td>183</td>
+<td>2025-08-08</td>
+<td>대조 안 함</td>
+</tr>
+<tr>
+<td><code>ft-robotic/ForceVLA</code></td>
+<td>ForceVLA [8] 공식 코드</td>
+<td>Apache-2.0</td>
+<td>118</td>
+<td>2026-11-05</td>
+<td>대조 안 함</td>
+</tr>
+<tr>
+<td><code>ZZongzheng0918/Torque-Aware-VLA.github.io</code></td>
+<td>TA-VLA [7] 프로젝트 페이지(코드 아님)</td>
+<td>표기 없음</td>
+<td>1</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Bi-ACT [9], Bi-LAT [10]의 공개 저장소는 찾지 못했습니다.</li>
+<li>Trossen Robotics의 ALOHA Solo 전용 저장소(<code>TrossenRobotics/aloha</code>)는 API에서 404였습니다. 논문의 서보 게인이 원조 ALOHA(D1)와 같은지는 확인하지 못했습니다.</li>
+</ul>
+</section></body></html>

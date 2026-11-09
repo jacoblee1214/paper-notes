@@ -1,0 +1,756 @@
+{
+ "T1_table1": {
+  "pi05": {
+   "counts": {
+    "Lightbulb-A": "7/25",
+    "Lightbulb-I": "2/25",
+    "Plug-A": "9/25",
+    "Plug-I": "5/25",
+    "Peg-A": "7/15",
+    "Peg-I": "6/15",
+    "Transfer": "4/15",
+    "Wiping": "3/15"
+   },
+   "avg_8col_recomputed": 28.18,
+   "avg_reported": 28.2,
+   "avg_matches": true,
+   "task_success_5task_mean": 22.94,
+   "task_success_pooled": "20/95",
+   "task_success_pooled_pct": 21.1,
+   "task_success_pooled_wilson95": [
+    0.141,
+    0.303
+   ]
+  },
+  "DP_woT": {
+   "counts": {
+    "Lightbulb-A": "5/25",
+    "Lightbulb-I": "0/25",
+    "Plug-A": "7/25",
+    "Plug-I": "4/25",
+    "Peg-A": "6/15",
+    "Peg-I": "4/15",
+    "Transfer": "2/15",
+    "Wiping": "1/15"
+   },
+   "avg_8col_recomputed": 18.84,
+   "avg_reported": 18.8,
+   "avg_matches": true,
+   "task_success_5task_mean": 12.54,
+   "task_success_pooled": "11/95",
+   "task_success_pooled_pct": 11.6,
+   "task_success_pooled_wilson95": [
+    0.066,
+    0.196
+   ]
+  },
+  "pi05_T-ResNet": {
+   "counts": {
+    "Lightbulb-A": "4/25",
+    "Lightbulb-I": "0/25",
+    "Plug-A": "8/25",
+    "Plug-I": "6/25",
+    "Peg-A": "6/15",
+    "Peg-I": "6/15",
+    "Transfer": "3/15",
+    "Wiping": "2/15"
+   },
+   "avg_8col_recomputed": 23.16,
+   "avg_reported": 23.2,
+   "avg_matches": true,
+   "task_success_5task_mean": 19.46,
+   "task_success_pooled": "17/95",
+   "task_success_pooled_pct": 17.9,
+   "task_success_pooled_wilson95": [
+    0.115,
+    0.268
+   ]
+  },
+  "pi05_T-UniT": {
+   "counts": {
+    "Lightbulb-A": "7/25",
+    "Lightbulb-I": "3/25",
+    "Plug-A": "10/25",
+    "Plug-I": "8/25",
+    "Peg-A": "11/15",
+    "Peg-I": "8/15",
+    "Transfer": "10/15",
+    "Wiping": "5/15"
+   },
+   "avg_8col_recomputed": 42.33,
+   "avg_reported": 42.3,
+   "avg_matches": true,
+   "task_success_5task_mean": 39.46,
+   "task_success_pooled": "34/95",
+   "task_success_pooled_pct": 35.8,
+   "task_success_pooled_wilson95": [
+    0.269,
+    0.458
+   ]
+  },
+  "DP_T-ResTac": {
+   "counts": {
+    "Lightbulb-A": "8/25",
+    "Lightbulb-I": "3/25",
+    "Plug-A": "8/25",
+    "Plug-I": "7/25",
+    "Peg-A": "10/15",
+    "Peg-I": "9/15",
+    "Transfer": "6/15",
+    "Wiping": "5/15"
+   },
+   "avg_8col_recomputed": 38.0,
+   "avg_reported": 38.0,
+   "avg_matches": true,
+   "task_success_5task_mean": 34.66,
+   "task_success_pooled": "30/95",
+   "task_success_pooled_pct": 31.6,
+   "task_success_pooled_wilson95": [
+    0.231,
+    0.415
+   ]
+  },
+  "ResTacVLA": {
+   "counts": {
+    "Lightbulb-A": "14/25",
+    "Lightbulb-I": "8/25",
+    "Plug-A": "17/25",
+    "Plug-I": "15/25",
+    "Peg-A": "13/15",
+    "Peg-I": "12/15",
+    "Transfer": "9/15",
+    "Wiping": "9/15"
+   },
+   "avg_8col_recomputed": 62.84,
+   "avg_reported": 62.8,
+   "avg_matches": true,
+   "task_success_5task_mean": 58.4,
+   "task_success_pooled": "53/95",
+   "task_success_pooled_pct": 55.8,
+   "task_success_pooled_wilson95": [
+    0.458,
+    0.654
+   ]
+  }
+ },
+ "T2_headline_claims": {
+  "up_to_86.7_is_column": "Peg-A",
+  "best_task_success_column(final_phase)": [
+   80.0,
+   "Peg-in-Hole"
+  ],
+  "+34.6_is_pp_vs_pi05": 34.6,
+  "relative_gain_vs_pi05_pct": 122.7,
+  "+44.0_is_pp_vs_DP_woT": 44.0,
+  "+19.2_is_pp_DP_T-ResTac_vs_DP_woT": 19.2,
+  "pp_vs_strongest_baseline_T-UniT(8col)": 20.5,
+  "pp_vs_T-UniT(5task_mean)": 18.9,
+  "pp_vs_pi05(5task_mean)": 35.5,
+  "note": "8칸 평균은 A(정렬)와 I(완료)를 같은 무게로 섞는다. 두 단계 과제는 A ≥ I이므로 8칸 평균이 과제 성공률보다 높다."
+ },
+ "T3_significance": {
+  "ResTacVLA_vs_pi05": {
+   "Lightbulb": {
+    "ours": "8/25",
+    "base": "2/25",
+    "ours_wilson95": [
+     0.172,
+     0.516
+    ],
+    "base_wilson95": [
+     0.022,
+     0.25
+    ],
+    "fisher_p": 0.0738,
+    "holm_p": 0.242
+   },
+   "Plug": {
+    "ours": "15/25",
+    "base": "5/25",
+    "ours_wilson95": [
+     0.407,
+     0.766
+    ],
+    "base_wilson95": [
+     0.089,
+     0.391
+    ],
+    "fisher_p": 0.00858,
+    "holm_p": 0.0429
+   },
+   "Peg-in-Hole": {
+    "ours": "12/15",
+    "base": "6/15",
+    "ours_wilson95": [
+     0.548,
+     0.93
+    ],
+    "base_wilson95": [
+     0.198,
+     0.643
+    ],
+    "fisher_p": 0.0604,
+    "holm_p": 0.242
+   },
+   "Transfer": {
+    "ours": "9/15",
+    "base": "4/15",
+    "ours_wilson95": [
+     0.357,
+     0.802
+    ],
+    "base_wilson95": [
+     0.109,
+     0.52
+    ],
+    "fisher_p": 0.139,
+    "holm_p": 0.242
+   },
+   "Wiping": {
+    "ours": "9/15",
+    "base": "3/15",
+    "ours_wilson95": [
+     0.357,
+     0.802
+    ],
+    "base_wilson95": [
+     0.07,
+     0.452
+    ],
+    "fisher_p": 0.0604,
+    "holm_p": 0.242
+   },
+   "pooled_CMH(5 tasks, final phase)": {
+    "chi2": 25.37,
+    "p": 4.73e-07,
+    "MH_odds_ratio": 5.48
+   },
+   "pooled_CMH(3 tasks, Alignment)": {
+    "chi2": 13.756,
+    "p": 0.000208,
+    "MH_odds_ratio": 4.05
+   }
+  },
+  "ResTacVLA_vs_pi05_T-UniT": {
+   "Lightbulb": {
+    "ours": "8/25",
+    "base": "3/25",
+    "ours_wilson95": [
+     0.172,
+     0.516
+    ],
+    "base_wilson95": [
+     0.042,
+     0.3
+    ],
+    "fisher_p": 0.171,
+    "holm_p": 0.682
+   },
+   "Plug": {
+    "ours": "15/25",
+    "base": "8/25",
+    "ours_wilson95": [
+     0.407,
+     0.766
+    ],
+    "base_wilson95": [
+     0.172,
+     0.516
+    ],
+    "fisher_p": 0.0877,
+    "holm_p": 0.438
+   },
+   "Peg-in-Hole": {
+    "ours": "12/15",
+    "base": "8/15",
+    "ours_wilson95": [
+     0.548,
+     0.93
+    ],
+    "base_wilson95": [
+     0.301,
+     0.752
+    ],
+    "fisher_p": 0.245,
+    "holm_p": 0.735
+   },
+   "Transfer": {
+    "ours": "9/15",
+    "base": "10/15",
+    "ours_wilson95": [
+     0.357,
+     0.802
+    ],
+    "base_wilson95": [
+     0.417,
+     0.848
+    ],
+    "fisher_p": 1.0,
+    "holm_p": 1.0
+   },
+   "Wiping": {
+    "ours": "9/15",
+    "base": "5/15",
+    "ours_wilson95": [
+     0.357,
+     0.802
+    ],
+    "base_wilson95": [
+     0.152,
+     0.583
+    ],
+    "fisher_p": 0.272,
+    "holm_p": 0.735
+   },
+   "pooled_CMH(5 tasks, final phase)": {
+    "chi2": 8.346,
+    "p": 0.00387,
+    "MH_odds_ratio": 2.48
+   },
+   "pooled_CMH(3 tasks, Alignment)": {
+    "chi2": 8.514,
+    "p": 0.00352,
+    "MH_odds_ratio": 3.07
+   }
+  },
+  "ResTacVLA_vs_pi05_T-ResNet": {
+   "Lightbulb": {
+    "ours": "8/25",
+    "base": "0/25",
+    "ours_wilson95": [
+     0.172,
+     0.516
+    ],
+    "base_wilson95": [
+     0.0,
+     0.133
+    ],
+    "fisher_p": 0.00403,
+    "holm_p": 0.0201
+   },
+   "Plug": {
+    "ours": "15/25",
+    "base": "6/25",
+    "ours_wilson95": [
+     0.407,
+     0.766
+    ],
+    "base_wilson95": [
+     0.115,
+     0.434
+    ],
+    "fisher_p": 0.0209,
+    "holm_p": 0.0834
+   },
+   "Peg-in-Hole": {
+    "ours": "12/15",
+    "base": "6/15",
+    "ours_wilson95": [
+     0.548,
+     0.93
+    ],
+    "base_wilson95": [
+     0.198,
+     0.643
+    ],
+    "fisher_p": 0.0604,
+    "holm_p": 0.121
+   },
+   "Transfer": {
+    "ours": "9/15",
+    "base": "3/15",
+    "ours_wilson95": [
+     0.357,
+     0.802
+    ],
+    "base_wilson95": [
+     0.07,
+     0.452
+    ],
+    "fisher_p": 0.0604,
+    "holm_p": 0.121
+   },
+   "Wiping": {
+    "ours": "9/15",
+    "base": "2/15",
+    "ours_wilson95": [
+     0.357,
+     0.802
+    ],
+    "base_wilson95": [
+     0.037,
+     0.379
+    ],
+    "fisher_p": 0.0209,
+    "holm_p": 0.0834
+   },
+   "pooled_CMH(5 tasks, final phase)": {
+    "chi2": 31.313,
+    "p": 2.2e-08,
+    "MH_odds_ratio": 7.43
+   },
+   "pooled_CMH(3 tasks, Alignment)": {
+    "chi2": 21.313,
+    "p": 3.9e-06,
+    "MH_odds_ratio": 6.08
+   }
+  },
+  "DP_T-ResTac_vs_DP_woT": {
+   "per_task_fisher_p": {
+    "Lightbulb": 0.235,
+    "Plug": 0.496,
+    "Peg-in-Hole": 0.139,
+    "Transfer": 0.215,
+    "Wiping": 0.169
+   },
+   "pooled_CMH": {
+    "chi2": 11.919,
+    "p": 0.000556,
+    "MH_odds_ratio": 3.99
+   }
+  },
+  "T-ResNet_degrades_Lightbulb-A": {
+   "pi05": "7/25",
+   "T-ResNet": "4/25",
+   "fisher_p": 0.496
+  }
+ },
+ "T4_phase_decomposition": {
+  "Lightbulb": {
+   "pi05": {
+    "A": "7/25",
+    "I": "2/25",
+    "P(I|A)": 0.286
+   },
+   "DP_woT": {
+    "A": "5/25",
+    "I": "0/25",
+    "P(I|A)": 0.0
+   },
+   "pi05_T-ResNet": {
+    "A": "4/25",
+    "I": "0/25",
+    "P(I|A)": 0.0
+   },
+   "pi05_T-UniT": {
+    "A": "7/25",
+    "I": "3/25",
+    "P(I|A)": 0.429
+   },
+   "DP_T-ResTac": {
+    "A": "8/25",
+    "I": "3/25",
+    "P(I|A)": 0.375
+   },
+   "ResTacVLA": {
+    "A": "14/25",
+    "I": "8/25",
+    "P(I|A)": 0.571
+   }
+  },
+  "Plug": {
+   "pi05": {
+    "A": "9/25",
+    "I": "5/25",
+    "P(I|A)": 0.556
+   },
+   "DP_woT": {
+    "A": "7/25",
+    "I": "4/25",
+    "P(I|A)": 0.571
+   },
+   "pi05_T-ResNet": {
+    "A": "8/25",
+    "I": "6/25",
+    "P(I|A)": 0.75
+   },
+   "pi05_T-UniT": {
+    "A": "10/25",
+    "I": "8/25",
+    "P(I|A)": 0.8
+   },
+   "DP_T-ResTac": {
+    "A": "8/25",
+    "I": "7/25",
+    "P(I|A)": 0.875
+   },
+   "ResTacVLA": {
+    "A": "17/25",
+    "I": "15/25",
+    "P(I|A)": 0.882
+   }
+  },
+  "Peg-in-Hole": {
+   "pi05": {
+    "A": "7/15",
+    "I": "6/15",
+    "P(I|A)": 0.857
+   },
+   "DP_woT": {
+    "A": "6/15",
+    "I": "4/15",
+    "P(I|A)": 0.667
+   },
+   "pi05_T-ResNet": {
+    "A": "6/15",
+    "I": "6/15",
+    "P(I|A)": 1.0
+   },
+   "pi05_T-UniT": {
+    "A": "11/15",
+    "I": "8/15",
+    "P(I|A)": 0.727
+   },
+   "DP_T-ResTac": {
+    "A": "10/15",
+    "I": "9/15",
+    "P(I|A)": 0.9
+   },
+   "ResTacVLA": {
+    "A": "13/15",
+    "I": "12/15",
+    "P(I|A)": 0.923
+   }
+  },
+  "log_decomposition_3tasks": {
+   "ResTacVLA_vs_pi05": {
+    "A_sum": "44 vs 23",
+    "I_sum": "35 vs 13",
+    "ratio_I": 2.692,
+    "ratio_A": 1.913,
+    "ratio_P(I|A)": 1.407,
+    "share_of_log_gain_from_A": 0.655,
+    "P(I|A)_fisher_p(pooled)": 0.0848
+   },
+   "ResTacVLA_vs_pi05_T-UniT": {
+    "A_sum": "44 vs 28",
+    "I_sum": "35 vs 19",
+    "ratio_I": 1.842,
+    "ratio_A": 1.571,
+    "ratio_P(I|A)": 1.172,
+    "share_of_log_gain_from_A": 0.74,
+    "P(I|A)_fisher_p(pooled)": 0.28
+   }
+  }
+ },
+ "T5_table2_ablation": {
+  "Full": {
+   "avg": 60.0,
+   "possible_(plug/25, wiping/15)": [
+    [
+     5,
+     15
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     15,
+     9
+    ],
+    [
+     20,
+     6
+    ],
+    [
+     25,
+     3
+    ]
+   ]
+  },
+  "w/o VQ": {
+   "avg": 33.3,
+   "possible_(plug/25, wiping/15)": [
+    [
+     0,
+     10
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     10,
+     4
+    ],
+    [
+     15,
+     1
+    ]
+   ]
+  },
+  "w/o Gating": {
+   "avg": 46.7,
+   "possible_(plug/25, wiping/15)": [
+    [
+     0,
+     14
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     10,
+     8
+    ],
+    [
+     15,
+     5
+    ],
+    [
+     20,
+     2
+    ]
+   ]
+  },
+  "pi05": {
+   "avg": 20.0,
+   "possible_(plug/25, wiping/15)": [
+    [
+     0,
+     6
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     10,
+     0
+    ]
+   ]
+  },
+  "consistency": {
+   "Full_vs_TableI(Plug-I, Wiping)": 60.0,
+   "pi05_vs_TableI": 20.0,
+   "T-UniT_same_two_tasks(TableI)": 32.65,
+   "w/o_VQ_minus_T-UniT_pp": 0.65,
+   "note": "w/o VQ(연속 잔차, 게이트 유지로 읽힘)가 같은 두 과제의 T-UniT(원시 UniT 특징)와 같은 수준이다."
+  }
+ },
+ "T6_robustness_drop": {
+  "pi05": {
+   "Dynamic": {
+    "perturbed": "4/15",
+    "nominal(TableI)": "6/15",
+    "drop_pp": -13.3,
+    "fisher_p_vs_nominal": 0.7
+   },
+   "Height(+)": {
+    "perturbed": "5/15",
+    "nominal(TableI)": "3/15",
+    "drop_pp": 13.3,
+    "fisher_p_vs_nominal": 0.682
+   },
+   "Height(-)": {
+    "perturbed": "0/15",
+    "nominal(TableI)": "3/15",
+    "drop_pp": -20.0,
+    "fisher_p_vs_nominal": 0.224
+   },
+   "Grasp": {
+    "perturbed": "2/25",
+    "nominal(TableI)": "5/25",
+    "drop_pp": -12.0,
+    "fisher_p_vs_nominal": 0.417
+   }
+  },
+  "pi05_T-UniT": {
+   "Dynamic": {
+    "perturbed": "6/15",
+    "nominal(TableI)": "8/15",
+    "drop_pp": -13.3,
+    "fisher_p_vs_nominal": 0.715
+   },
+   "Height(+)": {
+    "perturbed": "7/15",
+    "nominal(TableI)": "5/15",
+    "drop_pp": 13.4,
+    "fisher_p_vs_nominal": 0.71
+   },
+   "Height(-)": {
+    "perturbed": "2/15",
+    "nominal(TableI)": "5/15",
+    "drop_pp": -20.0,
+    "fisher_p_vs_nominal": 0.39
+   },
+   "Grasp": {
+    "perturbed": "5/25",
+    "nominal(TableI)": "8/25",
+    "drop_pp": -12.0,
+    "fisher_p_vs_nominal": 0.52
+   }
+  },
+  "ResTacVLA": {
+   "Dynamic": {
+    "perturbed": "10/15",
+    "nominal(TableI)": "12/15",
+    "drop_pp": -13.3,
+    "fisher_p_vs_nominal": 0.682
+   },
+   "Height(+)": {
+    "perturbed": "8/15",
+    "nominal(TableI)": "9/15",
+    "drop_pp": -6.7,
+    "fisher_p_vs_nominal": 1.0
+   },
+   "Height(-)": {
+    "perturbed": "6/15",
+    "nominal(TableI)": "9/15",
+    "drop_pp": -20.0,
+    "fisher_p_vs_nominal": 0.466
+   },
+   "Grasp": {
+    "perturbed": "13/25",
+    "nominal(TableI)": "15/25",
+    "drop_pp": -8.0,
+    "fisher_p_vs_nominal": 0.776
+   }
+  },
+  "note": "Dynamic은 세 방법 모두 −13.3pp(−2/15), Height(−)는 모두 −20.0pp(−3/15)로 같다. 강건성 표의 차이는 교란 없는 성능 차이가 그대로 옮겨온 것이다."
+ },
+ "T7_column_ranks": {
+  "Lightbulb-A": {
+   "best": "ResTacVLA",
+   "best_value": 56.0,
+   "ours_rank": 1
+  },
+  "Lightbulb-I": {
+   "best": "ResTacVLA",
+   "best_value": 32.0,
+   "ours_rank": 1
+  },
+  "Plug-A": {
+   "best": "ResTacVLA",
+   "best_value": 68.0,
+   "ours_rank": 1
+  },
+  "Plug-I": {
+   "best": "ResTacVLA",
+   "best_value": 60.0,
+   "ours_rank": 1
+  },
+  "Peg-A": {
+   "best": "ResTacVLA",
+   "best_value": 86.7,
+   "ours_rank": 1
+  },
+  "Peg-I": {
+   "best": "ResTacVLA",
+   "best_value": 80.0,
+   "ours_rank": 1
+  },
+  "Transfer": {
+   "best": "pi05_T-UniT",
+   "best_value": 66.7,
+   "ours_rank": 2
+  },
+  "Wiping": {
+   "best": "ResTacVLA",
+   "best_value": 60.0,
+   "ours_rank": 1
+  }
+ }
+}

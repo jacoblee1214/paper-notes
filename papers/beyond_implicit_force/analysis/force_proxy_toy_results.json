@@ -1,0 +1,190 @@
+{
+  "assumptions": {
+    "Kp_eef_N_per_m": 800.0,
+    "mg_N": 1.5,
+    "F_demo_N": 6.0,
+    "F_min_N": 2.0
+  },
+  "T1_actuation": {
+    "k_e=2000": {
+      "z_leader_mm": 8.62,
+      "z_follower_mm": 3.0,
+      "margin_mm": 5.63,
+      "force_replay_leader_N": 6.0,
+      "force_replay_follower_N": 2.79,
+      "follower_over_demo": 0.464,
+      "sigma_mm": [
+        0.5,
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ],
+      "P(F>=F_min)": {
+        "leader_target": [
+          1.0,
+          1.0,
+          1.0,
+          0.959,
+          0.808
+        ],
+        "follower_target": [
+          0.997,
+          0.915,
+          0.756,
+          0.633,
+          0.57
+        ]
+      },
+      "P(contact)": {
+        "leader_target": [
+          1.0,
+          1.0,
+          1.0,
+          0.995,
+          0.902
+        ],
+        "follower_target": [
+          1.0,
+          1.0,
+          0.991,
+          0.884,
+          0.724
+        ]
+      },
+      "gravity_sag_mm": 1.88
+    },
+    "k_e=20000": {
+      "z_leader_mm": 5.93,
+      "z_follower_mm": 0.3,
+      "margin_mm": 5.63,
+      "force_replay_leader_N": 6.0,
+      "force_replay_follower_N": 1.67,
+      "follower_over_demo": 0.279,
+      "sigma_mm": [
+        0.5,
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ],
+      "P(F>=F_min)": {
+        "leader_target": [
+          1.0,
+          1.0,
+          0.995,
+          0.904,
+          0.742
+        ],
+        "follower_target": [
+          0.201,
+          0.337,
+          0.416,
+          0.46,
+          0.477
+        ]
+      },
+      "P(contact)": {
+        "leader_target": [
+          1.0,
+          1.0,
+          1.0,
+          0.972,
+          0.831
+        ],
+        "follower_target": [
+          1.0,
+          0.984,
+          0.855,
+          0.697,
+          0.603
+        ]
+      },
+      "gravity_sag_mm": 1.88
+    },
+    "k_e=200000": {
+      "z_leader_mm": 5.66,
+      "z_follower_mm": 0.03,
+      "margin_mm": 5.63,
+      "force_replay_leader_N": 6.0,
+      "force_replay_follower_N": 1.52,
+      "follower_over_demo": 0.253,
+      "sigma_mm": [
+        0.5,
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ],
+      "P(F>=F_min)": {
+        "leader_target": [
+          1.0,
+          1.0,
+          0.994,
+          0.899,
+          0.737
+        ],
+        "follower_target": [
+          0.111,
+          0.274,
+          0.381,
+          0.441,
+          0.473
+        ]
+      },
+      "P(contact)": {
+        "leader_target": [
+          1.0,
+          1.0,
+          1.0,
+          0.971,
+          0.825
+        ],
+        "follower_target": [
+          1.0,
+          0.967,
+          0.823,
+          0.679,
+          0.595
+        ]
+      },
+      "gravity_sag_mm": 1.88
+    }
+  },
+  "T2_sensing": {
+    "frames_after_contact": 5340,
+    "overlap_frames": 2965,
+    "overlap_z_max_mm": 6.04,
+    "balanced_acc_single_frame_qpos": 0.507,
+    "balanced_acc_single_frame_tau": 0.999,
+    "balanced_acc_qpos_history_5frames": 0.963,
+    "note": "ACT 입력은 현재 프레임 qpos와 이미지뿐(속도·이력 없음). 위치가 겹치는 구간에서 qpos 한 프레임은 강성을 못 가른다"
+  },
+  "T3_proxy_quality": {
+    "assumptions": {
+      "lever_m": 0.3,
+      "static_friction_Nm": 0.25,
+      "current_noise_Nm": 0.05
+    },
+    "detect_rate_at_5pct_false_alarm": {
+      "F=0.5N": 0.316,
+      "F=1N": 0.624,
+      "F=2N": 0.999,
+      "F=4N": 1.0,
+      "F=8N": 1.0
+    },
+    "min_force_band_N": 0.83,
+    "gravity": {
+      "raw_tau_TPR_at_5pct_FA": 0.842,
+      "after_pose_regression_TPR_at_5pct_FA": 1.0
+    }
+  },
+  "T4_discrepancy_vs_force": {
+    "R2_delta_vs_force_contact_only": 0.995,
+    "R2_delta_vs_force_whole_episode": 0.874,
+    "delta_free_motion_max_mm": 5.75,
+    "delta_contact_median_mm": 9.54,
+    "slope_N_per_mm_contact": 0.807,
+    "note": "준정적 접촉에서는 delta ∝ F(기울기 ≈ K_p). 빠른 자유 운동의 추종 지연도 delta를 만들어 전체 구간에서는 힘과 섞인다"
+  }
+}

@@ -1,0 +1,400 @@
+{
+  "C1_internal_consistency": {
+    "per_variant": {
+      "Base ACT": {
+        "bottle_overall_is_mode_mean": true,
+        "wipe_count_integer": true,
+        "plug_two_step_ge_one_step": true
+      },
+      "ACT + Torque": {
+        "bottle_overall_is_mode_mean": true,
+        "wipe_count_integer": true,
+        "plug_two_step_ge_one_step": true
+      },
+      "ACT-o": {
+        "bottle_overall_is_mode_mean": true,
+        "wipe_count_integer": true,
+        "plug_two_step_ge_one_step": true
+      },
+      "ACT-o + Torque": {
+        "bottle_overall_is_mode_mean": true,
+        "wipe_count_integer": true,
+        "plug_two_step_ge_one_step": true
+      }
+    },
+    "n_total": {
+      "bottle": 80,
+      "plug": 40,
+      "wipe": 80,
+      "foam_stop": 120,
+      "paper": [
+        80,
+        40,
+        80,
+        120
+      ]
+    }
+  },
+  "C2_pairwise_tests": {
+    "remove_cue (Base vs ACT-o)": {
+      "bottle": {
+        "a": [
+          10,
+          20
+        ],
+        "b": [
+          5,
+          20
+        ],
+        "fisher_p": 0.191,
+        "holm_p_within_comparison": 0.382
+      },
+      "plug": {
+        "a": [
+          3,
+          10
+        ],
+        "b": [
+          0,
+          10
+        ],
+        "fisher_p": 0.211,
+        "holm_p_within_comparison": 0.382
+      },
+      "wipe": {
+        "a": [
+          12,
+          20
+        ],
+        "b": [
+          3,
+          20
+        ],
+        "fisher_p": 0.00791,
+        "holm_p_within_comparison": 0.0237
+      },
+      "MH_pooled_3_tasks": {
+        "chi2": 13.187,
+        "p": 0.000282,
+        "common_OR": 5.59
+      }
+    },
+    "recover (ACT-o+τ vs ACT-o)": {
+      "bottle": {
+        "a": [
+          15,
+          20
+        ],
+        "b": [
+          5,
+          20
+        ],
+        "fisher_p": 0.00385,
+        "holm_p_within_comparison": 0.0077
+      },
+      "plug": {
+        "a": [
+          5,
+          10
+        ],
+        "b": [
+          0,
+          10
+        ],
+        "fisher_p": 0.0325,
+        "holm_p_within_comparison": 0.0325
+      },
+      "wipe": {
+        "a": [
+          19,
+          20
+        ],
+        "b": [
+          3,
+          20
+        ],
+        "fisher_p": 4.06e-07,
+        "holm_p_within_comparison": 1.22e-06
+      },
+      "MH_pooled_3_tasks": {
+        "chi2": 39.454,
+        "p": 3.36e-10,
+        "common_OR": 23.14
+      }
+    },
+    "improve_base (ACT+τ vs Base)": {
+      "bottle": {
+        "a": [
+          14,
+          20
+        ],
+        "b": [
+          10,
+          20
+        ],
+        "fisher_p": 0.333,
+        "holm_p_within_comparison": 0.358
+      },
+      "plug": {
+        "a": [
+          7,
+          10
+        ],
+        "b": [
+          3,
+          10
+        ],
+        "fisher_p": 0.179,
+        "holm_p_within_comparison": 0.358
+      },
+      "wipe": {
+        "a": [
+          18,
+          20
+        ],
+        "b": [
+          12,
+          20
+        ],
+        "fisher_p": 0.0648,
+        "holm_p_within_comparison": 0.194
+      },
+      "MH_pooled_3_tasks": {
+        "chi2": 8.596,
+        "p": 0.00337,
+        "common_OR": 3.75
+      }
+    },
+    "explicit_only_vs_base (ACT-o+τ vs Base)": {
+      "bottle": {
+        "a": [
+          15,
+          20
+        ],
+        "b": [
+          10,
+          20
+        ],
+        "fisher_p": 0.191,
+        "holm_p_within_comparison": 0.382
+      },
+      "plug": {
+        "a": [
+          5,
+          10
+        ],
+        "b": [
+          3,
+          10
+        ],
+        "fisher_p": 0.65,
+        "holm_p_within_comparison": 0.65
+      },
+      "wipe": {
+        "a": [
+          19,
+          20
+        ],
+        "b": [
+          12,
+          20
+        ],
+        "fisher_p": 0.0197,
+        "holm_p_within_comparison": 0.059
+      },
+      "MH_pooled_3_tasks": {
+        "chi2": 8.982,
+        "p": 0.00273,
+        "common_OR": 4.04
+      }
+    },
+    "hybrid_vs_explicit (ACT+τ vs ACT-o+τ)": {
+      "bottle": {
+        "a": [
+          14,
+          20
+        ],
+        "b": [
+          15,
+          20
+        ],
+        "fisher_p": 1.0,
+        "holm_p_within_comparison": 1.0
+      },
+      "plug": {
+        "a": [
+          7,
+          10
+        ],
+        "b": [
+          5,
+          10
+        ],
+        "fisher_p": 0.65,
+        "holm_p_within_comparison": 1.0
+      },
+      "wipe": {
+        "a": [
+          18,
+          20
+        ],
+        "b": [
+          19,
+          20
+        ],
+        "fisher_p": 1.0,
+        "holm_p_within_comparison": 1.0
+      },
+      "MH_pooled_3_tasks": {
+        "chi2": 0.0,
+        "p": 1.0,
+        "common_OR": 1.0
+      }
+    },
+    "bottle_high_only": {
+      "ACT + Torque vs Base ACT": 0.000714,
+      "ACT-o + Torque vs ACT-o": 0.0031,
+      "ACT-o + Torque vs Base ACT": 0.0031
+    }
+  },
+  "C2b_wilson_95": {
+    "Base ACT": {
+      "bottle": [
+        0.299,
+        0.701
+      ],
+      "plug": [
+        0.108,
+        0.603
+      ],
+      "wipe": [
+        0.387,
+        0.781
+      ]
+    },
+    "ACT + Torque": {
+      "bottle": [
+        0.481,
+        0.855
+      ],
+      "plug": [
+        0.397,
+        0.892
+      ],
+      "wipe": [
+        0.699,
+        0.972
+      ]
+    },
+    "ACT-o": {
+      "bottle": [
+        0.112,
+        0.469
+      ],
+      "plug": [
+        0.0,
+        0.278
+      ],
+      "wipe": [
+        0.052,
+        0.36
+      ]
+    },
+    "ACT-o + Torque": {
+      "bottle": [
+        0.531,
+        0.888
+      ],
+      "plug": [
+        0.237,
+        0.763
+      ],
+      "wipe": [
+        0.764,
+        0.991
+      ]
+    }
+  },
+  "C3_bottle_as_discrimination": {
+    "Base ACT": {
+      "overall": 0.5,
+      "youden_J": 0.0,
+      "interpretation": "항상 누르는 정책과 같음"
+    },
+    "ACT + Torque": {
+      "overall": 0.7,
+      "youden_J": 0.4,
+      "interpretation": "판별함"
+    },
+    "ACT-o": {
+      "overall": 0.25,
+      "youden_J": -0.5,
+      "interpretation": "판별 신호 없음(J≤0)"
+    },
+    "ACT-o + Torque": {
+      "overall": 0.75,
+      "youden_J": 0.5,
+      "interpretation": "판별함"
+    },
+    "always_press_policy_overall": 0.5
+  },
+  "C4_plug_second_attempt": {
+    "Base ACT": {
+      "one_step": 0.2,
+      "one_or_two": 0.3,
+      "gain_from_retry_pp": 10
+    },
+    "ACT + Torque": {
+      "one_step": 0.4,
+      "one_or_two": 0.7,
+      "gain_from_retry_pp": 30
+    },
+    "ACT-o": {
+      "one_step": 0.0,
+      "one_or_two": 0.0,
+      "gain_from_retry_pp": 0
+    },
+    "ACT-o + Torque": {
+      "one_step": 0.1,
+      "one_or_two": 0.5,
+      "gain_from_retry_pp": 40
+    }
+  },
+  "C5_hyperparams": {
+    "act_readme_default": {
+      "kl_weight": 10,
+      "chunk_size": 100,
+      "hidden_dim": 512,
+      "batch_size": 8,
+      "dim_feedforward": 3200,
+      "num_epochs": 2000,
+      "lr": 1e-05
+    },
+    "paper_table3": {
+      "kl_weight": 10,
+      "chunk_size": 100,
+      "hidden_dim": 512,
+      "batch_size": 16,
+      "dim_feedforward": 3200,
+      "num_epochs": 8000,
+      "lr": 2e-05
+    },
+    "differs": {
+      "batch_size": [
+        8,
+        16
+      ],
+      "num_epochs": [
+        2000,
+        8000
+      ],
+      "lr": [
+        1e-05,
+        2e-05
+      ]
+    },
+    "chunk_seconds_at_50Hz": 2.0,
+    "temporal_agg_mean_command_age_ms_if_used": 1153.9,
+    "note": "논문은 temporal ensembling 사용 여부를 적지 않음. 쓰지 않고 chunk를 그대로 실행하면 명령이 최대 2 s 동안 열린 루프"
+  }
+}
