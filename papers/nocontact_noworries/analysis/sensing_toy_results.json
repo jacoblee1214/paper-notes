@@ -1,0 +1,232 @@
+{
+ "settings": {
+  "T_frames": 60000,
+  "pi_contact": 0.4,
+  "window": 8,
+  "delta_rad": 0.05,
+  "alpha": 0.2,
+  "occlusion_rate": null
+ },
+ "scenarios": [
+  {
+   "sigma_e_rad": 0.005,
+   "kappa_speed_in_contact": 0.0,
+   "vision (occlusion-aware)": {
+    "auc": 0.8,
+    "f1_at_0.5": 0.673
+   },
+   "proprio |e|": {
+    "auc": 0.715,
+    "f1_at_0.5": 0.524
+   },
+   "proprio |e| + signed e": {
+    "auc": 0.72,
+    "f1_at_0.5": 0.534
+   },
+   "fusion (vision + |e|)": {
+    "auc": 0.803,
+    "f1_at_0.5": 0.672
+   },
+   "vision_occluded_f1": 0.703,
+   "vision_occluded_auc": 0.752,
+   "vision_occluded_contact_rate": 0.546,
+   "fusion_occluded_auc": 0.764,
+   "proprio_occluded_auc": 0.719,
+   "vision_visible_f1": 0.56,
+   "vision_visible_auc": 0.822,
+   "vision_visible_contact_rate": 0.189,
+   "fusion_visible_auc": 0.823,
+   "proprio_visible_auc": 0.714,
+   "spearman_absErr_vs_contact": 0.365,
+   "occlusion_rate_measured": 0.595,
+   "contact_rate_measured": 0.399
+  },
+  {
+   "sigma_e_rad": 0.005,
+   "kappa_speed_in_contact": -0.5,
+   "vision (occlusion-aware)": {
+    "auc": 0.806,
+    "f1_at_0.5": 0.678
+   },
+   "proprio |e|": {
+    "auc": 0.735,
+    "f1_at_0.5": 0.566
+   },
+   "proprio |e| + signed e": {
+    "auc": 0.739,
+    "f1_at_0.5": 0.57
+   },
+   "fusion (vision + |e|)": {
+    "auc": 0.81,
+    "f1_at_0.5": 0.678
+   },
+   "vision_occluded_f1": 0.707,
+   "vision_occluded_auc": 0.758,
+   "vision_occluded_contact_rate": 0.541,
+   "fusion_occluded_auc": 0.768,
+   "proprio_occluded_auc": 0.733,
+   "vision_visible_f1": 0.579,
+   "vision_visible_auc": 0.832,
+   "vision_visible_contact_rate": 0.196,
+   "fusion_visible_auc": 0.833,
+   "proprio_visible_auc": 0.74,
+   "spearman_absErr_vs_contact": 0.389,
+   "occlusion_rate_measured": 0.588,
+   "contact_rate_measured": 0.401
+  },
+  {
+   "sigma_e_rad": 0.005,
+   "kappa_speed_in_contact": 0.5,
+   "vision (occlusion-aware)": {
+    "auc": 0.802,
+    "f1_at_0.5": 0.682
+   },
+   "proprio |e|": {
+    "auc": 0.698,
+    "f1_at_0.5": 0.488
+   },
+   "proprio |e| + signed e": {
+    "auc": 0.694,
+    "f1_at_0.5": 0.504
+   },
+   "fusion (vision + |e|)": {
+    "auc": 0.803,
+    "f1_at_0.5": 0.68
+   },
+   "vision_occluded_f1": 0.71,
+   "vision_occluded_auc": 0.754,
+   "vision_occluded_contact_rate": 0.567,
+   "fusion_occluded_auc": 0.76,
+   "proprio_occluded_auc": 0.699,
+   "vision_visible_f1": 0.582,
+   "vision_visible_auc": 0.826,
+   "vision_visible_contact_rate": 0.213,
+   "fusion_visible_auc": 0.823,
+   "proprio_visible_auc": 0.696,
+   "spearman_absErr_vs_contact": 0.345,
+   "occlusion_rate_measured": 0.59,
+   "contact_rate_measured": 0.408
+  },
+  {
+   "sigma_e_rad": 0.02,
+   "kappa_speed_in_contact": 0.0,
+   "vision (occlusion-aware)": {
+    "auc": 0.801,
+    "f1_at_0.5": 0.682
+   },
+   "proprio |e|": {
+    "auc": 0.685,
+    "f1_at_0.5": 0.474
+   },
+   "proprio |e| + signed e": {
+    "auc": 0.7,
+    "f1_at_0.5": 0.508
+   },
+   "fusion (vision + |e|)": {
+    "auc": 0.802,
+    "f1_at_0.5": 0.68
+   },
+   "vision_occluded_f1": 0.713,
+   "vision_occluded_auc": 0.755,
+   "vision_occluded_contact_rate": 0.564,
+   "fusion_occluded_auc": 0.761,
+   "proprio_occluded_auc": 0.687,
+   "vision_visible_f1": 0.571,
+   "vision_visible_auc": 0.813,
+   "vision_visible_contact_rate": 0.215,
+   "fusion_visible_auc": 0.812,
+   "proprio_visible_auc": 0.679,
+   "spearman_absErr_vs_contact": 0.314,
+   "occlusion_rate_measured": 0.594,
+   "contact_rate_measured": 0.411
+  },
+  {
+   "sigma_e_rad": 0.02,
+   "kappa_speed_in_contact": -0.5,
+   "vision (occlusion-aware)": {
+    "auc": 0.803,
+    "f1_at_0.5": 0.671
+   },
+   "proprio |e|": {
+    "auc": 0.695,
+    "f1_at_0.5": 0.508
+   },
+   "proprio |e| + signed e": {
+    "auc": 0.714,
+    "f1_at_0.5": 0.54
+   },
+   "fusion (vision + |e|)": {
+    "auc": 0.804,
+    "f1_at_0.5": 0.67
+   },
+   "vision_occluded_f1": 0.704,
+   "vision_occluded_auc": 0.756,
+   "vision_occluded_contact_rate": 0.542,
+   "fusion_occluded_auc": 0.763,
+   "proprio_occluded_auc": 0.697,
+   "vision_visible_f1": 0.555,
+   "vision_visible_auc": 0.815,
+   "vision_visible_contact_rate": 0.191,
+   "fusion_visible_auc": 0.813,
+   "proprio_visible_auc": 0.691,
+   "spearman_absErr_vs_contact": 0.326,
+   "occlusion_rate_measured": 0.594,
+   "contact_rate_measured": 0.405
+  },
+  {
+   "sigma_e_rad": 0.02,
+   "kappa_speed_in_contact": 0.5,
+   "vision (occlusion-aware)": {
+    "auc": 0.797,
+    "f1_at_0.5": 0.669
+   },
+   "proprio |e|": {
+    "auc": 0.685,
+    "f1_at_0.5": 0.439
+   },
+   "proprio |e| + signed e": {
+    "auc": 0.697,
+    "f1_at_0.5": 0.473
+   },
+   "fusion (vision + |e|)": {
+    "auc": 0.798,
+    "f1_at_0.5": 0.666
+   },
+   "vision_occluded_f1": 0.698,
+   "vision_occluded_auc": 0.747,
+   "vision_occluded_contact_rate": 0.545,
+   "fusion_occluded_auc": 0.752,
+   "proprio_occluded_auc": 0.684,
+   "vision_visible_f1": 0.561,
+   "vision_visible_auc": 0.814,
+   "vision_visible_contact_rate": 0.193,
+   "fusion_visible_auc": 0.813,
+   "proprio_visible_auc": 0.684,
+   "spearman_absErr_vs_contact": 0.307,
+   "occlusion_rate_measured": 0.592,
+   "contact_rate_measured": 0.399
+  }
+ ],
+ "null_delta0": {
+  "kappa=+0.0": {
+   "spearman_absErr_vs_contact": -0.007,
+   "proprio_auc": 0.499
+  },
+  "kappa=-0.5": {
+   "spearman_absErr_vs_contact": -0.16,
+   "proprio_auc": 0.601
+  },
+  "kappa=+0.5": {
+   "spearman_absErr_vs_contact": 0.132,
+   "proprio_auc": 0.58
+  },
+  "kappa=-1.0": {
+   "spearman_absErr_vs_contact": -0.266,
+   "proprio_auc": 0.651
+  },
+  "kappa=+1.0": {
+   "spearman_absErr_vs_contact": 0.21,
+   "proprio_auc": 0.627
+  }
+ }
+}

@@ -5,8 +5,12 @@
 | 날짜 | 글 | 요약 |
 |---|---|---|
 | 2026-11-09 | [You don't need long context 읽기: 압축은 정확도를 지키지만, 비용 이득은 계산 방식에 달려 있다](papers/no_long_context/) | 에이전트 문맥을 자주 압축하면 정확도는 거의 그대로이고 비용은 크게 준다는 NVIDIA 논문을, 표 17개를 다시 계산하고 비용 모델을 구조별로 재구성하며 읽었습니다. 정확도 결론은 표와 맞습니다. 비용 결론은 가정한 단가 비율과 기준선 가격 규칙에 크게 기댑니다. |
+| 2026-11-09 | [Stiffness Copilot 읽기: 방향별 임피던스 라벨은 믿을 만한가, 사용자 연구 주장은 어디까지 가나](papers/stiffness_copilot/) | IROS 2026 원격조작 임피던스 정책 Stiffness Copilot을, 사용자 연구 통계를 다시 계산하고 라벨 식과 접촉 모델을 numpy toy로 점검하며 읽었습니다. |
 | 2026-11-09 | [ResTacVLA 읽기: 촉각 잔차와 'surprise' 게이트는 무엇을 보고 있나](papers/restacvla/) | IROS 2026 촉각 VLA ResTacVLA를, 표를 다시 계산하고 게이트·잔차 가정을 numpy toy로 점검하며 읽었습니다. |
+| 2026-11-09 | [NoContactNoWorries: 손목 영상과 관절 자세로 접촉을 맞힐 수 있는가](papers/nocontact_noworries/) | 촉각 센서 없이 손목 RGB-D와 관절 자세로 손가락 접촉을 추정하는 논문을 표·검정·toy로 다시 읽었습니다. 칸별 F1 우위는 견고하지만, 정책 성능 주장은 실물 downstream에서 검출 불가능하거나 반대 방향입니다. |
+| 2026-11-09 | [KineFuse: 가림 속 손가락 자세 추적에서 촉각 토큰을 어떻게 묶을까](papers/kinefuse/) | 손가락이 가리는 물체의 자세를 고유감각, 근위 F/T, 접촉으로 보강하는 KineFuse를 평가 설계와 수치 재계산 관점에서 읽었습니다. 프레임 평가, 개방 루프 추적, 조작 성공의 차이와 본문-표 불일치를 정리했습니다. |
 | 2026-11-09 | [DreamX 읽기: 영상 diffusion 모델 안에서 latent action을 읽으면, 사람과 로봇은 정말 같은 좌표에 놓일까](papers/dreamx/) | 영상 diffusion 백본으로 latent action을 학습하는 DreamX를, 표를 재계산하고 사람·로봇 정렬이 언제 생기는지 선형 toy로 따져 보며 읽었습니다. |
+| 2026-11-09 | [CONTACT 읽기: 촉각 영상과 힘장, 어느 쪽이 분해 정책에 도움이 되나](papers/contact_disassembly/) | IROS 2026 CONTACT 논문을 표 재계산, 통계 가정 점검, 공식 코드 대조, 두 개의 numpy 토이로 읽었습니다. |
 | 2026-11-09 | [Beyond Implicit Force 읽기: ACT의 '암묵적 힘'은 감지일까 구동일까](papers/beyond_implicit_force/) | ALOHA식 원격조작 데이터로 학습한 ACT가 힘을 아는 듯 보이는 이유를 leader-follower 불일치에서 찾고, 서보 전류 토크로 대신하는 IROS 2026 논문을 표 재계산과 물리 toy로 다시 읽었습니다. |
 | 2026-11-09 | [BA-T 읽기: bundle adjustment의 정보 흐름을 Transformer 층 하나로, 그런데 코드는 다르게](papers/ba_t/) | 고전 BA의 '잔차 → 카메라 → geometry' 흐름을 38M짜리 반복 층으로 옮긴 BA-T(NeurIPS 2026)를, 표를 재계산하고 공개 코드와 대조하고 numpy BA toy로 확인하며 읽었습니다. |
 | 2026-11-05 | [NestDex 읽기: 손가락은 기술이, 팔은 사람이. 그런데 빨라진 것은 효율일까 신뢰성일까](papers/nestdex/) | 다지 손 텔레옵에서 손가락을 작은 proprio 기술 정책에 맡기는 NestDex를, 표를 재계산하고 프로젝트 사이트의 공개 데이터를 다시 분석하며 읽었습니다. |

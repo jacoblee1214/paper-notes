@@ -1,0 +1,51 @@
+{
+ "partA_label_estimators": {
+  "skew0": {
+   "m_valid": 200,
+   "closed_form_max_abs_err": 8.659739592076221e-15,
+   "paper_log_label": {
+    "angle_top_to_normal_deg": 0.82,
+    "aniso_ratio": 1.34,
+    "det": 0.10178865778261616
+   },
+   "covariance_duan_label": {
+    "angle_top_to_normal_deg": 0.32,
+    "aniso_ratio": 2.98,
+    "det": 9.486600992520223
+   }
+  },
+  "skew1": {
+   "m_valid": 200,
+   "closed_form_max_abs_err": 4.6629367034256575e-15,
+   "paper_log_label": {
+    "angle_top_to_normal_deg": 0.83,
+    "aniso_ratio": 1.34,
+    "det": 0.09454842197209024
+   },
+   "covariance_duan_label": {
+    "angle_top_to_normal_deg": 1.18,
+    "aniso_ratio": 3.24,
+    "det": 1.0767579654267303
+   }
+  },
+  "eps_sweep_skew1": {
+   "0.001": 1.34,
+   "0.01": 1.35,
+   "0.1": 1.34,
+   "1": 1.26,
+   "10": 1.15
+  },
+  "swelling_check": {
+   "det_euclid_mean_K": 0.9422458484714545,
+   "det_logeuclid_mean_K": 0.0945808674847514,
+   "det_ratio_euclid_over_log": 9.962330369018513
+  }
+ },
+ "partB_identifiability": {
+  "angle_only_no_distance": 0.2873,
+  "angle_plus_distance_noise0.02": 0.0323,
+  "angle_plus_distance_noise0.1": 0.085,
+  "oracle_theta_and_contact_c": 0.0009,
+  "note": "kNN k=30, \ud559\uc2b5 3000, \uc2dc\ud5d8 1000, \uc2dc\ub4dc 0. \uc811\ucd09 c = [d<0.3]. \uac70\ub9ac d\uac00 \uc601\uc0c1\uc5d0 \uc5c6\uc73c\uba74 \uc811\ucd09 \uc0c1\ud0dc\uac00 \ub77c\ubca8\uc5d0\uc11c \ud3c9\uade0\uc73c\ub85c \ud750\ub824\uc9c4\ub2e4(\uc2dd\ubcc4 \ubd88\uac00)."
+ }
+}

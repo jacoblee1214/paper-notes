@@ -1,0 +1,1424 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>NoContactNoWorries 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig1"] { max-width: 48%; }
+img[src*="paper_fig4"], img[src*="paper_fig5"], img[src*="paper_fig6"], img[src*="paper_table2"] { max-width: 58%; }
+img[src*="residual_vs_raw"] { max-width: 80%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>NoContactNoWorries: 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 그림(CC BY-SA 4.0, 개인용만 허용)은 제외했습니다. 원문 https://arxiv.org/abs/2606.24450 · arXiv:2606.24450v2 · IROS 2026 채택 · IIIT Hyderabad RRC Lab, University of Manchester (Patil, Das, Bhosale, Roy) · 코드 미공개(프로젝트 페이지 "Code (Coming Soon)", 저장소는 웹사이트만) · 분석일 2026-11-09</p>
+
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 손목 RGB-D와 관절 현재·명령 자세로 손가락 끝 4곳의 이진 접촉을 예측한다. 예측값을 시뮬레이션에서 학습한 in-hand 회전 정책에 실제 접촉 대신 넣는다(재학습 없음).</li>
+<li><strong>칸별 F1 우위는 견고하다:</strong> Full이 시뮬레이션·실물 14개 칸 모두에서 모든 기준선보다 높다(Holm 보정 후 시뮬레이션 p &lt; 10⁻⁷, 실물 Star p = 0.00065). 학습에 없던 두 물체도 seen 범위 안이다(<code>03</code> §1).</li>
+<li><strong>정책 성능 주장은 약하다:</strong> 실물 CRA에서 접촉 없이 관절만 쓴 변형이 Stairs, Hexagonal, Letter R에서 같거나 높다. 본문의 &quot;시각을 빼면 결손이 남는다&quot;와 어긋난다. 칸별 차이는 n = 10에서 검출 불가(MDE 2.3 rad)다(<code>03</code> §3.3, §3.5).</li>
+<li><strong>자세 질의 비대칭은 F1에서만 일관된다:</strong> F1에서 (a) &gt; (b) &gt; (c)가 14/14지만, downstream에서는 MLP가 4칸에서 더 높다(<code>03</code> §3.4).</li>
+<li><strong>F1 0.84가 위양성률 7–21%일 수 있다:</strong> 같은 F1이라도 재현율에 따라 위양성률이 달라진다. 위양성 1%만으로도 접촉 정지 제어기의 성공률이 18% 떨어진다(<code>03</code> §4, §6.3).</li>
+<li><strong>Fig. 6의 상관은 접촉 증거로 부족하다:</strong> 접촉이 없어도 속도 결합만으로 Spearman ±0.2–0.3이 나온다(toy). 시간 셔플 대조는 이것을 걸러내지 못한다(<code>03</code> §6.2).</li>
+<li><strong>구현 가능성:</strong> 공식 재현은 불가(코드·데이터 없음, 시뮬레이터와 실물 필요). 이 맥에서는 접촉 헤드 학습과 평가 설계까지 가능하고, 정책 재현은 CUDA 시뮬레이터가 필요하다(<code>04</code> §4).</li>
+</ol>
+<h2>구현 가능성 판단</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>공식 재현</td>
+<td><strong>불가</strong>: 모델·학습·데이터 코드 없음</td>
+</tr>
+<tr>
+<td>이 맥(M4 Pro, 24 GiB, MPS, CUDA 없음)</td>
+<td>접촉 헤드 학습 가능(데이터 있을 때). Isaac Gym 시뮬레이션과 RL은 불가. 실물 불가</td>
+</tr>
+<tr>
+<td>아이디어 재구현 노력</td>
+<td>모델 구조는 쉬움(수백 줄 추정). 데이터 확보가 병목. 평가는 논문보다 엄격하게 다시 설계 필요</td>
+</tr>
+<tr>
+<td>필요 하드웨어</td>
+<td>시뮬레이션: NVIDIA GPU. 실물: LEAP Hand, RealSense D455, FSR</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section class="chapter"><h1>01. 논문 분석: NoContactNoWorries</h1>
+<p><strong>논문:</strong> NoContactNoWorries: Estimating Contact through Vision and Proprioception for In-Hand Dexterous Manipulation
+<strong>저자:</strong> Soham Patil (IIIT Hyderabad, RRC Lab), Avirup Das (University of Manchester), Sourabh Bhosale, Spandan Roy (IIIT Hyderabad)
+<strong>arXiv:</strong> 2606.24450v2 (cs.RO), v1 2026-06-23, v2 2026-11-06, 8쪽
+<strong>학회:</strong> IROS 2026 채택 (arXiv 댓글)
+<strong>라이선스:</strong> arXiv abs 페이지는 CC BY-SA 4.0 (arXiv abs 페이지 저장본)
+<strong>코드:</strong> 공개되지 않음 (프로젝트 페이지 &quot;Code (Coming Soon)&quot;)</p>
+<p>이 문서는 논문 본문을 절 번호로 따라가며 읽고, 주장과 표의 위치를 적고, 비판적으로 해석합니다. 주장별 검증은 <code>04_claim_verification.md</code>, 수치 재계산과 toy는 <code>03_analysis.md</code>에 있습니다.</p>
+<h2>0. v1 → v2 차이</h2>
+<ul>
+<li>텍스트 기준(추출한 추출 텍스트와 v1 추출본을 단어 단위로 비교)으로, 소수점 수치 533개는 두 버전에서 모두 같습니다. Table I–III의 값은 바뀌지 않았습니다.</li>
+<li>v2에서 바뀐 것은 문장 표현과 구성입니다.
+<ul>
+<li>Sec. V-C의 문장을 다듬었습니다. v1의 &quot;act as a simulator-aligned surrogate&quot;는 v2에서 &quot;provides an idealized input for simulation-trained policies&quot;가 되었고, &quot;Notably in Table III&quot;은 &quot;Notably, our method&quot;로 바뀌었습니다. 초록과 서론도 문장 수준에서 고쳤습니다.</li>
+<li>Table III 캡션에 굵은 글씨 규칙(&quot;best non-oracle&quot;)과 Oracle 설명을 추가했습니다. v1 텍스트에는 이 설명이 없습니다.</li>
+<li>v1 텍스트에 있던 저자 이메일과 지원 문구(UASAT 프로젝트, MeITY)는 v2 추출 텍스트에서 보이지 않습니다. 저자 소속은 프로젝트 페이지에 있습니다.</li>
+</ul>
+</li>
+<li>바뀐 본문 주장은 확인하지 못했습니다. 텍스트 추출이 두 단 레이아웃에서 순서를 섞기 때문에 문장 단위 diff는 노이즈가 많습니다. 수치 목록 비교가 더 신뢰할 수 있습니다.</li>
+</ul>
+<h2>1. 한 문단 요약</h2>
+<p>NoContactNoWorries는 손목에 붙인 RGB-D 카메라와 관절 상태(현재 q, 명령 qcom)로 손가락마다 이진 접촉을 예측합니다. 고정된 RGB-D 인코더(AsymFormer) 토큰을 현재 자세와 명령 자세로 교차 어텐션하고, 시간 창 8의 인과 transformer와 sigmoid 머리로 접촉을 냅니다. 시뮬레이션(LEAP Hand, Isaac Gym)에서 5개 물체로 학습하고, 2개의 학습에 없던 물체와 실물 LEAP Hand에서 F1을 보고합니다. 접촉 예측을 시뮬레이션에서 학습한 in-hand 회전 정책에 실제 접촉 대신 넣으면 실물에서도 회전이 된다고 주장합니다(재학습 없음). 정책 성능 주장은 실물에서 통계적 힘이 약한 소표본(10회)에 기대고 있습니다.</p>
+<h2>2. 문제 설정과 동기 (Introduction, Sec. III)</h2>
+<ul>
+<li><strong>문제:</strong> 시각과 관절 신호로 손가락별 이진 접촉 ĉt ∈ {0,1}^K를 추정. K = 4(LEAP Hand의 네 능동 손가락 끝, Sec. IV).</li>
+<li><strong>동기:</strong> 촉각 센서는 비용, 취약성, 설치(배선, 보정) 때문에 확장이 어렵다. 손목 RGB-D는 자기 가림(self-occlusion)이 생긴다. 사람은 시각과 신체 감각을 합쳐 접촉을 추정한다는 생물학적 근거(S1의 시각·고유감각 수렴, [8–10])를 든다.</li>
+<li><strong>위치:</strong> &quot;pseudo-tactile sensing&quot; 또는 &quot;virtual sensor&quot;. 예측값을 정책에 실시간 관측으로 넣는다. 보상 형성으로만 쓴 [29]와 구분한다(Sec. II).</li>
+<li>판단: 생물학적 근거는 동기일 뿐이고 실험으로 검증되지 않았습니다. 논문도 &quot;hypothesis&quot;라고 씁니다.</li>
+</ul>
+<h2>3. 방법 (Sec. III-A–C)</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>연산</th>
+<th>차원 (논문 표기)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>특징</td>
+<td>ft = Φ(It, Dt), Φ는 고정 AsymFormer [31]</td>
+<td>f ∈ R^{C×H'×W'}</td>
+</tr>
+<tr>
+<td>시각 토큰</td>
+<td>vt = Ψconv(ft), 두 번의 스트라이드 합성곱</td>
+<td>vt ∈ R^{N×D}</td>
+</tr>
+<tr>
+<td>자세 임베딩</td>
+<td>ht = ψ(qt), htcom = ψcom(qtcom)</td>
+<td>D</td>
+</tr>
+<tr>
+<td>교차 어텐션</td>
+<td>at = Attn(ht, vt, vt), atcom = Attn(htcom, vt, vt), 같은 공유 다중헤드</td>
+<td>D</td>
+</tr>
+<tr>
+<td>융합</td>
+<td>zt = MLP([at; atcom])</td>
+<td>D</td>
+</tr>
+<tr>
+<td>시간</td>
+<td>z̃t = Transformer_causal(zt−T+1…zt), T = 8</td>
+<td>D</td>
+</tr>
+<tr>
+<td>머리</td>
+<td>ĉt = σ(Wc z̃t + bc)</td>
+<td>K = 4</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>질의 비대칭(query asymmetry):</strong> 현재 자세는 &quot;실현된 상태(접촉에 따른 예상 밖 변화)&quot;를, 명령 자세는 &quot;의도(곧 접촉할 영역)&quot;를 찾는다고 해석합니다. 두 질의는 같은 어텐션을 공유하지만, 출력을 대칭으로 묶지 않고 따로 이어 붙입니다.</li>
+<li><strong>손실:</strong> 시간과 접촉 지점에 대한 BCE 평균. 인코더는 고정하고 나머지 전체를 학습.</li>
+<li><strong>하이퍼파라미터:</strong> AdamW, lr 1×10⁻⁴(상수), wd 0.01, batch 128, 어텐션 1층 1헤드, 차원 256, T = 8.</li>
+<li>판단: 구조는 작고 명료합니다. 독창성은 &quot;현재와 명령을 다른 질의로 쓴다&quot;는 설계와, 그것을 downstream에 넣는 절차에 있습니다. 교차 어텐션, 인과 transformer, BCE는 표준입니다.</li>
+<li>빠진 것: 에폭, 체크포인트 선택, Ψconv의 정확한 층 구성, N(토큰 수).</li>
+</ul>
+<h2>4. 실험 설정 (Sec. IV, V-A)</h2>
+<ul>
+<li><strong>플랫폼:</strong> LEAP Hand [32] (Isaac Gym, 시뮬레이션), 손목 RealSense D455(최소 거리 밖), 30 Hz RGB-D, 20 Hz 제어. 워크스테이션 RTX 4090.</li>
+<li><strong>정책:</strong> GRU, PPO(γ = 0.99, λ = 0.95, lr 3×10⁻⁴). 보상은 Shaw 등 [32]의 구조. 접촉 정답은 PhysX에서 가져와 정책 학습에 씀. 파지 초기화는 RMA [35]식 안정 파지 캐시.</li>
+<li><strong>도메인 랜덤화:</strong> 질량 0.01–0.25 kg, 마찰 0.3–3.0, PD 게인, 물체 크기, 시각 방해물, 카메라 시점, 가우시안 잡음, 가벼운 외력.</li>
+<li><strong>데이터:</strong> 학습 물체 5개(cuboid, pentagonal prism, extruded star, dodecahedron, stairs). 물체당 10궤적, 궤적당 15 s, 정책은 서로 다른 시드와 체크포인트에서 독립 학습(정책 분리). 총 50궤적.</li>
+<li><strong>분할:</strong> 물체 계층화, 정책 분리 무작위 분할을 10회. 분할마다 물체별 2궤적을 &quot;검증&quot;으로, 8궤적을 학습으로 씀. 보고 값은 10분할 평균.</li>
+<li><strong>학습 물체 외 평가:</strong> 시뮬레이션의 Hexagonal Prism과 Letter R(학습에 없음).</li>
+<li><strong>실물:</strong> LEAP Hand에 얇은 저항형 FSR(&lt; 0.5 mm)을 붙여 라벨을 얻고, 0.1 N으로 이진화. 추론과 정책 실행에서는 센서를 뗀다.</li>
+<li><strong>Downstream 지표:</strong> 시뮬레이션은 CRR(물체의 각속도 누적), 실물은 CRA(라디안, 한 명이 영상으로 수동 측정). 30 s 궤적, 10 trial. Oracle은 정답 접촉 입력 상한.</li>
+</ul>
+<h2>5. 결과</h2>
+<h3>5.1 접촉 예측 (Table I, Sec. V-B)</h3>
+<ul>
+<li><strong>설정 4개:</strong> 시뮬레이션 seen, 시뮬레이션 novel, 실물 seen(복제), 실물 novel. F1을 시간 단계마다 계산하고 접촉 지점으로 평균.</li>
+<li><strong>전체 Full:</strong> 시뮬레이션 seen 0.88–0.93(볼록 0.90–0.93), novel 0.87–0.89. 실물 seen 0.71–0.84, novel 0.74–0.80.</li>
+<li><strong>기준선 (a)–(g):</strong> 자세만(a, query-asym / b, symmetric / c, MLP / d, pose-delta), 시각만(e), 시간 모델 없음(f), 운동학 깊이(g). 교란된 qcom 변형은 별도 행.</li>
+<li><strong>본문 주장:</strong> 전 설정에서 Full이 가장 높다. 시뮬레이션 볼록 물체에서 0.9 초과. 실물 볼록 0.82–0.84, Star 0.71, R 0.74.</li>
+<li><strong>재계산 결과:</strong> 칸별 Full &gt; 모든 기준선이 7/7(두 설정 모두). Holm 보정 후 시뮬레이션은 모든 칸 p &lt; 10⁻⁷, 실물은 모든 칸 p ≤ 0.00065(Star)입니다. 자세 순서(a &gt; b &gt; c)는 F1에서 14/14입니다. 세부는 <code>03</code> §1.</li>
+<li><strong>가림(Table II):</strong> Hexagonal Prism 시뮬레이션에서 가림 프레임 비율은 61%(Sec. V-B(a)). 시각만 0.79(보임)·0.51(가림), Full 0.93·0.85. 표 I과 일관됩니다. 다만 가림 조건별 F1은 접촉 비율이 조건마다 달라 직접 비교할 수 없습니다(<code>03</code> §2.2).</li>
+<li><strong>Fig. 6(Sec. V-B(b)):</strong> 관절 추종 오차 크기(||qcom − q||)와 접촉의 Spearman 상관. 정렬 분포는 중앙값 약 0.3, 시간 셔플 분포는 0 근처. &quot;통계적으로 유의하다&quot;고 쓰지만 검정 값은 없습니다.</li>
+<li><strong>교란 검사(Sec. V-B(c)):</strong> 다른 물체·궤적의 명령을 넣으면 F1은 약간 떨어진다(시뮬 2–5 pp, 실물 1–6 pp). 정책이 명령 이력에 의존하지 않는다고 해석합니다.</li>
+</ul>
+<h3>5.2 downstream (Table III, Sec. V-C)</h3>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>시뮬레이션 CRR</th>
+<th>실물 CRA</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ours 대 Oracle</td>
+<td>평균 비 0.97, 칸별 모두 낮음</td>
+<td>평균 비 1.01, 볼록 3칸에서 높으나 유의하지 않음</td>
+<td>&quot;near-oracle&quot; 방향은 맞음</td>
+</tr>
+<tr>
+<td>Ours 대 Proprio only</td>
+<td>Ours 높음 (차이 2–10)</td>
+<td>Stairs, Hexagonal, R에서 Proprio가 같거나 높음</td>
+<td>실물 결손 주장과 어긋남</td>
+</tr>
+<tr>
+<td>자세 query-asym 대 MLP</td>
+<td>(c)가 4칸 높음</td>
+<td>(c)가 4칸 높음</td>
+<td>downstream에서는 지지 안 됨</td>
+</tr>
+<tr>
+<td>Vision only</td>
+<td>평균 89.4 (pose-delta 87.8)</td>
+<td>평균 14.7 (query-asym 13.8)</td>
+<td>&quot;가장 불안정&quot; 주장과 어긋남</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>실물 CRA 칸에서 Table III는 Proprio only를 굵게 표시합니다. 본문은 &quot;Removing vision leaves a persistent deficit&quot;이라고 씁니다.</li>
+<li>검출력: n = 10에서 CRA는 80% 검출력으로 2.3 rad 이상 차이만 잡습니다. 위 &quot;차이 없음&quot;은 증명이 아니라 검출 불가입니다(<code>03</code> §3.5).</li>
+<li>지연: 추론 8 ms(RTX 4090, torch.jit FP32). 20 Hz 제어(50 ms)에 여유가 있다고 보고합니다(Remark 1).</li>
+</ul>
+<h2>6. 한계 (Sec. VI)</h2>
+<p>논문이 스스로 적은 한계:</p>
+<ol>
+<li>고정된 손가락 끝 지점만 다룸. 조밀한 접촉 지도와 손바닥은 없음.</li>
+<li>학습 데이터가 in-hand 조작이라 다른 과제(도구, 조립)에는 일반화하지 않을 수 있음. 범용 접촉 탐지기가 아님.</li>
+<li>인코더 고정. 다른 시각 백본을 실험하지 않음.</li>
+<li>이진 접촉만. 힘의 크기, 전단, 토크는 없음 [36].</li>
+</ol>
+<h2>7. 비판적 해석</h2>
+<h3>7.1 강한 부분</h3>
+<ul>
+<li><strong>설계가 깔끔하다.</strong> 고정 인코더 + 자세 조건 어텐션 + 인과 시간 모델은 재현하기 쉬운 구조입니다. 두 질의를 분리하고 평균하지 않는 선택은 F1에서 일관되게 나타납니다(14/14).</li>
+<li><strong>칸별 F1 우위는 견고하다.</strong> 칸마다 검정하면 Full의 우위는 Holm 보정 후에도 대부분 유의합니다(<code>03</code> §1.2).</li>
+<li><strong>정책 분리(policy-disjoint) 분할.</strong> 같은 정책에서 나온 궤적이 학습과 검증에 섞이지 않도록 한 점은 좋습니다.</li>
+</ul>
+<h3>7.2 약한 부분</h3>
+<ul>
+<li><strong>F1과 downstream이 맞지 않는다.</strong> 자세 변형 순서와 시각 기여는 F1에서는 뚜렷하지만, 실물 CRA에서는 사라집니다(<code>04</code> C12–C13, C16). 본문은 downstream을 근거로 전체 기여를 주장합니다.</li>
+<li><strong>검증 세트가 보고 세트다.</strong> 10분할 &quot;검증&quot;의 F1이 보고되고, 별도 테스트나 모델 선택 절차가 없습니다.</li>
+<li><strong>통계가 없다.</strong> ± 의 뜻이 없고, 칸 간 검정도 없으며, Fig. 6의 &quot;유의성&quot;은 근거가 없습니다.</li>
+<li><strong>라벨 정의가 다르다.</strong> 시뮬레이션 라벨은 PhysX 접촉(임계 미공개), 실물은 0.1 N FSR. 센서를 붙인 상태에서 라벨을 얻고 떼고 추론한다는 점도 분포 차이를 만들 수 있습니다.</li>
+<li><strong>정책이 깨끗한 라벨만 봤다.</strong> 정책 학습에 접촉 잡음을 넣지 않았으므로, 추정 오류(특히 위양성)에 대한 정책의 민감도는 보고되지 않았습니다. 제어 toy(<code>03</code> §6.3)에서 위양성 1%는 접촉 정지 성공률을 18% 떨어뜨립니다.</li>
+<li><strong>관절 추종 오차는 속도 신호이기도 하다.</strong> 정책이 접촉 중에 속도를 바꾸면 δ = 0이어도 |e|와 접촉이 상관합니다(toy, ρ ±0.2–0.3). Fig. 6의 셔플 대조는 이것을 걸러내지 못합니다(<code>03</code> §6.2).</li>
+</ul>
+<h3>7.3 무엇을 믿을 수 있나</h3>
+<ul>
+<li>칸별 F1 우위, 실물 F1 수치, 가림 시 시각의 약점(방향).</li>
+<li>믿기 어려운 것: 실물 downstream의 자세·시각 기여, &quot;near-oracle&quot;의 칸별 결론, &quot;효과적 전이&quot;의 크기, novel 물체 일반화의 세부.</li>
+</ul>
+<h2>8. 읽기 메모</h2>
+<ul>
+<li><strong>CRR, CRA:</strong> [3]의 누적 회전 지표. CRR은 시뮬레이션 각속도 기반(단위 무차원 큰 값), CRA는 실물 회전 각도(라디안).</li>
+<li><strong>질의 비대칭:</strong> 현재 자세와 명령 자세를 각각 질의로 쓴 교차 어텐션. 본문 용어 &quot;query-asymmetry&quot;와 같습니다.</li>
+<li><strong>Table I의 기호:</strong> (a)–(g)는 기준선, &quot;Full (mismatched command)&quot;는 교란 변형, &quot;Full (Proposed)&quot;는 제안 방법입니다.</li>
+<li><strong>가림 비율 61%:</strong> 접촉 부위가 가려진 프레임의 평균(접촉 지점 평균). 접촉 비율과는 다른 값입니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>03. 수치 재계산, 통계 검정, 유도, toy</h1>
+<p>논문: NoContactNoWorries (arXiv:2606.24450v2, IROS 2026 채택). 원문 표는 원문 PDF의 렌더링 이미지(Table I p.5, Table II p.6, Table III p.7)에서 옮겼고, 추출 텍스트와 대조했습니다.</p>
+<p><strong>계산 파일</strong></p>
+<table>
+<thead>
+<tr>
+<th>파일</th>
+<th>내용</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>analysis/table_check.py</code></td>
+<td>Table I–III 재계산, Welch t, Holm, 부호 검정, Table II 일관성, 검출력(MDE), ± 가정(sd/se) 민감도</td>
+<td><code>analysis/table_check_results.json</code></td>
+</tr>
+<tr>
+<td><code>analysis/sensing_toy.py</code></td>
+<td>감각 toy: 관절 오차와 가려진 시각의 접촉 정보, 속도 결합 대조</td>
+<td><code>analysis/sensing_toy_results.json</code></td>
+</tr>
+<tr>
+<td><code>analysis/control_toy.py</code></td>
+<td>제어 toy: 위양성·위음성과 디바운스, F1 → (P, R, FPR) 변환</td>
+<td><code>analysis/control_toy_results.json</code></td>
+</tr>
+<tr>
+<td><code>analysis/plot_figures.py</code></td>
+<td>위 결과의 그래프 네 장</td>
+<td><code>report/figures/*.png</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>가정 (중요)</strong></p>
+<ul>
+<li>표의 ± 는 표준편차(sd)이고 n = 10(10 splits, 10 trials)으로 봅니다. 논문은 ± 의 뜻을 적지 않았습니다. 표준오차(se)라면 검정이 더 약해지므로, 주요 결론 칸은 두 가정에서 모두 확인했습니다.</li>
+<li>칸끼리의 독립성은 Welch 검정으로 가정합니다. 같은 split을 공유하는 칸이라 대응 검정이 더 맞을 수 있지만, 논문이 split별 값을 주지 않아 할 수 없습니다.</li>
+<li>여러 칸은 Holm으로 보정했습니다.</li>
+</ul>
+<hr />
+<p><img src="figures/f1_sim_real.png" alt="f1_sim_real.png" /></p>
+<p class="cap">그림 A: Table I의 F1(mean ± sd)을 칸별로 다시 그림. Full, 기준선 최댓값, 교란 변형. 음영은 novel 물체.</p>
+<h2>1. Table I: F1 재계산과 검정</h2>
+<h3>1.1 값 확인</h3>
+<ul>
+<li>시뮬레이션·실물, 9개 설정(a–g, 교란 변형, Full), 7개 물체(seen 5 + novel 2) = 126 칸을 옮겼습니다.</li>
+<li>본문의 수치 주장은 모두 표와 일치합니다(§4의 C1–C3).</li>
+<li>두 버전(v1, v2)의 소수 수치는 533개가 모두 같습니다(추출 텍스트 기준). 아래 재계산은 v2 기준입니다.</li>
+</ul>
+<h3>1.2 Full이 기준선보다 높은가</h3>
+<table>
+<thead>
+<tr>
+<th>설정</th>
+<th>칸 수</th>
+<th>Full &gt; 모든 기준선(a–g)</th>
+<th>Full − 최강 기준선 (pp)</th>
+<th>Holm p (sd 가정)</th>
+<th>Holm p (se 가정)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>시뮬레이션</td>
+<td>7</td>
+<td><strong>7/7</strong></td>
+<td>9–14</td>
+<td>2×10⁻¹¹ – 5×10⁻⁸</td>
+<td>3×10⁻⁴ – 0.009</td>
+</tr>
+<tr>
+<td>실물</td>
+<td>7</td>
+<td><strong>7/7</strong></td>
+<td>6–12</td>
+<td>2×10⁻¹¹ – 0.00065</td>
+<td>0.0005 – 0.21 (Star)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>최강 기준선은 칸마다 다릅니다. 시뮬레이션은 (a) query-asym 또는 (f) 시간 모델 없음, 실물은 대부분 (a)입니다. Star(실물)에서는 (f)가 최강입니다.</li>
+<li>실물 Star는 se 가정에서 유의하지 않습니다(p = 0.21). 나머지 실물 칸은 se 가정에서도 대체로 유의합니다(0.0005–0.04).</li>
+<li>결론: 기준선보다 높다는 주장은 두 설정 모두에서 칸 단위로 지지됩니다.</li>
+</ul>
+<h3>1.3 교란된 qcom(mismatched command)</h3>
+<ul>
+<li>시뮬레이션: Full − 교란 = 2–5 pp, 7/7 양수. Holm p는 대부분 0.003 이하이고 Stairs(0.11)만 유의하지 않습니다.</li>
+<li>실물: 1–6 pp, 7/7 양수. Holm 유의는 Hexagonal(0.004)과 Letter R(0.011)뿐입니다.</li>
+<li>두 설정 합쳐 14칸 모두 양수입니다(양측 부호 검정 p = 2×(1/2)^14 ≈ 1×10⁻⁴).</li>
+<li>해석: &quot;qcom을 바꿔도 조금만 떨어진다&quot;는 주장(본문 Sec. V-B(c))은 맞지만, &quot;작은 감소&quot;가 0이 아니라는 점도 같이 봐야 합니다. 모델이 qcom에 의존하는 정도는 작지 않습니다(칸당 2–5 pp, 시뮬 Dodecahedron과 Star는 5 pp).</li>
+</ul>
+<h3>1.4 자세 변형 순서</h3>
+<ul>
+<li>F1 기준 (a) &gt; (b) &gt; (c)가 두 설정 모두 7/7입니다. 본문 &quot;query-asymmetry가 symmetric과 MLP보다 낫다&quot;는 F1에서는 맞습니다.</li>
+<li>같은 주장을 downstream(Table III)에서 보면 지지되지 않습니다(§3.4).</li>
+</ul>
+<h3>1.5 novel 물체</h3>
+<ul>
+<li>시뮬레이션 Full 평균: seen 0.90, novel 0.88. 실물: seen 0.80, novel 0.77.</li>
+<li>novel 두 칸(Hexagonal 0.89, Letter R 0.87)은 seen 범위(0.88–0.93) 안에 있습니다. &quot;학습에 없던 물체에도 일반화한다&quot;는 F1 주장은 이 표 수준에서는 지지됩니다.</li>
+<li>한계: novel 물체는 2개뿐이고, 그 칸의 &quot;10 splits&quot;가 어떻게 나뉘었는지(모델을 다시 학습했는지) 논문에 없습니다.</li>
+</ul>
+<h3>1.6 sim → real 감소</h3>
+<ul>
+<li>Full의 시뮬레이션 − 실물 F1 차이: Cuboid 0.09, Pentagonal 0.07, Dodecahedron 0.09, Star 0.17, Stairs 0.09, Hexagonal 0.09, Letter R 0.13.</li>
+<li>논문은 이를 &quot;effective sim-to-real transfer&quot;라고 부릅니다. 실물 F1은 0.71–0.84로 낮아졌고 감소폭은 칸마다 7–17 pp입니다. &quot;효과적&quot;이라는 표현은 과장일 수 있습니다. 실물 F1에 대한 비교 기준(예: 시뮬레이션에서만 학습한 것 대비 실물에서 무엇이 좋아졌는지)이 없습니다.</li>
+</ul>
+<h3>1.7 pose-delta(d)와 vision-only(e)</h3>
+<ul>
+<li>실물에서 pose-delta가 vision-only보다 칸마다 4–9 pp 높습니다(Holm p ≤ 0.005, 7/7).</li>
+<li>본문은 &quot;comparable&quot;이라고 씁니다. 차이는 작지 않으므로 &quot;벡터 하나짜리 pose-delta가 시각 전용보다 낫다&quot;가 더 정확한 문장입니다. 시각 분기가 실물에서 가장 약하다는 것을 뜻합니다.</li>
+</ul>
+<h3>1.8 &quot;0.9 초과&quot; 점검</h3>
+<ul>
+<li>시뮬레이션 볼록 물체 Full: 0.93, 0.90, 0.91. Pentagonal Prism은 정확히 0.90으로 &quot;0.9를 넘는다&quot;는 말과 어긋납니다(사소한 문제).</li>
+</ul>
+<hr />
+<h2>2. Table II: 가림 조건별 F1</h2>
+<h3>2.1 값 일관성</h3>
+<p>Table II는 Hexagonal Prism(시뮬레이션)에 대한 가림별 F1입니다. 가림 프레임 비율 w = 0.61(본문 Sec. V-B(a))로 가중하면 전체 F1 ≈ (1−w)·visible + w·occluded입니다.</p>
+<table>
+<thead>
+<tr>
+<th>모델</th>
+<th>visible</th>
+<th>occluded</th>
+<th>가중 전체 F1</th>
+<th>Table I Hexagonal(시뮬)</th>
+<th>차이</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kinematic depth</td>
+<td>0.81</td>
+<td>0.54</td>
+<td>0.645</td>
+<td>0.65 (g)</td>
+<td>−0.005</td>
+</tr>
+<tr>
+<td>Vision-only</td>
+<td>0.79</td>
+<td>0.51</td>
+<td>0.619</td>
+<td>0.62 (e)</td>
+<td>−0.001</td>
+</tr>
+<tr>
+<td>Pose-only (best)</td>
+<td>0.75</td>
+<td>0.81</td>
+<td>0.787</td>
+<td>0.78 (a)</td>
+<td>+0.007</td>
+</tr>
+<tr>
+<td>Full</td>
+<td>0.93</td>
+<td>0.85</td>
+<td>0.881</td>
+<td>0.89</td>
+<td>−0.009</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>네 칸 모두 ±0.01 안에서 맞습니다. 표 II와 I가 같은 물체·같은 평가를 가리킨다는 뜻입니다.</li>
+<li>&quot;Pose-only (best)&quot;가 무엇인지는 논문에 없습니다. Table I의 Hexagonal(시뮬) 칸에서 가장 높은 자세 변형이 (a)이고 0.78로 맞아서, (a)일 가능성이 높습니다(추정, 확인 안 됨).</li>
+<li>작은 불일치: Full만 가림 비율을 0.50으로 맞춰야 합니다. 조건부 F1은 선형으로 합쳐지지 않으므로 완전히 설명되지는 않습니다.</li>
+</ul>
+<h3>2.2 가림 조건별 F1의 기저율 문제</h3>
+<ul>
+<li>접촉 비율이 가림 조건마다 다르면 F1은 가림 조건끼리 직접 비교할 수 없습니다. 논문은 가림 조건별 접촉 비율을 보고하지 않습니다.</li>
+<li>감각 toy(§6)에서 가림 프레임의 접촉 비율은 약 0.55, 보이는 프레임은 약 0.20입니다. 그 결과 toy의 시각 모델은 보이는 프레임의 AUC(0.81–0.83)가 가려진 프레임(0.75)보다 높은데도, F1은 가려진 프레임에서 더 높게 나옵니다(0.70 대 0.56).</li>
+<li>따라서 Table II의 &quot;Pose-only (best)&quot;가 가림 프레임에서 0.81로 보이는 프레임 0.75보다 높은 것은, 자세 정보가 가림에 강하다는 증거로 읽기 어렵습니다. AUC와 접촉 비율을 함께 보고해야 합니다.</li>
+</ul>
+<hr />
+<p><img src="figures/table3_cra.png" alt="table3_cra.png" /></p>
+<p class="cap">그림 B: Table III의 실물 CRA(mean ± sd). Proprio only가 Ours와 겹치는 칸이 여럿이고, 칸별 차이는 MDE(2.3 rad) 안이다.</p>
+<h2>3. Table III: 실물과 시뮬레이션 downstream</h2>
+<h3>3.1 단위 문제</h3>
+<ul>
+<li>CRR(시뮬레이션, 약 80–125)과 CRA(실물, 약 9–21 rad)는 단위가 다르고, 같은 칸에서 두 설정을 함께 재지 않았습니다.</li>
+<li>따라서 &quot;performance is uniformly higher in simulation&quot;(본문 Sec. V-C)은 이 표로 검증할 수 없습니다. 시뮬레이션과 실물의 차이는 이 표에서 직접 비교할 수 없습니다.</li>
+</ul>
+<h3>3.2 Ours와 Oracle</h3>
+<table>
+<thead>
+<tr>
+<th>지표</th>
+<th>평균 비 (Ours/Oracle, 7물체)</th>
+<th>Ours − Oracle (볼록 3물체)</th>
+<th>Welch p (볼록 3물체)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRR (시뮬)</td>
+<td>0.966</td>
+<td>−1.4, −8.0, −2.6</td>
+<td>0.25–0.74</td>
+</tr>
+<tr>
+<td>CRA (실물)</td>
+<td>1.01</td>
+<td>+1.14, +1.09, +0.97</td>
+<td>0.06, 0.22, 0.18</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>실물 CRA에서 볼록 물체의 Ours &gt; Oracle은 방향은 맞지만(+0.97–1.14 rad), 어떤 칸도 유의하지 않습니다(p ≥ 0.06).</li>
+<li>나머지 4물체(Star, Stairs, Hexagonal, Letter R)에서는 Ours − Oracle이 −0.05 ~ −0.70 rad로 모두 음수입니다.</li>
+<li>결론: &quot;Oracle과 비슷하다(near-oracle)&quot;는 말은 평균 비 1.01(CRA)과 0.97(CRR)로 맞지만, &quot;볼록 물체에서 실물 Oracle을 넘는다&quot;는 칸별로는 유의하지 않습니다. 설명(센서 잡음이 Oracle을 떨어뜨린다)은 가설이고 검증되지 않았습니다.</li>
+</ul>
+<h3>3.3 Ours와 Proprio only (접촉 없음)</h3>
+<table>
+<thead>
+<tr>
+<th>지표</th>
+<th>칸별 Ours − Proprio</th>
+<th>Holm p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRA (실물)</td>
+<td>+0.78, +1.29, +0.45, +1.12, <strong>−0.74 (Stairs)</strong>, <strong>−2.04 (Hexagonal)</strong>, −0.17 (R)</td>
+<td>0.83–1.0</td>
+</tr>
+<tr>
+<td>CRR (시뮬)</td>
+<td>+9.9, +4.8, +5.4, +2.8, +9.0, +1.9, +5.1</td>
+<td>0.59–1.0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>실물 CRA에서 Stairs, Hexagonal, Letter R의 세 칸은 Proprio only가 Ours보다 같거나 높습니다. 논문도 이 세 칸의 Proprio only 값을 굵게 표시했습니다(Table III 캡션의 &quot;best non-oracle&quot; 규칙). 본문의 &quot;Removing vision leaves a persistent deficit&quot;와 어긋납니다.</li>
+<li>Holm 보정 후 어떤 칸도 유의하지 않습니다. 이것은 &quot;차이가 없다&quot;는 증거가 아니라 검출력 부족입니다(§3.5).</li>
+<li>대조: 같은 모델이 F1에서는 실물 Cuboid 0.84 대 자세 변형(a) 0.72처럼 큰 차이를 냅니다(Table I). F1의 이득이 CRA에서는 보이지 않는다는 점이 이 논문의 핵심 불일치입니다.</li>
+</ul>
+<h3>3.4 자세 query-asym (a)와 MLP (c)</h3>
+<ul>
+<li>F1에서는 (a) &gt; (c)가 7/7(두 설정)입니다.</li>
+<li>CRA(실물): (c)가 (a)보다 높은 칸이 Cuboid(p = 0.039), Dodecahedron(p = 0.018), Star(p = 0.004), Hexagonal(p = 0.005) 4칸이고, Star에서는 (c) 15.61이 Ours 14.37보다 높습니다(굵게 표시된 값).</li>
+<li>CRR(시뮬): (c)가 높은 칸이 Cuboid, Dodecahedron, Star, Hexagonal(Hex는 p = 0.002), (a)가 높은 칸이 Pentagonal, Stairs, Letter R(p &lt; 10⁻⁴)입니다. 합치면 (a) &gt; (c)는 14칸 중 6칸입니다(부호 검정 p = 0.79).</li>
+<li>결론: &quot;query-asymmetry가 MLP보다 낫다&quot;는 주장은 F1에서만 지지되고, downstream에서는 지지되지 않습니다.</li>
+<li>변형별 평균(7물체, 실물 CRA): 자세 query-asym 13.81, pose-delta 14.30, vision-only 14.71, MLP 14.73, Proprio only 17.65, Ours 17.75, Oracle 17.52. 시각 전용이 &quot;가장 불안정하다&quot;는 본문 문장과 맞지 않습니다(04 C16). 값은 <code>table_check_results.json</code>의 <code>variant_means_over_7_objects</code>입니다.</li>
+</ul>
+<h3>3.5 검출력</h3>
+<ul>
+<li>n = 10, sd 중앙값에서 80% 검출력의 최소 차이(MDE, Welch, 양측 0.05):
+<ul>
+<li>F1: 0.032 (중앙 sd 0.024)</li>
+<li>CRA: 2.33 rad (중앙 sd 1.76)</li>
+<li>CRR: 13.5 (중앙 sd 10.2)</li>
+</ul>
+</li>
+<li>Ours − Proprio의 실물 차이(최대 2.04 rad)와 Ours − Oracle 차이(최대 1.14 rad)는 모두 MDE보다 작습니다. &quot;차이가 없다&quot;고 쓰는 칸은 &quot;이 실험으로는 구분할 수 없다&quot;로 바꿔 읽어야 합니다.</li>
+<li>실물 downstream은 trial 10회이고 CRA는 한 명의 관찰자가 영상으로 수동 측정했습니다(본문 Sec. V-C). 측정 잡음이 크고, 관찰자 간 일치도가 없습니다.</li>
+</ul>
+<h3>3.6 ± 가정 민감도</h3>
+<ul>
+<li>CRA 칸별 Holm 결과: sd 가정과 se 가정 모두 유의한 칸이 없습니다.</li>
+<li>Ours − Oracle, CRR: se 가정에서 p = 0.71–0.99로 더 큽니다. 결론은 같습니다.</li>
+</ul>
+<hr />
+<h2>4. 유도: F1과 접촉 오류율</h2>
+<h3>4.1 항등식</h3>
+<p>F1 = 2TP / (2TP + FP + FN) = 2PR/(P + R)</p>
+<p>재현율 R과 F1을 알면 정밀도 P = F1·R / (2R − F1)입니다.</p>
+<p>접촉 비율을 π(프레임 기준)라 하면 TP = R·π·N, 음성은 (1 − π)·N이므로</p>
+<p>FPR = FP / ((1−π)N) = R·π·(1/P − 1) / (1 − π)</p>
+<p>FNR = 1 − R</p>
+<h3>4.2 같은 F1, 다른 위양성률</h3>
+<p>π = 0.4(가정, 논문은 접촉 비율을 보고하지 않음)일 때:</p>
+<table>
+<thead>
+<tr>
+<th>F1</th>
+<th>R = 0.7</th>
+<th>R = 0.8</th>
+<th>R = 0.9</th>
+<th>R = 0.95</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.71 (Star, 실물)</td>
+<td>FPR 0.18</td>
+<td>0.30</td>
+<td>0.42</td>
+<td>0.48</td>
+</tr>
+<tr>
+<td>0.74 (Letter R, 실물)</td>
+<td>0.13</td>
+<td>0.24</td>
+<td>0.36</td>
+<td>0.41</td>
+</tr>
+<tr>
+<td>0.79 (Stairs, 실물)</td>
+<td>0.05</td>
+<td>0.15</td>
+<td>0.25</td>
+<td>0.30</td>
+</tr>
+<tr>
+<td>0.84 (Cuboid, 실물)</td>
+<td>—</td>
+<td>0.07</td>
+<td>0.16</td>
+<td>0.21</td>
+</tr>
+<tr>
+<td>0.93 (Cuboid, 시뮬)</td>
+<td>—</td>
+<td>—</td>
+<td>0.02</td>
+<td>0.06</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>F1 0.84라도 재현율에 따라 위양성률은 7%에서 21%까지 갈 수 있습니다. F1 하나로는 위양성률이 정해지지 않습니다.</li>
+<li>접촉 비율이 바뀌면 같은 F1에서도 FPR이 달라집니다. π를 모르면 이 표를 실제 값으로 바꿀 수 없습니다. 논문이 접촉 비율을 적어야 합니다.</li>
+</ul>
+<h3>4.3 Spearman(Fig. 6)</h3>
+<ul>
+<li>Fig. 6(a)의 정렬(aligned) 분포는 중앙값 약 0.3, 셔플(shuffled) 분포는 0 근처입니다(그림 눈 판독, 개수 불명).</li>
+<li>본문은 &quot;statistically significant monotonic dependence&quot;라고 쓰지만, 검정 통계량, 표본 수, p-value가 없습니다.</li>
+<li>대조 설계의 문제: 시간 셔플은 시간 정렬만 끊습니다. 명령 속도와 접촉이 함께 움직이는 경우(정책이 접촉 중에 느려지거나 빨라짐)는 셔플로 걸러지지 않습니다. §6.3에서 이것을 toy로 보입니다.</li>
+</ul>
+<hr />
+<h2>5. 유도: 관절 추종 오차와 접촉 편차</h2>
+<p>1차 추종 모델을 가정합니다. q_{t+1} = q_t + α(q^com_t − q_t) − β·c_t.</p>
+<ul>
+<li>명령이 상수이고 접촉이 지속될 때 정상상태 편차는 e = β·c/α = δ·c입니다. 접촉 편차는 δ = β/α입니다.</li>
+<li>명령이 일정한 속도 v로 움직이면 추종 지연의 정상상태 오차는 e = v(1 − α)/α입니다. 이것이 접촉과 무관하게 |e|를 키우는 항입니다.</li>
+<li>따라서 |e| 하나로 접촉을 읽으려면 δ가 속도 항보다 커야 합니다. 논문은 δ와 속도 항의 비를 보고하지 않습니다.</li>
+<li>가림과 관절 정보의 결합: proprioception은 δ·c + 속도 항 + 잡음을 봅니다. 가림은 시각 신호만 줄입니다.</li>
+</ul>
+<hr />
+<h2>6. 두 toy (CPU, numpy·scipy)</h2>
+<p><img src="figures/sensing_toy.png" alt="sensing_toy.png" /></p>
+<p class="cap">그림 C: 감각 toy. 왼쪽은 프레임 종류별 AUC, 오른쪽은 δ = 0일 때 속도 결합만으로 생기는 Spearman.</p>
+<h3>6.1 감각 toy (<code>analysis/sensing_toy.py</code>)</h3>
+<p>설정: 1 손가락, 30 Hz, 60,000 프레임, 접촉 비율 π = 0.4(가정), δ = 0.05 rad, α = 0.2, 창 8프레임, 가림 확률은 접촉 시 0.8·비접촉 시 0.45(전체 약 0.59, 논문 61%에 맞춤), 시각 점수 평균은 보이면 1.5, 가려지면 0.2. 로지스틱 회귀(앞 절반 학습, 뒤 절반 평가).</p>
+<table>
+<thead>
+<tr>
+<th>특징 (σ_e = 0.005 rad, 속도 결합 0)</th>
+<th>가려진 프레임 AUC</th>
+<th>보이는 프레임 AUC</th>
+<th>전체 AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>시각 (가림 인식)</td>
+<td>0.75</td>
+<td>0.82</td>
+<td>0.80</td>
+</tr>
+<tr>
+<td>관절 |e|</td>
+<td>0.72</td>
+<td>0.71</td>
+<td>0.72</td>
+</tr>
+<tr>
+<td>융합</td>
+<td>0.76</td>
+<td>0.82</td>
+<td>0.80</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>가려진 프레임에서 관절 정보는 시각과 거의 같은 AUC를 냅니다(0.72 대 0.75). 융합은 가려진 프레임에서 +0.01만 더합니다.</li>
+<li>해석: 이 toy에서는 관절 오차가 가림에서도 접촉 정보를 줍니다. 다만 이 결과는 δ/σ_e와 시각 신호 세기라는 가정에 달려 있습니다. 논문의 &quot;융합이 필요하다&quot;는 주장을 toy로 확인하려면 더 많은 가정 스윕이 필요합니다.</li>
+<li>σ_e = 0.02(잡음 큼)에서는 관절 AUC가 0.69로 떨어집니다. 잡음에 민감합니다.</li>
+</ul>
+<h3>6.2 속도 결합 대조 (δ = 0)</h3>
+<p>접촉이 관절 편차를 만들지 않는데(δ = 0), 정책이 접촉 중에 속도를 바꾸는 경우(κ):</p>
+<table>
+<thead>
+<tr>
+<th>κ (접촉 중 속도 변화 비율)</th>
+<th>Spearman ρ(|e|, 접촉)</th>
+<th>관절 AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>−0.01</td>
+<td>0.50</td>
+</tr>
+<tr>
+<td>−0.5</td>
+<td>−0.16</td>
+<td>0.60</td>
+</tr>
+<tr>
+<td>+0.5</td>
+<td>+0.13</td>
+<td>0.58</td>
+</tr>
+<tr>
+<td>−1.0</td>
+<td>−0.27</td>
+<td>0.65</td>
+</tr>
+<tr>
+<td>+1.0</td>
+<td>+0.21</td>
+<td>0.63</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>접촉이 없는데도 속도 결합만으로 ρ가 ±0.2–0.3 나오고, 관절 AUC도 0.6–0.65까지 올라갑니다. 논문 Fig. 6의 중앙값(약 0.3)과 같은 크기입니다.</li>
+<li>따라서 Fig. 6의 상관은 &quot;접촉 때문에 생긴 편차&quot;와 &quot;정책이 접촉과 함께 움직이는 속도&quot;를 구분하지 못합니다. 필요한 대조는 시간 셔플이 아니라 속도(또는 명령 이력)만 넣은 기준 모델입니다.</li>
+<li>본문 Sec. V-B(b)의 &quot;control intent&quot; 해석은 이 점에서 가능성이 있지만, 검증되지 않았습니다.</li>
+</ul>
+<p><img src="figures/control_toy.png" alt="control_toy.png" /></p>
+<p class="cap">그림 D: 제어 toy. 위양성률과 디바운스에 따른 정지 성공률(왼쪽), F1이 함의하는 위양성률(오른쪽, π = 0.4).</p>
+<h3>6.3 제어 toy (<code>analysis/control_toy.py</code>)</h3>
+<p>설정: 손가락이 20프레임(30 Hz) 동안 접근한 뒤 접촉이 시작되고, 접촉 후 0–3프레임(100 ms) 안에 멈추면 성공입니다. 검출기는 프레임마다 독립으로 오류를 냅니다. 디바운스 K는 K 프레임 연속 1일 때 멈춤.</p>
+<p><strong>성공률 (20,000 에피소드, 100 ms 기준)</strong></p>
+<table>
+<thead>
+<tr>
+<th>FPR</th>
+<th>K=1 (fnr 0)</th>
+<th>K=2 (fnr 0)</th>
+<th>K=3 (fnr 0)</th>
+<th>K=1 (fnr 0.1)</th>
+<th>K=2 (fnr 0.1)</th>
+<th>K=3 (fnr 0.1)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.97</td>
+<td>0.80</td>
+</tr>
+<tr>
+<td>0.005</td>
+<td>0.90</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.90</td>
+<td>0.97</td>
+<td>0.80</td>
+</tr>
+<tr>
+<td>0.01</td>
+<td>0.82</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.81</td>
+<td>0.97</td>
+<td>0.80</td>
+</tr>
+<tr>
+<td>0.02</td>
+<td>0.67</td>
+<td>0.99</td>
+<td>1.00</td>
+<td>0.66</td>
+<td>0.96</td>
+<td>0.81</td>
+</tr>
+<tr>
+<td>0.05</td>
+<td>0.36</td>
+<td>0.96</td>
+<td>1.00</td>
+<td>0.36</td>
+<td>0.93</td>
+<td>0.80</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>디바운스 없이(K=1) 위양성률 1%면 성공이 18% 떨어집니다. 2프레임 디바운스(K=2)는 위양성 영향을 거의 없애지만, 위음성이 0.1이면 K=2는 0.97, K=3은 0.80입니다. K=3은 100 ms 안에 3프레임을 연속으로 맞추기 어려워 위음성에 더 민감합니다.</li>
+<li>K=5는 접촉 후 5프레임(167 ms)이 필요해 100 ms 기준을 넘으므로 항상 실패합니다. 그래서 격자에서 뺐습니다.</li>
+<li>한계: 프레임 독립 가정은 위양성에 비관적입니다. 논문 모델의 인과 transformer는 오류를 시간적으로 묶으므로 실제로는 디바운스가 덜 필요할 수 있습니다. 반대로 위음성이 연속으로 나타나면 K가 큰 쪽이 더 나빠집니다.</li>
+</ul>
+<p><strong>F1 → 제어기(π = 0.4):</strong> F1 0.84이고 재현율 0.9이면 FPR은 0.16입니다. 이때 K=1 성공률은 0.03, K=3은 0.77입니다(<code>control_toy_results.json</code>의 T4). 같은 F1이라도 제어기 성능은 극단적으로 다릅니다.</p>
+<hr />
+<h2>7. 재현 가능한 설정 값 (논문에 있는 것만)</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+<th>출처</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>프레임 인코더</td>
+<td>고정 RGB-D 의미 분할 백본(AsymFormer [31])</td>
+<td>Sec. III-A</td>
+</tr>
+<tr>
+<td>시간 창 T</td>
+<td>8</td>
+<td>Sec. IV</td>
+</tr>
+<tr>
+<td>임베딩 차원 D</td>
+<td>256, 어텐션 1층 1헤드</td>
+<td>Sec. IV</td>
+</tr>
+<tr>
+<td>학습</td>
+<td>AdamW, lr 1×10⁻⁴ (상수), wd 0.01, batch 128, BCE</td>
+<td>Sec. IV</td>
+</tr>
+<tr>
+<td>시뮬레이션 데이터</td>
+<td>5 학습 물체 × 10 궤적, 궤적당 15 s, 30 Hz RGB-D</td>
+<td>Sec. IV</td>
+</tr>
+<tr>
+<td>평가 분할</td>
+<td>10 splits, 물체별 2 궤적 검증(나머지 8 학습)</td>
+<td>Sec. IV</td>
+</tr>
+<tr>
+<td>접촉 라벨 (실물)</td>
+<td>FSR, 0.1 N 임계</td>
+<td>Sec. IV</td>
+</tr>
+<tr>
+<td>접촉 라벨 (시뮬레이션)</td>
+<td>PhysX 접촉, 임계 값 없음(논문에 없음)</td>
+<td>Sec. IV</td>
+</tr>
+<tr>
+<td>제어 주기</td>
+<td>20 Hz, 추론 8 ms (RTX 4090, torch.jit)</td>
+<td>Sec. VI remark</td>
+</tr>
+<tr>
+<td>downstream</td>
+<td>30 s 궤적, 10 trials, CRR(시뮬) / CRA(실물, 수동 측정)</td>
+<td>Sec. V-C</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>논문에 없는 값: 학습 에폭, 시뮬레이션 접촉 임계, 실물 학습 데이터 양, 검증과 테스트의 구분, 가림 조건별 접촉 비율, Fig. 6의 표본 수.</li>
+</ul>
+<hr />
+<h2>8. 요약</h2>
+<ol>
+<li>Table I의 기준선 우위와 novel 일반화는 칸 단위 검정에서 지지됩니다(Full 7/7, Holm p ≤ 10⁻³ 대부분).</li>
+<li>Table II는 Table I과 일관됩니다. 그러나 가림 조건별 F1은 접촉 비율 차이 때문에 직접 비교할 수 없습니다.</li>
+<li>Table III의 downstream에서는 Ours와 Proprio only, Ours와 Oracle, (a)와 (c) 모두 검출력 밖입니다. 실물 CRA에서 Proprio only가 같거나 높은 칸이 3개 있어 &quot;시각이 없으면 결손이 남는다&quot;는 주장과 어긋납니다.</li>
+<li>F1 0.84는 위양성률 7–21%에 대응할 수 있고, 위양성 1%만으로도 접촉 정지 제어기의 성공률은 K=1에서 18% 떨어집니다.</li>
+<li>Fig. 6의 상관은 속도 결합만으로도 재현됩니다(toy). 논문 대조 설계가 이를 걸러내지 못합니다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>04. 주장 검증과 구현 가능성</h1>
+<p>논문: NoContactNoWorries (arXiv:2606.24450v2, IROS 2026 채택). 공식 코드가 없어서 <strong>코드 대조 대신 주장 검증</strong>을 했습니다(<code>repo/</code> 없음). 주장은 논문의 절·표·그림 번호로 적었고, 판정은 <code>03_analysis.md</code>의 재계산과 toy에 근거합니다.</p>
+<h2>0. 코드 상태 (2026-11-09 확인)</h2>
+<ul>
+<li>공식 저장소는 없습니다. 프로젝트 페이지는 &quot;Code (Coming Soon)&quot;라고 씁니다(프로젝트 페이지 저장본).</li>
+<li><code>soham2560/no-contact-no-worries</code>는 <strong>프로젝트 웹사이트 저장소</strong>입니다(index.html, static 그림·GIF·영상, README). 모델·학습·데이터 코드가 없습니다.</li>
+<li><code>lucidrains/no-contact-no-worries</code>는 제3자 WIP입니다. README와 LICENSE만 있고 구현은 없습니다.</li>
+<li>논문 기반 저장소(AsymFormer, LEAP Hand Isaac Gym)는 <code>02_prior_work.md</code> §5에 적었습니다.</li>
+</ul>
+<p>따라서 아래 &quot;재현 정보&quot; 항목은 전부 논문 텍스트에서만 얻었습니다.</p>
+<hr />
+<h2>1. 주장 검증 (C1–C20)</h2>
+<p>판정: <strong>지지</strong> / <strong>부분 지지</strong> / <strong>지지 안 됨</strong> / <strong>검증 불가</strong>. 근거 칸은 <code>03_analysis.md</code> 절 번호입니다.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장 (논문 위치)</th>
+<th>근거</th>
+<th>판정</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>모든 설정에서 Full이 가장 높다 (Sec. V-B)</td>
+<td>Table I, 시뮬·실물 각 7/7 칸에서 Full &gt; 기준선 a–g 전부 (03 §1.2)</td>
+<td><strong>지지</strong></td>
+<td>실물 Star의 se 가정에서만 유의성이 약함</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>시뮬레이션 볼록 물체에서 F1 &gt; 0.9 (Sec. V-B)</td>
+<td>0.93, 0.90, 0.91 (03 §1.8)</td>
+<td>부분</td>
+<td>Pentagonal은 정확히 0.90. 사소함</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>실물 볼록 0.82–0.84, Star 0.71, R 0.74 (Sec. V-B)</td>
+<td>Table I 실물 Full (03 §1.1)</td>
+<td><strong>지지</strong></td>
+<td>값이 표와 일치</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>&quot;effective sim-to-real transfer&quot; (Sec. V-B)</td>
+<td>sim→real 감소 7–17 pp, 일관됨 (03 §1.6)</td>
+<td>부분</td>
+<td>시뮬레이션 학습 기준과 실물 비교가 없어 &quot;효과적&quot;은 해석</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>학습에 없던 물체(novel)에 일반화 (Abstract, Sec. V-B)</td>
+<td>novel 평균 시뮬 0.88 (seen 0.90), 실물 0.77 (seen 0.80) (03 §1.5)</td>
+<td>부분</td>
+<td>novel 물체 2개, 10 splits가 어떻게 나뉘었는지 불명</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>자세 query-asym &gt; symmetric &gt; MLP (Sec. V-B)</td>
+<td>F1: 두 설정 각 7/7 (03 §1.4)</td>
+<td><strong>지지 (F1)</strong></td>
+<td>downstream에서는 <strong>지지 안 됨</strong>, C12</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>시각만으로는 가려진 접촉을 못 읽는다 (Sec. V-B(a), Table II)</td>
+<td>Vision 0.79 대 0.51, Full 0.93 대 0.85. 표 II와 I 일관 (03 §2.1)</td>
+<td>부분</td>
+<td>가림 조건별 F1은 접촉 비율 차이로 직접 비교가 안 됨 (03 §2.2)</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>자세 변형 F1은 가림 프레임에서 시각보다 낫다 (Table II, &quot;Pose-only (best)&quot; 0.81 대 0.75)</td>
+<td>같은 표</td>
+<td>검증 불가</td>
+<td>변형이 무엇인지 불명, 기저율 혼재 가능 (03 §2.2)</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>교란된 qcom에서도 F1은 &quot;조금만&quot; 떨어진다, 따라서 shortcut이 아니다 (Sec. V-B(c))</td>
+<td>시뮬 2–5 pp, 실물 1–6 pp, 14/14 양수 (03 §1.3)</td>
+<td>부분</td>
+<td>감소는 작지만 0이 아니고 모델이 qcom에 의존하는 정도도 작지 않다. &quot;shortcut 아님&quot;은 추론이고, 칸 내 셔플 대조가 없다</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>관절 추종 오차 크기와 접촉의 상관이 &quot;통계적으로 유의하다&quot; (Sec. V-B(b), Fig. 6)</td>
+<td>검정 통계, 표본 수, p-value가 없음. 시간 셔플 대조는 속도 결합을 걸러내지 못함 (03 §4.3, §6.2)</td>
+<td><strong>검증 불가</strong> (근거 부족)</td>
+<td>속도 결합만으로도 ρ ±0.2–0.3 (toy). 근거로 쓰기 어려움</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>pose-delta가 시각 전용과 &quot;comparable&quot; (Sec. V-B)</td>
+<td>실물에서 pose-delta가 칸마다 4–9 pp 높음 (Holm p ≤ 0.005) (03 §1.7)</td>
+<td>부분</td>
+<td>문장이 차이를 축소. 이 결과는 시각 분기가 실물에서 가장 약하다는 뜻</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>자세 query-asym이 MLP보다 낫다 (downstream, Sec. V-C 암시)</td>
+<td>CRA: (c)가 4칸에서 더 높고(Star p = 0.004), CRR: (c)가 4칸에서 더 높음. (a) &gt; (c)는 14칸 중 6칸 (03 §3.4)</td>
+<td><strong>지지 안 됨</strong></td>
+<td>F1 결과가 downstream으로 옮겨지지 않음</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>&quot;시각 제거 시 결손이 남는다&quot; (Sec. V-C)</td>
+<td>실물 CRA: Proprio only가 Stairs, Hexagonal, R에서 같거나 높음. Holm p ≥ 0.83. Table III 굵은 글씨도 Proprio only (03 §3.3)</td>
+<td><strong>지지 안 됨</strong> (실물)</td>
+<td>시뮬 CRR은 Ours가 높지만 Holm p ≥ 0.59. 검출력 부족 (MDE 2.3 rad)</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>제안 방법이 볼록 물체에서 실물 Oracle보다 높다 (Sec. V-C)</td>
+<td>CRA +0.97 ~ +1.14 rad, p = 0.06–0.22 (03 §3.2)</td>
+<td>방향만</td>
+<td>유의하지 않음. &quot;센서 잡음이 Oracle을 떨어뜨린다&quot;는 설명은 검증 안 됨</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>예측 접촉은 Oracle에 가까운 성능 (Sec. VI)</td>
+<td>평균 비 CRA 1.01, CRR 0.97. CRA는 7물체 중 4개에서 낮음 (03 §3.2)</td>
+<td>부분</td>
+<td>평균은 맞지만 칸별로 차이가 검출력 밖</td>
+</tr>
+<tr>
+<td>C16</td>
+<td>&quot;Vision-only가 가장 불안정하다&quot; (Sec. V-C)</td>
+<td>평균 CRA: 자세 query-asym 13.81 &lt; pose-delta 14.30 &lt; vision-only 14.71 (7물체 평균, <code>table_check_results.json</code>의 <code>variant_means_over_7_objects</code>). CRR에서도 pose-delta(87.8)가 가장 낮고 vision-only(89.4)는 그보다 높음</td>
+<td><strong>지지 안 됨</strong></td>
+<td>시각 전용이 가장 낮다는 문장은 표와 맞지 않음</td>
+</tr>
+<tr>
+<td>C17</td>
+<td>시뮬레이션이 실물보다 &quot;균일하게 높다&quot; (Sec. V-C)</td>
+<td>CRR(시뮬)과 CRA(실물)는 단위가 다르고 같은 칸에서 재지 않음 (03 §3.1)</td>
+<td><strong>검증 불가</strong></td>
+<td>같은 조건의 시뮬·실물 비교가 필요</td>
+</tr>
+<tr>
+<td>C18</td>
+<td>추론 8 ms &lt; 20 Hz 제어 주기의 50 ms (Sec. VI, Remark 1)</td>
+<td>산술은 맞음. 측정은 RTX 4090 워크스테이션, 분산 미보고, 카메라 캡처·전처리 시간 불포함</td>
+<td>부분</td>
+<td>정책 루프 전체 지연은 보고되지 않음</td>
+</tr>
+<tr>
+<td>C19</td>
+<td>시뮬레이션 접촉 라벨은 PhysX 접촉이고 손가락 4 지점이 실물 FSR 위치와 대응 (Sec. IV)</td>
+<td>시뮬 접촉 임계 값과 &quot;접촉&quot; 정의가 없음. 실물은 0.1 N</td>
+<td><strong>검증 불가</strong></td>
+<td>시뮬·실물 라벨 정의 차이가 F1 감소의 원인일 수 있음</td>
+</tr>
+<tr>
+<td>C20</td>
+<td>실물 평가에서 FSR은 평가에만 쓰고 추론에서는 뗀다 (Sec. IV, Fig. 3)</td>
+<td>라벨을 FSR이 붙은 상태에서 얻었는지, 떼고 얻었는지 불명</td>
+<td><strong>검증 불가</strong></td>
+<td>라벨과 입력의 분포 차이가 있을 수 있음</td>
+</tr>
+</tbody>
+</table>
+<p>추가로 확인한 항목:</p>
+<ul>
+<li><strong>&quot;F1은 시간 단계마다 계산해 접촉 지점 평균&quot;(Sec. V-B):</strong> 지점별 F1과 지점별 접촉 비율이 없습니다. 접촉 비율이 지점마다 다르면 평균 F1은 해석이 어려워집니다.</li>
+<li><strong>&quot;held-out policies에 일반화&quot;(Sec. VI):</strong> 평가 분할은 정책 분리(policy-disjoint)입니다. 그러나 보고된 분할이 검증 세트(validation)로 불리고, 별도 테스트 세트가 없습니다. 모델 선택에 같은 세트를 썼는지 불명입니다.</li>
+<li><strong>실물 Oracle이 어려운 물체(Star, R)에서 유리하다(Sec. V-C):</strong> 방향은 맞습니다(Star 14.95 대 14.37, R 15.39 대 15.12). 그러나 차이는 검출력 밖입니다.</li>
+</ul>
+<hr />
+<h2>2. 논문에 없는 재현 정보</h2>
+<p>재현하려면 다음이 필요하고, 논문에는 없습니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>학습 에폭, 체크포인트 선택 기준, 조기 종료</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>시뮬레이션 접촉 임계와 정의</td>
+<td>없음 (PhysX 접촉 신호만)</td>
+</tr>
+<tr>
+<td>실물 학습 데이터 궤적 수, 물체당 수</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>검증·테스트 분리</td>
+<td>없음 (10 splits, &quot;validation&quot;으로만 부름)</td>
+</tr>
+<tr>
+<td>인코더 AsymFormer 가중치 출처, 미세 조정 여부</td>
+<td>&quot;frozen&quot;만 있음</td>
+</tr>
+<tr>
+<td>Ψconv의 스트라이드 수, 출력 해상도 N</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>정책(GRU PPO)의 관측 구성, 보상 가중치</td>
+<td>보상 구조만 인용 ([32])</td>
+</tr>
+<tr>
+<td>downstream 정책 학습에 쓴 접촉 입력 잡음</td>
+<td>없음 (정답 접촉으로만 학습)</td>
+</tr>
+<tr>
+<td>실물 CRA 측정자 수, 측정 절차</td>
+<td>한 명의 관찰자, 영상 재생</td>
+</tr>
+<tr>
+<td>novel 물체의 10 splits 구성</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>게이트 입력과 어텐션 마스크 세부</td>
+<td>없음</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>가장 중요한 누락은 <strong>정책 학습에서 접촉 라벨에 잡음을 넣었는지</strong>입니다. 정책은 깨끗한 정답 접촉으로만 학습합니다(Sec. IV). 그러면 추론 시 위양성·위음성에 얼마나 강한지는 정책 쪽에서 보장되지 않습니다(<code>03_analysis.md</code> §6.3 제어 toy의 결과가 이 점을 보여 줍니다).</li>
+</ul>
+<hr />
+<h2>3. 주장 요약</h2>
+<p><strong>검증된 것 (표와 맞고 검정을 통과):</strong></p>
+<ul>
+<li>칸별 F1 우위(C1), 실물 F1 수치(C3), 자세 변형 순서의 F1 결과(C6 F1), 교란 감소의 방향(C9, 작음).</li>
+</ul>
+<p><strong>방향은 맞지만 근거가 약한 것:</strong></p>
+<ul>
+<li>novel 일반화(C5), 시뮬레이션 대 실물 &quot;효과적 전이&quot;(C4), 가림 조건별 해석(C7).</li>
+</ul>
+<p><strong>표와 맞지 않는 것 (downstream):</strong></p>
+<ul>
+<li>시각 제거 시 결손(C13), 자세 query-asym 우위(C12), 시각 전용이 가장 불안정(C16).</li>
+</ul>
+<p><strong>검증할 수 없는 것:</strong></p>
+<ul>
+<li>Fig. 6의 유의성(C10), 시뮬레이션·실물 차이(C17), 시뮬레이션 라벨 정의(C19), FSR 시점(C20).</li>
+</ul>
+<hr />
+<h2>4. 구현 가능성 판단</h2>
+<p><strong>질문:</strong> 이 논문을 구현할 수 있는가? (1) 공식 재현, (2) 이 맥에서의 실행, (3) 아이디어 재구현의 노력, (4) 필요한 하드웨어.</p>
+<p><strong>맥 사양:</strong> Apple M4 Pro, 통합 메모리 약 24 GiB, MPS 사용 가능, CUDA 없음, torch 미설치(이 작업에서는 설치하지 않음).</p>
+<h3>4.1 공식 재현: <strong>불가</strong></h3>
+<ul>
+<li>코드, 학습 데이터, 체크포인트 모두 공개되지 않았습니다(§0).</li>
+<li>학습 데이터는 Isaac Gym 시뮬레이터(LEAP Hand, NVIDIA GPU 필요)에서 만듭니다. 정책은 PPO로 같은 시뮬레이터에서 학습합니다.</li>
+<li>실물 평가는 LEAP Hand, Intel RealSense D455, 맞춤 FSR 센서가 필요합니다.</li>
+</ul>
+<h3>4.2 이 맥에서 실행: <strong>부분 가능</strong></h3>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>맥에서 가능?</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>시뮬레이션 데이터 생성 (Isaac Gym, LEAP)</td>
+<td><strong>불가</strong></td>
+<td>Isaac Gym은 NVIDIA GPU를 전제로 함. CUDA 없음</td>
+</tr>
+<tr>
+<td>정책 학습 (GRU PPO)</td>
+<td><strong>불가</strong></td>
+<td>위와 같음</td>
+</tr>
+<tr>
+<td>인코더 AsymFormer 추론</td>
+<td>가능 (추정)</td>
+<td>공개 저장소 Fourier7754/AsymFormer(Apache-2.0)가 있으나 가중치 출처와 동작은 확인하지 않음</td>
+</tr>
+<tr>
+<td>접촉 헤드 (교차 어텐션 + 인과 transformer, 1층 256차원) 학습</td>
+<td>가능 (추정)</td>
+<td>작은 모델. 데이터만 있으면 MPS나 CPU로 학습 가능. 수 시간 규모로 추정(확인 안 함)</td>
+</tr>
+<tr>
+<td>실물 데모</td>
+<td><strong>불가</strong></td>
+<td>하드웨어 없음</td>
+</tr>
+<tr>
+<td>감각·제어 toy</td>
+<td><strong>가능 (완료)</strong></td>
+<td><code>03_analysis.md</code> §6, numpy로 실행</td>
+</tr>
+</tbody>
+</table>
+<h3>4.3 아이디어 재구현 노력</h3>
+<ul>
+<li><strong>모델 구조:</strong> 교차 어텐션 두 질의(현재·명령 자세), 연결 후 MLP, 인과 transformer 창 8, 접촉 머리의 sigmoid. PyTorch로 수백 줄 안쪽으로 가능합니다(추정). 쉬운 편입니다.</li>
+<li><strong>학습 데이터:</strong> 병목입니다. 공개 손-물체 접촉 데이터가 RGB-D와 관절 명령을 함께 제공하는지 아직 확인하지 않았습니다. 없으면 시뮬레이터(CUDA)나 실물 LEAP Hand가 필요합니다.</li>
+<li><strong>정책 통합:</strong> 시뮬레이터에서 RL을 다시 돌려야 합니다. 맥에서는 불가입니다.</li>
+<li><strong>평가 설계:</strong> 가림 조건별 AUC, 접촉 비율 보고, 속도 결합 대조는 맥에서도 할 수 있습니다. 논문에 없는 항목이라 재구현 시 먼저 추가해야 합니다.</li>
+</ul>
+<h3>4.4 필요한 자원</h3>
+<table>
+<thead>
+<tr>
+<th>목적</th>
+<th>필요</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>접촉 헤드만 (공개 데이터 있을 때)</td>
+<td>맥 MPS 또는 CPU, RGB-D·관절 데이터</td>
+</tr>
+<tr>
+<td>논문 규모 재현</td>
+<td>NVIDIA GPU(Isaac Gym), LEAP Hand, RealSense, FSR 센서</td>
+</tr>
+<tr>
+<td>downstream 정책</td>
+<td>위와 같음 + RL 학습 시간</td>
+</tr>
+</tbody>
+</table>
+<h3>4.5 판정</h3>
+<ul>
+<li><strong>공식 재현:</strong> 불가 (코드·데이터 없음, 시뮬레이터·하드웨어 필요).</li>
+<li><strong>이 맥에서 논문 재현:</strong> 불가 (CUDA 시뮬레이터, 실물 하드웨어).</li>
+<li><strong>아이디어 재구현:</strong> 모델 구조는 쉬움. 데이터 확보가 어려움. 평가와 검정은 논문보다 엄격하게 다시 설계해야 함.</li>
+<li><strong>구현할 수 있는가:</strong> 예. 다만 &quot;접촉 헤드 + 가림 인식 평가&quot; 수준까지만이고, 논문의 downstream 결과는 CUDA 시뮬레이터와 LEAP Hand 없이는 재현할 수 없습니다.</li>
+</ul>
+<hr />
+<h2>5. 다음에 확인할 것 (아직 안 함)</h2>
+<ul>
+<li>AsymFormer 공식 가중치와 라이선스, RGB-D 입력 해상도.</li>
+<li>공개된 손-물체 접촉 데이터셋(RGB-D + 관절 명령 + 접촉 라벨)의 존재 여부.</li>
+<li>저자 측 연락 또는 코드 공개 일정(프로젝트 페이지 &quot;Coming Soon&quot;).</li>
+</ul>
+</section>
+<section class="chapter"><h1>02. 선행연구와 관계</h1>
+<p>논문: NoContactNoWorries (arXiv:2606.24450v2, IROS 2026 채택). 참고문헌 번호는 논문 References의 번호입니다.</p>
+<h2>1. 계보</h2>
+<table>
+<thead>
+<tr>
+<th>갈래</th>
+<th>대표 연구 (논문 번호)</th>
+<th>이 논문이 가져온 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>촉각 센서 기반 in-hand 회전</td>
+<td>AnyRotate [2], &quot;Rotating without seeing&quot; [3]</td>
+<td>과제 설정(in-hand 회전), 평가 지표 CRR·CRA([3]의 표준 절차)</td>
+</tr>
+<tr>
+<td>시각 + 촉각 정책 융합</td>
+<td>General in-hand rotation with vision and touch [21]</td>
+<td>손목 RGB-D, 관절 상태, 촉각을 넣는 정책 구조의 비교 기준</td>
+</tr>
+<tr>
+<td>자기 고정 시각 정책</td>
+<td>Visual dexterity [13], Learning deep visuomotor policies [12], Diffusion Policy [14]</td>
+<td>시각 전용 기준선의 맥락</td>
+</tr>
+<tr>
+<td>시각-관절 정책의 실패</td>
+<td>&quot;When would vision-proprioception policies fail?&quot; [16]</td>
+<td>시각이 과제 단계별로 덜 쓰인다는 관찰 (Introduction, Related Work)</td>
+</tr>
+<tr>
+<td>시각 → 촉각 예측 / 촉각 표현</td>
+<td>시각-촉각 교차 예측, 마스크 시각-촉각 사전학습 [22–28]</td>
+<td>&quot;시각에서 접촉을 맞힌다&quot;는 방향. 논문은 이들이 실물 촉각을 입력으로 가정한다고 구분</td>
+</tr>
+<tr>
+<td>보상으로만 촉각 사용</td>
+<td>UpVital [29]</td>
+<td>예측 모델을 보상 계산에만 쓰는 방식과 대비. 논문은 <strong>예측값을 정책 관측에 직접 넣는다</strong>고 차별화</td>
+</tr>
+<tr>
+<td>보상 형성</td>
+<td>Ng 1999 [30]</td>
+<td>보상 형성은 목표를 바꿀 수 있다는 논거</td>
+</tr>
+<tr>
+<td>시각 인코더</td>
+<td>AsymFormer [31]</td>
+<td>고정된 RGB-D 의미 분할 백본 (Φ)</td>
+</tr>
+<tr>
+<td>손 플랫폼·정책</td>
+<td>LEAP Hand [32], RMA [35]</td>
+<td>시뮬레이션 손, 파지 캐시, PPO 기반 정책의 보상 구성</td>
+</tr>
+<tr>
+<td>힘·토크 추정</td>
+<td>TransForce [36]</td>
+<td>이진 접촉에서 힘으로 확장하는 미래 연구 (Limitations)</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 가까운 대안</h2>
+<h3>2.1 촉각을 정책 입력에 넣는 방법 (논문이 언급)</h3>
+<ul>
+<li>촉각 센서를 직접 쓰는 in-hand 회전 정책 [2, 3, 21]. 하드웨어 비용과 취약성이 문제라고 논문이 말합니다(Intro).</li>
+<li>시각-촉각 사전학습 [22–28]. 실물 촉각을 배포 시에도 입력으로 가정합니다. 논문은 이것을 차별점으로 씁니다.</li>
+</ul>
+<h3>2.2 접촉을 추정하는 다른 방법 (논문이 직접 비교하지 않음)</h3>
+<ul>
+<li><strong>기하 기반 접촉 추정:</strong> 논문의 기준선 (g) &quot;Kinematic depth&quot;가 이 갈래입니다. 운동학 + 깊이 근접도로 접촉을 예측합니다. 가림에서 무너진다고 보고합니다(Table II: 0.54).</li>
+<li><strong>관절 추종 오차 기반:</strong> 논문의 (d) pose-delta와 Fig. 6이 이 갈래에 가깝습니다. 리더-팔로워 데이터를 다루는 연구 [저장소 <code>beyond_implicit_force/</code>]와 연결됩니다.</li>
+</ul>
+<h3>2.3 논문이 인용하지 않은 가까운 연구</h3>
+<ul>
+<li>접촉 정보로 정책 입력을 게이트하는 방법(예: FoAR류), 시각으로 촉각을 예측하는 Connecting Touch and Vision(arXiv:1906.06322, 2019). 이 목록은 <code>restacvla/analysis/02_prior_work.md</code>의 §2.2를 참고하면 됩니다. 이 논문은 이들을 인용하지 않습니다.</li>
+</ul>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>저장소 폴더</th>
+<th>논문</th>
+<th>이 논문과 맞닿는 부분</th>
+<th>차이</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>beyond_implicit_force/</code></td>
+<td>Beyond Implicit Force (arXiv:2607.14578, IROS 2026)</td>
+<td><strong>관절 추종 오차 → 접촉 힘 (proprioception 단서).</strong> P 서보의 정상상태 편차 δ = 힘/강성이 이 논문의 δ·c 항과 같은 원리입니다(<code>03</code> §5). 이 논문은 δ를 &quot;잔차&quot;로 쓰고 Fig. 6으로 상관만 보입니다. 그 논문은 구동 여유가 목표에 들어 있을 때 δ가 힘이 됨을 보입니다</td>
+<td>이 논문은 학습된 분류기, 그 논문은 물리 모델과 실물 2×2 실험</td>
+</tr>
+<tr>
+<td><code>contact_grounded_policy/</code></td>
+<td>Contact-Grounded Policy (arXiv:2603.05687, RSS 2026)</td>
+<td>촉각을 미래 예측과 접촉 일관성 사상으로 다룸. 예측값을 제어기 목표로 씀</td>
+<td>그쪽은 다지 촉각 정책 학습, 이 논문은 접촉 추정기를 분리</td>
+</tr>
+<tr>
+<td><code>reactive_grasp/</code></td>
+<td>Real-Time Force Regulation for Whole-Hand Grasping (arXiv:2609.30082)</td>
+<td>촉각 없이 메쉬·추적 자세·관절각으로 접점을 계산(기하 기반)</td>
+<td>메쉬가 필요하고 학습이 없음. 이 논문은 메쉬 없이 학습</td>
+</tr>
+<tr>
+<td><code>gpt6_astra_tactile/</code></td>
+<td>GPT-as-Tactile-Policy (arXiv:2610.28457)</td>
+<td>고정된 큰 모델을 촉각 정책으로 씀. 논문의 future work(&quot;pseudo-tactile 기반 모델&quot;)와 같은 방향</td>
+<td>언어 모델 기반, 이 논문은 작은 학습 헤드</td>
+</tr>
+<tr>
+<td><code>restacvla/</code></td>
+<td>ResTacVLA (arXiv:2607.03387, IROS 2026)</td>
+<td>영상으로 촉각을 예측하고 예측 오차(잔차)를 입력하는 점</td>
+<td>ResTacVLA는 촉각 센서가 있고 잔차를 VQ로 이산화. 이 논문은 센서 없이 이진 접촉만 예측</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>이 논문의 핵심 가설(시각 + 관절로 접촉을 맞힌다)은 <code>beyond_implicit_force/</code>의 δ 물리(관절 편차가 힘을 품는다)와 서로 보완합니다. 두 논문 모두 &quot;관절 편차&quot;를 접촉 단서로 봅니다. 그러나 이 논문은 편차의 속도 교란(명령 속도와의 결합)을 다루지 않습니다(<code>03</code> §6.2).</li>
+</ul>
+<h2>4. 구성 요소별 출처</h2>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>출처</th>
+<th>이 논문에서 새로운 점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RGB-D 인코더 Φ (고정)</td>
+<td>AsymFormer [31]</td>
+<td>고정하여 시간·자세 추론만 분리</td>
+</tr>
+<tr>
+<td>시각 토큰 Ψconv</td>
+<td>논문 자체</td>
+<td>두 번의 스트라이드 합성곱</td>
+</tr>
+<tr>
+<td>자세 질의 ψ(q), ψcom(qcom) 교차 어텐션</td>
+<td>논문 자체</td>
+<td><strong>현재와 명령을 다른 질의로 씀</strong> (&quot;query-asymmetry&quot;). 가장 강조하는 설계</td>
+</tr>
+<tr>
+<td>인과 transformer, 창 T = 8</td>
+<td>표준 구조</td>
+<td>이진 접촉 시계열</td>
+</tr>
+<tr>
+<td>BCE 손실</td>
+<td>표준</td>
+<td>프레임·접촉 지점 평균</td>
+</tr>
+<tr>
+<td>시뮬레이션 접촉 라벨</td>
+<td>PhysX</td>
+<td>손가락 중심 4 지점, 실물 FSR 위치에 맞춤</td>
+</tr>
+<tr>
+<td>정책 RL (GRU, PPO)</td>
+<td>LEAP Hand [32]와 RMA [35]의 파지 캐시</td>
+<td>접촉 추정기를 정책 관측에 연결</td>
+</tr>
+<tr>
+<td>지표 CRR·CRA</td>
+<td>[3]</td>
+<td>실물 CRA는 한 명의 관찰자가 수동 측정</td>
+</tr>
+</tbody>
+</table>
+<h2>5. GitHub와 공개 자료 (2026-11-09 확인)</h2>
+<p>논문의 공식 모델 코드는 없습니다. 프로젝트 페이지는 &quot;Code (Coming Soon)&quot;라고 씁니다(프로젝트 페이지 저장본). <code>gh search repos</code>와 <code>gh search code</code>로 제목, 저자, 논문 번호를 검색했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>관계</th>
+<th>라이선스</th>
+<th>★</th>
+<th>마지막 push</th>
+<th>대조 commit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>soham2560/no-contact-no-worries</code></td>
+<td>저자의 <strong>프로젝트 웹사이트 저장소</strong>. index.html, 그림·GIF·영상, README만 있음. 모델 코드 없음</td>
+<td>표기 없음 (웹사이트 본문에 CC BY-SA 4.0 표기)</td>
+<td>0</td>
+<td>2026-06-24</td>
+<td><code>f7c2b29</code></td>
+</tr>
+<tr>
+<td><code>lucidrains/no-contact-no-worries</code></td>
+<td>제3자 WIP &quot;Implementation of NoContactNoWorries&quot;. README, LICENSE, .gitignore만 있음</td>
+<td>MIT</td>
+<td>4</td>
+<td>2026-09-05</td>
+<td><code>7f76a23</code></td>
+</tr>
+<tr>
+<td><code>Fourier7754/AsymFormer</code></td>
+<td>인코더 [31]의 AsymFormer 저장소. 논문 저자 공식 여부는 확인하지 않음</td>
+<td>Apache-2.0</td>
+<td>57</td>
+<td>2026-08-23</td>
+<td><code>f1048c2</code></td>
+</tr>
+<tr>
+<td><code>leap-hand/LEAP_Hand_Sim</code></td>
+<td>LEAP Hand v1 Isaac Gym 저장소. 논문의 시뮬레이션 플랫폼 [32]의 후보</td>
+<td>MIT</td>
+<td>215</td>
+<td>2024-05-18</td>
+<td><code>150bc3d</code></td>
+</tr>
+<tr>
+<td><code>leap-hand/LEAP_Hand_Isaac_Lab</code></td>
+<td>LEAP Hand Isaac Lab 저장소 (대안)</td>
+<td>표기 없음 (API가 null)</td>
+<td>46</td>
+<td>2025-09-04</td>
+<td><code>c576e6a</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>검색 결과: <code>gh search repos &quot;NoContactNoWorries&quot;</code>는 <code>lucidrains/no-contact-no-worries</code>만 찾았고, <code>soham2560</code>의 저장소는 제목 검색으로 나오지 않았습니다. 이름으로 직접 조회해 찾았습니다.</li>
+<li><code>gh search code &quot;NoContactNoWorries&quot;</code>는 요약·목록형 저장소(VLA-Handbook, Embodied-AI-Daily 등)와 저자 웹사이트 파일만 찾았습니다. 구현 코드는 없습니다.</li>
+<li>공식 코드 저장소가 나오면 <code>repo/</code>에 얕은 clone을 받고 <code>04_code_verification.md</code>를 새로 씁니다.</li>
+</ul>
+<h2>6. 학회</h2>
+<ul>
+<li>arXiv 댓글: &quot;Accepted to IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) 2026&quot;입니다. 프로젝트 페이지도 IROS 2026을 씁니다. 따라서 **IROS 2026 (채택)**으로 적습니다.</li>
+<li>v1은 2026-06-23 제출, v2는 2026-11-06 개정입니다.</li>
+</ul>
+</section></body></html>
