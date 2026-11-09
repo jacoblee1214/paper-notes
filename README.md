@@ -4,6 +4,9 @@
 
 | 날짜 | 글 | 요약 |
 |---|---|---|
+| 2026-11-09 | [You don't need long context 읽기: 압축은 정확도를 지키지만, 비용 이득은 계산 방식에 달려 있다](papers/no_long_context/) | 에이전트 문맥을 자주 압축하면 정확도는 거의 그대로이고 비용은 크게 준다는 NVIDIA 논문을, 표 17개를 다시 계산하고 비용 모델을 구조별로 재구성하며 읽었습니다. 정확도 결론은 표와 맞습니다. 비용 결론은 가정한 단가 비율과 기준선 가격 규칙에 크게 기댑니다. |
+| 2026-11-09 | [DreamX 읽기: 영상 diffusion 모델 안에서 latent action을 읽으면, 사람과 로봇은 정말 같은 좌표에 놓일까](papers/dreamx/) | 영상 diffusion 백본으로 latent action을 학습하는 DreamX를, 표를 재계산하고 사람·로봇 정렬이 언제 생기는지 선형 toy로 따져 보며 읽었습니다. |
+| 2026-11-09 | [BA-T 읽기: bundle adjustment의 정보 흐름을 Transformer 층 하나로, 그런데 코드는 다르게](papers/ba_t/) | 고전 BA의 '잔차 → 카메라 → geometry' 흐름을 38M짜리 반복 층으로 옮긴 BA-T(NeurIPS 2026)를, 표를 재계산하고 공개 코드와 대조하고 numpy BA toy로 확인하며 읽었습니다. |
 | 2026-11-05 | [NestDex 읽기: 손가락은 기술이, 팔은 사람이. 그런데 빨라진 것은 효율일까 신뢰성일까](papers/nestdex/) | 다지 손 텔레옵에서 손가락을 작은 proprio 기술 정책에 맡기는 NestDex를, 표를 재계산하고 프로젝트 사이트의 공개 데이터를 다시 분석하며 읽었습니다. |
 | 2026-11-05 | [CHORD 읽기: 접촉 wrench 보상은 '어디를'이 아니라 '어느 방향으로' 미는지를 본다](papers/chord/) | 사람 시연의 접촉을 wrench 지지 함수로 바꿔 다지 손 RL을 지도하는 CHORD를, 공식 보상 함수를 numpy로 옮긴 toy와 표 재계산, 그리고 FlashDexRetarget 기준선 결과와의 대조로 읽었습니다. |
 | 2026-11-04 | [OpenWAM 읽기: World–Action Model을 부품으로 쪼개 보니, 추론 때 미래 영상은 거의 쓰이지 않았다](papers/openwam/) | WAM의 설계 선택을 같은 조건에서 비교하고 5B+1B 모델을 사전학습한 OpenWAM을, 표를 재계산하고 공개 코드·체크포인트 메타데이터와 대조하며 읽었습니다. |

@@ -1,0 +1,296 @@
+{
+  "A_table1": {
+    "7Scenes": {
+      "two_view_best_per_metric": {
+        "AUC@5": [
+          "BA-T"
+        ],
+        "AUC@10": [
+          "BA-T"
+        ],
+        "AUC@20": [
+          "BA-T"
+        ],
+        "Chamf": [
+          "ViSTA"
+        ],
+        "Acc": [
+          "ViSTA",
+          "BA-T"
+        ],
+        "Comp": [
+          "ViSTA"
+        ],
+        "d1.25": [
+          "ViSTA",
+          "BA-T"
+        ]
+      },
+      "multi_view_models_better_than_BA-T": {
+        "AUC@5": [
+          "VGGT",
+          "DA3"
+        ],
+        "AUC@10": [
+          "VGGT",
+          "DA3"
+        ],
+        "AUC@20": [
+          "VGGT",
+          "DA3"
+        ],
+        "Chamf": [
+          "VGGT",
+          "MA",
+          "DA3"
+        ],
+        "Acc": [
+          "DA3"
+        ],
+        "Comp": [
+          "VGGT",
+          "MA",
+          "DA3"
+        ],
+        "d1.25": []
+      }
+    },
+    "BundleFusion": {
+      "two_view_best_per_metric": {
+        "AUC@5": [
+          "DUSt3R",
+          "MASt3R",
+          "BA-T"
+        ],
+        "AUC@10": [
+          "BA-T"
+        ],
+        "AUC@20": [
+          "BA-T"
+        ],
+        "Chamf": [
+          "ViSTA"
+        ],
+        "Acc": [
+          "ViSTA"
+        ],
+        "Comp": [
+          "ViSTA"
+        ],
+        "d1.25": [
+          "ViSTA",
+          "BA-T"
+        ]
+      },
+      "multi_view_models_better_than_BA-T": {
+        "AUC@5": [
+          "VGGT",
+          "DA3"
+        ],
+        "AUC@10": [
+          "VGGT",
+          "DA3"
+        ],
+        "AUC@20": [
+          "VGGT",
+          "DA3"
+        ],
+        "Chamf": [
+          "VGGT",
+          "DA3"
+        ],
+        "Acc": [],
+        "Comp": [
+          "VGGT",
+          "DA3"
+        ],
+        "d1.25": []
+      }
+    },
+    "size_ratio_BA-T_over": {
+      "VGGT": 0.063,
+      "MA": 0.222,
+      "DA3": 0.05,
+      "DUSt3R": 0.167,
+      "ViSTA": 0.336
+    },
+    "ViSTA†_vs_ViSTA_AUC@5_7Scenes": {
+      "ViSTA†": 0.01,
+      "ViSTA": 0.13,
+      "ratio": 13.0
+    },
+    "ViSTA†_rot_only_AUC@5_table3a": 0.426,
+    "note": "표 1의 포즈 AUC는 max(회전, 이동 방향 각) 오차 기준, 표 2·3은 회전·이동(m) 따로. 같은 ViSTA†가 표 1 AUC@5=0.01, 표 3 (a) 회전 AUC@5=0.426 — 이동 방향 오차가 지배한다는 뜻"
+  },
+  "B_table2": {
+    "ViSTA†_iter": {
+      "rot5_gain_1to4": 0.049,
+      "tra05_gain_1to4": 0.05,
+      "corr_reduction_1to4_pct": 27.4,
+      "rel_reduction_1to4_pct": 1.6
+    },
+    "BA-T": {
+      "rot5_gain_1to4": 0.033,
+      "tra05_gain_1to4": 0.1,
+      "corr_reduction_1to4_pct": 43.5,
+      "rel_reduction_1to4_pct": 5.9
+    },
+    "claim": "본문 4.2: ViSTA† Corr. 27% 감소, BA-T 44% 감소",
+    "BA-T_iter1_vs_ViSTA†_iter4": {
+      "rot5": [
+        0.65,
+        0.491
+      ],
+      "tra05": [
+        0.322,
+        0.151
+      ]
+    },
+    "BA-T_tra05_gain_per_step": [
+      0.079,
+      0.02,
+      0.001
+    ],
+    "BA-T_share_of_iter4_gap_over_ViSTA†iter4_reached_at_iter1": {
+      "rot5": 0.828,
+      "tra05": 0.631
+    },
+    "table3_a_b_equal_table2": {
+      "a==ViSTA†(no iter)": true,
+      "b==ViSTA†_iter4": true,
+      "g==BA-T_iter4": true
+    }
+  },
+  "C_table3": {
+    "(a→b)/(a→g)": {
+      "rot5": 0.253,
+      "tra05": 0.148,
+      "corr": 0.269,
+      "claim": "25% / 15% / 27%"
+    },
+    "(b→h)/(b→g)": {
+      "rot5": 0.76,
+      "tra05": 0.535,
+      "rel": 0.75,
+      "claim": "76% / 54% / 75%"
+    },
+    "(h→g)/(b→g)": {
+      "corr": 0.684,
+      "tra05": 0.465,
+      "claim": "Corr 68%, 이동 46%"
+    },
+    "(b→h)/(b→g)_all_metrics": {
+      "rot5": 0.76,
+      "rot10": 0.79,
+      "rot20": 0.803,
+      "tra05": 0.535,
+      "tra10": 0.633,
+      "tra20": 0.689,
+      "corr": 0.316,
+      "rel": 0.75,
+      "d105": 0.576,
+      "d125": 0.375
+    },
+    "leave_one_out_drop_rot5_tra05": {
+      "c": [
+        0.018,
+        0.037
+      ],
+      "d": [
+        0.016,
+        0.018
+      ],
+      "e": [
+        0.006,
+        0.01
+      ]
+    },
+    "(d)_d1.05_higher_than_full": [
+      0.62,
+      0.601
+    ]
+  },
+  "D_tables456": {
+    "T4_speedup": 5.2,
+    "T4_mem_reduction_pct": 44.4,
+    "T4_vs_T2_consistency(BA-T K=4, 7Scenes)": {
+      "rot5": [
+        0.68,
+        0.683
+      ],
+      "tra05": [
+        0.42,
+        0.422
+      ],
+      "d1.25": [
+        0.98,
+        0.976
+      ],
+      "rel": [
+        0.2,
+        0.048
+      ],
+      "rel_ratio": 4.17
+    },
+    "T5_time_fit_ms": {
+      "per_iter": 3.22,
+      "intercept(encoder+heads)": 18.26,
+      "diffs": [
+        3.25,
+        3.67,
+        2.6
+      ],
+      "K8_extrapolated": 44.0,
+      "README_RTX4070_K8": "약 50 ms (GPU가 다름)"
+    },
+    "T5_BA-T_k4_vs_fastest_other": {
+      "BA-T k4": 30.92,
+      "ViSTA": 37.96,
+      "MapAny": 41.13
+    },
+    "mem_values_BA-T": {
+      "T4": 1.35,
+      "T5": 1.32,
+      "T6(4view)": 1.35
+    },
+    "weights_fp32": {
+      "GB": 1.378,
+      "GiB": 1.283,
+      "T5_peak_minus_weights_if_GiB": 0.037,
+      "note": "최대 메모리 1.32가 GiB라면 활성값은 약 0.04 GiB — 메모리 비교는 거의 가중치 크기 비교"
+    },
+    "T6_better_count": {
+      "VGGT_better_than_BA-T": [
+        "trans",
+        "rot",
+        "rel",
+        "d125"
+      ],
+      "BA-T_better_than_MapAny": [
+        "trans",
+        "rot",
+        "rel",
+        "d125"
+      ]
+    },
+    "T6_mem_ratio_vs_MapAny": 0.395,
+    "T6_time_ratio_vs_VGGT": 4.55
+  },
+  "E_eq11_weights": {
+    "weights_k1..k5": [
+      0.4096,
+      0.512,
+      0.64,
+      0.8,
+      1.0
+    ],
+    "sum(=ViSTA† loss 배수)": 3.3616,
+    "share_k1..k5": [
+      0.122,
+      0.152,
+      0.19,
+      0.238,
+      0.297
+    ]
+  }
+}

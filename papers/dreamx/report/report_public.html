@@ -1,0 +1,1057 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>DreamX 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="policy_push_ci"] { max-width: 78%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+td code { word-break: break-word; }
+th:first-child, td:first-child { min-width: 6.5em; }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>DreamX: 분석 리포트</h1>
+<p class="meta">게시용 버전 · 원문 https://arxiv.org/abs/2611.05377 · arXiv:2611.05377v1 · KAIST, NVIDIA (Jisoo Kim, Chaehyun Kim, … Fu-En Yang, Seungryong Kim) · 공식 코드 미공개(cvlab-kaist/DreamX @ 056bd46, README만) · 분석일 2026-11-09 · 논문 그림 © 저자, CC BY 4.0</p>
+<p><img src="figures/paper_fig1_overview.png" alt="Fig. 1" /></p>
+<p class="cap">논문 Fig. 1: 사람 1인칭 영상과 로봇 영상에서 영상 diffusion 모델로 공통 latent action을 학습하고, 영상 전이·행동 전이·압축 latent 정책에 쓴다.</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 했나:</strong> Cosmos-Predict2.5 2B에 learnable query를 붙여 latent frame당 4개의 latent-action 토큰을 읽고(Eq. 2), 같은 백본을 decoder로 써서 첫 프레임과 이 토큰만으로 미래 영상을 재구성한다(Eq. 3–4). 로봇 클립에는 행동 보조 손실을, 사람 클립(21.4%)에는 재구성만 쓴다. 2.19k시간, 78k step.</li>
+<li><strong>표 수치는 맞다:</strong> Table 1 평균(DiLA 회귀 0.3875 → 0.38만 경계), Table 3 SR 96.7/50.0, Table 7 Avg. Len., 데이터 합계 2,188 h가 재현된다. LARYBench 회귀 오차는 기존 최고 대비 44–65% 낮고, 32차원 압축 코드(FAE-32)도 모든 기준선보다 낫다.</li>
+<li><strong>정렬의 근거는 &quot;같은 시점&quot;에 몰려 있다:</strong> 재구성 손실은 사람·로봇 latent가 같은 좌표에 놓이기를 요구하지 않는다. 선형 toy에서 공유 encoder는 이미지 공간 움직임이 일치할 때만 정렬되고(전이 오차 = 2(1 − cos θ)), 짝 클립 5%면 θ와 무관하게 정렬된다. Fig. 5·6의 사람 영상은 로봇과 같은 위쪽 시점이고, 1인칭 → 3인칭 전이는 평가되지 않았다.</li>
+<li><strong>탐침 점수는 정렬을 재지 못한다:</strong> toy의 모든 조건에서 embodiment별 탐침 R²는 1이다. LARYBench의 높은 점수는 정보량의 근거이지 공통 좌표의 근거가 아니다. 영상 모델만 중간 프레임을 받았고, 학습 데이터의 37.4%(AgiBot)가 평가셋과 같은 출처다.</li>
+<li><strong>통제되지 않은 경로:</strong> encoder는 지시문을 받고 decoder는 받지 않는다. 빈 지시 ablation이 없어 전이의 어디까지가 움직임이고 어디까지가 과제 의미인지 가를 수 없다. query를 0으로 바꿔도 움직임이 46% 남고, 채널 표준편차만큼의 잡음에도 94.6%가 유지된다(Table 8).</li>
+<li><strong>&quot;300×&quot;는 토큰 개수다:</strong> 토큰당 2,048차원이라 프레임당 8,192개 실수, VAE latent 대비 9.4×다. 실물 정책 우위는 push 28/30 대 2/30(p = 3×10⁻¹²)으로 확실하지만 reach는 차이가 없고(p = 0.49), &quot;사람 영상만으로 100%&quot;는 로봇 시연 8/10과 구분되지 않는다(p = 0.47).</li>
+<li><strong>구현 가능성:</strong> 코드·가중치가 없어 공식 재현은 불가능하다. 이 맥(M4 Pro 24 GiB, MPS)은 표 재계산과 toy까지 했고, 공개 백본 단독 추론(4.6 GB)은 설치·다운로드 승인 후 조건부(미검증, 공식 스택은 CUDA·Linux 전제), 학습은 불가능하다. 재구현은 query + LoRA 구조라 중간 난이도이지만 행동 branch와 행동 공간 통일 방식이 빠져 있다.</li>
+</ol>
+<p><img src="figures/paper_fig2_arch.png" alt="Fig. 2" /></p>
+<p class="cap">논문 Fig. 2: (a) query가 백본의 시공간 표현을 읽어 latent action을 만들고, 같은 백본의 decoder가 첫 프레임과 latent action으로 미래 영상(과 레이블이 있으면 행동)을 재구성한다. (b) encoder·decoder attention 마스크.</p>
+</section>
+<section class="chapter"><h1>01. 논문 분석: DreamX (arXiv:2611.05377)</h1>
+<ul>
+<li><strong>제목:</strong> <em>DreamX: Video Diffusion Model is a Universal Latent Action Learner</em></li>
+<li><strong>저자:</strong> Jisoo Kim, Chaehyun Kim, Junsu Kim, Jiho Park, Seongchan Kim, Eunbeen Hong, Soowon Son, Fu-En Yang, Seungryong Kim (KAIST, Fu-En Yang은 NVIDIA)</li>
+<li><strong>공개:</strong> arXiv v1(2026-11-03). 본문 10쪽, 부록 A–D와 참고문헌을 합쳐 25쪽입니다. 프로젝트 페이지는 https://cvlab-kaist.github.io/DreamX/ 입니다.</li>
+<li><strong>코드·가중치:</strong> 공개되지 않았습니다. 프로젝트 페이지에는 &quot;Code soon&quot;만 있고, <code>cvlab-kaist/DreamX</code> 저장소(@ <code>056bd46</code>)에는 README와 티저 그림뿐입니다(2026-11-09 확인).</li>
+<li><strong>라이선스:</strong> arXiv abs 페이지 기준 <strong>CC BY 4.0</strong>입니다. PDF 안에 이와 충돌하는 권리 표기(© 문구 등)는 없습니다. 그래서 출처를 밝히고 게시본에도 논문 그림을 넣었습니다.</li>
+</ul>
+<p><strong>한 줄 요약:</strong> 사전학습된 영상 diffusion 모델(Cosmos-Predict2.5 2B)에 학습 가능한 query 토큰을 붙여 영상 특징에서 <strong>latent frame당 4개의 latent-action 토큰</strong>을 읽어 내고, 같은 백본을 decoder로 써서 첫 프레임과 이 토큰만으로 미래 영상을 재구성하도록 학습합니다. 이렇게 얻은 latent action을 사람·로봇 사이의 공통 행동 인터페이스로 쓰고, 영상 전이, 행동 전이, 정책 학습에 활용합니다.</p>
+<h2>1. Abstract와 문제 설정</h2>
+<p><strong>문제.</strong> 사람 영상에는 로봇 행동 레이블이 없고, 로봇끼리도 제어 공간이 다릅니다. 그래서 같은 행동이 embodiment마다 다른 저수준 행동으로 기록됩니다(§1). latent action model(LAM)은 연속 프레임의 변화를 압축한 latent action으로 이 문제를 풀려 하지만, 재구성 정확도만으로는 latent action이 &quot;행동&quot;만 담는다는 보장이 없습니다. 재구성에 도움이 되면 시점이나 장면 외관 같은 도메인 정보도 함께 담깁니다(§1, Nikulin et al. 2025 인용).</p>
+<p><strong>주장.</strong></p>
+<ol>
+<li>영상 diffusion 모델의 시공간 특징은 움직임·대응·기하를 이미 담고 있으므로, 여기서 latent action을 직접 읽으면 좋습니다(§1, §2).</li>
+<li>같은 모델의 생성 prior가 외관을 책임지므로, decoder가 첫 프레임과 latent action으로 미래를 재구성하게 하면 latent action은 움직임에 집중하게 됩니다(§3.2).</li>
+<li>그 결과 LARYBench에서 LAM 중 최고 성능을 냈고(Table 1), 짝지은 학습 데이터 없이도 임의 embodiment 간 영상 전이와 사람→로봇 zero-shot 행동 전이가 됩니다(§4.2–4.3).</li>
+<li>압축 코드를 예측 대상으로 하는 정책은 미래 영상을 생성하는 정책(Mimic-Video)보다 성공률이 높고 19.1배 빠릅니다(Table 3).</li>
+</ol>
+<p><strong>기여(§1).</strong> (i) 영상 diffusion 모델의 시공간 prior와 생성 prior로 범용 latent action을 학습하는 틀, (ii) 짝지은 데이터 없는 영상·행동 전이와 압축 latent 코드를 예측 대상으로 하는 정책.</p>
+<h2>2. Method</h2>
+<h3>2.1 백본: Cosmos-Predict2.5 (§3.1, Eq. 1)</h3>
+<p>causal 영상 autoencoder가 클립을 latent frame N개 V = (V₀, …, V_{N−1})로 압축합니다. V₀는 첫 프레임만 담습니다. 이 latent를 공간 패치 토큰으로 나눠 시공간 attention으로 모델링하고, 첫 프레임과 텍스트 등의 조건 c 아래에서 flow matching으로 학습합니다. x_τ = (1 − τ)x + τε, 손실은 ‖v_θ(x_τ, τ; c) − (ε − x)‖²입니다(Eq. 1).</p>
+<h3>2.2 Encoder: query 토큰으로 latent action 읽기 (§3.2, Eq. 2, Fig. 2)</h3>
+<ul>
+<li>학습 가능한 query 토큰 q를 영상 토큰 열에 이어 붙여, 백본의 시공간 attention을 함께 통과시킵니다.</li>
+<li>latent frame V_g마다 query K = 4개(q_g)를 배정하고, 문맥화된 출력이 latent-action 그룹 Q_g가 됩니다. 모든 그룹을 한 번의 forward로 뽑습니다: <strong>Q = E_φ(q; V, ℓ)</strong> (Eq. 2).</li>
+<li><strong>ℓ은 언어 지시이고, 백본의 원래 cross-attention으로 encoder에 들어갑니다.</strong> decoder에는 텍스트가 들어가지 않습니다. 이 차이는 §4에서 다시 다룹니다.</li>
+<li>attention 마스크(Fig. 2b): query → 영상은 프레임 causal이라 Q_g는 V_{0:g}만 봅니다. query끼리는 제한이 없습니다.</li>
+<li>encoder는 사전학습 백본에 rank-16 LoRA를 붙여 학습합니다(백본 가중치는 고정, 부록 A.2).</li>
+</ul>
+<h3>2.3 Decoder: 생성 재구성과 보조 행동 손실 (§3.2, Eq. 3–4)</h3>
+<ul>
+<li>같은 백본을 별도 rank-16 LoRA로 decoder로 씁니다. 조건은 V₀와 Q_{0:N−1}이고 텍스트는 넣지 않습니다.</li>
+<li>행동 레이블이 있는 클립에서는 고유수용 상태 p₀를 받아 행동 chunk도 함께 decode합니다: V̂, Â = D_θ(Q_{0:N−1}, V₀, p₀) (Eq. 3).</li>
+<li>decoder 마스크: query는 조건으로만 쓰이고 아무것도 보지 않습니다. 영상 프레임 V_t는 Q_{0:t}를, 행동 chunk A_m은 Q_{0:m}을 보며, 영상과 행동 스트림은 서로를 보지 않습니다.</li>
+<li>손실: L = L_video + λ L_action, 행동 레이블이 없는 클립은 λ = 0입니다(Eq. 4). 레이블이 있으면 두 손실의 가중치가 같습니다(부록 A.2).</li>
+</ul>
+<h3>2.4 전이 (§3.3, Eq. 5, Fig. 3a)</h3>
+<p>원본 영상에서 고정된 encoder로 Q_src = E_φ(q; V_src, ℓ_src)를 뽑고, 두 가지로 씁니다.</p>
+<ul>
+<li><strong>영상 전이:</strong> V̂_tgt = D_θ(Q_src, V₀^tgt). 대상 장면의 첫 프레임에 원본 움직임을 입힙니다.</li>
+<li><strong>행동 전이:</strong> Â_tgt = D_θ(Q_src, p₀^tgt). 대상 로봇의 초기 상태에서 실행할 행동을 decode합니다.</li>
+</ul>
+<p>논문은 이 전이 능력이 학습 목표에 없던 <strong>창발 성질</strong>이라고 설명합니다(§3.3). 추가 학습은 하지 않습니다.</p>
+<h3>2.5 압축과 정책 (§3.4, Eq. 6–9, 부록 A.3–A.4)</h3>
+<ul>
+<li><strong>압축(FAE):</strong> latent-action 토큰은 개수는 적지만 각 토큰이 백본 폭(2,048차원)을 그대로 가집니다. 논문도 이 때문에 직접 diffusion하기에는 차원이 높다고 적습니다(§3.4). 그래서 encoder를 고정하고 변분 bottleneck으로 토큰마다 2,048 → 32차원으로 줄입니다. 손실은 ‖Q̂ − Q‖² + β KL이고 β = 0.01입니다(Eq. 8–9). encoder는 self-attention 블록 하나, decoder는 6층 transformer, 학습은 50k step입니다. 정책 학습에는 사후 평균 Z = μ_ψ(Q)를 씁니다.</li>
+<li><strong>정책:</strong> π(Z, A | V₀, ℓ, p₀)(Eq. 6). 같은 영상 백본이 현재 프레임과 지시에서 압축 코드 Z를 생성하고, 별도의 Action DiT가 생성기의 latent-action 특징, 관찰, 지시, 상태를 보고 행동을 생성합니다. 행동 토큰은 latent 특징을 보지만 반대는 아닙니다. 손실은 L_latent + λ L_action이고, 사람 영상은 λ = 0입니다(Eq. 7).</li>
+<li><strong>생성기 사전학습:</strong> DreamX 사전학습 데이터의 약 1/3로 rank-128 LoRA를 100k step 학습합니다(H200 2장, 배치 60). Action DiT는 따로 사전학습하지 않고 과제별 학습 때 함께 학습합니다(부록 A.4).</li>
+</ul>
+<h3>2.6 학습 설정 (§4 구현 세부, 부록 A.1–A.2)</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>백본</td>
+<td>Cosmos-Predict2.5 2B, 480 × 640</td>
+</tr>
+<tr>
+<td>클립</td>
+<td>5–29프레임(4 간격) = latent frame 2–8개, query 최대 32개</td>
+</tr>
+<tr>
+<td>학습</td>
+<td>encoder·decoder 각각 rank-16 LoRA, 78,000 step, LoRA·query 학습률 1e-4, 나머지 5e-5, warm-up 500</td>
+</tr>
+<tr>
+<td>데이터</td>
+<td>2.19k시간, 6개 데이터셋(Fig. 9): AgiBot 818.2 h, MolmoAct2-BimanualYAM 502.3 h, DROID 410.1 h, EgoDex 350.5 h, EgoVerse 59.0 h, Bridge 47.9 h. 사람 영상 21.4%</td>
+</tr>
+<tr>
+<td>미보고</td>
+<td>GPU 종류·수와 학습 시간(사전학습), 배치 크기, seed, 행동 레이블이 있는 클립의 비율</td>
+</tr>
+</tbody>
+</table>
+<h2>3. Experiments</h2>
+<h3>3.1 표현 품질: LARYBench (§4.1, Table 1, 부록 B.4)</h3>
+<p>모든 표현 모델을 고정하고 공통 attentive probe를 학습해, 말단 궤적 회귀(정규화 MSE)와 행동 분류(정확도)를 평가합니다.</p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>회귀 평균 ↓</th>
+<th>분류 평균 ↑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LAPA / UniVLA / villa-X (프레임 2장)</td>
+<td>0.97 / 0.87 / 0.87</td>
+<td>20.17 / 18.75 / 20.90</td>
+</tr>
+<tr>
+<td>LAPA-DINOv3 (프레임 2장)</td>
+<td>0.60</td>
+<td>49.17</td>
+</tr>
+<tr>
+<td>MoTo / AdaWorld / VideoWorld2 (영상)</td>
+<td>0.44 / 0.69 / 0.70</td>
+<td>51.01 / 44.29 / 27.37</td>
+</tr>
+<tr>
+<td>DiLA (영상, 기존 최고)</td>
+<td>0.38</td>
+<td>62.25</td>
+</tr>
+<tr>
+<td><strong>DreamX</strong></td>
+<td><strong>0.17</strong></td>
+<td><strong>69.67</strong></td>
+</tr>
+<tr>
+<td>DreamX + FAE-32</td>
+<td>0.22</td>
+<td>67.15</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>DreamX는 8개 열 모두에서 1위이고, FAE-32 압축 코드도 모든 기준선보다 낫습니다.</li>
+<li><strong>비교 조건이 같지 않습니다.</strong> 회귀 벤치마크는 원래 표본당 프레임 2장만 주는데, 저자들이 메타데이터로 원본 영상의 중간 프레임까지 복원해 영상 기반 모델에만 넣었습니다(부록 B.4). 표의 위쪽 그룹(프레임 2장)과 아래쪽 그룹(영상)은 입력 정보량부터 다릅니다. 논문도 표를 두 그룹으로 나눠 두었습니다.</li>
+<li>encoder가 언어 지시 ℓ을 받는데(Eq. 2), LARYBench 특징을 뽑을 때 지시를 넣었는지, 넣었다면 무엇을 넣었는지 적혀 있지 않습니다. 분류 과제라면 지시문이 정답 정보를 줄 수 있습니다(<code>04</code> C9).</li>
+<li>평균을 다시 계산하면 DiLA 회귀 평균만 0.3875로 표의 0.38과 경계에 있습니다(나머지는 반올림 안에서 일치, <code>04</code> C1).</li>
+</ul>
+<p><img src="figures/table1_gains.png" alt="table1_gains.png" /></p>
+<p class="cap">Table 1 다시 그림: 회귀 평균 MSE와 분류 평균 정확도. 파랑 DreamX, 초록 FAE-32 압축 코드, 회색 기준선.</p>
+<h3>3.2 영상 전이 (§4.2, Table 2, Fig. 4–5, 부록 B.5)</h3>
+<p><img src="figures/paper_fig5_h2r_video.png" alt="Fig. 5" /></p>
+<p class="cap">논문 Fig. 5: HumanAndRobot 벤치마크의 사람→로봇 zero-shot 영상 전이. 사람과 로봇이 같은 위쪽 시점에서 찍혀 있습니다.</p>
+<ul>
+<li><strong>임의 embodiment 간 전이(Fig. 4):</strong> 같은 로봇의 다른 환경, 다른 로봇, 사람→로봇, DAVIS 일반 영상까지 정성 예시만 있습니다.</li>
+<li><strong>사람→로봇 zero-shot(Table 2):</strong> HumanAndRobot 21개 과제에서 과제당 48클립, 총 1,008클립을 씁니다. 각 방법은 사람 영상과, 짝지은 로봇 녹화의 첫 프레임을 받습니다. 나머지 로봇 프레임은 평가 기준으로만 씁니다. 첫 20프레임에서 조건 프레임을 뺀 19프레임으로 평가합니다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>FVD ↓</th>
+<th>LPIPS ↓</th>
+<th>PSNR ↑</th>
+<th>SSIM ↑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AdaWorld</td>
+<td>170.19</td>
+<td>0.344</td>
+<td>22.95</td>
+<td>0.846</td>
+</tr>
+<tr>
+<td>VideoWorld2</td>
+<td>241.92</td>
+<td>0.299</td>
+<td>22.53</td>
+<td>0.881</td>
+</tr>
+<tr>
+<td><strong>DreamX</strong></td>
+<td><strong>57.44</strong></td>
+<td><strong>0.179</strong></td>
+<td><strong>26.52</strong></td>
+<td><strong>0.917</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>기준선은 전이 과제용으로 학습되지 않았고 학습 데이터도 다릅니다. &quot;첫 프레임을 그대로 복사&quot;하거나 query를 0으로 둔 자명한 기준선은 없습니다. PSNR·SSIM은 정지 배경이 대부분을 차지하므로, 이런 기준선이 있어야 움직임 전이 몫을 가를 수 있습니다(<code>04</code> C2).</li>
+</ul>
+<h3>3.3 행동 전이 (§4.3, Fig. 6, 부록 B.2)</h3>
+<p>사람 시연에서 뽑은 latent action을 로봇 초기 상태와 함께 decode해서 <strong>시각 피드백 없이 open-loop로</strong> 실행합니다. 글자 &quot;N&quot; 쓰기(오른쪽 그리퍼에 마커), 한 팔로 &quot;앞으로 민 뒤 왼쪽으로&quot; 밀기, 양팔로 앞으로 밀기를 보입니다.</p>
+<ul>
+<li>정량 결과(시행 수, 궤적 오차, 성공률)는 없습니다. 정성 사례만 있습니다.</li>
+<li>Fig. 6의 사람 시연은 로봇 카메라와 <strong>같은 위쪽 시점, 같은 작업대</strong>에서 찍혔습니다. 1인칭 사람 영상에서 3인칭 로봇으로 가는 경우처럼 시점이 다른 전이는 시험하지 않았습니다. 이 차이가 왜 중요한지는 <code>03</code> §1의 toy에서 다룹니다.</li>
+</ul>
+<p><img src="figures/paper_fig6_action_transfer.png" alt="paper_fig6_action_transfer.png" /></p>
+<p class="cap">논문 Fig. 6: 사람 시연에서 뽑은 latent action을 로봇 명령으로 decode해 open-loop 실행. 사람과 로봇이 같은 위쪽 시점에서 찍혔다.</p>
+<h3>3.4 정책: 실물 서랍 닫기 (§4.4, Table 3, 5, 6, 부록 B.1, B.3, C.1)</h3>
+<ul>
+<li><strong>설정:</strong> 양팔 YAM(팔마다 관절 6개 + 그리퍼 1개, 14차원 절대 명령), 위쪽 시점의 RealSense D405 한 대. 위 서랍만 열림, 아래 서랍만 열림, 둘 다 열림(위 → 아래 순서) 세 설정입니다. 학습 궤적은 45개이고, 설정당 10회 평가합니다. 두 방법 모두 30,000 step 과제별 학습을 했습니다. Mimic-Video는 MolmoAct로 사전학습한 영상 백본에서, DreamX는 사전학습한 latent-action 생성기에서 출발합니다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>위 R/P</th>
+<th>아래 R/P</th>
+<th>둘 다 R/P</th>
+<th>SR(Table 3)</th>
+<th>지연(ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mimic-Video</td>
+<td>80 / 20</td>
+<td>100 / 0</td>
+<td>100 / 0</td>
+<td>50.0</td>
+<td>28,226</td>
+</tr>
+<tr>
+<td><strong>DreamX</strong></td>
+<td>100 / 80</td>
+<td>100 / 100</td>
+<td>100 / 100</td>
+<td><strong>96.7</strong></td>
+<td><strong>1,474</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>SR은 설정마다 reach와 push 완료율을 평균하고 세 설정을 같은 가중치로 평균한 값입니다. 다시 계산하면 정확히 맞습니다(<code>04</code> C3).</li>
+<li><strong>차이는 전부 push에서 나옵니다.</strong> Mimic-Video는 30회 중 28회 서랍에 닿지만 2회만 닫습니다. reach는 30/30 대 28/30으로 차이가 없습니다(Fisher p = 0.49).</li>
+<li><strong>사람 영상만으로 학습(Table 6):</strong> 위 서랍 설정의 로봇 시연을 사람 영상으로 바꿔도 100/100입니다. 로봇 시연 정책의 위 서랍 push 8/10과 비교하면 p = 0.47로 구분되지 않습니다. 사람 영상의 개수는 보고되지 않았습니다(<code>04</code> C4).</li>
+<li>정책 1회 호출이 1.47초라서 실시간 제어 주기와는 거리가 있습니다.</li>
+</ul>
+<h3>3.5 Ablation과 분석 (§4.5–4.6, Table 4, 7, 8, Fig. 7–8, 12–13)</h3>
+<ul>
+<li><strong>행동 보조 손실(Table 4):</strong> MolmoAct2·EgoVerse·EgoDex 일부로 학습했을 때 RGB만은 회귀 0.24 / 분류 65.3, RGB + 행동은 0.23 / 64.8입니다. 논문은 &quot;영상만으로 행동 의미를 잡는다&quot;고 해석합니다. 다만 이 표는 LARYBench 탐침 점수만 재고, <strong>행동 손실이 사람→로봇 전이(정렬)에 미치는 영향은 재지 않았습니다</strong>. seed도 1개입니다.</li>
+<li><strong>CALVIN(Table 7):</strong> 정책의 action head가 latent-action 특징을 못 보게 막으면 Avg. Len.이 2.643 → 2.378로 줄어듭니다. 평가 시퀀스 수는 적혀 있지 않습니다. 절대 수준도 낮습니다(<code>04</code> C5).</li>
+<li><strong>방향 구조(Fig. 12):</strong> RoboCOIN 로봇 10종, 2,362클립의 말단 이동 방향 6가지에 대해, <strong>로봇별 평균을 뺀 방향별 중심점 60개</strong>를 t-SNE로 그렸습니다. 그림 안에 &quot;개별 클립 군집이 아니라 집계 시각화&quot;라고 적혀 있습니다. 사람 클립은 없습니다. 로봇별 평균을 빼는 단계가 바로 embodiment마다 다른 오프셋을 지우는 조작이므로, 이 그림은 &quot;로봇 간 정렬&quot;의 강한 근거가 되지 못합니다.</li>
+<li><strong>교란 민감도(Table 8, Eq. 10):</strong> 고움직임 클립 8개를 골라 decoder seed 2개로 평가했습니다. 채널 표준편차 크기의 잡음(α = 1)을 더해도 움직임 크기 비율은 0.946으로 거의 그대로입니다. query를 0으로 바꿔도 움직임이 45.6% 남습니다. latent action이 움직임을 조종하는 것은 맞지만, 첫 프레임과 생성 prior만으로도 움직임의 절반 가까이가 나온다는 뜻입니다(<code>04</code> C8).</li>
+<li><strong>attention(Fig. 8):</strong> query가 손과 그리퍼 같은 움직이는 영역을 봅니다. 정성 결과입니다.</li>
+</ul>
+<h2>4. Limitations</h2>
+<p>논문에는 한계 절이 따로 없습니다. 윤리 절에서 &quot;평가하지 않은 설정에서는 실패할 수 있다&quot;고만 적었습니다. 아래는 이 분석에서 정리한 한계입니다.</p>
+<ol>
+<li><strong>정렬이 왜 생기는지 설명이 없습니다.</strong> 재구성 손실은 embodiment마다 다른 latent 좌표계를 허용합니다. 사람 영상에는 행동 손실이 없으므로(λ = 0), 사람과 로봇의 latent가 같은 좌표에 놓일 압력은 (a) 가중치 공유와 (b) 같은 행동이 이미지에서 비슷하게 움직여 보이는 것뿐입니다. toy(<code>03</code> §1)에서 공유 encoder는 이미지 공간의 움직임이 일치할 때(θ ≈ 0)만 정렬되고, 시점 차이로 움직임이 돌아 보이면 전이 오차가 2(1 − cos θ)로 커졌습니다.</li>
+<li><strong>전이 증거가 쉬운 경우에 몰려 있습니다.</strong> Fig. 5(HumanAndRobot)와 Fig. 6(실물)의 사람 영상은 로봇 카메라와 같은 위쪽 시점에서 찍었습니다. 학습 데이터의 사람 영상(EgoDex, EgoVerse)은 1인칭인데, 1인칭 → 3인칭 전이의 정량 평가는 없습니다.</li>
+<li><strong>텍스트 경로가 통제되지 않았습니다.</strong> encoder는 지시 ℓ을 받고 decoder는 받지 않습니다(Eq. 2, §3.2). 전이할 때 Q_src에는 원본 지시(예: &quot;Grab red cube and pull to plate&quot;)의 의미가 들어갈 수 있고, decoder는 그 의미를 대상 장면에서 실현할 수 있습니다. 빈 지시로 encode하는 ablation이 없어서, 전이 중 어디까지가 움직임이고 어디까지가 과제 의미인지 가를 수 없습니다.</li>
+<li><strong>&quot;300× 압축&quot;은 토큰 개수 기준입니다.</strong> 각 토큰은 2,048차원이라 프레임당 8,192개 실수이고, VAE latent(프레임당 76,800개로 추정) 대비 9.4배입니다. 진짜 작은 코드는 FAE-32(128개)입니다(<code>03</code> §3, <code>04</code> C7).</li>
+<li><strong>LARYBench 비교 조건이 다릅니다.</strong> 영상 기반 모델만 중간 프레임을 받았고, DreamX 학습 데이터의 37.4%인 AgiBot이 평가셋 AgiBotWorld-Beta와 같은 출처입니다(학습·평가 분리 여부 미보고).</li>
+<li><strong>정책 실험의 표본과 기준선이 작습니다.</strong> 과제 하나, 설정당 10회, 체크포인트 1개입니다. 기준선은 Mimic-Video 하나이고 사전학습 출발점이 다릅니다. 차이는 push에서만 나옵니다.</li>
+<li><strong>재현 정보가 부족합니다.</strong> 코드·가중치가 없고, 사전학습 연산량·배치·seed, 행동 레이블 클립 비율, 정책에 쓴 사람 영상 수가 빠져 있습니다(<code>04</code> §2).</li>
+<li><strong>사소한 표기 문제:</strong> VideoWorld2가 참고문헌에 같은 논문으로 두 번(Ren et al. 2026a, 2026b) 들어가 있습니다. LARY-Bench/LARYBench, MolmoAct2-BimanualYAM/MolmoAct-BimanualYAM, reach/approach처럼 같은 대상을 다르게 부릅니다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>03. 분석: 정렬 toy, LARYBench 읽기, 압축 산술, 실험 통계</h1>
+<p>이 문서의 계산은 <code>analysis/alignment_toy.py</code>(numpy, 단일 스레드, 약 20초)와 <code>analysis/table_check.py</code>(1초 미만)가 만듭니다. 결과는 <code>alignment_toy_results.json</code>, <code>table_check_results.json</code>에 있습니다.</p>
+<h2>1. 재구성만으로 사람·로봇 latent action이 정렬되는가 (toy)</h2>
+<h3>1.1 질문</h3>
+<p>DreamX가 내세우는 전이(Eq. 5)는 사람 영상에서 뽑은 Q_src를 로봇의 행동 branch로 decode합니다. 이것이 되려면 <strong>같은 행동이 사람과 로봇에서 같은 latent 좌표</strong>로 가야 합니다. 그런데 학습 손실(Eq. 4)에는 이를 직접 요구하는 항이 없습니다.</p>
+<ul>
+<li>재구성 손실은 embodiment마다 latent를 가역 변환해도 값이 같습니다. decoder가 첫 프레임 V₀로 embodiment를 알 수 있으므로, 사람용 좌표계와 로봇용 좌표계를 따로 써도 재구성은 똑같이 잘 됩니다.</li>
+<li>행동 보조 손실은 로봇 클립에만 있습니다(사람은 λ = 0). 그래서 로봇 latent만 행동 좌표에 묶입니다.</li>
+</ul>
+<p>남는 정렬 압력은 두 가지입니다. (a) encoder 가중치 공유, (b) 같은 행동이 이미지에서 비슷하게 움직여 보이는 것. toy는 이 둘이 각각 얼마나 일을 하는지 봅니다.</p>
+<h3>1.2 모형</h3>
+<ul>
+<li>행동 a ∈ ℝ², 영상 공간의 움직임 Δo_e = R_e a + 잡음(8차원).</li>
+<li>로봇 렌더러 R_r은 직교 열 2개입니다. 사람 렌더러는 <strong>R_h = R_r Q(θ) + η R_⊥</strong> 를 열마다 정규화한 것입니다. θ는 시점 차이 때문에 이미지 평면에서 움직임이 돌아 보이는 각도, η = 0.3은 손이 그리퍼와 다르게 보이는 정도입니다.</li>
+<li>encoder z = E_e Δo, decoder Δo ≈ D_e z(embodiment별), 로봇 클립에만 행동 head 손실 ‖H z − a‖²(λ = 1, H 공유)를 둡니다. DreamX의 Eq. 3–4를 선형으로 줄인 구조입니다.</li>
+<li>조건 세 가지:
+<ul>
+<li><strong>S:</strong> 공유 encoder. 가중치 공유가 유일한 정렬 압력입니다.</li>
+<li><strong>I:</strong> embodiment별 encoder. 강한 비선형 encoder가 입력만 보고 embodiment를 알아보는 경우를 근사합니다.</li>
+<li><strong>P:</strong> embodiment별 encoder에, 짝지은 사람·로봇 클립 5%로 정렬 손실 ‖z_h − z_r‖²(가중치 5)를 더합니다. DreamX가 쓰지 않는 신호입니다.</li>
+</ul>
+</li>
+<li>지표: (1) <strong>탐침 R²</strong>: embodiment마다 z → a 선형 회귀를 따로 학습합니다. LARYBench 방식입니다. (2) <strong>전이 오차</strong> ‖H z_h − a‖²/‖a‖²: 사람 latent를 로봇 행동 head로 풀었을 때의 오차입니다. DreamX의 행동 전이(Eq. 5)에 해당합니다.</li>
+<li>Adam(lr 0.02, weight decay 1e-3) 2,500 step, embodiment당 1,000표본, seed 5개.</li>
+</ul>
+<h3>1.3 결과</h3>
+<p><img src="figures/alignment_toy.png" alt="정렬 toy" /></p>
+<p class="cap">왼쪽: 시점 회전 θ에 따른 사람→로봇 행동 전이 오차(seed 5개 평균, 음영은 최소–최대). 오른쪽: 사람 쪽 탐침 R²(세 조건이 겹쳐 모두 1).</p>
+<table>
+<thead>
+<tr>
+<th>θ</th>
+<th>0°</th>
+<th>15°</th>
+<th>30°</th>
+<th>60°</th>
+<th>90°</th>
+<th>180°</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S 공유 encoder</td>
+<td>0.0003</td>
+<td>0.067</td>
+<td>0.264</td>
+<td>0.984</td>
+<td>1.968</td>
+<td>3.935</td>
+</tr>
+<tr>
+<td>이론 2(1 − cos θ)</td>
+<td>0</td>
+<td>0.068</td>
+<td>0.268</td>
+<td>1.0</td>
+<td>2.0</td>
+<td>4.0</td>
+</tr>
+<tr>
+<td>I embodiment별 encoder</td>
+<td>2.29</td>
+<td>2.28</td>
+<td>2.27</td>
+<td>2.16</td>
+<td>2.16</td>
+<td>1.40</td>
+</tr>
+<tr>
+<td>P + 짝 클립 5%</td>
+<td>0.0001</td>
+<td>0.0002</td>
+<td>0.0001</td>
+<td>0.295</td>
+<td>0.0002</td>
+<td>0.0002</td>
+</tr>
+<tr>
+<td>탐침 R²(세 조건 모두)</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<p>전이 오차 1은 &quot;아무것도 예측하지 않는 것&quot;(z_h = 0)과 같은 수준입니다. I의 seed별 값은 0.74–3.34 사이에서 흩어집니다. P의 60°는 seed 5개 중 1개가 국소 최소에 걸린 값(1.47)이고 나머지 4개는 0입니다.</p>
+<h3>1.4 읽기</h3>
+<ol>
+<li><strong>공유 encoder는 이미지 공간의 움직임이 일치할 때만 정렬됩니다.</strong> S의 전이 오차는 이론값 2(1 − cos θ)를 거의 정확히 따릅니다. 행동 head를 로봇에 맞춰 H E R_r = I로 학습하면 사람 쪽은 H E R_h ≈ Q(θ)가 되고, 등방 행동에서 기대 오차가 ‖Q(θ) − I‖²_F / 2 = 2(1 − cos θ)이기 때문입니다. 사람 전용 방향 R_⊥을 써서 회전을 보정하는 해가 선형 encoder에도 존재하지만, 재구성 손실은 그 해를 고를 이유가 없고 weight decay는 오히려 막습니다.</li>
+<li><strong>encoder가 embodiment를 알아볼 수 있으면 정렬은 임의적입니다.</strong> I는 θ와 무관하게 오차가 1을 넘습니다. 재구성 손실이 embodiment별 좌표계를 허용한다는 것을 그대로 보여 줍니다. DreamX의 encoder는 2B 백본에 지시문까지 받으므로, 입력만으로 사람인지 로봇인지 쉽게 알 수 있습니다. 실제 모델은 S와 I 사이 어딘가에 있고, 어느 쪽에 가까운지는 사전학습 백본의 귀납 편향에 달려 있습니다.</li>
+<li><strong>짝지은 클립이 조금만 있어도 정렬됩니다.</strong> 5%로 θ와 무관하게 전이 오차가 0 근처로 갑니다. 정렬을 만드는 가장 싼 신호입니다.</li>
+<li><strong>탐침 점수는 정렬을 재지 못합니다.</strong> 세 조건, 모든 θ에서 사람 쪽 탐침 R²는 1입니다. LARYBench처럼 탐침을 embodiment(벤치마크)마다 따로 학습하면, latent에 정보가 있는지는 재도 같은 좌표에 있는지는 재지 못합니다. Table 1의 높은 점수는 정렬의 근거가 아닙니다.</li>
+</ol>
+<h3>1.5 DreamX 실험에 대입</h3>
+<ul>
+<li>Fig. 5(HumanAndRobot)와 Fig. 6(실물 행동 전이)의 사람 영상은 로봇과 <strong>같은 위쪽 시점</strong>에서 찍었습니다. toy로 말하면 θ ≈ 0인 경우입니다. 이 조건에서는 공유 encoder만으로 전이가 되는 것이 자연스럽고, DreamX의 결과와 맞습니다.</li>
+<li>학습 데이터의 사람 영상(EgoDex, EgoVerse)은 1인칭입니다. 1인칭 손 움직임을 3인칭 로봇 카메라로 옮기는 경우는 θ가 크고, 실제로는 회전이 아니라 투영까지 바뀝니다. 이 경우의 정량 평가는 논문에 없습니다.</li>
+<li>그래서 &quot;짝 데이터 없이 정렬된다&quot;는 결과는 <strong>&quot;시점이 맞으면 가중치 공유로 정렬된다&quot;</strong> 로 읽는 것이 안전합니다. 시점이 다른 전이에서는 소량의 짝 클립(P)이나 시점 정규화가 필요할 가능성이 큽니다.</li>
+</ul>
+<h3>1.6 toy의 한계</h3>
+<p>선형 모형이고, 시점 변화를 이미지 평면 회전으로만 근사했습니다. 실제 영상 diffusion 백본의 사전학습 표현은 시점에 어느 정도 불변인 특징(예: 물체 중심 좌표)을 가질 수 있고, 그렇다면 S보다 나은 정렬이 나올 수 있습니다. toy가 보여 주는 것은 &quot;손실이 정렬을 요구하지 않는다&quot;까지입니다. 실제 정렬 정도는 시점이 다른 짝 데이터(예: 1인칭·3인칭 동시 촬영)로 직접 재야 합니다.</p>
+<h2>2. LARYBench가 재는 것과 재지 못하는 것 (Table 1, 부록 B.4)</h2>
+<h3>2.1 이득의 크기</h3>
+<p>기준선 중 열별 최고값 대비 DreamX의 개선입니다(<code>table_check.py</code> C1).</p>
+<table>
+<thead>
+<tr>
+<th>열</th>
+<th>최고 기준선</th>
+<th>DreamX</th>
+<th>상대 개선</th>
+<th>FAE-32 상대 개선</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CALVIN 회귀</td>
+<td>0.43</td>
+<td>0.15</td>
+<td>−65.1%</td>
+<td>−46.5%</td>
+</tr>
+<tr>
+<td>VLABench 회귀</td>
+<td>0.09</td>
+<td>0.05</td>
+<td>−44.4%</td>
+<td>−22.2%</td>
+</tr>
+<tr>
+<td>RoboCOIN 회귀</td>
+<td>0.51</td>
+<td>0.26</td>
+<td>−49.0%</td>
+<td>−39.2%</td>
+</tr>
+<tr>
+<td>AgiBotWorld-Beta 회귀</td>
+<td>0.52</td>
+<td>0.22</td>
+<td>−57.7%</td>
+<td>−50.0%</td>
+</tr>
+<tr>
+<td>Atomic robot 분류</td>
+<td>58.51</td>
+<td>68.03</td>
+<td>+9.52%p</td>
+<td>+7.39%p</td>
+</tr>
+<tr>
+<td>Composite human 분류</td>
+<td>65.47</td>
+<td>72.72</td>
+<td>+7.25%p</td>
+<td>+4.02%p</td>
+</tr>
+<tr>
+<td>Composite robot 분류</td>
+<td>62.76</td>
+<td>68.26</td>
+<td>+5.50%p</td>
+<td>+3.30%p</td>
+</tr>
+</tbody>
+</table>
+<p>회귀에서는 이득이 크고 모든 열에서 일관됩니다. 분류 이득은 상대적으로 작습니다.</p>
+<h3>2.2 같은 조건 비교가 아닌 이유</h3>
+<ol>
+<li><strong>입력 프레임 수:</strong> 회귀 벤치마크는 원래 표본당 프레임 2장입니다. 영상 기반 모델에는 저자들이 원본에서 중간 프레임을 복원해 넣었습니다(부록 B.4). 위 그룹(프레임 2장)과 아래 그룹(영상)의 차이 일부는 입력 정보량 차이입니다.</li>
+<li><strong>특징 크기:</strong> DreamX 특징은 latent frame마다 2,048차원 토큰 4개입니다. 탐침은 토큰마다 768차원으로 사영한 뒤 attentive pooling을 하므로, 넓은 특징이 유리할 수 있습니다. 그래서 <strong>토큰당 32차원인 FAE-32가 더 공정한 비교 대상</strong>입니다. FAE-32도 모든 기준선을 이기므로, 결론의 방향은 유지됩니다.</li>
+<li><strong>데이터 출처 겹침:</strong> DreamX 사전학습의 37.4%가 AgiBot이고(Fig. 9), 회귀 평가셋 AgiBotWorld-Beta도 같은 출처입니다. 다만 사전학습에 없는 CALVIN에서 상대 개선이 가장 크므로(−65.1%), 겹침만으로 설명되지는 않습니다.</li>
+<li><strong>텍스트:</strong> encoder가 지시문 ℓ을 받는데(Eq. 2), 탐침용 특징을 뽑을 때 무엇을 넣었는지 적혀 있지 않습니다(<code>04</code> C9).</li>
+<li><strong>정렬 미측정:</strong> §1.4대로, 벤치마크마다 따로 학습한 탐침은 embodiment 간 정렬을 재지 못합니다.</li>
+</ol>
+<h2>3. &quot;300× 압축&quot;의 산술 (<code>table_check.py</code> C7)</h2>
+<p>Cosmos-Predict2.5의 VAE를 공간 8배·시간 4배·16채널, patch 2로 두었습니다. 이 사양은 논문에 없어서 사전 지식으로 넣은 가정입니다. 이 가정으로 논문의 &quot;latent frame당 1,200토큰&quot;과 &quot;29프레임 → latent frame 8개&quot;가 그대로 나옵니다.</p>
+<table>
+<thead>
+<tr>
+<th>표현</th>
+<th>프레임당 개수</th>
+<th>프레임당 실수 개수</th>
+<th>VAE latent 대비</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>백본 토큰 (30 × 40 패치, 폭 2,048)</td>
+<td>1,200</td>
+<td>2,457,600</td>
+<td>—</td>
+</tr>
+<tr>
+<td>VAE latent (60 × 80 × 16)</td>
+<td>—</td>
+<td>76,800</td>
+<td>1×</td>
+</tr>
+<tr>
+<td>DreamX latent action (토큰 4 × 2,048)</td>
+<td>4</td>
+<td>8,192</td>
+<td>9.4× 작음</td>
+</tr>
+<tr>
+<td>FAE-32 압축 코드 (토큰 4 × 32)</td>
+<td>4</td>
+<td>128</td>
+<td>600× 작음</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>&quot;1,200 → 4토큰, 300×&quot;(초록, §1)는 <strong>토큰 개수의 비</strong>입니다. 실수 개수로는 백본 토큰 대비 300배이지만, 영상 자체(VAE latent) 대비로는 9.4배에 그칩니다.</li>
+<li>논문도 §3.4에서 &quot;토큰 수는 적지만 각 토큰이 백본 폭을 그대로 가진다&quot;고 인정하고 FAE로 줄입니다. 그러니 초록과 프로젝트 페이지의 &quot;300× fewer tokens&quot;는 정확하지만, &quot;compact&quot;한 행동 코드라고 부를 수 있는 것은 FAE-32입니다.</li>
+<li>정책 지연 19.1배 단축(Table 3)은 이 압축 덕분이라기보다, 미래 영상(수만 개 실수)을 생성하지 않고 4 × 32 코드만 생성하는 데서 옵니다. 지연 비는 28,226 / 1,474 = 19.15입니다.</li>
+</ul>
+<h2>4. 실물·CALVIN 결과의 통계 (<code>table_check.py</code> C3–C5)</h2>
+<p><img src="figures/policy_push_ci.png" alt="정책 결과" /></p>
+<p class="cap">Table 5를 세 설정 합산으로 다시 그림. 오차막대는 Wilson 95% 구간.</p>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>성공 수</th>
+<th>Wilson 95%</th>
+<th>Fisher p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>push 합산: DreamX vs Mimic-Video</td>
+<td>28/30 vs 2/30</td>
+<td>[0.79, 0.98] vs [0.02, 0.21]</td>
+<td>3.2 × 10⁻¹²</td>
+</tr>
+<tr>
+<td>reach 합산</td>
+<td>30/30 vs 28/30</td>
+<td>—</td>
+<td>0.49</td>
+</tr>
+<tr>
+<td>위 서랍 push</td>
+<td>8/10 vs 2/10</td>
+<td>—</td>
+<td>0.023</td>
+</tr>
+<tr>
+<td>사람 영상만 vs 로봇 시연 (위 서랍 push, Table 6 vs 5)</td>
+<td>10/10 vs 8/10</td>
+<td>—</td>
+<td>0.47</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>DreamX가 push에서 앞선다는 결과는 표본이 작아도 확실합니다.</strong> 다만 Mimic-Video가 30회 중 28회 서랍에 닿고도 2회만 닫는 것은 &quot;덜 학습된 기준선&quot;일 가능성도 시사합니다. 두 방법의 사전학습 출발점(MolmoAct 영상 백본 대 DreamX 생성기)과 사전학습 데이터 규모가 다르고, 기준선 튜닝 절차는 적혀 있지 않습니다.</li>
+<li><strong>&quot;사람 영상만으로도 100%&quot;</strong> 는 10회 표본에서 로봇 시연(8/10)과 구분되지 않습니다. 정확히 말하면 &quot;사람 영상으로 바꿔도 떨어지지 않았다&quot;입니다.</li>
+<li><strong>CALVIN(Table 7):</strong> Avg. Len.은 ≥k 열의 합(÷100)으로 정확히 재현됩니다(2.378, 2.643). 평가 시퀀스 수가 없어서, 관례인 1,000개로 가정하면 ≥1 차이는 p = 0.17, ≥5 차이는 p = 0.0057입니다. 긴 과제열로 갈수록 차이가 벌어지는 패턴이라 효과는 있어 보이지만, 같은 정책 안에서 latent 특징 attention을 막는 ablation이라 &quot;latent action 예측이 행동 학습을 돕는다&quot;까지만 말할 수 있습니다. 절대 수준 2.64도 CALVIN의 최근 정책들보다 낮습니다.</li>
+</ul>
+<h2>5. Table 8 읽기: latent action은 움직임을 얼마나 결정하는가 (<code>table_check.py</code> C8)</h2>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>움직임 비율</th>
+<th>flow 편차 (px/프레임)</th>
+<th>RGB L1</th>
+<th>정지 영역 RGB L1</th>
+<th>정지/전체</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>α = 0.1</td>
+<td>1.000</td>
+<td>0.141</td>
+<td>0.0054</td>
+<td>0.0030</td>
+<td>0.56</td>
+</tr>
+<tr>
+<td>α = 0.3</td>
+<td>0.995</td>
+<td>0.211</td>
+<td>0.0077</td>
+<td>0.0034</td>
+<td>0.44</td>
+</tr>
+<tr>
+<td>α = 1.0</td>
+<td>0.946</td>
+<td>0.481</td>
+<td>0.0215</td>
+<td>0.0077</td>
+<td>0.36</td>
+</tr>
+<tr>
+<td>query = 0</td>
+<td>0.456</td>
+<td>0.866</td>
+<td>0.0758</td>
+<td>0.0227</td>
+<td>0.30</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>교란이 커질수록 flow 편차가 단조 증가하고, 정지 영역의 변화는 전체보다 작습니다. &quot;latent action이 외관보다 움직임을 조종한다&quot;는 해석과 맞습니다.</li>
+<li>그러나 <strong>채널 표준편차만큼의 잡음(α = 1)에도 움직임 크기는 94.6% 유지됩니다.</strong> decoder가 latent의 세부 값에 둔감하다는 뜻입니다. 행동 전이처럼 latent의 세부가 궤적을 결정해야 하는 용도에서는 이 둔감함이 정밀도의 상한이 될 수 있습니다.</li>
+<li><strong>query를 0으로 바꿔도 움직임이 45.6% 남습니다.</strong> 첫 프레임과 생성 prior만으로도 &quot;그럴듯한 움직임&quot;이 상당히 나옵니다. Table 2의 영상 전이 점수에도 이 몫이 섞여 있을 수 있으므로, query = 0 기준선의 FVD·PSNR이 함께 있어야 합니다(<code>04</code> C2).</li>
+<li>표본은 <strong>골라 낸 고움직임 클립 8개 × seed 2개</strong>입니다. 분포를 대표하지 않습니다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>04. 주장 검증: 수치 재계산, 공개 자료 대조, 구현 가능성</h1>
+<ul>
+<li><strong>대상:</strong> arXiv:2611.05377v1 본문과 부록 A–D, 프로젝트 페이지(HTML, 2026-11-09 저장).</li>
+<li><strong>공식 코드:</strong> 없습니다. 프로젝트 페이지는 &quot;Code soon&quot;이고, <code>cvlab-kaist/DreamX</code> 저장소(@ <code>056bd46</code>, push 2026-11-06, 라이선스 없음)에는 README(&quot;Code-Coming Soon&quot;)와 티저 그림만 있습니다. 그래서 코드 대조 대신 표 재계산, 프로젝트 페이지 대조, 공개 백본 사양 확인, numpy toy로 검증했습니다.</li>
+<li><strong>대조한 외부 자료:</strong>
+<ul>
+<li>백본 사양: <code>nvidia-cosmos/cosmos-predict2.5</code> <code>docs/setup.md</code>(main @ <code>a2c298b</code>), HF <code>nvidia/Cosmos-Predict2.5-2B</code> 메타데이터(파일 크기, 라이선스 태그만, 가중치는 받지 않음)</li>
+<li>관련 LAM 저장소 메타데이터(<code>02</code> §4)</li>
+</ul>
+</li>
+<li><strong>스크립트:</strong> <code>analysis/table_check.py</code>(표 재계산, Fisher·Wilson), <code>analysis/alignment_toy.py</code>(정렬 toy). 둘 다 CPU 단일 스레드, numpy·scipy만 씁니다.</li>
+</ul>
+<h2>1. 수치 재계산과 주장 판정</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장·수치 (출처)</th>
+<th>재계산·확인</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>Table 1 평균과 &quot;모든 벤치마크에서 최고&quot;(§4.1)</td>
+<td>13개 방법의 분류 평균은 모두 일치. 회귀 평균은 DiLA만 0.3875로 표의 0.38과 경계(원값이 반올림 전 더 작아야 가능). DreamX는 8열 모두 1위, 회귀 상대 개선 44–65%, 분류 +5.5–9.5%p. FAE-32도 8열 모두 기준선보다 나음</td>
+<td>✅ 수치 일치(경계 1건). 비교 조건은 C9·<code>03</code> §2</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>Table 2 &quot;모든 지표에서 앞섬&quot;(§4.2)</td>
+<td>FVD 2.96배 낮음, LPIPS −40.1%, PSNR +3.57 dB, SSIM +0.036. 1,008클립 × 19프레임. seed·신뢰구간 없음. 첫 프레임 복사, query = 0 같은 자명한 기준선 없음. query = 0에서도 움직임이 45.6% 남으므로(Table 8) 이 기준선이 필요</td>
+<td>✅ 순위 / ⚠️ 움직임 전이 몫은 분리 안 됨</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>Table 3 SR 96.7 vs 50.0, &quot;19.1배 빠름&quot;(§4.4)</td>
+<td>Table 5에서 설정별 SR 90/100/100, 50/50/50을 정확히 재현. 지연 비 19.15. push 28/30 vs 2/30(p = 3.2 × 10⁻¹²), reach 30/30 vs 28/30(p = 0.49)</td>
+<td>✅ 일치. 차이는 전부 push</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>&quot;사람 영상만으로 학습해도 100%&quot;(부록 C.1, Table 6)</td>
+<td>위 서랍 push 10/10 vs 로봇 시연 정책 8/10, p = 0.47. 사람 영상 개수 미보고</td>
+<td>⚠️ &quot;떨어지지 않았다&quot;까지만</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>Table 7 &quot;latent 조건이 모든 길이에서 개선&quot;(부록 C.2)</td>
+<td>Avg. Len. 2.378, 2.643 정확히 재현. 평가 시퀀스 수 미보고. 1,000개 가정 시 ≥1 p = 0.17, ≥5 p = 0.0057</td>
+<td>✅ 방향 / ⚠️ 표본 수 불명, 절대 수준 낮음</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>&quot;2.19k시간, 사람 469시간&quot;(부록 A.1, Fig. 9)</td>
+<td>합계 2,188.0 h, 사람 469.1 h(21.4%). AgiBot 818.2 h(37.4%)가 LARYBench AgiBotWorld-Beta와 같은 출처, 분리 여부 미보고</td>
+<td>✅ 합계 / ⚠️ 평가셋 출처 겹침</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>&quot;latent frame당 300× 압축(1,200 → 4토큰)&quot;(초록, §1)</td>
+<td>VAE 8×·4×·16채널, patch 2 가정으로 1,200토큰과 latent frame 2–8개가 재현됨. 토큰당 2,048차원이라 프레임당 8,192개 실수, VAE latent(76,800) 대비 9.4×. FAE-32는 128개로 600×</td>
+<td>✅ 토큰 수로는 맞음 / ⚠️ 정보량 압축으로 읽으면 과장</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>&quot;latent action이 외관을 유지하며 움직임을 조종&quot;(§4.6, Table 8)</td>
+<td>flow 편차 단조 증가, 정지/전체 RGB 변화 0.56 → 0.30. α = 1에서도 움직임 94.6% 유지, query = 0에서도 45.6% 남음. 골라 낸 클립 8개 × seed 2</td>
+<td>✅ 방향 / ⚠️ decoder가 latent 세부에 둔감, prior 몫 큼</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>&quot;짝지은 데이터 없이 전이, 범용 latent action&quot;(§3.3, §4.2–4.3)</td>
+<td>(a) encoder는 지시문 ℓ을 받고 decoder는 받지 않음(Eq. 2, §3.2). 전이와 LARYBench 추출에서 무엇을 ℓ로 넣었는지 미보고, 빈 지시 ablation 없음. (b) Fig. 5·6의 사람 영상은 로봇과 같은 위쪽 시점. (c) toy에서 재구성 손실은 정렬을 요구하지 않고, 공유 encoder는 이미지 움직임이 일치할 때만 정렬됨(<code>03</code> §1)</td>
+<td>⚠️ 시점 일치 조건에서만 근거 있음, 텍스트 경로 미통제</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>&quot;행동 레이블 없이 영상만으로 행동 의미를 잡는다&quot;(§4.5, Table 4)</td>
+<td>0.24/65.3 vs 0.23/64.8, seed 1개, 일부 데이터. 탐침 점수만 재고 전이(정렬)는 재지 않음. toy에서 탐침 R²는 정렬 여부와 무관하게 1</td>
+<td>⚠️ 정렬에 대한 행동 손실의 역할은 미검증</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>&quot;로봇 간 공통 방향 구조&quot;(부록 C.3, Fig. 12)</td>
+<td>로봇별 평균을 뺀 방향별 중심점 60개의 t-SNE. 개별 클립이 아닌 집계이고 사람 클립 없음. 로봇별 평균 제거가 embodiment 오프셋을 직접 지움</td>
+<td>⚠️ 약한 근거</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>실물 정책 비교의 공정성(부록 B.3)</td>
+<td>Mimic-Video는 MolmoAct 영상 백본, DreamX는 사전학습 생성기(사전학습 데이터 약 1/3, H200 2장 100k step)에서 출발. 둘 다 30k step. Mimic-Video는 reach 28/30인데 push 2/30. 기준선 튜닝 절차, 학습 seed 미보고</td>
+<td>⚠️ 출발점이 달라 &quot;latent 예측 대 영상 예측&quot; 비교로 단정 못 함</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>프로젝트 페이지 수치</td>
+<td>&quot;300× fewer tokens&quot;, MSE 0.17 vs 0.38, FVD 57.4 vs 170.2, 2.19k h, 막대그래프 9개 방법 값이 Table 1·2와 일치</td>
+<td>✅ 일치</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 재현에 필요한 정보 체크리스트</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>논문에 있음</th>
+<th>없음</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>모델 구성</td>
+<td>백본(Cosmos-Predict2.5 2B), query 4개/latent frame, LoRA rank 16(encoder·decoder 각각), 마스크 규칙(Fig. 2b), FAE 구조(self-attn 1블록, 6층 decoder, 32차원)</td>
+<td>행동 branch의 구조(행동 토큰 수, chunk 길이, 사영층), Action DiT 크기, query 초기화</td>
+</tr>
+<tr>
+<td>학습 하이퍼파라미터</td>
+<td>step 수(78k, 50k, 100k, 30k), 학습률, warm-up, β = 0.01, 정책 생성기 배치 60·H200 2장</td>
+<td>DreamX 사전학습 배치, GPU 수·시간, seed, flow timestep 분포, 행동 손실의 정확한 정규화</td>
+</tr>
+<tr>
+<td>데이터</td>
+<td>6개 데이터셋과 시간(Fig. 9), 해상도, 클립 길이</td>
+<td>데이터셋별 표집 비율, 행동 레이블이 있는 클립 비율과 행동 공간 통일 방식(데이터셋마다 다름), 지시문 출처(사람 영상), 평가셋과의 분리</td>
+</tr>
+<tr>
+<td>평가</td>
+<td>LARYBench 탐침 구조, H&amp;R 클립 수·지표·horizon, 실물 시행 수</td>
+<td>탐침 학습 설정과 seed, LARYBench 추출 때 지시문, CALVIN 평가 시퀀스 수와 학습 split, 실물 사람 영상 개수</td>
+</tr>
+<tr>
+<td>공개물</td>
+<td>백본(공개)</td>
+<td>코드, DreamX 가중치, FAE, 정책 체크포인트, 실물 데이터</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 대조 메모</h2>
+<ul>
+<li>프로젝트 페이지의 표와 막대그래프 값은 Table 1과 칸마다 같습니다(C13).</li>
+<li>백본 공개 상태: <code>nvidia/Cosmos-Predict2.5-2B</code>는 NVIDIA Open Model License(HF 태그 <code>license:other</code>, 자동 승인 gated)입니다. bf16 EMA 체크포인트가 4.12 GB, tokenizer(VAE)가 0.51 GB입니다. 같은 저장소에 <code>robot/policy/libero</code>, <code>robot/policy/robocasa</code> 체크포인트가 있습니다. 영상 백본을 정책으로 미세조정하는 Cosmos Policy(Kim et al. 2026b)의 공개 사례로 보입니다. DreamX §3.4는 &quot;같은 영상 백본으로 미래 영상 대신 latent action을 예측한다&quot;는 문장에 Kim et al. 2026a를 인용하는데, 참고문헌의 2026a는 &quot;Planning in 8 tokens&quot;(압축 tokenizer)이고 영상 백본을 정책으로 바꾸는 논문은 2026b(Cosmos Policy)입니다. 인용 표기가 바뀌었을 가능성이 있습니다(<code>02</code> §5).</li>
+<li>공식 Cosmos 실행 환경은 NVIDIA Ampere 이상 GPU, CUDA 12.8.1, Linux x86-64를 요구합니다(<code>docs/setup.md</code>).</li>
+</ul>
+<h2>4. 구현할 수 있는가</h2>
+<h3>4.1 공식 재현</h3>
+<p><strong>불가능합니다.</strong> 코드와 가중치가 없습니다. 데이터 6종은 모두 공개 데이터셋이지만(윤리 절), 합치면 2.19k시간이고 DROID·AgiBot만 해도 수 TB 규모입니다. DreamX 사전학습의 GPU 수와 시간은 적혀 있지 않고, 정책 생성기만 H200 2장으로 100k step입니다. 실물 정책 결과는 양팔 YAM과 비공개 시연 45개가 있어야 합니다.</p>
+<h3>4.2 이 맥(Apple M4 Pro, 통합 메모리 약 24 GiB, MPS, CUDA 없음)</h3>
+<table>
+<thead>
+<tr>
+<th>작업</th>
+<th>판단</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>표 재계산, 통계 검정, 정렬 toy</td>
+<td>✅ 완료</td>
+<td><code>table_check.py</code> 1초 미만, <code>alignment_toy.py</code> 약 20초</td>
+</tr>
+<tr>
+<td>공식 DreamX 추론</td>
+<td>❌</td>
+<td>코드·가중치 없음</td>
+</tr>
+<tr>
+<td>Cosmos-Predict2.5 2B 단독 추론</td>
+<td>⚠️ 조건부, 미검증</td>
+<td>가중치 bf16 4.12 GB + VAE 0.51 GB는 메모리에 들어감. 480 × 640, latent frame 8개면 토큰 약 9,600개라 SDPA 추론 활성값도 들어갈 것으로 추정. 다만 공식 스택이 CUDA·Linux 전제이고, 텍스트 encoder(Cosmos-Reason1 7B로 알려짐, 사전 지식)는 bf16로 약 15 GB라 함께 올리기 어려움. 지시문 임베딩을 미리 계산하거나 빈 문자열 임베딩(<code>cr1_empty_string_text_embeddings.pt</code>)으로 대체해야 함. torch 설치와 약 4.6 GB 다운로드(라이선스 동의) 필요</td>
+</tr>
+<tr>
+<td>DreamX 방식 재구현 + 학습(2B, LoRA)</td>
+<td>❌ 사실상 불가</td>
+<td>시퀀스 약 9,600토큰의 2B 모델을 LoRA로 역전파하면 MPS에서 step당 수십 초 이상으로 추정. 78k step과 2.19k시간 데이터는 비현실적</td>
+</tr>
+<tr>
+<td>축소 재구현(작은 영상 모델 + query + 재구성, 합성 데이터)</td>
+<td>✅ 가능</td>
+<td>torch(MPS) 설치 후 수 시간 규모. 정렬 질문(<code>03</code> §1)을 비선형 모델로 확인하는 데 충분</td>
+</tr>
+</tbody>
+</table>
+<h3>4.3 아이디어 재구현 (CUDA GPU가 있는 경우)</h3>
+<p>구조 자체는 간단합니다. 공개 백본에 (1) latent frame당 query 4개, (2) Fig. 2b 마스크, (3) encoder·decoder 각각 LoRA, (4) 텍스트 cross-attention 자리에 query 조건, (5) 로봇 클립용 행동 branch를 붙이면 됩니다. 어려운 점은 세 가지입니다.</p>
+<ol>
+<li><strong>decoder의 조건 경로:</strong> 원래 텍스트 cross-attention이 있던 자리에 query를 넣는지, 영상 토큰 열에 이어 붙이는지(논문은 &quot;temporal sequence를 따라 이어 붙인다&quot;, §3.2)에 따라 구현이 달라집니다. 행동 branch의 구조는 적혀 있지 않습니다.</li>
+<li><strong>행동 공간 통일:</strong> 로봇 데이터 4종은 행동 공간이 서로 다릅니다. 어떻게 하나의 행동 branch로 학습했는지 설명이 없습니다.</li>
+<li><strong>연산량:</strong> 2B 백본, 480 × 640, 최대 29프레임, 78k step이면 H100급 여러 장이 필요할 것으로 추정됩니다. 줄인 해상도와 일부 데이터(Table 4처럼 MolmoAct2·EgoVerse·EgoDex 일부)로 시작하는 것이 현실적입니다.</li>
+</ol>
+<h3>4.4 판단</h3>
+<ul>
+<li><strong>공식 재현: 불가능</strong>(코드·가중치 미공개, 사전학습 연산량 미보고).</li>
+<li><strong>이 맥: 분석·toy까지 완료.</strong> 공개 백본 단독 추론은 설치·다운로드 승인 후 조건부(미검증)이고, DreamX 학습은 불가능합니다.</li>
+<li><strong>재구현 난이도: 중간.</strong> 공개 백본에 query + LoRA를 붙이는 구조라 코드량은 적지만, 행동 branch와 행동 공간 통일 방식이 빠져 있고 CUDA GPU 여러 장이 필요합니다. 가장 먼저 확인할 가치가 있는 것은 성능보다 <strong>시점이 다른 사람→로봇 전이에서 정렬이 유지되는지</strong>입니다(<code>03</code> §1).</li>
+</ul>
+</section>
+<section class="chapter"><h1>02. 선행연구와 위치</h1>
+<h2>1. 계보</h2>
+<pre><code>latent action model (LAM)                         영상 생성 모델의 표현
+LAPO (Schmidt &amp; Jiang 2024), Genie (Bruce 2024)    대응·추적·flow가 창발 (Nam 2026, Vélez 2025)
+   이산 latent, 인접 프레임 쌍의 IDM/FDM 병목        텍스트 조건 모델의 의미 grounding (Wiedemer 2025)
+        │                                                  │
+LAPA (Ye 2025) VLA 사전학습으로 확장                       │
+Moto (Chen 2025c) 움직임 토큰                               │
+UniVLA (Bu 2025b) 의미 특징으로 grounding                  │
+villa-X (Chen 2025b) 언어·로봇 상태 동역학                   │
+CoMo (Yang 2026), DiLA (Zhang 2026) 움직임/외관 분리         │
+LAOM (Nikulin 2025): 방해 요소가 있으면 감독이 필요           │
+        │                                                  │
+        └───────────── 영상 생성 prior를 쓰는 LAM ──────────────┘
+          VPP (Hu 2024): 미세조정한 영상 diffusion 특징 + 행동 레이블 정책
+          AdaWorld (Gao 2025): latent action 조건 적응형 world model
+          VideoWorld 2 (Ren 2026): 사전학습 영상 diffusion + 별도 latent 동역학 모델
+                         │
+                       DreamX: 백본 내부 표현에서 query로 latent action을 직접 읽고,
+                               같은 백본을 decoder로 재구성 감독 (Cosmos-Predict2.5 2B)
+</code></pre>
+<p>저자들의 위치 설정(§2)은 이렇습니다. 기존 LAM은 프레임 한 쌍 같은 국소 전이에서 행동 공간을 처음부터 학습하므로, 움직임이 한 step 너머로 어떻게 이어지는지 보지 못하고 외관과 행동이 얽힌다고 봅니다. 영상 prior를 쓰는 LAM(AdaWorld, VideoWorld 2)도 영상 모델은 픽셀이나 rollout을 공급할 뿐이고, 행동 표현은 처음부터 학습한 외부 모듈이 만든다고 봅니다. DreamX는 백본 내부 표현을 직접 읽고, embodiment별 행동 encoder를 쓰지 않는다는 점을 차이로 듭니다.</p>
+<p><strong>이 위치 설정에서 빠진 것.</strong> 저자들이 인용한 LAOM(Nikulin et al. 2025)의 결론은 &quot;방해 요소가 있으면 latent action 학습에 감독이 필요하다&quot;입니다. DreamX는 이 문제를 &quot;생성 prior가 외관을 맡는다&quot;로 우회한다고 주장하지만, 사람 쪽에는 감독이 전혀 없고 로봇 쪽 행동 손실만 있습니다. 감독 없이 사람·로봇 latent가 같은 좌표에 놓이는 이유는 설명하지 않습니다(<code>03</code> §1).</p>
+<h2>2. 구성 요소별 출처</h2>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>출처</th>
+<th>DreamX에서 바꾼 점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>영상 diffusion 백본</td>
+<td>Cosmos-Predict2.5 2B (Ali et al. 2025)</td>
+<td>encoder와 decoder 양쪽으로 재사용, 각각 rank-16 LoRA, 백본 고정</td>
+</tr>
+<tr>
+<td>query readout</td>
+<td>learnable query로 특징을 모으는 Perceiver·Q-Former 계열 방식</td>
+<td>영상 토큰 열에 붙여 백본 시공간 attention을 함께 통과, latent frame당 4개, query → 영상은 프레임 causal</td>
+</tr>
+<tr>
+<td>latent action + 미래 재구성</td>
+<td>LAPO, Genie, LAPA의 IDM/FDM 병목</td>
+<td>decoder를 사전학습 영상 diffusion으로 바꾸고, 텍스트 조건 자리를 latent action이 대신함</td>
+</tr>
+<tr>
+<td>행동 보조 branch</td>
+<td>영상·행동 결합 생성(WAM 계열)</td>
+<td>레이블 있는 클립만 λ &gt; 0, 영상과 행동 스트림이 서로를 보지 않음</td>
+</tr>
+<tr>
+<td>압축 코드(FAE)</td>
+<td>Gao et al. 2026 &quot;One layer is enough&quot;의 feature autoencoder</td>
+<td>토큰 배치를 유지하며 2,048 → 32차원, β = 0.01</td>
+</tr>
+<tr>
+<td>정책 생성기</td>
+<td>영상 백본을 정책으로 미세조정하는 방식(Cosmos Policy, Kim et al. 2026b)</td>
+<td>미래 영상 대신 압축 코드 Z를 생성, 별도 Action DiT가 단방향으로 읽음</td>
+</tr>
+<tr>
+<td>기준선 정책</td>
+<td>Mimic-Video (Pai et al. 2025)</td>
+<td>MolmoAct로 사전학습한 영상 백본에서 출발</td>
+</tr>
+<tr>
+<td>평가</td>
+<td>LARYBench (Nie et al. 2026), HumanAndRobot (Human2Robot, Xie et al. 2026), CALVIN</td>
+<td>LARYBench 영상 모델에는 중간 프레임 복원</td>
+</tr>
+<tr>
+<td>데이터</td>
+<td>MolmoAct2-BimanualYAM, Bridge, DROID, AgiBot, EgoDex, EgoVerse</td>
+<td>2.19k시간, 사람 21.4%</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ThinkWorld (<code>thinkworld/</code>)</td>
+<td><strong>같은 그룹의 짝 논문입니다.</strong> 저자 4명(Chaehyun Kim, Jisoo Kim, Seungryong Kim, Fu-En Yang)이 겹치고, 둘 다 양팔 YAM과 MolmoAct2-BimanualYAM, 사람 영상 EgoDex·EgoVerse를 씁니다. 사람·로봇 공통 행동 인터페이스를 푸는 방식이 정반대입니다. ThinkWorld의 Chain-of-Dynamics는 <strong>손목 자세 주석에서 만든 명시적 6D/12D 움직임 토큰</strong>이라 정렬이 구성상 보장되지만 주석이 필요합니다(ThinkWorld 분석에서 &quot;레이블 없는 사람 영상&quot;이라는 서술이 손 자세 주석을 쓴다는 점을 지적했습니다). DreamX는 주석 없이 latent를 학습하지만 정렬이 보장되지 않습니다(<code>03</code> §1). 미래 예측 대상도 다릅니다. ThinkWorld는 1초 뒤 DINOv3 특징을, DreamX는 영상 diffusion으로 미래 프레임 자체를 재구성합니다. toy 결과로 보면 두 접근을 합치는 것이 자연스럽습니다. 사람 클립 일부에만 손목 자세 head를 붙여 latent를 고정하면 짝 클립(P 조건)과 같은 정렬 신호가 됩니다.</td>
+</tr>
+<tr>
+<td>Hydra-0 (<code>hydra0/</code>)</td>
+<td>Hydra-0는 행동을 <strong>이미지 평면의 점 궤적(action flow)</strong> 으로 명시적으로 표현해 Cosmos 계열 영상 world model의 조건으로 씁니다. DreamX는 같은 문제의 암묵적 버전입니다. 학습된 latent가 조건 역할을 합니다. 두 방법 모두 &quot;이미지에서 보이는 움직임&quot;이 공통 인터페이스라는 점은 같고, 그래서 둘 다 시점에 묶입니다. Hydra-0는 배포할 때 URDF·카메라 보정·Isaac Lab 투영이 있어야 하고, DreamX의 행동 전이는 로봇 초기 상태만 있으면 되지만 대응 관계가 보장되지 않습니다. 명시적 track은 시점이 달라도 3D 역투영으로 맞출 수 있다는 장점이 있습니다.</td>
+</tr>
+<tr>
+<td>OpenWAM (<code>openwam/</code>)</td>
+<td>OpenWAM은 영상 prior + 행동 생성(WAM)의 설계를 통제 실험으로 비교했고, 추론 때 미래 영상의 기여는 작고 이득은 학습 때 생긴다는 결과를 냈습니다. DreamX 정책은 이 관찰을 구조로 옮긴 사례입니다. 미래 영상 대신 4 × 32 압축 코드를 생성해 Mimic-Video보다 19.1배 빠릅니다. 다만 DreamX에는 &quot;같은 백본, 예측 대상만 다름&quot; 같은 통제 비교가 없어서(<code>04</code> C12), OpenWAM 같은 실험이 있어야 &quot;latent 예측 대 영상 예측&quot;을 판단할 수 있습니다. 사람 영상 비중은 OpenWAM 30%(비공개 1인칭), DreamX 21.4%(공개 EgoDex·EgoVerse)입니다.</td>
+</tr>
+<tr>
+<td>AW-0 (<code>agentic_wam/</code>)</td>
+<td>AW-0도 Cosmos-Predict2.5 2B 영상 전문가와 행동 전문가를 MoT로 묶어 함께 denoise합니다. DreamX 정책의 구조(영상 백본이 코드 Z 생성, Action DiT가 그 특징을 단방향으로 읽음)는 AW-0의 영상 → 행동 정보 흐름과 비슷합니다. AW-0 분석에서 &quot;4단계 추론에서 행동이 읽는 미래 영상은 σ ≥ 0.625의 흐린 상태&quot;라고 지적했는데, DreamX는 영상 대신 작은 코드를 생성하는 쪽으로 이 문제를 피합니다. 사전학습 규모도 비슷합니다(AW-0 약 2,900시간, DreamX 2.19k시간).</td>
+</tr>
+<tr>
+<td>PaceVLA (<code>pacevla/</code>)</td>
+<td>PaceVLA는 텔레옵 시연의 느린 속도를 정책이 물려받는 문제를 다룹니다. DreamX의 latent action은 VAE의 시간 압축(latent frame 1개 = 영상 4프레임)에 묶여 있어, 같은 움직임이라도 사람(빠름)과 텔레옵 로봇(느림)에서 latent frame 수와 토큰 내용이 달라집니다. 행동 전이를 open-loop로 실행하면 사람의 속도가 그대로 로봇 명령으로 옮겨질 수 있는데, 논문은 속도·fps 정규화를 다루지 않습니다. 정책 1회 호출 1.47초라는 지연도 PaceVLA가 다루는 실행 속도 문제와 맞닿습니다.</td>
+</tr>
+<tr>
+<td>GNR (<code>gnr/</code>)</td>
+<td>GNR은 사람 손 시연을 로봇 손 궤적으로 <strong>명시적으로</strong> 리타겟팅합니다. 손 자세를 입력으로, MPC가 푼 궤적을 목표로 조건부 flow 생성기를 학습하고, 후보를 시뮬레이터로 거릅니다. DreamX의 행동 전이는 주석·기구학·물리 검사 없이 latent만으로 하고, 대상은 평행 그리퍼의 거친 움직임(글자 쓰기, 밀기)입니다. 물리적 타당성 검사가 없는 대신 입력 요구가 거의 없습니다. DreamX latent를 &quot;움직임 의도&quot;로, GNR식 시뮬레이터 거르기를 타당성 검사로 쓰는 조합을 생각할 수 있습니다.</td>
+</tr>
+</tbody>
+</table>
+<h3>DreamX가 위 논문들에 더하는 것</h3>
+<ol>
+<li><strong>주석 없는 공통 인터페이스의 실물 시연.</strong> ThinkWorld(손목 자세), Hydra-0(점 궤적), GNR(손 자세 + MPC)은 모두 명시적 대응을 씁니다. DreamX는 주석 없이 사람 시연을 로봇 명령으로 옮긴 실물 사례를 보였습니다. 정량 평가가 없고 같은 시점 조건이라는 제약은 있습니다.</li>
+<li><strong>영상 백본 내부를 읽는 latent action.</strong> LAM 계열에서 처음으로 사전학습 영상 diffusion의 내부 표현에서 직접 latent action을 뽑았고, LARYBench에서 회귀 오차를 기존 최고 대비 절반 아래로 낮췄습니다.</li>
+<li><strong>정책 지연.</strong> 미래 영상 대신 압축 코드를 생성하는 WAM형 정책으로 지연을 28.2초(Mimic-Video)에서 1.5초로 줄였습니다.</li>
+<li><strong>같은 약점.</strong> 이 저장소의 다른 논문들처럼 같은 백본에서 한 변수만 바꾼 통제 비교, 시점이 다른 조건, 여러 seed가 없습니다.</li>
+</ol>
+<h2>4. 공개 저장소 (2026-11-09 확인, GitHub API 메타데이터)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>역할</th>
+<th>라이선스</th>
+<th>★</th>
+<th>마지막 push</th>
+<th>확인한 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/cvlab-kaist/DreamX">cvlab-kaist/DreamX</a></td>
+<td>공식 저장소</td>
+<td>없음</td>
+<td>5</td>
+<td>2026-11-06</td>
+<td><code>056bd46</code> (README &quot;Code-Coming Soon&quot;과 티저 그림만)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/nvidia-cosmos/cosmos-predict2.5">nvidia-cosmos/cosmos-predict2.5</a></td>
+<td>백본 코드</td>
+<td>Apache-2.0 (가중치는 NVIDIA Open Model License)</td>
+<td>1,394</td>
+<td>2026-06-08</td>
+<td><code>a2c298b</code> (<code>docs/setup.md</code>만 확인)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LatentActionPretraining/LAPA">LatentActionPretraining/LAPA</a></td>
+<td>LAPA, Table 1 기준선</td>
+<td>MIT</td>
+<td>587</td>
+<td>2025-01-22</td>
+<td><code>46aca51</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenDriveLab/UniVLA">OpenDriveLab/UniVLA</a></td>
+<td>UniVLA, Table 1 기준선</td>
+<td>Apache-2.0</td>
+<td>1,145</td>
+<td>2025-11-19</td>
+<td><code>0ab9e9d</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/microsoft/villa-x">microsoft/villa-x</a></td>
+<td>villa-X, Table 1 기준선</td>
+<td>MIT</td>
+<td>211</td>
+<td>2026-09-16</td>
+<td><code>9b44899</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/TencentARC/Moto">TencentARC/Moto</a></td>
+<td>Moto, Table 1 기준선</td>
+<td>NOASSERTION (GitHub가 판별 못 함)</td>
+<td>181</td>
+<td>2025-10-01</td>
+<td><code>63244f4</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Little-Podi/AdaWorld">Little-Podi/AdaWorld</a></td>
+<td>AdaWorld, Table 1·2 기준선</td>
+<td>Apache-2.0</td>
+<td>264</td>
+<td>2025-06-17</td>
+<td><code>fe3701e</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/ByteDance-Seed/VideoWorld">ByteDance-Seed/VideoWorld</a></td>
+<td>VideoWorld 계열, Table 1·2 기준선</td>
+<td>Apache-2.0</td>
+<td>808</td>
+<td>2026-02-25</td>
+<td>VideoWorld 2 코드 포함 여부 미확인</td>
+</tr>
+<tr>
+<td><a href="https://github.com/senngadaisuki/disentangled-latent-action-world-models">senngadaisuki/disentangled-latent-action-world-models</a></td>
+<td>DiLA, Table 1 최고 기준선</td>
+<td>없음</td>
+<td>21</td>
+<td>2026-09-15</td>
+<td><code>adac869</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/schmidtdominik/LAPO">schmidtdominik/LAPO</a></td>
+<td>LAPO (계보)</td>
+<td>없음</td>
+<td>149</td>
+<td>2024-07-31</td>
+<td>확인 안 함</td>
+</tr>
+<tr>
+<td><a href="https://github.com/dunnolab/laom">dunnolab/laom</a></td>
+<td>LAOM (Nikulin et al. 2025)</td>
+<td>Apache-2.0</td>
+<td>41</td>
+<td>2025-07-08</td>
+<td><code>e133195</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/mimic-video/mimic-video">mimic-video/mimic-video</a></td>
+<td>Mimic-Video, 실물 기준선</td>
+<td>Apache-2.0</td>
+<td>317</td>
+<td>2026-10-19</td>
+<td><code>a38dbfe</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Genie:</strong> 공식 코드가 없습니다.</li>
+<li><strong>LARYBench:</strong> 공식 저장소를 찾지 못했습니다(arXiv:2604.11689).</li>
+<li>어떤 저장소도 clone하지 않았습니다. DreamX 코드가 없어서 04는 코드 대조가 아니라 주장 검증입니다.</li>
+<li><strong>HF:</strong> <code>nvidia/Cosmos-Predict2.5-2B</code>(NVIDIA Open Model License, 자동 승인 gated, bf16 EMA 4.12 GB, tokenizer 0.51 GB). 메타데이터만 확인했습니다.</li>
+</ul>
+<h2>5. 참고문헌 메모 (확인 안 한 부분 포함)</h2>
+<ul>
+<li>VideoWorld 2가 Ren et al. 2026a와 2026b로 두 번 들어가 있습니다(같은 arXiv:2602.10102). 본문에서 Table 1은 2026a, §2와 §4.2는 2026b를 인용합니다.</li>
+<li>§3.4의 &quot;같은 영상 백본으로 미래 영상 대신 latent action을 예측(Kim et al. 2026a)&quot;에서 2026a는 참고문헌상 &quot;Planning in 8 tokens&quot;(CVPR 2026, 압축 tokenizer)입니다. 영상 백본을 정책으로 미세조정하는 논문은 2026b(Cosmos Policy)라서, 인용이 바뀌었을 가능성이 있습니다.</li>
+<li>CoMo, VPP, Genie, LAPO의 세부 내용은 이번에 원문을 다시 읽지 않았습니다. 계보의 한 줄 설명은 DreamX §2의 서술을 따랐습니다.</li>
+<li>LARYBench 원 논문(arXiv:2604.11689)의 탐침 프로토콜과 Table 1 기준선 값이 원 논문 값인지 DreamX 저자들이 다시 돌린 값인지는 확인하지 않았습니다. 부록 B.4는 &quot;모든 표현 모델을 고정하고 공통 탐침을 학습&quot;한다고만 적었습니다.</li>
+</ul>
+</section></body></html>

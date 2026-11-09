@@ -1,0 +1,942 @@
+{
+  "M1_memory_bound_ratio": {
+    "순수 어텐션(GQA·MLA 무관)": {
+      "s0_MiB": 0.0,
+      "kv_B_per_token": 1.0,
+      "s0_over_k_tokens": 0,
+      "mem_bound_ratio_16K_vs_256K": 15.12
+    },
+    "Kimi K2.6 가정(MLA, FP8 KV)": {
+      "s0_MiB": 0.0,
+      "kv_B_per_token": 35136,
+      "s0_over_k_tokens": 0,
+      "mem_bound_ratio_16K_vs_256K": 15.12
+    },
+    "Qwen3-Next 구조 가정(DeltaNet 상태 FP32)": {
+      "s0_MiB": 73.69,
+      "kv_B_per_token": 24576,
+      "s0_over_k_tokens": 3144,
+      "mem_bound_ratio_16K_vs_256K": 11.37
+    },
+    "Qwen3-Next 구조 가정(DeltaNet 상태 BF16)": {
+      "s0_MiB": 37.69,
+      "kv_B_per_token": 24576,
+      "s0_over_k_tokens": 1608,
+      "mem_bound_ratio_16K_vs_256K": 12.92
+    },
+    "Nemotron 3.5 Super VL (FP8 KV, SSM FP16)": {
+      "s0_MiB": 82.34,
+      "kv_B_per_token": 4096,
+      "s0_over_k_tokens": 21079,
+      "mem_bound_ratio_16K_vs_256K": 5.13
+    },
+    "Nemotron 3.5 Super VL (FP8 KV, SSM FP32)": {
+      "s0_MiB": 162.34,
+      "kv_B_per_token": 4096,
+      "s0_over_k_tokens": 41559,
+      "mem_bound_ratio_16K_vs_256K": 3.44
+    },
+    "Nemotron 3.5 Super VL (BF16 KV, SSM FP16)": {
+      "s0_MiB": 82.34,
+      "kv_B_per_token": 8192,
+      "s0_over_k_tokens": 10540,
+      "mem_bound_ratio_16K_vs_256K": 7.39
+    },
+    "순수 SSM": {
+      "s0_MiB": 0.0,
+      "kv_B_per_token": 0.0,
+      "s0_over_k_tokens": null,
+      "mem_bound_ratio_16K_vs_256K": 1.0
+    }
+  },
+  "M1_nemotron_repo_values": {
+    "kv_bytes_per_token": {
+      "BF16": 8192.0,
+      "FP8": 4096.0,
+      "NVFP4": 2304.0
+    },
+    "kv_GiB_at_1M_tokens": {
+      "BF16": 8.0,
+      "FP8": 4.0,
+      "NVFP4": 2.25
+    },
+    "ssm_state_MiB_per_request": {
+      "FP32": 160.0,
+      "FP16": 80.0
+    },
+    "conv_state_MiB_per_request_bf16": 2.34,
+    "tokens_per_mamba_page_check": {
+      "one_layer_ssm_fp16_bytes": 2097152,
+      "one_layer_kv_fp8_bytes_per_token": 512,
+      "tokens": 4096,
+      "report": "one Mamba cache page ≈ 4K tokens of Attention KV (§5.3)"
+    },
+    "crossover_tokens_ssm_fp16_vs_kv_fp8": 20480
+  },
+  "M1_curve": {
+    "s0_over_k_tokens": [
+      0,
+      1000,
+      2000,
+      4000,
+      8000,
+      16000,
+      21000,
+      32000,
+      42000,
+      64000,
+      128000,
+      256000
+    ],
+    "ratio": [
+      15.12,
+      13.66,
+      12.48,
+      10.67,
+      8.36,
+      5.97,
+      5.14,
+      4.02,
+      3.42,
+      2.69,
+      1.9,
+      1.46
+    ]
+  },
+  "M2_observed_vs_upper": {
+    "rows": {
+      "GLM 5.2": {
+        "observed": 3.61,
+        "mem_bound_upper": null,
+        "fraction_of_mem_bound_concurrency_used_at_16K": null
+      },
+      "Kimi K2.6": {
+        "observed": 5.63,
+        "mem_bound_upper": 15.12,
+        "fraction_of_mem_bound_concurrency_used_at_16K": 0.37
+      },
+      "Qwen 3 Coder Next": {
+        "observed": 6.95,
+        "mem_bound_upper": 11.37,
+        "fraction_of_mem_bound_concurrency_used_at_16K": 0.61
+      }
+    },
+    "note": "GLM 5.2 구조는 확인하지 못해 비워 둠. 비율 < 1이면 16K 지점이 메모리가 아닌 다른 한계에 걸림"
+  },
+  "M3_batch1_latency_ratio_super_vl": {
+    "vs_16K": {
+      "16K": 1.0,
+      "64K": 1.02,
+      "128K": 1.047,
+      "256K": 1.102,
+      "1024K": 1.426
+    },
+    "assume": "대역폭 한계, 가중치 9.76 GB/token(NVFP4), FP8 KV, SSM FP16"
+  },
+  "M4_r_sensitivity": {
+    "r_values": [
+      0.1439,
+      0.1777,
+      0.2,
+      0.2772,
+      0.1923,
+      0.2882,
+      0.5,
+      1.0
+    ],
+    "savings": {
+      "SWE-bench Verified 48K": {
+        "opus": [
+          3.78,
+          3.45,
+          3.26,
+          2.74,
+          3.32,
+          2.68,
+          1.88,
+          1.11
+        ],
+        "gpt": [
+          3.59,
+          3.21,
+          3.0,
+          2.45,
+          3.07,
+          2.39,
+          1.6,
+          0.9
+        ]
+      },
+      "SWE-bench Verified 32K": {
+        "opus": [
+          5.34,
+          4.68,
+          4.32,
+          3.43,
+          4.44,
+          3.33,
+          2.14,
+          1.17
+        ],
+        "gpt": [
+          4.61,
+          3.97,
+          3.64,
+          2.82,
+          3.75,
+          2.74,
+          1.71,
+          0.91
+        ]
+      },
+      "SWE-bench Verified 24K": {
+        "opus": [
+          7.84,
+          6.65,
+          6.05,
+          4.6,
+          6.24,
+          4.45,
+          2.72,
+          1.42
+        ],
+        "gpt": [
+          5.2,
+          4.36,
+          3.94,
+          2.96,
+          4.08,
+          2.86,
+          1.72,
+          0.89
+        ]
+      },
+      "SWE-bench Verified 16K": {
+        "opus": [
+          9.34,
+          7.56,
+          6.72,
+          4.85,
+          6.99,
+          4.66,
+          2.69,
+          1.34
+        ],
+        "gpt": [
+          5.74,
+          4.65,
+          4.13,
+          2.98,
+          4.29,
+          2.86,
+          1.65,
+          0.83
+        ]
+      },
+      "SWE-bench Multilingual 48K": {
+        "opus": [
+          4.3,
+          3.93,
+          3.71,
+          3.13,
+          3.79,
+          3.06,
+          2.15,
+          1.26
+        ],
+        "gpt": [
+          3.53,
+          3.16,
+          2.95,
+          2.41,
+          3.02,
+          2.35,
+          1.57,
+          0.89
+        ]
+      },
+      "SWE-bench Multilingual 32K": {
+        "opus": [
+          7.01,
+          6.14,
+          5.67,
+          4.5,
+          5.83,
+          4.37,
+          2.81,
+          1.53
+        ],
+        "gpt": [
+          4.22,
+          3.64,
+          3.34,
+          2.59,
+          3.43,
+          2.51,
+          1.57,
+          0.83
+        ]
+      },
+      "SWE-bench Multilingual 24K": {
+        "opus": [
+          9.44,
+          8.01,
+          7.28,
+          5.54,
+          7.52,
+          5.36,
+          3.28,
+          1.71
+        ],
+        "gpt": [
+          4.64,
+          3.89,
+          3.52,
+          2.64,
+          3.64,
+          2.55,
+          1.53,
+          0.79
+        ]
+      },
+      "SWE-bench Multilingual 16K": {
+        "opus": [
+          12.25,
+          9.92,
+          8.82,
+          6.36,
+          9.17,
+          6.12,
+          3.53,
+          1.76
+        ],
+        "gpt": [
+          4.93,
+          3.99,
+          3.55,
+          2.56,
+          3.69,
+          2.46,
+          1.42,
+          0.71
+        ]
+      },
+      "Terminal-Bench 2.1 48K": {
+        "opus": [
+          2.61,
+          2.39,
+          2.26,
+          1.9,
+          2.3,
+          1.86,
+          1.3,
+          0.77
+        ],
+        "gpt": [
+          4.08,
+          3.65,
+          3.41,
+          2.78,
+          3.49,
+          2.71,
+          1.82,
+          1.02
+        ]
+      },
+      "Terminal-Bench 2.1 32K": {
+        "opus": [
+          4.04,
+          3.54,
+          3.27,
+          2.59,
+          3.36,
+          2.52,
+          1.62,
+          0.88
+        ],
+        "gpt": [
+          4.59,
+          3.95,
+          3.62,
+          2.81,
+          3.73,
+          2.72,
+          1.7,
+          0.91
+        ]
+      },
+      "Terminal-Bench 2.1 24K": {
+        "opus": [
+          5.27,
+          4.47,
+          4.06,
+          3.09,
+          4.2,
+          2.99,
+          1.83,
+          0.95
+        ],
+        "gpt": [
+          3.15,
+          2.64,
+          2.39,
+          1.79,
+          2.47,
+          1.73,
+          1.04,
+          0.54
+        ]
+      },
+      "Terminal-Bench 2.1 16K": {
+        "opus": [
+          6.82,
+          5.52,
+          4.91,
+          3.54,
+          5.1,
+          3.4,
+          1.96,
+          0.98
+        ],
+        "gpt": [
+          5.54,
+          4.49,
+          3.99,
+          2.88,
+          4.15,
+          2.77,
+          1.59,
+          0.8
+        ]
+      },
+      "FRAMES 48K": {
+        "opus": [
+          4.69,
+          4.28,
+          4.05,
+          3.41,
+          4.13,
+          3.33,
+          2.34,
+          1.37
+        ],
+        "gpt": [
+          3.31,
+          2.96,
+          2.77,
+          2.26,
+          2.83,
+          2.2,
+          1.48,
+          0.83
+        ]
+      },
+      "FRAMES 32K": {
+        "opus": [
+          7.71,
+          6.75,
+          6.24,
+          4.95,
+          6.41,
+          4.81,
+          3.1,
+          1.68
+        ],
+        "gpt": [
+          3.98,
+          3.43,
+          3.14,
+          2.44,
+          3.24,
+          2.36,
+          1.48,
+          0.79
+        ]
+      },
+      "FRAMES 24K": {
+        "opus": [
+          8.17,
+          6.93,
+          6.3,
+          4.8,
+          6.51,
+          4.64,
+          2.84,
+          1.48
+        ],
+        "gpt": [
+          4.66,
+          3.91,
+          3.54,
+          2.65,
+          3.66,
+          2.56,
+          1.54,
+          0.8
+        ]
+      },
+      "FRAMES 16K": {
+        "opus": [
+          10.77,
+          8.72,
+          7.75,
+          5.59,
+          8.06,
+          5.38,
+          3.1,
+          1.55
+        ],
+        "gpt": [
+          5.29,
+          4.28,
+          3.8,
+          2.74,
+          3.96,
+          2.64,
+          1.52,
+          0.76
+        ]
+      }
+    },
+    "note": "r=1이면 평탄 단가(명목 비용 비율). 0.19·0.29는 Super VL 메모리 한계 모델의 1/5.2·1/3.47"
+  },
+  "M5_same_rule": {
+    "rows": {
+      "SWE-bench Verified 48K opus": {
+        "paper_savings": 3.26,
+        "same_rule_savings": 2.51,
+        "same_rule_savings_heavy_tail": 2.51,
+        "baseline_factor_cached": 0.851,
+        "baseline_factor_cached_heavy": 0.851,
+        "config_factor_cached": 0.326,
+        "config_factor_paper": 0.339,
+        "break_even_baseline_factor": 0.307,
+        "sim_mean_compactions": 0.73,
+        "delta_tokens": 2295
+      },
+      "SWE-bench Verified 32K opus": {
+        "paper_savings": 4.32,
+        "same_rule_savings": 3.13,
+        "same_rule_savings_heavy_tail": 3.13,
+        "baseline_factor_cached": 0.851,
+        "baseline_factor_cached_heavy": 0.851,
+        "config_factor_cached": 0.27,
+        "config_factor_paper": 0.27,
+        "break_even_baseline_factor": 0.231,
+        "sim_mean_compactions": 1.31,
+        "delta_tokens": 2295
+      },
+      "SWE-bench Verified 24K opus": {
+        "paper_savings": 6.05,
+        "same_rule_savings": 4.28,
+        "same_rule_savings_heavy_tail": 4.28,
+        "baseline_factor_cached": 0.851,
+        "baseline_factor_cached_heavy": 0.851,
+        "config_factor_cached": 0.236,
+        "config_factor_paper": 0.235,
+        "break_even_baseline_factor": 0.165,
+        "sim_mean_compactions": 2.05,
+        "delta_tokens": 2295
+      },
+      "SWE-bench Verified 16K opus": {
+        "paper_savings": 6.72,
+        "same_rule_savings": 4.5,
+        "same_rule_savings_heavy_tail": 4.5,
+        "baseline_factor_cached": 0.851,
+        "baseline_factor_cached_heavy": 0.851,
+        "config_factor_cached": 0.206,
+        "config_factor_paper": 0.2,
+        "break_even_baseline_factor": 0.149,
+        "sim_mean_compactions": 3.93,
+        "delta_tokens": 2295
+      },
+      "SWE-bench Verified 48K gpt": {
+        "paper_savings": 3.0,
+        "same_rule_savings": 1.07,
+        "same_rule_savings_heavy_tail": 1.17,
+        "baseline_factor_cached": 0.366,
+        "baseline_factor_cached_heavy": 0.43,
+        "config_factor_cached": 0.27,
+        "config_factor_paper": 0.3,
+        "break_even_baseline_factor": 0.333,
+        "sim_mean_compactions": 0.13,
+        "delta_tokens": 1796
+      },
+      "SWE-bench Verified 32K gpt": {
+        "paper_savings": 3.64,
+        "same_rule_savings": 1.17,
+        "same_rule_savings_heavy_tail": 1.28,
+        "baseline_factor_cached": 0.366,
+        "baseline_factor_cached_heavy": 0.43,
+        "config_factor_cached": 0.24,
+        "config_factor_paper": 0.25,
+        "break_even_baseline_factor": 0.275,
+        "sim_mean_compactions": 0.36,
+        "delta_tokens": 1796
+      },
+      "SWE-bench Verified 24K gpt": {
+        "paper_savings": 3.94,
+        "same_rule_savings": 1.2,
+        "same_rule_savings_heavy_tail": 1.33,
+        "baseline_factor_cached": 0.366,
+        "baseline_factor_cached_heavy": 0.43,
+        "config_factor_cached": 0.224,
+        "config_factor_paper": 0.225,
+        "break_even_baseline_factor": 0.254,
+        "sim_mean_compactions": 0.6,
+        "delta_tokens": 1796
+      },
+      "SWE-bench Verified 16K gpt": {
+        "paper_savings": 4.13,
+        "same_rule_savings": 1.17,
+        "same_rule_savings_heavy_tail": 1.32,
+        "baseline_factor_cached": 0.366,
+        "baseline_factor_cached_heavy": 0.43,
+        "config_factor_cached": 0.209,
+        "config_factor_paper": 0.2,
+        "break_even_baseline_factor": 0.242,
+        "sim_mean_compactions": 1.12,
+        "delta_tokens": 1796
+      },
+      "SWE-bench Multilingual 48K opus": {
+        "paper_savings": 3.71,
+        "same_rule_savings": 1.69,
+        "same_rule_savings_heavy_tail": 1.69,
+        "baseline_factor_cached": 0.436,
+        "baseline_factor_cached_heavy": 0.436,
+        "config_factor_cached": 0.315,
+        "config_factor_paper": 0.339,
+        "break_even_baseline_factor": 0.269,
+        "sim_mean_compactions": 0.41,
+        "delta_tokens": 581
+      },
+      "SWE-bench Multilingual 32K opus": {
+        "paper_savings": 5.67,
+        "same_rule_savings": 2.4,
+        "same_rule_savings_heavy_tail": 2.4,
+        "baseline_factor_cached": 0.436,
+        "baseline_factor_cached_heavy": 0.436,
+        "config_factor_cached": 0.266,
+        "config_factor_paper": 0.27,
+        "break_even_baseline_factor": 0.176,
+        "sim_mean_compactions": 0.94,
+        "delta_tokens": 581
+      },
+      "SWE-bench Multilingual 24K opus": {
+        "paper_savings": 7.28,
+        "same_rule_savings": 2.98,
+        "same_rule_savings_heavy_tail": 2.98,
+        "baseline_factor_cached": 0.436,
+        "baseline_factor_cached_heavy": 0.436,
+        "config_factor_cached": 0.236,
+        "config_factor_paper": 0.235,
+        "break_even_baseline_factor": 0.137,
+        "sim_mean_compactions": 1.55,
+        "delta_tokens": 581
+      },
+      "SWE-bench Multilingual 16K opus": {
+        "paper_savings": 8.82,
+        "same_rule_savings": 3.36,
+        "same_rule_savings_heavy_tail": 3.36,
+        "baseline_factor_cached": 0.436,
+        "baseline_factor_cached_heavy": 0.436,
+        "config_factor_cached": 0.21,
+        "config_factor_paper": 0.2,
+        "break_even_baseline_factor": 0.113,
+        "sim_mean_compactions": 2.83,
+        "delta_tokens": 581
+      },
+      "SWE-bench Multilingual 48K gpt": {
+        "paper_savings": 2.95,
+        "same_rule_savings": 0.93,
+        "same_rule_savings_heavy_tail": 0.93,
+        "baseline_factor_cached": 0.284,
+        "baseline_factor_cached_heavy": 0.284,
+        "config_factor_cached": 0.263,
+        "config_factor_paper": 0.3,
+        "break_even_baseline_factor": 0.339,
+        "sim_mean_compactions": 0.08,
+        "delta_tokens": 1392
+      },
+      "SWE-bench Multilingual 32K gpt": {
+        "paper_savings": 3.34,
+        "same_rule_savings": 0.94,
+        "same_rule_savings_heavy_tail": 0.94,
+        "baseline_factor_cached": 0.284,
+        "baseline_factor_cached_heavy": 0.284,
+        "config_factor_cached": 0.242,
+        "config_factor_paper": 0.25,
+        "break_even_baseline_factor": 0.3,
+        "sim_mean_compactions": 0.31,
+        "delta_tokens": 1392
+      },
+      "SWE-bench Multilingual 24K gpt": {
+        "paper_savings": 3.52,
+        "same_rule_savings": 0.94,
+        "same_rule_savings_heavy_tail": 0.94,
+        "baseline_factor_cached": 0.284,
+        "baseline_factor_cached_heavy": 0.284,
+        "config_factor_cached": 0.223,
+        "config_factor_paper": 0.225,
+        "break_even_baseline_factor": 0.284,
+        "sim_mean_compactions": 0.69,
+        "delta_tokens": 1392
+      },
+      "SWE-bench Multilingual 16K gpt": {
+        "paper_savings": 3.55,
+        "same_rule_savings": 0.89,
+        "same_rule_savings_heavy_tail": 0.89,
+        "baseline_factor_cached": 0.284,
+        "baseline_factor_cached_heavy": 0.284,
+        "config_factor_cached": 0.207,
+        "config_factor_paper": 0.2,
+        "break_even_baseline_factor": 0.282,
+        "sim_mean_compactions": 1.4,
+        "delta_tokens": 1392
+      },
+      "Terminal-Bench 2.1 48K opus": {
+        "paper_savings": 2.26,
+        "same_rule_savings": 1.18,
+        "same_rule_savings_heavy_tail": 1.18,
+        "baseline_factor_cached": 0.536,
+        "baseline_factor_cached_heavy": 0.536,
+        "config_factor_cached": 0.317,
+        "config_factor_paper": 0.339,
+        "break_even_baseline_factor": 0.443,
+        "sim_mean_compactions": 0.41,
+        "delta_tokens": 911
+      },
+      "Terminal-Bench 2.1 32K opus": {
+        "paper_savings": 3.27,
+        "same_rule_savings": 1.58,
+        "same_rule_savings_heavy_tail": 1.58,
+        "baseline_factor_cached": 0.536,
+        "baseline_factor_cached_heavy": 0.536,
+        "config_factor_cached": 0.266,
+        "config_factor_paper": 0.27,
+        "break_even_baseline_factor": 0.306,
+        "sim_mean_compactions": 0.85,
+        "delta_tokens": 911
+      },
+      "Terminal-Bench 2.1 24K opus": {
+        "paper_savings": 4.06,
+        "same_rule_savings": 1.88,
+        "same_rule_savings_heavy_tail": 1.88,
+        "baseline_factor_cached": 0.536,
+        "baseline_factor_cached_heavy": 0.536,
+        "config_factor_cached": 0.236,
+        "config_factor_paper": 0.235,
+        "break_even_baseline_factor": 0.246,
+        "sim_mean_compactions": 1.41,
+        "delta_tokens": 911
+      },
+      "Terminal-Bench 2.1 16K opus": {
+        "paper_savings": 4.91,
+        "same_rule_savings": 2.13,
+        "same_rule_savings_heavy_tail": 2.13,
+        "baseline_factor_cached": 0.536,
+        "baseline_factor_cached_heavy": 0.536,
+        "config_factor_cached": 0.209,
+        "config_factor_paper": 0.2,
+        "break_even_baseline_factor": 0.204,
+        "sim_mean_compactions": 2.73,
+        "delta_tokens": 911
+      },
+      "Terminal-Bench 2.1 48K gpt": {
+        "paper_savings": 3.41,
+        "same_rule_savings": 1.53,
+        "same_rule_savings_heavy_tail": 1.53,
+        "baseline_factor_cached": 0.502,
+        "baseline_factor_cached_heavy": 0.502,
+        "config_factor_cached": 0.282,
+        "config_factor_paper": 0.3,
+        "break_even_baseline_factor": 0.293,
+        "sim_mean_compactions": 0.31,
+        "delta_tokens": 2108
+      },
+      "Terminal-Bench 2.1 32K gpt": {
+        "paper_savings": 3.62,
+        "same_rule_savings": 1.51,
+        "same_rule_savings_heavy_tail": 1.51,
+        "baseline_factor_cached": 0.502,
+        "baseline_factor_cached_heavy": 0.502,
+        "config_factor_cached": 0.242,
+        "config_factor_paper": 0.25,
+        "break_even_baseline_factor": 0.276,
+        "sim_mean_compactions": 0.66,
+        "delta_tokens": 2108
+      },
+      "Terminal-Bench 2.1 24K gpt": {
+        "paper_savings": 2.39,
+        "same_rule_savings": 0.94,
+        "same_rule_savings_heavy_tail": 0.94,
+        "baseline_factor_cached": 0.502,
+        "baseline_factor_cached_heavy": 0.502,
+        "config_factor_cached": 0.227,
+        "config_factor_paper": 0.225,
+        "break_even_baseline_factor": 0.419,
+        "sim_mean_compactions": 0.89,
+        "delta_tokens": 2108
+      },
+      "Terminal-Bench 2.1 16K gpt": {
+        "paper_savings": 3.99,
+        "same_rule_savings": 1.48,
+        "same_rule_savings_heavy_tail": 1.48,
+        "baseline_factor_cached": 0.502,
+        "baseline_factor_cached_heavy": 0.502,
+        "config_factor_cached": 0.208,
+        "config_factor_paper": 0.2,
+        "break_even_baseline_factor": 0.251,
+        "sim_mean_compactions": 1.64,
+        "delta_tokens": 2108
+      },
+      "FRAMES 48K opus": {
+        "paper_savings": 4.05,
+        "same_rule_savings": 2.15,
+        "same_rule_savings_heavy_tail": 2.15,
+        "baseline_factor_cached": 0.509,
+        "baseline_factor_cached_heavy": 0.509,
+        "config_factor_cached": 0.311,
+        "config_factor_paper": 0.339,
+        "break_even_baseline_factor": 0.247,
+        "sim_mean_compactions": 0.24,
+        "delta_tokens": 677
+      },
+      "FRAMES 32K opus": {
+        "paper_savings": 6.24,
+        "same_rule_savings": 3.04,
+        "same_rule_savings_heavy_tail": 3.04,
+        "baseline_factor_cached": 0.509,
+        "baseline_factor_cached_heavy": 0.509,
+        "config_factor_cached": 0.263,
+        "config_factor_paper": 0.27,
+        "break_even_baseline_factor": 0.16,
+        "sim_mean_compactions": 0.53,
+        "delta_tokens": 677
+      },
+      "FRAMES 24K opus": {
+        "paper_savings": 6.3,
+        "same_rule_savings": 2.93,
+        "same_rule_savings_heavy_tail": 2.93,
+        "baseline_factor_cached": 0.509,
+        "baseline_factor_cached_heavy": 0.509,
+        "config_factor_cached": 0.236,
+        "config_factor_paper": 0.235,
+        "break_even_baseline_factor": 0.159,
+        "sim_mean_compactions": 0.81,
+        "delta_tokens": 677
+      },
+      "FRAMES 16K opus": {
+        "paper_savings": 7.75,
+        "same_rule_savings": 3.35,
+        "same_rule_savings_heavy_tail": 3.35,
+        "baseline_factor_cached": 0.509,
+        "baseline_factor_cached_heavy": 0.509,
+        "config_factor_cached": 0.21,
+        "config_factor_paper": 0.2,
+        "break_even_baseline_factor": 0.129,
+        "sim_mean_compactions": 1.57,
+        "delta_tokens": 677
+      },
+      "FRAMES 48K gpt": {
+        "paper_savings": 2.77,
+        "same_rule_savings": 1.19,
+        "same_rule_savings_heavy_tail": 1.19,
+        "baseline_factor_cached": 0.471,
+        "baseline_factor_cached_heavy": 0.471,
+        "config_factor_cached": 0.278,
+        "config_factor_paper": 0.3,
+        "break_even_baseline_factor": 0.361,
+        "sim_mean_compactions": 0.13,
+        "delta_tokens": 1570
+      },
+      "FRAMES 32K gpt": {
+        "paper_savings": 3.14,
+        "same_rule_savings": 1.24,
+        "same_rule_savings_heavy_tail": 1.24,
+        "baseline_factor_cached": 0.471,
+        "baseline_factor_cached_heavy": 0.471,
+        "config_factor_cached": 0.242,
+        "config_factor_paper": 0.25,
+        "break_even_baseline_factor": 0.318,
+        "sim_mean_compactions": 0.29,
+        "delta_tokens": 1570
+      },
+      "FRAMES 24K gpt": {
+        "paper_savings": 3.54,
+        "same_rule_savings": 1.33,
+        "same_rule_savings_heavy_tail": 1.33,
+        "baseline_factor_cached": 0.471,
+        "baseline_factor_cached_heavy": 0.471,
+        "config_factor_cached": 0.223,
+        "config_factor_paper": 0.225,
+        "break_even_baseline_factor": 0.283,
+        "sim_mean_compactions": 0.49,
+        "delta_tokens": 1570
+      },
+      "FRAMES 16K gpt": {
+        "paper_savings": 3.8,
+        "same_rule_savings": 1.35,
+        "same_rule_savings_heavy_tail": 1.35,
+        "baseline_factor_cached": 0.471,
+        "baseline_factor_cached_heavy": 0.471,
+        "config_factor_cached": 0.205,
+        "config_factor_paper": 0.2,
+        "break_even_baseline_factor": 0.263,
+        "sim_mean_compactions": 0.98,
+        "delta_tokens": 1570
+      }
+    },
+    "assume": "로그정규(기준선 median·mean에 맞춤, max에서 자름), 시작 3K, 요약 3K, δ는 기준선 캐시 합계로 보정, 압축 후에도 단계 수 같음. 압축 설정의 토큰 합계는 논문 값 그대로 사용"
+  },
+  "M5_summary": {
+    "paper_range": [
+      2.26,
+      8.82
+    ],
+    "same_rule_range": [
+      0.89,
+      4.5
+    ],
+    "same_rule_heavy_range": [
+      0.89,
+      4.5
+    ],
+    "median_ratio_same_over_paper": 0.42,
+    "by_model_ranges": {
+      "opus": {
+        "paper": [
+          2.26,
+          8.82
+        ],
+        "same": [
+          1.18,
+          4.5
+        ],
+        "heavy": [
+          1.18,
+          4.5
+        ]
+      },
+      "gpt": {
+        "paper": [
+          2.39,
+          4.13
+        ],
+        "same": [
+          0.89,
+          1.53
+        ],
+        "heavy": [
+          0.89,
+          1.53
+        ]
+      }
+    },
+    "n_below_1": {
+      "same": 5,
+      "heavy": 5
+    },
+    "break_even_note": "기준선의 실제 평균 배수가 break_even보다 크면 압축이 싸다. 압축 설정은 논문 값 f(W)(상한)로 둠"
+  }
+}

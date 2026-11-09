@@ -1,0 +1,278 @@
+{
+  "C1_table1": {
+    "rows": {
+      "LAPA": {
+        "reg_avg_recomputed": 0.9675,
+        "reg_avg_table": 0.97,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 20.17,
+        "cls_avg_table": 20.17,
+        "cls_ok": true
+      },
+      "UniVLA": {
+        "reg_avg_recomputed": 0.8675,
+        "reg_avg_table": 0.87,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 18.75,
+        "cls_avg_table": 18.75,
+        "cls_ok": true
+      },
+      "villa-X": {
+        "reg_avg_recomputed": 0.8725,
+        "reg_avg_table": 0.87,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 20.9,
+        "cls_avg_table": 20.9,
+        "cls_ok": true
+      },
+      "LAPA-MAGVIT2": {
+        "reg_avg_recomputed": 0.645,
+        "reg_avg_table": 0.65,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 40.78,
+        "cls_avg_table": 40.78,
+        "cls_ok": true
+      },
+      "LAPA-SigLIP2": {
+        "reg_avg_recomputed": 0.6525,
+        "reg_avg_table": 0.65,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 43.67,
+        "cls_avg_table": 43.67,
+        "cls_ok": true
+      },
+      "LAPA-DINOv2": {
+        "reg_avg_recomputed": 0.63,
+        "reg_avg_table": 0.63,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 49.36,
+        "cls_avg_table": 49.36,
+        "cls_ok": true
+      },
+      "LAPA-DINOv3": {
+        "reg_avg_recomputed": 0.6025,
+        "reg_avg_table": 0.6,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 49.17,
+        "cls_avg_table": 49.17,
+        "cls_ok": true
+      },
+      "MoTo": {
+        "reg_avg_recomputed": 0.445,
+        "reg_avg_table": 0.44,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 51.01,
+        "cls_avg_table": 51.01,
+        "cls_ok": true
+      },
+      "AdaWorld": {
+        "reg_avg_recomputed": 0.695,
+        "reg_avg_table": 0.69,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 44.29,
+        "cls_avg_table": 44.29,
+        "cls_ok": true
+      },
+      "VideoWorld2": {
+        "reg_avg_recomputed": 0.7,
+        "reg_avg_table": 0.7,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 27.37,
+        "cls_avg_table": 27.37,
+        "cls_ok": true
+      },
+      "DiLA": {
+        "reg_avg_recomputed": 0.3875,
+        "reg_avg_table": 0.38,
+        "reg_ok": false,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 62.25,
+        "cls_avg_table": 62.25,
+        "cls_ok": true
+      },
+      "DreamX": {
+        "reg_avg_recomputed": 0.17,
+        "reg_avg_table": 0.17,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 69.67,
+        "cls_avg_table": 69.67,
+        "cls_ok": true
+      },
+      "DreamX+FAE-32": {
+        "reg_avg_recomputed": 0.2175,
+        "reg_avg_table": 0.22,
+        "reg_ok": true,
+        "reg_within_rounding": true,
+        "cls_avg_recomputed": 67.15,
+        "cls_avg_table": 67.15,
+        "cls_ok": true
+      }
+    },
+    "all_ok": false,
+    "boundary_cases": [
+      "DiLA"
+    ],
+    "best_baseline_per_column_reg": {
+      "CALVIN": 0.43,
+      "VLABench": 0.09,
+      "RoboCOIN": 0.51,
+      "AgiBotWorld-Beta": 0.52
+    },
+    "best_baseline_per_column_cls": {
+      "Atomic robot": 58.51,
+      "Composite human": 65.47,
+      "Composite robot": 62.76
+    },
+    "gains": {
+      "DreamX": {
+        "reg_rel_drop_vs_best_baseline": {
+          "CALVIN": 0.651,
+          "VLABench": 0.444,
+          "RoboCOIN": 0.49,
+          "AgiBotWorld-Beta": 0.577
+        },
+        "cls_gain_pp_vs_best_baseline": {
+          "Atomic robot": 9.52,
+          "Composite human": 7.25,
+          "Composite robot": 5.5
+        }
+      },
+      "DreamX+FAE-32": {
+        "reg_rel_drop_vs_best_baseline": {
+          "CALVIN": 0.465,
+          "VLABench": 0.222,
+          "RoboCOIN": 0.392,
+          "AgiBotWorld-Beta": 0.5
+        },
+        "cls_gain_pp_vs_best_baseline": {
+          "Atomic robot": 7.39,
+          "Composite human": 4.02,
+          "Composite robot": 3.3
+        }
+      }
+    },
+    "note": "LARYBench 탐침(probe)은 벤치마크마다 따로 학습. 표현이 embodiment 사이에 정렬되었는지는 재지 않음(03 §2)"
+  },
+  "C2_table2": {
+    "FVD_ratio_best_baseline_over_dreamx": 2.96,
+    "LPIPS_rel_drop_vs_best": 0.401,
+    "PSNR_gain_dB_vs_best": 3.57,
+    "SSIM_gain_vs_best": 0.036,
+    "n_clips": 1008,
+    "frames_per_clip_evaluated": 19,
+    "note": "시드·신뢰구간 없음. 기준선의 학습 데이터가 DreamX(사람 469 h 포함)와 다름"
+  },
+  "C3_real_policy": {
+    "sr_per_config_recomputed": {
+      "Mimic-Video": [
+        50.0,
+        50.0,
+        50.0
+      ],
+      "DreamX": [
+        90.0,
+        100.0,
+        100.0
+      ]
+    },
+    "avg_recomputed": {
+      "Mimic-Video": 50.0,
+      "DreamX": 96.67
+    },
+    "table3": {
+      "Mimic-Video": 50.0,
+      "DreamX": 96.7
+    },
+    "push_successes_of_30": {
+      "Mimic-Video": 2,
+      "DreamX": 28
+    },
+    "reach_successes_of_30": {
+      "Mimic-Video": 28,
+      "DreamX": 30
+    },
+    "push_wilson95": {
+      "Mimic-Video": [
+        0.018,
+        0.213
+      ],
+      "DreamX": [
+        0.787,
+        0.982
+      ]
+    },
+    "fisher_p_push_pooled": 3.22e-12,
+    "fisher_p_reach_pooled": 0.492,
+    "fisher_p_upper_push_8v2": 0.023,
+    "latency_ratio": 19.15,
+    "note": "차이는 전부 push에서 나온다. Mimic-Video는 거의 항상 서랍에 닿지만 거의 밀지 못함. 학습 시연 45개, 설정당 10회, 체크포인트·시드 1개"
+  },
+  "C4_human_only_upper": {
+    "human_only_push": "10/10",
+    "robot_demo_push": "8/10",
+    "fisher_p": 0.474,
+    "note": "'사람 영상만으로도 100%'는 표본 10회 안에서 로봇 시연(8/10)과 구분되지 않음. 사람 영상 개수는 보고 안 됨"
+  },
+  "C5_table7_calvin": {
+    "avg_len": {
+      "w/o latent": {
+        "avg_len_recomputed": 2.378,
+        "table": 2.378
+      },
+      "DreamX policy": {
+        "avg_len_recomputed": 2.643,
+        "table": 2.643
+      }
+    },
+    "gain": 0.265,
+    "fisher_p_if_1000_sequences": {
+      "k>=1": 0.173,
+      "k>=5": 0.0057
+    },
+    "note": "평가 시퀀스 수 미보고. 1,000개(관례)라고 가정한 검정. Avg. Len. 2.64는 CALVIN ABC→D 최신 정책(4 이상)보다 낮은 수준이라 '보조 신호로서의 효과'만 보여 줌"
+  },
+  "C6_data_hours": {
+    "total_h": 2188.0,
+    "human_h": 469.1,
+    "human_share": 0.214,
+    "robot_share": 0.786,
+    "agibot_share": 0.374,
+    "note": "AgiBot(37.4%)이 LARYBench 회귀 벤치마크 AgiBotWorld-Beta와 같은 출처. 학습/평가 분리 여부는 논문에 없음"
+  },
+  "C7_compression": {
+    "tokens_per_latent_frame": 1200,
+    "token_ratio": 300.0,
+    "floats_backbone_tokens_per_frame": 2457600,
+    "floats_latent_action_per_frame": 8192,
+    "floats_vae_latent_per_frame": 76800,
+    "ratio_vs_vae_latent": 9.4,
+    "floats_fae32_per_frame": 128,
+    "ratio_fae32_vs_vae_latent": 600.0,
+    "latent_frames_for_29_frames": 8,
+    "max_query_tokens": 32,
+    "assumption": "VAE 8× 공간·4× 시간·16채널, patch 2는 Cosmos-Predict2.5(Wan2.1 VAE) 사양을 사전 지식으로 둔 것. 1,200 토큰과 2–8 latent 프레임은 논문 수치와 일치",
+    "note": "300×는 토큰 개수 비. 각 latent-action 토큰은 백본 폭(2,048)을 그대로 가져 프레임당 8,192개 실수. VAE latent(76,800) 대비로는 9.4×이고, 진짜 '작은 코드'는 FAE-32(128개)"
+  },
+  "C8_table8": {
+    "static_over_whole_rgb": {
+      "0.1": 0.56,
+      "0.3": 0.44,
+      "1.0": 0.36,
+      "zero": 0.3
+    },
+    "monotone_flow_dev": true,
+    "n": "선별한 고움직임 클립 8개 × decoder seed 2",
+    "note": "α=1(채널 표준편차 크기 잡음)에서도 움직임 크기는 0.946로 거의 유지 → 디코더가 latent의 세부에 둔감. 0 query에서도 움직임이 46% 남음 → 첫 프레임과 생성 prior만으로도 상당한 움직임이 나옴"
+  }
+}

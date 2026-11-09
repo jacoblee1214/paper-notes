@@ -1,0 +1,287 @@
+{
+  "T1_schur_equals_full": {
+    "max_abs_diff": 1.3850032232198828e-14,
+    "C_offdiag_over_diag": 0.0,
+    "note": "C(점끼리 블록)가 대각이라 역행렬이 O(N), Schur 보완 S는 6×6"
+  },
+  "T2_update_order": {
+    "baseline0.05_init3.0deg": {
+      "joint": {
+        "rot_deg_median_by_iter": [
+          3.0,
+          0.114,
+          0.092,
+          0.089,
+          0.088,
+          0.087,
+          0.087,
+          0.087,
+          0.087
+        ],
+        "tdir_deg_median_iter4": 2.535,
+        "depth_rel_median_iter4": 0.0568,
+        "iters_to_rot<0.2deg_median": 1.0,
+        "reached_frac": 1.0
+      },
+      "camera_first(paper)": {
+        "rot_deg_median_by_iter": [
+          3.0,
+          0.133,
+          0.107,
+          0.094,
+          0.087,
+          0.089,
+          0.088,
+          0.088,
+          0.087
+        ],
+        "tdir_deg_median_iter4": 2.734,
+        "depth_rel_median_iter4": 0.0566,
+        "iters_to_rot<0.2deg_median": 1.0,
+        "reached_frac": 1.0
+      },
+      "geometry_first(code)": {
+        "rot_deg_median_by_iter": [
+          3.0,
+          0.587,
+          0.212,
+          0.108,
+          0.115,
+          0.102,
+          0.093,
+          0.09,
+          0.088
+        ],
+        "tdir_deg_median_iter4": 2.905,
+        "depth_rel_median_iter4": 0.0652,
+        "iters_to_rot<0.2deg_median": 3.0,
+        "reached_frac": 1.0
+      }
+    },
+    "baseline0.05_init10.0deg": {
+      "joint": {
+        "rot_deg_median_by_iter": [
+          10.0,
+          0.493,
+          0.108,
+          0.087,
+          0.087,
+          0.087,
+          0.087,
+          0.087,
+          0.087
+        ],
+        "tdir_deg_median_iter4": 2.506,
+        "depth_rel_median_iter4": 0.0553,
+        "iters_to_rot<0.2deg_median": 2.0,
+        "reached_frac": 1.0
+      },
+      "camera_first(paper)": {
+        "rot_deg_median_by_iter": [
+          10.0,
+          0.518,
+          0.202,
+          0.129,
+          0.124,
+          0.106,
+          0.095,
+          0.091,
+          0.089
+        ],
+        "tdir_deg_median_iter4": 2.821,
+        "depth_rel_median_iter4": 0.0632,
+        "iters_to_rot<0.2deg_median": 2.5,
+        "reached_frac": 1.0
+      },
+      "geometry_first(code)": {
+        "rot_deg_median_by_iter": [
+          10.0,
+          1.053,
+          0.194,
+          0.131,
+          0.116,
+          0.109,
+          0.1,
+          0.104,
+          0.106
+        ],
+        "tdir_deg_median_iter4": 3.099,
+        "depth_rel_median_iter4": 0.0676,
+        "iters_to_rot<0.2deg_median": 2.0,
+        "reached_frac": 0.9
+      }
+    },
+    "baseline0.3_init3.0deg": {
+      "joint": {
+        "rot_deg_median_by_iter": [
+          3.0,
+          0.183,
+          0.13,
+          0.13,
+          0.129,
+          0.129,
+          0.129,
+          0.129,
+          0.129
+        ],
+        "tdir_deg_median_iter4": 0.51,
+        "depth_rel_median_iter4": 0.0184,
+        "iters_to_rot<0.2deg_median": 1.0,
+        "reached_frac": 0.9
+      },
+      "camera_first(paper)": {
+        "rot_deg_median_by_iter": [
+          3.0,
+          0.6,
+          0.53,
+          0.473,
+          0.422,
+          0.375,
+          0.333,
+          0.294,
+          0.261
+        ],
+        "tdir_deg_median_iter4": 0.698,
+        "depth_rel_median_iter4": 0.0238,
+        "iters_to_rot<0.2deg_median": null,
+        "reached_frac": 0.0
+      },
+      "geometry_first(code)": {
+        "rot_deg_median_by_iter": [
+          3.0,
+          1.383,
+          0.835,
+          0.719,
+          0.59,
+          0.499,
+          0.425,
+          0.362,
+          0.307
+        ],
+        "tdir_deg_median_iter4": 0.989,
+        "depth_rel_median_iter4": 0.1587,
+        "iters_to_rot<0.2deg_median": 5.5,
+        "reached_frac": 0.2
+      }
+    },
+    "baseline0.3_init10.0deg": {
+      "joint": {
+        "rot_deg_median_by_iter": [
+          10.0,
+          0.859,
+          0.132,
+          0.132,
+          0.129,
+          0.129,
+          0.129,
+          0.129,
+          0.129
+        ],
+        "tdir_deg_median_iter4": 0.51,
+        "depth_rel_median_iter4": 0.0184,
+        "iters_to_rot<0.2deg_median": 2.0,
+        "reached_frac": 0.9
+      },
+      "camera_first(paper)": {
+        "rot_deg_median_by_iter": [
+          10.0,
+          0.859,
+          0.688,
+          0.619,
+          0.554,
+          0.494,
+          0.427,
+          0.366,
+          0.311
+        ],
+        "tdir_deg_median_iter4": 0.921,
+        "depth_rel_median_iter4": 0.0591,
+        "iters_to_rot<0.2deg_median": 8.0,
+        "reached_frac": 0.3
+      },
+      "geometry_first(code)": {
+        "rot_deg_median_by_iter": [
+          10.0,
+          3.895,
+          3.165,
+          2.933,
+          2.738,
+          2.505,
+          2.287,
+          2.081,
+          1.887
+        ],
+        "tdir_deg_median_iter4": 4.565,
+        "depth_rel_median_iter4": 0.2335,
+        "iters_to_rot<0.2deg_median": null,
+        "reached_frac": 0.0
+      }
+    }
+  },
+  "T2b_same_fixed_point_200iters": [
+    {
+      "seed": 100,
+      "camera_first": {
+        "rot_diff_deg_vs_joint": 0.0001745043158351596,
+        "t_diff_vs_joint": 0.0003697879923030982,
+        "rho_maxdiff_vs_joint": 0.0006989055302213387
+      },
+      "geometry_first": {
+        "rot_diff_deg_vs_joint": 0.014709540793590718,
+        "t_diff_vs_joint": 0.04216678490859576,
+        "rho_maxdiff_vs_joint": 0.07139992036365062
+      },
+      "joint_cost": 0.0002712013323040701
+    },
+    {
+      "seed": 101,
+      "camera_first": {
+        "rot_diff_deg_vs_joint": 9.753219560428559e-05,
+        "t_diff_vs_joint": 0.00029404080946293486,
+        "rho_maxdiff_vs_joint": 0.0005813338019603487
+      },
+      "geometry_first": {
+        "rot_diff_deg_vs_joint": 0.00019956034418744048,
+        "t_diff_vs_joint": 0.0006004737146662182,
+        "rho_maxdiff_vs_joint": 0.0012126726003399702
+      },
+      "joint_cost": 0.00026747747870125264
+    },
+    {
+      "seed": 102,
+      "camera_first": {
+        "rot_diff_deg_vs_joint": 9.50338663300096e-05,
+        "t_diff_vs_joint": 0.00026988903518298634,
+        "rho_maxdiff_vs_joint": 0.00046091561296435213
+      },
+      "geometry_first": {
+        "rot_diff_deg_vs_joint": 5.69153971001364e-05,
+        "t_diff_vs_joint": 0.00016194313007730058,
+        "rho_maxdiff_vs_joint": 0.0002818914728730526
+      },
+      "joint_cost": 0.0003697660691408159
+    }
+  ],
+  "T3_dimensionality": {
+    "N10": {
+      "rot_deg_median": 0.2773,
+      "depth_rel_median": 0.024,
+      "depth_prior_rel_median": 0.0595
+    },
+    "N40": {
+      "rot_deg_median": 0.1305,
+      "depth_rel_median": 0.0145,
+      "depth_prior_rel_median": 0.0636
+    },
+    "N160": {
+      "rot_deg_median": 0.0547,
+      "depth_rel_median": 0.0127,
+      "depth_prior_rel_median": 0.0612
+    },
+    "ratio_N10_over_N160": {
+      "rot": 5.07,
+      "depth": 1.89,
+      "sqrt(160/10)": 4.0
+    }
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "setup": {
+    "m": 8,
+    "d": 2,
+    "k": 2,
+    "N_per_embodiment": 1000,
+    "eta_human_nuisance": 0.3,
+    "seeds": 5,
+    "steps": 2500,
+    "optimizer": "Adam lr 0.02, weight decay 1e-3",
+    "robot_action_aux_lambda": 1.0,
+    "pair_frac_for_P": 0.05,
+    "pair_loss_weight_for_P": 5.0
+  },
+  "results": {
+    "S": {
+      "0": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 0.0003,
+          "min": 0.0002,
+          "max": 0.0003
+        }
+      },
+      "15": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 0.0673,
+          "min": 0.0669,
+          "max": 0.0679
+        }
+      },
+      "30": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 0.2638,
+          "min": 0.2625,
+          "max": 0.2653
+        }
+      },
+      "60": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 0.9839,
+          "min": 0.9799,
+          "max": 0.988
+        }
+      },
+      "90": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 1.9676,
+          "min": 1.9603,
+          "max": 1.9744
+        }
+      },
+      "180": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 3.9349,
+          "min": 3.9217,
+          "max": 3.9448
+        }
+      }
+    },
+    "I": {
+      "0": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 2.2852,
+          "min": 1.6945,
+          "max": 3.3357
+        }
+      },
+      "15": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 2.2806,
+          "min": 1.6966,
+          "max": 3.2315
+        }
+      },
+      "30": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 2.2712,
+          "min": 1.6989,
+          "max": 3.1594
+        }
+      },
+      "60": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 2.1587,
+          "min": 1.6984,
+          "max": 2.8888
+        }
+      },
+      "90": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 2.1563,
+          "min": 1.6965,
+          "max": 3.318
+        }
+      },
+      "180": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 1.3958,
+          "min": 0.7364,
+          "max": 1.7116
+        }
+      }
+    },
+    "P": {
+      "0": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 0.0001,
+          "min": 0.0001,
+          "max": 0.0002
+        }
+      },
+      "15": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 0.0002,
+          "min": 0.0001,
+          "max": 0.0003
+        }
+      },
+      "30": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 0.0001,
+          "min": 0.0,
+          "max": 0.0003
+        }
+      },
+      "60": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 0.9994,
+          "min": 0.9971,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0006,
+          "min": 0.0,
+          "max": 0.0029
+        },
+        "transfer_action_err": {
+          "mean": 0.2948,
+          "min": 0.0,
+          "max": 1.4733
+        }
+      },
+      "90": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "transfer_action_err": {
+          "mean": 0.0002,
+          "min": 0.0,
+          "max": 0.0003
+        }
+      },
+      "180": {
+        "probe_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "probe_r2_human": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recon_r2_robot": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "robot_action_err": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0001
+        },
+        "transfer_action_err": {
+          "mean": 0.0002,
+          "min": 0.0001,
+          "max": 0.0005
+        }
+      }
+    }
+  },
+  "theory_shared_encoder_rotation_err": {
+    "0": 0.0,
+    "15": 0.068,
+    "30": 0.268,
+    "60": 1.0,
+    "90": 2.0,
+    "180": 4.0
+  },
+  "reading": [
+    "probe R²는 세 조건, 모든 θ에서 거의 1이다. 탐침을 embodiment마다 따로 학습하는 LARYBench식 평가는 정렬 여부를 재지 못한다",
+    "공유 인코더(S)는 θ = 0에서 잘 전이되지만 θ가 커지면 전이 오차가 커진다. 정렬은 같은 행동이 이미지에서 비슷하게 움직여 보일 때만 생긴다",
+    "embodiment별 인코더(I)는 θ와 무관하게 전이가 임의적이다. 재구성 손실은 embodiment마다 다른 좌표계를 허용한다",
+    "짝지은 클립 5%(P)를 쓰면 θ와 무관하게 정렬된다. DreamX는 이 신호 없이 정렬된다고 주장하므로, 정렬은 가중치 공유와 시점 유사성에서 나온다고 보는 것이 자연스럽다"
+  ]
+}

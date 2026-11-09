@@ -1,0 +1,65 @@
+{
+  "P1_decoder": {
+    "ba_layer_parts_M": {
+      "self_attn_x3 (norm + attn, MLP 없음)": 7.092,
+      "cross_attn_layer (geometry update)": 7.089,
+      "camera_inverse (MLP)": 4.722,
+      "token_transform (adaLN 조건 블록)": 9.45,
+      "camera_attn (camera update)": 7.089,
+      "geo_norm + cam_norm": 0.003,
+      "token_corr_res (matching + residual)": 2.956
+    },
+    "ba_layer_total_M": 38.402,
+    "around_M": {
+      "appearance_embed (1024→768)": 0.787,
+      "pts head (768→(3+1)·16²)": 0.787,
+      "pose head (768→512→512→512, rot9·t3·conf1)": 0.926,
+      "init_pose_token": 0.001
+    },
+    "ba_layer_plus_around_M": 40.903,
+    "camera_token_encoder_unused_M": 0.431,
+    "paper_decoder_M": 38,
+    "appendixA_selfattn_with_mlp_M": 52.57,
+    "appendixA_plus_residual_mlp_ratio4_M": 56.12
+  },
+  "P2_encoder": {
+    "vit_l_encoder_M": 303.1,
+    "total_model_M": 344.4,
+    "decoder_share_of_total": 0.119
+  },
+  "P3_vista": {
+    "decoderblock_768_M": 9.453,
+    "12_layers_M": 113.4,
+    "3_layers_M": 28.4,
+    "paper_claim": "ViSTA 12층 113M, 3층 38M (Appendix B)",
+    "implied_non_layer_M_if_linear": 9.8,
+    "solve_X_plus_12L_113__X_plus_3L_38": {
+      "L_M": 8.33,
+      "X_M": 13.0
+    }
+  },
+  "P4_ratios": {
+    "BA-T/DUSt3R": 0.167,
+    "DUSt3R/BA-T": 5.97,
+    "BA-T/VGGT": 0.063,
+    "BA-T/DA3": 0.05,
+    "BA-T/MapAnything": 0.222,
+    "claims": "초록 16%(v1 본문: DUSt3R 대비), v2 본문 '최대 6배 큰 2-view 모델', '대형 multi-view의 5–6%'"
+  },
+  "P5_flops_224_pair": {
+    "tokens_per_view": 196,
+    "encoder_2views_GFLOP": 245.2,
+    "ba_layer_per_iter_GFLOP": 25.28,
+    "ba_layer_parts_GFLOP": {
+      "token_transform x3 (이웃 2 + 잔차 1)": 11.47,
+      "geometry cross-attn x2 view": 5.79,
+      "self-attn x3 x2 view": 6.26,
+      "token_corr_res": 1.28,
+      "camera_attn (query 1개, key N개)": 0.48
+    },
+    "heads_and_embed_GFLOP": 1.23,
+    "total_K4_GFLOP": 347.5,
+    "total_K8_GFLOP": 448.7,
+    "note": "추정치(측정 아님). 인코더가 대부분을 차지한다"
+  }
+}
