@@ -1,0 +1,1140 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Retargeting Through Reasoning 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 18pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.6pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.6pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>Retargeting Through Reasoning for Humanoid–Object Interaction: 분석 리포트</h1>
+<p class="meta">프로젝트 블로그 (2026-11-06 게시, 2026-11-10 접근) · 심사 논문 아님 · https://narayananpp.github.io/semantic-humanoid-retargeting-blog/ · 저자 Narayanan Palghat Parameswaran 외 · 블로그 원자료 저장소 커밋 84cbe2253 (라이선스 없음)</p>
+<h2>요약</h2>
+<ol>
+<li><strong>무엇을 주장하나:</strong> GPT-6 Astra를 Codex 환경에서 돌려, 초기 운동학 재targeting(HOI-Retarget) 결과를 MuJoCo 실행 피드백으로 고쳐 G1 휴머노이드의 객체 상호작용 기준을 만든다. 40과제에서 의미 성공 75%, 객체 추적 오차 12.63 cm로 HOI-Retarget + SPIDER(17.5%, 42.87 cm)보다 낫다고 보고한다.</li>
+<li><strong>수치는 원자료와 일치한다:</strong> 표 1–2, 성공률, 추적 평균, 최선값 곡선(29.59 → 10.21 cm), 경험 실험 선반 값(23.35 → 7.77 cm)을 모두 과제별 원자료에서 재계산했다. 단 추적 평균 12.63은 미완료 1과제를 뺀 39과제 평균이다.</li>
+<li><strong>기준선 승리는 강하다:</strong> 120분 Codex 대 HOI-Retarget + SPIDER는 의미 성공 차이가 McNemar p ≈ 1.5e-6, 추적 차이 −30.4 cm [−40.6, −20.5]다.</li>
+<li><strong>스웜과 단일 실행의 우열은 나지 않는다:</strong> 블로그가 말하는 &quot;단일 120분 75% &gt; 협업 스웜 67.5%&quot;는 p = 0.51이다. 독립 스웜의 21 대 19 성공도 재검토 판정(19 대 19)에서는 사라진다.</li>
+<li><strong>경험 효과는 과제 한 개에 기댄다:</strong> 10과제 중 5개가 좋아지고 5개가 나빠진다(부호 검정 p = 1.0). 선반 한 과제를 빼면 집단 평균 효과가 뒤집힌다. 방향 오차는 두 집단 모두 늘어난다.</li>
+<li><strong>선택 편향:</strong> 추적 최선값은 보고 지표와 같은 지표로 고른 값이라 최종 값보다 0.4–2.4 cm 낮다. 시뮬레이션 잡음 2–4 cm에서 같은 선택은 1–4 cm 낙관 편향을 만든다(toy).</li>
+<li><strong>구현 판정:</strong> 이 맥에서 전체 재현은 불가능하다(외부 LLM API, MuJoCo·SONIC·데이터, 지표·판정 프롬프트 비공개). 수치 재계산과 toy는 CPU로 완료했다.</li>
+</ol>
+<p class="cap">그림 1. 40과제 의미 성공률과 평균 추적 오차 (블로그 원자료 재계산, 우리 그림).</p>
+<p><img src="figures/fig_outcomes.png" alt="fig_outcomes" /></p>
+</section>
+<section class="chapter"><h2>01. 블로그 분석: 무엇을 주장하고 어떻게 측정했나</h2>
+<p>대상: <em>Retargeting Through Reasoning for Humanoid–Object Interaction</em> (프로젝트 블로그, 2026-11-06 게시, 접근 2026-11-10). 저자 Narayanan Palghat Parameswaran, Jay Karhade, Haoyang He, Neehar Peri, Jay Patrikar, Dong-Ki Kim, Shayegan Omidshafiei, Sebastian Scherer, Deva Ramanan. arXiv 판과 심사 논문이 없다. 본문 인용은 블로그의 절 번호(§1–§7, A1–A2)와 표 번호를 쓴다. 원문 텍스트는 <code>paper/blog.txt</code>, 원본 HTML은 <code>paper/blog.html</code>에 있다.</p>
+<h3>1. 핵심 주장 (블로그 Key Takeaways와 §1–§2)</h3>
+<ul>
+<li><strong>주장 A (의미 보존 재targeting).</strong> 로봇의 재targeting은 사람의 관절 자세가 아니라 객체가 같은 궤적을 따라가게 해야 한다(§1, Key Takeaways 1). 기존 운동학 방법(HOI-Retarget, §1의 [1])은 사람 자세를 맞추므로 물리 실행이 실패한다. 샘플링 기반 물리 방법(SPIDER, [3])은 입력 기준이 잘못된 접촉 전략을 주면 그 오류를 이어받는다.</li>
+<li><strong>주장 B (에이전트 + 시뮬레이터 루프).</strong> GPT-6 Astra를 Codex 환경에서 돌리면 에이전트가 기준 모션과 제어 코드를 쓰고, MuJoCo 실행 후 이미지·객체 추적 오차·접촉 측정을 보고 고친다(§2, §3.1). 이 구성을 &quot;Astra with Refinement&quot;라고 부른다.</li>
+<li><strong>주장 C (정량).</strong> 40과제(HUMOTO 20, OMOMO 20)에서 의미 성공률 75%(Astra with Refinement, 120분) 대 17.5%(HOI-Retarget + SPIDER) 대 2.5%(Astra one-shot). 평균 객체 추적 오차 12.63 cm 대 42.87 cm 대 62.98 cm (§4, Table 1–2, Fig. 5).</li>
+<li><strong>주장 D (시간 효과).</strong> 최선값 기준 추적 오차는 30분 29.59 cm에서 120분 10.21 cm로 줄어든다(§4.1, Fig. 6).</li>
+<li><strong>주장 E (경험 효과).</strong> 다른 가구 상호작용 4개의 요약(성공·실패 전략)을 주면 새 과제 선반 세우기에서 오차가 23.35 cm에서 7.77 cm로 준다. 같은 계산 시간에서 비교했다고 한다(§5).</li>
+<li><strong>주장 F (스웜).</strong> 같은 30분 시간 예산에서 독립 스웜은 성공 21과제(단일 19과제), 협업 스웜은 67.5%다. 같은 4 agent-hours에서는 단일 120분 실행(75%)이 협업 스웜(67.5%)보다 낫다(§5.2–5.3, A2).</li>
+<li><strong>주장 G (텍스트만으로).</strong> 모션 참조 없이 텍스트 설명만 주어도 5개 과제에서 동작이 나온다(A1). 정량 평가는 없고 예시 5개뿐이다.</li>
+</ul>
+<p>§1의 &quot;주장 A&quot;는 설명이고, 정량 근거는 §4 표다. 블로그는 &quot;semantic intent&quot; 보존을 목표라고 하지만 이를 재는 지표는 LLM 판정 하나뿐이다(§3.2).</p>
+<h3>2. 방법 (§2, §3.1, 블로그 method 소스)</h3>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>블로그가 적은 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>입력</td>
+<td>SMPL 형식 사람 시연, HOI-Retarget이 만든 초기 운동학 기준, 장면, 객체 목표 궤적(로봇 크기에 맞게 scale)</td>
+</tr>
+<tr>
+<td>출력</td>
+<td>전신과 손의 기준 모션 + Python 제어 코드 (에이전트가 작성)</td>
+</tr>
+<tr>
+<td>제어기</td>
+<td>SONIC(다리·허리), Dex3 손은 임피던스 제어. 에이전트가 SONIC의 관절 출력을 보강하거나 대체할 수 있음</td>
+</tr>
+<tr>
+<td>시뮬레이터</td>
+<td>MuJoCo, G1 + Dex3 모델</td>
+</tr>
+<tr>
+<td>피드백</td>
+<td>실행 이미지, 객체 추적 오차(object_path_v1), 접촉 측정. 매 시도 후 확인</td>
+</tr>
+<tr>
+<td>시도 수</td>
+<td>한 실행 최대 2시간. 저장된 실행 시도 수는 실행당 평균 약 118개(최소 4, 최대 762, 원자료 기준)</td>
+</tr>
+<tr>
+<td>구성</td>
+<td>단일 Codex 실행, 독립 4-agent 스웜, 협업 4-agent 스웜, Astra one-shot(도구 호출 없음)</td>
+</tr>
+</tbody>
+</table>
+<p>agent가 실제로 바꾸는 것은 블로그 A2 트레이스(clothes-stand 한 실행, <code>repo/site/trace-explorer/architecture/agent-0.json</code>)에서 확인했다. 26회 시도 중 메시지 12개를 보면 다음이 보인다.</p>
+<ul>
+<li>초기 자세의 발 높이와 손-물체 겹침을 먼저 고친다(1.1분 메시지).</li>
+<li>한 손 파지 → 두 손 파지 → 단단한 한 손 파지로 <strong>접촉 전략을 바꾼다</strong>(5.8–20분).</li>
+<li>고정 시간으로 손을 놓으면 불안정해지자 <strong>바닥 지지와 물체 속도가 조건을 만족할 때 놓는</strong> 방식으로 바꾼다(23.9–26.5분).</li>
+</ul>
+<p>즉 에이전트는 기준 궤적과 제어 코드를 같이 고치고, 손가락·손바닥 접촉 목표와 놓는 타이밍을 바꾼다. 신경망 가중치나 SPIDER식 비용 가중치를 바꾸는 방식은 아니다. 블로그는 에이전트가 <strong>목적함수 가중치를 바꾸는지</strong>는 설명하지 않는다. 트레이스의 도구 호출 내용이 &quot;Workspace operation&quot;으로 가려져 있어서 코드 수준의 편집 내용은 확인할 수 없다.</p>
+<h3>3. 평가 (§3.2, evaluation-metrics 소스)</h3>
+<ul>
+<li><strong>객체 추적 오차.</strong> 평균 ADD(cm), 위치 오차(cm), 방향 오차(°). 시뮬레이션 객체 궤적과 목표 궤적을 단계별로 맞춘다. 과제 단위 동등 가중 평균이다. 지표 이름은 <code>object_path_v1</code>이지만 정의 코드와 상세 명세는 공개 저장소에 없다(04 참조).</li>
+<li><strong>의미 성공.</strong> GPT-6 Astra를 심판으로 써서 사람 SMPL 영상과 로봇 영상을 비교해 PASS/FAIL을 준다. 심판 프롬프트는 해시(sha256)만 공개되어 있다. 심판 모델은 생성 에이전트와 같은 계열이다.</li>
+<li><strong>재검토.</strong> 원래 판정(<code>semantic</code>) 외에 저자가 따로 검토한 판정(<code>reviewed_semantic</code>)을 두었다. 시작 자세에서 물체를 관통한 경우를 걸러낸 것이다. 보고 수치는 원래 판정을 쓴다고 명시한다(protocol).</li>
+<li><strong>선택 규칙.</strong> 추적 최선값 곡선(§4.1, §5)은 같은 추적 지표로 시도들 중 최솟값을 고른다. 최선값이 보고 지표와 같은 지표로 선택되는 셈이다.</li>
+</ul>
+<h3>4. 결과 (§4–§5, A1–A2)</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>블로그 값</th>
+<th>재계산(원자료)</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Table 1 HUMOTO 평균 ADD (HOI+SPIDER / one-shot / Astra w/ Ref.)</td>
+<td>44.96 / 56.09 / 9.85</td>
+<td>동일</td>
+<td>20과제</td>
+</tr>
+<tr>
+<td>Table 2 OMOMO 평균 ADD</td>
+<td>40.77 / 69.87 / 15.55</td>
+<td>동일</td>
+<td>Astra w/ Ref.는 19과제만 추적</td>
+</tr>
+<tr>
+<td>의미 성공률 (40과제)</td>
+<td>17.5 / 2.5 / 75.0</td>
+<td>동일</td>
+<td>75% = 30/40</td>
+</tr>
+<tr>
+<td>스웜 30분 의미 성공</td>
+<td>독립 52.5(21/40), 협업 67.5</td>
+<td>동일</td>
+<td>재검토 후에는 독립 47.5(19/40)</td>
+</tr>
+<tr>
+<td>합산 추적 평균</td>
+<td>42.87 / 62.98 / 12.63</td>
+<td>동일</td>
+<td>12.63은 39과제 평균</td>
+</tr>
+<tr>
+<td>30분 · 120분 최선값</td>
+<td>29.59 · 10.21</td>
+<td>동일</td>
+<td>budget-tracking.json</td>
+</tr>
+<tr>
+<td>경험: 선반</td>
+<td>23.35 → 7.77</td>
+<td>동일</td>
+<td>experience-story.json (실행 1회씩)</td>
+</tr>
+</tbody>
+</table>
+<p>재계산 결과와 통계 검정은 <code>analysis/03_analysis.md</code>에 있다. 핵심만 적으면 다음과 같다.</p>
+<ul>
+<li>블로그 수치는 공개된 과제별 기록에서 모두 재현된다. 단, 추적 평균에서 미완료 1과제(OMOMO <code>sub13_whitechair_069</code>)를 뺐다는 점을 표 주석에만 적었다.</li>
+<li>§4의 &quot;단일 Codex 47.5%&quot;와 §5.1의 &quot;HOI-Retarget + SPIDER 5%&quot;는 옛 결과다. 현재 원자료는 19/40(47.5%)과 7/40(17.5%)다. 저장소의 소스 텍스트(<code>site/content/refinement-results.md</code>)에는 옛 수치 5%와 52.48 cm가 아직 남아 있다.</li>
+<li>블로그는 SPIDER 기준선을 한 번 다시 돌렸다(옛 52.48 cm → 재실행 42.87 cm). 같은 기준선이 10 cm 가까이 움직였다. 재실행 설정(seed 0, 1초 horizon, 2048 샘플, 16 반복)은 공개됐지만 시간 예산은 밝히지 않았다.</li>
+</ul>
+<h3>5. 한계와 블로그가 인정한 것 (§6–§7)</h3>
+<ul>
+<li><strong>손 형태.</strong> 접시 돌리기(Fig. 7)는 Dex3 손가락이 얇은 가장자리를 안정적으로 잡지 못해 실패한다. 블로그는 여러 번 수정해도 이 격차를 보정하지 못했다고 쓴다. 정량 실패율은 없다(예시 1개).</li>
+<li><strong>정책 학습 없음.</strong> 기준 모션은 whole-body 정책 학습에 쓸 수 있다고 하지만, 이번 실험은 SONIC과 에이전트가 쓴 제어기로만 실행했다(§7).</li>
+<li><strong>제3자 판정.</strong> 성공 판정은 생성 에이전트와 같은 계열의 모델이 했고, 인간 판정과의 일치도는 보고하지 않았다.</li>
+<li><strong>비용.</strong> 토큰과 달러 비용은 본문에 없다. 원자료의 토큰 기록은 <code>analysis/03_analysis.md</code> §7에 정리했다.</li>
+</ul>
+<h3>6. 블로그를 읽을 때 주의할 점</h3>
+<ul>
+<li>비교 대상의 계산 예산이 같지 않다. Astra 실행은 2시간 또는 4 agent-hours를 쓰고, HOI-Retarget + SPIDER의 시간 예산은 보고되지 않았다. 같은 시간·계산을 맞췄다고 명시된 것은 §5의 경험 실험과 §5.2–5.3(30분 스웜, 2 agent-hours)뿐이다.</li>
+<li>&quot;Astra with Refinement&quot;는 120분 단일 실행이다. §5.1의 &quot;단일 Codex 47.5%&quot;는 별도의 30분 실행이다. 두 실행은 접두부 관계가 아니다(같은 과제에서 다른 실행).</li>
+<li>용어가 여러 개다. 블로그 소스에는 HuMoTAR(구성 전체), Astra with Refinement(본문), Codex(단일 실행의 에이전트 소프트웨어)가 섞여 있다. 이 폴더에서는 본문 표기를 따르고 실행 길이를 붙인다.</li>
+<li>블로그는 arXiv 논문이 아니다. 심사를 거치지 않았고, 저자가 자기 시스템을 평가했다.</li>
+</ul>
+</section>
+<section class="chapter"><h2>02. 선행연구와 관련 저장소</h2>
+<h3>1. 계보</h3>
+<ul>
+<li><strong>운동학 재targeting.</strong> GMR(사람 몸 pose를 맞추는 빠른 IK), PHC, PyRoki, NMR, ReActor. 이들은 몸 자세와 말단 위치를 맞추며 물체 접촉은 직접 다루지 않는다(HOI-Retarget 논문 §II-A).</li>
+<li><strong>상호작용 인식 운동학.</strong> OmniRetarget(상호작용 메시 변형, HOI-Retarget 논문의 가장 가까운 비교 대상). HOI-Retarget(arXiv:2609.34674, CC BY 4.0)은 객체 좌표계의 접촉 목표를 직접 최소화하는 윈도우 궤적 최적화를 제안했다. 블로그는 이 방법을 <strong>초기 운동학 기준</strong>으로 쓴다(블로그 §3.1).</li>
+<li><strong>물리 기반 재targeting.</strong> DynaRetarget(SBTO), SPIDER(arXiv:2511.09484, 샘플링 기반 물리 최적화). 블로그는 SPIDER를 G1 + Dex3에 맞춰 다시 돌린 것을 기준선으로 쓴다(블로그 §3.1, &quot;HOI-Retarget + SPIDER&quot;).</li>
+<li><strong>전신 제어기.</strong> SONIC(arXiv:2511.07820). 블로그는 다리·허리 제어에 쓰고, 에이전트는 관절 출력을 보강하거나 대체할 수 있다.</li>
+<li><strong>LLM 에이전트 + 시뮬레이터 피드백.</strong> 블로그 자체가 주요 출처다. 모델은 GPT-6 Astra(OpenAI 공개 발표 글만 인용), 실행 환경은 Codex(Apache-2.0). 이 조합을 쓴 심사 논문은 아직 없다.</li>
+<li>블로그는 공개 글 두 개를 관련 연구로 인정한다(Xiao Hu의 DexGPT 데모와 코드, Haoyang Weng의 Steerable Physical Interaction Competence 글).</li>
+</ul>
+<p>블로그 §1이 나누는 세 축은 (a) 사람 자세 보존(GMR류), (b) 물리 샘플링(SPIDER류), (c) 의미 보존 + 에이전트 루프(이 블로그)다. (c)는 기존 방법을 대체한다기보다 (a)를 입력으로 받아 (b)가 실패하는 접촉 전략을 고치는 구조다.</p>
+<h3>2. 구성 요소별 출처와 라이선스</h3>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>출처</th>
+<th>라이선스 (확인 방법)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>초기 운동학 기준</td>
+<td>HOI-Retarget, arXiv:2609.34674</td>
+<td>CC BY 4.0 (arXiv abs 페이지). 공식 코드 leggedrobotics/hoi-retarget</td>
+</tr>
+<tr>
+<td>물리 기준선</td>
+<td>SPIDER, arXiv:2511.09484</td>
+<td>논문 CC BY 4.0. 코드 README 배지 CC BY-NC 4.0 (GitHub API는 NOASSERTION)</td>
+</tr>
+<tr>
+<td>전신 제어기</td>
+<td>SONIC, arXiv:2511.07820</td>
+<td>CC BY-SA 4.0 (arXiv abs). 코드는 NVlabs/GR00T-WholeBodyControl (API NOASSERTION)</td>
+</tr>
+<tr>
+<td>에이전트 프레임워크</td>
+<td>OpenAI Codex</td>
+<td>Apache-2.0 (openai/codex, GitHub API)</td>
+</tr>
+<tr>
+<td>에이전트 모델</td>
+<td>GPT-6 Astra (OpenAI 발표 글)</td>
+<td>비공개 모델. 라이선스 해당 없음</td>
+</tr>
+<tr>
+<td>시뮬레이터</td>
+<td>MuJoCo (Todorov et al., IROS 2012)</td>
+<td>공식 사이트 (라이선스 확인 생략)</td>
+</tr>
+<tr>
+<td>G1 모델</td>
+<td>unitreerobotics/unitree_mujoco</td>
+<td>BSD-3-Clause (GitHub API)</td>
+</tr>
+<tr>
+<td>사람 동작 데이터</td>
+<td>HUMOTO, OMOMO</td>
+<td>블로그가 인용. 원자료 공지(<code>repo/site/architecture-trace/DATA-NOTICE.txt</code>)는 상위 모션 데이터를 CC BY-NC-SA 4.0으로 표기한다</td>
+</tr>
+<tr>
+<td>블로그 원자료</td>
+<td>narayananpp/semantic-humanoid-retargeting-blog</td>
+<td>라이선스 파일 없음 (GitHub API 404). 3절과 README 참조</td>
+</tr>
+</tbody>
+</table>
+<h3>3. GitHub 저장소 표</h3>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>역할</th>
+<th>라이선스</th>
+<th>최근 push</th>
+<th>이 폴더에서 한 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/narayananpp/semantic-humanoid-retargeting-blog">narayananpp/semantic-humanoid-retargeting-blog</a></td>
+<td>블로그 소스 + 과제별 원자료·트레이스·export 도구</td>
+<td>없음 (LICENSE 없음)</td>
+<td>2026-11-06 (커밋 <code>84cbe2253</code>)</td>
+<td><code>repo/</code>에 shallow clone, 정적 읽기와 수치 재계산 (04 참조)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/facebookresearch/spider">facebookresearch/spider</a></td>
+<td>SPIDER 공식 구현 (기준선의 원 방법)</td>
+<td>README: CC BY-NC 4.0</td>
+<td>2026-09-22</td>
+<td>정적 읽기만. GitHub 표시 NOASSERTION</td>
+</tr>
+<tr>
+<td><a href="https://github.com/leggedrobotics/hoi-retarget">leggedrobotics/hoi-retarget</a></td>
+<td>HOI-Retarget 공식 구현과 데이터</td>
+<td>NOASSERTION (논문 CC BY 4.0)</td>
+<td>2026-09-30</td>
+<td>정적 확인만. 클론하지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/NVlabs/GR00T-WholeBodyControl">NVlabs/GR00T-WholeBodyControl</a></td>
+<td>SONIC 제어기 코드 (블로그 SONIC 링크는 프로젝트 페이지 nvlabs.github.io/GEAR-SONIC)</td>
+<td>NOASSERTION</td>
+<td>2026-11-03</td>
+<td>정적 확인만</td>
+</tr>
+<tr>
+<td><a href="https://github.com/YanjieZe/GMR">YanjieZe/GMR</a></td>
+<td>GMR 운동학 재targeting</td>
+<td>MIT</td>
+<td>2026-10-22</td>
+<td>블로그 kinematic 비교 대상. 정적 확인만</td>
+</tr>
+<tr>
+<td><a href="https://github.com/openai/codex">openai/codex</a></td>
+<td>블로그가 쓴 에이전트 환경</td>
+<td>Apache-2.0</td>
+<td>2026-11-10</td>
+<td>정적 확인만. 블로그 모델(GPT-6 Astra)과 무관한 소프트웨어</td>
+</tr>
+<tr>
+<td><a href="https://github.com/unitreerobotics/unitree_mujoco">unitreerobotics/unitree_mujoco</a></td>
+<td>G1 MuJoCo 모델</td>
+<td>BSD-3-Clause</td>
+<td>2026-09-07</td>
+<td>정적 확인만</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Hu-xiao-max/dexgpt">Hu-xiao-max/dexgpt</a></td>
+<td>블로그가 관련 공개 작업으로 인용</td>
+<td>없음</td>
+<td>2026-09-11</td>
+<td>정적 확인만 (손 재targeting, 이 블로그와 직접 관계 없음)</td>
+</tr>
+</tbody>
+</table>
+<p><code>gh search repos &quot;GEAR-SONIC&quot;</code>에서는 해당 저장소가 나오지 않았다. 블로그 링크는 프로젝트 페이지이며 코드 저장소는 GR00T-WholeBodyControl이다.</p>
+<h3>4. 블로그 원자료 저장소의 내용 (repo/)</h3>
+<ul>
+<li><code>site/assets/analysis/*.json</code>: 과제별 추적 오차, LLM 판정, 토큰 사용량, 최선값 곡선, 매칭 시간 곡선, SPIDER 재실행 결과.</li>
+<li><code>site/experience-story.json</code>: 경험 실험 10과제의 without/with 곡선과 과제별 지표.</li>
+<li><code>site/trace-explorer/</code>: 에이전트 트레이스(도구 호출 내용은 가려짐, 메시지와 시도 기록은 공개).</li>
+<li><code>tools/*.py</code>, <code>build.py</code>: 원자료를 웹 페이지 데이터로 바꾸는 export와 그림 스크립트.</li>
+<li>없는 것: 에이전트 harness, 프롬프트 원문, 생성된 제어 코드, 심판 프롬프트 원문(해시만 있음), <code>object_path_v1</code> 지표 구현.</li>
+</ul>
+<h3>5. 이 저장소의 다른 논문과의 관계</h3>
+<table>
+<thead>
+<tr>
+<th>폴더</th>
+<th>논문</th>
+<th>이 블로그와 맞닿는 지점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gnr/</code></td>
+<td>Generative Neural Retargeting (arXiv:2610.12440)</td>
+<td>샘플링 MPC가 푼 궤적에 생성 모델로 잔차를 더해 보정한다. &quot;기준 궤적 + 시뮬레이터 피드백&quot; 구조를 쓰지만 학습 기반이다</td>
+</tr>
+<tr>
+<td><code>flashdexretarget/</code></td>
+<td>FlashDexRetarget (arXiv:2610.01849)</td>
+<td>사람 손-물체 시연을 로봇 손 궤적으로 옮긴다. 접촉·물체 목표 문제를 다루지만 손 중심이다</td>
+</tr>
+<tr>
+<td><code>chord/</code></td>
+<td>CHORD (arXiv:2607.00033)</td>
+<td>접촉 법선에서 만든 wrench 보상을 RL에 넣는다. 블로그의 접촉 목표 정의와 대비되는 학습 기반 접근이다</td>
+</tr>
+<tr>
+<td><code>cross_embodiment_wm/</code></td>
+<td>Scaling Cross-Embodiment World Models (arXiv:2511.01177)</td>
+<td>여러 몸체를 한 세계 모델로 다룬다. 블로그의 &quot;로봇이 달라도 의미를 보존&quot;과 같은 관심사다</td>
+</tr>
+<tr>
+<td><code>dreamx/</code></td>
+<td>DreamX (arXiv:2611.05377)</td>
+<td>영상 생성 백본의 latent action으로 사람 시연을 로봇 명령으로 옮긴다. 블로그의 텍스트 명령(A1)과 대비된다</td>
+</tr>
+<tr>
+<td><code>motion_latent_action/</code></td>
+<td>Motion-Focused Latent Action (arXiv:2606.18955)</td>
+<td>사람 egocentric 영상에서 교차 embodiment 학습을 한다. 블로그와 직접 비교 대상은 아니다</td>
+</tr>
+<tr>
+<td><code>warp_retargeting/</code></td>
+<td>WARP (arXiv:2606.29940)</td>
+<td>이 폴더에서는 읽지 않았다. 필요하면 arXiv 논문만 참조한다</td>
+</tr>
+</tbody>
+</table>
+<h3>6. 선행연구 관점의 해석</h3>
+<ul>
+<li>블로그가 말하는 &quot;에이전트가 물체 궤적을 목표로 삼는다&quot;는 점은 HOI-Retarget의 접촉 목표 정의와 같은 방향이다. 블로그는 HOI-Retarget을 인용하지만, 두 논문의 지표(접촉 위치 gap 0.5 cm, 객체 추적 ADD 12–43 cm)가 달라 직접 비교하지 않는다.</li>
+<li>SPIDER는 블로그의 객체 추적 오차를 원래 쓰지 않는다. 기준선은 블로그가 정의한 지표로 다시 측정한 값이다.</li>
+<li>블로그의 경험 효과 주장은 에이전트 메모리·요약 재사용 계열과 비교할 수 있지만, 블로그는 그쪽 문헌을 인용하지 않았다.</li>
+</ul>
+</section>
+<section class="chapter"><h2>03. 수치 재계산, 통계 검정, 유도, toy 검증</h2>
+<p>재계산 스크립트는 <code>analysis/recompute_blog.py</code>(결과 <code>analysis/recompute_results.json</code>), toy는 <code>analysis/refinement_toy.py</code>(결과 <code>analysis/refinement_toy_results.json</code>)다. 입력은 블로그 원자료 <code>repo/site/assets/analysis/*.json</code>과 <code>repo/site/experience-story.json</code>이다. 모든 재계산은 CPU에서 1분 안에 끝나고 LLM API를 쓰지 않는다. 그림은 <code>analysis/plot_figures.py</code>가 <code>report/figures/</code>에 만든다.</p>
+<h3>1. 표와 본문 수치 재계산 (블로그 §4, §5)</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>블로그</th>
+<th>재계산</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Table 1 HUMOTO ADD: HOI+SPIDER</td>
+<td>44.96</td>
+<td>44.96</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>Table 1 HUMOTO ADD: Astra one-shot</td>
+<td>56.09</td>
+<td>56.09</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>Table 1 HUMOTO ADD: Astra w/ Refinement (120분)</td>
+<td>9.85</td>
+<td>9.85</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>Table 2 OMOMO ADD: HOI+SPIDER / one-shot / w/ Ref.</td>
+<td>40.77 / 69.87 / 15.55</td>
+<td>동일 (w/ Ref.는 19과제)</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>의미 성공 17.5% / 2.5% / 75%</td>
+<td>7/40, 1/40, 30/40</td>
+<td>동일</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>스웜 독립 30분 의미 성공</td>
+<td>21/40 (52.5%)</td>
+<td>원래 판정 21/40. 재검토 판정은 19/40</td>
+<td>일치 (재검토 차이는 §3)</td>
+</tr>
+<tr>
+<td>협업 30분 67.5%, 단일 30분 47.5%</td>
+<td>27/40, 19/40</td>
+<td>동일</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>합산 추적 평균 42.87 / 62.98 / 12.63</td>
+<td>동일</td>
+<td>동일</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>30분·120분 최선값 29.59 · 10.21 cm (§4.1)</td>
+<td></td>
+<td>동일 (budget-tracking.json)</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>경험 선반 23.35 → 7.77 cm (§5)</td>
+<td></td>
+<td>동일 (experience-story.json, 최선값 = 실행 내 최솟값)</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>경험 그룹 평균 (유사) 9.00 → 6.66, (무작위) 5.94 → 5.18 (블로그 그림 8)</td>
+<td></td>
+<td>동일</td>
+<td>일치</td>
+</tr>
+</tbody>
+</table>
+<p><strong>합산 평균 12.63의 정의.</strong> 블로그 값은 두 데이터셋을 과제 수로 가중한 평균이다. 두 데이터셋의 과제 수는 같다(각 20).</p>
+<ul>
+<li>추적 가능한 39과제 평균: (9.85×20 + 15.55×19) / 39 = (197.0 + 295.45) / 39 = 12.63.</li>
+<li>데이터셋 평균을 같은 가중치로 두면 (9.85 + 15.55) / 2 = 12.70.</li>
+</ul>
+<p>즉 12.63은 &quot;39과제 가중 평균&quot;이다. 누락 1과제는 OMOMO <code>sub13_whitechair_069</code>(Codex 120분, 미완료)이고, 이 과제는 40과제 집계에서 빠진다. 누락 과제에 초기 기준값(41.38 cm)을 넣으면 평균은 13.35 cm, 다른 방법 중 최악값(59.22 cm, one-shot)을 넣으면 13.79 cm가 된다. 결론은 바뀌지 않지만 표의 &quot;n=39&quot; 주석 없이는 비교 대상이 다르다. 이 과제를 두고도 의미 성공은 실패로 셌다(30/40 중 미완료는 실패).</p>
+<p><img src="figures/fig_budget.png" alt="fig_budget.png" /></p>
+<p class="cap">그림 2. 최선값 곡선 네 개 (재계산). 실행 간 비교이며 같은 실행의 접두부가 아니다.</p>
+<h3>2. 짝지은 비교: 의미 성공(McNemar 정확검정)과 추적 오차(과제 부트스트랩)</h3>
+<p>같은 과제 집합(40)에서 방법 두 개를 짝지어 비교했다. 의미 성공은 한쪽만 성공한 과제 수(불일치 쌍)로 McNemar 정확검정을 했다. 불일치 쌍 n개 중 k개가 한쪽이면 p = 2·P(X ≤ min(k, n−k)), X ~ Binomial(n, 1/2)이다. 추적 차이는 과제별 차이 평균의 95% 부트스트랩 구간(10,000회 재표본, seed 0)이다.</p>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>의미 성공 (A만 / B만 불일치)</th>
+<th>McNemar p</th>
+<th>추적 차이 평균 (cm)</th>
+<th>95% CI (cm)</th>
+<th>과제 수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codex 120분 − HOI+SPIDER</td>
+<td>24 / 1</td>
+<td>1.5e-6</td>
+<td>−30.39</td>
+<td>[−40.6, −20.5]</td>
+<td>39</td>
+</tr>
+<tr>
+<td>Codex 120분 − Codex 30분</td>
+<td>11 / 0</td>
+<td>0.001</td>
+<td>−10.88</td>
+<td>[−17.1, −4.9]</td>
+<td>39</td>
+</tr>
+<tr>
+<td>협업 스웜 − Codex 30분</td>
+<td>10 / 2</td>
+<td>0.039</td>
+<td>−10.59</td>
+<td>[−15.9, −5.8]</td>
+<td>40</td>
+</tr>
+<tr>
+<td>협업 스웜 − 독립 스웜</td>
+<td>8 / 2</td>
+<td>0.109</td>
+<td>−3.81</td>
+<td>[−7.4, −0.6]</td>
+<td>40</td>
+</tr>
+<tr>
+<td>독립 스웜 − Codex 30분</td>
+<td>7 / 5</td>
+<td>0.77</td>
+<td>−6.78</td>
+<td>[−11.5, −2.7]</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Codex 120분 − 협업 스웜</td>
+<td>6 / 3</td>
+<td>0.51</td>
+<td>−0.37</td>
+<td>[−4.8, 5.1]</td>
+<td>39</td>
+</tr>
+<tr>
+<td>Codex 30분 − HOI+SPIDER</td>
+<td>13 / 1</td>
+<td>0.002</td>
+<td>−19.13</td>
+<td>[−27.1, −11.8]</td>
+<td>40</td>
+</tr>
+</tbody>
+</table>
+<p>읽는 법.</p>
+<ul>
+<li>기준선보다 낫다는 주장(120분 Codex, 30분 Codex, 스웜 전부)은 통계로 뒷받침된다. 특히 Codex 120분 대 HOI+SPIDER는 강하다.</li>
+<li>블로그 §5.3 &quot;단일 120분이 협업 스웜보다 낫다(75% 대 67.5%)&quot;는 <strong>통계적으로 구별되지 않는다</strong>(p = 0.51). 추적 평균 차이도 0에 가깝다(−0.37 cm). 블로그의 A2 문장을 &quot;우열이 가려지지 않았다&quot;로 읽는 것이 정직하다.</li>
+<li>독립 스웜 대 단일 30분(21 대 19)은 p = 0.77로 차이가 없다. 독립 스웜의 추적 평균은 낫다(−6.8 cm, CI 전체 음수). 하지만 아래 §3의 재검토 라벨을 쓰면 성공 수 차이는 사라진다.</li>
+<li>협업 스웜과 단일 30분의 차이(p = 0.039)는 과제 40개와 불일치 쌍 12개에 기댄다. 판정 모델 한 개의 판정 결과이므로, 판정 잡음이 크면 이 결론도 약하다(§4).</li>
+</ul>
+<h3>3. 재검토 라벨 민감도</h3>
+<p>원자료에는 원래 판정(<code>semantic</code>) 외에 저자의 재검토 판정(<code>reviewed_semantic</code>)이 있다. 재검토는 시작 자세에서 물체를 관통한 경우(<code>opening_disqualified</code>)를 실패로 바꾼다. 프로토콜은 &quot;보고 수치에는 재검토를 적용하지 않는다&quot;고 적고 있다.</p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>원래 판정 성공</th>
+<th>재검토 후 성공</th>
+<th>바뀐 과제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>독립 스웜 30분</td>
+<td>21</td>
+<td>19</td>
+<td><code>carry_side_table_with_both_hands_walk_around-536</code>, <code>walk_with_low_chair-308</code></td>
+</tr>
+<tr>
+<td>나머지 방법</td>
+<td>변화 없음</td>
+<td>변화 없음</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>재검토 후 독립 스웜과 단일 30분의 차이는 0이다. 불일치 쌍 7 대 7, p = 1.0. 블로그 §5.2의 &quot;독립 스웜이 21과제에서 성공해 19과제보다 많다&quot;는 문장은 원래 판정에만 맞는다. 저자가 같은 원자료에서 다시 본 판정과는 맞지 않는다. 재검토는 저자 자신의 것이므로 보고 기준을 바꾸는 것이 아니라, 불확실성의 크기를 보여 준다.</p>
+<h3>4. 판정 모델 신뢰도 (정성)</h3>
+<ul>
+<li>판정 모델(GPT-6 Astra)은 생성 에이전트와 같은 계열이다. 블로그는 인간 판정과의 일치를 보고하지 않았다.</li>
+<li>판정 프롬프트의 해시만 공개되어 있어 다른 모델로 재판정할 수 없다(04 참조).</li>
+<li>원자료의 <code>judge_reason</code>에는 이유 문장이 있다. 예: &quot;사람 영상에서는 선반 상자에 물건을 옮기지만 로봇은 책상에 머문다&quot;는 식의 판정 근거다. 이 이유는 판정의 일관성을 보기에 좋지만, 일치도를 대신하지는 않는다.</li>
+</ul>
+<h3>5. 최선값 곡선과 최종 제출 값의 차이 (선택 편향)</h3>
+<p>추적 곡선(§4.1, Fig. 6)은 실행 중 시도 가운데 <strong>추적 오차가 가장 작은 것</strong>을 고른다. 고른 기준과 보고 기준이 같다(§3.2 &quot;Mean ADD selects the best execution at each point&quot;).</p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>최선값 (30분 시점, 40과제)</th>
+<th>최종 제출 값 (40과제)</th>
+<th>차이</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codex 30분</td>
+<td>21.47</td>
+<td>23.74</td>
+<td>2.27</td>
+</tr>
+<tr>
+<td>독립 스웜 30분</td>
+<td>14.73</td>
+<td>16.96</td>
+<td>2.23</td>
+</tr>
+<tr>
+<td>협업 스웜 30분</td>
+<td>12.71</td>
+<td>13.14</td>
+<td>0.43</td>
+</tr>
+<tr>
+<td>Codex 120분</td>
+<td>10.21 (120분 시점)</td>
+<td>12.63 (39과제)</td>
+<td>2.42 (과제 수 다름)</td>
+</tr>
+</tbody>
+</table>
+<p>곡선의 값이 최종 값보다 2–2.4 cm 낮다. 이는 최종 제출물이 최선 시도가 아니라는 뜻도 된다. 더 중요한 것은, 같은 지표로 고른 값은 <strong>보고 시점에 이미 낙관 편향이 들어 있다</strong>는 점이다. 이 편향은 Toy B(§7)로 크기를 가늠할 수 있다.</p>
+<h3>6. 실행 간 변동과 시간 효과</h3>
+<ul>
+<li>30분 단독 Codex 실행의 최선값(21.47)과 120분 실행의 30분 시점 최선값(29.59)은 같은 설정, 같은 경과 시간인데 8 cm 차이가 난다. 두 값은 서로 다른 실행에서 나왔다(곡선의 첫 시점이 다르다).</li>
+<li>따라서 &quot;30분 29.59 → 120분 10.21&quot;의 시간 효과는 <strong>실행 한 번씩</strong>의 차이다. 실행 간 분산이 이 차이의 몇 %를 차지하는지는 같은 설정을 여러 번 돌리지 않으면 알 수 없다.</li>
+<li>트레이스 한 번(clothes-stand, 26회 시도)에서 시도별 추적 오차는 6.3–130 cm로 흩어진다(<code>repo/site/trace-explorer/architecture/agent-0.json</code>). 시도 하나의 값은 신뢰하기 어렵고, 최선 선택이 편향을 키울 수 있다.</li>
+<li>실행당 저장된 시도 수는 평균 118(최소 4, 최대 762)이다. 시도 수가 실행 간에 크게 다르므로, &quot;시간&quot; 축과 &quot;시도 수&quot; 축이 섞여 있다.</li>
+</ul>
+<h3>7. 예산과 토큰 (블로그에 없는 비용)</h3>
+<ul>
+<li>시간 예산. Codex 120분 40과제 = 80 agent-hours. 30분 스웜 4-agent 40과제 = 80 agent-hours. 30분 단일 40과제 = 20 agent-hours. 두 줄의 &quot;같은 계산 예산&quot;은 이 기준으로 맞는다. 단 HOI+SPIDER의 벽시계 시간과 계산량은 보고되지 않았다.</li>
+<li>토큰 (agent-tokens.json, 가격 정보 없음이므로 달러 환산 안 함).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>구성 (40과제 합)</th>
+<th>기록된 시도</th>
+<th>불완전 기록</th>
+<th>총 토큰</th>
+<th>과제당</th>
+<th>입력 중 캐시 비율</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Astra one-shot</td>
+<td>40</td>
+<td>0</td>
+<td>9.1 M</td>
+<td>0.23 M</td>
+<td>4.1%</td>
+</tr>
+<tr>
+<td>Codex (단일 실행)</td>
+<td>40</td>
+<td>12</td>
+<td>310.8 M</td>
+<td>7.8 M</td>
+<td>98.5%</td>
+</tr>
+<tr>
+<td>HuMoTAR (스웜 + 후보 전체)</td>
+<td>185</td>
+<td>89</td>
+<td>1,050 M</td>
+<td>26.3 M</td>
+<td>98.2%</td>
+</tr>
+</tbody>
+</table>
+<p>불완전 기록(partial)은 관측된 사용량이라 하한이다. Codex 행이 어느 실행(30분 또는 120분)인지 원자료의 행 이름만으로는 확정할 수 없다(시도 수 1/과제로 보면 120분 실행으로 보인다). 스웜 행은 후보 전체를 합친 값이다. 캐시 비율이 98%이므로, 비용 추정에는 입력 토큰 단가보다 캐시 단가가 더 크게 작용한다.</p>
+<p><img src="figures/fig_experience.png" alt="fig_experience.png" /></p>
+<p class="cap">그림 3. 경험 실험 10과제, 과제당 실행 1회씩 (재계산).</p>
+<h3>8. 경험 실험 재계산 (블로그 §5, 그림 8, 그림 11)</h3>
+<p>경험 실험의 원자료는 과제 10개(유사 5, 무작위 5)에 대해 &quot;경험 없음&quot;과 &quot;경험 있음&quot; 연속 실행 각 1회다. 두 조건은 같은 15분 시작 모션에서 나온다.</p>
+<table>
+<thead>
+<tr>
+<th>집단</th>
+<th>ADD 경험 없음 → 있음 (cm)</th>
+<th>방향 오차 (°)</th>
+<th>과제별 좋아짐 / 나빠짐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>유사 5과제</td>
+<td>9.00 → 6.66</td>
+<td>9.50 → 10.80</td>
+<td>2 / 3</td>
+</tr>
+<tr>
+<td>무작위 5과제</td>
+<td>5.94 → 5.18</td>
+<td>19.01 → 19.34</td>
+<td>3 / 2</td>
+</tr>
+<tr>
+<td>10과제 전체</td>
+<td>평균 차이 −1.54 cm, 부트스트랩 95% [−4.96, +0.70]</td>
+<td></td>
+<td>5 / 5, 부호 검정 p = 1.0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>선반 과제가 유사 집단 개선을 만든다.</strong> 선반(23.35 → 7.77)을 뺀 유사 4과제에서는 경험이 평균 0.97 cm 나빠진다(경험 있음이 더 나쁨). 선반을 남기고 다른 과제를 하나씩 뺀 경우는 평균 차이가 −2.9 ~ −3.8 cm로 &quot;좋아짐&quot; 방향인데, 이는 선반이 계속 포함되어 있기 때문이다. 즉 &quot;유사 과제 경험이 도움이 된다&quot;는 결론은 과제 한 개(선반)에 기댄다.</li>
+<li><strong>방향 오차는 두 집단 모두 나빠진다.</strong> 블로그 그림 8의 &quot;두 집단 모두 평균 ADD와 위치 오차가 낮아진다&quot;는 문장은 맞다. 그러나 방향 오차는 늘어난다. 블로그는 이 점을 쓰지 않았다.</li>
+<li>실행이 1회씩이라 조건 간 차이의 분산을 추정할 수 없다. 과제 간 차이(유사 집단: 선반 −15.6 cm, 낮은 의자 걷기 +3.4 cm, 나머지 ±0.4 cm 이내)를 보면 한 번의 실행으로는 효과를 가리기 어렵다.</li>
+</ul>
+<h3>9. 보고된 시간 곡선의 해석 (Fig. 11, 그림 6)</h3>
+<ul>
+<li>블로그 §4.1은 &quot;최선값&quot;을 쓴다. 최선값은 단조 감소하므로, 곡선이 낮아지는 것은 선택 과정이 있어서 자동으로 생긴다. 시도가 많을수록 최솟값이 작아지는 것은 시간 효과와 선택 효과가 섞인 결과다.</li>
+<li>같은 실행의 시도 수 대 시간 곡선은 <code>budget-tracking.json</code>에 있다. 이 곡선으로 &quot;추가 시간의 가치&quot;를 재려면 선택 효과를 빼야 한다. 그 방법은 독립 held-out 재실행이고, 이 블로그에는 없다.</li>
+</ul>
+<h3>10. 유도: 선택 편향의 닫힌 형태 (Toy B의 근거)</h3>
+<p>후보 K개의 진짜 품질 q_i ~ N(μ, τ²), 관측 y_i = q_i + ε_i, ε_i ~ N(0, σ²)를 가정한다. 관측 최솟값을 고르면 보고 값은 E[y_(1)]이다. 가우스에서 E[q | y] = μ + (τ²/s²)(y − μ), s² = τ² + σ²이므로 다음이 된다.</p>
+<ul>
+<li>E[y_sel] − μ = −s·c_K, 여기서 c_K = E[max of K standard normals].</li>
+<li>E[q_sel] − μ = (τ²/s²)(E[y_sel] − μ) = −(τ²/s)·c_K.</li>
+<li>낙관 편향 = E[y_sel] − E[q_sel] = −c_K·(s − τ²/s) = −c_K·σ²/s.</li>
+</ul>
+<p>τ = 5 cm로 두면 σ = 2 cm, K = 10이면 σ²/s = 4/√29 ≈ 0.743, c_10 ≈ 1.54이므로 편향 ≈ −1.14 cm다. Toy B의 시뮬레이션은 −1.06 cm였다(클리핑과 표본 잡음 때문). σ = 4 cm, K = 10이면 σ²/s ≈ 2.50, 편향 ≈ −3.85 cm이고 Toy B는 −3.73 cm였다. 편향은 K에 대해 느리게(로그에 가깝게) 커지고, 잡음 σ에 대해 거의 선형으로 커진다.</p>
+<h3>11. 시뮬레이션 잡음이 얼마나 큰가 (추정)</h3>
+<p>블로그 자료로는 σ를 직접 잴 수 없다. 대신 다음 두 관측을 쓴다. (a) 한 트레이스 안에서 시도별 추적 오차가 6.3–130 cm로 흩어진다(§6). (b) 같은 단일 Codex 구성의 두 실행이 30분 시점에서 21.5 cm와 29.6 cm를 보인다. (b)는 실행 간 변동이 최소 수 cm 규모임을 뜻한다. 따라서 Toy B에서 σ = 2–4 cm는 그럴듯한 범위이고, 그때 선택 편향은 1–4 cm가 된다. 이는 §5의 최선값과 최종값 차이(0.4–2.4 cm)와 같은 크기다.</p>
+<p><img src="figures/fig_toy_a.png" alt="fig_toy_a.png" /></p>
+<p class="cap">그림 4. Toy A: 규칙 기반 제안기와 고정 가중치 샘플링 (numpy, 100 시드).</p>
+<h3>12. Toy A: 피드백 제안기 대 고정 가중치 샘플링</h3>
+<p>설정(세부는 <code>refinement_toy.py</code> 상단 설명). 6차원 결정 변수, 기저 3개(잘못된 초기 기저 18, 올바른 기저 2, 나머지 6)를 가진 다봉 목적함수를 쓴다. 관측에는 가우스 잡음 σ를 더한다. 예산은 시뮬레이터 호출 수다. 고정 가중치 arm은 온도와 샘플 잡음이 고정된 MPPI형 탐색이다. 제안기 arm은 정체가 4라운드 이어지면 다른 앵커를 골라 다시 탐색한다. 이 제안기는 LLM이 아니고 규칙이다. 100 시드, 진짜 목적값의 중앙값.</p>
+<table>
+<thead>
+<tr>
+<th>시나리오 (σ)</th>
+<th>예산</th>
+<th>고정 가중치</th>
+<th>제안기</th>
+<th>제안기가 더 낮은 시드 비율 (2048)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>잘못된 초기 기저 (0)</td>
+<td>256 / 1024 / 2048</td>
+<td>6.20 / 6.05 / 6.03</td>
+<td>6.23 / 2.35 / 2.08</td>
+<td>0.92</td>
+</tr>
+<tr>
+<td>잘못된 초기 기저 (2)</td>
+<td>256 / 1024 / 2048</td>
+<td>7.60 / 6.64 / 6.57</td>
+<td>7.43 / 6.56 / 3.96</td>
+<td>0.77</td>
+</tr>
+<tr>
+<td>단봉 (0)</td>
+<td>256 / 1024 / 2048</td>
+<td>2.28 / 2.05 / 2.03</td>
+<td>2.23 / 2.08 / 2.08</td>
+<td>0.09</td>
+</tr>
+<tr>
+<td>단봉 (2)</td>
+<td>256 / 1024 / 2048</td>
+<td>3.74 / 2.66 / 2.59</td>
+<td>3.52 / 3.04 / 3.04</td>
+<td>0.21</td>
+</tr>
+</tbody>
+</table>
+<p>해석.</p>
+<ul>
+<li>고정 가중치 샘플링은 초기 기저에 갇힌다(중앙값 6 cm 부근에서 멈춤). 피드백으로 정체를 알아채는 제안기는 충분한 예산에서 탈출한다.</li>
+<li>단봉에서는 제안기의 재시작이 예산을 낭비한다. 같은 예산에서 고정 가중치가 더 낫다.</li>
+<li>이 결과는 &quot;피드백이 있으면 항상 낫다&quot;가 아니라, <strong>초기 기저가 틀렸고 정체를 감지할 수 있을 때</strong> 낫다는 뜻이다. 블로그의 Fig. 7 같은 실패(접시 돌리기)는 이 조건에 가까울 수 있으나, 블로그에는 정체를 기록한 정량 자료가 없다.</li>
+<li>toy는 목적함수가 2차 기저의 최솟값이며 실제 HOI 물리를 담지 않는다. 결과를 블로그의 수치로 옮기면 안 된다.</li>
+</ul>
+<p><img src="figures/fig_toy_b.png" alt="fig_toy_b.png" /></p>
+<p class="cap">그림 5. Toy B: 같은 지표로 고르고 보고할 때의 낙관 편향 (numpy).</p>
+<h3>13. Toy B: 같은 지표로 고르고 보고하기</h3>
+<p>결과(<code>refinement_toy_results.json</code>, 4000 반복).</p>
+<table>
+<thead>
+<tr>
+<th>σ (cm)</th>
+<th>K = 1</th>
+<th>K = 5</th>
+<th>K = 10</th>
+<th>K = 20</th>
+<th>K = 80</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>−0.01</td>
+<td>−0.28</td>
+<td>−0.28</td>
+<td>−0.35</td>
+<td>−0.47</td>
+</tr>
+<tr>
+<td>2</td>
+<td>−0.02</td>
+<td>−1.00</td>
+<td>−1.06</td>
+<td>−1.36</td>
+<td>−1.82</td>
+</tr>
+<tr>
+<td>4</td>
+<td>−0.03</td>
+<td>−3.12</td>
+<td>−3.73</td>
+<td>−4.57</td>
+<td>−6.19</td>
+</tr>
+</tbody>
+</table>
+<p>값은 (보고값 − held-out 값)의 평균이다. 음수는 보고값이 held-out보다 낮아 낙관적임을 뜻한다. K가 1이면 편향이 0이고, K가 커지고 잡음이 커질수록 편향이 커진다. 블로그 §4.1처럼 &quot;시도 중 최솟값&quot;을 보고하는 방식은 σ = 2–4 cm에서 1–5 cm 낙관 편향을 만든다. 블로그가 최종 값을 재실행으로 검증했는지(full replay)는 트레이스에 &quot;replay reproduced the scores exactly&quot;라는 문장으로 나온다. 재실행이 같은 시뮬레이션 잡음 없이 결정적이었다면 이 편향은 없다. 결정적 재실행인지 여부는 원자료로 확인되지 않았다.</p>
+<h3>14. 그림</h3>
+<ul>
+<li><code>report/figures/fig_outcomes.png</code>: 의미 성공과 추적 평균 (재계산).</li>
+<li><code>report/figures/fig_budget.png</code>: 최선값 곡선 네 개(실행 간 비교이며 접두부 관계가 아님을 표시).</li>
+<li><code>report/figures/fig_experience.png</code>: 경험 실험 과제별 없음/있음 비교(ADD와 방향 오차).</li>
+<li><code>report/figures/fig_toy_a.png</code>, <code>report/figures/fig_toy_b.png</code>: toy 결과.</li>
+</ul>
+<h3>15. 재현 방법</h3>
+<pre><code class="language-bash">git clone --depth 1 https://github.com/narayananpp/semantic-humanoid-retargeting-blog repo   # 커밋 84cbe2253
+python3 -I analysis/recompute_blog.py
+python3 -I analysis/refinement_toy.py        # 약 15초
+python3 -I analysis/plot_figures.py
+</code></pre>
+</section>
+<section class="chapter"><h2>04. 코드·데이터 대조와 주장 검증</h2>
+<p>대상 저장소: <code>narayananpp/semantic-humanoid-retargeting-blog</code>, 커밋 <code>84cbe2253</code>(2026-11-06), <code>repo/</code>에 shallow clone (git 제외). 라이선스 파일이 없다(GitHub API 404). 정적 읽기만 했고 실행하지 않았다.</p>
+<h3>1. 저장소에 무엇이 있나</h3>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>내용</th>
+<th>방법 논문과의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>site/assets/analysis/*.json</code></td>
+<td>과제별 추적 오차, LLM 판정, 토큰, 최선값 곡선, SPIDER 재실행</td>
+<td>블로그 표·그림의 원자료. 재계산 가능 (03 참조)</td>
+</tr>
+<tr>
+<td><code>site/experience-story.json</code></td>
+<td>경험 실험 10과제</td>
+<td>§5의 원자료</td>
+</tr>
+<tr>
+<td><code>site/trace-explorer/</code></td>
+<td>에이전트 트레이스(메시지, 시도 기록, 도구 호출 명칭만)</td>
+<td>에이전트 행동 확인 (01 §2)</td>
+</tr>
+<tr>
+<td><code>site/content/*.md</code></td>
+<td>본문 원고</td>
+<td>본문과 수치가 어긋나는 옛 문장 있음 (D5)</td>
+</tr>
+<tr>
+<td><code>tools/*.py</code>, <code>build.py</code></td>
+<td>원자료 → 웹 데이터 export, 그림 생성</td>
+<td>원자료 가공 방법 확인</td>
+</tr>
+<tr>
+<td><code>validate.py</code></td>
+<td>웹 페이지 검증</td>
+<td>방법과 무관</td>
+</tr>
+</tbody>
+</table>
+<p>없는 것은 다음과 같다. 에이전트 harness(실행 루프, 도구 정의), 프롬프트 원문, 에이전트가 만든 제어 코드와 기준 모션, 판정 프롬프트 원문, <code>object_path_v1</code>과 접촉 측정의 구현, G1 Dex3 어댑터 코드(SPIDER 재실행 설정은 <code>spider-rerun.json</code>의 protocol에만 있다), 시간 예산 기록.</p>
+<p>따라서 이 저장소는 <strong>방법의 코드가 아니라 결과의 원자료와 가공 도구</strong>다. &quot;방법을 코드로 검증&quot;하는 것은 불가능하고, 대신 수치를 원자료에서 재계산했다(03 참조).</p>
+<h3>2. 논문(블로그) ↔ 저장소 대조: 차이 D1–D10</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>블로그 쪽</th>
+<th>저장소 쪽</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>§2: 에이전트가 기준 모션과 제어 코드를 쓴다</td>
+<td>생성된 코드와 harness가 없다. 트레이스의 도구 호출은 &quot;Workspace operation&quot;으로 가려져 있다</td>
+<td><strong>검증 불가</strong> (방법 재현 불가의 핵심)</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>§3.2: object_path_v1 추적 오차</td>
+<td>지표 이름만 있고 정의·구현이 없다. 시도별 값만 있다</td>
+<td><strong>검증 불가</strong> (지표 재구현 불가)</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>§3.2: GPT-6 Astra를 심판으로 쓴다</td>
+<td>심판 프롬프트의 sha256 해시만 있다(spider-rerun.json, <code>judge_prompt_sha256</code>)</td>
+<td><strong>검증 불가</strong> (해시 대조만 가능)</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>§3.1: SPIDER를 G1 + Dex3에 맞춰 재실행</td>
+<td>설정(seed 0, 1초 horizon, 2048 샘플, 16 반복, 노이즈 스케일)과 과제별 결과는 있다. 어댑터 코드는 없다</td>
+<td>설정 공개, 구현 미공개</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>§4·§5의 최신 수치 (7/40, 42.87 cm, 19/40)</td>
+<td><code>site/content/refinement-results.md</code>에 옛 수치 &quot;5%&quot;, &quot;52.48 cm&quot;, &quot;23.74 cm&quot;가 남아 있다. 옛 SPIDER 결과는 protocol에서 superseded</td>
+<td><strong>불일치 (옛 문장)</strong>. 페이지와 JSON은 일치</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>본문: &quot;Astra with Refinement&quot;, 방법 소개: &quot;HuMoTAR&quot;</td>
+<td><code>site/content/method.md</code>, <code>build.py</code> 등에 HuMoTAR라는 이름이 남아 있다. <code>agent-tokens.json</code>은 HuMoTAR 행을 쓴다</td>
+<td>이름 불일치. 같은 방법을 가리키는 것으로 보임</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>§4 표 1–2</td>
+<td>집계 방식 차이: 기준선은 두 데이터셋의 단순 평균, 추적 Astra는 39과제 가중 평균(12.63). 같은 방식이 아니다</td>
+<td>수치 자체는 맞음 (03 §1)</td>
+</tr>
+<tr>
+<td>D8</td>
+<td>§4 표 2의 OMOMO Astra 15.55</td>
+<td>미완료 1과제가 추적 평균에서 빠진 것(n=19)이 표 주석에 없다. 저장소 <code>protocol.codex120_tracking</code>에만 있다</td>
+<td>본문 누락</td>
+</tr>
+<tr>
+<td>D9</td>
+<td>§5.2 &quot;21과제 성공&quot;</td>
+<td>원자료의 <code>reviewed_semantic</code>에서 2과제가 실패로 바뀐다. protocol은 재검토를 보고 수치에 쓰지 않는다고 적는다</td>
+<td>보고 기준의 선택 (03 §3)</td>
+</tr>
+<tr>
+<td>D10</td>
+<td>저장소 라이선스</td>
+<td>라이선스 파일 없음. 원자료 공지 <code>architecture-trace/DATA-NOTICE.txt</code>는 상위 HOI-Retarget 데이터를 CC BY-NC-SA 4.0로 적고, 객체 자산은 InterMimic(MIT)과 OMOMO 원자료 출처를 밝힌다</td>
+<td>재배포·2차 저작 제한 (5절 라이선스)</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 주장 검증: C1–C15</h3>
+<p>판정 기호: 일치 = 원자료 또는 산술로 재현됨, 부분 = 맞지만 조건이 빠짐, 불일치 = 원자료와 다름, 검증 불가 = 공개 자료로 확인 불가.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>블로그 주장 (절)</th>
+<th>근거</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>표 1–2 추적 평균 (§4)</td>
+<td>과제별 기록 재계산</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>의미 성공 75% / 17.5% / 2.5% (§4)</td>
+<td>40과제 PASS 수 30 / 7 / 1</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>추적 평균 12.63 대 42.87 대 62.98 cm (§4)</td>
+<td>39과제 가중 평균</td>
+<td>일치, 단 n=39 (D8)</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>120분 Codex가 HOI+SPIDER보다 낫다 (§4)</td>
+<td>McNemar p = 1.5e-6, 추적 차이 CI [−40.6, −20.5] cm</td>
+<td>일치, 강함</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>최선값 29.59 → 10.21 cm (§4.1)</td>
+<td>budget-tracking.json</td>
+<td>일치. 단 최선값은 선택 편향을 포함 (03 §5)</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>같은 계산 시간에 경험이 있으면 더 낫다. 선반 23.35 → 7.77 (§5)</td>
+<td>experience-story.json</td>
+<td>수치 일치. 실행 1회씩, 효과는 선반 한 과제에 기댐 (03 §8)</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>경험 효과는 두 집단 모두 평균 ADD·위치 오차를 줄인다 (그림 8)</td>
+<td>집단 평균 9.00→6.66, 5.94→5.18</td>
+<td>일치 (ADD·위치만). 방향 오차는 두 집단 모두 증가 (9.50→10.80, 19.01→19.34)</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>독립 스웜 30분은 21과제 성공, 단일 19과제 (§5.2)</td>
+<td>원래 판정 21 / 19</td>
+<td>일치 (원래 판정). 재검토 판정 19 / 19 (03 §3)</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>협업 스웜은 67.5%로 독립 스웜(52.5%)보다 낫다 (§5.2)</td>
+<td>27 대 21(원래 판정), 불일치 8 대 2, McNemar p = 0.11, 추적 차이 −3.8 cm [−7.4, −0.6]</td>
+<td>부분. 방향은 맞으나 성공 수 차이는 p = 0.11. 협업 대 단일 30분은 p = 0.039</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>단일 120분 75%가 협업 스웜 67.5%보다 낫다 (§5.3, A2)</td>
+<td>30 대 27, McNemar p = 0.51, 추적 차이 −0.37 cm [−4.8, 5.1]</td>
+<td><strong>통계적으로 구별되지 않음</strong></td>
+</tr>
+<tr>
+<td>C11</td>
+<td>같은 계산량(2 agent-hours) 비교 (§5.3)</td>
+<td>120분 × 1 = 2시간, 30분 × 4 = 2시간</td>
+<td>산술 일치. 단, HOI+SPIDER 계산량은 미보고</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>Astra one-shot이 최적화 기준선보다 못하다 (§4)</td>
+<td>2.5% 대 17.5%, 62.98 대 42.87 cm</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>최선 선택이 같은 추적 지표로 이뤄진다 (§3.2)</td>
+<td>곡선 정의</td>
+<td>일치. 보고 지표와 선택 지표가 같아 낙관 편향 (03 §5, §13)</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>텍스트 설명만으로 모션 참조 없이 동작한다 (A1)</td>
+<td>5개 예시 영상 (정량 없음, 원자료 없음)</td>
+<td>검증 불가 (정성 예시만)</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>손 형태가 접시 돌리기를 막는다 (§6)</td>
+<td>1개 사례, 정량 없음</td>
+<td>정성 주장으로만 검증 가능</td>
+</tr>
+<tr>
+<td>C16</td>
+<td>SPIDER는 두 예시(의자, 옷걸이)에서 실패한다 (§1)</td>
+<td>영상과 그림</td>
+<td>검증 불가 (영상, 원자료에 해당 실행 없음)</td>
+</tr>
+</tbody>
+</table>
+<h3>4. 구현 가능성 판단 (이 맥)</h3>
+<p>조건: Apple M4 Pro, 메모리 약 24 GiB, MPS 가능, CUDA 없음, torch 미설치, MuJoCo 미설치(설치는 승인 필요). 외부 LLM 호출 금지. 데이터 다운로드 금지.</p>
+<p><strong>결론: 전체 재현은 이 맥에서 할 수 없다. 방법을 다시 만드는 것은 난이도 상이다. 일부 검증(수치, 통계, 원리 toy)은 가능하고 이미 했다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>판단</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>수치 재계산</td>
+<td>가능 (완료)</td>
+<td>원자료로 블로그 값 전부 재현</td>
+</tr>
+<tr>
+<td>방법 재현 (Astra 루프)</td>
+<td>불가</td>
+<td>외부 LLM API 필요. 금지 조건. 40과제 기준 단일 Codex 약 3.1억 토큰, 스웜 약 10억 토큰(03 §7). 단가 정보 없음</td>
+</tr>
+<tr>
+<td>판정 재현</td>
+<td>불가</td>
+<td>판정 프롬프트 없음 (D3), 판정 모델은 API</td>
+</tr>
+<tr>
+<td>추적 지표 재구현</td>
+<td>어려움</td>
+<td><code>object_path_v1</code> 정의가 없다 (D2). &quot;구간 단계 정렬&quot; 규칙을 블로그 문장에서만 추정해야 한다</td>
+</tr>
+<tr>
+<td>SPIDER 기준선 (1과제)</td>
+<td>조건부</td>
+<td>MuJoCo 설치 승인 필요. SPIDER README의 기본 경로는 Mujoco Warp이며 GPU 의존 여부는 README에 명시 없음(미확인). 코드 라이선스 CC BY-NC 4.0이라 연구용 한정</td>
+</tr>
+<tr>
+<td>SONIC 제어기</td>
+<td>조건부</td>
+<td>GR00T-WholeBodyControl 코드와 체크포인트 필요. 체크포인트 크기·GPU 의존은 미확인</td>
+</tr>
+<tr>
+<td>데이터 (HUMOTO, OMOMO)</td>
+<td>불가 (지금)</td>
+<td>다운로드 금지. 라이선스 CC BY-NC-SA 표기</td>
+</tr>
+<tr>
+<td>재구현 노력</td>
+<td>상 (수 주)</td>
+<td>harness, MuJoCo G1 + Dex3 장면, SONIC 연결, 피드백 이미지 생성, 판정 루프, 지표 정의</td>
+</tr>
+<tr>
+<td>에이전트 비용</td>
+<td>상</td>
+<td>토큰 기록으로 과제당 약 8 M(단일)과 26 M(스웜) 규모. 달러 환산 자료는 없음</td>
+</tr>
+</tbody>
+</table>
+<p>실행 가능한 다음 단계는 CPU만으로 할 수 있는 검증 항목이다(재계산 확장, toy 스윕). 재현은 사용자에게 묻고 시작한다.</p>
+<h3>5. 라이선스 판단</h3>
+<ul>
+<li>블로그 페이지와 저장소는 라이선스가 없다. 기본적으로 저작권 보유(all rights reserved)로 보고, 블로그의 그림·영상·텍스트는 공개 산출물에 넣지 않았다.</li>
+<li>원자료의 수치는 사실 자료에 가깝지만, 원자료 공지는 상위 모션 데이터의 CC BY-NC-SA 4.0 조건을 따른다고 적는다. 그래서 공개본은 <strong>수치 요약과 우리 그림만</strong> 담는다(원자료 JSON, 트레이스, 영상 없음).</li>
+<li>HOI-Retarget(CC BY 4.0)은 그림을 쓰지 않았다. 필요 없었다.</li>
+<li>SPIDER 코드는 CC BY-NC 4.0 배지다. 재실행과 재배포는 비영리 연구 한정이다.</li>
+</ul>
+<h3>6. 검증 요약</h3>
+<ul>
+<li>재현된 것: 표 1–2, 의미 성공 비율, 추적 평균, 최선값 곡선, 경험 선반 값, 경험 집단 평균, 토큰 합계.</li>
+<li>재현되지 않은 것: 방법 자체, 판정, 지표 정의, HOI+SPIDER 계산량.</li>
+<li>보고에 적을 문장: 블로그의 정량 수치는 원자료와 일치하지만, 방법 비교의 통계적 힘은 기준선 대비 승리에만 있고, 스웜과 단일 실행의 우열은 없으며, 경험 효과는 과제 한 개에 기댄다.</li>
+</ul>
+</section></body></html>

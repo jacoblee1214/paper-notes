@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "seed": 20261110,
+    "alpha": 0.05,
+    "note": "가정된 설계값에서의 시뮬레이션. 논문 원자료가 아님."
+  },
+  "P1_power": {
+    "n_for_80pct_power_normal_approx": {
+      "p1=0.2,|d|=0.1": 294.0,
+      "p1=0.2,|d|=0.2": 82.0,
+      "p1=0.2,|d|=0.3": 39.0,
+      "p1=0.5,|d|=0.1": 388.0,
+      "p1=0.5,|d|=0.2": 93.0,
+      "p1=0.5,|d|=0.3": 39.0,
+      "p1=0.8,|d|=0.1": 199.0,
+      "p1=0.8,|d|=0.2": 35.0,
+      "p1=0.8,|d|=0.3": 39.0
+    },
+    "simulated_power_p1_0.5_fisher_exact": {
+      "d=0.2": {
+        "10": 0.054,
+        "20": 0.163,
+        "30": 0.263,
+        "50": 0.468,
+        "80": 0.674,
+        "120": 0.861
+      },
+      "d=0.3": {
+        "10": 0.13,
+        "20": 0.406,
+        "30": 0.593,
+        "50": 0.845,
+        "80": 0.978,
+        "120": 1.0
+      }
+    },
+    "rank_correct_probability": {
+      "pa=0.5,pb=0.4": {
+        "10": 0.673,
+        "30": 0.785,
+        "100": 0.923,
+        "300": 0.994
+      },
+      "pa=0.5,pb=0.3": {
+        "10": 0.818,
+        "30": 0.944,
+        "100": 0.998,
+        "300": 1.0
+      },
+      "pa=0.7,pb=0.5": {
+        "10": 0.817,
+        "30": 0.943,
+        "100": 0.998,
+        "300": 1.0
+      },
+      "pa=0.3,pb=0.1": {
+        "10": 0.869,
+        "30": 0.977,
+        "100": 1.0,
+        "300": 1.0
+      },
+      "pa=0.9,pb=0.8": {
+        "10": 0.733,
+        "30": 0.862,
+        "100": 0.976,
+        "300": 1.0
+      }
+    }
+  },
+  "P2_initial_conditions": {
+    "design=R,sigma_s=0.0,n=30,delta=0.0": {
+      "fisher_rate": 0.03
+    },
+    "design=R,sigma_s=0.0,n=30,delta=0.85": {
+      "fisher_rate": 0.19
+    },
+    "design=R,sigma_s=0.0,n=150,delta=0.0": {
+      "fisher_rate": 0.04
+    },
+    "design=R,sigma_s=0.0,n=150,delta=0.85": {
+      "fisher_rate": 0.824
+    },
+    "design=R,sigma_s=0.25,n=30,delta=0.0": {
+      "fisher_rate": 0.059
+    },
+    "design=R,sigma_s=0.25,n=30,delta=0.85": {
+      "fisher_rate": 0.215
+    },
+    "design=R,sigma_s=0.25,n=150,delta=0.0": {
+      "fisher_rate": 0.18
+    },
+    "design=R,sigma_s=0.25,n=150,delta=0.85": {
+      "fisher_rate": 0.718
+    },
+    "design=R,sigma_s=0.5,n=30,delta=0.0": {
+      "fisher_rate": 0.137
+    },
+    "design=R,sigma_s=0.5,n=30,delta=0.85": {
+      "fisher_rate": 0.282
+    },
+    "design=R,sigma_s=0.5,n=150,delta=0.0": {
+      "fisher_rate": 0.448
+    },
+    "design=R,sigma_s=0.5,n=150,delta=0.85": {
+      "fisher_rate": 0.658
+    },
+    "design=S,sigma_s=0.0,n=30,delta=0.0": {
+      "fisher_rate": 0.013,
+      "mcnemar_rate": 0.022
+    },
+    "design=S,sigma_s=0.0,n=30,delta=0.85": {
+      "fisher_rate": 0.172,
+      "mcnemar_rate": 0.203
+    },
+    "design=S,sigma_s=0.0,n=150,delta=0.0": {
+      "fisher_rate": 0.022,
+      "mcnemar_rate": 0.03
+    },
+    "design=S,sigma_s=0.0,n=150,delta=0.85": {
+      "fisher_rate": 0.857,
+      "mcnemar_rate": 0.891
+    },
+    "design=S,sigma_s=0.25,n=30,delta=0.0": {
+      "fisher_rate": 0.036,
+      "mcnemar_rate": 0.048
+    },
+    "design=S,sigma_s=0.25,n=30,delta=0.85": {
+      "fisher_rate": 0.188,
+      "mcnemar_rate": 0.224
+    },
+    "design=S,sigma_s=0.25,n=150,delta=0.0": {
+      "fisher_rate": 0.186,
+      "mcnemar_rate": 0.222
+    },
+    "design=S,sigma_s=0.25,n=150,delta=0.85": {
+      "fisher_rate": 0.72,
+      "mcnemar_rate": 0.747
+    },
+    "design=S,sigma_s=0.5,n=30,delta=0.0": {
+      "fisher_rate": 0.112,
+      "mcnemar_rate": 0.123
+    },
+    "design=S,sigma_s=0.5,n=30,delta=0.85": {
+      "fisher_rate": 0.259,
+      "mcnemar_rate": 0.285
+    },
+    "design=S,sigma_s=0.5,n=150,delta=0.0": {
+      "fisher_rate": 0.442,
+      "mcnemar_rate": 0.469
+    },
+    "design=S,sigma_s=0.5,n=150,delta=0.85": {
+      "fisher_rate": 0.679,
+      "mcnemar_rate": 0.701
+    }
+  },
+  "P3_weights": {
+    "unweighted_mean": {
+      "DP_on_6tasks": 0.3,
+      "PI05_on_6tasks": 0.4722,
+      "DP_on_4tasks": 0.3333,
+      "RDP_on_4tasks": 0.275,
+      "PI05_on_4tasks": 0.5583,
+      "FTP1_on_4tasks": 0.4167
+    },
+    "skill_count_weighted": {
+      "DP_on_6tasks": 0.2296,
+      "PI05_on_6tasks": 0.4889,
+      "DP_on_4tasks": 0.2667,
+      "RDP_on_4tasks": 0.1833,
+      "PI05_on_4tasks": 0.5444,
+      "FTP1_on_4tasks": 0.3722
+    },
+    "prob_ordering_holds_dirichlet_weights": {
+      "PI05>DP (6 tasks)": 0.9145,
+      "PI05>DP (4 tasks)": 1.0,
+      "DP>RDP (4 tasks)": 0.8608,
+      "PI05>FTP1 (4 tasks)": 1.0
+    },
+    "prob_ordering_holds_dirichlet_plus_binomial_noise": {
+      "PI05>DP (6 tasks)": 0.9043,
+      "PI05>DP (4 tasks)": 0.9969,
+      "DP>RDP (4 tasks)": 0.8407,
+      "PI05>FTP1 (4 tasks)": 0.9374
+    },
+    "mean_diff_pp_pi05_minus_dp_when_dropping_task": {
+      "thread": 16.67,
+      "tighten": 9.33,
+      "plug": 18.0,
+      "door": 20.67,
+      "utensil": 10.0,
+      "card": 28.67
+    }
+  },
+  "runtime_s": 17.7
+}

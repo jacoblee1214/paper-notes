@@ -1,0 +1,569 @@
+{
+ "source": "repo/site/assets/analysis/retargeting-results.json (blog repo commit 84cbe2253)",
+ "aggregate_recomputed": {
+  "hoi_spider": {
+   "humoto": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 44.96,
+    "pass": 5,
+    "pass_pct": 25.0
+   },
+   "omomo": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 40.77,
+    "pass": 2,
+    "pass_pct": 10.0
+   },
+   "all": {
+    "n_tasks": 40,
+    "n_tracked": 40,
+    "mean_add_cm": 42.87,
+    "pass": 7,
+    "pass_pct": 17.5
+   }
+  },
+  "zero_shot": {
+   "humoto": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 56.09,
+    "pass": 1,
+    "pass_pct": 5.0
+   },
+   "omomo": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 69.87,
+    "pass": 0,
+    "pass_pct": 0.0
+   },
+   "all": {
+    "n_tasks": 40,
+    "n_tracked": 40,
+    "mean_add_cm": 62.98,
+    "pass": 1,
+    "pass_pct": 2.5
+   }
+  },
+  "codex": {
+   "humoto": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 20.96,
+    "pass": 11,
+    "pass_pct": 55.0
+   },
+   "omomo": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 26.51,
+    "pass": 8,
+    "pass_pct": 40.0
+   },
+   "all": {
+    "n_tasks": 40,
+    "n_tracked": 40,
+    "mean_add_cm": 23.74,
+    "pass": 19,
+    "pass_pct": 47.5
+   }
+  },
+  "orchestrator": {
+   "humoto": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 14.3,
+    "pass": 11,
+    "pass_pct": 55.0
+   },
+   "omomo": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 19.61,
+    "pass": 10,
+    "pass_pct": 50.0
+   },
+   "all": {
+    "n_tasks": 40,
+    "n_tracked": 40,
+    "mean_add_cm": 16.96,
+    "pass": 21,
+    "pass_pct": 52.5
+   }
+  },
+  "communicating": {
+   "humoto": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 13.45,
+    "pass": 12,
+    "pass_pct": 60.0
+   },
+   "omomo": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 12.84,
+    "pass": 15,
+    "pass_pct": 75.0
+   },
+   "all": {
+    "n_tasks": 40,
+    "n_tracked": 40,
+    "mean_add_cm": 13.14,
+    "pass": 27,
+    "pass_pct": 67.5
+   }
+  },
+  "codex120": {
+   "humoto": {
+    "n_tasks": 20,
+    "n_tracked": 20,
+    "mean_add_cm": 9.85,
+    "pass": 16,
+    "pass_pct": 80.0
+   },
+   "omomo": {
+    "n_tasks": 20,
+    "n_tracked": 19,
+    "mean_add_cm": 15.55,
+    "pass": 14,
+    "pass_pct": 70.0
+   },
+   "all": {
+    "n_tasks": 40,
+    "n_tracked": 39,
+    "mean_add_cm": 12.63,
+    "pass": 30,
+    "pass_pct": 75.0
+   }
+  }
+ },
+ "aggregate_vs_page": {
+  "table1_humoto_add": {
+   "hoi_spider": [
+    44.96,
+    44.96
+   ],
+   "zero_shot": [
+    56.09,
+    56.09
+   ],
+   "codex120": [
+    9.85,
+    9.85
+   ]
+  },
+  "table2_omomo_add": {
+   "hoi_spider": [
+    40.77,
+    40.77
+   ],
+   "zero_shot": [
+    69.87,
+    69.87
+   ],
+   "codex120": [
+    15.55,
+    15.55
+   ]
+  },
+  "pooled_pass_pct": {
+   "hoi_spider": [
+    17.5,
+    17.5
+   ],
+   "zero_shot": [
+    2.5,
+    2.5
+   ],
+   "codex120": [
+    75.0,
+    75.0
+   ],
+   "codex": [
+    47.5,
+    47.5
+   ],
+   "orchestrator": [
+    52.5,
+    52.5
+   ],
+   "communicating": [
+    67.5,
+    67.5
+   ]
+  },
+  "pooled_add_cm": {
+   "hoi_spider": [
+    42.87,
+    42.87
+   ],
+   "zero_shot": [
+    62.98,
+    62.98
+   ],
+   "codex120": [
+    12.63,
+    12.63
+   ]
+  }
+ },
+ "paired_tests_raw_labels": {
+  "codex120 vs hoi_spider": {
+   "pass_mcnemar": {
+    "a_only": 24,
+    "b_only": 1,
+    "p_exact": 1.5497207641601562e-06
+   },
+   "add_cm_boot": {
+    "mean_diff": -30.38677623104452,
+    "ci95": [
+     -40.62427229291327,
+     -20.49845669127174
+    ],
+    "n": 39
+   }
+  },
+  "codex120 vs communicating": {
+   "pass_mcnemar": {
+    "a_only": 6,
+    "b_only": 3,
+    "p_exact": 0.5078125
+   },
+   "add_cm_boot": {
+    "mean_diff": -0.3698455613521408,
+    "ci95": [
+     -4.849983190048213,
+     5.137307896445118
+    ],
+    "n": 39
+   }
+  },
+  "communicating vs orchestrator": {
+   "pass_mcnemar": {
+    "a_only": 8,
+    "b_only": 2,
+    "p_exact": 0.109375
+   },
+   "add_cm_boot": {
+    "mean_diff": -3.8144297932695914,
+    "ci95": [
+     -7.367610943649031,
+     -0.5929812100909669
+    ],
+    "n": 40
+   }
+  },
+  "orchestrator vs codex": {
+   "pass_mcnemar": {
+    "a_only": 7,
+    "b_only": 5,
+    "p_exact": 0.7744140625
+   },
+   "add_cm_boot": {
+    "mean_diff": -6.7781960230053615,
+    "ci95": [
+     -11.504688881799613,
+     -2.655654395813817
+    ],
+    "n": 40
+   }
+  },
+  "codex vs hoi_spider": {
+   "pass_mcnemar": {
+    "a_only": 13,
+    "b_only": 1,
+    "p_exact": 0.0018310546875
+   },
+   "add_cm_boot": {
+    "mean_diff": -19.128780291586608,
+    "ci95": [
+     -27.08768604118112,
+     -11.817463401878454
+    ],
+    "n": 40
+   }
+  },
+  "codex120 vs codex": {
+   "pass_mcnemar": {
+    "a_only": 11,
+    "b_only": 0,
+    "p_exact": 0.0009765625
+   },
+   "add_cm_boot": {
+    "mean_diff": -10.879232595980605,
+    "ci95": [
+     -17.096253674159172,
+     -4.913102910423367
+    ],
+    "n": 39
+   }
+  },
+  "communicating vs codex": {
+   "pass_mcnemar": {
+    "a_only": 10,
+    "b_only": 2,
+    "p_exact": 0.03857421875
+   },
+   "add_cm_boot": {
+    "mean_diff": -10.592625816274952,
+    "ci95": [
+     -15.941910281805818,
+     -5.802640300966871
+    ],
+    "n": 40
+   }
+  }
+ },
+ "reviewed_label_pass_counts": {
+  "hoi_spider": 7,
+  "zero_shot": 1,
+  "codex": 19,
+  "orchestrator": 19,
+  "communicating": 27,
+  "codex120": 30
+ },
+ "orchestrator_vs_codex30_reviewed": {
+  "a_only": 7,
+  "b_only": 7,
+  "p_exact": 1.0
+ },
+ "opening_disqualified": [
+  "orchestrator:carry_side_table_with_both_hands_walk_around-536",
+  "orchestrator:walk_with_low_chair-308"
+ ],
+ "missing_task_sensitivity": {
+  "others_on_task_add_cm": {
+   "hoi_spider": 37.09,
+   "zero_shot": 59.22,
+   "codex": 32.73,
+   "orchestrator": 26.72,
+   "communicating": 18.89
+  },
+  "codex120_mean39": 12.63,
+  "initial_ref_add_cm_on_task": 41.38,
+  "codex120_mean40_if_initial_ref": 13.35,
+  "codex120_mean40_if_worst_other": 13.79
+ },
+ "best_so_far_vs_final": {
+  "codex": {
+   "best_so_far_at_30min_cm": 21.47,
+   "best_so_far_at_120min_cm": null,
+   "final_submitted_mean40_cm": 23.74
+  },
+  "orchestrator": {
+   "best_so_far_at_30min_cm": 14.73,
+   "best_so_far_at_120min_cm": null,
+   "final_submitted_mean40_cm": 16.96
+  },
+  "communicating": {
+   "best_so_far_at_30min_cm": 12.71,
+   "best_so_far_at_120min_cm": null,
+   "final_submitted_mean40_cm": 13.14
+  },
+  "codex120": {
+   "best_so_far_at_30min_cm": 29.59,
+   "best_so_far_at_120min_cm": 10.21,
+   "final_submitted_mean40_cm": 12.63
+  }
+ },
+ "run_to_run_note": "codex(30분)와 codex120은 서로 다른 실행이다. 120분 실행의 30분 시점 값(29.59)이 30분 단독 실행의 최종 값(23.74)보다 크다. 실행 간 분산이 블로그가 보고한 시간 효과와 같은 크기일 수 있다.",
+ "run_to_run_note_values": {
+  "codex30_best_at_30": 21.47,
+  "codex120_best_at_30": 29.59
+ },
+ "within_run_trials": {
+  "runs": 40,
+  "mean": 118.2,
+  "min": 4,
+  "max": 762,
+  "summary": {
+   "tasks": 40,
+   "paired_30_120": 35,
+   "improved": 33,
+   "mean_at_30_cm": 30.166087469498475,
+   "mean_at_120_cm": 10.650273970095538,
+   "coverage": {
+    "5": 23,
+    "10": 29,
+    "15": 34,
+    "20": 35,
+    "25": 35,
+    "30": 35,
+    "40": 35,
+    "60": 35,
+    "80": 40,
+    "100": 40,
+    "120": 40
+   }
+  }
+ },
+ "tokens_per_task_all40": {
+  "HOI-Retarget + SPIDER": {
+   "recorded_attempts": 0,
+   "partial_records": 0,
+   "total_tokens_M": 0.0,
+   "per_task_M": 0.0,
+   "cached_share_pct": 0.0
+  },
+  "Astra one-shot": {
+   "recorded_attempts": 40,
+   "partial_records": 0,
+   "total_tokens_M": 9.1,
+   "per_task_M": 0.23,
+   "cached_share_pct": 4.1
+  },
+  "Codex": {
+   "recorded_attempts": 40,
+   "partial_records": 12,
+   "total_tokens_M": 310.8,
+   "per_task_M": 7.77,
+   "cached_share_pct": 98.5
+  },
+  "HuMoTAR": {
+   "recorded_attempts": 185,
+   "partial_records": 89,
+   "total_tokens_M": 1050.4,
+   "per_task_M": 26.26,
+   "cached_share_pct": 98.2
+  }
+ },
+ "experience": {
+  "shelf_without_cm": 23.35,
+  "shelf_with_cm": 7.77,
+  "group_means": {
+   "related": {
+    "add_without": 9.0,
+    "add_with": 6.66,
+    "orient_without": 9.5,
+    "orient_with": 10.8,
+    "tasks_better_with": 2,
+    "tasks_worse_with": 3
+   },
+   "random": {
+    "add_without": 5.94,
+    "add_with": 5.18,
+    "orient_without": 19.01,
+    "orient_with": 19.34,
+    "tasks_better_with": 3,
+    "tasks_worse_with": 2
+   }
+  },
+  "related_leave_one_out_mean_diff_cm_when_dropped": {
+   "carry_side_table_with_both_hands_walk_around-536": -2.99,
+   "lifting_dining_chair_from_backrest_and_placing_back_with_right_hand_on_ground-595": -3.01,
+   "walk_with_low_chair-308": -3.77,
+   "lift_shelf_lie_to_stand-867": 0.97,
+   "pulling_and_pushing_the_dining_chair_from_back_post-203": -2.89
+  },
+  "all10_tasks_better_with": 5,
+  "all10_tasks_worse_with": 5,
+  "all10_sign_test_p": 1.0,
+  "all10_mean_diff_cm": -1.54,
+  "all10_boot_ci95_cm": [
+   -4.96,
+   0.7
+  ],
+  "per_task": [
+   {
+    "clip": "carry_side_table_with_both_hands_walk_around-536",
+    "group": "related",
+    "without_add": 4.278851820005587,
+    "with_add": 4.5670605694633375,
+    "without_orient": 8.585552416539361,
+    "with_orient": 9.258121666887092
+   },
+   {
+    "clip": "lifting_dining_chair_from_backrest_and_placing_back_with_right_hand_on_ground-595",
+    "group": "related",
+    "without_add": 5.3323100351816315,
+    "with_add": 5.691251757382504,
+    "without_orient": 6.651689447763649,
+    "with_orient": 7.596031861141958
+   },
+   {
+    "clip": "walk_with_low_chair-308",
+    "group": "related",
+    "without_add": 10.35991197260696,
+    "with_add": 13.744694625895978,
+    "without_orient": 13.910396839398272,
+    "with_orient": 25.23969469096787
+   },
+   {
+    "clip": "lift_shelf_lie_to_stand-867",
+    "group": "related",
+    "without_add": 23.351433173659945,
+    "with_add": 7.772009302207305,
+    "without_orient": 15.47444071886778,
+    "with_orient": 8.887586901225601
+   },
+   {
+    "clip": "pulling_and_pushing_the_dining_chair_from_back_post-203",
+    "group": "related",
+    "without_add": 1.653752077315582,
+    "with_add": 1.5188932884418422,
+    "without_orient": 2.888795259406218,
+    "with_orient": 3.032073999543555
+   },
+   {
+    "clip": "tilting_trash_can_with_right_foot-985",
+    "group": "random",
+    "without_add": 0.24050540013881816,
+    "with_add": 0.24615885854671968,
+    "without_orient": 0.7296472124425742,
+    "with_orient": 0.7575840802649981
+   },
+   {
+    "clip": "drag_wash_tub_on_ground_while_walking-176",
+    "group": "random",
+    "without_add": 11.856778756246094,
+    "with_add": 10.22982582801758,
+    "without_orient": 56.243934493678374,
+    "with_orient": 46.93582757899401
+   },
+   {
+    "clip": "carrying_mixing_bowl_with_both_hands-134",
+    "group": "random",
+    "without_add": 3.248722099832932,
+    "with_add": 3.462763529894749,
+    "without_orient": 4.721502944545132,
+    "with_orient": 5.846446968838041
+   },
+   {
+    "clip": "subject_holding_plastic_bowl_walk_back_and_fourth-039",
+    "group": "random",
+    "without_add": 9.347050590664068,
+    "with_add": 7.206116668518585,
+    "without_orient": 19.259212541272156,
+    "with_orient": 29.663172962981413
+   },
+   {
+    "clip": "turn_on_floor_lamp_while_sitting_on_low_chair_and_drinking_from_mug-457",
+    "group": "random",
+    "without_add": 4.986048640584881,
+    "with_add": 4.768810166549315,
+    "without_orient": 14.083347102038479,
+    "with_orient": 13.487781493273507
+   }
+  ]
+ },
+ "matched_time_30min_cm": {
+  "codex": {
+   "humoto_30min": 18.21,
+   "omomo_30min": 24.74,
+   "mean_of_two_datasets_30min": 21.47
+  },
+  "orchestrator": {
+   "humoto_30min": 13.15,
+   "omomo_30min": 16.3,
+   "mean_of_two_datasets_30min": 14.73
+  },
+  "communicating": {
+   "humoto_30min": 12.94,
+   "omomo_30min": 12.48,
+   "mean_of_two_datasets_30min": 12.71
+  }
+ }
+}
