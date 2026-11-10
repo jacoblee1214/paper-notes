@@ -1,0 +1,894 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Environmental PDEs 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig1"] { max-width: 50%; }
+img[src*="paper_fig2"] { max-width: 46%; }
+img[src*="paper_fig3"] { max-width: 60%; }
+img[src*="paper_fig4"], img[src*="paper_fig5"] { max-width: 78%; }
+img[src*="paper_table"] { max-width: 88%; }
+img[src*="toy_"] { max-width: 92%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>Localization in Spatiotemporal Fields via Environmental PDEs: 분석 리포트</h1>
+<p class="meta">게시용 버전 · 원문 https://arxiv.org/abs/2608.00272 · arXiv:2608.00272v1 · IROS 2026 (채택) · J. Fuentes, A. Al Redwan Newaz, A. Cavalcanti, L. Bobadilla (Florida International University, University of New Orleans) · 공식 코드 미공개(프로젝트 페이지 "coming soon", 2026-11-10 확인) · 분석일 2026-11-10 · 논문 그림 © 저자, CC BY 4.0</p>
+<p><img src="figures/paper_fig1_teaser.png" alt="Fig. 1" /></p>
+<p class="cap">논문 Fig. 1: 파티클 필터 위치추정의 개요. 움직이면 불확실성이 커지고, 환경 장을 측정하면 위치를 보정한다.</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 얕은 물 방정식(SWE)과 이류–확산 방정식(ADE)의 수치 해를 측정 모형으로 쓰고, 입자 필터의 가중치를 그 장과 점 센서 값의 맞춤으로 정합니다. 센서 편향은 입자마다 칼만 필터로 추정합니다(Rao-Blackwell 분해).</li>
+<li><strong>SWE에서는 개선이 확인되지만 ADE에서는 그렇지 않습니다:</strong> SWE 500 입자 RMSE 0.80 ± 0.03 대 PF 1.07 ± 0.04 m(t = −12, p ≈ 4·10⁻⁶). ADE는 500 입자에서 47% 줄지만, 400 입자에서 RBPF 평균(3.1 m)이 PF(≈2.35 m)보다 큽니다(p ≈ 0.23). &quot;일관되게 우세&quot;는 근거가 약합니다.</li>
+<li><strong>가장 큰 가정은 장을 완벽히 안다는 것:</strong> κ, 경계 조건, 초기 조건이 모두 참값입니다. 논문은 격자, 시간 간격, 수치 기법, 경계를 밝히지 않습니다. toy에서 κ를 0.5배로 잘못 잡으면 RMSE가 0.79에서 1.27 m로 커집니다(p &lt; 10⁻⁶).</li>
+<li><strong>시간 변화하는 지도가 필수입니다:</strong> 같은 장을 t = 0에 고정하면 RMSE가 4.0 m로 5배 커집니다. 또 이 장은 120 s 동안 기울기가 15배 줄어, 잡음 σ = 0.05에서 센서를 넣은 PF와 넣지 않은 PF의 차이가 유의하지 않았습니다(p = 0.42).</li>
+<li><strong>대칭 장에는 회전 모호성이 있습니다:</strong> 방사 대칭 장에서 자세 피셔 정보의 최소 고유값은 0.0067로 0에 가깝고, 경로를 중심 둘레로 돌려도 측정이 같습니다. toy에서는 출발점 사전 분포가 모호성을 묶어 오차를 작게 했지만, 측정이 이 방향을 식별한 것은 아닙니다.</li>
+<li><strong>수치 확산이 κ를 가립니다:</strong> 1차 풍상의 유효 확산은 (u·dx/2)(1 − C)입니다. u = 1 m/s, dx = 1 m이면 κ_num ≈ 0.5 m²/s로 논문의 κ 범위(0.01–1)와 같은 크기입니다. toy에서 이론과 3–4% 안에서 확인했습니다.</li>
+<li><strong>실물은 정성 결과뿐입니다:</strong> ASV 실험에 정량 오차가 없습니다. 채널 절제(Table I)도 입자 수와 실행 설정이 빠져 있고, ADE에서 M=1 → 3 차이는 p ≈ 0.22입니다.</li>
+<li><strong>구현 가능성:</strong> 공식 재현은 불가능합니다(코드, 데이터, 장비, 수치 방법 미공개). 아이디어 재구현은 ADE에서는 쉽고 SWE에서는 중간에서 어렵습니다. 이 맥(CPU)에서 ADE 규모 재구현과 toy는 끝났고, SWE 규모는 지형·바람 자료 승인이 필요하며, 실물은 불가능합니다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>01. 논문 분석: Localization in Spatiotemporal Fields via Environmental PDEs</h1>
+<ul>
+<li>원문: arXiv:2608.00272v1 (cs.RO, 2026-07-31 제출, 8쪽). 저자: Fuentes, Newaz, Cavalcanti, Bobadilla (Florida International University, University of New Orleans).</li>
+<li>학회: IROS 2026 (채택). 학회 정보는 사용자가 제공했고, 이 PDF에는 학회 이름이나 IEEE 표기가 없습니다.</li>
+<li>라이선스: arXiv abs 페이지에 CC BY 4.0이 표시되어 있습니다(<code>.scratch/abs.html</code>, 2026-11-10 확인). PDF 1쪽과 전체 쪽의 텍스트·렌더링을 확인했고, IEEE나 &quot;All rights reserved&quot; 같은 다른 권리 표기는 없습니다. 그래서 논문 그림은 출처와 함께 게시본에 씁니다(판정은 <code>analysis/04_claim_verification.md</code> §0).</li>
+<li>공식 코드: 프로젝트 페이지에 &quot;Code (coming soon)&quot;이라고 되어 있고 링크가 없습니다. 자세한 검색은 <code>analysis/02_prior_work.md</code> §4.</li>
+</ul>
+<h2>0. 한 문단 요약</h2>
+<p>환경 장(수온, 염분, 용존산소, 해수면 높이와 유속)이 얕은 물 방정식(SWE)이나 이류–확산 방정식(ADE)으로 주어진다고 보고, 그 PDE의 수치 해를 측정 모형으로 써서 로봇 위치를 추정합니다. 필터는 Rao-Blackwellized 입자 필터(RBPF)이고, 센서 편향은 입자마다 칼만 필터로 해석적으로 추정합니다. 결과는 시뮬레이션 두 개(SWE, ADE)와 ASV 실험 하나입니다. 실물 실험은 정성 결과뿐입니다.</p>
+<h2>1. 문제 설정 (Sec. II)</h2>
+<ul>
+<li>운동 모형 식 (1): <code>x_{t+1} = f(x_t, u_t)</code>. 투영 Π(x)가 위치 p를 줍니다.</li>
+<li>관측 모형 식 (2): <code>h(x_t) = φ(Π(x_t), t) + ε_t</code>, <code>ε_t ~ N(0, Σ)</code>. 센서는 M개 채널을 한 점에서 잽니다.</li>
+<li>문제 1: <code>p(x_t | y_{1:t}, u_{1:t-1})</code>를 근사합니다.</li>
+<li>가정: 장 φ는 PDE에서 <strong>알려져 있다</strong>고 봅니다. 즉 PDE의 형태, 계수(κ), 경계 조건, 초기 조건, 강제항이 모두 알려져 있습니다. 논문 결론(Sec. VI)에서만 초기 조건 추정을 <strong>미래 과제</strong>로 언급하고, 경계 조건은 &quot;유도하거나 가정할 수 있다&quot;고만 씁니다.</li>
+</ul>
+<h2>2. 장 모형 (Sec. III)</h2>
+<ul>
+<li><strong>SWE 식 (3)</strong>: 보존형 <code>∂_t ϕ + ∇·F(ϕ) = s(x,t,ϕ)</code>, 변수 ϕ = (η, u, v). 밀도를 뺀 비압축 형태(식 3 아래 문단)에서 M = 3채널.</li>
+<li><strong>강제항 식 (21)</strong>: 바닥 지형 <code>b(x)</code>(GEBCO 자료)와 바람 응력 <code>τ(ω − v)</code>, 바람 속도 약 12 m/s. 지형 항은 <code>−g(∇b)ᵀ</code>입니다.</li>
+<li><strong>ADE 식 (4)–(5)</strong>: <code>∂_t ϕ + ∇·(ϕv − κ∇ϕ) = s</code>, κ는 0.01–1 m²/s, 평균 유속 |v| = 1.0 m/s. 초기 조건 ϕ0는 &quot;이전에 얻은 데이터로 맞췄다&quot;고만 씁니다(Sec. V-B).</li>
+<li><strong>논문에 없는 것</strong>: 격자 크기, 시간 간격, 수치 기법(유한체적/유한차분/유한요소), 경계 조건, κ를 얻는 방법, ϕ0를 맞추는 절차, 솔버의 계산 시간. 이 빈칸이 재현의 가장 큰 장벽입니다(<code>analysis/04_claim_verification.md</code> §3).</li>
+</ul>
+<h2>3. RBPF (Sec. IV)</h2>
+<ul>
+<li><strong>상태 분할 (식 6–7)</strong>: 비선형 상태 <code>x^n = [p_x, p_y, θ, v]</code>는 입자로, 선형 상태 <code>x^l = δϕ ∈ R^M</code>(채널별 센서 편향)은 입자마다 칼만 필터로 다룹니다. 측정은 <code>y_t = h(x^n_t) + H x^l_t + ε_t</code>, <code>H = I_M</code>입니다.</li>
+<li><strong>운동 (식 8–9, 18–19)</strong>: 단위 자전거형 모형에 가법 잡음, 편향은 임의보행(<code>Λ</code>). 실험의 <code>Λ = diag(10⁻⁸)</code>입니다(Sec. V). 정확히 말하면 편향은 거의 상수입니다.</li>
+<li><strong>측정 갱신 (식 11–17)</strong>: 혁신 <code>e = y − φ(x^n) − x̂^l</code>, 혁신 공분산 <code>S = H P Hᵀ + Σ</code>. 가중치는 <code>log w̃ = log N(e; 0, S)</code>(식 13)이고, 칼만 갱신은 식 (15)–(17)입니다.</li>
+<li><strong>명목 장 값</strong>: 입자 위치를 <strong>가장 가까운 격자 칸으로 반올림</strong>해서 저장된 값을 읽습니다(식 11 바로 위 문단). 가중치는 칸 단위 계단 함수가 되고, 칸 크기가 위치 분해능의 하한이 됩니다. 이 줄은 논문에서 가장 중요한 구현 세부인데도 강조되지 않습니다.</li>
+<li><strong>영역 밖, 건조 칸</strong>: 가중치를 0(log = −∞)으로 둡니다. 육지 경계를 확률 0으로 만드는 방법입니다.</li>
+<li><strong>알고리즘 1</strong>: 매 스텝 체계적 재표본추출로 조상(ancestor)을 뽑고 가중치를 1/N로 되돌립니다(줄 1). 그 뒤 측정 갱신을 하고, <code>N_eff &lt; N/2</code>이면 SIR 재표본추출을 한 번 더 합니다(줄 11). 매 스텝 재표본추출을 하는 구조라서 입자 고갈이 생길 수 있는데, 논문은 이를 논하지 않습니다.</li>
+</ul>
+<h2>4. 실험 (Sec. V)</h2>
+<p><img src="figures/paper_fig2_swe.png" alt="paper_fig2_swe.png" /></p>
+<p class="cap">논문 Fig. 2: SWE 해(물 높이, 유속 벡터)와 타원 경로에서 RBPF 추정 경로. 500 입자, t = 0–500 s. © 저자, CC BY 4.0. 원문 https://arxiv.org/abs/2608.00272</p>
+<h3>4.1 실험 A: 얕은 물 방정식 (Sec. V-A, Fig. 2)</h3>
+<ul>
+<li>잡음: 측정 <code>diag(0.2², 0.2², 0.1²)</code>, 운동 <code>diag(0.5², 0.087²)</code>(텍스트 추출은 &quot;0.22, 0.22, 0.12&quot;와 &quot;0.52, 0.0872&quot;로 깨져 있어 제곱으로 읽었습니다). 선형 잡음 <code>diag(10⁻⁸)</code>.</li>
+<li>입자 500개, 시뮬레이션 간격 1 s, 총 500 s. 타원 경로(참값)를 추정합니다.</li>
+<li>격자 크기와 해상도는 없습니다. 영역 크기는 Fig. 2 축 눈금으로 대략 27 km × 9.5 km로 읽힙니다(작성자 추정).</li>
+</ul>
+<p><img src="figures/paper_fig3_adv.png" alt="paper_fig3_adv.png" /></p>
+<p class="cap">논문 Fig. 3: 이류–확산 세 채널(엽록소, 탁도, 수온)의 장과 RBPF 추정 경로(t = 0–500 s). © 저자, CC BY 4.0. 원문 https://arxiv.org/abs/2608.00272</p>
+<h3>4.2 실험 B: 이류–확산 (Sec. V-B, Fig. 3)</h3>
+<ul>
+<li>3채널: 엽록소(µg/L), 탁도(FNU), 수온(°C). 1 Hz 측정, 500 s, 입자 500개.</li>
+<li>참 궤적은 GPS가 아닌 시뮬레이터에서 생성했다고 보이지만 명시되어 있지 않습니다(GPS는 실험 D용).</li>
+</ul>
+<p><img src="figures/paper_fig4_swe_rmse.png" alt="paper_fig4_swe_rmse.png" /></p>
+<p class="cap">논문 Fig. 4: SWE의 PF(파랑)와 RBPF(주황) 상자그림, 입자 수 100–500, 독립 실행 5회. © 저자, CC BY 4.0. 원문 https://arxiv.org/abs/2608.00272</p>
+<p><img src="figures/paper_fig5_adv_rmse.png" alt="paper_fig5_adv_rmse.png" /></p>
+<p class="cap">논문 Fig. 5: 이류–확산의 PF와 RBPF 상자그림, 입자 수 100–500, 독립 실행 5회. 400 입자에서 RBPF 상자가 위로 긴 꼬리를 가진다. © 저자, CC BY 4.0. 원문 https://arxiv.org/abs/2608.00272</p>
+<h3>4.3 성능 (Fig. 4, Fig. 5, 본문 V-C)</h3>
+<ul>
+<li>지표: 최종 위치 오차와 RMSE. 입자 수 100–500, 독립 실행 <strong>5회</strong>(Fig. 4·5 캡션).</li>
+<li>SWE (500 입자): RBPF RMSE 0.80 ± 0.03 m 대 PF 1.07 ± 0.04 m(약 25% 감소). 최종 오차 0.70 ± 0.15 m 대 0.82 ± 0.02 m. RBPF 100 입자 RMSE 0.84 ± 0.04 m(PF 500보다 낮음).</li>
+<li>ADE (500 입자): RBPF 1.23 ± 0.35 m 대 PF 2.32 m(약 47% 감소). 400 입자에서 RBPF 3.1 ± 1.17 m. PF는 2.3–2.4 m 대역.</li>
+</ul>
+<p><img src="figures/paper_table1.png" alt="paper_table1.png" /></p>
+<p class="cap">논문 Table I: 채널 수 M에 따른 RMSE와 최종 오차(SWE, 이류–확산). 판독 불가 SD는 리포트 본문에 적었다. © 저자, CC BY 4.0. 원문 https://arxiv.org/abs/2608.00272</p>
+<h3>4.4 채널 절제 (Sec. V-C, Table I)</h3>
+<ul>
+<li>채널 수 M = 1, 2, 3을 &quot;무작위로&quot; 골랐다고 씁니다(SWE는 인덱스 0, 1, 2 중 선택). 입자 수와 어떤 채널을 골랐는지는 표에 없습니다.</li>
+<li>SWE: RMSE 1.59 ± 0.55 → 0.94 ± 0.10 → 0.82 ± 0.06 m. ADE: 2.63 ± 1.63 → 2.27 ± 1.20 → 1.51 ± 0.79 m.</li>
+</ul>
+<h3>4.5 실물 (Sec. V-D, Fig. 6–7)</h3>
+<ul>
+<li>ASV(SeaRobotics Suyveyor), YSI EXO2(수온, 용존산소, 염분), Sontek M9 ADCP(유속), GPS 기준. 해안 루프 한 바퀴.</li>
+<li>정량 결과 없음. Fig. 7의 정성 그림(입자가 실제 경로 주변에 모임)만 있습니다.</li>
+</ul>
+<h2>5. 저자 결론 (Sec. VI)</h2>
+<ul>
+<li>RBPF가 모든 입자 수에서 PF보다 RMSE와 최종 오차가 낮다고 씁니다(&quot;consistently outperforms&quot;).</li>
+<li>채널 융합이 &quot;critical&quot;이고 채널을 빼면 정확도가 &quot;substantially&quot; 떨어진다고 씁니다.</li>
+<li>실물 실험이 &quot;sufficient spatial variability for practical localization&quot;을 검증했다고 씁니다.</li>
+<li>미래 과제: SLAM(장 지도 동시 추정), 초기 조건 추정.</li>
+</ul>
+<h2>6. 읽으면서 본 문제</h2>
+<ol>
+<li><strong>&quot;장은 알려져 있다&quot;가 가장 강한 가정입니다.</strong> κ, 경계 조건, 초기 조건, 바람과 지형이 모두 참값으로 주어집니다. 실제 적용에서 이 값이 틀리면 필터가 어떻게 깨지는지는 논문에 없습니다. 이 저장소의 toy(<code>analysis/pde_toy.py</code>)에서 κ 불일치를 시험합니다(<code>analysis/03_analysis.md</code> §6).</li>
+<li><strong>RBPF 대 PF 비교의 공정성이 확인되지 않습니다.</strong> 표준 PF가 센서 편향 상태를 가지는지 논문이 밝히지 않습니다. 편향을 무시한 PF와 편향을 추정하는 RBPF를 비교하면, 이득의 일부는 Rao-Blackwell 자체가 아니라 모델링 차이입니다. 편향 상태를 증강한 PF가 빠져 있습니다.</li>
+<li><strong>&quot;일관되게 우세&quot;는 ADE에서 성립하지 않습니다.</strong> 400 입자에서 RBPF 평균(3.1 m)은 PF(2.3–2.4 m)보다 큽니다. Fig. 5 중앙값도 200·400에서 PF와 비슷하거나 나쁩니다(그림 판독, 근사치). Fig. 5 캡션은 &quot;both metrics have steady RMSE&quot;라고 쓰는데 RBPF 수치는 1.2–3.1 m로 흔들립니다.</li>
+<li><strong>통계 검정이 없습니다.</strong> 실행 5회, 평균 ± 표준편차만 보고합니다. 재계산한 결과(<code>analysis/03_analysis.md</code> §1)는 SWE 500 입자 차이는 p ≈ 4·10⁻⁶로 강하지만, 최종 오차 차이는 p ≈ 0.15로 유의하지 않습니다.</li>
+<li><strong>Table I 설정이 본문과 다릅니다.</strong> SWE M = 3(0.82 ± 0.06)은 본문 500 입자 RBPF(0.80 ± 0.03)와 달라 보이고, ADE M = 3(1.51 ± 0.79)은 500 입자 RBPF(1.23 ± 0.35)와 다릅니다. 입자 수와 실행 설정이 다른 것으로 보입니다.</li>
+<li><strong>계산 비용을 보고하지 않습니다.</strong> &quot;general-purpose laptop&quot;이라고만 씁니다. RBPF는 입자마다 칼만 필터를 돌리므로 비용이 입자 수에 비례하는데, 실제 시간은 없습니다.</li>
+<li><strong>실물 실험은 정량 검증이 없습니다.</strong> &quot;sufficient spatial variability&quot;는 정성 그림으로만 뒷받침됩니다. 기준 GPS와 입자 추정의 오차 수치가 없습니다.</li>
+<li><strong>Table I 조판 오류:</strong> 일부 값이 PDF 자체에 깨져 찍혀 있습니다(&quot;2.63 ± 1.6.38&quot;, &quot;2.27 ± 1.2.06&quot;, &quot;1.61 ± 0.3.9&quot;, &quot;2.11 ± 0.132&quot;). 본문의 &quot;2.63 ± 1.63&quot;으로 한 칸은 읽었고, 나머지 SD는 판독 불가로 두었습니다(<code>analysis/03_analysis.md</code> §1.3).</li>
+</ol>
+<h2>7. 이 논문이 말하지 않는 것 (요약)</h2>
+<ul>
+<li>격자, 경계, 초기 조건, κ의 추정 오차에 대한 민감도.</li>
+<li>입자 수와 계산 시간의 관계.</li>
+<li>장이 거의 평평해졌을 때(정보가 없을 때) 필터가 어떻게 행동하는지.</li>
+<li>같은 PF 구성에서 편향을 증강한 기준선.</li>
+</ul>
+</section>
+<section class="chapter"><h1>03. 유도, 재계산, toy 검증</h1>
+<p>이 문서는 논문 수치를 다시 계산하고, 필터와 PDE 이산화의 핵심 식을 유도하며, 숨은 가정을 numpy toy로 시험한 결과입니다. 모든 스크립트는 CPU, numpy 1스레드로 몇 초에서 1분 안에 끝납니다. 결과는 <code>analysis/*_results.json</code>에 있습니다.</p>
+<h2>0. 요약</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>결과</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SWE 500 입자 RMSE(0.80 ± 0.03 대 1.07 ± 0.04)</td>
+<td>t = −12.1, p ≈ 4·10⁻⁶ (SD를 실행 5회의 SD로 가정)</td>
+<td>지지</td>
+</tr>
+<tr>
+<td>SWE 500 입자 최종 오차(0.70 ± 0.15 대 0.82 ± 0.02)</td>
+<td>t = −1.8, p ≈ 0.15</td>
+<td>유의하지 않음</td>
+</tr>
+<tr>
+<td>ADE 500 입자 RMSE(1.23 ± 0.35 대 2.32)</td>
+<td>감소 47%, p ≈ 0.001–0.002 (PF SD 0.05–0.3 가정)</td>
+<td>지지</td>
+</tr>
+<tr>
+<td>ADE 400 입자(RBPF 3.1 ± 1.17 대 PF ≈ 2.35)</td>
+<td>t ≈ 1.4, p ≈ 0.23. RBPF 평균이 더 큼</td>
+<td>&quot;일관되게 우세&quot;와 반대</td>
+</tr>
+<tr>
+<td>자세 관측가능성: 방사 대칭 장의 회전 null</td>
+<td>λ_min = 0.0067 (1/σ² 단위), 비대칭 0.86</td>
+<td>대칭 장에서 회전 모호성 존재</td>
+</tr>
+<tr>
+<td>장 수준과 편향의 혼동</td>
+<td>이 toy에서는 작음(평행이동 가설 면적 1.69 → 1.75 m²). 장이 평평할 때는 커질 것으로 예상하나 시험 안 함</td>
+<td>부분</td>
+</tr>
+<tr>
+<td>수치 확산 κ_eff ≈ v·dx/2·(1−C)</td>
+<td>측정값이 이론과 3–4% 안에서 일치</td>
+<td>확인</td>
+</tr>
+<tr>
+<td>κ 불일치 toy(κ 0.5배, 0.25배)</td>
+<td>RMSE 1.27 m, 1.74 m(일치 0.79 m). 2배, 4배는 차이 없음(p ≈ 0.85, 0.46)</td>
+<td>과소 추정이 더 해로움</td>
+</tr>
+<tr>
+<td>정적 지도(t = 0 고정)</td>
+<td>RMSE 4.0 m(일치 0.79 m)</td>
+<td>시간 의존 지도가 필수</td>
+</tr>
+</tbody>
+</table>
+<h2>1. 논문 수치 재계산과 유의성</h2>
+<p>재계산 스크립트: <code>analysis/table_check.py</code> → <code>analysis/table_check_results.json</code>.</p>
+<p><strong>가정.</strong> &quot;평균 ± 값&quot;의 값은 표준편차(SD)로 읽었습니다. 독립 실행은 5회(Fig. 4·5 캡션)이며, Welch 검정을 요약 통계로 적용했습니다. 논문은 PF의 SD를 본문에 주지 않은 항목이 있어서, 그 항목은 SD를 0.05–0.3으로 바꿔 민감도를 봤습니다.</p>
+<h3>1.1 SWE, 500 입자</h3>
+<ul>
+<li>RMSE: RBPF 0.80 ± 0.03, PF 1.07 ± 0.04. Welch t = −12.07, p = 3.8·10⁻⁶. 감소율 (1.07 − 0.80)/1.07 = 25.2%(논문 &quot;roughly 25%&quot;와 일치).</li>
+<li>최종 오차: RBPF 0.70 ± 0.15, PF 0.82 ± 0.02. t = −1.77, p = 0.15. 본문의 &quot;also attaining a lower final error&quot;는 5회 실행으로는 입증되지 않습니다.</li>
+<li>100 입자 RBPF(0.84 ± 0.04)와 500 입자 PF(1.07 ± 0.04): p = 1.7·10⁻⁵. &quot;샘플 효율&quot; 주장은 이 비교로 지지됩니다. 같은 입자 수(100 대 100)의 비교는 Fig. 4 상자그림 판독으로만 가능하고 논문은 수치를 주지 않습니다.</li>
+</ul>
+<h3>1.2 대류–확산, 400·500 입자</h3>
+<ul>
+<li>500 입자: RBPF 1.23 ± 0.35, PF 2.32(SD 미보고). 감소율 47.0%(논문 &quot;nearly 47%&quot;와 일치). PF SD 0.05, 0.1, 0.2, 0.3에서 p = 0.002, 0.0015, 0.00075, 0.0008. <strong>500 입자에서는 차이가 강하게 유의합니다.</strong></li>
+<li>400 입자: RBPF 3.1 ± 1.17, PF ≈ 2.35(대역 2.3–2.4의 가운데). t ≈ 1.4, p ≈ 0.23. 평균도 RBPF가 더 큽니다. 논문의 &quot;RBPF consistently outperforms PF at equal sample size&quot;(Fig. 5 캡션, Sec. V-C)는 이 점에서 반박됩니다.</li>
+<li>실행 5회에서 RBPF SD(1.17)가 평균의 30%를 넘습니다. 한 번의 실패가 평균을 크게 움직입니다(Fig. 5에서 400 입자 RBPF 상자 위쪽 꼬리 확인).</li>
+</ul>
+<h3>1.3 Table I (채널 절제)</h3>
+<ul>
+<li>SWE: M = 1 → 3 RMSE 1.94배, p = 0.035. M = 2 → 3는 1.15배, p = 0.057. M = 1 → 2는 1.69배, p = 0.056.</li>
+<li>ADE: M = 1 → 3 RMSE 1.74배, p = 0.22(유의하지 않음). M = 2는 SD가 깨져 판독 불가.</li>
+<li>조판상 판독 불가 값(PDF에 깨져 찍힘): ADE M=2 RMSE SD(&quot;2.27 ± 1.2.06&quot;), ADE M=2 최종 오차(&quot;1.61 ± 0.3.9&quot;), ADE M=1 최종 오차(&quot;2.11 ± 0.132&quot;). 본문에 있는 ADE M=1 RMSE SD(1.63)는 사용했습니다.</li>
+<li><strong>Table I의 설정이 본문과 다릅니다.</strong> SWE M=3(0.82 ± 0.06)과 본문 500 입자 RBPF(0.80 ± 0.03), ADE M=3(1.51 ± 0.79)과 본문 500 입자 RBPF(1.23 ± 0.35)가 같은 조건인지 표에서 알 수 없습니다.</li>
+<li>결론: &quot;융합이 유의하게 개선한다&quot;는 SWE에서만 지지됩니다. ADE에서는 n = 5로 입증할 수 없습니다.</li>
+</ul>
+<h3>1.4 검출력 (n = 5)</h3>
+<p>Welch 근사, α = 0.05, 검정력 0.8에서 최소 검출 차이(m)는 SD 0.03 → 0.061, SD 0.05 → 0.101, SD 0.1 → 0.202, SD 0.35 → 0.707입니다. 이 논문의 ADE 차이(1.09 m)는 검출되지만, Table I의 M 간 차이(0.1–0.3 m)는 대부분 검출되지 않습니다.</p>
+<h2>2. 관측가능성</h2>
+<h3>2.1 모형 (식 7, 10)</h3>
+<p>측정은 <code>y_t = φ(p_t, t) + b + ε_t</code>, <code>ε ~ N(0, σ²)</code>입니다(채널 하나, 편향 b는 상수로 봄. 식 9의 Λ ≈ 0). 그래서 자세 ξ = (x_0, y_0, θ_0)에 대한 피셔 정보는 다음과 같습니다. 상대 경로 <code>r_t = p_t − p_0</code>를 주행기록계로 알고 있다고 두면</p>
+<p><code>p_t(ξ) = x_0 + R(θ_0) r_t</code>, <code>∂y_t/∂ξ = [∇φ(p_t, t), ∇φ(p_t, t)·rot90(r_t), (1)]</code></p>
+<p><code>J = Σ_t h_t h_tᵀ / σ²</code>. 편향을 미지수로 두면 4×4가 되고, 주변화하면 위치 정보는 Schur 보완으로 줄어듭니다.</p>
+<p><img src="figures/toy_symmetry.png" alt="toy_symmetry.png" /></p>
+<p class="cap">직접 계산(toy): 왼쪽은 경로를 중심 둘레로 돌렸을 때의 판별력 D(θ), 오른쪽은 자세 피셔 정보의 최소 고유값. 방사 대칭 장에서 회전 null이 0에 가깝다.</p>
+<h3>2.2 대칭과 회전 null (자세 피셔 정보)</h3>
+<p>스크립트: <code>analysis/obs_toy.py</code>. 참 장은 80×80 격자, κ = 0.2 m²/s, 경로는 중심 (10, 10) 둘레의 타원(반지름 6 m × 4 m, 각속도 0.1 rad/s), σ = 0.05입니다.</p>
+<table>
+<thead>
+<tr>
+<th>장</th>
+<th>편향</th>
+<th>λ_min</th>
+<th>나머지 고유값</th>
+<th>최소 고유벡터와 null 방향의 코사인</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>비대칭 (시간 변화)</td>
+<td>알고 있음</td>
+<td>0.859</td>
+<td>12.5, 710</td>
+<td>0.97</td>
+</tr>
+<tr>
+<td>비대칭 (시간 변화)</td>
+<td>모름</td>
+<td>0.760</td>
+<td>12.3, 703, 48008</td>
+<td>0.97</td>
+</tr>
+<tr>
+<td>방사 대칭 (시간 변화)</td>
+<td>알고 있음</td>
+<td><strong>0.0067</strong></td>
+<td>45.8, 1771</td>
+<td><strong>1.00</strong></td>
+</tr>
+<tr>
+<td>방사 대칭 (시간 변화)</td>
+<td>모름</td>
+<td>0.0067</td>
+<td>45.7, 1677, 48093</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<p>여기서 null 방향은 전체 경로를 중심 c 둘레로 회전시키는 방향 (rot90(x_0 − c), 1)입니다. 방사 대칭 장에서는 이 방향의 정보가 정확히 0이어야 합니다. 수치가 0.0067이고 코사인이 1.00인 것은 이론과 맞습니다(남은 0.0067은 유한차분과 보간 오차로 보입니다).</p>
+<p><strong>회전 판별력.</strong> 경로를 c 둘레로 θ만큼 돌렸을 때 D(θ) = Σ(φ(R_θ p_t, t) − φ(p_t, t))²/σ²를 봤습니다(잡음 없는 판별력, χ²₂ 95% 한계 5.99).</p>
+<ul>
+<li>방사 대칭 장: D의 최댓값이 0.070σ²(±90°)입니다. 180° 전체가 그럴듯합니다. <strong>회전 모호성이 완전합니다.</strong></li>
+<li>비대칭 장: D(30°) = 103σ²이고, 그럴듯한 범위는 13.5°입니다.</li>
+</ul>
+<p><strong>해석.</strong> 방사 대칭 원천에서 점 센서는 반지름만 측정합니다. 경로 전체를 돌려도 측정이 같으므로, 대칭 장에서는 초기 자세 추정이 회전 방향으로 식별되지 않습니다. 실제 필터에서는 출발점 주변의 사전 분포가 이 모호성을 묶어 줍니다(§6의 대칭 장 결과가 그 예입니다). 사전 분포가 없으면 필터는 원 위의 여러 점을 같이 가집니다.</p>
+<p><img src="figures/toy_field_decay.png" alt="toy_field_decay.png" /></p>
+<p class="cap">직접 계산(toy): 참 장의 최댓값(왼쪽)과 기울기 RMS(오른쪽)의 시간 변화. 이류가 있는 장은 120 s에 기울기가 15배 줄어든다.</p>
+<h3>2.3 장의 시간 변화와 정보량</h3>
+<p>스크립트: <code>analysis/pde_toy.py</code>(장 진단), <code>analysis/plot_figures.py</code>(그림).</p>
+<table>
+<thead>
+<tr>
+<th>시간</th>
+<th>비대칭 최대값</th>
+<th>비대칭 기울기 RMS (1/m)</th>
+<th>대칭 최대값</th>
+<th>대칭 기울기 RMS (1/m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 s</td>
+<td>1.00</td>
+<td>0.088</td>
+<td>1.00</td>
+<td>0.088</td>
+</tr>
+<tr>
+<td>60 s</td>
+<td>0.21</td>
+<td>0.011</td>
+<td>0.32</td>
+<td>0.021</td>
+</tr>
+<tr>
+<td>120 s</td>
+<td>0.066</td>
+<td>0.0058</td>
+<td>0.27</td>
+<td>0.013</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>비대칭 장은 이류(0.25 m/s)로 열린 경계 밖으로 빠져나가고 확산으로 퍼져서, 120 s에 기울기가 15배 줄었습니다. 관측 정보는 기울기 제곱에 비례하므로 같은 센서가 훨씬 적은 정보를 줍니다.</li>
+<li>시간 변화가 정보를 <strong>늘리는</strong> 경우도 있습니다. 같은 비대칭 장을 t = 0에 고정하면 자세 피셔의 λ_min이 6.6·10⁻⁵로 떨어집니다(움직이는 장은 0.86). 정적 장은 경로가 덮는 방향이 하나로 몰려서 자세의 한 방향을 식별하지 못합니다. 다만 이는 선형화된 국소 정보이고, 실제 필터에서는 정적 지도를 쓰면 오차가 4 m까지 커집니다(§6).</li>
+</ul>
+<h3>2.4 편향과 장 수준의 혼동 (유도)</h3>
+<p>편향 b를 미지수로 두고 사전 분포 b ~ N(b̂_0, P_0)를 주면, 입자 하나의 주변 우도는 <code>y ~ N(φ(p) + b̂_0 1, Σ + P_0 11ᵀ)</code>로 쓸 수 있습니다(H = I, Λ ≈ 0, 칼만 식의 주변화). 두 가지가 나옵니다.</p>
+<ol>
+<li>P_0 → ∞(무정보)이면 우도는 <strong>잔차의 중심 부분</strong>만 봅니다. 장 전체에 상수를 더한 가설과 빼기 가설이 같은 우도를 가집니다. 즉 &quot;장 수준 + 편향&quot;이 식별되지 않는 방향이 생깁니다.</li>
+<li>장이 경로를 따라 거의 평평하면 φ(p_t)의 변화가 σ 아래로 떨어지고, 위치 식별은 편향 방향과 같이 무너집니다.</li>
+</ol>
+<p>이 toy에서 확인한 것: 편향을 미지수로 두면 평행이동 가설의 그럴듯한 면적이 1.69 → 1.75 m²로 4% 늘어납니다. 장이 경로를 따라 충분히 변하기 때문입니다. <strong>평평한 장에서 이 혼동이 얼마나 커지는지는 시험하지 않았습니다</strong>. 논문은 P_0를 보고하지 않습니다.</p>
+<h2>3. RBPF 식의 확인</h2>
+<h3>3.1 우도와 칼만 갱신 (식 11–17)</h3>
+<ul>
+<li>혁신 <code>e_t = y_t − φ(x^n) − H x̂_{t|t−1}</code>, <code>S = H P H ᵀ + Σ</code>(식 12). 식 (13)의 로그 가중치는 <code>log N(e; 0, S)</code>와 같습니다(Cholesky 분해로 계산, 식 13의 −Σ log L_kk − ½ eᵀS⁻¹e − (M/2) log 2π). 확인했습니다.</li>
+<li>칼만 갱신 식 (15)–(17): <code>K = P Hᵀ S⁻¹</code>, <code>x̂ ← x̂ + K e</code>, <code>P ← P − K S Kᵀ</code>. 표준 식과 같습니다. 식 (17)은 Joseph 형태가 아니라서 수치적으로 덜 안정할 수 있습니다(M = 3에서는 문제가 되지 않을 것으로 보입니다).</li>
+<li>식 (19)의 편향 공분산 예측 <code>P_{t|t−1} = P_{t−1} + Λ</code>와 식 (18)의 조상(ancestor) 상속은 RB 구조와 맞습니다.</li>
+</ul>
+<h3>3.2 알고리즘 1의 재표본추출 순서</h3>
+<p>알고리즘 1 줄 1은 매 스텝 체계적 재표본추출을 하고 가중치를 1/N로 되돌립니다. 줄 7은 <code>log w_{t−1} = log(1/N)</code>에 우도를 더하므로, 우도 항만 남습니다. 수식은 맞습니다. 다만 매 스텝 재표본추출을 하므로 입자 고갈은 줄 11의 <code>N_eff</code> 조건과 무관하게 항상 일어날 수 있습니다. 논문은 이 효과를 측정하지 않습니다.</p>
+<h2>4. PDE 이산화: 안정 조건과 수치 확산</h2>
+<h3>4.1 안정 조건</h3>
+<p>2차원 명시적 확산: <code>dt ≤ dx²/(4κ)</code>(확산 Fourier 수 κdt/dx² ≤ 1/4). 이류(풍상): 쿠랑 수 <code>C = (|u| + |v|)dt/dx ≤ 1</code>. 얕은 물 방정식은 파속 <code>c = √(gh)</code>가 추가되어 <code>dt ≤ dx/(|u| + |v| + c)</code>입니다(h = 10 m이면 c ≈ 9.9 m/s).</p>
+<h3>4.2 논문 설정에 대입</h3>
+<p>논문은 시간 간격과 격자를 밝히지 않습니다. 시뮬레이션 간격 1 s(Sec. V-A)와 1 Hz 측정(Sec. V-B)을 솔버 간격으로 쓴다고 가정하면, 명시적 방식에서 필요한 격자 크기는 다음과 같습니다(C_d = 0.5, C_a = 1로 둠).</p>
+<ul>
+<li>ADE, κ = 1 m²/s: dx ≥ √(4κ dt / C_d) = <strong>2.8 m</strong>.</li>
+<li>ADE, |v| = 1 m/s: dx ≥ |v| dt / C_a = 1 m.</li>
+<li>SWE, h = 10 m: dx ≥ (|v| + c) dt / C_a ≈ 11 m(C_a = 1), 약 22 m(C_a = 0.5).</li>
+</ul>
+<p>즉 1 s 간격의 명시적 방식은 격자가 수 m에서 수십 m여야 합니다. 논문의 영역이 약 27 km이므로 격자 셀 수가 수천에서 수만이 됩니다. 이 값을 확인할 수 없으므로 CFL이 맞는지는 <strong>검증할 수 없습니다</strong>(<code>analysis/04_claim_verification.md</code>의 빈칸 목록).</p>
+<h3>4.3 1차 풍상의 수치 확산 (toy)</h3>
+<p>κ = 0인 순수 이류 <code>∂_t f + u ∂_x f = 0</code>을 1차 풍상으로 풀면, 수정 방정식은 <code>∂_t f + u∂_x f = κ_num ∂²_x f</code>이고 <code>κ_num = (u dx/2)(1 − C)</code>입니다. 가우시안(폭 2.5 m)을 u = 0.25 m/s로 20 s 이동시키고 분산 증가율로 κ_eff를 쟀습니다(<code>analysis/obs_toy.py</code> §4).</p>
+<table>
+<thead>
+<tr>
+<th>격자</th>
+<th>dx (m)</th>
+<th>C</th>
+<th>κ_eff 측정 (m²/s)</th>
+<th>이론 (m²/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>40</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>0.0302</td>
+<td>0.0313</td>
+</tr>
+<tr>
+<td>80</td>
+<td>0.25</td>
+<td>0.5</td>
+<td>0.0150</td>
+<td>0.0156</td>
+</tr>
+<tr>
+<td>160</td>
+<td>0.125</td>
+<td>0.5</td>
+<td>0.0073</td>
+<td>0.0078</td>
+</tr>
+</tbody>
+</table>
+<p>이론과 3–4% 안에서 맞습니다. 이 결과로 <strong>κ 범위 0.01–1 m²/s의 의미가 격자에 따라 달라짐</strong>을 알 수 있습니다. u = 1 m/s, dx = 1 m이면 κ_num ≈ 0.5 m²/s로 논문의 κ 범위 전체와 같은 크기입니다. dx = 10 m이면 κ_num은 5 m²/s가 되어 범위를 넘습니다. 따라서 논문이 보고한 κ가 물리적 확산인지, 격자 때문에 생긴 값인지 구분할 수 없습니다. <strong>κ 불일치는 격자 불일치와 섞여 들어옵니다.</strong></p>
+<p>toy 자체도 이 효과를 가집니다. 참값(80×80)과 지도(40×40)의 κ_num이 다르므로(x 방향 성분만 계산하면 약 0.030 대 0.058 m²/s), §6의 &quot;일치 κ&quot; 지도는 엄밀히 일치하지 않습니다. 그래도 두 격자 해의 차이는 RMS 0.0004–0.0025로 센서 잡음 0.05보다 20배 이상 작습니다.</p>
+<h2>5. 계산 비용</h2>
+<ul>
+<li>장은 로봇에 영향을 주지 않으므로(일방향 결합), 필터는 입자마다 PDE를 풀 필요가 없습니다. 시간당 한 번 장을 전진시키고 입자는 보간만 합니다.</li>
+<li>toy 측정(이 맥, numpy 1스레드): 80×80, 120 s 적분 0.18 s(1 s당 1.5 ms, 26 부분 스텝). 40×40 지도는 1 s당 0.23 ms(7 부분 스텝).</li>
+<li>입자 500개의 보간과 가중치 갱신은 1 s당 수십 µs 수준입니다(측정은 따로 하지 않음).</li>
+<li>추정(측정 아님): 27 km × 9.5 km 영역을 dx = 10 m로 나누면 약 2.6·10⁶ 셀입니다. 셀당 스텝 비용을 toy의 약 9 ns로 잡고 c ≈ 10 m/s에서 dt ≈ 0.5 s로 두면, 스칼라 확산–이류라면 시뮬레이션 1 s당 약 0.05 s입니다. 3변수 SWE의 리만 해법이면 이보다 여러 배 걸릴 것으로 추정합니다. 실시간 여부는 솔버에 따라 다릅니다.</li>
+<li>논문은 장을 미리 계산했는지 온라인인지 밝히지 않습니다(Sec. IV-C의 &quot;격자 값을 읽는다&quot;는 미리 계산한 격자를 가리키는 것으로 보입니다).</li>
+</ul>
+<h2>6. 위치추정 toy</h2>
+<p>스크립트: <code>analysis/pde_toy.py</code> → <code>analysis/pde_toy_results.json</code>(3초). 설정은 다음과 같습니다.</p>
+<ul>
+<li>영역 20 m × 20 m, 시간 120 s, 1 Hz 측정, σ_s = 0.05(장 단위).</li>
+<li>참 장: 80×80, κ = 0.2 m²/s. 필터 지도: 40×40, κ̂ 가변. 이류는 1차 풍상(유입 0), 확산은 zero-flux 경계.</li>
+<li>운동: 명령 변위 + 가우시안 이동 잡음 σ_o = 0.08 m/스텝(논문 식 8과 같은 가법 잡음).</li>
+<li>입자 500개, 출발점 주변 σ = 1.5 m 분포(논문 Fig. 2a의 &quot;흩어진 입자&quot;). 추정치는 가중 평균.</li>
+<li>30회, 설정 12종. 비대칭 장(두 원천 + 이류 0.25, 0.1 m/s)과 방사 대칭 장(중심 원천, 이류 0).</li>
+</ul>
+<p><img src="figures/toy_localization.png" alt="toy_localization.png" /></p>
+<p class="cap">직접 계산(toy): 설정별 RMSE(30회 평균 ± SD). 정적 지도와 κ의 과소 추정이 가장 나쁘다.</p>
+<h3>6.1 설정별 결과 (RMSE, 30회)</h3>
+<table>
+<thead>
+<tr>
+<th>설정</th>
+<th>RMSE (m) 평균 ± SD</th>
+<th>중앙값</th>
+<th>최종 오차</th>
+<th>일치 대비 p (Welch)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>비대칭, 일치 κ, 시간 의존 지도</td>
+<td>0.786 ± 0.278</td>
+<td>0.762</td>
+<td>0.995</td>
+<td>—</td>
+</tr>
+<tr>
+<td>κ̂ = 0.25κ</td>
+<td>1.743 ± 0.420</td>
+<td>1.707</td>
+<td>1.387</td>
+<td>4·10⁻¹⁴</td>
+</tr>
+<tr>
+<td>κ̂ = 0.5κ</td>
+<td>1.265 ± 0.364</td>
+<td>1.243</td>
+<td>1.139</td>
+<td>5·10⁻⁷</td>
+</tr>
+<tr>
+<td>κ̂ = 2κ</td>
+<td>0.800 ± 0.309</td>
+<td>0.757</td>
+<td>0.997</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>κ̂ = 4κ</td>
+<td>0.845 ± 0.341</td>
+<td>0.769</td>
+<td>1.041</td>
+<td>0.46</td>
+</tr>
+<tr>
+<td>정적 지도(t = 0 고정)</td>
+<td>4.017 ± 0.496</td>
+<td>3.968</td>
+<td>4.146</td>
+<td>2·10⁻³²</td>
+</tr>
+<tr>
+<td>PF, 센서 없음</td>
+<td>0.855 ± 0.367</td>
+<td>0.819</td>
+<td>1.160</td>
+<td>일치 대비 0.42</td>
+</tr>
+<tr>
+<td>주행기록계만(출발점 알려 줌)</td>
+<td>0.837 ± 0.361</td>
+<td>0.852</td>
+<td>1.143</td>
+<td>일치 대비 0.54</td>
+</tr>
+<tr>
+<td>비대칭, 일치, σ_s = 0.02</td>
+<td>0.636 ± 0.184</td>
+<td>0.617</td>
+<td>0.751</td>
+<td>센서 없음 대비 0.006</td>
+</tr>
+<tr>
+<td>비대칭, 일치, σ_s = 0.10</td>
+<td>0.866 ± 0.319</td>
+<td>0.820</td>
+<td>1.092</td>
+<td>센서 없음 대비 0.91</td>
+</tr>
+<tr>
+<td>대칭, 일치</td>
+<td>0.577 ± 0.122</td>
+<td>0.558</td>
+<td>0.658</td>
+<td>대칭 센서 없음 대비 4·10⁻⁴</td>
+</tr>
+<tr>
+<td>대칭, 정적 지도</td>
+<td>0.936 ± 0.228</td>
+<td>0.905</td>
+<td>1.021</td>
+<td>대칭 일치 대비 1·10⁻⁹</td>
+</tr>
+<tr>
+<td>대칭, 센서 없음</td>
+<td>0.855 ± 0.367</td>
+<td>0.819</td>
+<td>1.160</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>(센서 없음 두 행은 같은 난수 흐름을 써서 숫자가 같습니다. 측정을 쓰지 않으므로 장과 무관합니다.)</p>
+<h3>6.2 해석</h3>
+<ol>
+<li><strong>시간 의존 지도가 필수입니다.</strong> 정적 지도는 일치 지도보다 5배 이상 나쁩니다. 이 장에서 0–120 s 사이에 최댓값이 1.0에서 0.07까지 떨어졌기 때문입니다.</li>
+<li><strong>κ 불일치는 방향에 따라 다르게 작용합니다.</strong> 과소 추정(0.5배, 0.25배)은 유의하게 나쁘고, 과대 추정(2배, 4배)은 차이가 없습니다(p = 0.85, 0.46). 가설: 과소 추정은 실제보다 날카로운 장을 예측해 질량 중심을 틀린 곳에 두고, 과대 추정은 장을 넓혀 평평하게 만들지만 위치 정보의 방향은 남깁니다. 이 가설은 검증하지 않았습니다.</li>
+<li><strong>이 장에서 PDE 측정은 잡음이 클 때 이득이 작습니다.</strong> σ_s = 0.05에서 일치 지도와 센서 없는 PF의 차이는 p = 0.42로 유의하지 않습니다. σ_s = 0.02에서는 p = 0.006입니다. 장의 기울기가 줄어드는 만큼 잡음이 가려 버리기 때문입니다(§2.3과 맞습니다).</li>
+<li><strong>대칭 장에서 측정은 더 유의합니다.</strong> 대칭 장은 이류로 빠져나가지 않아서 최댓값이 0.27로 남습니다. 센서 없는 PF(0.855)보다 일치 지도(0.577)가 p = 4·10⁻⁴로 낫습니다. 비대칭 장보다 평균 오차가 작다는 점은 <strong>장이 비대칭일수록 좋다는 직관과 반대</strong>입니다. 원인은 이류에 따른 정보 손실이고, 회전 모호성은 출발점 사전 분포 덕분에 오차를 크게 만들지 않았습니다.</li>
+<li><strong>격자 차이는 무시할 수 있습니다.</strong> 참 장(80)과 지도(40)의 차이는 RMS 0.0004–0.0025로 σ_s의 1/20 이하입니다. 오차를 만드는 것은 격자가 아니라 κ와 장의 시간 진화입니다.</li>
+</ol>
+<h3>6.3 toy의 한계 (읽을 때 주의)</h3>
+<ul>
+<li><strong>오라클 초기 조건과 κ.</strong> 지도는 참 초기 장과 참 κ(또는 배율)를 씁니다. 실제로는 이 값을 데이터로 맞춰야 하고, 그 오차가 이 결과보다 클 것입니다.</li>
+<li><strong>편향 없음.</strong> RB 구조의 핵심인 편향 상태를 넣지 않았습니다. §2.4의 혼동은 유도와 평행이동 면적으로만 확인했습니다.</li>
+<li><strong>경로 하나, 장 두 개.</strong> 타원 경로 하나와 두 장만 시험했습니다. SWE와 실물 데이터는 없습니다.</li>
+<li><strong>쌍선형 보간.</strong> 논문은 가장 가까운 칸을 씁니다. 칸 크기 dx에서 반올림은 축마다 RMS dx/√12 오차를 줍니다(dx = 0.5 m이면 축당 약 0.14 m, 2차원 약 0.20 m). 이 toy는 보간을 써서 이 항을 줄였으므로, 같은 칸 크기의 논문 설정보다 나은 결과가 나올 수 있습니다.</li>
+<li><strong>n = 30.</strong> 평균 차이를 검정하기에는 충분하지만, 분포 꼬리(실패 사건)는 적게 나옵니다.</li>
+</ul>
+<h2>7. 논문 수치에 대한 정리</h2>
+<ul>
+<li>SWE: 방법의 우세는 500 입자에서 유의합니다(RMSE). 최종 오차는 유의하지 않습니다.</li>
+<li>ADE: 500 입자에서 우세하지만, 400 입자에서 뒤집힙니다. &quot;일관되게&quot;는 근거가 약합니다.</li>
+<li>채널 융합: SWE M = 1 → 3만 유의합니다. ADE는 검출되지 않습니다.</li>
+<li>결과 수는 5회라서 모든 차이의 신뢰 구간이 넓습니다.</li>
+</ul>
+<h2>8. PINN 변형이 바꾸는 것 (작성자 판단, 구현 안 함)</h2>
+<p>이 논문은 PINN이 아닙니다. 수치 해를 격자에서 읽습니다. PINN 변형은 다음을 바꿀 수 있습니다.</p>
+<ul>
+<li><strong>측정 모형을 연속 함수로 만듦.</strong> φ_θ(x, t; κ)를 학습하면 격자 반올림이 없어지고, ∂y/∂p를 자동 미분으로 얻어 제안 분포(예: 가우시안 근사)를 개선할 수 있습니다.</li>
+<li><strong>κ와 경계 조건을 함께 학습.</strong> PDE 잔차를 손실로 두면 κ를 학습 가능한 매개변수로 두는 역문제가 됩니다. 이 논문이 가정한 값을 데이터로 맞출 수 있습니다.</li>
+<li><strong>비용과 한계.</strong> 학습에 데이터와 시간이 필요합니다. 경계 조건과 초기 조건은 여전히 필요하고, 잔차가 작아도 장의 오차를 보장하지 않습니다. 장 진화가 길수록 근사 오차가 누적될 수 있습니다.</li>
+<li><strong>이 맥에서:</strong> 작은 MLP는 MPS나 CPU로 학습이 가능할 것으로 보입니다. 다만 torch 설치는 승인이 필요합니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>04. 주장 검증과 구현 가능성 (공식 코드 없음)</h1>
+<p>공식 코드가 없어서 코드 대조(D-항목)는 하지 않았습니다. 대신 논문의 주장을 표와 그림 수치로 다시 확인했습니다(C-항목). 재계산 근거는 <code>analysis/03_analysis.md</code> §1, toy 근거는 §2–§6입니다.</p>
+<h2>0. 권리 표기 판정 (그림 공개 여부)</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>확인 내용</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arXiv 라이선스</td>
+<td>abs 페이지(<code>.scratch/abs.html</code>, 2026-11-10)에 <code>creativecommons.org/licenses/by/4.0/</code></td>
+<td>CC BY 4.0</td>
+</tr>
+<tr>
+<td>PDF 텍스트</td>
+<td><code>pdftotext</code>로 전 8쪽 검색: &quot;©&quot;, &quot;Copyright&quot;, &quot;All rights&quot;, &quot;2026 IEEE&quot; 없음. &quot;IEEE&quot;는 참고문헌에만 있음</td>
+<td>충돌 없음</td>
+</tr>
+<tr>
+<td>PDF 렌더링</td>
+<td>1쪽 하단과 머리말·꼬리말 렌더링 확인. 표기 없음. 최종 글은 &quot;arXiv:2608.00272v1 [cs.RO] 31 Jul 2026&quot; 표기만 있음</td>
+<td>충돌 없음</td>
+</tr>
+<tr>
+<td>학회 정보</td>
+<td>사용자가 IROS 2026 채택이라고 알려 줌. PDF에는 학회명 없음</td>
+<td>학회판 PDF는 확인하지 않음</td>
+</tr>
+</tbody>
+</table>
+<p><strong>판정: 논문 그림은 게시본(report_public, publish/blog, publish/git)에 &quot;© 저자, CC BY 4.0&quot;과 원문 링크를 붙여 넣습니다.</strong> 단, 이 판단은 arXiv v1 PDF에 대한 것입니다. IROS 게재본에는 IEEE 권리 표기가 붙을 수 있으니, 학회 게재본을 쓰는 경우에는 다시 확인해야 합니다.</p>
+<h2>1. 확인 범위</h2>
+<ul>
+<li>코드: 공식 저장소 없음(프로젝트 페이지 &quot;Code (coming soon)&quot;, <code>gh</code> 검색 0건). <code>repo/</code> clone은 하지 않았습니다.</li>
+<li>수치: Table I, 본문 V-B·V-C, Fig. 4·5의 상자그림 판독, 장의 시간 진화(toy).</li>
+<li>빈 칸: 재현에 필요한 값(§3).</li>
+</ul>
+<h2>2. 주장 검증 (C-항목)</h2>
+<p>판정 기호: <strong>지지</strong>(재계산이 일치), <strong>부분</strong>(조건부로만 맞음), <strong>반박</strong>(재계산이 다름), <strong>확인 불가</strong>(근거 없음).</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>주장(논문 위치)</th>
+<th>확인 결과</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>SWE 500 입자: RBPF 0.80 ± 0.03 m 대 PF 1.07 ± 0.04 m (V-C)</td>
+<td>Welch t = −12.1, p ≈ 4·10⁻⁶(SD를 실행 5회의 SD로 가정)</td>
+<td>지지</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>SWE RMSE 약 25% 감소 (V-C)</td>
+<td>25.2%</td>
+<td>지지</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>RBPF 100 입자(0.84 m)가 PF 500 입자(1.07 m)보다 낫다 (V-C)</td>
+<td>p ≈ 2·10⁻⁵. 같은 입자 수 비교는 그림 판독뿐</td>
+<td>지지(다른 입자 수끼리)</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>SWE 최종 오차도 RBPF가 낮다: 0.70 ± 0.15 대 0.82 ± 0.02 (V-C)</td>
+<td>t = −1.8, p ≈ 0.15</td>
+<td>확인 불가(유의하지 않음)</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>ADE 500 입자: RBPF 1.23 ± 0.35 대 PF 2.32, 47% 감소 (V-C)</td>
+<td>47.0%. p ≈ 0.001–0.002(PF SD 0.05–0.3 가정)</td>
+<td>지지</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>ADE에서 &quot;같은 입자 수에서 RBPF가 일관되게 우세&quot; (V-C, Fig. 5 캡션, VI)</td>
+<td>400 입자: 3.1 ± 1.17 대 PF ≈ 2.35, p ≈ 0.23, 평균은 RBPF가 더 큼. 200·400의 상자 중앙값도 PF와 비슷하거나 나쁨(그림 판독)</td>
+<td><strong>반박</strong></td>
+</tr>
+<tr>
+<td>C7</td>
+<td>초록: &quot;RBPF consistently outperforms ... across varying particle counts&quot;</td>
+<td>SWE는 모든 입자 수에서 RBPF 상자가 낮음(그림 판독). ADE는 C6과 같은 이유로 반박</td>
+<td>부분</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>Fig. 5 캡션: &quot;both metrics have steady RMSE values as the particle count increases&quot;</td>
+<td>RBPF RMSE가 1.23(500)–3.1(400) m로 흔들림</td>
+<td><strong>반박</strong></td>
+</tr>
+<tr>
+<td>C9</td>
+<td>여러 채널 융합이 정확도를 &quot;significantly&quot; 올림 (V-C, VI)</td>
+<td>SWE M 1→3: 1.94배, p ≈ 0.035. ADE M 1→3: 1.74배, p ≈ 0.22(ADE M=2의 SD 판독 불가)</td>
+<td>부분(SWE만 지지)</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>RBPF는 PF보다 입자가 &quot;훨씬 적게&quot; 필요하다 (초록, VI)</td>
+<td>SWE에서 100 입자 RBPF가 500 입자 PF를 이김(C3). ADE에서는 500 입자 RBPF가 PF보다 낫지만 400에서 역전</td>
+<td>부분</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>장 기반 위치추정에 RBPF를 적용한 것은 처음이다 (I)</td>
+<td>이 저장소 검색(<code>gh</code>, 논문 제목·키워드, 2026-11-10)에서 반례 없음. 문헌 전체는 확인하지 않음</td>
+<td>확인 불가</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>Table I의 &quot;roughly twofold rise&quot;(SWE M 3 → 1) (V-C)</td>
+<td>1.94배</td>
+<td>지지</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>실물 ASV 실험이 &quot;sufficient spatial variability&quot;를 검증 (초록, V-D, VI)</td>
+<td>정량 오차, 기준선, 실행 수 없음. Fig. 7 정성 그림만</td>
+<td>확인 불가</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>장 기반 필터의 계산 효율(RBPF가 입자 수를 줄여 계산이 줄어듦)</td>
+<td>계산 시간 보고 없음. &quot;general-purpose laptop&quot;만 씀</td>
+<td>확인 불가</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>ADE의 최고 성능이 500 입자에서 나옴 (V-C)</td>
+<td>100–300 입자의 평균 수치가 본문에 없음. 그림 상자 판독으로 단정 불가</td>
+<td>확인 불가</td>
+</tr>
+<tr>
+<td>C16</td>
+<td>채널 절제 실험(Table I)은 입자 수와 무관하게 같은 조건 (암묵)</td>
+<td>본문 500 입자 RBPF와 SWE M=3 0.80 대 0.82, ADE M=3 1.23 대 1.51. 같은 조건이라는 근거 없음</td>
+<td>불일치 가능(암묵 가정)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>요약.</strong> 방법의 방향(시간 변화하는 PDE 장을 측정 모형으로 쓰면 PF보다 낫다)은 SWE에서 잘 뒷받침됩니다. ADE는 입자 수 증가에 따른 단조 개선이 없고, 저자들이 쓴 &quot;일관되게&quot;와 &quot;steady&quot;는 자료로 지지되지 않습니다. 실물과 계산 효율은 검증할 수 없습니다.</p>
+<h2>3. 재현에 필요하지만 논문에 없는 정보</h2>
+<ol>
+<li><strong>수치 방법:</strong> 격자 크기와 영역, 기법(유한체적·유한차분·유한요소), 시간 간격, CFL 또는 암시적 처리(<code>analysis/03_analysis.md</code> §4).</li>
+<li><strong>경계 조건:</strong> 육지 경계, 바다 열린 경계, 바람 경계. 이류 장에서 유입 경계값(toy에서 0을 쓴 것처럼 임의로 정해야 함).</li>
+<li><strong>계수:</strong> ADE의 κ 값(채널별), κ를 얻는 방법, 초기 장 ϕ0를 데이터로 맞추는 절차, SWE 강제항의 밀도 비 ρ_w/ρ_a와 항력 계수 c_c.</li>
+<li><strong>자료 전처리:</strong> GEBCO의 해상도와 보간, 바람 자료의 출처와 시간 해상도.</li>
+<li><strong>편향 사전 분포:</strong> 초기 편향 평균 x̂_0와 공분산 P_0, 시뮬레이션에서 편향을 실제로 넣었는지(참값 편향의 크기).</li>
+<li><strong>PF 구성:</strong> 표준 PF가 편향 상태를 가지는지, 재표본추출 임계값, 초기 입자 분포, 매 스텝 재표본추출을 하는지(알고리즘 1 줄 1).</li>
+<li><strong>실행 정보:</strong> 입자 수별 수치 표(100–500, 각 5회), 난수 시드, SD의 정의(표본 또는 모집단), 참 궤적 생성 방법.</li>
+<li><strong>Table I 설정:</strong> 입자 수, 채널 선택 규칙(SWE는 0, 1, 2 중 무엇), 실행 수.</li>
+<li><strong>계산 시간과 하드웨어:</strong> &quot;general-purpose laptop&quot;의 사양, 장 해석 시간, 필터 시간.</li>
+<li><strong>실물:</strong> 센서 보정, 시간 동기화, GPS와 입자 추정의 오차 수치, 실행 횟수.</li>
+<li><strong>공개 계획:</strong> 코드와 데이터. 프로젝트 페이지에 &quot;coming soon&quot;만 있음.</li>
+</ol>
+<h2>4. 구현할 수 있는지 (판정)</h2>
+<p><strong>판정: 공식 재현은 불가능합니다. 아이디어 재구현은 ADE에서는 쉽고 SWE에서는 중간에서 어렵습니다. 이 맥에서는 CPU로 ADE 규모의 재구현과 시험까지 가능하고, SWE 규모와 실물은 데이터·장비 때문에 어렵습니다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>판정</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>공식 재현</td>
+<td>불가능</td>
+<td>코드, 데이터, 장비 설정, 수치 방법이 공개되지 않음(§3)</td>
+</tr>
+<tr>
+<td>이 맥(Apple M4 Pro, 약 24 GiB 통합 메모리, MPS, CUDA 없음, torch 미설치)에서 ADE 규모 재구현</td>
+<td>가능(CPU, numpy 1스레드)</td>
+<td><code>analysis/pde_toy.py</code>가 120 s, 30회 × 12설정을 3초에 실행. 장 계산은 80×80에서 1 s당 1.5 ms</td>
+</tr>
+<tr>
+<td>이 맥에서 SWE 규모 재구현</td>
+<td>조건부</td>
+<td>2D 얕은 물 솔버와 GEBCO·바람 자료가 필요. 자료 다운로드 승인 필요. 계산은 CPU로 가능하나 긴 시간(추정)</td>
+</tr>
+<tr>
+<td>아이디어 재구현 effort, ADE</td>
+<td>쉬움(추정)</td>
+<td>필터와 RB 편향 칼만 추가는 약 150–250줄 numpy. toy가 이미 PF 골격을 포함</td>
+</tr>
+<tr>
+<td>아이디어 재구현 effort, SWE</td>
+<td>중간–어려움(추정)</td>
+<td>2D 얕은 물 해법(약 300–500줄), 지형 강제항, 바람 강제항, 자료 전처리</td>
+</tr>
+<tr>
+<td>필요한 하드웨어</td>
+<td>재현 실험에는 GPU가 필요 없음</td>
+<td>논문이 &quot;general-purpose laptop&quot;이라고 씀. 실물 재현은 ASV, 수질 센서(온도, 용존산소, 염분), ADCP, GPS가 필요</td>
+</tr>
+<tr>
+<td>실물 재현</td>
+<td>불가능</td>
+<td>장비와 현장이 없음</td>
+</tr>
+</tbody>
+</table>
+<p><strong>결정 요인.</strong> 재현의 실질적 장벽은 GPU가 아니라 <strong>장을 어떤 수치 방법으로 풀었는지</strong>와 <strong>κ, 경계, 초기 조건을 어떻게 얻었는지</strong>입니다. 이 값을 임의로 정하면 결과가 달라질 수 있습니다.</p>
+<h2>5. 판독 불확실 항목</h2>
+<ul>
+<li>Table I의 ADE M=2 RMSE SD(&quot;1.2.06&quot;), ADE M=2 최종 오차(&quot;0.3.9&quot;), ADE M=1 최종 오차(&quot;0.132&quot;), ADE M=1 RMSE(&quot;1.6.38&quot;, 본문 V-B의 1.63으로 읽음)는 판독할 수 없습니다. 텍스트 추출과 렌더링된 쪽 모두에서 같은 형태로 찍혀 있어, 추출 오류가 아니라 논문 표의 조판 오류로 보입니다.</li>
+<li>잡음 표기: &quot;diag(0.22, 0.22, 0.12)&quot;와 &quot;diag(0.52, 0.0872)&quot;는 제곱으로 읽었습니다(0.2², 0.2², 0.1², 0.5², 0.087²). 단위가 제곱인지 표준편차인지는 원문에서 확정할 수 없습니다.</li>
+<li>Fig. 4·5의 중앙값과 꼬리는 그림에서 눈으로 읽은 값입니다. 수치로 적은 것은 본문에 있는 값뿐입니다.</li>
+<li>본문 &quot;PF's RMSE plateaus near 1.07–1.10 m&quot;(V-C)는 Fig. 4 상자그림과 맞습니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>02. 선행연구와 관계</h1>
+<p>번호 [n]은 논문의 참고문헌 번호입니다(<code>paper/paper.txt</code>의 References). 논문 밖 문헌은 이 문서 작성자의 판단이며, 원문을 열어 확인하지 않은 것은 그렇게 표시했습니다. GitHub 정보는 2026-11-10에 <code>gh</code>로 확인했습니다.</p>
+<h2>1. 계보</h2>
+<ul>
+<li><strong>자연 장을 이용한 위치추정:</strong> 지자기 이상 [1, 2], 무선 신호 세기 [3], 시각 랜드마크 <a href="FastSLAM">4</a>. 이 논문은 같은 틀(장을 측정과 맞춘다)을 쓰지만, 장이 <strong>시간에 따라 PDE로 진화한다</strong>는 점을 더합니다.</li>
+<li><strong>유동장 기반 AUV 위치추정과 지도:</strong> 배경 흐름 기반 위치추정 [6], 흐름 기반 동시 위치추정·지도 [7], 다로봇 흐름 기반 위치추정·지도 [8]. 논문은 이들이 <strong>정상 또는 천천히 변하는 흐름</strong>과 특정 동역학에만 맞는다고 봅니다.</li>
+<li><strong>PDE 기반 환경 모형:</strong> 수중 비행체 궤적 추정용 PDE 관측기 [12, 13], 가스 확산 PDE와 희소 베이즈 학습으로 가스원 위치를 찾는 다로봇 연구 [15](Wiedemann et al.). [14]는 이류–확산 PDE와 가우시안 과정으로 장과 그 기울기를 실시간 추정하는 적응 항법입니다(Fuentes et al., ICRA 2025). 이 계열은 <strong>장 추정, 탐사, 원천 식별</strong>이 목적이고, 로봇의 <strong>위치추정</strong>은 목적이 아닙니다(논문 Sec. I의 주장).</li>
+<li><strong>Rao-Blackwell 입자 필터:</strong> RBPF 원전 [16, 24](Murphy &amp; Russell), 주변화 입자 필터 [25](Schön et al.), 입자 평활 SLAM [17](Kok et al., 2024), 연결 차량 위치추정 [18], 6자유도 페그인홀 [19]. 이 논문은 장 기반 위치추정에 RBPF를 <strong>처음 적용</strong>한다고 주장합니다.</li>
+</ul>
+<h2>2. 가까운 대안</h2>
+<h3>2.1 논문이 인용했지만 비교하지 않은 것</h3>
+<table>
+<thead>
+<tr>
+<th>연구</th>
+<th>관련 이유</th>
+<th>이 논문과 차이</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>흐름 기반 위치추정·지도 [6–8]</td>
+<td>흐름장으로 위치와 지도를 동시에 추정</td>
+<td>정상 흐름 가정. 확산 PDE나 얕은 물 방정식은 다루지 않음</td>
+</tr>
+<tr>
+<td>가스 확산 PDE 위치 추정 [15]</td>
+<td>확산 PDE 모형 + 희소 베이즈(SBL)</td>
+<td>위치가 아니라 원천을 추정. 측정 모형은 PDE 해와 비슷함</td>
+</tr>
+<tr>
+<td>적응 항법 + GP [14]</td>
+<td>PDE의 장을 GP로 추정하면서 항법</td>
+<td>장 기울기 추정이 목적. 위치추정은 없음</td>
+</tr>
+</tbody>
+</table>
+<h3>2.2 논문이 인용하지 않았지만 가까운 대안(작성자 판단, 원문 미확인)</h3>
+<table>
+<thead>
+<tr>
+<th>연구</th>
+<th>관련 이유</th>
+<th>이 논문과 차이</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>가우시안 과정 장 지도 + 입자 필터 (Rasmussen &amp; Williams, 2006)</td>
+<td>장 지도를 데이터로 학습하고 측정 우도로 위치를 맞춤</td>
+<td>장을 학습 데이터로 만듦. PDE를 풀지 않으므로 시간 변화를 직접 다루지 않음</td>
+</tr>
+<tr>
+<td>앙상블 칼만 필터 기반 데이터 동화 (Evensen, 1994)</td>
+<td>해양 모형의 상태와 매개변수를 관측으로 보정</td>
+<td>필터 상태가 장 전체. 로봇 위치를 추정하는 목적은 아님</td>
+</tr>
+<tr>
+<td>물리 정보 신경망 PINN (Raissi et al., 2019)</td>
+<td>PDE 잔차를 손실로 넣어 장 대리 모형을 만듦</td>
+<td>미분 가능한 장을 줄 수 있으나, 이 논문은 수치 해를 씀. 아래 §4 참고</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 분석과의 관계</h2>
+<ul>
+<li><strong>robosimstudio/</strong> (arXiv:2610.18835, 시뮬레이션 솔버와 물성의 식별, Real2Sim): 시뮬레이터의 매개변수를 실측에 맞추는 축이 같습니다. 이 논문의 κ, 경계 조건, 초기 조건이 <strong>식별해야 할 대상</strong>이라는 점에서 직접 관련됩니다. 이 논문은 식별을 하지 않으므로, robosimstudio의 식별 절차를 장 모형에 적용하는 것이 자연스러운 다음 단계입니다.</li>
+<li><strong>reactive_grasp/</strong> (arXiv:2609.30082, 모형 기반 QP 제어): 모형을 써서 실시간으로 행동을 계산하는 점은 비슷하지만, 위치추정과 직접 대응하지 않습니다. 이 논문의 필터는 제어 루프 밖에 있습니다.</li>
+<li><strong>PINN 관련:</strong> 이 저장소에는 PINN 전용 분석 폴더가 없습니다(02·README 검색, 2026-11-10). 물리 기반 모형을 다루는 폴더는 위 두 곳뿐입니다.</li>
+<li><strong>결론:</strong> 장을 측정 모형으로 쓰는 위치추정에는 이 저장소에 <strong>직접 대응하는 분석이 없습니다.</strong> 가장 가까운 것은 robosimstudio의 모형 식별이고, 제어(reactive_grasp)와는 연결이 약합니다.</li>
+</ul>
+<h2>4. GitHub 저장소 (2026-11-10 확인)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>★</th>
+<th>최근 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(이 논문)</td>
+<td>찾지 못함. 프로젝트 페이지에는 &quot;Code (coming soon)&quot;만 있음</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>nadavleh/SLAM---Rao-Blackwellised-Particle-Filter-no-scan-matching</td>
+<td>라이다 RBPF-SLAM(스캔 매칭 없음)</td>
+<td>아님</td>
+<td>없음</td>
+<td>2</td>
+<td><code>3f0fa35</code> (2019-08-22)</td>
+</tr>
+<tr>
+<td>wangting0310njtech/Rao-Blackwellised-particle-filter-SLAM</td>
+<td>단일 로봇 RBPF-SLAM</td>
+<td>아님</td>
+<td>없음</td>
+<td>1</td>
+<td><code>152a346</code> (2019-05-07)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>검색어: &quot;environmental PDE localization particle filter&quot;, &quot;Rao-Blackwellized particle filter PDE&quot;, &quot;Fuentes Bobadilla localization spatio-temporal fields&quot;, &quot;localization-environmental-pdes&quot;, &quot;shallow water equations robot localization&quot;, &quot;advection diffusion Kalman particle filter&quot;, &quot;Localization in Spatiotemporal Fields&quot;. 공식 저장소 후보는 0건입니다.</li>
+<li>프로젝트 페이지(<code>localization-environmental-pdes.github.io</code>)에 있는 GitHub 링크는 템플릿 크레딧(nerfies)뿐이라 논문 코드가 아닙니다.</li>
+<li>RBPF SLAM 두 저장소는 <strong>라이다 SLAM</strong>이라 장 측정 모형과 무관합니다. 칼만 필터 구조를 대조할 참고만 됩니다. 라이선스가 없어 코드를 가져다 쓸 수 없고, 재사용하려면 직접 다시 씁니다.</li>
+<li>공식 코드를 clone하지 않았으므로 <code>repo/</code>는 만들지 않았습니다(<code>analysis/04_claim_verification.md</code>).</li>
+</ul>
+<h2>5. 이 분석에서 가져오는 것</h2>
+<ul>
+<li>장 기반 위치추정은 <strong>시간 의존 지도</strong>가 핵심입니다. 정적 지도는 시험에서 가장 나쁩니다(<code>analysis/03_analysis.md</code> §6).</li>
+<li>측정 모형의 <strong>명목 장 값을 어떻게 읽는지</strong>(반올림, 보간, 건조 칸)가 위치 분해능을 정합니다.</li>
+<li>장과 편향을 같이 추정하면 <strong>식별성</strong>을 따로 확인해야 합니다(<code>analysis/03_analysis.md</code> §2.4).</li>
+</ul>
+</section></body></html>

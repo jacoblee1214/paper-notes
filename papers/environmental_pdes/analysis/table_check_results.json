@@ -1,0 +1,107 @@
+{
+  "swe_500_rmse_rbpf_vs_pf": {
+    "t": -12.074767078498866,
+    "p": 3.828673786983528e-06,
+    "reduction_pct": 25.2,
+    "paper_says": "roughly 25%"
+  },
+  "swe_500_final_rbpf_vs_pf": {
+    "t": -1.773162373696625,
+    "p": 0.1484170787486858
+  },
+  "swe_rbpf100_vs_pf500": {
+    "t": -9.091548272984094,
+    "p": 1.7201387415094305e-05
+  },
+  "adv_500_rbpf_vs_pf_sensitivity": {
+    "reduction_pct": 47.0,
+    "by_pf_sd": {
+      "sd_pf=0.05": {
+        "t": -6.89,
+        "p": 0.002
+      },
+      "sd_pf=0.1": {
+        "t": -6.7,
+        "p": 0.00149
+      },
+      "sd_pf=0.2": {
+        "t": -6.05,
+        "p": 0.000745
+      },
+      "sd_pf=0.3": {
+        "t": -5.29,
+        "p": 0.000798
+      }
+    }
+  },
+  "adv_400_rbpf_worse_than_pf": {
+    "note": "본문: RBPF 3.1 ± 1.17 대 PF ~2.35 (대역 2.3–2.4 중앙값 사용)",
+    "by_pf_sd": {
+      "sd_pf=0.05": {
+        "t": 1.43,
+        "p": 0.225
+      },
+      "sd_pf=0.1": {
+        "t": 1.43,
+        "p": 0.225
+      },
+      "sd_pf=0.2": {
+        "t": 1.41,
+        "p": 0.227
+      },
+      "sd_pf=0.3": {
+        "t": 1.39,
+        "p": 0.229
+      }
+    }
+  },
+  "table1_feature_pairs": {
+    "swe_M1_vs_M3": {
+      "rmse_p": 0.0347,
+      "final_p": 0.0385,
+      "rmse_ratio": 1.94
+    },
+    "swe_M2_vs_M3": {
+      "rmse_p": 0.0574,
+      "final_p": 0.148,
+      "rmse_ratio": 1.15
+    },
+    "swe_M1_vs_M2": {
+      "rmse_p": 0.0563,
+      "final_p": 0.119,
+      "rmse_ratio": 1.69
+    },
+    "adv_M1_vs_M3": {
+      "rmse_p": 0.218,
+      "final_p": "SD 판독 불가",
+      "rmse_ratio": 1.74
+    },
+    "adv_M2_vs_M3": {
+      "rmse_p": "SD 판독 불가",
+      "final_p": "SD 판독 불가",
+      "rmse_ratio": 1.5
+    },
+    "adv_M1_vs_M2": {
+      "rmse_p": "SD 판독 불가",
+      "final_p": "SD 판독 불가",
+      "rmse_ratio": 1.16
+    }
+  },
+  "table1_swe_M3_vs_text_500particles": {
+    "note": "Table I의 SWE M=3(0.82 ± 0.06)와 본문 500 입자 RBPF(0.80 ± 0.03). 입자 수와 실행 설정이 표에 없어 같은 조건인지 모른다."
+  },
+  "table1_adv_M3_vs_text_500particles": {
+    "note": "Table I의 대류–확산 M=3(1.51 ± 0.79)와 Fig. 5·본문 500 입자 RBPF(1.23 ± 0.35)가 다르다. 입자 수 또는 실행 설정이 다른 것으로 보인다."
+  },
+  "min_detectable_difference_n5": {
+    "sd=0.03": 0.061,
+    "sd=0.05": 0.101,
+    "sd=0.1": 0.202,
+    "sd=0.35": 0.707
+  },
+  "ratio_checks": {
+    "swe_rmse_100_to_500_RBPF_gain_pct": 4.8,
+    "table1_swe_M1_over_M3": 1.94,
+    "adv_rbpf_pf_500_ratio": 0.53
+  }
+}

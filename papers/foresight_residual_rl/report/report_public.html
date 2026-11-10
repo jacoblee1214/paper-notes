@@ -1,0 +1,933 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Foresight Residual RL 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig1"] { max-width: 52%; }
+img[src*="paper_fig2"], img[src*="paper_fig3"] { max-width: 92%; }
+img[src*="paper_table"] { max-width: 92%; }
+img[src*="forest_"], img[src*="product_"], img[src*="toy_"] { max-width: 92%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>Foresight Residual RL: 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 그림과 표는 라이선스(arXiv 비독점 배포) 때문에 제외했습니다. 원문 https://arxiv.org/abs/2607.16506 · arXiv:2607.16506v1 · IROS 2026 (채택) · Yuhan Liu, Xinyu Zhang, Litao Liu, Abdeslam Boularias (Rutgers University) · 공식 코드 없음(2026-11-10 확인) · 분석일 2026-11-10</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 고정된 VLA(π0) 기반 잔차 RL에서, 단계(grasp, move-insert, rotate)의 희소 성공 보상에 &quot;다음 단계가 성공할 확률&quot;(foresight 예측기 p_φ)을 곱합니다(식 9). 예측기는 기준 정책의 종료 상태 이미지와 하류 롤아웃 성공 횟수(κ/K_rep = κ/5)를 이항 NLL로 맞춘 것입니다. 학습은 뒤 단계부터 역순으로 합니다(Alg. 1).</li>
+<li><strong>숫자는 시드 4개에서 유의하지만, 시드 정의와 예측기 검증이 빠져 있습니다:</strong> 전체 과제 85.6 ± 3.9 대 54.5 ± 3.6(잔차 RL)은 Welch p ≈ 2×10⁻⁵, 차이 31.1 %p(상대 57%)입니다. &quot;+31.1%&quot;는 %p라는 표기 문제가 있습니다. &quot;512 에피소드&quot;가 시드당인지 총인지 불명입니다(<code>03</code> §1).</li>
+<li><strong>효과의 원인은 핸드오프 품질이라는 주장은 내부 일관성이 있습니다:</strong> foresight의 연속 Grasp+Insert(87.3)는 단계 oracle 성공의 곱(87.5)과 맞고, 잔차 RL은 곱(90.7)보다 35 %p 낮습니다(<code>03</code> §3). 다만 oracle 초기화의 한계가 있습니다.</li>
+<li><strong>곱셈 보상은 정확한 가치에서만 전역 목적과 같습니다:</strong> 정확한 하류 가치에서는 foresight 기대 기울기가 전역 희소 보상의 기대 기울기와 같습니다(차이 3.5×10⁻¹⁷, <code>03</code> §2.3). 가치가 틀리면 목적이 바뀝니다. 3단계 체인 toy에서 불안정한 잡기 행동의 가치만 0.99로 부풀리면 참 성공률이 0.507에서 0.129로 떨어졌습니다(<code>03</code> §4.2). PBRS 형태는 같은 오차에서도 최종 정책을 지켰습니다.</li>
+<li><strong>예측기 검증이 약합니다:</strong> Grasp→Insert 정확도 86.2%(다수 기준 73.9%)는 뚜렷하지만, 회전 단계의 Insert→Rotate 예측기는 93.9%(다수 기준 90.4%)로 검정 세트가 256이면 유의하지 않습니다(<code>03</code> §1.3). 보정, AUC, 독립 평가가 없고, Table III 점수는 학습에 쓴 같은 예측기로 잰 값입니다(순환, <code>04</code> C13–C14).</li>
+<li><strong>빠진 대조군:</strong> 상수 평균 가치, 섞인 가치, PBRS, 온라인 MC, 하류 critic, α·N·K_rep 민감도가 없습니다. toy에서 상수 평균 가치는 상수 기준선과 같은 결과(0.133)였으므로, 이득이 척도가 아니라 상태 의존성에서 온다는 점은 이 대조로만 확인할 수 있습니다(<code>03</code> §4.2).</li>
+<li><strong>구현 판정:</strong> 공식 코드가 없고(저장소는 템플릿), 프로젝트 페이지는 404입니다. 이 맥(CUDA 없음)에서는 Isaac Gym 재현과 π0 미세조정이 불가능합니다. 아이디어(곱셈 보상과 예측기)는 구현이 짧지만 시뮬레이션 자산과 전문가가 공개되지 않아 재구현 노력은 큽니다(<code>04</code> §4).</li>
+</ol>
+</section>
+<section class="chapter"><h1>01. 논문 분석: Foresight Residual RL</h1>
+<ul>
+<li><strong>대상:</strong> arXiv:2607.16506v1 (2026-07-17 제출, 8쪽). 저자: Yuhan Liu, Xinyu Zhang, Litao Liu, Abdeslam Boularias (Rutgers University). 학회: IROS 2026 채택(abs 댓글 &quot;Accepted at IROS2026&quot;).</li>
+<li><strong>원문:</strong> <code>paper/paper.pdf</code>, 추출 텍스트 <code>paper/paper.txt</code>. 판본은 v1 하나뿐입니다.</li>
+<li><strong>한 줄 요지:</strong> 고정된 VLA(π0) 기반 잔차 RL에서, 각 단계의 희소 성공 보상에 &quot;다음 단계가 성공할 확률(foresight)&quot;을 곱해 단계 경계의 핸드오프 품질을 높인다. 3단계 나사 조립(grasp, move-insert, rotate)에서 전체 성공률 54.5% → 85.6%.</li>
+</ul>
+<h2>1. 문제 설정 (Sec. III)</h2>
+<ul>
+<li><strong>순차 준-MDP (III-A).</strong> 과제를 K개 단계로 나누고, 단계 k의 종료 조건 β_k(s) ∈ {0,1}을 둔다. 단계 k+1은 단계 k의 종료 상태에서 시작한다. 목표는 최종 단계 성공 β_K의 기대 할인 합(식 1)이다. 단계들은 인과적으로 얽혀 있다. 예: 나사 돌릴 때 삽입 상태를 유지해야 한다(Sec. I).</li>
+<li><strong>단계별 학습 (III-B).</strong> 기준 방식은 단계 k마다 π_k를 상수 보상 β_k(s_{t+1})로 따로 학습한다(식 2). 저자들은 이것이 종료 상태의 품질을 무시한다고 본다.</li>
+</ul>
+<h2>2. 방법 (Sec. IV–V)</h2>
+<ul>
+<li><strong>foresight 가치 (Def. IV.1, 식 3).</strong> V_{k+1:K}(s) = E[Σ γ^t β_K(s_{t+1}) | s는 단계 k+1 시작, 하류 정책 π_{k+1:K} 고정]. 단계 k의 종료 상태 s가 최종 성공에 기여하는 정도다.</li>
+<li><strong>국소 foresight 목적 (식 4).</strong> V_k°(s) = E[Σ γ^t β_k(s_{t+1}) V_{k+1:K}(s_{t+1})]. 단계 k의 상수 보상 β_k를 V_{k+1:K}로 곱한 것이다. 저자들은 이것이 &quot;국소적인 수정&quot;이라고 쓴다(Sec. IV-B).</li>
+<li><strong>역방향 귀납 (Alg. 1).</strong> k = K부터 거꾸로 학습한다. π_K는 β_K로 학습하고, π_k는 하류 π_{k+1:K}가 고정된 상태에서 V_{k+1:K}를 추정해 학습한다. 하류가 학습 중에 바뀌지 않으므로 추정값이 정적이라는 주장이다(Sec. IV-C).</li>
+<li><strong>잔차 정책 (Sec. V-A, 식 5).</strong> a_t = π_k^0(o_t) + α π_k^res(o_t), α = 0.1. 잔차 최종층은 0으로 초기화된다.</li>
+<li><strong>1단계 근사 (식 6).</strong> V_{k+1}(s) = Pr(단계 k+1 성공 | s) ≈ V_{k+1:K}(s). 정확한 경우는 (a) k = K−1, (b) 단계 k+2 이후의 성공률이 단계 k+1 성공에 조건부로 일정할 때다.</li>
+<li><strong>오프라인 예측기 (Alg. 2, Sec. V-B–C).</strong> 기준 정책 π_k^0로 성공한 종료 상태 N개를 모으고, 각 상태에서 π_{k+1}을 K_rep = 5회 굴려 성공 횟수 κ_i를 센다. 예측기 p_φ(o)는 이항 음의 로그우도(식 8)로 학습한다. 입력은 두 카메라 이미지, 백본은 DINOv2-S/14, LoRA(rank 8), 시그모이드 출력이다.</li>
+<li><strong>보상 (식 9).</strong> r_t = β_k(s_{t+1}) · p_φ(o_{t+1}). 저자들은 이 보상이 &quot;유일한 보상이며 추가 shaping은 없다&quot;고 쓴다.</li>
+</ul>
+<h2>3. 실험 설정 (Sec. VI)</h2>
+<ul>
+<li><strong>환경.</strong> Isaac Gym(GPU PhysX), 7자유도 Kuka IIWA + 11자유도 Robotiq 3지 그리퍼. 나사 렌치 5개 크기 변형(여유 2 mm 미만). 시각 입력 2대(3인칭, 손목) 256×256 RGB와 자세 8차원. 힘 센서와 물체 자세 정답은 없음. 제어 20 Hz, 단계 길이 160/200/200 스텝, 최대 560.</li>
+<li><strong>전문가 시연.</strong> 단계마다 2,560개. 상태기계 전문가(물체 자세 정답 사용). 삽입 단계 전문가는 [28]의 상태 기반 RL 정책. 시연은 고정 전략이라 종료 상태 분포가 좁다(Sec. VI-B).</li>
+<li><strong>기준 정책.</strong> π0를 단계별 시연으로 따로 미세조정해 3개 생성. 청크 H = 20.</li>
+<li><strong>잔차 RL.</strong> 손목 카메라만 입력(DINOv2 고정, CNN, 2층 LSTM 256, MLP). PPO(rl_games), 병렬 환경 128개. 10회 비판단 워밍업 후 300회 공동 학습(Sec. VI-B). 총 환경 스텝 수와 horizon은 기재 없음.</li>
+<li><strong>평가.</strong> 512 에피소드 × 4 random seeds, 평균 ± 표준편차 (Sec. VII-B). 예측기는 학습 중에만 쓰고 평가에서는 쓰지 않는다.</li>
+</ul>
+<h2>4. 결과 (Sec. VII)</h2>
+<ul>
+<li><strong>예측기 품질 (Table I).</strong> Grasp→Insert 86.2% (다수 기준 73.9%), Insert→Rotate 93.9% (다수 기준 90.4%). 임계 0.5, 검정 세트 크기는 기재 없음(80/10/10 분할이면 약 256).</li>
+<li><strong>주요 결과 (Table II).</strong> 전체 과제: π0 end-to-end 54.9 ± 5.3, π0 chained 41.4 ± 3.3, π0 + Residual 54.5 ± 3.6, + Foresight 85.6 ± 3.9. 단계 oracle 초기화: Grasp 98.4 → 95.7, Insert 92.2 → 91.4, Rotate 99.2 → 99.8 (잔차 대 foresight). 연속 Grasp+Insert 55.5 → 87.3, Insert+Rotate 83.4 → 91.8.</li>
+<li><strong>종료 상태 품질 (Table III).</strong> 예측기 점수 Grasp 종료: π0 0.64, 잔차 0.32, foresight 0.73. Insert 종료: 0.97, 0.86, 0.91. 같은 예측기로 측정한다(Sec. VII-C).</li>
+<li><strong>정성 분석 (Fig. 3).</strong> 같은 시작 상태에서 두 방법 모두 단계 성공을 하지만, 잔차 방식의 종료 상태는 다음 단계에서 실패한다.</li>
+<li><strong>저자 주장의 숫자 표현.</strong> 기여 3은 &quot;+31.1%&quot;, 본문은 &quot;over 30% improvement&quot;. 둘 다 절대 차이 31.1 %p이며 상대 증가율은 57%다(03 §1).</li>
+</ul>
+<h2>5. 한계와 저자가 적은 향후 과제 (Sec. VIII)</h2>
+<ul>
+<li>시뮬레이션만 함. 실물 RL 비용이 장애가 될 것이라 추정(근거 없음).</li>
+<li>단일 과제, 단일 단계 분해, 대안 VLA 백본 미검증.</li>
+<li>본문이 인정한 근사: 1단계 근사(식 6)의 조건 (b)와 분포 이동 &quot;α가 작아 제한된다&quot;는 주장(Sec. V-C).</li>
+</ul>
+<h2>6. 읽으면서 확인한 점 (논문 자체의 빈칸)</h2>
+<ol>
+<li><strong>보상 형태: 에피소드가 성공 뒤에도 계속되는가.</strong> 식 4와 9는 β_k(s_{t+1})를 매 스텝 곱한다. 성공 상태가 여러 스텝 유지되면 p가 여러 번 더해진다(Sec. III-A의 &quot;last for a number of time-steps&quot;). 종료 조건이 명시되지 않았다.</li>
+<li><strong>예측기의 레이블 분포.</strong> Alg. 2는 기준 정책의 종료 상태에서 레이블을 만든다(Sec. V-B). Sec. VI-C는 레이블을 &quot;base + trained residual&quot; 하류 정책으로 만들었다고 쓴다. 하류는 잔차 적용 후 정책이므로 Alg. 2 입력과 다르다. 둘 중 무엇인지 분명하지 않다.</li>
+<li><strong>판정 기준.</strong> Table I의 정확도는 임계 0.5에서 계산한다. 예측기는 연속값으로 쓰이므로 이 지표는 보수적 대리값이라고 저자가 인정했다(Sec. VII-A). 보정(calibration)이나 AUC는 없다.</li>
+<li><strong>평가와 학습에 같은 예측기.</strong> Table III의 점수는 학습 목적함수와 같은 예측기로 잰 값이다. 예측기를 최적화하면 그 점수가 오르는 것이 당연하다. 독립 평가가 없다.</li>
+<li><strong>&quot;per-subtask success unchanged&quot; (초록).</strong> 단계 oracle 값이 잔차 대 foresight에서 Grasp 98.4 → 95.7로 낮아진다. 시드 표준편차(0.6, 3.3)로 보면 차이는 유의하지 않지만, &quot;변하지 않았다&quot;보다 &quot;차이가 검출되지 않았다&quot;가 정확하다.</li>
+<li><strong>end-to-end π0의 학습 데이터.</strong> 기준선 &quot;π0 (end-to-end)&quot;를 어떤 데이터로 학습했는지 기재 없음.</li>
+<li><strong>시드와 에피소드.</strong> &quot;512 episodes across 4 random seeds&quot;가 시드당 512인지 총 512인지 불명(03 §1).</li>
+<li><strong>하이퍼파라미터.</strong> PPO의 horizon, 에포크, 학습률, 엔트로피 계수, 보상 정규화, 예측기 학습률, N과 K_rep 값(N은 2,560으로 기재), 추가 시드 수에 따른 결과가 없음.</li>
+</ol>
+<h2>7. 요약 판단</h2>
+<ul>
+<li>핵심 아이디어(종료 상태의 하류 가치를 보상에 넣기)는 명확하고, 계산 비용도 작은 편이다(예측기 학습 5분 미만, Sec. VI-C).</li>
+<li>실험은 한 과제, 한 시뮬레이터, 시드 4개, 기준선 3개(π0 end-to-end, chained, 상수 잔차)에 한정된다. 예측기의 보정, 곱셈 형태의 대안(PBRS, 상수 평균 보상, 섞인 예측기), 하류 가치 추정의 대안(온라인 MC, critic 재사용)과의 직접 비교가 없다. 이 빈칸이 03의 toy 검증 주제가 된다.</li>
+<li>논문은 &quot;재현 가능하다&quot;는 근거를 주지 못한다. 공식 코드가 없고, 프로젝트 페이지는 404다(04 §1).</li>
+</ul>
+</section>
+<section class="chapter"><h1>03. 수치 재계산, 유도, toy 검증</h1>
+<p>재계산 코드: <code>analysis/table_check.py</code> → <code>table_check_results.json</code>. toy: <code>analysis/shaping_toy.py</code> → <code>shaping_toy_results.json</code>. 그래프: <code>analysis/plot_figures.py</code> → <code>report/figures/</code>. 모두 CPU, numpy 1스레드.</p>
+<h2>1. 표 재계산과 유의성</h2>
+<p><img src="figures/forest_welch.png" alt="forest_welch.png" /></p>
+<p class="cap">직접 계산: 열별 foresight − residual 차이와 Welch 95% 구간(시드 sd 해석).</p>
+<h3>1.1 Table II: 시드 4개 평균의 Welch 검정</h3>
+<p>논문은 &quot;평균 ± 표준편차&quot;를 쓰고 시드는 4개다. 표준편차가 시드 간 sd(ddof=1)인지 평균의 표준오차(SEM)인지 본문에 없어서 두 해석을 모두 계산했다.</p>
+<table>
+<thead>
+<tr>
+<th>열 (foresight 대 residual)</th>
+<th>foresight</th>
+<th>residual</th>
+<th>차이 (pp)</th>
+<th>Welch p (sd 해석)</th>
+<th>95% 구간 (sd)</th>
+<th>p (SEM 해석)</th>
+<th>Holm (sd, 6열)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grasp</td>
+<td>95.7 ± 3.3</td>
+<td>98.4 ± 0.6</td>
+<td>−2.7</td>
+<td>0.20</td>
+<td>[−7.9, 2.5]</td>
+<td>0.48</td>
+<td>0.46</td>
+</tr>
+<tr>
+<td>Insert</td>
+<td>91.4 ± 0.6</td>
+<td>92.2 ± 1.1</td>
+<td>−0.8</td>
+<td>0.26</td>
+<td>[−2.5, 0.9]</td>
+<td>0.55</td>
+<td>0.46</td>
+</tr>
+<tr>
+<td>Rotate</td>
+<td>99.8 ± 0.4</td>
+<td>99.2 ± 0.6</td>
+<td>+0.6</td>
+<td>0.15</td>
+<td>[−0.3, 1.5]</td>
+<td>0.44</td>
+<td>0.46</td>
+</tr>
+<tr>
+<td>Grasp+Insert</td>
+<td>87.3 ± 1.3</td>
+<td>55.5 ± 3.4</td>
+<td>+31.8</td>
+<td>8×10⁻⁵</td>
+<td>[26.7, 36.9]</td>
+<td>0.001</td>
+<td>4×10⁻⁴</td>
+</tr>
+<tr>
+<td>Insert+Rotate</td>
+<td>91.8 ± 3.3</td>
+<td>83.4 ± 3.2</td>
+<td>+8.4</td>
+<td>0.011</td>
+<td>[2.8, 14.0]</td>
+<td>0.12</td>
+<td>0.043</td>
+</tr>
+<tr>
+<td>All</td>
+<td>85.6 ± 3.9</td>
+<td>54.5 ± 3.6</td>
+<td>+31.1</td>
+<td>2×10⁻⁵</td>
+<td>[24.6, 37.6]</td>
+<td>0.001</td>
+<td>1×10⁻⁴</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>해석: 전체 과제와 연속 Grasp+Insert의 차이는 sd 해석에서도 SEM 해석에서도 유의하다. 시드 4개라 검정력이 낮아서, SEM 해석에서 95% 구간의 하한은 18.1 pp다.</li>
+<li>단계별 oracle 값은 차이가 검출되지 않는다. 초록의 &quot;leaving per-subtask success unchanged&quot;는 &quot;검출되지 않았다&quot;로 읽는 것이 맞다.</li>
+<li>기준선끼리: π0 end-to-end 54.9 ± 5.3 대 잔차 54.5 ± 3.6은 차이가 없다(p = 0.91). 잔차 RL이 end-to-end 대비 이득이 없다는 뜻이다. chained(41.4)보다는 13.1 pp 높다(p = 0.002).</li>
+<li><strong>단위.</strong> 기여 3의 &quot;+31.1%&quot;와 Sec. VII-B의 &quot;over 30%&quot;는 절대 차이 31.1 %p다. 상대 증가율은 57.1%다(85.6/54.5 − 1). 연속 Grasp+Insert는 31.8 %p, 상대 57.3%다.</li>
+</ul>
+<h3>1.2 이항 근거: Wilson, Fisher, CMH</h3>
+<ul>
+<li>512 에피소드를 시드 4개에 나눈 경우(시드당 128)와 시드당 512(총 2,048)를 나눠 보았다. 이항 표준편차의 기대치는 다음과 같다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>시드당 128 기대 sd</th>
+<th>시드당 512 기대 sd</th>
+<th>관측 sd</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>foresight (85.6)</td>
+<td>3.1</td>
+<td>1.6</td>
+<td>3.9</td>
+</tr>
+<tr>
+<td>residual (54.5)</td>
+<td>4.4</td>
+<td>2.2</td>
+<td>3.6</td>
+</tr>
+<tr>
+<td>π0 end-to-end (54.9)</td>
+<td>4.4</td>
+<td>2.2</td>
+<td>5.3</td>
+</tr>
+</tbody>
+</table>
+<p>관측 sd는 &quot;시드당 128&quot;의 이항 기대와 비슷하다. 그렇지만 시드 간 변동이 더 있을 수 있으므로 어느 쪽인지 단정할 수 없다. 논문에 &quot;512&quot;의 의미를 물어야 한다.</p>
+<ul>
+<li><strong>Wilson 95%:</strong> 시드당 128(총 512)일 때 foresight [82.2, 88.3], residual [50.2, 58.8]. 총 2,048이면 [84.0, 87.1], [52.3, 56.6].</li>
+<li><strong>Fisher(pooled):</strong> 총 512로 세면 p ≈ 5×10⁻²⁸, 2,048로 세면 p ≈ 3×10⁻¹⁰⁸. 그러나 시드 구조를 무시한 의사복제(pseudo-replication)라 근거로 쓰면 안 된다. 시드 단위 Welch(1.1)가 맞는 검정이다.</li>
+<li><strong>CMH / Mantel-Haenszel:</strong> 시드별 2×2 표(성공·실패 횟수)가 없어서 계산할 수 없다. 논문에 시드별 성공 횟수를 요청해야 한다.</li>
+</ul>
+<h3>1.3 Table I: 예측기 정확도</h3>
+<ul>
+<li>검정 세트 크기가 없다. 80/10/10 분할에서 10%는 2,560의 10% = 256이므로 이 값을 가정하고, 512를 민감도로 봤다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>경계</th>
+<th>정확도 (Wilson 95%, n=256)</th>
+<th>다수 기준 (Wilson 95%)</th>
+<th>차이</th>
+<th>근사 z, p (n=256)</th>
+<th>근사 z, p (n=512)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grasp→Insert</td>
+<td>86.2 [81.6, 90.0]</td>
+<td>73.9 [68.1, 78.8]</td>
+<td>+12.3 pp</td>
+<td>3.5, 4×10⁻⁴</td>
+<td>5.0, 6×10⁻⁷</td>
+</tr>
+<tr>
+<td>Insert→Rotate</td>
+<td>93.9 [90.1, 96.1]</td>
+<td>90.4 [86.0, 93.3]</td>
+<td>+3.5 pp</td>
+<td>1.5, 0.14</td>
+<td>2.1, 0.037</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>두 비율은 같은 샘플을 쓰므로 독립 근사는 과대 추정일 수 있다. 그래도 방향은 분명하다. <strong>Grasp→Insert 예측기는 다수 기준을 뚜렷이 넘고, Insert→Rotate 예측기(회전 단계 보상에 쓰이는 쪽)는 검정 세트가 256이면 유의하지 않다.</strong> 논문이 &quot;both predictors exceed their respective baselines&quot;라고 쓴 것은 점 추정으로는 맞지만 두 번째는 약하다.</li>
+<li>정확도는 임계 0.5의 지표다. 보정(ECE)이나 AUC, 로그우도 값은 없다. 보상은 연속값 p를 쓰므로 보정이 중요하다.</li>
+</ul>
+<h3>1.4 Table III</h3>
+<ul>
+<li>같은 예측기로 잰 점수라 독립 증거가 아니다(01 §6-4). 표준오차도 없다. 값 자체의 차이(0.32 → 0.73)는 크지만 시드 변동 정보가 없어서 유의성을 판단할 수 없다.</li>
+</ul>
+<h2>2. 유도</h2>
+<h3>2.1 foresight 목적은 전역 성공 확률이다 (조건: 종료 시점에 한 번 보상)</h3>
+<p>단계 k가 처음 성공하는 시점을 τ, 그때의 상태를 s_τ라 하자. 하류 정책 π_{k+1:K}가 고정되어 있고 환경이 마르코프이면, 전역 성공 G의 조건부 기대는 다음과 같다.</p>
+<p>E[G | F_τ] = 1{τ &lt; ∞} · V_{k+1:K}(s_τ)</p>
+<p>따라서 E[G] = E[1{τ&lt;∞} V_{k+1:K}(s_τ)]이다. 식 4가 이것과 같으려면 보상이 τ에서 한 번만 주어져야 한다(γ = 1). 식 4와 식 9는 β_k(s_{t+1})를 <strong>매 스텝</strong> 곱한다. 성공 상태가 여러 스텝 유지되면 V가 그만큼 여러 번 더해져 이 등식이 깨진다. 같은 문제가 상수 보상 기준선에도 있다(성공 유지 시간 보상). 논문은 종료 조건을 기재하지 않았다(01 §6-1).</p>
+<h3>2.2 곱셈 보상과 PBRS</h3>
+<ul>
+<li><strong>PBRS (Ng, Harada, Russell 1999; 논문 미인용, 외부 지식):</strong> 보상에 F(s,s') = γΦ(s') − Φ(s)를 더하면, 모든 경로의 할인 합이 R − Φ(s_0) (종료 Φ = 0)로 변한다. 정책 순위가 바뀌지 않는다. 이 성질은 Φ의 값이 정확하지 않아도 성립한다.</li>
+<li><strong>곱셈 보상:</strong> x_k · V̂(a_k)는 그런 차분 형태가 아니다. 목적함수 자체를 바꾼다. 두 경우로 나눠 보면 다음과 같다.
+<ul>
+<li>V̂ = V (정확): 단계 k의 목적이 E[x_k V(a_k)] = E[1{τ&lt;∞}V(s_τ)] = 전역 성공 확률이 된다(2.1). 최적 정책 보존이 전역 목적 기준으로 성립한다.</li>
+<li>V̂ ≠ V: 단계 k의 최적이 argmax E[x_k V̂(a_k)]로 옮겨 간다. 보존이 깨진다. 이것이 보상 해킹의 메커니즘이다(toy §5.1의 악용 행).</li>
+</ul>
+</li>
+<li>결론: 곱셈 보상은 &quot;모양을 바꾸는 shaping&quot;이 아니라 &quot;전역 목적을 단계별로 분해하는 방식&quot;이다. 보존 여부는 V의 정확도에 달려 있다. 논문은 이 조건을 쓰지 않았다.</li>
+</ul>
+<h3>2.3 foresight 곱셈 = 전역 희소 보상의 조건부 기대</h3>
+<p>2.1의 등식에서 단계 k의 기대 기울기는 다음과 같다. 하류가 고정되면</p>
+<p>E[∇log π_k(a_k) · R] = E[∇log π_k(a_k) · x_k V(a_k)]</p>
+<p>따라서 <strong>정확한 V에서 곱셈 foresight 보상은 &quot;하류까지 굴린 전역 희소 보상&quot;의 기대 기울기와 같다.</strong> 차이는 분산뿐이다. foresight는 V를 한 번에 주고, 전역 희소 보상은 하류 롤아웃 한 번으로 주므로 분산이 크다. 논문 Sec. V-B가 &quot;온라인 MC는 불편하지만 분산이 크다&quot;고 쓴 것과 맞는다. 예측기는 이 기대값을 학습된 함수로 바꾸는 장치로 볼 수 있다.
+toy에서 확인: 정확한 V로 단계 0의 기대 기울기 차이의 최댓값은 3.5×10⁻¹⁷이다(<code>_check_foresight_equals_sparse_expected_grad</code>).</p>
+<h3>2.4 1단계 근사 (식 6)</h3>
+<p>V_{k+1:K}(s) − V_{k+1}(s)는 단계 k+1 성공 이후의 성공 확률이 상태 s에 따라 달라지는 정도다. 이것이 0이면 근사가 정확하다. 논문 조건 (b)는 &quot;k+2 이후 성공률이 k+1 성공에 조건부로 일정&quot;이다. Table II로 간접 점검하면, 잔차 정책의 연속 Insert+Rotate(83.4)는 단계 Insert oracle(92.2)보다 낮으므로 Insert 이후 Rotate 성공이 일정하지 않다는 신호다. 다만 oracle 초기화와 연속 실행은 초기 분포가 달라서 직접 비교는 불완전하다(§4). Grasp 경계 예측기는 이 근사에 기대므로, 이 오차가 큰 경계일수록 foresight 보상의 의미가 흐려진다. 논문은 이 근사 오차를 측정하지 않았다.</p>
+<h3>2.5 이항 NLL과 레이블 잡음 (식 8)</h3>
+<p>레이블 y_i = κ_i/K_rep에서 기울기는 Σ_i (κ_i/K − p_φ(o_i)) ∇logit이며, 이는 soft-label 교차엔트로피와 같다. 레이블 분산은 p(1−p)/K_rep이다. K_rep = 5이면 p = 0.5에서 표준편차가 0.22다. 이 잡음은 N이 커지면 평균으로 줄지만, 상태마다 다른 p를 K_rep = 5로 추정하는 것이므로 <strong>표본 N(2,560)보다 K_rep이 개별 상태의 정확도를 제한한다.</strong> 논문은 K_rep 민감도를 보고하지 않았다.</p>
+<h3>2.6 계산 비용 (추정, 가정 명시)</h3>
+<p>레이블 하나에 하류 롤아웃 K_rep = 5, 최대 200스텝이므로 경계당 최대 약 2,560 × 5 × 200 ≈ 2.6×10⁶ 스텝이다. 시뮬레이션 스텝 수는 논문에 기재가 없어 실제 비용은 알 수 없다. 예측기 학습은 5분 미만(Sec. VI-C)이다.</p>
+<p><img src="figures/product_check.png" alt="product_check.png" /></p>
+<p class="cap">직접 계산: 단계 oracle 성공의 곱과 연속 성공(보고값)의 비교. 세 방법.</p>
+<h2>3. 곱 검사 (Table II 내부 일관성)</h2>
+<p>독립 가정이면 연속 성공 ≈ 단계 oracle 성공의 곱이다. 논문의 oracle 값으로 계산했다.</p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>G×I 곱</th>
+<th>G+I 보고</th>
+<th>I×R 곱</th>
+<th>I+R 보고</th>
+<th>G×I×R 곱</th>
+<th>All 보고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>π0 chained</td>
+<td>39.8</td>
+<td>37.1</td>
+<td>42.7</td>
+<td>61.5</td>
+<td>37.2</td>
+<td>41.4</td>
+</tr>
+<tr>
+<td>잔차</td>
+<td>90.7</td>
+<td>55.5</td>
+<td>91.5</td>
+<td>83.4</td>
+<td>90.0</td>
+<td>54.5</td>
+</tr>
+<tr>
+<td>foresight</td>
+<td>87.5</td>
+<td>87.3</td>
+<td>91.2</td>
+<td>91.8</td>
+<td>87.3</td>
+<td>85.6</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>foresight는 곱과 거의 맞는다.</strong> 핸드오프 실패가 사라지면 연속 성공이 단계 성공의 곱으로 수렴한다는 논문의 주장과 일치한다.</li>
+<li><strong>잔차는 곱보다 36 pp 낮다(All 54.5 대 90.0).</strong> 단계 성공은 높지만 연결에서 손실이 난다는 뜻이다. 이것이 논문의 핵심 현상이다.</li>
+<li><strong>반례.</strong> chained π0의 I+R은 곱(42.7)보다 크다(61.5). oracle 초기화 Insert 값(45.7)이 연속 실행의 실제 삽입 분포와 달라서 생긴 차이로 보인다. 즉 이 검사는 발견적 도구일 뿐 결정적 증거가 아니다.</li>
+</ul>
+<h2>4. toy 검증 (shaping_toy.py)</h2>
+<h3>4.1 설정</h3>
+<ul>
+<li>3단계, 행동 4개, 정책은 단계별 softmax 표(상태 = 직전 행동).</li>
+<li>기하 성공 SIG = [[0.98, 0.92, 0.85, 0.75], [0.95, 0.90, 0.85, 0.70], [0.99, 0.97, 0.90, 0.80]], 핸드오프 품질 Q = [[0.35, 0.60, 0.80, 0.95], [0.40, 0.65, 0.85, 0.97]]. 행동 0은 기하 성공이 가장 높고 핸드오프가 가장 나쁘다(논문 Fig. 3의 &quot;그럴듯하지만 불안정한 잡기&quot;에 대응).</li>
+<li>단계 k+1의 성공 = SIG[k+1][b] × Q[k][h]. 실패하면 종료. 경로 열거 148개.</li>
+<li>참 최적: 행동 (3, 2, 0), 전체 성공 <strong>0.5096</strong>. 상수 보상 기준선(각 단계 기하 성공 최대): 0.129.</li>
+<li>단계별 학습(Alg. 1 형식): 기대 기울기를 열거로 정확히 계산(표본 잡음 없음), 20 초기값. 끝까지 학습(joint): 배치 32 에피소드 REINFORCE, 1000 업데이트, 20 초기값.</li>
+<li>추정기 오차 모형: 표본 잡음(Binomial, n = 3,200), 편향 ±0.15, 과대확신(logit × 3), 악용(행동 0의 V̂를 0.99로), 상수(평균), 섞임(무작위 순열).</li>
+</ul>
+<p><img src="figures/toy_staged.png" alt="toy_staged.png" /></p>
+<p class="cap">직접 계산(toy): 단계별 학습 곡선(왼쪽)과 추정기 오차별 최종 참 성공률(오른쪽). 점선은 최적 0.510.</p>
+<h3>4.2 결과 (최종 참 성공률, 20 초기값 평균 ± sd)</h3>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>최종</th>
+<th>최적과의 차</th>
+<th>최적의 95%에 도달</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>상수 보상 (단계별 기준선)</td>
+<td>0.131 ± 0.000</td>
+<td>−0.378</td>
+<td>0/20</td>
+</tr>
+<tr>
+<td>전역 희소 보상 (단계별, 하류 고정)</td>
+<td>0.507 ± 0.000</td>
+<td>−0.002</td>
+<td>20/20</td>
+</tr>
+<tr>
+<td>foresight, V 정확</td>
+<td>0.507 ± 0.000</td>
+<td>−0.002</td>
+<td>20/20</td>
+</tr>
+<tr>
+<td>foresight, 표본 잡음</td>
+<td>0.507 ± 0.000</td>
+<td>−0.002</td>
+<td>20/20</td>
+</tr>
+<tr>
+<td>foresight, 편향 +0.15 / −0.15</td>
+<td>0.507 / 0.507</td>
+<td>−0.002 / −0.003</td>
+<td>20/20</td>
+</tr>
+<tr>
+<td>foresight, 과대확신 ×3</td>
+<td>0.507</td>
+<td>−0.002</td>
+<td>20/20</td>
+</tr>
+<tr>
+<td>foresight, 상수(평균) 보상</td>
+<td>0.133 ± 0.000</td>
+<td>−0.376</td>
+<td>0/20</td>
+</tr>
+<tr>
+<td>foresight, 섞인 V̂</td>
+<td>0.331 ± 0.154</td>
+<td>−0.179</td>
+<td>5/20</td>
+</tr>
+<tr>
+<td><strong>foresight, 악용 오차</strong></td>
+<td><strong>0.129 ± 0.000</strong></td>
+<td><strong>−0.381</strong></td>
+<td>0/20</td>
+</tr>
+<tr>
+<td>끝까지 희소 보상 (표본)</td>
+<td>0.495 ± 0.014</td>
+<td>−0.014</td>
+<td>13/20 (중앙값 356 업데이트)</td>
+</tr>
+<tr>
+<td>끝까지 PBRS, Φ 정확 (표본)</td>
+<td>0.503 ± 0.008</td>
+<td>−0.006</td>
+<td>18/20 (중앙값 267)</td>
+</tr>
+<tr>
+<td>끝까지 PBRS, Φ +0.15</td>
+<td>0.503 ± 0.008</td>
+<td>−0.007</td>
+<td>18/20 (중앙값 277)</td>
+</tr>
+<tr>
+<td>끝까지 PBRS, Φ −0.15</td>
+<td>0.506 ± 0.002</td>
+<td>−0.004</td>
+<td>20/20 (중앙값 300)</td>
+</tr>
+<tr>
+<td>끝까지 PBRS, Φ 악용</td>
+<td>0.501 ± 0.009</td>
+<td>−0.008</td>
+<td>17/20 (중앙값 275)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>단계별 학습 800 반복은 완전히 수렴하지 않는다(정확한 V에서 0.507 대 최적 0.510). 최적 정책은 같다.</li>
+<li><strong>검증 항목(모두 통과).</strong>
+<ul>
+<li>정확한 V에서 foresight와 전역 희소의 기대 기울기 차이: 3.5×10⁻¹⁷ (§2.3)</li>
+<li>PBRS 반환 합이 모든 경로에서 R − Φ_0와 같음: 편차 0 (telescoping)</li>
+<li>정확한 기대 기울기에서 PBRS 항 추가가 기울기를 바꾸지 않음: 4.9×10⁻¹⁷. 상태만의 함수는 기준선(baseline)과 같기 때문이다. 즉 <strong>정확한 기대 기울기에서 PBRS는 아무것도 바꾸지 않는다.</strong> 표본 기울기에서만 학습 속도가 달라진다(끝까지 학습 행: 중앙값 356 대 267).</li>
+</ul>
+</li>
+</ul>
+<p><img src="figures/toy_joint.png" alt="toy_joint.png" /></p>
+<p class="cap">직접 계산(toy): 끝까지 학습(희소 대 PBRS)의 곡선과 최종 성공률. PBRS는 Φ 오차에서도 최종 정책을 지킨다.</p>
+<h3>4.3 해석</h3>
+<ol>
+<li><strong>곱셈 foresight의 이득은 최적을 바꾸지 않는다.</strong> 정확한 V에서 전역 희소 보상과 같은 해로 간다. 이 toy에서 이득은 &quot;단계 분해로 얻는 분산 감소&quot;뿐이다(§2.3). 상수 보상 기준선과의 차이는 V의 상태 의존성에서 온다. 평균 상수 V̂(같은 척도)로는 상수 기준선과 같아진다(0.133). 척도 효과는 없다.</li>
+<li><strong>보상 해킹이 실제로 일어난다.</strong> 불안정한 잡기(행동 0)의 V̂만 0.99로 올려도 단계 0 정책이 그쪽으로 몰리고, 참 성공률은 상수 기준선 수준(0.129)으로 떨어진다. 이 사례는 &quot;예측기가 정책이 방문하는 상태에서 틀리면 정책이 그 오차를 찾아낸다&quot;는 위험을 보여준다. 논문의 잔차 정책은 손목 카메라만 보고 예측기 입력은 두 카메라다. 정책이 예측기가 틀린 영역으로 밀리는지는 측정되지 않았다.</li>
+<li><strong>무작위 섞임은 불안정하다.</strong> 예측기가 상태를 잘못 연결하면(섞임) 결과가 0.33 ± 0.15로 흩어진다. Table III의 점수 변화가 예측기의 &quot;국소적 정확도&quot;에 의존한다는 논문 주장과 맞는 방향이다.</li>
+<li><strong>PBRS(Φ 오차 포함)는 최종 정책을 바꾸지 않는다.</strong> 악용 Φ에서도 최적 근처(0.501)로 간다. 속도만 달라진다. 이 toy에서 곱셈 방식과 PBRS 방식은 <strong>오차가 있을 때 정반대로 행동한다.</strong> 논문이 PBRS 대신 곱셈을 택한 이유는 기록되어 있지 않다. 이 비교는 논문에 없다.</li>
+<li>toy는 표 형식(tabular)이고 이미지 예측기가 없다. 그래서 &quot;예측기가 어디서 틀리는가&quot;의 실제 분포는 알 수 없다. 이 결과는 메커니즘의 가능성을 보여줄 뿐 논문 수치를 재현하지 않는다.</li>
+</ol>
+<h2>5. 논문 수치와 toy의 연결</h2>
+<ul>
+<li>논문 Table II의 foresight 연속 성공(Grasp+Insert 87.3)은 toy의 &quot;전역 희소 보상&quot; 해에 가깝다(곱 검사 §3에서 foresight 곱 87.5). 즉 논문의 결과는 &quot;예측기가 전역 희소 보상의 기대를 잘 근사했다&quot;로 설명할 수 있다. 이는 예측기 오차가 작을 때의 결과다.</li>
+<li>논문에 없는 대조군: (i) 상수 평균 V̂, (ii) 섞인 V̂, (iii) 악용 V̂, (iv) PBRS, (v) 온라인 MC. 이 중 (i)–(iii)은 예측기가 실제로 &quot;무엇을&quot; 학습했는지 확인하는 최소 대조다.</li>
+</ul>
+<h2>6. 빈칸</h2>
+<ul>
+<li>논문에서 값을 얻을 수 없었던 것: 검정 세트 크기, 시드당 에피소드, 예측기의 정확도 대 보정, K_rep 민감도, N 민감도, α 민감도, PPO 설정, 시뮬레이션 스텝 수, 시드별 원자료.</li>
+<li>이 세션에서 할 수 없었던 것: 원자료 획득(공개되지 않음), Isaac Gym 실행(CUDA GPU 필요, 이 맥 불가).</li>
+</ul>
+</section>
+<section class="chapter"><h1>04. 주장 검증과 구현 가능성</h1>
+<ul>
+<li><strong>대상:</strong> arXiv:2607.16506v1. 원문 <code>paper/paper.pdf</code>.</li>
+<li><strong>코드:</strong> 공식 코드를 찾지 못했습니다. 저자 계정 저장소 <code>JaySparrow/foresight-residual-rl</code>은 Academic Project Page Template 그대로이고 플레이스홀더만 남아 있습니다(코드, 학습 스크립트, 설정 없음). 그래서 논문 ↔ 코드 대조(D 항목) 대신 다음을 했습니다.
+<ul>
+<li>표 재계산과 유의성, 곱 검사: <code>analysis/table_check.py</code> (<code>03</code> §1, §3)</li>
+<li>대조 toy(3단계 체인 MDP, 곱셈 대 PBRS 대 희소, 추정기 오차): <code>analysis/shaping_toy.py</code> (<code>03</code> §2–4)</li>
+<li>원문 텍스트·표·알고리즘 대조: <code>01</code></li>
+</ul>
+</li>
+</ul>
+<h2>1. 주장별 판정</h2>
+<p>판정 기호: ✅ 맞음(보고값·산술 일치), ⚠️ 맞지만 조건이나 표현에 문제, ❌ 틀리거나 근거 없음, ❓ 검증할 수 없음(정보 부족), ℹ️ 정보.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장 (출처)</th>
+<th>점검</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>3단계 나사 조립 전체 성공 85.6%, 잔차 RL 54.5% (초록, Table II)</td>
+<td>보고값과 일치. 시드 4개, sd 3.9 / 3.6, Welch p ≈ 2×10⁻⁵ (sd 해석)</td>
+<td>✅ (시드 정의 <code>03</code> §1.2)</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>&quot;VLA baselines&quot;보다 높다 (초록)</td>
+<td>π0 end-to-end 54.9 ± 5.3 대비 +30.7 pp, Welch t ≈ 9.3(근사)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>단계별 성공은 &quot;변하지 않는다&quot; (초록)</td>
+<td>oracle 값 차이 Grasp −2.7, Insert −0.8, Rotate +0.6. 모두 p &gt; 0.15</td>
+<td>⚠️ &quot;차이가 검출되지 않음&quot;이 정확 (<code>03</code> §1.1)</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>&quot;+31.1%&quot; 개선 (기여 3)</td>
+<td>절대 차이 31.1 %p. 상대 증가 57%</td>
+<td>⚠️ 단위 표기</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>상수 보상 대비 &quot;over 30%&quot; (VII-B)</td>
+<td>31.1 %p</td>
+<td>⚠️ 같은 표기 문제</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>잔차 RL은 end-to-end와 차이가 없다 (VII-B)</td>
+<td>54.5 대 54.9, p = 0.91</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>단계 Insert 성공이 &quot;두 배&quot; (45.7 → 92.2)</td>
+<td>2.02배</td>
+<td>✅ 단, 같은 과제 oracle 값 비교</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>Grasp→Insert 경계에서 연속 성공 55.5 → 87.3 (+31.8%) (VII-B)</td>
+<td>값 일치. +31.8 %p, 상대 57%</td>
+<td>✅ / ⚠️ 단위</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>chained π0(41.4)가 end-to-end(54.9)보다 낮다 (VII-B)</td>
+<td>Welch t ≈ −4.3, p ≈ 0.008</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>예측기 정확도가 두 경계 모두 다수 기준을 넘는다 (Table I)</td>
+<td>Grasp→Insert: 86.2 대 73.9 (n=256 가정 z ≈ 3.5). Insert→Rotate: 93.9 대 90.4 (z ≈ 1.5, p ≈ 0.14)</td>
+<td>⚠️ 두 번째 경계는 검정 세트가 256이면 유의하지 않음 (<code>03</code> §1.3)</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>Grasp→Insert의 정확도 격차가 &quot;종료 상태를 구분한다&quot;는 증거 (VII-A)</td>
+<td>정확도 격차는 구분 능력의 증거가 약함. AUC, 보정 없음</td>
+<td>❌ 근거 부족</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>예측기는 연속 곱셈기이고 임계 정확도는 보수적 대리값 (VII-A)</td>
+<td>맞는 말이나 보정(ECE)·로그우도 없이 연속값의 품질을 말할 수 없음</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>상수 보상 잔차는 종료 상태 점수를 낮춘다(0.64 → 0.32; 0.97 → 0.86) (Table III)</td>
+<td>값 일치. 같은 예측기로 잰 점수라 독립 증거가 아님</td>
+<td>⚠️ 순환 (<code>01</code> §6-4)</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>foresight 정책이 Grasp 종료 점수를 가장 높인다(0.73) (Table III)</td>
+<td>값 일치. 같은 조건의 순환</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>foresight 정책이 Insert 종료 품질을 잔차보다 더 보존(0.91 대 0.86) (VII-C)</td>
+<td>값 일치. 기본 π0(0.97)보다는 낮음</td>
+<td>✅ (잔차와의 비교만)</td>
+</tr>
+<tr>
+<td>C16</td>
+<td>잔차 정책이 종료 상태 분포를 학습 중에 크게 옮기지 않는다 (V-C, α = 0.1)</td>
+<td>측정 없음. 분포 이동 지표 없음</td>
+<td>❓</td>
+</tr>
+<tr>
+<td>C17</td>
+<td>예측기는 기준 정책 분포에서 학습하므로 잔차 정책의 방문 상태에 적용 가능 (V-C)</td>
+<td>이동 측정 없음. toy §4에서 예측기 오차가 있을 때 보상 해킹이 생김</td>
+<td>❓ (메커니즘 위험)</td>
+</tr>
+<tr>
+<td>C18</td>
+<td>온라인 MC 가치는 불편하지만 분산이 크다 (V-B)</td>
+<td>정확한 V에서 foresight 보상의 기대 기울기 = 전역 희소 보상의 기대 기울기(차이 3.5×10⁻¹⁷). 분산 주장은 이론상 맞음</td>
+<td>✅ (<code>03</code> §2.3)</td>
+</tr>
+<tr>
+<td>C19</td>
+<td>곱셈 foresight 보상은 &quot;국소 수정&quot;이고 최적 정책을 바꾸지 않는다 (IV-B, 기여 1)</td>
+<td>정확한 V에서만 전역 목적과 같다. V 오차가 있으면 목적이 바뀐다. toy 악용 행에서 0.507 → 0.129</td>
+<td>❌ 일반적 보존은 성립하지 않음 (<code>03</code> §2.2, §4)</td>
+</tr>
+<tr>
+<td>C20</td>
+<td>식 6의 1단계 근사는 (a) 마지막 다음 단계 또는 (b) 상수 조건에서 정확 (V-B)</td>
+<td>(a)는 Insert→Rotate 예측기에 해당. Grasp→Insert는 근사. (b) 확인 불가</td>
+<td>⚠️ 근사 오차 측정 없음</td>
+</tr>
+<tr>
+<td>C21</td>
+<td>이항 NLL은 &quot;보정된 확률&quot;을 준다 (V-C)</td>
+<td>적절한 점수규칙이라 표현력이 충분하면 맞음. 보정 검사 없음</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td>C22</td>
+<td>예측기 학습은 5분 미만 (VI-C)</td>
+<td>자료 크기(2,560×2 쌍)는 작음. 하드웨어 기재 없음</td>
+<td>❓</td>
+</tr>
+<tr>
+<td>C23</td>
+<td>평가에서 예측기는 쓰지 않는다 (VII-B)</td>
+<td>설계 진술. 평가 롤아웃은 보상과 독립</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C24</td>
+<td>정성 사례(Fig. 3)는 두 방법의 차이를 보여준다</td>
+<td>단일 사례. 통계 없음. 시작 상태와 과정은 맞음</td>
+<td>⚠️ 일화</td>
+</tr>
+<tr>
+<td>C25</td>
+<td>기준 π0는 단계별 미세조정, end-to-end π0 학습 데이터는 기재 없음 (VI-B)</td>
+<td>end-to-end 기준선이 같은 데이터를 쓰는지 알 수 없음</td>
+<td>❓</td>
+</tr>
+<tr>
+<td>C26</td>
+<td>&quot;512 episodes across 4 random seeds&quot; (VII-B)</td>
+<td>시드당 512인지 총 512인지 불명. 두 해석에 따라 검정력이 다름</td>
+<td>❓ (<code>03</code> §1.2)</td>
+</tr>
+<tr>
+<td>C27</td>
+<td>단계 길이 160/200/200, 최대 560 스텝, 20 Hz (VI-A)</td>
+<td>기재 값과 일치. 합 560은 맞음</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>C28</td>
+<td>예측기 학습 데이터 N = 2,560, K_rep = 5 (Alg. 2, VI-C)</td>
+<td>기재 값 확인. K_rep 민감도 없음</td>
+<td>✅ / ❓ (민감도)</td>
+</tr>
+<tr>
+<td>C29</td>
+<td>한계: 시뮬레이션만, 실물 비용이 장애 (VIII)</td>
+<td>맞는 한계 진술. 실물 비용 추정 근거 없음</td>
+<td>✅ / ℹ️</td>
+</tr>
+<tr>
+<td>C30</td>
+<td>방법이 &quot;최적 정책에 의해 국소 학습과 전역 성공을 정렬한다&quot; (기여 1)</td>
+<td>C18–C19와 같은 조건. 전역 목적과의 정렬은 V 정확도에 달림</td>
+<td>⚠️ 조건 생략</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 재현에 필요한데 논문에 없는 정보</h2>
+<ol>
+<li>공식 코드, 설정 파일, 학습 로그(없음. 저장소는 템플릿).</li>
+<li>시드 정의: 4개 시드 각각의 에피소드 수, 시드별 성공 횟수(CMH 계산용).</li>
+<li>에피소드 종료 조건: 단계 성공 시 종료하는지, 성공 상태가 유지되는 동안 보상이 계속 들어가는지(식 4, 9의 해석).</li>
+<li>예측기 레이블의 하류 정책: 기준 π_{k+1}인지, base + residual인지(Alg. 2와 VI-C가 다름).</li>
+<li>예측기 검정 세트 크기, 학습률, 에포크 외 설정, 입력 전처리, LoRA를 쓰는 백본 층 범위.</li>
+<li>예측기 보정(ECE, 신뢰도 도표), AUC, 로그우도.</li>
+<li>N과 K_rep, α의 민감도 표.</li>
+<li>PPO 설정: horizon, 학습률, 엔트로피, 보상 정규화, GAE, 미니배치, 환경 스텝 총수.</li>
+<li>π0 미세조정 설정(학습률, 단계 수, 데이터 혼합)과 end-to-end 기준선의 학습 데이터.</li>
+<li>온라인 MC, PBRS, critic 재사용, 상수 평균 보상, 섞인 예측기 등 대조군 결과(없음).</li>
+<li>독립 평가: 정책이 만든 종료 상태에서 새로 굴린 롤아웃으로 측정한 전환 성공률(없음).</li>
+<li>시뮬레이션 자산: 나사·너트 5개 크기 메시, 전문가 상태기계 코드, [28] 삽입 전문가 가중치.</li>
+<li>실행 하드웨어와 시간(GPU 종류, 학습 시간, 샘플 수).</li>
+</ol>
+<h2>3. 권리 표기</h2>
+<ul>
+<li><strong>arXiv 라이선스:</strong> abs 페이지의 license 링크는 <code>arxiv.org/licenses/nonexclusive-distrib/1.0/</code>(CC BY 아님). 2026-11-10 확인.</li>
+<li><strong>PDF 1쪽:</strong> 저작권 문구 없음. 1쪽 왼쪽 가장자리에 arXiv 스탬프(&quot;arXiv:2607.16506v1 [cs.RO] 17 Jul 2026&quot;)만 있다. 본문 전체에서 &quot;©&quot;, &quot;Copyright&quot;, &quot;Personal use&quot;, &quot;permission&quot; 문구를 찾지 못했다(pdftotext 검색). 인용 문헌 목록의 &quot;IEEE Robotics and Automation Letters&quot;는 참고문헌 항목이다.</li>
+<li><strong>프로젝트 페이지:</strong> 404라 라이선스 표기 없음.</li>
+<li><strong>결론:</strong> 논문 비CC BY이므로 논문 그림과 표는 <strong>개인용 리포트와 PPT에만</strong> 넣는다. 게시본(<code>publish/</code>, <code>report_public.pdf</code>)은 우리가 직접 그린 그래프와 논문 수치 인용(출처 표기)만 쓴다. 논문에서 가져온 그림은 <code>report/figures/paper_*.png</code>(개인용)이며, 공개 산출물에 들어가면 안 된다.</li>
+</ul>
+<h2>4. 구현할 수 있는지</h2>
+<h3>4.1 공식 재현</h3>
+<p><strong>불가능합니다.</strong> 코드, 설정, 시뮬레이션 자산(나사·너트 메시, 전문가), 학습 스크립트가 모두 공개되지 않았습니다. 저장소에는 템플릿만 있습니다. 재현에 필요한 빈칸은 §2의 13개 항목이고, 그중 시드 정의와 종료 조건, 예측기 레이블 정책은 결과 해석을 바꿀 수 있습니다.</p>
+<h3>4.2 이 맥(Apple M4 Pro, 약 24 GiB 통합 메모리, MPS, CUDA 없음, torch 미설치)에서</h3>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>표 재계산, 유의성, 곱 검사</td>
+<td>✅ 완료 (<code>table_check.py</code>, 수 초)</td>
+</tr>
+<tr>
+<td>3단계 체인 toy (곱셈 대 PBRS 대 희소, 추정기 오차)</td>
+<td>✅ 완료 (<code>shaping_toy.py</code>, 약 70초, 1스레드)</td>
+</tr>
+<tr>
+<td>Isaac Gym 나사 조립 환경</td>
+<td>❌ Isaac Gym은 NVIDIA CUDA GPU가 필요합니다(외부 지식, 이 세션에서 설치 여부 확인 안 함). 이 맥에서는 실행 불가</td>
+</tr>
+<tr>
+<td>π0 미세조정(3개 단계 정책)</td>
+<td>❌ torch 미설치. 3B급 모델 학습은 GPU 필요. MPS는 미확인</td>
+</tr>
+<tr>
+<td>DINOv2 + LoRA 예측기 학습</td>
+<td>❌ 레이블 데이터가 시뮬레이션에서 나와야 함. 공개 데이터 없음. 설치와 다운로드 금지 규칙</td>
+</tr>
+<tr>
+<td>잔차 PPO</td>
+<td>❌ 시뮬레이션 필요</td>
+</tr>
+<tr>
+<td>소형 대체 실험(같은 구조의 과제를 CPU 시뮬레이터에서)</td>
+<td>❌ 패키지 설치 필요(이번 작업 제약). toy 수준까지만 가능</td>
+</tr>
+</tbody>
+</table>
+<h3>4.3 아이디어만 다시 구현</h3>
+<p><strong>노력은 중간에서 큼입니다.</strong></p>
+<ul>
+<li>예측기와 곱셈 보상 자체(식 7–9): 짧습니다(수십에서 수백 줄). 어려운 부분은 레이블 생성과 하류 롤아웃 관리입니다.</li>
+<li>필요한 큰 부품: (1) 나사 조립 시뮬레이션 환경(자산 제작, 2 mm 여유 맞추기), (2) 상태기계 전문가와 삽입 RL 전문가([28]), (3) π0 단계별 미세조정 3회(시연 2,560 × 3), (4) 잔차 PPO(128 환경 이상), (5) 예측기 레이블(경계당 2,560 × 5 롤아웃, 최대 200 스텝).</li>
+<li>장벽: (a) 시뮬레이션 자산과 전문가가 공개되지 않음, (b) π0 미세조정의 GPU 비용, (c) 예측기 정확도와 보정을 재는 기준이 없음(논문 자체가 측정하지 않음), (d) 시드 4개에서의 검정력 부족.</li>
+</ul>
+<h3>4.4 하드웨어 요구 (추정)</h3>
+<ul>
+<li>시뮬레이션: NVIDIA GPU 1장 이상(CUDA). 128 병렬 환경 기준 메모리 여유가 필요합니다(추정, 논문에 기재 없음).</li>
+<li>학습: π0 미세조정 3회와 PPO 여러 번. 대략 GPU 여러 장 또는 수일 단위 작업일 가능성이 큽니다(추정).</li>
+<li>이 맥은 toy와 재계산까지만 씁니다.</li>
+</ul>
+<h3>4.5 판정 요약</h3>
+<ul>
+<li><strong>공식 재현:</strong> 불가능 (코드 없음).</li>
+<li><strong>이 맥에서 실측:</strong> 불가 (CUDA 없음, GPU 재현 금지 규칙). toy까지만.</li>
+<li><strong>아이디어 재구현:</strong> 가능하나 노력이 큼 (시뮬레이션과 π0가 주 장벽).</li>
+<li><strong>가장 싼 검증 (GPU 필요):</strong> 예측기 보정과 AUC, 독립 평가, 상수 평균·섞인 예측기 대조. 이 셋이 논문의 핵심 주장(예측기가 쓸모 있다)을 직접 시험한다.</li>
+</ul>
+<h2>5. 구현 판정 한 줄</h2>
+<p>공식 코드가 없어 재현할 수 없고, 이 맥에서는 시뮬레이션과 π0 학습이 불가능하다. 아이디어(곱셈 보상과 예측기)는 구현이 짧지만, 시뮬레이션 자산과 예측기 검증 기준이 없어서 결과를 그대로 믿기는 어렵다.</p>
+</section>
+<section class="chapter"><h1>02. 선행연구와 관계</h1>
+<h2>1. 계보</h2>
+<ul>
+<li><strong>계층 강화학습의 완성 함수:</strong> Dietterich의 MAXQ [17]은 하위 과제 종료 후의 기대 반환(완성 함수)을 학습한다. 논문은 foresight 가치가 &quot;선형 과제 그래프에 제한된 MAXQ 완성 함수&quot;라고 말한다(Sec. II).</li>
+<li><strong>재보상 하위 과제:</strong> Sutton 외 [18]은 하위 과제의 누적 신호에 부모 과제 보상과 종료 보너스를 넣는다. 논문은 이를 같은 계열로 본다.</li>
+<li><strong>보상 기계:</strong> Toro Icarte 외 [19]는 단계 사이의 보상 구조를 명시한다.</li>
+<li><strong>스킬 연결과 초기 집합 정렬:</strong> T-STAR [12](종료 상태 적대 정규화), SCaR [13](양방향 정규화), Sequential Dexterity [14](전이 가능성 함수), Bagaria 외 [15,16](초기 집합 분류기), Lee 외 [23](전이 정책), Meehan 외 [24](옵션 적응). 논문은 이들을 &quot;분포 겹침이라는 대리 목적&quot;으로 묶는다(Sec. II).</li>
+<li><strong>VLA 잔차 RL:</strong> ResiP [7](확산 정책의 시점별 잔차), ResFiT [20](오프-정책 잔차 미세조정), PLD [21](π0에 probe-learn-distill). 논문은 이들이 개별 과제에만 작동한다고 본다.</li>
+<li><strong>옵션과 반-MDP:</strong> Sutton 외 [25](옵션 경계의 V_Ω), option-critic [26].</li>
+<li><strong>시연 학습 기반 단계 연결:</strong> MimicGen [10], Plan-SeqLearn [11].</li>
+</ul>
+<h2>2. 가까운 대안 (이 문서 작성자의 판단)</h2>
+<table>
+<thead>
+<tr>
+<th>연구</th>
+<th>관련 이유</th>
+<th>이 논문과의 차이</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MAXQ 완성 함수 [17]</td>
+<td>같은 양(하류 기대 반환)을 다룸</td>
+<td>TD로 함께 학습하므로 비정상성이 생기고, 고정 VLA 기반에서는 쓰기 어려움. 이 논문은 몬테카를로 오프라인 추정 후 예측기로 증류</td>
+</tr>
+<tr>
+<td>전역 희소 보상으로 단계 학습 (온라인 MC)</td>
+<td>저자들도 Sec. V-B에서 &quot;불편 추정&quot;이라고 씀</td>
+<td>분산이 크고 시뮬레이션 비용이 큼. 이 논문의 곱셈 보상은 온라인 MC의 기대값을 예측기로 대체한 것으로 볼 수 있음(03 §3)</td>
+</tr>
+<tr>
+<td>잠재 기반 보상 형성 (PBRS, Ng 외 1999)</td>
+<td>단계 경계 가치를 보상에 넣는 가장 표준적인 방법. 논문은 인용하지 않음</td>
+<td>덧셈 형태이며 최적 정책을 보존함. 곱셈 형태는 보존하지 않음(03 §2)</td>
+</tr>
+<tr>
+<td>하류 critic 재사용</td>
+<td>논문 Sec. V-B가 명시적으로 기각</td>
+<td>하류 정책의 초기 상태 분포에서 학습된 값이라 상류 종료 상태에 맞지 않음 (논문 주장, 검증 안 함)</td>
+</tr>
+<tr>
+<td>초기 집합 정렬 (T-STAR, SCaR 등)</td>
+<td>같은 문제(핸드오프 품질)</td>
+<td>분포 겹침 대리 목적. 성공 확률을 직접 보지 않음</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>폴더</th>
+<th>관계</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>thinkworld/</code> (arXiv:2610.37666)</td>
+<td>세계 모델의 미래 예측 일치를 보상으로 GRPO 학습</td>
+<td>보상이 모델 자신의 예측에 기대는 구조. 이 논문의 예측기 점수도 학습에 쓰인 같은 예측기로 평가된다는 점이 공통 위험(Goodhart). 그 연구에서는 RL 이득이 작고 설계에 민감하다는 결론을 얻었음</td>
+</tr>
+<tr>
+<td><code>dexpolicy/</code> (arXiv:2610.00360)</td>
+<td>학습 중 행동 잡음 σ 스케줄(PPO, GRPO, FPO 적용)</td>
+<td>잔차나 보상 형태보다는 RL 미세조정 설계. 학습 안정성 비교의 관점</td>
+</tr>
+<tr>
+<td><code>insertion_wm/</code> (arXiv:2609.28258, 분석 완료)</td>
+<td>잠재 세계 모델로 삽입 과제. 미지 객체 제로샷 56%</td>
+<td>삽입 과제의 다른 경로(모델 기반 계획). 이 논문은 모델 없이 단계 종료 상태의 가치만 예측</td>
+</tr>
+<tr>
+<td><code>pacevla/</code> (arXiv:2610.25961)</td>
+<td>행동 청크의 실행 속도</td>
+<td>보상이 아니라 실행 시간 축. 관련은 약함</td>
+</tr>
+<tr>
+<td><code>openwam/</code> (arXiv:2609.07398), <code>agentic_wam/</code> (arXiv:2610.30136)</td>
+<td>세계 행동 모델(WAM)</td>
+<td>예측 대상이 영상. 이 논문의 예측기는 단일 이미지에서 성공 확률을 본다</td>
+</tr>
+<tr>
+<td><code>chronospolicy/</code> (arXiv:2610.13929)</td>
+<td>관측·행동 시각 조건</td>
+<td>단계 경계 시간 정의와 연결될 수 있으나 직접 관계는 약함</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 저자의 선행 연구 (참고문헌 [28])</h2>
+<ul>
+<li>[28] Liu, Zhang, Chang, Boularias (2025), &quot;Failure forecasting boosts robustness of sim2real rhythmic insertion policies.&quot; 같은 저자 그룹의 전작으로 보인다. 논문 본문은 [28]을 &quot;상태 기반 RL 삽입 전문가&quot;의 출처로 쓴다(Sec. VI-B). 이 논문에서 실패 예측의 역할은 확인하지 못했다. 원문은 이 세션에서 받지 않았다.</li>
+</ul>
+<h2>5. GitHub와 프로젝트 페이지 (2026-11-10 확인)</h2>
+<p>프로젝트 페이지 <code>jaysparrow.github.io/foresight-residual-rl</code>는 HTTP 404다(GitHub Pages 미활성).</p>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>별</th>
+<th>최근 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>JaySparrow/foresight-residual-rl</code></td>
+<td>저자 계정의 저장소. 설명에 논문 제목과 &quot;(IROS 2026)&quot;. 내용은 <strong>Academic Project Page Template 그대로</strong>(README와 index.html의 PAPER_TITLE, BIBTEX_CITATION_HERE, YOUR_GITHUB_USERNAME 등 플레이스홀더가 남음). 코드·데이터·학습 스크립트 없음</td>
+<td>저자 계정이지만 코드는 없음</td>
+<td>없음(license null)</td>
+<td>2</td>
+<td><code>f5f1345</code> (2026-07-17, &quot;Initial commit&quot;, 단일 커밋)</td>
+</tr>
+<tr>
+<td><code>JaySparrow/IsaacGymScrew</code></td>
+<td>다른 저자 Azulay 외(arXiv:2411.06408)의 IsaacGymInsertion 포크. Robotiq 3지 그리퍼로 교체. README는 &quot;Visuotactile-Based Learning for Insertion&quot;</td>
+<td>이 논문의 코드 아님. 같은 Isaac Gym 삽입 환경의 선행 포크</td>
+<td>LICENSE.txt(README는 Apache-2.0 표기, GitHub 자동 판별 실패)</td>
+<td>0</td>
+<td><code>def15c9</code> (2024-12-28)</td>
+</tr>
+<tr>
+<td><code>osheraz/IsaacGymInsertion</code></td>
+<td>위 포크의 원저장소(Azulay 외)</td>
+<td>공식(원 저자), 이 논문과 무관</td>
+<td>자동 판별 NOASSERTION, README는 Apache-2.0</td>
+<td>24</td>
+<td><code>b0e6b07</code> (2025-05-20)</td>
+</tr>
+<tr>
+<td><code>JaySparrow/JaySparrow.github.io</code></td>
+<td>저자 개인 사이트 소스</td>
+<td>무관</td>
+<td>—</td>
+<td>—</td>
+<td><code>c208a3a</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>gh search repos &quot;foresight residual&quot;</code>: 위 첫 번째 저장소만 나옴. <code>&quot;residual RL VLA foresight&quot;</code>: 결과 없음. <code>&quot;failure forecasting rhythmic insertion&quot;</code>: 결과 없음([28] 공개 코드 없음).</li>
+<li>공식 코드 clone 없음(공개된 코드가 없어 <code>repo/</code>를 만들지 않음). 그래서 <code>04_code_verification.md</code>가 아니라 <code>04_claim_verification.md</code>를 씀.</li>
+<li>프로젝트 페이지 HTML과 원저장소 README는 보관하지 않음(<code>.scratch/</code>에만 임시 보관, 커밋 대상 아님).</li>
+</ul>
+</section></body></html>

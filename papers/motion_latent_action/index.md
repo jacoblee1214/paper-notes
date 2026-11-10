@@ -25,6 +25,9 @@ summary: "IROS 2026 논문 Motion-Focused Latent Action을 표 재계산, 통계
 ![LIBERO](images/libero_wilson.png)
 <p class="cap">LIBERO 과제군별 성공률과 Wilson 95% 구간(과제군당 200회 가정).</p>
 
+![RoboTwin](images/robotwin_tasks.png)
+<p class="cap">RoboTwin 2.0 과제별 성공률(과제당 100회 가정). 평균은 제안 67.7, π0 65.2, UniVLA 63.6.</p>
+
 ## 2. 기준선 하나는 원 논문보다 약하게 재현되었다
 
 UniVLA(Bridge) 행은 저자가 재현한 값(88.1)입니다. UniVLA 원 논문의 Bridge 행은 92.5입니다. 또한 LIBERO 기준선 칸 가운데 200회 가정에서 정수가 되지 않는 칸이 17개 있어, 다른 평가 프로토콜에서 가져온 값으로 보입니다. 공정한 비교에는 같은 프로토콜로 다시 돌린 기준선이 필요합니다.
@@ -43,6 +46,9 @@ UniVLA(Bridge) 행은 저자가 재현한 값(88.1)입니다. UniVLA 원 논문�
 <p class="cap">토이: 입력별 코드 판독. 전체 차이는 밝기를 완전히 담고, 전경 마스크는 밝기를 0.61까지 줄이지만 카메라 정보는 0.58로 남습니다(기준선 0.22).</p>
 
 이 결과는 토이이고 k-means로 이산화했습니다. VQ-VAE 학습 결과를 대신하지 않습니다. 그래도 "마스크가 움직임만 남긴다"는 가정이 카메라 이동에는 성립하지 않는다는 점은 보여 줍니다.
+
+![Toy K sweep](images/toy_k_sweep.png)
+<p class="cap">토이: 코드 수 K(4–64)에 따른 혼잡도와 행동 판독. 전경 마스크는 K가 낮을 때 행동을 더 잘 담습니다.</p>
 
 ## 5. 코드에서 확인한 차이
 

@@ -1,0 +1,401 @@
+{
+ "setup": {
+  "modes": 4,
+  "sigma": 0.05,
+  "iters": 3000,
+  "batch": 256,
+  "hidden": 64,
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "samples": 4000,
+  "target": "unconditional 4-mode ring, radius 1"
+ },
+ "summary": {
+  "L2 regression (m=1)": {
+   "coverage": {
+    "mean": 0.0,
+    "sd": 0.0
+   },
+   "between_frac": {
+    "mean": 1.0,
+    "sd": 0.0
+   },
+   "mean_dist": {
+    "mean": 0.9361849566541659,
+    "sd": 0.007080825086419808
+   },
+   "sample_mean_norm": {
+    "mean": 0.01584903271197405,
+    "sd": 0.008384400741467889
+   }
+  },
+  "cIMLE m=2 (zd=2)": {
+   "coverage": {
+    "mean": 0.0,
+    "sd": 0.0
+   },
+   "between_frac": {
+    "mean": 0.9998333333333335,
+    "sd": 0.00023570226039548988
+   },
+   "mean_dist": {
+    "mean": 0.6966070899279829,
+    "sd": 0.02614232165308541
+   },
+   "sample_mean_norm": {
+    "mean": 0.016888301669178606,
+    "sd": 0.0061118710077553064
+   }
+  },
+  "cIMLE m=5 (zd=2)": {
+   "coverage": {
+    "mean": 1.0,
+    "sd": 0.0
+   },
+   "between_frac": {
+    "mean": 0.4819166666666667,
+    "sd": 0.028108668097621112
+   },
+   "mean_dist": {
+    "mean": 0.330785898151851,
+    "sd": 0.005113082002468023
+   },
+   "sample_mean_norm": {
+    "mean": 0.01917738037489754,
+    "sd": 0.010170016172649614
+   }
+  },
+  "cIMLE m=10 (zd=2)": {
+   "coverage": {
+    "mean": 1.0,
+    "sd": 0.0
+   },
+   "between_frac": {
+    "mean": 0.21833333333333335,
+    "sd": 0.003595908168398573
+   },
+   "mean_dist": {
+    "mean": 0.17203936366806238,
+    "sd": 0.006891344534890963
+   },
+   "sample_mean_norm": {
+    "mean": 0.026847808624130026,
+    "sd": 0.007544231937310648
+   }
+  },
+  "cIMLE m=20 (zd=2)": {
+   "coverage": {
+    "mean": 1.0,
+    "sd": 0.0
+   },
+   "between_frac": {
+    "mean": 0.09166666666666667,
+    "sd": 0.0029744280495957935
+   },
+   "mean_dist": {
+    "mean": 0.10188113716650195,
+    "sd": 0.004083338365591717
+   },
+   "sample_mean_norm": {
+    "mean": 0.01820590035563147,
+    "sd": 0.002633519825252568
+   }
+  },
+  "cIMLE m=2 (zd=32)": {
+   "coverage": {
+    "mean": 0.0,
+    "sd": 0.0
+   },
+   "between_frac": {
+    "mean": 0.99225,
+    "sd": 0.0020103896803024372
+   },
+   "mean_dist": {
+    "mean": 0.6745777527923073,
+    "sd": 0.012892792893001269
+   },
+   "sample_mean_norm": {
+    "mean": 0.017474019591895942,
+    "sd": 0.004053785721773277
+   }
+  },
+  "cIMLE m=2 (15k iters)": {
+   "coverage": {
+    "mean": 0.0,
+    "sd": 0.0
+   },
+   "between_frac": {
+    "mean": 1.0,
+    "sd": 0.0
+   },
+   "mean_dist": {
+    "mean": 0.7085579622874447,
+    "sd": 0.02550314133159113
+   },
+   "sample_mean_norm": {
+    "mean": 0.01337763563897426,
+    "sd": 0.007386719535601234
+   }
+  },
+  "cIMLE m=2 (warm from flow)": {
+   "coverage": {
+    "mean": 0.0,
+    "sd": 0.0
+   },
+   "between_frac": {
+    "mean": 0.9998333333333335,
+    "sd": 0.00023570226039548988
+   },
+   "mean_dist": {
+    "mean": 0.6766987484059875,
+    "sd": 0.004517605239712907
+   },
+   "sample_mean_norm": {
+    "mean": 0.037314121404563694,
+    "sd": 0.025115518670509727
+   }
+  },
+  "flow 1-step": {
+   "coverage": {
+    "mean": 0.0,
+    "sd": 0.0
+   },
+   "between_frac": {
+    "mean": 0.9994999999999999,
+    "sd": 0.0004082482904638634
+   },
+   "mean_dist": {
+    "mean": 0.7950100175256534,
+    "sd": 0.02078990914947685
+   },
+   "sample_mean_norm": {
+    "mean": 0.07824126529610136,
+    "sd": 0.005418586598892743
+   }
+  },
+  "flow 10-step": {
+   "coverage": {
+    "mean": 1.0,
+    "sd": 0.0
+   },
+   "between_frac": {
+    "mean": 0.10333333333333333,
+    "sd": 0.016457436684436073
+   },
+   "mean_dist": {
+    "mean": 0.11281722671938264,
+    "sd": 0.011245743854968765
+   },
+   "sample_mean_norm": {
+    "mean": 0.04847441586556426,
+    "sd": 0.022584663068963506
+   }
+  }
+ },
+ "runs": {
+  "L2 regression (m=1)": [
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.9459853036683799,
+    "sample_mean_norm": 0.004228511270662683
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.9330658010182349,
+    "sample_mean_norm": 0.0237013205539746
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.9295037652758829,
+    "sample_mean_norm": 0.019617266311284874
+   }
+  ],
+  "cIMLE m=2 (zd=2)": [
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.7037917966503681,
+    "sample_mean_norm": 0.0178446119995278
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.7244220042624216,
+    "sample_mean_norm": 0.023849672949767232
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 0.9995,
+    "mean_dist": 0.6616074688711588,
+    "sample_mean_norm": 0.00897062005824079
+   }
+  ],
+  "cIMLE m=5 (zd=2)": [
+   {
+    "coverage": 1.0,
+    "between_frac": 0.4995,
+    "mean_dist": 0.33449596078133886,
+    "sample_mean_norm": 0.008483233704448884
+   },
+   {
+    "coverage": 1.0,
+    "between_frac": 0.504,
+    "mean_dist": 0.3343059936086262,
+    "sample_mean_norm": 0.016195572412424624
+   },
+   {
+    "coverage": 1.0,
+    "between_frac": 0.44225,
+    "mean_dist": 0.3235557400655879,
+    "sample_mean_norm": 0.03285333500781912
+   }
+  ],
+  "cIMLE m=10 (zd=2)": [
+   {
+    "coverage": 1.0,
+    "between_frac": 0.221,
+    "mean_dist": 0.17816737479324757,
+    "sample_mean_norm": 0.018313710540402123
+   },
+   {
+    "coverage": 1.0,
+    "between_frac": 0.22075,
+    "mean_dist": 0.17553825030213605,
+    "sample_mean_norm": 0.036660128688125425
+   },
+   {
+    "coverage": 1.0,
+    "between_frac": 0.21325,
+    "mean_dist": 0.1624124659088036,
+    "sample_mean_norm": 0.025569586643862528
+   }
+  ],
+  "cIMLE m=20 (zd=2)": [
+   {
+    "coverage": 1.0,
+    "between_frac": 0.08875,
+    "mean_dist": 0.09718836128816279,
+    "sample_mean_norm": 0.017176561098514946
+   },
+   {
+    "coverage": 1.0,
+    "between_frac": 0.0905,
+    "mean_dist": 0.10714194944482128,
+    "sample_mean_norm": 0.02182032570445489
+   },
+   {
+    "coverage": 1.0,
+    "between_frac": 0.09575,
+    "mean_dist": 0.1013131007665218,
+    "sample_mean_norm": 0.015620814263924568
+   }
+  ],
+  "cIMLE m=2 (zd=32)": [
+   {
+    "coverage": 0.0,
+    "between_frac": 0.9895,
+    "mean_dist": 0.6681183259932555,
+    "sample_mean_norm": 0.02279069625830097
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 0.993,
+    "mean_dist": 0.6925737459177324,
+    "sample_mean_norm": 0.016672958818929808
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 0.99425,
+    "mean_dist": 0.6630411864659337,
+    "sample_mean_norm": 0.012958403698457053
+   }
+  ],
+  "cIMLE m=2 (15k iters)": [
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.6976707939897099,
+    "sample_mean_norm": 0.009371794322697016
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.7437793485968355,
+    "sample_mean_norm": 0.023735816003313162
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.6842237442757889,
+    "sample_mean_norm": 0.007025296590912597
+   }
+  ],
+  "cIMLE m=2 (warm from flow)": [
+   {
+    "coverage": 0.0,
+    "between_frac": 0.9995,
+    "mean_dist": 0.6714641634116878,
+    "sample_mean_norm": 0.04611667765502122
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.6824881814432004,
+    "sample_mean_norm": 0.06271334947849593
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.6761439003630747,
+    "sample_mean_norm": 0.0031123370801739493
+   }
+  ],
+  "flow 1-step": [
+   {
+    "coverage": 0.0,
+    "between_frac": 0.9995,
+    "mean_dist": 0.7765619437368747,
+    "sample_mean_norm": 0.08157713529150196
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 1.0,
+    "mean_dist": 0.8240603479157541,
+    "sample_mean_norm": 0.08254790975011893
+   },
+   {
+    "coverage": 0.0,
+    "between_frac": 0.999,
+    "mean_dist": 0.7844077609243316,
+    "sample_mean_norm": 0.07059875084668317
+   }
+  ],
+  "flow 10-step": [
+   {
+    "coverage": 1.0,
+    "between_frac": 0.1195,
+    "mean_dist": 0.12578073970441322,
+    "sample_mean_norm": 0.019964497132687952
+   },
+   {
+    "coverage": 1.0,
+    "between_frac": 0.10975,
+    "mean_dist": 0.11431423144603911,
+    "sample_mean_norm": 0.050259856023488494
+   },
+   {
+    "coverage": 1.0,
+    "between_frac": 0.08075,
+    "mean_dist": 0.0983567090076956,
+    "sample_mean_norm": 0.07519889444051633
+   }
+  ]
+ },
+ "elapsed_s": 165.4
+}

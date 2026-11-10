@@ -1,0 +1,1118 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>IMLE-VLA 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig"] { max-width: 92%; }
+img[src*="paper_table"] { max-width: 92%; }
+img[src*="latency"], img[src*="success"], img[src*="toy_"] { max-width: 96%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>IMLE-VLA: 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 그림과 표는 라이선스(arXiv 비독점 배포, CC BY 아님) 때문에 제외했습니다. 원문 https://arxiv.org/abs/2609.10915 · arXiv:2609.10915v1 · IROS 2026 (채택) · Kian Hosseinkhani 외 (Simon Fraser University, University of Pennsylvania, Amii) · 공식 코드 kianhk6/IMLE-VLA (Apache-2.0, 커밋 0f08e32) · 분석일 2026-11-10</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> π0.5의 10단계 흐름 매칭 행동 헤드를 1단계 생성기로 바꿉니다. 생성기는 cIMLE로 학습하고(후보 m=2개 중 가장 가까운 것만 갱신), VLM은 동결합니다(식 2–4, Algorithm 1). 추론은 행동 expert를 한 번 돌립니다.</li>
+<li><strong>LIBERO 98.0%는 최고라고 말하기 어렵습니다:</strong> 2000회 중 1960회 대 인용 π0.5의 1950회, 차이 0.5pp, Fisher p = 0.34입니다. 2000회 평가의 최소 검출 차이가 약 1.4pp라 이 차이는 검출되지 않습니다(<code>03</code> §1).</li>
+<li><strong>실물은 합산에서만 유의합니다:</strong> 68/80 대 54/80(p = 0.015, CMH도 같음), 과제별로는 Holm 보정 후 모두 유의하지 않습니다(<code>03</code> §2). 과제당 20회, 제로샷, 시드 하나입니다.</li>
+<li><strong>3.67배는 엔진과 헤드가 섞여 있습니다:</strong> 15 Hz는 JAX, 55 Hz는 Triton·CUDA 그래프 엔진입니다. 같은 엔진 가정에서 헤드 효과는 2.2배이고, 엔진 효과는 1.67배입니다. 접두부 VLM이 IMLE 시간의 약 87%입니다(<code>03</code> §4, 민감도 그림).</li>
+<li><strong>실물 VLA-WC 절대값은 현실적이지 않습니다:</strong> 빈도와 H로 환산하면 한 번의 과제가 12–52분의 로봇 시간이 됩니다. 저장소 코드는 모든 에피소드의 호출 시간을 더하는데, 논문은 성공 에피소드당이라고 씁니다(<code>03</code> §5.1, <code>04</code> D12).</li>
+<li><strong>코드는 논문 식과 맞지만 설정이 다릅니다:</strong> 손실, argmin, 단일 expert 샘플러, VLM 동결은 논문과 일치합니다. 반면 LIBERO 학습에는 EMA 0.999가 있고, 체크포인트는 suite별 최고를 고르며, H=30 모델은 m=5에 학습률 10배를 씁니다. 논문은 이 셋을 밝히지 않았습니다(<code>04</code> D4–D6, D8).</li>
+<li><strong>toy: m=2는 이 설정에서 다봉을 보존하지 못합니다:</strong> 회귀(m=1)와 1단계 흐름은 평균으로 붕괴합니다. m=5는 네 봉우리를 덮지만 샘플의 절반이 봉우리 사이 호 위에 남습니다. 흐름 가중치에서 시작해도 m=2는 실패합니다(<code>03</code> §7, §7.1).</li>
+<li><strong>구현 가능성:</strong> 공식 재현은 CUDA GPU와 LIBERO 시뮬레이터가 필요해서 이 맥에서는 불가입니다. 아이디어 재구현은 중간 난이도입니다. 손실은 약 50줄이지만 chunk 길이, EMA, 체크포인트 선택, m을 논문만으로 정할 수 없습니다(<code>04</code> §4).</li>
+</ol>
+<p><img src="figures/success_ci.png" alt="success" /></p>
+<p class="cap">직접 계산: LIBERO(H=10, 인용 π0.5)와 실물 과제의 성공률 차이와 Newcombe 95% 구간. 주황은 LIBERO 전체, 파랑은 suite, 초록은 실물 과제.</p>
+<p><img src="figures/latency_decomp.png" alt="latency" /></p>
+<p class="cap">직접 계산: 빈도별 패스 시간(왼쪽), 같은 엔진 가정의 P와 a 분해(가운데), 접두부 P에 따른 헤드 배율(오른쪽). 점선은 논문의 전체 배율 3.67.</p>
+</section>
+<section class="chapter"><h1>01. 논문 분석: IMLE-VLA</h1>
+<p><strong>논문:</strong> IMLE-VLA: Fast Single-Step Action Generation for Vision-Language-Action Policies
+<strong>저자:</strong> Kian Hosseinkhani, Qinhe Peng, George Shramko, Mehran Aghabozorgi, Jianing Qian, Tristan Engst, Alireza Moazeni, Dinesh Jayaraman, Ke Li (Simon Fraser University, University of Pennsylvania, Amii)
+<strong>arXiv:</strong> 2609.10915, v1 (2026-09-10). 8쪽, 그림 5, 표 5. 이 폴더는 v1만 확인했습니다.
+<strong>학회:</strong> IEEE/RSJ IROS 2026 채택(초록 주석과 프로젝트 페이지 확인).
+<strong>권리 표기:</strong> arXiv 비독점 배포(nonexclusive-distrib 1.0), CC BY 아님. v1 PDF 전체 텍스트와 1쪽 하단을 확인했고 저작권 문구(© IEEE 등)는 없었음. 판단 근거는 arXiv 라이선스뿐이며, 보수적으로 논문 그림·표는 개인용에만 씀.</p>
+<p>원문 쪽 번호는 PDF 기준입니다. 절·표·그림 번호는 논문 표기를 따랐습니다.</p>
+<h2>1. 초록이 주장하는 것</h2>
+<p>초록은 다섯 가지를 주장합니다.</p>
+<ol>
+<li>π0.5의 10단계 흐름 매칭 행동 헤드를 단일 단계 조건부 생성기로 바꾸면 추론 빈도가 15 Hz에서 55 Hz(3.67배)로 오릅니다. 행동 처리량은 빈도 × 실행 지평 H이므로 H=30에서 11.0배입니다(초록, Table III).</li>
+<li>LIBERO 40과제 평균 성공률 98.0%로 &quot;모든 비교 대상 중 최고&quot;입니다(Table II).</li>
+<li>LIBERO-plus 교란에서 π0.5의 견고성을 유지하고, 다른 기준선은 크게 떨어집니다(Fig. 2, 수치 표 없음).</li>
+<li>실물(Franka Panda, 4과제)에서 jerk가 2.2–3.0배 낮고, 4과제 모두 π0.5보다 성공이 많습니다(Table V). VLA 추론 시간은 3.9–6.6배 줄었습니다.</li>
+<li>접두부 VLM은 그대로 두고 행동 헤드만 바꾸므로 &quot;드롭인 대체&quot;입니다(결론, Sec. V).</li>
+</ol>
+<h2>2. 서론과 문제 설정 (Sec. I)</h2>
+<ul>
+<li>문제: 흐름·확산 행동 헤드는 chunk마다 여러 번의 순전파가 필요하고, 그 지연이 &quot;stop-and-go&quot; 움직임을 만듭니다(Sec. I, 2문단).</li>
+<li>단순한 해결책인 1단계 회귀는 평균으로 붕괴합니다(mode collapse). 이 주장은 식 5–6에서 L2 최소해가 조건부 평균이라는 사실로 뒷받침합니다.</li>
+<li>질문: &quot;1단계 생성기가 다봉 목표를 보존하면서 성능을 낼 수 있는가?&quot;(Sec. I, 마지막 문단).</li>
+</ul>
+<h2>3. 관련 연구 (Sec. II)</h2>
+<p>세 갈래로 나눕니다. 자세한 계보와 대조는 <code>02</code> §1–2 에 있습니다.</p>
+<ul>
+<li>시스템 최적화(Ma et al. [12], 커널 튜닝): 논문은 이것과 보완 관계라고 씁니다.</li>
+<li>증류: Shallow-π [7]는 π0.5를 얕은 학생으로 줄여 성공률을 잃습니다(LIBERO 94.5%). 단일 단계 학생 증류 [29–31]는 교사의 편향을 물려받습니다.</li>
+<li>교사 없는 단일 단계: OpenVLA-OFT [8]는 L1 회귀 헤드를 씁니다. 저자들은 L1이 조건부 중앙값으로 붕괴한다고 보고, 7B 백본 덕분이라는 해석을 인용합니다.</li>
+</ul>
+<h2>4. 방법 (Sec. III)</h2>
+<h3>4.1 구조 (III-A, 식 1)</h3>
+<ul>
+<li>VLM 백본은 동결하고, 행동 헤드 G_θ만 학습합니다. G_θ는 π0.5 체크포인트로 초기화합니다(III-A 마지막 문장).</li>
+<li>입력은 VLM 임베딩 f_VLM(o_t)와 잠재 잡음 z ∼ N(0, I)이고, 출력은 행동 chunk A ∈ R^{C×D}입니다(식 1). 잠재 차원은 A와 같습니다.</li>
+<li>이 설계에서 z와 A의 차원(C × D)은 저자가 명시한 값이 아니라 &quot;같다&quot;는 문장으로만 주어집니다. C(chunk 길이)는 본문에 없습니다.</li>
+</ul>
+<h3>4.2 cIMLE 목적 함수 (III-B, 식 2–6, Algorithm 1)</h3>
+<ul>
+<li>각 학습 쌍마다 m개의 잡음 z_{i,j}를 뽑아 m개 후보 Â_{i,j} = G_θ(f_VLM, z_{i,j})를 만듭니다(식 2).</li>
+<li>선택 단계(기울기 없음): j*(i) = argmin_j ‖Â_{i,j} − A_gt‖²(식 3).</li>
+<li>갱신 단계: L = (1/n) Σ_i ‖Â_{i,j*(i)} − A_gt‖²(식 4). 선택된 후보만 다시 계산해 기울기를 흘립니다(Algorithm 1 Step 2).</li>
+<li>m=1이면 식 4는 L2 회귀와 같고, 최소해는 조건부 평균 E[A | o]입니다(식 5–6). m&gt;1에서는 가장 가까운 후보만 갱신하므로 다른 후보가 다른 봉우리를 맡을 수 있다는 것이 논문의 논리입니다(III-B, &quot;two illustrative regimes&quot;).</li>
+<li>기본값은 m=2이고, 근거는 Fig. 4(IV-C)입니다.</li>
+</ul>
+<h3>4.3 추론 (IV 첫 문단과 Sec. III-A)</h3>
+<ul>
+<li>1단계: 잡음 z를 샘플하고 action expert를 한 번 돌립니다. 접두부 KV 캐시는 한 번만 계산합니다(코드 확인: <code>04</code> §1).</li>
+<li>&quot;forward pass&quot;의 정의가 중요합니다. 논문의 &quot;1 forward pass&quot;는 행동 expert의 한 번 호출을 뜻하고, 그 앞의 VLM 접두부 계산은 포함되는지 명시되지 않았습니다(<code>03</code> §4).</li>
+</ul>
+<h3>4.4 방법에서 빠진 정보</h3>
+<p>이 절의 정보로는 재구현이 되지 않습니다. 빠진 항목은 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>논문의 서술</th>
+<th>공식 코드에서 찾은 값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chunk 길이 C</td>
+<td>없음</td>
+<td>LIBERO 50(H=10 모델)·100(H=30 모델), DROID 16 (<code>04</code> D5)</td>
+</tr>
+<tr>
+<td>잠재 차원</td>
+<td>&quot;A와 같다&quot;</td>
+<td>패딩된 행동 차원 포함 전체 chunk 형태 (<code>04</code> D10)</td>
+</tr>
+<tr>
+<td>훈련 스텝, 학습률, 배치</td>
+<td>없음(실물에서 DROID만 언급)</td>
+<td>LIBERO 10k 스텝, 배치 140(4 GPU), 학습률 1.25e-5(H=10 모델) 또는 1.25e-4(H=30) (<code>04</code> D5, D8)</td>
+</tr>
+<tr>
+<td>EMA</td>
+<td>없음</td>
+<td>LIBERO 0.999, DROID 0.99. 평가는 EMA 가중치 (<code>04</code> D4)</td>
+</tr>
+<tr>
+<td>체크포인트 선택</td>
+<td>없음</td>
+<td>LeRobot 저장소 README는 &quot;suite별 최고 체크포인트&quot;라고 씀 (<code>04</code> D6)</td>
+</tr>
+<tr>
+<td>시간 조건(t)</td>
+<td>없음</td>
+<td>학습·추론 모두 t = 1로 고정. 행동 expert의 시간 입력은 상수 (<code>04</code> §1)</td>
+</tr>
+<tr>
+<td>ε, 거절 기준</td>
+<td>없음</td>
+<td>해당 없음. 거절 샘플링이 아니라 m개 중 argmin입니다</td>
+</tr>
+</tbody>
+</table>
+<h2>5. 실험 (Sec. IV)</h2>
+<h3>5.1 추론 빈도 (IV-A, Table I)</h3>
+<ul>
+<li>측정 조건: NVIDIA L40S 1장, LIBERO-Long 10과제에서 50 에피소드 평균, 자연어 토큰화와 고유수용감각을 매 호출에 포함(논문은 빈 프롬프트 벤치마크와 다르다고 강조).</li>
+<li>행: π0.5 JAX 15 Hz, PyTorch+torch.compile 20 Hz, Triton 25 Hz, IMLE-VLA 55 Hz.</li>
+<li>저자 설명: 시스템 최적화로는 10단계 루프의 천장을 넘을 수 없다.</li>
+<li>확인 사항: 55 Hz는 저장소의 Triton·CUDA 그래프 엔진(<code>realtime-vla-imle/</code>, 약 18 ms/호출, L40S, 2뷰 224×224)입니다. JAX 기준선과 엔진이 다릅니다. 같은 엔진 기준 비교는 논문에 없습니다(<code>03</code> §4).</li>
+</ul>
+<h3>5.2 LIBERO (IV-B, Table II, Table III, Table IV)</h3>
+<ul>
+<li>설정: 4개 suite × 10과제 × 50회 = 2000회. H = 10과 H = 30 두 행.</li>
+<li>IMLE-VLA H=10 평균 98.0%(Spatial 98.0, Object 99.8, Goal 98.2, Long 96.0). π0.5 H=10 97.5%는 [14]에서 인용한 값입니다. 저자가 같은 실행에서 잰 값이 아닙니다(표 주석과 IV-B 첫 단락).</li>
+<li>Inf.(×): π0.5 1.0, IMLE 3.67. Shallow-π0.5-L6는 2.3(H100 측정 [7] 인용).</li>
+<li>처리량(Table III): H=10 550 Hz, H=30 1650 Hz(π0.5 150 Hz의 11.0배). 11.0배는 빈도 3.67배 × H 3배입니다. 성공률은 H에 따라 떨어집니다(Fig. 3).</li>
+<li>VLA-WC(Table IV): π0.5 1.03 s, IMLE H=10 0.28 s(3.6배), H=30 0.10 s(10.5배). 성공 에피소드당 패스 수는 H=10에서 15.4 대 15.5로 같습니다.</li>
+<li>LIBERO-plus(Fig. 2): 4축 × 5단계 곡선만 있고 수치 표가 없습니다. 이 PDF에서 값을 읽을 수 없습니다.</li>
+</ul>
+<h3>5.3 민감도 (IV-C, Fig. 3, Fig. 4)</h3>
+<ul>
+<li>실행 지평(Fig. 3, 수치는 그림에서 읽음): H=10 98.0, H=20 97.5, H=30 97.1, H=40 96.5, H=50 95.7.</li>
+<li>샘플 인자 m(Fig. 4, 그림에서 읽음): m=1 93.0, m=2 98.0, m=5 97.6. 축은 90에서 시작합니다. 시각적 낙차는 과장될 수 있습니다.</li>
+<li>논문은 m=2를 &quot;strong performance while minimizing cost&quot;로 고릅니다. 이 선택은 m=2와 m=5 차이(0.4pp, 약 8회)보다 1회 실험의 분산이 클 수 있어 판단하기 어렵습니다(<code>03</code> §1).</li>
+</ul>
+<h3>5.4 실물 (IV-D, Table V, Fig. 5)</h3>
+<ul>
+<li>설정: Franka Emika Panda, A6000(본문), DROID에서 학습해 제로샷 배치. 4과제 각 20회.</li>
+<li>π0.5는 H=8, IMLE는 H=12(본문 설명으로는 &quot;더 긴 H를 빠른 추론이 보상&quot;). 두 정책의 H가 다릅니다.</li>
+<li>성공(IMLE 대 π0.5): 19 대 15, 18 대 15, 15 대 12, 16 대 12(각 20회).</li>
+<li>jerk: 세 번째 후진 차분을 dt³로 나눠 관절 평균(7 관절, 그리퍼 제외). 비율 2.7, 2.2, 3.0, 2.7배.</li>
+<li>VLA-WC(s): IMLE 18.56, 31.1, 99.4, 16.7 대 π0.5 123.0, 178.3, 389.4, 89.5(3.9–6.6배). 절대값 해석은 <code>03</code> §5에서 다룹니다.</li>
+<li>본문은 &quot;에피소드 종단 시간이 약 2배 빠르다&quot;고 씁니다(IV-D 첫 단락, 보조 영상 기준). 수치 표는 없습니다.</li>
+</ul>
+<h2>6. 한계</h2>
+<p>논문에는 Limitations 절이 없습니다. 본문에서 한계로 읽힐 수 있는 문장은 다음입니다.</p>
+<ul>
+<li>&quot;The VLM backbone unchanged&quot;와 &quot;frozen VLM&quot;을 강조하지만, 이는 행동 헤드만 학습한다는 뜻이라 VLM의 표현 한계는 그대로입니다.</li>
+<li>실물은 4과제, 과제당 20회, 단일 실행입니다.</li>
+<li>LIBERO-plus 결과는 그림으로만 있습니다.</li>
+<li>1단계 생성기가 π0.5 흐름 헤드와 같은 입력(t=1 고정)을 쓰는 것이 장기 과제에서 어떤 영향이 있는지는 다루지 않습니다.</li>
+</ul>
+<h2>7. 주장과 근거의 대응 (요약)</h2>
+<table>
+<thead>
+<tr>
+<th>주장</th>
+<th>근거</th>
+<th>이 폴더의 판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>55 Hz, 3.67배</td>
+<td>Table I, 같은 엔진 비교 없음</td>
+<td>측정은 맞지만 엔진이 다름. 헤드만의 효과는 약 2.2배(<code>03</code> §4)</td>
+</tr>
+<tr>
+<td>처리량 11배</td>
+<td>Table III, H=30</td>
+<td>산술은 맞음. 빈도와 H의 곱이라 성공률 비교와 분리해야 함</td>
+</tr>
+<tr>
+<td>LIBERO 98.0%, 최고</td>
+<td>Table II</td>
+<td>수치는 맞음. π0.5 대비 차이 0.5pp, 유의하지 않음(p = 0.34, <code>03</code> §1)</td>
+</tr>
+<tr>
+<td>LIBERO-plus 유지</td>
+<td>Fig. 2</td>
+<td>수치 없음, 판정 보류</td>
+</tr>
+<tr>
+<td>실물 4과제 우세</td>
+<td>Table V</td>
+<td>합산 p = 0.015, 과제별 유의하지 않음(<code>03</code> §2)</td>
+</tr>
+<tr>
+<td>jerk 2.2–3.0배</td>
+<td>Table V</td>
+<td>정의는 코드와 맞음. 집계 방식과 분산 없음(<code>04</code> D11)</td>
+</tr>
+<tr>
+<td>VLA-WC 3.9–6.6배</td>
+<td>Table V</td>
+<td>정의(성공 에피소드당)와 값의 규모가 맞지 않음(<code>03</code> §5)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="chapter"><h1>03. 재계산, 유의성, 지연 산술, 유도, toy</h1>
+<p>이 문서의 수치는 <code>analysis/table_check.py</code>(→ <code>table_check_results.json</code>)와 <code>analysis/imle_toy.py</code>(→ <code>imle_toy_results.json</code>)에서 나옵니다. 모두 CPU, numpy·scipy, 1스레드로 실행했습니다.</p>
+<p><strong>검정의 한계(먼저 읽기).</strong> 논문 표는 반올림된 백분율과 평균만 줍니다. 그래서 suite별 성공 횟수는 백분율 × 500으로 정수가 되는 값을 골랐습니다(0.2pp 간격이 1회이므로 모두 정수). 공통 한계는 다음과 같습니다.</p>
+<ul>
+<li>π0.5 행은 저자가 같은 실행에서 잰 값이 아니라 [14]에서 인용한 값입니다. 두 표본의 독립 가정은 근사입니다.</li>
+<li>학습 시드가 하나이고, 같은 과제 안의 상관은 무시합니다. 그래서 검정이 과대 확신을 줄 수 있습니다.</li>
+<li>쌍을 이룬 설계(같은 초기 상태)인지 논문에 나오지 않아 McNemar는 쓰지 않았습니다.</li>
+</ul>
+<p><img src="figures/success_ci.png" alt="success_ci.png" /></p>
+<p class="cap">직접 계산: LIBERO와 실물의 성공률 차이, Newcombe 95% 구간.</p>
+<h2>1. LIBERO (Table II)</h2>
+<h3>1.1 suite별 검정 (H=10, 각 500회)</h3>
+<table>
+<thead>
+<tr>
+<th>suite</th>
+<th>IMLE 성공</th>
+<th>π0.5 성공(인용)</th>
+<th>차이</th>
+<th>Fisher p</th>
+<th>Holm p</th>
+<th>IMLE Wilson 95%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spatial</td>
+<td>490/500 (98.0)</td>
+<td>486/500 (97.2)</td>
+<td>+0.8pp</td>
+<td>0.54</td>
+<td>1.00</td>
+<td>96.4–98.9</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>499/500 (99.8)</td>
+<td>495/500 (99.0)</td>
+<td>+0.8pp</td>
+<td>0.22</td>
+<td>0.87</td>
+<td>98.9–100.0</td>
+</tr>
+<tr>
+<td>Goal</td>
+<td>491/500 (98.2)</td>
+<td>489/500 (97.8)</td>
+<td>+0.4pp</td>
+<td>0.82</td>
+<td>1.00</td>
+<td>96.6–99.1</td>
+</tr>
+<tr>
+<td>Long</td>
+<td>480/500 (96.0)</td>
+<td>480/500 (96.0)</td>
+<td>0.0pp</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>93.9–97.4</td>
+</tr>
+<tr>
+<td><strong>전체</strong></td>
+<td><strong>1960/2000 (98.0)</strong></td>
+<td><strong>1950/2000 (97.5)</strong></td>
+<td><strong>+0.5pp</strong></td>
+<td><strong>0.34</strong></td>
+<td>—</td>
+<td>97.3–98.5</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>전체 차이는 10회(0.5pp)입니다. 유의하지 않습니다.</li>
+<li>최고 기준선인 CogVLA(97.5%, 표 Avg)와도 같은 숫자 차이이므로 p = 0.34입니다. 표 II 캡션의 &quot;highest average&quot;는 수치로는 맞지만 통계적 우위는 아닙니다.</li>
+<li>표 II의 Avg는 네 suite 평균과 일치합니다(T2, 모든 행 통과).</li>
+</ul>
+<h3>1.2 H=30 행 (인용 기준 π0.5 96.1%)</h3>
+<ul>
+<li>IMLE H=30 1941/2000(97.05%) 대 π0.5 H=30 1922/2000(96.1%), 전체 p = 0.12.</li>
+<li>suite별 최소 Holm 보정 p = 0.40(Spatial, 차이 +2.2pp).</li>
+<li>원 논문 π0.5 H=30 행의 출처(인용 [14])는 이 PDF만으로는 확인할 수 없습니다.</li>
+</ul>
+<h3>1.3 검출력과 포화</h3>
+<ul>
+<li>80% 검정력, 양측 5%에서 최소 검출 차이(정규 근사):
+<ul>
+<li>2000회, 성공률 97.5%: <strong>약 1.4pp</strong></li>
+<li>500회(suite당): 약 2.8pp</li>
+<li>20회(실물 과제당): 정규 근사가 부정확하지만 대략 30–40pp</li>
+</ul>
+</li>
+<li>논문의 최고 주장(+0.5pp)은 이 검출력 밖입니다.</li>
+<li>성공률이 98%에 가까워 천장 효과가 있고, Long suite는 두 방법 모두 96.0%로 같습니다.</li>
+<li>Fig. 4의 m=2 대 m=5(98.0 대 97.6, 8회 차이)도 같은 이유로 구분되지 않습니다. m=1 대 m=2(93.0 대 98.0, 100회 차이)는 차이가 크지만 시드가 하나라 학습 분산을 알 수 없습니다.</li>
+</ul>
+<h3>1.4 무엇이 빠졌나</h3>
+<ul>
+<li>학습 시드 분산과 평가 시드 분산이 없습니다. 같은 체크포인트를 여러 평가 시드로 돌린 값도 없습니다.</li>
+<li>저장소 README는 suite별 체크포인트를 &quot;그 suite에서 가장 좋은 것&quot;으로 소개합니다(<code>04</code> D6). 선택 기준이 평가 성공률이라면 선택 편향이 있어 차이를 과장합니다.</li>
+</ul>
+<h2>2. 실물 (Table V, 과제당 20회)</h2>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>IMLE</th>
+<th>π0.5</th>
+<th>Fisher p</th>
+<th>Holm p</th>
+<th>IMLE Wilson 95%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pineapple in bowl</td>
+<td>19/20</td>
+<td>15/20</td>
+<td>0.18</td>
+<td>0.73</td>
+<td>76.4–99.1</td>
+</tr>
+<tr>
+<td>Swap pineapple &amp; cube</td>
+<td>18/20</td>
+<td>15/20</td>
+<td>0.41</td>
+<td>0.90</td>
+<td>69.9–97.2</td>
+</tr>
+<tr>
+<td>Pineapple in cabinet</td>
+<td>15/20</td>
+<td>12/20</td>
+<td>0.50</td>
+<td>0.90</td>
+<td>53.1–88.8</td>
+</tr>
+<tr>
+<td>Pineapple on moving plate</td>
+<td>16/20</td>
+<td>12/20</td>
+<td>0.30</td>
+<td>0.90</td>
+<td>58.4–91.9</td>
+</tr>
+<tr>
+<td><strong>합산 (68/80 대 54/80)</strong></td>
+<td><strong>85.0%</strong></td>
+<td><strong>67.5%</strong></td>
+<td><strong>0.015</strong></td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>층화 검정(CMH, 과제를 층으로): χ² = 5.87, p = 0.015, 공통 승산비 2.83. 합산 Fisher와 같은 결론입니다.</li>
+<li>과제별로는 어느 것도 Holm 보정 후 유의하지 않습니다(모두 ≥ 0.73).</li>
+<li>해석: 네 과제가 같은 방향이라는 증거는 합산 검정에서 나옵니다. 다만 과제 간 차이가 실제로 같다는 근거는 과제별 검정으로 얻지 못했습니다. 한 번의 학습, 제로샷, 과제당 20회라는 조건을 감안하면 &quot;방향은 일관되지만 크기는 불확실&quot;이 정확합니다.</li>
+<li>jerk 비율(2.2–3.0배)에는 분산이나 구간이 없습니다. 에피소드 수준의 값이 없어 검정할 수 없습니다.</li>
+</ul>
+<h2>3. 지연 산술 (Table I, III, IV, V)</h2>
+<table>
+<thead>
+<tr>
+<th>구성</th>
+<th>빈도(Hz)</th>
+<th>패스당 시간(ms)</th>
+<th>대비 π0.5 JAX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>π0.5 JAX (Table I)</td>
+<td>15</td>
+<td>66.7</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>PyTorch + compile</td>
+<td>20</td>
+<td>50.0</td>
+<td>1.33</td>
+</tr>
+<tr>
+<td>Triton π0.5 (Table I)</td>
+<td>25</td>
+<td>40.0</td>
+<td>1.67</td>
+</tr>
+<tr>
+<td>IMLE-VLA (Table I)</td>
+<td>55</td>
+<td>18.2</td>
+<td>3.67</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Table I의 3.67배는 IMLE-VLA 대 JAX입니다. 같은 Triton 계열 π0.5 대비는 2.2배입니다(55/25). 같은 PyTorch 계열 대비는 2.75배입니다.</li>
+</ul>
+<p>Table IV(LIBERO, 성공 에피소드당 평균):</p>
+<table>
+<thead>
+<tr>
+<th>행</th>
+<th>패스 수</th>
+<th>VLA-WC(s)</th>
+<th>패스당 시간(ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>π0.5 H=10</td>
+<td>15.4</td>
+<td>1.03</td>
+<td>66.9</td>
+</tr>
+<tr>
+<td>IMLE H=10</td>
+<td>15.5</td>
+<td>0.28</td>
+<td>18.1</td>
+</tr>
+<tr>
+<td>IMLE H=30</td>
+<td>5.4</td>
+<td>0.10</td>
+<td>18.5</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>H=10 배율: 1.03/0.28 = 3.68(논문 3.6). 0.28이 0.275–0.285로 반올림되면 3.61–3.74이므로 경계 밖에 가깝습니다. 작은 불일치입니다.</li>
+<li>H=30 배율: 1.03/0.10 = 10.3(논문 10.5). 0.10이 0.095–0.105면 9.8–10.8이므로 반올림 범위 안입니다.</li>
+<li>분해: 패스 수 비 15.4/5.4 = 2.85 × 패스당 시간 비 66.9/18.5 = 3.61 → 10.3.</li>
+</ul>
+<p>Table III(LIBERO 처리량 = 빈도 × H): π0.5 H=10 150 Hz, IMLE H=10 550 Hz(3.67배), IMLE H=30 1650 Hz(11.0배). 11.0배는 빈도 3.67배 × H 3배입니다. 성공률은 H에 따라 떨어지므로(Fig. 3) 처리량 배율을 성공률과 같이 보고해야 합니다.</p>
+<p>Table V(실물 VLA-WC 배율): 6.63, 5.73, 3.92, 5.36(논문 3.9–6.6 ✓).</p>
+<p><img src="figures/latency_decomp.png" alt="latency_decomp.png" /></p>
+<p class="cap">직접 계산: 빈도별 패스 시간, 같은 엔진 가정의 분해, 접두부 P에 따른 헤드 배율.</p>
+<h2>4. 3.67배의 분해 (가정 명시)</h2>
+<p>논문은 3.67배를 &quot;단일 단계 헤드 효과&quot;로 설명하지만, 비교 대상(JAX π0.5)과 IMLE 측정(Triton 엔진)의 엔진이 다릅니다. 두 요인으로 나눠 봅니다.</p>
+<ul>
+<li>엔진 요인: JAX 66.7 ms → Triton π0.5 40 ms = <strong>1.67배</strong>(Table I의 두 행).</li>
+<li>헤드 요인: Triton π0.5 40 ms → IMLE 18.2 ms = <strong>2.2배</strong>. 같은 엔진이라는 가정이 필요합니다.</li>
+<li>로그 기준 비중: 엔진 39%, 헤드 61%.</li>
+</ul>
+<p><strong>같은 엔진 가정에서의 역산.</strong> 한 청크 시간을 T = P + n·a로 씁니다. P는 VLM 접두부(KV 캐시 생성), a는 행동 expert 1회, n은 단계 수입니다.</p>
+<ul>
+<li>Triton π0.5: P + 10a = 40 ms</li>
+<li>IMLE: P + a = 18.2 ms (a는 π0.5와 같다고 가정)</li>
+<li>역산: a = 2.42 ms, P = 15.8 ms. 따라서 IMLE 시간의 13%만 행동 헤드입니다.</li>
+<li>헤드 비용을 0으로 줄여도 얻는 것은 18.2/15.8 = <strong>1.15배</strong>입니다. 10단계에서 1단계로 가는 이득(2.2배)은 대부분 10단계 루프를 없애는 데서 나오고, 그 뒤의 개선 여지는 작습니다.</li>
+</ul>
+<p><strong>민감도.</strong> 총 40 ms를 고정하고 P를 바꿉니다(표 T6).</p>
+<table>
+<thead>
+<tr>
+<th>P(접두부, ms)</th>
+<th>a(ms)</th>
+<th>IMLE 시간(ms)</th>
+<th>헤드 효과 배율</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td>3.5</td>
+<td>8.5</td>
+<td>4.71</td>
+</tr>
+<tr>
+<td>10</td>
+<td>3.0</td>
+<td>13.0</td>
+<td>3.08</td>
+</tr>
+<tr>
+<td><strong>15.8</strong></td>
+<td><strong>2.42</strong></td>
+<td><strong>18.2</strong></td>
+<td><strong>2.20</strong></td>
+</tr>
+<tr>
+<td>20</td>
+<td>2.0</td>
+<td>22.0</td>
+<td>1.82</td>
+</tr>
+<tr>
+<td>25</td>
+<td>1.5</td>
+<td>26.5</td>
+<td>1.51</td>
+</tr>
+<tr>
+<td>30</td>
+<td>1.0</td>
+<td>31.0</td>
+<td>1.29</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>이 배율은 P에 민감합니다. IMLE 55 Hz가 측정된 값이므로 P + a = 18.2는 고정이지만, 역산의 P와 a는 같은 엔진 가정에 기대고 있습니다.</li>
+<li>논문의 &quot;bottleneck is algorithmic&quot;(IV-A)은 40 ms 중 21.8 ms가 10단계 루프라는 뜻에서만 맞습니다(55%). 그 이상으로 &quot;시스템 최적화는 천장을 못 넘는다&quot;고 하기에는 엔진 비교가 없습니다.</li>
+</ul>
+<p><strong>필요한 측정.</strong> 같은 장비, 같은 엔진(realtime-vla)에서 π0.5 10단계와 IMLE 1단계를 재면 헤드 배율이 직접 나옵니다. 이 맥에서는 CUDA가 없어 불가합니다.</p>
+<h2>5. 내부 정합성 문제</h2>
+<h3>5.1 실물 VLA-WC의 규모</h3>
+<p>Table V의 VLA-WC는 성공 에피소드당 값이라고 정의됩니다. 패스 시간과 H로 환산하면 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>π0.5 패스 수(66.7 ms 기준)</th>
+<th>같은 패스로 H=8 행동을 15 Hz에서 실행했을 때 로봇 시간</th>
+<th>IMLE 패스 수(18.2 ms)</th>
+<th>H=12, 15 Hz 로봇 시간</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pineapple in bowl</td>
+<td>1,844</td>
+<td>984 s (16 분)</td>
+<td>1,020</td>
+<td>816 s</td>
+</tr>
+<tr>
+<td>Swap pineapple &amp; cube</td>
+<td>2,673</td>
+<td>1,426 s (24 분)</td>
+<td>1,709</td>
+<td>1,367 s</td>
+</tr>
+<tr>
+<td>Pineapple in cabinet</td>
+<td>5,838</td>
+<td>3,114 s (52 분)</td>
+<td>5,462</td>
+<td>4,369 s</td>
+</tr>
+<tr>
+<td>Pineapple on moving plate</td>
+<td>1,342</td>
+<td>716 s (12 분)</td>
+<td>918</td>
+<td>734 s</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>한 번의 pick-and-place 에피소드가 12–52분이라는 것은 DROID형 과제에서 현실적이지 않습니다. 같은 계산을 LIBERO(Table IV)에 하면 15.4 패스 × H=10 = 154 행동 = 약 10초(15 Hz)로 맞습니다.</li>
+<li>따라서 Table V의 VLA-WC는 (a) 여러 에피소드·재시도의 합, (b) A6000에서 π0.5 패스가 훨씬 느림, (c) 15 Hz가 실제 제어 주기가 아님, 중 하나일 가능성이 큽니다. 어느 것인지 논문으로는 가릴 수 없습니다.</li>
+<li>배율(3.9–6.6배)은 같은 집계라면 비교가 가능하지만, 절대값을 &quot;추론 시간&quot;으로 읽으면 안 됩니다.</li>
+<li>저장소의 실물 클라이언트는 호출 시간을 모든 에피소드에서 더하며, 웹소켓 왕복을 포함합니다(<code>04</code> D12). 이는 &quot;성공 에피소드당&quot;과 다릅니다.</li>
+</ul>
+<h3>5.2 장비 표기</h3>
+<ul>
+<li>Table I과 프로젝트 페이지, 저장소의 Triton 문서는 55 Hz를 L40S(약 18 ms/패스)로 적습니다.</li>
+<li>본문 IV-D는 실물을 A6000에서 돌렸고, π0.5 15 Hz와 IMLE 55 Hz를 그대로 씁니다. A6000에서 두 값을 측정했다는 기록은 없습니다.</li>
+</ul>
+<h3>5.3 설정 차이</h3>
+<ul>
+<li>LIBERO H=10 모델은 chunk 50, m=2, 학습률 1.25e-5입니다. H=30 모델은 chunk 100, m=5, 학습률 1.25e-4입니다(<code>04</code> D5, D8). 두 행은 같은 모델의 실행 지평 차이가 아닙니다. 그러면 &quot;H에 따른 성공률 감소&quot;(Fig. 3)가 어떤 모델에서 나왔는지 확인해야 합니다.</li>
+<li>실물은 π0.5 H=8, IMLE H=12로 다릅니다. 같은 H에서의 비교가 없습니다.</li>
+</ul>
+<h2>6. 유도와 식 확인</h2>
+<p><strong>6.1 식 5–6 (m=1).</strong> 고정된 관측 o에서 E_{A,z}‖G(z) − A‖²를 최소화합니다. 각 z에 대해 g = G(z)를 따로 최소화하면 g = E[A | o]입니다. 따라서 G는 z에 무관하게 조건부 평균을 냅니다. 논문 식 6과 같습니다.</p>
+<p><strong>6.2 식 3–4 (m&gt;1).</strong> 각 관측에서 m개 샘플 {G(z_j)}의 최소 거리 min_j ‖G(z_j) − A‖²를 최소화합니다. 기울기는 선택된 후보에만 흐릅니다. 이 형태는 IMLE 원 논문의 목적과 같은 구조입니다. 원 논문의 점근 결과(m → ∞에서 덮음)는 이 PDF에 없어 직접 확인하지 못했습니다. 논문의 &quot;coverage by construction&quot;은 이 점근 성질에 기대고 있으므로, 유한 m(m=2)에서도 성립한다는 주장은 근거가 약합니다. 이 판단을 §7의 toy가 뒷받침합니다.</p>
+<p><strong>6.3 비용.</strong> 학습 한 쌍당 VLM 접두부 1회, 행동 expert 전진 m회(기울기 없음), 선택 후보 1회(기울기 있음)입니다. 추론은 접두부 1회와 expert 1회입니다. 저장소 README는 &quot;m 패스만큼 추가 비용&quot;이라고 씁니다(<code>04</code> §1).</p>
+<p><strong>6.4 처리량과 VLA-WC의 곱셈 구조.</strong> 처리량 T = f × H, 따라서 T_IMLE/T_π = (f_IMLE/f_π) × (H_IMLE/H_π). VLA-WC = (성공 에피소드당 패스 수) × (패스당 시간), 따라서 WC 배율 = (N_π/N_IMLE) × (t_π/t_IMLE). 두 식 모두 다른 요인을 섞지 않으므로 지연 이득과 행동 이득을 따로 봐야 합니다.</p>
+<h2>7. Toy: 다봉 목표에서 cIMLE, 흐름, 회귀 비교</h2>
+<p>설정: 2차원 링 위 4봉우리(반지름 1, 표준편차 0.05), 조건 없음. 2층 tanh MLP(폭 64), Adam(학습률 2e-3), 배치 256, 3000회, 시드 3개. 지표는 4000 샘플 기준입니다. 덮음률은 반지름 0.25 안 질량 ≥ 5%인 봉우리의 비율입니다. 봉우리 사이 비율은 가장 가까운 봉우리까지 거리 &gt; 0.3인 샘플의 비율입니다.</p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>덮음률</th>
+<th>봉우리 사이 비율</th>
+<th>평균 거리</th>
+<th>|샘플 평균|</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L2 회귀 (cIMLE m=1)</td>
+<td>0.00</td>
+<td>1.000</td>
+<td>0.94</td>
+<td>0.02</td>
+</tr>
+<tr>
+<td>cIMLE m=2 (zd=2)</td>
+<td>0.00</td>
+<td>1.000</td>
+<td>0.70</td>
+<td>0.02</td>
+</tr>
+<tr>
+<td>cIMLE m=5</td>
+<td>1.00</td>
+<td>0.48</td>
+<td>0.33</td>
+<td>0.02</td>
+</tr>
+<tr>
+<td>cIMLE m=10</td>
+<td>1.00</td>
+<td>0.22</td>
+<td>0.17</td>
+<td>0.03</td>
+</tr>
+<tr>
+<td>cIMLE m=20</td>
+<td>1.00</td>
+<td>0.09</td>
+<td>0.10</td>
+<td>0.02</td>
+</tr>
+<tr>
+<td>cIMLE m=2, 잠재 zd=32</td>
+<td>0.00</td>
+<td>0.99</td>
+<td>0.68</td>
+<td>0.02</td>
+</tr>
+<tr>
+<td>cIMLE m=2, 15k 회</td>
+<td>0.00</td>
+<td>1.000</td>
+<td>0.71</td>
+<td>0.01</td>
+</tr>
+<tr>
+<td>cIMLE m=2, 흐름 가중치에서 시작(§7.1)</td>
+<td>0.00</td>
+<td>1.000</td>
+<td>0.68</td>
+<td>0.04</td>
+</tr>
+<tr>
+<td>흐름 1단계</td>
+<td>0.00</td>
+<td>0.999</td>
+<td>0.80</td>
+<td>0.08</td>
+</tr>
+<tr>
+<td>흐름 10단계</td>
+<td>1.00</td>
+<td>0.10</td>
+<td>0.11</td>
+<td>0.05</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/toy_m_sweep.png" alt="toy_m_sweep.png" /></p>
+<p class="cap">직접 계산(toy): cIMLE m에 따른 봉우리 사이 샘플 비율(시드 3개), 흐름 1·10단계 기준선.</p>
+<p>(시드 3개의 평균. 시드 간 표준편차는 <code>imle_toy_results.json</code>에 있습니다. 봉우리 사이 비율은 m=5 0.48±0.03, m=10 0.22±0.00, m=20 0.09±0.00, 흐름 10단계 0.10±0.02입니다.)</p>
+<p>해석:</p>
+<ol>
+<li><strong>m=1은 평균으로 붕괴합니다.</strong> 샘플 평균은 0이고 봉우리 사이 비율은 100%입니다. 식 5–6의 예측과 같습니다.</li>
+<li><strong>m=2는 이 toy에서 실패합니다.</strong> 3000회와 15000회 모두 덮음이 없고, 흐름 가중치에서 시작해도 마찬가지입니다. 논문 Fig. 4에서 m=2가 m=1보다 5pp 높다는 결과와 달리, 이 toy에서는 m=2가 회귀와 같은 붕괴를 보입니다. 잠재 차원을 32로 늘려도 마찬가지입니다. 이 toy가 실제 행동 chunk를 대표하지 않으므로 결론은 &quot;이 toy 설정에서 m=2는 다봉을 보존하지 못한다&quot;까지만 말할 수 있습니다.</li>
+<li><strong>m이 커지면 덮음과 정밀도가 함께 좋아지지만, 봉우리 사이 비율은 m=5에서도 절반입니다.</strong> 덮음률만 보고 &quot;다봉 보존&quot;을 주장하면 안 된다는 뜻입니다.</li>
+<li><strong>m=20 IMLE는 10단계 흐름과 비슷한 품질을 1단계로 냅니다</strong>(봉우리 사이 비율 0.09 대 0.10). 다만 학습 비용은 m배입니다.</li>
+<li><strong>1단계 흐름은 평균으로 갑니다</strong>(샘플 평균 0.08, 봉우리 사이 0.999). 1단계 적분 자체가 다봉을 못 살린다는 점에서 논문의 문제 설정(Sec. I)과 맞습니다.</li>
+<li><strong>m=5의 &quot;봉우리 사이&quot; 샘플은 평균이 아니라 호(arc) 위의 보간입니다.</strong> 그림 <code>toy_scatter</code>에서 m=5 샘플은 인접한 봉우리를 잇는 호 위에 남습니다. 즉 덮음은 되지만 봉우리 사이 경로로 샘플이 새어 나옵니다. 평균 붕괴(m=2, 회귀)와는 다른 실패 양식입니다. 흐름 10단계도 소량이 같은 방식으로 남습니다.</li>
+</ol>
+<p><img src="figures/toy_scatter.png" alt="toy_scatter.png" /></p>
+<p class="cap">직접 계산(toy): 4봉우리 링에서 시드 0의 샘플 1000개. m=5는 봉우리를 덮고 호 위에 샘플이 남습니다.</p>
+<p><strong>숨은 가정 점검.</strong> 논문은 G_θ를 π0.5 흐름 체크포인트에서 초기화합니다(III-A). 이 toy는 무작위 초기화이므로, 초기화가 m=2의 실패를 설명하는지 §7.1에서 확인했습니다.</p>
+<h3>7.1 흐름 가중치에서 시작한 cIMLE(m=2)</h3>
+<p>흐름 10단계 망을 3000회 학습한 뒤, 그 가중치를 cIMLE 생성기의 초기값으로 씁니다. 논문과 같이 t = 1을 입력에 고정하고 잡음 z를 흐름 망의 x_t 자리에 넣습니다. 학습은 cIMLE m=2로 3000회 합니다.</p>
+<ul>
+<li>결과: 덮음률 0.00, 봉우리 사이 비율 1.000, 평균 거리 0.68, 샘플 평균 0.04(시드 3개, 시드 간 차이 작음).</li>
+<li>해석: 이 toy 설정에서는 흐름 초기화가 m=2의 붕괴를 고치지 못합니다. 논문의 m=2 성공은 초기화 말고 다른 조건(실제 행동 분포의 구조, chunk 차원, 학습 예산, 평가 설정)에 달려 있을 수 있습니다. 어느 조건인지는 이 toy로 가리지 못했습니다.</li>
+</ul>
+<h2>8. 요약: 이 문서가 확정하는 것과 아닌 것</h2>
+<ul>
+<li><strong>확정:</strong> LIBERO 0.5pp 차이는 유의하지 않음(p = 0.34). 실물은 합산 유의(p = 0.015)이지만 과제별로는 아님. 3.67배는 엔진 1.67배 × 헤드 2.2배로 나눠 읽어야 함(같은 엔진 가정). 실물 VLA-WC 절대값은 현실적인 에피소드 길이와 맞지 않음.</li>
+<li><strong>확정하지 않음:</strong> LIBERO-plus, 실물 jerk의 분산, 원 논문의 m=2 덮음 보장(toy에서는 무작위 초기화와 흐름 초기화 모두 실패했지만 실제 정책과 다름), 체크포인트 선택이 결과를 얼마나 부풀렸는지.</li>
+</ul>
+</section>
+<section class="chapter"><h1>04. 코드 대조: 논문 ↔ 공식 저장소</h1>
+<p><strong>대상:</strong> <code>kianhk6/IMLE-VLA</code>, 커밋 <code>0f08e32</code>(2026-10-28, README 학습 연산량 갱신). 얕은 복제본은 <code>repo/</code>(gitignore)에 있습니다. 라이선스 Apache-2.0.
+<strong>범위:</strong> 코드를 읽고 논문의 식, 설정, 수치 정의와 대조했습니다. 실행하지 않았습니다. 학습과 LIBERO 평가는 CUDA GPU와 시뮬레이터가 필요해 이 맥에서 하지 않았습니다(재현 보류).
+<strong>구성:</strong> 저장소에는 openpi(JAX, Apache-2.0)와 LeRobot(PyTorch, Apache-2.0) 포크, Triton 엔진(<code>openpi/realtime-vla-imle/</code>, Dexmal realtime-vla 기반, MIT)이 들어 있습니다.</p>
+<h2>1. 논문 항목과 일치하는 부분</h2>
+<table>
+<thead>
+<tr>
+<th>논문</th>
+<th>코드</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>식 3–4: m개 후보 중 argmin, 갱신은 선택 후보</td>
+<td>openpi <code>src/openpi/models/pi0.py</code> 426행(<code>jnp.argmin</code>), 선택은 <code>stop_gradient</code> 뒤 재순전파. LeRobot <code>lerobot/src/lerobot/policies/pi05/modeling_pi05.py</code> 1214행(<code>dists.argmin</code>), 선택 후 다시 순전파</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>Algorithm 1: 선택 단계는 기울기 없음, 선택 후보만 역전파</td>
+<td>openpi <code>_compute_loss_imle</code>의 Phase 1(<code>stop_gradient</code>)과 Phase 2(선택 잡음 재순전파). LeRobot <code>_forward_imle</code>의 Phase 1(<code>torch.no_grad</code>, eval 모드)과 Phase 2(train 모드)</td>
+<td>일치. LeRobot은 선택 단계를 eval 모드로 돌립니다. 드롭아웃이 있다면 논문과 다른 설정이지만, 현재 설정에서는 영향이 명시되지 않았습니다</td>
+</tr>
+<tr>
+<td>식 1, 2: z ∼ N(0, I), 잠재 차원 = A의 차원</td>
+<td>openpi: <code>jax.random.normal(noise_rng, (B*k,) + actions.shape[1:])</code>(chunk × action_dim). LeRobot: <code>(B*k, chunk_size, max_action_dim)</code></td>
+<td>일치(패딩 차원 포함, D10)</td>
+</tr>
+<tr>
+<td>III-A: VLM 동결, 행동 헤드만 학습</td>
+<td>openpi 논문 설정 <code>frozen=[&quot;paligemma&quot;]</code>(LIBERO 설정 <code>libero_50_action_05_lr_005_min_2_factor_correct</code>, DROID 설정 <code>16_horrizon_05_lr_2_factor_96_batch</code>). LeRobot은 <code>use_lora</code>가 꺼져 있으면 VLM 전체를 동결(<code>modeling_pi05.py</code> 1826–1832행)</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>추론 1회: 접두부 KV 캐시 한 번, 행동 expert 한 번</td>
+<td>openpi <code>_sample_actions_imle</code>(518행): 접두부 KV 한 번 계산, <code>time = 1.0</code>, 접미부 한 번 통과. LeRobot <code>sample_actions_imle</code>(1358행): 접두부 <code>past_key_values</code> 한 번, <code>denoise_step</code>을 <code>t = 1.0</code>으로 한 번</td>
+<td>일치. t = 1 고정이 논문에 명시되지 않았지만 코드에서는 항상 1입니다</td>
+</tr>
+<tr>
+<td>실물 H=12(π0.5는 H=8)</td>
+<td>openpi <code>examples/droid/main.py</code> 기본 <code>open_loop_horizon = 8</code>, 저장소 README의 실행 명령 <code>--open_loop_horizon 12</code></td>
+<td>일치</td>
+</tr>
+<tr>
+<td>55 Hz의 엔진: Triton + CUDA 그래프, L40S 약 18 ms</td>
+<td><code>openpi/realtime-vla-imle/</code>(<code>pi05_infer_imle.py</code>), <code>openpi/docs/triton.md</code> 83행 &quot;about 18 ms per forward pass on an L40S&quot;</td>
+<td>엔진 존재 일치. 실측 스크립트(Table I 전체)는 없음(D14)</td>
+</tr>
+<tr>
+<td>실물 jerk: 관절 위치의 세 번째 차분 / dt³, 관절 평균, 그리퍼 제외</td>
+<td><code>openpi/examples/droid/main.py</code> 99–100행: <code>JerkMeter(&quot;proprio&quot;, signal=&quot;position&quot;, n_dims=7)</code>(3차). <code>openpi/examples/jerk_metric.py</code>: `</td>
+<td>Δⁿ</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 차이와 누락 (D1–D15)</h2>
+<p>판정 기준: <strong>차이</strong> = 논문과 코드가 다름, <strong>누락</strong> = 논문에 없어 재현에 필요한 정보, <strong>불일치</strong> = 문서끼리 또는 논문과 문서가 맞지 않음.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>판정</th>
+<th>내용</th>
+<th>근거</th>
+<th>영향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>차이(작음)</td>
+<td>LIBERO 학습 데이터 출처가 두 가지입니다. LeRobot은 <code>HuggingFaceVLA/libero</code>, openpi는 <code>physical-intelligence/libero</code></td>
+<td><code>lerobot/examples/imle_vla/train_libero.sh</code>, <code>openpi/src/openpi/training/config.py</code>의 LIBERO 설정</td>
+<td>같은 원데이터의 다른 변환일 가능성이 큽니다. 어느 쪽으로 논문 결과를 냈는지는 불명</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>누락</td>
+<td>LIBERO 평가 경로가 세 가지입니다(LeRobot PyTorch <code>eval_libero.sh</code>, openpi 웹소켓 <code>examples/libero/main.py</code>, Triton <code>eval_triton_imle.py</code>). 논문은 어느 경로인지 쓰지 않습니다</td>
+<td>세 스크립트</td>
+<td>bf16 등 수치 차이 가능성. 수치 차이는 작아 보이지만 확인 전에는 단정하지 않습니다</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>차이(중요)</td>
+<td>표 I의 기준선 &quot;π0.5 JAX 15 Hz&quot;와 IMLE 55 Hz는 엔진이 다릅니다. IMLE 55 Hz는 Triton·CUDA 그래프 엔진에서 나온 값입니다. 같은 엔진의 π0.5 10단계 측정은 저장소에 없습니다</td>
+<td><code>docs/triton.md</code>(엔진 설명), <code>openpi/realtime-vla/benchmark.py</code>(Dexmal의 기존 벤치마크, 어느 행을 재었는지 확인되지 않음)</td>
+<td>3.67배 중 헤드 효과는 2.2배로 줄어듭니다(<code>03</code> §4)</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>누락</td>
+<td>EMA를 씁니다. LeRobot LIBERO는 <code>use_ema=true</code>, <code>ema_decay=0.999</code>, 평가도 EMA 가중치(<code>eval_libero.sh</code>). openpi DROID 설정은 <code>ema_decay=0.99</code>, LIBERO 설정은 0.999. 논문은 EMA를 언급하지 않습니다</td>
+<td><code>train_libero.sh</code>, <code>eval_libero.sh</code>, <code>configuration_pi05.py</code> 123–124행, openpi <code>config.py</code></td>
+<td>재현 시 EMA를 빼면 결과가 달라질 수 있습니다. 논문의 수치가 EMA 가중치인지 불명</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>차이</td>
+<td>두 LIBERO 모델이 같은 모델의 실행 지평 차이가 아닙니다. H=10은 chunk 50, m=2, 학습률 1.25e-5. H=30은 chunk 100, m=5(<code>imle_k=5</code>), 학습률 1.25e-4. 논문은 &quot;m=2 throughout&quot;이라고 씁니다</td>
+<td><code>train_libero.sh</code> 두 레시피(h50, h100), <code>lerobot/README.md</code> 체크포인트 표</td>
+<td>Table II의 H=30 행과 Fig. 3이 어느 모델의 결과인지 불명. 논문 본문의 &quot;m=2 throughout&quot;과 H=30 레시피가 맞지 않습니다</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>누락(위험)</td>
+<td>저장소 README는 suite별 체크포인트가 &quot;그 suite에서 가장 좋은 것&quot;이라고 씁니다. 선택 기준(검증 셋인지, 평가 성공률인지)과 절차는 없습니다</td>
+<td><code>lerobot/README.md</code>, 체크포인트 표</td>
+<td>평가 성공률로 고르면 Table II 수치가 과장됩니다. 논문의 &quot;highest average&quot;는 이 선택에 달렸을 수 있습니다</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>불일치(문서)</td>
+<td>학습 스텝이 문서끼리 맞지 않습니다. LeRobot README는 &quot;약 8시간 후 step 5000 체크포인트&quot;라고 쓰지만 <code>train_libero.sh</code>는 10,000 스텝입니다. openpi README는 DROID &quot;step 57000&quot;을 공개했다고 쓰지만 DROID 설정 <code>num_train_steps</code>는 256,000입니다</td>
+<td><code>lerobot/README.md</code> 학습 절, <code>train_libero.sh</code>, <code>openpi/README.md</code>, openpi <code>config.py</code></td>
+<td>어느 스텝의 체크포인트로 논문 결과를 냈는지 불명</td>
+</tr>
+<tr>
+<td>D8</td>
+<td>차이</td>
+<td>같은 LIBERO 설정의 학습률과 감쇠가 두 구현에서 다릅니다. openpi 논문 설정은 peak 1.25e-5, 최종 1.25e-6, 워밍업 333. LeRobot H=10 레시피는 1.25e-5에서 1.25e-7로, 워밍업 1000</td>
+<td><code>train_libero.sh</code>, openpi <code>config.py</code></td>
+<td>두 구현에서 같은 결과가 나온다고 가정할 수 없습니다</td>
+</tr>
+<tr>
+<td>D9</td>
+<td>차이(무해할 가능성)</td>
+<td>코드에만 있는 옵션: <code>imle_softmax_temp</code>(설정에만 있고 학습·추론 경로에서 읽히지 않음), <code>noise_locked_reactive</code>(추론, 기본 꺼짐), <code>continuity_k_candidates</code>(추론, 기본 1). 논문에는 없습니다</td>
+<td><code>configuration_pi05.py</code> 53, 60, 66행</td>
+<td>기본값으로 실행하면 논문과 같은 경로입니다. 논문 결과에 쓰였는지는 확인되지 않음</td>
+</tr>
+<tr>
+<td>D10</td>
+<td>차이(작음)</td>
+<td>선택 거리 정의가 두 구현에서 다릅니다. openpi는 모델의 행동 차원(패딩 포함, DROID 32) 전체로 거리를 계산합니다. LeRobot은 <code>original_action_dim</code>으로 잘라 거리를 계산하지만, 손실(<code>loss</code>)은 패딩을 포함한 전체에 대해 계산합니다</td>
+<td>openpi <code>pi0.py</code> 413행(거리), 426행(argmin), 445행(갱신 손실). LeRobot 1164–1166행(차원), 1213행(선택 거리), 1262행과 1273행(갱신 손실)</td>
+<td>패딩 차원의 목표가 0이라 영향은 작을 것으로 보입니다. 논문의 &quot;행동 거리&quot; 정의와 어느 쪽이 맞는지는 명시되지 않음</td>
+</tr>
+<tr>
+<td>D11</td>
+<td>누락</td>
+<td>jerk 집계 방식과 dt가 논문에 없습니다. 클라이언트는 모든 에피소드와 성공 에피소드를 따로 집계하고, 기본 dt는 1.0입니다</td>
+<td><code>openpi/examples/jerk_metric.py</code> 헤더 주석, <code>examples/droid/main.py</code> 97–100행</td>
+<td>비율(2.2–3.0배)은 dt에 무관하지만 집계 방식에 따라 값이 달라집니다</td>
+</tr>
+<tr>
+<td>D12</td>
+<td>차이(중요)</td>
+<td>VLA-WC의 정의가 다릅니다. 논문은 &quot;성공 에피소드당 VLA 시간&quot;이지만, 코드는 <code>client.infer</code> 호출 시간을 모든 에피소드에서 더하고(웹소켓 왕복 포함) 출력합니다. 성공 에피소드만 거르는 코드는 보이지 않습니다</td>
+<td><code>openpi/examples/libero/main.py</code> 95–97, 170–173, 220–224행</td>
+<td>실물 Table V의 절대값을 재현하는 경로가 없습니다(<code>03</code> §5.1)</td>
+</tr>
+<tr>
+<td>D13</td>
+<td>불일치</td>
+<td>장비 표기가 맞지 않습니다. Table I(55 Hz)와 프로젝트 페이지, 저장소 문서는 L40S입니다. 본문 IV-D는 실물을 A6000에서 돌렸고 π0.5 15 Hz와 IMLE 55 Hz를 그대로 씁니다</td>
+<td>논문 IV-A, IV-D, 프로젝트 페이지</td>
+<td>실물의 빈도는 L40S 측정을 옮긴 값일 가능성이 큽니다(확인 불가)</td>
+</tr>
+<tr>
+<td>D14</td>
+<td>누락</td>
+<td>Table I의 PyTorch+compile 20 Hz와 Triton π0.5 25 Hz를 재는 스크립트가 IMLE 저장소에 없습니다. Dexmal 저장소의 <code>benchmark.py</code>가 있지만 어느 실행이 이 값을 냈는지 기록이 없습니다</td>
+<td><code>openpi/realtime-vla/benchmark.py</code></td>
+<td>기준선의 재현성이 떨어집니다</td>
+</tr>
+<tr>
+<td>D15</td>
+<td>누락</td>
+<td>LIBERO-plus(Fig. 2) 평가 코드와 설정이 없습니다. 논문에 수치 표도 없습니다</td>
+<td>저장소 전체 검색(<code>LIBERO-plus</code>, <code>libero_plus</code>, <code>liberoplus</code>: 없음)</td>
+<td>Fig. 2는 재현할 수 없습니다</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 재현에 필요한 빈칸 정리</h2>
+<p>논문과 저장소를 합쳐도 다음 값은 확정되지 않습니다.</p>
+<ul>
+<li>학습 스텝, 배치, 학습률, 감쇠가 두 구현에서 다름(D7, D8). 논문 결과에 쓴 체크포인트 스텝 불명.</li>
+<li>EMA 사용 여부(D4), 체크포인트 선택 규칙(D6), 평가 경로(D2).</li>
+<li>H=30 결과의 모델(D5).</li>
+<li>실물 VLA-WC의 집계(D12)와 jerk 집계(D11).</li>
+<li>기준선의 엔진과 측정 스크립트(D3, D14).</li>
+</ul>
+<h2>4. 구현 가능성 판정</h2>
+<ul>
+<li><strong>공식 재현 (학습과 LIBERO 평가):</strong> 가능성은 있습니다. 코드와 가중치(HF <code>kinster/IMLE-VLA</code>의 LIBERO 10개와 DROID)가 공개되어 있습니다. 다만 CUDA GPU 1장 이상, LIBERO 시뮬레이터, 그리고 원시 학습 데이터(수 GB)가 필요합니다. 이 맥(Apple M4 Pro, 약 24 GiB 통합 메모리, MPS, CUDA 없음, torch 미설치)에서는 <strong>불가</strong>합니다. 이번 작업은 재현을 보류했습니다.</li>
+<li><strong>Triton 55 Hz 측정:</strong> CUDA 장비가 필요합니다. 이 맥에서는 불가입니다.</li>
+<li><strong>실물 재현:</strong> Franka 장비와 DROID 학습 설정(RLDS, 수 TB 규모)이 필요해 불가입니다.</li>
+<li><strong>아이디어 재구현:</strong> 쉬운 편입니다. cIMLE 손실은 약 30–50줄입니다(후보 m개 생성, argmin, 선택 후보 재순전파). 추론은 접두부 KV 캐시를 두고 행동 expert를 한 번 돌리면 됩니다. 어려운 부분은 (a) π0.5 흐름 체크포인트를 그대로 쓰는 초기화와 t = 1 입력, (b) EMA와 체크포인트 선택 규칙, (c) chunk 길이와 m 선택입니다. 이 셋은 논문만으로 정할 수 없어 임의로 정해야 합니다.</li>
+<li><strong>종합 판정:</strong> 공식 재현은 GPU가 있으면 가능하지만 이 맥에서는 불가입니다. 아이디어 재구현은 중간 난이도이며, 재구현 결과를 논문 수치와 비교하려면 D4–D8을 먼저 확인해야 합니다. 저장소에는 학습 명령, 설정 이름, 엔진, 체크포인트가 있어 빈칸이 임의 선택보다는 확인 문제로 좁혀집니다.</li>
+</ul>
+<h2>5. 라이선스와 권리</h2>
+<ul>
+<li>저장소 Apache-2.0(LICENSE, NOTICE). Triton 엔진은 MIT(Dexmal). Gemma·PaliGemma 가중치는 별도 라이선스(LICENSE_GEMMA.txt).</li>
+<li>이 폴더는 저장소의 코드를 복사하지 않았습니다. <code>repo/</code>는 gitignore이고, 공개본에는 넣지 않습니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>02. 선행연구와 관련 자료</h1>
+<h2>1. 계보</h2>
+<p>논문이 다루는 문제는 &quot;행동 생성의 반복 횟수&quot;입니다. 계보를 세 줄로 나눕니다.</p>
+<p><strong>(a) 반복 생성의 바탕: 흐름 매칭과 확산</strong></p>
+<ul>
+<li>흐름 매칭 [38] → π0 [13] → π0.5 [14]. π0.5의 행동 expert는 Euler 10단계를 씁니다(Sec. III-B).</li>
+<li>확산 정책 [19], Octo [15], RDT [16], CogACT [17]도 같은 반복 구조입니다.</li>
+</ul>
+<p><strong>(b) 1단계 생성: 세 가지 방식</strong></p>
+<ul>
+<li>증류: Shallow-π [7](π0.5를 얕은 학생으로), 일관성 정책 [29] 같은 단일 단계 학생 [29–31]. 교사의 출력 분포와 편향을 물려받습니다.</li>
+<li>교사 없는 회귀: OpenVLA-OFT [8](L1 회귀 헤드). 저자들의 인용 내용으로는 L1이 조건부 중앙값으로 붕괴합니다. 그 해결을 7B 백본에 돌립니다(Sec. II).</li>
+<li>교사 없는 cIMLE: 이 논문. IMLE [21] → AIMLE [22], ChIMLE [23], RS-IMLE [24]는 이미지 합성용입니다. WIMLE [25]은 같은 저자 Aghabozorgi가 참여해 세계 모델에 cIMLE를 쓴 연구입니다. 로봇 정책에 쓴 선행은 [31], [35–37]처럼 특화 정책입니다(Sec. II, &quot;From specialists to a generalist&quot;).</li>
+</ul>
+<p><strong>(c) 시스템 수준 가속: 이 논문과 보완</strong></p>
+<ul>
+<li>커널 튜닝 [12] Ma et al.(realtime-VLA, Triton). 저자들은 55 Hz를 이 방식의 엔진 위에서 얻었다고 씁니다(Sec. II 첫 문단, IV-A).</li>
+<li>비동기 흐름 [11], 양자화 [9], RLRC [10], FAST 토큰화 [6], VLA-perf [5].</li>
+</ul>
+<p><strong>논문 밖에서 확인할 것:</strong> cIMLE의 원 논문 Li &amp; Malik(2018, arXiv:1809.09087)은 이 PDF에 없습니다. 이 폴더는 IMLE 이론을 원 논문에서 직접 확인하지 않았고, 식 3–4의 형태는 논문 본문에서만 읽었습니다.</p>
+<h2>2. 가까운 대안 비교</h2>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>학습 필요</th>
+<th>헤드 단계</th>
+<th>다봉 처리</th>
+<th>보고된 속도</th>
+<th>같은 백본</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>π0.5 흐름 (기준)</td>
+<td>이미 학습됨</td>
+<td>10</td>
+<td>흐름</td>
+<td>15 Hz (JAX, L40S)</td>
+<td>예</td>
+<td>IV-A, Table I</td>
+</tr>
+<tr>
+<td>IMLE-VLA (이 논문)</td>
+<td>예(LIBERO 10k 스텝, DROID 57k 스텝 공개)</td>
+<td>1</td>
+<td>cIMLE (m=2)</td>
+<td>55 Hz (Triton, L40S)</td>
+<td>예(VLM 동결)</td>
+<td>Table I, <code>04</code> §2</td>
+</tr>
+<tr>
+<td>AdaVLA (<code>adavla/</code>)</td>
+<td>아니요(학습 없음)</td>
+<td>1–3, 곡률에 따라</td>
+<td>흐름의 적응 적분</td>
+<td>513 ms(Jetson AGX Orin, adavla 폴더가 옮긴 값)</td>
+<td>예(π0.5, X-VLA)</td>
+<td><code>adavla/analysis/01</code></td>
+</tr>
+<tr>
+<td>Shallow-π0.5-L6 [7]</td>
+<td>예(증류)</td>
+<td>10 (얕은 층)</td>
+<td>교사 상속</td>
+<td>2.3배 (H100)</td>
+<td>아니요(얕은 학생)</td>
+<td>Table II</td>
+</tr>
+<tr>
+<td>OpenVLA-OFT [8]</td>
+<td>예(L1)</td>
+<td>1</td>
+<td>없음(중앙값)</td>
+<td>0.69배</td>
+<td>아니요(7B 백본)</td>
+<td>Table II</td>
+</tr>
+<tr>
+<td>SmolVLA [41]</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>기준 1.0</td>
+<td>아니요</td>
+<td>Table II</td>
+</tr>
+</tbody>
+</table>
+<p><strong>읽는 법.</strong> 학습을 요구하는지, 단계 수가 몇인지, 다봉을 어떻게 다루는지, 어떤 기준선과 비교했는지가 셋의 차이입니다. 특히 AdaVLA는 같은 π0.5를 다루고 학습이 없다는 점에서 IMLE-VLA와 직접 비교해야 하는 가장 가까운 대안입니다. 두 논문 모두 &quot;같은 학회(IROS 2026)&quot;입니다.</p>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>폴더</th>
+<th>무엇인가</th>
+<th>IMLE-VLA와의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>adavla/</code></td>
+<td>π0.5·X-VLA 흐름 행동 머리의 학습 없는 적응 적분(AdaVLA, arXiv:2608.29208)</td>
+<td><strong>가장 가까움.</strong> 같은 π0.5 행동 머리의 단계 수를 줄이는 방법. 학습 유무, 다봉 처리, 비교 설정(NFE 대 단일 단계)이 다릅니다. adavla의 <code>02</code> §1은 이미 IMLE-VLA를 같은 학회 대안으로 적었습니다. 두 논문 모두 정적 기준선(같은 NFE)을 빠뜨렸다는 점이 공통입니다.</td>
+</tr>
+<tr>
+<td><code>pacevla/</code></td>
+<td>행동 청크의 실행 속도(PaceVLA, arXiv:2610.25961)</td>
+<td>같은 &quot;실행 시간&quot; 축. IMLE-VLA의 처리량 11배는 빈도 × H로 정의되며, H를 늘리면 성공률이 떨어집니다(Fig. 3). 지연 이득과 실행 속도를 한 예산으로 봐야 합니다.</td>
+</tr>
+<tr>
+<td><code>chronospolicy/</code></td>
+<td>관측·실행 시각을 명시하는 정책(Chronos Policy, arXiv:2610.13929)</td>
+<td>정지-이동 문제(stop-and-go)의 다른 해법. IMLE-VLA는 추론 지연을 줄이고, Chronos는 지연에 강건하도록 학습합니다.</td>
+</tr>
+<tr>
+<td><code>openwam/</code></td>
+<td>영상·행동 WAM의 노이즈 평면과 설계 부품(OpenWAM, arXiv:2609.07398)</td>
+<td>잡음 설계 관점. IMLE는 잡음 z를 다봉 샘플의 색인으로 씁니다. 흐름 매칭의 잡음–데이터 보간과 다른 기하입니다.</td>
+</tr>
+<tr>
+<td><code>thinkworld/</code></td>
+<td>VLM이 손목 움직임 토큰을 생성하는 WAM(ThinkWorld, arXiv:2610.37666)</td>
+<td>직접 관계 약함. 평가에 LIBERO-PRO·LIBERO-Plus를 씁니다(IMLE-VLA와 같은 벤치마크지만 교란 설정이 같은지는 확인하지 않음).</td>
+</tr>
+<tr>
+<td><code>agentic_wam/</code></td>
+<td>영상·코드·행동을 같은 흐름 루프에서 생성하는 AW-0(arXiv:2610.30136)</td>
+<td>공통 루프에서 흐름 단계를 나누는 문제. 단일 단계 행동 헤드를 공동 루프에 넣으면 영상 쪽 단계는 그대로 남습니다.</td>
+</tr>
+</tbody>
+</table>
+<h2>4. GitHub 저장소 (2026-11-10 확인)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>별</th>
+<th>최근 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kianhk6/IMLE-VLA</td>
+<td>논문 코드(openpi 포크와 LeRobot 포크를 하위 폴더로 포함), 체크포인트 링크</td>
+<td>저자(논문 초록, 프로젝트 페이지 &quot;Code&quot; 링크)</td>
+<td>Apache-2.0</td>
+<td>4</td>
+<td><code>0f08e32</code> (2026-10-28)</td>
+</tr>
+<tr>
+<td>Physical-Intelligence/openpi</td>
+<td>π0/π0.5 원본 JAX·PyTorch 구현(IMLE 포크의 기준)</td>
+<td>바탕 모델 공식</td>
+<td>Apache-2.0</td>
+<td>14,603</td>
+<td><code>215abfb</code> (2026-08-24)</td>
+</tr>
+<tr>
+<td>huggingface/lerobot</td>
+<td>π0.5 PyTorch 포트, LIBERO 체크포인트 배포처(IMLE 포크의 기준, 저장소 README 기준 v0.4.2)</td>
+<td>공식 라이브러리</td>
+<td>Apache-2.0</td>
+<td>28,790</td>
+<td><code>81b8c5b</code> (2026-11-09)</td>
+</tr>
+<tr>
+<td>dexmal/realtime-vla</td>
+<td>Triton·CUDA 그래프 추론 엔진(IMLE 엔진의 기반, 저장소 README 인용)</td>
+<td>엔진 저자 공식</td>
+<td>MIT</td>
+<td>640</td>
+<td>해시 미확인 (2026-09-30 push)</td>
+</tr>
+<tr>
+<td>Lifelong-Robot-Learning/LIBERO</td>
+<td>벤치마크</td>
+<td>공식</td>
+<td>MIT</td>
+<td>2,525</td>
+<td><code>8f1084e</code> (2025-03-15, adavla 폴더 기록과 같음)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>프로젝트 페이지(kianhk6.github.io/IMLE-VLA)는 &quot;Paper&quot;와 &quot;Code&quot; 링크를 가지며 GitHub 저장소로 연결됩니다(<code>paper/project_page.html</code>).</li>
+<li>Hugging Face <code>kinster/IMLE-VLA</code>: 저장소 README가 체크포인트 위치로 밝힌 곳입니다. 메타데이터만 확인했고(카드 라이선스 apache-2.0, 마지막 수정 2026-10-28, 다운로드 0으로 표시) 파일은 받지 않았습니다. <code>libero/</code>에 H=10과 H=30의 suite별·overall 체크포인트 10개가 있습니다. <code>droid/jax/57000</code>과 <code>droid/triton/</code> 패키지도 있습니다.</li>
+<li>제3자 미러(예: 다른 사용자 저장소의 논문 요약, 다른 체크포인트 이름)는 공식이 아니므로 쓰지 않았습니다.</li>
+<li>저장소 내 openpi가 기준으로 삼은 업스트림 커밋 <code>86b6dee</code>(2025-12-27)는 업스트림에 존재합니다(확인함).</li>
+</ul>
+<h2>5. 이 논문과 직접 맞대는 자료</h2>
+<ul>
+<li><strong>AdaVLA</strong> (<code>adavla/</code>): 같은 π0.5 행동 머리, 학습 없음. 비교 실험을 같은 평균 NFE에서 하면 두 방법의 차이가 드러납니다. 이 논문에는 그 비교가 없습니다.</li>
+<li><strong>Shallow-π</strong> [7]: Table II의 Inf.(×) 값(H100 측정)이 여기서 옮겨졌습니다. IMLE의 L40S 측정과 장비가 다릅니다.</li>
+<li><strong>Dexmal realtime-vla</strong> [12]: Table I의 Triton 25 Hz 행의 출처로 보입니다. 이 저장소에 <code>benchmark.py</code>가 있으나 이 행을 재현하는 실행 기록은 없습니다(<code>04</code> D14).</li>
+</ul>
+</section></body></html>
