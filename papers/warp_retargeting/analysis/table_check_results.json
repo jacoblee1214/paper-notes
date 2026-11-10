@@ -1,0 +1,304 @@
+{
+  "table1": {
+    "avg_check": {
+      "MINK": {
+        "replay_mean_of_tasks": 79.5,
+        "replay_reported": 79.5,
+        "policy_mean_of_tasks": 58.67,
+        "policy_reported": 59
+      },
+      "WARP": {
+        "replay_mean_of_tasks": 80.0,
+        "replay_reported": 80.0,
+        "policy_mean_of_tasks": 70.67,
+        "policy_reported": 71
+      }
+    },
+    "policy_diff_pts": {
+      "can_sort": 6,
+      "pouring": 4,
+      "coffee": 26,
+      "mean": 12.0
+    },
+    "fisher": {
+      "policy_per_task": [
+        {
+          "task": "can_sort",
+          "n": 50,
+          "WARP": "50/50",
+          "MINK": "47/50",
+          "fisher_p": 0.2424,
+          "wilson_WARP": [
+            0.929,
+            1.0
+          ],
+          "wilson_MINK": [
+            0.838,
+            0.979
+          ]
+        },
+        {
+          "task": "can_sort",
+          "n": 100,
+          "WARP": "100/100",
+          "MINK": "94/100",
+          "fisher_p": 0.0289,
+          "wilson_WARP": [
+            0.963,
+            1.0
+          ],
+          "wilson_MINK": [
+            0.875,
+            0.972
+          ]
+        },
+        {
+          "task": "pouring",
+          "n": 50,
+          "WARP": "39/50",
+          "MINK": "37/50",
+          "fisher_p": 0.8153,
+          "wilson_WARP": [
+            0.648,
+            0.872
+          ],
+          "wilson_MINK": [
+            0.604,
+            0.841
+          ]
+        },
+        {
+          "task": "pouring",
+          "n": 100,
+          "WARP": "78/100",
+          "MINK": "74/100",
+          "fisher_p": 0.6197,
+          "wilson_WARP": [
+            0.689,
+            0.85
+          ],
+          "wilson_MINK": [
+            0.646,
+            0.816
+          ]
+        },
+        {
+          "task": "coffee",
+          "n": 50,
+          "WARP": "17/50",
+          "MINK": "4/50",
+          "fisher_p": 0.0026,
+          "wilson_WARP": [
+            0.224,
+            0.478
+          ],
+          "wilson_MINK": [
+            0.032,
+            0.188
+          ]
+        },
+        {
+          "task": "coffee",
+          "n": 100,
+          "WARP": "34/100",
+          "MINK": "8/100",
+          "fisher_p": 0.0,
+          "wilson_WARP": [
+            0.255,
+            0.437
+          ],
+          "wilson_MINK": [
+            0.041,
+            0.15
+          ]
+        }
+      ],
+      "policy_holm_n50": [
+        0.48484848484848486,
+        0.8152594598987604,
+        0.007820504650913454
+      ],
+      "replay_per_task_n200": [
+        {
+          "task": "can_sort",
+          "WARP": "197/200",
+          "MINK": "199/200",
+          "fisher_p": 0.6231
+        },
+        {
+          "task": "pouring",
+          "WARP": "181/200",
+          "MINK": "177/200",
+          "fisher_p": 0.6251
+        },
+        {
+          "task": "coffee",
+          "WARP": "102/200",
+          "MINK": "101/200",
+          "fisher_p": 1.0
+        }
+      ],
+      "replay_holm_n200": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "policy_relative_gain_avg_pct": 20.3,
+    "pooled_policy_n50": {
+      "WARP": "106/150",
+      "MINK": "88/150",
+      "fisher_p": 0.039798
+    }
+  },
+  "fig7_reading": {
+    "reading_note": "그림 막대 라벨에서 읽음, ±1%p. MINK 변형(EF/TE)은 실물 절에 명시되지 않음",
+    "rows": [
+      {
+        "task": "Rotate box",
+        "rollout_WARP_pct": 65,
+        "rollout_MINK_pct": 40,
+        "diff_pts": 25,
+        "fisher_p_(20 half-trials)": 0.205,
+        "wilson_95_WARP_10trials": [
+          35.4,
+          86.3
+        ],
+        "wilson_95_MINK_10trials": [
+          16.8,
+          68.7
+        ]
+      },
+      {
+        "task": "Push cart",
+        "rollout_WARP_pct": 75,
+        "rollout_MINK_pct": 25,
+        "diff_pts": 50,
+        "fisher_p_(20 half-trials)": 0.004,
+        "wilson_95_WARP_10trials": [
+          44.2,
+          91.9
+        ],
+        "wilson_95_MINK_10trials": [
+          8.1,
+          55.8
+        ]
+      },
+      {
+        "task": "Laundry",
+        "rollout_WARP_pct": 37.5,
+        "rollout_MINK_pct": 7.5,
+        "diff_pts": 30.0,
+        "fisher_p_(20 half-trials)": 0.065,
+        "wilson_95_WARP_10trials": [
+          15.2,
+          66.7
+        ],
+        "wilson_95_MINK_10trials": [
+          1.1,
+          37.5
+        ]
+      }
+    ],
+    "rollout_mean_diff_pts_3tasks": 35.0,
+    "holm_p": [
+      0.205,
+      0.012,
+      0.13
+    ],
+    "rotate_box_rollout_text_65_vs_40": "논문 본문 값과 일치"
+  },
+  "table3_4_best_checks": {
+    "514_palm": {
+      "best_off": "WARP off",
+      "best_on": "MINK-EF on"
+    },
+    "514_p95": {
+      "best_off": "WARP off",
+      "best_on": "MINK-EF on"
+    },
+    "514_ori": {
+      "best_off": "SEW-M off",
+      "best_on": "MINK-EF on"
+    },
+    "514_torso_out": {
+      "best_off": "SEW-M off",
+      "best_on": "MINK-TE on"
+    },
+    "514_limit": {
+      "best_off": "WARP off",
+      "best_on": "WARP on"
+    },
+    "514_coll": {
+      "best_off": "WARP off",
+      "best_on": "WARP on"
+    },
+    "514_nnad_torso": {
+      "best_off": "WARP off",
+      "best_on": "WARP on"
+    },
+    "514_pca": {
+      "best_off": "WARP off",
+      "best_on": "WARP on"
+    },
+    "514_rms": {
+      "best_off": "WARP off",
+      "best_on": "WARP on"
+    },
+    "514_solve_ms": {
+      "best_off": "WARP off",
+      "best_on": "SEW-M on"
+    },
+    "514_nnad_R": {
+      "best_off": "SEW-M off",
+      "best_on": "SEW-M on"
+    },
+    "514_nnad_L": {
+      "best_off": "SEW-M off",
+      "best_on": "SEW-M on"
+    },
+    "7.6k_palm_raw": {
+      "best": "WARP off"
+    },
+    "7.6k_palm_clean": {
+      "best": "MINK-EF off"
+    },
+    "7.6k_p95": {
+      "best": "WARP off"
+    },
+    "7.6k_limit": {
+      "best": "SEW-M off"
+    },
+    "7.6k_coll": {
+      "best": "SEW-M off"
+    },
+    "7.6k_nnad_torso": {
+      "best": "MINK-EF off"
+    },
+    "7.6k_nnad_R": {
+      "best": "SEW-M off"
+    },
+    "7.6k_solve_ms": {
+      "best": "SEW-M off"
+    },
+    "7.6k_margin_higher_better": {
+      "best": "SEW-M off"
+    }
+  },
+  "ratios": {
+    "palm_raw_reduction_vs_MINK-EF_pct": 99.34,
+    "palm_raw_reduction_vs_MINK-TE_pct": 99.975,
+    "palm_raw_ratio_MINK-EF_over_WARP": 152.4,
+    "solve_ratio_MINK-EF_over_WARP_514": 28.3,
+    "solve_ratio_SEW-M_over_WARP_514": 2.19,
+    "palm_clean_ratio_WARP_over_MINK-EF_7.6k": 1.92,
+    "palm_raw_7.6k_ratio_MINK-EF_over_WARP": 20.8,
+    "514_wall_time_WARP_min": 15.4,
+    "514_wall_time_MINK-EF_h": 7.25,
+    "7.6k_frames_est": 2015438,
+    "7.6k_wall_time_WARP_h_est": 5.89,
+    "7.6k_wall_time_MINK-EF_h_est": 214.3,
+    "claim_1_hour_vs_1_day_note": "514 subset 기준 WARP 약 15분, MINK-EF 약 7.3시간. 논문 '1시간 대 하루'와 자릿수가 맞지 않음(코어 수, 전처리 포함 여부 미기재)",
+    "WARP_on_palm_raw_vs_clean_ratio": 156.2
+  }
+}

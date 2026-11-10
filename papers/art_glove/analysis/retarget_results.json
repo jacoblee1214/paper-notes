@@ -1,0 +1,90 @@
+{
+  "config": {
+    "link_human_cm": [
+      4.5,
+      2.8,
+      2.0
+    ],
+    "link_robot_cm": [
+      4.86,
+      2.66,
+      2.1
+    ],
+    "frames": 400,
+    "contact_frac": 0.333,
+    "human_ik_max_tip_err_mm": 0.0,
+    "note": "링크 비율, 접촉 기준, 잡음, 라벨 오류율은 모두 가정"
+  },
+  "runs": {
+    "lam=0,eps=0": {
+      "contact_height_mm_median": 0.985,
+      "contact_height_mm_p90": 2.904,
+      "contact_penetration_frac": 1.0,
+      "joint_dev_contact_deg_median": 0.0,
+      "joint_dev_free_deg_p90": 0.0
+    },
+    "lam=1,eps=0": {
+      "contact_height_mm_median": 0.015,
+      "contact_height_mm_p90": 0.159,
+      "contact_penetration_frac": 0.609,
+      "joint_dev_contact_deg_median": 0.686,
+      "joint_dev_free_deg_p90": 0.0
+    },
+    "lam=10,eps=0": {
+      "contact_height_mm_median": 0.002,
+      "contact_height_mm_p90": 0.017,
+      "contact_penetration_frac": 0.414,
+      "joint_dev_contact_deg_median": 0.696,
+      "joint_dev_free_deg_p90": 0.0
+    },
+    "lam=100,eps=0": {
+      "contact_height_mm_median": 0.0,
+      "contact_height_mm_p90": 0.002,
+      "contact_penetration_frac": 0.0,
+      "joint_dev_contact_deg_median": 0.697,
+      "joint_dev_free_deg_p90": 0.0
+    },
+    "lam=0,eps=0.1": {
+      "contact_height_mm_median": 0.985,
+      "contact_height_mm_p90": 2.904,
+      "contact_penetration_frac": 1.0,
+      "joint_dev_contact_deg_median": 0.0,
+      "joint_dev_free_deg_p90": 0.0
+    },
+    "lam=1,eps=0.1": {
+      "contact_height_mm_median": 0.089,
+      "contact_height_mm_p90": 0.164,
+      "contact_penetration_frac": 0.647,
+      "joint_dev_contact_deg_median": 0.616,
+      "joint_dev_free_deg_p90": 0.0
+    },
+    "lam=10,eps=0.1": {
+      "contact_height_mm_median": 0.01,
+      "contact_height_mm_p90": 0.381,
+      "contact_penetration_frac": 0.504,
+      "joint_dev_contact_deg_median": 0.638,
+      "joint_dev_free_deg_p90": 2.295
+    },
+    "lam=100,eps=0.1": {
+      "contact_height_mm_median": 0.001,
+      "contact_height_mm_p90": 0.002,
+      "contact_penetration_frac": 0.098,
+      "joint_dev_contact_deg_median": 0.639,
+      "joint_dev_free_deg_p90": 2.647
+    }
+  },
+  "linear_check": {
+    "J_sq_median_cm2_per_rad2": 65.903,
+    "pred_contact_height_mm_median": {
+      "lam=1": 0.0147,
+      "lam=10": 0.0015,
+      "lam=100": 0.0001
+    },
+    "pred_contact_height_mm_p90": {
+      "lam=1": 0.1623,
+      "lam=10": 0.0171,
+      "lam=100": 0.0017
+    },
+    "joint_limit_deg_median": 0.696
+  }
+}

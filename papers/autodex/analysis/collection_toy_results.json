@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "N_TRIALS": 500,
+    "loop_mu_s": 48.2,
+    "loop_sd_s": 8.0,
+    "overhead_s": 26.0,
+    "intervention_wall_s": 600.0,
+    "intervention_human_s": 120.0,
+    "reps": 400,
+    "note": "설계값 토이. 개입 비용과 리셋 빈도는 논문에 없다."
+  },
+  "throughput": {
+    "reset_every=1, q=0.0": {
+      "wall_h_mean": 10.3,
+      "wall_h_sd": 0.05,
+      "interventions_mean": 0.0,
+      "human_h_mean": 0.0,
+      "trials_per_wall_h": 48.5
+    },
+    "reset_every=1, q=0.02": {
+      "wall_h_mean": 11.93,
+      "wall_h_sd": 0.51,
+      "interventions_mean": 9.8,
+      "human_h_mean": 0.33,
+      "trials_per_wall_h": 41.9
+    },
+    "reset_every=1, q=0.05": {
+      "wall_h_mean": 14.43,
+      "wall_h_sd": 0.75,
+      "interventions_mean": 24.8,
+      "human_h_mean": 0.83,
+      "trials_per_wall_h": 34.6
+    },
+    "reset_every=1, q=0.1": {
+      "wall_h_mean": 18.59,
+      "wall_h_sd": 1.06,
+      "interventions_mean": 49.7,
+      "human_h_mean": 1.66,
+      "trials_per_wall_h": 26.9
+    },
+    "reset_every=1, q=0.2": {
+      "wall_h_mean": 26.93,
+      "wall_h_sd": 1.46,
+      "interventions_mean": 99.7,
+      "human_h_mean": 3.32,
+      "trials_per_wall_h": 18.6
+    },
+    "reset_every=3, q=0.0": {
+      "wall_h_mean": 10.3,
+      "wall_h_sd": 0.05,
+      "interventions_mean": 0.0,
+      "human_h_mean": 0.0,
+      "trials_per_wall_h": 48.5
+    },
+    "reset_every=3, q=0.02": {
+      "wall_h_mean": 10.84,
+      "wall_h_sd": 0.29,
+      "interventions_mean": 3.2,
+      "human_h_mean": 0.11,
+      "trials_per_wall_h": 46.1
+    },
+    "reset_every=3, q=0.05": {
+      "wall_h_mean": 11.66,
+      "wall_h_sd": 0.45,
+      "interventions_mean": 8.1,
+      "human_h_mean": 0.27,
+      "trials_per_wall_h": 42.9
+    },
+    "reset_every=3, q=0.1": {
+      "wall_h_mean": 13.07,
+      "wall_h_sd": 0.66,
+      "interventions_mean": 16.6,
+      "human_h_mean": 0.55,
+      "trials_per_wall_h": 38.3
+    },
+    "reset_every=3, q=0.2": {
+      "wall_h_mean": 15.8,
+      "wall_h_sd": 0.85,
+      "interventions_mean": 33.0,
+      "human_h_mean": 1.1,
+      "trials_per_wall_h": 31.6
+    },
+    "reset_every=10, q=0.0": {
+      "wall_h_mean": 10.31,
+      "wall_h_sd": 0.05,
+      "interventions_mean": 0.0,
+      "human_h_mean": 0.0,
+      "trials_per_wall_h": 48.5
+    },
+    "reset_every=10, q=0.02": {
+      "wall_h_mean": 10.47,
+      "wall_h_sd": 0.17,
+      "interventions_mean": 1.0,
+      "human_h_mean": 0.03,
+      "trials_per_wall_h": 47.7
+    },
+    "reset_every=10, q=0.05": {
+      "wall_h_mean": 10.72,
+      "wall_h_sd": 0.25,
+      "interventions_mean": 2.5,
+      "human_h_mean": 0.08,
+      "trials_per_wall_h": 46.7
+    },
+    "reset_every=10, q=0.1": {
+      "wall_h_mean": 11.14,
+      "wall_h_sd": 0.35,
+      "interventions_mean": 5.0,
+      "human_h_mean": 0.17,
+      "trials_per_wall_h": 44.9
+    },
+    "reset_every=10, q=0.2": {
+      "wall_h_mean": 11.96,
+      "wall_h_sd": 0.48,
+      "interventions_mean": 9.9,
+      "human_h_mean": 0.33,
+      "trials_per_wall_h": 41.8
+    }
+  },
+  "implied_reset_fail_rate_from_31_interventions": {
+    "1": 0.062,
+    "3": 0.187,
+    "10": 0.62
+  },
+  "selection_bias": {
+    "gamma=0.0": {
+      "population_success_pct": 45.966,
+      "labelable_frac_pct": 68.963,
+      "db_success_pct": 45.906,
+      "bias_pp_db_minus_population": -0.061,
+      "corr_labelable_vs_p": -0.001,
+      "bias_pp_sd": 0.39
+    },
+    "gamma=0.5": {
+      "population_success_pct": 45.966,
+      "labelable_frac_pct": 68.075,
+      "db_success_pct": 48.951,
+      "bias_pp_db_minus_population": 2.985,
+      "corr_labelable_vs_p": 0.208,
+      "bias_pp_sd": 0.42
+    },
+    "gamma=1.0": {
+      "population_success_pct": 45.966,
+      "labelable_frac_pct": 66.063,
+      "db_success_pct": 51.621,
+      "bias_pp_db_minus_population": 5.654,
+      "corr_labelable_vs_p": 0.375,
+      "bias_pp_sd": 0.45
+    },
+    "gamma=2.0": {
+      "population_success_pct": 45.966,
+      "labelable_frac_pct": 61.982,
+      "db_success_pct": 55.48,
+      "bias_pp_db_minus_population": 9.514,
+      "corr_labelable_vs_p": 0.575,
+      "bias_pp_sd": 0.46
+    }
+  }
+}

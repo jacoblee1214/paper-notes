@@ -1,0 +1,104 @@
+{
+  "taxel": {
+    "fingers": 1024,
+    "thumb_meta_palm": 544,
+    "thumb_distal_prox": 480,
+    "total": 2048,
+    "paper_total": 2048,
+    "match": true,
+    "fig15_fingers": 1024,
+    "fig15_thumb": 480,
+    "fig15_thumb_note": "Fig.15 라벨은 20x15, 12x15 (32행), 본문은 15행 영역이라 함 -> 면적 480은 같고 모양 표기가 다름"
+  },
+  "encoder_pcb": {
+    "layouts": {
+      "finger_DIP": 4,
+      "finger_PIP": 4,
+      "type3_arc_slot": 5,
+      "finger_MCP_AA": 4,
+      "others": 5
+    },
+    "sum": 22,
+    "dof_fingers": 16,
+    "dof_thumb": 6,
+    "dof_total": 22,
+    "match_22": true
+  },
+  "rom_width_deg": {
+    "DIP": 70,
+    "PIP": 75,
+    "MCP-FE": 88,
+    "MCP-AA": 180,
+    "thumb IP": 135,
+    "thumb MCP-FE": 120,
+    "thumb MCP-AA": 60,
+    "thumb MCP-AR": 30,
+    "thumb CMC-FE": 120,
+    "thumb CMC-AR": 25
+  },
+  "joint_accuracy": {
+    "per_mechanism": {
+      "Type I shaft-sleeve": {
+        "MAE": 0.535,
+        "RMSE": 0.708,
+        "MaxAE": 2.383,
+        "range_deg": 90,
+        "RMSE_over_MAE": 1.323,
+        "MaxAE_over_RMSE": 3.366,
+        "MAE_pct_of_range": 0.59
+      },
+      "Type II shaft-bearing": {
+        "MAE": 0.387,
+        "RMSE": 0.461,
+        "MaxAE": 1.262,
+        "range_deg": 90,
+        "RMSE_over_MAE": 1.191,
+        "MaxAE_over_RMSE": 2.738,
+        "MAE_pct_of_range": 0.43
+      },
+      "Type III arc-slot": {
+        "MAE": 0.377,
+        "RMSE": 0.462,
+        "MaxAE": 1.368,
+        "range_deg": 75,
+        "RMSE_over_MAE": 1.225,
+        "MaxAE_over_RMSE": 2.961,
+        "MAE_pct_of_range": 0.5
+      }
+    },
+    "gaussian_RMS_over_MAE": 1.253,
+    "note": "RMSE/MAE가 1.253보다 크면 꼬리가 정규분포보다 두껍거나 편향이 있음. 원자료(샘플)가 없어 유의성 검정은 불가",
+    "MAE_diff_I_vs_II": 0.148,
+    "MAE_diff_II_vs_III": 0.01
+  },
+  "resolution": {
+    "AS5600_bits_assumed": 12,
+    "encoder_step_deg": 0.0879,
+    "type3_transmission": 7.4,
+    "type3_joint_equiv_step_deg": 0.0119,
+    "type2_step_deg": 0.0879,
+    "note": "분해능 바닥은 MAE(0.38~0.54도)보다 1자릿수 작음 -> 측정 오차는 분해능이 아니라 기계 조립, 기어 유격, 기준 서보가 지배할 가능성이 큼(추정)"
+  },
+  "readout_budget": {
+    "samples_per_s": 245760,
+    "Mbit_per_s_12bit": 2.949,
+    "frame_period_ms": 8.333,
+    "per_row_us_if_32_row_scans": 260.4,
+    "per_row_us_if_64_row_scans": 130.2,
+    "note": "행 수와 주사 방식은 논문에 없음. 행 단위 주사 가정으로 행당 허용 시간만 계산"
+  },
+  "bom": {
+    "priced_rows": 30,
+    "total_usd_all_priced": 2323.23,
+    "printer_usd": 1849.0,
+    "total_usd_excl_printer": 474.23,
+    "unpriced_or_pending": [
+      "Readout PCB",
+      "MCU PCB",
+      "FFC hub PCB",
+      "Encoder PCB",
+      "Tactile FPCB"
+    ],
+    "note": "'or' 두 가격 중 첫 번째 값 사용. 세금, 배송, 3D 프린터 외주 비용 제외"
+  }
+}

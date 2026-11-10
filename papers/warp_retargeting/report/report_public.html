@@ -1,0 +1,1134 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>WARP 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_"] { max-width: 92%; }
+img[src*="toy_"], img[src*="table1_"], img[src*="subset_"] { max-width: 92%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>WARP: Whole-Body Retargeting 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 그림·표는 CC BY-NC-ND 라이선스 때문에 뺐습니다. 원문 https://arxiv.org/abs/2606.29940 · arXiv:2606.29940v2 · CoRL 2026 (프로젝트 페이지·저장소 표기, arXiv 댓글 없음) · 저자 Chen, Kong, Zhang 외 · 공개 저장소 있음(솔버 없음) · 분석일 2026-11-10 · 논문 그림·표 미포함(CC BY-NC-ND 4.0)</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 사람 상체 시연을 SEW 기하 해(c-SEW)로 로봇 전신 행동으로 바꿉니다. 손바닥은 등식 제약으로 맞추고, 몸통 위치 보정과 느린 기지 제어를 붙였습니다.</li>
+<li><strong>헤드라인 수치는 한 설정에서만 나옵니다:</strong> 손바닥 152배, 머신 정밀도 방향 오차는 (공개 프리셋 기준) 관절 한계와 lazy base를 모두 끈 설정입니다. 전체 시스템의 손바닥 평균 오차는 24 mm입니다.</li>
+<li><strong>시뮬 정책 실험은 사람 데이터가 아닙니다:</strong> GR1 로봇 시연을 옮긴 것입니다. 정책 +12%p는 coffee 과제에 몰려 있고(Holm 보정 후 p ≈ 0.008), 시드와 롤아웃 수가 적혀 있지 않습니다.</li>
+<li><strong>실물 &quot;35%&quot;는 세 과제 롤아웃 차이의 평균(%p)입니다.</strong> 과제당 10회이고 MINK 변형이 적혀 있지 않습니다.</li>
+<li><strong>일관성과 시간 주장은 부분적으로만 맞습니다:</strong> PCA와 RMS는 정의상 0입니다. NNAD는 몸통에서 약 20% 낮을 뿐입니다. &quot;마이크로초&quot;와 &quot;한 시간 대 하루&quot;는 표와 맞지 않습니다.</li>
+<li><strong>구현 가능성:</strong> 공식 재현은 불가합니다(솔버 라이선스, 정책 코드 없음). 기하 부분 재구현은 중간 난이도이고 CPU로 가능합니다. 정책 재구현은 어렵습니다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>WARP: Whole-Body Retargeting for Learning from Offline Human Demonstrations 논문 분석</h1>
+<ul>
+<li><strong>arXiv:</strong> 2606.29940 (v2, 2026-08-19 개정 / v1 2026-06-29). 분석 대상은 v2이고, v1과의 차이는 §7에 정리했습니다.</li>
+<li><strong>저자:</strong> Zhenyang Chen*, Chuizheng Kong*, Chuye Zhang*, Yuanshao Yang, Lawrence Y. Zhu, Shreyas Kousik, Danfei Xu (*공동 1저자)</li>
+<li><strong>학회:</strong> CoRL 2026 (프로젝트 페이지 &quot;Accepted at CoRL 2026&quot;, BibTeX <code>booktitle = Proceedings of the 10th Conference on Robot Learning (CoRL)</code>, 공개 저장소 README의 같은 표기). arXiv abs 페이지에는 댓글(Comments) 항목이 없어 채택을 arXiv로 확인하지는 못했습니다. IROS 2026 목록이 아니므로 <code>conferences/iros2026/</code> 연결 대상이 아닙니다.</li>
+<li><strong>분야:</strong> cs.RO. 분석일 2026-11-10.</li>
+<li><strong>원문:</strong> <code>paper/paper.pdf</code> (23쪽, 15.5 MB, 본문 8쪽 + 참고문헌 + 부록 A–D). 텍스트는 <code>paper/paper.txt</code>.</li>
+</ul>
+<h2>0. 한 줄 요약</h2>
+<p>사람 자세를 로봇 어깨-팔꿈치-손목(SEW) 표현으로 옮긴 뒤 닫힌 형식의 해(c-SEW)로 손바닥 위치를 <strong>hard constraint</strong>로 맞추고, 몸통 위치 보정(adaptive offset)과 느린 기지 제어(lazy base)를 붙인 오프라인 리타게터입니다. 주장의 핵심은 &quot;리타게팅 정밀도와 일관성이 좋아지면 같은 정책을 학습했을 때 성공률이 오른다&quot;입니다. 그런데 헤드라인 수치(150배, 머신 정밀도)는 <strong>관절 한계와 lazy base를 모두 끈 변형</strong>에서 나오고, 하위 정책 비교(시뮬)는 <strong>사람이 아니라 GR1 로봇 시연</strong>을 옮긴 것이며, 실물 비교는 <strong>과제당 10회</strong>입니다. 이 셋을 구분해서 읽어야 합니다.</p>
+<h2>1. 초록에서 나온 주장</h2>
+<table>
+<thead>
+<tr>
+<th>주장</th>
+<th>본문 위치</th>
+<th>근거 제시 방식</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>기존 리타게터는 부정확하거나 일관되지 않은 해를 낸다 (행동 다중모드)</td>
+<td>§1, §3</td>
+<td>개념 설명, 정량 근거는 §4.1</td>
+</tr>
+<tr>
+<td>c-SEW는 손목 정확 추종과 전신 구조를 함께 보존</td>
+<td>§3 식 (1)–(3), 부록 B.1–B.4</td>
+<td>정리(Properties (i)–(iv)), 시뮬 지표</td>
+</tr>
+<tr>
+<td>느린 기지 제어로 기지 움직임이 안정적</td>
+<td>§3 Lazy base, 부록 B.5</td>
+<td>정성 (Fig. 4c), 정량 지표 없음</td>
+</tr>
+<tr>
+<td>공개 시연 없이 사람 데이터만으로 전신 모바일 조작 정책의 제로샷 전이</td>
+<td>§1, §4.3</td>
+<td>실물 4과제 × 10회</td>
+</tr>
+<tr>
+<td>리타게팅 개선이 정책 성공률을 올린다</td>
+<td>§1 (35%), §4.2 Table 1 (+12%p)</td>
+<td>시뮬 3과제, 실물 3과제</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 방법 (§3, 부록 B)</h2>
+<h3>2.1 입력과 목표</h3>
+<ul>
+<li>사람 시연 τ^h = {o_t, H(t)}: 헤드셋의 상체 운동학 트리와 양손(60 Hz), 루트 자세. 로봇 행동 q^r_t = Ret(H(t))를 per-timestep 사상으로 정의하고, 같은 행동을 상태 이력과 감독 신호로 함께 씁니다(§3 식 정의).</li>
+<li>보조 객체는 사람 상체 좌표계에서 표현합니다(Algorithm 1, 부록 B.1). 어깨 중점과 두 어깨 선, 몸통 기준점으로 직교 기저를 만들고, 이 기저는 사람과 로봇에 같은 방식으로 적용합니다.</li>
+</ul>
+<h3>2.2 SEW 표현과 &quot;스케일 불변&quot; 주장</h3>
+<ul>
+<li>팔을 (s, e, w, H, t)로 표현합니다. 단위 방향 u = unit(e−s), l = unit(w−e)는 사람과 로봇 모두 같은 형태로 정의됩니다.</li>
+<li>직접 복사하면 손바닥이 어긋납니다: t̂^rb = s^rb + ℓ_SE u + ℓ_EW l + H p_WT, 여기서 t̂ ≠ t (§3). 이 차이의 크기는 링크 길이 비율에 비례합니다(<code>03_analysis.md</code> §4 유도).</li>
+<li>논문은 &quot;scale-invariant&quot;라고 부르지만, 정확히는 <strong>방향은 복사하고 길이는 로봇 값을 쓴다</strong>는 뜻입니다. 길이 불일치는 아래 adaptive offset과 손바닥 정합이 맡습니다.</li>
+</ul>
+<h3>2.3 c-SEW의 단계 (식 (1)–(3))</h3>
+<ol>
+<li><strong>Adaptive offset (식 (2)):</strong> 두 팔 손바닥 중점의 차이만큼 로봇 상체 원점을 옮깁니다. 몸통 자세로 흡수하는 장치입니다.</li>
+<li><strong>팔별 손바닥 정합 (식 (1)):</strong> 손 방향은 H^rb = H^hm로 그대로 옮기고, 손목 위치는 손바닥 목표에서 역산해 <strong>정확히 맞춥니다(hard)</strong>. 여기서 가중합이 아니라 등식입니다.</li>
+<li><strong>팔꿈치 자유도 해소 (식 (3), 부록 B.4):</strong> Stereo-SEW(Elias &amp; Wen)로 사람의 팔꿈치 반평면 법선 n̂을 얻고, SP3 부분문제로 팔꿈치 위치를 구합니다. 근은 최대 2개이고 사람 반평면과 맞는 가지 θ_SEW &gt; 0을 고릅니다.</li>
+<li><strong>몸통 6자유도:</strong> ik-geo로 몸통 자세를 풀고 &quot;무릎 앞&quot; 해를 항상 택합니다.</li>
+<li><strong>관절각:</strong> SEW-Mimic(Kong et al. 2026, arXiv:2602.01632)으로 닫힌 형식으로 푼니다. 반복 최적화는 어느 단계에도 없다고 주장합니다.</li>
+</ol>
+<p>논문이 주장하는 성질: (i) 비퇴화 자세에서 유일해, (ii) 사람 손바닥과 정확히 일치, (iii) 자세 유사도를 최대화하는 배치(제약 하에), (iv) 마이크로초 단위 계산과 로봇별 보정 없음. <strong>(iv)는 측정값과 맞지 않습니다</strong> (§5 참고, Table 3의 6.8 ms/프레임).</p>
+<h3>2.4 Lazy mobile base (식 (6)–(7), 부록 B.5)</h3>
+<ul>
+<li>사람 상체 목표가 함의하는 기지 자세 q_d ∈ SE(2)를 바로 따라가면, 작은 상체 움직임이 바퀴 움직임으로 번집니다. 그래서 기지 목표 q_b를 따로 두고, 데드밴드(δ_xy = 0.05 m, δ_θ = 0.1 rad) 안에서는 스프링력을 0으로 둡니다. 몸통 6자유도가 미세 조정을 맡습니다.</li>
+<li>필터는 2차 시스템 p̈ = ω_n² ẽ − 2ζω_n ṗ이고 ζ = 1(임계 감쇠), f_n ≈ 1.5 Hz입니다. 이 값은 코드 설정(<code>warp</code> 프리셋)과 일치합니다(<code>04_code_verification.md</code> C14).</li>
+</ul>
+<h3>2.5 손 처리와 정책</h3>
+<ul>
+<li>손가락은 리타게팅 대상이 아니라 XHand 내부 리타게터(논문), 시뮬에서는 GR1의 Fourier 손 명령을 그대로 복사합니다(부록 C.2). <strong>두 방법의 손 처리가 같은지는 시뮬에서만 명시됩니다.</strong></li>
+<li>정책 (부록 B.7): HPT 기반 흐름 정합(flow matching) 트랜스포머. 행동 청크를 기지 ≼ 몸통 ≼ 팔 ≼ 손 순서로 나누고 block-causal 마스크를 씁니다. 약 11M 파라미터, 배치 32, 체크포인트는 epoch 599. 학습 장치, 시간, 시드 수는 없습니다.</li>
+</ul>
+<h3>2.6 데이터 수집 (§3, 부록 C.1)</h3>
+<ul>
+<li>Meta Quest 한 대만 사용(외부 모캡, 마커, 로봇 없음). 손 관절 포함 상체 트리 60 Hz.</li>
+<li>물체: 헤드셋의 AprilTag. 실물 정책 입력은 AprilTag로 얻은 물체 포즈와 로봇 상태이고, 이미지는 쓰지 않습니다(한계로 명시, D.1).</li>
+<li>로봇: RB-Y1 (holonomic 기지, 몸통 6자유도, 7자유도 팔 두 개, XHand 두 개), 관절 임피던스 100 Hz. 재생과 정책 롤아웃은 원래 속도의 30%(6 Hz)로 실행합니다. 기지 위치는 Vicon으로 측정합니다.</li>
+</ul>
+<h2>3. 실험 (§4, 부록 C)</h2>
+<h3>3.1 리타게팅 품질 (§4.1, Fig. 5, Table 3, Table 4)</h3>
+<ul>
+<li><strong>데이터:</strong> BONES-SEED SOMA Proportional에서 &quot;table/everyday/object&quot;를 포함하고 &quot;sit/seated&quot;를 뺀 514개 조작 동작(원본 257 + 좌우 반전 257, 프레임 135,896개). 고높이 동작은 파일명 필터로 제외합니다(부록 C.2.1). 부록 C.3.2는 7,623개 확장 부분집합을 보입니다.</li>
+<li><strong>비교 대상:</strong> MINK-EF(손만), MINK-TE(손 + 몸통 방향 0.5 + 팔꿈치 0.2 (표 2), SEW-M(SEW-Mimic, 목표 없음). 본문 서론은 GMR[4]과 HOMIE[10]도 비교 기준으로 인용하지만 실험 표에는 없습니다.</li>
+<li><strong>지표:</strong> 추종(손바닥 평균·P95, 방향), 실현 가능성(몸통 이탈 비율, 관절 한계 근접 비율, 자기 충돌 비율), 일관성(NNAD, 해의 PCA 고윳값, RMS 표준편차), 시간(ms/프레임). 정의는 부록 B.8.</li>
+<li><strong>결과 (514 부분집합, JL off 기준):</strong> 손바닥 평균 오차 WARP 0.0046 mm, MINK-EF 0.701 mm (152배), 방향 오차 WARP 8.7e-6°. 자기 충돌 WARP 0.163, SEW-M 0.243, MINK-EF 0.977. 처리 시간 WARP 6.8 ms, MINK-EF 192 ms.</li>
+<li><strong>하지만:</strong> 공개 저장소의 대응 프리셋 기준으로 &quot;JL off&quot;는 관절 한계와 lazy base를 모두 끈 설정입니다(<code>04</code> C15, D5). &quot;JL on&quot;(WARP 전체)에서는 손바닥 평균 오차가 24.0 mm, 방향 오차 3.26°로 올라가며, MINK-EF on(0.75 mm, 0.011°)보다 나쁩니다. 논문은 이를 &quot;목표가 작업공간 밖에 있어서&quot;라고 설명하지만 검증하지 않았습니다.</li>
+<li><strong>7,623 부분집합 (부록 Table 4, JL off만):</strong> WARP의 정상 프레임 손바닥 오차 1.51 mm, MINK-EF 0.79 mm로 MINK-EF가 더 정확합니다. 원시 평균의 우위(11.9 mm 대 248 mm)는 이상치가 MINK-EF에 몰린 결과입니다. 관절 한계 여유 최솟값 WARP −7.7°, SEW-M −4.9°로 WARP가 더 나쁩니다.</li>
+</ul>
+<h3>3.2 시뮬레이션 하위 학습 (§4.2, Table 1)</h3>
+<ul>
+<li><strong>설정:</strong> DexMimicGen으로 만든 <strong>GR1 시연</strong> 200개씩 세 과제(coffee, pouring, can-sort)를 RB-Y1 Fourier 손으로 옮깁니다. 리타게터마다 BC 정책을 하나씩 학습하고, 두 방법이 모두 성공한 시연의 교집합으로 학습합니다(부록 C.2).</li>
+<li><strong>중요:</strong> 이 실험의 원천 데이터는 <strong>사람이 아니라 로봇(GR1) 시연</strong>입니다. 사람 데이터 조건은 시뮬 실험에 없습니다. §1의 &quot;사람 데이터 제로샷&quot;은 실물 실험에만 해당합니다.</li>
+<li><strong>결과:</strong> 재생 성공 WARP 80.0%, MINK 79.5%. 정책 성공 WARP 71%, MINK 59% (+12%p). 과제별 정책 차이는 can-sort +6, pouring +4, coffee +26%p.</li>
+</ul>
+<h3>3.3 실물 (§4.3, Fig. 7, Fig. 8–9)</h3>
+<ul>
+<li><strong>과제:</strong> 세탁 바구니 들기(양손 손목 자세), 카트 밀기(기지–팔 접촉), 상자 회전(몸통–팔 비틀림), 냉장고 문 닫기(팔꿈치 접촉, 재생만).</li>
+<li><strong>Fig. 7 (과제당 10회):</strong> 상자 회전 재생 100 대 95(MINK), 롤아웃 65 대 40. 카트 밀기 재생 95 대 25, 롤아웃 75 대 25. 세탁 재생 70 대 0, 롤아웃 37.5 대 7.5. 냉장고 재생 90(MINK 없음).</li>
+<li><strong>&quot;35%&quot;의 출처:</strong> 서론의 &quot;35%&quot;는 세 과제 롤아웃 차이의 평균 35%p입니다((25 + 50 + 30) / 3). 상대 비율이나 시드 평균이 아닙니다(<code>03_analysis.md</code> §2).</li>
+<li><strong>MINK 변형 미지정:</strong> 실물 MINK가 EF인지 TE인지 적혀 있지 않습니다.</li>
+</ul>
+<h2>4. 한계 (§D.1과 읽은 사람의 지적)</h2>
+<p>논문 D.1의 한계: (1) 기구학 중심이며 제어기 오차와 동역학을 무시, (2) 정책이 이미지를 쓰지 않고 AprilTag에 의존, (3) Quest 관성 추적의 지터가 그대로 감독 신호가 됨. 추가로 읽은 쪽에서 본 한계:</p>
+<ul>
+<li>평가 지표 대부분이 WARP의 목적함수와 같은 기하량(손바닥, 팔꿈치 ψ, 몸통 방향)이라 <strong>지표와 목적이 맞물립니다</strong>. MINK-TE도 같은 ψ를 쓰지만, 공정한 비교 대상이 되려면 MINK 목적을 같은 기하량으로 두고 가중치만 바꿔야 합니다. 부록 A.2 스윕이 이 방향이지만 그림으로만 있습니다.</li>
+<li>일관성 지표(NNAD, PCA, RMS)는 닫힌 형식 해에 대해 <strong>수치 잡음 수준 0에 가까워지도록 되어 있습니다</strong>. 즉 &quot;결정적 함수는 흔들리지 않는다&quot;를 측정할 뿐, 학습 성능과의 관계는 측정하지 않았습니다.</li>
+<li>정책 비교의 교란 요인: 시뮬에서 WARP는 <strong>재생 시 온라인으로 SEW를 푸는</strong> 반면 MINK는 <strong>미리 계산한 관절 목표를 저장</strong>합니다(부록 C.2). 두 데이터 생성 경로가 다릅니다.</li>
+<li>시드 수, 반복 학습, 신뢰구간, 검정 모두 없습니다(§6 참고).</li>
+</ul>
+<h2>5. 질문 (저자에게 물을 것)</h2>
+<ol>
+<li>Table 2의 MINK-TE 팔꿈치 가중치 0.2와 공개 저장소 설정 0.5 중 무엇이 실험에 쓰였는가?</li>
+<li>&quot;JL&quot;은 정확히 무엇을 가리키는가? WARP on/off가 관절 한계만인지, lazy base까지 포함하는지. 전체 WARP 시스템의 손바닥·방향 오차는 얼마인가?</li>
+<li>시뮬 Table 1의 정책 평가 롤아웃 수와 학습 시드 수는? 교집합 학습에 쓴 시연 수는 50개(부록 C.2)인가 200개 전부인가?</li>
+<li>실물 MINK는 EF/TE 중 무엇인가? 같은 정책 구조와 하이퍼파라미터를 썼는가?</li>
+<li>&quot;1시간 대 하루&quot;의 기준(코어 수, 전처리 포함 여부, 데이터 양)은?</li>
+<li>서론 &quot;35%&quot;를 정의대로 쓰면 어떤 값인가?</li>
+<li>시뮬 정책 학습의 원천을 사람 시연으로 바꾼 실험이 있는가?</li>
+</ol>
+<h2>6. 빠진 정보 요약</h2>
+<ul>
+<li>시드 수, 신뢰구간, 검정 (정책, 실물, 리타게팅 모두)</li>
+<li>학습 장치, 시간, 전체 데이터 시간</li>
+<li>정책 평가 롤아웃 수 (시뮬), 실물 시행 조건의 편차</li>
+<li>손 리타게터의 세부(XHand IK는 공개 저장소에 없음)</li>
+<li>부록 A.2 스윕 수치 (그림만 있음)</li>
+<li>공개 코드·가중치·데이터 (공개 저장소는 부분 릴리스, <code>04</code> 참고)</li>
+</ul>
+<h2>7. v1 → v2 차이</h2>
+<ul>
+<li>본문 텍스트 비교 (pdftotext, 1116줄): <strong>차이는 2줄뿐입니다.</strong> (a) arXiv 스탬프 <code>v1 [cs.RO] 29 Jun 2026</code> → <code>v2 [cs.RO] 19 Aug 2026</code>, (b) 초록 말미 프로젝트 주소 <code>warp-retarget.github.io</code> → <code>warp-retargeting.github.io</code> (철자 수정).</li>
+<li>내장 이미지 108개 전부 MD5 일치(<code>pdfimages -png</code> 후 정렬 해시 비교). 그림, 표, 수식, 참고문헌은 바뀌지 않았습니다.</li>
+<li>따라서 v2는 <strong>주소 수정과 재공개</strong>에 해당하고, 실험이나 주장에 대한 수정은 확인되지 않았습니다. 학회 채택 표기(CoRL 2026)는 v2 PDF에 없고 프로젝트 페이지에만 있습니다.</li>
+<li>v1 PDF는 <code>.scratch/v1.pdf</code>에 임시 보관했고 저장소에는 넣지 않았습니다.</li>
+</ul>
+<h2>8. 읽으며 발견한 소소한 문제</h2>
+<ul>
+<li>Fig. 5 레이더 범례 &quot;WRAP w/o JL&quot; (WARP 오타)</li>
+<li>본문 &quot;BONE-SEED&quot;와 &quot;BONES-SEED&quot; 혼용, &quot;obervation&quot;, &quot;invesigate&quot; 등 오탈자</li>
+<li>서론 &quot;99.34% whole-body tracking error&quot;는 실제로는 손바닥 평균 위치 오차(MINK-EF 대비)입니다</li>
+<li>서론이 비교 기준으로 인용한 [10] HOMIE, [4] GMR는 실험 표에 없습니다</li>
+</ul>
+</section>
+<section class="chapter"><h1>WARP 재계산, 검정, 유도, 장난감 검증</h1>
+<p>재계산 스크립트: <code>analysis/table_check.py</code> → <code>table_check_results.json</code>. 장난감: <code>analysis/retarget_toy.py</code> → <code>retarget_toy_results.json</code>(약 8초). 그림: <code>analysis/plot_figures.py</code>. 모두 CPU 1스레드, numpy와 scipy만 사용합니다.</p>
+<p><img src="figures/table1_success_ci.png" alt="table1_success_ci.png" /></p>
+<p class="cap">직접 계산: Table 1 정책(n=50 가정)과 재생(n=200 가정) 성공률과 Wilson 95% 구간.</p>
+<h2>1. Table 1 (DexMimicGen, 시뮬): 평균과 검정</h2>
+<p><strong>평균 검산.</strong> 과제 세 개의 평균은 표 값과 일치합니다.</p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>재생 평균 (계산 / 표)</th>
+<th>정책 평균 (계산 / 표)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MINK</td>
+<td>79.50 / 79.5</td>
+<td>58.67 / 59</td>
+</tr>
+<tr>
+<td>WARP</td>
+<td>80.00 / 80.0</td>
+<td>70.67 / 71</td>
+</tr>
+</tbody>
+</table>
+<p><strong>차이.</strong> 정책 성공률 차이는 과제별로 can-sort +6, pouring +4, coffee +26%p이고 평균 +12%p입니다. 상대 비율로는 71/59 = +20%입니다. &quot;12% higher&quot;는 %p 차이입니다.</p>
+<p><strong>표본 크기는 논문에 없습니다.</strong> 값의 격자로 추정했습니다. 재생 값은 0.5%p 단위이므로 n = 200 demos입니다(99.5 = 199/200). 정책 값은 정수 단위이며 2%p 격자면 n = 50, 1%p면 n = 100입니다. 두 경우를 모두 계산했습니다.</p>
+<p><strong>과제별 Fisher 정확검정 (정책, n = 50 가정):</strong></p>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>WARP</th>
+<th>MINK</th>
+<th>Fisher p</th>
+<th>Holm 보정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>can-sort</td>
+<td>50/50</td>
+<td>47/50</td>
+<td>≈0.24</td>
+<td>0.48</td>
+</tr>
+<tr>
+<td>pouring</td>
+<td>39/50</td>
+<td>37/50</td>
+<td>≈0.82</td>
+<td>0.82</td>
+</tr>
+<tr>
+<td>coffee</td>
+<td>17/50</td>
+<td>4/50</td>
+<td>≈0.003</td>
+<td><strong>0.008</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>n = 100 가정에서는 coffee가 보정 후에도 유의하고(p &lt; 0.001), can-sort는 원 p = 0.029가 보정 후 약 0.06으로 올라갑니다(<code>table_check_results.json</code>).</li>
+<li><strong>세 과제를 합친 150 대 150 검정</strong>은 p ≈ 0.040입니다. 그러나 과제가 독립이 아니고 과제 수준의 효과가 한 과제(coffee)에 몰려 있어 합친 검정은 과장되기 쉽습니다.</li>
+<li>**재생(n = 200 가정)**은 과제별 차이가 작아서 (99.5 대 98.5, 88.5 대 90.5, 50.5 대 51.0) 두 방법이 다르지 않다는 논문 주장과 맞습니다.</li>
+<li>시드 수, 학습 반복, 롤아웃 수가 적혀 있지 않습니다. 위 검정은 <strong>단일 학습 실행</strong>을 가정한 것이므로, 학습 시드 변동이 있으면 p 값은 과대평가됩니다.</li>
+</ul>
+<h2>2. Fig. 7 (실물, 10회)과 &quot;35%&quot;</h2>
+<p>Fig. 7의 막대 라벨을 읽었습니다(±1%p, 그림에서 읽은 값이므로 근사치).</p>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>재생 WARP / MINK</th>
+<th>롤아웃 WARP / MINK</th>
+<th>롤아웃 차이 (%p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>상자 회전</td>
+<td>100 / 95</td>
+<td>65 / 40</td>
+<td>+25</td>
+</tr>
+<tr>
+<td>카트 밀기</td>
+<td>95 / 25</td>
+<td>75 / 25</td>
+<td>+50</td>
+</tr>
+<tr>
+<td>세탁 바구니</td>
+<td>70 / 0</td>
+<td>37.5 / 7.5</td>
+<td>+30</td>
+</tr>
+<tr>
+<td>평균</td>
+<td></td>
+<td></td>
+<td><strong>+35.0</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>서론의 &quot;35%&quot;는 **세 과제 롤아웃 차이의 평균(%p)**과 정확히 일치합니다. 상대 비율이 아닙니다(상대로는 세 과제 평균 WARP 59.2% 대 MINK 24.2%로 약 2.4배). 그러나 &quot;identical policies ... by 35%&quot;라는 문장은 정의가 적혀 있지 않아 읽는 사람이 다르게 해석할 수 있습니다.</li>
+<li><strong>MINK가 어느 변형인지 실물 절에 없습니다.</strong></li>
+<li>10회 중 점수 단위가 0.5이므로 시행당 점수는 0.05 단위입니다. 대략적으로 20개 반 시행으로 바꿔 Fisher 검정을 하면 카트 밀기만 Holm 보정 후 p ≈ 0.012, 상자 회전 p ≈ 0.21, 세탁 p ≈ 0.13입니다. 이 값은 근사치이고, 시행별 원자료가 없으므로 <strong>참고용</strong>입니다.</li>
+<li>Wilson 95% 구간(10회): 롤아웃 WARP 65%는 [35, 87]%, MINK 40%는 [17, 69]%로 겹칩니다. 세탁은 WARP 37.5%의 구간이 [15, 67]%, MINK 7.5%는 [1, 38]%입니다.</li>
+<li>냉장고 과제(팔꿈치 모드)는 WARP 재생 90%만 있고 MINK 비교가 없습니다. H3(&quot;EEF만으로는 불가능&quot;)을 <strong>직접 검증하지 않았습니다.</strong></li>
+</ul>
+<p><img src="figures/subset_check.png" alt="subset_check.png" /></p>
+<p class="cap">직접 계산: 514 부분집합과 7,623 부분집합에서 JL off 네 방법의 자기 충돌, 몸통 NNAD, 정상 프레임 손바닥 오차(로그). 순위가 뒤집히는 항목이 있음.</p>
+<h2>3. 리타게팅 표 (Table 3, 4)의 &quot;최고&quot; 주장 검사</h2>
+<p>논문 주장을 표 값으로 항목별 검사했습니다. 결과는 <code>table_check_results.json</code>의 <code>table3_4_best_checks</code>입니다.</p>
+<table>
+<thead>
+<tr>
+<th>주장 (논문)</th>
+<th>514 부분집합 (Table 3)</th>
+<th>7,623 부분집합 (Table 4)</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>손바닥 오차 최저 (JL off)</td>
+<td>WARP 0.0046 mm, 최저</td>
+<td>원시 평균 WARP 11.9 mm 최저, 정상 프레임은 MINK-EF 0.79 mm가 WARP 1.51 mm보다 낮음</td>
+<td>514에서만 성립, 7.6k에서 정상 프레임 기준 뒤집힘</td>
+</tr>
+<tr>
+<td>손바닥 &quot;정확 일치 by construction&quot;</td>
+<td>JL off에서만 성립 (0.0005 mm 정상 프레임)</td>
+<td>JL off 정상 프레임 1.51 mm</td>
+<td>JL on(전체 WARP)에서는 <strong>원시 평균 24.0 mm, P95 82 mm</strong> → 성립 안 함</td>
+</tr>
+<tr>
+<td>방향 오차 &quot;머신 정밀도&quot;</td>
+<td>JL off: 8.7e-6° (SEW-M 7.9e-6°가 더 낮음)</td>
+<td>—</td>
+<td>JL off에서만. JL on은 3.26° → 성립 안 함</td>
+</tr>
+<tr>
+<td>관절 한계 근접 최저</td>
+<td>WARP off 0.0047, on 0.0060 (최저)</td>
+<td>SEW-M 0.0131 &lt; WARP 0.0234</td>
+<td>514에서만 성립</td>
+</tr>
+<tr>
+<td>자기 충돌 최저</td>
+<td>WARP off 0.163, on 0.017 (최저)</td>
+<td>SEW-M 0.1028 &lt; WARP 0.1112</td>
+<td>514에서만 성립, 7.6k에서 뒤집힘</td>
+</tr>
+<tr>
+<td>NNAD (몸통) 최저</td>
+<td>WARP off 0.289 (MINK-EF 0.368), on 0.266 (MINK-EF 0.354)</td>
+<td>MINK-EF 0.748 &lt; WARP 0.792</td>
+<td>514에서만 성립, 차이는 약 20% (<strong>&quot;수 자릿수&quot;가 아님</strong>)</td>
+</tr>
+<tr>
+<td>NNAD (팔) 최저</td>
+<td>SEW-M 0.658 &lt; WARP 0.683 (off); SEW-M 0.653 &lt; WARP 0.727 (on)</td>
+<td>SEW-M 1.061 &lt; WARP 1.298</td>
+<td>WARP는 팔 NNAD에서 최저가 아님</td>
+</tr>
+<tr>
+<td>PCA 고윳값, RMS 최저</td>
+<td>WARP 1e-25 / 1e-14</td>
+<td>—</td>
+<td>성립. 단, 닫힌 형식은 자코비안 재시작에 따라 흔들리지 않으므로 <strong>정의상 0에 가깝습니다</strong> (§6)</td>
+</tr>
+<tr>
+<td>처리 시간 최저</td>
+<td>WARP off 6.8 ms 최저 (SEW-M off 14.8 ms, MINK-EF 192 ms)</td>
+<td>SEW-M 7.6 ms &lt; WARP 10.5 ms</td>
+<td>514 off만 성립. 전체 on에서는 SEW-M on 5.0 ms &lt; WARP on 5.4 ms</td>
+</tr>
+<tr>
+<td>시간 &quot;약 30배&quot; (MINK 대비)</td>
+<td>192.1 / 6.78 = <strong>28.3배</strong></td>
+<td>382.7 / 10.52 = 36.4배</td>
+<td>성립</td>
+</tr>
+<tr>
+<td>시간 &quot;마이크로초 단위&quot; (§3)</td>
+<td>6.8 ms = 6,800 µs</td>
+<td>—</td>
+<td><strong>성립하지 않음.</strong> 밀리초 단위</td>
+</tr>
+</tbody>
+</table>
+<p><strong>손바닥 오차 비율 확인.</strong> 원시 평균 기준 MINK-EF 대비 0.701 / 0.0046 = 152배, 감소율 99.34%. 서론의 &quot;whole-body tracking error 99.34%&quot;는 <strong>손바닥 위치 오차</strong>입니다. MINK-TE 대비는 99.975%입니다.</p>
+<p><strong>&quot;SEED 한 시간 대 하루&quot; 검산.</strong> 514 부분집합 프레임 135,896개에 프레임당 시간을 곱하면, WARP 약 15분(6.78 ms × 135,896), MINK-EF 약 7.3시간(192 ms × 135,896)입니다. 7,623 부분집합은 프레임이 약 2.0백만 개로 추정되며, WARP 약 5.9시간, MINK-EF 약 214시간입니다. 논문의 &quot;한 시간 대 하루&quot;는 어느 쪽과도 맞지 않습니다. 코어 수, 병렬화, 전처리 포함 여부가 적혀 있지 않아 원인을 구분할 수 없습니다. 저장소의 <code>fixtures/retargeted/README.md</code>도 기록된 시간은 기계 간 벤치마크가 아니라고 명시합니다.</p>
+<h2>4. 유도 노트</h2>
+<h3>4.1 직접 복사할 때의 손바닥 오차 (SEW 복사)</h3>
+<p>사람 팔의 단위 방향 u_1, u_2와 길이 L_h1, L_h2, 로봇 길이 L_r1, L_r2가 있을 때, 방향을 그대로 복사하면 손 위치 차는</p>
+<p>t̂ − t = (L_r1 − L_h1) u_1 + (L_r2 − L_h2) u_2</p>
+<p>입니다(평면 2링크로 검산). 길이를 r = L_r/L_h로 같은 비율로 줄이면 |t̂ − t| = |1 − r| · |L_h1 u_1 + L_h2 u_2| = |1 − r| · |t − s| 입니다. 즉 <strong>손바닥 오차는 길이 비율 오차에 선형이고, 팔 길이에 비례합니다.</strong> 평면 장난감 결과: 길이 0.9배에서 42 mm, 0.7배에서 126 mm, 1.1배에서 42 mm (<code>retarget_toy_results.json</code>의 <code>exp_B_direction_copy_check</code>, 해석 식과 수치 일치). 실제 0.3–0.5 m급 팔에서 10% 길이 차이는 3–5 cm 손바닥 오차에 해당합니다. 이것이 손바닥을 <strong>등식 제약</strong>으로 따로 맞춰야 하는 이유입니다.</p>
+<h3>4.2 Adaptive offset (식 2)</h3>
+<p>두 손의 손바닥 중점이 맞도록 상체 원점을 p_offset = ½(t_L + t_R) − ½(t̂_L + t̂_R)만큼 옮깁니다. 이 보정은 두 팔이 대칭적인 오차를 가질 때만 두 손을 동시에 맞춥니다. 한 팔만 오차가 크면 중점은 맞아도 개별 손은 어긋납니다. 논문은 이 한계를 언급하지 않습니다. 개별 손 정합은 다음 단계(식 1)에서 손목을 역산하여 처리하므로, 두 손 모두 정확하려면 식 (1)이 필요합니다. 이 순서는 타당합니다.</p>
+<h3>4.3 팔꿈치 자유도 (식 3, SP3)</h3>
+<p>손목 w^rb와 어깨 s^rb가 정해지면 팔꿈치 e는 중심 s, 반지름 ℓ_SE의 구면 위에 있고, 동시에 중심 w, 반지름 ℓ_EW의 구면 위에 있습니다. 두 구면의 교선은 원이고, 사람의 반평면 법선 n̂을 축으로 하는 회전 각 θ에 대한 조건 ∥R(n̂, θ) ℓ_SE ê_SW − (w − s)∥ = ℓ_EW으로 쓸 수 있습니다. 이것이 부록 B.4의 SP3 형식입니다. 근은 최대 두 개이고, 사람 반평면과 맞는 쪽 θ &gt; 0을 고릅니다. <strong>해가 존재하려면 삼각 부등식 |ℓ_SE − ℓ_EW| ≤ ∥w − s∥ ≤ ℓ_SE + ℓ_EW가 필요합니다.</strong> 논문은 손목이 도달 범위 밖일 때의 처리를 말하지 않습니다. 이 경우 &quot;최소제곱 각&quot; 이 쓰이는데, 손바닥 등식이 깨지는 지점입니다. 이것이 JL on에서 손바닥 오차가 커지는 <strong>또 다른 원인일 수 있습니다</strong>(검증 안 함).</p>
+<h3>4.4 Lazy base 필터의 응답 (식 6–7)</h3>
+<p>ζ = 1, 고유각진동수 ω_n = 2π · 1.5 = 9.42 rad/s인 임계 감쇠 2차 시스템입니다. 단위 계단 응답은 x(t) = 1 − (1 + ω_n t) e^{−ω_n t}입니다. 2% 정착 시간은 ω_n t ≈ 5.83이므로 <strong>t ≈ 0.62 s</strong>입니다. 데드밴드 δ_xy = 0.05 m 안에서는 스프링력이 0이므로, 기지는 최대 5 cm까지 목표에서 벗어날 수 있고 그 편차는 몸통 6자유도가 흡수해야 합니다. 몸통이 흡수할 수 있는 범위는 논문에 없습니다(공개 저장소 config에도 몸통 한계 수치 없음). 즉 <strong>&quot;몸통이 미세 조정을 맡는다&quot;는 주장은 몸통 여유가 5 cm 편차를 흡수할 때만 성립</strong>하며, 이 조건은 검증되지 않았습니다.</p>
+<p><img src="figures/toy_leg_tradeoff.png" alt="toy_leg_tradeoff.png" /></p>
+<p class="cap">직접 계산(장난감): 접촉 가중치에 따른 발목 추종 오차와 입각 미끄럼·뜸, 관통. 논문 모델이 아님.</p>
+<h2>5. 장난감 A: 평면 다리, 접촉 가중치와 스케일 정규화</h2>
+<p><strong>설정.</strong> 사람 대퇴·정강이 0.44 m씩, 로봇 0.34 m와 0.40 m(정강이가 더 김, 비율 불일치). 사람은 골반 높이 0.80 m이고 120프레임 동안 0–59는 정지, 60–89는 발 들기, 90–119는 다른 위치에서 정지합니다. 로봇은 골반 위치를 사람과 같이 쓰고, 골반 높이·대퇴각·정강각 세 변수를 풉니다. 목표는 무릎과 발목의 상대 위치입니다. 접촉 항은 입각 프레임에서만 켜고 (발목 높이 0, 발목 x를 사람 발 위치에 고정), 가중치 w ∈ {0, 0.1, 1, 10, 100}을 씁니다. 정규화는 세 가지입니다: N0 없음(사람 벡터 그대로), N1 전체 높이 비(0.84), N2 링크별 비(대퇴 0.77, 정강 0.91).</p>
+<table>
+<thead>
+<tr>
+<th>정규화</th>
+<th>w</th>
+<th>무릎 오차 (mm)</th>
+<th>발목 오차 (mm)</th>
+<th>입각 뜸 (mm)</th>
+<th>입각 미끄럼 (mm)</th>
+<th>관통 최대 (mm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N0</td>
+<td>0</td>
+<td>108</td>
+<td>86</td>
+<td>91</td>
+<td>13.5</td>
+<td>0</td>
+</tr>
+<tr>
+<td>N0</td>
+<td>10</td>
+<td>116</td>
+<td>79</td>
+<td>0.8</td>
+<td>0.3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>N1</td>
+<td>0</td>
+<td>31</td>
+<td>7.0</td>
+<td>0</td>
+<td>9.9</td>
+<td>6.1</td>
+</tr>
+<tr>
+<td>N1</td>
+<td>10</td>
+<td>31</td>
+<td>10.9</td>
+<td>0</td>
+<td>0.1</td>
+<td>6.1</td>
+</tr>
+<tr>
+<td>N2</td>
+<td>0</td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td>0</td>
+<td>32.1</td>
+<td>4.2</td>
+</tr>
+<tr>
+<td>N2</td>
+<td>1</td>
+<td>2.4</td>
+<td>11.7</td>
+<td>0</td>
+<td>16.7</td>
+<td>4.2</td>
+</tr>
+<tr>
+<td>N2</td>
+<td>10</td>
+<td>5.2</td>
+<td>24.0</td>
+<td>0</td>
+<td>0.35</td>
+<td>4.2</td>
+</tr>
+<tr>
+<td>N2</td>
+<td>100</td>
+<td>5.3</td>
+<td>24.3</td>
+<td>0</td>
+<td>0.0</td>
+<td>4.2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>해석.</strong></p>
+<ol>
+<li><strong>정규화 방식이 결과를 바꿉니다.</strong> 정규화를 하지 않으면 로봇 링크가 짧아서 무릎을 맞출 수 없습니다(108 mm). 전체 높이로 맞추면 무릎 오차는 31 mm로 줄지만 대퇴·정강 비율이 달라 남습니다. 링크별로 맞추면 추종 오차는 0이지만 <strong>입각 미끄럼이 32 mm</strong>로 커집니다. 추종 정확도와 접촉 일관성이 상충합니다.</li>
+<li><strong>접촉 가중치가 미끄럼을 없애는 비용은 발목 추종 오차입니다.</strong> N2에서 w = 0 → 10이 되면 미끄럼은 32 → 0.35 mm, 발목 오차는 0 → 24 mm로 바뀝니다. 교환 비율은 정규화 방식에 따라 다릅니다.</li>
+<li><strong>입각에만 거는 접촉 항은 스윙 중 관통을 막지 못합니다.</strong> 관통 최대는 w를 100까지 올려도 N1 6.1 mm, N2 4.2 mm로 그대로입니다. 공중 발 높이(clearance)를 따로 두어야 합니다. 논문의 리타게팅 목표에는 이 항이 없습니다.</li>
+<li><strong>뜸과 미끄럼은 다른 자유도에서 옵니다.</strong> 수직 불일치는 골반 높이가 흡수하고 (N0 w=0에서 골반 높이 편차 0이지만 발이 91 mm 떠 있음), 수평 불일치는 미끄럼으로 나타납니다.</li>
+</ol>
+<p><strong>한계.</strong> 평면 한 다리, 정지·발 들기 두 동작뿐입니다. 3차원 상체 리타게팅이나 실제 관절 한계는 없습니다. 결과의 정량값보다 교환 구조를 보는 용도입니다.</p>
+<p><img src="figures/toy_arm_posture.png" alt="toy_arm_posture.png" /></p>
+<p class="cap">직접 계산(장난감): 평면 3관절 팔에서 자세 가중치에 따른 손바닥·팔꿈치 오차와 seed별 분산. 논문 모델이 아님.</p>
+<h2>6. 장난감 B: 평면 3관절 팔, 자세 가중치와 seed 분산</h2>
+<p><strong>설정.</strong> 로봇 링크 0.30, 0.27, 0.10 m, 사람 0.33, 0.30, 0.10 m. 사람 자세 120개(손바닥 도달 가능 범위 안)를 무작위로 만들고, 로봇은 손바닥 위치만 맞춥니다. 자유도 3, 제약 2이므로 1차원 영공간이 있습니다. 각 자세마다 seed 12개에서 최소제곱으로 풉니다. 목적은 w_t ∥p(q) − p*∥² + w_p ∥q − q_human∥²입니다.</p>
+<table>
+<thead>
+<tr>
+<th>w_p</th>
+<th>손바닥 오차 (mm)</th>
+<th>팔꿈치 자세 오차 (도)</th>
+<th>seed별 표준편차 (도)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0.0</td>
+<td>45.8</td>
+<td><strong>60.1</strong></td>
+</tr>
+<tr>
+<td>0.01</td>
+<td>13.3</td>
+<td>12.1</td>
+<td>7.5</td>
+</tr>
+<tr>
+<td>0.03</td>
+<td>20.6</td>
+<td>6.5</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td>29.7</td>
+<td>2.9</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td>36.2</td>
+<td>1.4</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>해석.</strong></p>
+<ol>
+<li>자세 가중치가 0이면 손은 정확하지만 해가 seed마다 크게 달라집니다(표준편차 60°). 이것이 논문의 &quot;불일치(inconsistency)&quot; 문제입니다.</li>
+<li>자세 가중치를 올리면 해는 일관되지만 손바닥이 밀려납니다. 팔꿈치 오차와 손바닥 오차의 교환이 뚜렷합니다. 부록 A.2의 MINK 스윕과 같은 방향입니다.</li>
+<li>이 장난감에서는 <strong>둘 다 0으로 만드는 가중치가 없습니다.</strong> 논문 주장대로 닫힌 형식 SEW가 이 교환을 깨는지는 이 장난감으로 검증할 수 없습니다(SEW는 구현하지 않음). 장난감은 &quot;가중 IK는 이 교환을 피할 수 없다&quot;는 것까지만 보입니다.</li>
+</ol>
+<p><strong>손바닥 정합 해석식(4.1)과의 연결.</strong> 링크 길이 비율 0.9에서 손바닥이 42 mm 밀리는 값이 수치와 해석식에서 일치합니다. 이는 조정 없이 방향만 복사하는 기준(SEW-M의 &quot;목표 없음&quot; 계열)이 길이 차이에 얼마나 민감한지 보여 줍니다.</p>
+<h2>7. 지표와 목적의 순환성</h2>
+<ul>
+<li><strong>닫힌 형식의 일관성 지표.</strong> PCA 고윳값과 RMS 편차가 10⁻²⁵, 10⁻¹⁴ 수준인 것은 &quot;입력 근처에서 자코비안 시작점을 흔들어도 같은 해가 나온다&quot;는 <strong>정의상 성질</strong>입니다. 수치 잡음에 가깝습니다. 최적화 기준선의 3·4 수치(3–6도, 고윳값 100–1000)와 비교하는 것은 그 자체로 의미 있는 대비이지만, 학습 성능과 연결되는 근거는 없습니다.</li>
+<li><strong>NNAD는 정의가 다릅니다.</strong> 사람 입력 이웃 k개의 로봇 출력 차이를 재므로, 결정적이더라도 사람 입력 공간에서 매끄러운 사상이면 값이 작습니다. WARP의 NNAD가 몸통에서 작은 것은 사실이지만 팔에서는 최저가 아닙니다.</li>
+<li><strong>지표가 목적과 맞물립니다.</strong> 손바닥(식 1), 팔꿈치 ψ(식 3 근처), 몸통 방향(adaptive offset)은 WARP가 직접 맞추는 양입니다. 기준선 MINK-TE도 ψ를 쓰지만 가중치가 0.2 또는 0.5입니다. 같은 기하량을 같은 기준으로 재는 점은 공정하지만, WARP가 목적으로 삼은 값을 WARP가 잘 맞춘다는 결과는 독립적인 증거가 아닙니다.</li>
+</ul>
+<h2>8. 계산 비용 요약</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값 (논문 기준)</th>
+<th>출처</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>리타게팅 시간, 프레임당</td>
+<td>WARP off 6.8 ms, on 5.4 ms; MINK-EF 192 ms, MINK-TE 236 ms</td>
+<td>Table 3</td>
+</tr>
+<tr>
+<td>514 부분집합 총 처리 시간 (추정)</td>
+<td>WARP 약 15분, MINK-EF 약 7.3시간 (단일 코어 가정)</td>
+<td>프레임 수 × 시간</td>
+</tr>
+<tr>
+<td>정책 크기</td>
+<td>약 11M 파라미터, 배치 32, epoch 599</td>
+<td>부록 B.7</td>
+</tr>
+<tr>
+<td>학습 장치와 시간</td>
+<td><strong>보고 없음</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>데이터 수집</td>
+<td>시연 50개/과제 (실물), 시뮬은 GR1 200개/과제</td>
+<td>§4.2–4.3, C.1</td>
+</tr>
+<tr>
+<td>시뮬 평가 횟수, 학습 시드</td>
+<td><strong>보고 없음</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2>9. 개선은 리타게팅 품질에서 왔는가, 하위 학습 차이에서 왔는가</h2>
+<p>결론: <strong>논문 설계로는 둘을 분리할 수 없습니다.</strong> 리타게팅 품질이 정책 차이의 원인이라는 주장은 그럴듯하지만 증명되지 않았습니다.</p>
+<ul>
+<li><strong>시뮬 (Table 1).</strong> 두 방법은 같은 GR1 시연을 옮기고, 같은 정책 구조와 두 방법의 성공 교집합을 쓰는 점에서 통제가 되어 있습니다. 그러나 (a) 재생 파이프라인이 다릅니다. WARP는 재생 시 SEW를 온라인으로 풀고 MINK는 미리 계산한 관절 목표를 씁니다(부록 C.2). (b) 정책 입력의 로봇 상태가 리타게팅 출력이므로, 리타게터가 바뀌면 <strong>입력 분포와 행동 분포가 함께</strong> 바뀝니다. 같은 행동을 두고 상태 표현만 바꾼 대조가 없습니다. (c) 교집합 필터가 두 방법의 성공 시연을 다르게 걸러 냅니다. 재생 성공이 같아도 학습에 들어가는 시연의 구성은 다를 수 있습니다. (d) 시드 수와 롤아웃 수가 없어서 +12%p가 학습 잡음인지 알 수 없습니다.</li>
+<li><strong>실물 (Fig. 7).</strong> 같은 사람 시연을 두 리타게터에 넣었고 정책은 같다고 하지만(§1), 정책 구조가 두 방법에 같은 하이퍼파라미터로 쓰였는지 명시되지 않았습니다. MINK 변형도 모릅니다. 과제당 10회라 차이가 노이즈와 구분되지 않는 경우가 있습니다(상자 회전 p ≈ 0.21).</li>
+<li><strong>재생 동등성의 해석.</strong> 재생 성공이 같다는 것은 두 리타게터의 궤적이 <strong>실행 가능성에서는 비슷하다</strong>는 뜻입니다. 정책 차이는 그 다음 단계, 즉 같은 실행 가능 궤적 집합 안에서 <strong>분포의 일관성</strong>이 학습에 영향을 준다는 가설을 뒷받침합니다. 이 가설이 맞다면 필요한 대조는 &quot;같은 성공 궤적, 다른 일관성&quot;입니다. 논문에는 그런 실험이 없습니다.</li>
+<li><strong>판정.</strong> 현재 증거는 &quot;리타게팅 방식이 정책 학습 결과를 바꾼다&quot;까지만 말할 수 있습니다. &quot;정확도와 일관성이 원인이다&quot;는 근거가 부족합니다. 분리하려면 (1) 같은 궤적에 상태 표현만 다르게 준 조건, (2) 같은 파이프라인(온라인 대 온라인)에서 두 방법 비교, (3) 시드 여러 개와 롤아웃 수 명시가 필요합니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>WARP 논문과 공개 코드 대조 (정적 읽기)</h1>
+<ul>
+<li><strong>대상 코드:</strong> <code>Euler-Rodrigues-Lab/WARP_retargeting</code>, 얕은 clone <code>repo/WARP_retargeting/</code> (커밋 <code>172b1dcde11d3942d3fad6d378695b5703631ded</code>, 2026-11-08 &quot;Fix CI Python setup and canonical author identity&quot;). 첫 공개 커밋은 <code>b98b97f</code> &quot;Initial public WARP retargeting release&quot; (2026-11-08)입니다.</li>
+<li><strong>라이선스:</strong> 저장소 코드 MIT (LICENSE). 의존 패키지는 각자 라이선스를 따르고, <strong><code>geo_kin</code> 솔버는 별도 라이선스</strong>입니다(README).</li>
+<li><strong>방법:</strong> 읽기만 했습니다. 설치(<code>uv sync</code>), 실행, 테스트는 하지 않았습니다. 설치는 CLAUDE.md 규칙에 따라 목록을 먼저 보고 승인을 받아야 하므로 보류했습니다.</li>
+<li><strong>실행 기록:</strong> 이 저장소의 <code>README.md</code>, <code>docs/</code>(SCOPE, WORKFLOWS, PROVENANCE, RUNNING, SAMPLE_VALIDATION), <code>src/warp_retargeting/</code>(config, variants, metrics, offline_validate), <code>experiments/warp_paper/configs/</code>를 읽었습니다.</li>
+</ul>
+<h2>1. 저장소가 담은 것과 빠진 것</h2>
+<table>
+<thead>
+<tr>
+<th>구성</th>
+<th>저장소 상태</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WARP / c-SEW / SEW-Mimic 솔버 소스</td>
+<td><strong>없음.</strong> <code>geo_kin</code> 휠을 따로 받아 등록해야 함</td>
+<td><code>docs/PROVENANCE.md</code>, <code>docs/SCOPE.md</code> (&quot;protected solver sources are absent&quot;)</td>
+</tr>
+<tr>
+<td>설정 프리셋 (<code>warp</code>, <code>c_sew</code>, <code>sew_mimic</code>, <code>warp_no_spring</code>, <code>warp_no_joint_limits</code>)</td>
+<td>있음</td>
+<td><code>experiments/warp_paper/configs/variants.yaml</code></td>
+</tr>
+<tr>
+<td>MINK-EF / MINK-TE 변환</td>
+<td>있음 (공개 폴백 <code>geo_kin_core</code>). <strong>손(XHand) IK는 없음</strong> (&quot;hand outputs unsolved&quot;)</td>
+<td><code>docs/RUNNING.md</code>, <code>docs/WORKFLOWS.md</code></td>
+</tr>
+<tr>
+<td>재생 (MuJoCo, HDF5)</td>
+<td>있음</td>
+<td><code>replay_hdf5.py</code>, <code>fixtures/retargeted/*.hdf5</code></td>
+</tr>
+<tr>
+<td>지표</td>
+<td>일부만: EEF 위치·방향, 몸통 방향, 관절 속도·저크, 자기 충돌</td>
+<td><code>metrics.py</code> (<code>compute_metrics</code>)</td>
+</tr>
+<tr>
+<td>NNAD, PCA/RMS 해 변동, P95/P99, 팔꿈치 오차, Out@15, 관절 한계 비율, 여유 최솟값</td>
+<td><strong>없음.</strong> 문서에 &quot;global NNAD/PCAV pass는 재현하지 않는다&quot;고 명시</td>
+<td><code>docs/WORKFLOWS.md</code> 마지막 표</td>
+</tr>
+<tr>
+<td>정책 학습 (HPT, flow matching, block-causal 마스크)</td>
+<td><strong>없음.</strong> src, tests, scripts, docs를 검색해 해당 항목을 찾지 못함</td>
+<td>검색 결과 없음</td>
+</tr>
+<tr>
+<td>정책 롤아웃 클라이언트</td>
+<td>있음 (websocket, msgpack)</td>
+<td><code>policy_rollout.py</code></td>
+</tr>
+<tr>
+<td>DexMimicGen 파이프라인, 시뮬 데이터 생성</td>
+<td>없음</td>
+<td>논문 C.2</td>
+</tr>
+<tr>
+<td>실물 로봇 코드</td>
+<td>없음 (<code>external/rby1_teleop</code> submodule로 분리)</td>
+<td><code>docs/SCOPE.md</code></td>
+</tr>
+<tr>
+<td>데이터</td>
+<td>샘플 1개 (washing dishes, 420프레임, 30 Hz) + 참조 HDF5 5종</td>
+<td><code>fixtures/</code></td>
+</tr>
+<tr>
+<td>BONES-SEED 514 / 7,623 부분집합 목록</td>
+<td>없음</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 주장별 판정 (C1–C23)</h2>
+<p>판정 기호: ✔ 일치, ◐ 조건부 또는 부분 일치, ✘ 불일치, ? 검증 불가. 근거는 <code>03_analysis.md</code>(재계산), <code>paper/paper.txt</code>(본문), 저장소 파일입니다.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>논문 주장 (위치)</th>
+<th>판정</th>
+<th>근거·메모</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>실물 Fig. 7: 상자 회전 롤아웃 65 대 40, 세탁 재생 70 대 0 (§4.3)</td>
+<td>✔</td>
+<td>그림 막대 라벨과 일치. 10회 시행</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>냉장고 과제 재생 90% (§4.3)</td>
+<td>?</td>
+<td>본문만 있음. Fig. 7에 없음, 시행 수 10으로 추정</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>서론 &quot;정책 35% 우수&quot;</td>
+<td>◐</td>
+<td>세 과제 롤아웃 차이의 평균 %p와 일치(35.0). 정의가 적혀 있지 않음 (<code>03</code> §2)</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>시뮬 정책 +12%p, 재생 동등 (Table 1)</td>
+<td>✔ (평균) / ◐ (유의성)</td>
+<td>평균 재계산 일치. coffee 과제 하나만 Holm 보정 후 유의 (<code>03</code> §1). 시드·롤아웃 수 없음</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>&quot;whole-body tracking error 99.34% 감소&quot; (서론)</td>
+<td>◐</td>
+<td>실제 값은 손바닥 <strong>위치</strong> 평균 오차(MINK-EF 대비, JL off). 용어가 부정확</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>손바닥 오차 150배 감소 (§4.1)</td>
+<td>◐</td>
+<td>514 JL off에서 152배 재현. 7.6k 부분집합의 정상 프레임에서는 MINK-EF가 더 낮음 (<code>03</code> §3)</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>방향 오차 머신 정밀도 (§4.1)</td>
+<td>◐</td>
+<td>JL off만 8.7e-6°. JL on은 3.26°</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>&quot;exact palm matching by construction&quot; (식 1, §3 Properties)</td>
+<td>◐</td>
+<td>이론상 성립. 실험의 전체 시스템(JL on)에서 원시 평균 24 mm. 설명 없음</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>관절 한계·자기 충돌 최저 (§4.1)</td>
+<td>◐</td>
+<td>514에서만 최저. 7.6k에서 SEW-M이 충돌·한계 모두 낮음</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>NNAD, PCA, RMS 최저 &quot;수 자릿수 차이&quot; (§4.1)</td>
+<td>✘ (NNAD) / ◐ (PCA, RMS)</td>
+<td>PCA, RMS는 닫힌 형식이라 정의상 0에 가까움. NNAD 차이는 약 20%, 팔 NNAD는 SEW-M이 더 낮음</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>30배 빠름 (§4.1)</td>
+<td>✔</td>
+<td>192.1 / 6.78 = 28배 (514), 36배 (7.6k)</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>프레임당 마이크로초 (§3)</td>
+<td>✘</td>
+<td>Table 3은 6.8 ms (밀리초). 저장소 fixture README도 기록 시간은 벤치마크가 아니라고 함</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>&quot;SEED 한 시간 대 하루&quot; (§4.1)</td>
+<td>✘ / ?</td>
+<td>프레임 × 시간으로 계산하면 514에서 15분 대 7.3시간. 조건 미기재</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>기지 필터 파라미터 δ = 0.05 m, δ_θ = 0.1 rad, f_n ≈ 1.5 Hz, ζ = 1 (부록 B.5)</td>
+<td>✔</td>
+<td><code>warp</code> 프리셋: <code>mobile_base_deadband 0.05</code>, <code>yaw 0.1</code>, <code>natural_freq 1.5</code>, <code>damping 1.0</code>. <code>config.py</code> 기본값과 일치</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>&quot;JL off&quot; = 관절 한계 없음 (Table 3 열)</td>
+<td>◐</td>
+<td>프리셋 <code>warp_no_joint_limits</code>는 관절 한계와 스프링 댐퍼 기지를 <strong>함께</strong> 끔. 논문 &quot;JL off&quot; 행은 기지 필터도 꺼진 설정으로 보임 (D5)</td>
+</tr>
+<tr>
+<td>C16</td>
+<td>시뮬 실험은 사람 데이터 (서론의 &quot;human demonstrations&quot; 전제)</td>
+<td>✘</td>
+<td>원천은 DexMimicGen으로 만든 <strong>GR1 로봇 시연</strong> (부록 C.2). 사람 데이터는 실물에만 쓰임</td>
+</tr>
+<tr>
+<td>C17</td>
+<td>실물 두 방법 정책이 &quot;identical&quot; (§1)</td>
+<td>?</td>
+<td>정책 구조와 하이퍼파라미터 비교 조건이 적혀 있지 않음. 공개 코드에 정책 없음</td>
+</tr>
+<tr>
+<td>C18</td>
+<td>사람 영상 없이 Quest 데이터만으로 제로샷 전이 (§1)</td>
+<td>◐</td>
+<td>정책은 AprilTag 물체 포즈와 로봇 상태를 입력. 이미지 없음(D.1). &quot;제로샷&quot;의 뜻이 좁음</td>
+</tr>
+<tr>
+<td>C19</td>
+<td>&quot;first framework ... zero-shot whole-body mobile manipulation&quot; (초록)</td>
+<td>?</td>
+<td>선행 연구 전수 조사 없음. HOMMI [3]와 비교하지 않음</td>
+</tr>
+<tr>
+<td>C20</td>
+<td>CoRL 2026 채택 (BibTeX, 프로젝트 페이지, 저장소 README)</td>
+<td>◐</td>
+<td>세 곳에서 같은 표기. arXiv abs에는 댓글 없음. 학회 목록은 확인하지 못함</td>
+</tr>
+<tr>
+<td>C21</td>
+<td>공식 코드 공개 (BibTeX/README의 링크)</td>
+<td>◐</td>
+<td>논문과 프로젝트 페이지에는 코드 링크가 없음. 공개 저장소는 있으나 <strong>WARP 솔버 없이 MINK 기준선과 재생만 포함</strong></td>
+</tr>
+<tr>
+<td>C22</td>
+<td>JL on의 큰 손바닥 오차는 작업공간 밖 목표 때문 (§4.1)</td>
+<td>?</td>
+<td>분해 실험 없음. 같은 자리에 &quot;몸통 이탈·관절 한계&quot;가 함께 있어 다른 원인도 가능</td>
+</tr>
+<tr>
+<td>C23</td>
+<td>부록 A.2: 어떤 MINK 가중치도 SEW와 세 지표를 동시에 맞추지 못함</td>
+<td>?</td>
+<td>그림 10만 있음. MINK 스윕 코드와 수치 없음</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 코드 대조에서 나온 차이 (D1–D8)</h2>
+<ul>
+<li><strong>D1. MINK-TE 팔꿈치 가중치 불일치.</strong> 논문 Table 2는 팔꿈치 스윙 비용 0.2, 저장소 <code>variants.yaml</code>의 <code>mink_te</code>는 <code>elbow_angle_cost: 0.5</code>입니다. 몸통 방향 가중치 0.5는 두 곳이 같습니다. 어느 값이 실험에 쓰였는지 확인해야 합니다.</li>
+<li><strong>D2. 솔버 부재.</strong> WARP, c-SEW, SEW-M 결과는 <code>geo_kin</code> 휠이 있어야 새로 만들 수 있습니다. 공개 저장소로는 <strong>논문 표 3, 4를 재생성할 수 없습니다.</strong> 제공된 참조 HDF5 5종은 washing dishes 한 동작의 결과물이라 표의 514 집합과 맞지 않습니다.</li>
+<li><strong>D3. 지표 누락.</strong> 공개 <code>metrics.py</code>의 지표는 9개 정도입니다. 논문 표의 P95, P99, 팔꿈치 오차, Out@15, 관절 한계 비율, 여유 최솟값, NNAD, PCA, RMS는 <strong>공개 코드에 없습니다.</strong> 저장소 문서가 이것을 명시합니다. 논문의 일관성 지표 전체를 독립적으로 확인할 방법이 없습니다.</li>
+<li><strong>D4. 정책 학습 코드 없음.</strong> HPT 기반 흐름 정합, block-causal 마스크, 체크포인트, 학습 설정이 공개 저장소에 없습니다. 실물 정책 재현이 불가능합니다.</li>
+<li><strong>D5. &quot;JL&quot; 열의 의미.</strong> 프리셋 <code>warp</code>는 <code>enable_joint_limits: true</code>와 <code>mobile_base_spring_damper: true</code>를 함께 켭니다. <code>warp_no_joint_limits</code>는 두 가지를 함께 끕니다. 따라서 논문 Table 3·4의 &quot;off&quot; 행(손바닥 0.0046 mm, 충돌 0.163)은 <strong>관절 한계와 lazy base가 모두 빠진 설정</strong>으로 보입니다. 논문은 &quot;JL&quot;을 정의하지 않고 본문에서 &quot;auxiliary constraints 없이&quot;라고만 씁니다. 이 구분이 헤드라인 수치를 크게 바꿉니다.</li>
+<li><strong>D6. 파이프라인 차이 (시뮬).</strong> WARP 시연은 재생 시 SEW 솔버를 <strong>온라인으로</strong> 돌리고, MINK 시연은 <strong>미리 계산된 관절 목표</strong>를 저장합니다(논문 C.2). 두 방법의 데이터 생성 경로가 같지 않습니다.</li>
+<li><strong>D7. 손 리타게팅 차이.</strong> 공개 MINK 폴백은 XHand IK가 없어 손 출력이 비어 있습니다. 논문의 MINK 기준선은 보호된 &quot;analytical XHand IK&quot;를 썼다고 저장소 문서가 밝힙니다(<code>docs/RUNNING.md</code>). 손 쪽 비교는 재현할 수 없습니다.</li>
+<li><strong>D8. 충돌 회피 꺼짐.</strong> 모든 프리셋에서 <code>enable_collision_avoidance: false</code>입니다. 자기 충돌 지표는 사후 측정이고, IK는 충돌을 피하도록 풀지 않습니다. 논문의 &quot;self-collision avoidance prior&quot; 해석(§4.1)은 이 점을 고려해야 합니다. 충돌 비율 0.163(JL off)은 이 설정에서 나온 값입니다.</li>
+</ul>
+<h2>4. 구현 가능성 판정 (이 맥 기준)</h2>
+<p><strong>이 맥:</strong> Apple M4 Pro, 통합 메모리 약 24 GiB, MPS 사용 가능, CUDA 없음, torch 미설치. 설치는 승인 전이므로 하지 않았습니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>판정</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>공식 재현 (논문 표 전체)</strong></td>
+<td><strong>불가</strong></td>
+<td>WARP 솔버는 <code>geo_kin</code> 라이선스 휠이 필요합니다. 저자에게 요청하지 않는 한 확보할 수 없습니다. 정책 학습 코드, 데이터 처리, 시뮬 GPU, 실물이 없습니다.</td>
+</tr>
+<tr>
+<td>공개 부분 재현 (MINK 기준선, 재생, 공개 지표 4종)</td>
+<td><strong>조건부</strong></td>
+<td><code>uv sync</code>와 <code>mujoco</code>, <code>h5py</code>, <code>geo_kin_core</code> 설치가 필요합니다(승인 필요). 설치 후 headless 재생과 MINK 변환은 CPU로 됩니다(시간은 수 분 규모로 예상, 미검증).</td>
+</tr>
+<tr>
+<td>c-SEW 아이디어 재구현 (기하 부분)</td>
+<td><strong>중간 난이도</strong></td>
+<td>식 (1)–(3), SP3, Stereo-SEW, SEW-Mimic은 수백 줄의 numpy입니다. Stereo-SEW와 ik-geo의 원 논문 [24], [25]를 읽어야 세부를 맞출 수 있습니다. 정확도 검증 기준은 손바닥 등식과 해의 유일성 두 가지로 충분합니다.</td>
+</tr>
+<tr>
+<td>lazy base 필터</td>
+<td><strong>쉬움</strong></td>
+<td>2차 시스템과 데드밴드 50줄 이하입니다. 장난감으로 가능 (<code>03</code> §4.4).</td>
+</tr>
+<tr>
+<td>정책 학습 (HPT류, 11M)</td>
+<td><strong>어려움</strong></td>
+<td>코드가 없어 처음부터 구현해야 합니다. 맥 MPS에서 작은 규모 학습은 가능할 수 있으나 미검증입니다. 시뮬 Table 1 규모는 GPU가 필요합니다.</td>
+</tr>
+<tr>
+<td>시뮬 DexMimicGen</td>
+<td><strong>불가 (현재 조건)</strong></td>
+<td>MuJoCo, robosuite 설치, GPU 권장. 설치 승인 전까지 보류.</td>
+</tr>
+<tr>
+<td>실물 RB-Y1, XArm, Quest, Vicon</td>
+<td><strong>불가</strong></td>
+<td>하드웨어 없음.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>판정 요약:</strong> 논문의 공식 재현은 <strong>불가</strong>합니다. 공개 코드로는 MINK 기준선과 재생, 일부 지표까지만 확인할 수 있습니다. 아이디어 재구현은 기하 부분이 <strong>중간 난이도</strong>이고 CPU로 충분합니다. 정책 부분은 코드가 없어 <strong>재구현 노력이 크고</strong> GPU 필요성이 큽니다.</p>
+<h2>5. 권리</h2>
+<ul>
+<li><strong>논문:</strong> arXiv abs 페이지 라이선스는 <strong>CC BY-NC-ND 4.0</strong>입니다(CC BY 아님). ND는 변형 게시를 금지하고 NC는 상업 이용을 금지합니다. 따라서 논문 그림과 표는 <strong>개인용 리포트와 PPT에만</strong> 넣고, 공개 산출물에는 넣지 않습니다. 공개물은 직접 만든 그래프와 우리 문장만 씁니다.</li>
+<li><strong>PDF 1쪽 권리 표기:</strong> arXiv 스탬프(<code>arXiv:2606.29940v2 [cs.RO] 19 Aug 2026</code>)만 있습니다. 저작권 문구, 라이선스 문구, <code>©</code> 표기는 전체 23쪽에서 찾지 못했습니다(pdftotext 검색). 권리 표기는 abs 페이지 기준으로 판단합니다.</li>
+<li><strong>공개 저장소 코드:</strong> MIT. 저작권 표기는 저자 개인 계정명입니다. 재사용은 가능하지만, 이 분석에서는 코드를 복사하지 않았습니다.</li>
+<li><strong><code>geo_kin</code>:</strong> 별도 라이선스. 저장소에 포함되지 않습니다. <strong>재배포 대상이 아닙니다.</strong></li>
+<li><strong><code>rby1_teleop</code> (submodule, 공개):</strong> 라이선스 파일이 없습니다. 기본 저작권이 적용되므로 복사하지 않았습니다.</li>
+<li><strong>MINK:</strong> Apache-2.0 (<code>kevinzakka/mink</code>).</li>
+<li><strong>DexMimicGen:</strong> NOASSERTION. 확인하지 않았습니다.</li>
+<li><strong>BONES-SEED 데이터:</strong> 접근 조건을 확인하지 않았습니다.</li>
+</ul>
+<h2>6. 빠진 정보와 저자에게 물을 것</h2>
+<ol>
+<li><code>geo_kin</code> 솔버를 연구용으로 받을 수 있는지, 또는 논문 표 재생성용 출력을 공유할 수 있는지.</li>
+<li>D1: MINK-TE 팔꿈치 가중치 (0.2 또는 0.5).</li>
+<li>D5: &quot;JL off&quot;가 관절 한계만인지, lazy base까지인지. 전체 WARP 시스템(JL on)의 손바닥·방향 오차.</li>
+<li>시뮬 Table 1의 롤아웃 수, 학습 시드, 교집합 학습 시연 수.</li>
+<li>실물 MINK 변형(EF 또는 TE), 정책 구조와 하이퍼파라미터 동일 여부.</li>
+<li>D7: 공개되지 않은 XHand IK를 MINK 기준선에 쓴 방식.</li>
+<li>표 4의 정상 프레임 손바닥 오차에서 MINK-EF가 WARP보다 낮은 이유.</li>
+</ol>
+</section>
+<section class="chapter"><h1>WARP 선행연구와 관련 연구</h1>
+<p>분석일 2026-11-10. GitHub 상태는 같은 날 <code>gh api</code>로 확인했습니다. 논문 인용은 원문 참고문헌 번호([n])를 씁니다.</p>
+<h2>1. 계보: 무엇을 이어받고 무엇을 바꿨나</h2>
+<table>
+<thead>
+<tr>
+<th>축</th>
+<th>논문이 이어받은 것</th>
+<th>논문이 바꾼 것</th>
+<th>참고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>기하 해법</td>
+<td>SEW 표현, 닫힌 형식 SEW-Mimic 해, Stereo-SEW(팔꿈치 반평면), SP3, ik-geo</td>
+<td>손바닥을 hard constraint로, 두 단계 (몸통 오프셋 → 팔꿈치 정렬), 무릎 앞 해 선택</td>
+<td>[8] Kong et al. 2026 (arXiv:2602.01632), [24] Elias &amp; Wen 2024, [25] Elias &amp; Wen 2025</td>
+</tr>
+<tr>
+<td>최적화 리타게팅</td>
+<td>MINK의 가중 속도 IK (실험 비교 대상)</td>
+<td>가중합 대신 등식 제약, 자세 정규화 항 대신 해석해</td>
+<td>[9] Zakka, MINK (2024). 부록 A</td>
+</tr>
+<tr>
+<td>전신 리타게팅</td>
+<td>GMR이 대표하는 &quot;추종 + 자세 가중&quot; 전신 IK</td>
+<td>팔꿈치 위치를 기하량으로 직접 다룸</td>
+<td>[4] Araujo et al. 2025 (arXiv:2510.02252): 논문은 GMR을 MINK 기반으로 서술</td>
+</tr>
+<tr>
+<td>보행·전신 제어</td>
+<td>HOMIE, CLONE, BEHAVIOR가 쓴 전신 제어</td>
+<td>준정적·조작 중심 가정, 기지는 느린 필터</td>
+<td>[10] HOMIE, [21] CLONE, [20] BEHAVIOR Robot Suite</td>
+</tr>
+<tr>
+<td>사람 데이터 수집</td>
+<td>UMI/DexCap류의 &quot;사람 데이터 직접 수집&quot; 발상</td>
+<td>엔드이펙터만 저장하지 않고 상체 운동학 트리 전체를 저장</td>
+<td>[13] UMI, [14] DexCap</td>
+</tr>
+<tr>
+<td>사람 데이터 기반 모바일 조작</td>
+<td>가장 가까운 기존 연구</td>
+<td>직접 비교 없음</td>
+<td><strong>[3] HOMMI (Xu et al. 2026, arXiv:2603.03243): 사람 시연으로 전신 모바일 조작 학습.</strong> 같은 목표이지만 논문 실험에 없음</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 직접 대조하는 것과 빼 놓은 것</h2>
+<ul>
+<li><strong>논문 실험의 비교 대상:</strong> MINK-EF, MINK-TE, SEW-M (표 3·4, Fig. 5). 정책 비교는 MINK 하나뿐입니다.</li>
+<li><strong>서론에서만 언급된 것:</strong> GMR [4], HOMIE [10]. 표에 없습니다.</li>
+<li><strong>요청하신 기준선 중 논문에 없는 것:</strong> PHC와 OmniH2O류는 논문 참고문헌에 없어서 <strong>비교 대상이 아닙니다.</strong> 이 분석에서 그 결과를 인용하지 않았습니다.</li>
+<li><strong>가장 가까운 연구인 HOMMI [3]:</strong> 같은 해 같은 목표(사람 시연 → 전신 모바일 조작)입니다. 논문이 이것과 비교하지 않은 이유는 적혀 있지 않습니다.</li>
+</ul>
+<h2>3. 이 저장소의 관련 분석과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>폴더</th>
+<th>대상 (arXiv)</th>
+<th>WARP와 맞닿는 지점</th>
+<th>차이</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gnr/</code></td>
+<td>GNR, Generative Neural Retargeting (2610.12440, Meta Reality Labs)</td>
+<td>리타게팅 해의 다중성이 정책 학습을 해친다는 같은 문제의식. GNR은 잔차를 <strong>생성 모델</strong>로 다중 해를 받아들이고, WARP는 해를 <strong>유일하게</strong> 만듦</td>
+<td>손 리타게팅(DG-5F), 샘플링 MPC + flow matching, 공개 코드 없음</td>
+</tr>
+<tr>
+<td><code>flashdexretarget/</code></td>
+<td>FlashDexRetarget (2610.01849)</td>
+<td>사람 시연을 로봇 손 궤적으로 옮기는 과제</td>
+<td>RL 정책으로 리타게팅 (손), 학습은 GPU 필요</td>
+</tr>
+<tr>
+<td><code>chord/</code></td>
+<td>CHORD (2607.00033, NVIDIA, CoRL 2026)</td>
+<td>접촉 정보를 리타게팅·학습의 신호로 쓴다는 점. WARP는 접촉을 <strong>기하로 제약하지 않음</strong> (손바닥만 hard)</td>
+<td>손 조작 RL, 마찰원뿔 보상</td>
+</tr>
+<tr>
+<td><code>cross_embodiment_wm/</code></td>
+<td>Scaling Cross-Embodiment WM (2511.01177, IROS 2026)</td>
+<td>서로 다른 몸체 사이의 간극을 표현 단계에서 흡수한다는 발상 (파티클 변위 대 SEW)</td>
+<td>파티클 세계모델, 손 전용, MPC</td>
+</tr>
+<tr>
+<td><code>dreamx/</code></td>
+<td>DreamX (2611.05377)</td>
+<td>사람 데이터를 로봇 명령으로 옮김. 기하 리타게팅 대신 영상 latent action을 씀</td>
+<td>영상 diffusion 백본, 공개 코드 없음</td>
+</tr>
+<tr>
+<td><code>motion_latent_action/</code></td>
+<td>Motion-Focused Latent Action (2606.18955, IROS 2026)</td>
+<td>사람 영상을 로봇 VLA 학습에 쓰는 법. 기하가 아니라 잠재 행동</td>
+<td>사람 egovideo, 마스크 파이프라인 필요</td>
+</tr>
+<tr>
+<td><code>dextouch_wm/</code></td>
+<td>DexTouch-WM (2609.20649, IROS 2026 워크숍)</td>
+<td>WARP의 한계(이미지 없음, 접촉 정보 없음)를 촉각으로 보완하는 방향</td>
+<td>촉각 세계모델, 워크숍 논문</td>
+</tr>
+</tbody>
+</table>
+<p><strong>정리:</strong> WARP의 학습 쪽 주장(일관된 행동 목표 → 좋은 정책)은 GNR의 &quot;다중 해를 생성 모델로 받는다&quot;와 정면으로 반대되는 설계입니다. 어느 쪽이 맞는지는 같은 과제에서 두 방식을 비교해야 알 수 있고, 두 논문 모두 그 비교를 하지 않았습니다. 이 비교 방향은 연구 활용 측면에서 따로 정리했습니다.</p>
+<h2>4. GitHub 확인 (2026-11-10, <code>gh api</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>별 / 포크</th>
+<th>마지막 push</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Euler-Rodrigues-Lab/WARP_retargeting</code></td>
+<td><strong>이 논문의 공개 릴리스.</strong> 리타게팅 파이프라인, MINK 기준선, 지표 일부, 재생 도구. WARP(c-SEW) 솔버는 없음</td>
+<td>저자 조직 (조직 소개: &quot;Robotics Embodiment Retargeting using Geometry&quot;)</td>
+<td>MIT</td>
+<td>1 / 2</td>
+<td>2026-11-08 (커밋 <code>172b1dc</code>, 첫 커밋 <code>b98b97f</code> &quot;Initial public WARP retargeting release&quot;)</td>
+</tr>
+<tr>
+<td><code>warp-retargeting/warp-retargeting.github.io</code></td>
+<td>프로젝트 페이지 저장소 (Nerfies 템플릿)</td>
+<td>저자 조직 추정</td>
+<td>없음</td>
+<td>—</td>
+<td>2026-10-08</td>
+</tr>
+<tr>
+<td><code>Euler-Rodrigues-Lab/rby1_teleop</code></td>
+<td>RB-Y1 텔레옵, MuJoCo 모델, SEW 기하 리타게팅 래퍼. WARP 저장소의 submodule (<code>973ed0d</code>)</td>
+<td>저자 조직</td>
+<td>없음</td>
+<td>1</td>
+<td>2026-10-27</td>
+</tr>
+<tr>
+<td><code>Euler-Rodrigues-Lab/geo_kin_core</code></td>
+<td>&quot;SEW 기하 텔레옵 리타게팅의 공개 코어&quot; (타입, 솔버 인터페이스, 로봇 사양). 공개 폴백(MINK)이 여기 연결</td>
+<td>저자 조직</td>
+<td>없음</td>
+<td>—</td>
+<td>2026-10-27</td>
+</tr>
+<tr>
+<td><code>Euler-Rodrigues-Lab/XRT_devices</code></td>
+<td>입력 장치 어댑터 (SEED CSV 읽기 포함)</td>
+<td>저자 조직</td>
+<td>MIT</td>
+<td>—</td>
+<td>2026-10-27</td>
+</tr>
+<tr>
+<td><code>Euler-Rodrigues-Lab/SEW-Geometric-Teleop</code></td>
+<td>논문이 말하는 원본 소스 체크포인트 (<code>4f0fa5e</code>)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td><strong>404, 공개 아님</strong></td>
+</tr>
+<tr>
+<td><code>kevinzakka/mink</code></td>
+<td>MINK (MuJoCo 기반 IK), 기준선의 엔진</td>
+<td>원 저자</td>
+<td>Apache-2.0</td>
+<td>1,604</td>
+<td>2026-11-02</td>
+</tr>
+<tr>
+<td><code>NVlabs/dexmimicgen</code></td>
+<td>DexMimicGen 환경 (시뮬 실험의 데이터 원천)</td>
+<td>NVIDIA</td>
+<td>NOASSERTION (확인 안 됨)</td>
+<td>298</td>
+<td>2025-12-06</td>
+</tr>
+<tr>
+<td><code>warp-retargeting</code> (검색어)</td>
+<td><code>NVIDIA/warp</code>(물리 엔진)와 이름 혼동 주의</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>GitHub 검색 <code>WARP whole-body retargeting</code>으로 찾은 저장소는 위 <code>Euler-Rodrigues-Lab/WARP_retargeting</code> 하나뿐입니다. 논문 본문과 프로젝트 페이지에는 코드 링크가 <strong>없습니다</strong> (프로젝트 페이지 HTML의 링크를 전부 확인). 공개 저장소의 홈페이지 필드만 프로젝트 페이지를 가리킵니다.</li>
+<li>공개 저장소 clone: <code>repo/WARP_retargeting</code> (얕은 clone, 커밋 <code>172b1dcde11d3942d3fad6d378695b5703631ded</code>, 저장소 <code>.gitignore</code>에 <code>repo/</code> 추가). 세부 대조는 <code>04_code_verification.md</code>.</li>
+<li>SEW-Mimic(<code>arXiv:2602.01632</code>)의 전용 저장소는 확인하지 못했습니다. 조직 저장소 목록에 해당 이름이 없습니다(<code>SEW-Geometric-Teleop</code> 404). GMR 저장소는 검색으로 찾지 못했습니다. 두 항목은 &quot;확인 못 함&quot;으로 둡니다.</li>
+<li>저자 개인 계정 세 곳의 저장소 목록에서도 WARP 관련 저장소는 찾지 못했습니다(이름으로만 검색, 추가 확인 안 함).</li>
+</ul>
+<h2>5. 기준선 해석 메모</h2>
+<ul>
+<li><strong>MINK-EF/TE</strong>는 &quot;가중 속도 IK + 기본 자세 정규화&quot;입니다. 손 목표와 자세 목표의 가중치가 해를 바꾸므로 결과가 가중치 선택에 민감합니다. 부록 A.2 스윕이 이 점을 보입니다(그림으로만 제시).</li>
+<li><strong>SEW-M</strong>은 SEW 해를 목표 없이 쓰는 기준입니다. 같은 저자군이므로 WARP의 기여를 분리하기 가장 좋은 대조입니다. 실제로 손바닥 정확도(JL off 178.979 mm)가 나쁘고, 몸통 이탈 0.000과 방향 정확도는 WARP와 같습니다. 즉 <strong>손바닥 hard constraint와 몸통 오프셋이 기여하는 부분이 드러나는 비교</strong>입니다.</li>
+<li><strong>공정성 문제:</strong> MINK 변형이 소프트 가중치로 튜닝되지 않았습니다(&quot;튜닝 없음&quot;이 WARP의 장점으로 제시됨). 기준선에 같은 수준의 튜닝을 했는지는 논문에 없습니다.</li>
+</ul>
+</section></body></html>

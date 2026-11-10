@@ -1,0 +1,187 @@
+{
+  "assumptions": {
+    "AR": 0.5,
+    "s0": 0.05102040816326531,
+    "slip_median": 0.45,
+    "slip_logsd": 0.5,
+    "event_len_frames": 3,
+    "hz": 12.0,
+    "n_cal_static": 6477,
+    "n_cal_slip": 18,
+    "n_test_static": 20000,
+    "n_test_slip": 2000,
+    "reps": 200,
+    "effort_step_per_false_alarm": 300,
+    "note": "합성 데이터. 논문의 값을 맞추지 않았다. 방향성(규칙 간 차이, 드리프트 효과)만 읽는다."
+  },
+  "example_rep0_thresholds": {
+    "R1_noise_P99.9": 0.1676082543084343,
+    "R2_paper_style_min_slip": 0.22389502189385227,
+    "R3_in_sample_Youden": 0.183,
+    "R4_midpoint": 0.1960516381011433
+  },
+  "results": {
+    "drift_1.0": {
+      "R1_noise_P99.9": {
+        "theta_median": 0.166414348511365,
+        "theta_p05_p95": [
+          0.15787753698284154,
+          0.17776403173516586
+        ],
+        "tpr_event_median": 0.9765,
+        "tpr_event_p05": 0.967975,
+        "fpr_frame_median": 0.00105,
+        "false_alarm_per_min_median": 0.72,
+        "false_alarm_per_min_p95": 1.476,
+        "effort_added_per_min_by_false_alarms": 216.0
+      },
+      "R2_paper_style_min_slip": {
+        "theta_median": 0.18760262810304515,
+        "theta_p05_p95": [
+          0.16104278734619418,
+          0.2821901752970085
+        ],
+        "tpr_event_median": 0.959,
+        "tpr_event_p05": 0.82925,
+        "fpr_frame_median": 0.000225,
+        "false_alarm_per_min_median": 0.16199999999999998,
+        "false_alarm_per_min_p95": 1.0835999999999988,
+        "effort_added_per_min_by_false_alarms": 48.599999999999994
+      },
+      "R3_in_sample_Youden": {
+        "theta_median": 0.182,
+        "theta_p05_p95": [
+          0.12100000000000001,
+          0.21205
+        ],
+        "tpr_event_median": 0.964,
+        "tpr_event_p05": 0.93345,
+        "fpr_frame_median": 0.00035,
+        "false_alarm_per_min_median": 0.252,
+        "false_alarm_per_min_p95": 11.00879999999999,
+        "effort_added_per_min_by_false_alarms": 75.6
+      },
+      "R4_midpoint": {
+        "theta_median": 0.17809054963351578,
+        "theta_p05_p95": [
+          0.13450119353063514,
+          0.22358979170710377
+        ],
+        "tpr_event_median": 0.9684999999999999,
+        "tpr_event_p05": 0.922375,
+        "fpr_frame_median": 0.00045,
+        "false_alarm_per_min_median": 0.324,
+        "false_alarm_per_min_p95": 5.579999999999988,
+        "effort_added_per_min_by_false_alarms": 97.2
+      }
+    },
+    "drift_1.25": {
+      "R1_noise_P99.9": {
+        "theta_median": 0.166414348511365,
+        "theta_p05_p95": [
+          0.15787753698284154,
+          0.17776403173516586
+        ],
+        "tpr_event_median": 0.9765,
+        "tpr_event_p05": 0.968,
+        "fpr_frame_median": 0.009174999999999999,
+        "false_alarm_per_min_median": 5.9399999999999995,
+        "false_alarm_per_min_p95": 8.713799999999999,
+        "effort_added_per_min_by_false_alarms": 1781.9999999999998
+      },
+      "R2_paper_style_min_slip": {
+        "theta_median": 0.18760262810304515,
+        "theta_p05_p95": [
+          0.16104278734619418,
+          0.2821901752970085
+        ],
+        "tpr_event_median": 0.9585,
+        "tpr_event_p05": 0.8328249999999999,
+        "fpr_frame_median": 0.00345,
+        "false_alarm_per_min_median": 2.268,
+        "false_alarm_per_min_p95": 7.781399999999998,
+        "effort_added_per_min_by_false_alarms": 680.4
+      },
+      "R3_in_sample_Youden": {
+        "theta_median": 0.182,
+        "theta_p05_p95": [
+          0.12100000000000001,
+          0.21205
+        ],
+        "tpr_event_median": 0.9652499999999999,
+        "tpr_event_p05": 0.931975,
+        "fpr_frame_median": 0.004375,
+        "false_alarm_per_min_median": 2.916,
+        "false_alarm_per_min_p95": 34.410599999999995,
+        "effort_added_per_min_by_false_alarms": 874.8
+      },
+      "R4_midpoint": {
+        "theta_median": 0.17809054963351578,
+        "theta_p05_p95": [
+          0.13450119353063514,
+          0.22358979170710377
+        ],
+        "tpr_event_median": 0.96825,
+        "tpr_event_p05": 0.9199,
+        "fpr_frame_median": 0.005175,
+        "false_alarm_per_min_median": 3.51,
+        "false_alarm_per_min_p95": 21.10859999999998,
+        "effort_added_per_min_by_false_alarms": 1053.0
+      }
+    },
+    "drift_1.5": {
+      "R1_noise_P99.9": {
+        "theta_median": 0.166414348511365,
+        "theta_p05_p95": [
+          0.15787753698284154,
+          0.17776403173516586
+        ],
+        "tpr_event_median": 0.9765,
+        "tpr_event_p05": 0.967975,
+        "fpr_frame_median": 0.02935,
+        "false_alarm_per_min_median": 17.91,
+        "false_alarm_per_min_p95": 23.371199999999998,
+        "effort_added_per_min_by_false_alarms": 5373.0
+      },
+      "R2_paper_style_min_slip": {
+        "theta_median": 0.18760262810304515,
+        "theta_p05_p95": [
+          0.16104278734619418,
+          0.2821901752970085
+        ],
+        "tpr_event_median": 0.95975,
+        "tpr_event_p05": 0.819,
+        "fpr_frame_median": 0.013125000000000001,
+        "false_alarm_per_min_median": 8.405999999999999,
+        "false_alarm_per_min_p95": 20.845799999999997,
+        "effort_added_per_min_by_false_alarms": 2521.7999999999997
+      },
+      "R3_in_sample_Youden": {
+        "theta_median": 0.182,
+        "theta_p05_p95": [
+          0.12100000000000001,
+          0.21205
+        ],
+        "tpr_event_median": 0.966,
+        "tpr_event_p05": 0.935825,
+        "fpr_frame_median": 0.017175,
+        "false_alarm_per_min_median": 10.782,
+        "false_alarm_per_min_p95": 61.1298,
+        "effort_added_per_min_by_false_alarms": 3234.6
+      },
+      "R4_midpoint": {
+        "theta_median": 0.17809054963351578,
+        "theta_p05_p95": [
+          0.13450119353063514,
+          0.22358979170710377
+        ],
+        "tpr_event_median": 0.9685,
+        "tpr_event_p05": 0.917475,
+        "fpr_frame_median": 0.019575,
+        "false_alarm_per_min_median": 12.276,
+        "false_alarm_per_min_p95": 42.63119999999993,
+        "effort_added_per_min_by_false_alarms": 3682.7999999999997
+      }
+    }
+  }
+}

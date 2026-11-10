@@ -1,0 +1,397 @@
+{
+  "assumptions": {
+    "SIM_HZ": 600.0,
+    "T_END": 10.0,
+    "N_EP": 400,
+    "MU": 0.8,
+    "TAU": 0.08,
+    "THETA_S": 0.2,
+    "THETA_Q": 0.1,
+    "THETA_C": 0.1,
+    "SY_NOISE": 0.04,
+    "E_INIT": 1200.0,
+    "E_MAX": 5000.0,
+    "step_slip": [
+      300.0,
+      80.0
+    ],
+    "step_release": [
+      200.0,
+      60.0
+    ],
+    "step_protect": [
+      400.0,
+      100.0
+    ],
+    "CRUSH_T": 0.1,
+    "DROP_T": 0.3,
+    "W_sweep": [
+      0.15,
+      0.3,
+      0.6,
+      0.9
+    ],
+    "W_in_slip_steps": [
+      0.5,
+      1.0,
+      2.0,
+      3.0
+    ],
+    "note": "합성 데이터. 논문 값을 맞추지 않았다. 구성 간 순서와 민감도만 읽는다."
+  },
+  "ablation": {
+    "W=0.15": {
+      "A_slip_only": {
+        "success": 107,
+        "n": 400,
+        "rate": 0.2675,
+        "wilson95": [
+          0.22648238411831478,
+          0.31294083274713314
+        ],
+        "drop_rate": 0.0925,
+        "crush_rate": 0.7175,
+        "e_max_median": 1800.0,
+        "release_events_median": 0.0,
+        "release_episode_share": 0.0
+      },
+      "B_slip_protect": {
+        "success": 105,
+        "n": 400,
+        "rate": 0.2625,
+        "wilson95": [
+          0.22178679994488373,
+          0.30773153986390706
+        ],
+        "drop_rate": 0.1075,
+        "crush_rate": 0.725,
+        "e_max_median": 1800.0,
+        "release_events_median": 0.0,
+        "release_episode_share": 0.0
+      },
+      "C_slip_release": {
+        "success": 105,
+        "n": 400,
+        "rate": 0.2625,
+        "wilson95": [
+          0.22178679994488373,
+          0.30773153986390706
+        ],
+        "drop_rate": 0.1075,
+        "crush_rate": 0.725,
+        "e_max_median": 1800.0,
+        "release_events_median": 46.0,
+        "release_episode_share": 1.0
+      },
+      "D_full": {
+        "success": 105,
+        "n": 400,
+        "rate": 0.2625,
+        "wilson95": [
+          0.22178679994488373,
+          0.30773153986390706
+        ],
+        "drop_rate": 0.1075,
+        "crush_rate": 0.725,
+        "e_max_median": 1800.0,
+        "release_events_median": 46.0,
+        "release_episode_share": 1.0
+      }
+    },
+    "W=0.3": {
+      "A_slip_only": {
+        "success": 123,
+        "n": 400,
+        "rate": 0.3075,
+        "wilson95": [
+          0.2642873977313039,
+          0.3543748355874003
+        ],
+        "drop_rate": 0.07,
+        "crush_rate": 0.6625,
+        "e_max_median": 1800.0,
+        "release_events_median": 0.0,
+        "release_episode_share": 0.0
+      },
+      "B_slip_protect": {
+        "success": 116,
+        "n": 400,
+        "rate": 0.29,
+        "wilson95": [
+          0.24769665928572088,
+          0.3362985043346836
+        ],
+        "drop_rate": 0.095,
+        "crush_rate": 0.6775,
+        "e_max_median": 1800.0,
+        "release_events_median": 0.0,
+        "release_episode_share": 0.0
+      },
+      "C_slip_release": {
+        "success": 108,
+        "n": 400,
+        "rate": 0.27,
+        "wilson95": [
+          0.22883278412268437,
+          0.31554287127109204
+        ],
+        "drop_rate": 0.095,
+        "crush_rate": 0.7025,
+        "e_max_median": 1800.0,
+        "release_events_median": 46.0,
+        "release_episode_share": 1.0
+      },
+      "D_full": {
+        "success": 108,
+        "n": 400,
+        "rate": 0.27,
+        "wilson95": [
+          0.22883278412268437,
+          0.31554287127109204
+        ],
+        "drop_rate": 0.095,
+        "crush_rate": 0.7025,
+        "e_max_median": 1800.0,
+        "release_events_median": 46.0,
+        "release_episode_share": 1.0
+      }
+    },
+    "W=0.6": {
+      "A_slip_only": {
+        "success": 368,
+        "n": 400,
+        "rate": 0.92,
+        "wilson95": [
+          0.8892454231693245,
+          0.9427642495898665
+        ],
+        "drop_rate": 0.0775,
+        "crush_rate": 0.0025,
+        "e_max_median": 1800.0,
+        "release_events_median": 0.0,
+        "release_episode_share": 0.0
+      },
+      "B_slip_protect": {
+        "success": 368,
+        "n": 400,
+        "rate": 0.92,
+        "wilson95": [
+          0.8892454231693245,
+          0.9427642495898665
+        ],
+        "drop_rate": 0.0775,
+        "crush_rate": 0.0025,
+        "e_max_median": 1800.0,
+        "release_events_median": 0.0,
+        "release_episode_share": 0.0
+      },
+      "C_slip_release": {
+        "success": 353,
+        "n": 400,
+        "rate": 0.8825,
+        "wilson95": [
+          0.8472450357843669,
+          0.9104780590498961
+        ],
+        "drop_rate": 0.1075,
+        "crush_rate": 0.01,
+        "e_max_median": 1800.0,
+        "release_events_median": 46.0,
+        "release_episode_share": 1.0
+      },
+      "D_full": {
+        "success": 353,
+        "n": 400,
+        "rate": 0.8825,
+        "wilson95": [
+          0.8472450357843669,
+          0.9104780590498961
+        ],
+        "drop_rate": 0.1075,
+        "crush_rate": 0.01,
+        "e_max_median": 1800.0,
+        "release_events_median": 46.0,
+        "release_episode_share": 1.0
+      }
+    },
+    "W=0.9": {
+      "A_slip_only": {
+        "success": 366,
+        "n": 400,
+        "rate": 0.915,
+        "wilson95": [
+          0.8835678157264721,
+          0.9385369799760619
+        ],
+        "drop_rate": 0.085,
+        "crush_rate": 0.0,
+        "e_max_median": 1800.0,
+        "release_events_median": 0.0,
+        "release_episode_share": 0.0
+      },
+      "B_slip_protect": {
+        "success": 366,
+        "n": 400,
+        "rate": 0.915,
+        "wilson95": [
+          0.8835678157264721,
+          0.9385369799760619
+        ],
+        "drop_rate": 0.085,
+        "crush_rate": 0.0,
+        "e_max_median": 1800.0,
+        "release_events_median": 0.0,
+        "release_episode_share": 0.0
+      },
+      "C_slip_release": {
+        "success": 350,
+        "n": 400,
+        "rate": 0.875,
+        "wilson95": [
+          0.8389809024860414,
+          0.9038848767632363
+        ],
+        "drop_rate": 0.125,
+        "crush_rate": 0.0,
+        "e_max_median": 1800.0,
+        "release_events_median": 45.0,
+        "release_episode_share": 1.0
+      },
+      "D_full": {
+        "success": 350,
+        "n": 400,
+        "rate": 0.875,
+        "wilson95": [
+          0.8389809024860414,
+          0.9038848767632363
+        ],
+        "drop_rate": 0.125,
+        "crush_rate": 0.0,
+        "e_max_median": 1800.0,
+        "release_events_median": 45.0,
+        "release_episode_share": 1.0
+      }
+    }
+  },
+  "fixed": {
+    "W=0.15": {
+      "F0_fixed_1200": {
+        "success": 114,
+        "n": 400,
+        "rate": 0.285,
+        "wilson95": [
+          0.24297076989988833,
+          0.33111951666385914
+        ],
+        "drop_rate": 0.715,
+        "crush_rate": 0.0
+      },
+      "Fh_fixed_3000": {
+        "success": 0,
+        "n": 400,
+        "rate": 0.0,
+        "wilson95": [
+          8.673617379884035e-19,
+          0.009512294334296508
+        ],
+        "drop_rate": 0.0,
+        "crush_rate": 1.0
+      }
+    },
+    "W=0.3": {
+      "F0_fixed_1200": {
+        "success": 98,
+        "n": 400,
+        "rate": 0.245,
+        "wilson95": [
+          0.20540872953011524,
+          0.289442540580376
+        ],
+        "drop_rate": 0.755,
+        "crush_rate": 0.0
+      },
+      "Fh_fixed_3000": {
+        "success": 0,
+        "n": 400,
+        "rate": 0.0,
+        "wilson95": [
+          8.673617379884035e-19,
+          0.009512294334296508
+        ],
+        "drop_rate": 0.0,
+        "crush_rate": 1.0
+      }
+    },
+    "W=0.6": {
+      "F0_fixed_1200": {
+        "success": 117,
+        "n": 400,
+        "rate": 0.2925,
+        "wilson95": [
+          0.2500620261568489,
+          0.33888557599188407
+        ],
+        "drop_rate": 0.7075,
+        "crush_rate": 0.0
+      },
+      "Fh_fixed_3000": {
+        "success": 0,
+        "n": 400,
+        "rate": 0.0,
+        "wilson95": [
+          8.673617379884035e-19,
+          0.009512294334296508
+        ],
+        "drop_rate": 0.0,
+        "crush_rate": 1.0
+      }
+    },
+    "W=0.9": {
+      "F0_fixed_1200": {
+        "success": 128,
+        "n": 400,
+        "rate": 0.32,
+        "wilson95": [
+          0.2761841236239046,
+          0.36724030233644217
+        ],
+        "drop_rate": 0.68,
+        "crush_rate": 0.0
+      },
+      "Fh_fixed_3000": {
+        "success": 0,
+        "n": 400,
+        "rate": 0.0,
+        "wilson95": [
+          8.673617379884035e-19,
+          0.009512294334296508
+        ],
+        "drop_rate": 0.0,
+        "crush_rate": 1.0
+      }
+    }
+  },
+  "delay": {
+    "12Hz": {
+      "episodes_with_slip_onset": 310,
+      "detected_after_onset": 279,
+      "delay_median_ms": 186.66666666666677,
+      "delay_p90_ms": 460.33333333333337,
+      "deficit_at_detect_median": 0.13378309867729277
+    },
+    "25Hz": {
+      "episodes_with_slip_onset": 310,
+      "detected_after_onset": 286,
+      "delay_median_ms": 125.0,
+      "delay_p90_ms": 227.50000000000003,
+      "deficit_at_detect_median": 0.11070385678020933
+    },
+    "50Hz": {
+      "episodes_with_slip_onset": 310,
+      "detected_after_onset": 294,
+      "delay_median_ms": 86.66666666666667,
+      "delay_p90_ms": 176.16666666666666,
+      "deficit_at_detect_median": 0.09235654555395412
+    }
+  }
+}

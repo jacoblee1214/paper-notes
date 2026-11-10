@@ -1,0 +1,431 @@
+{
+  "overall": {
+    "n": 3593,
+    "success": 1912,
+    "rate_pct": 53.2,
+    "wilson95": [
+      51.6,
+      54.8
+    ],
+    "fails": 1681
+  },
+  "hand_split": {
+    "allegro": {
+      "n": 2226,
+      "k_from_rate": 877,
+      "rate_check_pct": 39.4,
+      "wilson95": [
+        37.4,
+        41.4
+      ]
+    },
+    "inspire": {
+      "n": 1367,
+      "k_from_rate": 1035,
+      "rate_check_pct": 75.71,
+      "wilson95": [
+        73.4,
+        77.9
+      ]
+    },
+    "sum_success_check": 1912,
+    "sum_success_paper": 1912,
+    "fisher_p_hand": 5.898340571762748e-103,
+    "diff_pp_inspire_minus_allegro": 36.3,
+    "newcombe95_pp": [
+      33.3,
+      39.3
+    ],
+    "note": "손은 물체 집합·세션·시기와 섞여 있어 손 효과를 분리할 수 없다(교란)."
+  },
+  "validation_effect_split_sensitivity": [
+    {
+      "n_validated": 100,
+      "n_modelscreened": 415,
+      "k_validated": 76,
+      "k_modelscreened": 141,
+      "rate_v_pct": 76.0,
+      "rate_m_pct": 34.0,
+      "wilson_v": [
+        66.8,
+        83.3
+      ],
+      "wilson_m": [
+        29.6,
+        38.7
+      ],
+      "fisher_p": 2.982892603322046e-14,
+      "newcombe_diff_pp": [
+        31.7,
+        50.5
+      ]
+    },
+    {
+      "n_validated": 150,
+      "n_modelscreened": 365,
+      "k_validated": 114,
+      "k_modelscreened": 124,
+      "rate_v_pct": 76.0,
+      "rate_m_pct": 34.0,
+      "wilson_v": [
+        68.6,
+        82.1
+      ],
+      "wilson_m": [
+        29.3,
+        39.0
+      ],
+      "fisher_p": 1.9166280893495012e-18,
+      "newcombe_diff_pp": [
+        33.1,
+        49.7
+      ]
+    },
+    {
+      "n_validated": 200,
+      "n_modelscreened": 315,
+      "k_validated": 152,
+      "k_modelscreened": 107,
+      "rate_v_pct": 76.0,
+      "rate_m_pct": 34.0,
+      "wilson_v": [
+        69.6,
+        81.4
+      ],
+      "wilson_m": [
+        29.0,
+        39.4
+      ],
+      "fisher_p": 6.114172789783105e-21,
+      "newcombe_diff_pp": [
+        33.6,
+        49.4
+      ]
+    },
+    {
+      "n_validated": 257,
+      "n_modelscreened": 258,
+      "k_validated": 195,
+      "k_modelscreened": 88,
+      "rate_v_pct": 75.9,
+      "rate_m_pct": 34.1,
+      "wilson_v": [
+        70.3,
+        80.7
+      ],
+      "wilson_m": [
+        28.6,
+        40.1
+      ],
+      "fisher_p": 6.530742877096071e-22,
+      "newcombe_diff_pp": [
+        33.6,
+        49.1
+      ]
+    },
+    {
+      "n_validated": 258,
+      "n_modelscreened": 257,
+      "k_validated": 196,
+      "k_modelscreened": 87,
+      "rate_v_pct": 76.0,
+      "rate_m_pct": 33.9,
+      "wilson_v": [
+        70.4,
+        80.8
+      ],
+      "wilson_m": [
+        28.3,
+        39.8
+      ],
+      "fisher_p": 2.748370872665742e-22,
+      "newcombe_diff_pp": [
+        34.0,
+        49.5
+      ]
+    },
+    {
+      "n_validated": 300,
+      "n_modelscreened": 215,
+      "k_validated": 228,
+      "k_modelscreened": 73,
+      "rate_v_pct": 76.0,
+      "rate_m_pct": 34.0,
+      "wilson_v": [
+        70.9,
+        80.5
+      ],
+      "wilson_m": [
+        28.0,
+        40.5
+      ],
+      "fisher_p": 8.449211369688598e-22,
+      "newcombe_diff_pp": [
+        33.7,
+        49.5
+      ]
+    },
+    {
+      "n_validated": 400,
+      "n_modelscreened": 115,
+      "k_validated": 304,
+      "k_modelscreened": 39,
+      "rate_v_pct": 76.0,
+      "rate_m_pct": 33.9,
+      "wilson_v": [
+        71.6,
+        79.9
+      ],
+      "wilson_m": [
+        25.9,
+        43.0
+      ],
+      "fisher_p": 2.7621580584678e-16,
+      "newcombe_diff_pp": [
+        32.0,
+        51.0
+      ]
+    }
+  ],
+  "validation_effect_note": "분할을 어떻게 하든 p는 10^-20 이하다. 문제는 검정력이 아니라 독립성이다: 같은 20개 물체·자세에 반복 시험했을 가능성, 라벨 규칙 동일성, 기준선 선택 순서가 검정에 들어가지 않았다.",
+  "fig5_right_category_check": {
+    "values_source": "repo rebuttal_fig.py (Fig. 5 우측과 같은 수치로 보임: 막대 높이 일치)",
+    "rows": [
+      {
+        "cat": "Wood",
+        "real_pct": 67.5,
+        "errbar_pp": 14.5,
+        "n_assumed_per_arm": 64,
+        "binomial_se_pp": 5.9
+      },
+      {
+        "cat": "Plastic",
+        "real_pct": 73.3,
+        "errbar_pp": 11.2,
+        "n_assumed_per_arm": 64,
+        "binomial_se_pp": 5.5
+      },
+      {
+        "cat": "Metal",
+        "real_pct": 75.7,
+        "errbar_pp": 13.8,
+        "n_assumed_per_arm": 64,
+        "binomial_se_pp": 5.4
+      },
+      {
+        "cat": "Paper",
+        "real_pct": 90.3,
+        "errbar_pp": 10.4,
+        "n_assumed_per_arm": 64,
+        "binomial_se_pp": 3.7
+      },
+      {
+        "cat": "Table",
+        "real_pct": 81.7,
+        "errbar_pp": 7.9,
+        "n_assumed_per_arm": 86,
+        "binomial_se_pp": 4.2
+      },
+      {
+        "cat": "Wall",
+        "real_pct": 67.6,
+        "errbar_pp": 15.1,
+        "n_assumed_per_arm": 86,
+        "binomial_se_pp": 5.0
+      },
+      {
+        "cat": "Clutt.",
+        "real_pct": 86.7,
+        "errbar_pp": 17.2,
+        "n_assumed_per_arm": 86,
+        "binomial_se_pp": 3.7
+      },
+      {
+        "cat": "Light",
+        "real_pct": 73.7,
+        "errbar_pp": 9.9,
+        "n_assumed_per_arm": 86,
+        "binomial_se_pp": 4.7
+      },
+      {
+        "cat": "Middle",
+        "real_pct": 73.8,
+        "errbar_pp": 11.0,
+        "n_assumed_per_arm": 86,
+        "binomial_se_pp": 4.7
+      },
+      {
+        "cat": "Heavy",
+        "real_pct": 83.9,
+        "errbar_pp": 12.9,
+        "n_assumed_per_arm": 86,
+        "binomial_se_pp": 4.0
+      }
+    ],
+    "note": "오차막대(7.9–17.2 pp)는 범주별 이항 SE(n=64 또는 86 가정, 약 2.3–6 pp)보다 크다. 따라서 물체 간 분산 같은 다른 정의일 가능성이 높다. 정의는 논문에 없다. 세 축은 같은 시험을 나눈 것이라 범주끼리 독립이 아니다. 범주별 n이 없어 CMH와 Holm 보정은 계산할 수 없다."
+  },
+  "fig5_right_cmh_holm": "not computable: per-category counts absent",
+  "teleop_vs_autodex_success_sensitivity": [
+    {
+      "n_each": 50,
+      "k_tele": 36,
+      "k_autodex": 25,
+      "fisher_p": 0.03970434833205372,
+      "newcombe_diff_pp_teleop_minus_autodex": [
+        2.8,
+        39.0
+      ]
+    },
+    {
+      "n_each": 100,
+      "k_tele": 72,
+      "k_autodex": 51,
+      "fisher_p": 0.0035276512654464744,
+      "newcombe_diff_pp_teleop_minus_autodex": [
+        7.5,
+        33.5
+      ]
+    },
+    {
+      "n_each": 200,
+      "k_tele": 143,
+      "k_autodex": 101,
+      "fisher_p": 2.4330600544613617e-05,
+      "newcombe_diff_pp_teleop_minus_autodex": [
+        11.5,
+        30.0
+      ]
+    },
+    {
+      "n_each": 500,
+      "k_tele": 358,
+      "k_autodex": 254,
+      "fisher_p": 1.8897321278253957e-11,
+      "newcombe_diff_pp_teleop_minus_autodex": [
+        14.8,
+        26.6
+      ]
+    }
+  ],
+  "teleop_vs_autodex_note": "50.7%는 AutoDex 전체 3,593회 53.2%와도 다르다(캠페인 정의 차이). 손 분해가 없어 조정 비교도 불가능하다.",
+  "interventions": {
+    "n": 500,
+    "k": 31,
+    "rate_pct": 6.2,
+    "wilson95": [
+      4.4,
+      8.7
+    ],
+    "human_h": 0.2,
+    "human_s_per_intervention_if_all_time_is_intervention": 23.2,
+    "note": "0.2 h = 720 s를 31회 개입에 나누면 회당 약 23 s다. 개입 정의(무엇을 세었는지)는 본문에 없다."
+  },
+  "time_budget": {
+    "loop_mean_s": 48.2,
+    "loop_total_h_500": 6.69,
+    "wall_h_500": 10.3,
+    "non_loop_h": 3.61,
+    "non_loop_share_pct": 35.0,
+    "non_loop_per_trial_s": 26.0,
+    "loop_component_sum_s": 48.3,
+    "loop_component_shares_pct": [
+      51.5,
+      24.6,
+      16.1,
+      7.8
+    ],
+    "trials_per_wall_h_autodex": 48.5,
+    "trials_per_wall_h_teleop_v2": 17.6,
+    "trials_per_human_h_autodex": 2500.0,
+    "trials_per_human_h_teleop": 53.8,
+    "wall_ratio_v2": 2.76,
+    "wall_ratio_v1": 4.8,
+    "human_ratio": 46.5,
+    "teleop_s_per_trial_human": 67.0,
+    "autodex_s_per_trial_human": 1.44,
+    "note": "루프 밖 시간 3.6 h(35%, 회당 약 26 s)는 본문에 이름이 없다. 리셋 시간이 여기 들어가는지 논문은 밝히지 않는다. 28.4 h(teleop 벽시계)는 '8시간 근무일' 가정이라 하지만, 9.3 h 인적 시간과 8 h/일로 28.4 h가 재현되지 않는다."
+  },
+  "camera_add_s": {
+    "k": [
+      2,
+      4,
+      8,
+      16
+    ],
+    "mean_mm_reported": {
+      "2": 14.3,
+      "16": 0.5
+    },
+    "n_trials": 51,
+    "n_objects": 5,
+    "note": "분산·분위수가 없어 검정 불가. 'k=2 꼬리 실패'는 평균을 끌어올린 것으로만 해석 가능."
+  },
+  "reset_ejection": {
+    "reported_pct": 5.3,
+    "n": "not reported",
+    "note": "분모가 없어 구간을 만들 수 없다. 5.3%는 n=57이면 3/57, n=94면 5/94 등 여러 값에 가능하다."
+  },
+  "dataset_md_vs_paper": {
+    "dataset_md_counts": {
+      "selected_100 (Allegro, legacy)": 1656,
+      "corl_selected_100 (Allegro)": 574,
+      "selected_100_inspire (Inspire)": 384
+    },
+    "allegro_sum_dataset_md": 2230,
+    "allegro_paper": 2226,
+    "inspire_dataset_md": 384,
+    "inspire_paper": 1367,
+    "total_dataset_md": 2614,
+    "total_paper": 3593,
+    "note": "공개 설명서의 Inspire 수(384)는 본문 1,367과 다르다. 시점과 품질 필터(pose outlier 격리)가 원인일 수 있으나 논문은 설명하지 않는다."
+  },
+  "label_error_bounds_on_overall_rate": [
+    {
+      "e0_false_success": 0.0,
+      "e1_false_fail": 0.0,
+      "implied_true_rate_pct": 53.2
+    },
+    {
+      "e0_false_success": 0.02,
+      "e1_false_fail": 0.02,
+      "implied_true_rate_pct": 53.3
+    },
+    {
+      "e0_false_success": 0.05,
+      "e1_false_fail": 0.05,
+      "implied_true_rate_pct": 53.6
+    },
+    {
+      "e0_false_success": 0.1,
+      "e1_false_fail": 0.02,
+      "implied_true_rate_pct": 49.1
+    },
+    {
+      "e0_false_success": 0.02,
+      "e1_false_fail": 0.1,
+      "implied_true_rate_pct": 58.2
+    },
+    {
+      "e0_false_success": 0.1,
+      "e1_false_fail": 0.1,
+      "implied_true_rate_pct": 54.0
+    }
+  ],
+  "holm_example_three_tests": {
+    "p_raw": [
+      5.898340571762748e-103,
+      2.4330600544613617e-05,
+      6.530742877096071e-22
+    ],
+    "p_holm": [
+      1.7695021715288242e-102,
+      2.4330600544613617e-05,
+      1.3061485754192141e-21
+    ],
+    "labels": [
+      "hand (Inspire vs Allegro)",
+      "teleop vs AutoDex (n=200)",
+      "validated vs model-screened (n=257/258)"
+    ]
+  }
+}
