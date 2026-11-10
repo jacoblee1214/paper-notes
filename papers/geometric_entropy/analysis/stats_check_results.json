@@ -1,0 +1,656 @@
+{
+  "assumptions": {
+    "sim_se": 0.015,
+    "real_se": 0.05,
+    "real_n_A": 120,
+    "real_n_B": 40,
+    "digitization": "300dpi 그림 판독, ±0.01–0.02(시뮬), ±0.01(실물 점 위치). 근사값이며 논문 원자료가 아님"
+  },
+  "A_table_I_order": {
+    "H_sorted": [
+      [
+        "0/0",
+        2.901
+      ],
+      [
+        "0.05/1",
+        2.909
+      ],
+      [
+        "0.01/0",
+        2.917
+      ],
+      [
+        "0.10/1",
+        2.997
+      ],
+      [
+        "0.03/0",
+        3.016
+      ],
+      [
+        "0.05/0",
+        3.183
+      ],
+      [
+        "0.10/0",
+        3.667
+      ]
+    ]
+  },
+  "B_DP_StackCube_peak_and_curvature": {
+    "100": {
+      "argmax_config": "0.05/0",
+      "argmax_H": 3.183,
+      "runner_up_config": "0.10/0",
+      "z_top_vs_runner_up": 4.01,
+      "p_top_vs_runner_up": 0.0001,
+      "P_argmax_under_noise": {
+        "0/0": 0.0,
+        "0.05/1": 0.0,
+        "0.01/0": 0.0,
+        "0.10/1": 0.0,
+        "0.03/0": 0.0,
+        "0.05/0": 1.0,
+        "0.10/0": 0.0
+      },
+      "quad_vs_linear": {
+        "quad_coef": -1.499,
+        "t_quad": -8.47,
+        "F_quad_vs_lin": 71.798,
+        "p_quad_vs_lin": 0.0011,
+        "df_resid": 4,
+        "vertex_H": 3.355,
+        "rss_lin": 170.9938,
+        "rss_quad": 9.0237
+      },
+      "monotone_tail_after_peak": "점 부족",
+      "holm_p_top_vs_runner_up": 0.0002
+    },
+    "200": {
+      "argmax_config": "0.05/0",
+      "argmax_H": 3.183,
+      "runner_up_config": "0.03/0",
+      "z_top_vs_runner_up": 2.12,
+      "p_top_vs_runner_up": 0.0339,
+      "P_argmax_under_noise": {
+        "0/0": 0.0,
+        "0.05/1": 0.0,
+        "0.01/0": 0.0,
+        "0.10/1": 0.002,
+        "0.03/0": 0.018,
+        "0.05/0": 0.98,
+        "0.10/0": 0.0
+      },
+      "quad_vs_linear": {
+        "quad_coef": -1.491,
+        "t_quad": -4.01,
+        "F_quad_vs_lin": 16.09,
+        "p_quad_vs_lin": 0.016,
+        "df_resid": 4,
+        "vertex_H": 3.299,
+        "rss_lin": 200.0462,
+        "rss_quad": 39.829
+      },
+      "monotone_tail_after_peak": "점 부족",
+      "holm_p_top_vs_runner_up": 0.1017
+    },
+    "500": {
+      "argmax_config": "0.03/0",
+      "argmax_H": 3.016,
+      "runner_up_config": "0.05/0",
+      "z_top_vs_runner_up": 0.71,
+      "p_top_vs_runner_up": 0.4795,
+      "P_argmax_under_noise": {
+        "0/0": 0.0,
+        "0.05/1": 0.0,
+        "0.01/0": 0.0,
+        "0.10/1": 0.126,
+        "0.03/0": 0.674,
+        "0.05/0": 0.201,
+        "0.10/0": 0.0
+      },
+      "quad_vs_linear": {
+        "quad_coef": -1.62,
+        "t_quad": -4.19,
+        "F_quad_vs_lin": 17.59,
+        "p_quad_vs_lin": 0.0138,
+        "df_resid": 4,
+        "vertex_H": 3.248,
+        "rss_lin": 232.3502,
+        "rss_quad": 43.0485
+      },
+      "monotone_tail_after_peak": {
+        "kendall_tau": -1.0,
+        "p_exact_two_sided_if_random": 0.3333
+      },
+      "holm_p_top_vs_runner_up": 0.4795
+    },
+    "1000": {
+      "argmax_config": "0.01/0",
+      "argmax_H": 2.917,
+      "runner_up_config": "0.05/1",
+      "z_top_vs_runner_up": 1.18,
+      "p_top_vs_runner_up": 0.2386,
+      "P_argmax_under_noise": {
+        "0/0": 0.004,
+        "0.05/1": 0.109,
+        "0.01/0": 0.859,
+        "0.10/1": 0.018,
+        "0.03/0": 0.01,
+        "0.05/0": 0.0,
+        "0.10/0": 0.0
+      },
+      "quad_vs_linear": {
+        "quad_coef": -0.117,
+        "t_quad": -0.69,
+        "F_quad_vs_lin": 0.475,
+        "p_quad_vs_lin": 0.5287,
+        "df_resid": 4,
+        "vertex_H": 1.629,
+        "rss_lin": 9.3017,
+        "rss_quad": 8.315
+      },
+      "monotone_tail_after_peak": {
+        "kendall_tau": -1.0,
+        "p_exact_two_sided_if_random": 0.0167
+      },
+      "holm_p_top_vs_runner_up": 0.4772
+    }
+  },
+  "C_peak_H_vs_N": {
+    "vertex_H_by_N": {
+      "100": 3.355,
+      "200": 3.299,
+      "500": 3.248,
+      "1000": 1.629
+    },
+    "bootstrap_95CI_vertex_by_N": {
+      "100": [
+        3.338,
+        3.376
+      ],
+      "200": [
+        3.284,
+        3.313
+      ],
+      "500": [
+        3.233,
+        3.262
+      ],
+      "1000": [
+        -23.944,
+        2.759
+      ]
+    },
+    "slope_per_decade_of_N": -1.507,
+    "se_slope": 0.824,
+    "p_slope": 0.2088,
+    "r": -0.791,
+    "note": "4개 점, 꼭짓점은 7개 격자 점의 2차 적합에서 나옴. 기울기 p값은 참고용."
+  },
+  "D_H_vs_r_k_N1000": {
+    "model_H_quadratic_RSS": 8.31505,
+    "model_r_quadratic_plus_k_RSS": 60.2283,
+    "coef_r_quadratic_plus_k": [
+      0.748,
+      -2.39,
+      -1.388,
+      0.168
+    ],
+    "note": "k=0 경우 H는 r의 단조 함수(Table I). 두 모형의 차이는 k=1 두 점(0.05/1, 0.10/1)이 좌우한다. 7점, 자유도 3–4라 차이를 강하게 말할 수 없다."
+  },
+  "E_pi05_StackCube_fig4": {
+    "100": {
+      "monotone": {
+        "kendall_tau": -1.0,
+        "p_exact_two_sided_if_random": 0.0833
+      },
+      "slope_per_H": -0.297,
+      "drop_2.917_to_3.667": 0.22
+    },
+    "200": {
+      "monotone": {
+        "kendall_tau": -0.667,
+        "p_exact_two_sided_if_random": 0.0833
+      },
+      "slope_per_H": -0.11,
+      "drop_2.917_to_3.667": 0.082
+    },
+    "500": {
+      "monotone": {
+        "kendall_tau": -1.0,
+        "p_exact_two_sided_if_random": 0.0833
+      },
+      "slope_per_H": -0.167,
+      "drop_2.917_to_3.667": 0.125
+    },
+    "1000": {
+      "monotone": {
+        "kendall_tau": -1.0,
+        "p_exact_two_sided_if_random": 0.0833
+      },
+      "slope_per_H": -0.142,
+      "drop_2.917_to_3.667": 0.115
+    }
+  },
+  "F_real_ACT_curvature": {
+    "StackCube": {
+      "quad_vs_linear": {
+        "quad_coef": -1.313,
+        "t_quad": -3.01,
+        "F_quad_vs_lin": 9.069,
+        "p_quad_vs_lin": 0.0948,
+        "df_resid": 2,
+        "vertex_H": 3.39,
+        "rss_lin": 37.5532,
+        "rss_quad": 6.7855
+      },
+      "monotone": {
+        "kendall_tau": -0.4,
+        "p_exact_two_sided_if_random": 0.0167
+      },
+      "Wilson95_nA_120": [
+        [
+          0.225,
+          0.387
+        ],
+        [
+          0.531,
+          0.702
+        ],
+        [
+          0.383,
+          0.559
+        ],
+        [
+          0.289,
+          0.459
+        ],
+        [
+          0.113,
+          0.247
+        ]
+      ],
+      "Wilson95_nB_40": [
+        [
+          0.181,
+          0.454
+        ],
+        [
+          0.465,
+          0.754
+        ],
+        [
+          0.325,
+          0.62
+        ],
+        [
+          0.238,
+          0.525
+        ],
+        [
+          0.084,
+          0.314
+        ]
+      ]
+    },
+    "PlacePanda": {
+      "quad_vs_linear": {
+        "quad_coef": 0.853,
+        "t_quad": 1.43,
+        "F_quad_vs_lin": 2.038,
+        "p_quad_vs_lin": 0.2896,
+        "df_resid": 2,
+        "vertex_H": 3.263,
+        "rss_lin": 11.2509,
+        "rss_quad": 5.5725
+      },
+      "monotone": {
+        "kendall_tau": -1.0,
+        "p_exact_two_sided_if_random": 0.0167
+      },
+      "Wilson95_nA_120": [
+        [
+          0.798,
+          0.919
+        ],
+        [
+          0.582,
+          0.748
+        ],
+        [
+          0.383,
+          0.559
+        ],
+        [
+          0.257,
+          0.423
+        ],
+        [
+          0.138,
+          0.28
+        ]
+      ],
+      "Wilson95_nB_40": [
+        [
+          0.733,
+          0.942
+        ],
+        [
+          0.515,
+          0.795
+        ],
+        [
+          0.325,
+          0.62
+        ],
+        [
+          0.209,
+          0.49
+        ],
+        [
+          0.105,
+          0.348
+        ]
+      ]
+    },
+    "OpenDrawer": {
+      "quad_vs_linear": {
+        "quad_coef": -0.021,
+        "t_quad": -2.65,
+        "F_quad_vs_lin": 7.016,
+        "p_quad_vs_lin": 0.1179,
+        "df_resid": 2,
+        "vertex_H": 0.415,
+        "rss_lin": 3.9594,
+        "rss_quad": 0.8783
+      },
+      "monotone": {
+        "kendall_tau": -1.0,
+        "p_exact_two_sided_if_random": 0.0167
+      },
+      "Wilson95_nA_120": [
+        [
+          0.87,
+          0.964
+        ],
+        [
+          0.644,
+          0.801
+        ],
+        [
+          0.317,
+          0.489
+        ],
+        [
+          0.289,
+          0.459
+        ],
+        [
+          0.164,
+          0.313
+        ]
+      ],
+      "Wilson95_nB_40": [
+        [
+          0.808,
+          0.977
+        ],
+        [
+          0.577,
+          0.843
+        ],
+        [
+          0.263,
+          0.554
+        ],
+        [
+          0.238,
+          0.525
+        ],
+        [
+          0.127,
+          0.38
+        ]
+      ]
+    }
+  },
+  "G_real_pairwise_fisher": [
+    {
+      "pair": "StackCube 피크(3.27) vs 왼쪽 끝(3.00)",
+      "A_120": {
+        "counts": [
+          [
+            74,
+            46
+          ],
+          [
+            36,
+            84
+          ]
+        ],
+        "odds_ratio": 3.754,
+        "p_two_sided": 1.3492496692861288e-06
+      },
+      "B_40": {
+        "counts": [
+          [
+            25,
+            15
+          ],
+          [
+            12,
+            28
+          ]
+        ],
+        "odds_ratio": 3.889,
+        "p_two_sided": 0.006745915282824635
+      },
+      "holm_p_A": 0.0
+    },
+    {
+      "pair": "StackCube 피크(3.27) vs 오른쪽 이웃(3.50)",
+      "A_120": {
+        "counts": [
+          [
+            74,
+            46
+          ],
+          [
+            56,
+            64
+          ]
+        ],
+        "odds_ratio": 1.839,
+        "p_two_sided": 0.027427549984553386
+      },
+      "B_40": {
+        "counts": [
+          [
+            25,
+            15
+          ],
+          [
+            19,
+            21
+          ]
+        ],
+        "odds_ratio": 1.842,
+        "p_two_sided": 0.2610652836038355
+      },
+      "holm_p_A": 0.0549
+    },
+    {
+      "pair": "StackCube 피크(3.27) vs 최고 H(3.94)",
+      "A_120": {
+        "counts": [
+          [
+            74,
+            46
+          ],
+          [
+            20,
+            100
+          ]
+        ],
+        "odds_ratio": 8.043,
+        "p_two_sided": 7.728807000889046e-13
+      },
+      "B_40": {
+        "counts": [
+          [
+            25,
+            15
+          ],
+          [
+            7,
+            33
+          ]
+        ],
+        "odds_ratio": 7.857,
+        "p_two_sided": 7.73585865895434e-05
+      },
+      "holm_p_A": 0.0
+    },
+    {
+      "pair": "PlacePanda 최고(2.45) vs 최고 H(3.29)",
+      "A_120": {
+        "counts": [
+          [
+            104,
+            16
+          ],
+          [
+            24,
+            96
+          ]
+        ],
+        "odds_ratio": 26.0,
+        "p_two_sided": 1.3127688151448132e-26
+      },
+      "B_40": {
+        "counts": [
+          [
+            35,
+            5
+          ],
+          [
+            8,
+            32
+          ]
+        ],
+        "odds_ratio": 28.0,
+        "p_two_sided": 1.2163841529702964e-09
+      },
+      "holm_p_A": 0.0
+    },
+    {
+      "pair": "PlacePanda 3.27 vs 3.29 (거의 같은 H)",
+      "A_120": {
+        "counts": [
+          [
+            40,
+            80
+          ],
+          [
+            24,
+            96
+          ]
+        ],
+        "odds_ratio": 2.0,
+        "p_two_sided": 0.028113704091080747
+      },
+      "B_40": {
+        "counts": [
+          [
+            13,
+            27
+          ],
+          [
+            8,
+            32
+          ]
+        ],
+        "odds_ratio": 1.926,
+        "p_two_sided": 0.3095101108094055
+      },
+      "holm_p_A": 0.0549
+    },
+    {
+      "pair": "OpenDrawer 최고(2.0) vs 최고 H(6.4)",
+      "A_120": {
+        "counts": [
+          [
+            112,
+            8
+          ],
+          [
+            28,
+            92
+          ]
+        ],
+        "odds_ratio": 46.0,
+        "p_two_sided": 9.354046012409373e-31
+      },
+      "B_40": {
+        "counts": [
+          [
+            37,
+            3
+          ],
+          [
+            9,
+            31
+          ]
+        ],
+        "odds_ratio": 42.481,
+        "p_two_sided": 1.254033680772844e-10
+      },
+      "holm_p_A": 0.0
+    },
+    {
+      "pair": "OpenDrawer 4.0 vs 5.5",
+      "A_120": {
+        "counts": [
+          [
+            88,
+            32
+          ],
+          [
+            48,
+            72
+          ]
+        ],
+        "odds_ratio": 4.125,
+        "p_two_sided": 2.9073109467689977e-07
+      },
+      "B_40": {
+        "counts": [
+          [
+            29,
+            11
+          ],
+          [
+            16,
+            24
+          ]
+        ],
+        "odds_ratio": 3.955,
+        "p_two_sided": 0.006451872912018596
+      },
+      "holm_p_A": 0.0
+    }
+  ],
+  "H_CMH_best_vs_top_H_strata_tasks": {
+    "MH_OR_best_over_top": 18.12,
+    "OR_CI95": [
+      12.26,
+      26.78
+    ],
+    "CMH_chi2": 267.58,
+    "p": 0.0,
+    "note": "층은 과제 3개(가정 A, 120회). 최고 성공 쌍 대 최고 H 쌍의 요약이며 H의 인과 효과를 뜻하지 않는다. 동질성 검정 p는 StratifiedTable.test_equal_odds로 따로 계산했다.",
+    "homogeneity_p": 0.0014143541823741224
+  }
+}

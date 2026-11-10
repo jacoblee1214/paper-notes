@@ -1,0 +1,1241 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Geometric Entropy 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_table"] { max-width: 90%; }
+img[src*="paper_fig"], img[src*="private_paper"] { max-width: 92%; }
+img[src*="own_"] { max-width: 96%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.6pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>Geometric Entropy: 분석 리포트</h1>
+<p class="meta">arXiv:2606.20871v1 · IROS 2026 (채택) · Qian Luo, Ruizhe Liu, Pei Zhou, Xunzhe Zhou, Yanchao Yang (University of Hong Kong) · 공식 코드 미공개(2026-11-10 확인) · 분석일 2026-11-10 · 게시용 버전: 논문 그림과 표는 라이선스(arXiv 비독점 배포)에 따라 뺐습니다. 원문: https://arxiv.org/abs/2606.20871</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 주장하는가:</strong> 시연 궤적의 모양 다양성을 H_G(호 길이 재표집, 끝점 고정, 목표 프레임 회전, 시작–끝 거리 정규화, 공분산 스펙트럼의 ln d_eff + ln Σλ)로 재고, 성공률이 H_G에 대해 역U라고 한다. 최적 H_G는 숙련도(데이터 양, 과제 난이도, 사전학습)에 따라 낮아지고, 사전학습 VLA에서는 단조 감소한다(<code>01</code> Abstract, §5).</li>
+<li><strong>표 I의 방향은 재현된다:</strong> k=0에서 r이 커지면 H가 단조 증가하고, k=1은 같은 r에서 H를 낮춘다. 합성 궤적의 toy도 같은 순서를 보인다. 절댓값은 논문에 없는 시작–목표 거리에 따라 달라진다(<code>03</code> §1.2, §3 T1b).</li>
+<li><strong>H_G는 전략 수가 아니라 선형 차원을 잰다:</strong> 반대 두 전략은 연속 분포보다 H가 약 0.93 낮다. 논문의 &quot;모드 모호성&quot; 해석과 반대 방향이다(<code>03</code> §3 T1c, <code>04</code> C6).</li>
+<li><strong>역U는 DP의 N = 100, 200에서 유의하고, N = 1000에서는 근거가 없다:</strong> 판독 값으로 2차항 p = 0.001(N = 100), 0.016(N = 200), 0.53(N = 1000). N = 500은 최고점이 동률이다(<code>03</code> §1.3, <code>04</code> C7, C8).</li>
+<li><strong>사전학습 VLA는 단조이지만 범위가 좁다:</strong> 4점, 오차막대 없음, 모두 k=0이다. 낮은 H 설정이 없어 최적점이 범위 밖인지 확인할 수 없다(<code>03</code> §1.4, <code>04</code> C10).</li>
+<li><strong>실물 역U는 한 점에 의존한다:</strong> StackCube 실물에서 왼쪽 끝 한 점(H ≈ 3.0)에서 피크로 오르는 기울기가 가장 강하다. 2차 검정은 p = 0.095다(<code>03</code> §1.5, <code>04</code> C12).</li>
+<li><strong>커버리지는 재현되고, 평균화는 정책에 따라 다르다:</strong> 2차원 toy에서 학습 시작점이 넓을수록 성공이 오른다. 모드 평균화(충돌 증가)는 단봉 최소제곱 정책에서만 나타나고, kNN은 나타나지 않는다(<code>03</code> §4).</li>
+<li><strong>구현 가능성:</strong> 공식 재현은 불가하다(코드 없음). H_G 계산과 toy는 이 맥에서 가능하다. 실험 재현(DP, ACT, π0.5)은 GPU와 하드웨어가 필요하다(<code>04</code> §4).</li>
+</ol>
+</section>
+<section class="chapter"><h1>01 논문 분석: Geometric Entropy</h1>
+<h2>메타</h2>
+<ul>
+<li>제목: <em>Geometric Entropy: When Trajectory Diversity Helps and Hurts in Imitation Learning</em></li>
+<li>arXiv: 2606.20871, v1 (2026-06-18), cs.RO, 8쪽. 분석 대상은 v1이다.</li>
+<li>저자: Qian Luo, Ruizhe Liu, Pei Zhou, Xunzhe Zhou, Yanchao Yang (University of Hong Kong, InfoBodied AI Lab)</li>
+<li>학회: IROS 2026 (채택). arXiv 초록에 &quot;Accepted to IROS 2026&quot;이 있다. 카메라 레디 PDF는 프로젝트 페이지(<code>https://geometric-entropy.github.io/assets/paper/geometric_entropy_iros2026.pdf</code>)에 있다.</li>
+<li>프로젝트 페이지: https://geometric-entropy.github.io/</li>
+<li>라이선스: arXiv 비독점 배포(<code>arxiv.org/licenses/nonexclusive-distrib/1.0/</code>). CC BY가 아니다. 논문 그림과 표는 개인용 리포트와 PPT에만 쓴다.</li>
+<li>PDF 권리 문구: 1쪽 텍스트 층에서 저작권·IEEE 문구를 찾지 못했다(<code>© </code>, <code>Copyright</code>, <code>IEEE</code> 검색). arXiv 스탬프 &quot;arXiv:2606.20871v1 [cs.RO] 18 Jun 2026&quot;만 있다.</li>
+</ul>
+<h2>한 문단 요약</h2>
+<p>로봇 시연 데이터의 &quot;궤적 모양 다양성&quot;을 하나의 스칼라로 재는 H_G를 제안한다. 전이 구간을 목표 프레임에 정렬해 위치 차이를 없앤 뒤, 공분산 고유값 스펙트럼의 유효 차원과 총 분산의 로그를 더한다(식 1–2). 이 H_G에 대해 성공률이 역U를 그린다고 주장한다. 최적 H_G는 학습자의 &quot;숙련도&quot;(데이터 양, 과제 난이도, 사전학습)에 따라 낮아지고, 사전학습 VLA(π0.5)에서는 단조 감소한다. 시뮬(ManiSkill StackCube, PegInsertion; Diffusion Policy, π0.5)과 실물(ARX 팔; ACT, 3개 과제)에서 실험했다. 학습 전 데이터셋 감사 도구로 쓰자고 제안한다.</p>
+<h2>1. Abstract과 Introduction (Sec. I)</h2>
+<ul>
+<li>질문: 궤적 모양의 다양성은 얼마나 있어야 하는가(Sec. I, 1–2쪽). 기존 데이터 품질 연구는 관측 충실도, 라벨 정확도, 과제·장면 범위를 다뤘다.</li>
+<li>주장: 다양성이 역할을 두 가지 한다. 낮은 범위에서는 경로 회랑을 넓혀 커버리지를 준다. 높은 범위에서는 같은 조건에 다른 전략이 섞여 모드 모호성을 만든다(Sec. I, 2쪽).</li>
+<li>기여 세 가지: (1) 형식적 처리, (2) H_G, (3) 역U와 피크 이동의 실험 보고.</li>
+<li>관찰: Sec. I의 &quot;전략 모호성&quot;은 H_G가 측정하는 것이 아니라 해석으로 붙은 것이다(<code>03</code> §3.2). 이는 이 논문의 핵심 쟁점이다.</li>
+</ul>
+<h2>2. 관련 연구 (Sec. II)</h2>
+<ul>
+<li>A: 데이터 스케일링(RT-1, RT-2, OXE, DROID, Octo, OpenVLA, BC-Z, RoboCat, PaLM-E, VIMA, AW-Opt).</li>
+<li>B: 데이터 품질과 큐레이션(데이터 품질 분해 [12], DAgger [13], DART [14], 가중치·필터 [15–19], MimicGen [21], DemoGen [22], FieldGen [25], MOVE [26]).</li>
+<li>C: 궤적 기하, 다양성, 모드 커버리지(다중모드 GAIL [27], Behavior Transformer [28], IBC [30], 다양성 벤치마크 D3IL [33], 궤적 정렬 DTW [36]).</li>
+<li>빠진 것: 사람 텔레옵 데이터의 품질·노력(<code>nestdex</code>, <code>dexforce</code> 등)을 H_G와 연결하는 논의가 없다. 또 다른 교란(시연 수, 학습 예산)을 다루는 연구(<code>contact_disassembly</code> D1–D2)와 연결하지 않았다.</li>
+</ul>
+<h2>3. 방법 (Sec. III)</h2>
+<h3>3.1 문제 설정 (III-A, 2쪽)</h3>
+<p>궤적 τ_i = {p_1..p_L}은 세 요인이 섞인 결과다. 외생 맥락 E(목표 자세, 작업 공간 크기), 기하 전략 G(접근 각, 곡률, 고도 프로파일, 우회), 실행 노이즈 ε. 목표는 G의 다양성을 E와 ε를 빼고 재는 것이다.</p>
+<h3>3.2 전이 구간 분할 (III-B, 2쪽)</h3>
+<ul>
+<li>전이(transit)와 정밀 조작(fine manipulation)을 나눈다. 그리퍼 닫힘이 접근→파지, 열림이 운반→놓기 경계다(예시). 정밀 구간은 제외한다.</li>
+<li>구간마다 따로 점수를 매기고, 구간별 점수는 성공 궤적 수 n_p로 가중 평균한다(식 3).</li>
+</ul>
+<h3>3.3 정렬 (III-C, 2–3쪽)</h3>
+<ol>
+<li>호 길이 재표집, T = 50 점(식 없음, 본문 &quot;T=50&quot;).</li>
+<li>끝점 고정: p'_k = p̄_k − p̄_T (목표 = 파지 자세).</li>
+<li>목표 프레임 회전: p''_k = R_T^⊤ p'_k. 시뮬은 환경 상태, 실물은 인지에서 R_T를 얻는다(각주 1).</li>
+<li>시작–끝 거리로 나눔: p̃_k = p''_k/(‖p̄_1 − p̄_T‖ + ε), ε = 10⁻⁹.</li>
+</ol>
+<p>디스크립터 ξ ∈ R^{3T}, D = 150.</p>
+<h3>3.4 H_G (III-D, 3쪽)</h3>
+<ul>
+<li>스펙트럼: X의 SVD에서 λ_j를 얻는다. &quot;sample covariance&quot;라고 쓰며, ÷(M−1)을 명시하지 않는다.</li>
+<li>d_eff = exp(−Σ p_j ln p_j), p_j = λ_j/Σλ(식 1).</li>
+<li>H_G = ln d_eff + ln Σ_j λ_j(식 2). 논문은 미분 엔트로피 근사라고 주장하지 않는다(3쪽 &quot;spectral surrogate&quot;).</li>
+<li>이유로 든 것: 대역폭이 없고, 한 번의 SVD로 계산되며, M ~ 10²–10³에서 안정적이다. 로그 행렬식 log det(Σ+αI)은 M ≪ 3T에서 조건이 나쁘고 정규화(α)가 필요하다고 한다.</li>
+</ul>
+<h3>3.5 관찰과 확인 사항</h3>
+<ul>
+<li>H_G는 ln d_eff(Shannon 형)와 ln Σλ(크기)의 합이다. 둘 다 2차 모멘트에 의존하므로 &quot;모드 수&quot;를 세지 않는다. <code>03</code> §2–3.</li>
+<li>÷(M−1) 여부, T 의존성(ln T 항), 시작–끝 거리의 역할은 논문에 없다.</li>
+<li>정렬 후에도 시작점 방위 φ가 남는다. 이 변동은 &quot;외생 변동&quot;인데, 정렬이 이를 제거하지 못하면 H는 외생 변동을 센다(<code>03</code> T1).</li>
+</ul>
+<h2>4. 실험 설정 (Sec. IV, 3쪽)</h2>
+<ul>
+<li>질문 세 가지: (1) H_G가 안정하고 구별력 있는가(Fig. 1–2, Table I), (2) IL 성능이 H_G에 따라 어떻게 변하는가(Fig. 3–5), (3) 최적 H_G를 정하는 원리가 있는가(V-B).</li>
+<li>IV-A 시뮬: ManiSkill3의 PandaArmMotionPlanningSolver. 경유점 w = g + [r cos θ, r sin θ, Δz](식 4). 모드 수 k(θ는 k개 등간격 값 중 하나, k=0이면 연속). 설정 7개(Table I).</li>
+<li>과제: StackCube-v1(쌓기, 높은 난이도), PegInsertionSide-v1(정밀 삽입, 높은 숙련도).</li>
+<li>데이터 크기: N ∈ {100, 200, 500, 1000}. 세 시드.</li>
+<li>모델: Diffusion Policy(처음부터 학습), π0.5(StackCube에서 미세조정, Physical Intelligence).</li>
+<li>IV-B 실물: ARX 팔, 과제 3개(StackCube, PlacePanda, OpenDrawer), 다양성 5수준, 수집자 3명, N = 100, ACT 정책. 시험 40회 × 세 시드.</li>
+<li>빠진 것: 시뮬 시험 횟수, 학습 예산, 시작점 분포, 시연 생성 실패 처리, 수집자와 수준의 대응.</li>
+</ul>
+<h2>5. 결과 (Sec. V, 4–6쪽)</h2>
+<h3>5.1 H_G의 수렴과 기준선 (Fig. 2, Fig. 6, Table I)</h3>
+<ul>
+<li>Fig. 2: StackCube에서 H_G가 &quot;첫 50–100개 성공 궤적 안에서 안정&quot;하다고 주장한다. 수치는 그림에만 있다.</li>
+<li>Table I: 설정 7개의 H^avg_G(2.901–3.667). 순서는 <code>03</code> §1.2에서 확인했다.</li>
+<li>Fig. 6: 기준선 네 가지(평균 분산, LogDet, 참여율, kNN KL)의 수렴 곡선. 그림만 있다. 주장: 평균 분산은 (0,0), (0.01,0), (0.03,0)을 구별하지 못하고, LogDet·참여율은 (0.10,1)을 (0.05,0) 근처에 둔다. kNN은 N ≤ 1000에서 표본 크기 drift가 크다.</li>
+</ul>
+<h3>5.2 DP, StackCube와 PegInsertion (Fig. 3, V-A-1, V-A-2)</h3>
+<ul>
+<li>주장 1(역U): 낮은 H_G에서는 성공이 오르고, 높은 H_G에서는 떨어진다. 과제와 모델에 따라 피크 H*가 있다.</li>
+<li>주장 2(피크 이동): N이 커지면 H*가 왼쪽으로 옮겨진다. 이유로 &quot;더 많은 데모가 초기 조건 범위를 넓게 덮어 추가 다양성의 한계 이득이 줄어든다&quot;를 든다.</li>
+<li>과제 비교: StackCube는 N이 커도 어렵고 H 증가가 커버리지로 도움이 된다. PegInsertion은 N이 커지면 포화하고 H 증가는 간섭이 된다.</li>
+<li>판독 결과(<code>03</code> §1.3): StackCube N = 100, 200은 역U가 명확하다. N = 500은 최고점이 동률이다. N = 1000은 2차항이 유의하지 않다.</li>
+<li>PegInsertion은 H 축과 설정 목록이 없다. 판독 값은 H 약 1.8–2.5 범위다.</li>
+</ul>
+<h3>5.3 π0.5, 사전학습 VLA (Fig. 4, V-A &quot;generalist foundation model&quot;)</h3>
+<ul>
+<li>주장: StackCube 미세조정에서 성공은 H_G에 대해 &quot;approximately monotonically&quot; 감소한다. 사전학습이 이미 커버리지를 가지므로 추가 다양성이 중복이고 간섭이 된다.</li>
+<li>판독(<code>03</code> §1.4): 네 점(k=0, r = 0.01–0.10), 오차막대 없음. 감소는 0.08–0.22.</li>
+<li>우려: 낮은 H 설정이 시험되지 않았다. 관찰 범위 안에서는 단조이지만, 최적점이 범위 밖인지 확인할 수 없다.</li>
+</ul>
+<h3>5.4 실물 (Fig. 5, V-B, V-C)</h3>
+<ul>
+<li>StackCube(ACT): 피크 H ≈ 3.3(판독 3.27, 0.62). 왼쪽 끝(3.00, 0.30)과 오른쪽 감소. 역U.</li>
+<li>PlacePanda: 단조 감소(2.45 → 3.29, 0.87 → 0.20).</li>
+<li>OpenDrawer: 단조 감소(2.0 → 6.4, 0.93 → 0.23).</li>
+<li>해석: 역U는 &quot;어려운 과제&quot;, 단조는 &quot;쉬운 과제&quot;와 맞는다는 &quot;sim-to-real consistency&quot;를 주장한다.</li>
+</ul>
+<h3>5.5 숙련도 원리 (V-B, 6쪽)</h3>
+<ul>
+<li>&quot;최적 H*는 학습자의 숙련도에 따라 결정된다&quot;는 원리. 숙련도는 N, 과제 난이도, 모델 사전지식 세 가지로 조작된다.</li>
+<li>프록시: &quot;저다양성 데이터셋에서의 성공률&quot;을 숙련도로 본다. 높은 기준 성공률은 &quot;이미 회랑을 배웠다&quot;는 뜻이다.</li>
+<li>비판: 프록시와 결과 변수가 같은 측정이고, 세 조작은 학습 예산과 설정 집합도 함께 바꾼다(<code>04</code> C16).</li>
+</ul>
+<h2>6. 논의와 한계 (Sec. VI, 6–7쪽)</h2>
+<ul>
+<li>VI-A 실용적 진단: 파일럿 데이터셋에서 H_G를 재고, 목표 모델과 N에 맞는 예상 형태와 비교한다. H_G가 매우 낮으면 좁은 회랑, 매우 높으면 혼재 전략.</li>
+<li>VI-B 한계(저자 인정): 과제 범위(변형체, 도구, 덜 접촉적인 기술, 긴 조립), 전이 구간 분할이 이벤트 의존, 역U와 피크 이동은 경험적 규칙이며 용량·조건·커버리지와의 형식적 연결이 없다.</li>
+<li>결론: &quot;최대 다양성&quot; 휴리스틱에 도전, 숙련도에 맞춘 캘리브레이션 원리 제안.</li>
+</ul>
+<h2>7. 공개된 자료와 프로젝트 페이지 차이</h2>
+<ul>
+<li>프로젝트 페이지의 요약문은 v1 초록보다 약하다. v1은 &quot;consistent inverted-U&quot;, 프로젝트 페이지는 &quot;inverted-U curves and, in higher-performing regimes, declining trends over the tested diversity range&quot;라고 쓴다.</li>
+<li>프로젝트 페이지의 StackCube 설명은 최고 H(3.183, 3.016, 2.917)를 N별로 알려 주며, 판독과 맞다.</li>
+<li>카메라 레디 PDF와 v1의 핵심 문장·표·절 구성은 같다(키워드 대조). 분석은 v1 기준이다.</li>
+</ul>
+<h2>8. 분석자 관찰 (요약, 세부는 <code>03</code>, <code>04</code>)</h2>
+<ol>
+<li>표 I의 방향은 맞다. 절댓값은 미공개 변수(시작–목표 거리, T, ÷(M−1))에 달려 있다(<code>03</code> §2.2).</li>
+<li>H_G는 선형 차원과 크기를 잰다. 반대 두 전략은 연속 분포보다 H가 낮다(<code>03</code> T1c). 논문의 &quot;모드 모호성&quot; 해석과 반대 방향이다.</li>
+<li>역U는 DP N = 100, 200과 실물 StackCube에서만 유의하다. N = 1000에서는 단조 감소뿐이고, π0.5는 단조다. &quot;일관된 역U&quot;는 과장이다(<code>04</code> C15).</li>
+<li>평가 횟수와 학습 예산이 공개되지 않아 N 효과와 학습량 효과를 나눌 수 없다.</li>
+<li>커버리지 이득은 toy에서 재현되지만, 평균화 손실은 정책 클래스에 따라 달라진다(<code>03</code> §4).</li>
+</ol>
+</section>
+<section class="chapter"><h1>03 재계산, 유도, toy 검증</h1>
+<p>이 문서는 논문의 수치를 다시 계산하고, H_G의 정의를 유도하고, 두 개의 CPU toy로 핵심 기전과 숨은 가정을 시험한 결과입니다. 코드는 <code>analysis/entropy_toy.py</code>, <code>analysis/bc_toy.py</code>, <code>analysis/stats_check.py</code>이고, 결과는 같은 이름의 <code>*_results.json</code>에 있습니다. 모든 계산은 numpy/scipy 1스레드로 한 번에 몇 초 안에 끝납니다.</p>
+<p><strong>읽는 법.</strong> 논문에는 표 I(StackCube의 H 값)만 숫자로 있습니다. 나머지 성공률은 그림 3·4·5에서 300 dpi로 판독한 근사값입니다(±0.01–0.02). 그래서 판독값으로 한 검정은 판단의 근거이지 확정값이 아닙니다. 시뮬 평가 횟수, 오차막대의 정의(SD 또는 SE), 시드별 값은 논문에 없어서 가정을 씁니다(§1.1).</p>
+<h2>1. 논문 수치의 재계산과 유의성</h2>
+<h3>1.1 가정</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>가정</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>시뮬(DP, 그림 3a) 점 표준오차</td>
+<td>0.015</td>
+<td>3 시드, 오차막대 반폭 0.01–0.02 판독</td>
+</tr>
+<tr>
+<td>실물(ACT, 그림 5) 점 표준오차</td>
+<td>0.05</td>
+<td>오차막대 반폭 0.04–0.06 판독</td>
+</tr>
+<tr>
+<td>실물 이항 횟수</td>
+<td>A: 40회 × 3 시드 = 120, B: 40회</td>
+<td>논문은 &quot;40 test episodes per configuration&quot;과 &quot;three seeds&quot;만 씀. 두 해석을 모두 계산</td>
+</tr>
+<tr>
+<td>π0.5(그림 4)</td>
+<td>오차막대 없음</td>
+<td>점 간 차이만 본다</td>
+</tr>
+</tbody>
+</table>
+<h3>1.2 표 I (StackCube, 정확한 값)</h3>
+<table>
+<thead>
+<tr>
+<th>r/k</th>
+<th>0/0</th>
+<th>0.01/0</th>
+<th>0.03/0</th>
+<th>0.05/0</th>
+<th>0.05/1</th>
+<th>0.10/0</th>
+<th>0.10/1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H^avg_G</td>
+<td>2.901</td>
+<td>2.917</td>
+<td>3.016</td>
+<td>3.183</td>
+<td>2.909</td>
+<td>3.667</td>
+<td>2.997</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>k=0에서 r이 커지면 H가 단조 증가합니다(2.901 → 2.917 → 3.016 → 3.183 → 3.667). 표 안에서 맞습니다.</li>
+<li>같은 r에서 k=1은 k=0보다 H가 낮습니다(0.05: 2.909 &lt; 3.183, 0.10: 2.997 &lt; 3.667). 표 안에서 맞습니다.</li>
+<li>표에는 평균 분산, LogDet, 참여율, kNN 값이 없습니다. 기준선 비교(Fig. 6)는 그림으로만 있고, 수치 재계산은 못 합니다.</li>
+</ul>
+<h3>1.3 그림 3a(DP, StackCube) 판독과 검정</h3>
+<p>판독 값(성공률), 열은 표 I의 설정 순서입니다.</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>0/0 (2.901)</th>
+<th>0.05/1 (2.909)</th>
+<th>0.01/0 (2.917)</th>
+<th>0.10/1 (2.997)</th>
+<th>0.03/0 (3.016)</th>
+<th>0.05/0 (3.183)</th>
+<th>0.10/0 (3.667)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>0.06</td>
+<td>0.065</td>
+<td>0.12</td>
+<td>0.215</td>
+<td>0.22</td>
+<td><strong>0.325</strong></td>
+<td>0.24</td>
+</tr>
+<tr>
+<td>200</td>
+<td>0.16</td>
+<td>0.26</td>
+<td>0.285</td>
+<td>0.36</td>
+<td>0.375</td>
+<td><strong>0.42</strong></td>
+<td>0.27</td>
+</tr>
+<tr>
+<td>500</td>
+<td>0.395</td>
+<td>0.42</td>
+<td>0.48</td>
+<td>0.575</td>
+<td><strong>0.595</strong></td>
+<td>0.58</td>
+<td>0.355</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>0.71</td>
+<td>0.735</td>
+<td><strong>0.76</strong></td>
+<td>0.72</td>
+<td>0.715</td>
+<td>0.635</td>
+<td>0.445</td>
+</tr>
+</tbody>
+</table>
+<p>검정 결과(<code>analysis/stats_check_results.json</code> 섹션 B, C):</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>최고점</th>
+<th>2등과 차이 z (p)</th>
+<th>2차항 p (vs 1차)</th>
+<th>꼭짓점 H*</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>3.183</td>
+<td>4.0 (0.0001)</td>
+<td>0.001</td>
+<td>3.36</td>
+<td>역U 명확</td>
+</tr>
+<tr>
+<td>200</td>
+<td>3.183</td>
+<td>2.1 (0.034; Holm 0.10)</td>
+<td>0.016</td>
+<td>3.30</td>
+<td>역U 있음, 최고점은 약함</td>
+</tr>
+<tr>
+<td>500</td>
+<td>3.016</td>
+<td>0.7 (0.48)</td>
+<td>0.014</td>
+<td>3.25</td>
+<td>최고점 동률, 곡률은 있음</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>2.917</td>
+<td>1.2 (0.24)</td>
+<td>0.53</td>
+<td>식별 안 됨</td>
+<td>역U 근거 없음</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>N=1000 곡선은 왼쪽이 평평하고(0/0 → 0.01/0에서 0.71 → 0.76), 오른쪽만 감소합니다. 2차항이 유의하지 않고(p=0.53), 2.917 이후 감소는 단조입니다(Kendall τ = −1, p = 0.017). &quot;역U&quot;보다는 &quot;2.92 근처에서 최고, 그 뒤 감소&quot;가 정확합니다.</li>
+<li>최고점 위치의 노이즈 시뮬레이션(점마다 SE 0.015를 20,000번 흔듦): N=500의 최고점 0.03/0은 67%, 0.05/0은 20%. N=1000의 0.01/0은 86%.</li>
+<li>꼭짓점의 N 의존성(4점, 로그 N 회귀): 3.36 → 3.30 → 3.25(N = 100, 200, 500)으로 낮아지지만 기울기는 −1.5 per decade, SE 0.8, p = 0.21입니다. 피크가 왼쪽으로 옮겨 간다는 방향은 맞아 보이나, 통계적으로는 확정되지 않습니다.</li>
+</ul>
+<h3>1.4 그림 4(π0.5, StackCube) 판독</h3>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>2.917</th>
+<th>3.016</th>
+<th>3.183</th>
+<th>3.667</th>
+<th>2.917 → 3.667 하락</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>0.905</td>
+<td>0.88</td>
+<td>0.875</td>
+<td>0.685</td>
+<td>0.22</td>
+</tr>
+<tr>
+<td>200</td>
+<td>0.932</td>
+<td>0.92</td>
+<td>0.93</td>
+<td>0.85</td>
+<td>0.08</td>
+</tr>
+<tr>
+<td>500</td>
+<td>0.97</td>
+<td>0.953</td>
+<td>0.947</td>
+<td>0.845</td>
+<td>0.125</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>0.975</td>
+<td>0.94</td>
+<td>0.918</td>
+<td>0.86</td>
+<td>0.115</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>네 점, 오차막대 없음. 단조 감소는 τ = −1(N = 100, 500, 1000)이지만 정확 순열 p = 0.083으로 n=4에서는 유의하지 않습니다.</li>
+<li>4개 점은 모두 k=0(r = 0.01, 0.03, 0.05, 0.10)입니다. 표 I 구조상 k=0에서 H는 r의 단조 함수이므로, 이 곡선은 &quot;H 감소&quot;가 아니라 &quot;r 감소&quot;와 같은 정보입니다. 0/0, 0.05/1, 0.10/1 같은 낮은 H 점은 시험하지 않았습니다. 그래서 &quot;최적점이 왼쪽으로 밀려 관찰 범위 밖에 있다&quot;는 주장은 확인할 수 없습니다.</li>
+<li>π0.5 곡선은 DP의 모든 점보다 위에 있습니다(같은 설정 3.183, N=1000에서 0.918 대 DP 0.635). 감소 추세와 사전학습 효과가 섞여 있어, 감소를 &quot;다양성 간섭&quot;으로만 해석하기 어렵습니다.</li>
+</ul>
+<h3>1.5 그림 5(ACT 실물) 판독과 검정</h3>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>H (판독)</th>
+<th>성공률 (판독)</th>
+<th>Wilson 95% (A, n=120)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StackCube</td>
+<td>3.00</td>
+<td>0.30</td>
+<td>0.23–0.39</td>
+</tr>
+<tr>
+<td></td>
+<td>3.27</td>
+<td>0.62</td>
+<td>0.53–0.70</td>
+</tr>
+<tr>
+<td></td>
+<td>3.50</td>
+<td>0.47</td>
+<td>0.38–0.56</td>
+</tr>
+<tr>
+<td></td>
+<td>3.70</td>
+<td>0.37</td>
+<td>0.29–0.46</td>
+</tr>
+<tr>
+<td></td>
+<td>3.94</td>
+<td>0.17</td>
+<td>0.11–0.25</td>
+</tr>
+<tr>
+<td>PlacePanda</td>
+<td>2.45</td>
+<td>0.87</td>
+<td>0.80–0.92</td>
+</tr>
+<tr>
+<td></td>
+<td>2.53</td>
+<td>0.67</td>
+<td>0.58–0.75</td>
+</tr>
+<tr>
+<td></td>
+<td>2.79</td>
+<td>0.47</td>
+<td>0.38–0.56</td>
+</tr>
+<tr>
+<td></td>
+<td>3.27</td>
+<td>0.335</td>
+<td>0.26–0.42</td>
+</tr>
+<tr>
+<td></td>
+<td>3.29</td>
+<td>0.20</td>
+<td>0.14–0.28</td>
+</tr>
+<tr>
+<td>OpenDrawer</td>
+<td>2.0</td>
+<td>0.93</td>
+<td>0.87–0.96</td>
+</tr>
+<tr>
+<td></td>
+<td>4.0</td>
+<td>0.73</td>
+<td>0.64–0.80</td>
+</tr>
+<tr>
+<td></td>
+<td>5.5</td>
+<td>0.40</td>
+<td>0.32–0.49</td>
+</tr>
+<tr>
+<td></td>
+<td>5.9</td>
+<td>0.37</td>
+<td>0.29–0.46</td>
+</tr>
+<tr>
+<td></td>
+<td>6.4</td>
+<td>0.23</td>
+<td>0.16–0.31</td>
+</tr>
+</tbody>
+</table>
+<p>쌍 비교(Fisher 양측, Holm 보정은 가정 A 기준):</p>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>가정 A (n=120)</th>
+<th>가정 B (n=40)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StackCube 피크 3.27(0.62) 대 왼쪽 3.00(0.30)</td>
+<td>p = 1.3×10⁻⁶</td>
+<td>p = 0.007</td>
+</tr>
+<tr>
+<td>StackCube 피크 3.27 대 오른쪽 3.50(0.47)</td>
+<td>p = 0.027 (Holm 0.055)</td>
+<td>p = 0.26</td>
+</tr>
+<tr>
+<td>StackCube 피크 3.27 대 최고 H 3.94(0.17)</td>
+<td>p &lt; 10⁻¹²</td>
+<td>p = 0.0001</td>
+</tr>
+<tr>
+<td>PlacePanda 3.27(0.335) 대 3.29(0.20)</td>
+<td>p = 0.028 (Holm 0.055)</td>
+<td>p = 0.31</td>
+</tr>
+<tr>
+<td>OpenDrawer 4.0 대 5.5</td>
+<td>p &lt; 10⁻⁶</td>
+<td>p = 0.007</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>StackCube의 &quot;역U&quot;는 왼쪽 끝 한 점(3.00)에서 피크로 올라가는 기울기가 가장 강한 근거입니다. 2차 검정은 p = 0.095(df 2)로 약합니다. 피크 오른쪽 이웃과의 차이는 가정 A에서만 유의합니다.</li>
+<li>PlacePanda에서 H가 0.02 다른 두 점(3.27, 3.29)의 성공률이 0.335와 0.20으로 다릅니다. H가 성공률을 정하지 않는다는 근거이지만, 판독 오차 범위입니다.</li>
+<li>OpenDrawer는 2차항 p = 0.12이고 꼭짓점이 관측 범위 밖(0.4)입니다. 단조 감소입니다.</li>
+<li>Mantel–Haenszel(과제 3개를 층으로, 최고 성공 쌍 대 최고 H 쌍): 합동 OR = 18.1(95% CI 12.3–26.8), CMH χ² = 268. 다만 층 간 동질성 p = 0.0014이므로 하나의 OR로 요약하기 어렵습니다. 이 검정은 &quot;가장 높은 H 설정이 과제마다 덜 성공한다&quot;는 단순 요약이며, H가 원인이라는 뜻은 아닙니다.</li>
+</ul>
+<h3>1.6 H만으로 설명되는가, r과 k로 충분한가</h3>
+<p>N=1000 DP 곡선(7점, 가중 최소제곱, σ = 0.015)에서 H의 2차 모형(3 모수)은 가중 잔차제곱합 8.3, r의 2차항과 k 더미(4 모수)는 60.2입니다. H 모형이 더 잘 맞습니다. 다만 k=0에서 H는 r의 단조 함수이므로 차이는 k=1 두 점(0.05/1, 0.10/1)에서 나옵니다. 점이 7개이고 모수가 3–4개라서 &quot;H가 r보다 낫다&quot;는 결론은 약합니다.</p>
+<h2>2. 정의와 유도</h2>
+<h3>2.1 식 1–2를 다시 쓰기</h3>
+<p>λ_j를 표본 공분산의 고유값, p_j = λ_j/Σλ, d_eff = exp(−Σp_j ln p_j)로 두면</p>
+<ul>
+<li>ln d_eff = H(p) (정규화된 스펙트럼의 Shannon 엔트로피, nats)</li>
+<li>H_G = H(p) + ln(Σ_j λ_j)</li>
+</ul>
+<p>입니다. 즉 H_G는 &quot;선형으로 퍼진 차원의 수(Shannon 형)&quot;와 &quot;전체 분산의 로그(크기)&quot;를 더한 것입니다. 미분 엔트로피가 아닙니다. 논문도 이렇게 씁니다(Sec. III-D, &quot;spectral surrogate&quot;).</p>
+<h3>2.2 세 가지 함정: 단위, 샘플 수, 재표집 점 수</h3>
+<ol>
+<li><strong>정규화 분모 ÷(M−1).</strong> 논문 식만으로는 λ가 ÷(M−1)인지 불분명합니다. ÷(M−1)을 쓰면 Σλ = tr(표본 공분산)이고 M에 대해 기대값이 같습니다. ÷1(특이값² 그대로)을 쓰면 ln Σλ에 ln(M−1)이 더해집니다. Fig. 2가 &quot;N=50–100 이후 안정&quot;이라고 했으므로 ÷(M−1)이 맞을 것입니다(추론, 코드 없음).
+toy(T2): ÷(M−1)은 M=100에서 3.293, M=2000에서 3.296로 평평합니다. ÷1은 7.89에서 10.90으로 증가하며, 증가량은 ln(1999/99) ≈ 3.0과 같습니다.</li>
+<li><strong>재표집 점 수 T.</strong> 궤적 점 수를 T라 하면 D = 3T이고 trace(공분산)은 T에 비례합니다. 그래서 ln Σλ에 ln T가 더해집니다. toy(T3): T = 25, 50, 100에서 H_G = 2.62, 3.29, 3.98로, 두 배마다 약 0.69(= ln 2)씩 증가합니다. 논문은 T = 50만 씁니다. 다른 T나 다른 논문과 H의 절대 값을 비교하면 안 됩니다.</li>
+<li><strong>거리 정규화와 시작–목표 거리.</strong> 식은 시작–끝 거리로 나눕니다. 이 거리가 작으면 같은 반지름 r의 효과가 커집니다. 논문은 이 거리를 보고하지 않습니다. toy(T1 대 T1b): 거리 1.0에서는 r = 0.10인 경우에도 H가 3.26 → 3.30만 움직이지만, 거리 0.3에서는 2.98 → 3.46으로 움직입니다. 표 I의 크기는 이 숨은 값에 달려 있습니다.</li>
+</ol>
+<h3>2.3 0 분산 극한</h3>
+<p>완전히 같은 시연이면 λ = 0이 되고 ln Σλ → −∞입니다. toy에서 k=1이고 시작점을 고정한 경우 H = −58.5, 2차원 toy에서 s_tr = 0이면 −66입니다. 이것은 수치 하한(1e-12) 때문입니다. 실제 자료에서는 시작점, 노이즈가 조금이라도 있으면 유한한 값을 갖지만, 분산이 작을수록 H는 로그 스케일로 빠르게 내려갑니다. 저다양성 데이터에서 H가 &quot;음수로 크게&quot; 나오는 것은 정상이며 해석할 때 주의합니다.</p>
+<p><img src="figures/own_entropy_toy.png" alt="own_entropy_toy.png" /></p>
+<p class="cap">직접 계산(toy): (a) 시작–목표 거리 0.3에서 r에 따른 H_G, (b) 시작점을 고정한 격리 검사, (c) 노이즈 자료와 등방 가우시안의 N 편향.</p>
+<h2>3. toy 1: H_G 정의를 합성 전이 궤적에 적용 (<code>analysis/entropy_toy.py</code>)</h2>
+<p>설정: 목표 g = 0, 시작점 방위 φ ~ U(0, 2π), 경유점 w = g + [r cos θ, r sin θ, 0.2], 궤적은 시작 → w → g의 두 직선을 호 길이로 재표집(T = 50). 목표 프레임은 z축 회전 yaw를 무작위로 주고 정렬 후 되돌립니다. 노이즈는 점마다 σ = 0.002입니다. 정렬(끝점 고정, R^T 회전, 시작–끝 거리 정규화)과 식 1–2는 논문 그대로입니다.</p>
+<h3>3.1 결과</h3>
+<table>
+<thead>
+<tr>
+<th>검사</th>
+<th>결과</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1 (거리 1.0, N = 1000)</td>
+<td>k=0: r = 0 → 0.10에서 3.256 → 3.297. k=1: 3.239</td>
+<td>시작점의 외생 변동이 분산을 지배해 r 효과가 작음</td>
+</tr>
+<tr>
+<td>T1b (거리 0.3)</td>
+<td>k=0: 2.977 → 2.986 → 3.052 → 3.152 → 3.457 (r = 0, 0.01, 0.03, 0.05, 0.10). k=1: 2.971–2.977로 평평</td>
+<td>표 I의 순서(k=0에서 r ↑ H ↑, k=1은 낮음)를 재현. 절댓값은 다름</td>
+</tr>
+<tr>
+<td>T1c (시작 고정, yaw 없음, 노이즈 없음, N = 3000)</td>
+<td>k=0: H = 1.053, d_eff = 2.03. k=2: H = 0.119, d_eff = 1.00. k=3: H = 0.986, d_eff = 1.95</td>
+<td><strong>k=2(반대 두 전략)는 k=0보다 H가 0.93 낮음.</strong> d_eff가 2에서 1로 줄어 ln 2 = 0.69가 빠지고, 나머지는 trace 차이</td>
+</tr>
+<tr>
+<td>T2 (N, ÷(M−1))</td>
+<td>M = 100, 200, 500, 1000, 2000: 3.293, 3.288, 3.293, 3.294, 3.296 (모집단 3.296)</td>
+<td>이 자료는 스펙트럼이 낮은 차원이라 편향이 작음</td>
+</tr>
+<tr>
+<td>T2c (노이즈 0.03, 거리 0.3)</td>
+<td>M = 100, 200, 500, 1000, 3000: 4.42, 4.49, 4.57, 4.56, 4.57</td>
+<td>노이즈가 크면 N = 100에서 약 0.14 낮게 편향</td>
+</tr>
+<tr>
+<td>T2d (등방 가우시안, D = 150)</td>
+<td>M = 100, 200, 500, 1000, 6000: 9.27, 9.64, 9.87, 9.95, 10.01</td>
+<td>참값 ≈ 10.02. N = 100에서 0.73 낮음</td>
+</tr>
+<tr>
+<td>T3 (노이즈)</td>
+<td>σ = 0, 0.002, 0.01, 0.03: 3.297, 3.298, 3.314, 3.427</td>
+<td>노이즈는 차원을 늘려 H를 올림</td>
+</tr>
+<tr>
+<td>T3 (T)</td>
+<td>T = 25, 50, 100: 2.62, 3.29, 3.98</td>
+<td>ln T 항. 비교 가능성을 깨뜨림</td>
+</tr>
+<tr>
+<td>T4 (전역 회전)</td>
+<td>원래 3.292979, 회전 후 3.292979</td>
+<td>정렬 구현은 회전 불변 (검산)</td>
+</tr>
+<tr>
+<td>T5 (kNN KL 기준선, D = 150)</td>
+<td>k = 5: M = 100, 300, 1000에서 −207, −278, −362. H_G는 3.30, 3.30, 3.30</td>
+<td>KL은 N에 따라 크게 드리프트. 이 기준선은 D = 150, M ≤ 1000에서 신뢰할 수 없음</td>
+</tr>
+</tbody>
+</table>
+<h3>3.2 해석</h3>
+<ol>
+<li><strong>H_G는 &quot;전략 수&quot;가 아니라 &quot;선형 차원&quot;을 센다.</strong> T1c가 핵심입니다. 반대 방향 두 전략(k=2)은 공분산의 선형 차원이 1이라서, 연속 분포(k=0)보다 H가 낮습니다. 즉 논문에서 &quot;모드 모호성&quot;이라고 부르는 상황(서로 다른 전략이 같은 조건에 섞임)을 H_G는 &quot;다양성 낮음&quot;으로 읽습니다. 표 I에서 k=1이 H를 낮추는 결과는 이 성질과 맞습니다. 하지만 이는 &quot;모호성을 측정한다&quot;의 증거가 아니라 &quot;2차 모멘트가 작다&quot;의 증거입니다. 논문 Sec. V-D가 기준선(평균 분산, LogDet, 참여율)을 실패 사례로 든 이유와 같은 한계입니다. H_G도 2차 모멘트 기반입니다.</li>
+<li><strong>k=3은 k=0과 같습니다</strong>(T1c: 0.986 대 1.053). 정삼각 배치의 공분산은 등방이어서, 3개 이산 전략과 연속 분포를 구별하지 못합니다.</li>
+<li><strong>N 편향은 자료의 스펙트럼에 달려 있습니다.</strong> 낮은 차원 구조가 강하면 N = 100에서도 편향이 0.01 이하이고, 노이즈가 많거나 차원이 높으면 N = 100에서 0.14–0.7 낮게 나옵니다. 논문 Fig. 2의 &quot;50–100개면 안정&quot;은 이 차이에 따라 맞을 수도 틀릴 수도 있습니다. 이 논문에서는 N 곡선 수치가 없어 확인할 수 없습니다.
+방향에 주의합니다. toy에서 편향은 작은 N의 H를 낮춥니다. 그러면 N = 100에서 관찰된 피크(3.18)는 편향을 보정하면 더 높아야 합니다. 즉 편향이 관찰된 &quot;피크 왼쪽 이동&quot;을 만든 것은 아니고, 오히려 그 이동을 줄이는 쪽입니다. 다만 편향은 설정(r, k)마다 다를 수 있으므로 검증 실험이 필요합니다.</li>
+<li><strong>T(재표집 점 수)는 H의 절대 값을 옮깁니다.</strong> 논문은 T = 50에 고정했으나, 다른 연구나 다른 로봇 데이터와 비교할 때 반드시 같은 T를 써야 합니다.</li>
+</ol>
+<p><img src="figures/own_bc_toy.png" alt="own_bc_toy.png" /></p>
+<p class="cap">직접 계산(toy): (a) 학습 시작점 퍼짐과 성공률, (b) 아래쪽 전략 비율 q와 성공·충돌, (c) 같은 시연의 H_G.</p>
+<h2>4. toy 2: 커버리지 대 모드 평균화 (<code>analysis/bc_toy.py</code>)</h2>
+<p>설정: 2차원, 시작 (−1, y0), 목표 (1, 0), 원점에 반지름 0.2 장애물. 시연은 경유점 (0, h)을 지나며, h = +0.4(위쪽 전략)와 h = −0.4(아래쪽 전략)을 씁니다. 학습 시작점 y0 ~ U(−s_tr, s_tr), 시험 시작점은 y0 ∈ [−0.6, 0.6]의 400개 격자입니다. 정책은 두 가지입니다. (a) kNN(K=10): 이웃의 평균 속도. (b) 2차 다항식 최소제곱: 단봉(unimodal) MSE 회귀의 대리. 속도 크기는 1로 자릅니다. 5개 시드, 각 60개 시연.</p>
+<h3>4.1 결과</h3>
+<p><strong>E1, 커버리지(단일 전략, 학습 시작점 퍼짐 s_tr):</strong></p>
+<table>
+<thead>
+<tr>
+<th>s_tr</th>
+<th>0.0</th>
+<th>0.1</th>
+<th>0.2</th>
+<th>0.3</th>
+<th>0.5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2차 최소제곱 성공률</td>
+<td>0.735</td>
+<td>0.733</td>
+<td>0.808</td>
+<td>0.986</td>
+<td>1.000</td>
+</tr>
+<tr>
+<td>kNN 성공률</td>
+<td>0.652</td>
+<td>0.722</td>
+<td>0.789</td>
+<td>0.857</td>
+<td>0.988</td>
+</tr>
+</tbody>
+</table>
+<p>시험 시작점이 학습 분포보다 넓으므로, 학습 시작점이 넓을수록 성공률이 올라갑니다. 이것이 논문의 &quot;커버리지가 도움이 된다&quot;와 맞습니다.</p>
+<p><strong>E2, 모드 평균화(학습 시작점 퍼짐 0.2, 아래쪽 전략 비율 q):</strong></p>
+<table>
+<thead>
+<tr>
+<th>q</th>
+<th>0.0</th>
+<th>0.1</th>
+<th>0.2</th>
+<th>0.3</th>
+<th>0.4</th>
+<th>0.5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2차: 성공</td>
+<td>0.805</td>
+<td>0.908</td>
+<td>0.925</td>
+<td>0.931</td>
+<td>0.931</td>
+<td>0.930</td>
+</tr>
+<tr>
+<td>2차: 충돌 비율</td>
+<td>0.000</td>
+<td>0.092</td>
+<td>0.076</td>
+<td>0.069</td>
+<td>0.069</td>
+<td>0.070</td>
+</tr>
+<tr>
+<td>kNN: 성공</td>
+<td>0.794</td>
+<td>0.999</td>
+<td>1.000</td>
+<td>1.000</td>
+<td>1.000</td>
+<td>1.000</td>
+</tr>
+<tr>
+<td>2차 H_G</td>
+<td>−3.32</td>
+<td>−0.96</td>
+<td>−0.64</td>
+<td>−0.34</td>
+<td>−0.26</td>
+<td>−0.21</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>2차 최소제곱 정책에서 q = 0의 실패는 전부 시간 초과입니다(커버리지 실패). q &gt; 0에서는 실패가 충돌로 바뀝니다(모드 평균화의 특징적 실패). 실패 유형이 바뀌는 것은 전형적인 평균화 신호입니다.</li>
+<li>그래도 이 toy에서 성공률은 q와 함께 올라갑니다. 커버리지 이득이 평균화 손실보다 큽니다. 논문이 말한 &quot;역U&quot;는 이 설정에서 나타나지 않았습니다.</li>
+<li>kNN 정책은 q가 커져도 충돌이 없습니다. 상태(위치)가 전략을 구별하므로 이웃이 같은 전략에서 옵니다. 평균화는 &quot;조건 신호가 전략을 구별하지 못하는&quot; 경우에만 생기며, 논문의 주장은 이 조건을 명시하지 않습니다.</li>
+<li>연속 분포(양쪽, |h| ∈ [0.25, 0.45], s_tr = 0.2): 2차 정책 0.794(SD 0.12, 충돌 0.08), kNN 0.984(충돌 0.02). H_G = −0.47.</li>
+</ul>
+<h3>4.2 해석</h3>
+<ul>
+<li>같은 시연 데이터의 H_G는 q와 함께 <strong>단조 증가</strong>합니다(−3.3 → −0.2). 성공률은 q = 0.2 이후 거의 평평합니다. 즉 H_G는 &quot;다양성이 많아졌다&quot;를 알려 주지만, 최적점을 알려 주지는 않습니다. 최적점은 학습 방법(정책 클래스)에 따라 달라집니다. 논문의 결론(&quot;학습자에 따라 최적 H가 다르다&quot;)과 같은 방향입니다.</li>
+<li>이 toy는 &quot;다양성은 항상 해롭다&quot;는 주장을 지지하지 않습니다. 해로움은 정책이 평균화하는 경우에만 나타나고, 그 크기는 성공률 차이로는 크지 않았습니다(충돌 7–9%, 성공률은 오히려 증가).</li>
+<li>한계: 2차원, 장애물 하나, 시연 60개, 정책 두 종류. 실제 IL의 확산 정책이나 VLA와는 다릅니다. 이 toy는 기전(커버리지, 평균화, H의 단조성)을 보이는 용도입니다.</li>
+</ul>
+<h2>5. 민감도 요약</h2>
+<table>
+<thead>
+<tr>
+<th>민감도</th>
+<th>값</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>샘플 수 N (낮은 차원 자료)</td>
+<td>±0.01 이내 (N ≥ 100)</td>
+<td>편향 작음</td>
+</tr>
+<tr>
+<td>샘플 수 N (노이즈 0.03)</td>
+<td>N = 100에서 −0.14</td>
+<td>피크 위치 비교에 영향 가능</td>
+</tr>
+<tr>
+<td>샘플 수 N (등방 D = 150)</td>
+<td>N = 100에서 −0.73</td>
+<td>고차원 자료에서는 큼</td>
+</tr>
+<tr>
+<td>재표집 점 수 T</td>
+<td>두 배마다 +0.69 (ln 2)</td>
+<td>절댓값 비교 불가</td>
+</tr>
+<tr>
+<td>시작–목표 거리</td>
+<td>1.0 대 0.3에서 r 효과가 약 10배</td>
+<td>논문 미보고, 표 I 크기를 결정</td>
+</tr>
+<tr>
+<td>노이즈 σ</td>
+<td>0.03에서 +0.13</td>
+<td>노이즈가 차원을 늘림</td>
+</tr>
+<tr>
+<td>정규화 ÷(M−1) 대 ÷1</td>
+<td>M=100 → 2000에서 +3.0 (ln 20)</td>
+<td>÷(M−1)이면 안정</td>
+</tr>
+<tr>
+<td>kNN 엔트로피(D = 150)</td>
+<td>k = 3 → 20에서 −210 nats (M = 100)</td>
+<td>대역폭(k) 민감도가 매우 큼. 기준선으로 부적절</td>
+</tr>
+</tbody>
+</table>
+<p>H_G에는 대역폭이 없다는 점은 맞습니다. 그러나 T, 거리 정규화, 편향이라는 다른 자유도가 있습니다.</p>
+<h2>6. 종합</h2>
+<ol>
+<li>표 I의 방향(r ↑ → H ↑, k=1 → H ↓)은 이 정의로 재현됩니다(T1b). 절댓값은 미보고 변수(시작–목표 거리)에 달려 있어 재현되지 않습니다.</li>
+<li>H_G는 선형 차원과 크기를 재므로, 두 전략이 반대로 나뉜 자료(k=2)를 &quot;다양성이 낮은&quot; 쪽으로 읽습니다(T1c). 모드 모호성을 직접 측정하지 못합니다.</li>
+<li>N 편향은 자료의 스펙트럼에 따라 0.01–0.7 nats입니다. 논문의 피크 이동(0.1–0.3 nats)과 같은 크기이므로, N마다 같은 부분표본으로 비교하는 검증이 필요합니다.</li>
+<li>성공률 판독으로 보면 StackCube 시뮬의 역U는 N = 100, 200에서 명확하고, N = 1000에서는 &quot;피크 뒤 감소&quot;만 있습니다. 실물 StackCube는 왼쪽 점 한 개에 의존합니다.</li>
+<li>toy 2에서 커버리지 이득은 재현되고, 평균화 손실은 정책 클래스에 따라 나타나거나 나타나지 않습니다. 논문의 기전은 조건 신호가 모호한 경우에만 성립합니다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>04 주장 검증과 구현 가능성</h1>
+<p>공식 코드가 없어서(§3) 코드 대조(<code>04_code_verification.md</code>) 대신 <strong>주장 검증</strong>으로 씁니다. 각 주장을 논문 절·표·그림에 붙이고, 우리 재계산(<code>03</code>), 판독 검정(<code>stats_check.py</code>), toy 결과로 판정했습니다. 판정 기준은 다음과 같습니다.</p>
+<ul>
+<li><strong>지지</strong>: 논문 수치 또는 우리 재계산이 주장과 맞고, 유의하다.</li>
+<li><strong>부분</strong>: 방향은 맞지만 범위, 유의성, 조건 중 하나가 빠졌다.</li>
+<li><strong>약함</strong>: 방향은 맞아 보이나 통계적으로 확정되지 않는다(판독 오차 안).</li>
+<li><strong>반박</strong>: 논문 수치 또는 toy가 주장과 반대다.</li>
+<li><strong>검증 불가</strong>: 필요한 정보(코드, 평가 횟수, 시드별 값, 그림 수치)가 없다.</li>
+</ul>
+<p>판독 기반 판정은 모두 근사입니다(<code>03</code> §1.1 가정).</p>
+<h2>1. 주장별 판정</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>주장 (논문 위치)</th>
+<th>근거</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>H_G는 과제에 무관(task-agnostic)하고 대역폭이 없다 (Abstract, Sec. III-D)</td>
+<td>식은 대역폭이 없다. 그러나 전이 구간 분할은 그리퍼 이벤트에 의존하고(III-B), 목표 프레임 R_T는 시뮬에서는 환경 상태, 실물에서는 인지로 얻는다(III-B 각주 1). 재표집 점 수 T(<code>03</code> §2.2), 시작–목표 거리 정규화(§2.2)에 따라 H 값이 달라진다</td>
+<td>부분. &quot;대역폭 없음&quot;은 맞고, &quot;과제 무관&quot;은 분할과 목표 프레임에 의존한다</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>H_G = ln d_eff + ln Σλ, d_eff = exp(Shannon 엔트로피) (식 1–2)</td>
+<td>식을 그대로 구현하면 toy에서 동작한다. ln d_eff = H(p)임을 유도했다(<code>03</code> §2.1)</td>
+<td>지지 (구현 가능)</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>표본 공분산 λ 사용, H는 &quot;안정&quot;하다. HG는 N ≈ 50–100 이후 수렴(Fig. 2)</td>
+<td>정규화를 ÷(M−1)로 가정하면 총 분산 항은 M에 무관하다(toy T2). 편향은 자료 스펙트럼에 따라 낮은 차원에서는 0.01 이하, 노이즈 0.03에서 N = 100에 −0.14, 등방 D = 150에서 −0.73(<code>03</code> §3.1). Fig. 2의 수치는 논문에 없다</td>
+<td>약함. 자료가 낮은 차원일 때만 맞고, Fig. 2 수치 없이는 확인 불가</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>표 I: r ↑에서 H ↑(k=0), k=1에서 H ↓</td>
+<td>표 I 값 자체가 단조다(2.901 → 3.667; 0.05/1 = 2.909 &lt; 0.05/0 = 3.183; 0.10/1 = 2.997 &lt; 0.10/0 = 3.667)</td>
+<td>지지 (표 안 일관성). 재현은 불가(C5)</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>표 I 값이 재현된다</td>
+<td>코드, 시연 생성 설정(시작점 분포, 거리, Δz, 최소 성공률), 평가 세부가 없다</td>
+<td>검증 불가. toy는 방향만 재현(T1b), 절댓값은 시작–목표 거리(미보고)에 따라 달라진다</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>식 4의 k=1은 &quot;단일 전략&quot;, k=0은 &quot;연속 전략&quot;이라 H가 모드 모호성을 반영한다 (III-A, V-D)</td>
+<td>toy(T1c): 반대 두 전략(k=2)은 연속 분포(k=0)보다 H가 0.93 낮다(d_eff 2.03 → 1.00). k=3과 k=0은 같다. 즉 H는 선형 차원을 센다</td>
+<td><strong>반박 (해석 부분).</strong> H는 전략 수가 아니라 2차 모멘트를 재므로, 모호성을 직접 재지 못한다. k=1이 H를 낮춘다는 표 I 결과는 맞다</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>DP(StackCube)에서 성공률은 H에 대해 역U다 (Fig. 3a, V-A-1)</td>
+<td>N = 100: 2차항 p = 0.001, 꼭짓점 3.36. N = 200: p = 0.016, 꼭짓점 3.30 (<code>03</code> §1.3)</td>
+<td>지지 (N = 100, 200). 판독 근사 기준</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>역U의 피크가 N이 늘수록 낮은 H로 이동한다 (Fig. 3a, V-A-2)</td>
+<td>꼭짓점 3.36 → 3.30 → 3.25(N = 100, 200, 500). 기울기 −1.5/decade, p = 0.21. N = 500 최고점은 0.03/0과 0.05/0이 동률(p = 0.48). N = 1000의 피크 2.917은 2등(2.909)과 차이가 없고(p = 0.24), 2차항도 유의하지 않다(p = 0.53)</td>
+<td>약함. 방향은 맞아 보이나 N = 1000에 역U가 없다</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>쉬운 과제(PegInsertion)는 더 낮은 H에서 포화한다 (Fig. 3b, V-A-2)</td>
+<td>Fig. 3b는 판독 가능하지만 H 축 값과 설정 목록이 없다. 판독 시 곡선은 낮은 H(약 1.8–2.5)에 있고, StackCube(2.9–3.7)와 축이 다르다</td>
+<td>검증 불가 (H 축과 설정 미공개). 곡선 모양은 &quot;더 빨리 포화&quot;와 맞다</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>π0.5(사전학습 VLA)에서 성공은 H에 대해 단조 감소한다. 최적점이 관찰 범위 밖으로 밀렸다 (Fig. 4, V-A)</td>
+<td>4점, 오차막대 없음, 모두 k=0이라 H는 r과 같은 정보. τ = −1이지만 정확 p = 0.083. 0/0, 0.05/1 등 낮은 H 설정은 시험하지 않았다(<code>03</code> §1.4)</td>
+<td>약함. &quot;관찰 범위 밖에 최적점이 있다&quot;는 확인되지 않았다. 최적점이 실제로 밀렸는지는 낮은 H 설정 없이 알 수 없다</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>사전학습이 최적 H를 낮춘다 (V-B, Sec. I)</td>
+<td>π0.5 곡선은 DP의 모든 점보다 높다(같은 설정 3.183, N=1000: π0.5 0.918, DP 0.635). 최적점 비교를 위한 공통 설정이 없다</td>
+<td>부분. 사전학습이 성능을 전반적으로 올린다는 것은 맞다. &quot;최적 H의 이동&quot;은 같은 설정 비교로 확인되지 않았다</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>실물 ACT StackCube에서 역U, 피크 H ≈ 3.3 (Fig. 5, V-C)</td>
+<td>피크 3.27(0.62). 왼쪽 끝 3.00(0.30) 대 피크: p = 1×10⁻⁶(A), 0.007(B). 오른쪽 이웃 3.50과 차이: p = 0.027(A), 0.26(B). 2차항 p = 0.095 (<code>03</code> §1.5)</td>
+<td>부분. 역U의 기울기는 왼쪽 한 점에 의존한다. 가정 B에서 피크 오른쪽 차이는 유의하지 않다</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>실물 PlacePanda, OpenDrawer는 단조 감소 (Fig. 5, V-C)</td>
+<td>두 과제 모두 Kendall τ = −1(5점), 정확 p = 0.017. OpenDrawer의 2차항 꼭짓점은 범위 밖</td>
+<td>지지 (판독 기준)</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>시뮬과 실물의 정성적 일치 (V-C &quot;sim-to-real consistency&quot;)</td>
+<td>실물은 ACT, 시뮬은 DP다. 알고리즘이 다르므로 &quot;같은 메커니즘&quot;의 증거로는 약하다. 과제 H 축도 다르다(StackCube 시뮬 2.9–3.7, 실물 StackCube 3.0–3.9, PlacePanda 2.45–3.3, OpenDrawer 2.0–6.4)</td>
+<td>약함</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>&quot;일관된(consistent)&quot; 역U가 여러 IL 구조에서 나온다 (Abstract)</td>
+<td>역U는 DP(시뮬, 특히 N = 100, 200)와 ACT(실물 StackCube)에서만 나온다. π0.5는 단조이고, 단조 과제가 2개이다. &quot;일관된&quot;은 과장이다. 논문 자신도 &quot;effectively monotonic&quot;을 인정한다</td>
+<td>반박 (일관성 주장). 역U가 나오는 조건이 과제와 N에 의존함</td>
+</tr>
+<tr>
+<td>C16</td>
+<td>최적 H는 학습자의 숙련도(task mastery)에 따라 이동한다 (V-B)</td>
+<td>숙련도의 독립 측정이 없다. 작업 프록시(저다양성 기준 성공률)는 결과 변수와 같은 측정이다. N, 과제, 사전학습은 숙련도 변수이지만 동시에 학습 예산, 과제 난이도, 설정 집합을 바꾼다</td>
+<td>부분. 순환 정의와 교란이 있다. 원인 해석은 약하다</td>
+</tr>
+<tr>
+<td>C17</td>
+<td>H_G는 기준선(평균 분산, LogDet, 참여율, kNN)보다 낫다 (V-D, Fig. 6)</td>
+<td>Fig. 6의 수치는 그림에만 있다. toy에서 H_G는 낮은 차원 구조에서 편향이 작고 kNN보다 N에 안정적이다(T2 대 T5). 그러나 kNN 기준선은 D = 150, M ≤ 1000에서 대역폭 민감도가 커서 공정한 비교가 아니다(§5). LogDet, 참여율은 toy에서 시험하지 않았다</td>
+<td>검증 불가 (기준선 수치 없음). kNN 비교는 불공정</td>
+</tr>
+<tr>
+<td>C18</td>
+<td>H_G는 학습 전에 데이터셋을 감사하는 도구이다 (Abstract, VI-A)</td>
+<td>예측 검증이 없다. 새 과제에서 H를 미리 재고 최적을 맞힌 사례가 없다. 시뮬 H 범위에서 최적은 과제마다 다르다(C9, C13). 최적 H의 절댓값을 과제 사이에 옮길 수 없다</td>
+<td>검증 불가 (예측 검증 없음)</td>
+</tr>
+<tr>
+<td>C19</td>
+<td>한계: 과제 수가 적고, 전이 구간 분할이 이벤트 의존이며, 인과 효과는 실험에 기대고 있다 (VI-B)</td>
+<td>저자가 스스로 인정한 한계이다. 우리 검토에서 추가 한계: 시연 평가 횟수 미공개, 학습 예산 통제 불명, 정책의 성공 시연만 H에 들어감(Eq. 3의 n_p)</td>
+<td>지지 (한계 목록은 충분하지 않음. 추가 항목은 §2)</td>
+</tr>
+<tr>
+<td>C20</td>
+<td>낮은 H는 좁은 회랑, 높은 H는 혼재 전략이라는 해석 (VI-A)</td>
+<td>toy(T1c)에서 H가 높아도 혼재 전략의 구별 여부는 H에 나타나지 않는다. 반대 두 전략은 H를 낮춘다(C6). 해석의 진단 능력이 약하다</td>
+<td>반박 (해석). 진단 규칙을 그대로 쓰면 오분류가 생긴다</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 빠진 정보</h2>
+<p>논문 본문과 그림에서 확인되지 않는 항목입니다. 재현과 비교에 필요합니다.</p>
+<ol>
+<li>시뮬 평가 에피소드 수와 오차막대의 정의(SD 또는 SE), 시드별 값.</li>
+<li>학습 예산(에포크 또는 스텝)이 N에 따라 같은지. 같지 않으면 N 효과는 학습량 효과와 섞입니다(<code>contact_disassembly</code>의 D1–D2에서 같은 문제를 확인, 시뮬 데모 수 90과 30이 에포크 555와 1666으로 바뀜).</li>
+<li>시연 생성기의 시작점 분포, 목표 배치, 반지름 r의 단위, 경유점 높이 Δz, 플래너 실패 처리.</li>
+<li>시작–목표 거리(정규화 분모). 표 I 크기를 결정합니다(<code>03</code> §2.2).</li>
+<li>T(재표집 점 수)를 T = 50으로 고정한 이유, 다른 T에서의 민감도.</li>
+<li>÷(M−1) 대 ÷M 여부(λ 정의). Fig. 2의 안정성은 ÷(M−1)을 전제합니다.</li>
+<li>실물에서 세 명의 수집자가 어떤 H 설정을 맡았는지. 수집자와 설정이 섞이면 H 효과가 수집자 효과와 교란됩니다.</li>
+<li>Fig. 3b(PegInsertion)의 설정 목록과 H 값.</li>
+<li>Fig. 4(π0.5)의 시드 수, 평가 횟수, 학습 설정, 낮은 H 설정(0/0, 0.05/1)을 포함하지 않은 이유.</li>
+<li>Fig. 6의 기준선 수치, LogDet의 α, kNN의 k.</li>
+<li>전이 구간 분할의 세부(그리퍼 이벤트의 임계값, 최소 길이).</li>
+<li>성공하지 못한 시연을 어떻게 다뤘는지. Eq. 3은 성공 시연만 씁니다. 실패가 설정(r, k)에 따라 다르면 H는 선택 편향을 가집니다.</li>
+</ol>
+<h2>3. 재현 가능성 점검</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>결과</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>논문 공식 코드</td>
+<td>없음</td>
+<td>프로젝트 페이지는 <code>index.html</code>, <code>style.css</code>, 논문 PDF만 있음(<code>geometric-entropy/geometric-entropy.github.io</code>, 커밋 <code>d292168</code>, 2026-11-07, 라이선스 없음, 별 0). 저자 개인 저장소에 관련 코드 없음(<code>gh search repos</code>, <code>gh api</code>)</td>
+</tr>
+<tr>
+<td>프로젝트 페이지 대 arXiv v1</td>
+<td>주요 수치와 표는 같다</td>
+<td>프로젝트 페이지의 StackCube 설명은 &quot;최고 3.183(N=100, 200), 3.016(N=500), 2.917(N=1000)&quot;이라고 쓰며 우리 판독과 맞다. 요약문 표현은 더 약하다(&quot;in higher-performing regimes, declining trends&quot;)</td>
+</tr>
+<tr>
+<td>카메라 레디 PDF (<code>assets/paper/geometric_entropy_iros2026.pdf</code>)</td>
+<td>v1과 같은 구성</td>
+<td>키워드 대조(표 I, 3.3, 40 test episodes, three seeds, 절 제목)가 같다. v1을 기준으로 씀</td>
+</tr>
+<tr>
+<td>우리 재계산</td>
+<td>표 I 순서 재현, 역U 일부 재현</td>
+<td><code>03</code> §1, §3</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 구현 가능성 판정</h2>
+<p><strong>결론: 공식 재현은 불가능하고, 아이디어(H_G 계산과 역U 실험 설계)는 옮길 수 있습니다. 실험 재현에는 GPU와 시뮬레이터 설치가 필요합니다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>판정</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>공식 재현</td>
+<td><strong>불가</strong></td>
+<td>코드, 시연 생성기, 학습 설정이 없다. 프로젝트 페이지에는 코드 링크가 없다(§3)</td>
+</tr>
+<tr>
+<td>H_G 계산 (식 1–3)</td>
+<td><strong>가능</strong> (이 맥, CPU numpy)</td>
+<td><code>entropy_toy.py</code>의 <code>align()</code>과 <code>h_g()</code>가 정렬과 식 1–2를 수십 줄로 구현. 이미 실행됨. 실제 궤적 입력만 있으면 된다</td>
+</tr>
+<tr>
+<td>시연 생성기(ManiSkill, 경유점 삽입)</td>
+<td><strong>조건부</strong>: 설치 승인 필요, 플래너 CPU 실행 여부 미확인</td>
+<td>논문은 PandaArmMotionPlanningSolver를 쓴다. ManiSkill(Apache-2.0, 3504 별, 2026-08-04 최근 푸시)는 시뮬 설치가 필요하고 카메라 렌더링에 GPU가 필요할 수 있다. 상태 기반 플래너만 쓰면 CPU로 가능할 가능성이 있으나, 이 맥에서 실측하지 않았다</td>
+</tr>
+<tr>
+<td>DP 학습 (N 스윕, 그림 3)</td>
+<td><strong>불가 (현재 환경)</strong></td>
+<td>공개 DP 코드(MIT, 4721 별, 최근 푸시 2024-12-24, <code>5ba07ac</code>)는 사용 가능하다. 학습에는 CUDA GPU가 권장된다. 이 맥은 CUDA가 없고 torch가 없다. MPS로 소형 모델은 가능할 수 있으나 StackCube 성공률 평가는 시뮬이 필요하다</td>
+</tr>
+<tr>
+<td>π0.5 미세조정(그림 4)</td>
+<td><strong>불가</strong></td>
+<td>openpi(Apache-2.0, 14603 별, <code>215abfb</code>)와 3B급 모델 미세조정에는 GPU가 여러 장 필요하다. 체크포인트 다운로드도 승인 대상</td>
+</tr>
+<tr>
+<td>ACT 실물(그림 5)</td>
+<td><strong>불가</strong></td>
+<td>ARX 로봇 팔이 필요하다. 시뮬 재현도 없다. ACT 코드(tonyzhaozh/act, MIT, 2335 별, <code>742c753</code>)는 쓸 수 있다</td>
+</tr>
+<tr>
+<td>판독 검정(<code>03</code> §1)</td>
+<td><strong>가능</strong> (완료)</td>
+<td>이 맥에서 완료. 판독 오차의 영향은 <code>stats_check.py</code>에서 흔들기로 확인</td>
+</tr>
+<tr>
+<td>재구현 노력</td>
+<td>H_G 계산 0.5일, 시연 생성기와 평가 1–2주(GPU 포함), 실물 재현 별도</td>
+<td>추정. 실제 노력은 ManiSkill 설치와 플래너 호환에 크게 좌우됨</td>
+</tr>
+<tr>
+<td>필요한 하드웨어</td>
+<td>GPU 1장 이상(CUDA, 소형 DP 학습 기준 수 GPU-시간), 실물 팔 1대</td>
+<td>논문 설정 기준</td>
+</tr>
+</tbody>
+</table>
+<p><strong>이 맥(Apple M4 Pro, 약 24 GiB 통합 메모리, MPS, CUDA 없음, torch 미설치)에서 할 수 있는 것:</strong> H_G 정의의 검산, 합성 궤적에서 N·T·정규화·노이즈 민감도, 2차원 BC toy, 판독 값 검정. 이것들은 모두 완료했습니다.</p>
+<p><strong>할 수 없는 것:</strong> 논문 수치 재현, DP·ACT·π0.5 학습과 평가, 실물 실험. 이들은 설치·다운로드·GPU 승인이 필요하며 현재 계획에 없습니다.</p>
+<p><strong>H_G를 실제 데이터 감사에 쓰려면:</strong> 시연 궤적(위치 시계열)과 목표 프레임(목표 자세)이 있으면 됩니다. 이 조건은 텔레옵 데이터셋에서 대부분 충족될 가능성이 있으나, 목표 자세 추정이 없으면 정렬이 불가능합니다(C1). 과제 분할 이벤트(그리퍼)도 필요합니다.</p>
+<h2>5. 기준선 공정성 메모</h2>
+<ul>
+<li>kNN(Kozachenko–Leonenko) 엔트로피는 D = 150, M ≤ 1000에서 대역폭 k에 민감합니다(T5, k = 3 → 20에서 −210 nats). 같은 자료에서 H_G는 0.005만 움직입니다. 이 비교는 &quot;H_G가 안정적&quot;을 보이기는 하지만, 기준선이 약하게 설정된 것입니다. 공정한 기준선은 차원을 줄인 뒤의 가우시안 엔트로피나, 같은 PCA 차원에서의 H_G 변형일 것입니다.</li>
+<li>평균 분산(σ²_avg)은 임의의 순서를 무시합니다. 논문이 든 (0,0), (0.01,0), (0.03,0)의 붕괴는 이 기준선의 정의상 예상되는 결과이므로 증거로서 약합니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>02 선행연구, 가까운 대안, 저장소 내 관계, GitHub</h1>
+<h2>1. 선행연구 계보</h2>
+<table>
+<thead>
+<tr>
+<th>계보</th>
+<th>대표 연구 (논문 참고문헌 번호)</th>
+<th>이 논문과의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>데이터 스케일링</td>
+<td>RT-1 [1], RT-2 [2], OXE [3], DROID [4], Octo [5], OpenVLA [6]</td>
+<td>다양성을 &quot;태스크·객체·embodiment&quot; 같은 거친 속성으로 다룸. H_G는 궤적 기하에 한정</td>
+</tr>
+<tr>
+<td>데이터 품질</td>
+<td>Belkhale et al. [12] (행동 발산과 전이 다양성), Mandlekar et al. [15]</td>
+<td>품질 축은 관측, 라벨, 범위. 궤적 기하 축은 다루지 않음</td>
+</tr>
+<tr>
+<td>수집과 큐레이션</td>
+<td>DAgger [13], DART [14], 가중치·필터 [16], Scizor [17], CUPID [18], 온라인 경험 큐레이션 [19]</td>
+<td>선택과 가중이 목적. H_G는 감사(진단) 용도</td>
+</tr>
+<tr>
+<td>데이터 생성</td>
+<td>MimicGen [21], DemoGen [22], ManiBox [23], FieldGen [25], MOVE [26]</td>
+<td>생성으로 커버리지를 넓힘. H_G는 넓힌 결과의 측정 도구로 쓸 수 있음</td>
+</tr>
+<tr>
+<td>다중모드 정책</td>
+<td>GAIL [27], BeT [28], IBC [30], 잠재 행동 생성 [31], BAKU [32]</td>
+<td>다중모드를 정책 쪽에서 모델링. 논문은 이 정책 클래스의 차이를 실험하지 않음</td>
+</tr>
+<tr>
+<td>다양성 평가</td>
+<td>D3IL [33], 점유 측도 매칭 [34], &quot;다양성이 필요한가&quot; [35]</td>
+<td>[35]이 &quot;다양성 효과가 변수에 따라 다르다&quot;를 보임. 논문과 같은 질문</td>
+</tr>
+<tr>
+<td>궤적 유사도</td>
+<td>DTW [36]</td>
+<td>쌍별 정렬. H_G는 집단 스펙트럼</td>
+</tr>
+</tbody>
+</table>
+<p><strong>가까운 선행 연구 중 이 논문이 비교하지 않은 것.</strong> [35] Shi et al. (<code>Is diversity all you need</code>)은 같은 질문에 다른 변수(장면·객체 다양성)로 답한다. 논문은 이 연구를 언급만 하고 H_G와 비교하지 않는다.</p>
+<h2>2. 가까운 대안 (기준선)</h2>
+<table>
+<thead>
+<tr>
+<th>대안</th>
+<th>정의</th>
+<th>H_G와 차이</th>
+<th>이 저장소 검증</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>평균 분산 σ²_avg</td>
+<td>시점별 분산의 평균</td>
+<td>순서와 상관을 무시</td>
+<td>논문 Fig. 6 (그림만)</td>
+</tr>
+<tr>
+<td>LogDet</td>
+<td>log det(Σ+αI)</td>
+<td>정규화 α 필요, 낮은 차원에서 조건 나쁨</td>
+<td>우리 toy 미실시</td>
+</tr>
+<tr>
+<td>참여율 PR</td>
+<td>(Σλ)²/Σλ²</td>
+<td>스펙트럼 정보는 쓰지만 단일 요약</td>
+<td>논문 Fig. 6</td>
+</tr>
+<tr>
+<td>kNN KL</td>
+<td>Kozachenko–Leonenko</td>
+<td>대역폭 k, D = 150에서 표본 크기 drift</td>
+<td>우리 toy T5 (k에 매우 민감)</td>
+</tr>
+<tr>
+<td>공분산 유효 차원만</td>
+<td>exp(H(p))</td>
+<td>크기 항 없음</td>
+<td>toy T1c에서 d_eff로 분해</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 분석과의 관계</h2>
+<p>논문의 핵심 질문(데이터의 어떤 속성이 학습에 도움이 되는가)은 이 저장소의 여러 폴더와 맞닿아 있습니다. 아래는 이 논문을 읽을 때 참고할 연결점입니다.</p>
+<ul>
+<li><strong><code>nestdex/</code> (NestDex, arXiv:2608.13362).</strong> 텔레옵 시연을 수집하는 방식이다. 수집 성공률(Table II, Fisher 검정)과 수집자의 노력이 데이터 품질을 좌우한다. H_G는 수집 품질(성공률)을 재지 않으므로, H_G 감사와 수집 품질 감사는 따로 해야 한다. 논문 Eq. 3이 성공 궤적만 쓰는 것도 같은 선택 편향 문제다(<code>04</code> §2의 12번).</li>
+<li><strong><code>chronospolicy/</code> (Chronos Policy, arXiv:2610.13929).</strong> 공개 코드가 없다(&quot;Coming soon&quot;, 2026-10-28 확인). 이 논문과 같이 &quot;공개 코드가 없는 IL 논문에서 수치만 재계산하는&quot; 사례다. 교훈: 재계산과 toy로 검증할 수 있는 범위를 먼저 정한다.</li>
+<li><strong><code>do_as_i_do/</code> (Do as I Do, arXiv:2606.19333).</strong> 일상 영상에서 손 궤적을 복원해 로봇 손으로 리타겟한다. 시연이 사람 영상에서 오므로, H_G의 목표 프레임(R_T)과 전이 구간 분할을 영상에서 얻는 문제가 생긴다(<code>04</code> C1). 영상 유래 데이터의 감사 도구로 H_G를 쓸 때 가장 먼저 확인할 조건이다.</li>
+<li><strong><code>beyond_implicit_force/</code> (Beyond Implicit Force, arXiv:2607.14578, IROS 2026).</strong> ACT를 ALOHA식 원격조작 데이터로 학습한다. 이 논문의 실물 실험(ACT, N = 100, 3 수집자)과 같은 정책 계열이다. 데이터 양과 수집 조건의 통제 방법(<code>beyond_implicit_force/analysis/04_claim_verification.md</code>)을 참고할 수 있다.</li>
+<li><strong><code>contact_disassembly/</code> (CONTACT, arXiv:2603.08560, IROS 2026).</strong> 시뮬 데모 수가 과제마다 90, 30으로 달라졌고, 에포크는 <code>int(50000/n_demo)</code>로 자동 계산되어 학습량이 같이 바뀐다(<code>contact_disassembly/analysis/04_code_verification.md</code> D1–D2). 이 논문의 N 스윕(100–1000)도 학습 예산을 통제하지 않았다면 같은 교란이 있다(<code>04</code> §2의 2번). 이 패턴이 이 논문 검증의 가장 중요한 참고 사례다.</li>
+<li><strong><code>dexforce/</code> (DexForce, arXiv:2501.10356).</strong> 키네스테틱 시연에서 접촉력으로 행동 목표를 만든다. 데이터의 &quot;품질&quot;을 힘 정보로 정의한다는 점에서 H_G(기하 다양성)와 다른 축이다. 두 축을 같이 감사하면 데이터 큐레이션이 더 정확해질 것이다.</li>
+</ul>
+<h2>4. GitHub 조사 (2026-11-10 확인)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>별</th>
+<th>최근 커밋 (해시)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(논문 관련 코드)</td>
+<td><code>gh search repos &quot;geometric entropy imitation learning&quot;</code>, <code>&quot;geometric-entropy&quot;</code>, 저자 3명 계정(<code>qianqianlo</code>, <code>zrllrz</code>, <code>YanchaoYang</code>) 검색</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td><strong>찾지 못함.</strong> 관련 없는 &quot;geometric entropy&quot; 저장소만 검색됨</td>
+</tr>
+<tr>
+<td><code>geometric-entropy/geometric-entropy.github.io</code></td>
+<td>프로젝트 페이지(<code>index.html</code>, <code>style.css</code>, 논문 PDF). 코드 없음</td>
+<td>공식 (프로젝트 페이지)</td>
+<td>없음</td>
+<td>0</td>
+<td><code>d292168</code> (2026-11-07)</td>
+</tr>
+<tr>
+<td><code>qianqianlo/qianqianlo.github.io</code></td>
+<td>제1저자 개인 사이트</td>
+<td>저자 개인</td>
+<td>확인 안 함</td>
+<td>—</td>
+<td>2026-11-07 푸시. 코드 아님</td>
+</tr>
+<tr>
+<td><code>mani-skill/ManiSkill</code></td>
+<td>시뮬레이터(PandaArm 플래너, StackCube-v1, PegInsertionSide-v1)</td>
+<td>논문이 사용</td>
+<td>Apache-2.0</td>
+<td>3504</td>
+<td><code>62ff3a5</code> (2026-08-02)</td>
+</tr>
+<tr>
+<td><code>real-stanford/diffusion_policy</code></td>
+<td>Diffusion Policy 구현</td>
+<td>논문이 사용(정책)</td>
+<td>MIT</td>
+<td>4721</td>
+<td><code>5ba07ac</code> (2024-12-24)</td>
+</tr>
+<tr>
+<td><code>tonyzhaozh/act</code></td>
+<td>ACT 구현</td>
+<td>논문이 사용(실물)</td>
+<td>MIT</td>
+<td>2335</td>
+<td><code>742c753</code> (2024-01-28)</td>
+</tr>
+<tr>
+<td><code>Physical-Intelligence/openpi</code></td>
+<td>π0.5 구현(미세조정 레시피)</td>
+<td>논문이 사용(VLA)</td>
+<td>Apache-2.0</td>
+<td>14603</td>
+<td><code>215abfb</code> (2026-08-24)</td>
+</tr>
+<tr>
+<td><code>huggingface/lerobot</code></td>
+<td>SO-100 계열 및 π0.5 PyTorch 포트</td>
+<td>참고용</td>
+<td>Apache-2.0</td>
+<td>28790</td>
+<td><code>81b8c5b</code> (2026-11-09)</td>
+</tr>
+</tbody>
+</table>
+<p>판단: 이 논문의 H_G 계산 코드와 시연 생성기는 공개되지 않았습니다. 프로젝트 페이지 저장소는 웹사이트이고 코드가 없습니다. 실험 기반(ManiSkill, DP, ACT, openpi)은 모두 공개되어 있으므로, 실험 재현의 뼈대는 가능합니다. 다만 논문이 쓴 설정(경유점 생성, 시연 수, 학습량)은 우리가 다시 정해야 합니다.</p>
+<h2>5. 저작권과 인용 메모</h2>
+<ul>
+<li>저자 소속은 대학(University of Hong Kong)만 인용합니다. 공개 문서에 기관명을 더 쓰지 않습니다.</li>
+<li>인용 형식: Luo, Liu, Zhou, Zhou, Yang, &quot;Geometric Entropy: When Trajectory Diversity Helps and Hurts in Imitation Learning&quot;, arXiv:2606.20871 (v1), IROS 2026.</li>
+</ul>
+</section></body></html>

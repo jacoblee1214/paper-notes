@@ -1,0 +1,172 @@
+{
+  "setup": {
+    "dt": 0.05,
+    "obstacle_radius": 0.2,
+    "knn_k": 10,
+    "T_resample": 50,
+    "demos_per_config": 60,
+    "test_starts": 400,
+    "test_start_range": [
+      -0.6,
+      0.6
+    ],
+    "seeds": 5,
+    "policies": [
+      "knn (K=10 이웃 평균)",
+      "poly2 (2차 다항식 최소제곱, 단봉 MSE 대리)"
+    ],
+    "note": "toy; 논문 실험 아님. 실패는 장애물 충돌(collision)과 시간 초과(timeout)를 합친 값 1 − success에서 충돌을 뺀 것."
+  },
+  "E1_coverage_single_mode_poly2": {
+    "0.0": {
+      "success_mean": 0.735,
+      "success_sd": 0.0,
+      "collision_mean": 0.083,
+      "H_G_mean": -66.388
+    },
+    "0.1": {
+      "success_mean": 0.733,
+      "success_sd": 0.003,
+      "collision_mean": 0.0,
+      "H_G_mean": -4.711
+    },
+    "0.2": {
+      "success_mean": 0.808,
+      "success_sd": 0.01,
+      "collision_mean": 0.0,
+      "H_G_mean": -3.358
+    },
+    "0.3": {
+      "success_mean": 0.986,
+      "success_sd": 0.017,
+      "collision_mean": 0.0,
+      "H_G_mean": -2.565
+    },
+    "0.5": {
+      "success_mean": 1.0,
+      "success_sd": 0.0,
+      "collision_mean": 0.0,
+      "H_G_mean": -1.545
+    }
+  },
+  "E2_two_mode_fraction_q_poly2": {
+    "0.0": {
+      "success_mean": 0.805,
+      "success_sd": 0.012,
+      "collision_mean": 0.0,
+      "H_G_mean": -3.321
+    },
+    "0.1": {
+      "success_mean": 0.908,
+      "success_sd": 0.019,
+      "collision_mean": 0.092,
+      "H_G_mean": -0.962
+    },
+    "0.2": {
+      "success_mean": 0.925,
+      "success_sd": 0.008,
+      "collision_mean": 0.076,
+      "H_G_mean": -0.64
+    },
+    "0.3": {
+      "success_mean": 0.931,
+      "success_sd": 0.006,
+      "collision_mean": 0.069,
+      "H_G_mean": -0.336
+    },
+    "0.4": {
+      "success_mean": 0.931,
+      "success_sd": 0.005,
+      "collision_mean": 0.069,
+      "H_G_mean": -0.259
+    },
+    "0.5": {
+      "success_mean": 0.93,
+      "success_sd": 0.004,
+      "collision_mean": 0.07,
+      "H_G_mean": -0.208
+    }
+  },
+  "E1_coverage_single_mode_knn": {
+    "0.0": {
+      "success_mean": 0.652,
+      "success_sd": 0.0,
+      "collision_mean": 0.347,
+      "H_G_mean": -66.388
+    },
+    "0.1": {
+      "success_mean": 0.722,
+      "success_sd": 0.003,
+      "collision_mean": 0.278,
+      "H_G_mean": -4.711
+    },
+    "0.2": {
+      "success_mean": 0.789,
+      "success_sd": 0.005,
+      "collision_mean": 0.212,
+      "H_G_mean": -3.358
+    },
+    "0.3": {
+      "success_mean": 0.857,
+      "success_sd": 0.008,
+      "collision_mean": 0.143,
+      "H_G_mean": -2.565
+    },
+    "0.5": {
+      "success_mean": 0.988,
+      "success_sd": 0.009,
+      "collision_mean": 0.013,
+      "H_G_mean": -1.545
+    }
+  },
+  "E2_two_mode_fraction_q_knn": {
+    "0.0": {
+      "success_mean": 0.794,
+      "success_sd": 0.005,
+      "collision_mean": 0.206,
+      "H_G_mean": -3.321
+    },
+    "0.1": {
+      "success_mean": 0.999,
+      "success_sd": 0.002,
+      "collision_mean": 0.001,
+      "H_G_mean": -0.962
+    },
+    "0.2": {
+      "success_mean": 1.0,
+      "success_sd": 0.0,
+      "collision_mean": 0.0,
+      "H_G_mean": -0.64
+    },
+    "0.3": {
+      "success_mean": 1.0,
+      "success_sd": 0.0,
+      "collision_mean": 0.0,
+      "H_G_mean": -0.336
+    },
+    "0.4": {
+      "success_mean": 1.0,
+      "success_sd": 0.0,
+      "collision_mean": 0.0,
+      "H_G_mean": -0.259
+    },
+    "0.5": {
+      "success_mean": 1.0,
+      "success_sd": 0.0,
+      "collision_mean": 0.0,
+      "H_G_mean": -0.208
+    }
+  },
+  "E2b_continuum_both_sides_poly2": {
+    "success_mean": 0.794,
+    "success_sd": 0.123,
+    "collision_mean": 0.083,
+    "H_G_mean": -0.467
+  },
+  "E2b_continuum_both_sides_knn": {
+    "success_mean": 0.984,
+    "success_sd": 0.014,
+    "collision_mean": 0.017,
+    "H_G_mean": -0.467
+  }
+}

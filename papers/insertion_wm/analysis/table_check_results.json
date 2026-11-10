@@ -1,0 +1,221 @@
+{
+  "T1_unseen_ours": {
+    "k": 560,
+    "n": 1000,
+    "p": 0.56,
+    "wilson95": [
+      0.5291,
+      0.5905
+    ],
+    "note": "10개 × 100회 (본문 VI-A에서 확인)"
+  },
+  "T1_fisher_ours_vs_automate_n100": {
+    "k_auto": 7,
+    "n_auto": 100,
+    "p_auto": 0.07,
+    "wilson95_auto": [
+      0.0343,
+      0.1375
+    ],
+    "fisher_p_two_sided": 1.8622569276445993e-23,
+    "note": "AutoMate 시도 수 불명. 가정 n100"
+  },
+  "T1_fisher_ours_vs_automate_n1000": {
+    "k_auto": 70,
+    "n_auto": 1000,
+    "p_auto": 0.07,
+    "wilson95_auto": [
+      0.0558,
+      0.0875
+    ],
+    "fisher_p_two_sided": 1.056570122118596e-134,
+    "note": "AutoMate 시도 수 불명. 가정 n1000"
+  },
+  "T1_matched_size_note": "Fig. 1: 우리 모델의 미지 객체 성공률은 학습 객체 5/15/45/75/90개에서 약 27/40/50/53/56%, AutoMate 점 7%는 학습 객체 약 15–25개(정확한 x 불명)에 있습니다. 56%와 7%는 학습 규모가 다릅니다.",
+  "T2_seen_90": {
+    "text_pct": 55.0,
+    "fig7_pct": 54.5,
+    "n_trials": 9000,
+    "wilson95": [
+      0.5397,
+      0.5603
+    ],
+    "note": "본문 55.0%와 Fig. 7 54.5%가 다름. 시도 수 9000회(90 × 100) 가정"
+  },
+  "T2_unseen_ci_halfwidth_pp": 3.05,
+  "T3_specialists_paired_sensitivity": {
+    "diff_pp": 9.47,
+    "n_assemblies": 100,
+    "rows": [
+      {
+        "assumed_sd_pp": 10,
+        "se_pp": 1.0,
+        "z": 9.47,
+        "p_normal": 0.0
+      },
+      {
+        "assumed_sd_pp": 15,
+        "se_pp": 1.5,
+        "z": 6.31,
+        "p_normal": 2.7308844074980243e-10
+      },
+      {
+        "assumed_sd_pp": 20,
+        "se_pp": 2.0,
+        "z": 4.73,
+        "p_normal": 2.19055099037746e-06
+      },
+      {
+        "assumed_sd_pp": 30,
+        "se_pp": 3.0,
+        "z": 3.16,
+        "p_normal": 0.001595836590577271
+      }
+    ],
+    "note": "객체 단위 쌍 차이 SD는 Fig. 5에서 추정 불가. 가정 SD에 따른 민감도"
+  },
+  "T3_trial_level_naive": {
+    "n_trials": 50000,
+    "wilson95_ours": [
+      0.7943,
+      0.8013
+    ],
+    "note": "시도 단위 Wilson은 객체 간 분산을 무시해 지나치게 좁음. 참고용"
+  },
+  "T4_ablation_naive_binomial": {
+    "sensors_generalist": {
+      "depth_ours": {
+        "diff_pp_vs_proprio_only": 14.9,
+        "fisher_p_naive": 2.0915458383054792e-89
+      },
+      "depth_alt": {
+        "diff_pp_vs_proprio_only": 6.8,
+        "fisher_p_naive": 3.490714268134515e-20
+      }
+    },
+    "curriculum_generalist": {
+      "curriculum_ours": {
+        "diff_pp_vs_none": 2.4,
+        "fisher_p_naive": 0.0013173400588729332
+      },
+      "demonstrations": {
+        "diff_pp_vs_none": 4.4,
+        "fisher_p_naive": 3.396952253356579e-09
+      }
+    },
+    "sensors_specialists": {
+      "depth_ours": {
+        "diff_pp_vs_proprio_only": 24.6,
+        "fisher_p_naive": 0.0
+      },
+      "depth_alt": {
+        "diff_pp_vs_proprio_only": 17.5,
+        "fisher_p_naive": 0.0
+      }
+    },
+    "curriculum_specialists": {
+      "curriculum_ours": {
+        "diff_pp_vs_none": 3.6,
+        "fisher_p_naive": 5.903591174527093e-43
+      },
+      "curriculum_alt": {
+        "diff_pp_vs_none": 3.3,
+        "fisher_p_naive": 3.409987347788445e-36
+      }
+    }
+  },
+  "T4_holm_naive": {
+    "sensors_generalist:depth_ours": {
+      "p_raw": 2.0915458383054792e-89,
+      "p_holm": 1.2549275029832874e-88
+    },
+    "sensors_generalist:depth_alt": {
+      "p_raw": 3.490714268134515e-20,
+      "p_holm": 1.0472142804403546e-19
+    },
+    "curriculum_generalist:curriculum_ours": {
+      "p_raw": 0.0013173400588729332,
+      "p_holm": 0.0013173400588729332
+    },
+    "curriculum_generalist:demonstrations": {
+      "p_raw": 3.396952253356579e-09,
+      "p_holm": 6.793904506713158e-09
+    },
+    "sensors_specialists:depth_ours": {
+      "p_raw": 0.0,
+      "p_holm": 0.0
+    },
+    "sensors_specialists:depth_alt": {
+      "p_raw": 0.0,
+      "p_holm": 0.0
+    },
+    "curriculum_specialists:curriculum_ours": {
+      "p_raw": 5.903591174527093e-43,
+      "p_holm": 2.951795587263547e-42
+    },
+    "curriculum_specialists:curriculum_alt": {
+      "p_raw": 3.409987347788445e-36,
+      "p_holm": 1.363994939115378e-35
+    }
+  },
+  "T4_note": "절제 값은 시드 수가 밝혀지지 않아(생성 모델 단일 실행으로 보임) 시드 분산이 빠져 있습니다. naive 검정은 과신입니다. 차이 2.4pp(curriculum)는 시드 간 변동보다 작을 수 있습니다.",
+  "T5_finetune_note": "Fig. 6 x축은 30k 환경 스텝까지. 특정 스크래치 기준선은 2M 스텝 값(점선). 두 곡선의 스텝 범위가 달라 '데이터 효율'은 30k 시점 비교로만 확인 가능. 1053과 1132에서는 미세조정도 낮게 머묾.",
+  "T5_fig6_step0_read_mean": {
+    "values": {
+      "1036": 0.95,
+      "1041": 0.8,
+      "1053": 0.02,
+      "1079": 0.65,
+      "1092": 0.75,
+      "1102": 0.55,
+      "1125": 0.6,
+      "1129": 0.85,
+      "1132": 0.0,
+      "1136": 0.8
+    },
+    "mean_read": 0.597,
+    "note": "눈으로 읽은 값(±0.1). 본문 56%와 대략 같은 수준인지 확인용"
+  },
+  "T6_planning_cost_per_step": {
+    "dynamics~0.8M 가정": {
+      "model_calls_per_step": 9288,
+      "gflop_per_step": 14.9
+    },
+    "전체 5M 상한": {
+      "model_calls_per_step": 9288,
+      "gflop_per_step": 92.9
+    }
+  },
+  "T6_note": "논문에 샘플 수, 호라이즌, 반복 수가 없음. TD-MPC2 공개 기본값(commit 332f19e)을 가정한 추정. MLP 호출만 셈. CNN 인코더와 메모리 이동은 제외.",
+  "T7_unseen_object_level_ci": {
+    "n_objects": 10,
+    "rows": {
+      "sd20": {
+        "se_pp": 6.3,
+        "ci95_halfwidth_pp": 12.4,
+        "ci95_pct": [
+          43.6,
+          68.4
+        ]
+      },
+      "sd25": {
+        "se_pp": 7.9,
+        "ci95_halfwidth_pp": 15.5,
+        "ci95_pct": [
+          40.5,
+          71.5
+        ]
+      },
+      "sd30": {
+        "se_pp": 9.5,
+        "ci95_halfwidth_pp": 18.6,
+        "ci95_pct": [
+          37.4,
+          74.6
+        ]
+      }
+    },
+    "note": "객체 간 SD는 논문에 없음. 가정 값. Fig. 6 0스텝 값(눈으로 읽음) SD는 아래 참고"
+  },
+  "T7_fig6_step0_read_sd": 0.331
+}

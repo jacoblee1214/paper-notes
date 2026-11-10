@@ -1,0 +1,958 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>InsertionWM 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig1"] { max-width: 96%; }
+img[src*="paper_fig5"], img[src*="paper_fig6"], img[src*="paper_fig7"] { max-width: 92%; }
+img[src*="fig_headline"], img[src*="fig_scaling"], img[src*="fig_toy"] { max-width: 92%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>Generalizable Robotic Insertion with World Models: 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 그림과 표는 제외했습니다. 원문 https://arxiv.org/abs/2609.28258 · arXiv:2609.28258v1 (2026-09-23) · 학회: IROS 2026 표기는 arXiv 메타데이터뿐이고 논문에는 채택 문구가 없음(상태 불명) · 저자 Hansen 외 10인 · 분석일 2026-11-10 · 논문 그림과 표는 라이선스(arXiv 비독점 배포, CC BY 아님) 때문에 제외했습니다</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 잠재 세계 모델(TD-MPC2)을 손목 깊이 영상과 고유감각으로 학습하고, MPPI로 삽입 행동을 계획합니다. 한 모델을 조립 객체 90개에 학습하고, 학습하지 않은 10개에서 제로샷 56%를 보고합니다. 디코더는 없고, 세계 모델은 잠재 상태·보상·가치만 예측합니다.</li>
+<li><strong>&quot;56% 대 7%&quot;는 같은 조건의 비교가 아닙니다:</strong> 7%는 AutoMate 논문의 수치이고, 학습 객체가 약 15–25개일 때의 한 점입니다. 같은 x에서 우리 값은 약 40%입니다. AutoMate 생성 정책은 CAD 점군을 입력으로 씁니다. 분할은 저자들도 모른다고 씁니다.</li>
+<li><strong>미지 객체 10개의 불확실성은 큽니다:</strong> 시도 단위 95% 구간은 [52.9, 59.1]%지만, 객체 간 분산을 넣으면 ±15–19pp입니다. &quot;unseen&quot;은 같은 데이터 분포의 자산이고, 기하가 다른 객체라는 뜻은 아닙니다.</li>
+<li><strong>특수 모델 79.78% 대 70.31%는 방향이 유의합니다:</strong> 객체별 차이 SD를 10–30pp로 가정해도 p &lt; 0.002입니다. 절제 실험은 시드 수가 없어 커리큘럼 효과(+2.4pp)를 판단할 수 없습니다. 시각 입력 효과(+14.9pp 생성, +24.6pp 특수)는 큽니다.</li>
+<li><strong>미세조정은 일부 객체에서만 뚜렷합니다:</strong> 1053, 1129, 1079, 1102에서 차이가 크고, 1132는 두 방법 모두 실패합니다. 비교 스텝도 다릅니다(30k 대 2M 기준선).</li>
+<li><strong>toy 결과(CPU):</strong> 모델 오차가 간극의 절반(c/2) 이상이면, 모델이 간극을 좁게 본 에피소드가 모두 실패합니다. 샘플 수 16–256은 성공률을 바꾸지 않았습니다. 이 toy에서는 <strong>모델 없는 kNN 정책이 더 좋았습니다.</strong> 이 결과는 논문의 대비를 재현하지 않으며, 기준선의 강도에 달려 있습니다.</li>
+<li><strong>빠진 정보가 많습니다:</strong> 샘플 수, 호라이즌, 제어 주기, 시드 수, 객체별 값, 보상 계수, 코드, 체크포인트. 실물 실험은 없습니다.</li>
+</ol>
+<h2>구현 가능성 (판정)</h2>
+<ul>
+<li><strong>공식 재현: 불가능합니다.</strong> 논문 링크와 코드가 없고, AutoMate 학습 코드도 찾지 못했습니다(<code>gh</code> 검색과 웹 검색, 2026-11-10 확인). 실험은 Isaac Gym(CUDA GPU 필요)입니다.</li>
+<li><strong>이 맥(Apple M4 Pro, 약 24 GiB 통합 메모리, MPS, CUDA 없음, torch 미설치): 논문 설정 재현은 불가능합니다.</strong> 논문 학습은 RTX 3090에서 특수 40시간, 생성 3일입니다.</li>
+<li><strong>아이디어 재구현: 중간에서 높음.</strong> TD-MPC2 공식 코드(MIT)는 재사용할 수 있습니다. 병목은 조립 자산 100쌍과 환경, 그리고 CAD 기반 역분해 시연 보상(식 5)을 다시 만드는 일입니다.</li>
+<li><strong>하드웨어:</strong> NVIDIA GPU 1장(RTX 3090급 이상 권장), Linux. 실물은 Franka와 손목 카메라가 필요합니다.</li>
+<li><strong>이 맥에서 한 것:</strong> 수치 재계산, 계획 계산량 추정, 2D 삽입 toy(CPU, 약 73초).</li>
+</ul>
+</section>
+<section class="chapter"><h1>01. 논문 분석: Generalizable Robotic Insertion with World Models</h1>
+<ul>
+<li>논문: Hansen 외 10인, <em>Generalizable Robotic Insertion with World Models</em>, arXiv:2609.28258v1 (2026-09-23 제출, cs.RO)</li>
+<li>원문: <code>paper/paper.pdf</code>(v1, 8쪽, 3.4 MB). 본문 인용은 절·식·그림 번호로 합니다. 페이지 번호는 쓰지 않습니다.</li>
+<li>학회: arXiv Comments에 &quot;IROS 2026&quot;만 있습니다. 논문 본문에는 채택 여부가 없습니다(상세는 <code>04_claim_verification.md</code> §0).</li>
+<li>이 문서는 논문이 말하는 것을 정리하고, 빠진 정보와 해석이 갈리는 곳을 표시합니다. 수치 재계산은 <code>03_analysis.md</code>, 주장별 판정은 <code>04_claim_verification.md</code>에 있습니다.</li>
+</ul>
+<h2>0. 한 문단 요약</h2>
+<p>저자들은 TD-MPC2(잠재 공간 세계 모델 + MPPI 계획)를 <strong>삽입(insertion) 과제 하나</strong>에 적용하고, 그 모델 하나로 <strong>90개 조립품</strong>(AutoMate 데이터셋 100쌍 중 90쌍)을 학습합니다. 입력은 손목 카메라의 96×96 깊이 영상과 로봇 고유감각(24차원)입니다. 학습에는 CAD 기반 역분해 시연을 쓴 보상이 들어갑니다. 학습하지 않은 10쌍(ID가 가장 큰 10개)에서 <strong>제로샷 성공률 56%</strong>(100회 × 10쌍)를 보고하고, 비교 대상으로 AutoMate의 **7%**를 씁니다. 이 7%는 저자들이 AutoMate 논문에서 가져온 수치이며, 같은 분할과 같은 학습 규모에서 재측정한 값이 아닙니다. 실험은 전부 Isaac Gym 시뮬레이션이고, 실물 실험은 없습니다.</p>
+<h2>1. Abstract과 Introduction</h2>
+<p><strong>주장 (Abstract, I절).</strong></p>
+<ol>
+<li>고정된 조립 쌍마다 정책을 따로 학습하는 방식(specialist)은 확장이 어렵다.</li>
+<li>세계 모델 하나를 90개 조립품에 학습하면 학습하지 않은 조립품에서 56% 제로샷 성공을 보인다. 모델 없는 기준선은 7%다.</li>
+<li>학습 객체가 늘수록 성능이 오른다(확장성).</li>
+<li>생성 모델을 미지 객체에 미세조정하면 처음부터 학습보다 데이터 효율이 좋고, 일부는 점근 성능도 높다.</li>
+<li>&quot;기하를 모르는 미지 객체를 완전히 데이터로만 조립한 첫 시스템&quot;이라고 주장한다.</li>
+</ol>
+<p><strong>기여 (I절 마지막 문단).</strong> 새 알고리즘보다 &quot;시각 모델 기반 RL이 산업 조립에서 쓸모 있다&quot;는 것을 보이는 데 무게를 둡니다. 저자들은 스스로 기여를 &quot;설계 선택의 실용 지침&quot;이라고 씁니다(I절, &quot;Notably, the key contribution ... is not to propose a new algorithm&quot;).</p>
+<p><strong>문제 설정 (I절, III절).</strong> 실물 조립은 손으로 짠 제어기나 부품별 전문 정책에 의존합니다. 제안은 정책 학습을 <strong>다수 객체의 한 모델</strong>로 옮기는 것입니다.</p>
+<h2>2. Preliminaries와 TD-MPC2 (III절)</h2>
+<p>논문은 II절 &quot;Related Work&quot; 제목 아래 본문이 없고, 관련 연구 문단이 III절 &quot;Preliminaries&quot; 제목 아래 들어 있습니다(편집 오류로 보입니다). 여기서는 실제 내용 위치를 따라 씁니다.</p>
+<p><strong>MDP 정의 (III절, &quot;Robotic insertion with RL&quot;).</strong> 상태는 깊이 영상 x ∈ R^{96×96}과 고유감각 q ∈ R^24로 근사하고, 부분 관측 MDP로 봅니다. 행동은 6자유도 end-effector 증분 자세(정규화 [-1, 1])입니다. 저자들은 &quot;full state s는 실제 응용에서 알 수 없어 [x, q]로 근사한다&quot;고 씁니다.</p>
+<p><strong>TD-MPC2 구조 (식 1).</strong> 잠재 세계 모델은 다섯 부분으로 구성됩니다.</p>
+<ul>
+<li>인코더 z = h(s), 잠재 전이 z′ = d(z, a), 보상 r̂ = R(z), 가치 q̂ = Q(z, a), 정책 사전분포 â ∼ p(z).</li>
+</ul>
+<p><strong>학습 목적 (식 2–4).</strong> 잠재 예측 손실을 시간 지수 가중 λ로 합산합니다. 단계 손실은 보상 교차엔트로피, 가치 교차엔트로피, 그리고 잠재 공간 예측 손실 ∥z′_t − sg(h(s′_t))∥²입니다(식 4, stop-gradient). <strong>픽셀을 복원하는 디코더는 없습니다.</strong> 저자는 &quot;without decoding raw observations&quot;라고 씁니다(III절 첫 단락). 따라서 이 세계 모델이 <strong>예측하는 것은 잠재 상태, 보상, 가치</strong>이고, 영상이나 물체 자세, 접촉력을 직접 예측하지 않습니다.</p>
+<p><strong>계획.</strong> 추론 때는 MPPI(Williams 외 2015)로 행동 시퀀스를 샘플링하고, 정책 사전분포를 샘플에 섞습니다. 샘플 수, 호라이즌, 반복 수, 온도는 <strong>이 논문에 없습니다</strong>. TD-MPC2 참조(III절 &quot;Refer to [30], [31]&quot;)에만 있습니다. 저장소 기본값은 <code>03_analysis.md</code> §7에 있습니다.</p>
+<h2>3. 방법 (V절)</h2>
+<p><strong>관측과 행동.</strong> 깊이 영상 96×96(손목 카메라 한 대, 시뮬레이션용 RealSense D435 모사), 고유감각 24차원입니다. 고유감각은 다음과 같습니다(IV절 &quot;Observations&quot;).</p>
+<ul>
+<li>관절각 R^7</li>
+<li>끝점 자세의 잡음 섞인 추정 R^7 (위치 3 + 쿼터니언 4)</li>
+<li><strong>소켓 자세의 잡음 섞인 추정 R^7</strong> (위치 3 + 쿼터니언 4)</li>
+<li>목표 위치 R^3 (플러그가 완전히 삽입된 점)</li>
+</ul>
+<p><strong>중요한 점:</strong> 소켓 자세는 시뮬레이터의 참값에 백색 잡음을 더한 것으로 보입니다. 실제 장비에서는 이것을 추정하는 단계가 필요하고, 그 단계는 논문에서 다루지 않습니다. 저자들이 말하는 &quot;CAD와 객체 ID가 필요 없다&quot;는 것은 <strong>객체 기하 정보에 한정된 주장</strong>입니다. 자세 추정은 포함하지 않습니다(§4 C12).</p>
+<p><strong>인코더 (식 6).</strong> h(x, q) = h_fuse(h_depth(x) + h_prop(q)). h_depth는 얕은 CNN, h_prop과 h_fuse는 2층 MLP이고, 모두 SimNorm 출력입니다. 저자들은 &quot;객체 ID의 one-hot은 미지 객체에 옮길 수 없으므로 시각 정보만으로 구별한다&quot;고 씁니다(V절 &quot;Zero-shot generalization&quot;).</p>
+<p><strong>행동 출력.</strong> 학습된 정책 사전분포와 MPPI 계획으로 행동을 냅니다(III절과 V절).</p>
+<p><strong>보상 (식 5).</strong> R = r_penetration·(r_dist + r_imitation + r_success). r_dist는 플러그와 목표의 음의 거리, r_imitation은 <strong>역분해 절차로 만든 시연</strong>을 따라가는 항, r_success는 성공 이진항입니다. 계수는 생략했고, 저자들은 이 보상을 [6]과 [1]에서 &quot;수정 없이&quot; 가져왔다고 씁니다. 이 보상은 학습 객체마다 역분해 시연이 필요하므로, <strong>학습 단계에서는 객체 기하(CAD에서 만든 시연)를 쓴다</strong>는 뜻입니다. 저자들은 이 점을 &quot;privileged&quot;라고 따로 쓰지 않습니다.</p>
+<p><strong>학습 설정 (VI-A &quot;Implementation details&quot;, IV절).</strong></p>
+<ul>
+<li>세계 모델 약 5M 파라미터(모든 변형 동일)</li>
+<li>특수 모델(specialist, 객체 100개 각각) 2M 스텝, AutoMate는 50M 스텝</li>
+<li>생성 모델(generalist, 90개) 7M 스텝</li>
+<li>계산: 특수 모델 40시간, 생성 모델 3일, 둘 다 RTX 3090 1장(VI-A)</li>
+<li>병렬 환경: 생성 모델은 객체마다 환경 하나(90개 병렬), 무작위화된 장면 설정(IV절 &quot;Zero-shot generalization&quot;)</li>
+<li>커리큘럼: 학습 성공률에 따라 초기 상태 분포를 쉬운 쪽에서 어려운 쪽으로 옮김(V절·VI-B)</li>
+</ul>
+<p><strong>학습 구현 세부가 빠진 것.</strong> 샘플 수와 호라이즌은 없습니다. 환경 스텝의 정의(병렬 수 포함)는 없어, AutoMate의 &quot;50M 스텝&quot;과 직접 비교는 단위가 맞지 않을 수 있습니다. 두 방법의 단계 수를 같다고 가정하면 안 됩니다.</p>
+<h2>4. 데이터와 환경 (IV절)</h2>
+<ul>
+<li><strong>데이터:</strong> AutoMate[1]의 조립 자산 100쌍(플러그를 소켓에 넣는 두 부품). [4][5]에서 가져왔고, 자산마다 번호(ID)가 있습니다.</li>
+<li><strong>환경:</strong> AutoMate의 Isaac Gym 환경을 &quot;closely follow&quot;로 재현(Franka Panda, 평행 그리퍼, 테이블 위 소켓은 상향 자세로 무작위 배치, 플러그는 모션 플래닝으로 잡은 뒤 시작).</li>
+<li><strong>실물 장비 주장:</strong> 저자들은 장비 구성이 [1][6][7][10]의 실물 실험과 같다고 씁니다. 그러나 <strong>이 논문에는 실물 결과가 없습니다</strong>(VII절 &quot;deployment of visual policies on real hardware is still challenging&quot;).</li>
+</ul>
+<h2>5. 실험 (VI절)</h2>
+<h3>5.1 평가 프로토콜 (VI-A &quot;Evaluation&quot;)</h3>
+<ul>
+<li><strong>미지 객체 분할:</strong> 100개 가운데 ID가 가장 큰 10개를 고정된 테스트 세트로 둡니다. 나머지 90개로 학습합니다. ID는 1036, 1041, 1053, 1079, 1092, 1102, 1125, 1129, 1132, 1136입니다(Fig. 6 제목에서 확인).</li>
+<li><strong>Fig. 2 설명:</strong> &quot;Training and test assemblies are drawn from the same data distribution.&quot; 즉, 미지 객체는 <strong>같은 데이터 분포의 다른 자산</strong>입니다. &quot;unknown geometry&quot;는 정책이 기하를 입력으로 받지 않는다는 뜻이고, 기하가 본질적으로 다른 객체라는 뜻은 아닙니다.</li>
+<li><strong>분할 근거:</strong> &quot;선택 편향을 줄이려고 ID 순서로 자른다&quot;고 씁니다. 그러나 ID가 자산 출처나 기하 계열과 관련이 있으면 이 분할은 계열 단위의 분할일 수 있습니다. 논문은 이를 확인하지 않았습니다.</li>
+<li><strong>학습 규모 실험:</strong> 생성 모델은 학습 객체 수를 5, 15, 45, 75, 90으로 바꿔 학습합니다(Fig. 1 오른쪽). 학습 객체의 부분집합은 ID 오름차순으로 고릅니다.</li>
+<li><strong>시도 수:</strong> 생성 모델은 객체당 100회, 특수 모델은 객체당 5 seed × 100회입니다. 미세조정은 5 seed(95% 신뢰 구간 음영, Fig. 6).</li>
+</ul>
+<h3>5.2 기준선 (VI-A &quot;Baselines&quot;)</h3>
+<ul>
+<li><strong>AutoMate[1] (주 기준선):</strong> PPO로 특수 모델을 학습합니다. 생성 모델은 특수 모델을 BC, DAgger, 온라인 RL로 증류하고, <strong>CAD 모델의 점군 임베딩을 조건으로 씁니다</strong>(VI-A). 배포 때도 객체별 CAD와 자세 추정 파이프라인이 필요하다고 씁니다.</li>
+<li><strong>수치 출처:</strong> &quot;AutoMate 생성 모델 수치는 [1]에서 가져왔다&quot;. 분할은 저자들도 <strong>알 수 없다</strong>고 씁니다(&quot;exact training and test splits for AutoMate are not known&quot;). 그래서 Fig. 1의 AutoMate 수치는 AutoMate 논문의 값입니다. 재측정이 아닙니다.</li>
+<li><strong>내부 변형:</strong> 시각 없는 모델(blind), 카메라 위치 변경, 커리큘럼 유무와 종류, 전문가 롤아웃 100개를 받는 생성 모델.</li>
+</ul>
+<h3>5.3 주요 결과 (VI-B, Fig. 1, Fig. 5, Fig. 6)</h3>
+<table>
+<thead>
+<tr>
+<th>결과</th>
+<th>값</th>
+<th>출처</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>특수 모델 100개 평균</td>
+<td>79.78% (AutoMate 70.31%)</td>
+<td>VI-B &quot;Single-assembly&quot;, Fig. 5</td>
+</tr>
+<tr>
+<td>생성 모델, 학습 객체 90개(seen)</td>
+<td>55.0% (본문), 54.5% (Fig. 7)</td>
+<td>VI-B, Fig. 7</td>
+</tr>
+<tr>
+<td>생성 모델, 미지 10개</td>
+<td>56% (제로샷)</td>
+<td>Abstract, VI-B, Fig. 1</td>
+</tr>
+<tr>
+<td>AutoMate, 학습 80개(seen)</td>
+<td>15.6%</td>
+<td>VI-B</td>
+</tr>
+<tr>
+<td>AutoMate, 미지</td>
+<td>7% (Fig. 1의 점 하나)</td>
+<td>Fig. 1, Abstract</td>
+</tr>
+<tr>
+<td>미지 곡선 (우리)</td>
+<td>5개 27%, 15개 40%, 45개 50%, 75개 53%, 90개 56%</td>
+<td>Fig. 1 오른쪽</td>
+</tr>
+</tbody>
+</table>
+<p><strong>특수 모델.</strong> 79.78%대 70.31%입니다. 저자들은 AutoMate가 &quot;큰 소켓&quot;에서 이기고 우리 방법은 &quot;작고 얇은 소켓&quot;에서 이긴다고 씁니다. 296과 726에서 떨어짐(VI-B)을 인정합니다. 가림(occlusion)이 원인일 것이라고 추측합니다.</p>
+<p><strong>생성 모델 확장.</strong> 학습 객체가 늘면 seen 성능은 약간 떨어지고(59 → 55), unseen 성능은 오릅니다(27 → 56). 저자들은 &quot;in-domain과 out-of-domain이 이 수준에서 saturation할 것&quot;이라고 가정합니다(VI-B). 이것은 가설로 표시되어 있습니다.</p>
+<p><strong>미세조정 (Fig. 6, VI-B).</strong> 90개 생성 모델을 10개 미지 객체에 미세조정하고 처음부터 학습과 비교합니다. x축은 0–30k 환경 스텝이고, 처음부터 학습 기준선은 2M 스텝 값을 점선으로 씁니다. 두 곡선의 스텝 범위가 다릅니다. 또 <strong>1053</strong>에서는 미세조정(약 0.4–0.6)이 처음부터(약 0)보다 낫지만 2M 기준선(0.8)에 못 미치고, <strong>1132</strong>에서는 두 방법 모두 낮습니다(처음부터 2M 기준선 0.25, 미세조정 약 0.05). 저자들이 말한 &quot;in some cases exceeds&quot;는 1036과 1041 두 개를 가리킵니다.</p>
+<p><strong>절제 (Fig. 7, VI-B).</strong></p>
+<ul>
+<li>센서: 고유감각만(39.6) 대 깊이 + 고유감각(54.5) 대 대체 카메라 위치(46.4), 생성 모델 기준. 특수 모델은 55.2 / 79.8 / 72.7.</li>
+<li>커리큘럼: 없음 52.1 / 기본 54.5 / 시연 56.5(생성 모델). 특수 모델은 76.2 / 79.8 / 79.5(역커리큘럼).</li>
+<li>저자들의 결론: 시각이 &quot;critical&quot;이고, 커리큘럼은 &quot;consistently improves&quot;하지만 종류는 덜 중요하다.</li>
+</ul>
+<h3>5.4 한계 (VII절, VI-B)</h3>
+<p>저자들이 인정하는 한계는 네 가지입니다. (i) 가림이 큰 조립품에서 실패, (ii) 학습 객체가 늘수록 seen 성능이 약간 떨어짐, (iii) 생성 학습용 조립 데이터셋이 부족함, (iv) 실물 배포는 아직 어렵고 깊이 잡음과 얇은 부품, 실시간 처리가 문제. 논문은 <strong>실물 결과가 없음</strong>을 명시하지 않고 &quot;still challenging&quot;이라고 씁니다.</p>
+<h2>6. 해석이 갈리는 곳 (읽을 때 조심할 것)</h2>
+<ol>
+<li><strong>&quot;unseen&quot;의 뜻.</strong> 같은 데이터 분포의 객체이며, 기하 계열이 떨어진 객체가 아닙니다. 분할은 ID 기준입니다.</li>
+<li><strong>&quot;model-free baseline 7%&quot;의 뜻.</strong> AutoMate는 PPO 기반의 모델 없는 방법이지만, 이 수치는 AutoMate가 <strong>CAD를 입력으로 쓴 생성 모델의 점</strong>이고, 학습 객체 수도 다릅니다(Fig. 1에서 7%는 학습 객체 약 15–25개 부근). 헤드라인의 &quot;56 대 7&quot;은 같은 조건의 비교가 아닙니다.</li>
+<li><strong>&quot;vision-only, no privileged information&quot;의 뜻.</strong> 배포 때는 CAD를 안 쓰지만, 관측에 **시뮬레이터 소켓 자세(잡음 있음)**가 들어 있고, 학습 보상에는 CAD 기반 역분해 시연이 들어 있습니다.</li>
+<li><strong>&quot;world model&quot;의 뜻.</strong> 픽셀 예측 모델이 아니라 잠재 공간 보상·가치 모델입니다. 접촉이나 자세를 명시적으로 예측하지 않습니다.</li>
+<li><strong>시도 수와 신뢰 구간.</strong> 미지 10개 × 100회라는 시도 수는 객체 간 분산을 무시합니다(<code>03_analysis.md</code> §2).</li>
+<li><strong>Fig. 7 수치 불일치.</strong> 본문 55.0%와 Fig. 7의 54.5%가 다릅니다. 같은 평가의 반올림 차이인지 확인되지 않았습니다.</li>
+<li><strong>&quot;zero-shot reaches in-domain at this scale&quot;(VI-B).</strong> 56 대 55는 차이가 우연일 가능성이 큽니다. 미지 10개의 객체 간 분산을 고려하면 구간이 매우 넓습니다.</li>
+</ol>
+<h2>7. 저자가 말하지 않은 것 (빠진 정보)</h2>
+<ul>
+<li>샘플 수, 호라이즌, 반복 수, 온도(MPPI) 및 계획 시간(제어 주기당 ms)</li>
+<li>제어 주기, 환경 스텝의 정의, 병렬 환경 수</li>
+<li>생성 모델의 seed 수(절제와 학습 곡선에 대해), 미지 객체별 제로샷 값(Fig. 6 0스텝 값은 눈으로만 읽힘)</li>
+<li>생성 모델 시도 수의 근거: 100회 × 10 = 1000회는 명시되어 있지만 특수 모델 평균 분산은 없음</li>
+<li>소켓 깊이 잡음 모델, 시각 렌더링 설정, 조명</li>
+<li>역분해 시연 생성 절차와 시연 수</li>
+<li>학습·평가 코드, 체크포인트, 프로젝트 페이지, 데이터(§ <code>02_prior_work.md</code> §4)</li>
+<li>실물 실험(없음)</li>
+<li>학회 채택 여부</li>
+</ul>
+<h2>8. 라이선스와 권리 표기 (요약)</h2>
+<ul>
+<li>arXiv 라이선스: <strong>nonexclusive-distrib 1.0</strong>(abs 페이지 확인, 2026-11-10). CC BY가 아닙니다.</li>
+<li>PDF 1쪽: arXiv 찍힘(arXiv:2609.28258v1 [cs.RO] 23 Sep 2026)만 있습니다. IEEE 저작권 문구는 <strong>없습니다</strong>(텍스트와 1쪽 이미지 확인).</li>
+<li>따라서 논문 그림과 표는 개인용 리포트와 PPT에만 넣고, 게시본에는 넣지 않습니다. 게시본 그림은 논문 수치를 다시 그린 것입니다.</li>
+</ul>
+<h2>9. 용어</h2>
+<ul>
+<li><strong>specialist:</strong> 객체 쌍 하나에 학습한 정책. <strong>generalist:</strong> 여러 쌍을 한 모델로 학습한 정책.</li>
+<li><strong>seen / in-domain:</strong> 학습 객체. <strong>unseen / zero-shot / out-of-domain:</strong> 학습하지 않은 10개 테스트 객체.</li>
+<li><strong>SimNorm:</strong> TD-MPC2의 잠재 정규화(그룹 softmax). 논문 식 6 설명.</li>
+</ul>
+</section>
+<section class="chapter"><h1>03. 수치 재계산, 유도, toy 검증</h1>
+<p>재현 코드는 <code>analysis/table_check.py</code>(→ <code>table_check_results.json</code>), <code>analysis/insertion_toy.py</code>(→ <code>insertion_toy_results.json</code>)에 있습니다. 둘 다 CPU, numpy·scipy, 단일 스레드입니다. toy는 약 73초 걸립니다. 논문에 없는 값은 가정으로 표시했습니다.</p>
+<h2>0. 요약</h2>
+<ul>
+<li>헤드라인 &quot;56% 대 7%&quot;는 <strong>통계적으로는 확실</strong>합니다. 56%(1000회)의 Wilson 95% 구간은 [52.9, 59.1]%입니다. 그러나 <strong>객체 단위</strong>로 보면 10개 객체의 평균이므로 구간은 약 ±15–19pp로 넓어집니다(§2). 비교 대상 7%는 학습 규모가 다른 점에서 나왔고, 시도 수도 밝혀지지 않았습니다(§1).</li>
+<li>특수 모델 79.78 대 70.31%는 객체 쌍별 차이의 SD를 모르면 검정할 수 없습니다. 가정 SD 10–30pp에서 p는 10⁻³보다 작습니다(§3).</li>
+<li>절제 실험의 차이(커리큘럼 +2.4pp, 시연 +2.0pp)는 시드 수가 밝혀지지 않아 판단할 수 없습니다. 시도 단위 검정은 과신입니다(§4).</li>
+<li>미세조정은 1053, 1129, 1079, 1102에서 30k 스텝 시점 차이가 큽니다. 1036과 1041은 시작점부터 높아서 차이가 작고, 1132는 두 방법 모두 실패합니다(§5).</li>
+<li>계획 비용은 모델 호출 약 9,300회/스텝, 약 15–93 GFLOP/스텝으로 추정됩니다. 기본 설정을 가정한 값입니다(§6).</li>
+<li>toy: 모델 오차가 <strong>간극의 절반(c/2) 이상</strong>이면, 모델이 간극을 좁게 본 에피소드가 모두 실패합니다. 샘플 수(16–256)는 성공률을 바꾸지 않았습니다. 이 toy에서는 <strong>모델 없는 kNN 정책이 모든 미지 기하에서 더 좋았습니다</strong>(§8). 이것은 toy 설계(오라클 시연, 접촉 규칙, 관측)에 따른 결과입니다.</li>
+</ul>
+<p><img src="figures/fig_headline_ci.png" alt="fig_headline_ci.png" /></p>
+<p class="cap">직접 계산: 헤드라인 수치와 Wilson 95% 구간. AutoMate 7%는 시도 수를 100회와 1000회로 가정.</p>
+<h2>1. 헤드라인 비교 (T1, <code>table_check.py</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>우리, 미지 10개 × 100회</td>
+<td>560/1000 = 56.0%, Wilson 95% [52.9, 59.1]</td>
+<td>본문 VI-A(시도 수), Fig. 1</td>
+</tr>
+<tr>
+<td>AutoMate 미지 7%</td>
+<td>시도 수 불명. 100회 가정 → [3.4, 13.8]%, 1000회 가정 → [5.6, 8.8]%</td>
+<td>Fig. 1</td>
+</tr>
+<tr>
+<td>Fisher 검정 (우리 대 AutoMate)</td>
+<td>p = 1.9×10⁻²³ (n=100 가정), p = 1.1×10⁻¹³⁴ (n=1000 가정)</td>
+<td>이항 근사</td>
+</tr>
+</tbody>
+</table>
+<p><strong>해석.</strong> 시도 단위 검정은 의미가 있습니다. 그러나 이 검정은 &quot;같은 조건&quot;의 차이를 보지 않습니다. 세 가지가 달라서 비교가 불균형합니다.</p>
+<ol>
+<li><strong>학습 규모.</strong> Fig. 1 오른쪽 패널에서 AutoMate 7%는 학습 객체 약 15–25개 부근의 점 하나입니다. 우리 모델은 같은 부근(15개)에서 약 40%입니다(Fig. 1). 90개 대 15–25개에서 나온 값을 나란히 놓은 것입니다.</li>
+<li><strong>입력.</strong> AutoMate 생성 정책은 CAD 점군 임베딩을 입력으로 받습니다(VI-A). 우리 정책은 깊이와 고유감각을 받고, 고유감각에는 잡음 섞인 소켓 자세가 들어갑니다.</li>
+<li><strong>분할.</strong> AutoMate 측의 분할은 알 수 없다고 저자들이 씁니다(VI-B). 같은 10개로 평가했는지 모릅니다.</li>
+</ol>
+<p>Fig. 1을 눈으로 읽어 같은 x 위치에서 비교하면 40% 대 7%입니다. 그래도 차이는 크지만, 헤드라인의 56% 대 7%보다는 작습니다. 이 값은 읽은 값이므로 ±2pp 정도 오차가 있습니다.</p>
+<p><img src="figures/fig_scaling_read.png" alt="fig_scaling_read.png" /></p>
+<p class="cap">직접 다시 그림: 논문 Fig. 1을 눈으로 읽은 규모 곡선. x 위치와 값은 대략이며, 학습 규모가 다른 점에 주의.</p>
+<p><strong>재계산 확인.</strong> 특수 모델 평균(79.78%)과 그 생성 모델 값(55.0%, 54.5%)은 Fig. 5와 Fig. 7에서 맞습니다. 55.0%(본문)와 54.5%(Fig. 7)가 다른 것은 반올림이나 평가 시점 차이로 보이지만 확인되지 않았습니다.</p>
+<h2>2. 객체 단위 불확실성 (T7)</h2>
+<p>미지 객체 10개의 평균 56%에서 객체 간 SD를 가정하면 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>객체 간 SD(가정)</th>
+<th>평균의 SE</th>
+<th>95% 구간</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20pp</td>
+<td>6.3pp</td>
+<td>[43.6, 68.4]%</td>
+</tr>
+<tr>
+<td>25pp</td>
+<td>7.9pp</td>
+<td>[40.5, 71.5]%</td>
+</tr>
+<tr>
+<td>30pp</td>
+<td>9.5pp</td>
+<td>[37.4, 74.6]%</td>
+</tr>
+</tbody>
+</table>
+<p>가정 근거: Fig. 6의 0스텝(미세조정 시작점)을 눈으로 읽은 값(1036 ≈ 0.95, 1053 ≈ 0.02, 1132 ≈ 0.0, 나머지 0.55–0.85)의 SD는 0.33입니다. 이 값도 눈으로 읽은 것이라 대략적입니다. 그래서 구간의 하한이 40% 근처라는 것, 즉 7%보다 훨씬 위라는 결론은 유지됩니다. 그러나 <strong>&quot;56%는 ±3pp 정확도로 알려졌다&quot;는 해석은 틀립니다.</strong></p>
+<p>Fig. 6의 0스텝 값 평균은 0.597입니다(§5). 본문 56%와 대략 같은 수준입니다.</p>
+<h2>3. 특수 모델 79.78% 대 AutoMate 70.31% (T3)</h2>
+<ul>
+<li>차이: 9.47pp (100개 객체, 객체당 5 seed × 100회).</li>
+<li>쌍 설계(같은 객체에서 두 방법을 비교)이므로 검정에는 객체별 차이의 SD가 필요합니다. 논문에는 없습니다. Fig. 5 막대 높이로는 추정할 수 없습니다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>객체별 차이 SD(가정)</th>
+<th>SE</th>
+<th>z</th>
+<th>p (정규 근사)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10pp</td>
+<td>1.0</td>
+<td>9.5</td>
+<td>&lt; 10⁻¹⁰</td>
+</tr>
+<tr>
+<td>15pp</td>
+<td>1.5</td>
+<td>6.3</td>
+<td>2.7×10⁻¹⁰</td>
+</tr>
+<tr>
+<td>20pp</td>
+<td>2.0</td>
+<td>4.7</td>
+<td>2.2×10⁻⁶</td>
+</tr>
+<tr>
+<td>30pp</td>
+<td>3.0</td>
+<td>3.2</td>
+<td>1.6×10⁻³</td>
+</tr>
+</tbody>
+</table>
+<p>시도 단위로 계산하면 구간이 ±0.6pp로 나오지만, 객체를 단위로 두지 않은 과신입니다. 결론: 평균 차이 9.5pp는 가정 SD 30pp까지 유의합니다. 그러나 AutoMate의 특수 모델 수치가 <strong>재측정이 아니라면</strong>(VI-B 각주는 &quot;재현 수치를 저자가 확인했다&quot;고 씁니다) 같은 조건인지는 확인되지 않았습니다.</p>
+<h2>4. 절제 실험 (T4, Fig. 7)</h2>
+<p>막대 값만 쓸 수 있습니다. 시드 수와 시드별 분산은 없습니다.</p>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>차이</th>
+<th>근사 p(시도 단위, 시드 무시)</th>
+<th>해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>생성: 고유감각만 39.6 → 깊이(기본) 54.5</td>
+<td>+14.9pp</td>
+<td>2×10⁻⁸⁹</td>
+<td>시각 효과는 크고 안정적으로 보임. 시드 분산이 14pp보다 작다고 보기 어려운 이유는 없음</td>
+</tr>
+<tr>
+<td>생성: 깊이(기본) 54.5 → 대체 카메라 46.4</td>
+<td>−8.1pp</td>
+<td>3×10⁻²⁰</td>
+<td>카메라 위치 효과. 시드 1개면 확인 필요</td>
+</tr>
+<tr>
+<td>생성: 커리큘럼 없음 52.1 → 기본 54.5</td>
+<td>+2.4pp</td>
+<td>0.0013</td>
+<td>시드 분산보다 작을 수 있음. &quot;consistently&quot;는 과장</td>
+</tr>
+<tr>
+<td>생성: 커리큘럼 없음 52.1 → 시연 100개 56.5</td>
+<td>+4.4pp</td>
+<td>3×10⁻⁹</td>
+<td>저자는 &quot;marginal&quot;이라고 씀</td>
+</tr>
+<tr>
+<td>특수: 고유감각만 55.2 → 깊이 79.8</td>
+<td>+24.6pp</td>
+<td>0</td>
+<td>특수 모델에서 시각 효과 매우 큼</td>
+</tr>
+<tr>
+<td>특수: 커리큘럼 없음 76.2 → 기본 79.8</td>
+<td>+3.6pp</td>
+<td>6×10⁻⁴³</td>
+<td>5 seed 평균이면 SE를 알아야 함</td>
+</tr>
+</tbody>
+</table>
+<p>Holm 보정(8개 비교, 시도 단위 근사)은 모든 p를 그대로 두거나 키울 뿐입니다. 시드 분산을 넣으면 결론이 달라질 수 있습니다. 따라서 <strong>시각 효과(특수와 생성 모두)는 방향이 안정적이고, 커리큘럼 효과(2–4pp)는 확인되지 않았습니다.</strong></p>
+<h2>5. 미세조정 (Fig. 6, T5)</h2>
+<ul>
+<li>x축은 0–30k 환경 스텝입니다. 처음부터 학습의 2M 스텝 값은 점선으로만 있습니다. 즉 <strong>데이터 효율</strong>은 30k 스텝 시점의 곡선을 비교해야 확인됩니다.</li>
+<li>객체별 시작점(0스텝, 눈으로 읽음 ±0.1): 1036 0.95, 1041 0.80, 1053 0.02, 1079 0.65, 1092 0.75, 1102 0.55, 1125 0.60, 1129 0.85, 1132 0.00, 1136 0.80. 평균 0.597.</li>
+<li>30k 시점 차이가 큰 객체(눈으로 읽음, 처음부터 대 미세조정): 1053(≈0.05 대 ≈0.5), 1129(≈0.6 대 ≈0.95), 1079(≈0.7 대 ≈0.9), 1102(≈0.6 대 ≈0.75). 1092와 1136은 차이가 작습니다.</li>
+<li>1132: 처음부터 2M 기준선 0.25, 미세조정 30k에서 약 0.05. <strong>두 방법 모두 실패</strong>에 가깝습니다. 얇은 판 형태라 깊이 영상이 잘 안 보이는 것으로 보이지만 논문은 이 원인을 확인하지 않았습니다.</li>
+<li>본문의 &quot;exceeds the asymptotic performance(1036, 1041)&quot;는 2M 기준선과 비교한 것입니다. 1036은 미세조정 ≈0.9–0.95, 기준선 ≈0.85이고, 1041은 두 곡선이 겹칩니다. 차이가 작아 우연일 수 있습니다.</li>
+</ul>
+<h2>6. 계획 계산량 추정 (T6)</h2>
+<p>논문에는 샘플 수와 호라이즌이 없습니다. TD-MPC2 저장소의 기본 설정(<code>332f19e</code>: 호라이즌 3, 샘플 512, 반복 6, 정책 궤적 24)을 가정합니다.</p>
+<ul>
+<li>제어 주기당 모델 호출 수 = 반복 × 샘플 × 호라이즌 + 정책 궤적 × 호라이즌 = 6 × 512 × 3 + 24 × 3 = <strong>9,288회</strong>.</li>
+<li>FLOPs ≈ 2 × (호출당 MLP 파라미터) × 호출 수. 호출당 파라미터가 0.8M(잠재 전이 d로 가정)이면 약 <strong>15 GFLOP/스텝</strong>, 전체 5M을 매번 쓴다고 보면 상한 <strong>93 GFLOP/스텝</strong>입니다. CNN 인코더와 가치 앙상블(5개)은 제외했으므로 실제는 더 큽니다.</li>
+<li>시간 추정: 이 맥의 GPU 유효 처리량을 1–5 TFLOPS로 가정하면 3–90 ms/스텝입니다. 공개 사양 근사이고 MPS 실측은 하지 않았습니다. 제어 주기(논문에 없음)가 정해지면 판정할 수 있습니다.</li>
+<li>학습 비용: 생성 모델 7M 스텝, RTX 3090 3일(VI-A). 스텝을 전체 합으로 세는지 환경당으로 세는지 논문에 없어 스텝당 시간은 계산하지 않습니다.</li>
+</ul>
+<h2>7. 세계 모델 목적 함수 (식 2–4) 해석</h2>
+<p>식 2는 λ 가중 합입니다. 단계 손실(식 3)은 보상의 two-hot 교차엔트로피, 가치의 교차엔트로피, 그리고 잠재 예측 손실(식 4)입니다. 식 4의 stop-gradient 대상은 목표 인코더 출력 h(s′)입니다. 따라서 <strong>학습 신호는 잠재 공간의 일치와 보상·가치에서만 옵니다.</strong> 픽셀 재구성 손실이 없으므로, 이 세계 모델은 &quot;깊이 영상에서 무엇이 보이는지&quot;를 직접 학습하지 않습니다. 소켓 위치와 간극은 보상과 가치를 통해서만 간접적으로 들어갑니다. 이 점이 &quot;깊이 영상으로 기하를 추론한다&quot;는 저자 설명과 어떻게 맞는지는 논문이 보여주지 않았습니다.</p>
+<h2>8. toy 실험 (<code>insertion_toy.py</code>)</h2>
+<p><strong>설계 (요약, 자세한 내용은 스크립트 설명).</strong></p>
+<ul>
+<li>2D 점 peg(반지름 0.5), 깊이 2, 간극 c(슬롯 폭 = 2r + c). 벽에 막히면 그 스텝은 움직이지 않습니다(마찰 없음).</li>
+<li>관측: 슬롯 중심 ĥ(잡음 0.01). 간극은 관측하지 않습니다.</li>
+<li>계획자: MPPI, 호라이즌 8, 반복 2, 샘플 N. 모델은 벽 반폭에 δ 오차를 가지며, 부호는 에피소드마다 무작위입니다.</li>
+<li>모델 없는 정책: 학습 간극 {0.2, 0.4, 0.6}에서 참 모델 MPPI 시연 약 6,500개로 학습한 kNN(k=10, 특징 (ĥ−x, −D−y)).</li>
+<li>셀당 150 에피소드, 셀마다 고정 시드. 여러 번 다시 돌린 결과 셀 값은 ±10회 정도 흔들렸지만, 아래 결론의 방향은 바뀌지 않았습니다.</li>
+</ul>
+<p><img src="figures/fig_toy_model_error.png" alt="fig_toy_model_error.png" /></p>
+<p class="cap">직접 계산(toy): 모델 오차 δ와 간극 c에 따른 성공률(각 150회, Wilson 95%).</p>
+<p><strong>결과 (마지막 실행).</strong></p>
+<table>
+<thead>
+<tr>
+<th>실험</th>
+<th>조건</th>
+<th>성공</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>모델 오차 δ</td>
+<td>c = 0.1, N = 128</td>
+<td>δ=0: 150/150, δ=0.02: 150/150, δ=0.05: 71/150, δ=0.1: 77/150</td>
+</tr>
+<tr>
+<td>부호별 (δ=0.05)</td>
+<td>모델이 간극을 넓게 봄 / 좁게 봄</td>
+<td>72/72 대 0/78</td>
+</tr>
+<tr>
+<td>부호별 (δ=0.1)</td>
+<td>같음</td>
+<td>78/78 대 0/72</td>
+</tr>
+<tr>
+<td>간극 c</td>
+<td>δ = 0.05, N = 128</td>
+<td>c=0.05: 74/150, c=0.1: 74/150, c=0.2: 150/150, c=0.4: 150/150</td>
+</tr>
+<tr>
+<td>샘플 수 N</td>
+<td>δ = 0.05, c = 0.05</td>
+<td>N=16: 73/150, N=64: 72/150, N=256: 76/150</td>
+</tr>
+<tr>
+<td>모델 없는 정책</td>
+<td>학습 간극 0.2, 0.4</td>
+<td>150/150, 150/150</td>
+</tr>
+<tr>
+<td>모델 없는 정책</td>
+<td>미지 간극 0.05, 0.1, 0.15</td>
+<td>150/150 each</td>
+</tr>
+<tr>
+<td>모델 없는 정책</td>
+<td>미지 오프셋</td>
+<td>h</td>
+</tr>
+<tr>
+<td>같은 미지 조건 비교</td>
+<td>계획자(δ=0.05) 대 kNN</td>
+<td>간극 0.05: 85 대 150 (p = 7×10⁻²⁴), 간극 0.1: 77 대 150 (p = 2×10⁻²⁷), 오프셋: 65 대 150 (p = 2×10⁻³³)</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/fig_toy_compare.png" alt="fig_toy_compare.png" /></p>
+<p class="cap">직접 계산(toy): 미지 기하에서 계획자와 모델 없는 kNN 정책의 성공률(150회, Wilson 95%).</p>
+<p><strong>해석.</strong></p>
+<ol>
+<li><strong>실패는 &quot;모델이 간극을 좁게 본&quot; 절반에서 나옵니다.</strong> 이 경우 모델의 자유 횡방향 범위 c/2 − δ가 0 이하가 되어 모델은 중앙 정렬조차 불가능하다고 판단합니다. 그래서 계획자는 전진하지 않습니다. 반대로 간극을 넓게 본 절반은 모두 성공합니다. 그 이유는 toy 규칙 때문일 수 있습니다(벽에 막히면 멈추고 관측 잡음이 섞이므로 무작위로 빠져나옴). 실제 접촉에서는 다르게 나올 수 있습니다.</li>
+<li><strong>임계는 δ ≈ c/2입니다.</strong> c = 0.1에서 δ = 0.02는 통과, δ = 0.05부터 실패합니다. c = 0.2에서 δ = 0.05는 통과합니다. 이는 &quot;모델 정확도는 간극의 절반보다 작아야 한다&quot;는 설계 규칙으로 읽을 수 있습니다.</li>
+<li><strong>샘플 수는 모델 편향을 고치지 못합니다.</strong> N을 16에서 256으로 늘려도 성공률은 약 50%로 같습니다. 샘플을 늘리면 모델 오차를 더 정확히 따라가는 것이지 오차를 줄이는 것은 아닙니다. 이 결과는 정책 최적화에서 흔한 &quot;과대 최적화&quot; 효과와 맞지만, toy에서만 확인됐습니다.</li>
+<li><strong>모델 없는 kNN이 이겼습니다.</strong> 이 toy의 기준선은 오라클 시연을 그대로 모방하는데, 시연은 간극에 관계없이 &quot;정렬 후 하강&quot;이라는 같은 행동 규칙을 씁니다. 그래서 간극이 줄어도 정책이 맞습니다. 이 결과는 <strong>논문의 대비(7%)를 재현하지 않습니다.</strong> 논문의 기준선은 AutoMate PPO로, 그리고 CAD 조건이 있는 증류 정책이라 이 toy 기준선과 다릅니다. 이 toy는 &quot;모델 기반이 모델 없는 것보다 낫다&quot;는 주장이 <strong>기준선의 강도와 관측 설계</strong>에 달려 있다는 점을 보여 줍니다.</li>
+</ol>
+<p><strong>한계.</strong> 점 peg, 운동학적 이동, 벽 접촉 규칙이 단순합니다. 학습된 모델을 쓰지 않고 δ를 주입했습니다. 깊이 영상과 소켓 잡음을 모델링하지 않았습니다. 따라서 &quot;학습된 세계 모델의 오차가 얼마인가&quot;에 대한 답은 주지 않습니다.</p>
+<h2>9. 유도: MPPI 업데이트 (TD-MPC2 참조)</h2>
+<p>샘플 행동 시퀀스 U_k ~ N(μ, σ²)에 대해 비용 J_k를 구하고, 가중치 w_k ∝ exp(−(J_k − min J)/λ)로 μ를 갱신합니다. toy와 TD-MPC2 모두 이 형태입니다. 여기서 온도 λ가 작으면 최적 샘플에 집중하므로, 모델 오차를 더 강하게 따릅니다. 이 논문은 λ를 보고하지 않아 민감도를 확인할 수 없습니다.</p>
+<h2>10. 확인되지 않은 것과 필요한 자료</h2>
+<ul>
+<li>시드 수(생성 모델과 절제), 객체별 분산, 특수 모델의 쌍별 값</li>
+<li>샘플, 호라이즌, 제어 주기, 환경 스텝 정의</li>
+<li>AutoMate 측 분할과 평가 프로토콜</li>
+<li>1132 실패의 원인, 소켓 가림의 정량 값</li>
+</ul>
+</section>
+<section class="chapter"><h1>04. 주장 검증과 구현 가능성</h1>
+<p>공식 코드를 찾지 못했으므로 코드 대조(<code>04_code_verification.md</code>)는 만들지 않았습니다. 대신 논문의 주장을 수치와 그림으로 검증했습니다(C-번호). 재계산 근거는 <code>03_analysis.md</code>, 원자료는 <code>table_check_results.json</code>과 <code>insertion_toy_results.json</code>에 있습니다.</p>
+<h2>0. 기본 정보와 판정 요약</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>버전</td>
+<td>arXiv:2609.28258v1 (2026-09-23, cs.RO). 이 저장소에는 v1만 있습니다(abs 페이지에 v1만 있음).</td>
+</tr>
+<tr>
+<td>학회</td>
+<td><strong>IROS 2026 표기는 arXiv Comments에만 있고, 논문 본문에는 채택 문구가 없습니다.</strong> 채택 여부는 불명입니다. README에 &quot;상태 불명&quot;으로 적습니다.</td>
+</tr>
+<tr>
+<td>라이선스</td>
+<td>arXiv <strong>nonexclusive-distrib 1.0</strong>(abs 페이지 확인). <strong>CC BY 아님.</strong></td>
+</tr>
+<tr>
+<td>PDF 권리 문구</td>
+<td>1쪽에 arXiv 찍힘만 있고, IEEE 저작권 문구는 없습니다(텍스트 추출과 1쪽 이미지로 확인).</td>
+</tr>
+<tr>
+<td>게시 규칙</td>
+<td>논문 그림과 표는 개인용 리포트·PPT에만 넣습니다. 게시본은 우리가 다시 그린 그래프와 수치만 씁니다.</td>
+</tr>
+<tr>
+<td>코드</td>
+<td>공식 코드 없음(논문 본문 링크 없음, <code>gh search repos</code>·코드 검색·웹 검색 결과 없음). AutoMate 측 코드도 찾지 못함(<code>02_prior_work.md</code> §4).</td>
+</tr>
+<tr>
+<td>실험 환경</td>
+<td>전부 시뮬레이션(Isaac Gym). 실물 결과 없음.</td>
+</tr>
+</tbody>
+</table>
+<h2>1. 주장별 판정</h2>
+<p>판정 기준: <strong>확인</strong>(재계산이나 그림과 일치), <strong>부분</strong>(일치하지만 해석이 넓음), <strong>확인 불가</strong>(자료 없음), <strong>과장 가능</strong>(같은 근거로 더 좁게만 말할 수 있음).</p>
+<table>
+<thead>
+<tr>
+<th>번호</th>
+<th>주장 (논문 위치)</th>
+<th>근거</th>
+<th>판정</th>
+<th>메모</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>미지 10개에서 제로샷 56% (Abstract, VI-B, Fig. 1)</td>
+<td>100회 × 10쌍 = 1000회. Wilson [52.9, 59.1]% (<code>03</code> §1)</td>
+<td>부분</td>
+<td>수치는 맞음. 객체 단위 구간은 약 ±15–19pp (<code>03</code> §2). 10개 평균이라 &quot;56%&quot;의 정밀도는 과대.</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>모델 없는 기준선 7%와 비교 (Abstract)</td>
+<td>AutoMate 논문 수치 인용(VI-A). Fig. 1의 7%는 학습 객체 약 15–25 부근의 한 점</td>
+<td>확인 불가 (비교 조건 불일치)</td>
+<td>학습 규모, 분할, 입력(CAD 조건)이 다름. 같은 x에서 우리 값은 약 40%. &quot;model-free&quot;는 PPO 기반이라는 뜻에서만 맞음.</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>학습 객체가 늘수록 미지 성능이 오른다 (Abstract, VI-B)</td>
+<td>Fig. 1 오른쪽: 5, 15, 45, 75, 90개에서 27, 40, 50, 53, 56%</td>
+<td>확인</td>
+<td>점 5개, seed 수 불명, 단조 증가. 시드 분산 없이 기울기를 말하기는 어려움.</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>seen 성능은 학습 객체가 늘면 약간 떨어진다 (VII절)</td>
+<td>Fig. 1 왼쪽: 약 59 → 55%</td>
+<td>확인</td>
+<td>저자 인정.</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>학습하지 않은 객체에서 in-domain 수준에 도달 (VI-B)</td>
+<td>56 대 55.0(또는 54.5)</td>
+<td>부분</td>
+<td>차이는 우연일 수 있음. 미지 10개의 객체 간 분산이 큼.</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>시각 입력이 결정적이다 (VI-B, Fig. 7)</td>
+<td>생성: 39.6 → 54.5, 특수: 55.2 → 79.8</td>
+<td>확인</td>
+<td>효과 크기가 커서 시드 분산과 무관하게 방향은 안정적으로 보임. 단, 생성 모델의 시드 수는 불명.</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>커리큘럼은 일관되게 성능을 올린다 (VI-B)</td>
+<td>생성: 52.1 → 54.5(+2.4), 특수: 76.2 → 79.8(+3.6)</td>
+<td>과장 가능</td>
+<td>차이가 작고 시드 분산이 없음. &quot;일관되게&quot;는 근거가 약함.</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>특수 모델이 AutoMate보다 우수, 79.78 대 70.31% (VI-B, Fig. 5)</td>
+<td>9.47pp, 쌍 SD를 가정(10–30pp)하면 p &lt; 0.002 (<code>03</code> §3)</td>
+<td>부분</td>
+<td>방향은 유의. AutoMate 수치의 재측정 여부는 각주가 &quot;검증했다&quot;고만 씀. 실패 객체(296, 726)도 있음.</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>미세조정이 처음부터 학습보다 데이터 효율이 좋다 (VI-B, Fig. 6)</td>
+<td>10개 중 대부분에서 30k 스텝 시점 우세</td>
+<td>부분</td>
+<td>비교 스텝 범위가 다름(처음부터 2M 기준선). 1053과 1132는 효과 약함 또는 없음.</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>일부 객체에서 미세조정이 처음부터 점근 성능을 넘는다 (1036, 1041)</td>
+<td>Fig. 6: 1036 미세조정 ≈0.9–0.95 대 기준선 0.85, 1041 두 곡선 겹침</td>
+<td>부분</td>
+<td>1036만 차이가 뚜렷. 1041은 우연 범위.</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>미지 객체를 데이터만으로 조립한 최초 시스템 (Abstract)</td>
+<td>선행 시스템 비교 없음</td>
+<td>확인 불가</td>
+<td>선행 조사를 하지 않았음. 최초라는 주장은 검증하지 않음.</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>배포 때 CAD와 객체 ID가 필요 없다 (V절)</td>
+<td>관측에 소켓 자세 잡음 추정(IV절 proprio) 포함</td>
+<td>부분</td>
+<td>기하 정보는 입력되지 않지만, 소켓 자세는 입력됨. 실물에서는 자세 추정이 별도로 필요.</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>기하 정보 없이 &quot;unseen geometry&quot;에서 작동 (Abstract, I절)</td>
+<td>Fig. 2 설명: 학습과 테스트는 같은 데이터 분포</td>
+<td>과장 가능</td>
+<td>&quot;같은 분포의 다른 자산&quot;이 정확. &quot;unknown geometry&quot;는 입력에 기하가 없다는 뜻.</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>&quot;세계 모델&quot; (I절, III절)</td>
+<td>디코더 없음, 잠재 전이, 보상, 가치 (식 1–4)</td>
+<td>확인 (용어 주의)</td>
+<td>영상이나 자세를 예측하지 않는 잠재 모델. &quot;world model&quot;이 영상 예측을 뜻한다고 읽으면 틀림.</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>학습 규모에 따라 확장된다 (Abstract)</td>
+<td>C3과 같음</td>
+<td>부분</td>
+<td>학습 객체 5–90개, 90 이상은 없음. 저자도 saturation을 가설로 씀.</td>
+</tr>
+<tr>
+<td>C16</td>
+<td>특수 모델 2M 스텝이 AutoMate 50M 스텝보다 효율적 (VI-A)</td>
+<td>스텝 정의(병렬 수) 불명</td>
+<td>확인 불가</td>
+<td>두 값의 단위가 같다는 근거가 없음. 효율 주장은 실제 벽시계 시간이나 샘플 수로 다시 말해야 함.</td>
+</tr>
+<tr>
+<td>C17</td>
+<td>가림이 큰 조립품에서 실패하는 원인 (VI-B)</td>
+<td>저자 추측 (&quot;We conjecture&quot;)</td>
+<td>확인 불가</td>
+<td>저자도 추측이라고 씀. 이 저장소에서 검증하지 않음.</td>
+</tr>
+<tr>
+<td>C18</td>
+<td>특수 정책 40시간, 생성 3일, RTX 3090 (VI-A)</td>
+<td>본문 명시</td>
+<td>확인 (자기 보고)</td>
+<td>재확인 불가. 이 맥에서 재현할 수 없음.</td>
+</tr>
+<tr>
+<td>C19</td>
+<td>미지 분할은 ID 기준의 선택 편향을 줄인다 (VI-A)</td>
+<td>마지막 10개 ID: 1036, 1041, 1053, 1079, 1092, 1102, 1125, 1129, 1132, 1136</td>
+<td>확인 불가</td>
+<td>ID가 자산 계열과 관련 있는지 확인하지 못함. 분할이 계열 단위일 수 있음.</td>
+</tr>
+<tr>
+<td>C20</td>
+<td>AutoMate 결과는 공식 코드로 재현했다 (VI-A)</td>
+<td>공식 코드 미발견</td>
+<td>확인 불가</td>
+<td>웹사이트 저장소만 발견. 각주의 &quot;released codebase&quot;는 공개 위치를 밝히지 않음.</td>
+</tr>
+<tr>
+<td>C21</td>
+<td>실물 배포는 가능할 것 (V절 &quot;making deployment on real hardware feasible in the future&quot;)</td>
+<td>실물 실험 없음</td>
+<td>확인 불가</td>
+<td>저자도 VII절에서 어렵다고 씀.</td>
+</tr>
+<tr>
+<td>C22</td>
+<td>생성 정책을 AutoMate와 같은 조건으로 학습 (VI-A &quot;Baselines&quot;)</td>
+<td>분할과 규모가 다름</td>
+<td>과장 가능</td>
+<td>같은 환경 계열이지만 같은 조건은 아님. 저자도 &quot;exact splits 불명&quot;이라고 인정.</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 빠진 정보 목록 (재현과 비교에 필요한 것)</h2>
+<ol>
+<li>계획: MPPI 샘플 수, 호라이즌, 반복 수, 온도, 정책 사전분포 샘플 수, 제어 주기당 계산 시간</li>
+<li>학습: 학습률, 배치 크기, 재생 버퍼 크기, 병렬 환경 수, 스텝의 정의</li>
+<li>시드: 생성 모델과 절제의 시드 수, 특수 모델의 시드별 값</li>
+<li>미지 객체별 제로샷 값(표로 없음)과 객체별 시도 수</li>
+<li>평가: 초기 상태 분포(소켓 무작위 범위), 시도 종료 조건(성공 판정 기준 값), 실패 원인 분류</li>
+<li>시각: 깊이 잡음 모델, 카메라 내부 파라미터, 시뮬레이터 설정</li>
+<li>보상: 계수(생략됨), 역분해 시연 생성 절차와 개수</li>
+<li>자산: 100쌍 목록과 ID-계열 대응, 학습·평가 분할 파일</li>
+<li>코드, 체크포인트, 데이터, 프로젝트 페이지</li>
+<li>학회 채택 여부와 최종판(v2 여부)</li>
+</ol>
+<h2>3. 수치 불일치와 텍스트 문제</h2>
+<ul>
+<li>학습 객체 90개 seen 성능: 본문 55.0%, Fig. 7 54.5%.</li>
+<li>AutoMate 학습 80개 seen 15.6%(본문)와 Fig. 1의 마지막 점(약 16%) 위치: 일치하는 것으로 보이지만 Fig. 1의 x 위치는 읽은 값입니다.</li>
+<li>II절 &quot;Related Work&quot; 제목 아래 본문이 없고, 관련 연구 문단이 III절 &quot;Preliminaries&quot; 아래 있습니다(편집 오류).</li>
+<li>Fig. 7 생성 모델 커리큘럼 패널의 세 번째 막대는 &quot;Demonstrations&quot;이고, 본문에서 말한 &quot;역커리큘럼&quot;은 특수 모델 패널에 있습니다. 설명이 두 곳에 나뉘어 있습니다.</li>
+<li>Fig. 6의 x축 단위가 &quot;environment steps&quot;이지만 스텝 수가 명확하지 않습니다(0–30k).</li>
+</ul>
+<h2>4. 구현 가능성 판정 (필수)</h2>
+<p><strong>결론 (한 줄).</strong> 논문 그대로의 재현은 <strong>불가능</strong>합니다. 이 맥에서도 <strong>불가능</strong>합니다. 아이디어를 옮기는 것은 <strong>중간에서 높은 노력</strong>이 들고, 병목은 모델이 아니라 <strong>조립 환경과 자산, 역분해 시연 보상</strong>을 다시 만드는 일입니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>판정</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>공식 재현</td>
+<td><strong>불가능</strong></td>
+<td>공식 코드 없음. AutoMate 학습 코드도 찾지 못함. Isaac Gym 기반 환경이 필요함. 데이터와 체크포인트 없음.</td>
+</tr>
+<tr>
+<td>이 맥(Apple M4 Pro, 약 24 GiB 통합 메모리, MPS, CUDA 없음, torch 미설치)에서 재현</td>
+<td><strong>불가능</strong></td>
+<td>Isaac Gym은 NVIDIA CUDA GPU가 필요합니다. 논문 학습은 RTX 3090에서 특수 40시간, 생성 3일입니다. 맥에서 같은 시뮬레이터를 돌릴 방법이 없습니다.</td>
+</tr>
+<tr>
+<td>맥에서 부분 재현(TD-MPC2 공식 코드를 다른 시뮬레이터, 예: MuJoCo 조립 환경에서 학습)</td>
+<td><strong>조건부</strong></td>
+<td>TD-MPC2 공식 코드는 MIT입니다(<code>tdmpc2</code> 999 별, 2026-10-20 push). torch 설치(승인 필요) 후 MPS에서 소형 학습은 가능해 보이나 <strong>미확인</strong>입니다. 조립 자산과 보상을 새로 만들어야 합니다.</td>
+</tr>
+<tr>
+<td>아이디어 재구현 노력</td>
+<td><strong>중간에서 높음</strong></td>
+<td>식 6 인코더(CNN + 2층 MLP + SimNorm, 수십 줄), 식 1–4 모델(TD-MPC2 재사용). 병목은 (a) 100쌍 자산 확보 또는 대체 자산, (b) 역분해 시연 기반 보상(식 5)을 만드는 파이프라인, (c) 소켓 잡음 자세 입력 설계입니다. 추정: 환경과 보상 구축에 수 주, 학습에 GPU 수일.</td>
+</tr>
+<tr>
+<td>필요한 하드웨어</td>
+<td><strong>NVIDIA GPU 1장(RTX 3090급 이상 권장)</strong>, Linux, Isaac Gym 설치</td>
+<td>논문 VI-A의 학습 시간에서 추정. 실물 실험은 Franka, 손목 RealSense D435급 카메라, 실물 소켓 세트 필요.</td>
+</tr>
+<tr>
+<td>실물 재현</td>
+<td><strong>불가능</strong> (현재 자료로)</td>
+<td>실물 실험 없음, 저자도 어렵다고 씀.</td>
+</tr>
+<tr>
+<td>수치 검증(재계산)</td>
+<td><strong>가능, 완료</strong></td>
+<td><code>table_check.py</code>, Fig. 1, 5, 6, 7 읽기</td>
+</tr>
+<tr>
+<td>toy 검증</td>
+<td><strong>가능, 완료</strong></td>
+<td><code>insertion_toy.py</code>(CPU, 73초). 결과와 한계는 <code>03</code> §8.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>판정 근거 요약.</strong></p>
+<ol>
+<li>논문의 핵심 수치(56%, 7%, 79.78%)는 공개 자료로 확인할 방법이 없습니다. 재현하려면 시뮬레이터 환경과 AutoMate 자산 100쌍을 다시 만들어야 하는데, 그 자산이 공개되었는지 확인하지 못했습니다.</li>
+<li>TD-MPC2 자체는 재사용할 수 있습니다. 그러나 논문의 큰 기여는 TD-MPC2가 아니라 시각 인코더와 다과제 설정입니다.</li>
+<li>toy에서는 세계 모델 오차가 간극 절반을 넘으면 계획이 실패한다는 설계 규칙이 보였습니다. 이것은 실제 모델에도 적용할 만한 검사입니다.</li>
+</ol>
+<h2>5. 이 맥에서 한 검증 (CPU, 설치 없음)</h2>
+<ul>
+<li>표·그림 수치 재계산: 헤드라인, 특수 모델, 절제, 미세조정 읽기, 객체 단위 구간(<code>table_check.py</code>).</li>
+<li>계획 계산량 추정(TD-MPC2 기본 설정 가정, <code>table_check.py</code> T6).</li>
+<li>2D 삽입 toy: 모델 오차, 간극, 샘플 수, 부호별 실패, 모델 없는 kNN과의 비교(<code>insertion_toy.py</code>).</li>
+<li>설치한 패키지: 없음(numpy, scipy, matplotlib, markdown-it-py, python-pptx, Pillow는 이미 있던 것을 사용).</li>
+</ul>
+<h2>6. 다음 단계 (재현은 보류)</h2>
+<p>재현이나 설치는 사용자 승인 전에는 하지 않습니다. 승인 전까지 재현 항목은 후보로만 둡니다.</p>
+</section>
+<section class="chapter"><h1>02. 선행연구와 관련 저장소</h1>
+<p>확인일: 2026-11-10. 논문 본문의 참고문헌 번호는 [번호]로 씁니다.</p>
+<h2>1. 계보</h2>
+<table>
+<thead>
+<tr>
+<th>축</th>
+<th>대표 연구</th>
+<th>이 논문과의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>조립 시뮬레이션과 데이터</td>
+<td>Joinable [4], Assemble-them-all [5] (CAD 조립 자산과 역분해 시연)</td>
+<td>자산 100쌍과 역분해 시연의 출처</td>
+</tr>
+<tr>
+<td>특수 정책 (RL, 저차원 상태)</td>
+<td>IndustReal [6] (PPO, 접촉 보상), Force-guided exploration [7]</td>
+<td>보상 형태(식 5)를 가져온 출처</td>
+</tr>
+<tr>
+<td>생성 정책 (CAD 점군 조건)</td>
+<td><strong>AutoMate [1]</strong> (RSS 2024, arXiv:2407.08028)</td>
+<td>주 기준선. 특수 PPO 학습, 생성 정책은 BC·DAgger·RL 증류</td>
+</tr>
+<tr>
+<td>잠재 세계 모델 + 계획</td>
+<td>TD-MPC [30], <strong>TD-MPC2 [31]</strong>, 다과제 TD-MPC2 [32]</td>
+<td>이 논문의 기반 알고리즘</td>
+</tr>
+<tr>
+<td>시각 세계 모델 (조작)</td>
+<td>MoDem-V2 [18], Finetuning offline WM [19]</td>
+<td>같은 저자 계열의 선행</td>
+</tr>
+<tr>
+<td>능동 지각 조립</td>
+<td>Fabrica [42] (arXiv:2506.05168)</td>
+<td>저자들이 향후 방향으로 언급</td>
+</tr>
+</tbody>
+</table>
+<p><strong>이 논문의 위치.</strong> 방법 자체는 TD-MPC2를 그대로 쓰고, 새로운 점은 (1) 깊이 + 고유감각 인코더(식 6), (2) 90개 조립품 다과제 학습, (3) 미세조정 실험입니다. 알고리즘 기여가 아니라는 점은 저자들도 씁니다(I절).</p>
+<h2>2. 가까운 대안 (읽은 것과 제목만 확인한 것)</h2>
+<ul>
+<li><strong>AutoMate [1]:</strong> 논문 본문과 웹 검색으로 확인. 프로젝트 페이지는 bingjietang718.github.io/automate. 공식 코드는 찾지 못했습니다(§4).</li>
+<li><strong>EasyInsert (arXiv:2505.16187):</strong> 데이터 효율적이고 일반화되는 삽입 정책이라는 검색 결과의 제목만 확인했습니다. <strong>읽지 않았습니다.</strong> 이 논문의 &quot;unseen 삽입&quot; 주장과 비교하려면 따로 읽어야 합니다.</li>
+<li><strong>Fabrica [42]:</strong> 본문에서 능동 지각 방향으로 언급만 합니다. 읽지 않았습니다.</li>
+</ul>
+<h2>3. 이 저장소의 다른 분석과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>폴더</th>
+<th>관계</th>
+<th>이 논문에서 가져올 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openwam/</code> (arXiv:2609.07398)</td>
+<td>세계 행동 모델(WAM). 영상 생성 prior 기반이라 잠재 모델과 목적이 다름</td>
+<td>&quot;세계 모델이 무엇을 예측하는가&quot;의 대비 (영상 대 잠재)</td>
+</tr>
+<tr>
+<td><code>agentic_wam/</code> (arXiv:2610.30136)</td>
+<td>영상·행동을 한 모델에서 함께 denoise하는 WAM</td>
+<td>같은 질문: 예측 대상이 영상이어야 하나</td>
+</tr>
+<tr>
+<td><code>contact_disassembly/</code> (CONTACT, arXiv:2603.08560)</td>
+<td>접촉이 많은 분해 과제, 시각 + 촉각 비교</td>
+<td>실물 접촉 삽입에서 시각만으로 충분한지</td>
+</tr>
+<tr>
+<td><code>dexforce/</code> (arXiv:2501.10356)</td>
+<td>손끝 힘을 목표에 더하는 시연 정책</td>
+<td>힘 정보 대 시각 정보</td>
+</tr>
+<tr>
+<td><code>reactive_grasp/</code> (arXiv:2609.30082)</td>
+<td>접촉력 분배 QP, 힘 제어</td>
+<td>접촉 모델 기반 제어의 난이도</td>
+</tr>
+<tr>
+<td><code>stiffness_copilot/</code> (arXiv:2603.14068)</td>
+<td>손목 영상 정책이 임피던스 행렬을 고르는 공유 제어</td>
+<td>삽입의 임피던스 설계 대 학습 정책</td>
+</tr>
+<tr>
+<td><code>chronospolicy/</code> (arXiv:2610.13929)</td>
+<td>시간 정보 주입, 센서 지연 무작위화</td>
+<td>실물 전환에서 지연 처리</td>
+</tr>
+</tbody>
+</table>
+<h2>4. GitHub와 허깅페이스 (논문 본문에서 찾은 것과 검색으로 찾은 것)</h2>
+<p>논문 본문에는 URL, 프로젝트 페이지, 코드 링크가 <strong>없습니다</strong>(<code>paper/paper.txt</code> 전체 검색). arXiv 초록 페이지에도 코드 링크가 없습니다. 아래는 <code>gh search repos</code>와 <code>gh api</code>로 확인한 결과입니다.</p>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>별</th>
+<th>최근 커밋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(InsertionWM 코드)</td>
+<td><code>gh search repos</code>, 코드 검색(&quot;2609.28258&quot;, &quot;InsertionWM&quot;), 웹 검색 모두 결과 없음</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://github.com/nicklashansen/tdmpc2">nicklashansen/tdmpc2</a></td>
+<td>TD-MPC2 공식 구현(방법의 기반)</td>
+<td>방법 원저자 공식</td>
+<td>MIT</td>
+<td>999</td>
+<td><code>332f19e</code> (2026-10-20)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/bingjietang718/automate">bingjietang718/automate</a></td>
+<td>AutoMate <strong>프로젝트 웹사이트 소스</strong>(README에 CC BY-SA 4.0 웹사이트 표기). 정책 학습 코드가 아닙니다</td>
+<td>저자 계정, 코드 아님</td>
+<td>명시 없음(웹사이트 CC BY-SA 4.0)</td>
+<td>0</td>
+<td><code>ce95071</code> (2024-10-26 push)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/isaac-sim/IsaacGymEnvs">isaac-sim/IsaacGymEnvs</a></td>
+<td>Isaac Gym 강화학습 환경 모음. AutoMate 환경이 이 계열에 기반했는지는 확인하지 못함</td>
+<td>NVIDIA 공식</td>
+<td>NOASSERTION (LICENSE 파일 확인 필요)</td>
+<td>2,950</td>
+<td><code>aeed298</code> (2024-10-26 push)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ShaneFlandermeyer/tdmpc2-jax">ShaneFlandermeyer/tdmpc2-jax</a></td>
+<td>TD-MPC2의 JAX 구현(커뮤니티)</td>
+<td>비공식</td>
+<td>MIT</td>
+<td>82</td>
+<td>push 2026-07-28</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>AutoMate 코드:</strong> 논문 VI-A는 &quot;All AutoMate results are reproduced using the official codebase&quot;라고 쓰고, VI-B 각주는 &quot;released codebase&quot;를 말합니다. 그러나 <code>bingjietang718/automate</code>는 웹사이트 소스뿐입니다. <strong>논문이 말하는 공식 학습 코드는 이 검색으로는 찾지 못했습니다.</strong> 따라서 AutoMate 수치를 우리 조건에서 재현할 방법이 없습니다.</li>
+<li><strong>TD-MPC2 기본 설정(<code>tdmpc2/config.yaml</code>, commit <code>332f19e</code>):</strong> 호라이즌 3, 샘플 512, 엘리트 64, 반복 6, 정책 궤적 24, 온도 0.5, 잠재 차원 512, 가치 bins 101. 이 논문의 설정이라고 확정할 수 없습니다. 논문에 명시가 없기 때문입니다(<code>03_analysis.md</code> §7).</li>
+<li><strong>Isaac Gym:</strong> 논문 시뮬레이션의 기반입니다(III절 &quot;we leverage Isaac&quot;). CUDA GPU가 있어야 하므로 이 맥에서는 실행할 수 없습니다.</li>
+<li><strong>체크포인트와 데이터:</strong> 확인된 것이 없습니다. 자산 100쌍의 원본은 AutoMate 측이 공개했는지 확인하지 못했습니다.</li>
+<li><strong>HF:</strong> 이 논문 전용 모델이나 데이터셋은 검색되지 않았습니다.</li>
+</ul>
+<p><strong>결론.</strong> 공식 코드가 없습니다. 재현 가능한 자산은 TD-MPC2 공식 구현(MIT)과 Isaac Gym 환경 모음뿐입니다. 이 맥에서 TD-MPC2 코드를 그대로 쓰는 것은 가능하지만(torch 설치 필요), 조립 환경과 자산은 직접 만들어야 합니다.</p>
+<h2>5. 이 논문을 읽을 때 같이 볼 것</h2>
+<ol>
+<li>AutoMate [1]의 실험 설정과 생성 정책 수치(7%의 출처).</li>
+<li>TD-MPC2 [31]의 계획 설정과 MPPI 세부(샘플, 호라이즌).</li>
+<li>TD-MPC2 다과제 [32]: 다과제 확장에서 학습 규모 효과가 어떻게 보고되는지.</li>
+<li>Fabrica [42]: 능동 지각 방향과 이 논문의 한계(VII절)의 연결.</li>
+</ol>
+</section></body></html>

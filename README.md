@@ -4,8 +4,11 @@
 
 | 날짜 | 글 | 요약 |
 |---|---|---|
+| 2026-11-10 | [손을 파티클로 보는 세계 모델: Cross-Embodiment World Models 분석](papers/cross_embodiment_wm/) | 손과 물체를 3차원 파티클로 보고 행동을 파티클 변위장으로 바꾼 그래프 세계 모델. 표 재계산과 장난감 실험으로 주장의 강도를 따져 봤습니다. |
 | 2026-11-10 | [TactSpace: 공유 잠재로 촉각 sim-to-real 옮기기 (분석)](papers/tactspace/) | 시뮬 촉각과 실측 정전용량을 같은 자극끼리 짝지어 공유 잠재를 학습한다. 헤드라인 수치와 표·본문 대조, 공유 잠재 numpy 토이, 구현 가능성을 정리했다. |
 | 2026-11-10 | [Motion-Focused Latent Action 읽기: 움직임만 담는 잠재 행동은 얼마나 분리되었나](papers/motion_latent_action/) | IROS 2026 논문 Motion-Focused Latent Action을 표 재계산, 통계 검정, 잠재 행동 토이로 점검했습니다. |
+| 2026-11-10 | [InsertionWM 읽기: 세계 모델로 미지 조립 객체에 삽입할 수 있나](papers/insertion_wm/) | Generalizable Robotic Insertion with World Models(arXiv:2609.28258v1)를 수치 재계산과 2D toy로 읽었습니다. 56% 대 7%는 학습 규모와 입력이 달라 같은 조건의 비교가 아니었습니다. |
+| 2026-11-10 | [Geometric Entropy 읽기: 시연 궤적의 다양성은 언제 도움이 되고 언제 해로운가](papers/geometric_entropy/) | IROS 2026 Geometric Entropy(H_G)를 재계산, 그림 판독 검정, 합성 궤적 toy로 읽었습니다. 표 I의 방향은 재현되지만, 역U는 일부 조건에서만 유의했고, 공식 코드는 없습니다. |
 | 2026-11-10 | [DexTouch-WM: 사람 촉각 데이터는 로봇 세계모델을 돕는가](papers/dextouch_wm/) | 사람 장갑 촉각을 로봇 세계모델에 섞는 DexTouch-WM의 스케일링 결과를 재계산하고, 정책 평가 통계와 전이 조건을 토이로 점검했습니다. |
 | 2026-11-10 | [AdaVLA 읽기: 곡률로 흐름 매칭 VLA의 적분 단계를 줄일 수 있나](papers/adavla/) | IROS 2026 AdaVLA를 표 재계산, 지연 산술, 곡률 기준 toy로 읽었습니다. 지연 이득은 평균 2–3 NFE에서 나오고, 중점 평가 방식에 오차 원인이 있었습니다. |
 | 2026-11-09 | [You don't need long context 읽기: 압축은 정확도를 지키지만, 비용 이득은 계산 방식에 달려 있다](papers/no_long_context/) | 에이전트 문맥을 자주 압축하면 정확도는 거의 그대로이고 비용은 크게 준다는 NVIDIA 논문을, 표 17개를 다시 계산하고 비용 모델을 구조별로 재구성하며 읽었습니다. 정확도 결론은 표와 맞습니다. 비용 결론은 가정한 단가 비율과 기준선 가격 규칙에 크게 기댑니다. |
