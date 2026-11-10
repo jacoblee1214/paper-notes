@@ -1,0 +1,246 @@
+{
+  "table1_robot_to_100h": {
+    "PSNR": {
+      "robot_only": 23.473,
+      "plus100h": 27.096,
+      "delta": 3.623,
+      "rel_pct": 15.4
+    },
+    "SSIM": {
+      "robot_only": 0.824,
+      "plus100h": 0.89,
+      "delta": 0.066,
+      "rel_pct": 8.0
+    },
+    "LPIPS": {
+      "robot_only": 0.098,
+      "plus100h": 0.048,
+      "delta": -0.05,
+      "rel_pct": -51.0
+    },
+    "Aesthetic": {
+      "robot_only": 0.4,
+      "plus100h": 0.414,
+      "delta": 0.014,
+      "rel_pct": 3.5
+    },
+    "ImageQ": {
+      "robot_only": 0.718,
+      "plus100h": 0.724,
+      "delta": 0.006,
+      "rel_pct": 0.8
+    },
+    "JEPA": {
+      "robot_only": 0.864,
+      "plus100h": 0.924,
+      "delta": 0.06,
+      "rel_pct": 6.9
+    },
+    "SubjCons": {
+      "robot_only": 0.751,
+      "plus100h": 0.751,
+      "delta": 0.0,
+      "rel_pct": 0.0
+    },
+    "SemAlign": {
+      "robot_only": 0.813,
+      "plus100h": 0.86,
+      "delta": 0.047,
+      "rel_pct": 5.8
+    },
+    "TrajAcc": {
+      "robot_only": 0.891,
+      "plus100h": 0.962,
+      "delta": 0.071,
+      "rel_pct": 8.0
+    },
+    "GeomErr": {
+      "robot_only": 0.131,
+      "plus100h": 0.1,
+      "delta": -0.031,
+      "rel_pct": -23.7
+    },
+    "PSNRtaxel": {
+      "robot_only": 24.813,
+      "plus100h": 29.179,
+      "delta": 4.366,
+      "rel_pct": 17.6
+    },
+    "SSIMtaxel": {
+      "robot_only": 0.81,
+      "plus100h": 0.896,
+      "delta": 0.086,
+      "rel_pct": 10.6
+    },
+    "LPIPSheat": {
+      "robot_only": 0.008,
+      "plus100h": 0.002,
+      "delta": -0.006,
+      "rel_pct": -75.0
+    },
+    "MSE": {
+      "robot_only": 0.093,
+      "plus100h": 0.029,
+      "delta": -0.064,
+      "rel_pct": -68.8
+    },
+    "MAE": {
+      "robot_only": 0.069,
+      "plus100h": 0.035,
+      "delta": -0.034,
+      "rel_pct": -49.3
+    },
+    "ContactMAE": {
+      "robot_only": 0.806,
+      "plus100h": 0.516,
+      "delta": -0.29,
+      "rel_pct": -36.0
+    },
+    "ContactIoU": {
+      "robot_only": 0.415,
+      "plus100h": 0.588,
+      "delta": 0.173,
+      "rel_pct": 41.7
+    },
+    "ContactF1": {
+      "robot_only": 0.551,
+      "plus100h": 0.706,
+      "delta": 0.155,
+      "rel_pct": 28.1
+    }
+  },
+  "table1_plus10_vs_robot": {
+    "PSNRtaxel": -0.464,
+    "ContactIoU": 0.002,
+    "ContactF1": 0.003
+  },
+  "saturation": {
+    "PSNR_robot_to_50": 3.401,
+    "PSNR_50_to_100": 0.222,
+    "ContactIoU_robot_to_50": 0.119,
+    "ContactIoU_50_to_100": 0.054,
+    "TrajAcc_50_to_100": 0.0,
+    "Aesthetic_robot_to_100": 0.014
+  },
+  "table3": {
+    "WM-Robot": {
+      "pearson_recomputed": [
+        0.4,
+        0.945,
+        0.906,
+        0.334
+      ],
+      "pearson_paper": [
+        0.4,
+        0.945,
+        0.906,
+        0.334
+      ],
+      "pearson_mean": 0.646,
+      "p_two_sided_df1": [
+        0.738,
+        0.212,
+        0.278,
+        0.783
+      ],
+      "mmrv_recomputed": [
+        0.0333,
+        0.0,
+        0.0,
+        0.0667
+      ],
+      "mmrv_paper": [
+        0.033,
+        0,
+        0,
+        0.067
+      ],
+      "mmrv_mean": 0.025
+    },
+    "WM-Mix": {
+      "pearson_recomputed": [
+        0.973,
+        0.939,
+        0.889,
+        0.577
+      ],
+      "pearson_paper": [
+        0.972,
+        0.939,
+        0.889,
+        0.577
+      ],
+      "pearson_mean": 0.845,
+      "p_two_sided_df1": [
+        0.149,
+        0.224,
+        0.302,
+        0.609
+      ],
+      "mmrv_recomputed": [
+        0.0,
+        0.0,
+        0.0,
+        0.0667
+      ],
+      "mmrv_paper": [
+        0,
+        0,
+        0,
+        0.067
+      ],
+      "mmrv_mean": 0.0167
+    }
+  },
+  "n3_critical_r_p05": 0.997,
+  "pooled_r_robot_vs_mix": 0.925,
+  "within_task_r_robot_vs_mix": 0.925,
+  "table4_means": {
+    "FTP": {
+      "real": 0.731,
+      "+WM-Robot": 0.688,
+      "+WM-Mix": 0.694
+    },
+    "pi05": {
+      "real": 0.625,
+      "+WM-Robot": 0.562,
+      "+WM-Mix": 0.494
+    },
+    "XVLA": {
+      "real": 0.5,
+      "+WM-Robot": 0.506,
+      "+WM-Mix": 0.4
+    }
+  },
+  "table4_se_sensitivity": {
+    "0.15": {
+      "se_mean_4task": 0.024,
+      "se_diff": 0.034
+    },
+    "0.25": {
+      "se_mean_4task": 0.04,
+      "se_diff": 0.056
+    },
+    "0.35": {
+      "se_mean_4task": 0.055,
+      "se_diff": 0.078
+    }
+  },
+  "table4_diff_pi05_real_minus_mix": 0.131,
+  "table4_diff_ftp_real_minus_mix": 0.037,
+  "table4_diff_xvla_real_minus_mix": 0.1,
+  "sim_minus_real_bias": {
+    "WM-Robot": {
+      "mean_signed": 0.123,
+      "mean_abs": 0.223,
+      "n_over": 9,
+      "n_cells": 12
+    },
+    "WM-Mix": {
+      "mean_signed": 0.18,
+      "mean_abs": 0.222,
+      "n_over": 10,
+      "n_cells": 12
+    }
+  }
+}

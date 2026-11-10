@@ -1,0 +1,359 @@
+{
+  "T1_table2": {
+    "counts_and_avg": {
+      "pi05_base": {
+        "suite_counts": {
+          "Spatial": "497/500",
+          "Object": "491/500",
+          "Goal": "494/500",
+          "Long": "491/500"
+        },
+        "pooled": "1973/2000",
+        "avg_recomputed": 98.65,
+        "avg_reported": 98.65,
+        "avg_matches": true,
+        "pooled_wilson95_pct": [
+          98.04,
+          99.07
+        ]
+      },
+      "pi05_SparseVLM": {
+        "suite_counts": {
+          "Spatial": "483/500",
+          "Object": "485/500",
+          "Goal": "488/500",
+          "Long": "471/500"
+        },
+        "pooled": "1927/2000",
+        "avg_recomputed": 96.35,
+        "avg_reported": 96.35,
+        "avg_matches": true,
+        "pooled_wilson95_pct": [
+          95.44,
+          97.09
+        ]
+      },
+      "pi05_FastV": {
+        "suite_counts": {
+          "Spatial": "331/500",
+          "Object": "384/500",
+          "Goal": "386/500",
+          "Long": "240/500"
+        },
+        "pooled": "1341/2000",
+        "avg_recomputed": 67.05,
+        "avg_reported": 67.05,
+        "avg_matches": true,
+        "pooled_wilson95_pct": [
+          64.96,
+          69.08
+        ]
+      },
+      "pi05_ours": {
+        "suite_counts": {
+          "Spatial": "497/500",
+          "Object": "500/500",
+          "Goal": "499/500",
+          "Long": "493/500"
+        },
+        "pooled": "1989/2000",
+        "avg_recomputed": 99.45,
+        "avg_reported": 99.45,
+        "avg_matches": true,
+        "pooled_wilson95_pct": [
+          99.02,
+          99.69
+        ]
+      },
+      "xvla_base": {
+        "suite_counts": {
+          "Spatial": "498/500",
+          "Object": "500/500",
+          "Goal": "490/500",
+          "Long": "482/500"
+        },
+        "pooled": "1970/2000",
+        "avg_recomputed": 98.5,
+        "avg_reported": 98.5,
+        "avg_matches": true,
+        "pooled_wilson95_pct": [
+          97.87,
+          98.95
+        ]
+      },
+      "xvla_SparseVLM": {
+        "suite_counts": {
+          "Spatial": "496/500",
+          "Object": "410/500",
+          "Goal": "485/500",
+          "Long": "453/500"
+        },
+        "pooled": "1844/2000",
+        "avg_recomputed": 92.2,
+        "avg_reported": 92.2,
+        "avg_matches": true,
+        "pooled_wilson95_pct": [
+          90.94,
+          93.3
+        ]
+      },
+      "xvla_FastV": {
+        "suite_counts": {
+          "Spatial": "492/500",
+          "Object": "498/500",
+          "Goal": "490/500",
+          "Long": "406/500"
+        },
+        "pooled": "1886/2000",
+        "avg_recomputed": 94.3,
+        "avg_reported": 94.3,
+        "avg_matches": true,
+        "pooled_wilson95_pct": [
+          93.2,
+          95.23
+        ]
+      },
+      "xvla_ours": {
+        "suite_counts": {
+          "Spatial": "497/500",
+          "Object": "500/500",
+          "Goal": "494/500",
+          "Long": "487/500"
+        },
+        "pooled": "1978/2000",
+        "avg_recomputed": 98.9,
+        "avg_reported": 98.9,
+        "avg_matches": true,
+        "pooled_wilson95_pct": [
+          98.34,
+          99.27
+        ]
+      }
+    },
+    "tests": {
+      "pi05": {
+        "ours_vs_base_pooled_fisher_p": 0.01341,
+        "diff_pp": 0.8,
+        "ours_vs_base_extra_episodes": 16,
+        "per_suite_fisher_raw": [
+          1.0,
+          0.003767,
+          0.1237,
+          0.802
+        ],
+        "per_suite_fisher_holm": [
+          1.0,
+          0.01507,
+          0.3711,
+          1.0
+        ],
+        "ours_vs_SparseVLM_pooled_fisher_p": 1.384e-12,
+        "ours_vs_FastV_pooled_fisher_p": 3.603e-206
+      },
+      "xvla": {
+        "ours_vs_base_pooled_fisher_p": 0.3286,
+        "diff_pp": 0.4,
+        "ours_vs_base_extra_episodes": 8,
+        "per_suite_fisher_raw": [
+          1.0,
+          1.0,
+          0.4508,
+          0.4661
+        ],
+        "per_suite_fisher_holm": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "ours_vs_SparseVLM_pooled_fisher_p": 4.349e-27,
+        "ours_vs_FastV_pooled_fisher_p": 1.22e-16
+      }
+    },
+    "note": "쌍 설계이나 쌍별 집계가 없어 비쌍 Fisher는 근사. McNemar 불가."
+  },
+  "T2_table3": {
+    "counts": {
+      "baseline_10step": 1973,
+      "1step": 1941,
+      "5step": 1960,
+      "random_step": 1973,
+      "ours_PR_adp_0.15": 1989,
+      "ours_SVD_adp": 1993,
+      "ours_Fxd_adp": 1987,
+      "ours_noprune_adp": 1973,
+      "ours_PR_noadp": 1985,
+      "ours_PR_adp_0.20": 1984,
+      "ours_PR_adp_0.25": 1968
+    },
+    "vs_ours_PR": {
+      "baseline_10step": {
+        "diff_pp": 0.8,
+        "fisher_p": 0.01341,
+        "holm_p": 0.08048
+      },
+      "1step": {
+        "diff_pp": 2.4,
+        "fisher_p": 3.344e-09,
+        "holm_p": 2.675e-08
+      },
+      "5step": {
+        "diff_pp": 1.45,
+        "fisher_p": 5.135e-05,
+        "holm_p": 0.0003594
+      },
+      "random_step": {
+        "diff_pp": 0.8,
+        "fisher_p": 0.01341,
+        "holm_p": 0.08048
+      },
+      "ours_Fxd_adp": {
+        "diff_pp": 0.1,
+        "fisher_p": 0.8383,
+        "holm_p": 1.0
+      },
+      "ours_SVD_adp": {
+        "diff_pp": -0.2,
+        "fisher_p": 0.4797,
+        "holm_p": 1.0
+      },
+      "ours_noprune_adp": {
+        "diff_pp": 0.8,
+        "fisher_p": 0.01341,
+        "holm_p": 0.08048
+      },
+      "ours_PR_noadp": {
+        "diff_pp": 0.2,
+        "fisher_p": 0.5559,
+        "holm_p": 1.0
+      }
+    },
+    "min_detectable_diff_80pct_power_pp": 1.08,
+    "note": "Fxd(+0.10pp) 차이 2건은 PR 설계 이득의 증거로 약하다."
+  },
+  "T3_table4": {
+    "per_task_base": [
+      "25/30",
+      "26/30",
+      "29/30",
+      "25/30"
+    ],
+    "per_task_ours": [
+      "29/30",
+      "28/30",
+      "27/30",
+      "24/30"
+    ],
+    "per_task_fisher_p": [
+      0.1945,
+      0.6707,
+      0.612,
+      1.0
+    ],
+    "per_task_holm_p": [
+      0.778,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "pooled": "105/120 vs 108/120",
+    "pooled_fisher_p": 0.6835,
+    "pooled_wilson_base": [
+      80.4,
+      92.28
+    ],
+    "pooled_wilson_ours": [
+      83.33,
+      94.19
+    ],
+    "avg_base_reported": 87.5,
+    "avg_ours_reported": 90.0,
+    "avg_latency_base_recomputed": 806.73,
+    "avg_latency_ours_recomputed": 488.49,
+    "speedup": 1.651,
+    "note": "지연 SD가 보고되지 않아 지연 검정 불가. 실험은 과제당 30회."
+  },
+  "T4_latency_arithmetic": {
+    "vlm_total_input_plus_forward": 386.53,
+    "vlm_share_pct": 40.5,
+    "flow10_share_pct": 58.5,
+    "flow_10x_single_step": 537.5,
+    "flow10_reported_minus_10x_step": 20.28,
+    "components_sum_plus_flow": 944.31,
+    "e2e_minus_components": 9.31,
+    "per_layer_18x_attn_plus_mlp": 279.36,
+    "vlm_forward_minus_18x_layer": 10.92,
+    "pred_1step_total": 440.28,
+    "meas_1step_total_T3": 447.45,
+    "pred_5step_total": 655.28,
+    "meas_5step_total_T3": 677.56,
+    "pred_10step_total": 924.03,
+    "meas_10step_total_T2": 958.54,
+    "speedup_pi05_orin": 1.867,
+    "speedup_xvla_orin": 2.239,
+    "speedup_pi05_A10": 1.823,
+    "energy_ratio_pi05": 1.506,
+    "energy_ratio_xvla": 3.057,
+    "fastv_xvla_latency_drop_ms": 2.31,
+    "tableI_e2e_vs_tableII_base_diff": 4.92
+  },
+  "T5_implied_nfe": {
+    "assumption": "지연 = VLM(386.53 − 선형 가지치기 절감) + NFE_avg × 53.75 ms; 절감 = MLP 비율 12.47/(12.47+3.05) × VLM forward 290.28 × p",
+    "mlp_share_of_vlm_forward": 0.8035,
+    "saving_ms_per_unit_p": 233.23,
+    "nfe_avg_noprune_variant": 2.71,
+    "nfe_avg_full_by_p": {
+      "0.0": 2.36,
+      "0.05": 2.58,
+      "0.08": 2.71,
+      "0.1": 2.79,
+      "0.15": 3.01,
+      "0.2": 3.23
+    },
+    "p_needed_if_nfe_equal_noprune": 0.081,
+    "static_steps_latency_ms": {
+      "1": 440.28,
+      "2": 494.03,
+      "3": 547.78,
+      "5": 655.28,
+      "10": 924.03
+    },
+    "note": "p가 0.2를 넘으면 NFE가 10을 넘어 속도 이득이 설명되지 않음. 따라서 평균 가지치기는 작고 NFE는 2~7 범위로 추정된다."
+  },
+  "T6_eq8_cost": {
+    "rows_C_over_Cth": {
+      "0.5": {
+        "s_hat": 0.4,
+        "nfe_per_unit_tau": 5.0,
+        "ratio_vs_euler10": 0.5
+      },
+      "1": {
+        "s_hat": 0.2,
+        "nfe_per_unit_tau": 10.0,
+        "ratio_vs_euler10": 1.0
+      },
+      "1.5": {
+        "s_hat": 0.1333,
+        "nfe_per_unit_tau": 15.0,
+        "ratio_vs_euler10": 1.5
+      },
+      "2": {
+        "s_hat": 0.1,
+        "nfe_per_unit_tau": 20.0,
+        "ratio_vs_euler10": 2.0
+      },
+      "4": {
+        "s_hat": 0.1,
+        "nfe_per_unit_tau": 20.0,
+        "ratio_vs_euler10": 2.0
+      },
+      "8": {
+        "s_hat": 0.1,
+        "nfe_per_unit_tau": 20.0,
+        "ratio_vs_euler10": 2.0
+      }
+    },
+    "max_ratio_vs_euler": 2.0,
+    "note": "C >= 2Cth 이면 s_hat = s, NFE = 2/s = 20 per unit tau = Euler 대비 2배"
+  }
+}

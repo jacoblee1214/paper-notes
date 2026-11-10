@@ -4,6 +4,10 @@
 
 | 날짜 | 글 | 요약 |
 |---|---|---|
+| 2026-11-10 | [TactSpace: 공유 잠재로 촉각 sim-to-real 옮기기 (분석)](papers/tactspace/) | 시뮬 촉각과 실측 정전용량을 같은 자극끼리 짝지어 공유 잠재를 학습한다. 헤드라인 수치와 표·본문 대조, 공유 잠재 numpy 토이, 구현 가능성을 정리했다. |
+| 2026-11-10 | [Motion-Focused Latent Action 읽기: 움직임만 담는 잠재 행동은 얼마나 분리되었나](papers/motion_latent_action/) | IROS 2026 논문 Motion-Focused Latent Action을 표 재계산, 통계 검정, 잠재 행동 토이로 점검했습니다. |
+| 2026-11-10 | [DexTouch-WM: 사람 촉각 데이터는 로봇 세계모델을 돕는가](papers/dextouch_wm/) | 사람 장갑 촉각을 로봇 세계모델에 섞는 DexTouch-WM의 스케일링 결과를 재계산하고, 정책 평가 통계와 전이 조건을 토이로 점검했습니다. |
+| 2026-11-10 | [AdaVLA 읽기: 곡률로 흐름 매칭 VLA의 적분 단계를 줄일 수 있나](papers/adavla/) | IROS 2026 AdaVLA를 표 재계산, 지연 산술, 곡률 기준 toy로 읽었습니다. 지연 이득은 평균 2–3 NFE에서 나오고, 중점 평가 방식에 오차 원인이 있었습니다. |
 | 2026-11-09 | [You don't need long context 읽기: 압축은 정확도를 지키지만, 비용 이득은 계산 방식에 달려 있다](papers/no_long_context/) | 에이전트 문맥을 자주 압축하면 정확도는 거의 그대로이고 비용은 크게 준다는 NVIDIA 논문을, 표 17개를 다시 계산하고 비용 모델을 구조별로 재구성하며 읽었습니다. 정확도 결론은 표와 맞습니다. 비용 결론은 가정한 단가 비율과 기준선 가격 규칙에 크게 기댑니다. |
 | 2026-11-09 | [Stiffness Copilot 읽기: 방향별 임피던스 라벨은 믿을 만한가, 사용자 연구 주장은 어디까지 가나](papers/stiffness_copilot/) | IROS 2026 원격조작 임피던스 정책 Stiffness Copilot을, 사용자 연구 통계를 다시 계산하고 라벨 식과 접촉 모델을 numpy toy로 점검하며 읽었습니다. |
 | 2026-11-09 | [ResTacVLA 읽기: 촉각 잔차와 'surprise' 게이트는 무엇을 보고 있나](papers/restacvla/) | IROS 2026 촉각 VLA ResTacVLA를, 표를 다시 계산하고 게이트·잔차 가정을 numpy toy로 점검하며 읽었습니다. |

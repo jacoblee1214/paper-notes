@@ -1,0 +1,208 @@
+{
+  "headline_check": {
+    "force 16.7%": "(78-65)/78 = 16.67%: R2(정렬 Mc,Mp; 과제 Mp) 대 R4 (ID 힘)",
+    "pen 45.8%": "(48-26)/48 = 45.83%: R3(정렬 Mc,Ms; 과제 Ms) 대 R4 (ID 깊이)",
+    "no-alignment 대비 ID 깊이": "(37-26)/37 = 29.7%",
+    "no-alignment 대비 ID 힘": "(89-65)/89 = 27.0%",
+    "R1(복원 없음) 대비 ID 힘": "(60-65)/60 = -8.3% (음수면 R4가 나쁨)"
+  },
+  "pair_search": [
+    {
+      "base(행 A)": "R2",
+      "new(행 B)": "R4",
+      "split": "ID",
+      "metric": "Force",
+      "base": 78,
+      "new": 65,
+      "reduction_%": 16.67
+    },
+    {
+      "base(행 A)": "R3",
+      "new(행 B)": "R4",
+      "split": "ID",
+      "metric": "Pen",
+      "base": 48,
+      "new": 26,
+      "reduction_%": 45.83
+    }
+  ],
+  "significance": {
+    "Acc InfoNCE vs MSE, ID, rho=0.0": {
+      "n_eff": 2264.8,
+      "z": 5.84,
+      "p": 0.0
+    },
+    "Acc InfoNCE vs MSE, OOD-Size, rho=0.0": {
+      "n_eff": 2058.9,
+      "z": 1.3,
+      "p": 0.1926
+    },
+    "Acc InfoNCE vs MSE, OOD-Shape, rho=0.0": {
+      "n_eff": 1647.1,
+      "z": 0.63,
+      "p": 0.5255
+    },
+    "Acc RBS 15x vs 1x, ID, rho=0.0": {
+      "n_eff": 2264.8,
+      "z": 8.48,
+      "p": 0.0
+    },
+    "Acc InfoNCE vs MSE, ID, rho=0.05": {
+      "n_eff": 778.0,
+      "z": 3.42,
+      "p": 0.0006
+    },
+    "Acc InfoNCE vs MSE, OOD-Size, rho=0.05": {
+      "n_eff": 707.3,
+      "z": 0.76,
+      "p": 0.4451
+    },
+    "Acc InfoNCE vs MSE, OOD-Shape, rho=0.05": {
+      "n_eff": 565.9,
+      "z": 0.37,
+      "p": 0.7098
+    },
+    "Acc RBS 15x vs 1x, ID, rho=0.05": {
+      "n_eff": 778.0,
+      "z": 4.97,
+      "p": 0.0
+    },
+    "Acc InfoNCE vs MSE, ID, rho=0.2": {
+      "n_eff": 262.0,
+      "z": 1.98,
+      "p": 0.0472
+    },
+    "Acc InfoNCE vs MSE, OOD-Size, rho=0.2": {
+      "n_eff": 238.2,
+      "z": 0.44,
+      "p": 0.6577
+    },
+    "Acc InfoNCE vs MSE, OOD-Shape, rho=0.2": {
+      "n_eff": 190.6,
+      "z": 0.22,
+      "p": 0.829
+    },
+    "Acc RBS 15x vs 1x, ID, rho=0.2": {
+      "n_eff": 262.0,
+      "z": 2.88,
+      "p": 0.0039
+    }
+  },
+  "claims": {
+    "T2 'InfoNCE가 모든 지표·분할에서 우위'": {
+      "반례": "OOD-Shape Pen: No alignment 10 µm < InfoNCE 13 µm",
+      "값": true
+    },
+    "T1 '깊이 기하는 RBS가 강함(Pen)'": {
+      "값": {
+        "ID": {
+          "RBS Pen": 16,
+          "FEM Pen": 12
+        },
+        "OOD-Size": {
+          "RBS Pen": 18,
+          "FEM Pen": 14
+        },
+        "OOD-Shape": {
+          "RBS Pen": 20,
+          "FEM Pen": 6
+        }
+      },
+      "해석": "세 분할 모두 FEM의 깊이 오차가 더 작다. '기하는 RBS' 주장은 Acc에만 맞는다"
+    },
+    "T1 '실측 잠재가 시뮬과 비슷(comparable)'": {
+      "값": {
+        "ID": {
+          "RBS Acc/Pen/Force": [
+            64.3,
+            16,
+            65
+          ],
+          "Real Acc/Pen/Force": [
+            61.09,
+            26,
+            65
+          ]
+        },
+        "OOD-Size": {
+          "RBS Acc/Pen/Force": [
+            71.75,
+            18,
+            67
+          ],
+          "Real Acc/Pen/Force": [
+            51.84,
+            39,
+            59
+          ]
+        },
+        "OOD-Shape": {
+          "RBS Acc/Pen/Force": [
+            44.5,
+            20,
+            85
+          ],
+          "Real Acc/Pen/Force": [
+            45.25,
+            13,
+            63
+          ]
+        }
+      },
+      "해석": "OOD-Size Acc 51.8 대 71.8, 깊이 39 대 18 µm로 차이가 크다. ID Pen도 26 대 16 µm"
+    },
+    "T4 '규모 확대로 분류·깊이 개선'": {
+      "깊이 ID (1x→30x)": [
+        34,
+        38,
+        34,
+        33
+      ],
+      "Acc ID (1x→30x)": [
+        58.78,
+        65.32,
+        70.81,
+        70.85
+      ],
+      "해석": "분류 Acc는 58.8→70.9로 오르지만 깊이는 34→33 µm로 변하지 않는다. 텍스트의 '깊이 추정 개선'과 어긋난다"
+    },
+    "T3 'full 모델이 최고 또는 차선'": {
+      "R4가 최고 아닌 셀(R1–R4, 3분할×3지표)": null,
+      "R4가 차선 밖인 셀": [
+        {
+          "split": "ID",
+          "metric": "Force",
+          "R4": 65,
+          "R4 순위(1=최고)": 3,
+          "앞선 행": [
+            "R1",
+            "R3"
+          ]
+        },
+        {
+          "split": "OOD-Shape",
+          "metric": "Pen",
+          "R4": 13,
+          "R4 순위(1=최고)": 3,
+          "앞선 행": [
+            "R1",
+            "R3"
+          ]
+        }
+      ],
+      "셀 수": 2
+    }
+  },
+  "significance_note": "샘플 단위 검정은 궤적 내 상관을 무시하므로 과대평가다. 궤적당 샘플 수 m≈39.2, ρ는 알 수 없으므로 0–0.2로 훑었다. 시드 반복 결과가 없어 학습 분산은 포함되지 않는다.",
+  "effect_size_log_mae": {
+    "InfoNCE ID Pen 26(9-59) vs MSE ID Pen 35(21-66)": {
+      "d_log": -0.331
+    },
+    "InfoNCE ID Pen 26(9-59) vs No align ID Pen 37(12-82)": {
+      "d_log": -0.312
+    },
+    "InfoNCE ID Force 65(37-118) vs MSE ID Force 68(38-122)": {
+      "d_log": -0.065
+    }
+  }
+}

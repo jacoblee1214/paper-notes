@@ -1,0 +1,62 @@
+{
+  "i_identity_and_effrank": {
+    "gauss_N256_M64": {
+      "PR_trace_formula": 51.092,
+      "PR_collision_entropy_eig": 51.092,
+      "rel_err_trace_vs_eig": 4.17e-16,
+      "rel_err_NxN_gram_vs_eig": 1.39e-16,
+      "PR_over_M": 0.7983,
+      "effective_rank_eq11_12": 61.7954
+    },
+    "gauss_N256_M512": {
+      "PR_trace_formula": 170.9419,
+      "PR_collision_entropy_eig": 170.9419,
+      "rel_err_trace_vs_eig": 6.65e-16,
+      "rel_err_NxN_gram_vs_eig": 3.33e-16,
+      "PR_over_M": 0.3339,
+      "effective_rank_eq11_12": 237.2254
+    },
+    "lowrank8_plus_noise_N256_M512": {
+      "PR_trace_formula": 7.6423,
+      "PR_collision_entropy_eig": 7.6423,
+      "rel_err_trace_vs_eig": 8.14e-16,
+      "rel_err_NxN_gram_vs_eig": 1.05e-15,
+      "PR_over_M": 0.0149,
+      "effective_rank_eq11_12": 13.7822
+    }
+  },
+  "ii_PR_vs_effrank_spectra": {
+    "flat_8": {
+      "PR_on_lambda": 8.0,
+      "effrank_on_sigma": 8.0
+    },
+    "power_0.5": {
+      "PR_on_lambda": 13.811,
+      "effrank_on_sigma": 54.99
+    },
+    "power_1.0": {
+      "PR_on_lambda": 2.453,
+      "effrank_on_sigma": 29.118
+    },
+    "one_big_63_small": {
+      "PR_on_lambda": 1.339,
+      "effrank_on_sigma": 40.325
+    }
+  },
+  "iii_scale": {
+    "PR_scale_invariant_max_abs_diff": 5.68e-14,
+    "minmax_delta_scale_invariant_max_abs_diff": 1.33e-15,
+    "delta_range": [
+      0.0,
+      1.0
+    ],
+    "note": "Eq.15 min–max는 층 수 18에서 가장 작은/큰 층을 항상 0/1로 보냄. 상대 순위만 반영."
+  },
+  "iv_timing_ms_single_run_N256_M2048": {
+    "trace_MxM_gram": 68.4,
+    "trace_NxN_gram": 3.2,
+    "eigvalsh_MxM": 984.6,
+    "svd_values": 21.3,
+    "note": "단일 CPU 1스레드, 참고용. 논문의 Jetson 측정이 아님."
+  }
+}

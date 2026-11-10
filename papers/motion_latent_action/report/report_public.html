@@ -1,0 +1,1064 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Motion-Focused Latent Action 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig3"] { max-width: 80%; }
+img[src*="toy_"], img[src*="libero_"], img[src*="robotwin_"] { max-width: 88%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.6pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>Motion-Focused Latent Action: 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 그림은 라이선스(arXiv 비독점 배포) 때문에 제외했습니다. 원문 https://arxiv.org/abs/2606.18955 · arXiv:2606.18955v2 · IROS 2026 채택 · Xu, Zhang, Wang, Wang, Yu · 공식 코드 있음(shuiyigong/Motion-Focused-Latent-Action @ fd614f7, Apache-2.0) · 분석일 2026-11-10</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 사람 1인칭 영상에서 움직임을 담는 이산 잠재 행동을 만들고(손 마스크로 행동 경로와 배경 경로를 나눈 이중 코드북 VQ-VAE), 그 토큰으로 VLM을 사전학습한 뒤, 소량의 시연으로 VLM과 flow-matching 헤드를 함께 미세조정합니다(01 §2).</li>
+<li><strong>표의 평균은 맞지만 헤드라인 차이는 작습니다:</strong> LIBERO 평균 91.8은 villa-x 90.1보다 1.6점 높은데, 합산 Fisher p = 0.30로 유의하지 않습니다. RoboTwin 67.7은 π0 65.2(p = 0.26), UniVLA 63.6(보정 p = 0.12)과 구별되지 않습니다(03 §2).</li>
+<li><strong>&quot;사람 영상만으로 사전학습&quot;은 헤드라인 LIBERO 실험과 맞지 않습니다.</strong> IV-A의 LIBERO는 BridgeV2 <strong>로봇</strong> 영상으로 잠재 행동과 VLM을 사전학습했습니다. 사람 영상은 RoboTwin과 실물에서만 씁니다(01 §4.1, 04 C1).</li>
+<li><strong>기준선 한 개는 원 보고치보다 약합니다:</strong> UniVLA(Bridge)를 저자가 재현한 값은 88.1이고, UniVLA 원 논문의 Bridge 행은 92.5입니다. LIBERO 기준선 17칸은 200회 가정에서 정수가 되지 않아 시행 프로토콜이 다릅니다(03 §1.3, 04 C5).</li>
+<li><strong>&quot;움직임에 집중&quot;은 직접 검증되지 않았습니다:</strong> 마스크 제거, 배경 경로 제거 ablation이 없습니다. 코드에서 전체 재구성 경로는 마스크 없이 전역 MSE로 학습됩니다. 토이에서 전경 마스크 안에도 카메라 이동 정보가 남았습니다(판독 0.58 대 기준선 0.22)(04 D4, 03 §4).</li>
+<li><strong>공개 코드와 논문의 차이:</strong> LIBERO 설정이 손목 DINO를 항상 쓰고, 쌍 간격이 1초가 아니라 9프레임이며(기본 창 10), 이미지만 자르고 마스크는 자르지 않습니다. 기본 설정은 VLM 동결입니다(04 D8, D9, D14, D17).</li>
+<li><strong>구현:</strong> 이 맥에서 공식 재현은 불가능합니다(CUDA 전제, 마스크와 체크포인트 미공개). 아이디어 재구현은 중간 난이도입니다(04 §4). 가장 값싼 검증은 마스크 누수 토이와 누수 probe입니다(05 R1, A3).</li>
+</ol>
+<p><img src="figures/libero_wilson.png" alt="libero" /></p>
+<p class="cap">그림 1(직접 그림): LIBERO 과제군별 성공률과 Wilson 95% 구간. 과제군당 200회 가정이고, 기준선 행은 논문 보고치 또는 저자 재현치입니다.</p>
+<p><img src="figures/robotwin_tasks.png" alt="robotwin" /></p>
+<p class="cap">그림 2(직접 그림): RoboTwin 2.0 과제별 성공률. 과제당 100회 가정입니다.</p>
+<p><img src="figures/toy_leakage.png" alt="toy" /></p>
+<p class="cap">그림 3(직접 그림, 토이): 프레임 차이 입력별 코드 판독. 전경 마스크가 밝기를 줄여도 카메라 이동 정보가 마스크 안에 남습니다. "전경 평균 제거"는 논문에 없는 가설적 보정입니다.</p>
+<p><img src="figures/toy_k_sweep.png" alt="k" /></p>
+<p class="cap">그림 4(직접 그림, 토이): 코드 혼잡도 대 행동 판독. 전체 차이는 K가 낮을 때 행동을 잘 담지 못하고, 전경 마스크는 K = 4에서도 행동을 판독합니다.</p>
+</section>
+<section class="chapter"><h1>01. 논문 분석: Motion-Focused Latent Action</h1>
+<p><em>Motion-Focused Latent Action Enables Cross-Embodiment VLA Training from Human EgoVideos</em> (Xu, Zhang, Wang, Wang, Yu; IROS 2026 채택, arXiv:2606.18955 v2, 2026-07-02). 원문은 arXiv:2606.18955v2 PDF(https://arxiv.org/pdf/2606.18955v2, 8쪽, IEEE 2단)이고, 분석에는 PDF 텍스트 추출본을 썼습니다. 절·식·표·그림 번호는 원문 기준입니다.</p>
+<h2>0. 읽는 순서와 한 줄 결론</h2>
+<p>논문은 사람 1인칭 영상에서 <strong>움직임만 담는 이산 잠재 행동</strong>(hybrid disentangled VQ-VAE)을 만들고, 그 코드를 VLM의 다음 토큰 목표로 사전학습한 뒤, 소량의 로봇 시연으로 VLM과 flow-matching action expert를 함께 미세조정합니다. 주장의 핵심은 &quot;마스크로 배경과 움직임을 분리하면 잠재 행동이 로봇과 사람에서 같은 의미를 가진다&quot;는 것입니다. 그런데 근거는 시뮬레이션 두 종(LIBERO, RoboTwin)과 실물 3과제, 그리고 CKA 한 쌍에 그칩니다. 분리 효과를 직접 떼어 보는 ablation(마스크 제거, 배경 경로 제거)은 없습니다.</p>
+<h2>1. Abstract와 서론</h2>
+<ul>
+<li><strong>문제 설정:</strong> VLA 학습에는 행동 라벨이 붙은 로봇 데이터가 많이 필요합니다. 사람 영상은 많지만 행동 라벨이 없습니다. 기존 사람-데이터 방식(EgoMimic, MotionTrans, H-RDT)은 AR/VR 손 자세 라벨을 씁니다(II-C).</li>
+<li><strong>문제 진단:</strong> VQ-VAE형 잠재 행동(LAPA, IGOR)은 배경 변화와 카메라 이동 같은 <strong>작업과 무관한 변화</strong>를 잡습니다(I, 2문단). UniVLA는 언어로 작업 중심 움직임을 유도하지만, 사람 영상의 다양성 때문에 언어 신호만으로는 분리가 어렵다고 주장합니다.</li>
+<li><strong>제안:</strong> (1) 전경(손·팔) 마스크로 행동 경로를, 배경 마스크로 배경 경로를 감독하는 이중 코드북 VQ-VAE. (2) 사람 영상으로 VLM을 사전학습. (3) 미세조정 때 VLM은 행동 의도를, 고정된 DINOv2는 현재 상태를 맡는 <strong>의도-인지 분리</strong>(intention-perception decoupling).</li>
+<li><strong>초록의 주장:</strong> &quot;사람 영상만으로 사전학습&quot;하고 &quot;약 50 궤적&quot;으로 미세조정하며, 대규모 주석 데이터로 학습한 VLA와 &quot;경쟁력 있다&quot;고 합니다.</li>
+</ul>
+<h2>2. 방법 (Sec. III)</h2>
+<h3>2.1 Hybrid Disentangled VQ-VAE (III-B, Fig. 2)</h3>
+<ul>
+<li><strong>입력:</strong> 1초 간격으로 고른 인접 프레임 쌍 V. 프레임은 224×224로 맞추고, 동결한 DINOv2 ViT-B/14-reg의 패치 특징 F ∈ R^{T×N×D}를 씁니다(III-B.1, IV 서두).</li>
+<li><strong>인코더:</strong> 공간-시간 transformer. 학습 가능한 질의 두 세트 Q_act(4개)와 Q_bg(4개)를 패치와 이어 붙입니다.</li>
+<li><strong>이중 양자화:</strong> 행동 코드북과 배경 코드북, 각각 크기 16(III-B.2). 쌍마다 행동 토큰 4개를 씁니다. 즉 행동 어휘는 16개이고 한 쌍의 행동은 16⁴ 조합 중 하나입니다.</li>
+<li><strong>디코더 세 경로</strong>(III-B.3):
+<ul>
+<li>전체 경로: z_act, z_bg, 첫 프레임 특징으로 목표 특징 맵 전체를 재구성합니다.</li>
+<li>행동 경로: z_act와 첫 프레임만 씁니다. 손 마스크 안에서만 오차를 계산합니다.</li>
+<li>배경 경로: z_bg만 씁니다. 배경 영역에서만 오차를 계산합니다.</li>
+</ul>
+</li>
+<li><strong>마스크:</strong> 사람 데이터는 SAM2로 손 마스크를 만듭니다. 로봇 데이터(Bridge, LIBERO 실험)는 RoboEngine으로 로봇 마스크를 만듭니다(III-B.3, IV-A). 마스크는 학습 때만 씁니다.</li>
+<li><strong>손실</strong> (Eq. 1): L_total = λ_recon L_recon + λ_vq L_vq + λ_commit L_commit. L_recon은 전경 오차, 배경 오차, 전체 오차의 합입니다. λ 값은 본문에 없습니다.</li>
+</ul>
+<h3>2.2 VLM 사전학습 (III-C, Eq. 2)</h3>
+<ul>
+<li>잠재 행동 코드를 UniVLA 방식으로 VLM 어휘에 넣습니다. 쌍의 목표 토큰 K = 4를 자기회귀로 예측하는 음의 로그우도입니다.</li>
+<li>백본은 Prismatic-7B입니다(III-C 마지막 문장). 사전학습 데이터 규모, 스텝 수, 배치 크기는 본문에 없습니다.</li>
+</ul>
+<h3>2.3 하위 과제 적응 (III-D, Eq. 3–5)</h3>
+<ul>
+<li>입력 맥락 F_full = Concat(f_act, f_obs, f_proprio)(Eq. 3). f_act는 VLM 마지막 층 은닉 상태의 평균, f_obs는 동결 DINOv2 특징, f_proprio는 로봇 상태입니다.</li>
+<li>action expert는 처음부터 학습하는 flow-matching 디코더입니다. 손실은 Eq. 4의 속도장 회귀입니다.</li>
+<li>의도 예측을 살리려고 교차 엔트로피 L_intent를 더합니다(Eq. 5, λ_intent 값 없음). VLM은 LoRA로 미세조정합니다(III-D).</li>
+<li><strong>설계 의도:</strong> VLM 시각 임베딩 대신 DINOv2 특징을 쓰면 &quot;환각&quot;이 줄어든다고 주장합니다(III-D 마지막 문단, 예: 용기가 닫혀 있는데 넣으려 함).</li>
+</ul>
+<h2>3. 실험 (Sec. IV)</h2>
+<table>
+<thead>
+<tr>
+<th>실험</th>
+<th>사전학습 데이터</th>
+<th>평가</th>
+<th>미세조정 데이터</th>
+<th>기준선</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IV-A LIBERO</td>
+<td>BridgeV2 <strong>3인칭 로봇 영상만</strong>(라벨 없음)</td>
+<td>LIBERO 4개 과제군, 과제당 20회(Table I)</td>
+<td>LIBERO 과제당 사람 시연 50개, 3인칭만</td>
+<td>LAPA, DP, OpenVLA, SpatialVLA, π0, π0-FAST, villa-x, UniVLA(Table I)</td>
+</tr>
+<tr>
+<td>IV-B RoboTwin 2.0</td>
+<td>EgoDex 영상(사람, 라벨 없음)</td>
+<td>10과제(Table II), 시행 수 명시 없음</td>
+<td>과제당 50 궤적, 손목 카메라 추가</td>
+<td>RDT, π0, ACT, DP, UniVLA; 절제: w/o DINO, Freeze</td>
+</tr>
+<tr>
+<td>IV-B 실물 ARX R5</td>
+<td>EgoDex</td>
+<td>3과제, 시행 수 명시 없음(Fig. 3c)</td>
+<td>과제당 50 궤적, 20k 스텝</td>
+<td>UniVLA</td>
+</tr>
+<tr>
+<td>IV-C CKA</td>
+<td>BridgeV2 + FurnitureBench 표현</td>
+<td>토큰 중심 CKA, 2만 쌍</td>
+<td>—</td>
+<td>UniVLA 잠재 행동</td>
+</tr>
+<tr>
+<td>IV-D 시각화</td>
+<td>BridgeV2 + EgoDex</td>
+<td>같은 토큰을 받는 쌍 예시(Fig. 5)</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>결과 요약</strong></p>
+<ul>
+<li><strong>LIBERO (Table I):</strong> 평균 91.8. villa-x 90.1, UniVLA(Bridge) 88.1이고, w/o DINO 85.4입니다. 과제군별로는 Spatial 95.5, Object 94.0, Goal 93.5, Long 84.0입니다. Goal은 villa-x보다 2.0, Long은 9.5 높습니다(IV-A).</li>
+<li><strong>RoboTwin (Table II):</strong> 평균 67.7. π0 65.2, UniVLA 63.6, w/o DINO 62.8, Freeze 52.4, RDT 52.5입니다.</li>
+<li><strong>실물 (Fig. 3c):</strong> 정확한 수치는 그림에만 있습니다. 읽은 값은 UniVLA 0.30/0.35/0.50, 제안 0.75/0.80/0.75입니다(병에 올리기/코드 뽑기/수건 접기).</li>
+<li><strong>CKA (Fig. 4b):</strong> UniVLA 0.8659±0.0064, 제안 0.9139±0.0099. 본문은 &quot;유의하게 높다&quot;고 씁니다.</li>
+<li><strong>Fig. 5:</strong> 사람 손과 로봇 팔이 같은 토큰을 받은 예 3개(Move Forward, Move Right, Lift Object)입니다. 정성적 예시입니다.</li>
+</ul>
+<p><strong>논문이 스스로 밝힌 한계</strong> (V): 이산 행동 코드는 큰 의도는 잡지만 정밀 제어에는 표현력이 부족하고, 다중 스케일 잠재를 향후 과제로 둡니다.</p>
+<h2>4. 비판적 해석</h2>
+<ol>
+<li><strong>&quot;사람 영상만으로&quot;는 두 실험에만 해당합니다.</strong> 초록과 서론은 사람 영상 사전학습을 강조하지만, IV-A(LIBERO, 과제군 평균 91.8이라는 헤드라인 수치)는 BridgeV2 <strong>로봇</strong> 영상으로 잠재 행동과 VLM을 사전학습했습니다(IV-A 1문단: &quot;we train the hybrid disentangled VQ-VAE and the VLM backbone using only the third-view video data from the BridgeV2 dataset[24], which features a WindowX manipulator&quot;). 사람 영상은 IV-B(RoboTwin)와 실물에서만 씁니다. 그래서 &quot;로봇 데이터 없이&quot;라는 주장은 헤드라인 표에 대해서는 맞지 않습니다.</li>
+<li><strong>&quot;50 궤적&quot;은 과제당 수치입니다.</strong> LIBERO는 과제 10개마다 50개씩(군당 500개)이고, RoboTwin과 실물도 과제당 50개입니다. 과제별로 따로 미세조정하는지(IV-B &quot;30k training steps for each task&quot;)도 본문에서 분명하지 않습니다.</li>
+<li><strong>운동 집중(motion focus)을 직접 검증하지 않았습니다.</strong> 마스크 없는 학습, 전체 경로 제거, 배경 경로 제거의 ablation이 없습니다. 잠재 행동에 카메라 이동이나 배경이 얼마나 남는지도 재지 않았습니다. &quot;분리되었다&quot;는 근거는 Fig. 5의 정성적 예 3개와, 도메인 부분공간을 지운 뒤의 CKA 하나입니다. 코드 대조(04 §2)에서 전체 경로가 마스크 없이 전역 MSE를 쓰는 점을 확인했습니다. 이 경로는 카메라 이동 정보가 행동 코드에 들어갈 통로가 됩니다.</li>
+<li><strong>기준선 재구현 문제.</strong> UniVLA(Bridge) 행은 &quot;엄격히 재현했다&quot;고 적혀 있고 값은 88.1입니다. 그런데 UniVLA 원 논문의 Bridge 행은 평균 92.5입니다(arXiv:2505.06111 Table I). 따라서 저자 재현이 원 보고치보다 4.4점 낮습니다. π0, π0-FAST, villa-x, SpatialVLA, OpenVLA, DP, LAPA 행은 villa-x 논문의 값과 일치합니다. 그중 π0-FAST의 Long 60.2%는 200회 기준으로 정수가 아니어서 다른 시행 수에서 나온 값입니다(03 §1).</li>
+<li><strong>이득의 크기와 통계.</strong> 평균 차이는 villa-x 대비 1.6점입니다. 시드 변동이 보고되지 않았고, 이항 검정으로도 유의하지 않습니다(03 §2). UniVLA(Bridge) 대비는 방향이 맞고 p ≈ 0.02이지만, 그 기준선은 저자 재현값입니다.</li>
+<li><strong>절제(IV-B Freeze)의 해석.</strong> 동결 VLM이 RDT와 비슷하니(52.4 대 52.5) &quot;VLM 사전학습이 매우 효과적&quot;이라고 씁니다. 같은 구조에서 사전학습을 뺀 대조가 없어서, RDT와의 비슷함은 사전학습 효과의 증거가 되지 못합니다.</li>
+<li><strong>의도-인지 분리 효과.</strong> w/o DINO는 RoboTwin에서 −4.9점, LIBERO에서 −6.4점입니다. 단일 시드로 보이며, 이 결과는 분리 주장을 가장 직접 지지하는 증거입니다. 다만 코드의 LIBERO 경로는 주 시점 VLM 은닉 상태와 손목 DINO를 함께 씁니다(04 §2, D17). 논문 설명과 맞지 않아 실제 분리 방식은 확인이 필요합니다.</li>
+<li><strong>시간 간격.</strong> &quot;1초 간격&quot;이라고 했지만 코드는 창 크기 10을 기본값으로 써서 쌍 간격이 9프레임입니다(04 D8). 영상 fps가 9가 아니면 1초가 아닙니다.</li>
+<li><strong>재현 세부.</strong> λ 값, 마스크 임계값, K-means 같은 코드북 초기화, 사용률, 학습 스텝과 배치(LAM), LIBERO 정책 헤드 종류(논문은 UniVLA의 자기회귀 헤드라고 씀, 코드는 MLP+tanh L1) 등이 본문에 없거나 코드와 다릅니다.</li>
+</ol>
+<h2>5. 버전과 권리 (v1 → v2)</h2>
+<ul>
+<li><strong>텍스트 차이:</strong> 단어 단위 비교(v1, v2 PDF 텍스트 추출본)에서 두 가지뿐입니다. (1) v2 초록에 &quot;Code is available at https://github.com/shuiyigong/Motion-Focused-Latent-Action.&quot; 문장이 추가되었습니다. (2) 하이픈 줄바꿈 &quot;latent-action-based&quot;가 &quot;latent-actionbased&quot;로 바뀌었습니다(조판 차이). 본문, 표, 참고문헌은 같습니다.</li>
+<li><strong>그림·표:</strong> 텍스트로는 비교할 수 없었습니다. 두 판의 그림 개수와 페이지 수(8쪽)는 같습니다.</li>
+<li><strong>arXiv 기록:</strong> v1 2026-06-17, v2 2026-07-02. 댓글란은 &quot;Accepted by IROS 2026&quot;입니다.</li>
+<li><strong>권리:</strong> arXiv 초록 페이지의 라이선스 링크는 <code>arxiv.org/licenses/nonexclusive-distrib/1.0/</code>입니다(비독점 배포, CC BY 아님). PDF에는 © 표시나 IEEE 저작권 문구가 없습니다(<code>grep</code>으로 확인). 따라서 <strong>논문 그림은 개인용 리포트와 PPT에만 넣고, 공개 산출물에는 넣지 않습니다.</strong></li>
+</ul>
+<h2>6. 이 논문의 위치</h2>
+<p>사람 영상에서 잠재 행동을 뽑아 VLA를 사전학습한다는 점에서 DreamX(사람 1인칭 영상 → 잠재 행동 4토큰, 확산 백본)와 가장 가깝습니다. 학습 방식은 VQ 재구성이고, 마스크로 움직임을 분리한다는 점이 새롭습니다. 자세한 관계는 02 §3에 있습니다.</p>
+</section>
+<section class="chapter"><h1>03. 수치 재계산, 유의성, 유도와 toy 검증</h1>
+<p>재계산 스크립트는 <code>analysis/table_check.py</code>(→ <code>table_check_results.json</code>), <code>analysis/motion_toy.py</code>(→ <code>motion_toy_results.json</code>)입니다. 둘 다 numpy 단일 스레드로 수 초 안에 돕니다. 시행 수는 논문에 전부 적혀 있지 않아서, <strong>보고된 %가 정수 성공 수로 떨어지는지</strong>로 추정했고 가정을 표에 같이 적었습니다.</p>
+<h2>1. 표 재계산</h2>
+<h3>1.1 시행 수 추정</h3>
+<table>
+<thead>
+<tr>
+<th>표</th>
+<th>보고된 형식</th>
+<th>추정 시행 수</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Table I (LIBERO)</td>
+<td>과제군 평균, 0.5% 단위</td>
+<td>과제군당 200회(과제 10 × 20회)</td>
+<td>본문 IV-A &quot;Each task is evaluated 20 times&quot;, 과제 10개. 우리 행 8개 값 모두 200회에서 정수</td>
+</tr>
+<tr>
+<td>Table II (RoboTwin)</td>
+<td>과제별 정수 %</td>
+<td>과제당 100회</td>
+<td>모든 칸이 정수 %이고 홀수 값이 있어 50의 배수면 안 됨. 시행 수는 명시되지 않음</td>
+</tr>
+<tr>
+<td>Fig. 3c (실물)</td>
+<td>0.05 단위</td>
+<td>과제당 20회</td>
+<td>값이 모두 5%의 배수. 시행 수는 명시되지 않음</td>
+</tr>
+</tbody>
+</table>
+<h3>1.2 평균 재계산</h3>
+<ul>
+<li><strong>LIBERO:</strong> 제안 방법 (95.5+94.0+93.5+84.0)/4 = 91.75 → 보고 91.8. villa-x 90.125 → 90.1. UniVLA(Bridge) 88.125 → 88.1. 나머지 기준선도 반올림 안에서 일치합니다.</li>
+<li><strong>RoboTwin:</strong> 과제별 값으로 계산한 평균이 보고된 8개 평균과 모두 일치합니다(제안 67.7, π0 65.2, UniVLA 63.6, w/o DINO 62.8, Freeze 52.4, RDT 52.5, ACT 51.2, DP 49.7).</li>
+<li><strong>결론:</strong> 표 안의 평균은 모두 맞습니다.</li>
+</ul>
+<h3>1.3 기준선 행의 정수성 점검 (중요)</h3>
+<p>LIBERO 200회 가정에서 보고된 값이 정수 성공 수로 떨어지지 않는 칸이 <strong>17개</strong> 있습니다. 대부분 π0-FAST, SpatialVLA, OpenVLA, LAPA, DP 행입니다. 예를 들어 π0-FAST Long 60.2%는 200회에서 120.4회입니다. 500회로 바꾸면 이 칸은 정수가 되지만, 전체 40칸 중 <strong>16칸은 500회에서도 정수가 되지 않고</strong> 그중 5칸(OpenVLA Spatial·Long, DP Spatial·Goal, SpatialVLA Object)은 200회와 500회 모두에서 정수가 아닙니다. 따라서 이 기준선 값들은 한 가지 시행 수가 아니라 <strong>다른 평가 프로토콜</strong>(villa-x 논문 등)에서 가져온 것으로 보입니다. 이 기준선과의 비교는 시행 수가 같다는 가정이 깨진 상태입니다.</p>
+<table>
+<thead>
+<tr>
+<th>기준선</th>
+<th>출처 표시</th>
+<th>확인</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>villa-x, π0, π0-FAST, SpatialVLA, OpenVLA, LAPA, DP</td>
+<td>본문: π0는 villa-x 보고치 사용</td>
+<td>villa-x 논문 Table(arXiv:2507.23682) 행과 값이 같음(villa-x, π0 reimpl., π0-FAST, SpatialVLA, OpenVLA 행 확인)</td>
+</tr>
+<tr>
+<td>UniVLA-Bridge</td>
+<td>본문: &quot;strictly reproduced on BridgeV2&quot;</td>
+<td>UniVLA 원 논문(arXiv:2505.06111, Table I)의 Bridge 행은 95.2/95.4/91.9/87.5/<strong>92.5</strong>이고, 논문 값은 90.0/86.0/90.5/86.0/<strong>88.1</strong>. 저자 재현은 원 보고치보다 4.4점 낮음</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 유의성 검정</h2>
+<p>방법은 다음과 같습니다. 과제군(또는 과제)별 Fisher 정확 검정, 층화 Mantel–Haenszel(CMH, 연속성 보정), 합산 Fisher를 계산했고, 비교 대상이 여러 개인 경우 Holm 보정을 적용했습니다. 모든 검정은 과제군 내 시드 변동을 포함하지 않습니다. 시드가 하나라면 여기서 나오는 p 값은 <strong>시행 샘플링 변동만</strong> 반영합니다.</p>
+<h3>2.1 LIBERO (과제군당 200회 가정, 합계 800회)</h3>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>평균 차이(점)</th>
+<th>합산 Fisher p</th>
+<th>CMH p (과제군 층화)</th>
+<th>Holm p (기준선 8개)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>제안 대 villa-x</td>
+<td>+1.6</td>
+<td>0.30</td>
+<td>0.28</td>
+<td>0.30</td>
+</tr>
+<tr>
+<td>제안 대 UniVLA(저자 재현)</td>
+<td>+3.6</td>
+<td>0.020</td>
+<td>0.020</td>
+<td>0.039</td>
+</tr>
+<tr>
+<td>제안 대 π0-FAST*</td>
+<td>+6.3</td>
+<td>1×10⁻⁴</td>
+<td>5×10⁻⁵</td>
+<td>3×10⁻⁴</td>
+</tr>
+<tr>
+<td>제안 대 π0*</td>
+<td>+10.6</td>
+<td>~0</td>
+<td>~0</td>
+<td>~0</td>
+</tr>
+<tr>
+<td>제안 대 w/o DINO (절제)</td>
+<td>+6.4</td>
+<td>8×10⁻⁵</td>
+<td>8×10⁻⁵</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>*시행 수 가정이 깨지는 행(§1.3). 과제군별로 보면 villa-x 대비 Long만 p = 0.026(Fisher)이고, Goal은 p = 0.57입니다. 나머지 과제군은 유의하지 않습니다.</p>
+<p><strong>Wilson 95% 구간(합산):</strong> 제안 91.8 [89.6, 93.5], villa-x 90.1 [87.9, 92.0]. 두 구간이 겹칩니다. 과제군별 구간은 Spatial [91.7, 97.6], Object [89.8, 96.5], Goal [89.2, 96.2], Long [78.3, 88.4]입니다.</p>
+<h3>2.2 RoboTwin (과제당 100회 가정, 합계 1000회)</h3>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>차이(점)</th>
+<th>합산 Fisher p</th>
+<th>CMH p (과제 층화)</th>
+<th>Holm p (7개)</th>
+<th>과제별 부호 검정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>제안 대 π0</td>
+<td>+2.5</td>
+<td>0.26</td>
+<td>0.18</td>
+<td>0.26</td>
+<td>—</td>
+</tr>
+<tr>
+<td>제안 대 UniVLA</td>
+<td>+4.1</td>
+<td>0.060</td>
+<td>0.032</td>
+<td>0.12</td>
+<td>7승 3패, p = 0.34</td>
+</tr>
+<tr>
+<td>제안 대 w/o DINO</td>
+<td>+4.9</td>
+<td>0.024</td>
+<td>0.009</td>
+<td>0.073</td>
+<td>—</td>
+</tr>
+<tr>
+<td>제안 대 Freeze</td>
+<td>+15.3</td>
+<td>~0</td>
+<td>~0</td>
+<td>~0</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>RDT, ACT, DP와의 차이는 모두 p &lt; 10⁻¹⁴입니다(표 생략).</p>
+<p><strong>해석:</strong> 제안은 RoboTwin에서 π0, UniVLA와 <strong>통계적으로 구별되지 않습니다.</strong> &quot;comparable&quot; 표현은 맞지만 &quot;앞선다&quot;고 쓰기는 어렵습니다. 의도-인지 분리(w/o DINO 대비)는 층화 검정에서 nominal p = 0.009이고 보정 후에는 0.073입니다.</p>
+<h3>2.3 실물 (과제당 20회 가정, 합계 60회)</h3>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>제안</th>
+<th>UniVLA</th>
+<th>Fisher p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>병을 접시에 올리기</td>
+<td>15/20</td>
+<td>6/20</td>
+<td>0.010</td>
+</tr>
+<tr>
+<td>전선 뽑기</td>
+<td>16/20</td>
+<td>7/20</td>
+<td>0.0095</td>
+</tr>
+<tr>
+<td>수건 접기</td>
+<td>15/20</td>
+<td>10/20</td>
+<td>0.19</td>
+</tr>
+<tr>
+<td>합계</td>
+<td>46/60</td>
+<td>23/60</td>
+<td>3.9×10⁻⁵ (CMH OR 5.3, p 5.7×10⁻⁵)</td>
+</tr>
+</tbody>
+</table>
+<p>과제별 Holm 보정 p는 0.029, 0.029, 0.19입니다. 과제당 20회와 1회 시드라는 가정 아래에서 방향은 분명하지만, 표본이 작아서 크기 추정은 불안정합니다.</p>
+<h3>2.4 CKA (Fig. 4b)</h3>
+<p>평균 차이는 0.048입니다. 부트스트랩 표준편차를 표본 표준편차로 본다면 Welch t ≈ 29입니다. 그러나 이 표준편차는 <strong>토큰 중심의 재표본 변동</strong>입니다. 학습 시드 변동이 아니므로 &quot;유의하게 높다&quot;는 주장을 뒷받침하지 못합니다. 또한 이 분석은 BridgeV2와 FurnitureBench 두 로봇 데이터셋만 사용합니다. 사람 영상은 들어 있지 않습니다.</p>
+<h3>2.5 검출력</h3>
+<ul>
+<li>91.8 대 90.1(약 1.7점 차이)을 80% 검정력, 양측 α = 0.05로 가리려면 <strong>팔당 약 4,470회</strong>가 필요합니다. 논문 전체 LIBERO 시행은 800회입니다.</li>
+<li>3.7점 차이는 팔당 약 1,040회, 10점 차이는 약 285회가 필요합니다.</li>
+<li>즉 이 실험 규모로 확인할 수 있는 것은 큰 차이(약 10점 이상)뿐입니다. 이 논문의 LIBERO 평균 개선은 그보다 훨씬 작습니다.</li>
+</ul>
+<h2>3. 유도 (검증한 식)</h2>
+<h3>3.1 Wilson 구간</h3>
+<p>p̂ = k/n, z = 1.96일 때 중심 (p̂ + z²/2n)/(1 + z²/n), 반폭 z√(p̂(1−p̂)/n + z²/4n²)/(1 + z²/n). 구현은 <code>wilson()</code>에 있습니다. 극단 성공률(p̂ ≈ 0.9)에서도 Wald보다 안정적입니다.</p>
+<h3>3.2 층화 Mantel–Haenszel</h3>
+<p>과제군 g마다 2×2 표 (a_g, b_g, c_g, d_g), n_g = a+b+c+d일 때</p>
+<ul>
+<li>공통 오즈비 OR_MH = Σ a_g d_g/n_g ÷ Σ b_g c_g/n_g</li>
+<li>χ² = (|Σa_g − Σ E_g| − 0.5)² / Σ V_g, E_g = r_g c_g/n_g, V_g = r_g(n_g−r_g)c_g(n_g−c_g)/(n_g²(n_g−1))</li>
+</ul>
+<p>LIBERO 결과에서 제안 대 UniVLA의 OR_MH = 1.50, 제안 대 villa-x는 1.23입니다.</p>
+<h3>3.3 Holm</h3>
+<p>m개 p 값을 정렬해 p_(i) × (m − i + 1)의 누적 최댓값을 취합니다.</p>
+<h3>3.4 전경 마스크 기준(임계값 0.5)의 실제 의미</h3>
+<p>코드(<code>lam.py</code>)는 16×16 패치 격자에서 마스크 면적 비율 a를 <code>attention = (5·a + 0.3)/5.3</code>으로 계산합니다. 이 식은 가중치처럼 보이지만 <code>shared_step</code>에서 임계값 0.5로 이진화합니다. 따라서 패치가 전경이 되는 조건은 (5a + 0.3)/5.3 &gt; 0.5 ⇔ <strong>a &gt; 0.47</strong>입니다. 즉 패치 면적의 47% 이상이 마스크여야 전경 손실에 들어갑니다. 논문은 &quot;foreground&quot;라고만 씁니다. 이 임계값은 논문에 없습니다(04 D3).</p>
+<h3>3.5 자르기로 인한 이미지-마스크 어긋남</h3>
+<p>코드의 <code>random_resized_crop</code> 설정은 <code>scale=[0.9, 0.9], ratio=[1, 1]</code>입니다. 면적 0.9 자르기를 가정하면 자른 한 변은 √0.9 = 0.949 W이고, 다시 키우면 배율은 1/0.949 = 1.054입니다. 자르기 시작점을 u(0 ≤ u ≤ 0.051 W)라고 하면 원래 좌표 x에 있는 내용은 x′ = (x − u)/0.949로 옮겨갑니다. 마스크는 자르지 않으므로 어긋남은</p>
+<p>d(x) = x′ − x = 0.054 x − 1.054 u</p>
+<p>입니다(W = 224 기준). 중앙(x = 112)에서는 |d| ≤ 6 px, 가장자리에서는 최대 약 12 px입니다. 패치 한 칸은 14 px이므로, 가장자리 패치는 한 칸 가까이 밀립니다. 이것은 가정(면적 비율 해석)에 따른 계산이고, 실제 dlimp 구현에서 자르기 변수를 확인하지는 못했습니다(04 D9).</p>
+<h3>3.6 행동 경로 손실의 정규화</h3>
+<p>전경 손실은 Σ(pred − target)² · m / (Σm · D)입니다. 분모는 전경 패치 수 × 768입니다. 배경 손실도 같은 방식입니다. 전체 경로는 마스크 없이 평균 제곱 오차입니다. 세 항의 가중치는 모두 1입니다(코드 <code>w_recon_*</code>).</p>
+<h2>4. Toy 검증 (<code>analysis/motion_toy.py</code>)</h2>
+<h3>4.1 설계</h3>
+<ul>
+<li>32×32 프레임. 4×4 에이전트 블록이 행동 {오른쪽, 왼쪽, 위, 아래}에 따라 2 px 움직입니다. 행동 라벨 4종.</li>
+<li>분포 이동 두 가지를 넣었습니다. 카메라 이동 5종(장면 전체가 1 px 움직임)과 밝기 변화 3종(전체 −0.2, 0, +0.2).</li>
+<li>프레임 차이를 2×2 평균풀링해 256차원으로 줄이고, k-means(16개 코드)로 이산화합니다. VQ-VAE 학습은 하지 않습니다. 목적은 <strong>무엇이 코드를 차지하는가</strong>를 보는 것입니다.</li>
+<li>지표: 혼잡도(perplexity = 2^H(코드 사용률)), 판독력(코드별 최빈 라벨의 정확도, 확률 기준선 포함).</li>
+<li>마스크: 에이전트가 t와 t+1 어디에든 있는 영역을 1 px 팽창한 영역입니다.</li>
+<li>기본 배경 질감 진폭은 0.05(거의 정적인 배경)이고, 0.25로도 돌렸습니다.</li>
+<li>시작 위치는 두 가지입니다. 무작위(교란 있음)와 고정(교란 제거)입니다.</li>
+<li>&quot;fg_norm&quot;은 <strong>논문에 없는 가설적 보정</strong>입니다. 전경 평균을 빼서 밝기 성분을 지웁니다.</li>
+</ul>
+<h3>4.2 결과</h3>
+<p><strong>(A) 입력 비교, K = 16, 시작 위치 고정, 배경 0.05</strong></p>
+<table>
+<thead>
+<tr>
+<th>입력</th>
+<th>행동 판독</th>
+<th>카메라 판독(기준선 0.22)</th>
+<th>밝기 판독(기준선 0.35)</th>
+<th>혼잡도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>전체 차이</td>
+<td>1.00</td>
+<td>0.31</td>
+<td><strong>1.00</strong></td>
+<td>14.7</td>
+</tr>
+<tr>
+<td>전경 마스크</td>
+<td>1.00</td>
+<td><strong>0.58</strong></td>
+<td>0.61</td>
+<td>14.4</td>
+</tr>
+<tr>
+<td>배경 마스크</td>
+<td>0.75</td>
+<td>0.34</td>
+<td>1.00</td>
+<td>13.2</td>
+</tr>
+<tr>
+<td>전경 평균 제거(가설)</td>
+<td>1.00</td>
+<td>0.67</td>
+<td>0.37</td>
+<td>11.9</td>
+</tr>
+</tbody>
+</table>
+<p><strong>(B) 시작 위치를 무작위로 두면</strong>(배경 0.05): 행동 판독이 기준선 근처(0.28 대 0.26)로 떨어집니다. 위치 교란이 k-means 군집을 지배하기 때문입니다. 밝기 판독은 전체 차이에서 1.00, 전경 마스크에서 0.40입니다. 배경 0.25에서도 같은 방향입니다(표 생략, <code>motion_toy_results.json</code>).</p>
+<p><strong>(C) K 스윕(시작 위치 고정):</strong> 전체 차이는 K = 4에서 행동 판독 0.42로 낮고, K ≥ 16에서 1.0 근처입니다. 전경 마스크는 K = 4에서도 1.00입니다. 혼잡도는 K에 따라 2.6–47로 늘어납니다. 낮은 K에서는 마스크가 행동 판독에 도움이 되고, 높은 K에서는 차이가 줄어듭니다.</p>
+<p><strong>(D) 자르기 불일치(시작 위치 고정, K = 16, 전경 마스크):</strong></p>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>행동 판독</th>
+<th>카메라 판독</th>
+<th>밝기 판독</th>
+<th>가짜 움직임 라벨(25종) 판독</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>올바른 마스크</td>
+<td>0.98</td>
+<td>0.61</td>
+<td>0.59</td>
+<td>—</td>
+</tr>
+<tr>
+<td>공통 자르기, 마스크는 그대로</td>
+<td>0.79</td>
+<td>0.26</td>
+<td>0.47</td>
+<td>—</td>
+</tr>
+<tr>
+<td>프레임 t+1만 자르기</td>
+<td>0.62</td>
+<td>0.31</td>
+<td>0.50</td>
+<td>0.145(기준선 0.047)</td>
+</tr>
+</tbody>
+</table>
+<p>프레임 t+1만 자르면 코드가 <strong>자르기 이동 자체를</strong> 판독할 수 있을 만큼 담습니다(0.145 대 0.047).</p>
+<h3>4.3 toy의 한계</h3>
+<ul>
+<li>k-means는 VQ-VAE와 다릅니다. 그래디언트가 없고 전이 구조도 없습니다.</li>
+<li>32×32 장면과 4×4 블록은 실제 손·팔 영상과 비교하면 매우 단순합니다.</li>
+<li>가짜 움직임 실험은 자르기 정도를 ±2 px로 골랐습니다. 실제 크기는 §3.5의 계산을 따릅니다.</li>
+<li>무작위 시작 위치에서 행동 판독이 무너지는 것은 토이의 군집 방식 때문입니다. 실제 VQ는 다른 결과를 낼 수 있습니다.</li>
+</ul>
+<h2>5. 이 분석이 말하는 것</h2>
+<ol>
+<li><strong>숫자는 맞지만 헤드라인 차이는 작습니다.</strong> 표의 평균은 모두 맞습니다. 그러나 villa-x 대비 1.6점은 유의하지 않고(p 0.30), RoboTwin에서 π0·UniVLA 대비도 유의하지 않습니다(p 0.26, 0.12 보정 후). 유의한 차이는 저자 재현 UniVLA, 실물 소표본, 그리고 절제(w/o DINO)에서만 나타납니다.</li>
+<li><strong>기준선 행이 같은 프로토콜이 아닙니다.</strong> 17개 칸이 200회에서 정수가 되지 않습니다. UniVLA 재현은 원 보고치보다 4.4점 낮습니다.</li>
+<li><strong>toy는 &quot;밝기를 마스크가 못 막는다&quot;와 &quot;카메라 이동이 마스크 안에 남는다&quot;를 보여 줍니다.</strong> 전체 차이는 밝기 성분을 완전히 담고, 전경 마스크는 이를 0.61까지 줄이지만 0에는 이르지 못합니다. 전경 마스크 안의 카메라 판독은 0.58입니다. 논문의 전체 재구성 경로는 마스크 없이 학습되므로 이 누수의 통로가 됩니다.</li>
+<li><strong>자르기 불일치는 가짜 움직임을 만들 수 있습니다.</strong> 코드 설정(이미지만 자르고 마스크는 안 자름)을 그대로 두면, 프레임마다 다른 자르기가 들어갈 때 코드가 자르기 이동을 기억합니다. 이 실험은 설정이 실제로 프레임 단위로 독립인지 확인이 필요함을 보여 줍니다(04 D9).</li>
+</ol>
+</section>
+<section class="chapter"><h1>04. 코드 대조와 주장 검증</h1>
+<p>공식 코드는 얕게 clone해 분석 폴더 안에 두었습니다(<code>repo/</code>, 저장소 <code>.gitignore</code>로 제외). 대조 기준 커밋은 **<code>fd614f7</code>(2026-06-18, &quot;update readme&quot;)**입니다. 저장소는 Apache-2.0(<code>LICENSE</code>), 별점 0, 마지막 push 2026-06-18입니다. v2 초록의 코드 링크는 2026-07-02에 추가되었으므로, 이 커밋은 v1 시점의 스냅샷에 가깝습니다. 태그나 릴리스는 없습니다. 대조 범위는 잠재 행동 모델(<code>latent_action_model/</code>), VLM 사전학습과 미세조정(<code>vla-scripts/</code>), 데이터 로더(<code>prismatic/vla/datasets/</code>)입니다. 실행은 하지 않았습니다(CUDA 전제, §4).</p>
+<h2>1. 저장소 구성</h2>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>내용</th>
+<th>논문과의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>latent_action_model/genie/modules/lam.py</code> (229줄)</td>
+<td>이중 코드북 VQ-VAE, 세 디코딩 경로</td>
+<td>III-B 전부</td>
+</tr>
+<tr>
+<td><code>latent_action_model/genie/model.py</code> (481줄)</td>
+<td>Lightning 학습 루프, 손실, 코드 사용률</td>
+<td>III-B.4, Eq. 1</td>
+</tr>
+<tr>
+<td><code>latent_action_model/genie/dataset.py</code>, <code>prismatic/vla/datasets/</code></td>
+<td>RLDS 로더, 쌍 샘플링, 마스크 전달, 증강</td>
+<td>III-B 입력, 실험 설정</td>
+</tr>
+<tr>
+<td><code>latent_action_model/config/*.yaml</code></td>
+<td>EgoDex / Bridge 설정</td>
+<td>IV-A, IV-B</td>
+</tr>
+<tr>
+<td><code>vla-scripts/train.py</code></td>
+<td>VLM 사전학습(잠재 토큰 NLL)</td>
+<td>III-C, Eq. 2</td>
+</tr>
+<tr>
+<td><code>vla-scripts/finetune_libero.py</code></td>
+<td>LIBERO 미세조정(L1 헤드)</td>
+<td>IV-A</td>
+</tr>
+<tr>
+<td><code>vla-scripts/finetune_robotwin_flow.py</code> (1166줄)</td>
+<td>RoboTwin 미세조정(flow-matching 헤드)</td>
+<td>III-D, IV-B</td>
+</tr>
+<tr>
+<td><code>vla-scripts/deployment_real.py</code></td>
+<td>실물 배포</td>
+<td>IV-B 실물</td>
+</tr>
+<tr>
+<td>없음</td>
+<td>데이터 전처리, SAM2·RoboEngine 마스크 생성, 학습된 체크포인트</td>
+<td>README: &quot;data preprocessing script will be released upon finalization&quot;</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 논문 ↔ 코드 대조 (D 항목)</h2>
+<p>판정: <strong>일치</strong>(논문과 코드가 같음), <strong>차이</strong>(코드가 논문과 다름), <strong>누락</strong>(논문은 있으나 코드가 없음), <strong>버그</strong>(동작 오류), <strong>미확인</strong>(코드만으로 알 수 없음).</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>논문 주장(위치)</th>
+<th>코드(파일:줄)</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>SAM2로 사람 손 마스크 생성(III-B.3)</td>
+<td>로더는 <code>egodex_with_sam2_mask_all</code> 데이터의 <code>mask</code> 키를 읽음(<code>lam-stage-2-egodex.yaml</code>, <code>configs.py:79–80</code>). 생성 코드 없음</td>
+<td>누락(생성 파이프라인)</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>로봇 마스크는 RoboEngine(IV-A)</td>
+<td>Bridge 설정은 <code>bridge_oxeall</code>의 <code>mask</code> 키를 읽음(<code>lam-stage-2-bridgeall.yaml</code>). 생성 코드 없음</td>
+<td>누락</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>행동 경로는 &quot;전경 영역&quot;만 감독(III-B.3)</td>
+<td><code>model.py:291–299</code>: 주의 맵 임계값 0.5로 이진화. 실제 전경 조건은 마스크 면적 &gt; 47%(03 §3.4). 맵의 연속 가중치(<code>lam.py:137–139</code>)는 쓰이지 않음</td>
+<td>차이(임계값은 논문에 없음)</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>전체 재구성 경로(III-B.3)</td>
+<td><code>lam.py:204–213</code>, <code>model.py:320</code>: 마스크 없는 전역 MSE, 가중치 1. 행동 코드가 배경·밝기를 설명하는 통로</td>
+<td>일치(논문도 전역 항 포함) — 누수 통로(03 §4)</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>Eq. 1의 λ_recon, λ_vq, λ_commit</td>
+<td>재구성 항 가중치 1, 1, 1(<code>model.py:320–325</code>), VQ 가중치 1, 커밋 β = 0.25(<code>model.py:357</code>, <code>vq_beta</code>). 논문은 값을 주지 않음</td>
+<td>미확인(논문 누락)</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>코드북 크기 16 두 개, 쌍당 토큰 4(III-B.2)</td>
+<td><code>lam.py:68–79</code>(<code>num_latents=16</code>), <code>lam.py:46</code>(<code>num_codes=4</code>)</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>VQ 재시작(논문 언급 없음)</td>
+<td><code>model.py:440–441</code>: 에포크마다 <strong>배경 코드북만</strong> <code>random_restart()</code>. 행동 코드북은 재시작하지 않음. 재시작은 <code>randperm</code>으로 기존 코드를 복사(<code>blocks.py:435–445</code>)</td>
+<td>차이(행동 코드북 사용률 관리 없음; 재시작 방식이 죽은 코드에 기존 코드를 복사)</td>
+</tr>
+<tr>
+<td>D8</td>
+<td>&quot;1초 간격 쌍&quot;(III-B 서두)</td>
+<td><code>dataset.py:357–363</code>: 설정 목록에 없는 데이터셋은 창 크기가 기본값. <code>datasets.py:337</code>의 기본 <code>window_size=10</code>이 그대로 전달되어 쌍 간격은 <strong>9프레임</strong>. 목록에 없는 EgoDex와 Bridge 모두 해당. 영상 fps 확인 필요</td>
+<td>차이(1초는 fps 9에서만 성립)</td>
+</tr>
+<tr>
+<td>D9</td>
+<td>(논문 언급 없음) 증강</td>
+<td><code>datasets.py:383–410</code>: 영상에 <code>random_resized_crop(scale 0.9)</code> 적용. 마스크 증강은 주석 처리(<code>#&quot;mask&quot;: mask_augment_kwargs</code>). EgoDex 설정은 <code>image_aug: true</code>. <code>obs_transforms.augment</code>는 <code>image_*</code> 키 중 지정된 것만 자름. 두 프레임이 같은 자르기 변수를 쓰는지는 dlimp 내부 구현에 달려 있어 미확인</td>
+<td><strong>버그 가능성</strong>: 이미지와 마스크 정렬 불일치(03 §3.5). 프레임 단위 독립 자르기라면 가짜 움직임</td>
+</tr>
+<tr>
+<td>D10</td>
+<td>코드북 크기 16, 행동 토큰 4(III-C)</td>
+<td><code>vla-scripts/train.py:42</code>(<code>codebook_size=16</code>), 특수 토큰 <code>&lt;ACT_i&gt;</code> 16개</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>D11</td>
+<td>Prismatic-7B 백본(III-C)</td>
+<td><code>train.py:38</code>(<code>prism-dinosiglip-224px+7b</code>), README의 HF 링크</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>D12</td>
+<td>디코더와 VLM 어휘 연결(III-C, Eq. 2)</td>
+<td><code>train.py:186–218</code>: 학습된 LAM으로 쌍의 토큰을 만들어 VLM 목표로 사용</td>
+<td>일치(사전학습 데이터 규모 미기재)</td>
+</tr>
+<tr>
+<td>D13</td>
+<td>의도 예측 CE, λ_intent(Eq. 5)</td>
+<td><code>finetune_robotwin_flow.py:1076</code>: VLA 미동결 시 <strong>L = 10·L_flow + L_CE</strong>(상대 가중 0.1). 동결 시 L = L_flow로 CE 없음</td>
+<td>차이(λ 값은 논문에 없음; 기본 설정은 동결)</td>
+</tr>
+<tr>
+<td>D14</td>
+<td>VLM은 LoRA로 미세조정(III-D)</td>
+<td><code>finetune_robotwin_flow.py:855</code>(<code>freeze_vla=True</code>), <code>:857</code>(<code>use_lora=False</code>). <code>finetune_libero.py:175–176</code> 동일. 기본값은 <strong>동결 + LoRA 없음</strong>. LoRA 설정은 실행 경로 이름(<code>lora-r32</code>)에서만 드러남</td>
+<td>차이(기본값이 논문 주 설정과 다름)</td>
+</tr>
+<tr>
+<td>D15</td>
+<td>미세조정 흐름: VLM 은닉 + DINOv2 + 고유 감각(Eq. 3), flow-matching(Eq. 4)</td>
+<td>RoboTwin: DINOv2 특징(<code>x_norm_patchtokens</code>)을 주 시점과 손목 시점에 모두 씀(<code>:796</code>). 흐름 손실은 <code>:725</code>, <code>:811</code></td>
+<td>일치</td>
+</tr>
+<tr>
+<td>D16</td>
+<td>LIBERO 행동 헤드: &quot;UniVLA의 자기회귀 헤드&quot;(IV-A)</td>
+<td><code>finetune_libero.py:40–60</code>: MAP 풀링과 MLP(tanh) 출력, L1 회귀(<code>:133</code>). 자기회귀 디코딩이 아님. 흐름 손실도 아님</td>
+<td>차이(설명과 구현 불일치)</td>
+</tr>
+<tr>
+<td>D17</td>
+<td>LIBERO는 3인칭 영상만 씀(IV-A)</td>
+<td><code>finetune_libero.py:100</code>: <code>wrist_dino = True</code>로 <strong>손목 DINOv2 특징을 항상 사용</strong>. 주 시점 임베딩은 VLM 은닉 상태(<code>:105</code>), DINO가 아님. 주 시점 DINO 분기(<code>:113–120</code>)는 <code>else</code>에만 있음</td>
+<td><strong>차이(중요)</strong>: 논문의 &quot;DINO로 상태 인지&quot;와 LIBERO 설정 설명이 코드와 맞지 않음. 손목 입력을 쓴다면 IV-A 설명과 다름</td>
+</tr>
+<tr>
+<td>D18</td>
+<td>잠재 토큰 위치 선택</td>
+<td><code>finetune_libero.py</code>의 <code>action_gt &gt; 32000</code> 마스크: 어휘 ID가 32000보다 큰 토큰을 잠재 행동으로 씀</td>
+<td>미확인(32000 오프셋의 근거 없음)</td>
+</tr>
+<tr>
+<td>D19</td>
+<td>자기회귀 대 flow 헤드(RoboTwin)</td>
+<td><code>finetune_robotwin_flow.py:654–725</code>: HRDT 계열 FlowBlock 기반 헤드</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>D20</td>
+<td>실험 설정 값: LIBERO 30k/40k 스텝, 배치 128(IV-A)</td>
+<td><code>train.sh</code>와 finetune 설정: 배치 8, 최대 40000 스텝(<code>finetune_libero.py:154–155</code>). 배치 128과 불일치하는 설정 확인 필요</td>
+<td>차이(미확인)</td>
+</tr>
+<tr>
+<td>D21</td>
+<td>코드북 크기 &quot;32&quot;(설정)</td>
+<td><code>finetune_robotwin_flow.py:844</code>에 <code>lam_num_latents=32</code>가 있으나 <code>lam.py:70, 75</code>는 16을 고정. 인자는 무시됨</td>
+<td>버그(인자 무시, 실행은 됨)</td>
+</tr>
+<tr>
+<td>D22</td>
+<td>학습 명령</td>
+<td><code>latent_action_model/train.sh</code>는 <code>lam-stage-2-mix.yaml</code>을 부르지만 저장소에 없음(설정은 egodex와 bridgeall 두 개). 경로는 <code>MFVLA/…</code> 고정</td>
+<td>버그</td>
+</tr>
+<tr>
+<td>D23</td>
+<td>테스트 시 코드 사용률 그림</td>
+<td><code>model.py:448–455</code>: <code>self.lam.vq</code>를 참조하지만 모듈 이름은 <code>vq_action</code>, <code>vq_bg</code>. 테스트 종료 때 AttributeError</td>
+<td>버그</td>
+</tr>
+<tr>
+<td>D24</td>
+<td>(실행 장치)</td>
+<td><code>model.py:363, 368</code>: <code>.cuda()</code> 하드코딩. <code>flash-attn==2.5.5</code>(README). <code>torch.hub</code>로 DINOv2 다운로드</td>
+<td>제약(CUDA·네트워크)</td>
+</tr>
+<tr>
+<td>D25</td>
+<td>입력 마스크 채널</td>
+<td>주석은 마스크가 2채널(<code>lam.py:131</code>)이라 하지만 로더는 1채널(<code>datasets.py:310–313</code>). 실제 형상은 (B,T,1,H,W)이고 동작에는 문제 없음</td>
+<td>주석 오류</td>
+</tr>
+<tr>
+<td>D26</td>
+<td>공개 상태</td>
+<td>README 제목 &quot;Motion-Focused Vision-Language-Action Model via Hybrid Disentangled Action Tokenization&quot;은 arXiv 제목과 다름. README는 데이터 전처리를 &quot;released upon finalization&quot;이라 함</td>
+<td>누락·제목 불일치</td>
+</tr>
+<tr>
+<td>D27</td>
+<td>평가 시행 수(IV-A, 과제당 20회)</td>
+<td><code>README</code>: <code>--num_trials_per_task 20 --seed 7</code>(<code>run_libero_eval.py</code>)</td>
+<td>일치</td>
+</tr>
+</tbody>
+</table>
+<p><strong>죽은 코드 참고:</strong> <code>model.py:325–349</code>의 행동 손실 분기는 <code>pred_action</code>이 없어서 실행되지 않습니다. <code>lam.py</code>의 <code>shallow</code> 분기(<code>dim_half</code>)도 입력이 768차원뿐이라 빈 텐서입니다. 두 경우 모두 결과에 영향은 없습니다.</p>
+<h2>3. 주장 검증 (C 항목)</h2>
+<p>논문 주장을 원문 기준으로 대조했습니다. 판정: <strong>지지</strong>, <strong>부분 지지</strong>, <strong>미지지</strong>, <strong>검증 불가</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>주장(위치)</th>
+<th>검증 결과</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>초록: &quot;pre-trained exclusively on unlabeled human videos&quot;</td>
+<td>IV-A(LIBERO, 헤드라인 평균 91.8)는 BridgeV2 <strong>로봇</strong> 영상으로 사전학습. 사람 영상은 IV-B(RoboTwin)와 실물에서만 씀</td>
+<td>부분 지지(헤드라인과 불일치)</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>초록: &quot;requiring only ∼50 trajectories&quot;</td>
+<td>과제당 50개. LIBERO는 10과제(군당 500개), RoboTwin 10과제(500개)</td>
+<td>부분 지지(과제당 수치)</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>Table I: 평균이 모든 기준선보다 높다</td>
+<td>91.8 &gt; 90.1(villa-x): 합산 Fisher p = 0.30. UniVLA(저자 재현)보다는 p = 0.020, 보정 0.039</td>
+<td>부분 지지(villa-x 대비 유의하지 않음)</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>IV-A: Goal +2.0, Long +9.5(villa-x 대비)</td>
+<td>차이 값은 정확(93.5−91.5, 84.0−74.5). Long만 p = 0.026(과제군 내), Goal p = 0.57</td>
+<td>지지(값), Long만 유의</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>Table I 기준선 UniVLA &quot;strictly reproduced&quot;</td>
+<td>원 논문 Bridge 평균 92.5 대 재현 88.1</td>
+<td>지지되지 않음(재현값이 4.4점 낮음)</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>Table II: &quot;comparable to state-of-the-art&quot;</td>
+<td>67.7 대 π0 65.2(p = 0.26), UniVLA 63.6(p = 0.06, 보정 0.12)</td>
+<td>지지(comparable), &quot;앞선다&quot;는 미지지</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>의도-인지 분리가 성능을 올린다(IV-A, IV-B)</td>
+<td>w/o DINO 대비 LIBERO +6.4(p ≈ 8×10⁻⁵), RoboTwin +4.9(p = 0.024, 보정 0.073). 단일 시드로 보임</td>
+<td>부분 지지(LIBERO 강함, RoboTwin 약함)</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>동결 VLM도 RDT와 비슷하니 VLM 사전학습이 효과적(IV-B)</td>
+<td>대조(사전학습 없는 같은 구조)가 없음. RDT는 다른 아키텍처</td>
+<td>미지지(근거 부족)</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>실물에서 UniVLA를 앞선다(Fig. 3c)</td>
+<td>46/60 대 23/60, p = 4×10⁻⁵(시행 수 20회 가정). 과제 3개 중 2개만 p &lt; 0.05(보정 0.029)</td>
+<td>지지(소표본, 시드 미보고)</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>CKA 0.9139 대 0.8659에서 &quot;significantly higher&quot;</td>
+<td>부트스트랩 표준편차는 시드 변동이 아님. 데이터 쌍 1개(BridgeV2 대 FurnitureBench), 사람 영상 없음</td>
+<td>미지지(유의성 주장)</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>Fig. 5: 사람과 로봇이 같은 토큰을 받는다</td>
+<td>세 예시의 정성적 나열. 정량 지표 없음</td>
+<td>검증 불가(예시 3개)</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>행동 코드는 배경과 카메라 이동을 분리한다(I, III-B)</td>
+<td>전체 재구성 경로가 마스크 없이 학습됨(D4). 분리 여부를 재는 probe가 없음. toy에서 전경 마스크 안에도 카메라 정보가 남음(03 §4.2 A)</td>
+<td>미검증(누수 가능성)</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>코드북 사용이 건강하다(암묵)</td>
+<td>사용률·혼잡도를 보고하지 않음. 행동 코드북은 재시작하지 않음(D7)</td>
+<td>검증 불가</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>시드 반복, 신뢰구간</td>
+<td>어떤 표에도 없음</td>
+<td>미지지(보고 부재)</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 구현 가능성 (판정)</h2>
+<p><strong>결론: 공식 재현은 이 맥에서 불가능하고, 아이디어 재구현은 중간 난이도입니다.</strong></p>
+<p><strong>(a) 공식 재현</strong></p>
+<ul>
+<li>코드는 공개되어 있지만 실행 경로가 CUDA를 전제합니다(<code>.cuda()</code> 하드코딩, flash-attn 2.5.5, <code>torch.hub</code> 다운로드). 이 맥(M4 Pro, 통합 메모리 약 24 GiB, MPS, CUDA 없음, <strong>torch 미설치</strong>)에서는 실행 자체가 막힙니다.</li>
+<li>자원: LAM 학습은 GPU 2장(설정 <code>devices: 2</code>, 배치 64/장치, 2 epoch, 16-mixed). VLM 사전학습과 LIBERO 미세조정은 GPU 4장(<code>train.sh</code>), RoboTwin은 2장. GPU 모델은 기재되지 않았습니다.</li>
+<li>데이터: EgoDex 영상 + SAM2 마스크(<strong>마스크 미공개</strong>), BridgeV2 OXE + RoboEngine 마스크(<strong>미공개</strong>), LIBERO RLDS(HF), RoboTwin 2.0 생성 데이터, 실물 데이터(미공개). 체크포인트: Prismatic-7B(HF)만 공개, 잠재 행동 체크포인트와 미세조정 체크포인트는 공개되지 않음.</li>
+<li>판정: <strong>이 맥 불가</strong>, 공식 재현은 CUDA 서버에서 4 GPU 수준 + 마스크 생성 파이프라인이 필요합니다.</li>
+</ul>
+<p><strong>(b) 아이디어 재구현</strong></p>
+<ul>
+<li>핵심(이중 코드북 VQ-VAE + 마스크 손실 + 토큰을 VLM에 넣기 + 의도-인지 분리)은 코드에서 수백 줄로 다시 쓸 수 있습니다. 재구현 장벽은 (1) 사람 손 마스크 생성 파이프라인(SAM2 실행), (2) 두 단계 사전학습 자원, (3) 자르기-마스크 정렬 같은 데이터 세부입니다.</li>
+<li>이 맥에서는 DINOv2-B 특징 추출도 느리고, 7B VLM의 LoRA 학습은 24 GiB에 맞지 않습니다. 작은 실험은 가능합니다(toy 수준, 소형 인코더 대체).</li>
+<li>판정: <strong>중간 난이도</strong>. 설계 요소를 떼어 검증하는 소형 실험(§5 R1, R2)은 맥에서 가능하고, 대규모 학습은 GPU가 필요합니다.</li>
+</ul>
+<h2>5. 빠진 정보 목록 (재현에 필요한데 논문·코드에 없는 것)</h2>
+<ol>
+<li>사전학습 데이터 규모(EgoDex 쌍 수), 스텝, 배치, 학습률(LAM, VLM).</li>
+<li>손·로봇 마스크 생성 절차와 임계값(D1, D2, D3).</li>
+<li>λ_recon, λ_vq, λ_commit, λ_intent 값(D5, D13).</li>
+<li>쌍 간격과 영상 fps(D8).</li>
+<li>증강이 프레임과 마스크에 어떻게 적용되는지(D9).</li>
+<li>사용률, 혼잡도, 코드 재시작 방식(D7, C13).</li>
+<li>시드 수, 표준편차, 평가 시행 수(RoboTwin, 실물).</li>
+<li>LIBERO 헤드 구조와 시점 구성(D16, D17).</li>
+<li>기준선 재현 설정(UniVLA-Bridge, 기준선 값의 출처별 프로토콜).</li>
+</ol>
+</section>
+<section class="chapter"><h1>02. 선행연구와 관계</h1>
+<h2>1. 계보</h2>
+<table>
+<thead>
+<tr>
+<th>갈래</th>
+<th>대표 연구</th>
+<th>이 논문이 가져온 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>잠재 행동 사전학습(VQ 재구성)</td>
+<td>LAPA [9], IGOR [10]</td>
+<td>프레임 쌍을 이산 코드로 압축하고 재구성하는 틀. 배경과 카메라 이동이 섞인다는 진단(I)</td>
+</tr>
+<tr>
+<td>작업 중심 잠재 행동</td>
+<td>UniVLA [12]</td>
+<td>두 단계 학습과 언어 유도로 움직임 집중. 이 논문은 언어 대신 전경 마스크를 쓴다고 주장</td>
+</tr>
+<tr>
+<td>로봇 상태 결합 잠재</td>
+<td>villa-x [17], GO-1 [5], GR00T N1 [14]</td>
+<td>잠재 행동에 로봇 상태·행동 감독을 붙이는 방식. 이 논문은 행동 라벨 없이 사람 영상만 씀</td>
+</tr>
+<tr>
+<td>사람 데이터 VLA</td>
+<td>EgoMimic [6], MotionTrans [7], H-RDT [8], UMI [18]</td>
+<td>손 자세 라벨(AR/VR, 손잡이) 기반. 이 논문은 라벨이 없다고 비교</td>
+</tr>
+<tr>
+<td>VLA 바탕</td>
+<td>OpenVLA [13], π0 [2], RDT [3], Prismatic-7B [20]</td>
+<td>VLM 백본(Prismatic)과 flow-matching action expert(RDT 계열 헤드)</td>
+</tr>
+<tr>
+<td>표현 정렬 측정</td>
+<td>CKA [30]</td>
+<td>도메인 부분공간을 지운 뒤 로봇 두 데이터셋의 토큰 표현 정렬</td>
+</tr>
+<tr>
+<td>분할</td>
+<td>SAM2 [19], RoboEngine [26]</td>
+<td>손·로봇 마스크 생성</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 가까운 대안</h2>
+<h3>2.1 사람 영상을 쓰는 잠재 행동</h3>
+<ul>
+<li><strong>DreamX</strong> (저장소 <code>dreamx/</code>): 사전학습된 영상 확산 모델(Cosmos-Predict2.5 2B)에 질의를 붙여 잠재 프레임당 행동 토큰 4개를 뽑습니다. 이 토큰만으로 미래 영상을 재구성합니다. 이 논문과 <strong>토큰 개수(4)와 &quot;사람·로봇 공통 인터페이스&quot;라는 목표가 같습니다.</strong> 차이는 재구성 백본(확산 대 VQ-transformer)과 마스크 유무입니다. DreamX에는 마스크로 움직임을 분리하는 장치가 없습니다.</li>
+<li><strong>LAPA [9], IGOR [10]:</strong> 사람 영상으로 잠재 행동을 학습하지만 마스크가 없습니다. 이 논문의 기준선(LAPA)입니다.</li>
+<li><strong>UniVLA [12]:</strong> 사람 영상과 로봇 영상을 함께 쓰며, 언어 신호로 작업 중심 움직임을 고릅니다. 이 논문의 주된 비교 대상입니다(Table I, Table II, 실물).</li>
+</ul>
+<h3>2.2 논문이 인용하지 않은 가까운 연구</h3>
+<ul>
+<li><strong>ThinkWorld</strong> (저장소 <code>thinkworld/</code>): 사람·로봇 공유 손목 움직임 토큰을 쓰고, 1초 뒤 DINO 특징을 예측합니다. 이 논문과 &quot;1초 간격 쌍&quot;과 DINO 특징 예측이 비슷합니다. 인용되지 않았습니다.</li>
+<li><strong>FlashDexRetarget</strong> (저장소 <code>flashdexretarget/</code>): 사람 손-물체 시연을 레퍼런스 조건부 RL 정책으로 로봇 손 궤적에 옮기는 연구입니다. 사람과 로봇을 궤적 수준에서 맞추는 방법이라서, 잠재 토큰을 공유하는 이 논문의 방식과 대비됩니다.</li>
+</ul>
+<h3>2.3 구성 요소별 출처</h3>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>출처</th>
+<th>이 논문의 새 점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이중 코드북 VQ, 쌍당 토큰 4</td>
+<td>LAPA [9]와 VQ 재구성 계열</td>
+<td>행동 코드북과 배경 코드북을 분리</td>
+</tr>
+<tr>
+<td>마스크 손실(전경·배경 경로)</td>
+<td>SAM2 [19], RoboEngine [26]</td>
+<td>디코더 경로를 세 개로 나누고 영역별로 감독</td>
+</tr>
+<tr>
+<td>DINOv2 특징</td>
+<td>DINOv2 (코드 <code>dinov2_vitb14_reg</code>)</td>
+<td>미세조정에서 상태 인지를 DINO에 맡김</td>
+</tr>
+<tr>
+<td>VLM에 잠재 토큰 넣기</td>
+<td>UniVLA [12]의 어휘 확장</td>
+<td>사람 영상으로 사전학습</td>
+</tr>
+<tr>
+<td>의도-인지 분리</td>
+<td>논문의 주장</td>
+<td>DINO와 VLM 임베딩을 바꿔 가며 절제</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>폴더</th>
+<th>공통점</th>
+<th>차이와 시사점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dreamx/</code></td>
+<td>사람 영상에서 잠재 행동 토큰 4개를 뽑고 사람·로봇 공통 인터페이스로 씀</td>
+<td>DreamX는 영상 확산 백본을 디코더로 쓰고, 이 논문은 VQ 재구성과 마스크를 씀. DreamX는 공개 코드가 없고, 이 논문은 있음. 두 논문 모두 <strong>움직임과 배경을 어떻게 분리했는지</strong> 직접 측정한 실험이 부족함</td>
+</tr>
+<tr>
+<td><code>openwam/</code></td>
+<td>행동 생성 설계 선택을 부품으로 쪼갬</td>
+<td>OpenWAM은 영상 생성 prior를 쓰고, 이 논문은 VLM에 잠재 토큰을 넣음. 둘 다 사전학습 데이터 규모가 재현의 장벽</td>
+</tr>
+<tr>
+<td><code>agentic_wam/</code></td>
+<td>행동과 미래 영상을 함께 다룸</td>
+<td>AW-0는 코드·미래 영상·행동을 Mixture-of-Transformers 하나에서 함께 denoise합니다. 이 논문은 잠재 행동 토큰만 VLM에 넣고 영상 생성은 하지 않습니다</td>
+</tr>
+<tr>
+<td><code>pacevla/</code></td>
+<td>VLA의 action expert만 바꿈</td>
+<td>PaceVLA는 여러 decoder와 라우터. 이 논문은 action expert 입력에 DINO 특징과 VLM 의도를 함께 넣음</td>
+</tr>
+<tr>
+<td><code>thinkworld/</code></td>
+<td>1초 뒤 DINO 특징 예측</td>
+<td>ThinkWorld는 예측을 RL 보상으로 쓰고, 이 논문은 잠재 행동 학습에 씀. 이 논문의 &quot;1초 간격 쌍&quot;과 설계 근거를 비교할 수 있음</td>
+</tr>
+<tr>
+<td><code>flashdexretarget/</code></td>
+<td>사람 시연을 로봇 손으로 옮김</td>
+<td>사람-로봇 연결 방식이 다름(이 논문은 잠재 토큰으로 연결)</td>
+</tr>
+</tbody>
+</table>
+<h2>4. GitHub (2026-11-10 확인)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>커밋</th>
+<th>라이선스</th>
+<th>별</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shuiyigong/Motion-Focused-Latent-Action</code></td>
+<td>논문 코드(잠재 행동, VLM 사전학습, LIBERO·RoboTwin 미세조정, 실물 배포)</td>
+<td>공식(v2 초록 링크)</td>
+<td><code>fd614f7</code> (2026-06-18, &quot;update readme&quot;)</td>
+<td>Apache-2.0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>OpenDriveLab/UniVLA</code></td>
+<td>UniVLA [12] 코드</td>
+<td>원 저자 조직 추정(논문 본문에는 링크 없음, 미확인)</td>
+<td><code>0ab9e9d</code> (2025-11-19)</td>
+<td>Apache-2.0</td>
+<td>1,145</td>
+</tr>
+<tr>
+<td><code>RoboTwin-Platform/RoboTwin</code></td>
+<td>RoboTwin 2.0 시뮬레이터와 벤치마크 [27]</td>
+<td>원 저자 조직 추정</td>
+<td><code>ea8b211</code> (2026-09-24)</td>
+<td>MIT</td>
+<td>3,049</td>
+</tr>
+<tr>
+<td><code>apple-aiml-research/ml-egodex</code></td>
+<td>EgoDex 데이터 [28] (논문 README 링크는 <code>apple/ml-egodex</code>로 이동됨)</td>
+<td>원 저자</td>
+<td><code>718d9eb</code> (2026-09-11)</td>
+<td>NOASSERTION(라이선스 파일 확인 필요)</td>
+<td>410</td>
+</tr>
+<tr>
+<td><code>TRI-ML/prismatic-vlms</code></td>
+<td>Prismatic VLM 백본 [20]</td>
+<td>백본 공식</td>
+<td><code>874c5bb</code> (2024-05-16)</td>
+<td>MIT</td>
+<td>1,026</td>
+</tr>
+</tbody>
+</table>
+<p><code>villa-x</code>와 LAPA의 공식 저장소는 <code>gh search repos</code>에서 찾지 못했습니다. 이 논문의 <code>shuiyigong</code> 저장소는 clone했습니다(<code>repo/</code>). 나머지는 메타데이터만 확인했습니다.</p>
+</section></body></html>

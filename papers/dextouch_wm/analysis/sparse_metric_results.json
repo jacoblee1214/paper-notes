@@ -1,0 +1,94 @@
+{
+  "settings": {
+    "H": 20,
+    "W": 16,
+    "threshold": 0.1,
+    "trials": 200,
+    "candidates": [
+      "zero",
+      "blur(s=2, x0.6)",
+      "shift(1 taxel)",
+      "noisy(0.03)"
+    ]
+  },
+  "results": {
+    "contact_frac=0.03": {
+      "zero": {
+        "MSE": 0.0038,
+        "MAE": 0.019,
+        "PSNR": 24.2536,
+        "ContactIoU": 0.0,
+        "ContactF1": 0.0,
+        "ContactMAE": 0.2337
+      },
+      "blur": {
+        "MSE": 0.0031,
+        "MAE": 0.0198,
+        "PSNR": 25.173,
+        "ContactIoU": 0.0,
+        "ContactF1": 0.0,
+        "ContactMAE": 0.2084
+      },
+      "shift": {
+        "MSE": 0.004,
+        "MAE": 0.0237,
+        "PSNR": 24.0363,
+        "ContactIoU": 0.1662,
+        "ContactF1": 0.2782,
+        "ContactMAE": 0.1923
+      },
+      "noisy": {
+        "MSE": 0.0005,
+        "MAE": 0.014,
+        "PSNR": 32.9417,
+        "ContactIoU": 0.6394,
+        "ContactF1": 0.7764,
+        "ContactMAE": 0.0239
+      }
+    },
+    "contact_frac=0.1": {
+      "zero": {
+        "MSE": 0.0157,
+        "MAE": 0.0672,
+        "PSNR": 18.0476,
+        "ContactIoU": 0.0,
+        "ContactF1": 0.0,
+        "ContactMAE": 0.2343
+      },
+      "blur": {
+        "MSE": 0.0109,
+        "MAE": 0.0574,
+        "PSNR": 19.6619,
+        "ContactIoU": 0.0029,
+        "ContactF1": 0.0053,
+        "ContactMAE": 0.185
+      },
+      "shift": {
+        "MSE": 0.0133,
+        "MAE": 0.0699,
+        "PSNR": 18.7944,
+        "ContactIoU": 0.3163,
+        "ContactF1": 0.4786,
+        "ContactMAE": 0.177
+      },
+      "noisy": {
+        "MSE": 0.0007,
+        "MAE": 0.0183,
+        "PSNR": 31.8458,
+        "ContactIoU": 0.7252,
+        "ContactF1": 0.8398,
+        "ContactMAE": 0.0239
+      }
+    }
+  },
+  "flags": {
+    "contact_frac=0.03": {
+      "mse_prefers_zero_over_blur": false,
+      "iou_prefers_blur_over_zero": false
+    },
+    "contact_frac=0.1": {
+      "mse_prefers_zero_over_blur": false,
+      "iou_prefers_blur_over_zero": true
+    }
+  }
+}
