@@ -1,0 +1,84 @@
+{
+  "surface_cells": {
+    "218→451": {
+      "added_particles": 233,
+      "new_cells": 16,
+      "share_into_occupied": 0.9313304721030042
+    },
+    "451→876": {
+      "added_particles": 425,
+      "new_cells": 46,
+      "share_into_occupied": 0.8917647058823529
+    },
+    "cell_growth_151_over_89": 1.696629213483146,
+    "particle_growth_876_over_218": 4.018348623853211
+  },
+  "descent_fisher": {
+    "PRT-CD vs PCD-CD": {
+      "p_two_sided": 1.960192399087958e-11
+    },
+    "PRT-CD vs PRT-EMD": {
+      "p_two_sided": 3.695529311212666e-07
+    },
+    "PRT-CD vs PCD-EMD": {
+      "p_two_sided": 3.4204939165646753e-10
+    }
+  },
+  "linesearch_fisher": {
+    "p_two_sided": 0.49828538909355713
+  },
+  "hmd_rel_diff_PRTCD_vs_PRTEMD_pct": 1.0760828421564965,
+  "table2_check": {
+    "steps": [
+      2,
+      5,
+      10,
+      20,
+      40
+    ],
+    "f32_spread_monotone": false,
+    "f32_spread_peak_step": 10,
+    "f32_growth_2_to_10_factor": 322.72727272727275,
+    "f32_growth_10_to_40_factor": 0.39436619718309857,
+    "fd_f64_jump_20_over_10": 11638.225255972697,
+    "note": "f64 AD/FD는 f32 손실 산포 V와 비교해 판정했다. 산포의 단위가 다르다(04_claim_verification.md C2)."
+  },
+  "dL_implied_2step": {
+    "min": 2.046e-05,
+    "max": 0.0011283999999999999
+  },
+  "bit_budget": {
+    "DDBot_27440_f64": {
+      "N": 15,
+      "W": 38,
+      "B": 76,
+      "need_B_ge": 61,
+      "ok": true,
+      "bits_beyond_p": 23
+    },
+    "f32_example": {
+      "N": 15,
+      "W": 38,
+      "B": 76,
+      "need_B_ge": 32,
+      "ok": true,
+      "bits_beyond_p": 52
+    }
+  },
+  "toy_example": {
+    "q": [
+      10,
+      7,
+      12
+    ],
+    "Q": 29,
+    "Sb": 3.625,
+    "Qhi": 1,
+    "Qlo": 13
+  },
+  "timing": {
+    "cpu_gpu_speedup": 12.730427567356504,
+    "fd_slowdown_2_to_40": 7.12
+  },
+  "metric_note": "V(식 13)는 f32 반복 산포로 보고되었다. f64 AD/FD 판정에 쓰였다면 잡음 바닥이 과대평가된다."
+}

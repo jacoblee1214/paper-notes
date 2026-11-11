@@ -1,0 +1,114 @@
+{
+  "note": "논문 Fig. 3, 4, 5, 7의 곡선을 400 dpi 확대본에서 육안으로 읽은 값. 공식 수치가 아니며 정확도는 약 ±10% (x축 범위 기준). 시드별 값은 없음. 원본 PDF 벡터 그림 기준.",
+  "fig3_pickcube_octo": {
+    "x_unit": "1e7 steps",
+    "x_end": 1.25,
+    "steps_to_0p5": {
+      "RPD-MSE (Octo)": 0.15,
+      "RPD-L1": 0.15,
+      "RPD-MSE (OpenVLA, 1 run)": 0.15,
+      "PPO": 0.9,
+      "RPD-BC": null,
+      "PPD": null
+    },
+    "final_success_at_1p25e7": {
+      "RPD-MSE (Octo)": 0.8,
+      "RPD-L1": 0.76,
+      "RPD-MSE (OpenVLA)": 0.8,
+      "PPO": 0.72,
+      "RPD-BC": 0.14,
+      "PPD": 0.03
+    },
+    "band_halfwidth_final": {
+      "RPD-MSE (Octo)": 0.04,
+      "PPO": 0.05
+    },
+    "octo_teacher_line": 0.09,
+    "openvla_teacher_line": 0.06,
+    "openvla_run_end": 0.72
+  },
+  "fig4_octo_dense_vs_sparse": {
+    "x_unit": "1e6 steps",
+    "tasks": {
+      "PickCube": {
+        "RPD dense": 1.0,
+        "PPO dense": 10.0,
+        "RPD sparse": 14.5,
+        "PPO sparse": null,
+        "x_end": 19.0
+      },
+      "LiftPegUpright": {
+        "RPD dense": 0.7,
+        "PPO dense": 2.9,
+        "RPD sparse": 0.9,
+        "PPO sparse": null,
+        "x_end": 3.0
+      },
+      "PullCube": {
+        "RPD dense": 0.15,
+        "PPO dense": 0.35,
+        "RPD sparse": 0.13,
+        "PPO sparse": 2.7,
+        "x_end": 0.8
+      },
+      "PushCube": {
+        "RPD dense": 0.1,
+        "PPO dense": 0.3,
+        "RPD sparse": 0.26,
+        "PPO sparse": null,
+        "x_end": 1.0
+      },
+      "RollBall": {
+        "RPD dense": 1.6,
+        "PPO dense": null,
+        "RPD sparse": 1.6,
+        "PPO sparse": null,
+        "x_end": 3.0
+      },
+      "StackCube": {
+        "RPD dense": 18.0,
+        "PPO dense": null,
+        "RPD sparse": 26.0,
+        "PPO sparse": null,
+        "x_end": 30.0
+      }
+    },
+    "note_null": "null = 해당 그래프 범위 안에서 0.5에 도달하지 않음 또는 판독 불가. RollBall은 ~0.5 평탄 구간, StackCube는 오른쪽 끝이 잘려 있어 값이 거칠다."
+  },
+  "fig5_not_in_finetune_set": {
+    "PullCubeTool (sparse)": {
+      "RPD sparse final": 0.85,
+      "PPO sparse final": 0.42,
+      "RPD dense final": 0.02,
+      "PPO dense final": 0.0,
+      "x_end_1e6": 9.0
+    },
+    "PokeCube": {
+      "RPD sparse final": 0.6,
+      "PPO dense final": 0.62,
+      "PPO sparse final": 0.05,
+      "x_end_1e7": 2.2,
+      "note": "RPD dense는 판독 불가"
+    }
+  },
+  "fig7_pushcube_camera_sparse": {
+    "x_unit": "1e6 steps",
+    "steps_to_0p5": {
+      "RPD-MSE (Octo)": 0.28,
+      "RPD-MSE (OpenVLA)": 0.23,
+      "PPO": null
+    },
+    "final_success_at_1p5": {
+      "RPD-MSE (Octo)": 0.98,
+      "RPD-MSE (OpenVLA)": 0.96,
+      "PPO": 0.35
+    },
+    "band_halfwidth_final": {
+      "RPD-MSE (Octo)": 0.02,
+      "RPD-MSE (OpenVLA)": 0.02,
+      "PPO": 0.1
+    },
+    "octo_teacher_line_after_camera_change": 0.0,
+    "openvla_teacher_line_after_camera_change": 0.045
+  }
+}

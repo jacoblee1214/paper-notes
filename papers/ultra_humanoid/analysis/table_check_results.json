@@ -1,0 +1,243 @@
+{
+  "table3": {
+    "cells": {
+      "ID_points": {
+        "RL_off": [
+          16,
+          20,
+          0.8,
+          [
+            0.584,
+            0.9193
+          ]
+        ],
+        "RL_on": [
+          19,
+          20,
+          0.95,
+          [
+            0.7639,
+            0.9911
+          ]
+        ]
+      },
+      "ID_position": {
+        "RL_off": [
+          14,
+          20,
+          0.7,
+          [
+            0.481,
+            0.8545
+          ]
+        ],
+        "RL_on": [
+          16,
+          20,
+          0.8,
+          [
+            0.584,
+            0.9193
+          ]
+        ]
+      },
+      "OOD_points": {
+        "RL_off": [
+          5,
+          20,
+          0.25,
+          [
+            0.1119,
+            0.4687
+          ]
+        ],
+        "RL_on": [
+          9,
+          20,
+          0.45,
+          [
+            0.2582,
+            0.6579
+          ]
+        ]
+      },
+      "OOD_position": {
+        "RL_off": [
+          4,
+          20,
+          0.2,
+          [
+            0.0807,
+            0.416
+          ]
+        ],
+        "RL_on": [
+          12,
+          20,
+          0.6,
+          [
+            0.3866,
+            0.7812
+          ]
+        ]
+      }
+    },
+    "fisher": {
+      "ID_points": {
+        "p_raw": 0.3416,
+        "diff_pp": 15.0,
+        "newcombe_diff_ci": [
+          -0.0711,
+          0.3699
+        ],
+        "p_holm": 0.9609
+      },
+      "ID_position": {
+        "p_raw": 0.7164,
+        "diff_pp": 10.0,
+        "newcombe_diff_ci": [
+          -0.1656,
+          0.3494
+        ],
+        "p_holm": 0.9609
+      },
+      "OOD_points": {
+        "p_raw": 0.3203,
+        "diff_pp": 20.0,
+        "newcombe_diff_ci": [
+          -0.0909,
+          0.4496
+        ],
+        "p_holm": 0.9609
+      },
+      "OOD_position": {
+        "p_raw": 0.0225,
+        "diff_pp": 40.0,
+        "newcombe_diff_ci": [
+          0.0963,
+          0.617
+        ],
+        "p_holm": 0.09
+      }
+    },
+    "mcnemar_paired_range": {
+      "ID_points": {
+        "min_p": 0.25,
+        "max_p": 0.375
+      },
+      "ID_position": {
+        "min_p": 0.5,
+        "max_p": 0.7539
+      },
+      "OOD_points": {
+        "min_p": 0.125,
+        "max_p": 0.424
+      },
+      "OOD_position": {
+        "min_p": 0.0078,
+        "max_p": 0.0768
+      }
+    }
+  },
+  "table4": {
+    "dense_19_of_26_wilson": [
+      0.5392,
+      0.863
+    ],
+    "cells_wilson": {
+      "MoCap_vertical": {
+        "k": 8,
+        "n": 10,
+        "ci": [
+          0.4902,
+          0.9433
+        ]
+      },
+      "MoCap_lateral": {
+        "k": 9,
+        "n": 10,
+        "ci": [
+          0.5958,
+          0.9821
+        ]
+      },
+      "Ego_vertical": {
+        "k": 5,
+        "n": 10,
+        "ci": [
+          0.2366,
+          0.7634
+        ]
+      },
+      "Ego_lateral": {
+        "k": 6,
+        "n": 10,
+        "ci": [
+          0.3127,
+          0.8318
+        ]
+      }
+    },
+    "fisher": {
+      "MoCap_pooled_vs_Ego_pooled (17/20 vs 11/20)": {
+        "p": 0.0824
+      },
+      "MoCap_vs_Ego_vertical (8/10 vs 5/10)": {
+        "p": 0.3498
+      },
+      "MoCap_vs_Ego_lateral (9/10 vs 6/10)": {
+        "p": 0.3034
+      }
+    }
+  },
+  "table1_welch_sensitivity": {
+    "ID_humanoid_succ: ULTRA(Ours) 67.30±0.12 vs ULTRA(Distillation) 85.03±3.00": {
+      "n=3": 0.009323,
+      "n=5": 0.000186,
+      "n=10": 0.0,
+      "n=20": 0.0
+    },
+    "OOD_humanoid_succ: ULTRA(Ours) 70.57±0.54 vs OmniRetarget(augmented, retrained) 46.71±0.74": {
+      "n=3": 4e-06,
+      "n=5": 0.0,
+      "n=10": 0.0,
+      "n=20": 0.0
+    },
+    "ID_humanoid_succ: ULTRA(Ours) 67.30±0.12 vs ULTRA(RL) 54.47±0.43": {
+      "n=3": 0.000149,
+      "n=5": 0.0,
+      "n=10": 0.0,
+      "n=20": 0.0
+    }
+  },
+  "table2_welch_sensitivity": {
+    "Largebox foot skating duration: ULTRA 0.061±0.031 vs OmniRetarget 0.205±0.106": {
+      "n=3": 0.133842,
+      "n=5": 0.035925,
+      "n=10": 0.001854,
+      "n=20": 7e-06
+    },
+    "Largebox contact floating: ULTRA 0.015±0.063 vs OmniRetarget 0.231±0.224": {
+      "n=3": 0.232174,
+      "n=5": 0.097059,
+      "n=10": 0.014306,
+      "n=20": 0.000417
+    },
+    "Suitcase penetration duration: ULTRA 0.002±0.013 vs OmniRetarget 0.003±0.016": {
+      "n=3": 0.93724,
+      "n=5": 0.916407,
+      "n=10": 0.879866,
+      "n=20": 0.829471
+    }
+  },
+  "text_checks": {
+    "RL gain ID points +18.8% (19/16-1)": 18.8,
+    "RL gain ID position +14.3% (16/14-1)": 14.3,
+    "RL gain OOD points +80% (9/5-1)": 80.0,
+    "RL gain OOD position +200% (12/4-1)": 200.0,
+    "OOD points ratio 9/5 = 1.8 ('nearly doubling')": 1.8,
+    "OOD position ratio 12/4 = 3 ('tripling')": 3.0,
+    "Teacher-student ID gap 97.57-67.30 (pp)": 30.27,
+    "Table IV dense 19/26 = 73.1%": 73.1
+  }
+}
