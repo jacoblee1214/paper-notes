@@ -15,6 +15,7 @@
 | `analysis/table_check.py` | Table 11 → Table 1, 본문 수치, Table 12 정합, 루브릭 격자, 검정, 리더보드 대조 |
 | `analysis/noise_toy.py` | video noise 분포, 중요도 가중치, 추론 단계별 σ |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
+| `analysis/extra_plan_stream.py` | 계획 스트림 형식과 시각 입력의 2차원 다단계 도달 toy (PyTorch CPU, 약 8분) |
 
 ## 재실행
 
@@ -24,9 +25,11 @@ mkdir -p paper/site
 curl -L -o paper/paper.pdf https://arxiv.org/pdf/2610.30136 && pdftotext -layout paper/paper.pdf paper/paper.txt
 curl -L -o paper/site/robotwin_leaderboard.json https://robotwin-platform.github.io/data/robotwin_leaderboard.json
 python3 analysis/table_check.py && python3 analysis/noise_toy.py && python3 analysis/plot_figures.py
+pip install torch  # 추가 검증은 PyTorch(CPU)가 필요
+python3 analysis/extra_plan_stream.py  # 결과 JSON을 다시 만듦
 ```
 
-모두 CPU에서 수 초 안에 끝납니다. 리더보드는 계속 갱신되므로 값과 순위는 달라질 수 있습니다(2026-10-25 갱신본 기준).
+기존 스크립트는 CPU에서 수 초 안에 끝납니다. 추가 검증 스크립트(PyTorch CPU)는 약 8분 걸립니다. 리더보드는 계속 갱신되므로 값과 순위는 달라질 수 있습니다(2026-10-25 갱신본 기준).
 
 ## 출처와 라이선스
 

@@ -1,0 +1,100 @@
+{
+ "device": "cpu",
+ "torch": "2.15.0",
+ "numpy": "1.26.4",
+ "python": "3.12.7",
+ "threads": 4,
+ "config": {
+  "dt": 0.016666666666666666,
+  "steps": 240,
+  "horizon": 8,
+  "grasp": 80,
+  "release": 180,
+  "kp": [
+   150.0,
+   300.0
+  ],
+  "demos": 3000,
+  "eval_episodes": 300,
+  "train_steps": 8000,
+  "seeds": [
+   0,
+   1
+  ],
+  "jitter_m": 0.0005,
+  "success_tol_m": 0.004,
+  "router_dist_m": 0.03,
+  "fm_euler_steps": 16
+ },
+ "results": {
+  "kp150": {
+   "base": {
+    "success_mean": 0.377,
+    "success_per_seed": [
+     0.323,
+     0.43
+    ],
+    "cmd_ratio_mean": 1.0
+   },
+   "posthoc": {
+    "success_mean": 0.303,
+    "success_per_seed": [
+     0.373,
+     0.233
+    ],
+    "cmd_ratio_mean": 0.5
+   },
+   "decoder": {
+    "success_mean": 0.575,
+    "success_per_seed": [
+     0.62,
+     0.53
+    ],
+    "cmd_ratio_mean": 0.5
+   },
+   "router": {
+    "success_mean": 0.55,
+    "success_per_seed": [
+     0.533,
+     0.567
+    ],
+    "cmd_ratio_mean": 0.782
+   }
+  },
+  "kp300": {
+   "base": {
+    "success_mean": 0.377,
+    "success_per_seed": [
+     0.513,
+     0.24
+    ],
+    "cmd_ratio_mean": 1.0
+   },
+   "posthoc": {
+    "success_mean": 0.348,
+    "success_per_seed": [
+     0.477,
+     0.22
+    ],
+    "cmd_ratio_mean": 0.5
+   },
+   "decoder": {
+    "success_mean": 0.507,
+    "success_per_seed": [
+     0.577,
+     0.437
+    ],
+    "cmd_ratio_mean": 0.5
+   },
+   "router": {
+    "success_mean": 0.525,
+    "success_per_seed": [
+     0.667,
+     0.383
+    ],
+    "cmd_ratio_mean": 0.784
+   }
+  }
+ },
+ "wall_time_s": 170.4
+}

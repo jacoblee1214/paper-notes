@@ -16,6 +16,7 @@ manifold 가설 toy로 분석한 자료입니다. 공식 코드와 데이터가 
 | `analysis/scaling_toy.py` | pass@S Beta-혼합 적합과 조기 종료 기대 표본 |
 | `analysis/manifold_toy.py` | 생성기 대용(최근접 시드 + 국소 보정) 대 annealed CEM toy |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
+| `analysis/extra_residual_flow.py` | 3관절 팔 toy: 잔차 flow matching, 절대 flow matching, 검색의 pass@S (PyTorch CPU, 약 20초) |
 
 ## 재실행
 
@@ -23,9 +24,11 @@ manifold 가설 toy로 분석한 자료입니다. 공식 코드와 데이터가 
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py && python3 analysis/scaling_toy.py && python3 analysis/manifold_toy.py
 cd analysis && python3 plot_figures.py
+pip install torch  # 추가 검증은 PyTorch(CPU)가 필요
+python3 analysis/extra_residual_flow.py  # 결과 JSON을 다시 만듦
 ```
 
-모두 CPU 단일 스레드에서 수 초에서 수십 초 안에 끝납니다. 논문 PDF는 필요하지 않습니다(수치는 스크립트에 출처와 함께 적었습니다).
+기존 스크립트는 CPU 단일 스레드에서 수 초에서 수십 초 안에 끝납니다. 추가 검증 스크립트(PyTorch CPU)는 20초 정도 걸립니다. 논문 PDF는 필요하지 않습니다(수치는 스크립트에 출처와 함께 적었습니다).
 
 ## 출처와 라이선스
 

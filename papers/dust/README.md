@@ -14,6 +14,7 @@ numpy toy(추정기, cosine 법칙, credit decay의 편향-분산)로 분석한 
 | `analysis/table_check.py` | 본문 수치 재계산, power law 재적합, EGGROLL 외삽, 코드 배분 대조, 연산량 환산 |
 | `analysis/dust_toy.py` | Dust 추정기 numpy 구현과 cosine 법칙·편향 실험 |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
+| `analysis/extra_dust_small_lm.py` | 직접 구현한 Dust와 backprop의 작은 문자 Transformer 학습 곡선 (PyTorch CPU, 약 8분) |
 
 ## 재실행
 
@@ -21,9 +22,11 @@ numpy toy(추정기, cosine 법칙, credit decay의 편향-분산)로 분석한 
 pip install numpy scipy matplotlib
 git clone https://github.com/qlabs-eng/dust code_official && git -C code_official checkout b20f7c0   # table_check.py가 dust.py의 배분을 읽음
 python3 analysis/table_check.py && python3 analysis/dust_toy.py && python3 analysis/plot_figures.py
+pip install torch  # 추가 검증은 PyTorch(CPU)가 필요
+python3 analysis/extra_dust_small_lm.py  # 결과 JSON을 다시 만듦
 ```
 
-`table_check.py`는 수 초, `dust_toy.py`는 CPU에서 약 4분이 걸립니다.
+`table_check.py`는 수 초, `dust_toy.py`는 CPU에서 약 4분이 걸립니다. 추가 검증 스크립트(PyTorch CPU)는 약 8분 걸립니다.
 
 ## 출처와 라이선스
 

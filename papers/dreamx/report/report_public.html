@@ -607,6 +607,84 @@ li { margin: 2px 0; }
 <li><strong>query를 0으로 바꿔도 움직임이 45.6% 남습니다.</strong> 첫 프레임과 생성 prior만으로도 &quot;그럴듯한 움직임&quot;이 상당히 나옵니다. Table 2의 영상 전이 점수에도 이 몫이 섞여 있을 수 있으므로, query = 0 기준선의 FVD·PSNR이 함께 있어야 합니다(<code>04</code> C2).</li>
 <li>표본은 <strong>골라 낸 고움직임 클립 8개 × seed 2개</strong>입니다. 분포를 대표하지 않습니다.</li>
 </ol>
+<h2>추가 검증 (2026-11-11)</h2>
+<p>스크립트: <code>analysis/extra_alignment_nonlinear.py</code> → <code>analysis/extra_alignment_nonlinear_results.json</code> (PyTorch CPU, 4 스레드, 실행 57초). 선형 정렬 toy(§1)를 비선형으로 바꾼 실험입니다.</p>
+<h3>추가 검증 1: 비선형 encoder·decoder에서도 공유 encoder의 정렬이 시점 각도에 따라 깨지는가</h3>
+<p><strong>목적.</strong> §1의 선형 결론 세 가지(공유 encoder는 θ ≈ 0에서만 정렬, embodiment별 encoder는 임의적, 짝 클립 5%면 정렬)가 비선형 encoder와 행동 손실에서도 유지되는지 봅니다. 탐침 R²가 정렬을 재지 못한다는 결론도 함께 봅니다.</p>
+<p><strong>설정(가정).</strong></p>
+<ul>
+<li>행동 a ∈ R², 관측 Δo_e = tanh(R_e φ(a) W + 잡음) ∈ R⁸, φ(a) = [a₁, a₂, a₁a₂, sin a₁]. 로봇 R_r은 직교 열 2개, 사람 R_h = R_r Q(θ) + 0.3 R_⊥(열 정규화).</li>
+<li>encoder MLP 8→64→2, embodiment별 decoder MLP 2→64→8(재구성). 로봇 클립에만 행동 head 손실 ‖Hz − a‖²(H 선형, 공유).</li>
+<li>조건: S 공유 encoder, I embodiment별 encoder, P embodiment별 encoder + 짝 클립 5%에 가중치 5의 ‖z_h − z_r‖².</li>
+<li>지표: 탐침 R²(사람 latent → 행동, 선형), 전이 오차 ‖Hz_h − a_h‖²/‖a_h‖². embodiment당 1000표본, Adam 2000 step, θ ∈ {0, 30, 60, 90}°, 시드 3개.</li>
+<li>첫 프레임 조건 decoder는 두지 않았습니다(embodiment별 decoder로 대신). CNN 대신 MLP.</li>
+<li>장치: CPU. 패키지: torch 2.15.0, numpy 1.26.4, Python 3.12.7.</li>
+</ul>
+<p><strong>결과 (시드 3개 평균).</strong></p>
+<table>
+<thead>
+<tr>
+<th>θ</th>
+<th>0°</th>
+<th>30°</th>
+<th>60°</th>
+<th>90°</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S 전이 오차</td>
+<td>0.21</td>
+<td>1.09</td>
+<td>2.79</td>
+<td>2.84</td>
+</tr>
+<tr>
+<td>I 전이 오차</td>
+<td>1.64</td>
+<td>1.33</td>
+<td>1.40</td>
+<td>1.23</td>
+</tr>
+<tr>
+<td>P 전이 오차</td>
+<td>0.22</td>
+<td>0.28</td>
+<td>0.27</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>S 사람 탐침 R²</td>
+<td>0.80</td>
+<td>0.59</td>
+<td>0.40</td>
+<td>0.41</td>
+</tr>
+<tr>
+<td>I 사람 탐침 R²</td>
+<td>0.65</td>
+<td>0.61</td>
+<td>0.60</td>
+<td>0.61</td>
+</tr>
+<tr>
+<td>P 사람 탐침 R²</td>
+<td>0.78</td>
+<td>0.73</td>
+<td>0.74</td>
+<td>0.75</td>
+</tr>
+</tbody>
+</table>
+<p>(전이 오차 1은 대략 &quot;행동을 예측하지 않는&quot; 수준입니다. 시드별 값은 결과 JSON에 있습니다.)</p>
+<p><strong>결론.</strong></p>
+<ul>
+<li>공유 encoder의 정렬은 θ에 따라 깨집니다. 전이 오차가 0.21(θ = 0)에서 2.8(θ ≥ 60°)로 올라갑니다. 선형 toy의 결론과 같은 방향입니다.</li>
+<li>짝 클립 5%를 넣은 P는 θ와 무관하게 0.25–0.28로 정렬됩니다. 선형 toy와 같은 결과입니다.</li>
+<li>embodiment별 encoder(I)는 θ와 무관하게 1.2–1.6으로 정렬되지 않습니다. 선형 toy와 같은 방향입니다.</li>
+<li><strong>탐침 점수에 대한 결론은 이 비선형 설정에서 유지되지 않습니다.</strong> 선형 toy에서는 탐침 R²가 세 조건과 모든 θ에서 1이었지만, 비선형에서는 S의 탐침 R²가 θ에 따라 0.80에서 0.41로 떨어지며 전이 오차와 같이 움직입니다. 반면 P는 탐침 R²가 0.75 근처이면서 전이 오차는 가장 작습니다. 따라서 탐침 점수 하나로 정렬을 판단할 수 없다는 주장은 맞지만, 탐침이 정렬과 무관하다는 강한 주장은 이 실험에서 지지되지 않습니다.</li>
+</ul>
+<p><strong>한계.</strong> 영상 대신 8차원 움직임 벡터, CNN 대신 MLP, 첫 프레임 조건 없음, 시드 3개입니다. 전이 오차의 S와 I 값은 시드 간 편차가 큽니다(S, θ = 90°: 2.46–3.33). 논문의 DreamX 백본과 직접 비교할 수 없습니다.</p>
 </section>
 <section class="chapter"><h1>04. 주장 검증: 수치 재계산, 공개 자료 대조, 구현 가능성</h1>
 <ul>

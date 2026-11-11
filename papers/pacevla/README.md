@@ -14,12 +14,15 @@
 | `analysis/table_check.py` | Table 1–6, 본문, Fig. 1(b) 재계산 |
 | `analysis/quant_toy.py` | SO(3) 집계, 2차원 추적 toy, ES의 t_max 의존성 (numpy, 단일 스레드, 10초 이내) |
 | `analysis/plot_figures.py` | 리포트 그래프 세 장 |
+| `analysis/extra_quant_policy.py` | 양자화 명령 toy: 기준·사후 양자화·학습된 decoder·물리 판정 라우터 (PyTorch CPU, 약 3분) |
 
 ## 재실행
 
 ```bash
 pip install numpy scipy matplotlib
 cd analysis && python3 table_check.py && python3 quant_toy.py && python3 plot_figures.py
+pip install torch  # 추가 검증은 PyTorch(CPU)가 필요
+python3 analysis/extra_quant_policy.py  # 결과 JSON을 다시 만듦
 ```
 
 ## 출처와 라이선스

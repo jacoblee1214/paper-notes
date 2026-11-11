@@ -20,6 +20,7 @@
 | `analysis/table_check.py` | 표·본문 수치 재계산, Wilson 구간, Fisher 검정 |
 | `analysis/alignment_toy.py` | 재구성 손실만으로 사람·로봇 latent가 정렬되는지 보는 선형 toy |
 | `analysis/plot_figures.py` | 리포트 그래프 세 장 |
+| `analysis/extra_alignment_nonlinear.py` | 비선형 latent 정렬 toy: 공유·분리 encoder, 짝 클립 5%의 전이 오차 (PyTorch CPU, 약 1분) |
 
 ## 재실행
 
@@ -27,9 +28,11 @@
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py && python3 analysis/alignment_toy.py
 python3 analysis/plot_figures.py
+pip install torch  # 추가 검증은 PyTorch(CPU)가 필요
+python3 analysis/extra_alignment_nonlinear.py  # 결과 JSON을 다시 만듦
 ```
 
-모두 CPU 단일 스레드로 1분 안에 끝납니다. 논문 PDF와 가중치는 필요하지 않습니다(수치는 스크립트에 출처와 함께 적었습니다).
+기존 스크립트는 CPU 단일 스레드로 1분 안에 끝납니다. 추가 검증 스크립트(PyTorch CPU)는 약 1분 걸립니다. 논문 PDF와 가중치는 필요하지 않습니다(수치는 스크립트에 출처와 함께 적었습니다).
 
 ## 출처와 라이선스
 

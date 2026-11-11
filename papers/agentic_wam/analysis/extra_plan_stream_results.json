@@ -1,0 +1,71 @@
+{
+ "device": "cpu",
+ "torch": "2.15.0",
+ "numpy": "1.26.4",
+ "python": "3.12.7",
+ "threads": 4,
+ "config": {
+  "slots": 3,
+  "step": 0.05,
+  "radius": 0.03,
+  "horizon": 200,
+  "train_episodes": 1000,
+  "eval_episodes": 500,
+  "planner_epochs": 10,
+  "actor_epochs": 70,
+  "batch": 1024,
+  "seeds": [
+   0,
+   1,
+   2
+  ]
+ },
+ "success_rate": {
+  "none_vision_off": {
+   "mean": 0.007,
+   "std": 0.001,
+   "per_seed": [
+    0.008,
+    0.006,
+    0.006
+   ]
+  },
+  "onehot_vision_off": {
+   "mean": 0.005,
+   "std": 0.001,
+   "per_seed": [
+    0.006,
+    0.004,
+    0.006
+   ]
+  },
+  "onehot_vision_on": {
+   "mean": 0.498,
+   "std": 0.049,
+   "per_seed": [
+    0.548,
+    0.432,
+    0.514
+   ]
+  },
+  "code_vision_off": {
+   "mean": 0.005,
+   "std": 0.002,
+   "per_seed": [
+    0.006,
+    0.008,
+    0.002
+   ]
+  },
+  "code_vision_on": {
+   "mean": 0.692,
+   "std": 0.03,
+   "per_seed": [
+    0.684,
+    0.66,
+    0.732
+   ]
+  }
+ },
+ "wall_time_s": 450.9
+}

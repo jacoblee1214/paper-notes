@@ -14,6 +14,7 @@ numpy toy로 time-aware RoPE와 학습/평가 시간 범위를 확인하며 분�
 | `analysis/table_check.py` | 표 ↔ 웹 데이터 대조, 본문 수치 재계산, 시드별 성공 횟수 역산, 검정 |
 | `analysis/timing_toy.py` | time-aware RoPE와 시간 범위 numpy toy |
 | `analysis/plot_headline.py` | 리포트 그래프 세 장 |
+| `analysis/extra_time_conditioning.py` | 시간 조건화(index·AddTime·RoPE)와 학습 무작위화 범위에 따른 불규칙 관측 toy (PyTorch CPU, 약 8분) |
 
 ## 재실행
 
@@ -23,9 +24,11 @@ mkdir -p paper/site
 curl -L -o paper/paper.pdf https://arxiv.org/pdf/2610.13929 && pdftotext -layout paper/paper.pdf paper/paper.txt
 for f in data.js dex-data.js; do curl -L -o paper/site/$f https://changhaowang.github.io/chronospolicy/$f; done
 python3 analysis/table_check.py && python3 analysis/timing_toy.py && python3 analysis/plot_headline.py
+pip install torch  # 추가 검증은 PyTorch(CPU)가 필요
+python3 analysis/extra_time_conditioning.py  # 결과 JSON을 다시 만듦
 ```
 
-모두 CPU에서 수 초 안에 끝납니다. 웹 데이터 파일은 프로젝트 페이지가 바뀌면 달라질 수 있습니다(2026-10-28에 받은 값 기준).
+기존 스크립트는 CPU에서 수 초 안에 끝납니다. 추가 검증 스크립트(PyTorch CPU)는 약 8분 걸립니다. 웹 데이터 파일은 프로젝트 페이지가 바뀌면 달라질 수 있습니다(2026-10-28에 받은 값 기준).
 
 ## 출처와 라이선스
 
