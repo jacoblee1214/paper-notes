@@ -1,0 +1,218 @@
+{
+ "script": "nestdex/analysis/extra_chunk_policy.py",
+ "device": "cpu",
+ "threads": 4,
+ "torch_version": "2.15.0",
+ "mujoco_version": "4.0.0",
+ "numpy_version": "1.26.4",
+ "python": "3.12.7",
+ "setup": {
+  "hand": "3 planar fingers, 2 hinge joints each, palm lift (7 actuators), position servo kp 100 (fingers) / 800 (palm)",
+  "object": "upright cylinder, 0.08 m tall, 0.1 kg; radius not given to policy",
+  "train_radii_m": [
+   0.03,
+   0.045
+  ],
+  "test_radii_m": [
+   0.025,
+   0.035,
+   0.045,
+   0.055
+  ],
+  "demos": 10,
+  "test_offsets_per_radius": 10,
+  "control_hz": 20,
+  "episode_s": 2.0,
+  "sim_dt_s": 0.002,
+  "policy": "Transformer encoder, d=64, 2 layers, 4 heads, input = last 4 joint readings",
+  "train": "Adam lr 1e-3, wd 1e-4, 1500 full-batch steps",
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "ensemble_weight": "exp(-0.01 * age)"
+ },
+ "demo_success": "10/10",
+ "oracle_scripted_demonstrator_by_radius": {
+  "0.025": 1.0,
+  "0.035": 1.0,
+  "0.045": 1.0,
+  "0.055": 1.0
+ },
+ "oracle_success": 1.0,
+ "train_final_loss": {
+  "chunk_m1_seed0": 0.00033,
+  "chunk_m4_seed0": 0.00239,
+  "chunk_m8_seed0": 0.0105,
+  "ens_m8_seed0": 0.0105,
+  "chunk_m1_seed1": 0.00043,
+  "chunk_m4_seed1": 0.00194,
+  "chunk_m8_seed1": 0.01063,
+  "ens_m8_seed1": 0.01063,
+  "chunk_m1_seed2": 0.00049,
+  "chunk_m4_seed2": 0.00211,
+  "chunk_m8_seed2": 0.0123,
+  "ens_m8_seed2": 0.0123
+ },
+ "results": {
+  "open_loop_replay_demo0": {
+   "success": 0.75,
+   "by_radius": {
+    "0.025": 1.0,
+    "0.035": 1.0,
+    "0.045": 1.0,
+    "0.055": 0.0
+   }
+  },
+  "chunk_m1": {
+   "success_per_seed": [
+    0.475,
+    0.7,
+    0.75
+   ],
+   "by_radius_per_seed": {
+    "0.025": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "0.035": [
+     0.9,
+     0.8,
+     1.0
+    ],
+    "0.045": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "0.055": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "success_mean": 0.6417,
+   "success_std_over_seeds": 0.1196,
+   "by_radius_mean_over_seeds": {
+    "0.025": 0.3333,
+    "0.035": 0.9,
+    "0.045": 1.0,
+    "0.055": 0.3333
+   }
+  },
+  "chunk_m4": {
+   "success_per_seed": [
+    1.0,
+    1.0,
+    0.8
+   ],
+   "by_radius_per_seed": {
+    "0.025": [
+     1.0,
+     1.0,
+     0.2
+    ],
+    "0.035": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "0.045": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "0.055": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "success_mean": 0.9333,
+   "success_std_over_seeds": 0.0943,
+   "by_radius_mean_over_seeds": {
+    "0.025": 0.7333,
+    "0.035": 1.0,
+    "0.045": 1.0,
+    "0.055": 1.0
+   }
+  },
+  "chunk_m8": {
+   "success_per_seed": [
+    0.75,
+    0.75,
+    1.0
+   ],
+   "by_radius_per_seed": {
+    "0.025": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "0.035": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "0.045": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "0.055": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "success_mean": 0.8333,
+   "success_std_over_seeds": 0.1179,
+   "by_radius_mean_over_seeds": {
+    "0.025": 0.3333,
+    "0.035": 1.0,
+    "0.045": 1.0,
+    "0.055": 1.0
+   }
+  },
+  "ens_m8": {
+   "success_per_seed": [
+    0.8,
+    0.8,
+    1.0
+   ],
+   "by_radius_per_seed": {
+    "0.025": [
+     0.2,
+     0.2,
+     1.0
+    ],
+    "0.035": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "0.045": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "0.055": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "success_mean": 0.8667,
+   "success_std_over_seeds": 0.0943,
+   "by_radius_mean_over_seeds": {
+    "0.025": 0.4667,
+    "0.035": 1.0,
+    "0.045": 1.0,
+    "0.055": 1.0
+   }
+  }
+ },
+ "wall_time_s": 103.6
+}

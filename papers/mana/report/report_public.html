@@ -716,6 +716,76 @@ Student: 점군(512점, 손목 좌표) + 고유수용감각 → Perceiver(질의
 <li>시작점의 약 23%는 접촉 목표에 도달하지 못한다(관절 한계). 두 방법 모두 여기서 실패하며, 이 상한은 설정에 따른 값이다.</li>
 <li><strong>한계.</strong> 평면 2손가락, 점 샘플 침투 검사, 상자 1개. 3차원, 실제 접촉 솔버, LG의 기하 샘플링은 포함하지 않았다. 논문 Fig. 8과 직접 비교하지 않았으므로 실제 LG+의 성능은 이 결과로 정해지지 않는다. 앞 절의 &quot;지면 근처 한계&quot;는 이 toy에서 재현되었다.</li>
 </ul>
+<h3>추가 검증 2: 도구 관절 적분기 안정성, MuJoCo 1자유도</h3>
+<p><strong>목적.</strong> §5는 도구 관절을 명시적 Euler로 적분하면 이 규모(3–7 N, 1–2 cm, 5–50 g, dt = 1/200 s)에서 발산한다는 toy 결과를 보였습니다. 이 절에서는 같은 파라미터 격자를 MuJoCo 4.0.0의 적분기로 돌려, 실제 시뮬레이터 기본 적분기에서도 같은 판정이 나오는지 봅니다.</p>
+<p><strong>설정(가정).</strong></p>
+<ul>
+<li>미끄럼 관절 1개(질량 m, 강성 k = F/s, 점성 감쇠 c = 2ζ√(km), 평형 0). 초기 변위 s, 정지 상태에서 놓습니다. 중력 0, 접촉 없음.</li>
+<li>격자: (F, s, m) = (3 N, 1 cm, 5 g), (3 N, 2 cm, 50 g), (7 N, 1 cm, 5 g), (7 N, 1 cm, 50 g). ζ = 0과 0.2. dt = 1/200, 1/500, 1/1000 s. 1 s 적분.</li>
+<li>적분기: MuJoCo <code>Euler</code>, <code>implicit</code>, <code>implicitfast</code>, <code>RK4</code>.</li>
+<li>지표: 마지막 0.2 s의 |x| 최댓값을 s로 나눈 값. 1보다 크면 초기 진폭보다 커진 것입니다. 값이 발산하면 NaN 또는 비정상 판정.</li>
+<li><code>analysis/extra_joint_integrator.py</code> → <code>analysis/extra_joint_integrator_results.json</code> (CPU 단일 스레드, 약 0.2초).</li>
+<li>장치: CPU. 패키지: mujoco 4.0.0, numpy 1.26.4, Python 3.12.7.</li>
+</ul>
+<p><strong>결과 (ζ = 0.2, dt = 1/200 s).</strong> 네 적분기 모두 네 경우에서 진폭이 줄어들었고(0.0000–0.0002 배, 마지막 0.2 s 기준), 발산하지 않았습니다. <code>Euler</code>, <code>implicit</code>, <code>implicitfast</code>는 모든 경우에서 값이 같았습니다.</p>
+<p><strong>결과 (ζ = 0, 감쇠 없음).</strong></p>
+<table>
+<thead>
+<tr>
+<th>경우 (F, s, m)</th>
+<th>ω·dt</th>
+<th>Euler, dt 1/200</th>
+<th>Euler, 1/500</th>
+<th>Euler, 1/1000</th>
+<th>RK4, 1/200</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3 N, 1 cm, 5 g</td>
+<td>1.22</td>
+<td>1.26</td>
+<td>1.03</td>
+<td>1.01</td>
+<td>0.04</td>
+</tr>
+<tr>
+<td>7 N, 1 cm, 5 g</td>
+<td>1.87</td>
+<td>2.83</td>
+<td>1.08</td>
+<td>1.02</td>
+<td>0.00</td>
+</tr>
+<tr>
+<td>3 N, 2 cm, 50 g</td>
+<td>0.27</td>
+<td>1.01</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>7 N, 1 cm, 50 g</td>
+<td>0.59</td>
+<td>1.05</td>
+<td>1.01</td>
+<td>1.00</td>
+<td>0.95</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>ζ = 0.2에서 <code>Euler</code>는 §5의 명시적 Euler 발산 판정(8가지 중 6가지 발산)과 달리 네 경우 모두 감쇠합니다.</li>
+<li>ζ = 0, ω·dt ≈ 1.9인 7 N, 1 cm, 5 g에서 <code>Euler</code>는 진폭이 초기의 2.8배까지 커집니다. dt를 1/500으로 줄이면 1.08배로 줄어듭니다. 이 값은 에너지 오차이고, 1-DOF 발산이 아닙니다.</li>
+</ul>
+<p><strong>결론.</strong></p>
+<ul>
+<li>§5의 &quot;명시적 Euler 발산&quot; 결론은 MuJoCo의 기본 <code>Euler</code>에는 맞지 않습니다. MuJoCo <code>Euler</code>는 관절 감쇠와 강성을 암시적으로 다루는 것으로 보입니다(감쇠 상태에서 세 적분기가 같은 값을 줍니다). 따라서 &quot;명시적 Euler가 발산하므로 암시적 적분이 필요하다&quot;는 §5의 문장은, MuJoCo 기본 설정에서는 그대로 적용되지 않습니다. 순수 명시적 Euler의 발산은 numpy toy에서만 보였습니다.</li>
+<li>감쇠가 없을 때는 dt의 영향이 큽니다. ω·dt가 1.9 근처이면 MuJoCo <code>Euler</code>의 진폭 오차가 dt 1/200에서 2.8배입니다. 도구 스프링의 실제 감쇠가 0에 가깝다면 dt를 1/500 이하로 두는 것이 안전합니다.</li>
+<li>접촉이 있는 경우는 확인하지 않았습니다. 접촉 솔버의 반복 횟수와 soft contact 설정이 도구 진동에 어떻게 작용하는지는 이 절로 정해지지 않습니다.</li>
+<li><strong>한계.</strong> 중력과 접촉이 없는 1자유도 선형 스프링 관절입니다. 실제 손의 관절 결합, 도구 질량 분포, 접촉 정지는 포함하지 않았습니다. 명시적 Euler를 MuJoCo 안에서 직접 돌린 것이 아니라(MuJoCo에 없음), §5의 numpy 결과와는 별개 시스템입니다. 공식 파이프라인의 dt와 적분기 설정은 확인하지 않았습니다.</li>
+</ul>
 </section>
 <section class="chapter"><h1>04. 주장 검증과 구현 가능성</h1>
 <ul>

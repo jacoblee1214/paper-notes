@@ -21,6 +21,7 @@
 | `analysis/table_check.py` | Table III 재계산과 검정(1초 미만) |
 | `analysis/cvar_toy.py` | 이중 봉우리 믿음의 CVaR 선택, µ_f 민감도, softplus 편향, 샘플링 확인 |
 | `analysis/extra_eq8_tau.py` | 추가 검증: 식 (8) 샘플의 간격 질량과 온도 τ 어닐링 (numpy, 1스레드, 약 1초) |
+| `analysis/extra_friction_mix.py` | 추가 검증: MuJoCo 접촉 마찰 결합 규칙(µ_f = 1.0, µ_o 0.4와 0.9) 측정 (MuJoCo, 1스레드, 약 1초) |
 | `analysis/plot_figures.py` | 그래프 세 장 |
 | `report/figures/` | 우리가 그린 그래프 세 장 |
 

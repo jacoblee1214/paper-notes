@@ -1,0 +1,128 @@
+{
+ "script": "analysis/extra_friction_mix.py",
+ "device": "cpu",
+ "threads": 1,
+ "mujoco_version": "4.0.0",
+ "numpy_version": "1.26.4",
+ "python": "3.12.7",
+ "params": {
+  "dt_s": 0.001,
+  "sim_time_s": 1.0,
+  "speed_threshold_m_s": 0.05,
+  "bisection_iters": 22,
+  "gravity": 9.81
+ },
+ "pairs": [
+  {
+   "geom_friction_floor": 1.0,
+   "geom_friction_slab": 0.4,
+   "effective_mu_sliding": 1.0055,
+   "contact_friction_stored_by_mujoco": 1.0,
+   "closest_rule": "max",
+   "rule_values": {
+    "max": 1.0,
+    "geometric_mean": 0.6325,
+    "min": 0.4,
+    "arithmetic_mean": 0.7
+   }
+  },
+  {
+   "geom_friction_floor": 0.4,
+   "geom_friction_slab": 1.0,
+   "effective_mu_sliding": 1.0055,
+   "contact_friction_stored_by_mujoco": 1.0,
+   "closest_rule": "max",
+   "rule_values": {
+    "max": 1.0,
+    "geometric_mean": 0.6325,
+    "min": 0.4,
+    "arithmetic_mean": 0.7
+   }
+  },
+  {
+   "geom_friction_floor": 1.0,
+   "geom_friction_slab": 0.9,
+   "effective_mu_sliding": 1.0055,
+   "contact_friction_stored_by_mujoco": 1.0,
+   "closest_rule": "max",
+   "rule_values": {
+    "max": 1.0,
+    "geometric_mean": 0.9487,
+    "min": 0.9,
+    "arithmetic_mean": 0.95
+   }
+  },
+  {
+   "geom_friction_floor": 0.9,
+   "geom_friction_slab": 1.0,
+   "effective_mu_sliding": 1.0055,
+   "contact_friction_stored_by_mujoco": 1.0,
+   "closest_rule": "max",
+   "rule_values": {
+    "max": 1.0,
+    "geometric_mean": 0.9487,
+    "min": 0.9,
+    "arithmetic_mean": 0.95
+   }
+  },
+  {
+   "geom_friction_floor": 0.4,
+   "geom_friction_slab": 0.4,
+   "effective_mu_sliding": 0.405,
+   "contact_friction_stored_by_mujoco": 0.4,
+   "closest_rule": "max",
+   "rule_values": {
+    "max": 0.4,
+    "geometric_mean": 0.4,
+    "min": 0.4,
+    "arithmetic_mean": 0.4
+   }
+  },
+  {
+   "geom_friction_floor": 0.9,
+   "geom_friction_slab": 0.9,
+   "effective_mu_sliding": 0.9046,
+   "contact_friction_stored_by_mujoco": 0.9,
+   "closest_rule": "max",
+   "rule_values": {
+    "max": 0.9,
+    "geometric_mean": 0.9,
+    "min": 0.9,
+    "arithmetic_mean": 0.9
+   }
+  },
+  {
+   "geom_friction_floor": 1.0,
+   "geom_friction_slab": 1.0,
+   "effective_mu_sliding": 1.0055,
+   "contact_friction_stored_by_mujoco": 1.0,
+   "closest_rule": "max",
+   "rule_values": {
+    "max": 1.0,
+    "geometric_mean": 1.0,
+    "min": 1.0,
+    "arithmetic_mean": 1.0
+   }
+  },
+  {
+   "geom_friction_floor": 0.4,
+   "geom_friction_slab": 0.9,
+   "effective_mu_sliding": 0.9046,
+   "contact_friction_stored_by_mujoco": 0.9,
+   "closest_rule": "max",
+   "rule_values": {
+    "max": 0.9,
+    "geometric_mean": 0.6,
+    "min": 0.4,
+    "arithmetic_mean": 0.65
+   }
+  }
+ ],
+ "case_mu_f_1p0": {
+  "mu_o_0p4_effective": 1.0055,
+  "mu_o_0p9_effective": 1.0055,
+  "difference": 0.0,
+  "note": "geom friction of the slab is 1.0 in both cases; the floor geom changes"
+ },
+ "wall_time_s": 0.73
+}

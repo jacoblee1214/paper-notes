@@ -18,6 +18,7 @@ temporal ensembling toy로 분석한 자료입니다. 공식 코드는 공개되
 | `analysis/table_check.py` | Table II·III 통계(Fisher, Holm, Mantel–Haenszel)와 공개 데이터 재분석 |
 | `analysis/ensemble_toy.py` | Eq. 2 temporal ensembling 가중치와 접촉 반응 toy |
 | `analysis/extra_clutch_toy.py` | 1차원 닫기 toy: 클러치 속도 상한과 chunk 길이의 접촉 반응 |
+| `analysis/extra_chunk_policy.py` | 추가 검증: MuJoCo 3지 평면 손의 시연 학습 정책(청크 길이 1·4·8, 시간 앙상블)과 열린 루프 재생 비교 (CPU 4스레드, 약 2분) |
 | `analysis/extra_effort_timing.py` | 공개 노력 곡선의 시간 해상 AUC와 블록 순서 점검 |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
 
