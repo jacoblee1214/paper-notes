@@ -15,6 +15,7 @@
 | `analysis/table_check.py` | 본문·그림·Table I 수치 재계산 |
 | `analysis/sampling_toy.py`, `reward_toy.py` | 샘플러·보상 구조 toy (numpy) |
 | `analysis/plot_figures.py` | 리포트 그래프 세 장 |
+| `analysis/extra_bank_grid.py` | 시작 상태 샘플러(식 4, SGS, 균등) × 보상 구조 다중 과제 toy (numpy, 수 분) |
 
 ## 재실행
 

@@ -13,6 +13,7 @@
 | `analysis/04_claim_verification.md` | 주장별 판정, 빠진 정보, 권리 표기, 구현 가능성 |
 | `analysis/table_check.py` | 표 재계산 (수 초) |
 | `analysis/shaping_toy.py` | 3단계 체인 MDP toy: 곱셈 보상, PBRS, 희소 보상, 추정기 오차 (약 70초, 1스레드) |
+| `analysis/extra_chain_sweep.py` | 3–5단계 체인에서 핸드오프 격차와 예측기 표본 수를 바꾼 foresight 이득 스캔 (numpy, 수 분, 1스레드) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 네 장 |
 
 ## 재실행

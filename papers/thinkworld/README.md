@@ -13,6 +13,7 @@
 | `analysis/04_claim_verification.md` | 주장별 재계산(C1–C14), 공개 자료와 다른 점, 구현 가능성 |
 | `analysis/table_check.py` | 표·그림·리더보드 재계산 |
 | `analysis/reward_toy.py` | Eq. 6 보상과 GRPO 표준화 toy |
+| `analysis/extra_grpo_recovery.py` | 레이블 없는 전이 GRPO로 토큰 복원, 보상 잡음·형식 벌칙 스캔 (numpy, 수 초) |
 | `analysis/plot_figures.py` | 리포트 그래프 세 장 |
 
 ## 재실행

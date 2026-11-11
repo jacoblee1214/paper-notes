@@ -14,6 +14,7 @@ numpy로 만든 DDPG toy(진자 swing-up)로 분석한 자료입니다. 공식 �
 | `analysis/table_check.py` | Table 1·부록 수치 재계산 |
 | `analysis/ddpg_toy.py` | numpy DDPG (8개 설정 × 5 시드) |
 | `analysis/plot_figures.py` | 그래프와 toy 통계 |
+| `analysis/extra_lqr_bn.py` | LQR toy에서 배치 정규화 × 표적망 교차 실험 (BN 3종 × 표적망 2종 × 관측 척도 2종, 시드 8개) |
 
 ## 재실행
 
