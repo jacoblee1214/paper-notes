@@ -1,0 +1,130 @@
+{
+  "libero_avg": {
+    "ours": 88.8,
+    "dp": 72.4,
+    "dit": 74.02
+  },
+  "maniskill_avg": {
+    "ours": 68.86,
+    "dp": 49.6,
+    "dit": 38.88
+  },
+  "libero_plus": {
+    "ours": {
+      "simple_mean": 53.27,
+      "table": 53.0
+    },
+    "dp": {
+      "simple_mean": 31.17,
+      "table": 31.7
+    },
+    "dit": {
+      "simple_mean": 31.81,
+      "table": 31.1
+    }
+  },
+  "real_per_task": {
+    "Placing Bowl": {
+      "dp": 16,
+      "ours": 17,
+      "fisher_p": 1.0,
+      "dp_wilson": [
+        0.584,
+        0.9193
+      ],
+      "ours_wilson": [
+        0.6396,
+        0.9476
+      ]
+    },
+    "Microwave": {
+      "dp": 12,
+      "ours": 15,
+      "fisher_p": 0.5006,
+      "dp_wilson": [
+        0.3866,
+        0.7812
+      ],
+      "ours_wilson": [
+        0.5313,
+        0.8881
+      ]
+    },
+    "Door Opening": {
+      "dp": 13,
+      "ours": 17,
+      "fisher_p": 0.2733,
+      "dp_wilson": [
+        0.4329,
+        0.8188
+      ],
+      "ours_wilson": [
+        0.6396,
+        0.9476
+      ]
+    },
+    "Nut onto Screw": {
+      "dp": 5,
+      "ours": 12,
+      "fisher_p": 0.0536,
+      "dp_wilson": [
+        0.1119,
+        0.4687
+      ],
+      "ours_wilson": [
+        0.3866,
+        0.7812
+      ]
+    }
+  },
+  "real_pooled": {
+    "dp": 46,
+    "ours": 61,
+    "n_per_arm": 80,
+    "fisher_p": 0.0183,
+    "dp_wilson": [
+      0.4657,
+      0.6774
+    ],
+    "ours_wilson": [
+      0.6586,
+      0.8424
+    ]
+  },
+  "mantel_haenszel": {
+    "or_common": 2.604,
+    "chi2": 3.535,
+    "p_two_sided": 0.0601
+  },
+  "holm_per_task": {
+    "Nut onto Screw": 0.2144,
+    "Door Opening": 0.8199,
+    "Microwave": 1.0,
+    "Placing Bowl": 1.0
+  },
+  "power": {
+    "observed_p_dp": 0.575,
+    "observed_p_ours": 0.7625,
+    "n_per_arm_for_80pct_at_observed_diff": 98,
+    "n_per_arm_for_80pct_if_diff_10pt": 367,
+    "n_per_arm_for_80pct_if_diff_5pt": 1506
+  },
+  "libero_welch_sd_assumed": {
+    "Spatial": {
+      "t": 12.06,
+      "p": 0.0004
+    },
+    "Object": {
+      "t": 5.95,
+      "p": 0.004
+    },
+    "Goal": {
+      "t": 22.05,
+      "p": 0.0
+    },
+    "Long": {
+      "t": 21.22,
+      "p": 0.0001
+    }
+  }
+}

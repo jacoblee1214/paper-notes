@@ -1,0 +1,1000 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>VolumeDP 분석 리포트 (공개)</title><style>
+body { font-family: "Apple SD Gothic Neo", "Noto Sans CJK KR", sans-serif; font-size: 10.5pt; line-height: 1.6; color: #1d1d1f; margin: 0 2.2cm; }
+h1 { font-size: 20pt; border-bottom: 2px solid #1f6fb4; padding-bottom: 4px; }
+h2 { font-size: 14pt; margin-top: 1.4em; border-bottom: 1px solid #d0d0d0; }
+h3 { font-size: 11.5pt; }
+table { border-collapse: collapse; width: 100%; margin: 0.6em 0; font-size: 9pt; }
+th, td { border: 1px solid #c8c8c8; padding: 3px 6px; vertical-align: top; }
+th { background: #f0f4f8; }
+code { font-size: 9pt; background: #f4f4f4; padding: 0 2px; }
+img { max-width: 100%; display: block; margin: 0.6em auto 0.2em; }
+p.cap { text-align: center; font-size: 8.5pt; color: #555; margin-top: 0; }
+p.meta { font-size: 9pt; color: #555; }
+.break { page-break-before: always; }
+</style></head><body><h1>VolumeDP: 분석 리포트</h1>
+<p class="meta">arXiv:2603.17720v2 (2026-07-01) · IROS 2026 (채택) · Tianxing Zhou, Feiyang Xue, Zhangchen Ye 외 (Tsinghua IIIS) · 공개 코드: 단일 커밋 `d2ec13a` (ManiSkill 포크, Apache-2.0) · 분석일 2026-11-11 · 논문 라이선스 arXiv nonexclusive-distrib (CC BY 아님)</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 이미지 특징을 40³ 복셀 볼륨으로 올리고(deformable attention), 학습된 가중치로 200개 공간 토큰을 골라, DiT 블록 디퓨전 디코더에 넣습니다. RGB만 씁니다. 카메라 보정이 필요합니다.</li>
+<li><strong>공개 코드에는 방법이 없습니다:</strong> 저장소는 ManiSkill 3.0.0b19 상류 구조이고, 볼륨, 토큰, 디코더 구현은 찾지 못했습니다(검색 0건). 프로젝트 페이지의 LIBERO 코드 링크는 404입니다.</li>
+<li><strong>승격 조건 (LIBERO DP 기준선이 같은 레시피로 재학습되었는가): 해결되지 않았습니다.</strong> DP 행에 자체 실행 표시가 없고, 인용 출처로 보이는 IB-BC [32]에는 같은 수치가 없습니다. 같은 표의 BC 행은 [32]와 소수점까지 일치합니다. 공정성은 확인할 수 없습니다.</li>
+<li><strong>실물 46/80 대 61/80:</strong> 과제 무시 Fisher p = 0.018, 과제 층화 Mantel-Haenszel p = 0.060입니다. 과제별로는 Holm 보정 후 유의하지 않습니다. 과제당 n = 20은 검정력이 부족합니다(팔당 약 98회 필요).</li>
+<li><strong>LIBERO-Plus 평균 불일치:</strong> 열 단순평균은 DP 31.17, DiT 31.81인데 표에는 31.7과 31.1로 적혀 있습니다(뒤바뀐 모양). 결론(1위, 약 21포인트)은 바뀌지 않습니다.</li>
+<li><strong>과제명 불일치:</strong> 본문은 Hook Cube와 Stack Pyramid를 쓰지만, 공개 환경에는 이 둘이 없습니다. Fig. 3은 Pull Cube Tool을 보입니다.</li>
+<li><strong>토이 결과:</strong> 깊이가 관측에 들어가야 z 예측이 좋아집니다(2D 투영은 평균 수준). 가림이 있으면 깊이 표현도 오차가 큽니다. 이 토이는 VolumeDP의 우위를 증명하지 않습니다.</li>
+<li><strong>구현 가능성:</strong> 공식 재현 경로는 모두 열려 있지 않습니다(LIBERO 코드 없음, 실물 없음, ManiSkill은 macOS 미지원). 이 맥에서 방법 구현은 MPS로 소규모 시도가 가능할 수 있으나 미확인입니다.</li>
+</ol>
+<p><img src="figures/own_real_per_task.png" alt="직접 만든 그래프: 실물 과제별 성공률과 Wilson 95% 구간" /></p>
+<p class="cap">직접 계산: Table V 과제별 성공률(n = 20)과 Wilson 95% 구간. 과제별 구간이 크게 겹칩니다.</p>
+<p><img src="figures/own_libero_bars.png" alt="직접 만든 그래프: LIBERO 표 I 값" /></p>
+<p class="cap">Table I 값을 옮긴 그래프(재계산 아님). DP 행의 출처가 불명확합니다.</p>
+<p><img src="figures/own_toy_rmse.png" alt="직접 만든 토이 결과" /></p>
+<p class="cap">CPU 토이: 관측 표현별 z 예측 RMSE. 점 요약 선형 0.000은 구성상의 누출입니다(03 §6).</p>
+<h2>권리 표기</h2>
+<ul>
+<li><strong>논문:</strong> arXiv nonexclusive-distrib 1.0. CC BY가 아닙니다. PDF 1쪽에는 arXiv 스탬프만 있고 IEEE 저작권 문구는 없습니다. 게시본과 공개 리포트에는 논문 그림을 넣지 않고, 직접 만든 그래프만 넣습니다.</li>
+<li><strong>공개 코드:</strong> Apache-2.0. 얕은 클론만 하고 재배포하지 않습니다.</li>
+</ul>
+<div class="break"></div>
+<h1>01. 논문 분석: VolumeDP (arXiv:2603.17720v2)</h1>
+<ul>
+<li><strong>제목:</strong> VolumeDP: Modeling Volumetric Representation for Manipulation Policy Learning</li>
+<li><strong>저자:</strong> Tianxing Zhou, Feiyang Xue, Zhangchen Ye (equal contribution), Tianyuan Yuan, Hang Zhao, Tao Jiang (Tsinghua IIIS 및 다른 기관 소속)</li>
+<li><strong>arXiv:</strong> v1 2026-03-18, v2 2026-07-01 (cs.RO), 8쪽. 저널 comment: &quot;Accepted to IROS 2026&quot;</li>
+<li><strong>라이선스:</strong> arXiv nonexclusive-distrib 1.0 (CC BY 아님). PDF 1쪽에는 arXiv 식별 스탬프만 있고 IEEE 저작권 문구는 없습니다(<code>pdftotext -f 1 -l 1</code>로 확인).</li>
+<li><strong>원문:</strong> <code>paper/paper.pdf</code> (v2, 4.3 MB, 25 MB 미만이라 gitignore하지 않음). v1은 <code>.scratch/v1.pdf</code>에만 보관.</li>
+</ul>
+<h2>1. v1 → v2 차이</h2>
+<p>단어 단위 diff(<code>difflib</code>, 6,525 대 6,526 단어)에서 본문, 표, 수치 차이는 <strong>없습니다</strong>. 차이는 네 곳입니다.</p>
+<table>
+<thead>
+<tr>
+<th>위치</th>
+<th>v1</th>
+<th>v2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arXiv 스탬프</td>
+<td>v1, 18 Mar 2026</td>
+<td>v2, 1 Jul 2026</td>
+</tr>
+<tr>
+<td>초록 끝</td>
+<td>코드 공개 시점 문구(&quot;will be released&quot;)</td>
+<td>&quot;Code and videos are available on the project page: yzc0731.github.io/VolumeDP&quot;</td>
+</tr>
+<tr>
+<td>1쪽 각주</td>
+<td>&quot;These authors contributed equally&quot;</td>
+<td>&quot;Equal Contribution.&quot;</td>
+</tr>
+<tr>
+<td>1쪽 연락처</td>
+<td>(v1과 동일)</td>
+<td>(v2와 동일)</td>
+</tr>
+</tbody>
+</table>
+<p>따라서 v2의 실질 변화는 <strong>공개 코드에 대한 문장이 바뀐 것</strong>입니다. 그런데 프로젝트 페이지에는 &quot;Code (Coming soon)&quot; 버튼만 있고(§5 참고), v2 초록의 약속과 맞지 않습니다.</p>
+<h2>2. 문제와 주장</h2>
+<ul>
+<li><strong>문제(§I):</strong> 2D 이미지 특징을 3D 행동으로 바꾸는 과정의 2D–3D 불일치가 공간 추론을 해친다고 봅니다. 깊이 센서가 있는 포인트 클라우드(DP3 류)는 비용이 크므로, RGB만 쓰면서 3D 표현을 만드는 것이 목표입니다.</li>
+<li><strong>핵심 주장:</strong> (i) 이미지 특징을 복셀 볼륨으로 올리면 공간 추론이 좋아진다, (ii) 학습된 가중치로 200개 공간 토큰만 골라도 충분하다, (iii) 토큰 전체를 조건으로 주는 다중 토큰 디코더가 한 벡터로 압축하는 방식보다 낫다.</li>
+</ul>
+<h2>3. 방법 (식 번호와 절은 원문 기준)</h2>
+<table>
+<thead>
+<tr>
+<th>모듈</th>
+<th>내용</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>영상 인코딩</td>
+<td>현재 프레임과 과거 T 프레임의 공유 백본 특징 F2d ∈ R^{H×W×C}</td>
+<td>§III-A</td>
+</tr>
+<tr>
+<td>볼륨 공간</td>
+<td>과제별 큐브 범위 r = [(xmin,ymin,zmin),(xmax,ymax,zmax)], 40×40×40 복셀, 채널 32</td>
+<td>§III-A, §IV-A</td>
+</tr>
+<tr>
+<td>복셀 중심 좌표</td>
+<td>x = i·s + xmin 등 (식 1)</td>
+<td>식 1</td>
+</tr>
+<tr>
+<td>카메라 투영</td>
+<td>(u,v,1)ᵀ ∝ K P (x,y,z,1)ᵀ, P는 3×4 외부 행렬, K는 내부 행렬 (식 2)</td>
+<td>식 2</td>
+</tr>
+<tr>
+<td>볼륨–이미지 교차 주의</td>
+<td>복셀 질의가 투영점 주변의 학습된 오프셋에서 샘플링하는 deformable attention (식 3)</td>
+<td>식 3</td>
+</tr>
+<tr>
+<td>목표 조건</td>
+<td>텍스트 토큰을 복셀마다 붙여 2C 채널</td>
+<td>§III-B</td>
+</tr>
+<tr>
+<td>공간 토큰</td>
+<td>TokenLearner식 softmax 가중치 W ∈ R^{N×X×Y×Z}로 가중합, N = 200</td>
+<td>§III-B</td>
+</tr>
+<tr>
+<td>보조 감독</td>
+<td>말단 위치와 그리퍼 개폐 시점 주변에 BCE 마스크, 근거는 proprio 신호</td>
+<td>§III-B</td>
+</tr>
+<tr>
+<td>디코더</td>
+<td>202개 토큰(공간 200 + 언어 1 + proprio 1), 512차원 MLP 투영 후 adaLN-Zero DiT 블록</td>
+<td>§III-C, §IV-A</td>
+</tr>
+<tr>
+<td>학습 목표</td>
+<td>DDPM 노이즈 예측 MSE(DP와 동일), 샘플링 100 단계</td>
+<td>식 4, §IV-A</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 실험 설정 (원문에 있는 것만)</h2>
+<ul>
+<li><strong>LIBERO:</strong> 4 suite(Spatial, Object, Goal, Long), 과제당 시연 50개, no-op 제거와 실패 시연 제외. 3 시드.</li>
+<li><strong>ManiSkill:</strong> 5과제(Poke Cube, Place Sphere, Hook Cube, Stack Pyramid, Insert Peg), 과제당 평균 150개 시연(스크립트 정책). 3 시드.</li>
+<li><strong>LIBERO-Plus:</strong> LIBERO로만 학습한 뒤 7종 교란(카메라, 로봇 초기 상태, 언어, 조명, 배경, 센서 잡음, 배치)으로 평가.</li>
+<li><strong>실물:</strong> Galaxea R1 Lite(양팔 6-DoF 2개 + 그리퍼), 과제당 시연 100개, 시험 과제당 20회. 4과제(Placing Bowl, Microwave, Door Opening, Nut onto Screw).</li>
+<li><strong>입력:</strong> 256×256 RGB, 프레임 2장(t, t−1), 언어 지시, 8D proprio.</li>
+<li><strong>기준선:</strong> BC(LIBERO는 [32]에서 인용, ManiSkill은 ManiSkill 코드베이스의 BC), DP(ManiSkill, LIBERO), DiT-Block Policy.</li>
+<li><strong>&quot;All methods are uniformly trained and evaluated with 100 denoising steps.&quot;</strong> (§IV-A) 이 문장이 공정성 주장의 근거입니다. 다만 epoch 수, 배치 크기, 학습률, 샘플러, 이미지 전처리를 기준선별로 적지 않았습니다.</li>
+</ul>
+<h2>5. 핵심 수치 (표 번호는 원문 기준, 재계산은 <code>analysis/volumedp_check.py</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+<th>표</th>
+<th>재계산</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LIBERO 평균 Ours / DP / DiT</td>
+<td>88.8 / 72.4 / 74.0</td>
+<td>Table I</td>
+<td>일치 (88.80, 72.40, 74.03)</td>
+</tr>
+<tr>
+<td>LIBERO suite별 Ours (Spatial / Object / Goal / Long)</td>
+<td>90.7 / 95.9 / 89.9 / 78.7</td>
+<td>Table I</td>
+<td>평균 일치</td>
+</tr>
+<tr>
+<td>ManiSkill 평균 Ours / DP / DiT</td>
+<td>68.9 / 49.6 / 38.9</td>
+<td>Table II</td>
+<td>일치 (68.86, 49.6, 38.88)</td>
+</tr>
+<tr>
+<td>LIBERO-Plus 평균 Ours / DP / DiT</td>
+<td>53.0 / 31.7 / 31.1</td>
+<td>Table III</td>
+<td><strong>열 단순평균은 53.27 / 31.17 / 31.81</strong> (§6 참고)</td>
+</tr>
+<tr>
+<td>Ablation (LIBERO-Spatial)</td>
+<td>2D 대체 78.2, random 62.8, all 68.4, GT depth 75.8, w/o 감독 82.2, concat 76.4, conv 80.0, 전체 90.7</td>
+<td>Table IV</td>
+<td>전체 대비 차이 일치</td>
+</tr>
+<tr>
+<td>실물 DP / Ours 과제별</td>
+<td>Bowl 16→17, Microwave 12→15, Door 13→17, Nut 5→12 (각 /20)</td>
+<td>Table V</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>실물 합계</td>
+<td>DP 46/80, Ours 61/80</td>
+<td>Table V</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>실물 OOD (공간 / 시점 / 환경)</td>
+<td>DP 35 / 0 / 20, Ours 65 / 40 / 45</td>
+<td>Table V</td>
+<td>원문 텍스트 추출로 열 배치 확인</td>
+</tr>
+</tbody>
+</table>
+<h2>6. 원문 안의 불일치와 주의점</h2>
+<ol>
+<li><strong>Table III 평균 불일치.</strong> 열 단순평균은 DP 31.17, DiT 31.81인데 표에는 DP 31.7, DiT 31.1로 적혀 있습니다. 두 값이 서로 뒤바뀐 것처럼 보입니다. 원본 데이터 파일이 없어 가중평균 여부는 확인하지 못했습니다. 텍스트 본문도 31.7과 31.1을 그대로 인용합니다. 차이는 0.5포인트 이하라 결론은 바뀌지 않습니다. 다만 &quot;DP 대비 +21.3&quot;의 기준값이 흔들리는 셈입니다.</li>
+<li><strong>Fig. 3과 본문의 과제명 불일치.</strong> 본문은 ManiSkill 과제로 <strong>Hook Cube</strong>를 쓰고, Fig. 3 캡션 그림은 <strong>Pull Cube Tool</strong>을 보입니다(렌더링으로 확인). 공개 코드에는 <code>PullCubeTool-v1</code>과 <code>PokeCube-v1</code>, <code>PlaceSphere-v1</code>, <code>PegInsertionSide-v1</code>이 있고, <code>HookCube</code>와 <code>StackPyramid</code>는 등록되어 있지 않습니다(<code>04</code> D10).</li>
+<li><strong>DP 행의 출처가 표시되지 않음.</strong> Table I에서 DP에는 별표가 없고, 별표는 DiT-Block에만 있습니다. 같은 표의 BC 행은 <a href="IB-BC">32</a>의 수치와 소수점까지 일치합니다(BC-Trans 67.83±10.42 → 68.0±1.0 등, <code>02</code> §2). 그러나 DP 행의 suite별 값(78.3, 92.5, 68.3, 50.5)은 [32]에 없습니다. 같은 [32]의 부록 C.3.1은 DP를 LIBERO-Long에서 <strong>78.0</strong>(50 epoch, 배치 64, 1e-4, 90M 헤드, 128×128, 필터링 없음)으로 보고합니다. 본 논문의 DP Long 값 50.5와 다릅니다. 웹 검색으로도 해당 수치 조합의 출처를 찾지 못했습니다(<code>02</code> §2).</li>
+<li><strong>&quot;same recipe&quot; 주장의 근거 부족.</strong> 기준선에 대한 명시는 &quot;uniformly trained&quot;뿐입니다. 특히 LIBERO의 DP 행이 재학습인지 인용인지 원문으로 확정할 수 없습니다. 이것이 승격 조건의 핵심입니다(<code>02</code>, <code>03</code> §8).</li>
+<li><strong>컴퓨트 주장 미검증.</strong> §III-B는 토큰 축약으로 계산을 줄인다고 하지만, 파라미터 수, FLOPs, 지연, 학습 시간을 보고하지 않았습니다. 볼륨 40³×32 채널은 약 2.05M 값을 한 장면에서 만듭니다.</li>
+<li><strong>Ablation 범위.</strong> 표 IV는 LIBERO-Spatial 한 suite에서만, 시드와 오차 없이 보고했습니다.</li>
+<li><strong>LIBERO ± 정의 없음.</strong> ± 값이 SD인지 SE인지, 3 시드 기준인지 밝히지 않았습니다.</li>
+<li><strong>GT depth 대조(표 IV e)의 해석.</strong> &quot;GT depth&quot;는 복셀 선택을 점 개수 상위 N으로 하는 휴리스틱입니다. 깊이 센서를 쓰는 기존 3D 방법(DP3 류)과 직접 비교한 것이 아닙니다.</li>
+<li><strong>카메라 보정 필요.</strong> 식 2는 외부·내부 행렬을 요구합니다. &quot;RGB only&quot;이지만 보정과 과제별 작업 공간 범위 r은 미리 필요합니다.</li>
+</ol>
+<h2>7. 추가로 확인할 질문</h2>
+<ul>
+<li>LIBERO DP 행을 같은 학습 조건으로 다시 학습했는가? (논문에서 확인 불가, 코드도 없음)</li>
+<li>DP와 제안 방법의 학습 epoch, 배치, 샘플러가 같은가?</li>
+<li>실물 20회 시험의 초기 배치 분포와 시험 순서(무작위화 여부)는 무엇인가?</li>
+<li>복셀 점유를 만드는 이미지 특징 백본은 DP의 ResNet-18인가, 다른 것인가? 원문에는 &quot;shared backbone&quot;이라고만 적혀 있습니다.</li>
+</ul>
+<div class="break"></div>
+<h1>02. 선행연구와 비교 대상</h1>
+<h2>1. 계보</h2>
+<ul>
+<li><strong>행동 복제와 확산 정책:</strong> BC(Ross 2010/2011 [9][10]), 가우시안 혼합·이산 행동·잠재 행동 계열 [11]–[15], 확산 정책 DP [2](IJRR 2025), 조건부 DDPM [16].</li>
+<li><strong>확산 트랜스포머:</strong> DiT-Block Policy [6](ICRA 2025)은 adaLN-Zero 블록으로 다중 토큰을 조건으로 줍니다. VolumeDP 디코더는 이 블록을 그대로 씁니다(§III-C).</li>
+<li><strong>3D 표현 정책:</strong> DP3 [3](포인트 클라우드), Act3D [4], RVT [25], PerAct [23], GNFactor [24]. 모두 깊이 또는 점군 입력을 요구합니다.</li>
+<li><strong>3D 점유 예측 계열:</strong> Occ3D [28], CVT-Occ [29], BEVFormer [27]. VolumeDP의 deformable 볼륨 리프팅은 이 계열의 기법(deformable attention [26])을 가져옵니다.</li>
+<li><strong>토큰 축약:</strong> TokenLearner [31]. 학습 가능한 softmax 가중치로 복셀을 N개 토큰으로 줄입니다.</li>
+</ul>
+<p><strong>새로움:</strong> 기법 조합은 기존 요소의 결합입니다(원문도 TokenLearner와 deformable attention을 명시합니다). 새로움은 &quot;RGB만으로 볼륨을 만들고, 볼륨에서 토큰을 골라 DiT 디코더에 넣는다&quot;는 파이프라인과 실험 설계에 있습니다.</p>
+<h2>2. 기준선 출처 검증 (승격 조건의 핵심)</h2>
+<table>
+<thead>
+<tr>
+<th>표</th>
+<th>행</th>
+<th>원문 표시</th>
+<th>확인 결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Table I (LIBERO)</td>
+<td>BC-Trans, BC-VILT</td>
+<td>원문 본문: &quot;[32]에서 인용&quot;</td>
+<td><strong>일치 확인.</strong> [32] IB-BC 표 (arXiv 2502.02853)는 열 순서가 Goal, Object, Spatial, Long입니다. 이를 Spatial, Object, Goal, Long으로 바꿔 보면 BC-Trans는 68.00 / 41.83 / 67.83 / 15.83, BC-VILT는 67.17 / 43.00 / 76.17 / 6.50 이고, 표 I의 값과 소수점 한 자리까지 같습니다</td>
+</tr>
+<tr>
+<td>Table I</td>
+<td>Diffusion Policy [2]</td>
+<td>별표 없음</td>
+<td><strong>출처를 찾지 못함.</strong> [32]에는 DP가 LIBERO-Long 한 셀(78.0, 50 epoch)로만 나옵니다. 본 논문의 DP 행(78.3 / 92.5 / 68.3 / 50.5, 평균 72.4)과 맞지 않습니다. 웹 검색으로도 이 수치 조합을 찾지 못했습니다. 다른 논문의 DiT 정책 표에도 근사 수치 조각만 보였고 확정하지 못했습니다</td>
+</tr>
+<tr>
+<td>Table I</td>
+<td>DiT-Block Policy*</td>
+<td>별표(자체 구현)</td>
+<td>자체 실행 표시. 레시피 상세는 원문에 없음</td>
+</tr>
+<tr>
+<td>Table II (ManiSkill)</td>
+<td>DP*, DiT*</td>
+<td>별표(자체 구현)</td>
+<td>자체 실행. 공개 ManiSkill DP 코드와 비교 가능 (<code>04</code> D11)</td>
+</tr>
+<tr>
+<td>Table III (LIBERO-Plus)</td>
+<td>DP*, DiT*</td>
+<td>별표(자체 구현)</td>
+<td>자체 실행</td>
+</tr>
+</tbody>
+</table>
+<p><strong>해석.</strong> 같은 표 안에서 BC 행은 인용임이 확인되고, DiT 행은 자체 실행임이 표시되어 있습니다. DP 행은 두 가지 중 하나입니다. (a) 어떤 외부 문헌의 값을 인용했다. (b) 자체 실행했으나 별표를 빠뜨렸다. 원문 근거만으로는 어느 쪽인지 정할 수 없습니다. 어느 쪽이든 +16.4%p 주장의 핵심 기준선이 같은 레시피인지 <strong>확인되지 않았습니다</strong>. ManiSkill과 LIBERO-Plus에서는 DP가 자체 실행인데, LIBERO에서만 다른 출처라면 그 차이를 설명해야 합니다.</p>
+<h2>3. 공정성 비교 축 (같은 저장소의 다른 분석과 비교)</h2>
+<table>
+<thead>
+<tr>
+<th>분석</th>
+<th>교훈</th>
+<th>VolumeDP에 대한 시사점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>temporal_policy/</code> (arXiv 2607.29482)</td>
+<td>비교 대상마다 시연 수, 학습 epoch, 샘플러가 달라 수치 차이가 방법 차이로 읽히기 쉽습니다. CMH 검정은 과제 층화 후 결과가 달라질 수 있습니다</td>
+<td>VolumeDP도 시연 수(LIBERO 50, 실물 100)와 epoch를 명시하지 않았습니다. 층화 검정(MH)을 기본으로 봐야 합니다(<code>03</code> §2)</td>
+</tr>
+<tr>
+<td><code>contact_disassembly/</code> (arXiv 2603.08560)</td>
+<td>확산 정책 비교에서 샘플러(DDPM 100 대 DDIM 등)가 성능 차이를 만들 수 있습니다</td>
+<td>VolumeDP는 &quot;100 denoising steps&quot;만 명시. DP와 디코더의 샘플러가 같은지 확인되지 않았습니다</td>
+</tr>
+<tr>
+<td><code>imle_vla/</code> (arXiv 2609.10915)</td>
+<td>생성 헤드 비교에서 평가 시드 수가 결론을 바꿉니다</td>
+<td>VolumeDP의 LIBERO ±는 정의가 없어 시드 기반 검정이 불가능</td>
+</tr>
+<tr>
+<td><code>adavla/</code> (arXiv 2608.29208)</td>
+<td>VLA 비교에서 교란 평가의 표본이 작으면 차이가 불안정합니다</td>
+<td>LIBERO-Plus 교란 평가의 시험 수가 원문에 없습니다</td>
+</tr>
+<tr>
+<td><code>geometric_entropy/</code> (arXiv 2606.20871)</td>
+<td>기하 정보를 조건으로 주는 설계의 이득을 분리하려면 대조군이 필요</td>
+<td>표 IV의 GT depth 대조가 이에 해당하지만 단일 suite</td>
+</tr>
+<tr>
+<td><code>chronospolicy/</code> (arXiv 2610.13929)</td>
+<td>시계열 조건과 공간 조건의 기여 분리</td>
+<td>볼륨 공간 토큰과 텍스트·proprio 토큰의 기여는 분리되지 않음</td>
+</tr>
+<tr>
+<td><code>ba_t/</code> (arXiv 2606.03287)</td>
+<td>3D 기하를 쓰는 정책의 깊이 의존성</td>
+<td>VolumeDP는 깊이를 쓰지 않지만 카메라 보정이 필요</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 관련 3D·볼륨 정책과 직접 비교 가능 여부</h2>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>입력</th>
+<th>공개 여부</th>
+<th>비교 가능성</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DP3 [3]</td>
+<td>점군(깊이 필요)</td>
+<td>공개(확인 안 함)</td>
+<td>VolumeDP가 인용하지 않음. 가장 중요한 빠진 대조</td>
+</tr>
+<tr>
+<td>RVT [25], Act3D [4]</td>
+<td>다시점 RGB-D</td>
+<td>공개(확인 안 함)</td>
+<td>깊이 요구</td>
+</tr>
+<tr>
+<td>DiT-Block Policy [6]</td>
+<td>2D 토큰</td>
+<td>공개 여부 확인 안 함</td>
+<td>디코더 대조군으로 사용됨</td>
+</tr>
+<tr>
+<td>TokenLearner [31]</td>
+<td>일반</td>
+<td>공개</td>
+<td>기법 원형</td>
+</tr>
+</tbody>
+</table>
+<h2>5. GitHub 저장소 (2026-11-11 확인, <code>gh api</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>별</th>
+<th>최근 커밋 / 해시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>yzc0731/volumedp_maniskill</code></td>
+<td>ManiSkill 3.0.0b19 기반 저장소. <strong>VolumeDP 고유 코드(볼륨, 토큰, 디코더)는 없음</strong> (<code>04</code> §1)</td>
+<td>저자 계정. 프로젝트 페이지 링크는 없음</td>
+<td>Apache-2.0</td>
+<td>0</td>
+<td><code>d2ec13a</code> (2026-06-22, 단일 커밋 &quot;volumedp&quot;)</td>
+</tr>
+<tr>
+<td><code>ZTX2021/LIBERO_openvla</code></td>
+<td>프로젝트 페이지의 &quot;Code (Coming soon)&quot; 버튼이 가리키는 주소</td>
+<td>프로젝트 페이지 링크</td>
+<td>확인 불가</td>
+<td>—</td>
+<td><strong>404 (저장소 없음 또는 비공개)</strong></td>
+</tr>
+<tr>
+<td><code>mani-skill/ManiSkill</code> (구 haosulab)</td>
+<td>시뮬레이터 원본</td>
+<td>원 개발자</td>
+<td>Apache-2.0</td>
+<td>3,504</td>
+<td>2026-08-04 push</td>
+</tr>
+<tr>
+<td><code>real-stanford/diffusion_policy</code></td>
+<td>DP 원본</td>
+<td>원 개발자</td>
+<td>MIT</td>
+<td>4,721</td>
+<td>2024-12-24 push</td>
+</tr>
+<tr>
+<td><code>Lifelong-Robot-Learning/LIBERO</code></td>
+<td>LIBERO 벤치마크</td>
+<td>원 개발자</td>
+<td>MIT</td>
+<td>2,528</td>
+<td>2025-03-15 push</td>
+</tr>
+<tr>
+<td><code>SudeepDasari/dit-policy</code></td>
+<td>DiT-Block Policy 관련 저장소(공식 여부 미확인)</td>
+<td>추정</td>
+<td>MIT</td>
+<td>171</td>
+<td>2024-10-15 push</td>
+</tr>
+</tbody>
+</table>
+<p><strong>요약:</strong> 공개된 코드 중 VolumeDP 고유 구현은 <strong>없습니다</strong>. 공개 저장소는 ManiSkill 포크로, 기준선 DP(state/RGB-D)와 BC 예제만 들어 있습니다. LIBERO 학습·평가 코드와 실물 코드, 복셀 볼륨 모듈은 찾지 못했습니다.</p>
+<h2>6. 파생 방향과 관련 자료</h2>
+<ul>
+<li>VolumeDP와 같은 복셀 볼륨 정책은 아직 공개 구현이 없어서, 직접 재구현 비용이 큽니다.</li>
+<li>원문 [41] Galaxea 오픈월드 데이터셋과 G0 VLA 모델은 실물 로봇 플랫폼의 배경입니다. 재현에는 필요하지 않습니다.</li>
+</ul>
+<div class="break"></div>
+<h1>03. 수치 재계산, 유의성, 토이 검증</h1>
+<p>재계산 스크립트: <code>analysis/volumedp_check.py</code> → <code>volumedp_check_results.json</code> (numpy, scipy 1.13.1 Welch만 사용, 실행 0.2초).
+토이 스크립트: <code>analysis/volumedp_toy.py</code> → <code>volumedp_toy_results.json</code> (numpy 단일 스레드, 2초).</p>
+<h2>1. 표 재계산</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>원문</th>
+<th>재계산</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LIBERO 평균 Ours</td>
+<td>88.8</td>
+<td>88.80</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>LIBERO 평균 DP</td>
+<td>72.4</td>
+<td>72.40</td>
+<td>일치 (단, DP 행 출처는 <code>02</code> §2)</td>
+</tr>
+<tr>
+<td>LIBERO 평균 DiT</td>
+<td>74.0</td>
+<td>74.02</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>ManiSkill 평균 Ours / DP / DiT</td>
+<td>68.9 / 49.6 / 38.9</td>
+<td>68.86 / 49.60 / 38.88</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>LIBERO-Plus 평균 Ours</td>
+<td>53.0</td>
+<td>53.27</td>
+<td>0.27 차이 (반올림 범위 밖)</td>
+</tr>
+<tr>
+<td>LIBERO-Plus 평균 DP</td>
+<td>31.7</td>
+<td>31.17</td>
+<td><strong>0.53 차이</strong></td>
+</tr>
+<tr>
+<td>LIBERO-Plus 평균 DiT</td>
+<td>31.1</td>
+<td>31.81</td>
+<td><strong>0.71 차이, DP 와 값이 뒤바뀐 모양</strong></td>
+</tr>
+</tbody>
+</table>
+<p>LIBERO-Plus는 열 단순평균과 표 값이 맞지 않습니다. 가중평균이라면 가중치가 필요한데 원문에는 없습니다. 열 값을 잘못 옮겼을 가능성도 있으므로 원본 표를 확인해야 합니다. 결론(Ours가 1위, 차이 약 21포인트)은 바뀌지 않습니다.</p>
+<h2>2. 실물 실험 (Table V, 과제당 n = 20)</h2>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>DP</th>
+<th>Ours</th>
+<th>차이</th>
+<th>Fisher 양측 p</th>
+<th>Holm 보정</th>
+<th>DP Wilson 95%</th>
+<th>Ours Wilson 95%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Placing Bowl</td>
+<td>16</td>
+<td>17</td>
+<td>+1</td>
+<td>1.000</td>
+<td>1.000</td>
+<td>[0.58, 0.92]</td>
+<td>[0.64, 0.95]</td>
+</tr>
+<tr>
+<td>Microwave</td>
+<td>12</td>
+<td>15</td>
+<td>+3</td>
+<td>0.501</td>
+<td>1.000</td>
+<td>[0.39, 0.78]</td>
+<td>[0.53, 0.89]</td>
+</tr>
+<tr>
+<td>Door Opening</td>
+<td>13</td>
+<td>17</td>
+<td>+4</td>
+<td>0.273</td>
+<td>0.820</td>
+<td>[0.43, 0.82]</td>
+<td>[0.64, 0.95]</td>
+</tr>
+<tr>
+<td>Nut onto Screw</td>
+<td>5</td>
+<td>12</td>
+<td>+7</td>
+<td>0.054</td>
+<td>0.214</td>
+<td>[0.11, 0.47]</td>
+<td>[0.39, 0.78]</td>
+</tr>
+<tr>
+<td><strong>합계</strong></td>
+<td><strong>46/80</strong></td>
+<td><strong>61/80</strong></td>
+<td>+15</td>
+<td><strong>0.0183</strong> (Fisher, 과제 무시)</td>
+<td>—</td>
+<td>[0.47, 0.68]</td>
+<td>[0.66, 0.84]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mantel-Haenszel 층화 검정(과제를 층으로):</strong> 공통 오즈비 2.60, χ² = 3.54, <strong>양측 p = 0.060</strong>.</p>
+<p><strong>해석.</strong></p>
+<ul>
+<li>원문 본문과 <code>temporal_policy</code>의 교훈처럼, 과제를 무시한 합산 Fisher 검정(p = 0.018)은 과제별 차이를 하나로 합칩니다. 과제 층화 검정(MH)은 p = 0.060이라 <strong>5% 수준에서 유의하지 않습니다</strong>.</li>
+<li>과제별로는 Holm 보정 후 아무 과제도 유의하지 않습니다(최소 0.214).</li>
+<li>따라서 &quot;실물에서 유의하게 우월하다&quot;는 주장은 합산 검정에만 의존합니다. 층화를 고려하면 방향은 일관되지만 강한 증거는 아닙니다.</li>
+<li>Wilson 구간은 과제별로 크게 겹칩니다(예: Microwave는 DP [0.39, 0.78], 제안 [0.53, 0.89]이고 [0.53, 0.78]에서 겹침).</li>
+</ul>
+<h2>3. 검정력(power) 분석</h2>
+<p>두 비율의 정규근사, 양측 α = 0.05, 검정력 0.80.</p>
+<table>
+<thead>
+<tr>
+<th>가정한 차이 (DP 대 Ours)</th>
+<th>과제당 필요한 n (각 팔)</th>
+<th>합산 80/80 가정의 검정력</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>관측 차이 (0.575 대 0.763, 약 19포인트)</td>
+<td><strong>98</strong></td>
+<td>팔당 80일 때 약 0.72 (정규근사, 관측 차이를 참값으로 가정)</td>
+</tr>
+<tr>
+<td>10포인트 (0.575 대 0.675)</td>
+<td>367</td>
+<td>—</td>
+</tr>
+<tr>
+<td>5포인트 (0.575 대 0.625)</td>
+<td>1,506</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>과제당 n = 20은 검정력이 매우 낮습니다. 관측된 19포인트 차이를 참값으로 믿더라도 합산에서 팔당 약 98회가 필요합니다. 실물 비교는 <strong>과제별 검정으로는 결론을 내릴 수 없습니다.</strong></li>
+<li>관측 차이는 참값보다 과대 추정되기 쉽습니다(선택 편향). 10포인트 차이를 가정하면 팔당 367회가 필요합니다.</li>
+<li>실물 시험은 시행 간 독립, 같은 초기 배치 분포, 같은 시험자 조건을 가정합니다. 이 가정은 원문에 적혀 있지 않습니다.</li>
+</ul>
+<h2>4. LIBERO (Table I)</h2>
+<p>± 값의 정의가 없습니다. 두 경우로 나누어 봅니다.</p>
+<ul>
+<li><strong>±를 3 시드의 SD로 가정:</strong> Welch 검정 결과는 Spatial t = 12.1, p = 0.0004 / Object t = 6.0, p = 0.004 / Goal t = 22.1, p &lt; 0.001 / Long t = 21.2, p = 0.0001. 모두 유의합니다.</li>
+<li><strong>±를 SE로 가정:</strong> SD = SE × √3이므로 분산이 3배 커집니다. 이 경우에도 Goal과 Long은 유의할 가능성이 높지만, Spatial과 Object는 재확인이 필요합니다. 계산은 하지 않았습니다.</li>
+</ul>
+<p><strong>핵심 한계:</strong> 유의성은 Ours 대 DP 행의 값이 <strong>같은 조건에서 나온 두 독립 측정</strong>이라는 전제 위에서만 의미가 있습니다. DP 행의 출처가 불명확하므로(<code>02</code> §2) 이 검정은 &quot;같은 레시피로 재실행한 DP와의 차이&quot;가 아니라 &quot;인용값과의 차이&quot;를 검정하는 셈입니다.</p>
+<h2>5. LIBERO-Plus (Table III)</h2>
+<p>열 단순평균이 표의 평균과 0.5포인트 이상 다릅니다(§1). 7항목 중 Camera 항목(Ours 23.1, DP 1.6)과 Language 항목(Ours 80.8, DP 77.0)의 차이가 평균 차이를 많이 좌우합니다. 교란마다 시험 수가 원문에 없으므로 항목별 검정은 불가능합니다.</p>
+<h2>6. 토이: 관측 표현 비교 (<code>analysis/volumedp_toy.py</code>)</h2>
+<p><strong>설정 (단순화, 실제 로봇 아님).</strong> 목표 큐브(한 변 0.1)의 높이 z를 정책이 맞힙니다. 카메라는 위에서 내려다보는 직교 카메라이고, 가림판은 확률 p로 목표 위에 놓입니다. 표현 세 가지를 비교합니다.</p>
+<ul>
+<li>(A) 2D 투영 8×8 xy 점유 격자 (깊이 없음)</li>
+<li>(B) 8×8×8 복셀 점유, 카메라에서 처음 보이는 표면만 (깊이 있음)</li>
+<li>(C) 보이는 표면 32점의 평균·최소·최대와 가림 신호 (깊이 있음, 순서 불변)</li>
+</ul>
+<p>정책 근사는 선형 최소제곱과 kNN(k = 5)입니다. 평가는 테스트 RMSE(z 단위, 장면 공간 [0,1])입니다. 학습 1,500, 테스트 500, 시드 0.</p>
+<table>
+<thead>
+<tr>
+<th>설정</th>
+<th>평균 예측</th>
+<th>2D 선형</th>
+<th>2D kNN</th>
+<th>복셀 선형</th>
+<th>복셀 kNN</th>
+<th>점 요약 선형</th>
+<th>점 요약 kNN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>가림 없음</td>
+<td>0.296</td>
+<td>0.306</td>
+<td>0.325</td>
+<td>0.066</td>
+<td>0.177</td>
+<td><strong>0.000</strong></td>
+<td>0.024</td>
+</tr>
+<tr>
+<td>가림 확률 0.5</td>
+<td>0.279</td>
+<td>0.288</td>
+<td>0.310</td>
+<td>0.235</td>
+<td>0.273</td>
+<td>0.120</td>
+<td>0.132</td>
+</tr>
+<tr>
+<td>가림 확률 1.0</td>
+<td>0.295</td>
+<td>0.301</td>
+<td>0.322</td>
+<td>0.246</td>
+<td>0.321</td>
+<td>0.178</td>
+<td>0.181</td>
+</tr>
+</tbody>
+</table>
+<p><strong>읽는 법.</strong></p>
+<ul>
+<li>2D 투영은 깊이가 없으므로 어떤 정책도 평균 수준을 넘지 못합니다(가림 없음에서 0.31대 0.30). 깊이가 관측에 들어가면 z를 맞힐 수 있습니다.</li>
+<li>가림이 없을 때 깊이를 담는 표현(복셀, 점 집합)이 z를 맞힙니다. 점 집합 선형 0.000은 <strong>구성상의 누출</strong>입니다. 보이는 윗면 점의 평균 z가 목표 z + 0.05로 정해져 있어서 선형 모델이 정확히 복원합니다. 학습된 표현의 이득으로 읽으면 안 됩니다.</li>
+<li>가림이 있을 때는 깊이 표현도 오차가 크게 늘어납니다. 가려진 목표의 z는 어떤 표현에서도 관측되지 않기 때문입니다. 이 토이에서 볼륨이 도움이 되는 조건은 <strong>목표 표면이 일부라도 보이고 그 깊이가 정책 출력에 필요한 경우</strong>입니다.</li>
+<li><strong>결론(토이 수준):</strong> 볼륨이나 점 표현의 이득은 깊이 정보가 관측에 들어가는 것에서 옵니다. RGB에서 깊이를 만들 수 있는지(VolumeDP의 주장)는 이 토이로 판단할 수 없습니다. 실제 RGB 리프팅의 깊이 복원 품질은 원문에 없습니다.</li>
+</ul>
+<h2>7. 공정성: DP 기준선이 같은 레시피인지</h2>
+<p>원문에서 확인할 수 있는 것과 없는 것입니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>확인</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BC 행이 인용인지</td>
+<td>확인 (인용 일치)</td>
+<td><code>02</code> §2, [32] 표</td>
+</tr>
+<tr>
+<td>DiT 행이 자체 실행인지</td>
+<td>원문 별표</td>
+<td>Table I</td>
+</tr>
+<tr>
+<td>DP 행(LIBERO)이 자체 실행인지</td>
+<td><strong>확인 불가</strong></td>
+<td>별표 없음. [32]와 불일치. 출처 불명</td>
+</tr>
+<tr>
+<td>DP 행(ManiSkill, LIBERO-Plus)이 자체 실행인지</td>
+<td>원문 별표</td>
+<td>Table II, III</td>
+</tr>
+<tr>
+<td>시연 수 (LIBERO 50, ManiSkill 평균 150)</td>
+<td>원문 명시</td>
+<td>§IV-A</td>
+</tr>
+<tr>
+<td>학습 epoch, 배치, 학습률</td>
+<td><strong>기준선별 명시 없음</strong></td>
+<td>§IV-A의 &quot;uniformly trained&quot; 한 문장뿐</td>
+</tr>
+<tr>
+<td>샘플러 (denoising 100 단계)</td>
+<td>명시</td>
+<td>§IV-A</td>
+</tr>
+<tr>
+<td>입력 해상도 (256×256), 프레임 (t, t−1)</td>
+<td>명시</td>
+<td>§IV-A</td>
+</tr>
+<tr>
+<td>DP 디코더 크기 대 제안 디코더 크기</td>
+<td><strong>명시 없음</strong></td>
+<td>파라미터 수 미보고</td>
+</tr>
+</tbody>
+</table>
+<p><strong>결론.</strong> LIBERO에서 DP 행이 같은 레시피로 재실행되었다는 증거는 없습니다. 인용값이라면 학습 조건이 다를 수 있고, 이것이 +16.4%p의 가장 큰 불확실성입니다. ManiSkill 행은 자체 실행이므로 이 축은 상대적으로 더 공정하게 볼 수 있습니다. 다만 ManiSkill DP와 제안 방법의 파라미터 수와 epoch는 여전히 빠져 있습니다.</p>
+<h2>8. 승격 조건 판정: &quot;LIBERO DP 기준선이 같은 레시피로 재학습되었는가?&quot;</h2>
+<p><strong>판정: 해결되지 않았습니다. 원문과 공개 코드로는 공정성을 확인할 수 없습니다.</strong></p>
+<p>근거:</p>
+<ol>
+<li>DP 행에 자체 실행 표시가 없고, 캡션 규칙(&quot;*는 자체 구현&quot;)에 따르면 인용값입니다.</li>
+<li>인용 출처로 보이는 [32]에는 같은 DP 수치가 없습니다(Long 한 셀 78.0, 본 논문 50.5와 다름).</li>
+<li>공개 코드는 ManiSkill 포크이며 LIBERO 코드가 없습니다. 프로젝트 페이지의 LIBERO 코드 링크는 404입니다.</li>
+<li>따라서 &quot;같은 시연 수, 같은 epoch, 같은 샘플러&quot;는 검증할 수 없습니다.</li>
+</ol>
+<p><strong>이 판정이 바꾸는 것:</strong> LIBERO의 +16.4%p는 &quot;재학습 비교&quot;가 아니라 &quot;인용값 대 자체 측정&quot;으로 읽어야 합니다. ManiSkill 결과(+19.3%p, 자체 실행)와 LIBERO-Plus 결과(+21.3%p, 자체 실행)가 더 믿을 만한 비교입니다. 다만 LIBERO-Plus 평균에도 0.5포인트 계산 불일치가 있습니다(§1).</p>
+<p><strong>재확인 방법(재현 시 수행할 일, 실행하지 않음):</strong> 공개 ManiSkill 포크에서 DP 기준선을 같은 시연·epoch·샘플러로 학습해 보는 것입니다. 그러나 LIBERO에는 코드가 없어 같은 실험은 불가능합니다.</p>
+<h2>9. 컴퓨트 비용 추정 (원문 미보고, 계산으로만 추정)</h2>
+<ul>
+<li>볼륨 40×40×40×32 = 2,048,000 값. fp32 기준 약 8.2 MB 활성화 메모리 per 샘플, 프레임 2장이면 2배 가까이 됩니다. 이는 중간 텐서이며 학습 배치에 곱해집니다.</li>
+<li>deformable 샘플링은 복셀 64,000개 × 샘플점 수 × 헤드 수 만큼의 바이리니어 보간입니다. 실제 시간은 구현에 따라 다릅니다.</li>
+<li>토큰 축약(N = 200)으로 디코더 입력은 202개 토큰입니다. DiT-Block 디코더와 같은 크기의 어텐션 비용이 남습니다.</li>
+<li>원문에는 파라미터 수, FLOPs, 지연이 없습니다. &quot;computation 크게 축소&quot; 주장은 <strong>검증되지 않았습니다.</strong></li>
+</ul>
+<h2>10. 파일</h2>
+<table>
+<thead>
+<tr>
+<th>파일</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>analysis/volumedp_check.py</code>, <code>analysis/volumedp_check_results.json</code></td>
+<td>표 재계산, Fisher, MH, Holm, Wilson, Welch, 검정력</td>
+</tr>
+<tr>
+<td><code>analysis/volumedp_toy.py</code>, <code>analysis/volumedp_toy_results.json</code></td>
+<td>관측 표현 토이</td>
+</tr>
+<tr>
+<td><code>analysis/plot_figures.py</code></td>
+<td>직접 만든 그래프(Table V 과제별, LIBERO 구간, 토이 결과)</td>
+</tr>
+</tbody>
+</table>
+<div class="break"></div>
+<h1>04. 코드 검증: 논문 ↔ 공개 저장소</h1>
+<p><strong>방법.</strong> 정적 읽기만 했습니다. 코드를 실행하거나 패키지를 설치하지 않았습니다.</p>
+<ul>
+<li>저장소: <code>repo/volumedp_maniskill/</code> (<code>yzc0731/volumedp_maniskill</code>, 얕은 클론, 커밋 <code>d2ec13a</code>, 2026-06-22, Apache-2.0, 스타 0). 단일 커밋 &quot;volumedp&quot;이며 ManiSkill 3.0.0b19 구조입니다(<code>mani_skill/__init__.py</code>의 <code>__version__ = &quot;3.0.0b19&quot;</code>).</li>
+<li>추적 파일 1,111개 중 VolumeDP 고유 구현 여부를 검색했습니다(<code>volumetric</code>, <code>voxel</code>, <code>deformable</code>, <code>TokenLearner</code>, <code>adaLN</code>, <code>DeformAttn</code>, <code>LIBERO</code>, <code>VolumeDP</code>, <code>volume_dp</code>를 단어 단위로 검색 → <strong>0건</strong>).</li>
+<li>프로젝트 페이지(<code>paper/project_page.html</code>)의 코드 버튼은 &quot;Code (Coming soon)&quot;이며 <code>ZTX2021/LIBERO_openvla</code>를 가리킵니다. 이 저장소는 <strong>404</strong>입니다(2026-11-11 <code>gh api</code>).</li>
+</ul>
+<p><strong>한 줄 결론:</strong> 공개 저장소에는 <strong>논문의 방법 구현이 없습니다.</strong> 들어 있는 것은 ManiSkill 상류의 확산 정책 기준선(DP)과 다른 기준선 예제뿐입니다. 논문 ↔ 코드 대조는 &quot;구현 없음&quot;이 대부분이며, 기준선 설정만 대조할 수 있습니다.</p>
+<h2>1. 저장소 구성 (실제로 들어 있는 것)</h2>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>내용</th>
+<th>논문과의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mani_skill/</code></td>
+<td>시뮬레이터 본체(상류 3.0.0b19)</td>
+<td>환경 기반. 논문 과제 중 PokeCube, PlaceSphere, PullCubeTool, PegInsertionSide 등록 확인</td>
+</tr>
+<tr>
+<td><code>examples/baselines/diffusion_policy/</code></td>
+<td>상류 DP 기준선 (<code>train.py</code> 상태 기반, <code>train_rgbd.py</code> 영상 기반)</td>
+<td>논문 기준선 DP와 설정 대조 가능 (D5–D9)</td>
+</tr>
+<tr>
+<td><code>examples/baselines/{bc, act, ppo, sac, tdmpc2, rlpd, rfcl, stable_baselines3}</code></td>
+<td>상류 기준선</td>
+<td>논문과 무관</td>
+</tr>
+<tr>
+<td><code>docs/</code>, <code>tests/</code></td>
+<td>문서와 테스트</td>
+<td>무관</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 논문 항목별 대조 (D-items)</h2>
+<p>범례: <strong>구현 없음</strong> = 공개 코드에서 찾지 못함, <strong>설정 일치</strong> = 기준선 설정이 논문 서술과 맞음, <strong>불일치</strong> = 서술과 다름.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>논문 (원문 위치)</th>
+<th>공개 코드</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>D1 볼륨 구성</strong></td>
+<td>큐브 범위 r, 40³ 복셀, 채널 32, 복셀 중심 식 1, 카메라 투영 식 2 (§III-A)</td>
+<td>해당 코드 없음 (검색 0건)</td>
+<td><strong>구현 없음</strong></td>
+</tr>
+<tr>
+<td><strong>D2 볼륨–이미지 교차 주의</strong></td>
+<td>deformable attention, 식 3 (§III-A)</td>
+<td>없음. <code>DeformAttn</code>류 검색 0건</td>
+<td><strong>구현 없음</strong></td>
+</tr>
+<tr>
+<td><strong>D3 공간 토큰 생성</strong></td>
+<td>goal-aware 볼륨(텍스트 토큰 결합), TokenLearner식 softmax 가중치, N = 200 (§III-B)</td>
+<td>없음</td>
+<td><strong>구현 없음</strong></td>
+</tr>
+<tr>
+<td><strong>D4 보조 감독</strong></td>
+<td>말단·그리퍼 개폐 BCE 마스크, proprio에서 얻는 신호 (§III-B)</td>
+<td>없음</td>
+<td><strong>구현 없음</strong></td>
+</tr>
+<tr>
+<td><strong>D5 다중 토큰 디코더</strong></td>
+<td>adaLN-Zero DiT 블록, 202 토큰 (§III-C)</td>
+<td>없음. 상류 DP는 1D UNet(<code>conditional_unet1d.py</code>, 약 4.5M 파라미터)과 PlainConv 인코더</td>
+<td><strong>구현 없음</strong> (DiT 블록 없음)</td>
+</tr>
+<tr>
+<td><strong>D6 디퓨전 목표와 샘플링</strong></td>
+<td>DDPM, ε 예측 MSE, 샘플링 100 단계 (식 4, §IV-A)</td>
+<td><code>train_rgbd.py</code>: <code>DDPMScheduler(num_train_timesteps=100, prediction_type=&quot;epsilon&quot;)</code>, <code>num_diffusion_iters = 100</code></td>
+<td><strong>설정 일치</strong> (기준선 DP 기준)</td>
+</tr>
+<tr>
+<td><strong>D7 입력 프레임 수</strong></td>
+<td>두 프레임 (t, t−1) (§IV-A)</td>
+<td><code>obs_horizon = 2</code> (기본값)</td>
+<td><strong>설정 일치</strong> (기준선 DP 기준)</td>
+</tr>
+<tr>
+<td><strong>D8 기준선 DP의 관측 모드</strong></td>
+<td><strong>RGB만 사용</strong> (§I, §III-A, 저자 주장)</td>
+<td><code>train_rgbd.py</code>의 기본 <code>obs_mode = &quot;rgb+depth&quot;</code> (88행). 깊이가 관측에 있으면 깊이 채널이 <code>PlainConv</code> 입력 채널에 더해짐 (264–273행)</td>
+<td><strong>불일치 가능성.</strong> 논문이 쓴 설정이 <code>rgb</code>인지 확인되지 않음. 기본값대로 돌렸다면 기준선이 깊이를 사용</td>
+</tr>
+<tr>
+<td><strong>D9 학습 설정 (기준선 DP)</strong></td>
+<td>&quot;uniformly trained&quot; (§IV-A). 시연 수는 과제당 약 150(ManiSkill)</td>
+<td><code>total_iters</code> 기본 1,000,000, <code>batch_size</code> 256, <code>lr</code> 1e-4, <code>act_horizon</code> 8, <code>pred_horizon</code> 16, <code>unet_dims</code> [64,128,256]. 예시 스크립트(<code>baselines.sh</code>)는 <code>num_demos</code> 100, <code>total_iters</code> 30,000–100,000</td>
+<td><strong>논문에 값 없음.</strong> 저장소 예시와 논문 실험 설정의 일치 여부는 확인 불가</td>
+</tr>
+<tr>
+<td><strong>D10 과제 목록</strong></td>
+<td>Poke Cube, Place Sphere, Hook Cube, Stack Pyramid, Insert Peg (본문) / Fig. 3은 Pull Cube Tool 표시</td>
+<td>PokeCube-v1, PlaceSphere-v1, PullCubeTool-v1, PegInsertionSide-v1 <strong>등록됨</strong>. HookCube, StackPyramid <strong>등록 없음</strong></td>
+<td><strong>불일치.</strong> 본문 과제명 두 개가 공개 환경에 없음. Fig. 3과 본문도 어긋남</td>
+</tr>
+<tr>
+<td><strong>D11 평가 에피소드</strong></td>
+<td>시뮬 평가 횟수는 원문에 없음. 실물은 과제당 20회</td>
+<td><code>num_eval_episodes</code> 기본 100, <code>num_eval_envs</code> 10</td>
+<td><strong>원문과 비교 불가</strong> (시뮬 횟수 미보고)</td>
+</tr>
+<tr>
+<td><strong>D12 시드</strong></td>
+<td>시뮬 3 시드 (§IV-A)</td>
+<td>시드 인자 <code>seed</code> 기본값 1 (43행). 논문의 3 시드 실행 목록은 공개되지 않음</td>
+<td>설정 존재 확인, 실행 기록은 없음</td>
+</tr>
+<tr>
+<td><strong>D13 LIBERO 학습·평가</strong></td>
+<td>4 suite, 과제당 50 시연, no-op 제거 (§IV-A)</td>
+<td>해당 코드 없음. LIBERO 저장소 참조 0건</td>
+<td><strong>구현 없음</strong></td>
+</tr>
+<tr>
+<td><strong>D14 LIBERO-Plus 교란 평가</strong></td>
+<td>7종 교란 (§IV-A)</td>
+<td>없음</td>
+<td><strong>구현 없음</strong></td>
+</tr>
+<tr>
+<td><strong>D15 실물 로봇 코드</strong></td>
+<td>Galaxea R1 Lite, isomorphic teleoperation (§V)</td>
+<td>없음</td>
+<td><strong>구현 없음</strong> (하드웨어 필요)</td>
+</tr>
+<tr>
+<td><strong>D16 카메라 보정</strong></td>
+<td>식 2의 외부·내부 행렬 필요 (§III-A)</td>
+<td>볼륨 관련 코드 없음</td>
+<td><strong>구현 없음</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>3. 기준선 설정에서 드러난 공정성 문제 (D8, D9)</h2>
+<ul>
+<li><strong>관측 모드 불일치 가능성(D8).</strong> 논문은 &quot;RGB만 사용&quot;이 핵심 차별점이라고 주장합니다(§I). 그런데 공개된 상류 RGB-D 기준선의 기본값은 <code>rgb+depth</code>입니다. 원문 DP의 ManiSkill 결과(Table II)가 이 기본값으로 돌렸다면, 기준선은 깊이를 쓰고 제안 방법은 쓰지 않는 셈입니다. 그러면 비교는 &quot;깊이 있는 DP 대 RGB 전용 VolumeDP&quot;가 되어 방향이 바뀔 수 있습니다. 원문으로는 확인할 수 없습니다.</li>
+<li><strong>학습 설정 미공개(D9).</strong> 논문은 학습 epoch나 배치를 보고하지 않습니다. 상류 기본값(total_iters 1M, batch 256)과 예시(30k–100k)가 서로 크게 다르므로, 기준선 설정에 따라 결과가 크게 달라질 수 있습니다.</li>
+<li><strong>LIBERO 행(D13).</strong> 코드가 없으므로 LIBERO 기준선 설정을 대조할 수 없습니다. <code>02</code> §2의 출처 문제와 합쳐 보면, LIBERO의 +16.4%p는 검증 불가입니다.</li>
+</ul>
+<h2>4. 구현 가능성 판정 (이 맥 기준, 정적 판단)</h2>
+<p><strong>판정: 논문 방법은 공개 코드로 재현할 수 없습니다(구현 없음). 공식 재현 경로는 세 가지 중 하나도 현재 열려 있지 않습니다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>재현 경로</th>
+<th>공개 여부</th>
+<th>이 맥(Apple M4 Pro, 약 24 GiB 통합 메모리, MPS, CUDA 없음, torch 미설치)에서</th>
+<th>필요한 자원</th>
+<th>노력</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>공식 ManiSkill 재현</strong></td>
+<td>기준선 DP만 공개, VolumeDP 방법 없음</td>
+<td><strong>불가능.</strong> ManiSkill README는 macOS를 지원하지 않음(GPU 시뮬 Linux 전용). CPU 시뮬도 macOS에서 불가로 명시</td>
+<td>Linux + NVIDIA GPU(GPU 시뮬), Vulkan 렌더링</td>
+<td>방법을 직접 구현해야 함(큼)</td>
+</tr>
+<tr>
+<td><strong>공식 LIBERO 재현</strong></td>
+<td>코드 없음(404)</td>
+<td><strong>불가능.</strong> 코드 없음. LIBERO 자체는 MuJoCo 기반이라 헤드리스 렌더링 확인 필요</td>
+<td>학습 GPU, 데이터</td>
+<td>구현 필요, 기준선 재학습 필요</td>
+</tr>
+<tr>
+<td><strong>실물 재현 (Galaxea R1 Lite)</strong></td>
+<td>코드 없음</td>
+<td><strong>불가능.</strong> 하드웨어 없음</td>
+<td>로봇, 텔레오퍼레이션 장비</td>
+<td>불가</td>
+</tr>
+<tr>
+<td><strong>아이디어 재구현 (볼륨 + 토큰 + DiT)</strong></td>
+<td>해당 없음</td>
+<td><strong>중간~높은 난이도.</strong> 모델 구현 자체는 PyTorch로 가능하나 MPS에서 40³×32 볼륨 학습은 메모리·시간 면에서 제한적(추정, 미확인). torch 설치 승인 필요</td>
+<td>기존 DP 기준선 코드 + 구현</td>
+<td>큼</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>노력 추정 (구현 가능성):</strong> 공개된 것은 DP 기준선뿐이므로 방법 전체를 새로 짜야 합니다. 볼륨 리프팅(식 1–3)과 토큰 생성(§III-B), DiT 디코더(§III-C) 세 모듈입니다. 보조 감독(§III-B)과 카메라 투영 정확성을 검증하려면 대조 실험도 필요합니다.</li>
+<li><strong>하드웨어:</strong> 학습에는 GPU가 필요합니다. 이 맥에서는 토이 수준 검증까지만 CPU로 가능합니다(<code>03</code> §6).</li>
+</ul>
+<h2>5. 재현 전 확인할 것 (저자 또는 공개 자료로)</h2>
+<ol>
+<li>기준선 DP가 RGB로 학습되었는지(D8).</li>
+<li>LIBERO 코드와 기준선 설정(공개 여부).</li>
+<li>실물 시험의 초기 배치 무작위화 방식.</li>
+<li>볼륨 생성에 쓴 카메라 보정 값과 과제별 r의 값(부록 없음).</li>
+</ol>
+<h2>6. 파일</h2>
+<ul>
+<li>저장소 클론: <code>repo/volumedp_maniskill/</code> (<code>.gitignore</code>에 포함, 재배포 안 함)</li>
+<li>상세 검색 결과는 이 문서의 §2 판정에 요약했습니다. 재실행이 필요하면 <code>grep -rnwi</code>로 같은 용어를 다시 찾을 수 있습니다.</li>
+</ul>
+</body></html>

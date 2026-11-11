@@ -1,0 +1,227 @@
+{
+ "assumption": "± = 시도별 표준편차(SD), n = 5 per cell",
+ "table_I": {
+  "band2_cellwise_welch": [
+   {
+    "g": "172.5",
+    "S2S": 15.5,
+    "PkgSI": 60.0,
+    "diff_S2S_minus_PkgSI": -44.5,
+    "t": -30.0,
+    "p": 1.04e-08
+   },
+   {
+    "g": "192.5",
+    "S2S": 3.5,
+    "PkgSI": 34.5,
+    "diff_S2S_minus_PkgSI": -31.0,
+    "t": -17.88,
+    "p": 8.15e-07
+   },
+   {
+    "g": "212.5",
+    "S2S": 23.5,
+    "PkgSI": 11.0,
+    "diff_S2S_minus_PkgSI": 12.5,
+    "t": 4.04,
+    "p": 0.00911
+   }
+  ],
+  "band2_all_targets_welch_n15": {
+   "S2S_mean": 14.17,
+   "S2S_sd_est": 8.8,
+   "PkgSI_mean": 35.17,
+   "PkgSI_sd_est": 21.22,
+   "t": -3.54,
+   "p": 0.00223,
+   "rel_reduction_pct": 59.7
+  },
+  "band1_all_targets_welch_n15": {
+   "S2S_mean": 7.17,
+   "PkgSI_mean": 8.0,
+   "diff": -0.83,
+   "t": -0.42,
+   "p": 0.675
+  },
+  "band2_g212_reversal_cm": 12.5,
+  "cell_outcomes_band1_2": [
+   [
+    "B1",
+    "172.5",
+    "S2S better"
+   ],
+   [
+    "B1",
+    "192.5",
+    "S2S better"
+   ],
+   [
+    "B1",
+    "212.5",
+    "tie"
+   ],
+   [
+    "B2",
+    "172.5",
+    "S2S better"
+   ],
+   [
+    "B2",
+    "192.5",
+    "S2S better"
+   ],
+   [
+    "B2",
+    "212.5",
+    "PkgSI better"
+   ]
+  ],
+  "N_NA_cells": {
+   "Real2Sim2Real": 9,
+   "Package SI": 3,
+   "Sling2Sim2Real": 0
+  }
+ },
+ "table_IV": {
+  "vs_full_welch_n15": {
+   "DEL": {
+    "mean": 11.17,
+    "t": -1.76,
+    "p": 0.0899
+   },
+   "BOL": {
+    "mean": 9.17,
+    "t": -0.88,
+    "p": 0.386
+   },
+   "AdamL": {
+    "mean": 21.83,
+    "t": -4.69,
+    "p": 0.000131
+   },
+   "S2S-c,-m": {
+    "mean": 7.17,
+    "t": 0.0,
+    "p": 1.0
+   },
+   "S2S-m": {
+    "mean": 20.33,
+    "t": -5.54,
+    "p": 8.46e-06
+   },
+   "S2S-c": {
+    "mean": 10.0,
+    "t": -0.95,
+    "p": 0.355
+   },
+   "S2S-Lwork": {
+    "mean": 27.83,
+    "t": -10.07,
+    "p": 8.66e-11
+   }
+  }
+ },
+ "checks": {
+  "all_targets_arithmetic": {
+   "B1 Package SI": {
+    "cell_mean_avg": 8.0,
+    "reported": 8.0,
+    "diff": 0.0,
+    "pm_reported": 1.94,
+    "pm_rms_of_cell_SD": 1.935
+   },
+   "B1 Sling2Sim2Real": {
+    "cell_mean_avg": 7.167,
+    "reported": 7.17,
+    "diff": 0.003,
+    "pm_reported": 2.68,
+    "pm_rms_of_cell_SD": 2.827
+   },
+   "B2 Package SI": {
+    "cell_mean_avg": 35.167,
+    "reported": 35.17,
+    "diff": 0.003,
+    "pm_reported": 4.58,
+    "pm_rms_of_cell_SD": 4.472
+   },
+   "B2 Sling2Sim2Real": {
+    "cell_mean_avg": 14.167,
+    "reported": 14.17,
+    "diff": 0.003,
+    "pm_reported": 2.16,
+    "pm_rms_of_cell_SD": 2.16
+   },
+   "B3 Sling2Sim2Real": {
+    "cell_mean_avg": 19.0,
+    "reported": 19.0,
+    "diff": 0.0,
+    "pm_reported": 2.47,
+    "pm_rms_of_cell_SD": 2.482
+   },
+   "DEL": {
+    "cell_mean_avg": 11.167,
+    "reported": 11.17,
+    "diff": 0.003,
+    "pm_reported": 0.85,
+    "pm_rms_of_cell_SD": 1.469
+   },
+   "BOL": {
+    "cell_mean_avg": 9.167,
+    "reported": 9.17,
+    "diff": 0.003,
+    "pm_reported": 2.12,
+    "pm_rms_of_cell_SD": 3.696
+   },
+   "AdamL": {
+    "cell_mean_avg": 21.833,
+    "reported": 21.83,
+    "diff": -0.003,
+    "pm_reported": 2.31,
+    "pm_rms_of_cell_SD": 3.98
+   },
+   "S2S (full)": {
+    "cell_mean_avg": 7.167,
+    "reported": 7.17,
+    "diff": 0.003,
+    "pm_reported": 2.68,
+    "pm_rms_of_cell_SD": 2.827
+   },
+   "S2S-c,-m": {
+    "cell_mean_avg": 7.167,
+    "reported": 7.83,
+    "diff": 0.663,
+    "pm_reported": 5.39,
+    "pm_rms_of_cell_SD": 1.825
+   },
+   "S2S-m": {
+    "cell_mean_avg": 20.333,
+    "reported": 20.33,
+    "diff": -0.003,
+    "pm_reported": 7.18,
+    "pm_rms_of_cell_SD": 3.028
+   },
+   "S2S-c": {
+    "cell_mean_avg": 10.0,
+    "reported": 10.0,
+    "diff": 0.0,
+    "pm_reported": 9.91,
+    "pm_rms_of_cell_SD": 3.895
+   },
+   "S2S-Lwork": {
+    "cell_mean_avg": 27.833,
+    "reported": 27.83,
+    "diff": -0.003,
+    "pm_reported": 5.62,
+    "pm_rms_of_cell_SD": 1.779
+   }
+  }
+ },
+ "table_II_loss_reduction_pct": {
+  "B1": 20.0,
+  "B2": 6.5,
+  "B3": 72.5
+ },
+ "power": {
+  "n_per_group_for_1cm_diff_SD2_80pct": 63
+ }
+}

@@ -1,0 +1,1384 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>UVT 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_table"] { max-width: 92%; }
+img[src*="success"], img[src*="toy_"], img[src*="power"] { max-width: 96%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.4pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 3px 5px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.6pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>UVT (Unified Visuomotor Targets): 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 표와 그림은 라이선스(CC BY-NC-SA 4.0, 비상업·동일조건변경) 때문에 제외했습니다. 원문 https://arxiv.org/abs/2608.03563 · arXiv:2608.03563v1 · IROS 2026 (채택) · Zhenyang Feng, Unnat Jain (University of California, Irvine) · 공식 코드 DeFisch/UVT (라이선스 파일 없음, 커밋 4c46246) · 분석일 2026-11-11</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> VLA의 회귀 목표를 행동 청크에서, 행동과 LAM 동역학 코드를 정밀도 가중 PoE로 합친 32차원 잠재(UVT)로 바꿉니다. 디코더가 행동을 복원합니다. 구조와 추가 데이터는 바꾸지 않습니다(<code>01</code> §3).</li>
+<li><strong>LIBERO 10k 평균 79.7 → 88.2는 산술이 맞고, 가정(suite당 500회) 아래 통계적으로 큽니다.</strong> 그러나 이득은 Spatial과 Long에 집중되어 있고 Object는 0.6pp입니다. 100k의 차이 +2.1pp는 개별 suite에서 Holm 보정 후 유의하지 않습니다(<code>03</code> §1).</li>
+<li><strong>π0.5 쪽 개선(96.2 → 96.9, +0.7pp)은 검출되지 않습니다</strong>(가정 아래 p ≈ 0.22). 시행 수와 시드가 없어 더 정밀한 판단은 못 합니다(<code>03</code> §1.3).</li>
+<li><strong>실물은 방향이 일관되지만 과제별로 확인되지 않습니다.</strong> 과제당 50회에서 최소 검출 차이는 22–28pp인데, 과제별 전체 성공 차이는 10–16pp입니다. 세 과제 CMH는 p = 0.012입니다. 절반 성공을 포함한 점수 검정은 저자가 정한 절반 성공 정의에 기댑니다(<code>03</code> §2).</li>
+<li><strong>이득의 출처는 아직 나뉘지 않았습니다.</strong> 논문에 동역학을 뺀 32차원 대조가 없습니다. 선형 toy에서 같은 차원의 잡음 블록만으로도 MSE가 0.37 줄었습니다(n = 30, r = 6). 동역학 고유 이득은 병목이 신호 차원 이상이고 데이터가 충분할 때만 양수입니다(<code>03</code> §6).</li>
+<li><strong>코드는 MVAE 식과 맞지만 학습 설정이 논문과 다릅니다.</strong> 손실 가중치(λ_z 0.5, β 0.01), VLA 정렬 손실(공개 명령은 L1, 논문은 제곱 L2), 디코딩 가중치(공개 명령 1.0, 논문 0.5)가 다릅니다. README와 파이프라인의 인자 이름도 스크립트와 맞지 않아 1단계부터 막힐 가능성이 큽니다(<code>04</code> D1–D3, D19).</li>
+<li><strong>promotion 조건(동역학 없는 행동 전용 대조)은 미충족입니다.</strong> 논문에도 코드에도 없습니다. 노트의 &quot;조건부 승격&quot;은 유지합니다. 첫 실험은 이 대조입니다(<code>04</code> §3).</li>
+<li><strong>구현 가능성:</strong> 공식 재현은 NVIDIA GPU가 있으면 조건부로 가능합니다(10k 스텝 약 4–5시간, A100 기준 추정). 이 맥(MPS, CUDA 없음)에서는 VLA 학습이 불가능하고, MVAE 학습과 toy 검증만 CPU로 가능합니다. π0.5와 실물은 재현할 수 없습니다(<code>04</code> §4).</li>
+</ol>
+<p><img src="figures/success_ci.png" alt="success" /></p>
+<p class="cap">직접 계산: 실물 과제의 전체 성공률과 Wilson 95% 구간(왼쪽), LIBERO suite별 10k 차이와 Holm 보정 p값(오른쪽, 가정 n = 500). 이득 구간은 이항 샘플링만 반영합니다.</p>
+</section>
+<section class="chapter"><h1>01. 논문 분석: Unified Visuomotor Targets (arXiv:2608.03563v1)</h1>
+<p><strong>제목:</strong> Unified Visuomotor Targets: Supervising VLAs Beyond Physical Actions
+<strong>저자:</strong> Zhenyang Feng, Unnat Jain (University of California, Irvine)
+<strong>arXiv:</strong> 2608.03563v1 (cs.RO), 2026-08-04 제출. 본문 9쪽. 이 분석은 v1만 봅니다.
+<strong>학회:</strong> IROS 2026 채택 (arXiv 주석 &quot;Accepted at IROS 2026&quot;)
+<strong>프로젝트 페이지:</strong> https://unified-visuomotor-targets.github.io/ (코드 링크는 DeFisch/UVT)
+<strong>원문:</strong> <code>paper/paper.pdf</code>(5.5 MB, 25 MB 미만이라 gitignore하지 않음), 텍스트 <code>paper/paper.txt</code></p>
+<h2>권리 표기</h2>
+<ul>
+<li><strong>arXiv 라이선스: CC BY-NC-SA 4.0.</strong> abs 페이지의 &quot;Rights to this article&quot; 링크가 <code>licenses/by-nc-sa/4.0/</code>을 가리킵니다. CC BY가 아닙니다. 비상업과 동일조건변경 조건이 붙습니다.</li>
+<li><strong>PDF 1쪽 확인:</strong> 본문 텍스트에 저작권 문구(©, Copyright, IEEE, all rights reserved, licen*)가 없습니다. 1쪽 하단 텍스트는 arXiv 식별자 줄뿐입니다. 권리 판단은 arXiv 라이선스 표기에 근거합니다.</li>
+<li><strong>사용 정책:</strong> 논문 그림과 표 이미지는 개인용 리포트와 발표 자료에만 넣습니다(표 3은 <code>report/figures/paper_table3.png</code>로 잘라 개인용에 넣음). 공개 게시본과 공개 리포트에는 논문 그림과 표 이미지를 넣지 않습니다. 공개물은 논문 수치를 인용하고 직접 만든 그래프만 씁니다.</li>
+<li><strong>코드 라이선스:</strong> 공식 저장소에 LICENSE 파일이 없습니다(<code>04</code> D23). 코드는 복사하지 않습니다.</li>
+</ul>
+<h2>1. 한 문장 요약</h2>
+<p>VLA가 행동 청크를 직접 회귀하는 대신, 사전학습된 잠재 행동 모델(LAM)의 동역학 코드와 행동 청크를 멀티모달 VAE로 합친 32차원 잠재 목표(UVT)를 예측하게 하고, 디코더로 행동을 복원하는 학습 목표 변경입니다. 구조와 데이터는 바꾸지 않습니다.</p>
+<h2>2. 문제 설정</h2>
+<ul>
+<li>VLM은 장면, 물체, 목표 같은 의미 표현을 학습했는데, VLA는 관절과 자세 같은 저수준 신호를 직접 회귀합니다. 저자는 이 불일치가 수렴을 늦추고 견고성을 떨어뜨린다고 봅니다(§I).</li>
+<li>기존 연구는 헤드와 어텐션 구조를 바꾸는 쪽입니다. 저자는 &quot;무엇을 예측하는가&quot;를 바꾸자고 제안합니다(§I, §II).</li>
+<li>LAM은 두 프레임 사이의 시각적 전이를 이산 코드로 압축하는 역동역학 모델입니다. 기존 연구는 주로 대규모 사전학습에 쓰였고, 미세 조정의 보조 감독으로 쓰인 적은 없다고 저자는 말합니다(§I, §II).</li>
+</ul>
+<h2>3. 방법</h2>
+<table>
+<thead>
+<tr>
+<th>구성</th>
+<th>내용</th>
+<th>식과 위치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>입력</td>
+<td>행동 청크 a_t ∈ R^{k×d}(k 스텝, d 차원), LAM 코드 z_t = LAM(v_t, v_{t+k})</td>
+<td>§III-A</td>
+</tr>
+<tr>
+<td>인코더</td>
+<td>행동 f_a, 동역학 f_z가 각각 가우시안 평균과 로그분산을 냄</td>
+<td>§III-C</td>
+</tr>
+<tr>
+<td>융합</td>
+<td>정밀도 가중 PoE. τ = α_a τ_a + α_z τ_z, μ = (α_a τ_a μ_a + α_z τ_z μ_z)/τ. α는 학습되는 스칼라</td>
+<td>§III-C</td>
+</tr>
+<tr>
+<td>목표</td>
+<td>u_t = μ_t ∈ R^32</td>
+<td>§III-C</td>
+</tr>
+<tr>
+<td>디코더</td>
+<td>g_a(u) → 행동, g_z(u) → 코드</td>
+<td>§III-C</td>
+</tr>
+<tr>
+<td>MVAE 손실</td>
+<td>L_ACT(L1) + L_DYN(CE) + L_KL, 논문에서 가중치 1</td>
+<td>§III-C</td>
+</tr>
+<tr>
+<td>VLA 손실</td>
+<td>L = ‖û − u‖²₂ + γ‖â − a‖₁, γ = 0.5. 디코더 g_a는 학습 중에도 갱신</td>
+<td>§III-D, §IV-A-d</td>
+</tr>
+<tr>
+<td>추론</td>
+<td>정책이 û를 예측 → g_a로 행동 복원</td>
+<td>§III-D</td>
+</tr>
+</tbody>
+</table>
+<p><strong>구조 변경 없음, 추가 데이터 없음</strong>(초록, §III-D). 기반 모델은 두 개입니다: VLA-Adapter(회귀 헤드)와 π0.5(플로우 매칭 헤드). 헤드의 출력만 u로 바꿉니다.</p>
+<h2>4. 실험 결과 (논문 수치)</h2>
+<p><strong>LIBERO, 10k와 100k 스텝 성공률 (Table I, II):</strong></p>
+<table>
+<thead>
+<tr>
+<th>기반</th>
+<th>스텝</th>
+<th>Object</th>
+<th>Spatial</th>
+<th>Goal</th>
+<th>Long</th>
+<th>평균</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VLA-Adapter</td>
+<td>10k</td>
+<td>93.4</td>
+<td>78.8</td>
+<td>90.4</td>
+<td>56.2</td>
+<td>79.7</td>
+</tr>
+<tr>
+<td>UVT(VLA-Adapter)</td>
+<td>10k</td>
+<td>94.0</td>
+<td>95.0</td>
+<td>95.0</td>
+<td>68.8</td>
+<td>88.2</td>
+</tr>
+<tr>
+<td>VLA-Adapter</td>
+<td>100k</td>
+<td>97.6</td>
+<td>96.2</td>
+<td>95.6</td>
+<td>89.0</td>
+<td>94.6</td>
+</tr>
+<tr>
+<td>UVT(VLA-Adapter)</td>
+<td>100k</td>
+<td>99.6</td>
+<td>98.6</td>
+<td>97.2</td>
+<td>91.2</td>
+<td>96.7</td>
+</tr>
+<tr>
+<td>π0.5</td>
+<td>100k</td>
+<td>97.8</td>
+<td>98.4</td>
+<td>98.0</td>
+<td>90.6</td>
+<td>96.2</td>
+</tr>
+<tr>
+<td>UVT(π0.5)</td>
+<td>100k</td>
+<td>99.0</td>
+<td>98.4</td>
+<td>97.8</td>
+<td>92.4</td>
+<td>96.9</td>
+</tr>
+</tbody>
+</table>
+<p><strong>LIBERO-Plus (Table I):</strong> 10k 평균 42.7 → 66.2, 100k 평균 70.5 → 73.6. Spatial 10k는 34.0 → 81.5입니다.</p>
+<p><strong>LIBERO-Spatial 헤드 비교, 10k (Table III):</strong> 기준 78.8, Villa-X 헤드 83.2, UniVLA 헤드 86.4, UVT 95.0. 100k는 96.2, 96.8, 95.8, 98.6입니다.</p>
+<p><strong>실물 (양팔, 과제당 시연 30회, 평가 50회, §IV-D):</strong></p>
+<ul>
+<li>Lift Pot: 19/50 → 27/50 (38% → 54%)</li>
+<li>Close Marker: 전체 0 → 5, 절반 0 → 28, 점수 0% → 38%</li>
+<li>Plate Handover: 전체 7 → 12, 절반 4 → 16, 점수 18% → 40%</li>
+</ul>
+<p><strong>정성 분석:</strong> t-SNE에서 u_t는 suite별로 묶이고 행동은 섞입니다(Fig. 5). 디코딩된 행동은 시연보다 고주파 떨림이 적습니다(Fig. 6, 정성적).</p>
+<h2>5. 저자 주장과 증거 수준</h2>
+<table>
+<thead>
+<tr>
+<th>주장</th>
+<th>증거</th>
+<th>평가</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UVT가 학습을 빠르게 한다(10k)</td>
+<td>Table I, LIBERO와 LIBERO-Plus</td>
+<td>표 산술 맞음. 시드와 시행 수 없음(<code>03</code> §1)</td>
+</tr>
+<tr>
+<td>최종 성능을 해치지 않는다(100k)</td>
+<td>Table II</td>
+<td>평균 +2.1pp, 개별 suite는 유의하지 않음</td>
+</tr>
+<tr>
+<td>π0.5에서도 일관된 개선</td>
+<td>Table II</td>
+<td>0.7pp, 검출 불가(<code>03</code> §1.3)</td>
+</tr>
+<tr>
+<td>실물에서 잡기 신뢰도를 크게 높인다</td>
+<td>Fig. 2–4 본문 수치</td>
+<td>과제별로 유의하지 않음, 합산 CMH만 p=0.012(<code>03</code> §2)</td>
+</tr>
+<tr>
+<td>동역학 정보가 추가 가치를 낸다</td>
+<td>Table III(헤드 두 개 대 UVT)</td>
+<td><strong>행동 전용 32차원 대조가 없음</strong> (<code>04</code> §3)</td>
+</tr>
+<tr>
+<td>목표 공간이 더 구조적이다</td>
+<td>Fig. 5, t-SNE</td>
+<td>정성적. 정량 지표 없음</td>
+</tr>
+<tr>
+<td>디코딩 행동이 더 부드럽다</td>
+<td>Fig. 6</td>
+<td>정성적. 정량 지표 없음</td>
+</tr>
+<tr>
+<td>추가 데이터와 연산 없음</td>
+<td>§III-D, 초록</td>
+<td>LAM 사전학습 비용과 MVAE 비용 미보고 (<code>03</code> §5)</td>
+</tr>
+</tbody>
+</table>
+<h2>6. 빠진 정보와 열린 질문</h2>
+<ol>
+<li><strong>시행 수와 시드 수</strong>(LIBERO, LIBERO-Plus, 실물 이외). 통계 해석이 불가능합니다.</li>
+<li><strong>행동 전용 32차원 대조</strong>(promotion 조건). 동역학을 뺀 같은 파이프라인이 없습니다.</li>
+<li><strong>LAM 종류.</strong> 주 실험에 어떤 LAM을 썼는지 본문에 없습니다. 공개 코드는 UniVLA LAM을 씁니다(<code>04</code> D9).</li>
+<li><strong>MVAE 학습 범위.</strong> &quot;demonstration dataset에서 한 번 학습&quot;이라고만 씁니다. suite별인지 전체인지 불명확합니다(<code>04</code> D11).</li>
+<li><strong>손실 가중치 불일치.</strong> 논문 식과 공개 코드의 가중치와 L1·L2 선택이 다릅니다(<code>04</code> D1–D3).</li>
+<li><strong>π0.5 구현.</strong> 저장소에 없습니다(<code>04</code> D13).</li>
+<li><strong>실물 설정.</strong> 과제당 시연 30회, 물체 배치 무작위화 범위는 있지만, 로봇과 카메라와 제어 주기가 없습니다. 재현 불가입니다(<code>04</code> D14).</li>
+<li><strong>절반 성공의 정의.</strong> 과제마다 저자가 정의했습니다. 사전 등록된 기준인지 불명확합니다.</li>
+<li><strong>학습된 정밀도.</strong> 학습 후 α와 분산, w 값이 보고되지 않았습니다. 학습 중 진단값(코드가 기록하는 <code>precision/ratio_a_over_z</code>)에 해당하는 수치가 논문에 없습니다.</li>
+<li><strong>t-SNE와 Fig. 6의 정량화.</strong> 정성적 관찰만 있습니다.</li>
+</ol>
+<h2>7. 한계 (저자 언급과 분석자 보완)</h2>
+<ul>
+<li>저자는 &quot;극단적 환경 조건에서 강하다&quot;고 말하지만, LIBERO-Plus는 섭동 종류별로 나누어 보고하지 않았습니다.</li>
+<li>저자는 장기 계획과 다중 에이전트로의 확장을 제안하지만(§V), 실험은 없습니다.</li>
+<li>디코더는 정책과 함께 학습되므로, 정책 오차가 디코더에 흡수될 수 있습니다. 디코더가 얼마나 적응하는지 분석하지 않았습니다.</li>
+</ul>
+<h2>8. 이 저장소의 다른 분석과의 관계</h2>
+<p><code>02_prior_work.md</code> §3에 정리했습니다. 요지는 다음과 같습니다. 잠재 행동을 로봇 학습에 쓰는 축(<code>motion_latent_action</code>, <code>dreamx</code>), VLA 헤드와 목표를 바꾸는 축(<code>imle_vla</code>, <code>adavla</code>, <code>pacevla</code>), 보조 예측을 붙이는 축(<code>thinkworld</code>, <code>openwam</code>, <code>restacvla</code>)과 맞닿습니다.</p>
+</section>
+<section class="chapter"><h1>03. 표 재계산, 통계 검정, 유도, toy</h1>
+<p><strong>계산 파일:</strong> <code>analysis/table_check.py</code> → <code>table_check_results.json</code>(표 산술, LIBERO와 실물 검정, CMH, Holm, 검출력), <code>analysis/uvt_toy.py</code> → <code>uvt_toy_results.json</code>(선형 toy), <code>analysis/plot_figures.py</code>(그래프). 모두 CPU, 단일 스레드, 수 초에서 수십 초입니다.</p>
+<p><strong>가정 (명시):</strong> 논문은 LIBERO의 suite별 시행 횟수와 시드 수를 쓰지 않았습니다. 그래서 두 가지를 가정합니다. (a) 공식 코드의 기본값인 과제당 50회 × 과제 10개 = suite당 500회. (b) README 예시의 과제당 20회 = suite당 200회(민감도). 표준오차는 이항 샘플링만 반영하고 시드 분산은 빠져 있으므로, 여기서의 p값은 하한에 가까운 낙관적 값입니다.</p>
+<hr />
+<h2>1. LIBERO (Table I, II)</h2>
+<h3>1.1 표 산술</h3>
+<p>Table I의 네 suite 산술 평균과 Table II의 평균을 다시 계산했습니다. 모든 셀이 논문 값과 일치합니다(12개 항목 전부 일치: 10k·100k, 기준·UVT, LIBERO·LIBERO-Plus, Table II의 4개 모델). 따라서 평균 열의 계산 오류는 없습니다.</p>
+<h3>1.2 suite별 검정 (가정 n = 500)</h3>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>suite</th>
+<th>VLA-Adapter</th>
+<th>UVT</th>
+<th>차이 (pp)</th>
+<th>Fisher p</th>
+<th>Holm p (8개)</th>
+<th>기준 Wilson 95%</th>
+<th>UVT Wilson 95%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10k</td>
+<td>Object</td>
+<td>93.4</td>
+<td>94.0</td>
+<td>+0.6</td>
+<td>0.80</td>
+<td>0.80</td>
+<td>90.9–95.3</td>
+<td>91.6–95.8</td>
+</tr>
+<tr>
+<td>10k</td>
+<td>Spatial</td>
+<td>78.8</td>
+<td>95.0</td>
+<td>+16.2</td>
+<td>1e-14</td>
+<td>9e-14</td>
+<td>75.0–82.2</td>
+<td>92.7–96.6</td>
+</tr>
+<tr>
+<td>10k</td>
+<td>Goal</td>
+<td>90.4</td>
+<td>95.0</td>
+<td>+4.6</td>
+<td>0.007</td>
+<td>0.043</td>
+<td>87.5–92.7</td>
+<td>92.7–96.6</td>
+</tr>
+<tr>
+<td>10k</td>
+<td>Long</td>
+<td>56.2</td>
+<td>68.8</td>
+<td>+12.6</td>
+<td>5e-5</td>
+<td>3.5e-4</td>
+<td>51.8–60.5</td>
+<td>64.6–72.7</td>
+</tr>
+<tr>
+<td>100k</td>
+<td>Object</td>
+<td>97.6</td>
+<td>99.6</td>
+<td>+2.0</td>
+<td>0.012</td>
+<td>0.062</td>
+<td>95.9–98.6</td>
+<td>98.6–99.9</td>
+</tr>
+<tr>
+<td>100k</td>
+<td>Spatial</td>
+<td>96.2</td>
+<td>98.6</td>
+<td>+2.4</td>
+<td>0.027</td>
+<td>0.108</td>
+<td>94.1–97.6</td>
+<td>97.1–99.3</td>
+</tr>
+<tr>
+<td>100k</td>
+<td>Goal</td>
+<td>95.6</td>
+<td>97.2</td>
+<td>+1.6</td>
+<td>0.23</td>
+<td>0.70</td>
+<td>93.4–97.1</td>
+<td>95.4–98.3</td>
+</tr>
+<tr>
+<td>100k</td>
+<td>Long</td>
+<td>89.0</td>
+<td>91.2</td>
+<td>+2.2</td>
+<td>0.29</td>
+<td>0.70</td>
+<td>86.0–91.5</td>
+<td>88.4–93.4</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>10k 스텝의 평균 이득 +8.5pp</strong>(79.7 → 88.2)는 suite 네 개의 평균 차이로 보면 표준오차 1.08pp, 정규 근사 p &lt; 10^-14입니다. 이 값은 시드 분산을 모르므로 과신하지 않습니다.</li>
+<li><strong>10k에서 이득은 Spatial과 Long에 집중</strong>합니다. Object는 차이가 없습니다. 논문의 &quot;전 suite에서 개선&quot;이라는 문장(§IV-B)은 Object에서 0.6pp이므로 실질적으로 차이가 없다는 뜻입니다.</li>
+<li><strong>100k 평균 이득은 +2.05pp</strong>(94.6 → 96.7), 표준오차 0.64pp입니다. 개별 suite 중 Holm 보정 후 유의한 것은 없습니다. 논문의 &quot;포화 후에도 유지&quot; 해석은 약한 증거입니다.</li>
+<li><strong>민감도(n = 200):</strong> 10k 평균 차이의 표준오차는 1.7pp로 커지지만 여전히 크게 유의합니다. 결론은 같습니다.</li>
+</ul>
+<h3>1.3 π0.5 쪽 (Table II)</h3>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>차이 (pp)</th>
+<th>표준오차(n=500 가정)</th>
+<th>정규 근사 p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>π0.5 → UVT(π0.5), 최종 평균</td>
+<td>+0.7</td>
+<td>0.57</td>
+<td>0.22</td>
+</tr>
+</tbody>
+</table>
+<p><strong>판정:</strong> π0.5에서의 개선 0.7pp는 이 가정에서 검출되지 않습니다. 논문은 &quot;consistent improvement&quot;라고 쓰지만 이 수치로는 근거가 약합니다. 기반 모델이 이미 96% 이상이라 천장 효과도 있습니다.</p>
+<h3>1.4 LIBERO-Plus</h3>
+<p>Spatial 10k는 34.0 → 81.5로 차이가 47.5pp입니다. 시행 수를 모르더라도 효과 크기가 매우 큽니다. 다른 suite(Object +(-0.3), Goal +25.5, Long +21.3)도 10k에서 큽니다. Object 100k는 58.3 → 60.4(+2.1). 100k 평균 차이는 70.5 → 73.6(+3.1)입니다. <strong>LIBERO-Plus의 시행 수, 시드 수가 없으므로 검정은 하지 않았습니다.</strong> 큰 효과가 시드 한두 개의 우연일 가능성은 배제할 수 없습니다.</p>
+<hr />
+<h2>2. 실물 (Table V 없음, 본문과 그림 값)</h2>
+<p>논문은 실물 결과를 과제당 50회로 보고합니다. Lift Pot은 전체 성공만, Close Marker와 Plate Handover는 전체 성공과 절반 성공을 함께 씁니다. 절반 성공은 저자가 과제마다 정의한 중간 단계입니다(Close: 두 물체 파지 후 삽입 실패, Plate: 들어 올린 후 전달 실패).</p>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>기준 전체</th>
+<th>UVT 전체</th>
+<th>기준 절반</th>
+<th>UVT 절반</th>
+<th>기준 점수</th>
+<th>UVT 점수</th>
+<th>Fisher p (전체)</th>
+<th>Holm p (전체, 3개)</th>
+<th>Mann–Whitney p (점수)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lift Pot</td>
+<td>19/50 (38%)</td>
+<td>27/50 (54%)</td>
+<td>—</td>
+<td>—</td>
+<td>38%</td>
+<td>54%</td>
+<td>0.16</td>
+<td>0.32</td>
+<td>— (전체만)</td>
+</tr>
+<tr>
+<td>Close Marker</td>
+<td>0/50 (0%)</td>
+<td>5/50 (10%)</td>
+<td>0</td>
+<td>28</td>
+<td>0%</td>
+<td>38%</td>
+<td>0.056</td>
+<td>0.17</td>
+<td>5e-12</td>
+</tr>
+<tr>
+<td>Plate Handover</td>
+<td>7/50 (14%)</td>
+<td>12/50 (24%)</td>
+<td>4</td>
+<td>16</td>
+<td>18%</td>
+<td>40%</td>
+<td>0.31</td>
+<td>0.32</td>
+<td>0.0019</td>
+</tr>
+</tbody>
+</table>
+<p>Wilson 95% 구간(전체 성공): Lift Pot 기준 26–52%, UVT 40–67%. Close Marker 기준 0–7%, UVT 4–21%. Plate 기준 7–26%, UVT 14–37%.</p>
+<p><strong>다중 과제 검정:</strong> Mantel–Haenszel 공통 오즈비(UVT 대 기준)는 약 2.28입니다(연속성 보정 카이제곱 6.36, p = 0.012). 이것은 세 과제의 전체 성공을 같은 오즈비로 본다는 가정이 필요합니다. 과제마다 난이도가 다르므로 이 p값은 참고용입니다. 풀링한 단순 Fisher(26/150 대 44/150)는 p = 0.020입니다.</p>
+<p><img src="figures/power_mde.png" alt="power_mde.png" /></p>
+<p class="cap">직접 계산: 과제당 50회, 두 팔 비교의 최소 검출 차이(80% 검출력). 논문의 과제별 차이(점선)는 모두 이 값보다 작습니다.</p>
+<p><strong>검출력:</strong> 과제당 50회, 두 팔, 양측 5%, 검출력 80%에서 최소 검출 차이(MDE)는 기준 성공률 20%에서 22pp, 40%에서 27pp, 50%에서 28pp입니다(<code>table_check.py</code>의 근사식). 논문의 과제별 차이(10–16pp, 전체 성공 기준)는 모두 이 MDE보다 작습니다. 즉 <strong>과제 하나로는 효과가 있어도 검출하기 어려운 설계</strong>입니다.</p>
+<p><strong>해석:</strong></p>
+<ol>
+<li>과제별 전체 성공 차이는 어느 것도 Holm 보정 후 유의하지 않습니다. 논문 본문의 &quot;substantially improves grasping reliability&quot;는 과제별로 과장된 표현입니다.</li>
+<li>점수(절반 성공 포함)의 Mann–Whitney 검정은 Close Marker와 Plate에서 유의합니다. 그러나 이 검정은 <strong>저자가 절반 성공을 사후에 정의한 것</strong>에 의존합니다. Lift Pot에는 점수가 없고, 절반 성공 정의가 바뀌면 결론이 바뀔 수 있습니다(연구자 자유도).</li>
+<li>전체 성공만 보면 세 과제 CMH에서 p = 0.012로 유의하지만, 과제 수와 샘플 수가 작고 한 번의 실험(시드 1개, 한 로봇)입니다.</li>
+<li>시행 간 상관(같은 물체 배치, 같은 시간대의 하드웨어 상태)은 고려하지 않았습니다.</li>
+</ol>
+<p><strong>판정:</strong> &quot;실물 개선&quot;은 <strong>방향은 일관되지만 과제별로 통계적으로 확인되지 않습니다.</strong> 합산 검정은 시험 설계(과제 묶음, 절반 성공 정의)에 따라 달라집니다.</p>
+<hr />
+<h2>3. 유도 (정밀도 가중 PoE)</h2>
+<p><strong>(a) 융합 평균은 볼록 결합입니다.</strong> 행동과 LAM 각각의 정밀도 T_a = α_a/σ_a², T_z = α_z/σ_z²에 대해</p>
+<p>μ_u = (T_a μ_a + T_z μ_z)/(T_a + T_z) = w μ_a + (1 − w) μ_z, 여기서 w = T_a/(T_a + T_z).</p>
+<p>따라서 α를 같은 배수로 키워도 w는 바뀌지 않습니다(α의 절대 크기는 의미가 없고 비율 α_a/α_z만 의미가 있음).</p>
+<p><strong>(b) 초기 가중치.</strong> 코드의 초기값(로그분산 −2와 +1, α = 1)에서 σ_a² = e^{−2} ≈ 0.135, σ_z² = e ≈ 2.718이므로 w = 7.39/(7.39 + 0.368) ≈ 0.953입니다. 학습 전의 목표는 행동 평균 95%와 동역학 평균 5%의 혼합입니다. 학습 후 w는 보고되지 않았습니다.</p>
+<p><strong>(c) 동역학 정보의 두 경로.</strong> 동역학 정보가 u에 들어가는 길은 두 가지입니다.</p>
+<ul>
+<li>경로 1: PoE 가중치 (1 − w). 초기에는 작습니다.</li>
+<li>경로 2: LAM 디코더 손실 L_DYN. u에서 z를 복원하도록 강제하므로, w가 작아도 u의 방향이 z 정보를 담게 됩니다. 이 경로의 크기는 λ_z(코드에서 0.5)에 따라 달라집니다.
+따라서 &quot;동역학 신호의 효과&quot;를 보려면 경로 2를 끊는 대조(CE 제거)가 필요합니다.</li>
+</ul>
+<p><strong>(d) KL 항.</strong> 융합 후 분포 N(μ_u, σ_u²)에 대한 KL은 표준 VAE의 닫힌 형태를 씁니다. β = 0.01이므로 목표의 분산 정규화는 약합니다. 논문의 가중치 1(β 없음)과 다릅니다(<code>04</code> D3).</p>
+<p><strong>(e) 목표 공간의 스케일.</strong> L1 행동 손실은 56차원 평균이고 CE는 4개 코드 평균입니다. 두 항의 상대 크기는 λ_z에 의해 정해집니다. 논문의 식처럼 합으로 쓰면 행동 항이 56배 커지므로, 어느 쪽인지에 따라 동역학의 상대 기여가 크게 달라집니다.</p>
+<hr />
+<h2>4. 표 값 검증에서 나온 해석 (LIBERO-Spatial 헤드 비교, Table III)</h2>
+<ul>
+<li>기준 78.8 → Villa-X 헤드 83.2 → UniVLA 헤드 86.4 → UVT 95.0 (10k). 세 변형은 같은 suite, 시드 한 번, 같은 데이터로 나왔습니다. 차이 8.6pp(UniVLA 헤드 대 UVT)는 가정 n=500에서 검출 가능하지만 시드 분산을 모릅니다.</li>
+<li><strong>핵심 빈칸:</strong> Table III의 세 번째 열은 &quot;행동 전용 32차원 목표&quot;가 없습니다. 기준(행동 L1)과 UVT(행동+동역학 32차원) 사이에는 &quot;32차원 병목&quot;과 &quot;디코더 학습&quot;과 &quot;동역학 정보&quot;가 동시에 바뀌었습니다. 이 셋을 나누려면 행동 전용 32차원 대조가 필요합니다(<code>04</code> §3).</li>
+<li>100k 스텝에서는 UniVLA 헤드(95.8)가 기준(96.2)보다 낮고, UVT(98.6)만 올라갑니다. 헤드 변형 중 UVT만 100k에서 효과가 있다는 점은 흥미롭지만, 시드 하나의 값입니다.</li>
+</ul>
+<hr />
+<h2>5. 계산량과 데이터 공평성</h2>
+<ul>
+<li>논문은 &quot;추가 데이터와 연산 없음&quot;을 주장합니다. 그러나 (a) LAM 사전학습(외부 영상 데이터와 GPU 시간)은 계산에 빠져 있습니다. (b) MVAE 학습과 LAM 추론, 목표 사전계산은 추가 단계입니다. 이것들은 크지 않을 것으로 보이지만(MVAE 약 31만 파라미터, <code>04</code> §8), 논문이 수치로 밝히지 않았습니다. (c) 기준 헤드와 UVT 헤드의 파라미터 수 비교가 없습니다. 공식 코드의 UVT 헤드는 잔차 블록이 24개인 MLP입니다(<code>04</code> D16). 기준 회귀 헤드와 크기가 같은지 확인되지 않았습니다.</li>
+<li>학습 예산은 같은 스텝 수와 같은 배치로 맞췄다고 합니다(§IV-A-d). 그러나 코드에서 VLA 학습은 시드를 고정하지 않으므로, 같은 설정을 두 번 돌려도 다른 결과가 나올 수 있습니다(<code>04</code> D15).</li>
+<li>논문은 실물에서 &quot;같은 파인튜닝 예산&quot;을 말합니다(§IV-D). 그러나 실물 기준선의 학습 스텝과 데이터 양(과제당 시연 30회)은 같지만, LAM 사전학습 데이터가 실물 과제와 겹치는지는 밝히지 않았습니다.</li>
+</ul>
+<hr />
+<h2>6. 선형 toy: 공동 목표가 행동 정확도를 올리는 조건</h2>
+<h3>6.1 설정</h3>
+<ul>
+<li>x ∈ R^20, 행동 신호 a* = W x (순위 q = 4), 관측 행동 a = a* + σ_a ε (σ_a = 1, ε는 x와 무관한 운동 잡음), 행동 차원 k = 12.</li>
+<li>동역학 코드 d = √ρ S x + √(1−ρ) ξ, S는 행동 신호와 같은 부분공간의 단위분산 사상, m = 6. 따라서 R²(d | x) = ρ.</li>
+<li>목표 세 가지(모두 절편 있는 선형 OLS로 x → 목표를 맞춤): (F) 행동 전체(압축 없음), (A_r) 행동만 PCA r차원, (J_r) [행동; 동역학]을 블록 스케일링 후 PCA r차원. 디코더는 PCA 사영의 전치(고정)입니다. 논문은 디코더를 학습하지만 선형 toy에서는 같은 구조로 둡니다.</li>
+<li>평가: 테스트 x 4000개에서 ‖â − a*‖²의 평균. 시드 30개.</li>
+<li>같은 시드에서 x와 ε와 ξ는 모든 ρ에서 같습니다. 따라서 **동역학 고유 이득 = MSE(J_r, ρ = 0) − MSE(J_r, ρ)**는 &quot;같은 차원의 예측 불가능한 블록&quot;과의 짝비교입니다. 이 값이 목표 구성 효과(잡음 블록이 주는 효과)를 뺀 순수 동역학 효과입니다.</li>
+</ul>
+<p><img src="figures/toy_dyn_gain.png" alt="toy_dyn_gain.png" /></p>
+<p class="cap">직접 계산(선형 toy): 동역학 고유 이득(잡음 블록 대비 MSE 감소)을 예측도 ρ와 압축 차원 r별로. 오차 막대는 95%.</p>
+<h3>6.2 결과 (선택)</h3>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>ρ</th>
+<th>F MSE</th>
+<th>r = 2: A−J / 동역학 고유</th>
+<th>r = 4: A−J / 동역학 고유</th>
+<th>r = 6: A−J / 동역학 고유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30</td>
+<td>0</td>
+<td>2.71</td>
+<td>−0.065 / 0</td>
+<td>+0.077 / 0</td>
+<td>+0.373 / 0</td>
+</tr>
+<tr>
+<td>30</td>
+<td>0.95</td>
+<td>2.71</td>
+<td>+0.234 / +0.298</td>
+<td>+0.630 / +0.553</td>
+<td>+0.452 / +0.079</td>
+</tr>
+<tr>
+<td>60</td>
+<td>0</td>
+<td>0.55</td>
+<td>−0.016 / 0</td>
+<td>−0.067 / 0</td>
+<td>+0.061 / 0</td>
+</tr>
+<tr>
+<td>60</td>
+<td>0.95</td>
+<td>0.55</td>
+<td>−0.005 / +0.011</td>
+<td>+0.101 / +0.168</td>
+<td>+0.084 / +0.023</td>
+</tr>
+<tr>
+<td>200</td>
+<td>0</td>
+<td>0.118</td>
+<td>−0.001 / 0</td>
+<td>−0.049 / 0</td>
+<td>+0.001 / 0</td>
+</tr>
+<tr>
+<td>200</td>
+<td>0.95</td>
+<td>0.118</td>
+<td>−0.064 / −0.063</td>
+<td>+0.016 / +0.065</td>
+<td>+0.014 / +0.013</td>
+</tr>
+</tbody>
+</table>
+<p>(A−J는 A 대 J의 MSE 차이로 양수면 J가 좋음. 표준오차는 <code>uvt_toy_results.json</code>에 있음. 중앙값 0.008, 최대 0.054. r = 1, 3과 n = 30의 ρ = 0.25, 0.5는 생략)</p>
+<p><strong>검증:</strong></p>
+<ul>
+<li>r = k + m(압축 없음)에서 J의 행동 예측은 F와 같습니다(최대 차이 3×10^-14). 선형 OLS는 목표를 가역 선형 변환해도 예측이 같으므로 <strong>압축이 없으면 보조 목표는 아무 효과가 없습니다.</strong> 따라서 논문 같은 이득은 전적으로 병목과 디코더에서 나와야 합니다.</li>
+</ul>
+<p><strong>결과 해석:</strong></p>
+<ol>
+<li><strong>동역학 고유 이득은 r이 신호 차원(4) 이상일 때 양수입니다</strong>(n = 60, 200). r &lt; 4에서는 n = 200에서 음수입니다. 즉 병목이 신호보다 좁으면 동역학 방향이 신호 방향을 밀어냅니다.</li>
+<li><strong>데이터가 적으면(n = 30) r에 상관없이 동역학이 도움이 됩니다.</strong> 보조 목표가 정규화 역할을 하는 것으로 보입니다.</li>
+<li><strong>목표 구성 효과가 동역학 효과와 같은 크기일 수 있습니다.</strong> n = 30, r = 6에서 ρ = 0(순수 잡음 블록)의 A−J는 +0.373입니다. 동역학 고유 이득(+0.079)보다 훨씬 큽니다. 즉 &quot;32차원 목표가 더 낫다&quot;는 관찰만으로는 동역학 정보 때문인지 목표 구성 때문인지 구분되지 않습니다. 잡음 블록 대조가 필수입니다.</li>
+<li><strong>예측도 ρ의 효과는 단조적입니다.</strong> 같은 r과 n에서 ρ가 커질수록 동역학 고유 이득이 커집니다(r = 4, n = 60: 0.128 → 0.168).</li>
+</ol>
+<h3>6.3 toy의 한계</h3>
+<ul>
+<li>선형 모형이고 디코더를 학습하지 않았습니다. 논문의 MLP 디코더와 학습된 디코더는 다른 결과를 낼 수 있습니다.</li>
+<li>동역학 신호가 행동 신호와 같은 부분공간에 있다고 가정했습니다(S가 W의 행공간 안). 동역학이 행동과 직교하면 이득이 사라지거나 음수가 될 수 있는데, 이 경우는 테스트하지 않았습니다.</li>
+<li>LAM 코드는 이산 16진 코드 4개인데, toy는 연속 벡터 6차원으로 대체했습니다.</li>
+<li>블록 스케일은 &quot;평균 분산 1&quot;로 맞췄습니다. 논문은 학습된 α로 블록 가중치를 정하므로 최적 스케일이 다를 수 있습니다.</li>
+</ul>
+<p><strong>toy가 말하는 것:</strong> 공동 목표가 도움이 되는 조건은 (i) 병목이 신호 차원 이상이고, (ii) 동역학이 관측으로부터 예측 가능하며, (iii) 데이터가 충분할 때입니다. 그러나 이 조건은 선형 toy의 결과입니다. 실제 LIBERO에서 이것이 맞는지는 행동 전용 32차원 대조로만 확인할 수 있습니다.</p>
+<hr />
+<h2>7. 재계산 목록과 한계</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>결과</th>
+<th>파일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Table I, II 평균 산술</td>
+<td>12/12 일치</td>
+<td><code>table_check_results.json</code> › <code>table_arithmetic</code></td>
+</tr>
+<tr>
+<td>LIBERO suite 검정 (n=500, 200)</td>
+<td>위 §1.2</td>
+<td><code>libero_n500_assumed</code>, <code>libero_n200_assumed</code></td>
+</tr>
+<tr>
+<td>π0.5 대 UVT</td>
+<td>+0.7pp, p = 0.22</td>
+<td><code>pi05_vs_uvt_final_avg</code></td>
+</tr>
+<tr>
+<td>실물 Fisher, Holm, MW, CMH, 풀링</td>
+<td>위 §2</td>
+<td><code>real_tasks</code>, <code>real_cmh_full</code>, <code>real_pooled_full</code></td>
+</tr>
+<tr>
+<td>검출력</td>
+<td>22–28pp</td>
+<td><code>real_mde_n50_pp</code></td>
+</tr>
+<tr>
+<td>선형 toy</td>
+<td>위 §6</td>
+<td><code>uvt_toy_results.json</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>한계:</strong> 시드 분산, 시행 수, 실물 시행의 상관을 모릅니다. 모든 p값은 이항 샘플링 기준입니다. 논문 수치는 PDF 본문과 그림 설명에서 읽었습니다. Fig. 2–4의 시행 분포는 그림에서 판독하지 않았고, 본문 숫자만 씁니다.</p>
+</section>
+<section class="chapter"><h1>04. 논문 ↔ 공식 코드 대조 (UVT, arXiv:2608.03563)</h1>
+<p><strong>대상 저장소:</strong> <code>https://github.com/DeFisch/UVT</code> (프로젝트 페이지의 Code 버튼이 가리키는 저장소). 얕은 복제는 <code>uvt_visuomotor/repo/</code>(gitignore)에 있고, 확인 시점의 HEAD는 <code>4c46246</code>(2026-03-11)입니다. 저장소에는 커밋 3개(2026-03-10 <code>0725777</code> 초기 커밋, 2026-03-11 <code>1fc1f2b</code>, <code>4c46246</code>)만 있고 태그와 릴리스가 없습니다.
+<strong>방법:</strong> 정적 읽기만 했습니다. 코드를 실행하지 않았고, 패키지를 설치하지 않았고, 데이터와 가중치를 받지 않았습니다. 인용은 <code>파일:줄</code> 형식입니다.
+<strong>라이선스 주의:</strong> 저장소에는 LICENSE 파일이 없습니다. 그래서 코드는 복사하지 않고 파일명과 줄 번호로만 인용합니다(권리 판정은 <code>01</code> 머리말 참조).</p>
+<hr />
+<h2>1. 요약</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MVAE 구조(두 인코더, 정밀도 가중 PoE, 두 디코더, KL)</td>
+<td><strong>일치.</strong> 논문 §III-C의 식과 같은 구조입니다. 다만 파라미터화 세부(두 층 MLP 256, 고정 초기 분산)는 논문에 없습니다</td>
+</tr>
+<tr>
+<td>MVAE 손실 가중치</td>
+<td><strong>불일치.</strong> 논문은 가중치 1, 1, 1(β 없음)이고, 코드는 CE에 0.5, KL에 0.01과 워밍업을 씁니다 (D3)</td>
+</tr>
+<tr>
+<td>VLA 정렬 손실</td>
+<td><strong>불일치.</strong> 논문은 제곱 L2, 코드 기본값과 공개 명령은 L1입니다 (D1). 디코딩 손실 가중치도 논문 0.5, 공개 명령 1.0입니다 (D2)</td>
+</tr>
+<tr>
+<td>디코더를 VLA 학습 중 갱신</td>
+<td><strong>일치.</strong> 학습 가능으로 불러옵니다 (<code>vla-scripts/finetune.py:1205–1221</code>)</td>
+</tr>
+<tr>
+<td>동역학 코드</td>
+<td><strong>일치하지만 세부가 빠짐.</strong> 4개 코드 × 16 범주, UniVLA 2단계 LAM입니다. 논문 본문은 주 실험에 쓴 LAM을 밝히지 않았습니다 (D9)</td>
+</tr>
+<tr>
+<td>LIBERO 평가 설정</td>
+<td><strong>부분 일치.</strong> 과제 최대 스텝과 시드 7은 코드에 있습니다. 시행 수는 코드 기본 50, README 예시 20으로 서로 다르고, 논문은 밝히지 않았습니다 (D15)</td>
+</tr>
+<tr>
+<td>π0.5 + UVT</td>
+<td><strong>재현 불가.</strong> 저장소에 π0.5 코드가 없습니다 (D13)</td>
+</tr>
+<tr>
+<td>실물 실험</td>
+<td><strong>재현 불가.</strong> 실물 제어 코드, 양팔 설정, 원격 조작 코드가 없습니다 (D14)</td>
+</tr>
+<tr>
+<td>공개 명령의 실행 가능성</td>
+<td><strong>불일치 다수.</strong> README와 <code>run_full_pipeline.sh</code>의 인자 이름이 스크립트와 맞지 않습니다 (D19). 정적 확인 기준으로 1단계부터 막힐 가능성이 큽니다</td>
+</tr>
+<tr>
+<td><strong>promotion 조건: 동역학 없는 행동 전용 대조</strong></td>
+<td><strong>저장소와 논문 모두 답하지 않습니다.</strong> §3 참조</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. 논문 항목과 코드 위치 대조</h2>
+<table>
+<thead>
+<tr>
+<th>논문 항목 (절)</th>
+<th>코드 위치</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>행동 청크 56차원 = 8 × 7 (§III-A, Fig. 5)</td>
+<td><code>scripts/fusion_mvae/configs.py:21</code>(chunk 8), <code>:22</code>(action 7), <code>:63–64</code>의 <code>input_action_dim</code> 계산</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>동역학 코드 z_t = LAM(v_t, v_{t+k}) (§III-A)</td>
+<td><code>scripts/precompute_lam_indices.py:155–182</code>(첫 프레임과 <code>step_start + window − 1</code> 프레임으로 창 생성), <code>:293</code>(창 기본 8)</td>
+<td>일치. 창 길이와 행동 청크 길이의 관계는 명시되지 않음 (D10)</td>
+</tr>
+<tr>
+<td>인코더 두 개가 같은 32차원 가우시안을 냄 (§III-C)</td>
+<td><code>scripts/fusion_mvae/model.py:19–48</code>(행동), <code>:50–82</code>(LAM 코드, 원-핫 64차원 입력)</td>
+<td>일치. 구조 세부는 논문에 없음</td>
+</tr>
+<tr>
+<td>정밀도 가중 PoE: τ = α_a τ_a + α_z τ_z, μ = (α_a τ_a μ_a + α_z τ_z μ_z)/τ (§III-C)</td>
+<td><code>model.py:158–181</code>(<code>poe_fuse</code>)</td>
+<td>일치. 단, <code>T_a = α_a/var_a</code>, <code>T_z = α_z/var_z</code>로 정밀도 가중이 맞습니다. 파라미터는 스칼라 로그 α 두 개(<code>model.py:151–152</code>)</td>
+</tr>
+<tr>
+<td>α는 전역 학습 스칼라 (§III-C)</td>
+<td><code>model.py:151–152</code></td>
+<td>일치. 다만 <code>model.py:172</code>의 주석 &quot;(D,)&quot;는 실제 형상(1)과 어긋납니다 (사소)</td>
+</tr>
+<tr>
+<td>고정 분산 초기값 (논문 없음)</td>
+<td><code>configs.py:39–40</code>, <code>model.py:36</code>, <code>:69</code></td>
+<td><strong>논문에 없음.</strong> 행동 로그분산 −2, LAM 로그분산 +1 (D5)</td>
+</tr>
+<tr>
+<td>융합 평균 μ_t를 목표 u_t로 씀 (§III-C)</td>
+<td><code>model.py:204</code>(샘플링), <code>:238–239</code>(결정적 <code>pd_mu</code> 사용), <code>scripts/compute_u_for_subset.py:204</code></td>
+<td>일치. 학습 목표는 샘플링이 아니라 평균입니다</td>
+</tr>
+<tr>
+<td>디코더 g_a, g_z (§III-C)</td>
+<td><code>model.py:85–130</code></td>
+<td>일치</td>
+</tr>
+<tr>
+<td>L_ACT = ‖a − â‖₁ (§III-C)</td>
+<td><code>scripts/fusion_mvae/train.py:38</code>(<code>F.l1_loss</code>, 평균)</td>
+<td>일치하지만 평균(mean)입니다. 논문의 ‖·‖₁가 합인지 평균인지 불명확 (D3)</td>
+</tr>
+<tr>
+<td>L_DYN = CE(z, ẑ) (§III-C)</td>
+<td><code>train.py:42–45</code>(네 코드 평균 CE)</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>L_KL = KL(N(μ,σ²) ‖ N(0,I)), 융합 후 분포 (§III-C)</td>
+<td><code>train.py:47–50</code>(융합 후 μ, logvar에 대해 계산)</td>
+<td><strong>일치</strong></td>
+</tr>
+<tr>
+<td>L_UVT = L_ACT + L_DYN + L_KL, 가중치 없음 (§III-C)</td>
+<td><code>train.py:52</code>: L1 + λ_z·CE + β·KL. <code>configs.py:34</code>(λ_z = 0.5), <code>:35</code>(β_max = 0.01), <code>:36</code>(워밍업 2000 스텝)</td>
+<td><strong>불일치</strong> (D3)</td>
+</tr>
+<tr>
+<td>VLA 목표 ‖û − u‖²₂ (§III-D)</td>
+<td><code>vla-scripts/finetune.py:157</code>(<code>ut_loss_type = &quot;l1&quot;</code> 기본), <code>:473</code>(L1 사용), <code>:479</code>(MSE 분기)</td>
+<td><strong>불일치</strong> (D1). 공개 명령도 <code>l1</code></td>
+</tr>
+<tr>
+<td>디코딩 손실 γ = 0.5 (§IV-A-d)</td>
+<td><code>finetune.py:159</code>(<code>ut_decode_loss_weight</code> 기본 0.0), 공개 명령 <code>1.0</code> (README, <code>run_full_pipeline.sh:126–127</code>)</td>
+<td><strong>불일치</strong> (D2)</td>
+</tr>
+<tr>
+<td>디코더 학습 중 갱신 (§III-D)</td>
+<td><code>finetune.py:1205–1221</code>(<code>requires_grad(True)</code>), <code>:1213</code>(MVAE 설정으로 재구성)</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>학습 시 행동은 복원 손실로만 사용 (§III-D)</td>
+<td><code>finetune.py:506–511</code>(디코딩 후 L1), <code>:506–508</code>(LIBERO만 그리퍼 변환 <code>(x+1)/2</code>)</td>
+<td>일치. 그리퍼 변환은 논문에 없음 (D18)</td>
+</tr>
+<tr>
+<td>해시 실패 창 ~6%는 손실에서 제외 (논문 없음)</td>
+<td><code>prismatic/vla/datasets/datasets_lam_precomputed.py:195–205</code>(0 벡터 대체), <code>finetune.py:463–470</code>(마스크)</td>
+<td><strong>논문에 없음</strong> (D17)</td>
+</tr>
+<tr>
+<td>u 사전계산 후 VLA 학습 (§III-D)</td>
+<td><code>scripts/compute_u_for_subset.py:188–238</code>(인코딩, <code>u_vectors.npy</code>, <code>decoder_weights.pt</code>)</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>표준 LIBERO 평가: 과제 10개, 실행 한 번에 최대 스텝 (§IV)</td>
+<td><code>experiments/robot/libero/run_libero_eval.py:73–79</code>(suite별 최대 스텝 220/280/300/520), <code>:120</code>(시행 50), <code>:135</code>(시드 7)</td>
+<td>부분 일치 (D15)</td>
+</tr>
+<tr>
+<td>10k·100k 스텝 학습, 동일 데이터 분할 (§IV-A-d)</td>
+<td>README 예시는 100k 스텝, 공개 명령의 <code>--max_steps</code> 값은 1만 또는 10만. 시드 설정이 <code>finetune.py</code>에 없음</td>
+<td>부분 일치. 학습 시드 미설정 (D15)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. promotion 조건: 동역학 없는 행동 전용 대조 (핵심 질문)</h2>
+<p><strong>질문:</strong> 같은 32차원 목표 파이프라인에서 LAM 동역학 코드만 뺀 대조(행동 전용)를 두면, 이득이 사라지는가? 즉 &quot;동역학 신호 자체&quot;가 도움이 되는가?</p>
+<p><strong>결론: 답할 수 없습니다. 조건은 아직 열려 있습니다.</strong> 근거는 세 가지입니다.</p>
+<ol>
+<li><strong>논문에 없습니다.</strong> Table III은 기준선(VLA-Adapter 회귀 헤드, 행동 L1)과 &quot;동역학을 별도 헤드로 예측하는&quot; 두 변형(Villa-X, UniVLA LAM 헤드)과 UVT만 비교합니다. 동역학 없이 행동만 32차원 MVAE로 압축한 대조가 없습니다. 그래서 UVT와 기준선의 차이는 (a) 동역학 정보, (b) 32차원 병목과 디코더, (c) 디코딩 손실과 L1·L2 차이, (d) 정렬 손실 가중치를 분리하지 못합니다.</li>
+<li><strong>저장소에 스위치가 없습니다.</strong> <code>scripts/fusion_mvae/model.py</code>의 MVAE는 항상 LAM 인코더를 만듭니다. <code>train.py</code>의 <code>lambda_z</code>를 0으로 두어도 LAM 인코더는 PoE 융합에 계속 들어가므로 z가 μ에 섞입니다. 그래서 <code>λ_z = 0</code>은 깨끗한 대조가 아닙니다. 동역학을 완전히 빼려면 (i) <code>poe_fuse</code>에서 z 정밀도 T_z를 0으로 두고, (ii) CE 항과 LAM 디코더를 제거해야 합니다. 이 변경은 저장소에 없습니다.</li>
+<li><strong>학습 시 LAM 디코더 항이 u에 z 정보를 넣는 주된 경로입니다.</strong> PoE 가중치만으로는 z 정보가 u에 들어가지 않습니다. 초기값에서 행동 가중치는 약 0.953(§4의 계산)이라 z의 직접 기여는 5% 정도입니다. 나머지 z 정보는 &quot;u에서 z를 복원해야 한다&quot;는 CE 항에서 옵니다. 따라서 올바른 대조는 <strong>T_z 제거와 CE·LAM 디코더 제거를 함께</strong> 하는 것입니다.</li>
+</ol>
+<p><strong>코드 안에서 얻을 수 있는 간접 증거.</strong> 저장소의 <code>train.py:141–180</code>은 <code>train/ce_lam</code>, <code>precision/ratio_a_over_z</code>(T_a/T_z) 같은 진단값을 기록합니다. 이 값들이 학습 중 어떻게 움직이는지는 W&amp;B 기록이 없어서 확인할 수 없습니다. 특히 학습된 α와 분산이 초기 비율 20:1에서 얼마나 바뀌는지가 중요합니다. 논문은 이 값을 보고하지 않습니다.</p>
+<p><strong>판정:</strong> 조건 미충족. 노트의 &quot;조건부 승격&quot;은 그대로 유지합니다. 첫 실험은 이 대조입니다. 선형 toy(<code>analysis/uvt_toy.py</code>, <code>03</code> §6)는 이 질문에 대해 조건부 답을 줍니다. 동역학 고유 이득은 예측도 ρ가 크고 압축 차원 r이 신호 차원(4) 이상일 때 양수이며, r이 작고 데이터가 많으면 음수가 됩니다. 실제 LIBERO에서 같은 결과가 나올지는 실험으로만 알 수 있습니다.</p>
+<hr />
+<h2>4. 구현 가능성 판정</h2>
+<p><strong>질문 1: 공식 재현이 가능한가?</strong> 조건부로 가능합니다. 다만 이 맥에서는 불가능합니다.</p>
+<table>
+<thead>
+<tr>
+<th>요소</th>
+<th>상태</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>학습 코드</td>
+<td>있음. 다만 CUDA 전제</td>
+<td><code>finetune.py</code>는 <code>torchrun</code>, DDP, <code>device_id</code>를 씀(<code>:250–262</code>). MPS 경로 없음</td>
+</tr>
+<tr>
+<td>LIBERO 데이터</td>
+<td>외부 다운로드 필요</td>
+<td>README: <code>modified_libero_rlds</code>(git-lfs). 용량 수십 GB로 추정(확인 안 함)</td>
+</tr>
+<tr>
+<td>기반 VLM</td>
+<td>외부 다운로드 필요</td>
+<td>Prismatic Qwen2.5-0.5B + DINOSigLIP, 약 3 GB(README)</td>
+</tr>
+<tr>
+<td>LAM 체크포인트</td>
+<td>외부 다운로드 필요</td>
+<td>UniVLA stage-2 LAM, 약 200 MB(README)</td>
+</tr>
+<tr>
+<td>UVT 체크포인트</td>
+<td><strong>공개되지 않음</strong></td>
+<td>README의 체크포인트 표에 UVT 항목이 없습니다</td>
+</tr>
+<tr>
+<td>LIBERO 시뮬레이터</td>
+<td>설치 필요</td>
+<td>README 설치 4단계. MuJoCo와 EGL 설정</td>
+</tr>
+<tr>
+<td>실행 시간</td>
+<td>10k 스텝 약 4–5시간(A100 80GB), 10k 스텝 RTX 4090 약 8–10시간(README 추정). 100k 스텝 40–50시간</td>
+<td>README 표. 논문은 A6000 기준 10k 스텝 약 8시간</td>
+</tr>
+<tr>
+<td>π0.5 대조</td>
+<td><strong>불가</strong></td>
+<td>저장소에 openpi나 π0.5 코드가 없습니다(검색 결과 0건)</td>
+</tr>
+<tr>
+<td>실물</td>
+<td><strong>불가</strong></td>
+<td>제어 코드와 하드웨어 설정이 없습니다</td>
+</tr>
+</tbody>
+</table>
+<p><strong>공개 명령의 결함 (D19–D20):</strong> 현재 상태로는 README 1단계부터 인자 불일치로 막힐 가능성이 큽니다(정적 확인이며 실행하지 않았습니다). 고치는 데 코드 수정 몇 줄이 필요하고, <code>predict_u</code> 메서드는 없습니다.</p>
+<p><strong>질문 2: 이 맥(Apple M4 Pro, 약 24 GiB 통합 메모리, MPS, CUDA 없음, torch 미설치)에서 할 수 있는가?</strong></p>
+<ul>
+<li><strong>VLA 학습과 LIBERO 평가: 불가(현실적으로).</strong> CUDA 전제 코드입니다. MPS로 포팅해도 0.5B 모델을 10k 스텝 LoRA 학습하는 것은 실용적이지 않습니다. 추정이며 측정하지 않았습니다.</li>
+<li><strong>MVAE 학습: 가능.</strong> 약 31만 파라미터(§4 계산)라서 CPU로 몇 분에서 수십 분이면 됩니다. 단, 입력 데이터(LAM 코드)를 만들려면 LAM 추론과 RLDS 읽기가 필요합니다. 그 부분은 CPU로 될지 확인하지 않았습니다.</li>
+<li><strong>선형 또는 소형 toy: 가능.</strong> 이미 <code>analysis/uvt_toy.py</code>로 했습니다.</li>
+</ul>
+<p><strong>질문 3: 노력과 필요한 자원.</strong> LIBERO-Spatial에서 기준선과 UVT를 10k 스텝으로 비교하는 최소 재현은 NVIDIA GPU 1장(24 GB 이상)과 1–2주 정도의 작업(인자 수정, 데이터 준비, 시드 여러 개)이 필요하다고 추정합니다. 이것은 추정이며 확인하지 않았습니다.</p>
+<p><strong>최종 판정:</strong> 공식 재현은 <strong>조건부 가능</strong>(NVIDIA GPU 필요, 공개 명령을 고쳐야 함, π0.5와 실물은 불가). 이 맥에서는 <strong>학습 재현 불가, MVAE와 toy 검증은 가능</strong>.</p>
+<hr />
+<h2>5. 설정과 시드 (논문 대 코드)</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>논문</th>
+<th>코드 기본값</th>
+<th>공개 명령</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MVAE 잠재 차원</td>
+<td>32</td>
+<td>32 (<code>configs.py:19</code>)</td>
+<td>32</td>
+</tr>
+<tr>
+<td>MVAE 은닉 차원, 층 수</td>
+<td>없음</td>
+<td>256, 두 층 (<code>configs.py:20</code>, <code>model.py</code>)</td>
+<td>기본값</td>
+</tr>
+<tr>
+<td>MVAE 배치, 학습률, 에폭</td>
+<td>없음</td>
+<td>256, 1e-3에서 1e-5 코사인, 200 (<code>configs.py:27–30</code>)</td>
+<td>500 에폭(<code>run_full_pipeline.sh:77</code>)</td>
+</tr>
+<tr>
+<td>MVAE 시드</td>
+<td>없음</td>
+<td>42 (<code>configs.py:45</code>), 검증 분할 10%</td>
+<td>기본값</td>
+</tr>
+<tr>
+<td>MVAE 손실 가중치</td>
+<td>1, 1, 1</td>
+<td>λ_z 0.5, β 0.01, 워밍업 2000 (<code>configs.py:34–36</code>)</td>
+<td>기본값</td>
+</tr>
+<tr>
+<td>VLA 정렬 손실</td>
+<td>제곱 L2</td>
+<td>L1(<code>finetune.py:157</code>)</td>
+<td>L1</td>
+</tr>
+<tr>
+<td>VLA 디코딩 가중치</td>
+<td>γ = 0.5</td>
+<td>0(<code>finetune.py:159</code>)</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>VLA 학습률, 배치</td>
+<td>논문 본문에 없음</td>
+<td>명령에서 지정</td>
+<td>README: 1e-4, 배치 8 × 누적 2. 파이프라인: 1e-4, 배치 4 × 누적 4 (효과 배치 16으로 같음)</td>
+</tr>
+<tr>
+<td>LoRA 랭크</td>
+<td>없음</td>
+<td>명령에서 지정</td>
+<td>64</td>
+</tr>
+<tr>
+<td>입력 이미지 수</td>
+<td>없음</td>
+<td>명령에서 지정</td>
+<td>README 2, 파이프라인 3 (서로 다름)</td>
+</tr>
+<tr>
+<td>VLA 학습 시드</td>
+<td>없음</td>
+<td>설정 없음(<code>finetune.py</code>에 <code>set_seed</code> 호출 없음)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>LIBERO 평가 시행</td>
+<td>없음</td>
+<td>과제당 50(<code>run_libero_eval.py:120</code>)</td>
+<td>README 예시 20</td>
+</tr>
+<tr>
+<td>LIBERO 평가 시드</td>
+<td>없음</td>
+<td>7(<code>:135</code>)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>동역학 코드</td>
+<td>&quot;discrete code&quot;</td>
+<td>4개 × 16 범주(UniVLA 2단계 VQ, <code>latent_action_model/genie/modules/lam.py:48</code>)</td>
+<td>UniVLA LAM</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. 차이 목록 (D1–D27)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>분류</th>
+<th>내용</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>불일치</td>
+<td>VLA 정렬 손실: 논문은 제곱 L2, 코드 기본과 공개 명령은 L1</td>
+<td>논문 §III-D; <code>finetune.py:157, 473, 479</code>; README 명령 <code>--ut_loss_type l1</code></td>
+</tr>
+<tr>
+<td>D2</td>
+<td>불일치</td>
+<td>디코딩 손실 가중치: 논문 γ 0.5, 코드 기본 0, 공개 명령 1.0</td>
+<td>논문 §IV-A-d; <code>finetune.py:159</code>; <code>run_full_pipeline.sh:127</code></td>
+</tr>
+<tr>
+<td>D3</td>
+<td>불일치</td>
+<td>MVAE 손실: 논문 가중치 1, 1, 1(β 없음). 코드 CE에 0.5, KL에 0.01과 워밍업. L1은 평균</td>
+<td><code>train.py:38, 42–52</code>; <code>configs.py:34–36</code></td>
+</tr>
+<tr>
+<td>D4</td>
+<td>누락</td>
+<td>행동 전용 32차원 대조, 동역학 제거 스위치 없음</td>
+<td>§3</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>누락</td>
+<td>고정 로그분산 초기값(−2, +1)은 초기 행동 가중치 약 0.953을 만듦. 논문에 없음</td>
+<td><code>configs.py:39–40</code>; <code>model.py:36, 69</code>; §4 계산</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>일치</td>
+<td>융합 후 KL, 융합 평균을 목표로 씀</td>
+<td><code>train.py:48–50</code>; <code>model.py:238–239</code></td>
+</tr>
+<tr>
+<td>D7</td>
+<td>누락</td>
+<td>인코더와 디코더 구조(두 층 MLP 256, 활성 ReLU)</td>
+<td><code>model.py:19–130</code></td>
+</tr>
+<tr>
+<td>D8</td>
+<td>일치</td>
+<td>동역학 코드 4개 × 16 범주, CE</td>
+<td><code>configs.py:23–24</code>; <code>precompute_lam_indices.py:270</code></td>
+</tr>
+<tr>
+<td>D9</td>
+<td>누락</td>
+<td>주 실험의 LAM 종류. 공개 파이프라인은 UniVLA LAM</td>
+<td><code>run_full_pipeline.sh:25</code>; README 체크포인트 표. 논문은 Table III에서만 Villa-X와 UniVLA를 언급</td>
+</tr>
+<tr>
+<td>D10</td>
+<td>불명확</td>
+<td>LAM 창 길이와 행동 청크 길이의 관계. 코드에서 MVAE 청크 8, 창 기본 8, 파이프라인 25, README 예시 25</td>
+<td><code>configs.py:21</code>; <code>precompute_lam_indices.py:293</code>; <code>run_full_pipeline.sh:15</code>; README</td>
+</tr>
+<tr>
+<td>D11</td>
+<td>불명확</td>
+<td>MVAE는 데이터셋마다 따로 학습. 논문 Fig. 5는 네 suite를 한 MVAE로 본 것처럼 쓰임</td>
+<td><code>configs.py:50</code>(기본 libero_spatial); <code>run_full_pipeline.sh:42–71</code>(데이터셋 인자)</td>
+</tr>
+<tr>
+<td>D12</td>
+<td>불일치</td>
+<td>MVAE 에폭: 코드 기본 200, 파이프라인 500</td>
+<td><code>configs.py:30</code>; <code>run_full_pipeline.sh:77</code></td>
+</tr>
+<tr>
+<td>D13</td>
+<td>재현 불가</td>
+<td>π0.5 + UVT 결과는 이 저장소에 코드가 없음</td>
+<td>저장소 전체 검색(openpi, π0.5, pi0 키워드 0건)</td>
+</tr>
+<tr>
+<td>D14</td>
+<td>재현 불가</td>
+<td>실물 실험 코드 없음(양팔 제어, 원격 조작, 과제 설정)</td>
+<td>저장소 파일 목록</td>
+</tr>
+<tr>
+<td>D15</td>
+<td>누락</td>
+<td>시행 수(코드 50, README 20), LIBERO 평가 시드 7, VLA 학습 시드 없음</td>
+<td><code>run_libero_eval.py:120, 135</code>; <code>finetune.py</code>(set_seed 없음); README</td>
+</tr>
+<tr>
+<td>D16</td>
+<td>명명</td>
+<td>평가 코드의 <code>use_ut_head</code>는 <code>VillaXLatentHead</code>를 불러옴(이름 잔재). 이 헤드는 잔차 블록 24개의 MLP</td>
+<td><code>run_libero_eval.py:143, 181–196</code>; <code>prismatic/models/action_heads.py:170–200</code></td>
+</tr>
+<tr>
+<td>D17</td>
+<td>누락</td>
+<td>해시 실패 ~6% 창은 0 벡터로 채우고 손실에서 마스크</td>
+<td><code>datasets_lam_precomputed.py:195–205</code>; <code>finetune.py:463–470</code></td>
+</tr>
+<tr>
+<td>D18</td>
+<td>누락</td>
+<td>디코딩 후 LIBERO 그리퍼 변환 <code>(x+1)/2</code></td>
+<td><code>finetune.py:506–508</code></td>
+</tr>
+<tr>
+<td>D19</td>
+<td>결함</td>
+<td>공개 명령과 스크립트의 인자 불일치. <code>train.py</code>는 <code>--data_npz</code>를 받는데 README와 파이프라인은 <code>--data_path</code>. <code>compute_u_for_subset.py</code>에는 <code>--dataset_path</code>, <code>--lam_indices_dir</code>, <code>--output_dir</code>이 없음. <code>extract_fusion_data_generic.py</code>는 <code>--data_root</code>, <code>--precomputed_dir</code>, <code>--output_npz</code>를 받음. <code>precompute_lam_indices.py</code>는 <code>--datasets</code>를 받음</td>
+<td><code>train.py:241</code>; <code>compute_u_for_subset.py:67–76</code>; <code>extract_fusion_data_generic.py:62–68</code>; <code>precompute_lam_indices.py:289–299</code>; README와 <code>run_full_pipeline.sh</code> 명령</td>
+</tr>
+<tr>
+<td>D20</td>
+<td>결함</td>
+<td>README 빠른 시작의 <code>vla.predict_u</code>는 저장소에 없음</td>
+<td>README:114 (전체 검색 0건)</td>
+</tr>
+<tr>
+<td>D21</td>
+<td>사소한 결함</td>
+<td><code>train.py:108</code>의 except 절이 import 실패 시 정의되지 않은 <code>wandb</code>를 참조</td>
+<td><code>train.py:101–110</code></td>
+</tr>
+<tr>
+<td>D22</td>
+<td>이식성</td>
+<td>개발 서버의 절대 경로가 하드코딩됨(평가 스크립트의 LIBERO 경로, <code>compute_u_for_subset.py</code> 문서 문자열). 공개 문서에는 쓰지 않음</td>
+<td><code>run_libero_eval.py:13</code>; <code>compute_u_for_subset.py:12–16</code></td>
+</tr>
+<tr>
+<td>D23</td>
+<td>라이선스</td>
+<td>LICENSE 파일 없음. <code>pyproject.toml</code>은 LICENSE 파일을 가리키고 MIT 분류자를 씀. GitHub 라이선스는 none. VLA-Adapter 계열(prismatic)과 UniVLA LAM 코드가 들어 있음</td>
+<td><code>pyproject.toml:15–20</code>; GitHub API</td>
+</tr>
+<tr>
+<td>D24</td>
+<td>버전</td>
+<td>저장소 최신 커밋(2026-03-11)이 arXiv 제출(2026-08-04)보다 5개월 앞섬. 논문 결과와 어느 커밋이 맞는지 확인할 수 없음</td>
+<td><code>gh api</code> 커밋 목록</td>
+</tr>
+<tr>
+<td>D25</td>
+<td>누락</td>
+<td>UVT 체크포인트 링크 없음(README 체크포인트 표에 기반 모델과 LAM만)</td>
+<td>README 71–85</td>
+</tr>
+<tr>
+<td>D26</td>
+<td>재현 불가</td>
+<td>LIBERO-Plus 평가 코드 없음</td>
+<td>저장소 전체 검색</td>
+</tr>
+<tr>
+<td>D27</td>
+<td>확인 불가</td>
+<td>논문 Fig. 5(t-SNE)와 Fig. 6(부드러움)의 생성 코드 없음</td>
+<td>저장소 파일 목록</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>7. 자세히 본 부분 (재현 관점의 결론)</h2>
+<ul>
+<li><strong>MVAE 자체는 충실합니다.</strong> 식과 코드가 같은 구조이고, 정밀도 가중이 맞습니다. 논문 식 대조에서 불일치는 손실 가중치와 β(D3)에 있습니다. 이 차이는 &quot;동역학 항의 크기&quot;를 바꾸므로 결과 해석에 직접 영향을 줍니다.</li>
+<li><strong>VLA 쪽은 공개 명령이 논문 설정과 다릅니다(D1, D2).</strong> 논문 표가 어떤 설정에서 나왔는지 코드만으로는 알 수 없습니다.</li>
+<li><strong>평가 쪽은 시행 수와 시드를 알 수 없습니다(D15).</strong> LIBERO 수치를 통계적으로 해석하려면 이것이 필요합니다. 본 분석은 suite당 500회를 가정했습니다(<code>03</code> §1).</li>
+<li><strong>공개 저장소는 &quot;논문의 방법을 그대로 실행하는&quot; 수준이 아닙니다.</strong> 명령을 고쳐야 하고, 기반 모델 하나가 빠져 있고, 체크포인트가 없습니다.</li>
+</ul>
+<h2>8. 계산 기록 (정적)</h2>
+<ul>
+<li>MVAE 파라미터 수(입력 56 행동, 64 원-핫 LAM, 은닉 256, 잠재 32, 디코더 56과 64 출력): 행동 인코더 96,832, LAM 인코더 98,880, 행동 디코더 88,632, LAM 디코더 24,896, 합계 약 309,242(α 두 개 포함). 계산은 <code>analysis/uvt_toy.py</code>를 실행한 것이 아니라 층 크기에서 손으로 계산한 값입니다.</li>
+<li>초기 정밀도 비율: 행동 분산 e^{−2} ≈ 0.135, LAM 분산 e^{1} ≈ 2.718, α = 1일 때 T_a = 7.39, T_z = 0.368, 행동 가중치 w_a = T_a/(T_a + T_z) ≈ 0.953, T_a/T_z ≈ 20.1.</li>
+<li>이 값은 학습 전 초기값입니다. 학습 후 분포는 확인할 수 없습니다.</li>
+</ul>
+</section>
+<section class="chapter"><h1>02. 선행연구, 가까운 대안, 공식 자료</h1>
+<h2>1. 계보</h2>
+<table>
+<thead>
+<tr>
+<th>줄기</th>
+<th>대표 연구</th>
+<th>UVT와의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>행동 토큰화</td>
+<td>RT-2, FAST, VQ-VLA (논문 [1–3])</td>
+<td>UVT는 토큰 대신 연속 32차원 잠재를 씀</td>
+</tr>
+<tr>
+<td>연속 행동 헤드</td>
+<td>OpenVLA-OFT류 회귀 헤드(논문 [4]), π0 플로우 헤드(논문 [5]), π0.5(논문 [6])</td>
+<td>논문은 이 헤드들의 출력 목표만 바꿈</td>
+</tr>
+<tr>
+<td>경량 VLA</td>
+<td>VLA-Adapter(논문 [7], Qwen2.5-0.5B 계열)</td>
+<td>주 기준선. 공식 코드 MIT</td>
+</tr>
+<tr>
+<td>표현 보존 미세 조정</td>
+<td>Knowledge Insulating(논문 [8], Driess 외), 표현 앵커(논문 [9], Dalal 외 2026, Jain 공동저자)</td>
+<td>목표가 아니라 정규화 방향. [9]은 UVT 저자 연구실의 연구</td>
+</tr>
+<tr>
+<td>잠재 행동 모델(LAM)</td>
+<td>LAPA(논문 [10]), UniVLA(논문 [11], Apache-2.0), Villa-X(논문 [12]), MVP-LAM(논문 [13]), ViPRA(논문 [14])</td>
+<td>UVT의 z_t 공급원. 논문은 주로 사전학습에 쓰인다고 봄</td>
+</tr>
+<tr>
+<td>정밀도 가중 결합</td>
+<td>PoE(Hinton 2002), 다중 모달 VAE(Wu &amp; Goodman 2018, 논문 [30])</td>
+<td>MVAE 구조의 원형</td>
+</tr>
+<tr>
+<td>벤치마크</td>
+<td>LIBERO(논문 [15], MIT), LIBERO-Plus(논문 [16])</td>
+<td>평가</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 가까운 대안 (같은 문제를 다른 방법으로 푼 것)</h2>
+<ol>
+<li><strong>보조 헤드 방식:</strong> 행동 헤드 옆에 LAM 코드 예측 헤드를 붙이는 방법. 논문 Table III의 Villa-X와 UniVLA 헤드가 이에 해당합니다. 10k에서 78.8 → 83.2 또는 86.4로 올랐고, 100k에서는 기준과 같거나 낮습니다. UVT(95.0, 98.6)보다 낮습니다. 저자는 &quot;독립 헤드는 상호작용을 강제하지 않는다&quot;고 해석합니다(§IV-E). 이 비교는 <strong>공동 목표의 효과</strong>와 <strong>보조 손실의 효과</strong>를 나누는 증거입니다. 그러나 행동 전용 32차원 대조가 빠져 있어 완전하지 않습니다(<code>04</code> §3).</li>
+<li><strong>LAM 코드를 행동 대신 쓰는 방법(사전학습 LAM 정책):</strong> LAPA, UniVLA 등. 행동 감독을 없애는 점이 UVT와 다릅니다. UVT는 행동 감독을 유지합니다.</li>
+<li><strong>행동 헤드를 바꾸는 방법:</strong> 흐름 매칭을 1단계로 줄이는 IMLE-VLA(<code>imle_vla</code>)나 곡률 기반 가속(<code>adavla</code>)은 행동 생성 쪽을 건드립니다. UVT는 목표 공간을 바꿉니다. 둘은 결합 가능합니다.</li>
+<li><strong>촉각 잠재를 토큰으로 붙이는 방법:</strong> ResTacVLA(<code>restacvla</code>)는 촉각 잔차를 VQ 토큰으로 넣습니다. UVT와 같은 &quot;잠재 토큰을 VLA에 붙이기&quot;이지만, 목표가 아니라 입력 측 토큰입니다.</li>
+</ol>
+<h2>3. 이 저장소의 관련 분석 (읽기만 함)</h2>
+<table>
+<thead>
+<tr>
+<th>폴더</th>
+<th>논문</th>
+<th>관련 이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>motion_latent_action/</code></td>
+<td>Motion-Focused Latent Action (arXiv:2606.18955, IROS 2026)</td>
+<td>사람 영상에서 잠재 행동을 학습해 로봇 VLA에 쓰는 축. UVT의 LAM 공급원과 같은 질문(무엇을 잠재로 볼지)을 다룸</td>
+</tr>
+<tr>
+<td><code>dreamx/</code></td>
+<td>DreamX (arXiv:2611.05377)</td>
+<td>영상 확산 모델의 latent-action 토큰을 사람·로봇 공통 인터페이스로 씀. 동역학 토큰의 대안 공급원</td>
+</tr>
+<tr>
+<td><code>imle_vla/</code></td>
+<td>IMLE-VLA (arXiv:2609.10915, IROS 2026)</td>
+<td>VLA 행동 헤드를 1단계 생성기로 바꾸는 방법. 목표 대 헤드의 축이 다름. 보고 방식(검정, 실물 n=20 등)의 비교 기준</td>
+</tr>
+<tr>
+<td><code>adavla/</code></td>
+<td>AdaVLA (arXiv:2608.29208, IROS 2026)</td>
+<td>흐름 VLA 적분을 가속. 행동 생성 쪽, UVT와 직교</td>
+</tr>
+<tr>
+<td><code>pacevla/</code></td>
+<td>PaceVLA (arXiv:2610.25961)</td>
+<td>국면별 시간 해상도 디코더. 행동 쪽 구조 변경</td>
+</tr>
+<tr>
+<td><code>thinkworld/</code></td>
+<td>ThinkWorld (arXiv:2610.37666)</td>
+<td>VLM이 손목 움직임 토큰을 생성하고 미래 특징을 예측하는 보조 목표. 동역학을 보조 감독으로 쓰는 점이 UVT와 같음. 코드 미공개</td>
+</tr>
+<tr>
+<td><code>openwam/</code></td>
+<td>OpenWAM (arXiv:2609.07398)</td>
+<td>세계-행동 모델의 설계 선택 비교. 보조 예측이 행동 성능에 주는 효과를 다룸</td>
+</tr>
+<tr>
+<td><code>temporal_policy/</code></td>
+<td>Temporal Policy (arXiv:2607.29482, IROS 2026)</td>
+<td>과거 행동으로 행동 생성을 초기화. 시간 정보 활용의 다른 방식</td>
+</tr>
+<tr>
+<td><code>restacvla/</code></td>
+<td>ResTacVLA (arXiv:2607.03387)</td>
+<td>잠재 잔차를 VQ 토큰으로 VLA에 넣음. 입력 측 잠재</td>
+</tr>
+</tbody>
+</table>
+<p><strong>요지:</strong> UVT는 &quot;보조 감독으로서의 동역학 신호&quot;를 목표 공간에서 다룬 점이 특이합니다. ThinkWorld와 OpenWAM은 보조 예측을 쓰지만 목표 공간을 합치지 않습니다. motion_latent_action과 dreamx는 잠재 행동 공급원입니다. 따라서 UVT의 주장을 검증하려면 &quot;보조 예측 대 공동 목표&quot;와 &quot;잠재 공급원 교체&quot; 두 축을 나눠야 합니다.</p>
+<h2>4. GitHub와 공식 자료 (2026-11-11 확인, <code>gh api</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>별</th>
+<th>최근 커밋 (해시, 날짜)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DeFisch/UVT</code></td>
+<td>논문 공식 구현(MVAE, 파이프라인, VLA 학습과 LIBERO 평가)</td>
+<td>공식(프로젝트 페이지 Code 링크)</td>
+<td><strong>없음</strong>(LICENSE 파일 없음, pyproject는 MIT 분류자 표기)</td>
+<td>3</td>
+<td><code>4c46246</code> (2026-03-11)</td>
+</tr>
+<tr>
+<td><code>OpenHelix-Team/VLA-Adapter</code></td>
+<td>기준 VLA(회귀 헤드)</td>
+<td>원저자 저장소로 보임(논문 [7])</td>
+<td>MIT</td>
+<td>2,345</td>
+<td><code>23fa0c9</code> (2026-03-19)</td>
+</tr>
+<tr>
+<td><code>OpenDriveLab/UniVLA</code></td>
+<td>UniVLA LAM(공개 코드의 LAM 공급원)</td>
+<td>원저자 저장소로 보임(논문 [11])</td>
+<td>Apache-2.0</td>
+<td>1,145</td>
+<td><code>0ab9e9d</code> (2025-11-19)</td>
+</tr>
+<tr>
+<td><code>microsoft/villa-x</code></td>
+<td>Villa-X LAM(Table III 헤드)</td>
+<td>원저자 저장소로 보임(논문 [12])</td>
+<td>MIT</td>
+<td>211</td>
+<td><code>9b44899</code> (2026-09-16)</td>
+</tr>
+<tr>
+<td><code>Physical-Intelligence/openpi</code></td>
+<td>π0.5 원본 구현</td>
+<td>공식</td>
+<td>Apache-2.0</td>
+<td>14,604</td>
+<td><code>215abfb</code> (2026-08-24)</td>
+</tr>
+<tr>
+<td><code>Lifelong-Robot-Learning/LIBERO</code></td>
+<td>벤치마크</td>
+<td>공식</td>
+<td>MIT</td>
+<td>2,528</td>
+<td><code>8f1084e</code> (2025-03-15)</td>
+</tr>
+<tr>
+<td><code>sylvestf/LIBERO-plus</code></td>
+<td>견고성 벤치마크(LIBERO-Plus)</td>
+<td>공식(논문 [16])</td>
+<td><strong>없음</strong></td>
+<td>494</td>
+<td><code>4976dc3</code> (2026-01-21)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>UVT 저장소 확인:</strong> 프로젝트 페이지 HTML에서 <code>github.com/DeFisch/UVT</code> 링크를 찾았습니다. 커밋 3개, 태그와 릴리스 없음. 논문 실험과 어느 커밋이 맞는지는 확인할 수 없습니다(<code>04</code> D24).</li>
+<li><strong>체크포인트:</strong> UVT 체크포인트 링크는 없습니다. 기반 모델(Prismatic Qwen2.5-0.5B, 약 3 GB)과 UniVLA LAM(약 200 MB)만 README에 링크되어 있습니다.</li>
+<li><strong>π0.5 + UVT:</strong> 공개 구현이 없습니다. openpi는 원본이고, UVT를 붙인 코드는 없습니다.</li>
+<li><strong>Hugging Face:</strong> 이 분석에서 확인하지 않았습니다.</li>
+</ul>
+<h2>5. 저자와 연구 맥락</h2>
+<ul>
+<li>저자 Zhenyang Feng과 Unnat Jain은 모두 UC Irvine 소속입니다(논문 1쪽). 논문 참고문헌에 Unnat Jain의 다른 연구(논문 [9] Dalal 외, [25] Patel 외, [22], [23])가 많습니다. 같은 집단의 표현 앵커 연구와 함께 읽으면 맥락이 잡힙니다.</li>
+<li>본문 감사 문장에 &quot;IROS 리뷰어와 AC&quot;가 있습니다. IROS 2026 채택과 일치합니다.</li>
+</ul>
+</section></body></html>

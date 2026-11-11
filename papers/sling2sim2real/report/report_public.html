@@ -1,0 +1,1158 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sling2Sim2Real 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig1"] { max-width: 52%; }
+img[src*="paper_fig2"] { max-width: 92%; }
+img[src*="paper_fig3"] { max-width: 50%; }
+img[src*="paper_fig4"] { max-width: 92%; }
+img[src*="toy_"] { max-width: 92%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.4pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>Sling2Sim2Real: 한 번의 당김으로 탄성 파라미터를 맞추고 새총 정책을 옮기는가</h1>
+<p class="meta">게시용 버전 · 원문 https://arxiv.org/abs/2607.23268 · arXiv:2607.23268v1 · IROS 2026 (채택) · W. Kang, G. Kim, M. Song, D. Park · 공식 코드 미공개(2026-11-11 확인) · 분석일 2026-11-11 · 논문 그림 © 저자, CC BY 4.0</p>
+<p><img src="figures/paper_fig1_teaser.png" alt="Fig. 1" /></p>
+<p class="cap">논문 Fig. 1: 한 번의 비파괴 상호작용으로 고무줄을 맞추고, 보정된 시뮬에서 정책을 학습해 실물에 옮깁니다. © 저자, CC BY 4.0. 원문 https://arxiv.org/abs/2607.23268</p>
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 고무줄을 40 cm 당겼다 놓는 기록 한 번(속도, 손목 힘, 점군)으로 시뮬 파라미터 5개를 맞춥니다. DE로 넓게 찾은 뒤 공분산을 반영한 다중 시작 CMA-ES로 다듬습니다. 보정된 시뮬에서 학습한 정책을 실물에 추가 학습 없이 옮깁니다.</li>
+<li><strong>가장 좋은 숫자는 재계산에서 맞습니다:</strong> Band 2 평균 착탄 오차 14.2 cm 대 Package SI 35.2 cm(Table I). 이 차이는 가정 아래 유의합니다(15회 근사 Welch p = 0.002).</li>
+<li><strong>우세는 셀 단위에서 깨집니다:</strong> Band 2, 목표 212.5 cm에서 Package SI(11.0 cm)가 제안(23.5 cm)보다 낫고, 차이는 가정 아래 유의합니다(p = 0.009). 본문은 &quot;slightly higher&quot;라고 씁니다.</li>
+<li><strong>Table IV의 &quot;All targets&quot; 7.83 cm는 틀렸습니다:</strong> 셀 값 15.00, 6.00, 0.50의 평균은 7.17 cm입니다. 0.50이 2.50의 오식이면 맞습니다. 순위에는 영향이 없습니다.</li>
+<li><strong>Band 1의 우세는 통계적으로 구별되지 않습니다:</strong> 7.17 대 8.00 cm, p = 0.68. Band 3에서는 기준선이 모두 N/A라 비교가 없습니다.</li>
+<li><strong>알고리즘 설명에 불일치가 있습니다:</strong> Alg. 1 줄 16은 DE 히스토리 <code>H</code>에서 최솟값을 고르는데, 본문은 CMA-ES 결과를 쓴다고 합니다. 필터 차단 주파수 0.224 rad/s는 단위가 맞지 않아 보입니다.</li>
+<li><strong>toy에서 식별성은 강성과 비선형에 강하고 감쇠와 마찰에 약합니다:</strong> 1회 기록의 피셔 정보에서 k와 β는 1–2%로 정해지지만 c와 μ는 4–7%이고 서로 얽힙니다(상관 −0.93).</li>
+<li><strong>보정 오차는 재계산으로 사라지지 않습니다:</strong> 정책이 같은 모델로 당김을 고르기 때문에, 강성이 10% 틀리면 착탄도 약 20 cm 틀립니다(toy).</li>
+<li><strong>구현 가능성:</strong> 공식 재현은 이 맥에서 불가능합니다(Isaac Sim은 NVIDIA GPU, 실물 Franka와 고무줄 필요). 알고리즘은 CPU toy로 구현했고, 3차원 재구현은 설정값을 가정해야 합니다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>Sling2Sim2Real: One-Shot Elastic System Identification for Non-Destructive Slingshot Policy Learning (arXiv:2607.23268) 분석</h1>
+<ul>
+<li><strong>원문:</strong> arXiv:2607.23268v1 (2026-07-25), cs.RO, 8쪽 (<code>paper/paper.pdf</code>, 추출 텍스트 <code>paper/paper.txt</code>). 인용은 논문의 절(§), 식(Eq.), 알고리즘(Alg.), 표(Table), 그림(Fig.) 번호로 합니다.</li>
+<li><strong>저자:</strong> Wonjae Kang, Geonwoo Kim, Minseok Song, Daehyung Park (교신 저자 D. Park)</li>
+<li><strong>학회:</strong> IROS 2026 채택 (arXiv 주석 &quot;Accepted by IROS 2026&quot;)</li>
+<li><strong>공식 코드:</strong> 논문에 없음. 프로젝트 페이지도 찾지 못함 (<code>analysis/02_prior_work.md</code> §4)</li>
+</ul>
+<h2>1. 한눈에</h2>
+<p>고무줄 한 번을 발사 없이 당겼다 놓는 기록으로 Isaac Sim의 탄성 파라미터 5개를 맞추고, 보정된 시뮬에서 새총 정책을 학습해 실물에 바로 옮깁니다. 보정은 DE로 넓게 찾은 뒤 공분산을 반영한 다중 시작 CMA-ES로 다듬습니다. 실험은 고무줄 3종 × 목표 거리 3개 × 5회입니다. 실물 평균 착탄 오차는 Band 2에서 14.2 cm로 Package SI의 35.2 cm보다 작지만, 목표 거리 212.5 cm에서는 Package SI(11.0 cm)가 더 좋습니다.</p>
+<p>읽으면서 확인한 것을 먼저 적으면 다음과 같습니다.</p>
+<ol>
+<li><strong>Table IV의 &quot;All targets&quot; 7.83 cm는 셀 평균과 맞지 않습니다.</strong> 세 셀 15.00, 6.00, 0.50의 평균은 7.17 cm입니다(<code>analysis/03_analysis.md</code> §1). 다른 행은 모두 맞습니다.</li>
+<li><strong>&quot;일관되게 우세&quot;라는 문장은 Table I과 맞지 않습니다.</strong> Band 2, g = 212.5 cm에서 Sling2Sim2Real은 23.5 cm, Package SI는 11.0 cm입니다. 본문은 &quot;slightly higher error&quot;라고 적었지만 차이는 12.5 cm이고 2배가 넘습니다.</li>
+<li><strong>Alg. 1의 반환값이 CMA-ES 결과가 아니라 DE 히스토리 <code>H</code>의 최솟값입니다(line 16).</strong> 본문은 공분산 기반 CMA-ES가 최종 해를 낸다고 설명합니다. 두 설명이 맞으려면 CMA-ES 해를 <code>H</code>에 넣어야 하는데, 그 내용이 없습니다.</li>
+<li><strong>&quot;±&quot;의 정의가 없습니다.</strong> &quot;All targets&quot;의 ±는 셀 내부 SD를 합한 값에 가깝고(§2), 15회 전체 분산으로 보면 Band 2에서 약 4배 큽니다.</li>
+<li><strong>정책 학습의 기여를 분리하지 않았습니다.</strong> 1단계 MDP에서 행동은 2차원 발사 위치이고, 보정된 시뮬에서 같은 목적을 직접 탐색하는 기준선이 없습니다.</li>
+</ol>
+<h2>2. 문제 설정 (§I)</h2>
+<ul>
+<li>고무줄의 영률과 감쇠는 영상으로 구별되지 않습니다. 그래서 Real2Sim 보정이 어렵습니다(§I, 2–3문단).</li>
+<li>발사 실험으로 실물 데이터를 모으면 고무줄이 손상됩니다. 그래서 &quot;비파괴, 1회&quot; 기록으로 보정하겠다는 것이 목표입니다.</li>
+<li>기존 Real2Sim2Real [2]는 데이터가 많이 필요하고, 관측이 충분하다고 가정하며, 비선형 탄성체에서 강건하지 않다고 주장합니다(§I, 4문단).</li>
+<li>차별점은 (i) 영률과 감쇠를 포함한 5개 파라미터, (ii) 힘과 일(work)을 쓰는 손실, (iii) 공분산 기반 다중 시작입니다(§I, 6문단).</li>
+<li>정책 학습은 1단계 MDP로 단순화해 시뮬 오차에 덜 민감하게 만든다고 주장합니다(§I, 마지막 문단).</li>
+</ul>
+<p><img src="figures/paper_fig2_pipeline.png" alt="paper_fig2_pipeline.png" /></p>
+<p class="cap">논문 Fig. 2: 단일 기록 → 보정(DE 초기화, 공분산 CMA-ES) → 정책 학습 → 실물 전이. © 저자, CC BY 4.0. 원문 https://arxiv.org/abs/2607.23268</p>
+<h2>3. 방법 (§III)</h2>
+<h3>3.1 전체 구조 (Fig. 2)</h3>
+<ol>
+<li>단일 기록 획득 → 2. Real2Sim 보정(DE 초기화 + 공분산 CMA-ES) → 3. 보정된 Isaac Sim에서 PPO 정책 학습 → 4. 실물 전이 (무보정, 0-shot).</li>
+</ol>
+<h3>3.2 단일 기록 (§III-B.1, Eq. 1)</h3>
+<ul>
+<li>로봇(Franka Panda)이 고무줄 아래쪽을 잡고, 발사대 U자 포크 평면에서 40 cm 당긴 뒤 놓습니다. 그 전후 기록은 <code>D_real = [(ẋ_ee,t, f_ee,t, p_sling,t)]</code>, T = 300 샘플(9 s)입니다.</li>
+<li>힘은 저역통과 필터를 거칩니다. 차단 주파수는 <strong>0.224 rad/s</strong>로 적혀 있습니다(§III-B.1). 이 값을 Hz로 읽으면 약 0.036 Hz이고, 9 s 기록의 진동 주기보다 훨씬 깁니다. 단위가 잘못되었을 가능성이 큽니다(확인 필요).</li>
+<li>점군은 RGB에서 SAM으로 고무줄을 분할하고, 깊이를 투영한 뒤 FPS로 <strong>10점</strong>까지 줄입니다(§III-B.1).</li>
+<li>손실에 쓰는 힘과 속도는 중앙값 필터(창 7)를 거칩니다(§III-B.2).</li>
+</ul>
+<h3>3.3 손실 (Eq. 2–5)</h3>
+<ul>
+<li><code>L = L_geom + L_force + L_work</code> (Eq. 2). 가중치 <code>w_geom</code>, <code>w_force</code>, <code>w_work</code>는 &quot;상수&quot;라고만 하고 값이 없습니다.</li>
+<li><code>L_geom = Σ_t w_geom · CD(p^real_t, p^sim_t)</code> (Eq. 3): 점군 Chamfer 거리. 10점 점군에서 Chamfer 거리가 얼마나 민감한지는 적혀 있지 않습니다.</li>
+<li><code>L_force = w_force Σ_t ||f^real_t − f^sim_t||²</code> (Eq. 4): 샘플별 힘 차이.</li>
+<li><code>L_work = w_work | Σ_t [½(f^real_t·ẋ^real_t + f^real_{t+1}·ẋ^real_{t+1}) − (같은 식, sim)] |</code> (Eq. 5): 사다리꼴로 쓴 일의 차이. 합이 망원급수 꼴이라 <code>|W_real − W_sim|</code>과 같습니다(<code>analysis/03_analysis.md</code> §3.2).</li>
+</ul>
+<h3>3.4 DE 초기화와 공분산 (§III-B.2, Alg. 1 줄 2–4)</h3>
+<ul>
+<li>DE로 시뮬을 매 세대마다 돌려 <code>L(θ)</code>를 계산합니다. 초기 집단은 LHS입니다.</li>
+<li>히스토리 <code>H</code>에서 손실 순으로 <code>δ = 0.1</code> 밖의 중심만 골라 <code>K_top = 5</code>개를 얻습니다(NMS). <code>δ</code>의 단위(정규화 공간인지 물리 단위인지)는 적혀 있지 않습니다.</li>
+<li>각 중심의 공분산은 <code>H</code>에서 가까운 <code>K_NN = 15</code>개로 계산합니다(Alg. 1 줄 4).</li>
+</ul>
+<h3>3.5 공분산 기반 CMA-ES (§III-B.3, Alg. 1 줄 5–15)</h3>
+<ul>
+<li>각 시작점에서 <code>Σ = L Lᵀ</code>(Cholesky)로 <code>θ = µ + L z</code>, <code>z ~ N(0, I)</code>을 샘플합니다([26] 방식). 초기 σ₀ = 1.0.</li>
+<li>5개 solver를 나란히 돌리고 마지막에 최적을 고릅니다. <strong>그러나 Alg. 1 줄 16은 <code>θ* = argmin_{θ∈H} L(θ)</code>입니다.</strong> CMA-ES가 새로 찾은 해가 <code>H</code>에 들어가는지 적혀 있지 않습니다. 이 불일치는 Table IV의 &quot;−m&quot;, &quot;−c&quot; 비교가 실제로 무엇을 비교하는지에 영향을 줍니다(<code>analysis/04_claim_verification.md</code> C5).</li>
+</ul>
+<h3>3.6 정책 학습 (§III-C)</h3>
+<ul>
+<li>상태 <code>s = (x_proj, g)</code>: 발사체 위치 <code>x_proj = (y_p, z_p)</code> 2차원과 목표 거리 <code>g</code>.</li>
+<li>행동 <code>a = x_proj ∈ R²</code>: 당김 위치. 발사 각도는 고무줄 평면에 맞춘다고 합니다.</li>
+<li>보상 <code>R = 5 e^{−|y_p − g|}</code>, 실패 패널티 1, 과녁 반지름 20 cm (§III-C).</li>
+<li>전이 <code>T</code>는 사실상 상태에서 끝나는 1단계 과정입니다. 그러므로 &quot;정책&quot;은 목표마다 발사 위치를 고르는 조회표에 가깝습니다.</li>
+<li>PPO (RSL-RL, [256, 128, 64] ELU), 학습 샘플 수와 시드 수는 없습니다(§IV-B).</li>
+</ul>
+<p><img src="figures/paper_fig3_bands.png" alt="paper_fig3_bands.png" /></p>
+<p class="cap">논문 Fig. 3: 고무줄 세 종(Band 1–3). 오른쪽 사진은 1.5 kg 추를 달았을 때 늘어난 모습. © 저자, CC BY 4.0. 원문 https://arxiv.org/abs/2607.23268</p>
+<h2>4. 실험 설정 (§IV)</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값 (논문)</th>
+<th>출처</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>로봇, 센서</td>
+<td>Franka Panda 7-DoF, 손목 6축 FT (Aidin AFT200, 1 kHz → 30 Hz), 외부 RGB-D (Orbbec Femto Bolt, 30 FPS)</td>
+<td>§IV-A</td>
+</tr>
+<tr>
+<td>포크, 고무줄</td>
+<td>U자 포크 간격 27.5 cm, 자유 길이 52 cm, 발사체 39 g (3D 프린트), 과녁 1 m × 1 m</td>
+<td>§IV-A</td>
+</tr>
+<tr>
+<td>시뮬</td>
+<td>Isaac Sim, 시간 간격 1/200 s, 솔버 반복 64, 고무줄 사면체 메쉬(길이 55 cm, 지름 1 cm)</td>
+<td>§IV-A</td>
+</tr>
+<tr>
+<td>계산 환경</td>
+<td>AMD Threadripper Pro 5975WS, NVIDIA RTX 6000 Ada</td>
+<td>§IV-A</td>
+</tr>
+<tr>
+<td>고무줄</td>
+<td>Band 1 실리콘(10 mm, 23 g, 최대 힘 12.18 N), Band 2 천연고무(8 mm, 17 g, 14.25 N), Band 3 라텍스(10 mm, 21 g, 16.7 N)</td>
+<td>§IV-B, Fig. 3</td>
+</tr>
+<tr>
+<td>목표 거리</td>
+<td>g = 172.5, 192.5, 212.5 cm</td>
+<td>§IV-B</td>
+</tr>
+<tr>
+<td>시행</td>
+<td>방법 × 고무줄 × 목표 = 셀당 5회</td>
+<td>§IV-B</td>
+</tr>
+<tr>
+<td>비교</td>
+<td>Real2Sim2Real [2] (DE, 영률·동마찰), Package SI [17] (베이지안, 영률·감쇠, 기하 손실), DEL, BOL, AdamL (각각 같은 L을 DE, 베이지안, Adam으로 최소화)</td>
+<td>§IV-B</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>SI는 미리 모은 데이터로 수행합니다(실시간이 아님). 정책 학습은 보정 결과를 넣은 Isaac Sim에서 PPO로 합니다.</li>
+<li>보정 파라미터 집합은 <code>θ = [E, ν, 탄성 감쇠, 동마찰, 감쇠 스케일]</code>입니다(§III-A).</li>
+</ul>
+<h2>5. 결과 (§V)</h2>
+<h3>5.1 벤치마크 (Table I, 착탄 거리 오차, cm, 평균 ± ?)</h3>
+<table>
+<thead>
+<tr>
+<th>고무줄</th>
+<th>방법</th>
+<th>172.5</th>
+<th>192.5</th>
+<th>212.5</th>
+<th>All targets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Band 1 (soft)</td>
+<td>Real2Sim2Real</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td></td>
+<td>Package SI</td>
+<td>13.00 ± 1.87</td>
+<td>1.50 ± 1.22</td>
+<td>9.50 ± 2.50</td>
+<td>8.00 ± 1.94</td>
+</tr>
+<tr>
+<td></td>
+<td>Sling2Sim2Real</td>
+<td>11.00 ± 2.00</td>
+<td>1.00 ± 1.22</td>
+<td>9.50 ± 4.30</td>
+<td>7.17 ± 2.68</td>
+</tr>
+<tr>
+<td>Band 2 (medium)</td>
+<td>Real2Sim2Real</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td></td>
+<td>Package SI</td>
+<td>60.00 ± 2.74</td>
+<td>34.50 ± 3.32</td>
+<td>11.00 ± 6.44</td>
+<td>35.17 ± 4.58</td>
+</tr>
+<tr>
+<td></td>
+<td>Sling2Sim2Real</td>
+<td>15.50 ± 1.87</td>
+<td>3.50 ± 2.00</td>
+<td>23.50 ± 2.55</td>
+<td>14.17 ± 2.16</td>
+</tr>
+<tr>
+<td>Band 3 (stiff)</td>
+<td>Real2Sim2Real</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td></td>
+<td>Package SI</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td></td>
+<td>Sling2Sim2Real</td>
+<td>35.50 ± 1.87</td>
+<td>18.00 ± 1.87</td>
+<td>3.50 ± 3.39</td>
+<td>19.00 ± 2.47</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Real2Sim2Real는 9개 셀 모두 N/A입니다. Package SI는 Band 3 세 셀이 모두 N/A입니다.</li>
+<li>N/A는 &quot;발사 실패 또는 과녁 밖&quot;이라고 정의합니다(Table I 캡션). 평균에서 N/A를 어떻게 처리했는지는 없습니다. 아래 계산에서는 제외했습니다.</li>
+</ul>
+<h3>5.2 보정 결과 (Table II)</h3>
+<ul>
+<li>손실 <code>L</code>: Band 1에서 Sling2Sim2Real 1.98, Package SI 2.47 (−20%). Band 2에서 2.17 대 2.33 (−6.5%). Band 3에서 0.94 대 3.43 (−72.5%). 본문의 &quot;최대 72.5%&quot;는 Band 3입니다.</li>
+<li>영률: Band 1 9.29E+5, Band 2 5.01E+6, Band 3 3.33E+6. 이름이 말하는 강성 순서(soft &lt; medium &lt; stiff)와 맞지 않습니다(§5.3 참조).</li>
+<li>포아송 비: Band 2만 0.38이고 나머지는 0.45–0.46입니다.</li>
+<li>감쇠 스케일: Sling2Sim2Real은 0.71–0.79이고 두 기준선은 1.00입니다. 본문은 &quot;두 기준선이 더 높은 감쇠 스케일을 추정한다&quot;고 썼는데, 표의 방향과 반대입니다.</li>
+</ul>
+<h3>5.3 절제 (Table III, Table IV, Band 1 only)</h3>
+<ul>
+<li>Table III (최적화기 비교): DEL 11.17, BOL 9.17, AdamL 21.83, 제안 7.17 cm.</li>
+<li>Table IV (공분산·다중 시작·일 항): −c,−m 7.83(표), −m 20.33, −c 10.00, −L_work 27.83, 제안 7.17 cm.</li>
+<li>절제는 Band 1 한 종류, 목표 3개, 셀당 5회입니다. 나머지 두 고무줄에서는 확인하지 않았습니다.</li>
+</ul>
+<p><img src="figures/paper_fig4_trajectories.png" alt="paper_fig4_trajectories.png" /></p>
+<p class="cap">논문 Fig. 4: 실물 발사 궤적. 왼쪽부터 Sling2Sim2Real, Package SI, Real2Sim2Real. © 저자, CC BY 4.0. 원문 https://arxiv.org/abs/2607.23268</p>
+<h3>5.4 정성 (Fig. 4)</h3>
+<ul>
+<li>실물 궤적 세 장(제안, Package SI, Real2Sim2Real). 같은 목표의 정량 비교는 없습니다.</li>
+</ul>
+<h2>6. 논문이 밝힌 한계와 읽으며 본 문제</h2>
+<p><strong>논문이 밝힌 한계 (§V)</strong></p>
+<ul>
+<li>g = 212.5 cm에서 CMA-ES 보정이 DE보다 성능을 떨어뜨릴 수 있다고 인정합니다.</li>
+<li>목표별 보정과 대규모 보정은 미래 과제입니다.</li>
+</ul>
+<p><strong>읽으며 본 문제 (근거는 <code>analysis/04_claim_verification.md</code>)</strong></p>
+<ol>
+<li>Table IV &quot;All targets&quot; 7.83 ≠ 7.17 (C1).</li>
+<li>&quot;일관되게 우세&quot;는 Band 2, g = 212.5에서 깨집니다 (C2).</li>
+<li>Alg. 1 줄 16의 반환값이 <code>H</code> 기준이라 CMA-ES의 기여가 불분명합니다 (C5).</li>
+<li>기준선이 N/A인 셀은 평균과 비교에서 빠집니다. Band 3에서는 Package SI와의 비교가 한 셀도 없습니다 (C3).</li>
+<li>필터 차단 주파수 단위 (§3.2).</li>
+<li>힘과 속도는 30 Hz로 내린 뒤 쓰는데(§IV-A), 놓는 순간의 짧은 과도 응답은 이 표본화로 흐려집니다. 일 항의 해상도가 그만큼 떨어집니다.</li>
+<li>점군 10점은 Chamfer 거리로 쓰기에 적습니다. 이 항의 민감도를 알 수 없습니다.</li>
+<li>가중치 <code>w_geom, w_force, w_work</code>, DE 집단 크기와 세대 수, CMA 집단 크기, NMS <code>δ</code>의 단위 등 재구현에 필요한 값이 빠져 있습니다.</li>
+<li>포아송 비 Band 2의 0.38은 고무 계열의 0.5 근처와 멀어서, 이 파라미터가 1회 기록에서 약하게 식별된다는 신호로 읽을 수 있습니다(C7).</li>
+<li>영률은 Band 2 &gt; Band 3 &gt; Band 1이고 이름 순서와 맞지 않습니다. 탄성 감쇠, 스케일, 영률이 서로 얽혀 있다는 뜻일 수 있습니다(§6 9번과 함께 식별성 질문).</li>
+<li>정책 학습의 기여를 분리하지 않았습니다. &quot;보정된 시뮬에서 같은 목표를 최적화하는 것&quot;과 PPO를 비교하지 않았습니다(C8).</li>
+<li>&quot;실물 상호작용이 줄었다&quot;는 주장에 비교 대상의 실물 호출 수가 없습니다(C9).</li>
+<li>보정의 재현성(시드별 분산)을 보고하지 않았습니다. 1회 기록에서 얻은 θ*가 다른 시드에서 같은지 모릅니다.</li>
+<li>그림 4가 한 장면이라 정책의 일반화를 보여 주지 못합니다.</li>
+<li>논문 자체가 &quot;1 cm 당김 위치 차이가 착탄 30 cm 차이를 만든다&quot;고 씁니다(§V). 이 민감도는 toy에서도 같은 크기입니다(<code>analysis/03_analysis.md</code> §5). 그러면 보정 오차가 착탄 오차로 얼마나 전달되는지가 핵심입니다.</li>
+</ol>
+</section>
+<section class="chapter"><h1>Sling2Sim2Real (arXiv:2607.23268) 수치 재계산, 유도, toy</h1>
+<p>재계산 스크립트와 결과: <code>analysis/table_check.py</code> → <code>table_check_results.json</code>, <code>analysis/sysid_toy.py</code> → <code>sysid_toy_results.json</code>, <code>analysis/model_error_check.py</code> → <code>model_error_results.json</code>. 모두 CPU 1스레드입니다. toy의 장치(모델, 잡음, 손실 가중치)는 논문과 다르고, 모두 가정입니다.</p>
+<p><strong>공통 가정:</strong> 표의 &quot;±&quot;는 셀당 5회 시도의 표준편차(SD)로 둡니다. 논문은 SD인지 표준오차인지 적지 않았습니다. SD라고 가정하면 Welch t 검정을 쓸 수 있습니다.</p>
+<h2>1. 표 산술 재계산</h2>
+<p>셀 평균 세 개의 산술 평균을 &quot;All targets&quot;와 비교했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>행 (표)</th>
+<th>셀 평균 (172.5 / 192.5 / 212.5)</th>
+<th>산술 평균</th>
+<th>보고값</th>
+<th>차이</th>
+<th>보고된 ±</th>
+<th>셀 SD 제곱평균의 제곱근</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Band 1 Package SI (I)</td>
+<td>13.00 / 1.50 / 9.50</td>
+<td>8.00</td>
+<td>8.00</td>
+<td>0</td>
+<td>1.94</td>
+<td>1.94</td>
+</tr>
+<tr>
+<td>Band 1 Sling2Sim2Real (I, III, IV)</td>
+<td>11.00 / 1.00 / 9.50</td>
+<td>7.17</td>
+<td>7.17</td>
+<td>0</td>
+<td>2.68</td>
+<td>2.83</td>
+</tr>
+<tr>
+<td>Band 2 Package SI (I)</td>
+<td>60.00 / 34.50 / 11.00</td>
+<td>35.17</td>
+<td>35.17</td>
+<td>0</td>
+<td>4.58</td>
+<td>4.47</td>
+</tr>
+<tr>
+<td>Band 2 Sling2Sim2Real (I)</td>
+<td>15.50 / 3.50 / 23.50</td>
+<td>14.17</td>
+<td>14.17</td>
+<td>0</td>
+<td>2.16</td>
+<td>2.16</td>
+</tr>
+<tr>
+<td>Band 3 Sling2Sim2Real (I)</td>
+<td>35.50 / 18.00 / 3.50</td>
+<td>19.00</td>
+<td>19.00</td>
+<td>0</td>
+<td>2.47</td>
+<td>2.48</td>
+</tr>
+<tr>
+<td>DEL (III)</td>
+<td>19.00 / 11.50 / 3.00</td>
+<td>11.17</td>
+<td>11.17</td>
+<td>0</td>
+<td>0.85</td>
+<td>1.47</td>
+</tr>
+<tr>
+<td>BOL (III)</td>
+<td>16.50 / 3.00 / 8.00</td>
+<td>9.17</td>
+<td>9.17</td>
+<td>0</td>
+<td>2.12</td>
+<td>3.70</td>
+</tr>
+<tr>
+<td>AdamL (III)</td>
+<td>11.00 / 20.00 / 34.50</td>
+<td>21.83</td>
+<td>21.83</td>
+<td>0</td>
+<td>2.31</td>
+<td>3.98</td>
+</tr>
+<tr>
+<td><strong>−c,−m (IV)</strong></td>
+<td><strong>15.00 / 6.00 / 0.50</strong></td>
+<td><strong>7.17</strong></td>
+<td><strong>7.83</strong></td>
+<td><strong>+0.66</strong></td>
+<td>5.39</td>
+<td>1.83</td>
+</tr>
+<tr>
+<td>−m (IV)</td>
+<td>29.50 / 15.00 / 16.50</td>
+<td>20.33</td>
+<td>20.33</td>
+<td>0</td>
+<td>7.18</td>
+<td>3.03</td>
+</tr>
+<tr>
+<td>−c (IV)</td>
+<td>22.50 / 1.00 / 6.50</td>
+<td>10.00</td>
+<td>10.00</td>
+<td>0</td>
+<td>9.91</td>
+<td>3.90</td>
+</tr>
+<tr>
+<td>−Lwork (IV)</td>
+<td>33.00 / 30.00 / 20.50</td>
+<td>27.83</td>
+<td>27.83</td>
+<td>0</td>
+<td>5.62</td>
+<td>1.78</td>
+</tr>
+</tbody>
+</table>
+<p><strong>결과:</strong></p>
+<ul>
+<li>12개 행 중 11개는 소수점 둘째 자리까지 맞습니다. <strong>−c,−m 행만 틀립니다.</strong> 보고값 7.83은 세 셀의 합 23.50을 3으로 나눈 값입니다. 셀 값 0.50이 2.50이었다면 합이 23.50이 되어 맞습니다. 오식(0.50 → 2.50)일 가능성이 있습니다. 저자에게 확인해야 합니다.</li>
+<li>순위에는 영향이 없습니다. 7.17이든 7.83이든 제안 방법은 −c,−m보다 낫습니다.</li>
+<li>&quot;All targets ±&quot;는 셀 SD 제곱평균의 제곱근과 대부분 맞습니다(1.94/1.94, 2.16/2.16, 2.47/2.48, 4.58/4.47). 즉 <strong>이 열의 ±는 세 목표에 걸친 분산이 아니라 셀 내부 SD를 합친 값</strong>으로 보입니다. 다만 Band 1 Sling2Sim2Real(2.68 대 2.83), DEL(0.85 대 1.47), BOL(2.12 대 3.70)처럼 맞지 않는 행도 있어, 정의가 일관되지 않거나 계산 방법이 다를 가능성이 있습니다.</li>
+</ul>
+<h2>2. 유의성 (Welch)</h2>
+<h3>2.1 셀 단위 (n = 5 vs 5, SD = 표의 ±)</h3>
+<table>
+<thead>
+<tr>
+<th>목표</th>
+<th>Sling2Sim2Real</th>
+<th>Package SI</th>
+<th>차이 (S2S − Pkg)</th>
+<th>t</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Band 2, 172.5</td>
+<td>15.50 ± 1.87</td>
+<td>60.00 ± 2.74</td>
+<td>−44.5</td>
+<td>−30.0</td>
+<td>1.0·10⁻⁸</td>
+</tr>
+<tr>
+<td>Band 2, 192.5</td>
+<td>3.50 ± 2.00</td>
+<td>34.50 ± 3.32</td>
+<td>−31.0</td>
+<td>−17.9</td>
+<td>8.2·10⁻⁷</td>
+</tr>
+<tr>
+<td><strong>Band 2, 212.5</strong></td>
+<td><strong>23.50 ± 2.55</strong></td>
+<td><strong>11.00 ± 6.44</strong></td>
+<td><strong>+12.5</strong></td>
+<td><strong>+4.04</strong></td>
+<td><strong>0.009 (Package SI가 낫다)</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Band 2에서 전반적인 우세는 크지만, 212.5 cm에서는 방향이 반대이고 유의합니다(가정 하에서).</li>
+</ul>
+<h3>2.2 15회 전체 (근사)</h3>
+<p>셀 평균과 SD로 15회 분포의 평균과 SD를 추정했습니다(셀 내 분산 평균 + 셀 평균들의 분산).</p>
+<table>
+<thead>
+<tr>
+<th>고무줄</th>
+<th>제안 평균 (SD 추정)</th>
+<th>Package SI 평균 (SD 추정)</th>
+<th>차이</th>
+<th>t</th>
+<th>p</th>
+<th>상대 감소</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Band 2</td>
+<td>14.17 (8.8)</td>
+<td>35.17 (21.2)</td>
+<td>−21.0</td>
+<td>−3.54</td>
+<td>0.002</td>
+<td>59.7%</td>
+</tr>
+<tr>
+<td>Band 1</td>
+<td>7.17</td>
+<td>8.00</td>
+<td>−0.83</td>
+<td>−0.42</td>
+<td>0.68</td>
+<td>10.4% (유의하지 않음)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Band 2의 &quot;35.2 대 14.2 cm&quot;는 가정 하에서 유의합니다. 다만 15회 SD(8.8, 21.2)는 표의 ±(2.16, 4.58)보다 훨씬 큽니다. 논문이 ±를 셀 내부 값으로 쓴 탓에 전체 분산이 과소 보고된 것입니다.</li>
+<li>Band 1의 차이(0.83 cm)는 검정할 수 없습니다(p = 0.68).</li>
+</ul>
+<h3>2.3 Table IV (Band 1, 15회 근사, 제안을 기준으로)</h3>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>평균</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEL</td>
+<td>11.17</td>
+<td>0.09</td>
+</tr>
+<tr>
+<td>BOL</td>
+<td>9.17</td>
+<td>0.39</td>
+</tr>
+<tr>
+<td>AdamL</td>
+<td>21.83</td>
+<td>1.3·10⁻⁴</td>
+</tr>
+<tr>
+<td>−c</td>
+<td>10.00</td>
+<td>0.36</td>
+</tr>
+<tr>
+<td>−m</td>
+<td>20.33</td>
+<td>8·10⁻⁶</td>
+</tr>
+<tr>
+<td>−Lwork</td>
+<td>27.83</td>
+<td>9·10⁻¹¹</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>제안 대 DEL, BOL, −c는 유의하지 않습니다. Table III의 &quot;제안이 최고&quot;는 셀 평균 차이로만 말할 수 있습니다.</li>
+<li>−Lwork와 −m의 차이는 크지만, 이 SD 추정은 가정입니다.</li>
+</ul>
+<h3>2.4 검출력</h3>
+<ul>
+<li>셀당 5회, SD 2 cm에서 1 cm 차이를 80%로 잡으려면 군당 약 63회가 필요합니다. 논문 설계(군당 5회)로는 1–3 cm 차이를 구별할 수 없습니다. Band 1의 목표 간 차이(0.5–10 cm)가 검정으로 구별되지 않는 이유입니다.</li>
+</ul>
+<h2>3. 유도</h2>
+<h3>3.1 All targets 평균</h3>
+<ul>
+<li>셀마다 시행 수가 같으면(n = 5) 전체 평균은 셀 평균의 산술 평균입니다. 그래서 표의 &quot;All targets&quot; 열은 <code>(m₁₇₂ + m₁₉₂ + m₂₁₂)/3</code>과 같아야 합니다. 12행 중 11행이 맞고 1행(−c,−m)이 틀립니다(§1).</li>
+</ul>
+<h3>3.2 손실 Eq. 5가 일의 차이로 줄어드는 이유</h3>
+<p>Eq. (5)의 안쪽 항은 구간 <code>[t, t+1]</code>의 사다리꼴 일입니다.</p>
+<p><code>w_t = ½(f_t ẋ_t + f_{t+1} ẋ_{t+1}) Δt</code>.</p>
+<p>사다리꼴 구간들의 합은 전체 일의 사다리꼴 적분과 같으므로 <code>Σ_t w_t = W_total</code>입니다. 따라서 <code>L_work = w_work |W_real − W_sim|</code>입니다. 이 항은 <strong>총 일의 크기만</strong> 맞추고, 힘과 속도가 시간별로 어떻게 맞는지는 보지 않습니다. 즉 Eq. (5)는 힘 항(Eq. 4)과 독립된 정보가 아닐 수 있고, 같은 총 일을 내는 다른 θ를 구별하지 못합니다. 논문이 &quot;감쇠로 소산되는 에너지를 맞춘다&quot;고 한 것은 총 일의 크기가 감쇠에 민감하다는 뜻으로 이해할 수 있습니다.</p>
+<h3>3.3 보정 오차와 착탄 거리 (무손실 근사)</h3>
+<p>발사를 무손실로 보고 고무줄 힘이 <code>F(x) = k x (1 + β x)</code>일 때, 당김 거리 <code>d</code>에서 저장된 에너지는 <code>k d²/2 + k β d³/3</code>입니다. 발사체 질량을 <code>m</code>, 발사각을 <code>α</code>라 하면</p>
+<p><code>½ m v₀² = k (d²/2 + β d³/3)</code>, <code>R = v₀² sin 2α / g = k (d² + 2β d³/3) sin 2α / (m g)</code>.</p>
+<ul>
+<li><strong>스케일 오차:</strong> <code>∂ ln R / ∂ ln k = 1</code>입니다. 같은 <code>d</code>에서 <code>k</code>가 10% 틀리면 착탄 거리가 10% 틀립니다. 정책이 같은 모델로 <code>d</code>를 고르므로 이 오차는 <code>d</code>를 바꿔도 사라지지 않습니다.</li>
+<li><strong>당김 민감도:</strong> <code>∂ ln R / ∂ ln d = (2d² + 2βd³) / (d² + 2βd³/3)</code>. <code>β = 3</code>, <code>d = 0.2885 m</code>이면 2.37이므로 <code>dR/dd ≈ 2.37 R/d ≈ 15.8 m/m</code>입니다. 1 cm 당김 위치 차이는 약 16 cm 착탄 차이입니다. 논문이 말한 &quot;최대 30 cm&quot;는 더 작은 <code>d</code>, 큰 <code>β</code>, 감쇠와 마찰 효과를 포함하면 가능한 크기입니다(toy에서 17 cm/cm).</li>
+</ul>
+<h3>3.4 다섯 파라미터 중 식별되지 않을 수 있는 것</h3>
+<p>1차원 장력 모델에서 포아송 비는 들어갈 자리가 없습니다. 논문 모델에서는 사면체 메쉬의 체적 거동에 들어가므로 1차원 toy로는 답할 수 없습니다. 이 때문에 toy는 <code>θ = (k, β, c, μ)</code> 4개를 씁니다. 감쇠 스케일은 감쇠 계수와 곱하여 나타나므로 <code>c</code> 하나로 합쳤습니다.</p>
+<p><img src="figures/toy_identifiability.png" alt="toy_identifiability.png" /></p>
+<p class="cap">직접 계산(toy): 왼쪽은 log θ 공간의 CRLB 상관 행렬, 오른쪽은 기대 상대 표준편차(로그 축). 강성과 비선형은 잘 정해지고 감쇠와 마찰은 얽혀 있다.</p>
+<h2>4. 식별성 (1회 당김, 피셔 정보)</h2>
+<p>toy 모델 (<code>sysid_toy.py</code>): 손(질량 0.5 kg, 가정)을 0.40 m까지 3차 보간으로 당기고 1.5 s에 놓습니다. 100 Hz로 위치(σ = 3 mm), 힘(σ = 0.05 N), 속도(σ = 5 mm/s)를 봅니다. 피셔 정보는 <code>log θ</code> 공간에서 중앙차분으로 계산했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>파라미터</th>
+<th>참값</th>
+<th>기대 상대 SD (CRLB)</th>
+<th>상관 (가장 강한 것)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>k [N/m]</td>
+<td>9.0</td>
+<td>0.98%</td>
+<td>k–β −0.998</td>
+</tr>
+<tr>
+<td>β [1/m]</td>
+<td>3.0</td>
+<td>1.84%</td>
+<td>k–c 0.86, β–μ 0.65</td>
+</tr>
+<tr>
+<td>c [N s/m]</td>
+<td>0.15</td>
+<td>4.34%</td>
+<td>c–μ −0.93</td>
+</tr>
+<tr>
+<td>μ [N]</td>
+<td>0.10</td>
+<td>7.29%</td>
+<td>c–μ −0.93</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>정규화된 피셔 행렬의 조건수는 약 3·10⁴입니다. 가장 약한 방향은 (c, μ) 조합과 (k, β) 조합의 차이입니다.</li>
+<li><strong>해석:</strong> 한 번의 당김으로 <strong>강성 k와 비선형 β는 잘 정해지고(k–β 상관 −0.998), 감쇠 c와 마찰 μ는 서로 얽혀 덜 정해집니다.</strong> 논문의 Table II에서 영률과 감쇠 파라미터가 기준선마다 크게 다르게 나온 것과 방향이 맞습니다. 다만 이 toy는 잡음과 설계를 가정했으므로, 실제 논문 설정의 식별성을 보여 주지는 않습니다.</li>
+<li>포아송 비(Band 2 0.38)는 toy에서 볼 수 없습니다. 실제로는 기록에서 잘 정해지지 않는다는 신호로만 읽습니다.</li>
+</ul>
+<h2>5. 착탄 거리로의 전파</h2>
+<ul>
+<li>참 <code>θ</code>에서 <code>R = 1.925 m</code>를 맞추는 당김은 <code>d* = 0.2885 m</code>입니다.</li>
+<li><code>∂R/∂ln θ</code> (m): k <strong>2.43</strong>, β 0.87, c −0.75, μ −0.12.</li>
+<li>피셔 공분산을 쓴 선형 전파의 착탄 SD는 <strong>1.74 cm</strong>입니다. 목표 1.925 m의 약 0.9%입니다.</li>
+</ul>
+<p><strong>보정 오차를 같은 당김에 넣었을 때 (<code>model_error_check.py</code>):</strong></p>
+<table>
+<thead>
+<tr>
+<th>보정 오차</th>
+<th>같은 당김에서 착탄 오차 (cm)</th>
+<th>재계산한 당김으로 낸 실제 착탄 오차 (cm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>k × 1.1</td>
+<td>+24.4</td>
+<td>−21.8</td>
+</tr>
+<tr>
+<td>β × 1.3</td>
+<td>+26.4</td>
+<td>−22.7</td>
+</tr>
+<tr>
+<td>c × 2</td>
+<td>−66.9</td>
+<td>+97.0</td>
+</tr>
+<tr>
+<td>μ × 2</td>
+<td>−12.5</td>
+<td>+12.8</td>
+</tr>
+<tr>
+<td>k × 1.1, β ÷ 1.1</td>
+<td>+15.6</td>
+<td>−14.6</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>재계산으로 모델 오차가 흡수되지 않습니다.</strong> 정책이 보정 모델로 당김을 고르면, 그 모델의 착탄 오차가 실제 착탄 오차로 옮겨집니다.</li>
+<li>감쇠 <code>c</code>에 대한 민감도가 가장 큽니다. 논문은 감쇠를 5개 파라미터에 넣었는데, 그 감쇠가 착탄 거리를 가장 많이 바꾸는 것으로 toy에서 보입니다. 이 결과는 논문 Table II에서 감쇠 값이 기준선마다 2–3배 차이 나는 점과 연결됩니다.</li>
+</ul>
+<p><img src="figures/toy_landing.png" alt="toy_landing.png" /></p>
+<p class="cap">직접 계산(toy): 목표 1.925 m에서 보정 모델로 당김을 고른 뒤 실제 착탄 오차(절댓값, cm, 로그 축). 보정이 없으면 130 cm이다.</p>
+<h2>6. 손실 설계의 toy 비교 (20회, 잡음 실현 반복)</h2>
+<p>설정: 손실 두 가지 — <strong>전체</strong>(<code>L_geom + L_force + L_work</code>, 가중치는 잡음 SD로 맞춤: 위치 3 mm, 힘 0.05 N, 일 0.015 J) 와 <strong>힘만</strong>(<code>L_force</code>). 최적화는 DE 한 번 → 공분산 CEM → Nelder-Mead(두 손실 공통). &quot;DE&quot;는 DE 최솟값만 쓴 경우입니다.</p>
+<table>
+<thead>
+<tr>
+<th>손실</th>
+<th>최적화</th>
+<th>착탄 절대오차 평균 (cm), g = 1.925 m</th>
+<th>중앙값</th>
+<th>p90</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>기본값 θ₀ (보정 없음)</td>
+<td>—</td>
+<td>130.1</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>전체</td>
+<td>DE</td>
+<td>24.5</td>
+<td>29.3</td>
+<td>32.7</td>
+</tr>
+<tr>
+<td>전체</td>
+<td>DE + 공분산 CEM</td>
+<td>13.9</td>
+<td>12.4</td>
+<td>30.2</td>
+</tr>
+<tr>
+<td>힘만</td>
+<td>DE</td>
+<td>6.5</td>
+<td>6.1</td>
+<td>12.9</td>
+</tr>
+<tr>
+<td>힘만</td>
+<td>DE + 공분산 CEM</td>
+<td><strong>3.3</strong></td>
+<td>2.6</td>
+<td>7.5</td>
+</tr>
+</tbody>
+</table>
+<p>θ 상대오차 (중앙값 / p90, %): 힘만 — k 0.9/1.9, β 1.7/3.2, c 5.2/13.1, μ 8.3/15.5. 전체 — k 4.4/12.2, β 8.6/24.1, c 30.9/84.0, μ 56.9/144.1.</p>
+<p><strong>해석과 주의:</strong></p>
+<ol>
+<li>힘만 쓴 보정이 전체보다 나았습니다. 이것은 <strong>논문의 일(work) 항 주장과 반대입니다.</strong> 그러나 toy에서 일 항의 잡음은 힘과 속도 잡음이 곱해져 생기고, 그 크기는 임의로 정한 가중치에 민감합니다. 그래서 결론이 아니라 확인해야 할 질문으로 남깁니다.</li>
+<li>전체 손실의 낮은 결과는 손실 자체보다 최적화 문제가 큰 것으로 보입니다. 잡음 한 실현에서 3000개 무작위 점으로 찾은 전체 손실의 최솟값은 참값 근처였습니다. 4회 적합을 다시 보니 3회는 적합 손실이 참값 손실보다 낮았고, 1회는 높았습니다(DE와 CEM이 골짜기를 못 찾은 경우). 이 진단은 산출물에 포함하지 않은 임시 확인입니다. 즉 <strong>이 toy의 전체 손실은 골짜기가 좁고 기울기가 불연속(절댓값)이라 전역 최적화가 어렵습니다.</strong></li>
+<li>공분산 CEM은 DE 단독보다 일관되게 낫습니다(착탄 오차 6.5 → 3.3 cm). 이것은 논문 Table IV의 &quot;−m, −c&quot; 결과와 같은 방향입니다. 다만 toy의 CEM은 CMA-ES 대용이므로 같은 효과인지는 단정하지 않습니다.</li>
+<li>기본값 θ₀는 착탄 130 cm 오차입니다. 보정이 없으면 정책이 목표에 맞을 수 없다는 뜻입니다. 논문 Table I의 기준선 N/A가 이런 실패일 수 있습니다.</li>
+<li>전파 예측(CRLB 1.7 cm)은 힘만 쓴 보정(3.3 cm)과 같은 크기입니다. 전체 보정(14–25 cm)은 예측보다 훨씬 나쁩니다. 손실의 편향이나 최적화 실패를 뜻하며, 식별성 한계 때문은 아닙니다.</li>
+</ol>
+<h2>7. 한계</h2>
+<ul>
+<li>toy는 1차원, 4개 파라미터, 가정된 잡음·질량·발사각 <code>α = 35°</code>를 씁니다. 논문의 3차원 Isaac Sim과 다릅니다.</li>
+<li>점군과 기하 손실은 &quot;위치 3 mm&quot;로 대신했습니다. 실제 Chamfer 거리의 민감도와 다릅니다.</li>
+<li>손실 가중치는 잡음 SD로 맞췄습니다. 논문 가중치는 알 수 없습니다.</li>
+<li>한 번의 당김 데이터만 씁니다(20회 잡음 실현). 시드 간 분산은 이 반복으로 보입니다.</li>
+<li>정책 학습은 없습니다. 착탄 거리는 <code>d</code>를 역으로 풀어서 얻은 &quot;이상적인 정책&quot;입니다. 논문 정책의 한계(PPO 샘플 수 등)는 반영하지 않았습니다.</li>
+<li>실행 시간: <code>sysid_toy.py</code> 약 130 s(20회), <code>table_check.py</code> 1 s 미만, <code>model_error_check.py</code> 수 초.</li>
+</ul>
+</section>
+<section class="chapter"><h1>Sling2Sim2Real (arXiv:2607.23268) 주장 검증과 구현 가능성</h1>
+<p>공식 코드가 없어(<code>analysis/02_prior_work.md</code> §4) 코드 대조는 하지 않았습니다. 대신 <strong>표와 본문의 수치 재계산, 식의 성질 확인, toy 시뮬레이션</strong>으로 주장을 검증했습니다. 판정은 네 가지입니다: <strong>지지</strong>(재계산·toy와 일치), <strong>부분 지지</strong>(조건부 또는 일부 셀만), <strong>미검증</strong>(근거가 없어 확인할 수 없음), <strong>반박</strong>(표와 본문이 맞지 않음). 재계산 세부는 <code>analysis/03_analysis.md</code>, 원자료는 <code>analysis/table_check_results.json</code>과 <code>analysis/sysid_toy_results.json</code>입니다.</p>
+<h2>1. 주장 검증 (C1–C15)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>주장 (위치)</th>
+<th>검증 방법</th>
+<th>판정</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>Table IV 'All targets' 열은 셀 평균이다 (Table IV, Band 1)</td>
+<td>산술 재계산</td>
+<td><strong>반박</strong> (1행)</td>
+<td>−c,−m 행: 셀 15.00/6.00/0.50의 평균은 7.17인데 보고값 7.83. 나머지 11행은 0.003 이내로 맞음. 셀 0.50이 2.50의 오식이면 7.83과 일치. 03 §1</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>제안 방법이 모든 고무줄과 모든 목표에서 기준선보다 낫다 (§V, Table I)</td>
+<td>셀별 비교</td>
+<td><strong>부분 지지</strong></td>
+<td>9개 셀 중 Band 2 g = 212.5 cm에서 Package SI가 11.0 cm, 제안이 23.5 cm로 낫지 않음(차이 12.5 cm, Welch p = 0.009). 본문은 &quot;slightly higher error&quot;로 줄였음. Band 1 g = 212.5 cm은 9.50 대 9.50으로 동률. Band 3은 기준선이 전부 N/A라 비교 자체가 없음</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>Band 2에서 평균 착탄 오차 14.2 cm 대 35.2 cm (Table I, §I)</td>
+<td>산술 및 Welch</td>
+<td><strong>지지</strong> (가정 하)</td>
+<td>산술 일치. 15회 근사 Welch t = −3.5, p = 0.002(SD는 셀 값에서 추정). 상대 감소 59.7%</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>Band 1에서도 제안이 최고 (Table I)</td>
+<td>Welch (15회 근사)</td>
+<td><strong>미지지</strong></td>
+<td>7.17 대 8.00, 차이 0.83 cm, p = 0.68. 이 차이로 우열을 말할 수 없음</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>공분산 기반 CMA-ES가 최적을 찾는다; 다중 시작이 효과적이다 (§III-B.3, Table IV)</td>
+<td>Alg. 1 줄 16 확인, toy에서 DE 단독 대 DE+CEM</td>
+<td><strong>부분 지지 / 기술적 불일치</strong></td>
+<td>알고리즘 줄 16은 <code>argmin_{θ∈H}</code>로, CMA 결과가 <code>H</code>에 들지 않으면 반환값과 무관. toy에서 공분산 CEM은 DE보다 착탄 오차를 6.5 → 3.3 cm로 줄임(03 §6). 다만 toy의 CEM은 CMA-ES가 아님</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>두 기준선은 더 높은 감쇠 스케일을 추정한다 (§V)</td>
+<td>Table II 대조</td>
+<td><strong>반박 (방향)</strong></td>
+<td>감쇠 스케일: 기준선 1.00, 제안 0.71–0.79. 표는 기준선이 더 낮은 쪽이 아니라 제안이 더 낮습니다. 탄성 감쇠(Elasticity damping) 열로 읽어도 Band 1에서 Package SI(1.30E-2)가 제안(1.11E-2)보다 큼. 어느 열인지 불명확</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>다섯 파라미터(영률, 포아송 비, 감쇠 등)가 식별된다 (§I, §V)</td>
+<td>1 pull 피셔 정보 (toy, 4 파라미터)</td>
+<td><strong>미검증 (부분)</strong></td>
+<td>실제 모델의 식별성은 계산하지 않음. toy에서 강성과 비선형은 1–2% 정도로 정해지고, 감쇠와 마찰은 4–7%에 상관(−0.93)으로 얽힘. Band 2 포아송 비 0.38(고무 0.5 근처와 멀다)은 약한 식별의 신호로 읽힘</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>손실 L이 가장 작은 것이 가장 좋은 보정이다 (Table II, &quot;최대 72.5%&quot;)</td>
+<td>산술 재계산 및 목적 함수 확인</td>
+<td><strong>산술 지지 / 해석 순환</strong></td>
+<td>Band 3 감소율 72.5%는 맞음(0.9416 대 3.4290). 그러나 L은 제안 방법이 직접 최소화하는 목적이므로, L이 낮다는 것은 최적화가 잘 되었다는 뜻이지 보정이 맞다는 증거가 아님. 착탄 오차와 Band별 순서가 일치하지 않음(Band 2: L 감소 6.5%인데 착탄 오차는 60%↓)</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>L_work 제거 시 Band 1 오차가 27.8 cm로 악화 (Table IV)</td>
+<td>산술 및 Welch (15회 근사)</td>
+<td><strong>지지 (Band 1, 가정 하)</strong></td>
+<td>평균 27.83 대 7.17, p ≈ 10⁻¹⁰(근사). 그러나 Band 1 한 종류에서만. toy에서는 힘만 쓴 손실이 전체보다 나았음(03 §6): 이 결과와 맞지 않음</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>&quot;일 항&quot;은 강성 스케일과 소산 에너지를 모두 맞춘다 (§III-B.2)</td>
+<td>식 Eq. 5의 성질</td>
+<td><strong>반박 (과장 가능)</strong></td>
+<td>Eq. 5는 총 일의 차이의 절댓값 하나로 줄어드는 스칼라 항(03 §3.2). 스칼라 하나로 두 물리량을 동시에 맞춘다는 것은 과장일 가능성. 힘 항과 독립된 정보가 있는지 불명확</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>정책 학습이 보정된 시뮬에서 실물로 0-shot 전이된다 (§V, Fig. 4)</td>
+<td>정량 결과 확인</td>
+<td><strong>부분 지지</strong></td>
+<td>실물 궤적 한 장면(Fig. 4), 정량은 Table I의 셀별 5회. 정책이 보정 덕분인지 분리하지 않았고, 시드 수 보고 없음. 같은 목표를 보정 시뮬에서 직접 탐색하는 기준선이 없음</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>정책 학습(RL)이 정책을 만든다 (§III-C)</td>
+<td>문제 구조 확인</td>
+<td><strong>미검증 (기여 분리 안 됨)</strong></td>
+<td>1단계 MDP라 <code>d</code>를 역으로 고르는 1차원 탐색과 같음(03 §5). RL의 기여는 측정되지 않음. 논문도 1단계 MDP임을 인정</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>실제 상호작용을 크게 줄인다 (§V, 초록)</td>
+<td>기준선 실물 시행 수 확인</td>
+<td><strong>미검증</strong></td>
+<td>논문은 SI가 실물 1회라고 하지만, 기준선이 몇 회 쓰는지 비교하지 않음. SI 자체는 DE와 CEM이 시뮬을 수천 번 돌림(§III-B.2, 시뮬 계산 시간 미보고)</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>1 cm의 당김 위치 차이가 착탄 최대 30 cm 차이를 만든다 (§V)</td>
+<td>toy에서 dR/dd</td>
+<td><strong>부분 지지</strong></td>
+<td>toy에서 1 cm → 약 17 cm(03 §3.3). 크기는 같은 자릿수. 논문 모델의 값은 확인하지 못함</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>Real2Sim2Real [2]는 DE만으로 쓰면 실패한다 (§V, Table I)</td>
+<td>기준선 구현 확인</td>
+<td><strong>미검증 (공정성)</strong></td>
+<td>9개 셀이 모두 N/A. 실패 원인(보정 실패인지, 발사 가능 영역 밖인지, 기준선 구현 차이인지)을 구분하지 않음. 기준선의 파라미터 범위와 시드를 알 수 없음</td>
+</tr>
+</tbody>
+</table>
+<p><strong>표 해석:</strong> 논문의 핵심 숫자(Band 2의 14.2 대 35.2 cm, Band 3의 72.5% 손실 감소)는 재계산에서 맞습니다. 그러나 (i) 우세의 범위가 셀 단위에서 깨지고, (ii) Band 1의 우세는 통계적으로 구별되지 않고, (iii) 절제의 기여가 Band 1 한 종류에서만 보이며, (iv) 정책 학습의 기여와 실물 상호작용 감소는 측정되지 않았습니다. 따라서 &quot;one-shot 보정이 정책 학습 전이를 개선한다&quot;는 <strong>부분적으로만</strong> 지지됩니다.</p>
+<h2>2. 누락된 정보와 재현에 필요한 값</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>논문 상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>손실 가중치 <code>w_geom</code>, <code>w_force</code>, <code>w_work</code></td>
+<td>&quot;상수&quot;라고만 함</td>
+</tr>
+<tr>
+<td>DE 집단 크기, 세대 수 <code>N_de</code>, CMA 세대 <code>N_cma</code></td>
+<td>없음</td>
+</tr>
+<tr>
+<td>NMS 반경 <code>δ = 0.1</code>의 단위</td>
+<td>없음 (정규화 공간 여부)</td>
+</tr>
+<tr>
+<td>필터 차단 주파수</td>
+<td>0.224 rad/s. 단위가 Hz인지 rad/s인지 불명확. 0.036 Hz라면 기록의 동역학을 모두 지움</td>
+</tr>
+<tr>
+<td>점군 Chamfer 거리의 정의(점 수 10점, 대칭인지)</td>
+<td>간략함</td>
+</tr>
+<tr>
+<td>시뮬 설정: 감쇠 스케일 범위, 동마찰 범위, 초기값</td>
+<td>기본값만 언급(<code>default deformable parameter values</code>)</td>
+</tr>
+<tr>
+<td>정책 학습 샘플 수, 시드 수, 수렴 기준</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>평균 계산 시 N/A 처리</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>&quot;±&quot;의 정의 (SD 또는 SE), 시행 수</td>
+<td>표에 명시 없음</td>
+</tr>
+<tr>
+<td>실물 실험의 시도 횟수와 날짜</td>
+<td>셀당 5회만</td>
+</tr>
+<tr>
+<td>기준선 Real2Sim2Real과 Package SI의 파라미터 범위와 시도 예산</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>고무줄 3종 측정 방법(인장 시험)</td>
+<td>Fig. 3 캡션의 1.5 kg 추만 언급</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 재현 보류 (사용자 지시)</h2>
+<ul>
+<li>이번 작업은 CPU toy와 재계산만 했습니다. 설치, 데이터·가중치 다운로드, Isaac 실행은 하지 않았습니다.</li>
+</ul>
+<h2>4. 구현 가능성 (판정)</h2>
+<p><strong>판정: 이 논문의 공식 재현은 이 맥에서 불가능합니다. 알고리즘(손실, DE, 공분산 CEM)은 구현할 수 있으며, 결과 수치를 재현하려면 설정값을 가정해야 해서 효과는 제한적입니다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>공식 재현 (Isaac Sim)</td>
+<td><strong>불가능.</strong> 코드 없음. Isaac Sim은 NVIDIA RTX GPU가 필요하고 이 맥(Apple M4 Pro, CUDA 없음, MPS만 있음)에서는 실행할 수 없음. Franka Panda, 손목 FT 센서(Aidin AFT200), RGB-D(Orbbec Femto Bolt), 고무줄 3종, 3D 프린트 발사체가 실물로 필요함</td>
+</tr>
+<tr>
+<td>이 맥 (Apple M4 Pro, 약 24 GiB 통합 메모리, MPS, CUDA 없음, torch 미설치)</td>
+<td>Isaac 계열 불가. 설치 없이 numpy와 scipy만으로 할 수 있는 것은 1자유도 toy와 표 재계산(완료). 3차원 연성체 시뮬을 CPU에서 돌리려면 시뮬러 설치가 필요하고 설치 전에 승인이 필요함</td>
+</tr>
+<tr>
+<td>알고리즘 재구현 (CPU, 1D toy)</td>
+<td><strong>가능(완료).</strong> 손실 식과 DE + 공분산 CEM + Nelder-Mead의 흐름을 구현함. 20회 반복이 약 130 s</td>
+</tr>
+<tr>
+<td>알고리즘 재구현 (3D 연성체)</td>
+<td><strong>조건부 가능.</strong> 시뮬러(예: MuJoCo 등 CPU 연성 모델, 또는 Warp 기반)를 설치하고 고무줄 메쉬·감쇠 모델을 가정해야 함. 논문 값과 일치시키기는 어려움. 노력: 중간에서 큼(추정)</td>
+</tr>
+<tr>
+<td>실물 재현</td>
+<td><strong>불가능(이 저장소 범위 밖).</strong> 실물 로봇과 고무줄 3종이 필요함</td>
+</tr>
+<tr>
+<td>필요한 하드웨어</td>
+<td>공식 재현: NVIDIA RTX GPU 워크스테이션(논문: RTX 6000 Ada), 7-DoF 로봇 팔, 6축 FT 센서, RGB-D 카메라, 고무줄 3종, 발사대</td>
+</tr>
+<tr>
+<td>노력 (추정)</td>
+<td>공식 재현: 코드가 없으므로 Isaac 환경 구축 + 고무줄 메쉬·물성 + 정책 학습까지 수 주 규모(추정). 알고리즘 재구현 중간. 공개 toy는 완료</td>
+</tr>
+</tbody>
+</table>
+<p><strong>재현하기 전에 요청할 것 (저자에게):</strong> 코드 또는 설정 파일, 손실 가중치, 필터 단위, DE와 CMA 설정, N/A 처리 규칙, 시도 로그.</p>
+<h2>5. 검증 방식 (요약)</h2>
+<p><code>재계산 + CPU toy(numpy/scipy), 공식 코드 없음</code></p>
+</section>
+<section class="chapter"><h1>Sling2Sim2Real (arXiv:2607.23268) 선행연구와 관계</h1>
+<p>이 문서는 논문이 기대는 선행연구의 계보, 논문이 이기려는 대안, 이 저장소의 다른 논문과의 관계, 그리고 공식 코드 검색 결과를 정리합니다. 논문 인용 번호는 원문의 [번호]입니다.</p>
+<h2>1. 계보: 탄성체·변형체 Real2Sim 보정</h2>
+<table>
+<thead>
+<tr>
+<th>흐름</th>
+<th>대표 연구 (논문 번호)</th>
+<th>보정 대상</th>
+<th>손실·신호</th>
+<th>Sling2Sim2Real과의 차이</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>해석식 + FEM</td>
+<td>Sengupta et al. 2020 [15]</td>
+<td>영률</td>
+<td>변형 관측</td>
+<td>시각 중심, 감쇠 없음</td>
+</tr>
+<tr>
+<td>점 관측 기하 정합</td>
+<td>Chen et al. 2025 DER [16]</td>
+<td>선형 변형체 파라미터</td>
+<td>점 위치</td>
+<td>힘 없음</td>
+</tr>
+<tr>
+<td>미분 가능 시뮬</td>
+<td>DiffCloud [19], gradSim [28], Yang et al. 2025 [29]</td>
+<td>영률 등</td>
+<td>점군·영상</td>
+<td>미분 가능 시뮬 필요. 논문은 유한차분 기울기(AdamL)로 같은 목적을 비교</td>
+</tr>
+<tr>
+<td>베이지안 보정</td>
+<td>Antonova et al. 2022 [18]</td>
+<td>영률 등</td>
+<td>영상</td>
+<td>불확실성 추정은 있으나 힘 신호가 없음</td>
+</tr>
+<tr>
+<td>패키지 모델 + 베이지안</td>
+<td>Manyar et al. 2025 [17] (Package SI)</td>
+<td>영률, 감쇠</td>
+<td>기하 손실</td>
+<td>논문의 주요 기준선</td>
+</tr>
+<tr>
+<td>테이블탑 1단계 Real2Sim2Real</td>
+<td>Lim et al. 2022 [2] (Real2Sim2Real)</td>
+<td>영률, 동마찰</td>
+<td>DE 전역 탐색</td>
+<td>논문의 기준선. 9개 셀 모두 N/A</td>
+</tr>
+<tr>
+<td>물리 기반 재구성</td>
+<td>PhysTwin [12], EMPM [20]</td>
+<td>영률, 포아송 비 등</td>
+<td>영상 재구성</td>
+<td>영상 기반, 긴 관측</td>
+</tr>
+</tbody>
+</table>
+<p><strong>읽는 법:</strong> 논문의 위치는 &quot;DE의 전역 탐색과 공분산 기반 다중 시작 국소 탐색을 결합하고, 힘과 일(work) 항을 손실에 넣은 것&quot;입니다. 개별 요소는 모두 선행 연구에 있습니다. 새로운 것은 조합과 적용 대상(감쇠 포함 5개 파라미터, 발사 과제)입니다.</p>
+<h2>2. 최적화 계보</h2>
+<ul>
+<li><strong>DE + CMA-ES 결합:</strong> Warchulski 등 [26]은 DE 집단을 CMA-ES에 넘기는 방식을 제안했습니다. 논문의 Cholesky 재매개화(<code>θ = µ + L z</code>)도 [26]을 따릅니다.</li>
+<li><strong>CMA-ES 튜토리얼:</strong> Hansen [4]. 논문은 pycma [37]를 쓴 것으로 보입니다(구현 이름은 본문에 없음).</li>
+<li><strong>희소 탐색 기반 SI:</strong> Sobanbabu 등 [30](능동 탐색 샘플링), Zhang 등 [31](온라인 안전 SI).</li>
+<li><strong>단일 시도 조정:</strong> TuneNet [32], Auto-tuned sim-to-real [33]. 실물에서 한두 번 시도로 시뮬 파라미터를 고치는 흐름입니다. 논문은 &quot;1회 기록&quot;을 강조하지만 이 흐름과 비교하지 않았습니다.</li>
+</ul>
+<h2>3. 이 저장소의 다른 논문과의 관계</h2>
+<table>
+<thead>
+<tr>
+<th>폴더 (arXiv)</th>
+<th>관계</th>
+<th>이 논문에 쓸 수 있는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>robosimstudio/</code> (arXiv:2610.18835)</td>
+<td>시뮬 물성 보정 도구. 영상 기반 물성 식별의 식별성을 toy로 쟀습니다(<code>identifiability_toy.py</code>).</td>
+<td>영상 대 힘 관측의 식별성 비교. 이 논문의 힘 항(Eq. 4)이 얼마나 정보를 더하는지 같은 틀로 잴 수 있습니다.</td>
+</tr>
+<tr>
+<td><code>environmental_pdes/</code> (arXiv:2608.00272)</td>
+<td>물리 법칙을 측정 모형에 넣은 RBPF. 관측가능성(자세 피셔)을 계산했습니다.</td>
+<td>일 보존 같은 물리 항을 손실로 넣는 방식과 식별성 계산의 방법(피셔 행렬).</td>
+</tr>
+<tr>
+<td><code>stiffness_copilot/</code> (arXiv:2603.14068)</td>
+<td>손목 영상으로 방향별 임피던스를 고르는 공유 제어. 강성을 다룹니다.</td>
+<td>강성 추정과 힘 피드백의 연결. 이 논문은 강성을 시뮬에서 맞추고, 그쪽은 실시간으로 고릅니다.</td>
+</tr>
+<tr>
+<td><code>reactive_grasp/</code> (arXiv:2609.30082)</td>
+<td>힘 조절 파지. 힘 신호를 제어에 씁니다.</td>
+<td>힘 신호를 보정 손실에 쓰는 것과 제어에 쓰는 것의 차이.</td>
+</tr>
+<tr>
+<td><code>tactilereflex/</code> (arXiv:2605.23568)</td>
+<td>촉각 반사 제어</td>
+<td>힘·촉각 신호 활용 사례.</td>
+</tr>
+<tr>
+<td><code>mpm_gradient_reliability</code> (arXiv:2609.34666)</td>
+<td>미분 가능 물리 기반 최적화의 수치 신뢰성. 이 논문이 쓰지 않은 미분 기반 SI(AdamL)와 관련됩니다.</td>
+<td>기울기 기반 SI가 왜 어려운지에 대한 배경(인용만, 내용은 이 문서에서 다루지 않음).</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 공식 코드 검색 (2026-11-11)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>무엇인가</th>
+<th>공식 여부</th>
+<th>라이선스</th>
+<th>★</th>
+<th>최근 푸시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(이 논문)</td>
+<td>찾지 못함. 논문 본문, arXiv 페이지, arXiv HTML 판에 코드 또는 프로젝트 링크 없음</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>YanjieZe/agent-real2sim2real</td>
+<td>&quot;agents × real-to-sim-to-real&quot; 논문 목록 (설명 문구). 코드 아님</td>
+<td>아님</td>
+<td>없음</td>
+<td>39</td>
+<td>2026-11-11</td>
+</tr>
+<tr>
+<td>ChuaHanChong/ResearchBrain</td>
+<td>연구 도구 저장소. 검색어가 파일 안에 있었던 것으로 보이나 내용은 확인하지 않음</td>
+<td>아님</td>
+<td>없음</td>
+<td>0</td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>Kendrick-Stein/MCISLAB_DeepRead</td>
+<td>논문 노트 모음(GUI 에이전트, VLM). 내용은 확인하지 않음</td>
+<td>아님</td>
+<td>없음</td>
+<td>12</td>
+<td>2026-11-09</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>검색: <code>gh search repos &quot;Sling2Sim2Real&quot;</code> 0건, <code>gh search repos &quot;slingshot elastic system identification&quot;</code> 0건, <code>gh search code &quot;Sling2Sim2Real&quot;</code> 3건(위 표). 세 건 모두 이 논문의 코드가 아닙니다.</li>
+<li>arXiv HTML 판(<code>arxiv.org/html/2607.23268v1</code>)에서 github.com 링크는 LaTeXML 도구 저장소뿐이었습니다.</li>
+<li>결론: <strong>공식 코드 없음.</strong> <code>repo/</code>는 만들지 않았습니다. 검증은 정적 재계산과 toy로만 했습니다(<code>analysis/04_claim_verification.md</code>).</li>
+<li>재검색 시점: 2026-11-11. 나중에 코드가 나오면 <code>04_code_verification.md</code>를 새로 씁니다.</li>
+</ul>
+<h2>5. 가까운 대안(재현 대상이 아니라 비교 대상으로)</h2>
+<ol>
+<li><strong>전체 손실 + 베이지안 최적화 (BOL):</strong> 논문 기준선. 같은 <code>L</code>을 쓰므로 손실 설계의 효과만 떼어 볼 수 있습니다.</li>
+<li><strong>기하 손실만 + Package SI:</strong> 논문 기준선. 힘 신호가 없는 경우의 대조군입니다.</li>
+<li><strong>힘만 쓰는 손실:</strong> 논문의 절제에는 없습니다. 이 저장소의 toy(<code>analysis/sysid_toy.py</code>)에서 힘만 쓴 손실이 전체 손실보다 나았습니다(<code>analysis/03_analysis.md</code> §6). 이것이 논문의 일 항 주장과 맞지 않는 점입니다.</li>
+<li><strong>보정 없이 정책만 학습 (실물 반복):</strong> 논문이 피하려는 방식. 실물 시도 횟수 비교가 필요합니다(C9).</li>
+</ol>
+</section></body></html>
