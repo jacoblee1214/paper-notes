@@ -1,0 +1,138 @@
+{
+  "data": {
+    "source": "https://huggingface.co/datasets/willi19/autodex-gallery (resolve/main)",
+    "repo_last_modified": "2026-09-30T16:55:20.000Z",
+    "license": "데이터셋 카드에 license 필드 없음(미표기)",
+    "selection": "world_pose_records 639개 중 seed 0로 40개 무작위 추출",
+    "n_files": 40,
+    "bytes_records": 144250800,
+    "sha256_first_file": {
+      "data/allegro/apple/20260206_181350/object_tracking/gotrack_output/world_pose_records.json": "5bac8842894c3082ea1f893bd184ec970af1686dbaba2890d7e2b504d3b08c57"
+    }
+  },
+  "threshold_mm": 50.0,
+  "hold_s": 3.0,
+  "skipped_no_grasp_state": [
+    "allegro/box_pink/20260121_234848",
+    "allegro/box_pink/20260121_235056",
+    "allegro/box_pink/20260121_235245"
+  ],
+  "conventions": {
+    "as_recorded": {
+      "n_analysed": 37,
+      "n_zmax_yes": 0,
+      "n_hold_yes": 0,
+      "n_hold_undetermined": 0,
+      "n_determined": 37,
+      "agreement": {
+        "agree": 37,
+        "rate": 1.0,
+        "wilson95": [
+          0.9059,
+          1.0
+        ]
+      },
+      "contingency_determined": {
+        "zmax_yes_hold_yes": 0,
+        "zmax_no_hold_no": 37,
+        "zmax_yes_hold_no": 0,
+        "zmax_no_hold_yes": 0
+      },
+      "zmax_yes_but_hold_no_trials": [],
+      "sensitivity_hold_duration": {
+        "1.0": {
+          "n_determined": 37,
+          "agree": 37,
+          "agree_rate": 1.0
+        },
+        "2.0": {
+          "n_determined": 37,
+          "agree": 37,
+          "agree_rate": 1.0
+        },
+        "3.0": {
+          "n_determined": 37,
+          "agree": 37,
+          "agree_rate": 1.0
+        },
+        "4.0": {
+          "n_determined": 37,
+          "agree": 37,
+          "agree_rate": 1.0
+        }
+      }
+    },
+    "flipped": {
+      "n_analysed": 37,
+      "n_zmax_yes": 17,
+      "n_hold_yes": 3,
+      "n_hold_undetermined": 14,
+      "n_determined": 23,
+      "agreement": {
+        "agree": 23,
+        "rate": 1.0,
+        "wilson95": [
+          0.8569,
+          1.0
+        ]
+      },
+      "contingency_determined": {
+        "zmax_yes_hold_yes": 3,
+        "zmax_no_hold_no": 20,
+        "zmax_yes_hold_no": 0,
+        "zmax_no_hold_yes": 0
+      },
+      "zmax_yes_but_hold_no_trials": [],
+      "sensitivity_hold_duration": {
+        "1.0": {
+          "n_determined": 23,
+          "agree": 23,
+          "agree_rate": 1.0
+        },
+        "2.0": {
+          "n_determined": 23,
+          "agree": 23,
+          "agree_rate": 1.0
+        },
+        "3.0": {
+          "n_determined": 23,
+          "agree": 23,
+          "agree_rate": 1.0
+        },
+        "4.0": {
+          "n_determined": 23,
+          "agree": 23,
+          "agree_rate": 1.0
+        }
+      }
+    }
+  },
+  "sign_check_onset_minus_lift": {
+    "as_recorded": {
+      "n_with_onset": 0,
+      "median_onset_minus_lift_s": null,
+      "min_s": null,
+      "max_s": null
+    },
+    "flipped": {
+      "n_with_onset": 17,
+      "median_onset_minus_lift_s": 0.3736666666666659,
+      "min_s": 0.1083333333333325,
+      "max_s": 0.990333333333334
+    }
+  },
+  "record_end_minus_lift_s": {
+    "median": 0.9416666666666664,
+    "min": 0.4153333333333329,
+    "max": 5.676666666666667
+  },
+  "versions": {
+    "python": "3.12.7",
+    "numpy": "1.26.4",
+    "matplotlib": "3.9.2",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "threads": 4,
+  "seed": 0,
+  "wall_time_s": 0.43
+}

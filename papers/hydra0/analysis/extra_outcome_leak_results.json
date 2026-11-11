@@ -1,0 +1,177 @@
+{
+  "data": {
+    "source": "https://huggingface.co/datasets/ankile/square-01a-baseline-uniform-r{1,2,3,4}-policy-rollouts (resolve/main)",
+    "license": "apache-2.0",
+    "files": [
+      {
+        "set": "r1",
+        "path": "data/ankile_square_r1/data/chunk-000/file-000.parquet",
+        "bytes": 4810320,
+        "sha256": "2450b9b9e890f3513835ec274bfca1463cb28bc6e134ae3bc8386aba41c4c971",
+        "rows": 25027,
+        "episodes": 100,
+        "successes": 69
+      },
+      {
+        "set": "r2",
+        "path": "data/ankile_square_r2/data/chunk-000/file-000.parquet",
+        "bytes": 4171320,
+        "sha256": "26957e53d5390029902956adfda778b98c8948738f1565f4dd6e091a258d324f",
+        "rows": 21481,
+        "episodes": 100,
+        "successes": 81
+      },
+      {
+        "set": "r3",
+        "path": "data/ankile_square_r3/data/chunk-000/file-000.parquet",
+        "bytes": 3507097,
+        "sha256": "dcde96dc6777c5b0de5c62007eb3b63a87088fce2597f6111b8c2bd075145fce",
+        "rows": 17864,
+        "episodes": 100,
+        "successes": 99
+      },
+      {
+        "set": "r4",
+        "path": "data/ankile_square_r4/data/chunk-000/file-000.parquet",
+        "bytes": 3403786,
+        "sha256": "eb0a1fbb9a402db1ee619cdd3f29b6dc81412cc41473062b6fc4dc8d7031c6d6",
+        "rows": 17304,
+        "episodes": 100,
+        "successes": 99
+      }
+    ],
+    "episodes_total": 400,
+    "successes_total": 348,
+    "success_rate": 0.87
+  },
+  "settings": {
+    "lambda_l2": 1.0,
+    "folds": 5,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "features_traj": 180,
+    "signals": [
+      "observation.state",
+      "action",
+      "observation.environment_state"
+    ],
+    "excluded_columns": [
+      "success",
+      "reward",
+      "done",
+      "is_valid"
+    ]
+  },
+  "length_by_outcome": {
+    "success_median": 164.0,
+    "failure_median": 400.0,
+    "success_min": 119.0,
+    "success_max": 397.0,
+    "failure_min": 400.0,
+    "failure_max": 400.0
+  },
+  "auc_length_only": 1.0,
+  "cv_auc": {
+    "trajectory_summary_no_length": {
+      "mean": 0.9995,
+      "sd": 0.0003,
+      "per_seed": [
+        0.9994,
+        0.9998,
+        0.9995,
+        0.9991,
+        0.9997
+      ]
+    },
+    "trajectory_summary_with_length": {
+      "mean": 0.9996,
+      "sd": 0.0001,
+      "per_seed": [
+        0.9996,
+        0.9998,
+        0.9996,
+        0.9995,
+        0.9997
+      ]
+    },
+    "length_only_logreg": {
+      "mean": 0.9997,
+      "sd": 0.0005,
+      "per_seed": [
+        1.0,
+        1.0,
+        0.9994,
+        0.9988,
+        1.0
+      ]
+    },
+    "first_frame_only_control": {
+      "mean": 0.534,
+      "sd": 0.0254,
+      "per_seed": [
+        0.5031,
+        0.5541,
+        0.5098,
+        0.5478,
+        0.5553
+      ]
+    },
+    "last_frame_only": {
+      "mean": 0.9735,
+      "sd": 0.0104,
+      "per_seed": [
+        0.9809,
+        0.9762,
+        0.9763,
+        0.9552,
+        0.9788
+      ]
+    },
+    "early50_summary_no_termination": {
+      "mean": 0.7822,
+      "sd": 0.0235,
+      "per_seed": [
+        0.7613,
+        0.7981,
+        0.7635,
+        0.7732,
+        0.8151
+      ]
+    },
+    "early100_summary_no_termination": {
+      "mean": 0.8861,
+      "sd": 0.0089,
+      "per_seed": [
+        0.891,
+        0.8957,
+        0.8742,
+        0.8794,
+        0.8903
+      ]
+    },
+    "shuffled_labels_control": {
+      "mean": 0.4846,
+      "sd": 0.046,
+      "per_seed": [
+        0.5092,
+        0.4351,
+        0.4346,
+        0.5161,
+        0.5281
+      ]
+    }
+  },
+  "versions": {
+    "python": "3.12.7",
+    "numpy": "1.26.4",
+    "pyarrow": "16.1.0",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "threads": 4,
+  "wall_time_s": 1.72
+}

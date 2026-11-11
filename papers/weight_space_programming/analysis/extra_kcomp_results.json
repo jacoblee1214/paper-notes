@@ -1,0 +1,390 @@
+{
+  "method": "Elhage et al. (2021) K-composition, residual-space, LN gain folded and centering projected; weights only, no forward pass",
+  "versions": {
+    "python": "3.12.7",
+    "numpy": "1.26.4",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "threads": 4,
+  "seed": 0,
+  "nets": {
+    "python": {
+      "data": {
+        "path": "data/exp3_language/networks/python/blocks.npz",
+        "bytes": 28345926,
+        "sha256": "77ed8f7d418619c9390da0abea19de2a05d6e2200d8484473deafee15a6fd43f"
+      },
+      "arch": "python_L4_H6_d384_s0",
+      "copy_truth_induct_gt_0.2": [
+        "L2H1",
+        "L3H1",
+        "L3H5"
+      ],
+      "best_kcomp_per_head": {
+        "L0H0": {
+          "max": null,
+          "partner": null
+        },
+        "L0H1": {
+          "max": null,
+          "partner": null
+        },
+        "L0H2": {
+          "max": null,
+          "partner": null
+        },
+        "L0H3": {
+          "max": null,
+          "partner": null
+        },
+        "L0H4": {
+          "max": null,
+          "partner": null
+        },
+        "L0H5": {
+          "max": null,
+          "partner": null
+        },
+        "L1H0": {
+          "max": 0.3134245322405743,
+          "partner": "L0H4"
+        },
+        "L1H1": {
+          "max": 0.4571235310244475,
+          "partner": "L0H4"
+        },
+        "L1H2": {
+          "max": 0.4407008149236531,
+          "partner": "L0H4"
+        },
+        "L1H3": {
+          "max": 0.4612688689520704,
+          "partner": "L0H4"
+        },
+        "L1H4": {
+          "max": 0.4503026112822172,
+          "partner": "L0H4"
+        },
+        "L1H5": {
+          "max": 0.4321898857646161,
+          "partner": "L0H4"
+        },
+        "L2H0": {
+          "max": 0.1690166516936571,
+          "partner": "L0H4"
+        },
+        "L2H1": {
+          "max": 0.07793104816270736,
+          "partner": "L0H5"
+        },
+        "L2H2": {
+          "max": 0.23646377355733886,
+          "partner": "L0H4"
+        },
+        "L2H3": {
+          "max": 0.2413435419405623,
+          "partner": "L0H4"
+        },
+        "L2H4": {
+          "max": 0.2205242291286068,
+          "partner": "L0H4"
+        },
+        "L2H5": {
+          "max": 0.1432469317598575,
+          "partner": "L0H4"
+        },
+        "L3H0": {
+          "max": 0.08279622337157667,
+          "partner": "L0H4"
+        },
+        "L3H1": {
+          "max": 0.06971180719850104,
+          "partner": "L0H5"
+        },
+        "L3H2": {
+          "max": 0.1182513550410116,
+          "partner": "L0H4"
+        },
+        "L3H3": {
+          "max": 0.06523099379033213,
+          "partner": "L0H4"
+        },
+        "L3H4": {
+          "max": 0.10277825940923953,
+          "partner": "L0H4"
+        },
+        "L3H5": {
+          "max": 0.08034123922114055,
+          "partner": "L0H5"
+        }
+      },
+      "max_kcomp_overall": 0.4612688689520704
+    },
+    "romaji": {
+      "data": {
+        "path": "data/exp3_language/networks/romaji/blocks.npz",
+        "bytes": 28345926,
+        "sha256": "04ec0b300d207b26b92a1af6d49d56d452833e39b35826200bc1d821e5b7d930"
+      },
+      "arch": "romaji_L4_H6_d384_s0",
+      "copy_truth_induct_gt_0.2": [
+        "L3H3"
+      ],
+      "best_kcomp_per_head": {
+        "L0H0": {
+          "max": null,
+          "partner": null
+        },
+        "L0H1": {
+          "max": null,
+          "partner": null
+        },
+        "L0H2": {
+          "max": null,
+          "partner": null
+        },
+        "L0H3": {
+          "max": null,
+          "partner": null
+        },
+        "L0H4": {
+          "max": null,
+          "partner": null
+        },
+        "L0H5": {
+          "max": null,
+          "partner": null
+        },
+        "L1H0": {
+          "max": 0.46941276139594795,
+          "partner": "L0H5"
+        },
+        "L1H1": {
+          "max": 0.48607068396562064,
+          "partner": "L0H5"
+        },
+        "L1H2": {
+          "max": 0.4651382291215946,
+          "partner": "L0H5"
+        },
+        "L1H3": {
+          "max": 0.4880432501623888,
+          "partner": "L0H5"
+        },
+        "L1H4": {
+          "max": 0.40813896118211895,
+          "partner": "L0H5"
+        },
+        "L1H5": {
+          "max": 0.4977363621284268,
+          "partner": "L0H5"
+        },
+        "L2H0": {
+          "max": 0.3851543634129088,
+          "partner": "L0H5"
+        },
+        "L2H1": {
+          "max": 0.32307069387579396,
+          "partner": "L0H5"
+        },
+        "L2H2": {
+          "max": 0.3177354936675477,
+          "partner": "L0H5"
+        },
+        "L2H3": {
+          "max": 0.25090784585376036,
+          "partner": "L0H5"
+        },
+        "L2H4": {
+          "max": 0.34962317143729305,
+          "partner": "L0H5"
+        },
+        "L2H5": {
+          "max": 0.3228483979661607,
+          "partner": "L0H5"
+        },
+        "L3H0": {
+          "max": 0.20922612841907967,
+          "partner": "L0H5"
+        },
+        "L3H1": {
+          "max": 0.18420475373997922,
+          "partner": "L0H5"
+        },
+        "L3H2": {
+          "max": 0.2265399416846482,
+          "partner": "L0H5"
+        },
+        "L3H3": {
+          "max": 0.06911004655265682,
+          "partner": "L0H3"
+        },
+        "L3H4": {
+          "max": 0.07118217982892527,
+          "partner": "L0H0"
+        },
+        "L3H5": {
+          "max": 0.20158297790365662,
+          "partner": "L0H5"
+        }
+      },
+      "max_kcomp_overall": 0.4977363621284268
+    },
+    "english": {
+      "data": {
+        "path": "data/exp3_language/networks/english/blocks.npz",
+        "bytes": 28345926,
+        "sha256": "130135d2b27829df2734d78fa3af27b00b1cc1bf34c41b01a09b350e6c09a7de"
+      },
+      "arch": "english_L4_H6_d384_s0",
+      "copy_truth_induct_gt_0.2": [
+        "L3H1"
+      ],
+      "best_kcomp_per_head": {
+        "L0H0": {
+          "max": null,
+          "partner": null
+        },
+        "L0H1": {
+          "max": null,
+          "partner": null
+        },
+        "L0H2": {
+          "max": null,
+          "partner": null
+        },
+        "L0H3": {
+          "max": null,
+          "partner": null
+        },
+        "L0H4": {
+          "max": null,
+          "partner": null
+        },
+        "L0H5": {
+          "max": null,
+          "partner": null
+        },
+        "L1H0": {
+          "max": 0.4635402650473985,
+          "partner": "L0H5"
+        },
+        "L1H1": {
+          "max": 0.48176176706523305,
+          "partner": "L0H5"
+        },
+        "L1H2": {
+          "max": 0.4999122210998348,
+          "partner": "L0H5"
+        },
+        "L1H3": {
+          "max": 0.4861918547666842,
+          "partner": "L0H5"
+        },
+        "L1H4": {
+          "max": 0.5061364819812534,
+          "partner": "L0H5"
+        },
+        "L1H5": {
+          "max": 0.507133055458124,
+          "partner": "L0H5"
+        },
+        "L2H0": {
+          "max": 0.2833020635227449,
+          "partner": "L0H5"
+        },
+        "L2H1": {
+          "max": 0.20949436750509215,
+          "partner": "L0H5"
+        },
+        "L2H2": {
+          "max": 0.279510152043091,
+          "partner": "L0H5"
+        },
+        "L2H3": {
+          "max": 0.3102677676755907,
+          "partner": "L0H5"
+        },
+        "L2H4": {
+          "max": 0.29442028762180383,
+          "partner": "L0H5"
+        },
+        "L2H5": {
+          "max": 0.28560906134487385,
+          "partner": "L0H5"
+        },
+        "L3H0": {
+          "max": 0.10732135923062742,
+          "partner": "L0H5"
+        },
+        "L3H1": {
+          "max": 0.08392538804695385,
+          "partner": "L0H2"
+        },
+        "L3H2": {
+          "max": 0.20297021799829235,
+          "partner": "L0H5"
+        },
+        "L3H3": {
+          "max": 0.2243787033069928,
+          "partner": "L0H5"
+        },
+        "L3H4": {
+          "max": 0.16695797361664452,
+          "partner": "L0H5"
+        },
+        "L3H5": {
+          "max": 0.07528307536794879,
+          "partner": "L0H3"
+        }
+      },
+      "max_kcomp_overall": 0.507133055458124
+    }
+  },
+  "evaluation": {
+    "n_eligible_heads": 54,
+    "n_copy_truth": 5,
+    "auc": 0.04897959183673469,
+    "precision_at_5": 0.0,
+    "recall_at_5": 0.0,
+    "top5": [
+      {
+        "net": "english",
+        "head": "L1H5",
+        "kcomp": 0.507133055458124,
+        "copy_truth": false
+      },
+      {
+        "net": "english",
+        "head": "L1H4",
+        "kcomp": 0.5061364819812534,
+        "copy_truth": false
+      },
+      {
+        "net": "english",
+        "head": "L1H2",
+        "kcomp": 0.4999122210998348,
+        "copy_truth": false
+      },
+      {
+        "net": "romaji",
+        "head": "L1H5",
+        "kcomp": 0.4977363621284268,
+        "copy_truth": false
+      },
+      {
+        "net": "romaji",
+        "head": "L1H3",
+        "kcomp": 0.4880432501623888,
+        "copy_truth": false
+      }
+    ]
+  },
+  "random_baseline": {
+    "mean": 0.05105716132857365,
+    "std": 0.000590746492944105,
+    "p95": 0.052083013060089146,
+    "n": 200
+  },
+  "wall_time_s": 0.57
+}
