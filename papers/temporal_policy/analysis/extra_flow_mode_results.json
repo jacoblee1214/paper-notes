@@ -1,0 +1,967 @@
+{
+  "device": "cpu",
+  "versions": {
+    "torch": "2.15.0",
+    "numpy": "1.26.4",
+    "python": "3.12.7"
+  },
+  "threads": 4,
+  "mps_available": true,
+  "setup": {
+    "H": 16,
+    "lag": 14,
+    "phi": 0.99,
+    "delta_amp": 0.5,
+    "sigma": 0.2,
+    "eps": 1.0,
+    "train_steps": 6000,
+    "batch": 512,
+    "optimizer": "Adam 1e-3 cosine",
+    "net": "33-128-128-16 SiLU",
+    "train_seeds": [
+      0,
+      1,
+      2
+    ],
+    "n_eval_histories": 1000,
+    "n_seed_histories": 200,
+    "n_sampler_seeds": 5,
+    "n_steps": [
+      10,
+      16
+    ],
+    "g": [
+      0.1,
+      1.0
+    ]
+  },
+  "results": {
+    "h=0.5": {
+      "per_train_seed": [
+        {
+          "truth_frac_plus": 0.5,
+          "truth_frac_minus": 0.5,
+          "rows": {
+            "n10_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.024047625513104274,
+              "mean_sq_dist_to_nearest_mode_center": 0.08874598125783988,
+              "sampler_seed_sd_per_dim": 9.543149782703845e-18
+            },
+            "n10_ode_raw": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.02534000713725341,
+              "mean_sq_dist_to_nearest_mode_center": 0.08821858058461768,
+              "sampler_seed_sd_per_dim": 1.029439516428343e-17
+            },
+            "n10_sde_g0.1": {
+              "frac_plus": 0.003,
+              "frac_minus": 0.005,
+              "frac_between": 0.992,
+              "rms_to_conditional_mean": 0.08289409083876856,
+              "mean_sq_dist_to_nearest_mode_center": 0.0743797286701529,
+              "sampler_seed_sd_per_dim": 0.07370136397635826
+            },
+            "n10_sde_g1.0": {
+              "frac_plus": 0.312,
+              "frac_minus": 0.32,
+              "frac_between": 0.368,
+              "rms_to_conditional_mean": 0.5275937380412189,
+              "mean_sq_dist_to_nearest_mode_center": 0.21750473194471356,
+              "sampler_seed_sd_per_dim": 0.4877137134622329
+            },
+            "n10_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.0230089825793808,
+              "mean_sq_dist_to_nearest_mode_center": 0.09143235645134458,
+              "sampler_seed_sd_per_dim": 1.0541375795984664e-17
+            },
+            "n10_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.473,
+              "frac_minus": 0.507,
+              "frac_between": 0.02,
+              "rms_to_conditional_mean": 0.462410067068273,
+              "mean_sq_dist_to_nearest_mode_center": 0.11691566058050759,
+              "sampler_seed_sd_per_dim": 0.4274638138549742
+            },
+            "n10_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.06931366736780022,
+              "mean_sq_dist_to_nearest_mode_center": 0.08533323000475172,
+              "sampler_seed_sd_per_dim": 0.06134827853479646
+            },
+            "n10_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.476,
+              "frac_minus": 0.494,
+              "frac_between": 0.03,
+              "rms_to_conditional_mean": 0.4533709903243312,
+              "mean_sq_dist_to_nearest_mode_center": 0.11032357750496741,
+              "sampler_seed_sd_per_dim": 0.41898186880682436
+            },
+            "n10_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 9.644689773616584e-12,
+              "mean_sq_dist_to_nearest_mode_center": 0.09444444443966192,
+              "sampler_seed_sd_per_dim": 1.0299243863801491e-17
+            },
+            "n16_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.02593163577850915,
+              "mean_sq_dist_to_nearest_mode_center": 0.08826020754079446,
+              "sampler_seed_sd_per_dim": 1.091502870259525e-17
+            },
+            "n16_ode_raw": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.027306201202069193,
+              "mean_sq_dist_to_nearest_mode_center": 0.08770869910901051,
+              "sampler_seed_sd_per_dim": 8.979791507449119e-18
+            },
+            "n16_sde_g0.1": {
+              "frac_plus": 0.004,
+              "frac_minus": 0.007,
+              "frac_between": 0.989,
+              "rms_to_conditional_mean": 0.08659829798579152,
+              "mean_sq_dist_to_nearest_mode_center": 0.07172454874116924,
+              "sampler_seed_sd_per_dim": 0.074392833875916
+            },
+            "n16_sde_g1.0": {
+              "frac_plus": 0.341,
+              "frac_minus": 0.311,
+              "frac_between": 0.348,
+              "rms_to_conditional_mean": 0.4695692106225177,
+              "mean_sq_dist_to_nearest_mode_center": 0.14800757365854733,
+              "sampler_seed_sd_per_dim": 0.41949966158299895
+            },
+            "n16_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.02465005855233073,
+              "mean_sq_dist_to_nearest_mode_center": 0.09106595835946008,
+              "sampler_seed_sd_per_dim": 1.0244544472363366e-17
+            },
+            "n16_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.507,
+              "frac_minus": 0.485,
+              "frac_between": 0.008,
+              "rms_to_conditional_mean": 0.39811941820813274,
+              "mean_sq_dist_to_nearest_mode_center": 0.06307191354264995,
+              "sampler_seed_sd_per_dim": 0.3638211148351253
+            },
+            "n16_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.001,
+              "frac_minus": 0.001,
+              "frac_between": 0.998,
+              "rms_to_conditional_mean": 0.07079328755975091,
+              "mean_sq_dist_to_nearest_mode_center": 0.08394323639507814,
+              "sampler_seed_sd_per_dim": 0.060505508785265644
+            },
+            "n16_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.517,
+              "frac_minus": 0.477,
+              "frac_between": 0.006,
+              "rms_to_conditional_mean": 0.3985174367038823,
+              "mean_sq_dist_to_nearest_mode_center": 0.06418585222565334,
+              "sampler_seed_sd_per_dim": 0.36628899642660145
+            },
+            "n16_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 4.901439281481999e-11,
+              "mean_sq_dist_to_nearest_mode_center": 0.09444444442014067,
+              "sampler_seed_sd_per_dim": 1.0940219211810174e-17
+            }
+          },
+          "train_seed": 0,
+          "train_wall_s": 4.89,
+          "final_loss": 0.06285197287797928
+        },
+        {
+          "truth_frac_plus": 0.5,
+          "truth_frac_minus": 0.5,
+          "rows": {
+            "n10_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.023394699888884627,
+              "mean_sq_dist_to_nearest_mode_center": 0.08937627097201194,
+              "sampler_seed_sd_per_dim": 1.1057535011868263e-17
+            },
+            "n10_ode_raw": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.024779621831182076,
+              "mean_sq_dist_to_nearest_mode_center": 0.08875474080208585,
+              "sampler_seed_sd_per_dim": 1.105806533837805e-17
+            },
+            "n10_sde_g0.1": {
+              "frac_plus": 0.003,
+              "frac_minus": 0.004,
+              "frac_between": 0.993,
+              "rms_to_conditional_mean": 0.08267457279469172,
+              "mean_sq_dist_to_nearest_mode_center": 0.07444109917402926,
+              "sampler_seed_sd_per_dim": 0.07368096188216407
+            },
+            "n10_sde_g1.0": {
+              "frac_plus": 0.312,
+              "frac_minus": 0.327,
+              "frac_between": 0.361,
+              "rms_to_conditional_mean": 0.5283246545399483,
+              "mean_sq_dist_to_nearest_mode_center": 0.2177407207258118,
+              "sampler_seed_sd_per_dim": 0.48862478050518987
+            },
+            "n10_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.022494771116235976,
+              "mean_sq_dist_to_nearest_mode_center": 0.0917915752593401,
+              "sampler_seed_sd_per_dim": 1.0142418738764204e-17
+            },
+            "n10_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.474,
+              "frac_minus": 0.506,
+              "frac_between": 0.02,
+              "rms_to_conditional_mean": 0.4622607377963534,
+              "mean_sq_dist_to_nearest_mode_center": 0.11686567697112381,
+              "sampler_seed_sd_per_dim": 0.42718983693928936
+            },
+            "n10_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.06911196273743495,
+              "mean_sq_dist_to_nearest_mode_center": 0.08540317350737217,
+              "sampler_seed_sd_per_dim": 0.06130582845363168
+            },
+            "n10_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.476,
+              "frac_minus": 0.494,
+              "frac_between": 0.03,
+              "rms_to_conditional_mean": 0.4533709903243312,
+              "mean_sq_dist_to_nearest_mode_center": 0.11032357750496741,
+              "sampler_seed_sd_per_dim": 0.41898186880682436
+            },
+            "n10_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 9.644689773616584e-12,
+              "mean_sq_dist_to_nearest_mode_center": 0.09444444443966192,
+              "sampler_seed_sd_per_dim": 1.0299243863801491e-17
+            },
+            "n16_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.02521339732942412,
+              "mean_sq_dist_to_nearest_mode_center": 0.08893524718252527,
+              "sampler_seed_sd_per_dim": 1.1528995279069733e-17
+            },
+            "n16_ode_raw": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.02666739467356693,
+              "mean_sq_dist_to_nearest_mode_center": 0.08829056022525739,
+              "sampler_seed_sd_per_dim": 8.970094108412997e-18
+            },
+            "n16_sde_g0.1": {
+              "frac_plus": 0.004,
+              "frac_minus": 0.005,
+              "frac_between": 0.991,
+              "rms_to_conditional_mean": 0.08619920609707367,
+              "mean_sq_dist_to_nearest_mode_center": 0.07181772694862895,
+              "sampler_seed_sd_per_dim": 0.07437917459738802
+            },
+            "n16_sde_g1.0": {
+              "frac_plus": 0.334,
+              "frac_minus": 0.314,
+              "frac_between": 0.352,
+              "rms_to_conditional_mean": 0.47044241808104886,
+              "mean_sq_dist_to_nearest_mode_center": 0.14858609640919485,
+              "sampler_seed_sd_per_dim": 0.4207412280950403
+            },
+            "n16_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.024076381066684766,
+              "mean_sq_dist_to_nearest_mode_center": 0.09149061789176827,
+              "sampler_seed_sd_per_dim": 1.112753811116027e-17
+            },
+            "n16_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.512,
+              "frac_minus": 0.48,
+              "frac_between": 0.008,
+              "rms_to_conditional_mean": 0.39834425926606154,
+              "mean_sq_dist_to_nearest_mode_center": 0.063041209764931,
+              "sampler_seed_sd_per_dim": 0.3640607126763923
+            },
+            "n16_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.001,
+              "frac_minus": 0.001,
+              "frac_between": 0.998,
+              "rms_to_conditional_mean": 0.07041593472495025,
+              "mean_sq_dist_to_nearest_mode_center": 0.08414959994767196,
+              "sampler_seed_sd_per_dim": 0.060469412201784714
+            },
+            "n16_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.517,
+              "frac_minus": 0.477,
+              "frac_between": 0.006,
+              "rms_to_conditional_mean": 0.3985174367038823,
+              "mean_sq_dist_to_nearest_mode_center": 0.06418585222565334,
+              "sampler_seed_sd_per_dim": 0.36628899642660145
+            },
+            "n16_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 4.901439281481999e-11,
+              "mean_sq_dist_to_nearest_mode_center": 0.09444444442014067,
+              "sampler_seed_sd_per_dim": 1.0940219211810174e-17
+            }
+          },
+          "train_seed": 1,
+          "train_wall_s": 5.03,
+          "final_loss": 0.06025473773479462
+        },
+        {
+          "truth_frac_plus": 0.5,
+          "truth_frac_minus": 0.5,
+          "rows": {
+            "n10_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.02371224677041204,
+              "mean_sq_dist_to_nearest_mode_center": 0.08888607287641984,
+              "sampler_seed_sd_per_dim": 1.0376065446790773e-17
+            },
+            "n10_ode_raw": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.024912528541831784,
+              "mean_sq_dist_to_nearest_mode_center": 0.08839773354908426,
+              "sampler_seed_sd_per_dim": 1.0086204128726682e-17
+            },
+            "n10_sde_g0.1": {
+              "frac_plus": 0.003,
+              "frac_minus": 0.005,
+              "frac_between": 0.992,
+              "rms_to_conditional_mean": 0.08283442880348368,
+              "mean_sq_dist_to_nearest_mode_center": 0.07436979374092477,
+              "sampler_seed_sd_per_dim": 0.07380465234495444
+            },
+            "n10_sde_g1.0": {
+              "frac_plus": 0.297,
+              "frac_minus": 0.335,
+              "frac_between": 0.368,
+              "rms_to_conditional_mean": 0.5243876531359796,
+              "mean_sq_dist_to_nearest_mode_center": 0.21552610722290183,
+              "sampler_seed_sd_per_dim": 0.48600360015501964
+            },
+            "n10_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.022750604879659686,
+              "mean_sq_dist_to_nearest_mode_center": 0.09168304093507203,
+              "sampler_seed_sd_per_dim": 1.1373836894491779e-17
+            },
+            "n10_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.472,
+              "frac_minus": 0.507,
+              "frac_between": 0.021,
+              "rms_to_conditional_mean": 0.4621764066190613,
+              "mean_sq_dist_to_nearest_mode_center": 0.11687610062138007,
+              "sampler_seed_sd_per_dim": 0.42595856143271144
+            },
+            "n10_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.06913757374198819,
+              "mean_sq_dist_to_nearest_mode_center": 0.08533990125364638,
+              "sampler_seed_sd_per_dim": 0.06134148335073689
+            },
+            "n10_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.476,
+              "frac_minus": 0.494,
+              "frac_between": 0.03,
+              "rms_to_conditional_mean": 0.4533709903243312,
+              "mean_sq_dist_to_nearest_mode_center": 0.11032357750496741,
+              "sampler_seed_sd_per_dim": 0.41898186880682436
+            },
+            "n10_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 9.644689773616584e-12,
+              "mean_sq_dist_to_nearest_mode_center": 0.09444444443966192,
+              "sampler_seed_sd_per_dim": 1.0299243863801491e-17
+            },
+            "n16_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.02550277413428474,
+              "mean_sq_dist_to_nearest_mode_center": 0.0884646831195461,
+              "sampler_seed_sd_per_dim": 1.0082113038508319e-17
+            },
+            "n16_ode_raw": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.02678281520708159,
+              "mean_sq_dist_to_nearest_mode_center": 0.0879404881819816,
+              "sampler_seed_sd_per_dim": 8.98282194464791e-18
+            },
+            "n16_sde_g0.1": {
+              "frac_plus": 0.004,
+              "frac_minus": 0.005,
+              "frac_between": 0.991,
+              "rms_to_conditional_mean": 0.08652547036712467,
+              "mean_sq_dist_to_nearest_mode_center": 0.07157933353962823,
+              "sampler_seed_sd_per_dim": 0.07453649999660353
+            },
+            "n16_sde_g1.0": {
+              "frac_plus": 0.332,
+              "frac_minus": 0.33,
+              "frac_between": 0.338,
+              "rms_to_conditional_mean": 0.4647266232605699,
+              "mean_sq_dist_to_nearest_mode_center": 0.14561859530274018,
+              "sampler_seed_sd_per_dim": 0.41689262871237026
+            },
+            "n16_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 0.024326634168377846,
+              "mean_sq_dist_to_nearest_mode_center": 0.0913662906892036,
+              "sampler_seed_sd_per_dim": 1.0157495163828176e-17
+            },
+            "n16_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.505,
+              "frac_minus": 0.487,
+              "frac_between": 0.008,
+              "rms_to_conditional_mean": 0.39837284049138316,
+              "mean_sq_dist_to_nearest_mode_center": 0.06302716607783806,
+              "sampler_seed_sd_per_dim": 0.36302817499922857
+            },
+            "n16_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.001,
+              "frac_minus": 0.001,
+              "frac_between": 0.998,
+              "rms_to_conditional_mean": 0.07053999102678779,
+              "mean_sq_dist_to_nearest_mode_center": 0.08403967347836766,
+              "sampler_seed_sd_per_dim": 0.06053898291758175
+            },
+            "n16_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.517,
+              "frac_minus": 0.477,
+              "frac_between": 0.006,
+              "rms_to_conditional_mean": 0.3985174367038823,
+              "mean_sq_dist_to_nearest_mode_center": 0.06418585222565334,
+              "sampler_seed_sd_per_dim": 0.36628899642660145
+            },
+            "n16_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.0,
+              "frac_minus": 0.0,
+              "frac_between": 1.0,
+              "rms_to_conditional_mean": 4.901439281481999e-11,
+              "mean_sq_dist_to_nearest_mode_center": 0.09444444442014067,
+              "sampler_seed_sd_per_dim": 1.0940219211810174e-17
+            }
+          },
+          "train_seed": 2,
+          "train_wall_s": 5.04,
+          "final_loss": 0.06460238248109818
+        }
+      ]
+    },
+    "h=0.02": {
+      "per_train_seed": [
+        {
+          "truth_frac_plus": 0.50384,
+          "truth_frac_minus": 0.49616000000000005,
+          "rows": {
+            "n10_ode_corr": {
+              "frac_plus": 0.477,
+              "frac_minus": 0.461,
+              "frac_between": 0.062,
+              "rms_to_conditional_mean": 0.0840644743387202,
+              "mean_sq_dist_to_nearest_mode_center": 0.004989726294196229,
+              "sampler_seed_sd_per_dim": 1.1735671096027088e-17
+            },
+            "n10_ode_raw": {
+              "frac_plus": 0.487,
+              "frac_minus": 0.465,
+              "frac_between": 0.048,
+              "rms_to_conditional_mean": 0.08304187047469827,
+              "mean_sq_dist_to_nearest_mode_center": 0.004297518775147096,
+              "sampler_seed_sd_per_dim": 1.2226147356650952e-17
+            },
+            "n10_sde_g0.1": {
+              "frac_plus": 0.479,
+              "frac_minus": 0.463,
+              "frac_between": 0.058,
+              "rms_to_conditional_mean": 0.1108080034937846,
+              "mean_sq_dist_to_nearest_mode_center": 0.00835215016138261,
+              "sampler_seed_sd_per_dim": 0.06232505081927406
+            },
+            "n10_sde_g1.0": {
+              "frac_plus": 0.466,
+              "frac_minus": 0.436,
+              "frac_between": 0.098,
+              "rms_to_conditional_mean": 0.4549451141328298,
+              "mean_sq_dist_to_nearest_mode_center": 0.18676781179657545,
+              "sampler_seed_sd_per_dim": 0.41566301425744484
+            },
+            "n10_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.466,
+              "frac_minus": 0.452,
+              "frac_between": 0.082,
+              "rms_to_conditional_mean": 0.15091269220868692,
+              "mean_sq_dist_to_nearest_mode_center": 0.006469981245619747,
+              "sampler_seed_sd_per_dim": 1.3082700430888432e-17
+            },
+            "n10_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.482,
+              "frac_minus": 0.481,
+              "frac_between": 0.037,
+              "rms_to_conditional_mean": 0.367735291187217,
+              "mean_sq_dist_to_nearest_mode_center": 0.11752965256895902,
+              "sampler_seed_sd_per_dim": 0.3457272480911395
+            },
+            "n10_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.468,
+              "frac_minus": 0.453,
+              "frac_between": 0.079,
+              "rms_to_conditional_mean": 0.16457329243984964,
+              "mean_sq_dist_to_nearest_mode_center": 0.01000990945801077,
+              "sampler_seed_sd_per_dim": 0.06507858301757731
+            },
+            "n10_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.489,
+              "frac_minus": 0.482,
+              "frac_between": 0.029,
+              "rms_to_conditional_mean": 0.3470383891606454,
+              "mean_sq_dist_to_nearest_mode_center": 0.11030296386107054,
+              "sampler_seed_sd_per_dim": 0.32086685488016253
+            },
+            "n10_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.504,
+              "frac_minus": 0.496,
+              "frac_between": 0.0,
+              "rms_to_conditional_mean": 0.01076296259292949,
+              "mean_sq_dist_to_nearest_mode_center": 2.340175907393949e-06,
+              "sampler_seed_sd_per_dim": 1.3430443099449374e-17
+            },
+            "n16_ode_corr": {
+              "frac_plus": 0.482,
+              "frac_minus": 0.463,
+              "frac_between": 0.055,
+              "rms_to_conditional_mean": 0.08369970030571791,
+              "mean_sq_dist_to_nearest_mode_center": 0.004744294265737018,
+              "sampler_seed_sd_per_dim": 1.2397670102102363e-17
+            },
+            "n16_ode_raw": {
+              "frac_plus": 0.488,
+              "frac_minus": 0.466,
+              "frac_between": 0.046,
+              "rms_to_conditional_mean": 0.08310925746014092,
+              "mean_sq_dist_to_nearest_mode_center": 0.004106072183339361,
+              "sampler_seed_sd_per_dim": 1.0482888358048055e-17
+            },
+            "n16_sde_g0.1": {
+              "frac_plus": 0.484,
+              "frac_minus": 0.466,
+              "frac_between": 0.05,
+              "rms_to_conditional_mean": 0.10872337053407834,
+              "mean_sq_dist_to_nearest_mode_center": 0.008051598266931479,
+              "sampler_seed_sd_per_dim": 0.060787884985877935
+            },
+            "n16_sde_g1.0": {
+              "frac_plus": 0.484,
+              "frac_minus": 0.47,
+              "frac_between": 0.046,
+              "rms_to_conditional_mean": 0.3589551868976965,
+              "mean_sq_dist_to_nearest_mode_center": 0.11012038986409703,
+              "sampler_seed_sd_per_dim": 0.3249281964832268
+            },
+            "n16_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.469,
+              "frac_minus": 0.457,
+              "frac_between": 0.074,
+              "rms_to_conditional_mean": 0.160928578002,
+              "mean_sq_dist_to_nearest_mode_center": 0.006216455505578611,
+              "sampler_seed_sd_per_dim": 1.2907616921728446e-17
+            },
+            "n16_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.485,
+              "frac_minus": 0.508,
+              "frac_between": 0.007,
+              "rms_to_conditional_mean": 0.28277615412921914,
+              "mean_sq_dist_to_nearest_mode_center": 0.06270652879418105,
+              "sampler_seed_sd_per_dim": 0.2595991178404395
+            },
+            "n16_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.469,
+              "frac_minus": 0.459,
+              "frac_between": 0.072,
+              "rms_to_conditional_mean": 0.1726401275034693,
+              "mean_sq_dist_to_nearest_mode_center": 0.00973422378220931,
+              "sampler_seed_sd_per_dim": 0.06456498004661679
+            },
+            "n16_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.501,
+              "frac_minus": 0.492,
+              "frac_between": 0.007,
+              "rms_to_conditional_mean": 0.26963733345691876,
+              "mean_sq_dist_to_nearest_mode_center": 0.06418573989243107,
+              "sampler_seed_sd_per_dim": 0.24813401831603632
+            },
+            "n16_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.504,
+              "frac_minus": 0.496,
+              "frac_between": 0.0,
+              "rms_to_conditional_mean": 0.010851017095788281,
+              "mean_sq_dist_to_nearest_mode_center": 2.0785244002934716e-06,
+              "sampler_seed_sd_per_dim": 1.1984773033767475e-17
+            }
+          },
+          "train_seed": 0,
+          "train_wall_s": 5.06,
+          "final_loss": 0.04294664412736893
+        },
+        {
+          "truth_frac_plus": 0.50384,
+          "truth_frac_minus": 0.49616000000000005,
+          "rows": {
+            "n10_ode_corr": {
+              "frac_plus": 0.477,
+              "frac_minus": 0.47,
+              "frac_between": 0.053,
+              "rms_to_conditional_mean": 0.07960854001897585,
+              "mean_sq_dist_to_nearest_mode_center": 0.004174586410155108,
+              "sampler_seed_sd_per_dim": 1.2211904301816648e-17
+            },
+            "n10_ode_raw": {
+              "frac_plus": 0.481,
+              "frac_minus": 0.475,
+              "frac_between": 0.044,
+              "rms_to_conditional_mean": 0.07882702188282413,
+              "mean_sq_dist_to_nearest_mode_center": 0.003556026054628492,
+              "sampler_seed_sd_per_dim": 1.15065700437987e-17
+            },
+            "n10_sde_g0.1": {
+              "frac_plus": 0.473,
+              "frac_minus": 0.473,
+              "frac_between": 0.054,
+              "rms_to_conditional_mean": 0.10769326274472517,
+              "mean_sq_dist_to_nearest_mode_center": 0.007576251120567691,
+              "sampler_seed_sd_per_dim": 0.06331609440985708
+            },
+            "n10_sde_g1.0": {
+              "frac_plus": 0.462,
+              "frac_minus": 0.465,
+              "frac_between": 0.073,
+              "rms_to_conditional_mean": 0.45326842143748874,
+              "mean_sq_dist_to_nearest_mode_center": 0.18218210530620585,
+              "sampler_seed_sd_per_dim": 0.4125581969683026
+            },
+            "n10_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.467,
+              "frac_minus": 0.474,
+              "frac_between": 0.059,
+              "rms_to_conditional_mean": 0.1482971340083705,
+              "mean_sq_dist_to_nearest_mode_center": 0.004670274216064989,
+              "sampler_seed_sd_per_dim": 1.1588694891885861e-17
+            },
+            "n10_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.488,
+              "frac_minus": 0.481,
+              "frac_between": 0.031,
+              "rms_to_conditional_mean": 0.36870042726618196,
+              "mean_sq_dist_to_nearest_mode_center": 0.1171748320324231,
+              "sampler_seed_sd_per_dim": 0.3424383473427671
+            },
+            "n10_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.463,
+              "frac_minus": 0.475,
+              "frac_between": 0.062,
+              "rms_to_conditional_mean": 0.16386245436810976,
+              "mean_sq_dist_to_nearest_mode_center": 0.008672562459966178,
+              "sampler_seed_sd_per_dim": 0.06600505892454188
+            },
+            "n10_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.489,
+              "frac_minus": 0.482,
+              "frac_between": 0.029,
+              "rms_to_conditional_mean": 0.3470383891606454,
+              "mean_sq_dist_to_nearest_mode_center": 0.11030296386107054,
+              "sampler_seed_sd_per_dim": 0.32086685488016253
+            },
+            "n10_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.504,
+              "frac_minus": 0.496,
+              "frac_between": 0.0,
+              "rms_to_conditional_mean": 0.01076296259292949,
+              "mean_sq_dist_to_nearest_mode_center": 2.340175907393949e-06,
+              "sampler_seed_sd_per_dim": 1.3430443099449374e-17
+            },
+            "n16_ode_corr": {
+              "frac_plus": 0.478,
+              "frac_minus": 0.471,
+              "frac_between": 0.051,
+              "rms_to_conditional_mean": 0.07935588929949614,
+              "mean_sq_dist_to_nearest_mode_center": 0.003914050834890998,
+              "sampler_seed_sd_per_dim": 1.3040577353825275e-17
+            },
+            "n16_ode_raw": {
+              "frac_plus": 0.483,
+              "frac_minus": 0.478,
+              "frac_between": 0.039,
+              "rms_to_conditional_mean": 0.0788743507179642,
+              "mean_sq_dist_to_nearest_mode_center": 0.0033472876732520583,
+              "sampler_seed_sd_per_dim": 1.0424097876391566e-17
+            },
+            "n16_sde_g0.1": {
+              "frac_plus": 0.482,
+              "frac_minus": 0.474,
+              "frac_between": 0.044,
+              "rms_to_conditional_mean": 0.10581491651841297,
+              "mean_sq_dist_to_nearest_mode_center": 0.007534614904617166,
+              "sampler_seed_sd_per_dim": 0.06202878515425587
+            },
+            "n16_sde_g1.0": {
+              "frac_plus": 0.473,
+              "frac_minus": 0.498,
+              "frac_between": 0.029,
+              "rms_to_conditional_mean": 0.3577213978687597,
+              "mean_sq_dist_to_nearest_mode_center": 0.10730883397554747,
+              "sampler_seed_sd_per_dim": 0.32369174380763566
+            },
+            "n16_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.474,
+              "frac_minus": 0.475,
+              "frac_between": 0.051,
+              "rms_to_conditional_mean": 0.15907877838786885,
+              "mean_sq_dist_to_nearest_mode_center": 0.0042582264194164455,
+              "sampler_seed_sd_per_dim": 1.3544539059983749e-17
+            },
+            "n16_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.484,
+              "frac_minus": 0.508,
+              "frac_between": 0.008,
+              "rms_to_conditional_mean": 0.2834018264118081,
+              "mean_sq_dist_to_nearest_mode_center": 0.0626875210604483,
+              "sampler_seed_sd_per_dim": 0.25765279377409706
+            },
+            "n16_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.467,
+              "frac_minus": 0.475,
+              "frac_between": 0.058,
+              "rms_to_conditional_mean": 0.17312658036547615,
+              "mean_sq_dist_to_nearest_mode_center": 0.008288018726164612,
+              "sampler_seed_sd_per_dim": 0.0654066190043232
+            },
+            "n16_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.501,
+              "frac_minus": 0.492,
+              "frac_between": 0.007,
+              "rms_to_conditional_mean": 0.26963733345691876,
+              "mean_sq_dist_to_nearest_mode_center": 0.06418573989243107,
+              "sampler_seed_sd_per_dim": 0.24813401831603632
+            },
+            "n16_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.504,
+              "frac_minus": 0.496,
+              "frac_between": 0.0,
+              "rms_to_conditional_mean": 0.010851017095788281,
+              "mean_sq_dist_to_nearest_mode_center": 2.0785244002934716e-06,
+              "sampler_seed_sd_per_dim": 1.1984773033767475e-17
+            }
+          },
+          "train_seed": 1,
+          "train_wall_s": 5.03,
+          "final_loss": 0.04122719541192055
+        },
+        {
+          "truth_frac_plus": 0.50384,
+          "truth_frac_minus": 0.49616000000000005,
+          "rows": {
+            "n10_ode_corr": {
+              "frac_plus": 0.484,
+              "frac_minus": 0.459,
+              "frac_between": 0.057,
+              "rms_to_conditional_mean": 0.08892506291589618,
+              "mean_sq_dist_to_nearest_mode_center": 0.004962540378411003,
+              "sampler_seed_sd_per_dim": 1.2132658369068338e-17
+            },
+            "n10_ode_raw": {
+              "frac_plus": 0.488,
+              "frac_minus": 0.465,
+              "frac_between": 0.047,
+              "rms_to_conditional_mean": 0.0891422497247371,
+              "mean_sq_dist_to_nearest_mode_center": 0.004208862089107253,
+              "sampler_seed_sd_per_dim": 1.2560707623397166e-17
+            },
+            "n10_sde_g0.1": {
+              "frac_plus": 0.485,
+              "frac_minus": 0.462,
+              "frac_between": 0.053,
+              "rms_to_conditional_mean": 0.11516506179417793,
+              "mean_sq_dist_to_nearest_mode_center": 0.008349055333602131,
+              "sampler_seed_sd_per_dim": 0.06271364927185513
+            },
+            "n10_sde_g1.0": {
+              "frac_plus": 0.465,
+              "frac_minus": 0.446,
+              "frac_between": 0.089,
+              "rms_to_conditional_mean": 0.45835009103034546,
+              "mean_sq_dist_to_nearest_mode_center": 0.18763100936403942,
+              "sampler_seed_sd_per_dim": 0.41937432648382467
+            },
+            "n10_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.473,
+              "frac_minus": 0.449,
+              "frac_between": 0.078,
+              "rms_to_conditional_mean": 0.15664030495288492,
+              "mean_sq_dist_to_nearest_mode_center": 0.006381826930741231,
+              "sampler_seed_sd_per_dim": 1.2568586760114016e-17
+            },
+            "n10_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.486,
+              "frac_minus": 0.479,
+              "frac_between": 0.035,
+              "rms_to_conditional_mean": 0.3686779935352396,
+              "mean_sq_dist_to_nearest_mode_center": 0.11752046080728537,
+              "sampler_seed_sd_per_dim": 0.3463963625185387
+            },
+            "n10_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.473,
+              "frac_minus": 0.454,
+              "frac_between": 0.073,
+              "rms_to_conditional_mean": 0.1696810896697754,
+              "mean_sq_dist_to_nearest_mode_center": 0.009471962833367077,
+              "sampler_seed_sd_per_dim": 0.06471525120264675
+            },
+            "n10_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.489,
+              "frac_minus": 0.482,
+              "frac_between": 0.029,
+              "rms_to_conditional_mean": 0.3470383891606454,
+              "mean_sq_dist_to_nearest_mode_center": 0.11030296386107054,
+              "sampler_seed_sd_per_dim": 0.32086685488016253
+            },
+            "n10_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.504,
+              "frac_minus": 0.496,
+              "frac_between": 0.0,
+              "rms_to_conditional_mean": 0.01076296259292949,
+              "mean_sq_dist_to_nearest_mode_center": 2.340175907393949e-06,
+              "sampler_seed_sd_per_dim": 1.3430443099449374e-17
+            },
+            "n16_ode_corr": {
+              "frac_plus": 0.486,
+              "frac_minus": 0.461,
+              "frac_between": 0.053,
+              "rms_to_conditional_mean": 0.08914322383442837,
+              "mean_sq_dist_to_nearest_mode_center": 0.004679668802567366,
+              "sampler_seed_sd_per_dim": 1.227584652671108e-17
+            },
+            "n16_ode_raw": {
+              "frac_plus": 0.488,
+              "frac_minus": 0.466,
+              "frac_between": 0.046,
+              "rms_to_conditional_mean": 0.08989188921182699,
+              "mean_sq_dist_to_nearest_mode_center": 0.003982833383923946,
+              "sampler_seed_sd_per_dim": 1.0449553548861386e-17
+            },
+            "n16_sde_g0.1": {
+              "frac_plus": 0.488,
+              "frac_minus": 0.46,
+              "frac_between": 0.052,
+              "rms_to_conditional_mean": 0.11228970387518296,
+              "mean_sq_dist_to_nearest_mode_center": 0.008136532962237677,
+              "sampler_seed_sd_per_dim": 0.06139556912161737
+            },
+            "n16_sde_g1.0": {
+              "frac_plus": 0.494,
+              "frac_minus": 0.476,
+              "frac_between": 0.03,
+              "rms_to_conditional_mean": 0.3666472260780911,
+              "mean_sq_dist_to_nearest_mode_center": 0.11042947380671692,
+              "sampler_seed_sd_per_dim": 0.329703756933583
+            },
+            "n16_diag_ode_corr_oracle_score": {
+              "frac_plus": 0.473,
+              "frac_minus": 0.454,
+              "frac_between": 0.073,
+              "rms_to_conditional_mean": 0.1665921242943897,
+              "mean_sq_dist_to_nearest_mode_center": 0.005964807812248029,
+              "sampler_seed_sd_per_dim": 1.224720889518253e-17
+            },
+            "n16_diag_sde_g1.0_oracle_score": {
+              "frac_plus": 0.485,
+              "frac_minus": 0.507,
+              "frac_between": 0.008,
+              "rms_to_conditional_mean": 0.28632219098584766,
+              "mean_sq_dist_to_nearest_mode_center": 0.06268172798745308,
+              "sampler_seed_sd_per_dim": 0.2619670118489607
+            },
+            "n16_diag_sde_g0.1_oracle_score": {
+              "frac_plus": 0.474,
+              "frac_minus": 0.452,
+              "frac_between": 0.074,
+              "rms_to_conditional_mean": 0.17761920885023683,
+              "mean_sq_dist_to_nearest_mode_center": 0.009450206699162982,
+              "sampler_seed_sd_per_dim": 0.06407609430013832
+            },
+            "n16_diag_oracle_full_sde_g1.0": {
+              "frac_plus": 0.501,
+              "frac_minus": 0.492,
+              "frac_between": 0.007,
+              "rms_to_conditional_mean": 0.26963733345691876,
+              "mean_sq_dist_to_nearest_mode_center": 0.06418573989243107,
+              "sampler_seed_sd_per_dim": 0.24813401831603632
+            },
+            "n16_diag_oracle_full_ode_corr": {
+              "frac_plus": 0.504,
+              "frac_minus": 0.496,
+              "frac_between": 0.0,
+              "rms_to_conditional_mean": 0.010851017095788281,
+              "mean_sq_dist_to_nearest_mode_center": 2.0785244002934716e-06,
+              "sampler_seed_sd_per_dim": 1.1984773033767475e-17
+            }
+          },
+          "train_seed": 2,
+          "train_wall_s": 5.06,
+          "final_loss": 0.04095139354467392
+        }
+      ]
+    }
+  },
+  "total_wall_s": 33.12
+}

@@ -12,6 +12,7 @@
 | `analysis/04_code_verification.md` | 공개 코드 대조, 주장별 판정, 구현 가능성, 권리 |
 | `analysis/table_check.py` | 표 재계산과 검정 (수 초) |
 | `analysis/retarget_toy.py` | 장난감 A(평면 다리, 접촉 가중치와 정규화), B(평면 3관절 팔, 자세 가중치와 seed 분산). 약 8초 |
+| `analysis/extra_block_causal.py` | 블록 인과 마스크 유무를 같은 데이터에서 비교하는 장난감 (torch 필요, CPU 약 6분) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 |
 
 ## 재실행
@@ -19,6 +20,7 @@
 ```bash
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py && python3 analysis/retarget_toy.py
+python3 analysis/extra_block_causal.py  # torch 필요, 약 6분
 python3 analysis/plot_figures.py
 ```
 

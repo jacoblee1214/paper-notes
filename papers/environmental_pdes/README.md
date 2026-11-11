@@ -20,6 +20,7 @@
 | `analysis/extra_kappa_scheme.py` | 수치 방식(1차 풍상, Lax–Wendroff)에 따른 κ_eff와 필터 오차 |
 | `analysis/extra_flat_bias.py` | 평평한 장에서 편향–장 수준 혼동과 편향 사전 분포의 영향 |
 | `analysis/extra_rbpf_bias.py` | 편향 증강 표준 PF 대 RBPF(같은 입자 수·시드) |
+| `analysis/extra_neural_field.py` | 작은 MLP 장 대리 모형을 측정 모형으로 쓴 입자 필터와 κ 복원 (torch 필요) |
 | `analysis/plot_figures.py` | toy 그래프 |
 | `report/crop_figures.py` | 논문 그림을 PDF에서 자르는 스크립트 |
 
@@ -30,6 +31,8 @@ pip install numpy scipy matplotlib pillow
 python3 analysis/table_check.py && python3 analysis/pde_toy.py && python3 analysis/obs_toy.py
 python3 analysis/plot_figures.py
 ```
+
+`analysis/extra_neural_field.py`는 torch가 필요하고 CPU에서 약 20초 걸립니다(`pip install torch`).
 
 모두 CPU에서 몇 초 안에 끝납니다. toy의 장, 잡음, 경계 조건, κ 값은 가정입니다.
 

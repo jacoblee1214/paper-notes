@@ -12,6 +12,7 @@
 | `analysis/04_claim_verification.md` | 주장별 판정, 빠진 정보, 구현 가능성, 권리 |
 | `analysis/table_check.py` | Table I 재계산 (수 초) |
 | `analysis/particle_toy.py` | 2차원 장난감 (numpy 1스레드, 약 2분 30초) |
+| `analysis/extra_particle_3d.py` | MuJoCo 손 3종의 입자 밀도와 합·평균 집계 검사 (torch, mujoco 필요, CPU 약 2.5분) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 |
 
 ## 재실행
@@ -19,6 +20,7 @@
 ```bash
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py && python3 analysis/particle_toy.py
+python3 analysis/extra_particle_3d.py  # torch, mujoco 필요
 python3 analysis/plot_figures.py
 ```
 

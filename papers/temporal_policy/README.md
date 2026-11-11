@@ -13,6 +13,7 @@
 | `analysis/04_code_verification.md` | 논문 ↔ 코드 대조, 구현 가능성, 권리 표기 |
 | `analysis/table_check.py` | 표 재계산 (1초 미만) |
 | `analysis/transport_toy.py` | 이력·잡음 원천 오라클 토이 (약 13초, numpy 1스레드) |
+| `analysis/extra_flow_mode.py` | 학습된 이력 조건부 흐름의 모드 붕괴와 SDE 샘플러 (torch 필요, CPU 약 35초) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 네 장 |
 
 ## 재실행
@@ -20,6 +21,7 @@
 ```bash
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py && python3 analysis/transport_toy.py
+python3 analysis/extra_flow_mode.py  # torch 필요
 python3 analysis/plot_figures.py
 ```
 
