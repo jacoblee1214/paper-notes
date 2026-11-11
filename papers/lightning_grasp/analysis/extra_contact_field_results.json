@@ -1,0 +1,208 @@
+{
+  "source": {
+    "hand_and_objects": "zhaohengyin/lightning-grasp release v1.0.0, assets.zip (GitHub release, public, no login)",
+    "url": "https://github.com/zhaohengyin/lightning-grasp/releases/download/v1.0.0/assets.zip",
+    "zip_bytes": 44807401,
+    "zip_sha256": "42d1cad23398678b0f64274c3ead57f5f1d9203f9df0cfaa30ee34f3f9d092a6",
+    "used_files": [
+      "hand/allegro_right/allegro_hand_right.urdf",
+      "hand/allegro_right/meshes/collision/link_tip.obj",
+      "object/ycb/013_apple/nontextured.stl"
+    ],
+    "license_note": "repo license NOASSERTION (gh API); assets include YCB objects; check original licenses before redistribution"
+  },
+  "mesh_info": {
+    "link_11.0_tip": {
+      "file": "data/assets/hand/allegro_right/meshes/collision/link_tip.obj",
+      "bytes": 67338,
+      "verts": 701,
+      "faces": 1398
+    },
+    "link_15.0_tip": {
+      "file": "data/assets/hand/allegro_right/meshes/collision/link_tip.obj",
+      "bytes": 67338,
+      "verts": 701,
+      "faces": 1398
+    },
+    "link_3.0_tip": {
+      "file": "data/assets/hand/allegro_right/meshes/collision/link_tip.obj",
+      "bytes": 67338,
+      "verts": 701,
+      "faces": 1398
+    },
+    "link_7.0_tip": {
+      "file": "data/assets/hand/allegro_right/meshes/collision/link_tip.obj",
+      "bytes": 67338,
+      "verts": 701,
+      "faces": 1398
+    }
+  },
+  "apple_extent_m": [
+    0.07544799894094467,
+    0.0748709999024868,
+    0.07188900237088092
+  ],
+  "apple_scale_applied": 1.0,
+  "config": {
+    "seed": 0,
+    "tips": [
+      "link_11.0_tip",
+      "link_15.0_tip",
+      "link_3.0_tip",
+      "link_7.0_tip"
+    ],
+    "surface_samples_per_tip": 3000,
+    "configs_box_stage": 80000,
+    "vectors_per_config_per_tip": 6,
+    "box_m": 0.01,
+    "leaf_cap": 256,
+    "configs_reach_stage": 4000,
+    "tip_points_per_config_reach": 30,
+    "object_surface_samples": 8000,
+    "normal_threshold_deg": 36,
+    "palm_anchor_m": [
+      0.06933322915715218,
+      0.014300807994615503,
+      0.09183971214875021
+    ],
+    "joint_sampling": "uniform within URDF limits; fixed joints ignored"
+  },
+  "box_occupancy": {
+    "link_11.0_tip": {
+      "vectors": 480000,
+      "occupied_boxes": 2012,
+      "median_per_box": 157.5,
+      "frac_boxes_gt50": 0.6843936381709742,
+      "frac_boxes_gt256": 0.37475149105367794,
+      "frac_vectors_cut_by_256": 0.3930125
+    },
+    "link_15.0_tip": {
+      "vectors": 480000,
+      "occupied_boxes": 2630,
+      "median_per_box": 97.0,
+      "frac_boxes_gt50": 0.6148288973384031,
+      "frac_boxes_gt256": 0.2832699619771863,
+      "frac_vectors_cut_by_256": 0.32377083333333334
+    },
+    "link_3.0_tip": {
+      "vectors": 480000,
+      "occupied_boxes": 2005,
+      "median_per_box": 161.0,
+      "frac_boxes_gt50": 0.6922693266832918,
+      "frac_boxes_gt256": 0.3825436408977556,
+      "frac_vectors_cut_by_256": 0.3898229166666667
+    },
+    "link_7.0_tip": {
+      "vectors": 480000,
+      "occupied_boxes": 2028,
+      "median_per_box": 156.0,
+      "frac_boxes_gt50": 0.7001972386587771,
+      "frac_boxes_gt256": 0.3772189349112426,
+      "frac_vectors_cut_by_256": 0.3867
+    }
+  },
+  "object_reach": {
+    "offset_-0.02m_r_0.5cm": {
+      "reachable_any_finger": 0.943875,
+      "reachable_per_finger": {
+        "link_11.0_tip": 0.21775,
+        "link_15.0_tip": 0.416125,
+        "link_3.0_tip": 0.448875,
+        "link_7.0_tip": 0.58975
+      },
+      "saturated_at_k": 0.0
+    },
+    "offset_-0.02m_r_1.0cm": {
+      "reachable_any_finger": 0.984,
+      "reachable_per_finger": {
+        "link_11.0_tip": 0.297625,
+        "link_15.0_tip": 0.54475,
+        "link_3.0_tip": 0.675,
+        "link_7.0_tip": 0.74125
+      },
+      "saturated_at_k": 0.0
+    },
+    "offset_-0.02m_r_2.0cm": {
+      "reachable_any_finger": 1.0,
+      "reachable_per_finger": {
+        "link_11.0_tip": 0.414625,
+        "link_15.0_tip": 0.625375,
+        "link_3.0_tip": 0.758125,
+        "link_7.0_tip": 0.831125
+      },
+      "saturated_at_k": 0.871125
+    },
+    "offset_+0.00m_r_0.5cm": {
+      "reachable_any_finger": 0.901625,
+      "reachable_per_finger": {
+        "link_11.0_tip": 0.21325,
+        "link_15.0_tip": 0.296125,
+        "link_3.0_tip": 0.500125,
+        "link_7.0_tip": 0.613
+      },
+      "saturated_at_k": 0.0
+    },
+    "offset_+0.00m_r_1.0cm": {
+      "reachable_any_finger": 0.95825,
+      "reachable_per_finger": {
+        "link_11.0_tip": 0.304875,
+        "link_15.0_tip": 0.376375,
+        "link_3.0_tip": 0.68275,
+        "link_7.0_tip": 0.733125
+      },
+      "saturated_at_k": 0.0
+    },
+    "offset_+0.00m_r_2.0cm": {
+      "reachable_any_finger": 1.0,
+      "reachable_per_finger": {
+        "link_11.0_tip": 0.43125,
+        "link_15.0_tip": 0.47025,
+        "link_3.0_tip": 0.75725,
+        "link_7.0_tip": 0.83125
+      },
+      "saturated_at_k": 0.80975
+    },
+    "offset_+0.02m_r_0.5cm": {
+      "reachable_any_finger": 0.806875,
+      "reachable_per_finger": {
+        "link_11.0_tip": 0.19475,
+        "link_15.0_tip": 0.161375,
+        "link_3.0_tip": 0.43175,
+        "link_7.0_tip": 0.53275
+      },
+      "saturated_at_k": 0.0
+    },
+    "offset_+0.02m_r_1.0cm": {
+      "reachable_any_finger": 0.9425,
+      "reachable_per_finger": {
+        "link_11.0_tip": 0.2745,
+        "link_15.0_tip": 0.2185,
+        "link_3.0_tip": 0.599875,
+        "link_7.0_tip": 0.72425
+      },
+      "saturated_at_k": 0.0
+    },
+    "offset_+0.02m_r_2.0cm": {
+      "reachable_any_finger": 1.0,
+      "reachable_per_finger": {
+        "link_11.0_tip": 0.393125,
+        "link_15.0_tip": 0.301125,
+        "link_3.0_tip": 0.74525,
+        "link_7.0_tip": 0.809875
+      },
+      "saturated_at_k": 0.779
+    }
+  },
+  "hand_points_in_tree": 480000,
+  "versions": {
+    "python": "3.12.7",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "wall_time_s": {
+    "box_stage": 1.93,
+    "reach_stage": 15.88,
+    "total": 17.85
+  }
+}

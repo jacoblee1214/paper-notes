@@ -1,14 +1,14 @@
 """공개 PCA 자산(repo/src/action_bench/assets/*/pca.safetensors) 검산과 벤치마크별 초기 탐색 공분산 비교.
 실행: python3 analysis/pca_check.py   (repo/ 에 공식 코드 shallow clone이 있어야 함, README 참조)
 
-- P1: 손별 90% 분산 k, 상위 3개 성분 누적 분산 (본문 Sec. 3.1, 4.2와 대조)
-- P2: 설정별 초기 공분산 Σ = diag(σ_q²) + Eᵀ diag(σ_e²) E (정규화 관절 좌표)의
+- 손별 90% 분산 k, 상위 3개 성분 누적 분산 (본문 Sec. 3.1, 4.2와 대조)
+- 설정별 초기 공분산 Σ = diag(σ_q²) + Eᵀ diag(σ_e²) E (정규화 관절 좌표)의
       관절당 평균 분산(Joint-Space = 1), k차원 부분공간 안의 분산 비율, 참여비 유효 차원
       - 논문 서술(Sec. 3.2): 총 분산을 Joint-Space와 같게, 둘로 반씩, σ_e ∝ √λ
       - 공개 DeXtreme preset: iid √0.5, eigen RMS √0.5, spectrum_power 1
       - 공개 SimToolReal preset: iid 1, eigen RMS 1, spectrum_power 0.5
-- P3: SPIDER 설정의 스펙트럼(σ_e ∝ λ)과 기존 IID 대비 총 분산 (가정 명시)
-- P4: 오차 방향 정렬 이득 uᵀΣu / (tr Σ / d): 사람 자세 분포에서 뽑은 오차 방향 vs 등방 방향
+- SPIDER 설정의 스펙트럼(σ_e ∝ λ)과 기존 IID 대비 총 분산 (가정 명시)
+- 오차 방향 정렬 이득 uᵀΣu / (tr Σ / d): 사람 자세 분포에서 뽑은 오차 방향 vs 등방 방향
 """
 import json
 import os
@@ -106,7 +106,7 @@ def main():
             "fit_corpora": H["m"]["source_corpora"], "fit_dataset_weights": H["m"]["fit"]["dataset_weights"],
             "fit_source_sequences": H["m"]["fit_summary"]["source_sequence_count"],
         }
-    # P2: 설정별 초기 공분산
+    # 설정별 초기 공분산
     configs = {
         "paper_text (matched, split, √λ)": (np.sqrt(0.5), np.sqrt(0.5), 1.0),
         "release DeXtreme preset": (np.sqrt(0.5), np.sqrt(0.5), 1.0),
@@ -129,7 +129,7 @@ def main():
         order = np.argsort(-sd)
         row["eigen_std_top3_joints(normalized)"] = [[H["names"][i], round(float(sd[i]), 3), round(float(H["half"][i]), 3)] for i in order[:3]]
         row["eigen_std_bottom3_joints(normalized)"] = [[H["names"][i], round(float(sd[i]), 3), round(float(H["half"][i]), 3)] for i in order[-3:]]
-        # P4: 사람 자세 공분산(정규화 좌표, 전 성분)
+        # 사람 자세 공분산(정규화 좌표, 전 성분)
         Bf = H["t"]["components"] / H["half"]
         C_h = Bf.T @ np.diag(H["t"]["component_std"] ** 2) @ Bf
         res["P4_alignment_gain"][h] = {}
@@ -149,7 +149,7 @@ def main():
         g = alignment_gain(S, C_h, rng)
         g.update(stats(S, B))
         res["P4_alignment_gain_all_hands"][h] = g
-    # P3: SPIDER (radian 좌표). sampling._powered_component_scale: σ_e ∝ λ (분산 비율의 1제곱)
+    # SPIDER (radian 좌표). sampling._powered_component_scale: σ_e ∝ λ (분산 비율의 1제곱)
     H = hs["sharpa"]
     spider = yaml.safe_load((ROOT / "repo/src/action_bench/benchmarks/spider/configs/hands.yaml").read_text())["hands"]["sharpa"]
     k = k_at(H["t"]["explained_variance"], 0.9)
