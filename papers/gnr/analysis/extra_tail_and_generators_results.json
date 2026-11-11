@@ -1,0 +1,282 @@
+{
+  "part1_tail_mechanism": {
+    "match_S1_then_compare": {
+      "f=0.0,alpha=0.14": {
+        "beta": 1.898,
+        "pred_pass_64_128_256": [
+          41.1,
+          46.5,
+          51.4
+        ],
+        "rmse_pp_on_64_128_256": 7.88
+      },
+      "f=0.0,alpha=0.5": {
+        "beta": 6.778,
+        "pred_pass_64_128_256": [
+          69.6,
+          78.0,
+          84.2
+        ],
+        "rmse_pp_on_64_128_256": 38.86
+      },
+      "f=0.0,alpha=2.0": {
+        "beta": 27.112,
+        "pred_pass_64_128_256": [
+          90.9,
+          96.9,
+          99.1
+        ],
+        "rmse_pp_on_64_128_256": 57.11
+      },
+      "f=0.2,alpha=0.14": {
+        "beta": 1.49,
+        "pred_pass_64_128_256": [
+          34.8,
+          39.0,
+          42.7
+        ],
+        "rmse_pp_on_64_128_256": 0.54
+      },
+      "f=0.2,alpha=0.5": {
+        "beta": 5.322,
+        "pred_pass_64_128_256": [
+          58.3,
+          64.4,
+          68.8
+        ],
+        "rmse_pp_on_64_128_256": 25.37
+      },
+      "f=0.2,alpha=2.0": {
+        "beta": 21.29,
+        "pred_pass_64_128_256": [
+          74.8,
+          78.3,
+          79.5
+        ],
+        "rmse_pp_on_64_128_256": 39.07
+      },
+      "f=0.4,alpha=0.14": {
+        "beta": 1.083,
+        "pred_pass_64_128_256": [
+          28.1,
+          31.1,
+          33.7
+        ],
+        "rmse_pp_on_64_128_256": 7.59
+      },
+      "f=0.4,alpha=0.5": {
+        "beta": 3.867,
+        "pred_pass_64_128_256": [
+          46.1,
+          50.0,
+          52.9
+        ],
+        "rmse_pp_on_64_128_256": 11.2
+      },
+      "f=0.4,alpha=2.0": {
+        "beta": 15.467,
+        "pred_pass_64_128_256": [
+          57.6,
+          59.3,
+          59.8
+        ],
+        "rmse_pp_on_64_128_256": 20.51
+      },
+      "f=0.5,alpha=0.14": {
+        "beta": 0.879,
+        "pred_pass_64_128_256": [
+          24.6,
+          26.9,
+          29.1
+        ],
+        "rmse_pp_on_64_128_256": 11.74
+      },
+      "f=0.5,alpha=0.5": {
+        "beta": 3.139,
+        "pred_pass_64_128_256": [
+          39.6,
+          42.6,
+          44.7
+        ],
+        "rmse_pp_on_64_128_256": 3.96
+      },
+      "f=0.5,alpha=2.0": {
+        "beta": 12.556,
+        "pred_pass_64_128_256": [
+          48.6,
+          49.6,
+          49.9
+        ],
+        "rmse_pp_on_64_128_256": 11.15
+      }
+    },
+    "paper_curve_fit": {
+      "free_3param": {
+        "pi0": 0.211,
+        "a": 0.14,
+        "b": 1.463,
+        "rmse_pp": 0.35
+      },
+      "pi0_forced_0": {
+        "a": 0.098,
+        "b": 1.296,
+        "rmse_pp": 0.4
+      }
+    }
+  },
+  "part2_generators": {
+    "n_seeds": 933,
+    "n_replicates": 5,
+    "summary": {
+      "q=0.0/in_dist/search_pass": {
+        "pass@1_mean": 60.0,
+        "pass@1_sd": 2.0,
+        "pass@4_mean": 72.7,
+        "pass@4_sd": 0.8,
+        "pass@16_mean": 78.7,
+        "pass@16_sd": 0.4,
+        "pass@64_mean": 81.3,
+        "pass@64_sd": 0.4,
+        "pass@256_mean": 83.2,
+        "pass@256_sd": 0.3
+      },
+      "q=0.0/in_dist/deterministic_regression_pass": {
+        "pass@1_mean": 0.0,
+        "pass@1_sd": 0.0,
+        "pass@4_mean": 0.0,
+        "pass@4_sd": 0.0,
+        "pass@16_mean": 0.0,
+        "pass@16_sd": 0.0,
+        "pass@64_mean": 0.0,
+        "pass@64_sd": 0.0,
+        "pass@256_mean": 0.0,
+        "pass@256_sd": 0.0
+      },
+      "q=0.0/in_dist/gmm_conditional_pass": {
+        "pass@1_mean": 8.8,
+        "pass@1_sd": 1.1,
+        "pass@4_mean": 26.2,
+        "pass@4_sd": 1.0,
+        "pass@16_mean": 55.0,
+        "pass@16_sd": 3.0,
+        "pass@64_mean": 71.9,
+        "pass@64_sd": 2.7,
+        "pass@256_mean": 79.0,
+        "pass@256_sd": 2.0
+      },
+      "q=0.0/in_dist/n_contaminated": 0,
+      "q=0.0/interp_ood/search_pass": {
+        "pass@1_mean": 19.0,
+        "pass@1_sd": 0.9,
+        "pass@4_mean": 35.7,
+        "pass@4_sd": 1.6,
+        "pass@16_mean": 50.4,
+        "pass@16_sd": 0.7,
+        "pass@64_mean": 60.9,
+        "pass@64_sd": 0.4,
+        "pass@256_mean": 67.7,
+        "pass@256_sd": 1.1
+      },
+      "q=0.0/interp_ood/deterministic_regression_pass": {
+        "pass@1_mean": 0.0,
+        "pass@1_sd": 0.0,
+        "pass@4_mean": 0.0,
+        "pass@4_sd": 0.0,
+        "pass@16_mean": 0.0,
+        "pass@16_sd": 0.0,
+        "pass@64_mean": 0.0,
+        "pass@64_sd": 0.0,
+        "pass@256_mean": 0.0,
+        "pass@256_sd": 0.0
+      },
+      "q=0.0/interp_ood/gmm_conditional_pass": {
+        "pass@1_mean": 7.3,
+        "pass@1_sd": 2.8,
+        "pass@4_mean": 22.6,
+        "pass@4_sd": 8.7,
+        "pass@16_mean": 54.6,
+        "pass@16_sd": 14.9,
+        "pass@64_mean": 82.0,
+        "pass@64_sd": 15.1,
+        "pass@256_mean": 94.4,
+        "pass@256_sd": 7.3
+      },
+      "q=0.0/interp_ood/n_contaminated": 0,
+      "q=0.2/in_dist/search_pass": {
+        "pass@1_mean": 40.4,
+        "pass@1_sd": 0.8,
+        "pass@4_mean": 57.6,
+        "pass@4_sd": 1.1,
+        "pass@16_mean": 62.8,
+        "pass@16_sd": 1.3,
+        "pass@64_mean": 65.8,
+        "pass@64_sd": 1.8,
+        "pass@256_mean": 67.3,
+        "pass@256_sd": 1.4
+      },
+      "q=0.2/in_dist/deterministic_regression_pass": {
+        "pass@1_mean": 0.0,
+        "pass@1_sd": 0.0,
+        "pass@4_mean": 0.0,
+        "pass@4_sd": 0.0,
+        "pass@16_mean": 0.0,
+        "pass@16_sd": 0.0,
+        "pass@64_mean": 0.0,
+        "pass@64_sd": 0.0,
+        "pass@256_mean": 0.0,
+        "pass@256_sd": 0.0
+      },
+      "q=0.2/in_dist/gmm_conditional_pass": {
+        "pass@1_mean": 2.7,
+        "pass@1_sd": 2.3,
+        "pass@4_mean": 9.4,
+        "pass@4_sd": 7.2,
+        "pass@16_mean": 25.0,
+        "pass@16_sd": 14.6,
+        "pass@64_mean": 49.4,
+        "pass@64_sd": 14.0,
+        "pass@256_mean": 66.6,
+        "pass@256_sd": 8.0
+      },
+      "q=0.2/in_dist/n_contaminated": 187,
+      "q=0.2/interp_ood/search_pass": {
+        "pass@1_mean": 11.6,
+        "pass@1_sd": 1.7,
+        "pass@4_mean": 23.2,
+        "pass@4_sd": 4.3,
+        "pass@16_mean": 33.7,
+        "pass@16_sd": 5.3,
+        "pass@64_mean": 40.6,
+        "pass@64_sd": 6.3,
+        "pass@256_mean": 46.2,
+        "pass@256_sd": 7.1
+      },
+      "q=0.2/interp_ood/deterministic_regression_pass": {
+        "pass@1_mean": 0.0,
+        "pass@1_sd": 0.0,
+        "pass@4_mean": 0.0,
+        "pass@4_sd": 0.0,
+        "pass@16_mean": 0.0,
+        "pass@16_sd": 0.0,
+        "pass@64_mean": 0.0,
+        "pass@64_sd": 0.0,
+        "pass@256_mean": 0.0,
+        "pass@256_sd": 0.0
+      },
+      "q=0.2/interp_ood/gmm_conditional_pass": {
+        "pass@1_mean": 1.9,
+        "pass@1_sd": 0.9,
+        "pass@4_mean": 8.1,
+        "pass@4_sd": 3.5,
+        "pass@16_mean": 27.0,
+        "pass@16_sd": 8.8,
+        "pass@64_mean": 59.8,
+        "pass@64_sd": 9.4,
+        "pass@256_mean": 85.5,
+        "pass@256_sd": 6.8
+      },
+      "q=0.2/interp_ood/n_contaminated": 187
+    }
+  },
+  "runtime_s": 4.6
+}

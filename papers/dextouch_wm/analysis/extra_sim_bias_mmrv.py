@@ -1,4 +1,4 @@
-"""추가 검증 (DexTouch-WM R2): 시뮬레이터 점수 보정이 MMRV를 바꾸는가 (정책 수 3과 10에서).
+"""추가 검증 (DexTouch-WM): 시뮬레이터 점수 보정이 MMRV를 바꾸는가 (정책 수 3과 10에서).
 
 논문 식 (7): MMRV_k = (1/N) sum_i max_j |R_ik - R_jk| v_ijk,  v_ijk = 1 if (R_ik - R_jk)(S_ik - S_jk) < 0.
   (03 §6.3의 N=3 닫힌 형식 2d/3과 일치한다. 논문 본문 인용과 같은 식.)

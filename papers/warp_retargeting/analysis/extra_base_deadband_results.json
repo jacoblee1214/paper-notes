@@ -1,0 +1,203 @@
+{
+  "setup": {
+    "deadband_m": 0.05,
+    "omega_rad_s": 9.425,
+    "zeta": 1.0,
+    "L_t_m": 0.45,
+    "tol_m": 0.02,
+    "dt_s": 0.005,
+    "T_s": 20.0,
+    "paths_per_setting": 30,
+    "seed": 20261111,
+    "static_threshold_deg": 6.38,
+    "speed_limit_for_convergence_m_s": 0.236
+  },
+  "ramp_check": {
+    "v=0.05_m_s": {
+      "steady_dev_cm_sim": 6.06,
+      "steady_dev_cm_theory_delta_plus_2zv_over_w": 6.06
+    },
+    "v=0.1_m_s": {
+      "steady_dev_cm_sim": 7.12,
+      "steady_dev_cm_theory_delta_plus_2zv_over_w": 7.12
+    },
+    "v=0.2_m_s": {
+      "steady_dev_cm_sim": 9.24,
+      "steady_dev_cm_theory_delta_plus_2zv_over_w": 9.24
+    }
+  },
+  "base_deviation": {
+    "A=0.1_f=0.2": {
+      "max_base_dev_cm_median": 9.42,
+      "max_base_dev_cm_p90": 9.44,
+      "max_base_dev_cm_max": 9.71
+    },
+    "A=0.1_f=0.5": {
+      "max_base_dev_cm_median": 13.3,
+      "max_base_dev_cm_p90": 14.46,
+      "max_base_dev_cm_max": 14.85
+    },
+    "A=0.1_f=0.8": {
+      "max_base_dev_cm_median": 15.04,
+      "max_base_dev_cm_p90": 16.28,
+      "max_base_dev_cm_max": 17.65
+    },
+    "A=0.2_f=0.2": {
+      "max_base_dev_cm_median": 14.33,
+      "max_base_dev_cm_p90": 14.44,
+      "max_base_dev_cm_max": 14.46
+    },
+    "A=0.2_f=0.5": {
+      "max_base_dev_cm_median": 24.23,
+      "max_base_dev_cm_p90": 24.51,
+      "max_base_dev_cm_max": 25.64
+    },
+    "A=0.2_f=0.8": {
+      "max_base_dev_cm_median": 29.27,
+      "max_base_dev_cm_p90": 31.51,
+      "max_base_dev_cm_max": 32.94
+    },
+    "A=0.3_f=0.2": {
+      "max_base_dev_cm_median": 19.21,
+      "max_base_dev_cm_p90": 19.28,
+      "max_base_dev_cm_max": 19.29
+    },
+    "A=0.3_f=0.5": {
+      "max_base_dev_cm_median": 34.85,
+      "max_base_dev_cm_p90": 34.86,
+      "max_base_dev_cm_max": 35.09
+    },
+    "A=0.3_f=0.8": {
+      "max_base_dev_cm_median": 43.29,
+      "max_base_dev_cm_p90": 43.82,
+      "max_base_dev_cm_max": 45.82
+    }
+  },
+  "success_fraction_by_theta": {
+    "A=0.1_f=0.2": {
+      "theta_0deg_success_frac": 0.1626,
+      "theta_2deg_success_frac": 0.2918,
+      "theta_4deg_success_frac": 0.4556,
+      "theta_6deg_success_frac": 0.6875,
+      "theta_7deg_success_frac": 0.7943,
+      "theta_8deg_success_frac": 0.885,
+      "theta_10deg_success_frac": 1.0,
+      "theta_15deg_success_frac": 1.0
+    },
+    "A=0.1_f=0.5": {
+      "theta_0deg_success_frac": 0.1377,
+      "theta_2deg_success_frac": 0.2491,
+      "theta_4deg_success_frac": 0.3733,
+      "theta_6deg_success_frac": 0.5396,
+      "theta_7deg_success_frac": 0.6114,
+      "theta_8deg_success_frac": 0.675,
+      "theta_10deg_success_frac": 0.7938,
+      "theta_15deg_success_frac": 0.9979
+    },
+    "A=0.1_f=0.8": {
+      "theta_0deg_success_frac": 0.1311,
+      "theta_2deg_success_frac": 0.2343,
+      "theta_4deg_success_frac": 0.3448,
+      "theta_6deg_success_frac": 0.4843,
+      "theta_7deg_success_frac": 0.552,
+      "theta_8deg_success_frac": 0.6122,
+      "theta_10deg_success_frac": 0.7199,
+      "theta_15deg_success_frac": 0.941
+    },
+    "A=0.2_f=0.2": {
+      "theta_0deg_success_frac": 0.0893,
+      "theta_2deg_success_frac": 0.1653,
+      "theta_4deg_success_frac": 0.2575,
+      "theta_6deg_success_frac": 0.4433,
+      "theta_7deg_success_frac": 0.523,
+      "theta_8deg_success_frac": 0.5954,
+      "theta_10deg_success_frac": 0.7174,
+      "theta_15deg_success_frac": 0.9558
+    },
+    "A=0.2_f=0.5": {
+      "theta_0deg_success_frac": 0.0826,
+      "theta_2deg_success_frac": 0.1454,
+      "theta_4deg_success_frac": 0.212,
+      "theta_6deg_success_frac": 0.2871,
+      "theta_7deg_success_frac": 0.3311,
+      "theta_8deg_success_frac": 0.3882,
+      "theta_10deg_success_frac": 0.4775,
+      "theta_15deg_success_frac": 0.6477
+    },
+    "A=0.2_f=0.8": {
+      "theta_0deg_success_frac": 0.0678,
+      "theta_2deg_success_frac": 0.1231,
+      "theta_4deg_success_frac": 0.1779,
+      "theta_6deg_success_frac": 0.2384,
+      "theta_7deg_success_frac": 0.2686,
+      "theta_8deg_success_frac": 0.3011,
+      "theta_10deg_success_frac": 0.3753,
+      "theta_15deg_success_frac": 0.5546
+    },
+    "A=0.3_f=0.2": {
+      "theta_0deg_success_frac": 0.0753,
+      "theta_2deg_success_frac": 0.1292,
+      "theta_4deg_success_frac": 0.1979,
+      "theta_6deg_success_frac": 0.3257,
+      "theta_7deg_success_frac": 0.3888,
+      "theta_8deg_success_frac": 0.4474,
+      "theta_10deg_success_frac": 0.5478,
+      "theta_15deg_success_frac": 0.7439
+    },
+    "A=0.3_f=0.5": {
+      "theta_0deg_success_frac": 0.0591,
+      "theta_2deg_success_frac": 0.1036,
+      "theta_4deg_success_frac": 0.15,
+      "theta_6deg_success_frac": 0.2022,
+      "theta_7deg_success_frac": 0.2295,
+      "theta_8deg_success_frac": 0.2604,
+      "theta_10deg_success_frac": 0.333,
+      "theta_15deg_success_frac": 0.4816
+    },
+    "A=0.3_f=0.8": {
+      "theta_0deg_success_frac": 0.0482,
+      "theta_2deg_success_frac": 0.0862,
+      "theta_4deg_success_frac": 0.1273,
+      "theta_6deg_success_frac": 0.1653,
+      "theta_7deg_success_frac": 0.1842,
+      "theta_8deg_success_frac": 0.2051,
+      "theta_10deg_success_frac": 0.2502,
+      "theta_15deg_success_frac": 0.3773
+    }
+  },
+  "summary_by_theta": {
+    "theta_0deg": {
+      "mean_over_settings": 0.0949,
+      "min_over_settings": 0.0482
+    },
+    "theta_2deg": {
+      "mean_over_settings": 0.1698,
+      "min_over_settings": 0.0862
+    },
+    "theta_4deg": {
+      "mean_over_settings": 0.2551,
+      "min_over_settings": 0.1273
+    },
+    "theta_6deg": {
+      "mean_over_settings": 0.3748,
+      "min_over_settings": 0.1653
+    },
+    "theta_7deg": {
+      "mean_over_settings": 0.4314,
+      "min_over_settings": 0.1842
+    },
+    "theta_8deg": {
+      "mean_over_settings": 0.4855,
+      "min_over_settings": 0.2051
+    },
+    "theta_10deg": {
+      "mean_over_settings": 0.5794,
+      "min_over_settings": 0.2502
+    },
+    "theta_15deg": {
+      "mean_over_settings": 0.7444,
+      "min_over_settings": 0.3773
+    }
+  },
+  "runtime_s": 15.27
+}

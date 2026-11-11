@@ -1,0 +1,166 @@
+{
+  "setup": {
+    "threshold": 0.15,
+    "mu": 0.5,
+    "G_bias": 0.5,
+    "n_per_shape_size": 800,
+    "sizes_m": [
+      0.04,
+      0.08,
+      0.16,
+      0.3
+    ],
+    "shapes": {
+      "cube": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "box": [
+        1.0,
+        0.6,
+        0.4
+      ],
+      "tool": [
+        1.0,
+        0.15,
+        0.15
+      ]
+    },
+    "seed": 20261111
+  },
+  "pass_rate_by_size": {
+    "V_code": {
+      "4cm": 0.247,
+      "8cm": 0.119,
+      "16cm": 0.059,
+      "30cm": 0.024
+    },
+    "V_norm": {
+      "4cm": 0.055,
+      "8cm": 0.055,
+      "16cm": 0.055,
+      "30cm": 0.055
+    },
+    "V_fric": {
+      "4cm": 0.122,
+      "8cm": 0.122,
+      "16cm": 0.122,
+      "30cm": 0.122
+    },
+    "V_grav": {
+      "4cm": 0.101,
+      "8cm": 0.101,
+      "16cm": 0.101,
+      "30cm": 0.101
+    },
+    "V_code_grav": {
+      "4cm": 0.318,
+      "8cm": 0.175,
+      "16cm": 0.103,
+      "30cm": 0.065
+    }
+  },
+  "invariance": {
+    "V_code": {
+      "decision_flip_rate": {
+        "8cm_vs_4cm": 0.128,
+        "16cm_vs_4cm": 0.188,
+        "30cm_vs_4cm": 0.223
+      },
+      "median_score_ratio_30cm_over_4cm": 1.0
+    },
+    "V_norm": {
+      "decision_flip_rate": {
+        "8cm_vs_4cm": 0.0,
+        "16cm_vs_4cm": 0.0,
+        "30cm_vs_4cm": 0.0
+      },
+      "median_score_ratio_30cm_over_4cm": 1.0
+    },
+    "V_fric": {
+      "decision_flip_rate": {
+        "8cm_vs_4cm": 0.0,
+        "16cm_vs_4cm": 0.0,
+        "30cm_vs_4cm": 0.0
+      },
+      "median_score_ratio_30cm_over_4cm": 1.0
+    },
+    "V_grav": {
+      "decision_flip_rate": {
+        "8cm_vs_4cm": 0.0,
+        "16cm_vs_4cm": 0.0,
+        "30cm_vs_4cm": 0.0
+      },
+      "median_score_ratio_30cm_over_4cm": 1.0
+    },
+    "V_code_grav": {
+      "decision_flip_rate": {
+        "8cm_vs_4cm": 0.144,
+        "16cm_vs_4cm": 0.215,
+        "30cm_vs_4cm": 0.254
+      },
+      "median_score_ratio_30cm_over_4cm": 1.552
+    }
+  },
+  "rank_and_flip_8cm": {
+    "V_norm": {
+      "spearman_vs_V_code": 0.994,
+      "decision_flip_vs_V_code": 0.065
+    },
+    "V_fric": {
+      "spearman_vs_V_code": 0.892,
+      "decision_flip_vs_V_code": 0.069
+    },
+    "V_grav": {
+      "spearman_vs_V_code": 0.764,
+      "decision_flip_vs_V_code": 0.089
+    },
+    "V_code_grav": {
+      "spearman_vs_V_code": 0.879,
+      "decision_flip_vs_V_code": 0.087
+    }
+  },
+  "rate_matched": {
+    "V_code": {
+      "threshold": 0.1508,
+      "pass_4cm": 0.247,
+      "pass_8cm": 0.119,
+      "pass_16cm": 0.059,
+      "pass_30cm": 0.024
+    },
+    "V_norm": {
+      "threshold": 0.2804,
+      "pass_4cm": 0.119,
+      "pass_8cm": 0.119,
+      "pass_16cm": 0.119,
+      "pass_30cm": 0.119,
+      "decision_flip_vs_V_code_8cm": 0.027
+    },
+    "V_fric": {
+      "threshold": 0.1483,
+      "pass_4cm": 0.119,
+      "pass_8cm": 0.119,
+      "pass_16cm": 0.119,
+      "pass_30cm": 0.119,
+      "decision_flip_vs_V_code_8cm": 0.068
+    },
+    "V_grav": {
+      "threshold": 0.1773,
+      "pass_4cm": 0.119,
+      "pass_8cm": 0.119,
+      "pass_16cm": 0.119,
+      "pass_30cm": 0.119,
+      "decision_flip_vs_V_code_8cm": 0.088
+    },
+    "V_code_grav": {
+      "threshold": 0.1011,
+      "pass_4cm": 0.228,
+      "pass_8cm": 0.119,
+      "pass_16cm": 0.066,
+      "pass_30cm": 0.047,
+      "decision_flip_vs_V_code_8cm": 0.085
+    }
+  },
+  "runtime_s": 20.8
+}

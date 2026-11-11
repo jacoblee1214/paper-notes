@@ -1,0 +1,99 @@
+{
+  "setup": {
+    "k_p": 310.0,
+    "N_lo": 0.5,
+    "N_hi": 5.0,
+    "demo_force_median_N": 3.0,
+    "demo_force_cv": 0.3,
+    "n_demos": 20000,
+    "sigma_e_mm_list": [
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "target_rate": 0.9,
+    "grid_step_kf": 0.0001,
+    "bisection_tol_kf": 1e-05,
+    "seed": 20261111
+  },
+  "by_sigma_e": {
+    "sigma_e=0.0mm": {
+      "feasible_fraction_any_kf": 1.0,
+      "kf_lo_median": 0.00066,
+      "kf_hi_median": 0.00479,
+      "fraction_lo_below_1e-4": 0.0,
+      "max_rate_over_grid": 1.0,
+      "grid_lower90_kf": 0.001,
+      "grid_upper90_kf": 0.0034000000000000002,
+      "bisection": {
+        "lower90_kf": 0.000904,
+        "upper90_kf": 0.003475,
+        "evals_lower": 8,
+        "evals_upper": 11,
+        "grid_evals": 201,
+        "lower_abs_diff_vs_grid": 9.6e-05,
+        "upper_abs_diff_vs_grid": 7.5e-05
+      }
+    },
+    "sigma_e=0.5mm": {
+      "feasible_fraction_any_kf": 1.0,
+      "kf_lo_median": 0.00069,
+      "kf_hi_median": 0.00477,
+      "fraction_lo_below_1e-4": 0.0,
+      "max_rate_over_grid": 0.999,
+      "grid_lower90_kf": 0.0011,
+      "grid_upper90_kf": 0.0034000000000000002,
+      "bisection": {
+        "lower90_kf": 0.001051,
+        "upper90_kf": 0.003472,
+        "evals_lower": 8,
+        "evals_upper": 11,
+        "grid_evals": 201,
+        "lower_abs_diff_vs_grid": 4.9e-05,
+        "upper_abs_diff_vs_grid": 7.2e-05
+      }
+    },
+    "sigma_e=1.0mm": {
+      "feasible_fraction_any_kf": 1.0,
+      "kf_lo_median": 0.00076,
+      "kf_hi_median": 0.00477,
+      "fraction_lo_below_1e-4": 0.0097,
+      "max_rate_over_grid": 0.994,
+      "grid_lower90_kf": 0.0014,
+      "grid_upper90_kf": 0.0034000000000000002,
+      "bisection": {
+        "lower90_kf": 0.001319,
+        "upper90_kf": 0.003439,
+        "evals_lower": 8,
+        "evals_upper": 11,
+        "grid_evals": 201,
+        "lower_abs_diff_vs_grid": 8.1e-05,
+        "upper_abs_diff_vs_grid": 3.9e-05
+      }
+    },
+    "sigma_e=2.0mm": {
+      "feasible_fraction_any_kf": 0.9988,
+      "kf_lo_median": 0.00094,
+      "kf_hi_median": 0.00469,
+      "fraction_lo_below_1e-4": 0.0664,
+      "max_rate_over_grid": 0.956,
+      "grid_lower90_kf": 0.002,
+      "grid_upper90_kf": 0.0032,
+      "bisection": {
+        "lower90_kf": 0.001922,
+        "upper90_kf": 0.003275,
+        "evals_lower": 9,
+        "evals_upper": 11,
+        "grid_evals": 201,
+        "lower_abs_diff_vs_grid": 7.8e-05,
+        "upper_abs_diff_vs_grid": 7.5e-05
+      }
+    }
+  },
+  "demo_force_vs_lower_bound_sigma0": {
+    "lo_median_when_max_force_below_p25": 0.00077,
+    "lo_median_when_max_force_above_p75": 0.00058
+  },
+  "runtime_s": 0.02
+}

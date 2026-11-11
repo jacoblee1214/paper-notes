@@ -1,0 +1,161 @@
+{
+  "setup": {
+    "box_W_m": 0.04,
+    "box_H_m": 0.01,
+    "finger_radius_m": 0.003,
+    "links_m": [
+      0.03,
+      0.03,
+      0.025
+    ],
+    "bases_m": [
+      [
+        -0.06,
+        0.07
+      ],
+      [
+        0.06,
+        0.07
+      ]
+    ],
+    "joint_limit_rad": 2.6,
+    "n_trials": 500,
+    "n_outer_steps": 60,
+    "tol_contact_m": 0.002,
+    "tol_pen_m": 0.0005,
+    "lambdas": [
+      0.0,
+      0.3,
+      1.0,
+      3.0
+    ],
+    "seed": 20261111
+  },
+  "results": {
+    "ground=on_lambda=0.0": {
+      "n": 500,
+      "valid_rate": 0.584,
+      "valid_ci95": [
+        0.5403165775956056,
+        0.6264025332068537
+      ],
+      "contact_ok_rate": 0.77,
+      "pen_free_rate": 0.764,
+      "contact_ok_but_penetrating_rate": 0.186,
+      "max_contact_err_mm_median": 6.938893903907228e-15,
+      "pen_depth_mm_median": 7.806255641895632e-15,
+      "pen_depth_mm_p90": 1.0427956743095088
+    },
+    "ground=on_lambda=0.3": {
+      "n": 500,
+      "valid_rate": 0.73,
+      "valid_ci95": [
+        0.6894413425907917,
+        0.7670514607968943
+      ],
+      "contact_ok_rate": 0.77,
+      "pen_free_rate": 0.912,
+      "contact_ok_but_penetrating_rate": 0.04,
+      "max_contact_err_mm_median": 7.152448122690996e-15,
+      "pen_depth_mm_median": 4.336808689942018e-15,
+      "pen_depth_mm_p90": 0.3695683795301924
+    },
+    "ground=on_lambda=1.0": {
+      "n": 500,
+      "valid_rate": 0.76,
+      "valid_ci95": [
+        0.7206732029933738,
+        0.7953621399666191
+      ],
+      "contact_ok_rate": 0.776,
+      "pen_free_rate": 0.956,
+      "contact_ok_but_penetrating_rate": 0.016,
+      "max_contact_err_mm_median": 1.0408340855860843e-14,
+      "pen_depth_mm_median": 4.336808689942018e-15,
+      "pen_depth_mm_p90": 0.13054046811393885
+    },
+    "ground=on_lambda=3.0": {
+      "n": 500,
+      "valid_rate": 0.756,
+      "valid_ci95": [
+        0.7164951931439073,
+        0.791601144539778
+      ],
+      "contact_ok_rate": 0.756,
+      "pen_free_rate": 0.99,
+      "contact_ok_but_penetrating_rate": 0.0,
+      "max_contact_err_mm_median": 1.393178779658193e-14,
+      "pen_depth_mm_median": 4.336808689942018e-15,
+      "pen_depth_mm_p90": 0.01697837848414134
+    },
+    "ground=off_lambda=0.0": {
+      "n": 500,
+      "valid_rate": 0.616,
+      "valid_ci95": [
+        0.5726388276307122,
+        0.6575923253822078
+      ],
+      "contact_ok_rate": 0.77,
+      "pen_free_rate": 0.804,
+      "contact_ok_but_penetrating_rate": 0.154,
+      "max_contact_err_mm_median": 6.938893903907228e-15,
+      "pen_depth_mm_median": 4.336808689942018e-15,
+      "pen_depth_mm_p90": 0.9893160615345082
+    },
+    "ground=off_lambda=0.3": {
+      "n": 500,
+      "valid_rate": 0.734,
+      "valid_ci95": [
+        0.6935922104844646,
+        0.770839598179529
+      ],
+      "contact_ok_rate": 0.77,
+      "pen_free_rate": 0.924,
+      "contact_ok_but_penetrating_rate": 0.036,
+      "max_contact_err_mm_median": 6.938893903907228e-15,
+      "pen_depth_mm_median": 4.336808689942018e-15,
+      "pen_depth_mm_p90": 0.2829150992222452
+    },
+    "ground=off_lambda=1.0": {
+      "n": 500,
+      "valid_rate": 0.752,
+      "valid_ci95": [
+        0.7123215407533252,
+        0.7878357916540524
+      ],
+      "contact_ok_rate": 0.77,
+      "pen_free_rate": 0.954,
+      "contact_ok_but_penetrating_rate": 0.018,
+      "max_contact_err_mm_median": 1.0408340855860843e-14,
+      "pen_depth_mm_median": 4.336808689942018e-15,
+      "pen_depth_mm_p90": 0.14264946977632026
+    },
+    "ground=off_lambda=3.0": {
+      "n": 500,
+      "valid_rate": 0.772,
+      "valid_ci95": [
+        0.7332341279039163,
+        0.8066182308849994
+      ],
+      "contact_ok_rate": 0.772,
+      "pen_free_rate": 1.0,
+      "contact_ok_but_penetrating_rate": 0.0,
+      "max_contact_err_mm_median": 1.1536548846752019e-14,
+      "pen_depth_mm_median": 4.336808689942018e-15,
+      "pen_depth_mm_p90": 0.03162573726960805
+    }
+  },
+  "paired_lambda1_vs_lambda0": {
+    "ground=on": {
+      "alg_only_valid": 88,
+      "base_only_valid": 0,
+      "p_sign_test": 6.462348535570529e-27
+    },
+    "ground=off": {
+      "alg_only_valid": 68,
+      "base_only_valid": 0,
+      "p_sign_test": 6.776263578034403e-21
+    }
+  },
+  "runtime_s": 147.29
+}

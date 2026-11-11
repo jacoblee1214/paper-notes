@@ -1,0 +1,148 @@
+{
+  "setup": {
+    "n_trials": 20000,
+    "fs_hz": 10.0,
+    "T_s": 8.0,
+    "type_probs": {
+      "hold_ok": 0.4,
+      "hold_slip": 0.15,
+      "toss": 0.15,
+      "occ_hold": 0.15,
+      "tilt_hold": 0.05,
+      "nolift": 0.1
+    },
+    "meas_sigma_m": 0.005,
+    "thresh_m": 0.05,
+    "charuco_tilt_limit_deg": 60,
+    "seed": 20261111
+  },
+  "rates": {
+    "GT_hold_3s_5cm": 0.3841,
+    "C3_paper_5cm_3s": 0.3531,
+    "Cc_charuco_visible_after_lift": 0.8931,
+    "Cz_max_height_50mm": 0.8931
+  },
+  "agreement": {
+    "C3_vs_Cc": 0.4535,
+    "C3_vs_Cz": 0.46,
+    "Cc_vs_Cz": 0.9929,
+    "C3_vs_GT": 0.9646,
+    "Cc_vs_GT": 0.4839,
+    "Cz_vs_GT": 0.491
+  },
+  "vs_GT_confusion": {
+    "C3": {
+      "false_pos_rate_among_GT_fail": 0.0036,
+      "false_neg_rate_among_GT_success": 0.0864
+    },
+    "Cc": {
+      "false_pos_rate_among_GT_fail": 0.8321,
+      "false_neg_rate_among_GT_success": 0.0092
+    },
+    "Cz": {
+      "false_pos_rate_among_GT_fail": 0.8264,
+      "false_neg_rate_among_GT_success": 0.0
+    }
+  },
+  "by_behavior_type_success_rate": {
+    "hold_ok": {
+      "n": 7880,
+      "GT": 0.601,
+      "C3": 0.549,
+      "Cc": 1.0,
+      "Cz": 1.0
+    },
+    "hold_slip": {
+      "n": 2983,
+      "GT": 0.176,
+      "C3": 0.164,
+      "Cc": 0.998,
+      "Cz": 0.976
+    },
+    "toss": {
+      "n": 3008,
+      "GT": 0.0,
+      "C3": 0.0,
+      "Cc": 1.0,
+      "Cz": 0.999
+    },
+    "occ_hold": {
+      "n": 3045,
+      "GT": 0.597,
+      "C3": 0.554,
+      "Cc": 0.977,
+      "Cz": 1.0
+    },
+    "tilt_hold": {
+      "n": 1023,
+      "GT": 0.592,
+      "C3": 0.544,
+      "Cc": 1.0,
+      "Cz": 1.0
+    },
+    "nolift": {
+      "n": 2061,
+      "GT": 0.0,
+      "C3": 0.0,
+      "Cc": 0.0,
+      "Cz": 0.0
+    }
+  },
+  "disagreement_patterns_top": {
+    "C3=0,Cc=1,Cz=1": {
+      "n": 10795,
+      "GT_mean": 0.061,
+      "dominant_types": {
+        "hold_ok": 3551,
+        "toss": 3004,
+        "hold_slip": 2422
+      }
+    },
+    "C3=1,Cc=1,Cz=1": {
+      "n": 6996,
+      "GT_mean": 0.994,
+      "dominant_types": {
+        "hold_ok": 4329,
+        "occ_hold": 1622,
+        "tilt_hold": 557
+      }
+    },
+    "C3=0,Cc=0,Cz=0": {
+      "n": 2068,
+      "GT_mean": 0.0,
+      "dominant_types": {
+        "nolift": 2061,
+        "hold_slip": 7,
+        "hold_ok": 0
+      }
+    },
+    "C3=0,Cc=1,Cz=0": {
+      "n": 70,
+      "GT_mean": 0.0,
+      "dominant_types": {
+        "hold_slip": 66,
+        "toss": 4,
+        "hold_ok": 0
+      }
+    },
+    "C3=1,Cc=0,Cz=1": {
+      "n": 66,
+      "GT_mean": 1.0,
+      "dominant_types": {
+        "occ_hold": 66,
+        "hold_ok": 0,
+        "hold_slip": 0
+      }
+    },
+    "C3=0,Cc=0,Cz=1": {
+      "n": 5,
+      "GT_mean": 1.0,
+      "dominant_types": {
+        "occ_hold": 5,
+        "hold_ok": 0,
+        "hold_slip": 0
+      }
+    }
+  },
+  "runtime_s": 0.52
+}

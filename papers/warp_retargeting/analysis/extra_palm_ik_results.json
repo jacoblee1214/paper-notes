@@ -1,0 +1,55 @@
+{
+  "setup": {
+    "L_SE": 0.3,
+    "L_EW": 0.27,
+    "L_hand": 0.1,
+    "n_targets": 20000,
+    "seed": 20261111,
+    "target_dist_range_m": [
+      0.02,
+      0.7
+    ],
+    "human_elbow_dist_m": 0.33
+  },
+  "a_residuals_selected_root": {
+    "n_with_real_root": 13939,
+    "palm_err_max_m": 1.2719202621569003e-16,
+    "palm_err_median_m": 3.576224061345498e-17,
+    "upper_arm_err_max_m": 3.885780586188048e-16,
+    "forearm_err_max_m": 2.7755575615628914e-16,
+    "u_norm_err_max": 9.992007221626409e-16,
+    "elbow_plane_err_max_m": 5.925296879201003e-16
+  },
+  "b_root_count": {
+    "frac_0_real_roots": 0.303,
+    "frac_1_real_root": 0.0,
+    "frac_2_real_roots": 0.6969,
+    "triangle_holds_for_selected_root_given_real_root": 1.0
+  },
+  "c_uniqueness": {
+    "frac_exactly_one_satisfies_human_side_given_real_root": 1.0,
+    "frac_zero_satisfy_human_side_given_real_root": 0.0,
+    "frac_two_satisfy_human_side_given_real_root": 0.0,
+    "frac_two_root_cases_with_roots_on_opposite_sides": 1.0,
+    "n_two_root_cases": 13939,
+    "frac_selected_elbow_within_1cm_of_palm_axis": 0.0015
+  },
+  "d_link_ratio_sensitivity": {
+    "upper_arm_x0.9": {
+      "frac_with_selected_solution": 0.6289,
+      "palm_err_max_m": 5.594315114139762e-17,
+      "elbow_angle_from_human_median_deg": 47.49
+    },
+    "upper_arm_x1.0": {
+      "frac_with_selected_solution": 0.6969,
+      "palm_err_max_m": 6.206335383118183e-17,
+      "elbow_angle_from_human_median_deg": 47.29
+    },
+    "upper_arm_x1.1": {
+      "frac_with_selected_solution": 0.7636,
+      "palm_err_max_m": 6.206335383118183e-17,
+      "elbow_angle_from_human_median_deg": 47.34
+    }
+  },
+  "runtime_s": 0.02
+}
