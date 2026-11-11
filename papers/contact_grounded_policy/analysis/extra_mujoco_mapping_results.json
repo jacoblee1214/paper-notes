@@ -1,0 +1,82 @@
+{
+  "device": "cpu",
+  "torch": "2.15.0",
+  "mujoco": "4.0.0",
+  "numpy": "1.26.4",
+  "threads": 4,
+  "n_samples": 10000,
+  "discarded_not_at_rest": 1008,
+  "train_val_split": "1:1",
+  "settle_steps": 2500,
+  "kp": 2.0,
+  "contact_fraction": 0.0618,
+  "fingertip_contact_events_per_sample": 0.0363,
+  "max_jacobian_vs_solver_force_error": 4.632582191813951e-06,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "epochs": 100,
+  "units": "MAE x 1e-3 rad on validation split",
+  "results_mae_1e3rad": {
+    "zero_residual_a_eq_q": 0.4776634529636005,
+    "analytic_all_links": 0.24812010734741,
+    "analytic_fingertip_only": 0.26239863409530984,
+    "state+tactile, residual": {
+      "mean": 0.23654619397563945,
+      "std": 0.002424555962414839,
+      "per_seed": [
+        0.23746495116764316,
+        0.238947693101409,
+        0.23322593765786614
+      ]
+    },
+    "state+tactile, absolute": {
+      "mean": 8.813566991824246,
+      "std": 0.7242521645068304,
+      "per_seed": [
+        8.09879207394078,
+        8.53563216305465,
+        9.806276738477308
+      ]
+    },
+    "state only, residual": {
+      "mean": 0.4778597552910175,
+      "std": 4.6093312717554563e-05,
+      "per_seed": [
+        0.4779116659656803,
+        0.47786794452291687,
+        0.4777996553844553
+      ]
+    },
+    "tactile only, residual": {
+      "mean": 0.23707311993252358,
+      "std": 0.0038467823992889955,
+      "per_seed": [
+        0.23687601444311146,
+        0.2418799063492931,
+        0.2324634390051662
+      ]
+    },
+    "tactile only, absolute": {
+      "mean": 346.8815928355728,
+      "std": 0.7974079895796427,
+      "per_seed": [
+        345.8114769010821,
+        347.7247549537638,
+        347.1085466518726
+      ]
+    },
+    "fingertip-only state+tactile, residual": {
+      "mean": 0.23517191500300294,
+      "std": 0.001186967991608689,
+      "per_seed": [
+        0.2338172595305196,
+        0.23670774197209724,
+        0.23499074350639196
+      ]
+    }
+  },
+  "wall_time_s": 97.7
+}

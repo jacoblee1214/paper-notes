@@ -14,12 +14,16 @@
 | `analysis/table_check.py` | Table II–VI과 그림 수치 재계산 |
 | `analysis/mapping_toy.py` | 3-DoF 평면 손가락 + 관절 PD + 촉각 taxel toy (numpy, CPU 약 2분) |
 | `analysis/plot_figures.py` | 리포트 그래프 세 장 |
+| `analysis/03_analysis.md` | 추가 검증: 다지 손 MuJoCo 매핑 실험, 저차원 CGP 대 DP 비교 |
+| `analysis/extra_mujoco_mapping.py` | 3손가락 MuJoCo 모델과 Table III식 매핑 비교 (CPU, 약 1.5분) |
+| `analysis/extra_cgp_vs_dp.py` | 저차원 확산 정책 비교 (CPU, 약 1분) |
 
 ## 재실행
 
 ```bash
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py && python3 analysis/mapping_toy.py
+python3 analysis/extra_mujoco_mapping.py && python3 analysis/extra_cgp_vs_dp.py
 cd analysis && python3 plot_figures.py
 ```
 

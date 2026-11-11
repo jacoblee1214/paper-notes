@@ -82,5 +82,6 @@ CGP는 한 번 추론할 때 16스텝의 (상태, 촉각)을 예측하고 8스�
 - [통합 리포트 PDF](report/report_public.pdf)
 - [01. 논문 분석: Contact-Grounded Policy (arXiv:2603.05687)](analysis/01_paper_analysis.md)
 - [02. 선행연구와 계보](analysis/02_prior_work.md)
+- [03. 추가 검증 (MuJoCo 다지 손)](analysis/03_analysis.md)
 - [03. Contact-consistency mapping의 물리적 의미와 toy 검증](analysis/03_derivations.md)
 - [04. 주장 검증: 표·그림 수치 재계산, 구현 가능성](analysis/04_claim_verification.md)

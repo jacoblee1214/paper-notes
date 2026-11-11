@@ -1,0 +1,360 @@
+{
+  "device": "cpu",
+  "torch": "2.15.0",
+  "mujoco": "4.0.0",
+  "numpy": "1.26.4",
+  "threads": 4,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "settings": {
+    "n_demo_episodes": 240,
+    "cmp_episodes_without_wall": 120,
+    "n_eval_episodes_per_variant_seed": 60,
+    "t_max_steps": 160,
+    "chunk": 8,
+    "executed_sensitivity": [
+      4,
+      1
+    ],
+    "flow_steps_inference": 5,
+    "policy_train_iters": 3000,
+    "cmp_iters": 1500,
+    "batch": 256,
+    "force_limit_N": 3.0,
+    "target_lead_limit_m": 0.1,
+    "finger_mass_kg": 0.005,
+    "wall_fraction": 0.5,
+    "step_m": 0.02,
+    "expert_demo_success": 0.7875
+  },
+  "results": {
+    "exec4_of_8": {
+      "vision only": {
+        "per_seed": [
+          {
+            "success": 0.5666666666666667,
+            "success_wall": 0.2,
+            "success_no_wall": 0.9333333333333333,
+            "damage_rate_wall": 0.8,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          },
+          {
+            "success": 0.5833333333333334,
+            "success_wall": 0.23333333333333334,
+            "success_no_wall": 0.9333333333333333,
+            "damage_rate_wall": 0.7666666666666667,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          },
+          {
+            "success": 0.5166666666666667,
+            "success_wall": 0.16666666666666666,
+            "success_no_wall": 0.8666666666666667,
+            "damage_rate_wall": 0.8,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          }
+        ],
+        "mean": {
+          "success": 0.5555555555555555,
+          "success_wall": 0.19999999999999998,
+          "success_no_wall": 0.9111111111111111,
+          "damage_rate_wall": 0.7888888888888891
+        },
+        "std": {
+          "success": 0.02832788618662657,
+          "success_wall": 0.027216552697590872,
+          "success_no_wall": 0.03142696805273544,
+          "damage_rate_wall": 0.01571348402636772
+        }
+      },
+      "raw tactile": {
+        "per_seed": [
+          {
+            "success": 0.5333333333333333,
+            "success_wall": 0.06666666666666667,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.9333333333333333,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          },
+          {
+            "success": 0.5333333333333333,
+            "success_wall": 0.1,
+            "success_no_wall": 0.9666666666666667,
+            "damage_rate_wall": 0.9,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          },
+          {
+            "success": 0.5666666666666667,
+            "success_wall": 0.13333333333333333,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.8666666666666667,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          }
+        ],
+        "mean": {
+          "success": 0.5444444444444444,
+          "success_wall": 0.10000000000000002,
+          "success_no_wall": 0.9888888888888889,
+          "damage_rate_wall": 0.9
+        },
+        "std": {
+          "success": 0.01571348402636772,
+          "success_wall": 0.027216552697590865,
+          "success_no_wall": 0.01571348402636772,
+          "damage_rate_wall": 0.02721655269759086
+        }
+      },
+      "sigma gate": {
+        "per_seed": [
+          {
+            "success": 0.6,
+            "success_wall": 0.2,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.8,
+            "gate_unexpected_contact_mean": 0.9180295398602119,
+            "gate_expected_contact_mean": 0.6976501503603054
+          },
+          {
+            "success": 0.5666666666666667,
+            "success_wall": 0.16666666666666666,
+            "success_no_wall": 0.9666666666666667,
+            "damage_rate_wall": 0.8333333333333334,
+            "gate_unexpected_contact_mean": 0.8233776059415605,
+            "gate_expected_contact_mean": 0.5774272871592492
+          },
+          {
+            "success": 0.5833333333333334,
+            "success_wall": 0.2,
+            "success_no_wall": 0.9666666666666667,
+            "damage_rate_wall": 0.8,
+            "gate_unexpected_contact_mean": 0.8179284236869033,
+            "gate_expected_contact_mean": 0.6024560492871136
+          }
+        ],
+        "mean": {
+          "success": 0.5833333333333334,
+          "success_wall": 0.18888888888888888,
+          "success_no_wall": 0.9777777777777779,
+          "damage_rate_wall": 0.8111111111111112
+        },
+        "std": {
+          "success": 0.01360827634879543,
+          "success_wall": 0.015713484026367734,
+          "success_no_wall": 0.01571348402636772,
+          "damage_rate_wall": 0.01571348402636772
+        }
+      },
+      "sigma+error gate": {
+        "per_seed": [
+          {
+            "success": 0.5333333333333333,
+            "success_wall": 0.1,
+            "success_no_wall": 0.9666666666666667,
+            "damage_rate_wall": 0.8666666666666667,
+            "gate_unexpected_contact_mean": 0.9410382280747096,
+            "gate_expected_contact_mean": 0.3360689209291228
+          },
+          {
+            "success": 0.6,
+            "success_wall": 0.2,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.8,
+            "gate_unexpected_contact_mean": 0.9258203899606745,
+            "gate_expected_contact_mean": 0.5789778384053155
+          },
+          {
+            "success": 0.5833333333333334,
+            "success_wall": 0.2,
+            "success_no_wall": 0.9666666666666667,
+            "damage_rate_wall": 0.8,
+            "gate_unexpected_contact_mean": 0.9183520999821749,
+            "gate_expected_contact_mean": 0.5592580632871936
+          }
+        ],
+        "mean": {
+          "success": 0.5722222222222223,
+          "success_wall": 0.16666666666666666,
+          "success_no_wall": 0.9777777777777779,
+          "damage_rate_wall": 0.8222222222222223
+        },
+        "std": {
+          "success": 0.028327886186626582,
+          "success_wall": 0.04714045207910317,
+          "success_no_wall": 0.01571348402636772,
+          "damage_rate_wall": 0.03142696805273544
+        }
+      }
+    },
+    "exec1_of_8": {
+      "vision only": {
+        "per_seed": [
+          {
+            "success": 0.7166666666666667,
+            "success_wall": 0.4666666666666667,
+            "success_no_wall": 0.9666666666666667,
+            "damage_rate_wall": 0.4666666666666667,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          },
+          {
+            "success": 0.6,
+            "success_wall": 0.2,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.8,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          },
+          {
+            "success": 0.2833333333333333,
+            "success_wall": 0.0,
+            "success_no_wall": 0.5666666666666667,
+            "damage_rate_wall": 0.8666666666666667,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          }
+        ],
+        "mean": {
+          "success": 0.5333333333333333,
+          "success_wall": 0.22222222222222224,
+          "success_no_wall": 0.8444444444444444,
+          "damage_rate_wall": 0.7111111111111111
+        },
+        "std": {
+          "success": 0.18308063392537868,
+          "success_wall": 0.1911627837120584,
+          "success_no_wall": 0.19688939051854834,
+          "damage_rate_wall": 0.17497795275581804
+        }
+      },
+      "raw tactile": {
+        "per_seed": [
+          {
+            "success": 0.5666666666666667,
+            "success_wall": 0.13333333333333333,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.8333333333333334,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          },
+          {
+            "success": 0.75,
+            "success_wall": 0.5,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.5,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          },
+          {
+            "success": 0.5333333333333333,
+            "success_wall": 0.06666666666666667,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.7,
+            "gate_unexpected_contact_mean": null,
+            "gate_expected_contact_mean": null
+          }
+        ],
+        "mean": {
+          "success": 0.6166666666666667,
+          "success_wall": 0.2333333333333333,
+          "success_no_wall": 1.0,
+          "damage_rate_wall": 0.6777777777777777
+        },
+        "std": {
+          "success": 0.09525793444156805,
+          "success_wall": 0.19051586888313607,
+          "success_no_wall": 0.0,
+          "damage_rate_wall": 0.13698697784375505
+        }
+      },
+      "sigma gate": {
+        "per_seed": [
+          {
+            "success": 0.6,
+            "success_wall": 0.23333333333333334,
+            "success_no_wall": 0.9666666666666667,
+            "damage_rate_wall": 0.6333333333333333,
+            "gate_unexpected_contact_mean": 0.9181905440836144,
+            "gate_expected_contact_mean": 0.6942660587494363
+          },
+          {
+            "success": 0.8166666666666667,
+            "success_wall": 0.6333333333333333,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.36666666666666664,
+            "gate_unexpected_contact_mean": 0.8253908677208692,
+            "gate_expected_contact_mean": 0.5823363177081622
+          },
+          {
+            "success": 0.6666666666666666,
+            "success_wall": 0.3333333333333333,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.6,
+            "gate_unexpected_contact_mean": 0.814814063745576,
+            "gate_expected_contact_mean": 0.5857455994220491
+          }
+        ],
+        "mean": {
+          "success": 0.6944444444444443,
+          "success_wall": 0.39999999999999997,
+          "success_no_wall": 0.9888888888888889,
+          "damage_rate_wall": 0.5333333333333333
+        },
+        "std": {
+          "success": 0.09060836905722272,
+          "success_wall": 0.1699673171197595,
+          "success_no_wall": 0.01571348402636772,
+          "damage_rate_wall": 0.11863420280034791
+        }
+      },
+      "sigma+error gate": {
+        "per_seed": [
+          {
+            "success": 0.6666666666666666,
+            "success_wall": 0.3333333333333333,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.6,
+            "gate_unexpected_contact_mean": 0.947382289252869,
+            "gate_expected_contact_mean": 0.2872036432707182
+          },
+          {
+            "success": 0.7333333333333333,
+            "success_wall": 0.4666666666666667,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.43333333333333335,
+            "gate_unexpected_contact_mean": 0.9326899435169013,
+            "gate_expected_contact_mean": 0.5076402359720199
+          },
+          {
+            "success": 0.5666666666666667,
+            "success_wall": 0.13333333333333333,
+            "success_no_wall": 1.0,
+            "damage_rate_wall": 0.7666666666666667,
+            "gate_unexpected_contact_mean": 0.9238456567825629,
+            "gate_expected_contact_mean": 0.5329309872625955
+          }
+        ],
+        "mean": {
+          "success": 0.6555555555555556,
+          "success_wall": 0.3111111111111111,
+          "success_no_wall": 1.0,
+          "damage_rate_wall": 0.6
+        },
+        "std": {
+          "success": 0.0684934889218775,
+          "success_wall": 0.13698697784375502,
+          "success_no_wall": 0.0,
+          "damage_rate_wall": 0.13608276348795434
+        }
+      }
+    }
+  },
+  "wall_time_s": 124.6
+}

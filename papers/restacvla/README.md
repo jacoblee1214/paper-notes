@@ -14,12 +14,14 @@
 | `analysis/table_check.py` | 표 재계산 (1초 미만) |
 | `analysis/gate_toy.py` | σ 게이트 대 예측 오차 게이트, 잔차 대 원시 촉각 toy (numpy 1스레드, 약 30초) |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
+| `analysis/extra_flow_gate_sim.py` | 자체 작성 MuJoCo 벽 충돌 장면에서 흐름 정책과 게이트 4종을 폐루프로 비교 (CPU, 약 2분) |
 
 ## 재실행
 
 ```bash
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py && python3 analysis/gate_toy.py
+python3 analysis/extra_flow_gate_sim.py
 python3 analysis/plot_figures.py
 ```
 

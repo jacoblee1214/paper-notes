@@ -1,0 +1,1497 @@
+{
+  "device": "cpu",
+  "torch": "2.15.0",
+  "numpy": "1.26.4",
+  "threads": 4,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "settings": {
+    "n_train": 6000,
+    "n_test": 1000,
+    "n_visual_tokens": 64,
+    "d_visual_input": 16,
+    "d_model": 32,
+    "heads": 4,
+    "layers": 2,
+    "steps": 1500,
+    "batch": 128,
+    "lr": 0.001,
+    "scales": [
+      1.0,
+      10.0
+    ],
+    "joint_feature_dim": 4,
+    "joints": 16,
+    "fingers": 4
+  },
+  "results": {
+    "flat | scale 1 | none": {
+      "trajectory_mean_over_seeds": [
+        {
+          "step": 0,
+          "test_mse": 0.3637848099072774,
+          "test_mse_std": 0.022502893730027132,
+          "vis_token_norm": 3.3944479624430337,
+          "vis_token_norm_std": 0.006729245050579197,
+          "joint_token_norm": 2.6050212383270264,
+          "joint_token_norm_std": 0.2953893021651504,
+          "attn_mass_joint_tokens": 0.19820445527633032,
+          "attn_mass_joint_tokens_std": 0.0026632547446651476
+        },
+        {
+          "step": 100,
+          "test_mse": 0.02588959348698457,
+          "test_mse_std": 0.0007054000662716667,
+          "vis_token_norm": 3.589694102605184,
+          "vis_token_norm_std": 0.0030285687777453357,
+          "joint_token_norm": 2.6414473056793213,
+          "joint_token_norm_std": 0.2870119217500178,
+          "attn_mass_joint_tokens": 0.19020845492680868,
+          "attn_mass_joint_tokens_std": 0.002332682096068964
+        },
+        {
+          "step": 200,
+          "test_mse": 0.019749289999405544,
+          "test_mse_std": 0.0012841784037868115,
+          "vis_token_norm": 3.614124854405721,
+          "vis_token_norm_std": 0.012203210817615552,
+          "joint_token_norm": 2.7149036725362143,
+          "joint_token_norm_std": 0.28722160617366665,
+          "attn_mass_joint_tokens": 0.19375159591436386,
+          "attn_mass_joint_tokens_std": 0.0021855141098755465
+        },
+        {
+          "step": 300,
+          "test_mse": 0.016348905861377716,
+          "test_mse_std": 0.00018892629187695312,
+          "vis_token_norm": 3.6522382895151773,
+          "vis_token_norm_std": 0.014600404385349139,
+          "joint_token_norm": 2.790107011795044,
+          "joint_token_norm_std": 0.2733275063029899,
+          "attn_mass_joint_tokens": 0.20066565771897635,
+          "attn_mass_joint_tokens_std": 0.0036183584437800382
+        },
+        {
+          "step": 400,
+          "test_mse": 0.013089798080424467,
+          "test_mse_std": 0.00045520038858337837,
+          "vis_token_norm": 3.691917578379313,
+          "vis_token_norm_std": 0.009302483155140907,
+          "joint_token_norm": 2.8247440656026206,
+          "joint_token_norm_std": 0.2581532436181776,
+          "attn_mass_joint_tokens": 0.206431083381176,
+          "attn_mass_joint_tokens_std": 0.007858029758087998
+        },
+        {
+          "step": 500,
+          "test_mse": 0.011749419383704662,
+          "test_mse_std": 0.0002463610239120592,
+          "vis_token_norm": 3.7259395917256675,
+          "vis_token_norm_std": 0.006773131573963097,
+          "joint_token_norm": 2.8363937536875405,
+          "joint_token_norm_std": 0.2538933905126311,
+          "attn_mass_joint_tokens": 0.20960471282402673,
+          "attn_mass_joint_tokens_std": 0.009749951860314535
+        },
+        {
+          "step": 600,
+          "test_mse": 0.010817077631751696,
+          "test_mse_std": 0.00026829899406183706,
+          "vis_token_norm": 3.757044792175293,
+          "vis_token_norm_std": 0.004704153291510305,
+          "joint_token_norm": 2.8495119412740073,
+          "joint_token_norm_std": 0.2521921499659461,
+          "attn_mass_joint_tokens": 0.2165063073237737,
+          "attn_mass_joint_tokens_std": 0.013595399562596835
+        },
+        {
+          "step": 700,
+          "test_mse": 0.009931473682324091,
+          "test_mse_std": 0.0007393190535128432,
+          "vis_token_norm": 3.779874086380005,
+          "vis_token_norm_std": 0.015516793317660647,
+          "joint_token_norm": 2.863102118174235,
+          "joint_token_norm_std": 0.24631626483640331,
+          "attn_mass_joint_tokens": 0.22520547856887183,
+          "attn_mass_joint_tokens_std": 0.020432143141153245
+        },
+        {
+          "step": 800,
+          "test_mse": 0.008149453594038883,
+          "test_mse_std": 0.0009532093540422567,
+          "vis_token_norm": 3.7904694080352783,
+          "vis_token_norm_std": 0.03205212443038821,
+          "joint_token_norm": 2.883541742960612,
+          "joint_token_norm_std": 0.23451746033231574,
+          "attn_mass_joint_tokens": 0.23861927539110184,
+          "attn_mass_joint_tokens_std": 0.028772746035193846
+        },
+        {
+          "step": 900,
+          "test_mse": 0.006992213117579619,
+          "test_mse_std": 0.0015489071379054843,
+          "vis_token_norm": 3.791672945022583,
+          "vis_token_norm_std": 0.05386786146701846,
+          "joint_token_norm": 2.9049973487854004,
+          "joint_token_norm_std": 0.21901310152408465,
+          "attn_mass_joint_tokens": 0.25280102094014484,
+          "attn_mass_joint_tokens_std": 0.037340749795605054
+        },
+        {
+          "step": 1000,
+          "test_mse": 0.00598208955489099,
+          "test_mse_std": 0.0019503493290017515,
+          "vis_token_norm": 3.7855513095855713,
+          "vis_token_norm_std": 0.07760387889106458,
+          "joint_token_norm": 2.928278605143229,
+          "joint_token_norm_std": 0.20922236499014504,
+          "attn_mass_joint_tokens": 0.2669060304760933,
+          "attn_mass_joint_tokens_std": 0.03953278790612584
+        },
+        {
+          "step": 1100,
+          "test_mse": 0.004656714852899313,
+          "test_mse_std": 0.0017838049753141657,
+          "vis_token_norm": 3.77240784962972,
+          "vis_token_norm_std": 0.09548568865628898,
+          "joint_token_norm": 2.9508046309153237,
+          "joint_token_norm_std": 0.2041694688482618,
+          "attn_mass_joint_tokens": 0.28203901400168735,
+          "attn_mass_joint_tokens_std": 0.04024015916398819
+        },
+        {
+          "step": 1200,
+          "test_mse": 0.0037666169616083303,
+          "test_mse_std": 0.0013753483812516875,
+          "vis_token_norm": 3.754746437072754,
+          "vis_token_norm_std": 0.10638839055769427,
+          "joint_token_norm": 2.971301794052124,
+          "joint_token_norm_std": 0.20580808918990615,
+          "attn_mass_joint_tokens": 0.29594044387340546,
+          "attn_mass_joint_tokens_std": 0.039026103386632184
+        },
+        {
+          "step": 1300,
+          "test_mse": 0.0031554325638959804,
+          "test_mse_std": 0.0014527961735140784,
+          "vis_token_norm": 3.7345663706461587,
+          "vis_token_norm_std": 0.11215773943988765,
+          "joint_token_norm": 2.9854397773742676,
+          "joint_token_norm_std": 0.2075003376796457,
+          "attn_mass_joint_tokens": 0.3057202473282814,
+          "attn_mass_joint_tokens_std": 0.03846067417615432
+        },
+        {
+          "step": 1400,
+          "test_mse": 0.0024642059191440544,
+          "test_mse_std": 0.0009655141801174677,
+          "vis_token_norm": 3.7123688062032065,
+          "vis_token_norm_std": 0.11313837643896643,
+          "joint_token_norm": 2.9998939832051597,
+          "joint_token_norm_std": 0.21205608334368478,
+          "attn_mass_joint_tokens": 0.31448841840028763,
+          "attn_mass_joint_tokens_std": 0.03622339075141891
+        },
+        {
+          "step": 1500,
+          "test_mse": 0.002232386381365359,
+          "test_mse_std": 0.0011571887168806052,
+          "vis_token_norm": 3.690880219141642,
+          "vis_token_norm_std": 0.1113712812567524,
+          "joint_token_norm": 3.0126850605010986,
+          "joint_token_norm_std": 0.21683990445303422,
+          "attn_mass_joint_tokens": 0.3210166469216347,
+          "attn_mass_joint_tokens_std": 0.034196301461302314
+        }
+      ],
+      "count_based_share_joint_tokens": 0.2,
+      "final_norm_ratio_joint_over_vis": 0.8162511058681103,
+      "initial_norm_ratio_joint_over_vis": 0.7674359033190642
+    },
+    "flat | scale 1 | layernorm": {
+      "trajectory_mean_over_seeds": [
+        {
+          "step": 0,
+          "test_mse": 0.37079042196273804,
+          "test_mse_std": 0.020466256355951656,
+          "vis_token_norm": 3.3944479624430337,
+          "vis_token_norm_std": 0.006729245050579197,
+          "joint_token_norm": 2.6050212383270264,
+          "joint_token_norm_std": 0.2953893021651504,
+          "attn_mass_joint_tokens": 0.19562345991532007,
+          "attn_mass_joint_tokens_std": 0.007395942083497951
+        },
+        {
+          "step": 100,
+          "test_mse": 0.032608030984799065,
+          "test_mse_std": 0.0005986340536566692,
+          "vis_token_norm": 3.4063072999318442,
+          "vis_token_norm_std": 0.036920363989677116,
+          "joint_token_norm": 2.544410069783529,
+          "joint_token_norm_std": 0.3026481016002492,
+          "attn_mass_joint_tokens": 0.20993153005838394,
+          "attn_mass_joint_tokens_std": 0.012169762355074545
+        },
+        {
+          "step": 200,
+          "test_mse": 0.01719314604997635,
+          "test_mse_std": 0.00034561837133699973,
+          "vis_token_norm": 3.3502036730448403,
+          "vis_token_norm_std": 0.052660337603664696,
+          "joint_token_norm": 2.5264511108398438,
+          "joint_token_norm_std": 0.30519347859945717,
+          "attn_mass_joint_tokens": 0.22141965727011362,
+          "attn_mass_joint_tokens_std": 0.019557120487321576
+        },
+        {
+          "step": 300,
+          "test_mse": 0.011256257072091103,
+          "test_mse_std": 0.0008615116781797189,
+          "vis_token_norm": 3.3210271199544272,
+          "vis_token_norm_std": 0.056419994810570785,
+          "joint_token_norm": 2.5183920860290527,
+          "joint_token_norm_std": 0.30092536155418703,
+          "attn_mass_joint_tokens": 0.24486861129601797,
+          "attn_mass_joint_tokens_std": 0.04006281733157738
+        },
+        {
+          "step": 400,
+          "test_mse": 0.007942563233276209,
+          "test_mse_std": 0.0019330597946631222,
+          "vis_token_norm": 3.2957871754964194,
+          "vis_token_norm_std": 0.05833801982669826,
+          "joint_token_norm": 2.5118541717529297,
+          "joint_token_norm_std": 0.2954782568441251,
+          "attn_mass_joint_tokens": 0.27589625120162964,
+          "attn_mass_joint_tokens_std": 0.05844003871098289
+        },
+        {
+          "step": 500,
+          "test_mse": 0.005583679769188166,
+          "test_mse_std": 0.0021259643717583105,
+          "vis_token_norm": 3.2695158322652182,
+          "vis_token_norm_std": 0.05860721111230875,
+          "joint_token_norm": 2.5055956840515137,
+          "joint_token_norm_std": 0.2908120531266067,
+          "attn_mass_joint_tokens": 0.30265846848487854,
+          "attn_mass_joint_tokens_std": 0.06939392073419781
+        },
+        {
+          "step": 600,
+          "test_mse": 0.003919908970904847,
+          "test_mse_std": 0.0014052653077398934,
+          "vis_token_norm": 3.24185848236084,
+          "vis_token_norm_std": 0.05794785910087675,
+          "joint_token_norm": 2.5013842582702637,
+          "joint_token_norm_std": 0.28724648601101327,
+          "attn_mass_joint_tokens": 0.32565969477097195,
+          "attn_mass_joint_tokens_std": 0.07153290766594522
+        },
+        {
+          "step": 700,
+          "test_mse": 0.0028298969070116677,
+          "test_mse_std": 0.0006710326096316234,
+          "vis_token_norm": 3.2160938580830893,
+          "vis_token_norm_std": 0.05232899477972105,
+          "joint_token_norm": 2.4997491041819253,
+          "joint_token_norm_std": 0.2855461394597964,
+          "attn_mass_joint_tokens": 0.3472316587964694,
+          "attn_mass_joint_tokens_std": 0.06882338829580055
+        },
+        {
+          "step": 800,
+          "test_mse": 0.00184112760083129,
+          "test_mse_std": 0.00058687728208676,
+          "vis_token_norm": 3.194023370742798,
+          "vis_token_norm_std": 0.047273748836388116,
+          "joint_token_norm": 2.499137798945109,
+          "joint_token_norm_std": 0.284286319599751,
+          "attn_mass_joint_tokens": 0.3616431802511215,
+          "attn_mass_joint_tokens_std": 0.06690314394100154
+        },
+        {
+          "step": 900,
+          "test_mse": 0.0016014161131655176,
+          "test_mse_std": 0.00015836742884076696,
+          "vis_token_norm": 3.1751057306925454,
+          "vis_token_norm_std": 0.042620810237993204,
+          "joint_token_norm": 2.5000313917795816,
+          "joint_token_norm_std": 0.2839023857989595,
+          "attn_mass_joint_tokens": 0.37263987958431244,
+          "attn_mass_joint_tokens_std": 0.06591057835912852
+        },
+        {
+          "step": 1000,
+          "test_mse": 0.0012705633804822962,
+          "test_mse_std": 0.00015752647689616138,
+          "vis_token_norm": 3.1588566303253174,
+          "vis_token_norm_std": 0.039370435889727946,
+          "joint_token_norm": 2.501500368118286,
+          "joint_token_norm_std": 0.2837427061470779,
+          "attn_mass_joint_tokens": 0.38327711323897046,
+          "attn_mass_joint_tokens_std": 0.06511741168683272
+        },
+        {
+          "step": 1100,
+          "test_mse": 0.0012585567116426926,
+          "test_mse_std": 0.0002306859527177696,
+          "vis_token_norm": 3.1453022162119546,
+          "vis_token_norm_std": 0.03708102985265806,
+          "joint_token_norm": 2.5029637813568115,
+          "joint_token_norm_std": 0.2836181610946485,
+          "attn_mass_joint_tokens": 0.3894059310356776,
+          "attn_mass_joint_tokens_std": 0.06462542660938833
+        },
+        {
+          "step": 1200,
+          "test_mse": 0.0010150682840806742,
+          "test_mse_std": 0.0002101203767792014,
+          "vis_token_norm": 3.1331507364908853,
+          "vis_token_norm_std": 0.03531242069559963,
+          "joint_token_norm": 2.5040067036946616,
+          "joint_token_norm_std": 0.28342063591381483,
+          "attn_mass_joint_tokens": 0.3948350598414739,
+          "attn_mass_joint_tokens_std": 0.06452271436784911
+        },
+        {
+          "step": 1300,
+          "test_mse": 0.00111016834853217,
+          "test_mse_std": 0.00017006137338326392,
+          "vis_token_norm": 3.1219441095987954,
+          "vis_token_norm_std": 0.03290146727839031,
+          "joint_token_norm": 2.505451202392578,
+          "joint_token_norm_std": 0.283536558908947,
+          "attn_mass_joint_tokens": 0.3998079796632131,
+          "attn_mass_joint_tokens_std": 0.06310986482775123
+        },
+        {
+          "step": 1400,
+          "test_mse": 0.0008874122674266497,
+          "test_mse_std": 1.7199264969021312e-05,
+          "vis_token_norm": 3.1121172110239663,
+          "vis_token_norm_std": 0.030927283946356694,
+          "joint_token_norm": 2.506738821665446,
+          "joint_token_norm_std": 0.2835367479674587,
+          "attn_mass_joint_tokens": 0.4042432854572932,
+          "attn_mass_joint_tokens_std": 0.06264745520497325
+        },
+        {
+          "step": 1500,
+          "test_mse": 0.0008642262158294519,
+          "test_mse_std": 0.000209499051136251,
+          "vis_token_norm": 3.1028010845184326,
+          "vis_token_norm_std": 0.028658243771543843,
+          "joint_token_norm": 2.507408618927002,
+          "joint_token_norm_std": 0.2837144776921318,
+          "attn_mass_joint_tokens": 0.4077375531196594,
+          "attn_mass_joint_tokens_std": 0.0611460397461832
+        }
+      ],
+      "count_based_share_joint_tokens": 0.2,
+      "final_norm_ratio_joint_over_vis": 0.8081113002821326,
+      "initial_norm_ratio_joint_over_vis": 0.7674359033190642
+    },
+    "flat | scale 10 | none": {
+      "trajectory_mean_over_seeds": [
+        {
+          "step": 0,
+          "test_mse": 0.45300692319869995,
+          "test_mse_std": 0.12076114956950773,
+          "vis_token_norm": 3.3944479624430337,
+          "vis_token_norm_std": 0.006729245050579197,
+          "joint_token_norm": 17.940200169881184,
+          "joint_token_norm_std": 1.3391660758465291,
+          "attn_mass_joint_tokens": 0.2694818352659543,
+          "attn_mass_joint_tokens_std": 0.02069529677977047
+        },
+        {
+          "step": 100,
+          "test_mse": 0.018391180783510208,
+          "test_mse_std": 0.0012164161018412157,
+          "vis_token_norm": 3.6242692470550537,
+          "vis_token_norm_std": 0.015373921789211152,
+          "joint_token_norm": 17.972111384073894,
+          "joint_token_norm_std": 1.3718321188533398,
+          "attn_mass_joint_tokens": 0.2646497040987015,
+          "attn_mass_joint_tokens_std": 0.019073578370866092
+        },
+        {
+          "step": 200,
+          "test_mse": 0.014810813590884209,
+          "test_mse_std": 0.00013590325900883637,
+          "vis_token_norm": 3.633035580317179,
+          "vis_token_norm_std": 0.012308937779347455,
+          "joint_token_norm": 17.97589874267578,
+          "joint_token_norm_std": 1.3580633402137299,
+          "attn_mass_joint_tokens": 0.26338312526543933,
+          "attn_mass_joint_tokens_std": 0.024301966540438487
+        },
+        {
+          "step": 300,
+          "test_mse": 0.013629330011705557,
+          "test_mse_std": 0.000523255838334056,
+          "vis_token_norm": 3.6559513409932456,
+          "vis_token_norm_std": 0.011336692669012344,
+          "joint_token_norm": 17.984346389770508,
+          "joint_token_norm_std": 1.3318729973147545,
+          "attn_mass_joint_tokens": 0.2643219456076622,
+          "attn_mass_joint_tokens_std": 0.02687500154338821
+        },
+        {
+          "step": 400,
+          "test_mse": 0.013062921663125357,
+          "test_mse_std": 0.0020060153986009824,
+          "vis_token_norm": 3.6853439807891846,
+          "vis_token_norm_std": 0.01835068249760439,
+          "joint_token_norm": 17.991635004679363,
+          "joint_token_norm_std": 1.3182285943059227,
+          "attn_mass_joint_tokens": 0.26699531078338623,
+          "attn_mass_joint_tokens_std": 0.029069734138159393
+        },
+        {
+          "step": 500,
+          "test_mse": 0.011502921270827452,
+          "test_mse_std": 0.002302849547719441,
+          "vis_token_norm": 3.7021288871765137,
+          "vis_token_norm_std": 0.02498865889383627,
+          "joint_token_norm": 17.99311065673828,
+          "joint_token_norm_std": 1.302885814247338,
+          "attn_mass_joint_tokens": 0.27157675723234814,
+          "attn_mass_joint_tokens_std": 0.03188913639289599
+        },
+        {
+          "step": 600,
+          "test_mse": 0.008396324080725511,
+          "test_mse_std": 0.0007457189013021159,
+          "vis_token_norm": 3.709982951482137,
+          "vis_token_norm_std": 0.035162154551890486,
+          "joint_token_norm": 17.994045893351238,
+          "joint_token_norm_std": 1.2991936326759905,
+          "attn_mass_joint_tokens": 0.27775151282548904,
+          "attn_mass_joint_tokens_std": 0.0321061071783701
+        },
+        {
+          "step": 700,
+          "test_mse": 0.0072603013056019945,
+          "test_mse_std": 0.000457676519879702,
+          "vis_token_norm": 3.7111244996388755,
+          "vis_token_norm_std": 0.03562721160070081,
+          "joint_token_norm": 17.982524236043293,
+          "joint_token_norm_std": 1.3145035234053895,
+          "attn_mass_joint_tokens": 0.2805984442432721,
+          "attn_mass_joint_tokens_std": 0.03298042718187553
+        },
+        {
+          "step": 800,
+          "test_mse": 0.006446453897903363,
+          "test_mse_std": 0.000684243554793578,
+          "vis_token_norm": 3.706516663233439,
+          "vis_token_norm_std": 0.03406206229608594,
+          "joint_token_norm": 17.981713612874348,
+          "joint_token_norm_std": 1.3108988803563577,
+          "attn_mass_joint_tokens": 0.28621777643760044,
+          "attn_mass_joint_tokens_std": 0.03528936145368987
+        },
+        {
+          "step": 900,
+          "test_mse": 0.005263277484724919,
+          "test_mse_std": 0.0004715410006139017,
+          "vis_token_norm": 3.6970834732055664,
+          "vis_token_norm_std": 0.029342553562817772,
+          "joint_token_norm": 17.976727803548176,
+          "joint_token_norm_std": 1.3088928161638202,
+          "attn_mass_joint_tokens": 0.29046118756135303,
+          "attn_mass_joint_tokens_std": 0.03335573350332519
+        },
+        {
+          "step": 1000,
+          "test_mse": 0.0038340960163623095,
+          "test_mse_std": 0.0005268528434649472,
+          "vis_token_norm": 3.6799492835998535,
+          "vis_token_norm_std": 0.02765549883044604,
+          "joint_token_norm": 17.964731216430664,
+          "joint_token_norm_std": 1.311909786661767,
+          "attn_mass_joint_tokens": 0.29583026717106503,
+          "attn_mass_joint_tokens_std": 0.028650945540545765
+        },
+        {
+          "step": 1100,
+          "test_mse": 0.002945295457417766,
+          "test_mse_std": 0.00036667434839791674,
+          "vis_token_norm": 3.655355215072632,
+          "vis_token_norm_std": 0.031178507770066838,
+          "joint_token_norm": 17.95127550760905,
+          "joint_token_norm_std": 1.3010322110479642,
+          "attn_mass_joint_tokens": 0.30083926518758136,
+          "attn_mass_joint_tokens_std": 0.029435549802058425
+        },
+        {
+          "step": 1200,
+          "test_mse": 0.002657319186255336,
+          "test_mse_std": 0.0003745649959365752,
+          "vis_token_norm": 3.629811922709147,
+          "vis_token_norm_std": 0.03236088222468039,
+          "joint_token_norm": 17.941953659057617,
+          "joint_token_norm_std": 1.293262685567125,
+          "attn_mass_joint_tokens": 0.3027280519406001,
+          "attn_mass_joint_tokens_std": 0.029867289057643975
+        },
+        {
+          "step": 1300,
+          "test_mse": 0.0017374185845255852,
+          "test_mse_std": 1.4450644185650524e-05,
+          "vis_token_norm": 3.6075008710225425,
+          "vis_token_norm_std": 0.0342131983936852,
+          "joint_token_norm": 17.929793039957683,
+          "joint_token_norm_std": 1.2901045795277883,
+          "attn_mass_joint_tokens": 0.30305972695350647,
+          "attn_mass_joint_tokens_std": 0.030119879687709777
+        },
+        {
+          "step": 1400,
+          "test_mse": 0.0015855667879804969,
+          "test_mse_std": 0.0002715953800709179,
+          "vis_token_norm": 3.588256041208903,
+          "vis_token_norm_std": 0.034810770196361494,
+          "joint_token_norm": 17.91642125447591,
+          "joint_token_norm_std": 1.2867028335527417,
+          "attn_mass_joint_tokens": 0.30273622274398804,
+          "attn_mass_joint_tokens_std": 0.030188388406140434
+        },
+        {
+          "step": 1500,
+          "test_mse": 0.001320954179391265,
+          "test_mse_std": 0.00018209131576159287,
+          "vis_token_norm": 3.5720601876576743,
+          "vis_token_norm_std": 0.03489917451108301,
+          "joint_token_norm": 17.90708859761556,
+          "joint_token_norm_std": 1.2819048121483927,
+          "attn_mass_joint_tokens": 0.3030811871091525,
+          "attn_mass_joint_tokens_std": 0.0307596670190401
+        }
+      ],
+      "count_based_share_joint_tokens": 0.2,
+      "final_norm_ratio_joint_over_vis": 5.013098228156639,
+      "initial_norm_ratio_joint_over_vis": 5.285159875295116
+    },
+    "flat | scale 10 | layernorm": {
+      "trajectory_mean_over_seeds": [
+        {
+          "step": 0,
+          "test_mse": 0.42780471841494244,
+          "test_mse_std": 0.031393511555097744,
+          "vis_token_norm": 3.3944479624430337,
+          "vis_token_norm_std": 0.006729245050579197,
+          "joint_token_norm": 17.940200169881184,
+          "joint_token_norm_std": 1.3391660758465291,
+          "attn_mass_joint_tokens": 0.19730294247468314,
+          "attn_mass_joint_tokens_std": 0.007769880622360978
+        },
+        {
+          "step": 100,
+          "test_mse": 0.032342630748947464,
+          "test_mse_std": 0.0019211912580875685,
+          "vis_token_norm": 3.411752541859945,
+          "vis_token_norm_std": 0.02157443957038238,
+          "joint_token_norm": 18.02014096577962,
+          "joint_token_norm_std": 1.1839469207414146,
+          "attn_mass_joint_tokens": 0.20773373047510782,
+          "attn_mass_joint_tokens_std": 0.0035921534983901185
+        },
+        {
+          "step": 200,
+          "test_mse": 0.018703270082672436,
+          "test_mse_std": 0.0008937694161560339,
+          "vis_token_norm": 3.365727663040161,
+          "vis_token_norm_std": 0.02873192012789852,
+          "joint_token_norm": 18.105873107910156,
+          "joint_token_norm_std": 1.1378897602107219,
+          "attn_mass_joint_tokens": 0.23438249031702676,
+          "attn_mass_joint_tokens_std": 0.0025263447556513365
+        },
+        {
+          "step": 300,
+          "test_mse": 0.014003723549346129,
+          "test_mse_std": 0.00039816547259415285,
+          "vis_token_norm": 3.346349557240804,
+          "vis_token_norm_std": 0.030886753388297387,
+          "joint_token_norm": 18.11143175760905,
+          "joint_token_norm_std": 1.1066810487870395,
+          "attn_mass_joint_tokens": 0.24028552571932474,
+          "attn_mass_joint_tokens_std": 0.004791012830196246
+        },
+        {
+          "step": 400,
+          "test_mse": 0.011555467111368975,
+          "test_mse_std": 0.0006285514560666009,
+          "vis_token_norm": 3.3405535221099854,
+          "vis_token_norm_std": 0.036643133715326834,
+          "joint_token_norm": 18.10372797648112,
+          "joint_token_norm_std": 1.0904219739881083,
+          "attn_mass_joint_tokens": 0.24056597550710043,
+          "attn_mass_joint_tokens_std": 0.007929753442002689
+        },
+        {
+          "step": 500,
+          "test_mse": 0.010290663378934065,
+          "test_mse_std": 0.0005972077058817436,
+          "vis_token_norm": 3.336291790008545,
+          "vis_token_norm_std": 0.034812310298917425,
+          "joint_token_norm": 18.10113525390625,
+          "joint_token_norm_std": 1.0875527580210627,
+          "attn_mass_joint_tokens": 0.24079755942026773,
+          "attn_mass_joint_tokens_std": 0.01156060445310579
+        },
+        {
+          "step": 600,
+          "test_mse": 0.009608551549414793,
+          "test_mse_std": 0.00026196746614790055,
+          "vis_token_norm": 3.3327670097351074,
+          "vis_token_norm_std": 0.03528833128381855,
+          "joint_token_norm": 18.104525883992512,
+          "joint_token_norm_std": 1.0835097472534083,
+          "attn_mass_joint_tokens": 0.24208498746156693,
+          "attn_mass_joint_tokens_std": 0.015069038899804897
+        },
+        {
+          "step": 700,
+          "test_mse": 0.008811979865034422,
+          "test_mse_std": 0.00019111331667190007,
+          "vis_token_norm": 3.3295346895853677,
+          "vis_token_norm_std": 0.038977702841842425,
+          "joint_token_norm": 18.107536951700848,
+          "joint_token_norm_std": 1.0780732242867708,
+          "attn_mass_joint_tokens": 0.2405493954817454,
+          "attn_mass_joint_tokens_std": 0.018449088438081965
+        },
+        {
+          "step": 800,
+          "test_mse": 0.008015733677893877,
+          "test_mse_std": 0.0003508307169384816,
+          "vis_token_norm": 3.323143243789673,
+          "vis_token_norm_std": 0.04167404747119304,
+          "joint_token_norm": 18.108038584391277,
+          "joint_token_norm_std": 1.0797223781505927,
+          "attn_mass_joint_tokens": 0.24355835964282355,
+          "attn_mass_joint_tokens_std": 0.01918527698691874
+        },
+        {
+          "step": 900,
+          "test_mse": 0.007597924675792456,
+          "test_mse_std": 0.0002369526431438849,
+          "vis_token_norm": 3.314434051513672,
+          "vis_token_norm_std": 0.04324222095275812,
+          "joint_token_norm": 18.105355580647785,
+          "joint_token_norm_std": 1.0869150405286545,
+          "attn_mass_joint_tokens": 0.2468191534280777,
+          "attn_mass_joint_tokens_std": 0.022739913234601773
+        },
+        {
+          "step": 1000,
+          "test_mse": 0.00723029285048445,
+          "test_mse_std": 0.0001146085284796894,
+          "vis_token_norm": 3.3076939582824707,
+          "vis_token_norm_std": 0.04574037994279652,
+          "joint_token_norm": 18.095309575398762,
+          "joint_token_norm_std": 1.0977548673899122,
+          "attn_mass_joint_tokens": 0.2497290919224421,
+          "attn_mass_joint_tokens_std": 0.02390894603722676
+        },
+        {
+          "step": 1100,
+          "test_mse": 0.00676496047526598,
+          "test_mse_std": 0.000234966654893117,
+          "vis_token_norm": 3.3017146587371826,
+          "vis_token_norm_std": 0.04571654234206888,
+          "joint_token_norm": 18.09078089396159,
+          "joint_token_norm_std": 1.1069995310001368,
+          "attn_mass_joint_tokens": 0.2536883130669594,
+          "attn_mass_joint_tokens_std": 0.026751693573496108
+        },
+        {
+          "step": 1200,
+          "test_mse": 0.006338024977594614,
+          "test_mse_std": 0.00020320880331778084,
+          "vis_token_norm": 3.2917267481486,
+          "vis_token_norm_std": 0.046360777437464785,
+          "joint_token_norm": 18.076321283976238,
+          "joint_token_norm_std": 1.1284585446511486,
+          "attn_mass_joint_tokens": 0.2603476867079735,
+          "attn_mass_joint_tokens_std": 0.029459363873995247
+        },
+        {
+          "step": 1300,
+          "test_mse": 0.006015214913835128,
+          "test_mse_std": 0.0003793428120003825,
+          "vis_token_norm": 3.2833878993988037,
+          "vis_token_norm_std": 0.04192666573760572,
+          "joint_token_norm": 18.060937881469727,
+          "joint_token_norm_std": 1.1462943533753551,
+          "attn_mass_joint_tokens": 0.267042135198911,
+          "attn_mass_joint_tokens_std": 0.03557814691272542
+        },
+        {
+          "step": 1400,
+          "test_mse": 0.005777702511598666,
+          "test_mse_std": 0.00034226694786401545,
+          "vis_token_norm": 3.275266726811727,
+          "vis_token_norm_std": 0.04047193661890895,
+          "joint_token_norm": 18.031147638956707,
+          "joint_token_norm_std": 1.168621170132913,
+          "attn_mass_joint_tokens": 0.2736433297395706,
+          "attn_mass_joint_tokens_std": 0.03836063828681593
+        },
+        {
+          "step": 1500,
+          "test_mse": 0.005636717348049085,
+          "test_mse_std": 0.0007756184276726244,
+          "vis_token_norm": 3.2645848592122397,
+          "vis_token_norm_std": 0.04051547958307995,
+          "joint_token_norm": 17.997702916463215,
+          "joint_token_norm_std": 1.1934345828455415,
+          "attn_mass_joint_tokens": 0.2801790038744609,
+          "attn_mass_joint_tokens_std": 0.040654430153743114
+        }
+      ],
+      "count_based_share_joint_tokens": 0.2,
+      "final_norm_ratio_joint_over_vis": 5.513014270612696,
+      "initial_norm_ratio_joint_over_vis": 5.285159875295116
+    },
+    "finger | scale 1 | none": {
+      "trajectory_mean_over_seeds": [
+        {
+          "step": 0,
+          "test_mse": 0.3942319651444753,
+          "test_mse_std": 0.043640596134184875,
+          "vis_token_norm": 3.3944479624430337,
+          "vis_token_norm_std": 0.006729245050579197,
+          "joint_token_norm": 2.4450532595316568,
+          "joint_token_norm_std": 0.3052116065961714,
+          "attn_mass_joint_tokens": 0.05807711866994699,
+          "attn_mass_joint_tokens_std": 0.0004990735995361917
+        },
+        {
+          "step": 100,
+          "test_mse": 0.026970351735750835,
+          "test_mse_std": 0.0005615291361459416,
+          "vis_token_norm": 3.6046318213144937,
+          "vis_token_norm_std": 0.006164183827184743,
+          "joint_token_norm": 2.4529507954915366,
+          "joint_token_norm_std": 0.30575514579472085,
+          "attn_mass_joint_tokens": 0.05566622503101826,
+          "attn_mass_joint_tokens_std": 0.0009263929889868407
+        },
+        {
+          "step": 200,
+          "test_mse": 0.02217459740738074,
+          "test_mse_std": 0.0006021907666072645,
+          "vis_token_norm": 3.657212018966675,
+          "vis_token_norm_std": 0.01449778149069738,
+          "joint_token_norm": 2.469682455062866,
+          "joint_token_norm_std": 0.31043171989746193,
+          "attn_mass_joint_tokens": 0.05364596967895826,
+          "attn_mass_joint_tokens_std": 0.0015530036850771656
+        },
+        {
+          "step": 300,
+          "test_mse": 0.018865666041771572,
+          "test_mse_std": 8.676692022766725e-05,
+          "vis_token_norm": 3.7084941069285073,
+          "vis_token_norm_std": 0.01730674922660855,
+          "joint_token_norm": 2.508795738220215,
+          "joint_token_norm_std": 0.320493947274206,
+          "attn_mass_joint_tokens": 0.053021879866719246,
+          "attn_mass_joint_tokens_std": 0.0026297027611290372
+        },
+        {
+          "step": 400,
+          "test_mse": 0.016095327213406563,
+          "test_mse_std": 0.00019355451238705653,
+          "vis_token_norm": 3.750448783238729,
+          "vis_token_norm_std": 0.017231876126367788,
+          "joint_token_norm": 2.58447265625,
+          "joint_token_norm_std": 0.33731149459987225,
+          "attn_mass_joint_tokens": 0.05422009093066057,
+          "attn_mass_joint_tokens_std": 0.003607210847111818
+        },
+        {
+          "step": 500,
+          "test_mse": 0.014536617944637934,
+          "test_mse_std": 0.0005277024953295786,
+          "vis_token_norm": 3.77390193939209,
+          "vis_token_norm_std": 0.021089997891112232,
+          "joint_token_norm": 2.7147320906321206,
+          "joint_token_norm_std": 0.35064617066254583,
+          "attn_mass_joint_tokens": 0.059910781060655914,
+          "attn_mass_joint_tokens_std": 0.006597204124706895
+        },
+        {
+          "step": 600,
+          "test_mse": 0.011671571992337704,
+          "test_mse_std": 0.000947007557920839,
+          "vis_token_norm": 3.7921883265177407,
+          "vis_token_norm_std": 0.016349046008119,
+          "joint_token_norm": 2.857607920964559,
+          "joint_token_norm_std": 0.30826985598976736,
+          "attn_mass_joint_tokens": 0.07606155735750993,
+          "attn_mass_joint_tokens_std": 0.01760128420143234
+        },
+        {
+          "step": 700,
+          "test_mse": 0.010269917858143648,
+          "test_mse_std": 0.0002720200166480558,
+          "vis_token_norm": 3.8095449606577554,
+          "vis_token_norm_std": 0.014267939344319585,
+          "joint_token_norm": 2.935417572657267,
+          "joint_token_norm_std": 0.31509495698997175,
+          "attn_mass_joint_tokens": 0.08559094555675983,
+          "attn_mass_joint_tokens_std": 0.024074383149493256
+        },
+        {
+          "step": 800,
+          "test_mse": 0.009208187460899353,
+          "test_mse_std": 0.0003994471756458543,
+          "vis_token_norm": 3.826707124710083,
+          "vis_token_norm_std": 0.015384176813256364,
+          "joint_token_norm": 3.0020509560902915,
+          "joint_token_norm_std": 0.3340517810477783,
+          "attn_mass_joint_tokens": 0.0932117619862159,
+          "attn_mass_joint_tokens_std": 0.02457343507254899
+        },
+        {
+          "step": 900,
+          "test_mse": 0.007919247727841139,
+          "test_mse_std": 0.00025049302462776046,
+          "vis_token_norm": 3.841428756713867,
+          "vis_token_norm_std": 0.019897561603883396,
+          "joint_token_norm": 3.0647085507710776,
+          "joint_token_norm_std": 0.35032527988294787,
+          "attn_mass_joint_tokens": 0.10281343385577202,
+          "attn_mass_joint_tokens_std": 0.025486875694206972
+        },
+        {
+          "step": 1000,
+          "test_mse": 0.0070755681954324245,
+          "test_mse_std": 0.0005938950338287525,
+          "vis_token_norm": 3.8520095348358154,
+          "vis_token_norm_std": 0.02702683447452004,
+          "joint_token_norm": 3.1566343307495117,
+          "joint_token_norm_std": 0.3636246650785016,
+          "attn_mass_joint_tokens": 0.11938027665019035,
+          "attn_mass_joint_tokens_std": 0.030891341686684996
+        },
+        {
+          "step": 1100,
+          "test_mse": 0.005799788981676102,
+          "test_mse_std": 3.903467664752949e-05,
+          "vis_token_norm": 3.8516921202341714,
+          "vis_token_norm_std": 0.02872743548557604,
+          "joint_token_norm": 3.242771546045939,
+          "joint_token_norm_std": 0.35335477647732266,
+          "attn_mass_joint_tokens": 0.1375592847665151,
+          "attn_mass_joint_tokens_std": 0.038686114616863373
+        },
+        {
+          "step": 1200,
+          "test_mse": 0.004962514465053876,
+          "test_mse_std": 0.00021594880462965974,
+          "vis_token_norm": 3.849448283513387,
+          "vis_token_norm_std": 0.02912622914848208,
+          "joint_token_norm": 3.3011550903320312,
+          "joint_token_norm_std": 0.3526109359007192,
+          "attn_mass_joint_tokens": 0.15190681318442026,
+          "attn_mass_joint_tokens_std": 0.03962413443187604
+        },
+        {
+          "step": 1300,
+          "test_mse": 0.004293528385460377,
+          "test_mse_std": 0.0003924077380724112,
+          "vis_token_norm": 3.8446351687113443,
+          "vis_token_norm_std": 0.027014702047773165,
+          "joint_token_norm": 3.34739089012146,
+          "joint_token_norm_std": 0.35426153818058576,
+          "attn_mass_joint_tokens": 0.16331737985213599,
+          "attn_mass_joint_tokens_std": 0.039476858209713105
+        },
+        {
+          "step": 1400,
+          "test_mse": 0.003630109674607714,
+          "test_mse_std": 0.00040981937884614083,
+          "vis_token_norm": 3.8363188107808432,
+          "vis_token_norm_std": 0.02496516405218481,
+          "joint_token_norm": 3.3853256702423096,
+          "joint_token_norm_std": 0.3592294667672258,
+          "attn_mass_joint_tokens": 0.1732025941212972,
+          "attn_mass_joint_tokens_std": 0.03862722493257399
+        },
+        {
+          "step": 1500,
+          "test_mse": 0.003264270800476273,
+          "test_mse_std": 0.0005091793143944195,
+          "vis_token_norm": 3.8254780769348145,
+          "vis_token_norm_std": 0.02423198908593458,
+          "joint_token_norm": 3.4174935022989907,
+          "joint_token_norm_std": 0.3746980672229581,
+          "attn_mass_joint_tokens": 0.1810611387093862,
+          "attn_mass_joint_tokens_std": 0.03633303390705536
+        }
+      ],
+      "count_based_share_joint_tokens": 0.058823529411764705,
+      "final_norm_ratio_joint_over_vis": 0.8933506959311283,
+      "initial_norm_ratio_joint_over_vis": 0.7203095426956896
+    },
+    "finger | scale 1 | layernorm": {
+      "trajectory_mean_over_seeds": [
+        {
+          "step": 0,
+          "test_mse": 0.39874465266863507,
+          "test_mse_std": 0.05592139111583071,
+          "vis_token_norm": 3.3944479624430337,
+          "vis_token_norm_std": 0.006729245050579197,
+          "joint_token_norm": 2.4450532595316568,
+          "joint_token_norm_std": 0.3052116065961714,
+          "attn_mass_joint_tokens": 0.05747108471890291,
+          "attn_mass_joint_tokens_std": 0.0007135582997556655
+        },
+        {
+          "step": 100,
+          "test_mse": 0.03495949258406957,
+          "test_mse_std": 0.0005463065708337408,
+          "vis_token_norm": 3.4114601612091064,
+          "vis_token_norm_std": 0.02128253314218429,
+          "joint_token_norm": 2.283963680267334,
+          "joint_token_norm_std": 0.26724433939537695,
+          "attn_mass_joint_tokens": 0.06014844526847204,
+          "attn_mass_joint_tokens_std": 0.0036617598221480295
+        },
+        {
+          "step": 200,
+          "test_mse": 0.0184409711509943,
+          "test_mse_std": 0.0008214999999885467,
+          "vis_token_norm": 3.3462839921315513,
+          "vis_token_norm_std": 0.01664890748233673,
+          "joint_token_norm": 2.1726702451705933,
+          "joint_token_norm_std": 0.25199335792516836,
+          "attn_mass_joint_tokens": 0.08045925448338191,
+          "attn_mass_joint_tokens_std": 0.008401000025249003
+        },
+        {
+          "step": 300,
+          "test_mse": 0.012978641937176386,
+          "test_mse_std": 0.0005479432907106948,
+          "vis_token_norm": 3.315891901652018,
+          "vis_token_norm_std": 0.010209467043284647,
+          "joint_token_norm": 2.185850143432617,
+          "joint_token_norm_std": 0.25084306431641096,
+          "attn_mass_joint_tokens": 0.10729527908066909,
+          "attn_mass_joint_tokens_std": 0.009998940898576003
+        },
+        {
+          "step": 400,
+          "test_mse": 0.00964153278619051,
+          "test_mse_std": 0.0009154430108855402,
+          "vis_token_norm": 3.2853885491689048,
+          "vis_token_norm_std": 0.008021908597715564,
+          "joint_token_norm": 2.191868543624878,
+          "joint_token_norm_std": 0.254415605158803,
+          "attn_mass_joint_tokens": 0.14867695048451424,
+          "attn_mass_joint_tokens_std": 0.010585940553610899
+        },
+        {
+          "step": 500,
+          "test_mse": 0.006304554486026366,
+          "test_mse_std": 0.0008361235093877031,
+          "vis_token_norm": 3.2476208209991455,
+          "vis_token_norm_std": 0.0038506419598468406,
+          "joint_token_norm": 2.2042160431543985,
+          "joint_token_norm_std": 0.2628569650799933,
+          "attn_mass_joint_tokens": 0.20116968701283136,
+          "attn_mass_joint_tokens_std": 0.012837441211904822
+        },
+        {
+          "step": 600,
+          "test_mse": 0.00428902474232018,
+          "test_mse_std": 0.0004649253023293029,
+          "vis_token_norm": 3.2143876552581787,
+          "vis_token_norm_std": 0.006594624548570515,
+          "joint_token_norm": 2.220688819885254,
+          "joint_token_norm_std": 0.2677290907224948,
+          "attn_mass_joint_tokens": 0.24344663818677267,
+          "attn_mass_joint_tokens_std": 0.02967731274534441
+        },
+        {
+          "step": 700,
+          "test_mse": 0.0036250068806111813,
+          "test_mse_std": 0.0004454971628203919,
+          "vis_token_norm": 3.185689131418864,
+          "vis_token_norm_std": 0.008389951558624967,
+          "joint_token_norm": 2.2322367429733276,
+          "joint_token_norm_std": 0.26864680575988503,
+          "attn_mass_joint_tokens": 0.2745702229440212,
+          "attn_mass_joint_tokens_std": 0.03873458585702793
+        },
+        {
+          "step": 800,
+          "test_mse": 0.003085584690173467,
+          "test_mse_std": 0.0001363551948940327,
+          "vis_token_norm": 3.1613972981770835,
+          "vis_token_norm_std": 0.011188665642506057,
+          "joint_token_norm": 2.239581068356832,
+          "joint_token_norm_std": 0.2699332937452973,
+          "attn_mass_joint_tokens": 0.29467840989430744,
+          "attn_mass_joint_tokens_std": 0.0474711878082337
+        },
+        {
+          "step": 900,
+          "test_mse": 0.0027617409359663725,
+          "test_mse_std": 0.000434213587149375,
+          "vis_token_norm": 3.1413923104604087,
+          "vis_token_norm_std": 0.011796928923845304,
+          "joint_token_norm": 2.2443102598190308,
+          "joint_token_norm_std": 0.2692905721976727,
+          "attn_mass_joint_tokens": 0.30610306685169536,
+          "attn_mass_joint_tokens_std": 0.050187824786349984
+        },
+        {
+          "step": 1000,
+          "test_mse": 0.002803920768201351,
+          "test_mse_std": 0.0001369815631584481,
+          "vis_token_norm": 3.1238606770833335,
+          "vis_token_norm_std": 0.014286393238939106,
+          "joint_token_norm": 2.2481582959493003,
+          "joint_token_norm_std": 0.26744332113260366,
+          "attn_mass_joint_tokens": 0.3159250219662984,
+          "attn_mass_joint_tokens_std": 0.05455047983396608
+        },
+        {
+          "step": 1100,
+          "test_mse": 0.0023237550631165504,
+          "test_mse_std": 0.00035565382308269845,
+          "vis_token_norm": 3.1093739668528237,
+          "vis_token_norm_std": 0.014745291020213111,
+          "joint_token_norm": 2.251256585121155,
+          "joint_token_norm_std": 0.26688460085601223,
+          "attn_mass_joint_tokens": 0.32265326629082364,
+          "attn_mass_joint_tokens_std": 0.05709010517671956
+        },
+        {
+          "step": 1200,
+          "test_mse": 0.0019083035100872319,
+          "test_mse_std": 0.00033824602811045906,
+          "vis_token_norm": 3.0961921215057373,
+          "vis_token_norm_std": 0.015011456239903074,
+          "joint_token_norm": 2.2538130283355713,
+          "joint_token_norm_std": 0.26589681931844844,
+          "attn_mass_joint_tokens": 0.3287893012166023,
+          "attn_mass_joint_tokens_std": 0.05838254405038768
+        },
+        {
+          "step": 1300,
+          "test_mse": 0.00186232333847632,
+          "test_mse_std": 8.181727565545456e-05,
+          "vis_token_norm": 3.0827365716298423,
+          "vis_token_norm_std": 0.015806216480683484,
+          "joint_token_norm": 2.2564556201299033,
+          "joint_token_norm_std": 0.2639652501063424,
+          "attn_mass_joint_tokens": 0.33455415070056915,
+          "attn_mass_joint_tokens_std": 0.060610222385396845
+        },
+        {
+          "step": 1400,
+          "test_mse": 0.0018505422631278634,
+          "test_mse_std": 0.00037415641353545935,
+          "vis_token_norm": 3.07220196723938,
+          "vis_token_norm_std": 0.016481295033957483,
+          "joint_token_norm": 2.2580888668696084,
+          "joint_token_norm_std": 0.26335563807625645,
+          "attn_mass_joint_tokens": 0.33906573553880054,
+          "attn_mass_joint_tokens_std": 0.061656922166394505
+        },
+        {
+          "step": 1500,
+          "test_mse": 0.0018521050612131755,
+          "test_mse_std": 8.872625979689032e-05,
+          "vis_token_norm": 3.0612967809041343,
+          "vis_token_norm_std": 0.016657816156345744,
+          "joint_token_norm": 2.2602227528889975,
+          "joint_token_norm_std": 0.2615446466504742,
+          "attn_mass_joint_tokens": 0.34390583137671155,
+          "attn_mass_joint_tokens_std": 0.061986450664362605
+        }
+      ],
+      "count_based_share_joint_tokens": 0.058823529411764705,
+      "final_norm_ratio_joint_over_vis": 0.7383219970660457,
+      "initial_norm_ratio_joint_over_vis": 0.7203095426956896
+    },
+    "finger | scale 10 | none": {
+      "trajectory_mean_over_seeds": [
+        {
+          "step": 0,
+          "test_mse": 0.42578669389088947,
+          "test_mse_std": 0.06994928023916717,
+          "vis_token_norm": 3.3944479624430337,
+          "vis_token_norm_std": 0.006729245050579197,
+          "joint_token_norm": 15.727567036946615,
+          "joint_token_norm_std": 1.4714674188826309,
+          "attn_mass_joint_tokens": 0.07332005724310875,
+          "attn_mass_joint_tokens_std": 0.004114953935046142
+        },
+        {
+          "step": 100,
+          "test_mse": 0.018652725964784622,
+          "test_mse_std": 0.000847591660881234,
+          "vis_token_norm": 3.5735963185628257,
+          "vis_token_norm_std": 0.005333477168116771,
+          "joint_token_norm": 15.796688715616861,
+          "joint_token_norm_std": 1.4506337196543708,
+          "attn_mass_joint_tokens": 0.12442486484845479,
+          "attn_mass_joint_tokens_std": 0.014579378151740026
+        },
+        {
+          "step": 200,
+          "test_mse": 0.015234118017057577,
+          "test_mse_std": 0.0006397142783992679,
+          "vis_token_norm": 3.5928243001302085,
+          "vis_token_norm_std": 0.005490502160985524,
+          "joint_token_norm": 15.884871482849121,
+          "joint_token_norm_std": 1.405160974986751,
+          "attn_mass_joint_tokens": 0.12833242987593016,
+          "attn_mass_joint_tokens_std": 0.004344566680215971
+        },
+        {
+          "step": 300,
+          "test_mse": 0.012493285040060679,
+          "test_mse_std": 0.0012332368909645324,
+          "vis_token_norm": 3.623852809270223,
+          "vis_token_norm_std": 0.004516818372268068,
+          "joint_token_norm": 15.961973826090494,
+          "joint_token_norm_std": 1.3874658929435515,
+          "attn_mass_joint_tokens": 0.13441830252607664,
+          "attn_mass_joint_tokens_std": 0.004142464371712095
+        },
+        {
+          "step": 400,
+          "test_mse": 0.010583410349984964,
+          "test_mse_std": 0.0004886411374120553,
+          "vis_token_norm": 3.6493921279907227,
+          "vis_token_norm_std": 0.007204082087666644,
+          "joint_token_norm": 16.02004114786784,
+          "joint_token_norm_std": 1.3766976035406262,
+          "attn_mass_joint_tokens": 0.14294934645295143,
+          "attn_mass_joint_tokens_std": 0.012419440150219457
+        },
+        {
+          "step": 500,
+          "test_mse": 0.008782779177029928,
+          "test_mse_std": 0.0010861014969629913,
+          "vis_token_norm": 3.6655795574188232,
+          "vis_token_norm_std": 0.014147595643943977,
+          "joint_token_norm": 16.02718226114909,
+          "joint_token_norm_std": 1.3712177450361422,
+          "attn_mass_joint_tokens": 0.1465390920639038,
+          "attn_mass_joint_tokens_std": 0.020137444796956686
+        },
+        {
+          "step": 600,
+          "test_mse": 0.007402301300317049,
+          "test_mse_std": 0.0007075901264359678,
+          "vis_token_norm": 3.6703380743662515,
+          "vis_token_norm_std": 0.02216803699677331,
+          "joint_token_norm": 16.032392501831055,
+          "joint_token_norm_std": 1.3865270031908277,
+          "attn_mass_joint_tokens": 0.1525761547187964,
+          "attn_mass_joint_tokens_std": 0.026992821462948464
+        },
+        {
+          "step": 700,
+          "test_mse": 0.005810524181773265,
+          "test_mse_std": 0.000787266013758629,
+          "vis_token_norm": 3.6689329942067466,
+          "vis_token_norm_std": 0.0344253781291984,
+          "joint_token_norm": 15.998310407002768,
+          "joint_token_norm_std": 1.3880146970667728,
+          "attn_mass_joint_tokens": 0.15580593918760618,
+          "attn_mass_joint_tokens_std": 0.030844956162229747
+        },
+        {
+          "step": 800,
+          "test_mse": 0.004864357567081849,
+          "test_mse_std": 0.0006704054053049907,
+          "vis_token_norm": 3.657435496648153,
+          "vis_token_norm_std": 0.04319450905881957,
+          "joint_token_norm": 15.967462857564291,
+          "joint_token_norm_std": 1.387810855209587,
+          "attn_mass_joint_tokens": 0.1604811499516169,
+          "attn_mass_joint_tokens_std": 0.03780240848647458
+        },
+        {
+          "step": 900,
+          "test_mse": 0.003562258401264747,
+          "test_mse_std": 0.00038980810210365784,
+          "vis_token_norm": 3.6425612767537436,
+          "vis_token_norm_std": 0.04280356921233115,
+          "joint_token_norm": 15.95221201578776,
+          "joint_token_norm_std": 1.3724707687232198,
+          "attn_mass_joint_tokens": 0.1650515521566073,
+          "attn_mass_joint_tokens_std": 0.044301062043535525
+        },
+        {
+          "step": 1000,
+          "test_mse": 0.003076320126031836,
+          "test_mse_std": 0.0002506901428090822,
+          "vis_token_norm": 3.6310741106669107,
+          "vis_token_norm_std": 0.0456275706211728,
+          "joint_token_norm": 15.939436276753744,
+          "joint_token_norm_std": 1.371498919931941,
+          "attn_mass_joint_tokens": 0.16687676186362901,
+          "attn_mass_joint_tokens_std": 0.04629326494660538
+        },
+        {
+          "step": 1100,
+          "test_mse": 0.0024643507786095142,
+          "test_mse_std": 5.079414673517378e-05,
+          "vis_token_norm": 3.6173590819040933,
+          "vis_token_norm_std": 0.04642781019518923,
+          "joint_token_norm": 15.917935689290365,
+          "joint_token_norm_std": 1.3622238398695738,
+          "attn_mass_joint_tokens": 0.1690633756419023,
+          "attn_mass_joint_tokens_std": 0.049665444512800146
+        },
+        {
+          "step": 1200,
+          "test_mse": 0.0021663516915092864,
+          "test_mse_std": 9.305985985378311e-05,
+          "vis_token_norm": 3.6058294773101807,
+          "vis_token_norm_std": 0.047587257746151114,
+          "joint_token_norm": 15.908318201700846,
+          "joint_token_norm_std": 1.3526676784494887,
+          "attn_mass_joint_tokens": 0.1704573631286621,
+          "attn_mass_joint_tokens_std": 0.053186991728093325
+        },
+        {
+          "step": 1300,
+          "test_mse": 0.002044887786420683,
+          "test_mse_std": 9.411763458612365e-05,
+          "vis_token_norm": 3.5951342582702637,
+          "vis_token_norm_std": 0.05014551085111573,
+          "joint_token_norm": 15.901588439941406,
+          "joint_token_norm_std": 1.3567886675619738,
+          "attn_mass_joint_tokens": 0.17069485411047935,
+          "attn_mass_joint_tokens_std": 0.05362161154576941
+        },
+        {
+          "step": 1400,
+          "test_mse": 0.001898182633643349,
+          "test_mse_std": 0.0002217973035238024,
+          "vis_token_norm": 3.585783084233602,
+          "vis_token_norm_std": 0.05184036996114257,
+          "joint_token_norm": 15.879002253214518,
+          "joint_token_norm_std": 1.349093183388035,
+          "attn_mass_joint_tokens": 0.17029627536733946,
+          "attn_mass_joint_tokens_std": 0.05599695767312201
+        },
+        {
+          "step": 1500,
+          "test_mse": 0.0018816383089870214,
+          "test_mse_std": 7.448173461048912e-05,
+          "vis_token_norm": 3.5780089696248374,
+          "vis_token_norm_std": 0.054562610403772034,
+          "joint_token_norm": 15.861186345418295,
+          "joint_token_norm_std": 1.3464186274519898,
+          "attn_mass_joint_tokens": 0.17085738480091095,
+          "attn_mass_joint_tokens_std": 0.05716265784442445
+        }
+      ],
+      "count_based_share_joint_tokens": 0.058823529411764705,
+      "final_norm_ratio_joint_over_vis": 4.4329643888738985,
+      "initial_norm_ratio_joint_over_vis": 4.633321002696196
+    },
+    "finger | scale 10 | layernorm": {
+      "trajectory_mean_over_seeds": [
+        {
+          "step": 0,
+          "test_mse": 0.4351944426695506,
+          "test_mse_std": 0.1063716681663932,
+          "vis_token_norm": 3.3944479624430337,
+          "vis_token_norm_std": 0.006729245050579197,
+          "joint_token_norm": 15.727567036946615,
+          "joint_token_norm_std": 1.4714674188826309,
+          "attn_mass_joint_tokens": 0.05687623284757137,
+          "attn_mass_joint_tokens_std": 0.0013536232286241567
+        },
+        {
+          "step": 100,
+          "test_mse": 0.034487489610910416,
+          "test_mse_std": 0.0013321793161952583,
+          "vis_token_norm": 3.4105233351389566,
+          "vis_token_norm_std": 0.021119916222393457,
+          "joint_token_norm": 15.65219815572103,
+          "joint_token_norm_std": 1.3443818286645766,
+          "attn_mass_joint_tokens": 0.057443262388308845,
+          "attn_mass_joint_tokens_std": 0.004024326664935971
+        },
+        {
+          "step": 200,
+          "test_mse": 0.018468793481588364,
+          "test_mse_std": 0.0009949287616126824,
+          "vis_token_norm": 3.34355092048645,
+          "vis_token_norm_std": 0.016734246871711263,
+          "joint_token_norm": 15.721262613932291,
+          "joint_token_norm_std": 1.341839884643805,
+          "attn_mass_joint_tokens": 0.07088314990202586,
+          "attn_mass_joint_tokens_std": 0.004963807562458836
+        },
+        {
+          "step": 300,
+          "test_mse": 0.013568884382645289,
+          "test_mse_std": 0.000584000988390313,
+          "vis_token_norm": 3.3187442620595298,
+          "vis_token_norm_std": 0.013072399652904524,
+          "joint_token_norm": 15.741913477579752,
+          "joint_token_norm_std": 1.2802480122372315,
+          "attn_mass_joint_tokens": 0.09431833277146022,
+          "attn_mass_joint_tokens_std": 0.006916319272112394
+        },
+        {
+          "step": 400,
+          "test_mse": 0.011287443339824677,
+          "test_mse_std": 0.0003473323494682114,
+          "vis_token_norm": 3.304752985636393,
+          "vis_token_norm_std": 0.012864914254022664,
+          "joint_token_norm": 15.731335639953613,
+          "joint_token_norm_std": 1.2217758632331917,
+          "attn_mass_joint_tokens": 0.10954201531906922,
+          "attn_mass_joint_tokens_std": 0.014982392098684143
+        },
+        {
+          "step": 500,
+          "test_mse": 0.010315089796980223,
+          "test_mse_std": 0.0006833829394874072,
+          "vis_token_norm": 3.2957188288370767,
+          "vis_token_norm_std": 0.012010662460673628,
+          "joint_token_norm": 15.742756843566895,
+          "joint_token_norm_std": 1.195791225012414,
+          "attn_mass_joint_tokens": 0.11839186400175095,
+          "attn_mass_joint_tokens_std": 0.01983489474816959
+        },
+        {
+          "step": 600,
+          "test_mse": 0.00912886361281077,
+          "test_mse_std": 0.00010400024700206695,
+          "vis_token_norm": 3.286882241566976,
+          "vis_token_norm_std": 0.00978914384424626,
+          "joint_token_norm": 15.747122764587402,
+          "joint_token_norm_std": 1.1861590319696327,
+          "attn_mass_joint_tokens": 0.12456698094805081,
+          "attn_mass_joint_tokens_std": 0.02229070922040694
+        },
+        {
+          "step": 700,
+          "test_mse": 0.00829222984611988,
+          "test_mse_std": 0.0001778424430719856,
+          "vis_token_norm": 3.2757505575815835,
+          "vis_token_norm_std": 0.010357854380302595,
+          "joint_token_norm": 15.74693234761556,
+          "joint_token_norm_std": 1.1784784526025094,
+          "attn_mass_joint_tokens": 0.13036883249878883,
+          "attn_mass_joint_tokens_std": 0.024961412675716842
+        },
+        {
+          "step": 800,
+          "test_mse": 0.007967059190074602,
+          "test_mse_std": 0.00029719822862834817,
+          "vis_token_norm": 3.264427979787191,
+          "vis_token_norm_std": 0.012779067359730212,
+          "joint_token_norm": 15.744425773620605,
+          "joint_token_norm_std": 1.1836642317342683,
+          "attn_mass_joint_tokens": 0.1374490074813366,
+          "attn_mass_joint_tokens_std": 0.028631698137304276
+        },
+        {
+          "step": 900,
+          "test_mse": 0.007150405086576939,
+          "test_mse_std": 0.00028394872610003645,
+          "vis_token_norm": 3.251899242401123,
+          "vis_token_norm_std": 0.013251974377860194,
+          "joint_token_norm": 15.728429794311523,
+          "joint_token_norm_std": 1.1835077629932054,
+          "attn_mass_joint_tokens": 0.14527266348401704,
+          "attn_mass_joint_tokens_std": 0.03280274212983273
+        },
+        {
+          "step": 1000,
+          "test_mse": 0.006646102139105399,
+          "test_mse_std": 0.00016069828249687545,
+          "vis_token_norm": 3.238757292429606,
+          "vis_token_norm_std": 0.01413652213401978,
+          "joint_token_norm": 15.709714889526367,
+          "joint_token_norm_std": 1.188075176833211,
+          "attn_mass_joint_tokens": 0.15608602638045946,
+          "attn_mass_joint_tokens_std": 0.04048255694527498
+        },
+        {
+          "step": 1100,
+          "test_mse": 0.005898613948374987,
+          "test_mse_std": 0.00028144339696033053,
+          "vis_token_norm": 3.224088271458944,
+          "vis_token_norm_std": 0.015503930213840719,
+          "joint_token_norm": 15.675515492757162,
+          "joint_token_norm_std": 1.1863106033439503,
+          "attn_mass_joint_tokens": 0.16930587341388068,
+          "attn_mass_joint_tokens_std": 0.049806558389366255
+        },
+        {
+          "step": 1200,
+          "test_mse": 0.0053727988464136915,
+          "test_mse_std": 0.00046787848514768924,
+          "vis_token_norm": 3.2060836950937905,
+          "vis_token_norm_std": 0.013467723343369065,
+          "joint_token_norm": 15.64891497294108,
+          "joint_token_norm_std": 1.189887191025057,
+          "attn_mass_joint_tokens": 0.1804279051721096,
+          "attn_mass_joint_tokens_std": 0.056247789810069705
+        },
+        {
+          "step": 1300,
+          "test_mse": 0.005200630519539118,
+          "test_mse_std": 0.0007843641564144055,
+          "vis_token_norm": 3.1900166670481362,
+          "vis_token_norm_std": 0.01188734467967284,
+          "joint_token_norm": 15.63262907663981,
+          "joint_token_norm_std": 1.1974814795154467,
+          "attn_mass_joint_tokens": 0.1900324635207653,
+          "attn_mass_joint_tokens_std": 0.059003711111801464
+        },
+        {
+          "step": 1400,
+          "test_mse": 0.004632227898885806,
+          "test_mse_std": 0.0004341569340563977,
+          "vis_token_norm": 3.173051357269287,
+          "vis_token_norm_std": 0.008531714607833278,
+          "joint_token_norm": 15.60870107014974,
+          "joint_token_norm_std": 1.2017340282392164,
+          "attn_mass_joint_tokens": 0.20085138951738676,
+          "attn_mass_joint_tokens_std": 0.061316161135043006
+        },
+        {
+          "step": 1500,
+          "test_mse": 0.004574609299500783,
+          "test_mse_std": 0.0005821663514498307,
+          "vis_token_norm": 3.1592729091644287,
+          "vis_token_norm_std": 0.005634796632516979,
+          "joint_token_norm": 15.589350064595541,
+          "joint_token_norm_std": 1.2044823158199367,
+          "attn_mass_joint_tokens": 0.20934720089038214,
+          "attn_mass_joint_tokens_std": 0.06139778790445215
+        }
+      ],
+      "count_based_share_joint_tokens": 0.058823529411764705,
+      "final_norm_ratio_joint_over_vis": 4.934474011211221,
+      "initial_norm_ratio_joint_over_vis": 4.633321002696196
+    }
+  },
+  "wall_time_s": 868.5
+}
