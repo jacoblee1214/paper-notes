@@ -1,0 +1,192 @@
+{
+  "settings": {
+    "mu": [
+      0.18,
+      1.0
+    ],
+    "sd": [
+      0.03,
+      0.05
+    ],
+    "samples": 200000,
+    "gap": [
+      0.4,
+      0.8
+    ],
+    "taus": [
+      2.0,
+      1.0,
+      0.5,
+      0.25,
+      0.1,
+      0.05,
+      0.01
+    ],
+    "w_low_grid": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ],
+    "seed": 7,
+    "note": "가정 모델. 코드 rsample의 tau=0.5는 03 §7(d)에서 확인한 값"
+  },
+  "true_mixture_w0.5": {
+    "gap_mass": 0.0,
+    "mean": 0.5913,
+    "sd": 0.4122
+  },
+  "tau_sweep_w0.5": [
+    {
+      "tau": 2.0,
+      "gap_mass": 0.7824,
+      "mean": 0.5899,
+      "sd": 0.1568,
+      "W1_to_true_mixture": 0.2835
+    },
+    {
+      "tau": 1.0,
+      "gap_mass": 0.4915,
+      "mean": 0.5899,
+      "sd": 0.2385,
+      "W1_to_true_mixture": 0.2053
+    },
+    {
+      "tau": 0.5,
+      "gap_mass": 0.265,
+      "mean": 0.5899,
+      "sd": 0.3115,
+      "W1_to_true_mixture": 0.1262
+    },
+    {
+      "tau": 0.25,
+      "gap_mass": 0.1347,
+      "mean": 0.5898,
+      "sd": 0.3597,
+      "W1_to_true_mixture": 0.0687
+    },
+    {
+      "tau": 0.1,
+      "gap_mass": 0.0537,
+      "mean": 0.5897,
+      "sd": 0.3912,
+      "W1_to_true_mixture": 0.0284
+    },
+    {
+      "tau": 0.05,
+      "gap_mass": 0.0272,
+      "mean": 0.5896,
+      "sd": 0.4017,
+      "W1_to_true_mixture": 0.0144
+    },
+    {
+      "tau": 0.01,
+      "gap_mass": 0.0054,
+      "mean": 0.5896,
+      "sd": 0.41,
+      "W1_to_true_mixture": 0.0035
+    }
+  ],
+  "w_sweep_tau0.5": [
+    {
+      "w_low": 0.1,
+      "true_gap_mass": 0.0,
+      "eq8_tau0.5_gap_mass": 0.1045,
+      "eq8_tau0.5_mean": 0.8945,
+      "true_mean": 0.9191,
+      "eq8_tau0.5_W1": 0.0567,
+      "eq8_tau0.5_effective_w_from_mean": 0.1286
+    },
+    {
+      "w_low": 0.3,
+      "true_gap_mass": 0.0,
+      "eq8_tau0.5_gap_mass": 0.2286,
+      "eq8_tau0.5_mean": 0.7319,
+      "true_mean": 0.7542,
+      "eq8_tau0.5_W1": 0.1102,
+      "eq8_tau0.5_effective_w_from_mean": 0.3269
+    },
+    {
+      "w_low": 0.5,
+      "true_gap_mass": 0.0,
+      "eq8_tau0.5_gap_mass": 0.2637,
+      "eq8_tau0.5_mean": 0.5889,
+      "true_mean": 0.5903,
+      "eq8_tau0.5_W1": 0.1252,
+      "eq8_tau0.5_effective_w_from_mean": 0.5013
+    },
+    {
+      "w_low": 0.7,
+      "true_gap_mass": 0.0,
+      "eq8_tau0.5_gap_mass": 0.2205,
+      "eq8_tau0.5_mean": 0.446,
+      "true_mean": 0.4266,
+      "eq8_tau0.5_W1": 0.11,
+      "eq8_tau0.5_effective_w_from_mean": 0.6756
+    },
+    {
+      "w_low": 0.9,
+      "true_gap_mass": 0.0,
+      "eq8_tau0.5_gap_mass": 0.0966,
+      "eq8_tau0.5_mean": 0.2839,
+      "true_mean": 0.2622,
+      "eq8_tau0.5_W1": 0.0559,
+      "eq8_tau0.5_effective_w_from_mean": 0.8733
+    }
+  ],
+  "annealing_1.0_to_0.1_10steps": [
+    {
+      "tau": 1.0,
+      "gap_mass": 0.4915,
+      "W1": 0.2053
+    },
+    {
+      "tau": 0.7743,
+      "gap_mass": 0.3964,
+      "W1": 0.1746
+    },
+    {
+      "tau": 0.5995,
+      "gap_mass": 0.3142,
+      "W1": 0.1454
+    },
+    {
+      "tau": 0.4642,
+      "gap_mass": 0.2465,
+      "W1": 0.1188
+    },
+    {
+      "tau": 0.3594,
+      "gap_mass": 0.1921,
+      "W1": 0.0955
+    },
+    {
+      "tau": 0.2783,
+      "gap_mass": 0.1489,
+      "W1": 0.0759
+    },
+    {
+      "tau": 0.2154,
+      "gap_mass": 0.1165,
+      "W1": 0.0597
+    },
+    {
+      "tau": 0.1668,
+      "gap_mass": 0.0902,
+      "W1": 0.0467
+    },
+    {
+      "tau": 0.1292,
+      "gap_mass": 0.0701,
+      "W1": 0.0364
+    },
+    {
+      "tau": 0.1,
+      "gap_mass": 0.0537,
+      "W1": 0.0284
+    }
+  ],
+  "annealing_mean_gap_mass": 0.212,
+  "annealing_final_gap_mass_tau0.1": 0.0537
+}

@@ -20,6 +20,7 @@
 | `analysis/04_code_verification.md` | 논문과 공식 저장소 대조(D1–D25), 구현 가능성, 권리 |
 | `analysis/table_check.py` | Table III 재계산과 검정(1초 미만) |
 | `analysis/cvar_toy.py` | 이중 봉우리 믿음의 CVaR 선택, µ_f 민감도, softplus 편향, 샘플링 확인 |
+| `analysis/extra_eq8_tau.py` | 추가 검증: 식 (8) 샘플의 간격 질량과 온도 τ 어닐링 (numpy, 1스레드, 약 1초) |
 | `analysis/plot_figures.py` | 그래프 세 장 |
 | `report/figures/` | 우리가 그린 그래프 세 장 |
 

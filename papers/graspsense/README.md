@@ -13,6 +13,7 @@
 | `analysis/04_code_verification.md` | 논문 ↔ 저자 저장소 대조(D1–D9), 수치 재계산(C1–C9, T1–T3), 구현 가능성 |
 | `analysis/table_check.py` | Table I–IV 재계산과 정합성 점검 |
 | `analysis/force_map_toy.py` | 힘 지도 재순위화·조회 방식·두께 환산 toy (numpy) |
+| `analysis/extra_ray_thickness.py` | 추가 검증: 두 단계 광선 두께 추정의 면 수와 테두리 보정 (numpy, 1스레드, 약 0.1초) |
 | `analysis/plot_figures.py` | 리포트 그래프 세 장 |
 
 ## 재실행

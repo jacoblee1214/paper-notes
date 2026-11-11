@@ -1,0 +1,461 @@
+{
+  "settings": {
+    "H": 20,
+    "W": 16,
+    "thresholds": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3
+    ],
+    "contact_fracs": [
+      0.03,
+      0.1
+    ],
+    "trials": 200,
+    "seed": 1,
+    "candidates": [
+      "zero",
+      "blur(s=2, x0.6)",
+      "shift(1 taxel)",
+      "noisy(0.03)"
+    ],
+    "note": "가정 모델. 논문의 접촉 임계값은 없음"
+  },
+  "results": {
+    "contact_frac=0.03": {
+      "means": {
+        "zero": {
+          "MSE": 0.00382,
+          "thr=0.05": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.1": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.15": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.2": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.25": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.3": {
+            "IoU": 0.0,
+            "F1": 0.0
+          }
+        },
+        "blur": {
+          "MSE": 0.00309,
+          "thr=0.05": {
+            "IoU": 0.008,
+            "F1": 0.013
+          },
+          "thr=0.1": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.15": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.2": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.25": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.3": {
+            "IoU": 0.0,
+            "F1": 0.0
+          }
+        },
+        "shift": {
+          "MSE": 0.004,
+          "thr=0.05": {
+            "IoU": 0.289,
+            "F1": 0.447
+          },
+          "thr=0.1": {
+            "IoU": 0.166,
+            "F1": 0.278
+          },
+          "thr=0.15": {
+            "IoU": 0.055,
+            "F1": 0.099
+          },
+          "thr=0.2": {
+            "IoU": 0.021,
+            "F1": 0.039
+          },
+          "thr=0.25": {
+            "IoU": 0.021,
+            "F1": 0.038
+          },
+          "thr=0.3": {
+            "IoU": 0.018,
+            "F1": 0.033
+          }
+        },
+        "noisy": {
+          "MSE": 0.00051,
+          "thr=0.05": {
+            "IoU": 0.597,
+            "F1": 0.745
+          },
+          "thr=0.1": {
+            "IoU": 0.639,
+            "F1": 0.776
+          },
+          "thr=0.15": {
+            "IoU": 0.895,
+            "F1": 0.942
+          },
+          "thr=0.2": {
+            "IoU": 0.906,
+            "F1": 0.948
+          },
+          "thr=0.25": {
+            "IoU": 0.9,
+            "F1": 0.943
+          },
+          "thr=0.3": {
+            "IoU": 0.859,
+            "F1": 0.917
+          }
+        }
+      },
+      "flags_by_threshold": {
+        "thr=0.05": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur>zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "blur",
+            "zero"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "blur",
+            "zero"
+          ]
+        },
+        "thr=0.1": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur<=zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ]
+        },
+        "thr=0.15": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur<=zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ]
+        },
+        "thr=0.2": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur<=zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ]
+        },
+        "thr=0.25": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur<=zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ]
+        },
+        "thr=0.3": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur<=zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ]
+        }
+      }
+    },
+    "contact_frac=0.1": {
+      "means": {
+        "zero": {
+          "MSE": 0.01575,
+          "thr=0.05": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.1": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.15": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.2": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.25": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.3": {
+            "IoU": 0.0,
+            "F1": 0.0
+          }
+        },
+        "blur": {
+          "MSE": 0.01086,
+          "thr=0.05": {
+            "IoU": 0.31,
+            "F1": 0.465
+          },
+          "thr=0.1": {
+            "IoU": 0.003,
+            "F1": 0.005
+          },
+          "thr=0.15": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.2": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.25": {
+            "IoU": 0.0,
+            "F1": 0.0
+          },
+          "thr=0.3": {
+            "IoU": 0.0,
+            "F1": 0.0
+          }
+        },
+        "shift": {
+          "MSE": 0.01326,
+          "thr=0.05": {
+            "IoU": 0.433,
+            "F1": 0.604
+          },
+          "thr=0.1": {
+            "IoU": 0.316,
+            "F1": 0.479
+          },
+          "thr=0.15": {
+            "IoU": 0.178,
+            "F1": 0.298
+          },
+          "thr=0.2": {
+            "IoU": 0.086,
+            "F1": 0.154
+          },
+          "thr=0.25": {
+            "IoU": 0.066,
+            "F1": 0.121
+          },
+          "thr=0.3": {
+            "IoU": 0.059,
+            "F1": 0.109
+          }
+        },
+        "noisy": {
+          "MSE": 0.00066,
+          "thr=0.05": {
+            "IoU": 0.775,
+            "F1": 0.873
+          },
+          "thr=0.1": {
+            "IoU": 0.725,
+            "F1": 0.84
+          },
+          "thr=0.15": {
+            "IoU": 0.857,
+            "F1": 0.922
+          },
+          "thr=0.2": {
+            "IoU": 0.896,
+            "F1": 0.944
+          },
+          "thr=0.25": {
+            "IoU": 0.905,
+            "F1": 0.95
+          },
+          "thr=0.3": {
+            "IoU": 0.879,
+            "F1": 0.934
+          }
+        }
+      },
+      "flags_by_threshold": {
+        "thr=0.05": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur>zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "blur",
+            "zero"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "blur",
+            "zero"
+          ]
+        },
+        "thr=0.1": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur>zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "blur",
+            "zero"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "blur",
+            "zero"
+          ]
+        },
+        "thr=0.15": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur<=zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ]
+        },
+        "thr=0.2": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur<=zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ]
+        },
+        "thr=0.25": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur<=zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ]
+        },
+        "thr=0.3": {
+          "MSE_prefers_zero_over_blur": false,
+          "IoU_order_blur_vs_zero": "blur<=zero",
+          "F1_order_shift_vs_zero": "shift>zero",
+          "F1_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ],
+          "IoU_ranking": [
+            "noisy",
+            "shift",
+            "zero",
+            "blur"
+          ]
+        }
+      }
+    }
+  }
+}

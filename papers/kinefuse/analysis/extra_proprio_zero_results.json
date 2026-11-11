@@ -1,0 +1,183 @@
+{
+  "settings": {
+    "occlusion_levels": [
+      0.0,
+      0.3,
+      0.6,
+      0.9
+    ],
+    "frames_per_episode": 50,
+    "episodes_train": 200,
+    "episodes_test": 200,
+    "p_contact": 0.7,
+    "haptic_noise_deg": 3.0,
+    "vision_sigma_deg": "2 + 20*occ",
+    "ridge_lambda": 0.001,
+    "seeds": 5,
+    "note": "가정 모델. 논문 수치를 재현하지 않는다. 선형 추정기, 구조 없음."
+  },
+  "sig_delta_sweep": {
+    "sig_delta_0": {
+      "V": {
+        "mean": 11.44,
+        "sd": 0.245
+      },
+      "VH": {
+        "mean": 11.442,
+        "sd": 0.245
+      },
+      "VP": {
+        "mean": 0.059,
+        "sd": 0.006
+      },
+      "VHP": {
+        "mean": 0.059,
+        "sd": 0.006
+      },
+      "VHP_zeroH_at_test": {
+        "mean": 0.059,
+        "sd": 0.006
+      },
+      "VHP_zeroP_at_test": {
+        "mean": 26.014,
+        "sd": 0.063
+      },
+      "VHP_zeroH_and_P_at_test": {
+        "mean": 26.014,
+        "sd": 0.063
+      },
+      "VP_trained_without_H": {
+        "mean": 0.059,
+        "sd": 0.006
+      }
+    },
+    "sig_delta_2": {
+      "V": {
+        "mean": 11.443,
+        "sd": 0.246
+      },
+      "VH": {
+        "mean": 11.444,
+        "sd": 0.246
+      },
+      "VP": {
+        "mean": 1.905,
+        "sd": 0.109
+      },
+      "VHP": {
+        "mean": 1.71,
+        "sd": 0.08
+      },
+      "VHP_zeroH_at_test": {
+        "mean": 1.904,
+        "sd": 0.11
+      },
+      "VHP_zeroP_at_test": {
+        "mean": 25.577,
+        "sd": 0.096
+      },
+      "VHP_zeroH_and_P_at_test": {
+        "mean": 25.585,
+        "sd": 0.096
+      },
+      "VP_trained_without_H": {
+        "mean": 1.905,
+        "sd": 0.109
+      }
+    },
+    "sig_delta_8": {
+      "V": {
+        "mean": 11.52,
+        "sd": 0.258
+      },
+      "VH": {
+        "mean": 11.474,
+        "sd": 0.255
+      },
+      "VP": {
+        "mean": 6.596,
+        "sd": 0.327
+      },
+      "VHP": {
+        "mean": 4.528,
+        "sd": 0.21
+      },
+      "VHP_zeroH_at_test": {
+        "mean": 6.895,
+        "sd": 0.4
+      },
+      "VHP_zeroP_at_test": {
+        "mean": 23.111,
+        "sd": 0.338
+      },
+      "VHP_zeroH_and_P_at_test": {
+        "mean": 23.645,
+        "sd": 0.37
+      },
+      "VP_trained_without_H": {
+        "mean": 6.596,
+        "sd": 0.327
+      }
+    },
+    "sig_delta_20": {
+      "V": {
+        "mean": 11.835,
+        "sd": 0.298
+      },
+      "VH": {
+        "mean": 11.604,
+        "sd": 0.279
+      },
+      "VP": {
+        "mean": 10.633,
+        "sd": 0.375
+      },
+      "VHP": {
+        "mean": 8.286,
+        "sd": 0.383
+      },
+      "VHP_zeroH_at_test": {
+        "mean": 12.31,
+        "sd": 0.784
+      },
+      "VHP_zeroP_at_test": {
+        "mean": 17.078,
+        "sd": 0.714
+      },
+      "VHP_zeroH_and_P_at_test": {
+        "mean": 19.291,
+        "sd": 0.965
+      },
+      "VP_trained_without_H": {
+        "mean": 10.633,
+        "sd": 0.375
+      }
+    }
+  },
+  "per_occlusion_sig_delta_8_seed0": {
+    "occ_0": {
+      "V": 5.35,
+      "VHP": 4.59,
+      "VHP_zeroH": 7.42,
+      "VHP_zeroP": 23.17
+    },
+    "occ_0.3": {
+      "V": 8.09,
+      "VHP": 4.7,
+      "VHP_zeroH": 7.46,
+      "VHP_zeroP": 23.36
+    },
+    "occ_0.6": {
+      "V": 12.54,
+      "VHP": 4.45,
+      "VHP_zeroH": 6.79,
+      "VHP_zeroP": 23.32
+    },
+    "occ_0.9": {
+      "V": 16.87,
+      "VHP": 4.85,
+      "VHP_zeroH": 7.22,
+      "VHP_zeroP": 23.14
+    }
+  }
+}

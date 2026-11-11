@@ -12,6 +12,9 @@
 | `analysis/table_check.py` | Table I–IV 재계산 (numpy, 1스레드) |
 | `analysis/transfer_toy.py` | 사람 데이터 전이의 부호 토이 (numpy, 1스레드, 약 1초) |
 | `analysis/sparse_metric_toy.py` | 희소 접촉 지표와 MSE의 역설 토이 (numpy, 1스레드, 약 0.1초) |
+| `analysis/extra_src_weight_cv.py` | 추가 검증: 사람 데이터 가중을 로봇 교차검증으로 고를 때의 이득 (numpy, 1스레드, 약 3초) |
+| `analysis/extra_sim_bias_mmrv.py` | 추가 검증: 시뮬 점수 편향 보정과 MMRV (numpy, 1스레드, 약 10초) |
+| `analysis/extra_contact_thr.py` | 추가 검증: 접촉 임계값에 따른 MSE와 접촉 지표 순위 (numpy, 1스레드, 약 0.2초) |
 | `analysis/plot_figures.py` | 그래프 세 장 |
 
 ## 재실행

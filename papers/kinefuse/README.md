@@ -17,6 +17,7 @@
 | `analysis/table_check.py` | 표 값 재계산, Welch·Holm, 상관, 변동계수 |
 | `analysis/norm_dominance_toy.py` | 노름과 attention, ridge 벌점과 스케일, GD 과도 응답 |
 | `analysis/drift_toy.py` | 프레임 격차의 chain 증폭, 해석해 |
+| `analysis/extra_proprio_zero.py` | 추가 검증: 고유감각 제거 대 촉각 제로화 1자유도 toy (numpy, 1스레드, 약 0.2초) |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
 
 ## 재실행

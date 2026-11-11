@@ -1,0 +1,211 @@
+{
+  "settings": {
+    "mus": [
+      0.12,
+      0.15,
+      0.18
+    ],
+    "eta_sd": 0.05,
+    "tasks_per_rep": 4,
+    "reps": 2000,
+    "eval_policies": [
+      3,
+      10
+    ],
+    "calibration_policies": [
+      3,
+      10
+    ],
+    "note": "가정 모델. 편향의 정책별 변동 0.05는 가정이다. MMRV 식은 논문 식 (7)"
+  },
+  "cells": {
+    "N_eval=3,k_cal=3": {
+      "mu=0.12": {
+        "mean_MMRV_raw": 0.0048,
+        "mean_MMRV_shift": 0.0048,
+        "mean_MMRV_linear": 0.0078,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.0071,
+        "share_tasks_MMRV_worse_linear": 0.007,
+        "share_linear_slope_negative": 0.0071,
+        "mean_MAE_raw": 0.1162,
+        "mean_MAE_shift": 0.0452,
+        "mean_MAE_linear": 0.0718,
+        "mean_pearson_raw": 0.9622,
+        "mean_pearson_linear": 0.9488,
+        "n_nan_pearson": 3
+      },
+      "mu=0.15": {
+        "mean_MMRV_raw": 0.0046,
+        "mean_MMRV_shift": 0.0046,
+        "mean_MMRV_linear": 0.0073,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.0074,
+        "share_tasks_MMRV_worse_linear": 0.0074,
+        "share_linear_slope_negative": 0.0074,
+        "mean_MAE_raw": 0.1427,
+        "mean_MAE_shift": 0.0463,
+        "mean_MAE_linear": 0.0764,
+        "mean_pearson_raw": 0.96,
+        "mean_pearson_linear": 0.946,
+        "n_nan_pearson": 10
+      },
+      "mu=0.18": {
+        "mean_MMRV_raw": 0.0047,
+        "mean_MMRV_shift": 0.0047,
+        "mean_MMRV_linear": 0.0079,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.007,
+        "share_tasks_MMRV_worse_linear": 0.0069,
+        "share_linear_slope_negative": 0.007,
+        "mean_MAE_raw": 0.1703,
+        "mean_MAE_shift": 0.0495,
+        "mean_MAE_linear": 0.1808,
+        "mean_pearson_raw": 0.9587,
+        "mean_pearson_linear": 0.9452,
+        "n_nan_pearson": 26
+      }
+    },
+    "N_eval=3,k_cal=10": {
+      "mu=0.12": {
+        "mean_MMRV_raw": 0.0048,
+        "mean_MMRV_shift": 0.0048,
+        "mean_MMRV_linear": 0.0048,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.0,
+        "share_tasks_MMRV_worse_linear": 0.0,
+        "share_linear_slope_negative": 0.0,
+        "mean_MAE_raw": 0.1161,
+        "mean_MAE_shift": 0.0409,
+        "mean_MAE_linear": 0.0433,
+        "mean_pearson_raw": 0.9605,
+        "mean_pearson_linear": 0.9605,
+        "n_nan_pearson": 7
+      },
+      "mu=0.15": {
+        "mean_MMRV_raw": 0.0045,
+        "mean_MMRV_shift": 0.0045,
+        "mean_MMRV_linear": 0.0045,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.0,
+        "share_tasks_MMRV_worse_linear": 0.0,
+        "share_linear_slope_negative": 0.0,
+        "mean_MAE_raw": 0.1429,
+        "mean_MAE_shift": 0.0424,
+        "mean_MAE_linear": 0.045,
+        "mean_pearson_raw": 0.9584,
+        "mean_pearson_linear": 0.9584,
+        "n_nan_pearson": 13
+      },
+      "mu=0.18": {
+        "mean_MMRV_raw": 0.0046,
+        "mean_MMRV_shift": 0.0046,
+        "mean_MMRV_linear": 0.0046,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.0,
+        "share_tasks_MMRV_worse_linear": 0.0,
+        "share_linear_slope_negative": 0.0,
+        "mean_MAE_raw": 0.1693,
+        "mean_MAE_shift": 0.0451,
+        "mean_MAE_linear": 0.0475,
+        "mean_pearson_raw": 0.9586,
+        "mean_pearson_linear": 0.9586,
+        "n_nan_pearson": 25
+      }
+    },
+    "N_eval=10,k_cal=3": {
+      "mu=0.12": {
+        "mean_MMRV_raw": 0.0184,
+        "mean_MMRV_shift": 0.0184,
+        "mean_MMRV_linear": 0.0221,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.0063,
+        "share_tasks_MMRV_worse_linear": 0.0063,
+        "share_linear_slope_negative": 0.0063,
+        "mean_MAE_raw": 0.1163,
+        "mean_MAE_shift": 0.0453,
+        "mean_MAE_linear": 0.0747,
+        "mean_pearson_raw": 0.9821,
+        "mean_pearson_linear": 0.9698,
+        "n_nan_pearson": 0
+      },
+      "mu=0.15": {
+        "mean_MMRV_raw": 0.018,
+        "mean_MMRV_shift": 0.018,
+        "mean_MMRV_linear": 0.0225,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.008,
+        "share_tasks_MMRV_worse_linear": 0.008,
+        "share_linear_slope_negative": 0.008,
+        "mean_MAE_raw": 0.1429,
+        "mean_MAE_shift": 0.0464,
+        "mean_MAE_linear": 0.0797,
+        "mean_pearson_raw": 0.9811,
+        "mean_pearson_linear": 0.9654,
+        "n_nan_pearson": 0
+      },
+      "mu=0.18": {
+        "mean_MMRV_raw": 0.0178,
+        "mean_MMRV_shift": 0.0178,
+        "mean_MMRV_linear": 0.0214,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.0063,
+        "share_tasks_MMRV_worse_linear": 0.0063,
+        "share_linear_slope_negative": 0.0063,
+        "mean_MAE_raw": 0.1694,
+        "mean_MAE_shift": 0.0493,
+        "mean_MAE_linear": 0.0829,
+        "mean_pearson_raw": 0.9792,
+        "mean_pearson_linear": 0.9669,
+        "n_nan_pearson": 0
+      }
+    },
+    "N_eval=10,k_cal=10": {
+      "mu=0.12": {
+        "mean_MMRV_raw": 0.0188,
+        "mean_MMRV_shift": 0.0188,
+        "mean_MMRV_linear": 0.0188,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.0,
+        "share_tasks_MMRV_worse_linear": 0.0,
+        "share_linear_slope_negative": 0.0,
+        "mean_MAE_raw": 0.116,
+        "mean_MAE_shift": 0.0412,
+        "mean_MAE_linear": 0.0436,
+        "mean_pearson_raw": 0.9818,
+        "mean_pearson_linear": 0.9818,
+        "n_nan_pearson": 0
+      },
+      "mu=0.15": {
+        "mean_MMRV_raw": 0.0185,
+        "mean_MMRV_shift": 0.0185,
+        "mean_MMRV_linear": 0.0185,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.0,
+        "share_tasks_MMRV_worse_linear": 0.0,
+        "share_linear_slope_negative": 0.0,
+        "mean_MAE_raw": 0.143,
+        "mean_MAE_shift": 0.0427,
+        "mean_MAE_linear": 0.045,
+        "mean_pearson_raw": 0.9808,
+        "mean_pearson_linear": 0.9808,
+        "n_nan_pearson": 0
+      },
+      "mu=0.18": {
+        "mean_MMRV_raw": 0.0176,
+        "mean_MMRV_shift": 0.0176,
+        "mean_MMRV_linear": 0.0176,
+        "max_abs_change_shift": 0.0,
+        "share_tasks_MMRV_changed_linear": 0.0,
+        "share_tasks_MMRV_worse_linear": 0.0,
+        "share_linear_slope_negative": 0.0,
+        "mean_MAE_raw": 0.1693,
+        "mean_MAE_shift": 0.0448,
+        "mean_MAE_linear": 0.0473,
+        "mean_pearson_raw": 0.9793,
+        "mean_pearson_linear": 0.9793,
+        "n_nan_pearson": 0
+      }
+    }
+  }
+}

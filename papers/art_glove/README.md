@@ -13,6 +13,7 @@
 | `analysis/taxel_loc_toy.py` | 토이: 접촉 위치 오차 vs taxel 간격과 잡음 (numpy, 1스레드) |
 | `analysis/hysteresis_toy.py` | 토이: 히스테리시스와 드리프트가 힘 추정에 주는 오차 (numpy, 1스레드) |
 | `analysis/retarget_contact_toy.py` | 토이: 접촉 라벨을 관절 공간 리타게팅에 넣었을 때 (numpy, 1스레드) |
+| `analysis/extra_taxel_grid.py` | 추가 검증: taxel 간격, 접촉 폭, 잡음에 따른 위치 오차와 2 mm 기준 (numpy, 1스레드, 약 1초) |
 | `analysis/plot_figures.py` | 그래프 네 장 |
 
 ## 재실행
