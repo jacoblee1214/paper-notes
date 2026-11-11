@@ -1,0 +1,669 @@
+{
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "N": 2000,
+  "tol": 0.1,
+  "configs": {
+    "B_two_modes_a2": {
+      "static": {
+        "euler_2": {
+          "nfe": {
+            "mean": 2.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.5878,
+            "sd": 0.0106
+          }
+        },
+        "euler_3": {
+          "nfe": {
+            "mean": 3.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.2229,
+            "sd": 0.0052
+          }
+        },
+        "euler_4": {
+          "nfe": {
+            "mean": 4.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.1592,
+            "sd": 0.002
+          }
+        },
+        "euler_5": {
+          "nfe": {
+            "mean": 5.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.1311,
+            "sd": 0.0016
+          }
+        },
+        "euler_10": {
+          "nfe": {
+            "mean": 10.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.0705,
+            "sd": 0.0007
+          }
+        },
+        "euler_20": {
+          "nfe": {
+            "mean": 20.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.0368,
+            "sd": 0.0003
+          }
+        },
+        "euler_30": {
+          "nfe": {
+            "mean": 30.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.0249,
+            "sd": 0.0002
+          }
+        },
+        "rk2_1": {
+          "nfe": {
+            "mean": 2.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 1.2225,
+            "sd": 0.0121
+          }
+        },
+        "rk2_2": {
+          "nfe": {
+            "mean": 4.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.1493,
+            "sd": 0.0072
+          }
+        }
+      },
+      "paper": {
+        "cth_0.15": {
+          "nfe": {
+            "mean": 18.4599,
+            "sd": 0.0925
+          },
+          "err": {
+            "mean": 0.3846,
+            "sd": 0.0024
+          }
+        },
+        "cth_0.5": {
+          "nfe": {
+            "mean": 9.2218,
+            "sd": 0.0727
+          },
+          "err": {
+            "mean": 0.3281,
+            "sd": 0.0075
+          }
+        },
+        "cth_0.7": {
+          "nfe": {
+            "mean": 7.4214,
+            "sd": 0.0577
+          },
+          "err": {
+            "mean": 0.3603,
+            "sd": 0.0079
+          }
+        },
+        "cth_0.8": {
+          "nfe": {
+            "mean": 6.4237,
+            "sd": 0.056
+          },
+          "err": {
+            "mean": 0.3841,
+            "sd": 0.0085
+          }
+        },
+        "cth_0.9": {
+          "nfe": {
+            "mean": 5.9468,
+            "sd": 0.0489
+          },
+          "err": {
+            "mean": 0.3585,
+            "sd": 0.0096
+          }
+        },
+        "cth_1.0": {
+          "nfe": {
+            "mean": 5.1562,
+            "sd": 0.045
+          },
+          "err": {
+            "mean": 0.5417,
+            "sd": 0.0105
+          }
+        },
+        "cth_1.2": {
+          "nfe": {
+            "mean": 3.6136,
+            "sd": 0.0343
+          },
+          "err": {
+            "mean": 0.6417,
+            "sd": 0.0089
+          }
+        },
+        "cth_2.0": {
+          "nfe": {
+            "mean": 2.0986,
+            "sd": 0.0094
+          },
+          "err": {
+            "mean": 1.1762,
+            "sd": 0.0128
+          }
+        },
+        "cth_5.0": {
+          "nfe": {
+            "mean": 2.0007,
+            "sd": 0.0007
+          },
+          "err": {
+            "mean": 1.222,
+            "sd": 0.0119
+          }
+        }
+      },
+      "consistent": {
+        "cth_0.15": {
+          "nfe": {
+            "mean": 21.334,
+            "sd": 0.1296
+          },
+          "err": {
+            "mean": 0.0482,
+            "sd": 0.0024
+          }
+        },
+        "cth_0.5": {
+          "nfe": {
+            "mean": 12.8965,
+            "sd": 0.0676
+          },
+          "err": {
+            "mean": 0.1903,
+            "sd": 0.0075
+          }
+        },
+        "cth_0.7": {
+          "nfe": {
+            "mean": 10.3072,
+            "sd": 0.0559
+          },
+          "err": {
+            "mean": 0.2612,
+            "sd": 0.0086
+          }
+        },
+        "cth_0.8": {
+          "nfe": {
+            "mean": 8.4389,
+            "sd": 0.0443
+          },
+          "err": {
+            "mean": 0.4729,
+            "sd": 0.0051
+          }
+        },
+        "cth_0.9": {
+          "nfe": {
+            "mean": 7.4526,
+            "sd": 0.0472
+          },
+          "err": {
+            "mean": 0.5228,
+            "sd": 0.0101
+          }
+        },
+        "cth_1.0": {
+          "nfe": {
+            "mean": 6.05,
+            "sd": 0.0442
+          },
+          "err": {
+            "mean": 0.6474,
+            "sd": 0.0088
+          }
+        },
+        "cth_1.2": {
+          "nfe": {
+            "mean": 3.8726,
+            "sd": 0.0408
+          },
+          "err": {
+            "mean": 0.8028,
+            "sd": 0.0113
+          }
+        },
+        "cth_2.0": {
+          "nfe": {
+            "mean": 2.1324,
+            "sd": 0.0148
+          },
+          "err": {
+            "mean": 1.1781,
+            "sd": 0.0129
+          }
+        },
+        "cth_5.0": {
+          "nfe": {
+            "mean": 2.0013,
+            "sd": 0.0012
+          },
+          "err": {
+            "mean": 1.222,
+            "sd": 0.0119
+          }
+        }
+      },
+      "matched_nfe_comparison": {
+        "cth_0.15": {
+          "consistent_nfe_mean": 21.334,
+          "gap_err_minus_euler_interp_mean": 0.013,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_0.5": {
+          "consistent_nfe_mean": 12.896,
+          "gap_err_minus_euler_interp_mean": 0.1295,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_0.7": {
+          "consistent_nfe_mean": 10.307,
+          "gap_err_minus_euler_interp_mean": 0.1917,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_0.8": {
+          "consistent_nfe_mean": 8.439,
+          "gap_err_minus_euler_interp_mean": 0.3835,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_0.9": {
+          "consistent_nfe_mean": 7.453,
+          "gap_err_minus_euler_interp_mean": 0.4214,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_1.0": {
+          "consistent_nfe_mean": 6.05,
+          "gap_err_minus_euler_interp_mean": 0.529,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_1.2": {
+          "consistent_nfe_mean": 3.873,
+          "gap_err_minus_euler_interp_mean": 0.6355,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_2.0": {
+          "consistent_nfe_mean": 2.132,
+          "gap_err_minus_euler_interp_mean": 0.6387,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_5.0": {
+          "consistent_nfe_mean": 2.001,
+          "gap_err_minus_euler_interp_mean": 0.6347,
+          "seeds_consistent_better": "0/10"
+        }
+      }
+    },
+    "C_ring4_r3": {
+      "static": {
+        "euler_2": {
+          "nfe": {
+            "mean": 2.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.9008,
+            "sd": 0.0089
+          }
+        },
+        "euler_3": {
+          "nfe": {
+            "mean": 3.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.3413,
+            "sd": 0.0058
+          }
+        },
+        "euler_4": {
+          "nfe": {
+            "mean": 4.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.2452,
+            "sd": 0.003
+          }
+        },
+        "euler_5": {
+          "nfe": {
+            "mean": 5.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.2007,
+            "sd": 0.002
+          }
+        },
+        "euler_10": {
+          "nfe": {
+            "mean": 10.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.1046,
+            "sd": 0.001
+          }
+        },
+        "euler_20": {
+          "nfe": {
+            "mean": 20.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.0536,
+            "sd": 0.0005
+          }
+        },
+        "euler_30": {
+          "nfe": {
+            "mean": 30.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.036,
+            "sd": 0.0003
+          }
+        },
+        "rk2_1": {
+          "nfe": {
+            "mean": 2.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 1.8673,
+            "sd": 0.0097
+          }
+        },
+        "rk2_2": {
+          "nfe": {
+            "mean": 4.0,
+            "sd": 0.0
+          },
+          "err": {
+            "mean": 0.1922,
+            "sd": 0.0063
+          }
+        }
+      },
+      "paper": {
+        "cth_0.15": {
+          "nfe": {
+            "mean": 18.8714,
+            "sd": 0.0579
+          },
+          "err": {
+            "mean": 0.6431,
+            "sd": 0.0014
+          }
+        },
+        "cth_0.5": {
+          "nfe": {
+            "mean": 9.544,
+            "sd": 0.0546
+          },
+          "err": {
+            "mean": 0.5057,
+            "sd": 0.0024
+          }
+        },
+        "cth_0.7": {
+          "nfe": {
+            "mean": 7.9851,
+            "sd": 0.0424
+          },
+          "err": {
+            "mean": 0.5114,
+            "sd": 0.0055
+          }
+        },
+        "cth_0.8": {
+          "nfe": {
+            "mean": 6.7518,
+            "sd": 0.0309
+          },
+          "err": {
+            "mean": 0.6111,
+            "sd": 0.0043
+          }
+        },
+        "cth_0.9": {
+          "nfe": {
+            "mean": 6.3473,
+            "sd": 0.0314
+          },
+          "err": {
+            "mean": 0.5408,
+            "sd": 0.0061
+          }
+        },
+        "cth_1.0": {
+          "nfe": {
+            "mean": 5.7482,
+            "sd": 0.0333
+          },
+          "err": {
+            "mean": 0.7425,
+            "sd": 0.0144
+          }
+        },
+        "cth_1.2": {
+          "nfe": {
+            "mean": 3.9264,
+            "sd": 0.0332
+          },
+          "err": {
+            "mean": 1.1154,
+            "sd": 0.0093
+          }
+        },
+        "cth_2.0": {
+          "nfe": {
+            "mean": 2.0468,
+            "sd": 0.0126
+          },
+          "err": {
+            "mean": 1.8527,
+            "sd": 0.0106
+          }
+        },
+        "cth_5.0": {
+          "nfe": {
+            "mean": 2.0002,
+            "sd": 0.0004
+          },
+          "err": {
+            "mean": 1.8672,
+            "sd": 0.0096
+          }
+        }
+      },
+      "consistent": {
+        "cth_0.15": {
+          "nfe": {
+            "mean": 20.0004,
+            "sd": 0.1411
+          },
+          "err": {
+            "mean": 0.0443,
+            "sd": 0.0014
+          }
+        },
+        "cth_0.5": {
+          "nfe": {
+            "mean": 13.9849,
+            "sd": 0.0491
+          },
+          "err": {
+            "mean": 0.177,
+            "sd": 0.0035
+          }
+        },
+        "cth_0.7": {
+          "nfe": {
+            "mean": 11.6146,
+            "sd": 0.0396
+          },
+          "err": {
+            "mean": 0.2538,
+            "sd": 0.0066
+          }
+        },
+        "cth_0.8": {
+          "nfe": {
+            "mean": 9.5583,
+            "sd": 0.0443
+          },
+          "err": {
+            "mean": 0.5872,
+            "sd": 0.0099
+          }
+        },
+        "cth_0.9": {
+          "nfe": {
+            "mean": 8.2193,
+            "sd": 0.0162
+          },
+          "err": {
+            "mean": 0.7851,
+            "sd": 0.0078
+          }
+        },
+        "cth_1.0": {
+          "nfe": {
+            "mean": 7.0221,
+            "sd": 0.0217
+          },
+          "err": {
+            "mean": 0.9399,
+            "sd": 0.0107
+          }
+        },
+        "cth_1.2": {
+          "nfe": {
+            "mean": 4.5527,
+            "sd": 0.0269
+          },
+          "err": {
+            "mean": 1.2915,
+            "sd": 0.0081
+          }
+        },
+        "cth_2.0": {
+          "nfe": {
+            "mean": 2.0455,
+            "sd": 0.0084
+          },
+          "err": {
+            "mean": 1.8482,
+            "sd": 0.0111
+          }
+        },
+        "cth_5.0": {
+          "nfe": {
+            "mean": 2.0004,
+            "sd": 0.0008
+          },
+          "err": {
+            "mean": 1.8672,
+            "sd": 0.0096
+          }
+        }
+      },
+      "matched_nfe_comparison": {
+        "cth_0.15": {
+          "consistent_nfe_mean": 20.0,
+          "gap_err_minus_euler_interp_mean": -0.0094,
+          "seeds_consistent_better": "10/10"
+        },
+        "cth_0.5": {
+          "consistent_nfe_mean": 13.985,
+          "gap_err_minus_euler_interp_mean": 0.0928,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_0.7": {
+          "consistent_nfe_mean": 11.615,
+          "gap_err_minus_euler_interp_mean": 0.1574,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_0.8": {
+          "consistent_nfe_mean": 9.558,
+          "gap_err_minus_euler_interp_mean": 0.4742,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_0.9": {
+          "consistent_nfe_mean": 8.219,
+          "gap_err_minus_euler_interp_mean": 0.6463,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_1.0": {
+          "consistent_nfe_mean": 7.022,
+          "gap_err_minus_euler_interp_mean": 0.7781,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_1.2": {
+          "consistent_nfe_mean": 4.553,
+          "gap_err_minus_euler_interp_mean": 1.0709,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_2.0": {
+          "consistent_nfe_mean": 2.045,
+          "gap_err_minus_euler_interp_mean": 0.9729,
+          "seeds_consistent_better": "0/10"
+        },
+        "cth_5.0": {
+          "consistent_nfe_mean": 2.0,
+          "gap_err_minus_euler_interp_mean": 0.9667,
+          "seeds_consistent_better": "0/10"
+        }
+      }
+    }
+  },
+  "runtime_s": 44.9
+}

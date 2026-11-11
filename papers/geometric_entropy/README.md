@@ -12,6 +12,7 @@
 | `analysis/03_analysis.md` | 표 재계산, 그림 판독 검정, H_G 유도, toy 결과 |
 | `analysis/04_claim_verification.md` | 주장별 판정, 빠진 정보, 재현 가능성, 구현 가능성 판정 |
 | `analysis/entropy_toy.py` | 합성 전이 궤적에 H_G 적용: r·k 의존, 거리, N 편향, 노이즈, T 민감도 |
+| `analysis/extra_hg_replicates.py` | 순서·N 편향·T 민감도를 시드 10개로 반복 (numpy 1스레드, 약 20초; `entropy_toy.py` 함수를 가져다 씀) |
 | `analysis/bc_toy.py` | 2차원 BC toy: 커버리지와 모드 평균화 |
 | `analysis/stats_check.py` | 판독 값의 검정(2차항, 피크, Fisher, Holm, CMH) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 |
@@ -20,7 +21,7 @@
 
 ```bash
 pip install numpy scipy matplotlib
-python3 analysis/entropy_toy.py && python3 analysis/bc_toy.py && python3 analysis/stats_check.py
+python3 analysis/entropy_toy.py && python3 analysis/extra_hg_replicates.py && python3 analysis/bc_toy.py && python3 analysis/stats_check.py
 python3 analysis/plot_figures.py
 ```
 

@@ -13,13 +13,14 @@
 | `analysis/04_code_verification.md` | 논문과 공개 코드 대조(D1–D27), 주장 검증(C1–C14), 구현 가능성 |
 | `analysis/table_check.py` | 표 재계산과 검정 (1초 미만) |
 | `analysis/motion_toy.py` | 잠재 행동 토이: 마스크 누수, 자르기 불일치, 혼잡도 대 판독 (수 초) |
+| `analysis/extra_mask_dilation.py` | 마스크 팽창 0–4 px, 카메라 이동 1–2 px에 따른 카메라·밝기 판독 (numpy, 약 1분; `motion_toy.py` 함수를 가져다 씀) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 네 장 |
 
 ## 재실행
 
 ```bash
 pip install numpy scipy matplotlib
-python3 analysis/table_check.py && python3 analysis/motion_toy.py
+python3 analysis/table_check.py && python3 analysis/motion_toy.py && python3 analysis/extra_mask_dilation.py
 python3 analysis/plot_figures.py
 ```
 

@@ -1,0 +1,957 @@
+{
+ "setup": {
+  "N": 2000,
+  "K": 16,
+  "pool": "2x2 mean",
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "dil_px": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "cam_mag_px": [
+   1,
+   2
+  ],
+  "tex_amp": [
+   0.05,
+   0.25
+  ],
+  "start_pos": [
+   "fixed (14,14)",
+   "random"
+  ],
+  "note": "마스크 안 차이만 사용. excess_vs_null = 실제 순도 − 라벨 무작위 섞기 순도(귀무)"
+ },
+ "grid": {
+  "fixpos_tex0.05_cam1px_dil0": {
+   "action": {
+    "purity": 0.992,
+    "chance": 0.264,
+    "null_purity": 0.297,
+    "excess_vs_null": 0.695,
+    "mi_bits": 1.981
+   },
+   "cam": {
+    "purity": 0.692,
+    "chance": 0.213,
+    "null_purity": 0.245,
+    "excess_vs_null": 0.447,
+    "mi_bits": 1.539
+   },
+   "bright": {
+    "purity": 0.457,
+    "chance": 0.345,
+    "null_purity": 0.374,
+    "excess_vs_null": 0.083,
+    "mi_bits": 0.18
+   }
+  },
+  "fixpos_tex0.05_cam1px_dil1": {
+   "action": {
+    "purity": 0.972,
+    "chance": 0.264,
+    "null_purity": 0.299,
+    "excess_vs_null": 0.673,
+    "mi_bits": 1.923
+   },
+   "cam": {
+    "purity": 0.62,
+    "chance": 0.213,
+    "null_purity": 0.243,
+    "excess_vs_null": 0.377,
+    "mi_bits": 1.302
+   },
+   "bright": {
+    "purity": 0.545,
+    "chance": 0.345,
+    "null_purity": 0.375,
+    "excess_vs_null": 0.169,
+    "mi_bits": 0.395
+   }
+  },
+  "fixpos_tex0.05_cam1px_dil2": {
+   "action": {
+    "purity": 0.951,
+    "chance": 0.264,
+    "null_purity": 0.299,
+    "excess_vs_null": 0.652,
+    "mi_bits": 1.889
+   },
+   "cam": {
+    "purity": 0.508,
+    "chance": 0.213,
+    "null_purity": 0.245,
+    "excess_vs_null": 0.263,
+    "mi_bits": 0.938
+   },
+   "bright": {
+    "purity": 0.668,
+    "chance": 0.345,
+    "null_purity": 0.375,
+    "excess_vs_null": 0.294,
+    "mi_bits": 0.746
+   }
+  },
+  "fixpos_tex0.05_cam1px_dil3": {
+   "action": {
+    "purity": 0.941,
+    "chance": 0.264,
+    "null_purity": 0.3,
+    "excess_vs_null": 0.641,
+    "mi_bits": 1.861
+   },
+   "cam": {
+    "purity": 0.462,
+    "chance": 0.213,
+    "null_purity": 0.244,
+    "excess_vs_null": 0.218,
+    "mi_bits": 0.804
+   },
+   "bright": {
+    "purity": 0.719,
+    "chance": 0.345,
+    "null_purity": 0.377,
+    "excess_vs_null": 0.341,
+    "mi_bits": 0.891
+   }
+  },
+  "fixpos_tex0.05_cam1px_dil4": {
+   "action": {
+    "purity": 0.945,
+    "chance": 0.264,
+    "null_purity": 0.297,
+    "excess_vs_null": 0.648,
+    "mi_bits": 1.868
+   },
+   "cam": {
+    "purity": 0.43,
+    "chance": 0.213,
+    "null_purity": 0.244,
+    "excess_vs_null": 0.186,
+    "mi_bits": 0.696
+   },
+   "bright": {
+    "purity": 0.758,
+    "chance": 0.345,
+    "null_purity": 0.375,
+    "excess_vs_null": 0.383,
+    "mi_bits": 0.999
+   }
+  },
+  "fixpos_tex0.05_cam2px_dil0": {
+   "action": {
+    "purity": 0.675,
+    "chance": 0.264,
+    "null_purity": 0.296,
+    "excess_vs_null": 0.379,
+    "mi_bits": 1.189
+   },
+   "cam": {
+    "purity": 0.551,
+    "chance": 0.213,
+    "null_purity": 0.243,
+    "excess_vs_null": 0.307,
+    "mi_bits": 1.247
+   },
+   "bright": {
+    "purity": 0.521,
+    "chance": 0.345,
+    "null_purity": 0.376,
+    "excess_vs_null": 0.145,
+    "mi_bits": 0.414
+   }
+  },
+  "fixpos_tex0.05_cam2px_dil1": {
+   "action": {
+    "purity": 0.676,
+    "chance": 0.264,
+    "null_purity": 0.297,
+    "excess_vs_null": 0.378,
+    "mi_bits": 1.19
+   },
+   "cam": {
+    "purity": 0.568,
+    "chance": 0.213,
+    "null_purity": 0.244,
+    "excess_vs_null": 0.325,
+    "mi_bits": 1.285
+   },
+   "bright": {
+    "purity": 0.507,
+    "chance": 0.345,
+    "null_purity": 0.376,
+    "excess_vs_null": 0.131,
+    "mi_bits": 0.39
+   }
+  },
+  "fixpos_tex0.05_cam2px_dil2": {
+   "action": {
+    "purity": 0.675,
+    "chance": 0.264,
+    "null_purity": 0.297,
+    "excess_vs_null": 0.378,
+    "mi_bits": 1.184
+   },
+   "cam": {
+    "purity": 0.586,
+    "chance": 0.213,
+    "null_purity": 0.244,
+    "excess_vs_null": 0.343,
+    "mi_bits": 1.309
+   },
+   "bright": {
+    "purity": 0.519,
+    "chance": 0.345,
+    "null_purity": 0.375,
+    "excess_vs_null": 0.145,
+    "mi_bits": 0.428
+   }
+  },
+  "fixpos_tex0.05_cam2px_dil3": {
+   "action": {
+    "purity": 0.664,
+    "chance": 0.264,
+    "null_purity": 0.296,
+    "excess_vs_null": 0.368,
+    "mi_bits": 1.167
+   },
+   "cam": {
+    "purity": 0.582,
+    "chance": 0.213,
+    "null_purity": 0.244,
+    "excess_vs_null": 0.338,
+    "mi_bits": 1.298
+   },
+   "bright": {
+    "purity": 0.55,
+    "chance": 0.345,
+    "null_purity": 0.377,
+    "excess_vs_null": 0.173,
+    "mi_bits": 0.493
+   }
+  },
+  "fixpos_tex0.05_cam2px_dil4": {
+   "action": {
+    "purity": 0.661,
+    "chance": 0.264,
+    "null_purity": 0.295,
+    "excess_vs_null": 0.366,
+    "mi_bits": 1.133
+   },
+   "cam": {
+    "purity": 0.541,
+    "chance": 0.213,
+    "null_purity": 0.242,
+    "excess_vs_null": 0.298,
+    "mi_bits": 1.145
+   },
+   "bright": {
+    "purity": 0.621,
+    "chance": 0.345,
+    "null_purity": 0.377,
+    "excess_vs_null": 0.244,
+    "mi_bits": 0.68
+   }
+  },
+  "fixpos_tex0.25_cam1px_dil0": {
+   "action": {
+    "purity": 0.983,
+    "chance": 0.264,
+    "null_purity": 0.3,
+    "excess_vs_null": 0.683,
+    "mi_bits": 1.962
+   },
+   "cam": {
+    "purity": 0.737,
+    "chance": 0.213,
+    "null_purity": 0.244,
+    "excess_vs_null": 0.493,
+    "mi_bits": 1.657
+   },
+   "bright": {
+    "purity": 0.415,
+    "chance": 0.345,
+    "null_purity": 0.376,
+    "excess_vs_null": 0.039,
+    "mi_bits": 0.075
+   }
+  },
+  "fixpos_tex0.25_cam1px_dil1": {
+   "action": {
+    "purity": 0.992,
+    "chance": 0.264,
+    "null_purity": 0.299,
+    "excess_vs_null": 0.693,
+    "mi_bits": 1.972
+   },
+   "cam": {
+    "purity": 0.649,
+    "chance": 0.213,
+    "null_purity": 0.247,
+    "excess_vs_null": 0.402,
+    "mi_bits": 1.339
+   },
+   "bright": {
+    "purity": 0.542,
+    "chance": 0.345,
+    "null_purity": 0.378,
+    "excess_vs_null": 0.164,
+    "mi_bits": 0.383
+   }
+  },
+  "fixpos_tex0.25_cam1px_dil2": {
+   "action": {
+    "purity": 0.98,
+    "chance": 0.264,
+    "null_purity": 0.3,
+    "excess_vs_null": 0.68,
+    "mi_bits": 1.939
+   },
+   "cam": {
+    "purity": 0.53,
+    "chance": 0.213,
+    "null_purity": 0.244,
+    "excess_vs_null": 0.287,
+    "mi_bits": 1.03
+   },
+   "bright": {
+    "purity": 0.654,
+    "chance": 0.345,
+    "null_purity": 0.375,
+    "excess_vs_null": 0.278,
+    "mi_bits": 0.756
+   }
+  },
+  "fixpos_tex0.25_cam1px_dil3": {
+   "action": {
+    "purity": 0.956,
+    "chance": 0.264,
+    "null_purity": 0.299,
+    "excess_vs_null": 0.657,
+    "mi_bits": 1.899
+   },
+   "cam": {
+    "purity": 0.472,
+    "chance": 0.213,
+    "null_purity": 0.245,
+    "excess_vs_null": 0.227,
+    "mi_bits": 0.871
+   },
+   "bright": {
+    "purity": 0.724,
+    "chance": 0.345,
+    "null_purity": 0.374,
+    "excess_vs_null": 0.35,
+    "mi_bits": 0.933
+   }
+  },
+  "fixpos_tex0.25_cam1px_dil4": {
+   "action": {
+    "purity": 0.969,
+    "chance": 0.264,
+    "null_purity": 0.299,
+    "excess_vs_null": 0.671,
+    "mi_bits": 1.929
+   },
+   "cam": {
+    "purity": 0.42,
+    "chance": 0.213,
+    "null_purity": 0.245,
+    "excess_vs_null": 0.175,
+    "mi_bits": 0.669
+   },
+   "bright": {
+    "purity": 0.786,
+    "chance": 0.345,
+    "null_purity": 0.374,
+    "excess_vs_null": 0.411,
+    "mi_bits": 1.101
+   }
+  },
+  "fixpos_tex0.25_cam2px_dil0": {
+   "action": {
+    "purity": 0.676,
+    "chance": 0.264,
+    "null_purity": 0.296,
+    "excess_vs_null": 0.38,
+    "mi_bits": 1.204
+   },
+   "cam": {
+    "purity": 0.58,
+    "chance": 0.213,
+    "null_purity": 0.242,
+    "excess_vs_null": 0.338,
+    "mi_bits": 1.32
+   },
+   "bright": {
+    "purity": 0.497,
+    "chance": 0.345,
+    "null_purity": 0.378,
+    "excess_vs_null": 0.119,
+    "mi_bits": 0.312
+   }
+  },
+  "fixpos_tex0.25_cam2px_dil1": {
+   "action": {
+    "purity": 0.675,
+    "chance": 0.264,
+    "null_purity": 0.297,
+    "excess_vs_null": 0.378,
+    "mi_bits": 1.204
+   },
+   "cam": {
+    "purity": 0.59,
+    "chance": 0.213,
+    "null_purity": 0.244,
+    "excess_vs_null": 0.346,
+    "mi_bits": 1.343
+   },
+   "bright": {
+    "purity": 0.499,
+    "chance": 0.345,
+    "null_purity": 0.377,
+    "excess_vs_null": 0.122,
+    "mi_bits": 0.331
+   }
+  },
+  "fixpos_tex0.25_cam2px_dil2": {
+   "action": {
+    "purity": 0.674,
+    "chance": 0.264,
+    "null_purity": 0.297,
+    "excess_vs_null": 0.378,
+    "mi_bits": 1.189
+   },
+   "cam": {
+    "purity": 0.578,
+    "chance": 0.213,
+    "null_purity": 0.244,
+    "excess_vs_null": 0.334,
+    "mi_bits": 1.306
+   },
+   "bright": {
+    "purity": 0.523,
+    "chance": 0.345,
+    "null_purity": 0.376,
+    "excess_vs_null": 0.147,
+    "mi_bits": 0.4
+   }
+  },
+  "fixpos_tex0.25_cam2px_dil3": {
+   "action": {
+    "purity": 0.673,
+    "chance": 0.264,
+    "null_purity": 0.295,
+    "excess_vs_null": 0.378,
+    "mi_bits": 1.198
+   },
+   "cam": {
+    "purity": 0.582,
+    "chance": 0.213,
+    "null_purity": 0.245,
+    "excess_vs_null": 0.337,
+    "mi_bits": 1.315
+   },
+   "bright": {
+    "purity": 0.534,
+    "chance": 0.345,
+    "null_purity": 0.379,
+    "excess_vs_null": 0.156,
+    "mi_bits": 0.436
+   }
+  },
+  "fixpos_tex0.25_cam2px_dil4": {
+   "action": {
+    "purity": 0.664,
+    "chance": 0.264,
+    "null_purity": 0.297,
+    "excess_vs_null": 0.366,
+    "mi_bits": 1.168
+   },
+   "cam": {
+    "purity": 0.561,
+    "chance": 0.213,
+    "null_purity": 0.245,
+    "excess_vs_null": 0.315,
+    "mi_bits": 1.235
+   },
+   "bright": {
+    "purity": 0.579,
+    "chance": 0.345,
+    "null_purity": 0.375,
+    "excess_vs_null": 0.203,
+    "mi_bits": 0.561
+   }
+  },
+  "randpos_tex0.05_cam1px_dil0": {
+   "action": {
+    "purity": 0.303,
+    "chance": 0.259,
+    "null_purity": 0.288,
+    "excess_vs_null": 0.015,
+    "mi_bits": 0.034
+   },
+   "cam": {
+    "purity": 0.239,
+    "chance": 0.209,
+    "null_purity": 0.238,
+    "excess_vs_null": 0.002,
+    "mi_bits": 0.022
+   },
+   "bright": {
+    "purity": 0.382,
+    "chance": 0.342,
+    "null_purity": 0.367,
+    "excess_vs_null": 0.015,
+    "mi_bits": 0.022
+   }
+  },
+  "randpos_tex0.05_cam1px_dil1": {
+   "action": {
+    "purity": 0.294,
+    "chance": 0.259,
+    "null_purity": 0.29,
+    "excess_vs_null": 0.004,
+    "mi_bits": 0.029
+   },
+   "cam": {
+    "purity": 0.238,
+    "chance": 0.209,
+    "null_purity": 0.238,
+    "excess_vs_null": 0.001,
+    "mi_bits": 0.024
+   },
+   "bright": {
+    "purity": 0.407,
+    "chance": 0.342,
+    "null_purity": 0.367,
+    "excess_vs_null": 0.04,
+    "mi_bits": 0.05
+   }
+  },
+  "randpos_tex0.05_cam1px_dil2": {
+   "action": {
+    "purity": 0.3,
+    "chance": 0.259,
+    "null_purity": 0.286,
+    "excess_vs_null": 0.014,
+    "mi_bits": 0.039
+   },
+   "cam": {
+    "purity": 0.24,
+    "chance": 0.209,
+    "null_purity": 0.237,
+    "excess_vs_null": 0.002,
+    "mi_bits": 0.025
+   },
+   "bright": {
+    "purity": 0.468,
+    "chance": 0.342,
+    "null_purity": 0.367,
+    "excess_vs_null": 0.101,
+    "mi_bits": 0.152
+   }
+  },
+  "randpos_tex0.05_cam1px_dil3": {
+   "action": {
+    "purity": 0.305,
+    "chance": 0.259,
+    "null_purity": 0.293,
+    "excess_vs_null": 0.013,
+    "mi_bits": 0.035
+   },
+   "cam": {
+    "purity": 0.242,
+    "chance": 0.209,
+    "null_purity": 0.239,
+    "excess_vs_null": 0.004,
+    "mi_bits": 0.026
+   },
+   "bright": {
+    "purity": 0.655,
+    "chance": 0.342,
+    "null_purity": 0.371,
+    "excess_vs_null": 0.284,
+    "mi_bits": 0.542
+   }
+  },
+  "randpos_tex0.05_cam1px_dil4": {
+   "action": {
+    "purity": 0.312,
+    "chance": 0.259,
+    "null_purity": 0.293,
+    "excess_vs_null": 0.019,
+    "mi_bits": 0.04
+   },
+   "cam": {
+    "purity": 0.25,
+    "chance": 0.209,
+    "null_purity": 0.241,
+    "excess_vs_null": 0.009,
+    "mi_bits": 0.029
+   },
+   "bright": {
+    "purity": 0.875,
+    "chance": 0.342,
+    "null_purity": 0.373,
+    "excess_vs_null": 0.501,
+    "mi_bits": 1.06
+   }
+  },
+  "randpos_tex0.05_cam2px_dil0": {
+   "action": {
+    "purity": 0.295,
+    "chance": 0.259,
+    "null_purity": 0.285,
+    "excess_vs_null": 0.011,
+    "mi_bits": 0.028
+   },
+   "cam": {
+    "purity": 0.245,
+    "chance": 0.209,
+    "null_purity": 0.233,
+    "excess_vs_null": 0.012,
+    "mi_bits": 0.035
+   },
+   "bright": {
+    "purity": 0.38,
+    "chance": 0.342,
+    "null_purity": 0.368,
+    "excess_vs_null": 0.012,
+    "mi_bits": 0.023
+   }
+  },
+  "randpos_tex0.05_cam2px_dil1": {
+   "action": {
+    "purity": 0.298,
+    "chance": 0.259,
+    "null_purity": 0.286,
+    "excess_vs_null": 0.012,
+    "mi_bits": 0.034
+   },
+   "cam": {
+    "purity": 0.242,
+    "chance": 0.209,
+    "null_purity": 0.237,
+    "excess_vs_null": 0.005,
+    "mi_bits": 0.032
+   },
+   "bright": {
+    "purity": 0.394,
+    "chance": 0.342,
+    "null_purity": 0.362,
+    "excess_vs_null": 0.032,
+    "mi_bits": 0.042
+   }
+  },
+  "randpos_tex0.05_cam2px_dil2": {
+   "action": {
+    "purity": 0.299,
+    "chance": 0.259,
+    "null_purity": 0.286,
+    "excess_vs_null": 0.013,
+    "mi_bits": 0.033
+   },
+   "cam": {
+    "purity": 0.242,
+    "chance": 0.209,
+    "null_purity": 0.237,
+    "excess_vs_null": 0.005,
+    "mi_bits": 0.032
+   },
+   "bright": {
+    "purity": 0.442,
+    "chance": 0.342,
+    "null_purity": 0.366,
+    "excess_vs_null": 0.076,
+    "mi_bits": 0.102
+   }
+  },
+  "randpos_tex0.05_cam2px_dil3": {
+   "action": {
+    "purity": 0.299,
+    "chance": 0.259,
+    "null_purity": 0.289,
+    "excess_vs_null": 0.01,
+    "mi_bits": 0.034
+   },
+   "cam": {
+    "purity": 0.25,
+    "chance": 0.209,
+    "null_purity": 0.236,
+    "excess_vs_null": 0.015,
+    "mi_bits": 0.037
+   },
+   "bright": {
+    "purity": 0.602,
+    "chance": 0.342,
+    "null_purity": 0.367,
+    "excess_vs_null": 0.235,
+    "mi_bits": 0.429
+   }
+  },
+  "randpos_tex0.05_cam2px_dil4": {
+   "action": {
+    "purity": 0.301,
+    "chance": 0.259,
+    "null_purity": 0.297,
+    "excess_vs_null": 0.004,
+    "mi_bits": 0.032
+   },
+   "cam": {
+    "purity": 0.261,
+    "chance": 0.209,
+    "null_purity": 0.24,
+    "excess_vs_null": 0.021,
+    "mi_bits": 0.045
+   },
+   "bright": {
+    "purity": 0.761,
+    "chance": 0.342,
+    "null_purity": 0.369,
+    "excess_vs_null": 0.392,
+    "mi_bits": 0.79
+   }
+  },
+  "randpos_tex0.25_cam1px_dil0": {
+   "action": {
+    "purity": 0.298,
+    "chance": 0.259,
+    "null_purity": 0.286,
+    "excess_vs_null": 0.012,
+    "mi_bits": 0.038
+   },
+   "cam": {
+    "purity": 0.238,
+    "chance": 0.209,
+    "null_purity": 0.233,
+    "excess_vs_null": 0.004,
+    "mi_bits": 0.024
+   },
+   "bright": {
+    "purity": 0.383,
+    "chance": 0.342,
+    "null_purity": 0.367,
+    "excess_vs_null": 0.016,
+    "mi_bits": 0.024
+   }
+  },
+  "randpos_tex0.25_cam1px_dil1": {
+   "action": {
+    "purity": 0.293,
+    "chance": 0.259,
+    "null_purity": 0.287,
+    "excess_vs_null": 0.006,
+    "mi_bits": 0.03
+   },
+   "cam": {
+    "purity": 0.237,
+    "chance": 0.209,
+    "null_purity": 0.236,
+    "excess_vs_null": 0.002,
+    "mi_bits": 0.023
+   },
+   "bright": {
+    "purity": 0.404,
+    "chance": 0.342,
+    "null_purity": 0.365,
+    "excess_vs_null": 0.039,
+    "mi_bits": 0.051
+   }
+  },
+  "randpos_tex0.25_cam1px_dil2": {
+   "action": {
+    "purity": 0.298,
+    "chance": 0.259,
+    "null_purity": 0.29,
+    "excess_vs_null": 0.008,
+    "mi_bits": 0.035
+   },
+   "cam": {
+    "purity": 0.24,
+    "chance": 0.209,
+    "null_purity": 0.239,
+    "excess_vs_null": 0.001,
+    "mi_bits": 0.026
+   },
+   "bright": {
+    "purity": 0.466,
+    "chance": 0.342,
+    "null_purity": 0.364,
+    "excess_vs_null": 0.102,
+    "mi_bits": 0.143
+   }
+  },
+  "randpos_tex0.25_cam1px_dil3": {
+   "action": {
+    "purity": 0.306,
+    "chance": 0.259,
+    "null_purity": 0.288,
+    "excess_vs_null": 0.018,
+    "mi_bits": 0.038
+   },
+   "cam": {
+    "purity": 0.243,
+    "chance": 0.209,
+    "null_purity": 0.237,
+    "excess_vs_null": 0.005,
+    "mi_bits": 0.026
+   },
+   "bright": {
+    "purity": 0.647,
+    "chance": 0.342,
+    "null_purity": 0.371,
+    "excess_vs_null": 0.276,
+    "mi_bits": 0.513
+   }
+  },
+  "randpos_tex0.25_cam1px_dil4": {
+   "action": {
+    "purity": 0.319,
+    "chance": 0.259,
+    "null_purity": 0.295,
+    "excess_vs_null": 0.024,
+    "mi_bits": 0.04
+   },
+   "cam": {
+    "purity": 0.246,
+    "chance": 0.209,
+    "null_purity": 0.238,
+    "excess_vs_null": 0.009,
+    "mi_bits": 0.026
+   },
+   "bright": {
+    "purity": 0.857,
+    "chance": 0.342,
+    "null_purity": 0.375,
+    "excess_vs_null": 0.483,
+    "mi_bits": 1.054
+   }
+  },
+  "randpos_tex0.25_cam2px_dil0": {
+   "action": {
+    "purity": 0.297,
+    "chance": 0.259,
+    "null_purity": 0.285,
+    "excess_vs_null": 0.013,
+    "mi_bits": 0.033
+   },
+   "cam": {
+    "purity": 0.241,
+    "chance": 0.209,
+    "null_purity": 0.236,
+    "excess_vs_null": 0.005,
+    "mi_bits": 0.035
+   },
+   "bright": {
+    "purity": 0.377,
+    "chance": 0.342,
+    "null_purity": 0.368,
+    "excess_vs_null": 0.009,
+    "mi_bits": 0.022
+   }
+  },
+  "randpos_tex0.25_cam2px_dil1": {
+   "action": {
+    "purity": 0.297,
+    "chance": 0.259,
+    "null_purity": 0.284,
+    "excess_vs_null": 0.012,
+    "mi_bits": 0.034
+   },
+   "cam": {
+    "purity": 0.246,
+    "chance": 0.209,
+    "null_purity": 0.235,
+    "excess_vs_null": 0.011,
+    "mi_bits": 0.036
+   },
+   "bright": {
+    "purity": 0.397,
+    "chance": 0.342,
+    "null_purity": 0.365,
+    "excess_vs_null": 0.032,
+    "mi_bits": 0.039
+   }
+  },
+  "randpos_tex0.25_cam2px_dil2": {
+   "action": {
+    "purity": 0.295,
+    "chance": 0.259,
+    "null_purity": 0.285,
+    "excess_vs_null": 0.011,
+    "mi_bits": 0.03
+   },
+   "cam": {
+    "purity": 0.242,
+    "chance": 0.209,
+    "null_purity": 0.239,
+    "excess_vs_null": 0.003,
+    "mi_bits": 0.032
+   },
+   "bright": {
+    "purity": 0.431,
+    "chance": 0.342,
+    "null_purity": 0.364,
+    "excess_vs_null": 0.068,
+    "mi_bits": 0.087
+   }
+  },
+  "randpos_tex0.25_cam2px_dil3": {
+   "action": {
+    "purity": 0.299,
+    "chance": 0.259,
+    "null_purity": 0.292,
+    "excess_vs_null": 0.006,
+    "mi_bits": 0.031
+   },
+   "cam": {
+    "purity": 0.245,
+    "chance": 0.209,
+    "null_purity": 0.239,
+    "excess_vs_null": 0.006,
+    "mi_bits": 0.033
+   },
+   "bright": {
+    "purity": 0.578,
+    "chance": 0.342,
+    "null_purity": 0.369,
+    "excess_vs_null": 0.21,
+    "mi_bits": 0.372
+   }
+  },
+  "randpos_tex0.25_cam2px_dil4": {
+   "action": {
+    "purity": 0.301,
+    "chance": 0.259,
+    "null_purity": 0.291,
+    "excess_vs_null": 0.01,
+    "mi_bits": 0.029
+   },
+   "cam": {
+    "purity": 0.258,
+    "chance": 0.209,
+    "null_purity": 0.236,
+    "excess_vs_null": 0.022,
+    "mi_bits": 0.038
+   },
+   "bright": {
+    "purity": 0.748,
+    "chance": 0.342,
+    "null_purity": 0.369,
+    "excess_vs_null": 0.379,
+    "mi_bits": 0.743
+   }
+  }
+ },
+ "runtime_s": 50.3
+}

@@ -17,6 +17,7 @@
 | `analysis/04_code_verification.md` | 논문 ↔ 코드 대조(D1–D14), 수치 재계산(C1–C10, V1–V2), 구현 가능성 |
 | `analysis/table_check.py` | 표·본문 수치 재계산 |
 | `analysis/noise_toy.py` | 학습 분포와 Fig. 9 경로 17개의 Gaussian 혼합 toy |
+| `analysis/extra_learned_denoiser.py` | 작은 MLP velocity 모델을 같은 toy에서 학습해 Fig. 9 경로 17개 평가 (numpy 1스레드, 약 3분; 세계와 경로 식은 `noise_toy.py`에서 복사) |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
 | `analysis/data/robodojo_per_seed.json` | 공식 저장소 `assets/robodojo_verification/`의 RoboDojo 시드별 결과(Apache-2.0) |
 | `analysis/data/param_counts.json` | 공개 사전학습 체크포인트 safetensors 헤더로 센 파라미터 수 |
@@ -25,7 +26,7 @@
 
 ```bash
 pip install numpy scipy matplotlib
-python3 analysis/table_check.py && python3 analysis/noise_toy.py
+python3 analysis/table_check.py && python3 analysis/noise_toy.py && python3 analysis/extra_learned_denoiser.py
 python3 analysis/plot_figures.py
 ```
 

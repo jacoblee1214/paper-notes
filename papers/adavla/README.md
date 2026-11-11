@@ -15,6 +15,9 @@
 | `analysis/pr_check.py` | 참여율 정의 검산, 스케일 불변성, 계산 비용 (수 초) |
 | `analysis/flow_toy.py` | 2차원 가우시안 혼합 흐름 toy (numpy 1스레드, 약 40초) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 네 장 |
+| `analysis/extra_flow_nfe.py` | 같은 NFE에서 일관 중점 대 정적 Euler 비교, 10시드 (numpy, 약 45초) |
+| `analysis/extra_flow_scale.py` | 스케일 불변 곡률 정의와 Cth 전이성 검증 (numpy, 약 55초) |
+| `analysis/extra_decision_signal.py` | 곡률 대 분산 변화율 결정 신호 비교 (numpy, 약 45초) |
 
 ## 재실행
 
@@ -22,6 +25,7 @@
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py && python3 analysis/pr_check.py && python3 analysis/flow_toy.py
 python3 analysis/plot_figures.py
+python3 analysis/extra_flow_nfe.py && python3 analysis/extra_flow_scale.py && python3 analysis/extra_decision_signal.py
 ```
 
 ## 출처와 라이선스

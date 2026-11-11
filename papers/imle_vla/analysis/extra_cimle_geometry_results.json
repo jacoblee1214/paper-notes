@@ -1,0 +1,415 @@
+{
+ "setup": {
+  "iters": 3000,
+  "batch": 256,
+  "hidden": 64,
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "samples": 4000,
+  "ms": [
+   1,
+   2,
+   5
+  ],
+  "cover_radius": "0.25R",
+  "between_threshold": "0.3R"
+ },
+ "conditions": {
+  "base K=4 R=1 s=0.05": {
+   "K": 4,
+   "R": 1.0,
+   "sigma": 0.05,
+   "methods": {
+    "m=1": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "mean_dist_over_R": {
+      "mean": 0.9362,
+      "sd": 0.0071
+     }
+    },
+    "m=2": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.9998,
+      "sd": 0.0002
+     },
+     "mean_dist_over_R": {
+      "mean": 0.6966,
+      "sd": 0.0261
+     }
+    },
+    "m=5": {
+     "coverage": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.4819,
+      "sd": 0.0281
+     },
+     "mean_dist_over_R": {
+      "mean": 0.3308,
+      "sd": 0.0051
+     }
+    }
+   }
+  },
+  "R=0.5": {
+   "K": 4,
+   "R": 0.5,
+   "sigma": 0.05,
+   "methods": {
+    "m=1": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "mean_dist_over_R": {
+      "mean": 0.914,
+      "sd": 0.0237
+     }
+    },
+    "m=2": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.9888,
+      "sd": 0.0158
+     },
+     "mean_dist_over_R": {
+      "mean": 0.6963,
+      "sd": 0.0309
+     }
+    },
+    "m=5": {
+     "coverage": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.4936,
+      "sd": 0.0537
+     },
+     "mean_dist_over_R": {
+      "mean": 0.3407,
+      "sd": 0.0206
+     }
+    }
+   }
+  },
+  "R=0.25": {
+   "K": 4,
+   "R": 0.25,
+   "sigma": 0.05,
+   "methods": {
+    "m=1": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "mean_dist_over_R": {
+      "mean": 0.916,
+      "sd": 0.0211
+     }
+    },
+    "m=2": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.9951,
+      "sd": 0.007
+     },
+     "mean_dist_over_R": {
+      "mean": 0.7073,
+      "sd": 0.0211
+     }
+    },
+    "m=5": {
+     "coverage": {
+      "mean": 0.9167,
+      "sd": 0.1179
+     },
+     "between_frac": {
+      "mean": 0.5043,
+      "sd": 0.0347
+     },
+     "mean_dist_over_R": {
+      "mean": 0.3354,
+      "sd": 0.0128
+     }
+    }
+   }
+  },
+  "K=2": {
+   "K": 2,
+   "R": 1.0,
+   "sigma": 0.05,
+   "methods": {
+    "m=1": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "mean_dist_over_R": {
+      "mean": 0.9489,
+      "sd": 0.012
+     }
+    },
+    "m=2": {
+     "coverage": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.6908,
+      "sd": 0.0262
+     },
+     "mean_dist_over_R": {
+      "mean": 0.4942,
+      "sd": 0.0249
+     }
+    },
+    "m=5": {
+     "coverage": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.2239,
+      "sd": 0.0043
+     },
+     "mean_dist_over_R": {
+      "mean": 0.1835,
+      "sd": 0.0011
+     }
+    }
+   }
+  },
+  "K=8": {
+   "K": 8,
+   "R": 1.0,
+   "sigma": 0.05,
+   "methods": {
+    "m=1": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "mean_dist_over_R": {
+      "mean": 0.9344,
+      "sd": 0.0048
+     }
+    },
+    "m=2": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.9991,
+      "sd": 0.0011
+     },
+     "mean_dist_over_R": {
+      "mean": 0.6073,
+      "sd": 0.0108
+     }
+    },
+    "m=5": {
+     "coverage": {
+      "mean": 0.4583,
+      "sd": 0.2125
+     },
+     "between_frac": {
+      "mean": 0.3833,
+      "sd": 0.014
+     },
+     "mean_dist_over_R": {
+      "mean": 0.2793,
+      "sd": 0.0032
+     }
+    }
+   }
+  },
+  "s=0.02": {
+   "K": 4,
+   "R": 1.0,
+   "sigma": 0.02,
+   "methods": {
+    "m=1": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "mean_dist_over_R": {
+      "mean": 0.9357,
+      "sd": 0.0075
+     }
+    },
+    "m=2": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "mean_dist_over_R": {
+      "mean": 0.704,
+      "sd": 0.014
+     }
+    },
+    "m=5": {
+     "coverage": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.4795,
+      "sd": 0.0298
+     },
+     "mean_dist_over_R": {
+      "mean": 0.3308,
+      "sd": 0.0097
+     }
+    }
+   }
+  },
+  "s=0.1": {
+   "K": 4,
+   "R": 1.0,
+   "sigma": 0.1,
+   "methods": {
+    "m=1": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "mean_dist_over_R": {
+      "mean": 0.9371,
+      "sd": 0.0065
+     }
+    },
+    "m=2": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.9897,
+      "sd": 0.0146
+     },
+     "mean_dist_over_R": {
+      "mean": 0.6533,
+      "sd": 0.0198
+     }
+    },
+    "m=5": {
+     "coverage": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.4976,
+      "sd": 0.0096
+     },
+     "mean_dist_over_R": {
+      "mean": 0.3349,
+      "sd": 0.008
+     }
+    }
+   }
+  },
+  "s=0.2": {
+   "K": 4,
+   "R": 1.0,
+   "sigma": 0.2,
+   "methods": {
+    "m=1": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "mean_dist_over_R": {
+      "mean": 0.939,
+      "sd": 0.0057
+     }
+    },
+    "m=2": {
+     "coverage": {
+      "mean": 0.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "mean_dist_over_R": {
+      "mean": 0.6929,
+      "sd": 0.018
+     }
+    },
+    "m=5": {
+     "coverage": {
+      "mean": 1.0,
+      "sd": 0.0
+     },
+     "between_frac": {
+      "mean": 0.4437,
+      "sd": 0.0176
+     },
+     "mean_dist_over_R": {
+      "mean": 0.3176,
+      "sd": 0.0113
+     }
+    }
+   }
+  }
+ },
+ "runtime_s": 351.3
+}

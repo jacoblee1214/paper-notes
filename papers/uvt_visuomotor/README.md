@@ -13,6 +13,7 @@
 | `analysis/04_code_verification.md` | 논문 ↔ 공식 저장소 대조(D1–D27), 구현 가능성 판정 |
 | `analysis/table_check.py` | 표 재계산과 검정 (수 초) |
 | `analysis/uvt_toy.py` | 선형 toy: 동역학 고유 이득과 목표 압축 효과 (numpy 1스레드, 수 초) |
+| `analysis/extra_linear_orthogonal.py` | 동역학과 행동 신호의 정렬(1, 0.5, 0)에 따른 동역학 고유 이득 (numpy 1스레드, 수 초; `uvt_toy.py` 함수를 가져다 씀) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 세 장 |
 
 ## 재실행
@@ -21,6 +22,7 @@
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py
 python3 analysis/uvt_toy.py
+python3 analysis/extra_linear_orthogonal.py
 python3 analysis/plot_figures.py
 ```
 

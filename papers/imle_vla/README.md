@@ -13,6 +13,8 @@
 | `analysis/04_code_verification.md` | 논문 ↔ 공식 저장소 대조(D1–D15), 구현 가능성 판정 |
 | `analysis/table_check.py` | 표 재계산과 지연 산술 (수 초) |
 | `analysis/imle_toy.py` | 4봉우리 링에서 cIMLE 대 흐름 toy (numpy 1스레드, 약 3분). 결과와 샘플 저장 |
+| `analysis/extra_cimle_geometry.py` | 봉우리 간격·개수·잡음을 바꾼 m=1,2,5 덮음 경계 (numpy 1스레드, 약 6분) |
+| `analysis/extra_cimle_conditional.py` | 관측 조건에 따라 봉우리가 움직이는 목표의 조건부·무조건 cIMLE 비교 (numpy 1스레드, 약 2분; `extra_cimle_geometry.py`의 학습 함수를 가져다 씀) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 네 장 |
 
 ## 재실행
@@ -21,6 +23,8 @@
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py
 python3 analysis/imle_toy.py
+python3 analysis/extra_cimle_geometry.py
+python3 analysis/extra_cimle_conditional.py
 python3 analysis/plot_figures.py
 ```
 

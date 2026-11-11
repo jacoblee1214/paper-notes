@@ -1,0 +1,263 @@
+{
+ "setup": {
+  "hidden": 128,
+  "iters": 15000,
+  "batch": 512,
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "M_eval": 20000,
+  "loss": "unweighted MSE to eps - x0",
+  "train_mse_per_seed": [
+   0.5412,
+   0.5449,
+   0.528
+  ]
+ },
+ "per_path": {
+  "sync": {
+   "fig9": 93.0,
+   "learned": {
+    "action_valid_mean": 0.7704,
+    "action_valid_sd": 0.0127,
+    "same_mode_mean": 0.8584
+   },
+   "ideal_valid": 0.9489,
+   "max_action_du": 0.1,
+   "action_updates": 10
+  },
+  "VS action-lead α=4": {
+   "fig9": 91.0,
+   "learned": {
+    "action_valid_mean": 0.8601,
+    "action_valid_sd": 0.0038,
+    "same_mode_mean": 0.8869
+   },
+   "ideal_valid": 0.9835,
+   "max_action_du": 0.308,
+   "action_updates": 10
+  },
+  "VS action-lead α=8": {
+   "fig9": 90.7,
+   "learned": {
+    "action_valid_mean": 0.8679,
+    "action_valid_sd": 0.0025,
+    "same_mode_mean": 0.9136
+   },
+   "ideal_valid": 0.9861,
+   "max_action_du": 0.471,
+   "action_updates": 10
+  },
+  "VS action-lead α=16": {
+   "fig9": 89.7,
+   "learned": {
+    "action_valid_mean": 0.8582,
+    "action_valid_sd": 0.005,
+    "same_mode_mean": 0.9204
+   },
+   "ideal_valid": 0.9804,
+   "max_action_du": 0.64,
+   "action_updates": 10
+  },
+  "VS action-lead α=32": {
+   "fig9": 88.5,
+   "learned": {
+    "action_valid_mean": 0.8169,
+    "action_valid_sd": 0.0016,
+    "same_mode_mean": 0.9126
+   },
+   "ideal_valid": 0.9673,
+   "max_action_du": 0.78,
+   "action_updates": 10
+  },
+  "VS video-lead α=4": {
+   "fig9": 91.8,
+   "learned": {
+    "action_valid_mean": 0.8929,
+    "action_valid_sd": 0.0096,
+    "same_mode_mean": 0.9371
+   },
+   "ideal_valid": 0.9918,
+   "max_action_du": 0.1,
+   "action_updates": 10
+  },
+  "VS video-lead α=8": {
+   "fig9": 91.1,
+   "learned": {
+    "action_valid_mean": 0.9054,
+    "action_valid_sd": 0.0092,
+    "same_mode_mean": 0.9445
+   },
+   "ideal_valid": 0.9943,
+   "max_action_du": 0.1,
+   "action_updates": 10
+  },
+  "VS video-lead α=16": {
+   "fig9": 91.9,
+   "learned": {
+    "action_valid_mean": 0.8922,
+    "action_valid_sd": 0.0053,
+    "same_mode_mean": 0.9396
+   },
+   "ideal_valid": 0.9928,
+   "max_action_du": 0.1,
+   "action_updates": 10
+  },
+  "VS video-lead α=32": {
+   "fig9": 91.5,
+   "learned": {
+    "action_valid_mean": 0.8557,
+    "action_valid_sd": 0.0031,
+    "same_mode_mean": 0.9248
+   },
+   "ideal_valid": 0.9845,
+   "max_action_du": 0.1,
+   "action_updates": 10
+  },
+  "LO action-lead o=0.2": {
+   "fig9": 92.2,
+   "learned": {
+    "action_valid_mean": 0.745,
+    "action_valid_sd": 0.0132,
+    "same_mode_mean": 0.8497
+   },
+   "ideal_valid": 0.927,
+   "max_action_du": 0.1,
+   "action_updates": 10
+  },
+  "LO action-lead o=0.4": {
+   "fig9": 92.0,
+   "learned": {
+    "action_valid_mean": 0.7311,
+    "action_valid_sd": 0.0074,
+    "same_mode_mean": 0.8628
+   },
+   "ideal_valid": 0.8971,
+   "max_action_du": 0.1,
+   "action_updates": 10
+  },
+  "LO action-lead o=0.6": {
+   "fig9": 92.3,
+   "learned": {
+    "action_valid_mean": 0.7462,
+    "action_valid_sd": 0.0147,
+    "same_mode_mean": 0.9286
+   },
+   "ideal_valid": 0.8613,
+   "max_action_du": 0.1,
+   "action_updates": 10
+  },
+  "LO action-lead o=0.8": {
+   "fig9": 92.3,
+   "learned": {
+    "action_valid_mean": 0.7785,
+    "action_valid_sd": 0.0113,
+    "same_mode_mean": 0.9756
+   },
+   "ideal_valid": 0.8323,
+   "max_action_du": 0.1,
+   "action_updates": 10
+  },
+  "LO video-lead o=0.2": {
+   "fig9": 91.7,
+   "learned": {
+    "action_valid_mean": 0.7611,
+    "action_valid_sd": 0.0162,
+    "same_mode_mean": 0.8942
+   },
+   "ideal_valid": 0.9417,
+   "max_action_du": 0.125,
+   "action_updates": 8
+  },
+  "LO video-lead o=0.4": {
+   "fig9": 91.1,
+   "learned": {
+    "action_valid_mean": 0.7777,
+    "action_valid_sd": 0.018,
+    "same_mode_mean": 0.9397
+   },
+   "ideal_valid": 0.9303,
+   "max_action_du": 0.167,
+   "action_updates": 6
+  },
+  "LO video-lead o=0.6": {
+   "fig9": 91.5,
+   "learned": {
+    "action_valid_mean": 0.8194,
+    "action_valid_sd": 0.013,
+    "same_mode_mean": 0.9715
+   },
+   "ideal_valid": 0.9264,
+   "max_action_du": 0.25,
+   "action_updates": 4
+  },
+  "LO video-lead o=0.8": {
+   "fig9": 91.2,
+   "learned": {
+    "action_valid_mean": 0.8529,
+    "action_valid_sd": 0.006,
+    "same_mode_mean": 0.9836
+   },
+   "ideal_valid": 0.9172,
+   "max_action_du": 0.5,
+   "action_updates": 2
+  }
+ },
+ "spearman_vs_fig9": {
+  "learned": {
+   "rho": -0.51,
+   "p": 0.0367
+  },
+  "ideal": {
+   "rho": -0.448,
+   "p": 0.0712
+  }
+ },
+ "path_stat_correlations": {
+  "max_action_du": {
+   "vs_fig9": {
+    "rho": -0.815,
+    "p": 6.76e-05
+   },
+   "vs_learned_valid": {
+    "rho": 0.173,
+    "p": 0.508
+   }
+  },
+  "action_updates": {
+   "vs_fig9": {
+    "rho": 0.15,
+    "p": 0.565
+   },
+   "vs_learned_valid": {
+    "rho": 0.161,
+    "p": 0.536
+   }
+  }
+ },
+ "within_family": {
+  "action_lead_alpha": {
+   "n": 4,
+   "learned_vs_fig9": 0.8,
+   "learned_valid": {
+    "VS action-lead α=4": 0.8601,
+    "VS action-lead α=8": 0.8679,
+    "VS action-lead α=16": 0.8582,
+    "VS action-lead α=32": 0.8169
+   }
+  },
+  "action_lead_linear_delay": {
+   "n": 4,
+   "learned_vs_fig9": 0.949,
+   "learned_valid": {
+    "LO action-lead o=0.2": 0.745,
+    "LO action-lead o=0.4": 0.7311,
+    "LO action-lead o=0.6": 0.7462,
+    "LO action-lead o=0.8": 0.7785
+   }
+  }
+ },
+ "runtime_s": 192.6
+}
