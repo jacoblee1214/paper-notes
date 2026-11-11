@@ -670,6 +670,117 @@ li { margin: 2px 0; }
 </tr>
 </tbody>
 </table>
+<h2>추가 검증 (2026-11-11)</h2>
+<h3>추가 검증 1: 실제 손 기구학과 YCB 물체에서 힘 분배 QP와 접점 추정 (CPU)</h3>
+<p><strong>목적.</strong> §2(null 차원, ε√d)와 §5(자세 오차 아래 접점 추정)는 원통 위 toy 손으로 계산했습니다. 공개 Robotis 손 URDF와 YCB 메쉬로 같은 양을 다시 재서, toy의 크기가 실제 기하에서도 맞는지 봅니다.</p>
+<p><strong>데이터.</strong></p>
+<ul>
+<li>손: ROBOTIS-GIT/robotis_hand @ <code>7730b76</code>(Apache-2.0)의 <code>robotis_hand_description</code>, hx5_d20_rev2 오른손 <code>urdf.xacro</code>(33,765 B, 관절 25개 중 회전 20개)와 visual STL 9개(약 6.9 MB). xacro 매크로는 손으로 펴서 읽었습니다.</li>
+<li>물체: YCB 042 adjustable wrench, 043 phillips screwdriver의 <code>nontextured.stl</code>(각 819 KB). 같은 release의 파일을 복사했습니다.</li>
+<li>라이선스: 손 패키지는 Apache-2.0입니다. YCB 물체는 원본 라이선스를 따로 확인해야 합니다.</li>
+</ul>
+<p><strong>설정.</strong></p>
+<ul>
+<li>FK는 URDF 관절로 직접 계산했습니다. 접점은 손 표면 점 중 물체 표면까지의 부호 거리 |d| ≤ 3 mm이고 법선이 물체를 향하는 점입니다. 링크당 최대 6개를 QP에 씁니다.</li>
+<li>자세 탐색: 관절 한계 안에서 무작위 100개(물체 × 방향 4 경우)를 뽑고, 상위 3개에서 60스텝 언덕 오르기를 합니다. 목적은 손가락 그룹별 물체까지 최소 거리(3 cm 이내)와 접점 개수입니다. 접점 개수만 쓴 첫 시도는 접점이 0개여서 실패했습니다.</li>
+<li>QP는 <code>qp_toy.py</code>의 식과 ADMM 설정을 그대로 씁니다(μ 0.7, f_min 10 N, τ_max 0.2 N·m, ε 0.5 N). 3개 자세 중 접점이 있는 것에 대해 d = 3N_act − rank(J_act), ε√d, 실현 잔차(range(J_act) 사영)를 계산했습니다.</li>
+<li>자세 오차: 물체를 원점 기준 회전·이동하고, 자세마다 30번 뽑습니다. 추정 규칙은 부호 거리 &lt; 1 cm이고, 실제 접점 재현율·비접촉 점(&gt; 5 mm) 오검출·법선 오차를 씁니다.</li>
+<li>CPU, 4 스레드, 455 s, numpy 1.26.4, scipy 1.13.1.</li>
+</ul>
+<p><strong>결과 1: 탐색 결과.</strong> 4 경우 중 wrench의 rot_x90에서는 접점이 있는 자세가 없었습니다(0개). 나머지 3경우는 접점 2–62개를 가진 자세 9개를 찾았습니다.</p>
+<p><strong>결과 2: QP (접점 있는 자세 6개).</strong></p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>최소</th>
+<th>중앙값</th>
+<th>최대</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>접점 수</td>
+<td>8</td>
+<td>14</td>
+<td>21</td>
+</tr>
+<tr>
+<td>null 차원 d</td>
+<td>2</td>
+<td>24</td>
+<td>46</td>
+</tr>
+<tr>
+<td>ε√d (N)</td>
+<td>0.71</td>
+<td>2.45</td>
+<td>3.39</td>
+</tr>
+<tr>
+<td>실현 잔차 힘 (N)</td>
+<td>0.002</td>
+<td>0.09</td>
+<td>2.32</td>
+</tr>
+<tr>
+<td>구동 힘 중 보이지 않는 비율</td>
+<td>0.13</td>
+<td>0.76</td>
+<td>0.83</td>
+</tr>
+</tbody>
+</table>
+<p>ADMM 제약 위반은 최대 7e-6입니다.</p>
+<p><strong>결과 3: 자세 오차 (9개 자세 중앙값).</strong></p>
+<table>
+<thead>
+<tr>
+<th>오프셋 (회전, 이동)</th>
+<th>실제 접점 재현율</th>
+<th>비접촉 오검출</th>
+<th>법선 오차 중앙값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(0°, 0)</td>
+<td>1.00</td>
+<td>1.2%</td>
+<td>0°</td>
+</tr>
+<tr>
+<td>(10°, 1 mm)</td>
+<td>0.99</td>
+<td>1.4%</td>
+<td>24°</td>
+</tr>
+<tr>
+<td>(20°, 3 mm)</td>
+<td>0.72</td>
+<td>2.0%</td>
+<td>50°</td>
+</tr>
+<tr>
+<td>(30°, 5 mm)</td>
+<td>0.50</td>
+<td>2.1%</td>
+<td>63°</td>
+</tr>
+</tbody>
+</table>
+<p><strong>결론.</strong></p>
+<ul>
+<li>§2의 방향은 실제 기하에서도 맞습니다. 접점이 많을수록 null 차원이 커집니다(중앙값 24). 상자 크기 ε√d(중앙값 2.45 N)는 실현 잔차(중앙값 0.09 N)보다 훨씬 큽니다. 그래서 상자 제약은 실제 힘 분배를 거의 정하지 않습니다.</li>
+<li>실제 기하에서 자세 오차에 따른 접점 재현율은 toy(§5)보다 빨리 떨어집니다. 20°/3 mm에서 0.72(toy 0.95), 30°/5 mm에서 0.50(toy 0.88)입니다. 다만 toy의 접점 정의와 기준이 완전히 같지 않아, 이 수치를 toy와 직접 비교하는 것은 조심해야 합니다.</li>
+</ul>
+<p><strong>한계.</strong></p>
+<ul>
+<li>손 기구학과 메쉬는 실제 것이지만, 접점 자세는 연구실 수행 결과가 아니라 이 스크립트가 찾은 자세입니다. 파지 품질을 평가하지 않았습니다.</li>
+<li>자세 탐색은 무작위 100개와 언덕 오르기 3회로 작은 규모입니다. 물체 방향 rot_x90(wrench)에서는 접점을 찾지 못했습니다.</li>
+<li>자세 오차 시험은 자세당 30회입니다. 손 자세는 고정하고 물체만 움직였습니다.</li>
+<li>마찰 원뿔은 4면 근사를 썼습니다. 실제 물리 시뮬레이션과 연결하지 않았습니다.</li>
+</ul>
 </section>
 <section class="chapter"><h1>04. 코드 검증: 공개된 같은 연구실 코드 대조, 수치 재계산, 구현 가능성</h1>
 <ul>

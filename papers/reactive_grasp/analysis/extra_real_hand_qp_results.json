@@ -1,0 +1,1131 @@
+{
+  "source": {
+    "hand": "ROBOTIS-GIT/robotis_hand @ 7730b76 robotis_hand_description (hx5_d20_rev2 right): URDF.xacro expanded by hand (25 joints, 20 revolute), visual STL",
+    "hand_url_base": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/7730b76bbac51786b122023a7ab2afc17afc7d12/robotis_hand_description/",
+    "hand_license": "Apache-2.0 (repository)",
+    "hand_files": {
+      "data/robotis/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_base_unit.stl": 2107884,
+      "data/robotis/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_dip.stl": 456084,
+      "data/robotis/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_mcp.stl": 493284,
+      "data/robotis/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_pip.stl": 456084,
+      "data/robotis/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_tip.stl": 225884,
+      "data/robotis/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_ip.stl": 866184,
+      "data/robotis/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_mcp.stl": 948484,
+      "data/robotis/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_mcp2.stl": 480684,
+      "data/robotis/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_tip.stl": 873184
+    },
+    "hand_urdf_bytes": 33765,
+    "objects": {
+      "adjustable_wrench": {
+        "file": "data/ycb/042_adjustable_wrench.stl",
+        "bytes": 819284
+      },
+      "phillips_screwdriver": {
+        "file": "data/ycb/043_phillips_screwdriver.stl",
+        "bytes": 819284
+      }
+    },
+    "objects_source": "YCB nontextured.stl, copied from the lightning-grasp v1.0.0 release assets.zip (already downloaded in the sibling folder)"
+  },
+  "config": {
+    "seed": 0,
+    "n_init_random": 100,
+    "hill_starts": 3,
+    "hill_steps": 60,
+    "contact_band_m": 0.003,
+    "estimate_threshold_m": 0.01,
+    "contacts_per_link": 6,
+    "facing_cos": 0.5,
+    "points_per_link": 800,
+    "object_surface_samples": 20000,
+    "mu": 0.7,
+    "fmin_N": 10.0,
+    "tau_max": 0.2,
+    "eps_N": 0.5,
+    "anchor_m": [
+      0.0011,
+      0.0051,
+      0.0145
+    ]
+  },
+  "search": [
+    {
+      "object": "adjustable_wrench",
+      "orientation": "identity",
+      "valid_random_configs": 100,
+      "search_wall_s": 48.55,
+      "grasps_found": 3,
+      "grasp_search_key": [
+        5.568,
+        5.307,
+        5.244
+      ],
+      "grasp_contacts": [
+        2,
+        4,
+        2
+      ]
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "rot_x90",
+      "valid_random_configs": 100,
+      "search_wall_s": 26.06,
+      "grasps_found": 3,
+      "grasp_search_key": [
+        2.093,
+        2.093,
+        2.036
+      ],
+      "grasp_contacts": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "identity",
+      "valid_random_configs": 98,
+      "search_wall_s": 42.13,
+      "grasps_found": 3,
+      "grasp_search_key": [
+        6.531,
+        6.355,
+        5.518
+      ],
+      "grasp_contacts": [
+        25,
+        62,
+        9
+      ]
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "rot_x90",
+      "valid_random_configs": 100,
+      "search_wall_s": 36.45,
+      "grasps_found": 3,
+      "grasp_search_key": [
+        14.289,
+        13.559,
+        10.493
+      ],
+      "grasp_contacts": [
+        45,
+        14,
+        62
+      ]
+    }
+  ],
+  "qp_per_grasp": [
+    {
+      "object": "adjustable_wrench",
+      "orientation": "identity",
+      "search_key": 5.568,
+      "search_fingers_term": 5.568,
+      "q": [
+        -0.8927,
+        -0.283,
+        0.2077,
+        1.4979,
+        0.5528,
+        1.1822,
+        0.9857,
+        0.7884,
+        -0.2697,
+        1.244,
+        1.4431,
+        1.0429,
+        0.165,
+        2.0,
+        0.3749,
+        0.9482,
+        -0.0286,
+        2.0,
+        1.2737,
+        0.0
+      ],
+      "penetrating_fraction": 0.00351,
+      "qp": {
+        "obj_residual_N": 0.8836,
+        "sum_fn_N": 10.0,
+        "max_fn_N": 5.194,
+        "invisible_fraction_of_actuated_force": 0.323,
+        "realized_residual_force_N": 0.002,
+        "realized_residual_torque_Nm": 0.0011,
+        "n_contacts": 8,
+        "n_actuated": 2,
+        "rank_Jact": 4,
+        "null_dim_d": 2,
+        "eps_sqrt_d_N": 0.7071,
+        "admm_violation": 0.0,
+        "fingers_with_contact": 1
+      }
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "identity",
+      "search_key": 5.307,
+      "search_fingers_term": 5.307,
+      "q": [
+        -0.4349,
+        -0.3574,
+        1.5124,
+        0.3044,
+        -0.2965,
+        0.5751,
+        1.4302,
+        1.5009,
+        0.3684,
+        1.9629,
+        1.208,
+        0.2158,
+        -0.3417,
+        0.7103,
+        1.57,
+        1.2607,
+        0.0385,
+        2.0,
+        1.2962,
+        0.027
+      ],
+      "penetrating_fraction": 0.00518,
+      "qp": {
+        "obj_residual_N": 0.0001,
+        "sum_fn_N": 12.665,
+        "max_fn_N": 3.156,
+        "invisible_fraction_of_actuated_force": 0.78,
+        "realized_residual_force_N": 0.009,
+        "realized_residual_torque_Nm": 0.003,
+        "n_contacts": 10,
+        "n_actuated": 4,
+        "rank_Jact": 4,
+        "null_dim_d": 8,
+        "eps_sqrt_d_N": 1.4142,
+        "admm_violation": 0.0,
+        "fingers_with_contact": 1
+      }
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "identity",
+      "search_key": 5.244,
+      "search_fingers_term": 5.244,
+      "q": [
+        -0.356,
+        -0.3016,
+        0.7712,
+        0.9379,
+        -0.5066,
+        0.8496,
+        0.6507,
+        0.4251,
+        0.0076,
+        1.6219,
+        1.3599,
+        0.6415,
+        0.2183,
+        1.5366,
+        0.8682,
+        1.4201,
+        0.0734,
+        2.0,
+        1.3269,
+        0.0
+      ],
+      "penetrating_fraction": 0.00512,
+      "qp": {
+        "obj_residual_N": 0.0004,
+        "sum_fn_N": 13.866,
+        "max_fn_N": 4.457,
+        "invisible_fraction_of_actuated_force": 0.127,
+        "realized_residual_force_N": 0.003,
+        "realized_residual_torque_Nm": 0.0004,
+        "n_contacts": 8,
+        "n_actuated": 2,
+        "rank_Jact": 4,
+        "null_dim_d": 2,
+        "eps_sqrt_d_N": 0.7071,
+        "admm_violation": 0.0,
+        "fingers_with_contact": 1
+      }
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "rot_x90",
+      "search_key": 2.093,
+      "search_fingers_term": 2.093,
+      "q": [
+        -0.6068,
+        -0.7465,
+        0.3802,
+        0.9247,
+        -0.4167,
+        0.7954,
+        1.4039,
+        0.2635,
+        -0.2474,
+        0.2994,
+        1.4713,
+        1.5155,
+        -0.6,
+        0.0425,
+        1.4896,
+        0.4563,
+        0.4493,
+        0.1848,
+        0.5941,
+        1.3044
+      ],
+      "penetrating_fraction": 0.0,
+      "qp": null
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "rot_x90",
+      "search_key": 2.093,
+      "search_fingers_term": 2.093,
+      "q": [
+        -0.6419,
+        -0.9943,
+        1.3614,
+        0.3397,
+        -0.4637,
+        0.3482,
+        0.8654,
+        0.3279,
+        -0.2717,
+        1.5741,
+        1.5099,
+        1.3301,
+        -0.6,
+        2.0,
+        1.0482,
+        0.419,
+        -0.0853,
+        0.004,
+        0.787,
+        1.5506
+      ],
+      "penetrating_fraction": 0.0,
+      "qp": null
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "rot_x90",
+      "search_key": 2.036,
+      "search_fingers_term": 2.036,
+      "q": [
+        -0.6159,
+        -0.1044,
+        1.5288,
+        1.3287,
+        0.3499,
+        0.8614,
+        0.0,
+        0.0135,
+        -0.3023,
+        0.8164,
+        1.3917,
+        1.5562,
+        0.1028,
+        0.4395,
+        0.8082,
+        0.5918,
+        -0.1311,
+        0.8153,
+        1.2247,
+        0.9931
+      ],
+      "penetrating_fraction": 0.0,
+      "qp": null
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "identity",
+      "search_key": 6.531,
+      "search_fingers_term": 6.531,
+      "q": [
+        -1.2914,
+        -1.2061,
+        0.8682,
+        1.57,
+        -0.1006,
+        2.0,
+        1.0365,
+        0.078,
+        -0.1226,
+        1.7791,
+        0.5519,
+        0.6196,
+        -0.3692,
+        1.5787,
+        0.0638,
+        0.4583,
+        0.4257,
+        1.2591,
+        0.0771,
+        1.374
+      ],
+      "penetrating_fraction": 0.00643,
+      "qp": {
+        "obj_residual_N": 0.0004,
+        "sum_fn_N": 11.131,
+        "max_fn_N": 3.768,
+        "invisible_fraction_of_actuated_force": 0.768,
+        "realized_residual_force_N": 2.324,
+        "realized_residual_torque_Nm": 0.1469,
+        "n_contacts": 14,
+        "n_actuated": 11,
+        "rank_Jact": 3,
+        "null_dim_d": 30,
+        "eps_sqrt_d_N": 2.7386,
+        "admm_violation": 7e-06,
+        "fingers_with_contact": 1
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "identity",
+      "search_key": 6.355,
+      "search_fingers_term": 6.355,
+      "q": [
+        -1.4927,
+        -1.3114,
+        1.3414,
+        1.4015,
+        -0.1746,
+        2.0,
+        0.9695,
+        0.3839,
+        0.5122,
+        0.7906,
+        0.9614,
+        1.3799,
+        0.0923,
+        0.2992,
+        0.1055,
+        1.57,
+        -0.4689,
+        0.6891,
+        0.9277,
+        0.2332
+      ],
+      "penetrating_fraction": 0.00577,
+      "qp": {
+        "obj_residual_N": 0.0003,
+        "sum_fn_N": 10.761,
+        "max_fn_N": 3.785,
+        "invisible_fraction_of_actuated_force": 0.833,
+        "realized_residual_force_N": 1.762,
+        "realized_residual_torque_Nm": 0.1072,
+        "n_contacts": 15,
+        "n_actuated": 12,
+        "rank_Jact": 3,
+        "null_dim_d": 33,
+        "eps_sqrt_d_N": 2.8723,
+        "admm_violation": 0.0,
+        "fingers_with_contact": 1
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "identity",
+      "search_key": 5.518,
+      "search_fingers_term": 5.518,
+      "q": [
+        0.0787,
+        -1.3425,
+        0.2859,
+        1.078,
+        -0.5433,
+        0.2892,
+        1.0312,
+        0.3355,
+        0.1476,
+        2.0,
+        1.1386,
+        0.0,
+        -0.1282,
+        0.5178,
+        1.062,
+        1.0494,
+        0.2043,
+        1.4312,
+        0.6641,
+        0.422
+      ],
+      "penetrating_fraction": 0.00179,
+      "qp": {
+        "obj_residual_N": 0.0018,
+        "sum_fn_N": 10.0,
+        "max_fn_N": 3.316,
+        "invisible_fraction_of_actuated_force": 0.768,
+        "realized_residual_force_N": 0.09,
+        "realized_residual_torque_Nm": 0.0049,
+        "n_contacts": 9,
+        "n_actuated": 6,
+        "rank_Jact": 2,
+        "null_dim_d": 16,
+        "eps_sqrt_d_N": 2.0,
+        "admm_violation": 3e-06,
+        "fingers_with_contact": 1
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "rot_x90",
+      "search_key": 14.289,
+      "search_fingers_term": 14.289,
+      "q": [
+        1.1585,
+        -0.1798,
+        1.443,
+        1.1478,
+        -0.6,
+        2.0,
+        0.7654,
+        0.5671,
+        -0.1626,
+        0.8463,
+        0.6939,
+        1.5557,
+        0.4168,
+        1.9413,
+        0.7528,
+        0.9244,
+        0.4008,
+        2.0,
+        1.0926,
+        0.3806
+      ],
+      "penetrating_fraction": 0.00226,
+      "qp": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 11.078,
+        "max_fn_N": 1.883,
+        "invisible_fraction_of_actuated_force": 0.755,
+        "realized_residual_force_N": 0.092,
+        "realized_residual_torque_Nm": 0.0118,
+        "n_contacts": 21,
+        "n_actuated": 18,
+        "rank_Jact": 12,
+        "null_dim_d": 42,
+        "eps_sqrt_d_N": 3.2404,
+        "admm_violation": 0.0,
+        "fingers_with_contact": 3
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "rot_x90",
+      "search_key": 13.559,
+      "search_fingers_term": 13.559,
+      "q": [
+        0.4678,
+        -0.327,
+        1.4527,
+        0.766,
+        -0.1797,
+        0.0314,
+        0.7103,
+        0.7587,
+        0.1551,
+        1.9624,
+        1.1513,
+        0.4127,
+        0.6,
+        1.718,
+        1.5324,
+        0.0058,
+        0.4174,
+        1.957,
+        0.7123,
+        0.9665
+      ],
+      "penetrating_fraction": 0.00173,
+      "qp": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 11.399,
+        "max_fn_N": 2.084,
+        "invisible_fraction_of_actuated_force": 0.49,
+        "realized_residual_force_N": 0.024,
+        "realized_residual_torque_Nm": 0.0056,
+        "n_contacts": 15,
+        "n_actuated": 12,
+        "rank_Jact": 12,
+        "null_dim_d": 24,
+        "eps_sqrt_d_N": 2.4495,
+        "admm_violation": 0.0,
+        "fingers_with_contact": 3
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "rot_x90",
+      "search_key": 10.493,
+      "search_fingers_term": 10.493,
+      "q": [
+        1.4318,
+        -1.4914,
+        1.0801,
+        0.9443,
+        -0.6,
+        1.89,
+        1.0224,
+        0.5064,
+        -0.336,
+        1.048,
+        0.1685,
+        0.0532,
+        0.3332,
+        2.0,
+        0.3204,
+        1.0178,
+        0.5568,
+        0.4224,
+        0.8735,
+        1.2222
+      ],
+      "penetrating_fraction": 0.00298,
+      "qp": {
+        "obj_residual_N": 0.0,
+        "sum_fn_N": 12.403,
+        "max_fn_N": 1.584,
+        "invisible_fraction_of_actuated_force": 0.6,
+        "realized_residual_force_N": 0.895,
+        "realized_residual_torque_Nm": 0.0647,
+        "n_contacts": 21,
+        "n_actuated": 18,
+        "rank_Jact": 8,
+        "null_dim_d": 46,
+        "eps_sqrt_d_N": 3.3912,
+        "admm_violation": 0.0,
+        "fingers_with_contact": 2
+      }
+    }
+  ],
+  "qp_aggregate": {
+    "n_contacts": {
+      "min": 8.0,
+      "median": 14.0,
+      "max": 21.0
+    },
+    "n_actuated": {
+      "min": 2.0,
+      "median": 11.0,
+      "max": 18.0
+    },
+    "null_dim_d": {
+      "min": 2.0,
+      "median": 24.0,
+      "max": 46.0
+    },
+    "eps_sqrt_d_N": {
+      "min": 0.7071,
+      "median": 2.4495,
+      "max": 3.3912
+    },
+    "realized_residual_force_N": {
+      "min": 0.002,
+      "median": 0.09,
+      "max": 2.324
+    },
+    "realized_residual_torque_Nm": {
+      "min": 0.0004,
+      "median": 0.0056,
+      "max": 0.1469
+    },
+    "invisible_fraction_of_actuated_force": {
+      "min": 0.127,
+      "median": 0.755,
+      "max": 0.833
+    },
+    "sum_fn_N": {
+      "min": 10.0,
+      "median": 11.131,
+      "max": 13.866
+    },
+    "max_fn_N": {
+      "min": 1.584,
+      "median": 3.316,
+      "max": 5.194
+    }
+  },
+  "pose_error_per_grasp": [
+    {
+      "object": "adjustable_wrench",
+      "orientation": "identity",
+      "pose_error": {
+        "true_contacts": 14,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.008,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 0.988,
+            "recall_min": 0.857,
+            "false_positive_rate": 0.01,
+            "normal_err_median_deg": 29.65,
+            "normal_err_p90_deg": 151.14
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.905,
+            "recall_min": 0.643,
+            "false_positive_rate": 0.014,
+            "normal_err_median_deg": 63.79,
+            "normal_err_p90_deg": 156.1
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.724,
+            "recall_min": 0.357,
+            "false_positive_rate": 0.017,
+            "normal_err_median_deg": 81.03,
+            "normal_err_p90_deg": 152.24
+          }
+        }
+      }
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "identity",
+      "pose_error": {
+        "true_contacts": 16,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.008,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 0.998,
+            "recall_min": 0.938,
+            "false_positive_rate": 0.01,
+            "normal_err_median_deg": 34.17,
+            "normal_err_p90_deg": 137.31
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.85,
+            "recall_min": 0.625,
+            "false_positive_rate": 0.012,
+            "normal_err_median_deg": 54.25,
+            "normal_err_p90_deg": 150.91
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.675,
+            "recall_min": 0.312,
+            "false_positive_rate": 0.015,
+            "normal_err_median_deg": 81.25,
+            "normal_err_p90_deg": 158.95
+          }
+        }
+      }
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "identity",
+      "pose_error": {
+        "true_contacts": 14,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.008,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 0.99,
+            "recall_min": 0.857,
+            "false_positive_rate": 0.01,
+            "normal_err_median_deg": 22.94,
+            "normal_err_p90_deg": 145.28
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.876,
+            "recall_min": 0.643,
+            "false_positive_rate": 0.015,
+            "normal_err_median_deg": 53.35,
+            "normal_err_p90_deg": 154.11
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.726,
+            "recall_min": 0.429,
+            "false_positive_rate": 0.013,
+            "normal_err_median_deg": 75.24,
+            "normal_err_p90_deg": 149.57
+          }
+        }
+      }
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "rot_x90",
+      "pose_error": {
+        "true_contacts": 1,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.002,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.002,
+            "normal_err_median_deg": 42.12,
+            "normal_err_p90_deg": 104.07
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.733,
+            "recall_min": 0.0,
+            "false_positive_rate": 0.006,
+            "normal_err_median_deg": 46.23,
+            "normal_err_p90_deg": 150.31
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.5,
+            "recall_min": 0.0,
+            "false_positive_rate": 0.01,
+            "normal_err_median_deg": 60.37,
+            "normal_err_p90_deg": 122.41
+          }
+        }
+      }
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "rot_x90",
+      "pose_error": {
+        "true_contacts": 1,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.002,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.002,
+            "normal_err_median_deg": 50.05,
+            "normal_err_p90_deg": 114.39
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.667,
+            "recall_min": 0.0,
+            "false_positive_rate": 0.006,
+            "normal_err_median_deg": 77.54,
+            "normal_err_p90_deg": 135.02
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.467,
+            "recall_min": 0.0,
+            "false_positive_rate": 0.011,
+            "normal_err_median_deg": 95.06,
+            "normal_err_p90_deg": 132.8
+          }
+        }
+      }
+    },
+    {
+      "object": "adjustable_wrench",
+      "orientation": "rot_x90",
+      "pose_error": {
+        "true_contacts": 1,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.002,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.002,
+            "normal_err_median_deg": 60.23,
+            "normal_err_p90_deg": 119.67
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.733,
+            "recall_min": 0.0,
+            "false_positive_rate": 0.007,
+            "normal_err_median_deg": 77.49,
+            "normal_err_p90_deg": 151.2
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.267,
+            "recall_min": 0.0,
+            "false_positive_rate": 0.008,
+            "normal_err_median_deg": 63.65,
+            "normal_err_p90_deg": 107.22
+          }
+        }
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "identity",
+      "pose_error": {
+        "true_contacts": 28,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.027,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 0.995,
+            "recall_min": 0.929,
+            "false_positive_rate": 0.025,
+            "normal_err_median_deg": 18.76,
+            "normal_err_p90_deg": 34.86
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.832,
+            "recall_min": 0.107,
+            "false_positive_rate": 0.038,
+            "normal_err_median_deg": 43.49,
+            "normal_err_p90_deg": 106.96
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.477,
+            "recall_min": 0.071,
+            "false_positive_rate": 0.031,
+            "normal_err_median_deg": 66.92,
+            "normal_err_p90_deg": 126.82
+          }
+        }
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "identity",
+      "pose_error": {
+        "true_contacts": 65,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.019,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 0.991,
+            "recall_min": 0.892,
+            "false_positive_rate": 0.017,
+            "normal_err_median_deg": 19.38,
+            "normal_err_p90_deg": 33.74
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.606,
+            "recall_min": 0.046,
+            "false_positive_rate": 0.025,
+            "normal_err_median_deg": 49.72,
+            "normal_err_p90_deg": 87.65
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.494,
+            "recall_min": 0.046,
+            "false_positive_rate": 0.03,
+            "normal_err_median_deg": 63.15,
+            "normal_err_p90_deg": 111.61
+          }
+        }
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "identity",
+      "pose_error": {
+        "true_contacts": 12,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.019,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 0.944,
+            "recall_min": 0.333,
+            "false_positive_rate": 0.022,
+            "normal_err_median_deg": 17.1,
+            "normal_err_p90_deg": 31.69
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.694,
+            "recall_min": 0.25,
+            "false_positive_rate": 0.028,
+            "normal_err_median_deg": 42.92,
+            "normal_err_p90_deg": 128.23
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.639,
+            "recall_min": 0.25,
+            "false_positive_rate": 0.024,
+            "normal_err_median_deg": 48.9,
+            "normal_err_p90_deg": 116.24
+          }
+        }
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "rot_x90",
+      "pose_error": {
+        "true_contacts": 48,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.023,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 0.946,
+            "recall_min": 0.708,
+            "false_positive_rate": 0.025,
+            "normal_err_median_deg": 22.67,
+            "normal_err_p90_deg": 42.09
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.608,
+            "recall_min": 0.062,
+            "false_positive_rate": 0.036,
+            "normal_err_median_deg": 50.99,
+            "normal_err_p90_deg": 81.66
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.359,
+            "recall_min": 0.062,
+            "false_positive_rate": 0.029,
+            "normal_err_median_deg": 61.29,
+            "normal_err_p90_deg": 101.47
+          }
+        }
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "rot_x90",
+      "pose_error": {
+        "true_contacts": 17,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.016,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 0.875,
+            "recall_min": 0.412,
+            "false_positive_rate": 0.023,
+            "normal_err_median_deg": 23.97,
+            "normal_err_p90_deg": 47.02
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.716,
+            "recall_min": 0.176,
+            "false_positive_rate": 0.029,
+            "normal_err_median_deg": 44.84,
+            "normal_err_p90_deg": 77.42
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.58,
+            "recall_min": 0.176,
+            "false_positive_rate": 0.042,
+            "normal_err_median_deg": 60.73,
+            "normal_err_p90_deg": 121.19
+          }
+        }
+      }
+    },
+    {
+      "object": "phillips_screwdriver",
+      "orientation": "rot_x90",
+      "pose_error": {
+        "true_contacts": 65,
+        "levels": {
+          "0deg_0.0mm": {
+            "recall_mean": 1.0,
+            "recall_min": 1.0,
+            "false_positive_rate": 0.035,
+            "normal_err_median_deg": 0.0,
+            "normal_err_p90_deg": 0.0
+          },
+          "10deg_0.001mm": {
+            "recall_mean": 0.941,
+            "recall_min": 0.8,
+            "false_positive_rate": 0.03,
+            "normal_err_median_deg": 23.6,
+            "normal_err_p90_deg": 39.7
+          },
+          "20deg_0.003mm": {
+            "recall_mean": 0.601,
+            "recall_min": 0.062,
+            "false_positive_rate": 0.031,
+            "normal_err_median_deg": 42.29,
+            "normal_err_p90_deg": 75.22
+          },
+          "30deg_0.005mm": {
+            "recall_mean": 0.365,
+            "recall_min": 0.046,
+            "false_positive_rate": 0.03,
+            "normal_err_median_deg": 37.19,
+            "normal_err_p90_deg": 94.78
+          }
+        }
+      }
+    }
+  ],
+  "pose_error_aggregate": {
+    "0deg_0.0mm": {
+      "recall_mean_over_grasps_median": 1.0,
+      "false_positive_rate_median": 0.012,
+      "normal_err_median_deg_median": 0.0
+    },
+    "10deg_0.001mm": {
+      "recall_mean_over_grasps_median": 0.99,
+      "false_positive_rate_median": 0.014,
+      "normal_err_median_deg_median": 23.79
+    },
+    "20deg_0.003mm": {
+      "recall_mean_over_grasps_median": 0.724,
+      "false_positive_rate_median": 0.02,
+      "normal_err_median_deg_median": 50.36
+    },
+    "30deg_0.005mm": {
+      "recall_mean_over_grasps_median": 0.497,
+      "false_positive_rate_median": 0.021,
+      "normal_err_median_deg_median": 63.4
+    }
+  },
+  "versions": {
+    "python": "3.12.7",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "wall_time_s": 455.36
+}
