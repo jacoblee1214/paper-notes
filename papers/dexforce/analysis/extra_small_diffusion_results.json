@@ -1,0 +1,126 @@
+{
+  "env": {
+    "torch": "2.15.0",
+    "mujoco": "4.0.0",
+    "numpy": "1.26.4",
+    "device": "cpu",
+    "threads": 4,
+    "n_demo": 100,
+    "demo_k_e_range": [
+      1000.0,
+      10000.0
+    ],
+    "demo_force_mean_N": 3.0,
+    "demo_force_sd_N": 0.0,
+    "diffusion_T": 30,
+    "chunk": 4,
+    "policy_period_ms": 20.0,
+    "success_window_N": [
+      2.0,
+      4.0
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "n_test": 30,
+    "n_ood": 10,
+    "train_steps": 2500,
+    "batch": 256,
+    "physics": "k_e는 팁에 가하는 한쪽 스프링 외력(MuJoCo 접촉 아님)"
+  },
+  "variants": {
+    "관측 위치 목표 + 힘 없음": {
+      "target": "관측 위치",
+      "sensing": "힘 없음",
+      "train_samples": 48000,
+      "success_mean": 0.0,
+      "success_by_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_force_N": 0.0,
+      "ood_3e4_success_mean": 0.0,
+      "ood_3e4_mean_force_N": 0.0,
+      "wall_s": 41.8
+    },
+    "관측 위치 목표 + F/T": {
+      "target": "관측 위치",
+      "sensing": "F/T",
+      "train_samples": 48000,
+      "success_mean": 0.0,
+      "success_by_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_force_N": 0.036,
+      "ood_3e4_success_mean": 0.0,
+      "ood_3e4_mean_force_N": 0.038,
+      "wall_s": 40.4
+    },
+    "관측 위치 목표 + 0/1": {
+      "target": "관측 위치",
+      "sensing": "0/1",
+      "train_samples": 48000,
+      "success_mean": 0.0,
+      "success_by_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_force_N": 0.042,
+      "ood_3e4_success_mean": 0.0,
+      "ood_3e4_mean_force_N": 0.042,
+      "wall_s": 40.5
+    },
+    "힘 목표 + 힘 없음": {
+      "target": "힘 목표(k_f = 1/k_p)",
+      "sensing": "힘 없음",
+      "train_samples": 48000,
+      "success_mean": 0.2,
+      "success_by_seed": [
+        0.1,
+        0.5,
+        0.0
+      ],
+      "mean_force_N": 1.366,
+      "ood_3e4_success_mean": 0.367,
+      "ood_3e4_mean_force_N": 1.072,
+      "wall_s": 38.2
+    },
+    "힘 목표 + F/T": {
+      "target": "힘 목표(k_f = 1/k_p)",
+      "sensing": "F/T",
+      "train_samples": 48000,
+      "success_mean": 0.956,
+      "success_by_seed": [
+        1.0,
+        0.867,
+        1.0
+      ],
+      "mean_force_N": 2.853,
+      "ood_3e4_success_mean": 1.0,
+      "ood_3e4_mean_force_N": 2.911,
+      "wall_s": 37.3
+    },
+    "힘 목표 + 0/1": {
+      "target": "힘 목표(k_f = 1/k_p)",
+      "sensing": "0/1",
+      "train_samples": 48000,
+      "success_mean": 0.478,
+      "success_by_seed": [
+        0.567,
+        0.0,
+        0.867
+      ],
+      "mean_force_N": 1.734,
+      "ood_3e4_success_mean": 0.433,
+      "ood_3e4_mean_force_N": 1.492,
+      "wall_s": 36.9
+    }
+  },
+  "wall_time_s": 236.1
+}

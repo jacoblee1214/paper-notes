@@ -1,0 +1,110 @@
+{
+  "env": {
+    "torch": "2.15.0",
+    "mujoco": "4.0.0",
+    "device": "cpu",
+    "threads": 4,
+    "n_pairs": 30,
+    "policy_seeds": [
+      0,
+      1,
+      2
+    ],
+    "policies": [
+      "ACT + τ",
+      "ACT-o + τ"
+    ],
+    "eval_seed_base": 100000
+  },
+  "onset_check": {
+    "soft": {
+      "n": 30,
+      "tau_norm_mean_Nm": 0.681,
+      "tau_norm_sd_Nm": 0.1,
+      "dq_5steps_mean_rad": 0.0333,
+      "dq_5steps_sd_rad": 0.0029
+    },
+    "hard": {
+      "n": 30,
+      "tau_norm_mean_Nm": 0.748,
+      "tau_norm_sd_Nm": 0.092,
+      "dq_5steps_mean_rad": 0.0366,
+      "dq_5steps_sd_rad": 0.0028
+    }
+  },
+  "results": {
+    "ACT + τ": {
+      "baseline": {
+        "soft_n": 90,
+        "soft_pressed": 0.37777777777777777,
+        "soft_retreated": 0.08888888888888889,
+        "hard_n": 90,
+        "hard_retreated": 0.0,
+        "hard_kept_pressing": 0.022222222222222223
+      },
+      "inject_hard_tau_into_soft": {
+        "soft_n": 90,
+        "soft_pressed": 0.24444444444444444,
+        "soft_retreated": 0.03333333333333333,
+        "hard_n": 0,
+        "hard_retreated": null,
+        "hard_kept_pressing": null
+      },
+      "inject_soft_tau_into_hard": {
+        "soft_n": 0,
+        "soft_pressed": null,
+        "soft_retreated": null,
+        "hard_n": 90,
+        "hard_retreated": 0.6666666666666666,
+        "hard_kept_pressing": 0.022222222222222223
+      },
+      "tau_zero": {
+        "soft_n": 90,
+        "soft_pressed": 0.0,
+        "soft_retreated": 0.0,
+        "hard_n": 90,
+        "hard_retreated": 1.0,
+        "hard_kept_pressing": 0.0
+      },
+      "fisher_soft_retreat_baseline_vs_hard_tau_p": 0.21191559361038328,
+      "fisher_hard_retreat_baseline_vs_soft_tau_p": 3.730165776216979e-25
+    },
+    "ACT-o + τ": {
+      "baseline": {
+        "soft_n": 90,
+        "soft_pressed": 0.08888888888888889,
+        "soft_retreated": 0.0,
+        "hard_n": 90,
+        "hard_retreated": 0.32222222222222224,
+        "hard_kept_pressing": 0.0
+      },
+      "inject_hard_tau_into_soft": {
+        "soft_n": 90,
+        "soft_pressed": 0.044444444444444446,
+        "soft_retreated": 0.0,
+        "hard_n": 0,
+        "hard_retreated": null,
+        "hard_kept_pressing": null
+      },
+      "inject_soft_tau_into_hard": {
+        "soft_n": 0,
+        "soft_pressed": null,
+        "soft_retreated": null,
+        "hard_n": 90,
+        "hard_retreated": 0.26666666666666666,
+        "hard_kept_pressing": 0.0
+      },
+      "tau_zero": {
+        "soft_n": 90,
+        "soft_pressed": 0.0,
+        "soft_retreated": 0.0,
+        "hard_n": 90,
+        "hard_retreated": 1.0,
+        "hard_kept_pressing": 0.0
+      },
+      "fisher_soft_retreat_baseline_vs_hard_tau_p": 1.0,
+      "fisher_hard_retreat_baseline_vs_soft_tau_p": 0.5132538791365449
+    }
+  },
+  "wall_time_s": 6.2
+}

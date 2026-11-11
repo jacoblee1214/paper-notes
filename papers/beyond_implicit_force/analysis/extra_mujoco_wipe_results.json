@@ -1,0 +1,143 @@
+{
+  "env": {
+    "torch": "2.15.0",
+    "mujoco": "4.0.0",
+    "numpy": "1.26.4",
+    "device_train": "mps",
+    "device_infer": "cpu",
+    "device_bench_ms": {
+      "cpu_ms": 1.253,
+      "mps_ms": 0.617
+    },
+    "threads": 4,
+    "seeds_train": [
+      0,
+      1,
+      2
+    ],
+    "dt_phys_s": 0.002,
+    "control_hz": 50,
+    "chunk_H": 20,
+    "replan_steps": 5
+  },
+  "fk_check_max_err_m": 5.551115123125783e-17,
+  "model": {
+    "mlp": "40-256-256-out, GELU, AdamW 1e-3",
+    "epochs": 60,
+    "batch": 256
+  },
+  "demo": {
+    "wipe_n": 100,
+    "stiff_n": 100,
+    "wipe_success_rate": 1.0,
+    "stiff_soft_success": 1.0,
+    "stiff_hard_success": 1.0,
+    "demo_time_s": 1.65
+  },
+  "results": {
+    "wipe": {
+      "Base ACT": {
+        "success_mean": 0.656,
+        "success_by_seed": [
+          0.8,
+          0.667,
+          0.5
+        ],
+        "mean_normal_force_N": 5.93
+      },
+      "ACT + τ": {
+        "success_mean": 1.0,
+        "success_by_seed": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "mean_normal_force_N": 6.11
+      },
+      "ACT-o": {
+        "success_mean": 0.0,
+        "success_by_seed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_normal_force_N": 3.07
+      },
+      "ACT-o + τ": {
+        "success_mean": 0.0,
+        "success_by_seed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_normal_force_N": 2.92
+      },
+      "ACT-o + qhist": {
+        "success_mean": 0.0,
+        "success_by_seed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_normal_force_N": 2.51
+      }
+    },
+    "stiff": {
+      "Base ACT": {
+        "soft_press_mean": 0.222,
+        "hard_retreat_mean": 0.422,
+        "youden_J_mean": -0.356,
+        "youden_J_by_seed": [
+          -0.4,
+          -0.267,
+          -0.4
+        ]
+      },
+      "ACT + τ": {
+        "soft_press_mean": 0.4,
+        "hard_retreat_mean": 0.0,
+        "youden_J_mean": -0.6,
+        "youden_J_by_seed": [
+          -0.667,
+          -0.6,
+          -0.533
+        ]
+      },
+      "ACT-o": {
+        "soft_press_mean": 0.089,
+        "hard_retreat_mean": 0.111,
+        "youden_J_mean": -0.8,
+        "youden_J_by_seed": [
+          -0.733,
+          -0.733,
+          -0.933
+        ]
+      },
+      "ACT-o + τ": {
+        "soft_press_mean": 0.133,
+        "hard_retreat_mean": 0.244,
+        "youden_J_mean": -0.622,
+        "youden_J_by_seed": [
+          -0.6,
+          -0.667,
+          -0.6
+        ]
+      },
+      "ACT-o + qhist": {
+        "soft_press_mean": 0.0,
+        "hard_retreat_mean": 0.0,
+        "youden_J_mean": -1.0,
+        "youden_J_by_seed": [
+          -1.0,
+          -1.0,
+          -1.0
+        ]
+      }
+    }
+  },
+  "test": {
+    "wipe_episodes_per_seed": 30,
+    "stiff_episodes_per_seed": "15 soft + 15 hard"
+  },
+  "wall_time_s": 258.6
+}

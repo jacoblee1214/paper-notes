@@ -1,0 +1,242 @@
+{
+  "env": {
+    "mujoco": "4.0.0",
+    "torch": "2.15.0",
+    "numpy": "1.26.4",
+    "device": "cpu",
+    "threads": 4,
+    "dt_s": 0.0005,
+    "k_p": 310.0,
+    "k_v": 2.0,
+    "f_demo_N": 3.0,
+    "N_lo_N": 0.5,
+    "N_hi_N": 5.0,
+    "tip_mass_kg": 0.05,
+    "contact": "one-sided spring k_e applied as external joint force (not MuJoCo contact)"
+  },
+  "G_table": [
+    {
+      "k_e": 1000.0,
+      "k_f_name": "0",
+      "k_f": 0.0,
+      "demo_force_N": 3.0,
+      "replay_force_N": 0.7099,
+      "G_measured": 0.2366,
+      "G_formula": 0.2366
+    },
+    {
+      "k_e": 1000.0,
+      "k_f_name": "1/k_p",
+      "k_f": 0.0032258064516129032,
+      "demo_force_N": 3.0,
+      "replay_force_N": 3.0,
+      "G_measured": 1.0,
+      "G_formula": 1.0
+    },
+    {
+      "k_e": 1000.0,
+      "k_f_name": "0.0045",
+      "k_f": 0.0045,
+      "demo_force_N": 3.0,
+      "replay_force_N": 3.9046,
+      "G_measured": 1.3015,
+      "G_formula": 1.3015
+    },
+    {
+      "k_e": 1000.0,
+      "k_f_name": "0.01",
+      "k_f": 0.01,
+      "demo_force_N": 3.0,
+      "replay_force_N": 7.8092,
+      "G_measured": 2.6031,
+      "G_formula": 2.6031
+    },
+    {
+      "k_e": 10000.0,
+      "k_f_name": "0",
+      "k_f": 0.0,
+      "demo_force_N": 3.0,
+      "replay_force_N": 0.0902,
+      "G_measured": 0.0301,
+      "G_formula": 0.0301
+    },
+    {
+      "k_e": 10000.0,
+      "k_f_name": "1/k_p",
+      "k_f": 0.0032258064516129032,
+      "demo_force_N": 3.0,
+      "replay_force_N": 3.0,
+      "G_measured": 1.0,
+      "G_formula": 1.0
+    },
+    {
+      "k_e": 10000.0,
+      "k_f_name": "0.0045",
+      "k_f": 0.0045,
+      "demo_force_N": 3.0,
+      "replay_force_N": 4.1494,
+      "G_measured": 1.3831,
+      "G_formula": 1.3831
+    },
+    {
+      "k_e": 10000.0,
+      "k_f_name": "0.01",
+      "k_f": 0.01,
+      "demo_force_N": 3.0,
+      "replay_force_N": 9.1106,
+      "G_measured": 3.0369,
+      "G_formula": 3.0369
+    },
+    {
+      "k_e": 100000.0,
+      "k_f_name": "0",
+      "k_f": 0.0,
+      "demo_force_N": 3.0,
+      "replay_force_N": 0.0093,
+      "G_measured": 0.0031,
+      "G_formula": 0.0031
+    },
+    {
+      "k_e": 100000.0,
+      "k_f_name": "1/k_p",
+      "k_f": 0.0032258064516129032,
+      "demo_force_N": 3.0,
+      "replay_force_N": 3.0,
+      "G_measured": 1.0,
+      "G_formula": 1.0
+    },
+    {
+      "k_e": 100000.0,
+      "k_f_name": "0.0045",
+      "k_f": 0.0045,
+      "demo_force_N": 3.0,
+      "replay_force_N": 4.1813,
+      "G_measured": 1.3938,
+      "G_formula": 1.3938
+    },
+    {
+      "k_e": 100000.0,
+      "k_f_name": "0.01",
+      "k_f": 0.01,
+      "demo_force_N": 3.0,
+      "replay_force_N": 9.2805,
+      "G_measured": 3.0935,
+      "G_formula": 3.0935
+    }
+  ],
+  "press_window": [
+    {
+      "k_e": 1000.0,
+      "wall_offset_mm": 0.0,
+      "demo_force_N": 3.0,
+      "window_sim": [
+        0.0,
+        0.006
+      ],
+      "contiguous": true,
+      "window_formula_nominal": [
+        -0.0003,
+        0.00604
+      ],
+      "k_f0_success": true,
+      "n_grid": 61
+    },
+    {
+      "k_e": 10000.0,
+      "wall_offset_mm": 0.0,
+      "demo_force_N": 3.0,
+      "window_sim": [
+        0.0006,
+        0.0054
+      ],
+      "contiguous": true,
+      "window_formula_nominal": [
+        0.00045,
+        0.00544
+      ],
+      "k_f0_success": false,
+      "n_grid": 61
+    },
+    {
+      "k_e": 100000.0,
+      "wall_offset_mm": 0.0,
+      "demo_force_N": 3.0,
+      "window_sim": [
+        0.0006,
+        0.0052
+      ],
+      "contiguous": true,
+      "window_formula_nominal": [
+        0.00053,
+        0.00538
+      ],
+      "k_f0_success": false,
+      "n_grid": 61
+    },
+    {
+      "k_e": 10000.0,
+      "wall_offset_mm": 1.0,
+      "demo_force_N": 3.0,
+      "window_sim": [
+        0.0008,
+        0.0056
+      ],
+      "contiguous": true,
+      "window_formula_nominal": [
+        0.00045,
+        0.00544
+      ],
+      "k_f0_success": false,
+      "n_grid": 61
+    },
+    {
+      "k_e": 10000.0,
+      "wall_offset_mm": 2.0,
+      "demo_force_N": 3.0,
+      "window_sim": [
+        0.0012,
+        0.006
+      ],
+      "contiguous": true,
+      "window_formula_nominal": [
+        0.00045,
+        0.00544
+      ],
+      "k_f0_success": false,
+      "n_grid": 61
+    }
+  ],
+  "pinch_window": [
+    {
+      "k_e": 1000.0,
+      "demo_force_A_N": 3.0,
+      "demo_force_B_N": 3.0,
+      "window_sim": [
+        0.0,
+        0.006
+      ],
+      "window_formula_nominal": [
+        -0.0003,
+        0.00604
+      ],
+      "k_f0_success": true,
+      "n_grid": 61
+    },
+    {
+      "k_e": 10000.0,
+      "demo_force_A_N": 3.0,
+      "demo_force_B_N": 3.0,
+      "window_sim": [
+        0.0006,
+        0.0054
+      ],
+      "window_formula_nominal": [
+        0.00045,
+        0.00544
+      ],
+      "k_f0_success": false,
+      "n_grid": 61
+    }
+  ],
+  "wall_time_s": 6.9
+}
