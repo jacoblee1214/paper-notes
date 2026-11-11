@@ -1,0 +1,265 @@
+{
+ "setup": {
+  "sigma_n": 0.05,
+  "train_episodes": 200,
+  "test_episodes": 200,
+  "test_collision_rate": 0.5,
+  "seeds": 3,
+  "gate_hidden": 4,
+  "adam_iters": 800,
+  "lr": 0.03,
+  "policy": "p = w0 + w1·v + w2·g·‖z‖ + w3·g·‖z‖·v (상호작용항: 충돌 후퇴를 표현하려고 추가), 학습은 행동 MSE(+선택적 게이트 BCE)",
+  "expert": "기대 접촉 +1, 예상 밖 충돌 -1, 그 밖 0",
+  "cmp": "gate_toy.fit_cmp (학습 세트로 적합)"
+ },
+ "results": {
+  "σ (논문 Eq. 3) | 행동 손실만": {
+   "p=0.01": {
+    "collision_gate_recall(g>0.5)": 0.405,
+    "collision_gate_mean_g": 0.448,
+    "contact_gate_recall(g>0.5)": 0.998,
+    "free_space_false_open": 0.592,
+    "collision_policy_mean_action": 0.51,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 1.201,
+    "behavior_mse_all": 0.071,
+    "train_collision_steps_mean": 6.0,
+    "collision_gate_recall_sd": 0.421
+   },
+   "p=0.02": {
+    "collision_gate_recall(g>0.5)": 0.054,
+    "collision_gate_mean_g": 0.362,
+    "contact_gate_recall(g>0.5)": 0.995,
+    "free_space_false_open": 0.377,
+    "collision_policy_mean_action": 0.375,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 1.108,
+    "behavior_mse_all": 0.066,
+    "train_collision_steps_mean": 16.0,
+    "collision_gate_recall_sd": 0.015
+   },
+   "p=0.05": {
+    "collision_gate_recall(g>0.5)": 0.046,
+    "collision_gate_mean_g": 0.139,
+    "contact_gate_recall(g>0.5)": 0.993,
+    "free_space_false_open": 0.356,
+    "collision_policy_mean_action": 0.125,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.935,
+    "behavior_mse_all": 0.057,
+    "train_collision_steps_mean": 42.0,
+    "collision_gate_recall_sd": 0.01
+   },
+   "p=0.1": {
+    "collision_gate_recall(g>0.5)": 0.045,
+    "collision_gate_mean_g": 0.079,
+    "contact_gate_recall(g>0.5)": 0.992,
+    "free_space_false_open": 0.344,
+    "collision_policy_mean_action": 0.07,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.904,
+    "behavior_mse_all": 0.056,
+    "train_collision_steps_mean": 84.0,
+    "collision_gate_recall_sd": 0.027
+   },
+   "p=0.2": {
+    "collision_gate_recall(g>0.5)": 0.014,
+    "collision_gate_mean_g": 0.033,
+    "contact_gate_recall(g>0.5)": 0.99,
+    "free_space_false_open": 0.333,
+    "collision_policy_mean_action": 0.028,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.892,
+    "behavior_mse_all": 0.055,
+    "train_collision_steps_mean": 194.0,
+    "collision_gate_recall_sd": 0.002
+   }
+  },
+  "σ (논문 Eq. 3) | 보조 감독 있음": {
+   "p=0.01": {
+    "collision_gate_recall(g>0.5)": 0.0,
+    "collision_gate_mean_g": 0.009,
+    "contact_gate_recall(g>0.5)": 0.819,
+    "free_space_false_open": 0.118,
+    "collision_policy_mean_action": 0.042,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 2.661,
+    "behavior_mse_all": 0.061,
+    "train_collision_steps_mean": 6.0,
+    "collision_gate_recall_sd": 0.0
+   },
+   "p=0.02": {
+    "collision_gate_recall(g>0.5)": 0.001,
+    "collision_gate_mean_g": 0.009,
+    "contact_gate_recall(g>0.5)": 0.82,
+    "free_space_false_open": 0.118,
+    "collision_policy_mean_action": 0.041,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 2.688,
+    "behavior_mse_all": 0.061,
+    "train_collision_steps_mean": 16.0,
+    "collision_gate_recall_sd": 0.001
+   },
+   "p=0.05": {
+    "collision_gate_recall(g>0.5)": 0.0,
+    "collision_gate_mean_g": 0.011,
+    "contact_gate_recall(g>0.5)": 0.821,
+    "free_space_false_open": 0.118,
+    "collision_policy_mean_action": 0.044,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 2.675,
+    "behavior_mse_all": 0.061,
+    "train_collision_steps_mean": 42.0,
+    "collision_gate_recall_sd": 0.0
+   },
+   "p=0.1": {
+    "collision_gate_recall(g>0.5)": 0.0,
+    "collision_gate_mean_g": 0.012,
+    "contact_gate_recall(g>0.5)": 0.82,
+    "free_space_false_open": 0.117,
+    "collision_policy_mean_action": 0.044,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 2.735,
+    "behavior_mse_all": 0.062,
+    "train_collision_steps_mean": 84.0,
+    "collision_gate_recall_sd": 0.0
+   },
+   "p=0.2": {
+    "collision_gate_recall(g>0.5)": 0.0,
+    "collision_gate_mean_g": 0.016,
+    "contact_gate_recall(g>0.5)": 0.805,
+    "free_space_false_open": 0.111,
+    "collision_policy_mean_action": 0.052,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 2.718,
+    "behavior_mse_all": 0.062,
+    "train_collision_steps_mean": 194.0,
+    "collision_gate_recall_sd": 0.0
+   }
+  },
+  "σ + 예측 오차 | 행동 손실만": {
+   "p=0.01": {
+    "collision_gate_recall(g>0.5)": 1.0,
+    "collision_gate_mean_g": 0.999,
+    "contact_gate_recall(g>0.5)": 0.986,
+    "free_space_false_open": 0.107,
+    "collision_policy_mean_action": 0.91,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.911,
+    "behavior_mse_all": 0.088,
+    "train_collision_steps_mean": 6.0,
+    "collision_gate_recall_sd": 0.0
+   },
+   "p=0.02": {
+    "collision_gate_recall(g>0.5)": 0.719,
+    "collision_gate_mean_g": 0.759,
+    "contact_gate_recall(g>0.5)": 0.986,
+    "free_space_false_open": 0.106,
+    "collision_policy_mean_action": 0.668,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.89,
+    "behavior_mse_all": 0.077,
+    "train_collision_steps_mean": 16.0,
+    "collision_gate_recall_sd": 0.397
+   },
+   "p=0.05": {
+    "collision_gate_recall(g>0.5)": 0.342,
+    "collision_gate_mean_g": 0.42,
+    "contact_gate_recall(g>0.5)": 0.691,
+    "free_space_false_open": 0.374,
+    "collision_policy_mean_action": 0.348,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 1.574,
+    "behavior_mse_all": 0.049,
+    "train_collision_steps_mean": 42.0,
+    "collision_gate_recall_sd": 0.465
+   },
+   "p=0.1": {
+    "collision_gate_recall(g>0.5)": 0.344,
+    "collision_gate_mean_g": 0.394,
+    "contact_gate_recall(g>0.5)": 0.714,
+    "free_space_false_open": 0.544,
+    "collision_policy_mean_action": 0.243,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 1.523,
+    "behavior_mse_all": 0.046,
+    "train_collision_steps_mean": 84.0,
+    "collision_gate_recall_sd": 0.464
+   },
+   "p=0.2": {
+    "collision_gate_recall(g>0.5)": 0.668,
+    "collision_gate_mean_g": 0.558,
+    "contact_gate_recall(g>0.5)": 0.775,
+    "free_space_false_open": 0.377,
+    "collision_policy_mean_action": 0.201,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.959,
+    "behavior_mse_all": 0.046,
+    "train_collision_steps_mean": 194.0,
+    "collision_gate_recall_sd": 0.469
+   }
+  },
+  "σ + 예측 오차 | 보조 감독 있음": {
+   "p=0.01": {
+    "collision_gate_recall(g>0.5)": 1.0,
+    "collision_gate_mean_g": 0.994,
+    "contact_gate_recall(g>0.5)": 0.921,
+    "free_space_false_open": 0.028,
+    "collision_policy_mean_action": 0.918,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.923,
+    "behavior_mse_all": 0.094,
+    "train_collision_steps_mean": 6.0,
+    "collision_gate_recall_sd": 0.0
+   },
+   "p=0.02": {
+    "collision_gate_recall(g>0.5)": 1.0,
+    "collision_gate_mean_g": 0.992,
+    "contact_gate_recall(g>0.5)": 0.922,
+    "free_space_false_open": 0.027,
+    "collision_policy_mean_action": 0.867,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.873,
+    "behavior_mse_all": 0.092,
+    "train_collision_steps_mean": 16.0,
+    "collision_gate_recall_sd": 0.0
+   },
+   "p=0.05": {
+    "collision_gate_recall(g>0.5)": 1.0,
+    "collision_gate_mean_g": 0.993,
+    "contact_gate_recall(g>0.5)": 0.919,
+    "free_space_false_open": 0.026,
+    "collision_policy_mean_action": 0.754,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.759,
+    "behavior_mse_all": 0.087,
+    "train_collision_steps_mean": 42.0,
+    "collision_gate_recall_sd": 0.0
+   },
+   "p=0.1": {
+    "collision_gate_recall(g>0.5)": 1.0,
+    "collision_gate_mean_g": 0.991,
+    "contact_gate_recall(g>0.5)": 0.918,
+    "free_space_false_open": 0.027,
+    "collision_policy_mean_action": 0.594,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.598,
+    "behavior_mse_all": 0.08,
+    "train_collision_steps_mean": 84.0,
+    "collision_gate_recall_sd": 0.0
+   },
+   "p=0.2": {
+    "collision_gate_recall(g>0.5)": 1.0,
+    "collision_gate_mean_g": 0.989,
+    "contact_gate_recall(g>0.5)": 0.908,
+    "free_space_false_open": 0.026,
+    "collision_policy_mean_action": 0.291,
+    "collision_retreat_fraction(a<-0.5)": 0.0,
+    "oracle_gate_open_collision_action": 0.292,
+    "behavior_mse_all": 0.07,
+    "train_collision_steps_mean": 194.0,
+    "collision_gate_recall_sd": 0.0
+   }
+  }
+ }
+}

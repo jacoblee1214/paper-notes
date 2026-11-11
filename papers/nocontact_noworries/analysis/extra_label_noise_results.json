@@ -1,0 +1,626 @@
+{
+ "setup": {
+  "N_PRE": 20,
+  "D_MAX_frames": 3,
+  "window": 4,
+  "T": 30,
+  "N_train": 4000,
+  "N_test": 20000,
+  "policy": "로지스틱 회귀, 최근 4프레임 d, 멈춤 = 처음 P>0.5",
+  "seed": 1,
+  "note": "제어 toy(control_toy.py)는 K 디바운스 규칙을 쓰고, 여기서는 학습된 확률 규칙을 쓴다"
+ },
+ "weights_bias_then_W_lags": {
+  "clean": [
+   -14.508,
+   26.542,
+   2.792,
+   1.337,
+   0.955
+  ],
+  "label 잡음 r=0.02": [
+   -3.926,
+   7.732,
+   0.061,
+   -0.049,
+   0.04
+  ],
+  "label 잡음 r=0.05": [
+   -2.962,
+   5.886,
+   0.0,
+   -0.031,
+   0.011
+  ],
+  "label 잡음 r=0.1": [
+   -2.193,
+   4.404,
+   0.043,
+   -0.014,
+   -0.024
+  ],
+  "input 잡음 r=0.02": [
+   -7.018,
+   7.836,
+   4.307,
+   3.144,
+   2.239
+  ],
+  "input 잡음 r=0.05": [
+   -6.138,
+   5.963,
+   3.615,
+   2.63,
+   2.069
+  ],
+  "input 잡음 r=0.1": [
+   -5.384,
+   4.345,
+   2.997,
+   2.25,
+   1.878
+  ]
+ },
+ "results": {
+  "clean": {
+   "metrics": {
+    "fpr=0.0,fnr=0.0": {
+     "success": 1.0,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.0,fnr=0.1": {
+     "success": 0.9999,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.0,fnr=0.2": {
+     "success": 0.9986,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0014
+    },
+    "fpr=0.005,fnr=0.0": {
+     "success": 0.8993,
+     "early_stop": 0.1007,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.005,fnr=0.1": {
+     "success": 0.9014,
+     "early_stop": 0.0984,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.005,fnr=0.2": {
+     "success": 0.9026,
+     "early_stop": 0.0964,
+     "missed_or_late": 0.0011
+    },
+    "fpr=0.01,fnr=0.0": {
+     "success": 0.8164,
+     "early_stop": 0.1836,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.01,fnr=0.1": {
+     "success": 0.8116,
+     "early_stop": 0.1883,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.01,fnr=0.2": {
+     "success": 0.8133,
+     "early_stop": 0.1852,
+     "missed_or_late": 0.0015
+    },
+    "fpr=0.02,fnr=0.0": {
+     "success": 0.662,
+     "early_stop": 0.338,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.02,fnr=0.1": {
+     "success": 0.6582,
+     "early_stop": 0.3417,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.02,fnr=0.2": {
+     "success": 0.656,
+     "early_stop": 0.3433,
+     "missed_or_late": 0.0007
+    },
+    "fpr=0.05,fnr=0.0": {
+     "success": 0.3483,
+     "early_stop": 0.6516,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.05,fnr=0.1": {
+     "success": 0.3486,
+     "early_stop": 0.6513,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.05,fnr=0.2": {
+     "success": 0.3476,
+     "early_stop": 0.6522,
+     "missed_or_late": 0.0003
+    }
+   },
+   "sensitivity_success_pp_per_1pct_fpr": 17.09
+  },
+  "label 잡음 r=0.02": {
+   "metrics": {
+    "fpr=0.0,fnr=0.0": {
+     "success": 1.0,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.0,fnr=0.1": {
+     "success": 0.9999,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.0,fnr=0.2": {
+     "success": 0.9986,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0014
+    },
+    "fpr=0.005,fnr=0.0": {
+     "success": 0.9029,
+     "early_stop": 0.0971,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.005,fnr=0.1": {
+     "success": 0.8991,
+     "early_stop": 0.1007,
+     "missed_or_late": 0.0002
+    },
+    "fpr=0.005,fnr=0.2": {
+     "success": 0.9014,
+     "early_stop": 0.097,
+     "missed_or_late": 0.0015
+    },
+    "fpr=0.01,fnr=0.0": {
+     "success": 0.8112,
+     "early_stop": 0.1888,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.01,fnr=0.1": {
+     "success": 0.8157,
+     "early_stop": 0.1842,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.01,fnr=0.2": {
+     "success": 0.8109,
+     "early_stop": 0.1877,
+     "missed_or_late": 0.0014
+    },
+    "fpr=0.02,fnr=0.0": {
+     "success": 0.6581,
+     "early_stop": 0.3419,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.02,fnr=0.1": {
+     "success": 0.6612,
+     "early_stop": 0.3387,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.02,fnr=0.2": {
+     "success": 0.6593,
+     "early_stop": 0.3395,
+     "missed_or_late": 0.0012
+    },
+    "fpr=0.05,fnr=0.0": {
+     "success": 0.3491,
+     "early_stop": 0.6509,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.05,fnr=0.1": {
+     "success": 0.3533,
+     "early_stop": 0.6466,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.05,fnr=0.2": {
+     "success": 0.3529,
+     "early_stop": 0.6464,
+     "missed_or_late": 0.0007
+    }
+   },
+   "sensitivity_success_pp_per_1pct_fpr": 16.93
+  },
+  "label 잡음 r=0.05": {
+   "metrics": {
+    "fpr=0.0,fnr=0.0": {
+     "success": 1.0,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.0,fnr=0.1": {
+     "success": 0.9999,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.0,fnr=0.2": {
+     "success": 0.998,
+     "early_stop": 0.0,
+     "missed_or_late": 0.002
+    },
+    "fpr=0.005,fnr=0.0": {
+     "success": 0.9039,
+     "early_stop": 0.0961,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.005,fnr=0.1": {
+     "success": 0.9043,
+     "early_stop": 0.0956,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.005,fnr=0.2": {
+     "success": 0.9055,
+     "early_stop": 0.093,
+     "missed_or_late": 0.0015
+    },
+    "fpr=0.01,fnr=0.0": {
+     "success": 0.8144,
+     "early_stop": 0.1856,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.01,fnr=0.1": {
+     "success": 0.8165,
+     "early_stop": 0.1834,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.01,fnr=0.2": {
+     "success": 0.8102,
+     "early_stop": 0.1888,
+     "missed_or_late": 0.001
+    },
+    "fpr=0.02,fnr=0.0": {
+     "success": 0.6667,
+     "early_stop": 0.3332,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.02,fnr=0.1": {
+     "success": 0.66,
+     "early_stop": 0.34,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.02,fnr=0.2": {
+     "success": 0.6585,
+     "early_stop": 0.3405,
+     "missed_or_late": 0.001
+    },
+    "fpr=0.05,fnr=0.0": {
+     "success": 0.3462,
+     "early_stop": 0.6539,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.05,fnr=0.1": {
+     "success": 0.3528,
+     "early_stop": 0.6472,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.05,fnr=0.2": {
+     "success": 0.3457,
+     "early_stop": 0.6538,
+     "missed_or_late": 0.0005
+    }
+   },
+   "sensitivity_success_pp_per_1pct_fpr": 16.99
+  },
+  "label 잡음 r=0.1": {
+   "metrics": {
+    "fpr=0.0,fnr=0.0": {
+     "success": 1.0,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.0,fnr=0.1": {
+     "success": 0.9999,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.0,fnr=0.2": {
+     "success": 0.9981,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0019
+    },
+    "fpr=0.005,fnr=0.0": {
+     "success": 0.9018,
+     "early_stop": 0.0982,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.005,fnr=0.1": {
+     "success": 0.9026,
+     "early_stop": 0.0974,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.005,fnr=0.2": {
+     "success": 0.9017,
+     "early_stop": 0.0968,
+     "missed_or_late": 0.0016
+    },
+    "fpr=0.01,fnr=0.0": {
+     "success": 0.8072,
+     "early_stop": 0.1928,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.01,fnr=0.1": {
+     "success": 0.8095,
+     "early_stop": 0.1903,
+     "missed_or_late": 0.0002
+    },
+    "fpr=0.01,fnr=0.2": {
+     "success": 0.8091,
+     "early_stop": 0.1893,
+     "missed_or_late": 0.0016
+    },
+    "fpr=0.02,fnr=0.0": {
+     "success": 0.6634,
+     "early_stop": 0.3366,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.02,fnr=0.1": {
+     "success": 0.6626,
+     "early_stop": 0.3373,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.02,fnr=0.2": {
+     "success": 0.6573,
+     "early_stop": 0.3418,
+     "missed_or_late": 0.0009
+    },
+    "fpr=0.05,fnr=0.0": {
+     "success": 0.3463,
+     "early_stop": 0.6537,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.05,fnr=0.1": {
+     "success": 0.3511,
+     "early_stop": 0.6489,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.05,fnr=0.2": {
+     "success": 0.3487,
+     "early_stop": 0.6509,
+     "missed_or_late": 0.0005
+    }
+   },
+   "sensitivity_success_pp_per_1pct_fpr": 16.87
+  },
+  "input 잡음 r=0.02": {
+   "metrics": {
+    "fpr=0.0,fnr=0.0": {
+     "success": 1.0,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.0,fnr=0.1": {
+     "success": 0.9999,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.0,fnr=0.2": {
+     "success": 0.9986,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0014
+    },
+    "fpr=0.005,fnr=0.0": {
+     "success": 0.9049,
+     "early_stop": 0.0951,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.005,fnr=0.1": {
+     "success": 0.9045,
+     "early_stop": 0.0954,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.005,fnr=0.2": {
+     "success": 0.8986,
+     "early_stop": 0.1002,
+     "missed_or_late": 0.0012
+    },
+    "fpr=0.01,fnr=0.0": {
+     "success": 0.8129,
+     "early_stop": 0.1871,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.01,fnr=0.1": {
+     "success": 0.8123,
+     "early_stop": 0.1877,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.01,fnr=0.2": {
+     "success": 0.8081,
+     "early_stop": 0.19,
+     "missed_or_late": 0.0019
+    },
+    "fpr=0.02,fnr=0.0": {
+     "success": 0.6569,
+     "early_stop": 0.3431,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.02,fnr=0.1": {
+     "success": 0.662,
+     "early_stop": 0.3379,
+     "missed_or_late": 0.0001
+    },
+    "fpr=0.02,fnr=0.2": {
+     "success": 0.6613,
+     "early_stop": 0.3376,
+     "missed_or_late": 0.0011
+    },
+    "fpr=0.05,fnr=0.0": {
+     "success": 0.3543,
+     "early_stop": 0.6456,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.05,fnr=0.1": {
+     "success": 0.3469,
+     "early_stop": 0.6531,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.05,fnr=0.2": {
+     "success": 0.3489,
+     "early_stop": 0.6509,
+     "missed_or_late": 0.0002
+    }
+   },
+   "sensitivity_success_pp_per_1pct_fpr": 16.89
+  },
+  "input 잡음 r=0.05": {
+   "metrics": {
+    "fpr=0.0,fnr=0.0": {
+     "success": 1.0,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.0,fnr=0.1": {
+     "success": 0.9959,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0041
+    },
+    "fpr=0.0,fnr=0.2": {
+     "success": 0.9738,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0262
+    },
+    "fpr=0.005,fnr=0.0": {
+     "success": 0.9982,
+     "early_stop": 0.0018,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.005,fnr=0.1": {
+     "success": 0.9945,
+     "early_stop": 0.001,
+     "missed_or_late": 0.0044
+    },
+    "fpr=0.005,fnr=0.2": {
+     "success": 0.9714,
+     "early_stop": 0.0012,
+     "missed_or_late": 0.0274
+    },
+    "fpr=0.01,fnr=0.0": {
+     "success": 0.995,
+     "early_stop": 0.005,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.01,fnr=0.1": {
+     "success": 0.9915,
+     "early_stop": 0.005,
+     "missed_or_late": 0.0034
+    },
+    "fpr=0.01,fnr=0.2": {
+     "success": 0.9676,
+     "early_stop": 0.0046,
+     "missed_or_late": 0.0278
+    },
+    "fpr=0.02,fnr=0.0": {
+     "success": 0.9795,
+     "early_stop": 0.0205,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.02,fnr=0.1": {
+     "success": 0.9758,
+     "early_stop": 0.0214,
+     "missed_or_late": 0.0028
+    },
+    "fpr=0.02,fnr=0.2": {
+     "success": 0.9528,
+     "early_stop": 0.0204,
+     "missed_or_late": 0.0268
+    },
+    "fpr=0.05,fnr=0.0": {
+     "success": 0.8934,
+     "early_stop": 0.1066,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.05,fnr=0.1": {
+     "success": 0.8829,
+     "early_stop": 0.1143,
+     "missed_or_late": 0.0027
+    },
+    "fpr=0.05,fnr=0.2": {
+     "success": 0.8616,
+     "early_stop": 0.1157,
+     "missed_or_late": 0.0227
+    }
+   },
+   "sensitivity_success_pp_per_1pct_fpr": 1.01
+  },
+  "input 잡음 r=0.1": {
+   "metrics": {
+    "fpr=0.0,fnr=0.0": {
+     "success": 1.0,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.0,fnr=0.1": {
+     "success": 0.9971,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0029
+    },
+    "fpr=0.0,fnr=0.2": {
+     "success": 0.9733,
+     "early_stop": 0.0,
+     "missed_or_late": 0.0267
+    },
+    "fpr=0.005,fnr=0.0": {
+     "success": 0.9989,
+     "early_stop": 0.0011,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.005,fnr=0.1": {
+     "success": 0.9953,
+     "early_stop": 0.0014,
+     "missed_or_late": 0.0034
+    },
+    "fpr=0.005,fnr=0.2": {
+     "success": 0.9705,
+     "early_stop": 0.0019,
+     "missed_or_late": 0.0276
+    },
+    "fpr=0.01,fnr=0.0": {
+     "success": 0.9942,
+     "early_stop": 0.0058,
+     "missed_or_late": 0.0
+    },
+    "fpr=0.01,fnr=0.1": {
+     "success": 0.9915,
+     "early_stop": 0.0053,
+     "missed_or_late": 0.0033
+    },
+    "fpr=0.01,fnr=0.2": {
+     "success": 0.9683,
+     "early_stop": 0.0056,
+     "missed_or_late": 0.0262
+    },
+    "fpr=0.02,fnr=0.0": {
+     "success": 0.9777,
+     "early_stop": 0.0223,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.02,fnr=0.1": {
+     "success": 0.9748,
+     "early_stop": 0.0215,
+     "missed_or_late": 0.0037
+    },
+    "fpr=0.02,fnr=0.2": {
+     "success": 0.9544,
+     "early_stop": 0.0205,
+     "missed_or_late": 0.0251
+    },
+    "fpr=0.05,fnr=0.0": {
+     "success": 0.8878,
+     "early_stop": 0.1123,
+     "missed_or_late": -0.0
+    },
+    "fpr=0.05,fnr=0.1": {
+     "success": 0.8881,
+     "early_stop": 0.1086,
+     "missed_or_late": 0.0033
+    },
+    "fpr=0.05,fnr=0.2": {
+     "success": 0.8648,
+     "early_stop": 0.1132,
+     "missed_or_late": 0.0221
+    }
+   },
+   "sensitivity_success_pp_per_1pct_fpr": 1.11
+  }
+ }
+}

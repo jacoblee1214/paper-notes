@@ -1,0 +1,38 @@
+{
+ "setup": {
+  "n_replications": 100,
+  "n_seeds": 10,
+  "n_init": 50,
+  "n_demo": 25,
+  "tau": 0.1,
+  "mlp": "2→16→1 tanh, Adam 800 steps, lr 0.01",
+  "fixed_init_seed": 999,
+  "noise": 0.05,
+  "truth": "g(s)=sin(2 s1)+0.5 s2"
+ },
+ "success_rate_mean": 0.8785,
+ "true_sd_grand_mean_resampled_inits_and_seeds": 0.0313,
+ "fixed_init_protocol": {
+  "sd_across_replications_of_grand_mean(seed+init fixed)": 0.0248,
+  "mean_reported_SE_(seed_sd/sqrt10)": 0.0242,
+  "ratio_reported_to_true_sd": 0.775
+ },
+ "resampled_init_protocol": {
+  "mean_reported_SE_(seed_sd/sqrt10)": 0.0257,
+  "ratio_reported_to_true_sd": 0.822
+ },
+ "three_seed_version_first3": {
+  "true_sd_fixed_init": 0.0466,
+  "fixed_init_reported_SE": 0.0405,
+  "fixed_ratio_to_true_sd": 0.869,
+  "true_sd_resampled": 0.051,
+  "resampled_reported_SE": 0.0447,
+  "resampled_ratio_to_true_sd": 0.876
+ },
+ "naive_binomial_SE": {
+  "N=1500": 0.0084,
+  "N=500": 0.0146,
+  "ratio_1500_to_true_sd": 0.269
+ },
+ "mean_diff_fixed_minus_resampled": 0.0118
+}

@@ -1,0 +1,2345 @@
+{
+ "setup": {
+  "tracking_limit_mm": 2.0,
+  "F_peak_limit_N": 20.0,
+  "seeds": 5,
+  "base_model": "contact_toy.simulate (m=1 kg, k_env=5000 N/m, v=0.05 m/s, damping 1.4√k)",
+  "grid": {
+   "delta_cm": [
+    0.5,
+    1.0,
+    2.0,
+    3.0
+   ],
+   "err_deg": [
+    0,
+    15,
+    30,
+    45,
+    60
+   ],
+   "mu": [
+    0.0,
+    0.2,
+    0.4,
+    0.6
+   ]
+  }
+ },
+ "summary": {
+  "grid_points": 80,
+  "pass_count": {
+   "고정 저강성 300/300": 35,
+   "고정 고강성 3000/3000": 30,
+   "방향별 300/3000": 20
+  },
+  "pass_count_fixed_low_or_high": 40,
+  "directional_only_pass_count": 8,
+  "directional_only_pass_points": [
+   {
+    "delta_cm": 1.0,
+    "mu": 0.4,
+    "err_deg": 0
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.6,
+    "err_deg": 0
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.2,
+    "err_deg": 0
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.4,
+    "err_deg": 0
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.6,
+    "err_deg": 0
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.2,
+    "err_deg": 0
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.4,
+    "err_deg": 0
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.6,
+    "err_deg": 0
+   }
+  ],
+  "directional_fail_points": [
+   {
+    "delta_cm": 0.5,
+    "mu": 0.0,
+    "err_deg": 30,
+    "track_mm": 2.29,
+    "Fpeak_N": 2.06
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.0,
+    "err_deg": 45,
+    "track_mm": 3.64,
+    "Fpeak_N": 2.83
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.0,
+    "err_deg": 60,
+    "track_mm": 5.02,
+    "Fpeak_N": 4.42
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.2,
+    "err_deg": 30,
+    "track_mm": 2.44,
+    "Fpeak_N": 1.99
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.2,
+    "err_deg": 45,
+    "track_mm": 3.95,
+    "Fpeak_N": 2.54
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.2,
+    "err_deg": 60,
+    "track_mm": 5.84,
+    "Fpeak_N": 3.8
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.4,
+    "err_deg": 30,
+    "track_mm": 2.57,
+    "Fpeak_N": 1.96
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.4,
+    "err_deg": 45,
+    "track_mm": 4.19,
+    "Fpeak_N": 2.32
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.4,
+    "err_deg": 60,
+    "track_mm": 6.42,
+    "Fpeak_N": 3.36
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.6,
+    "err_deg": 30,
+    "track_mm": 2.69,
+    "Fpeak_N": 1.93
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.6,
+    "err_deg": 45,
+    "track_mm": 4.39,
+    "Fpeak_N": 2.16
+   },
+   {
+    "delta_cm": 0.5,
+    "mu": 0.6,
+    "err_deg": 60,
+    "track_mm": 6.86,
+    "Fpeak_N": 3.04
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.0,
+    "err_deg": 15,
+    "track_mm": 2.2,
+    "Fpeak_N": 3.16
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.0,
+    "err_deg": 30,
+    "track_mm": 4.62,
+    "Fpeak_N": 3.85
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.0,
+    "err_deg": 45,
+    "track_mm": 7.33,
+    "Fpeak_N": 5.31
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.0,
+    "err_deg": 60,
+    "track_mm": 10.08,
+    "Fpeak_N": 8.43
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.2,
+    "err_deg": 15,
+    "track_mm": 2.41,
+    "Fpeak_N": 3.04
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.2,
+    "err_deg": 30,
+    "track_mm": 4.93,
+    "Fpeak_N": 3.56
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.2,
+    "err_deg": 45,
+    "track_mm": 7.95,
+    "Fpeak_N": 4.7
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.2,
+    "err_deg": 60,
+    "track_mm": 11.72,
+    "Fpeak_N": 7.23
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.4,
+    "err_deg": 15,
+    "track_mm": 2.6,
+    "Fpeak_N": 2.93
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.4,
+    "err_deg": 30,
+    "track_mm": 5.2,
+    "Fpeak_N": 3.32
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.4,
+    "err_deg": 45,
+    "track_mm": 8.43,
+    "Fpeak_N": 4.23
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.4,
+    "err_deg": 60,
+    "track_mm": 12.89,
+    "Fpeak_N": 6.45
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.6,
+    "err_deg": 15,
+    "track_mm": 2.78,
+    "Fpeak_N": 2.84
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.6,
+    "err_deg": 30,
+    "track_mm": 5.42,
+    "Fpeak_N": 3.12
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.6,
+    "err_deg": 45,
+    "track_mm": 8.82,
+    "Fpeak_N": 3.87
+   },
+   {
+    "delta_cm": 1.0,
+    "mu": 0.6,
+    "err_deg": 60,
+    "track_mm": 13.77,
+    "Fpeak_N": 5.93
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.0,
+    "err_deg": 15,
+    "track_mm": 4.45,
+    "Fpeak_N": 6.16
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.0,
+    "err_deg": 30,
+    "track_mm": 9.29,
+    "Fpeak_N": 7.46
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.0,
+    "err_deg": 45,
+    "track_mm": 14.71,
+    "Fpeak_N": 10.31
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.0,
+    "err_deg": 60,
+    "track_mm": 20.2,
+    "Fpeak_N": 16.41
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.2,
+    "err_deg": 15,
+    "track_mm": 4.87,
+    "Fpeak_N": 5.91
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.2,
+    "err_deg": 30,
+    "track_mm": 9.91,
+    "Fpeak_N": 6.86
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.2,
+    "err_deg": 45,
+    "track_mm": 15.95,
+    "Fpeak_N": 9.09
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.2,
+    "err_deg": 60,
+    "track_mm": 23.49,
+    "Fpeak_N": 14.92
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.4,
+    "err_deg": 15,
+    "track_mm": 5.26,
+    "Fpeak_N": 5.68
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.4,
+    "err_deg": 30,
+    "track_mm": 10.44,
+    "Fpeak_N": 6.35
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.4,
+    "err_deg": 45,
+    "track_mm": 16.92,
+    "Fpeak_N": 8.18
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.4,
+    "err_deg": 60,
+    "track_mm": 25.83,
+    "Fpeak_N": 14.25
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.6,
+    "err_deg": 15,
+    "track_mm": 5.61,
+    "Fpeak_N": 5.47
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.6,
+    "err_deg": 30,
+    "track_mm": 10.89,
+    "Fpeak_N": 5.93
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.6,
+    "err_deg": 45,
+    "track_mm": 17.68,
+    "Fpeak_N": 7.47
+   },
+   {
+    "delta_cm": 2.0,
+    "mu": 0.6,
+    "err_deg": 60,
+    "track_mm": 27.58,
+    "Fpeak_N": 13.84
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.0,
+    "err_deg": 15,
+    "track_mm": 6.7,
+    "Fpeak_N": 9.17
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.0,
+    "err_deg": 30,
+    "track_mm": 13.95,
+    "Fpeak_N": 11.07
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.0,
+    "err_deg": 45,
+    "track_mm": 22.08,
+    "Fpeak_N": 15.33
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.0,
+    "err_deg": 60,
+    "track_mm": 30.32,
+    "Fpeak_N": 24.41
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.2,
+    "err_deg": 15,
+    "track_mm": 7.33,
+    "Fpeak_N": 8.79
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.2,
+    "err_deg": 30,
+    "track_mm": 14.89,
+    "Fpeak_N": 10.17
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.2,
+    "err_deg": 45,
+    "track_mm": 23.95,
+    "Fpeak_N": 13.78
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.2,
+    "err_deg": 60,
+    "track_mm": 35.25,
+    "Fpeak_N": 24.52
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.4,
+    "err_deg": 15,
+    "track_mm": 7.91,
+    "Fpeak_N": 8.44
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.4,
+    "err_deg": 30,
+    "track_mm": 15.69,
+    "Fpeak_N": 9.41
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.4,
+    "err_deg": 45,
+    "track_mm": 25.4,
+    "Fpeak_N": 12.74
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.4,
+    "err_deg": 60,
+    "track_mm": 38.76,
+    "Fpeak_N": 24.46
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.6,
+    "err_deg": 15,
+    "track_mm": 8.44,
+    "Fpeak_N": 8.12
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.6,
+    "err_deg": 30,
+    "track_mm": 16.36,
+    "Fpeak_N": 8.76
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.6,
+    "err_deg": 45,
+    "track_mm": 26.54,
+    "Fpeak_N": 12.0
+   },
+   {
+    "delta_cm": 3.0,
+    "mu": 0.6,
+    "err_deg": 60,
+    "track_mm": 41.39,
+    "Fpeak_N": 24.36
+   }
+  ]
+ },
+ "rows": [
+  {
+   "delta_cm": 0.5,
+   "mu": 0.0,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 1.9,
+    "Fss_N": 1.42,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.0,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 1.08,
+    "Fpeak_N": 1.92,
+    "Fss_N": 1.5,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.0,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 2.29,
+    "Fpeak_N": 2.06,
+    "Fss_N": 1.8,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.0,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 3.64,
+    "Fpeak_N": 2.83,
+    "Fss_N": 2.46,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.0,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 5.02,
+    "Fpeak_N": 4.42,
+    "Fss_N": 3.9,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.2,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 0.89,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.58,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.04,
+    "Fpeak_N": 1.9,
+    "Fss_N": 1.42,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.2,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 0.89,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.58,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 1.18,
+    "Fpeak_N": 1.91,
+    "Fss_N": 1.44,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.2,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 0.89,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.58,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 2.44,
+    "Fpeak_N": 1.99,
+    "Fss_N": 1.65,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.2,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 0.89,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.58,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 3.95,
+    "Fpeak_N": 2.54,
+    "Fss_N": 2.15,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.2,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 0.89,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.58,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 5.84,
+    "Fpeak_N": 3.8,
+    "Fss_N": 3.24,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.4,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 1.83,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.2,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.14,
+    "Fpeak_N": 1.9,
+    "Fss_N": 1.42,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.4,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 1.83,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.2,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 1.28,
+    "Fpeak_N": 1.89,
+    "Fss_N": 1.38,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.4,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 1.83,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.2,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 2.57,
+    "Fpeak_N": 1.96,
+    "Fss_N": 1.52,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.4,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 1.83,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.2,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 4.19,
+    "Fpeak_N": 2.32,
+    "Fss_N": 1.9,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.4,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 1.83,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.2,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 6.42,
+    "Fpeak_N": 3.36,
+    "Fss_N": 2.78,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.6,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 2.78,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.83,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.23,
+    "Fpeak_N": 1.9,
+    "Fss_N": 1.42,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.6,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 2.78,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.83,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 1.37,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.32,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.6,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 2.78,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.83,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 2.69,
+    "Fpeak_N": 1.93,
+    "Fss_N": 1.41,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.6,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 2.78,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.83,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 4.39,
+    "Fpeak_N": 2.16,
+    "Fss_N": 1.71,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 0.5,
+   "mu": 0.6,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 2.78,
+    "Fpeak_N": 1.88,
+    "Fss_N": 1.41,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.83,
+    "Fpeak_N": 9.99,
+    "Fss_N": 9.39,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 6.86,
+    "Fpeak_N": 3.04,
+    "Fss_N": 2.43,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.0,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 2.96,
+    "Fss_N": 2.83,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.0,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 2.2,
+    "Fpeak_N": 3.16,
+    "Fss_N": 3.0,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.0,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 4.62,
+    "Fpeak_N": 3.85,
+    "Fss_N": 3.59,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.0,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 7.33,
+    "Fpeak_N": 5.31,
+    "Fss_N": 4.92,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.0,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 10.08,
+    "Fpeak_N": 8.43,
+    "Fss_N": 7.8,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.2,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 1.84,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.2,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.14,
+    "Fpeak_N": 2.96,
+    "Fss_N": 2.83,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.2,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 1.84,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.2,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 2.41,
+    "Fpeak_N": 3.04,
+    "Fss_N": 2.87,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.2,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 1.84,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.2,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 4.93,
+    "Fpeak_N": 3.56,
+    "Fss_N": 3.29,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.2,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 1.84,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.2,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 7.95,
+    "Fpeak_N": 4.7,
+    "Fss_N": 4.29,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.2,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 1.84,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 1.2,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": true
+   },
+   "방향별 300/3000": {
+    "track_mm": 11.72,
+    "Fpeak_N": 7.23,
+    "Fss_N": 6.48,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.4,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 3.72,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 2.45,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.33,
+    "Fpeak_N": 2.96,
+    "Fss_N": 2.83,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.4,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 3.72,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 2.45,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 2.6,
+    "Fpeak_N": 2.93,
+    "Fss_N": 2.75,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.4,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 3.72,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 2.45,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 5.2,
+    "Fpeak_N": 3.32,
+    "Fss_N": 3.03,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.4,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 3.72,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 2.45,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 8.43,
+    "Fpeak_N": 4.23,
+    "Fss_N": 3.8,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.4,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 3.72,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 2.45,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 12.89,
+    "Fpeak_N": 6.45,
+    "Fss_N": 5.55,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.6,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 5.61,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 3.7,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.52,
+    "Fpeak_N": 2.96,
+    "Fss_N": 2.83,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.6,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 5.61,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 3.7,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 2.78,
+    "Fpeak_N": 2.84,
+    "Fss_N": 2.65,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.6,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 5.61,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 3.7,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 5.42,
+    "Fpeak_N": 3.12,
+    "Fss_N": 2.81,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.6,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 5.61,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 3.7,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 8.82,
+    "Fpeak_N": 3.87,
+    "Fss_N": 3.41,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 1.0,
+   "mu": 0.6,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 5.61,
+    "Fpeak_N": 2.97,
+    "Fss_N": 2.83,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 3.7,
+    "Fpeak_N": 19.36,
+    "Fss_N": 18.76,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 13.77,
+    "Fpeak_N": 5.93,
+    "Fss_N": 4.85,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.0,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 5.79,
+    "Fss_N": 5.66,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.0,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 4.45,
+    "Fpeak_N": 6.16,
+    "Fss_N": 6.0,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.0,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 9.29,
+    "Fpeak_N": 7.46,
+    "Fss_N": 7.19,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.0,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 14.71,
+    "Fpeak_N": 10.31,
+    "Fss_N": 9.84,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.0,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 20.2,
+    "Fpeak_N": 16.41,
+    "Fss_N": 15.59,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.2,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 3.72,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 2.45,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.33,
+    "Fpeak_N": 5.79,
+    "Fss_N": 5.66,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.2,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 3.72,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 2.45,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 4.87,
+    "Fpeak_N": 5.91,
+    "Fss_N": 5.74,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.2,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 3.72,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 2.45,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 9.91,
+    "Fpeak_N": 6.86,
+    "Fss_N": 6.57,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.2,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 3.72,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 2.45,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 15.95,
+    "Fpeak_N": 9.09,
+    "Fss_N": 8.57,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.2,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 3.72,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 2.45,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 23.49,
+    "Fpeak_N": 14.92,
+    "Fss_N": 12.96,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.4,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 7.49,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 4.95,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.7,
+    "Fpeak_N": 5.79,
+    "Fss_N": 5.66,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.4,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 7.49,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 4.95,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 5.26,
+    "Fpeak_N": 5.68,
+    "Fss_N": 5.51,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.4,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 7.49,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 4.95,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 10.44,
+    "Fpeak_N": 6.35,
+    "Fss_N": 6.06,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.4,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 7.49,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 4.95,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 16.92,
+    "Fpeak_N": 8.18,
+    "Fss_N": 7.6,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.4,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 7.49,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 4.95,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 25.83,
+    "Fpeak_N": 14.25,
+    "Fss_N": 11.1,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.6,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 11.27,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 7.45,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 1.08,
+    "Fpeak_N": 5.79,
+    "Fss_N": 5.66,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.6,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 11.27,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 7.45,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 5.61,
+    "Fpeak_N": 5.47,
+    "Fss_N": 5.29,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.6,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 11.27,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 7.45,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 10.89,
+    "Fpeak_N": 5.93,
+    "Fss_N": 5.62,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.6,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 11.27,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 7.45,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 17.68,
+    "Fpeak_N": 7.47,
+    "Fss_N": 6.82,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 2.0,
+   "mu": 0.6,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 11.27,
+    "Fpeak_N": 5.8,
+    "Fss_N": 5.66,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 7.45,
+    "Fpeak_N": 38.13,
+    "Fss_N": 37.51,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 27.58,
+    "Fpeak_N": 13.84,
+    "Fss_N": 9.7,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.0,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.0,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 6.7,
+    "Fpeak_N": 9.17,
+    "Fss_N": 9.0,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.0,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 13.95,
+    "Fpeak_N": 11.07,
+    "Fss_N": 10.78,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.0,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 22.08,
+    "Fpeak_N": 15.33,
+    "Fss_N": 14.76,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.0,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 0.05,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": true
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 0.05,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 30.32,
+    "Fpeak_N": 24.41,
+    "Fss_N": 23.38,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.2,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 5.61,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 3.7,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 0.52,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.2,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 5.61,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 3.7,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 7.33,
+    "Fpeak_N": 8.79,
+    "Fss_N": 8.62,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.2,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 5.61,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 3.7,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 14.89,
+    "Fpeak_N": 10.17,
+    "Fss_N": 9.86,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.2,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 5.61,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 3.7,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 23.95,
+    "Fpeak_N": 13.78,
+    "Fss_N": 12.86,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.2,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 5.61,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 3.7,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 35.25,
+    "Fpeak_N": 24.52,
+    "Fss_N": 19.44,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.4,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 11.27,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 7.45,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 1.08,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.4,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 11.27,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 7.45,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 7.91,
+    "Fpeak_N": 8.44,
+    "Fss_N": 8.26,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.4,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 11.27,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 7.45,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 15.69,
+    "Fpeak_N": 9.41,
+    "Fss_N": 9.08,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.4,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 11.27,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 7.45,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 25.4,
+    "Fpeak_N": 12.74,
+    "Fss_N": 11.4,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.4,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 11.27,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 7.45,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 38.76,
+    "Fpeak_N": 24.46,
+    "Fss_N": 16.64,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.6,
+   "err_deg": 0,
+   "고정 저강성 300/300": {
+    "track_mm": 16.93,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 11.2,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 1.65,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": true
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.6,
+   "err_deg": 15,
+   "고정 저강성 300/300": {
+    "track_mm": 16.93,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 11.2,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 8.44,
+    "Fpeak_N": 8.12,
+    "Fss_N": 7.93,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.6,
+   "err_deg": 30,
+   "고정 저강성 300/300": {
+    "track_mm": 16.93,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 11.2,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 16.36,
+    "Fpeak_N": 8.76,
+    "Fss_N": 8.42,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.6,
+   "err_deg": 45,
+   "고정 저강성 300/300": {
+    "track_mm": 16.93,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 11.2,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 26.54,
+    "Fpeak_N": 12.0,
+    "Fss_N": 10.23,
+    "pass": false
+   }
+  },
+  {
+   "delta_cm": 3.0,
+   "mu": 0.6,
+   "err_deg": 60,
+   "고정 저강성 300/300": {
+    "track_mm": 16.93,
+    "Fpeak_N": 8.63,
+    "Fss_N": 8.49,
+    "pass": false
+   },
+   "고정 고강성 3000/3000": {
+    "track_mm": 11.2,
+    "Fpeak_N": 56.89,
+    "Fss_N": 56.26,
+    "pass": false
+   },
+   "방향별 300/3000": {
+    "track_mm": 41.39,
+    "Fpeak_N": 24.36,
+    "Fss_N": 14.55,
+    "pass": false
+   }
+  }
+ ]
+}
