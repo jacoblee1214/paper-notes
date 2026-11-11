@@ -1,0 +1,105 @@
+{
+  "setup": {
+    "dt": 0.01,
+    "T_max": 300,
+    "alpha": 0.3,
+    "K": 50.0,
+    "squeeze_bias": 0.15,
+    "clutch": "0–3 s ramp to 1",
+    "chunk_H": [
+      1,
+      10,
+      30
+    ],
+    "x_obj": [
+      0.5,
+      0.6,
+      0.7
+    ]
+  },
+  "speed_limit": {
+    "T_max": 300,
+    "min_time_by_rate_limit_s": 2.99,
+    "measured_time_after_step_s": 2.98,
+    "note": "x_obj=2.0(접촉 없음). r이 틱당 1칸만 움직이므로 측정값은 (T_max−1)·0.01 s와 같아야 한다."
+  },
+  "contact_response": {
+    "x_obj=0.5_H=1": {
+      "first_contact_s": 1.6400000000000001,
+      "force_0_0p5s_mean": 13.16391566740797,
+      "force_0_0p5s_max": 18.28753711201408,
+      "force_peak_all": 25.0,
+      "cmd_max_minus_obj": 0.5
+    },
+    "x_obj=0.5_H=10": {
+      "first_contact_s": 1.6400000000000001,
+      "force_0_0p5s_mean": 12.41391566740797,
+      "force_0_0p5s_max": 18.28753711201408,
+      "force_peak_all": 25.0,
+      "cmd_max_minus_obj": 0.5
+    },
+    "x_obj=0.5_H=30": {
+      "first_contact_s": 1.6400000000000001,
+      "force_0_0p5s_mean": 10.91391566740797,
+      "force_0_0p5s_max": 18.28753711201408,
+      "force_peak_all": 25.0,
+      "cmd_max_minus_obj": 0.5
+    },
+    "x_obj=0.6_H=1": {
+      "first_contact_s": 1.87,
+      "force_0_0p5s_mean": 12.728371580394661,
+      "force_0_0p5s_max": 17.197444332119172,
+      "force_peak_all": 20.0,
+      "cmd_max_minus_obj": 0.4
+    },
+    "x_obj=0.6_H=10": {
+      "first_contact_s": 1.87,
+      "force_0_0p5s_mean": 12.428371580394662,
+      "force_0_0p5s_max": 17.197444332119172,
+      "force_peak_all": 20.0,
+      "cmd_max_minus_obj": 0.4
+    },
+    "x_obj=0.6_H=30": {
+      "first_contact_s": 1.87,
+      "force_0_0p5s_mean": 9.42837158039466,
+      "force_0_0p5s_max": 17.197444332119172,
+      "force_peak_all": 20.0,
+      "cmd_max_minus_obj": 0.4
+    },
+    "x_obj=0.7_H=1": {
+      "first_contact_s": 2.12,
+      "force_0_0p5s_mean": 12.07265294743735,
+      "force_0_0p5s_max": 15.000000000000002,
+      "force_peak_all": 15.000000000000002,
+      "cmd_max_minus_obj": 0.30000000000000004
+    },
+    "x_obj=0.7_H=10": {
+      "first_contact_s": 2.12,
+      "force_0_0p5s_mean": 10.87265294743735,
+      "force_0_0p5s_max": 15.000000000000002,
+      "force_peak_all": 15.000000000000002,
+      "cmd_max_minus_obj": 0.30000000000000004
+    },
+    "x_obj=0.7_H=30": {
+      "first_contact_s": 2.12,
+      "force_0_0p5s_mean": 7.872652947437349,
+      "force_0_0p5s_max": 15.000000000000002,
+      "force_peak_all": 15.000000000000002,
+      "cmd_max_minus_obj": 0.30000000000000004
+    }
+  },
+  "no_squeeze_control_x_obj=0.6_H=30": {
+    "first_contact_s": 1.87,
+    "force_0_0p5s_mean": 5.378371580394661,
+    "force_0_0p5s_max": 9.69744433211917,
+    "force_peak_all": 15.000000000000002,
+    "cmd_max_minus_obj": 0.30000000000000004
+  },
+  "squeeze_H=1_x_obj=0.6": {
+    "first_contact_s": 1.87,
+    "force_0_0p5s_mean": 12.728371580394661,
+    "force_0_0p5s_max": 17.197444332119172,
+    "force_peak_all": 20.0,
+    "cmd_max_minus_obj": 0.4
+  }
+}

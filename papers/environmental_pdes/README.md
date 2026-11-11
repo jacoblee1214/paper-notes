@@ -17,6 +17,9 @@
 | `analysis/table_check.py` | 논문 수치 재계산(Welch, 민감도, 검출력) |
 | `analysis/pde_toy.py` | 2D 이류–확산 유한차분 + 입자 필터 toy |
 | `analysis/obs_toy.py` | 자세 피셔 정보, 회전 판별력, 수치 확산 검사 |
+| `analysis/extra_kappa_scheme.py` | 수치 방식(1차 풍상, Lax–Wendroff)에 따른 κ_eff와 필터 오차 |
+| `analysis/extra_flat_bias.py` | 평평한 장에서 편향–장 수준 혼동과 편향 사전 분포의 영향 |
+| `analysis/extra_rbpf_bias.py` | 편향 증강 표준 PF 대 RBPF(같은 입자 수·시드) |
 | `analysis/plot_figures.py` | toy 그래프 |
 | `report/crop_figures.py` | 논문 그림을 PDF에서 자르는 스크립트 |
 

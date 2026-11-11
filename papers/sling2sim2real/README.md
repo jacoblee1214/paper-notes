@@ -15,6 +15,7 @@
 | `analysis/table_check.py` | 표 산술과 검정 |
 | `analysis/sysid_toy.py` | 1자유도 탄성 밴드 toy: 피셔 정보, DE + 공분산 CEM, 착탄 전파 |
 | `analysis/model_error_check.py` | 보정 오차가 착탄 오차로 옮겨지는 정도 |
+| `analysis/extra_sysid_repro.py` | 적합 시드 50개의 재현성과 일 항 가중치 스윕 |
 | `analysis/plot_figures.py` | toy 그래프 |
 | `report/crop_figures.py` | 논문 그림을 PDF에서 자르는 스크립트 |
 
