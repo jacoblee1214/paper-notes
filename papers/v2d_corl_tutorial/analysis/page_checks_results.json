@@ -1,0 +1,195 @@
+{
+ "prize": {
+  "per_track_winner_plus_runner_up_usd": 9000,
+  "sum_if_track2_counted_once_usd": 36000,
+  "sum_if_track2_counted_per_tier_usd": 54000,
+  "page_pool_usd": 54000,
+  "matches_page_only_if_tiers_counted": true
+ },
+ "fisher": {
+  "4of5_vs_0of5_two_sided_p": 0.047619047619047616,
+  "4of5_vs_0of5_note": "n=5 vs 5 실제 로봇 시행, 효과 크기 추정에는 신뢰구간이 필요함"
+ },
+ "formulas": {
+  "collection_attempts_example": 29,
+  "finetune_steps_example": 915,
+  "collection_max_steps_example_with_15pct_margin": 920
+ },
+ "lift_hold": {
+  "hold_le_lift": true,
+  "min_hold_steps_seconds_at_20hz": 1.0,
+  "placement_window_seconds_at_20hz": 1.0
+ },
+ "kit_constants": {
+  "track_2/SP-SR.py: SPIDER position threshold 0.1 m": true,
+  "track_2/SP-SR.py: SPIDER orientation threshold 0.5 rad": true,
+  "track_2/MP-SR.py: ManipTrans position threshold 0.03 m": true,
+  "track_2/MP-SR.py: ManipTrans orientation threshold 30 deg": true,
+  "track_2/AUC.py: ADD thresholds arange(0.01, 0.10, 0.01)": true,
+  "track_2/MPPE.py: keypoint radius 0.05 m": true,
+  "track_1/PEN.py: penetration = relu(-sdf) mean x100 (cm)": true,
+  "track_1/PEN.py: contact accuracy threshold 0.015 m": true,
+  "track_3/RPE.py: 10000 metric samples": true
+ },
+ "leaderboard": {
+  "generated_at": "2026-11-09T20:04:43+00:00",
+  "track_1": {
+   "entries": 60,
+   "incomplete": 1,
+   "cd_h_cm": {
+    "n": 60,
+    "best": 11.3702,
+    "median": 14.8552,
+    "higher_is_better": false
+   },
+   "cd_o_cm": {
+    "n": 59,
+    "best": 15.4545,
+    "median": 24.2111,
+    "higher_is_better": false
+   },
+   "acc_h_cm": {
+    "n": 59,
+    "best": 0.1319,
+    "median": 0.1398,
+    "higher_is_better": false
+   },
+   "acc_o_cm": {
+    "n": 59,
+    "best": 0.0669,
+    "median": 0.074,
+    "higher_is_better": false
+   },
+   "interpenetration_cm": {
+    "n": 59,
+    "best": 0.0,
+    "median": 0.0001,
+    "higher_is_better": false
+   }
+  },
+  "track_2_tier1": {
+   "entries": 29,
+   "incomplete": 1,
+   "add_auc": {
+    "n": 29,
+    "best": 0.9492,
+    "median": 0.5926,
+    "higher_is_better": true
+   },
+   "spider_sr": {
+    "n": 28,
+    "best": 1.0,
+    "median": 0.7,
+    "higher_is_better": true
+   },
+   "maniptrans_sr": {
+    "n": 28,
+    "best": 1.0,
+    "median": 0.5667,
+    "higher_is_better": true
+   },
+   "mppe_cm": {
+    "n": 28,
+    "best": 0.8351,
+    "median": 14.1659,
+    "higher_is_better": false
+   }
+  },
+  "track_2_tier2": {
+   "entries": 25,
+   "incomplete": 0,
+   "add_auc": {
+    "n": 25,
+    "best": 0.8227,
+    "median": 0.4289,
+    "higher_is_better": true
+   },
+   "spider_sr": {
+    "n": 25,
+    "best": 0.9667,
+    "median": 0.5667,
+    "higher_is_better": true
+   },
+   "maniptrans_sr": {
+    "n": 25,
+    "best": 0.9667,
+    "median": 0.2667,
+    "higher_is_better": true
+   },
+   "mppe_cm": {
+    "n": 25,
+    "best": 1.6886,
+    "median": 18.0853,
+    "higher_is_better": false
+   }
+  },
+  "track_2_tier3": {
+   "entries": 20,
+   "incomplete": 0,
+   "add_auc": {
+    "n": 20,
+    "best": 0.6164,
+    "median": 0.2364,
+    "higher_is_better": true
+   },
+   "spider_sr": {
+    "n": 20,
+    "best": 0.6667,
+    "median": 0.2,
+    "higher_is_better": true
+   },
+   "maniptrans_sr": {
+    "n": 20,
+    "best": 0.4667,
+    "median": 0.0333,
+    "higher_is_better": true
+   },
+   "mppe_cm": {
+    "n": 20,
+    "best": 10.9999,
+    "median": 47.7718,
+    "higher_is_better": false
+   }
+  },
+  "track_3": {
+   "entries": 50,
+   "incomplete": 3,
+   "add_auc": {
+    "n": 50,
+    "best": 0.985,
+    "median": 0.4979,
+    "higher_is_better": true
+   },
+   "spider_sr": {
+    "n": 48,
+    "best": 1.0,
+    "median": 0.55,
+    "higher_is_better": true
+   },
+   "maniptrans_sr": {
+    "n": 48,
+    "best": 1.0,
+    "median": 0.15,
+    "higher_is_better": true
+   },
+   "rpe_cm": {
+    "n": 48,
+    "best": 0.6299,
+    "median": 9.2166,
+    "higher_is_better": false
+   },
+   "mppe_cm": {
+    "n": 48,
+    "best": 0.6031,
+    "median": 7.422,
+    "higher_is_better": false
+   },
+   "cd_o_cm": {
+    "n": 47,
+    "best": 0.2069,
+    "median": 0.3958,
+    "higher_is_better": false
+   }
+  }
+ }
+}
