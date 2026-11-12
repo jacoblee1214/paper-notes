@@ -1,0 +1,196 @@
+{
+  "file": {
+    "bytes": 17818214,
+    "sha256": "06a854e66144d6675e604d22ccb5a39c35645d5caf651dee9ec78f5aa28ff615",
+    "source": "https://huggingface.co/nvidia/Alpamayo2-Edge/resolve/main/tokenizer.json",
+    "revision_x_repo_commit": "b92b6aa326bd3e2235db28f248ad5a30b5890e64"
+  },
+  "model_type": "BPE",
+  "base_vocab_size": 131072,
+  "merges": 269443,
+  "added_tokens": 5030,
+  "added_special": 1024,
+  "added_ids_min_max": [
+    0,
+    135101
+  ],
+  "added_ids_overlap_base_vocab": 1000,
+  "added_ids_out_of_base_range": 4030,
+  "candidates": {
+    "<NOMINAL>": {
+      "in_added_tokens": false,
+      "in_base_vocab": false
+    },
+    "NOMINAL": {
+      "in_added_tokens": false,
+      "in_base_vocab": false
+    },
+    "<nominal>": {
+      "in_added_tokens": false,
+      "in_base_vocab": false
+    },
+    "<COC>": {
+      "in_added_tokens": false,
+      "in_base_vocab": false
+    },
+    "<coc>": {
+      "in_added_tokens": false,
+      "in_base_vocab": false
+    },
+    "<think>": {
+      "in_added_tokens": true,
+      "in_base_vocab": true,
+      "added_id": 12,
+      "added_special": false,
+      "base_id": 12
+    },
+    "</think>": {
+      "in_added_tokens": true,
+      "in_base_vocab": true,
+      "added_id": 13,
+      "added_special": false,
+      "base_id": 13
+    },
+    "<i0>": {
+      "in_added_tokens": true,
+      "in_base_vocab": false,
+      "added_id": 131072,
+      "added_special": false
+    },
+    "<i1000>": {
+      "in_added_tokens": true,
+      "in_base_vocab": false,
+      "added_id": 132072,
+      "added_special": false
+    },
+    "<i3999>": {
+      "in_added_tokens": true,
+      "in_base_vocab": false,
+      "added_id": 135071,
+      "added_special": false
+    },
+    "<i4000>": {
+      "in_added_tokens": false,
+      "in_base_vocab": false
+    },
+    "<|endoftext|>": {
+      "in_added_tokens": false,
+      "in_base_vocab": false
+    },
+    "<|im_start|>": {
+      "in_added_tokens": true,
+      "in_base_vocab": true,
+      "added_id": 10,
+      "added_special": true,
+      "base_id": 10
+    },
+    "<|im_end|>": {
+      "in_added_tokens": true,
+      "in_base_vocab": true,
+      "added_id": 11,
+      "added_special": true,
+      "base_id": 11
+    }
+  },
+  "strings_containing_nominal_case_insensitive": [
+    "Ġnominal"
+  ],
+  "count_strings_containing_nominal": 1,
+  "added_trajectory_like_tokens": 4000,
+  "trajectory_like_id_range": [
+    131072,
+    135071
+  ],
+  "sample_splits": {
+    "<NOMINAL>": {
+      "n_tokens": 5,
+      "ids": [
+        124549,
+        11135,
+        3174,
+        4286,
+        1062
+      ],
+      "tokens": [
+        "<N",
+        "OM",
+        "IN",
+        "AL",
+        ">"
+      ],
+      "tokens_are_added": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "<i0>": {
+      "n_tokens": 1,
+      "ids": [
+        131072
+      ],
+      "tokens": [
+        "<i0>"
+      ],
+      "tokens_are_added": [
+        true
+      ]
+    },
+    "<i1000>": {
+      "n_tokens": 1,
+      "ids": [
+        132072
+      ],
+      "tokens": [
+        "<i1000>"
+      ],
+      "tokens_are_added": [
+        true
+      ]
+    },
+    "<think>": {
+      "n_tokens": 1,
+      "ids": [
+        12
+      ],
+      "tokens": [
+        "<think>"
+      ],
+      "tokens_are_added": [
+        true
+      ]
+    },
+    "Decelerate and turn right at the intersection.": {
+      "n_tokens": 10,
+      "ids": [
+        12230,
+        8051,
+        1419,
+        1321,
+        3884,
+        3169,
+        1513,
+        1278,
+        32999,
+        1046
+      ],
+      "roundtrip_ok": true
+    },
+    "NOMINAL: keep going.": {
+      "n_tokens": 8,
+      "ids": [
+        1078,
+        11135,
+        3174,
+        4286,
+        1058,
+        5807,
+        4670,
+        1046
+      ],
+      "roundtrip_ok": true
+    }
+  }
+}

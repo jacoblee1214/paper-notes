@@ -13,6 +13,7 @@ NVIDIA 기술 블로그(2026-11-10, 접근 2026-11-12)의 Alpamayo 2 Edge와 Alp
 | `analysis/config_check.py` | 공개 config로 파라미터와 메모리 산술 |
 | `analysis/latency_toy.py` | 대역폭 상한, 지연 모델, 추측 디코딩 몬테카를로 |
 | `analysis/rf_score_check.py` | AlpaJudge RF 점수 재계산 (공개 노트북의 기록값 사용) |
+| `analysis/extra_tokenizer_vocab.py` | Hugging Face의 `tokenizer.json`으로 `<NOMINAL>` 어휘 확인 (파일은 저장소에 넣지 않음), 바이트 BPE 직접 구현 → `extra_tokenizer_vocab_results.json` (1초 미만) |
 | `analysis/plot_figures.py` | 그래프 세 장 |
 
 ## 재실행
@@ -31,6 +32,7 @@ pip install numpy matplotlib
 python3 analysis/config_check.py
 python3 analysis/latency_toy.py
 python3 analysis/rf_score_check.py
+python3 analysis/extra_tokenizer_vocab.py data/hf_tokenizer/tokenizer.json   # 선택: 먼저 받아 둔 tokenizer.json 필요
 python3 analysis/plot_figures.py
 ```
 

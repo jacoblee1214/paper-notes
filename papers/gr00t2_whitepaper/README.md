@@ -20,6 +20,7 @@
 | `analysis/04_claim_verification.md` | 주장 검증(C1–C22), 구현 가능성 판정 |
 | `analysis/paper_checks.py` | 표와 본문 수치의 재계산과 검정 → `paper_checks_results.json` (수 초) |
 | `analysis/toy_power_fit.py` | 시도 수별 검출력 몬테카를로, 2B 가중치 메모리 → `toy_power_fit_results.json` (1초 미만) |
+| `analysis/extra_elo_bootstrap.py` | 합성 쌍 비교 데이터로 Bradley-Terry Elo의 과제 단위 부트스트랩 구간 폭, 동점 처리(반 승 대 버림) 비교 → `extra_elo_bootstrap_results.json` (약 75초) |
 | `analysis/fetch_meta.py` | GitHub·Hugging Face·arXiv 메타데이터 수집 → `analysis/meta/` (가중치 없음) |
 | `analysis/plot_figures.py` | 직접 그린 그래프 네 장 |
 
@@ -29,6 +30,7 @@
 pip install numpy scipy matplotlib
 python3 analysis/paper_checks.py
 OMP_NUM_THREADS=1 python3 analysis/toy_power_fit.py
+python3 analysis/extra_elo_bootstrap.py
 (cd analysis && python3 plot_figures.py)
 python3 analysis/fetch_meta.py   # 선택: 메타데이터 갱신 (네트워크 필요)
 ```
