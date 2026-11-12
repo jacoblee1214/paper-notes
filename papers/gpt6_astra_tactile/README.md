@@ -13,6 +13,7 @@
 | `analysis/05_claim_verification.md` | 주장 판정, 통계 재계산 (`python3 analysis/stats_check.py`) |
 | `analysis/06_code_verification.md` | 재구현 코드의 테스트·E2E·정적 점검 |
 | `analysis/07_experiments.md` | 실제 LLM 촉각 probe, UniVTAC 폐루프 2×2, 반사실(거울 반전) 촉각 실험 |
+| `analysis/extra_physics_descriptors.py`, `analysis/extra_physics_descriptors_results.json` | UniVTAC 데모 30개에서 센서 자세로 옮긴 전단 등 물리 descriptor의 방향 판별력 (`07` 추가 검증). 데모 원자료는 한 파일씩 받아 처리하고 지우며 저장소에 남기지 않음 |
 
 문서 번호 03(연구 방향)은 이 공개본에 넣지 않았습니다. 05는 이 폴더의 이전 형식에서 주장 검증 문서입니다.
 

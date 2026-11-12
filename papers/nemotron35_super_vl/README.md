@@ -21,6 +21,7 @@ ReplaySSM·MOPD numpy toy로 분석한 자료입니다. 모델 가중치는 받�
 | `analysis/table_check.py` | 보고서 표·본문·블로그 수치 재계산 |
 | `analysis/mechanism_toy.py` | ReplaySSM 닫힌 식·트래픽·FP16 반올림 오차, MOPD proximal teacher 하한 (numpy, 약 10초) |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
+| `analysis/extra_nvfp4_scale.py`, `analysis/extra_nvfp4_scale_results.json` | shard 하나의 expert 가중치(132 MB range 읽기)를 NVFP4로 에뮬레이션해 Max와 MSE 블록 scale을 비교 (`03` 추가 검증). 원자료는 저장하지 않음 |
 
 ## 재실행
 
@@ -28,6 +29,7 @@ ReplaySSM·MOPD numpy toy로 분석한 자료입니다. 모델 가중치는 받�
 pip install numpy matplotlib
 python3 analysis/param_check.py && python3 analysis/table_check.py && python3 analysis/mechanism_toy.py
 cd analysis && python3 plot_figures.py
+python3 analysis/extra_nvfp4_scale.py   # shard 9의 expert 텐서 24개를 HTTP Range로 받음 (약 130 s, 132 MB)
 ```
 
 ## 출처와 라이선스

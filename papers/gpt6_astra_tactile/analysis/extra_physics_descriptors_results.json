@@ -1,0 +1,1884 @@
+{
+ "script": "analysis/extra_physics_descriptors.py",
+ "dataset": {
+  "repo": "byml/UniVTAC",
+  "files": "isaac45/insert_hole/hdf5/N.hdf5",
+  "episodes": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29
+  ],
+  "total_bytes_transferred": 4001432897,
+  "largest_single_file_bytes": 162556055,
+  "license_note": "HF 데이터셋 byml/UniVTAC, 공개(게이트 없음). 원자료는 저장하지 않음"
+ },
+ "decision_frame_rule": {
+  "descent_min_m": 0.01,
+  "stall_window_frames": 5,
+  "stall_threshold_m": 0.0005
+ },
+ "label_rule": {
+  "label": "막힘 프레임 이후 ee x 변위가 가장 큰 방향",
+  "min_excursion_m": 0.01
+ },
+ "sensor_frame_assumption": "image u = local X, image v = local Y, 쿼터니언은 wxyz (analysis/07 §1.1 자세 대조와 일치)",
+ "units_note": "변위는 픽셀, 깊이는 mm. 부호와 순위만 쓰고 절대 힘·slip margin은 계산하지 않음",
+ "summary": {
+  "n_episodes_requested": 30,
+  "n_usable": 30,
+  "n_excluded": 0,
+  "label_counts": {
+   "+x": 20,
+   "-x": 10
+  },
+  "majority_rate": 0.6666666666666666,
+  "descriptors": {
+   "shear_world_x_px": {
+    "meaning": "로봇 x 전단(signed, 주 descriptor)",
+    "auc": 1.0,
+    "auc_ci95_boot": [
+     1.0,
+     1.0
+    ],
+    "sign_accuracy": 1.0,
+    "sign_accuracy_ci95": [
+     0.8864829086095221,
+     1.0
+    ],
+    "sign_binom_p_two_sided": 1.862645149230957e-09
+   },
+   "shear_world_x_px_left": {
+    "meaning": "왼쪽 손가락 로봇 x 전단",
+    "auc": 1.0,
+    "auc_ci95_boot": [
+     1.0,
+     1.0
+    ],
+    "sign_accuracy": 1.0,
+    "sign_accuracy_ci95": [
+     0.8864829086095221,
+     1.0
+    ],
+    "sign_binom_p_two_sided": 1.862645149230957e-09
+   },
+   "shear_world_x_px_right": {
+    "meaning": "오른쪽 손가락 로봇 x 전단",
+    "auc": 1.0,
+    "auc_ci95_boot": [
+     1.0,
+     1.0
+    ],
+    "sign_accuracy": 1.0,
+    "sign_accuracy_ci95": [
+     0.8864829086095221,
+     1.0
+    ],
+    "sign_binom_p_two_sided": 1.862645149230957e-09
+   },
+   "dv_px": {
+    "meaning": "image v 변위(좌표 변환 없음, 손가락 평균)",
+    "auc": 0.0,
+    "auc_ci95_boot": [
+     0.0,
+     0.0
+    ],
+    "sign_accuracy": 0.0,
+    "sign_accuracy_ci95": [
+     -1.3877787807814457e-17,
+     0.113517091390478
+    ],
+    "sign_binom_p_two_sided": 1.862645149230957e-09
+   },
+   "du_px": {
+    "meaning": "image u 변위(좌표 변환 없음, 손가락 평균)",
+    "auc": 0.0,
+    "auc_ci95_boot": [
+     0.0,
+     0.0
+    ],
+    "sign_accuracy": 0.0,
+    "sign_accuracy_ci95": [
+     -1.3877787807814457e-17,
+     0.113517091390478
+    ],
+    "sign_binom_p_two_sided": 1.862645149230957e-09
+   },
+   "shear_world_z_px": {
+    "meaning": "로봇 z 전단(signed)",
+    "auc": 0.205,
+    "auc_ci95_boot": [
+     0.058020228127136024,
+     0.38758063482570054
+    ],
+    "sign_accuracy": 0.6666666666666666,
+    "sign_accuracy_ci95": [
+     0.48779725813830266,
+     0.807697044731538
+    ],
+    "sign_binom_p_two_sided": 0.09873714670538905
+   },
+   "delta_p99_mm": {
+    "meaning": "크기/법선 계열 (방향 대조군)",
+    "auc": 0.875,
+    "auc_ci95_boot": [
+     0.7329192546583851,
+     0.9900107655502391
+    ],
+    "abs_auc_minus_half": 0.375
+   },
+   "contact_frac": {
+    "meaning": "크기/법선 계열 (방향 대조군)",
+    "auc": 0.985,
+    "auc_ci95_boot": [
+     0.9365079365079365,
+     1.0
+    ],
+    "abs_auc_minus_half": 0.485
+   },
+   "shear_mag_px": {
+    "meaning": "크기/법선 계열 (방향 대조군)",
+    "auc": 0.205,
+    "auc_ci95_boot": [
+     0.06220095693779904,
+     0.38889517345399693
+    ],
+    "abs_auc_minus_half": 0.29500000000000004
+   },
+   "hertz_Fn_rel": {
+    "meaning": "크기/법선 계열 (방향 대조군)",
+    "auc": 0.875,
+    "auc_ci95_boot": [
+     0.7329192546583851,
+     0.9900107655502391
+    ],
+    "abs_auc_minus_half": 0.375
+   },
+   "slip_ratio_rel": {
+    "meaning": "크기/법선 계열 (방향 대조군)",
+    "auc": 0.13,
+    "auc_ci95_boot": [
+     0.022727272727272728,
+     0.27845944564694536
+    ],
+    "abs_auc_minus_half": 0.37
+   }
+  }
+ },
+ "episodes": [
+  {
+   "episode": 0,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/0.hdf5",
+   "bytes": 121234636,
+   "sha256": "e164ae67bc83a147f0bac57926ae57ba9cbc28630a4da260172b97cf674f1eed",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.6,
+   "ok": true,
+   "t_q": 67,
+   "n_frames": 156,
+   "label": 1,
+   "excursion_mm": 39.94625806808472,
+   "features": {
+    "du_px": -0.7140021324157715,
+    "du0_px": 1.7574870586395264,
+    "dv0_px": 2.007708728313446,
+    "dv_px": -0.7816869616508484,
+    "shear_world_x_px": 0.8466434701766168,
+    "shear_world_z_px": 5.394346881842198,
+    "delta_p99_mm": 5.392894325256347,
+    "contact_frac": 0.20415364583333334,
+    "shear_mag_px": 5.463545322418213,
+    "hertz_Fn_rel": 12.52436914715765,
+    "slip_ratio_rel": 0.43743601434946666,
+    "shear_world_x_px_left": 1.1444433510194294,
+    "shear_world_x_px_right": 0.5488435893338042
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -6.1181464195251465,
+     "du0_px": 1.9194103479385376,
+     "dv0_px": 1.9333044290542603,
+     "dv_px": -1.0709178447723389,
+     "shear_world_x_px": 1.1444433510194294,
+     "shear_world_z_px": 6.104817102083715,
+     "delta_p99_mm": 5.328813610076904,
+     "contact_frac": 0.19305989583333333,
+     "shear_mag_px": 6.211165904998779,
+     "hertz_Fn_rel": 12.301152279625391,
+     "slip_ratio_rel": 0.5049255357391551
+    },
+    "right_gsmini": {
+     "du_px": 4.6901421546936035,
+     "du0_px": 1.5955637693405151,
+     "dv0_px": 2.082113027572632,
+     "dv_px": -0.4924560785293579,
+     "shear_world_x_px": 0.5488435893338042,
+     "shear_world_z_px": 4.68387666160068,
+     "delta_p99_mm": 5.456975040435791,
+     "contact_frac": 0.21524739583333333,
+     "shear_mag_px": 4.7159247398376465,
+     "hertz_Fn_rel": 12.747586014689906,
+     "slip_ratio_rel": 0.3699464929597782
+    }
+   }
+  },
+  {
+   "episode": 1,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/1.hdf5",
+   "bytes": 159176315,
+   "sha256": "88ed1946c449c44470b6229424a49a2b396298e4d0109b6496aaaed0920d6d65",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 8.2,
+   "ok": true,
+   "t_q": 83,
+   "n_frames": 205,
+   "label": -1,
+   "excursion_mm": -40.41624069213867,
+   "features": {
+    "du_px": 0.47011232376098633,
+    "du0_px": 1.5136178135871887,
+    "dv0_px": 2.2162857055664062,
+    "dv_px": 0.8801460266113281,
+    "shear_world_x_px": -0.8885243977297885,
+    "shear_world_z_px": 5.113867954366016,
+    "delta_p99_mm": 5.253203887939453,
+    "contact_frac": 0.1483984375,
+    "shear_mag_px": 5.1905198097229,
+    "hertz_Fn_rel": 12.040448695109536,
+    "slip_ratio_rel": 0.43075594050215305,
+    "shear_world_x_px_left": -0.7877887469252023,
+    "shear_world_x_px_right": -0.9892600485343749
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.645205974578857,
+     "du0_px": 1.7237005233764648,
+     "dv0_px": 2.0912024974823,
+     "dv_px": 0.7801806926727295,
+     "shear_world_x_px": -0.7877887469252023,
+     "shear_world_z_px": 4.643920204085793,
+     "delta_p99_mm": 5.220567398071288,
+     "contact_frac": 0.1365625,
+     "shear_mag_px": 4.710267543792725,
+     "hertz_Fn_rel": 11.928245265360243,
+     "slip_ratio_rel": 0.3948835255317389
+    },
+    "right_gsmini": {
+     "du_px": 5.58543062210083,
+     "du0_px": 1.3035351037979126,
+     "dv0_px": 2.3413689136505127,
+     "dv_px": 0.9801113605499268,
+     "shear_world_x_px": -0.9892600485343749,
+     "shear_world_z_px": 5.583815704646239,
+     "delta_p99_mm": 5.285840377807617,
+     "contact_frac": 0.160234375,
+     "shear_mag_px": 5.670772075653076,
+     "hertz_Fn_rel": 12.15265212485883,
+     "slip_ratio_rel": 0.46662835547256726
+    }
+   }
+  },
+  {
+   "episode": 2,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/2.hdf5",
+   "bytes": 121974301,
+   "sha256": "0b74f8c8e8ab2c3fa9012838032c6e25299584afa576b8933024c44013133d56",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.9,
+   "ok": true,
+   "t_q": 70,
+   "n_frames": 157,
+   "label": 1,
+   "excursion_mm": 38.47867250442505,
+   "features": {
+    "du_px": -0.3625032901763916,
+    "du0_px": 1.4299715757369995,
+    "dv0_px": 2.04020893573761,
+    "dv_px": -1.3133995532989502,
+    "shear_world_x_px": 1.3793344014190554,
+    "shear_world_z_px": 7.459464102125006,
+    "delta_p99_mm": 5.43722331047058,
+    "contact_frac": 0.20613281249999998,
+    "shear_mag_px": 7.607538461685181,
+    "hertz_Fn_rel": 12.679135460394217,
+    "slip_ratio_rel": 0.6008721523887712,
+    "shear_world_x_px_left": 2.0265853795686954,
+    "shear_world_x_px_right": 0.7320834232694151
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -7.833890438079834,
+     "du0_px": 1.4704846143722534,
+     "dv0_px": 2.064962863922119,
+     "dv_px": -1.9575127363204956,
+     "shear_world_x_px": 2.0265853795686954,
+     "shear_world_z_px": 7.816250462685999,
+     "delta_p99_mm": 5.371374187469482,
+     "contact_frac": 0.19040364583333333,
+     "shear_mag_px": 8.074756622314453,
+     "hertz_Fn_rel": 12.448817829195404,
+     "slip_ratio_rel": 0.6486364193857228
+    },
+    "right_gsmini": {
+     "du_px": 7.108883857727051,
+     "du0_px": 1.3894585371017456,
+     "dv0_px": 2.0154550075531006,
+     "dv_px": -0.6692863702774048,
+     "shear_world_x_px": 0.7320834232694151,
+     "shear_world_z_px": 7.102677741564013,
+     "delta_p99_mm": 5.5030724334716785,
+     "contact_frac": 0.22186197916666667,
+     "shear_mag_px": 7.140320301055908,
+     "hertz_Fn_rel": 12.909453091593031,
+     "slip_ratio_rel": 0.5531078853918195
+    }
+   }
+  },
+  {
+   "episode": 3,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/3.hdf5",
+   "bytes": 152996180,
+   "sha256": "3066db0836ce21871c093d2e9d95a8f2a1f5786fc532aa8b3916d237c36c1746",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 8.0,
+   "ok": true,
+   "t_q": 81,
+   "n_frames": 197,
+   "label": 1,
+   "excursion_mm": 39.11811113357544,
+   "features": {
+    "du_px": -0.6740384101867676,
+    "du0_px": 1.4571107029914856,
+    "dv0_px": 1.860517978668213,
+    "dv_px": -0.8502826690673828,
+    "shear_world_x_px": 0.9888158558452185,
+    "shear_world_z_px": 4.198247339582863,
+    "delta_p99_mm": 5.456611604690551,
+    "contact_frac": 0.18690104166666666,
+    "shear_mag_px": 4.3133624792099,
+    "hertz_Fn_rel": 12.74647202643355,
+    "slip_ratio_rel": 0.33889489582940396,
+    "shear_world_x_px_left": 1.1879332245955936,
+    "shear_world_x_px_right": 0.7896984870948434
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.902562141418457,
+     "du0_px": 1.5104105472564697,
+     "dv0_px": 1.7356195449829102,
+     "dv_px": -1.027350902557373,
+     "shear_world_x_px": 1.1879332245955936,
+     "shear_world_z_px": 4.866092669903966,
+     "delta_p99_mm": 5.42509307861328,
+     "contact_frac": 0.16865885416666668,
+     "shear_mag_px": 5.0090484619140625,
+     "hertz_Fn_rel": 12.636034142534209,
+     "slip_ratio_rel": 0.3964098549760231
+    },
+    "right_gsmini": {
+     "du_px": 3.554485321044922,
+     "du0_px": 1.4038108587265015,
+     "dv0_px": 1.9854164123535156,
+     "dv_px": -0.6732144355773926,
+     "shear_world_x_px": 0.7896984870948434,
+     "shear_world_z_px": 3.5304020092617585,
+     "delta_p99_mm": 5.488130130767821,
+     "contact_frac": 0.20514322916666666,
+     "shear_mag_px": 3.6176764965057373,
+     "hertz_Fn_rel": 12.85690991033289,
+     "slip_ratio_rel": 0.2813799366827848
+    }
+   }
+  },
+  {
+   "episode": 4,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/4.hdf5",
+   "bytes": 123564616,
+   "sha256": "8395d759c88ddf915d3a785df46bfd5ec38f062327c8214c4a8d9a62ceee93b8",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.6,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 159,
+   "label": 1,
+   "excursion_mm": 39.05981779098511,
+   "features": {
+    "du_px": -0.4005274772644043,
+    "du0_px": 1.3102139830589294,
+    "dv0_px": 1.6275662779808044,
+    "dv_px": -0.7422557473182678,
+    "shear_world_x_px": 0.7950190409910742,
+    "shear_world_z_px": 4.40519470536481,
+    "delta_p99_mm": 5.316297073364256,
+    "contact_frac": 0.18612630208333333,
+    "shear_mag_px": 4.47758936882019,
+    "hertz_Fn_rel": 12.258472163176151,
+    "slip_ratio_rel": 0.3659875328505041,
+    "shear_world_x_px_left": 0.9730312254561906,
+    "shear_world_x_px_right": 0.617006856525958
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.814919948577881,
+     "du0_px": 1.3773144483566284,
+     "dv0_px": 1.6246780157089233,
+     "dv_px": -0.9154880046844482,
+     "shear_world_x_px": 0.9730312254561906,
+     "shear_world_z_px": 4.803620698569136,
+     "delta_p99_mm": 5.253832206726073,
+     "contact_frac": 0.17018229166666668,
+     "shear_mag_px": 4.901180744171143,
+     "hertz_Fn_rel": 12.042434635547057,
+     "slip_ratio_rel": 0.40699251376492895
+    },
+    "right_gsmini": {
+     "du_px": 4.013864994049072,
+     "du0_px": 1.2431135177612305,
+     "dv0_px": 1.6304545402526855,
+     "dv_px": -0.5690234899520874,
+     "shear_world_x_px": 0.617006856525958,
+     "shear_world_z_px": 4.006768712160484,
+     "delta_p99_mm": 5.3787619400024385,
+     "contact_frac": 0.2020703125,
+     "shear_mag_px": 4.053997993469238,
+     "hertz_Fn_rel": 12.474509690805244,
+     "slip_ratio_rel": 0.3249825519360792
+    }
+   }
+  },
+  {
+   "episode": 5,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/5.hdf5",
+   "bytes": 121946355,
+   "sha256": "2b1539f5c390940f43cc716c207a687869eb600a5963ad71599b2920a53b6e52",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.8,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 157,
+   "label": 1,
+   "excursion_mm": 38.40458393096924,
+   "features": {
+    "du_px": -0.5899739265441895,
+    "du0_px": 1.5433432459831238,
+    "dv0_px": 2.2421661615371704,
+    "dv_px": -1.0527105331420898,
+    "shear_world_x_px": 1.1174921216395592,
+    "shear_world_z_px": 5.257940226799076,
+    "delta_p99_mm": 5.4454167079925515,
+    "contact_frac": 0.20857421874999998,
+    "shear_mag_px": 5.383402109146118,
+    "hertz_Fn_rel": 12.707898113046447,
+    "slip_ratio_rel": 0.4247872927109298,
+    "shear_world_x_px_left": 1.5398031866469866,
+    "shear_world_x_px_right": 0.6951810566321319
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.861268043518066,
+     "du0_px": 1.5648432970046997,
+     "dv0_px": 2.352414846420288,
+     "dv_px": -1.4678043127059937,
+     "shear_world_x_px": 1.5398031866469866,
+     "shear_world_z_px": 5.842762012878778,
+     "delta_p99_mm": 5.375243701934814,
+     "contact_frac": 0.19518229166666667,
+     "shear_mag_px": 6.042260646820068,
+     "hertz_Fn_rel": 12.462272362467443,
+     "slip_ratio_rel": 0.4848442138865069
+    },
+    "right_gsmini": {
+     "du_px": 4.6813201904296875,
+     "du0_px": 1.5218431949615479,
+     "dv0_px": 2.1319174766540527,
+     "dv_px": -0.637616753578186,
+     "shear_world_x_px": 0.6951810566321319,
+     "shear_world_z_px": 4.673118440719374,
+     "delta_p99_mm": 5.51558971405029,
+     "contact_frac": 0.22196614583333332,
+     "shear_mag_px": 4.724543571472168,
+     "hertz_Fn_rel": 12.95352386362545,
+     "slip_ratio_rel": 0.3647303715353527
+    }
+   }
+  },
+  {
+   "episode": 6,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/6.hdf5",
+   "bytes": 153700648,
+   "sha256": "ae20c54ac5eddd47d896760fcbe68dd4e2dd62cc19ec5934f57b607d42462c0f",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 7.9,
+   "ok": true,
+   "t_q": 80,
+   "n_frames": 198,
+   "label": -1,
+   "excursion_mm": -39.47269916534424,
+   "features": {
+    "du_px": 0.32667016983032227,
+    "du0_px": 1.605569303035736,
+    "dv0_px": 1.9180251955986023,
+    "dv_px": 1.1201873421669006,
+    "shear_world_x_px": -1.0801478754267502,
+    "shear_world_z_px": 5.261536234142145,
+    "delta_p99_mm": 5.279825496673583,
+    "contact_frac": 0.17206380208333333,
+    "shear_mag_px": 5.377686023712158,
+    "hertz_Fn_rel": 12.132087832104569,
+    "slip_ratio_rel": 0.4430023940577032,
+    "shear_world_x_px_left": -0.7450834932086384,
+    "shear_world_x_px_right": -1.415212257644862
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.926488399505615,
+     "du0_px": 1.6454166173934937,
+     "dv0_px": 1.857978105545044,
+     "dv_px": 0.7826261520385742,
+     "shear_world_x_px": -0.7450834932086384,
+     "shear_world_z_px": 4.932304902014428,
+     "delta_p99_mm": 5.247268619537352,
+     "contact_frac": 0.1668359375,
+     "shear_mag_px": 4.988265514373779,
+     "hertz_Fn_rel": 12.0198748520746,
+     "slip_ratio_rel": 0.4150014518256666
+    },
+    "right_gsmini": {
+     "du_px": 5.57982873916626,
+     "du0_px": 1.5657219886779785,
+     "dv0_px": 1.9780722856521606,
+     "dv_px": 1.457748532295227,
+     "shear_world_x_px": -1.415212257644862,
+     "shear_world_z_px": 5.5907675662698635,
+     "delta_p99_mm": 5.312382373809814,
+     "contact_frac": 0.17729166666666665,
+     "shear_mag_px": 5.767106533050537,
+     "hertz_Fn_rel": 12.244300812134536,
+     "slip_ratio_rel": 0.4710033362897398
+    }
+   }
+  },
+  {
+   "episode": 7,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/7.hdf5",
+   "bytes": 122000677,
+   "sha256": "4b55a2bfb3bf09c9fae016a3bcda9153fad1900ce3582b30d608ff79805fd16f",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.8,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 157,
+   "label": 1,
+   "excursion_mm": 41.10640287399292,
+   "features": {
+    "du_px": -0.26992619037628174,
+    "du0_px": 1.1738706827163696,
+    "dv0_px": 1.5339326858520508,
+    "dv_px": -0.62989741563797,
+    "shear_world_x_px": 0.6431116730923767,
+    "shear_world_z_px": 4.157376112898045,
+    "delta_p99_mm": 5.2614254665374744,
+    "contact_frac": 0.17297526041666667,
+    "shear_mag_px": 4.210489630699158,
+    "hertz_Fn_rel": 12.069038175888068,
+    "slip_ratio_rel": 0.3493374785291558,
+    "shear_world_x_px_left": 0.8620488008548927,
+    "shear_world_x_px_right": 0.42417454532986076
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.429325103759766,
+     "du0_px": 1.2643518447875977,
+     "dv0_px": 1.5639305114746094,
+     "dv_px": -0.847977876663208,
+     "shear_world_x_px": 0.8620488008548927,
+     "shear_world_z_px": 4.42660802185169,
+     "delta_p99_mm": 5.206842803955077,
+     "contact_frac": 0.16221354166666666,
+     "shear_mag_px": 4.509765625,
+     "hertz_Fn_rel": 11.881238110193404,
+     "slip_ratio_rel": 0.37957034302097575
+    },
+    "right_gsmini": {
+     "du_px": 3.889472723007202,
+     "du0_px": 1.0833895206451416,
+     "dv0_px": 1.5039348602294922,
+     "dv_px": -0.41181695461273193,
+     "shear_world_x_px": 0.42417454532986076,
+     "shear_world_z_px": 3.888144203944399,
+     "delta_p99_mm": 5.316008129119872,
+     "contact_frac": 0.18373697916666668,
+     "shear_mag_px": 3.9112136363983154,
+     "hertz_Fn_rel": 12.25683824158273,
+     "slip_ratio_rel": 0.31910461403733587
+    }
+   }
+  },
+  {
+   "episode": 8,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/8.hdf5",
+   "bytes": 159974328,
+   "sha256": "fe7349bacccf376be6b9faf157132c12472be4b77ad5a676cfc55d3ed81b5313",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 8.4,
+   "ok": true,
+   "t_q": 84,
+   "n_frames": 206,
+   "label": 1,
+   "excursion_mm": 39.30199146270752,
+   "features": {
+    "du_px": -0.47841739654541016,
+    "du0_px": 1.5338352918624878,
+    "dv0_px": 2.222100019454956,
+    "dv_px": -1.2182322144508362,
+    "shear_world_x_px": 1.2484991363634048,
+    "shear_world_z_px": 4.462187259714045,
+    "delta_p99_mm": 5.491050090789794,
+    "contact_frac": 0.21879557291666668,
+    "shear_mag_px": 4.634266376495361,
+    "hertz_Fn_rel": 12.867838407726273,
+    "slip_ratio_rel": 0.3609047642457788,
+    "shear_world_x_px_left": 1.2992627515665032,
+    "shear_world_x_px_right": 1.1977355211603067
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.948974132537842,
+     "du0_px": 1.7024270296096802,
+     "dv0_px": 2.1386406421661377,
+     "dv_px": -1.265749454498291,
+     "shear_world_x_px": 1.2992627515665032,
+     "shear_world_z_px": 4.940271005207248,
+     "delta_p99_mm": 5.4265220451354965,
+     "contact_frac": 0.20309895833333333,
+     "shear_mag_px": 5.108274459838867,
+     "hertz_Fn_rel": 12.641026957901277,
+     "slip_ratio_rel": 0.40410280563842477
+    },
+    "right_gsmini": {
+     "du_px": 3.9921393394470215,
+     "du0_px": 1.3652435541152954,
+     "dv0_px": 2.3055593967437744,
+     "dv_px": -1.1707149744033813,
+     "shear_world_x_px": 1.1977355211603067,
+     "shear_world_z_px": 3.9841035142208416,
+     "delta_p99_mm": 5.555578136444091,
+     "contact_frac": 0.2344921875,
+     "shear_mag_px": 4.1602582931518555,
+     "hertz_Fn_rel": 13.09464985755127,
+     "slip_ratio_rel": 0.31770672285313273
+    }
+   }
+  },
+  {
+   "episode": 9,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/9.hdf5",
+   "bytes": 123485434,
+   "sha256": "928ba6fe5ce2ffc04886a8215347122d6e6738244987143558df499537651bf7",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 8.5,
+   "ok": true,
+   "t_q": 67,
+   "n_frames": 159,
+   "label": -1,
+   "excursion_mm": -40.386080741882324,
+   "features": {
+    "du_px": 0.5181360244750977,
+    "du0_px": 1.3681296706199646,
+    "dv0_px": 1.9953741431236267,
+    "dv_px": 1.208649456501007,
+    "shear_world_x_px": -1.1852660710261476,
+    "shear_world_z_px": 6.108822903224858,
+    "delta_p99_mm": 5.268962593078612,
+    "contact_frac": 0.15531250000000002,
+    "shear_mag_px": 6.228113412857056,
+    "hertz_Fn_rel": 12.094761213546098,
+    "slip_ratio_rel": 0.5144597729283015,
+    "shear_world_x_px_left": -0.8223324401535979,
+    "shear_world_x_px_right": -1.548199701898697
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.5861053466796875,
+     "du0_px": 1.437139630317688,
+     "dv0_px": 2.0173232555389404,
+     "dv_px": 0.843721866607666,
+     "shear_world_x_px": -0.8223324401535979,
+     "shear_world_z_px": 5.5892936685084,
+     "delta_p99_mm": 5.228455448150634,
+     "contact_frac": 0.15688802083333334,
+     "shear_mag_px": 5.649463653564453,
+     "hertz_Fn_rel": 11.955290063824124,
+     "slip_ratio_rel": 0.47254927512460254
+    },
+    "right_gsmini": {
+     "du_px": 6.622377395629883,
+     "du0_px": 1.2991197109222412,
+     "dv0_px": 1.973425030708313,
+     "dv_px": 1.5735770463943481,
+     "shear_world_x_px": -1.548199701898697,
+     "shear_world_z_px": 6.628352137941317,
+     "delta_p99_mm": 5.309469738006591,
+     "contact_frac": 0.15373697916666668,
+     "shear_mag_px": 6.806763172149658,
+     "hertz_Fn_rel": 12.234232363268072,
+     "slip_ratio_rel": 0.5563702707320004
+    }
+   }
+  },
+  {
+   "episode": 10,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/10.hdf5",
+   "bytes": 122751568,
+   "sha256": "5a98bcc8693a6f680de4133ac5901b63a82f2bfe4360ce3b8d50ff4eded62d3c",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 7.1,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 158,
+   "label": 1,
+   "excursion_mm": 40.62962532043457,
+   "features": {
+    "du_px": -0.2656877040863037,
+    "du0_px": 1.153746247291565,
+    "dv0_px": 1.638292133808136,
+    "dv_px": -0.7721127867698669,
+    "shear_world_x_px": 0.7769577051432066,
+    "shear_world_z_px": 4.281634290502533,
+    "delta_p99_mm": 5.303916044235227,
+    "contact_frac": 0.18600911458333333,
+    "shear_mag_px": 4.3549644947052,
+    "hertz_Fn_rel": 12.215813226800778,
+    "slip_ratio_rel": 0.3571165823157333,
+    "shear_world_x_px_left": 0.9996341776458826,
+    "shear_world_x_px_right": 0.5542812326405308
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.5482025146484375,
+     "du0_px": 1.217677354812622,
+     "dv0_px": 1.6729838848114014,
+     "dv_px": -0.9944899082183838,
+     "shear_world_x_px": 0.9996341776458826,
+     "shear_world_z_px": 4.547069134444986,
+     "delta_p99_mm": 5.235090961456298,
+     "contact_frac": 0.17016927083333333,
+     "shear_mag_px": 4.655658721923828,
+     "hertz_Fn_rel": 11.978056247257827,
+     "slip_ratio_rel": 0.38868232255877594
+    },
+    "right_gsmini": {
+     "du_px": 4.01682710647583,
+     "du0_px": 1.0898151397705078,
+     "dv0_px": 1.6036003828048706,
+     "dv_px": -0.5497356653213501,
+     "shear_world_x_px": 0.5542812326405308,
+     "shear_world_z_px": 4.016199446560079,
+     "delta_p99_mm": 5.372741127014156,
+     "contact_frac": 0.20184895833333333,
+     "shear_mag_px": 4.054270267486572,
+     "hertz_Fn_rel": 12.453570206343729,
+     "slip_ratio_rel": 0.3255508420726906
+    }
+   }
+  },
+  {
+   "episode": 11,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/11.hdf5",
+   "bytes": 149003080,
+   "sha256": "cbf2bbc2b17b23a3721558156103f00a2eca46672f68cd89025a6cacd6ff235d",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 8.0,
+   "ok": true,
+   "t_q": 79,
+   "n_frames": 192,
+   "label": -1,
+   "excursion_mm": -39.45803642272949,
+   "features": {
+    "du_px": 0.34606242179870605,
+    "du0_px": 1.5676285028457642,
+    "dv0_px": 1.8700432181358337,
+    "dv_px": 1.085022509098053,
+    "shear_world_x_px": -1.0519963599333668,
+    "shear_world_z_px": 5.2247614350592535,
+    "delta_p99_mm": 5.27160566329956,
+    "contact_frac": 0.16848958333333333,
+    "shear_mag_px": 5.336483716964722,
+    "hertz_Fn_rel": 12.103770369643355,
+    "slip_ratio_rel": 0.4406173668606026,
+    "shear_world_x_px_left": -0.7066752240790207,
+    "shear_world_x_px_right": -1.3973174957877128
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.871942043304443,
+     "du0_px": 1.615302562713623,
+     "dv0_px": 1.8171563148498535,
+     "dv_px": 0.7375059127807617,
+     "shear_world_x_px": -0.7066752240790207,
+     "shear_world_z_px": 4.876508098599825,
+     "delta_p99_mm": 5.238813285827636,
+     "contact_frac": 0.16467447916666667,
+     "shear_mag_px": 4.9274468421936035,
+     "hertz_Fn_rel": 11.99083371444532,
+     "slip_ratio_rel": 0.4109344654039797
+    },
+    "right_gsmini": {
+     "du_px": 5.5640668869018555,
+     "du0_px": 1.5199544429779053,
+     "dv0_px": 1.922930121421814,
+     "dv_px": 1.4325391054153442,
+     "shear_world_x_px": -1.3973174957877128,
+     "shear_world_z_px": 5.573014771518683,
+     "delta_p99_mm": 5.304398040771484,
+     "contact_frac": 0.1723046875,
+     "shear_mag_px": 5.74552059173584,
+     "hertz_Fn_rel": 12.21670702484139,
+     "slip_ratio_rel": 0.4703002683172255
+    }
+   }
+  },
+  {
+   "episode": 12,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/12.hdf5",
+   "bytes": 121198600,
+   "sha256": "19ccccc1aab3865d7303ed95915118c87603a14d127357a9570cb5240d4f87c4",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.9,
+   "ok": true,
+   "t_q": 67,
+   "n_frames": 156,
+   "label": 1,
+   "excursion_mm": 38.4712815284729,
+   "features": {
+    "du_px": -0.45848560333251953,
+    "du0_px": 1.3983781337738037,
+    "dv0_px": 1.9970043301582336,
+    "dv_px": -0.8493638038635254,
+    "shear_world_x_px": 0.896184293220498,
+    "shear_world_z_px": 5.1448620683551995,
+    "delta_p99_mm": 5.415281782150267,
+    "contact_frac": 0.20371744791666668,
+    "shear_mag_px": 5.2321882247924805,
+    "hertz_Fn_rel": 12.602657902884525,
+    "slip_ratio_rel": 0.4161828410403148,
+    "shear_world_x_px_left": 1.2993518146469223,
+    "shear_world_x_px_right": 0.49301677179407366
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.611301422119141,
+     "du0_px": 1.4363186359405518,
+     "dv0_px": 2.0203933715820312,
+     "dv_px": -1.2483975887298584,
+     "shear_world_x_px": 1.2993518146469223,
+     "shear_world_z_px": 5.599692775836748,
+     "delta_p99_mm": 5.341103153228758,
+     "contact_frac": 0.1872265625,
+     "shear_mag_px": 5.748495578765869,
+     "hertz_Fn_rel": 12.343730988864918,
+     "slip_ratio_rel": 0.46570162489376143
+    },
+    "right_gsmini": {
+     "du_px": 4.694330215454102,
+     "du0_px": 1.3604376316070557,
+     "dv0_px": 1.973615288734436,
+     "dv_px": -0.4503300189971924,
+     "shear_world_x_px": 0.49301677179407366,
+     "shear_world_z_px": 4.690031360873651,
+     "delta_p99_mm": 5.489460411071775,
+     "contact_frac": 0.22020833333333334,
+     "shear_mag_px": 4.715880870819092,
+     "hertz_Fn_rel": 12.861584816904132,
+     "slip_ratio_rel": 0.3666640571868681
+    }
+   }
+  },
+  {
+   "episode": 13,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/13.hdf5",
+   "bytes": 121215292,
+   "sha256": "e311cf7d72fe94b6a50d735955d13c95f3acde4ddac8963ba0c08f897357b894",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 7.3,
+   "ok": true,
+   "t_q": 67,
+   "n_frames": 156,
+   "label": 1,
+   "excursion_mm": 38.48683834075928,
+   "features": {
+    "du_px": -0.43311119079589844,
+    "du0_px": 1.492226779460907,
+    "dv0_px": 2.1787269115448,
+    "dv_px": -0.9961485266685486,
+    "shear_world_x_px": 1.0481032127998606,
+    "shear_world_z_px": 5.577141750148085,
+    "delta_p99_mm": 5.450174016952515,
+    "contact_frac": 0.20921875,
+    "shear_mag_px": 5.692612648010254,
+    "hertz_Fn_rel": 12.724457969447316,
+    "slip_ratio_rel": 0.44826011442961444,
+    "shear_world_x_px_left": 1.5843857621795612,
+    "shear_world_x_px_right": 0.5118206634201603
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -6.019801139831543,
+     "du0_px": 1.5348320007324219,
+     "dv0_px": 2.2133309841156006,
+     "dv_px": -1.528473973274231,
+     "shear_world_x_px": 1.5843857621795612,
+     "shear_world_z_px": 6.005262479420611,
+     "delta_p99_mm": 5.384373474121094,
+     "contact_frac": 0.1909375,
+     "shear_mag_px": 6.210816383361816,
+     "hertz_Fn_rel": 12.494036319418045,
+     "slip_ratio_rel": 0.4971024754993755
+    },
+    "right_gsmini": {
+     "du_px": 5.153578758239746,
+     "du0_px": 1.449621558189392,
+     "dv0_px": 2.144122838973999,
+     "dv_px": -0.4638230800628662,
+     "shear_world_x_px": 0.5118206634201603,
+     "shear_world_z_px": 5.14902102087556,
+     "delta_p99_mm": 5.515974559783935,
+     "contact_frac": 0.2275,
+     "shear_mag_px": 5.174408912658691,
+     "hertz_Fn_rel": 12.954879619476587,
+     "slip_ratio_rel": 0.3994177533598534
+    }
+   }
+  },
+  {
+   "episode": 14,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/14.hdf5",
+   "bytes": 142716976,
+   "sha256": "c45c61a4cf8d9dbbcbe269c59e41f3f9ca4961db54645c4f9b763963eadffb81",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 9.3,
+   "ok": true,
+   "t_q": 70,
+   "n_frames": 184,
+   "label": -1,
+   "excursion_mm": -40.80730676651001,
+   "features": {
+    "du_px": 0.25057148933410645,
+    "du0_px": 1.4745833277702332,
+    "dv0_px": 2.020530581474304,
+    "dv_px": 0.7730944156646729,
+    "shear_world_x_px": -0.7586027381177464,
+    "shear_world_z_px": 5.121408915424895,
+    "delta_p99_mm": 5.201142501831052,
+    "contact_frac": 0.13781901041666667,
+    "shear_mag_px": 5.182997941970825,
+    "hertz_Fn_rel": 11.861884657299425,
+    "slip_ratio_rel": 0.436764923232298,
+    "shear_world_x_px_left": -0.47588490145094187,
+    "shear_world_x_px_right": -1.0413205747845509
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.868670463562012,
+     "du0_px": 1.6129978895187378,
+     "dv0_px": 2.0160186290740967,
+     "dv_px": 0.4896667003631592,
+     "shear_world_x_px": -0.47588490145094187,
+     "shear_world_z_px": 4.870036409308989,
+     "delta_p99_mm": 5.170732116699218,
+     "contact_frac": 0.12865885416666667,
+     "shear_mag_px": 4.893232822418213,
+     "hertz_Fn_rel": 11.757853857562523,
+     "slip_ratio_rel": 0.41616717486847643
+    },
+    "right_gsmini": {
+     "du_px": 5.369813442230225,
+     "du0_px": 1.3361687660217285,
+     "dv0_px": 2.0250425338745117,
+     "dv_px": 1.0565221309661865,
+     "shear_world_x_px": -1.0413205747845509,
+     "shear_world_z_px": 5.3727814215408,
+     "delta_p99_mm": 5.231552886962887,
+     "contact_frac": 0.14697916666666666,
+     "shear_mag_px": 5.4727630615234375,
+     "hertz_Fn_rel": 11.965915457036328,
+     "slip_ratio_rel": 0.4573626715961196
+    }
+   }
+  },
+  {
+   "episode": 15,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/15.hdf5",
+   "bytes": 121943058,
+   "sha256": "56003e986a2574a6d3ba64c2a4ae3db5ec6e5af7b2350a3a0116a1e51d6acb64",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.4,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 157,
+   "label": 1,
+   "excursion_mm": 39.51185941696167,
+   "features": {
+    "du_px": -0.4909179210662842,
+    "du0_px": 1.4256364703178406,
+    "dv0_px": 2.0370327830314636,
+    "dv_px": -1.156623363494873,
+    "shear_world_x_px": 1.1370070793203213,
+    "shear_world_z_px": 4.997506504836661,
+    "delta_p99_mm": 5.449164600372314,
+    "contact_frac": 0.21042968750000002,
+    "shear_mag_px": 5.126323938369751,
+    "hertz_Fn_rel": 12.721426847802658,
+    "slip_ratio_rel": 0.4041837323938754,
+    "shear_world_x_px_left": 1.357361021902211,
+    "shear_world_x_px_right": 0.9166531367384315
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.483924388885498,
+     "du0_px": 1.6076740026474,
+     "dv0_px": 1.9370206594467163,
+     "dv_px": -1.378906488418579,
+     "shear_world_x_px": 1.357361021902211,
+     "shear_world_z_px": 5.489293040451458,
+     "delta_p99_mm": 5.362772045135498,
+     "contact_frac": 0.1927734375,
+     "shear_mag_px": 5.654627323150635,
+     "hertz_Fn_rel": 12.418925027052941,
+     "slip_ratio_rel": 0.45532341252023
+    },
+    "right_gsmini": {
+     "du_px": 4.50208854675293,
+     "du0_px": 1.2435989379882812,
+     "dv0_px": 2.137044906616211,
+     "dv_px": -0.934340238571167,
+     "shear_world_x_px": 0.9166531367384315,
+     "shear_world_z_px": 4.505719969221863,
+     "delta_p99_mm": 5.535557155609131,
+     "contact_frac": 0.2280859375,
+     "shear_mag_px": 4.598020553588867,
+     "hertz_Fn_rel": 13.023928668552376,
+     "slip_ratio_rel": 0.3530440522675208
+    }
+   }
+  },
+  {
+   "episode": 16,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/16.hdf5",
+   "bytes": 121216228,
+   "sha256": "ca9d0b80d5f90270f0513ec77fd450fc0b51783ce2b89071c5b4eba07a053265",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.2,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 156,
+   "label": 1,
+   "excursion_mm": 40.44896364212036,
+   "features": {
+    "du_px": -0.37944841384887695,
+    "du0_px": 1.338024079799652,
+    "dv0_px": 1.921733558177948,
+    "dv_px": -0.8394558429718018,
+    "shear_world_x_px": 0.8603984083843372,
+    "shear_world_z_px": 4.673468650847159,
+    "delta_p99_mm": 5.38182406425476,
+    "contact_frac": 0.20135416666666667,
+    "shear_mag_px": 4.756923675537109,
+    "hertz_Fn_rel": 12.486060260224203,
+    "slip_ratio_rel": 0.3818474658680403,
+    "shear_world_x_px_left": 1.1487207181755785,
+    "shear_world_x_px_right": 0.572076098593096
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.056734085083008,
+     "du0_px": 1.3967156410217285,
+     "dv0_px": 1.947149395942688,
+     "dv_px": -1.1260876655578613,
+     "shear_world_x_px": 1.1487207181755785,
+     "shear_world_z_px": 5.051626163098693,
+     "delta_p99_mm": 5.307354240417479,
+     "contact_frac": 0.18865885416666667,
+     "shear_mag_px": 5.180601596832275,
+     "hertz_Fn_rel": 12.22692120637418,
+     "slip_ratio_rel": 0.4237045049518685
+    },
+    "right_gsmini": {
+     "du_px": 4.297837257385254,
+     "du0_px": 1.2793325185775757,
+     "dv0_px": 1.896317720413208,
+     "dv_px": -0.5528240203857422,
+     "shear_world_x_px": 0.572076098593096,
+     "shear_world_z_px": 4.295311138595624,
+     "delta_p99_mm": 5.45629388809204,
+     "contact_frac": 0.21404947916666667,
+     "shear_mag_px": 4.333245754241943,
+     "hertz_Fn_rel": 12.745199314074224,
+     "slip_ratio_rel": 0.33999042678421215
+    }
+   }
+  },
+  {
+   "episode": 17,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/17.hdf5",
+   "bytes": 121165060,
+   "sha256": "6471afa66eae99985d0cc84b801010886a35fc94fe95705182a1a8ace86c5544",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.7,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 156,
+   "label": 1,
+   "excursion_mm": 39.908766746520996,
+   "features": {
+    "du_px": -0.7240018844604492,
+    "du0_px": 1.8004006743431091,
+    "dv0_px": 2.0326656699180603,
+    "dv_px": -0.9566762447357178,
+    "shear_world_x_px": 1.0193391386600361,
+    "shear_world_z_px": 5.810515274036066,
+    "delta_p99_mm": 5.404814596176147,
+    "contact_frac": 0.20529947916666666,
+    "shear_mag_px": 5.902143239974976,
+    "hertz_Fn_rel": 12.565848310252354,
+    "slip_ratio_rel": 0.4708564222438759,
+    "shear_world_x_px_left": 1.331746162347537,
+    "shear_world_x_px_right": 0.706932114972535
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -6.545165061950684,
+     "du0_px": 1.957291841506958,
+     "dv0_px": 1.9600001573562622,
+     "dv_px": -1.2613003253936768,
+     "shear_world_x_px": 1.331746162347537,
+     "shear_world_z_px": 6.531192422777803,
+     "delta_p99_mm": 5.344010467529296,
+     "contact_frac": 0.19358072916666666,
+     "shear_mag_px": 6.665587902069092,
+     "hertz_Fn_rel": 12.353810925840365,
+     "slip_ratio_rel": 0.5395572218226795
+    },
+    "right_gsmini": {
+     "du_px": 5.097161293029785,
+     "du0_px": 1.6435095071792603,
+     "dv0_px": 2.1053311824798584,
+     "dv_px": -0.6520521640777588,
+     "shear_world_x_px": 0.706932114972535,
+     "shear_world_z_px": 5.08983812529433,
+     "delta_p99_mm": 5.465618724822998,
+     "contact_frac": 0.21701822916666666,
+     "shear_mag_px": 5.138698577880859,
+     "hertz_Fn_rel": 12.777885694664343,
+     "slip_ratio_rel": 0.4021556226650723
+    }
+   }
+  },
+  {
+   "episode": 18,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/18.hdf5",
+   "bytes": 162556055,
+   "sha256": "7e2a48c9183f138be8be56a5505d2eec907ace09e63b3a12073092f4c8b7638e",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 8.5,
+   "ok": true,
+   "t_q": 85,
+   "n_frames": 209,
+   "label": 1,
+   "excursion_mm": 40.281593799591064,
+   "features": {
+    "du_px": -0.687641978263855,
+    "du0_px": 1.680691659450531,
+    "dv0_px": 1.938686490058899,
+    "dv_px": -0.6805856823921204,
+    "shear_world_x_px": 0.7125336555537983,
+    "shear_world_z_px": 3.9997343873263995,
+    "delta_p99_mm": 5.4203748035430905,
+    "contact_frac": 0.20171223958333334,
+    "shear_mag_px": 4.062742114067078,
+    "hertz_Fn_rel": 12.62062229246985,
+    "slip_ratio_rel": 0.3233181921013516,
+    "shear_world_x_px_left": 0.8180827342397629,
+    "shear_world_x_px_right": 0.6069845768678338
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.692937850952148,
+     "du0_px": 1.8325716257095337,
+     "dv0_px": 1.8678162097930908,
+     "dv_px": -0.7806487083435059,
+     "shear_world_x_px": 0.8180827342397629,
+     "shear_world_z_px": 4.6865554139029335,
+     "delta_p99_mm": 5.338902740478515,
+     "contact_frac": 0.18328125,
+     "shear_mag_px": 4.757423400878906,
+     "hertz_Fn_rel": 12.336103770866279,
+     "slip_ratio_rel": 0.3856504038263959
+    },
+    "right_gsmini": {
+     "du_px": 3.3176538944244385,
+     "du0_px": 1.5288116931915283,
+     "dv0_px": 2.009556770324707,
+     "dv_px": -0.5805226564407349,
+     "shear_world_x_px": 0.6069845768678338,
+     "shear_world_z_px": 3.3129133607498655,
+     "delta_p99_mm": 5.501846866607666,
+     "contact_frac": 0.22014322916666668,
+     "shear_mag_px": 3.368060827255249,
+     "hertz_Fn_rel": 12.905140814073421,
+     "slip_ratio_rel": 0.2609859803763073
+    }
+   }
+  },
+  {
+   "episode": 19,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/19.hdf5",
+   "bytes": 159263030,
+   "sha256": "77aa0f6ee0c8a2562b3857017a886ba29134fc5def9af41f520deb3c68614c97",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 8.4,
+   "ok": true,
+   "t_q": 83,
+   "n_frames": 205,
+   "label": 1,
+   "excursion_mm": 39.371490478515625,
+   "features": {
+    "du_px": -0.5912685394287109,
+    "du0_px": 1.6221030950546265,
+    "dv0_px": 2.371904969215393,
+    "dv_px": -1.2389301657676697,
+    "shear_world_x_px": 1.2070715946468102,
+    "shear_world_z_px": 4.693477878387007,
+    "delta_p99_mm": 5.490765228271483,
+    "contact_frac": 0.21798828125,
+    "shear_mag_px": 4.846682071685791,
+    "hertz_Fn_rel": 12.867263928089292,
+    "slip_ratio_rel": 0.3779022908035947,
+    "shear_world_x_px_left": 1.2904843321844217,
+    "shear_world_x_px_right": 1.1236588571091988
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.276444435119629,
+     "du0_px": 1.8338755369186401,
+     "dv0_px": 2.2332265377044678,
+     "dv_px": -1.326360821723938,
+     "shear_world_x_px": 1.2904843321844217,
+     "shear_world_z_px": 5.285325910770391,
+     "delta_p99_mm": 5.408118267059326,
+     "contact_frac": 0.20032552083333333,
+     "shear_mag_px": 5.440597057342529,
+     "hertz_Fn_rel": 12.576774396434374,
+     "slip_ratio_rel": 0.43259081270353283
+    },
+    "right_gsmini": {
+     "du_px": 4.093907356262207,
+     "du0_px": 1.4103306531906128,
+     "dv0_px": 2.5105834007263184,
+     "dv_px": -1.1514995098114014,
+     "shear_world_x_px": 1.1236588571091988,
+     "shear_world_z_px": 4.101629846003624,
+     "delta_p99_mm": 5.573412189483641,
+     "contact_frac": 0.23565104166666667,
+     "shear_mag_px": 4.252767086029053,
+     "hertz_Fn_rel": 13.15775345974421,
+     "slip_ratio_rel": 0.32321376890365655
+    }
+   }
+  },
+  {
+   "episode": 20,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/20.hdf5",
+   "bytes": 139852600,
+   "sha256": "a56d967b7c9484934d4a1001111475babb3e36e3ea12f0aedadd5222439f8362",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 7.7,
+   "ok": true,
+   "t_q": 73,
+   "n_frames": 180,
+   "label": 1,
+   "excursion_mm": 41.75084829330444,
+   "features": {
+    "du_px": -0.7509310245513916,
+    "du0_px": 1.7983402609825134,
+    "dv0_px": 2.4315704107284546,
+    "dv_px": -1.1312945485115051,
+    "shear_world_x_px": 1.0210922817704802,
+    "shear_world_z_px": 5.179186710059547,
+    "delta_p99_mm": 5.59177930831909,
+    "contact_frac": 0.22006510416666666,
+    "shear_mag_px": 5.278899192810059,
+    "hertz_Fn_rel": 13.22378725474324,
+    "slip_ratio_rel": 0.4005629126397856,
+    "shear_world_x_px_left": 1.156644384844031,
+    "shear_world_x_px_right": 0.8855401786969295
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.907167911529541,
+     "du0_px": 1.956321358680725,
+     "dv0_px": 2.3324739933013916,
+     "dv_px": -1.2828922271728516,
+     "shear_world_x_px": 1.156644384844031,
+     "shear_world_z_px": 5.933179283747629,
+     "delta_p99_mm": 5.514855480194091,
+     "contact_frac": 0.205703125,
+     "shear_mag_px": 6.044869422912598,
+     "hertz_Fn_rel": 12.950937395158485,
+     "slip_ratio_rel": 0.4667514974763434
+    },
+    "right_gsmini": {
+     "du_px": 4.405305862426758,
+     "du0_px": 1.6403591632843018,
+     "dv0_px": 2.5306668281555176,
+     "dv_px": -0.9796968698501587,
+     "shear_world_x_px": 0.8855401786969295,
+     "shear_world_z_px": 4.4251941363714655,
+     "delta_p99_mm": 5.668703136444089,
+     "contact_frac": 0.23442708333333334,
+     "shear_mag_px": 4.5129289627075195,
+     "hertz_Fn_rel": 13.496637114327996,
+     "slip_ratio_rel": 0.3343743278032278
+    }
+   }
+  },
+  {
+   "episode": 21,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/21.hdf5",
+   "bytes": 121103284,
+   "sha256": "b66d0d2b44b2de1c1fad4d2f92152df06fc6a6e696f39a0a6d23d107b9514148",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.5,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 156,
+   "label": -1,
+   "excursion_mm": -38.42979669570923,
+   "features": {
+    "du_px": 0.574505090713501,
+    "du0_px": 1.3463473320007324,
+    "dv0_px": 1.881245195865631,
+    "dv_px": 1.2365288138389587,
+    "shear_world_x_px": -1.1920440265630747,
+    "shear_world_z_px": 5.679586732134752,
+    "delta_p99_mm": 5.306800909042357,
+    "contact_frac": 0.16270833333333334,
+    "shear_mag_px": 5.807756185531616,
+    "hertz_Fn_rel": 12.225393215839356,
+    "slip_ratio_rel": 0.4744312986707475,
+    "shear_world_x_px_left": -0.8408677975756182,
+    "shear_world_x_px_right": -1.5432202555505312
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.0955681800842285,
+     "du0_px": 1.384063482284546,
+     "dv0_px": 1.9172236919403076,
+     "dv_px": 0.8808276653289795,
+     "shear_world_x_px": -0.8408677975756182,
+     "shear_world_z_px": 5.102312406335435,
+     "delta_p99_mm": 5.258226985931397,
+     "contact_frac": 0.15893229166666667,
+     "shear_mag_px": 5.171138286590576,
+     "hertz_Fn_rel": 12.057547862976442,
+     "slip_ratio_rel": 0.4288714708293984
+    },
+    "right_gsmini": {
+     "du_px": 6.2445783615112305,
+     "du0_px": 1.308631181716919,
+     "dv0_px": 1.8452666997909546,
+     "dv_px": 1.592229962348938,
+     "shear_world_x_px": -1.5432202555505312,
+     "shear_world_z_px": 6.25686105793407,
+     "delta_p99_mm": 5.355374832153318,
+     "contact_frac": 0.166484375,
+     "shear_mag_px": 6.444374084472656,
+     "hertz_Fn_rel": 12.39323856870227,
+     "slip_ratio_rel": 0.5199911265120966
+    }
+   }
+  },
+  {
+   "episode": 22,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/22.hdf5",
+   "bytes": 125903464,
+   "sha256": "1f1ae2422fe417148a3f40357829131fbce99c740f1d4f69108d94fac127b77a",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.7,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 162,
+   "label": 1,
+   "excursion_mm": 41.249632835388184,
+   "features": {
+    "du_px": -0.25679492950439453,
+    "du0_px": 1.2059541940689087,
+    "dv0_px": 1.5511471033096313,
+    "dv_px": -0.5244004130363464,
+    "shear_world_x_px": 0.5548692684806033,
+    "shear_world_z_px": 4.170470788591084,
+    "delta_p99_mm": 5.228874063491821,
+    "contact_frac": 0.16970703125,
+    "shear_mag_px": 4.217000842094421,
+    "hertz_Fn_rel": 11.957124145461709,
+    "slip_ratio_rel": 0.3530951030886278,
+    "shear_world_x_px_left": 0.8775735021150147,
+    "shear_world_x_px_right": 0.23216503484619183
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.431206703186035,
+     "du0_px": 1.285978078842163,
+     "dv0_px": 1.5826245546340942,
+     "dv_px": -0.8452377319335938,
+     "shear_world_x_px": 0.8775735021150147,
+     "shear_world_z_px": 4.4249161046741,
+     "delta_p99_mm": 5.179594573974608,
+     "contact_frac": 0.16052083333333333,
+     "shear_mag_px": 4.511099815368652,
+     "hertz_Fn_rel": 11.788095643249424,
+     "slip_ratio_rel": 0.38268266155033964
+    },
+    "right_gsmini": {
+     "du_px": 3.917616844177246,
+     "du0_px": 1.1259303092956543,
+     "dv0_px": 1.5196696519851685,
+     "dv_px": -0.20356309413909912,
+     "shear_world_x_px": 0.23216503484619183,
+     "shear_world_z_px": 3.9160254725080677,
+     "delta_p99_mm": 5.278153553009033,
+     "contact_frac": 0.17889322916666667,
+     "shear_mag_px": 3.9229018688201904,
+     "hertz_Fn_rel": 12.126152647673996,
+     "slip_ratio_rel": 0.323507544626916
+    }
+   }
+  },
+  {
+   "episode": 23,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/23.hdf5",
+   "bytes": 120298575,
+   "sha256": "e4ad0748e9c816ca893fa9f8e15b904202227064b947460690abcc2ee37126ee",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.8,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 155,
+   "label": -1,
+   "excursion_mm": -38.908541202545166,
+   "features": {
+    "du_px": 0.4474954605102539,
+    "du0_px": 1.425992727279663,
+    "dv0_px": 1.7519772052764893,
+    "dv_px": 1.1177704334259033,
+    "shear_world_x_px": -1.0421015363905612,
+    "shear_world_z_px": 5.437316611114918,
+    "delta_p99_mm": 5.300771398544311,
+    "contact_frac": 0.16190755208333332,
+    "shear_mag_px": 5.54389214515686,
+    "hertz_Fn_rel": 12.204615849744862,
+    "slip_ratio_rel": 0.45372422219596853,
+    "shear_world_x_px_left": -0.6608792312404885,
+    "shear_world_x_px_right": -1.423323841540634
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.974771499633789,
+     "du0_px": 1.4764577150344849,
+     "dv0_px": 1.7263903617858887,
+     "dv_px": 0.7302742004394531,
+     "shear_world_x_px": -0.6608792312404885,
+     "shear_world_z_px": 4.984464586497853,
+     "delta_p99_mm": 5.24905611038208,
+     "contact_frac": 0.15485677083333332,
+     "shear_mag_px": 5.028086185455322,
+     "hertz_Fn_rel": 12.026017260859355,
+     "slip_ratio_rel": 0.41810069588209003
+    },
+    "right_gsmini": {
+     "du_px": 5.869762420654297,
+     "du0_px": 1.3755277395248413,
+     "dv0_px": 1.7775640487670898,
+     "dv_px": 1.5052666664123535,
+     "shear_world_x_px": -1.423323841540634,
+     "shear_world_z_px": 5.890168635731982,
+     "delta_p99_mm": 5.352486686706541,
+     "contact_frac": 0.16895833333333332,
+     "shear_mag_px": 6.059698104858398,
+     "hertz_Fn_rel": 12.383214438630366,
+     "slip_ratio_rel": 0.48934774850984697
+    }
+   }
+  },
+  {
+   "episode": 24,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/24.hdf5",
+   "bytes": 142033669,
+   "sha256": "c3de5b0de27b1d3cda23c98336a2ce015a5dc58c270148550b2c35e23da43323",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 7.2,
+   "ok": true,
+   "t_q": 75,
+   "n_frames": 183,
+   "label": -1,
+   "excursion_mm": -39.29793834686279,
+   "features": {
+    "du_px": 0.3537445068359375,
+    "du0_px": 1.6286671161651611,
+    "dv0_px": 1.9393620491027832,
+    "dv_px": 1.2803850173950195,
+    "shear_world_x_px": -1.21364004815035,
+    "shear_world_z_px": 5.4956309190401,
+    "delta_p99_mm": 5.303541994094848,
+    "contact_frac": 0.17237630208333332,
+    "shear_mag_px": 5.637915134429932,
+    "hertz_Fn_rel": 12.213958624975627,
+    "slip_ratio_rel": 0.46127835073404144,
+    "shear_world_x_px_left": -0.7939251896591648,
+    "shear_world_x_px_right": -1.6333549066415352
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.126720428466797,
+     "du0_px": 1.6503732204437256,
+     "dv0_px": 1.8772501945495605,
+     "dv_px": 0.8563356399536133,
+     "shear_world_x_px": -0.7939251896591648,
+     "shear_world_z_px": 5.136755277721134,
+     "delta_p99_mm": 5.26772813796997,
+     "contact_frac": 0.17106770833333335,
+     "shear_mag_px": 5.197746753692627,
+     "hertz_Fn_rel": 12.090243008244627,
+     "slip_ratio_rel": 0.42991251293693256
+    },
+    "right_gsmini": {
+     "du_px": 5.834209442138672,
+     "du0_px": 1.6069610118865967,
+     "dv0_px": 2.001473903656006,
+     "dv_px": 1.7044343948364258,
+     "shear_world_x_px": -1.6333549066415352,
+     "shear_world_z_px": 5.8545065603590665,
+     "delta_p99_mm": 5.339355850219726,
+     "contact_frac": 0.17368489583333332,
+     "shear_mag_px": 6.078083515167236,
+     "hertz_Fn_rel": 12.337674241706626,
+     "slip_ratio_rel": 0.49264418853115033
+    }
+   }
+  },
+  {
+   "episode": 25,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/25.hdf5",
+   "bytes": 125820196,
+   "sha256": "c804fda7732cef8ead1b4c4a64fb1761567fd203428cf91758b65e6e1521154e",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.7,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 162,
+   "label": 1,
+   "excursion_mm": 39.443790912628174,
+   "features": {
+    "du_px": -0.3124830722808838,
+    "du0_px": 1.3550981879234314,
+    "dv0_px": 2.000337064266205,
+    "dv_px": -0.8939343690872192,
+    "shear_world_x_px": 1.000695956155914,
+    "shear_world_z_px": 5.58816820511622,
+    "delta_p99_mm": 5.402380971908567,
+    "contact_frac": 0.20502604166666666,
+    "shear_mag_px": 5.688521862030029,
+    "hertz_Fn_rel": 12.557492949993554,
+    "slip_ratio_rel": 0.453709325009619,
+    "shear_world_x_px_left": 1.4210325355016635,
+    "shear_world_x_px_right": 0.5803593768101644
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.918724536895752,
+     "du0_px": 1.4457855224609375,
+     "dv0_px": 1.8780139684677124,
+     "dv_px": -1.3083863258361816,
+     "shear_world_x_px": 1.4210325355016635,
+     "shear_world_z_px": 5.892689947462896,
+     "delta_p99_mm": 5.335269184112547,
+     "contact_frac": 0.1894140625,
+     "shear_mag_px": 6.061614990234375,
+     "hertz_Fn_rel": 12.323512335007273,
+     "slip_ratio_rel": 0.4918739743551202
+    },
+    "right_gsmini": {
+     "du_px": 5.293758392333984,
+     "du0_px": 1.2644108533859253,
+     "dv0_px": 2.1226601600646973,
+     "dv_px": -0.47948241233825684,
+     "shear_world_x_px": 0.5803593768101644,
+     "shear_world_z_px": 5.283646462769543,
+     "delta_p99_mm": 5.469492759704587,
+     "contact_frac": 0.22063802083333334,
+     "shear_mag_px": 5.315428733825684,
+     "hertz_Fn_rel": 12.791473564979835,
+     "slip_ratio_rel": 0.4155446756641179
+    }
+   }
+  },
+  {
+   "episode": 26,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/26.hdf5",
+   "bytes": 121168336,
+   "sha256": "053a0b9e0ff770bca218ad23f6dd1dfbe44a67e8743baa0cdf2753afd640237f",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.6,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 156,
+   "label": -1,
+   "excursion_mm": -38.37639093399048,
+   "features": {
+    "du_px": 0.7142086029052734,
+    "du0_px": 1.4968073964118958,
+    "dv0_px": 2.1723140478134155,
+    "dv_px": 1.4372282028198242,
+    "shear_world_x_px": -1.3697785677853984,
+    "shear_world_z_px": 6.935292459833516,
+    "delta_p99_mm": 5.332153663635253,
+    "contact_frac": 0.17002604166666668,
+    "shear_mag_px": 7.0814528465271,
+    "hertz_Fn_rel": 12.312952893605326,
+    "slip_ratio_rel": 0.5744828325674738,
+    "shear_world_x_px_left": -0.8075072324731604,
+    "shear_world_x_px_right": -1.9320499030976366
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -6.207435607910156,
+     "du0_px": 1.5369800329208374,
+     "dv0_px": 2.2062149047851562,
+     "dv_px": 0.8679344654083252,
+     "shear_world_x_px": -0.8075072324731604,
+     "shear_world_z_px": 6.215581383934643,
+     "delta_p99_mm": 5.294241466522217,
+     "contact_frac": 0.1715625,
+     "shear_mag_px": 6.267819881439209,
+     "hertz_Fn_rel": 12.181635992268214,
+     "slip_ratio_rel": 0.5145302228220779
+    },
+    "right_gsmini": {
+     "du_px": 7.635852813720703,
+     "du0_px": 1.456634759902954,
+     "dv0_px": 2.138413190841675,
+     "dv_px": 2.0065219402313232,
+     "shear_world_x_px": -1.9320499030976366,
+     "shear_world_z_px": 7.655003535732389,
+     "delta_p99_mm": 5.37006586074829,
+     "contact_frac": 0.16848958333333333,
+     "shear_mag_px": 7.89508581161499,
+     "hertz_Fn_rel": 12.444269794942437,
+     "slip_ratio_rel": 0.6344354423128697
+    }
+   }
+  },
+  {
+   "episode": 27,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/27.hdf5",
+   "bytes": 127398732,
+   "sha256": "cc3db236dde1a55bf7ae2859016a303439743e7f1aa0be38d6aed3015470d60e",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.9,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 164,
+   "label": 1,
+   "excursion_mm": 41.12517833709717,
+   "features": {
+    "du_px": -0.3709280490875244,
+    "du0_px": 1.1753563284873962,
+    "dv0_px": 1.4836543798446655,
+    "dv_px": -0.7122651934623718,
+    "shear_world_x_px": 0.6963618589615101,
+    "shear_world_z_px": 3.857116472843418,
+    "delta_p99_mm": 5.296151218414305,
+    "contact_frac": 0.18248046875,
+    "shear_mag_px": 3.9198116064071655,
+    "hertz_Fn_rel": 12.18901917129985,
+    "slip_ratio_rel": 0.3223063614810971,
+    "shear_world_x_px_left": 0.711247910308009,
+    "shear_world_x_px_right": 0.6814758076150114
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.22514009475708,
+     "du0_px": 1.2867517471313477,
+     "dv0_px": 1.446545124053955,
+     "dv_px": -0.7286800742149353,
+     "shear_world_x_px": 0.711247910308009,
+     "shear_world_z_px": 4.228108960940585,
+     "delta_p99_mm": 5.226465682983397,
+     "contact_frac": 0.17020833333333332,
+     "shear_mag_px": 4.287514686584473,
+     "hertz_Fn_rel": 11.948466072517279,
+     "slip_ratio_rel": 0.35883390056621617
+    },
+    "right_gsmini": {
+     "du_px": 3.4832839965820312,
+     "du0_px": 1.0639609098434448,
+     "dv0_px": 1.520763635635376,
+     "dv_px": -0.6958503127098083,
+     "shear_world_x_px": 0.6814758076150114,
+     "shear_world_z_px": 3.4861239847462517,
+     "delta_p99_mm": 5.365836753845214,
+     "contact_frac": 0.19475260416666668,
+     "shear_mag_px": 3.5521085262298584,
+     "hertz_Fn_rel": 12.429572270082424,
+     "slip_ratio_rel": 0.285778822395978
+    }
+   }
+  },
+  {
+   "episode": 28,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/28.hdf5",
+   "bytes": 153646792,
+   "sha256": "1f847a302e1f53a4bdc92fee8d6320c0dd4e4a2fa6515bb6f14839abcfc810a9",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 8.0,
+   "ok": true,
+   "t_q": 81,
+   "n_frames": 198,
+   "label": 1,
+   "excursion_mm": 39.51752185821533,
+   "features": {
+    "du_px": -0.46715831756591797,
+    "du0_px": 1.390525221824646,
+    "dv0_px": 1.9757246375083923,
+    "dv_px": -0.9224772751331329,
+    "shear_world_x_px": 0.938898374658448,
+    "shear_world_z_px": 3.965652072537445,
+    "delta_p99_mm": 5.39429443359375,
+    "contact_frac": 0.20545572916666666,
+    "shear_mag_px": 4.076657056808472,
+    "hertz_Fn_rel": 12.529739254856917,
+    "slip_ratio_rel": 0.32639351281741924,
+    "shear_world_x_px_left": 0.9417446194899111,
+    "shear_world_x_px_right": 0.9360521298269852
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -4.436671257019043,
+     "du0_px": 1.5547988414764404,
+     "dv0_px": 1.9103106260299683,
+     "dv_px": -0.9233818650245667,
+     "shear_world_x_px": 0.9417446194899111,
+     "shear_world_z_px": 4.432802411334766,
+     "delta_p99_mm": 5.309688720703124,
+     "contact_frac": 0.18865885416666667,
+     "shear_mag_px": 4.531742095947266,
+     "hertz_Fn_rel": 12.234989250381714,
+     "slip_ratio_rel": 0.37039199652798077
+    },
+    "right_gsmini": {
+     "du_px": 3.502354621887207,
+     "du0_px": 1.2262516021728516,
+     "dv0_px": 2.0411386489868164,
+     "dv_px": -0.9215726852416992,
+     "shear_world_x_px": 0.9360521298269852,
+     "shear_world_z_px": 3.4985017337401234,
+     "delta_p99_mm": 5.478900146484374,
+     "contact_frac": 0.22225260416666667,
+     "shear_mag_px": 3.6215720176696777,
+     "hertz_Fn_rel": 12.82448925933212,
+     "slip_ratio_rel": 0.28239502910685765
+    }
+   }
+  },
+  {
+   "episode": 29,
+   "url": "https://huggingface.co/datasets/byml/UniVTAC/resolve/main/isaac45/insert_hole/hdf5/29.hdf5",
+   "bytes": 121124812,
+   "sha256": "253a429817047907bc69b668b63de0d603253e8728a0ad4b5b2834547b5dd2ba",
+   "commit": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+   "download_s": 6.4,
+   "ok": true,
+   "t_q": 68,
+   "n_frames": 156,
+   "label": -1,
+   "excursion_mm": -38.48838806152344,
+   "features": {
+    "du_px": 0.6117208003997803,
+    "du0_px": 1.3580336570739746,
+    "dv0_px": 1.917101263999939,
+    "dv_px": 1.2326563596725464,
+    "shear_world_x_px": -1.1863806229572278,
+    "shear_world_z_px": 5.8047366495200645,
+    "delta_p99_mm": 5.298232154846189,
+    "contact_frac": 0.16195963541666666,
+    "shear_mag_px": 5.930766344070435,
+    "hertz_Fn_rel": 12.195794455813054,
+    "slip_ratio_rel": 0.4856212296284792,
+    "shear_world_x_px_left": -0.7896931907837164,
+    "shear_world_x_px_right": -1.5830680551307394
+   },
+   "per_side": {
+    "left_gsmini": {
+     "du_px": -5.183371543884277,
+     "du0_px": 1.4004913568496704,
+     "dv0_px": 1.9443457126617432,
+     "dv_px": 0.8310620784759521,
+     "shear_world_x_px": -0.7896931907837164,
+     "shear_world_z_px": 5.189833014898432,
+     "delta_p99_mm": 5.24977949142456,
+     "contact_frac": 0.158828125,
+     "shear_mag_px": 5.249571800231934,
+     "hertz_Fn_rel": 12.028503334288356,
+     "slip_ratio_rel": 0.4364276796821053
+    },
+    "right_gsmini": {
+     "du_px": 6.406813144683838,
+     "du0_px": 1.3155759572982788,
+     "dv0_px": 1.8898568153381348,
+     "dv_px": 1.6342506408691406,
+     "shear_world_x_px": -1.5830680551307394,
+     "shear_world_z_px": 6.419640284141698,
+     "delta_p99_mm": 5.346684818267818,
+     "contact_frac": 0.16509114583333334,
+     "shear_mag_px": 6.6119608879089355,
+     "hertz_Fn_rel": 12.363085577337753,
+     "slip_ratio_rel": 0.5348147795748531
+    }
+   }
+  }
+ ],
+ "versions": {
+  "python": "3.12.7",
+  "numpy": "1.26.4",
+  "h5py": "3.11.0",
+  "scipy": "1.13.1",
+  "requests": "2.32.3"
+ },
+ "wall_time_s": 231.7
+}
