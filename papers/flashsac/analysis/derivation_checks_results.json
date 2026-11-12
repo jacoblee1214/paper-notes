@@ -1,0 +1,58 @@
+{
+ "target_entropy_per_dim_gaussian": -0.4781814516812086,
+ "target_entropy": {
+  "6": -2.8690887100872517,
+  "19": -9.085447581942963,
+  "20": -9.563629033624172,
+  "29": -13.86726209875505,
+  "37": -17.692713712204718
+ },
+ "per_dim_entropy_tanh_squashed_mc": -0.5006002321038742,
+ "per_dim_entropy_tanh_squashed_minus_target": -0.02241878042266554,
+ "zeta_repeat": {
+  "E_k": 2.1338317860790026,
+  "P_k1": 0.6311750484444903,
+  "P_k_ge_8": 0.04579142236833832,
+  "fraction_of_steps_resampling_noise": 0.4686405022757385,
+  "note": "반복 길이 k의 갱신 과정에서 새 잡음이 뽑히는 step 비율은 1/E[k] (코드: count==0 또는 count>=n일 때 재추출)"
+ },
+ "replay_ratios": {
+  "gpu_sim (IsaacLab 등, 1024 env)": {
+   "updates_per_transition": 0.001953125,
+   "batch_draws_per_transition": 4.0
+  },
+  "cpu_sim (MuJoCo 등, 1 env)": {
+   "updates_per_transition": 1.0,
+   "batch_draws_per_transition": 512.0
+  },
+  "vision (DMC 픽셀, 1 env, 코드 설정 UTD 0.5, 논문 Table 11)": {
+   "updates_per_transition": 0.5,
+   "batch_draws_per_transition": 128.0
+  }
+ },
+ "gpu_schedule": {
+  "interaction_steps": 48829,
+  "gradient_updates": 97658,
+  "lr_warmup_steps_after_int": 0,
+  "actor_updates_period2": 48829,
+  "note": "warmup = int(1e-6 × 97,656) = 0 이므로 사실상 워밍업이 없다. 코사인 감쇠는 3e-4 → 1.5e-4"
+ },
+ "parameter_counts": {
+  "IsaacLab Shadow Repose (obs 157, act 20)": {
+   "actor": 290402,
+   "critic_ensemble_2": 2251150,
+   "actor_plus_critic": 2541552
+  },
+  "MuJoCo Playground G1 flat (obs 123, act 37)": {
+   "actor": 290368,
+   "critic_ensemble_2": 2242378,
+   "actor_plus_critic": 2532746
+  },
+  "MuJoCo HalfCheetah-v4 (obs 17, act 6)": {
+   "actor": 268590,
+   "critic_ensemble_2": 2171686,
+   "actor_plus_critic": 2440276
+  }
+ },
+ "parameter_note": "논문 §4.1의 '2.5M-parameter'는 액터+비판자 앙상블(온라인)에 해당한다. 액터만은 약 0.29M(Shadow 기준). 공개 코드의 SAC 기준선 Small MLP(0.2–0.5M)와 비교할 때 비판자 앙상블을 포함해야 같은 기준이 된다."
+}
