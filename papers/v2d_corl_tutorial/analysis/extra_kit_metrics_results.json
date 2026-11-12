@@ -1,0 +1,661 @@
+{
+  "config": {
+    "seed": 20261112,
+    "T_frames": 300,
+    "fps": 30.0,
+    "half_extents_m": [
+      0.03,
+      0.03,
+      0.05
+    ],
+    "add_thresholds_m": [
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06,
+      0.07,
+      0.08,
+      0.09
+    ],
+    "sp_thresholds": [
+      0.1,
+      0.5
+    ],
+    "mp_thresholds": [
+      0.03,
+      30.0
+    ],
+    "n_vertices": 200,
+    "static_drift_m": 0.001,
+    "kit_warp_flag": {
+      "track_2": false,
+      "track_3": true
+    }
+  },
+  "unit_tests": [
+    {
+      "name": "identity: SP-SR raw (b) = 1",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "identity: SP-SR centered (a) = 1",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "identity: SP-SR warp (c) = 1",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "identity: MP-SR = 1",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "identity: ADD-AUC = 1",
+      "got": 1.0,
+      "expected": 1.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "identity: MPPE = 0 cm",
+      "got": 8.00220659837122e-17,
+      "expected": 0.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "identity: RPE = 0 cm",
+      "got": 1.6979936470436179e-16,
+      "expected": 0.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "identity: PEN, hand points outside object = 0 cm",
+      "got": 0.0,
+      "expected": 0.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "warp of identity returns reference positions",
+      "got": 0.0,
+      "expected": 0.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "const offset 0.035 m: SP-SR raw pos = 0.035",
+      "got": 0.03500000000000011,
+      "expected": 0.035,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "const offset 0.035 m: SP-SR centered pos = 0",
+      "got": 1.0430314019889882e-16,
+      "expected": 0.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "const offset 0.035 m: SP-SR warp pos = 0",
+      "got": 7.979727989493313e-19,
+      "expected": 0.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "const offset 0.035 m: ADD-AUC = 0.6875 (thresholds 1-3 cm fail, 4-9 cm pass)",
+      "got": 0.6875,
+      "expected": 0.6875,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "const offset 0.035 m: MPPE = 3.5 cm",
+      "got": 3.500000000000001,
+      "expected": 3.5,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "const offset 0.035 m: RPE = 0 (both bodies move together)",
+      "got": 4.749196761130754e-16,
+      "expected": 0.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "const offset 0.035 m: MP-SR fails (> 0.03 m)",
+      "got": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "const offset 0.02 m: MP-SR passes",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "rot offset 0.3 rad: SP-SR raw rot = 0.3 (geodesic)",
+      "got": 0.29999999999999905,
+      "expected": 0.3,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "rot offset 0.3 rad: SP-SR raw pos = 0",
+      "got": 0.0,
+      "expected": 0.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "rot offset 0.3 rad: ADD on ring r=5 cm = 2 r sin(theta/2)",
+      "got": 0.014943813247359928,
+      "expected": 0.014943813247359923,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "rot offset 0.3 rad: MPPE = 100 * 4*2r*sin(theta/2)/6 cm",
+      "got": 0.9962542164906617,
+      "expected": 0.9962542164906615,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "rot offset 0.6 rad: SP-SR raw fails (rot > 0.5)",
+      "got": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "rot offset 0.6 rad: SP-SR centered fails (rot not centered)",
+      "got": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "rot offset 0.6 rad: warp removes the orientation error",
+      "got": 8.214750702721387e-09,
+      "expected": 0.0,
+      "tol": 1e-06,
+      "pass": true
+    },
+    {
+      "name": "rot offset 0.6 rad: warp creates a position error (rigid-warp artifact)",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "drift 0.1 m: SP-SR raw pos = d/2",
+      "got": 0.05,
+      "expected": 0.05,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "drift 0.25 m: SP-SR raw pos = d/2",
+      "got": 0.12499999999999996,
+      "expected": 0.125,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "drift 0.25 m: SP-SR centered pos = d * mean|s-1/2| (about 0.25 d)",
+      "got": 0.06270903010033445,
+      "expected": 0.0625,
+      "tol": 0.002,
+      "pass": true
+    },
+    {
+      "name": "drift 0.25 m: centered (a) passes, raw (b) fails",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "transient 0.15 m: SP-SR raw pos = 0.15 * mean(exp(-t/tau))",
+      "got": 0.01525069645118623,
+      "expected": 0.015250696451186235,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "transient 0.15 m: SP-SR warp pos = 0.15 * mean(1 - exp(-t/tau))  (over-correction)",
+      "got": 0.13474930354881376,
+      "expected": 0.13474930354881376,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "transient 0.15 m: warp (c) fails while raw (b) passes",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "jitter 1 cm: ADD fractions match chi(3) CDF (max abs diff < 0.02)",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "jitter 1 cm: SP-SR raw pos mean = sigma*sqrt(8/pi) (rel. err < 2%)",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "PEN: one point 2 mm inside a face, one outside -> 0.1 cm",
+      "got": 0.09999999999999992,
+      "expected": 0.1,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "PEN: centre point of 6x6x10 cm box (depth 3 cm) -> 3.0 cm",
+      "got": 3.0,
+      "expected": 3.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "PEN: rotated 90 deg and translated object gives the same value",
+      "got": 0.09999999999999992,
+      "expected": 0.1,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "RPE: one body shifted 3 cm -> 3.0 cm",
+      "got": 3.0,
+      "expected": 3.0,
+      "tol": 1e-09,
+      "pass": true
+    },
+    {
+      "name": "MP-SR: rot 20 deg passes",
+      "got": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "MP-SR: rot 40 deg fails",
+      "got": false,
+      "expected": false,
+      "pass": true
+    }
+  ],
+  "perturbations": {
+    "초기 과도 오프셋 0.15 m (tau 1 s)": {
+      "a_centered": {
+        "pos_m": 0.020429284133616714,
+        "rot_rad": 0.0,
+        "pass": true
+      },
+      "b_raw_chord": {
+        "pos_m": 0.01525069645118623,
+        "rot_rad": 0.0,
+        "pass": true
+      },
+      "c_kit_warp_track3": {
+        "pos_m": 0.13474930354881376,
+        "rot_rad": 0.0,
+        "pass": false
+      },
+      "diag_a_with_1step_ref_lag": {
+        "pos_m": 0.020440378630650305,
+        "rot_rad": 0.0,
+        "pass": true
+      }
+    },
+    "지속 오프셋 0.15 m": {
+      "a_centered": {
+        "pos_m": 8.318808604930913e-16,
+        "rot_rad": 0.0,
+        "pass": true
+      },
+      "b_raw_chord": {
+        "pos_m": 0.14999999999999916,
+        "rot_rad": 0.0,
+        "pass": false
+      },
+      "c_kit_warp_track3": {
+        "pos_m": 3.0993726104118953e-18,
+        "rot_rad": 0.0,
+        "pass": true
+      },
+      "diag_a_with_1step_ref_lag": {
+        "pos_m": 0.0005048116192625853,
+        "rot_rad": 0.0,
+        "pass": true
+      }
+    },
+    "선형 드리프트 0.25 m": {
+      "a_centered": {
+        "pos_m": 0.06270903010033445,
+        "rot_rad": 0.0,
+        "pass": true
+      },
+      "b_raw_chord": {
+        "pos_m": 0.12499999999999996,
+        "rot_rad": 0.0,
+        "pass": false
+      },
+      "c_kit_warp_track3": {
+        "pos_m": 0.12499999999999996,
+        "rot_rad": 0.0,
+        "pass": false
+      },
+      "diag_a_with_1step_ref_lag": {
+        "pos_m": 0.06271123410619797,
+        "rot_rad": 0.0,
+        "pass": true
+      }
+    },
+    "상수 회전 오프셋 0.6 rad (z축)": {
+      "a_centered": {
+        "pos_m": 0.0,
+        "rot_rad": 0.5999999999999965,
+        "pass": false
+      },
+      "b_raw_chord": {
+        "pos_m": 0.0,
+        "rot_rad": 0.5999999999999965,
+        "pass": false
+      },
+      "c_kit_warp_track3": {
+        "pos_m": 0.059104041332267876,
+        "rot_rad": 8.214750702721387e-09,
+        "pass": true
+      },
+      "diag_a_with_1step_ref_lag": {
+        "pos_m": 0.0005048116192625831,
+        "rot_rad": 0.5999999999999965,
+        "pass": false
+      }
+    },
+    "떨림 σ 0.08 m (위치)": {
+      "a_centered": {
+        "pos_m": 0.12725206041971832,
+        "rot_rad": 0.0,
+        "pass": false
+      },
+      "b_raw_chord": {
+        "pos_m": 0.12732357247381773,
+        "rot_rad": 0.0,
+        "pass": false
+      },
+      "c_kit_warp_track3": {
+        "pos_m": 0.16694607180403426,
+        "rot_rad": 0.0,
+        "pass": false
+      },
+      "diag_a_with_1step_ref_lag": {
+        "pos_m": 0.12726972349169377,
+        "rot_rad": 0.0,
+        "pass": false
+      }
+    },
+    "항등 (기준)": {
+      "a_centered": {
+        "pos_m": 0.0,
+        "rot_rad": 0.0,
+        "pass": true
+      },
+      "b_raw_chord": {
+        "pos_m": 0.0,
+        "rot_rad": 0.0,
+        "pass": true
+      },
+      "c_kit_warp_track3": {
+        "pos_m": 0.0,
+        "rot_rad": 0.0,
+        "pass": true
+      },
+      "diag_a_with_1step_ref_lag": {
+        "pos_m": 0.0005048116192625831,
+        "rot_rad": 0.0,
+        "pass": true
+      }
+    }
+  },
+  "populations": [
+    {
+      "name": "완만 (오프셋 <= 5 cm, 드리프트 <= 5 cm)",
+      "episodes": 500,
+      "assumptions": {
+        "constant_offset_norm_uniform_m": [
+          0.0,
+          0.05
+        ],
+        "drift_total_norm_uniform_m": [
+          0.0,
+          0.05
+        ],
+        "rotation_offset_angle_uniform_rad": [
+          0.0,
+          0.0
+        ],
+        "jitter_sigma_m": 0.002,
+        "direction": "uniform on sphere, independent per body and per episode",
+        "reference": "two bodies, min-jerk 15 cm motion, 10 s, 30 fps"
+      },
+      "SR_a_centered": 1.0,
+      "SR_b_raw_chord_or_kit_track2": 1.0,
+      "SR_c_kit_warp_track3": 1.0,
+      "disagree_a_pass_b_fail": 0,
+      "disagree_b_pass_a_fail": 0,
+      "disagree_c_pass_b_fail": 0,
+      "disagree_b_pass_c_fail": 0
+    },
+    {
+      "name": "넓음 (오프셋 <= 15 cm, 드리프트 <= 25 cm)",
+      "episodes": 500,
+      "assumptions": {
+        "constant_offset_norm_uniform_m": [
+          0.0,
+          0.15
+        ],
+        "drift_total_norm_uniform_m": [
+          0.0,
+          0.25
+        ],
+        "rotation_offset_angle_uniform_rad": [
+          0.0,
+          0.0
+        ],
+        "jitter_sigma_m": 0.002,
+        "direction": "uniform on sphere, independent per body and per episode",
+        "reference": "two bodies, min-jerk 15 cm motion, 10 s, 30 fps"
+      },
+      "SR_a_centered": 1.0,
+      "SR_b_raw_chord_or_kit_track2": 0.468,
+      "SR_c_kit_warp_track3": 0.566,
+      "disagree_a_pass_b_fail": 266,
+      "disagree_b_pass_a_fail": 0,
+      "disagree_c_pass_b_fail": 83,
+      "disagree_b_pass_c_fail": 34
+    },
+    {
+      "name": "넓음 + 회전 오프셋 (<= 0.6 rad)",
+      "episodes": 500,
+      "assumptions": {
+        "constant_offset_norm_uniform_m": [
+          0.0,
+          0.15
+        ],
+        "drift_total_norm_uniform_m": [
+          0.0,
+          0.25
+        ],
+        "rotation_offset_angle_uniform_rad": [
+          0.0,
+          0.6
+        ],
+        "jitter_sigma_m": 0.002,
+        "direction": "uniform on sphere, independent per body and per episode",
+        "reference": "two bodies, min-jerk 15 cm motion, 10 s, 30 fps"
+      },
+      "SR_a_centered": 0.944,
+      "SR_b_raw_chord_or_kit_track2": 0.422,
+      "SR_c_kit_warp_track3": 0.496,
+      "disagree_a_pass_b_fail": 261,
+      "disagree_b_pass_a_fail": 0,
+      "disagree_c_pass_b_fail": 85,
+      "disagree_b_pass_c_fail": 48
+    }
+  ],
+  "jitter": {
+    "grid_mm": [
+      0,
+      5,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      100
+    ],
+    "episodes_per_sigma": 40,
+    "note": "떨림은 위치에만 더한다. 회전 떨림은 넣지 않았다. ADD 해석 값은 ||n|| 의 chi(3) 분포, SP-SR 해석 값은 평균 노름 sigma*sqrt(8/pi).",
+    "rows": [
+      {
+        "sigma_mm": 0,
+        "ADD_AUC": 1.0,
+        "ADD_AUC_analytic_chi3": 1.0,
+        "SP_SR_b_raw": 1.0,
+        "SP_SR_a_centered": 1.0,
+        "SP_SR_c_warp_track3": 1.0,
+        "SP_pos_b_mean_m": 0.0,
+        "SP_pos_b_analytic_m": 0.0
+      },
+      {
+        "sigma_mm": 5,
+        "ADD_AUC": 0.9832421874999999,
+        "ADD_AUC_analytic_chi3": 0.9835167344814759,
+        "SP_SR_b_raw": 1.0,
+        "SP_SR_a_centered": 1.0,
+        "SP_SR_c_warp_track3": 1.0,
+        "SP_pos_b_mean_m": 0.008010360919881856,
+        "SP_pos_b_analytic_m": 0.007978845608028654
+      },
+      {
+        "sigma_mm": 10,
+        "ADD_AUC": 0.9139140625,
+        "ADD_AUC_analytic_chi3": 0.9134336881578784,
+        "SP_SR_b_raw": 1.0,
+        "SP_SR_a_centered": 1.0,
+        "SP_SR_c_warp_track3": 1.0,
+        "SP_pos_b_mean_m": 0.015935578786691513,
+        "SP_pos_b_analytic_m": 0.015957691216057307
+      },
+      {
+        "sigma_mm": 20,
+        "ADD_AUC": 0.7237265625,
+        "ADD_AUC_analytic_chi3": 0.7241764320038244,
+        "SP_SR_b_raw": 1.0,
+        "SP_SR_a_centered": 1.0,
+        "SP_SR_c_warp_track3": 1.0,
+        "SP_pos_b_mean_m": 0.03196173058863943,
+        "SP_pos_b_analytic_m": 0.031915382432114614
+      },
+      {
+        "sigma_mm": 30,
+        "ADD_AUC": 0.5292942708333332,
+        "ADD_AUC_analytic_chi3": 0.5298867924099946,
+        "SP_SR_b_raw": 1.0,
+        "SP_SR_a_centered": 1.0,
+        "SP_SR_c_warp_track3": 0.975,
+        "SP_pos_b_mean_m": 0.04790868874299002,
+        "SP_pos_b_analytic_m": 0.04787307364817192
+      },
+      {
+        "sigma_mm": 40,
+        "ADD_AUC": 0.36447656250000005,
+        "ADD_AUC_analytic_chi3": 0.3636756103977884,
+        "SP_SR_b_raw": 1.0,
+        "SP_SR_a_centered": 1.0,
+        "SP_SR_c_warp_track3": 0.75,
+        "SP_pos_b_mean_m": 0.06377806113277057,
+        "SP_pos_b_analytic_m": 0.06383076486422923
+      },
+      {
+        "sigma_mm": 50,
+        "ADD_AUC": 0.24456510416666666,
+        "ADD_AUC_analytic_chi3": 0.24511394888583302,
+        "SP_SR_b_raw": 1.0,
+        "SP_SR_a_centered": 1.0,
+        "SP_SR_c_warp_track3": 0.45,
+        "SP_pos_b_mean_m": 0.08006090744389445,
+        "SP_pos_b_analytic_m": 0.07978845608028655
+      },
+      {
+        "sigma_mm": 60,
+        "ADD_AUC": 0.16746354166666666,
+        "ADD_AUC_analytic_chi3": 0.16734744263989546,
+        "SP_SR_b_raw": 1.0,
+        "SP_SR_a_centered": 1.0,
+        "SP_SR_c_warp_track3": 0.0,
+        "SP_pos_b_mean_m": 0.09607886673106922,
+        "SP_pos_b_analytic_m": 0.09574614729634384
+      },
+      {
+        "sigma_mm": 70,
+        "ADD_AUC": 0.11657552083333333,
+        "ADD_AUC_analytic_chi3": 0.11712422467836267,
+        "SP_SR_b_raw": 0.0,
+        "SP_SR_a_centered": 0.0,
+        "SP_SR_c_warp_track3": 0.0,
+        "SP_pos_b_mean_m": 0.11164529307798783,
+        "SP_pos_b_analytic_m": 0.11170383851240116
+      },
+      {
+        "sigma_mm": 80,
+        "ADD_AUC": 0.08363802083333334,
+        "ADD_AUC_analytic_chi3": 0.08424174255985412,
+        "SP_SR_b_raw": 0.0,
+        "SP_SR_a_centered": 0.0,
+        "SP_SR_c_warp_track3": 0.0,
+        "SP_pos_b_mean_m": 0.1278869014879036,
+        "SP_pos_b_analytic_m": 0.12766152972845846
+      },
+      {
+        "sigma_mm": 100,
+        "ADD_AUC": 0.04766927083333333,
+        "ADD_AUC_analytic_chi3": 0.04701241796374197,
+        "SP_SR_b_raw": 0.0,
+        "SP_SR_a_centered": 0.0,
+        "SP_SR_c_warp_track3": 0.0,
+        "SP_pos_b_mean_m": 0.15933096054137375,
+        "SP_pos_b_analytic_m": 0.1595769121605731
+      }
+    ]
+  },
+  "unit_tests_summary": {
+    "passed": 40,
+    "total": 40
+  },
+  "timing": {
+    "cpu_s": 3.38,
+    "wall_s": 3.2
+  }
+}

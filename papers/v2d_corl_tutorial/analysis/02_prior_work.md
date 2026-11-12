@@ -88,4 +88,4 @@
 
 ## 6. 참고: 챌린지 지표 계보와 CHORD의 해석 차이
 
-`chord/analysis/02_prior_work.md`는 SP-SR이 "위치를 궤적 평균으로 중심화하는 관대한 지표"라고 적습니다(`flashdexretarget/04` D3 인용). 그런데 키트 `metric_code/track_2/SP-SR.py`는 `_warp_to_reference_start`로 **첫 프레임만 맞추고** 위치 오차를 시간 평균(`mean(axis=0)`)해서 임계와 비교하며, 궤적 평균을 빼는 중심화는 없습니다. 원 SPIDER 스크립트가 다를 수 있으므로 이 점은 **`chord/`의 해석이 키트 구현과 다르다는 확인 사항**으로 남깁니다. `chord/`는 읽기 전용이라 수정하지 않았습니다 (`04` D2).
+처음 `chord/` 분석은 SP-SR을 "위치를 궤적 평균으로 중심화하는 관대한 지표"라고 적었습니다(`flashdexretarget/04` D3 인용). 이것은 SPIDER 원 스크립트의 양손 모드 동작입니다. CHORD 공개 평가 코드(`flash_chord/evaluation/metrics.py: spider_success`)와 키트 트랙 2 `metric_code/track_2/SP-SR.py`는 중심화하지 않은 원 위치 오차를 시간 평균(`mean(axis=0)`)해 임계와 비교합니다. 트랙 2는 `_ALIGN_INITIAL_POSE = False`라서 첫 프레임 정렬(`_warp_to_reference_start`)도 하지 않고, 정렬은 트랙 3 파일에서만 켜집니다. 세 정의의 차이는 `03` 추가 검증과 `04` D2에 있습니다. 이 확인에 따라 `chord/`의 해당 설명은 2026-11-12에 고쳤습니다(`chord/analysis/04_code_verification.md` D13).

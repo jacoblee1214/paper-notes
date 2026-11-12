@@ -36,6 +36,17 @@ CoRL 2026 튜토리얼 *From Human Videos to Dexterous Robot Capability*는 사�
 
 챌린지 트랙 2의 SP-SR, MP-SR, AUC, MPPE 임계는 키트 채점 코드가 정본입니다. SP-SR은 0.10 m와 0.5 rad, MP-SR은 0.03 m와 30°입니다. 페이지의 "as defined in the CHORD manuscript"는 지표 이름의 출처를 밝히는 말입니다. 채점 기준이 CHORD 논문 본문에 숫자로 적혀 있지는 않았습니다.
 
+## 키트 지표를 직접 옮겨 보기
+
+챌린지 키트의 채점 식(PEN, SP-SR, MP-SR, AUC, RPE, MPPE)을 numpy로 옮기고, 답을 아는 합성 궤적 40개로 확인했습니다. 키트 코드는 실행하지 않고 읽어서 옮겼습니다.
+
+SP-SR의 정의는 세 가지입니다. SPIDER 양손 모드는 궤적마다 시간 평균 오프셋을 뺀 뒤 위치를 잽니다. CHORD 평가 코드는 원시 시간 평균 오차를 씁니다. 키트 트랙 3은 첫 프레임을 맞춘 뒤 같은 오차를 씁니다. 같은 합성 궤적에서 지속 오프셋은 중심화와 첫 프레임 정렬이 용서하고 원시 평균은 실패시킵니다. 선형 드리프트는 중심화만 절반쯤 용서합니다. 첫 프레임 정렬은 잠깐 있다 사라지는 초기 오차를 전 구간에 남겨서 오히려 실패시킵니다.
+
+떨림 σ를 키우면 AUC는 해석 곡선과 거의 같게 줄어듭니다. SP-SR은 평균 떨림 노름이 0.10 m를 넘는 σ 약 63 mm에서 떨어집니다. 첫 프레임 정렬을 쓰는 정의는 30 mm부터 떨어집니다.
+
+![위치 떨림에 따른 ADD-AUC와 SP-SR 성공 비율](images/extra_kit_jitter.png)
+<p class="cap">위치 떨림 σ에 따른 ADD-AUC(왼쪽)와 SP-SR 성공 비율(오른쪽). 합성 궤적으로 직접 계산한 결과입니다. 왼쪽의 회색 선은 χ(3) 분포로 구한 해석 값입니다.</p>
+
 ## 숫자 점검
 
 - 상금 $54K은 트랙 2를 티어 세 개로 셀 때만 맞습니다.
@@ -50,7 +61,7 @@ CoRL 2026 튜토리얼 *From Human Videos to Dexterous Robot Capability*는 사�
 
 - 저장소 `LICENSE`: 문서와 스킬은 CC BY 4.0, 소스는 Apache-2.0입니다. 재구성 모델 여럿은 비상업 또는 비파생 조건이라 각자 확인해야 합니다.
 - 이 글은 페이지 미디어를 싣지 않았습니다. 그림은 합성 궤적으로 직접 그린 것입니다.
-- 분석 코드(`gate_toy.py`, `page_checks.py`, `plot_figures.py`)와 결과 JSON은 `publish/git/`에 있습니다.
+- 분석 코드(`gate_toy.py`, `page_checks.py`, `plot_figures.py`, `extra_kit_metrics.py`)와 결과 JSON은 `publish/git/`에 있습니다.
 
 ## 자료
 
