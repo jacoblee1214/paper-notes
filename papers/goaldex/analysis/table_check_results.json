@@ -1,0 +1,171 @@
+{
+  "table5_sd_convention": {
+    "succ": {
+      "mean": 16.0,
+      "sd_ddof0": 1.67,
+      "sd_ddof1": 1.87,
+      "paper": [
+        16.0,
+        1.67
+      ]
+    },
+    "drop": {
+      "mean": 0.8,
+      "sd_ddof0": 0.75,
+      "sd_ddof1": 0.84,
+      "paper": [
+        0.8,
+        0.75
+      ]
+    },
+    "timeout": {
+      "mean": 0.8,
+      "sd_ddof0": 0.75,
+      "sd_ddof1": 0.84,
+      "paper": [
+        0.8,
+        0.75
+      ]
+    },
+    "pfail": {
+      "mean": 2.4,
+      "sd_ddof0": 1.02,
+      "sd_ddof1": 1.14,
+      "paper": [
+        2.4,
+        1.02
+      ]
+    }
+  },
+  "real_world": {
+    "ours": {
+      "successes": 80,
+      "n": 100,
+      "rate": 0.8,
+      "wilson95": [
+        0.7111708336357507,
+        0.8666330671028517
+      ]
+    },
+    "pose_baseline_27_of_100_wilson95": [
+      0.19269584096677833,
+      0.36432116846696
+    ],
+    "fisher_ours_vs_pose_baseline_two_sided_p": 4.059488002453444e-14,
+    "failure_counts_total": {
+      "drop": 4,
+      "timeout": 4,
+      "prediction_failure": 12
+    },
+    "object_heterogeneity_chi2": {
+      "chi2": 4.375,
+      "dof": 4,
+      "p": 0.35762758853359566
+    },
+    "per_object": {
+      "Cube": {
+        "successes": 18,
+        "wilson95": [
+          0.6989663528135878,
+          0.9721335190383086
+        ],
+        "fisher_vs_rest_p": 0.34849947166408246,
+        "holm_p": 1.0
+      },
+      "3D Printed Toy": {
+        "successes": 16,
+        "wilson95": [
+          0.583982565906683,
+          0.9193423379822393
+        ],
+        "fisher_vs_rest_p": 1.0,
+        "holm_p": 1.0
+      },
+      "Tablet Bottle": {
+        "successes": 13,
+        "wilson95": [
+          0.4328542750684442,
+          0.818808176876017
+        ],
+        "fisher_vs_rest_p": 0.11351703205824787,
+        "holm_p": 0.5675851602912394
+      },
+      "Rubber Duck": {
+        "successes": 17,
+        "wilson95": [
+          0.6395811333571357,
+          0.9476312545132735
+        ],
+        "fisher_vs_rest_p": 0.756312250361592,
+        "holm_p": 1.0
+      },
+      "Globe": {
+        "successes": 16,
+        "wilson95": [
+          0.583982565906683,
+          0.9193423379822393
+        ],
+        "fisher_vs_rest_p": 1.0,
+        "holm_p": 1.0
+      }
+    }
+  },
+  "sim_table1": {
+    "Table1 image-goal vs image+JP+pose-goal (CS)": {
+      "diff": 8.099999999999994,
+      "welch_t": 1.8003690023268117,
+      "p_two_sided": 0.16235484475932532
+    },
+    "Table1 image-goal vs best pose-only baseline (CS)": {
+      "diff": 66.07,
+      "welch_t": 9.176167629798378,
+      "p_two_sided": 0.005912446950743697
+    }
+  },
+  "power_3seed_CS": {
+    "diff_8.1_vs_image_pose_goal": 0.228225,
+    "MDE_80pct_diff_pooled_sd_like_T1": 20.35688018798828
+  },
+  "sim_table3_CS_vs_ours": {
+    "Separate": {
+      "CS_diff": 20.309999999999995,
+      "welch_t": 7.639820588900921,
+      "p_raw": 0.00364324423324529,
+      "p_holm": 0.01457297693298116
+    },
+    "EMA": {
+      "CS_diff": 9.349999999999994,
+      "welch_t": 1.7544576260346056,
+      "p_raw": 0.18181537311118245,
+      "p_holm": 0.3636307462223649
+    },
+    "Shared": {
+      "CS_diff": 10.11999999999999,
+      "welch_t": 2.6048496165056427,
+      "p_raw": 0.06516838334185777,
+      "p_holm": 0.19550515002557334
+    },
+    "InfoNCE": {
+      "CS_diff": 14.29,
+      "welch_t": 1.2752764124263025,
+      "p_raw": 0.3214324498119344,
+      "p_holm": 0.3636307462223649
+    }
+  },
+  "sim_table4_2x_sd_zero_flag": true,
+  "checks": {
+    "image_goal_row_identical_in_T1_T2_T3": [
+      [
+        77.3,
+        3.25
+      ],
+      [
+        77.3,
+        3.25
+      ]
+    ],
+    "real_world_mean_80_of_100": true,
+    "sim_seeds": 3,
+    "episodes_per_policy_per_seed": 128
+  }
+}

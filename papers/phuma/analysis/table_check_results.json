@@ -1,0 +1,190 @@
+{
+  "table4_vs_table21_mismatch": [
+    {
+      "dataset": "AMASS",
+      "split": "unseen",
+      "table4": 78.2,
+      "table21_015": 70.2
+    }
+  ],
+  "table3_sink_vs_table21_amass": {
+    "table3_sink_unseen": 70.2,
+    "table21_amass_unseen": 70.2,
+    "table4_amass_unseen": 78.2
+  },
+  "amass_unseen_simple_mean_of_categories": 68.1,
+  "phusink_amass_test_table3": 79.5,
+  "phusink_phumasrc_test_table9": 89.9,
+  "real_reduction_pct": {
+    "empjpe_total": 16.3,
+    "dof_vel_total": 15.9,
+    "dof_acc_total": 14.0
+  },
+  "table5_empjpe_simple_mean": {
+    "AMASS": 41.02,
+    "PHUMA": 34.32
+  },
+  "table8_sum_clips_K": 76.03,
+  "table8_sum_hours": 72.97,
+  "table8_video_hours": 44.78,
+  "table8_mocap_hours": 28.19,
+  "split_counts": {
+    "train": 67953,
+    "test": 7557,
+    "unseen_video": 504,
+    "train_plus_test": 75510,
+    "total_clips_listed": 76014
+  },
+  "test_fraction_of_total_pct": 9.9,
+  "humanoidx_remaining_pct": {
+    "62.2/231.4": 26.9,
+    "62.2/237.2": 26.2,
+    "text_claim": 27.1
+  },
+  "humanoidx_hours_reported": {
+    "figure2a_feasible": 69.1,
+    "table2_all_filters": 62,
+    "table31_original": 237.2,
+    "table4_original": 231.4
+  },
+  "compute_days_single_gpu": {
+    "PhySINK": 99.1,
+    "SINK": 96.0
+  },
+  "clip_frames_mean": 103.7,
+  "ci95_wilson": {
+    "PhySINK test 79.5": {
+      "n": 7557,
+      "ci": [
+        78.6,
+        80.4
+      ]
+    },
+    "PHUMA test 92.7": {
+      "n": 7557,
+      "ci": [
+        92.1,
+        93.3
+      ]
+    },
+    "PhySINK unseen 72.8": {
+      "n": 504,
+      "ci": [
+        68.8,
+        76.5
+      ]
+    },
+    "SINK unseen 70.2": {
+      "n": 504,
+      "ci": [
+        66.1,
+        74.0
+      ]
+    },
+    "PHUMA unseen 82.9": {
+      "n": 504,
+      "ci": [
+        79.4,
+        85.9
+      ]
+    },
+    "Humanoid-X unseen 39.1": {
+      "n": 504,
+      "ci": [
+        34.9,
+        43.4
+      ]
+    }
+  },
+  "z_tests": {
+    "T3 PhySINK vs SINK, PHUMA test (n=7557)": {
+      "diff_pts": 3.3,
+      "z": 4.88,
+      "p_two_sided": 1.03e-06
+    },
+    "T3 PhySINK vs SINK, Unseen (n=504)": {
+      "diff_pts": 2.6,
+      "z": 0.91,
+      "p_two_sided": 0.361
+    },
+    "T3 PhySINK vs GMR, Unseen (n=504)": {
+      "diff_pts": 13.5,
+      "z": 4.53,
+      "p_two_sided": 6.02e-06
+    },
+    "T4 PHUMA vs AMASS, PHUMA test (n=7557)": {
+      "diff_pts": 16.5,
+      "z": 27.99,
+      "p_two_sided": 0.0
+    },
+    "T4 PHUMA vs AMASS, Unseen (n=504, table4 78.2)": {
+      "diff_pts": 4.7,
+      "z": 1.88,
+      "p_two_sided": 0.0594
+    },
+    "T4 PHUMA vs AMASS, Unseen (n=504, table21 70.2)": {
+      "diff_pts": 12.7,
+      "z": 4.76,
+      "p_two_sided": 1.95e-06
+    },
+    "T21 PHUMA vs AMASS 0.5 m, Unseen (n=504)": {
+      "diff_pts": 1.4,
+      "z": 0.87,
+      "p_two_sided": 0.384
+    },
+    "T20 PHUMA vs AMASS 0.5 m, PHUMA test (n=7557)": {
+      "diff_pts": 6.9,
+      "z": 17.39,
+      "p_two_sided": 0.0
+    },
+    "T9 PhySINK vs GMR, Unseen (n=504)": {
+      "diff_pts": 6.5,
+      "z": 2.51,
+      "p_two_sided": 0.0121
+    }
+  },
+  "seed_welch": {
+    "T25 PhySINK vs SINK, PHUMA test (GMR) 0.5m": {
+      "diff": 1.8,
+      "t": 11.02,
+      "p_two_sided": 0.000385
+    },
+    "T25 PhySINK vs SINK, Unseen (GMR) 0.5m": {
+      "diff": 3.9,
+      "t": 9.37,
+      "p_two_sided": 0.00136
+    },
+    "T30 +Video 33% vs MoCap only, Unseen 0.5m": {
+      "diff": -5.9,
+      "t": -12.39,
+      "p_two_sided": 0.00408
+    },
+    "T30 +Video 100% vs MoCap only, Unseen 0.5m": {
+      "diff": 4.2,
+      "t": 7.89,
+      "p_two_sided": 0.0119
+    },
+    "T32 No FC filter vs all filters, Unseen": {
+      "diff": -10.2,
+      "t": -17.16,
+      "p_two_sided": 0.000337
+    },
+    "T35 No Grounding vs PhySINK, Unseen": {
+      "diff": -5.7,
+      "t": -8.2,
+      "p_two_sided": 0.00128
+    },
+    "T35 No Skating vs PhySINK, PHUMA test": {
+      "diff": -0.4,
+      "t": -4.9,
+      "p_two_sided": 0.00805
+    },
+    "T35 No Skating vs PhySINK, Unseen": {
+      "diff": -2.0,
+      "t": -2.88,
+      "p_two_sided": 0.0459
+    }
+  },
+  "table2_all_filters_vs_unfiltered_pts": 36.4,
+  "fig2_pct_gain_phuma_vs_amass_real": 16.3
+}

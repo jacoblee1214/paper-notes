@@ -1,0 +1,28 @@
+{
+  "setup": {
+    "tolerance_rad": 0.4,
+    "alpha": 2.5,
+    "n_samples": 400000,
+    "seed": 0,
+    "cube_group_size": 24
+  },
+  "cube": {
+    "P_geometric_success_random_goal": 0.003445,
+    "P_image_equivalent_success_random_goal": 0.08109,
+    "ratio_image_over_geometric": 23.538461538461537,
+    "P_image_success_but_geometric_fail": 0.077645,
+    "irreducible_MSE_of_sstar_target": 0.002131694519610253,
+    "total_var_of_sstar_target": 0.002132155246435263,
+    "irreducible_fraction_of_target_variance": 0.9997839149725236
+  },
+  "bottle_of_revolution": {
+    "P_geometric_success_given_axis_aligned": 0.1273436328183591,
+    "P_geometric_fail_given_axis_aligned": 0.872656367181641,
+    "irreducible_MSE_of_sstar_target_within_class": 0.0015871812327068425,
+    "total_var_of_sstar_target": 0.0021762885835088634,
+    "irreducible_fraction_of_target_variance": 0.7293064186128321,
+    "class_size_K_grid": 72
+  },
+  "note": "설계 가정 토이. 무늬와 조명이 없는 물체를 가정했다. 실제 GoalDex 물체의 대칭성과 텍스처는 논문에 기술되지 않았다.",
+  "check_identity_in_group": true
+}

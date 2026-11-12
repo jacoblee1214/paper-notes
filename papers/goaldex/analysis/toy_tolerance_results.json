@@ -1,0 +1,173 @@
+{
+  "setup": {
+    "n": 2000000,
+    "seed": "1 (MC), 7 (fit)",
+    "taus": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6
+    ],
+    "s_values": [
+      0.15,
+      0.25,
+      0.35
+    ]
+  },
+  "chance_formula": {
+    "0.1": 5.302512818824604e-05,
+    "0.2": 0.000423565163172343,
+    "0.3": 0.0014259625077559092,
+    "0.4": 0.0033682462553692926,
+    "0.5": 0.006549054465188936,
+    "0.6": 0.011254650269366635
+  },
+  "chance_mc": {
+    "0.1": 4.85e-05,
+    "0.2": 0.0003925,
+    "0.3": 0.001385,
+    "0.4": 0.003344,
+    "0.5": 0.0065215,
+    "0.6": 0.011375
+  },
+  "chance_formula_check_tau0.4": {
+    "formula": 0.0033682462553692926,
+    "mc": 0.003344
+  },
+  "implied_head_noise_at_tau0.4": {
+    "sim_image_goal_8.80pct": {
+      "s=0.15": {
+        "reachable": false,
+        "ceiling_pfr": 0.0076105
+      },
+      "s=0.25": {
+        "reachable": true,
+        "implied_sigma_h_rad": 0.9999999995348043,
+        "check_pfr_at_tau0.4": 0.0864110709567949
+      },
+      "s=0.35": {
+        "reachable": true,
+        "implied_sigma_h_rad": 0.19132082940032707,
+        "check_pfr_at_tau0.4": 0.08843052251389448
+      }
+    },
+    "real_12of100_prediction_failures": {
+      "s=0.15": {
+        "reachable": false,
+        "ceiling_pfr": 0.007754
+      },
+      "s=0.25": {
+        "reachable": false,
+        "ceiling_pfr": 0.109892
+      },
+      "s=0.35": {
+        "reachable": true,
+        "implied_sigma_h_rad": 0.2989008468915709,
+        "check_pfr_at_tau0.4": 0.12000112343070773
+      }
+    }
+  },
+  "tau_sweep_sigma_h_ref": {
+    "sigma_h_rad": 0.17045072267490802,
+    "rows": {
+      "s=0.15": {
+        "0.1": {
+          "declared_rate": 0.465713,
+          "PFR": 0.34360110196623245,
+          "true_success_given_declared": 0.6563988980337676
+        },
+        "0.2": {
+          "declared_rate": 0.667216,
+          "PFR": 0.09651821898755425,
+          "true_success_given_declared": 0.9034817810124457
+        },
+        "0.3": {
+          "declared_rate": 0.82612,
+          "PFR": 0.020734881131070547,
+          "true_success_given_declared": 0.9792651188689294
+        },
+        "0.4": {
+          "declared_rate": 0.9242695,
+          "PFR": 0.0033642784923661336,
+          "true_success_given_declared": 0.9966357215076339
+        },
+        "0.5": {
+          "declared_rate": 0.9728405,
+          "PFR": 0.0003787876841064902,
+          "true_success_given_declared": 0.9996212123158935
+        },
+        "0.6": {
+          "declared_rate": 0.99189,
+          "PFR": 2.772484852150944e-05,
+          "true_success_given_declared": 0.9999722751514785
+        }
+      },
+      "s=0.25": {
+        "0.1": {
+          "declared_rate": 0.3447895,
+          "PFR": 0.4439781373852742,
+          "true_success_given_declared": 0.5560218626147257
+        },
+        "0.2": {
+          "declared_rate": 0.521178,
+          "PFR": 0.2028827003442202,
+          "true_success_given_declared": 0.7971172996557798
+        },
+        "0.3": {
+          "declared_rate": 0.6866225,
+          "PFR": 0.0924146820123139,
+          "true_success_given_declared": 0.907585317987686
+        },
+        "0.4": {
+          "declared_rate": 0.815103,
+          "PFR": 0.039959980517799594,
+          "true_success_given_declared": 0.9600400194822004
+        },
+        "0.5": {
+          "declared_rate": 0.901499,
+          "PFR": 0.01602442154677931,
+          "true_success_given_declared": 0.9839755784532207
+        },
+        "0.6": {
+          "declared_rate": 0.95261,
+          "PFR": 0.005827673444536589,
+          "true_success_given_declared": 0.9941723265554634
+        }
+      },
+      "s=0.35": {
+        "0.1": {
+          "declared_rate": 0.265818,
+          "PFR": 0.48130863974599164,
+          "true_success_given_declared": 0.5186913602540084
+        },
+        "0.2": {
+          "declared_rate": 0.4140575,
+          "PFR": 0.254260579750397,
+          "true_success_given_declared": 0.745739420249603
+        },
+        "0.3": {
+          "declared_rate": 0.564671,
+          "PFR": 0.1419933022946105,
+          "true_success_given_declared": 0.8580066977053895
+        },
+        "0.4": {
+          "declared_rate": 0.697023,
+          "PFR": 0.08061929089857867,
+          "true_success_given_declared": 0.9193807091014213
+        },
+        "0.5": {
+          "declared_rate": 0.801279,
+          "PFR": 0.04577806232286132,
+          "true_success_given_declared": 0.9542219376771387
+        },
+        "0.6": {
+          "declared_rate": 0.876263,
+          "PFR": 0.025212179448407614,
+          "true_success_given_declared": 0.9747878205515924
+        }
+      }
+    }
+  }
+}
