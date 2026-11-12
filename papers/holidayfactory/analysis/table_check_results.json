@@ -1,0 +1,326 @@
+{
+  "table5_battery": {
+    "cdmm_32iter": {
+      "k": 20,
+      "n": 20,
+      "wilson95": [
+        0.839,
+        1.0
+      ]
+    },
+    "mujoco_15iter": {
+      "k": 1,
+      "n": 20,
+      "wilson95": [
+        0.009,
+        0.236
+      ]
+    },
+    "mujoco_100iter": {
+      "k": 0,
+      "n": 20,
+      "wilson95": [
+        0.0,
+        0.161
+      ]
+    },
+    "fisher_p_cdmm_vs_mujoco15": 3.0468667118084345e-10,
+    "fisher_p_cdmm_vs_mujoco100": 1.4508889103849688e-11,
+    "note": "파라미터(잡기 자세, 목표값)를 CDMM으로 튜닝했으므로 차이가 솔버만의 효과가 아니다."
+  },
+  "table10_visual": {
+    "mesh_detailed_realistic": {
+      "k": 48,
+      "n": 60,
+      "wilson95": [
+        0.682,
+        0.882
+      ],
+      "effective_n_assets": 30
+    },
+    "code_native_detailed_realistic": {
+      "k": 0,
+      "n": 60,
+      "wilson95": [
+        0.0,
+        0.06
+      ]
+    }
+  },
+  "table11_verification": {
+    "any_stage": {
+      "k": 34,
+      "n": 72,
+      "pct": 47.2
+    },
+    "conformance": {
+      "k": 28,
+      "n": 72,
+      "pct": 38.9,
+      "unique": 24
+    },
+    "collider": {
+      "k": 10,
+      "n": 72,
+      "pct": 13.9,
+      "unique": 4
+    },
+    "articulation": {
+      "k": 2,
+      "n": 72,
+      "pct": 2.8,
+      "unique": 0
+    },
+    "interaction": {
+      "k": 2,
+      "n": 72,
+      "pct": 2.8,
+      "unique": 0
+    },
+    "unique_sum_check": "unique 합 = 24 + 4 = 28, 탈락 34 중 6개는 두 단계 이상에서 탈락"
+  },
+  "table12_recollider": {
+    "colliders": {
+      "k": 346,
+      "n": 1597,
+      "pct": 21.7,
+      "wilson95": [
+        0.197,
+        0.238
+      ]
+    },
+    "assets": {
+      "k": 39,
+      "n": 72,
+      "pct": 54.2
+    }
+  },
+  "table13_revision_paired": {
+    "first_round_success": {
+      "k": 20,
+      "n": 32,
+      "pct": 62.5
+    },
+    "success_at3": {
+      "independent": {
+        "k": 27,
+        "n": 32,
+        "wilson95": [
+          0.682,
+          0.931
+        ]
+      },
+      "coarse": {
+        "k": 26,
+        "n": 32,
+        "wilson95": [
+          0.647,
+          0.911
+        ]
+      },
+      "eris": {
+        "k": 32,
+        "n": 32,
+        "wilson95": [
+          0.893,
+          1.0
+        ]
+      }
+    },
+    "mcnemar_eris_vs_independent": {
+      "feasible_splits": 1,
+      "p_min": 0.0625,
+      "p_max": 0.0625,
+      "b_c_at_p_min": [
+        5,
+        0
+      ],
+      "b_c_at_p_max": [
+        5,
+        0
+      ]
+    },
+    "mcnemar_eris_vs_coarse": {
+      "feasible_splits": 1,
+      "p_min": 0.03125,
+      "p_max": 0.03125,
+      "b_c_at_p_min": [
+        6,
+        0
+      ],
+      "b_c_at_p_max": [
+        6,
+        0
+      ]
+    },
+    "mcnemar_independent_vs_coarse": {
+      "feasible_splits": 6,
+      "p_min": 1.0,
+      "p_max": 1.0,
+      "b_c_at_p_min": [
+        0,
+        1
+      ],
+      "b_c_at_p_max": [
+        0,
+        1
+      ]
+    },
+    "recovery_at1": {
+      "independent": "4/12",
+      "coarse": "2/12",
+      "eris": "11/12"
+    },
+    "fisher_recovery_at1_eris_11_12_vs_independent_4_12": 0.0094,
+    "consistency": "Success@2, @3 값은 1차 20/32 + Recovery 분자로 모두 재현됨(0.75, 0.84 / 0.69, 0.81 / 0.97, 1.00)"
+  },
+  "table14_backbones": {
+    "claude-opus-5-5 (high)": {
+      "raw_k": 26,
+      "eris_k": 40,
+      "n": 40,
+      "delta_pp": 35.0,
+      "mcnemar_range": {
+        "feasible_splits": 1,
+        "p_min": 0.00012,
+        "p_max": 0.00012,
+        "b_c_at_p_min": [
+          14,
+          0
+        ],
+        "b_c_at_p_max": [
+          14,
+          0
+        ]
+      }
+    },
+    "claude-fable-5-1": {
+      "raw_k": 28,
+      "eris_k": 38,
+      "n": 40,
+      "delta_pp": 25.0,
+      "mcnemar_range": {
+        "feasible_splits": 3,
+        "p_min": 0.00195,
+        "p_max": 0.01294,
+        "b_c_at_p_min": [
+          10,
+          0
+        ],
+        "b_c_at_p_max": [
+          12,
+          2
+        ]
+      }
+    },
+    "gpt-6-astra": {
+      "raw_k": 26,
+      "eris_k": 38,
+      "n": 40,
+      "delta_pp": 30.0,
+      "mcnemar_range": {
+        "feasible_splits": 3,
+        "p_min": 0.00049,
+        "p_max": 0.00418,
+        "b_c_at_p_min": [
+          12,
+          0
+        ],
+        "b_c_at_p_max": [
+          14,
+          2
+        ]
+      }
+    },
+    "gpt-6.1-sol": {
+      "raw_k": 23,
+      "eris_k": 37,
+      "n": 40,
+      "delta_pp": 35.0,
+      "mcnemar_range": {
+        "feasible_splits": 4,
+        "p_min": 0.00012,
+        "p_max": 0.00258,
+        "b_c_at_p_min": [
+          14,
+          0
+        ],
+        "b_c_at_p_max": [
+          17,
+          3
+        ]
+      }
+    },
+    "gpt-6-luna": {
+      "raw_k": 17,
+      "eris_k": 30,
+      "n": 40,
+      "delta_pp": 32.5,
+      "mcnemar_range": {
+        "feasible_splits": 11,
+        "p_min": 0.00024,
+        "p_max": 0.03508,
+        "b_c_at_p_min": [
+          13,
+          0
+        ],
+        "b_c_at_p_max": [
+          23,
+          10
+        ]
+      }
+    }
+  },
+  "table15_efficiency": {
+    "one_shot_rounds_total": 40.0,
+    "one_shot_check": "1회 시도 x 40단위 = 40 라운드 예상. 2.22 x 18 = 39.96으로 일치",
+    "independent_rounds_total": 99.1,
+    "eris_rounds_total": 68.0,
+    "cost_per_round_usd": {
+      "one_shot": 1.17,
+      "independent": 1.31,
+      "eris": 1.46
+    },
+    "eris_over_independent_cost_per_solved": 0.496,
+    "reading": "E RIS의 해결당 비용 절감은 라운드 수 감소(3.81 -> 1.70)에서 나온다. 라운드당 비용은 오히려 늘었다."
+  },
+  "fig19_eval_generation": {
+    "accept_direct_no_feedback": {
+      "k": 6,
+      "n": 12
+    },
+    "accept_direct_feedback": {
+      "k": 12,
+      "n": 12
+    },
+    "accept_questions_no_feedback": {
+      "k": 10,
+      "n": 12
+    },
+    "accept_questions_feedback": {
+      "k": 11,
+      "n": 12
+    },
+    "fisher_p_direct_nofb_vs_fb": 0.0137,
+    "fisher_p_direct_nofb_vs_questions_nofb": 0.193,
+    "caveat": "시행 3회, 과제 1개, 기록 15개. 시행은 독립 무작위 시드가 아니라 반복 호출이다(E.3)."
+  },
+  "fig14_isg_feedback": {
+    "gen_then_verify_5_of_18_vs_feedback_16_of_18": 0.000491,
+    "scene_only_1_of_10_vs_full_isg_5_of_10": 0.1409,
+    "spec_gen_first_attempt_4_of_54_vs_5attempts_40_of_54": 0.0
+  },
+  "table17_own_critic": {
+    "gpt-6.1-sol_scene_accept_1_of_10_vs_claude-sonnet_7_of_10": 0.0198,
+    "shared_opus_critic_3_of_10_vs_3_of_10": 1.0
+  },
+  "intro_claim_c20": {
+    "p95_20_jobs": 0.3585,
+    "p99_20_jobs": 0.8179,
+    "paper_says": "95% -> 36%, 99% -> 82%"
+  },
+  "table45_installs": {
+    "sum_5_regions": 519100,
+    "note": "서론의 '2025년 600,000대 이상 설치'는 본문 IFR 인용이며 이 표 5개 지역 합(519,100)과 직접 비교되지 않는다."
+  }
+}
