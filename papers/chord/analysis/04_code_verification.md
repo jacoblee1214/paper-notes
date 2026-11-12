@@ -46,6 +46,7 @@
 | D10 | **같은 body 위의 추가 접촉은 약하게만 벌합니다.** 보상은 사람 지지값이 0인 방향을 세지 않고, r_unintend는 사람 접촉이 없는 body에만 걸립니다. | toy에서 옆면 추가 접촉은 보상 1.00 → 0.87로만 떨어집니다(`03` §2.4). |
 | D11 | **r_relative가 꺼져 있습니다.** 함수는 있지만(`rewards.py:487–560`) 기본 RewardsCfg와 FlashCHORD 목적 함수 어디에도 등록되지 않았습니다. 커리큘럼 인자 기본값도 0입니다(`curriculum.py:132–133`). | 논문이 다물체 과제(삽입·붓기)의 핵심으로 설명한 항입니다. 공개 설정으로는 Table 1의 다물체 19개 결과가 이 항 없이 나온 것인지 알 수 없습니다. |
 | D12 | **시드 수:** Table 1 캡션은 3개, App. G는 DexMachina·SPIDER 시드 5개. | 표 오차 막대의 의미가 기준선마다 다를 수 있습니다. |
+| D13 | **SP-SR의 위치 오차 정의가 구현마다 다릅니다(2026-11-12 추가).** CHORD 공개 평가 코드 `fc/evaluation/metrics.py: spider_success`는 시간 평균한 원 위치 오차를 10 cm·0.5 rad와 비교하고, docstring에 "원 구현의 시간 평균 빼기는 생략한다"고 적었습니다. 중심화한 오차(`spider_centered_position_error`)는 진단 값(`spider_position_error_centered_m`)으로만 기록합니다. SPIDER 원 스크립트는 양손 모드에서 궤적 평균을 빼고(`flashdexretarget/04` D3), V2D 챌린지 키트 `metric_code/track_2/SP-SR.py`는 첫 프레임을 강체 정렬(`_warp_to_reference_start`)한 뒤 원 오차를 씁니다(`v2d_corl_tutorial/04` D2). 다음 커밋 `5226e34`의 `spider_success`도 같습니다. | Table 1이 어느 정의로 계산됐는지는 논문에 없습니다. 처음 분석에서 SP-SR을 "궤적 평균으로 중심화하는 관대한 지표"라고 한 것은 SPIDER 원 스크립트 기준이었고, CHORD 공개 코드와는 맞지 않아 `01` §3.3, `02` 표와 §3.4, 블로그를 고쳤습니다. SPIDER 대비 동률(t = 0.58)이라는 통계 결론은 그대로입니다. |
 
 ## 3. 주장별 재계산
 

@@ -27,7 +27,7 @@
 |---|---|---|
 | VOC(가상 물체 제어) 커리큘럼, 위치 기반 접촉 보상, ADD-AUC | DexMachina [1] | 학습 보조와 "Position Only" ablation, AUC 지표 |
 | 잔차 행동 공간, MP-SR 지표 | ManipTrans [2] | 리타겟 동작을 사전으로 쓰는 잔차 정책 |
-| SP-SR 지표 | SPIDER [3], `spider/postprocess/get_success_rate.py` | 양손 모드에서 궤적 평균을 빼는 관대한 지표(`flashdexretarget/04` D3) |
+| SP-SR 지표 | SPIDER [3], `spider/postprocess/get_success_rate.py` | 시간 평균 위치 오차 ≤ 10 cm, 자세 ≤ 0.5 rad. SPIDER 원 스크립트는 양손 모드에서 궤적 평균을 빼지만(`flashdexretarget/04` D3), CHORD 공개 평가 코드와 V2D 챌린지 키트는 빼지 않습니다(`04` D13, 2026-11-12 수정) |
 | 시뮬레이터 | Isaac Lab [42] (PPO 경로), Newton + Warp + JAX (FlashCHORD 경로) | 코드에 두 경로가 함께 있음(`04` §1) |
 | PPO 구현 | rsl_rl (`scripts/rsl_rl/train.py`) | 공개 첫 학습 경로 |
 | FlashSAC | FlashSAC (Holiday Robotics·KAIST) | v2 App. B가 말하는 학습기. FlashCHORD에 JAX로 들어 있음 |
@@ -68,7 +68,8 @@
 | 엄격한 지표 | MP-SR 0.894 (ManipTrans식) | SR_MT 0.00, SR_MT-Obj 0.02(XHand)·0.22(Sharpa) |
 | 판정 | 완료율 > 0.7 (rollout 여러 개의 비율) | FDR 쪽 판정(첫 성공에서 멈추고 실패 모션은 전체 비용 합산) |
 
-- 같은 Sharpa 손, 같은 SPIDER 지표에서도 0.926 vs 0.50입니다. 과제 묶음, 학습 레시피, 성공 판정(완료율 > 0.7 vs FDR의 rollout 판정)이 모두 달라서 둘 중 하나가 틀렸다고 할 수는 없습니다.
+- 같은 Sharpa 손, 같은 이름의 SPIDER 지표에서도 0.926 vs 0.50입니다. 과제 묶음, 학습 레시피, 성공 판정(완료율 > 0.7 vs FDR의 rollout 판정)이 모두 달라서 둘 중 하나가 틀렸다고 할 수는 없습니다.
+- 위치 오차 정의도 다릅니다(2026-11-12 추가). FDR의 SR_SPIDER는 양손에서 궤적 평균을 빼고(`flashdexretarget/04` D3), CHORD 공개 평가 코드는 빼지 않습니다(`04` D13). 평균을 빼면 오차가 줄어드는 쪽이므로, 이 정의 차이로는 FDR 쪽 값이 더 낮은 것을 설명할 수 없습니다.
 - 가장 큰 불일치는 엄격한 지표입니다. CHORD 자신은 MP-SR 0.894를 보고했는데, FDR에서는 SR_MT가 0입니다. FDR의 SR_MT는 손끝 6 cm, 관절 8 cm 조건까지 요구하고(`flashdexretarget/01` §3.1), CHORD의 MP-SR이 이 손 조건을 포함하는지는 논문에 적혀 있지 않습니다. 같은 이름의 지표라도 구현이 다를 수 있습니다.
 - FDR 쪽의 불리한 요인: XHand는 CHORD의 기본 손이 아니므로 접촉 링크 대응, 마찰원뿔(μ = 0.1), 보상 가중치를 다시 맞춰야 했을 수 있습니다. FDR이 XHand용으로 튜닝했는지는 알 수 없습니다(`flashdexretarget/01` §3.2 "기준선이 모두 공개 구현 그대로").
 - CHORD 쪽의 유리한 요인: Table 1의 60개 과제는 1,831개에서 고른 것이고 선택 기준이 없습니다. 기준선은 모두 CHORD 팀이 Sharpa로 옮겨 다시 구현했습니다.
