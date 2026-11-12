@@ -1,0 +1,287 @@
+{
+  "assumptions": {
+    "CTX": 3300,
+    "bw_GBps": {
+      "가정 273 GB/s": 273.0,
+      "보수 200 GB/s": 200.0
+    },
+    "T_token_greedy_ms": 7.0,
+    "T_round_ms": 12.0,
+    "stage_ms": [
+      20.0,
+      75.0,
+      70.0
+    ]
+  },
+  "bandwidth": {
+    "rows": [
+      {
+        "format": "BF16 가중치, 전체 head, BF16 KV",
+        "GB_per_token": 3.75,
+        "ceiling_tok_s_가정 273 GB/s": 72.8,
+        "ceiling_tok_s_보수 200 GB/s": 53.3
+      },
+      {
+        "format": "FP8 가중치, 전체 head, BF16 KV",
+        "GB_per_token": 2.064,
+        "ceiling_tok_s_가정 273 GB/s": 132.2,
+        "ceiling_tok_s_보수 200 GB/s": 96.9
+      },
+      {
+        "format": "FP8 가중치, 축소 head(레시피), FP8 KV",
+        "GB_per_token": 1.615,
+        "ceiling_tok_s_가정 273 GB/s": 169.0,
+        "ceiling_tok_s_보수 200 GB/s": 123.8
+      }
+    ],
+    "recipe_implied_GBps": 230.7,
+    "fraction_of_273": 0.845,
+    "note": "7 ms/토큰이 대역폭 바운드라고 보면 실효 대역폭은 약 230 GB/s (273 대비 약 85%). 커널 효율이 높다는 뜻이다."
+  },
+  "latency": {
+    "rows": [
+      {
+        "rounds": 0,
+        "rolling_5steps_ms": 165.0,
+        "rolling_10steps_ms": 235.0,
+        "cold_5steps_est_ms": 218.3
+      },
+      {
+        "rounds": 1,
+        "rolling_5steps_ms": 177.0,
+        "rolling_10steps_ms": 247.0,
+        "cold_5steps_est_ms": 230.3
+      },
+      {
+        "rounds": 2,
+        "rolling_5steps_ms": 189.0,
+        "rolling_10steps_ms": 259.0,
+        "cold_5steps_est_ms": 242.3
+      },
+      {
+        "rounds": 3,
+        "rolling_5steps_ms": 201.0,
+        "rolling_10steps_ms": 271.0,
+        "cold_5steps_est_ms": 254.3
+      },
+      {
+        "rounds": 4,
+        "rolling_5steps_ms": 213.0,
+        "rolling_10steps_ms": 283.0,
+        "cold_5steps_est_ms": 266.3
+      },
+      {
+        "rounds": 5,
+        "rolling_5steps_ms": 225.0,
+        "rolling_10steps_ms": 295.0,
+        "cold_5steps_est_ms": 278.3
+      },
+      {
+        "rounds": 6,
+        "rolling_5steps_ms": 237.0,
+        "rolling_10steps_ms": 307.0,
+        "cold_5steps_est_ms": 290.3
+      },
+      {
+        "rounds": 7,
+        "rolling_5steps_ms": 249.0,
+        "rolling_10steps_ms": 319.0,
+        "cold_5steps_est_ms": 302.3
+      }
+    ],
+    "floor_one_round_ms": 177.0,
+    "blog_range_rounds": [
+      0,
+      1,
+      2
+    ],
+    "recipe_range_rounds": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "example_clip_4_rounds_ms": 213.0,
+    "euler_5_to_10_extra_ms": 70.0,
+    "cold_start_penalty_1_round_ms_est": 53.3,
+    "ten_hz_budget_ms": 100.0,
+    "ten_hz_gap_ms_at_1_round": 77.0
+  },
+  "speculative": {
+    "rows": [
+      {
+        "alpha": 0.2,
+        "E_formula": 1.25,
+        "E_montecarlo": 1.248,
+        "speedup_vs_greedy": 0.73
+      },
+      {
+        "alpha": 0.4,
+        "E_formula": 1.667,
+        "E_montecarlo": 1.666,
+        "speedup_vs_greedy": 0.97
+      },
+      {
+        "alpha": 0.5,
+        "E_formula": 2.0,
+        "E_montecarlo": 2.014,
+        "speedup_vs_greedy": 1.17
+      },
+      {
+        "alpha": 0.6,
+        "E_formula": 2.499,
+        "E_montecarlo": 2.502,
+        "speedup_vs_greedy": 1.46
+      },
+      {
+        "alpha": 0.7,
+        "E_formula": 3.322,
+        "E_montecarlo": 3.331,
+        "speedup_vs_greedy": 1.94
+      },
+      {
+        "alpha": 0.8,
+        "E_formula": 4.859,
+        "E_montecarlo": 4.861,
+        "speedup_vs_greedy": 2.83
+      },
+      {
+        "alpha": 0.9,
+        "E_formula": 8.147,
+        "E_montecarlo": 8.058,
+        "speedup_vs_greedy": 4.75
+      }
+    ],
+    "breakeven_alpha": 0.417,
+    "rounds_for_L_alpha": [
+      {
+        "L_tokens": 10,
+        "alpha": 0.5,
+        "rounds_MC": 5.55
+      },
+      {
+        "L_tokens": 10,
+        "alpha": 0.7,
+        "rounds_MC": 3.76
+      },
+      {
+        "L_tokens": 10,
+        "alpha": 0.8,
+        "rounds_MC": 2.77
+      },
+      {
+        "L_tokens": 10,
+        "alpha": 0.9,
+        "rounds_MC": 1.89
+      },
+      {
+        "L_tokens": 25,
+        "alpha": 0.5,
+        "rounds_MC": 13.1
+      },
+      {
+        "L_tokens": 25,
+        "alpha": 0.7,
+        "rounds_MC": 8.17
+      },
+      {
+        "L_tokens": 25,
+        "alpha": 0.8,
+        "rounds_MC": 5.89
+      },
+      {
+        "L_tokens": 25,
+        "alpha": 0.9,
+        "rounds_MC": 3.72
+      },
+      {
+        "L_tokens": 50,
+        "alpha": 0.5,
+        "rounds_MC": 25.49
+      },
+      {
+        "L_tokens": 50,
+        "alpha": 0.7,
+        "rounds_MC": 15.61
+      },
+      {
+        "L_tokens": 50,
+        "alpha": 0.8,
+        "rounds_MC": 11.1
+      },
+      {
+        "L_tokens": 50,
+        "alpha": 0.9,
+        "rounds_MC": 6.87
+      },
+      {
+        "L_tokens": 100,
+        "alpha": 0.5,
+        "rounds_MC": 50.54
+      },
+      {
+        "L_tokens": 100,
+        "alpha": 0.7,
+        "rounds_MC": 30.85
+      },
+      {
+        "L_tokens": 100,
+        "alpha": 0.8,
+        "rounds_MC": 21.34
+      },
+      {
+        "L_tokens": 100,
+        "alpha": 0.9,
+        "rounds_MC": 12.94
+      }
+    ],
+    "latency_for_L_alpha0.8": [
+      {
+        "L_tokens": 10,
+        "greedy_ms": 235.0,
+        "spec_alpha0.8_rounds": 2.77,
+        "spec_alpha0.8_ms": 198.2
+      },
+      {
+        "L_tokens": 25,
+        "greedy_ms": 340.0,
+        "spec_alpha0.8_rounds": 5.89,
+        "spec_alpha0.8_ms": 235.6
+      },
+      {
+        "L_tokens": 50,
+        "greedy_ms": 515.0,
+        "spec_alpha0.8_rounds": 10.9,
+        "spec_alpha0.8_ms": 295.8
+      },
+      {
+        "L_tokens": 100,
+        "greedy_ms": 865.0,
+        "spec_alpha0.8_rounds": 21.25,
+        "spec_alpha0.8_ms": 420.0
+      },
+      {
+        "L_tokens": 256,
+        "greedy_ms": 1957.0,
+        "spec_alpha0.8_rounds": 53.45,
+        "spec_alpha0.8_ms": 806.4
+      }
+    ]
+  },
+  "nominal_sensitivity": [
+    {
+      "nominal_fraction": 0.0,
+      "avg_ms_CoT_2rounds_NOMINAL_0rounds": 189.0
+    },
+    {
+      "nominal_fraction": 0.5,
+      "avg_ms_CoT_2rounds_NOMINAL_0rounds": 177.0
+    },
+    {
+      "nominal_fraction": 0.9,
+      "avg_ms_CoT_2rounds_NOMINAL_0rounds": 167.4
+    }
+  ]
+}

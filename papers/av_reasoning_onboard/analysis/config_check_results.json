@@ -1,0 +1,43 @@
+{
+  "edge_params_B": {
+    "text_decoder_incl_embed_and_head": 1.963,
+    "vision_encoder": 0.411,
+    "projector_assumed_2layer": 0.077,
+    "backbone_total": 2.451,
+    "action_expert": 0.198,
+    "total": 2.649,
+    "card_claims": {
+      "backbone": 2.45,
+      "language_model": 1.96,
+      "siglip2": 0.41,
+      "projector": 0.08,
+      "expert": 0.2
+    }
+  },
+  "edge_bytes": {
+    "bf16_weights_GiB": 4.93,
+    "fp8_weights_GB_if_all_fp8": 2.65,
+    "kv_per_token_bf16_bytes": 114688,
+    "kv_prompt_3236_tokens_bf16_MiB": 353.9,
+    "kv_prompt_3236_tokens_6_copies_GiB": 2.07
+  },
+  "h100_measured_check": {
+    "peak_allocated_GiB_card": 8.4,
+    "weights_bf16_GiB": 4.93,
+    "remainder_GiB": 3.47,
+    "note": "잔여분은 활성값·ViT·KV·샘플링 버퍼 합. 6개 후보가 KV를 각자 가지면 6×KV가 잔여분 안에 들어간다(추정, 구조 미공개)."
+  },
+  "mac_fit": {
+    "unified_memory_GiB": 24,
+    "bf16_weights_fraction_of_24GiB": 0.206,
+    "note": "BF16 가중치 약 4.9 GiB는 24 GiB 통합 메모리에 여유 있게 들어간다. GPU 작업 한도는 별도 확인 필요."
+  },
+  "alpajudge_rf_params_B": {
+    "text_incl_tied_embed": 1.728,
+    "vision_24L_1024": 0.302,
+    "merger_assumed": 0.025,
+    "total": 2.055,
+    "bf16_GB": 4.11,
+    "card_note": "notebook/README: 모델 로드에 가중치 약 5 GB (BF16 추정 약 4.1 GB; 차이는 미공개 구조 세부 때문일 수 있음)"
+  }
+}
