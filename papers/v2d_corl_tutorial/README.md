@@ -15,6 +15,7 @@
 | `analysis/page_checks.py` | 숫자 점검 → `page_checks_results.json` (키트 경로를 주면 상수 대조) |
 | `analysis/plot_figures.py` | toy 그림 생성 |
 | `analysis/extra_kit_metrics.py` | 키트 지표 numpy 포트, 알려진 답 테스트, SP-SR 정의 비교, 떨림 곡선 (numpy, 약 4초) → `extra_kit_metrics_results.json`, `extra_kit_jitter.png` |
+| `analysis/extra_lift_hold.py` | lift-hold 성공 판정 numpy 포트, 합성 높이 트레이스 알려진 답, 프레임 속도·잡음·임계 교환 (numpy, 약 1초) → `extra_lift_hold_results.json` |
 | `report/figures/` | 직접 계산한 그림 5장 |
 
 ## 구현 가능성
@@ -28,6 +29,7 @@ CPU로 가능한 것은 페이지 숫자 점검, 키트 지표 상수 대조, �
 python3 -I analysis/gate_toy.py
 python3 -I analysis/plot_figures.py
 python3 -I analysis/extra_kit_metrics.py
+python3 -I analysis/extra_lift_hold.py
 python3 -I analysis/page_checks.py -
 ```
 

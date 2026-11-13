@@ -1,0 +1,884 @@
+{
+ "script": "analysis/extra_lift_hold.py",
+ "source": {
+  "judge": "repo/robotic_grounding/groot_finetune/closed_loop/evaluation.py (LiftHoldTracker.update, complete; evaluate_lift_hold)",
+  "config": "repo/robotic_grounding/groot_finetune/task_profiles/tissue_box_lift_hold.json (evaluator 블록, 값은 손으로 옮김)",
+  "commit": "sparse clone 5226e34",
+  "method": "식과 임계를 읽고 옮긴 독자 구현. 저장소 코드는 실행하지 않음"
+ },
+ "config": {
+  "final_min_lift_m": -0.01,
+  "hold_threshold_m": 0.05,
+  "lift_threshold_m": 0.1,
+  "max_descent_step_m": 0.01,
+  "max_terminal_range_m": 0.01,
+  "max_terminal_step_m": 0.005,
+  "min_hold_steps": 20,
+  "placement_threshold_m": 0.03,
+  "placement_window_steps": 20
+ },
+ "port_notes": {
+  "baseline": "첫 샘플이 기준 높이. evaluate_lift_hold에서 첫 샘플은 샘플 수에 들지 않음 (sample_count = N-1)",
+  "descent": "최대 들기가 hold_threshold 이상이 된 뒤에만 직전 샘플 대비 감소를 셈",
+  "placement": "마지막 placement_window 샘플(들기 기준)의 최댓값, 연속 차, 범위를 본다"
+ },
+ "nominal_fps": 20.0,
+ "scenarios": {
+  "clean_lift_hold": {
+   "label": 1,
+   "knots": [
+    [
+     0,
+     0
+    ],
+    [
+     0.5,
+     0
+    ],
+    [
+     1.5,
+     0.15
+    ],
+    [
+     3.5,
+     0.15
+    ],
+    [
+     4.5,
+     0.0
+    ],
+    [
+     6.0,
+     0.0
+    ]
+   ]
+  },
+  "early_drop": {
+   "label": 0,
+   "knots": [
+    [
+     0,
+     0
+    ],
+    [
+     0.5,
+     0
+    ],
+    [
+     1.0,
+     0.15
+    ],
+    [
+     1.5,
+     0.15
+    ],
+    [
+     1.6,
+     0.0
+    ],
+    [
+     3.0,
+     0.0
+    ]
+   ]
+  },
+  "dip_splits_hold": {
+   "label": 0,
+   "knots": [
+    [
+     0,
+     0
+    ],
+    [
+     0.5,
+     0
+    ],
+    [
+     0.6,
+     0.15
+    ],
+    [
+     0.7,
+     0.15
+    ],
+    [
+     1.6,
+     0.0
+    ],
+    [
+     1.9,
+     0.0
+    ],
+    [
+     2.0,
+     0.15
+    ],
+    [
+     2.1,
+     0.15
+    ],
+    [
+     3.0,
+     0.0
+    ],
+    [
+     5.0,
+     0.0
+    ],
+    [
+     6.0,
+     0.0
+    ]
+   ]
+  },
+  "dip_then_long_hold": {
+   "label": 1,
+   "knots": [
+    [
+     0,
+     0
+    ],
+    [
+     0.5,
+     0
+    ],
+    [
+     0.6,
+     0.15
+    ],
+    [
+     0.7,
+     0.15
+    ],
+    [
+     1.6,
+     0.0
+    ],
+    [
+     1.9,
+     0.0
+    ],
+    [
+     2.0,
+     0.15
+    ],
+    [
+     3.2,
+     0.15
+    ],
+    [
+     4.1,
+     0.0
+    ],
+    [
+     6.0,
+     0.0
+    ]
+   ]
+  },
+  "slow_lift": {
+   "label": 1,
+   "knots": [
+    [
+     0,
+     0
+    ],
+    [
+     0.5,
+     0
+    ],
+    [
+     4.5,
+     0.15
+    ],
+    [
+     6.0,
+     0.15
+    ],
+    [
+     7.0,
+     0.0
+    ],
+    [
+     8.5,
+     0.0
+    ]
+   ]
+  },
+  "near_miss_hold": {
+   "label": 0,
+   "knots": [
+    [
+     0,
+     0
+    ],
+    [
+     0.5,
+     0
+    ],
+    [
+     0.6,
+     0.15
+    ],
+    [
+     0.88,
+     0.15
+    ],
+    [
+     1.78,
+     0.0
+    ],
+    [
+     3.0,
+     0.0
+    ],
+    [
+     5.0,
+     0.0
+    ]
+   ]
+  },
+  "low_lift": {
+   "label": 0,
+   "knots": [
+    [
+     0,
+     0
+    ],
+    [
+     0.5,
+     0
+    ],
+    [
+     1.5,
+     0.08
+    ],
+    [
+     3.5,
+     0.08
+    ],
+    [
+     4.5,
+     0.0
+    ],
+    [
+     6.0,
+     0.0
+    ]
+   ]
+  },
+  "held_at_end": {
+   "label": 0,
+   "knots": [
+    [
+     0,
+     0
+    ],
+    [
+     0.5,
+     0
+    ],
+    [
+     1.5,
+     0.15
+    ],
+    [
+     5.0,
+     0.15
+    ]
+   ]
+  },
+  "static": {
+   "label": 0,
+   "knots": [
+    [
+     0,
+     0
+    ],
+    [
+     6.0,
+     0.0
+    ]
+   ]
+  }
+ },
+ "known_answers": {
+  "clean_lift_hold": {
+   "expected": true,
+   "judge": true,
+   "clauses": {
+    "lift": true,
+    "hold": true,
+    "final": true,
+    "placement": true,
+    "descent": true
+   },
+   "max_hold_steps": 67,
+   "max_lift_m": 0.15,
+   "ok": true
+  },
+  "early_drop": {
+   "expected": false,
+   "judge": false,
+   "clauses": {
+    "lift": true,
+    "hold": false,
+    "final": true,
+    "placement": true,
+    "descent": false
+   },
+   "max_hold_steps": 18,
+   "max_lift_m": 0.15,
+   "ok": true
+  },
+  "dip_splits_hold": {
+   "expected": false,
+   "judge": false,
+   "clauses": {
+    "lift": true,
+    "hold": false,
+    "final": true,
+    "placement": true,
+    "descent": true
+   },
+   "max_hold_steps": 16,
+   "max_lift_m": 0.15,
+   "ok": true
+  },
+  "dip_then_long_hold": {
+   "expected": true,
+   "judge": true,
+   "clauses": {
+    "lift": true,
+    "hold": true,
+    "final": true,
+    "placement": true,
+    "descent": true
+   },
+   "max_hold_steps": 37,
+   "max_lift_m": 0.15,
+   "ok": true
+  },
+  "slow_lift": {
+   "expected": true,
+   "judge": true,
+   "clauses": {
+    "lift": true,
+    "hold": true,
+    "final": true,
+    "placement": true,
+    "descent": true
+   },
+   "max_hold_steps": 97,
+   "max_lift_m": 0.15,
+   "ok": true
+  },
+  "near_miss_hold": {
+   "expected": false,
+   "judge": false,
+   "clauses": {
+    "lift": true,
+    "hold": false,
+    "final": true,
+    "placement": true,
+    "descent": true
+   },
+   "max_hold_steps": 19,
+   "max_lift_m": 0.15,
+   "ok": true
+  },
+  "low_lift": {
+   "expected": false,
+   "judge": false,
+   "clauses": {
+    "lift": false,
+    "hold": true,
+    "final": true,
+    "placement": true,
+    "descent": true
+   },
+   "max_hold_steps": 55,
+   "max_lift_m": 0.08,
+   "ok": true
+  },
+  "held_at_end": {
+   "expected": false,
+   "judge": false,
+   "clauses": {
+    "lift": true,
+    "hold": true,
+    "final": true,
+    "placement": false,
+    "descent": true
+   },
+   "max_hold_steps": 84,
+   "max_lift_m": 0.15,
+   "ok": true
+  },
+  "static": {
+   "expected": false,
+   "judge": false,
+   "clauses": {
+    "lift": false,
+    "hold": false,
+    "final": true,
+    "placement": true,
+    "descent": true
+   },
+   "max_hold_steps": 0,
+   "max_lift_m": 0.0,
+   "ok": true
+  }
+ },
+ "fps_sweep": {
+  "10.0": {
+   "clean_lift_hold": {
+    "label": 1,
+    "judge": false,
+    "clauses": {
+     "lift": true,
+     "hold": true,
+     "final": true,
+     "placement": false,
+     "descent": false
+    },
+    "max_hold_steps": 33
+   },
+   "early_drop": {
+    "label": 0,
+    "judge": false,
+    "clauses": {
+     "lift": true,
+     "hold": false,
+     "final": true,
+     "placement": false,
+     "descent": false
+    },
+    "max_hold_steps": 9
+   },
+   "dip_splits_hold": {
+    "label": 0,
+    "judge": false,
+    "clauses": {
+     "lift": true,
+     "hold": false,
+     "final": true,
+     "placement": true,
+     "descent": false
+    },
+    "max_hold_steps": 8
+   },
+   "dip_then_long_hold": {
+    "label": 1,
+    "judge": false,
+    "clauses": {
+     "lift": true,
+     "hold": false,
+     "final": true,
+     "placement": true,
+     "descent": false
+    },
+    "max_hold_steps": 18
+   },
+   "slow_lift": {
+    "label": 1,
+    "judge": false,
+    "clauses": {
+     "lift": true,
+     "hold": true,
+     "final": true,
+     "placement": false,
+     "descent": false
+    },
+    "max_hold_steps": 48
+   }
+  },
+  "20.0": {
+   "clean_lift_hold": {
+    "label": 1,
+    "judge": true,
+    "clauses": {
+     "lift": true,
+     "hold": true,
+     "final": true,
+     "placement": true,
+     "descent": true
+    },
+    "max_hold_steps": 67
+   },
+   "early_drop": {
+    "label": 0,
+    "judge": false,
+    "clauses": {
+     "lift": true,
+     "hold": false,
+     "final": true,
+     "placement": true,
+     "descent": false
+    },
+    "max_hold_steps": 18
+   },
+   "dip_splits_hold": {
+    "label": 0,
+    "judge": false,
+    "clauses": {
+     "lift": true,
+     "hold": false,
+     "final": true,
+     "placement": true,
+     "descent": true
+    },
+    "max_hold_steps": 16
+   },
+   "dip_then_long_hold": {
+    "label": 1,
+    "judge": true,
+    "clauses": {
+     "lift": true,
+     "hold": true,
+     "final": true,
+     "placement": true,
+     "descent": true
+    },
+    "max_hold_steps": 37
+   },
+   "slow_lift": {
+    "label": 1,
+    "judge": true,
+    "clauses": {
+     "lift": true,
+     "hold": true,
+     "final": true,
+     "placement": true,
+     "descent": true
+    },
+    "max_hold_steps": 97
+   }
+  },
+  "30.0": {
+   "clean_lift_hold": {
+    "label": 1,
+    "judge": true,
+    "clauses": {
+     "lift": true,
+     "hold": true,
+     "final": true,
+     "placement": true,
+     "descent": true
+    },
+    "max_hold_steps": 100
+   },
+   "early_drop": {
+    "label": 0,
+    "judge": false,
+    "clauses": {
+     "lift": true,
+     "hold": true,
+     "final": true,
+     "placement": true,
+     "descent": false
+    },
+    "max_hold_steps": 27
+   },
+   "dip_splits_hold": {
+    "label": 0,
+    "judge": true,
+    "clauses": {
+     "lift": true,
+     "hold": true,
+     "final": true,
+     "placement": true,
+     "descent": true
+    },
+    "max_hold_steps": 23
+   },
+   "dip_then_long_hold": {
+    "label": 1,
+    "judge": true,
+    "clauses": {
+     "lift": true,
+     "hold": true,
+     "final": true,
+     "placement": true,
+     "descent": true
+    },
+    "max_hold_steps": 56
+   },
+   "slow_lift": {
+    "label": 1,
+    "judge": true,
+    "clauses": {
+     "lift": true,
+     "hold": true,
+     "final": true,
+     "placement": true,
+     "descent": true
+    },
+    "max_hold_steps": 144
+   }
+  }
+ },
+ "noise_sweep": {
+  "trials_per_cell": 200,
+  "rows": {
+   "0.0": {
+    "sigma_m": 0.0,
+    "FRR_positive_rejected": {
+     "clean_lift_hold": 0.0,
+     "dip_then_long_hold": 0.0,
+     "slow_lift": 0.0
+    },
+    "FAR_negative_accepted": {
+     "early_drop": 0.0,
+     "dip_splits_hold": 0.0,
+     "near_miss_hold": 0.0,
+     "low_lift": 0.0,
+     "held_at_end": 0.0,
+     "static": 0.0
+    },
+    "FRR_mean": 0.0,
+    "FAR_mean": 0.0
+   },
+   "0.0005": {
+    "sigma_m": 0.0005,
+    "FRR_positive_rejected": {
+     "clean_lift_hold": 0.0,
+     "dip_then_long_hold": 0.32499999999999996,
+     "slow_lift": 0.0
+    },
+    "FAR_negative_accepted": {
+     "early_drop": 0.0,
+     "dip_splits_hold": 0.0,
+     "near_miss_hold": 0.0,
+     "low_lift": 0.0,
+     "held_at_end": 0.0,
+     "static": 0.0
+    },
+    "FRR_mean": 0.10833333333333332,
+    "FAR_mean": 0.0
+   },
+   "0.001": {
+    "sigma_m": 0.001,
+    "FRR_positive_rejected": {
+     "clean_lift_hold": 0.5549999999999999,
+     "dip_then_long_hold": 0.995,
+     "slow_lift": 0.5549999999999999
+    },
+    "FAR_negative_accepted": {
+     "early_drop": 0.0,
+     "dip_splits_hold": 0.0,
+     "near_miss_hold": 0.0,
+     "low_lift": 0.0,
+     "held_at_end": 0.0,
+     "static": 0.0
+    },
+    "FRR_mean": 0.7016666666666665,
+    "FAR_mean": 0.0
+   },
+   "0.002": {
+    "sigma_m": 0.002,
+    "FRR_positive_rejected": {
+     "clean_lift_hold": 0.995,
+     "dip_then_long_hold": 1.0,
+     "slow_lift": 1.0
+    },
+    "FAR_negative_accepted": {
+     "early_drop": 0.0,
+     "dip_splits_hold": 0.0,
+     "near_miss_hold": 0.0,
+     "low_lift": 0.0,
+     "held_at_end": 0.0,
+     "static": 0.0
+    },
+    "FRR_mean": 0.9983333333333334,
+    "FAR_mean": 0.0
+   },
+   "0.005": {
+    "sigma_m": 0.005,
+    "FRR_positive_rejected": {
+     "clean_lift_hold": 1.0,
+     "dip_then_long_hold": 1.0,
+     "slow_lift": 1.0
+    },
+    "FAR_negative_accepted": {
+     "early_drop": 0.0,
+     "dip_splits_hold": 0.0,
+     "near_miss_hold": 0.0,
+     "low_lift": 0.0,
+     "held_at_end": 0.0,
+     "static": 0.0
+    },
+    "FRR_mean": 1.0,
+    "FAR_mean": 0.0
+   },
+   "0.01": {
+    "sigma_m": 0.01,
+    "FRR_positive_rejected": {
+     "clean_lift_hold": 1.0,
+     "dip_then_long_hold": 1.0,
+     "slow_lift": 1.0
+    },
+    "FAR_negative_accepted": {
+     "early_drop": 0.0,
+     "dip_splits_hold": 0.0,
+     "near_miss_hold": 0.0,
+     "low_lift": 0.0,
+     "held_at_end": 0.0,
+     "static": 0.0
+    },
+    "FRR_mean": 1.0,
+    "FAR_mean": 0.0
+   },
+   "0.02": {
+    "sigma_m": 0.02,
+    "FRR_positive_rejected": {
+     "clean_lift_hold": 1.0,
+     "dip_then_long_hold": 1.0,
+     "slow_lift": 1.0
+    },
+    "FAR_negative_accepted": {
+     "early_drop": 0.0,
+     "dip_splits_hold": 0.0,
+     "near_miss_hold": 0.0,
+     "low_lift": 0.0,
+     "held_at_end": 0.0,
+     "static": 0.0
+    },
+    "FRR_mean": 1.0,
+    "FAR_mean": 0.0
+   }
+  }
+ },
+ "clause_failure_rate_clean_lift_hold": {
+  "0.0": {
+   "descent": 0.0,
+   "placement": 0.0,
+   "hold": 0.0,
+   "lift": 0.0,
+   "final": 0.0
+  },
+  "0.001": {
+   "descent": 0.575,
+   "placement": 0.005,
+   "hold": 0.0,
+   "lift": 0.0,
+   "final": 0.0
+  },
+  "0.002": {
+   "descent": 0.995,
+   "placement": 0.745,
+   "hold": 0.0,
+   "lift": 0.0,
+   "final": 0.0
+  },
+  "0.005": {
+   "descent": 1.0,
+   "placement": 1.0,
+   "hold": 0.0,
+   "lift": 0.0,
+   "final": 0.115
+  }
+ },
+ "tradeoff": {
+  "min_hold_steps": {
+   "10": {
+    "FAR_dip_splits_hold": 1.0,
+    "FAR_near_miss_hold_sigma0": 1.0,
+    "FAR_near_miss_hold_sigma0.002": 0.0,
+    "FAR_early_drop": 0.0,
+    "FRR_clean_sigma0": 0.0,
+    "FRR_dip_then_long_hold_sigma0": 0.0
+   },
+   "14": {
+    "FAR_dip_splits_hold": 1.0,
+    "FAR_near_miss_hold_sigma0": 1.0,
+    "FAR_near_miss_hold_sigma0.002": 0.0,
+    "FAR_early_drop": 0.0,
+    "FRR_clean_sigma0": 0.0,
+    "FRR_dip_then_long_hold_sigma0": 0.0
+   },
+   "16": {
+    "FAR_dip_splits_hold": 1.0,
+    "FAR_near_miss_hold_sigma0": 1.0,
+    "FAR_near_miss_hold_sigma0.002": 0.0,
+    "FAR_early_drop": 0.0,
+    "FRR_clean_sigma0": 0.0,
+    "FRR_dip_then_long_hold_sigma0": 0.0
+   },
+   "20": {
+    "FAR_dip_splits_hold": 0.0,
+    "FAR_near_miss_hold_sigma0": 0.0,
+    "FAR_near_miss_hold_sigma0.002": 0.0,
+    "FAR_early_drop": 0.0,
+    "FRR_clean_sigma0": 0.0,
+    "FRR_dip_then_long_hold_sigma0": 0.0
+   },
+   "26": {
+    "FAR_dip_splits_hold": 0.0,
+    "FAR_near_miss_hold_sigma0": 0.0,
+    "FAR_near_miss_hold_sigma0.002": 0.0,
+    "FAR_early_drop": 0.0,
+    "FRR_clean_sigma0": 0.0,
+    "FRR_dip_then_long_hold_sigma0": 0.0
+   }
+  },
+  "max_terminal_step_m_vs_noise": {
+   "0.003": {
+    "FRR_clean_sigma0.0005": 0.0,
+    "FRR_clean_sigma0.001": 0.765,
+    "FRR_clean_sigma0.002": 1.0
+   },
+   "0.005": {
+    "FRR_clean_sigma0.0005": 0.010000000000000009,
+    "FRR_clean_sigma0.001": 0.495,
+    "FRR_clean_sigma0.002": 1.0
+   },
+   "0.008": {
+    "FRR_clean_sigma0.0005": 0.0050000000000000044,
+    "FRR_clean_sigma0.001": 0.55,
+    "FRR_clean_sigma0.002": 1.0
+   },
+   "0.012": {
+    "FRR_clean_sigma0.0005": 0.0,
+    "FRR_clean_sigma0.001": 0.56,
+    "FRR_clean_sigma0.002": 1.0
+   }
+  },
+  "max_descent_step_m_vs_noise": {
+   "0.005": {
+    "FRR_clean_sigma0.0": 1.0,
+    "FRR_clean_sigma0.001": 1.0,
+    "FRR_clean_sigma0.002": 1.0
+   },
+   "0.01": {
+    "FRR_clean_sigma0.0": 0.0,
+    "FRR_clean_sigma0.001": 0.5449999999999999,
+    "FRR_clean_sigma0.002": 1.0
+   },
+   "0.02": {
+    "FRR_clean_sigma0.0": 0.0,
+    "FRR_clean_sigma0.001": 0.0,
+    "FRR_clean_sigma0.002": 0.7
+   }
+  },
+  "lift_threshold_m_vs_low_lift": {
+   "0.07": {
+    "FAR_low_lift_0.08m": 1.0,
+    "FRR_clean_sigma0": 0.0
+   },
+   "0.1": {
+    "FAR_low_lift_0.08m": 0.0,
+    "FRR_clean_sigma0": 0.0
+   },
+   "0.12": {
+    "FAR_low_lift_0.08m": 0.0,
+    "FRR_clean_sigma0": 0.0
+   }
+  }
+ },
+ "versions": {
+  "python": "3.12.7",
+  "numpy": "1.26.4"
+ },
+ "wall_time_s": 0.9
+}
