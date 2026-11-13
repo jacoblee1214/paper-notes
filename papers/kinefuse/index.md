@@ -1,6 +1,7 @@
 ---
 title: "KineFuse: 가림 속 손가락 자세 추적에서 촉각 토큰을 어떻게 묶을까"
 date: 2026-11-09
+venue: "IROS 2026"
 tags: [in-hand pose tracking, visuo-haptic fusion, dexterous manipulation, IROS 2026, 평가 설계]
 paper: "KineFuse: Kinematic-Aware Haptic Fusion for In-Hand Occluded-Object Pose Tracking (arXiv:2607.14842, IROS 2026 채택)"
 code: "공식 코드 없음 (cold-young/kine-fuse는 프로젝트 페이지뿐, 2026-11-09 확인)"

@@ -3,7 +3,8 @@ title: "DexTouch-WM: 사람 촉각 데이터는 로봇 세계모델을 돕는가
 date: 2026-11-10
 tags: [tactile, world-model, dexterous-manipulation, human-data, IROS-workshop]
 paper: "arXiv:2609.20649 (v2)"
-venue: "IROS 2026 워크숍(RoBoWoMo), 라이트닝 토크 (본 트랙 아님)"
+venue: "IROS 2026 워크숍"
+venue_note: "IROS 2026 워크숍(RoBoWoMo), 라이트닝 토크 (본 트랙 아님)"
 code: "공식 코드 없음 (GitHub·웹 조사, 2026-11-10)"
 summary: "사람 장갑 촉각을 로봇 세계모델에 섞는 DexTouch-WM의 스케일링 결과를 재계산하고, 정책 평가 통계와 전이 조건을 토이로 점검했습니다."
 ---

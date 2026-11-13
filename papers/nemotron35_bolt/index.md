@@ -1,6 +1,7 @@
 ---
 title: "Nemotron 3.5 Bolt 24GB 읽기: 이름의 24GB는 텍스트 전용이고, 속도는 2비트가 아니라 Mamba가 정한다"
 date: 2026-10-30
+venue: "학회 표기 없음 (arXiv)"
 tags: [llm, vlm, quantization, moe, mamba, speculative-decoding, local-inference, paper-review]
 paper: https://arxiv.org/abs/2610.33039
 project: https://research.nvidia.com/labs/nemotron/Nemotron-3.5-Bolt-24GB/

@@ -1,6 +1,7 @@
 ---
 title: "GPT-as-Tactile-Policy 읽고 직접 돌려 보기: 촉각을 이해하는가, 증류된 규칙을 따르는가"
 date: 2026-10-29
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, tactile, foundation-model, llm-policy, evaluation, paper-review]
 paper: https://arxiv.org/abs/2610.28457
 project: https://gpt-as-tactile-policy.github.io/

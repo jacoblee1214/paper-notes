@@ -1,6 +1,7 @@
 ---
 title: "BA-T 읽기: bundle adjustment의 정보 흐름을 Transformer 층 하나로, 그런데 코드는 다르게"
 date: 2026-11-09
+venue: "NeurIPS 2026"
 tags: [3d-reconstruction, bundle-adjustment, transformer, pose-estimation, paper-review]
 paper: https://arxiv.org/abs/2606.03287
 code: https://github.com/zhangganlin/BA-T

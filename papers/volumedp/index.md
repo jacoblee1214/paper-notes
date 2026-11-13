@@ -1,6 +1,7 @@
 ---
 title: "VolumeDP: RGB 이미지를 3D 복셀 볼륨으로 올리면 정책이 나아지나"
 date: 2026-11-11
+venue: "IROS 2026"
 tags: [로봇 학습, 확산 정책, 3D 표현, 모방 학습, 분석]
 paper: "arXiv:2603.17720v2 (Zhou, Xue, Ye, Yuan, Zhao, Jiang, IROS 2026 채택)"
 project: "https://yzc0731.github.io/VolumeDP/"

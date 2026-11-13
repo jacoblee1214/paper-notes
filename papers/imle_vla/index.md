@@ -1,6 +1,7 @@
 ---
 title: "IMLE-VLA: 단일 단계 행동 생성은 얼마나 빠르고 얼마나 정확한가"
 date: 2026-11-10
+venue: "IROS 2026"
 tags: [VLA, flow-matching, IMLE, LIBERO, 통계]
 paper: "arXiv:2609.10915 (IROS 2026 채택)"
 code: "https://github.com/kianhk6/IMLE-VLA (Apache-2.0)"

@@ -1,6 +1,7 @@
 ---
 title: "ResTacVLA 읽기: 촉각 잔차와 'surprise' 게이트는 무엇을 보고 있나"
 date: 2026-11-09
+venue: "IROS 2026"
 tags: [robotics, tactile, vla, contact-rich-manipulation, predictive-coding, paper-review]
 paper: https://arxiv.org/abs/2607.03387
 project: https://awilekong.github.io/ResTacVLA/

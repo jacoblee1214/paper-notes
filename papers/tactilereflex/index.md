@@ -1,6 +1,7 @@
 ---
 title: "TactileReflex 읽기: 노이즈로 임계값을 정했다는 주장, 어디까지 맞나"
 date: 2026-11-10
+venue: "IROS 2026"
 tags: [robotics, tactile, grasp-control, reflex, paper-review]
 paper: https://arxiv.org/abs/2605.23568
 project: https://shayfeng.github.io/TactileReflex/

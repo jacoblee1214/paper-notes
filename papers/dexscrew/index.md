@@ -1,6 +1,8 @@
 ---
 title: "DexScrew 읽기: 촉각은 평균이 아니라 꼬리를 바꾼다"
 date: 2026-10-28
+venue: "ICRA 2026"
+venue_note: "arXiv Journal ref"
 tags: [robotics, dexterous-manipulation, sim-to-real, tactile, behavior-cloning, paper-review]
 paper: https://arxiv.org/abs/2512.02011
 code: https://github.com/x-robotics-lab/dexscrew

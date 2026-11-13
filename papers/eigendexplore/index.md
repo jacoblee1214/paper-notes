@@ -1,6 +1,7 @@
 ---
 title: "EigenDEXplore 읽기: 사람 손 협응을 탐색 잡음에만 넣으면, 그런데 잡음의 크기는 같았나"
 date: 2026-10-29
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, reinforcement-learning, exploration, paper-review]
 paper: https://arxiv.org/abs/2610.07681
 code: https://github.com/hgupt3/eigendexplore

@@ -1,6 +1,7 @@
 ---
 title: "AW-0 읽기: 코드로 계획하는 World Action Model, 그런데 이득은 어디서 오는가"
 date: 2026-10-29
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, world-action-model, vla, code-as-policies, diffusion, paper-review]
 paper: https://arxiv.org/abs/2610.30136
 code: https://github.com/ZhuoyangLiu2005/agentic-wam

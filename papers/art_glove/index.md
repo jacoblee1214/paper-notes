@@ -3,7 +3,8 @@ title: "ART-Glove: 관절형 촉각 장갑은 접촉이 담긴 사람 시연을 
 date: 2026-11-10
 tags: [tactile-glove, dexterous-manipulation, data-collection, retargeting, hardware]
 paper: "arXiv:2606.16370 (v1)"
-venue: "확인 불가 (arXiv 댓글과 저널 참조 없음, 본문과 프로젝트 페이지에 학회 표기 없음)"
+venue: "학회 표기 없음 (arXiv)"
+venue_note: "확인 불가 (arXiv 댓글과 저널 참조 없음, 본문과 프로젝트 페이지에 학회 표기 없음)"
 code: "기계 설계 파일과 BOM만 공개 (GitHub linchangyi1/ART-Glove, 라이선스 표기 없음, 커밋 7e210b8)"
 project: "https://linchangyi1.github.io/ART-Glove"
 summary: "16개 강체 면, 22개 관절, 2048 taxel 촉각을 가진 장갑의 수치를 재계산하고, 촉각 위치와 힘 추정, 접촉 라벨 리타게팅을 CPU 토이로 점검했습니다. 기계 파일은 공개되어 있지만 센싱 파일이 없어 재현은 부분만 가능합니다."

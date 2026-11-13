@@ -1,6 +1,7 @@
 ---
 title: "FlashDexRetarget 읽기: 시연 수백 개를 정책 하나로, 그런데 무엇이 성능을 만들었나"
 date: 2026-10-28
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, retargeting, reinforcement-learning, paper-review]
 paper: https://arxiv.org/abs/2610.01849
 code: https://github.com/Holiday-Robot/FlashDexRetarget

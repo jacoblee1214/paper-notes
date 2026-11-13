@@ -1,6 +1,7 @@
 ---
 title: "NestDex 읽기: 손가락은 기술이, 팔은 사람이. 그런데 빨라진 것은 효율일까 신뢰성일까"
 date: 2026-11-05
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, teleoperation, imitation-learning, paper-review]
 paper: https://arxiv.org/abs/2608.13362
 project: https://aus.bot/research/nestdex/

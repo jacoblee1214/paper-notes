@@ -1,6 +1,7 @@
 ---
 title: "RPD 분석: PPO에 교사 VLA 행동을 당기는 항 하나를 더하면"
 date: 2026-11-11
+venue: "IROS 2026"
 tags: [VLA, reinforcement-learning, policy-distillation, ManiSkill, IROS2026]
 paper: "arXiv:2503.05833 (Refined Policy Distillation, IROS 2026 채택)"
 code: "https://github.com/Refined-Policy-Distillation/RPD (Apache-2.0)"

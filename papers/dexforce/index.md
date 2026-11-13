@@ -1,6 +1,8 @@
 ---
 title: "DexForce 읽기: 힘을 위치 목표에 담는 한 줄, 그런데 그 한 줄은 1.4배였다"
 date: 2026-10-29
+venue: "RA-L 2025"
+venue_note: "프로젝트 페이지 기준 2025년 6월 게재"
 tags: [robotics, dexterous-manipulation, imitation-learning, force-sensing, impedance-control, paper-review]
 paper: https://arxiv.org/abs/2501.10356
 project: https://clairelc.github.io/dexforce.github.io/

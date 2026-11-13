@@ -1,6 +1,8 @@
 ---
 title: "영상에서 로봇 학습 데이터까지: 검증 게이트 튜토리얼 분석"
 date: 2026-11-12
+venue: "CoRL 2026"
+venue_note: "튜토리얼 (논문 아님)"
 tags: [robot-learning, video-to-data, dexterous-manipulation, data-validation, CoRL-2026]
 project: "https://nvidia-isaac.github.io/video_to_data/v2d_corl_tutorial/"
 code: "https://github.com/nvidia-isaac/video_to_data"

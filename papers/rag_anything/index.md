@@ -1,6 +1,7 @@
 ---
 title: "RAG-Anything 읽기: 표를 검산하고 코드를 열어 보니"
 date: 2026-10-28
+venue: "학회 표기 없음 (arXiv)"
 tags: [rag, multimodal, knowledge-graph, document-qa, paper-review]
 paper: https://arxiv.org/abs/2510.12323
 code: https://github.com/HKUDS/RAG-Anything

@@ -1,6 +1,7 @@
 ---
 title: "TactSpace: 공유 잠재로 촉각 sim-to-real 옮기기 (분석)"
 date: 2026-11-10
+venue: "IROS 2026"
 tags: [tactile, sim-to-real, representation-learning, IROS2026]
 paper: "arXiv:2606.18959v1"
 code: "https://github.com/leggedrobotics/TactSpace (메타 저장소, 시뮬레이터·정렬 저장소는 접근 불가)"

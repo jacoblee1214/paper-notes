@@ -1,6 +1,7 @@
 ---
 title: "Mana 읽기: 1 cm 도구를 집어 작동시키는 keyframe 데이터 생성, 끝단 성공률은 얼마인가"
 date: 2026-10-29
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, sim-to-real, reinforcement-learning, data-generation, paper-review]
 paper: https://arxiv.org/abs/2606.13677
 project: https://zhaohengyin.github.io/mana

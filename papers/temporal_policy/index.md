@@ -1,6 +1,7 @@
 ---
 title: "Temporal Policy: 가우시안 잡음 대신 행동 이력에서 흐름을 시작하면 무엇이 달라지나"
 date: 2026-11-10
+venue: "IROS 2026"
 tags: [로봇 학습, 플로우 매칭, 확률적 보간, 행동 청크, 분석]
 paper: "arXiv:2607.29482 (Miller & Jagersand, IROS 2026 채택)"
 code: "https://github.com/dmiller12/TemporalPolicy (MIT)"

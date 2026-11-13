@@ -1,6 +1,7 @@
 ---
 title: "Beyond Implicit Force 읽기: ACT의 '암묵적 힘'은 감지일까 구동일까"
 date: 2026-11-09
+venue: "IROS 2026"
 tags: [robotics, imitation-learning, ACT, force-control, teleoperation, paper-review]
 paper: https://arxiv.org/abs/2607.14578
 summary: "ALOHA식 원격조작 데이터로 학습한 ACT가 힘을 아는 듯 보이는 이유를 leader-follower 불일치에서 찾고, 서보 전류 토크로 대신하는 IROS 2026 논문을 표 재계산과 물리 toy로 다시 읽었습니다."

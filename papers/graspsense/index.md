@@ -1,6 +1,7 @@
 ---
 title: "GraspSense 읽기: 힘 지도로 고르고, 같은 지도로 판정하면"
 date: 2026-10-28
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, grasp-planning, impedance-control, paper-review]
 paper: https://arxiv.org/abs/2604.05697
 code: https://github.com/eliizavetas/GraspSense

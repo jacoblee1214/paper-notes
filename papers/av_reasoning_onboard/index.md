@@ -1,6 +1,7 @@
 ---
 title: "Alpamayo 2 Edge와 AlpaJudge: 온보드 지연 예산으로 블로그 수치를 점검하다"
 date: 2026-11-12
+venue: "기술 보고서·블로그"
 tags: [autonomous-driving, vla, edge-inference, speculative-decoding, judge-model]
 paper: "NVIDIA 기술 블로그: Running AV Reasoning Models Within Onboard Compute and Latency Limits (2026-11-10)"
 project: "https://developer.nvidia.com/blog/running-av-reasoning-models-within-onboard-compute-and-latency-limits/"

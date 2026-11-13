@@ -1,6 +1,7 @@
 ---
 title: "ThinkWorld 읽기: 이득의 대부분은 '추론'이 아니라 미래 예측 보조 손실에서 나왔다"
 date: 2026-10-29
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, vla, world-model, human-video, reinforcement-learning, paper-review]
 paper: https://arxiv.org/abs/2610.37666
 project: https://thinkworld-project.github.io

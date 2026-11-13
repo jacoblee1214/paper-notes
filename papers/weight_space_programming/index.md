@@ -1,6 +1,7 @@
 ---
 title: "Weight-Space Programming 읽기: LLM이 가중치를 읽고 쓴다는 주장을 로그로 확인하기"
 date: 2026-11-03
+venue: "기술 보고서·블로그"
 tags: [interpretability, weight-editing, llm-agents, reinforcement-learning, paper-review]
 paper: https://rikiyat.github.io/blog/weight-space-programming/
 code: https://github.com/RikiyaT/lm_understand-logs

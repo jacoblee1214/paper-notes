@@ -1,6 +1,7 @@
 ---
 title: "NoContactNoWorries: 손목 영상과 관절 자세로 접촉을 맞힐 수 있는가"
 date: 2026-11-09
+venue: "IROS 2026"
 tags: [tactile, contact-estimation, in-hand-manipulation, robot-learning, IROS2026]
 paper: "arXiv:2606.24450v2 (IROS 2026 채택)"
 code: "공식 코드 미공개 (프로젝트 페이지 Coming Soon)"

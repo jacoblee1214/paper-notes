@@ -1,6 +1,7 @@
 ---
 title: "Geometric Entropy 읽기: 시연 궤적의 다양성은 언제 도움이 되고 언제 해로운가"
 date: 2026-11-10
+venue: "IROS 2026"
 tags: [robotics, imitation-learning, data-curation, diffusion-policy, act, vla, paper-review]
 paper: https://arxiv.org/abs/2606.20871
 summary: "IROS 2026 Geometric Entropy(H_G)를 재계산, 그림 판독 검정, 합성 궤적 toy로 읽었습니다. 표 I의 방향은 재현되지만, 역U는 일부 조건에서만 유의했고, 공식 코드는 없습니다."

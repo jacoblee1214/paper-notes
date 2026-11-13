@@ -1,6 +1,8 @@
 ---
 title: "빠른 off-policy RL은 안정적인가: FlashSAC 논문 분석"
 date: 2026-11-12
+venue: "RSS 2026"
+venue_note: "arXiv Comments \"RSS'26\""
 tags: [reinforcement-learning, SAC, sim-to-real, humanoid, off-policy]
 paper: "arXiv:2604.04539 (FlashSAC, RSS 2026, arXiv 댓글 기준)"
 code: "https://github.com/Holiday-Robot/FlashSAC (MIT, 커밋 87edc90 기준 정적 읽기)"

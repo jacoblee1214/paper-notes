@@ -1,6 +1,7 @@
 ---
 title: "AutoDex 읽기: 사람 없이 실물 파지를 모으면 데이터가 얼마나 믿을 만한가"
 date: 2026-11-10
+venue: "CoRL 2026"
 tags: [robotics, dexterous-grasping, data-collection, autonomous-learning, paper-review]
 paper: https://arxiv.org/abs/2606.23689
 project: https://snuvclab.github.io/AutoDex/

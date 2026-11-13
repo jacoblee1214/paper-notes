@@ -1,6 +1,7 @@
 ---
 title: "Do as I Do 읽기: SAM 3D 추적은 사실 EMA 필터다"
 date: 2026-10-28
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, retargeting, flow-matching, paper-review]
 paper: https://arxiv.org/abs/2606.19333
 code: https://github.com/malik-group/do-as-i-do

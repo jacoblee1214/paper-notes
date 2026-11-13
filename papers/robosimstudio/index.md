@@ -1,6 +1,7 @@
 ---
 title: "RoboSimStudio 읽기: 쓸 만한 Real2Sim 도구, 그런데 스펀지는 손에 붙어 있었다"
 date: 2026-10-29
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, simulation, real2sim, coding-agents, paper-review]
 paper: https://arxiv.org/abs/2610.18835
 code: https://github.com/robosimstudio/robosimstudio

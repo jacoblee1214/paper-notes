@@ -1,6 +1,7 @@
 ---
 title: "PDE 장으로 위치를 맞출 수 있는가: 환경 장 기반 RBPF 위치추정 분석"
 date: 2026-11-10
+venue: "IROS 2026"
 tags: [localization, particle-filter, PDE, environmental-monitoring, IROS2026]
 paper: "arXiv:2608.00272 (Fuentes et al., IROS 2026 채택)"
 code: "공식 코드 미공개 (프로젝트 페이지: Code coming soon)"

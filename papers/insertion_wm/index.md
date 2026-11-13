@@ -1,6 +1,8 @@
 ---
 title: "InsertionWM 읽기: 세계 모델로 미지 조립 객체에 삽입할 수 있나"
 date: 2026-11-10
+venue: "IROS 2026"
+venue_note: "arXiv Comments에 학회명만 있음 (채택 상태 불명)"
 tags: [robotics, assembly, insertion, world-model, tdmpc2, paper-review]
 paper: https://arxiv.org/abs/2609.28258
 summary: "Generalizable Robotic Insertion with World Models(arXiv:2609.28258v1)를 수치 재계산과 2D toy로 읽었습니다. 56% 대 7%는 학습 규모와 입력이 달라 같은 조건의 비교가 아니었습니다."

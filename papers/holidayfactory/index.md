@@ -1,6 +1,7 @@
 ---
 title: "HolidayFactory 1.0 읽기: 리셋 없는 산업 작업 평가, 주장과 증거를 나눠 보니"
 date: 2026-11-12
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, simulation, benchmark, industrial, statistics, paper-review]
 paper: https://arxiv.org/abs/2611.11789
 project: https://holiday-robotics.com/

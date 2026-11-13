@@ -1,6 +1,7 @@
 ---
 title: "CONTACT 읽기: 촉각 영상과 힘장, 어느 쪽이 분해 정책에 도움이 되나"
 date: 2026-11-09
+venue: "IROS 2026"
 tags: [robotics, tactile, disassembly, diffusion-policy, paper-review]
 paper: https://arxiv.org/abs/2603.08560
 project: https://vict0rhu.github.io/CONTACT-Website/

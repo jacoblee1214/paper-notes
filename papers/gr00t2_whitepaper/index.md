@@ -1,6 +1,7 @@
 ---
 title: "GR00T 2 백서 읽기: 영상과 행동을 함께 예측하는 로봇 모델, 숫자는 어디까지 믿을 수 있나"
 date: 2026-11-12
+venue: "기술 보고서·블로그"
 tags: [robot-learning, vla, world-action-model, nvidia, evaluation]
 paper: "GR00T 2: Scaling Robot Foundation Models for Generalization, Dexterity, and Adaptation (NVIDIA, 2026-11, arXiv 없음)"
 project: https://research.nvidia.com/labs/gear/gr00t-2/

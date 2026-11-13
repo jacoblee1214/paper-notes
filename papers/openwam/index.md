@@ -1,6 +1,7 @@
 ---
 title: "OpenWAM 읽기: World–Action Model을 부품으로 쪼개 보니, 추론 때 미래 영상은 거의 쓰이지 않았다"
 date: 2026-11-04
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, world-action-model, vla, flow-matching, pretraining, paper-review]
 paper: https://arxiv.org/abs/2609.07398
 code: https://github.com/OpenWAM-Official/OpenWAM

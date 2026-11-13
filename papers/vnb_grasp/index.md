@@ -1,6 +1,7 @@
 ---
 title: "VNB: 불확실성 하의 파지 분석 (arXiv:2604.25897)"
 date: 2026-11-11
+venue: "IROS 2026"
 tags: [grasping, uncertainty, CVaR, reparameterization, MuJoCo]
 paper: "Variational Neural Belief Parameterizations for Robust Dexterous Grasping under Multimodal Uncertainty (arXiv:2604.25897v2, IROS 2026 채택)"
 code: "https://github.com/coenwerem/vnb-grasp (Apache-2.0, 커밋 23702bd)"

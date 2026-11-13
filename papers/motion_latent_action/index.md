@@ -1,6 +1,7 @@
 ---
 title: "Motion-Focused Latent Action 읽기: 움직임만 담는 잠재 행동은 얼마나 분리되었나"
 date: 2026-11-10
+venue: "IROS 2026"
 tags: [robotics, vla, latent-action, human-video, cross-embodiment, paper-review]
 paper: https://arxiv.org/abs/2606.18955
 code: https://github.com/shuiyigong/Motion-Focused-Latent-Action

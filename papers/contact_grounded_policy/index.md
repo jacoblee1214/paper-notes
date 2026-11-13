@@ -1,6 +1,8 @@
 ---
 title: "Contact-Grounded Policy 읽기: 촉각을 예측해서 제어기 목표로 바꾸면 무엇이 달라지나"
 date: 2026-10-28
+venue: "RSS 2026"
+venue_note: "원문·프로젝트 페이지 표기"
 tags: [robotics, dexterous-manipulation, tactile, diffusion-policy, compliance-control, paper-review]
 paper: https://arxiv.org/abs/2603.05687
 project: https://contact-grounded-policy.github.io/

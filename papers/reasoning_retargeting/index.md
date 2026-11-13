@@ -1,6 +1,7 @@
 ---
 title: "블로그 읽기: 에이전트가 시뮬레이터 피드백으로 휴머노이드 재targeting을 고친다, 그 수치는 얼마나 단단한가"
 date: 2026-11-10
+venue: "기술 보고서·블로그"
 tags: [humanoid, retargeting, human-object-interaction, llm-agent, simulation-feedback, evaluation]
 project: https://narayananpp.github.io/semantic-humanoid-retargeting-blog/
 summary: "GPT-6 Astra를 Codex에서 돌려 MuJoCo 피드백으로 휴머노이드 객체 상호작용 기준을 고치는 블로그를 원자료로 재계산하고, 통계 검정과 numpy toy로 읽었습니다."

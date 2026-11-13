@@ -1,6 +1,7 @@
 ---
 title: "DDPG 다시 읽기: 표적망은 확실하고, 나머지는 구현마다 다르다"
 date: 2026-10-28
+venue: "ICLR 2016"
 tags: [reinforcement-learning, continuous-control, actor-critic, ddpg, paper-review]
 paper: https://arxiv.org/abs/1509.02971
 code: https://github.com/DLR-RM/stable-baselines3

@@ -1,6 +1,7 @@
 ---
 title: "Nemotron 3.5 Super VL 기술 보고서 읽기: 120B-A12B 하이브리드 MoE를 공개 체크포인트로 검증하기"
 date: 2026-10-30
+venue: "기술 보고서·블로그"
 tags: [llm, vlm, mixture-of-experts, mamba, quantization, nvfp4, speculative-decoding, tech-report-review]
 paper: https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3.5-Super-and-Lightning-Technical-Report.pdf
 code: https://github.com/NVIDIA-NeMo/Nemotron

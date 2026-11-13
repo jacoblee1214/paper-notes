@@ -1,6 +1,7 @@
 ---
 title: "한 번 당겨서 탄성을 맞출 수 있는가: Sling2Sim2Real 분석"
 date: 2026-11-11
+venue: "IROS 2026"
 tags: [system-identification, sim2real, elastic-objects, IROS2026]
 paper: "arXiv:2607.23268 (Kang, Kim, Song, Park; IROS 2026 채택)"
 code: "공식 코드 미공개 (2026-11-11 확인)"

@@ -1,6 +1,7 @@
 ---
 title: "DreamX 읽기: 영상 diffusion 모델 안에서 latent action을 읽으면, 사람과 로봇은 정말 같은 좌표에 놓일까"
 date: 2026-11-09
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, latent-action, video-diffusion, cross-embodiment, vla, paper-review]
 paper: https://arxiv.org/abs/2611.05377
 project: https://cvlab-kaist.github.io/DreamX/

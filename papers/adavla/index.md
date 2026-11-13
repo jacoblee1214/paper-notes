@@ -1,6 +1,7 @@
 ---
 title: "AdaVLA 읽기: 곡률로 흐름 매칭 VLA의 적분 단계를 줄일 수 있나"
 date: 2026-11-10
+venue: "IROS 2026"
 tags: [robotics, vla, flow-matching, inference-acceleration, lerobot, paper-review]
 paper: https://arxiv.org/abs/2608.29208
 summary: "IROS 2026 AdaVLA를 표 재계산, 지연 산술, 곡률 기준 toy로 읽었습니다. 지연 이득은 평균 2–3 NFE에서 나오고, 중점 평가 방식에 오차 원인이 있었습니다."

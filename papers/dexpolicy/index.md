@@ -1,6 +1,7 @@
 ---
 title: "DexPolicy 읽기: 잡음을 줄이면 나아진다, 그런데 무엇과 비교했나"
 date: 2026-10-28
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, reinforcement-learning, exploration, ppo, paper-review]
 paper: https://arxiv.org/abs/2610.00360
 code: https://github.com/AIGeeksGroup/DexPolicy

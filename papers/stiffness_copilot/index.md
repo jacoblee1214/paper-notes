@@ -1,6 +1,7 @@
 ---
 title: "Stiffness Copilot 읽기: 방향별 임피던스 라벨은 믿을 만한가, 사용자 연구 주장은 어디까지 가나"
 date: 2026-11-09
+venue: "IROS 2026"
 tags: [impedance-control, teleoperation, shared-control, contact-rich-manipulation, paper-review]
 paper: https://arxiv.org/abs/2603.14068
 project: https://stiffness-copilot.github.io

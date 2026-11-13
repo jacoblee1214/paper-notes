@@ -1,6 +1,8 @@
 ---
 title: "사람 시연을 로봇 전신 행동으로: WARP 리타게팅 분석"
 date: 2026-11-10
+venue: "CoRL 2026"
+venue_note: "프로젝트 페이지·저장소 README 표기 (arXiv에서 독립 확인 못 함)"
 tags: [retargeting, whole-body, mobile-manipulation, imitation-learning, CoRL2026]
 paper: "arXiv:2606.29940 v2 (CoRL 2026, 프로젝트 페이지 표기)"
 project: "https://warp-retargeting.github.io/"

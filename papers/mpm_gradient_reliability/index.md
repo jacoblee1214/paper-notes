@@ -1,6 +1,8 @@
 ---
 title: "미분 가능 시뮬레이터의 기울기를 믿을 수 있는가: MPM 식별의 수치 신뢰도"
 date: 2026-11-11
+venue: "IROS 2026 워크숍"
+venue_note: "워크숍 구두 발표 (arXiv Comments)"
 tags: [differentiable-simulation, material-point-method, numerical-reliability, system-identification, IROS2026]
 paper: "arXiv:2609.34666 (Yang, Wei, Lai, Ji; IROS 2026 워크숍 구두 발표)"
 code: "공식 코드 미공개 (논문·abs 페이지·GitHub 검색에서 찾지 못함)"

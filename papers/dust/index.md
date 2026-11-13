@@ -1,6 +1,7 @@
 ---
 title: "Dust 읽기: 역전파 없이 Transformer를 학습한다, 그런데 무엇과 비교했나"
 date: 2026-10-29
+venue: "기술 보고서·블로그"
 tags: [optimization, zeroth-order, evolution-strategies, transformer, pretraining, paper-review]
 paper: https://qlabs.sh/research/dust
 code: https://github.com/qlabs-eng/dust

@@ -1,6 +1,7 @@
 ---
 title: "ZeroDex 읽기: 시연 없이 dexterous 손을 움직이는 다시점 VLM 그라운딩, 숫자는 어디서 나왔나"
 date: 2026-10-28
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, vision-language-model, zero-shot, paper-review]
 paper: https://arxiv.org/abs/2606.19340
 project: https://jlogkim.github.io/zerodex/

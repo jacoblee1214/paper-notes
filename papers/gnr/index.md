@@ -1,6 +1,7 @@
 ---
 title: "GNR 읽기: MPC가 푼 궤적으로 배운 생성기, 그 이득은 어디서 오나"
 date: 2026-11-03
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, retargeting, flow-matching, sampling-mpc, paper-review]
 paper: https://arxiv.org/abs/2610.12440
 project: https://yy-gx.github.io/GNR/

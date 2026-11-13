@@ -1,6 +1,7 @@
 ---
 title: "Hydra-0 읽기: 숫자는 맞는데, 무엇과 비교했나"
 date: 2026-10-28
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, world-model, video-generation, policy-evaluation, paper-review]
 paper: https://arxiv.org/abs/2608.18077
 project: https://nvidia-isaac.github.io/video_to_data/hydra-0/

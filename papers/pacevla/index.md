@@ -1,6 +1,7 @@
 ---
 title: "PaceVLA 읽기: 빨라진 VLA의 우위는 속도가 아니라 덜 실패하는 데 있다"
 date: 2026-10-29
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, vla, action-chunking, imitation-learning, paper-review]
 paper: https://arxiv.org/abs/2610.25961
 project: https://pacevla.github.io

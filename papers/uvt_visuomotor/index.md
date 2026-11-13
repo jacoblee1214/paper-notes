@@ -1,6 +1,7 @@
 ---
 title: "UVT: 행동 대신 행동+동역학 잠재를 맞추면 VLA가 빨라지는가"
 date: 2026-11-11
+venue: "IROS 2026"
 tags: [VLA, latent-action, 학습 목표, LIBERO, 통계]
 paper: "arXiv:2608.03563 (IROS 2026 채택)"
 code: "https://github.com/DeFisch/UVT (라이선스 파일 없음)"

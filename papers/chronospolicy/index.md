@@ -1,6 +1,7 @@
 ---
 title: "Chronos Policy 읽기: 시간을 알려 주면 정책이 강해진다, 그런데 어디까지가 시간 덕인가"
 date: 2026-10-28
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, imitation-learning, diffusion-policy, latency, rope, paper-review]
 paper: https://arxiv.org/abs/2610.13929
 project: https://changhaowang.github.io/chronospolicy/

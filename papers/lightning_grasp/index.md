@@ -1,6 +1,7 @@
 ---
 title: "Lightning Grasp 읽기: 빠른 건 맞는데, '유효한 grasp'는 무엇을 통과한 것인가"
 date: 2026-10-29
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, grasp-synthesis, gpu, paper-review]
 paper: https://arxiv.org/abs/2511.07418
 code: https://github.com/zhaohengyin/lightning-grasp

@@ -1,6 +1,7 @@
 ---
 title: "ULTRA 읽기: 물리 리타게팅과 목표 조건부 전신 제어, 표를 다시 세어 보니"
 date: 2026-11-11
+venue: "IROS 2026"
 tags: [robotics, humanoid, loco-manipulation, retargeting, statistics, paper-review]
 paper: https://arxiv.org/abs/2603.03279
 project: https://ultrahumanoid.github.io/

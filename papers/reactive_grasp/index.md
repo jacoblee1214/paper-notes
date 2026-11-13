@@ -1,6 +1,7 @@
 ---
 title: "손 전체 접점의 실시간 힘 조절 읽기: 촉각 없이 잡는다는 것, 그리고 시험이 실제로 잰 것"
 date: 2026-10-29
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, dexterous-manipulation, grasping, force-control, paper-review]
 paper: https://arxiv.org/abs/2609.30082
 project: https://sangminkim-99.github.io/reactive-grasp-whole-hand/

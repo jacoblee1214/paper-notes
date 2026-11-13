@@ -1,6 +1,7 @@
 ---
 title: "ContactBench 1.0 읽기: 접촉 과제 벤치마크, 표를 다시 세어 보니"
 date: 2026-11-10
+venue: "학회 표기 없음 (arXiv)"
 tags: [robotics, benchmark, contact-rich, tactile, statistics, paper-review]
 paper: https://arxiv.org/abs/2610.24512
 project: https://jingyi-xiang.github.io/contactbench/

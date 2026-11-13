@@ -1,6 +1,7 @@
 ---
 title: "You don't need long context 읽기: 압축은 정확도를 지키지만, 비용 이득은 계산 방식에 달려 있다"
 date: 2026-11-09
+venue: "학회 표기 없음 (arXiv)"
 tags: [llm-agents, context-management, compaction, long-context, inference-cost, paper-review]
 paper: https://arxiv.org/abs/2611.05306
 project: https://research.nvidia.com/labs/lpr/lfi/

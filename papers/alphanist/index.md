@@ -1,6 +1,8 @@
 ---
 title: "AlphaNIST 읽기: 이진 보상 하나로 조립 보드 20개 과제, 그런데 98.2%는 어디서 시작한 성공률인가"
 date: 2026-10-28
+venue: "학회 표기 없음 (arXiv)"
+venue_note: "ICRA 투고 (arXiv Comments, 채택 미확인)"
 tags: [robotics, reinforcement-learning, assembly, sparse-reward, paper-review]
 paper: https://arxiv.org/abs/2610.13354
 project: https://alpha-nist.github.io/

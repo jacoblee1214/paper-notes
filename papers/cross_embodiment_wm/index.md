@@ -1,6 +1,7 @@
 ---
 title: "손을 파티클로 보는 세계 모델: Cross-Embodiment World Models 분석"
 date: 2026-11-10
+venue: "IROS 2026"
 tags: [world-model, dexterous-manipulation, cross-embodiment, MPC, IROS2026]
 paper: "arXiv:2511.01177 (IROS 2026 채택)"
 project: "https://alan-heoooh.github.io/dexwm.html"
