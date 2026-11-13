@@ -22,7 +22,7 @@
 | `analysis/sensitivity_toy.py` | 지표 임계·프레임레이트 장난감 (수 초, numpy·scipy) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 (matplotlib) |
 | `analysis/extra_zip_inventory.py` | 공개 `data.zip`의 압축 구조 집계 (중앙 디렉터리만 읽음, 결과 `extra_zip_inventory_results.json`) |
-| `analysis/extra_public_data_metrics.py` | 공개 G1·H1-2 모션의 발 지표, 관절 한계, G1 2차 필터 재계산 (CPU, 결과 `extra_public_data_metrics_results.json`, 집계값만) |
+| `analysis/extra_public_data_metrics.py` | 공개 G1·H1-2 모션의 발 지표, 관절 한계, 2차 필터(G1·H1-2) 재계산 (CPU, 결과 `extra_public_data_metrics_results.json`, 집계값만) |
 | `analysis/extra_public_data_plots.py` | 위 결과의 그래프 (`report/figures/own_public_metrics.png`) |
 | `report/crop_figures.py` | 논문 PDF에서 Figure 2 자르기 (원본 PDF는 포함하지 않음) |
 

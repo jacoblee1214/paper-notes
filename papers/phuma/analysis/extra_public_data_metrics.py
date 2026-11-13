@@ -42,8 +42,8 @@ GROUND_DELTA = 0.025  # 접지 높이 다수결 창 폭 (식 (11))
 FILTER_CHUNK = 120
 FILTER_OVERLAP = 15
 FILTER_MIN = 30
-FILTER_COM_MIN_H = 0.40
-FILTER_BOS = 0.16
+# 로봇별 2차 필터 임계 (질량중심 최소 높이 m, 질량중심–BoS 평균 거리 m). 저장소 preprocess_<robot>_folder.py 기본값
+FILTER_THRESH = {"g1": (0.40, 0.16), "h1_2": (0.60, 0.24)}
 
 # npy 안의 피클을 읽을 때 허용하는 전역 이름. 이 밖의 모든 전역 참조는 거부한다.
 ALLOWED_GLOBALS = {
@@ -289,13 +289,13 @@ def filter_chunks(N):
     return starts
 
 
-def filter_clip(com, kp, fps):
+def filter_clip(com, kp, fps, com_min_h, bos_max):
     res = []
     for s, e in filter_chunks(com.shape[0]):
         cmin = float(com[s:e, 2].min())
         bos, err = bos_distance(kp[s:e], com[s:e, :2])
         res.append({"n": e - s, "com_min_h": cmin, "bos": bos, "bos_err": err,
-                    "fail_h": cmin < FILTER_COM_MIN_H, "fail_bos": bos > FILTER_BOS})
+                    "fail_h": cmin < com_min_h, "fail_bos": bos > bos_max})
     return res
 
 
@@ -392,8 +392,8 @@ def main():
         agg["joints_vel_bad_clips"] = 0
         agg["ground_vote"] = []
         agg["ground_zero_clip_share"] = 0
-        is_g1 = robot_name == "g1"
-        if is_g1:
+        do_filter = robot_name in FILTER_THRESH
+        if do_filter:
             filt = {"clips": 0, "chunks": 0, "chunk_frames": 0, "fail_h_chunks": 0, "fail_bos_chunks": 0,
                     "fail_any_chunks": 0, "fail_chunk_frames": 0, "clips_fail_any": 0,
                     "bos_hull_errors": 0, "com_min_h": [], "bos_mean": []}
@@ -420,7 +420,7 @@ def main():
                     raise ValueError(f"dof columns {dof.shape[1]} vs model {rob.nd}")
                 agg["dof_len_hist"][str(dof.shape[1])] = agg["dof_len_hist"].get(str(dof.shape[1]), 0) + 1
                 agg["fps_hist"][str(fps)] = agg["fps_hist"].get(str(fps), 0) + 1
-                if is_g1:
+                if do_filter:
                     H, XY, COM, KP = rob.fk_clip(rt, ro, dof, need_com=True)
                 else:
                     H, XY = rob.fk_clip(rt, ro, dof)
@@ -474,9 +474,9 @@ def main():
                 agg["joints_pos_bad_clips"] += 1
             if j["joints_vel_bad"]:
                 agg["joints_vel_bad_clips"] += 1
-            if is_g1:
+            if do_filter:
                 filt["clips"] += 1
-                chunks = filter_clip(COM, KP, fps)
+                chunks = filter_clip(COM, KP, fps, *FILTER_THRESH[robot_name])
                 any_fail_clip = False
                 for ch in chunks:
                     filt["chunks"] += 1
@@ -562,8 +562,9 @@ def main():
                 "consecutive_pairs_overlap_exact": overlap["exact"],
             },
         })
-        if is_g1:
-            res_r["robot_filter_g1"] = {
+        if do_filter:
+            res_r[f"robot_filter_{robot_name}"] = {
+                "thresholds_com_min_h_m_bos_m": list(FILTER_THRESH[robot_name]),
                 "clips": filt["clips"],
                 "chunks_total": filt["chunks"],
                 "chunk_frames_total": filt["chunk_frames"],
