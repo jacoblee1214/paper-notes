@@ -1,0 +1,347 @@
+{
+ "zip_sha256": "7bd38634f1ec075af907a2bce10616b083a5414885674ce6630664124e22e495",
+ "seed": 20261112,
+ "max_clips_arg": 0,
+ "contact_bands": [
+  0.025,
+  0.05,
+  0.1
+ ],
+ "main_band": 0.025,
+ "tol_m": 0.01,
+ "skate_speed_mps": 0.1,
+ "joint_fraction": 0.98,
+ "robots": {
+  "g1": {
+   "n_zip_members": 73076,
+   "model_nq": 30,
+   "model_hinge_joints": 23,
+   "joint_names": [
+    "left_hip_pitch_joint",
+    "left_hip_roll_joint",
+    "left_hip_yaw_joint",
+    "left_knee_joint",
+    "left_ankle_pitch_joint",
+    "left_ankle_roll_joint",
+    "right_hip_pitch_joint",
+    "right_hip_roll_joint",
+    "right_hip_yaw_joint",
+    "right_knee_joint",
+    "right_ankle_pitch_joint",
+    "right_ankle_roll_joint",
+    "waist_yaw_joint",
+    "waist_roll_joint",
+    "waist_pitch_joint",
+    "left_shoulder_pitch_joint",
+    "left_shoulder_roll_joint",
+    "left_shoulder_yaw_joint",
+    "left_elbow_joint",
+    "right_shoulder_pitch_joint",
+    "right_shoulder_roll_joint",
+    "right_shoulder_yaw_joint",
+    "right_elbow_joint"
+   ],
+   "joints_without_velocity_limit": [],
+   "n_clips_processed": 73076,
+   "clips_ok": 73076,
+   "errors": {},
+   "fps_hist": {
+    "30": 73076
+   },
+   "dof_len_hist": {
+    "23": 73076
+   },
+   "frames_total": 7529058,
+   "clip_frames_pct": {
+    "p5": 45.0,
+    "p25": 90.0,
+    "p50": 120.0,
+    "p75": 120.0,
+    "p95": 120.0,
+    "n": 73076
+   },
+   "pass_rates_main_band": {
+    "non_floating_pct": 94.23,
+    "non_penetration_pct": 79.62,
+    "non_skating_pct": 69.74,
+    "joint_feasibility_pct": 100.0,
+    "joint_pos_only_pct": 100.0,
+    "joint_vel_only_pct": 100.0
+   },
+   "pass_rates_main_band_per_clip_ground": {
+    "non_floating_pct": 74.94,
+    "non_penetration_pct": 70.26,
+    "non_skating_pct": 69.12
+   },
+   "contact_region_frames_per_clip_ground": 25121479,
+   "main_band_m": 0.025,
+   "contact_band_sensitivity": {
+    "0.025": {
+     "contact_region_frames": 24739368,
+     "non_floating_pct": 94.23,
+     "non_penetration_pct": 79.62,
+     "non_skating_pct": 69.74
+    },
+    "0.050": {
+     "contact_region_frames": 26038401,
+     "non_floating_pct": 89.53,
+     "non_penetration_pct": 80.64,
+     "non_skating_pct": 67.4
+    },
+    "0.100": {
+     "contact_region_frames": 27578159,
+     "non_floating_pct": 84.53,
+     "non_penetration_pct": 81.72,
+     "non_skating_pct": 64.76
+    }
+   },
+   "contact_region_frames_main": 24739368,
+   "per_clip_rate_pct_main": {
+    "non_floating": {
+     "p5": 82.8994,
+     "p25": 90.7454,
+     "p50": 95.208,
+     "p75": 99.4475,
+     "p95": 100.0,
+     "n": 73076
+    },
+    "non_penetration": {
+     "p5": 43.9815,
+     "p25": 72.5275,
+     "p50": 83.3962,
+     "p75": 93.0736,
+     "p95": 100.0,
+     "n": 73076
+    },
+    "non_skating": {
+     "p5": 23.1797,
+     "p25": 49.4037,
+     "p50": 71.5496,
+     "p75": 92.0432,
+     "p95": 100.0,
+     "n": 73076
+    },
+    "joint_feasibility": {
+     "p5": 100.0,
+     "p25": 100.0,
+     "p50": 100.0,
+     "p75": 100.0,
+     "p95": 100.0,
+     "n": 73076
+    },
+    "contact_share_pct": {
+     "p5": 50.0,
+     "p25": 70.098,
+     "p50": 85.9008,
+     "p75": 100.0,
+     "p95": 100.0,
+     "n": 73076
+    }
+   },
+   "ground_vote_m": {
+    "p5": -0.0249,
+    "p25": -0.0129,
+    "p50": -0.0009,
+    "p75": 0.0071,
+    "p95": 0.0138,
+    "n": 73076
+   },
+   "ground_vote_abs_lt_1cm_clip_share": 0.5418,
+   "nonzero_wrist_clips": 0,
+   "joints_pos_bad_clips": 0,
+   "joints_vel_bad_clips": 4,
+   "motion_fidelity": "not computed (no human reference in released data)",
+   "window_structure": {
+    "source_sequences": 36068,
+    "saved_windows": 73076,
+    "window_ids_absent_below_max": 6118,
+    "sequences_with_absent_window": 4598,
+    "consecutive_pairs_checked": 36239,
+    "consecutive_pairs_overlap_exact": 0
+   },
+   "robot_filter_g1": {
+    "clips": 73076,
+    "chunks_total": 73076,
+    "chunk_frames_total": 7529058,
+    "chunks_fail_com_height": 17,
+    "chunks_fail_bos": 0,
+    "chunks_fail_any": 17,
+    "chunk_frames_in_failing_chunks": 1806,
+    "chunk_frames_in_failing_share_pct": 0.024,
+    "clips_with_any_failing_chunk": 17,
+    "clips_with_any_failing_chunk_pct": 0.023,
+    "bos_hull_errors": 0,
+    "chunk_min_com_height_m": {
+     "p5": 0.5387,
+     "p25": 0.6503,
+     "p50": 0.6814,
+     "p75": 0.698,
+     "p95": 0.7229,
+     "n": 73076
+    },
+    "chunk_mean_bos_distance_m": {
+     "p5": 0.0,
+     "p25": 0.0,
+     "p50": 0.0,
+     "p75": 0.0029,
+     "p95": 0.0189,
+     "n": 73076
+    }
+   }
+  },
+  "h1_2": {
+   "n_zip_members": 73076,
+   "model_nq": 34,
+   "model_hinge_joints": 27,
+   "joint_names": [
+    "left_hip_yaw_joint",
+    "left_hip_pitch_joint",
+    "left_hip_roll_joint",
+    "left_knee_joint",
+    "left_ankle_pitch_joint",
+    "left_ankle_roll_joint",
+    "right_hip_yaw_joint",
+    "right_hip_pitch_joint",
+    "right_hip_roll_joint",
+    "right_knee_joint",
+    "right_ankle_pitch_joint",
+    "right_ankle_roll_joint",
+    "torso_joint",
+    "left_shoulder_pitch_joint",
+    "left_shoulder_roll_joint",
+    "left_shoulder_yaw_joint",
+    "left_elbow_pitch_joint",
+    "left_elbow_roll_joint",
+    "left_wrist_pitch_joint",
+    "left_wrist_yaw_joint",
+    "right_shoulder_pitch_joint",
+    "right_shoulder_roll_joint",
+    "right_shoulder_yaw_joint",
+    "right_elbow_pitch_joint",
+    "right_elbow_roll_joint",
+    "right_wrist_pitch_joint",
+    "right_wrist_yaw_joint"
+   ],
+   "joints_without_velocity_limit": [],
+   "n_clips_processed": 73076,
+   "clips_ok": 73076,
+   "errors": {},
+   "fps_hist": {
+    "30": 73076
+   },
+   "dof_len_hist": {
+    "27": 73076
+   },
+   "frames_total": 7529058,
+   "clip_frames_pct": {
+    "p5": 45.0,
+    "p25": 90.0,
+    "p50": 120.0,
+    "p75": 120.0,
+    "p95": 120.0,
+    "n": 73076
+   },
+   "pass_rates_main_band": {
+    "non_floating_pct": 94.33,
+    "non_penetration_pct": 75.59,
+    "non_skating_pct": 68.25,
+    "joint_feasibility_pct": 99.86,
+    "joint_pos_only_pct": 99.87,
+    "joint_vel_only_pct": 99.99
+   },
+   "pass_rates_main_band_per_clip_ground": {
+    "non_floating_pct": 77.15,
+    "non_penetration_pct": 68.54,
+    "non_skating_pct": 67.75
+   },
+   "contact_region_frames_per_clip_ground": 24952720,
+   "main_band_m": 0.025,
+   "contact_band_sensitivity": {
+    "0.025": {
+     "contact_region_frames": 24540738,
+     "non_floating_pct": 94.33,
+     "non_penetration_pct": 75.59,
+     "non_skating_pct": 68.25
+    },
+    "0.050": {
+     "contact_region_frames": 25935325,
+     "non_floating_pct": 89.25,
+     "non_penetration_pct": 76.9,
+     "non_skating_pct": 65.9
+    },
+    "0.100": {
+     "contact_region_frames": 27592522,
+     "non_floating_pct": 83.89,
+     "non_penetration_pct": 78.29,
+     "non_skating_pct": 63.08
+    }
+   },
+   "contact_region_frames_main": 24540738,
+   "per_clip_rate_pct_main": {
+    "non_floating": {
+     "p5": 83.5125,
+     "p25": 91.1028,
+     "p50": 95.122,
+     "p75": 99.1525,
+     "p95": 100.0,
+     "n": 73076
+    },
+    "non_penetration": {
+     "p5": 33.3333,
+     "p25": 65.0731,
+     "p50": 80.7453,
+     "p75": 93.0295,
+     "p95": 100.0,
+     "n": 73076
+    },
+    "non_skating": {
+     "p5": 24.1701,
+     "p25": 47.4359,
+     "p50": 68.0,
+     "p75": 89.7917,
+     "p95": 99.4258,
+     "n": 73076
+    },
+    "joint_feasibility": {
+     "p5": 98.9247,
+     "p25": 100.0,
+     "p50": 100.0,
+     "p75": 100.0,
+     "p95": 100.0,
+     "n": 73076
+    },
+    "contact_share_pct": {
+     "p5": 50.0,
+     "p25": 68.75,
+     "p50": 85.4167,
+     "p75": 100.0,
+     "p95": 100.0,
+     "n": 73076
+    }
+   },
+   "ground_vote_m": {
+    "p5": -0.024,
+    "p25": -0.0119,
+    "p50": -0.0008,
+    "p75": 0.0067,
+    "p95": 0.0138,
+    "n": 73076
+   },
+   "ground_vote_abs_lt_1cm_clip_share": 0.5692,
+   "nonzero_wrist_clips": 0,
+   "joints_pos_bad_clips": 7228,
+   "joints_vel_bad_clips": 550,
+   "motion_fidelity": "not computed (no human reference in released data)",
+   "window_structure": {
+    "source_sequences": 36068,
+    "saved_windows": 73076,
+    "window_ids_absent_below_max": 6118,
+    "sequences_with_absent_window": 4598,
+    "consecutive_pairs_checked": 36239,
+    "consecutive_pairs_overlap_exact": 0
+   }
+  }
+ },
+ "elapsed_s": 1926.6,
+ "merged_from_parts": 2
+}

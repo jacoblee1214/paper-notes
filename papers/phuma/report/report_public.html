@@ -35,7 +35,7 @@ li { margin: 2px 0; }
 <li><strong>지표가 손실과 같은 양입니다.</strong> 표 1 지표는 PhySINK 손실과 같은 접지·미끄럼·관절 한계를 재므로 독립 증거가 아닙니다. PhySINK의 관절 100%는 저장 시 클리핑에서 올 수 있습니다.</li>
 <li><strong>지표는 프레임레이트와 잡음에 민감합니다.</strong> 장난감 실험에서 완벽히 붙은 발도 5 mm 잡음이면 임계 0.5 cm에서 15% 실패하고, 발 미끄럼 지표는 30 Hz에서 정지한 발의 36%만 통과합니다.</li>
 <li><strong>공개 코드는 논문과 여러 점에서 다릅니다.</strong> 접지 추정, 접촉 뒤꿈치 보정, 미끄럼 손실(노름), 링크 스케일 학습, 논문에 없는 2차 로봇 공간 필터가 있습니다. 표 1 지표 계산 코드는 없습니다.</li>
-<li><strong>구현 가능성:</strong> 공식 파이프라인 재현은 <strong>불가</strong>입니다(SMPL-X 등록, 원본 데이터 비공개, 리타게팅 단일 GPU 약 99일, 정책 학습은 CUDA와 IsaacSim 필요). 공개 로봇 모션의 지표 재계산은 3.42 GB 다운로드 승인 후 CPU로 <strong>조건부 가능</strong>합니다.</li>
+<li><strong>구현 가능성:</strong> 공식 파이프라인 재현은 <strong>불가</strong>입니다(SMPL-X 등록, 원본 데이터 비공개, 리타게팅 단일 GPU 약 99일, 정책 학습은 CUDA와 IsaacSim 필요). 공개 로봇 모션의 지표를 CPU에서 다시 계산했습니다(2026-11-12, 03 추가 검증 절). 발 지표 세 개는 논문 표 1 값과 <strong>맞지 않았고</strong>, 관절 한계만 일치했습니다.</li>
 </ol>
 </section>
 <section class="chapter"><h1>PHUMA: Physically Reliable Humanoid Locomotion Dataset (arXiv:2510.26236) 논문 분석</h1>
@@ -515,7 +515,7 @@ li { margin: 2px 0; }
 </ul>
 </section>
 <section class="chapter"><h1>PHUMA 수치 재계산, 통계 검정, 유도, 장난감 (03)</h1>
-<p>이 문서는 논문에 실린 수치만 씁니다. 데이터셋은 내려받지 않았습니다(§7). 계산은 <code>analysis/table_check.py</code>(결과 <code>table_check_results.json</code>)와 <code>analysis/sensitivity_toy.py</code>(결과 <code>sensitivity_toy_results.json</code>)로 다시 돌릴 수 있습니다. 둘 다 numpy와 scipy만 씁니다.</p>
+<p>이 문서의 §1–§7은 논문에 실린 수치만 씁니다. 공개 데이터셋은 2026-11-12에 내려받아 끝의 &quot;추가 검증 (2026-11-12): 공개 데이터로 지표 재계산&quot; 절에서 따로 계산했습니다. 계산은 <code>analysis/table_check.py</code>(결과 <code>table_check_results.json</code>)와 <code>analysis/sensitivity_toy.py</code>(결과 <code>sensitivity_toy_results.json</code>)로 다시 돌릴 수 있습니다. 둘 다 numpy와 scipy만 씁니다.</p>
 <h2>0. 요약</h2>
 <ol>
 <li><strong>표 간 불일치가 하나 있습니다.</strong> 표 4의 AMASS Unseen 총합 78.2는 표 3, 표 21, v1 논문의 70.2와 다릅니다. 이 값에 따라 PHUMA 대 AMASS 유의성이 p ≈ 0.06에서 p &lt; 0.001로 바뀝니다.</li>
@@ -977,7 +977,7 @@ li { margin: 2px 0; }
 </ul>
 <h3>5.4 저장소와 데이터 용량</h3>
 <ul>
-<li><code>data.zip</code> 3,416,370,206 바이트(3.42 GB). 승인 기준(1 GB 미만)을 넘으므로 다운로드하지 않았습니다.</li>
+<li><code>data.zip</code> 3,416,370,206 바이트(3.42 GB). 처음에는 승인 기준(1 GB 미만)을 넘어 받지 않았고, 2026-11-12 승인 후 내려받았습니다(추가 검증 절).</li>
 <li>원 PDF 13.9 MB(25 MB 미만이므로 gitignore 대상 아님).</li>
 </ul>
 <h2>6. 주장 검사</h2>
@@ -1094,7 +1094,7 @@ li { margin: 2px 0; }
 </table>
 <h2>7. 데이터 검증을 하지 않은 이유</h2>
 <ul>
-<li>공개 데이터는 <code>data.zip</code> 하나(3.42 GB)뿐입니다. 승인 기준 1 GB 미만에 맞지 않아 내려받지 않았습니다.</li>
+<li>공개 데이터는 <code>data.zip</code> 하나(3.42 GB)뿐입니다. 처음에는 승인 기준 1 GB 미만에 맞지 않아 받지 않았고, 2026-11-12 승인 후 내려받아 추가 검증 절에서 계산했습니다.</li>
 <li>작은 샘플도 없습니다. 저장소에는 <code>data/split/*.txt</code>(파일 목록)만 있고, README 예시 <code>example/kick.npy</code>는 저장소에 포함되어 있지 않습니다.</li>
 <li>따라서 <strong>논문의 지표 수치(표 1)를 PHUMA 데이터로 재계산하지 못했습니다.</strong> 대신 지표 정의를 장난감에서 시험하고, 표 간 일치를 검사했습니다.</li>
 <li>데이터를 받은 뒤의 검증 계획은 이 문서 §3.5와 §4를 기준으로 정합니다.</li>
@@ -1108,6 +1108,330 @@ li { margin: 2px 0; }
 <li><strong>성공률의 정의가 본문에 없다.</strong> &quot;전신 성공률, 0.15 m&quot;만 있습니다. 프레임 단위인지 모션 단위인지, 최대 오차인지 평균인지 모릅니다.</li>
 <li><strong>학습 예산이 같은지 알 수 없다.</strong> 데이터 크기가 다른 정책이 같은 반복 수로 학습됐는지 명시되지 않았습니다.</li>
 </ol>
+<h2>추가 검증 (2026-11-12): 공개 데이터로 지표 재계산</h2>
+<p>§7에서 미뤘던 데이터 검증을 이 절에서 했습니다. <code>data.zip</code> 전체를 내려받아 공개 G1·H1-2 모션의 물리 지표를 CPU에서 계산했습니다. 계산은 <code>analysis/extra_public_data_metrics.py</code>로 하며, 결과는 집계값만 <code>analysis/extra_public_data_metrics_results.json</code>에 저장합니다. 모션 원자료는 저장하지 않았습니다. 압축 구조는 <code>analysis/extra_zip_inventory.py</code>(결과 <code>analysis/extra_zip_inventory_results.json</code>)로 확인했습니다. 그림은 <code>analysis/extra_public_data_plots.py</code>로 만들었습니다.</p>
+<h3>1. 데이터 출처</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>파일</td>
+<td>Hugging Face <code>DAVIAN-Robotics/PHUMA</code>의 <code>data.zip</code></td>
+</tr>
+<tr>
+<td>크기</td>
+<td>3,416,370,206 바이트 (3.42 GB)</td>
+</tr>
+<tr>
+<td>sha256</td>
+<td><code>7bd38634f1ec075af907a2bce10616b083a5414885674ce6630664124e22e495</code> (응답 헤더 <code>x-linked-etag</code>와 일치)</td>
+</tr>
+<tr>
+<td>저장소 커밋</td>
+<td><code>48b0f5982969104ab041461e594a8b8c36db8ba5</code> (응답 헤더 <code>x-repo-commit</code>)</td>
+</tr>
+<tr>
+<td>내려받은 날</td>
+<td>2026-11-12 (응답 헤더 날짜)</td>
+</tr>
+<tr>
+<td>압축 구조</td>
+<td>멤버 147,149개. <code>data/g1/&lt;출처&gt;/*.npy</code> 73,076개, <code>data/h1_2/&lt;출처&gt;/*.npy</code> 73,076개, 디렉터리 997개. 출처 폴더는 로봇마다 15개이며 humanml 21,731, fitness 19,655, idea400 9,939 순으로 많습니다. 압축 해제 합계 4.29 GB</td>
+</tr>
+<tr>
+<td>파일 형식</td>
+<td>클립마다 <code>root_trans</code>(N×3), <code>root_ori</code>(N×4, xyzw), <code>dof_pos</code>(N×D), <code>fps</code>(모두 30). 피클로 감싼 numpy 객체라 제한된 피클 로더로만 읽었고, 모든 파일을 오류 없이 읽었습니다</td>
+</tr>
+<tr>
+<td>열 수</td>
+<td>G1 29열 중 손목 6열은 모든 클립에서 0이어서 제거하고 23관절로 씀. H1-2는 27열</td>
+</tr>
+<tr>
+<td>길이</td>
+<td>로봇 하나당 7,529,058 프레임 = 69.7 h (30 fps). 클립 중앙값 120 프레임(4 s)</td>
+</tr>
+</tbody>
+</table>
+<p>논문의 73.0 h와 76.0K 클립은 로봇 하나 기준으로 보는 것이 자연스럽습니다. 그러면 공개본은 클립 수가 약 4% 적고 시간이 약 4.5% 적습니다. 두 로봇의 합으로 쓴 것이라면 차이는 2배입니다. 본문에는 어느 쪽인지 없습니다.</p>
+<h3>2. 계산 명세 (표 1 지표 명세)</h3>
+<p>논문은 다섯 지표를 &quot;프레임 비율&quot;로만 정의하고, 저장소에는 표 1 계산 코드가 없습니다(<code>04</code> D14). 아래 명세는 이 분석에서 실제로 쓴 것입니다. 논문 정의와 다른 부분은 오른쪽 열에 표시했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>이 분석의 명세</th>
+<th>논문 본문</th>
+<th>차이와 비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>순운동학</td>
+<td>저장소의 정적 MJCF(<code>repo/asset/humanoid_model/&lt;로봇&gt;/scene.xml</code>)와 MuJoCo 순운동학</td>
+<td>없음</td>
+<td>로봇 모델 값은 저장소 파일 그대로</td>
+</tr>
+<tr>
+<td>발 영역</td>
+<td>발목 롤 링크의 충돌 기하 표면 점을 키포인트 x 중점으로 뒤꿈치·발끝 두 영역으로 나눔. 좌우 합쳐 4영역</td>
+<td>4영역(LH, LT, RH, RT), 영역당 꼭짓점 22개</td>
+<td>점 집합이 같지 않음</td>
+</tr>
+<tr>
+<td>영역 높이 H</td>
+<td>영역 안 점들의 최저 z</td>
+<td>발 높이</td>
+<td>같은 의미</td>
+</tr>
+<tr>
+<td>영역 위치</td>
+<td>영역 안 점들의 수평 평균</td>
+<td>명시 없음</td>
+<td>최저점 위치를 쓰면 속도 결과가 달라질 수 있음</td>
+</tr>
+<tr>
+<td>바닥 높이 g</td>
+<td>주값 g = 0 (데이터 바닥). 대안으로 클립마다 최빈 높이를 쓰되 창 폭 2.5 cm, 4N개 값 기준</td>
+<td>식 (11)</td>
+<td>주값이 데이터 바닥과 맞는지는 아래 3절에서 봄</td>
+</tr>
+<tr>
+<td>접촉</td>
+<td>H ≤ 2.5 cm (주값). 5 cm, 10 cm도 계산</td>
+<td>&quot;접촉 중&quot; (정의 없음)</td>
+<td>결과를 크게 좌우함</td>
+</tr>
+<tr>
+<td>분모</td>
+<td>접촉 중인 영역-프레임 수 (영역 4개 × 프레임 중 접촉한 것)</td>
+<td>&quot;프레임 비율&quot;</td>
+<td>프레임 단위인지 영역 단위인지 논문에 없음</td>
+</tr>
+<tr>
+<td>비접지</td>
+<td>접촉이면서 H &gt; 1 cm이면 실패</td>
+<td>접촉 중 발이 1 cm 이내로 떠 있음</td>
+<td>같음</td>
+</tr>
+<tr>
+<td>비관통</td>
+<td>접촉이면서 H &lt; −1 cm이면 실패</td>
+<td>접촉 중 발이 1 cm 이내로 뚫지 않음</td>
+<td>같음</td>
+</tr>
+<tr>
+<td>비미끄럼</td>
+<td>접촉이면서 영역 수평 위치의 속도 ≥ 0.10 m/s이면 실패. 속도는 4초 창 안의 중앙차분</td>
+<td>접촉 중 수평 발 속도 &lt; 10 cm/s</td>
+<td>창 경계는 편측 차분. 접촉 경계 프레임 처리 없음</td>
+</tr>
+<tr>
+<td>관절 feasibility</td>
+<td>프레임에서 위치가 [0.98 min, 0.98 max] 안이고 |q̇| ≤ 0.98 × 속도 한계(<code>config.yaml</code>)</td>
+<td>위치·속도 98% 안</td>
+<td>프레임 단위. 두 조건을 모두 만족해야 통과</td>
+</tr>
+<tr>
+<td>충실도</td>
+<td>계산하지 않음. 공개 데이터에 사람 기준 모션이 없음</td>
+<td>관절 위치 오차 &lt; 10 cm, 방향 &lt; 10°</td>
+<td>미계산</td>
+</tr>
+<tr>
+<td>2차 필터 (G1만)</td>
+<td>저장소 큐레이션과 같은 창(120프레임, 겹침 15, 최소 30). 창의 최저 질량중심 높이 &lt; 0.40 m 또는 창 평균 BoS 거리 &gt; 0.16 m이면 실패</td>
+<td>논문에 없음 (<code>04</code> D7)</td>
+<td>H1-2(0.6 m, 0.24 m)는 계산하지 않음</td>
+</tr>
+</tbody>
+</table>
+<p>지표 통과율은 (접촉 영역-프레임 − 실패) ÷ 접촉 영역-프레임입니다. 전수 계산이므로 난수 시드의 영향은 없습니다(시드 20261112는 표본 옵션에만 쓰였고 이번 실행에서는 쓰지 않았습니다).</p>
+<h3>3. 결과: 논문 표 1과 비교</h3>
+<table>
+<thead>
+<tr>
+<th>지표</th>
+<th>G1 재계산</th>
+<th>G1 논문 (PhySINK, 표 1)</th>
+<th>차이 (%p)</th>
+<th>H1-2 재계산</th>
+<th>H1-2 논문 (PhySINK, 표 37)</th>
+<th>차이 (%p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>비접지</td>
+<td>94.2</td>
+<td>99.9</td>
+<td>−5.7</td>
+<td>94.3</td>
+<td>97.7</td>
+<td>−3.4</td>
+</tr>
+<tr>
+<td>비관통</td>
+<td>79.6</td>
+<td>96.8</td>
+<td>−17.2</td>
+<td>75.6</td>
+<td>99.7</td>
+<td>−24.1</td>
+</tr>
+<tr>
+<td>비미끄럼</td>
+<td>69.7</td>
+<td>89.7</td>
+<td>−20.0</td>
+<td>68.2</td>
+<td>87.7</td>
+<td>−19.5</td>
+</tr>
+<tr>
+<td>관절 feasibility</td>
+<td>100.0</td>
+<td>100.0</td>
+<td>0.0</td>
+<td>99.9</td>
+<td>99.9</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>충실도</td>
+<td>계산 안 함</td>
+<td>94.8</td>
+<td>—</td>
+<td>계산 안 함</td>
+<td>93.9</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>관절 feasibility 값만 논문과 맞습니다. 나머지 세 발 지표는 모두 논문보다 낮습니다. 로봇별 클립 중앙값은 G1 기준 비접지 95.2%, 비관통 83.4%, 비미끄럼 71.5%, H1-2 기준 95.1%, 80.7%, 68.0%입니다.</p>
+<p><strong>접촉 판정과 바닥 기준에 따른 민감도</strong> (통과율, %)</p>
+<table>
+<thead>
+<tr>
+<th>설정</th>
+<th>G1 비접지</th>
+<th>G1 비관통</th>
+<th>G1 비미끄럼</th>
+<th>H1-2 비접지</th>
+<th>H1-2 비관통</th>
+<th>H1-2 비미끄럼</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>주값 (접촉 2.5 cm, 바닥 z = 0)</td>
+<td>94.2</td>
+<td>79.6</td>
+<td>69.7</td>
+<td>94.3</td>
+<td>75.6</td>
+<td>68.2</td>
+</tr>
+<tr>
+<td>접촉 5 cm</td>
+<td>89.5</td>
+<td>80.6</td>
+<td>67.4</td>
+<td>89.3</td>
+<td>76.9</td>
+<td>65.9</td>
+</tr>
+<tr>
+<td>접촉 10 cm</td>
+<td>84.5</td>
+<td>81.7</td>
+<td>64.8</td>
+<td>83.9</td>
+<td>78.3</td>
+<td>63.1</td>
+</tr>
+<tr>
+<td>클립별 최빈 바닥 (접촉 2.5 cm)</td>
+<td>74.9</td>
+<td>70.3</td>
+<td>69.1</td>
+<td>77.2</td>
+<td>68.5</td>
+<td>67.8</td>
+</tr>
+</tbody>
+</table>
+<p>해석은 다음과 같습니다.</p>
+<ol>
+<li><strong>관절 한계 일치는 검증으로 볼 수 없습니다.</strong> 저장 직전 클리핑(<code>motion_adaptation.py</code> 391행)이 같은 98% 한계를 씁니다. 그래서 G1의 100%는 정의상 거의 보장됩니다. H1-2에서는 7,228개 클립(9.9%)에 위치 한계를 넘는 프레임이 있습니다. 원인은 확인하지 못했습니다. 클리핑이 쓰는 한계(<code>motion_adaptation.py</code>의 <code>retarget.robot.joints_range</code>, 로봇 래퍼 쪽에서 옴. 이 분석에서는 읽지 않음)가 이 분석의 MJCF 한계와 다를 가능성이 있습니다.</li>
+<li><strong>세 발 지표가 모두 논문보다 낮습니다.</strong> 가장 큰 차이는 비관통입니다. 접촉 판정 대역을 2.5 cm에서 10 cm로 넓혀도 비관통은 79.6%에서 81.7%로만 올라갑니다. 따라서 대역 하나로 논문 값을 설명할 수 없습니다. 클립별 최빈 바닥을 쓰면 세 지표 모두 더 떨어집니다.</li>
+<li><strong>공개 데이터의 바닥은 클립마다 조금씩 다릅니다.</strong> 클립별 최빈 바닥이 z = 0의 1 cm 안에 있는 클립은 G1에서 54%, H1-2에서 57%입니다. 5–95% 범위는 −2.5 cm에서 +1.4 cm입니다. 1 cm 허용 오차 근처에서는 이 차이만으로도 떠 있음과 관통 판정이 바뀝니다.</li>
+<li><strong>접촉 판정 대역이 1 cm보다 좁아지면 비접지는 정의상 100%에 가까워집니다.</strong> 이 조건은 계산하지 않았습니다. 논문의 99.9%가 이런 정의에서 나왔는지는 판정할 수 없습니다.</li>
+<li><strong>1 cm 허용 오차의 민감도는 계산하지 않았습니다.</strong> 프레임별 높이를 저장하지 않았기 때문입니다. 다시 계산해야 합니다.</li>
+<li><strong>비미끄럼은 속도 정의에 따라 달라질 수 있습니다.</strong> 이 분석은 영역 평균 위치의 중앙차분을 씁니다. 발의 최저점, 평활 속도, 접촉 경계 프레임 제외는 쓰지 않았습니다. 공개 데이터는 FK 출력이라 §3.5의 잡음 효과는 작을 것으로 보이지만 확인하지 않았습니다.</li>
+</ol>
+<p><strong>결론:</strong> 공개 G1 데이터의 PhySINK 지표는 논문 표 1 값으로 재현되지 않았습니다. 관절 한계만 맞습니다. 이 명세의 접촉 판정, 분모, 바닥 기준이 논문과 가장 다를 가능성이 큽니다. 논문에는 이 세 가지의 정의가 없어서 불일치의 원인을 특정하지 못했습니다. 이 결과는 &quot;이 명세에서의 값&quot;으로만 읽어야 합니다.</p>
+<h3>4. G1 2차 필터 결과</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>검사한 창</td>
+<td>73,076개 (클립 하나가 창 하나. 프레임 7,529,058)</td>
+</tr>
+<tr>
+<td>질량중심 높이 &lt; 0.40 m인 창</td>
+<td>17개 (0.023%), 1,806프레임</td>
+</tr>
+<tr>
+<td>BoS 거리 &gt; 0.16 m인 창</td>
+<td>0개</td>
+</tr>
+<tr>
+<td>최저 질량중심 높이 (창별)</td>
+<td>5% 0.539 m, 중앙값 0.681 m, 95% 0.723 m</td>
+</tr>
+<tr>
+<td>창 평균 BoS 거리 (창별)</td>
+<td>중앙값 0 m (질량중심이 발 볼록 껍질 안), 95% 0.019 m</td>
+</tr>
+<tr>
+<td>창 번호가 빈 곳</td>
+<td>원본 시퀀스 36,068개 중 4,598개에서 빈 번호 6,118개</td>
+</tr>
+<tr>
+<td>인접 창 15프레임 겹침이 정확히 같은 쌍</td>
+<td>0 / 36,239</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>공개 G1 데이터는 2차 필터를 거의 통과합니다. 질량중심 높이 분포는 0.40 m 근처에서 잘리지 않고, 0.54 m 아래로 얇은 꼬리만 있습니다. 이 모양은 필터가 적용된 결과와 맞습니다. 다만 필터 전 분포를 보지 않았으므로 적용 여부를 확정하지는 못합니다.</li>
+<li>필터가 저장소와 같은 방식으로 적용되었다면 실패한 창이 0개여야 합니다. 17개가 남은 이유는 (1) 질량중심 계산 차이, (2) 창 분할 전 클립 전체에 필터를 적용, (3) 데이터 생성 후 수정 중 하나일 수 있으나 확인하지 못했습니다.</li>
+<li>빈 창 번호는 중간 창이 어떤 필터로 제거되었음을 뜻할 수 있습니다. 논문 표 7의 필터가 창 단위로 적용되었다면 이에 해당합니다. 확인하지 못했습니다.</li>
+<li>인접 창 쌍에서 겹침 15프레임이 정확히 같은 경우가 한 번도 없습니다. 창이 같은 연속 동작에서 잘린 것인지, 창마다 다시 정렬된 것인지 공개 파일만으로는 알 수 없습니다. 창별 지표는 창 안에서만 계산하므로 이 점의 영향은 제한적입니다.</li>
+</ul>
+<p><img src="figures/own_public_metrics.png" alt="공개 G1·H1-2 모션의 발 지표 통과율과 논문 표 1 PhySINK 값 비교 (a), G1 2차 필터의 최저 질량중심 높이 분포 (b)" /></p>
+<p class="cap">직접 계산(공개 데이터, CPU). (a) 주값 명세의 통과율(파란색)과 논문 표 1(G1)·표 37(H1-2) PhySINK 값(회색). 관절 한계만 맞습니다. (b) G1 창별 최저 질량중심 높이의 5–95% 범위와 중앙값, 0.40 m 임계. 임계 아래 창은 17개입니다. 논문 원 그림이 아닙니다. 논문 값은 표 1과 표 37에서 옮겼습니다.</p>
+<h3>5. 한계</h3>
+<ul>
+<li>논문 정의가 없어서 접촉 판정, 분모, 속도, 바닥 기준은 이 분석의 선택입니다. 다른 선택이면 값이 달라집니다.</li>
+<li>충실도는 계산하지 않았습니다. 공개 데이터에 사람 기준 모션이 없습니다.</li>
+<li>허용 오차 1 cm의 민감도와 H1-2의 2차 필터는 계산하지 않았습니다.</li>
+<li>공개 데이터는 최종 출력만 있으므로 리타게팅 중간 상태나 손실 값은 볼 수 없습니다.</li>
+<li>공개 데이터의 클립 수와 길이(로봇당 73,076개, 69.7 h)는 논문(76.0K, 73.0 h)과 다릅니다. 공개본이 논문의 평가 데이터와 같은지 확인되지 않았습니다.</li>
+<li>두 로봇의 결과는 같은 명세로 계산했지만, H1-2 관절 한계 문제는 이 명세 자체의 문제인지 데이터 문제인지 구분하지 못했습니다.</li>
+<li>원 데이터(<code>data.zip</code>)는 <code>phuma/data/zip/</code>에 두었고, 이 저장소에는 포함되지 않습니다(<code>.gitignore</code>). 다시 받으려면 <code>curl -L -o phuma/data/zip/data.zip https://huggingface.co/datasets/DAVIAN-Robotics/PHUMA/resolve/main/data.zip</code> 을 실행하고 sha256을 대조합니다.</li>
+</ul>
 </section>
 <section class="chapter"><h1>PHUMA 공개 코드 대조 (04): 논문 ↔ 코드</h1>
 <p><strong>정적 읽기만 했습니다.</strong> 저장소는 <code>phuma/repo/</code>에 얕게 복제했습니다(HEAD <code>2faf15b</code>, 2026-09-30). 스크립트는 실행하지 않았고, 패키지도 설치하지 않았습니다. 판단 근거는 파일과 줄 번호로 씁니다. 코드를 실행하지 않았으므로 &quot;버그&quot;는 정적 판단이며 실행으로 확인하지 않았습니다.</p>
@@ -1219,7 +1543,7 @@ li { margin: 2px 0; }
 <td>로봇 공간 추가 필터</td>
 <td>논문에 없음</td>
 <td><code>preprocess_g1_folder.py</code> (기본값): 질량중심 최소 높이 0.4 m, 질량중심 대 BoS 0.16 m. H1-2 (<code>preprocess_h1_2_folder.py</code>): 0.6 m, 0.24 m. 다운로드 스크립트가 이 필터를 실행</td>
-<td><strong>누락</strong> (논문 표 7과 별개의 2차 필터. 공개 데이터가 이 필터를 거친 결과인지 확인 필요)</td>
+<td><strong>누락</strong> (논문 표 7과 별개의 2차 필터. 공개 데이터가 이 필터를 거친 결과인지 확인 필요) (2026-11-12 추가) 공개 G1 데이터에서 질량중심 높이 필터 실패 창은 17개(0.023%), BoS 실패는 0개입니다. 공개본이 이 필터를 거쳤는지는 확인하지 못했습니다(<code>03</code> 추가 검증 §4).</td>
 </tr>
 <tr>
 <td>D8</td>
@@ -1268,7 +1592,7 @@ li { margin: 2px 0; }
 <td>표 1 지표 (충실도 10 cm·10°, 비접지·비관통 1 cm, 비미끄럼 10 cm/s, 관절 98%)</td>
 <td>프레임 비율(%)</td>
 <td><strong>지표 계산 코드가 없음.</strong> 실행 중 출력은 다른 정의: 접촉 마스크 <code>contact == max(contact)</code>(전체 배열 최댓값과 같은 프레임만), 발 높이 <strong>절댓값 평균</strong>, 미끄럼 마스크 높이 &lt; 2.5 mm, 관절 위반은 <strong>위치만</strong>, 속도 한계 없음</td>
-<td><strong>누락</strong>. 표 1 수치를 저장소로 재현할 수 없음</td>
+<td><strong>누락</strong>. 표 1 수치를 저장소로 재현할 수 없음 (2026-11-12 추가) 명세를 정해 공개 데이터로 계산했습니다. 주값 명세의 G1 비접지 94.2, 비관통 79.6, 비미끄럼 69.7은 논문 표 1과 맞지 않고, 관절 한계만 맞습니다(<code>03</code> 추가 검증 §3).</td>
 </tr>
 <tr>
 <td>D15</td>
@@ -1367,13 +1691,13 @@ li { margin: 2px 0; }
 </tr>
 <tr>
 <td><strong>공개 데이터 사용</strong> (다운로드, 로드, 정책 학습 입력)</td>
-<td><strong>조건부</strong></td>
-<td><code>data.zip</code> 3.42 GB로 승인 기준(1 GB 미만)을 넘음. 승인 후에도 원천 약관 확인이 필요 (<code>02</code> §4). 학습은 GPU 필요</td>
+<td><strong>다운로드·로드 완료, 학습은 불가</strong></td>
+<td>2026-11-12 승인 후 <code>data.zip</code>(3.42 GB)을 받아 CPU로 읽음(<code>03</code> 추가 검증). 원천 약관 확인은 여전히 필요 (<code>02</code> §4). 학습은 GPU 필요</td>
 </tr>
 <tr>
 <td><strong>공개 로봇 모션으로 지표 재계산</strong> (접지, 관통, 관절, 미끄럼; 표 1 재현에 가까운 것)</td>
-<td><strong>조건부 (CPU 가능)</strong></td>
-<td>데이터 다운로드 승인 후 MuJoCo FK(또는 numpy FK)로 발 높이와 속도를 구하면 됨. 맥 CPU로 가능. 표 1 정의와 똑같이 맞추려면 정의를 정해야 함 (D14). 구현 1–2일</td>
+<td><strong>완료 (CPU, 2026-11-12)</strong></td>
+<td>MuJoCo FK로 G1·H1-2 전 클립을 계산(로봇당 15–18분). 표 1 정의가 부족해 명세를 정해 계산했고, 발 지표 세 개는 표 1과 맞지 않음 (<code>03</code> 추가 검증, D14)</td>
 </tr>
 <tr>
 <td><strong>큐레이션 임계 재구현</strong> (표 7, numpy)</td>
@@ -1399,7 +1723,7 @@ li { margin: 2px 0; }
 </table>
 <h3>4.2 이 맥(Apple M4 Pro, 약 24 GiB 통합 메모리, MPS, CUDA 없음)에서의 조건</h3>
 <ul>
-<li><strong>torch:</strong> 저장소 요구 사항은 <code>torch==2.6.0</code>, <code>mujoco==3.3.0</code>, <code>numpy==1.26.4</code>, Python 3.9입니다. 이 분석의 실행 환경은 torch 2.15.0, mujoco 4.0.0입니다. 재현하려면 별도 환경(패키지 설치 승인 필요)이 필요합니다. 이 분석에서 설치하지 않았습니다.</li>
+<li><strong>torch:</strong> 저장소 요구 사항은 <code>torch==2.6.0</code>, <code>mujoco==3.3.0</code>, <code>numpy==1.26.4</code>, Python 3.9입니다. 이 분석의 실행 환경은 torch 2.15.0, mujoco 4.0.0입니다. 저장소 요구 버전은 설치하지 않았습니다. 2026-11-12 공개 데이터 재계산은 기존 환경(mujoco 4.0.0)과 직접 짠 스크립트로 했습니다.</li>
 <li><strong>장치:</strong> 리타게팅 기본값은 CUDA입니다. MPS는 <code>--device mps</code>로 바꿔야 하며, <code>pytorch_kinematics</code> 배치 FK와 <code>torch.diff</code> 계열 연산의 MPS 지원은 확인하지 않았습니다.</li>
 <li><strong>처리 시간 추정(미측정):</strong> RTX 3090에서 PhySINK 0.92 fps(표 10). 4초 클립 한 개는 약 130초입니다. 맥에서 2–5배 느리다고 가정하면 클립 하나에 4–11분이고, 100개 부분 집합은 수 시간이 걸릴 것으로 보입니다. 전체 76K 클립은 현실적이지 않습니다.</li>
 <li><strong>메모리:</strong> 3001 반복의 역전파 기록은 클립당 수백 MB 수준으로 추정됩니다(미측정). 24 GiB는 한두 클립을 병렬로 돌리는 데 충분할 것으로 보입니다.</li>
