@@ -19,15 +19,27 @@
 | `analysis/toy_symmetry.py` | 대칭 물체에서 목표 모호성 (numpy, 약 2초) |
 | `analysis/toy_tolerance.py` | 허용오차와 예측 실패율 모형 (numpy, 약 6초) |
 | `analysis/plot_figures.py` | 그래프 네 장 생성 |
+| `analysis/extra_goal_alignment.py` | 손 모델(MuJoCo)에서 목표 정렬 손실만 바꾼 소규모 비교. 손 모델은 별도로 받아야 함(아래 명령) |
+| `analysis/extra_goal_alignment_results.json` | 위 비교의 집계 결과(CS, 검정, 임베딩 진단) |
 
 ## 재실행
 
 ```bash
-pip install numpy scipy matplotlib
+pip install numpy scipy matplotlib torch mujoco
 python3 analysis/table_check.py
 python3 analysis/toy_symmetry.py
 python3 analysis/toy_tolerance.py
 python3 analysis/plot_figures.py
+```
+
+### 손 모델 비교 (선택, CPU 약 20–25분)
+
+손 모델은 저장소에 넣지 않았습니다. 이 폴더 안에서 다음 명령으로 받습니다(라이선스 BSD-3-Clause, commit 370c43965323c0944b433b202aac5058b5f907a9, 폴더 2.5 MB).
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/google-deepmind/mujoco_menagerie.git data/menagerie
+git -C data/menagerie sparse-checkout set wonik_allegro
+python3 analysis/extra_goal_alignment.py
 ```
 
 ## 출처와 라이선스
