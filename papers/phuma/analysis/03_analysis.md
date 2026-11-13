@@ -336,4 +336,4 @@ H1-2 필터를 넣어 같은 스크립트로 다시 돌렸을 때 발 지표와 
 - 공개 데이터는 최종 출력만 있으므로 리타게팅 중간 상태나 손실 값은 볼 수 없습니다.
 - 공개 데이터의 클립 수와 길이(로봇당 73,076개, 69.7 h)는 논문(76.0K, 73.0 h)과 다릅니다. 공개본이 논문의 평가 데이터와 같은지 확인되지 않았습니다.
 - 두 로봇의 결과는 같은 명세로 계산했지만, H1-2 관절 한계 문제는 이 명세 자체의 문제인지 데이터 문제인지 구분하지 못했습니다.
-- 원 데이터(`data.zip`)는 `phuma/data/zip/`에 두었고, 이 저장소에는 포함되지 않습니다(`.gitignore`). 다시 받으려면 `curl -L -o phuma/data/zip/data.zip https://huggingface.co/datasets/DAVIAN-Robotics/PHUMA/resolve/main/data.zip` 을 실행하고 sha256을 대조합니다.
+- 원 데이터(`data.zip`)는 계산 뒤 2026-11-13에 지웠고, 이 저장소에는 포함되지 않습니다. 집계값만 결과 JSON에 남겼습니다. 다시 받으려면 `curl -L -o phuma/data/zip/data.zip https://huggingface.co/datasets/DAVIAN-Robotics/PHUMA/resolve/main/data.zip` 을 실행하고 sha256을 대조합니다.
