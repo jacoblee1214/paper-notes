@@ -20,6 +20,7 @@ toy 수준의 메커니즘 확인은 CPU에서 끝났습니다(`analysis/04_clai
 | `analysis/extra_lyapunov_noise.py` | 접선의 리아푸노프 기울기와 f32·f64 누적 순서 잡음의 임계 스텝 |
 | `analysis/extra_fixedpoint_reduce.py` | 고정소수점 정수 리덕션의 셔플 재현성과 접선 정확성 |
 | `analysis/extra_pinn_hessian.py` | 작은 PINN 손실의 이차 도함수에 AD/FD 검사 (torch 필요, CPU 수 초) |
+| `analysis/extra_mpm2d.py` | 2차원 MLS-MPM 축소 구현과 전진 접선 기울기, 극분해 두 식의 AD/FD 비교 (numpy, 약 2분) |
 | `analysis/plot_figures.py` | toy 그래프 |
 | `report/crop_figures.py` | 논문 그림을 PDF에서 자르는 스크립트 |
 
@@ -32,6 +33,7 @@ python3 analysis/fd_chaos_toy.py
 python3 analysis/reduction_order_toy.py
 python3 analysis/svd_vjp_toy.py
 python3 analysis/extra_pinn_hessian.py  # torch 필요
+python3 analysis/extra_mpm2d.py  # 약 2분
 python3 analysis/plot_figures.py
 ```
 
