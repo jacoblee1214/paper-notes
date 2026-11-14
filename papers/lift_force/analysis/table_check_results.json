@@ -1,0 +1,278 @@
+{
+  "assumptions": {
+    "binary_n": 30,
+    "binary_n_v1": 10,
+    "sd_grid": [
+      0.2,
+      0.3,
+      0.4,
+      0.5
+    ]
+  },
+  "hanoi_counts": {
+    "LIFT_peak_0.6": {
+      "k": 18,
+      "n": 30,
+      "rate": 0.6,
+      "wilson95": [
+        0.423,
+        0.754
+      ]
+    },
+    "LIFT_final_0.6_at_2.0K": {
+      "k": 18,
+      "n": 30,
+      "rate": 0.6,
+      "wilson95": [
+        0.423,
+        0.754
+      ]
+    },
+    "OnlineDAgger_peak_0.3": {
+      "k": 9,
+      "n": 30,
+      "rate": 0.3,
+      "wilson95": [
+        0.167,
+        0.479
+      ]
+    },
+    "OnlineDAgger_final_0.2": {
+      "k": 6,
+      "n": 30,
+      "rate": 0.2,
+      "wilson95": [
+        0.095,
+        0.373
+      ]
+    },
+    "LIFT_wo_RFI_peak_0.5": {
+      "k": 15,
+      "n": 30,
+      "rate": 0.5,
+      "wilson95": [
+        0.332,
+        0.668
+      ]
+    },
+    "LIFT_wo_RFI_final_0.1": {
+      "k": 3,
+      "n": 30,
+      "rate": 0.1,
+      "wilson95": [
+        0.035,
+        0.256
+      ]
+    }
+  },
+  "hanoi_fisher": {
+    "LIFT_peak_0.6 vs OnlineDAgger_peak_0.3": {
+      "p_two_sided": 0.037,
+      "diff": 0.3
+    },
+    "LIFT_final_0.6_at_2.0K vs OnlineDAgger_final_0.2": {
+      "p_two_sided": 0.0033,
+      "diff": 0.4
+    },
+    "LIFT_peak_0.6 vs LIFT_wo_RFI_peak_0.5": {
+      "p_two_sided": 0.6042,
+      "diff": 0.1
+    },
+    "LIFT_final_0.6_at_2.0K vs LIFT_wo_RFI_final_0.1": {
+      "p_two_sided": 0.0001,
+      "diff": 0.5
+    }
+  },
+  "hanoi_peak_selection_null": {
+    "p0=0.2,K=4": 0.0004,
+    "p0=0.2,K=6": 0.0002,
+    "p0=0.3,K=4": 0.0009,
+    "p0=0.3,K=6": 0.0003
+  },
+  "half_width_95_n30": {
+    "0.2": 0.075,
+    "0.3": 0.112,
+    "0.4": 0.149,
+    "0.5": 0.187
+  },
+  "mean_diff_sensitivity": {
+    "towel_LIFT_0.825_vs_DAgger_0.725": {
+      "SD=0.2": {
+        "z": 1.94,
+        "p_two_sided": 0.0528
+      },
+      "SD=0.3": {
+        "z": 1.29,
+        "p_two_sided": 0.1967
+      },
+      "SD=0.4": {
+        "z": 0.97,
+        "p_two_sided": 0.3329
+      },
+      "SD=0.5": {
+        "z": 0.77,
+        "p_two_sided": 0.4386
+      }
+    },
+    "towel_LIFT_0.65_at_2.3K_vs_DAgger_0.725_at_3.1K": {
+      "SD=0.2": {
+        "z": -1.45,
+        "p_two_sided": 0.1464
+      },
+      "SD=0.3": {
+        "z": -0.97,
+        "p_two_sided": 0.3329
+      },
+      "SD=0.4": {
+        "z": -0.73,
+        "p_two_sided": 0.4677
+      },
+      "SD=0.5": {
+        "z": -0.58,
+        "p_two_sided": 0.5613
+      }
+    },
+    "book_LIFT_0.6_vs_DAgger_0.4": {
+      "SD=0.2": {
+        "z": 3.87,
+        "p_two_sided": 0.0001
+      },
+      "SD=0.3": {
+        "z": 2.58,
+        "p_two_sided": 0.0098
+      },
+      "SD=0.4": {
+        "z": 1.94,
+        "p_two_sided": 0.0528
+      },
+      "SD=0.5": {
+        "z": 1.55,
+        "p_two_sided": 0.1213
+      }
+    },
+    "hanoi_LIFT_0.6_vs_DAgger_0.3_means": {
+      "SD=0.2": {
+        "z": 5.81,
+        "p_two_sided": 0.0
+      },
+      "SD=0.3": {
+        "z": 3.87,
+        "p_two_sided": 0.0001
+      },
+      "SD=0.4": {
+        "z": 2.9,
+        "p_two_sided": 0.0037
+      },
+      "SD=0.5": {
+        "z": 2.32,
+        "p_two_sided": 0.0201
+      }
+    }
+  },
+  "power_binary_n30": {
+    "p1=0.6_vs_p2=0.3": 0.562,
+    "p1=0.6_vs_p2=0.2": 0.847
+  },
+  "figure1_vs_text": {
+    "towel": {
+      "fig_vision": 0.733,
+      "fig_lift": 0.842,
+      "text_vision": 0.725,
+      "text_lift": 0.825,
+      "diff_vision": 0.008,
+      "diff_lift": 0.017
+    },
+    "book": {
+      "fig_vision": 0.367,
+      "fig_lift": 0.583,
+      "text_vision": 0.4,
+      "text_lift": 0.6,
+      "diff_vision": -0.033,
+      "diff_lift": -0.017
+    },
+    "hanoi": {
+      "fig_vision": 0.267,
+      "fig_lift": 0.567,
+      "text_vision": 0.3,
+      "text_lift": 0.6,
+      "diff_vision": -0.033,
+      "diff_lift": -0.033
+    }
+  },
+  "figure1_thirds_check": {
+    "hanoi_vision": {
+      "x30": 8.01
+    },
+    "hanoi_lift": {
+      "x30": 17.01
+    },
+    "book_vision": {
+      "x30": 11.01
+    }
+  },
+  "generalization_fig6": {
+    "towel": {
+      "Another desktop": {
+        "diff": 0.025,
+        "z_SD=0.3": 0.32,
+        "p_SD=0.3": 0.7469,
+        "z_SD=0.5": 0.19,
+        "p_SD=0.5": 0.8465
+      },
+      "Blue towel": {
+        "diff": 0.125,
+        "z_SD=0.3": 1.61,
+        "p_SD=0.3": 0.1066,
+        "z_SD=0.5": 0.97,
+        "p_SD=0.5": 0.3329
+      },
+      "Purple light": {
+        "diff": 0.05,
+        "z_SD=0.3": 0.65,
+        "p_SD=0.3": 0.5186,
+        "z_SD=0.5": 0.39,
+        "p_SD=0.5": 0.6985
+      }
+    },
+    "book": {
+      "Another book": {
+        "diff": -0.15,
+        "z_SD=0.3": -1.94,
+        "p_SD=0.3": 0.0528,
+        "z_SD=0.5": -1.16,
+        "p_SD=0.5": 0.2453
+      },
+      "Another desktop": {
+        "diff": -0.4,
+        "z_SD=0.3": -5.16,
+        "p_SD=0.3": 0.0,
+        "z_SD=0.5": -3.1,
+        "p_SD=0.5": 0.0019
+      },
+      "Purple light": {
+        "diff": -0.05,
+        "z_SD=0.3": -0.65,
+        "p_SD=0.3": 0.5186,
+        "z_SD=0.5": -0.39,
+        "p_SD=0.5": 0.6985
+      }
+    },
+    "hanoi": {
+      "Another desktop": {
+        "diff": -0.3,
+        "z_SD=0.3": -3.87,
+        "p_SD=0.3": 0.0001,
+        "z_SD=0.5": -2.32,
+        "p_SD=0.5": 0.0201
+      },
+      "Purple light": {
+        "diff": -0.1,
+        "z_SD=0.3": -1.29,
+        "p_SD=0.3": 0.1967,
+        "z_SD=0.5": -0.77,
+        "p_SD=0.5": 0.4386
+      }
+    },
+    "hanoi_binary_fisher_original_18_of_30_vs_desktop_9_of_30": 0.037
+  }
+}
