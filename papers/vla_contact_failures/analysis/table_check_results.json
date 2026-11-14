@@ -1,0 +1,740 @@
+{
+ "n_per_cell": 40,
+ "main_counts": {
+  "pi05": [
+   12,
+   15,
+   5,
+   40,
+   6
+  ],
+  "pi05_LN": [
+   20,
+   19,
+   23,
+   35,
+   15
+  ],
+  "FACT": [
+   23,
+   19,
+   30,
+   36,
+   24
+  ],
+  "ForceVLA": [
+   13,
+   15,
+   5,
+   31,
+   17
+  ],
+  "TA-VLA": [
+   12,
+   10,
+   8,
+   39,
+   6
+  ]
+ },
+ "main_avg_recomputed": {
+  "pi05": 39.0,
+  "pi05_LN": 56.0,
+  "FACT": 66.0,
+  "ForceVLA": 40.5,
+  "TA-VLA": 37.5
+ },
+ "main_avg_reported": {
+  "pi05": 39.0,
+  "pi05_LN": 56.0,
+  "FACT": 66.0,
+  "ForceVLA": 40.5,
+  "TA-VLA": 37.5
+ },
+ "main_avg_mismatch": {
+  "pi05": 0.0,
+  "pi05_LN": 0.0,
+  "FACT": 0.0,
+  "ForceVLA": 0.0,
+  "TA-VLA": 0.0
+ },
+ "main_tests": [
+  {
+   "method": "pi05_LN",
+   "task": "plug",
+   "k": 20,
+   "k_base": 12,
+   "wilson95": [
+    35.2,
+    64.8
+   ],
+   "p_reported": 0.055,
+   "p_recomputed": 0.0548,
+   "p_holm_20": 0.7666
+  },
+  {
+   "method": "pi05_LN",
+   "task": "usb",
+   "k": 19,
+   "k_base": 15,
+   "wilson95": [
+    32.9,
+    62.5
+   ],
+   "p_reported": 0.249,
+   "p_recomputed": 0.2489,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "pi05_LN",
+   "task": "button",
+   "k": 23,
+   "k_base": 5,
+   "wilson95": [
+    42.2,
+    71.5
+   ],
+   "p_reported": 0.001,
+   "p_recomputed": 0.0,
+   "p_holm_20": 0.0004
+  },
+  {
+   "method": "pi05_LN",
+   "task": "board",
+   "k": 35,
+   "k_base": 40,
+   "wilson95": [
+    73.9,
+    94.5
+   ],
+   "p_reported": 1.0,
+   "p_recomputed": 1.0,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "pi05_LN",
+   "task": "key",
+   "k": 15,
+   "k_base": 6,
+   "wilson95": [
+    24.2,
+    53.0
+   ],
+   "p_reported": 0.02,
+   "p_recomputed": 0.0203,
+   "p_holm_20": 0.3046
+  },
+  {
+   "method": "FACT",
+   "task": "plug",
+   "k": 23,
+   "k_base": 12,
+   "wilson95": [
+    42.2,
+    71.5
+   ],
+   "p_reported": 0.012,
+   "p_recomputed": 0.0118,
+   "p_holm_20": 0.1886
+  },
+  {
+   "method": "FACT",
+   "task": "usb",
+   "k": 19,
+   "k_base": 15,
+   "wilson95": [
+    32.9,
+    62.5
+   ],
+   "p_reported": 0.249,
+   "p_recomputed": 0.2489,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "FACT",
+   "task": "button",
+   "k": 30,
+   "k_base": 5,
+   "wilson95": [
+    59.8,
+    85.8
+   ],
+   "p_reported": 0.001,
+   "p_recomputed": 0.0,
+   "p_holm_20": 0.0
+  },
+  {
+   "method": "FACT",
+   "task": "board",
+   "k": 36,
+   "k_base": 40,
+   "wilson95": [
+    76.9,
+    96.0
+   ],
+   "p_reported": 1.0,
+   "p_recomputed": 1.0,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "FACT",
+   "task": "key",
+   "k": 24,
+   "k_base": 6,
+   "wilson95": [
+    44.6,
+    73.7
+   ],
+   "p_reported": 0.001,
+   "p_recomputed": 0.0,
+   "p_holm_20": 0.0005
+  },
+  {
+   "method": "ForceVLA",
+   "task": "plug",
+   "k": 13,
+   "k_base": 12,
+   "wilson95": [
+    20.1,
+    48.0
+   ],
+   "p_reported": 0.5,
+   "p_recomputed": 0.5,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "ForceVLA",
+   "task": "usb",
+   "k": 15,
+   "k_base": 15,
+   "wilson95": [
+    24.2,
+    53.0
+   ],
+   "p_reported": 0.591,
+   "p_recomputed": 0.5912,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "ForceVLA",
+   "task": "button",
+   "k": 5,
+   "k_base": 5,
+   "wilson95": [
+    5.5,
+    26.1
+   ],
+   "p_reported": 0.631,
+   "p_recomputed": 0.6315,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "ForceVLA",
+   "task": "board",
+   "k": 31,
+   "k_base": 40,
+   "wilson95": [
+    62.5,
+    87.7
+   ],
+   "p_reported": 1.0,
+   "p_recomputed": 1.0,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "ForceVLA",
+   "task": "key",
+   "k": 17,
+   "k_base": 6,
+   "wilson95": [
+    28.5,
+    57.8
+   ],
+   "p_reported": 0.006,
+   "p_recomputed": 0.0063,
+   "p_holm_20": 0.1067
+  },
+  {
+   "method": "TA-VLA",
+   "task": "plug",
+   "k": 12,
+   "k_base": 12,
+   "wilson95": [
+    18.1,
+    45.4
+   ],
+   "p_reported": 0.596,
+   "p_recomputed": 0.5962,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "TA-VLA",
+   "task": "usb",
+   "k": 10,
+   "k_base": 15,
+   "wilson95": [
+    14.2,
+    40.2
+   ],
+   "p_reported": 0.926,
+   "p_recomputed": 0.9264,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "TA-VLA",
+   "task": "button",
+   "k": 8,
+   "k_base": 5,
+   "wilson95": [
+    10.5,
+    34.8
+   ],
+   "p_reported": 0.273,
+   "p_recomputed": 0.2729,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "TA-VLA",
+   "task": "board",
+   "k": 39,
+   "k_base": 40,
+   "wilson95": [
+    87.1,
+    99.6
+   ],
+   "p_reported": 1.0,
+   "p_recomputed": 1.0,
+   "p_holm_20": 1.0
+  },
+  {
+   "method": "TA-VLA",
+   "task": "key",
+   "k": 6,
+   "k_base": 6,
+   "wilson95": [
+    7.1,
+    29.1
+   ],
+   "p_reported": 0.622,
+   "p_recomputed": 0.6223,
+   "p_holm_20": 1.0
+  }
+ ],
+ "main_pi05_wilson": {
+  "plug": [
+   18.1,
+   45.4
+  ],
+  "usb": [
+   24.2,
+   53.0
+  ],
+  "button": [
+   5.5,
+   26.1
+  ],
+  "board": [
+   91.2,
+   100.0
+  ],
+  "key": [
+   7.1,
+   29.1
+  ]
+ },
+ "pooled_200": {
+  "pi05": {
+   "k": 78,
+   "n": 200,
+   "rate": 39.0,
+   "wilson95": [
+    32.5,
+    45.9
+   ]
+  },
+  "pi05_LN": {
+   "k": 112,
+   "n": 200,
+   "rate": 56.0,
+   "wilson95": [
+    49.1,
+    62.7
+   ]
+  },
+  "FACT": {
+   "k": 132,
+   "n": 200,
+   "rate": 66.0,
+   "wilson95": [
+    59.2,
+    72.2
+   ]
+  },
+  "ForceVLA": {
+   "k": 81,
+   "n": 200,
+   "rate": 40.5,
+   "wilson95": [
+    33.9,
+    47.4
+   ]
+  },
+  "TA-VLA": {
+   "k": 75,
+   "n": 200,
+   "rate": 37.5,
+   "wilson95": [
+    31.1,
+    44.4
+   ]
+  }
+ },
+ "diff_FACT_minus_ForceVLA_pooled_pp": [
+  25.5,
+  15.8,
+  34.5
+ ],
+ "diff_FACT_minus_pi05_pooled_pp": [
+  27.0,
+  17.3,
+  36.0
+ ],
+ "diff_FACT_minus_ForceVLA_per_task_pp": {
+  "plug": [
+   25.0,
+   3.2,
+   43.7
+  ],
+  "usb": [
+   10.0,
+   -11.2,
+   30.0
+  ],
+  "button": [
+   62.5,
+   42.1,
+   75.4
+  ],
+  "board": [
+   12.5,
+   -4.1,
+   28.7
+  ],
+  "key": [
+   17.5,
+   -4.2,
+   37.0
+  ]
+ },
+ "text_claims": {
+  "LN_plug_gain_pp": 20.0,
+  "LN_usb_gain_pp": 10.0,
+  "LN_button_gain_pp": 45.0,
+  "LN_key_gain_pp": 22.5,
+  "FACT_over_LN_button_pp": 17.5,
+  "FACT_over_LN_key_pp": 22.5,
+  "FACT_minus_ForceVLA_avg_pp": 25.5,
+  "FACT_minus_ForceVLA_per_task_pp": [
+   25.0,
+   10.0,
+   62.5,
+   12.5,
+   17.5
+  ],
+  "FACT_minus_ForceVLA_min_task_pp": 10.0
+ },
+ "ln_on_baselines": [
+  {
+   "base": "TA-VLA",
+   "task": "plug",
+   "k_base": 12,
+   "k_ln": 19,
+   "delta_pp": 17.5,
+   "p_ln_greater": 0.084
+  },
+  {
+   "base": "TA-VLA",
+   "task": "key",
+   "k_base": 6,
+   "k_ln": 13,
+   "delta_pp": 17.5,
+   "p_ln_greater": 0.0568
+  },
+  {
+   "base": "TA-VLA",
+   "task": "button",
+   "k_base": 8,
+   "k_ln": 17,
+   "delta_pp": 22.5,
+   "p_ln_greater": 0.0263
+  },
+  {
+   "base": "ForceVLA",
+   "task": "plug",
+   "k_base": 13,
+   "k_ln": 23,
+   "delta_pp": 25.0,
+   "p_ln_greater": 0.0212
+  },
+  {
+   "base": "ForceVLA",
+   "task": "key",
+   "k_base": 17,
+   "k_ln": 12,
+   "delta_pp": -12.5,
+   "p_ln_greater": 0.9188
+  },
+  {
+   "base": "ForceVLA",
+   "task": "button",
+   "k_base": 5,
+   "k_ln": 12,
+   "delta_pp": 17.5,
+   "p_ln_greater": 0.0497
+  }
+ ],
+ "ln_on_baselines_note": "ForceVLA의 key insertion은 42.5 -> 30.0 (-12.5 pp)으로 떨어진다. 본문 '일관된 이득(consistent gains)'과 맞지 않는다.",
+ "noise_tests": [
+  {
+   "method": "TA-VLA",
+   "task": "plug",
+   "k_measured": 12,
+   "k_noise": 9,
+   "p_reported": 0.306,
+   "p_recomputed_one_sided": 0.306
+  },
+  {
+   "method": "TA-VLA",
+   "task": "key",
+   "k_measured": 6,
+   "k_noise": 10,
+   "p_reported": 0.919,
+   "p_recomputed_one_sided": 0.9195
+  },
+  {
+   "method": "TA-VLA",
+   "task": "button",
+   "k_measured": 8,
+   "k_noise": 5,
+   "p_reported": 0.273,
+   "p_recomputed_one_sided": 0.2729
+  },
+  {
+   "method": "ForceVLA",
+   "task": "plug",
+   "k_measured": 13,
+   "k_noise": 16,
+   "p_reported": 0.824,
+   "p_recomputed_one_sided": 0.8238
+  },
+  {
+   "method": "ForceVLA",
+   "task": "key",
+   "k_measured": 17,
+   "k_noise": 6,
+   "p_reported": 0.006,
+   "p_recomputed_one_sided": 0.0063
+  },
+  {
+   "method": "ForceVLA",
+   "task": "button",
+   "k_measured": 5,
+   "k_noise": 7,
+   "p_reported": 0.826,
+   "p_recomputed_one_sided": 0.8259
+  },
+  {
+   "method": "FACT",
+   "task": "plug",
+   "k_measured": 23,
+   "k_noise": 16,
+   "p_reported": 0.09,
+   "p_recomputed_one_sided": 0.0896
+  },
+  {
+   "method": "FACT",
+   "task": "key",
+   "k_measured": 24,
+   "k_noise": 2,
+   "p_reported": 0.001,
+   "p_recomputed_one_sided": 0.0
+  },
+  {
+   "method": "FACT",
+   "task": "button",
+   "k_measured": 30,
+   "k_noise": 7,
+   "p_reported": 0.001,
+   "p_recomputed_one_sided": 0.0
+  }
+ ],
+ "ablation_tests_not_in_paper": [
+  {
+   "ablation": "w/o grad th",
+   "task": "plug",
+   "k_FACT": 23,
+   "k_ablation": 17,
+   "delta_pp": -15.0,
+   "p_FACT_greater": 0.1317,
+   "p_holm_9": 0.2634
+  },
+  {
+   "ablation": "w/o grad th",
+   "task": "key",
+   "k_FACT": 24,
+   "k_ablation": 11,
+   "delta_pp": -32.5,
+   "p_FACT_greater": 0.0032,
+   "p_holm_9": 0.0224
+  },
+  {
+   "ablation": "w/o grad th",
+   "task": "button",
+   "k_FACT": 30,
+   "k_ablation": 23,
+   "delta_pp": -17.5,
+   "p_FACT_greater": 0.0777,
+   "p_holm_9": 0.2331
+  },
+  {
+   "ablation": "w/o curr. read",
+   "task": "plug",
+   "k_FACT": 23,
+   "k_ablation": 24,
+   "delta_pp": 2.5,
+   "p_FACT_greater": 0.675,
+   "p_holm_9": 0.675
+  },
+  {
+   "ablation": "w/o curr. read",
+   "task": "key",
+   "k_FACT": 24,
+   "k_ablation": 14,
+   "delta_pp": -25.0,
+   "p_FACT_greater": 0.0216,
+   "p_holm_9": 0.092
+  },
+  {
+   "ablation": "w/o curr. read",
+   "task": "button",
+   "k_FACT": 30,
+   "k_ablation": 20,
+   "delta_pp": -25.0,
+   "p_FACT_greater": 0.0184,
+   "p_holm_9": 0.092
+  },
+  {
+   "ablation": "w/o history",
+   "task": "plug",
+   "k_FACT": 23,
+   "k_ablation": 12,
+   "delta_pp": -27.5,
+   "p_FACT_greater": 0.0118,
+   "p_holm_9": 0.0708
+  },
+  {
+   "ablation": "w/o history",
+   "task": "key",
+   "k_FACT": 24,
+   "k_ablation": 8,
+   "delta_pp": -40.0,
+   "p_FACT_greater": 0.0003,
+   "p_holm_9": 0.0024
+  },
+  {
+   "ablation": "w/o history",
+   "task": "button",
+   "k_FACT": 30,
+   "k_ablation": 5,
+   "delta_pp": -62.5,
+   "p_FACT_greater": 0.0,
+   "p_holm_9": 0.0
+  }
+ ],
+ "pi0_tests_not_in_paper": [
+  {
+   "task": "plug",
+   "k_FACT_pi0": 28,
+   "k_pi0": 13,
+   "delta_pp": 37.5,
+   "p_greater": 0.0008
+  },
+  {
+   "task": "key",
+   "k_FACT_pi0": 20,
+   "k_pi0": 18,
+   "delta_pp": 5.0,
+   "p_greater": 0.4115
+  },
+  {
+   "task": "button",
+   "k_FACT_pi0": 24,
+   "k_pi0": 19,
+   "delta_pp": 12.5,
+   "p_greater": 0.1849
+  }
+ ],
+ "table_runs_unique": 61,
+ "rollouts_from_tables": 2440,
+ "paper_claim_rollouts": "nearly 2,500 (논문 초록·§5)",
+ "power_n40_fisher_one_sided": [
+  {
+   "baseline_rate_pct": 12.5,
+   "min_detectable_pp_power80": [
+    27.5,
+    0.853
+   ]
+  },
+  {
+   "baseline_rate_pct": 30.0,
+   "min_detectable_pp_power80": [
+    30.0,
+    0.8
+   ]
+  },
+  {
+   "baseline_rate_pct": 50.0,
+   "min_detectable_pp_power80": [
+    30.0,
+    0.831
+   ]
+  }
+ ],
+ "FACT_vs_LN_not_in_paper": [
+  {
+   "task": "plug",
+   "k_FACT": 23,
+   "k_LN": 20,
+   "delta_pp": 7.5,
+   "p_FACT_greater_than_LN": 0.3271
+  },
+  {
+   "task": "usb",
+   "k_FACT": 19,
+   "k_LN": 19,
+   "delta_pp": 0.0,
+   "p_FACT_greater_than_LN": 0.5885
+  },
+  {
+   "task": "button",
+   "k_FACT": 30,
+   "k_LN": 23,
+   "delta_pp": 17.5,
+   "p_FACT_greater_than_LN": 0.0777
+  },
+  {
+   "task": "board",
+   "k_FACT": 36,
+   "k_LN": 35,
+   "delta_pp": 2.5,
+   "p_FACT_greater_than_LN": 0.5
+  },
+  {
+   "task": "key",
+   "k_FACT": 24,
+   "k_LN": 15,
+   "delta_pp": 22.5,
+   "p_FACT_greater_than_LN": 0.0365
+  }
+ ]
+}
