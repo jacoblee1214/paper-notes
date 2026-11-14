@@ -15,6 +15,7 @@
 | `analysis/fig_digitize.py` | Fig. 5(DexMachina) 막대 판독 |
 | `analysis/table_check.py` | 본문 수치 재계산 |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
+| `analysis/extra_eigen_contact.py` | 구를 미는 접촉 과제에서 탐색 공분산 4종을 CEM으로 비교 (MuJoCo, Allegro) |
 
 ## 재실행
 

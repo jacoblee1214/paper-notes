@@ -1,0 +1,181 @@
+{
+ "script": "chord/analysis/extra_lid_support.py",
+ "device": "cpu",
+ "threads": 1,
+ "mujoco_version": "4.0.0",
+ "numpy_version": "1.26.4",
+ "python": "3.12.7",
+ "params": {
+  "sim_dt_s": 0.002,
+  "segment_s": 0.5,
+  "geom_friction_mu": 0.5,
+  "cone_edges": 8,
+  "boundary_radius_m": 0.1,
+  "lip_target_xz_m": [
+   0.108,
+   0.025
+  ],
+  "sigma_m": 0.01,
+  "open_success_rad": 0.3,
+  "cem": {
+   "pop": 40,
+   "elite": 8,
+   "iters": 20,
+   "init_std": 0.03,
+   "waypoint_bounds_xz": [
+    [
+     0.09,
+     -0.03,
+     0.09,
+     -0.03
+    ],
+    [
+     0.17,
+     0.08,
+     0.17,
+     0.08
+    ]
+   ]
+  },
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ "reference_nonpushing_lid_angle_rad": -0.0,
+ "runs": {
+  "position": {
+   "per_seed": [
+    {
+     "seed": 0,
+     "best_reward_final_eval": 0.9982,
+     "lid_angle_rad_at_end": -0.0,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0005
+    },
+    {
+     "seed": 1,
+     "best_reward_final_eval": 0.9995,
+     "lid_angle_rad_at_end": -0.0,
+     "success": false,
+     "tip_distance_to_lip_m": 0.002
+    },
+    {
+     "seed": 2,
+     "best_reward_final_eval": 0.9996,
+     "lid_angle_rad_at_end": -0.0,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0007
+    },
+    {
+     "seed": 3,
+     "best_reward_final_eval": 1.0,
+     "lid_angle_rad_at_end": -0.0,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0004
+    },
+    {
+     "seed": 4,
+     "best_reward_final_eval": 0.9982,
+     "lid_angle_rad_at_end": -0.0,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0023
+    }
+   ],
+   "success_rate": 0.0,
+   "success_count": 0,
+   "n_seeds": 5,
+   "median_lid_angle_rad": 0.0
+  },
+  "support_end": {
+   "per_seed": [
+    {
+     "seed": 0,
+     "best_reward_final_eval": 2.733,
+     "lid_angle_rad_at_end": 0.108,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0439
+    },
+    {
+     "seed": 1,
+     "best_reward_final_eval": 2.7237,
+     "lid_angle_rad_at_end": 0.009,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0234
+    },
+    {
+     "seed": 2,
+     "best_reward_final_eval": 2.944,
+     "lid_angle_rad_at_end": -0.002,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0199
+    },
+    {
+     "seed": 3,
+     "best_reward_final_eval": 2.7328,
+     "lid_angle_rad_at_end": 0.093,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0408
+    },
+    {
+     "seed": 4,
+     "best_reward_final_eval": 2.7512,
+     "lid_angle_rad_at_end": 0.016,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0248
+    }
+   ],
+   "success_rate": 0.0,
+   "success_count": 0,
+   "n_seeds": 5,
+   "median_lid_angle_rad": 0.016
+  },
+  "support_max": {
+   "per_seed": [
+    {
+     "seed": 0,
+     "best_reward_final_eval": 2.8482,
+     "lid_angle_rad_at_end": 0.19,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0538
+    },
+    {
+     "seed": 1,
+     "best_reward_final_eval": 2.9332,
+     "lid_angle_rad_at_end": 0.021,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0247
+    },
+    {
+     "seed": 2,
+     "best_reward_final_eval": 3.0005,
+     "lid_angle_rad_at_end": -0.002,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0157
+    },
+    {
+     "seed": 3,
+     "best_reward_final_eval": 3.0117,
+     "lid_angle_rad_at_end": -0.003,
+     "success": false,
+     "tip_distance_to_lip_m": 0.019
+    },
+    {
+     "seed": 4,
+     "best_reward_final_eval": 3.0062,
+     "lid_angle_rad_at_end": -0.003,
+     "success": false,
+     "tip_distance_to_lip_m": 0.0192
+    }
+   ],
+   "success_rate": 0.0,
+   "success_count": 0,
+   "n_seeds": 5,
+   "median_lid_angle_rad": -0.002
+  }
+ },
+ "wall_time_s": 187.1
+}

@@ -14,6 +14,7 @@ Table 1·2와 Fig. 7 재계산, 손가락 힘 용량·적분기 안정성·랜�
 | `analysis/table_check.py` | Table 1·2·Fig. 7 재계산 |
 | `analysis/physics_toy.py` | 손가락 힘 용량, 적분기 안정성, 랜덤화 환산 (numpy, 수 초) |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
+| `analysis/extra_tongs_contact.py` | 스프링 구동 집게가 블록을 무는 접촉 과제에서 적분기·dt 안정성 비교 (MuJoCo) |
 
 ## 재실행
 

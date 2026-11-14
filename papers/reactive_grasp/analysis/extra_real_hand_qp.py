@@ -9,6 +9,11 @@ same ADMM settings.
 
 Outputs: null-space dimension d, eps*sqrt(d), realized residual of the projected force,
 and recall / false-positive / normal-error of geometric contact estimates under object pose error.
+
+Default search size: 100 random configurations per case, 3 hill-climbing starts.
+With --large: 400 random configurations, 6 hill-climbing starts, pose-error tests only for
+grasps with an actuated-finger contact, written to extra_real_hand_qp_large_results.json
+(the default output is unchanged).
 """
 import os
 
@@ -40,12 +45,13 @@ OBJECTS = {
     "adjustable_wrench": DATA / "ycb" / "042_adjustable_wrench.stl",
     "phillips_screwdriver": DATA / "ycb" / "043_phillips_screwdriver.stl",
 }
-OUT = HERE / "extra_real_hand_qp_results.json"
+LARGE = "--large" in sys.argv
+OUT = HERE / ("extra_real_hand_qp_large_results.json" if LARGE else "extra_real_hand_qp_results.json")
 SEED = 0
 N_PER_LINK = 800
 N_OBJ = 20000
-N_INIT = 100          # random joint configurations per case
-N_HILL = 3             # hill-climbing starts
+N_INIT = 400 if LARGE else 100          # random joint configurations per case
+N_HILL = 6 if LARGE else 3              # hill-climbing starts
 STEPS = 60
 D_CONTACT = 0.003      # physical contact band (m)
 D_THRESH = 0.01        # estimate rule: signed distance < d_thresh (paper-style)
@@ -374,6 +380,9 @@ def main():
     for case in cases:
         for k, q, g, nc, pen in case["grasps"]:
             qp_res = grasp_qp(q, case)
+            if LARGE and qp_res is None:
+                # no actuated-finger contact: the pose-error contact set would only hold non-actuated links
+                continue
             pe = pose_error(q, case)
             all_qp.append(dict(object=case["object"], orientation=case["orientation"],
                                search_key=round(float(k), 3), search_fingers_term=round(float(g), 3), q=[round(float(v), 4) for v in q],

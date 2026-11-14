@@ -14,6 +14,7 @@
 | `analysis/table_check.py` | 표·그림·예산 재계산 |
 | `analysis/wrench_toy.py` | 공식 보상 함수 numpy 이식과 toy(W1–W9) |
 | `analysis/plot_figures.py` | 리포트 그래프 세 장 |
+| `analysis/extra_lid_support.py` | 지지 함수 보상과 위치 보상으로 뚜껑 열기 정책을 CEM으로 학습 비교 (MuJoCo, 2링크 손가락) |
 
 ## 재실행
 

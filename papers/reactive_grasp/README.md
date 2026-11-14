@@ -17,6 +17,7 @@
 | `analysis/qp_toy.py` | 공개 코드 형식의 접촉력 QP를 OSQP식 ADMM으로 푼 toy (20 DoF 손 모델) |
 | `analysis/pose_error_toy.py` | 자세 오프셋 아래 기하 접점 재현율·오검출·법선 오차 |
 | `analysis/plot_figures.py` | 리포트 그래프 세 장 |
+| `analysis/extra_real_hand_qp.py` | 실제 손 기구학과 YCB 메쉬에서 접점 탐색·힘 분배 QP·자세 오차 (`--large`: 탐색 4배) |
 
 ## 재실행
 
