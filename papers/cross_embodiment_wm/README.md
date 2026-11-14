@@ -13,6 +13,7 @@
 | `analysis/table_check.py` | Table I 재계산 (수 초) |
 | `analysis/particle_toy.py` | 2차원 장난감 (numpy 1스레드, 약 2분 30초) |
 | `analysis/extra_particle_3d.py` | MuJoCo 손 3종의 입자 밀도와 합·평균 집계 검사 (torch, mujoco 필요, CPU 약 2.5분) |
+| `analysis/extra_particle_3d_seeds.py` | 위 3차원 검사를 시드 3개로 반복 (torch, mujoco 필요, CPU 약 9분) |
 | `analysis/plot_figures.py` | 직접 만든 그래프 |
 
 ## 재실행

@@ -17,6 +17,7 @@ manifold 가설 toy로 분석한 자료입니다. 공식 코드와 데이터가 
 | `analysis/manifold_toy.py` | 생성기 대용(최근접 시드 + 국소 보정) 대 annealed CEM toy |
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
 | `analysis/extra_residual_flow.py` | 3관절 팔 toy: 잔차 flow matching, 절대 flow matching, 검색의 pass@S (PyTorch CPU, 약 20초) |
+| `analysis/extra_contact_flow.py` | 테이블 충돌 제약이 있는 평면 팔 toy: 학습 쌍 2,000 / 40,000개에서 같은 세 생성기의 pass@S (PyTorch CPU, 약 80초) |
 
 ## 재실행
 

@@ -21,6 +21,7 @@
 | `analysis/alignment_toy.py` | 재구성 손실만으로 사람·로봇 latent가 정렬되는지 보는 선형 toy |
 | `analysis/plot_figures.py` | 리포트 그래프 세 장 |
 | `analysis/extra_alignment_nonlinear.py` | 비선형 latent 정렬 toy: 공유·분리 encoder, 짝 클립 5%의 전이 오차 (PyTorch CPU, 약 1분) |
+| `analysis/extra_alignment_cnn.py` | 합성 2D 장면의 CNN encoder·query·첫 프레임 조건 decoder로 사람·로봇 정렬을 시점 각도별로 비교 (PyTorch CPU, 약 35분) |
 
 ## 재실행
 

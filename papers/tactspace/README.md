@@ -14,6 +14,7 @@ TactSpace 논문(시뮬 촉각과 실측 정전용량의 공유 잠재 정렬)�
 | `analysis/align_toy.py` | 공유 잠재 토이 (numpy 1스레드, 약 14초) |
 | `analysis/extra_penalty_depth.py` | 추가 검증: penalty 방식 침투 깊이 분포의 numpy 재구현 (numpy, 1스레드, 약 2초) |
 | `analysis/extra_pair_count.py` | 추가 검증: 자체 시뮬 쌍 수 곡선, 소형 ViT 정렬과 무정렬 인코더 (torch CPU, 약 5분) |
+| `analysis/extra_pair_count_scarce.py` | 추가 검증: 라벨 20·50개일 때 같은 쌍 수 곡선 (torch CPU, 약 7분) |
 | `analysis/plot_figures.py` | 직접 그린 그래프 세 장 |
 
 ## 재실행
