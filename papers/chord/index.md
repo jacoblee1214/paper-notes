@@ -2,7 +2,7 @@
 title: "CHORD 읽기: 접촉 wrench 보상은 '어디를'이 아니라 '어느 방향으로' 미는지를 본다"
 date: 2026-11-05
 venue: "CoRL 2026"
-venue_note: "프로젝트 페이지 표기"
+venue_note: "포스터 (corl.org 공식 채택 목록, 2026-11-14 확인)"
 tags: [robotics, dexterous-manipulation, reinforcement-learning, human-demonstration, contact, paper-review]
 paper: https://arxiv.org/abs/2607.00033
 code: https://github.com/nvidia-isaac/video_to_data/tree/main/robotic_grounding

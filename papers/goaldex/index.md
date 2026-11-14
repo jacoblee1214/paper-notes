@@ -2,7 +2,7 @@
 title: "GoalDex 읽기: 목표를 이미지로 주면 무엇이 좋아지고 무엇이 그대로인가"
 date: 2026-11-12
 venue: "CoRL 2026"
-venue_note: "원문 1쪽 표기"
+venue_note: "포스터 (corl.org 공식 채택 목록, 2026-11-14 확인)"
 tags: [robotics, dexterous-manipulation, in-hand, image-goal, sim-to-real, paper-review]
 paper: https://arxiv.org/abs/2611.02171
 project: https://rffr.leggedrobotics.com/works/goaldex/

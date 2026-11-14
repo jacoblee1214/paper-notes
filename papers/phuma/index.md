@@ -2,7 +2,7 @@
 title: "PHUMA 분석: 물리적으로 신뢰할 수 있는 휴머노이드 보행 데이터는 얼마나 신뢰할 수 있나"
 date: 2026-11-12
 venue: "CoRL 2026"
-venue_note: "Spotlight (원문 머리글·프로젝트 페이지 표기)"
+venue_note: "Spotlight (corl.org 공식 채택 목록, 2026-11-14 확인)"
 tags: [humanoid, motion-retargeting, dataset, locomotion, reproducibility]
 paper: "https://arxiv.org/abs/2510.26236"
 code: "https://github.com/davian-robotics/PHUMA"
