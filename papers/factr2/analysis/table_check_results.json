@@ -1,0 +1,213 @@
+{
+  "t1_reduction_pct": {
+    "contact_vs_FILIC": 87.55,
+    "contact_vs_DO": 62.81,
+    "paper_says": {
+      "contact_vs_FILIC": 87.6,
+      "contact_vs_DO": 62.8
+    }
+  },
+  "t1_welch_n6": {
+    "contact_NEXT_vs_DO": [
+      -2.7047603435118233,
+      0.030414056721841186
+    ],
+    "free_NEXT_vs_sensor": [
+      -0.24692420536420503,
+      0.8103530567846949
+    ]
+  },
+  "t1_free_diff": {
+    "diff": 0.035,
+    "t_if_n_30000_naive": -17.460178005212907,
+    "note": "n=30000은 자기상관을 무시한 값이라 근거가 되지 못함"
+  },
+  "t5_welch_n6": {
+    "NEXT_vs_DO": [
+      -4.250522307988794,
+      0.007798903369745514
+    ],
+    "NEXT_vs_FILIC": [
+      -4.533278239165235,
+      0.0061218301364107395
+    ],
+    "reduction_pct_vs_DO": 92.7
+  },
+  "t4_qqdD_best_in_column": {
+    "MLP": {
+      "free_qqdD_lt_qqd_all_H": true,
+      "contact_qqdD_lt_qqd_all_H": false
+    },
+    "GRU": {
+      "free_qqdD_lt_qqd_all_H": true,
+      "contact_qqdD_lt_qqd_all_H": false
+    },
+    "LSTM": {
+      "free_qqdD_lt_qqd_all_H": true,
+      "contact_qqdD_lt_qqd_all_H": false
+    }
+  },
+  "t4_lstm_H50_equals_table1": {
+    "free": 0.414,
+    "contact": 0.547,
+    "same_as_table1_NEXT_free_and_contact": true
+  },
+  "t2_average_recomputed": {
+    "C": 0.6696,
+    "PC": 0.8182,
+    "PC+C": 0.8114
+  },
+  "t2_average_paper": {
+    "C": 0.67,
+    "PC": 0.818,
+    "PC+C": 0.811
+  },
+  "t2_paired_PC_minus_C": {
+    "mean_diff": 0.1486,
+    "t_p": [
+      2.8692,
+      0.0455
+    ],
+    "per_task": [
+      0.216,
+      0.273,
+      0.133,
+      0.155,
+      -0.034
+    ]
+  },
+  "t2_granularity_20xS": {
+    "LEGO": {
+      "0.697": false,
+      "0.913": false,
+      "0.875": true
+    },
+    "NIST Belt": {
+      "0.494": false,
+      "0.767": false,
+      "0.649": false
+    },
+    "NIST Insertion": {
+      "0.8": true,
+      "0.933": false
+    },
+    "Tool Clean Up": {
+      "0.65": true,
+      "0.805": false,
+      "0.775": true
+    },
+    "Cap Screwing": {
+      "0.707": false,
+      "0.673": false,
+      "0.825": true
+    }
+  },
+  "t2_fraction_fitting_20xS": 0.333,
+  "t9_fits_n20": 5,
+  "t9_n_values": 24,
+  "t9_common_denominators_le200": [],
+  "t2_vs_t9_FMwtau_identical": {
+    "Belt_PC_PCC": [
+      true
+    ],
+    "Tool_PC_PCC": [
+      true
+    ]
+  },
+  "t9_fisher_n20": {
+    "ACT_wtau_Belt_None_vs_PC": {
+      "k": [
+        7,
+        14
+      ],
+      "n": 20,
+      "p": 0.0562
+    },
+    "ACT_wtau_Belt_None_vs_PCC": {
+      "k": [
+        7,
+        15
+      ],
+      "n": 20,
+      "p": 0.0248
+    },
+    "ACT_wotau_Belt_None_vs_PC": {
+      "k": [
+        4,
+        7
+      ],
+      "n": 20,
+      "p": 0.4801
+    },
+    "FM_wtau_Belt_None_vs_PC": {
+      "k": [
+        9,
+        15
+      ],
+      "n": 20,
+      "p": 0.1053
+    },
+    "FM_wotau_Tool_None_vs_PC": {
+      "k": [
+        9,
+        12
+      ],
+      "n": 20,
+      "p": 0.5273
+    }
+  },
+  "t10_fisher_n20": {
+    "Insertion_base_vs_tau": {
+      "k": [
+        4,
+        11
+      ],
+      "n": 20,
+      "p": 0.0484
+    },
+    "Insertion_current_vs_tau": {
+      "k": [
+        9,
+        11
+      ],
+      "n": 20,
+      "p": 0.7524
+    },
+    "Cap_base_vs_tau": {
+      "k": [
+        9,
+        10
+      ],
+      "n": 20,
+      "p": 1.0
+    }
+  },
+  "t10_granularity_n20": {
+    "0.567": false,
+    "0.431": false,
+    "0.525": false,
+    "0.440": false
+  },
+  "t11_deltas_vs_none": {
+    "None": 0.0,
+    "WR_PC": -0.108,
+    "WR_PCC": 0.025,
+    "FIRST_PC": 0.12,
+    "FIRST_PCC": 0.048
+  },
+  "wilson_n20_examples": {
+    "0.767": [
+      0.549,
+      0.899
+    ],
+    "0.431": [
+      0.243,
+      0.641
+    ],
+    "0.647_placeholder": [
+      0.433,
+      0.819
+    ]
+  },
+  "table1_contact_equals_table4_LSTM_H50_contact": true
+}
