@@ -1,0 +1,393 @@
+{
+  "script": "analysis/extra_gallery_rules_scale.py",
+  "source": {
+    "repo": "willi19/autodex-gallery",
+    "commit_sha_seen": "4d9212eeaf3892e260289078c2190076b9a6ae3a",
+    "repo_last_modified": "2026-09-30T16:55:20.000Z",
+    "gated": false,
+    "license": "데이터셋 카드에 license 필드 없음(미표기)",
+    "population_allegro_world_pose_files": 2226,
+    "population_note": "기존 analysis/extra_gallery_rules.py 주석은 639개였다. 이번 목록은 allegro 978개이며, 차이 원인은 확인하지 않았다.",
+    "verification": "크기와 git blob sha1(목록의 oid)로 대조. 목록 oid는 LFS sha256이 아니다."
+  },
+  "selection": {
+    "first40": "기존 40개(data/allegro/, extra_gallery_rules.py와 같은 파일)",
+    "new120": "population에서 기존 40개를 뺀 나머지 중 seed 1로 120개"
+  },
+  "bytes_new_this_run": 445923369,
+  "missing_meta_trials": [
+    "allegro/mug_holder/20260124_044550/executed_grasp/meta.json",
+    "allegro/mug_holder/20260124_045730/executed_grasp/meta.json"
+  ],
+  "n_trials_total": 158,
+  "skipped_no_grasp_state": {
+    "as_recorded": [
+      "allegro/box_pink/20260121_234848",
+      "allegro/box_pink/20260121_235056",
+      "allegro/box_pink/20260121_235245",
+      "allegro/bamboo_box/20260123_203818",
+      "allegro/bamboo_box/20260123_205710",
+      "allegro/icecream_scoop/20260123_131735",
+      "allegro/icecream_scoop/20260123_132226",
+      "allegro/icecream_scoop/20260123_135203",
+      "allegro/icecream_scoop/20260123_141227",
+      "allegro/magazine_file/20260125_123927",
+      "allegro/magazine_file/20260125_130040",
+      "allegro/open_box/20260124_072939",
+      "allegro/open_box/20260124_074059",
+      "allegro/open_box/20260125_134448",
+      "allegro/open_box/20260125_134618",
+      "allegro/organizer_beige/20260121_153610",
+      "allegro/spray_bottle/20260127_152706",
+      "allegro/standing_frame/20260125_180445",
+      "allegro/standing_frame/20260125_181519",
+      "allegro/standing_frame/20260125_182003",
+      "allegro/toothbrush_holder/20260121_183217",
+      "allegro/toothbrush_holder/20260121_184249",
+      "allegro/washing_brush/20260127_085807",
+      "allegro/washing_brush/20260127_090214",
+      "allegro/washing_brush/20260127_090316",
+      "allegro/washing_brush/20260127_093204",
+      "allegro/white_plastic_box/20260127_021436",
+      "allegro/white_plastic_box/20260127_022111",
+      "allegro/white_plastic_box/20260127_024346",
+      "allegro/wood_tray_small/20260127_013033",
+      "allegro/wood_tray_small/20260127_014157",
+      "allegro/yellow_plastic_glass/20260126_105655",
+      "allegro/yellow_wash_tub/20260127_172406"
+    ],
+    "flipped": [
+      "allegro/box_pink/20260121_234848",
+      "allegro/box_pink/20260121_235056",
+      "allegro/box_pink/20260121_235245",
+      "allegro/bamboo_box/20260123_203818",
+      "allegro/bamboo_box/20260123_205710",
+      "allegro/icecream_scoop/20260123_131735",
+      "allegro/icecream_scoop/20260123_132226",
+      "allegro/icecream_scoop/20260123_135203",
+      "allegro/icecream_scoop/20260123_141227",
+      "allegro/magazine_file/20260125_123927",
+      "allegro/magazine_file/20260125_130040",
+      "allegro/open_box/20260124_072939",
+      "allegro/open_box/20260124_074059",
+      "allegro/open_box/20260125_134448",
+      "allegro/open_box/20260125_134618",
+      "allegro/organizer_beige/20260121_153610",
+      "allegro/spray_bottle/20260127_152706",
+      "allegro/standing_frame/20260125_180445",
+      "allegro/standing_frame/20260125_181519",
+      "allegro/standing_frame/20260125_182003",
+      "allegro/toothbrush_holder/20260121_183217",
+      "allegro/toothbrush_holder/20260121_184249",
+      "allegro/washing_brush/20260127_085807",
+      "allegro/washing_brush/20260127_090214",
+      "allegro/washing_brush/20260127_090316",
+      "allegro/washing_brush/20260127_093204",
+      "allegro/white_plastic_box/20260127_021436",
+      "allegro/white_plastic_box/20260127_022111",
+      "allegro/white_plastic_box/20260127_024346",
+      "allegro/wood_tray_small/20260127_013033",
+      "allegro/wood_tray_small/20260127_014157",
+      "allegro/yellow_plastic_glass/20260126_105655",
+      "allegro/yellow_wash_tub/20260127_172406"
+    ]
+  },
+  "threshold_mm": 50.0,
+  "hold_s": 3.0,
+  "conventions_all": {
+    "as_recorded": {
+      "n_analysed": 125,
+      "n_zmax_yes": 3,
+      "n_hold_yes": 0,
+      "n_hold_undetermined": 2,
+      "n_determined": 123,
+      "agreement": {
+        "agree": 122,
+        "rate": 0.9919,
+        "wilson95": [
+          0.9554,
+          0.9986
+        ]
+      },
+      "contingency_determined": {
+        "zmax_yes_hold_yes": 0,
+        "zmax_no_hold_no": 122,
+        "zmax_yes_hold_no": 1,
+        "zmax_no_hold_yes": 0
+      },
+      "zmax_yes_but_hold_no_trials": [
+        "allegro/donut_light/20260124_101112"
+      ],
+      "sensitivity_hold_duration": {
+        "1.0": {
+          "n_determined": 124,
+          "agree": 123,
+          "agree_rate": 0.9919
+        },
+        "2.0": {
+          "n_determined": 123,
+          "agree": 122,
+          "agree_rate": 0.9919
+        },
+        "3.0": {
+          "n_determined": 123,
+          "agree": 122,
+          "agree_rate": 0.9919
+        },
+        "4.0": {
+          "n_determined": 123,
+          "agree": 122,
+          "agree_rate": 0.9919
+        }
+      }
+    },
+    "flipped": {
+      "n_analysed": 125,
+      "n_zmax_yes": 57,
+      "n_hold_yes": 3,
+      "n_hold_undetermined": 48,
+      "n_determined": 77,
+      "agreement": {
+        "agree": 71,
+        "rate": 0.9221,
+        "wilson95": [
+          0.8402,
+          0.9638
+        ]
+      },
+      "contingency_determined": {
+        "zmax_yes_hold_yes": 3,
+        "zmax_no_hold_no": 68,
+        "zmax_yes_hold_no": 6,
+        "zmax_no_hold_yes": 0
+      },
+      "zmax_yes_but_hold_no_trials": [
+        "allegro/blue_alarm/20260328_034030",
+        "allegro/lemon_squeezer/20260123_154533",
+        "allegro/metal_scoop_big/20260206_165255",
+        "allegro/screwdriver/20260126_203154",
+        "allegro/wateringcan/20260124_024140",
+        "allegro/wood_organizer/20260326_132438"
+      ],
+      "sensitivity_hold_duration": {
+        "1.0": {
+          "n_determined": 78,
+          "agree": 72,
+          "agree_rate": 0.9231
+        },
+        "2.0": {
+          "n_determined": 77,
+          "agree": 71,
+          "agree_rate": 0.9221
+        },
+        "3.0": {
+          "n_determined": 77,
+          "agree": 71,
+          "agree_rate": 0.9221
+        },
+        "4.0": {
+          "n_determined": 77,
+          "agree": 71,
+          "agree_rate": 0.9221
+        }
+      }
+    }
+  },
+  "conventions_by_origin": {
+    "as_recorded": {
+      "first40": {
+        "n_analysed": 37,
+        "n_zmax_yes": 0,
+        "n_hold_yes": 0,
+        "n_hold_undetermined": 0,
+        "n_determined": 37,
+        "agreement": {
+          "agree": 37,
+          "rate": 1.0,
+          "wilson95": [
+            0.9059,
+            1.0
+          ]
+        },
+        "contingency_determined": {
+          "zmax_yes_hold_yes": 0,
+          "zmax_no_hold_no": 37,
+          "zmax_yes_hold_no": 0,
+          "zmax_no_hold_yes": 0
+        },
+        "zmax_yes_but_hold_no_trials": [],
+        "sensitivity_hold_duration": {
+          "1.0": {
+            "n_determined": 37,
+            "agree": 37,
+            "agree_rate": 1.0
+          },
+          "2.0": {
+            "n_determined": 37,
+            "agree": 37,
+            "agree_rate": 1.0
+          },
+          "3.0": {
+            "n_determined": 37,
+            "agree": 37,
+            "agree_rate": 1.0
+          },
+          "4.0": {
+            "n_determined": 37,
+            "agree": 37,
+            "agree_rate": 1.0
+          }
+        }
+      },
+      "new120": {
+        "n_analysed": 88,
+        "n_zmax_yes": 3,
+        "n_hold_yes": 0,
+        "n_hold_undetermined": 2,
+        "n_determined": 86,
+        "agreement": {
+          "agree": 85,
+          "rate": 0.9884,
+          "wilson95": [
+            0.937,
+            0.9979
+          ]
+        },
+        "contingency_determined": {
+          "zmax_yes_hold_yes": 0,
+          "zmax_no_hold_no": 85,
+          "zmax_yes_hold_no": 1,
+          "zmax_no_hold_yes": 0
+        },
+        "zmax_yes_but_hold_no_trials": [
+          "allegro/donut_light/20260124_101112"
+        ],
+        "sensitivity_hold_duration": {
+          "1.0": {
+            "n_determined": 87,
+            "agree": 86,
+            "agree_rate": 0.9885
+          },
+          "2.0": {
+            "n_determined": 86,
+            "agree": 85,
+            "agree_rate": 0.9884
+          },
+          "3.0": {
+            "n_determined": 86,
+            "agree": 85,
+            "agree_rate": 0.9884
+          },
+          "4.0": {
+            "n_determined": 86,
+            "agree": 85,
+            "agree_rate": 0.9884
+          }
+        }
+      }
+    },
+    "flipped": {
+      "first40": {
+        "n_analysed": 37,
+        "n_zmax_yes": 17,
+        "n_hold_yes": 3,
+        "n_hold_undetermined": 14,
+        "n_determined": 23,
+        "agreement": {
+          "agree": 23,
+          "rate": 1.0,
+          "wilson95": [
+            0.8569,
+            1.0
+          ]
+        },
+        "contingency_determined": {
+          "zmax_yes_hold_yes": 3,
+          "zmax_no_hold_no": 20,
+          "zmax_yes_hold_no": 0,
+          "zmax_no_hold_yes": 0
+        },
+        "zmax_yes_but_hold_no_trials": [],
+        "sensitivity_hold_duration": {
+          "1.0": {
+            "n_determined": 23,
+            "agree": 23,
+            "agree_rate": 1.0
+          },
+          "2.0": {
+            "n_determined": 23,
+            "agree": 23,
+            "agree_rate": 1.0
+          },
+          "3.0": {
+            "n_determined": 23,
+            "agree": 23,
+            "agree_rate": 1.0
+          },
+          "4.0": {
+            "n_determined": 23,
+            "agree": 23,
+            "agree_rate": 1.0
+          }
+        }
+      },
+      "new120": {
+        "n_analysed": 88,
+        "n_zmax_yes": 40,
+        "n_hold_yes": 0,
+        "n_hold_undetermined": 34,
+        "n_determined": 54,
+        "agreement": {
+          "agree": 48,
+          "rate": 0.8889,
+          "wilson95": [
+            0.7781,
+            0.9481
+          ]
+        },
+        "contingency_determined": {
+          "zmax_yes_hold_yes": 0,
+          "zmax_no_hold_no": 48,
+          "zmax_yes_hold_no": 6,
+          "zmax_no_hold_yes": 0
+        },
+        "zmax_yes_but_hold_no_trials": [
+          "allegro/blue_alarm/20260328_034030",
+          "allegro/lemon_squeezer/20260123_154533",
+          "allegro/metal_scoop_big/20260206_165255",
+          "allegro/screwdriver/20260126_203154",
+          "allegro/wateringcan/20260124_024140",
+          "allegro/wood_organizer/20260326_132438"
+        ],
+        "sensitivity_hold_duration": {
+          "1.0": {
+            "n_determined": 55,
+            "agree": 49,
+            "agree_rate": 0.8909
+          },
+          "2.0": {
+            "n_determined": 54,
+            "agree": 48,
+            "agree_rate": 0.8889
+          },
+          "3.0": {
+            "n_determined": 54,
+            "agree": 48,
+            "agree_rate": 0.8889
+          },
+          "4.0": {
+            "n_determined": 54,
+            "agree": 48,
+            "agree_rate": 0.8889
+          }
+        }
+      }
+    }
+  },
+  "versions": {
+    "python": "3.12.7",
+    "numpy": "1.26.4",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "wall_time_s": 2.69
+}

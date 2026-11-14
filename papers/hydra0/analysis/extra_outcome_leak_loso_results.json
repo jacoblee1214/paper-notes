@@ -1,0 +1,207 @@
+{
+  "data": {
+    "source": "ankile/square-01a-baseline-uniform-r{1,2,3,4}-policy-rollouts (resolve/main), Apache-2.0",
+    "files": [
+      {
+        "set": "r1",
+        "bytes": 4810320,
+        "sha256": "2450b9b9e890f3513835ec274bfca1463cb28bc6e134ae3bc8386aba41c4c971",
+        "rows": 25027,
+        "episodes": 100,
+        "successes": 69
+      },
+      {
+        "set": "r2",
+        "bytes": 4171320,
+        "sha256": "26957e53d5390029902956adfda778b98c8948738f1565f4dd6e091a258d324f",
+        "rows": 21481,
+        "episodes": 100,
+        "successes": 81
+      },
+      {
+        "set": "r3",
+        "bytes": 3507097,
+        "sha256": "dcde96dc6777c5b0de5c62007eb3b63a87088fce2597f6111b8c2bd075145fce",
+        "rows": 17864,
+        "episodes": 100,
+        "successes": 99
+      },
+      {
+        "set": "r4",
+        "bytes": 3403786,
+        "sha256": "eb0a1fbb9a402db1ee619cdd3f29b6dc81412cc41473062b6fc4dc8d7031c6d6",
+        "rows": 17304,
+        "episodes": 100,
+        "successes": 99
+      }
+    ]
+  },
+  "settings": {
+    "lambda_l2": 1.0,
+    "split": "leave-one-set-out (4 sets)",
+    "features_from": "analysis/extra_outcome_leak.py (동일 정의)",
+    "failure_count_note": "r3, r4는 실패 1개씩이라 평가 AUC가 불안정함"
+  },
+  "results": {
+    "traj_no_len": {
+      "per_heldout_set": {
+        "r1": {
+          "auc": 0.9991,
+          "test_episodes": 100,
+          "test_failures": 31,
+          "train_success_rate": 0.93
+        },
+        "r2": {
+          "auc": 1.0,
+          "test_episodes": 100,
+          "test_failures": 19,
+          "train_success_rate": 0.89
+        },
+        "r3": {
+          "auc": 1.0,
+          "test_episodes": 100,
+          "test_failures": 1,
+          "train_success_rate": 0.83
+        },
+        "r4": {
+          "auc": 1.0,
+          "test_episodes": 100,
+          "test_failures": 1,
+          "train_success_rate": 0.83
+        }
+      },
+      "mean_all4": 0.9998,
+      "mean_r1_r2_only": 0.9995
+    },
+    "early100_no_termination": {
+      "per_heldout_set": {
+        "r1": {
+          "auc": 0.8415,
+          "test_episodes": 100,
+          "test_failures": 31,
+          "train_success_rate": 0.93
+        },
+        "r2": {
+          "auc": 0.8674,
+          "test_episodes": 100,
+          "test_failures": 19,
+          "train_success_rate": 0.89
+        },
+        "r3": {
+          "auc": 0.9495,
+          "test_episodes": 100,
+          "test_failures": 1,
+          "train_success_rate": 0.83
+        },
+        "r4": {
+          "auc": 0.9192,
+          "test_episodes": 100,
+          "test_failures": 1,
+          "train_success_rate": 0.83
+        }
+      },
+      "mean_all4": 0.8944,
+      "mean_r1_r2_only": 0.8544
+    },
+    "early50_no_termination": {
+      "per_heldout_set": {
+        "r1": {
+          "auc": 0.6522,
+          "test_episodes": 100,
+          "test_failures": 31,
+          "train_success_rate": 0.93
+        },
+        "r2": {
+          "auc": 0.6199,
+          "test_episodes": 100,
+          "test_failures": 19,
+          "train_success_rate": 0.89
+        },
+        "r3": {
+          "auc": 0.9798,
+          "test_episodes": 100,
+          "test_failures": 1,
+          "train_success_rate": 0.83
+        },
+        "r4": {
+          "auc": 0.9596,
+          "test_episodes": 100,
+          "test_failures": 1,
+          "train_success_rate": 0.83
+        }
+      },
+      "mean_all4": 0.8029,
+      "mean_r1_r2_only": 0.6361
+    },
+    "last_frame_only": {
+      "per_heldout_set": {
+        "r1": {
+          "auc": 0.9878,
+          "test_episodes": 100,
+          "test_failures": 31,
+          "train_success_rate": 0.93
+        },
+        "r2": {
+          "auc": 0.7823,
+          "test_episodes": 100,
+          "test_failures": 19,
+          "train_success_rate": 0.89
+        },
+        "r3": {
+          "auc": 1.0,
+          "test_episodes": 100,
+          "test_failures": 1,
+          "train_success_rate": 0.83
+        },
+        "r4": {
+          "auc": 1.0,
+          "test_episodes": 100,
+          "test_failures": 1,
+          "train_success_rate": 0.83
+        }
+      },
+      "mean_all4": 0.9425,
+      "mean_r1_r2_only": 0.8851
+    },
+    "length_only": {
+      "per_heldout_set": {
+        "r1": {
+          "auc": 1.0,
+          "test_episodes": 100,
+          "test_failures": 31,
+          "train_success_rate": 0.93
+        },
+        "r2": {
+          "auc": 1.0,
+          "test_episodes": 100,
+          "test_failures": 19,
+          "train_success_rate": 0.89
+        },
+        "r3": {
+          "auc": 1.0,
+          "test_episodes": 100,
+          "test_failures": 1,
+          "train_success_rate": 0.83
+        },
+        "r4": {
+          "auc": 1.0,
+          "test_episodes": 100,
+          "test_failures": 1,
+          "train_success_rate": 0.83
+        }
+      },
+      "mean_all4": 1.0,
+      "mean_r1_r2_only": 1.0
+    },
+    "first_frame_only_control": {
+      "per_heldout_set_auc": {
+        "r1": 0.5362,
+        "r2": 0.4035,
+        "r3": 0.3232,
+        "r4": 0.2323
+      },
+      "mean_all4": 0.3738
+    }
+  },
+  "wall_time_s": 117.18
+}

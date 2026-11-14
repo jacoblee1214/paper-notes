@@ -1,0 +1,167 @@
+{
+ "file_bytes": 121234636,
+ "sha256": "e164ae67bc83a147f0bac57926ae57ba9cbc28630a4da260172b97cf674f1eed",
+ "n_datasets": 20,
+ "datasets": {
+  "actor/prism": {
+   "shape": [
+    156,
+    7
+   ],
+   "dtype": "float32"
+  },
+  "actor/prism_base": {
+   "shape": [
+    156,
+    7
+   ],
+   "dtype": "float32"
+  },
+  "actor/slot": {
+   "shape": [
+    156,
+    7
+   ],
+   "dtype": "float32"
+  },
+  "atom/id": {
+   "shape": [
+    156
+   ],
+   "dtype": "int64"
+  },
+  "atom/tag": {
+   "shape": [
+    156
+   ],
+   "dtype": "|S5"
+  },
+  "embodiment/ee": {
+   "shape": [
+    156,
+    7
+   ],
+   "dtype": "float32"
+  },
+  "embodiment/joint": {
+   "shape": [
+    156,
+    9
+   ],
+   "dtype": "float32"
+  },
+  "observation/head/rgb": {
+   "shape": [
+    156
+   ],
+   "dtype": "|S27736"
+  },
+  "observation/wrist/rgb": {
+   "shape": [
+    156
+   ],
+   "dtype": "|S25043"
+  },
+  "step": {
+   "shape": [
+    156
+   ],
+   "dtype": "int64"
+  },
+  "tactile/left_gsmini/depth": {
+   "shape": [
+    156,
+    240,
+    320
+   ],
+   "dtype": "float32"
+  },
+  "tactile/left_gsmini/marker": {
+   "shape": [
+    156,
+    2,
+    1200,
+    2
+   ],
+   "dtype": "float32"
+  },
+  "tactile/left_gsmini/pose": {
+   "shape": [
+    156,
+    7
+   ],
+   "dtype": "float32"
+  },
+  "tactile/left_gsmini/rgb": {
+   "shape": [
+    156
+   ],
+   "dtype": "|S11213"
+  },
+  "tactile/left_gsmini/rgb_marker": {
+   "shape": [
+    156
+   ],
+   "dtype": "|S23582"
+  },
+  "tactile/right_gsmini/depth": {
+   "shape": [
+    156,
+    240,
+    320
+   ],
+   "dtype": "float32"
+  },
+  "tactile/right_gsmini/marker": {
+   "shape": [
+    156,
+    2,
+    1200,
+    2
+   ],
+   "dtype": "float32"
+  },
+  "tactile/right_gsmini/pose": {
+   "shape": [
+    156,
+    7
+   ],
+   "dtype": "float32"
+  },
+  "tactile/right_gsmini/rgb": {
+   "shape": [
+    156
+   ],
+   "dtype": "|S12373"
+  },
+  "tactile/right_gsmini/rgb_marker": {
+   "shape": [
+    156
+   ],
+   "dtype": "|S24059"
+  }
+ },
+ "force_like_dataset_names": [],
+ "force_like_found": false,
+ "derived_episodes": 30,
+ "derived_feature_keys": [
+  "contact_frac",
+  "delta_p99_mm",
+  "du0_px",
+  "du_px",
+  "dv0_px",
+  "dv_px",
+  "hertz_Fn_rel",
+  "label",
+  "shear_mag_px",
+  "shear_world_x_px",
+  "shear_world_x_px_left",
+  "shear_world_x_px_right",
+  "shear_world_z_px",
+  "slip_ratio_rel",
+  "t_q"
+ ],
+ "numpy": "1.26.4",
+ "h5py": "3.11.0",
+ "conclusion": "힘·재질 관련 데이터셋 없음: 절대 힘, Hertz 힘, slip margin은 이 데이터로 계산할 수 없음"
+}

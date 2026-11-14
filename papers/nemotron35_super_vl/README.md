@@ -23,6 +23,7 @@ ReplaySSM·MOPD numpy toy로 분석한 자료입니다. 모델 가중치는 받�
 | `analysis/plot_figures.py` | 리포트 그래프 네 장 |
 | `analysis/extra_mamba_decay.py`, `analysis/extra_mamba_decay_results.json` | 공개 `A_log`·`dt_bias`(Mamba 40개 층, 헤더와 텐서 80개 range 읽기, 3.9 MB, 원자료는 공개 저장소에 넣지 않음)로 헤드별 감쇠 분포를 만들고 FP16 RN·SR·replay toy를 다시 돌림 (`03` 추가 검증, 약 8분) |
 | `analysis/extra_nvfp4_scale.py`, `analysis/extra_nvfp4_scale_results.json` | shard 하나의 expert 가중치(132 MB range 읽기)를 NVFP4로 에뮬레이션해 Max와 MSE 블록 scale을 비교 (`03` 추가 검증). 원자료는 저장하지 않음 |
+| `analysis/extra_nvfp4_scale_layers.py`, `analysis/extra_nvfp4_scale_layers_results.json` | 층 6개(3, 30, 48, 65, 79, 87)에서 expert 8개씩 range로 받아(530 MB) 층 12와 합쳐 120개 텐서에서 Max와 MSE scale 비교 (`03` 추가 검증 2026-11-14). 원자료는 저장하지 않음 |
 
 ## 재실행
 
