@@ -1,0 +1,80 @@
+{
+  "setup": {
+    "dt": 0.01,
+    "T_max": 300,
+    "alpha": 0.3,
+    "K": 50.0,
+    "squeeze_bias": 0.15,
+    "x_obj": 0.6,
+    "clutch": "0-3 s ramp to 1, hold to 4 s, 4-5 s down to c_back, hold to 6 s, 6-7 s up to 1, hold to 8 s",
+    "simplification": "backward motion replays q_demo(r) without query or squeeze"
+  },
+  "backoff": {
+    "c_back=0.4_H=1": {
+      "first_contact_s": 1.87,
+      "first_0_0p5s_mean": 12.728371580394661,
+      "first_0_0p5s_max": 17.197444332119172,
+      "backoff_release_after_4s_s": 1.16,
+      "backoff_force_max": 20.0,
+      "r_min_in_backoff": 119,
+      "recontact_s": 6.67,
+      "recontact_0_0p5s_mean": 12.728371580394661,
+      "recontact_0_0p5s_max": 17.197444332119172
+    },
+    "c_back=0.4_H=30": {
+      "first_contact_s": 1.87,
+      "first_0_0p5s_mean": 9.42837158039466,
+      "first_0_0p5s_max": 17.197444332119172,
+      "backoff_release_after_4s_s": 1.16,
+      "backoff_force_max": 20.0,
+      "r_min_in_backoff": 119,
+      "recontact_s": 6.67,
+      "recontact_0_0p5s_mean": 12.278371580394662,
+      "recontact_0_0p5s_max": 17.197444332119172
+    },
+    "c_back=0.4_H=30_no_squeeze": {
+      "first_contact_s": 1.87,
+      "first_0_0p5s_mean": 5.378371580394661,
+      "first_0_0p5s_max": 9.69744433211917,
+      "backoff_release_after_4s_s": 1.16,
+      "backoff_force_max": 15.000000000000002,
+      "r_min_in_backoff": 119,
+      "recontact_s": 6.67,
+      "recontact_0_0p5s_mean": 5.378371580394661,
+      "recontact_0_0p5s_max": 9.69744433211917
+    },
+    "c_back=0.2_H=1": {
+      "first_contact_s": 1.87,
+      "first_0_0p5s_mean": 12.728371580394661,
+      "first_0_0p5s_max": 17.197444332119172,
+      "backoff_release_after_4s_s": 1.16,
+      "backoff_force_max": 20.0,
+      "r_min_in_backoff": 100,
+      "recontact_s": 7.1000000000000005,
+      "recontact_0_0p5s_mean": 12.728371580394661,
+      "recontact_0_0p5s_max": 17.197444332119172
+    },
+    "c_back=0.2_H=30": {
+      "first_contact_s": 1.87,
+      "first_0_0p5s_mean": 9.42837158039466,
+      "first_0_0p5s_max": 17.197444332119172,
+      "backoff_release_after_4s_s": 1.16,
+      "backoff_force_max": 20.0,
+      "r_min_in_backoff": 100,
+      "recontact_s": 7.1000000000000005,
+      "recontact_0_0p5s_mean": 9.578371580394661,
+      "recontact_0_0p5s_max": 17.197444332119172
+    },
+    "c_back=0.2_H=30_no_squeeze": {
+      "first_contact_s": 1.87,
+      "first_0_0p5s_mean": 5.378371580394661,
+      "first_0_0p5s_max": 9.69744433211917,
+      "backoff_release_after_4s_s": 1.16,
+      "backoff_force_max": 15.000000000000002,
+      "r_min_in_backoff": 100,
+      "recontact_s": 7.1000000000000005,
+      "recontact_0_0p5s_mean": 5.378371580394661,
+      "recontact_0_0p5s_max": 9.69744433211917
+    }
+  }
+}

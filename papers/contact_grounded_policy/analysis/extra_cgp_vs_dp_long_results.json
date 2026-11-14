@@ -1,0 +1,67 @@
+{
+  "device": "cpu",
+  "torch": "2.15.0",
+  "mujoco": "4.0.0",
+  "numpy": "1.26.4",
+  "threads": 4,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "settings": {
+    "train_episodes": 400,
+    "test_episodes": 100,
+    "steps_per_episode": 48,
+    "chunk": 8,
+    "ddpm_steps": 20,
+    "diffusion_train_steps": 9000,
+    "mapper_train_steps": 9000,
+    "batch": 256,
+    "units": "MAE x 1e-3 rad over chunk",
+    "n_train_windows": 16400,
+    "n_test_windows": 4100,
+    "contact_fraction_of_windows_train": 0.07640243902439024,
+    "contact_fraction_of_windows_test": 0.07292682926829268,
+    "tactile_proxy": "penalty KAPPA x penetration (N/m = 2000)"
+  },
+  "results_mae_1e3rad": {
+    "DP visuomotor": {
+      "mean": 276.87354882558185,
+      "std": 20.14761822452792,
+      "per_seed": [
+        261.6576552391052,
+        305.3440749645233,
+        263.61891627311707
+      ]
+    },
+    "DP visuotactile": {
+      "mean": 296.73083623250324,
+      "std": 6.50372102851219,
+      "per_seed": [
+        295.28024792671204,
+        289.59041833877563,
+        305.3218424320221
+      ]
+    },
+    "CGP": {
+      "mean": 881.2777797381083,
+      "std": 69.08970470443272,
+      "per_seed": [
+        873.3062744140625,
+        800.9283542633057,
+        969.5987105369568
+      ]
+    },
+    "mapper_on_true_future": {
+      "mean": 42.14093089103699,
+      "std": 3.418568199808366,
+      "per_seed": [
+        37.70792856812477,
+        42.686719447374344,
+        46.02814465761185
+      ]
+    }
+  },
+  "wall_time_s": 159.2
+}

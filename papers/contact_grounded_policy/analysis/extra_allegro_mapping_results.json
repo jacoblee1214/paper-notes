@@ -1,0 +1,138 @@
+{
+  "device": "cpu",
+  "torch": "2.15.0",
+  "mujoco": "4.0.0",
+  "numpy": "1.26.4",
+  "hand_model": {
+    "source": "google-deepmind/mujoco_menagerie",
+    "folder": "wonik_allegro",
+    "commit": "370c43965323c0944b433b202aac5058b5f907a9",
+    "license": "BSD-3-Clause",
+    "local_copy": "contact_grounded_policy/data/menagerie (not in git)"
+  },
+  "n_joints": 16,
+  "n_samples": 6000,
+  "discarded_episodes_or_not_at_rest": 15553,
+  "contact_fraction": 0.8285,
+  "nontip_contact_fraction_among_contact": 0.9102796218064776,
+  "tip_only_contact_fraction_among_contact": 0.08972037819352242,
+  "n_validation": 3000,
+  "n_contact_validation": 2485,
+  "n_nontip_contact_validation": 2257,
+  "max_contact_jacobian_vs_solver_force_error": 2.6645352591003757e-15,
+  "kp": 5.0,
+  "joint_damping": 0.5,
+  "settle_steps": 900,
+  "drift_tol_rad": 2e-05,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "epochs": 60,
+  "units": "MAE x 1e-3 rad on validation split",
+  "results_mae_1e3rad": {
+    "zero_residual_a_eq_q": {
+      "all": 19.836609073774373,
+      "contact": 23.94761519218025,
+      "nontip_contact": 25.201800420120776
+    },
+    "analytic_all_links": {
+      "all": 0.10582271379320747,
+      "contact": 0.12775238334986144,
+      "nontip_contact": 0.13898438706420282
+    },
+    "analytic_floor_free_space": 6.735447022747081e-06,
+    "state+tactile, residual": {
+      "all": {
+        "mean": 2.3914632604220634,
+        "std": 0.0062205105367189395
+      },
+      "contact": {
+        "mean": 2.808292670634263,
+        "std": 0.003209383371397443
+      },
+      "nontip_contact": {
+        "mean": 2.8164901375206637,
+        "std": 0.005619597059066105
+      },
+      "tip_only_contact": {
+        "mean": 2.727144939219324,
+        "std": 0.06173161724304495
+      }
+    },
+    "state+tactile, absolute": {
+      "all": {
+        "mean": 22.77781380082357,
+        "std": 0.7448286222346309
+      },
+      "contact": {
+        "mean": 23.27442369287371,
+        "std": 0.6999813109165817
+      },
+      "nontip_contact": {
+        "mean": 22.990962814861508,
+        "std": 0.7237511345221237
+      },
+      "tip_only_contact": {
+        "mean": 26.08043773530152,
+        "std": 0.4676669839749078
+      }
+    },
+    "state only, residual": {
+      "all": {
+        "mean": 14.900780879855217,
+        "std": 0.05609111253192764
+      },
+      "contact": {
+        "mean": 17.163014413611577,
+        "std": 0.0650344092087198
+      },
+      "nontip_contact": {
+        "mean": 17.60145322469106,
+        "std": 0.08976334354783343
+      },
+      "tip_only_contact": {
+        "mean": 12.822854779373026,
+        "std": 0.19269906706953782
+      }
+    },
+    "tactile only, residual": {
+      "all": {
+        "mean": 2.4867258454339214,
+        "std": 0.009453188543679533
+      },
+      "contact": {
+        "mean": 2.959413185935301,
+        "std": 0.012551844336032665
+      },
+      "nontip_contact": {
+        "mean": 2.986672478646696,
+        "std": 0.007661016084273153
+      },
+      "tip_only_contact": {
+        "mean": 2.689570099752768,
+        "std": 0.07978012788024227
+      }
+    },
+    "fingertip-only state+tactile, residual": {
+      "all": {
+        "mean": 11.809370456052143,
+        "std": 0.012985271184189118
+      },
+      "contact": {
+        "mean": 13.716030002489527,
+        "std": 0.01725532610455639
+      },
+      "nontip_contact": {
+        "mean": 14.48533808761932,
+        "std": 0.04618232914386688
+      },
+      "tip_only_contact": {
+        "mean": 6.10055479135821,
+        "std": 0.30586378434308165
+      }
+    }
+  },
+  "wall_time_s": 163.0
+}

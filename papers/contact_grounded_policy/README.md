@@ -17,6 +17,8 @@
 | `analysis/03_analysis.md` | 추가 검증: 다지 손 MuJoCo 매핑 실험, 저차원 CGP 대 DP 비교 |
 | `analysis/extra_mujoco_mapping.py` | 3손가락 MuJoCo 모델과 Table III식 매핑 비교 (CPU, 약 1.5분) |
 | `analysis/extra_cgp_vs_dp.py` | 저차원 확산 정책 비교 (CPU, 약 1분) |
+| `analysis/extra_allegro_mapping.py` | 16자유도 공개 손(Allegro) 모델의 매핑 비교, 손끝만 감지 조건 포함 (CPU, 약 3분). 모델은 아래 명령으로 받음 |
+| `analysis/extra_cgp_vs_dp_long.py` | 저차원 확산 정책 비교, 학습 스텝 3배 (CPU, 약 6분) |
 
 ## 재실행
 
@@ -24,6 +26,9 @@
 pip install numpy scipy matplotlib
 python3 analysis/table_check.py && python3 analysis/mapping_toy.py
 python3 analysis/extra_mujoco_mapping.py && python3 analysis/extra_cgp_vs_dp.py
+git clone --depth 1 --filter=blob:none --sparse https://github.com/google-deepmind/mujoco_menagerie.git data/menagerie
+git -C data/menagerie sparse-checkout set wonik_allegro
+python3 analysis/extra_allegro_mapping.py && python3 analysis/extra_cgp_vs_dp_long.py
 cd analysis && python3 plot_figures.py
 ```
 
