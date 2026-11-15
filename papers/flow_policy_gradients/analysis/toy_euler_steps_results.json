@@ -1,0 +1,144 @@
+{
+  "setup": {
+    "pi": [
+      0.35,
+      0.65
+    ],
+    "mu": [
+      -1.0,
+      1.0
+    ],
+    "sd": [
+      0.2,
+      0.2
+    ],
+    "N": 200000,
+    "ref_K": 1024,
+    "steps": [
+      1,
+      2,
+      4,
+      5,
+      8,
+      10,
+      16,
+      32,
+      64
+    ],
+    "time_convention": "x_t = t*eps + (1-t)*a (논문 코드 actor_critic.py와 같은 규약)",
+    "seed": 0
+  },
+  "ref_K1024": {
+    "random_mean": 0.3001867482202567,
+    "random_std": 0.97457522747964,
+    "random_pos_mass": 0.650075,
+    "zero_action": 0.8527338791612604
+  },
+  "gauss_zero_check_K_to_err": {
+    "1": 0.0,
+    "2": 0.0,
+    "5": 0.0,
+    "10": 0.0
+  },
+  "rows": [
+    {
+      "K": 1,
+      "random_mean": 0.2999999999999999,
+      "random_std": 2.1853383791060232e-16,
+      "random_pos_mass": 1.0,
+      "random_mean_err": -0.00018674822025682714,
+      "random_std_err": -0.9745752274796398,
+      "random_pos_mass_err": 0.34992500000000004,
+      "zero_action": 0.3000000000000001,
+      "zero_err": -0.5527338791612604
+    },
+    {
+      "K": 2,
+      "random_mean": 0.3550394392043078,
+      "random_std": 0.5795446372310521,
+      "random_pos_mass": 0.728645,
+      "random_mean_err": 0.0548526909840511,
+      "random_std_err": -0.3950305902485879,
+      "random_pos_mass_err": 0.07857000000000003,
+      "zero_action": 0.526549457409813,
+      "zero_err": -0.32618442175144746
+    },
+    {
+      "K": 4,
+      "random_mean": 0.3480259926754559,
+      "random_std": 0.8468014228959507,
+      "random_pos_mass": 0.680025,
+      "random_mean_err": 0.047839244455199215,
+      "random_std_err": -0.12777380458368925,
+      "random_pos_mass_err": 0.029950000000000032,
+      "zero_action": 0.8572141259018465,
+      "zero_err": 0.0044802467405861135
+    },
+    {
+      "K": 5,
+      "random_mean": 0.3365591350930982,
+      "random_std": 0.8723232973478177,
+      "random_pos_mass": 0.672605,
+      "random_mean_err": 0.0363723868728415,
+      "random_std_err": -0.10225193013182232,
+      "random_pos_mass_err": 0.02253000000000005,
+      "zero_action": 0.8479861581481879,
+      "zero_err": -0.004747721013072526
+    },
+    {
+      "K": 8,
+      "random_mean": 0.32130647754105546,
+      "random_std": 0.9090081204677263,
+      "random_pos_mass": 0.663225,
+      "random_mean_err": 0.021119729320798752,
+      "random_std_err": -0.0655671070119137,
+      "random_pos_mass_err": 0.013149999999999995,
+      "zero_action": 0.8512180304210187,
+      "zero_err": -0.0015158487402416876
+    },
+    {
+      "K": 10,
+      "random_mean": 0.31668365339922977,
+      "random_std": 0.9216569895948105,
+      "random_pos_mass": 0.660225,
+      "random_mean_err": 0.016496905178973065,
+      "random_std_err": -0.05291823788482952,
+      "random_pos_mass_err": 0.010149999999999992,
+      "zero_action": 0.8517160858153177,
+      "zero_err": -0.0010177933459427635
+    },
+    {
+      "K": 16,
+      "random_mean": 0.31016848131987357,
+      "random_std": 0.9410620282842225,
+      "random_pos_mass": 0.656215,
+      "random_mean_err": 0.009981733099616863,
+      "random_std_err": -0.03351319919541751,
+      "random_pos_mass_err": 0.006140000000000034,
+      "zero_action": 0.8521919843998853,
+      "zero_err": -0.0005418947613751168
+    },
+    {
+      "K": 32,
+      "random_mean": 0.30497369795622076,
+      "random_std": 0.9577888650067968,
+      "random_pos_mass": 0.653015,
+      "random_mean_err": 0.004786949735964052,
+      "random_std_err": -0.016786362472843153,
+      "random_pos_mass_err": 0.0029400000000000537,
+      "zero_action": 0.8525396196296668,
+      "zero_err": -0.0001942595315935769
+    },
+    {
+      "K": 64,
+      "random_mean": 0.3024717322209866,
+      "random_std": 0.96636947100056,
+      "random_pos_mass": 0.651455,
+      "random_mean_err": 0.002284984000729906,
+      "random_std_err": -0.008205756479079951,
+      "random_pos_mass_err": 0.0013800000000000479,
+      "zero_action": 0.8526630137779945,
+      "zero_err": -7.086538326595004e-05
+    }
+  ]
+}

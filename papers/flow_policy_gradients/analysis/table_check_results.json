@@ -1,0 +1,265 @@
+{
+  "base_policy_success_granularity": [
+    {
+      "name": "Can FPO++ / vanilla FPO",
+      "reported_pct": 73.76,
+      "count_if_n1000": 737.6,
+      "is_integer_if_n1000": false,
+      "min_n_for_integer_count": 625,
+      "wilson95_if_n1000": [
+        0.7095,
+        0.7639
+      ]
+    },
+    {
+      "name": "Can ReinFlow",
+      "reported_pct": 76.3,
+      "count_if_n1000": 763.0,
+      "is_integer_if_n1000": true,
+      "min_n_for_integer_count": 1000,
+      "wilson95_if_n1000": [
+        0.7357,
+        0.7883
+      ]
+    },
+    {
+      "name": "Can DPPO",
+      "reported_pct": 76.1,
+      "count_if_n1000": 760.9999999999999,
+      "is_integer_if_n1000": true,
+      "min_n_for_integer_count": 1000,
+      "wilson95_if_n1000": [
+        0.7336,
+        0.7864
+      ]
+    },
+    {
+      "name": "Square DPPO",
+      "reported_pct": 37.6,
+      "count_if_n1000": 376.0,
+      "is_integer_if_n1000": true,
+      "min_n_for_integer_count": 125,
+      "wilson95_if_n1000": [
+        0.3465,
+        0.4064
+      ]
+    },
+    {
+      "name": "Square ReinFlow",
+      "reported_pct": 36.5,
+      "count_if_n1000": 365.0,
+      "is_integer_if_n1000": true,
+      "min_n_for_integer_count": 200,
+      "wilson95_if_n1000": [
+        0.3357,
+        0.3953
+      ]
+    },
+    {
+      "name": "Square FPO++ / vanilla FPO",
+      "reported_pct": 28.62,
+      "count_if_n1000": 286.2,
+      "is_integer_if_n1000": false,
+      "min_n_for_integer_count": 5000,
+      "wilson95_if_n1000": [
+        0.259,
+        0.315
+      ]
+    }
+  ],
+  "figure_a9_granularity": [
+    {
+      "name": "Can base zero-sampling",
+      "reported_pct": 71.35,
+      "min_n_for_integer_count": 2000
+    },
+    {
+      "name": "Can base random-sampling",
+      "reported_pct": 10.0,
+      "min_n_for_integer_count": 10
+    },
+    {
+      "name": "Can high-quality base zero-sampling",
+      "reported_pct": 96.11,
+      "min_n_for_integer_count": 10000
+    },
+    {
+      "name": "Can high-quality base random-sampling",
+      "reported_pct": 64.36,
+      "min_n_for_integer_count": 2500
+    }
+  ],
+  "c7_pooled_wilson": [
+    {
+      "name": "sparse, PPO trust region",
+      "p": 0.73,
+      "count_of_1000": 730,
+      "wilson95": [
+        0.7016,
+        0.7566
+      ]
+    },
+    {
+      "name": "sparse, ASPO",
+      "p": 0.07,
+      "count_of_1000": 70,
+      "wilson95": [
+        0.0558,
+        0.0875
+      ]
+    },
+    {
+      "name": "dense, PPO trust region",
+      "p": 0.81,
+      "count_of_1000": 810,
+      "wilson95": [
+        0.7845,
+        0.8331
+      ]
+    },
+    {
+      "name": "dense, ASPO",
+      "p": 0.28,
+      "count_of_1000": 280,
+      "wilson95": [
+        0.2531,
+        0.3086
+      ]
+    }
+  ],
+  "seed_sensitivity": {
+    "rows": [
+      {
+        "comparison": "sparse PPO - ASPO",
+        "diff": 0.66,
+        "assumed_seed_sd": 0.1,
+        "z": 14.76,
+        "p_two_sided_normal": 0.0
+      },
+      {
+        "comparison": "sparse PPO - ASPO",
+        "diff": 0.66,
+        "assumed_seed_sd": 0.2,
+        "z": 7.38,
+        "p_two_sided_normal": 1.5942802633617248e-13
+      },
+      {
+        "comparison": "sparse PPO - ASPO",
+        "diff": 0.66,
+        "assumed_seed_sd": 0.3,
+        "z": 4.92,
+        "p_two_sided_normal": 8.683228085448746e-07
+      },
+      {
+        "comparison": "dense PPO - ASPO",
+        "diff": 0.53,
+        "assumed_seed_sd": 0.1,
+        "z": 11.85,
+        "p_two_sided_normal": 0.0
+      },
+      {
+        "comparison": "dense PPO - ASPO",
+        "diff": 0.53,
+        "assumed_seed_sd": 0.2,
+        "z": 5.93,
+        "p_two_sided_normal": 3.1119677945667945e-09
+      },
+      {
+        "comparison": "dense PPO - ASPO",
+        "diff": 0.53,
+        "assumed_seed_sd": 0.3,
+        "z": 3.95,
+        "p_two_sided_normal": 7.802500743170349e-05
+      }
+    ],
+    "seed_sd_needed_for_z2": {
+      "sparse": 0.738,
+      "dense": 0.593
+    },
+    "note": "시드별 값이 없어 정확한 t 검정은 할 수 없다. 이 표는 가정 기반 근사다."
+  },
+  "wallclock": {
+    "gaussian_ppo_min": 19,
+    "fpo_pp_min": 23,
+    "ratio_fpo_to_gauss": 1.211,
+    "motion_tracking_factor_v2": 2,
+    "motion_tracking_factor_v1": 3,
+    "note": "v1 한계 절은 '3x'(최대), v2는 '2x'로 바뀌었다. 바뀐 이유는 본문에 없다."
+  },
+  "sweep_mismatch": {
+    "table_a1_clip_sweep": [
+      0.03,
+      0.04,
+      0.05,
+      0.06
+    ],
+    "fig2_and_fig4_caption_clip_values": [
+      0.04,
+      0.05,
+      0.06
+    ],
+    "fig2_caption_lr_sweep": [
+      "1e-5",
+      "1e-4",
+      "3e-4"
+    ],
+    "note": "표 A.1에는 0.03이 있으나 그림 캡션에는 없다. 그림 4 캡션은 세 값만 쓴다."
+  },
+  "table_vs_repo_defaults": {
+    "A.1 betas (0.9, 0.95)": "repo rl_cfg 기본값 (0.9, 0.999)",
+    "A.2 learning rate 3e-4": "repo task_cfgs 기본값 1e-4 (motion 설정이 덮어쓰지 않음)",
+    "A.2 learning epochs 5": "repo 기본값 16 (motion 설정이 덮어쓰지 않음)",
+    "A.2 minibatches 4": "repo motion 설정 6",
+    "A.2 flow steps 50": "repo 기본값 64 (motion 설정이 덮어쓰지 않음)",
+    "A.1 samples per action 16": "repo Spot/H1/G1 설정 32",
+    "B.2.2 rollout length 96": "repo motion 설정 num_steps_per_env 48"
+  },
+  "v1_table1_welch": {
+    "values": {
+      "random_5": [
+        34.7,
+        55.0
+      ],
+      "random_50": [
+        38.4,
+        26.6
+      ],
+      "zero_5": [
+        45.1,
+        27.4
+      ],
+      "zero_50": [
+        45.5,
+        23.2
+      ]
+    },
+    "n_rollouts_assumed": 100,
+    "rows": [
+      {
+        "comparison": "zero_5 - random_5",
+        "diff": 10.4,
+        "welch_t": 1.69,
+        "p_two_sided": 0.0926922075358922
+      },
+      {
+        "comparison": "zero_50 - zero_5",
+        "diff": 0.4,
+        "welch_t": 0.11,
+        "p_two_sided": 0.9114052506536439
+      },
+      {
+        "comparison": "random_50 - random_5",
+        "diff": 3.7,
+        "welch_t": 0.61,
+        "p_two_sided": 0.5457294626518061
+      },
+      {
+        "comparison": "zero_5 - random_50",
+        "diff": 6.7,
+        "welch_t": 1.75,
+        "p_two_sided": 0.08089658203831411
+      }
+    ],
+    "note": "v1 표 I만 해당. 표준편차 정의(롤아웃 간)는 논문에 없어 가정이다."
+  }
+}

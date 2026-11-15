@@ -1,0 +1,160 @@
+{
+  "setup": {
+    "s": 0.3,
+    "deltas": [
+      0.05,
+      0.1,
+      0.2
+    ],
+    "N_act": 2000,
+    "M_pop": 4000,
+    "Nmc": [
+      1,
+      4,
+      16,
+      64
+    ],
+    "clip": 0.05,
+    "seed": 1,
+    "loss": "squared CFM, x_t = t*eps + (1-t)*a, target eps - a, t~U(0,1)"
+  },
+  "by_delta": {
+    "0.05": {
+      "exact_logratio_sd": 0.16780808814020987,
+      "exact_logratio_mean": -0.016121878360235344,
+      "surrogate_mean_of_means": -0.007592314420854674,
+      "corr_surrogate_exact": 0.9998535215201138,
+      "slope_surrogate_on_exact": 0.4715677131766039,
+      "resid_sd": 0.0013545859827688272,
+      "per_sample_single_logratio_sd_within_a": 0.08357619302513791,
+      "variance_by_Nmc": [
+        {
+          "Nmc": 1,
+          "per_sample_logratio_sd_within_a": NaN,
+          "per_action_logratio_sd_across_a": 0.11341686273737758,
+          "per_sample_clip_frac": 0.524,
+          "per_action_clip_frac": 0.524
+        },
+        {
+          "Nmc": 4,
+          "per_sample_logratio_sd_within_a": 0.07078920634643635,
+          "per_action_logratio_sd_across_a": 0.08899619707957566,
+          "per_sample_clip_frac": 0.517125,
+          "per_action_clip_frac": 0.544
+        },
+        {
+          "Nmc": 16,
+          "per_sample_logratio_sd_within_a": 0.0802103672183269,
+          "per_action_logratio_sd_across_a": 0.08088439260709349,
+          "per_sample_clip_frac": 0.5119375,
+          "per_action_clip_frac": 0.5315
+        },
+        {
+          "Nmc": 64,
+          "per_sample_logratio_sd_within_a": 0.08261930981550206,
+          "per_action_logratio_sd_across_a": 0.07978127820367747,
+          "per_sample_clip_frac": 0.511578125,
+          "per_action_clip_frac": 0.5425
+        }
+      ]
+    },
+    "0.1": {
+      "exact_logratio_sd": 0.3356161762804196,
+      "exact_logratio_mean": -0.06002153449824846,
+      "surrogate_mean_of_means": -0.028224115286776184,
+      "corr_surrogate_exact": 0.9998633014515861,
+      "slope_surrogate_on_exact": 0.4711628830382264,
+      "resid_sd": 0.002614902101296728,
+      "per_sample_single_logratio_sd_within_a": 0.16761275231113112,
+      "variance_by_Nmc": [
+        {
+          "Nmc": 1,
+          "per_sample_logratio_sd_within_a": NaN,
+          "per_action_logratio_sd_across_a": 0.23560598384707326,
+          "per_sample_clip_frac": 0.742,
+          "per_action_clip_frac": 0.742
+        },
+        {
+          "Nmc": 4,
+          "per_sample_logratio_sd_within_a": 0.1412521710171784,
+          "per_action_logratio_sd_across_a": 0.17770045897275633,
+          "per_sample_clip_frac": 0.72975,
+          "per_action_clip_frac": 0.769
+        },
+        {
+          "Nmc": 16,
+          "per_sample_logratio_sd_within_a": 0.1606125813808527,
+          "per_action_logratio_sd_across_a": 0.16405679421593747,
+          "per_sample_clip_frac": 0.72696875,
+          "per_action_clip_frac": 0.7645
+        },
+        {
+          "Nmc": 64,
+          "per_sample_logratio_sd_within_a": 0.16551204109448792,
+          "per_action_logratio_sd_across_a": 0.15970219468180738,
+          "per_sample_clip_frac": 0.7236953125,
+          "per_action_clip_frac": 0.757
+        }
+      ]
+    },
+    "0.2": {
+      "exact_logratio_sd": 0.6712323525608394,
+      "exact_logratio_mean": -0.23115418010760805,
+      "surrogate_mean_of_means": -0.10901927814829869,
+      "corr_surrogate_exact": 0.9998431410367746,
+      "slope_surrogate_on_exact": 0.4713801634270333,
+      "resid_sd": 0.005604862311709452,
+      "per_sample_single_logratio_sd_within_a": 0.33856567255845355,
+      "variance_by_Nmc": [
+        {
+          "Nmc": 1,
+          "per_sample_logratio_sd_within_a": NaN,
+          "per_action_logratio_sd_across_a": 0.4629518460570393,
+          "per_sample_clip_frac": 0.852,
+          "per_action_clip_frac": 0.852
+        },
+        {
+          "Nmc": 4,
+          "per_sample_logratio_sd_within_a": 0.2813953340306035,
+          "per_action_logratio_sd_across_a": 0.3584839916413641,
+          "per_sample_clip_frac": 0.862875,
+          "per_action_clip_frac": 0.878
+        },
+        {
+          "Nmc": 16,
+          "per_sample_logratio_sd_within_a": 0.32500691307624224,
+          "per_action_logratio_sd_across_a": 0.3304235162523327,
+          "per_sample_clip_frac": 0.85859375,
+          "per_action_clip_frac": 0.8815
+        },
+        {
+          "Nmc": 64,
+          "per_sample_logratio_sd_within_a": 0.33526635251791015,
+          "per_action_logratio_sd_across_a": 0.32039427467248965,
+          "per_sample_clip_frac": 0.8595859375,
+          "per_action_clip_frac": 0.891
+        }
+      ]
+    }
+  },
+  "scale_sweep": [
+    {
+      "s": 0.1,
+      "slope": 0.1571711415391916,
+      "slope_over_s": 1.5717114153919158,
+      "corr": 0.9996264374157828
+    },
+    {
+      "s": 0.3,
+      "slope": 0.47143803622935876,
+      "slope_over_s": 1.5714601207645293,
+      "corr": 0.9998578077235175
+    },
+    {
+      "s": 1.0,
+      "slope": 1.5713094098101155,
+      "slope_over_s": 1.5713094098101155,
+      "corr": 0.9998616013085183
+    }
+  ]
+}
