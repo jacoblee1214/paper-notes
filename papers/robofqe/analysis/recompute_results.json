@@ -1,0 +1,534 @@
+{
+  "table1_ARE_vs_MSE": [
+    {
+      "method": "RoboFQE",
+      "suite": "Spatial",
+      "ARE_reported": 3.4,
+      "ARE_RMS_bound": 3.4,
+      "ok": true
+    },
+    {
+      "method": "RoboFQE",
+      "suite": "Object",
+      "ARE_reported": 4.56,
+      "ARE_RMS_bound": 4.56,
+      "ok": true
+    },
+    {
+      "method": "RoboFQE",
+      "suite": "Goal",
+      "ARE_reported": 2.34,
+      "ARE_RMS_bound": 2.36,
+      "ok": true
+    },
+    {
+      "method": "RoboFQE",
+      "suite": "Long",
+      "ARE_reported": 5.63,
+      "ARE_RMS_bound": 7.07,
+      "ok": true
+    },
+    {
+      "method": "RoboFQE-scratch",
+      "suite": "Spatial",
+      "ARE_reported": 9.35,
+      "ARE_RMS_bound": 9.12,
+      "ok": false
+    },
+    {
+      "method": "RoboFQE-scratch",
+      "suite": "Object",
+      "ARE_reported": 13.89,
+      "ARE_RMS_bound": 16.3,
+      "ok": true
+    },
+    {
+      "method": "RoboFQE-scratch",
+      "suite": "Goal",
+      "ARE_reported": 5.82,
+      "ARE_RMS_bound": 6.58,
+      "ok": true
+    },
+    {
+      "method": "RoboFQE-scratch",
+      "suite": "Long",
+      "ARE_reported": 32.09,
+      "ARE_RMS_bound": 33.96,
+      "ok": true
+    },
+    {
+      "method": "WorldGym",
+      "suite": "Spatial",
+      "ARE_reported": 24.2,
+      "ARE_RMS_bound": 24.51,
+      "ok": true
+    },
+    {
+      "method": "WorldGym",
+      "suite": "Object",
+      "ARE_reported": 22.21,
+      "ARE_RMS_bound": 22.26,
+      "ok": true
+    },
+    {
+      "method": "WorldGym",
+      "suite": "Goal",
+      "ARE_reported": 50.04,
+      "ARE_RMS_bound": 50.97,
+      "ok": true
+    },
+    {
+      "method": "WorldGym",
+      "suite": "Long",
+      "ARE_reported": 69.18,
+      "ARE_RMS_bound": 68.75,
+      "ok": false
+    },
+    {
+      "method": "Cosmos 2.5-AC",
+      "suite": "Spatial",
+      "ARE_reported": 8.44,
+      "ARE_RMS_bound": 8.47,
+      "ok": true
+    },
+    {
+      "method": "Cosmos 2.5-AC",
+      "suite": "Object",
+      "ARE_reported": 7.55,
+      "ARE_RMS_bound": 7.56,
+      "ok": true
+    },
+    {
+      "method": "Cosmos 2.5-AC",
+      "suite": "Goal",
+      "ARE_reported": 8.03,
+      "ARE_RMS_bound": 8.06,
+      "ok": true
+    },
+    {
+      "method": "Cosmos 2.5-AC",
+      "suite": "Long",
+      "ARE_reported": 54.37,
+      "ARE_RMS_bound": 50.74,
+      "ok": false
+    },
+    {
+      "method": "Ctrl-World",
+      "suite": "Spatial",
+      "ARE_reported": 9.13,
+      "ARE_RMS_bound": 9.1,
+      "ok": true
+    },
+    {
+      "method": "Ctrl-World",
+      "suite": "Object",
+      "ARE_reported": 8.17,
+      "ARE_RMS_bound": 8.18,
+      "ok": true
+    },
+    {
+      "method": "Ctrl-World",
+      "suite": "Goal",
+      "ARE_reported": 8.71,
+      "ARE_RMS_bound": 8.73,
+      "ok": true
+    },
+    {
+      "method": "Ctrl-World",
+      "suite": "Long",
+      "ARE_reported": 58.75,
+      "ARE_RMS_bound": 56.17,
+      "ok": false
+    }
+  ],
+  "table1_ARE_vs_MSE_violations": [
+    {
+      "method": "RoboFQE-scratch",
+      "suite": "Spatial",
+      "ARE_reported": 9.35,
+      "ARE_RMS_bound": 9.12,
+      "ok": false
+    },
+    {
+      "method": "WorldGym",
+      "suite": "Long",
+      "ARE_reported": 69.18,
+      "ARE_RMS_bound": 68.75,
+      "ok": false
+    },
+    {
+      "method": "Cosmos 2.5-AC",
+      "suite": "Long",
+      "ARE_reported": 54.37,
+      "ARE_RMS_bound": 50.74,
+      "ok": false
+    },
+    {
+      "method": "Ctrl-World",
+      "suite": "Long",
+      "ARE_reported": 58.75,
+      "ARE_RMS_bound": 56.17,
+      "ok": false
+    }
+  ],
+  "r_critical_p05": {
+    "n=3": 0.997,
+    "n=4": 0.95,
+    "n=5": 0.878,
+    "n=10": 0.632
+  },
+  "min_one_sided_p_spearman_n4": 0.0417,
+  "RoboFQE_r_CI_if_n4": [
+    {
+      "suite": "Spatial",
+      "r_V": 0.96,
+      "CI95_n4": [
+        -0.014,
+        0.999
+      ],
+      "significant_n4": true
+    },
+    {
+      "suite": "Object",
+      "r_V": 0.91,
+      "CI95_n4": [
+        -0.407,
+        0.998
+      ],
+      "significant_n4": false
+    },
+    {
+      "suite": "Goal",
+      "r_V": 0.9,
+      "CI95_n4": [
+        -0.452,
+        0.998
+      ],
+      "significant_n4": false
+    },
+    {
+      "suite": "Long",
+      "r_V": 0.88,
+      "CI95_n4": [
+        -0.526,
+        0.997
+      ],
+      "significant_n4": false
+    }
+  ],
+  "table1_claims_check": {
+    "Spatial": {
+      "vsV_highest_r": true,
+      "vsV_lowest_MMRV": true,
+      "vsSR_lowest_MMRV": false,
+      "vsSR_lowest_MMRV_among_cosmos_ctrl": {
+        "min_value": [
+          "Ctrl-World",
+          0.09
+        ]
+      }
+    },
+    "Object": {
+      "vsV_highest_r": true,
+      "vsV_lowest_MMRV": true,
+      "vsSR_lowest_MMRV": false,
+      "vsSR_lowest_MMRV_among_cosmos_ctrl": {
+        "min_value": [
+          "Cosmos",
+          0.09
+        ]
+      }
+    },
+    "Goal": {
+      "vsV_highest_r": true,
+      "vsV_lowest_MMRV": true,
+      "vsSR_lowest_MMRV": false,
+      "vsSR_lowest_MMRV_among_cosmos_ctrl": {
+        "min_value": [
+          "Cosmos",
+          0.1
+        ]
+      }
+    },
+    "Long": {
+      "vsV_highest_r": true,
+      "vsV_lowest_MMRV": true,
+      "vsSR_lowest_MMRV": true,
+      "vsSR_lowest_MMRV_among_cosmos_ctrl": {
+        "min_value": [
+          "Ctrl-World",
+          0.22
+        ]
+      }
+    }
+  },
+  "ARE_CI_overlap_RoboFQE_vs_Cosmos": {
+    "Spatial": {
+      "RoboFQE": [
+        3.32,
+        3.48
+      ],
+      "Cosmos": [
+        8.25,
+        8.63
+      ]
+    },
+    "Object": {
+      "RoboFQE": [
+        4.39,
+        4.73
+      ],
+      "Cosmos": [
+        6.72,
+        8.38
+      ]
+    },
+    "Goal": {
+      "RoboFQE": [
+        2.15,
+        2.53
+      ],
+      "Cosmos": [
+        5.66,
+        10.4
+      ]
+    },
+    "Long": {
+      "RoboFQE": [
+        2.92,
+        8.34
+      ],
+      "Cosmos": [
+        39.48,
+        69.26
+      ]
+    }
+  },
+  "implied_success_length": {
+    "Spatial": {
+      "mean_discount_given_success": 0.2821,
+      "implied_success_step_if_constant": 126.9,
+      "H": 220,
+      "ratio_to_H": 0.58
+    },
+    "Object": {
+      "mean_discount_given_success": 0.2075,
+      "implied_success_step_if_constant": 157.5,
+      "H": 280,
+      "ratio_to_H": 0.56
+    },
+    "Goal": {
+      "mean_discount_given_success": 0.3195,
+      "implied_success_step_if_constant": 114.5,
+      "H": 300,
+      "ratio_to_H": 0.38
+    },
+    "Long": {
+      "mean_discount_given_success": 0.0674,
+      "implied_success_step_if_constant": 269.3,
+      "H": 520,
+      "ratio_to_H": 0.52
+    }
+  },
+  "table2_avglen_check": {
+    "Ground Truth": {
+      "sum_SRk": 4.32,
+      "reported_avg_len": 4.32,
+      "monotone": true
+    },
+    "RoboFQE": {
+      "sum_SRk": 3.61,
+      "reported_avg_len": 3.61,
+      "monotone": true
+    },
+    "WorldGym": {
+      "sum_SRk": 1.04,
+      "reported_avg_len": 1.04,
+      "monotone": true
+    },
+    "Cosmos 2.5-AC": {
+      "sum_SRk": 1.48,
+      "reported_avg_len": 1.48,
+      "monotone": true
+    },
+    "Ctrl-World": {
+      "sum_SRk": 1.58,
+      "reported_avg_len": 1.59,
+      "monotone": true
+    }
+  },
+  "table2_RoboFQE_rel_gap_pct": 16.4,
+  "table2_GT_possible_n_le500": [
+    45,
+    55,
+    67,
+    68,
+    76,
+    78,
+    79,
+    82,
+    85,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    97,
+    98,
+    99,
+    100
+  ],
+  "table2_GT_20chain_grid_check": [
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "table2_GT_binomial_CI_n100": {
+    "SR@1": [
+      0.922,
+      0.998
+    ],
+    "SR@2": [
+      0.854,
+      0.966
+    ],
+    "SR@3": [
+      0.804,
+      0.936
+    ],
+    "SR@4": [
+      0.745,
+      0.895
+    ],
+    "SR@5": [
+      0.676,
+      0.844
+    ]
+  },
+  "table2_WorldGym_SR1_gap_vs_GT": 0.21,
+  "table3_interpretation": {
+    "RoboFQE": {
+      "ARE_mean": 7.5,
+      "ARE_pm": 5.0,
+      "SD_if_pm_is_CI": 2.01,
+      "CI_half_if_pm_is_SD": 12.42
+    },
+    "WorldGym": {
+      "ARE_mean": 17.8,
+      "ARE_pm": 10.9,
+      "SD_if_pm_is_CI": 4.39,
+      "CI_half_if_pm_is_SD": 27.08
+    },
+    "Cosmos 2.5-AC": {
+      "ARE_mean": 24.5,
+      "ARE_pm": 17.1,
+      "SD_if_pm_is_CI": 6.88,
+      "CI_half_if_pm_is_SD": 42.48
+    },
+    "Ctrl-World": {
+      "ARE_mean": 10.3,
+      "ARE_pm": 10.2,
+      "SD_if_pm_is_CI": 4.11,
+      "CI_half_if_pm_is_SD": 25.34
+    }
+  },
+  "table3_welch_RoboFQE_vs_CtrlWorld_ARE": {
+    "if_pm_is_CI": {
+      "t": 1.061,
+      "p": 0.369,
+      "df": 2.91
+    },
+    "if_pm_is_SD": {
+      "t": 0.427,
+      "p": 0.699,
+      "df": 2.91
+    }
+  },
+  "table3_feasibility": {
+    "LRM_83.3pct_with_n250": [],
+    "LRM_83.3pct_nearest_n250_counts": [
+      83.2,
+      83.6
+    ],
+    "GT_58.5pct_with_n300": [],
+    "GT_81.0pct_with_n300": [
+      243
+    ],
+    "GT_33.0pct_with_n300": [
+      99
+    ],
+    "LRM_97.4pct_with_n1000": [
+      974
+    ],
+    "LRM_97.4pct_with_n250": []
+  },
+  "table3_wilson_LRM_83.3_n250": [
+    0.782,
+    0.874
+  ],
+  "table3_wilson_GT_58.5_n300": [
+    0.529,
+    0.639
+  ],
+  "table4_ARE_vs_MSE": {
+    "Spatial": {
+      "ARE": 6.41,
+      "RMS_bound": 6.55
+    },
+    "Object": {
+      "ARE": 9.68,
+      "RMS_bound": 9.98
+    },
+    "Goal": {
+      "ARE": 9.84,
+      "RMS_bound": 11.24
+    },
+    "Long": {
+      "ARE": 21.85,
+      "RMS_bound": 23.8
+    }
+  },
+  "table5_demo_vs_aug": {
+    "Spatial": {
+      "ARE_demo": 19.22,
+      "RMS_bound_demo": 16.84,
+      "ratio_ARE": 5.65,
+      "demo_ok": false
+    },
+    "Object": {
+      "ARE_demo": 29.05,
+      "RMS_bound_demo": 27.79,
+      "ratio_ARE": 6.37,
+      "demo_ok": false
+    },
+    "Goal": {
+      "ARE_demo": 23.07,
+      "RMS_bound_demo": 22.21,
+      "ratio_ARE": 9.86,
+      "demo_ok": false
+    },
+    "Long": {
+      "ARE_demo": 30.85,
+      "RMS_bound_demo": 30.94,
+      "ratio_ARE": 5.48,
+      "demo_ok": true
+    }
+  },
+  "table5_ratio_range": [
+    5.48,
+    9.86
+  ],
+  "ram_uint8_images_GB": {
+    "Spatial": 10.0,
+    "Object": 11.9,
+    "Goal": 11.2,
+    "Long": 22.8
+  },
+  "ram_uint8_all_LIBERO_GB": 55.9,
+  "ram_uint8_all_LIBERO_GiB": 52.1,
+  "A3_transitions_sum": 569000
+}

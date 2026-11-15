@@ -1,0 +1,284 @@
+{
+  "model": "V_hat = TPR*V + (1-TNR)*gamma^(H-1)*(1-SR); MC with n=400k per policy",
+  "policies_SR": [
+    0.84,
+    0.7,
+    0.55,
+    0.3
+  ],
+  "libero_symmetric": {
+    "Spatial": {
+      "acc=0.974": {
+        "V_true_mc": [
+          0.2361,
+          0.1966,
+          0.1543,
+          0.0843
+        ],
+        "bias_relative_pct_mc_mean": -1.65,
+        "bias_relative_pct_closed_form_mean": -1.64,
+        "kendall_tau_vs_true": 1.0
+      },
+      "acc=0.9": {
+        "V_true_mc": [
+          0.236,
+          0.1969,
+          0.1542,
+          0.0846
+        ],
+        "bias_relative_pct_mc_mean": -6.33,
+        "bias_relative_pct_closed_form_mean": -6.3,
+        "kendall_tau_vs_true": 1.0
+      }
+    },
+    "Object": {
+      "acc=0.974": {
+        "V_true_mc": [
+          0.1739,
+          0.1449,
+          0.1138,
+          0.0619
+        ],
+        "bias_relative_pct_mc_mean": -1.85,
+        "bias_relative_pct_closed_form_mean": -1.88,
+        "kendall_tau_vs_true": 1.0
+      },
+      "acc=0.9": {
+        "V_true_mc": [
+          0.1738,
+          0.1448,
+          0.1136,
+          0.0621
+        ],
+        "bias_relative_pct_mc_mean": -7.25,
+        "bias_relative_pct_closed_form_mean": -7.25,
+        "kendall_tau_vs_true": 1.0
+      }
+    },
+    "Goal": {
+      "acc=0.974": {
+        "V_true_mc": [
+          0.2678,
+          0.2235,
+          0.1756,
+          0.0956
+        ],
+        "bias_relative_pct_mc_mean": -2.19,
+        "bias_relative_pct_closed_form_mean": -2.22,
+        "kendall_tau_vs_true": 1.0
+      },
+      "acc=0.9": {
+        "V_true_mc": [
+          0.2685,
+          0.2233,
+          0.1757,
+          0.0959
+        ],
+        "bias_relative_pct_mc_mean": -8.56,
+        "bias_relative_pct_closed_form_mean": -8.54,
+        "kendall_tau_vs_true": 1.0
+      }
+    },
+    "Long": {
+      "acc=0.974": {
+        "V_true_mc": [
+          0.0567,
+          0.0473,
+          0.037,
+          0.0202
+        ],
+        "bias_relative_pct_mc_mean": -2.42,
+        "bias_relative_pct_closed_form_mean": -2.4,
+        "kendall_tau_vs_true": 1.0
+      },
+      "acc=0.9": {
+        "V_true_mc": [
+          0.0566,
+          0.0472,
+          0.037,
+          0.0202
+        ],
+        "bias_relative_pct_mc_mean": -9.23,
+        "bias_relative_pct_closed_form_mean": -9.24,
+        "kendall_tau_vs_true": 1.0
+      }
+    }
+  },
+  "real_world_gamma1": {
+    "acc=0.833": {
+      "V_hat": [
+        0.557,
+        0.706,
+        0.387
+      ],
+      "abs_bias_pp": [
+        -2.8,
+        -10.4,
+        5.7
+      ],
+      "relative_error_pct": [
+        4.9,
+        12.8,
+        17.2
+      ],
+      "mean_relative_error_pct": 11.6
+    },
+    "acc=0.95": {
+      "V_hat": [
+        0.576,
+        0.779,
+        0.347
+      ],
+      "abs_bias_pp": [
+        -0.8,
+        -3.1,
+        1.7
+      ],
+      "relative_error_pct": [
+        1.5,
+        3.8,
+        5.2
+      ],
+      "mean_relative_error_pct": 3.5
+    },
+    "policy_dependent_FPR": {
+      "V_true": [
+        0.585,
+        0.81,
+        0.33
+      ],
+      "V_hat": [
+        0.576,
+        0.779,
+        0.514
+      ],
+      "rel_error_pct": [
+        1.5,
+        3.8,
+        55.9
+      ],
+      "order_preserved": true
+    }
+  },
+  "spatial_asymmetric": {
+    "TPR=0.75,TNR=0.99": {
+      "V_true": [
+        0.236,
+        0.197,
+        0.155,
+        0.084
+      ],
+      "V_hat": [
+        0.178,
+        0.148,
+        0.117,
+        0.064
+      ],
+      "bias_pp": [
+        -5.9,
+        -4.9,
+        -3.8,
+        -2.0
+      ],
+      "kendall_tau": 1.0
+    },
+    "TPR=0.99,TNR=0.75": {
+      "V_true": [
+        0.236,
+        0.197,
+        0.155,
+        0.085
+      ],
+      "V_hat": [
+        0.238,
+        0.203,
+        0.166,
+        0.103
+      ],
+      "bias_pp": [
+        0.2,
+        0.6,
+        1.1,
+        1.8
+      ],
+      "kendall_tau": 1.0
+    },
+    "TPR=0.90,TNR=0.90": {
+      "V_true": [
+        0.236,
+        0.197,
+        0.154,
+        0.084
+      ],
+      "V_hat": [
+        0.214,
+        0.18,
+        0.144,
+        0.083
+      ],
+      "bias_pp": [
+        -2.2,
+        -1.6,
+        -1.0,
+        -0.1
+      ],
+      "kendall_tau": 1.0
+    }
+  },
+  "spatial_policy_dependent": {
+    "V_true": [
+      0.237,
+      0.197,
+      0.155,
+      0.084
+    ],
+    "V_hat_policy_dependent": [
+      0.23,
+      0.192,
+      0.165,
+      0.084
+    ],
+    "V_hat_uniform_TNR": [
+      0.23,
+      0.192,
+      0.152,
+      0.084
+    ],
+    "kendall_tau_policy_dependent": 1.0,
+    "kendall_tau_uniform": 1.0
+  },
+  "spatial_bias_vs_acc_closed_form": [
+    {
+      "acc": 1.0,
+      "mean_rel_bias_pct": 0.0
+    },
+    {
+      "acc": 0.99,
+      "mean_rel_bias_pct": -0.63
+    },
+    {
+      "acc": 0.974,
+      "mean_rel_bias_pct": -1.64
+    },
+    {
+      "acc": 0.95,
+      "mean_rel_bias_pct": -3.15
+    },
+    {
+      "acc": 0.9,
+      "mean_rel_bias_pct": -6.3
+    },
+    {
+      "acc": 0.85,
+      "mean_rel_bias_pct": -9.45
+    },
+    {
+      "acc": 0.833,
+      "mean_rel_bias_pct": -10.52
+    },
+    {
+      "acc": 0.8,
+      "mean_rel_bias_pct": -12.6
+    }
+  ]
+}

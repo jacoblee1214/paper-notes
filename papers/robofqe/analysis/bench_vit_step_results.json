@@ -1,0 +1,18 @@
+{
+  "device": "mps",
+  "torch": "2.15.0",
+  "encoder": "ViT-S/16 layout, 12 blocks, d=384, random init, 21.6M params",
+  "images_per_step": 1280,
+  "trainable_blocks": 4,
+  "step_seconds_median": 3.214,
+  "step_seconds_all": [
+    3.198,
+    3.243,
+    3.223,
+    3.214,
+    3.209
+  ],
+  "driver_allocated_GiB_after": 13.38,
+  "steps_50k_hours_estimate": 44.6,
+  "note": "정책 순전파, 데이터 로딩, 평가(estimate)는 포함하지 않음. 랜덤 가중치라 정확도와 무관."
+}

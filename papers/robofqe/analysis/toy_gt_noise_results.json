@@ -1,0 +1,332 @@
+{
+  "assumptions": {
+    "N_GT": 200,
+    "gamma": 0.99,
+    "timing": "truncated normal, sd = c*mu",
+    "c_values": [
+      0.15,
+      0.25,
+      0.35
+    ]
+  },
+  "gt_noise_floor": {
+    "Spatial": {
+      "c=0.15": {
+        "mu_steps": 128.8,
+        "SE_GT_abs": 0.00814,
+        "SE_GT_rel_pct": 3.4,
+        "MC_SE_rel_pct": 3.4,
+        "ARE_floor_mean_abs_pct": 2.7,
+        "RoboFQE_ARE_reported": 3.4
+      },
+      "c=0.25": {
+        "mu_steps": 132.7,
+        "SE_GT_abs": 0.00959,
+        "SE_GT_rel_pct": 4.0,
+        "MC_SE_rel_pct": 4.0,
+        "ARE_floor_mean_abs_pct": 3.2,
+        "RoboFQE_ARE_reported": 3.4
+      },
+      "c=0.35": {
+        "mu_steps": 143.2,
+        "SE_GT_abs": 0.01145,
+        "SE_GT_rel_pct": 4.8,
+        "MC_SE_rel_pct": 4.9,
+        "ARE_floor_mean_abs_pct": 3.9,
+        "RoboFQE_ARE_reported": 3.4
+      }
+    },
+    "Object": {
+      "c=0.15": {
+        "mu_steps": 160.4,
+        "SE_GT_abs": 0.00669,
+        "SE_GT_rel_pct": 4.0,
+        "MC_SE_rel_pct": 4.0,
+        "ARE_floor_mean_abs_pct": 3.2,
+        "RoboFQE_ARE_reported": 4.56
+      },
+      "c=0.25": {
+        "mu_steps": 166.4,
+        "SE_GT_abs": 0.00818,
+        "SE_GT_rel_pct": 4.9,
+        "MC_SE_rel_pct": 5.0,
+        "ARE_floor_mean_abs_pct": 3.9,
+        "RoboFQE_ARE_reported": 4.56
+      },
+      "c=0.35": {
+        "mu_steps": 181.4,
+        "SE_GT_abs": 0.01017,
+        "SE_GT_rel_pct": 6.1,
+        "MC_SE_rel_pct": 6.1,
+        "ARE_floor_mean_abs_pct": 4.9,
+        "RoboFQE_ARE_reported": 4.56
+      }
+    },
+    "Goal": {
+      "c=0.15": {
+        "mu_steps": 116.1,
+        "SE_GT_abs": 0.01013,
+        "SE_GT_rel_pct": 4.1,
+        "MC_SE_rel_pct": 4.1,
+        "ARE_floor_mean_abs_pct": 3.3,
+        "RoboFQE_ARE_reported": 2.34
+      },
+      "c=0.25": {
+        "mu_steps": 119.0,
+        "SE_GT_abs": 0.01127,
+        "SE_GT_rel_pct": 4.6,
+        "MC_SE_rel_pct": 4.6,
+        "ARE_floor_mean_abs_pct": 3.7,
+        "RoboFQE_ARE_reported": 2.34
+      },
+      "c=0.35": {
+        "mu_steps": 123.3,
+        "SE_GT_abs": 0.01291,
+        "SE_GT_rel_pct": 5.2,
+        "MC_SE_rel_pct": 5.3,
+        "ARE_floor_mean_abs_pct": 4.2,
+        "RoboFQE_ARE_reported": 2.34
+      }
+    },
+    "Long": {
+      "c=0.15": {
+        "mu_steps": 278.0,
+        "SE_GT_abs": 0.00273,
+        "SE_GT_rel_pct": 9.4,
+        "MC_SE_rel_pct": 9.6,
+        "ARE_floor_mean_abs_pct": 7.5,
+        "RoboFQE_ARE_reported": 5.63
+      },
+      "c=0.25": {
+        "mu_steps": 297.1,
+        "SE_GT_abs": 0.00357,
+        "SE_GT_rel_pct": 12.3,
+        "MC_SE_rel_pct": 12.4,
+        "ARE_floor_mean_abs_pct": 9.8,
+        "RoboFQE_ARE_reported": 5.63
+      },
+      "c=0.35": {
+        "mu_steps": 344.8,
+        "SE_GT_abs": 0.00501,
+        "SE_GT_rel_pct": 17.3,
+        "MC_SE_rel_pct": 18.6,
+        "ARE_floor_mean_abs_pct": 13.8,
+        "RoboFQE_ARE_reported": 5.63
+      }
+    }
+  },
+  "rank_ceiling": {
+    "Spatial": {
+      "close (SR 0.84/0.80/0.77/0.73)": {
+        "V_true": [
+          0.237,
+          0.226,
+          0.217,
+          0.206
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0096,
+          0.01,
+          0.0103,
+          0.0106
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.88,
+        "closest_pair_gap_in_V": 0.008,
+        "closest_pair_correct_order_prob": 0.722
+      },
+      "medium (SR 0.84/0.70/0.55/0.30)": {
+        "V_true": [
+          0.237,
+          0.197,
+          0.155,
+          0.085
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0096,
+          0.0108,
+          0.0111,
+          0.0099
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.994,
+        "closest_pair_gap_in_V": 0.04,
+        "closest_pair_correct_order_prob": 0.997
+      },
+      "wide (SR 0.90/0.60/0.30/0.05)": {
+        "V_true": [
+          0.254,
+          0.169,
+          0.085,
+          0.014
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0088,
+          0.0111,
+          0.0099,
+          0.0046
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.998,
+        "closest_pair_gap_in_V": 0.071,
+        "closest_pair_correct_order_prob": 1.0
+      }
+    },
+    "Object": {
+      "close (SR 0.84/0.80/0.77/0.73)": {
+        "V_true": [
+          0.174,
+          0.166,
+          0.16,
+          0.151
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0079,
+          0.0082,
+          0.0083,
+          0.0085
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.856,
+        "closest_pair_gap_in_V": 0.006,
+        "closest_pair_correct_order_prob": 0.703
+      },
+      "medium (SR 0.84/0.70/0.55/0.30)": {
+        "V_true": [
+          0.174,
+          0.145,
+          0.114,
+          0.062
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0079,
+          0.0086,
+          0.0087,
+          0.0076
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.993,
+        "closest_pair_gap_in_V": 0.029,
+        "closest_pair_correct_order_prob": 0.994
+      },
+      "wide (SR 0.90/0.60/0.30/0.05)": {
+        "V_true": [
+          0.187,
+          0.124,
+          0.062,
+          0.01
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0075,
+          0.0087,
+          0.0076,
+          0.0035
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.998,
+        "closest_pair_gap_in_V": 0.052,
+        "closest_pair_correct_order_prob": 1.0
+      }
+    },
+    "Goal": {
+      "close (SR 0.84/0.80/0.77/0.73)": {
+        "V_true": [
+          0.268,
+          0.256,
+          0.246,
+          0.233
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0104,
+          0.0109,
+          0.0113,
+          0.0116
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.886,
+        "closest_pair_gap_in_V": 0.01,
+        "closest_pair_correct_order_prob": 0.729
+      },
+      "medium (SR 0.84/0.70/0.55/0.30)": {
+        "V_true": [
+          0.268,
+          0.224,
+          0.176,
+          0.096
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0104,
+          0.0119,
+          0.0123,
+          0.011
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.994,
+        "closest_pair_gap_in_V": 0.045,
+        "closest_pair_correct_order_prob": 0.998
+      },
+      "wide (SR 0.90/0.60/0.30/0.05)": {
+        "V_true": [
+          0.288,
+          0.192,
+          0.096,
+          0.016
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0094,
+          0.0123,
+          0.011,
+          0.0052
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.998,
+        "closest_pair_gap_in_V": 0.08,
+        "closest_pair_correct_order_prob": 1.0
+      }
+    },
+    "Long": {
+      "close (SR 0.84/0.80/0.77/0.73)": {
+        "V_true": [
+          0.057,
+          0.054,
+          0.052,
+          0.049
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0041,
+          0.0041,
+          0.0041,
+          0.0041
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.742,
+        "closest_pair_gap_in_V": 0.002,
+        "closest_pair_correct_order_prob": 0.636
+      },
+      "medium (SR 0.84/0.70/0.55/0.30)": {
+        "V_true": [
+          0.057,
+          0.047,
+          0.037,
+          0.02
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0041,
+          0.0041,
+          0.0038,
+          0.0031
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.986,
+        "closest_pair_gap_in_V": 0.009,
+        "closest_pair_correct_order_prob": 0.948
+      },
+      "wide (SR 0.90/0.60/0.30/0.05)": {
+        "V_true": [
+          0.061,
+          0.04,
+          0.02,
+          0.003
+        ],
+        "SE_GT_per_policy_abs": [
+          0.0041,
+          0.0039,
+          0.0031,
+          0.0014
+        ],
+        "ceiling_r_median_of_noisy_GT_vs_true": 0.996,
+        "closest_pair_gap_in_V": 0.017,
+        "closest_pair_correct_order_prob": 1.0
+      }
+    }
+  }
+}
