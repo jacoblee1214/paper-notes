@@ -1,0 +1,599 @@
+{
+  "model": "2-D 횡방향 이중 적분기 + 움직이는 틈, 우리가 쓴 numpy 토이 (논문 코드 아님)",
+  "dt_s": 0.016666666666666666,
+  "gap_W_H_m": [
+    0.8,
+    0.25
+  ],
+  "drone_half_axes_m": [
+    0.19,
+    0.05
+  ],
+  "lambda_coll_per_m2": 6.0,
+  "w_coll": 18.0,
+  "w_track": 0.5,
+  "A_horizon_sweep": {
+    "config": {
+      "N": 2048,
+      "beta_per_m": 16.0,
+      "theta0": [
+        1.5,
+        1.0,
+        0.0
+      ],
+      "sigma": 0.5,
+      "h_fd": 1e-06,
+      "objective": "중심 추적(0.5) + 충돌(18·g·softplus_β) — PW와 SF가 같은 J를 쓴다"
+    },
+    "rows": [
+      {
+        "T": 10,
+        "horizon_s": 0.167,
+        "pw_grad_norm_mean": 0.02068168974000509,
+        "pw_grad_norm_max": 0.05366294012899632,
+        "pw_var_trace": 0.00039192056709666816,
+        "sf_var_trace_single_rollout": 26.86957486207603,
+        "sf_over_pw_var_ratio": 68558.72622640032,
+        "coll_only_smooth_nonzero_fraction": 1.0,
+        "coll_only_smooth_norm_mean": 0.020171804491039863,
+        "coll_only_hard_nonzero_fraction": 0.0,
+        "coll_only_hard_norm_mean": 0.0,
+        "smooth_coll_cost_mean": 0.35514762989342435,
+        "violation_fraction_at_crossing_mean_policy_pct": 49.560546875,
+        "success_rate_mean_policy_pct": 50.439453125,
+        "bias_z_scores_PW_minus_SF": [
+          -0.39,
+          -2.37,
+          0.46
+        ]
+      },
+      {
+        "T": 20,
+        "horizon_s": 0.333,
+        "pw_grad_norm_mean": 0.10939471360374493,
+        "pw_grad_norm_max": 0.335724841532742,
+        "pw_var_trace": 0.013968535953722123,
+        "sf_var_trace_single_rollout": 100.88756638372116,
+        "sf_over_pw_var_ratio": 7222.486788734519,
+        "coll_only_smooth_nonzero_fraction": 1.0,
+        "coll_only_smooth_norm_mean": 0.10659624759908795,
+        "coll_only_hard_nonzero_fraction": 0.0,
+        "coll_only_hard_norm_mean": 0.0,
+        "smooth_coll_cost_mean": 0.5146698167367064,
+        "violation_fraction_at_crossing_mean_policy_pct": 42.919921875,
+        "success_rate_mean_policy_pct": 57.080078125,
+        "bias_z_scores_PW_minus_SF": [
+          -0.65,
+          2.18,
+          0.82
+        ]
+      },
+      {
+        "T": 40,
+        "horizon_s": 0.667,
+        "pw_grad_norm_mean": 0.42824815114666515,
+        "pw_grad_norm_max": 1.626571346255984,
+        "pw_var_trace": 0.2644353620305432,
+        "sf_var_trace_single_rollout": 116.56951267184813,
+        "sf_over_pw_var_ratio": 440.8242217558783,
+        "coll_only_smooth_nonzero_fraction": 1.0,
+        "coll_only_smooth_norm_mean": 0.4150857262222617,
+        "coll_only_hard_nonzero_fraction": 0.0,
+        "coll_only_hard_norm_mean": 0.0,
+        "smooth_coll_cost_mean": 0.5038087887256554,
+        "violation_fraction_at_crossing_mean_policy_pct": 26.26953125,
+        "success_rate_mean_policy_pct": 73.73046875,
+        "bias_z_scores_PW_minus_SF": [
+          -1.63,
+          0.36,
+          1.9
+        ]
+      },
+      {
+        "T": 80,
+        "horizon_s": 1.333,
+        "pw_grad_norm_mean": 1.8702583390670764,
+        "pw_grad_norm_max": 5.010796309894247,
+        "pw_var_trace": 2.1127256460168895,
+        "sf_var_trace_single_rollout": 205.3860452402289,
+        "sf_over_pw_var_ratio": 97.21377956832309,
+        "coll_only_smooth_nonzero_fraction": 1.0,
+        "coll_only_smooth_norm_mean": 1.8159729748113191,
+        "coll_only_hard_nonzero_fraction": 0.0,
+        "coll_only_hard_norm_mean": 0.0,
+        "smooth_coll_cost_mean": 0.5497511164233855,
+        "violation_fraction_at_crossing_mean_policy_pct": 64.35546875,
+        "success_rate_mean_policy_pct": 35.64453125,
+        "bias_z_scores_PW_minus_SF": [
+          0.57,
+          0.07,
+          0.05
+        ]
+      },
+      {
+        "T": 120,
+        "horizon_s": 2.0,
+        "pw_grad_norm_mean": 2.0505318614947274,
+        "pw_grad_norm_max": 4.130907070060993,
+        "pw_var_trace": 1.6227690254469591,
+        "sf_var_trace_single_rollout": 551.8569848465931,
+        "sf_over_pw_var_ratio": 340.0711846188925,
+        "coll_only_smooth_nonzero_fraction": 1.0,
+        "coll_only_smooth_norm_mean": 1.913381473940565,
+        "coll_only_hard_nonzero_fraction": 0.0,
+        "coll_only_hard_norm_mean": 0.0,
+        "smooth_coll_cost_mean": 0.8994054520525308,
+        "violation_fraction_at_crossing_mean_policy_pct": 66.40625,
+        "success_rate_mean_policy_pct": 33.59375,
+        "bias_z_scores_PW_minus_SF": [
+          -0.51,
+          -0.39,
+          0.01
+        ]
+      }
+    ],
+    "slopes_loglog": {
+      "pw_var_vs_T": 3.4820357116972147,
+      "sf_var_vs_T": 1.046999242177086,
+      "pw_gradnorm_vs_T": 1.9178178128414867
+    },
+    "trained_policy": {
+      "theta": [
+        6.029,
+        2.696,
+        0.435
+      ],
+      "rows": [
+        {
+          "T": 10,
+          "pw_var_trace": 0.000328528761721667,
+          "sf_var_trace_single_rollout": 23.812781644538138,
+          "sf_over_pw_var_ratio": 72483.09560400856,
+          "success_rate_mean_policy_pct": 51.953125
+        },
+        {
+          "T": 20,
+          "pw_var_trace": 0.00916866397919891,
+          "sf_var_trace_single_rollout": 85.71350666780523,
+          "sf_over_pw_var_ratio": 9348.527425834865,
+          "success_rate_mean_policy_pct": 63.96484375
+        },
+        {
+          "T": 40,
+          "pw_var_trace": 0.05005863425125745,
+          "sf_var_trace_single_rollout": 63.939813213550785,
+          "sf_over_pw_var_ratio": 1277.298395569884,
+          "success_rate_mean_policy_pct": 100.0
+        },
+        {
+          "T": 80,
+          "pw_var_trace": 0.018915621539277703,
+          "sf_var_trace_single_rollout": 1.248513322279503,
+          "sf_over_pw_var_ratio": 66.00435093750443,
+          "success_rate_mean_policy_pct": 100.0
+        },
+        {
+          "T": 120,
+          "pw_var_trace": 0.02241816697114367,
+          "sf_var_trace_single_rollout": 3.545589249250665,
+          "sf_over_pw_var_ratio": 158.1569650103193,
+          "success_rate_mean_policy_pct": 100.0
+        }
+      ],
+      "slopes_loglog": {
+        "pw_var_vs_T": 1.4972145146575,
+        "sf_var_vs_T": -1.2698822019665332
+      }
+    }
+  },
+  "B_temperature": {
+    "config": {
+      "T": 60,
+      "train_iters": 150,
+      "lr": 0.05,
+      "batch": 256,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "theta0": [
+        1.5,
+        1.0,
+        0.0
+      ],
+      "modes": {
+        "full": "중심 추적 0.5 + 충돌",
+        "coll_only": "충돌 항만"
+      }
+    },
+    "beta_rows": [
+      {
+        "label": "beta=1.0",
+        "beta_per_m": 1.0,
+        "pw_grad_norm_full_mean": 0.8706088940572643,
+        "coll_cost_mean_smooth": 8.847081037590709,
+        "coll_cost_mean_hinge_limit": 0.1498337388741578,
+        "coll_cost_abs_dev_from_hinge_mean": 8.697247298716551,
+        "full": {
+          "theta_per_seed": [
+            [
+              6.854,
+              2.92,
+              0.593
+            ],
+            [
+              6.876,
+              2.936,
+              0.601
+            ],
+            [
+              6.885,
+              2.944,
+              0.592
+            ]
+          ],
+          "success_pct_per_seed": [
+            100.0,
+            100.0,
+            100.0
+          ],
+          "success_pct_mean": 100.0,
+          "success_pct_sd": 0.0
+        },
+        "coll_only": {
+          "theta_per_seed": [
+            [
+              6.841,
+              2.915,
+              0.596
+            ],
+            [
+              6.864,
+              2.93,
+              0.604
+            ],
+            [
+              6.873,
+              2.94,
+              0.595
+            ]
+          ],
+          "success_pct_per_seed": [
+            100.0,
+            100.0,
+            100.0
+          ],
+          "success_pct_mean": 100.0,
+          "success_pct_sd": 0.0
+        }
+      },
+      {
+        "label": "beta=4.0",
+        "beta_per_m": 4.0,
+        "pw_grad_norm_full_mean": 0.8441084568568786,
+        "coll_cost_mean_smooth": 1.9687490906028535,
+        "coll_cost_mean_hinge_limit": 0.1498337388741578,
+        "coll_cost_abs_dev_from_hinge_mean": 1.8189153517286956,
+        "full": {
+          "theta_per_seed": [
+            [
+              6.698,
+              2.876,
+              0.573
+            ],
+            [
+              6.728,
+              2.886,
+              0.582
+            ],
+            [
+              6.734,
+              2.889,
+              0.575
+            ]
+          ],
+          "success_pct_per_seed": [
+            100.0,
+            100.0,
+            100.0
+          ],
+          "success_pct_mean": 100.0,
+          "success_pct_sd": 0.0
+        },
+        "coll_only": {
+          "theta_per_seed": [
+            [
+              6.68,
+              2.867,
+              0.576
+            ],
+            [
+              6.71,
+              2.879,
+              0.586
+            ],
+            [
+              6.717,
+              2.881,
+              0.578
+            ]
+          ],
+          "success_pct_per_seed": [
+            100.0,
+            100.0,
+            100.0
+          ],
+          "success_pct_mean": 100.0,
+          "success_pct_sd": 0.0
+        }
+      },
+      {
+        "label": "beta=16.0",
+        "beta_per_m": 16.0,
+        "pw_grad_norm_full_mean": 0.7787441477681658,
+        "coll_cost_mean_smooth": 0.3839262007938996,
+        "coll_cost_mean_hinge_limit": 0.1498337388741578,
+        "coll_cost_abs_dev_from_hinge_mean": 0.2340924619197418,
+        "full": {
+          "theta_per_seed": [
+            [
+              6.029,
+              2.696,
+              0.435
+            ],
+            [
+              6.081,
+              2.735,
+              0.447
+            ],
+            [
+              6.062,
+              2.74,
+              0.453
+            ]
+          ],
+          "success_pct_per_seed": [
+            100.0,
+            100.0,
+            100.0
+          ],
+          "success_pct_mean": 100.0,
+          "success_pct_sd": 0.0
+        },
+        "coll_only": {
+          "theta_per_seed": [
+            [
+              5.971,
+              2.667,
+              0.442
+            ],
+            [
+              6.023,
+              2.705,
+              0.454
+            ],
+            [
+              6.005,
+              2.709,
+              0.461
+            ]
+          ],
+          "success_pct_per_seed": [
+            100.0,
+            100.0,
+            100.0
+          ],
+          "success_pct_mean": 100.0,
+          "success_pct_sd": 0.0
+        }
+      },
+      {
+        "label": "beta=64.0",
+        "beta_per_m": 64.0,
+        "pw_grad_norm_full_mean": 0.7535472641077545,
+        "coll_cost_mean_smooth": 0.15914857915687264,
+        "coll_cost_mean_hinge_limit": 0.1498337388741578,
+        "coll_cost_abs_dev_from_hinge_mean": 0.009314840282714832,
+        "full": {
+          "theta_per_seed": [
+            [
+              5.391,
+              2.696,
+              0.184
+            ],
+            [
+              5.464,
+              2.732,
+              0.201
+            ],
+            [
+              5.429,
+              2.722,
+              0.198
+            ]
+          ],
+          "success_pct_per_seed": [
+            99.68,
+            100.0,
+            99.88
+          ],
+          "success_pct_mean": 99.853515625,
+          "success_pct_sd": 0.1600937139722168
+        },
+        "coll_only": {
+          "theta_per_seed": [
+            [
+              5.266,
+              2.65,
+              0.182
+            ],
+            [
+              5.338,
+              2.682,
+              0.2
+            ],
+            [
+              5.304,
+              2.67,
+              0.195
+            ]
+          ],
+          "success_pct_per_seed": [
+            99.46,
+            99.93,
+            99.8
+          ],
+          "success_pct_mean": 99.7314453125,
+          "success_pct_sd": 0.24045062992666272
+        }
+      },
+      {
+        "label": "hard",
+        "beta_per_m": null,
+        "pw_grad_norm_full_mean": 0.025650615212276396,
+        "coll_cost_mean_smooth": 1.8711448989511725,
+        "coll_cost_mean_hinge_limit": 0.1498337388741578,
+        "coll_cost_abs_dev_from_hinge_mean": 1.7213111600770148,
+        "full": {
+          "theta_per_seed": [
+            [
+              7.061,
+              3.226,
+              0.286
+            ],
+            [
+              7.148,
+              3.321,
+              0.226
+            ],
+            [
+              7.095,
+              3.281,
+              0.269
+            ]
+          ],
+          "success_pct_per_seed": [
+            100.0,
+            100.0,
+            100.0
+          ],
+          "success_pct_mean": 100.0,
+          "success_pct_sd": 0.0
+        },
+        "coll_only": {
+          "theta_per_seed": [
+            [
+              2.022,
+              1.678,
+              0.453
+            ],
+            [
+              1.995,
+              1.495,
+              0.516
+            ],
+            [
+              1.898,
+              1.0,
+              0.356
+            ]
+          ],
+          "success_pct_per_seed": [
+            99.0,
+            96.51,
+            98.97
+          ],
+          "success_pct_mean": 98.16080729166667,
+          "success_pct_sd": 1.430741829868745
+        },
+        "full_zero_grad": {
+          "theta_per_seed": [
+            [
+              7.061,
+              3.226,
+              0.286
+            ],
+            [
+              7.117,
+              3.269,
+              0.283
+            ],
+            [
+              7.095,
+              3.281,
+              0.269
+            ]
+          ],
+          "success_pct_per_seed": [
+            100.0,
+            100.0,
+            100.0
+          ],
+          "success_pct_mean": 100.0,
+          "success_pct_sd": 0.0
+        },
+        "coll_only_zero_grad": {
+          "theta_per_seed": [
+            [
+              1.5,
+              1.0,
+              0.0
+            ],
+            [
+              1.5,
+              1.0,
+              0.0
+            ],
+            [
+              1.5,
+              1.0,
+              0.0
+            ]
+          ],
+          "success_pct_per_seed": [
+            65.62,
+            67.07,
+            66.58
+          ],
+          "success_pct_mean": 66.42252604166667,
+          "success_pct_sd": 0.7325574961242066
+        }
+      }
+    ],
+    "initial_theta0_success_pct": 65.625,
+    "beta_rows_note": "coll_only는 충돌 항만 학습하는 조건이다. 지시함수 행은 기울기가 0이라 θ가 바뀌지 않아야 한다(full에서는 추적 항만 학습)."
+  },
+  "C_semantics_check": {
+    "aligned_drone_R_eye": true,
+    "rows": [
+      {
+        "offset_y_m": 0.0,
+        "code_style_margin_sum": 0.0,
+        "physical_half_sizes_sum": 0.0
+      },
+      {
+        "offset_y_m": 0.05,
+        "code_style_margin_sum": 0.04999999999999999,
+        "physical_half_sizes_sum": 0.0
+      },
+      {
+        "offset_y_m": 0.1,
+        "code_style_margin_sum": 0.10000000000000003,
+        "physical_half_sizes_sum": 0.0
+      },
+      {
+        "offset_y_m": 0.2,
+        "code_style_margin_sum": 0.2,
+        "physical_half_sizes_sum": 0.0
+      },
+      {
+        "offset_y_m": 0.3,
+        "code_style_margin_sum": 0.3,
+        "physical_half_sizes_sum": 0.08999999999999997
+      }
+    ],
+    "note": "정렬된 드론(R=I)에서 축소 기준 합은 |offset|과 같고, 물리 기준은 offset ≤ 0.21 m에서 0. 이것은 손계산 재현이며 논문 저자의 의도는 확인하지 못함"
+  },
+  "runtime_s": 77.5
+}
