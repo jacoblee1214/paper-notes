@@ -1,0 +1,217 @@
+{
+ "setup": {
+  "reps": 3000,
+  "sessions_per_checkpoint": 2,
+  "alpha": 0.05,
+  "seed_sd_grid": [
+   0.0,
+   0.03,
+   0.05,
+   0.1
+  ],
+  "session_sizes": [
+   10,
+   20,
+   32
+  ],
+  "note": "가정 시드 SD. 시도 독립 가정. 실제 논문은 초기 조건을 공유하는 짝지은 설계"
+ },
+ "paper_pm_vs_seed": [
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.0,
+   "mean_paper_pm": 8.46,
+   "true_seed_sd": 0.0
+  },
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.03,
+   "mean_paper_pm": 8.32,
+   "true_seed_sd": 2.93
+  },
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.05,
+   "mean_paper_pm": 8.51,
+   "true_seed_sd": 4.96
+  },
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.1,
+   "mean_paper_pm": 8.44,
+   "true_seed_sd": 9.77
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.0,
+   "mean_paper_pm": 6.24,
+   "true_seed_sd": 0.0
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.03,
+   "mean_paper_pm": 6.17,
+   "true_seed_sd": 3.07
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.05,
+   "mean_paper_pm": 6.08,
+   "true_seed_sd": 4.95
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.1,
+   "mean_paper_pm": 6.03,
+   "true_seed_sd": 9.9
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.0,
+   "mean_paper_pm": 4.94,
+   "true_seed_sd": 0.0
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.03,
+   "mean_paper_pm": 4.83,
+   "true_seed_sd": 2.92
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.05,
+   "mean_paper_pm": 4.78,
+   "true_seed_sd": 4.93
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.1,
+   "mean_paper_pm": 4.57,
+   "true_seed_sd": 10.3
+  }
+ ],
+ "type1": [
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.0,
+   "false_positive_rate": 0.019
+  },
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.03,
+   "false_positive_rate": 0.025
+  },
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.05,
+   "false_positive_rate": 0.037
+  },
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.1,
+   "false_positive_rate": 0.097
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.0,
+   "false_positive_rate": 0.032
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.03,
+   "false_positive_rate": 0.043
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.05,
+   "false_positive_rate": 0.075
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.1,
+   "false_positive_rate": 0.2
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.0,
+   "false_positive_rate": 0.029
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.03,
+   "false_positive_rate": 0.056
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.05,
+   "false_positive_rate": 0.087
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.1,
+   "false_positive_rate": 0.262
+  }
+ ],
+ "power": [
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.0,
+   "power_delta_020": 0.138
+  },
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.03,
+   "power_delta_020": 0.166
+  },
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.05,
+   "power_delta_020": 0.172
+  },
+  {
+   "n_per_session": 10,
+   "seed_sd": 0.1,
+   "power_delta_020": 0.238
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.0,
+   "power_delta_020": 0.361
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.03,
+   "power_delta_020": 0.383
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.05,
+   "power_delta_020": 0.383
+  },
+  {
+   "n_per_session": 20,
+   "seed_sd": 0.1,
+   "power_delta_020": 0.436
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.0,
+   "power_delta_020": 0.566
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.03,
+   "power_delta_020": 0.551
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.05,
+   "power_delta_020": 0.543
+  },
+  {
+   "n_per_session": 32,
+   "seed_sd": 0.1,
+   "power_delta_020": 0.549
+  }
+ ]
+}
