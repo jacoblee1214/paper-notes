@@ -1,0 +1,68 @@
+{
+  "toy_A_projection_info": {
+    "cam_tilt_0deg": {
+      "overlay_2d_R2_per_axis_Fx_Fy_Fz": [
+        0.993,
+        0.994,
+        0.001
+      ],
+      "overlay_pixel_arrow_len_median": 28.17,
+      "frac_arrows_under_2px": 0.002
+    },
+    "cam_tilt_30deg": {
+      "overlay_2d_R2_per_axis_Fx_Fy_Fz": [
+        0.991,
+        0.989,
+        0.001
+      ],
+      "overlay_pixel_arrow_len_median": 34.89,
+      "frac_arrows_under_2px": 0.002
+    },
+    "cam_tilt_60deg": {
+      "overlay_2d_R2_per_axis_Fx_Fy_Fz": [
+        0.973,
+        0.943,
+        0.002
+      ],
+      "overlay_pixel_arrow_len_median": 82.15,
+      "frac_arrows_under_2px": 0.001
+    },
+    "cam_tilt_80deg": {
+      "overlay_2d_R2_per_axis_Fx_Fy_Fz": [
+        0.005,
+        0.002,
+        0.0
+      ],
+      "overlay_pixel_arrow_len_median": 513.15,
+      "frac_arrows_under_2px": 0.0
+    }
+  },
+  "toy_A_note": "Linear readout from the 2D arrow vector (2 numbers per element) cannot recover all 3 force components; the depth-direction (normal) component is only partly visible. A separate 3-value vector channel recovers all 3 exactly. Pixel quantization and arrow length lam=0.02 m/N are assumed.",
+  "toy_B_mechanical_headroom_corr": {
+    "setting": "40 tasks, plain ~ U(0.05,0.95), ACRO ~ N(0.92, sd) independent of plain (no true effect of plain on ACRO); 2000 reps",
+    "sweep": {
+      "acro_sd_0.02": {
+        "median_r": 0.997,
+        "q05": 0.996,
+        "q95": 0.998
+      },
+      "acro_sd_0.05": {
+        "median_r": 0.984,
+        "q05": 0.976,
+        "q95": 0.99
+      },
+      "acro_sd_0.1": {
+        "median_r": 0.955,
+        "q05": 0.929,
+        "q95": 0.972
+      },
+      "acro_sd_0.15": {
+        "median_r": 0.921,
+        "q05": 0.873,
+        "q95": 0.952
+      }
+    },
+    "paper_reported_r": 0.924,
+    "note": "Delta and headroom share the plain-success term, so r is inflated by construction. The paper's r=0.924 is in the range this artifact produces, so it cannot be read as evidence that overlays help most where vision fails."
+  }
+}

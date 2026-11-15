@@ -1,0 +1,321 @@
+{
+  "seed_means_match": {
+    "plain2v": true,
+    "proprio2v": true,
+    "acro2v": true
+  },
+  "sd_convention": {
+    "plain2v": {
+      "reported_sd": [
+        7.0,
+        4.1,
+        4.0,
+        2.1
+      ],
+      "ddof0": [
+        7.0,
+        4.1,
+        4.0,
+        2.1
+      ],
+      "ddof1": [
+        8.6,
+        5.1,
+        4.9,
+        2.5
+      ],
+      "matches_ddof0": true,
+      "matches_ddof1": false
+    },
+    "proprio2v": {
+      "reported_sd": [
+        2.0,
+        4.3,
+        1.4,
+        5.1
+      ],
+      "ddof0": [
+        2.0,
+        4.3,
+        1.4,
+        5.1
+      ],
+      "ddof1": [
+        2.5,
+        5.2,
+        1.7,
+        6.3
+      ],
+      "matches_ddof0": true,
+      "matches_ddof1": false
+    },
+    "acro2v": {
+      "reported_sd": [
+        1.2,
+        2.5,
+        2.7,
+        2.3
+      ],
+      "ddof0": [
+        1.2,
+        2.5,
+        2.7,
+        2.3
+      ],
+      "ddof1": [
+        1.4,
+        3.0,
+        3.3,
+        2.8
+      ],
+      "matches_ddof0": true,
+      "matches_ddof1": false
+    }
+  },
+  "avg_2v": {
+    "plain2v": 76.83,
+    "proprio2v": 71.08,
+    "acro2v": 92.46
+  },
+  "delta_acro_minus_plain_2v": 15.62,
+  "delta_acro_minus_proprio_2v": 21.38,
+  "delta_proprio_minus_plain_2v": -5.75,
+  "welch_acro_vs_plain_2v": {
+    "OBJECT": {
+      "diff": 15.33,
+      "ci95": [
+        -5.31,
+        35.98
+      ],
+      "df": 2.11,
+      "p": 0.0874
+    },
+    "GOAL": {
+      "diff": 6.0,
+      "ci95": [
+        -4.34,
+        16.34
+      ],
+      "df": 3.26,
+      "p": 0.1683
+    },
+    "SPATIAL": {
+      "diff": 7.5,
+      "ci95": [
+        -2.54,
+        17.54
+      ],
+      "df": 3.52,
+      "p": 0.1029
+    },
+    "LONG": {
+      "diff": 33.67,
+      "ci95": [
+        27.63,
+        39.71
+      ],
+      "df": 3.96,
+      "p": 0.0001
+    }
+  },
+  "welch_acro_vs_proprio_2v": {
+    "OBJECT": {
+      "diff": 18.17,
+      "ci95": [
+        13.05,
+        23.29
+      ],
+      "df": 3.2,
+      "p": 0.0012
+    },
+    "GOAL": {
+      "diff": 11.33,
+      "ci95": [
+        0.64,
+        22.03
+      ],
+      "df": 3.2,
+      "p": 0.0431
+    },
+    "SPATIAL": {
+      "diff": 12.33,
+      "ci95": [
+        5.45,
+        19.22
+      ],
+      "df": 3.01,
+      "p": 0.0107
+    },
+    "LONG": {
+      "diff": 43.67,
+      "ci95": [
+        30.46,
+        56.87
+      ],
+      "df": 2.76,
+      "p": 0.0023
+    }
+  },
+  "paired_seed_diff_acro_minus_plain_2v": {
+    "per_seed_avg_over_suites": [
+      14.88,
+      17.88,
+      14.12
+    ],
+    "mean": 15.62,
+    "one_sample_t_over_3_seeds_p": 0.0053
+  },
+  "realworld_macro_multi_minus_baseline_pp": 30.28,
+  "realworld_task_diffs_pp": {
+    "Lift": 13.3,
+    "Tube": 58.3,
+    "Dishwasher": 31.1,
+    "Charger": 18.3
+  },
+  "realworld_final_stage_success": {
+    "Baseline": {
+      "per_task": [
+        20,
+        0,
+        11,
+        0
+      ],
+      "macro_pct": 25.8
+    },
+    "Tac-View": {
+      "per_task": [
+        16,
+        0,
+        16,
+        0
+      ],
+      "macro_pct": 26.7
+    },
+    "Position-Only": {
+      "per_task": [
+        22,
+        7,
+        11,
+        0
+      ],
+      "macro_pct": 33.3
+    },
+    "Binbars": {
+      "per_task": [
+        23,
+        1,
+        15,
+        0
+      ],
+      "macro_pct": 32.5
+    },
+    "Binary Contact (1x)": {
+      "per_task": [
+        19,
+        2,
+        4,
+        0
+      ],
+      "macro_pct": 20.8
+    },
+    "Avg. Arrow": {
+      "per_task": [
+        23,
+        3,
+        12,
+        0
+      ],
+      "macro_pct": 31.7
+    },
+    "Binary Contact (9x)": {
+      "per_task": [
+        9,
+        0,
+        12,
+        0
+      ],
+      "macro_pct": 17.5
+    },
+    "Multi-arrows": {
+      "per_task": [
+        24,
+        16,
+        21,
+        2
+      ],
+      "macro_pct": 52.5
+    }
+  },
+  "realworld_final_stage_macro_diff_pp": 26.7,
+  "fisher_multi_vs_baseline": {
+    "Lift-Pick": {
+      "multi": 24,
+      "baseline": 20,
+      "p_two_sided": 0.3817
+    },
+    "Tube-Pick": {
+      "multi": 24,
+      "baseline": 5,
+      "p_two_sided": 0.0
+    },
+    "Tube-Insert": {
+      "multi": 16,
+      "baseline": 0,
+      "p_two_sided": 0.0
+    },
+    "Dish-Pull": {
+      "multi": 28,
+      "baseline": 21,
+      "p_two_sided": 0.0419
+    },
+    "Dish-Pick": {
+      "multi": 22,
+      "baseline": 11,
+      "p_two_sided": 0.0089
+    },
+    "Dish-Place": {
+      "multi": 21,
+      "baseline": 11,
+      "p_two_sided": 0.0191
+    },
+    "Charger-Pick": {
+      "multi": 18,
+      "baseline": 9,
+      "p_two_sided": 0.037
+    },
+    "Charger-Insert": {
+      "multi": 2,
+      "baseline": 0,
+      "p_two_sided": 0.4915
+    }
+  },
+  "holm_multi_vs_baseline": {
+    "Tube-Insert": 0,
+    "Tube-Pick": 0,
+    "Dish-Pick": 0.0534,
+    "Dish-Place": 0.0955,
+    "Charger-Pick": 0.148,
+    "Dish-Pull": 0.148,
+    "Lift-Pick": 0.7634,
+    "Charger-Insert": 0.7634
+  },
+  "pooled_subtask_counts": {
+    "multi": 155,
+    "baseline": 77,
+    "of": 240,
+    "fisher_p_two_sided_NOT_independent": 0.0
+  },
+  "multi_vs_tacview_subtask_wins": [
+    8,
+    0,
+    0
+  ],
+  "demo_counts": {
+    "cube": 100,
+    "tube": 97,
+    "charger": 100,
+    "dishwasher": 100,
+    "sum": 397,
+    "stated_collected": 400
+  }
+}
