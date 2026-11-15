@@ -1,0 +1,199 @@
+{
+  "A_calibration": {
+    "chunked_pass_ms": 9.74,
+    "stream_bar_ms": 4.9,
+    "required_per_pass_gain_if_stream_is_one_pass": 1.99
+  },
+  "A_grid": [
+    {
+      "N": 1,
+      "c0_share": 0.0,
+      "stream_pass_ms": 9.74,
+      "decode_speedup_per_chunk": 10.0,
+      "work_ratio_flops_per_chunk": 0.1
+    },
+    {
+      "N": 1,
+      "c0_share": 0.5,
+      "stream_pass_ms": 9.74,
+      "decode_speedup_per_chunk": 10.0,
+      "work_ratio_flops_per_chunk": 0.1
+    },
+    {
+      "N": 1,
+      "c0_share": 0.9,
+      "stream_pass_ms": 9.74,
+      "decode_speedup_per_chunk": 10.0,
+      "work_ratio_flops_per_chunk": 0.1
+    },
+    {
+      "N": 1,
+      "c0_share": 1.0,
+      "stream_pass_ms": 9.74,
+      "decode_speedup_per_chunk": 10.0,
+      "work_ratio_flops_per_chunk": 0.1
+    },
+    {
+      "N": 2,
+      "c0_share": 0.0,
+      "stream_pass_ms": 19.48,
+      "decode_speedup_per_chunk": 5.0,
+      "work_ratio_flops_per_chunk": 0.2
+    },
+    {
+      "N": 2,
+      "c0_share": 0.5,
+      "stream_pass_ms": 14.61,
+      "decode_speedup_per_chunk": 6.67,
+      "work_ratio_flops_per_chunk": 0.2
+    },
+    {
+      "N": 2,
+      "c0_share": 0.9,
+      "stream_pass_ms": 10.71,
+      "decode_speedup_per_chunk": 9.09,
+      "work_ratio_flops_per_chunk": 0.2
+    },
+    {
+      "N": 2,
+      "c0_share": 1.0,
+      "stream_pass_ms": 9.74,
+      "decode_speedup_per_chunk": 10.0,
+      "work_ratio_flops_per_chunk": 0.2
+    },
+    {
+      "N": 4,
+      "c0_share": 0.0,
+      "stream_pass_ms": 38.96,
+      "decode_speedup_per_chunk": 2.5,
+      "work_ratio_flops_per_chunk": 0.4
+    },
+    {
+      "N": 4,
+      "c0_share": 0.5,
+      "stream_pass_ms": 24.35,
+      "decode_speedup_per_chunk": 4.0,
+      "work_ratio_flops_per_chunk": 0.4
+    },
+    {
+      "N": 4,
+      "c0_share": 0.9,
+      "stream_pass_ms": 12.66,
+      "decode_speedup_per_chunk": 7.69,
+      "work_ratio_flops_per_chunk": 0.4
+    },
+    {
+      "N": 4,
+      "c0_share": 1.0,
+      "stream_pass_ms": 9.74,
+      "decode_speedup_per_chunk": 10.0,
+      "work_ratio_flops_per_chunk": 0.4
+    },
+    {
+      "N": 5,
+      "c0_share": 0.0,
+      "stream_pass_ms": 48.7,
+      "decode_speedup_per_chunk": 2.0,
+      "work_ratio_flops_per_chunk": 0.5
+    },
+    {
+      "N": 5,
+      "c0_share": 0.5,
+      "stream_pass_ms": 29.22,
+      "decode_speedup_per_chunk": 3.33,
+      "work_ratio_flops_per_chunk": 0.5
+    },
+    {
+      "N": 5,
+      "c0_share": 0.9,
+      "stream_pass_ms": 13.64,
+      "decode_speedup_per_chunk": 7.14,
+      "work_ratio_flops_per_chunk": 0.5
+    },
+    {
+      "N": 5,
+      "c0_share": 1.0,
+      "stream_pass_ms": 9.74,
+      "decode_speedup_per_chunk": 10.0,
+      "work_ratio_flops_per_chunk": 0.5
+    },
+    {
+      "N": 6,
+      "c0_share": 0.0,
+      "stream_pass_ms": 58.44,
+      "decode_speedup_per_chunk": 1.67,
+      "work_ratio_flops_per_chunk": 0.6
+    },
+    {
+      "N": 6,
+      "c0_share": 0.5,
+      "stream_pass_ms": 34.09,
+      "decode_speedup_per_chunk": 2.86,
+      "work_ratio_flops_per_chunk": 0.6
+    },
+    {
+      "N": 6,
+      "c0_share": 0.9,
+      "stream_pass_ms": 14.61,
+      "decode_speedup_per_chunk": 6.67,
+      "work_ratio_flops_per_chunk": 0.6
+    },
+    {
+      "N": 6,
+      "c0_share": 1.0,
+      "stream_pass_ms": 9.74,
+      "decode_speedup_per_chunk": 10.0,
+      "work_ratio_flops_per_chunk": 0.6
+    }
+  ],
+  "A_note": "N=4 에서 패스가 체인 패스보다 빨라지려면 c0 비중이 커야 함. 그래도 Fig 1b 막대 4.9 ms(패스당 9.74 ms의 절반)에 맞추려면 미최적화 조건에서 패스당 약 2배 단축이 필요하다. 이는 각주 1의 '커널 실행 직렬화 제거'와 맞고, '미최적화' 캡션과는 맞지 않는다.",
+  "A_deadline": {
+    "deadline_ms": 33.33,
+    "decode_budget_if_vlm_31_5_ms": 1.83,
+    "chunked_pi05_fits": false,
+    "streaming_N4_fits": false
+  },
+  "B_boundary_jump_mean_abs": {
+    "E10_d0": {
+      "rho0.0": 0.0188,
+      "rho0.5": 0.0186,
+      "rho1.0": 0.017
+    },
+    "E10_d1": {
+      "rho0.0": 0.0242,
+      "rho0.5": 0.0228,
+      "rho1.0": 0.0192
+    },
+    "E10_d2": {
+      "rho0.0": 0.0332,
+      "rho0.5": 0.0252,
+      "rho1.0": 0.018
+    },
+    "E10_d4": {
+      "rho0.0": 0.051,
+      "rho0.5": 0.0336,
+      "rho1.0": 0.0181
+    },
+    "E20_d0": {
+      "rho0.0": 0.0172,
+      "rho0.5": 0.0177,
+      "rho1.0": 0.0179
+    },
+    "E20_d1": {
+      "rho0.0": 0.0249,
+      "rho0.5": 0.0204,
+      "rho1.0": 0.019
+    },
+    "E20_d2": {
+      "rho0.0": 0.0339,
+      "rho0.5": 0.0262,
+      "rho1.0": 0.0174
+    },
+    "E20_d4": {
+      "rho0.0": 0.0513,
+      "rho0.5": 0.0332,
+      "rho1.0": 0.0186
+    }
+  },
+  "B_note": "토이 가정: 새 청크의 첫 행동 오차 = 속도 x d 의 (1-rho) 비율. rho는 '진행 중 청크 조건화'의 효과를 나타내는 자유 파라미터이며 논문이 측정한 값이 아니다. 논문 Table 1/3의 성공률 차이는 이 토이로 설명하지 않는다."
+}

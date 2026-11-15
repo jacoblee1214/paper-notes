@@ -1,0 +1,166 @@
+{
+  "table1": {
+    "pi05": {
+      "avg_recomputed": 96.85,
+      "speedup_recomputed": 1.0,
+      "episode_time_check_steps_x_tps_s": 8.39,
+      "episode_time_reported_s": 8.4
+    },
+    "vlash_d1": {
+      "avg_recomputed": 97.275,
+      "speedup_recomputed": 1.15,
+      "episode_time_check_steps_x_tps_s": 7.2,
+      "episode_time_reported_s": 7.2
+    },
+    "vlash_d4": {
+      "avg_recomputed": 93.075,
+      "speedup_recomputed": 1.64,
+      "episode_time_check_steps_x_tps_s": 5.8,
+      "episode_time_reported_s": 5.8
+    },
+    "streamingvla_d1": {
+      "avg_recomputed": 94.9,
+      "speedup_recomputed": 1.703
+    },
+    "flashvla_d1": {
+      "avg_recomputed": 97.85,
+      "speedup_recomputed": 2.434,
+      "episode_time_check_steps_x_tps_s": 3.49,
+      "episode_time_reported_s": 3.5,
+      "avg_gain_vs_pi05": 0.95
+    }
+  },
+  "table2": {
+    "4090_2v": {
+      "ratio_vs_pi05": 1.715,
+      "flashvla_hz": 37.5
+    },
+    "4090_3v": {
+      "ratio_vs_pi05": 1.505,
+      "flashvla_hz": 27.2
+    },
+    "5090_2v": {
+      "ratio_vs_pi05": 1.823,
+      "flashvla_hz": 49.3
+    },
+    "5090_3v": {
+      "ratio_vs_pi05": 1.653,
+      "flashvla_hz": 36.9
+    }
+  },
+  "fig1b": {
+    "action_share_pi05": 0.756,
+    "vlm_pi05_ms": 31.5,
+    "vlm_flashvla_ms": 31.7,
+    "overall_ratio": 3.522,
+    "action_ratio": 19.88,
+    "per_pass_pi05_if_10_passes_ms": 9.74,
+    "implied_per_pass_gain_if_1_pass_flashvla": 1.99
+  },
+  "table4_consistency": {
+    "feasible_group_sizes_n_s_n_m_n_l": [
+      [
+        30,
+        15,
+        5
+      ]
+    ],
+    "count": 1,
+    "note": "Table 3의 Clean/Random 평균(86.1, 85.8, 90.8, 90.2)과 Table 4 그룹 평균의 가중합이 0.061 이내인 정수 해 (반올림 0.05 + 여유)"
+  },
+  "libero_test_one_run": {
+    "flash_d1_vs_pi05": {
+      "diff_pp": 0.9,
+      "newcombe95_pp": [
+        -0.1,
+        1.92
+      ],
+      "two_prop_z": 1.77,
+      "p_two_sided": 0.0763
+    },
+    "flash_d0_vs_pi05": {
+      "diff_pp": 1.0,
+      "newcombe95_pp": [
+        0.01,
+        2.01
+      ],
+      "two_prop_z": 1.99,
+      "p_two_sided": 0.0468
+    }
+  },
+  "libero_test_five_runs_upper_bound": {
+    "diff_pp": 0.9,
+    "newcombe95_pp": [
+      0.46,
+      1.35
+    ]
+  },
+  "robotwin_test_assumed_n5000": {
+    "diff_pp": 4.5,
+    "newcombe95_pp": [
+      3.24,
+      5.76
+    ],
+    "note": "시행 수 미보고. 과제 군집을 무시한 근사"
+  },
+  "real_world_approx": {
+    "flash_vs_pi05_sync": {
+      "diff_pp": 4.4,
+      "newcombe95_pp": [
+        -11.7,
+        20.3
+      ]
+    },
+    "flash_vs_naive": {
+      "diff_pp": 8.8,
+      "newcombe95_pp": [
+        -7.9,
+        25.0
+      ]
+    },
+    "flash_vs_rtc": {
+      "diff_pp": 4.4,
+      "newcombe95_pp": [
+        -11.7,
+        20.3
+      ]
+    },
+    "per_task_wilson_n15_at_0.8": [
+      0.548,
+      0.93
+    ]
+  },
+  "fig4_implied_exec_window_ms": {
+    "pi05": 100.0,
+    "faster": 100.0,
+    "flashvla": 66.6,
+    "note": "TTFA를 dt_infer로 본 추정. 세 방법의 실행 구간이 같지 않을 수 있음"
+  },
+  "fig4_ratios": {
+    "ttfa_vs_faster": 1.67,
+    "ttr_vs_faster": 1.59
+  },
+  "fig5e_read_speedup_by_horizon": {
+    "pick_place": 1.21,
+    "whiteboard": 1.26,
+    "table_clean": 1.24
+  },
+  "fig5e_read_speedup_vs_rtc": {
+    "pick_place": 1.08,
+    "whiteboard": 1.21,
+    "table_clean": 1.08
+  },
+  "fig5d_read_score_avg": {
+    "pi05": 80.0,
+    "rtc": 80.0,
+    "naive": 75.7,
+    "flashvla": 84.3
+  },
+  "fig5e_note": "그래프 판독 근사치(±0.5 s). 본문은 '긴 과제일수록 속도 향상이 크다'고 쓰지만 판독값은 과제 사이에서 1.2–1.26으로 뚜렷한 증가 추세가 없음. 본문 평균 1.3x는 판독 범위의 윗부분",
+  "a4000": {
+    "period_30hz_ms": 33.33,
+    "invocation_ms": 67.3,
+    "invocations_per_s": 14.9,
+    "periods_covered": 2.02
+  }
+}
