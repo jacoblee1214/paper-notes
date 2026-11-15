@@ -1,0 +1,719 @@
+{
+  "table1_libero_delta": {
+    "LIBERO Spatial": {
+      "probe": 99.0,
+      "foundation_delta": -14.3,
+      "best_delta": 0.8
+    },
+    "LIBERO Object": {
+      "probe": 100.0,
+      "foundation_delta": -11.6,
+      "best_delta": 0.0
+    },
+    "LIBERO Goal": {
+      "probe": 98.8,
+      "foundation_delta": -19.6,
+      "best_delta": 0.7
+    },
+    "LIBERO Long": {
+      "probe": 92.4,
+      "foundation_delta": -38.7,
+      "best_delta": 6.4
+    }
+  },
+  "table1_calvin_delta": {
+    "D->D": {
+      "probe": 3.123,
+      "foundation_delta": -0.29,
+      "best_delta": 1.4
+    },
+    "ABC->D": {
+      "probe": 3.242,
+      "foundation_delta": -0.76,
+      "best_delta": 1.54
+    },
+    "ABCD->D": {
+      "probe": 3.872,
+      "foundation_delta": 0.22,
+      "best_delta": 0.93
+    }
+  },
+  "table1_other_delta": {
+    "RoboTwin clean": {
+      "probe": 60.4,
+      "x_vla_delta": 12.4,
+      "best_delta": 35.4
+    },
+    "RoboTwin rand": {
+      "probe": 59.4,
+      "x_vla_delta": 13.4,
+      "best_delta": 36.7
+    },
+    "RoboCasa RSS24": {
+      "probe": 18.8,
+      "gr00t_delta": 30.8,
+      "best_delta": 60.4
+    },
+    "SimplerEnv WidowX": {
+      "probe": 0.0,
+      "x_vla_delta": 95.8,
+      "best_delta": 97.9
+    }
+  },
+  "table2_libero": {
+    "best_mean": 97.55,
+    "final_mean": 95.1,
+    "gap_pp_range": [
+      0.6,
+      4.4
+    ]
+  },
+  "table3_robotwin_probe_mean": {
+    "clean": 60.4,
+    "rand": 59.4,
+    "reported": [
+      60.4,
+      59.4
+    ]
+  },
+  "table5_simplerenv_newcombe": [
+    {
+      "policy": "CogACT-Base",
+      "change": "Reverse language",
+      "calib": "60/288",
+      "altered": "28/288",
+      "drop_pp": 11.11,
+      "ci": [
+        5.26,
+        16.95
+      ],
+      "paper": [
+        60,
+        28,
+        11.11,
+        5.26,
+        16.95
+      ],
+      "match": true
+    },
+    {
+      "policy": "CogACT-Base",
+      "change": "Stacked support",
+      "calib": "60/288",
+      "altered": "64/288",
+      "drop_pp": -1.39,
+      "ci": [
+        -8.09,
+        5.33
+      ],
+      "paper": [
+        60,
+        64,
+        -1.39,
+        -8.09,
+        5.33
+      ],
+      "match": true
+    },
+    {
+      "policy": "CogACT-Base",
+      "change": "Random pose + arm",
+      "calib": "60/288",
+      "altered": "31/288",
+      "drop_pp": 10.07,
+      "ci": [
+        4.13,
+        15.99
+      ],
+      "paper": [
+        60,
+        31,
+        10.07,
+        4.13,
+        15.99
+      ],
+      "match": true
+    },
+    {
+      "policy": "InternVLA-M1",
+      "change": "Reverse language",
+      "calib": "73/288",
+      "altered": "46/288",
+      "drop_pp": 9.38,
+      "ci": [
+        2.76,
+        15.91
+      ],
+      "paper": [
+        73,
+        46,
+        9.38,
+        2.76,
+        15.91
+      ],
+      "match": true
+    },
+    {
+      "policy": "InternVLA-M1",
+      "change": "Stacked support",
+      "calib": "73/288",
+      "altered": "60/288",
+      "drop_pp": 4.51,
+      "ci": [
+        -2.38,
+        11.35
+      ],
+      "paper": [
+        73,
+        60,
+        4.51,
+        -2.38,
+        11.35
+      ],
+      "match": true
+    },
+    {
+      "policy": "InternVLA-M1",
+      "change": "Random pose + arm",
+      "calib": "73/288",
+      "altered": "46/288",
+      "drop_pp": 9.38,
+      "ci": [
+        2.76,
+        15.91
+      ],
+      "paper": [
+        73,
+        46,
+        9.38,
+        2.76,
+        15.91
+      ],
+      "match": true
+    },
+    {
+      "policy": "X-VLA-WidowX",
+      "change": "Reverse language",
+      "calib": "172/288",
+      "altered": "153/288",
+      "drop_pp": 6.6,
+      "ci": [
+        -1.49,
+        14.57
+      ],
+      "paper": [
+        172,
+        153,
+        6.6,
+        -1.49,
+        14.57
+      ],
+      "match": true
+    },
+    {
+      "policy": "X-VLA-WidowX",
+      "change": "Stacked support",
+      "calib": "172/288",
+      "altered": "90/288",
+      "drop_pp": 28.47,
+      "ci": [
+        20.46,
+        35.96
+      ],
+      "paper": [
+        172,
+        90,
+        28.47,
+        20.46,
+        35.96
+      ],
+      "match": true
+    },
+    {
+      "policy": "X-VLA-WidowX",
+      "change": "Random pose + arm",
+      "calib": "172/288",
+      "altered": "160/288",
+      "drop_pp": 4.17,
+      "ci": [
+        -3.88,
+        12.14
+      ],
+      "paper": [
+        172,
+        160,
+        4.17,
+        -3.88,
+        12.14
+      ],
+      "match": true
+    },
+    {
+      "policy": "Dexbotic (DB-MemVLA)",
+      "change": "Reverse language",
+      "calib": "129/288",
+      "altered": "137/288",
+      "drop_pp": -2.78,
+      "ci": [
+        -10.84,
+        5.33
+      ],
+      "paper": [
+        129,
+        137,
+        -2.78,
+        -10.84,
+        5.33
+      ],
+      "match": true
+    },
+    {
+      "policy": "Dexbotic (DB-MemVLA)",
+      "change": "Stacked support",
+      "calib": "129/288",
+      "altered": "79/288",
+      "drop_pp": 17.36,
+      "ci": [
+        9.54,
+        24.89
+      ],
+      "paper": [
+        129,
+        79,
+        17.36,
+        9.54,
+        24.89
+      ],
+      "match": true
+    },
+    {
+      "policy": "Dexbotic (DB-MemVLA)",
+      "change": "Random pose + arm",
+      "calib": "129/288",
+      "altered": "112/288",
+      "drop_pp": 5.9,
+      "ci": [
+        -2.14,
+        13.84
+      ],
+      "paper": [
+        129,
+        112,
+        5.9,
+        -2.14,
+        13.84
+      ],
+      "match": true
+    }
+  ],
+  "table5_max_abs_diff_pp": 0.005,
+  "table5_all_counts_match": true,
+  "table4_calibration_rates": {
+    "CogACT-Base": 20.8,
+    "InternVLA-M1": 25.3,
+    "X-VLA-WidowX": 59.7,
+    "Dexbotic (DB-MemVLA)": 44.8
+  },
+  "calvin_resampled_conditions": [
+    "calibration",
+    "resampled_pose"
+  ],
+  "table6_calvin_resampled": [
+    {
+      "policy": "X-VLA",
+      "n": 1000,
+      "calib_atc": 4.165,
+      "resampled_atc": 3.138,
+      "drop": 1.027,
+      "ci": [
+        0.89,
+        1.164
+      ],
+      "chain_counts": [
+        709,
+        459
+      ],
+      "paper": [
+        4.165,
+        3.138,
+        1.027,
+        0.89,
+        1.164
+      ]
+    },
+    {
+      "policy": "GR-1",
+      "n": 1000,
+      "calib_atc": 3.244,
+      "resampled_atc": 2.495,
+      "drop": 0.749,
+      "ci": [
+        0.624,
+        0.874
+      ],
+      "chain_counts": [
+        431,
+        296
+      ],
+      "paper": [
+        3.244,
+        2.495,
+        0.749,
+        0.624,
+        0.874
+      ]
+    },
+    {
+      "policy": "RoboFlamingo",
+      "n": 1000,
+      "calib_atc": 2.367,
+      "resampled_atc": 1.869,
+      "drop": 0.498,
+      "ci": [
+        0.372,
+        0.624
+      ],
+      "chain_counts": [
+        209,
+        145
+      ],
+      "paper": [
+        2.367,
+        1.869,
+        0.498,
+        0.372,
+        0.624
+      ]
+    }
+  ],
+  "table8_calvin_fresh": [
+    {
+      "policy": "X-VLA",
+      "n_calib": 1000,
+      "n_fresh": 2000,
+      "fresh_seeds": 2,
+      "calib_atc": 4.165,
+      "fresh_atc": 4.1795,
+      "drop": -0.0145,
+      "ci": [
+        -0.1287,
+        0.0997
+      ],
+      "paper": [
+        -0.0145,
+        -0.1287,
+        0.0997
+      ]
+    },
+    {
+      "policy": "GR-1",
+      "n_calib": 1000,
+      "n_fresh": 2000,
+      "fresh_seeds": 2,
+      "calib_atc": 3.244,
+      "fresh_atc": 3.137,
+      "drop": 0.107,
+      "ci": [
+        -0.0373,
+        0.2513
+      ],
+      "paper": [
+        0.107,
+        -0.0373,
+        0.2513
+      ]
+    },
+    {
+      "policy": "RoboFlamingo",
+      "n_calib": 1000,
+      "n_fresh": 2000,
+      "fresh_seeds": 2,
+      "calib_atc": 2.367,
+      "fresh_atc": 2.298,
+      "drop": 0.069,
+      "ci": [
+        -0.0677,
+        0.2057
+      ],
+      "paper": [
+        0.069,
+        -0.0677,
+        0.2057
+      ]
+    }
+  ],
+  "calvin_rank_preservation": {
+    "kendall_tau_calib_vs_resampled": 1.0,
+    "n_policies": 3,
+    "note": "세 정책 모두 순위가 같습니다. 수준(level)만 내려갑니다."
+  },
+  "table7_libero_newcombe": [
+    {
+      "policy": "Spatial Forcing",
+      "calib": "1956/2000",
+      "fresh": "9718/10000",
+      "drop_pp": 0.62,
+      "ci": [
+        -0.18,
+        1.27
+      ],
+      "paper": [
+        0.62,
+        -0.18,
+        1.27
+      ]
+    },
+    {
+      "policy": "SimVLA",
+      "calib": "1946/2000",
+      "fresh": "9760/10000",
+      "drop_pp": -0.3,
+      "ci": [
+        -1.15,
+        0.4
+      ],
+      "paper": [
+        -0.3,
+        -1.15,
+        0.4
+      ]
+    },
+    {
+      "policy": "Pi05 / LeRobot",
+      "calib": "1951/2000",
+      "fresh": "9741/10000",
+      "drop_pp": 0.14,
+      "ci": [
+        -0.69,
+        0.82
+      ],
+      "paper": [
+        0.14,
+        -0.69,
+        0.82
+      ]
+    }
+  ],
+  "table9_recount_from_trials": {
+    "carrot": "23/24",
+    "eggplant": "23/24",
+    "spoon": "21/24",
+    "stack": "24/24"
+  },
+  "table9_recount_all": "91/96",
+  "table9_paper": {
+    "stack": "24/24",
+    "carrot": "23/24",
+    "spoon": "21/24",
+    "eggplant": "23/24",
+    "all": "91/96 (94.8%)"
+  },
+  "figure3_recount_current_release": {
+    "CALVIN/abc_d_atc": {
+      "no_improvement": 24,
+      "provably_not_significant": 0,
+      "indeterminate": 36,
+      "provably_significant": 47,
+      "n": 107,
+      "sig_share_pct": 43.9
+    },
+    "LIBERO/goal": {
+      "no_improvement": 130,
+      "provably_not_significant": 34,
+      "indeterminate": 61,
+      "provably_significant": 43,
+      "n": 268,
+      "sig_share_pct": 16.0
+    },
+    "LIBERO/long10": {
+      "no_improvement": 87,
+      "provably_not_significant": 19,
+      "indeterminate": 93,
+      "provably_significant": 83,
+      "n": 282,
+      "sig_share_pct": 29.4
+    },
+    "LIBERO/object": {
+      "no_improvement": 118,
+      "provably_not_significant": 41,
+      "indeterminate": 41,
+      "provably_significant": 59,
+      "n": 259,
+      "sig_share_pct": 22.8
+    },
+    "LIBERO/spatial": {
+      "no_improvement": 115,
+      "provably_not_significant": 42,
+      "indeterminate": 63,
+      "provably_significant": 42,
+      "n": 262,
+      "sig_share_pct": 16.0
+    },
+    "RoboCasa/rss24": {
+      "no_improvement": 4,
+      "provably_not_significant": 0,
+      "indeterminate": 10,
+      "provably_significant": 16,
+      "n": 30,
+      "sig_share_pct": 53.3
+    },
+    "RoboTwin2/hard_randomized": {
+      "no_improvement": 2,
+      "provably_not_significant": 0,
+      "indeterminate": 3,
+      "provably_significant": 14,
+      "n": 19,
+      "sig_share_pct": 73.7
+    },
+    "SimplerEnv/widowx_bridge": {
+      "no_improvement": 17,
+      "provably_not_significant": 16,
+      "indeterminate": 65,
+      "provably_significant": 24,
+      "n": 122,
+      "sig_share_pct": 19.7
+    },
+    "LIBERO spatial+object+goal (pooled)": {
+      "no_improvement": 363,
+      "provably_not_significant": 117,
+      "indeterminate": 165,
+      "provably_significant": 144,
+      "n": 789,
+      "sig_share_pct": 18.3
+    }
+  },
+  "figure3_paper_reported_share_pct": {
+    "LIBERO": 19.8,
+    "SimplerEnv": 19.7,
+    "RoboCasa": 53.3,
+    "RoboTwin2": 73.7,
+    "CALVIN ABC-D (fig3 label)": 43.9
+  },
+  "figure3_necessary_cutoff_match_rows": [
+    1318,
+    1318
+  ],
+  "figure3_sufficient_check_T1_binary": [
+    43,
+    43
+  ],
+  "figure3_category_rule_mismatch_rows": [
+    0,
+    1349
+  ],
+  "pie_counts_release_current": [
+    {
+      "benchmark": "LIBERO",
+      "protocol": "Spatial + Object + Goal",
+      "negative": "363",
+      "not_significant": "117",
+      "possibly_significant": "165",
+      "certainly_significant": "144",
+      "total": "789",
+      "release_no_improvement": "363",
+      "release_provably_not_significant": "117",
+      "release_indeterminate": "165",
+      "release_provably_significant": "144"
+    },
+    {
+      "benchmark": "CALVIN",
+      "protocol": "ABC->D",
+      "negative": "24",
+      "not_significant": "0",
+      "possibly_significant": "36",
+      "certainly_significant": "47",
+      "total": "107",
+      "release_no_improvement": "24",
+      "release_provably_not_significant": "0",
+      "release_indeterminate": "36",
+      "release_provably_significant": "47"
+    },
+    {
+      "benchmark": "SimplerEnv",
+      "protocol": "WidowX-Bridge",
+      "negative": "17",
+      "not_significant": "16",
+      "possibly_significant": "65",
+      "certainly_significant": "24",
+      "total": "122",
+      "release_no_improvement": "17",
+      "release_provably_not_significant": "16",
+      "release_indeterminate": "65",
+      "release_provably_significant": "24"
+    },
+    {
+      "benchmark": "RoboCasa",
+      "protocol": "RSS24 protocol",
+      "negative": "4",
+      "not_significant": "0",
+      "possibly_significant": "10",
+      "certainly_significant": "16",
+      "total": "30",
+      "release_no_improvement": "4",
+      "release_provably_not_significant": "0",
+      "release_indeterminate": "10",
+      "release_provably_significant": "16"
+    },
+    {
+      "benchmark": "RoboTwin 2.0",
+      "protocol": "50 clean + 500 randomized demos",
+      "negative": "2",
+      "not_significant": "0",
+      "possibly_significant": "3",
+      "certainly_significant": "14",
+      "total": "19",
+      "release_no_improvement": "2",
+      "release_provably_not_significant": "0",
+      "release_indeterminate": "3",
+      "release_provably_significant": "14"
+    }
+  ],
+  "paper_v1_vs_release_rowlevel": {
+    "paper_input_rows": 1067,
+    "rows_with_changed_category": 88,
+    "unmatched_by_paper_name": 0,
+    "by_benchmark_from_to": {
+      "LIBERO: indeterminate -> provably_not_significant": 1,
+      "LIBERO: indeterminate -> provably_significant": 6,
+      "LIBERO: provably_not_significant -> no_improvement": 48,
+      "LIBERO: provably_not_significant -> indeterminate": 5,
+      "LIBERO: provably_significant -> no_improvement": 13,
+      "LIBERO: provably_significant -> provably_not_significant": 5,
+      "CALVIN: provably_not_significant -> no_improvement": 3,
+      "SimplerEnv: provably_not_significant -> indeterminate": 3,
+      "SimplerEnv: provably_not_significant -> no_improvement": 4
+    }
+  },
+  "table9_fisher_22M_vs_xvla": {
+    "22M_scripted": "91/96",
+    "x_vla_reported": "92/96",
+    "fisher_two_sided_p": 1.0
+  },
+  "libero_goal_pairwise_D": {
+    "policies": [
+      "hif_vla",
+      "openvla_oft",
+      "pi05_n_action_steps_10",
+      "simvla",
+      "spatial_forcing"
+    ],
+    "n_instances_per_policy": 5000,
+    "mean_D_recomputed": 0.03528,
+    "median_D_recomputed": 0.0354,
+    "mean_D_reported_in_release": 0.03528,
+    "median_D_reported_in_release": 0.0354,
+    "pairs_matching_csv_to_1e-4": [
+      10,
+      10
+    ]
+  },
+  "libero_tracker": {
+    "rows": 1053,
+    "reports_results": 551,
+    "march2026_reports_results": 79,
+    "march2026_all_rows": 117,
+    "reports_results_no_arxiv_date": 96
+  },
+  "libero_suite_rank_tau_probe_vs_openvla": 1.0,
+  "libero_suite_rank_rho_probe_vs_openvla": 1.0
+}
