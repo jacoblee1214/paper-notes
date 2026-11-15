@@ -1,0 +1,421 @@
+{
+  "table3": {
+    "NN_avg_in_domain": 3.552,
+    "CMA_avg_in_domain": 4.154,
+    "RND_avg_in_domain": 15.288,
+    "reported": 3.55,
+    "NN_rope_avg_recomputed": {
+      "Brown": 1.72,
+      "Yellow": 3.89,
+      "Red": 3.81,
+      "Orange": 4.79
+    },
+    "CMA_rope_avg_recomputed": {
+      "Brown": 3.22,
+      "Yellow": 4.17,
+      "Red": 2.35,
+      "Orange": 6.88
+    },
+    "RND_rope_avg_recomputed": {
+      "Brown": 17.8,
+      "Yellow": 16.37,
+      "Red": 16.44,
+      "Orange": 10.55
+    },
+    "headline_ratio_RND_over_NN": 4.3,
+    "headline_ratio_RND_over_CMA": 3.68,
+    "NN_cell_sd": 4.18,
+    "NN_mean_t95_CI_cells": [
+      1.79,
+      5.32
+    ],
+    "NN_vs_CMA": {
+      "NN_lower_cells": 12,
+      "CMA_lower_cells": 10,
+      "ties": 2,
+      "wilcoxon_p": 0.5922,
+      "paired_t_p": 0.632,
+      "mean_diff_CMA_minus_NN": 0.6
+    },
+    "NN_vs_CMA_by_config": {
+      "45cm 5g": {
+        "NN": 4.58,
+        "CMA": 0.37,
+        "RND": 14.76
+      },
+      "45cm 10g": {
+        "NN": 6.6,
+        "CMA": 4.05,
+        "RND": 14.6
+      },
+      "45cm 20g": {
+        "NN": 2.67,
+        "CMA": 3.36,
+        "RND": 15.89
+      },
+      "45cm 30g": {
+        "NN": 1.72,
+        "CMA": 3.92,
+        "RND": 16.19
+      },
+      "55cm 5g": {
+        "NN": 3.81,
+        "CMA": 5.33,
+        "RND": 13.12
+      },
+      "65cm 5g": {
+        "NN": 1.92,
+        "CMA": 7.89,
+        "RND": 17.16
+      }
+    },
+    "NN_vs_CMA_in_lead_range_cols": {
+      "cols": [
+        "45cm 20g",
+        "45cm 30g"
+      ],
+      "NN": 2.2,
+      "CMA": 3.64
+    },
+    "NN_vs_CMA_out_lead_range_cols": {
+      "cols": [
+        "45cm 5g",
+        "45cm 10g",
+        "55cm 5g",
+        "65cm 5g"
+      ],
+      "NN": 4.23,
+      "CMA": 4.41
+    },
+    "ratio_RND_over_NN_per_config": [
+      3.2,
+      2.2,
+      6.0,
+      9.4,
+      3.4,
+      8.9
+    ],
+    "ratio_RND_over_NN_per_rope": [
+      10.3,
+      4.2,
+      4.3,
+      2.2
+    ],
+    "ratio_claim_check": "논문 3.3–13.1배: 설정별 2.2–9.4, 로프별 2.2–10.3",
+    "RND_range_same_config_max": 13.08,
+    "RND_range_same_config_argmax": "65cm 5g",
+    "RND_range_across_4_ropes_per_config": {
+      "45cm 5g": 6.73,
+      "45cm 10g": 7.35,
+      "45cm 20g": 6.46,
+      "45cm 30g": 4.19,
+      "55cm 5g": 7.47,
+      "65cm 5g": 13.08
+    },
+    "NN_vs_CMA_in_lead_range_cells_wilcoxon_p": 0.3105,
+    "rollout_count": {
+      "cells": 84,
+      "per_cell": 5,
+      "implied_rollouts": 420,
+      "claimed": 600
+    }
+  },
+  "table2": [
+    {
+      "param": "Number of links",
+      "min": 20,
+      "max": 26,
+      "unit": "-",
+      "MAE_v2": 0.098,
+      "rel_err_v1_pct": 0.44,
+      "MAE_over_range_pct": 1.6
+    },
+    {
+      "param": "Rope length",
+      "min": 0.45,
+      "max": 0.65,
+      "unit": "m",
+      "MAE_v2": 0.006,
+      "rel_err_v1_pct": 1.13,
+      "MAE_over_range_pct": 3.0
+    },
+    {
+      "param": "Ball damping",
+      "min": 0.001,
+      "max": 0.05,
+      "unit": "N·s/m",
+      "MAE_v2": 0.01,
+      "rel_err_v1_pct": 33.73,
+      "MAE_over_range_pct": 20.4
+    },
+    {
+      "param": "Ball stiffness",
+      "min": 0.05,
+      "max": 1.0,
+      "unit": "N/m",
+      "MAE_v2": 0.111,
+      "rel_err_v1_pct": 33.82,
+      "MAE_over_range_pct": 11.7
+    },
+    {
+      "param": "Rope radius",
+      "min": 0.003,
+      "max": 0.015,
+      "unit": "m",
+      "MAE_v2": 0.002,
+      "rel_err_v1_pct": 36.37,
+      "MAE_over_range_pct": 16.7
+    },
+    {
+      "param": "Mass per unit length",
+      "min": 0.02,
+      "max": 0.12,
+      "unit": "kg/m",
+      "MAE_v2": 0.007,
+      "rel_err_v1_pct": 62.56,
+      "MAE_over_range_pct": 7.0
+    },
+    {
+      "param": "Lead mass",
+      "min": 0.02,
+      "max": 0.12,
+      "unit": "kg",
+      "MAE_v2": 0.005,
+      "rel_err_v1_pct": 45.2,
+      "MAE_over_range_pct": 5.0
+    },
+    {
+      "param": "Lead radius",
+      "min": 0.015,
+      "max": 0.045,
+      "unit": "m",
+      "MAE_v2": 0.008,
+      "rel_err_v1_pct": 28.81,
+      "MAE_over_range_pct": 26.7
+    },
+    {
+      "param": "Link extra scale",
+      "min": 50,
+      "max": 120,
+      "unit": "%",
+      "MAE_v2": 0.152,
+      "rel_err_v1_pct": 19.85,
+      "MAE_over_range_pct": 0.2
+    }
+  ],
+  "table2_note": "v2는 상대 오차 열을 뺐고, v1의 상대 오차는 질량 단위 길이 62.6%, 리드 질량 45.2%, 반지름 36.4%, 감쇠 33.7%, 강성 33.8%로 가장 컸다. 'sub-millimeter MAE'는 v2 본문에서 길이 6 mm, 반지름 2 mm 값과 함께 쓰여 단위 표현이 맞지 않는다.",
+  "range_check": {
+    "rope_mass_below_train_min": {
+      "Brown": 0.013,
+      "Yellow": 0.011
+    },
+    "rope_mass_train_min": 0.02,
+    "lead_mass_below_train_min_configs": [
+      "45cm 5g",
+      "45cm 10g",
+      "55cm 5g",
+      "65cm 5g"
+    ],
+    "lead_mass_train_min": 0.02,
+    "clamped_bias_lower_bound_kg_per_m": {
+      "Brown": 0.007,
+      "Yellow": 0.009
+    },
+    "relative_bias_lower_bound_pct": {
+      "Brown": 54.0,
+      "Yellow": 82.0
+    },
+    "radius_in_range": {
+      "Brown": true,
+      "Yellow": true,
+      "Red": true,
+      "Orange": true
+    }
+  },
+  "table4": {
+    "Ground truth": {
+      "median": 1.2,
+      "mean": 1.4,
+      "SD_assumed": 2.2,
+      "SE": 0.22,
+      "CI95_mean": [
+        0.96,
+        1.84
+      ]
+    },
+    "Predicted (Φ-NN)": {
+      "median": 2.1,
+      "mean": 5.7,
+      "SD_assumed": 11.5,
+      "SE": 1.15,
+      "CI95_mean": [
+        3.42,
+        7.98
+      ]
+    },
+    "Random in-dist.": {
+      "median": 12.8,
+      "mean": 16.3,
+      "SD_assumed": 12.1,
+      "SE": 1.21,
+      "CI95_mean": [
+        13.9,
+        18.7
+      ]
+    },
+    "predicted_minus_GT_median": 0.9,
+    "random_over_predicted_median_ratio": 6.1
+  },
+  "table5": {
+    "Full Φ-NN": {
+      "mean": 0.9,
+      "gap_closed_by_NN_pct": 100.0
+    },
+    "Random, keep length+lead mass": {
+      "mean": 10.9,
+      "gap_closed_by_NN_pct": 24.8
+    },
+    "Random, keep length only": {
+      "mean": 13.3,
+      "gap_closed_by_NN_pct": 6.8
+    },
+    "Random, keep lead mass only": {
+      "mean": 12.3,
+      "gap_closed_by_NN_pct": 14.3
+    },
+    "Fully random": {
+      "mean": 14.2,
+      "gap_closed_by_NN_pct": 0.0
+    },
+    "text_claim_check": {
+      "length_and_leadmass_closes_cm": 3.3,
+      "remaining_gap_driven_by_7_params_cm": 10.0
+    }
+  },
+  "table6": {
+    "target_NN": {
+      "k": 13,
+      "n": 24,
+      "pct": 54.2,
+      "wilson95": [
+        35.1,
+        72.1
+      ]
+    },
+    "target_CMA": {
+      "k": 15,
+      "n": 24,
+      "pct": 62.5,
+      "wilson95": [
+        42.7,
+        78.8
+      ]
+    },
+    "stay_NN": {
+      "k": 5,
+      "n": 24,
+      "pct": 20.8,
+      "wilson95": [
+        9.2,
+        40.5
+      ]
+    },
+    "stay_CMA": {
+      "k": 9,
+      "n": 24,
+      "pct": 37.5,
+      "wilson95": [
+        21.2,
+        57.3
+      ]
+    },
+    "draping_NN": {
+      "k": 15,
+      "n": 24,
+      "pct": 62.5,
+      "wilson95": [
+        42.7,
+        78.8
+      ]
+    },
+    "draping_CMA": {
+      "k": 16,
+      "n": 24,
+      "pct": 66.7,
+      "wilson95": [
+        46.7,
+        82.0
+      ]
+    },
+    "fisher_p_target_NN_vs_CMA": 0.77,
+    "fisher_p_stay_NN_vs_CMA": 0.341,
+    "fisher_p_draping_NN_vs_CMA": 1.0,
+    "full_success_NN_note": "전체 성공(목표 도달과 체류의 교집합)은 표에 없어 계산하지 못함. 초록의 50%는 목표 도달 기준으로만 맞다.",
+    "draping_orange_exactly_50pct": true
+  },
+  "table9": {
+    "freq_mean_all10": {
+      "NN": 0.955,
+      "CMA": 0.949,
+      "RND": 0.812
+    },
+    "freq_mean_in_domain8": {
+      "NN": 0.975,
+      "CMA": 0.939,
+      "RND": 0.822
+    },
+    "dist_mean_all10": {
+      "NN": 5.45,
+      "CMA": 5.79,
+      "RND": 13.72
+    },
+    "n_rows": 5,
+    "n_values_per_method": 10,
+    "chain_NN_freq_mean_two_leads": 0.875,
+    "text_claim": "본문은 '10 in-distribution pairs'라고 쓰지만 표의 10개 행에는 chain(OOD) 2개가 들어 있다. 평균 0.95는 chain 포함 값."
+  },
+  "sim_vs_real": {
+    "sim_full_pipeline_mean_cm_table5": 0.9,
+    "real_NN_avg_cm": 3.55,
+    "note": "시뮬 0.9는 표 5의 30 설정 시뮬, 실기는 표 3. 두 집합이 같은지 논문이 밝히지 않음."
+  },
+  "table8": {
+    "mean_abs_err_over_9_params": {
+      "Abl1 20°0.5Hz": 0.048,
+      "Abl2 20°0.75Hz": 0.069,
+      "Abl3 20°1.0Hz": 0.081,
+      "Abl4 30°0.5Hz": 0.075,
+      "Abl5 30°0.75Hz": 0.078,
+      "Abl6 30°1.0Hz": 0.122,
+      "Abl7 random1": 0.315,
+      "Abl8 random2": 0.233,
+      "Main joint6": 0.044
+    },
+    "main_is_best_per_param": [
+      "Number of links",
+      "Rope length",
+      "Ball damping",
+      "Ball stiffness",
+      "Mass per unit length",
+      "Lead mass",
+      "Link extra scale"
+    ],
+    "main_worse_than": {
+      "Abl1 20°0.5Hz": [
+        "Rope radius"
+      ],
+      "Abl2 20°0.75Hz": [],
+      "Abl3 20°1.0Hz": [],
+      "Abl4 30°0.5Hz": [],
+      "Abl5 30°0.75Hz": [],
+      "Abl6 30°1.0Hz": [],
+      "Abl7 random1": [
+        "Lead radius"
+      ],
+      "Abl8 random2": []
+    },
+    "ratio_random1_over_main_links": 21.4,
+    "ratio_abl2_over_main_stiffness": 2.32,
+    "note": "'wiggle는 중요하지 않다'는 주장은 평면 wiggle 사이에서 맞고, 무작위 궤적(Abl7–8)에서는 링크 수 MAE가 주 궤적의 약 15–21배다."
+  }
+}
