@@ -1,0 +1,407 @@
+{
+ "assumptions": {
+  "sim_pm": "3 seeds sample sd (ddof=1); SPIDER 5 seeds not compared",
+  "fisher": "two-sided exact test on 10-trial counts",
+  "ci": "Wilson and Clopper-Pearson 95%"
+ },
+ "real_table2": [
+  {
+   "task": "LEAP-Scissors",
+   "method": "REGRIND",
+   "k": 9,
+   "n": 10,
+   "sr": 0.9,
+   "wilson95": [
+    0.5958499704752279,
+    0.982123787103926
+   ],
+   "cp95": [
+    0.5549838829718047,
+    0.9974714214555382
+   ]
+  },
+  {
+   "task": "LEAP-Scissors",
+   "method": "DexMachina",
+   "k": 0,
+   "n": 10,
+   "sr": 0.0,
+   "wilson95": [
+    0.0,
+    0.2775328030260577
+   ],
+   "cp95": [
+    0.0,
+    0.3084971078187608
+   ]
+  },
+  {
+   "task": "LEAP-Screwdriver",
+   "method": "REGRIND",
+   "k": 10,
+   "n": 10,
+   "sr": 1.0,
+   "wilson95": [
+    0.7224671969739421,
+    0.9999999999999999
+   ],
+   "cp95": [
+    0.6915028921812392,
+    1.0
+   ]
+  },
+  {
+   "task": "LEAP-Screwdriver",
+   "method": "DexMachina",
+   "k": 2,
+   "n": 10,
+   "sr": 0.2,
+   "wilson95": [
+    0.05668215093776685,
+    0.5098375308778678
+   ],
+   "cp95": [
+    0.02521072632683336,
+    0.5560954623076415
+   ]
+  },
+  {
+   "task": "WUJI-Scissors",
+   "method": "REGRIND",
+   "k": 0,
+   "n": 10,
+   "sr": 0.0,
+   "wilson95": [
+    0.0,
+    0.2775328030260577
+   ],
+   "cp95": [
+    0.0,
+    0.3084971078187608
+   ]
+  },
+  {
+   "task": "WUJI-Screwdriver",
+   "method": "REGRIND",
+   "k": 9,
+   "n": 10,
+   "sr": 0.9,
+   "wilson95": [
+    0.5958499704752279,
+    0.982123787103926
+   ],
+   "cp95": [
+    0.5549838829718047,
+    0.9974714214555382
+   ]
+  },
+  {
+   "task": "WUJI-Screwdriver",
+   "method": "DexMachina",
+   "k": 5,
+   "n": 10,
+   "sr": 0.5,
+   "wilson95": [
+    0.23659308901147935,
+    0.7634069109885206
+   ],
+   "cp95": [
+    0.18708602844739855,
+    0.8129139715526015
+   ]
+  },
+  {
+   "task": "WUJI-Screwdriver",
+   "method": "Mink IK + RL",
+   "k": 0,
+   "n": 10,
+   "sr": 0.0,
+   "wilson95": [
+    0.0,
+    0.2775328030260577
+   ],
+   "cp95": [
+    0.0,
+    0.3084971078187608
+   ]
+  }
+ ],
+ "real_tests": [
+  {
+   "comparison": "REGRIND vs DexMachina (LEAP-Scissors)",
+   "p_fisher": 0.00011907597046915932
+  },
+  {
+   "comparison": "REGRIND vs DexMachina (LEAP-Screwdriver)",
+   "p_fisher": 0.0007144558228149558
+  },
+  {
+   "comparison": "REGRIND vs DexMachina (WUJI-Screwdriver)",
+   "p_fisher": 0.14086687306501547
+  },
+  {
+   "comparison": "REGRIND vs Mink IK + RL (WUJI-Screwdriver)",
+   "p_fisher": 0.00011907597046915932
+  },
+  {
+   "comparison": "REGRIND vs DexMachina pooled (3 tasks)",
+   "k_n_regrind": [
+    28,
+    30
+   ],
+   "k_n_dexmachina": [
+    7,
+    30
+   ],
+   "p_fisher": 3.4807710047511755e-08,
+   "wilson_regrind": [
+    0.7867654148312584,
+    0.9815229763754831
+   ],
+   "wilson_dexmachina": [
+    0.11792388080557861,
+    0.40928326306719587
+   ]
+  }
+ ],
+ "table3_vs_table2": [
+  {
+   "task": "LEAP-Scissors",
+   "demo_init": [
+    9,
+    10
+   ],
+   "random_init": [
+    8,
+    10
+   ],
+   "p_fisher": 1.0
+  },
+  {
+   "task": "LEAP-Screwdriver",
+   "demo_init": [
+    10,
+    10
+   ],
+   "random_init": [
+    10,
+    10
+   ],
+   "p_fisher": 1.0
+  },
+  {
+   "task": "WUJI-Screwdriver",
+   "demo_init": [
+    9,
+    10
+   ],
+   "random_init": [
+    9,
+    10
+   ],
+   "p_fisher": 1.0
+  }
+ ],
+ "sim_table1": [
+  {
+   "task": "LEAP-Scissors",
+   "metric": "sr",
+   "REGRIND": {
+    "mean": 99.8,
+    "sd": 0.3,
+    "ci95_halfwidth": 0.7452413135158636
+   },
+   "DexMachina": {
+    "mean": 22.3,
+    "sd": 17.7,
+    "ci95_halfwidth": 43.969237497435955
+   },
+   "welch_ddof1": {
+    "t": 7.582749197457175,
+    "p_two_sided": 0.016923685279983888
+   },
+   "welch_if_ddof0": {
+    "t": 6.191288793756242,
+    "p_two_sided": 0.025074512482050296
+   }
+  },
+  {
+   "task": "LEAP-Scissors",
+   "metric": "err",
+   "REGRIND": {
+    "mean": 5.6,
+    "sd": 6.4,
+    "ci95_halfwidth": 15.898481355005094
+   },
+   "DexMachina": {
+    "mean": 10.1,
+    "sd": 9.5,
+    "ci95_halfwidth": 23.599308261335683
+   },
+   "welch_ddof1": {
+    "t": -0.6804397453741411,
+    "p_two_sided": 0.5384880442233616
+   },
+   "welch_if_ddof0": {
+    "t": -0.5555767256253186,
+    "p_two_sided": 0.6120222713641579
+   }
+  },
+  {
+   "task": "LEAP-Screwdriver",
+   "metric": "sr",
+   "REGRIND": {
+    "mean": 99.7,
+    "sd": 0.0,
+    "ci95_halfwidth": 0.0
+   },
+   "DexMachina": {
+    "mean": 99.7,
+    "sd": 0.1,
+    "ci95_halfwidth": 0.2484137711719546
+   },
+   "welch_ddof1": "sd=0 또는 DexMachina 0% (검정 생략)"
+  },
+  {
+   "task": "LEAP-Screwdriver",
+   "metric": "err",
+   "REGRIND": {
+    "mean": 5.4,
+    "sd": 5.8,
+    "ci95_halfwidth": 14.407998727973364
+   },
+   "DexMachina": {
+    "mean": 8.3,
+    "sd": 6.7,
+    "ci95_halfwidth": 16.643722668520958
+   },
+   "welch_ddof1": {
+    "t": -0.5668143367064192,
+    "p_two_sided": 0.6017204368869163
+   },
+   "welch_if_ddof0": {
+    "t": -0.4628019679416081,
+    "p_two_sided": 0.6680306411409624
+   }
+  },
+  {
+   "task": "WUJI-Scissors",
+   "metric": "sr",
+   "REGRIND": {
+    "mean": 98.7,
+    "sd": 1.3,
+    "ci95_halfwidth": 3.22937902523541
+   },
+   "DexMachina": {
+    "mean": 0.0,
+    "sd": 0.0,
+    "ci95_halfwidth": 0.0
+   },
+   "welch_ddof1": "sd=0 또는 DexMachina 0% (검정 생략)"
+  },
+  {
+   "task": "WUJI-Scissors",
+   "metric": "err",
+   "REGRIND": {
+    "mean": 5.3,
+    "sd": 13.1,
+    "ci95_halfwidth": 32.54220402352605
+   },
+   "DexMachina": {
+    "mean": 67.2,
+    "sd": 31.8,
+    "ci95_halfwidth": 78.99557923268156
+   },
+   "welch_ddof1": {
+    "t": -3.11735627291902,
+    "p_two_sided": 0.06174005585055857
+   },
+   "welch_if_ddof0": {
+    "t": -2.5453107383719793,
+    "p_two_sided": 0.0949685054317252
+   }
+  },
+  {
+   "task": "WUJI-Screwdriver",
+   "metric": "sr",
+   "REGRIND": {
+    "mean": 98.8,
+    "sd": 1.3,
+    "ci95_halfwidth": 3.22937902523541
+   },
+   "DexMachina": {
+    "mean": 99.3,
+    "sd": 0.1,
+    "ci95_halfwidth": 0.2484137711719546
+   },
+   "welch_ddof1": {
+    "t": -0.6642111641550714,
+    "p_two_sided": 0.5741863920097838
+   },
+   "welch_if_ddof0": {
+    "t": -0.5423261445466405,
+    "p_two_sided": 0.6413833589533324
+   }
+  },
+  {
+   "task": "WUJI-Screwdriver",
+   "metric": "err",
+   "REGRIND": {
+    "mean": 6.5,
+    "sd": 15.5,
+    "ci95_halfwidth": 38.50413453165296
+   },
+   "DexMachina": {
+    "mean": 5.9,
+    "sd": 9.7,
+    "ci95_halfwidth": 24.09613580367959
+   },
+   "welch_ddof1": {
+    "t": 0.056835241365928976,
+    "p_two_sided": 0.9578924173172949
+   },
+   "welch_if_ddof0": {
+    "t": 0.04640578025148307,
+    "p_two_sided": 0.9656113022061096
+   }
+  }
+ ],
+ "sim_pm_vs_binomial": [
+  {
+   "task": "LEAP-Scissors",
+   "binomial_se_pct_1024": 0.13961442439805427,
+   "reported_sd_pct": 0.3
+  },
+  {
+   "task": "LEAP-Screwdriver",
+   "binomial_se_pct_1024": 0.17090636142344154,
+   "reported_sd_pct": 0.0
+  },
+  {
+   "task": "WUJI-Scissors",
+   "binomial_se_pct_1024": 0.35398126274564323,
+   "reported_sd_pct": 1.3
+  },
+  {
+   "task": "WUJI-Screwdriver",
+   "binomial_se_pct_1024": 0.34026643972040516,
+   "reported_sd_pct": 1.3
+  }
+ ],
+ "consistency": {
+  "ppo_batch_per_iter": 98304,
+  "ppo_minibatch": 24576,
+  "ppo_optimizer_passes_per_iter": 20,
+  "episode_control_steps": 270,
+  "control_dt_s": 0.03333333333333333,
+  "lag_1_2_steps_ms": [
+   33,
+   67
+  ],
+  "aug_yaw_30deg_rad": 0.5236,
+  "max_iterations_total_transitions_billion": 1.96608,
+  "gravity_full_at_vector_steps_iterations": 5416.666666666667,
+  "keypoints_in_code_per_object": 100,
+  "keypoints_in_paper_per_object": 50
+ }
+}
