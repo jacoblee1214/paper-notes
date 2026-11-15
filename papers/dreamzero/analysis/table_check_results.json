@@ -1,0 +1,268 @@
+{
+  "assumptions": [
+    "표 2의 ± 값은 9개 과제 사이의 표준오차(SD/√9)다. 그림 9 값에서 SD 22.8, SE 7.6이 나와 일치한다.",
+    "표 2 검정은 과제 단위 상관 rho를 0, 0.5, 0.8로 둔 민감도다. 논문은 과제를 짝지었는지 밝히지 않았다.",
+    "표 3은 과제당 10 롤아웃(본문 4.2절)이고 ± 값은 표준오차다. SD는 SE×√10으로 되돌렸다.",
+    "표 4의 ± 표준오차 기준 검정. 롤아웃 수 n은 가정이다. 같은 학습 조건의 반복 실행은 1회라서 seed 분산은 빠져 있다.",
+    "DROID 성공률은 롤아웃 80개(본문 4.1절 'total of 80 evaluation rollouts')로 가정했다. 22.5, 12.5, 7.5, 75는 각각 18, 10, 6, 60으로 정확히 떨어진다."
+  ],
+  "checks": {
+    "table2_fig9_recompute": {
+      "dz_mean_10_tasks": 39.49,
+      "dz_mean_9_tasks_excl_pullcart": 38.32,
+      "sd_9_tasks": 22.83,
+      "se_9_tasks_sd_over_sqrt9": 7.61,
+      "paper_table2_se_dz": 7.6,
+      "pi05_pre_mean_10": 16.31,
+      "gr00t_pre_mean_10": 4.38,
+      "gr00t_scratch_mean_10": 0.71,
+      "note_gr00t_pre_fig_avg_label": 5
+    },
+    "table2_relative_gain_pct": {
+      "+Human2Robot": 41.8,
+      "+Robot2Robot": 44.6
+    },
+    "table2_abstract_claim": "초록은 '42% 이상'이라고 쓰지만 Human2Robot은 41.8%다(54.3/38.3).",
+    "table2_tests_unpaired_and_paired": {
+      "+Human2Robot": {
+        "diff": 16.0,
+        "rho=0.0": {
+          "se_diff": 12.88,
+          "t": 1.24,
+          "p_two_sided": 0.235
+        },
+        "rho=0.5": {
+          "se_diff": 9.32,
+          "t": 1.72,
+          "p_two_sided": 0.105
+        },
+        "rho=0.8": {
+          "se_diff": 6.28,
+          "t": 2.55,
+          "p_two_sided": 0.022
+        }
+      },
+      "+Robot2Robot": {
+        "diff": 17.1,
+        "rho=0.0": {
+          "se_diff": 12.17,
+          "t": 1.41,
+          "p_two_sided": 0.182
+        },
+        "rho=0.5": {
+          "se_diff": 8.71,
+          "t": 1.96,
+          "p_two_sided": 0.067
+        },
+        "rho=0.8": {
+          "se_diff": 5.7,
+          "t": 3.0,
+          "p_two_sided": 0.008
+        }
+      }
+    },
+    "table3_ci": {
+      "4-step (350ms)": {
+        "mean": 83,
+        "sd_implied": 19.3,
+        "ci95": [
+          69.2,
+          96.8
+        ]
+      },
+      "1-step (150ms)": {
+        "mean": 52,
+        "sd_implied": 32.3,
+        "ci95": [
+          28.9,
+          75.1
+        ]
+      },
+      "Flash 1-step (150ms)": {
+        "mean": 74,
+        "sd_implied": 31.9,
+        "ci95": [
+          51.2,
+          96.8
+        ]
+      }
+    },
+    "table3_tests": {
+      "flash_vs_1step": {
+        "diff": 22,
+        "se": 14.35,
+        "t": 1.53,
+        "p_two_sided": 0.143
+      },
+      "flash_vs_4step": {
+        "diff": -9,
+        "se": 11.8,
+        "ci95_diff": [
+          -33.8,
+          15.8
+        ],
+        "t": -0.76,
+        "p_two_sided": 0.455,
+        "note": "차이 -9의 95% 신뢰구간이 -32에서 +14까지다. '거의 같다'를 검정하려면 여유 폭을 정하고 더 많은 롤아웃이 필요하다."
+      },
+      "speed_ratio_350_over_150": 2.33
+    },
+    "table3_linear_latency_fit": {
+      "per_dit_step_ms": 66.7,
+      "fixed_ms": 83.3,
+      "note": "고정 항에는 VAE, 텍스트·이미지 인코더, 실제 관측을 KV 캐시에 넣는 추가 DiT 순전파(알고리즘 2)가 들어간다. 두 점 적합이라 기울기와 절편은 근사값이다."
+    },
+    "table4_note": "표 4의 PnP Easy 롤아웃 수가 없다. n = 24(3 과제 × 8)로 가정하고 n = 12, 48로 민감도를 봤다.",
+    "table4_tests": {
+      "Diverse 14B AR vs Repetitive 14B AR": {
+        "n=12": {
+          "diff": 17,
+          "se": 7.57,
+          "t": 2.25,
+          "p_two_sided": 0.0351
+        },
+        "n=24": {
+          "diff": 17,
+          "se": 7.57,
+          "t": 2.25,
+          "p_two_sided": 0.0296
+        },
+        "n=48": {
+          "diff": 17,
+          "se": 7.57,
+          "t": 2.25,
+          "p_two_sided": 0.0271
+        }
+      },
+      "Diverse 14B AR vs 5B AR (Diverse)": {
+        "n=12": {
+          "diff": 29,
+          "se": 7.57,
+          "t": 3.83,
+          "p_two_sided": 0.0009
+        },
+        "n=24": {
+          "diff": 29,
+          "se": 7.57,
+          "t": 3.83,
+          "p_two_sided": 0.0004
+        },
+        "n=48": {
+          "diff": 29,
+          "se": 7.57,
+          "t": 3.83,
+          "p_two_sided": 0.0002
+        }
+      },
+      "14B BD (Diverse) vs Diverse 14B AR": {
+        "n=12": {
+          "diff": 0,
+          "se": 15.72,
+          "t": 0.0,
+          "p_two_sided": 1.0
+        },
+        "n=24": {
+          "diff": 0,
+          "se": 15.72,
+          "t": 0.0,
+          "p_two_sided": 1.0
+        },
+        "n=48": {
+          "diff": 0,
+          "se": 15.72,
+          "t": 0.0,
+          "p_two_sided": 1.0
+        }
+      }
+    },
+    "fig8_seen_average_recompute": {
+      "note": "본문 62.2 = 과제 수(3·4·3)로 가중한 평균. 범주 평균을 그냥 나누면 63.7이 된다. 본문에 가중 방식이 없다.",
+      "values": {
+        "DZ": {
+          "task_weighted": 62.2,
+          "category_unweighted": 63.73
+        },
+        "pi05_pre": {
+          "task_weighted": 27.47,
+          "category_unweighted": 28.0
+        },
+        "gr_pre": {
+          "task_weighted": 8.42,
+          "category_unweighted": 8.83
+        }
+      }
+    },
+    "fig10_average_recompute": {
+      "GR00T scratch": {
+        "mean3": 9.83
+      },
+      "GR00T pretrained": {
+        "mean3": 53.33
+      },
+      "pi0.5 scratch": {
+        "mean3": 0.5
+      },
+      "pi0.5 pretrained": {
+        "mean3": 79.83
+      },
+      "DreamZero": {
+        "mean3": 90.5
+      },
+      "note": "그림 라벨 AVG: GR00T 9.8/53.3, pi0.5 0.5/79.8, DreamZero 90.5. 본문 '10% 앞섬'은 90.5 - 79.8 = 10.7 pp와 맞다."
+    },
+    "droid_success": {
+      "ci": {
+        "unseen DZ": {
+          "k": 18,
+          "n": 80,
+          "rate": 22.5,
+          "wilson95": [
+            14.7,
+            32.8
+          ]
+        },
+        "unseen GR00T pre": {
+          "k": 10,
+          "n": 80,
+          "rate": 12.5,
+          "wilson95": [
+            6.9,
+            21.5
+          ]
+        },
+        "unseen pi0.5 pre": {
+          "k": 6,
+          "n": 80,
+          "rate": 7.5,
+          "wilson95": [
+            3.5,
+            15.4
+          ]
+        },
+        "seen DZ": {
+          "k": 60,
+          "n": 80,
+          "rate": 75.0,
+          "wilson95": [
+            64.5,
+            83.2
+          ]
+        }
+      },
+      "fisher_p": {
+        "unseen DZ vs pi0.5 pre": 0.0136,
+        "unseen DZ vs GR00T pre": 0.1444
+      },
+      "seen_pi05_or_gr00t_42pct_check": "분모 80이면 42%는 정수 개수가 아니다(33/80 = 41.3, 34/80 = 42.5). 표기 방식 확인이 필요하다."
+    },
+    "table1_arithmetic": {
+      "gb200_final_speedup_16.6_x_flash_2.33": 38.7,
+      "naive_5.7s_over_38": 150.0,
+      "naive_5.7s_over_16.6": 343.0,
+      "cfg_parallel_expected_from_47pct_latency_cut": 1.89,
+      "dit_caching_16_to_4_ideal": 4.0,
+      "dit_caching_observed_ratio_5.4_over_1.8": 3.0,
+      "note": "표 1의 행은 누적 배율이다. 16.6 × 2.33 = 38.7이고 본문은 38×라고 한다. 누적 16.6×는 약 343 ms로 표 3의 4단계 350 ms와 맞는다."
+    }
+  }
+}

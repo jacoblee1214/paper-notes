@@ -1,0 +1,45 @@
+{
+  "assumptions": [
+    "데이터: 2차원 4-가우시안 혼합(반지름 2, 표준편차 0.3), 정확한 속도장 사용 → DiT 근사 오차 0 (아래한계: 실제 캐시 오차는 이보다 큼)",
+    "호출하지 않은 단계는 직전 속도를 재사용 (공개 코드 캐시 방식과 같은 가정)",
+    "Euler, 균등 시간 간격. 코드의 sigma_shift = 5와 Flow UniPC는 넣지 않음",
+    "참조: 같은 잡음에서 512단계 Euler. 샘플 4000개, 시드 0"
+  ],
+  "results": {
+    "16단계 전부 (기준 스케줄)": {
+      "dit_calls": 16,
+      "rms_endpoint_error": 0.0702,
+      "p90_endpoint_error": 0.0937,
+      "mode_agreement_with_ref_pct": 100.0,
+      "mean_radius_error": 0.0641
+    },
+    "코드 mask 8회 (기본값)": {
+      "dit_calls": 8,
+      "rms_endpoint_error": 0.2877,
+      "p90_endpoint_error": 0.3993,
+      "mode_agreement_with_ref_pct": 100.0,
+      "mean_radius_error": 0.2602
+    },
+    "코드 mask 5회 (최소 제공 mask)": {
+      "dit_calls": 5,
+      "rms_endpoint_error": 0.3359,
+      "p90_endpoint_error": 0.4333,
+      "mode_agreement_with_ref_pct": 100.0,
+      "mean_radius_error": 0.307
+    },
+    "논문 수치 4회 (균등 배치, 코드에 없음)": {
+      "dit_calls": 4,
+      "rms_endpoint_error": 0.41,
+      "p90_endpoint_error": 0.6263,
+      "mode_agreement_with_ref_pct": 100.0,
+      "mean_radius_error": 0.3454
+    },
+    "코드 동적 규칙 (코사인 0.95/0.93)": {
+      "dit_calls": 6,
+      "rms_endpoint_error": 0.3151,
+      "p90_endpoint_error": 0.3517,
+      "mode_agreement_with_ref_pct": 100.0,
+      "mean_radius_error": 0.3019
+    }
+  }
+}
