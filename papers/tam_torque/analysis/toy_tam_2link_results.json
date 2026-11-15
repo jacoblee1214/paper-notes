@@ -1,0 +1,444 @@
+{
+  "setup": {
+    "dt_s": 0.001,
+    "T_test_s": 2.0,
+    "cold_start_s": 0.2,
+    "history_lags": 20,
+    "lag_step_ms": 10,
+    "train_rollouts": 300,
+    "val_rollouts": 100,
+    "dagger_rollouts": 150,
+    "train_T_s": 1.2,
+    "test_rollouts": 120,
+    "hidden": 128,
+    "epochs": 15,
+    "ideal_mass_kg": 1.0,
+    "link_m_l": [
+      0.4,
+      0.4
+    ],
+    "kp": 100.0,
+    "kd": 20.0,
+    "train_ranges": {
+      "sm": [
+        0.9,
+        1.1
+      ],
+      "b": [
+        0,
+        0.5
+      ],
+      "A": [
+        0,
+        1.0
+      ],
+      "alpha": [
+        0.97,
+        1.03
+      ],
+      "beta": [
+        -0.1,
+        0.1
+      ]
+    },
+    "clip_note": "_nominal_torque_over_limit_fraction: 직접 제어의 공칭 토크가 +-30 Nm를 넘는 시간 비율(콜드 스타트 이후)",
+    "rmse_definition": "joint position RMSE vs ideal-model rollout, deg, after cold start, per rollout mean; bootstrap 95% CI over rollouts"
+  },
+  "train": {
+    "full": {
+      "n_samples": 75000,
+      "n_val_samples": 25000,
+      "n_features": 166,
+      "train_loss_first": 0.08563,
+      "train_loss_last": 0.00222,
+      "train_mse_Nm2": 0.0009976,
+      "val_mse_Nm2": 0.00141,
+      "val_R2_vs_zero": 0.996
+    },
+    "noetau": {
+      "n_samples": 75000,
+      "n_val_samples": 25000,
+      "n_features": 126,
+      "train_loss_first": 0.28996,
+      "train_loss_last": 0.01426,
+      "train_mse_Nm2": 0.006389,
+      "val_mse_Nm2": 0.01051,
+      "val_R2_vs_zero": 0.972
+    },
+    "nohist": {
+      "n_samples": 75000,
+      "n_val_samples": 25000,
+      "n_features": 6,
+      "train_loss_first": 0.48947,
+      "train_loss_last": 0.28262,
+      "train_mse_Nm2": 0.1016,
+      "val_mse_Nm2": 0.235,
+      "val_R2_vs_zero": 0.37
+    },
+    "dagger": {
+      "n_samples": 112500,
+      "n_dagger_samples": 37500,
+      "n_features": 166,
+      "train_loss_first": 0.0719,
+      "train_loss_last": 0.0039,
+      "val_mse_Nm2_on_direct_val_set": 0.002021
+    }
+  },
+  "results_rmse_deg": {
+    "in_distribution": {
+      "_nominal_torque_over_limit_fraction": 0.0,
+      "Direct": {
+        "rmse_deg_mean": 6.976,
+        "ci95": [
+          6.517,
+          7.381
+        ]
+      },
+      "Oracle (known xi)": {
+        "rmse_deg_mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "Learned full (hist+e_tau)": {
+        "rmse_deg_mean": 3.672,
+        "ci95": [
+          3.424,
+          3.904
+        ]
+      },
+      "Learned no e_tau": {
+        "rmse_deg_mean": 2.479,
+        "ci95": [
+          2.261,
+          2.736
+        ]
+      },
+      "Learned no history": {
+        "rmse_deg_mean": 4.834,
+        "ci95": [
+          4.539,
+          5.126
+        ]
+      },
+      "Learned full + DAgger x1": {
+        "rmse_deg_mean": 2.036,
+        "ci95": [
+          1.835,
+          2.253
+        ]
+      },
+      "Diag: Learned full x0.5": {
+        "rmse_deg_mean": 4.952,
+        "ci95": [
+          4.671,
+          5.252
+        ]
+      },
+      "Diag: Learned no e_tau x0.5": {
+        "rmse_deg_mean": 5.027,
+        "ci95": [
+          4.711,
+          5.315
+        ]
+      }
+    },
+    "velocity_2x": {
+      "_nominal_torque_over_limit_fraction": 0.1383,
+      "Direct": {
+        "rmse_deg_mean": 14.866,
+        "ci95": [
+          13.553,
+          16.046
+        ]
+      },
+      "Oracle (known xi)": {
+        "rmse_deg_mean": 5.443,
+        "ci95": [
+          4.669,
+          6.292
+        ]
+      },
+      "Learned full (hist+e_tau)": {
+        "rmse_deg_mean": 12.549,
+        "ci95": [
+          11.293,
+          13.999
+        ]
+      },
+      "Learned no e_tau": {
+        "rmse_deg_mean": 13.962,
+        "ci95": [
+          12.612,
+          15.394
+        ]
+      },
+      "Learned no history": {
+        "rmse_deg_mean": 13.998,
+        "ci95": [
+          12.718,
+          15.295
+        ]
+      },
+      "Learned full + DAgger x1": {
+        "rmse_deg_mean": 11.769,
+        "ci95": [
+          10.486,
+          13.177
+        ]
+      },
+      "Diag: Learned full x0.5": {
+        "rmse_deg_mean": 13.671,
+        "ci95": [
+          12.375,
+          15.029
+        ]
+      },
+      "Diag: Learned no e_tau x0.5": {
+        "rmse_deg_mean": 14.286,
+        "ci95": [
+          13.067,
+          15.644
+        ]
+      }
+    },
+    "position_shift": {
+      "_nominal_torque_over_limit_fraction": 0.0,
+      "Direct": {
+        "rmse_deg_mean": 4.689,
+        "ci95": [
+          4.418,
+          4.956
+        ]
+      },
+      "Oracle (known xi)": {
+        "rmse_deg_mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "Learned full (hist+e_tau)": {
+        "rmse_deg_mean": 2.023,
+        "ci95": [
+          1.855,
+          2.186
+        ]
+      },
+      "Learned no e_tau": {
+        "rmse_deg_mean": 2.841,
+        "ci95": [
+          2.663,
+          3.023
+        ]
+      },
+      "Learned no history": {
+        "rmse_deg_mean": 3.24,
+        "ci95": [
+          2.997,
+          3.474
+        ]
+      },
+      "Learned full + DAgger x1": {
+        "rmse_deg_mean": 1.365,
+        "ci95": [
+          1.242,
+          1.496
+        ]
+      },
+      "Diag: Learned full x0.5": {
+        "rmse_deg_mean": 3.142,
+        "ci95": [
+          2.92,
+          3.358
+        ]
+      },
+      "Diag: Learned no e_tau x0.5": {
+        "rmse_deg_mean": 3.551,
+        "ci95": [
+          3.329,
+          3.769
+        ]
+      }
+    },
+    "friction_2x_train_max": {
+      "_nominal_torque_over_limit_fraction": 0.0,
+      "Direct": {
+        "rmse_deg_mean": 10.236,
+        "ci95": [
+          9.661,
+          10.745
+        ]
+      },
+      "Oracle (known xi)": {
+        "rmse_deg_mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "Learned full (hist+e_tau)": {
+        "rmse_deg_mean": 6.471,
+        "ci95": [
+          6.185,
+          6.785
+        ]
+      },
+      "Learned no e_tau": {
+        "rmse_deg_mean": 4.613,
+        "ci95": [
+          4.315,
+          4.908
+        ]
+      },
+      "Learned no history": {
+        "rmse_deg_mean": 8.765,
+        "ci95": [
+          8.391,
+          9.218
+        ]
+      },
+      "Learned full + DAgger x1": {
+        "rmse_deg_mean": 3.936,
+        "ci95": [
+          3.677,
+          4.216
+        ]
+      },
+      "Diag: Learned full x0.5": {
+        "rmse_deg_mean": 8.492,
+        "ci95": [
+          8.111,
+          8.895
+        ]
+      },
+      "Diag: Learned no e_tau x0.5": {
+        "rmse_deg_mean": 8.394,
+        "ci95": [
+          8.004,
+          8.841
+        ]
+      }
+    },
+    "friction_3x_train_max": {
+      "_nominal_torque_over_limit_fraction": 0.0,
+      "Direct": {
+        "rmse_deg_mean": 11.608,
+        "ci95": [
+          10.844,
+          12.388
+        ]
+      },
+      "Oracle (known xi)": {
+        "rmse_deg_mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "Learned full (hist+e_tau)": {
+        "rmse_deg_mean": 8.414,
+        "ci95": [
+          7.938,
+          8.948
+        ]
+      },
+      "Learned no e_tau": {
+        "rmse_deg_mean": 6.54,
+        "ci95": [
+          6.104,
+          6.924
+        ]
+      },
+      "Learned no history": {
+        "rmse_deg_mean": 10.715,
+        "ci95": [
+          10.068,
+          11.373
+        ]
+      },
+      "Learned full + DAgger x1": {
+        "rmse_deg_mean": 6.595,
+        "ci95": [
+          6.181,
+          6.996
+        ]
+      },
+      "Diag: Learned full x0.5": {
+        "rmse_deg_mean": 10.373,
+        "ci95": [
+          9.787,
+          10.997
+        ]
+      },
+      "Diag: Learned no e_tau x0.5": {
+        "rmse_deg_mean": 10.069,
+        "ci95": [
+          9.455,
+          10.767
+        ]
+      }
+    },
+    "mass_1p3x": {
+      "_nominal_torque_over_limit_fraction": 0.0002,
+      "Direct": {
+        "rmse_deg_mean": 8.525,
+        "ci95": [
+          8.065,
+          8.977
+        ]
+      },
+      "Oracle (known xi)": {
+        "rmse_deg_mean": 0.014,
+        "ci95": [
+          0.0,
+          0.042
+        ]
+      },
+      "Learned full (hist+e_tau)": {
+        "rmse_deg_mean": 3.898,
+        "ci95": [
+          3.612,
+          4.189
+        ]
+      },
+      "Learned no e_tau": {
+        "rmse_deg_mean": 2.852,
+        "ci95": [
+          2.652,
+          3.087
+        ]
+      },
+      "Learned no history": {
+        "rmse_deg_mean": 6.534,
+        "ci95": [
+          6.199,
+          6.915
+        ]
+      },
+      "Learned full + DAgger x1": {
+        "rmse_deg_mean": 3.518,
+        "ci95": [
+          3.26,
+          3.767
+        ]
+      },
+      "Diag: Learned full x0.5": {
+        "rmse_deg_mean": 6.143,
+        "ci95": [
+          5.769,
+          6.541
+        ]
+      },
+      "Diag: Learned no e_tau x0.5": {
+        "rmse_deg_mean": 5.463,
+        "ci95": [
+          5.108,
+          5.813
+        ]
+      }
+    }
+  },
+  "runtime_s": 208.5
+}

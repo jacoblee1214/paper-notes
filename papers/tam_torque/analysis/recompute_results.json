@@ -1,0 +1,569 @@
+{
+  "box_counts": {
+    "Direct": [
+      10,
+      21,
+      47.6
+    ],
+    "Online SysID": [
+      12,
+      21,
+      57.1
+    ],
+    "RMA": [
+      11,
+      21,
+      52.4
+    ],
+    "TAM (w/ RMA)": [
+      14,
+      21,
+      66.7
+    ],
+    "TAM": [
+      16,
+      21,
+      76.2
+    ]
+  },
+  "box_wilson95": {
+    "Direct": [
+      28.3,
+      67.6
+    ],
+    "Online SysID": [
+      36.5,
+      75.5
+    ],
+    "RMA": [
+      32.4,
+      71.7
+    ],
+    "TAM (w/ RMA)": [
+      45.4,
+      82.8
+    ],
+    "TAM": [
+      54.9,
+      89.4
+    ]
+  },
+  "box_comparisons": [
+    {
+      "comparison": "TAM vs Direct",
+      "k1": 16,
+      "n1": 21,
+      "k2": 10,
+      "n2": 21,
+      "diff_pp": 28.6,
+      "newcombe95_pp": [
+        -0.6,
+        51.9
+      ],
+      "fisher_p": 0.1109
+    },
+    {
+      "comparison": "TAM vs Online SysID",
+      "k1": 16,
+      "n1": 21,
+      "k2": 12,
+      "n2": 21,
+      "diff_pp": 19.0,
+      "newcombe95_pp": [
+        -9.1,
+        43.5
+      ],
+      "fisher_p": 0.3264
+    },
+    {
+      "comparison": "TAM vs RMA",
+      "k1": 16,
+      "n1": 21,
+      "k2": 11,
+      "n2": 21,
+      "diff_pp": 23.8,
+      "newcombe95_pp": [
+        -4.9,
+        47.8
+      ],
+      "fisher_p": 0.1971
+    },
+    {
+      "comparison": "TAM(w/ RMA) vs RMA",
+      "k1": 14,
+      "n1": 21,
+      "k2": 11,
+      "n2": 21,
+      "diff_pp": 14.3,
+      "newcombe95_pp": [
+        -14.4,
+        40.0
+      ],
+      "fisher_p": 0.5303
+    }
+  ],
+  "box_ideal_sim": {
+    "k": 84,
+    "n": 100
+  },
+  "flip_counts": {
+    "Direct": [
+      25,
+      50,
+      50.0
+    ],
+    "Online SysID": [
+      17,
+      50,
+      34.0
+    ],
+    "TAM": [
+      36,
+      50,
+      72.0
+    ]
+  },
+  "flip_wilson95": {
+    "Direct": [
+      36.6,
+      63.4
+    ],
+    "Online SysID": [
+      22.4,
+      47.8
+    ],
+    "TAM": [
+      58.3,
+      82.5
+    ]
+  },
+  "flip_comparisons": [
+    {
+      "comparison": "TAM vs Direct",
+      "k1": 36,
+      "n1": 50,
+      "k2": 25,
+      "n2": 50,
+      "diff_pp": 22.0,
+      "newcombe95_pp": [
+        2.9,
+        39.0
+      ],
+      "fisher_p": 0.0397
+    },
+    {
+      "comparison": "TAM vs Online SysID",
+      "k1": 36,
+      "n1": 50,
+      "k2": 17,
+      "n2": 50,
+      "diff_pp": 38.0,
+      "newcombe95_pp": [
+        18.5,
+        53.6
+      ],
+      "fisher_p": 0.0003
+    }
+  ],
+  "flip_ideal_possible_n": [
+    34,
+    49,
+    68,
+    83,
+    98,
+    102
+  ],
+  "ball_welch": {
+    "TAM vs Online SysID": {
+      "t": 0.6041,
+      "p": 0.5495
+    },
+    "TAM vs Direct": {
+      "t": 5.7026,
+      "p": 0.0
+    },
+    "Online SysID vs Direct": {
+      "t": 5.785,
+      "p": 0.0
+    },
+    "TAM vs ideal sim": {
+      "t": -2.779,
+      "p": 0.0086
+    }
+  },
+  "ball_welch_if_se": {
+    "TAM vs Online SysID": {
+      "t": 0.1351,
+      "p": 0.8933
+    }
+  },
+  "ball_mean_ci95_TAM": [
+    12.24,
+    14.96
+  ],
+  "table2_welch": {
+    "hidden_reset": {
+      "TAM vs Direct": {
+        "t": -16.58,
+        "p": 7e-12
+      },
+      "TAM vs Online SysID": {
+        "t": -5.26,
+        "p": 0.00016
+      },
+      "TAM vs PhysPred": {
+        "t": -1.25,
+        "p": 0.23
+      }
+    },
+    "hidden_carried": {
+      "TAM vs Online SysID": {
+        "t": -8.61,
+        "p": 1.8e-06
+      },
+      "TAM vs PhysPred": {
+        "t": -3.11,
+        "p": 0.0088
+      }
+    },
+    "payload_reset": {
+      "TAM vs Direct": {
+        "t": -18.17,
+        "p": 1.7e-12
+      },
+      "TAM vs Online SysID": {
+        "t": -12.91,
+        "p": 1.7e-10
+      },
+      "TAM vs PhysPred": {
+        "t": -10.06,
+        "p": 8.4e-09
+      }
+    },
+    "payload_carried": {
+      "TAM vs Online SysID": {
+        "t": -16.73,
+        "p": 2.2e-11
+      },
+      "TAM vs PhysPred": {
+        "t": -19.81,
+        "p": 1.1e-13
+      }
+    }
+  },
+  "table2_tam_reset_vs_carried": {
+    "hidden": {
+      "t": 3.869,
+      "p": 0.001
+    },
+    "payload": {
+      "t": 6.397,
+      "p": 0.0
+    }
+  },
+  "table3_mean_recomputed": {
+    "Direct": 4.484,
+    "Online SysID": 1.239,
+    "TAM": 0.761,
+    "TAM sim-ft": 0.616,
+    "TAM w/o eτ": 1.641
+  },
+  "table3_mean_paper": {
+    "Direct": 4.48,
+    "Online SysID": 1.24,
+    "TAM": 0.76,
+    "TAM sim-ft": 0.62,
+    "TAM w/o eτ": 1.64
+  },
+  "table3_per_robot": [
+    {
+      "robot": "Panda",
+      "split": "Train",
+      "TAM_vs_SysID_ratio": 0.41,
+      "TAM_vs_SysID_p": 1.9e-29,
+      "TAM_vs_noEtau_p": 4.1e-41,
+      "Direct_over_TAM": 7.1
+    },
+    {
+      "robot": "Piper",
+      "split": "Train",
+      "TAM_vs_SysID_ratio": 0.63,
+      "TAM_vs_SysID_p": 7.5e-27,
+      "TAM_vs_noEtau_p": 0.36,
+      "Direct_over_TAM": 9.4
+    },
+    {
+      "robot": "iiwa14",
+      "split": "Train",
+      "TAM_vs_SysID_ratio": 0.57,
+      "TAM_vs_SysID_p": 4.5e-21,
+      "TAM_vs_noEtau_p": 3.5e-29,
+      "Direct_over_TAM": 6.6
+    },
+    {
+      "robot": "Flexiv Rizon4",
+      "split": "Train",
+      "TAM_vs_SysID_ratio": 0.63,
+      "TAM_vs_SysID_p": 1.3e-13,
+      "TAM_vs_noEtau_p": 2.3e-11,
+      "Direct_over_TAM": 4.8
+    },
+    {
+      "robot": "RBY-1",
+      "split": "Train",
+      "TAM_vs_SysID_ratio": 0.6,
+      "TAM_vs_SysID_p": 2.6e-09,
+      "TAM_vs_noEtau_p": 2.2e-37,
+      "Direct_over_TAM": 4.5
+    },
+    {
+      "robot": "Google Robot",
+      "split": "Test",
+      "TAM_vs_SysID_ratio": 0.64,
+      "TAM_vs_SysID_p": 2.8e-22,
+      "TAM_vs_noEtau_p": 5.5e-42,
+      "Direct_over_TAM": 4.5
+    },
+    {
+      "robot": "Unitree Z1",
+      "split": "Test",
+      "TAM_vs_SysID_ratio": 0.89,
+      "TAM_vs_SysID_p": 8.3e-05,
+      "TAM_vs_noEtau_p": 2.4e-126,
+      "Direct_over_TAM": 6.6
+    }
+  ],
+  "table3_ratio_summary": {
+    "train_mean_TAM_over_SysID": 0.57,
+    "test_mean_TAM_over_SysID": 0.77
+  },
+  "table3_noetau_inflation": {
+    "train_mean_ratio": 1.62,
+    "test_mean_ratio": 3.01
+  },
+  "f1_comparisons": [
+    {
+      "comparison": "Full TAM vs Direct",
+      "k1": 84,
+      "n1": 100,
+      "k2": 21,
+      "n2": 100,
+      "diff_pp": 63.0,
+      "newcombe95_pp": [
+        50.7,
+        72.0
+      ],
+      "fisher_p": 0.0
+    },
+    {
+      "comparison": "Full TAM vs No eτ",
+      "k1": 84,
+      "n1": 100,
+      "k2": 67,
+      "n2": 100,
+      "diff_pp": 17.0,
+      "newcombe95_pp": [
+        5.1,
+        28.4
+      ],
+      "fisher_p": 0.0081
+    },
+    {
+      "comparison": "Full TAM vs Privileged latent",
+      "k1": 84,
+      "n1": 100,
+      "k2": 70,
+      "n2": 100,
+      "diff_pp": 14.0,
+      "newcombe95_pp": [
+        2.3,
+        25.3
+      ],
+      "fisher_p": 0.0283
+    },
+    {
+      "comparison": "Full TAM vs History->params",
+      "k1": 84,
+      "n1": 100,
+      "k2": 59,
+      "n2": 100,
+      "diff_pp": 25.0,
+      "newcombe95_pp": [
+        12.6,
+        36.4
+      ],
+      "fisher_p": 0.0001
+    },
+    {
+      "comparison": "Full TAM vs short window",
+      "k1": 84,
+      "n1": 100,
+      "k2": 42,
+      "n2": 100,
+      "diff_pp": 42.0,
+      "newcombe95_pp": [
+        29.1,
+        52.9
+      ],
+      "fisher_p": 0.0
+    }
+  ],
+  "f3_ideal_no_tam_vs_tam": {
+    "comparison": "Ideal: with TAM vs without",
+    "k1": 84,
+    "n1": 100,
+    "k2": 84,
+    "n2": 100,
+    "diff_pp": 0.0,
+    "newcombe95_pp": [
+      -10.3,
+      10.3
+    ],
+    "fisher_p": 1.0
+  },
+  "ood_friction": {
+    "2x": {
+      "TAM": 82,
+      "Direct": 75,
+      "comp": {
+        "comparison": "2x TAM vs Direct",
+        "k1": 82,
+        "n1": 100,
+        "k2": 75,
+        "n2": 100,
+        "diff_pp": 7.0,
+        "newcombe95_pp": [
+          -4.4,
+          18.2
+        ],
+        "fisher_p": 0.3017
+      }
+    },
+    "3x": {
+      "TAM": 80,
+      "Direct": 59,
+      "comp": {
+        "comparison": "3x TAM vs Direct",
+        "k1": 80,
+        "n1": 100,
+        "k2": 59,
+        "n2": 100,
+        "diff_pp": 21.0,
+        "newcombe95_pp": [
+          8.3,
+          32.8
+        ],
+        "fisher_p": 0.002
+      }
+    }
+  },
+  "consistency_checks": [
+    {
+      "item": "box TAM - Direct (pp)",
+      "paper": 28.6,
+      "recomputed": 28.6,
+      "ok": true
+    },
+    {
+      "item": "box TAM - SysID (pp)",
+      "paper": 19.1,
+      "recomputed": 19.1,
+      "ok": true
+    },
+    {
+      "item": "box TAM(w/ RMA) - RMA (pp)",
+      "paper": 14.3,
+      "recomputed": 14.3,
+      "ok": true
+    },
+    {
+      "item": "flip TAM - Direct (pp)",
+      "paper": 22.0,
+      "recomputed": 22.0,
+      "ok": true
+    },
+    {
+      "item": "flip TAM - SysID (pp)",
+      "paper": 38.0,
+      "recomputed": 38.0,
+      "ok": true
+    },
+    {
+      "item": "flip TAM / SysID (x)",
+      "paper": 2.12,
+      "recomputed": 2.118,
+      "ok": true
+    },
+    {
+      "item": "table3 mean Direct",
+      "paper": 4.48,
+      "recomputed": 4.484,
+      "ok": true
+    },
+    {
+      "item": "table3 mean SysID",
+      "paper": 1.24,
+      "recomputed": 1.239,
+      "ok": true
+    },
+    {
+      "item": "table3 mean TAM",
+      "paper": 0.76,
+      "recomputed": 0.761,
+      "ok": true
+    },
+    {
+      "item": "table3 mean TAM sim-ft",
+      "paper": 0.62,
+      "recomputed": 0.616,
+      "ok": true
+    },
+    {
+      "item": "table3 mean noEtau (D.2)",
+      "paper": 1.64,
+      "recomputed": 1.641,
+      "ok": true
+    },
+    {
+      "item": "table2 hidden carried TAM gain (cm)",
+      "paper": 3.05,
+      "recomputed": 3.05,
+      "ok": true
+    },
+    {
+      "item": "table2 payload carried TAM vs direct (cm)",
+      "paper": 4.75,
+      "recomputed": 4.75,
+      "ok": true
+    },
+    {
+      "item": "ball TAM - SysID (goals)",
+      "paper": 0.5,
+      "recomputed": 0.5,
+      "ok": true
+    },
+    {
+      "item": "ball TAM - Direct (goals)",
+      "paper": 4.8,
+      "recomputed": 4.8,
+      "ok": true
+    },
+    {
+      "item": "F.3 ideal sim box 84/100 vs Table 1 84.0",
+      "paper": 84.0,
+      "recomputed": 84.0,
+      "ok": true
+    },
+    {
+      "item": "F.1 full TAM vs F.1 direct (pp)",
+      "paper": 63.0,
+      "recomputed": 63,
+      "ok": true
+    }
+  ],
+  "power": {
+    "box TAM 76.2 vs SysID 57.1, n per arm": 95,
+    "box TAM 76.2 vs Direct 47.6, n per arm": 45,
+    "flip TAM 72 vs SysID 34, n per arm": 26
+  }
+}
