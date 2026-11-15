@@ -1,0 +1,98 @@
+{
+  "compute": {
+    "sonic_gpu_hours": 21504,
+    "wallclock_ratio_1gpu": 56.0,
+    "wallclock_ratio_2gpu": 17.142857142857142,
+    "gpuhour_ratio_1gpu": 7168.0,
+    "gpuhour_ratio_2gpu": 1097.142857142857,
+    "gpuhour_ratio_worst_case_h100_5p5x": 1303.2727272727273,
+    "gpuhour_ratio_fp32_h100_0p74x": 5304.32,
+    "sonic_gpuh_from_paper_21000_check": 0.9765625
+  },
+  "data_ratio_611_over_264p56": 2.3094950105836105,
+  "failures": {
+    "sonic_released": {
+      "failures": 179,
+      "rate_pct": 0.1382089967107803,
+      "wilson95_pct": [
+        0.11940133133980992,
+        0.15997443249746163
+      ],
+      "clopper_pearson95_pct": [
+        0.1187141821052649,
+        0.15998815309508652
+      ]
+    },
+    "supermimic_1gpu_3h": {
+      "failures": 25,
+      "rate_pct": 0.019302932501505627,
+      "wilson95_pct": [
+        0.013075714665052902,
+        0.02849497418740865
+      ],
+      "clopper_pearson95_pct": [
+        0.012492217363000782,
+        0.02849362657451107
+      ]
+    },
+    "supermimic_2gpu_9p8h": {
+      "failures": 0,
+      "rate_pct": 0.0,
+      "wilson95_pct": [
+        0.0,
+        0.002965968887394999
+      ],
+      "clopper_pearson95_pct": [
+        0.0,
+        0.0028482070910102494
+      ]
+    },
+    "upper95_if_zero_rule_of_three_pct": 0.0023163519001806756
+  },
+  "failure_ratio_sonic_over_sm1": 7.16,
+  "fisher_independent_p": 6.603260693616364e-30,
+  "mcnemar_exact_p_range_over_overlap": {
+    "max_p": 6.911416520178858e-30,
+    "min_p": 8.758115402030107e-47,
+    "note": "o 전 범위에서 p가 모두 매우 작음. 쌍체 정보 없이도 차이는 유의하다고 볼 수 있으나, 모션별 자료가 있어야 정확한 값을 준다."
+  },
+  "tableA7": {
+    "name_filter_removed": 12553,
+    "feas_filter_removed": 153
+  },
+  "tableA8": {
+    "motions_sum": 129514,
+    "motions_expected": 129514,
+    "sonic_sum": 179,
+    "sm1_sum": 25,
+    "sm2_sum": 0,
+    "groups_where_sm1_exceeds_sonic": [],
+    "first_five_groups_motions": 195,
+    "first_five_groups_sm1_failures": 14,
+    "share_of_sm1_failures_first_five_pct": 56.0
+  },
+  "step_test": {
+    "total_expected_672": 672,
+    "rl_better": 650,
+    "distill_better": 15,
+    "distill_fell_commands": 7,
+    "sum_check": 672,
+    "sign_test_p_two_sided_650_of_665": 1.918398003924379e-170,
+    "caveat": "672개 명령은 한 정책 쌍의 격자 응답이라 독립이 아니고, 학습 시드가 1개이므로 검정은 기술적 요약으로만 쓴다."
+  },
+  "update_to_data_ratio_from_code": 0.4,
+  "policy_horizon_check": {
+    "H": 32,
+    "imagined_batch": 4096,
+    "wm_k": 8
+  },
+  "tilt_termination_deg": {
+    "anchor_etilt_0p8_deg": 78.46304096718453,
+    "velocity_1plus_uz_0p7_deg": 72.5423968762779
+  },
+  "seed_count_reported": {
+    "figures": "단일 시드(Fig 3, 4의 값)",
+    "step_test": 1,
+    "text": "several random seeds (§4)"
+  }
+}
