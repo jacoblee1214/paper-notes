@@ -1,0 +1,338 @@
+{
+ "assumptions": {
+  "n_critical_per_task": 50,
+  "reading_precision_pp": 1.0,
+  "note": "그림에서 읽은 값. 원자료 표 없음. 재계산은 근사."
+ },
+ "success_critical_n50": {
+  "screw": {
+   "base": {
+    "p": 0.2,
+    "bar": [
+     0.1,
+     0.37
+    ],
+    "wilson95": [
+     0.112,
+     0.33
+    ],
+    "count_out_of_50": 10.0
+   },
+   "rlt": {
+    "p": 0.65,
+    "bar": [
+     0.49,
+     0.81
+    ],
+    "wilson95": [
+     0.511,
+     0.767
+    ],
+    "count_out_of_50": 32.5
+   },
+   "fisher": {
+    "k_base": 10,
+    "k_rlt": 32,
+    "n": 50,
+    "p_value": 1.507542359824832e-05
+   }
+  },
+  "zip": {
+   "base": {
+    "p": 0.35,
+    "bar": [
+     0.19,
+     0.51
+    ],
+    "wilson95": [
+     0.233,
+     0.489
+    ],
+    "count_out_of_50": 17.5
+   },
+   "rlt": {
+    "p": 1.0,
+    "bar": [
+     0.88,
+     1.0
+    ],
+    "wilson95": [
+     0.929,
+     1.0
+    ],
+    "count_out_of_50": 50.0
+   },
+   "fisher": {
+    "k_base": 18,
+    "k_rlt": 50,
+    "n": 50,
+    "p_value": 2.52474835604702e-13
+   }
+  },
+  "ethernet": {
+   "base": {
+    "p": 0.98,
+    "bar": [
+     0.89,
+     1.0
+    ],
+    "wilson95": [
+     0.895,
+     0.996
+    ],
+    "count_out_of_50": 49.0
+   },
+   "rlt": {
+    "p": 1.0,
+    "bar": [
+     0.93,
+     1.0
+    ],
+    "wilson95": [
+     0.929,
+     1.0
+    ],
+    "count_out_of_50": 50.0
+   },
+   "fisher": {
+    "k_base": 49,
+    "k_rlt": 50,
+    "n": 50,
+    "p_value": 1.0
+   }
+  },
+  "charger": {
+   "base": {
+    "p": 0.8,
+    "bar": [
+     0.67,
+     0.89
+    ],
+    "wilson95": [
+     0.67,
+     0.888
+    ],
+    "count_out_of_50": 40.0
+   },
+   "rlt": {
+    "p": 1.0,
+    "bar": [
+     0.93,
+     1.0
+    ],
+    "wilson95": [
+     0.929,
+     1.0
+    ],
+    "count_out_of_50": 50.0
+   },
+   "fisher": {
+    "k_base": 40,
+    "k_rlt": 50,
+    "n": 50,
+    "p_value": 0.0011868393451716574
+   }
+  }
+ },
+ "success_full_sensitivity": {
+  "screw": {
+   "20": {
+    "k_base": 1,
+    "k_rlt": 9,
+    "n": 20,
+    "p_value": 0.00836173416818578
+   },
+   "30": {
+    "k_base": 2,
+    "k_rlt": 14,
+    "n": 30,
+    "p_value": 0.0009098128565499236
+   },
+   "50": {
+    "k_base": 4,
+    "k_rlt": 24,
+    "n": 50,
+    "p_value": 1.2252784015976553e-05
+   }
+  },
+  "zip": {
+   "20": {
+    "k_base": 5,
+    "k_rlt": 17,
+    "n": 20,
+    "p_value": 0.00032841871599911934
+   },
+   "30": {
+    "k_base": 8,
+    "k_rlt": 26,
+    "n": 30,
+    "p_value": 4.83435737816767e-06
+   },
+   "50": {
+    "k_base": 14,
+    "k_rlt": 44,
+    "n": 50,
+    "p_value": 1.1099966383394308e-09
+   }
+  }
+ },
+ "throughput_ratio": {
+  "critical": {
+   "screw": {
+    "ratio": 5.82,
+    "ratio_95": [
+     2.73,
+     12.41
+    ],
+    "base": 6.7,
+    "rlt": 39
+   },
+   "zip": {
+    "ratio": 7.06,
+    "ratio_95": [
+     4.36,
+     11.43
+    ],
+    "base": 17,
+    "rlt": 120
+   },
+   "ethernet": {
+    "ratio": 2.7,
+    "ratio_95": [
+     2.46,
+     2.96
+    ],
+    "base": 148,
+    "rlt": 400
+   },
+   "charger": {
+    "ratio": 4.44,
+    "ratio_95": [
+     3.82,
+     5.17
+    ],
+    "base": 135,
+    "rlt": 600
+   }
+  },
+  "full": {
+   "screw": {
+    "ratio": 7.94,
+    "ratio_95": [
+     1.65,
+     38.31
+    ],
+    "base": 1.7,
+    "rlt": 13.5
+   },
+   "zip": {
+    "ratio": 4.64,
+    "ratio_95": [
+     2.54,
+     8.47
+    ],
+    "base": 2.8,
+    "rlt": 13.0
+   }
+  }
+ },
+ "claim_checks": {
+  "full_task_gain_pp (본문 +40 나사, +60 지퍼타이)": {
+   "screw": {
+    "pp_gain": 40.0,
+    "relative_gain": 6.7
+   },
+   "zip": {
+    "pp_gain": 60.0,
+    "relative_gain": 3.2
+   }
+  },
+  "median_speed_ratio_base_over_rlt": 3.45,
+  "median_speed_ratio_teleop_over_rlt": 2.21,
+  "ethernet_throughput_ratio_fig4": 2.7,
+  "min_task_speed_claim": "본문은 '최대 3배'. 그림 9 중앙값 비 3.45와 일치. 처리량 비는 6–7배(성공률 증가 포함)",
+  "base_ethernet_median_below_stated_critical_range": true
+ },
+ "consistency_throughput": {
+  "base_ethernet": {
+   "episode_sec_median": 4.56,
+   "predicted_throughput": 129.0,
+   "observed": 148,
+   "obs_over_pred": 1.15
+  },
+  "rlt_ethernet": {
+   "episode_sec_median": 1.32,
+   "predicted_throughput": 455.0,
+   "observed": 400,
+   "obs_over_pred": 0.88
+  }
+ },
+ "sample_arithmetic": {
+  "15분": {
+   "transitions": 22500,
+   "updates_if_UTD_per_transition": 112500,
+   "updates_if_UTD_per_10step_chunk": 22500
+  },
+  "1시간": {
+   "transitions": 90000,
+   "updates_if_UTD_per_transition": 450000,
+   "updates_if_UTD_per_10step_chunk": 90000
+  },
+  "5시간": {
+   "transitions": 450000,
+   "updates_if_UTD_per_transition": 2250000,
+   "updates_if_UTD_per_10step_chunk": 450000
+  }
+ },
+ "episode_budget_hours": {
+  "400ep_x_5s_hours": 0.56,
+  "400ep_x_10s_hours": 1.11,
+  "400ep_x_20s_hours": 2.22,
+  "1000ep_x_5s_hours": 1.39,
+  "1000ep_x_10s_hours": 2.78,
+  "1000ep_x_20s_hours": 5.56
+ },
+ "ethernet_5min_rlt_successes": 131.0,
+ "baselines_eth_wilson": {
+  "DAgger": {
+   "succ": 1.0,
+   "wilson95": [
+    0.929,
+    1.0
+   ],
+   "thru": 270
+  },
+  "HIL-SERL": {
+   "succ": 0.0,
+   "wilson95": [
+    0.0,
+    0.071
+   ],
+   "thru": 0
+  },
+  "PLD": {
+   "succ": 0.4,
+   "wilson95": [
+    0.276,
+    0.538
+   ],
+   "thru": 45
+  },
+  "DSRL": {
+   "succ": 0.98,
+   "wilson95": [
+    0.895,
+    0.996
+   ],
+   "thru": 210
+  },
+  "RLT": {
+   "succ": 1.0,
+   "wilson95": [
+    0.929,
+    1.0
+   ],
+   "thru": 400
+  }
+ }
+}
