@@ -1,0 +1,523 @@
+{
+ "assumptions": {
+  "real": "과제당 20회, 시도 독립 가정. 같은 과제 안 상관과 시도 순서는 알 수 없음",
+  "sim_pm": "3 시드 표본 표준편차(ddof=1) 가정. 민감도로 ddof=0 환산 포함",
+  "newcombe": "두 비율 차이의 Newcombe 점수 구간",
+  "fisher": "양측 정확검정"
+ },
+ "headline_real": {
+  "base": [
+   42,
+   100
+  ],
+  "res": [
+   76,
+   100
+  ],
+  "wilson_base": [
+   0.3279838260663658,
+   0.5179351337366737
+  ],
+  "wilson_res": [
+   0.667676635719002,
+   0.8330867449211199
+  ],
+  "diff_pts": 34,
+  "newcombe_diff": [
+   0.2054084177513987,
+   0.45751020614631593
+  ],
+  "fisher_p": 1.624888130387114e-06,
+  "sim_avg_base": 7.58,
+  "sim_avg_res": 17.22,
+  "real_avg_base_per20": 8.4,
+  "real_avg_res_per20": 15.2
+ },
+ "real_per_task": [
+  {
+   "task": "Cube Lift",
+   "base": [
+    7,
+    20
+   ],
+   "res": [
+    17,
+    20
+   ],
+   "diff": 10,
+   "wilson_base": [
+    0.18119182312398308,
+    0.5671457249315559
+   ],
+   "wilson_res": [
+    0.6395811333571357,
+    0.9476312545132735
+   ],
+   "newcombe_diff": [
+    0.19762876245363803,
+    0.6950078522471344
+   ],
+   "fisher_p": 0.0030564491076170725
+  },
+  {
+   "task": "Pick-and-Place",
+   "base": [
+    9,
+    20
+   ],
+   "res": [
+    16,
+    20
+   ],
+   "diff": 7,
+   "wilson_base": [
+    0.25819785703764037,
+    0.6579146589808726
+   ],
+   "wilson_res": [
+    0.583982565906683,
+    0.9193423379822393
+   ],
+   "newcombe_diff": [
+    0.05017999190949057,
+    0.5758996584327221
+   ],
+   "fisher_p": 0.04837206505727084
+  },
+  {
+   "task": "Stack Cube",
+   "base": [
+    7,
+    20
+   ],
+   "res": [
+    15,
+    20
+   ],
+   "diff": 8,
+   "wilson_base": [
+    0.18119182312398308,
+    0.5671457249315559
+   ],
+   "wilson_res": [
+    0.5312991206074114,
+    0.8881382993000237
+   ],
+   "newcombe_diff": [
+    0.09180794866975794,
+    0.6181247127532952
+   ],
+   "fisher_p": 0.02484172037782329
+  },
+  {
+   "task": "Close Drawer",
+   "base": [
+    14,
+    20
+   ],
+   "res": [
+    20,
+    20
+   ],
+   "diff": 6,
+   "wilson_base": [
+    0.4810271799475211,
+    0.8545227559784271
+   ],
+   "wilson_res": [
+    0.8388748398148705,
+    1.0
+   ],
+   "newcombe_diff": [
+    0.07675439677375023,
+    0.5189728200524789
+   ],
+   "fisher_p": 0.020196020196020202
+  },
+  {
+   "task": "Stand Cup Up",
+   "base": [
+    5,
+    20
+   ],
+   "res": [
+    8,
+    20
+   ],
+   "diff": 3,
+   "wilson_base": [
+    0.11186170069997625,
+    0.46870087939258864
+   ],
+   "wilson_res": [
+    0.21880653127178018,
+    0.6134185007652458
+   ],
+   "newcombe_diff": [
+    -0.13400906280760827,
+    0.4042236145647925
+   ],
+   "fisher_p": 0.5006034160650401
+  }
+ ],
+ "sign_test_all_positive_5_tasks_p_two_sided": 0.0625,
+ "wilcoxon_diffs": [
+  10,
+  7,
+  8,
+  6,
+  3
+ ],
+ "power": {
+  "n_per_arm_0.35_to_0.75": 24,
+  "n_per_arm_0.42_to_0.76": 32,
+  "n_per_arm_0.90_to_0.50": 20
+ },
+ "ablation_vs_ours": [
+  {
+   "setting": "w/o noise injection",
+   "k_per_100": 69,
+   "diff_vs_ours_pts": -7,
+   "newcombe_diff_vs_ours": [
+    -0.05361610525637722,
+    0.19086259680520168
+   ],
+   "fisher_p_vs_ours": 0.34208226725935337
+  },
+  {
+   "setting": "w/o pose dropout",
+   "k_per_100": 58,
+   "diff_vs_ours_pts": -18,
+   "newcombe_diff_vs_ours": [
+    0.0496520814989872,
+    0.3022005020578271
+   ],
+   "fisher_p_vs_ours": 0.010299936671770652
+  },
+  {
+   "setting": "w/o both",
+   "k_per_100": 52,
+   "diff_vs_ours_pts": -24,
+   "newcombe_diff_vs_ours": [
+    0.10727441449848624,
+    0.3613199861705064
+   ],
+   "fisher_p_vs_ours": 0.000652758984814734
+  },
+  {
+   "setting": "Distillation-based",
+   "k_per_100": 46,
+   "diff_vs_ours_pts": -30,
+   "newcombe_diff_vs_ours": [
+    0.16583257403260057,
+    0.41937967328793435
+   ],
+   "fisher_p_vs_ours": 2.225425503501717e-05
+  },
+  {
+   "setting": "Image-based",
+   "k_per_100": 47,
+   "diff_vs_ours_pts": -29,
+   "newcombe_diff_vs_ours": [
+    0.15600659108818682,
+    0.40977533134354693
+   ],
+   "fisher_p_vs_ours": 4.086203440402347e-05
+  }
+ ],
+ "observation_space": [
+  {
+   "setting": "Distillation-based",
+   "per_task": [
+    {
+     "task": "Cube Lift",
+     "ours": 17,
+     "other": 9,
+     "fisher_p": 0.018701126042616593
+    },
+    {
+     "task": "Pick-and-Place",
+     "ours": 16,
+     "other": 4,
+     "fisher_p": 0.0003599673667865379
+    },
+    {
+     "task": "Stack Cube",
+     "ours": 15,
+     "other": 8,
+     "fisher_p": 0.05355099259437413
+    },
+    {
+     "task": "Close Drawer",
+     "ours": 20,
+     "other": 20,
+     "fisher_p": 1.0
+    },
+    {
+     "task": "Stand Cup Up",
+     "ours": 8,
+     "other": 5,
+     "fisher_p": 0.5006034160650401
+    }
+   ]
+  },
+  {
+   "setting": "Image-based",
+   "per_task": [
+    {
+     "task": "Cube Lift",
+     "ours": 17,
+     "other": 8,
+     "fisher_p": 0.007911693673651403
+    },
+    {
+     "task": "Pick-and-Place",
+     "ours": 16,
+     "other": 10,
+     "fisher_p": 0.09584556748071765
+    },
+    {
+     "task": "Stack Cube",
+     "ours": 15,
+     "other": 9,
+     "fisher_p": 0.10534026796540702
+    },
+    {
+     "task": "Close Drawer",
+     "ours": 20,
+     "other": 14,
+     "fisher_p": 0.020196020196020202
+    },
+    {
+     "task": "Stand Cup Up",
+     "ours": 8,
+     "other": 6,
+     "fisher_p": 0.7410536231448357
+    }
+   ]
+  }
+ ],
+ "tier_table7": {
+  "Tier1 base (GR00T-N1.5)": [
+   7,
+   9
+  ],
+  "Tier1 + residual": [
+   17,
+   16
+  ],
+  "Tier2 base (pi0.5)": [
+   18,
+   17
+  ],
+  "Tier2 + residual": [
+   19,
+   17
+  ]
+ },
+ "tier_checks": {
+  "tier1_sim_fisher_p": 0.0030564491076170725,
+  "tier1_real_fisher_p": 0.04837206505727084,
+  "tier2_sim_fisher_p": 1.0,
+  "tier2_real_fisher_p": 1.0,
+  "tier1_real_ratio": 1.7777777777777777,
+  "tier1_sim_ratio": 2.4285714285714284
+ },
+ "pi05_fig6a": {
+  "per_task": {
+   "Close": [
+    12,
+    18
+   ],
+   "Lift": [
+    6,
+    11
+   ],
+   "Stand": [
+    7,
+    13
+   ]
+  },
+  "pooled_base": [
+   25,
+   60
+  ],
+  "pooled_res": [
+   42,
+   60
+  ],
+  "fisher_p_pooled": 0.0030950506203099733,
+  "newcombe_diff": [
+   0.10574950373793729,
+   0.4371717097032253
+  ]
+ },
+ "sft_fig6c": {
+  "values_pct": {
+   "Base (no SFT)": 42,
+   "SFT on base rollouts": 47,
+   "SFT on residual rollouts": 59
+  },
+  "n_assumed_for_sensitivity": 100,
+  "fisher_p_base_rollouts_vs_res_rollouts_if_n100": 0.11891015597940426,
+  "note": "SFT 시도 수와 반복 시드 수가 보고되지 않아 유의성 판단 불가"
+ },
+ "sim_table1": [
+  {
+   "task": "Cube Lift",
+   "base": [
+    4.3,
+    0.6
+   ],
+   "res": [
+    20.0,
+    0.0
+   ],
+   "welch_ddof1": "sd=0 (검정 생략, 천장 효과)",
+   "ci95_halfwidth_base": 1.4904826270317273,
+   "ci95_halfwidth_res": 0.0
+  },
+  {
+   "task": "Pick-and-Place",
+   "base": [
+    7.0,
+    2.6
+   ],
+   "res": [
+    17.0,
+    2.0
+   ],
+   "welch_ddof1": {
+    "t": -5.280250078565722,
+    "p_two_sided": 0.007354386263293599
+   },
+   "welch_if_ddof0": {
+    "t": -4.311306135592269,
+    "p_two_sided": 0.014385152342183202
+   },
+   "ci95_halfwidth_base": 6.45875805047082,
+   "ci95_halfwidth_res": 4.968275423439091
+  },
+  {
+   "task": "Stack Cube",
+   "base": [
+    10.0,
+    1.0
+   ],
+   "res": [
+    14.7,
+    0.6
+   ],
+   "welch_ddof1": {
+    "t": -6.980540177985553,
+    "p_two_sided": 0.004509363125701002
+   },
+   "welch_if_ddof0": {
+    "t": -5.699587188353824,
+    "p_two_sided": 0.008404362856446973
+   },
+   "ci95_halfwidth_base": 2.4841377117195456,
+   "ci95_halfwidth_res": 1.4904826270317273
+  },
+  {
+   "task": "Close Drawer",
+   "base": [
+    11.3,
+    3.2
+   ],
+   "res": [
+    19.7,
+    0.6
+   ],
+   "welch_ddof1": {
+    "t": -4.468759483431024,
+    "p_two_sided": 0.041064951013102015
+   },
+   "welch_if_ddof0": {
+    "t": -3.6487268392097825,
+    "p_two_sided": 0.06096774760246411
+   },
+   "ci95_halfwidth_base": 7.949240677502547,
+   "ci95_halfwidth_res": 1.4904826270317273
+  },
+  {
+   "task": "Stand Cup Up",
+   "base": [
+    5.3,
+    1.2
+   ],
+   "res": [
+    14.7,
+    1.2
+   ],
+   "welch_ddof1": {
+    "t": -9.59383482590078,
+    "p_two_sided": 0.0006597249944085065
+   },
+   "welch_if_ddof0": {
+    "t": -7.833333333333332,
+    "p_two_sided": 0.0014341486339467938
+   },
+   "ci95_halfwidth_base": 2.9809652540634546,
+   "ci95_halfwidth_res": 2.9809652540634546
+  }
+ ],
+ "consistency": {
+  "sim_base_avg_from_tasks": 7.58,
+  "sim_res_avg_from_tasks": 17.22,
+  "paper_sim_base_avg": 7.6,
+  "paper_sim_res_avg": 17.2,
+  "paper_real_base_avg": 8.4,
+  "paper_real_res_avg": 15.2,
+  "real_base_avg_from_tasks": 8.4,
+  "real_res_avg_from_tasks": 15.2,
+  "fig6b_real_distill_equals_table2b_sum": true,
+  "fig6b_real_image_equals_table2b_sum": true,
+  "table7_tier1_pnp_matches_table1": true,
+  "table2a_ours_equals_table1_real_res": true,
+  "fig6c_base_42_equals_real_base": true,
+  "fig7b_reduction_claim_9_to_22pct": "figure readings -9,-22,-15,-13,-10 %, consistent"
+ },
+ "sim_real_structure": {
+  "base_sim_pct": [
+   21.5,
+   35.0,
+   50.0,
+   56.5,
+   26.5
+  ],
+  "base_real_pct": [
+   35.0,
+   45.0,
+   35.0,
+   70.0,
+   25.0
+  ],
+  "base_gap_sim_minus_real_pts": [
+   -13.5,
+   -10.0,
+   15.0,
+   -13.5,
+   1.5
+  ],
+  "pearson_base_sim_vs_real": 0.7143120072044086,
+  "pearson_base_sim_vs_real_p": 0.17523640781850114,
+  "gain_sim_pts": [
+   78.5,
+   50.0,
+   23.5,
+   42.0,
+   47.0
+  ],
+  "gain_real_pts": [
+   50.0,
+   35.0,
+   40.0,
+   30.0,
+   15.0
+  ],
+  "pearson_gain_sim_vs_real": 0.37620134860022303,
+  "pearson_gain_sim_vs_real_p": 0.532556932158182,
+  "note": "과제 5개뿐이라 상관의 검정력이 매우 낮다"
+ }
+}
