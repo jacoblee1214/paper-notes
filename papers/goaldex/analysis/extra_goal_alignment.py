@@ -19,7 +19,7 @@
 - 진단: 무작위 자세 쌍에서 임베딩 코사인과 각도의 상관, 그리고 대칭 등가 상태(정육면체에서는 영상이 같다)에서의
   학생 명령 크기를 잰다.
 
-실행: .venv/bin/python -I analysis/extra_goal_alignment.py  (torch, mujoco, scipy, matplotlib; CPU 6 프로세스, 프로세스당 스레드 2)
+실행: python3 -I analysis/extra_goal_alignment.py  (torch, mujoco, scipy, matplotlib; CPU 6 프로세스, 프로세스당 스레드 2)
 출력: analysis/extra_goal_alignment_results.json, report/figures/own_goal_alignment_*.png
 """
 import json

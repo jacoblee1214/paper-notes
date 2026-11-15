@@ -21,6 +21,8 @@
 | `analysis/plot_figures.py` | 그래프 네 장 생성 |
 | `analysis/extra_goal_alignment.py` | 손 모델(MuJoCo)에서 목표 정렬 손실만 바꾼 소규모 비교. 손 모델은 별도로 받아야 함(아래 명령) |
 | `analysis/extra_goal_alignment_results.json` | 위 비교의 집계 결과(CS, 검정, 임베딩 진단) |
+| `analysis/extra_goal_alignment_sweep.py` | 보조 손실의 인코더 기울기 노름을 행동 손실과 맞춘 뒤 InfoNCE 온도와 연속 대조 α를 바꾼 민감도 비교 |
+| `analysis/extra_goal_alignment_sweep_results.json` | 위 민감도 비교의 집계와 시드별 CS |
 
 ## 재실행
 
@@ -38,8 +40,11 @@ python3 analysis/plot_figures.py
 
 ```bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/google-deepmind/mujoco_menagerie.git data/menagerie
+git -C data/menagerie fetch --depth 1 origin 370c43965323c0944b433b202aac5058b5f907a9
+git -C data/menagerie checkout 370c43965323c0944b433b202aac5058b5f907a9
 git -C data/menagerie sparse-checkout set wonik_allegro
 python3 analysis/extra_goal_alignment.py
+python3 analysis/extra_goal_alignment_sweep.py   # 민감도 비교, CPU 한 프로세스 약 86분
 ```
 
 ## 출처와 라이선스
