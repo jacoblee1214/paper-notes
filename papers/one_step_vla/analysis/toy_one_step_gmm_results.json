@@ -1,0 +1,154 @@
+{
+  "setup": {
+    "s": 0.2,
+    "n_samples": 20000,
+    "seed": 0,
+    "target": "0.5 N(-d/2,s^2)+0.5 N(d/2,s^2)",
+    "field": "exact E[x1-x0 | x_t] for rectified flow (closed form, no training)"
+  },
+  "one_step_collapse_check_d4": {
+    "x0": [
+      0.1257,
+      -0.1321,
+      0.6404,
+      0.1049,
+      -0.5357
+    ],
+    "one_step_output": [
+      0.0,
+      0.0,
+      0.0,
+      -0.0,
+      -0.0
+    ]
+  },
+  "rows": [
+    {
+      "d": 0.0,
+      "d_over_s": 0.0,
+      "W1_one_step_vs_target": 0.1608,
+      "W1_10step_vs_target": 0.0379,
+      "W1_1000step_vs_target": 0.0032,
+      "one_step_output_std": 0.0,
+      "one_step_output_mean": 0.0,
+      "target_std": 0.2014,
+      "mode_coverage_one_step": {
+        "any_mode": 1.0,
+        "min_mode": 1.0
+      },
+      "mode_coverage_1000step": {
+        "any_mode": 0.9973,
+        "min_mode": 0.9973
+      },
+      "excess_percent_1000step_path_median": 0.943,
+      "excess_percent_1000step_path_sumratio": 0.943,
+      "endpoint_error_1step_over_chord": 0.2492
+    },
+    {
+      "d": 0.5,
+      "d_over_s": 2.5,
+      "W1_one_step_vs_target": 0.2704,
+      "W1_10step_vs_target": 0.0416,
+      "W1_1000step_vs_target": 0.0027,
+      "one_step_output_std": 0.0,
+      "one_step_output_mean": 0.0,
+      "target_std": 0.3201,
+      "mode_coverage_one_step": {
+        "any_mode": 1.0,
+        "min_mode": 1.0
+      },
+      "mode_coverage_1000step": {
+        "any_mode": 0.999,
+        "min_mode": 0.8439
+      },
+      "excess_percent_1000step_path_median": 11.99,
+      "excess_percent_1000step_path_sumratio": 7.591,
+      "endpoint_error_1step_over_chord": 0.5115
+    },
+    {
+      "d": 1.0,
+      "d_over_s": 5.0,
+      "W1_one_step_vs_target": 0.4992,
+      "W1_10step_vs_target": 0.0441,
+      "W1_1000step_vs_target": 0.0053,
+      "one_step_output_std": 0.0,
+      "one_step_output_mean": -0.0,
+      "target_std": 0.5368,
+      "mode_coverage_one_step": {
+        "any_mode": 1.0,
+        "min_mode": 1.0
+      },
+      "mode_coverage_1000step": {
+        "any_mode": 0.999,
+        "min_mode": 0.5082
+      },
+      "excess_percent_1000step_path_median": 88.689,
+      "excess_percent_1000step_path_sumratio": 56.487,
+      "endpoint_error_1step_over_chord": 1.4516
+    },
+    {
+      "d": 2.0,
+      "d_over_s": 10.0,
+      "W1_one_step_vs_target": 0.9988,
+      "W1_10step_vs_target": 0.0493,
+      "W1_1000step_vs_target": 0.0117,
+      "one_step_output_std": 0.0,
+      "one_step_output_mean": 0.0,
+      "target_std": 1.0187,
+      "mode_coverage_one_step": {
+        "any_mode": 0.0,
+        "min_mode": 0.0
+      },
+      "mode_coverage_1000step": {
+        "any_mode": 0.99795,
+        "min_mode": 0.49725
+      },
+      "excess_percent_1000step_path_median": 66.206,
+      "excess_percent_1000step_path_sumratio": 72.263,
+      "endpoint_error_1step_over_chord": 2.5381
+    },
+    {
+      "d": 3.0,
+      "d_over_s": 15.0,
+      "W1_one_step_vs_target": 1.4994,
+      "W1_10step_vs_target": 0.0491,
+      "W1_1000step_vs_target": 0.0069,
+      "one_step_output_std": 0.0,
+      "one_step_output_mean": 0.0,
+      "target_std": 1.513,
+      "mode_coverage_one_step": {
+        "any_mode": 0.0,
+        "min_mode": 0.0
+      },
+      "mode_coverage_1000step": {
+        "any_mode": 0.998,
+        "min_mode": 0.49725
+      },
+      "excess_percent_1000step_path_median": 25.006,
+      "excess_percent_1000step_path_sumratio": 31.242,
+      "endpoint_error_1step_over_chord": 2.0119
+    },
+    {
+      "d": 4.0,
+      "d_over_s": 20.0,
+      "W1_one_step_vs_target": 2.0022,
+      "W1_10step_vs_target": 0.063,
+      "W1_1000step_vs_target": 0.0157,
+      "one_step_output_std": 0.0,
+      "one_step_output_mean": 0.0,
+      "target_std": 2.012,
+      "mode_coverage_one_step": {
+        "any_mode": 0.0,
+        "min_mode": 0.0
+      },
+      "mode_coverage_1000step": {
+        "any_mode": 0.998,
+        "min_mode": 0.49725
+      },
+      "excess_percent_1000step_path_median": 10.122,
+      "excess_percent_1000step_path_sumratio": 13.532,
+      "endpoint_error_1step_over_chord": 1.6546
+    }
+  ],
+  "note": "Euler N=1 은 x0 + v(x0, 0) 이며 v(x0,0)=E[x1]-x0 이므로 출력은 x0 에 무관하게 E[x1]=0 이다. 표 값은 이 식과 맞는지 확인한다."
+}

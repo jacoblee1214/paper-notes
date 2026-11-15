@@ -1,0 +1,875 @@
+{
+  "source": "arXiv:2610.30735v1, Tables 1, 2, 3, A1, C1, E2",
+  "method_note": "모든 구간은 독립 표본 Newcombe(Wilson 90%)로 계산. 논문은 쌍체 Newcombe(상관 항 phi 포함)을 쓰므로 여기 구간은 보수적(넓음)이다. 쌍체 b, c 개수는 논문에 없어 계산할 수 없다.",
+  "table2_cells_with_known_n": 19,
+  "table2_verdict_counts_independent_ci": {
+    "equivalent": 10,
+    "different": 3,
+    "inconclusive": 6
+  },
+  "table2_rows": [
+    {
+      "model": "DiT",
+      "metric": "LIBERO SGO",
+      "ref": 89.9,
+      "one_step": 91.9,
+      "n": 1500,
+      "delta_pp_ref_minus_1step": -2.0,
+      "ci90_pp_independent": [
+        -3.73,
+        -0.27
+      ],
+      "verdict_independent_ci": "inconclusive"
+    },
+    {
+      "model": "DiT",
+      "metric": "LIBERO-10",
+      "ref": 68.4,
+      "one_step": 53.8,
+      "n": 500,
+      "delta_pp_ref_minus_1step": 14.6,
+      "ci90_pp_independent": [
+        9.54,
+        19.55
+      ],
+      "verdict_independent_ci": "different"
+    },
+    {
+      "model": "SmolVLA",
+      "metric": "LIBERO SGO",
+      "ref": 72.2,
+      "one_step": 82.0,
+      "n": 1500,
+      "delta_pp_ref_minus_1step": -9.8,
+      "ci90_pp_independent": [
+        -12.3,
+        -7.29
+      ],
+      "verdict_independent_ci": "different"
+    },
+    {
+      "model": "SmolVLA",
+      "metric": "LIBERO-10",
+      "ref": 34.6,
+      "one_step": 44.2,
+      "n": 500,
+      "delta_pp_ref_minus_1step": -9.6,
+      "ci90_pp_independent": [
+        -14.61,
+        -4.52
+      ],
+      "verdict_independent_ci": "different"
+    },
+    {
+      "model": "X-VLA",
+      "metric": "LIBERO SGO",
+      "ref": 97.6,
+      "one_step": 97.3,
+      "n": 1500,
+      "delta_pp_ref_minus_1step": 0.3,
+      "ci90_pp_independent": [
+        -0.66,
+        1.26
+      ],
+      "verdict_independent_ci": "equivalent"
+    },
+    {
+      "model": "X-VLA",
+      "metric": "LIBERO-10",
+      "ref": 96.2,
+      "one_step": 96.0,
+      "n": 500,
+      "delta_pp_ref_minus_1step": 0.2,
+      "ci90_pp_independent": [
+        -1.87,
+        2.27
+      ],
+      "verdict_independent_ci": "equivalent"
+    },
+    {
+      "model": "X-VLA",
+      "metric": "CALVIN SR@5",
+      "ref": 71.0,
+      "one_step": 70.0,
+      "n": 1000,
+      "delta_pp_ref_minus_1step": 1.0,
+      "ci90_pp_independent": [
+        -2.35,
+        4.35
+      ],
+      "verdict_independent_ci": "inconclusive"
+    },
+    {
+      "model": "X-VLA",
+      "metric": "RoboTwin clean",
+      "ref": 65.5,
+      "one_step": 65.1,
+      "n": 5000,
+      "delta_pp_ref_minus_1step": 0.4,
+      "ci90_pp_independent": [
+        -1.17,
+        1.97
+      ],
+      "verdict_independent_ci": "equivalent"
+    },
+    {
+      "model": "X-VLA",
+      "metric": "RoboTwin rand.",
+      "ref": 24.3,
+      "one_step": 23.3,
+      "n": 5000,
+      "delta_pp_ref_minus_1step": 1.0,
+      "ci90_pp_independent": [
+        -0.4,
+        2.4
+      ],
+      "verdict_independent_ci": "equivalent"
+    },
+    {
+      "model": "FLOWER",
+      "metric": "LIBERO SGO",
+      "ref": 97.3,
+      "one_step": 96.5,
+      "n": 1500,
+      "delta_pp_ref_minus_1step": 0.8,
+      "ci90_pp_independent": [
+        -0.25,
+        1.86
+      ],
+      "verdict_independent_ci": "equivalent"
+    },
+    {
+      "model": "FLOWER",
+      "metric": "LIBERO-10",
+      "ref": 89.6,
+      "one_step": 83.6,
+      "n": 500,
+      "delta_pp_ref_minus_1step": 6.0,
+      "ci90_pp_independent": [
+        2.46,
+        9.55
+      ],
+      "verdict_independent_ci": "inconclusive"
+    },
+    {
+      "model": "FLOWER",
+      "metric": "CALVIN SR@5",
+      "ref": 78.5,
+      "one_step": 75.5,
+      "n": 1000,
+      "delta_pp_ref_minus_1step": 3.0,
+      "ci90_pp_independent": [
+        -0.1,
+        6.09
+      ],
+      "verdict_independent_ci": "inconclusive"
+    },
+    {
+      "model": "pi0.5",
+      "metric": "LIBERO SGO",
+      "ref": 98.5,
+      "one_step": 98.9,
+      "n": 1500,
+      "delta_pp_ref_minus_1step": -0.4,
+      "ci90_pp_independent": [
+        -1.11,
+        0.29
+      ],
+      "verdict_independent_ci": "equivalent"
+    },
+    {
+      "model": "pi0.5",
+      "metric": "LIBERO-10",
+      "ref": 94.4,
+      "one_step": 94.4,
+      "n": 500,
+      "delta_pp_ref_minus_1step": 0.0,
+      "ci90_pp_independent": [
+        -2.43,
+        2.43
+      ],
+      "verdict_independent_ci": "equivalent"
+    },
+    {
+      "model": "LAP",
+      "metric": "LIBERO SGO",
+      "ref": 97.7,
+      "one_step": 98.8,
+      "n": 1500,
+      "delta_pp_ref_minus_1step": -1.1,
+      "ci90_pp_independent": [
+        -1.92,
+        -0.31
+      ],
+      "verdict_independent_ci": "equivalent"
+    },
+    {
+      "model": "LAP",
+      "metric": "LIBERO-10",
+      "ref": 90.2,
+      "one_step": 92.0,
+      "n": 500,
+      "delta_pp_ref_minus_1step": -1.8,
+      "ci90_pp_independent": [
+        -4.79,
+        1.18
+      ],
+      "verdict_independent_ci": "inconclusive"
+    },
+    {
+      "model": "XR-0",
+      "metric": "LIBERO SGO",
+      "ref": 97.3,
+      "one_step": 97.0,
+      "n": 1500,
+      "delta_pp_ref_minus_1step": 0.3,
+      "ci90_pp_independent": [
+        -0.71,
+        1.32
+      ],
+      "verdict_independent_ci": "equivalent"
+    },
+    {
+      "model": "XR-0",
+      "metric": "LIBERO-10",
+      "ref": 96.8,
+      "one_step": 97.4,
+      "n": 500,
+      "delta_pp_ref_minus_1step": -0.6,
+      "ci90_pp_independent": [
+        -2.43,
+        1.2
+      ],
+      "verdict_independent_ci": "equivalent"
+    },
+    {
+      "model": "XR-0",
+      "metric": "CALVIN SR@5",
+      "ref": 87.2,
+      "one_step": 88.1,
+      "n": 1000,
+      "delta_pp_ref_minus_1step": -0.9,
+      "ci90_pp_independent": [
+        -3.33,
+        1.52
+      ],
+      "verdict_independent_ci": "inconclusive"
+    }
+  ],
+  "table2_text_counts": {
+    "equivalent": 23,
+    "1-step better": 2,
+    "multi-step better": 4,
+    "inconclusive": 7,
+    "total": 36
+  },
+  "table3_tasks": [
+    {
+      "task": "Spoon->Drawer",
+      "model": "DiT",
+      "ref": 33,
+      "one_step": 32,
+      "net_count_ref_minus_1step": 1,
+      "reported_ci90": [
+        -8.2,
+        10.2
+      ],
+      "independent_newcombe_ci90": [
+        -9.8,
+        11.8
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 1.0
+    },
+    {
+      "task": "Spoon->Drawer",
+      "model": "X-VLA",
+      "ref": 0,
+      "one_step": 0,
+      "net_count_ref_minus_1step": 0,
+      "reported_ci90": [
+        -2.6,
+        2.6
+      ],
+      "independent_newcombe_ci90": [
+        -2.6,
+        2.6
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 1.0
+    },
+    {
+      "task": "Spoon->Drawer",
+      "model": "FLOWER",
+      "ref": 46,
+      "one_step": 50,
+      "net_count_ref_minus_1step": -4,
+      "reported_ci90": [
+        -13.8,
+        5.9
+      ],
+      "independent_newcombe_ci90": [
+        -15.4,
+        7.5
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.125
+    },
+    {
+      "task": "Spoon->Drawer",
+      "model": "pi0.5",
+      "ref": 88,
+      "one_step": 90,
+      "net_count_ref_minus_1step": -2,
+      "reported_ci90": [
+        -7.8,
+        3.7
+      ],
+      "independent_newcombe_ci90": [
+        -9.5,
+        5.4
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.5
+    },
+    {
+      "task": "Spoon->Drawer",
+      "model": "LAP",
+      "ref": 75,
+      "one_step": 73,
+      "net_count_ref_minus_1step": 2,
+      "reported_ci90": [
+        -4.8,
+        8.8
+      ],
+      "independent_newcombe_ci90": [
+        -8.2,
+        12.1
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.5
+    },
+    {
+      "task": "Spoon->Drawer",
+      "model": "XR-0",
+      "ref": 73,
+      "one_step": 69,
+      "net_count_ref_minus_1step": 4,
+      "reported_ci90": [
+        -3.1,
+        11.1
+      ],
+      "independent_newcombe_ci90": [
+        -6.5,
+        14.4
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.125
+    },
+    {
+      "task": "Open Drawer",
+      "model": "DiT",
+      "ref": 59,
+      "one_step": 64,
+      "net_count_ref_minus_1step": -5,
+      "reported_ci90": [
+        -13.5,
+        3.6
+      ],
+      "independent_newcombe_ci90": [
+        -16.1,
+        6.3
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.0625
+    },
+    {
+      "task": "Open Drawer",
+      "model": "X-VLA",
+      "ref": 68,
+      "one_step": 72,
+      "net_count_ref_minus_1step": -4,
+      "reported_ci90": [
+        -9.5,
+        1.4
+      ],
+      "independent_newcombe_ci90": [
+        -14.5,
+        6.6
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.125
+    },
+    {
+      "task": "Open Drawer",
+      "model": "FLOWER",
+      "ref": 81,
+      "one_step": 97,
+      "net_count_ref_minus_1step": -16,
+      "reported_ci90": [
+        -22.9,
+        -10.0
+      ],
+      "independent_newcombe_ci90": [
+        -23.5,
+        -9.0
+      ],
+      "starred_reported": true,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 3.0517578125e-05
+    },
+    {
+      "task": "Open Drawer",
+      "model": "pi0.5",
+      "ref": 78,
+      "one_step": 77,
+      "net_count_ref_minus_1step": 1,
+      "reported_ci90": [
+        -3.8,
+        5.8
+      ],
+      "independent_newcombe_ci90": [
+        -8.7,
+        10.7
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 1.0
+    },
+    {
+      "task": "Open Drawer",
+      "model": "LAP",
+      "ref": 78,
+      "one_step": 76,
+      "net_count_ref_minus_1step": 2,
+      "reported_ci90": [
+        -3.0,
+        7.1
+      ],
+      "independent_newcombe_ci90": [
+        -7.8,
+        11.7
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.5
+    },
+    {
+      "task": "Open Drawer",
+      "model": "XR-0",
+      "ref": 81,
+      "one_step": 83,
+      "net_count_ref_minus_1step": -2,
+      "reported_ci90": [
+        -6.7,
+        2.5
+      ],
+      "independent_newcombe_ci90": [
+        -11.0,
+        7.0
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.5
+    },
+    {
+      "task": "Open Oven",
+      "model": "DiT",
+      "ref": 0,
+      "one_step": 1,
+      "net_count_ref_minus_1step": -1,
+      "reported_ci90": [
+        -4.4,
+        1.7
+      ],
+      "independent_newcombe_ci90": [
+        -4.4,
+        1.7
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 1.0
+    },
+    {
+      "task": "Open Oven",
+      "model": "X-VLA",
+      "ref": 0,
+      "one_step": 0,
+      "net_count_ref_minus_1step": 0,
+      "reported_ci90": [
+        -2.6,
+        2.6
+      ],
+      "independent_newcombe_ci90": [
+        -2.6,
+        2.6
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 1.0
+    },
+    {
+      "task": "Open Oven",
+      "model": "FLOWER",
+      "ref": 20,
+      "one_step": 31,
+      "net_count_ref_minus_1step": -11,
+      "reported_ci90": [
+        -20.0,
+        -1.8
+      ],
+      "independent_newcombe_ci90": [
+        -20.9,
+        -0.8
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.0009765625
+    },
+    {
+      "task": "Open Oven",
+      "model": "pi0.5",
+      "ref": 63,
+      "one_step": 73,
+      "net_count_ref_minus_1step": -10,
+      "reported_ci90": [
+        -19.7,
+        -0.1
+      ],
+      "independent_newcombe_ci90": [
+        -20.5,
+        0.8
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.001953125
+    },
+    {
+      "task": "Open Oven",
+      "model": "LAP",
+      "ref": 56,
+      "one_step": 47,
+      "net_count_ref_minus_1step": 9,
+      "reported_ci90": [
+        1.1,
+        16.7
+      ],
+      "independent_newcombe_ci90": [
+        -2.6,
+        20.3
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.00390625
+    },
+    {
+      "task": "Open Oven",
+      "model": "XR-0",
+      "ref": 42,
+      "one_step": 42,
+      "net_count_ref_minus_1step": 0,
+      "reported_ci90": [
+        -9.6,
+        9.6
+      ],
+      "independent_newcombe_ci90": [
+        -11.3,
+        11.3
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 1.0
+    },
+    {
+      "task": "Close Oven",
+      "model": "DiT",
+      "ref": 22,
+      "one_step": 23,
+      "net_count_ref_minus_1step": -1,
+      "reported_ci90": [
+        -7.2,
+        5.2
+      ],
+      "independent_newcombe_ci90": [
+        -10.7,
+        8.7
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 1.0
+    },
+    {
+      "task": "Close Oven",
+      "model": "X-VLA",
+      "ref": 49,
+      "one_step": 50,
+      "net_count_ref_minus_1step": -1,
+      "reported_ci90": [
+        -7.5,
+        5.5
+      ],
+      "independent_newcombe_ci90": [
+        -12.5,
+        10.5
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 1.0
+    },
+    {
+      "task": "Close Oven",
+      "model": "FLOWER",
+      "ref": 92,
+      "one_step": 75,
+      "net_count_ref_minus_1step": 17,
+      "reported_ci90": [
+        9.4,
+        24.8
+      ],
+      "independent_newcombe_ci90": [
+        8.5,
+        25.4
+      ],
+      "starred_reported": true,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 1.52587890625e-05
+    },
+    {
+      "task": "Close Oven",
+      "model": "pi0.5",
+      "ref": 87,
+      "one_step": 74,
+      "net_count_ref_minus_1step": 13,
+      "reported_ci90": [
+        6.4,
+        19.9
+      ],
+      "independent_newcombe_ci90": [
+        3.8,
+        22.0
+      ],
+      "starred_reported": true,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.000244140625
+    },
+    {
+      "task": "Close Oven",
+      "model": "LAP",
+      "ref": 88,
+      "one_step": 86,
+      "net_count_ref_minus_1step": 2,
+      "reported_ci90": [
+        -2.6,
+        6.8
+      ],
+      "independent_newcombe_ci90": [
+        -6.0,
+        10.0
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 0.5
+    },
+    {
+      "task": "Close Oven",
+      "model": "XR-0",
+      "ref": 88,
+      "one_step": 88,
+      "net_count_ref_minus_1step": 0,
+      "reported_ci90": [
+        -5.3,
+        5.3
+      ],
+      "independent_newcombe_ci90": [
+        -7.7,
+        7.7
+      ],
+      "starred_reported": false,
+      "min_exact_mcnemar_p_if_all_discordant_one_sided": 1.0
+    }
+  ],
+  "table3_reported_ci_reproduced_within_1.5pp": "7/24",
+  "table3_pooled": [
+    {
+      "model": "DiT",
+      "ref_mean_of_tasks": 28.5,
+      "ref_reported": 28.5,
+      "one_step_mean_of_tasks": 30.0,
+      "one_step_reported": 30.0,
+      "delta_pp": -1.5,
+      "ci90_independent_pp": [
+        -6.8,
+        3.8
+      ],
+      "ci90_reported_pp": [
+        -5.0,
+        2.0
+      ]
+    },
+    {
+      "model": "X-VLA",
+      "ref_mean_of_tasks": 29.25,
+      "ref_reported": 29.2,
+      "one_step_mean_of_tasks": 30.5,
+      "one_step_reported": 30.5,
+      "delta_pp": -1.25,
+      "ci90_independent_pp": [
+        -6.6,
+        4.1
+      ],
+      "ci90_reported_pp": [
+        -3.4,
+        0.9
+      ]
+    },
+    {
+      "model": "FLOWER",
+      "ref_mean_of_tasks": 59.75,
+      "ref_reported": 59.8,
+      "one_step_mean_of_tasks": 63.25,
+      "one_step_reported": 63.2,
+      "delta_pp": -3.5,
+      "ci90_independent_pp": [
+        -9.1,
+        2.2
+      ],
+      "ci90_reported_pp": [
+        -7.7,
+        0.7
+      ]
+    },
+    {
+      "model": "pi0.5",
+      "ref_mean_of_tasks": 79.0,
+      "ref_reported": 79.0,
+      "one_step_mean_of_tasks": 78.5,
+      "one_step_reported": 78.5,
+      "delta_pp": 0.5,
+      "ci90_independent_pp": [
+        -4.3,
+        5.3
+      ],
+      "ci90_reported_pp": [
+        -3.0,
+        4.0
+      ]
+    },
+    {
+      "model": "LAP",
+      "ref_mean_of_tasks": 74.25,
+      "ref_reported": 74.2,
+      "one_step_mean_of_tasks": 70.5,
+      "one_step_reported": 70.5,
+      "delta_pp": 3.75,
+      "ci90_independent_pp": [
+        -1.5,
+        8.9
+      ],
+      "ci90_reported_pp": [
+        0.7,
+        6.8
+      ]
+    },
+    {
+      "model": "XR-0",
+      "ref_mean_of_tasks": 71.0,
+      "ref_reported": 71.0,
+      "one_step_mean_of_tasks": 70.5,
+      "one_step_reported": 70.5,
+      "delta_pp": 0.5,
+      "ci90_independent_pp": [
+        -4.8,
+        5.8
+      ],
+      "ci90_reported_pp": [
+        -2.9,
+        3.9
+      ]
+    }
+  ],
+  "consistency_issues": [
+    {
+      "item": "pi0.5 LIBERO+ SGO",
+      "table2": [
+        86.4,
+        86.3
+      ],
+      "tableE2": [
+        86.3,
+        86.2
+      ]
+    },
+    {
+      "item": "pi0.5 LIBERO+ 10",
+      "table2": [
+        77.6,
+        76.1
+      ],
+      "tableE2": [
+        77.7,
+        76.3
+      ]
+    },
+    {
+      "item": "FLOWER CALVIN SR@5 (H=10)",
+      "table2": [
+        78.5,
+        75.5
+      ],
+      "tableC1": [
+        79.5,
+        77.0
+      ]
+    },
+    {
+      "item": "FLOWER CALVIN avg len (H=10)",
+      "table2": [
+        4.51,
+        4.43
+      ],
+      "tableC1": [
+        4.55,
+        4.43
+      ]
+    },
+    {
+      "item": "LAP LIBERO SGO |1-step − ref|",
+      "value_pp": 1.1,
+      "text_claim": "within a percentage point (Sec 4.1)",
+      "consistent": false
+    }
+  ],
+  "table1_speedup_check": {
+    "DiT": {
+      "recomputed": 2.0,
+      "reported": 2.0,
+      "ok": true
+    },
+    "SmolVLA": {
+      "recomputed": 4.79,
+      "reported": 4.8,
+      "ok": true
+    },
+    "X-VLA": {
+      "recomputed": 3.07,
+      "reported": 3.1,
+      "ok": true
+    },
+    "FLOWER": {
+      "recomputed": 2.33,
+      "reported": 2.3,
+      "ok": true
+    },
+    "pi0.5": {
+      "recomputed": 1.6,
+      "reported": 1.6,
+      "ok": true
+    },
+    "LAP": {
+      "recomputed": 1.71,
+      "reported": 1.7,
+      "ok": true
+    },
+    "XR-0": {
+      "recomputed": 1.89,
+      "reported": 1.9,
+      "ok": true
+    }
+  },
+  "tableA1_smolvla_ratio": {
+    "vs_min": 9.8,
+    "vs_max": 3.7,
+    "text_claim": "3-4x (Sec A.2)"
+  },
+  "scale_checks": {
+    "LIBERO trials per variant": 2000,
+    "RoboTwin paired episodes per regime": 5000,
+    "real-world rollouts": 4800,
+    "real-world pooled n": 400
+  }
+}
