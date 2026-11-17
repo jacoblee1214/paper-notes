@@ -1,0 +1,30 @@
+{
+  "assumption": "rollout ~ clip(N(mean, s), 0, 100), 5 rollouts per condition, Welch t, 20000 reps",
+  "by_sd": {
+    "5": {
+      "welch_p_lt_0.05_rate": 1.0,
+      "mean_gap_pp": 35.8
+    },
+    "10": {
+      "welch_p_lt_0.05_rate": 0.998,
+      "mean_gap_pp": 33.9
+    },
+    "15": {
+      "welch_p_lt_0.05_rate": 0.904,
+      "mean_gap_pp": 32.0
+    },
+    "20": {
+      "welch_p_lt_0.05_rate": 0.664,
+      "mean_gap_pp": 30.2
+    },
+    "25": {
+      "welch_p_lt_0.05_rate": 0.461,
+      "mean_gap_pp": 28.5
+    },
+    "30": {
+      "welch_p_lt_0.05_rate": 0.323,
+      "mean_gap_pp": 27.1
+    }
+  },
+  "note": "논문은 Variation #1의 rollout별 값과 SD를 보고하지 않는다. 이 토이는 SD 가정에 따라 37 pp 차이가 5회 반복으로 유의하게 보일 가능성을 보여 줄 뿐이며, 실제 p값이 아니다."
+}
