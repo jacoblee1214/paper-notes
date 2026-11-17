@@ -1,0 +1,96 @@
+{
+  "s_rew_m": [
+    0.14,
+    0.03,
+    0.03
+  ],
+  "keypoint_scale_code": 1.5,
+  "cases": {
+    "paper_eps_1cm": {
+      "eps_m": 0.01,
+      "theta_worst_deg": 7.84,
+      "theta_median_deg": 8.13,
+      "theta_best_deg": 27.27,
+      "axis_worst": [
+        -0.226,
+        -0.97,
+        0.085
+      ]
+    },
+    "paper_eps_5cm": {
+      "eps_m": 0.05,
+      "theta_worst_deg": 39.97,
+      "theta_median_deg": 41.52,
+      "theta_best_deg": 180.0,
+      "axis_worst": [
+        -0.226,
+        -0.97,
+        0.085
+      ]
+    },
+    "paper_eps_10cm": {
+      "eps_m": 0.1,
+      "theta_worst_deg": 86.25,
+      "theta_median_deg": 90.3,
+      "theta_best_deg": 180.0,
+      "axis_worst": [
+        -0.226,
+        -0.97,
+        0.085
+      ]
+    },
+    "code_effective_1cm_x1.5": {
+      "eps_m": 0.015,
+      "theta_worst_deg": 11.77,
+      "theta_median_deg": 12.21,
+      "theta_best_deg": 41.41,
+      "axis_worst": [
+        -0.226,
+        -0.97,
+        0.085
+      ]
+    },
+    "code_curriculum_start_2cm_x1.5": {
+      "eps_m": 0.03,
+      "theta_worst_deg": 23.67,
+      "theta_median_deg": 24.56,
+      "theta_best_deg": 90.0,
+      "axis_worst": [
+        -0.226,
+        -0.97,
+        0.085
+      ]
+    }
+  },
+  "monotone_all_axes_sampled": true,
+  "keypoint_sign_pattern": [
+    [
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      -1.0,
+      -1.0
+    ],
+    [
+      -1.0,
+      1.0,
+      -1.0
+    ],
+    [
+      -1.0,
+      -1.0,
+      1.0
+    ]
+  ],
+  "analytic_short_axis_deg": {
+    "paper_eps_1cm": 8.01,
+    "paper_eps_5cm": 40.88,
+    "paper_eps_10cm": 88.6,
+    "code_effective_1cm_x1.5": 12.03,
+    "code_curriculum_start_2cm_x1.5": 24.19
+  },
+  "note": "최악 축은 가장 긴 키포인트 반경을 쓰는 방향이 아니라, 반경이 가장 작은 방향에서 나온다. θ* = 2 asin(ε/(2r)), r = 키포인트 반경. 수치와 해석해가 같은지 확인한다."
+}

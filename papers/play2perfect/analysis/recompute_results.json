@@ -1,0 +1,231 @@
+{
+  "source": "arXiv:2606.26428v4 (2026-10-15); v3 values from v3 Table 1",
+  "real_wilson_v4": {
+    "Tight 10mm": {
+      "k": 10,
+      "n": 10,
+      "p": 1.0,
+      "ci95": [
+        0.722,
+        1.0
+      ]
+    },
+    "Tight 2mm": {
+      "k": 9,
+      "n": 10,
+      "p": 0.9,
+      "ci95": [
+        0.596,
+        0.982
+      ]
+    },
+    "Tight 0.5mm": {
+      "k": 6,
+      "n": 10,
+      "p": 0.6,
+      "ci95": [
+        0.313,
+        0.832
+      ]
+    },
+    "Beam Step1 (end-to-end)": {
+      "k": 16,
+      "n": 20,
+      "p": 0.8,
+      "ci95": [
+        0.584,
+        0.919
+      ]
+    },
+    "Beam Step2 | Step1 ok": {
+      "k": 12,
+      "n": 16,
+      "p": 0.75,
+      "ci95": [
+        0.505,
+        0.898
+      ]
+    },
+    "Beam overall (12/20)": {
+      "k": 12,
+      "n": 20,
+      "p": 0.6,
+      "ci95": [
+        0.387,
+        0.781
+      ]
+    },
+    "Screw Insert": {
+      "k": 7,
+      "n": 10,
+      "p": 0.7,
+      "ci95": [
+        0.397,
+        0.892
+      ]
+    },
+    "Screw | Insert ok": {
+      "k": 5,
+      "n": 7,
+      "p": 0.714,
+      "ci95": [
+        0.359,
+        0.918
+      ]
+    },
+    "Screw overall (5/10, 유도)": {
+      "k": 5,
+      "n": 10,
+      "p": 0.5,
+      "ci95": [
+        0.237,
+        0.763
+      ]
+    }
+  },
+  "rollout_accounting": {
+    "rollouts_by_task": {
+      "tight": 30,
+      "beam": 20,
+      "screw": 10
+    },
+    "rollouts_total": 60,
+    "failures_by_task": {
+      "tight": 5,
+      "beam": 8,
+      "screw": 5
+    },
+    "failures_total": 18,
+    "fig10_categories": {
+      "timeout": 6,
+      "drop_insertion": 5,
+      "drop_reorientation": 3,
+      "pose_tracking": 4
+    },
+    "fig10_total": 18,
+    "note": "본문 60회 / 실패 18회와 일치하는지 확인. 표 1 tight 10mm·2mm·0.5mm는 각 10회로 가정."
+  },
+  "v3_to_v4_changes": {
+    "Beam Step1": {
+      "v3": "8/10 (80%), 6.9±1.9 s",
+      "v4": "16/20 (80%), 시간 21.0±8.9 s (Beam 합산으로 보임)"
+    },
+    "Beam Step2": {
+      "v3": "7/10 (70%), 6.4±2.5 s (단계별 독립 평가)",
+      "v4": "12/16 (75%), Step1 성공 조건부 (연속 실행)"
+    },
+    "Screw": {
+      "v3": "insert 7/10, screw 5/10, 15.6±2.9 s",
+      "v4": "insert 7/10, screw 5/7 조건부, 15.6±2.9 s"
+    },
+    "note": "비율은 두 판본에서 거의 같지만 시행 수와 평가 방식이 바뀌었다. 판본 간 재현 여부는 확인 불가."
+  },
+  "v3_wilson_beam_step1_8_10": [
+    0.49,
+    0.943
+  ],
+  "v3_wilson_beam_step2_7_10": [
+    0.397,
+    0.892
+  ],
+  "fisher_p2p_vs_playonly": {
+    "10mm": {
+      "n2=5, k2=3": 0.0952,
+      "n2=10, k2=6": 0.0867,
+      "n2=20, k2=12": 0.0288
+    },
+    "2mm": {
+      "n2=5, k2=1": 0.017,
+      "n2=10, k2=2": 0.0055,
+      "n2=20, k2=4": 0.0004
+    },
+    "0.5mm": {
+      "n2=5, k2=0": 0.044,
+      "n2=10, k2=0": 0.0108,
+      "n2=20, k2=0": 0.0004
+    }
+  },
+  "speedup_arithmetic": {
+    "ratio_if_scratch_100h": 25.0,
+    "ratio_if_scratch_132h": 33.0,
+    "scratch_h_needed_for_33x": 132.0,
+    "play_pretrain_gpu_h_single_gpu": 168.0,
+    "finetune_gpu_h_one_task_budget": 24.0,
+    "p2p_total_h_incl_pretrain_one_task": 172.0,
+    "breakeven_tasks_vs_scratch_100h": 1.75,
+    "note": "33x는 scratch 약 132 h를 가정해야 나온다. 본문은 '100 h 이상'이라 25x 이상만 확인된다. 사전학습 168 h를 포함하면 한 과제에서는 불리하고 약 2과제부터 유리하다(부록 H 기준, 가정: 과제당 미세조정 4 h)."
+  },
+  "sample_efficiency_claim": "초록은 '33x more sample-efficient'라 하지만 본문 근거는 벽시계 시간이다(Fig. 5, 4.1). 샘플 수는 보고하지 않는다.",
+  "claim_checks": {
+    "abstract_0.5mm_60pct": {
+      "k": 6,
+      "n": 10,
+      "ci95": [
+        0.313,
+        0.832
+      ]
+    },
+    "abstract_screw_over_50pct": {
+      "k": 5,
+      "n": 10,
+      "p": 0.5,
+      "ci95": [
+        0.237,
+        0.763
+      ],
+      "verdict": "점추정이 정확히 50%이고 구간이 50%를 포함한다. '50% 초과'는 근거가 약하다."
+    },
+    "abstract_multipart_over_50pct": {
+      "k": 12,
+      "n": 20,
+      "ci95": [
+        0.387,
+        0.781
+      ]
+    }
+  },
+  "clearance_geometry": {
+    "peg_mm": [
+      30,
+      20
+    ],
+    "hole_for_1mm": [
+      31,
+      21
+    ],
+    "hole_for_40mm": [
+      70,
+      60
+    ],
+    "hole_for_0p2mm": [
+      30.2,
+      20.2
+    ],
+    "note": "클리어런스는 치수 차이(양쪽 합)로 정의됨. 한쪽 간극은 절반이다."
+  },
+  "obs_dim_sum": {
+    "terms": {
+      "joint_pos": 29,
+      "joint_vel": 29,
+      "prev_action_targets": 29,
+      "palm_pos": 3,
+      "palm_rot": 4,
+      "object_rot": 4,
+      "fingertip_pos_rel_palm": 15,
+      "keypoints_rel_palm": 12,
+      "keypoints_rel_goal": 12,
+      "object_scales": 3
+    },
+    "sum": 140,
+    "paper": 140,
+    "match": true
+  },
+  "compute": {
+    "pretrain_envs": 24576,
+    "pretrain_days": 7,
+    "finetune_envs": 12288,
+    "finetune_days": 1,
+    "pretrain_gpu_h": 168,
+    "note": "단일 A6000 가정(부록 H). 환경 수 24,576은 SAPG 블록 4,096의 배수라 저장소 제약과 맞는다."
+  }
+}
