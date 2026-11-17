@@ -1,0 +1,352 @@
+{
+  "real_percent_not_k_over_30": [
+    {
+      "method": "only-Center",
+      "metric": "TR",
+      "object": "L-block",
+      "reported": 54,
+      "nearest_k_over_30": 53.3,
+      "k": 16
+    },
+    {
+      "method": "only-Center",
+      "metric": "TR",
+      "object": "Triangle",
+      "reported": 54,
+      "nearest_k_over_30": 53.3,
+      "k": 16
+    }
+  ],
+  "real_pooled_ci_pct_k": {
+    "only-WH|TR": [
+      0.0,
+      0.0,
+      4.1,
+      0
+    ],
+    "only-WH|SR": [
+      0.0,
+      0.0,
+      4.1,
+      0
+    ],
+    "only-Center|TR": [
+      54.4,
+      44.2,
+      64.3,
+      49
+    ],
+    "only-Center|SR": [
+      13.3,
+      7.8,
+      21.9,
+      12
+    ],
+    "S-A RL|TR": [
+      46.7,
+      36.7,
+      56.9,
+      42
+    ],
+    "S-A RL|SR": [
+      24.4,
+      16.7,
+      34.2,
+      22
+    ],
+    "Proposed|TR": [
+      72.2,
+      62.2,
+      80.4,
+      65
+    ],
+    "Proposed|SR": [
+      50.0,
+      39.9,
+      60.1,
+      45
+    ]
+  },
+  "real_tests_pooled": {
+    "Proposed vs S-A RL | TR": {
+      "diff_pp": 25.6,
+      "newcombe95_pp": [
+        11.2,
+        38.5
+      ],
+      "p_fisher": 0.00078,
+      "p_chi2": 0.00048
+    },
+    "Proposed vs S-A RL | SR": {
+      "diff_pp": 25.6,
+      "newcombe95_pp": [
+        11.5,
+        38.3
+      ],
+      "p_fisher": 0.00064,
+      "p_chi2": 0.00039
+    },
+    "Proposed vs only-Center | TR": {
+      "diff_pp": 17.8,
+      "newcombe95_pp": [
+        3.7,
+        30.9
+      ],
+      "p_fisher": 0.02,
+      "p_chi2": 0.013
+    },
+    "Proposed vs only-Center | SR": {
+      "diff_pp": 36.7,
+      "newcombe95_pp": [
+        23.4,
+        48.2
+      ],
+      "p_fisher": 1.6e-07,
+      "p_chi2": 1.2e-07
+    }
+  },
+  "real_per_object_SR_proposed_vs_SA": {
+    "Cube": {
+      "proposed_k": 19,
+      "sa_rl_k": 10,
+      "p_fisher": 0.038
+    },
+    "L-block": {
+      "proposed_k": 13,
+      "sa_rl_k": 6,
+      "p_fisher": 0.095
+    },
+    "Triangle": {
+      "proposed_k": 13,
+      "sa_rl_k": 6,
+      "p_fisher": 0.095
+    }
+  },
+  "text_check": {
+    "proposed_TR_mean_vs_text_approx70": 72.0,
+    "proposed_SR_mean_vs_text_approx50": 49.7,
+    "sa_rl_SR_mean_vs_text_approx24": 24.3,
+    "only_center_TR_mean": 55.0
+  },
+  "sim_tests": {
+    "seen|TR|Proposed vs S-A RL": {
+      "diff_pp": 11.77,
+      "ci95": [
+        8.6,
+        14.94
+      ],
+      "welch_p": 0.0035
+    },
+    "seen|TR|Proposed vs only-Center": {
+      "diff_pp": 2.9,
+      "ci95": [
+        -1.03,
+        6.83
+      ],
+      "welch_p": 0.088
+    },
+    "seen|TR|Proposed vs w/o-PF": {
+      "diff_pp": 77.84,
+      "ci95": [
+        74.8,
+        80.88
+      ],
+      "welch_p": 5.9e-05
+    },
+    "seen|SR|Proposed vs S-A RL": {
+      "diff_pp": 20.63,
+      "ci95": [
+        18.89,
+        22.37
+      ],
+      "welch_p": 2.5e-05
+    },
+    "seen|SR|Proposed vs only-Center": {
+      "diff_pp": 2.86,
+      "ci95": [
+        1.31,
+        4.41
+      ],
+      "welch_p": 0.0083
+    },
+    "seen|SR|Proposed vs w/o-PF": {
+      "diff_pp": 75.2,
+      "ci95": [
+        73.03,
+        77.37
+      ],
+      "welch_p": 2.4e-06
+    },
+    "unseen|TR|Proposed vs S-A RL": {
+      "diff_pp": 13.45,
+      "ci95": [
+        9.14,
+        17.76
+      ],
+      "welch_p": 0.0031
+    },
+    "unseen|TR|Proposed vs only-Center": {
+      "diff_pp": 1.78,
+      "ci95": [
+        -1.39,
+        4.95
+      ],
+      "welch_p": 0.17
+    },
+    "unseen|TR|Proposed vs w/o-PF": {
+      "diff_pp": 77.17,
+      "ci95": [
+        73.11,
+        81.23
+      ],
+      "welch_p": 2.4e-05
+    },
+    "unseen|SR|Proposed vs S-A RL": {
+      "diff_pp": 19.39,
+      "ci95": [
+        14.74,
+        24.04
+      ],
+      "welch_p": 0.00092
+    },
+    "unseen|SR|Proposed vs only-Center": {
+      "diff_pp": 4.11,
+      "ci95": [
+        1.51,
+        6.71
+      ],
+      "welch_p": 0.018
+    },
+    "unseen|SR|Proposed vs w/o-PF": {
+      "diff_pp": 76.94,
+      "ci95": [
+        73.88,
+        80.0
+      ],
+      "welch_p": 4.2e-07
+    }
+  },
+  "sim_note": "seed 3개, SD 0.2~2.3 pp. 같은 평가 설정이면 차이 1 pp 이상은 SD가 0.5일 때 검정이 가능하지만 seed 간 변동이 SD로 충분히 잡혔는지는 3개로 알 수 없다.",
+  "page_real_means": {
+    "Proposed": {
+      "TR": 76.4,
+      "SR": 52.8
+    },
+    "S-A RL": {
+      "TR": 61.1,
+      "SR": 31.8
+    },
+    "Only-Center": {
+      "TR": 45.7,
+      "SR": 14.4
+    }
+  },
+  "page_vs_arxiv_v1_SR_mean_diff": 3.2,
+  "page_360_nonint_check": {
+    "proposed_SR_cube_x360": 218.16
+  },
+  "sim_sd_vs_binomial": {
+    "seen|TR|w/o-PF": {
+      "reported_sd": 1.27,
+      "binomial_se_1000": 1.03,
+      "sd_below_binomial": false
+    },
+    "seen|TR|only-WH": {
+      "reported_sd": 0.6,
+      "binomial_se_1000": 0.86,
+      "sd_below_binomial": true
+    },
+    "seen|TR|only-Center": {
+      "reported_sd": 1.62,
+      "binomial_se_1000": 1.06,
+      "sd_below_binomial": false
+    },
+    "seen|TR|S-A RL": {
+      "reported_sd": 1.32,
+      "binomial_se_1000": 1.31,
+      "sd_below_binomial": false
+    },
+    "seen|TR|Proposed": {
+      "reported_sd": 0.21,
+      "binomial_se_1000": 0.95,
+      "sd_below_binomial": true
+    },
+    "seen|SR|w/o-PF": {
+      "reported_sd": 1.04,
+      "binomial_se_1000": 0.9,
+      "sd_below_binomial": false
+    },
+    "seen|SR|only-WH": {
+      "reported_sd": 0.51,
+      "binomial_se_1000": 0.72,
+      "sd_below_binomial": true
+    },
+    "seen|SR|only-Center": {
+      "reported_sd": 0.76,
+      "binomial_se_1000": 1.23,
+      "sd_below_binomial": true
+    },
+    "seen|SR|S-A RL": {
+      "reported_sd": 0.85,
+      "binomial_se_1000": 1.52,
+      "sd_below_binomial": true
+    },
+    "seen|SR|Proposed": {
+      "reported_sd": 0.5,
+      "binomial_se_1000": 1.16,
+      "sd_below_binomial": true
+    },
+    "unseen|TR|w/o-PF": {
+      "reported_sd": 1.9,
+      "binomial_se_1000": 1.03,
+      "sd_below_binomial": false
+    },
+    "unseen|TR|only-WH": {
+      "reported_sd": 0.35,
+      "binomial_se_1000": 0.76,
+      "sd_below_binomial": true
+    },
+    "unseen|TR|only-Center": {
+      "reported_sd": 1.53,
+      "binomial_se_1000": 1.05,
+      "sd_below_binomial": false
+    },
+    "unseen|TR|S-A RL": {
+      "reported_sd": 2.0,
+      "binomial_se_1000": 1.35,
+      "sd_below_binomial": false
+    },
+    "unseen|TR|Proposed": {
+      "reported_sd": 0.79,
+      "binomial_se_1000": 0.98,
+      "sd_below_binomial": true
+    },
+    "unseen|SR|w/o-PF": {
+      "reported_sd": 1.46,
+      "binomial_se_1000": 0.85,
+      "sd_below_binomial": false
+    },
+    "unseen|SR|only-WH": {
+      "reported_sd": 0.17,
+      "binomial_se_1000": 0.62,
+      "sd_below_binomial": true
+    },
+    "unseen|SR|only-Center": {
+      "reported_sd": 0.38,
+      "binomial_se_1000": 1.25,
+      "sd_below_binomial": true
+    },
+    "unseen|SR|S-A RL": {
+      "reported_sd": 2.25,
+      "binomial_se_1000": 1.5,
+      "sd_below_binomial": false
+    },
+    "unseen|SR|Proposed": {
+      "reported_sd": 1.17,
+      "binomial_se_1000": 1.13,
+      "sd_below_binomial": false
+    }
+  },
+  "sim_sd_below_binomial_count": 10,
+  "sim_sd_total": 20
+}
