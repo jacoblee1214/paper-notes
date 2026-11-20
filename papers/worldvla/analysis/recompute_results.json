@@ -1,0 +1,164 @@
+{
+  "table2_mean_check": {
+    "Diffusion Policy": {
+      "mean_of_4": 72.4,
+      "reported": 72.4,
+      "match": true
+    },
+    "Octo": {
+      "mean_of_4": 75.08,
+      "reported": 75.1,
+      "match": true
+    },
+    "DiT Policy": {
+      "mean_of_4": 82.42,
+      "reported": 82.4,
+      "match": true
+    },
+    "OpenVLA-OFT": {
+      "mean_of_4": 95.4,
+      "reported": 95.4,
+      "match": true
+    },
+    "OpenVLA": {
+      "mean_of_4": 76.5,
+      "reported": 76.5,
+      "match": true
+    },
+    "WorldVLA 256": {
+      "mean_of_4": 79.05,
+      "reported": 79.1,
+      "match": true
+    },
+    "WorldVLA 512": {
+      "mean_of_4": 81.8,
+      "reported": 81.8,
+      "match": true
+    }
+  },
+  "table3_mean_check": {
+    "1": {
+      "mean_of_4": 62.75,
+      "reported": 62.8,
+      "match": true
+    },
+    "2": {
+      "mean_of_4": 67.15,
+      "reported": 67.2,
+      "match": true
+    },
+    "3": {
+      "mean_of_4": 54.02,
+      "reported": 54.0,
+      "match": true
+    },
+    "4": {
+      "mean_of_4": 76.6,
+      "reported": 76.6,
+      "match": true
+    },
+    "5": {
+      "mean_of_4": 78.1,
+      "reported": 78.1,
+      "match": true
+    }
+  },
+  "table4_fvd_change_pct": {
+    "10 frames": 2.04,
+    "50 frames": -6.19
+  },
+  "intro_fvd_claim_10pct_supported": false,
+  "table6_mean_check": {
+    "w/o WM pretrain": {
+      "mean_of_4": 62.75,
+      "reported": 62.8
+    },
+    "w/ WM pretrain": {
+      "mean_of_4": 66.77,
+      "reported": 66.8
+    }
+  },
+  "per_task_95CI_halfwidth_pp": {
+    "0.5": 13.9,
+    "0.7": 12.7,
+    "0.85": 9.9,
+    "0.95": 6.0
+  },
+  "significance_avg_200_trials": {
+    "T3 row1 vs row2 (WM 추가, 체킹 없음) avg": {
+      "diff_pp": 4.4,
+      "z": 0.92,
+      "p_two_sided": 0.3563
+    },
+    "T3 row4 vs row5 (WM 추가, 체킹+마스크) avg": {
+      "diff_pp": 1.5,
+      "z": 0.36,
+      "p_two_sided": 0.7201
+    },
+    "T3 row3 vs row4 (마스크 효과, 체킹) avg": {
+      "diff_pp": 22.6,
+      "z": 4.75,
+      "p_two_sided": 0.0
+    },
+    "T2 WorldVLA256 vs OpenVLA avg (교차 논문 비교)": {
+      "diff_pp": 2.6,
+      "z": 0.63,
+      "p_two_sided": 0.5316
+    }
+  },
+  "mask_effect_per_suite": {
+    "Spatial": {
+      "diff_pp": 45.1,
+      "z": 4.59,
+      "p": 0.0
+    },
+    "Long": {
+      "diff_pp": 32.4,
+      "z": 3.44,
+      "p": 0.0006
+    }
+  },
+  "wm_effect_no_chunk_per_suite": {
+    "Goal": {
+      "diff_pp": 5.8,
+      "z": 0.63,
+      "p": 0.5261
+    },
+    "Object": {
+      "diff_pp": 5.1,
+      "z": 0.72,
+      "p": 0.4696
+    },
+    "Spatial": {
+      "diff_pp": 2.4,
+      "z": 0.29,
+      "p": 0.7683
+    },
+    "Long": {
+      "diff_pp": 4.3,
+      "z": 0.5,
+      "p": 0.6202
+    }
+  },
+  "claims": {
+    "intro: 'same backbone action model +4% (grasping SR)'": {
+      "table3_row2_minus_row1_avg": 4.4
+    },
+    "intro: 'naive chunking decreases SR 10-50%'": {
+      "row3_minus_row1_per_suite": {
+        "Goal": 12.3,
+        "Object": 0.0,
+        "Spatial": -41.1,
+        "Long": -6.1
+      },
+      "note": "Goal은 오히려 +12.3pp, Object는 0. 감소는 Spatial(-41.1)과 Long(-6.1)에 집중"
+    },
+    "intro: 'mask gives 4% to 23% improvement'": {
+      "row4_minus_row3_avg": 22.6
+    },
+    "Table 5 default (2 frames, w/ chunking) = 84.4": {
+      "matches_row4_Goal_SR": true,
+      "matches_row5_avg": false
+    }
+  }
+}
