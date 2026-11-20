@@ -1,0 +1,442 @@
+{
+  "n_tasks": 50,
+  "table3": {
+    "Fast-WAM": {
+      "clean_mean": 91.88,
+      "rand_mean": 91.78,
+      "clean_stated": 91.88,
+      "rand_stated": 91.78,
+      "avg_of_both": 91.83
+    },
+    "Fast-WAM-Joint": {
+      "clean_mean": 90.84,
+      "rand_mean": 90.32,
+      "clean_stated": 90.84,
+      "rand_stated": 90.32,
+      "avg_of_both": 90.58
+    },
+    "Fast-WAM-IDM": {
+      "clean_mean": 91.16,
+      "rand_mean": 91.34,
+      "clean_stated": 91.16,
+      "rand_stated": 91.34,
+      "avg_of_both": 91.25
+    },
+    "w.o.video-co-train": {
+      "clean_mean": 82.76,
+      "rand_mean": 84.8,
+      "clean_stated": 82.76,
+      "rand_stated": 84.8,
+      "avg_of_both": 83.78
+    },
+    "LingBot-VA": {
+      "clean_mean": 92.9,
+      "rand_mean": 91.5,
+      "clean_stated": 92.9,
+      "rand_stated": 91.5,
+      "avg_of_both": 92.2
+    },
+    "pi0.5": {
+      "clean_mean": 82.74,
+      "rand_mean": 76.76,
+      "clean_stated": 82.74,
+      "rand_stated": 76.76,
+      "avg_of_both": 79.75
+    },
+    "Motus": {
+      "clean_mean": 88.66,
+      "rand_mean": 87.02,
+      "clean_stated": 88.66,
+      "rand_stated": 87.02,
+      "avg_of_both": 87.84
+    }
+  },
+  "checks": {},
+  "table1_check": {
+    "Fast-WAM": {
+      "recomputed": 91.83,
+      "stated": 91.8,
+      "ok_at_0.05": true
+    },
+    "Fast-WAM-Joint": {
+      "recomputed": 90.58,
+      "stated": 90.6,
+      "ok_at_0.05": true
+    },
+    "Fast-WAM-IDM": {
+      "recomputed": 91.25,
+      "stated": 91.3,
+      "ok_at_0.05": true
+    },
+    "w.o.video-co-train": {
+      "recomputed": 83.78,
+      "stated": 83.8,
+      "ok_at_0.05": true
+    },
+    "LingBot-VA": {
+      "recomputed": 92.2,
+      "stated": 92.2,
+      "ok_at_0.05": true
+    },
+    "pi0.5": {
+      "recomputed": 79.75,
+      "stated": 79.8,
+      "ok_at_0.05": true
+    },
+    "Motus": {
+      "recomputed": 87.84,
+      "stated": 87.8,
+      "ok_at_0.05": true
+    }
+  },
+  "robotwin_paired": {
+    "Fast-WAM minus Fast-WAM-Joint": {
+      "mean_diff": 1.25,
+      "ci95": [
+        -1.8,
+        4.3
+      ],
+      "paired_t_p": 0.4148,
+      "wilcoxon_p": 0.1404,
+      "wins_losses_ties": [
+        12,
+        26,
+        12
+      ],
+      "sign_test_p": 0.0336
+    },
+    "Fast-WAM minus Fast-WAM-IDM": {
+      "mean_diff": 0.58,
+      "ci95": [
+        -1.97,
+        3.13
+      ],
+      "paired_t_p": 0.6497,
+      "wilcoxon_p": 0.3644,
+      "wins_losses_ties": [
+        17,
+        20,
+        13
+      ],
+      "sign_test_p": 0.7428
+    },
+    "Fast-WAM minus w.o.video-co-train": {
+      "mean_diff": 8.05,
+      "ci95": [
+        5.42,
+        10.68
+      ],
+      "paired_t_p": 0.0,
+      "wilcoxon_p": 0.0,
+      "wins_losses_ties": [
+        40,
+        4,
+        6
+      ],
+      "sign_test_p": 0.0
+    },
+    "Fast-WAM minus LingBot-VA": {
+      "mean_diff": -0.37,
+      "ci95": [
+        -2.49,
+        1.75
+      ],
+      "paired_t_p": 0.7279,
+      "wilcoxon_p": 0.5589,
+      "wins_losses_ties": [
+        21,
+        23,
+        6
+      ],
+      "sign_test_p": 0.8804
+    },
+    "Fast-WAM minus Motus": {
+      "mean_diff": 3.99,
+      "ci95": [
+        0.6,
+        7.38
+      ],
+      "paired_t_p": 0.0221,
+      "wilcoxon_p": 0.002,
+      "wins_losses_ties": [
+        33,
+        14,
+        3
+      ],
+      "sign_test_p": 0.0079
+    },
+    "Fast-WAM minus pi0.5": {
+      "mean_diff": 12.08,
+      "ci95": [
+        8.61,
+        15.55
+      ],
+      "paired_t_p": 0.0,
+      "wilcoxon_p": 0.0,
+      "wins_losses_ties": [
+        47,
+        2,
+        1
+      ],
+      "sign_test_p": 0.0
+    }
+  },
+  "robotwin_robustness": {
+    "Fast-WAM minus Fast-WAM-Joint": {
+      "median_diff": -0.5,
+      "largest_task": "Open Microwave",
+      "largest_diff": 45.0,
+      "mean_without_largest": 0.36
+    },
+    "Fast-WAM minus Fast-WAM-IDM": {
+      "median_diff": 0.0,
+      "largest_task": "Press Stapler",
+      "largest_diff": 40.0,
+      "mean_without_largest": -0.22
+    },
+    "Fast-WAM minus LingBot-VA": {
+      "median_diff": 0.0,
+      "largest_task": "Open Microwave",
+      "largest_diff": -30.5,
+      "mean_without_largest": 0.24
+    }
+  },
+  "robotwin_between_task_se": {
+    "Fast-WAM": 1.56,
+    "Fast-WAM-Joint": 2.43,
+    "Fast-WAM-IDM": 1.96,
+    "w.o.video-co-train": 2.11,
+    "LingBot-VA": 1.71,
+    "pi0.5": 2.5,
+    "Motus": 1.78
+  },
+  "libero": {
+    "Fast-WAM": {
+      "suite_counts_of_500": [
+        491,
+        500,
+        485,
+        476
+      ],
+      "integer_ok": true,
+      "overall_k_of_2000": 1952,
+      "overall_pct": 97.6,
+      "avg_of_suites_recomputed": 97.6,
+      "wilson95_overall": [
+        96.83,
+        98.19
+      ]
+    },
+    "Fast-WAM-Joint": {
+      "suite_counts_of_500": [
+        498,
+        497,
+        491,
+        484
+      ],
+      "integer_ok": true,
+      "overall_k_of_2000": 1970,
+      "overall_pct": 98.5,
+      "avg_of_suites_recomputed": 98.5,
+      "wilson95_overall": [
+        97.87,
+        98.95
+      ]
+    },
+    "Fast-WAM-IDM": {
+      "suite_counts_of_500": [
+        494,
+        489,
+        489,
+        488
+      ],
+      "integer_ok": true,
+      "overall_k_of_2000": 1960,
+      "overall_pct": 98.0,
+      "avg_of_suites_recomputed": 98.0,
+      "wilson95_overall": [
+        97.29,
+        98.53
+      ]
+    },
+    "w.o.video-co-train": {
+      "suite_counts_of_500": [
+        446,
+        496,
+        477,
+        450
+      ],
+      "integer_ok": true,
+      "overall_k_of_2000": 1869,
+      "overall_pct": 93.45,
+      "avg_of_suites_recomputed": 93.45,
+      "wilson95_overall": [
+        92.28,
+        94.45
+      ]
+    },
+    "LingBot-VA": {
+      "suite_counts_of_500": [
+        492,
+        498,
+        486,
+        492
+      ],
+      "integer_ok": false,
+      "overall_k_of_2000": 1968,
+      "overall_pct": 98.4,
+      "avg_of_suites_recomputed": 98.45,
+      "wilson95_overall": [
+        97.75,
+        98.86
+      ]
+    },
+    "Motus": {
+      "suite_counts_of_500": [
+        484,
+        499,
+        483,
+        488
+      ],
+      "integer_ok": true,
+      "overall_k_of_2000": 1954,
+      "overall_pct": 97.7,
+      "avg_of_suites_recomputed": 97.7,
+      "wilson95_overall": [
+        96.95,
+        98.27
+      ]
+    },
+    "pi0.5": {
+      "suite_counts_of_500": [
+        494,
+        491,
+        490,
+        462
+      ],
+      "integer_ok": true,
+      "overall_k_of_2000": 1937,
+      "overall_pct": 96.85,
+      "avg_of_suites_recomputed": 96.85,
+      "wilson95_overall": [
+        95.99,
+        97.53
+      ]
+    },
+    "pi0": {
+      "suite_counts_of_500": [
+        484,
+        494,
+        479,
+        426
+      ],
+      "integer_ok": true,
+      "overall_k_of_2000": 1883,
+      "overall_pct": 94.15,
+      "avg_of_suites_recomputed": 94.15,
+      "wilson95_overall": [
+        93.03,
+        95.1
+      ]
+    }
+  },
+  "libero_two_prop_vs_fastwam": {
+    "w.o.video-co-train": {
+      "diff_pts": 4.15,
+      "ci95_pts": [
+        2.87,
+        5.43
+      ],
+      "z": 6.347,
+      "p_unpaired": 0.0
+    },
+    "Fast-WAM-Joint": {
+      "diff_pts": -0.9,
+      "ci95_pts": [
+        -1.76,
+        -0.04
+      ],
+      "z": -2.058,
+      "p_unpaired": 0.03956
+    },
+    "Fast-WAM-IDM": {
+      "diff_pts": -0.4,
+      "ci95_pts": [
+        -1.31,
+        0.51
+      ],
+      "z": -0.862,
+      "p_unpaired": 0.3885
+    },
+    "LingBot-VA": {
+      "diff_pts": -0.8,
+      "ci95_pts": [
+        -1.67,
+        0.07
+      ],
+      "z": -1.807,
+      "p_unpaired": 0.07076
+    },
+    "Motus": {
+      "diff_pts": -0.1,
+      "ci95_pts": [
+        -1.04,
+        0.84
+      ],
+      "z": -0.209,
+      "p_unpaired": 0.83464
+    },
+    "pi0.5": {
+      "diff_pts": 0.75,
+      "ci95_pts": [
+        -0.27,
+        1.77
+      ],
+      "z": 1.444,
+      "p_unpaired": 0.14876
+    }
+  },
+  "libero_mde_pts": {
+    "overall_n2000": 1.36,
+    "per_suite_n500": 2.71
+  },
+  "real_world_read_from_fig4": {
+    "pi0.5": {
+      "success": 1.0,
+      "completion_s": 119
+    },
+    "Fast-WAM-IDM": {
+      "success": 0.9,
+      "completion_s": 177
+    },
+    "Fast-WAM": {
+      "success": 0.75,
+      "completion_s": 152
+    },
+    "Fast-WAM-Joint": {
+      "success": 0.7,
+      "completion_s": 227
+    },
+    "pi0.5-wo-pretrain": {
+      "success": 0.4,
+      "completion_s": 206
+    },
+    "w.o.video-co-train": {
+      "success": 0.1,
+      "completion_s": 241
+    }
+  },
+  "real_world_if_n20_counts": {
+    "pi0.5": 20.0,
+    "Fast-WAM-IDM": 18.0,
+    "Fast-WAM": 15.0,
+    "Fast-WAM-Joint": 14.0,
+    "pi0.5-wo-pretrain": 8.0,
+    "w.o.video-co-train": 2.0
+  },
+  "latency_ratio": {
+    "IDM_over_FastWAM": 4.26,
+    "Joint_over_FastWAM": 3.05,
+    "note": "초록의 '4배 이상'은 IDM 대비에서만 성립. Joint 대비는 약 3배 (그림 4 우측, 읽은 값)"
+  }
+}

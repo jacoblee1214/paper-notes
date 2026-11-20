@@ -42,7 +42,7 @@ RoboFQE는 세 줄기가 만난 곳에 있습니다.
 | DINOv3 가중치 | facebook/dinov3-vits16-pretrain-lvd1689m (HF, gated) | DINOv3 라이선스 (미확인) | - | 받지 않음. 토큰 필요 |
 | LIBERO 데모 | LIBERO 공식 스크립트 | (LIBERO) | 크기 미확인 | 받지 않음. Spatial만 해도 로더가 이미지 10 GB를 RAM에 올림 (`03` §1.5) |
 | BC 체크포인트 | 저장소에 없음 | - | - | 학습 필요 (`04` D10) |
-| 세계모델 기준선 | WorldGym, Cosmos 2.5-AC, Ctrl-World | - | - | 코드와 체크포인트 미확인. 공개되지 않은 것으로 보임 |
+| 세계모델 기준선 | WorldGym, Cosmos 2.5-AC, Ctrl-World | - | - | Ctrl-World는 공식 코드(github.com/Robert-gyj/Ctrl-World, MIT)와 체크포인트(Hugging Face yjguo/Ctrl-World)가 공개되어 있음(2026-11-20 확인, 이전 판의 "미공개" 기재를 정정). WorldGym과 Cosmos 2.5-AC의 RoboFQE 실험용 설정은 미확인 |
 | X-VLA, SmolVLA, π0.5 | arXiv 2510.10274 [43], [6], [44] | - | - | 미확인. 평가 정책 |
 
 - 논문 프로젝트 페이지의 arXiv 링크 중 `2510.10125`는 본문에서 인용되지 않았습니다. 확인하지 않았습니다.

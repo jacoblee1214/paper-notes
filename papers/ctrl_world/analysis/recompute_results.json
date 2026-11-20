@@ -1,0 +1,155 @@
+{
+  "table1_singleview_vs_IRASim": {
+    "PSNR": {
+      "CtrlWorld_SV": 21.27,
+      "IRASim_SV": 21.36,
+      "CtrlWorld_better": false
+    },
+    "SSIM": {
+      "CtrlWorld_SV": 0.793,
+      "IRASim_SV": 0.774,
+      "CtrlWorld_better": true
+    },
+    "LPIPS": {
+      "CtrlWorld_SV": 0.11,
+      "IRASim_SV": 0.117,
+      "CtrlWorld_better": true
+    },
+    "FID": {
+      "CtrlWorld_SV": 23.47,
+      "IRASim_SV": 26.46,
+      "CtrlWorld_better": true
+    },
+    "FVD": {
+      "CtrlWorld_SV": 127.5,
+      "IRASim_SV": 138.1,
+      "CtrlWorld_better": true
+    }
+  },
+  "table1_singleview_vs_IRASim_note": "PSNR에서 Ctrl-World-Single-View(21.27)가 IRASim-Single-View(21.36)보다 낮다. 본문 'outperforms these prior models'는 PSNR을 빼면 맞다.",
+  "table2_row_equals_table1": true,
+  "table3_fig7_regression_recomputed": {
+    "instruction (WM on real)": {
+      "slope": 0.873,
+      "intercept": -0.044,
+      "r": 0.968,
+      "n": 21
+    },
+    "success (WM on real)": {
+      "slope": 0.82,
+      "intercept": -0.108,
+      "r": 0.832,
+      "n": 21
+    },
+    "figure7_labels": {
+      "instruction": "y = 0.87x - 0.04",
+      "success": "y = 0.81x - 0.11"
+    }
+  },
+  "table3_pearson_spearman": {
+    "instruction": {
+      "pearson": 0.968,
+      "spearman": 0.942
+    },
+    "success": {
+      "pearson": 0.832,
+      "spearman": 0.846
+    }
+  },
+  "table3_means": {
+    "instruction_real": 0.571,
+    "instruction_wm": 0.455,
+    "success_real": 0.526,
+    "success_wm": 0.324,
+    "success_gap_wm_minus_real_mean": -0.202,
+    "success_gap_sd": 0.154,
+    "rows_wm_below_real_success": 21,
+    "rows_total": 21
+  },
+  "table3_success_le_instruction_violations": [],
+  "within_task_pair_order_agreement": {
+    "pairs": 21,
+    "success_agree": 18,
+    "success_ties_excluded": 3,
+    "instruction_agree": 19,
+    "instruction_ties_excluded": 2,
+    "disagree_success": 0,
+    "disagree_instruction": 0,
+    "note": "Table 3은 7과제 x 3정책 = 21행, 과제 내 정책 쌍 21개. 동점 쌍은 일치로도 불일치로도 세지 않음"
+  },
+  "table3_paired_tests": {
+    "success_wm_minus_real": {
+      "mean": -0.202,
+      "bootstrap95_over_rows": [
+        -0.274,
+        -0.145
+      ],
+      "paired_t_p": 7e-06,
+      "wilcoxon_p": 1e-06
+    },
+    "instruction_wm_minus_real": {
+      "mean": -0.117,
+      "bootstrap95_over_rows": [
+        -0.15,
+        -0.086
+      ],
+      "paired_t_p": 1e-06,
+      "wilcoxon_p": 0.000116
+    },
+    "note": "행 21개(과제 x 정책)를 독립 단위로 두었다. 같은 과제의 정책끼리 상관될 수 있어 p는 낙관적이다"
+  },
+  "policy_improvement_categories": {
+    "Spatial (T4)": {
+      "base_recomputed": 0.2875,
+      "base_reported": 0.2875,
+      "after_recomputed": 0.875,
+      "after_reported": 0.875,
+      "cells": 8
+    },
+    "Shape (T5)": {
+      "base_recomputed": 0.4375,
+      "base_reported": 0.4374,
+      "after_recomputed": 0.9125,
+      "after_reported": 0.9125,
+      "cells": 4
+    },
+    "Towel-dir (T6)": {
+      "base_recomputed": 0.575,
+      "base_reported": 0.575,
+      "after_recomputed": 0.8,
+      "after_reported": 0.8,
+      "cells": 4
+    },
+    "Novel-obj (T7)": {
+      "base_recomputed": 0.25,
+      "base_reported": 0.25,
+      "after_recomputed": 0.75,
+      "after_reported": 0.75,
+      "cells": 2
+    }
+  },
+  "policy_improvement_headline": {
+    "base_avg_pct": 38.75,
+    "after_avg_pct": 83.44,
+    "absolute_gain_pp": 44.69,
+    "relative_gain_pct": 115.3,
+    "note": "초록/결론의 '44.7%'는 절대 차이(percentage point). 상대 증가는 약 115%"
+  },
+  "policy_improvement_ci_assumed_n20": {
+    "mean_gain_pp": 44.69,
+    "ci95_pp": [
+      37.75,
+      51.63
+    ],
+    "assumption": "셀마다 n=20 이항, 셀 간 독립, 카테고리 평균을 동일 가중 (논문이 n을 명시하지 않아 추정)",
+    "caveat": "카테고리 4개뿐이라 정규근사는 거칠다. 과제 수준 변동을 반영하면 구간은 더 넓다."
+  },
+  "rounding_check_table5": {
+    "recomputed": 0.4375,
+    "reported": 0.4374
+  },
+  "table3_granularity": {
+    "all_values_multiple_of_0.05": true,
+    "n_if_20": "모든 값이 0.05의 배수 -> 시도 수 n=20과 맞음 (README의 '카테고리당 20회'와 일치)"
+  }
+}
