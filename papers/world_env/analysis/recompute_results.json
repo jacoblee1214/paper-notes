@@ -1,0 +1,308 @@
+{
+  "table1_average_check": {
+    "pi0": {
+      "reported": 61.1,
+      "recomputed": 61.1,
+      "match": true
+    },
+    "pi0+FAST": {
+      "reported": 55.0,
+      "recomputed": 55.0,
+      "match": true
+    },
+    "OpenVLA": {
+      "reported": 60.7,
+      "recomputed": 60.7,
+      "match": true
+    },
+    "UniVLA": {
+      "reported": 74.75,
+      "recomputed": 74.75,
+      "match": true
+    },
+    "OFT": {
+      "reported": 74.85,
+      "recomputed": 74.85,
+      "match": true
+    },
+    "Ours": {
+      "reported": 79.6,
+      "recomputed": 79.6,
+      "match": true
+    }
+  },
+  "table1_ours_vs_oft_per_suite": [
+    {
+      "suite": "Goal",
+      "ours": 86.4,
+      "ours_wilson95": [
+        83.1,
+        89.1
+      ],
+      "oft": 84.0,
+      "diff_pp": 2.4,
+      "z": 1.07,
+      "p_two_sided": 0.285
+    },
+    {
+      "suite": "Object",
+      "ours": 86.6,
+      "ours_wilson95": [
+        83.3,
+        89.3
+      ],
+      "oft": 74.2,
+      "diff_pp": 12.4,
+      "z": 4.94,
+      "p_two_sided": 7.85e-07
+    },
+    {
+      "suite": "Spatial",
+      "ours": 87.6,
+      "ours_wilson95": [
+        84.4,
+        90.2
+      ],
+      "oft": 84.2,
+      "diff_pp": 3.4,
+      "z": 1.54,
+      "p_two_sided": 0.122
+    },
+    {
+      "suite": "Long",
+      "ours": 57.8,
+      "ours_wilson95": [
+        53.4,
+        62.1
+      ],
+      "oft": 57.0,
+      "diff_pp": 0.8,
+      "z": 0.26,
+      "p_two_sided": 0.798
+    }
+  ],
+  "table1_avg_diff_OFT": {
+    "diff_pp": 4.75,
+    "se_pp": 1.27,
+    "z": 3.74,
+    "p_two_sided": 0.000184,
+    "note": "스위트 독립, 시행 샘플링만 반영. 학습 시드 분산 미반영"
+  },
+  "table2_ours_vs_ript_per_suite": [
+    {
+      "suite": "Goal",
+      "ours": 86.4,
+      "ript": 86.2,
+      "diff_pp": 0.2,
+      "p_two_sided": 0.927
+    },
+    {
+      "suite": "Object",
+      "ours": 86.6,
+      "ript": 83.4,
+      "diff_pp": 3.2,
+      "p_two_sided": 0.156
+    },
+    {
+      "suite": "Spatial",
+      "ours": 87.6,
+      "ript": 88.6,
+      "diff_pp": -1.0,
+      "p_two_sided": 0.625
+    },
+    {
+      "suite": "Long",
+      "ours": 57.8,
+      "ript": 58.4,
+      "diff_pp": -0.6,
+      "p_two_sided": 0.848
+    }
+  ],
+  "table2_avg": {
+    "ours": 79.6,
+    "ript": 79.15
+  },
+  "table4_average_check": {
+    "pi0": {
+      "reported": 54.9,
+      "recomputed": 54.9,
+      "match": "True"
+    },
+    "pi0+FAST": {
+      "reported": 38.75,
+      "recomputed": 38.75,
+      "match": "True"
+    },
+    "OpenVLA": {
+      "reported": 50.55,
+      "recomputed": 50.55,
+      "match": "True"
+    },
+    "UniVLA": {
+      "reported": 65.4,
+      "recomputed": 65.4,
+      "match": "True"
+    },
+    "OFT": {
+      "reported": 63.05,
+      "recomputed": 63.05,
+      "match": "True"
+    },
+    "Ours": {
+      "reported": 74.9,
+      "recomputed": 74.9,
+      "match": "True"
+    }
+  },
+  "table4_shift_vs_table1": {
+    "OFT_avg_T1_to_T4": [
+      74.85,
+      63.05,
+      -11.8
+    ],
+    "Ours_avg_T1_to_T4": [
+      79.6,
+      74.9,
+      -4.7
+    ],
+    "note": "표 4의 두 방법 수치는 표 1과 설정이 다른 것으로 보인다. 논문은 어떤 종료 규칙이 표 1에 쓰였는지 밝히지 않음"
+  },
+  "table4_ours_vs_oft_per_suite": [
+    {
+      "suite": "Goal",
+      "diff_pp": 17.6,
+      "p_two_sided": 6.38e-11
+    },
+    {
+      "suite": "Object",
+      "diff_pp": 4.6,
+      "p_two_sided": 0.0881
+    },
+    {
+      "suite": "Spatial",
+      "diff_pp": 7.2,
+      "p_two_sided": 0.00874
+    },
+    {
+      "suite": "Long",
+      "diff_pp": 18.0,
+      "p_two_sided": 1.24e-08
+    }
+  ],
+  "table5_avg": {
+    "no_extra_no_head": 64.75,
+    "extra_no_head": 71.15,
+    "no_extra_head": 65.85,
+    "extra_head_(Ours)": 79.6
+  },
+  "table5_effects_avg_pp": {
+    "extra_data_effect_without_head": 6.4,
+    "extra_data_effect_with_head": 13.75,
+    "reward_head_effect_without_extra": 1.1,
+    "reward_head_effect_with_extra": 8.45,
+    "interaction": 7.35
+  },
+  "table5_neither_vs_T1_OFT_pp": -10.1,
+  "table5_ours_equals_T1_ours": true,
+  "table6_octo_diff_pp": {
+    "Goal": 1.8,
+    "Object": 0.9,
+    "Spatial": 8.7,
+    "Long": 6.7
+  },
+  "table8_gaussian_vs_orig": {
+    "diff_pp": 2.2,
+    "z": 1.02,
+    "p_two_sided": 0.309
+  },
+  "table8_color_vs_orig": {
+    "diff_pp": 0.6,
+    "z": 0.28,
+    "p_two_sided": 0.776
+  },
+  "table7_reconstruction": {
+    "consistent_solutions_found": 6,
+    "smallest_n_solution": {
+      "n": 40,
+      "positives": 14,
+      "negatives": 26,
+      "per_eta": [
+        [
+          0.2,
+          [
+            14,
+            7,
+            0,
+            19
+          ]
+        ],
+        [
+          0.4,
+          [
+            13,
+            4,
+            1,
+            22
+          ]
+        ],
+        [
+          0.5,
+          [
+            13,
+            2,
+            1,
+            24
+          ]
+        ],
+        [
+          0.6,
+          [
+            11,
+            2,
+            3,
+            24
+          ]
+        ],
+        [
+          0.8,
+          [
+            9,
+            1,
+            5,
+            25
+          ]
+        ]
+      ]
+    },
+    "note": "n=40, 양성 14, 음성 26이 모든 η 행과 맞는 최소 해. 논문은 시행 수를 밝히지 않음"
+  },
+  "table7_acc_at_eta0.5_wilson95": [
+    0.801,
+    0.974
+  ],
+  "table3_real_world": {
+    "n_per_task_10": {
+      "oft_pooled": [
+        10,
+        40
+      ],
+      "ours_pooled": [
+        17,
+        40
+      ],
+      "fisher_p": 0.155
+    },
+    "n_per_task_100": {
+      "oft_pooled": [
+        100,
+        400
+      ],
+      "ours_pooled": [
+        170,
+        400
+      ],
+      "fisher_p": 2.22e-07
+    },
+    "note": "시행 수 미보고. 10과 100은 민감도 시나리오. 과제 4개 합산 Fisher, 과제 층화 안 함"
+  }
+}

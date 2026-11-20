@@ -1,0 +1,40 @@
+{
+  "N_rollouts_per_group": 8,
+  "groups": 20000,
+  "scenarios": {
+    "high_success_mean0.85": {
+      "binary": {
+        "frac_groups_zero_advantage": 0.5732,
+        "mean_abs_advantage": 0.1685
+      },
+      "continuous": {
+        "frac_groups_zero_advantage": 0.0,
+        "mean_abs_advantage": 0.1527
+      },
+      "mean_success_rate": 0.852
+    },
+    "mid_success_mean0.6": {
+      "binary": {
+        "frac_groups_zero_advantage": 0.2492,
+        "mean_abs_advantage": 0.319
+      },
+      "continuous": {
+        "frac_groups_zero_advantage": 0.0,
+        "mean_abs_advantage": 0.2495
+      },
+      "mean_success_rate": 0.602
+    },
+    "low_success_mean0.3": {
+      "binary": {
+        "frac_groups_zero_advantage": 0.3349,
+        "mean_abs_advantage": 0.2774
+      },
+      "continuous": {
+        "frac_groups_zero_advantage": 0.0,
+        "mean_abs_advantage": 0.2223
+      },
+      "mean_success_rate": 0.302
+    }
+  },
+  "note": "메커니즘 확인용 토이. 실제 반영기 점수의 분포와 잡음 크기는 논문에 없어서 k, s는 가정이다. 논문은 이 효과의 크기를 실험으로 보이지 않았고, 표 5의 절제가 간접 증거다."
+}
