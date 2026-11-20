@@ -1,0 +1,505 @@
+{
+ "assumptions": {
+  "calvin_chains": 1000
+ },
+ "checks": {
+  "dex_unseen_susie": {
+   "table7_reported": 0.328,
+   "recomputed": 0.2792,
+   "table5_reported": 0.28
+  },
+  "dex_tool_susie": {
+   "table7_reported": 0.23,
+   "recomputed_equal_weight": 0.175,
+   "table5_reported": 0.23
+  },
+  "claim_31_6pct": {
+   "claimed": 31.6,
+   "candidates": {
+    "Panda seen vs best": 52.2,
+    "Panda unseen vs best": 59.5,
+    "Dex seen vs best": 66.3,
+    "Dex unseen vs best": 116.4,
+    "Dex tool vs best": 285.7,
+    "mean over 5 settings, VPP vs per-setting best (rel)": 87.7,
+    "mean over 5 settings, abs diff (pp)": 33.8
+   },
+   "verdict": "표 5–7 값에서 31.6%에 해당하는 계산을 찾지 못함"
+  }
+ },
+ "calvin_table1": {
+  "RT-1": {
+   "avg_len_recomputed": 0.9,
+   "avg_len_reported": 0.9,
+   "se_chains": 0.0352
+  },
+  "Diffusion Policy": {
+   "avg_len_recomputed": 0.559,
+   "avg_len_reported": 0.56,
+   "se_chains": 0.0254
+  },
+  "RoboFlamingo": {
+   "avg_len_recomputed": 2.475,
+   "avg_len_reported": 2.47,
+   "se_chains": 0.0576
+  },
+  "UniPi": {
+   "avg_len_recomputed": 0.92,
+   "avg_len_reported": 0.92,
+   "se_chains": 0.0389
+  },
+  "MDT": {
+   "avg_len_recomputed": 1.549,
+   "avg_len_reported": 1.55,
+   "se_chains": 0.0513
+  },
+  "Susie": {
+   "avg_len_recomputed": 2.69,
+   "avg_len_reported": 2.69,
+   "se_chains": 0.0562
+  },
+  "GR-1": {
+   "avg_len_recomputed": 3.06,
+   "avg_len_reported": 3.06,
+   "se_chains": 0.0608
+  },
+  "Vidman": {
+   "avg_len_recomputed": 3.42,
+   "avg_len_reported": 3.42,
+   "se_chains": 0.0572
+  },
+  "RoboUniview": {
+   "avg_len_recomputed": 3.647,
+   "avg_len_reported": 3.65,
+   "se_chains": 0.0525
+  },
+  "VPP": {
+   "avg_len_recomputed": 4.329,
+   "avg_len_reported": 4.33,
+   "se_chains": 0.0441
+  }
+ },
+ "calvin_gains": {
+  "GR-1": {
+   "relative_gain_pct": 41.5,
+   "claimed": "41.5% (intro, project page)"
+  },
+  "RoboUniview": {
+   "relative_gain_pct": 18.7,
+   "claimed": "18.6% (v2 abstract)"
+  },
+  "Vidman": {
+   "relative_gain_pct": 26.6,
+   "claimed": "-"
+  },
+  "3.35 (v2 text, Sec 5.1)": {
+   "relative_gain_pct": 29.2,
+   "claimed": "text: 'from 3.35 to 4.33'; 3.35 is not a row in v2 Table 1"
+  }
+ },
+ "calvin_vpp_vs_roboUniview": {
+  "diff": 0.682,
+  "se_chain_only": 0.0685,
+  "z": 10.0,
+  "note": "채점 표집 오차만 반영. 학습 시드 변동은 논문에 없어 반영 불가"
+ },
+ "calvin_table12": {
+  "VPP": {
+   "avg_len": 4.329,
+   "se_chain_only": 0.0441
+  },
+  "Ablation1 (no temporal attn)": {
+   "avg_len": 4.182,
+   "se_chain_only": 0.0473
+  },
+  "Ablation2 (2-step denoise)": {
+   "avg_len": 4.19,
+   "se_chain_only": 0.047
+  },
+  "Single-view": {
+   "avg_len": 3.575,
+   "se_chain_only": 0.056
+  },
+  "z_VPP_vs_Ablation1": 2.27
+ },
+ "calvin_10pct": {
+  "avg_len": 3.249,
+  "beats_full_data_methods": [
+   "RT-1",
+   "Diffusion Policy",
+   "RoboFlamingo",
+   "UniPi",
+   "MDT",
+   "Susie",
+   "GR-1"
+  ],
+  "does_not_beat": [
+   "Vidman",
+   "RoboUniview",
+   "VPP"
+  ]
+ },
+ "metaworld_table2": {
+  "RT-1": {
+   "recomputed": 0.3513,
+   "reported": 0.346
+  },
+  "Diffusion Policy": {
+   "recomputed": 0.2821,
+   "reported": 0.279
+  },
+  "Susie": {
+   "recomputed": 0.4128,
+   "reported": 0.41
+  },
+  "GR-1": {
+   "recomputed": 0.5772,
+   "reported": 0.574
+  },
+  "VPP": {
+   "recomputed": 0.6823,
+   "reported": 0.682
+  }
+ },
+ "metaworld_gain": {
+  "absolute_pp": 10.8,
+  "relative_pct": 18.8,
+  "claimed": "10.8% (text: 'by 10.8% in average success rate'; 절대 %p로 읽힘)"
+ },
+ "real_world": {
+  "Panda seen": {
+   "Diffusion Policy": {
+    "successes": 68,
+    "trials": 160,
+    "rate_recomputed": 0.425,
+    "rate_reported": 0.425,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.351,
+     0.502
+    ]
+   },
+   "Susie": {
+    "successes": 90,
+    "trials": 160,
+    "rate_recomputed": 0.5625,
+    "rate_reported": 0.563,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.485,
+     0.637
+    ]
+   },
+   "GR-1": {
+    "successes": 83,
+    "trials": 160,
+    "rate_recomputed": 0.5188,
+    "rate_reported": 0.519,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.442,
+     0.595
+    ]
+   },
+   "VPP": {
+    "successes": 137,
+    "trials": 160,
+    "rate_recomputed": 0.8562,
+    "rate_reported": 0.856,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.794,
+     0.902
+    ]
+   },
+   "_vs_best": {
+    "baseline": "Susie",
+    "abs_diff_pp": 29.4,
+    "rel_gain_pct": 52.2,
+    "fisher_p": 8.59e-09
+   }
+  },
+  "Panda unseen": {
+   "Diffusion Policy": {
+    "successes": 20,
+    "trials": 80,
+    "rate_recomputed": 0.25,
+    "rate_reported": 0.25,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.168,
+     0.355
+    ]
+   },
+   "Susie": {
+    "successes": 37,
+    "trials": 80,
+    "rate_recomputed": 0.4625,
+    "rate_reported": 0.463,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.357,
+     0.571
+    ]
+   },
+   "GR-1": {
+    "successes": 31,
+    "trials": 80,
+    "rate_recomputed": 0.3875,
+    "rate_reported": 0.388,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.288,
+     0.497
+    ]
+   },
+   "VPP": {
+    "successes": 59,
+    "trials": 80,
+    "rate_recomputed": 0.7375,
+    "rate_reported": 0.737,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.632,
+     0.821
+    ]
+   },
+   "_vs_best": {
+    "baseline": "Susie",
+    "abs_diff_pp": 27.5,
+    "rel_gain_pct": 59.5,
+    "fisher_p": 0.000647
+   }
+  },
+  "Dex seen": {
+   "Diffusion Policy": {
+    "successes": 108,
+    "trials": 375,
+    "rate_recomputed": 0.288,
+    "rate_reported": 0.287,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.244,
+     0.336
+    ]
+   },
+   "Susie": {
+    "successes": 169,
+    "trials": 375,
+    "rate_recomputed": 0.4507,
+    "rate_reported": 0.45,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.401,
+     0.501
+    ]
+   },
+   "GR-1": {
+    "successes": 120,
+    "trials": 375,
+    "rate_recomputed": 0.32,
+    "rate_reported": 0.319,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.275,
+     0.369
+    ]
+   },
+   "VPP": {
+    "successes": 281,
+    "trials": 375,
+    "rate_recomputed": 0.7493,
+    "rate_reported": 0.749,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.703,
+     0.791
+    ]
+   },
+   "_vs_best": {
+    "baseline": "Susie",
+    "abs_diff_pp": 29.9,
+    "rel_gain_pct": 66.3,
+    "fisher_p": 6.88e-17
+   }
+  },
+  "Dex unseen": {
+   "Diffusion Policy": {
+    "successes": 27,
+    "trials": 240,
+    "rate_recomputed": 0.1125,
+    "rate_reported": 0.11,
+    "non_integer_counts": [
+     [
+      0.12,
+      20,
+      2.4
+     ],
+     [
+      0.44,
+      20,
+      8.8
+     ],
+     [
+      0.28,
+      20,
+      5.6000000000000005
+     ]
+    ],
+    "wilson95": [
+     0.078,
+     0.159
+    ]
+   },
+   "Susie": {
+    "successes": 67,
+    "trials": 240,
+    "rate_recomputed": 0.2792,
+    "rate_reported": 0.328,
+    "non_integer_counts": [
+     [
+      0.32,
+      20,
+      6.4
+     ],
+     [
+      0.76,
+      20,
+      15.2
+     ],
+     [
+      0.44,
+      20,
+      8.8
+     ]
+    ],
+    "wilson95": [
+     0.226,
+     0.339
+    ]
+   },
+   "GR-1": {
+    "successes": 38,
+    "trials": 240,
+    "rate_recomputed": 0.1583,
+    "rate_reported": 0.159,
+    "non_integer_counts": [
+     [
+      0.12,
+      20,
+      2.4
+     ],
+     [
+      0.24,
+      20,
+      4.8
+     ]
+    ],
+    "wilson95": [
+     0.118,
+     0.21
+    ]
+   },
+   "VPP": {
+    "successes": 145,
+    "trials": 240,
+    "rate_recomputed": 0.6042,
+    "rate_reported": 0.605,
+    "non_integer_counts": [
+     [
+      0.75,
+      50,
+      37.5
+     ],
+     [
+      0.76,
+      20,
+      15.2
+     ],
+     [
+      0.56,
+      20,
+      11.200000000000001
+     ],
+     [
+      0.32,
+      20,
+      6.4
+     ],
+     [
+      0.88,
+      20,
+      17.6
+     ],
+     [
+      0.56,
+      20,
+      11.200000000000001
+     ]
+    ],
+    "wilson95": [
+     0.541,
+     0.664
+    ]
+   },
+   "_vs_best": {
+    "baseline": "Susie",
+    "abs_diff_pp": 32.5,
+    "rel_gain_pct": 116.4,
+    "fisher_p": 9.07e-13
+   }
+  },
+  "Dex tool": {
+   "Diffusion Policy": {
+    "successes": 2,
+    "trials": 40,
+    "rate_recomputed": 0.05,
+    "rate_reported": 0.05,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.014,
+     0.165
+    ]
+   },
+   "Susie": {
+    "successes": 7,
+    "trials": 40,
+    "rate_recomputed": 0.175,
+    "rate_reported": 0.23,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.087,
+     0.32
+    ]
+   },
+   "GR-1": {
+    "successes": 6,
+    "trials": 40,
+    "rate_recomputed": 0.15,
+    "rate_reported": 0.15,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.071,
+     0.291
+    ]
+   },
+   "VPP": {
+    "successes": 27,
+    "trials": 40,
+    "rate_recomputed": 0.675,
+    "rate_reported": 0.68,
+    "non_integer_counts": [],
+    "wilson95": [
+     0.52,
+     0.799
+    ]
+   },
+   "_vs_best": {
+    "baseline": "Susie",
+    "abs_diff_pp": 50.0,
+    "rel_gain_pct": 285.7,
+    "fisher_p": 1.12e-05
+   }
+  }
+ }
+}
