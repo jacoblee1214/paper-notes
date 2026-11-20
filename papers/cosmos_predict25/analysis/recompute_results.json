@@ -1,0 +1,387 @@
+{
+ "table13_real_robot": {
+  "n_per_scenario": 3,
+  "n_scenarios": 10,
+  "Base": {
+   "successes": 1,
+   "trials": 30,
+   "rate": 0.0333,
+   "wilson95": [
+    0.0059,
+    0.1667
+   ],
+   "row_sum_matches_reported": true
+  },
+  "Baseline": {
+   "successes": 5,
+   "trials": 30,
+   "rate": 0.1667,
+   "wilson95": [
+    0.0734,
+    0.3356
+   ],
+   "row_sum_matches_reported": true
+  },
+  "Proposed": {
+   "successes": 24,
+   "trials": 30,
+   "rate": 0.8,
+   "wilson95": [
+    0.6269,
+    0.9049
+   ],
+   "row_sum_matches_reported": true
+  },
+  "fisher_two_sided": {
+   "Proposed_vs_Baseline_p": 1.5488900683552224e-06,
+   "Proposed_vs_Base_p": 6.91730887790216e-10,
+   "Baseline_vs_Base_p": 0.19450977211904957
+  },
+  "scenario_sign_test_proposed_vs_baseline": {
+   "per_scenario_diff": {
+    "Base": 0,
+    "Mangosteen": 3,
+    "Orange Bowl": 1,
+    "Beige Table": 1,
+    "Black Table": 1,
+    "Light On": 2,
+    "Distractors": 3,
+    "Black Cabinet": 2,
+    "Open Drawers": 3,
+    "Combo": 3
+   },
+   "positive": 9,
+   "negative": 0,
+   "tied": 1,
+   "two_sided_p": 0.0039
+  }
+ },
+ "human_preference_fig6_7": {
+  "2B_post vs Wan2.2-5B (Fig 6)": {
+   "sum_pct": 100.0,
+   "win_share_of_decisive": 0.5338,
+   "decisive_fraction_of_all_votes": 0.562,
+   "decisive_votes_needed_for_p05_if_true_share_is_observed": 841,
+   "if_N=100_p_two_sided": 0.6889,
+   "if_N=200_p_two_sided": 0.5085,
+   "if_N=400_p_two_sided": 0.3507,
+   "if_N=1000_p_two_sided": 0.1185
+  },
+  "2B_post vs Wan2.1-14B (Fig 6)": {
+   "sum_pct": 100.0,
+   "win_share_of_decisive": 0.4867,
+   "decisive_fraction_of_all_votes": 0.678,
+   "decisive_votes_needed_for_p05_if_true_share_is_observed": 5451,
+   "if_N=100_p_two_sided": 0.9036,
+   "if_N=200_p_two_sided": 0.7971,
+   "if_N=400_p_two_sided": 0.7156,
+   "if_N=1000_p_two_sided": 0.5139
+  },
+  "14B_post vs Wan2.1-14B (Fig 7)": {
+   "sum_pct": 100.0,
+   "win_share_of_decisive": 0.6045,
+   "decisive_fraction_of_all_votes": 0.804,
+   "decisive_votes_needed_for_p05_if_true_share_is_observed": 88,
+   "if_N=100_p_two_sided": 0.0929,
+   "if_N=200_p_two_sided": 0.0114,
+   "if_N=400_p_two_sided": 0.0002,
+   "if_N=1000_p_two_sided": 0.0
+  },
+  "14B_post vs Wan2.2-27B-A14B (Fig 7)": {
+   "sum_pct": 100.0,
+   "win_share_of_decisive": 0.5149,
+   "decisive_fraction_of_all_votes": 0.74,
+   "decisive_votes_needed_for_p05_if_true_share_is_observed": 4347,
+   "if_N=100_p_two_sided": 0.9076,
+   "if_N=200_p_two_sided": 0.8053,
+   "if_N=400_p_two_sided": 0.6842,
+   "if_N=1000_p_two_sided": 0.4401
+  }
+ },
+ "fig5_sums": {
+  "pretrained_plus_RL": 100.0,
+  "merged_plus_RL": 100.0
+ },
+ "fig3_sft_vs_base_reading": {
+  "Object Permanence": {
+   "sum_pct": 100.0,
+   "decisive_votes_needed_p05": 24
+  },
+  "High Motion": {
+   "sum_pct": 100.0,
+   "decisive_votes_needed_p05": 32
+  },
+  "Complex Scene": {
+   "sum_pct": 100.0,
+   "decisive_votes_needed_p05": 38
+  },
+  "Driving": {
+   "sum_pct": 100.0,
+   "decisive_votes_needed_p05": 33
+  },
+  "Robotic Manipulation": {
+   "sum_pct": 99.9,
+   "decisive_votes_needed_p05": 12
+  }
+ },
+ "benchmark_overall_check": {
+  "table10": {
+   "T2W 2B pre": {
+    "recomputed": 0.751,
+    "reported": 0.751,
+    "abs_diff": 0.0
+   },
+   "T2W 2B post": {
+    "recomputed": 0.768,
+    "reported": 0.768,
+    "abs_diff": 0.0
+   },
+   "T2W 14B pre": {
+    "recomputed": 0.7565,
+    "reported": 0.757,
+    "abs_diff": 0.0005
+   },
+   "T2W 14B post": {
+    "recomputed": 0.7675,
+    "reported": 0.768,
+    "abs_diff": 0.0005
+   },
+   "T2W Wan2.1-1.3B": {
+    "recomputed": 0.756,
+    "reported": 0.756,
+    "abs_diff": 0.0
+   },
+   "T2W Wan2.1-14B": {
+    "recomputed": 0.7605,
+    "reported": 0.761,
+    "abs_diff": 0.0005
+   },
+   "T2W Wan2.2-5B": {
+    "recomputed": 0.7635,
+    "reported": 0.764,
+    "abs_diff": 0.0005
+   },
+   "T2W Wan2.2-27B": {
+    "recomputed": 0.769,
+    "reported": 0.769,
+    "abs_diff": 0.0
+   }
+  },
+  "table11": {
+   "I2W 2B pre": {
+    "recomputed": 0.7995,
+    "reported": 0.799,
+    "abs_diff": 0.0005
+   },
+   "I2W 2B post": {
+    "recomputed": 0.8095,
+    "reported": 0.81,
+    "abs_diff": 0.0005
+   },
+   "I2W 14B pre": {
+    "recomputed": 0.806,
+    "reported": 0.806,
+    "abs_diff": 0.0
+   },
+   "I2W 14B post": {
+    "recomputed": 0.8095,
+    "reported": 0.81,
+    "abs_diff": 0.0005
+   },
+   "I2W Wan2.1-14B": {
+    "recomputed": 0.7975,
+    "reported": 0.797,
+    "abs_diff": 0.0005
+   },
+   "I2W Wan2.2-5B": {
+    "recomputed": 0.804,
+    "reported": 0.804,
+    "abs_diff": 0.0
+   },
+   "I2W Wan2.2-27B": {
+    "recomputed": 0.8065,
+    "reported": 0.806,
+    "abs_diff": 0.0005
+   }
+  },
+  "table7": {
+   "T2W teacher 2B": {
+    "recomputed": 0.768,
+    "reported": 0.768,
+    "abs_diff": 0.0
+   },
+   "T2W distilled 2B": {
+    "recomputed": 0.764,
+    "reported": 0.764,
+    "abs_diff": 0.0
+   }
+  },
+  "table8": {
+   "I2W teacher 2B": {
+    "recomputed": 0.8095,
+    "reported": 0.81,
+    "abs_diff": 0.0005
+   },
+   "I2W distilled 2B": {
+    "recomputed": 0.816,
+    "reported": 0.816,
+    "abs_diff": 0.0
+   }
+  }
+ },
+ "distill_vs_teacher_drop": {
+  "T2W_overall_drop": 0.004,
+  "T2W_relative_pct": -0.52,
+  "I2W_overall_gain": 0.006
+ },
+ "wan_vs_cosmos_gaps": {
+  "T2W_14B_post_minus_Wan2.2_27B": -0.001,
+  "I2W_2B_post_minus_Wan2.2_27B": 0.004,
+  "I2W_2B_post_minus_Wan2.2_5B": 0.006
+ },
+ "table6_sum_check": {
+  "T2W pre": {
+   "components_sum": 1.07,
+   "reported_sum": 1.08,
+   "abs_diff": 0.01
+  },
+  "T2W pre+RL": {
+   "components_sum": 1.69,
+   "reported_sum": 1.69,
+   "abs_diff": 0.0
+  },
+  "T2W merged": {
+   "components_sum": 1.22,
+   "reported_sum": 1.23,
+   "abs_diff": 0.01
+  },
+  "T2W merged+RL": {
+   "components_sum": 1.75,
+   "reported_sum": 1.74,
+   "abs_diff": 0.01
+  },
+  "I2W pre": {
+   "components_sum": 0.23,
+   "reported_sum": 0.23,
+   "abs_diff": 0.0
+  },
+  "I2W pre+RL": {
+   "components_sum": 0.42,
+   "reported_sum": 0.42,
+   "abs_diff": 0.0
+  },
+  "I2W merged": {
+   "components_sum": 0.23,
+   "reported_sum": 0.24,
+   "abs_diff": 0.01
+  },
+  "I2W merged+RL": {
+   "components_sum": 0.45,
+   "reported_sum": 0.45,
+   "abs_diff": 0.0
+  }
+ },
+ "table6_gain_pre_to_rl_T2W": 0.61,
+ "table12_uniform_T1_vs_T2.5": {
+  "Blur SSIM": {
+   "T1": 0.82,
+   "T2.5": 0.87,
+   "delta": 0.05,
+   "rel_pct": 6.1
+  },
+  "Edge F1": {
+   "T1": 0.26,
+   "T2.5": 0.41,
+   "delta": 0.15,
+   "rel_pct": 57.7
+  },
+  "Depth si-RMSE (lower better)": {
+   "T1": 0.7,
+   "T2.5": 0.67,
+   "delta": -0.03,
+   "rel_pct": -4.3
+  },
+  "Seg mIoU": {
+   "T1": 0.74,
+   "T2.5": 0.76,
+   "delta": 0.02,
+   "rel_pct": 2.7
+  },
+  "Overall Quality": {
+   "T1": 9.24,
+   "T2.5": 9.31,
+   "delta": 0.07,
+   "rel_pct": 0.8
+  }
+ },
+ "table14_transfer_ratios": {
+  "FVD StyleGAN T1 vs T2.5 (transfer)": {
+   "T1": 56.606,
+   "T2.5": 24.222,
+   "ratio_T1_over_T2.5": 2.337
+  },
+  "FVD I3D T1 vs T2.5": {
+   "T1": 60.66,
+   "T2.5": 25.692,
+   "ratio_T1_over_T2.5": 2.361
+  },
+  "FID T1 vs T2.5": {
+   "T1": 22.633,
+   "T2.5": 20.022,
+   "ratio_T1_over_T2.5": 1.13
+  },
+  "TSE T1 vs T2.5 (lower better?)": {
+   "T1": 1.017,
+   "T2.5": 1.246,
+   "ratio_T1_over_T2.5": 0.816
+  },
+  "CSE T1 vs T2.5 (lower better?)": {
+   "T1": 1.835,
+   "T2.5": 2.31,
+   "ratio_T1_over_T2.5": 0.794
+  }
+ },
+ "table14_predict_mv_vs_predict1": {
+  "FVD StyleGAN ratio": 2.76,
+  "FID ratio": 2.1
+ },
+ "table15_rel_change_pct": {
+  "LET-AP": 62.1,
+  "LET-APL": 64.9,
+  "LET-APH": 62.3,
+  "F1": 5.5,
+  "x-error far (lower better)": -7.1,
+  "Category Acc": 0.6
+ },
+ "table17_sampson_reduction_pct": -25.9,
+ "table19_bridge_deltas": {
+  "PSNR_dB": 3.81,
+  "SSIM": 0.03,
+  "LatentL2_rel_pct": -12.5,
+  "FVD_rel_pct": -23.2
+ },
+ "table20_timeemb_vs_crossattn": {
+  "PSNR_dB": 0.54,
+  "FVD": [
+   146,
+   159
+  ],
+  "note": "단일 실행, 시드·신뢰구간 없음"
+ },
+ "table18_2.5_minus_2_14B": {
+  "Object GPT": 1.8,
+  "Object Qwen": 7.4,
+  "Behavior GPT": 10.6,
+  "Behavior Qwen": -2.1,
+  "Env GPT": 0.0,
+  "Env Qwen": 3.5
+ },
+ "table2_central_view_sum_k": 305.5,
+ "table2_side_view_sum_k": 175,
+ "table5_robotics_vs_table2_k": {
+  "table5_robotic_manipulation_k": 730,
+  "table2_all_views_k": 480.5
+ },
+ "survival_rate_200M_over_6B_pct": 3.33,
+ "driving_clips_hours_3.1M_x_20s": 17222
+}
