@@ -1,0 +1,681 @@
+{
+  "assumptions": {
+    "libero_episodes_per_suite": 500,
+    "libero_episodes_note": "LIBERO 표준 프로토콜(과제당 50회 × 10과제)을 가정. 논문에는 평가 에피소드 수가 없다.",
+    "robotwin_episodes_per_cell": [
+      50,
+      100
+    ],
+    "robotwin_episodes_note": "RoboTwin 2.0 과제당 평가 횟수를 논문에서 찾지 못해 50과 100을 가정.",
+    "seed_caveat": "모든 비교는 학습 시드 1개로 보인다. 아래 구간은 에피소드 표본 변동만 반영하므로 학습 시드 변동을 빼고 있다."
+  },
+  "mean_checks": {
+    "T1_avg_recomputed": {
+      "base": 61.650000000000006,
+      "ours": 69.05
+    },
+    "T1_avg_printed": {
+      "base": 61.65,
+      "ours": 69.05
+    },
+    "T1_delta_recomputed": {
+      "avg": 7.3999999999999915,
+      "per_suite": [
+        11.0,
+        3.4000000000000057,
+        0.0,
+        15.2
+      ]
+    },
+    "T3_avg_recomputed": {
+      "oft_official": 95.35,
+      "oft_repro": 90.3,
+      "ours": 96.39999999999999
+    },
+    "T3_avg_printed": {
+      "oft_official": 95.35,
+      "oft_repro": 90.3,
+      "ours": 96.4
+    },
+    "T3_ours_minus_official_per_suite": [
+      1.0,
+      -0.3,
+      -0.6,
+      4.1
+    ],
+    "T3_ours_minus_official_avg": 1.05,
+    "T4_avg_recomputed": {
+      "base_easy": 54.833333333333336,
+      "base_hard": 9.333333333333334,
+      "ours_easy": 73.5,
+      "ours_hard": 17.666666666666668
+    },
+    "T4_avg_printed": {
+      "base_easy": 54.8,
+      "base_hard": 9.3,
+      "ours_easy": 73.5,
+      "ours_hard": 17.7
+    },
+    "T4_delta_recomputed": {
+      "easy": 18.67,
+      "hard": 8.33
+    },
+    "T4_task_delta": {
+      "easy": [
+        47,
+        7,
+        5,
+        13,
+        27,
+        13
+      ],
+      "hard": [
+        13,
+        4,
+        3,
+        0,
+        12,
+        18
+      ]
+    }
+  },
+  "T5": {
+    "avg_check": {
+      "base": {
+        "average_printed": 50.0,
+        "mean_of_layout_and_light": 0.0,
+        "gap": 50.0
+      },
+      "ours_1_5": {
+        "average_printed": 60.0,
+        "mean_of_layout_and_light": 50.0,
+        "gap": 10.0
+      },
+      "ours_full": {
+        "average_printed": 80.0,
+        "mean_of_layout_and_light": 100.0,
+        "gap": -20.0
+      }
+    },
+    "trial_counts_consistent_with_layout_light_values": [
+      3,
+      6,
+      9,
+      12,
+      15,
+      18,
+      21,
+      24,
+      27,
+      30
+    ],
+    "n10_consistent": false,
+    "note": "논문 부록 E는 모델당 10회 시행이라고 쓰지만 33.3과 66.7은 10회로는 나오지 않는다(1/3 단위)."
+  },
+  "T5_fisher_p_two_sided": {
+    "n3": {
+      "layout": 1.0,
+      "light": 0.4000000000000001
+    },
+    "n10": {
+      "layout": 0.21052631578947367,
+      "light": 0.0030959752321981426
+    }
+  },
+  "T1_ci": [
+    {
+      "suite": "Spatial",
+      "base": 58.2,
+      "new": 69.2,
+      "delta_pts": 11.0,
+      "ci95_pts": [
+        5.04,
+        16.85
+      ]
+    },
+    {
+      "suite": "Object",
+      "base": 74.8,
+      "new": 78.2,
+      "delta_pts": 3.4,
+      "ci95_pts": [
+        -1.86,
+        8.64
+      ]
+    },
+    {
+      "suite": "Goal",
+      "base": 87.8,
+      "new": 87.8,
+      "delta_pts": 0.0,
+      "ci95_pts": [
+        -4.08,
+        4.08
+      ]
+    },
+    {
+      "suite": "Long",
+      "base": 25.8,
+      "new": 41.0,
+      "delta_pts": 15.2,
+      "ci95_pts": [
+        9.37,
+        20.88
+      ]
+    }
+  ],
+  "T3_ci_vs_repro": [
+    {
+      "suite": "Spatial",
+      "base": 84.4,
+      "new": 97.2,
+      "delta_pts": 12.8,
+      "ci95_pts": [
+        9.35,
+        16.42
+      ]
+    },
+    {
+      "suite": "Object",
+      "base": 91.8,
+      "new": 98.0,
+      "delta_pts": 6.2,
+      "ci95_pts": [
+        3.54,
+        9.08
+      ]
+    },
+    {
+      "suite": "Goal",
+      "base": 95.2,
+      "new": 95.6,
+      "delta_pts": 0.4,
+      "ci95_pts": [
+        -2.27,
+        3.09
+      ]
+    },
+    {
+      "suite": "Long",
+      "base": 89.8,
+      "new": 94.8,
+      "delta_pts": 5.0,
+      "ci95_pts": [
+        1.7,
+        8.38
+      ]
+    }
+  ],
+  "T3_ci_vs_official": [
+    {
+      "suite": "Spatial",
+      "base": 96.2,
+      "new": 97.2,
+      "delta_pts": 1.0,
+      "ci95_pts": [
+        -1.29,
+        3.35
+      ]
+    },
+    {
+      "suite": "Object",
+      "base": 98.3,
+      "new": 98.0,
+      "delta_pts": -0.3,
+      "ci95_pts": [
+        -2.13,
+        1.5
+      ]
+    },
+    {
+      "suite": "Goal",
+      "base": 96.2,
+      "new": 95.6,
+      "delta_pts": -0.6,
+      "ci95_pts": [
+        -3.16,
+        1.93
+      ]
+    },
+    {
+      "suite": "Long",
+      "base": 90.7,
+      "new": 94.8,
+      "delta_pts": 4.1,
+      "ci95_pts": [
+        0.88,
+        7.39
+      ]
+    }
+  ],
+  "T1_sign_test_suites_positive": 0.0625,
+  "T3_sign_test_vs_repro_4of4": 0.0625,
+  "T4_sign_test": {
+    "easy_all_positive_6of6_one_sided_p": 0.015625,
+    "hard_positive_5_of_5_nonzero_two_sided_p": 0.0625,
+    "note": "과제 6개(논문은 50개 중 6개 선택 이유를 밝히지 않음). 과제 내 시드 변동은 반영하지 않음."
+  },
+  "T4_ci_pooled_assumed_n": {
+    "50": {
+      "easy_delta_pts": 18.67,
+      "ci95_pts_approx": [
+        4.51,
+        32.83
+      ]
+    },
+    "100": {
+      "easy_delta_pts": 18.67,
+      "ci95_pts_approx": [
+        5.22,
+        32.12
+      ]
+    }
+  },
+  "T2_aggregation_check": {
+    "WorldVLA": {
+      "per_dim_mean_over_suites": [
+        0.07,
+        28.37,
+        41.57,
+        43.7,
+        17.28,
+        11.2,
+        37.88
+      ],
+      "per_dim_printed": [
+        0.1,
+        27.9,
+        41.6,
+        43.7,
+        17.1,
+        10.9,
+        38.0
+      ],
+      "mean_of_7_dims_from_table2": 25.61,
+      "table2_total_printed": 25.0,
+      "mean_of_suite_totals": 25.28
+    },
+    "base": {
+      "per_dim_mean_over_suites": [
+        0.12,
+        20.77,
+        43.95,
+        26.25,
+        10.15,
+        4.15,
+        26.85
+      ],
+      "per_dim_printed": [
+        0.1,
+        20.8,
+        43.9,
+        26.3,
+        10.1,
+        4.1,
+        26.9
+      ],
+      "mean_of_7_dims_from_table2": 18.89,
+      "table2_total_printed": 18.9,
+      "mean_of_suite_totals": 18.82
+    },
+    "ours": {
+      "per_dim_mean_over_suites": [
+        0.45,
+        25.77,
+        54.38,
+        38.0,
+        23.95,
+        4.1,
+        32.83
+      ],
+      "per_dim_printed": [
+        0.4,
+        25.7,
+        54.4,
+        38.0,
+        23.9,
+        4.1,
+        32.8
+      ],
+      "mean_of_7_dims_from_table2": 25.61,
+      "table2_total_printed": 25.6,
+      "mean_of_suite_totals": 25.0
+    }
+  },
+  "T2_delta_check": {
+    "Camera": 0.3,
+    "Robot": 4.9,
+    "Language": 10.5,
+    "Light": 11.7,
+    "Background": 13.8,
+    "Noise": 0.0,
+    "Layout": 5.9
+  },
+  "T2_delta_printed": {
+    "Camera": 0.3,
+    "Robot": 4.9,
+    "Language": 10.5,
+    "Light": 11.7,
+    "Background": 13.8,
+    "Noise": 0.0,
+    "Layout": 5.9,
+    "Total": 6.7
+  },
+  "T9_12_suites": {
+    "Spatial": {
+      "delta_recomputed": [
+        0.8,
+        4.8,
+        1.8,
+        13.0,
+        33.7,
+        -0.3,
+        12.8,
+        8.3
+      ],
+      "delta_printed": [
+        0.8,
+        4.8,
+        1.8,
+        13.0,
+        33.7,
+        -0.3,
+        12.8,
+        8.3
+      ],
+      "delta_match": true,
+      "ours_minus_worldvla_total": -0.4
+    },
+    "Object": {
+      "delta_recomputed": [
+        0.0,
+        7.6,
+        19.5,
+        15.5,
+        4.1,
+        1.2,
+        9.4,
+        7.9
+      ],
+      "delta_printed": [
+        0.0,
+        7.6,
+        19.5,
+        15.5,
+        4.1,
+        1.2,
+        9.4,
+        7.9
+      ],
+      "delta_match": true,
+      "ours_minus_worldvla_total": 1.0
+    },
+    "Goal": {
+      "delta_recomputed": [
+        0.0,
+        3.5,
+        9.7,
+        5.4,
+        16.7,
+        -1.3,
+        5.2,
+        5.1
+      ],
+      "delta_printed": [
+        0.0,
+        3.5,
+        9.7,
+        5.4,
+        16.7,
+        -1.3,
+        5.2,
+        5.1
+      ],
+      "delta_match": true,
+      "ours_minus_worldvla_total": -5.6
+    },
+    "Long": {
+      "delta_recomputed": [
+        0.5,
+        4.1,
+        10.7,
+        13.1,
+        0.7,
+        0.2,
+        -3.5,
+        3.4
+      ],
+      "delta_printed": [
+        0.5,
+        4.1,
+        10.7,
+        13.1,
+        0.7,
+        0.2,
+        -3.5,
+        3.4
+      ],
+      "delta_match": true,
+      "ours_minus_worldvla_total": 3.9
+    }
+  },
+  "T9_12_raw_total_order": {
+    "columns": [
+      "Camera",
+      "Robot",
+      "Language",
+      "Light",
+      "Background",
+      "Noise",
+      "Layout",
+      "Total"
+    ],
+    "values": {
+      "Spatial": {
+        "WorldVLA": [
+          0.0,
+          44.3,
+          46.3,
+          65.1,
+          19.8,
+          11.7,
+          46.1,
+          32.5
+        ],
+        "base": [
+          0.0,
+          24.9,
+          51.5,
+          44.2,
+          10.5,
+          1.7,
+          31.4,
+          23.8
+        ],
+        "ours": [
+          0.8,
+          29.7,
+          53.3,
+          57.2,
+          44.2,
+          1.4,
+          44.2,
+          32.1
+        ]
+      },
+      "Object": {
+        "WorldVLA": [
+          0.0,
+          26.4,
+          57.2,
+          20.5,
+          17.3,
+          18.0,
+          53.6,
+          28.6
+        ],
+        "base": [
+          0.0,
+          25.4,
+          72.0,
+          19.5,
+          3.2,
+          5.2,
+          25.3,
+          21.7
+        ],
+        "ours": [
+          0.0,
+          33.0,
+          91.5,
+          35.0,
+          7.3,
+          6.4,
+          34.7,
+          29.6
+        ]
+      },
+      "Goal": {
+        "WorldVLA": [
+          0.3,
+          30.6,
+          42.2,
+          68.8,
+          30.3,
+          13.5,
+          47.4,
+          31.8
+        ],
+        "base": [
+          0.5,
+          25.4,
+          29.8,
+          35.1,
+          19.6,
+          9.0,
+          30.8,
+          21.1
+        ],
+        "ours": [
+          0.5,
+          28.9,
+          39.5,
+          40.5,
+          36.3,
+          7.7,
+          36.0,
+          26.2
+        ]
+      },
+      "Long": {
+        "WorldVLA": [
+          0.0,
+          12.2,
+          20.6,
+          20.4,
+          1.7,
+          1.6,
+          4.4,
+          8.2
+        ],
+        "base": [
+          0.0,
+          7.4,
+          22.5,
+          6.2,
+          7.3,
+          0.7,
+          19.9,
+          8.7
+        ],
+        "ours": [
+          0.5,
+          11.5,
+          33.2,
+          19.3,
+          8.0,
+          0.9,
+          16.4,
+          12.1
+        ]
+      }
+    }
+  },
+  "T9_12_total_mean_over_suites": {
+    "WorldVLA": 25.28,
+    "base": 18.82,
+    "ours": 25.0
+  },
+  "T9_12_ours_beats_worldvla_in_suites": 2,
+  "T9_12_sign_test_ours_gt_base_4of4_two_sided_p": 0.125,
+  "T6": {
+    "mw_avg_recomputed": {
+      "VC-1": 88.8,
+      "V-JEPA 2": 90.4
+    },
+    "mw_avg_printed": {
+      "VC-1": 88.8,
+      "V-JEPA 2": 90.4,
+      "CLIP": 75.5
+    },
+    "mw_diff_per_task": [
+      8.0,
+      -4.0,
+      4.0,
+      0.0,
+      0.0
+    ],
+    "dmc_avg_recomputed": {
+      "VC-1": 536.0,
+      "V-JEPA 2": 583.8
+    },
+    "dmc_avg_printed": {
+      "VC-1": 536.0,
+      "V-JEPA 2": 583.8
+    },
+    "dmc_diff_per_task": [
+      14,
+      98,
+      -15,
+      1,
+      141
+    ],
+    "dmc_relative_gain_pct": 8.92,
+    "mw_wins_ties_losses": [
+      2,
+      2,
+      1
+    ],
+    "dmc_wins_ties_losses": [
+      4,
+      0,
+      1
+    ]
+  },
+  "T7": {
+    "rows": [
+      [
+        "BASELINE",
+        25.8
+      ],
+      [
+        "BASELINE+DINOv2",
+        26.0
+      ],
+      [
+        "BASELINE+DINOv2",
+        31.2
+      ],
+      [
+        "BASELINE+SigLIP",
+        33.6
+      ],
+      [
+        "BASELINE+V-JEPA 2",
+        41.0
+      ]
+    ],
+    "negative_gain_rows": [],
+    "duplicate_label": "BASELINE+DINOv2가 두 번 나옴(26.0, 31.2)"
+  }
+}
