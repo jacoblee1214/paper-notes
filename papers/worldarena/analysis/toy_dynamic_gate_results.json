@@ -1,0 +1,39 @@
+{
+  "max_abs_gap_paper_vs_code": 0.7889,
+  "code_jump_at_threshold": {
+    "dyn_before": 0.121,
+    "dyn_after": 0.122,
+    "score_before": 0.1089,
+    "score_after": 0.9
+  },
+  "paper_formula_continuous_at_gamma": true,
+  "two_model_ranking": {
+    "paper_rule": {
+      "A": 0.7832,
+      "B": 0.85
+    },
+    "code_rule": {
+      "A": 0.095,
+      "B": 0.85
+    }
+  },
+  "threshold_sensitivity_on_random_videos": {
+    "0.1": {
+      "mean_code_rule": 0.5959,
+      "mean_paper_rule_with_same_gamma": 0.726
+    },
+    "0.1213": {
+      "mean_code_rule": 0.5381,
+      "mean_paper_rule_with_same_gamma": 0.6948
+    },
+    "0.15": {
+      "mean_code_rule": 0.4673,
+      "mean_paper_rule_with_same_gamma": 0.6529
+    },
+    "0.2": {
+      "mean_code_rule": 0.3518,
+      "mean_paper_rule_with_same_gamma": 0.5809
+    }
+  },
+  "note": "논문은 γ 값을 명시하지 않는다. 코드는 0.1213을 쓰며 식도 다르다(곱 대 min(1,·/γ)). toy는 영상 분포를 가정한 것이므로 절대 점수가 아니라 규칙 차이의 크기만 본다."
+}

@@ -1,0 +1,382 @@
+{
+  "ewmscore_recompute": {
+    "per_model": {
+      "GigaWorld-0": {
+        "mean16_x100": 53.39,
+        "fig1": 53.39,
+        "diff": -0.0
+      },
+      "Genie Envisioner": {
+        "mean16_x100": 43.65,
+        "fig1": 43.65,
+        "diff": -0.0
+      },
+      "TesserAct": {
+        "mean16_x100": 53.23,
+        "fig1": 53.23,
+        "diff": -0.0
+      },
+      "RoboMaster": {
+        "mean16_x100": 51.84,
+        "fig1": 51.84,
+        "diff": 0.0
+      },
+      "Vidar": {
+        "mean16_x100": 51.6,
+        "fig1": 51.6,
+        "diff": 0.0
+      },
+      "Cosmos-Predict 2.5 (text)": {
+        "mean16_x100": 50.81,
+        "fig1": 50.81,
+        "diff": -0.0
+      },
+      "Cosmos-Predict 2.5 (action)": {
+        "mean16_x100": 55.91,
+        "fig1": 55.9,
+        "diff": 0.01
+      },
+      "WoW": {
+        "mean16_x100": 54.88,
+        "fig1": 54.88,
+        "diff": -0.0
+      },
+      "CtrlWorld": {
+        "mean16_x100": 59.7,
+        "fig1": 59.7,
+        "diff": -0.0
+      },
+      "Wan 2.2": {
+        "mean16_x100": 54.54,
+        "fig1": 54.54,
+        "diff": 0.0
+      },
+      "CogVideoX": {
+        "mean16_x100": 57.9,
+        "fig1": 57.88,
+        "diff": 0.02
+      },
+      "IRASim": {
+        "mean16_x100": 58.12,
+        "fig1": 58.11,
+        "diff": 0.01
+      },
+      "Veo 3.1": {
+        "mean16_x100": 58.87,
+        "fig1": 58.87,
+        "diff": -0.0
+      },
+      "Wan 2.6": {
+        "mean16_x100": 61.86,
+        "fig1": 61.86,
+        "diff": 0.0
+      }
+    },
+    "max_abs_diff": 0.02,
+    "mean_abs_diff": 0.0,
+    "pearson_mean16_vs_fig1": 1.0,
+    "note": "Table 2·3 값을 16개 단순 평균 x100 한 값이 Figure 1(a) 막대와 얼마나 맞는지 본다. 정규화 bound(Table 6)는 표 값에 이미 적용됐다고 가정."
+  },
+  "group_means": {
+    "Image Quality": {
+      "general_mean": 0.5224,
+      "embodied_mean": 0.4105,
+      "diff_emb_minus_gen": -0.1118
+    },
+    "Aesthetic Quality": {
+      "general_mean": 0.4201,
+      "embodied_mean": 0.3924,
+      "diff_emb_minus_gen": -0.0277
+    },
+    "JEPA Similarity": {
+      "general_mean": 0.747,
+      "embodied_mean": 0.5928,
+      "diff_emb_minus_gen": -0.1542
+    },
+    "Dynamic Degree": {
+      "general_mean": 0.5096,
+      "embodied_mean": 0.5059,
+      "diff_emb_minus_gen": -0.0038
+    },
+    "Flow Score": {
+      "general_mean": 0.2346,
+      "embodied_mean": 0.2244,
+      "diff_emb_minus_gen": -0.0102
+    },
+    "Motion Smoothness": {
+      "general_mean": 0.7484,
+      "embodied_mean": 0.7437,
+      "diff_emb_minus_gen": -0.0047
+    },
+    "Subject Consist.": {
+      "general_mean": 0.7966,
+      "embodied_mean": 0.7981,
+      "diff_emb_minus_gen": 0.0014
+    },
+    "Background Consist.": {
+      "general_mean": 0.8803,
+      "embodied_mean": 0.888,
+      "diff_emb_minus_gen": 0.0077
+    },
+    "Photometric Consist.": {
+      "general_mean": 0.3377,
+      "embodied_mean": 0.2429,
+      "diff_emb_minus_gen": -0.0948
+    },
+    "Interaction Quality": {
+      "general_mean": 0.6569,
+      "embodied_mean": 0.5074,
+      "diff_emb_minus_gen": -0.1495
+    },
+    "Trajectory Acc.": {
+      "general_mean": 0.1892,
+      "embodied_mean": 0.2094,
+      "diff_emb_minus_gen": 0.0202
+    },
+    "Depth Acc.": {
+      "general_mean": 0.7858,
+      "embodied_mean": 0.8015,
+      "diff_emb_minus_gen": 0.0158
+    },
+    "Perspectivity": {
+      "general_mean": 0.7949,
+      "embodied_mean": 0.7501,
+      "diff_emb_minus_gen": -0.0448
+    },
+    "Instruction Following": {
+      "general_mean": 0.7627,
+      "embodied_mean": 0.5409,
+      "diff_emb_minus_gen": -0.2218
+    },
+    "Semantic Alignment": {
+      "general_mean": 0.8797,
+      "embodied_mean": 0.8672,
+      "diff_emb_minus_gen": -0.0125
+    },
+    "Action Following": {
+      "general_mean": 0.0608,
+      "embodied_mean": 0.0545,
+      "diff_emb_minus_gen": -0.0063
+    }
+  },
+  "claim_vs_table_ranks": {
+    "C1_TesserAct_trajectory_high (4.2.1)": {
+      "value": 0.1396,
+      "rank_of_14": 9,
+      "top": "CtrlWorld",
+      "top_value": 0.4766
+    },
+    "C2_WoW_action_following_strong (4.2.1)": {
+      "value": 0.0434,
+      "rank_of_14": 8,
+      "top": "Cosmos-Predict 2.5 (text)",
+      "top_value": 0.1418
+    },
+    "C3_CogVideoX_visual_quality_excels (4.2.1)": {
+      "value": 0.3582,
+      "rank_of_14": 9,
+      "top": "Wan 2.6",
+      "top_value": 0.6824
+    },
+    "C4_CogVideoX_lags_physics (4.2.1, interaction)": {
+      "value": 0.594,
+      "rank_of_14": 4,
+      "top": "Veo 3.1",
+      "top_value": 0.7872
+    },
+    "C5_CtrlWorld_trajectory_high (4.2.1)": {
+      "value": 0.4766,
+      "rank_of_14": 1,
+      "top": "CtrlWorld",
+      "top_value": 0.4766
+    },
+    "C6_Veo31_limited_embodied_gain (4.2.1, interaction)": {
+      "value": 0.7872,
+      "rank_of_14": 1,
+      "top": "Veo 3.1",
+      "top_value": 0.7872
+    },
+    "C7_Veo31_Wan26_top_visual (4.2.1, image quality)": {
+      "value": 0.6824,
+      "rank_of_14": 1,
+      "top": "Wan 2.6",
+      "top_value": 0.6824
+    }
+  },
+  "action_following_range": {
+    "min": 0.0076,
+    "max": 0.1418,
+    "figure11_example_high_low": [
+      12.01,
+      0.47
+    ]
+  },
+  "table4_stats": {
+    "real_data_ci95": {
+      "task1": [
+        0.678,
+        0.842
+      ],
+      "task2": [
+        0.563,
+        0.745
+      ]
+    },
+    "rows": {
+      "Genie Envisioner": {
+        "task1": 7,
+        "task2": 21,
+        "task1_ci95": [
+          0.034,
+          0.137
+        ],
+        "task2_ci95": [
+          0.142,
+          0.3
+        ],
+        "task1_p_vs_real_77": 0.0,
+        "task2_p_vs_real_66": 0.0,
+        "task2_diff_pp_vs_real": -45
+      },
+      "TesserAct": {
+        "task1": 1,
+        "task2": 35,
+        "task1_ci95": [
+          0.002,
+          0.054
+        ],
+        "task2_ci95": [
+          0.264,
+          0.447
+        ],
+        "task1_p_vs_real_77": 0.0,
+        "task2_p_vs_real_66": 1.9e-05,
+        "task2_diff_pp_vs_real": -31
+      },
+      "RoboMaster": {
+        "task1": 7,
+        "task2": 68,
+        "task1_ci95": [
+          0.034,
+          0.137
+        ],
+        "task2_ci95": [
+          0.583,
+          0.763
+        ],
+        "task1_p_vs_real_77": 0.0,
+        "task2_p_vs_real_66": 0.880541,
+        "task2_diff_pp_vs_real": 2
+      },
+      "Vidar": {
+        "task1": 13,
+        "task2": 53,
+        "task1_ci95": [
+          0.078,
+          0.21
+        ],
+        "task2_ci95": [
+          0.433,
+          0.625
+        ],
+        "task1_p_vs_real_77": 0.0,
+        "task2_p_vs_real_66": 0.0836,
+        "task2_diff_pp_vs_real": -13
+      },
+      "WoW": {
+        "task1": 45,
+        "task2": 71,
+        "task1_ci95": [
+          0.356,
+          0.548
+        ],
+        "task2_ci95": [
+          0.615,
+          0.79
+        ],
+        "task1_p_vs_real_77": 6e-06,
+        "task2_p_vs_real_66": 0.542776,
+        "task2_diff_pp_vs_real": 5
+      },
+      "Wan 2.2": {
+        "task1": 15,
+        "task2": 41,
+        "task1_ci95": [
+          0.093,
+          0.233
+        ],
+        "task2_ci95": [
+          0.319,
+          0.508
+        ],
+        "task1_p_vs_real_77": 0.0,
+        "task2_p_vs_real_66": 0.000631,
+        "task2_diff_pp_vs_real": -25
+      }
+    },
+    "note": "Fisher exact, 두 비율 모두 n=100 가정. 시드 반복이 없어 학습 분산은 빠져 있다."
+  },
+  "tesseract_identical_t4_t5": true,
+  "ewm_vs_tasks_n6": {
+    "models": [
+      "Genie Envisioner",
+      "TesserAct",
+      "RoboMaster",
+      "Vidar",
+      "WoW",
+      "Wan 2.2"
+    ],
+    "data_engine_avg_r": [
+      0.6,
+      0.2081
+    ],
+    "data_engine_avg_r_paper": 0.6,
+    "action_planner_avg_r": [
+      0.36,
+      0.4827
+    ],
+    "action_planner_avg_r_paper": 0.36,
+    "data_engine_task1_r": 0.424,
+    "data_engine_task2_r": 0.628,
+    "critical_r_n6_alpha05": 0.811,
+    "note": "논문 r=0.600, 0.360과 같은지 본다. 평균 방식(Task1·Task2 단순 평균)은 논문에 명시되지 않아 가정. EWMScore 값은 Figure 1(a) 라벨에서 옮긴 값이다."
+  },
+  "policy_evaluator": {
+    "ctrlworld": {
+      "pearson_r_paper": 0.986,
+      "n": 5,
+      "p_two_sided": 0.002,
+      "fisher_ci95": [
+        0.797,
+        0.999
+      ]
+    },
+    "cosmos_predict": {
+      "pearson_r_paper": 0.483,
+      "n": 5,
+      "p_two_sided": 0.4099,
+      "fisher_ci95": [
+        -0.696,
+        0.957
+      ]
+    },
+    "z_diff_independent_approx": {
+      "z": 1.951,
+      "p_two_sided": 0.0511,
+      "note": "두 상관이 같은 시뮬레이터 점수를 공유하므로 독립 가정은 근사다."
+    },
+    "code_default_sim_scores": {
+      "10data": 28.6,
+      "20data": 34.58,
+      "30data": 37.78,
+      "50data": 43.52,
+      "fulldata": 46.8
+    }
+  },
+  "human_eval": {
+    "pearson_paper": 0.825,
+    "n_models_reported": 14,
+    "p_if_n14": 0.00028121110668921645,
+    "note": "표 값이 없어 r 자체는 재계산 불가. 그림 5의 점 14개를 근거로 n=14로 두면 p<0.001이다."
+  }
+}
