@@ -1,0 +1,500 @@
+{
+  "assumptions": {
+    "n_sim_cell": 128,
+    "n_realworld": 30
+  },
+  "integer_check_fail_n128": [
+    {
+      "table": "T1",
+      "method": "Ours",
+      "P": 128,
+      "task": "StackThree",
+      "reported": 56.3
+    },
+    {
+      "table": "T1",
+      "method": "DPO",
+      "P": 1280,
+      "task": "ThreePieceAssembly",
+      "reported": 26.7
+    },
+    {
+      "table": "T2",
+      "method": "Ours",
+      "col": "Pos",
+      "reported": 22.3
+    }
+  ],
+  "mean_check": {
+    "('base', None)": {
+      "reported": 33.6,
+      "recomputed": 33.6,
+      "ok": true
+    },
+    "('GRPO', 128)": {
+      "reported": 33.2,
+      "recomputed": 33.2,
+      "ok": true
+    },
+    "('DPO', 128)": {
+      "reported": 37.3,
+      "recomputed": 37.3,
+      "ok": true
+    },
+    "('Ours', 128)": {
+      "reported": 47.1,
+      "recomputed": 47.08,
+      "ok": true
+    },
+    "('GRPO', 1280)": {
+      "reported": 37.1,
+      "recomputed": 37.12,
+      "ok": true
+    },
+    "('DPO', 1280)": {
+      "reported": 42.4,
+      "recomputed": 42.4,
+      "ok": true
+    },
+    "('Ours', 1280)": {
+      "reported": 57.6,
+      "recomputed": 57.62,
+      "ok": true
+    },
+    "T2 Base": {
+      "reported": 23.7,
+      "recomputed": 23.7,
+      "ok": true
+    },
+    "T2 GRPO": {
+      "reported": 24.7,
+      "recomputed": 24.73,
+      "ok": true
+    },
+    "T2 DPO": {
+      "reported": 19.5,
+      "recomputed": 19.53,
+      "ok": true
+    },
+    "T2 Ours": {
+      "reported": 29.6,
+      "recomputed": 29.57,
+      "ok": true
+    }
+  },
+  "table1_counts_n128": {
+    "('base', None)": [
+      56,
+      60,
+      25,
+      31
+    ],
+    "('GRPO', 128)": [
+      49,
+      67,
+      22,
+      32
+    ],
+    "('DPO', 128)": [
+      56,
+      69,
+      30,
+      36
+    ],
+    "('Ours', 128)": [
+      79,
+      72,
+      48,
+      42
+    ],
+    "('GRPO', 1280)": [
+      61,
+      70,
+      26,
+      33
+    ],
+    "('DPO', 1280)": [
+      67,
+      73,
+      34,
+      43
+    ],
+    "('Ours', 1280)": [
+      96,
+      82,
+      59,
+      58
+    ]
+  },
+  "table1_tests": {
+    "P128 Ours vs DPO (512 pooled episodes)": {
+      "diff_pts": 9.77,
+      "wald95_pts": [
+        3.75,
+        15.79
+      ],
+      "fisher_p": 0.0019158140162162465
+    },
+    "P128 Ours vs DPO per task": [
+      {
+        "task": "Coffee",
+        "ours": 79,
+        "other": 56,
+        "diff_pts": 17.97,
+        "wald95_pts": [
+          5.94,
+          30.0
+        ],
+        "fisher_p": 0.00577768411015
+      },
+      {
+        "task": "StackThree",
+        "ours": 72,
+        "other": 69,
+        "diff_pts": 2.34,
+        "wald95_pts": [
+          -9.84,
+          14.53
+        ],
+        "fisher_p": 0.8016462465302544
+      },
+      {
+        "task": "ThreePieceAssembly",
+        "ours": 48,
+        "other": 30,
+        "diff_pts": 14.06,
+        "wald95_pts": [
+          2.92,
+          25.21
+        ],
+        "fisher_p": 0.02066464414861169
+      },
+      {
+        "task": "Square",
+        "ours": 42,
+        "other": 36,
+        "diff_pts": 4.69,
+        "wald95_pts": [
+          -6.57,
+          15.95
+        ],
+        "fisher_p": 0.49731203179651634
+      }
+    ],
+    "P128 Ours vs GRPO (512 pooled episodes)": {
+      "diff_pts": 13.87,
+      "wald95_pts": [
+        7.92,
+        19.81
+      ],
+      "fisher_p": 7.794715094417642e-06
+    },
+    "P128 Ours vs GRPO per task": [
+      {
+        "task": "Coffee",
+        "ours": 79,
+        "other": 49,
+        "diff_pts": 23.44,
+        "wald95_pts": [
+          11.53,
+          35.35
+        ],
+        "fisher_p": 0.00027309506266238396
+      },
+      {
+        "task": "StackThree",
+        "ours": 72,
+        "other": 67,
+        "diff_pts": 3.91,
+        "wald95_pts": [
+          -8.29,
+          16.1
+        ],
+        "fisher_p": 0.6158603814429953
+      },
+      {
+        "task": "ThreePieceAssembly",
+        "ours": 48,
+        "other": 22,
+        "diff_pts": 20.31,
+        "wald95_pts": [
+          9.68,
+          30.95
+        ],
+        "fisher_p": 0.0004109770031293968
+      },
+      {
+        "task": "Square",
+        "ours": 42,
+        "other": 32,
+        "diff_pts": 7.81,
+        "wald95_pts": [
+          -3.25,
+          18.88
+        ],
+        "fisher_p": 0.21452744157600875
+      }
+    ],
+    "P1280 Ours vs DPO (512 pooled episodes)": {
+      "diff_pts": 15.23,
+      "wald95_pts": [
+        9.18,
+        21.29
+      ],
+      "fisher_p": 1.426626874141436e-06
+    },
+    "P1280 Ours vs DPO per task": [
+      {
+        "task": "Coffee",
+        "ours": 96,
+        "other": 67,
+        "diff_pts": 22.66,
+        "wald95_pts": [
+          11.2,
+          34.11
+        ],
+        "fisher_p": 0.0002537818262295706
+      },
+      {
+        "task": "StackThree",
+        "ours": 82,
+        "other": 73,
+        "diff_pts": 7.03,
+        "wald95_pts": [
+          -4.91,
+          18.97
+        ],
+        "fisher_p": 0.3062958139397362
+      },
+      {
+        "task": "ThreePieceAssembly",
+        "ours": 59,
+        "other": 34,
+        "diff_pts": 19.53,
+        "wald95_pts": [
+          7.99,
+          31.07
+        ],
+        "fisher_p": 0.0017432183434255525
+      },
+      {
+        "task": "Square",
+        "ours": 58,
+        "other": 43,
+        "diff_pts": 11.72,
+        "wald95_pts": [
+          -0.17,
+          23.61
+        ],
+        "fisher_p": 0.07316552598863431
+      }
+    ],
+    "P1280 Ours vs GRPO (512 pooled episodes)": {
+      "diff_pts": 20.51,
+      "wald95_pts": [
+        14.52,
+        26.49
+      ],
+      "fisher_p": 6.50895136177332e-11
+    },
+    "P1280 Ours vs GRPO per task": [
+      {
+        "task": "Coffee",
+        "ours": 96,
+        "other": 61,
+        "diff_pts": 27.34,
+        "wald95_pts": [
+          15.89,
+          38.8
+        ],
+        "fisher_p": 1.1034112960602694e-05
+      },
+      {
+        "task": "StackThree",
+        "ours": 82,
+        "other": 70,
+        "diff_pts": 9.38,
+        "wald95_pts": [
+          -2.6,
+          21.35
+        ],
+        "fisher_p": 0.1614191806008462
+      },
+      {
+        "task": "ThreePieceAssembly",
+        "ours": 59,
+        "other": 26,
+        "diff_pts": 25.78,
+        "wald95_pts": [
+          14.68,
+          36.88
+        ],
+        "fisher_p": 1.8346175911683685e-05
+      },
+      {
+        "task": "Square",
+        "ours": 58,
+        "other": 33,
+        "diff_pts": 19.53,
+        "wald95_pts": [
+          8.05,
+          31.01
+        ],
+        "fisher_p": 0.0016534106043528487
+      }
+    ]
+  },
+  "table2_counts_approx": {
+    "Base": [
+      18,
+      59,
+      14
+    ],
+    "GRPO": [
+      20,
+      61,
+      14
+    ],
+    "DPO": [
+      21,
+      44,
+      10
+    ],
+    "Ours": [
+      29,
+      64,
+      21
+    ]
+  },
+  "table2_tests": {
+    "Pos: Ours vs DPO": {
+      "diff_pts": 6.25,
+      "wald95_pts": [
+        -3.43,
+        15.93
+      ],
+      "fisher_p": 0.26968476423800547
+    },
+    "Pos: Ours vs Base": {
+      "diff_pts": 8.59,
+      "wald95_pts": [
+        -0.83,
+        18.02
+      ],
+      "fisher_p": 0.1057855433820743
+    },
+    "Pos: Ours vs GRPO": {
+      "diff_pts": 7.03,
+      "wald95_pts": [
+        -2.57,
+        16.63
+      ],
+      "fisher_p": 0.2034508733364341
+    },
+    "Bg: Ours vs DPO": {
+      "diff_pts": 15.62,
+      "wald95_pts": [
+        3.68,
+        27.57
+      ],
+      "fisher_p": 0.016010822177548796
+    },
+    "Bg: Ours vs Base": {
+      "diff_pts": 3.91,
+      "wald95_pts": [
+        -8.33,
+        16.14
+      ],
+      "fisher_p": 0.6168960351072093
+    },
+    "Bg: Ours vs GRPO": {
+      "diff_pts": 2.34,
+      "wald95_pts": [
+        -9.9,
+        14.59
+      ],
+      "fisher_p": 0.8025951991834782
+    },
+    "Tex: Ours vs DPO": {
+      "diff_pts": 8.59,
+      "wald95_pts": [
+        0.67,
+        16.52
+      ],
+      "fisher_p": 0.0540207450137113
+    },
+    "Tex: Ours vs Base": {
+      "diff_pts": 5.47,
+      "wald95_pts": [
+        -2.92,
+        13.86
+      ],
+      "fisher_p": 0.2749091315859813
+    },
+    "Tex: Ours vs GRPO": {
+      "diff_pts": 5.47,
+      "wald95_pts": [
+        -2.92,
+        13.86
+      ],
+      "fisher_p": 0.2749091315859813
+    }
+  },
+  "realworld_counts": {
+    "counts": {
+      "Base": 16,
+      "DPO": 18,
+      "WMPO": 21
+    },
+    "pct": {
+      "Base": 53.3,
+      "DPO": 60.0,
+      "WMPO": 70.0
+    },
+    "reported": {
+      "Base": 53,
+      "DPO": 60,
+      "WMPO": 70
+    }
+  },
+  "realworld_tests": {
+    "WMPO vs Base": {
+      "diff_pts": 16.67,
+      "wald95_pts": [
+        -7.57,
+        40.91
+      ],
+      "fisher_p": 0.28817964270091767
+    },
+    "WMPO vs DPO": {
+      "diff_pts": 10.0,
+      "wald95_pts": [
+        -14.0,
+        34.0
+      ],
+      "fisher_p": 0.5888821858925749
+    },
+    "DPO vs Base": {
+      "diff_pts": 6.67,
+      "wald95_pts": [
+        -18.35,
+        31.69
+      ],
+      "fisher_p": 0.7947745256391852
+    }
+  },
+  "realworld_wilson95": {
+    "Base": [
+      36.1,
+      69.8
+    ],
+    "DPO": [
+      42.3,
+      75.4
+    ],
+    "WMPO": [
+      52.1,
+      83.3
+    ]
+  }
+}
