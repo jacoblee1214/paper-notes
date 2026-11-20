@@ -1,0 +1,224 @@
+{
+  "table1": {
+    "behavior_mean_base": 11.21,
+    "behavior_mean_dg": 43.21,
+    "behavior_n": 14,
+    "env_n": 13,
+    "env_mean_base": 0.0,
+    "env_mean_dg_recomputed": 31.92,
+    "env_sum_dg": 415,
+    "env_mean_dg_if_denominator_14": 29.64,
+    "note": "Table 1 env 평균 28.5는 13개 과제 단순평균(31.9)과 다름. 본문 11.8% (p.7 l.563) vs 표 11.2 불일치.",
+    "wilcoxon_behavior_p": 0.0001220703125
+  },
+  "table4": {
+    "n_tasks": 24,
+    "recomputed_avg": [
+      17.44,
+      32.07,
+      49.59,
+      23.32,
+      39.94,
+      57.61,
+      20.55
+    ],
+    "reported_avg": [
+      17.44,
+      32.07,
+      49.59,
+      23.32,
+      39.94,
+      57.61,
+      20.55
+    ],
+    "paired_tests": {
+      "300 vs 300+NT": {
+        "mean_diff": 8.02,
+        "sd_diff": 10.94,
+        "ci95_t": [
+          3.4,
+          12.64
+        ],
+        "t_p": 0.0015383349397944238,
+        "wilcoxon_p": 0.0015796422958374023,
+        "tasks_improved": 17,
+        "tasks_worse": 7
+      },
+      "30 vs 30+NT": {
+        "mean_diff": 5.88,
+        "sd_diff": 7.5,
+        "ci95_t": [
+          2.71,
+          9.05
+        ],
+        "t_p": 0.0008307989892122121,
+        "wilcoxon_p": 0.0008622512288342256,
+        "tasks_improved": 17,
+        "tasks_worse": 1
+      },
+      "100 vs 100+NT": {
+        "mean_diff": 7.88,
+        "sd_diff": 9.5,
+        "ci95_t": [
+          3.86,
+          11.89
+        ],
+        "t_p": 0.000482603379748062,
+        "wilcoxon_p": 0.00037276744842529297,
+        "tasks_improved": 21,
+        "tasks_worse": 3
+      },
+      "300 vs ONLY_NT": {
+        "mean_diff": -29.04,
+        "sd_diff": 16.8,
+        "ci95_t": [
+          -36.14,
+          -21.95
+        ],
+        "t_p": 1.5969151726493102e-08,
+        "wilcoxon_p": 1.1920928955078125e-07,
+        "tasks_improved": 0,
+        "tasks_worse": 24
+      }
+    }
+  },
+  "table5": {
+    "gr1_avg_recomputed": {
+      "DP": 22.47,
+      "DP+NT": 27.42,
+      "GR00T": 37.15,
+      "GR00T+NT": 46.5
+    },
+    "gr1_avg_reported": {
+      "DP": 22.0,
+      "DP+NT": 27.0,
+      "GR00T": 37.0,
+      "GR00T+NT": 46.0
+    },
+    "gr1_avg_text_claim": {
+      "baseline": 37.0,
+      "with_NT": 46.4
+    },
+    "gr1_pooled_z": {
+      "diff_pp": 9.35,
+      "z": 0.85,
+      "p_two_sided": 0.3944752296259493,
+      "note": "cell 값을 10회 비율로 가정한 근사. 부분점수 사용 셀이 있어 근사치."
+    },
+    "paired_cell_changes": {
+      "n_cells": 19,
+      "improved": 16,
+      "flat": 2,
+      "worse": [
+        [
+          "DP",
+          "GR1",
+          0,
+          -20.0
+        ]
+      ]
+    },
+    "fisher_gr00t_franka_so100": {
+      "GR00T->GR00T+NT Franka Pick&Place": {
+        "successes_of_10": [
+          4,
+          6
+        ],
+        "fisher_p": 0.6562817986966593
+      },
+      "GR00T->GR00T+NT Franka CubeStacking": {
+        "successes_of_10": [
+          1,
+          2
+        ],
+        "fisher_p": 1.0
+      },
+      "GR00T->GR00T+NT Franka ToolUsage": {
+        "successes_of_10": [
+          2,
+          3
+        ],
+        "fisher_p": 1.0
+      }
+    },
+    "wilson_examples_gr00t_nt_franka_pnp_0.6": [
+      0.313,
+      0.832
+    ]
+  },
+  "table2_fig6": {
+    "x_avg_IF_GPT_PA_RoboCasa": {
+      "Hunyuan-zero": 0.5,
+      "CogVideoX-zero": 0.0,
+      "WAN2.1-zero": 0.0,
+      "Cosmos-zero": 13.55,
+      "Hunyuan-sft": 56.8,
+      "CogVideoX-sft": 58.85,
+      "WAN2.1-sft": 66.2,
+      "Cosmos-sft": 70.35
+    },
+    "note": "그림 6의 x값(DreamGen Bench score)이 RoboCasa IF(GPT)와 PA 평균과 맞는지 확인.",
+    "pearson_sft4_yread": {
+      "r": 0.84,
+      "p": 0.1597339257731123,
+      "n": 4
+    },
+    "pearson_sft3_without_cosmos": {
+      "r": 0.844,
+      "p": 0.36025648310804864,
+      "n": 3
+    },
+    "caveat": "n=4, y는 그림에서 눈으로 읽은 근사값. 제로샷 점은 제외. 상관은 Cosmos 한 점에 크게 의존."
+  },
+  "table6_7_consistency": {
+    "pearson_recomputed": {
+      "RoboCasa": {
+        "r_IFgpt_vs_hu_table6_7": 0.88,
+        "r_IFqwen_vs_hu": 0.92,
+        "r_IFgpt_vs_hu_table6": 0.88
+      },
+      "GR1-Object": {
+        "r_IFgpt_vs_hu_table6_7": 0.966,
+        "r_IFqwen_vs_hu": 0.949,
+        "r_IFgpt_vs_hu_table6": 0.966
+      },
+      "GR1-Behavior": {
+        "r_IFgpt_vs_hu_table6": 0.964,
+        "r_IFgpt_vs_hu_table7": 0.949
+      },
+      "GR1-Env": {
+        "r_IFgpt_vs_hu_table6_7": 0.849,
+        "r_IFqwen_vs_hu": 0.96,
+        "r_IFgpt_vs_hu_table2_Hu_column": 0.449
+      }
+    },
+    "reported_GPT": {
+      "RoboCasa": 0.94,
+      "GR1-Object": 0.93,
+      "GR1-Behavior": 0.96,
+      "GR1-Env": 1.0
+    },
+    "reported_Qwen": {
+      "RoboCasa": 0.92,
+      "GR1-Object": 0.95,
+      "GR1-Behavior": 0.97,
+      "GR1-Env": 0.96
+    },
+    "table2_Hu_vs_table6_IFhuman_GR1-Env": {
+      "table2_Hu": [
+        43.2,
+        61.1,
+        67.4,
+        53.3
+      ],
+      "table6_IFhuman": [
+        20.0,
+        30.0,
+        43.3,
+        53.3
+      ]
+    },
+    "note": "n=4 모델 점 기준 r. Table 2의 GR1-Env Hu 열과 Table 6/7의 IF-human 열이 다름. Table 7의 WAN2.1 GR1-Behavior IF-human(70.2)은 Table 6(74.5)·Table 2(74.5)와 다름."
+  },
+  "text_claim_avg_pearson": 0.9537
+}
