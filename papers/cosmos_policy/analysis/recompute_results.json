@@ -1,0 +1,112 @@
+{
+  "libero_avg_recomputed": 98.475,
+  "libero_achievable_k": {
+    "Spatial": 1471,
+    "Object": 1500,
+    "Goal": 1473,
+    "Long": 1464
+  },
+  "libero_wilson95": {
+    "Spatial": [
+      97.24,
+      98.65
+    ],
+    "Object": [
+      99.74,
+      100.0
+    ],
+    "Goal": [
+      97.39,
+      98.76
+    ],
+    "Long": [
+      96.7,
+      98.26
+    ]
+  },
+  "robocasa_cosmos_wilson95": [
+    65.56,
+    68.63
+  ],
+  "robocasa_vs_baselines": {
+    "FLARE (Zheng 2025)": {
+      "diff_pts": 0.7,
+      "z": 0.63,
+      "p_two_sided": 0.5284
+    },
+    "GR00T-N1.5+HAMLET (Koo 2025)": {
+      "diff_pts": 0.7,
+      "z": 0.63,
+      "p_two_sided": 0.5284
+    },
+    "Video Policy (Liang 2025)": {
+      "diff_pts": 1.1,
+      "z": 0.99,
+      "p_two_sided": 0.3226
+    },
+    "GR00T-N1.5 (Bjorck 2025)": {
+      "diff_pts": 3.0,
+      "z": 2.68,
+      "p_two_sided": 0.0074
+    }
+  },
+  "robocasa_mean_check": "논문 본문 67.1은 24 과제 평균 (표 2에 과제별 값 없음, 재계산 불가)",
+  "aloha_avg_check": {
+    "Diffusion Policy": {
+      "simple_mean": 33.55,
+      "trial_weighted": 35.33,
+      "reported": 33.6
+    },
+    "OpenVLA-OFT+": {
+      "simple_mean": 61.98,
+      "trial_weighted": 60.4,
+      "reported": 62.0
+    },
+    "pi0": {
+      "simple_mean": 77.9,
+      "trial_weighted": 77.02,
+      "reported": 77.9
+    },
+    "pi0.5": {
+      "simple_mean": 88.62,
+      "trial_weighted": 88.3,
+      "reported": 88.6
+    },
+    "Cosmos Policy": {
+      "simple_mean": 93.62,
+      "trial_weighted": 93.57,
+      "reported": 93.6
+    }
+  },
+  "aloha_cosmos_full_from_id_ood": {
+    "plate": 100.0,
+    "fold": 99.52,
+    "candies": 89.6,
+    "ziploc": 85.38
+  },
+  "aloha_total_trials": 101,
+  "aloha_note": "점수(0–100) 평균만 보고되어 이항 검정, 신뢰구간을 계산할 수 없다. 차이는 점 추정만 적는다.",
+  "aloha_pi05_vs_cosmos_avg_diff": 5.0,
+  "aloha_ood_pi05_minus_cosmos": 3.2,
+  "table4_drops": {
+    "w/o aux": 1.5,
+    "scratch": 3.9
+  },
+  "table4_avg_check": {
+    "w/o aux": 97.025,
+    "scratch": 94.625
+  },
+  "table5_1step_drop_text_vs_table": {
+    "text_says": 0.5,
+    "table_gives": 0.7
+  },
+  "table5_latency_ratio": 3.81,
+  "batch_check": {
+    "libero": 1920,
+    "robocasa": 800,
+    "aloha": 200
+  },
+  "aloha_demo_count": 185,
+  "rollout_count": 648,
+  "planning_value_queries_per_action": 15
+}
