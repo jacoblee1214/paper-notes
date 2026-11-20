@@ -1,0 +1,270 @@
+{
+  "table2_real_world": {
+    "single_cup": {
+      "DP-UMI": {
+        "k": 19,
+        "n": 20,
+        "rate": 0.95,
+        "wilson95": [
+          0.764,
+          0.991
+        ]
+      },
+      "UVA": {
+        "k": 17,
+        "n": 20,
+        "rate": 0.85,
+        "wilson95": [
+          0.64,
+          0.948
+        ]
+      },
+      "diff_pp_UVA_minus_DP": -10.0,
+      "fisher_p_two_sided": 0.605
+    },
+    "multi_cup": {
+      "DP-UMI": {
+        "k": 10,
+        "n": 20,
+        "rate": 0.5,
+        "wilson95": [
+          0.299,
+          0.701
+        ]
+      },
+      "UVA": {
+        "k": 13,
+        "n": 20,
+        "rate": 0.65,
+        "wilson95": [
+          0.433,
+          0.819
+        ]
+      },
+      "diff_pp_UVA_minus_DP": 15.0,
+      "fisher_p_two_sided": 0.5231
+    },
+    "multi_towel": {
+      "DP-UMI": {
+        "k": 14,
+        "n": 20,
+        "rate": 0.7,
+        "wilson95": [
+          0.481,
+          0.855
+        ]
+      },
+      "UVA": {
+        "k": 14,
+        "n": 20,
+        "rate": 0.7,
+        "wilson95": [
+          0.481,
+          0.855
+        ]
+      },
+      "diff_pp_UVA_minus_DP": 0.0,
+      "fisher_p_two_sided": 1.0
+    },
+    "multi_mouse": {
+      "DP-UMI": {
+        "k": 8,
+        "n": 20,
+        "rate": 0.4,
+        "wilson95": [
+          0.219,
+          0.613
+        ]
+      },
+      "UVA": {
+        "k": 16,
+        "n": 20,
+        "rate": 0.8,
+        "wilson95": [
+          0.584,
+          0.919
+        ]
+      },
+      "diff_pp_UVA_minus_DP": 40.0,
+      "fisher_p_two_sided": 0.0225
+    },
+    "multi_pooled_60": {
+      "DP-UMI": {
+        "k": 32,
+        "n": 60,
+        "rate": 0.533,
+        "wilson95": [
+          0.409,
+          0.654
+        ]
+      },
+      "UVA": {
+        "k": 43,
+        "n": 60,
+        "rate": 0.717,
+        "wilson95": [
+          0.592,
+          0.815
+        ]
+      },
+      "diff_pp_UVA_minus_DP": 18.3,
+      "fisher_p_two_sided": 0.0588
+    }
+  },
+  "table5_block_pushing": {
+    "DP-C": {
+      "k": 15,
+      "n": 40,
+      "rate": 0.375,
+      "wilson95": [
+        0.242,
+        0.53
+      ]
+    },
+    "DP-C+UVA_forward": {
+      "k": 24,
+      "n": 40,
+      "rate": 0.6,
+      "wilson95": [
+        0.446,
+        0.737
+      ]
+    },
+    "DP-C+GT_sim": {
+      "k": 30,
+      "n": 40,
+      "rate": 0.75,
+      "wilson95": [
+        0.598,
+        0.858
+      ]
+    },
+    "fisher_UVA_vs_DPC_p": 0.0729,
+    "fisher_GT_vs_UVA_p": 0.2324,
+    "per_cell_check": {
+      "DP-C cells (k/10)": [
+        2,
+        5,
+        6,
+        2
+      ],
+      "DP-C mean": 0.375,
+      "UVA cells (k/10)": [
+        8,
+        7,
+        5,
+        4
+      ],
+      "UVA mean": 0.6,
+      "GT cells (k/10)": [
+        8,
+        8,
+        7,
+        7
+      ],
+      "GT mean": 0.75
+    }
+  },
+  "table1_libero10_assumed_n500": {
+    "UVA(0.90) vs DP-T(0.58)": {
+      "diff_pp": 32.0,
+      "z_test_p": 0.0
+    },
+    "UVA(0.90) vs DP-C(0.53)": {
+      "diff_pp": 37.0,
+      "z_test_p": 0.0
+    },
+    "UVA(0.90) vs OpenVLA(0.54)": {
+      "diff_pp": 36.0,
+      "z_test_p": 0.0
+    },
+    "UVA(0.90) vs pi0(0.85)": {
+      "diff_pp": 5.0,
+      "z_test_p": 0.0168
+    },
+    "UVA(0.90) vs pi0-FAST(0.6)": {
+      "diff_pp": 30.0,
+      "z_test_p": 0.0
+    },
+    "UVA(0.90) vs UVA-action(0.86)": {
+      "diff_pp": 4.0,
+      "z_test_p": 0.0516
+    }
+  },
+  "table8_human_data": {
+    "500test UVA 450/500 vs +human 455/500": {
+      "fisher_p": 0.6664,
+      "diff_pp": 1.0
+    },
+    "30test UVA 28/30 vs +human 29/30": {
+      "fisher_p": 1.0
+    }
+  },
+  "integer_feasibility": {
+    "Table I PushT DP-C 0.91 (n=50)": {
+      "integer_count_fits": false,
+      "nearest_k": 46
+    },
+    "Table I PushT OpenVLA 0.35 (n=50)": {
+      "integer_count_fits": false,
+      "nearest_k": 18
+    },
+    "Table I PushT UVA-action 0.45 (n=50)": {
+      "integer_count_fits": false,
+      "nearest_k": 22
+    },
+    "Table I Tool DP-C 0.95 (n=50)": {
+      "integer_count_fits": false,
+      "nearest_k": 48
+    },
+    "Table I PushT UVA 0.98 (n=50)": {
+      "integer_count_fits": true,
+      "nearest_k": 49
+    },
+    "Table I Libero UVA 0.90 (n=500)": {
+      "integer_count_fits": true,
+      "nearest_k": 450
+    },
+    "Table II Cup DP-UMI 0.95 (n=20)": {
+      "integer_count_fits": true,
+      "nearest_k": 19
+    },
+    "Table III GoalColor UVA 0.64 (n=50)": {
+      "integer_count_fits": true,
+      "nearest_k": 32
+    },
+    "Table III BgColor UVA 0.35 (n=50)": {
+      "integer_count_fits": false,
+      "nearest_k": 18
+    },
+    "Table III BgObject UVA 0.31 (n=50)": {
+      "integer_count_fits": false,
+      "nearest_k": 16
+    },
+    "Table VIII 30test UVA 0.93 (n=30)": {
+      "integer_count_fits": true,
+      "nearest_k": 28
+    },
+    "Table VIII 30test +human 0.97 (n=30)": {
+      "integer_count_fits": true,
+      "nearest_k": 29
+    }
+  },
+  "table7_arithmetic": {
+    "UVA 16 steps (40+40+15)": 95,
+    "UVA 16 steps FA (40+30+15)": 85,
+    "UVA 100 steps (40+40+93)": 173,
+    "UVA 100 steps FA (40+30+93)": 163,
+    "Policy+Planner 16 (95+100)": 195,
+    "Policy+Planner 100 (173+625)": 798,
+    "reported": {
+      "UVA16": 95,
+      "UVA16FA": 85,
+      "UVA100": 173,
+      "UVA100FA": 163,
+      "P+P16": 195,
+      "P+P100": 798
+    },
+    "attention share of UVA16 time": 0.421
+  }
+}
