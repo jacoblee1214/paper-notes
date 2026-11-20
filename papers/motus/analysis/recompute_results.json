@@ -1,0 +1,291 @@
+{
+ "n_tasks": 50,
+ "averages": {
+  "GO1_clean": {
+   "recomputed": 37.86,
+   "reported_t14": 37.8
+  },
+  "GO1_rand": {
+   "recomputed": 36.24,
+   "reported_t14": 36.24
+  },
+  "pi05_clean": {
+   "recomputed": 42.98,
+   "reported_t14": 42.98
+  },
+  "pi05_rand": {
+   "recomputed": 43.84,
+   "reported_t14": 43.84
+  },
+  "xvla_clean": {
+   "recomputed": 72.88,
+   "reported_t14": 72.8
+  },
+  "xvla_rand": {
+   "recomputed": 72.84,
+   "reported_t14": 72.84
+  },
+  "wo_pt_clean": {
+   "recomputed": 77.56,
+   "reported_t14": 77.56
+  },
+  "wo_pt_rand": {
+   "recomputed": 77.0,
+   "reported_t14": 77.0
+  },
+  "stage1_clean": {
+   "recomputed": 82.26,
+   "reported_t14": 82.26
+  },
+  "stage1_rand": {
+   "recomputed": 81.86,
+   "reported_t14": 81.86
+  },
+  "motus_clean": {
+   "recomputed": 88.66,
+   "reported_t14": 88.66
+  },
+  "motus_rand": {
+   "recomputed": 87.02,
+   "reported_t14": 87.02
+  }
+ },
+ "table2_reported": {
+  "pi05_clean": 42.98,
+  "pi05_rand": 43.84,
+  "xvla_clean": 72.8,
+  "xvla_rand": 72.84,
+  "wo_pt_clean": 72.8,
+  "wo_pt_rand": 77.0,
+  "stage1_clean": 82.86,
+  "stage1_rand": 81.86,
+  "motus_clean": 88.66,
+  "motus_rand": 87.02
+ },
+ "checks": {
+  "table2_vs_table14_mismatch": {
+   "wo_pt_clean": {
+    "table2": 72.8,
+    "table14": 77.56
+   },
+   "stage1_clean": {
+    "table2": 82.86,
+    "table14": 82.26
+   }
+  },
+  "motus_vs_pi05_clean": {
+   "mean_diff_pts": 45.68,
+   "relative_pct": 106.3,
+   "wins_losses_ties": [
+    50,
+    0,
+    0
+   ],
+   "paired_t_p": 5.03e-18,
+   "wilcoxon_p": 1.78e-15,
+   "sign_test_p": 1.78e-15,
+   "bootstrap95_over_tasks": [
+    39.22,
+    52.2
+   ],
+   "binomial_se_of_mean_diff": 0.01
+  },
+  "motus_vs_pi05_rand": {
+   "mean_diff_pts": 43.18,
+   "relative_pct": 98.5,
+   "wins_losses_ties": [
+    48,
+    2,
+    0
+   ],
+   "paired_t_p": 1.12e-17,
+   "wilcoxon_p": 8.88e-15,
+   "sign_test_p": 2.27e-12,
+   "bootstrap95_over_tasks": [
+    36.7,
+    49.62
+   ],
+   "binomial_se_of_mean_diff": 0.01
+  },
+  "motus_vs_xvla_clean": {
+   "mean_diff_pts": 15.78,
+   "relative_pct": 21.7,
+   "wins_losses_ties": [
+    41,
+    6,
+    3
+   ],
+   "paired_t_p": 2.46e-05,
+   "wilcoxon_p": 9.73e-07,
+   "sign_test_p": 1.77e-07,
+   "bootstrap95_over_tasks": [
+    9.54,
+    22.62
+   ],
+   "binomial_se_of_mean_diff": 0.01
+  },
+  "motus_vs_xvla_rand": {
+   "mean_diff_pts": 14.18,
+   "relative_pct": 19.5,
+   "wins_losses_ties": [
+    33,
+    12,
+    5
+   ],
+   "paired_t_p": 1.66e-05,
+   "wilcoxon_p": 1.73e-05,
+   "sign_test_p": 0.00246,
+   "bootstrap95_over_tasks": [
+    8.68,
+    20.28
+   ],
+   "binomial_se_of_mean_diff": 0.01
+  },
+  "motus_vs_stage1_rand": {
+   "mean_diff_pts": 5.16,
+   "relative_pct": 6.3,
+   "wins_losses_ties": [
+    22,
+    20,
+    8
+   ],
+   "paired_t_p": 0.0467,
+   "wilcoxon_p": 0.143,
+   "sign_test_p": 0.878,
+   "bootstrap95_over_tasks": [
+    0.72,
+    10.52
+   ],
+   "binomial_se_of_mean_diff": 0.01
+  },
+  "motus_vs_wo_pt_rand": {
+   "mean_diff_pts": 10.02,
+   "relative_pct": 13.0,
+   "wins_losses_ties": [
+    39,
+    6,
+    5
+   ],
+   "paired_t_p": 3.12e-05,
+   "wilcoxon_p": 2.15e-06,
+   "sign_test_p": 5.42e-07,
+   "bootstrap95_over_tasks": [
+    5.86,
+    14.46
+   ],
+   "binomial_se_of_mean_diff": 0.01
+  },
+  "motus_vs_stage1_clean": {
+   "mean_diff_pts": 6.4,
+   "relative_pct": 7.8,
+   "wins_losses_ties": [
+    27,
+    15,
+    8
+   ],
+   "paired_t_p": 0.02,
+   "wilcoxon_p": 0.036,
+   "sign_test_p": 0.0884,
+   "bootstrap95_over_tasks": [
+    1.82,
+    12.0
+   ],
+   "binomial_se_of_mean_diff": 0.01
+  },
+  "motus_vs_xvla_rand_worst5": [
+   [
+    "Move Can Pot",
+    74.0,
+    86.0
+   ],
+   [
+    "Blocks Ranking Size",
+    63.0,
+    74.0
+   ],
+   [
+    "Open Laptop",
+    91.0,
+    100.0
+   ],
+   [
+    "Adjust Bottle",
+    93.0,
+    99.0
+   ],
+   [
+    "Place Cans Plasticbox",
+    94.0,
+    98.0
+   ]
+  ]
+ },
+ "real_world_trials": {
+  "put_bread_ac_one": {
+   "pi05": {
+    "n": 10,
+    "mean_pct": 12.0,
+    "reported_pct": 12
+   },
+   "wo_pt": {
+    "n": 10,
+    "mean_pct": 40.0,
+    "reported_pct": 40
+   },
+   "motus": {
+    "n": 10,
+    "mean_pct": 42.0,
+    "reported_pct": 42
+   },
+   "motus_minus_pi05": {
+    "mean_diff_pts": 30.0,
+    "mannwhitney_p": 0.262,
+    "bootstrap95": [
+     0.0,
+     60.0
+    ]
+   }
+  },
+  "get_water_agilex": {
+   "pi05": {
+    "n": 10,
+    "mean_pct": 62.0,
+    "reported_pct": 62
+   },
+   "wo_pt": {
+    "n": 10,
+    "mean_pct": 8.0,
+    "reported_pct": 8
+   },
+   "motus": {
+    "n": 10,
+    "mean_pct": 96.0,
+    "reported_pct": 96
+   },
+   "motus_minus_pi05": {
+    "mean_diff_pts": 34.0,
+    "mannwhitney_p": 0.001,
+    "bootstrap95": [
+     18.0,
+     48.0
+    ]
+   }
+  }
+ },
+ "table3_recomputed": {
+  "AC-One": {
+   "pi05": 14.79,
+   "wo_pt": 25.86,
+   "motus": 63.22
+  },
+  "Agilex-Aloha-2": {
+   "pi05": 48.6,
+   "wo_pt": 26.6,
+   "motus": 59.3
+  }
+ },
+ "table3_improvement_pts": {
+  "AC-One": 48.43,
+  "Agilex-Aloha-2": 10.7
+ }
+}
