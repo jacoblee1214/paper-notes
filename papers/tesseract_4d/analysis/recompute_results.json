@@ -1,0 +1,246 @@
+{
+  "table1": {
+    "rlbench_formula": 80000,
+    "real_total": 205000,
+    "text_claim": "only about 200k data points (real)"
+  },
+  "table3": {
+    "tasks": [
+      "close box",
+      "open drawer",
+      "open jar",
+      "open microwave",
+      "put knife",
+      "sweep to dustpan",
+      "lid off",
+      "weighing off",
+      "water plants"
+    ],
+    "means": {
+      "Image-BC": 10.555555555555555,
+      "UniPi*": 60.666666666666664,
+      "4DWM": 64.88888888888889
+    },
+    "per_task": [
+      {
+        "task": "close box",
+        "ours": 88,
+        "unipi": 81,
+        "bc": 53,
+        "ours_ci95": [
+          80.2,
+          93.0
+        ],
+        "unipi_ci95": [
+          72.2,
+          87.5
+        ],
+        "fisher_p_ours_vs_unipi": 0.241
+      },
+      {
+        "task": "open drawer",
+        "ours": 80,
+        "unipi": 67,
+        "bc": 4,
+        "ours_ci95": [
+          71.1,
+          86.7
+        ],
+        "unipi_ci95": [
+          57.3,
+          75.4
+        ],
+        "fisher_p_ours_vs_unipi": 0.054
+      },
+      {
+        "task": "open jar",
+        "ours": 44,
+        "unipi": 38,
+        "bc": 0,
+        "ours_ci95": [
+          34.7,
+          53.8
+        ],
+        "unipi_ci95": [
+          29.1,
+          47.8
+        ],
+        "fisher_p_ours_vs_unipi": 0.472
+      },
+      {
+        "task": "open microwave",
+        "ours": 70,
+        "unipi": 72,
+        "bc": 5,
+        "ours_ci95": [
+          60.4,
+          78.1
+        ],
+        "unipi_ci95": [
+          62.5,
+          79.9
+        ],
+        "fisher_p_ours_vs_unipi": 0.876
+      },
+      {
+        "task": "put knife",
+        "ours": 70,
+        "unipi": 66,
+        "bc": 0,
+        "ours_ci95": [
+          60.4,
+          78.1
+        ],
+        "unipi_ci95": [
+          56.3,
+          74.5
+        ],
+        "fisher_p_ours_vs_unipi": 0.649
+      },
+      {
+        "task": "sweep to dustpan",
+        "ours": 56,
+        "unipi": 49,
+        "bc": 0,
+        "ours_ci95": [
+          46.2,
+          65.3
+        ],
+        "unipi_ci95": [
+          39.4,
+          58.7
+        ],
+        "fisher_p_ours_vs_unipi": 0.396
+      },
+      {
+        "task": "lid off",
+        "ours": 73,
+        "unipi": 70,
+        "bc": 12,
+        "ours_ci95": [
+          63.6,
+          80.7
+        ],
+        "unipi_ci95": [
+          60.4,
+          78.1
+        ],
+        "fisher_p_ours_vs_unipi": 0.754
+      },
+      {
+        "task": "weighing off",
+        "ours": 62,
+        "unipi": 68,
+        "bc": 21,
+        "ours_ci95": [
+          52.2,
+          70.9
+        ],
+        "unipi_ci95": [
+          58.3,
+          76.3
+        ],
+        "fisher_p_ours_vs_unipi": 0.459
+      },
+      {
+        "task": "water plants",
+        "ours": 41,
+        "unipi": 35,
+        "bc": 0,
+        "ours_ci95": [
+          31.9,
+          50.8
+        ],
+        "unipi_ci95": [
+          26.4,
+          44.7
+        ],
+        "fisher_p_ours_vs_unipi": 0.466
+      }
+    ],
+    "mean_diff_4DWM_minus_UniPi_pp": 4.222222222222221,
+    "mean_diff_4DWM_minus_BC_pp": 54.33333333333333,
+    "wins_vs_UniPi": 7,
+    "ties_vs_UniPi": 0,
+    "losses_vs_UniPi": 2,
+    "wins_vs_BC": 9,
+    "task_level": {
+      "paired_t_p": 0.0508,
+      "wilcoxon_p": 0.0547,
+      "sign_test_p_two_sided": 0.1797,
+      "mean_diff_pp": 4.22,
+      "sd_diff_pp": 5.52,
+      "t_ci95_pp": [
+        -0.02,
+        8.46
+      ]
+    },
+    "pooled_two_prop": {
+      "ours_successes": 584,
+      "unipi_successes": 546,
+      "N_each": 900,
+      "diff_pp": 4.22,
+      "z": 1.853,
+      "p_two_sided": 0.0639,
+      "diff_ci95_unpaired_pp": [
+        -0.24,
+        8.68
+      ]
+    },
+    "any_task_significant_005": false
+  },
+  "table2_chamfer_rel": {
+    "real": {
+      "4D Point-E": 8.2,
+      "OpenSora": 32.6,
+      "CogVideoX": 7.3
+    },
+    "synthetic": {
+      "4D Point-E": 25.3,
+      "OpenSora": 68.4,
+      "CogVideoX": 71.9
+    }
+  },
+  "table2_best_check": {
+    "real": {
+      "FVD": "not best",
+      "SSIM": "not best",
+      "PSNR": "not best",
+      "AbsRel": "best",
+      "d1": "best",
+      "d2": "best",
+      "NormMean": "best",
+      "NormMedian": "best",
+      "11.25": "best",
+      "Chamfer": "best"
+    },
+    "synthetic": {
+      "FVD": "best",
+      "SSIM": "best",
+      "PSNR": "not best",
+      "AbsRel": "best",
+      "d1": "best",
+      "d2": "best",
+      "NormMean": "not best",
+      "NormMedian": "best",
+      "11.25": "best",
+      "Chamfer": "best"
+    }
+  },
+  "table2_real_rgb_gap_vs_cogvideox": {
+    "FVD_delta": 0.95,
+    "PSNR_delta_dB": -2.12,
+    "SSIM_delta": -3.52
+  },
+  "table4": {
+    "SoM_hours": 2,
+    "ours_minutes": 1,
+    "ratio_approx": 120,
+    "note": "시간 측정 하드웨어 미기재"
+  },
+  "sample_counts": {
+    "real_samples": 400,
+    "synthetic_samples": 200,
+    "runs_per_sample": 10
+  }
+}
