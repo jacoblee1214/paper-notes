@@ -1,0 +1,216 @@
+{
+ "table1_avg_recomputed": {
+  "MSE": 0.0039,
+  "PSNR": 25.2325,
+  "SSIM": 0.9058,
+  "LPIPS": 0.0587
+ },
+ "table1_avg_reported": {
+  "MSE": 0.0039,
+  "PSNR": 25.23,
+  "SSIM": 0.906,
+  "LPIPS": 0.059
+ },
+ "table2_base_avg": 86.6,
+ "table2_rft_avg": 91.1,
+ "table2_delta_per_suite": {
+  "Spatial": 6.0,
+  "Object": 6.4,
+  "Goal": 2.6,
+  "Long": 3.0
+ },
+ "table2_delta_avg": 4.5,
+ "implied_successes_base": {
+  "Spatial": 442,
+  "Object": 440,
+  "Goal": 464,
+  "Long": 386
+ },
+ "implied_successes_rft": {
+  "Spatial": 472,
+  "Object": 472,
+  "Goal": 477,
+  "Long": 401
+ },
+ "per_suite_two_prop": {
+  "Spatial": {
+   "z": 3.38,
+   "p": 0.000715
+  },
+  "Object": {
+   "z": 3.57,
+   "p": 0.000354
+  },
+  "Goal": {
+   "z": 1.74,
+   "p": 0.081
+  },
+  "Long": {
+   "z": 1.16,
+   "p": 0.247
+  }
+ },
+ "pooled_two_prop": {
+  "base_succ": 1732,
+  "rft_succ": 1822,
+  "n_per_arm": 2000,
+  "z": 4.52,
+  "p": 6.15e-06
+ },
+ "per_suite_wald95_ci_pp": {
+  "Spatial": [
+   2.54,
+   9.46
+  ],
+  "Object": [
+   2.91,
+   9.89
+  ],
+  "Goal": [
+   -0.32,
+   5.52
+  ],
+  "Long": [
+   -2.07,
+   8.07
+  ]
+ },
+ "perturbation": {
+  "Object ±2.5": {
+   "table8_mean_base": 69.25,
+   "reported_base": 69.3,
+   "table8_mean_ours": 73.5,
+   "reported_ours": 73.5,
+   "reported_delta": 4.2,
+   "recomputed_delta": 4.2,
+   "cell_diffs": [
+    7,
+    10,
+    2,
+    -2
+   ]
+  },
+  "Object ±5": {
+   "table8_mean_base": 48.0,
+   "reported_base": 48.0,
+   "table8_mean_ours": 52.5,
+   "reported_ours": 52.5,
+   "reported_delta": 4.5,
+   "recomputed_delta": 4.5,
+   "cell_diffs": [
+    2,
+    8,
+    6,
+    2
+   ]
+  },
+  "Goal ±2.5": {
+   "table8_mean_base": 74.5,
+   "reported_base": 74.5,
+   "table8_mean_ours": 79.0,
+   "reported_ours": 79.0,
+   "reported_delta": 4.5,
+   "recomputed_delta": 4.5,
+   "cell_diffs": [
+    2,
+    10,
+    2,
+    4
+   ]
+  },
+  "Goal ±5": {
+   "table8_mean_base": 45.5,
+   "reported_base": 44.8,
+   "table8_mean_ours": 51.5,
+   "reported_ours": 51.5,
+   "reported_delta": 6.7,
+   "recomputed_delta": 6.7,
+   "cell_diffs": [
+    12,
+    -4,
+    10,
+    6
+   ]
+  },
+  "RoboState ±20": {
+   "table8_mean_base": 73.0,
+   "reported_base": 73.0,
+   "table8_mean_ours": 76.5,
+   "reported_ours": 76.5,
+   "reported_delta": 2.5,
+   "recomputed_delta": 3.5,
+   "cell_diffs": [
+    2,
+    4,
+    4,
+    4
+   ]
+  },
+  "RoboState ±50": {
+   "table8_mean_base": 63.5,
+   "reported_base": 63.5,
+   "table8_mean_ours": 67.0,
+   "reported_ours": 67.0,
+   "reported_delta": 3.5,
+   "recomputed_delta": 3.5,
+   "cell_diffs": [
+    4,
+    4,
+    4,
+    2
+   ]
+  },
+  "Combined ±2.5/2.5/20": {
+   "table8_mean_base": 63.5,
+   "reported_base": 63.5,
+   "table8_mean_ours": 70.0,
+   "reported_ours": 70.0,
+   "reported_delta": 6.5,
+   "recomputed_delta": 6.5,
+   "cell_diffs": [
+    4,
+    10,
+    4,
+    8
+   ]
+  },
+  "Combined ±5/5/50": {
+   "table8_mean_base": 34.0,
+   "reported_base": 34.0,
+   "table8_mean_ours": 37.0,
+   "reported_ours": 37.0,
+   "reported_delta": 3.0,
+   "recomputed_delta": 3.0,
+   "cell_diffs": [
+    2,
+    -4,
+    4,
+    10
+   ]
+  }
+ },
+ "perturbation_cell_sign_test": {
+  "wins": 29,
+  "ties": 0,
+  "losses": 3,
+  "note": "표 8의 32개 셀(8 설정 x 4 셀) 대응 비교. 셀별 n은 미보고"
+ },
+ "n_per_arm_needed_for_p05_object_pm25": 890,
+ "n_per_arm_needed_for_p05_goal_pm5": 430,
+ "table9_avg_mismatch_over_0.06": {
+  "CoT-VLA": 2.825
+ },
+ "table9_rank1_by_avg": "VLA-RFT",
+ "table10_check": {
+  "VLA-RL": 0.0,
+  "ARFM": 0.0,
+  "RWR": 0.0,
+  "ReinboT": 0.0,
+  "VLA-RFT": 0.0
+ },
+ "table4_deltas": {
+  "type1": 1.1,
+  "type2": 0.5,
+  "type3": 4.5
+ }
+}
