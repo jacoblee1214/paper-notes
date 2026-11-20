@@ -1,0 +1,347 @@
+{
+  "table1_avg_check": {
+    "VLA-JEPA": {
+      "reported_avg": 97.2,
+      "mean_of_4_suites": 97.2
+    },
+    "w/o human videos": {
+      "reported_avg": 96.1,
+      "mean_of_4_suites": 96.05
+    },
+    "OpenVLA-OFT": {
+      "reported_avg": 97.1,
+      "mean_of_4_suites": 97.1
+    },
+    "pi0.5": {
+      "reported_avg": 96.9,
+      "mean_of_4_suites": 96.85
+    },
+    "GR00T N1": {
+      "reported_avg": 93.9,
+      "mean_of_4_suites": 93.9
+    },
+    "villa-X": {
+      "reported_avg": 90.1,
+      "mean_of_4_suites": 90.125
+    },
+    "UniVLA": {
+      "reported_avg": 95.2,
+      "mean_of_4_suites": 95.225
+    }
+  },
+  "table1_vla_jepa_wilson": {
+    "Spatial": {
+      "k": 481,
+      "n": 500,
+      "rate": 96.2,
+      "wilson95": [
+        94.14,
+        97.55
+      ]
+    },
+    "Object": {
+      "k": 498,
+      "n": 500,
+      "rate": 99.6,
+      "wilson95": [
+        98.55,
+        99.89
+      ]
+    },
+    "Goal": {
+      "k": 486,
+      "n": 500,
+      "rate": 97.2,
+      "wilson95": [
+        95.36,
+        98.32
+      ]
+    },
+    "LIBERO-10": {
+      "k": 479,
+      "n": 500,
+      "rate": 95.8,
+      "wilson95": [
+        93.66,
+        97.24
+      ]
+    },
+    "Avg(2000 ep)": {
+      "k": 1944,
+      "n": 2000,
+      "rate": 97.2,
+      "wilson95": [
+        96.38,
+        97.84
+      ]
+    }
+  },
+  "table1_two_prop_tests": {
+    "VLA-JEPA vs OpenVLA-OFT / Spatial": {
+      "diff_pp": -1.4,
+      "z": -1.28,
+      "p_two_sided": 0.202
+    },
+    "VLA-JEPA vs OpenVLA-OFT / Object": {
+      "diff_pp": 1.2,
+      "z": 1.91,
+      "p_two_sided": 0.057
+    },
+    "VLA-JEPA vs OpenVLA-OFT / Goal": {
+      "diff_pp": -0.8,
+      "z": -0.83,
+      "p_two_sided": 0.409
+    },
+    "VLA-JEPA vs OpenVLA-OFT / LIBERO-10": {
+      "diff_pp": 1.4,
+      "z": 1.03,
+      "p_two_sided": 0.305
+    },
+    "VLA-JEPA vs OpenVLA-OFT / Avg": {
+      "diff_pp": 0.1,
+      "z": 0.19,
+      "p_two_sided": 0.849
+    },
+    "VLA-JEPA vs pi0.5 / Spatial": {
+      "diff_pp": -2.6,
+      "z": -2.63,
+      "p_two_sided": 0.008
+    },
+    "VLA-JEPA vs pi0.5 / Object": {
+      "diff_pp": 1.4,
+      "z": 2.12,
+      "p_two_sided": 0.034
+    },
+    "VLA-JEPA vs pi0.5 / Goal": {
+      "diff_pp": -0.8,
+      "z": -0.83,
+      "p_two_sided": 0.409
+    },
+    "VLA-JEPA vs pi0.5 / LIBERO-10": {
+      "diff_pp": 3.4,
+      "z": 2.28,
+      "p_two_sided": 0.023
+    },
+    "VLA-JEPA vs pi0.5 / Avg": {
+      "diff_pp": 0.3,
+      "z": 0.56,
+      "p_two_sided": 0.575
+    }
+  },
+  "toy_libero_avg_gap_sim": {
+    "n_per_method": 2000,
+    "p_true": 0.972,
+    "reported_gap_pp": 0.1,
+    "P_abs_gap_ge_0.1pp_under_null": 0.841,
+    "sd_of_gap_pp": 0.523
+  },
+  "table2_avg_check": {
+    "Google VLA-JEPA": {
+      "reported_avg": 65.2,
+      "mean_of_4": 65.2
+    },
+    "Google w/o human videos": {
+      "reported_avg": 78.4,
+      "mean_of_4": 78.4
+    },
+    "Google villa-x": {
+      "reported_avg": 44.9,
+      "mean_of_4": 44.92
+    },
+    "Google RoboVLMs": {
+      "reported_avg": 51.7,
+      "mean_of_4": 51.65
+    },
+    "WidowX VLA-JEPA": {
+      "reported_avg": 57.3,
+      "mean_of_4": 57.28
+    },
+    "WidowX w/o human videos": {
+      "reported_avg": 57.3,
+      "mean_of_4": 57.3
+    },
+    "WidowX LAPA (*sim-ID)": {
+      "reported_avg": 57.3,
+      "mean_of_4": 57.28
+    },
+    "WidowX villa-x": {
+      "reported_avg": 40.8,
+      "mean_of_4": 40.85
+    },
+    "WidowX OpenVLA-OFT (*sim-ID)": {
+      "reported_avg": 41.8,
+      "mean_of_4": 41.67
+    },
+    "WidowX pi0-Fast": {
+      "reported_avg": 48.3,
+      "mean_of_4": 32.12
+    }
+  },
+  "table2_granularity": {
+    "WidowX_VLA-JEPA_candidates_le200": [
+      24,
+      48,
+      72,
+      96,
+      120,
+      144,
+      168
+    ],
+    "Google_VLA-JEPA_candidates_le200": []
+  },
+  "table2_widowx_task_ci_n24": {
+    "Spoon": {
+      "k": 18,
+      "n": 24,
+      "wilson95": [
+        55.1,
+        88.0
+      ]
+    },
+    "Carrot": {
+      "k": 17,
+      "n": 24,
+      "wilson95": [
+        50.8,
+        85.1
+      ]
+    },
+    "Block": {
+      "k": 3,
+      "n": 24,
+      "wilson95": [
+        4.3,
+        31.0
+      ]
+    },
+    "Eggplant": {
+      "k": 17,
+      "n": 24,
+      "wilson95": [
+        50.8,
+        85.1
+      ]
+    }
+  },
+  "table2_claim_checks": {
+    "WidowX avg: VLA-JEPA 57.3 equals LAPA 57.3 (LAPA is a *sim-ID method)": true,
+    "Google: VLA-JEPA best on Pick, Drawer, Place (3/4 among rows shown)": true,
+    "Google: VLA-JEPA Move 64.1 below pi0-Fast 67.5": true,
+    "w/o human videos Google Avg 78.4 > full model 65.2": true
+  },
+  "table3_avg_check": {
+    "UniVLA": {
+      "reported_avg": 42.9,
+      "unweighted_mean": 45.81,
+      "gap_pp": -2.91
+    },
+    "OpenVLA-OFT": {
+      "reported_avg": 69.6,
+      "unweighted_mean": 71.4,
+      "gap_pp": -1.8
+    },
+    "pi0": {
+      "reported_avg": 53.6,
+      "unweighted_mean": 56.13,
+      "gap_pp": -2.53
+    },
+    "pi0-Fast": {
+      "reported_avg": 61.6,
+      "unweighted_mean": 62.47,
+      "gap_pp": -0.87
+    },
+    "WorldVLA": {
+      "reported_avg": 25.0,
+      "unweighted_mean": 25.61,
+      "gap_pp": -0.61
+    },
+    "VLA-JEPA": {
+      "reported_avg": 79.5,
+      "unweighted_mean": 79.49,
+      "gap_pp": 0.01
+    },
+    "VLA-JEPA w/o human": {
+      "reported_avg": 62.9,
+      "unweighted_mean": 62.91,
+      "gap_pp": -0.01
+    }
+  },
+  "table3_best_per_dim": {
+    "Camera": {
+      "top": "pi0-Fast",
+      "top_value": 65.1,
+      "vla_jepa": 63.3
+    },
+    "Robot": {
+      "top": "VLA-JEPA",
+      "top_value": 67.1,
+      "vla_jepa": 67.1
+    },
+    "Language": {
+      "top": "VLA-JEPA",
+      "top_value": 85.4,
+      "vla_jepa": 85.4
+    },
+    "Light": {
+      "top": "VLA-JEPA",
+      "top_value": 95.6,
+      "vla_jepa": 95.6
+    },
+    "Background": {
+      "top": "VLA-JEPA",
+      "top_value": 93.6,
+      "vla_jepa": 93.6
+    },
+    "Noise": {
+      "top": "pi0",
+      "top_value": 79.0,
+      "vla_jepa": 66.3
+    },
+    "Layout": {
+      "top": "VLA-JEPA",
+      "top_value": 85.1,
+      "vla_jepa": 85.1
+    }
+  },
+  "table3_text_claim_5of7": 5,
+  "table3_background_margin_pp": 0.3,
+  "table4_avg_check": {
+    "T=4": {
+      "reported": 94.8,
+      "mean": 94.75
+    },
+    "T=8": {
+      "reported": 96.1,
+      "mean": 96.1
+    },
+    "T=16": {
+      "reported": 95.5,
+      "mean": 95.45
+    }
+  },
+  "table4_T8_vs_table1_main": {
+    "table4_T8": [
+      94.8,
+      99.8,
+      95.8,
+      94.0
+    ],
+    "table1_main": [
+      96.2,
+      99.6,
+      97.2,
+      95.8
+    ],
+    "table1_wo_human": [
+      94.8,
+      99.6,
+      95.8,
+      94.0
+    ]
+  },
+  "K_consistency": {
+    "T=8_K": 3.0,
+    "Table5_action_tokens_per_timestep": 3,
+    "repo_config_num_action_tokens_per_timestep": 8
+  }
+}

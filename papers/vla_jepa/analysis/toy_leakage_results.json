@@ -1,0 +1,23 @@
+{
+  "setup": {
+    "latent_dim": 4,
+    "obs_dim": 16,
+    "clip_steps": 8,
+    "feat_dim": 12,
+    "n_train": 3000,
+    "n_test": 1000,
+    "seeds": {
+      "data": [
+        1,
+        2
+      ],
+      "encoder": 7
+    },
+    "target": "final latent state s_T, linear readout (OLS) from history features"
+  },
+  "r2_future_from_input": {
+    "causal_history_features": 0.867,
+    "bidi_history_features": 0.92,
+    "current_frame_only": 0.609
+  }
+}
