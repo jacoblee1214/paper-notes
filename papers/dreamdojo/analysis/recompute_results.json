@@ -1,0 +1,231 @@
+{
+  "table4_integer_denominator_found": [],
+  "table4_ci_assumed_n": {
+    "2B>Cosmos phys": {
+      "pct": 62.5,
+      "n=50": {
+        "wilson95": [
+          48.6,
+          74.6
+        ],
+        "p_vs_50": 0.0771
+      },
+      "n=600": {
+        "wilson95": [
+          58.6,
+          66.3
+        ],
+        "p_vs_50": 0.0
+      }
+    },
+    "2B>Cosmos act": {
+      "pct": 63.45,
+      "n=50": {
+        "wilson95": [
+          49.6,
+          75.4
+        ],
+        "p_vs_50": 0.0572
+      },
+      "n=600": {
+        "wilson95": [
+          59.5,
+          67.2
+        ],
+        "p_vs_50": 0.0
+      }
+    },
+    "14B>Cosmos phys": {
+      "pct": 73.5,
+      "n=50": {
+        "wilson95": [
+          59.9,
+          83.7
+        ],
+        "p_vs_50": 0.0009
+      },
+      "n=600": {
+        "wilson95": [
+          69.8,
+          76.9
+        ],
+        "p_vs_50": 0.0
+      }
+    },
+    "14B>Cosmos act": {
+      "pct": 72.55,
+      "n=50": {
+        "wilson95": [
+          58.9,
+          83.0
+        ],
+        "p_vs_50": 0.0014
+      },
+      "n=600": {
+        "wilson95": [
+          68.8,
+          76.0
+        ],
+        "p_vs_50": 0.0
+      }
+    },
+    "14B>2B phys": {
+      "pct": 72.5,
+      "n=50": {
+        "wilson95": [
+          58.9,
+          82.9
+        ],
+        "p_vs_50": 0.0015
+      },
+      "n=600": {
+        "wilson95": [
+          68.8,
+          75.9
+        ],
+        "p_vs_50": 0.0
+      }
+    },
+    "14B>2B act": {
+      "pct": 65.53,
+      "n=50": {
+        "wilson95": [
+          51.7,
+          77.2
+        ],
+        "p_vs_50": 0.0281
+      },
+      "n=600": {
+        "wilson95": [
+          61.6,
+          69.2
+        ],
+        "p_vs_50": 0.0
+      }
+    }
+  },
+  "fig5a_pearson": {
+    "r": 0.995,
+    "n_points_read_from_figure": 6,
+    "ci95_if_n6": [
+      0.953,
+      0.999
+    ],
+    "ci95_if_n20_scenes": [
+      0.987,
+      0.998
+    ]
+  },
+  "fig5b": {
+    "group1_gain_vs_best_ckpt_points": 17,
+    "group1_ratio_vs_uniform": 1.89,
+    "group2_gain_vs_best_ckpt_points": 5,
+    "group2_ratio_vs_uniform": 1.24,
+    "group2_ratio_vs_worst_ckpt": 1.94,
+    "note": "본문은 두 번째 그룹도 '거의 2배'라고 씀. 그림의 균등 샘플링(55%) 대비는 1.24배. 10개 장면, 불확실성 없음."
+  },
+  "table1": {
+    "duration_ratio": 15.4,
+    "skill_ratio_vs_max_prior_87": 69.1,
+    "scene_ratio_using_table_1135k": 2012,
+    "scene_ratio_using_text_9869": 17.5,
+    "hours_sum_check": 44711,
+    "traj_sum_check_k": 1178.9
+  },
+  "table5_gr1_val": {
+    "relative": {
+      "psnr": 0.323,
+      "ssim": 0.019,
+      "lpips": -0.011,
+      "label": "base->relative"
+    },
+    "chunked": {
+      "psnr": 1.104,
+      "ssim": 0.044,
+      "lpips": -0.037,
+      "label": "relative->chunked"
+    },
+    "temporal": {
+      "psnr": 0.004,
+      "ssim": 0.002,
+      "lpips": -0.001,
+      "label": "chunked->temporal"
+    }
+  },
+  "table5_counterfactual_temporal": {
+    "psnr": 0.197,
+    "ssim": 0.006,
+    "lpips": -0.004,
+    "label": "chunked->temporal (cf)"
+  },
+  "table2_psnr_gaps_db": {
+    "inlab_latent_minus_actionfree": 0.116,
+    "inlab_retarget_minus_latent": 0.047,
+    "egodex_latent_minus_actionfree": 0.42,
+    "egodex_mano_minus_latent": 0.13
+  },
+  "table3_increments_db": {
+    "inlab_eval": [
+      0.337,
+      0.059,
+      0.044
+    ],
+    "egodex_eval": [
+      0.315,
+      0.067,
+      0.08
+    ],
+    "hv_eval": [
+      0.347,
+      0.085,
+      0.018
+    ],
+    "cf_eval": [
+      0.283,
+      0.042,
+      0.055
+    ]
+  },
+  "table3_monotonic": {
+    "inlab_eval": true,
+    "egodex_eval": true,
+    "hv_eval": true,
+    "cf_eval": true
+  },
+  "table7_with_minus_without": {
+    "inlab": {
+      "psnr": 0.429,
+      "ssim": 0.012,
+      "lpips": -0.01
+    },
+    "egodex": {
+      "psnr": 0.194,
+      "ssim": 0.003,
+      "lpips": -0.005
+    },
+    "hv": {
+      "psnr": 0.326,
+      "ssim": 0.004,
+      "lpips": -0.005
+    },
+    "cf": {
+      "psnr": 0.109,
+      "ssim": -0.012,
+      "lpips": 0.002
+    }
+  },
+  "table6": {
+    "speedup": 3.97,
+    "seconds_for_600_frames_at_10.81fps": 55.5,
+    "seconds_for_600_frames_at_2.72fps": 220.6,
+    "frames_in_60s_at_10.81fps": 649,
+    "psnr_teacher_minus_student": 0.94
+  },
+  "mde_psnr_db_n100": {
+    "sd_diff_0.5dB": 0.14,
+    "sd_diff_1.0dB": 0.28,
+    "sd_diff_2.0dB": 0.56,
+    "sd_diff_3.0dB": 0.84
+  },
+  "mde_note": "샘플 단위 PSNR 차이의 SD가 1 dB이면 탐지 한계는 약 0.28 dB. 표 2·3의 차이(0.02–0.13 dB)를 탐지하려면 쌍 차이의 SD가 약 0.1–0.45 dB 이하여야 함. SD는 가정이며 논문에 없음."
+}
