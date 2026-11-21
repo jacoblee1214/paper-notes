@@ -1,0 +1,392 @@
+{
+  "assumption_n_per_cell": 50,
+  "V1_table1_integrality": {
+    "table": "Table 1",
+    "n": 50,
+    "non_integer_cells": []
+  },
+  "V1_table1_pooled": {
+    "successes": {
+      "GR00T N1.7": 4,
+      "DynamicVLA": 1,
+      "ForceVLA": 11
+    },
+    "n_total": 450,
+    "pooled_pct": {
+      "GR00T N1.7": 0.89,
+      "DynamicVLA": 0.22,
+      "ForceVLA": 2.44
+    },
+    "reported_avg": {
+      "GR00T N1.7": 0.9,
+      "DynamicVLA": 0.2,
+      "ForceVLA": 2.4
+    },
+    "unweighted_mean_of_cells_pct": {
+      "GR00T N1.7": 0.89,
+      "DynamicVLA": 0.22,
+      "ForceVLA": 2.44
+    }
+  },
+  "V1_table1_wilson_overall": {
+    "GR00T N1.7": [
+      0.35,
+      2.26
+    ],
+    "DynamicVLA": [
+      0.04,
+      1.25
+    ],
+    "ForceVLA": [
+      1.37,
+      4.32
+    ]
+  },
+  "V1_table1_all_policies": {
+    "successes": 16,
+    "n": 1350,
+    "pct": 1.19,
+    "note": "본문 1.2%와 비교 (세 정책 pooled)"
+  },
+  "V2_table2": {
+    "1.0": {
+      "GR00T N1.7": {
+        "successes": 3,
+        "n": 150,
+        "pct": 2.0,
+        "reported_avg": 2
+      },
+      "DynamicVLA": {
+        "successes": 0,
+        "n": 150,
+        "pct": 0.0,
+        "reported_avg": 0
+      },
+      "ForceVLA": {
+        "successes": 5,
+        "n": 150,
+        "pct": 3.33,
+        "reported_avg": 3.3
+      }
+    },
+    "0.5": {
+      "GR00T N1.7": {
+        "successes": 7,
+        "n": 150,
+        "pct": 4.67,
+        "reported_avg": 4.7
+      },
+      "DynamicVLA": {
+        "successes": 3,
+        "n": 150,
+        "pct": 2.0,
+        "reported_avg": 2
+      },
+      "ForceVLA": {
+        "successes": 17,
+        "n": 150,
+        "pct": 11.33,
+        "reported_avg": 11.3
+      }
+    },
+    "0.0": {
+      "GR00T N1.7": {
+        "successes": 14,
+        "n": 150,
+        "pct": 9.33,
+        "reported_avg": 9.3
+      },
+      "DynamicVLA": {
+        "successes": 6,
+        "n": 150,
+        "pct": 4.0,
+        "reported_avg": 4
+      },
+      "ForceVLA": {
+        "successes": 53,
+        "n": 150,
+        "pct": 35.33,
+        "reported_avg": 35.3
+      }
+    }
+  },
+  "V3_table3": {
+    "GR00T N1.7": {
+      "successes": 9,
+      "n": 150,
+      "pct": 6.0,
+      "reported_avg": 6
+    },
+    "DynamicVLA": {
+      "successes": 1,
+      "n": 150,
+      "pct": 0.67,
+      "reported_avg": 0.7
+    },
+    "ForceVLA": {
+      "successes": 13,
+      "n": 150,
+      "pct": 8.67,
+      "reported_avg": 8.7
+    }
+  },
+  "V3_table4": {
+    "GR00T N1.7": {
+      "successes": 16,
+      "n": 150,
+      "pct": 10.67,
+      "reported_avg": 10.7
+    },
+    "DynamicVLA": {
+      "successes": 0,
+      "n": 150,
+      "pct": 0.0,
+      "reported_avg": 0
+    },
+    "ForceVLA": {
+      "successes": 77,
+      "n": 150,
+      "pct": 51.33,
+      "reported_avg": 51.3
+    }
+  },
+  "V4_fig4_gt": {
+    "GR00T N1.7": {
+      "without_gt_k_of_50": 3,
+      "with_gt_pct": 12.5,
+      "with_gt_k_of_50": null,
+      "gain_pp": 6.5,
+      "ratio": 2.08
+    },
+    "ForceVLA": {
+      "without_gt_k_of_50": 5,
+      "with_gt_pct": 24,
+      "with_gt_k_of_50": 12,
+      "gain_pp": 14,
+      "ratio": 2.4,
+      "fisher_p": 0.1083695840882205,
+      "wilson_with_gt_pct": [
+        14.3,
+        37.4
+      ]
+    },
+    "GR00T N1.7 sensitivity": {
+      "with_gt_k_of_48": 6,
+      "n": 48,
+      "fisher_p_vs_3_of_50": 0.312777607983531,
+      "note": "n 미보고. 12.5%는 50회에서 가능한 값이 아님"
+    }
+  },
+  "V5_comparisons": {
+    "sim pooled: ForceVLA vs GR00T (11/450 vs 4/450)": {
+      "p_fisher": 0.11540774330855386,
+      "k1_n1_k2_n2": [
+        11,
+        450,
+        4,
+        450
+      ]
+    },
+    "sim pooled: ForceVLA vs DynamicVLA (11/450 vs 1/450)": {
+      "p_fisher": 0.006029518535628967,
+      "k1_n1_k2_n2": [
+        11,
+        450,
+        1,
+        450
+      ]
+    },
+    "sim pooled: GR00T vs DynamicVLA (4/450 vs 1/450)": {
+      "p_fisher": 0.3736072410444902,
+      "k1_n1_k2_n2": [
+        4,
+        450,
+        1,
+        450
+      ]
+    },
+    "sim alpha=1 single-dest: ForceVLA vs GR00T (5/150 vs 3/150)": {
+      "p_fisher": 0.7228484185886205,
+      "k1_n1_k2_n2": [
+        5,
+        150,
+        3,
+        150
+      ]
+    },
+    "sim alpha=0 vs alpha=1, ForceVLA (53/150 vs 5/150)": {
+      "p_fisher": 3.188725956410516e-13,
+      "k1_n1_k2_n2": [
+        53,
+        150,
+        5,
+        150
+      ]
+    },
+    "sim alpha=0 vs alpha=1, GR00T (14/150 vs 3/150)": {
+      "p_fisher": 0.010408096483445714,
+      "k1_n1_k2_n2": [
+        14,
+        150,
+        3,
+        150
+      ]
+    },
+    "humanoid: ForceVLA vs GR00T (13/150 vs 9/150)": {
+      "p_fisher": 0.5072908637008535,
+      "k1_n1_k2_n2": [
+        13,
+        150,
+        9,
+        150
+      ]
+    },
+    "humanoid: ForceVLA vs DynamicVLA (13/150 vs 1/150)": {
+      "p_fisher": 0.0014506459321022114,
+      "k1_n1_k2_n2": [
+        13,
+        150,
+        1,
+        150
+      ]
+    },
+    "real: ForceVLA vs GR00T (77/150 vs 16/150)": {
+      "p_fisher": 1.1871678651447845e-14,
+      "k1_n1_k2_n2": [
+        77,
+        150,
+        16,
+        150
+      ]
+    },
+    "real: ForceVLA vs DynamicVLA (77/150 vs 0/150)": {
+      "p_fisher": 2.0869943589168435e-29,
+      "k1_n1_k2_n2": [
+        77,
+        150,
+        0,
+        150
+      ]
+    },
+    "real cube3: ForceVLA vs GR00T (20/50 vs 2/50)": {
+      "p_fisher": 1.6690629825255064e-05,
+      "k1_n1_k2_n2": [
+        20,
+        50,
+        2,
+        50
+      ]
+    },
+    "real cube1: GR00T vs cube3 GR00T (8/50 vs 2/50)": {
+      "p_fisher": 0.09164715528813333,
+      "k1_n1_k2_n2": [
+        8,
+        50,
+        2,
+        50
+      ]
+    },
+    "sim uniform single: ForceVLA vs GR00T (5/50 vs 3/50)": {
+      "p_fisher": 0.7149836629646896,
+      "k1_n1_k2_n2": [
+        5,
+        50,
+        3,
+        50
+      ]
+    },
+    "sim uniform single: ForceVLA GT vs no GT (12/50 vs 5/50)": {
+      "p_fisher": 0.1083695840882205,
+      "k1_n1_k2_n2": [
+        12,
+        50,
+        5,
+        50
+      ]
+    }
+  },
+  "V6_power_n50": {
+    "p0=0.02": {
+      "min_detectable_p1": 0.193,
+      "min_detectable_diff_pp": 17.3
+    },
+    "p0=0.06": {
+      "min_detectable_p1": 0.268,
+      "min_detectable_diff_pp": 20.8
+    },
+    "p0=0.1": {
+      "min_detectable_p1": 0.331,
+      "min_detectable_diff_pp": 23.1
+    },
+    "p0=0.2": {
+      "min_detectable_p1": 0.464,
+      "min_detectable_diff_pp": 26.4
+    }
+  },
+  "V7_fig7": {
+    "policy_sums": {
+      "GR00T N1.7": 100.0,
+      "DynamicVLA": 100.0,
+      "ForceVLA": 99.9
+    },
+    "unweighted_mean": [
+      38.53,
+      21.97,
+      10.67,
+      28.8
+    ],
+    "pie_reported": [
+      38.5,
+      22.0,
+      10.6,
+      28.8
+    ],
+    "pre_throw_share_pie": 89.3
+  },
+  "V8_reconstruct_21_24": {
+    "fail_counts_per_policy": {
+      "GR00T N1.7": 446,
+      "DynamicVLA": 449,
+      "ForceVLA": 439
+    },
+    "throw_error_counts_est": {
+      "GR00T N1.7": 66,
+      "DynamicVLA": 15,
+      "ForceVLA": 60
+    },
+    "throws_attempted_est": {
+      "GR00T N1.7": 70,
+      "DynamicVLA": 16,
+      "ForceVLA": 71
+    },
+    "reach_throw_pct_per_policy": {
+      "GR00T N1.7": 15.56,
+      "DynamicVLA": 3.56,
+      "ForceVLA": 15.78
+    },
+    "reach_throw_pct_mean": 11.63,
+    "reported_text_pct": 21.24,
+    "success_per_throw_pct_mean": 10.19,
+    "reported_success_per_throw_pct": 5.6,
+    "dynamicvla_reach_throw_pct": 3.56,
+    "dynamicvla_reported_grasp_pct": 3.57,
+    "note": "throws_attempted = 던지기 오류 + 성공. 파지 단계 도달과 같은 것으로 가정(§3.2.3의 실패 정의 기준)."
+  },
+  "V9_dataset": {
+    "mean_episode_seconds_at_10Hz": 14.58,
+    "episode_split_sum_pct": 100.0,
+    "destination_split_sum_pct": 100.0,
+    "asset_sum": 107,
+    "dynamic_assets_share_of_episodes_pct": 7.25,
+    "uniform_irregular_dynamic_episode_pct": [
+      31.8,
+      39.2,
+      29.0
+    ]
+  },
+  "V10_text_checks": {
+    "pre_throw_text_pct": 89,
+    "pie_pre_throw_pct": 89.3,
+    "dynamicvla_approach_plus_reach": 64.2
+  }
+}
