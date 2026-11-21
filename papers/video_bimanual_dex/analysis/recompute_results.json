@@ -1,0 +1,137 @@
+{
+  "table1": {
+    "H2S2R": {
+      "mean_recomputed": 2.575,
+      "per_task_count_if_150": [
+        0.0,
+        4.5,
+        0.0,
+        10.95
+      ]
+    },
+    "ViViDex": {
+      "mean_recomputed": 1.5,
+      "per_task_count_if_150": [
+        0.0,
+        9.0,
+        0.0,
+        0.0
+      ]
+    },
+    "w/o HP & Conf.": {
+      "mean_recomputed": 43.025,
+      "per_task_count_if_150": [
+        24.0,
+        76.05,
+        10.05,
+        148.05
+      ]
+    },
+    "w/o HP": {
+      "mean_recomputed": 55.5,
+      "per_task_count_if_150": [
+        61.95,
+        97.05,
+        25.05,
+        148.95
+      ]
+    },
+    "PriDex": {
+      "mean_recomputed": 57.175,
+      "per_task_count_if_150": [
+        147.0,
+        67.05,
+        60.0,
+        69.0
+      ]
+    }
+  },
+  "table1_checks": {},
+  "table2": {
+    "Pour": {
+      "PriDex": 36,
+      "wo_HP": 27,
+      "fisher_p": 0.2567
+    },
+    "Sweep": {
+      "PriDex": 120,
+      "wo_HP": 108,
+      "fisher_p": 0.13668
+    },
+    "Unscrew": {
+      "PriDex": 8,
+      "wo_HP": 1,
+      "fisher_p": 0.03627
+    },
+    "Clean": {
+      "PriDex": 24,
+      "wo_HP": 9,
+      "fisher_p": 0.00893
+    }
+  },
+  "table3": {
+    "real_only": 9,
+    "sim_real": 19,
+    "fisher_p_pooled": 0.0191
+  },
+  "pairwise": {
+    "Pour": {
+      "PriDex": 147,
+      "wo_HP": 62,
+      "fisher_p": 0.0
+    },
+    "Sweep": {
+      "PriDex": 67,
+      "wo_HP": 97,
+      "fisher_p": 0.00074
+    },
+    "Unscrew": {
+      "PriDex": 60,
+      "wo_HP": 25,
+      "fisher_p": 1e-05
+    },
+    "Clean": {
+      "PriDex": 69,
+      "wo_HP": 149,
+      "fisher_p": 0.0
+    }
+  },
+  "pooled_all_tasks": {
+    "PriDex": 343,
+    "wo_HP": 333,
+    "fisher_p": 0.60041
+  },
+  "confidence_adaptation": {
+    "per_task": {
+      "Pour": {
+        "w_o_HP": 62,
+        "w_o_HP_and_Conf": 24,
+        "fisher_p": 0.0,
+        "bonf_p": 1e-05
+      },
+      "Sweep": {
+        "w_o_HP": 97,
+        "w_o_HP_and_Conf": 76,
+        "fisher_p": 0.01927,
+        "bonf_p": 0.07709
+      },
+      "Unscrew": {
+        "w_o_HP": 25,
+        "w_o_HP_and_Conf": 10,
+        "fisher_p": 0.01095,
+        "bonf_p": 0.0438
+      },
+      "Clean": {
+        "w_o_HP": 149,
+        "w_o_HP_and_Conf": 148,
+        "fisher_p": 1.0,
+        "bonf_p": 1.0
+      }
+    },
+    "pooled": {
+      "w_o_HP": 333,
+      "no_conf": 258,
+      "fisher_p": 1.8855884375850995e-05
+    }
+  }
+}
