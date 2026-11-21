@@ -1,0 +1,316 @@
+{
+  "checks": [
+    {
+      "key": "signflip_10",
+      "what": "10/10 에피소드 부호 검정 양측 p (§5.1, 'p = 0.002')",
+      "paper": 0.002,
+      "recomputed": 0.00195,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "signflip_4",
+      "what": "4 궤적 전부 같은 부호일 때 최소 양측 p (§3.6, '1/8 아래로 갈 수 없음')",
+      "paper": 0.125,
+      "recomputed": 0.125,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "windows_total",
+      "what": "창 전체 수 9,961 = 10,000 - 40 + 1 (§4.3)",
+      "paper": 9961,
+      "recomputed": 9961,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "windows_kept",
+      "what": "에피소드 경계 보정 뒤 창 수 9,609 = 9,961 - 352 (§4.3)",
+      "paper": 9609,
+      "recomputed": 9609,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "glued_share",
+      "what": "접합 창 비율 352/9,961 = 3.5% (§4.3)",
+      "paper": "3.5%",
+      "recomputed": "3.53%",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "rows_seconds",
+      "what": "10,000행 = 50 Hz 200 s (§3.2)",
+      "paper": 200,
+      "recomputed": 200.0,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "stride",
+      "what": "보행 주기 27 스텝 = 0.54 s, 1.85 Hz (§3.2)",
+      "paper": "0.54 s / 1.85 Hz",
+      "recomputed": "0.54 s / 1.85 Hz",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "traj_per_episode",
+      "what": "에피소드 20 s(1,000행)당 400스텝 궤적 2개 (§3.4)",
+      "paper": 2,
+      "recomputed": 2,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "pool_counts",
+      "what": "학습 시뮬레이터 수 = 57 + 55 - 11 중복 = 101 (§3.4)",
+      "paper": 101,
+      "recomputed": 101,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "arch_counts",
+      "what": "다른 구조 38 = 13 + 12 + 13 (§3.4)",
+      "paper": 38,
+      "recomputed": 38,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "compressed_sum",
+      "what": "압축 복사본: 초록 '200'은 풀 합 40 + 200 = 240과 다름 (초록 vs §3.4)",
+      "paper": 200,
+      "recomputed": 240,
+      "ok": false,
+      "note": "초록의 '200 compressed copies'는 §3.4 표의 두 풀 합(240)과 맞지 않음. 중복 여부 설명 없음"
+    },
+    {
+      "key": "authors_score",
+      "what": "저자 정책 걷기 점수 0.942 (§3.5)",
+      "paper": 0.942,
+      "recomputed": 0.942,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "standing_score",
+      "what": "가만히 서 있기 0.069 (§3.5)",
+      "paper": 0.069,
+      "recomputed": 0.069,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "episodes",
+      "what": "걷기 점수 평가 96 에피소드 (§3.5)",
+      "paper": 96,
+      "recomputed": 96,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "ladder_tests",
+      "what": "사다리 시험 시뮬레이터 수 18 (§9.5)",
+      "paper": 18,
+      "recomputed": 18,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "ladder_policies",
+      "what": "정책 수 40 (§9.5)",
+      "paper": 40,
+      "recomputed": 40,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "ladder_third",
+      "what": "세 번째 정책이 필요한 시험 4개 (§9.5)",
+      "paper": 4,
+      "recomputed": 4,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "ladder_zero",
+      "what": "학습 붕괴(0.000) 정책 3개 (§9.5)",
+      "paper": 3,
+      "recomputed": 3,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "ladder_failed_policies",
+      "what": "실패 정책 27개 (§9.5)",
+      "paper": 27,
+      "recomputed": 27,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "ladder_failed_flag",
+      "what": "저장된 policy 'failed' 플래그와 점수 기준 실패 수 일치",
+      "paper": 27,
+      "recomputed": 27,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "ladder_fall_majority",
+      "what": "실패 정책 중 낙상률 > 0.5인 것 21개 (§9.5)",
+      "paper": 21,
+      "recomputed": 21,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "ladder_verdicts",
+      "what": "시뮬레이터 판정 (정책 2개 이상 실패 = 실패)과 저장된 판정 일치 (18개)",
+      "paper": 0,
+      "recomputed": 0,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "ladder_not_failed",
+      "what": "실패하지 않은 시뮬레이터 5개 (§9.5 표 'did not fail')",
+      "paper": 5,
+      "recomputed": 5,
+      "ok": true,
+      "note": "W_s0_d5, Wtf_s0_d5, W_s1_d5, Wg_s0_d80, Mg_s0_d80"
+    },
+    {
+      "key": "ladder_failed_count",
+      "what": "실패 시뮬레이터 13개 (§9.5 '13 of the 18 failed')",
+      "paper": 13,
+      "recomputed": 13,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "orig_lr_20_80_failed",
+      "what": "원래 학습률, 20·80 스텝 미세조정 8개 모두 실패 (§9.5)",
+      "paper": 8,
+      "recomputed": 8,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "orig_lr_5_ok",
+      "what": "원래 학습률, 5 스텝 4개 중 3개 실패 안 함 (§9.5)",
+      "paper": 3,
+      "recomputed": 3,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "tenth_lr_80_ok",
+      "what": "1/10 학습률, 80 스텝 2개 모두 실패 안 함 (§9.5)",
+      "paper": 2,
+      "recomputed": 2,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "tenth_lr_160_320_failed",
+      "what": "1/10 학습률, 160·320 스텝 4개 모두 실패 (§9.5)",
+      "paper": 4,
+      "recomputed": 4,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "best_three_mean",
+      "what": "상위 3개 평균 0.60 (§9.5)",
+      "paper": 0.6,
+      "recomputed": 0.599,
+      "ok": true,
+      "note": "저장값 기준. 저장된 best_three 목록은 W_s0_d5, W_s1_d5, REL"
+    },
+    {
+      "key": "shortfall_E1",
+      "what": "1-step 오차가 고른 3개와 최상위 평균의 차이 (§9.5 '0.53')",
+      "paper": 0.53,
+      "recomputed": 0.525,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "shortfall_E8",
+      "what": "8-step 오차가 고른 3개와 최상위 평균의 차이 (§9.5 '0.54')",
+      "paper": 0.54,
+      "recomputed": 0.542,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "premise_rho",
+      "what": "전제: 100스텝 오차 vs 걷기 순위 Spearman +0.16 (§9.5)",
+      "paper": 0.16,
+      "recomputed": 0.16,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "primary1_delta",
+      "what": "주 검정 1 (성장률 - 1스텝 오차) +0.49 (§9.5, 97.5% [-0.42, +1.32])",
+      "paper": 0.49,
+      "recomputed": 0.49,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "primary2_delta",
+      "what": "주 검정 2 (잔차 - 8스텝 오차) +0.75 (§9.5, 97.5% [-0.17, +1.42])",
+      "paper": 0.75,
+      "recomputed": 0.75,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "walk_tracking",
+      "what": "보조: 걷기 시험 추적 보상 - 8스텝 +1.22 [+0.71, +1.58] (§9.5)",
+      "paper": 1.22,
+      "recomputed": 1.22,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "key": "six_million_falls",
+      "what": "§9.4 본문: 600만 전이 시뮬레이터 2차 시험 낙상률 15.5%, 두 배 학습 26.6%",
+      "paper": "15.5% / 26.6%",
+      "recomputed": "표 9.4: 0.23 / 0.39",
+      "ok": false,
+      "note": "같은 시뮬레이터 두 번째 시험의 낙상률이 본문(26.6%)과 표(0.39)에서 다름. §9.6은 39%를 씀"
+    },
+    {
+      "key": "slowest_form",
+      "what": "§8.4 본문: 가장 느린 형태 '8비트 앙상블' 4 ms 미만 vs 표 8.4 (8비트 앙상블 행 없음)",
+      "paper": "< 4 ms (8-bit ensemble)",
+      "recomputed": "표의 가장 느린 행 = 32비트 앙상블 1,816 µs",
+      "ok": false,
+      "note": "표에 8비트 앙상블 측정이 없음"
+    },
+    {
+      "key": "factor_68",
+      "what": "§6.3 본문 '68% 덮기 위한 배수 6.6 / 31 / 42' vs 표 6.3 평균 오차/평균 SD 8.3 / 33.4 / 34.4",
+      "paper": "6.6, 31, 42",
+      "recomputed": "8.3, 33.4, 34.4 (다른 지표)",
+      "ok": false,
+      "note": "두 지표가 같은 말로 불림. 본문 배수가 어떤 표에도 없음"
+    },
+    {
+      "key": "timeline_first_prereg",
+      "what": "첫 사전등록 커밋 시각 2026-11-01 08:17 UTC (부록 B '1 Nov')",
+      "paper": "2026-11-01",
+      "recomputed": "2026-11-01",
+      "ok": true,
+      "note": ""
+    }
+  ]
+}
