@@ -1,0 +1,416 @@
+{
+  "table1_means": {
+    "VITaL*": {
+      "avg_all_recomputed": 36.33,
+      "avg_all_reported": 36.33,
+      "avg_wo_lift_recomputed": 34.5,
+      "avg_wo_lift_reported": 34.5
+    },
+    "UniVTAC-ACT*": {
+      "avg_all_recomputed": 43.0,
+      "avg_all_reported": 43.0,
+      "avg_wo_lift_recomputed": 39.5,
+      "avg_wo_lift_reported": 39.5
+    },
+    "pi0.5": {
+      "avg_all_recomputed": 49.17,
+      "avg_all_reported": 49.16,
+      "avg_wo_lift_recomputed": 31.5,
+      "avg_wo_lift_reported": 31.5
+    },
+    "Tactile-VLA": {
+      "avg_all_recomputed": 41.83,
+      "avg_all_reported": 41.83,
+      "avg_wo_lift_recomputed": 34.75,
+      "avg_wo_lift_reported": 34.75
+    },
+    "FTP-pi0.5": {
+      "avg_all_recomputed": 45.17,
+      "avg_all_reported": 45.16,
+      "avg_wo_lift_recomputed": 42.0,
+      "avg_wo_lift_reported": 42.0
+    },
+    "FTP-1": {
+      "avg_all_recomputed": 66.67,
+      "avg_all_reported": 66.66,
+      "avg_wo_lift_recomputed": 59.5,
+      "avg_wo_lift_reported": 59.5
+    }
+  },
+  "table10_NTP1_means": {
+    "all": 50.0,
+    "wo_lift": 36.5
+  },
+  "table2_means": {
+    "pi0.5": {
+      "recomputed": 45.833,
+      "reported": 45.3,
+      "successes_of_120": 55
+    },
+    "Tactile-VLA": {
+      "recomputed": 35.833,
+      "reported": 35.8,
+      "successes_of_120": 43
+    },
+    "FTP-pi0.5": {
+      "recomputed": 41.667,
+      "reported": 41.6,
+      "successes_of_120": 50
+    },
+    "FTP-1": {
+      "recomputed": 62.5,
+      "reported": 62.5,
+      "successes_of_120": 75
+    }
+  },
+  "table3_means": {
+    "pi0.5": {
+      "recomputed": 15.0,
+      "reported": 15.0,
+      "successes_of_60": 9
+    },
+    "Tactile-VLA": {
+      "recomputed": 8.333,
+      "reported": 8.3,
+      "successes_of_60": 5
+    },
+    "FTP-pi0.5": {
+      "recomputed": 15.0,
+      "reported": 15.0,
+      "successes_of_60": 9
+    },
+    "FTP-1": {
+      "recomputed": 46.667,
+      "reported": 46.6,
+      "successes_of_60": 28
+    }
+  },
+  "tests": [
+    {
+      "comparison": "T1 sim (100/task): FTP-1 vs pi0.5",
+      "ftp_successes": 400,
+      "base_successes": 295,
+      "trials_per_arm": 600,
+      "ftp_rate": 0.6667,
+      "base_rate": 0.4917,
+      "diff_pp": 17.5,
+      "diff_newcombe_95ci_pp": [
+        11.94,
+        22.91
+      ],
+      "p_fisher_pooled": 1.0731198586530018e-09,
+      "cmh_chi2": 45.894,
+      "p_cmh_stratified_by_task": 1.248112724283601e-11,
+      "cmh_common_or": 2.379
+    },
+    {
+      "comparison": "T1 sim (100/task): FTP-1 vs FTP-pi0.5",
+      "ftp_successes": 400,
+      "base_successes": 271,
+      "trials_per_arm": 600,
+      "ftp_rate": 0.6667,
+      "base_rate": 0.4517,
+      "diff_pp": 21.5,
+      "diff_newcombe_95ci_pp": [
+        15.94,
+        26.87
+      ],
+      "p_fisher_pooled": 7.859857676678477e-14,
+      "cmh_chi2": 66.124,
+      "p_cmh_stratified_by_task": 4.440892098500626e-16,
+      "cmh_common_or": 2.866
+    },
+    {
+      "comparison": "T1 sim (100/task): FTP-1 vs Tactile-VLA",
+      "ftp_successes": 400,
+      "base_successes": 251,
+      "trials_per_arm": 600,
+      "ftp_rate": 0.6667,
+      "base_rate": 0.4183,
+      "diff_pp": 24.83,
+      "diff_newcombe_95ci_pp": [
+        19.28,
+        30.17
+      ],
+      "p_fisher_pooled": 6.616630309854637e-18,
+      "cmh_chi2": 93.473,
+      "p_cmh_stratified_by_task": 0.0,
+      "cmh_common_or": 3.632
+    },
+    {
+      "comparison": "T1 sim non-lift (100/task): FTP-1 vs pi0.5",
+      "ftp_successes": 238,
+      "base_successes": 126,
+      "trials_per_arm": 400,
+      "ftp_rate": 0.595,
+      "base_rate": 0.315,
+      "diff_pp": 28.0,
+      "diff_newcombe_95ci_pp": [
+        21.22,
+        34.41
+      ],
+      "p_fisher_pooled": 2.1171610869972732e-15,
+      "cmh_chi2": 65.674,
+      "p_cmh_stratified_by_task": 5.551115123125783e-16,
+      "cmh_common_or": 3.333
+    },
+    {
+      "comparison": "T1 sim non-lift (100/task): FTP-1 vs FTP-pi0.5",
+      "ftp_successes": 238,
+      "base_successes": 168,
+      "trials_per_arm": 400,
+      "ftp_rate": 0.595,
+      "base_rate": 0.42,
+      "diff_pp": 17.5,
+      "diff_newcombe_95ci_pp": [
+        10.59,
+        24.17
+      ],
+      "p_fisher_pooled": 1.0016527253502208e-06,
+      "cmh_chi2": 27.361,
+      "p_cmh_stratified_by_task": 1.6878021713573332e-07,
+      "cmh_common_or": 2.213
+    },
+    {
+      "comparison": "T10 sim (100/task): FTP-1 vs NTP-1",
+      "ftp_successes": 400,
+      "base_successes": 300,
+      "trials_per_arm": 600,
+      "ftp_rate": 0.6667,
+      "base_rate": 0.5,
+      "diff_pp": 16.67,
+      "diff_newcombe_95ci_pp": [
+        11.11,
+        22.08
+      ],
+      "p_fisher_pooled": 6.18586240646478e-09,
+      "cmh_chi2": 39.347,
+      "p_cmh_stratified_by_task": 3.5484737370694575e-10,
+      "cmh_common_or": 2.204
+    },
+    {
+      "comparison": "T10 sim non-lift (100/task): FTP-1 vs NTP-1",
+      "ftp_successes": 238,
+      "base_successes": 146,
+      "trials_per_arm": 400,
+      "ftp_rate": 0.595,
+      "base_rate": 0.365,
+      "diff_pp": 23.0,
+      "diff_newcombe_95ci_pp": [
+        16.14,
+        29.55
+      ],
+      "p_fisher_pooled": 9.95220617538259e-11,
+      "cmh_chi2": 43.453,
+      "p_cmh_stratified_by_task": 4.342037840388002e-11,
+      "cmh_common_or": 2.605
+    },
+    {
+      "comparison": "T2 real seen (20/task): FTP-1 vs pi0.5",
+      "ftp_successes": 75,
+      "base_successes": 55,
+      "trials_per_arm": 120,
+      "ftp_rate": 0.625,
+      "base_rate": 0.4583,
+      "diff_pp": 16.67,
+      "diff_newcombe_95ci_pp": [
+        4.06,
+        28.55
+      ],
+      "p_fisher_pooled": 0.013666423187288433,
+      "cmh_chi2": 7.242,
+      "p_cmh_stratified_by_task": 0.0071204128058138805,
+      "cmh_common_or": 2.111
+    },
+    {
+      "comparison": "T2 real seen (20/task): FTP-1 vs FTP-pi0.5",
+      "ftp_successes": 75,
+      "base_successes": 50,
+      "trials_per_arm": 120,
+      "ftp_rate": 0.625,
+      "base_rate": 0.4167,
+      "diff_pp": 20.83,
+      "diff_newcombe_95ci_pp": [
+        8.2,
+        32.56
+      ],
+      "p_fisher_pooled": 0.001867504696818361,
+      "cmh_chi2": 11.591,
+      "p_cmh_stratified_by_task": 0.0006628656109283204,
+      "cmh_common_or": 2.618
+    },
+    {
+      "comparison": "T2 real seen (20/task): FTP-1 vs Tactile-VLA",
+      "ftp_successes": 75,
+      "base_successes": 43,
+      "trials_per_arm": 120,
+      "ftp_rate": 0.625,
+      "base_rate": 0.3583,
+      "diff_pp": 26.67,
+      "diff_newcombe_95ci_pp": [
+        14.07,
+        38.1
+      ],
+      "p_fisher_pooled": 5.721214181745528e-05,
+      "cmh_chi2": 19.053,
+      "p_cmh_stratified_by_task": 1.2710876260202397e-05,
+      "cmh_common_or": 3.415
+    },
+    {
+      "comparison": "T2 real seen (20/task): FTP-pi0.5 vs pi0.5",
+      "ftp_successes": 50,
+      "base_successes": 55,
+      "trials_per_arm": 120,
+      "ftp_rate": 0.4167,
+      "base_rate": 0.4583,
+      "diff_pp": -4.17,
+      "diff_newcombe_95ci_pp": [
+        -16.43,
+        8.27
+      ],
+      "p_fisher_pooled": 0.6028308553125556,
+      "cmh_chi2": 0.468,
+      "p_cmh_stratified_by_task": 0.49408139812231544,
+      "cmh_common_or": 0.828
+    },
+    {
+      "comparison": "T2 real seen (20/task): Tactile-VLA vs pi0.5",
+      "ftp_successes": 43,
+      "base_successes": 55,
+      "trials_per_arm": 120,
+      "ftp_rate": 0.3583,
+      "base_rate": 0.4583,
+      "diff_pp": -10.0,
+      "diff_newcombe_95ci_pp": [
+        -21.98,
+        2.41
+      ],
+      "p_fisher_pooled": 0.14840605000914753,
+      "cmh_chi2": 2.805,
+      "p_cmh_stratified_by_task": 0.09395943105256332,
+      "cmh_common_or": 0.624
+    },
+    {
+      "comparison": "T10 sim non-lift (100/task): NTP-1 vs FTP-pi0.5",
+      "ftp_successes": 146,
+      "base_successes": 168,
+      "trials_per_arm": 400,
+      "ftp_rate": 0.365,
+      "base_rate": 0.42,
+      "diff_pp": -5.5,
+      "diff_newcombe_95ci_pp": [
+        -12.19,
+        1.26
+      ],
+      "p_fisher_pooled": 0.1283278889250225,
+      "cmh_chi2": 2.69,
+      "p_cmh_stratified_by_task": 0.10096455696242479,
+      "cmh_common_or": 0.788
+    },
+    {
+      "comparison": "T10 sim (100/task): NTP-1 vs FTP-pi0.5",
+      "ftp_successes": 300,
+      "base_successes": 271,
+      "trials_per_arm": 600,
+      "ftp_rate": 0.5,
+      "base_rate": 0.4517,
+      "diff_pp": 4.83,
+      "diff_newcombe_95ci_pp": [
+        -0.82,
+        10.44
+      ],
+      "p_fisher_pooled": 0.10552140201938555,
+      "cmh_chi2": 3.249,
+      "p_cmh_stratified_by_task": 0.07147275007749732,
+      "cmh_common_or": 1.238
+    },
+    {
+      "comparison": "T3 real unseen (20/task): FTP-1 vs pi0.5",
+      "ftp_successes": 28,
+      "base_successes": 9,
+      "trials_per_arm": 60,
+      "ftp_rate": 0.4667,
+      "base_rate": 0.15,
+      "diff_pp": 31.67,
+      "diff_newcombe_95ci_pp": [
+        15.28,
+        45.89
+      ],
+      "p_fisher_pooled": 0.0003049364914791777,
+      "cmh_chi2": 14.62,
+      "p_cmh_stratified_by_task": 0.00013151576848324797,
+      "cmh_common_or": 5.691
+    },
+    {
+      "comparison": "T3 real unseen (20/task): FTP-1 vs FTP-pi0.5",
+      "ftp_successes": 28,
+      "base_successes": 9,
+      "trials_per_arm": 60,
+      "ftp_rate": 0.4667,
+      "base_rate": 0.15,
+      "diff_pp": 31.67,
+      "diff_newcombe_95ci_pp": [
+        15.28,
+        45.89
+      ],
+      "p_fisher_pooled": 0.0003049364914791777,
+      "cmh_chi2": 14.322,
+      "p_cmh_stratified_by_task": 0.00015401447582064076,
+      "cmh_common_or": 5.176
+    },
+    {
+      "comparison": "T3 real unseen (20/task): FTP-1 vs Tactile-VLA",
+      "ftp_successes": 28,
+      "base_successes": 5,
+      "trials_per_arm": 60,
+      "ftp_rate": 0.4667,
+      "base_rate": 0.0833,
+      "diff_pp": 38.33,
+      "diff_newcombe_95ci_pp": [
+        22.85,
+        51.64
+      ],
+      "p_fisher_pooled": 3.428361153253961e-06,
+      "cmh_chi2": 21.971,
+      "p_cmh_stratified_by_task": 2.767659937785716e-06,
+      "cmh_common_or": 9.364
+    }
+  ],
+  "table4_approx": {
+    "ftp1_600": 400,
+    "matched_600": 342,
+    "diff_pp": 9.67,
+    "ci_pp": [
+      4.17,
+      15.08
+    ],
+    "note": "과제별 값 없음, 전체 600 가정"
+  },
+  "relative_gains_pct": {
+    "real_seen": 38.0,
+    "unseen": 210.7,
+    "sim_all": 35.6
+  },
+  "table2_per_task_diff_pp_vs_pi0p5": {
+    "Draw Balloon": 10,
+    "Fix Hand (Tear)": 10,
+    "Fix Hand (Finish)": 5,
+    "Twist Cap": 25,
+    "Flip Book": 20,
+    "Wipe Dish": 30
+  },
+  "mde_pp": {
+    "single_task_20v20": 44.3,
+    "pooled_120v120": 18.1
+  },
+  "table12": {
+    "feelanyforce_mae_change_pct": {
+      "trunk": 15.0,
+      "tokenizer": 55.3
+    }
+  },
+  "tactile_expert_params_est_M": {
+    "paper B.5 (w1024, mlp4096)": 311.4,
+    "code gemma_small (w512, mlp2048)": 99.1
+  }
+}
