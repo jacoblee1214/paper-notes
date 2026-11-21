@@ -1,0 +1,237 @@
+{
+  "table2_vs_table1": {
+    "lat250": {
+      "base_iqm": 0.6125,
+      "base_mean": 0.605,
+      "base_table1": 0.61,
+      "rg_iqm": 0.9475,
+      "rg_mean": 0.945,
+      "rg_table1": 0.96
+    },
+    "lat400": {
+      "base_iqm": 0.1625,
+      "base_mean": 0.2175,
+      "base_table1": 0.16,
+      "rg_iqm": 0.9,
+      "rg_mean": 0.8912,
+      "rg_table1": 0.9
+    },
+    "comp": {
+      "base_iqm": 0.0,
+      "base_mean": 0.05,
+      "base_table1": 0.0,
+      "rg_iqm": 0.9575,
+      "rg_mean": 0.9562,
+      "rg_table1": 0.97
+    },
+    "rot90": {
+      "base_iqm": 0.0,
+      "base_mean": 0.0,
+      "base_table1": 0.0,
+      "rg_iqm": 0.98,
+      "rg_mean": 0.9462,
+      "rg_table1": 0.98
+    },
+    "gain3": {
+      "base_iqm": 0.15,
+      "base_mean": 0.1638,
+      "base_table1": 0.15,
+      "rg_iqm": 0.955,
+      "rg_mean": 0.9012,
+      "rg_table1": 0.96
+    }
+  },
+  "grid_fit": {
+    "35": "56/80",
+    "105": "80/80",
+    "175": "80/80"
+  },
+  "recovery": {
+    "lat250": {
+      "vs_oracle": 0.972,
+      "vs_nominal_val": 0.921
+    },
+    "lat400": {
+      "vs_oracle": 0.987,
+      "vs_nominal_val": 0.892
+    },
+    "comp": {
+      "vs_oracle": 1.054,
+      "vs_nominal_val": 0.98
+    },
+    "rot90": {
+      "vs_oracle": 1.0,
+      "vs_nominal_val": 0.99
+    },
+    "gain3": {
+      "vs_oracle": 0.976,
+      "vs_nominal_val": 0.964
+    }
+  },
+  "recovery_range_vs_nominal_val": [
+    0.892,
+    0.99
+  ],
+  "recovery_range_vs_oracle": [
+    0.972,
+    1.054
+  ],
+  "sign_test": {
+    "lat250": {
+      "rg_gt_base": 8,
+      "non_tied": 8,
+      "p_two_sided": 0.0078
+    },
+    "lat400": {
+      "rg_gt_base": 8,
+      "non_tied": 8,
+      "p_two_sided": 0.0078
+    },
+    "comp": {
+      "rg_gt_base": 8,
+      "non_tied": 8,
+      "p_two_sided": 0.0078
+    },
+    "rot90": {
+      "rg_gt_base": 8,
+      "non_tied": 8,
+      "p_two_sided": 0.0078
+    },
+    "gain3": {
+      "rg_gt_base": 8,
+      "non_tied": 8,
+      "p_two_sided": 0.0078
+    }
+  },
+  "bootstrap": {
+    "lat250_n105": {
+      "base_ci95": [
+        0.571,
+        0.657
+      ],
+      "rg_ci95": [
+        0.933,
+        0.969
+      ]
+    },
+    "lat250_n175": {
+      "base_ci95": [
+        0.583,
+        0.646
+      ],
+      "rg_ci95": [
+        0.937,
+        0.966
+      ]
+    },
+    "lat400_n105": {
+      "base_ci95": [
+        0.129,
+        0.188
+      ],
+      "rg_ci95": [
+        0.874,
+        0.926
+      ]
+    },
+    "lat400_n175": {
+      "base_ci95": [
+        0.137,
+        0.183
+      ],
+      "rg_ci95": [
+        0.879,
+        0.92
+      ]
+    },
+    "comp_n105": {
+      "base_ci95": [
+        0.0,
+        0.0
+      ],
+      "rg_ci95": [
+        0.943,
+        0.976
+      ]
+    },
+    "comp_n175": {
+      "base_ci95": [
+        0.0,
+        0.0
+      ],
+      "rg_ci95": [
+        0.944,
+        0.971
+      ]
+    },
+    "rot90_n105": {
+      "base_ci95": [
+        0.0,
+        0.0
+      ],
+      "rg_ci95": [
+        0.967,
+        0.993
+      ]
+    },
+    "rot90_n175": {
+      "base_ci95": [
+        0.0,
+        0.0
+      ],
+      "rg_ci95": [
+        0.969,
+        0.99
+      ]
+    },
+    "gain3_n105": {
+      "base_ci95": [
+        0.114,
+        0.171
+      ],
+      "rg_ci95": [
+        0.94,
+        0.976
+      ]
+    },
+    "gain3_n175": {
+      "base_ci95": [
+        0.123,
+        0.167
+      ],
+      "rg_ci95": [
+        0.944,
+        0.971
+      ]
+    }
+  },
+  "text_claims": {
+    "abstract 0.16->0.90 at 400ms": [
+      0.16,
+      0.9
+    ],
+    "ReGround overall 0.90-0.98 (min,max)": [
+      0.9,
+      0.98
+    ],
+    "+0.16 at 250 vs best baseline": 0.16,
+    "+0.74 at 400 vs best baseline": 0.74,
+    "+0.11 composite vs best baseline": 0.11,
+    "composite RG vs oracle (0.97 vs 0.92)": [
+      0.97,
+      0.92
+    ],
+    "rot90 unsafe linear->RG (0.76->0.29)": [
+      0.76,
+      0.29
+    ],
+    "gain3 unsafe linear->RG (1.00->0.77)": [
+      1.0,
+      0.77
+    ],
+    "Intent safer than RG (unsafe) cells": [
+      "lat250",
+      "comp"
+    ]
+  }
+}
