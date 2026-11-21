@@ -1,0 +1,164 @@
+{
+  "claims": [
+    {
+      "key": "h1s_avg",
+      "text_value": 31,
+      "recomputed": 31.11,
+      "note": "2s->1s 평균 거리 개선 (Table 3)"
+    },
+    {
+      "key": "h1s_final",
+      "text_value": 21,
+      "recomputed": 20.97,
+      "note": "2s->1s 최종 거리 개선 (Table 3)"
+    },
+    {
+      "key": "h3s_avg",
+      "text_value": 18,
+      "recomputed": 17.78,
+      "note": "2s->3s 평균 거리 악화 (Table 3)"
+    },
+    {
+      "key": "h3s_final",
+      "text_value": 11,
+      "recomputed": 11.29,
+      "note": "2s->3s 최종 거리 악화 (Table 3)"
+    },
+    {
+      "key": "goal_avg",
+      "text_value": 22,
+      "recomputed": 22.22,
+      "note": "목표 이미지 조건 평균 개선 (Table 4)"
+    },
+    {
+      "key": "goal_final",
+      "text_value": 53,
+      "recomputed": 53.23,
+      "note": "목표 이미지 조건 최종 개선 (Table 4)"
+    },
+    {
+      "key": "bc_k1_about15",
+      "text_value": 15,
+      "recomputed": 14.43,
+      "note": "BC의 K=1 평균 거리 우위 (4개 비교 평균, 본문 '약 15%')"
+    },
+    {
+      "key": "fm_up_to_34",
+      "text_value": 34,
+      "recomputed": 33.87,
+      "note": "34%는 'final 거리, EncDec+FM K=10 vs Dec+BC K=1'(33.9%)에만 맞음. 모든 비교의 최댓값은 42.3%(final vs Dec+DDPM/FM K=1)"
+    }
+  ],
+  "derived": {
+    "bc_advantage_K1_avg_pct": {
+      "Dec+BC vs Dec+DDPM (avg, K=1)": 15.1,
+      "Dec+BC vs Dec+FM (avg, K=1)": 13.5,
+      "EncDec+BC vs EncDec+DDPM (avg, K=1)": 15.4,
+      "EncDec+BC vs EncDec+FM (avg, K=1)": 13.7
+    },
+    "encdec_fm_k10_improvements_pct": {
+      "avg K=10 vs Dec+BC K=1": 15.6,
+      "final K=10 vs Dec+BC K=1": 33.9,
+      "avg K=10 vs Dec+DDPM K=1": 28.3,
+      "final K=10 vs Dec+DDPM K=1": 42.3,
+      "avg K=10 vs Dec+FM K=1": 26.9,
+      "final K=10 vs Dec+FM K=1": 42.3,
+      "avg K=10 vs EncDec+BC K=1": 13.6,
+      "final K=10 vs EncDec+BC K=1": 31.7,
+      "avg K=10 vs EncDec+DDPM K=1": 26.9,
+      "final K=10 vs EncDec+DDPM K=1": 42.3
+    },
+    "fm_34_match": "final K=10 vs Dec+BC K=1 = 33.9%",
+    "best_of_k_gain": {
+      "Dec+DDPM": {
+        "avg_K1_to_K10_pct": 22.6,
+        "final_K1_to_K10_pct": 38.0
+      },
+      "Dec+FM": {
+        "avg_K1_to_K10_pct": 23.1,
+        "final_K1_to_K10_pct": 39.4
+      },
+      "EncDec+DDPM": {
+        "avg_K1_to_K10_pct": 25.0,
+        "final_K1_to_K10_pct": 39.4
+      },
+      "EncDec+FM": {
+        "avg_K1_to_K10_pct": 25.5,
+        "final_K1_to_K10_pct": 41.4
+      }
+    },
+    "ood_vs_id_pct": {
+      "Jigsaw Puzzle": {
+        "avg_vs_ID_pct": 4.4,
+        "final_vs_ID_pct": 4.8
+      },
+      "Tetra Board": {
+        "avg_vs_ID_pct": 33.3,
+        "final_vs_ID_pct": 32.3
+      },
+      "Knit Scarf": {
+        "avg_vs_ID_pct": 42.2,
+        "final_vs_ID_pct": 50.0
+      },
+      "Play Reversi": {
+        "avg_vs_ID_pct": 44.4,
+        "final_vs_ID_pct": 54.8
+      },
+      "Blowdry Hair": {
+        "avg_vs_ID_pct": 84.4,
+        "final_vs_ID_pct": 90.3
+      },
+      "Stamp Paper": {
+        "avg_vs_ID_pct": 120.0,
+        "final_vs_ID_pct": 161.3
+      }
+    }
+  },
+  "consistency": {
+    "table6_h60_equals_table2_encdecfm": true,
+    "table3_h60_equals_table2_decbc": true,
+    "table6_monotone_in_K": true,
+    "table6_monotone_in_H": true,
+    "final_ge_avg_all_rows": true,
+    "dataset": {
+      "split_hours_sum": 829,
+      "paper_total_hours": 829,
+      "test_share_of_train_plus_test_pct": 0.96,
+      "frames_at_30hz_millions": 89.5,
+      "paper_frames_millions": 90,
+      "mean_episode_seconds": 8.83,
+      "approx_test_episodes_from_7h": 2854,
+      "tasks_from_listing": 194,
+      "paper_tasks": 194,
+      "raw_over_compressed_ratio": 250.0,
+      "paper_ratio_claim": 250,
+      "repo_zip_total_GB": 1716,
+      "paper_disk_TB": 2.0
+    }
+  },
+  "sensitivity": {
+    "assumed_test_episodes": 3380.0,
+    "assumed_sigma_m": [
+      0.02,
+      0.03,
+      0.05
+    ],
+    "rows": [
+      {
+        "sigma_m": 0.02,
+        "SE_of_mean_m": 0.00034,
+        "MDE_80pct_m": 0.00136
+      },
+      {
+        "sigma_m": 0.03,
+        "SE_of_mean_m": 0.00052,
+        "MDE_80pct_m": 0.00204
+      },
+      {
+        "sigma_m": 0.05,
+        "SE_of_mean_m": 0.00086,
+        "MDE_80pct_m": 0.00341
+      }
+    ]
+  }
+}
