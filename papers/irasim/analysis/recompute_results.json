@@ -1,0 +1,346 @@
+{
+  "table1_best_per_metric": {
+    "RT-1/PSNR": "Frame-Ada",
+    "RT-1/SSIM": "Frame-Ada",
+    "RT-1/LatentL2": "Frame-Ada",
+    "RT-1/FID": "LVDM",
+    "RT-1/FVD": "Frame-Ada",
+    "Bridge/PSNR": "Frame-Ada",
+    "Bridge/SSIM": "Frame-Ada",
+    "Bridge/LatentL2": "Frame-Ada",
+    "Bridge/FID": "Video-Ada",
+    "Bridge/FVD": "Frame-Ada",
+    "Language-Table/PSNR": "Frame-Ada",
+    "Language-Table/SSIM": "LVDM",
+    "Language-Table/LatentL2": "Frame-Ada",
+    "Language-Table/FID": "Frame-Ada",
+    "Language-Table/FVD": "LVDM"
+  },
+  "table1_frame_ada_not_best": [
+    "RT-1/FID",
+    "Bridge/FID",
+    "Language-Table/SSIM",
+    "Language-Table/FVD"
+  ],
+  "table3_frame_ada_latentL2_margin_pct_vs_LVDM": {
+    "RT-1": 6.2,
+    "Bridge": 9.0,
+    "Language-Table": 2.6
+  },
+  "table2_robonet_psnr_gain_db": 0.8,
+  "table4": {
+    "gt_counts_of_50": [
+      9,
+      25,
+      40,
+      50
+    ],
+    "irasim_counts_of_50": [
+      14,
+      24,
+      37,
+      48
+    ],
+    "pearson_r": 0.9931,
+    "pearson_p": 0.00686,
+    "pearson_fisher_95ci_n4": [
+      0.704,
+      1.0
+    ],
+    "spearman_rho": 1.0,
+    "mean_abs_diff": 0.055,
+    "max_abs_diff": 0.1,
+    "gt_wilson95": [
+      [
+        0.098,
+        0.308
+      ],
+      [
+        0.366,
+        0.634
+      ],
+      [
+        0.67,
+        0.888
+      ],
+      [
+        0.929,
+        1.0
+      ]
+    ],
+    "irasim_wilson95": [
+      [
+        0.175,
+        0.417
+      ],
+      [
+        0.348,
+        0.615
+      ],
+      [
+        0.604,
+        0.841
+      ],
+      [
+        0.865,
+        0.989
+      ]
+    ]
+  },
+  "figure4_preference": {
+    "RT-1 vs VDM": {
+      "win_tie_loss_of_50": [
+        50,
+        0,
+        0
+      ],
+      "win_share_excl_ties_wilson95": [
+        0.929,
+        1.0
+      ],
+      "sign_test_p_two_sided": 1.78e-15
+    },
+    "Bridge vs VDM": {
+      "win_tie_loss_of_50": [
+        50,
+        0,
+        0
+      ],
+      "win_share_excl_ties_wilson95": [
+        0.929,
+        1.0
+      ],
+      "sign_test_p_two_sided": 1.78e-15
+    },
+    "Language-Table vs VDM": {
+      "win_tie_loss_of_50": [
+        50,
+        0,
+        0
+      ],
+      "win_share_excl_ties_wilson95": [
+        0.929,
+        1.0
+      ],
+      "sign_test_p_two_sided": 1.78e-15
+    },
+    "RT-1 vs LVDM": {
+      "win_tie_loss_of_50": [
+        30,
+        6,
+        14
+      ],
+      "win_share_excl_ties_wilson95": [
+        0.534,
+        0.8
+      ],
+      "sign_test_p_two_sided": 0.0226
+    },
+    "Bridge vs LVDM": {
+      "win_tie_loss_of_50": [
+        36,
+        8,
+        6
+      ],
+      "win_share_excl_ties_wilson95": [
+        0.722,
+        0.933
+      ],
+      "sign_test_p_two_sided": 2.83e-06
+    },
+    "Language-Table vs LVDM": {
+      "win_tie_loss_of_50": [
+        34,
+        5,
+        11
+      ],
+      "win_share_excl_ties_wilson95": [
+        0.613,
+        0.858
+      ],
+      "sign_test_p_two_sided": 0.000824
+    },
+    "RT-1 vs Video-Ada": {
+      "win_tie_loss_of_50": [
+        19,
+        16,
+        15
+      ],
+      "win_share_excl_ties_wilson95": [
+        0.395,
+        0.711
+      ],
+      "sign_test_p_two_sided": 0.608
+    },
+    "Bridge vs Video-Ada": {
+      "win_tie_loss_of_50": [
+        18,
+        15,
+        17
+      ],
+      "win_share_excl_ties_wilson95": [
+        0.356,
+        0.67
+      ],
+      "sign_test_p_two_sided": 1.0
+    },
+    "Language-Table vs Video-Ada": {
+      "win_tie_loss_of_50": [
+        33,
+        10,
+        7
+      ],
+      "win_share_excl_ties_wilson95": [
+        0.68,
+        0.913
+      ],
+      "sign_test_p_two_sided": 4.23e-05
+    }
+  },
+  "table6_fit_to_15_trials": {
+    "Close Drawer | Random": {
+      "k_of_15": 3,
+      "value_from_k": 0.2,
+      "reported": 0.2,
+      "consistent": true
+    },
+    "Close Drawer | IRASim (ResNet50)": {
+      "k_of_15": 9,
+      "value_from_k": 0.6,
+      "reported": 0.6,
+      "consistent": true
+    },
+    "Close Drawer | IRASim (MSE)": {
+      "k_of_15": 13,
+      "value_from_k": 0.867,
+      "reported": 0.87,
+      "consistent": true
+    },
+    "Place Mandarin on Green Plate | Random": {
+      "k_of_15": 1,
+      "value_from_k": 0.067,
+      "reported": 0.07,
+      "consistent": true
+    },
+    "Place Mandarin on Green Plate | IRASim (ResNet50)": {
+      "k_of_15": 11,
+      "value_from_k": 0.733,
+      "reported": 0.73,
+      "consistent": true
+    },
+    "Place Mandarin on Green Plate | IRASim (MSE)": {
+      "k_of_15": 12,
+      "value_from_k": 0.8,
+      "reported": 0.8,
+      "consistent": true
+    },
+    "Place Mandarin on Red Plate | Random": {
+      "k_of_15": 2,
+      "value_from_k": 0.133,
+      "reported": 0.13,
+      "consistent": true
+    },
+    "Place Mandarin on Red Plate | IRASim (ResNet50)": {
+      "k_of_15": 9,
+      "value_from_k": 0.6,
+      "reported": 0.6,
+      "consistent": true
+    },
+    "Place Mandarin on Red Plate | IRASim (MSE)": {
+      "k_of_15": 13,
+      "value_from_k": 0.867,
+      "reported": 0.87,
+      "consistent": true
+    }
+  },
+  "table6_pooled_k_of_45": {
+    "Random": [
+      6,
+      45
+    ],
+    "IRASim (ResNet50)": [
+      29,
+      45
+    ],
+    "IRASim (MSE)": [
+      38,
+      45
+    ]
+  },
+  "table6_fisher_p": {
+    "pooled MSE vs ResNet50": 0.0518,
+    "pooled MSE vs Random": 7.48e-12,
+    "pooled ResNet50 vs Random": 1.01e-06,
+    "Close Drawer MSE vs ResNet50": 0.215,
+    "Close Drawer MSE vs Random": 0.000679
+  },
+  "table6_pooled_wilson95": {
+    "Random": [
+      0.063,
+      0.262
+    ],
+    "IRASim (ResNet50)": [
+      0.498,
+      0.768
+    ],
+    "IRASim (MSE)": [
+      0.712,
+      0.923
+    ]
+  },
+  "table5_monotonicity_violations_in_K_for_P_gt_0": [
+    "P=200: K=10->50 0.916 -> 0.912",
+    "P=500: K=5->10 0.907 -> 0.906"
+  ],
+  "table5_monotonicity_violations_in_P_by_K": [
+    "K=5: P=500->1000 0.907 -> 0.886",
+    "K=10: P=200->500 0.916 -> 0.906"
+  ],
+  "table5_P0_K50_minus_K1": -0.219,
+  "table5_best_cell": "P=1000, K=50, IoU 0.961 (20개 셀 중 최댓값 선택)",
+  "table5_gain_from_best_cell": 0.324,
+  "table11_param_check_millions": {
+    "IRASim-S": {
+      "formula_M": 33.1,
+      "paper_M": 33.0
+    },
+    "IRASim-B": {
+      "formula_M": 131.9,
+      "paper_M": 132.0
+    },
+    "IRASim-L": {
+      "formula_M": 461.0,
+      "paper_M": 461.0
+    },
+    "IRASim-XL": {
+      "formula_M": 678.9,
+      "paper_M": 679.0
+    }
+  },
+  "training_steps": {
+    "text_and_config": 300000,
+    "table10": 3000000
+  },
+  "table12_gpu_hours_per_1k_steps": {
+    "RT-1": 7.94,
+    "Bridge": 7.9,
+    "Language-Table": 7.9
+  },
+  "table12_wallclock_h_if_32_concurrent": {
+    "RT-1": 74.4,
+    "Bridge": 74.1,
+    "Language-Table": 74.0
+  },
+  "effective_batch_by_config": {
+    "rt1 (accum 2)": {
+      "8 GPU": 16,
+      "32 GPU": 64
+    },
+    "languagetable (accum 1)": {
+      "8 GPU": 8,
+      "32 GPU": 32,
+      "64 GPU": 64
+    },
+    "paper Appendix E": 64
+  }
+}
