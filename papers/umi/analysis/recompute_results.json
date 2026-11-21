@@ -1,0 +1,391 @@
+{
+ "rates": [
+  {
+   "name": "Cup 전체 방법 (UMI)",
+   "k": 20,
+   "n": 20,
+   "rate": 1.0,
+   "wilson95": [
+    0.839,
+    1.0
+   ],
+   "where": "§V-A"
+  },
+  {
+   "name": "Cup, 절대 행동",
+   "k": 5,
+   "n": 20,
+   "rate": 0.25,
+   "wilson95": [
+    0.112,
+    0.469
+   ],
+   "where": "§V-A, 그림 8c"
+  },
+  {
+   "name": "Cup, 상대 델타 행동",
+   "k": 16,
+   "n": 20,
+   "rate": 0.8,
+   "wilson95": [
+    0.584,
+    0.919
+   ],
+   "where": "§V-A, 그림 8c"
+  },
+  {
+   "name": "Cup, 어안 렌즈 없음",
+   "k": 11,
+   "n": 20,
+   "rate": 0.55,
+   "wilson95": [
+    0.342,
+    0.742
+   ],
+   "where": "§V-A, 그림 8c"
+  },
+  {
+   "name": "Cup, 거울 없음",
+   "k": 18,
+   "n": 20,
+   "rate": 0.9,
+   "wilson95": [
+    0.699,
+    0.972
+   ],
+   "where": "§V-A"
+  },
+  {
+   "name": "Cup, 거울 있으나 반사 없음",
+   "k": 17,
+   "n": 20,
+   "rate": 0.85,
+   "wilson95": [
+    0.64,
+    0.948
+   ],
+   "where": "§V-A"
+  },
+  {
+   "name": "Cup, Franka FR2 교차 로봇",
+   "k": 18,
+   "n": 20,
+   "rate": 0.9,
+   "wilson95": [
+    0.699,
+    0.972
+   ],
+   "where": "§V-A (그림 1, 8)"
+  },
+  {
+   "name": "Tossing, UMI (지연 맞춤)",
+   "k": 105,
+   "n": 120,
+   "rate": 0.875,
+   "wilson95": [
+    0.804,
+    0.923
+   ],
+   "where": "§V-B"
+  },
+  {
+   "name": "Tossing, 지연 맞춤 없음",
+   "k": 69,
+   "n": 120,
+   "rate": 0.575,
+   "wilson95": [
+    0.486,
+    0.66
+   ],
+   "where": "§V-B, 그림 8"
+  },
+  {
+   "name": "Cloth, UMI",
+   "k": 14,
+   "n": 20,
+   "rate": 0.7,
+   "wilson95": [
+    0.481,
+    0.855
+   ],
+   "where": "§V-C"
+  },
+  {
+   "name": "Cloth, 상대 그리퍼 자세 없음",
+   "k": 6,
+   "n": 20,
+   "rate": 0.3,
+   "wilson95": [
+    0.145,
+    0.519
+   ],
+   "where": "§V-C"
+  },
+  {
+   "name": "Dish, UMI (ViT-B CLIP)",
+   "k": 14,
+   "n": 20,
+   "rate": 0.7,
+   "wilson95": [
+    0.481,
+    0.855
+   ],
+   "where": "§V-D"
+  },
+  {
+   "name": "Dish, ResNet-34 (본문은 0/10)",
+   "k": 0,
+   "n": 20,
+   "rate": 0.0,
+   "wilson95": [
+    0.0,
+    0.161
+   ],
+   "where": "§V-D 본문 '0/10', 그림 8은 20회"
+  },
+  {
+   "name": "Cup in-the-wild, 학습 컵",
+   "k": 28,
+   "n": 40,
+   "rate": 0.7,
+   "wilson95": [
+    0.546,
+    0.819
+   ],
+   "where": "§VI"
+  },
+  {
+   "name": "Cup in-the-wild, 미지 컵",
+   "k": 15,
+   "n": 20,
+   "rate": 0.75,
+   "wilson95": [
+    0.531,
+    0.888
+   ],
+   "where": "§VI"
+  },
+  {
+   "name": "Cup in-the-wild, 전체 (카페 22/35 + 분수 21/25)",
+   "k": 43,
+   "n": 60,
+   "rate": 0.7167,
+   "wilson95": [
+    0.592,
+    0.815
+   ],
+   "where": "§VI, 그림 9c"
+  },
+  {
+   "name": "Cup 협소 데이터만 학습, 미지 환경",
+   "k": 0,
+   "n": 20,
+   "rate": 0.0,
+   "wilson95": [
+    0.0,
+    0.161
+   ],
+   "where": "§VI 그림 9b (카페 0/10 + 분수 0/10)"
+  }
+ ],
+ "fisher": [
+  {
+   "name": "Cup: UMI vs 어안 없음",
+   "a": [
+    20,
+    20
+   ],
+   "b": [
+    11,
+    20
+   ],
+   "p_two_sided": 0.00123
+  },
+  {
+   "name": "Cup: UMI vs 절대 행동",
+   "a": [
+    20,
+    20
+   ],
+   "b": [
+    5,
+    20
+   ],
+   "p_two_sided": 7.71e-07
+  },
+  {
+   "name": "Cup: UMI vs 델타 행동",
+   "a": [
+    20,
+    20
+   ],
+   "b": [
+    16,
+    20
+   ],
+   "p_two_sided": 0.106
+  },
+  {
+   "name": "Cup: UMI vs 거울 없음",
+   "a": [
+    20,
+    20
+   ],
+   "b": [
+    18,
+    20
+   ],
+   "p_two_sided": 0.487
+  },
+  {
+   "name": "Cup: 거울 반사 없음 vs 거울 없음",
+   "a": [
+    17,
+    20
+   ],
+   "b": [
+    18,
+    20
+   ],
+   "p_two_sided": 1.0
+  },
+  {
+   "name": "Cup: UMI vs 거울 반사 없음",
+   "a": [
+    20,
+    20
+   ],
+   "b": [
+    17,
+    20
+   ],
+   "p_two_sided": 0.231
+  },
+  {
+   "name": "Cup: 델타 vs 절대 행동",
+   "a": [
+    16,
+    20
+   ],
+   "b": [
+    5,
+    20
+   ],
+   "p_two_sided": 0.00123
+  },
+  {
+   "name": "Tossing: 지연 맞춤 vs 없음",
+   "a": [
+    105,
+    120
+   ],
+   "b": [
+    69,
+    120
+   ],
+   "p_two_sided": 2.51e-07
+  },
+  {
+   "name": "Cloth: UMI vs 상대 자세 없음",
+   "a": [
+    14,
+    20
+   ],
+   "b": [
+    6,
+    20
+   ],
+   "p_two_sided": 0.0256
+  },
+  {
+   "name": "Dish: UMI vs ResNet-34 (n=20 가정)",
+   "a": [
+    14,
+    20
+   ],
+   "b": [
+    0,
+    20
+   ],
+   "p_two_sided": 3.34e-06
+  },
+  {
+   "name": "Dish: UMI vs ResNet-34 (n=10 본문 가정)",
+   "a": [
+    14,
+    20
+   ],
+   "b": [
+    0,
+    10
+   ],
+   "p_two_sided": 0.0003
+  },
+  {
+   "name": "In-the-wild: 학습 컵 vs 미지 컵",
+   "a": [
+    28,
+    40
+   ],
+   "b": [
+    15,
+    20
+   ],
+   "p_two_sided": 0.769
+  }
+ ],
+ "consistency": {
+  "tossing_per_object_mean_ours": 0.875,
+  "tossing_per_object_mean_noLM": 0.575,
+  "tossing_object_counts_ours_x20": [
+   16,
+   17,
+   17,
+   20,
+   18,
+   17
+  ],
+  "tossing_object_counts_ours_sum": 105,
+  "tossing_object_counts_noLM_x20": [
+   14,
+   10,
+   14,
+   6,
+   13,
+   12
+  ],
+  "tossing_object_counts_noLM_sum": 69,
+  "inwild_cafe_sum": [
+   22,
+   35
+  ],
+  "inwild_fountain_sum": [
+   21,
+   25
+  ],
+  "inwild_total": [
+   43,
+   60
+  ],
+  "inwild_train_total": [
+   28,
+   40
+  ],
+  "inwild_unseen_total": [
+   15,
+   20
+  ],
+  "intro_OOD_70pct_vs_pooled": 0.7167,
+  "train_cup_rate_vs_intro": 0.7,
+  "throughput_cup_UMI_over_human": 0.4805,
+  "throughput_cup_UMI_over_spacemouse": 3.171,
+  "throughput_toss_UMI_over_human": 0.6287,
+  "slam_per_gripper_ATE_mm": 6.1,
+  "slam_inter_gripper_RPE_mm": 10.1
+ },
+ "power": {
+  "n_per_arm_for_80_vs_100": 35,
+  "n_per_arm_for_0.70_vs_0.30": 24,
+  "n_per_arm_for_0.875_vs_0.575": 34
+ }
+}
