@@ -1,0 +1,383 @@
+{
+  "V1_table1_average_recheck": {
+    "Diffuser*": {
+      "single_recomputed": 119.47,
+      "single_printed": 119.5,
+      "multi_recomputed": 129.4,
+      "multi_printed": 129.4
+    },
+    "Diffuser_diffused_action": {
+      "single_recomputed": 8.7,
+      "single_printed": 8.7,
+      "multi_recomputed": 20.57,
+      "multi_printed": 20.6
+    },
+    "Ours_wo_MCG": {
+      "single_recomputed": 129.67,
+      "single_printed": 129.67,
+      "multi_recomputed": 127.7,
+      "multi_printed": 127.7
+    },
+    "Ours": {
+      "single_recomputed": 141.7,
+      "single_printed": 141.7,
+      "multi_recomputed": 146.17,
+      "multi_printed": 146.2
+    },
+    "MPPI": {
+      "single_recomputed": 16.17,
+      "single_printed": 16.2,
+      "multi_recomputed": 21.53,
+      "multi_printed": 21.5
+    },
+    "IQL": {
+      "single_recomputed": 46.97,
+      "single_printed": 47.0,
+      "multi_recomputed": 16.93,
+      "multi_printed": 16.9
+    }
+  },
+  "V2_table1_pairwise_sensitivity_assumed_n": [
+    {
+      "env": "Maze2D U-Maze",
+      "comparison": "Ours_vs_Ours_wo_MCG",
+      "diff_mean": 6.6,
+      "welch_n5_t": 3.37,
+      "welch_n5_p": 0.015,
+      "welch_n10_t": 4.76,
+      "welch_n10_p": 0.00034
+    },
+    {
+      "env": "Maze2D U-Maze",
+      "comparison": "Ours_vs_Diffuser*",
+      "diff_mean": 2.8,
+      "welch_n5_t": 1.7,
+      "welch_n5_p": 0.13,
+      "welch_n10_t": 2.4,
+      "welch_n10_p": 0.029
+    },
+    {
+      "env": "Maze2D Medium",
+      "comparison": "Ours_vs_Ours_wo_MCG",
+      "diff_mean": 13.3,
+      "welch_n5_t": 2.35,
+      "welch_n5_p": 0.049,
+      "welch_n10_t": 3.32,
+      "welch_n10_p": 0.0042
+    },
+    {
+      "env": "Maze2D Medium",
+      "comparison": "Ours_vs_Diffuser*",
+      "diff_mean": 27.9,
+      "welch_n5_t": 7.83,
+      "welch_n5_p": 0.00054,
+      "welch_n10_t": 11.07,
+      "welch_n10_p": 2.1e-07
+    },
+    {
+      "env": "Maze2D Large",
+      "comparison": "Ours_vs_Ours_wo_MCG",
+      "diff_mean": 16.2,
+      "welch_n5_t": 5.83,
+      "welch_n5_p": 0.0013,
+      "welch_n10_t": 8.24,
+      "welch_n10_p": 1.6e-06
+    },
+    {
+      "env": "Maze2D Large",
+      "comparison": "Ours_vs_Diffuser*",
+      "diff_mean": 36.0,
+      "welch_n5_t": 11.59,
+      "welch_n5_p": 5.2e-05,
+      "welch_n10_t": 16.39,
+      "welch_n10_p": 1.2e-09
+    },
+    {
+      "env": "Multi2D U-Maze",
+      "comparison": "Ours_vs_Ours_wo_MCG",
+      "diff_mean": 11.4,
+      "welch_n5_t": 4.03,
+      "welch_n5_p": 0.0041,
+      "welch_n10_t": 5.7,
+      "welch_n10_p": 2.4e-05
+    },
+    {
+      "env": "Multi2D U-Maze",
+      "comparison": "Ours_vs_Diffuser*",
+      "diff_mean": -9.8,
+      "welch_n5_t": -5.0,
+      "welch_n5_p": 0.0031,
+      "welch_n10_t": -7.07,
+      "welch_n10_p": 1e-05
+    },
+    {
+      "env": "Multi2D Medium",
+      "comparison": "Ours_vs_Ours_wo_MCG",
+      "diff_mean": 6.7,
+      "welch_n5_t": 1.27,
+      "welch_n5_p": 0.25,
+      "welch_n10_t": 1.79,
+      "welch_n10_p": 0.093
+    },
+    {
+      "env": "Multi2D Medium",
+      "comparison": "Ours_vs_Diffuser*",
+      "diff_mean": 25.1,
+      "welch_n5_t": 5.36,
+      "welch_n5_p": 0.0032,
+      "welch_n10_t": 7.58,
+      "welch_n10_p": 1e-05
+    },
+    {
+      "env": "Multi2D Large",
+      "comparison": "Ours_vs_Ours_wo_MCG",
+      "diff_mean": 37.3,
+      "welch_n5_t": 27.0,
+      "welch_n5_p": 1e-07,
+      "welch_n10_t": 38.19,
+      "welch_n10_p": 1.3e-15
+    },
+    {
+      "env": "Multi2D Large",
+      "comparison": "Ours_vs_Diffuser*",
+      "diff_mean": 35.0,
+      "welch_n5_t": 12.23,
+      "welch_n5_p": 2.8e-05,
+      "welch_n10_t": 17.3,
+      "welch_n10_p": 3.2e-10
+    }
+  ],
+  "K1_claim_outperform_all_baselines_all_envs": {
+    "text_claim": "DF outperforms Diffuser and all baselines across all 6 environments (Sec. 4.2)",
+    "violations": [
+      {
+        "env": "Multi2D U-Maze",
+        "baseline": "Diffuser*",
+        "baseline_mean": 128.9,
+        "ours": 119.1
+      }
+    ]
+  },
+  "V3_ours_ci95_n5": {
+    "t_crit": 2.7764,
+    "rows": [
+      {
+        "dataset": "Exchange",
+        "mean": 0.003,
+        "sd": 0.001,
+        "ci95_low": 0.0018,
+        "ci95_high": 0.0042
+      },
+      {
+        "dataset": "Solar",
+        "mean": 0.289,
+        "sd": 0.002,
+        "ci95_low": 0.2865,
+        "ci95_high": 0.2915
+      },
+      {
+        "dataset": "Electricity",
+        "mean": 0.023,
+        "sd": 0.001,
+        "ci95_low": 0.0218,
+        "ci95_high": 0.0242
+      },
+      {
+        "dataset": "Traffic",
+        "mean": 0.04,
+        "sd": 0.004,
+        "ci95_low": 0.035,
+        "ci95_high": 0.045
+      },
+      {
+        "dataset": "Taxi",
+        "mean": 0.075,
+        "sd": 0.002,
+        "ci95_low": 0.0725,
+        "ci95_high": 0.0775
+      },
+      {
+        "dataset": "Wikipedia",
+        "mean": 0.085,
+        "sd": 0.007,
+        "ci95_low": 0.0763,
+        "ci95_high": 0.0937
+      }
+    ]
+  },
+  "V4_table2_ranks": {
+    "Exchange": {
+      "ours_rank": 1,
+      "better_than_ours": [],
+      "n_methods": 11
+    },
+    "Solar": {
+      "ours_rank": 3,
+      "better_than_ours": [
+        "ScoreGrad 0.256",
+        "TimeGrad 0.287"
+      ],
+      "n_methods": 13
+    },
+    "Electricity": {
+      "ours_rank": 5,
+      "better_than_ours": [
+        "NKF 0.016",
+        "ScoreGrad 0.019",
+        "Transformer-MAF 0.021",
+        "TimeGrad 0.021"
+      ],
+      "n_methods": 13
+    },
+    "Traffic": {
+      "ours_rank": 1,
+      "better_than_ours": [],
+      "n_methods": 13
+    },
+    "Taxi": {
+      "ours_rank": 1,
+      "better_than_ours": [],
+      "n_methods": 6
+    },
+    "Wikipedia": {
+      "ours_rank": 5,
+      "better_than_ours": [
+        "ScoreGrad 0.043",
+        "TimeGrad 0.049",
+        "Transformer-MAF 0.063",
+        "NKF 0.071"
+      ],
+      "n_methods": 10
+    }
+  },
+  "K2_text_claim_ranks": {
+    "text_claim": "outperforms all prior methods except [68] (ScoreGrad) overall tied; Wikipedia fourth place",
+    "wikipedia_rank_recomputed": 5,
+    "wins_or_ties_vs_scoregrad_per_dataset": {
+      "Exchange": "Ours better",
+      "Solar": "ScoreGrad better",
+      "Electricity": "ScoreGrad better",
+      "Traffic": "Ours better",
+      "Taxi": "Ours better",
+      "Wikipedia": "ScoreGrad better"
+    }
+  },
+  "V5_ours_vs_scoregrad_assumed_n": [
+    {
+      "dataset": "Exchange",
+      "ours": 0.003,
+      "scoregrad": 0.006,
+      "welch_n5_p": 0.0015,
+      "welch_n10_p": 0.00056
+    },
+    {
+      "dataset": "Solar",
+      "ours": 0.289,
+      "scoregrad": 0.256,
+      "welch_n5_p": 0.0075,
+      "welch_n10_p": 5.5e-05
+    },
+    {
+      "dataset": "Electricity",
+      "ours": 0.023,
+      "scoregrad": 0.019,
+      "welch_n5_p": 0.00023,
+      "welch_n10_p": 7.9e-05
+    },
+    {
+      "dataset": "Traffic",
+      "ours": 0.04,
+      "scoregrad": 0.041,
+      "welch_n5_p": 0.7,
+      "welch_n10_p": 0.66
+    },
+    {
+      "dataset": "Taxi",
+      "ours": 0.075,
+      "scoregrad": 0.101,
+      "welch_n5_p": 1.5e-05,
+      "welch_n10_p": 3.6e-10
+    },
+    {
+      "dataset": "Wikipedia",
+      "ours": 0.085,
+      "scoregrad": 0.043,
+      "welch_n5_p": 8.1e-05,
+      "welch_n10_p": 0.00012
+    }
+  ],
+  "K3_rounding_note": "Table 2 values are printed to 3 decimals; differences of 0.001 are within rounding (+/-0.0005) and the Exchange 0.003 vs 0.005/0.006 comparisons inherit that limit.",
+  "K4_v1_v4_table1": {
+    "note": "v1 (arXiv 2024-07-01) and v4 (2024-12-10) Table 1 rows are numerically identical; v1 labels the ablation 'Ours wo/ MCTG' and v4 'Ours wo/ MCG'. Multi-task averages differ only by rounding (v1 146.17 / 20.57 vs v4 146.2 / 20.6).",
+    "v1_multi_task_avg_ours": 146.17,
+    "v4_multi_task_avg_ours": 146.2
+  },
+  "V6_robot_success_wilson_assumed_n": {
+    "note": "Trial counts are not reported in Sec. 4.4; intervals are for assumed n only.",
+    "rows": [
+      {
+        "label": "DF 성공률 80%",
+        "rate": 0.8,
+        "wilson95_by_assumed_n": {
+          "10": {
+            "k": 8,
+            "low": 0.49,
+            "high": 0.943
+          },
+          "20": {
+            "k": 16,
+            "low": 0.584,
+            "high": 0.919
+          },
+          "50": {
+            "k": 40,
+            "low": 0.67,
+            "high": 0.888
+          }
+        }
+      },
+      {
+        "label": "DF 방해 조건 성공률 76%",
+        "rate": 0.76,
+        "wilson95_by_assumed_n": {
+          "10": {
+            "k": 8,
+            "low": 0.49,
+            "high": 0.943
+          },
+          "20": {
+            "k": 15,
+            "low": 0.531,
+            "high": 0.888
+          },
+          "50": {
+            "k": 38,
+            "low": 0.626,
+            "high": 0.857
+          }
+        }
+      },
+      {
+        "label": "다음 프레임 확산 기준선 48%",
+        "rate": 0.48,
+        "wilson95_by_assumed_n": {
+          "10": {
+            "k": 5,
+            "low": 0.237,
+            "high": 0.763
+          },
+          "20": {
+            "k": 10,
+            "low": 0.299,
+            "high": 0.701
+          },
+          "50": {
+            "k": 24,
+            "low": 0.348,
+            "high": 0.615
+          }
+        }
+      }
+    ]
+  }
+}
