@@ -1,0 +1,261 @@
+{
+  "mujoco_table1_avg": {
+    "Base": {
+      "successes_of_150": 47,
+      "pooled_pct": 31.33,
+      "reported_avg": 31.33,
+      "match": true,
+      "wilson95_pct": [
+        24.45,
+        39.14
+      ]
+    },
+    "Direct": {
+      "successes_of_150": 75,
+      "pooled_pct": 50.0,
+      "reported_avg": 50.0,
+      "match": true,
+      "wilson95_pct": [
+        42.1,
+        57.9
+      ]
+    },
+    "FTP-pi0.5": {
+      "successes_of_150": 66,
+      "pooled_pct": 44.0,
+      "reported_avg": 44.0,
+      "match": true,
+      "wilson95_pct": [
+        36.3,
+        52.0
+      ]
+    },
+    "CoRA-VTLA": {
+      "successes_of_150": 110,
+      "pooled_pct": 73.33,
+      "reported_avg": 73.33,
+      "match": true,
+      "wilson95_pct": [
+        65.74,
+        79.76
+      ]
+    }
+  },
+  "real_table2_avg": {
+    "Base": {
+      "successes_of_150": 49,
+      "pooled_pct": 32.67,
+      "reported_avg": 32.7,
+      "match": true,
+      "wilson95_pct": [
+        25.68,
+        40.52
+      ],
+      "wald95_pct": [
+        25.16,
+        40.17
+      ]
+    },
+    "Direct": {
+      "successes_of_150": 66,
+      "pooled_pct": 44.0,
+      "reported_avg": 44.0,
+      "match": true,
+      "wilson95_pct": [
+        36.3,
+        52.0
+      ],
+      "wald95_pct": [
+        36.06,
+        51.94
+      ]
+    },
+    "FTP-pi0.5": {
+      "successes_of_150": 67,
+      "pooled_pct": 44.67,
+      "reported_avg": 44.7,
+      "match": true,
+      "wilson95_pct": [
+        36.94,
+        52.66
+      ],
+      "wald95_pct": [
+        36.71,
+        52.62
+      ]
+    },
+    "CoRA-VTLA": {
+      "successes_of_150": 100,
+      "pooled_pct": 66.67,
+      "reported_avg": 66.7,
+      "match": true,
+      "wilson95_pct": [
+        58.79,
+        73.71
+      ],
+      "wald95_pct": [
+        59.12,
+        74.21
+      ]
+    }
+  },
+  "real_cora_reported_ci": [
+    59.3,
+    74.0
+  ],
+  "ablation_table3_avg": {
+    "CoRA-VTLA (full)": {
+      "successes_of_150": 110,
+      "pooled_pct": 73.33,
+      "reported_avg": 73.33,
+      "match": true
+    },
+    "+ Command & Motion": {
+      "successes_of_150": 102,
+      "pooled_pct": 68.0,
+      "reported_avg": 68.0,
+      "match": true
+    },
+    "w/o Memory Token": {
+      "successes_of_150": 81,
+      "pooled_pct": 54.0,
+      "reported_avg": 54.0,
+      "match": true
+    },
+    "w/o Response Pretraining": {
+      "successes_of_150": 81,
+      "pooled_pct": 54.0,
+      "reported_avg": 54.0,
+      "match": true
+    },
+    "w/o Gaze": {
+      "successes_of_150": 74,
+      "pooled_pct": 49.33,
+      "reported_avg": 49.33,
+      "match": true
+    },
+    "w/o Semantic Branch": {
+      "successes_of_150": 74,
+      "pooled_pct": 49.33,
+      "reported_avg": 49.33,
+      "match": true
+    }
+  },
+  "failure_accounting": {
+    "base_failures": 103,
+    "base_reported_timeouts_plus_safety": 103,
+    "base_match": true,
+    "cora_failures": 40,
+    "cora_reported_timeouts_plus_safety": 40,
+    "cora_match": true
+  },
+  "mujoco_unpaired_approx": {
+    "cora_vs_direct_diff_pp": 23.33,
+    "cora_vs_direct_newcombe_ci_pp": [
+      12.38,
+      33.52
+    ],
+    "cora_vs_direct_z_p_two_sided": 3.2e-05,
+    "reported_paired_bootstrap_ci_pp": [
+      14.67,
+      32.0
+    ],
+    "reported_padj": 5.1e-06,
+    "note": "쌍체 불일치 횟수가 본문에 없어 정확 McNemar는 계산하지 못했습니다."
+  },
+  "mujoco_per_task": {
+    "Nail": {
+      "cora_vs_direct_pp": 10,
+      "cora_vs_base_pp": 4,
+      "fisher_cora_vs_base_p": 0.81525946
+    },
+    "Plug": {
+      "cora_vs_direct_pp": 44,
+      "cora_vs_base_pp": 76,
+      "fisher_cora_vs_base_p": 0.0
+    },
+    "Knob": {
+      "cora_vs_direct_pp": 16,
+      "cora_vs_base_pp": 46,
+      "fisher_cora_vs_base_p": 6.02e-06
+    }
+  },
+  "univtac": {
+    "cora_minus_direct_from_counts": 16,
+    "cora_minus_direct_from_table": 16,
+    "cora_minus_base_from_counts": 21,
+    "cora_minus_base_from_table": 21,
+    "vs_direct": {
+      "b_only_proposed": 29,
+      "c_only_comparator": 13,
+      "diff_pp": 16.0,
+      "exact_two_sided_p": 0.01952,
+      "paired_wald_ci_pp": [
+        3.69,
+        28.31
+      ]
+    },
+    "vs_base": {
+      "b_only_proposed": 36,
+      "c_only_comparator": 15,
+      "diff_pp": 21.0,
+      "exact_two_sided_p": 0.004601,
+      "paired_wald_ci_pp": [
+        7.62,
+        34.38
+      ]
+    },
+    "reported_ci_vs_direct_pp": [
+      4,
+      28
+    ],
+    "reported_padj_vs_direct": 0.0195
+  },
+  "real_unpaired_approx": {
+    "cora_vs_ftp_diff_pp": 22.0,
+    "cora_vs_ftp_fisher_p": 0.000189,
+    "cora_vs_direct_fisher_p": 0.000119,
+    "cora_vs_base_fisher_p": 1e-08
+  },
+  "timing_checks": {
+    "k16_events_at_20hz_s": 0.8,
+    "reported_s": 0.8,
+    "600_commands_at_20hz_s": 30.0,
+    "reported_timeout_s": 30
+  },
+  "unverifiable_reported": {
+    "entropy_base_vs_direct": [
+      0.838,
+      0.884,
+      "p=0.0054, episode sign-flip, 24 frames"
+    ],
+    "contact_share_L17": [
+      1.62,
+      1.18
+    ],
+    "gaze_semantic_share_L17": [
+      2.77,
+      46.65,
+      "all 24 frames increase, p=0.00049"
+    ],
+    "real_attention_mean_share": [
+      2.1,
+      7.5,
+      "8 frames"
+    ],
+    "real_tube_example_share": [
+      2.6,
+      12.6
+    ],
+    "memory_offset_scenes_success": [
+      8,
+      16,
+      25
+    ],
+    "memory_aligned_scenes_success": [
+      16,
+      22,
+      25
+    ]
+  }
+}
