@@ -1,0 +1,252 @@
+{
+  "check1_table4_to_table2": {
+    "DiLA": {
+      "geo_from_t4": 0.7508,
+      "worst_from_t4": 0.796,
+      "geo_t2": 0.75,
+      "worst_t2": 0.796,
+      "ok": true
+    },
+    "LaWAM": {
+      "geo_from_t4": 0.891,
+      "worst_from_t4": 0.947,
+      "geo_t2": 0.891,
+      "worst_t2": 0.947,
+      "ok": true
+    },
+    "LAPA": {
+      "geo_from_t4": 0.922,
+      "worst_from_t4": 0.966,
+      "geo_t2": 0.922,
+      "worst_t2": 0.966,
+      "ok": true
+    },
+    "UniVLA": {
+      "geo_from_t4": 1.009,
+      "worst_from_t4": 1.077,
+      "geo_t2": 1.009,
+      "worst_t2": 1.077,
+      "ok": true
+    },
+    "MVP-LAM": {
+      "geo_from_t4": 1.095,
+      "worst_from_t4": 1.157,
+      "geo_t2": 1.095,
+      "worst_t2": 1.157,
+      "ok": true
+    }
+  },
+  "check2_table5_bound": {
+    "DiLA": {
+      "geo_pooled_le_max_half": true,
+      "worst_pooled_le_max_half": true
+    },
+    "LaWAM": {
+      "geo_pooled_le_max_half": true,
+      "worst_pooled_le_max_half": true
+    },
+    "LAPA": {
+      "geo_pooled_le_max_half": true,
+      "worst_pooled_le_max_half": true
+    },
+    "UniVLA": {
+      "geo_pooled_le_max_half": true,
+      "worst_pooled_le_max_half": true
+    },
+    "MVP-LAM": {
+      "geo_pooled_le_max_half": true,
+      "worst_pooled_le_max_half": true
+    }
+  },
+  "check3_table3b_vs_table7_equal": true,
+  "check4_table8_vs_table3b": {
+    "Raw/Identity": {
+      "geo_point_diff": -0.005,
+      "geo_paired": -0.00563,
+      "worst_point_diff": -0.011,
+      "worst_paired": -0.00488,
+      "worst_ratio_paired_over_point": 0.44
+    },
+    "Random residual": {
+      "geo_point_diff": -0.017,
+      "geo_paired": -0.01804,
+      "worst_point_diff": -0.03,
+      "worst_paired": -0.01713,
+      "worst_ratio_paired_over_point": 0.57
+    },
+    "Shuffled residual": {
+      "geo_point_diff": -0.016,
+      "geo_paired": -0.01617,
+      "worst_point_diff": -0.049,
+      "worst_paired": -0.01456,
+      "worst_ratio_paired_over_point": 0.3
+    },
+    "MSE residual": {
+      "geo_point_diff": -0.014,
+      "geo_paired": -0.01466,
+      "worst_point_diff": -0.025,
+      "worst_paired": -0.01404,
+      "worst_ratio_paired_over_point": 0.56
+    }
+  },
+  "check4b_identity_vs_raw_ci": {
+    "raw_geo_ci": [
+      -0.01852,
+      0.00713
+    ],
+    "identity_geo_ci": [
+      -0.01843,
+      0.00745
+    ],
+    "note": "동일 표현이어야 하므로 CI가 같아야 하지만 다르다 (미확인)"
+  },
+  "check5_matched_ci_overlap": {
+    "DiLA native vs LAPA": {
+      "point_order_ok": true,
+      "ci_overlap": false
+    },
+    "LAPA vs LaWAM": {
+      "point_order_ok": true,
+      "ci_overlap": true
+    },
+    "LaWAM vs MVP-LAM": {
+      "point_order_ok": true,
+      "ci_overlap": false
+    },
+    "MVP-LAM vs UniVLA": {
+      "point_order_ok": true,
+      "ci_overlap": false
+    }
+  },
+  "check6_task_mean_vs_pooled": {
+    "DiLA": {
+      "task_geo_mean": 0.673,
+      "pooled": 0.688,
+      "gap": -0.015
+    },
+    "LAPA": {
+      "task_geo_mean": 0.815,
+      "pooled": 0.831,
+      "gap": -0.016
+    },
+    "LaWAM": {
+      "task_geo_mean": 0.84,
+      "pooled": 0.86,
+      "gap": -0.02
+    },
+    "MVP-LAM": {
+      "task_geo_mean": 0.988,
+      "pooled": 0.988,
+      "gap": 0.0
+    },
+    "UniVLA": {
+      "task_geo_mean": 1.009,
+      "pooled": 1.01,
+      "gap": -0.001
+    }
+  },
+  "check6b_peg_insertion_gt1": {
+    "DiLA": true,
+    "LAPA": true,
+    "LaWAM": true,
+    "MVP-LAM": true,
+    "UniVLA": false
+  },
+  "check7_wilson_mvp": {
+    "recomputed": [
+      0.8882,
+      0.9785
+    ],
+    "reported": [
+      0.8882,
+      0.9785
+    ]
+  },
+  "check8_table14_delta": {
+    "camera": 0.0181,
+    "outcome": 0.2446,
+    "reported_camera": 0.0181,
+    "reported_outcome": 0.2446
+  },
+  "check9_rank_match_5models": {
+    "geo_order": [
+      "DiLA",
+      "LAPA",
+      "LaWAM",
+      "MVP-LAM",
+      "UniVLA"
+    ],
+    "branch_order": [
+      "DiLA",
+      "LAPA",
+      "LaWAM",
+      "MVP-LAM",
+      "UniVLA"
+    ],
+    "identical": true,
+    "prob_perfect_by_chance_one_sided": 0.008333333333333333
+  },
+  "check10_spearman_ci": {
+    "H4_TCP_mse_rho0.956_n25": {
+      "fisher": [
+        0.901,
+        0.981
+      ],
+      "reported": [
+        0.916,
+        0.993
+      ]
+    },
+    "H4_branch_rho0.810_n25": {
+      "fisher": [
+        0.61,
+        0.913
+      ],
+      "reported": [
+        0.27,
+        0.987
+      ]
+    },
+    "H5_native_rho-0.161_n50": {
+      "fisher": [
+        -0.421,
+        0.123
+      ],
+      "reported": [
+        -0.6048,
+        0.393
+      ]
+    }
+  },
+  "check10_spearman_p_TCP": 9.654385737426612e-14,
+  "check11_splits": {
+    "sum_test": 2048,
+    "reported_panel": 2048,
+    "episodes_per_fold": [
+      10,
+      10,
+      10,
+      10,
+      9
+    ],
+    "eligible_transitions": 28665,
+    "reported_eligible": 28665
+  },
+  "check12_recorded_action_mechanism": {
+    "action_target": {
+      "E_state": 0.2494,
+      "E_action_route": 2.51466211348557e-19,
+      "ratio_to_state": 1.0083850096660055e-18
+    },
+    "delta_target": {
+      "E_state": 1.071,
+      "E_action_route": 1.0036486550701018,
+      "ratio_to_state": 0.9371515284795819
+    }
+  },
+  "check13_note": "action_target 비율이 0에 가까운 것은 Y=A를 입력으로 넣은 항등 매핑 때문이다 (논문 식 (6)의 목표).",
+  "check14_gaussian_Q": {
+    "Q_closed_from_risks": 0.666667,
+    "Q_formula_sA2_over_sA2_plus_sE2": 0.666667
+  }
+}
