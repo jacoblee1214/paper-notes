@@ -98,7 +98,7 @@ Fisher 검정 (V6, 근사값 가정): Pack SR Fast 대 Slow는 n=10에서 p=0.07
 
 - `pdftotext` 전체 텍스트에서 ©, Copyright, All rights reserved, Confidential, Proprietary, 회사 고지를 찾지 못했습니다.
 - `pdfimages -list`: 임베디드 이미지 583개. 첫 쪽에 큰 로고 이미지가 있지만 저작권 문구는 없습니다.
-- 판정: arXiv abs 페이지의 CC BY 4.0과 PDF 본문의 고지가 충돌하지 않습니다. 게시본에서는 **논문 그림 두 장만** 출처와 함께 씁니다 (`README.md`).
+- 판정: arXiv abs 페이지의 CC BY 4.0과 PDF 본문의 고지가 충돌하지 않습니다. 게시본에서는 **논문 그림 한 장(Figure 8, 사진 없는 차트)만** 출처와 함께 씁니다 (`README.md`).
 
 ## 7. 재계산하지 않은 항목
 
