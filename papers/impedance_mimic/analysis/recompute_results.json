@@ -1,0 +1,1323 @@
+{
+ "checks": [
+  {
+   "id": "V1-T11_seen",
+   "ok": true,
+   "detail": "모든 열이 반올림 범위 안"
+  },
+  {
+   "id": "V1-T12_unseen",
+   "ok": false,
+   "detail": "평균 행과 활동 평균의 차이가 반올림 범위를 넘는 항목: [('Muscle', 'q', 0.012)]"
+  },
+  {
+   "id": "V1-T26_no_grf",
+   "ok": true,
+   "detail": "모든 열이 반올림 범위 안"
+  },
+  {
+   "id": "V2-table1-seen",
+   "ok": true,
+   "detail": "표 1 평균 열과 일치"
+  },
+  {
+   "id": "V2-table1-unseen",
+   "ok": true,
+   "detail": "표 1 평균 열과 일치"
+  },
+  {
+   "id": "V3-welch-seen",
+   "ok": true,
+   "detail": "seen: 21 비교 중 Holm 보정 p<0.05는 21개(sd 바닥 적용). 보정 후 유의하지 않은 비교: []"
+  },
+  {
+   "id": "V3-welch-unseen",
+   "ok": true,
+   "detail": "unseen: 21 비교 중 Holm 보정 p<0.05는 20개(sd 바닥 적용). 보정 후 유의하지 않은 비교: [('FZr', 'Muscle', 0.093)]"
+  },
+  {
+   "id": "V4-G1-stable-margin",
+   "ok": true,
+   "detail": "G1 안정 PD 생존율 차이 1.4점, Welch p=0.60 (시드 5개). 본문 '1.4점 이상 우위'는 통계적으로 구분되지 않음."
+  },
+  {
+   "id": "V5-table2-matched",
+   "ok": true,
+   "detail": "짝 맞춘 비교(같은 우선 gain)에서 IM이 지는 칸: [('stable', 'seen', 'matched 2x', 'Ep')] (논문 '96.3 대 96.6, 한 칸' 주장과 일치하는지 확인)"
+  },
+  {
+   "id": "V6-table18-total",
+   "ok": true,
+   "detail": "여섯 방법 합 553 GPU-h (본문 '~550'). IM 실행당 1.33 GPU-h (본문 '1.3')."
+  },
+  {
+   "id": "V7-robot-loss-wording",
+   "ok": false,
+   "detail": "본문 '98.1에서 82.1로, Fixed-PD와 Torque는 약 35점 손실'은 기준이 섞임. 98.1 기준 손실은 41.2과 54.1점, 각자 인간 기준 손실은 34.6과 35.2점(부록 A.3.3과 일치)."
+  },
+  {
+   "id": "V8-noncyclic-share",
+   "ok": true,
+   "detail": "비주기 활동(lateral, flexion, jump) 학습 클립 비율 16.2% (본문 16%)"
+  },
+  {
+   "id": "V8-subject-retention",
+   "ok": true,
+   "detail": "기록 144명 중 129명 유지, 제외 15명. Tan et al. (2022)는 16명 중 8명만 유지(50%)"
+  }
+ ],
+ "results": {
+  "V1_mean_row_deviation": {
+   "T11_seen": {
+    "Fixed-PD": {
+     "Ep": 0.033,
+     "q": 0.002,
+     "qdot": 0.017,
+     "px": 0.0,
+     "kinr": 0.0,
+     "FZ": 0.0,
+     "FZr": 0.002,
+     "FMLr": 0.003,
+     "FAPr": 0.002,
+     "CoP_ML": 0.0,
+     "CoP_AP": 0.333,
+     "tau": 0.002,
+     "tau_r": 0.0,
+     "taudot": 0.083
+    },
+    "Torque": {
+     "Ep": 0.0,
+     "q": 0.002,
+     "qdot": -0.333,
+     "px": -0.0,
+     "kinr": -0.005,
+     "FZ": 0.005,
+     "FZr": 0.003,
+     "FMLr": -0.002,
+     "FAPr": 0.003,
+     "CoP_ML": -0.333,
+     "CoP_AP": -0.167,
+     "tau": 0.0,
+     "tau_r": 0.003,
+     "taudot": -0.017
+    },
+    "Muscle": {
+     "Ep": -0.05,
+     "q": 0.005,
+     "qdot": -0.01,
+     "px": 0.0,
+     "kinr": -0.005,
+     "FZ": 0.002,
+     "FZr": -0.003,
+     "FMLr": 0.005,
+     "FAPr": -0.003,
+     "CoP_ML": -0.167,
+     "CoP_AP": -0.333,
+     "tau": 0.002,
+     "tau_r": 0.002,
+     "taudot": 0.0
+    },
+    "ImpedanceMimic": {
+     "Ep": -0.05,
+     "q": 0.003,
+     "qdot": -0.037,
+     "px": -0.001,
+     "kinr": 0.002,
+     "FZ": -0.002,
+     "FZr": 0.005,
+     "FMLr": 0.0,
+     "FAPr": 0.002,
+     "CoP_ML": -0.5,
+     "CoP_AP": 0.167,
+     "tau": -0.002,
+     "tau_r": 0.003,
+     "taudot": 0.033
+    }
+   },
+   "T12_unseen": {
+    "Fixed-PD": {
+     "Ep": 0.05,
+     "q": 0.003,
+     "qdot": -0.087,
+     "px": 0.0,
+     "kinr": -0.002,
+     "FZ": 0.0,
+     "FZr": -0.005,
+     "FMLr": 0.002,
+     "FAPr": -0.002,
+     "CoP_ML": 0.167,
+     "CoP_AP": 0.0,
+     "tau": -0.005,
+     "tau_r": 0.002,
+     "taudot": 0.033
+    },
+    "Torque": {
+     "Ep": 0.0,
+     "q": -0.007,
+     "qdot": 0.383,
+     "px": 0.0,
+     "kinr": -0.005,
+     "FZ": -0.005,
+     "FZr": -0.005,
+     "FMLr": 0.0,
+     "FAPr": 0.0,
+     "CoP_ML": 0.5,
+     "CoP_AP": 0.333,
+     "tau": 0.007,
+     "tau_r": 0.002,
+     "taudot": 0.033
+    },
+    "Muscle": {
+     "Ep": 0.033,
+     "q": 0.012,
+     "qdot": 0.017,
+     "px": 0.001,
+     "kinr": 0.005,
+     "FZ": -0.002,
+     "FZr": -0.002,
+     "FMLr": 0.003,
+     "FAPr": 0.002,
+     "CoP_ML": -0.5,
+     "CoP_AP": -0.333,
+     "tau": 0.005,
+     "tau_r": -0.005,
+     "taudot": 0.0
+    },
+    "ImpedanceMimic": {
+     "Ep": -0.017,
+     "q": 0.005,
+     "qdot": 0.017,
+     "px": -0.001,
+     "kinr": -0.002,
+     "FZ": -0.003,
+     "FZr": 0.005,
+     "FMLr": -0.003,
+     "FAPr": 0.002,
+     "CoP_ML": -0.167,
+     "CoP_AP": -0.167,
+     "tau": -0.005,
+     "tau_r": 0.002,
+     "taudot": -0.03
+    }
+   },
+   "T26_no_grf": {
+    "Fixed-PD": {
+     "Ep": 0.0,
+     "q": 0.003,
+     "qdot": 0.05,
+     "px": -0.0,
+     "kinr": -0.0,
+     "FZ": 0.002,
+     "FZr": 0.007,
+     "FMLr": -0.003,
+     "FAPr": -0.002,
+     "CoP_ML": -0.5,
+     "CoP_AP": 0.0,
+     "tau": -0.002,
+     "tau_r": 0.003,
+     "taudot": 0.073
+    },
+    "Torque": {
+     "Ep": -0.017,
+     "q": -0.003,
+     "qdot": -0.407,
+     "px": 0.001,
+     "kinr": -0.003,
+     "FZ": 0.002,
+     "FZr": 0.005,
+     "FMLr": -0.002,
+     "FAPr": 0.003,
+     "CoP_ML": 0.167,
+     "CoP_AP": -0.167,
+     "tau": -0.003,
+     "tau_r": 0.005,
+     "taudot": -0.02
+    },
+    "Muscle": {
+     "Ep": -0.05,
+     "q": 0.003,
+     "qdot": 0.053,
+     "px": -0.0,
+     "kinr": 0.002,
+     "FZ": -0.005,
+     "FZr": 0.003,
+     "FMLr": 0.0,
+     "FAPr": 0.005,
+     "CoP_ML": -0.333,
+     "CoP_AP": 0.0,
+     "tau": 0.003,
+     "tau_r": 0.002,
+     "taudot": 0.01
+    },
+    "ImpedanceMimic": {
+     "Ep": 0.017,
+     "q": 0.003,
+     "qdot": -0.037,
+     "px": 0.0,
+     "kinr": 0.0,
+     "FZ": -0.003,
+     "FZr": -0.003,
+     "FMLr": 0.0,
+     "FAPr": -0.002,
+     "CoP_ML": 0.333,
+     "CoP_AP": -0.167,
+     "tau": -0.007,
+     "tau_r": -0.003,
+     "taudot": 0.017
+    }
+   }
+  },
+  "V3_welch_mean_row": {
+   "seen": [
+    {
+     "metric": "Ep",
+     "baseline": "Fixed-PD",
+     "im_mean": 96.9,
+     "im_sd": 0.5,
+     "base_mean": 93.0,
+     "base_sd": 0.2,
+     "welch_t": 16.193868571479317,
+     "p_raw": 1.1078017933820222e-05,
+     "p_sd_floor": 1.1078017933820222e-05,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      96.27916800089812,
+      97.52083199910189
+     ],
+     "p_holm": 0.00011078017933820221
+    },
+    {
+     "metric": "Ep",
+     "baseline": "Torque",
+     "im_mean": 96.9,
+     "im_sd": 0.5,
+     "base_mean": 95.4,
+     "base_sd": 0.4,
+     "welch_t": 5.238227218271836,
+     "p_raw": 0.0009128972949817767,
+     "p_sd_floor": 0.0009128972949817767,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      96.27916800089812,
+      97.52083199910189
+     ],
+     "p_holm": 0.0027386918849453303
+    },
+    {
+     "metric": "Ep",
+     "baseline": "Muscle",
+     "im_mean": 96.9,
+     "im_sd": 0.5,
+     "base_mean": 84.8,
+     "base_sd": 0.5,
+     "welch_t": 38.26355968803742,
+     "p_raw": 2.3900941756878893e-10,
+     "p_sd_floor": 2.3900941756878893e-10,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      96.27916800089812,
+      97.52083199910189
+     ],
+     "p_holm": 4.7801883513757785e-09
+    },
+    {
+     "metric": "q",
+     "baseline": "Fixed-PD",
+     "im_mean": 2.28,
+     "im_sd": 0.04,
+     "base_mean": 2.91,
+     "base_sd": 0.03,
+     "welch_t": -28.174456516497365,
+     "p_raw": 8.153541574395374e-09,
+     "p_sd_floor": 8.153541574395374e-09,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      2.230333440071849,
+      2.3296665599281505
+     ],
+     "p_holm": 1.3861020676472136e-07
+    },
+    {
+     "metric": "q",
+     "baseline": "Torque",
+     "im_mean": 2.28,
+     "im_sd": 0.04,
+     "base_mean": 4.48,
+     "base_sd": 0.09,
+     "welch_t": -49.948427010515,
+     "p_raw": 1.5135021288317955e-08,
+     "p_sd_floor": 1.5135021288317955e-08,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      2.230333440071849,
+      2.3296665599281505
+     ],
+     "p_holm": 2.4216034061308727e-07
+    },
+    {
+     "metric": "q",
+     "baseline": "Muscle",
+     "im_mean": 2.28,
+     "im_sd": 0.04,
+     "base_mean": 7.18,
+     "base_sd": 0.26,
+     "welch_t": -41.65124955623031,
+     "p_raw": 1.2063406314208596e-06,
+     "p_sd_floor": 1.2063406314208596e-06,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      2.230333440071849,
+      2.3296665599281505
+     ],
+     "p_holm": 1.4476087577050316e-05
+    },
+    {
+     "metric": "FZr",
+     "baseline": "Fixed-PD",
+     "im_mean": 0.8,
+     "im_sd": 0.0,
+     "base_mean": 0.73,
+     "base_sd": 0.0,
+     "welch_t": Infinity,
+     "p_raw": 0.0,
+     "p_sd_floor": 1.8327808286006546e-08,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.8,
+      0.8
+     ],
+     "p_holm": 2.7491712429009817e-07
+    },
+    {
+     "metric": "FZr",
+     "baseline": "Torque",
+     "im_mean": 0.8,
+     "im_sd": 0.0,
+     "base_mean": 0.82,
+     "base_sd": 0.01,
+     "welch_t": -4.472135954999558,
+     "p_raw": 0.01105649339345025,
+     "p_sd_floor": 0.007413525183807915,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.8,
+      0.8
+     ],
+     "p_holm": 0.01482705036761583
+    },
+    {
+     "metric": "FZr",
+     "baseline": "Muscle",
+     "im_mean": 0.8,
+     "im_sd": 0.0,
+     "base_mean": 0.77,
+     "base_sd": 0.0,
+     "welch_t": Infinity,
+     "p_raw": 0.0,
+     "p_sd_floor": 1.2560639474749573e-05,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.8,
+      0.8
+     ],
+     "p_holm": 0.00011304575527274616
+    },
+    {
+     "metric": "FMLr",
+     "baseline": "Fixed-PD",
+     "im_mean": 0.7,
+     "im_sd": 0.01,
+     "base_mean": 0.53,
+     "base_sd": 0.01,
+     "welch_t": 26.87936011143121,
+     "p_raw": 3.950467627365369e-09,
+     "p_sd_floor": 3.950467627365369e-09,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.6875833600179623,
+      0.7124166399820376
+     ],
+     "p_holm": 7.110841729257664e-08
+    },
+    {
+     "metric": "FMLr",
+     "baseline": "Torque",
+     "im_mean": 0.7,
+     "im_sd": 0.01,
+     "base_mean": 0.62,
+     "base_sd": 0.01,
+     "welch_t": 12.649110640673511,
+     "p_raw": 1.4335915361780153e-06,
+     "p_sd_floor": 1.4335915361780153e-06,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.6875833600179623,
+      0.7124166399820376
+     ],
+     "p_holm": 1.576950689795817e-05
+    },
+    {
+     "metric": "FMLr",
+     "baseline": "Muscle",
+     "im_mean": 0.7,
+     "im_sd": 0.01,
+     "base_mean": 0.62,
+     "base_sd": 0.02,
+     "welch_t": 7.999999999999996,
+     "p_raw": 0.00022475317784061916,
+     "p_sd_floor": 0.00022475317784061916,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.6875833600179623,
+      0.7124166399820376
+     ],
+     "p_holm": 0.0011237658892030958
+    },
+    {
+     "metric": "FAPr",
+     "baseline": "Fixed-PD",
+     "im_mean": 0.59,
+     "im_sd": 0.01,
+     "base_mean": 0.47,
+     "base_sd": 0.01,
+     "welch_t": 18.973665961010276,
+     "p_raw": 6.160820641820872e-08,
+     "p_sd_floor": 6.160820641820872e-08,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.5775833600179623,
+      0.6024166399820376
+     ],
+     "p_holm": 8.625148898549221e-07
+    },
+    {
+     "metric": "FAPr",
+     "baseline": "Torque",
+     "im_mean": 0.59,
+     "im_sd": 0.01,
+     "base_mean": 0.54,
+     "base_sd": 0.01,
+     "welch_t": 7.9056941504209375,
+     "p_raw": 4.755471757840503e-05,
+     "p_sd_floor": 4.755471757840503e-05,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.5775833600179623,
+      0.6024166399820376
+     ],
+     "p_holm": 0.00028532830547043015
+    },
+    {
+     "metric": "FAPr",
+     "baseline": "Muscle",
+     "im_mean": 0.59,
+     "im_sd": 0.01,
+     "base_mean": 0.55,
+     "base_sd": 0.01,
+     "welch_t": 6.324555320336747,
+     "p_raw": 0.00022671674524800658,
+     "p_sd_floor": 0.00022671674524800658,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.5775833600179623,
+      0.6024166399820376
+     ],
+     "p_holm": 0.0011237658892030958
+    },
+    {
+     "metric": "tau_r",
+     "baseline": "Fixed-PD",
+     "im_mean": 0.49,
+     "im_sd": 0.0,
+     "base_mean": 0.39,
+     "base_sd": 0.0,
+     "welch_t": Infinity,
+     "p_raw": 0.0,
+     "p_sd_floor": 1.0883266880168866e-09,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.49,
+      0.49
+     ],
+     "p_holm": 2.0678207072320846e-08
+    },
+    {
+     "metric": "tau_r",
+     "baseline": "Torque",
+     "im_mean": 0.49,
+     "im_sd": 0.0,
+     "base_mean": 0.46,
+     "base_sd": 0.0,
+     "welch_t": Infinity,
+     "p_raw": 0.0,
+     "p_sd_floor": 1.2560639474749754e-05,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.49,
+      0.49
+     ],
+     "p_holm": 0.00011304575527274616
+    },
+    {
+     "metric": "tau_r",
+     "baseline": "Muscle",
+     "im_mean": 0.49,
+     "im_sd": 0.0,
+     "base_mean": 0.43,
+     "base_sd": 0.01,
+     "welch_t": 13.416407864998737,
+     "p_raw": 0.00017852131834470477,
+     "p_sd_floor": 2.3408707901832673e-05,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.49,
+      0.49
+     ],
+     "p_holm": 0.0001638609553128287
+    },
+    {
+     "metric": "taudot",
+     "baseline": "Fixed-PD",
+     "im_mean": 15.9,
+     "im_sd": 0.4,
+     "base_mean": 45.3,
+     "base_sd": 0.6,
+     "welch_t": -91.1655299230682,
+     "p_raw": 5.540777556373947e-12,
+     "p_sd_floor": 5.540777556373947e-12,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      15.403334400718494,
+      16.39666559928151
+     ],
+     "p_holm": 1.1635632868385288e-10
+    },
+    {
+     "metric": "taudot",
+     "baseline": "Torque",
+     "im_mean": 15.9,
+     "im_sd": 0.4,
+     "base_mean": 16.5,
+     "base_sd": 0.4,
+     "welch_t": -2.3717082451262828,
+     "p_raw": 0.04512593544680732,
+     "p_sd_floor": 0.04512593544680732,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      15.403334400718494,
+      16.39666559928151
+     ],
+     "p_holm": 0.04512593544680732
+    },
+    {
+     "metric": "taudot",
+     "baseline": "Muscle",
+     "im_mean": 15.9,
+     "im_sd": 0.4,
+     "base_mean": 6.89,
+     "base_sd": 0.15,
+     "welch_t": 47.16049542537826,
+     "p_raw": 6.169296464725432e-08,
+     "p_sd_floor": 6.169296464725432e-08,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      15.403334400718494,
+      16.39666559928151
+     ],
+     "p_holm": 8.625148898549221e-07
+    }
+   ],
+   "unseen": [
+    {
+     "metric": "Ep",
+     "baseline": "Fixed-PD",
+     "im_mean": 98.1,
+     "im_sd": 0.4,
+     "base_mean": 91.5,
+     "base_sd": 1.2,
+     "welch_t": 11.667261889578024,
+     "p_raw": 9.500367916132799e-05,
+     "p_sd_floor": 9.500367916132799e-05,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      97.60333440071848,
+      98.59666559928151
+     ],
+     "p_holm": 0.001045040470774608
+    },
+    {
+     "metric": "Ep",
+     "baseline": "Torque",
+     "im_mean": 98.1,
+     "im_sd": 0.4,
+     "base_mean": 79.2,
+     "base_sd": 4.4,
+     "welch_t": 9.56548290023844,
+     "p_raw": 0.0006160875232999792,
+     "p_sd_floor": 0.0006160875232999792,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      97.60333440071848,
+      98.59666559928151
+     ],
+     "p_holm": 0.004312612663099854
+    },
+    {
+     "metric": "Ep",
+     "baseline": "Muscle",
+     "im_mean": 98.1,
+     "im_sd": 0.4,
+     "base_mean": 75.3,
+     "base_sd": 5.1,
+     "welch_t": 9.965933567335865,
+     "p_raw": 0.0005355758412507745,
+     "p_sd_floor": 0.0005355758412507745,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      97.60333440071848,
+      98.59666559928151
+     ],
+     "p_holm": 0.004284606730006196
+    },
+    {
+     "metric": "q",
+     "baseline": "Fixed-PD",
+     "im_mean": 2.45,
+     "im_sd": 0.02,
+     "base_mean": 3.13,
+     "base_sd": 0.05,
+     "welch_t": -28.235463150271574,
+     "p_raw": 6.171280195848402e-07,
+     "p_sd_floor": 6.171280195848402e-07,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      2.425166720035925,
+      2.4748332799640753
+     ],
+     "p_holm": 9.874048313357444e-06
+    },
+    {
+     "metric": "q",
+     "baseline": "Torque",
+     "im_mean": 2.45,
+     "im_sd": 0.02,
+     "base_mean": 5.01,
+     "base_sd": 0.1,
+     "welch_t": -56.13171323564985,
+     "p_raw": 2.3708504787798127e-07,
+     "p_sd_floor": 2.3708504787798127e-07,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      2.425166720035925,
+      2.4748332799640753
+     ],
+     "p_holm": 4.2675308618036626e-06
+    },
+    {
+     "metric": "q",
+     "baseline": "Muscle",
+     "im_mean": 2.45,
+     "im_sd": 0.02,
+     "base_mean": 8.65,
+     "base_sd": 0.26,
+     "welch_t": -53.16456139417774,
+     "p_raw": 6.53539876641486e-07,
+     "p_sd_floor": 6.53539876641486e-07,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      2.425166720035925,
+      2.4748332799640753
+     ],
+     "p_holm": 9.874048313357444e-06
+    },
+    {
+     "metric": "FZr",
+     "baseline": "Fixed-PD",
+     "im_mean": 0.76,
+     "im_sd": 0.01,
+     "base_mean": 0.7,
+     "base_sd": 0.02,
+     "welch_t": 6.000000000000005,
+     "p_raw": 0.001036794441537716,
+     "p_sd_floor": 0.001036794441537716,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.7475833600179623,
+      0.7724166399820377
+     ],
+     "p_holm": 0.006220766649226297
+    },
+    {
+     "metric": "FZr",
+     "baseline": "Torque",
+     "im_mean": 0.76,
+     "im_sd": 0.01,
+     "base_mean": 0.79,
+     "base_sd": 0.01,
+     "welch_t": -4.7434164902525735,
+     "p_raw": 0.001457535319596467,
+     "p_sd_floor": 0.001457535319596467,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.7475833600179623,
+      0.7724166399820377
+     ],
+     "p_holm": 0.006220766649226297
+    },
+    {
+     "metric": "FZr",
+     "baseline": "Muscle",
+     "im_mean": 0.76,
+     "im_sd": 0.01,
+     "base_mean": 0.74,
+     "base_sd": 0.02,
+     "welch_t": 2.0000000000000018,
+     "p_raw": 0.09337888947464654,
+     "p_sd_floor": 0.09337888947464654,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.7475833600179623,
+      0.7724166399820377
+     ],
+     "p_holm": 0.09337888947464654
+    },
+    {
+     "metric": "FMLr",
+     "baseline": "Fixed-PD",
+     "im_mean": 0.65,
+     "im_sd": 0.01,
+     "base_mean": 0.45,
+     "base_sd": 0.01,
+     "welch_t": 31.622776601683796,
+     "p_raw": 1.0883266880168866e-09,
+     "p_sd_floor": 1.0883266880168866e-09,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.6375833600179623,
+      0.6624166399820377
+     ],
+     "p_holm": 2.285486044835462e-08
+    },
+    {
+     "metric": "FMLr",
+     "baseline": "Torque",
+     "im_mean": 0.65,
+     "im_sd": 0.01,
+     "base_mean": 0.53,
+     "base_sd": 0.03,
+     "welch_t": 8.48528137423857,
+     "p_raw": 0.00042157143405384856,
+     "p_sd_floor": 0.00042157143405384856,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.6375833600179623,
+      0.6624166399820377
+     ],
+     "p_holm": 0.003794142906484637
+    },
+    {
+     "metric": "FMLr",
+     "baseline": "Muscle",
+     "im_mean": 0.65,
+     "im_sd": 0.01,
+     "base_mean": 0.62,
+     "base_sd": 0.02,
+     "welch_t": 3.0000000000000027,
+     "p_raw": 0.02459746937823486,
+     "p_sd_floor": 0.02459746937823486,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.6375833600179623,
+      0.6624166399820377
+     ],
+     "p_holm": 0.04919493875646972
+    },
+    {
+     "metric": "FAPr",
+     "baseline": "Fixed-PD",
+     "im_mean": 0.56,
+     "im_sd": 0.01,
+     "base_mean": 0.43,
+     "base_sd": 0.01,
+     "welch_t": 20.554804791094476,
+     "p_raw": 3.285332896854779e-08,
+     "p_sd_floor": 3.285332896854779e-08,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.5475833600179624,
+      0.5724166399820377
+     ],
+     "p_holm": 6.570665793709559e-07
+    },
+    {
+     "metric": "FAPr",
+     "baseline": "Torque",
+     "im_mean": 0.56,
+     "im_sd": 0.01,
+     "base_mean": 0.52,
+     "base_sd": 0.02,
+     "welch_t": 4.0000000000000036,
+     "p_raw": 0.007413525183807734,
+     "p_sd_floor": 0.007413525183807734,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.5475833600179624,
+      0.5724166399820377
+     ],
+     "p_holm": 0.0222405755514232
+    },
+    {
+     "metric": "FAPr",
+     "baseline": "Muscle",
+     "im_mean": 0.56,
+     "im_sd": 0.01,
+     "base_mean": 0.51,
+     "base_sd": 0.01,
+     "welch_t": 7.905694150420955,
+     "p_raw": 4.7554717578404255e-05,
+     "p_sd_floor": 4.7554717578404255e-05,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.5475833600179624,
+      0.5724166399820377
+     ],
+     "p_holm": 0.0005706566109408511
+    },
+    {
+     "metric": "tau_r",
+     "baseline": "Fixed-PD",
+     "im_mean": 0.45,
+     "im_sd": 0.0,
+     "base_mean": 0.35,
+     "base_sd": 0.01,
+     "welch_t": 22.3606797749979,
+     "p_raw": 2.368332803706707e-05,
+     "p_sd_floor": 1.2381579951911436e-06,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.45,
+      0.45
+     ],
+     "p_holm": 1.7334211932676012e-05
+    },
+    {
+     "metric": "tau_r",
+     "baseline": "Torque",
+     "im_mean": 0.45,
+     "im_sd": 0.0,
+     "base_mean": 0.42,
+     "base_sd": 0.01,
+     "welch_t": 6.708203932499375,
+     "p_raw": 0.002570260765399924,
+     "p_sd_floor": 0.001036794441537716,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.45,
+      0.45
+     ],
+     "p_holm": 0.006220766649226297
+    },
+    {
+     "metric": "tau_r",
+     "baseline": "Muscle",
+     "im_mean": 0.45,
+     "im_sd": 0.0,
+     "base_mean": 0.4,
+     "base_sd": 0.0,
+     "welch_t": Infinity,
+     "p_raw": 0.0,
+     "p_sd_floor": 2.559753258726143e-07,
+     "sd_floor": 0.005,
+     "im_ci95": [
+      0.45,
+      0.45
+     ],
+     "p_holm": 4.351580539834443e-06
+    },
+    {
+     "metric": "taudot",
+     "baseline": "Fixed-PD",
+     "im_mean": 19.9,
+     "im_sd": 1.0,
+     "base_mean": 56.4,
+     "base_sd": 2.0,
+     "welch_t": -36.5,
+     "p_raw": 3.6923829753179475e-08,
+     "p_sd_floor": 3.6923829753179475e-08,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      18.658336001796233,
+      21.141663998203764
+     ],
+     "p_holm": 7.0155276531041e-07
+    },
+    {
+     "metric": "taudot",
+     "baseline": "Torque",
+     "im_mean": 19.9,
+     "im_sd": 1.0,
+     "base_mean": 23.7,
+     "base_sd": 0.7,
+     "welch_t": -6.961061401749463,
+     "p_raw": 0.00019722928838972634,
+     "p_sd_floor": 0.00019722928838972634,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      18.658336001796233,
+      21.141663998203764
+     ],
+     "p_holm": 0.0019722928838972636
+    },
+    {
+     "metric": "taudot",
+     "baseline": "Muscle",
+     "im_mean": 19.9,
+     "im_sd": 1.0,
+     "base_mean": 6.6,
+     "base_sd": 0.06,
+     "welch_t": 29.686316736084343,
+     "p_raw": 7.174055734796395e-06,
+     "p_sd_floor": 7.174055734796395e-06,
+     "sd_floor": 0.05,
+     "im_ci95": [
+      18.658336001796233,
+      21.141663998203764
+     ],
+     "p_holm": 9.326272455235314e-05
+    }
+   ]
+  },
+  "V4_G1_survival_welch": [
+   {
+    "scheme": "explicit",
+    "im": "ImpedanceMimic",
+    "baseline": "Fixed-PD",
+    "diff": 25.199999999999996,
+    "welch_p": 1.0174589535550929e-05
+   },
+   {
+    "scheme": "explicit",
+    "im": "ImpedanceMimic",
+    "baseline": "Fixed-PD 2x",
+    "diff": 18.799999999999997,
+    "welch_p": 0.00039427073938602214
+   },
+   {
+    "scheme": "stable",
+    "im": "ImpedanceMimic",
+    "baseline": "Fixed-PD",
+    "diff": 1.4000000000000057,
+    "welch_p": 0.5985964200781961
+   },
+   {
+    "scheme": "stable",
+    "im": "ImpedanceMimic",
+    "baseline": "Fixed-PD 2x",
+    "diff": 4.800000000000011,
+    "welch_p": 0.16379585982692063
+   },
+   {
+    "scheme": "implicit",
+    "im": "ImpedanceMimic",
+    "baseline": "Fixed-PD",
+    "diff": 14.899999999999999,
+    "welch_p": 0.0004776011351779642
+   },
+   {
+    "scheme": "implicit",
+    "im": "ImpedanceMimic",
+    "baseline": "Fixed-PD 2x",
+    "diff": 9.700000000000003,
+    "welch_p": 0.004303565924728533
+   }
+  ],
+  "V5_table2_claims": [
+   {
+    "scheme": "explicit",
+    "split": "seen",
+    "pair": "matched nominal",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "explicit",
+    "split": "seen",
+    "pair": "matched 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "explicit",
+    "split": "seen",
+    "pair": "IM nominal vs Fixed 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "explicit",
+    "split": "unseen",
+    "pair": "matched nominal",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "explicit",
+    "split": "unseen",
+    "pair": "matched 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "explicit",
+    "split": "unseen",
+    "pair": "IM nominal vs Fixed 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "stable",
+    "split": "seen",
+    "pair": "matched nominal",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "stable",
+    "split": "seen",
+    "pair": "matched 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": false,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "stable",
+    "split": "seen",
+    "pair": "IM nominal vs Fixed 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": false,
+     "q": false,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "stable",
+    "split": "unseen",
+    "pair": "matched nominal",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "stable",
+    "split": "unseen",
+    "pair": "matched 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "stable",
+    "split": "unseen",
+    "pair": "IM nominal vs Fixed 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": false,
+     "q": false,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "implicit",
+    "split": "seen",
+    "pair": "matched nominal",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "implicit",
+    "split": "seen",
+    "pair": "matched 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "implicit",
+    "split": "seen",
+    "pair": "IM nominal vs Fixed 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": false,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "implicit",
+    "split": "unseen",
+    "pair": "matched nominal",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "implicit",
+    "split": "unseen",
+    "pair": "matched 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   },
+   {
+    "scheme": "implicit",
+    "split": "unseen",
+    "pair": "IM nominal vs Fixed 2x",
+    "ImpedanceMimic_wins": {
+     "Ep": true,
+     "q": true,
+     "FZr": true,
+     "FMLr": true
+    }
+   }
+  ],
+  "V5_cross_prior_losses": [
+   [
+    "stable",
+    "seen",
+    "Ep"
+   ],
+   [
+    "stable",
+    "seen",
+    "q"
+   ],
+   [
+    "stable",
+    "unseen",
+    "Ep"
+   ],
+   [
+    "stable",
+    "unseen",
+    "q"
+   ],
+   [
+    "implicit",
+    "seen",
+    "q"
+   ]
+  ],
+  "V6_table18_gpu_hours": [
+   {
+    "method": "Fixed-PD",
+    "calc_gpu_h": 54.7,
+    "reported": 55,
+    "per_run_gpu_h": 1.37
+   },
+   {
+    "method": "Torque",
+    "calc_gpu_h": 53.3,
+    "reported": 54,
+    "per_run_gpu_h": 1.33
+   },
+   {
+    "method": "Muscle",
+    "calc_gpu_h": 73.3,
+    "reported": 73,
+    "per_run_gpu_h": 1.83
+   },
+   {
+    "method": "PHC",
+    "calc_gpu_h": 141.3,
+    "reported": 141,
+    "per_run_gpu_h": 3.53
+   },
+   {
+    "method": "SimPoE",
+    "calc_gpu_h": 177.3,
+    "reported": 177,
+    "per_run_gpu_h": 4.43
+   },
+   {
+    "method": "ImpedanceMimic",
+    "calc_gpu_h": 53.3,
+    "reported": 53,
+    "per_run_gpu_h": 1.33
+   }
+  ],
+  "V7_robot_loss": {
+   "IM_from_98.1": 16.0,
+   "FixedPD_from_98.1": 41.199999999999996,
+   "Torque_from_98.1": 54.099999999999994,
+   "FixedPD_from_own_human": 34.6,
+   "Torque_from_own_human": 35.2,
+   "IM_from_own_human": 16.0
+  },
+  "V8_retention": {
+   "recorded": 144,
+   "retained": 129,
+   "per_dataset_retained_pct": [
+    100,
+    100,
+    100,
+    100,
+    80,
+    92,
+    50,
+    100,
+    75
+   ]
+  }
+ }
+}
