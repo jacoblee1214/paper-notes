@@ -1,0 +1,183 @@
+{
+  "counts_sum_check": {
+    "base_total": 723,
+    "road_total": 723,
+    "expected": 723
+  },
+  "acc_base_pct": {
+    "computed": 52.9737,
+    "reported": 53.0,
+    "tol": 0.05,
+    "ok": true
+  },
+  "acc_road_pct": {
+    "computed": 70.1245,
+    "reported": 70.1,
+    "tol": 0.05,
+    "ok": true
+  },
+  "acc_gain_pp_vs_17.15": {
+    "computed": 17.1508,
+    "reported": 17.15,
+    "tol": 0.01,
+    "ok": true
+  },
+  "clr_rej_base_pct": {
+    "computed": 45.7815,
+    "reported": 45.8,
+    "tol": 0.05,
+    "ok": true
+  },
+  "clr_rej_road_pct": {
+    "computed": 28.4924,
+    "reported": 28.5,
+    "tol": 0.05,
+    "ok": true
+  },
+  "head_rej_base_pct": {
+    "computed": 1.2448,
+    "reported": 1.2,
+    "tol": 0.05,
+    "ok": true
+  },
+  "head_rej_road_pct": {
+    "computed": 1.3831,
+    "reported": 1.4,
+    "tol": 0.05,
+    "ok": true
+  },
+  "naive_two_prop_ci_pp": [
+    12.21,
+    22.09
+  ],
+  "paper_session_boot_ci_pp": [
+    11.88,
+    21.79
+  ],
+  "repair_fail_62.38_as_count": {
+    "count": 451,
+    "pct": 62.38
+  },
+  "drop_70.1_minus_62.38": 7.72,
+  "drop_exact_507_minus_451": 7.75,
+  "paired_improved_pct": {
+    "pct": 94.61,
+    "reported": 94.6
+  },
+  "sign_test_228_vs_11_p": 6.85e-54,
+  "clopper_pearson_228of241_pct": [
+    90.95,
+    97.1
+  ],
+  "paper_improved_interval_pct": [
+    90.1,
+    97.9
+  ],
+  "median_clr_diff_cm_naive": 12.13,
+  "median_paired_gain_cm_reported": 14.2,
+  "teacher_feasible": {
+    "n_pairs": 606,
+    "base_count_implied": 380,
+    "base_pct": 62.71,
+    "road_count_implied": 501,
+    "road_pct": 82.67,
+    "gain_pp": 19.97
+  },
+  "gain_table4": {
+    "fixed_gain": 0.2,
+    "prs_gain": 0.3,
+    "fcrs_gain_rounded": 0.6,
+    "cast_gain_rounded": 0.8,
+    "fcrs_gain_reported": 0.56,
+    "cast_gain_reported": 0.77,
+    "retention_from_reported_gains_pct": 72.73,
+    "retention_reported_pct": 73.2,
+    "fixed_retention_reported": 28.7,
+    "prs_retention_reported": 41.3,
+    "prs_retention_from_reported_pct": 41.56,
+    "fixed_retention_from_reported_pct": 28.57
+  },
+  "fcrs_gain_range_from_rounding": [
+    0.5,
+    0.64
+  ],
+  "cast_gain_range_from_rounding": [
+    0.7,
+    0.9
+  ],
+  "retention_range_from_rounding_pct": [
+    55.6,
+    91.4
+  ],
+  "fcrs_vs_cast_gap_text_0.21": 0.21,
+  "rollouts": {
+    "search_total": 1040,
+    "prs_total": 106,
+    "reduction_pct": 89.81,
+    "reported_pct": 89.8,
+    "search_per_trigger": 9.81,
+    "reported_per_trigger": 9.81,
+    "triggers_unfeasible_share_pct": 38.13,
+    "reported_share": 38.1,
+    "latency_ratio_search_over_fcrs": 9.53
+  },
+  "params": {
+    "prs_computed": 158850,
+    "prs_reported": 158850,
+    "projection_computed": 16416,
+    "projection_reported": 16416,
+    "residual_computed": 8354,
+    "residual_reported": 8354,
+    "trainable_sum": 24770,
+    "trainable_reported": 24770,
+    "student_total": 183620,
+    "student_reported": 183620,
+    "flatten_dim_check": 1088,
+    "all_ok": true
+  },
+  "epdms": {
+    "gain_vs_worlddrive": 11.24,
+    "reported_gain": 11.24,
+    "rel_pct": 40.55,
+    "reported_rel_pct": 40.5,
+    "gain_vs_diffusiondrive": 11.46,
+    "reported_gain_dd": 11.46,
+    "dac_gain_s1": 13.1,
+    "dac_gain_s2": 13.0,
+    "ep_gain_s1": 0.8,
+    "ep_gain_s2": 0.8
+  },
+  "table1_delta_mismatch": [],
+  "pdms_product_of_means": {
+    "WorldDrive": {
+      "computed": 86.72,
+      "reported": 89.0
+    },
+    "FCRS": {
+      "computed": 89.52,
+      "reported": 91.0
+    },
+    "CAST": {
+      "computed": 89.87,
+      "reported": 91.2
+    }
+  },
+  "pdms_upper_bound_E_S": {
+    "WorldDrive": {
+      "E_S": 91.04,
+      "reported": 89.0
+    },
+    "FCRS": {
+      "E_S": 91.71,
+      "reported": 91.0
+    },
+    "CAST": {
+      "E_S": 91.79,
+      "reported": 91.2
+    }
+  },
+  "pdms_upper_bound_ok": true,
+  "navsim_sd_needed_points": 31.5,
+  "seed_note": "세 시드의 개별 값이 없어 평균·표준편차를 재계산할 수 없다. 보고값만 확인",
+  "failed_checks": []
+}
