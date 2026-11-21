@@ -1,0 +1,427 @@
+{
+  "table1_counts": {
+    "visual_GT": {
+      "Wiping": 32,
+      "Insertion": 28,
+      "Pipette": 40
+    },
+    "visual_Pred": {
+      "Wiping": 33,
+      "Insertion": 29,
+      "Pipette": 40
+    },
+    "tactile_GT": {
+      "Wiping": 34,
+      "Insertion": 28,
+      "Pipette": 32
+    },
+    "tactile_Pred": {
+      "Wiping": 36,
+      "Insertion": 31,
+      "Pipette": 31
+    }
+  },
+  "table1_se_check_n40": {
+    "visual_GT/Wiping": 6.32,
+    "visual_GT/Insertion": 7.25,
+    "visual_GT/Pipette": 0.0,
+    "visual_Pred/Wiping": 6.01,
+    "visual_Pred/Insertion": 7.06,
+    "visual_Pred/Pipette": 0.0,
+    "tactile_GT/Wiping": 5.65,
+    "tactile_GT/Insertion": 7.25,
+    "tactile_GT/Pipette": 6.32,
+    "tactile_Pred/Wiping": 4.74,
+    "tactile_Pred/Insertion": 6.6,
+    "tactile_Pred/Pipette": 6.6
+  },
+  "table1_avg_check": {
+    "visual_GT": 83.33,
+    "visual_Pred": 85.0,
+    "tactile_GT": 78.33,
+    "tactile_Pred": 81.67
+  },
+  "table1_avg_printed": {
+    "visual_GT": 83.3,
+    "visual_Pred": 85.0,
+    "tactile_GT": 78.3,
+    "tactile_Pred": 81.7
+  },
+  "table1_gt_vs_pred": {
+    "visual/Wiping": {
+      "GT": "32/40",
+      "Pred": "33/40",
+      "p_fisher": 1.0
+    },
+    "visual/Insertion": {
+      "GT": "28/40",
+      "Pred": "29/40",
+      "p_fisher": 1.0
+    },
+    "visual/Pipette": {
+      "GT": "40/40",
+      "Pred": "40/40",
+      "p_fisher": 1.0
+    },
+    "tactile/Wiping": {
+      "GT": "34/40",
+      "Pred": "36/40",
+      "p_fisher": 0.737
+    },
+    "tactile/Insertion": {
+      "GT": "28/40",
+      "Pred": "31/40",
+      "p_fisher": 0.612
+    },
+    "tactile/Pipette": {
+      "GT": "32/40",
+      "Pred": "31/40",
+      "p_fisher": 1.0
+    }
+  },
+  "table1_wilson_lower_min": {
+    "visual_GT/Wiping": 0.6524,
+    "visual_GT/Insertion": 0.5457,
+    "visual_GT/Pipette": 0.9124,
+    "visual_Pred/Wiping": 0.6805,
+    "visual_Pred/Insertion": 0.5716,
+    "visual_Pred/Pipette": 0.9124,
+    "tactile_GT/Wiping": 0.7093,
+    "tactile_GT/Insertion": 0.5457,
+    "tactile_GT/Pipette": 0.6524,
+    "tactile_Pred/Wiping": 0.7695,
+    "tactile_Pred/Insertion": 0.625,
+    "tactile_Pred/Pipette": 0.625
+  },
+  "fig2_all_multiples_of_5": true,
+  "fig2_overall_le_min_violations": [],
+  "fig2_avg_panel_check": {
+    "Base": {
+      "mean_of_tasks": [
+        21.7,
+        50.0,
+        33.3
+      ],
+      "panel": [
+        22,
+        50,
+        33
+      ],
+      "max_abs_diff": 0.3
+    },
+    "VL8": {
+      "mean_of_tasks": [
+        25.0,
+        58.3,
+        36.7
+      ],
+      "panel": [
+        25,
+        58,
+        37
+      ],
+      "max_abs_diff": 0.3
+    },
+    "VL16": {
+      "mean_of_tasks": [
+        31.7,
+        76.7,
+        38.3
+      ],
+      "panel": [
+        32,
+        77,
+        38
+      ],
+      "max_abs_diff": 0.3
+    },
+    "TS": {
+      "mean_of_tasks": [
+        33.3,
+        51.7,
+        53.3
+      ],
+      "panel": [
+        33,
+        52,
+        53
+      ],
+      "max_abs_diff": 0.3
+    },
+    "TG": {
+      "mean_of_tasks": [
+        40.0,
+        55.0,
+        70.0
+      ],
+      "panel": [
+        40,
+        55,
+        70
+      ],
+      "max_abs_diff": 0.0
+    },
+    "Naive": {
+      "mean_of_tasks": [
+        45.0,
+        70.0,
+        60.0
+      ],
+      "panel": [
+        45,
+        70,
+        60
+      ],
+      "max_abs_diff": 0.0
+    },
+    "Ours": {
+      "mean_of_tasks": [
+        73.3,
+        81.7,
+        81.7
+      ],
+      "panel": [
+        73,
+        82,
+        82
+      ],
+      "max_abs_diff": 0.3
+    }
+  },
+  "fig2_errorbar_halfwidth_example": {
+    "Wiping/Base/Overall": {
+      "SE_pp": 8.9,
+      "95pct_halfwidth_pp": 17.5
+    },
+    "Pipette/Base/Overall": {
+      "SE_pp": 8.0,
+      "95pct_halfwidth_pp": 15.6
+    },
+    "Insertion/Base/Overall": {
+      "SE_pp": 10.2,
+      "95pct_halfwidth_pp": 20.1
+    },
+    "Wiping/Base/Visual": {
+      "SE_pp": 11.2,
+      "95pct_halfwidth_pp": 21.9
+    },
+    "Pipette/Base/Visual": {
+      "SE_pp": 11.1,
+      "95pct_halfwidth_pp": 21.8
+    },
+    "Insertion/Base/Visual": {
+      "SE_pp": 11.1,
+      "95pct_halfwidth_pp": 21.8
+    }
+  },
+  "fig2_pooled_overall_counts_of_60": {
+    "Base": 13,
+    "VL8": 15,
+    "VL16": 19,
+    "TS": 20,
+    "TG": 24,
+    "Naive": 27,
+    "Ours": 44
+  },
+  "fig2_pooled_overall_tests": {
+    "Ours_vs_TG": {
+      "ours": "44/60",
+      "other": "24/60",
+      "p_fisher": 0.00041
+    },
+    "Ours_vs_Naive": {
+      "ours": "44/60",
+      "other": "27/60",
+      "p_fisher": 0.00279
+    },
+    "Ours_vs_TS": {
+      "ours": "44/60",
+      "other": "20/60",
+      "p_fisher": 2e-05
+    },
+    "Ours_vs_VL16": {
+      "ours": "44/60",
+      "other": "19/60",
+      "p_fisher": 1e-05
+    },
+    "Ours_vs_VL8": {
+      "ours": "44/60",
+      "other": "15/60",
+      "p_fisher": 0.0
+    },
+    "Ours_vs_Base": {
+      "ours": "44/60",
+      "other": "13/60",
+      "p_fisher": 0.0
+    }
+  },
+  "fig2_per_task_tests": {
+    "Wiping": {
+      "Ours_vs_Naive": "16/20 vs 10/20, p=0.096",
+      "Ours_vs_best_unimodal": "16/20 vs 10/20, p=0.096"
+    },
+    "Pipette": {
+      "Ours_vs_Naive": "14/20 vs 7/20, p=0.056",
+      "Ours_vs_best_unimodal": "14/20 vs 5/20, p=0.010"
+    },
+    "Insertion": {
+      "Ours_vs_Naive": "14/20 vs 10/20, p=0.333",
+      "Ours_vs_best_unimodal": "14/20 vs 9/20, p=0.200"
+    }
+  },
+  "claims_fig2": {
+    "C_51pp_avg_overall_gain_over_base_pp": 51,
+    "C_51pp_relative_gain_ratio": 3.32,
+    "C_per_task_overall_gaps": {
+      "Wiping": {
+        "ours_overall": 80,
+        "best_unimodal": 50,
+        "best_unimodal_cond": "TG",
+        "gap_pp": 30,
+        "naive": 50,
+        "gap_vs_naive_pp": 30,
+        "gap_vs_base_pp": 60
+      },
+      "Pipette": {
+        "ours_overall": 70,
+        "best_unimodal": 25,
+        "best_unimodal_cond": "VL16",
+        "gap_pp": 45,
+        "naive": 35,
+        "gap_vs_naive_pp": 35,
+        "gap_vs_base_pp": 55
+      },
+      "Insertion": {
+        "ours_overall": 70,
+        "best_unimodal": 45,
+        "best_unimodal_cond": "VL16",
+        "gap_pp": 25,
+        "naive": 50,
+        "gap_vs_naive_pp": 20,
+        "gap_vs_base_pp": 40
+      }
+    },
+    "C_33pp_vs_best_unimodal_avg_pp": 33,
+    "C_20pp_vs_naive_avg_pp": 28
+  },
+  "power_n_per_arm_33pp_at_0.73_vs_0.40": 35,
+  "power_n_per_arm_20pp_at_0.70_vs_0.50": 93,
+  "c2_tests": {
+    "visual_base_to_ours/Wiping": {
+      "base": "6/20",
+      "ours": "18/20",
+      "p_fisher": 0.00024
+    },
+    "visual_base_to_ours/Pipette": {
+      "base": "6/20",
+      "ours": "15/20",
+      "p_fisher": 0.01039
+    },
+    "visual_base_to_ours/Insertion": {
+      "base": "8/20",
+      "ours": "16/20",
+      "p_fisher": 0.02248
+    },
+    "vt_base_to_ours/Wiping": {
+      "base": "6/20",
+      "ours": "14/20",
+      "p_fisher": 0.02564
+    },
+    "vt_base_to_ours/Pipette": {
+      "base": "14/20",
+      "ours": "16/20",
+      "p_fisher": 0.71643
+    },
+    "vt_base_to_ours/Insertion": {
+      "base": "12/20",
+      "ours": "14/20",
+      "p_fisher": 0.74105
+    }
+  },
+  "base_visual_disagreement": {
+    "Fig2_base_overall": {
+      "Wiping": 20,
+      "Pipette": 15,
+      "Insertion": 30
+    },
+    "C2_text_base_overall": {
+      "Wiping": 30,
+      "Pipette": 30,
+      "Insertion": 40
+    }
+  },
+  "ours_disagreement": {
+    "Fig2_ours_overall": {
+      "Wiping": 80,
+      "Pipette": 70,
+      "Insertion": 70
+    },
+    "C2_text_ours_overall": {
+      "Wiping": 90,
+      "Pipette": 75,
+      "Insertion": 80
+    },
+    "Fig2_ours_overall_counts": {
+      "Wiping": 16,
+      "Pipette": 14,
+      "Insertion": 14
+    },
+    "C2_ours_overall_counts": {
+      "Wiping": 18,
+      "Pipette": 15,
+      "Insertion": 16
+    }
+  },
+  "c2_avg_gain_pp": 48.3,
+  "table13_sums": {
+    "Ours": {
+      "sum_of_parts": 471,
+      "reported_total": 471
+    },
+    "Naive": {
+      "sum_of_parts": 430,
+      "reported_total": 429
+    },
+    "VL8_only": {
+      "sum_of_parts": 296,
+      "reported_total": 295
+    },
+    "VL16_only": {
+      "sum_of_parts": 406,
+      "reported_total": 405
+    },
+    "TS_only": {
+      "sum_of_parts": 104,
+      "reported_total": 103
+    },
+    "TG_only": {
+      "sum_of_parts": 94,
+      "reported_total": 94
+    }
+  },
+  "table13_ours_minus_naive_ms": 42,
+  "table13_ours_minus_naive_sd_ms_indep": 17.7,
+  "table13_text_claim_s_per_8actions": 0.05,
+  "table13_text_vs_table_ratio": 1.19,
+  "tables10_12_rgb_metrics_ours_better": "23/36",
+  "tables10_12_rgb_worse_cells": [
+    "wiping_front/MSE",
+    "wiping_wrist/MSE",
+    "wiping_wrist/PSNR",
+    "wiping_wrist/SSIM",
+    "insertion_front/MSE",
+    "pipette_front/MAE",
+    "pipette_front/MSE",
+    "pipette_front/PSNR",
+    "pipette_front/SSIM",
+    "pipette_wrist/MAE",
+    "pipette_wrist/MSE",
+    "pipette_wrist/PSNR",
+    "pipette_wrist/SSIM"
+  ],
+  "tables10_12_FID_LPIPS_both_better_in_cams": "6/6 cameras (both FID and LPIPS lower)",
+  "tables10_12_tactile_metrics_ours_better": "14/15",
+  "tables10_12_tactile_worse_cells": [
+    "wiping/GradCos"
+  ]
+}
