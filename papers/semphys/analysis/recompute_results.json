@@ -1,0 +1,351 @@
+{
+  "table1_as_read": {
+    "TextOp": {
+      "MM": 1.279,
+      "r1": 17.72,
+      "r2": 26.73,
+      "r3": 33.37,
+      "FID": 0.3404,
+      "Fail": 9.53,
+      "motion": 1.68,
+      "sem": 1.4,
+      "sd_r1": 0.19
+    },
+    "TeXedo": {
+      "MM": 1.25,
+      "r1": 22.58,
+      "r2": 30.27,
+      "r3": 36.03,
+      "FID": 0.3037,
+      "Fail": 0.46,
+      "motion": 1.58,
+      "sem": 1.4,
+      "sd_r1": 0.13
+    },
+    "MoMask": {
+      "MM": 1.18,
+      "r1": 36.61,
+      "r2": 44.46,
+      "r3": 48.99,
+      "FID": 0.3521,
+      "Fail": 1.81,
+      "motion": 1.84,
+      "sem": 1.86,
+      "sd_r1": 0.11
+    },
+    "ECHO": {
+      "MM": 1.177,
+      "r1": 26.36,
+      "r2": 39.36,
+      "r3": 47.72,
+      "FID": 0.2242,
+      "Fail": 2.09,
+      "motion": 1.64,
+      "sem": 1.6,
+      "sd_r1": 0.23
+    },
+    "OMG": {
+      "MM": 1.06,
+      "r1": 50.78,
+      "r2": 64.67,
+      "r3": 71.48,
+      "FID": 0.1441,
+      "Fail": 2.24,
+      "motion": 1.98,
+      "sem": 1.82,
+      "sd_r1": 0.21
+    },
+    "MotionGPT3": {
+      "MM": 1.017,
+      "r1": 58.35,
+      "r2": 70.55,
+      "r3": 75.88,
+      "FID": 0.164,
+      "Fail": 19.65,
+      "motion": 1.56,
+      "sem": 1.72,
+      "sd_r1": 0.14
+    },
+    "MDM": {
+      "MM": 1.01,
+      "r1": 60.1,
+      "r2": 72.24,
+      "r3": 78.15,
+      "FID": 0.1228,
+      "Fail": 5.71,
+      "motion": 1.4,
+      "sem": 1.82,
+      "sd_r1": 0.29
+    },
+    "SemPhys": {
+      "MM": 0.843,
+      "r1": 79.62,
+      "r2": 89.27,
+      "r3": 92.93,
+      "FID": 0.0838,
+      "Fail": 0.25,
+      "motion": 2.44,
+      "sem": 2.68,
+      "sd_r1": 0.06
+    }
+  },
+  "consistency_checks": {
+    "SemPhys - MDM R@1 (본문 19.52 pp)": {
+      "claimed": 19.52,
+      "computed": 19.52,
+      "ok": true
+    },
+    "MotionGPT3 ref->exec drop, 본문 74.08->58.18 (15.90)": {
+      "claimed": 15.9,
+      "computed": 15.9,
+      "ok": true
+    },
+    "MotionGPT3 exec R@1 표 1 값 58.35 대 본문 58.18 (차이)": {
+      "claimed": 0.17,
+      "computed": 0.17,
+      "ok": true
+    },
+    "SemPhys ref->exec drop (seed 42, 80.63->79.59)": {
+      "claimed": 1.04,
+      "computed": 1.04,
+      "ok": true
+    },
+    "Paired drop difference (15.90 - 1.04)": {
+      "claimed": 14.86,
+      "computed": 14.86,
+      "ok": true
+    },
+    "Anchoring gap start 74.61 -> 79.30 (4.69)": {
+      "claimed": 4.69,
+      "computed": 4.69,
+      "ok": true
+    },
+    "Shared start 76.71 -> 79.30 (2.59, 본문 약 +2.6)": {
+      "claimed": 2.59,
+      "computed": 2.59,
+      "ok": true
+    },
+    "Exec-ref-only gap 79.30 - 74.21 (5.09)": {
+      "claimed": 5.09,
+      "computed": 5.09,
+      "ok": true
+    },
+    "Matched control 79.31 - 73.31 (6.00)": {
+      "claimed": 6.0,
+      "computed": 6.0,
+      "ok": true
+    },
+    "Preference control 79.31 - 48.54 (30.77)": {
+      "claimed": 30.77,
+      "computed": 30.77,
+      "ok": true
+    },
+    "Window context 79.31 - 68.07 (11.24)": {
+      "claimed": 11.24,
+      "computed": 11.24,
+      "ok": true
+    },
+    "GT-trajectory relative change 56.93/79.30 - 1 (%) (-28.2)": {
+      "claimed": -28.2,
+      "computed": -28.2093,
+      "ok": true
+    },
+    "MM H=32 - H=96 (0.0133)": {
+      "claimed": 0.0133,
+      "computed": 0.0133,
+      "ok": true
+    },
+    "Replay sign agreement 102/112 (91.1%, 반올림 0.1)": {
+      "claimed": 91.1,
+      "computed": 91.0714,
+      "ok": true
+    },
+    "Replay improvement 107/127 (84.3%, 반올림 0.1)": {
+      "claimed": 84.3,
+      "computed": 84.252,
+      "ok": true
+    },
+    "Perturbation mean MDM = 78.89 - 20.43": {
+      "claimed": 58.46,
+      "computed": 58.46,
+      "ok": true
+    }
+  },
+  "seed_welch_R1_SemPhys_vs_MDM": {
+    "diff_pp": 19.52,
+    "se_from_seed_sd": 0.171,
+    "df": 2.17,
+    "ci95_from_seed_sd": [
+      18.84,
+      20.2
+    ],
+    "reported_ci": [
+      11.99,
+      27.05
+    ],
+    "reported_half_width": 7.53,
+    "note": "보고 구간은 시드 SD로 재현되지 않는다(폭이 약 11배). 구간의 출처(프롬프트 부트스트랩 등)는 본문에 없다."
+  },
+  "implied_queries_for_reported_ci_binomial": {
+    "se_needed_pp": 3.842,
+    "queries_per_system_needed": 272.0,
+    "note": "R@k의 쿼리 수는 본문에 없다(20개 풀 x 32 후보). 이 값은 독립 이항 가정의 대략적 역산이다."
+  },
+  "fail_event_counts_mean_over_seeds": {
+    "SemPhys": {
+      "fail_per_thousand": 0.25,
+      "expected_events": 3.27,
+      "exact_poisson95_events": [
+        0.62,
+        8.77
+      ],
+      "exact_poisson95_per_thousand": [
+        0.047,
+        0.67
+      ]
+    },
+    "TeXedo": {
+      "fail_per_thousand": 0.46,
+      "expected_events": 6.02,
+      "exact_poisson95_events": [
+        2.2,
+        13.06
+      ],
+      "exact_poisson95_per_thousand": [
+        0.168,
+        0.998
+      ]
+    },
+    "MDM": {
+      "fail_per_thousand": 5.71,
+      "expected_events": 74.7,
+      "exact_poisson95_events": [
+        58.99,
+        94.01
+      ],
+      "exact_poisson95_per_thousand": [
+        4.509,
+        7.186
+      ]
+    },
+    "MotionGPT3": {
+      "fail_per_thousand": 19.65,
+      "expected_events": 257.06,
+      "exact_poisson95_events": [
+        226.54,
+        290.42
+      ],
+      "exact_poisson95_per_thousand": [
+        17.317,
+        22.2
+      ]
+    },
+    "MoMask": {
+      "fail_per_thousand": 1.81,
+      "expected_events": 23.68,
+      "exact_poisson95_events": [
+        15.38,
+        35.71
+      ],
+      "exact_poisson95_per_thousand": [
+        1.175,
+        2.73
+      ]
+    }
+  },
+  "fail_note": "SemPhys 0.25‰는 약 3건 사건입니다(13,082 upright tasks). 95% 구간은 약 0.05–0.67‰. 차이 검정은 사건 수가 적어 제한적입니다. 표 1의 Fail은 3개 시드 평균이라 정수가 아닐 수 있습니다.",
+  "semphys_R1_by_protocol": {
+    "표 1, 3시드 평균 (생성)": 79.62,
+    "그림 3, 생성 시드 42 (실행)": 79.59,
+    "그림 7, 학습 시드 3개 평균 (생성 시드 42)": 79.3,
+    "표 2 / 그림 8, H=32 (학습 시드 3개)": 79.31,
+    "표 2, H=64": 80.11
+  },
+  "welch_ablations": {
+    "anchoring: 79.30±0.16 vs no-anchor 74.61 (SD 6.35)": {
+      "diff": 4.69,
+      "se": 3.667,
+      "t": 1.28,
+      "df": 2.0,
+      "p_welch": 0.329
+    },
+    "exec vs generated-only 79.30±0.16 vs 74.21±0.40": {
+      "diff": 5.09,
+      "se": 0.249,
+      "t": 20.46,
+      "df": 2.62,
+      "p_welch": 0.000574
+    },
+    "window 32-step ordered 79.31±0.16 vs endpoint padding 68.07±1.47": {
+      "diff": 11.24,
+      "se": 0.854,
+      "t": 13.17,
+      "df": 2.05,
+      "p_welch": 0.00522
+    },
+    "H=32 vs H=64 R@1 79.31±0.16 vs 80.11±0.32": {
+      "diff": -0.8,
+      "se": 0.207,
+      "t": -3.87,
+      "df": 2.94,
+      "p_welch": 0.0316
+    },
+    "H=32 vs H=96 R@1 79.31±0.16 vs 79.81±0.20": {
+      "diff": -0.5,
+      "se": 0.148,
+      "t": -3.38,
+      "df": 3.82,
+      "p_welch": 0.0298
+    },
+    "H=32 vs H=96 MM 0.8453±0.0015 vs 0.8320±0.0002": {
+      "diff": 0.013,
+      "se": 0.001,
+      "t": 15.22,
+      "df": 2.07,
+      "p_welch": 0.0037
+    }
+  },
+  "anchoring_variance_F": {
+    "F": 1575.1,
+    "p_two_sided": 0.00127,
+    "note": "SD 6.35 대 0.16, 시드 3개. 분산 비교는 가능하지만 시드 3개라 검정력이 낮고, 평균 차이(4.69 pp)는 p≈0.33입니다."
+  },
+  "fail_pairwise_binomial": {
+    "SemPhys vs TeXedo": {
+      "k_a": 3,
+      "k_b": 6,
+      "p_binom": 0.508
+    },
+    "SemPhys vs MDM": {
+      "k_a": 3,
+      "k_b": 75,
+      "p_binom": 5.24e-19
+    },
+    "SemPhys vs MoMask": {
+      "k_a": 3,
+      "k_b": 24,
+      "p_binom": 4.92e-05
+    }
+  },
+  "pointwise_halfwidth_if_640_queries_pp": 4.91,
+  "fig9_wilson95": {
+    "sign_agreement": {
+      "k": 102,
+      "n": 112,
+      "wilson": [
+        84.3,
+        95.1
+      ]
+    },
+    "mm_improve": {
+      "k": 107,
+      "n": 127,
+      "wilson": [
+        76.9,
+        89.6
+      ]
+    }
+  },
+  "fig9_note": "무작위 섭동 기준 48.8%는 표본 수가 없어 구간을 못 만듭니다. 그림 9 막대 구간은 프롬프트 부트스트랩입니다.",
+  "chance_R1_32_candidates_pct": 3.125
+}
