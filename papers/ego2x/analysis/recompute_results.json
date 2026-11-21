@@ -1,0 +1,198 @@
+{
+  "wilson_95": {
+    "yield_bread_ego2x": {
+      "k": 31,
+      "n": 52,
+      "p": 0.5962,
+      "ci": [
+        0.4607,
+        0.7184
+      ]
+    },
+    "yield_bread_huro_e2r": {
+      "k": 1,
+      "n": 52,
+      "p": 0.0192,
+      "ci": [
+        0.0034,
+        0.1012
+      ]
+    },
+    "yield_bell_ego2x": {
+      "k": 45,
+      "n": 53,
+      "p": 0.8491,
+      "ci": [
+        0.7295,
+        0.9215
+      ]
+    },
+    "yield_bell_baselines": {
+      "k": 0,
+      "n": 53,
+      "p": 0.0,
+      "ci": [
+        0.0,
+        0.0676
+      ]
+    },
+    "xvla_zero_shot": {
+      "k": 81,
+      "n": 200,
+      "p": 0.405,
+      "ci": [
+        0.3394,
+        0.4742
+      ]
+    },
+    "xvla_verified_55lw": {
+      "k": 134,
+      "n": 200,
+      "p": 0.67,
+      "ci": [
+        0.6022,
+        0.7314
+      ]
+    },
+    "xvla_verified_P70": {
+      "k": 127,
+      "n": 200,
+      "p": 0.635,
+      "ci": [
+        0.5663,
+        0.6986
+      ]
+    },
+    "xvla_unfiltered_bread": {
+      "k": 82,
+      "n": 200,
+      "p": 0.41,
+      "ci": [
+        0.3442,
+        0.4792
+      ]
+    },
+    "xvla_bell_zero_shot": {
+      "k": 34,
+      "n": 200,
+      "p": 0.17,
+      "ci": [
+        0.1243,
+        0.2282
+      ]
+    },
+    "xvla_bell_zero_retry_prompt": {
+      "k": 110,
+      "n": 200,
+      "p": 0.55,
+      "ci": [
+        0.4808,
+        0.6174
+      ]
+    },
+    "xvla_bell_unfiltered": {
+      "k": 54,
+      "n": 200,
+      "p": 0.27,
+      "ci": [
+        0.2132,
+        0.3354
+      ]
+    }
+  },
+  "fisher_yield": {
+    "bread_31of52_vs_1of52": {
+      "p_two_sided": 3.163257147592387e-11,
+      "diff_newcombe": [
+        0.5769230769230769,
+        0.41857502222428133,
+        0.7001922837998893
+      ]
+    },
+    "bell_45of53_vs_0of53": {
+      "p_two_sided": 9.389608610512339e-22,
+      "diff_newcombe": [
+        0.8490566037735849,
+        0.7116838645982065,
+        0.9214758218932962
+      ]
+    }
+  },
+  "mcnemar_check": {
+    "bread_55lw_vs_zero_shot": {
+      "b": 70,
+      "c": 21,
+      "exact_mcnemar_p": 2.509086976240059e-07,
+      "reported_p": 5e-07,
+      "b_minus_c": 49,
+      "implied_b_minus_c_from_SR": 53.0,
+      "mismatch_pairs": -4.0
+    },
+    "bread_P70_vs_zero_shot": {
+      "b": 67,
+      "c": 24,
+      "exact_mcnemar_p": 7.348549184628524e-06,
+      "reported_p": 7.4e-06,
+      "b_minus_c": 43,
+      "implied_b_minus_c_from_SR": 46.0,
+      "mismatch_pairs": -3.0
+    },
+    "bell_zero_retry_prompt_vs_zero_shot": {
+      "b": 84,
+      "c": 11,
+      "exact_mcnemar_p": 4.51844580634533e-15,
+      "reported_p": 2.7e-14,
+      "b_minus_c": 73,
+      "implied_b_minus_c_from_SR": 76.0,
+      "mismatch_pairs": -3.0
+    },
+    "bell_fixed_prompt_vs_zero_shot_195": {
+      "b": 68,
+      "c": 8,
+      "exact_mcnemar_p": 5.632907524806409e-13,
+      "reported_p": 5.6e-13,
+      "b_minus_c": 60,
+      "implied_b_minus_c_from_SR": 60.4,
+      "mismatch_pairs": -0.4
+    },
+    "bell_unfiltered_vs_zero_shot": {
+      "b": 17,
+      "c": 58,
+      "exact_mcnemar_p": 2.1823279653758543e-06,
+      "reported_p": 8.7e-06,
+      "b_minus_c": -41,
+      "implied_b_minus_c_from_SR": 20.0,
+      "mismatch_pairs": -61.0
+    },
+    "bread_unfiltered_vs_zero_shot": {
+      "note": "쌍 수 미보고"
+    }
+  },
+  "wilcoxon_6of6": {
+    "exact_two_sided_p": 0.03125,
+    "note": "정확 부호검정 기준, 순위 검정의 최소 가능 양측 p = 2/64"
+  },
+  "relative_changes": {
+    "HaWoR_ray_error_33.7pct": 33.7,
+    "EgoHand_ray_error_14.1pct": 14.1,
+    "EgoHand_MPJPE_reduction_pct": 11.4,
+    "HaWoR_MPJPE_reduction_pct": 17.7,
+    "conf_frame_F1_doubling_ratio": 2.02,
+    "in_contact_median_trans_err_cut_pct_p70": 35.7,
+    "in_contact_median_trans_err_cut_pct_held": 30.2,
+    "xvla_gain_pp": 26.5,
+    "mean_gain_bread_pp_from_table": 23.0
+  },
+  "integrality": {
+    "67.0_of_200": 134.0,
+    "40.5_of_200": 81.0,
+    "63.5_of_200": 127.0,
+    "41.0_of_200": 82.0,
+    "44.5_of_200": 89.0,
+    "55.0_of_200": 110.0,
+    "17.0_of_200": 34.0,
+    "27.0_of_200": 54.0,
+    "48.0_of_195": 93.6,
+    "47.0_of_200": 94.0
+  }
+}
