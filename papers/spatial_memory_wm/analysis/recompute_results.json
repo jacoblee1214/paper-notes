@@ -1,0 +1,203 @@
+{
+  "V1_rank_sum_per_criterion": {
+    "Cam-Acc": 10.0,
+    "Stat-Cons": 10.0,
+    "Dyn-Plaus": 10.0
+  },
+  "V1_rank_sum_expected": 10.0,
+  "V1_note": "4개 방법의 평균 순위 합이 10이면 피험자가 4개 결과를 1–4로 순위 매긴 것과 일치한다.",
+  "V2_view_recall": {
+    "PSNR_gain_dB_vs_best_baseline": 6.94,
+    "SSIM_relative_gain_pct": 43.4,
+    "LPIPS_relative_reduction_pct": 47.8,
+    "best_baseline_PSNR": 12.16,
+    "best_baseline_SSIM": 0.4512,
+    "best_baseline_LPIPS": 0.5874,
+    "note": "신뢰구간 불가: 샘플별 분산이 없다. 시험 수는 본문에 500 시퀀스(MiraData 테스트)로만 적혀 있다."
+  },
+  "V3_ahr_tests_worst_case_variance": {
+    "Cam-Acc": {
+      "TrajectoryCrafter": {
+        "rating_level_n280": {
+          "diff": 1.994,
+          "se_diff_upper": 0.0941,
+          "z_lower_bound": 21.19,
+          "p_two_sided_upper": 1.11e-99
+        },
+        "subject_level_n20": {
+          "diff": 1.994,
+          "se_diff_upper": 0.352,
+          "z_lower_bound": 5.66,
+          "p_two_sided_upper": 1.48e-08
+        }
+      },
+      "DaS": {
+        "rating_level_n280": {
+          "diff": 1.06,
+          "se_diff_upper": 0.1074,
+          "z_lower_bound": 9.87,
+          "p_two_sided_upper": 5.47e-23
+        },
+        "subject_level_n20": {
+          "diff": 1.06,
+          "se_diff_upper": 0.4017,
+          "z_lower_bound": 2.64,
+          "p_two_sided_upper": 0.00833
+        }
+      },
+      "Wan2.1-Inpainting": {
+        "rating_level_n280": {
+          "diff": 1.45,
+          "se_diff_upper": 0.1057,
+          "z_lower_bound": 13.72,
+          "p_two_sided_upper": 7.64e-43
+        },
+        "subject_level_n20": {
+          "diff": 1.45,
+          "se_diff_upper": 0.3954,
+          "z_lower_bound": 3.67,
+          "p_two_sided_upper": 0.000245
+        }
+      }
+    },
+    "Stat-Cons": {
+      "TrajectoryCrafter": {
+        "rating_level_n280": {
+          "diff": 1.6044,
+          "se_diff_upper": 0.1069,
+          "z_lower_bound": 15.01,
+          "p_two_sided_upper": 6.39e-51
+        },
+        "subject_level_n20": {
+          "diff": 1.6044,
+          "se_diff_upper": 0.4,
+          "z_lower_bound": 4.01,
+          "p_two_sided_upper": 6.04e-05
+        }
+      },
+      "DaS": {
+        "rating_level_n280": {
+          "diff": 0.945,
+          "se_diff_upper": 0.1152,
+          "z_lower_bound": 8.21,
+          "p_two_sided_upper": 2.3e-16
+        },
+        "subject_level_n20": {
+          "diff": 0.945,
+          "se_diff_upper": 0.4309,
+          "z_lower_bound": 2.19,
+          "p_two_sided_upper": 0.0283
+        }
+      },
+      "Wan2.1-Inpainting": {
+        "rating_level_n280": {
+          "diff": 0.989,
+          "se_diff_upper": 0.1151,
+          "z_lower_bound": 8.6,
+          "p_two_sided_upper": 8.27e-18
+        },
+        "subject_level_n20": {
+          "diff": 0.989,
+          "se_diff_upper": 0.4305,
+          "z_lower_bound": 2.3,
+          "p_two_sided_upper": 0.0216
+        }
+      }
+    },
+    "Dyn-Plaus": {
+      "TrajectoryCrafter": {
+        "rating_level_n280": {
+          "diff": 1.7756,
+          "se_diff_upper": 0.1022,
+          "z_lower_bound": 17.38,
+          "p_two_sided_upper": 1.22e-67
+        },
+        "subject_level_n20": {
+          "diff": 1.7756,
+          "se_diff_upper": 0.3823,
+          "z_lower_bound": 4.64,
+          "p_two_sided_upper": 3.41e-06
+        }
+      },
+      "DaS": {
+        "rating_level_n280": {
+          "diff": 0.6978,
+          "se_diff_upper": 0.1141,
+          "z_lower_bound": 6.11,
+          "p_two_sided_upper": 9.69e-10
+        },
+        "subject_level_n20": {
+          "diff": 0.6978,
+          "se_diff_upper": 0.427,
+          "z_lower_bound": 1.63,
+          "p_two_sided_upper": 0.102
+        }
+      },
+      "Wan2.1-Inpainting": {
+        "rating_level_n280": {
+          "diff": 1.131,
+          "se_diff_upper": 0.1139,
+          "z_lower_bound": 9.93,
+          "p_two_sided_upper": 3.2e-23
+        },
+        "subject_level_n20": {
+          "diff": 1.131,
+          "se_diff_upper": 0.4263,
+          "z_lower_bound": 2.65,
+          "p_two_sided_upper": 0.00798
+        }
+      }
+    }
+  },
+  "V3_assumption": "분산은 범위 [1,4]에서 최대값으로 둔다(보수적). 독립 가정 시 n=280, 피험자 군집을 고려하면 n=20. 실제 분산은 알 수 없다.",
+  "V4_vbench_diff_ours_minus_baseline": {
+    "DaS": {
+      "Aesthetic": 0.02,
+      "Imaging": 0.0084,
+      "Temporal": 0.006,
+      "Motion": 0.003,
+      "Subject": 0.0034,
+      "Background": 0.0012
+    },
+    "Wan2.1-Inpainting": {
+      "Aesthetic": 0.0174,
+      "Imaging": -0.0087,
+      "Temporal": 0.1147,
+      "Motion": 0.0018,
+      "Subject": 0.0002,
+      "Background": -0.0007
+    },
+    "TrajectoryCrafter": {
+      "Aesthetic": 0.058,
+      "Imaging": 0.0273,
+      "Temporal": 0.142,
+      "Motion": 0.0043,
+      "Subject": 0.0529,
+      "Background": 0.0279
+    }
+  },
+  "V4_ablation_diff_full_minus_ablated": {
+    "w/o episodic": {
+      "Aesthetic": 0.0232,
+      "Imaging": 0.0216,
+      "Temporal": 0.032,
+      "Motion": 0.0016,
+      "Subject": 0.0033,
+      "Background": 0.0017
+    },
+    "w/o working": {
+      "Aesthetic": 0.0284,
+      "Imaging": 0.0317,
+      "Temporal": 0.084,
+      "Motion": 0.0024,
+      "Subject": 0.0028,
+      "Background": 0.0053
+    }
+  },
+  "V4_note": "표 2, 표 3은 평균만 있고 분산과 시험 수가 없다. 차이는 보고만 하고 p값은 계산하지 않는다. 표 3에 '공간 기억 제거' 행이 없다.",
+  "K_consistency_checks": {
+    "K1_view_all_best": true,
+    "K2_vbench_wan_imaging_and_background_higher": true,
+    "K3_ablation_full_best_all_six": true
+  }
+}
