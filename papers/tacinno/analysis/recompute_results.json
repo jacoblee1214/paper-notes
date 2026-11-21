@@ -1,0 +1,471 @@
+{
+  "table1": {
+    "UniVTAC-ACT": {
+      "avg_recomputed": 40.5,
+      "avg_reported": 40.5,
+      "pooled_ci95": [
+        36.64,
+        44.48
+      ],
+      "min_task": 25
+    },
+    "pi0.5 (no tactile)": {
+      "avg_recomputed": 47.5,
+      "avg_reported": 47.5,
+      "pooled_ci95": [
+        43.53,
+        51.5
+      ],
+      "min_task": 25
+    },
+    "FTP-pi0.5": {
+      "avg_recomputed": 60.17,
+      "avg_reported": 60.2,
+      "pooled_ci95": [
+        56.2,
+        64.01
+      ],
+      "min_task": 19
+    },
+    "FTP-1": {
+      "avg_recomputed": 74.17,
+      "avg_reported": 74.2,
+      "pooled_ci95": [
+        70.52,
+        77.51
+      ],
+      "min_task": 40
+    },
+    "N0-VTLA": {
+      "avg_recomputed": 75.33,
+      "avg_reported": 75.3,
+      "pooled_ci95": [
+        71.73,
+        78.61
+      ],
+      "min_task": 24
+    },
+    "SimpleTouch": {
+      "avg_recomputed": 76.83,
+      "avg_reported": 76.8,
+      "pooled_ci95": [
+        73.29,
+        80.03
+      ],
+      "min_task": 54
+    },
+    "TacInno-VLA": {
+      "avg_recomputed": 87.5,
+      "avg_reported": 87.5,
+      "pooled_ci95": [
+        84.61,
+        89.91
+      ],
+      "min_task": 75
+    }
+  },
+  "table1_tests_pooled_600": {
+    "SimpleTouch": {
+      "diff_pp": 10.67,
+      "newcombe_ci_pp": [
+        6.36,
+        14.95
+      ],
+      "p_two_prop": 1.39e-06
+    },
+    "N0-VTLA": {
+      "diff_pp": 12.17,
+      "newcombe_ci_pp": [
+        7.8,
+        16.5
+      ],
+      "p_two_prop": 6.04e-08
+    },
+    "FTP-1": {
+      "diff_pp": 13.33,
+      "newcombe_ci_pp": [
+        8.92,
+        17.71
+      ],
+      "p_two_prop": 4.43e-09
+    },
+    "FTP-pi0.5": {
+      "diff_pp": 27.33,
+      "newcombe_ci_pp": [
+        22.53,
+        31.98
+      ],
+      "p_two_prop": 0.0
+    },
+    "UniVTAC-ACT": {
+      "diff_pp": 47.0,
+      "newcombe_ci_pp": [
+        42.09,
+        51.55
+      ],
+      "p_two_prop": 0.0
+    },
+    "pi0.5 (no tactile)": {
+      "diff_pp": 40.0,
+      "newcombe_ci_pp": [
+        35.07,
+        44.64
+      ],
+      "p_two_prop": 0.0
+    }
+  },
+  "table1_min_task_check": {
+    "UniVTAC-ACT": 25,
+    "pi0.5 (no tactile)": 25,
+    "FTP-pi0.5": 19,
+    "FTP-1": 40,
+    "N0-VTLA": 24,
+    "SimpleTouch": 54,
+    "TacInno-VLA": 75
+  },
+  "table1_n_for_80pct_power_vs_SimpleTouch": 200,
+  "table1_fisher_per_task_vs_SimpleTouch": [
+    1.0,
+    0.767,
+    0.596,
+    0.000198,
+    4.93e-11,
+    0.872
+  ],
+  "table2": {
+    "TacInno-VLA": {
+      "avg_recomputed": 83.0,
+      "pooled_n": 200
+    },
+    "w/o conditioning": {
+      "avg_recomputed": 62.0,
+      "pooled_n": 200,
+      "diff_vs_full_pp": -21.0,
+      "newcombe_ci_pp": [
+        12.32,
+        29.27
+      ],
+      "p_two_prop_unpaired": 2.56e-06
+    },
+    "vision-only conditioning": {
+      "avg_recomputed": 69.5,
+      "pooled_n": 200,
+      "diff_vs_full_pp": -13.5,
+      "newcombe_ci_pp": [
+        5.17,
+        21.61
+      ],
+      "p_two_prop_unpaired": 0.00151
+    },
+    "two-frame code": {
+      "avg_recomputed": 76.5,
+      "pooled_n": 200,
+      "diff_vs_full_pp": -6.5,
+      "newcombe_ci_pp": [
+        -1.4,
+        14.32
+      ],
+      "p_two_prop_unpaired": 0.106
+    },
+    "w/o attention mask": {
+      "avg_recomputed": 68.0,
+      "pooled_n": 200,
+      "diff_vs_full_pp": -15.0,
+      "newcombe_ci_pp": [
+        6.59,
+        23.15
+      ],
+      "p_two_prop_unpaired": 0.000487
+    },
+    "w/o code loss": {
+      "avg_recomputed": 76.0,
+      "pooled_n": 200,
+      "diff_vs_full_pp": -7.0,
+      "newcombe_ci_pp": [
+        -0.93,
+        14.84
+      ],
+      "p_two_prop_unpaired": 0.0829
+    },
+    "w/o tactile input": {
+      "avg_recomputed": 25.5,
+      "pooled_n": 200,
+      "diff_vs_full_pp": -57.5,
+      "newcombe_ci_pp": [
+        48.81,
+        64.68
+      ],
+      "p_two_prop_unpaired": 0.0
+    }
+  },
+  "table2_reported_avg_check": {
+    "TacInno-VLA": 83.0,
+    "w/o conditioning": 62.0,
+    "vision-only conditioning": 69.5,
+    "two-frame code": 76.5,
+    "w/o attention mask": 68.0,
+    "w/o code loss": 76.0,
+    "w/o tactile input": 25.5
+  },
+  "table3_mcnemar_lift_can_tacinno": {
+    "b_on_off": 88,
+    "c_off_on": 0,
+    "p_exact": 6.46e-27,
+    "note": "끔 0/100이면 감소 100%와 일치. 끔의 성공이 0이므로 쌍체 불일치가 88:0"
+  },
+  "table3_lift_bottle_drop_check": {
+    "on": 78,
+    "off_reported_text": 4,
+    "relative_drop_recomputed": 94.9,
+    "reported_drop": 95,
+    "seeds_note": "표 3 주석은 Lift Bottle을 25 시드로 적고, 표 2와 4.1절은 100 에피소드라고 적어 시도 수가 모순됩니다."
+  },
+  "table4": {
+    "FTP-1": {
+      "pooled_k": 117,
+      "n": 200,
+      "avg_recomputed": 58.5,
+      "avg_reported": 58.5,
+      "pooled_ci95": [
+        51.57,
+        65.11
+      ],
+      "per_task_ci95": [
+        [
+          76.2,
+          94.38
+        ],
+        [
+          8.34,
+          28.51
+        ],
+        [
+          52.15,
+          77.56
+        ],
+        [
+          50.14,
+          75.86
+        ]
+      ]
+    },
+    "SimpleTouch": {
+      "pooled_k": 123,
+      "n": 200,
+      "avg_recomputed": 61.5,
+      "avg_reported": 61.5,
+      "pooled_ci95": [
+        54.6,
+        67.97
+      ],
+      "per_task_ci95": [
+        [
+          69.2,
+          90.23
+        ],
+        [
+          17.47,
+          41.67
+        ],
+        [
+          48.15,
+          74.14
+        ],
+        [
+          60.45,
+          84.13
+        ]
+      ]
+    },
+    "TacInno-VLA, tactile-off": {
+      "pooled_k": 80,
+      "n": 200,
+      "avg_recomputed": 40.0,
+      "avg_reported": 40.0,
+      "pooled_ci95": [
+        33.46,
+        46.92
+      ],
+      "per_task_ci95": [
+        [
+          38.51,
+          65.2
+        ],
+        [
+          4.35,
+          21.36
+        ],
+        [
+          32.97,
+          59.6
+        ],
+        [
+          38.51,
+          65.2
+        ]
+      ]
+    },
+    "w/o code loss": {
+      "pooled_k": 95,
+      "n": 200,
+      "avg_recomputed": 47.5,
+      "avg_reported": 47.5,
+      "pooled_ci95": [
+        40.69,
+        54.4
+      ],
+      "per_task_ci95": [
+        [
+          48.15,
+          74.14
+        ],
+        [
+          12.75,
+          35.24
+        ],
+        [
+          36.64,
+          63.36
+        ],
+        [
+          42.31,
+          68.84
+        ]
+      ]
+    },
+    "w/o tactile input": {
+      "pooled_k": 103,
+      "n": 200,
+      "avg_recomputed": 51.5,
+      "avg_reported": 51.5,
+      "pooled_ci95": [
+        44.61,
+        58.33
+      ],
+      "per_task_ci95": [
+        [
+          48.15,
+          74.14
+        ],
+        [
+          6.95,
+          26.19
+        ],
+        [
+          38.51,
+          65.2
+        ],
+        [
+          64.76,
+          87.25
+        ]
+      ]
+    },
+    "TacInno-VLA": {
+      "pooled_k": 141,
+      "n": 200,
+      "avg_recomputed": 70.5,
+      "avg_reported": 70.5,
+      "pooled_ci95": [
+        63.84,
+        76.39
+      ],
+      "per_task_ci95": [
+        [
+          76.2,
+          94.38
+        ],
+        [
+          25.86,
+          51.85
+        ],
+        [
+          60.45,
+          84.13
+        ],
+        [
+          69.2,
+          90.23
+        ]
+      ]
+    }
+  },
+  "table4_all_counts_even_consistent_with_n50": true,
+  "table4_tests": {
+    "SimpleTouch": {
+      "diff_pp": 9.0,
+      "newcombe_ci_pp": [
+        -0.28,
+        18.07
+      ],
+      "p_two_prop_unpaired": 0.0574,
+      "p_fisher": 0.0726
+    },
+    "FTP-1": {
+      "diff_pp": 12.0,
+      "newcombe_ci_pp": [
+        2.62,
+        21.09
+      ],
+      "p_two_prop_unpaired": 0.0121,
+      "p_fisher": 0.0161
+    },
+    "w/o code loss": {
+      "diff_pp": 23.0,
+      "newcombe_ci_pp": [
+        13.41,
+        32.0
+      ],
+      "p_two_prop_unpaired": 2.92e-06,
+      "p_fisher": 4.29e-06
+    },
+    "w/o tactile input": {
+      "diff_pp": 19.0,
+      "newcombe_ci_pp": [
+        9.46,
+        28.06
+      ],
+      "p_two_prop_unpaired": 9.8e-05,
+      "p_fisher": 0.000141
+    },
+    "TacInno-VLA, tactile-off": {
+      "diff_pp": 30.5,
+      "newcombe_ci_pp": [
+        20.9,
+        39.3
+      ],
+      "p_two_prop_unpaired": 8.57e-10,
+      "p_fisher": 1.19e-09
+    }
+  },
+  "table4_power": {
+    "n_per_group_80pct_for_observed_diff_vs_SimpleTouch": 434,
+    "n_per_group_80pct_for_observed_diff_vs_FTP1": 249,
+    "n_per_group_80pct_for_observed_diff_vs_no_code_loss": 71
+  },
+  "consistency": {
+    "abstract: 87.5 - 76.8 (SimpleTouch) = 10.7 pp": 10.7,
+    "sec 4.2: 87.5 - 75.3 (N0-VTLA) = 12.2 pp": 12.2,
+    "sec 4.6: 70.5 - 61.5 (SimpleTouch) = 9.0 pp": 9.0,
+    "sec 4.6: 70.5 - 58.5 (FTP-1) = 12.0 pp": 12.0,
+    "sec 4.3: w/o conditioning drop = 83.0 - 62.0 = 21 pp": 21.0,
+    "sec 4.3: vision-only remains 83.0 - 69.5 = 13.5 pp": 13.5,
+    "sec 4.3: two-frame drop = 83.0 - 76.5 = 6.5 pp": 6.5,
+    "sec 4.3: attention mask drop = 83.0 - 68.0 = 15 pp": 15.0,
+    "sec 4.3: w/o tactile drop = 83.0 - 25.5 = 57.5 pp": 57.5,
+    "sec 4.3: w/o code loss drop = 83.0 - 76.0 = 7 pp": 7.0,
+    "sec 4.6: code loss gain per task (26, 16, 24, 26) range": [
+      16,
+      26
+    ],
+    "sec 4.5: 0.073 / 0.020 nats ratio": 3.65,
+    "sec 4.5: 65+25, 78+16, 87+7 (vision+action+code, %)": [
+      90,
+      94,
+      94
+    ],
+    "sec 4.4: 'to 4% on Lift Bottle' with 78% on-tactile: relative drop %": 94.9,
+    "sec 4.2: execution-horizon baseline averages and 91.3% (not in any table; unverifiable)": null
+  },
+  "sec4_5_predictability_note": "37% 평균은 6과제 전체 평균이고, Lift Can 값(65, 78, 87%)은 다른 분모입니다. 두 값을 직접 비교하지 않았습니다."
+}
