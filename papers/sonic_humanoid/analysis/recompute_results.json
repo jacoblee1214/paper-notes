@@ -1,0 +1,361 @@
+{
+  "V1_real_world": {
+    "real_success": [
+      123,
+      124
+    ],
+    "real_rate": 0.9919354838709677,
+    "real_wilson95": [
+      0.9557320139455229,
+      0.9985749935418747
+    ],
+    "sim_success": [
+      124,
+      124
+    ],
+    "sim_wilson95": [
+      0.9699513846593223,
+      0.9999999999999999
+    ],
+    "note": "시뮬 전부 성공이므로 쌍체 불일치는 최대 1쌍입니다. 1쌍이면 McNemar 정확 p = 1.0 입니다(정보 부족).",
+    "mcnemar_p_one_discordant": 1.0
+  },
+  "V6_baselines_two_prop": {
+    "test_content__BeyondMimic": {
+      "n": 7016,
+      "sonic_k": 6911,
+      "base_k": 5753,
+      "diff_pp": 16.5,
+      "newcombe95_pp": [
+        15.6,
+        17.5
+      ],
+      "z": 32.96,
+      "p": 3.424652139526826e-238
+    },
+    "test_content__Any2Track": {
+      "n": 7016,
+      "sonic_k": 6911,
+      "base_k": 4322,
+      "diff_pp": 36.9,
+      "newcombe95_pp": [
+        35.7,
+        38.1
+      ],
+      "z": 54.69,
+      "p": 0.0
+    },
+    "test_repetition__BeyondMimic": {
+      "n": 9395,
+      "sonic_k": 9320,
+      "base_k": 8023,
+      "diff_pp": 13.8,
+      "newcombe95_pp": [
+        13.1,
+        14.6
+      ],
+      "z": 35.49,
+      "p": 6.991742975837915e-276
+    },
+    "test_repetition__Any2Track": {
+      "n": 9395,
+      "sonic_k": 9320,
+      "base_k": 6520,
+      "diff_pp": 29.8,
+      "newcombe95_pp": [
+        28.9,
+        30.8
+      ],
+      "z": 56.15,
+      "p": 0.0
+    },
+    "phuma__BeyondMimic": {
+      "n": 68326,
+      "sonic_k": 66413,
+      "base_k": 50425,
+      "diff_pp": 23.4,
+      "newcombe95_pp": [
+        23.0,
+        23.8
+      ],
+      "z": 122.84,
+      "p": 0.0
+    },
+    "phuma__Any2Track": {
+      "n": 68326,
+      "sonic_k": 66413,
+      "base_k": 53636,
+      "diff_pp": 18.7,
+      "newcombe95_pp": [
+        18.4,
+        19.0
+      ],
+      "z": 105.79,
+      "p": 0.0
+    }
+  },
+  "V6_note": "백분율은 소수 첫째 자리로 반올림된 값이라 개수는 최대 ±0.5%p×N 만큼 어긋날 수 있습니다. p 값은 모두 0.001보다 훨씬 작아 논문의 P < 0.001과 맞습니다.",
+  "V6_mpjpe_reduction_pct": 42.05,
+  "V7_survival_openhomie": {
+    "sonic": [
+      197,
+      200
+    ],
+    "openhomie": [
+      86,
+      200
+    ],
+    "fisher_p": 7.928752719773588e-40,
+    "z": 12.2,
+    "z_p": 3.100747539359965e-34,
+    "welch_t_on_binary": 15.36,
+    "welch_p": 8.547015714742752e-37,
+    "diff_pp": 55.5,
+    "newcombe95_pp": [
+      48.0,
+      62.2
+    ],
+    "note": "분모 200 회가 어떤 조건인지 본문에 없습니다. 부록 S2.5의 OpenHomie 평가는 n = 80(20 속도 × 4 방향)입니다."
+  },
+  "V2_vla_table1A": {
+    "tasks": [
+      {
+        "task": "Apple to plate",
+        "k": 18,
+        "n": 20,
+        "rate": 0.9,
+        "wilson95": [
+          0.699,
+          0.972
+        ]
+      },
+      {
+        "task": "Object pickup (carrot)",
+        "k": 15,
+        "n": 20,
+        "rate": 0.75,
+        "wilson95": [
+          0.531,
+          0.888
+        ]
+      },
+      {
+        "task": "Object pickup (scrub)",
+        "k": 19,
+        "n": 20,
+        "rate": 0.95,
+        "wilson95": [
+          0.764,
+          0.991
+        ]
+      },
+      {
+        "task": "Open trash can (foot)",
+        "k": 7,
+        "n": 10,
+        "rate": 0.7,
+        "wilson95": [
+          0.397,
+          0.892
+        ]
+      },
+      {
+        "task": "Soda can to trash can",
+        "k": 6,
+        "n": 10,
+        "rate": 0.6,
+        "wilson95": [
+          0.313,
+          0.832
+        ]
+      },
+      {
+        "task": "Drill and box relocation",
+        "k": 7,
+        "n": 10,
+        "rate": 0.7,
+        "wilson95": [
+          0.397,
+          0.892
+        ]
+      }
+    ],
+    "unweighted_mean_5tasks_pct": 75.0,
+    "pooled_all_6_rows": {
+      "k": 72,
+      "n": 90,
+      "rate": 0.8,
+      "wilson95": [
+        0.706,
+        0.87
+      ]
+    }
+  },
+  "V3_fsq_vs_smpl_table1B": {
+    "assumption": "SMPL 시도 수 = 표 1 A 시도 수 (논문에 없음)",
+    "tasks": {
+      "carrot": {
+        "fsq": [
+          15,
+          20
+        ],
+        "smpl": [
+          12,
+          20
+        ],
+        "fisher_p": 0.5006,
+        "diff_pp": 15.0,
+        "newcombe95_pp": [
+          -13.4,
+          40.4
+        ]
+      },
+      "trash": {
+        "fsq": [
+          7,
+          10
+        ],
+        "smpl": [
+          2,
+          10
+        ],
+        "fisher_p": 0.0698,
+        "diff_pp": 50.0,
+        "newcombe95_pp": [
+          6.6,
+          74.0
+        ]
+      },
+      "soda": {
+        "fsq": [
+          6,
+          10
+        ],
+        "smpl": [
+          0,
+          10
+        ],
+        "fisher_p": 0.0108,
+        "diff_pp": 60.0,
+        "newcombe95_pp": [
+          20.1,
+          83.2
+        ]
+      }
+    },
+    "pooled_fsq": [
+      28,
+      40,
+      0.7
+    ],
+    "pooled_smpl": [
+      14,
+      40,
+      0.35
+    ],
+    "paper_avg_fsq_pct": 68.3,
+    "paper_avg_smpl_pct": 26.7,
+    "paper_avg_delta_pp": 41.7,
+    "pooled_diff_pp": 35.0
+  },
+  "V4_ablation_table3": {
+    "test_content": {
+      "fsq": 99.3,
+      "vq": 98.7,
+      "n": 7016,
+      "z": 3.57,
+      "p": 0.00036041815904487264,
+      "note": "단일 평가, 시드 변동 없음"
+    },
+    "test_repetition": {
+      "fsq": 99.6,
+      "vq": 99.3,
+      "n": 9395,
+      "z": 2.75,
+      "p": 0.005900575317107485,
+      "note": "단일 평가, 시드 변동 없음"
+    },
+    "mpjpe_gap_test_content_mm": 8.7,
+    "default_config_reported": {
+      "table3A_fsq_128gpu": {
+        "sr": 99.3,
+        "mpjpe": 26.6
+      },
+      "table3B_fsq_32_32_32gpu": {
+        "sr": 98.8,
+        "mpjpe": 27.5
+      },
+      "table3C_robot_encoder_128gpu": {
+        "sr": 99.6,
+        "mpjpe": 23.8
+      },
+      "fig2_largest_model_128gpu": {
+        "sr": 99.6,
+        "mpjpe": 23.8
+      }
+    }
+  },
+  "V5_quantizer_capacity_table3B": {
+    "dims_effect_at_16_levels_mm": -6.0,
+    "levels_effect_at_16_dims_mm": -5.4,
+    "dims_effect_at_32_levels_mm": -2.8,
+    "levels_effect_at_32_dims_mm": -2.2
+  },
+  "K1_table2_category_sums": {
+    "train": {
+      "sum_of_main_categories": 317189,
+      "reported_clips": 317189,
+      "unassigned": 0
+    },
+    "test_content": {
+      "sum_of_main_categories": 6998,
+      "reported_clips": 7016,
+      "unassigned": 18
+    },
+    "test_repetition": {
+      "sum_of_main_categories": 6306,
+      "reported_clips": 9395,
+      "unassigned": 3089
+    }
+  },
+  "K2_data_scale_frames_clips": {
+    "train_frames_from_611h_50hz_M": 110.0,
+    "mean_clip_seconds_full": 6.93,
+    "subsets": [
+      {
+        "frames_M": 4,
+        "clips_reported": 20000,
+        "mean_clip_s_implied": 4.0
+      },
+      {
+        "frames_M": 10,
+        "clips_reported": 50000,
+        "mean_clip_s_implied": 4.0
+      },
+      {
+        "frames_M": 22,
+        "clips_reported": 110000,
+        "mean_clip_s_implied": 4.0
+      },
+      {
+        "frames_M": 100,
+        "clips_reported": 317189,
+        "mean_clip_s_implied": 6.31
+      }
+    ],
+    "note": "전체 데이터의 평균 클립 길이는 약 6.9 s입니다. 부분집합은 같은 프레임 수에 클립이 더 많아 평균 길이가 약 4 s로 짧아집니다. 부분집합 추출 방식(하위 범주 균등 추출)이 이를 설명할 수 있지만 본문에 설명이 없습니다."
+  },
+  "V8_compute_check": {
+    "128_gpus_7_days_gpu_h": 21504,
+    "reported_gpu_h": 21000,
+    "note": "128 GPU × 7일 = 21,504 GPU 시간으로 본문 21k와 맞습니다. 2k, 9k 값의 벽시계 시간은 본문에 없습니다."
+  },
+  "K3_abstract_hours": {
+    "source_hours": 700,
+    "training_hours_after_filter": 611,
+    "note": "초록은 '100M+ frames from 700 hours'라고 쓰지만 학습에 쓴 것은 611시간입니다."
+  },
+  "K9_checkpoint_independence": {
+    "note": "그림 2 A–C 의 n = 6은 '평가 체크포인트' 6개입니다. 같은 학습 실행의 서로 다른 시점이므로 독립 반복이 아닙니다. Welch 검정의 독립 가정이 맞지 않으며, 시드 변동이 빠져 있습니다. P ≤ 0.011 값은 Data S1 없이는 재현할 수 없습니다."
+  }
+}
