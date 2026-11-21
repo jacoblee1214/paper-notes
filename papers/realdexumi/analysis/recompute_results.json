@@ -1,0 +1,637 @@
+{
+  "source": "arXiv:2606.06033 v2 (2026-06-06), 표 2·3·7·8·9, 그림 6·8 값",
+  "checks": {
+    "V1_avg_RealDexUMI": {
+      "recomputed": 88.75,
+      "pooled": 88.75,
+      "reported": 88.75
+    },
+    "V1_avg_w/o tactile": {
+      "recomputed": 70.0,
+      "pooled": 70.0,
+      "reported": 70.0
+    },
+    "V1_avg_State-as-action": {
+      "recomputed": 51.25,
+      "pooled": 51.25,
+      "reported": 51.25
+    },
+    "V1_avg_DP": {
+      "recomputed": 63.75,
+      "reported": 63.75
+    },
+    "V4_table8": {
+      "Drawer": {
+        "nonincreasing": true,
+        "final_subgoal": 17,
+        "table2_count": 17,
+        "match": true
+      },
+      "Tea": {
+        "nonincreasing": true,
+        "final_subgoal": 16,
+        "table2_count": 16,
+        "match": true
+      },
+      "Egg": {
+        "nonincreasing": true,
+        "final_subgoal": 14,
+        "table2_count": 14,
+        "match": true
+      },
+      "Multi-obj": {
+        "nonincreasing": true,
+        "final_subgoal": 20,
+        "table2_count": 20,
+        "match": true
+      }
+    },
+    "V5_survey": {
+      "UMI": {
+        "votes": [
+          18,
+          2,
+          0
+        ],
+        "sum": 20,
+        "plurality": "Low",
+        "reported_final": "Low",
+        "consistent": true
+      },
+      "DexViTac": {
+        "votes": [
+          15,
+          5,
+          0
+        ],
+        "sum": 20,
+        "plurality": "Low",
+        "reported_final": "Low",
+        "consistent": true
+      },
+      "DEXOP": {
+        "votes": [
+          0,
+          0,
+          20
+        ],
+        "sum": 20,
+        "plurality": "High",
+        "reported_final": "High",
+        "consistent": true
+      },
+      "DexExo": {
+        "votes": [
+          1,
+          6,
+          13
+        ],
+        "sum": 20,
+        "plurality": "High",
+        "reported_final": "High",
+        "consistent": true
+      },
+      "DEX-Mouse": {
+        "votes": [
+          1,
+          5,
+          14
+        ],
+        "sum": 20,
+        "plurality": "High",
+        "reported_final": "High",
+        "consistent": true
+      },
+      "Exo-ViHa": {
+        "votes": [
+          0,
+          1,
+          19
+        ],
+        "sum": 20,
+        "plurality": "High",
+        "reported_final": "High",
+        "consistent": true
+      },
+      "DexUMI": {
+        "votes": [
+          6,
+          10,
+          4
+        ],
+        "sum": 20,
+        "plurality": "Medium",
+        "reported_final": "Medium",
+        "consistent": true
+      },
+      "RealDexUMI": {
+        "votes": [
+          16,
+          4,
+          0
+        ],
+        "sum": 20,
+        "plurality": "Low",
+        "reported_final": "Low",
+        "consistent": true
+      }
+    },
+    "V6_data_scale": {
+      "hours": 100,
+      "episodes_min": 1600,
+      "mean_episode_s_upper": 225.0
+    }
+  },
+  "table2_counts": {
+    "RealDexUMI": [
+      20,
+      20,
+      17,
+      20,
+      16,
+      17,
+      14,
+      18
+    ],
+    "w/o tactile": [
+      18,
+      20,
+      9,
+      16,
+      11,
+      14,
+      12,
+      12
+    ],
+    "State-as-action": [
+      13,
+      17,
+      6,
+      7,
+      4,
+      9,
+      12,
+      14
+    ]
+  },
+  "table2_wilson": {
+    "RealDexUMI": [
+      [
+        0.8388748419471804,
+        0.9999999999999999
+      ],
+      [
+        0.8388748419471804,
+        0.9999999999999999
+      ],
+      [
+        0.639581135259243,
+        0.9476312541037833
+      ],
+      [
+        0.8388748419471804,
+        0.9999999999999999
+      ],
+      [
+        0.5839825677481064,
+        0.919342337420202
+      ],
+      [
+        0.639581135259243,
+        0.9476312541037833
+      ],
+      [
+        0.48102718164647645,
+        0.8545227551323957
+      ],
+      [
+        0.6989663547715127,
+        0.9721335187862318
+      ]
+    ],
+    "w/o tactile": [
+      [
+        0.6989663547715127,
+        0.9721335187862318
+      ],
+      [
+        0.8388748419471804,
+        0.9999999999999999
+      ],
+      [
+        0.2581978582556242,
+        0.6579146575496577
+      ],
+      [
+        0.5839825677481064,
+        0.919342337420202
+      ],
+      [
+        0.34208534245034233,
+        0.7418021417443759
+      ],
+      [
+        0.48102718164647645,
+        0.8545227551323957
+      ],
+      [
+        0.3865815007622531,
+        0.781193467627183
+      ],
+      [
+        0.3865815007622531,
+        0.781193467627183
+      ]
+    ],
+    "State-as-action": [
+      [
+        0.43285427668523624,
+        0.818808175898918
+      ],
+      [
+        0.639581135259243,
+        0.9476312541037833
+      ],
+      [
+        0.14547724486760422,
+        0.5189728183535234
+      ],
+      [
+        0.18119182410108203,
+        0.5671457233147638
+      ],
+      [
+        0.080657662579798,
+        0.4160174322518936
+      ],
+      [
+        0.2581978582556242,
+        0.6579146575496577
+      ],
+      [
+        0.3865815007622531,
+        0.781193467627183
+      ],
+      [
+        0.48102718164647645,
+        0.8545227551323957
+      ]
+    ]
+  },
+  "pooled_counts": {
+    "RealDexUMI": [
+      142,
+      160
+    ],
+    "w/o tactile": [
+      112,
+      160
+    ],
+    "State-as-action": [
+      82,
+      160
+    ],
+    "Diffusion Policy": [
+      102,
+      160
+    ]
+  },
+  "pooled_wilson": {
+    "RealDexUMI": [
+      0.8291855372862971,
+      0.9276436614557864
+    ],
+    "w/o tactile": [
+      0.6249851614393749,
+      0.7656363604920229
+    ],
+    "State-as-action": [
+      0.435669538105004,
+      0.5887443070157083
+    ],
+    "Diffusion Policy": [
+      0.5605966911485731,
+      0.7079556051792628
+    ]
+  },
+  "pooled_comparisons": {
+    "RealDexUMI vs w/o tactile": {
+      "diff_pts": 18.75,
+      "newcombe95_pts": [
+        9.97,
+        27.26
+      ],
+      "fisher_p": 4.9235614244541236e-05
+    },
+    "RealDexUMI vs State-as-action": {
+      "diff_pts": 37.5,
+      "newcombe95_pts": [
+        27.9,
+        46.17
+      ],
+      "fisher_p": 1.4412853729596293e-13
+    },
+    "RealDexUMI vs Diffusion Policy": {
+      "diff_pts": 25.0,
+      "newcombe95_pts": [
+        15.85,
+        33.68
+      ],
+      "fisher_p": 1.8148440366134823e-07
+    }
+  },
+  "per_task_fisher": {
+    "RealDexUMI vs w/o tactile": {
+      "Cube": {
+        "p_raw": 0.4872,
+        "p_holm": 1.0
+      },
+      "Multi-obj": {
+        "p_raw": 1.0,
+        "p_holm": 1.0
+      },
+      "Plug": {
+        "p_raw": 0.0187,
+        "p_holm": 0.1496
+      },
+      "Cap": {
+        "p_raw": 0.106,
+        "p_holm": 0.6362
+      },
+      "Tea": {
+        "p_raw": 0.176,
+        "p_holm": 0.88
+      },
+      "Drawer": {
+        "p_raw": 0.4506,
+        "p_holm": 1.0
+      },
+      "Egg": {
+        "p_raw": 0.7411,
+        "p_holm": 1.0
+      },
+      "Biman": {
+        "p_raw": 0.0648,
+        "p_holm": 0.4538
+      }
+    },
+    "RealDexUMI vs State-as-action": {
+      "Cube": {
+        "p_raw": 0.0083,
+        "p_holm": 0.0416
+      },
+      "Multi-obj": {
+        "p_raw": 0.2308,
+        "p_holm": 0.6923
+      },
+      "Plug": {
+        "p_raw": 0.0011,
+        "p_holm": 0.0064
+      },
+      "Cap": {
+        "p_raw": 0.0,
+        "p_holm": 0.0001
+      },
+      "Tea": {
+        "p_raw": 0.0004,
+        "p_holm": 0.0025
+      },
+      "Drawer": {
+        "p_raw": 0.0187,
+        "p_holm": 0.0748
+      },
+      "Egg": {
+        "p_raw": 0.7411,
+        "p_holm": 0.7411
+      },
+      "Biman": {
+        "p_raw": 0.2351,
+        "p_holm": 0.6923
+      }
+    },
+    "RealDexUMI vs Diffusion Policy": {
+      "Cube": {
+        "p_raw": 0.2308,
+        "p_holm": 0.6923
+      },
+      "Multi-obj": {
+        "p_raw": 0.0471,
+        "p_holm": 0.2827
+      },
+      "Plug": {
+        "p_raw": 0.0003,
+        "p_holm": 0.0026
+      },
+      "Cap": {
+        "p_raw": 0.0471,
+        "p_holm": 0.2827
+      },
+      "Tea": {
+        "p_raw": 0.0225,
+        "p_holm": 0.1573
+      },
+      "Drawer": {
+        "p_raw": 0.1552,
+        "p_holm": 0.6207
+      },
+      "Egg": {
+        "p_raw": 0.7164,
+        "p_holm": 0.7164
+      },
+      "Biman": {
+        "p_raw": 0.2351,
+        "p_holm": 0.6923
+      }
+    }
+  },
+  "cmh_stratified_by_task": {
+    "RealDexUMI vs w/o tactile": {
+      "mh_or": 3.87,
+      "cmh_p": 1.5377917204961733e-05
+    },
+    "RealDexUMI vs State-as-action": {
+      "mh_or": 8.45,
+      "cmh_p": 4.618527782440651e-14
+    },
+    "RealDexUMI vs Diffusion Policy": {
+      "mh_or": 4.86,
+      "cmh_p": 5.6217469457386926e-08
+    }
+  },
+  "mde_n20_power80": {
+    "0.5": 0.39,
+    "0.7": 0.285
+  },
+  "table3": {
+    "Cube": {
+      "counts": [
+        20,
+        20,
+        20
+      ],
+      "wilson": [
+        [
+          0.8388748419471804,
+          0.9999999999999999
+        ],
+        [
+          0.8388748419471804,
+          0.9999999999999999
+        ],
+        [
+          0.8388748419471804,
+          0.9999999999999999
+        ]
+      ]
+    },
+    "Drawer": {
+      "counts": [
+        17,
+        15,
+        16
+      ],
+      "wilson": [
+        [
+          0.639581135259243,
+          0.9476312541037833
+        ],
+        [
+          0.5312991223812559,
+          0.8881382985923344
+        ],
+        [
+          0.5839825677481064,
+          0.919342337420202
+        ]
+      ]
+    },
+    "total": {
+      "counts": 108,
+      "of": 120,
+      "pct": 90.0,
+      "wilson": [
+        0.833318258891048,
+        0.9418664079739892
+      ]
+    },
+    "fisher_drawer": {
+      "Drawer FR3 vs RM65": 0.6947646947646948,
+      "Drawer FR3 vs Adam-U": 1.0,
+      "Drawer RM65 vs Adam-U": 1.0
+    },
+    "fr3_equals_table2": {
+      "Cube": true,
+      "Drawer": true
+    }
+  },
+  "init_pose": {
+    "counts": 20,
+    "of": 20,
+    "wilson": [
+      0.8388748419471804,
+      0.9999999999999999
+    ],
+    "clopper_pearson": [
+      0.8315665290169146,
+      1.0
+    ],
+    "pose_counts": {
+      "left": 5,
+      "right": 5,
+      "center": 5,
+      "raised-center": 5
+    }
+  },
+  "fig8": {
+    "Cap": {
+      "Human": {
+        "succ": 10,
+        "of": 10,
+        "wilson": [
+          0.7224672001371106,
+          1.0
+        ]
+      },
+      "AVP": {
+        "succ": 2,
+        "of": 10,
+        "wilson": [
+          0.056682151454375246,
+          0.5098375284633583
+        ]
+      },
+      "Manus": {
+        "succ": 10,
+        "of": 10,
+        "wilson": [
+          0.7224672001371106,
+          1.0
+        ]
+      },
+      "RealDexUMI": {
+        "succ": 10,
+        "of": 10,
+        "wilson": [
+          0.7224672001371106,
+          1.0
+        ]
+      },
+      "fisher_RDU_vs_Manus_p": 1.0,
+      "fisher_RDU_vs_AVP_p": 0.0007144558228149558
+    },
+    "Tea": {
+      "Human": {
+        "succ": 10,
+        "of": 10,
+        "wilson": [
+          0.7224672001371106,
+          1.0
+        ]
+      },
+      "AVP": {
+        "succ": 1,
+        "of": 10,
+        "wilson": [
+          0.017876213095072924,
+          0.40415002679523854
+        ]
+      },
+      "Manus": {
+        "succ": 4,
+        "of": 10,
+        "wilson": [
+          0.1681803297062361,
+          0.6873262302663417
+        ]
+      },
+      "RealDexUMI": {
+        "succ": 10,
+        "of": 10,
+        "wilson": [
+          0.7224672001371106,
+          1.0
+        ]
+      },
+      "fisher_RDU_vs_Manus_p": 0.010835913312693499,
+      "fisher_RDU_vs_AVP_p": 0.00011907597046915932
+    },
+    "time_s": {
+      "Cap": {
+        "Human": 6,
+        "AVP": 273,
+        "Manus": 94,
+        "RealDexUMI": 40
+      },
+      "Tea": {
+        "Human": 15,
+        "AVP": 214,
+        "Manus": 86,
+        "RealDexUMI": 59
+      }
+    }
+  },
+  "survey_RDU_low_wilson": [
+    0.5839825677481064,
+    0.919342337420202
+  ]
+}
