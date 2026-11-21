@@ -1,0 +1,684 @@
+{
+ "t1_mean_check": {
+  "FastWAM": {
+   "mean_recomputed": 1.67,
+   "reported": 1.67,
+   "match": true,
+   "counts_out_of_60_integer": true,
+   "high_speed_mean": 1.0
+  },
+  "DynamicWAM": {
+   "mean_recomputed": 5.33,
+   "reported": 5.33,
+   "match": true,
+   "counts_out_of_60_integer": true,
+   "high_speed_mean": 7.0
+  },
+  "InternVLA-A1.5": {
+   "mean_recomputed": 4.0,
+   "reported": 4.0,
+   "match": true,
+   "counts_out_of_60_integer": true,
+   "high_speed_mean": 6.67
+  },
+  "DynamicVLA": {
+   "mean_recomputed": 17.33,
+   "reported": 17.33,
+   "match": true,
+   "counts_out_of_60_integer": true,
+   "high_speed_mean": 22.0
+  },
+  "PUMA": {
+   "mean_recomputed": 31.83,
+   "reported": 31.83,
+   "match": true,
+   "counts_out_of_60_integer": true,
+   "high_speed_mean": 21.0
+  },
+  "DynamicVLA+": {
+   "mean_recomputed": 25.17,
+   "reported": 25.17,
+   "match": true,
+   "counts_out_of_60_integer": true,
+   "high_speed_mean": 25.67
+  },
+  "PUMA+": {
+   "mean_recomputed": 41.5,
+   "reported": 41.5,
+   "match": true,
+   "counts_out_of_60_integer": true,
+   "high_speed_mean": 33.67
+  },
+  "PhysVAM": {
+   "mean_recomputed": 58.83,
+   "reported": 58.83,
+   "match": true,
+   "counts_out_of_60_integer": true,
+   "high_speed_mean": 57.67
+  }
+ },
+ "t1_best_per_scene": [
+  {
+   "scene": "Avocado",
+   "physvam_best": true,
+   "top_other": "DynamicVLA+"
+  },
+  {
+   "scene": "Beer",
+   "physvam_best": false,
+   "top_other": "PUMA+"
+  },
+  {
+   "scene": "Potato",
+   "physvam_best": true,
+   "top_other": "PUMA+"
+  },
+  {
+   "scene": "Apple",
+   "physvam_best": true,
+   "top_other": "PUMA+"
+  },
+  {
+   "scene": "Lemon",
+   "physvam_best": true,
+   "top_other": "PUMA"
+  },
+  {
+   "scene": "Can",
+   "physvam_best": true,
+   "top_other": "DynamicVLA"
+  },
+  {
+   "scene": "D-Bottle",
+   "physvam_best": false,
+   "top_other": "PUMA+"
+  },
+  {
+   "scene": "W-Bottle",
+   "physvam_best": true,
+   "top_other": "PUMA+"
+  },
+  {
+   "scene": "Egg",
+   "physvam_best": true,
+   "top_other": "InternVLA-A1.5"
+  },
+  {
+   "scene": "Cup",
+   "physvam_best": true,
+   "top_other": "PUMA"
+  }
+ ],
+ "t1_best_count": 8,
+ "seed_sd_checks": {
+  "PhysVAM 60.0±10.8": {
+   "ddof0_candidates": 2,
+   "ddof1_candidates": 0,
+   "ddof0_example": [
+    9,
+    13,
+    14
+   ],
+   "ddof1_example": null
+  },
+  "PhysVAM 41.67±10.27": {
+   "ddof0_candidates": 1,
+   "ddof1_candidates": 0,
+   "ddof0_example": [
+    6,
+    8,
+    11
+   ],
+   "ddof1_example": null
+  },
+  "PhysVAM 88.33±6.24": {
+   "ddof0_candidates": 1,
+   "ddof1_candidates": 0,
+   "ddof0_example": [
+    16,
+    18,
+    19
+   ],
+   "ddof1_example": null
+  },
+  "PUMA 10.0±0.0": {
+   "ddof0_candidates": 1,
+   "ddof1_candidates": 1,
+   "ddof0_example": [
+    2,
+    2,
+    2
+   ],
+   "ddof1_example": [
+    2,
+    2,
+    2
+   ]
+  },
+  "PUMA+ 85.0±12.25": {
+   "ddof0_candidates": 1,
+   "ddof1_candidates": 0,
+   "ddof0_example": [
+    14,
+    17,
+    20
+   ],
+   "ddof1_example": null
+  },
+  "DynamicVLA 23.33±2.36": {
+   "ddof0_candidates": 1,
+   "ddof1_candidates": 0,
+   "ddof0_example": [
+    4,
+    5,
+    5
+   ],
+   "ddof1_example": null
+  }
+ },
+ "paired_scene": {
+  "PhysVAM vs PUMA": {
+   "mean_diff_pp": 27.0,
+   "ci95_pp": [
+    6.67,
+    47.32
+   ],
+   "paired_t_p": 0.0148,
+   "wilcoxon_p": 0.0137
+  },
+  "PhysVAM vs PUMA+": {
+   "mean_diff_pp": 17.33,
+   "ci95_pp": [
+    -1.79,
+    36.45
+   ],
+   "paired_t_p": 0.0705,
+   "wilcoxon_p": 0.0645
+  },
+  "PhysVAM vs DynamicVLA": {
+   "mean_diff_pp": 41.5,
+   "ci95_pp": [
+    24.51,
+    58.49
+   ],
+   "paired_t_p": 0.0004,
+   "wilcoxon_p": 0.002
+  },
+  "PhysVAM vs DynamicVLA+": {
+   "mean_diff_pp": 33.67,
+   "ci95_pp": [
+    20.38,
+    46.95
+   ],
+   "paired_t_p": 0.0003,
+   "wilcoxon_p": 0.002
+  }
+ },
+ "sim_pooled_counts": {
+  "FastWAM": [
+   10,
+   600
+  ],
+  "DynamicWAM": [
+   32,
+   600
+  ],
+  "InternVLA-A1.5": [
+   24,
+   600
+  ],
+  "DynamicVLA": [
+   104,
+   600
+  ],
+  "PUMA": [
+   191,
+   600
+  ],
+  "DynamicVLA+": [
+   151,
+   600
+  ],
+  "PUMA+": [
+   249,
+   600
+  ],
+  "PhysVAM": [
+   353,
+   600
+  ]
+ },
+ "sim_pooled_comparisons": [
+  {
+   "comparison": "PhysVAM vs PUMA",
+   "k1": 353,
+   "n1": 600,
+   "k2": 191,
+   "n2": 600,
+   "diff_pp": 27.0,
+   "newcombe95_pp": [
+    21.5,
+    32.3
+   ],
+   "fisher_p": 0.0
+  },
+  {
+   "comparison": "PhysVAM vs PUMA+",
+   "k1": 353,
+   "n1": 600,
+   "k2": 249,
+   "n2": 600,
+   "diff_pp": 17.33,
+   "newcombe95_pp": [
+    11.7,
+    22.8
+   ],
+   "fisher_p": 0.0
+  },
+  {
+   "comparison": "PhysVAM vs DynamicVLA",
+   "k1": 353,
+   "n1": 600,
+   "k2": 104,
+   "n2": 600,
+   "diff_pp": 41.5,
+   "newcombe95_pp": [
+    36.4,
+    46.3
+   ],
+   "fisher_p": 0.0
+  }
+ ],
+ "ablation_mean_consistency": {
+  "표 6 대 표 2": {
+   "Without Value Branch": {
+    "mean_recomputed": 50.5,
+    "reported": 50.5,
+    "match": true
+   },
+   "Scalar Conditioning": {
+    "mean_recomputed": 40.83,
+    "reported": 40.83,
+    "match": true
+   },
+   "Binary Conditioning": {
+    "mean_recomputed": 48.5,
+    "reported": 48.5,
+    "match": true
+   },
+   "Single-Value (Single Query)": {
+    "mean_recomputed": 37.83,
+    "reported": 37.83,
+    "match": true
+   },
+   "Single-Value (Multiple Queries)": {
+    "mean_recomputed": 50.5,
+    "reported": 50.5,
+    "match": true
+   },
+   "Current-Value Prediction": {
+    "mean_recomputed": 46.5,
+    "reported": 46.5,
+    "match": true
+   },
+   "PhysVAM (Full)": {
+    "mean_recomputed": 58.83,
+    "reported": 58.83,
+    "match": true
+   }
+  },
+  "표 7 대 표 3": {
+   "Without Object Motion History": {
+    "mean_recomputed": 17.17,
+    "reported": 17.17,
+    "match": true
+   },
+   "RGB History": {
+    "mean_recomputed": 22.33,
+    "reported": 22.33,
+    "match": true
+   },
+   "Object Position History": {
+    "mean_recomputed": 30.67,
+    "reported": 30.67,
+    "match": true
+   },
+   "Object Velocity History (Oracle)": {
+    "mean_recomputed": 34.0,
+    "reported": 34.0,
+    "match": true
+   },
+   "Object Velocity History (Estimated)": {
+    "mean_recomputed": 33.67,
+    "reported": 33.67,
+    "match": true
+   },
+   "Without Robot Motion History": {
+    "mean_recomputed": 45.17,
+    "reported": 45.17,
+    "match": true
+   },
+   "PhysVAM (Full)": {
+    "mean_recomputed": 58.83,
+    "reported": 58.83,
+    "match": true
+   }
+  },
+  "표 5": {
+   "Main (3-CAM)": {
+    "mean_recomputed": 58.83,
+    "reported": 58.83,
+    "match": true
+   },
+   "Reweighted (3-CAM)": {
+    "mean_recomputed": 61.5,
+    "reported": 61.5,
+    "match": true
+   },
+   "Main (2-CAM)": {
+    "mean_recomputed": 50.0,
+    "reported": 50.0,
+    "match": true
+   }
+  }
+ },
+ "full_model_same_across_tables": false,
+ "ablation_vs_full": {
+  "Without Value Branch": {
+   "diff_pp_vs_full": -8.33,
+   "welch_seed3": {
+    "t": 7.316,
+    "p": 0.0032
+   },
+   "fisher_pooled_p": 0.004471
+  },
+  "Scalar Conditioning": {
+   "diff_pp_vs_full": -18.0,
+   "welch_seed3": {
+    "t": 14.279,
+    "p": 0.0002
+   },
+   "fisher_pooled_p": 0.0
+  },
+  "Binary Conditioning": {
+   "diff_pp_vs_full": -10.33,
+   "welch_seed3": {
+    "t": 5.891,
+    "p": 0.0067
+   },
+   "fisher_pooled_p": 0.000409
+  },
+  "Single-Value (Single Query)": {
+   "diff_pp_vs_full": -21.0,
+   "welch_seed3": {
+    "t": 9.859,
+    "p": 0.0024
+   },
+   "fisher_pooled_p": 0.0
+  },
+  "Single-Value (Multiple Queries)": {
+   "diff_pp_vs_full": -8.33,
+   "welch_seed3": {
+    "t": 8.032,
+    "p": 0.0057
+   },
+   "fisher_pooled_p": 0.004471
+  },
+  "Current-Value Prediction": {
+   "diff_pp_vs_full": -12.33,
+   "welch_seed3": {
+    "t": 7.61,
+    "p": 0.0023
+   },
+   "fisher_pooled_p": 2.4e-05
+  }
+ },
+ "history_vs_full": {
+  "Without Object Motion History": {
+   "diff_pp_vs_full": -41.66,
+   "welch_seed3": {
+    "t": 24.845,
+    "p": 0.0
+   }
+  },
+  "RGB History": {
+   "diff_pp_vs_full": -36.5,
+   "welch_seed3": {
+    "t": 27.926,
+    "p": 0.0
+   }
+  },
+  "Object Position History": {
+   "diff_pp_vs_full": -28.16,
+   "welch_seed3": {
+    "t": 18.756,
+    "p": 0.0001
+   }
+  },
+  "Object Velocity History (Estimated)": {
+   "diff_pp_vs_full": -25.16,
+   "welch_seed3": {
+    "t": 23.479,
+    "p": 0.0002
+   }
+  },
+  "Without Robot Motion History": {
+   "diff_pp_vs_full": -13.66,
+   "welch_seed3": {
+    "t": 8.991,
+    "p": 0.001
+   }
+  }
+ },
+ "oracle_vs_estimated_velocity": {
+  "t": 0.169,
+  "p": 0.8796
+ },
+ "reweight": {
+  "welch_seed3": {
+   "t": 2.345,
+   "p": 0.0894
+  },
+  "fisher_pooled": {
+   "comparison": "Reweighted vs Main (3-CAM), 풀링",
+   "k1": 369,
+   "n1": 600,
+   "k2": 353,
+   "n2": 600,
+   "diff_pp": 2.67,
+   "newcombe95_pp": [
+    -2.9,
+    8.2
+   ],
+   "fisher_p": 0.376433
+  },
+  "scene_paired": {
+   "n_up": 6,
+   "n_down": 4,
+   "mean_diff_pp": 2.67
+  },
+  "scene_paired_t_p": 0.2946
+ },
+ "view_paired": {
+  "mean_diff_pp": 8.83,
+  "scene_paired_t_p": 0.1753,
+  "n_up": 6,
+  "n_down": 3
+ },
+ "plus_variants_welch": {
+  "DynamicVLA+ vs DynamicVLA": {
+   "t": 15.375,
+   "p": 0.0022
+  },
+  "PUMA+ vs PUMA": {
+   "t": 5.034,
+   "p": 0.0124
+  },
+  "PhysVAM vs PUMA+": {
+   "t": 9.091,
+   "p": 0.0022
+  }
+ },
+ "time_table3_vs_table7_mismatch": [
+  "Without Robot Motion History"
+ ],
+ "real_world": {
+  "DynamicVLA": {
+   "scenario_avg": {
+    "Conveyor": 40.0,
+    "Turntable": 22.5,
+    "Rolling": 25.0
+   },
+   "macro_overall": 29.17,
+   "pooled_k_n": [
+    30,
+    100
+   ],
+   "pooled_pct": 30.0,
+   "wilson95_pooled": [
+    21.9,
+    39.6
+   ]
+  },
+  "PUMA": {
+   "scenario_avg": {
+    "Conveyor": 47.5,
+    "Turntable": 32.5,
+    "Rolling": 30.0
+   },
+   "macro_overall": 36.67,
+   "pooled_k_n": [
+    38,
+    100
+   ],
+   "pooled_pct": 38.0,
+   "wilson95_pooled": [
+    29.1,
+    47.8
+   ]
+  },
+  "PhysVAM": {
+   "scenario_avg": {
+    "Conveyor": 72.5,
+    "Turntable": 65.0,
+    "Rolling": 55.0
+   },
+   "macro_overall": 64.17,
+   "pooled_k_n": [
+    66,
+    100
+   ],
+   "pooled_pct": 66.0,
+   "wilson95_pooled": [
+    56.3,
+    74.5
+   ]
+  }
+ },
+ "real_world_comparisons": [
+  {
+   "comparison": "PhysVAM vs PUMA (풀링 100회)",
+   "k1": 66,
+   "n1": 100,
+   "k2": 38,
+   "n2": 100,
+   "diff_pp": 28.0,
+   "newcombe95_pp": [
+    14.2,
+    40.3
+   ],
+   "fisher_p": 0.000121
+  },
+  {
+   "comparison": "PhysVAM vs DynamicVLA (풀링 100회)",
+   "k1": 66,
+   "n1": 100,
+   "k2": 30,
+   "n2": 100,
+   "diff_pp": 36.0,
+   "newcombe95_pp": [
+    22.3,
+    47.8
+   ],
+   "fisher_p": 1e-06
+  }
+ ],
+ "real_world_scene_fisher": {
+  "Conveyor": {
+   "physvam": [
+    29,
+    40
+   ],
+   "puma": [
+    19,
+    40
+   ],
+   "fisher_p": 0.0392
+  },
+  "Turntable": {
+   "physvam": [
+    26,
+    40
+   ],
+   "puma": [
+    13,
+    40
+   ],
+   "fisher_p": 0.0069
+  },
+  "Rolling": {
+   "physvam": [
+    11,
+    20
+   ],
+   "puma": [
+    6,
+    20
+   ],
+   "fisher_p": 0.2003
+  }
+ },
+ "real_world_object_paired": {
+  "mean_diff_pp": 28.0,
+  "paired_t_p": 0.003,
+  "n": 5
+ },
+ "real_world_object_gain_range": [
+  35.0,
+  15.0,
+  25.0,
+  40.0,
+  25.0
+ ],
+ "headline": {
+  "sim_gain_vs_PUMA_pp": 27.0,
+  "sim_gain_vs_PUMA_plus_pp": 17.33,
+  "real_gain_vs_PUMA_pp": 27.5
+ },
+ "time_note": {
+  "PhysVAM": 8.23,
+  "PUMA": 9.56,
+  "PUMA+": 8.83,
+  "pearson_r_SR_vs_time_8methods": -0.885
+ },
+ "lift_miss_16": {
+  "gap": 0.439,
+  "ci95": [
+   0.358,
+   0.52
+  ],
+  "welch_p": "2.88e-21",
+  "frac_up_lift": [
+   96,
+   119,
+   0.807
+  ],
+  "frac_down_miss": [
+   77,
+   101,
+   0.762
+  ]
+ },
+ "lift_miss_8_gap": 0.253,
+ "lift_miss_note": "220회는 같은 에피소드 안에 묶여 있다. 에피소드 단위 군집 보정이 없어 Welch p는 과대평가일 수 있다. 33개 에피소드 쌍체 +0.319와 부트스트랩 CI [+0.125, +0.431]은 에피소드별 값이 없어 재계산하지 못했다."
+}
