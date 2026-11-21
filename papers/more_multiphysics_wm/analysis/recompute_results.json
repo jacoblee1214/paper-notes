@@ -1,0 +1,201 @@
+{
+ "table4_relative_change_pct": {
+  "rigid_np": {
+   "RMSE": -25.8,
+   "CD": -14.8,
+   "Lap_or_Rig_abs": [
+    0.0003,
+    0.0
+   ],
+   "Lap_or_Rig_rel": -100.0
+  },
+  "deform_np": {
+   "RMSE": -50.0,
+   "CD": -16.1,
+   "Lap_or_Rig_abs": [
+    0.0041,
+    0.0022
+   ],
+   "Lap_or_Rig_rel": -46.3
+  },
+  "deform_p": {
+   "RMSE": -27.6,
+   "CD": -11.4,
+   "Lap_or_Rig_abs": [
+    0.0063,
+    0.0051
+   ],
+   "Lap_or_Rig_rel": -19.0
+  }
+ },
+ "table3_vs_full": {
+  "Single Expert": {
+   "rigid_np": {
+    "worse": 3,
+    "tie": 0,
+    "better": 0
+   },
+   "deform_np": {
+    "worse": 3,
+    "tie": 0,
+    "better": 0
+   },
+   "deform_p": {
+    "worse": 3,
+    "tie": 0,
+    "better": 0
+   }
+  },
+  "Implicit Router": {
+   "rigid_np": {
+    "worse": 2,
+    "tie": 1,
+    "better": 0
+   },
+   "deform_np": {
+    "worse": 3,
+    "tie": 0,
+    "better": 0
+   },
+   "deform_p": {
+    "worse": 3,
+    "tie": 0,
+    "better": 0
+   }
+  },
+  "Implicit MoE": {
+   "rigid_np": {
+    "worse": 3,
+    "tie": 0,
+    "better": 0
+   },
+   "deform_np": {
+    "worse": 3,
+    "tie": 0,
+    "better": 0
+   },
+   "deform_p": {
+    "worse": 2,
+    "tie": 1,
+    "better": 0
+   }
+  },
+  "w/o Self-Rollout": {
+   "rigid_np": {
+    "worse": 2,
+    "tie": 1,
+    "better": 0
+   },
+   "deform_np": {
+    "worse": 3,
+    "tie": 0,
+    "better": 0
+   },
+   "deform_p": {
+    "worse": 3,
+    "tie": 0,
+    "better": 0
+   }
+  }
+ },
+ "implicit_moe_tie_example": {
+  "deform_p_CD": [
+   0.039,
+   0.039
+  ]
+ },
+ "table2_ours_minus_privileged": {
+  "rigid_np": {
+   "RMSE": 0.001,
+   "CD": 0.0,
+   "Lap/Rig": 0.0
+  },
+  "deform_np": {
+   "RMSE": 0.006,
+   "CD": -0.005,
+   "Lap/Rig": -0.0007
+  },
+  "deform_p": {
+   "RMSE": -0.003,
+   "CD": 0.001,
+   "Lap/Rig": -0.0018
+  }
+ },
+ "rounding_resolution_rmse_pct": {
+  "rigid_np": {
+   "rmse_half_step_rel_pct": 2.3
+  },
+  "deform_np": {
+   "rmse_half_step_rel_pct": 2.1
+  },
+  "deform_p": {
+   "rmse_half_step_rel_pct": 1.9
+  }
+ },
+ "mpc_sim_10trials": {
+  "fisher_two_sided_p": 0.35,
+  "wilson95_moe": [
+   23.7,
+   76.3
+  ],
+  "wilson95_dinowm": [
+   5.7,
+   51.0
+  ],
+  "newcombe_diff_pp": [
+   -10.7,
+   60.0
+  ],
+  "n_per_arm_for_80pct_power_50_vs_20": 39
+ },
+ "table5_gating": {
+  "Push-X": {
+   "reported_pct": 95.4,
+   "implied_k_of_50": 47.7,
+   "nearest_k": 48,
+   "nearest_pct": 96.0,
+   "wilson95_nearest_k": [
+    86.5,
+    98.9
+   ],
+   "k_over_50_matches_reported": false
+  },
+  "Manipulate Toy": {
+   "reported_pct": 94.9,
+   "implied_k_of_50": 47.45,
+   "nearest_k": 47,
+   "nearest_pct": 94.0,
+   "wilson95_nearest_k": [
+    83.8,
+    97.9
+   ],
+   "k_over_50_matches_reported": false
+  },
+  "Soft Grasp": {
+   "reported_pct": 99.8,
+   "implied_k_of_50": 49.9,
+   "nearest_k": 50,
+   "nearest_pct": 100.0,
+   "wilson95_nearest_k": [
+    92.9,
+    100.0
+   ],
+   "k_over_50_matches_reported": false
+  },
+  "overall": {
+   "unweighted_mean_of_three": 96.7,
+   "k_of_150_145_pct": 96.67,
+   "wilson95_145_of_150": [
+    92.4,
+    98.6
+   ]
+  }
+ },
+ "dataset_episodes": {
+  "paper_sim": 20000,
+  "paper_real": 7000,
+  "paper_sum": 27000,
+  "project_page_claim": 38700,
+  "gap": 11700
+ }
+}
