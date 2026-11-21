@@ -1,0 +1,409 @@
+{
+  "atari_normed": {
+    "recomputed_mean": {
+      "EfficientZero": 1.943,
+      "DreamerV3": 1.059,
+      "BBF": 2.247,
+      "EZ-V2": 2.68
+    },
+    "recomputed_median": {
+      "EfficientZero": 1.09,
+      "DreamerV3": 0.34,
+      "BBF": 0.917,
+      "EZ-V2": 1.235
+    },
+    "reported_mean": {
+      "EfficientZero": 1.945,
+      "DreamerV3": 1.12,
+      "BBF": 2.247,
+      "EZ-V2": 2.428
+    },
+    "reported_median": {
+      "EfficientZero": 1.09,
+      "DreamerV3": 0.49,
+      "BBF": 0.917,
+      "EZ-V2": 1.286
+    },
+    "note": "DreamerV3 평균·중앙값은 Up N Down을 뺀 25개 게임 기준으로 계산했다(논문 값과 차이가 나면 이 때문일 수 있다)."
+  },
+  "atari_ez_contrib": {
+    "top4": [
+      [
+        "Breakout",
+        13.833
+      ],
+      [
+        "Demon Attack",
+        12.437
+      ],
+      [
+        "Asterix",
+        7.428
+      ],
+      [
+        "Krull",
+        7.009
+      ]
+    ],
+    "mean_without_top2": 1.808,
+    "mean_without_top1": 2.234,
+    "n_games": 26
+  },
+  "atari_vs_dreamerv3": {
+    "n_games": 25,
+    "wins": 21,
+    "ties": 1,
+    "losses": 3,
+    "wilcoxon_p_normed": 0.000204,
+    "losing_games": [
+      "Hero",
+      "Kangaroo",
+      "Private Eye"
+    ]
+  },
+  "dmc_block_stats": {
+    "recomputed": {
+      "Proprio50k": {
+        "mean": [
+          793.5,
+          861.8,
+          695.6,
+          901.8
+        ],
+        "median": [
+          865.8,
+          952.8,
+          747.7,
+          942.2
+        ]
+      },
+      "Vision100k": {
+        "mean": [
+          650.8,
+          591.5,
+          661.7,
+          896.2
+        ],
+        "median": [
+          749.6,
+          574.8,
+          702.2,
+          936.2
+        ]
+      },
+      "Proprio100k": {
+        "mean": [
+          304.3,
+          600.6,
+          300.1,
+          553.1
+        ],
+        "median": [
+          247.0,
+          678.2,
+          292.6,
+          583.9
+        ]
+      },
+      "Vision200k": {
+        "mean": [
+          231.8,
+          239.7,
+          331.0,
+          552.6
+        ],
+        "median": [
+          203.6,
+          288.5,
+          312.6,
+          553.4
+        ]
+      },
+      "Proprio_all20": {
+        "mean": [
+          548.9,
+          731.2,
+          497.8,
+          727.4
+        ]
+      },
+      "Vision_all20": {
+        "mean": [
+          441.3,
+          415.6,
+          496.3,
+          724.4
+        ]
+      }
+    },
+    "reported_mean_row_100k_200k": {
+      "Proprio100k": [
+        552.0,
+        740.9,
+        517.1,
+        723.2
+      ],
+      "Vision200k": [
+        437.3,
+        410.3,
+        498.5,
+        726.1
+      ]
+    },
+    "reported_median_row_100k_200k": {
+      "Proprio100k": [
+        633.3,
+        806.4,
+        543.4,
+        800.4
+      ],
+      "Vision200k": [
+        324.9,
+        330.6,
+        484.5,
+        788.1
+      ]
+    }
+  },
+  "dmc_text_checks": {
+    "text_723.2_across_20_tasks": {
+      "mean_hard10_proprio": 553.1,
+      "mean_all20_proprio": 727.4
+    },
+    "text_726.1_vision": {
+      "mean_hard10_vision": 552.6,
+      "mean_all20_vision": 724.4,
+      "vs_DreamerV3_hard10_pct": 67.0,
+      "vs_DreamerV3_all20_pct": 45.9
+    }
+  },
+  "dmc_new_record_claim": {
+    "vision_tasks_ez_best": 16,
+    "n_tasks": 20,
+    "claim": "16 of 20 (Vision Control, 본문 5.2)",
+    "note": "기준선은 Table 2의 CURL, DrQ-v2, DreamerV3만 본다(SAC, TD-MPC2는 Vision 표에 없음)"
+  },
+  "dmc_mean_row_check": {
+    "reported_mean_Proprio100k_row": [
+      552.0,
+      740.9,
+      517.1,
+      723.2
+    ],
+    "recomputed_hard10_mean_Proprio": [
+      304.3,
+      600.6,
+      300.1,
+      553.1
+    ],
+    "recomputed_all20_mean_Proprio": [
+      548.9,
+      731.2,
+      497.8,
+      727.4
+    ],
+    "reported_mean_Vision200k_row": [
+      437.3,
+      410.3,
+      498.5,
+      726.1
+    ],
+    "recomputed_hard10_mean_Vision": [
+      231.8,
+      239.7,
+      331.0,
+      552.6
+    ],
+    "recomputed_all20_mean_Vision": [
+      441.3,
+      415.6,
+      496.3,
+      724.4
+    ],
+    "reported_median_row_Proprio": [
+      633.3,
+      806.4,
+      543.4,
+      800.4
+    ],
+    "reported_median_row_Vision": [
+      324.9,
+      330.6,
+      484.5,
+      788.1
+    ],
+    "recomputed_all20_median": {
+      "Proprio_all20_median": [
+        641.0,
+        800.6,
+        503.3,
+        800.4
+      ],
+      "Vision_all20_median": [
+        388.3,
+        349.6,
+        514.3,
+        796.9
+      ]
+    }
+  },
+  "win_count_vs_dreamerv3": {
+    "atari": [
+      21,
+      25
+    ],
+    "dmc_wins": 35,
+    "dmc_n": 40,
+    "total_wins": 56,
+    "total_n": 65,
+    "reported": "50 of 66 (Abstract, 서론)",
+    "note": "Up N Down(DreamerV3 값 없음)은 분모에서 뺐다. 논문의 66개는 Atari 26 + DMC 40 = 66이다."
+  },
+  "dmc_vs_dreamerv3_wilcoxon": {
+    "n": 40,
+    "median_diff": 201.6,
+    "p_two_sided": 0.0,
+    "note": "블록(Proprio/Vision, 50k/100k/200k)을 합쳐 짝지은 40개 과제. 서로 다른 벤치마크 점수 차이를 합쳐 쓰는 것은 근사다."
+  },
+  "bootstrap_task_ci": {
+    "Atari_normed_EZV2": {
+      "mean": 2.68,
+      "ci95_mean": [
+        1.368,
+        4.227
+      ],
+      "iqm": 1.305,
+      "ci95_iqm": [
+        0.587,
+        2.914
+      ],
+      "n": 26
+    },
+    "Proprio100k_EZV2": {
+      "mean": 553.1,
+      "ci95_mean": [
+        405.6,
+        701.2
+      ],
+      "n": 10
+    },
+    "Vision200k_EZV2": {
+      "mean": 552.6,
+      "ci95_mean": [
+        410.9,
+        691.8
+      ],
+      "n": 10
+    },
+    "Proprio100k_DreamerV3": {
+      "mean": 300.1,
+      "ci95_mean": [
+        188.9,
+        405.4
+      ],
+      "n": 10
+    },
+    "Vision200k_DreamerV3": {
+      "mean": 331.0,
+      "ci95_mean": [
+        201.2,
+        464.4
+      ],
+      "n": 10
+    },
+    "Proprio100k_diff": {
+      "mean_diff": 253.0,
+      "ci95_mean_diff": [
+        79.7,
+        421.9
+      ],
+      "wilcoxon_p": 0.03711,
+      "n": 10
+    },
+    "Vision200k_diff": {
+      "mean_diff": 221.7,
+      "ci95_mean_diff": [
+        103.3,
+        338.0
+      ],
+      "wilcoxon_p": 0.00977,
+      "n": 10
+    }
+  },
+  "ablation_tables_4_6": {
+    "proprio:Multi-step TD": {
+      "orig_wins": 6,
+      "ties": 0,
+      "var_wins": 1,
+      "n": 7,
+      "wilcoxon_p": 0.0312,
+      "mean_orig": 748.7,
+      "mean_var": 595.4
+    },
+    "proprio:GAE": {
+      "orig_wins": 7,
+      "ties": 0,
+      "var_wins": 0,
+      "n": 7,
+      "wilcoxon_p": 0.0156,
+      "mean_orig": 748.7,
+      "mean_var": 567.0
+    },
+    "proprio:Sample MCTS": {
+      "orig_wins": 7,
+      "ties": 0,
+      "var_wins": 0,
+      "n": 7,
+      "wilcoxon_p": 0.0156,
+      "mean_orig": 748.7,
+      "mean_var": 496.7
+    },
+    "vision:Multi-step TD": {
+      "orig_wins": 6,
+      "ties": 0,
+      "var_wins": 1,
+      "n": 7,
+      "wilcoxon_p": 0.0469,
+      "mean_orig": 640.1,
+      "mean_var": 556.4
+    },
+    "vision:GAE": {
+      "orig_wins": 5,
+      "ties": 0,
+      "var_wins": 2,
+      "n": 7,
+      "wilcoxon_p": 0.2188,
+      "mean_orig": 640.1,
+      "mean_var": 589.6
+    },
+    "vision:Sample MCTS": {
+      "orig_wins": 6,
+      "ties": 0,
+      "var_wins": 1,
+      "n": 7,
+      "wilcoxon_p": 0.0312,
+      "mean_orig": 640.1,
+      "mean_var": 456.7
+    },
+    "atari3:Multi-step TD": {
+      "orig_wins": 3,
+      "var_wins": 0,
+      "n": 3
+    },
+    "atari3:GAE": {
+      "orig_wins": 2,
+      "var_wins": 1,
+      "n": 3
+    }
+  },
+  "ablation_consistency_with_table2": {
+    "proprio": true,
+    "vision": true
+  },
+  "compute_ratio": {
+    "flops_ratio_tdmpc2_over_ez": 766.0,
+    "params_ratio": 3.77,
+    "time_ratio_100k": 1.22,
+    "claim": "본문 J.3: 1000배 적은 FLOPs, 약 4배 적은 파라미터"
+  }
+}
