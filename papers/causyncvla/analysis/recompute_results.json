@@ -1,0 +1,276 @@
+{
+  "libero_native": {
+    "cauSync": 469,
+    "pi05_10step": 456,
+    "n": 500,
+    "pct_cauSync": 93.8,
+    "pct_base": 91.2,
+    "wilson_cauSync_pct": [
+      91.33,
+      95.6
+    ],
+    "wilson_base_pct": [
+      88.39,
+      93.38
+    ],
+    "diff_pp": 2.6,
+    "newcombe_diff_pp": [
+      -0.69,
+      5.93
+    ],
+    "fisher_unpaired_p": 0.1493,
+    "chi2_unpaired_p": 0.1186,
+    "paired_mcnemar_bounds": {
+      "note": "w-l=13만 알려져 있어 쌍 검정은 계산할 수 없다. l(상대만 성공한 start 수)에 따라 p가 달라진다.",
+      "l=0": 0.000244,
+      "l=5": 0.0106,
+      "l=10": 0.0351,
+      "l=20": 0.0984,
+      "l=40": 0.213,
+      "l=80": 0.362
+    },
+    "per_task_counts": {
+      "pi05": [
+        46,
+        50,
+        47,
+        50,
+        48,
+        43,
+        45,
+        49,
+        29,
+        49
+      ],
+      "cauSync": [
+        49,
+        50,
+        49,
+        47,
+        48,
+        44,
+        46,
+        50,
+        38,
+        48
+      ]
+    }
+  },
+  "ablation_pairs": {
+    "memory_prediction (w/ vs w/o latent WM)": {
+      "wins": 80,
+      "losses": 14,
+      "k_full": 467,
+      "k_ref": 401,
+      "check_ref_from_wins_losses": 401,
+      "gain_pp": 13.2,
+      "paper_gain_pp": 13.2,
+      "gain_ci95_pp_clopper_pearson_on_discordant": [
+        9.88,
+        15.65
+      ],
+      "exact_mcnemar_p": 2.12e-12,
+      "paper_p": "2.12e-12",
+      "bonferroni_4_significant": true
+    },
+    "PFWS, full controller (w/ vs w/o PFWS)": {
+      "wins": 24,
+      "losses": 17,
+      "k_full": 467,
+      "k_ref": 460,
+      "check_ref_from_wins_losses": 460,
+      "gain_pp": 1.4,
+      "paper_gain_pp": 1.4,
+      "gain_ci95_pp_clopper_pearson_on_discordant": [
+        -1.29,
+        3.88
+      ],
+      "exact_mcnemar_p": 0.349,
+      "paper_p": "0.3489",
+      "bonferroni_4_significant": false
+    },
+    "action distillation (w/ vs w/o action loss)": {
+      "wins": 54,
+      "losses": 18,
+      "k_full": 464,
+      "k_ref": 428,
+      "check_ref_from_wins_losses": 428,
+      "gain_pp": 7.2,
+      "paper_gain_pp": 7.2,
+      "gain_ci95_pp_clopper_pearson_on_discordant": [
+        3.86,
+        9.92
+      ],
+      "exact_mcnemar_p": 2.57e-05,
+      "paper_p": "2.57e-5",
+      "bonferroni_4_significant": true
+    },
+    "PFWS, frozen policy (vs cold)": {
+      "wins": 26,
+      "losses": 15,
+      "k_full": 465,
+      "k_ref": 454,
+      "check_ref_from_wins_losses": 454,
+      "gain_pp": 2.2,
+      "paper_gain_pp": 2.2,
+      "gain_ci95_pp_clopper_pearson_on_discordant": [
+        -0.5,
+        4.57
+      ],
+      "exact_mcnemar_p": 0.117,
+      "paper_p": "0.1173",
+      "bonferroni_4_significant": false
+    }
+  },
+  "consistency_table5_vs_table10": {
+    "full_native_run_469_vs_table5_full_467": "Table 5 상단 Full 93.40 = 467/500 (별도 실행), native 93.80 = 469/500",
+    "action_loss_464_minus_428_equals_54_minus_18": true,
+    "latent_wm_467_minus_401_equals_80_minus_14": true,
+    "pfws_467_minus_460_equals_24_minus_17": true,
+    "frozen_465_minus_454_equals_26_minus_15": true
+  },
+  "table2_timed": {
+    "cauSync_vs_pi05_fisher_p": 0.3757,
+    "cauSync_vs_pi05_diff_pp": 5,
+    "cauSync_vs_pi05_newcombe_pp": [
+      -4.07,
+      14.15
+    ],
+    "cauSync_vs_rolling_fisher_p": 0.4986,
+    "response_ratio_p50": 2.128,
+    "replans_ratio": 1.276,
+    "actions_ratio": 1.275
+  },
+  "real_robot": {
+    "pooled_cauSync": "60/69",
+    "pooled_pi05": "50/69",
+    "pct_cauSync": 86.96,
+    "pct_pi05": 72.46,
+    "wilson_cauSync_pct": [
+      77.03,
+      92.98
+    ],
+    "wilson_pi05_pct": [
+      60.95,
+      81.61
+    ],
+    "paper_wilson_cauSync_pct": [
+      77.03,
+      92.98
+    ],
+    "paper_wilson_pi05_pct": [
+      60.95,
+      81.61
+    ],
+    "diff_pp": 14.49,
+    "newcombe_diff_pp": [
+      1.0,
+      27.49
+    ],
+    "fisher_unpaired_p": 0.0555,
+    "chi2_unpaired_p": 0.0343,
+    "cmh_chi2_by_task": 4.395,
+    "cmh_p": 0.0361,
+    "per_task_fisher_p": {
+      "stacking": 0.7222,
+      "placement": 0.047,
+      "sorting": 0.7222
+    },
+    "per_task_counts": {
+      "pi05": {
+        "stacking": 17,
+        "placement": 16,
+        "sorting": 17
+      },
+      "cauSync": {
+        "stacking": 19,
+        "placement": 22,
+        "sorting": 19
+      },
+      "n_per_task": 23
+    },
+    "fisher_p_already_above_05": true,
+    "min_cauSync_relabel_to_lose_p05_chi2": 1,
+    "min_cauSync_relabel_to_lose_p05_fisher": 0,
+    "execution_errors": {
+      "pi05_runs": 15,
+      "cauSync_runs": 5
+    }
+  },
+  "latency_ratios": {
+    "table16_10step_over_shared_warm (5.04 claimed)": 5.039,
+    "table16_10step_over_1step (decomp part 1)": 1.667,
+    "table16_1step_over_shared_warm (decomp part 2)": 3.023,
+    "product_of_parts": 5.039,
+    "table16_10step_over_isolated (12.52 claimed)": 12.528,
+    "table1_plans_per_s_ratio (5.04 claimed)": 5.04,
+    "table1_actions_per_s_check_5x_plans": 419.8,
+    "table2_response_p50_ratio": 2.128
+  },
+  "table3_ratios": {
+    "action_mse_stale_over_full (10.5 claimed)": 10.53,
+    "action_mse_age_endpoint_over_shuffled (4x claimed)": 4.16,
+    "kv_error_full_lowest": true
+  },
+  "table4_flips": {
+    "boundary_flips_rel_change_pct": -47.1,
+    "boundary_excess_w_o": 0.88,
+    "boundary_excess_w": -0.03,
+    "note": "Table 4는 비율만 있어 쌍 검정 불가. 'nearly halving'은 -47%."
+  },
+  "checkpoint_selection": {
+    "weighted_action_mse_by_milestone": {
+      "6k": 0.00807,
+      "12k": 0.00686,
+      "18k": 0.00648
+    },
+    "argmin_weighted_val": "18k",
+    "reported_checkpoint": "12k",
+    "note": "config의 selection-metric은 val/action_weighted(최소)인데 논문은 12k를 보고한다. 12k는 native 500 starts에서 고른 것으로 보인다(Fig. 8b, App. A)."
+  },
+  "table13": {
+    "pairs_sum (320 expected)": 320,
+    "action_mse_stale_over_updated_by_bin": [
+      6.8,
+      9.8,
+      9.3,
+      11.3,
+      8.7,
+      39.3
+    ]
+  },
+  "table12_totals": {
+    "w/o latent WM": 401,
+    "w/o PFWS": 460,
+    "Sync PFWS": 460,
+    "CauSyncVLA": 467
+  },
+  "table12_totals_expected": {
+    "w/o latent WM": 401,
+    "w/o PFWS": 460,
+    "Sync PFWS": 460,
+    "CauSyncVLA": 467
+  },
+  "libero_plus": {
+    "sync_pfws1_pct": 80.15,
+    "cauSync_pfws_pct": 78.09,
+    "gap_sync_minus_cauSync_pp": 2.06,
+    "gap_unpaired_fisher_p (approx, pairs not given)": 0.0771,
+    "sync_cold1_pct": 78.36,
+    "cauSync_noPFWS_pct": 76.38,
+    "gap_cold_pp": 1.98,
+    "family_episode_sum_ok": true,
+    "family_cold1_sum_ok": true,
+    "family_cauSync_pfws_sum_ok": true
+  },
+  "table6_check": {
+    "stacking_base_17_of_23_pct": 73.91,
+    "stacking_cs_19_of_23_pct": 82.61,
+    "placement_base_16_of_23_pct": 69.57,
+    "placement_cs_22_of_23_pct": 95.65,
+    "sorting_base_17_of_23_pct": 73.91,
+    "sorting_cs_19_of_23_pct": 82.61,
+    "pooled_50_of_69_pct": 72.46,
+    "pooled_60_of_69_pct": 86.96
+  }
+}
