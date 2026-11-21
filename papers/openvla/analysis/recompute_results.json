@@ -1,0 +1,410 @@
+{
+  "bridge_mean_pct": {
+    "RT-1-X": 18.53,
+    "Octo": 20.0,
+    "RT-2-X": 50.59,
+    "OpenVLA": 70.59
+  },
+  "bridge_reported_pct": {
+    "RT-1-X": 18.5,
+    "Octo": 20.0,
+    "RT-2-X": 50.6,
+    "OpenVLA": 70.6
+  },
+  "bridge_se_check": {
+    "RT-1-X": {
+      "reported": 2.7,
+      "binomial_n170": 2.98,
+      "task_level_se": 3.99
+    },
+    "Octo": {
+      "reported": 2.6,
+      "binomial_n170": 3.07,
+      "task_level_se": 5.32
+    },
+    "RT-2-X": {
+      "reported": 3.5,
+      "binomial_n170": 3.83,
+      "task_level_se": 6.87
+    },
+    "OpenVLA": {
+      "reported": 3.2,
+      "binomial_n170": 3.49,
+      "task_level_se": 6.11
+    }
+  },
+  "bridge_category_pct": {
+    "Visual": {
+      "RT-1-X": 8.0,
+      "Octo": 29.0,
+      "RT-2-X": 52.0,
+      "OpenVLA": 87.0
+    },
+    "Motion": {
+      "RT-1-X": 25.0,
+      "Octo": 7.5,
+      "RT-2-X": 55.0,
+      "OpenVLA": 60.0
+    },
+    "Physical": {
+      "RT-1-X": 10.0,
+      "Octo": 20.0,
+      "RT-2-X": 26.7,
+      "OpenVLA": 76.7
+    },
+    "Semantic": {
+      "RT-1-X": 26.2,
+      "Octo": 0.0,
+      "RT-2-X": 38.8,
+      "OpenVLA": 36.2
+    },
+    "Language": {
+      "RT-1-X": 30.0,
+      "Octo": 40.0,
+      "RT-2-X": 85.0,
+      "OpenVLA": 90.0
+    }
+  },
+  "bridge_ovla_vs_rt2x": {
+    "diff_pp": 20.0,
+    "z": 3.77,
+    "p_two_prop": 0.00016,
+    "newcombe95_pp": [
+      9.6,
+      29.8
+    ],
+    "task_wilcoxon_p": 0.0058,
+    "tasks_ovla_better": 12,
+    "tasks_rt2x_better": 3,
+    "tasks_tie": 2
+  },
+  "bridge_ovla_vs_Octo": {
+    "diff_pp": 50.6,
+    "p_two_prop": 7.3e-21
+  },
+  "bridge_ovla_vs_RT-1-X": {
+    "diff_pp": 52.1,
+    "p_two_prop": 4.6e-22
+  },
+  "bridge_tasks_rt2x_better": [
+    "Take Purple Grapes out of Pot",
+    "Stack Blue Cup on Pink Cup",
+    "Put {Eggplant, Red Bottle} into Pot"
+  ],
+  "google_mean_pct": {
+    "RT-1-X": 33.3,
+    "Octo": 26.7,
+    "RT-2-X": 78.3,
+    "OpenVLA": 85.0
+  },
+  "google_reported_pct": {
+    "RT-1-X": 33.3,
+    "Octo": 26.7,
+    "RT-2-X": 78.3,
+    "OpenVLA": 85.0
+  },
+  "google_ovla_vs_rt2x": {
+    "diff_pp": 6.7,
+    "z": 0.94,
+    "p_two_prop": 0.35,
+    "newcombe95_pp": [
+      -7.4,
+      20.5
+    ],
+    "task_wilcoxon_p": 0.23419430487921455
+  },
+  "google_in_dist_pct": {
+    "RT-1-X": 32.0,
+    "Octo": 44.0,
+    "RT-2-X": 72.0,
+    "OpenVLA": 88.0
+  },
+  "google_ood_pct": {
+    "RT-1-X": 34.3,
+    "Octo": 14.3,
+    "RT-2-X": 82.9,
+    "OpenVLA": 82.9
+  },
+  "pooled29": {
+    "OpenVLA_pct": 74.35,
+    "RT-2-X_pct": 57.83,
+    "diff_pp": 16.52
+  },
+  "franka_tabletop": {
+    "trials": 99,
+    "trial_weighted_pct": {
+      "DP": 48.5,
+      "DP_matched": 43.4,
+      "Octo": 43.4,
+      "OpenVLA_scratch": 43.4,
+      "OpenVLA": 67.2
+    },
+    "task_unweighted_pct": {
+      "DP": 46.4,
+      "DP_matched": 40.8,
+      "Octo": 37.5,
+      "OpenVLA_scratch": 41.0,
+      "OpenVLA": 66.0
+    },
+    "reported_avg_pct": {
+      "DP": 48.5,
+      "DP_matched": 43.4,
+      "Octo": 43.4,
+      "OpenVLA_scratch": 43.4,
+      "OpenVLA": 67.2
+    },
+    "min_task_pct": {
+      "DP": 8.3,
+      "DP_matched": 0,
+      "Octo": 0,
+      "OpenVLA_scratch": 0,
+      "OpenVLA": 40
+    }
+  },
+  "franka_droid": {
+    "trials": 30,
+    "trial_weighted_pct": {
+      "DP": 35.0,
+      "DP_matched": 26.7,
+      "Octo": 38.4,
+      "OpenVLA_scratch": 21.7,
+      "OpenVLA": 58.4
+    },
+    "task_unweighted_pct": {
+      "DP": 31.2,
+      "DP_matched": 26.4,
+      "Octo": 34.8,
+      "OpenVLA_scratch": 20.8,
+      "OpenVLA": 59.0
+    },
+    "reported_avg_pct": {
+      "DP": 35.0,
+      "DP_matched": 26.7,
+      "Octo": 38.3,
+      "OpenVLA_scratch": 21.7,
+      "OpenVLA": 58.3
+    }
+  },
+  "franka_both": {
+    "trial_pooled_pct": {
+      "DP": 45.35,
+      "DP_matched": 39.53,
+      "Octo": 42.26,
+      "OpenVLA_scratch": 38.37,
+      "OpenVLA": 65.12
+    },
+    "env_mean_of_reported": {
+      "DP": 41.75,
+      "DP_matched": 35.05,
+      "Octo": 40.85,
+      "OpenVLA_scratch": 32.55,
+      "OpenVLA": 62.75
+    },
+    "ovla_minus_dp_pooled_pp": 19.77,
+    "ovla_minus_dp_env_mean_pp": 21.0
+  },
+  "franka_tabletop_ovla_vs_dp": {
+    "diff_pp": 18.7,
+    "z": 2.66,
+    "p_two_prop": 0.0078
+  },
+  "franka_min_task_claim_check": {
+    "DP": 8.3,
+    "DP_matched": 0,
+    "Octo": 0,
+    "OpenVLA_scratch": 0,
+    "OpenVLA": 40
+  },
+  "peft_check": {
+    "Full FT": {
+      "calc_pct": 69.7,
+      "reported_pct": 69.7
+    },
+    "Last layer only": {
+      "calc_pct": 30.3,
+      "reported_pct": 30.3
+    },
+    "Frozen vision": {
+      "calc_pct": 47.0,
+      "reported_pct": 47.0
+    },
+    "Sandwich": {
+      "calc_pct": 62.1,
+      "reported_pct": 62.1
+    },
+    "LoRA r=32": {
+      "calc_pct": 68.2,
+      "reported_pct": 68.2
+    },
+    "LoRA r=64": {
+      "calc_pct": 68.2,
+      "reported_pct": 68.2
+    }
+  },
+  "peft_params_lora_r32_frac_pct": 1.36,
+  "peft_lora_vs_full": {
+    "diff_pp": -1.5,
+    "p_two_prop": 0.89
+  },
+  "quant_means": {
+    "bf16": 71.2,
+    "int8": 58.1,
+    "int4": 71.9
+  },
+  "quant_reported": {
+    "bf16": 71.3,
+    "int8": 58.1,
+    "int4": 71.9
+  },
+  "blocking_means": {
+    "bf16": 70.0,
+    "int8": 74.4,
+    "int4": 68.8
+  },
+  "blocking_reported": {
+    "bf16": 70.0,
+    "int8": 74.4,
+    "int4": 68.8
+  },
+  "ovla_subset8_from_table4_pct": 77.5,
+  "ovla_subset8_task_names": [
+    "Put Eggplant into Pot (Easy)",
+    "Put Eggplant into Pot",
+    "Put Cup from Counter into Sink",
+    "Lift Eggplant",
+    "Put Carrot on Plate",
+    "Flip Pot Upright",
+    "Take Purple Grapes out of Pot",
+    "Put {Eggplant, Red Bottle} into Pot"
+  ],
+  "quant_int8_vs_bf16_unpaired": {
+    "diff_pp": 13.1,
+    "z": 1.74,
+    "p_two_prop": 0.082
+  },
+  "quant_int8_vs_bf16_paired_wilcoxon_p": 0.024,
+  "quant_int4_vs_bf16_unpaired": {
+    "diff_pp": 0.6,
+    "p_two_prop": 0.93
+  },
+  "quant_int4_vs_bf16_paired_wilcoxon_p": 0.6,
+  "bf16_reported_across_tables": {
+    "table4_subset_OpenVLA": 76.3,
+    "table5_bf16_nonblocking": 71.3,
+    "table11_bf16_blocking": 70.0
+  },
+  "table9_means": {
+    "OpenVLA": 76.2,
+    "OpenVLA-Bridge": 45.6,
+    "OpenVLA-Bridge-SigLIP": 40.6
+  },
+  "table9_reported": {
+    "OpenVLA": 76.3,
+    "OpenVLA-Bridge": 45.6,
+    "OpenVLA-Bridge-SigLIP": 40.6
+  },
+  "abl_openx_effect": {
+    "diff_pp": 30.6,
+    "p_two_prop": 7.2e-05,
+    "paired_wilcoxon_p": 0.016
+  },
+  "abl_dino_effect": {
+    "diff_pp": 5.0,
+    "p_two_prop": 0.52,
+    "paired_wilcoxon_p": 0.34
+  },
+  "table10_paired_frozen_pct": 46.7,
+  "table10_paired_ft_pct": 80.0,
+  "table10_paired_n": 60,
+  "table10_siglip_only_frozen_pct": 57.5,
+  "table10_siglip_only_ft_pct": 75.0,
+  "table10_llava_frozen_pct": 25.0,
+  "table10_llava_ft_pct": 90.0,
+  "table10_claim_reported": {
+    "frozen": 46.7,
+    "ft": 80.0
+  },
+  "libero_se_check": {
+    "DP": [
+      {
+        "sr": 78.3,
+        "se_reported": 1.1,
+        "se_binomial_n1500": 1.06
+      },
+      {
+        "sr": 92.5,
+        "se_reported": 0.7,
+        "se_binomial_n1500": 0.68
+      },
+      {
+        "sr": 68.3,
+        "se_reported": 1.2,
+        "se_binomial_n1500": 1.2
+      },
+      {
+        "sr": 50.5,
+        "se_reported": 1.3,
+        "se_binomial_n1500": 1.29
+      }
+    ],
+    "Octo": [
+      {
+        "sr": 78.9,
+        "se_reported": 1.0,
+        "se_binomial_n1500": 1.05
+      },
+      {
+        "sr": 85.7,
+        "se_reported": 0.9,
+        "se_binomial_n1500": 0.9
+      },
+      {
+        "sr": 84.6,
+        "se_reported": 0.9,
+        "se_binomial_n1500": 0.93
+      },
+      {
+        "sr": 51.1,
+        "se_reported": 1.3,
+        "se_binomial_n1500": 1.29
+      }
+    ],
+    "OpenVLA": [
+      {
+        "sr": 84.7,
+        "se_reported": 0.9,
+        "se_binomial_n1500": 0.93
+      },
+      {
+        "sr": 88.4,
+        "se_reported": 0.8,
+        "se_binomial_n1500": 0.83
+      },
+      {
+        "sr": 79.2,
+        "se_reported": 1.0,
+        "se_binomial_n1500": 1.05
+      },
+      {
+        "sr": 53.7,
+        "se_reported": 1.3,
+        "se_binomial_n1500": 1.29
+      }
+    ]
+  },
+  "libero_avg_check": {
+    "DP": 72.4,
+    "Octo": 75.08,
+    "OpenVLA": 76.5
+  },
+  "libero_avg_reported": {
+    "DP": 72.4,
+    "Octo": 75.1,
+    "OpenVLA": 76.5
+  },
+  "libero_rank_avg_check": {
+    "DP": 2.5,
+    "Octo": 2.0,
+    "OpenVLA": 1.5
+  }
+}
