@@ -1,0 +1,214 @@
+{
+ "table5_ci95": {
+  "FiLM (PICR)": {
+   "seen": [
+    3.59,
+    6.27
+   ],
+   "unseen": [
+    3.58,
+    9.94
+   ]
+  },
+  "Input concat": {
+   "seen": [
+    3.53,
+    5.37
+   ],
+   "unseen": [
+    6.78,
+    10.2
+   ]
+  },
+  "Shift only": {
+   "seen": [
+    3.25,
+    5.93
+   ],
+   "unseen": [
+    6.44,
+    10.42
+   ]
+  },
+  "Low-rank hypernet": {
+   "seen": [
+    3.39,
+    5.13
+   ],
+   "unseen": [
+    5.22,
+    18.28
+   ]
+  }
+ },
+ "table5_welch_vs_film": {
+  "Input concat / seen": {
+   "t": 1.27,
+   "p_welch": 0.2811,
+   "increase_pct": -9.7
+  },
+  "Input concat / unseen": {
+   "t": -2.06,
+   "p_welch": 0.1293,
+   "increase_pct": 25.6
+  },
+  "Shift only / seen": {
+   "t": 0.77,
+   "p_welch": 0.4837,
+   "increase_pct": -6.9
+  },
+  "Shift only / unseen": {
+   "t": -1.92,
+   "p_welch": 0.1414,
+   "increase_pct": 24.7
+  },
+  "Low-rank hypernet / seen": {
+   "t": 1.8,
+   "p_welch": 0.1575,
+   "increase_pct": -13.6
+  },
+  "Low-rank hypernet / unseen": {
+   "t": -2.95,
+   "p_welch": 0.0624,
+   "increase_pct": 73.8
+  }
+ },
+ "table5_unseen_increase_pct_range": [
+  25,
+  74
+ ],
+ "table1_increase_seen_to_unseen_cm": {
+  "PICR": 1.83,
+  "RWM": 3.7,
+  "CaDM": 5.34,
+  "CaDeLaC": 12.66,
+  "DeLaN": 18.82,
+  "Neural-Fly": 14.22
+ },
+ "table1_text_claim_increase_range_others": [
+  12.66,
+  18.82
+ ],
+ "unseen_ratio_vs_picr_table1_mean": {
+  "RWM": 1.65,
+  "CaDM": 1.69,
+  "CaDeLaC": 3.17,
+  "DeLaN": 3.81,
+  "Neural-Fly": 3.29
+ },
+ "unseen_ratio_vs_picr_seed0": {
+  "RWM": 1.68,
+  "CaDM": 1.58,
+  "CaDeLaC": 3.58,
+  "DeLaN": 3.71,
+  "Neural-Fly": 3.58
+ },
+ "abstract_ratio_range_check": {
+  "table1_mean": [
+   1.65,
+   3.81
+  ],
+  "seed0": [
+   1.58,
+   3.71
+  ],
+  "claimed": [
+   1.6,
+   3.8
+  ]
+ },
+ "rmse_ratio_baseline_over_picr": {
+  "CaDeLaC": {
+   "gravity": 5.25,
+   "inertial": 5.41,
+   "coriolis": 1.35
+  },
+  "DeLaN": {
+   "gravity": 4.65,
+   "inertial": 2.52,
+   "coriolis": 1.05
+  }
+ },
+ "picr_table1_vs_table5_match": {
+  "add_seen": [
+   4.93,
+   4.93
+  ],
+  "add_unseen": [
+   6.76,
+   6.76
+  ],
+  "gravity": [
+   2.15,
+   2.15
+  ],
+  "inertial": [
+   2.31,
+   2.31
+  ],
+  "coriolis": [
+   1.59,
+   1.59
+  ]
+ },
+ "picr_table1_mean_vs_seed0_repo": {
+  "add_seen": [
+   4.93,
+   4.58
+  ],
+  "add_unseen": [
+   6.76,
+   6.92
+  ],
+  "gain": [
+   0.9,
+   0.86
+  ],
+  "gravity": [
+   2.15,
+   1.84
+  ],
+  "inertial": [
+   2.31,
+   1.63
+  ],
+  "coriolis": [
+   1.59,
+   1.46
+  ]
+ },
+ "table3_change_pct": {
+  "add_seen": 32.5,
+  "add_unseen": 41.3,
+  "gravity": 14.7,
+  "inertial": 76.1,
+  "coriolis": -21.2
+ },
+ "table3_change_in_seed_sd_units": {
+  "add_seen": 2.76,
+  "add_unseen": 2.23
+ },
+ "table4_picr_unseen_below_seen": true,
+ "table4_cadelac_contrastive_unseen_vs_picr": 2.85,
+ "table6_gaps_narrow_picr": {
+  "cadelac_w640_seen_minus_picr_w256": 2.72,
+  "cadelac_w640_unseen_minus_picr_w256": 8.1
+ },
+ "table6_claim_widening_deln": {
+  "seen_change": 0.4,
+  "unseen_change": -1.95
+ },
+ "params_encoder": 132616,
+ "params_picr_lagrangian_1024": 6413341,
+ "params_picr_total_1024": 6545957,
+ "params_picr_lagrangian_256": 423709,
+ "params_picr_total_256": 556325,
+ "params_film_map_per_net": 20480,
+ "counts": {
+  "train_plus_val_episodes": 358,
+  "payload_sweep_windows_seen_plus_unseen": 32967,
+  "torque_pairs_kept_fraction": 0.336,
+  "mass_levels_x_eps": 400
+ },
+ "repo_seed0_expectations_match_paper_table6": true
+}
