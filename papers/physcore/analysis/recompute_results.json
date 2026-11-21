@@ -1,0 +1,124 @@
+{
+  "table2_vs_phystwin": {
+    "elastic": {
+      "CD": 43.72,
+      "Track": 15.22,
+      "IoU": -3.26,
+      "PSNR": 2.26,
+      "SSIM": -2.27,
+      "LPIPS": 2.51
+    },
+    "elastoplastic": {
+      "CD": 30.46,
+      "Track": 8.29,
+      "IoU": 4.75,
+      "PSNR": 6.07,
+      "SSIM": 0.35,
+      "LPIPS": 15.58
+    }
+  },
+  "table2_vs_pgnd": {
+    "elastic": {
+      "CD": 73.39,
+      "Track": 80.59,
+      "IoU": 80.42,
+      "PSNR": 34.73,
+      "SSIM": 193.2,
+      "LPIPS": 53.37
+    },
+    "elastoplastic": {
+      "CD": 87.45,
+      "Track": 87.41,
+      "IoU": 176.57,
+      "PSNR": 52.18,
+      "SSIM": 253.09,
+      "LPIPS": 70.45
+    }
+  },
+  "table3_rfd": {
+    "elastic": {
+      "CD_reduction_pct": 13.09,
+      "Track_reduction_pct": 6.1
+    },
+    "elastoplastic": {
+      "CD_reduction_pct": 17.78,
+      "Track_reduction_pct": 15.7
+    }
+  },
+  "table4_planning": {
+    "rope": {
+      "vs_PhysTwin_pct": 64.2,
+      "vs_PGND_pct": 87.3
+    },
+    "towel": {
+      "vs_PhysTwin_pct": 25.4,
+      "vs_PGND_pct": 82.7
+    }
+  },
+  "table5_runtime": {
+    "identification_speedup_vs_PhysTwin": 81.6,
+    "identification_speedup_vs_PGND": 726.3,
+    "test_time_PhysCoRe_over_PhysTwin": 1.118,
+    "test_time_PhysCoRe_over_PGND": 4.47,
+    "ms_per_frame_text": 110,
+    "implied_predicted_frames_per_episode": 77.3
+  },
+  "claim_checks": {
+    "text_CD_elastic_pct": {
+      "text": 43.7,
+      "recomputed": 43.72
+    },
+    "text_CD_elastoplastic_pct": {
+      "text": 30.5,
+      "recomputed": 30.46
+    },
+    "text_Track_elastic_pct": {
+      "text": 15.2,
+      "recomputed": 15.22
+    },
+    "text_Track_elastoplastic_pct": {
+      "text": 8.3,
+      "recomputed": 8.29
+    },
+    "text_RfD_elastic_pct": {
+      "text": 13.1,
+      "recomputed": 13.09
+    },
+    "text_RfD_elastoplastic_pct": {
+      "text": 17.8,
+      "recomputed": 17.78
+    },
+    "table2_PhysCoRe_equals_table3_full": {
+      "elastic": true,
+      "elastoplastic": true
+    }
+  },
+  "significance_bounds": {
+    "t_crit_df11_two_sided_05": 2.201,
+    "n_assumed": 12,
+    "rows": {
+      "elastic_CD": {
+        "mean_diff": 0.00707,
+        "max_sd_of_paired_diff_for_p_lt_0.05_n12": 0.011127,
+        "max_sd_as_pct_of_PhysTwin_mean": 68.8
+      },
+      "elastic_Track": {
+        "mean_diff": 0.00459,
+        "max_sd_of_paired_diff_for_p_lt_0.05_n12": 0.007224,
+        "max_sd_as_pct_of_PhysTwin_mean": 24.0
+      },
+      "elastoplastic_CD": {
+        "mean_diff": 0.00237,
+        "max_sd_of_paired_diff_for_p_lt_0.05_n12": 0.00373,
+        "max_sd_as_pct_of_PhysTwin_mean": 47.9
+      },
+      "elastoplastic_Track": {
+        "mean_diff": 0.00151,
+        "max_sd_of_paired_diff_for_p_lt_0.05_n12": 0.002377,
+        "max_sd_as_pct_of_PhysTwin_mean": 13.1
+      }
+    },
+    "note": "표 2는 평균만 있고 에피소드별 값과 SD가 없어 검정 불가. 위 값은 필요 조건이다.",
+    "sign_test_all_12_same_direction_two_sided_p": 0.000488
+  }
+}
