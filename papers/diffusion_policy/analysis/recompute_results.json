@@ -1,0 +1,360 @@
+{
+  "V1_avg_improvement": {
+    "B2 본문 절차: 최대 성능, mh 제외 (표1 ph 6열 + 표2 ph 6열 + 표4 6열, N=18)": {
+      "N": 18,
+      "mean": 0.21748
+    },
+    "최대 성능, mh 포함 (표1 10열 + 표2 10열 + 표4 6열, N=26)": {
+      "N": 26,
+      "mean": 0.21976
+    },
+    "마지막 10개 평균, mh 포함 (N=26)": {
+      "N": 26,
+      "mean": 0.46669
+    },
+    "마지막 10개 평균, mh 제외 (N=18)": {
+      "N": 18,
+      "mean": 0.39668
+    }
+  },
+  "V1_paper_claim": 0.46858,
+  "V2_text_improvements": {
+    "BlockPush_p2_vs_BET_(DP-T_0.94)": 0.3239,
+    "Kitchen_p4_vs_BET_(DP-C_0.99)": 1.25,
+    "Kitchen_p4_vs_LSTM-GMM_(DP-C_0.99)": 1.9118,
+    "본문 주장": {
+      "BlockPush p2": "32%",
+      "Kitchen p4": "213%"
+    }
+  },
+  "V3_real_push_t": {
+    "Human": {
+      "k": 20,
+      "n": 20,
+      "rate": 1.0,
+      "wilson95": [
+        0.839,
+        1.0
+      ]
+    },
+    "IBC-pos": {
+      "k": 0,
+      "n": 20,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.161
+      ]
+    },
+    "IBC-vel": {
+      "k": 0,
+      "n": 20,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.161
+      ]
+    },
+    "LSTM-pos": {
+      "k": 4,
+      "n": 20,
+      "rate": 0.2,
+      "wilson95": [
+        0.081,
+        0.416
+      ]
+    },
+    "LSTM-vel": {
+      "k": 2,
+      "n": 20,
+      "rate": 0.1,
+      "wilson95": [
+        0.028,
+        0.301
+      ]
+    },
+    "DP-T-E2E": {
+      "k": 13,
+      "n": 20,
+      "rate": 0.65,
+      "wilson95": [
+        0.433,
+        0.819
+      ]
+    },
+    "DP-ImgNet": {
+      "k": 3,
+      "n": 20,
+      "rate": 0.15,
+      "wilson95": [
+        0.052,
+        0.36
+      ]
+    },
+    "DP-R3M": {
+      "k": 16,
+      "n": 20,
+      "rate": 0.8,
+      "wilson95": [
+        0.584,
+        0.919
+      ]
+    },
+    "DP-E2E": {
+      "k": 19,
+      "n": 20,
+      "rate": 0.95,
+      "wilson95": [
+        0.764,
+        0.991
+      ]
+    }
+  },
+  "V4_fisher_E2E_vs": {
+    "DP-R3M": {
+      "k_E2E": 19,
+      "k_other": 16,
+      "p_two_sided": 0.3416
+    },
+    "DP-T-E2E": {
+      "k_E2E": 19,
+      "k_other": 13,
+      "p_two_sided": 0.0436
+    },
+    "DP-ImgNet": {
+      "k_E2E": 19,
+      "k_other": 3,
+      "p_two_sided": 4.055e-07
+    },
+    "LSTM-pos": {
+      "k_E2E": 19,
+      "k_other": 4,
+      "p_two_sided": 2.21e-06
+    },
+    "IBC-pos": {
+      "k_E2E": 19,
+      "k_other": 0,
+      "p_two_sided": 3.047e-10
+    }
+  },
+  "V5_real_tasks": {
+    "Egg Beater (본문 55%)": {
+      "k": 11,
+      "n": 20,
+      "rate": 0.55,
+      "wilson95": [
+        0.342,
+        0.742
+      ]
+    },
+    "Mat Unrolling (본문 75%)": {
+      "k": 15,
+      "n": 20,
+      "rate": 0.75,
+      "wilson95": [
+        0.531,
+        0.888
+      ]
+    },
+    "Shirt Folding (본문 75%)": {
+      "k": 15,
+      "n": 20,
+      "rate": 0.75,
+      "wilson95": [
+        0.531,
+        0.888
+      ]
+    },
+    "Mug Flip DP (본문 90%)": {
+      "k": 18,
+      "n": 20,
+      "rate": 0.9,
+      "wilson95": [
+        0.699,
+        0.972
+      ]
+    },
+    "Mug Flip LSTM-GMM": {
+      "k": 0,
+      "n": 20,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.161
+      ]
+    },
+    "Mug Flip DP vs LSTM-GMM Fisher p": 3.352e-09
+  },
+  "V6_sim_approx": {
+    "Transport mh": {
+      "DP-T_avg10": 0.35,
+      "baseline_avg10": 0.2,
+      "baseline": "LSTM-GMM",
+      "n_assumed": 66,
+      "DP-T_wilson": [
+        0.245,
+        0.469
+      ],
+      "baseline_wilson": [
+        0.119,
+        0.308
+      ]
+    },
+    "Square mh": {
+      "DP-T_avg10": 0.81,
+      "baseline_avg10": 0.59,
+      "baseline": "LSTM-GMM",
+      "n_assumed": 66,
+      "DP-T_wilson": [
+        0.692,
+        0.881
+      ],
+      "baseline_wilson": [
+        0.47,
+        0.701
+      ]
+    },
+    "Lift mh": {
+      "DP-T_avg10": 1,
+      "baseline_avg10": 0.99,
+      "baseline": "BET",
+      "n_assumed": 66,
+      "DP-T_wilson": [
+        0.945,
+        1.0
+      ],
+      "baseline_wilson": [
+        0.919,
+        0.997
+      ]
+    },
+    "표2 ToolHang (시각) DP-T 대 LSTM-GMM, 마지막 10개 평균": {
+      "DP-T": 0.47,
+      "LSTM-GMM": 0.49,
+      "note": "DP-T가 LSTM-GMM보다 낮다 (V9)"
+    }
+  },
+  "V7_V16_checks": {
+    "V7_T1_no_gain_max": [
+      {
+        "col": "Lift-ph",
+        "ours": 1,
+        "base": 1.0,
+        "tie": true
+      },
+      {
+        "col": "Lift-mh",
+        "ours": 1,
+        "base": 1.0,
+        "tie": true
+      },
+      {
+        "col": "Can-ph",
+        "ours": 1,
+        "base": 1.0,
+        "tie": true
+      },
+      {
+        "col": "Can-mh",
+        "ours": 1,
+        "base": 1.0,
+        "tie": true
+      }
+    ],
+    "V7_T2_no_gain_max": [
+      {
+        "col": "Lift-ph",
+        "ours": 1,
+        "base": 1.0,
+        "tie": true
+      },
+      {
+        "col": "Lift-mh",
+        "ours": 1,
+        "base": 1.0,
+        "tie": true
+      },
+      {
+        "col": "Can-ph",
+        "ours": 1,
+        "base": 1.0,
+        "tie": true
+      }
+    ],
+    "V7_T2_no_gain_avg10": [],
+    "V7_T1_no_gain_avg10": [],
+    "V8_T4_DPC_below_BET": {
+      "BP-p1": {
+        "DP-C": 0.36,
+        "BET": 0.96
+      },
+      "BP-p2": {
+        "DP-C": 0.11,
+        "BET": 0.71
+      }
+    },
+    "V9_T2_ToolHang_DPT_below_LSTM_avg10": {
+      "DP-T": 0.47,
+      "LSTM-GMM": 0.49
+    },
+    "V10_T5_finetune_best_overall": {
+      "ResNet18": "finetune 아님",
+      "ResNet34": "finetune 최고",
+      "ViT-B/16 (CLIP)": "finetune 최고"
+    },
+    "V10_T5_frozen_vs_scratch_ViT": {
+      "frozen": 0.7,
+      "scratch": 0.22
+    },
+    "V11_real_task_sections": [
+      "Real Push-T",
+      "Mug flip",
+      "Sauce pouring",
+      "Sauce spreading",
+      "Egg beater",
+      "Mat unrolling",
+      "Shirt folding"
+    ],
+    "V12_task_count": {
+      "sim": 8,
+      "real": 7,
+      "sum": 15,
+      "abstract_pdf": 15,
+      "arxiv_abs_metadata": 12,
+      "v1_abstract": 11,
+      "v4_abstract": 12
+    },
+    "V13_blockpush_ctrl": {
+      "Table 7 (CNN)": "Pos",
+      "Table 8 (Transformer)": "Vel",
+      "text §5.2": "DP는 Pos 사용"
+    },
+    "V14_kitchen_demos": {
+      "text §5.1": 566,
+      "table 3 (#PH)": 656
+    },
+    "V15_inference_steps": {
+      "text §3.4": 10,
+      "table 7 sim": 100,
+      "table 7 real": 16
+    },
+    "V16_kitchen_p4_improvement_vs_text": {
+      "text": 2.13,
+      "recomputed_vs_BET": 1.25
+    }
+  },
+  "V17_real_iou": {
+    "human": 0.84,
+    "E2E": 0.8,
+    "text": "0.8 v.s. 0.84",
+    "status": "일치"
+  },
+  "V18_real_LSTM_IBC_text": {
+    "text": "IBC 0%, LSTM-GMM 20%",
+    "table": {
+      "IBC-pos": 0,
+      "LSTM-pos": 0.2
+    },
+    "status": "일치"
+  }
+}
