@@ -1,0 +1,117 @@
+{
+  "design": {
+    "rubric_max_points": {
+      "dishes_in_sink": 8,
+      "items_in_drawer": 4,
+      "laundry_basket": 3,
+      "make_bed": 5
+    },
+    "episodes_per_policy_standard": 40,
+    "locations_for_standard_eval": 12,
+    "language_following_chance": 0.2
+  },
+  "fig10_check": {
+    "no_WD": {
+      "diff_pt": 5,
+      "A_bar_is_95CI": {
+        "welch_t": 1.44,
+        "df": 71.2,
+        "p_two_sided": 0.154
+      },
+      "B_bar_is_SE": {
+        "welch_t": 0.74,
+        "df": 71.2,
+        "p_two_sided": 0.4646
+      },
+      "printed_p": 0.385
+    },
+    "no_CE": {
+      "diff_pt": 27,
+      "A_bar_is_95CI": {
+        "welch_t": 8.79,
+        "df": 76.9,
+        "p_two_sided": 0.0
+      },
+      "B_bar_is_SE": {
+        "welch_t": 4.48,
+        "df": 76.9,
+        "p_two_sided": 0.0
+      },
+      "printed_p": 0.001
+    },
+    "no_ME": {
+      "diff_pt": 24,
+      "A_bar_is_95CI": {
+        "welch_t": 7.81,
+        "df": 76.9,
+        "p_two_sided": 0.0
+      },
+      "B_bar_is_SE": {
+        "welch_t": 3.99,
+        "df": 76.9,
+        "p_two_sided": 0.0002
+      },
+      "printed_p": 0.001
+    },
+    "no_CE_or_ME": {
+      "diff_pt": 38,
+      "A_bar_is_95CI": {
+        "welch_t": 12.37,
+        "df": 76.9,
+        "p_two_sided": 0.0
+      },
+      "B_bar_is_SE": {
+        "welch_t": 6.31,
+        "df": 76.9,
+        "p_two_sided": 0.0
+      },
+      "printed_p": 0.001
+    }
+  },
+  "fig12_read": {
+    "per_task_read": {
+      "dishes_in_sink": {
+        "pi05": 91,
+        "fastflow_nohl": 55,
+        "pi0_300k": 41,
+        "pi0_80k": 19
+      },
+      "items_in_drawer": {
+        "pi05": 85,
+        "fastflow_nohl": 71,
+        "pi0_300k": 32,
+        "pi0_80k": 5
+      },
+      "laundry_basket": {
+        "pi05": 80,
+        "fastflow_nohl": 73,
+        "pi0_300k": 31,
+        "pi0_80k": 39
+      },
+      "make_bed": {
+        "pi05": 58,
+        "fastflow_nohl": 48,
+        "pi0_300k": 20,
+        "pi0_80k": 14
+      }
+    },
+    "task_mean_equal_weight": {
+      "pi05": 78.5,
+      "fastflow_nohl": 61.8,
+      "pi0_300k": 31.0,
+      "pi0_80k": 19.2
+    }
+  },
+  "fig11_ood_follow_read": {
+    "pi05": 94,
+    "no_WD": 80,
+    "no_CE": 67,
+    "no_ME": 33,
+    "no_ME_or_CE": 33,
+    "chance": 20
+  },
+  "sampling_note": {
+    "se_of_mean_if_per_episode_sd_50pct_of_scale": 7.91,
+    "meaning": "비율 척도 점수의 SD가 50pt이면 n=40 평균의 SE는 약 7.9pt. 그림 막대 폭과 비교하기 위한 상한 감각치"
+  }
+}
