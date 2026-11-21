@@ -1,0 +1,483 @@
+{
+  "real_count_checks": {
+    "Slide Ziploc / BC-ConvMLP": {
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Slide Ziploc / BeT": {
+      "counts": [
+        2,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Slide Ziploc / RT-1": {
+      "counts": [
+        1,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Slide Ziploc / VINN": {
+      "counts": [
+        7,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Slide Ziploc / ACT": {
+      "counts": [
+        23,
+        24,
+        22
+      ],
+      "integer_match": true,
+      "monotone": false
+    },
+    "Slot Battery / BC-ConvMLP": {
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Slot Battery / BeT": {
+      "counts": [
+        1,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Slot Battery / RT-1": {
+      "counts": [
+        1,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Slot Battery / VINN": {
+      "counts": [
+        5,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Slot Battery / ACT": {
+      "counts": [
+        25,
+        25,
+        24
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Open Cup / BeT": {
+      "counts": [
+        3,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Open Cup / ACT": {
+      "counts": [
+        25,
+        24,
+        21
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Thread Velcro / BeT": {
+      "counts": [
+        6,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Thread Velcro / ACT": {
+      "counts": [
+        23,
+        10,
+        5
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Prep Tape / BeT": {
+      "counts": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Prep Tape / ACT": {
+      "counts": [
+        24,
+        23,
+        18,
+        16
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Put On Shoe / BeT": {
+      "counts": [
+        3,
+        0,
+        0,
+        0
+      ],
+      "integer_match": true,
+      "monotone": true
+    },
+    "Put On Shoe / ACT": {
+      "counts": [
+        25,
+        23,
+        23,
+        23
+      ],
+      "integer_match": true,
+      "monotone": true
+    }
+  },
+  "real_all_integer": true,
+  "real_all_monotone": false,
+  "real_non_monotone": [
+    "Slide Ziploc / ACT"
+  ],
+  "real_final_vs_best_baseline": [
+    {
+      "task": "Slide Ziploc",
+      "ACT_final": "22/25",
+      "ACT_CI95": [
+        70.0,
+        95.8
+      ],
+      "best_baseline": "BC-ConvMLP",
+      "baseline_final": "0/25",
+      "p_fisher_two_sided": 5.18e-11,
+      "p_holm": 2.07e-10
+    },
+    {
+      "task": "Slot Battery",
+      "ACT_final": "24/25",
+      "ACT_CI95": [
+        80.5,
+        99.3
+      ],
+      "best_baseline": "BC-ConvMLP",
+      "baseline_final": "0/25",
+      "p_fisher_two_sided": 4.11e-13,
+      "p_holm": 2.47e-12
+    },
+    {
+      "task": "Open Cup",
+      "ACT_final": "21/25",
+      "ACT_CI95": [
+        65.3,
+        93.6
+      ],
+      "best_baseline": "BeT",
+      "baseline_final": "0/25",
+      "p_fisher_two_sided": 3.76e-10,
+      "p_holm": 1.13e-09
+    },
+    {
+      "task": "Thread Velcro",
+      "ACT_final": "5/25",
+      "ACT_CI95": [
+        8.9,
+        39.1
+      ],
+      "best_baseline": "BeT",
+      "baseline_final": "0/25",
+      "p_fisher_two_sided": 0.0502,
+      "p_holm": 0.0502
+    },
+    {
+      "task": "Prep Tape",
+      "ACT_final": "16/25",
+      "ACT_CI95": [
+        44.5,
+        79.8
+      ],
+      "best_baseline": "BeT",
+      "baseline_final": "0/25",
+      "p_fisher_two_sided": 8.3e-07,
+      "p_holm": 1.66e-06
+    },
+    {
+      "task": "Put On Shoe",
+      "ACT_final": "23/25",
+      "ACT_CI95": [
+        75.0,
+        97.8
+      ],
+      "best_baseline": "BeT",
+      "baseline_final": "0/25",
+      "p_fisher_two_sided": 5.55e-12,
+      "p_holm": 2.78e-11
+    }
+  ],
+  "thread_velcro_insert_two_sided_p": 0.0502,
+  "thread_velcro_insert_one_sided_p": 0.0251,
+  "sim_final_gap": {
+    "Cube Transfer (sim) | scripted | Transfer": {
+      "ACT": 86,
+      "ACT_CI95": [
+        79.5,
+        90.7
+      ],
+      "best_baseline": "BeT",
+      "baseline": 27,
+      "gap_pp": 59,
+      "p_fisher_pooled": 2.49e-26
+    },
+    "Cube Transfer (sim) | human | Transfer": {
+      "ACT": 50,
+      "ACT_CI95": [
+        42.1,
+        57.9
+      ],
+      "best_baseline": "BeT",
+      "baseline": 1,
+      "gap_pp": 49,
+      "p_fisher_pooled": 2.49e-25
+    },
+    "Bimanual Insertion (sim) | scripted | Insert": {
+      "ACT": 32,
+      "ACT_CI95": [
+        25.1,
+        39.8
+      ],
+      "best_baseline": "BeT",
+      "baseline": 3,
+      "gap_pp": 29,
+      "p_fisher_pooled": 2.81e-12
+    },
+    "Bimanual Insertion (sim) | human | Insert": {
+      "ACT": 20,
+      "ACT_CI95": [
+        14.4,
+        27.1
+      ],
+      "best_baseline": "VINN",
+      "baseline": 0,
+      "gap_pp": 20,
+      "p_fisher_pooled": 3.72e-10
+    }
+  },
+  "sim_all_cells": {
+    "Cube Transfer (sim) | scripted | Touched": {
+      "ACT": 97,
+      "ACT_CI95": [
+        93.3,
+        99.0
+      ],
+      "best_baseline": "BeT",
+      "baseline": 60,
+      "gap_pp": 37,
+      "p_fisher_pooled": 1.02e-16
+    },
+    "Cube Transfer (sim) | scripted | Lifted": {
+      "ACT": 90,
+      "ACT_CI95": [
+        84.2,
+        93.8
+      ],
+      "best_baseline": "BeT",
+      "baseline": 51,
+      "gap_pp": 39,
+      "p_fisher_pooled": 4.03e-14
+    },
+    "Cube Transfer (sim) | scripted | Transfer": {
+      "ACT": 86,
+      "ACT_CI95": [
+        79.5,
+        90.7
+      ],
+      "best_baseline": "BeT",
+      "baseline": 27,
+      "gap_pp": 59,
+      "p_fisher_pooled": 2.49e-26
+    },
+    "Cube Transfer (sim) | human | Touched": {
+      "ACT": 82,
+      "ACT_CI95": [
+        75.1,
+        87.3
+      ],
+      "best_baseline": "VINN",
+      "baseline": 17,
+      "gap_pp": 65,
+      "p_fisher_pooled": 9.14e-31
+    },
+    "Cube Transfer (sim) | human | Lifted": {
+      "ACT": 60,
+      "ACT_CI95": [
+        52.0,
+        67.5
+      ],
+      "best_baseline": "BeT",
+      "baseline": 13,
+      "gap_pp": 47,
+      "p_fisher_pooled": 1.87e-17
+    },
+    "Cube Transfer (sim) | human | Transfer": {
+      "ACT": 50,
+      "ACT_CI95": [
+        42.1,
+        57.9
+      ],
+      "best_baseline": "BeT",
+      "baseline": 1,
+      "gap_pp": 49,
+      "p_fisher_pooled": 2.49e-25
+    },
+    "Bimanual Insertion (sim) | scripted | Grasp": {
+      "ACT": 93,
+      "ACT_CI95": [
+        88.2,
+        96.3
+      ],
+      "best_baseline": "BeT",
+      "baseline": 21,
+      "gap_pp": 72,
+      "p_fisher_pooled": 2.97e-40
+    },
+    "Bimanual Insertion (sim) | scripted | Contact": {
+      "ACT": 90,
+      "ACT_CI95": [
+        84.2,
+        93.8
+      ],
+      "best_baseline": "BeT",
+      "baseline": 4,
+      "gap_pp": 86,
+      "p_fisher_pooled": 8.52e-59
+    },
+    "Bimanual Insertion (sim) | scripted | Insert": {
+      "ACT": 32,
+      "ACT_CI95": [
+        25.1,
+        39.8
+      ],
+      "best_baseline": "BeT",
+      "baseline": 3,
+      "gap_pp": 29,
+      "p_fisher_pooled": 2.81e-12
+    },
+    "Bimanual Insertion (sim) | human | Grasp": {
+      "ACT": 76,
+      "ACT_CI95": [
+        68.6,
+        82.1
+      ],
+      "best_baseline": "VINN",
+      "baseline": 0,
+      "gap_pp": 76,
+      "p_fisher_pooled": 7.7e-51
+    },
+    "Bimanual Insertion (sim) | human | Contact": {
+      "ACT": 66,
+      "ACT_CI95": [
+        58.1,
+        73.1
+      ],
+      "best_baseline": "VINN",
+      "baseline": 0,
+      "gap_pp": 66,
+      "p_fisher_pooled": 3.82e-41
+    },
+    "Bimanual Insertion (sim) | human | Insert": {
+      "ACT": 20,
+      "ACT_CI95": [
+        14.4,
+        27.1
+      ],
+      "best_baseline": "VINN",
+      "baseline": 0,
+      "gap_pp": 20,
+      "p_fisher_pooled": 3.72e-10
+    }
+  },
+  "claimed_gap_pp": {
+    "Cube Transfer scripted": {
+      "claimed": 59,
+      "table": 59,
+      "match": true
+    },
+    "Cube Transfer human": {
+      "claimed": 49,
+      "table": 49,
+      "match": true
+    },
+    "Insertion scripted": {
+      "claimed": 29,
+      "table": 29,
+      "match": true
+    },
+    "Insertion human": {
+      "claimed": 20,
+      "table": 20,
+      "match": true
+    }
+  },
+  "cvae_text_check": {
+    "text_percent": 35.3,
+    "table_mean_percent": 35.0,
+    "difference_pp": 0.3
+  },
+  "user_study_5hz_vs_50hz": {
+    "per_task_increase_pct": {
+      "zip_tie": 65.0,
+      "cups": 60.0
+    },
+    "mean_of_tasks_pct": 62.5,
+    "pooled_increase_pct": 63.3,
+    "text_claim_pct": 62,
+    "note": "p<0.001 (repeated measures)는 개별 시도 자료가 없어 재계산 불가"
+  },
+  "demo_minutes": {
+    "50_demos_range_min": [
+      6.7,
+      11.7
+    ],
+    "100_demos_range_min": [
+      13.3,
+      23.3
+    ],
+    "text_claim_min": [
+      10,
+      20
+    ],
+    "note": "본문 '과제당 10–20분'은 50회에 맞지 않음(50회는 6.7–11.7분)"
+  }
+}
