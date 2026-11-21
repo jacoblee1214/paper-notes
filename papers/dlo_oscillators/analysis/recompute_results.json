@@ -1,0 +1,162 @@
+{
+  "V1_params_reduction": {
+    "vs_NODE_pct": 97.18,
+    "vs_LNN_pct": 90.16
+  },
+  "V2_sim_reduction_pct": {
+    "Baseline": 99.37,
+    "Heavy": 99.41,
+    "Low damping": 97.53,
+    "Compliant": 99.67
+  },
+  "V2_sim_reduction_range": [
+    97.53,
+    99.67
+  ],
+  "V3_real_mean_of_endpoints_pct": 27.85,
+  "V3_real_aggregate_reduction_pct": {
+    "left": 24.02,
+    "right": 33.13
+  },
+  "V4_epoch_speed_ratio_LNN_over_PhiCON": 8.82,
+  "V5_table1_welch_phicon_vs": {
+    "Baseline": {
+      "vs_NODE": {
+        "t": -1.58,
+        "df": 8.0,
+        "p": 0.1525
+      },
+      "vs_LNN": {
+        "t": -5.62,
+        "df": 5.63,
+        "p": 0.0017
+      }
+    },
+    "Heavy": {
+      "vs_NODE": {
+        "t": -9.28,
+        "df": 7.7,
+        "p": 0.0
+      },
+      "vs_LNN": {
+        "t": -13.73,
+        "df": 7.54,
+        "p": 0.0
+      }
+    },
+    "Low damping": {
+      "vs_NODE": {
+        "t": -0.71,
+        "df": 6.71,
+        "p": 0.501
+      },
+      "vs_LNN": {
+        "t": -11.85,
+        "df": 6.71,
+        "p": 0.0
+      }
+    },
+    "Compliant": {
+      "vs_NODE": {
+        "t": -10.44,
+        "df": 5.16,
+        "p": 0.0001
+      },
+      "vs_LNN": {
+        "t": -24.05,
+        "df": 7.75,
+        "p": 0.0
+      }
+    }
+  },
+  "V6_real_per_target_ci95_n76": {
+    "left_23.5_pm_8.8": [
+      21.49,
+      25.51
+    ],
+    "right_32.2_pm_10.5": [
+      29.8,
+      34.6
+    ]
+  },
+  "V6_real_per_target_ci95_n80": {
+    "left": [
+      21.54,
+      25.46
+    ],
+    "right": [
+      29.86,
+      34.54
+    ]
+  },
+  "V7_real_mean_error_welch_independent": {
+    "left": 13.66,
+    "right": 14.0
+  },
+  "V8_timing_table2_vs_table8_pct_diff": {
+    "PhiCON_CPU": -9.4,
+    "PhiCON_GPU": 11.3,
+    "LNN_CPU": 0.4,
+    "LNN_GPU": 8.9
+  },
+  "V9_params": {
+    "sim": {
+      "NODE_calc": 710234,
+      "NODE_table": 710234,
+      "LNN_calc": 203584,
+      "LNN_table": 203584,
+      "FBCON_calc": 12105,
+      "FBCON_table": 12375,
+      "FBCON_diff": 270,
+      "PhiCON_calc": 19761,
+      "PhiCON_table": 20031,
+      "PhiCON_diff": 270,
+      "diff_equals_9N": true
+    },
+    "real": {
+      "NODE_calc": 336932,
+      "NODE_table": 336932,
+      "LNN_calc": 200603,
+      "LNN_table": 200603,
+      "FBCON_calc": 1926,
+      "FBCON_table": 2034,
+      "FBCON_diff": 108,
+      "PhiCON_calc": 3048,
+      "PhiCON_table": 3156,
+      "PhiCON_diff": 108,
+      "diff_equals_9N": true
+    }
+  },
+  "V10_mass_kg": {
+    "sim_baseline": 0.2356,
+    "sim_heavy": 0.6126,
+    "real_cable": 0.6769
+  },
+  "V10_weight_N": {
+    "sim_baseline": 2.31,
+    "sim_heavy": 6.01,
+    "real_cable": 6.64
+  },
+  "V10_pd_only_residual_force_N": {
+    "sim_baseline_Kp10": 2.39,
+    "sim_heavy_Kp10": 4.59,
+    "real_left_Kp200": 12.74,
+    "real_right_Kp200": 9.66
+  },
+  "V10_implied_mass_kg": 1.002,
+  "V11_table9_kd_over_sqrtkp": [
+    0.316,
+    0.317,
+    0.316
+  ],
+  "V11_table9_reduction_pct": {
+    "10": 99.37,
+    "50": 99.09,
+    "200": 98.76
+  },
+  "V11_pd_error_times_kp_N": [
+    2.386,
+    2.41,
+    2.42
+  ]
+}
