@@ -1,0 +1,336 @@
+{
+ "t3_denominator_candidates": [
+  20,
+  40
+ ],
+ "t3_real_per_task": {
+  "EgoEngine": {
+   "Mustard": {
+    "k": 8,
+    "n": 20,
+    "sr": 0.4,
+    "wilson95": [
+     0.2188,
+     0.6134
+    ]
+   },
+   "Drawer": {
+    "k": 7,
+    "n": 20,
+    "sr": 0.35,
+    "wilson95": [
+     0.1812,
+     0.5671
+    ]
+   },
+   "Flower": {
+    "k": 14,
+    "n": 20,
+    "sr": 0.7,
+    "wilson95": [
+     0.481,
+     0.8545
+    ]
+   },
+   "Hammer": {
+    "k": 12,
+    "n": 20,
+    "sr": 0.6,
+    "wilson95": [
+     0.3866,
+     0.7812
+    ]
+   }
+  },
+  "Real Robot": {
+   "Mustard": {
+    "k": 16,
+    "n": 20,
+    "sr": 0.8,
+    "wilson95": [
+     0.584,
+     0.9193
+    ]
+   },
+   "Drawer": {
+    "k": 16,
+    "n": 20,
+    "sr": 0.8,
+    "wilson95": [
+     0.584,
+     0.9193
+    ]
+   },
+   "Flower": {
+    "k": 14,
+    "n": 20,
+    "sr": 0.7,
+    "wilson95": [
+     0.481,
+     0.8545
+    ]
+   },
+   "Hammer": {
+    "k": 5,
+    "n": 20,
+    "sr": 0.25,
+    "wilson95": [
+     0.1119,
+     0.4687
+    ]
+   }
+  },
+  "Phantom": {
+   "Mustard": {
+    "k": 0,
+    "n": 20,
+    "sr": 0.0,
+    "wilson95": [
+     0.0,
+     0.1611
+    ]
+   },
+   "Drawer": {
+    "k": 1,
+    "n": 20,
+    "sr": 0.05,
+    "wilson95": [
+     0.0089,
+     0.2361
+    ]
+   },
+   "Flower": {
+    "k": 0,
+    "n": 20,
+    "sr": 0.0,
+    "wilson95": [
+     0.0,
+     0.1611
+    ]
+   },
+   "Hammer": {
+    "k": 0,
+    "n": 20,
+    "sr": 0.0,
+    "wilson95": [
+     0.0,
+     0.1611
+    ]
+   }
+  },
+  "Human Video": {
+   "Mustard": {
+    "k": 0,
+    "n": 20,
+    "sr": 0.0,
+    "wilson95": [
+     0.0,
+     0.1611
+    ]
+   },
+   "Drawer": {
+    "k": 2,
+    "n": 20,
+    "sr": 0.1,
+    "wilson95": [
+     0.0279,
+     0.301
+    ]
+   },
+   "Flower": {
+    "k": 0,
+    "n": 20,
+    "sr": 0.0,
+    "wilson95": [
+     0.0,
+     0.1611
+    ]
+   },
+   "Hammer": {
+    "k": 0,
+    "n": 20,
+    "sr": 0.0,
+    "wilson95": [
+     0.0,
+     0.1611
+    ]
+   }
+  }
+ },
+ "t3_fisher_vs_real": {
+  "Mustard": {
+   "EgoEngine_vs_Real_p": 0.0225,
+   "diff": -0.4
+  },
+  "Drawer": {
+   "EgoEngine_vs_Real_p": 0.0095,
+   "diff": -0.45
+  },
+  "Flower": {
+   "EgoEngine_vs_Real_p": 1.0,
+   "diff": 0.0
+  },
+  "Hammer": {
+   "EgoEngine_vs_Real_p": 0.0536,
+   "diff": 0.35
+  },
+  "pooled": {
+   "EgoEngine": "41/80",
+   "Real": "51/80",
+   "p": 0.1498,
+   "EgoEngine_wilson": [
+    0.4049,
+    0.6189
+   ],
+   "Real_wilson": [
+    0.5281,
+    0.7343
+   ]
+  }
+ },
+ "t4_ablation_check": {
+  "Human Videos": {
+   "k": 2,
+   "n": 80,
+   "k_over_n": 0.025,
+   "reported": 0.03,
+   "consistent_after_rounding": true
+  },
+  "+Visual branch": {
+   "k": 4,
+   "n": 80,
+   "k_over_n": 0.05,
+   "reported": 0.05,
+   "consistent_after_rounding": true
+  },
+  "+Action branch": {
+   "k": 34,
+   "n": 80,
+   "k_over_n": 0.425,
+   "reported": 0.43,
+   "consistent_after_rounding": true
+  },
+  "EgoEngine": {
+   "k": 41,
+   "n": 80,
+   "k_over_n": 0.5125,
+   "reported": 0.51,
+   "consistent_after_rounding": true
+  }
+ },
+ "t4_fisher": {
+  "Full vs Visual-only": {
+   "p": 2.59e-11,
+   "k": "41 vs 4",
+   "n": 80
+  },
+  "Full vs Action-only": {
+   "p": 0.342,
+   "k": "41 vs 34",
+   "n": 80
+  },
+  "Full vs Human videos": {
+   "p": 3.45e-13,
+   "k": "41 vs 2",
+   "n": 80
+  }
+ },
+ "t2_taco_denominators": [
+  12,
+  24,
+  36,
+  48,
+  52,
+  53,
+  59,
+  60,
+  63,
+  64,
+  65,
+  69,
+  71,
+  72,
+  75,
+  76,
+  77,
+  81,
+  83,
+  84,
+  87,
+  88,
+  89,
+  92,
+  93,
+  95,
+  96,
+  99,
+  100
+ ],
+ "t2_aria_denominators": [
+  10,
+  20,
+  30,
+  40,
+  41,
+  49,
+  50,
+  51,
+  59,
+  60,
+  61,
+  69,
+  70,
+  71,
+  79,
+  80,
+  81,
+  82,
+  83,
+  84,
+  86,
+  87,
+  88,
+  89,
+  90,
+  91,
+  92,
+  93,
+  94,
+  96,
+  97,
+  98,
+  99,
+  100
+ ],
+ "t2_taco_denominators_note": "본문은 TACO 16쌍이라고 한다. 16으로는 0.17(=2/16 또는 3/16)을 만들 수 없다. N=12 또는 N=64(16쌍 x 4회 추정)와 맞는다. 실제 시도 수는 보고되지 않았다.",
+ "t2_taco_16_possible": false,
+ "t2_cost_reduction_pct": {
+  "TACO": 52.7,
+  "Aria": 18.2
+ },
+ "t2_spider_vs_egoengine_cost_ratio_taco": 4.4,
+ "t2_throughput_gain_pct": 22.03,
+ "t2_taco_over_aria_length_ratio_check": {
+  "reported": 2.39,
+  "implied_aria_mean_len": 137.0
+ },
+ "t2_aria_fisher_ego_vs_rl_p": 1.0,
+ "tE1_sparc_check": {
+  "Real": {
+   "mean_of_task_values": -6.737,
+   "reported_all": -6.6,
+   "gap": 0.138
+  },
+  "EgoEngine": {
+   "mean_of_task_values": -4.875,
+   "reported_all": -4.81,
+   "gap": 0.065
+  }
+ },
+ "tE1_hammer_note": "Hammer에서는 Real(-3.21)이 EgoEngine(-3.25)보다 약간 매끄럽다.",
+ "t1_fd_rel_diff_pct_vs_phantom": {
+  "ResNet18": -0.85,
+  "VGG16": -1.01,
+  "DINOv2": 0.53
+ }
+}
