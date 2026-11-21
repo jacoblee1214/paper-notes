@@ -1,0 +1,380 @@
+{
+  "K1_six_task_scores": {
+    "GR00T N1.7 joint": {
+      "score": 0.5083,
+      "reported": 0.51,
+      "matches_reported": true,
+      "ci95": [
+        0.43,
+        0.587
+      ]
+    },
+    "pi0.5 joint": {
+      "score": 0.6283,
+      "reported": 0.63,
+      "matches_reported": true,
+      "ci95": [
+        0.549,
+        0.708
+      ]
+    },
+    "SHAPE EEF": {
+      "score": 0.5233,
+      "reported": 0.52,
+      "matches_reported": true,
+      "ci95": [
+        0.445,
+        0.602
+      ]
+    },
+    "SHAPE joint": {
+      "score": 0.7983,
+      "reported": 0.8,
+      "matches_reported": true,
+      "ci95": [
+        0.732,
+        0.864
+      ]
+    },
+    "w/o human EEF": {
+      "score": 0.47,
+      "reported": 0.47,
+      "matches_reported": true,
+      "ci95": [
+        0.388,
+        0.552
+      ]
+    },
+    "w/o human joint": {
+      "score": 0.6417,
+      "reported": 0.64,
+      "matches_reported": true,
+      "ci95": [
+        0.568,
+        0.716
+      ]
+    },
+    "w/o FAST EEF": {
+      "score": 0.2167,
+      "reported": 0.22,
+      "matches_reported": true,
+      "ci95": [
+        0.154,
+        0.279
+      ]
+    },
+    "w/o FAST joint": {
+      "score": 0.4733,
+      "reported": 0.47,
+      "matches_reported": true,
+      "ci95": [
+        0.391,
+        0.556
+      ]
+    },
+    "w/o both EEF": {
+      "score": 0.1983,
+      "reported": 0.2,
+      "matches_reported": true,
+      "ci95": [
+        0.134,
+        0.263
+      ]
+    },
+    "w/o both joint": {
+      "score": 0.4217,
+      "reported": 0.42,
+      "matches_reported": true,
+      "ci95": [
+        0.335,
+        0.508
+      ]
+    }
+  },
+  "K1_z_tests": [
+    {
+      "comparison": "SHAPE joint - pi0.5 joint",
+      "diff": 0.17,
+      "z": 3.22,
+      "p_two_sided": 0.0013
+    },
+    {
+      "comparison": "SHAPE joint - GR00T N1.7 joint",
+      "diff": 0.29,
+      "z": 5.54,
+      "p_two_sided": 3e-08
+    },
+    {
+      "comparison": "SHAPE joint - w/o human joint",
+      "diff": 0.1566,
+      "z": 3.1,
+      "p_two_sided": 0.002
+    },
+    {
+      "comparison": "w/o human joint - pi0.5 joint",
+      "diff": 0.0134,
+      "z": 0.24,
+      "p_two_sided": 0.81
+    },
+    {
+      "comparison": "SHAPE joint - SHAPE EEF",
+      "diff": 0.275,
+      "z": 5.24,
+      "p_two_sided": 1.6e-07
+    },
+    {
+      "comparison": "w/o FAST joint - w/o both joint",
+      "diff": 0.0516,
+      "z": 0.85,
+      "p_two_sided": 0.4
+    },
+    {
+      "comparison": "w/o human joint - w/o both joint",
+      "diff": 0.22,
+      "z": 3.8,
+      "p_two_sided": 0.00015
+    }
+  ],
+  "K2_joint_vs_eef": {
+    "pairs": 24,
+    "joint_better": 23,
+    "exceptions": [
+      [
+        "w/o FAST",
+        "Open Cabinet",
+        0.55,
+        0.65
+      ]
+    ],
+    "score_gap_joint_minus_eef": {
+      "SHAPE": 0.28,
+      "w/o human": 0.17,
+      "w/o FAST": 0.25,
+      "w/o both": 0.22
+    }
+  },
+  "K2_removing_LFAST": {
+    "comparisons": 24,
+    "pretrained_with_LFAST_higher": 22,
+    "not_higher": [
+      [
+        "EEF",
+        "Insert Battery",
+        "SHAPE vs w/o FAST",
+        0.0
+      ],
+      [
+        "joint",
+        "Reinsert USB",
+        "w/o human vs w/o both",
+        -0.08
+      ]
+    ]
+  },
+  "K2_binary_tasks": {
+    "w/o human joint": "61/80 = 76.25%",
+    "SHAPE joint": "72/80 = 90.00%"
+  },
+  "K2_strict_full_completions": {
+    "SHAPE joint": "76/120 = 63.3%",
+    "pi0.5 joint": "61/120 = 50.8%",
+    "GR00T N1.7 joint": "51/120 = 42.5%"
+  },
+  "K2_three_task_score_joint_insert_usb_wipe": {
+    "SHAPE joint": 0.75,
+    "w/o FAST joint": 0.36
+  },
+  "K3_stage_table_consistency": {
+    "GR00T N1.7 joint": {
+      "USB_from_S4": 0.175,
+      "USB_reported": 0.18,
+      "TypeC_from_S4": 0.52,
+      "TypeC_reported": 0.52,
+      "match": true
+    },
+    "pi0.5 joint": {
+      "USB_from_S4": 0.25,
+      "USB_reported": 0.25,
+      "TypeC_from_S4": 0.62,
+      "TypeC_reported": 0.62,
+      "match": true
+    },
+    "SHAPE EEF": {
+      "USB_from_S4": 0.15,
+      "USB_reported": 0.15,
+      "TypeC_from_S4": 0.54,
+      "TypeC_reported": 0.54,
+      "match": true
+    },
+    "SHAPE joint": {
+      "USB_from_S4": 0.55,
+      "USB_reported": 0.55,
+      "TypeC_from_S4": 0.64,
+      "TypeC_reported": 0.64,
+      "match": true
+    },
+    "w/o human EEF": {
+      "USB_from_S4": 0.15,
+      "USB_reported": 0.15,
+      "TypeC_from_S4": 0.42,
+      "TypeC_reported": 0.42,
+      "match": true
+    },
+    "w/o human joint": {
+      "USB_from_S4": 0.25,
+      "USB_reported": 0.25,
+      "TypeC_from_S4": 0.55,
+      "TypeC_reported": 0.55,
+      "match": true
+    },
+    "w/o FAST EEF": {
+      "USB_from_S4": 0.0,
+      "USB_reported": 0.0,
+      "TypeC_from_S4": 0.2,
+      "TypeC_reported": 0.2,
+      "match": true
+    },
+    "w/o FAST joint": {
+      "USB_from_S4": 0.075,
+      "USB_reported": 0.08,
+      "TypeC_from_S4": 0.51,
+      "TypeC_reported": 0.51,
+      "match": true
+    },
+    "w/o both EEF": {
+      "USB_from_S4": 0.025,
+      "USB_reported": 0.03,
+      "TypeC_from_S4": 0.105,
+      "TypeC_reported": 0.11,
+      "match": true
+    },
+    "w/o both joint": {
+      "USB_from_S4": 0.325,
+      "USB_reported": 0.33,
+      "TypeC_from_S4": 0.35,
+      "TypeC_reported": 0.35,
+      "match": true
+    }
+  },
+  "K3_all_match": true,
+  "K4_trial_count": {
+    "pretrained_4_models_x_2_streams_x_6_tasks": 960,
+    "baselines_2_models_x_6_tasks": 240,
+    "H2R_4_models_x_2_streams_x_3_tasks": 480,
+    "total": 1680,
+    "paper_claim": 1680
+  },
+  "K5_h2r_totals": {
+    "w/o both": "0/60",
+    "w/o human": "4/60",
+    "w/o FAST": "7/60",
+    "SHAPE": "21/60"
+  },
+  "K5_h2r_joint_stream": {
+    "successes": 0,
+    "trials": 240
+  },
+  "K5_h2r_eef_stream": {
+    "successes": 32,
+    "trials": 240
+  },
+  "K5_h2r_wilson95": {
+    "w/o both": [
+      0.0,
+      6.0
+    ],
+    "w/o human": [
+      2.6,
+      15.9
+    ],
+    "w/o FAST": [
+      5.8,
+      22.2
+    ],
+    "SHAPE": [
+      24.2,
+      47.6
+    ]
+  },
+  "K5_pooled_fisher": {
+    "SHAPE vs w/o FAST (LFAST, human pretraining on)": {
+      "diff_pp": 23.3,
+      "fisher_p": 0.0045
+    },
+    "SHAPE vs w/o human (human data, LFAST on)": {
+      "diff_pp": 28.3,
+      "fisher_p": 0.0002
+    },
+    "w/o FAST vs w/o both (human data, LFAST off)": {
+      "diff_pp": 11.7,
+      "fisher_p": 0.013
+    },
+    "w/o human vs w/o both (LFAST, robot-only pretraining)": {
+      "diff_pp": 6.7,
+      "fisher_p": 0.1187
+    }
+  },
+  "K5_stratified": {
+    "SHAPE vs w/o FAST": {
+      "MH_chi2": 9.25,
+      "MH_p": 0.00235,
+      "perm_p_20k": 0.00385,
+      "paper": "p = 0.004"
+    },
+    "SHAPE vs w/o human": {
+      "MH_chi2": 14.77,
+      "MH_p": 0.00012,
+      "perm_p_20k": 0.00035,
+      "paper": "p < 0.001"
+    }
+  },
+  "K7_cont_head_H2R": {
+    "SHAPE_total": 21,
+    "cont_total": 11,
+    "diff_pts": 16.7,
+    "MH_chi2": 4.48,
+    "MH_p": 0.03424,
+    "perm_p_20k": 0.05565,
+    "paper_CMH_p": 0.055
+  },
+  "K6_robocasa_weighted": {
+    "GR00T N1.7": {
+      "calc_All": 62.6,
+      "reported_All": 62.6,
+      "match": true
+    },
+    "pi0.5": {
+      "calc_All": 64.75,
+      "reported_All": 64.8,
+      "match": true
+    },
+    "w/o both": {
+      "calc_All": 62.0,
+      "reported_All": 62.0,
+      "match": true
+    },
+    "w/o human": {
+      "calc_All": 65.23,
+      "reported_All": 65.2,
+      "match": true
+    },
+    "w/o FAST": {
+      "calc_All": 69.62,
+      "reported_All": 69.6,
+      "match": true
+    },
+    "SHAPE": {
+      "calc_All": 72.22,
+      "reported_All": 72.2,
+      "match": true
+    }
+  },
+  "K6_robocasa_differences_pp": {
+    "human data with LFAST (72.2 - 65.2)": 7.0,
+    "human data without LFAST (69.6 - 62.0)": 7.6,
+    "LFAST with human data (72.2 - 69.6)": 2.6,
+    "LFAST without human data (65.2 - 62.0)": 3.2,
+    "SHAPE minus w/o both (72.2 - 62.0)": 10.2,
+    "SHAPE minus pi0.5 (72.2 - 64.8)": 7.4
+  }
+}
