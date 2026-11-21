@@ -1,0 +1,203 @@
+{
+  "V1_projection_vs_bruteforce": {
+    "mu": 0.6,
+    "n": 300,
+    "max_abs_err": 1.790464153156554e-05,
+    "note": "closed-form eq.(19) vs SLSQP minimizer over K"
+  },
+  "V1_moreau_decomposition": {
+    "max_abs_err": 1.1853938111129682e-15,
+    "note": "x = Pi_K(x) + Pi_Kpolar(x), Pi_Kpolar(x) = -Pi_K*(-x)"
+  },
+  "V2_socfb": {
+    "residual_complementary_pair": 0.0,
+    "residual_noncomplementary_pair": 0.7567069052203392,
+    "jacobian_max_abs_diff_eq35_vs_fd": 9.311629245445374e-11,
+    "note": "psi = 0 at a complementary pair, nonzero otherwise; closed-form Jacobian matches FD"
+  },
+  "V3_pyramid_anisotropy": {
+    "mu": 0.6,
+    "by_K": {
+      "3": {
+        "min_radius_numeric": 0.2999999999999998,
+        "max_radius_numeric": 0.6,
+        "min_radius_formula_mu_cos_pi_over_K": 0.30000000000000004,
+        "anisotropy_min_over_max": 0.4999999999999997
+      },
+      "4": {
+        "min_radius_numeric": 0.4242640687119284,
+        "max_radius_numeric": 0.6,
+        "min_radius_formula_mu_cos_pi_over_K": 0.4242640687119285,
+        "anisotropy_min_over_max": 0.7071067811865474
+      },
+      "6": {
+        "min_radius_numeric": 0.519615242270663,
+        "max_radius_numeric": 0.6,
+        "min_radius_formula_mu_cos_pi_over_K": 0.5196152422706632,
+        "anisotropy_min_over_max": 0.8660254037844384
+      },
+      "8": {
+        "min_radius_numeric": 0.5543277195067721,
+        "max_radius_numeric": 0.6,
+        "min_radius_formula_mu_cos_pi_over_K": 0.5543277195067721,
+        "anisotropy_min_over_max": 0.9238795325112868
+      }
+    }
+  },
+  "V4_lift_off_relaxation_vs_exact": {
+    "relaxed": {
+      "f": [
+        80.00000109269199,
+        -40.000000546345994
+      ],
+      "v_plus": [
+        0.30000001092691986,
+        0.5999999945365401
+      ],
+      "v_n_plus": 0.30000001092691986,
+      "mu_abs_vt_plus": 0.29999999726827004,
+      "lift_off_rate_rel": 1.3658649822279045e-08
+    },
+    "exact_closed_form": {
+      "f": [
+        50.0,
+        -25.0
+      ],
+      "v_plus": [
+        0.0,
+        0.75
+      ],
+      "v_n_plus": 0.0,
+      "note": "exact N-CCP sliding branch, closed form"
+    },
+    "mu": 0.5,
+    "v_f": [
+      -0.5,
+      1.0
+    ]
+  },
+  "V5_regularization_static_friction_loss": {
+    "P": 10.0,
+    "W": 1.0,
+    "mu": 0.5,
+    "by_R": {
+      "0.0": {
+        "f_t_numeric": 0.9999999619423284,
+        "f_n_numeric": 10.00000012133125,
+        "f_t_analytic_W_over_1plusR": 1.0,
+        "required_to_hold_W": 1.0,
+        "slip_fraction_deficit": 3.8057671569724505e-08
+      },
+      "0.2": {
+        "f_t_numeric": 0.8333333224506302,
+        "f_n_numeric": 8.333333304558693,
+        "f_t_analytic_W_over_1plusR": 0.8333333333333334,
+        "required_to_hold_W": 1.0,
+        "slip_fraction_deficit": 0.1666666775493698
+      },
+      "1.0": {
+        "f_t_numeric": 0.5000000242826615,
+        "f_n_numeric": 4.999999991593275,
+        "f_t_analytic_W_over_1plusR": 0.5,
+        "required_to_hold_W": 1.0,
+        "slip_fraction_deficit": 0.49999997571733845
+      }
+    },
+    "f_t_vs_pressing_force_R1": {
+      "2.0": 0.49999999231658787,
+      "10.0": 0.5000000242826615,
+      "100.0": 0.5000032279648757
+    },
+    "note": "R=0 holds W exactly (f_t = W) while mu*P >= W; R>0 gives f_t = W/(1+R), independent of P"
+  },
+  "V6_nls_vs_regularized_qcqp": {
+    "max_abs_diff_force": 0.0003230651707895049,
+    "max_abs_diff_accel": 0.00034389816404711837,
+    "force_norm": 462.575369304631,
+    "note": "eq.(61) NLS minimizer and eq.(68) SOCQP minimizer coincide; f = R^{-1} Pi_K(a_ref - J qdd)"
+  },
+  "V7_kinetic_energy_identity": {
+    "max_abs_residual_after_removing_const": 3.467448550509289e-12,
+    "note": "paper eq.(75) identity; gamma = 0 case"
+  },
+  "V8_penalty_penetration_scaling": {
+    "m": 1.0,
+    "g": 9.81,
+    "by_k": {
+      "100.0": {
+        "penetration_m": 0.0981
+      },
+      "1000.0": {
+        "penetration_m": 0.009810000000000001
+      },
+      "10000.0": {
+        "penetration_m": 0.000981
+      }
+    },
+    "note": "penalty steady penetration = m g / k; complementarity time-stepping gives 0 exactly"
+  },
+  "V9_rank_deficient_contacts": {
+    "rank_G": 3,
+    "n_contacts": 4,
+    "forces_null_dimension": 1,
+    "null_vector_of_G": [
+      0.49999999999999994,
+      -0.5,
+      -0.5,
+      0.49999999999999994
+    ],
+    "Jn_T_null_vector_norm": 7.850462293418876e-17,
+    "note": "rank 3 (vz, wx, wy): sum AND both moments of the forces are fixed by the motion; one free force direction remains. Text says only the sum is unique -> stricter than rank gives"
+  },
+  "V10_regularization_selection_claim": {
+    "f_selected_argmin_fRf_over_exact_set": [
+      1.5,
+      1.5,
+      0.0,
+      2.0
+    ],
+    "by_eps": {
+      "0.1": {
+        "f_reg": [
+          0.308342132692547,
+          0.5036958818502846,
+          0.0,
+          0.7560718051355826
+        ],
+        "gap_to_selection": 1.9899818397504228,
+        "residual_Gf_minus_b": 0.11644200244186202
+      },
+      "0.001": {
+        "f_reg": [
+          1.4505410711234061,
+          1.4739872855772822,
+          0.0,
+          1.9540922826953622
+        ],
+        "gap_to_selection": 0.07232126565112357,
+        "residual_Gf_minus_b": 0.0034669937389229556
+      },
+      "1e-05": {
+        "f_reg": [
+          1.4994877319344353,
+          1.4997375081017552,
+          0.0,
+          1.9995252056390864
+        ],
+        "gap_to_selection": 0.0007461569893774949,
+        "residual_Gf_minus_b": 3.53482541645285e-05
+      },
+      "1e-07": {
+        "f_reg": [
+          1.4999948754683727,
+          1.4999973752645768,
+          0.0,
+          1.9999952510514178
+        ],
+        "gap_to_selection": 7.463415644110754e-06,
+        "residual_Gf_minus_b": 3.5351619666475746e-07
+      }
+    },
+    "note": "regularized minimizer is not the exact-set selection; the gap shrinks with eps only as a perturbation, so 'selects the smallest weighted norm' holds only approximately"
+  }
+}
