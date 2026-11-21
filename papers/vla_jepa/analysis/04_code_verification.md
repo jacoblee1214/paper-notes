@@ -43,7 +43,7 @@
 - VLM(학생)은 `example["image"]`, 즉 현재 관측만 받습니다. 이 부분은 논문과 일치합니다.
 - 예측기 입력 `input_states`는 `video_embeddings[:, : (T−1)·dim]`입니다. `video_embeddings`는 `self.vj_encoder.get_vision_features(pixel_values_videos=input_videos)`로 얻는데, 이 `input_videos`는 **T 프레임 전체 클립**입니다(`batch_videos[i]`, `T`는 `num_frames`=8).
 - 즉 예측기가 받는 "과거" 상태는 미래 프레임을 포함해 인코딩된 특징입니다. 인코더가 프레임 사이에 양방향 어텐션을 쓴다면, 과거 스텝의 특징에 미래 정보가 섞입니다.
-- 인코더 구현(`AutoModel`, V-JEPA2)은 이 저장소에 없고 HF `transformers` 쪽 코드입니다. 양방향 어텐션 여부는 **미검증**입니다. V-JEPA 2 ViT 계열은 일반적으로 전 시공간 토큰이 서로 보는 구조로 알려져 있지만, 이 저장소에서 확인한 것은 아닙니다.
+- 인코더 구현(`AutoModel`, V-JEPA2)은 이 저장소에 없고 HF `transformers` 쪽 코드입니다. **추가 확인 (2026-11-21):** V-JEPA 2 공식 코드(facebookresearch/vjepa2, 커밋 204698b)의 `src/models/vision_transformer.py`는 블록을 `is_causal` 기본값(False)으로 만들고 `attn_mask=None`으로 호출합니다. 인코더는 클립 안의 모든 시공간 토큰이 서로 보는 양방향 구조입니다. HF `transformers` main 브랜치 구현도 마스크 없이 호출합니다(V-JEPA 2 분석 04 D1). 다만 이 저장소가 고정한 `transformers` 버전에서 직접 확인하지는 않았고, 실제 누수 크기는 측정하지 않았습니다.
 - 예측기 내부의 인과 마스크(`is_frame_causal=True`, `build_action_block_causal_attention_mask`)는 **시간 축 어텐션**만 제한합니다. 입력 특징 자체가 미래 프레임을 본 뒤에 만들어졌다면 이 마스크로는 막히지 않습니다.
 
 이것이 논문 주장을 뒤집는다는 뜻은 아닙니다. 논문의 "누수 없음"은 학생 경로(VLM)에 대한 주장으로 읽힙니다. 다만 세계모델의 예측 입력 쪽에 누수 경로가 있을 수 있고, 논문은 이를 다루지 않습니다. 토이(`analysis/toy_leakage.py`)는 양방향 인코더가 과거 특징에 미래 상태 정보를 더한다는 **메커니즘**만 보입니다. 실제 모델에서 그 크기는 측정하지 않았습니다(`03` §4).
@@ -76,4 +76,4 @@
 
 - 논문 수치 재현에는 8×A100, SSv2 220K 영상, DROID 76K 궤적, LIBERO와 SimplerEnv 시뮬레이터가 필요합니다. 이 맥에는 없습니다(`README.md` 구현 가능성 판정).
 - 설정에 누락된 값(D2 β, D7 반복 횟수, D5 세계모델 학습률)이 있어서, 저장소만으로 논문 표를 그대로 재현하기는 어렵습니다.
-- 외부 인코더 `AutoModel.from_pretrained(V-JEPA2)`의 어텐션 구조는 이 저장소에서 확인되지 않습니다(D4의 미검증 항목).
+- 외부 인코더 `AutoModel.from_pretrained(V-JEPA2)`의 어텐션 구조는 이 저장소에 없습니다. V-JEPA 2 공식 코드에서는 양방향으로 확인했습니다(2026-11-21 추가, D4). 이 저장소가 고정한 `transformers` 버전에서는 확인하지 않았습니다.
