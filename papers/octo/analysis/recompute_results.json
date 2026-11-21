@@ -1,0 +1,211 @@
+{
+  "table_I": {
+    "avg_check": {
+      "Scratch": {
+        "mean_computed": 20.0,
+        "reported": 20
+      },
+      "VC-1": {
+        "mean_computed": 15.83,
+        "reported": 15
+      },
+      "Octo": {
+        "mean_computed": 72.5,
+        "reported": 72
+      }
+    },
+    "per_domain": {
+      "Berkeley Insertion*": {
+        "octo": "14/20",
+        "octo_wilson95": [
+          0.481,
+          0.855
+        ],
+        "best_baseline": "Scratch",
+        "baseline": "2/20",
+        "fisher_p_two_sided": 0.0002
+      },
+      "Stanford Coffee": {
+        "octo": "15/20",
+        "octo_wilson95": [
+          0.531,
+          0.888
+        ],
+        "best_baseline": "Scratch",
+        "baseline": "9/20",
+        "fisher_p_two_sided": 0.1053
+      },
+      "CMU Baking": {
+        "octo": "10/20",
+        "octo_wilson95": [
+          0.299,
+          0.701
+        ],
+        "best_baseline": "VC-1",
+        "baseline": "6/20",
+        "fisher_p_two_sided": 0.3332
+      },
+      "Berkeley Pick-Up†": {
+        "octo": "12/20",
+        "octo_wilson95": [
+          0.387,
+          0.781
+        ],
+        "best_baseline": "Scratch",
+        "baseline": "0/20",
+        "fisher_p_two_sided": 0.0
+      },
+      "Berkeley Coke": {
+        "octo": "20/20",
+        "octo_wilson95": [
+          0.839,
+          1.0
+        ],
+        "best_baseline": "Scratch",
+        "baseline": "4/20",
+        "fisher_p_two_sided": 0.0
+      },
+      "Berkeley Bimanual†": {
+        "octo": "16/20",
+        "octo_wilson95": [
+          0.584,
+          0.919
+        ],
+        "best_baseline": "VC-1",
+        "baseline": "10/20",
+        "fisher_p_two_sided": 0.0958
+      }
+    },
+    "octo_minus_best_baseline_pp_avg": 52.5,
+    "octo_beats_best_baseline_in_domains": "6/6",
+    "paired_t_over_domains_vs_best_baseline": {
+      "mean_diff_pp": 46.67,
+      "t": 4.89,
+      "p": 0.0045,
+      "n_domains": 6
+    }
+  },
+  "table_VI_II": {
+    "rows": {
+      "Octo-small": {
+        "mean_computed": 82.5,
+        "reported_avg": 83,
+        "successes_of_40": 33,
+        "wilson95": [
+          0.68,
+          0.913
+        ]
+      },
+      "RT-X mix": {
+        "mean_computed": 60.0,
+        "reported_avg": 60,
+        "successes_of_40": 24,
+        "wilson95": [
+          0.446,
+          0.737
+        ]
+      },
+      "Bridge only": {
+        "mean_computed": 42.5,
+        "reported_avg": 43,
+        "successes_of_40": 17,
+        "wilson95": [
+          0.285,
+          0.578
+        ]
+      },
+      "Discretized": {
+        "mean_computed": 17.5,
+        "reported_avg": 18,
+        "successes_of_40": 7,
+        "wilson95": [
+          0.087,
+          0.32
+        ]
+      },
+      "MSE head": {
+        "mean_computed": 35.0,
+        "reported_avg": 35,
+        "successes_of_40": 14,
+        "wilson95": [
+          0.221,
+          0.505
+        ]
+      },
+      "ResNet+Transformer": {
+        "mean_computed": 70.0,
+        "reported_avg": 70,
+        "successes_of_40": 28,
+        "wilson95": [
+          0.546,
+          0.819
+        ]
+      }
+    },
+    "fisher_vs_octo": {
+      "RT-X mix": 0.0469,
+      "Bridge only": 0.0004,
+      "Discretized": 0.0,
+      "MSE head": 0.0,
+      "ResNet+Transformer": 0.2933
+    }
+  },
+  "table_VII": {
+    "In-distribution": {
+      "mean_computed": 85.0,
+      "reported": 85,
+      "successes_of_20": 17,
+      "wilson95": [
+        0.64,
+        0.948
+      ]
+    },
+    "Novel objects": {
+      "mean_computed": 80.0,
+      "reported": 80,
+      "successes_of_20": 16,
+      "wilson95": [
+        0.584,
+        0.919
+      ]
+    },
+    "Novel environment": {
+      "mean_computed": 40.0,
+      "reported": 40,
+      "successes_of_20": 8,
+      "wilson95": [
+        0.219,
+        0.613
+      ]
+    },
+    "Novel skill": {
+      "mean_computed": 5.0,
+      "reported": 5,
+      "successes_of_20": 1,
+      "wilson95": [
+        0.009,
+        0.236
+      ]
+    },
+    "note": "과제당 10회. 집계 20회(두 과제).",
+    "fisher_in_dist_vs_novel_skill_p": 4.0553795934170275e-07
+  },
+  "table_III": {
+    "n_datasets": 25,
+    "sum_pct_reported_values": 99.75,
+    "note": "UCSD Kitchen '<0.1%'는 0.05로 넣음. 반올림 오차 최대 ±1.25%p"
+  },
+  "compute": {
+    "samples_total_M": 614.4,
+    "samples_per_sec_all_chips": 12190,
+    "samples_per_sec_per_chip_v4_128": 95.2,
+    "note": "논문 부록 D: 300k 스텝, 배치 2048, TPU v4-128, 14시간. 공개 config 배치는 512 (V4)"
+  },
+  "params_rough": {
+    "octo_small_block_only_M": 21.2,
+    "octo_small_reported_M": 27,
+    "octo_base_block_only_M": 84.9,
+    "octo_base_reported_M": 93,
+    "note": "블록만 세면 Small 21.2M, Base 84.9M. 차이는 토크나이저와 헤드 등(추정)"
+  }
+}
