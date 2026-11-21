@@ -1,0 +1,901 @@
+{
+  "hash_check": {
+    "files": 21,
+    "matching": 21,
+    "mismatch": []
+  },
+  "census_total": {
+    "category_n": 485,
+    "pool_n": 100000,
+    "physics_pass_n": 83618,
+    "runtime_pass_n": 99586,
+    "intersection_n": 83365
+  },
+  "fig4_overlap": {
+    "both": 83365,
+    "phys_only": 253,
+    "rc_only": 16221,
+    "neither": 161
+  },
+  "retention_pct": {
+    "physical": 83.62,
+    "rc": 99.59,
+    "both": 83.36
+  },
+  "family_both_pct": {
+    "bag": 93.8,
+    "cloth_sheet": 98.46,
+    "garment": 98.29,
+    "shell": 87.88,
+    "solid": 60.92
+  },
+  "production_states_total": {
+    "accepted_first_pass": 83292,
+    "corrected_then_accepted": 326,
+    "rejected_model_limit": 16317,
+    "uncertain_human_escalation": 63,
+    "rejected_numerical_failure": 2
+  },
+  "soft_share_of_model_limit_pct": 82.69,
+  "phys_fail_vs_states_mismatch": [],
+  "pool_per_category_counts": {
+    "206": 395,
+    "207": 90
+  },
+  "lowest_intersection_categories": [
+    [
+      "Gummy Candy",
+      3,
+      206
+    ],
+    [
+      "Nama Chocolate",
+      9,
+      206
+    ],
+    [
+      "Toffee",
+      10,
+      207
+    ],
+    [
+      "Blackberry",
+      11,
+      207
+    ],
+    [
+      "Soft Chocolate Bar",
+      11,
+      206
+    ]
+  ],
+  "gummy_rows": [
+    [
+      "Gummy Candy",
+      "3",
+      "206"
+    ]
+  ],
+  "intersection_range": [
+    3,
+    207
+  ],
+  "crosstab_recovery": {
+    "cal_pass_held_pass": 682,
+    "cal_pass_held_fail": 49,
+    "cal_fail_held_pass": 3,
+    "cal_fail_held_fail": 83,
+    "missing": 23
+  },
+  "crosstab_filter": {
+    "cal_pass_held_pass": 8075,
+    "cal_pass_held_fail": 325,
+    "cal_fail_held_pass": 0,
+    "cal_fail_held_fail": 0,
+    "missing": 0
+  },
+  "bag_cal_only_rate_pct": {
+    "point": 3.869,
+    "wilson95": [
+      3.477,
+      4.303
+    ]
+  },
+  "filter_bags": {
+    "n_bags": 300,
+    "bags_with_any_reject": 26,
+    "runs_per_bag": [
+      [
+        28,
+        300
+      ]
+    ]
+  },
+  "bag_level_reject_rate_pct": {
+    "point": 8.67,
+    "wilson95": [
+      5.98,
+      12.4
+    ]
+  },
+  "filter_method_heterogeneity": {
+    "chi2": 2.279,
+    "dof": 6,
+    "p": 0.8923,
+    "pass_by_method": {
+      "one_shot_prior": 1148,
+      "vid2sid_style_reimplementation": 1151,
+      "full_numeric_agent": 1158,
+      "swim2real_style_reimplementation": 1159,
+      "fixed_profile": 1152,
+      "seeded_sobol": 1156,
+      "ruletune": 1151
+    }
+  },
+  "recovery_method_heterogeneity": {
+    "chi2": 0.601,
+    "dof": 6,
+    "p": 0.9964,
+    "pass_by_method": {
+      "ruletune": 98,
+      "vid2sid_style_reimplementation": 98,
+      "seeded_sobol": 97,
+      "fixed_profile": 100,
+      "swim2real_style_reimplementation": 96,
+      "full_numeric_agent": 97,
+      "one_shot_prior": 99
+    }
+  },
+  "threshold_consistency_filter": {
+    "cal_error_above_0.05_rows": 0,
+    "passed_indep_but_error_above_0.08": 0,
+    "failed_indep_but_error_le_0.08": 0
+  },
+  "pooled_errors_table15": {
+    "fixed_profile": {
+      "recovery_err": 0.0521,
+      "recovery_valid_n": 115,
+      "expanded_err": 0.0127,
+      "expanded_valid_n": 1200
+    },
+    "full_numeric_agent": {
+      "recovery_err": 0.0691,
+      "recovery_valid_n": 116,
+      "expanded_err": 0.0117,
+      "expanded_valid_n": 1200
+    },
+    "one_shot_prior": {
+      "recovery_err": 0.0704,
+      "recovery_valid_n": 119,
+      "expanded_err": 0.0128,
+      "expanded_valid_n": 1200
+    },
+    "ruletune": {
+      "recovery_err": 0.0626,
+      "recovery_valid_n": 117,
+      "expanded_err": 0.0125,
+      "expanded_valid_n": 1200
+    },
+    "seeded_sobol": {
+      "recovery_err": 0.067,
+      "recovery_valid_n": 117,
+      "expanded_err": 0.0121,
+      "expanded_valid_n": 1200
+    },
+    "swim2real_style_reimplementation": {
+      "recovery_err": 0.0734,
+      "recovery_valid_n": 118,
+      "expanded_err": 0.0118,
+      "expanded_valid_n": 1200
+    },
+    "vid2sid_style_reimplementation": {
+      "recovery_err": 0.0622,
+      "recovery_valid_n": 115,
+      "expanded_err": 0.0128,
+      "expanded_valid_n": 1200
+    }
+  },
+  "methods_in_recovery_long": [
+    "fixed_profile",
+    "full_numeric_agent",
+    "one_shot_prior",
+    "ruletune",
+    "seeded_sobol",
+    "swim2real_style_reimplementation",
+    "vid2sid_style_reimplementation"
+  ],
+  "table19_recovery_b1_recomputed": {
+    "pairs": 27,
+    "diff": -0.0102,
+    "ci95": [
+      -0.0349,
+      0.0113
+    ]
+  },
+  "table19_recovery_b2_recomputed": {
+    "pairs": 28,
+    "diff": 0.0227,
+    "ci95": [
+      -0.0026,
+      0.0576
+    ]
+  },
+  "table19_recovery_b4_recomputed": {
+    "pairs": 29,
+    "diff": 0.0196,
+    "ci95": [
+      -0.0014,
+      0.0529
+    ]
+  },
+  "table19_recovery_b8_recomputed": {
+    "pairs": 28,
+    "diff": 0.0052,
+    "ci95": [
+      0.0,
+      0.0119
+    ]
+  },
+  "table19_filter_b1_recomputed": {
+    "pairs": 300,
+    "diff": -0.0003,
+    "ci95": [
+      -0.0043,
+      0.0037
+    ]
+  },
+  "table19_filter_b2_recomputed": {
+    "pairs": 300,
+    "diff": -0.0015,
+    "ci95": [
+      -0.0048,
+      0.0018
+    ]
+  },
+  "table19_filter_b4_recomputed": {
+    "pairs": 300,
+    "diff": 0.0013,
+    "ci95": [
+      -0.0026,
+      0.0056
+    ]
+  },
+  "table19_filter_b8_recomputed": {
+    "pairs": 300,
+    "diff": -0.0036,
+    "ci95": [
+      -0.0071,
+      -0.0004
+    ]
+  },
+  "pairs_recovery_by_budget": {
+    "1": 27,
+    "2": 28,
+    "4": 29,
+    "8": 28
+  },
+  "application_total": {
+    "rows": 4000,
+    "task_success": 3079,
+    "intact": 0,
+    "damage_flag": 4000
+  },
+  "damage_proxy_min_max": [
+    0.2653,
+    1.0
+  ],
+  "table7_recomputed": {
+    "Fixed command": {
+      "held_out": "245/340",
+      "held_out_pct": 72.06,
+      "wilson95_pct": [
+        67.1,
+        76.6
+      ],
+      "cal": "595/660"
+    },
+    "Slip feedback": {
+      "held_out": "245/340",
+      "held_out_pct": 72.06,
+      "wilson95_pct": [
+        67.1,
+        76.6
+      ],
+      "cal": "634/660"
+    },
+    "Force prior (local)": {
+      "held_out": "200/340",
+      "held_out_pct": 58.82,
+      "wilson95_pct": [
+        53.5,
+        63.9
+      ],
+      "cal": "600/660"
+    },
+    "Privileged reference": {
+      "held_out": "200/340",
+      "held_out_pct": 58.82,
+      "wilson95_pct": [
+        53.5,
+        63.9
+      ],
+      "cal": "360/660"
+    }
+  },
+  "mcnemar_heldout": {
+    "fixed_vs_slip": {
+      "a_only": 0,
+      "b_only": 0,
+      "p_exact": 1.0,
+      "n": 340
+    },
+    "fixed_vs_force": {
+      "a_only": 45,
+      "b_only": 0,
+      "p_exact": 0.0,
+      "n": 340
+    },
+    "fixed_vs_reference": {
+      "a_only": 45,
+      "b_only": 0,
+      "p_exact": 0.0,
+      "n": 340
+    },
+    "slip_vs_force": {
+      "a_only": 45,
+      "b_only": 0,
+      "p_exact": 0.0,
+      "n": 340
+    }
+  },
+  "pooled_task_success_counts": {
+    "Fixed command": 840,
+    "Slip feedback": 879,
+    "Force prior (local)": 800,
+    "Privileged reference": 560
+  },
+  "damage_mean_by_condition": {
+    "high": 0.7248,
+    "low": 0.581,
+    "medium": 0.5544
+  },
+  "table14_recomputed": {
+    "q1_settle": {
+      "rated": 150,
+      "ge4": 148,
+      "ge4_pct": 98.7,
+      "wilson95_pct": [
+        95.3,
+        99.6
+      ],
+      "score5_count_fig12d": 142
+    },
+    "q2_deformation": {
+      "rated": 150,
+      "ge4": 146,
+      "ge4_pct": 97.3,
+      "wilson95_pct": [
+        93.3,
+        99.0
+      ],
+      "score5_count_fig12d": 129
+    },
+    "q3_recovery": {
+      "rated": 75,
+      "ge4": 72,
+      "ge4_pct": 96.0,
+      "wilson95_pct": [
+        88.9,
+        98.6
+      ],
+      "score5_count_fig12d": 61
+    },
+    "q4_contact": {
+      "rated": 150,
+      "ge4": 143,
+      "ge4_pct": 95.3,
+      "wilson95_pct": [
+        90.7,
+        97.7
+      ],
+      "score5_count_fig12d": 129
+    },
+    "q5_overall": {
+      "rated": 150,
+      "ge4": 141,
+      "ge4_pct": 94.0,
+      "wilson95_pct": [
+        89.0,
+        96.8
+      ],
+      "score5_count_fig12d": 121
+    }
+  },
+  "structure_status_counts": {
+    "simulated_for_review": 24,
+    "not_executed": 8
+  },
+  "structure_variant_status": {
+    "shape_preserving|simulated_for_review": 8,
+    "softer_material|simulated_for_review": 8,
+    "flexible_cloth|simulated_for_review": 8,
+    "surface_fix_flexible_garment|not_executed": 8
+  },
+  "table5_recomputed": {
+    "drop:shape_preserving": {
+      "n": 4,
+      "height_mean": 0.4985,
+      "speed_mean": 0.00091
+    },
+    "drop:softer_material": {
+      "n": 4,
+      "height_mean": 0.4702,
+      "speed_mean": 0.03125
+    },
+    "drop:flexible_cloth": {
+      "n": 4,
+      "height_mean": 0.3121,
+      "speed_mean": 0.1482
+    },
+    "compression:shape_preserving": {
+      "n": 4,
+      "height_mean": 0.8756,
+      "speed_mean": 0.15938
+    },
+    "compression:softer_material": {
+      "n": 4,
+      "height_mean": 0.7067,
+      "speed_mean": 0.00571
+    },
+    "compression:flexible_cloth": {
+      "n": 4,
+      "height_mean": 0.3029,
+      "speed_mean": 0.15665
+    }
+  },
+  "flexible_lower_height_objects": {
+    "drop": 4,
+    "compression": 4
+  },
+  "sign_test_p_4_of_4_two_sided": 0.125,
+  "speed_mean_note": {
+    "drop:shape_preserving": {
+      "speed_mean_from_rounded_values": 0.00091
+    },
+    "drop:softer_material": {
+      "speed_mean_from_rounded_values": 0.03125
+    },
+    "drop:flexible_cloth": {
+      "speed_mean_from_rounded_values": 0.1482
+    },
+    "compression:shape_preserving": {
+      "speed_mean_from_rounded_values": 0.15938
+    },
+    "compression:softer_material": {
+      "speed_mean_from_rounded_values": 0.00571
+    },
+    "compression:flexible_cloth": {
+      "speed_mean_from_rounded_values": 0.15665
+    }
+  },
+  "routing_executed_solver": {
+    "mpm_elastoplastic": 100,
+    "pbd_cloth": 193,
+    "mpm_elastic": 7
+  },
+  "routing_physical_status": {
+    "verified": 269,
+    "rejected": 31
+  },
+  "audit_status": {
+    "True": 1998,
+    "False": 2
+  },
+  "audit_pass_wilson95_pct": [
+    99.64,
+    99.97
+  ],
+  "checks": [
+    {
+      "id": "T2a",
+      "desc": "합계 categories",
+      "paper": 485,
+      "recomputed": 485,
+      "pass": true
+    },
+    {
+      "id": "T2b",
+      "desc": "합계 pool",
+      "paper": 100000,
+      "recomputed": 100000,
+      "pass": true
+    },
+    {
+      "id": "T2c",
+      "desc": "합계 physical",
+      "paper": 83618,
+      "recomputed": 83618,
+      "pass": true
+    },
+    {
+      "id": "T2d",
+      "desc": "합계 RC",
+      "paper": 99586,
+      "recomputed": 99586,
+      "pass": true
+    },
+    {
+      "id": "T2e",
+      "desc": "합계 both",
+      "paper": 83365,
+      "recomputed": 83365,
+      "pass": true
+    },
+    {
+      "id": "F4a",
+      "desc": "그림4 physical만 통과 253",
+      "paper": 253,
+      "recomputed": 253,
+      "pass": true
+    },
+    {
+      "id": "F4b",
+      "desc": "그림4 RC만 통과 16221",
+      "paper": 16221,
+      "recomputed": 16221,
+      "pass": true
+    },
+    {
+      "id": "F4c",
+      "desc": "그림4 둘 다 실패 161",
+      "paper": 161,
+      "recomputed": 161,
+      "pass": true
+    },
+    {
+      "id": "S51a",
+      "desc": "물리 검증 통과율 83.62%",
+      "paper": 83.62,
+      "recomputed": 83.62,
+      "pass": true
+    },
+    {
+      "id": "S51b",
+      "desc": "RC 통과율 99.59%",
+      "paper": 99.59,
+      "recomputed": 99.59,
+      "pass": true
+    },
+    {
+      "id": "S51c",
+      "desc": "교집합 83.37%",
+      "paper": 83.37,
+      "recomputed": 83.36,
+      "pass": false
+    },
+    {
+      "id": "S51d",
+      "desc": "soft solids 교집합 비율 60.92%",
+      "paper": 60.92,
+      "recomputed": 60.92,
+      "pass": true
+    },
+    {
+      "id": "S51e",
+      "desc": "cloth sheets 교집합 비율 98.46%",
+      "paper": 98.46,
+      "recomputed": 98.46,
+      "pass": true
+    },
+    {
+      "id": "T9a",
+      "desc": "first-pass accept 83,292",
+      "paper": 83292,
+      "recomputed": 83292,
+      "pass": true
+    },
+    {
+      "id": "T9b",
+      "desc": "corrected accept 326",
+      "paper": 326,
+      "recomputed": 326,
+      "pass": true
+    },
+    {
+      "id": "T9c",
+      "desc": "model-limit reject 16,317",
+      "paper": 16317,
+      "recomputed": 16317,
+      "pass": true
+    },
+    {
+      "id": "T9d",
+      "desc": "numerical reject 2",
+      "paper": 2,
+      "recomputed": 2,
+      "pass": true
+    },
+    {
+      "id": "T9e",
+      "desc": "human escalation 63",
+      "paper": 63,
+      "recomputed": 63,
+      "pass": true
+    },
+    {
+      "id": "T9f",
+      "desc": "row 합 100,000",
+      "paper": 100000,
+      "recomputed": 100000,
+      "pass": true
+    },
+    {
+      "id": "S51f",
+      "desc": "soft solids 모형 한계 비율 82.69%",
+      "paper": 82.69,
+      "recomputed": 82.69,
+      "pass": true
+    },
+    {
+      "id": "X1",
+      "desc": "가족별 물리 실패 = 모형한계+수치+보류 (불일치 가족 수)",
+      "paper": 0,
+      "recomputed": 0,
+      "pass": true
+    },
+    {
+      "id": "S31a",
+      "desc": "206인 범주 수 395",
+      "paper": 395,
+      "recomputed": 395,
+      "pass": true
+    },
+    {
+      "id": "S31b",
+      "desc": "207인 범주 수 90",
+      "paper": 90,
+      "recomputed": 90,
+      "pass": true
+    },
+    {
+      "id": "T6a",
+      "desc": "30 targets 둘 다 통과 682",
+      "paper": 682,
+      "recomputed": 682,
+      "pass": true
+    },
+    {
+      "id": "T6b",
+      "desc": "30 targets 교정만 통과 49",
+      "paper": 49,
+      "recomputed": 49,
+      "pass": true
+    },
+    {
+      "id": "T6c",
+      "desc": "30 targets 독립만 통과 3",
+      "paper": 3,
+      "recomputed": 3,
+      "pass": true
+    },
+    {
+      "id": "T6d",
+      "desc": "300 bags 교정만 통과 325",
+      "paper": 325,
+      "recomputed": 325,
+      "pass": true
+    },
+    {
+      "id": "T6e",
+      "desc": "325/8400 = 3.87%",
+      "paper": 3.87,
+      "recomputed": 3.869047619047619,
+      "pass": true
+    },
+    {
+      "id": "T6f",
+      "desc": "325 rejections 가 26개 bag에 걸침",
+      "paper": 26,
+      "recomputed": 26,
+      "pass": true
+    },
+    {
+      "id": "K1",
+      "desc": "독립 통과인데 오차 > 0.08 인 행 (0이어야 함)",
+      "paper": 0,
+      "recomputed": 0,
+      "pass": true
+    },
+    {
+      "id": "T15a",
+      "desc": "Fixed profile recovery error 0.0521",
+      "paper": 0.0521,
+      "recomputed": 0.0521,
+      "pass": true
+    },
+    {
+      "id": "T15b",
+      "desc": "Fixed profile recovery valid n 115",
+      "paper": 115,
+      "recomputed": 115,
+      "pass": true
+    },
+    {
+      "id": "T15c",
+      "desc": "Full agent expanded error 0.0117 (표 15, 반올림)",
+      "paper": 0.0117,
+      "recomputed": 0.0117,
+      "pass": true
+    },
+    {
+      "id": "T19a",
+      "desc": "Filter 예산 8 쌍별 차이 -0.0036 (재계산 평균)",
+      "paper": -0.0036,
+      "recomputed": -0.0036,
+      "pass": true
+    },
+    {
+      "id": "T19b",
+      "desc": "Recovery 예산 1 쌍 수 27",
+      "paper": 27,
+      "recomputed": 27,
+      "pass": true
+    },
+    {
+      "id": "T19c",
+      "desc": "Recovery 예산 8 쌍 수 28",
+      "paper": 28,
+      "recomputed": 28,
+      "pass": true
+    },
+    {
+      "id": "Q1",
+      "desc": "작업 성공 합 3,079",
+      "paper": 3079,
+      "recomputed": 3079,
+      "pass": true
+    },
+    {
+      "id": "Q2",
+      "desc": "무손상 성공 합 0",
+      "paper": 0,
+      "recomputed": 0,
+      "pass": true
+    },
+    {
+      "id": "Q3",
+      "desc": "손상 플래그 합 4,000",
+      "paper": 4000,
+      "recomputed": 4000,
+      "pass": true
+    },
+    {
+      "id": "Q4",
+      "desc": "최소 손상 점수 0.2653 (≥0.25 여야 전부 플래그)",
+      "paper": 0.2653,
+      "recomputed": 0.26532556,
+      "pass": true
+    },
+    {
+      "id": "T7a",
+      "desc": "Fixed command held-out 72.1%",
+      "paper": 72.1,
+      "recomputed": 72.06,
+      "pass": true
+    },
+    {
+      "id": "T7b",
+      "desc": "Force prior held-out 58.8%",
+      "paper": 58.8,
+      "recomputed": 58.82,
+      "pass": true
+    },
+    {
+      "id": "T7c",
+      "desc": "풀링 성공 수 고정 명령 840",
+      "paper": 840,
+      "recomputed": 840,
+      "pass": true
+    },
+    {
+      "id": "T7d",
+      "desc": "풀링 성공 수 슬립 피드백 879",
+      "paper": 879,
+      "recomputed": 879,
+      "pass": true
+    },
+    {
+      "id": "T14a",
+      "desc": "Settling 148/150",
+      "paper": 148,
+      "recomputed": 148,
+      "pass": true
+    },
+    {
+      "id": "T14b",
+      "desc": "Deformation 146/150",
+      "paper": 146,
+      "recomputed": 146,
+      "pass": true
+    },
+    {
+      "id": "T14c",
+      "desc": "Recovery 72/75",
+      "paper": 72,
+      "recomputed": 72,
+      "pass": true
+    },
+    {
+      "id": "T14d",
+      "desc": "Contact 143/150",
+      "paper": 143,
+      "recomputed": 143,
+      "pass": true
+    },
+    {
+      "id": "T14e",
+      "desc": "Overall 141/150",
+      "paper": 141,
+      "recomputed": 141,
+      "pass": true
+    },
+    {
+      "id": "F12d",
+      "desc": "그림 12d 막대 값 = 점수 5 개수 (Settle 142)",
+      "paper": 142,
+      "recomputed": 142,
+      "pass": true
+    },
+    {
+      "id": "T5a",
+      "desc": "Drop shape-preserving 높이 0.499",
+      "paper": 0.499,
+      "recomputed": 0.4985,
+      "pass": true
+    },
+    {
+      "id": "T5b",
+      "desc": "Drop flexible 높이 0.312",
+      "paper": 0.312,
+      "recomputed": 0.3121,
+      "pass": true
+    },
+    {
+      "id": "T5c",
+      "desc": "Compression flexible 높이 0.303",
+      "paper": 0.303,
+      "recomputed": 0.3029,
+      "pass": true
+    },
+    {
+      "id": "T5d",
+      "desc": "Drop flexible 속도 0.14820",
+      "paper": 0.1482,
+      "recomputed": 0.1482,
+      "pass": true
+    },
+    {
+      "id": "T11a",
+      "desc": "PBD cloth 193",
+      "paper": 193,
+      "recomputed": 193,
+      "pass": true
+    },
+    {
+      "id": "T11b",
+      "desc": "Elastoplastic MPM 100",
+      "paper": 100,
+      "recomputed": 100,
+      "pass": true
+    },
+    {
+      "id": "Q5",
+      "desc": "안정성 감사 통과 1,998",
+      "paper": 1998,
+      "recomputed": 1998,
+      "pass": true
+    }
+  ],
+  "checks_pass": 56,
+  "checks_total": 57
+}
