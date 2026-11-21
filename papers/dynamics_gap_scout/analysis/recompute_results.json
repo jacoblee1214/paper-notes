@@ -1,0 +1,388 @@
+{
+  "table1_normalized_check": {
+    "CQL": {
+      "recomputed_mean_ratio": 3.175,
+      "reported": 3.17
+    },
+    "BC": {
+      "recomputed_mean_ratio": 2.716,
+      "reported": 2.72
+    },
+    "AVDC": {
+      "recomputed_mean_ratio": 1.912,
+      "reported": 1.91
+    },
+    "ISE": {
+      "recomputed_mean_ratio": 1.609,
+      "reported": 1.61
+    },
+    "PEARL": {
+      "recomputed_mean_ratio": 1.307,
+      "reported": 1.31
+    },
+    "Raw GMM": {
+      "recomputed_mean_ratio": 1.666,
+      "reported": 1.67
+    },
+    "History GMM": {
+      "recomputed_mean_ratio": 1.108,
+      "reported": 1.11
+    },
+    "SCOUT": {
+      "recomputed_mean_ratio": 1.0,
+      "reported": 1.0
+    }
+  },
+  "table1_sd_implied": {
+    "SCOUT": {
+      "Slide Brick": {
+        "sd_if_n400": 3.8,
+        "sd_if_n800": 5.37
+      },
+      "Push Bar": {
+        "sd_if_n400": 3.6,
+        "sd_if_n800": 5.09
+      },
+      "Pick Bar": {
+        "sd_if_n400": 3.4,
+        "sd_if_n800": 4.81
+      },
+      "Open Box": {
+        "sd_if_n400": 1.0,
+        "sd_if_n800": 1.41
+      },
+      "Turn Faucet": {
+        "sd_if_n400": 0.6,
+        "sd_if_n800": 0.85
+      }
+    },
+    "History GMM": {
+      "Slide Brick": {
+        "sd_if_n400": 4.6,
+        "sd_if_n800": 6.51
+      },
+      "Push Bar": {
+        "sd_if_n400": 4.4,
+        "sd_if_n800": 6.22
+      },
+      "Pick Bar": {
+        "sd_if_n400": 2.2,
+        "sd_if_n800": 3.11
+      },
+      "Open Box": {
+        "sd_if_n400": 1.0,
+        "sd_if_n800": 1.41
+      },
+      "Turn Faucet": {
+        "sd_if_n400": 0.6,
+        "sd_if_n800": 0.85
+      }
+    }
+  },
+  "table1_welch_vs_history_gmm": {
+    "Slide Brick": {
+      "diff_hist_minus_scout": 0.55,
+      "se_diff": 0.298,
+      "z": 1.84,
+      "p_normal_approx": 0.0652,
+      "paper_padj_MW_holm": 4.93e-24
+    },
+    "Push Bar": {
+      "diff_hist_minus_scout": 0.51,
+      "se_diff": 0.284,
+      "z": 1.79,
+      "p_normal_approx": 0.0728,
+      "paper_padj_MW_holm": 7.29e-13
+    },
+    "Pick Bar": {
+      "diff_hist_minus_scout": 0.53,
+      "se_diff": 0.202,
+      "z": 2.62,
+      "p_normal_approx": 0.0089,
+      "paper_padj_MW_holm": 3.75e-26
+    },
+    "Open Box": {
+      "diff_hist_minus_scout": 0.04,
+      "se_diff": 0.071,
+      "z": 0.57,
+      "p_normal_approx": 0.5716,
+      "paper_padj_MW_holm": 7.4e-05
+    },
+    "Turn Faucet": {
+      "diff_hist_minus_scout": 0.07,
+      "se_diff": 0.042,
+      "z": 1.65,
+      "p_normal_approx": 0.099,
+      "paper_padj_MW_holm": 1.0
+    }
+  },
+  "appC1_holm_check": {
+    "ordering_by_padj": [
+      "Pick Bar",
+      "Slide Brick",
+      "Push Bar",
+      "Open Box",
+      "Turn Faucet"
+    ],
+    "monotone": true,
+    "turn_faucet_rank5_raw_p_implied": "padj=1.0 -> raw p 약 1 (순위 5, 승수 1)",
+    "open_box_rank4_raw_p_implied": 3.7e-05
+  },
+  "table3_segment_means": {
+    "Pick Bar": {
+      "train_segs": [
+        2.8,
+        2.2,
+        1.7
+      ],
+      "train_reported": 2.25,
+      "held_segs": [
+        4.0,
+        5.1
+      ],
+      "held_reported": 4.56,
+      "train_simple_mean": 2.233,
+      "held_simple_mean": 4.55,
+      "train_gap": 0.017,
+      "held_gap": 0.01
+    },
+    "Push Bar": {
+      "train_segs": [
+        3.7,
+        5.7,
+        3.9
+      ],
+      "train_reported": 4.48,
+      "held_segs": [
+        5.9,
+        6.8
+      ],
+      "held_reported": 6.34,
+      "train_simple_mean": 4.433,
+      "held_simple_mean": 6.35,
+      "train_gap": 0.047,
+      "held_gap": -0.01
+    },
+    "Slide Brick": {
+      "train_segs": [
+        4.6,
+        3.0,
+        2.1
+      ],
+      "train_reported": 3.14,
+      "held_segs": [
+        3.0,
+        3.7
+      ],
+      "held_reported": 3.36,
+      "train_simple_mean": 3.233,
+      "held_simple_mean": 3.35,
+      "train_gap": -0.093,
+      "held_gap": 0.01
+    }
+  },
+  "door_sr_wilson_n170": {
+    "PNDiT (generator only)": {
+      "sr": 0.68,
+      "k_of_170": 116,
+      "wilson95": [
+        0.609,
+        0.748
+      ]
+    },
+    "Raw GMM": {
+      "sr": 0.61,
+      "k_of_170": 104,
+      "wilson95": [
+        0.537,
+        0.682
+      ]
+    },
+    "History GMM": {
+      "sr": 0.68,
+      "k_of_170": 116,
+      "wilson95": [
+        0.609,
+        0.748
+      ]
+    },
+    "HAVE 5 samples": {
+      "sr": 0.82,
+      "k_of_170": 139,
+      "wilson95": [
+        0.753,
+        0.868
+      ]
+    },
+    "HAVE 20 samples": {
+      "sr": 0.84,
+      "k_of_170": 143,
+      "wilson95": [
+        0.779,
+        0.888
+      ]
+    },
+    "SCOUT 1 step": {
+      "sr": 0.83,
+      "k_of_170": 141,
+      "wilson95": [
+        0.766,
+        0.879
+      ]
+    },
+    "SCOUT 5 steps": {
+      "sr": 0.97,
+      "k_of_170": 165,
+      "wilson95": [
+        0.933,
+        0.987
+      ]
+    },
+    "w/o recon 1 step": {
+      "sr": 0.71,
+      "k_of_170": 121,
+      "wilson95": [
+        0.64,
+        0.775
+      ]
+    },
+    "w/o recon 5 steps": {
+      "sr": 0.73,
+      "k_of_170": 124,
+      "wilson95": [
+        0.658,
+        0.791
+      ]
+    },
+    "estimated flow 1 step": {
+      "sr": 0.83,
+      "k_of_170": 141,
+      "wilson95": [
+        0.766,
+        0.879
+      ]
+    },
+    "estimated flow 5 steps": {
+      "sr": 0.96,
+      "k_of_170": 163,
+      "wilson95": [
+        0.917,
+        0.98
+      ]
+    }
+  },
+  "door_two_prop_tests_n170": {
+    "History GMM": {
+      "SCOUT1_vs_p": 0.0016,
+      "SCOUT5_vs_p": 0.0
+    },
+    "HAVE 20 samples": {
+      "SCOUT1_vs_p": 0.77,
+      "SCOUT5_vs_p": 4.4e-05
+    },
+    "HAVE 5 samples": {
+      "SCOUT1_vs_p": 0.776,
+      "SCOUT5_vs_p": 5e-06
+    },
+    "PNDiT (generator only)": {
+      "SCOUT1_vs_p": 0.0016,
+      "SCOUT5_vs_p": 0.0
+    },
+    "Raw GMM": {
+      "SCOUT1_vs_p": 0.0,
+      "SCOUT5_vs_p": 0.0
+    }
+  },
+  "door_recon_ablation_1step_vs_full_1step": {
+    "note": "w/o recon 0.71 vs full 0.83 at 1 step, n=170 assumed",
+    "p": 0.009888
+  },
+  "table5_mann_whitney_check": {
+    "Pick Bar": {
+      "U_reported": 311.5,
+      "psup_if_U_counts_SCOUT_fewer": 0.346,
+      "psup_if_U_counts_SCOUT_more": 0.654,
+      "psup_reported": 0.65,
+      "z_no_tie_correction": -2.04,
+      "p_no_tie_correction": 0.0413,
+      "p_reported_raw": 0.035,
+      "mean_scout_reported": 2.17,
+      "mean_baseline_reported": 3.27
+    },
+    "Push Bar": {
+      "U_reported": 250.0,
+      "psup_if_U_counts_SCOUT_fewer": 0.278,
+      "psup_if_U_counts_SCOUT_more": 0.722,
+      "psup_reported": 0.72,
+      "z_no_tie_correction": -2.949,
+      "p_no_tie_correction": 0.0032,
+      "p_reported_raw": 0.003,
+      "mean_scout_reported": 2.9,
+      "mean_baseline_reported": 5.6
+    }
+  },
+  "fig3_position_pooling_check": {
+    "Pick Bar": {
+      "baseline": {
+        "position_means": [
+          3.2,
+          3.6,
+          3.0
+        ],
+        "pooled_mean": 3.267,
+        "position_sds": [
+          2.656,
+          2.516,
+          2.237
+        ],
+        "pooled_sd": 2.402
+      },
+      "scout": {
+        "position_means": [
+          2.0,
+          2.7,
+          1.8
+        ],
+        "pooled_mean": 2.167,
+        "position_sds": [
+          0.699,
+          2.796,
+          0.979
+        ],
+        "pooled_sd": 1.74
+      },
+      "welch_t_p_pooled": 0.0473
+    },
+    "Push Bar": {
+      "baseline": {
+        "position_means": [
+          6.1,
+          6.1,
+          4.6
+        ],
+        "pooled_mean": 5.6,
+        "position_sds": [
+          4.194,
+          3.495,
+          2.796
+        ],
+        "pooled_sd": 3.492
+      },
+      "scout": {
+        "position_means": [
+          2.9,
+          3.7,
+          2.1
+        ],
+        "pooled_mean": 2.9,
+        "position_sds": [
+          1.118,
+          0.699,
+          2.796
+        ],
+        "pooled_sd": 1.846
+      },
+      "welch_t_p_pooled": 0.0005
+    }
+  }
+}
