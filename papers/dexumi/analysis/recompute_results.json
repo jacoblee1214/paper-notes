@@ -1,0 +1,342 @@
+{
+  "avg_final_rel_yes": 0.8600000000000001,
+  "avg_final_by_row": {
+    "Rel_Yes_Inpaint": {
+      "mean": 0.8600000000000001,
+      "n_cells": 5
+    },
+    "Abs_Yes_Inpaint": {
+      "mean": 0.13999999999999999,
+      "n_cells": 5
+    },
+    "Rel_No_Inpaint": {
+      "mean": 0.74,
+      "n_cells": 5
+    },
+    "Abs_No_Inpaint": {
+      "mean": 0.62,
+      "n_cells": 5
+    },
+    "Rel_No_Mask": {
+      "mean": 0.39999999999999997,
+      "n_cells": 3
+    },
+    "Rel_No_Raw": {
+      "mean": 0.09999999999999999,
+      "n_cells": 3
+    }
+  },
+  "avg_all9_rel_yes": 0.911111111111111,
+  "wilson_final_rel_yes": {
+    "IH_cube": {
+      "k": 20,
+      "n": 20,
+      "ci95": [
+        0.839,
+        1.0
+      ]
+    },
+    "IH_carton": {
+      "k": 17,
+      "n": 20,
+      "ci95": [
+        0.64,
+        0.948
+      ]
+    },
+    "IH_tea_leaf": {
+      "k": 17,
+      "n": 20,
+      "ci95": [
+        0.64,
+        0.948
+      ]
+    },
+    "XH_tea_leaf": {
+      "k": 17,
+      "n": 20,
+      "ci95": [
+        0.64,
+        0.948
+      ]
+    },
+    "XH_salt": {
+      "k": 15,
+      "n": 20,
+      "ci95": [
+        0.531,
+        0.888
+      ]
+    }
+  },
+  "ablation_inpaint_vs_variant": {
+    "per_task": {
+      "Rel_No_Mask": {
+        "IH_cube": {
+          "p_raw": 0.019656,
+          "p_holm": 0.041442
+        },
+        "IH_carton": {
+          "p_raw": 1e-06,
+          "p_holm": 2e-06
+        },
+        "IH_tea_tool": {
+          "p_raw": 0.487179,
+          "p_holm": 0.487179
+        },
+        "IH_tea_leaf": {
+          "p_raw": 0.013814,
+          "p_holm": 0.041442
+        }
+      },
+      "Rel_No_Raw": {
+        "IH_cube": {
+          "p_raw": 2e-06,
+          "p_holm": 4e-06
+        },
+        "IH_carton": {
+          "p_raw": 0.0,
+          "p_holm": 0.0
+        },
+        "IH_tea_tool": {
+          "p_raw": 0.230769,
+          "p_holm": 0.230769
+        },
+        "IH_tea_leaf": {
+          "p_raw": 0.0,
+          "p_holm": 0.0
+        }
+      }
+    },
+    "pooled_cube_carton": {
+      "Rel_No_Mask": {
+        "inpaint": [
+          37,
+          40
+        ],
+        "variant": [
+          14,
+          40
+        ],
+        "p": 9.155779457570038e-08
+      },
+      "Rel_No_Raw": {
+        "inpaint": [
+          37,
+          40
+        ],
+        "variant": [
+          5,
+          40
+        ],
+        "p": 1.349743747323287e-13
+      }
+    }
+  },
+  "rel_vs_abs_tactile_Yes": [
+    {
+      "col": "IH_cube",
+      "rel_k": 20,
+      "abs_k": 2,
+      "p_raw": 0.0,
+      "p_holm": 0.0
+    },
+    {
+      "col": "IH_carton",
+      "rel_k": 17,
+      "abs_k": 7,
+      "p_raw": 0.003056,
+      "p_holm": 0.012226
+    },
+    {
+      "col": "IH_tea_tool",
+      "rel_k": 20,
+      "abs_k": 16,
+      "p_raw": 0.106029,
+      "p_holm": 0.212058
+    },
+    {
+      "col": "IH_tea_leaf",
+      "rel_k": 17,
+      "abs_k": 0,
+      "p_raw": 0.0,
+      "p_holm": 0.0
+    },
+    {
+      "col": "XH_tea_tool",
+      "rel_k": 20,
+      "abs_k": 20,
+      "p_raw": 1.0,
+      "p_holm": 1.0
+    },
+    {
+      "col": "XH_tea_leaf",
+      "rel_k": 17,
+      "abs_k": 5,
+      "p_raw": 0.000328,
+      "p_holm": 0.001971
+    },
+    {
+      "col": "XH_knob",
+      "rel_k": 19,
+      "abs_k": 10,
+      "p_raw": 0.003342,
+      "p_holm": 0.012226
+    },
+    {
+      "col": "XH_pan",
+      "rel_k": 19,
+      "abs_k": 9,
+      "p_raw": 0.001248,
+      "p_holm": 0.006238
+    },
+    {
+      "col": "XH_salt",
+      "rel_k": 15,
+      "abs_k": 0,
+      "p_raw": 1e-06,
+      "p_holm": 5e-06
+    }
+  ],
+  "rel_ge_abs_count_tactile_Yes": {
+    "rel_better": 8,
+    "tie": 1,
+    "abs_better": 0
+  },
+  "rel_vs_abs_tactile_No": [
+    {
+      "col": "IH_cube",
+      "rel_k": 19,
+      "abs_k": 18,
+      "p_raw": 1.0,
+      "p_holm": 1.0
+    },
+    {
+      "col": "IH_carton",
+      "rel_k": 18,
+      "abs_k": 17,
+      "p_raw": 1.0,
+      "p_holm": 1.0
+    },
+    {
+      "col": "IH_tea_tool",
+      "rel_k": 20,
+      "abs_k": 18,
+      "p_raw": 0.487179,
+      "p_holm": 1.0
+    },
+    {
+      "col": "IH_tea_leaf",
+      "rel_k": 18,
+      "abs_k": 12,
+      "p_raw": 0.064833,
+      "p_holm": 0.453832
+    },
+    {
+      "col": "XH_tea_tool",
+      "rel_k": 19,
+      "abs_k": 20,
+      "p_raw": 1.0,
+      "p_holm": 1.0
+    },
+    {
+      "col": "XH_tea_leaf",
+      "rel_k": 16,
+      "abs_k": 15,
+      "p_raw": 1.0,
+      "p_holm": 1.0
+    },
+    {
+      "col": "XH_knob",
+      "rel_k": 19,
+      "abs_k": 12,
+      "p_raw": 0.019656,
+      "p_holm": 0.176904
+    },
+    {
+      "col": "XH_pan",
+      "rel_k": 19,
+      "abs_k": 12,
+      "p_raw": 0.019656,
+      "p_holm": 0.176904
+    },
+    {
+      "col": "XH_salt",
+      "rel_k": 3,
+      "abs_k": 0,
+      "p_raw": 0.230769,
+      "p_holm": 1.0
+    }
+  ],
+  "rel_ge_abs_count_tactile_No": {
+    "rel_better": 8,
+    "tie": 0,
+    "abs_better": 1
+  },
+  "tactile_effects": {
+    "Rel": {
+      "xh_tactile_better": 3,
+      "xh_tactile_worse": 0,
+      "xh_same": 2
+    },
+    "Abs": {
+      "xh_tactile_better": 0,
+      "xh_tactile_worse": 3,
+      "xh_same": 2
+    },
+    "xh_salt_rel_yes_vs_no_p": 0.00032841871599911934,
+    "ih_rel_yes_vs_no": {
+      "better": 1,
+      "worse": 2
+    }
+  },
+  "power": {
+    "base0.85_diff0.15": {
+      "cohen_h": 0.364,
+      "n_per_arm_needed": 60
+    },
+    "base0.85_diff0.2": {
+      "cohen_h": 0.471,
+      "n_per_arm_needed": 36
+    },
+    "base0.85_diff0.3": {
+      "cohen_h": 0.675,
+      "n_per_arm_needed": 18
+    },
+    "base0.6_diff0.15": {
+      "cohen_h": 0.302,
+      "n_per_arm_needed": 87
+    },
+    "base0.6_diff0.2": {
+      "cohen_h": 0.403,
+      "n_per_arm_needed": 49
+    },
+    "base0.6_diff0.3": {
+      "cohen_h": 0.613,
+      "n_per_arm_needed": 21
+    },
+    "base0.95_diff0.15": {
+      "cohen_h": 0.476,
+      "n_per_arm_needed": 35
+    },
+    "base0.95_diff0.2": {
+      "cohen_h": 0.596,
+      "n_per_arm_needed": 23
+    },
+    "base0.95_diff0.3": {
+      "cohen_h": 0.815,
+      "n_per_arm_needed": 12
+    }
+  },
+  "collection_efficiency": {
+    "CT": {
+      "DexUMI": 36,
+      "bare_hand": 51,
+      "teleop": 11
+    },
+    "ratio_dexumi_over_teleop": 3.273,
+    "reported_ratio": 3.2,
+    "note": "그림 판독값. 세션 반복 수와 분산이 없어 구간을 못 만든다."
+  },
+  "avg_reported_abstract": 0.86
+}
