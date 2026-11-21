@@ -1,0 +1,272 @@
+{
+  "assumptions": {
+    "sd_ddof": 0,
+    "unit": "mm",
+    "n_test_frames": 21853,
+    "n_test_episodes": 4,
+    "n_train_episodes": 36
+  },
+  "t1_freq_check": {
+    "Pose-Only (MLP)": {
+      "table_hz": 1110.0,
+      "from_ms_hz": 1111.11,
+      "diff": -1.11
+    },
+    "ResNet-18 + Cross-Attn": {
+      "table_hz": 56.82,
+      "from_ms_hz": 56.82,
+      "diff": 0.0
+    },
+    "Proposed w/o B-spline": {
+      "table_hz": 16.26,
+      "from_ms_hz": 16.26,
+      "diff": -0.0
+    },
+    "Proposed w/o L_weighted": {
+      "table_hz": 16.26,
+      "from_ms_hz": 16.26,
+      "diff": -0.0
+    },
+    "Proposed": {
+      "table_hz": 16.26,
+      "from_ms_hz": 16.26,
+      "diff": -0.0
+    }
+  },
+  "t2_param_check": {
+    "trainable_diff_docs_minus_release": 1050624,
+    "total_diff_docs_minus_release": 1048560,
+    "pose_last_layer_extra_for_K32_vs_K16": 1050624,
+    "trainable_diff_explained_by_pose_layer": true,
+    "total_diff_unexplained": -2064,
+    "paper_proposed_row_matches_K32": [
+      6.38,
+      24.8
+    ],
+    "paper_woBspline_row_matches_K16": [
+      5.33,
+      23.75
+    ]
+  },
+  "t1_pairwise": [
+    {
+      "a": "Proposed",
+      "b": "Pose + Direction",
+      "metric": "RMSE(mean L2)",
+      "mean_a": 30.52,
+      "mean_b": 50.63,
+      "diff_a_minus_b": -20.11,
+      "cohen_d": -0.993,
+      "welch_p_frames": 0.0,
+      "episode_sd_threshold_mm": 12.64
+    },
+    {
+      "a": "Proposed",
+      "b": "Pose + Direction",
+      "metric": "Chamfer",
+      "mean_a": 27.29,
+      "mean_b": 40.7,
+      "diff_a_minus_b": -13.41,
+      "cohen_d": -0.902,
+      "welch_p_frames": 0.0,
+      "episode_sd_threshold_mm": 8.43
+    },
+    {
+      "a": "Proposed",
+      "b": "Pose-Only (MLP)",
+      "metric": "RMSE(mean L2)",
+      "mean_a": 30.52,
+      "mean_b": 55.0,
+      "diff_a_minus_b": -24.48,
+      "cohen_d": -1.294,
+      "welch_p_frames": 0.0,
+      "episode_sd_threshold_mm": 15.38
+    },
+    {
+      "a": "Proposed",
+      "b": "Pose-Only (MLP)",
+      "metric": "Chamfer",
+      "mean_a": 27.29,
+      "mean_b": 44.0,
+      "diff_a_minus_b": -16.71,
+      "cohen_d": -1.044,
+      "welch_p_frames": 0.0,
+      "episode_sd_threshold_mm": 10.5
+    },
+    {
+      "a": "Proposed",
+      "b": "ResNet-18 + Cross-Attn",
+      "metric": "RMSE(mean L2)",
+      "mean_a": 30.52,
+      "mean_b": 36.0,
+      "diff_a_minus_b": -5.48,
+      "cohen_d": -0.308,
+      "welch_p_frames": 4.14e-225,
+      "episode_sd_threshold_mm": 3.44
+    },
+    {
+      "a": "Proposed",
+      "b": "ResNet-18 + Cross-Attn",
+      "metric": "Chamfer",
+      "mean_a": 27.29,
+      "mean_b": 30.0,
+      "diff_a_minus_b": -2.71,
+      "cohen_d": -0.19,
+      "welch_p_frames": 2.81e-87,
+      "episode_sd_threshold_mm": 1.7
+    },
+    {
+      "a": "Proposed",
+      "b": "Proposed w/o B-spline",
+      "metric": "RMSE(mean L2)",
+      "mean_a": 30.52,
+      "mean_b": 35.01,
+      "diff_a_minus_b": -4.49,
+      "cohen_d": -0.282,
+      "welch_p_frames": 8.5e-189,
+      "episode_sd_threshold_mm": 2.82
+    },
+    {
+      "a": "Proposed",
+      "b": "Proposed w/o B-spline",
+      "metric": "Chamfer",
+      "mean_a": 27.29,
+      "mean_b": 30.06,
+      "diff_a_minus_b": -2.77,
+      "cohen_d": -0.213,
+      "welch_p_frames": 1.73e-109,
+      "episode_sd_threshold_mm": 1.74
+    },
+    {
+      "a": "Proposed",
+      "b": "Proposed w/o L_weighted",
+      "metric": "RMSE(mean L2)",
+      "mean_a": 30.52,
+      "mean_b": 37.0,
+      "diff_a_minus_b": -6.48,
+      "cohen_d": -0.354,
+      "welch_p_frames": 1.83e-295,
+      "episode_sd_threshold_mm": 4.07
+    },
+    {
+      "a": "Proposed",
+      "b": "Proposed w/o L_weighted",
+      "metric": "Chamfer",
+      "mean_a": 27.29,
+      "mean_b": 30.82,
+      "diff_a_minus_b": -3.53,
+      "cohen_d": -0.243,
+      "welch_p_frames": 1.33e-141,
+      "episode_sd_threshold_mm": 2.22
+    }
+  ],
+  "t1_ci95_frame_based": {
+    "T1 Pose-Only (MLP)": [
+      54.708,
+      55.292
+    ],
+    "T1 Pose + Direction": [
+      50.308,
+      50.952
+    ],
+    "T1 ResNet-18 + Cross-Attn": [
+      35.735,
+      36.265
+    ],
+    "T1 Proposed w/o B-spline": [
+      34.79,
+      35.23
+    ],
+    "T1 Proposed w/o L_weighted": [
+      36.723,
+      37.277
+    ],
+    "T1 Proposed": [
+      30.318,
+      30.722
+    ]
+  },
+  "t2_vs_full": [
+    {
+      "case": "new_1_removed",
+      "mean": 34.2,
+      "sd": 18.0,
+      "diff_vs_full": 3.68,
+      "rel_vs_full_pct": 12.1,
+      "cohen_d": 0.221,
+      "welch_p_frames": 4.02e-117,
+      "episode_sd_threshold_mm": 2.31
+    },
+    {
+      "case": "new_2_removed",
+      "mean": 37.8,
+      "sd": 21.2,
+      "diff_vs_full": 7.28,
+      "rel_vs_full_pct": 23.9,
+      "cohen_d": 0.394,
+      "welch_p_frames": 0.0,
+      "episode_sd_threshold_mm": 4.58
+    },
+    {
+      "case": "new_3_removed",
+      "mean": 46.3,
+      "sd": 23.3,
+      "diff_vs_full": 15.78,
+      "rel_vs_full_pct": 51.7,
+      "cohen_d": 0.802,
+      "welch_p_frames": 0.0,
+      "episode_sd_threshold_mm": 9.92
+    },
+    {
+      "case": "fault_1",
+      "mean": 45.3,
+      "sd": 23.3,
+      "diff_vs_full": 14.78,
+      "rel_vs_full_pct": 48.4,
+      "cohen_d": 0.751,
+      "welch_p_frames": 0.0,
+      "episode_sd_threshold_mm": 9.29
+    },
+    {
+      "case": "fault_2",
+      "mean": 70.9,
+      "sd": 30.8,
+      "diff_vs_full": 40.38,
+      "rel_vs_full_pct": 132.3,
+      "cohen_d": 1.662,
+      "welch_p_frames": 0.0,
+      "episode_sd_threshold_mm": 25.38
+    },
+    {
+      "case": "fault_3",
+      "mean": 106.2,
+      "sd": 34.8,
+      "diff_vs_full": 75.68,
+      "rel_vs_full_pct": 248.0,
+      "cohen_d": 2.818,
+      "welch_p_frames": 0.0,
+      "episode_sd_threshold_mm": 47.56
+    }
+  ],
+  "text_checks": {
+    "train_sessions_sum_docs": 196968,
+    "test_sessions_sum_docs": 21563,
+    "paper_train": 196678,
+    "paper_test": 21853,
+    "shift_train_to_test_docs": 290,
+    "test_docs_plus_shift": 21853,
+    "frames_per_episode_train_paper": 5463.3,
+    "frames_per_episode_test_paper": 5463.2,
+    "episodes_15_of_36_pct": 41.7,
+    "lr_backbone_stated_x005": 5e-06,
+    "lr_backbone_stated_1e5": 1e-05,
+    "lr_backbone_release_k16": 3.573504276116712e-05,
+    "scale_500mm_err_vs_full_mm": 5.48,
+    "scale_580mm_err_vs_full_mm": 9.48,
+    "w_wo_bspline_rel_pct": 14.7,
+    "w_wo_lw_rel_pct": 21.2,
+    "pose_dir_rel_pct": -7.9,
+    "chamfer_best_check": "Proposed",
+    "rmse_best_check": "Proposed"
+  }
+}
