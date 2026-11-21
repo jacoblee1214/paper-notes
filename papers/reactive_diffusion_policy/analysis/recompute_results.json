@@ -1,0 +1,260 @@
+{
+  "consistency": {
+    "peel_all_equals_mean_of_conditions": [
+      [
+        "DP",
+        0.443,
+        0.44,
+        true
+      ],
+      [
+        "DP w. tactile img.",
+        0.417,
+        0.41,
+        false
+      ],
+      [
+        "DP w. tactile emb.",
+        0.393,
+        0.39,
+        true
+      ],
+      [
+        "RDP (GelSight)",
+        0.903,
+        0.9,
+        true
+      ],
+      [
+        "RDP (MCTac)",
+        0.877,
+        0.88,
+        true
+      ],
+      [
+        "RDP (Force)",
+        0.95,
+        0.95,
+        true
+      ]
+    ],
+    "wipe_all_equals_mean_of_conditions": [
+      [
+        "DP",
+        0.567,
+        0.57,
+        true
+      ],
+      [
+        "DP w. tactile emb.",
+        0.5,
+        0.5,
+        true
+      ],
+      [
+        "RDP (GelSight)",
+        0.767,
+        0.77,
+        true
+      ],
+      [
+        "RDP (Force)",
+        0.867,
+        0.87,
+        true
+      ]
+    ],
+    "abl_all_equals_mean_of_conditions": [
+      [
+        "DP",
+        0.443,
+        0.44,
+        true
+      ],
+      [
+        "RDP w. only normal force",
+        0.483,
+        0.48,
+        true
+      ],
+      [
+        "RDP w. symmetric tokenizer",
+        0.577,
+        0.58,
+        true
+      ],
+      [
+        "RDP (default)",
+        0.95,
+        0.95,
+        true
+      ]
+    ],
+    "abl_default_equals_table_II_force_row": true,
+    "wipe_condition_scores_on_0.05_grid": true,
+    "lift_scores_feasible_for_lift_counts": {
+      "DP / soft": true,
+      "DP / hard": true,
+      "DP w. tactile emb. / soft": true,
+      "DP w. tactile emb. / hard": true,
+      "RDP (GelSight + MCTac) / soft": true,
+      "RDP (GelSight + MCTac) / hard": true,
+      "RDP (Force) / soft": true,
+      "RDP (Force) / hard": true
+    },
+    "lift_all_is_mean_of_two_cups": {
+      "DP": true,
+      "DP w. tactile emb.": true,
+      "RDP (GelSight + MCTac)": true,
+      "RDP (Force)": true
+    },
+    "abl_normal_force_drop_text": 0.95
+  },
+  "binary_wilson": {
+    "DP": {
+      "clamp": "0/20",
+      "clamp_wilson95": [
+        0.0,
+        0.161
+      ],
+      "lift": "0/20",
+      "lift_wilson95": [
+        0.0,
+        0.161
+      ]
+    },
+    "DP w. tactile emb.": {
+      "clamp": "3/20",
+      "clamp_wilson95": [
+        0.052,
+        0.36
+      ],
+      "lift": "2/20",
+      "lift_wilson95": [
+        0.028,
+        0.301
+      ]
+    },
+    "RDP (GelSight + MCTac)": {
+      "clamp": "19/20",
+      "clamp_wilson95": [
+        0.764,
+        0.991
+      ],
+      "lift": "18/20",
+      "lift_wilson95": [
+        0.699,
+        0.972
+      ]
+    },
+    "RDP (Force)": {
+      "clamp": "19/20",
+      "clamp_wilson95": [
+        0.764,
+        0.991
+      ],
+      "lift": "18/20",
+      "lift_wilson95": [
+        0.699,
+        0.972
+      ]
+    }
+  },
+  "binary_fisher": {
+    "lift: RDP (Force) vs DP w. tactile emb.": 5.3e-07,
+    "lift: RDP (GelSight + MCTac) vs DP w. tactile emb.": 5.3e-07,
+    "lift: DP w. tactile emb. vs DP": 0.487,
+    "clamp: RDP (Force) vs DP w. tactile emb.": 4.06e-07,
+    "clamp: RDP (GelSight + MCTac) vs DP w. tactile emb.": 4.06e-07
+  },
+  "score_welch_pmax": {
+    "Peeling no perturb: RDP (Force) vs DP": 0.0296,
+    "Peeling no perturb: RDP (Force) vs DP w. tactile emb.": 0.0137,
+    "Peeling perturb before contact: RDP (Force) vs DP": 0.0404,
+    "Peeling perturb before contact: RDP (Force) vs DP w. tactile emb.": 0.0308,
+    "Peeling perturb after contact: RDP (Force) vs DP": 0.000775,
+    "Peeling perturb after contact: RDP (Force) vs DP w. tactile emb.": 0.000261,
+    "Peeling All: RDP (Force) vs DP (n=30 each)": 9.71e-06,
+    "Peeling All: RDP (Force) vs DP w. tactile emb. (n=30 each)": 1.48e-06,
+    "Wiping no perturb: RDP (Force) vs DP": 0.237,
+    "Wiping no perturb: RDP (Force) vs DP w. tactile emb.": 0.073,
+    "Wiping perturb before contact: RDP (Force) vs DP": 0.449,
+    "Wiping perturb before contact: RDP (Force) vs DP w. tactile emb.": 0.6,
+    "Wiping perturb after contact: RDP (Force) vs DP": 0.0119,
+    "Wiping perturb after contact: RDP (Force) vs DP w. tactile emb.": 0.00192,
+    "Wiping All: RDP (Force) vs DP (n=30 each)": 0.0094,
+    "Wiping All: RDP (Force) vs DP w. tactile emb. (n=30 each)": 0.00174,
+    "Peeling after contact: RDP (GelSight) vs DP w. tactile emb.": 0.00192
+  },
+  "wipe_all_rdpF_vs_dp_sd_scenarios": {
+    "sd=0.2": 2.8e-07,
+    "sd=0.3": 0.000276
+  },
+  "claim_gt35_check": {
+    "Peeling": {
+      "best_baseline": "DP",
+      "best_all": 0.44,
+      "rdp_all": 0.95,
+      "abs_gain_points": 51.0,
+      "rel_gain_percent": 115.9
+    },
+    "Wiping": {
+      "best_baseline": "DP",
+      "best_all": 0.57,
+      "rdp_all": 0.87,
+      "abs_gain_points": 30.0,
+      "rel_gain_percent": 52.6
+    },
+    "Lifting": {
+      "best_baseline": "DP w. tactile emb.",
+      "best_all": 0.08,
+      "rdp_all": 0.7,
+      "abs_gain_points": 62.0,
+      "rel_gain_percent": 775.0
+    }
+  },
+  "chunk_table_v": {
+    "DP w. tactile emb., chunk 8": [
+      100,
+      0.15
+    ],
+    "DP w. tactile emb., chunk 2": [
+      20,
+      0.1
+    ],
+    "DP w. tactile emb., chunk 8, tau 0.2": [
+      30,
+      0.05
+    ],
+    "DP w. tactile emb., chunk 8, tau 0.5": [
+      0,
+      0.0
+    ],
+    "DP w. tactile emb., chunk 8, tau 0.8": [
+      100,
+      0.15
+    ],
+    "RDP (GelSight), chunk 8": [
+      100,
+      0.5
+    ]
+  },
+  "chunk_fisher_chunk8_vs_chunk2_assumed_n10": 0.000714,
+  "chunk_fisher_rdp_vs_dp_chunk8_assumed_n10": 1.0,
+  "ablation_drop_check": {
+    "default_all": 0.95,
+    "normal_force_only_all": 0.48,
+    "symmetric_tokenizer_all": 0.58,
+    "p_max_default_vs_symmetric": 0.000664,
+    "p_max_default_vs_normal_only": 3.72e-05
+  },
+  "extra_comparisons": {
+    "peel All: DP vs DP w. tactile emb. (n=30 each)": 0.7,
+    "wipe All: DP vs DP w. tactile emb. (n=30 each)": 0.594,
+    "peel All: RDP (Force) vs RDP (GelSight) (n=30 each)": 0.471,
+    "wipe All: RDP (Force) vs RDP (GelSight) (n=30 each)": 0.322,
+    "peel All: RDP (GelSight) vs RDP (MCTac) (n=30 each)": 0.808,
+    "peel All: DP vs RDP (Force), 시나리오 시행별 SD=0.2 (참고용, 상한 아님)": 4.92e-14,
+    "user study stable-force ratio 0.58 vs 0.87 (n=100 per arm, assumed)": 6.46e-06
+  }
+}
