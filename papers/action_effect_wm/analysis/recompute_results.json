@@ -1,0 +1,217 @@
+{
+  "pearson_n8": {
+    "UR5e|DreamDojo|base": {
+      "r": 0.451,
+      "ci95_lo": -0.372,
+      "ci95_hi": 0.877,
+      "p_two_sided_n8": 0.262
+    },
+    "UR5e|DreamDojo|AFFECT": {
+      "r": 0.686,
+      "ci95_lo": -0.036,
+      "ci95_hi": 0.937,
+      "p_two_sided_n8": 0.06
+    },
+    "UR5e|Cosmos3|base": {
+      "r": 0.091,
+      "ci95_lo": -0.656,
+      "ci95_hi": 0.748,
+      "p_two_sided_n8": 0.83
+    },
+    "UR5e|Cosmos3|AFFECT": {
+      "r": 0.334,
+      "ci95_lo": -0.485,
+      "ci95_hi": 0.841,
+      "p_two_sided_n8": 0.419
+    },
+    "DROID|DreamDojo|base": {
+      "r": 0.468,
+      "ci95_lo": -0.353,
+      "ci95_hi": 0.882,
+      "p_two_sided_n8": 0.242
+    },
+    "DROID|DreamDojo|AFFECT": {
+      "r": 0.79,
+      "ci95_lo": 0.192,
+      "ci95_hi": 0.96,
+      "p_two_sided_n8": 0.02
+    },
+    "DROID|Cosmos3|base": {
+      "r": 0.425,
+      "ci95_lo": -0.399,
+      "ci95_hi": 0.869,
+      "p_two_sided_n8": 0.294
+    },
+    "DROID|Cosmos3|AFFECT": {
+      "r": 0.583,
+      "ci95_lo": -0.207,
+      "ci95_hi": 0.913,
+      "p_two_sided_n8": 0.129
+    },
+    "ALOHA-2|DreamDojo|base": {
+      "r": 0.325,
+      "ci95_lo": -0.492,
+      "ci95_hi": 0.838,
+      "p_two_sided_n8": 0.432
+    },
+    "ALOHA-2|DreamDojo|AFFECT": {
+      "r": 0.49,
+      "ci95_lo": -0.328,
+      "ci95_hi": 0.888,
+      "p_two_sided_n8": 0.218
+    },
+    "ALOHA-2|Cosmos3|base": {
+      "r": 0.298,
+      "ci95_lo": -0.515,
+      "ci95_hi": 0.829,
+      "p_two_sided_n8": 0.473
+    },
+    "ALOHA-2|Cosmos3|AFFECT": {
+      "r": 0.694,
+      "ci95_lo": -0.021,
+      "ci95_hi": 0.939,
+      "p_two_sided_n8": 0.056
+    }
+  },
+  "pearson_gains": [
+    {
+      "env": "UR5e",
+      "backbone": "DreamDojo",
+      "delta": 0.235
+    },
+    {
+      "env": "UR5e",
+      "backbone": "Cosmos3",
+      "delta": 0.243
+    },
+    {
+      "env": "DROID",
+      "backbone": "DreamDojo",
+      "delta": 0.322
+    },
+    {
+      "env": "DROID",
+      "backbone": "Cosmos3",
+      "delta": 0.158
+    },
+    {
+      "env": "ALOHA-2",
+      "backbone": "DreamDojo",
+      "delta": 0.165
+    },
+    {
+      "env": "ALOHA-2",
+      "backbone": "Cosmos3",
+      "delta": 0.396
+    }
+  ],
+  "pearson_sign_test_all_6_improve_if_indep_p": 0.015625,
+  "droid_dreamdojo_indep_diff_p": 0.373,
+  "aloha_cosmos3_indep_diff_p": 0.386,
+  "droid_affect_ci_by_n": {
+    "6": [
+      -0.06,
+      0.976
+    ],
+    "8": [
+      0.192,
+      0.96
+    ],
+    "12": [
+      0.395,
+      0.938
+    ]
+  },
+  "fvd_rel_change_pct": {
+    "UR5e DreamDojo short": -14.1,
+    "UR5e DreamDojo long": -13.9,
+    "UR5e Cosmos3 short": -1.5,
+    "UR5e Cosmos3 long": -3.9,
+    "DROID DreamDojo": -22.9,
+    "DROID Cosmos3": -18.2,
+    "ALOHA-2 DreamDojo": 2.7,
+    "ALOHA-2 Cosmos3": -22.8
+  },
+  "ur5e_planning": {
+    "Uniform": {
+      "k": 28,
+      "n": 60,
+      "pct": 46.7,
+      "wilson95": [
+        34.6,
+        59.1
+      ]
+    },
+    "DreamDojo": {
+      "k": 36,
+      "n": 60,
+      "pct": 60.0,
+      "wilson95": [
+        47.4,
+        71.4
+      ]
+    },
+    "DreamDojo+AFFECT": {
+      "k": 41,
+      "n": 60,
+      "pct": 68.3,
+      "wilson95": [
+        55.8,
+        78.7
+      ]
+    }
+  },
+  "ur5e_planning_tests": {
+    "DreamDojo_vs_AFFECT_fisher_p_onesided_or_two": [
+      0.447,
+      0.341
+    ],
+    "Uniform_vs_AFFECT_fisher_p": [
+      0.026,
+      0.016
+    ]
+  },
+  "aloha2_planning_inferred_n36": {
+    "DreamDojo+AFFECT": {
+      "k": 29,
+      "n": 36,
+      "pct": 80.56,
+      "wilson95": [
+        65.0,
+        90.2
+      ]
+    },
+    "DreamDojo": {
+      "k": 26,
+      "n": 36,
+      "pct": 72.22,
+      "wilson95": [
+        56.0,
+        84.2
+      ]
+    }
+  },
+  "aloha2_planning_tests": {
+    "fisher_p": [
+      0.58,
+      0.405
+    ]
+  },
+  "aloha2_gain_pp_exact": 8.33,
+  "ur5e_gain_pp_exact": 8.33,
+  "ablation_delta_vs_flowonly_fvd": {
+    "AFFECT_vs_base_10k": -28,
+    "placebo_vs_base": 176,
+    "uncond_vs_base": 167,
+    "AFFECT_vs_base_20pct": -12
+  },
+  "consistency": {
+    "abstract_23pct_fvd_droid": 22.9,
+    "text_18pct_fvd_droid_cosmos3": 18.2,
+    "section_4_1_ur5e_planning_gain_pp": 8.3,
+    "section_4_2_aloha_gain_text_pp": 8.4,
+    "intro_six_combos_improve_pearson": true,
+    "table2_aloha_dreamdojo_fvd_worse": true,
+    "ablation_table3_base_matches_table2": false
+  }
+}
