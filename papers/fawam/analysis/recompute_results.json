@@ -1,0 +1,421 @@
+{
+  "checks": [
+    {
+      "id": "avg_pi05",
+      "match": true
+    },
+    {
+      "id": "avg_ge_act",
+      "match": true
+    },
+    {
+      "id": "avg_forcevla",
+      "match": true
+    },
+    {
+      "id": "avg_ta_vla",
+      "match": true
+    },
+    {
+      "id": "avg_feam",
+      "match": true
+    },
+    {
+      "id": "avg_ge_act_res",
+      "match": true
+    },
+    {
+      "id": "avg_ta_vla_res",
+      "match": true
+    },
+    {
+      "id": "avg_fawam",
+      "match": true
+    },
+    {
+      "id": "table2_base_none",
+      "match": true
+    },
+    {
+      "id": "table2_obs",
+      "match": true
+    },
+    {
+      "id": "table2_obs_pre",
+      "match": true
+    },
+    {
+      "id": "table2_res_only",
+      "match": true
+    },
+    {
+      "id": "table2_obs_pre_res",
+      "match": true
+    },
+    {
+      "id": "table2_feam_row_equals_table1",
+      "match": true
+    },
+    {
+      "id": "table2_full_row_equals_table1",
+      "match": true
+    },
+    {
+      "id": "table3_fawam_equals_table1_on_peel_wipe",
+      "match": true
+    },
+    {
+      "id": "abstract_36.25_vs_best_vision_only",
+      "match": true,
+      "calc": 36.25,
+      "claimed": 36.25
+    },
+    {
+      "id": "abstract_21.25_vs_best_force_aware",
+      "match": true,
+      "calc": 21.25,
+      "claimed": 21.25
+    },
+    {
+      "id": "matched_31.25_vs_ge_act_res",
+      "match": true,
+      "calc": 31.25,
+      "claimed": 31.25
+    },
+    {
+      "id": "matched_8.75_vs_ta_vla_res",
+      "match": true,
+      "calc": 8.75,
+      "claimed": 8.75
+    },
+    {
+      "id": "residual_gain_feam_to_fawam",
+      "match": true,
+      "calc": 11.25,
+      "claimed": 11.25
+    },
+    {
+      "id": "obs_gain_7.5",
+      "match": true,
+      "calc": 7.5,
+      "claimed": 7.5
+    },
+    {
+      "id": "pre_gain_17.5",
+      "match": true,
+      "calc": 17.5,
+      "claimed": 17.5
+    },
+    {
+      "id": "res_only_gain_18.75",
+      "match": true,
+      "calc": 18.75,
+      "claimed": 18.75
+    }
+  ],
+  "table1": {
+    "pi05": {
+      "successes": 38,
+      "trials": 80,
+      "avg_recomputed": 47.5,
+      "avg_reported": 47.5,
+      "match": true,
+      "wilson95_pct": [
+        36.9,
+        58.3
+      ]
+    },
+    "ge_act": {
+      "successes": 39,
+      "trials": 80,
+      "avg_recomputed": 48.75,
+      "avg_reported": 48.75,
+      "match": true,
+      "wilson95_pct": [
+        38.1,
+        59.5
+      ]
+    },
+    "forcevla": {
+      "successes": 51,
+      "trials": 80,
+      "avg_recomputed": 63.75,
+      "avg_reported": 63.75,
+      "match": true,
+      "wilson95_pct": [
+        52.8,
+        73.4
+      ]
+    },
+    "ta_vla": {
+      "successes": 51,
+      "trials": 80,
+      "avg_recomputed": 63.75,
+      "avg_reported": 63.75,
+      "match": true,
+      "wilson95_pct": [
+        52.8,
+        73.4
+      ]
+    },
+    "feam": {
+      "successes": 59,
+      "trials": 80,
+      "avg_recomputed": 73.75,
+      "avg_reported": 73.75,
+      "match": true,
+      "wilson95_pct": [
+        63.2,
+        82.1
+      ]
+    },
+    "ge_act_res": {
+      "successes": 43,
+      "trials": 80,
+      "avg_recomputed": 53.75,
+      "avg_reported": 53.75,
+      "match": true,
+      "wilson95_pct": [
+        42.9,
+        64.3
+      ]
+    },
+    "ta_vla_res": {
+      "successes": 61,
+      "trials": 80,
+      "avg_recomputed": 76.25,
+      "avg_reported": 76.25,
+      "match": true,
+      "wilson95_pct": [
+        65.9,
+        84.2
+      ]
+    },
+    "fawam": {
+      "successes": 68,
+      "trials": 80,
+      "avg_recomputed": 85.0,
+      "avg_reported": 85.0,
+      "match": true,
+      "wilson95_pct": [
+        75.6,
+        91.2
+      ]
+    }
+  },
+  "pairwise": {
+    "fawam_vs_ta_vla_res": {
+      "succ_a": 68,
+      "succ_b": 61,
+      "n": 80,
+      "diff_pp": 8.75,
+      "fisher_p": 0.2298
+    },
+    "fawam_vs_feam": {
+      "succ_a": 68,
+      "succ_b": 59,
+      "n": 80,
+      "diff_pp": 11.25,
+      "fisher_p": 0.1172
+    },
+    "fawam_vs_ge_act_res": {
+      "succ_a": 68,
+      "succ_b": 43,
+      "n": 80,
+      "diff_pp": 31.25,
+      "fisher_p": 0.0
+    },
+    "fawam_vs_forcevla": {
+      "succ_a": 68,
+      "succ_b": 51,
+      "n": 80,
+      "diff_pp": 21.25,
+      "fisher_p": 0.0035
+    },
+    "fawam_vs_ta_vla": {
+      "succ_a": 68,
+      "succ_b": 51,
+      "n": 80,
+      "diff_pp": 21.25,
+      "fisher_p": 0.0035
+    },
+    "feam_vs_ta_vla": {
+      "succ_a": 59,
+      "succ_b": 51,
+      "n": 80,
+      "diff_pp": 10.0,
+      "fisher_p": 0.2324
+    },
+    "feam_vs_ge_act": {
+      "succ_a": 59,
+      "succ_b": 39,
+      "n": 80,
+      "diff_pp": 25.0,
+      "fisher_p": 0.0019
+    },
+    "ta_vla_res_vs_ta_vla": {
+      "succ_a": 61,
+      "succ_b": 51,
+      "n": 80,
+      "diff_pp": 12.5,
+      "fisher_p": 0.12
+    },
+    "ge_act_res_vs_ge_act": {
+      "succ_a": 43,
+      "succ_b": 39,
+      "n": 80,
+      "diff_pp": 5.0,
+      "fisher_p": 0.6353
+    },
+    "fawam_vs_ge_act": {
+      "succ_a": 68,
+      "succ_b": 39,
+      "n": 80,
+      "diff_pp": 36.25,
+      "fisher_p": 0.0
+    },
+    "res_only_with_wrench_vs_ge_act_res_without_wrench": {
+      "succ_a": 54,
+      "succ_b": 43,
+      "n": 80,
+      "diff_pp": 13.75,
+      "fisher_p": 0.1053,
+      "note": "기반 모델과 교정 데이터가 같다고 가정한 비교. 논문은 이 쌍을 직접 비교하지 않음"
+    }
+  },
+  "ablation": {
+    "averages": {
+      "base_none": {
+        "recomputed": 48.75,
+        "reported": 48.75,
+        "match": true
+      },
+      "obs": {
+        "recomputed": 56.25,
+        "reported": 56.25,
+        "match": true
+      },
+      "obs_pre": {
+        "recomputed": 73.75,
+        "reported": 73.75,
+        "match": true
+      },
+      "res_only": {
+        "recomputed": 67.5,
+        "reported": 67.5,
+        "match": true
+      },
+      "obs_pre_res": {
+        "recomputed": 85.0,
+        "reported": 85.0,
+        "match": true
+      }
+    },
+    "step_obs_vs_base_none": {
+      "succ_a": 45,
+      "succ_b": 39,
+      "n": 80,
+      "diff_pp": 7.5,
+      "fisher_p": 0.4287
+    },
+    "step_obs_pre_vs_obs": {
+      "succ_a": 59,
+      "succ_b": 45,
+      "n": 80,
+      "diff_pp": 17.5,
+      "fisher_p": 0.0307
+    },
+    "step_obs_pre_res_vs_obs_pre": {
+      "succ_a": 68,
+      "succ_b": 59,
+      "n": 80,
+      "diff_pp": 11.25,
+      "fisher_p": 0.1172
+    },
+    "step_res_only_vs_base_none": {
+      "succ_a": 54,
+      "succ_b": 39,
+      "n": 80,
+      "diff_pp": 18.75,
+      "fisher_p": 0.0245
+    },
+    "feam_res_no_wrench": {
+      "succ": 30,
+      "n": 40,
+      "vs_fawam_fisher_p": 0.1395
+    },
+    "feam_res_no_gate": {
+      "succ": 32,
+      "n": 40,
+      "vs_fawam_fisher_p": 0.3482
+    },
+    "fawam_peel_wipe": {
+      "succ": 36,
+      "n": 40
+    },
+    "gate_removed_vs_fawam_fisher_p": 0.3482
+  },
+  "perturbation": {
+    "pooled": {
+      "no_correction": 3,
+      "with_correction": 16,
+      "n_each": 20,
+      "fisher_p": 8.8e-05
+    },
+    "per_task_fisher_p": {
+      "erase_board": 0.1667,
+      "peel_cucumber": 0.1667,
+      "slice_cucumber_sic": 0.0476,
+      "wipe_vase": 0.2063
+    },
+    "per_task_counts": {
+      "erase_board": [
+        0,
+        3
+      ],
+      "peel_cucumber": [
+        2,
+        5
+      ],
+      "slice_cucumber_sic": [
+        0,
+        4
+      ],
+      "wipe_vase": [
+        1,
+        4
+      ]
+    }
+  },
+  "power": {
+    "fawam_vs_ta_vla_res_85_vs_76": 320,
+    "fawam_vs_feam_85_vs_73.75": 202,
+    "fawam_vs_ge_act_res_85_vs_53.75": 33,
+    "per_task_17_vs_14": 121
+  },
+  "relative_gain_vs_best_vision_only_pct": 74.4,
+  "relative_gain_vs_best_force_aware_pct": 33.3,
+  "per_task_fawam_vs_ta_vla_res": {
+    "erase_board": {
+      "fawam": 15,
+      "ta_vla_res": 13,
+      "fisher_p": 0.731
+    },
+    "peel_cucumber": {
+      "fawam": 19,
+      "ta_vla_res": 19,
+      "fisher_p": 1.0
+    },
+    "pivot_box": {
+      "fawam": 17,
+      "ta_vla_res": 15,
+      "fisher_p": 0.695
+    },
+    "wipe_vase": {
+      "fawam": 17,
+      "ta_vla_res": 14,
+      "fisher_p": 0.451
+    }
+  },
+  "checks_all_match": true
+}
