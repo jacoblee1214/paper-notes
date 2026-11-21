@@ -1,0 +1,785 @@
+{
+  "assumptions": {
+    "sim_trials_per_task": 150,
+    "real_trials_per_policy_task": 20
+  },
+  "V1_sim_grid": {
+    "max_deviation_from_integer_count": 0.1,
+    "counts": {
+      "MDF++": [
+        128,
+        118,
+        138,
+        140,
+        128
+      ],
+      "MDF (adapted)": [
+        134,
+        118,
+        139,
+        63,
+        59
+      ],
+      "MDF + selective E2E": [
+        130,
+        82,
+        138,
+        119,
+        67
+      ],
+      "MDF++ (naive grad)": [
+        85,
+        75,
+        136,
+        101,
+        84
+      ],
+      "MDF++ (SIGReg)": [
+        76,
+        48,
+        127,
+        72,
+        113
+      ],
+      "MDF++ (frozen-ViT)": [
+        130,
+        99,
+        134,
+        55,
+        22
+      ],
+      "MDF++ (frozen-Sparsh)": [
+        135,
+        97,
+        122,
+        60,
+        28
+      ],
+      "MDF++ (policy)": [
+        94,
+        97,
+        136,
+        135,
+        130
+      ],
+      "UWM w/ tactile": [
+        133,
+        108,
+        134,
+        80,
+        102
+      ],
+      "DP w/ tactile": [
+        133,
+        122,
+        137,
+        42,
+        81
+      ]
+    },
+    "average_check": {
+      "MDF++": {
+        "recomputed": 86.92,
+        "reported": 86.9,
+        "ok": true
+      },
+      "MDF (adapted)": {
+        "recomputed": 68.4,
+        "reported": 68.4,
+        "ok": true
+      },
+      "MDF + selective E2E": {
+        "recomputed": 71.48,
+        "reported": 71.5,
+        "ok": true
+      },
+      "MDF++ (naive grad)": {
+        "recomputed": 64.14,
+        "reported": 64.1,
+        "ok": true
+      },
+      "MDF++ (SIGReg)": {
+        "recomputed": 58.14,
+        "reported": 58.1,
+        "ok": true
+      },
+      "MDF++ (frozen-ViT)": {
+        "recomputed": 58.68,
+        "reported": 58.7,
+        "ok": true
+      },
+      "MDF++ (frozen-Sparsh)": {
+        "recomputed": 58.94,
+        "reported": 58.9,
+        "ok": true
+      },
+      "MDF++ (policy)": {
+        "recomputed": 78.94,
+        "reported": 78.9,
+        "ok": true
+      },
+      "UWM w/ tactile": {
+        "recomputed": 74.24,
+        "reported": 74.2,
+        "ok": true
+      },
+      "DP w/ tactile": {
+        "recomputed": 68.66,
+        "reported": 68.7,
+        "ok": true
+      }
+    }
+  },
+  "V2_claims": {
+    "MDF++ minus frozen-ViT (pp)": 28.24,
+    "MDF++ minus frozen-Sparsh (pp)": 27.98,
+    "MDF++ minus naive grad (pp)": 22.78,
+    "MDF++ minus MDF adapted (pp)": 18.52,
+    "MDF++ minus MDF++(policy) (pp)": 7.98,
+    "MDF++ minus DP (pp)": 18.26,
+    "MDF++ minus UWM (pp)": 12.68,
+    "MDF+selective minus MDF adapted (pp)": 3.08
+  },
+  "V3_sim_per_task_fisher": {
+    "MDF++ (policy)": [
+      {
+        "task": "PegInsert",
+        "k_mdf": 128,
+        "k_rival": 94,
+        "diff_pp": 22.7,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "GearMesh",
+        "k_mdf": 118,
+        "k_rival": 97,
+        "diff_pp": 14.0,
+        "p_fisher": 0.0102
+      },
+      {
+        "task": "NutThread",
+        "k_mdf": 138,
+        "k_rival": 136,
+        "diff_pp": 1.3,
+        "p_fisher": 0.8378
+      },
+      {
+        "task": "BallSort",
+        "k_mdf": 140,
+        "k_rival": 135,
+        "diff_pp": 3.3,
+        "p_fisher": 0.4039
+      },
+      {
+        "task": "ObjectSearch",
+        "k_mdf": 128,
+        "k_rival": 130,
+        "diff_pp": -1.3,
+        "p_fisher": 0.868
+      }
+    ],
+    "MDF++ (naive grad)": [
+      {
+        "task": "PegInsert",
+        "k_mdf": 128,
+        "k_rival": 85,
+        "diff_pp": 28.7,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "GearMesh",
+        "k_mdf": 118,
+        "k_rival": 75,
+        "diff_pp": 28.7,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "NutThread",
+        "k_mdf": 138,
+        "k_rival": 136,
+        "diff_pp": 1.3,
+        "p_fisher": 0.8378
+      },
+      {
+        "task": "BallSort",
+        "k_mdf": 140,
+        "k_rival": 101,
+        "diff_pp": 26.0,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "ObjectSearch",
+        "k_mdf": 128,
+        "k_rival": 84,
+        "diff_pp": 29.3,
+        "p_fisher": 0.0
+      }
+    ],
+    "MDF++ (frozen-ViT)": [
+      {
+        "task": "PegInsert",
+        "k_mdf": 128,
+        "k_rival": 130,
+        "diff_pp": -1.3,
+        "p_fisher": 0.868
+      },
+      {
+        "task": "GearMesh",
+        "k_mdf": 118,
+        "k_rival": 99,
+        "diff_pp": 12.7,
+        "p_fisher": 0.0199
+      },
+      {
+        "task": "NutThread",
+        "k_mdf": 138,
+        "k_rival": 134,
+        "diff_pp": 2.7,
+        "p_fisher": 0.5523
+      },
+      {
+        "task": "BallSort",
+        "k_mdf": 140,
+        "k_rival": 55,
+        "diff_pp": 56.7,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "ObjectSearch",
+        "k_mdf": 128,
+        "k_rival": 22,
+        "diff_pp": 70.7,
+        "p_fisher": 0.0
+      }
+    ],
+    "MDF++ (frozen-Sparsh)": [
+      {
+        "task": "PegInsert",
+        "k_mdf": 128,
+        "k_rival": 135,
+        "diff_pp": -4.7,
+        "p_fisher": 0.2921
+      },
+      {
+        "task": "GearMesh",
+        "k_mdf": 118,
+        "k_rival": 97,
+        "diff_pp": 14.0,
+        "p_fisher": 0.0102
+      },
+      {
+        "task": "NutThread",
+        "k_mdf": 138,
+        "k_rival": 122,
+        "diff_pp": 10.7,
+        "p_fisher": 0.0102
+      },
+      {
+        "task": "BallSort",
+        "k_mdf": 140,
+        "k_rival": 60,
+        "diff_pp": 53.3,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "ObjectSearch",
+        "k_mdf": 128,
+        "k_rival": 28,
+        "diff_pp": 66.7,
+        "p_fisher": 0.0
+      }
+    ],
+    "UWM w/ tactile": [
+      {
+        "task": "PegInsert",
+        "k_mdf": 128,
+        "k_rival": 133,
+        "diff_pp": -3.3,
+        "p_fisher": 0.4927
+      },
+      {
+        "task": "GearMesh",
+        "k_mdf": 118,
+        "k_rival": 108,
+        "diff_pp": 6.7,
+        "p_fisher": 0.2279
+      },
+      {
+        "task": "NutThread",
+        "k_mdf": 138,
+        "k_rival": 134,
+        "diff_pp": 2.7,
+        "p_fisher": 0.5523
+      },
+      {
+        "task": "BallSort",
+        "k_mdf": 140,
+        "k_rival": 80,
+        "diff_pp": 40.0,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "ObjectSearch",
+        "k_mdf": 128,
+        "k_rival": 102,
+        "diff_pp": 17.3,
+        "p_fisher": 0.0006
+      }
+    ],
+    "DP w/ tactile": [
+      {
+        "task": "PegInsert",
+        "k_mdf": 128,
+        "k_rival": 133,
+        "diff_pp": -3.3,
+        "p_fisher": 0.4927
+      },
+      {
+        "task": "GearMesh",
+        "k_mdf": 118,
+        "k_rival": 122,
+        "diff_pp": -2.7,
+        "p_fisher": 0.6652
+      },
+      {
+        "task": "NutThread",
+        "k_mdf": 138,
+        "k_rival": 137,
+        "diff_pp": 0.7,
+        "p_fisher": 1.0
+      },
+      {
+        "task": "BallSort",
+        "k_mdf": 140,
+        "k_rival": 42,
+        "diff_pp": 65.3,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "ObjectSearch",
+        "k_mdf": 128,
+        "k_rival": 81,
+        "diff_pp": 31.3,
+        "p_fisher": 0.0
+      }
+    ],
+    "MDF (adapted)": [
+      {
+        "task": "PegInsert",
+        "k_mdf": 128,
+        "k_rival": 134,
+        "diff_pp": -4.0,
+        "p_fisher": 0.3857
+      },
+      {
+        "task": "GearMesh",
+        "k_mdf": 118,
+        "k_rival": 118,
+        "diff_pp": 0.0,
+        "p_fisher": 1.0
+      },
+      {
+        "task": "NutThread",
+        "k_mdf": 138,
+        "k_rival": 139,
+        "diff_pp": -0.7,
+        "p_fisher": 1.0
+      },
+      {
+        "task": "BallSort",
+        "k_mdf": 140,
+        "k_rival": 63,
+        "diff_pp": 51.3,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "ObjectSearch",
+        "k_mdf": 128,
+        "k_rival": 59,
+        "diff_pp": 46.0,
+        "p_fisher": 0.0
+      }
+    ],
+    "MDF++ (SIGReg)": [
+      {
+        "task": "PegInsert",
+        "k_mdf": 128,
+        "k_rival": 76,
+        "diff_pp": 34.7,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "GearMesh",
+        "k_mdf": 118,
+        "k_rival": 48,
+        "diff_pp": 46.7,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "NutThread",
+        "k_mdf": 138,
+        "k_rival": 127,
+        "diff_pp": 7.3,
+        "p_fisher": 0.0709
+      },
+      {
+        "task": "BallSort",
+        "k_mdf": 140,
+        "k_rival": 72,
+        "diff_pp": 45.3,
+        "p_fisher": 0.0
+      },
+      {
+        "task": "ObjectSearch",
+        "k_mdf": 128,
+        "k_rival": 113,
+        "diff_pp": 10.0,
+        "p_fisher": 0.0414
+      }
+    ]
+  },
+  "V4_sim_pooled_over_tasks": {
+    "MDF++ (policy)": {
+      "k_mdf": 652,
+      "k_rival": 592,
+      "n": 750,
+      "mdf_pct": 86.93,
+      "rival_pct": 78.93,
+      "diff_pp": 8.0,
+      "p_fisher_pooled": 4.83e-05,
+      "mdf_wilson95": [
+        84.3,
+        89.2
+      ],
+      "rival_wilson95": [
+        75.9,
+        81.7
+      ]
+    },
+    "MDF++ (naive grad)": {
+      "k_mdf": 652,
+      "k_rival": 481,
+      "n": 750,
+      "mdf_pct": 86.93,
+      "rival_pct": 64.13,
+      "diff_pp": 22.8,
+      "p_fisher_pooled": 3.62e-25,
+      "mdf_wilson95": [
+        84.3,
+        89.2
+      ],
+      "rival_wilson95": [
+        60.6,
+        67.5
+      ]
+    },
+    "MDF++ (frozen-ViT)": {
+      "k_mdf": 652,
+      "k_rival": 440,
+      "n": 750,
+      "mdf_pct": 86.93,
+      "rival_pct": 58.67,
+      "diff_pp": 28.27,
+      "p_fisher_pooled": 1.04e-35,
+      "mdf_wilson95": [
+        84.3,
+        89.2
+      ],
+      "rival_wilson95": [
+        55.1,
+        62.1
+      ]
+    },
+    "MDF++ (frozen-Sparsh)": {
+      "k_mdf": 652,
+      "k_rival": 442,
+      "n": 750,
+      "mdf_pct": 86.93,
+      "rival_pct": 58.93,
+      "diff_pp": 28.0,
+      "p_fisher_pooled": 3.7e-35,
+      "mdf_wilson95": [
+        84.3,
+        89.2
+      ],
+      "rival_wilson95": [
+        55.4,
+        62.4
+      ]
+    },
+    "UWM w/ tactile": {
+      "k_mdf": 652,
+      "k_rival": 557,
+      "n": 750,
+      "mdf_pct": 86.93,
+      "rival_pct": 74.27,
+      "diff_pp": 12.67,
+      "p_fisher_pooled": 6.33e-10,
+      "mdf_wilson95": [
+        84.3,
+        89.2
+      ],
+      "rival_wilson95": [
+        71.0,
+        77.3
+      ]
+    },
+    "DP w/ tactile": {
+      "k_mdf": 652,
+      "k_rival": 515,
+      "n": 750,
+      "mdf_pct": 86.93,
+      "rival_pct": 68.67,
+      "diff_pp": 18.27,
+      "p_fisher_pooled": 1.26e-17,
+      "mdf_wilson95": [
+        84.3,
+        89.2
+      ],
+      "rival_wilson95": [
+        65.3,
+        71.9
+      ]
+    },
+    "MDF (adapted)": {
+      "k_mdf": 652,
+      "k_rival": 513,
+      "n": 750,
+      "mdf_pct": 86.93,
+      "rival_pct": 68.4,
+      "diff_pp": 18.53,
+      "p_fisher_pooled": 4.86e-18,
+      "mdf_wilson95": [
+        84.3,
+        89.2
+      ],
+      "rival_wilson95": [
+        65.0,
+        71.6
+      ]
+    },
+    "MDF++ (SIGReg)": {
+      "k_mdf": 652,
+      "k_rival": 436,
+      "n": 750,
+      "mdf_pct": 86.93,
+      "rival_pct": 58.13,
+      "diff_pp": 28.8,
+      "p_fisher_pooled": 8.08e-37,
+      "mdf_wilson95": [
+        84.3,
+        89.2
+      ],
+      "rival_wilson95": [
+        54.6,
+        61.6
+      ]
+    }
+  },
+  "V5_mdf_wilson_per_task": {
+    "PegInsert": {
+      "k": 128,
+      "wilson95": [
+        78.8,
+        90.1
+      ]
+    },
+    "GearMesh": {
+      "k": 118,
+      "wilson95": [
+        71.4,
+        84.5
+      ]
+    },
+    "NutThread": {
+      "k": 138,
+      "wilson95": [
+        86.5,
+        95.4
+      ]
+    },
+    "BallSort": {
+      "k": 140,
+      "wilson95": [
+        88.2,
+        96.3
+      ]
+    },
+    "ObjectSearch": {
+      "k": 128,
+      "wilson95": [
+        78.8,
+        90.1
+      ]
+    }
+  },
+  "K1_real_score_recompute": {
+    "Bolt/MDF++": {
+      "trials": 20,
+      "base_score": 1900,
+      "reported_total": 1900,
+      "residual": 0,
+      "residual_over_5": 0.0,
+      "reported_avg_check": 95.0,
+      "reported_avg": 95.0,
+      "stage3_trials_max_bonus": 4
+    },
+    "Bolt/UWM": {
+      "trials": 20,
+      "base_score": 1150,
+      "reported_total": 1150,
+      "residual": 0,
+      "residual_over_5": 0.0,
+      "reported_avg_check": 57.5,
+      "reported_avg": 57.5,
+      "stage3_trials_max_bonus": 2
+    },
+    "Bolt/MDF++(frozen-ViT)": {
+      "trials": 20,
+      "base_score": 945,
+      "reported_total": 930,
+      "residual": -15,
+      "residual_over_5": -3.0,
+      "reported_avg_check": 46.5,
+      "reported_avg": 46.5,
+      "stage3_trials_max_bonus": 2
+    },
+    "Nut/MDF++": {
+      "trials": 20,
+      "base_score": 1615,
+      "reported_total": 1660,
+      "residual": 45,
+      "residual_over_5": 9.0,
+      "reported_avg_check": 83.0,
+      "reported_avg": 83.0,
+      "stage3_trials_max_bonus": 10
+    },
+    "Nut/UWM": {
+      "trials": 20,
+      "base_score": 1175,
+      "reported_total": 1220,
+      "residual": 45,
+      "residual_over_5": 9.0,
+      "reported_avg_check": 61.0,
+      "reported_avg": 61.0,
+      "stage3_trials_max_bonus": 9
+    },
+    "Nut/MDF++(frozen-ViT)": {
+      "trials": 20,
+      "base_score": 375,
+      "reported_total": 380,
+      "residual": 5,
+      "residual_over_5": 1.0,
+      "reported_avg_check": 19.0,
+      "reported_avg": 19.0,
+      "stage3_trials_max_bonus": 1
+    }
+  },
+  "V6_real_success_tests": {
+    "Bolt MDF++ vs UWM": {
+      "k_mdf": 16,
+      "k_rival": 10,
+      "diff_pp": 30.0,
+      "p_fisher": 0.0958,
+      "mdf_wilson95": [
+        58.4,
+        91.9
+      ],
+      "rival_wilson95": [
+        29.9,
+        70.1
+      ]
+    },
+    "Bolt MDF++ vs MDF++(frozen-ViT)": {
+      "k_mdf": 16,
+      "k_rival": 6,
+      "diff_pp": 50.0,
+      "p_fisher": 0.0036,
+      "mdf_wilson95": [
+        58.4,
+        91.9
+      ],
+      "rival_wilson95": [
+        14.5,
+        51.9
+      ]
+    },
+    "Nut MDF++ vs UWM": {
+      "k_mdf": 8,
+      "k_rival": 5,
+      "diff_pp": 15.0,
+      "p_fisher": 0.5006,
+      "mdf_wilson95": [
+        21.9,
+        61.3
+      ],
+      "rival_wilson95": [
+        11.2,
+        46.9
+      ]
+    },
+    "Nut MDF++ vs MDF++(frozen-ViT)": {
+      "k_mdf": 8,
+      "k_rival": 3,
+      "diff_pp": 25.0,
+      "p_fisher": 0.1552,
+      "mdf_wilson95": [
+        21.9,
+        61.3
+      ],
+      "rival_wilson95": [
+        5.2,
+        36.0
+      ]
+    },
+    "pooled MDF++ vs UWM": {
+      "k_mdf": 24,
+      "k_rival": 15,
+      "n": 40,
+      "diff_pp": 22.5,
+      "p_fisher": 0.0729
+    },
+    "pooled MDF++ vs MDF++(frozen-ViT)": {
+      "k_mdf": 24,
+      "k_rival": 9,
+      "n": 40,
+      "diff_pp": 37.5,
+      "p_fisher": 0.0013
+    }
+  },
+  "V7_real_score_mannwhitney": {
+    "Bolt MDF++ vs UWM": {
+      "U": 276.0,
+      "p": 0.0157,
+      "note": "단계 점수 기준 재구성, 보너스 제외"
+    },
+    "Bolt MDF++ vs MDF++(frozen-ViT)": {
+      "U": 324.0,
+      "p": 0.0002,
+      "note": "단계 점수 기준 재구성, 보너스 제외"
+    },
+    "Nut MDF++ vs UWM": {
+      "U": 254.0,
+      "p": 0.1173,
+      "note": "단계 점수 기준 재구성, 보너스 제외"
+    },
+    "Nut MDF++ vs MDF++(frozen-ViT)": {
+      "U": 337.0,
+      "p": 0.0001,
+      "note": "단계 점수 기준 재구성, 보너스 제외"
+    }
+  },
+  "V8_claims_real": {
+    "mdf_two_task_mean_score": 89.0,
+    "uwm_two_task_mean_score": 59.25,
+    "gap_pp": 29.75,
+    "bolt_success_gap_vs_frozen_pp": 50.0,
+    "note": "초록의 '최대 50%'는 볼트 성공률 80% 대 30%(pp)와 맞는다. 본문의 '29%'는 평균 점수 격차 29.75와 맞지만 단위가 명시되지 않았다."
+  },
+  "V9_real_power": {
+    "bolt 80 vs 50 (논문 성공률)": 39,
+    "nut 40 vs 25 (논문 성공률)": 152,
+    "bolt 80 vs 30 (프로즌 ViT)": 15,
+    "시뮬 150회, 86.9 vs 78.9 (정책 전용)": 347
+  }
+}
