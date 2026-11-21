@@ -1,0 +1,568 @@
+{
+ "checks": {
+  "pi0": {
+   "recomputed_avg": 23.0,
+   "reported_avg": 23.0,
+   "match": true
+  },
+  "pi0.5": {
+   "recomputed_avg": 44.0,
+   "reported_avg": 44.0,
+   "match": true
+  },
+  "SimpleDP3+tactile": {
+   "recomputed_avg": 10.0,
+   "reported_avg": 10.0,
+   "match": true
+  },
+  "PointACT": {
+   "recomputed_avg": 13.0,
+   "reported_avg": 13.0,
+   "match": true
+  },
+  "pi0+tactile": {
+   "recomputed_avg": 31.0,
+   "reported_avg": 31.0,
+   "match": true
+  },
+  "pi0.5+tactile": {
+   "recomputed_avg": 43.0,
+   "reported_avg": 43.0,
+   "match": true
+  },
+  "Tactile-VLA": {
+   "recomputed_avg": 45.0,
+   "reported_avg": 45.0,
+   "match": true
+  },
+  "3DTouch": {
+   "recomputed_avg": 65.0,
+   "reported_avg": 65.0,
+   "match": true
+  },
+  "T3:3DTouch (Full)": {
+   "recomputed_avg": 65.0,
+   "reported_avg": 65.0,
+   "match": true
+  },
+  "T3:w/o geom, Global tactile": {
+   "recomputed_avg": 53.0,
+   "reported_avg": 53.0,
+   "match": true
+  },
+  "T3:w/o geom, Local tactile": {
+   "recomputed_avg": 42.0,
+   "reported_avg": 42.0,
+   "match": true
+  },
+  "T3:Point cloud only": {
+   "recomputed_avg": 46.0,
+   "reported_avg": 46.0,
+   "match": true
+  },
+  "T3:Tactile only (Global)": {
+   "recomputed_avg": 35.0,
+   "reported_avg": 35.0,
+   "match": true
+  },
+  "T3:Geometric relations only": {
+   "recomputed_avg": 41.0,
+   "reported_avg": 41.0,
+   "match": true
+  },
+  "T3:RGB only (=pi0)": {
+   "recomputed_avg": 23.0,
+   "reported_avg": 23.0,
+   "match": true
+  },
+  "table2_text_5pp": {
+   "3DTouch_drop": 5.0,
+   "reported": 5.0
+  },
+  "table2_text_13.3pp": {
+   "baseline_drop": 13.3,
+   "reported": 13.3
+  }
+ },
+ "pooled": {
+  "pi0": {
+   "successes": 23,
+   "n": 100,
+   "pct": 23,
+   "wilson95": [
+    15.8,
+    32.2
+   ]
+  },
+  "pi0.5": {
+   "successes": 44,
+   "n": 100,
+   "pct": 44,
+   "wilson95": [
+    34.7,
+    53.8
+   ]
+  },
+  "SimpleDP3+tactile": {
+   "successes": 10,
+   "n": 100,
+   "pct": 10,
+   "wilson95": [
+    5.5,
+    17.4
+   ]
+  },
+  "PointACT": {
+   "successes": 13,
+   "n": 100,
+   "pct": 13,
+   "wilson95": [
+    7.8,
+    21.0
+   ]
+  },
+  "pi0+tactile": {
+   "successes": 31,
+   "n": 100,
+   "pct": 31,
+   "wilson95": [
+    22.8,
+    40.6
+   ]
+  },
+  "pi0.5+tactile": {
+   "successes": 43,
+   "n": 100,
+   "pct": 43,
+   "wilson95": [
+    33.7,
+    52.8
+   ]
+  },
+  "Tactile-VLA": {
+   "successes": 45,
+   "n": 100,
+   "pct": 45,
+   "wilson95": [
+    35.6,
+    54.8
+   ]
+  },
+  "3DTouch": {
+   "successes": 65,
+   "n": 100,
+   "pct": 65,
+   "wilson95": [
+    55.3,
+    73.6
+   ]
+  }
+ },
+ "per_task_tests": {
+  "Funnel": {
+   "Tactile-VLA": {
+    "k_vs_k": [
+     7,
+     2
+    ],
+    "diff_pp": 25.0,
+    "newcombe95_pp": [
+     -1.3,
+     47.9
+    ],
+    "fisher_p": 0.127,
+    "holm_p": 1.0
+   },
+   "pi0.5+tactile": {
+    "k_vs_k": [
+     7,
+     4
+    ],
+    "diff_pp": 15.0,
+    "newcombe95_pp": [
+     -12.4,
+     39.8
+    ],
+    "fisher_p": 0.48,
+    "holm_p": 1.0
+   },
+   "pi0.5": {
+    "k_vs_k": [
+     7,
+     3
+    ],
+    "diff_pp": 20.0,
+    "newcombe95_pp": [
+     -7.0,
+     43.8
+    ],
+    "fisher_p": 0.273,
+    "holm_p": 1.0
+   }
+  },
+  "Plug": {
+   "Tactile-VLA": {
+    "k_vs_k": [
+     12,
+     5
+    ],
+    "diff_pp": 35.0,
+    "newcombe95_pp": [
+     4.4,
+     57.8
+    ],
+    "fisher_p": 0.054,
+    "holm_p": 0.648
+   },
+   "pi0.5+tactile": {
+    "k_vs_k": [
+     12,
+     11
+    ],
+    "diff_pp": 5.0,
+    "newcombe95_pp": [
+     -23.7,
+     32.6
+    ],
+    "fisher_p": 1.0,
+    "holm_p": 1.0
+   },
+   "pi0.5": {
+    "k_vs_k": [
+     12,
+     10
+    ],
+    "diff_pp": 10.0,
+    "newcombe95_pp": [
+     -19.3,
+     37.0
+    ],
+    "fisher_p": 0.751,
+    "holm_p": 1.0
+   }
+  },
+  "Button": {
+   "Tactile-VLA": {
+    "k_vs_k": [
+     16,
+     9
+    ],
+    "diff_pp": 35.0,
+    "newcombe95_pp": [
+     5.0,
+     57.6
+    ],
+    "fisher_p": 0.048,
+    "holm_p": 0.624
+   },
+   "pi0.5+tactile": {
+    "k_vs_k": [
+     16,
+     6
+    ],
+    "diff_pp": 50.0,
+    "newcombe95_pp": [
+     19.2,
+     69.5
+    ],
+    "fisher_p": 0.004,
+    "holm_p": 0.06
+   },
+   "pi0.5": {
+    "k_vs_k": [
+     16,
+     15
+    ],
+    "diff_pp": 5.0,
+    "newcombe95_pp": [
+     -20.6,
+     29.9
+    ],
+    "fisher_p": 1.0,
+    "holm_p": 1.0
+   }
+  },
+  "Sponge": {
+   "Tactile-VLA": {
+    "k_vs_k": [
+     18,
+     17
+    ],
+    "diff_pp": 5.0,
+    "newcombe95_pp": [
+     -17.3,
+     27.2
+    ],
+    "fisher_p": 1.0,
+    "holm_p": 1.0
+   },
+   "pi0.5+tactile": {
+    "k_vs_k": [
+     18,
+     14
+    ],
+    "diff_pp": 20.0,
+    "newcombe95_pp": [
+     -5.4,
+     43.1
+    ],
+    "fisher_p": 0.235,
+    "holm_p": 1.0
+   },
+   "pi0.5": {
+    "k_vs_k": [
+     18,
+     12
+    ],
+    "diff_pp": 30.0,
+    "newcombe95_pp": [
+     2.9,
+     52.5
+    ],
+    "fisher_p": 0.065,
+    "holm_p": 0.715
+   }
+  },
+  "Pipette": {
+   "Tactile-VLA": {
+    "k_vs_k": [
+     12,
+     12
+    ],
+    "diff_pp": 0.0,
+    "newcombe95_pp": [
+     -28.0,
+     28.0
+    ],
+    "fisher_p": 1.0,
+    "holm_p": 1.0
+   },
+   "pi0.5+tactile": {
+    "k_vs_k": [
+     12,
+     8
+    ],
+    "diff_pp": 20.0,
+    "newcombe95_pp": [
+     -10.2,
+     45.6
+    ],
+    "fisher_p": 0.343,
+    "holm_p": 1.0
+   },
+   "pi0.5": {
+    "k_vs_k": [
+     12,
+     4
+    ],
+    "diff_pp": 40.0,
+    "newcombe95_pp": [
+     9.6,
+     61.7
+    ],
+    "fisher_p": 0.022,
+    "holm_p": 0.308
+   }
+  }
+ },
+ "ablation": {
+  "3DTouch (Full)": {
+   "successes": 65,
+   "pct": 65,
+   "wilson95": [
+    55.3,
+    73.6
+   ],
+   "fisher_vs_full_p": 1.0
+  },
+  "w/o geom, Global tactile": {
+   "successes": 53,
+   "pct": 53,
+   "wilson95": [
+    43.3,
+    62.5
+   ],
+   "fisher_vs_full_p": 0.1135
+  },
+  "w/o geom, Local tactile": {
+   "successes": 42,
+   "pct": 42,
+   "wilson95": [
+    32.8,
+    51.8
+   ],
+   "fisher_vs_full_p": 0.0017
+  },
+  "Point cloud only": {
+   "successes": 46,
+   "pct": 46,
+   "wilson95": [
+    36.6,
+    55.7
+   ],
+   "fisher_vs_full_p": 0.0102
+  },
+  "Tactile only (Global)": {
+   "successes": 35,
+   "pct": 35,
+   "wilson95": [
+    26.4,
+    44.7
+   ],
+   "fisher_vs_full_p": 0.0
+  },
+  "Geometric relations only": {
+   "successes": 41,
+   "pct": 41,
+   "wilson95": [
+    31.9,
+    50.8
+   ],
+   "fisher_vs_full_p": 0.0011
+  },
+  "RGB only (=pi0)": {
+   "successes": 23,
+   "pct": 23,
+   "wilson95": [
+    15.8,
+    32.2
+   ],
+   "fisher_vs_full_p": 0.0
+  }
+ },
+ "table2": {
+  "pi0.5+tactile": {
+   "unperturbed_pct_pooled": 37.5,
+   "perturbed_pct_pooled": 24.2,
+   "drop_pp": 13.3,
+   "drop_wald95_pp": [
+    -3.5,
+    30.2
+   ],
+   "reported_drop_pp": 13.3,
+   "per_setting_k": [
+    10,
+    0,
+    0,
+    55,
+    50,
+    30
+   ]
+  },
+  "3DTouch": {
+   "unperturbed_pct_pooled": 47.5,
+   "perturbed_pct_pooled": 42.5,
+   "drop_pp": 5.0,
+   "drop_wald95_pp": [
+    -12.8,
+    22.8
+   ],
+   "reported_drop_pp": 5.0,
+   "per_setting_k": [
+    30,
+    30,
+    30,
+    55,
+    60,
+    50
+   ]
+  },
+  "difference_in_drop_pp": {
+   "baseline_minus_3DTouch": 8.3,
+   "wald95": [
+    -16.2,
+    32.8
+   ]
+  }
+ },
+ "pooled_comparisons": {
+  "3DTouch_vs_Tactile-VLA": {
+   "diff_pp": 20.0,
+   "newcombe95_pp": [
+    6.2,
+    32.8
+   ],
+   "fisher_p": 0.0068
+  },
+  "3DTouch_vs_pi0.5+tactile": {
+   "diff_pp": 22.0,
+   "newcombe95_pp": [
+    8.2,
+    34.7
+   ],
+   "fisher_p": 0.0028
+  },
+  "3DTouch_vs_pi0": {
+   "diff_pp": 42.0,
+   "newcombe95_pp": [
+    28.6,
+    53.2
+   ],
+   "fisher_p": 0.0
+  },
+  "3DTouch_vs_pi0.5": {
+   "diff_pp": 21.0,
+   "newcombe95_pp": [
+    7.2,
+    33.7
+   ],
+   "fisher_p": 0.0044
+  }
+ },
+ "text_claims_arithmetic": {
+  "42pp over pi0 (65-23)": 42,
+  "20pp over Tactile-VLA (65-45)": 20,
+  "11pp shared grounding (53-42)": 11,
+  "12pp geometry (65-53)": 12,
+  "7pp PC+tactile over PC (53-46)": 7,
+  "18pp PC+tactile over tactile only (53-35)": 18,
+  "Funnel +25 vs Tactile-VLA": 25,
+  "Plug +35 vs Tactile-VLA": 35,
+  "Button +35 vs Tactile-VLA": 35,
+  "Sponge +5 vs Tactile-VLA": 5,
+  "Funnel +15 vs best task baseline (20)": 15,
+  "Funnel +20 geometry (35-15)": 20,
+  "Button +25 geometry (80-55)": 25
+ },
+ "ablation_contrasts": {
+  "Global vs Local (no geom)": {
+   "diff_pp": 11.0,
+   "newcombe95_pp": [
+    -2.8,
+    24.2
+   ],
+   "fisher_p": 0.1566
+  },
+  "Full vs Global no geom (geom)": {
+   "diff_pp": 12.0,
+   "newcombe95_pp": [
+    -1.6,
+    25.0
+   ],
+   "fisher_p": 0.1135
+  },
+  "PC+tactile vs PC only": {
+   "diff_pp": 7.0,
+   "newcombe95_pp": [
+    -6.8,
+    20.4
+   ],
+   "fisher_p": 0.3962
+  },
+  "PC+tactile vs tactile only": {
+   "diff_pp": 18.0,
+   "newcombe95_pp": [
+    4.2,
+    30.8
+   ],
+   "fisher_p": 0.0152
+  }
+ },
+ "pi05_vs_pi05tactile_button": {
+  "k": [
+   15,
+   6
+  ],
+  "fisher_p": 0.0104
+ }
+}
