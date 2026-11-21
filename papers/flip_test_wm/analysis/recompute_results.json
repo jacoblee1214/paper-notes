@@ -1,0 +1,287 @@
+{
+  "per_model": {
+    "Gemini Omni Flash 1.1": {
+      "sim_solved": 8,
+      "real_solved": 47,
+      "sim_pair_acc_pct": 5.33,
+      "real_pair_acc_pct": 31.33,
+      "overall_pct": 18.33,
+      "text_overall_pct": 18.3,
+      "text_real_pct": 31.3
+    },
+    "MiniMax-H3": {
+      "sim_solved": 5,
+      "real_solved": 38,
+      "sim_pair_acc_pct": 3.33,
+      "real_pair_acc_pct": 25.33,
+      "overall_pct": 14.33,
+      "text_overall_pct": null,
+      "text_real_pct": 25.3
+    },
+    "Wan2.2-I2V-A14B": {
+      "sim_solved": 5,
+      "real_solved": 37,
+      "sim_pair_acc_pct": 3.33,
+      "real_pair_acc_pct": 24.67,
+      "overall_pct": 14.0,
+      "text_overall_pct": 14.0,
+      "text_real_pct": 24.7
+    },
+    "VBVR-Wan2.2": {
+      "sim_solved": 8,
+      "real_solved": 34,
+      "sim_pair_acc_pct": 5.33,
+      "real_pair_acc_pct": 22.67,
+      "overall_pct": 14.0,
+      "text_overall_pct": 14.0,
+      "text_real_pct": null
+    },
+    "Cosmos3-Super": {
+      "sim_solved": 8,
+      "real_solved": 33,
+      "sim_pair_acc_pct": 5.33,
+      "real_pair_acc_pct": 22.0,
+      "overall_pct": 13.66,
+      "text_overall_pct": 13.7,
+      "text_real_pct": null
+    },
+    "Cosmos3-Nano": {
+      "sim_solved": 8,
+      "real_solved": 24,
+      "sim_pair_acc_pct": 5.33,
+      "real_pair_acc_pct": 16.0,
+      "overall_pct": 10.66,
+      "text_overall_pct": 10.7,
+      "text_real_pct": null
+    },
+    "Cosmos-Predict2.5": {
+      "sim_solved": 5,
+      "real_solved": 26,
+      "sim_pair_acc_pct": 3.33,
+      "real_pair_acc_pct": 17.33,
+      "overall_pct": 10.33,
+      "text_overall_pct": 10.3,
+      "text_real_pct": null
+    },
+    "VPP2": {
+      "sim_solved": 2,
+      "real_solved": 22,
+      "sim_pair_acc_pct": 1.33,
+      "real_pair_acc_pct": 14.67,
+      "overall_pct": 8.0,
+      "text_overall_pct": 8.0,
+      "text_real_pct": null
+    },
+    "HunyuanVideo-1.5": {
+      "sim_solved": 4,
+      "real_solved": 17,
+      "sim_pair_acc_pct": 2.67,
+      "real_pair_acc_pct": 11.33,
+      "overall_pct": 7.0,
+      "text_overall_pct": null,
+      "text_real_pct": null
+    },
+    "LingBot-Video-MoE-30B-A3B": {
+      "sim_solved": 4,
+      "real_solved": 15,
+      "sim_pair_acc_pct": 2.67,
+      "real_pair_acc_pct": 10.0,
+      "overall_pct": 6.33,
+      "text_overall_pct": 6.3,
+      "text_real_pct": null
+    },
+    "CogVideoX1.5-5B-I2V": {
+      "sim_solved": 3,
+      "real_solved": 14,
+      "sim_pair_acc_pct": 2.0,
+      "real_pair_acc_pct": 9.33,
+      "overall_pct": 5.67,
+      "text_overall_pct": 5.7,
+      "text_real_pct": 9.3
+    }
+  },
+  "same_share_sim": {
+    "same": 857,
+    "solved": 60,
+    "swap": 42,
+    "same_over_clear": 0.8936
+  },
+  "same_share_real": {
+    "same": 912,
+    "solved": 307,
+    "swap": 55,
+    "same_over_clear": 0.7159
+  },
+  "uncl_share_sim_pct": 14.36,
+  "pair_ci_and_binomial": {
+    "Gemini Omni Flash 1.1 | real": {
+      "k": 47,
+      "acc_pct": 31.33,
+      "wilson95_pct": [
+        24.45,
+        39.14
+      ],
+      "binom_p_two_sided_vs_0.25": 0.089,
+      "binom_p_greater_vs_0.25": 0.0473
+    },
+    "Gemini Omni Flash 1.1 | sim": {
+      "k": 8,
+      "acc_pct": 5.33,
+      "wilson95_pct": [
+        2.73,
+        10.17
+      ],
+      "binom_p_two_sided_vs_0.25": 2.97e-10,
+      "binom_p_greater_vs_0.25": 1.0
+    },
+    "MiniMax-H3 | real": {
+      "k": 38,
+      "acc_pct": 25.33,
+      "wilson95_pct": [
+        19.05,
+        32.85
+      ],
+      "binom_p_two_sided_vs_0.25": 0.925,
+      "binom_p_greater_vs_0.25": 0.494
+    },
+    "MiniMax-H3 | sim": {
+      "k": 5,
+      "acc_pct": 3.33,
+      "wilson95_pct": [
+        1.43,
+        7.57
+      ],
+      "binom_p_two_sided_vs_0.25": 8.83e-13,
+      "binom_p_greater_vs_0.25": 1.0
+    },
+    "Wan2.2-I2V-A14B | real": {
+      "k": 37,
+      "acc_pct": 24.67,
+      "wilson95_pct": [
+        18.46,
+        32.14
+      ],
+      "binom_p_two_sided_vs_0.25": 1.0,
+      "binom_p_greater_vs_0.25": 0.569
+    },
+    "Wan2.2-I2V-A14B | sim": {
+      "k": 5,
+      "acc_pct": 3.33,
+      "wilson95_pct": [
+        1.43,
+        7.57
+      ],
+      "binom_p_two_sided_vs_0.25": 8.83e-13,
+      "binom_p_greater_vs_0.25": 1.0
+    }
+  },
+  "sim_all_models_below_chance_p": {
+    "Gemini Omni Flash 1.1": 1.74e-10,
+    "MiniMax-H3": 4.92e-13,
+    "Wan2.2-I2V-A14B": 4.92e-13,
+    "VBVR-Wan2.2": 1.74e-10,
+    "Cosmos3-Super": 1.74e-10,
+    "Cosmos3-Nano": 1.74e-10,
+    "Cosmos-Predict2.5": 4.92e-13,
+    "VPP2": 2.35e-16,
+    "HunyuanVideo-1.5": 4.94e-14,
+    "LingBot-Video-MoE-30B-A3B": 4.94e-14,
+    "CogVideoX1.5-5B-I2V": 3.94e-15
+  },
+  "chance_adjusted_pct": {
+    "real_split_if_seesaw_3way_10_of_150": 24.07,
+    "sim_split_if_newton_cradle_3way_15_of_150": 23.61,
+    "all_300_if_25_three_way": 23.84
+  },
+  "model_diff_power": {
+    "Cosmos3-Super minus Cosmos-Predict2.5": {
+      "diff_pp": 3.33,
+      "approx_95ci_pp": [
+        -1.86,
+        8.53
+      ]
+    },
+    "Wan2.2 minus VBVR-Wan2.2": {
+      "diff_pp": 0.0,
+      "approx_95ci_pp": [
+        -5.55,
+        5.55
+      ]
+    },
+    "Gemini Omni minus Cosmos3-Super": {
+      "diff_pp": 4.67,
+      "approx_95ci_pp": [
+        -1.19,
+        10.52
+      ]
+    }
+  },
+  "measure_vs_direct_vlm_fisher_p": 0.117,
+  "omni_vs_direct_vlm_fisher_p": 5.32e-24,
+  "omni_real_single_judge_vs_dual": {
+    "single_3_8_pct": 34.7,
+    "dual_pct": 31.33,
+    "single_k_equiv": 52.0,
+    "dual_k": 47,
+    "inflation_pp": 3.37
+  },
+  "readout_ceiling_pair_acc_pct": {
+    "human_agreement_gemini36_0.79": 62.41,
+    "judge_pair_agreement_0.858": 73.62,
+    "reported_told_real_omni_0.867": 86.7
+  },
+  "selective_sensitivity_vlm": {
+    "ss": 0.46,
+    "approx_se": 0.045,
+    "approx_95ci": [
+      0.372,
+      0.548
+    ],
+    "paper_95ci": [
+      0.36,
+      0.56
+    ]
+  },
+  "video_ss_ci_halfwidth_needed": 0.036,
+  "agent_counts": {
+    "direct_vlm_real_pairs": 131,
+    "direct_vlm_real_pairs_pct": 87.33,
+    "measure_real_pairs": 140,
+    "measure_real_pairs_pct": 93.33,
+    "sim_agent_real_pairs": 137,
+    "sim_agent_real_pairs_pct": 91.33,
+    "direct_vlm_sweep_frames": 356,
+    "direct_vlm_sweep_pct": 74.17,
+    "measure_sweep_correct": 477,
+    "measure_sweep_pct": 99.38,
+    "pre_sim_real_frames": 288,
+    "pre_sim_real_pct": 96.0,
+    "pre_sim_sweep_frames": 468,
+    "pre_sim_sweep_pct": 97.5,
+    "sim_agent_sweep_errors_reported": 9,
+    "pre_sim_sweep_errors": 12,
+    "rollout_sweep_corrections_reported": 3
+  },
+  "measure_revisions_net": 48,
+  "rollout_count": 21240,
+  "frame_count": 1680,
+  "judge_agree_mean_of_splits_pct": 85.85,
+  "checks": {
+    "table3_row_sums_all_150": true,
+    "table3_bad_rows": [],
+    "overall_matches_text": true,
+    "real_matches_text": true,
+    "sim_max_pct": 5.33,
+    "sim_models_at_ceiling": 4,
+    "real_range_real_minus_sim_pp": [
+      7.3,
+      26.0
+    ],
+    "same_share_sim_matches_89": true,
+    "same_share_real_matches_72": true,
+    "sim_agent_sweep_error_balance": true,
+    "measure_sweep_errors_3": true,
+    "frame_count_1680": true,
+    "rollout_over_21000": true
+  }
+}
