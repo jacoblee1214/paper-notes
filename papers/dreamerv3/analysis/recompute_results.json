@@ -1,0 +1,465 @@
+{
+ "V_atari_table_rows": 57,
+ "V_atari_table_PPO": {
+  "median_hns_recomputed": 180.3,
+  "mean_hns_recomputed": 885.2,
+  "median_hns_reported": 180.0,
+  "mean_hns_reported": 892
+ },
+ "V_atari_table_MuZero": {
+  "median_hns_recomputed": 680.0,
+  "mean_hns_recomputed": 3046.4,
+  "median_hns_reported": 693.0,
+  "mean_hns_reported": 3054
+ },
+ "V_atari_table_Dreamer": {
+  "median_hns_recomputed": 833.3,
+  "mean_hns_recomputed": 3372.7,
+  "median_hns_reported": 830.0,
+  "mean_hns_reported": 3381
+ },
+ "atari57_dreamer_k_sensitivity": {
+  "last_1": {
+   "median_hns": 745.4,
+   "mean_hns": 3441.4
+  },
+  "last_3": {
+   "median_hns": 831.6,
+   "mean_hns": 3411.0
+  },
+  "last_5": {
+   "median_hns": 831.6,
+   "mean_hns": 3358.6
+  },
+  "last_10": {
+   "median_hns": 829.1,
+   "mean_hns": 3381.4
+  }
+ },
+ "atari57_dreamer_runs_per_game": {
+  "min": 3,
+  "max": 6
+ },
+ "atari57_dreamer_last_x_over_budget_min": 0.148,
+ "V_atari_released_vs_table_Dreamer_max_abs_diff_raw": 97294.25,
+ "V_atari_released_vs_table_Dreamer_n_games_gt_1pct": 26,
+ "atari57_dreamer_hns_released": {
+  "median": 831.6,
+  "median_ci95_games": [
+   389.4,
+   1314.6
+  ],
+  "mean": 3358.6,
+  "mean_ci95_games": [
+   1602.4,
+   6092.6
+  ],
+  "median_from_table_values": 833.3
+ },
+ "atari57_ppo_hns_released": {
+  "median": 179.5,
+  "mean": 880.5
+ },
+ "atari57_dreamer_vs_ppo_games": {
+  "dreamer_better_games": 52,
+  "ppo_better_games": 5,
+  "wilcoxon_p": 1.941769536701084e-09
+ },
+ "atari57_dreamer_vs_muzero_games": {
+  "dreamer_better_games": 32,
+  "muzero_better_games": 24,
+  "wilcoxon_p": 0.25686387716823267
+ },
+ "atari100k_dreamer_hns": {
+  "mean": 123.5,
+  "mean_ci95_games": [
+   60.6,
+   200.8
+  ],
+  "median": 47.7,
+  "median_ci95_games": [
+   18.2,
+   96.6
+  ],
+  "n_games": 26,
+  "reported_mean": 125,
+  "reported_median": 49
+ },
+ "atari100k_ppo_hns": {
+  "mean": 10.7,
+  "median": 1.6,
+  "reported_mean": 11,
+  "reported_median": 2
+ },
+ "atari100k_dreamer_vs_ppo": {
+  "dreamer_better_games": 25,
+  "wilcoxon_p": 2.086162567138672e-07
+ },
+ "atari100k_dreamer_runs_per_game": [
+  5
+ ],
+ "minecraft_last_x_over_100M_min": {
+  "Dreamer": 0.471,
+  "IMPALA": 0.999,
+  "Rainbow": 0.999,
+  "PPO": 1.0
+ },
+ "minecraft": {
+  "Dreamer": {
+   "n_runs": 20,
+   "mean_final": 9.24,
+   "sd": 1.41,
+   "mean_ci95": [
+    8.59,
+    9.84
+   ],
+   "reported_table5": 9.1,
+   "runs_reaching_12_items_at_some_point": 19
+  },
+  "IMPALA": {
+   "n_runs": 15,
+   "mean_final": 6.39,
+   "sd": 2.87,
+   "mean_ci95": [
+    4.86,
+    7.66
+   ],
+   "reported_table5": 7.1,
+   "runs_reaching_12_items_at_some_point": 0
+  },
+  "Rainbow": {
+   "n_runs": 15,
+   "mean_final": 6.33,
+   "sd": 2.53,
+   "mean_ci95": [
+    4.99,
+    7.46
+   ],
+   "reported_table5": 6.3,
+   "runs_reaching_12_items_at_some_point": 0
+  },
+  "PPO": {
+   "n_runs": 14,
+   "mean_final": 5.2,
+   "sd": 2.19,
+   "mean_ci95": [
+    4.06,
+    6.28
+   ],
+   "reported_table5": 5.1,
+   "runs_reaching_12_items_at_some_point": 0
+  }
+ },
+ "minecraft_welch_vs": {
+  "IMPALA": {
+   "p": 0.0021778833579678388
+  },
+  "Rainbow": {
+   "p": 0.0006437922652467326
+  },
+  "PPO": {
+   "p": 5.5750184958807015e-06
+  }
+ },
+ "minecraft_diamond_fisher": {
+  "dreamer": [
+   19,
+   20
+  ],
+  "baselines": [
+   0,
+   44
+  ],
+  "fisher_p": 2.293610038107238e-15,
+  "assumption": "반환값이 획득 아이템 수(최대 12)라고 가정"
+ },
+ "dmc_proprio_seeds_per_task": {
+  "PPO": [
+   5,
+   5
+  ],
+  "DDPG": [
+   10,
+   10
+  ],
+  "DMPO": [
+   10,
+   10
+  ],
+  "D4PG": [
+   10,
+   10
+  ],
+  "Dreamer": [
+   5,
+   5
+  ],
+  "MPO": [
+   10,
+   10
+  ]
+ },
+ "dmc_proprio_summary": {
+  "PPO": {
+   "n_tasks": 18,
+   "task_mean": 229.0,
+   "task_median": 126.0,
+   "reported_mean": 94
+  },
+  "DDPG": {
+   "n_tasks": 18,
+   "task_mean": 697.0,
+   "task_median": 766.0,
+   "reported_mean": 771
+  },
+  "DMPO": {
+   "n_tasks": 18,
+   "task_mean": 685.0,
+   "task_median": 800.0,
+   "reported_mean": 801
+  },
+  "D4PG": {
+   "n_tasks": 18,
+   "task_mean": 735.0,
+   "task_median": 811.0,
+   "reported_mean": 792
+  },
+  "Dreamer": {
+   "n_tasks": 18,
+   "task_mean": 758.0,
+   "task_median": 868.0,
+   "reported_mean": 871
+  },
+  "MPO": {
+   "n_tasks": 18,
+   "task_mean": 679.0,
+   "task_median": 807.0
+  }
+ },
+ "dmc_proprio_dreamer_vs_DMPO": {
+  "dreamer_better_tasks": 9,
+  "n_tasks": 18,
+  "mean_diff": 73.1,
+  "diff_ci95": [
+   8.8,
+   161.3
+  ],
+  "wilcoxon_p": 0.28372955322265625
+ },
+ "dmc_vision_seeds_per_task": {
+  "PPO": [
+   5,
+   5
+  ],
+  "SAC": [
+   10,
+   10
+  ],
+  "CURL": [
+   10,
+   10
+  ],
+  "DrQ-v2": [
+   8,
+   10
+  ],
+  "Dreamer": [
+   8,
+   10
+  ]
+ },
+ "dmc_vision_summary": {
+  "PPO": {
+   "n_tasks": 20,
+   "task_mean": 222.0,
+   "task_median": 102.0,
+   "reported_mean": 94
+  },
+  "SAC": {
+   "n_tasks": 20,
+   "task_mean": 219.0,
+   "task_median": 74.0,
+   "reported_mean": 81
+  },
+  "CURL": {
+   "n_tasks": 20,
+   "task_mean": 530.0,
+   "task_median": 500.0,
+   "reported_mean": 479
+  },
+  "DrQ-v2": {
+   "n_tasks": 20,
+   "task_mean": 705.0,
+   "task_median": 771.0,
+   "reported_mean": 770
+  },
+  "Dreamer": {
+   "n_tasks": 20,
+   "task_mean": 787.0,
+   "task_median": 860.0,
+   "reported_mean": 861
+  }
+ },
+ "dmc_vision_dreamer_vs_DrQ-v2": {
+  "dreamer_better_tasks": 12,
+  "n_tasks": 20,
+  "mean_diff": 81.3,
+  "diff_ci95": [
+   5.4,
+   168.4
+  ],
+  "wilcoxon_p": 0.08969497680664062
+ },
+ "procgen_table_rows_parsed": 17,
+ "V_procgen_dreamer_released_vs_table_max_abs_diff": 0.0,
+ "V_procgen_dreamer_released_vs_table_n_eq": 16,
+ "procgen_dreamer_seeds": [
+  1
+ ],
+ "procgen_dreamer_vs_ppg": {
+  "dreamer_better_tasks": 9,
+  "n_tasks": 16,
+  "sign_test_p": 0.803619384765625,
+  "wilcoxon_p": 0.899932861328125
+ },
+ "procgen_reported_normalized_mean": {
+  "Original PPO": 41.16,
+  "PPO": 42.8,
+  "PPG": 64.89,
+  "Dreamer": 66.01
+ },
+ "V_procgen_normalized_mean": "논문 표 7 정의 없음(기준 점수 미기재), 재계산 불가",
+ "dmlab_table_rows_parsed": 30,
+ "dmlab_released_vs_table_dreamer_median_abs_diff": {
+  "last5": 0.04,
+  "last1": 1.75,
+  "n_tasks_matched": 30
+ },
+ "dmlab_last_x_over_budget_min": 0.445,
+ "dmlab_reported_human_mean_capped": {
+  "Dreamer_100M": 71.4,
+  "IMPALA_1B": 66.3,
+  "PPO_100M": 35.9,
+  "IMPALA_100M": 31.0
+ },
+ "V_dmlab_human_norm_not_recomputable": "사람 기준 점수가 논문에 없어 Human mean capped는 재계산 불가",
+ "window_sensitivity": {
+  "procgen_k1_max_abs_diff_vs_table7_dreamer": 0.478,
+  "procgen_k3_max_abs_diff_vs_table7_dreamer": 0.005,
+  "procgen_k5_max_abs_diff_vs_table7_dreamer": 0.271,
+  "dmlab_k1_median_abs_diff_vs_table8_dreamer": 1.75,
+  "dmlab_k3_median_abs_diff_vs_table8_dreamer": 0.583,
+  "dmlab_k5_median_abs_diff_vs_table8_dreamer": 0.037,
+  "atari100k_k1_mean_median_hns": [
+   128.2,
+   48.7
+  ],
+  "atari100k_k3_mean_median_hns": [
+   123.5,
+   47.7
+  ],
+  "atari100k_k5_mean_median_hns": [
+   118.7,
+   45.5
+  ],
+  "minecraft_dreamer_k1_mean": 9.24,
+  "minecraft_dreamer_k3_mean": 9.08,
+  "minecraft_dreamer_k5_mean": 9.0,
+  "dmc_proprio_dreamer_k1_mean_median": [
+   757.8,
+   868.5
+  ],
+  "dmc_proprio_dreamer_k3_mean_median": [
+   753.5,
+   870.6
+  ],
+  "dmc_proprio_dreamer_k5_mean_median": [
+   741.4,
+   842.6
+  ]
+ },
+ "V_atari_reference_vs_baselines_yaml": {
+  "n": 57,
+  "max_abs_diff": 0.5
+ },
+ "V_procgen_normalized_mean_check": {
+  "definition": "mean_over_16_games of 100*(score-random)/(max-random), baselines.yaml procgen_hard",
+  "recomputed": [
+   41.2,
+   42.8,
+   64.9,
+   66.0
+  ],
+  "table_order": [
+   "Original PPO",
+   "PPO",
+   "PPG",
+   "Dreamer"
+  ],
+  "table_reported": [
+   41.16,
+   42.8,
+   64.89,
+   66.01
+  ]
+ },
+ "V_dmlab_human_capped_released_dreamer_k5": 71.4,
+ "V_dmlab_capped_across_seeds": {
+  "n_seeds": 5,
+  "mean": 71.0,
+  "sd": 1.8,
+  "values": [
+   69.4,
+   69.0,
+   70.9,
+   72.8,
+   72.8
+  ]
+ },
+ "V_dmlab_human_capped_check": {
+  "n_tasks": 30,
+  "recomputed": {
+   "R2D2+ 10B": 85.4,
+   "IMPALA 10B": 85.1,
+   "IMPALA 1B": 66.3,
+   "IMPALA 100M": 31.0,
+   "PPO 100M": 35.9,
+   "Dreamer 100M": 71.4
+  },
+  "table_reported": {
+   "R2D2+ 10B": 85.4,
+   "IMPALA 10B": 85.1,
+   "IMPALA 1B": 66.3,
+   "IMPALA 100M": 31.0,
+   "PPO 100M": 35.9,
+   "Dreamer 100M": 71.4
+  }
+ },
+ "V_replay_ratio_check": {
+  "batch_steps": 1024,
+  "replay_ratio": 32,
+  "action_repeat": 4,
+  "env_steps_per_grad_step": 128.0,
+  "grad_steps_over_200M": 1.56,
+  "text_claim_M": 1.5
+ },
+ "V_minecraft_days": {
+  "steps_per_second_from_36000_steps_30min": 20,
+  "days_for_100M_steps_at_20_steps_per_s": 57.9,
+  "steps_per_day_from_project_page_30M_in_17d": 1764706.0,
+  "days_for_100M_from_project_page_rate": 56.7,
+  "text_claim_days_at_100M": 100
+ },
+ "V_atari_text_tasks": {
+  "atari57": 57,
+  "procgen": 16,
+  "dmlab": 30,
+  "minecraft": 1,
+  "bsuite": 23,
+  "proprio": 18,
+  "visual": 20,
+  "atari100k": 26
+ },
+ "V_tasks_total_unique_protocols": 191,
+ "V_tasks_excluding_atari100k": 165
+}
