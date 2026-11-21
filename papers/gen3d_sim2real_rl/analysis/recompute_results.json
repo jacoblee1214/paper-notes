@@ -1,0 +1,224 @@
+{
+  "V1_table2_means": {
+    "IL": {
+      "PSR": {
+        "recomputed": 0.45,
+        "reported": 0.45,
+        "diff": 0.0
+      },
+      "SR": {
+        "recomputed": 0.2167,
+        "reported": 0.217,
+        "diff": -0.0003
+      },
+      "DFR": {
+        "recomputed": 0.6667,
+        "reported": 0.667,
+        "diff": -0.0003
+      },
+      "SFR": {
+        "recomputed": 0.1833,
+        "reported": 0.183,
+        "diff": 0.0003
+      },
+      "TF": {
+        "recomputed_mean_of_scene_means": 12.35,
+        "reported": 11.5,
+        "n_scenes": 11
+      }
+    },
+    "RL": {
+      "PSR": {
+        "recomputed": 0.8833,
+        "reported": 0.883,
+        "diff": 0.0003
+      },
+      "SR": {
+        "recomputed": 0.75,
+        "reported": 0.75,
+        "diff": 0.0
+      },
+      "DFR": {
+        "recomputed": 0.1833,
+        "reported": 0.183,
+        "diff": 0.0003
+      },
+      "SFR": {
+        "recomputed": 0.0667,
+        "reported": 0.067,
+        "diff": -0.0003
+      },
+      "TF": {
+        "recomputed_mean_of_scene_means": 10.32,
+        "reported": 10.2,
+        "n_scenes": 12
+      }
+    }
+  },
+  "V2_trial_counts_wilson": {
+    "IL": {
+      "successes": 26,
+      "trials": 120,
+      "SR": 0.2167,
+      "wilson95": [
+        0.1524,
+        0.2985
+      ],
+      "PSR_successes": 54
+    },
+    "RL": {
+      "successes": 90,
+      "trials": 120,
+      "SR": 0.75,
+      "wilson95": [
+        0.6656,
+        0.8189
+      ],
+      "PSR_successes": 106
+    }
+  },
+  "V3_fisher_real_SR": {
+    "table": [
+      [
+        90,
+        30
+      ],
+      [
+        26,
+        94
+      ]
+    ],
+    "diff_pp": 53.3,
+    "p_fisher": 7.145169722049537e-17
+  },
+  "V4_paired_scenes_SR": {
+    "RL_gt_IL": 12,
+    "tie": 0,
+    "RL_lt_IL": 0,
+    "sign_test_p": 0.00048828125,
+    "wilcoxon_p": 0.00048828125
+  },
+  "V5_failure_consistency": {
+    "IL": {
+      "violations_DFR_SFR_lt_fail": 0,
+      "scenes_with_overlap": 4,
+      "mean_overlap_pp": 6.7
+    },
+    "RL": {
+      "violations_DFR_SFR_lt_fail": 0,
+      "scenes_with_overlap": 0,
+      "mean_overlap_pp": 0.0
+    },
+    "check": "SR <= PSR 위반 개수",
+    "PSR_lt_SR_violations": {
+      "IL": 0,
+      "RL": 0
+    }
+  },
+  "V6_headline_79_8": {
+    "abstract_claim": 79.8,
+    "table1_N100_W_mean": 78.9,
+    "table1_N100_W_sd": 0.9,
+    "tableB1_K1_single_run": 79.75,
+    "note": "초록 79.8은 표 1 평균(78.9 ± 0.9, 3 시드)과 다르고 표 B.1의 단일 실행 79.75와 일치"
+  },
+  "V7_dG_recompute": {
+    "mismatches": [],
+    "bench_checks_n": 20,
+    "bench_checks_ok": 20
+  },
+  "V8_W_is_mean_of_ID_OOD_at_N50": {
+    "recomputed": 79.2,
+    "reported_W": 79.2,
+    "note": "N=50에서만 W=(ID+OOD)/2가 성립 (ID와 OOD가 서로소인 50장면씩). 다른 N은 ID 장면 수가 달라 불가"
+  },
+  "V9_welch_OOD_and_W": {
+    "OOD_N1_vs_N3": {
+      "diff": -8.1,
+      "t": -2.42,
+      "p": 0.1141
+    },
+    "OOD_N3_vs_N10": {
+      "diff": -11.1,
+      "t": -10.43,
+      "p": 0.0065
+    },
+    "OOD_N10_vs_N25": {
+      "diff": -5.2,
+      "t": -10.07,
+      "p": 0.0023
+    },
+    "OOD_N25_vs_N50": {
+      "diff": -0.3,
+      "t": -0.43,
+      "p": 0.6886
+    },
+    "OOD_N1_vs_N50": {
+      "diff": 24.7,
+      "t": 7.68,
+      "p": 0.0143
+    },
+    "W_N25_vs_N50": {
+      "diff": -0.9,
+      "t": -2.67,
+      "p": 0.0687
+    },
+    "W_N50_vs_N100": {
+      "diff": 0.3,
+      "t": 0.55,
+      "p": 0.6299
+    },
+    "note": "포화 구간(N=25 대 50)은 차이가 작고 p가 커야 함. 3 실행이라 검정력이 낮음"
+  },
+  "V10_claims_arith": {
+    "OOD_50_minus_1": 24.7,
+    "text_claim": 24.7,
+    "sim_gain_pp_79_8_minus_9_7": 70.1,
+    "text_claim_sim_gain": 70.1,
+    "real_gain_pp": 53.3,
+    "text_claim_real_gain": 53.3
+  },
+  "V11_speedups": {
+    "sim_W_TF_pre_over_N100": 1.235,
+    "sim_W_TF_pre_over_N50": 1.266,
+    "sim_W_TF_pre_over_K1_single_run": 1.259,
+    "text_claim": 1.25,
+    "real_TF_IL_over_RL": 1.127,
+    "text_claim_real": 1.13,
+    "real_TF_recomputed_RL_mean_of_scene_means": 10.32,
+    "real_TF_recomputed_IL_mean_of_scene_means": 12.35
+  },
+  "V12_tableB1_speedups": {
+    "reg_K10_over_K1": 2.72,
+    "text_claim_reg": 2.72,
+    "compile_K10_over_K1": 2.36,
+    "text_claim_compile": 2.36,
+    "backward_K2_over_K1": 1.17,
+    "text_claim_bwd_K2": 1.17,
+    "backward_K4_over_K1": 1.46,
+    "text_claim_bwd_K4": 1.45,
+    "SR_K1_minus_K2_pp": 2.52,
+    "SR_K1_minus_K4_pp": 2.46,
+    "note": "SR 차이는 실행 1회. 불확실성 없음"
+  },
+  "V13_tableC1": {
+    "scenes_x_objects": 5.16,
+    "reported_avg_objects": 5.16,
+    "sum_of_parts_min": 45.12,
+    "reported_total_min": 46.8,
+    "unexplained_gap_min": 1.68,
+    "QA_product_of_stage_pass_rates": 0.576,
+    "total_sequential_hours_100_scenes": 78.0
+  },
+  "V14_episode_time": {
+    "chunk_seconds": 0.8,
+    "max_episode_s_if_25_chunks": 20.0,
+    "TF_RL_s": 10.2,
+    "chunks_at_TF": 12.7,
+    "note": "에피소드 길이 단위(청크인지 환경 스텝인지) 논문에 명시 없음"
+  },
+  "V15_sigma_range": {
+    "sigma_min": 0.0821,
+    "sigma_max": 0.1353
+  }
+}
