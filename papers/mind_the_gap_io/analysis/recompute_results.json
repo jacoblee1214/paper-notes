@@ -1,0 +1,786 @@
+{
+  "table1_change_pct": {
+    "X": {
+      "recomputed": -16.8,
+      "reported": -17
+    },
+    "Y": {
+      "recomputed": -60.3,
+      "reported": -60
+    },
+    "Z": {
+      "recomputed": -80.8,
+      "reported": -81
+    }
+  },
+  "table1_min_r2": 0.977,
+  "table2_comparisons": [
+    {
+      "label": "Blind plug, π0: E2C vs EC2C (Q3)",
+      "a": {
+        "name": "E2C",
+        "k": 8,
+        "n": 20,
+        "p": 0.4,
+        "ci95": [
+          0.219,
+          0.613
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 16,
+        "n": 20,
+        "p": 0.8,
+        "ci95": [
+          0.584,
+          0.919
+        ]
+      },
+      "diff_b_minus_a": 0.4,
+      "fisher_p": 0.0225
+    },
+    {
+      "label": "Wiping strict, π0: E2C vs EC2C (Q3)",
+      "a": {
+        "name": "E2C",
+        "k": 4,
+        "n": 20,
+        "p": 0.2,
+        "ci95": [
+          0.081,
+          0.416
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 18,
+        "n": 20,
+        "p": 0.9,
+        "ci95": [
+          0.699,
+          0.972
+        ]
+      },
+      "diff_b_minus_a": 0.7,
+      "fisher_p": 0.0
+    },
+    {
+      "label": "Wiping strict, DP: E2C vs EC2C (Q3)",
+      "a": {
+        "name": "E2C",
+        "k": 4,
+        "n": 20,
+        "p": 0.2,
+        "ci95": [
+          0.081,
+          0.416
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 13,
+        "n": 20,
+        "p": 0.65,
+        "ci95": [
+          0.433,
+          0.819
+        ]
+      },
+      "diff_b_minus_a": 0.45,
+      "fisher_p": 0.0095
+    },
+    {
+      "label": "Wiping effective, π0: E2C vs EC2C",
+      "a": {
+        "name": "E2C",
+        "k": 13,
+        "n": 20,
+        "p": 0.65,
+        "ci95": [
+          0.433,
+          0.819
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 20,
+        "n": 20,
+        "p": 1.0,
+        "ci95": [
+          0.839,
+          1.0
+        ]
+      },
+      "diff_b_minus_a": 0.35,
+      "fisher_p": 0.0083
+    },
+    {
+      "label": "Microwave Open, π0: E2E vs E2C (Q2)",
+      "a": {
+        "name": "E2E",
+        "k": 0,
+        "n": 20,
+        "p": 0.0,
+        "ci95": [
+          0.0,
+          0.161
+        ]
+      },
+      "b": {
+        "name": "E2C",
+        "k": 18,
+        "n": 20,
+        "p": 0.9,
+        "ci95": [
+          0.699,
+          0.972
+        ]
+      },
+      "diff_b_minus_a": 0.9,
+      "fisher_p": 0.0
+    },
+    {
+      "label": "Microwave Open, DP: E2E vs E2C (Q2)",
+      "a": {
+        "name": "E2E",
+        "k": 0,
+        "n": 20,
+        "p": 0.0,
+        "ci95": [
+          0.0,
+          0.161
+        ]
+      },
+      "b": {
+        "name": "E2C",
+        "k": 14,
+        "n": 20,
+        "p": 0.7,
+        "ci95": [
+          0.481,
+          0.855
+        ]
+      },
+      "diff_b_minus_a": 0.7,
+      "fisher_p": 0.0
+    },
+    {
+      "label": "Microwave Open, π0: E2C vs EC2C (Q3)",
+      "a": {
+        "name": "E2C",
+        "k": 18,
+        "n": 20,
+        "p": 0.9,
+        "ci95": [
+          0.699,
+          0.972
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 20,
+        "n": 20,
+        "p": 1.0,
+        "ci95": [
+          0.839,
+          1.0
+        ]
+      },
+      "diff_b_minus_a": 0.1,
+      "fisher_p": 0.4872
+    },
+    {
+      "label": "Microwave Close, π0: E2C vs EC2C",
+      "a": {
+        "name": "E2C",
+        "k": 18,
+        "n": 20,
+        "p": 0.9,
+        "ci95": [
+          0.699,
+          0.972
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 19,
+        "n": 20,
+        "p": 0.95,
+        "ci95": [
+          0.764,
+          0.991
+        ]
+      },
+      "diff_b_minus_a": 0.05,
+      "fisher_p": 1.0
+    },
+    {
+      "label": "Plug Clear, π0: E2E vs E2C (Q2 force gen.)",
+      "a": {
+        "name": "E2E",
+        "k": 0,
+        "n": 20,
+        "p": 0.0,
+        "ci95": [
+          0.0,
+          0.161
+        ]
+      },
+      "b": {
+        "name": "E2C",
+        "k": 19,
+        "n": 20,
+        "p": 0.95,
+        "ci95": [
+          0.764,
+          0.991
+        ]
+      },
+      "diff_b_minus_a": 0.95,
+      "fisher_p": 0.0
+    },
+    {
+      "label": "Plug Clear, π0: E2C vs EC2C",
+      "a": {
+        "name": "E2C",
+        "k": 19,
+        "n": 20,
+        "p": 0.95,
+        "ci95": [
+          0.764,
+          0.991
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 19,
+        "n": 20,
+        "p": 0.95,
+        "ci95": [
+          0.764,
+          0.991
+        ]
+      },
+      "diff_b_minus_a": 0.0,
+      "fisher_p": 1.0
+    },
+    {
+      "label": "Plug Blind, π0: E2E vs E2C",
+      "a": {
+        "name": "E2E",
+        "k": 0,
+        "n": 20,
+        "p": 0.0,
+        "ci95": [
+          0.0,
+          0.161
+        ]
+      },
+      "b": {
+        "name": "E2C",
+        "k": 8,
+        "n": 20,
+        "p": 0.4,
+        "ci95": [
+          0.219,
+          0.613
+        ]
+      },
+      "diff_b_minus_a": 0.4,
+      "fisher_p": 0.0033
+    }
+  ],
+  "table3_sort_vs_chance": {
+    "DP E2E 17/33": 1.0,
+    "DP E2C 20/36": 0.618,
+    "π0 E2E 16/32": 1.0,
+    "π0 E2C 28/45": 0.135,
+    "π0 EC2C 48/49": 0.0
+  },
+  "table3_sort_rates": {
+    "DP E2E": 0.515,
+    "DP E2C": 0.556,
+    "DP EC2C naive": 0.891,
+    "π0 E2E": 0.5,
+    "π0 E2C": 0.622,
+    "π0 EC2C inpainting": 0.98
+  },
+  "table3_comparisons": [
+    {
+      "label": "Sort, DP: E2C vs EC2C (same naive async)",
+      "a": {
+        "name": "E2C",
+        "k": 20,
+        "n": 36,
+        "p": 0.556,
+        "ci95": [
+          0.396,
+          0.705
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 41,
+        "n": 46,
+        "p": 0.891,
+        "ci95": [
+          0.77,
+          0.953
+        ]
+      },
+      "diff_b_minus_a": 0.336,
+      "fisher_p": 0.0008
+    },
+    {
+      "label": "Sort, π0: E2C naive vs EC2C inpainting (confounded)",
+      "a": {
+        "name": "E2C",
+        "k": 28,
+        "n": 45,
+        "p": 0.622,
+        "ci95": [
+          0.476,
+          0.749
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 48,
+        "n": 49,
+        "p": 0.98,
+        "ci95": [
+          0.893,
+          0.996
+        ]
+      },
+      "diff_b_minus_a": 0.357,
+      "fisher_p": 0.0
+    },
+    {
+      "label": "Grasp, π0: sync EC2C vs inpainting EC2C",
+      "a": {
+        "name": "sync",
+        "k": 0,
+        "n": 50,
+        "p": 0.0,
+        "ci95": [
+          0.0,
+          0.071
+        ]
+      },
+      "b": {
+        "name": "inpaint",
+        "k": 50,
+        "n": 50,
+        "p": 1.0,
+        "ci95": [
+          0.929,
+          1.0
+        ]
+      },
+      "diff_b_minus_a": 1.0,
+      "fisher_p": 0.0
+    },
+    {
+      "label": "Tossing, π0: E2C vs EC2C (inpainting)",
+      "a": {
+        "name": "E2C",
+        "k": 17,
+        "n": 20,
+        "p": 0.85,
+        "ci95": [
+          0.64,
+          0.948
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 18,
+        "n": 20,
+        "p": 0.9,
+        "ci95": [
+          0.699,
+          0.972
+        ]
+      },
+      "diff_b_minus_a": 0.05,
+      "fisher_p": 1.0
+    },
+    {
+      "label": "Tossing, π0: sync EC2C vs inpainting EC2C (§4.2.6)",
+      "a": {
+        "name": "sync",
+        "k": 14,
+        "n": 20,
+        "p": 0.7,
+        "ci95": [
+          0.481,
+          0.855
+        ]
+      },
+      "b": {
+        "name": "inpaint",
+        "k": 18,
+        "n": 20,
+        "p": 0.9,
+        "ci95": [
+          0.699,
+          0.972
+        ]
+      },
+      "diff_b_minus_a": 0.2,
+      "fisher_p": 0.2351
+    }
+  ],
+  "table4_comparisons": [
+    {
+      "label": "Plug Clear: Tobs=1 vs Tobs=9",
+      "a": {
+        "name": "Tobs=1",
+        "k": 19,
+        "n": 20,
+        "p": 0.95,
+        "ci95": [
+          0.764,
+          0.991
+        ]
+      },
+      "b": {
+        "name": "Tobs=9",
+        "k": 12,
+        "n": 20,
+        "p": 0.6,
+        "ci95": [
+          0.387,
+          0.781
+        ]
+      },
+      "diff_b_minus_a": -0.35,
+      "fisher_p": 0.0197
+    },
+    {
+      "label": "Plug Blind: Tobs=1 vs Tobs=9",
+      "a": {
+        "name": "Tobs=1",
+        "k": 16,
+        "n": 20,
+        "p": 0.8,
+        "ci95": [
+          0.584,
+          0.919
+        ]
+      },
+      "b": {
+        "name": "Tobs=9",
+        "k": 12,
+        "n": 20,
+        "p": 0.6,
+        "ci95": [
+          0.387,
+          0.781
+        ]
+      },
+      "diff_b_minus_a": -0.2,
+      "fisher_p": 0.3008
+    },
+    {
+      "label": "Weight sorting: Tobs=1 (n=30) vs Tobs=9 (n=49)",
+      "a": {
+        "name": "Tobs=1",
+        "k": 18,
+        "n": 30,
+        "p": 0.6,
+        "ci95": [
+          0.423,
+          0.754
+        ]
+      },
+      "b": {
+        "name": "Tobs=9",
+        "k": 48,
+        "n": 49,
+        "p": 0.98,
+        "ci95": [
+          0.893,
+          0.996
+        ]
+      },
+      "diff_b_minus_a": 0.38,
+      "fisher_p": 0.0
+    }
+  ],
+  "table5_comparisons": [
+    {
+      "label": "A1→A1 (nominal, zero-shot)",
+      "a": {
+        "name": "E2C",
+        "k": 18,
+        "n": 20,
+        "p": 0.9,
+        "ci95": [
+          0.699,
+          0.972
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 20,
+        "n": 20,
+        "p": 1.0,
+        "ci95": [
+          0.839,
+          1.0
+        ]
+      },
+      "diff_b_minus_a": 0.1,
+      "fisher_p": 0.4872
+    },
+    {
+      "label": "A1→B2 (500 g zero-shot)",
+      "a": {
+        "name": "E2C",
+        "k": 0,
+        "n": 10,
+        "p": 0.0,
+        "ci95": [
+          0.0,
+          0.278
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 8,
+        "n": 10,
+        "p": 0.8,
+        "ci95": [
+          0.49,
+          0.943
+        ]
+      },
+      "diff_b_minus_a": 0.8,
+      "fisher_p": 0.0007
+    },
+    {
+      "label": "B2→B2 (500 g trained)",
+      "a": {
+        "name": "E2C",
+        "k": 7,
+        "n": 10,
+        "p": 0.7,
+        "ci95": [
+          0.397,
+          0.892
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 8,
+        "n": 10,
+        "p": 0.8,
+        "ci95": [
+          0.49,
+          0.943
+        ]
+      },
+      "diff_b_minus_a": 0.1,
+      "fisher_p": 1.0
+    },
+    {
+      "label": "A1B2→A2 (visual recombination)",
+      "a": {
+        "name": "E2C",
+        "k": 0,
+        "n": 10,
+        "p": 0.0,
+        "ci95": [
+          0.0,
+          0.278
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 10,
+        "n": 10,
+        "p": 1.0,
+        "ci95": [
+          0.722,
+          1.0
+        ]
+      },
+      "diff_b_minus_a": 1.0,
+      "fisher_p": 0.0
+    },
+    {
+      "label": "A1A2B2→A2",
+      "a": {
+        "name": "E2C",
+        "k": 10,
+        "n": 10,
+        "p": 1.0,
+        "ci95": [
+          0.722,
+          1.0
+        ]
+      },
+      "b": {
+        "name": "EC2C",
+        "k": 10,
+        "n": 10,
+        "p": 1.0,
+        "ci95": [
+          0.722,
+          1.0
+        ]
+      },
+      "diff_b_minus_a": 0.0,
+      "fisher_p": 1.0
+    }
+  ],
+  "table6_comparisons": [
+    {
+      "label": "100 ms: Naive vs Inpainting success",
+      "a": {
+        "name": "Naive",
+        "k": 50,
+        "n": 50,
+        "p": 1.0,
+        "ci95": [
+          0.929,
+          1.0
+        ]
+      },
+      "b": {
+        "name": "Ours",
+        "k": 50,
+        "n": 50,
+        "p": 1.0,
+        "ci95": [
+          0.929,
+          1.0
+        ]
+      },
+      "diff_b_minus_a": 0.0,
+      "fisher_p": 1.0
+    },
+    {
+      "label": "200 ms: Naive vs Inpainting success",
+      "a": {
+        "name": "Naive",
+        "k": 47,
+        "n": 50,
+        "p": 0.94,
+        "ci95": [
+          0.838,
+          0.979
+        ]
+      },
+      "b": {
+        "name": "Ours",
+        "k": 48,
+        "n": 50,
+        "p": 0.96,
+        "ci95": [
+          0.865,
+          0.989
+        ]
+      },
+      "diff_b_minus_a": 0.02,
+      "fisher_p": 1.0
+    },
+    {
+      "label": "300 ms: Naive vs Inpainting success",
+      "a": {
+        "name": "Naive",
+        "k": 45,
+        "n": 50,
+        "p": 0.9,
+        "ci95": [
+          0.786,
+          0.957
+        ]
+      },
+      "b": {
+        "name": "Ours",
+        "k": 48,
+        "n": 50,
+        "p": 0.96,
+        "ci95": [
+          0.865,
+          0.989
+        ]
+      },
+      "diff_b_minus_a": 0.06,
+      "fisher_p": 0.436
+    },
+    {
+      "label": "400 ms: Naive vs Inpainting success",
+      "a": {
+        "name": "Naive",
+        "k": 40,
+        "n": 50,
+        "p": 0.8,
+        "ci95": [
+          0.67,
+          0.888
+        ]
+      },
+      "b": {
+        "name": "Ours",
+        "k": 45,
+        "n": 50,
+        "p": 0.9,
+        "ci95": [
+          0.786,
+          0.957
+        ]
+      },
+      "diff_b_minus_a": 0.1,
+      "fisher_p": 0.2623
+    }
+  ],
+  "table6_jerk": {
+    "naive": [
+      0.75,
+      0.8,
+      1.01,
+      1.28
+    ],
+    "ours": [
+      0.75,
+      0.78,
+      0.82,
+      0.88
+    ],
+    "note": "SD 없음, 반복 측정 없음 -> 검정 불가"
+  },
+  "summary_p_lt_0.05": {
+    "all_sig_table2_table5": [
+      "Blind plug, π0: E2C vs EC2C (Q3)",
+      "Wiping strict, π0: E2C vs EC2C (Q3)",
+      "Wiping strict, DP: E2C vs EC2C (Q3)",
+      "Wiping effective, π0: E2C vs EC2C",
+      "Microwave Open, π0: E2E vs E2C (Q2)",
+      "Microwave Open, DP: E2E vs E2C (Q2)",
+      "Plug Clear, π0: E2E vs E2C (Q2 force gen.)",
+      "Plug Blind, π0: E2E vs E2C",
+      "A1→B2 (500 g zero-shot)",
+      "A1B2→A2 (visual recombination)"
+    ],
+    "not_sig": [
+      "Microwave Open, π0: E2C vs EC2C (Q3)",
+      "Microwave Close, π0: E2C vs EC2C",
+      "Plug Clear, π0: E2C vs EC2C",
+      "Tossing, π0: E2C vs EC2C (inpainting)",
+      "Tossing, π0: sync EC2C vs inpainting EC2C (§4.2.6)",
+      "Plug Blind: Tobs=1 vs Tobs=9",
+      "A1→A1 (nominal, zero-shot)",
+      "B2→B2 (500 g trained)",
+      "A1A2B2→A2",
+      "100 ms: Naive vs Inpainting success",
+      "200 ms: Naive vs Inpainting success",
+      "300 ms: Naive vs Inpainting success",
+      "400 ms: Naive vs Inpainting success"
+    ]
+  }
+}
