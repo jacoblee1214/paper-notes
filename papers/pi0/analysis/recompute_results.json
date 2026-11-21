@@ -1,0 +1,323 @@
+{
+  "fig7_object_level_fisher": {
+    "Shirt folding (Bi-ARX)": {
+      "parity": {
+        "n_each": 10,
+        "k_pi0": 10,
+        "k_other": 9,
+        "diff_pp": 10.0,
+        "fisher_p": 1.0
+      },
+      "small": {
+        "n_each": 10,
+        "k_pi0": 10,
+        "k_other": 5,
+        "diff_pp": 50.0,
+        "fisher_p": 0.032507739938080496
+      },
+      "note": "shirt folding is binary per eval (10 evals); object count = 10"
+    },
+    "Bussing easy (UR5e)": {
+      "parity": {
+        "n_each": 70,
+        "k_pi0": 68,
+        "k_other": 57,
+        "diff_pp": 15.7,
+        "fisher_p": 0.0047138789554537945
+      },
+      "small": {
+        "n_each": 70,
+        "k_pi0": 68,
+        "k_other": 32,
+        "diff_pp": 51.4,
+        "fisher_p": 2.4351082554859146e-12
+      }
+    },
+    "Bussing hard (Bi-Trossen)": {
+      "parity": {
+        "n_each": 120,
+        "k_pi0": 105,
+        "k_other": 60,
+        "diff_pp": 37.5,
+        "fisher_p": 3.503400647902968e-10
+      },
+      "small": {
+        "n_each": 120,
+        "k_pi0": 105,
+        "k_other": 40,
+        "diff_pp": 54.2,
+        "fisher_p": 2.3799833292317346e-18
+      }
+    },
+    "Grocery bagging (UR5e)": {
+      "parity": {
+        "n_each": 70,
+        "k_pi0": 55,
+        "k_other": 24,
+        "diff_pp": 44.3,
+        "fisher_p": 1.97181006696721e-07
+      },
+      "small": {
+        "n_each": 70,
+        "k_pi0": 55,
+        "k_other": 19,
+        "diff_pp": 51.4,
+        "fisher_p": 1.3559502693079803e-09
+      }
+    },
+    "Toast (UR5e)": {
+      "parity": {
+        "n_each": 40,
+        "k_pi0": 30,
+        "k_other": 16,
+        "diff_pp": 35.0,
+        "fisher_p": 0.003010273537461222
+      }
+    }
+  },
+  "fig7_pi0_wilson_object_level": {
+    "Shirt folding (Bi-ARX)": {
+      "k": 10,
+      "n": 10,
+      "point": 1.0,
+      "wilson95": [
+        0.722,
+        1.0
+      ]
+    },
+    "Bussing easy (UR5e)": {
+      "k": 68,
+      "n": 70,
+      "point": 0.971,
+      "wilson95": [
+        0.902,
+        0.992
+      ]
+    },
+    "Bussing hard (Bi-Trossen)": {
+      "k": 105,
+      "n": 120,
+      "point": 0.875,
+      "wilson95": [
+        0.804,
+        0.923
+      ]
+    },
+    "Grocery bagging (UR5e)": {
+      "k": 55,
+      "n": 70,
+      "point": 0.786,
+      "wilson95": [
+        0.676,
+        0.866
+      ]
+    },
+    "Toast (UR5e)": {
+      "k": 30,
+      "n": 40,
+      "point": 0.75,
+      "wilson95": [
+        0.598,
+        0.858
+      ]
+    }
+  },
+  "shirt_folding_10_evals_wilson": {
+    "k=9": [
+      0.596,
+      0.982
+    ],
+    "k=10": [
+      0.722,
+      1.0
+    ]
+  },
+  "fig13_points": {
+    "Laundry folding": {
+      "ft": 0.82,
+      "scratch": 0.22,
+      "out_of_box": 0.3,
+      "n_points": 40,
+      "ft_minus_scratch_pp": 60.0,
+      "fisher_p_object_level": 0.0,
+      "max_score_ft_ge_0_5": true
+    },
+    "Table bussing": {
+      "ft": 0.88,
+      "scratch": 0.71,
+      "out_of_box": 0.48,
+      "n_points": 120,
+      "ft_minus_scratch_pp": 17.0,
+      "fisher_p_object_level": 0.001,
+      "max_score_ft_ge_0_5": true
+    },
+    "Mobile laundry": {
+      "ft": 0.93,
+      "scratch": 0.32,
+      "out_of_box": 0.55,
+      "n_points": 40,
+      "ft_minus_scratch_pp": 61.0,
+      "fisher_p_object_level": 0.0,
+      "max_score_ft_ge_0_5": true
+    },
+    "Dryer unloading": {
+      "ft": 0.72,
+      "scratch": 0.38,
+      "out_of_box": 0.16,
+      "n_points": 50,
+      "ft_minus_scratch_pp": 34.0,
+      "fisher_p_object_level": 0.001,
+      "max_score_ft_ge_0_5": true
+    },
+    "Box building": {
+      "ft": 0.64,
+      "scratch": 0.32,
+      "out_of_box": 0.005,
+      "n_points": 50,
+      "ft_minus_scratch_pp": 32.0,
+      "fisher_p_object_level": 0.003,
+      "max_score_ft_ge_0_5": true
+    },
+    "To-go box": {
+      "ft": 0.7,
+      "scratch": 0.46,
+      "out_of_box": 0.005,
+      "n_points": 50,
+      "ft_minus_scratch_pp": 24.0,
+      "fisher_p_object_level": 0.025,
+      "max_score_ft_ge_0_5": true
+    },
+    "Packing eggs": {
+      "ft": 0.845,
+      "scratch": 0.885,
+      "out_of_box": 0.005,
+      "n_points": 70,
+      "ft_minus_scratch_pp": -4.0,
+      "fisher_p_object_level": 0.623,
+      "max_score_ft_ge_0_5": true
+    }
+  },
+  "fig13_all_ft_above_half": true,
+  "fig13_scratch_beats_ft": [
+    "Packing eggs"
+  ],
+  "fig11_tupperware_5h_pi0_below_all_baselines": true,
+  "fig11_tupperware_10h_pi0_minus_scratch": -0.01,
+  "fig11_paper_towel_pi0_change_1h_to_10h": -0.12,
+  "fig11_points": {
+    "Tupperware in microwave": {
+      "hours": [
+        1,
+        5,
+        10
+      ],
+      "pi0": [
+        0.87,
+        0.57,
+        0.76
+      ],
+      "pi0_scratch": [
+        0.67,
+        0.75,
+        0.77
+      ],
+      "DP": [
+        0.65,
+        0.62,
+        0.67
+      ],
+      "ACT": [
+        0.53,
+        0.63,
+        0.73
+      ]
+    },
+    "Paper towel replacement": {
+      "hours": [
+        1,
+        5,
+        10
+      ],
+      "pi0": [
+        0.82,
+        0.8,
+        0.7
+      ],
+      "pi0_scratch": [
+        0.37,
+        0.57,
+        0.57
+      ],
+      "DP": [
+        0.23,
+        0.33,
+        0.3
+      ]
+    },
+    "Average across all tasks": {
+      "hours": [
+        1,
+        5,
+        10
+      ],
+      "pi0": [
+        0.57,
+        0.86,
+        0.87
+      ],
+      "pi0_scratch": [
+        0.38,
+        0.78,
+        0.76
+      ],
+      "DP": [
+        0.2,
+        0.32,
+        0.38
+      ]
+    }
+  },
+  "table1": {
+    "onboard_sum_ms": 73,
+    "paper_onboard_ms": 73,
+    "match_onboard": true,
+    "offboard_sum_ms": 86,
+    "paper_offboard_ms": 86,
+    "match_offboard": true,
+    "per_flow_step_ms": 2.7,
+    "chunk_budget_50hz_ms": 500,
+    "chunk_budget_20hz_ms": 800,
+    "onboard_fraction_of_50hz_chunk": 0.146
+  },
+  "data_scale": {
+    "single_arm_plus_dual_arm": 903000000.0,
+    "own_steps_equal_903M": true,
+    "hours_if_all_50hz": 5017,
+    "hours_if_all_20hz": 12542,
+    "implied_mean_hz_for_10000h": 25.1,
+    "total_steps_if_open_source_is_9_1pct": 993,
+    "open_source_steps_implied_M": 90
+  },
+  "param_count": {
+    "action_expert_M_layers_only": 311.4,
+    "code_comment_says_M": 311,
+    "gemma_2b_B_with_embedding": 2.51,
+    "paligemma_B_approx_gemma2b_plus_siglip400m": 2.91,
+    "pi0_total_B_approx": 3.22,
+    "paper_total_B": 3.3
+  },
+  "timestep_mapping_ks": {
+    "statistic": 0.00189,
+    "p": 0.472,
+    "note": "code t=1-tau reproduces paper's Beta((s-tau)/s;1.5,1) if p is not small"
+  },
+  "timestep_range_check": {
+    "tau_min": 0.0,
+    "tau_max": 0.9986
+  },
+  "euler_steps": {
+    "paper_delta": 0.1,
+    "code_dt": -0.1,
+    "steps": 10
+  }
+}
