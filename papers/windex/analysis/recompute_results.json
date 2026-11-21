@@ -1,0 +1,196 @@
+{
+  "policy_success": {
+    "WinDEX references": {
+      "k": 61,
+      "n": 100,
+      "wilson68": [
+        0.561,
+        0.657
+      ],
+      "wilson95": [
+        0.512,
+        0.7
+      ]
+    },
+    "WiLoR references": {
+      "k": 8,
+      "n": 100,
+      "wilson68": [
+        0.057,
+        0.111
+      ],
+      "wilson95": [
+        0.041,
+        0.15
+      ]
+    },
+    "HaWoR references": {
+      "k": 17,
+      "n": 100,
+      "wilson68": [
+        0.136,
+        0.211
+      ],
+      "wilson95": [
+        0.109,
+        0.255
+      ]
+    }
+  },
+  "policy_fisher": {
+    "WinDEX_vs_WiLoR_p": 6.515813405049564e-16,
+    "WinDEX_vs_HaWoR_p": 1.943645324722123e-10,
+    "HaWoR_vs_WiLoR_p": 0.08562276792063268
+  },
+  "policy_ratio": {
+    "61_over_8": 7.625,
+    "61_over_17": 3.588
+  },
+  "single_cell_10_trials": {
+    "k=6": [
+      0.313,
+      0.832
+    ],
+    "k=10": [
+      0.722,
+      1.0
+    ]
+  },
+  "table5_reduction_pct": {
+    "W-MPJPE": 61.8,
+    "WA-MPJPE": 56.8,
+    "RTE": 29.3
+  },
+  "table6_f1": {
+    "in_the_wild": {
+      "Sapiens2-1B": {
+        "F1_reported": 79.69,
+        "F1_recomputed": 79.69,
+        "diff": 0.0
+      },
+      "YOLO11-pose": {
+        "F1_reported": 73.21,
+        "F1_recomputed": 73.21,
+        "diff": 0.0
+      },
+      "ViTPose-H": {
+        "F1_reported": 37.82,
+        "F1_recomputed": 37.82,
+        "diff": -0.0
+      },
+      "WinDEX-Net": {
+        "F1_reported": 80.88,
+        "F1_recomputed": 80.88,
+        "diff": 0.0
+      }
+    },
+    "motion_capture": {
+      "Sapiens2-1B": {
+        "F1_reported": 81.39,
+        "F1_recomputed": 81.39,
+        "diff": 0.0
+      },
+      "YOLO11-pose": {
+        "F1_reported": 76.72,
+        "F1_recomputed": 76.72,
+        "diff": -0.0
+      },
+      "ViTPose-H": {
+        "F1_reported": 50.93,
+        "F1_recomputed": 50.93,
+        "diff": 0.0
+      },
+      "WinDEX-Net": {
+        "F1_reported": 87.53,
+        "F1_recomputed": 87.53,
+        "diff": 0.0
+      }
+    }
+  },
+  "table4_vs_baselines": {
+    "wrist": {
+      "ours_P": 15.7,
+      "best_FT_baseline": {
+        "method": "UmeTrack",
+        "FT": 27.45
+      },
+      "reduction_vs_best_FT_pct": 42.8,
+      "ours_below_all_FT": true,
+      "ours_below_all_P": true
+    },
+    "MPJPE": {
+      "ours_P": 16.68,
+      "best_FT_baseline": {
+        "method": "HaWoR",
+        "FT": 23.48
+      },
+      "reduction_vs_best_FT_pct": 29.0,
+      "ours_below_all_FT": true,
+      "ours_below_all_P": true
+    },
+    "PA-MPJPE": {
+      "ours_P": 7.82,
+      "best_FT_baseline": {
+        "method": "HaWoR",
+        "FT": 9.45
+      },
+      "reduction_vs_best_FT_pct": 17.2,
+      "ours_below_all_FT": true,
+      "ours_below_all_P": true
+    },
+    "jitter": {
+      "ours_P": 3.15,
+      "best_FT_baseline": {
+        "method": "HaWoR",
+        "FT": 5.5
+      },
+      "reduction_vs_best_FT_pct": 42.7,
+      "ours_below_all_FT": true,
+      "ours_below_all_P": true
+    }
+  },
+  "same_config_mismatch": {
+    "tableII_tap11_production": {
+      "wrist": 15.7,
+      "MPJPE": 16.68,
+      "PA": 7.82
+    },
+    "tableIV_WinDEX_Window_P": {
+      "wrist": 15.7,
+      "MPJPE": 16.68,
+      "PA": 7.82
+    },
+    "tableIII_WinDEX_Net_2it": {
+      "wrist": 25.9,
+      "MPJPE": 17.8,
+      "PA": 7.8
+    },
+    "tableIII_WinDEX_Window_2it": {
+      "wrist": 27.1,
+      "MPJPE": 20.1,
+      "PA": 8.1
+    },
+    "wrist_gap_Window_IV_vs_III_mm": 11.4
+  },
+  "speed": {
+    "Window_over_Net_fps": 4.59,
+    "Stream_over_Window_fps": 3.92,
+    "Stream_wrist_vs_Window_2it_pct": 57.6,
+    "Stream_MPJPE_vs_Window_2it_pct": 65.2
+  },
+  "reproj_px": {
+    "ours": 14.5,
+    "best_FT_baseline_HaWoR": 22.42,
+    "reduction_pct": 35.3
+  },
+  "corpus_hours_sum": {
+    "sum_of_bars": 1000,
+    "stated": 1000,
+    "n_categories": 13
+  },
+  "tableII_gaps": {
+    "MPJPE_layer11_vs_layer4_pct": 2.3,
+    "PA_layer11_vs_layer4_pct": 1.3,
+    "note": "단일 학습 실행. 반복 실험이 없어 0.2-0.4 mm 차이의 유의성은 계산할 수 없다."
+  }
+}
