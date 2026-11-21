@@ -1,0 +1,320 @@
+{
+  "table2": {
+    "pi0-base w/o F": {
+      "k": [
+        12,
+        2,
+        6,
+        12,
+        2
+      ],
+      "max_roundtrip_err_pp": 0.003,
+      "unweighted_mean_recomputed": 38.93,
+      "unweighted_mean_reported": 38.93,
+      "pooled_k": 34,
+      "pooled_n": 94,
+      "pooled_rate_pct": 36.17,
+      "pooled_wilson95_pct": [
+        27.2,
+        46.2
+      ]
+    },
+    "pi0-base w/ F": {
+      "k": [
+        8,
+        2,
+        7,
+        6,
+        2
+      ],
+      "max_roundtrip_err_pp": 0.002,
+      "unweighted_mean_recomputed": 31.96,
+      "unweighted_mean_reported": 31.96,
+      "pooled_k": 25,
+      "pooled_n": 94,
+      "pooled_rate_pct": 26.6,
+      "pooled_wilson95_pct": [
+        18.7,
+        36.3
+      ]
+    },
+    "pi0-fast w/o F": {
+      "k": [
+        20,
+        7,
+        8,
+        10,
+        2
+      ],
+      "max_roundtrip_err_pp": 0.001,
+      "unweighted_mean_recomputed": 52.78,
+      "unweighted_mean_reported": 52.78,
+      "pooled_k": 47,
+      "pooled_n": 94,
+      "pooled_rate_pct": 50.0,
+      "pooled_wilson95_pct": [
+        40.1,
+        59.9
+      ]
+    },
+    "pi0-fast w/ F": {
+      "k": [
+        8,
+        1,
+        4,
+        10,
+        6
+      ],
+      "max_roundtrip_err_pp": 0.004,
+      "unweighted_mean_recomputed": 32.29,
+      "unweighted_mean_reported": 32.29,
+      "pooled_k": 29,
+      "pooled_n": 94,
+      "pooled_rate_pct": 30.85,
+      "pooled_wilson95_pct": [
+        22.4,
+        40.8
+      ]
+    },
+    "ForceVLA": {
+      "k": [
+        20,
+        8,
+        8,
+        18,
+        4
+      ],
+      "max_roundtrip_err_pp": 0.001,
+      "unweighted_mean_recomputed": 63.78,
+      "unweighted_mean_reported": 63.78,
+      "pooled_k": 58,
+      "pooled_n": 94,
+      "pooled_rate_pct": 61.7,
+      "pooled_wilson95_pct": [
+        51.6,
+        70.9
+      ]
+    }
+  },
+  "table2_trials_per_setting": {
+    "Object Gen.1": 25,
+    "Object Gen.2": 20,
+    "Height Gen.": 9,
+    "Visual Occlusion": 20,
+    "Unstable Socket": 20
+  },
+  "table2_pooled_fisher_vs_ForceVLA": {
+    "pi0-base w/o F": {
+      "fisher_p": 0.000748,
+      "holm_p": 0.001497
+    },
+    "pi0-base w/ F": {
+      "fisher_p": 2e-06,
+      "holm_p": 8e-06
+    },
+    "pi0-fast w/o F": {
+      "fisher_p": 0.141694,
+      "holm_p": 0.141694
+    },
+    "pi0-fast w/ F": {
+      "fisher_p": 3.7e-05,
+      "holm_p": 0.000111
+    }
+  },
+  "table2_per_setting_fisher_vs_base_wF": {
+    "Object Gen.1": {
+      "p": 0.0014,
+      "holm": 0.0058
+    },
+    "Object Gen.2": {
+      "p": 0.0648,
+      "holm": 0.1945
+    },
+    "Height Gen.": {
+      "p": 1.0,
+      "holm": 1.0
+    },
+    "Visual Occlusion": {
+      "p": 0.0002,
+      "holm": 0.0012
+    },
+    "Unstable Socket": {
+      "p": 0.6614,
+      "holm": 1.0
+    }
+  },
+  "figure5_average_check": {
+    "pi0-fast w/o F": {
+      "reported_average": 31.0,
+      "mean_of_6_bars": 31.0,
+      "mean_of_5_tasks_wipe_avg": 23.6
+    },
+    "pi0-fast w/ F": {
+      "reported_average": 14.2,
+      "mean_of_6_bars": 14.17,
+      "mean_of_5_tasks_wipe_avg": 14.0
+    },
+    "pi0-base w/o F": {
+      "reported_average": 37.3,
+      "mean_of_6_bars": 37.33,
+      "mean_of_5_tasks_wipe_avg": 39.4
+    },
+    "pi0-base w/ F": {
+      "reported_average": 40.2,
+      "mean_of_6_bars": 40.17,
+      "mean_of_5_tasks_wipe_avg": 48.2
+    },
+    "ForceVLA": {
+      "reported_average": 60.5,
+      "mean_of_6_bars": 60.5,
+      "mean_of_5_tasks_wipe_avg": 63.5
+    }
+  },
+  "figure5_gap_pp": {
+    "ForceVLA_minus_base_w/o_F_6bar": 23.2,
+    "ForceVLA_minus_base_w/_F_6bar": 20.3,
+    "ForceVLA_minus_base_w/_F_5task": 15.3,
+    "ForceVLA_minus_base_w/o_F_5task": 24.1
+  },
+  "figure5_not_multiple_of_stated_trials": {
+    "pi0-fast w/o F": [
+      {
+        "col": "Wipe Board-1",
+        "value": 91.0,
+        "nearest_k_over_n": "9/10"
+      },
+      {
+        "col": "Wipe Board-2",
+        "value": 45.0,
+        "nearest_k_over_n": "4/10"
+      }
+    ],
+    "pi0-fast w/ F": [],
+    "pi0-base w/o F": [
+      {
+        "col": "Pump Bottle",
+        "value": 33.0,
+        "nearest_k_over_n": "7/20"
+      },
+      {
+        "col": "Wipe Board-1",
+        "value": 45.0,
+        "nearest_k_over_n": "4/10"
+      },
+      {
+        "col": "Wipe Board-2",
+        "value": 9.0,
+        "nearest_k_over_n": "1/10"
+      },
+      {
+        "col": "Peel Cucumber",
+        "value": 87.0,
+        "nearest_k_over_n": "13/15"
+      }
+    ],
+    "pi0-base w/ F": [
+      {
+        "col": "Pump Bottle",
+        "value": 83.0,
+        "nearest_k_over_n": "17/20"
+      },
+      {
+        "col": "Peel Cucumber",
+        "value": 93.0,
+        "nearest_k_over_n": "14/15"
+      }
+    ],
+    "ForceVLA": [
+      {
+        "col": "Pump Bottle",
+        "value": 67.0,
+        "nearest_k_over_n": "13/20"
+      },
+      {
+        "col": "Wipe Board-1",
+        "value": 64.0,
+        "nearest_k_over_n": "6/10"
+      },
+      {
+        "col": "Wipe Board-2",
+        "value": 27.0,
+        "nearest_k_over_n": "3/10"
+      }
+    ]
+  },
+  "table5": {
+    "pi0-fast w/o F": {
+      "k": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "avg_recomputed_pct": 0.0,
+      "pooled_k": 0
+    },
+    "pi0-fast w/ F": {
+      "k": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "avg_recomputed_pct": 0.0,
+      "pooled_k": 0
+    },
+    "pi0-base w/o F": {
+      "k": [
+        4,
+        0,
+        0,
+        0
+      ],
+      "avg_recomputed_pct": 5.0,
+      "pooled_k": 4
+    },
+    "pi0-base w/ F": {
+      "k": [
+        10,
+        20,
+        2,
+        1
+      ],
+      "avg_recomputed_pct": 42.5,
+      "pooled_k": 33
+    },
+    "ForceVLA": {
+      "k": [
+        16,
+        20,
+        2,
+        8
+      ],
+      "avg_recomputed_pct": 67.5,
+      "pooled_k": 46
+    }
+  },
+  "table5_fisher": {
+    "ForceVLA_vs_base_wF_p": 0.0404,
+    "ForceVLA_vs_base_woF_p": 0.0,
+    "pooled_n": 70
+  },
+  "table3": {
+    "k_of_20": {
+      "baseline[10]": 9,
+      "linear before VLM": 11,
+      "MoE before VLM": 0,
+      "concat after VLM": 12,
+      "ForceVLA": 16
+    },
+    "ForceVLA_vs_baseline_p": 0.0484,
+    "ForceVLA_vs_concat_after_VLM_p": 0.3008,
+    "concat_after_VLM_vs_baseline_p": 0.5273
+  },
+  "table1_note": "평균 길이 차이(14.12 대 13.17 대 10.27 cm)에 대한 검정은 표준편차와 시행별 값이 없어 불가능",
+  "headline_pp": {
+    "ForceVLA_minus_base_w/o_F": 23.2,
+    "ForceVLA_minus_base_w/_F": 20.3,
+    "relative_gain_vs_base_w/o_F_pct": 62.2
+  }
+}
