@@ -1,0 +1,390 @@
+{
+ "V1_table2_weighted_average": {
+  "BC-Transformer": {
+   "weighted": 26.36,
+   "printed": 26.4
+  },
+  "Diffusion Policy": {
+   "weighted": 33.41,
+   "printed": 33.4
+  },
+  "GR00T-N1-2B": {
+   "weighted": 45.07,
+   "printed": 45.0
+  }
+ },
+ "V2_table4_row_means_vs_printed": {
+  "RoboCasa": {
+   "n_tasks": 24,
+   "recomputed": [
+    14.73,
+    25.62,
+    43.23,
+    17.45,
+    32.08,
+    49.6
+   ],
+   "printed": [
+    14.7,
+    25.6,
+    43.2,
+    17.4,
+    32.1,
+    49.6
+   ],
+   "max_abs_diff": 0.05
+  },
+  "DexMG": {
+   "n_tasks": 9,
+   "recomputed": [
+    23.74,
+    46.87,
+    68.37,
+    29.61,
+    58.5,
+    74.19
+   ],
+   "printed": [
+    23.7,
+    46.9,
+    68.4,
+    29.6,
+    58.5,
+    74.2
+   ],
+   "max_abs_diff": 0.04
+  },
+  "GR-1": {
+   "n_tasks": 24,
+   "recomputed": [
+    21.34,
+    32.69,
+    40.37,
+    43.23,
+    49.96,
+    49.26
+   ],
+   "printed": [
+    21.3,
+    32.7,
+    40.4,
+    43.2,
+    50.0,
+    49.3
+   ],
+   "max_abs_diff": 0.04
+  }
+ },
+ "V3_table2_vs_table4_100demo": {
+  "RoboCasa": {
+   "table2_DP": 25.6,
+   "table4_DP_100": 25.62,
+   "table2_GR00T": 32.1,
+   "table4_GR00T_100": 32.08
+  },
+  "DexMG": {
+   "table2_DP": 56.1,
+   "table4_DP_100": 46.87,
+   "table2_GR00T": 66.5,
+   "table4_GR00T_100": 58.5
+  },
+  "GR-1": {
+   "table2_DP": 32.7,
+   "table4_DP_100": 32.69,
+   "table2_GR00T": 50.0,
+   "table4_GR00T_100": 49.96
+  }
+ },
+ "V3b_average_from_table4": {
+  "DP": 31.95,
+  "GR00T": 43.78,
+  "gap_table4": 11.83,
+  "gap_printed": 11.6
+ },
+ "V4_headline_gaps_printed": {
+  "GR-1_GR00T_minus_DP_100": 17.3,
+  "GR-1_text_claim": "more than 17%"
+ },
+ "V5_table3_recomputed": {
+  "DP 10%": {
+   "group_means": {
+    "PnP": 3.0,
+    "Articulated": 14.33,
+    "Industrial": 6.67,
+    "Coordination": 27.5
+   },
+   "overall_13_tasks": 10.23
+  },
+  "DP full": {
+   "group_means": {
+    "PnP": 36.0,
+    "Articulated": 38.6,
+    "Industrial": 61.0,
+    "Coordination": 62.5
+   },
+   "overall_13_tasks": 46.45
+  },
+  "GR00T 10%": {
+   "group_means": {
+    "PnP": 35.0,
+    "Articulated": 61.97,
+    "Industrial": 31.0,
+    "Coordination": 50.0
+   },
+   "overall_13_tasks": 42.61
+  },
+  "GR00T full": {
+   "group_means": {
+    "PnP": 82.0,
+    "Articulated": 70.93,
+    "Industrial": 70.03,
+    "Coordination": 82.5
+   },
+   "overall_13_tasks": 76.76
+  }
+ },
+ "V5_table3_printed_avg": {
+  "PnP": [
+   3.0,
+   36.0,
+   35.0,
+   82.0
+  ],
+  "Articulated": [
+   14.3,
+   38.6,
+   62.0,
+   70.9
+  ],
+  "Industrial": [
+   6.7,
+   61.0,
+   31.0,
+   70.0
+  ],
+  "Coordination": [
+   27.5,
+   62.5,
+   50.0,
+   82.5
+  ],
+  "Average": [
+   10.2,
+   46.4,
+   42.6,
+   76.8
+  ]
+ },
+ "S2_real_paired_13_tasks": {
+  "full_data": {
+   "mean_diff": 30.32,
+   "boot95": [
+    20.98,
+    40.42
+   ],
+   "n_tasks": 13,
+   "n_positive": 13,
+   "wilcoxon_p": 0.0002,
+   "sign_test_p": 0.0002
+  },
+  "10pct": {
+   "mean_diff": 32.38,
+   "boot95": [
+    20.27,
+    45.74
+   ],
+   "n_tasks": 13,
+   "n_positive": 12,
+   "wilcoxon_p": 0.0005,
+   "sign_test_p": 0.0034
+  }
+ },
+ "S2b_pooled_trials": {
+  "n_trials_per_setting": 175,
+  "DP 10%": {
+   "successes_eq": 13.8,
+   "n": 175,
+   "rate": 7.9,
+   "wilson95": [
+    4.7,
+    12.8
+   ]
+  },
+  "DP full": {
+   "successes_eq": 76.2,
+   "n": 175,
+   "rate": 43.5,
+   "wilson95": [
+    36.4,
+    50.9
+   ]
+  },
+  "GR00T 10%": {
+   "successes_eq": 72.5,
+   "n": 175,
+   "rate": 41.4,
+   "wilson95": [
+    34.4,
+    48.8
+   ]
+  },
+  "GR00T full": {
+   "successes_eq": 138.0,
+   "n": 175,
+   "rate": 78.9,
+   "wilson95": [
+    72.2,
+    84.2
+   ]
+  }
+ },
+ "S2c_fisher_pooled_approx": {
+  "full: GR00T vs DP": 1.2e-11,
+  "10%: GR00T vs DP": 2.55e-13
+ },
+ "V6_pretrain": {
+  "coordinated_bimanual": {
+   "k_partial_credit": 11.5,
+   "n": 15,
+   "rate_recomputed": 76.67,
+   "printed": 76.6,
+   "wilson95": [
+    51.4,
+    91.1
+   ]
+  },
+  "novel_object": {
+   "k_partial_credit": 11.0,
+   "n": 15,
+   "rate_recomputed": 73.33,
+   "printed": 73.3,
+   "wilson95": [
+    48.0,
+    89.1
+   ]
+  }
+ },
+ "S1_sim_paired_100demos": {
+  "RoboCasa": {
+   "n_tasks": 24,
+   "gr00t_wins_100": 16,
+   "ties_100": 1,
+   "dp_wins_100": 7,
+   "mean_diff_pp": 6.46,
+   "boot95_mean_diff_pp": [
+    2.0,
+    11.0
+   ],
+   "wilcoxon_p": 0.005636,
+   "n_tasks_p_lt_0.05_ztest": 7
+  },
+  "DexMG": {
+   "n_tasks": 9,
+   "gr00t_wins_100": 8,
+   "ties_100": 0,
+   "dp_wins_100": 1,
+   "mean_diff_pp": 11.63,
+   "boot95_mean_diff_pp": [
+    -7.0,
+    27.0
+   ],
+   "wilcoxon_p": 0.097656,
+   "n_tasks_p_lt_0.05_ztest": 5
+  },
+  "GR-1": {
+   "n_tasks": 24,
+   "gr00t_wins_100": 22,
+   "ties_100": 0,
+   "dp_wins_100": 2,
+   "mean_diff_pp": 17.28,
+   "boot95_mean_diff_pp": [
+    13.0,
+    21.0
+   ],
+   "wilcoxon_p": 1e-06,
+   "n_tasks_p_lt_0.05_ztest": 18
+  }
+ },
+ "S1b_sim_all_57_tasks_100demos": {
+  "gr00t_wins": 46,
+  "n": 57,
+  "wilcoxon_p": 8.53e-08,
+  "boot95_pp": [
+   8.0,
+   16.0
+  ]
+ },
+ "S1c_sim_wins_by_size": {
+  "30": 39,
+  "100": 46,
+  "300": 42,
+  "n": 57
+ },
+ "V7_table7_sums": {
+  "robot": {
+   "recomputed": [
+    262.3,
+    3288.8
+   ],
+   "printed": [
+    262.3,
+    3288.8
+   ]
+  },
+  "human": {
+   "recomputed": [
+    181.3,
+    2517.0
+   ],
+   "printed": [
+    181.3,
+    2517.0
+   ]
+  },
+  "sim": {
+   "recomputed": [
+    125.5,
+    1742.6
+   ],
+   "printed": [
+    125.5,
+    1742.6
+   ]
+  },
+  "neural": {
+   "recomputed": [
+    23.8,
+    827.3
+   ],
+   "printed": [
+    23.8,
+    827.3
+   ]
+  },
+  "total": {
+   "recomputed": [
+    592.9,
+    8375.7
+   ],
+   "printed": [
+    592.9,
+    8375.7
+   ]
+  }
+ },
+ "V8_consistency": {
+  "neural_trajectories_est_(81_frames)": 293.8,
+  "text_claim_neural_trajectories": "~300k",
+  "neural_hours_from_8fps": 826.4,
+  "printed_neural_hours": 827.3,
+  "teleop_hours_from_20hz": 88.9,
+  "printed_teleop_hours": 88.4,
+  "sim_hours_from_20fps": 1743.1,
+  "printed_sim_hours": 1742.6,
+  "L40_gpu_hours_from_2min_per_s": 99240.0,
+  "printed_L40_gpu_hours": 105000,
+  "sim_pretrain_trajs_540k_avg_s": 11.62,
+  "claim_780k_traj_equiv_6500h_s_per_traj": 30.0,
+  "teleop_to_neural_ratio": 9.4
+ }
+}
