@@ -1,0 +1,276 @@
+{
+  "fig5_means_pct": {
+    "VLA-Adapter": 27.5,
+    "VLA-Adapter w/F": 30.0,
+    "ForceVLA": 37.5,
+    "TA-VLA": 35.83,
+    "FR-VLA": 58.33
+  },
+  "fig5_strongest_baseline": {
+    "method": "ForceVLA",
+    "mean_pct": 37.5,
+    "gap_pp": 20.83
+  },
+  "fig5_per_stage": [
+    {
+      "stage": "Gear",
+      "fr_pct": 90,
+      "best_baseline_pct": 70,
+      "best_baseline": [
+        "ForceVLA"
+      ],
+      "is_highest": true,
+      "fisher_p_vs_best_baseline": 0.2351
+    },
+    {
+      "stage": "SwitchTop",
+      "fr_pct": 60,
+      "best_baseline_pct": 45,
+      "best_baseline": [
+        "ForceVLA"
+      ],
+      "is_highest": true,
+      "fisher_p_vs_best_baseline": 0.5273
+    },
+    {
+      "stage": "SwitchSide",
+      "fr_pct": 35,
+      "best_baseline_pct": 15,
+      "best_baseline": [
+        "TA-VLA"
+      ],
+      "is_highest": true,
+      "fisher_p_vs_best_baseline": 0.2733
+    },
+    {
+      "stage": "Cleaning",
+      "fr_pct": 70,
+      "best_baseline_pct": 50,
+      "best_baseline": [
+        "TA-VLA"
+      ],
+      "is_highest": true,
+      "fisher_p_vs_best_baseline": 0.3332
+    },
+    {
+      "stage": "Screw",
+      "fr_pct": 40,
+      "best_baseline_pct": 25,
+      "best_baseline": [
+        "ForceVLA"
+      ],
+      "is_highest": true,
+      "fisher_p_vs_best_baseline": 0.5006
+    },
+    {
+      "stage": "Buckle",
+      "fr_pct": 55,
+      "best_baseline_pct": 40,
+      "best_baseline": [
+        "TA-VLA"
+      ],
+      "is_highest": true,
+      "fisher_p_vs_best_baseline": 0.5273
+    }
+  ],
+  "fig5_all_six_highest": true,
+  "fig5_min_margin_pp": 15,
+  "table2_avg_pct": {
+    "FR-VLA": 58.33,
+    "w/o force admission": 35.0,
+    "w/o force tokenization": 40.0
+  },
+  "table2_all_stages_lower_than_full": {
+    "w/o force admission": true,
+    "w/o force tokenization": true
+  },
+  "table2_pooled": [
+    {
+      "comparison": "FR-VLA vs w/o admission (pooled 120)",
+      "k1": 70,
+      "n1": 120,
+      "k2": 42,
+      "n2": 120,
+      "diff_pp": 23.3,
+      "newcombe95_pp": [
+        10.7,
+        34.9
+      ],
+      "fisher_p": 0.0005
+    },
+    {
+      "comparison": "FR-VLA vs w/o tokenization (pooled 120)",
+      "k1": 70,
+      "n1": 120,
+      "k2": 48,
+      "n2": 120,
+      "diff_pp": 18.3,
+      "newcombe95_pp": [
+        5.7,
+        30.2
+      ],
+      "fisher_p": 0.0066
+    },
+    {
+      "comparison": "FR-VLA vs ForceVLA (pooled 120)",
+      "k1": 70,
+      "n1": 120,
+      "k2": 45,
+      "n2": 120,
+      "diff_pp": 20.8,
+      "newcombe95_pp": [
+        8.2,
+        32.6
+      ],
+      "fisher_p": 0.0019
+    },
+    {
+      "comparison": "FR-VLA vs TA-VLA (pooled 120)",
+      "k1": 70,
+      "n1": 120,
+      "k2": 43,
+      "n2": 120,
+      "diff_pp": 22.5,
+      "newcombe95_pp": [
+        9.9,
+        34.1
+      ],
+      "fisher_p": 0.0007
+    },
+    {
+      "comparison": "FR-VLA vs VLA-Adapter w/F (pooled 120)",
+      "k1": 70,
+      "n1": 120,
+      "k2": 36,
+      "n2": 120,
+      "diff_pp": 28.3,
+      "newcombe95_pp": [
+        15.8,
+        39.6
+      ],
+      "fisher_p": 0.0
+    }
+  ],
+  "gear_magnitude_gating": {
+    "comparison": "Gear: FR-VLA 90% vs magnitude gating 70%",
+    "k1": 18,
+    "n1": 20,
+    "k2": 14,
+    "n2": 20,
+    "diff_pp": 20.0,
+    "newcombe95_pp": [
+      -5.4,
+      43.1
+    ],
+    "fisher_p": 0.2351
+  },
+  "gear_vs_vla_adapter_wf": {
+    "comparison": "Gear: FR-VLA 90% vs VLA-Adapter w/F 60% (fig5)",
+    "k1": 18,
+    "n1": 20,
+    "k2": 12,
+    "n2": 20,
+    "diff_pp": 30.0,
+    "newcombe95_pp": [
+      2.9,
+      52.5
+    ],
+    "fisher_p": 0.0648
+  },
+  "table3_gear_unseen": {
+    "comparison": "Unseen gear: FR-VLA 85% vs VLA-Adapter w/F 60%",
+    "k1": 17,
+    "n1": 20,
+    "k2": 12,
+    "n2": 20,
+    "diff_pp": 25.0,
+    "newcombe95_pp": [
+      -2.8,
+      48.5
+    ],
+    "fisher_p": 0.1552
+  },
+  "table3_target_pos": {
+    "comparison": "Unseen target position: FR-VLA 75% vs VLA-Adapter w/F 50%",
+    "k1": 15,
+    "n1": 20,
+    "k2": 10,
+    "n2": 20,
+    "diff_pp": 25.0,
+    "newcombe95_pp": [
+      -4.7,
+      49.4
+    ],
+    "fisher_p": 0.1908
+  },
+  "table4_pooled_k_n": [
+    20,
+    40
+  ],
+  "table4_groups_wilson95_pct": [
+    [
+      16.8,
+      68.7
+    ],
+    [
+      31.3,
+      83.2
+    ],
+    [
+      23.7,
+      76.3
+    ],
+    [
+      23.7,
+      76.3
+    ]
+  ],
+  "table4_pooled_wilson95_pct": [
+    35.2,
+    64.8
+  ],
+  "table4_vs_in_distribution_top": {
+    "comparison": "Cable unseen (20/40) vs in-distribution Switch-Top (12/20, fig5 60%)",
+    "k1": 20,
+    "n1": 40,
+    "k2": 12,
+    "n2": 20,
+    "diff_pp": -10.0,
+    "newcombe95_pp": [
+      -33.4,
+      16.0
+    ],
+    "fisher_p": 0.5854
+  },
+  "fr_stage_wilson95_pct": {
+    "Gear": [
+      69.9,
+      97.2
+    ],
+    "SwitchTop": [
+      38.7,
+      78.1
+    ],
+    "SwitchSide": [
+      18.1,
+      56.7
+    ],
+    "Cleaning": [
+      48.1,
+      85.5
+    ],
+    "Screw": [
+      21.9,
+      61.3
+    ],
+    "Buckle": [
+      34.2,
+      74.2
+    ]
+  },
+  "n_per_arm_for_80pct_power": {
+    "90_vs_70": 62,
+    "58.3_vs_37.5": 90,
+    "85_vs_60": 49
+  }
+}
