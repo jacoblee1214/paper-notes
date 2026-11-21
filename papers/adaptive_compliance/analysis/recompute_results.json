@@ -1,0 +1,180 @@
+{
+  "checks": {
+    "flip_total_matches_all": {
+      "ACP": [
+        96,
+        96
+      ],
+      "ACP_woFFT": [
+        95,
+        95
+      ],
+      "Compliant": [
+        23,
+        23
+      ],
+      "Stiff": [
+        14,
+        14
+      ]
+    },
+    "flip_total_ok": true,
+    "wipe_total_ok": {
+      "ACP": 15,
+      "ACP_woFFT": 13,
+      "Compliant": 7
+    },
+    "wipe_total_expected": {
+      "ACP": 15.0,
+      "ACP_woFFT": 13.0,
+      "Compliant": 7.0
+    },
+    "wipe_total_ok_bool": true
+  },
+  "flip": {
+    "ACP": {
+      "success": 96,
+      "n": 100,
+      "pct": 96,
+      "wilson95": [
+        90.2,
+        98.4
+      ],
+      "scenarios": {
+        "Train": "18/20",
+        "Unseen": "19/20",
+        "Push&Flip": "19/20",
+        "FixturePose": "20/20",
+        "Unstable": "20/20"
+      }
+    },
+    "ACP_woFFT": {
+      "success": 95,
+      "n": 100,
+      "pct": 95,
+      "wilson95": [
+        88.8,
+        97.8
+      ],
+      "scenarios": {
+        "Train": "18/20",
+        "Unseen": "20/20",
+        "Push&Flip": "20/20",
+        "FixturePose": "19/20",
+        "Unstable": "18/20"
+      }
+    },
+    "Compliant": {
+      "success": 23,
+      "n": 100,
+      "pct": 23,
+      "wilson95": [
+        15.8,
+        32.2
+      ],
+      "scenarios": {
+        "Train": "16/20",
+        "Unseen": "3/20",
+        "Push&Flip": "3/20",
+        "FixturePose": "1/20",
+        "Unstable": "0/20"
+      }
+    },
+    "Stiff": {
+      "success": 14,
+      "n": 100,
+      "pct": 14,
+      "wilson95": [
+        8.5,
+        22.1
+      ],
+      "scenarios": {
+        "Train": "4/20",
+        "Unseen": "1/20",
+        "Push&Flip": "0/20",
+        "FixturePose": "7/20",
+        "Unstable": "2/20"
+      }
+    }
+  },
+  "wipe": {
+    "ACP": {
+      "success": 15,
+      "n": 16,
+      "pct": 93.75,
+      "wilson95": [
+        71.7,
+        98.9
+      ],
+      "scenarios": {
+        "Small": "5/5",
+        "Large": "4/5",
+        "PbC": "4/4",
+        "PaC": "2/2"
+      }
+    },
+    "ACP_woFFT": {
+      "success": 13,
+      "n": 16,
+      "pct": 81.25,
+      "wilson95": [
+        57.0,
+        93.4
+      ],
+      "scenarios": {
+        "Small": "5/5",
+        "Large": "3/5",
+        "PbC": "3/4",
+        "PaC": "2/2"
+      }
+    },
+    "Compliant": {
+      "success": 7,
+      "n": 16,
+      "pct": 43.75,
+      "wilson95": [
+        23.1,
+        66.8
+      ],
+      "scenarios": {
+        "Small": "3/5",
+        "Large": "1/5",
+        "PbC": "1/4",
+        "PaC": "2/2"
+      }
+    }
+  },
+  "tests": {
+    "flip:ACP_vs_Compliant": {
+      "diff_pts": 73.0,
+      "rel_gain_pct": 317.4,
+      "fisher_p_two_sided": 0.0
+    },
+    "flip:ACP_vs_Stiff": {
+      "diff_pts": 82.0,
+      "rel_gain_pct": 585.7,
+      "fisher_p_two_sided": 0.0
+    },
+    "flip:ACP_vs_ACP_woFFT": {
+      "diff_pts": 1.0,
+      "rel_gain_pct": 1.1,
+      "fisher_p_two_sided": 1.0
+    },
+    "wipe:ACP_vs_Compliant": {
+      "diff_pts": 50.0,
+      "rel_gain_pct": 114.3,
+      "fisher_p_two_sided": 0.005923
+    },
+    "wipe:ACP_vs_ACP_woFFT": {
+      "diff_pts": 12.5,
+      "rel_gain_pct": 15.4,
+      "fisher_p_two_sided": 0.599555
+    }
+  },
+  "claim_50pct": {
+    "wipe_ACP_minus_Compliant_pts": 50.0,
+    "wipe_relative_gain_pct": 114.3,
+    "flip_ACP_minus_Compliant_pts": 73,
+    "flip_relative_gain_pct": 317.4
+  }
+}
