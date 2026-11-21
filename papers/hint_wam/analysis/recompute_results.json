@@ -1,0 +1,346 @@
+{
+  "table1_differences": {
+    "HINT_minus_SFT": 6.3,
+    "HINT_minus_FullSFT": 3.94,
+    "HINT_minus_BC_robotwin_clean_random": [
+      1.68,
+      1.6
+    ],
+    "FullSFT_minus_released_robotwin_clean_random": [
+      -2.36,
+      -0.2
+    ],
+    "SFT_minus_FastWAM_LIBERO90": 63.32
+  },
+  "table2_average_check": {
+    "Fast-WAM": {
+      "avg_recomputed": 96.55,
+      "avg_reported": 96.55,
+      "match": true
+    },
+    "no_replay_SFT": {
+      "avg_recomputed": 37.45,
+      "avg_reported": 37.45,
+      "match": true
+    },
+    "no_replay_FullSFT": {
+      "avg_recomputed": 32.85,
+      "avg_reported": 32.85,
+      "match": true
+    },
+    "no_replay_BC": {
+      "avg_recomputed": 33.0,
+      "avg_reported": 33.0,
+      "match": true
+    },
+    "no_replay_SelfImit": {
+      "avg_recomputed": 40.35,
+      "avg_reported": 40.35,
+      "match": true
+    },
+    "no_replay_Shuffled": {
+      "avg_recomputed": 41.2,
+      "avg_reported": 41.2,
+      "match": true
+    },
+    "no_replay_HINT": {
+      "avg_recomputed": 44.05,
+      "avg_reported": 44.05,
+      "match": true
+    },
+    "replay_SFT": {
+      "avg_recomputed": 91.55,
+      "avg_reported": 91.55,
+      "match": true
+    },
+    "replay_FullSFT": {
+      "avg_recomputed": 92.9,
+      "avg_reported": 92.9,
+      "match": true
+    },
+    "replay_HINT": {
+      "avg_recomputed": 95.1,
+      "avg_reported": 95.1,
+      "match": true
+    }
+  },
+  "table2_checks": {
+    "replay_HINT_minus_SFT_newtasks": 4.86,
+    "replay_HINT_minus_SFT_orig": 3.55,
+    "replay_HINT_gap_to_released": 1.45,
+    "replay_HINT_minus_FullSFT_orig": 2.2,
+    "noreplay_HINT_minus_SFT_orig": 6.6
+  },
+  "table6_paired": [
+    {
+      "comparison": "HINT-WAM vs SFT",
+      "mean": 6.3,
+      "SE": 1.76,
+      "t_reported": 3.58,
+      "t_from_mean_over_SE": 3.58,
+      "t_consistent_within_0.05": true,
+      "95CI": [
+        2.8,
+        9.8
+      ],
+      "p_t_two_sided_from_reported_t": 0.0005592,
+      "sign_test_p_recomputed": 0.08695,
+      "sign_test_p_reported": 0.087,
+      "wins_losses_ties": [
+        36,
+        22,
+        32
+      ]
+    },
+    {
+      "comparison": "HINT-WAM vs self-imitation",
+      "mean": 5.56,
+      "SE": 1.88,
+      "t_reported": 2.96,
+      "t_from_mean_over_SE": 2.957,
+      "t_consistent_within_0.05": true,
+      "95CI": [
+        1.82,
+        9.3
+      ],
+      "p_t_two_sided_from_reported_t": 0.003942,
+      "sign_test_p_recomputed": 0.005583,
+      "sign_test_p_reported": 0.0056,
+      "wins_losses_ties": [
+        47,
+        23,
+        20
+      ]
+    },
+    {
+      "comparison": "HINT-WAM vs shuffled hindsight",
+      "mean": 4.9,
+      "SE": 1.78,
+      "t_reported": 2.76,
+      "t_from_mean_over_SE": 2.753,
+      "t_consistent_within_0.05": true,
+      "95CI": [
+        1.36,
+        8.44
+      ],
+      "p_t_two_sided_from_reported_t": 0.007018,
+      "sign_test_p_recomputed": 0.02246,
+      "sign_test_p_reported": 0.022,
+      "wins_losses_ties": [
+        45,
+        25,
+        20
+      ]
+    },
+    {
+      "comparison": "HINT-WAM vs velocity matching",
+      "mean": 6.16,
+      "SE": 1.59,
+      "t_reported": 3.62,
+      "t_from_mean_over_SE": 3.874,
+      "t_consistent_within_0.05": false,
+      "95CI": [
+        3.0,
+        9.32
+      ],
+      "p_t_two_sided_from_reported_t": 0.000489,
+      "sign_test_p_recomputed": 0.0001521,
+      "sign_test_p_reported": 0.00042,
+      "wins_losses_ties": [
+        48,
+        17,
+        25
+      ]
+    },
+    {
+      "comparison": "velocity matching vs SFT",
+      "mean": 0.14,
+      "SE": 1.52,
+      "t_reported": 0.09,
+      "t_from_mean_over_SE": 0.092,
+      "t_consistent_within_0.05": true,
+      "95CI": [
+        -2.88,
+        3.16
+      ],
+      "p_t_two_sided_from_reported_t": 0.9285,
+      "sign_test_p_recomputed": 0.4638,
+      "sign_test_p_reported": 0.46,
+      "wins_losses_ties": [
+        30,
+        37,
+        23
+      ]
+    }
+  ],
+  "table6_HINT_vs_SFT_task_level_SD_of_difference": 16.7,
+  "eval_noise_floor": {
+    "per_task_SD_of_difference_pts": 8.0,
+    "SE_of_mean_over_90_tasks_pts": 0.84,
+    "note": "독립 에피소드 가정. 관측 SE 1.76보다 작아, 관측 분산의 대부분은 과제 간 이질성 또는 학습 시드 변동이다."
+  },
+  "MDE_80pct_power_pts_HINT_vs_SFT_design": 4.99,
+  "table8_robotwin_paired": [
+    {
+      "comparison": "HINT vs BC, clean",
+      "mean": 1.68,
+      "SE": 0.84,
+      "t_from_mean_over_SE": 2.0,
+      "t_reported": 2.0,
+      "p_t_two_sided_df24": 0.0569,
+      "sign_test_p": 0.6636
+    },
+    {
+      "comparison": "HINT vs BC, randomized",
+      "mean": 1.6,
+      "SE": 1.32,
+      "t_from_mean_over_SE": 1.212,
+      "t_reported": 1.21,
+      "p_t_two_sided_df24": 0.2381,
+      "sign_test_p": 0.4049
+    },
+    {
+      "comparison": "HINT vs released, clean",
+      "mean": 0.56,
+      "SE": 1.19,
+      "t_from_mean_over_SE": 0.471,
+      "t_reported": 0.47,
+      "p_t_two_sided_df24": 0.6426,
+      "sign_test_p": 0.8238
+    },
+    {
+      "comparison": "HINT vs released, randomized",
+      "mean": 0.24,
+      "SE": 1.04,
+      "t_from_mean_over_SE": 0.231,
+      "t_reported": 0.23,
+      "p_t_two_sided_df24": 0.82,
+      "sign_test_p": 0.5235
+    },
+    {
+      "comparison": "BC vs released, clean",
+      "mean": -1.12,
+      "SE": 1.08,
+      "t_from_mean_over_SE": -1.037,
+      "t_reported": -1.04,
+      "p_t_two_sided_df24": 0.3087,
+      "sign_test_p": 0.8238
+    },
+    {
+      "comparison": "BC vs released, randomized",
+      "mean": -1.36,
+      "SE": 1.43,
+      "t_from_mean_over_SE": -0.951,
+      "t_reported": -0.95,
+      "p_t_two_sided_df24": 0.3516,
+      "sign_test_p": 0.21
+    }
+  ],
+  "per_task_band_consistency": {
+    "implied_mean_gain_in_80_95_band_pts (n=20, not reported)": 2.36,
+    "note": "구간 평균과 전체 평균 6.30으로 역산한 값. 보고되지 않은 구간이라 대략적 일관성 확인만 가능."
+  },
+  "cost": {
+    "hours": {
+      "SFT_3k": 33.5,
+      "SFT_5k": 55.83,
+      "StageA_teacher": 4.39,
+      "StageB_distill": 33.67,
+      "BC_control_2k": 22.33,
+      "FullSFT_5k": 126.94
+    },
+    "GPU_hours": {
+      "SFT_3k": 268.0,
+      "SFT_5k": 446.7,
+      "StageA_teacher": 35.1,
+      "StageB_distill": 269.3,
+      "BC_control_2k": 178.7,
+      "FullSFT_5k": 1015.6
+    },
+    "HINT_total_hours_incl_SFT3k": 71.56,
+    "HINT_total_hours_excl_SFT3k (본문 4.4 + 34)": 38.39,
+    "ratio_HINT_over_SFT5k (paper 1.28)": 1.282,
+    "ratio_HINT_over_FullSFT (paper 0.56)": 0.564,
+    "ratio_FullSFT_over_SFT5k_step (paper 2.3)": 2.274,
+    "ratio_StageB_over_BC_step (paper 1.51)": 1.507,
+    "ratio_FullSFT_over_SFT5k_hours (paper 2.3)": 2.274,
+    "note": "본문 4.4절의 '4.4 h + 34 h'에는 3,000스텝 SFT(약 33.5 h)가 빠져 있다. 1.28배는 이를 포함해야 맞는다."
+  },
+  "schedule": {
+    "sigma_points_timesteps": [
+      1.0,
+      0.9783,
+      0.9524,
+      0.9211,
+      0.8824,
+      0.8333,
+      0.7692,
+      0.6818,
+      0.5556,
+      0.3571
+    ],
+    "weights_normalized": [
+      0.0024,
+      0.0033,
+      0.0049,
+      0.0075,
+      0.012,
+      0.0205,
+      0.0381,
+      0.0795,
+      0.1962,
+      0.6357
+    ],
+    "last_point_sigma": 0.3571,
+    "last_point_mass_pct": 63.57,
+    "last_three_mass_pct": 91.14,
+    "ESS_full": 2.217,
+    "top1_index_order": [
+      9,
+      8,
+      7
+    ]
+  },
+  "energy_score_propriety_toy": {
+    "beta1_unsquared_L2 (paper Eq.8, code)": {
+      "collapse_to_mean": 1.0,
+      "matched_distribution": 0.5,
+      "reading": "matched < collapse 이므로 분포 일치를 선호한다(엄격 적합 규칙과 일치)."
+    },
+    "beta2_squared (if the norms were squared)": {
+      "collapse_to_mean": 1.0,
+      "matched_distribution": 1.0,
+      "reading": "두 값이 같다. 제곱 노름(β=2)을 쓰면 평균만 맞추면 되어 적합 규칙이 아니다. 논문과 코드는 비제곱 노름을 쓴다."
+    },
+    "squared_error_to_mean_(velocity-matching-like)": {
+      "collapse_to_mean": 1.0,
+      "matched_distribution_single_sample_error": 0.0,
+      "reading": "단일 교사 표본에 대한 제곱오차의 기대값은 학생 평균이 0일 때 최소가 된다. 평균 0은 두 모드 어느 쪽도 아니다."
+    }
+  },
+  "misc_checks": {
+    "velocity_vs_SFT_gain (paper 0.14 from 79.02-78.88)": 0.14,
+    "MMD_minus_SFT (paper 1.7)": 1.75,
+    "actionMSE_minus_SFT (paper 4.0)": 4.05,
+    "energy_minus_velocity (paper 6.16)": 6.16,
+    "BC_control_minus_SFT (paper -7.3)": -7.32,
+    "distill_no_anchor_minus_SFT (paper -4.5)": -4.5,
+    "shuffled_minus_SFT (paper 1.4)": 1.4,
+    "offpolicy_states_minus_SFT (paper 1.8)": 1.8,
+    "M1_to_M2_to_M3_to_M4_steps (paper 1.1-1.4 per sample)": [
+      1.2,
+      1.4,
+      1.2
+    ],
+    "fullSFT_minus_FastWAM_RoboTwin_clean/random": [
+      -2.36,
+      -0.2
+    ]
+  },
+  "fastwam_orig_suites_vs_fastwam_paper": {
+    "HINT_paper_released_avg_4suites": 96.55,
+    "Fast-WAM_own_report_LIBERO_avg (Fast-WAM arXiv:2603.16666 표 2)": 97.6,
+    "difference": -1.05,
+    "note": "평가 프로토콜이 다를 수 있다. 본 논문이 재평가 조건을 밝히지 않았다."
+  }
+}
