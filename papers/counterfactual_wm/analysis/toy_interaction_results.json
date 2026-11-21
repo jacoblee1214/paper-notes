@@ -1,0 +1,126 @@
+{
+ "hs": [
+  0.1,
+  0.2,
+  0.4,
+  0.8
+ ],
+ "n_states": 400,
+ "n_draws": 256,
+ "rho": {
+  "additive": [
+   {
+    "h": 0.1,
+    "rho": 5.35283e-13,
+    "residual_error": 1.11563e-18,
+    "tr_var_contrast": 1.11563e-18
+   },
+   {
+    "h": 0.2,
+    "rho": 1.3573e-10,
+    "residual_error": 4.44803e-15,
+    "tr_var_contrast": 4.44803e-15
+   },
+   {
+    "h": 0.4,
+    "rho": 3.37599e-08,
+    "residual_error": 1.69569e-11,
+    "tr_var_contrast": 1.69569e-11
+   },
+   {
+    "h": 0.8,
+    "rho": 7.94591e-06,
+    "residual_error": 5.67359e-08,
+    "tr_var_contrast": 5.67359e-08
+   }
+  ],
+  "gain": [
+   {
+    "h": 0.1,
+    "rho": 1.92719,
+    "residual_error": 1.45832e-06,
+    "tr_var_contrast": 1.45832e-06
+   },
+   {
+    "h": 0.2,
+    "rho": 1.92714,
+    "residual_error": 2.29298e-05,
+    "tr_var_contrast": 2.29298e-05
+   },
+   {
+    "h": 0.4,
+    "rho": 1.92709,
+    "residual_error": 0.000351436,
+    "tr_var_contrast": 0.000351436
+   },
+   {
+    "h": 0.8,
+    "rho": 1.92773,
+    "residual_error": 0.0049979,
+    "tr_var_contrast": 0.0049979
+   }
+  ],
+  "saturating": [
+   {
+    "h": 0.1,
+    "rho": 0.0656192,
+    "residual_error": 8.88402e-08,
+    "tr_var_contrast": 8.88402e-08
+   },
+   {
+    "h": 0.2,
+    "rho": 0.065619,
+    "residual_error": 1.39688e-06,
+    "tr_var_contrast": 1.39688e-06
+   },
+   {
+    "h": 0.4,
+    "rho": 0.0656139,
+    "residual_error": 2.14077e-05,
+    "tr_var_contrast": 2.14077e-05
+   },
+   {
+    "h": 0.8,
+    "rho": 0.06552,
+    "residual_error": 0.000303827,
+    "tr_var_contrast": 0.000303827
+   }
+  ],
+  "damping": [
+   {
+    "h": 0.1,
+    "rho": 0.00250008,
+    "residual_error": 1.44862e-10,
+    "tr_var_contrast": 1.44862e-10
+   },
+   {
+    "h": 0.2,
+    "rho": 0.0100328,
+    "residual_error": 9.0457e-09,
+    "tr_var_contrast": 9.0457e-09
+   },
+   {
+    "h": 0.4,
+    "rho": 0.0401291,
+    "residual_error": 5.45895e-07,
+    "tr_var_contrast": 5.45895e-07
+   },
+   {
+    "h": 0.8,
+    "rho": 0.15697,
+    "residual_error": 2.99877e-05,
+    "tr_var_contrast": 2.99877e-05
+   }
+  ]
+ },
+ "loglog_slope": {
+  "additive": 7.94,
+  "gain": 0.0,
+  "saturating": -0.0,
+  "damping": 1.99
+ },
+ "checks": {
+  "additive_rho_below_1e4": true,
+  "residual_error_equals_trvar_rel_1e9": true
+ }
+}
