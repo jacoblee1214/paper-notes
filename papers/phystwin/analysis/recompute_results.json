@@ -1,0 +1,201 @@
+{
+  "check_table1_ours_equals_table3_full": {
+    "recon": true,
+    "future": true
+  },
+  "improvement_table1": {
+    "recon_vs_gs": {
+      "cd": 64.3,
+      "track": 59.1,
+      "iou": 12.3,
+      "psnr": 1.954,
+      "ssim": 0.005,
+      "lpips": 34.6
+    },
+    "recon_vs_spring": {
+      "cd": 87.8,
+      "track": 82.0,
+      "iou": 26.8,
+      "psnr": 4.769,
+      "ssim": 0.017,
+      "lpips": 66.7
+    },
+    "future_vs_gs": {
+      "cd": 70.7,
+      "track": 68.6,
+      "iou": 22.7,
+      "psnr": 3.077,
+      "ssim": 0.017,
+      "lpips": 43.3
+    },
+    "future_vs_spring": {
+      "cd": 80.6,
+      "track": 76.6,
+      "iou": 26.1,
+      "psnr": 3.129,
+      "ssim": 0.017,
+      "lpips": 51.3
+    }
+  },
+  "improvement_table2_gs_to_ours": {
+    "cd": 55.2,
+    "track": 52.6,
+    "iou": 8.78,
+    "psnr": 1.146,
+    "ssim": 0.004,
+    "lpips": 29.9
+  },
+  "future_over_recon_ratio_ours": {
+    "cd": 2.4,
+    "track": 2.44,
+    "iou": 0.86,
+    "psnr": 0.91,
+    "ssim": 1.0,
+    "lpips": 1.62
+  },
+  "table2_ours_minus_table1_future_ours": {
+    "cd": 0.001,
+    "track": -0.004,
+    "iou": -0.32,
+    "psnr": 0.582,
+    "ssim": -0.003,
+    "lpips": -0.008
+  },
+  "ablation_error_increase_pct_vs_full": {
+    "recon": {
+      "zero": {
+        "cd": 40.0,
+        "track": 33.3,
+        "lpips": 14.7
+      },
+      "first": {
+        "cd": 60.0,
+        "track": 33.3,
+        "lpips": 8.8
+      }
+    },
+    "future": {
+      "zero": {
+        "cd": 16.7,
+        "track": 13.6,
+        "lpips": 10.9
+      },
+      "first": {
+        "cd": 58.3,
+        "track": 54.5,
+        "lpips": 21.8
+      }
+    }
+  },
+  "scenarios_from_repo_data_config": {
+    "n": 22,
+    "shape_prior_false": 9,
+    "cloth_cases": 8,
+    "shape_prior_true": 13
+  },
+  "split_example": {
+    "frame_len": 100,
+    "train": 70,
+    "test": 30
+  },
+  "sd_max_for_p005_vs_gs_dynamics_n22": {
+    "recon_cd": {
+      "diff": 0.009,
+      "sd_max": 0.0203,
+      "sd_max_over_baseline_mean_pct": 145.0
+    },
+    "recon_track": {
+      "diff": 0.013,
+      "sd_max": 0.0293,
+      "sd_max_over_baseline_mean_pct": 133.3
+    },
+    "recon_iou": {
+      "diff": 12.3,
+      "sd_max": 27.7417,
+      "sd_max_over_baseline_mean_pct": 38.5
+    },
+    "recon_psnr": {
+      "diff": 1.954,
+      "sd_max": 4.4071,
+      "sd_max_over_baseline_mean_pct": 16.8
+    },
+    "recon_ssim": {
+      "diff": 0.005,
+      "sd_max": 0.0113,
+      "sd_max_over_baseline_mean_pct": 1.2
+    },
+    "recon_lpips": {
+      "diff": 0.018,
+      "sd_max": 0.0406,
+      "sd_max_over_baseline_mean_pct": 78.1
+    },
+    "future_cd": {
+      "diff": 0.029,
+      "sd_max": 0.0654,
+      "sd_max_over_baseline_mean_pct": 159.5
+    },
+    "future_track": {
+      "diff": 0.048,
+      "sd_max": 0.1083,
+      "sd_max_over_baseline_mean_pct": 154.7
+    },
+    "future_iou": {
+      "diff": 22.7,
+      "sd_max": 51.1982,
+      "sd_max_over_baseline_mean_pct": 102.8
+    },
+    "future_psnr": {
+      "diff": 3.077,
+      "sd_max": 6.9399,
+      "sd_max_over_baseline_mean_pct": 30.8
+    },
+    "future_ssim": {
+      "diff": 0.017,
+      "sd_max": 0.0383,
+      "sd_max_over_baseline_mean_pct": 4.1
+    },
+    "future_lpips": {
+      "diff": 0.042,
+      "sd_max": 0.0947,
+      "sd_max_over_baseline_mean_pct": 97.7
+    }
+  },
+  "t_crit_df21": 2.0796,
+  "sd_max_table2_n22": {
+    "cd": {
+      "diff": 0.016,
+      "sd_max": 0.0361,
+      "sd_max_over_baseline_mean_pct": 124.4
+    },
+    "track": {
+      "diff": 0.02,
+      "sd_max": 0.0451,
+      "sd_max_over_baseline_mean_pct": 118.7
+    },
+    "iou": {
+      "diff": 8.78,
+      "sd_max": 19.8026,
+      "sd_max_over_baseline_mean_pct": 31.2
+    },
+    "psnr": {
+      "diff": 1.146,
+      "sd_max": 2.5847,
+      "sd_max_over_baseline_mean_pct": 10.3
+    },
+    "ssim": {
+      "diff": 0.004,
+      "sd_max": 0.009,
+      "sd_max_over_baseline_mean_pct": 1.0
+    },
+    "lpips": {
+      "diff": 0.02,
+      "sd_max": 0.0451,
+      "sd_max_over_baseline_mean_pct": 67.3
+    }
+  },
+  "sign_test_n22": {
+    "min_wins_for_two_sided_p_lt_0.05": 17,
+    "p_if_all_22_win_two_sided": 4.76837158203125e-07
+  },
+  "confidence_intervals": "계산 불가: 시나리오별 값, SD, 실패 사례 수가 논문에 없음"
+}
