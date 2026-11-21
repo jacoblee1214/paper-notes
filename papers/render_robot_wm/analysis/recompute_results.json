@@ -1,0 +1,257 @@
+{
+  "headline_gain_vs_action_only": {
+    "Doppel_single_expert": {
+      "val": {
+        "per_dataset_db": {
+          "Droid": 1.469,
+          "Bridge": 0.328,
+          "RoboMind": 0.63
+        },
+        "mean_db": 0.809
+      },
+      "ood": {
+        "per_dataset_db": {
+          "Droid": 1.207,
+          "Bridge": 1.138,
+          "RoboMind": 0.192
+        },
+        "mean_db": 0.846
+      }
+    },
+    "Doppel-3": {
+      "val": {
+        "per_dataset_db": {
+          "Droid": 1.409,
+          "Bridge": 0.261,
+          "RoboMind": 0.591
+        },
+        "mean_db": 0.754
+      },
+      "ood": {
+        "per_dataset_db": {
+          "Droid": 1.181,
+          "Bridge": 1.89,
+          "RoboMind": 0.344
+        },
+        "mean_db": 1.138
+      }
+    },
+    "Doppel-8": {
+      "val": {
+        "per_dataset_db": {
+          "Droid": 1.931,
+          "Bridge": 0.254,
+          "RoboMind": 0.828
+        },
+        "mean_db": 1.004
+      },
+      "ood": {
+        "per_dataset_db": {
+          "Droid": 1.391,
+          "Bridge": 1.654,
+          "RoboMind": 0.561
+        },
+        "mean_db": 1.202
+      }
+    }
+  },
+  "table10_paired_doppel8_vs_doppel3": [
+    {
+      "dataset": "Droid",
+      "split": "val",
+      "d_psnr": 0.52,
+      "se": 0.03,
+      "ci95": [
+        0.461,
+        0.579
+      ],
+      "z": 17.3,
+      "better_share": 0.92,
+      "sign_test_p": 2.3e-37,
+      "d_arm": 0.7,
+      "d_obj": 0.69
+    },
+    {
+      "dataset": "Droid",
+      "split": "ood",
+      "d_psnr": 0.21,
+      "se": 0.03,
+      "ci95": [
+        0.151,
+        0.269
+      ],
+      "z": 7.0,
+      "better_share": 0.73,
+      "sign_test_p": 5.7e-11,
+      "d_arm": 0.34,
+      "d_obj": 0.13
+    },
+    {
+      "dataset": "Bridge",
+      "split": "val",
+      "d_psnr": -0.01,
+      "se": 0.06,
+      "ci95": [
+        -0.128,
+        0.108
+      ],
+      "z": -0.2,
+      "better_share": 0.57,
+      "sign_test_p": 0.056,
+      "d_arm": 0.09,
+      "d_obj": 0.12
+    },
+    {
+      "dataset": "Bridge",
+      "split": "ood",
+      "d_psnr": -0.24,
+      "se": 0.05,
+      "ci95": [
+        -0.338,
+        -0.142
+      ],
+      "z": -4.8,
+      "better_share": 0.38,
+      "sign_test_p": 0.00085,
+      "d_arm": -0.01,
+      "d_obj": -0.08
+    },
+    {
+      "dataset": "RoboMind",
+      "split": "val",
+      "d_psnr": 0.24,
+      "se": 0.04,
+      "ci95": [
+        0.162,
+        0.318
+      ],
+      "z": 6.0,
+      "better_share": 0.75,
+      "sign_test_p": 8.4e-13,
+      "d_arm": 0.42,
+      "d_obj": 0.14
+    },
+    {
+      "dataset": "RoboMind",
+      "split": "ood",
+      "d_psnr": 0.22,
+      "se": 0.04,
+      "ci95": [
+        0.142,
+        0.298
+      ],
+      "z": 5.5,
+      "better_share": 0.72,
+      "sign_test_p": 4e-10,
+      "d_arm": 0.34,
+      "d_obj": 0.16
+    }
+  ],
+  "table10_note": "SE가 클립 단위면 같은 에피소드의 창(window)이 독립이 아니어서 과소 추정될 가능성이 크다. 논문 부록 A.10.3은 에피소드 단위 5000회 부트스트랩을 말하지만 표에는 SE만 있다.",
+  "table13_vs_table10_region_delta": {
+    "Droid-val": {
+      "d_arm_recomputed": 0.7,
+      "d_obj_recomputed": 0.69
+    },
+    "Droid-ood": {
+      "d_arm_recomputed": 0.34,
+      "d_obj_recomputed": 0.13
+    },
+    "Bridge-val": {
+      "d_arm_recomputed": 0.08,
+      "d_obj_recomputed": 0.12
+    },
+    "Bridge-ood": {
+      "d_arm_recomputed": -0.01,
+      "d_obj_recomputed": -0.08
+    },
+    "RoboMind-val": {
+      "d_arm_recomputed": 0.42,
+      "d_obj_recomputed": 0.14
+    },
+    "RoboMind-ood": {
+      "d_arm_recomputed": 0.34,
+      "d_obj_recomputed": 0.16
+    }
+  },
+  "bridge_ood_moving_object_claim": {
+    "psnr_obj_gain_vs_action_only": 3.35,
+    "scs_obj_gain_vs_action_only": 0.053,
+    "note": "Doppel 단일 전문가(0.838)와 Doppel-3(0.843)의 SCSobj가 Doppel-8(0.831)보다 높다. 주장은 action-only 대비만 맞다."
+  },
+  "draw_efficiency": {
+    "reduction_pct_from_1216k_vs_3356k": 63.8,
+    "reduction_pct_from_table_labels_1p2_vs_3p4": 64.7,
+    "mean_psnr_doppel_1p2M": 24.464,
+    "mean_psnr_actiononly_3p4M": 23.617,
+    "all6_psnr_doppel_1p2_beats_ao_3p4": true,
+    "min_psnr_margin_db": 0.028,
+    "mean_scs_doppel_1p2M": 0.917,
+    "mean_scs_actiononly_3p4M": 0.8997,
+    "all6_scs_doppel_1p2_beats_ao_3p4": true,
+    "note": "Bridge val 여유는 +0.03 dB, +0.002 SCS로 매우 작다. 학습 실행은 seed 반복 없이 하나씩이다."
+  },
+  "table1_sums": {
+    "robot3_clips": 219451,
+    "all8_clips": 803602,
+    "robot3_episodes": 43914,
+    "all8_episodes": 68748,
+    "paper_states": {
+      "robot3_clips": 219451,
+      "all8_clips": 803602,
+      "robot3_episodes": 43914,
+      "all8_episodes": 68748
+    }
+  },
+  "emb8_sampler_vs_clip_share_max_abs_diff": 1e-06,
+  "emb8_sampler_weight_sum": 1.0,
+  "table4_row_check": {
+    "Droid": 0.0,
+    "Bridge": -0.1,
+    "RoboMind": 0.0,
+    "ABC": 0.0,
+    "T-Rex": 0.0,
+    "Ego-Exo4D": 0.0,
+    "GigaHands": 0.1,
+    "OakInk2": 0.0
+  },
+  "table4_totals": {
+    "train": 593.1,
+    "val": 32.6,
+    "test": 70.9,
+    "total": 696.6,
+    "paper": {
+      "train": 593.1,
+      "val": 32.6,
+      "test": 70.8,
+      "total": 696.6
+    }
+  },
+  "steps": {
+    "doppel3_steps": 49476,
+    "doppel8_steps": 189240,
+    "paper": {
+      "doppel3": 49500,
+      "doppel8": 189000
+    }
+  },
+  "doppel3_draws_total": 12665856,
+  "doppel3_implied_passes_uniform_sampling": {
+    "Droid": 50.6,
+    "Bridge": 68.2,
+    "RoboMind": 57.0
+  },
+  "doppel3_implied_passes_note": "균등 샘플링(각 1/3)이면 데이터셋마다 pass 수가 다르다. 논문의 '약 51 pass'와 Bridge(약 68)/Droid(약 51) 차이가 난다. 'pass'의 정의(중복 샘플 포함 여부)에 따라 달라진다.",
+  "doppel8_passes_proportional": 60.3,
+  "params": {
+    "render_action_adapter_M": 30.566,
+    "paper_M": 30.5,
+    "action_only_adapter_M_by_formula": 4.206,
+    "paper_action_only_M": 4.2
+  },
+  "rollout": {
+    "windows_for_25p6s": 8,
+    "frames_out": 129,
+    "fps_implied": 5.0
+  }
+}
