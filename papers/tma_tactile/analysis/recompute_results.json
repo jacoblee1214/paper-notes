@@ -1,0 +1,253 @@
+{
+  "real_totals": {
+    "TMA": {
+      "S": 27,
+      "G": 32,
+      "n": 40
+    },
+    "RMA": {
+      "S": 0,
+      "G": 1,
+      "n": 40
+    },
+    "Reactive": {
+      "S": 6,
+      "G": 23,
+      "n": 40
+    }
+  },
+  "real_consistency_S_le_G_le_10": true,
+  "real_comparisons": [
+    {
+      "comparison": "TMA vs RMA (S)",
+      "k1": 27,
+      "k2": 0,
+      "n": 40,
+      "diff_pp": 67.5,
+      "newcombe95_pp": [
+        49.7,
+        79.9
+      ],
+      "fisher_p": 1.57e-11
+    },
+    {
+      "comparison": "TMA vs RMA (G)",
+      "k1": 32,
+      "k2": 1,
+      "n": 40,
+      "diff_pp": 77.5,
+      "newcombe95_pp": [
+        59.5,
+        87.2
+      ],
+      "fisher_p": 1.94e-13
+    },
+    {
+      "comparison": "TMA vs Reactive (S)",
+      "k1": 27,
+      "k2": 6,
+      "n": 40,
+      "diff_pp": 52.5,
+      "newcombe95_pp": [
+        31.6,
+        67.2
+      ],
+      "fisher_p": 3.14e-06
+    },
+    {
+      "comparison": "TMA vs Reactive (G)",
+      "k1": 32,
+      "k2": 23,
+      "n": 40,
+      "diff_pp": 22.5,
+      "newcombe95_pp": [
+        2.2,
+        40.5
+      ],
+      "fisher_p": 0.0525
+    }
+  ],
+  "real_TMA_grasp_to_door_conversion": 0.844,
+  "real_Reactive_conversion_S_over_G": 0.261,
+  "real_per_knob_S_fisher": [
+    {
+      "knob": "Knob 1",
+      "TMA_S": 8,
+      "Reactive_S": 3,
+      "fisher_p": 0.0698
+    },
+    {
+      "knob": "Knob 2",
+      "TMA_S": 6,
+      "Reactive_S": 1,
+      "fisher_p": 0.0573
+    },
+    {
+      "knob": "Knob 3",
+      "TMA_S": 6,
+      "Reactive_S": 0,
+      "fisher_p": 0.0108
+    },
+    {
+      "knob": "Knob 4",
+      "TMA_S": 7,
+      "Reactive_S": 2,
+      "fisher_p": 0.0698
+    }
+  ],
+  "sim_ci": {
+    "TMA (cone, 16-d)": {
+      "G": {
+        "mean": 91.3,
+        "sd_seed": 1.0,
+        "binom_wilson95_pct": [
+          90.79,
+          91.79
+        ],
+        "seed_t95_pct": [
+          88.82,
+          93.78
+        ]
+      },
+      "S": {
+        "mean": 80.9,
+        "sd_seed": 1.4,
+        "binom_wilson95_pct": [
+          80.2,
+          81.59
+        ],
+        "seed_t95_pct": [
+          77.42,
+          84.38
+        ]
+      }
+    },
+    "Binary contact (4-d)": {
+      "G": {
+        "mean": 88.4,
+        "sd_seed": 1.2,
+        "binom_wilson95_pct": [
+          87.83,
+          88.96
+        ],
+        "seed_t95_pct": [
+          85.42,
+          91.38
+        ]
+      },
+      "S": {
+        "mean": 73.6,
+        "sd_seed": 1.4,
+        "binom_wilson95_pct": [
+          72.81,
+          74.37
+        ],
+        "seed_t95_pct": [
+          70.12,
+          77.08
+        ]
+      }
+    },
+    "Normal load (4-d)": {
+      "G": {
+        "mean": 86.5,
+        "sd_seed": 1.1,
+        "binom_wilson95_pct": [
+          85.88,
+          87.09
+        ],
+        "seed_t95_pct": [
+          83.77,
+          89.23
+        ]
+      },
+      "S": {
+        "mean": 74.2,
+        "sd_seed": 1.5,
+        "binom_wilson95_pct": [
+          73.42,
+          74.97
+        ],
+        "seed_t95_pct": [
+          70.47,
+          77.93
+        ]
+      }
+    },
+    "Shear only (8-d)": {
+      "G": {
+        "mean": 72.8,
+        "sd_seed": 1.6,
+        "binom_wilson95_pct": [
+          72.01,
+          73.58
+        ],
+        "seed_t95_pct": [
+          68.83,
+          76.77
+        ]
+      },
+      "S": {
+        "mean": 65.1,
+        "sd_seed": 1.7,
+        "binom_wilson95_pct": [
+          64.25,
+          65.93
+        ],
+        "seed_t95_pct": [
+          60.88,
+          69.32
+        ]
+      }
+    }
+  },
+  "sim_tests": [
+    {
+      "comparison": "TMA (cone, 16-d) vs Binary contact (4-d) (G)",
+      "diff_pp": 2.9,
+      "welch_t_sd": 3.22,
+      "welch_p_sd": 0.0339,
+      "welch_p_if_se": 0.1393
+    },
+    {
+      "comparison": "TMA (cone, 16-d) vs Binary contact (4-d) (S)",
+      "diff_pp": 7.3,
+      "welch_t_sd": 6.39,
+      "welch_p_sd": 0.0031,
+      "welch_p_if_se": 0.0211
+    },
+    {
+      "comparison": "TMA (cone, 16-d) vs Normal load (4-d) (G)",
+      "diff_pp": 4.8,
+      "welch_t_sd": 5.59,
+      "welch_p_sd": 0.0052,
+      "welch_p_if_se": 0.0324
+    },
+    {
+      "comparison": "TMA (cone, 16-d) vs Normal load (4-d) (S)",
+      "diff_pp": 6.7,
+      "welch_t_sd": 5.66,
+      "welch_p_sd": 0.0049,
+      "welch_p_if_se": 0.0311
+    },
+    {
+      "comparison": "TMA (cone, 16-d) vs Shear only (8-d) (G)",
+      "diff_pp": 18.5,
+      "welch_t_sd": 16.98,
+      "welch_p_sd": 0.0002,
+      "welch_p_if_se": 0.0014
+    },
+    {
+      "comparison": "TMA (cone, 16-d) vs Shear only (8-d) (S)",
+      "diff_pp": 15.8,
+      "welch_t_sd": 12.43,
+      "welch_p_sd": 0.0003,
+      "welch_p_if_se": 0.0023
+    }
+  ],
+  "fig5_vs_tableI_TMA_S": {
+    "fig5_TMA_TConv_pct": 80,
+    "tableI_TMA_S_pct": 80.9,
+    "diff_pp": 0.9
+  }
+}
