@@ -1,0 +1,865 @@
+{
+ "source": "arXiv:2602.10093 v1 (논문 Table I–IV 값을 옮겨 적음)",
+ "checks": {
+  "integer_counts": "모든 셀이 정수 횟수로 떨어짐 (표 I–III: 100회, 표 IV: 20회)",
+  "consistency": {
+   "abstract_17.1_equals_t1_diff": true,
+   "abstract_25_equals_t4_diff": true,
+   "table2_full_equals_table1_ours": true,
+   "table3_200K_equals_table1_ours": true,
+   "table3_0_equals_table2_scratch": true,
+   "table3_avg_0_recomputed_34.0_vs_reported_34.2": [
+    34.0,
+    34.2
+   ],
+   "table3_avg_1K_5K_recomputed_vs_fig4_label": [
+    38.25,
+    38.25,
+    38.2,
+    38.2
+   ],
+   "table3_avg_100K_recomputed_vs_fig4_label": [
+    44.25,
+    44.2
+   ],
+   "table3_monotone_claim_holds_for_average": false,
+   "table3_monotone_claim_holds_for_100K_to_50K": false,
+   "dataset_14000_x_14_shapes_vs_205826": [
+    196000,
+    205826
+   ],
+   "real_task_gain_insert_tube_pp": 30,
+   "real_task_gain_insert_usb_pp": 10,
+   "real_task_gain_bottle_upright_pp": 35,
+   "text_contact_gain_7.9_equals_t2": 7.9,
+   "text_shape_gain_7.6_equals_t2": 7.6
+  },
+  "power_note": "과제당 n=100, 과제 평균 차이의 SE는 아래 avg_diff_test 결과 참고"
+ },
+ "tables": {
+  "average_recompute": {
+   "표 I": {
+    "ACT": {
+     "recomputed": 30.875,
+     "reported": 30.9,
+     "match": true
+    },
+    "VITaL": {
+     "recomputed": 40.5,
+     "reported": 40.5,
+     "match": true
+    },
+    "Ours": {
+     "recomputed": 48.0,
+     "reported": 48.0,
+     "match": true
+    }
+   },
+   "표 II": {
+    "Scratch": {
+     "recomputed": 34.0,
+     "reported": 34.0,
+     "match": true
+    },
+    "Contact": {
+     "recomputed": 41.875,
+     "reported": 41.9,
+     "match": true
+    },
+    "Shape": {
+     "recomputed": 41.625,
+     "reported": 41.6,
+     "match": true
+    },
+    "Contact+Shape": {
+     "recomputed": 43.875,
+     "reported": 43.9,
+     "match": true
+    },
+    "Full": {
+     "recomputed": 48.0,
+     "reported": 48.0,
+     "match": true
+    }
+   }
+  },
+  "table3_average": {
+   "cols": [
+    "0",
+    "1K",
+    "5K",
+    "10K",
+    "50K",
+    "100K",
+    "200K"
+   ],
+   "recomputed": [
+    34.0,
+    38.25,
+    38.25,
+    44.125,
+    45.0,
+    44.25,
+    48.0
+   ],
+   "reported_table": [
+    34.2,
+    38.3,
+    38.3,
+    44.1,
+    45.0,
+    44.3,
+    48.0
+   ],
+   "reported_fig4": [
+    34.0,
+    38.2,
+    38.2,
+    44.1,
+    45.0,
+    44.2,
+    48.0
+   ],
+   "match_table": [
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    true
+   ]
+  },
+  "table4_average": {
+   "recomputed": [
+    43.33,
+    68.33
+   ],
+   "reported": [
+    43.3,
+    68.3
+   ]
+  },
+  "table1_wilson": {
+   "ACT": [
+    {
+     "task": "Lift Bottle",
+     "x": 42,
+     "rate": 0.42,
+     "wilson95": [
+      32.79838260663658,
+      51.793513373667366
+     ]
+    },
+    {
+     "task": "Pull-out Key",
+     "x": 28,
+     "rate": 0.28,
+     "wilson95": [
+      20.13968515708077,
+      37.48802878875508
+     ]
+    },
+    {
+     "task": "Lift Can",
+     "x": 20,
+     "rate": 0.2,
+     "wilson95": [
+      13.336693289714837,
+      28.882916636424948
+     ]
+    },
+    {
+     "task": "Put Bottle in Shelf",
+     "x": 28,
+     "rate": 0.28,
+     "wilson95": [
+      20.13968515708077,
+      37.48802878875508
+     ]
+    },
+    {
+     "task": "Insert Hole",
+     "x": 19,
+     "rate": 0.19,
+     "wilson95": [
+      12.514751467908535,
+      27.778845455769236
+     ]
+    },
+    {
+     "task": "Insert HDMI",
+     "x": 15,
+     "rate": 0.15,
+     "wilson95": [
+      9.305985248417562,
+      23.28355966541218
+     ]
+    },
+    {
+     "task": "Insert Tube",
+     "x": 45,
+     "rate": 0.45,
+     "wilson95": [
+      35.61453790959721,
+      54.75539707809276
+     ]
+    },
+    {
+     "task": "Grasp Classify",
+     "x": 50,
+     "rate": 0.5,
+     "wilson95": [
+      40.38315296354929,
+      59.61684703645071
+     ]
+    }
+   ],
+   "VITaL": [
+    {
+     "task": "Lift Bottle",
+     "x": 72,
+     "rate": 0.72,
+     "wilson95": [
+      62.51197121124493,
+      79.86031484291924
+     ]
+    },
+    {
+     "task": "Pull-out Key",
+     "x": 47,
+     "rate": 0.47,
+     "wilson95": [
+      37.51081788809403,
+      56.71114310451995
+     ]
+    },
+    {
+     "task": "Lift Can",
+     "x": 8,
+     "rate": 0.08,
+     "wilson95": [
+      4.109346127318457,
+      14.99810776927723
+     ]
+    },
+    {
+     "task": "Put Bottle in Shelf",
+     "x": 32,
+     "rate": 0.32,
+     "wilson95": [
+      23.669147266401065,
+      41.66261868928281
+     ]
+    },
+    {
+     "task": "Insert Hole",
+     "x": 25,
+     "rate": 0.25,
+     "wilson95": [
+      17.545211311910354,
+      34.304463626539466
+     ]
+    },
+    {
+     "task": "Insert HDMI",
+     "x": 6,
+     "rate": 0.06,
+     "wilson95": [
+      2.7786123800628144,
+      12.476815511608857
+     ]
+    },
+    {
+     "task": "Insert Tube",
+     "x": 34,
+     "rate": 0.34,
+     "wilson95": [
+      25.461520736693878,
+      43.722271223914014
+     ]
+    },
+    {
+     "task": "Grasp Classify",
+     "x": 100,
+     "rate": 1.0,
+     "wilson95": [
+      96.30065012310038,
+      100.00000000000003
+     ]
+    }
+   ],
+   "Ours": [
+    {
+     "task": "Lift Bottle",
+     "x": 71,
+     "rate": 0.71,
+     "wilson95": [
+      61.461108745546454,
+      78.98516430615571
+     ]
+    },
+    {
+     "task": "Pull-out Key",
+     "x": 46,
+     "rate": 0.46,
+     "wilson95": [
+      36.56080823843,
+      55.73513975172199
+     ]
+    },
+    {
+     "task": "Lift Can",
+     "x": 29,
+     "rate": 0.29,
+     "wilson95": [
+      21.014835693844297,
+      38.53889125445355
+     ]
+    },
+    {
+     "task": "Put Bottle in Shelf",
+     "x": 31,
+     "rate": 0.31,
+     "wilson95": [
+      22.779697154852567,
+      40.62605579836929
+     ]
+    },
+    {
+     "task": "Insert Hole",
+     "x": 24,
+     "rate": 0.24,
+     "wilson95": [
+      16.69132550788802,
+      33.2323364280998
+     ]
+    },
+    {
+     "task": "Insert HDMI",
+     "x": 28,
+     "rate": 0.28,
+     "wilson95": [
+      20.13968515708077,
+      37.48802878875508
+     ]
+    },
+    {
+     "task": "Insert Tube",
+     "x": 56,
+     "rate": 0.56,
+     "wilson95": [
+      46.228104575723734,
+      65.32797343904832
+     ]
+    },
+    {
+     "task": "Grasp Classify",
+     "x": 99,
+     "rate": 0.99,
+     "wilson95": [
+      94.55138032509936,
+      99.82325679553905
+     ]
+    }
+   ]
+  },
+  "ours_vs_act_per_task": [
+   {
+    "task": "Lift Bottle",
+    "diff_pp": 28.999999999999996,
+    "newcombe95_pp": [
+     15.32873997890129,
+     41.183292315714645
+    ],
+    "p_fisher": 5.791833846109196e-05,
+    "p_holm": 0.00040542836922764373
+   },
+   {
+    "task": "Pull-out Key",
+    "diff_pp": 18.0,
+    "newcombe95_pp": [
+     4.616389447987657,
+     30.512293771142602
+    ],
+    "p_fisher": 0.012531096557596263,
+    "p_holm": 0.07518657934557757
+   },
+   {
+    "task": "Lift Can",
+    "diff_pp": 8.999999999999996,
+    "newcombe95_pp": [
+     -2.94441530448344,
+     20.635725275186832
+    ],
+    "p_fisher": 0.18810777702937245,
+    "p_holm": 0.6284443313787746
+   },
+   {
+    "task": "Put Bottle in Shelf",
+    "diff_pp": 2.9999999999999973,
+    "newcombe95_pp": [
+     -9.553727301570007,
+     15.427610376220176
+    ],
+    "p_fisher": 0.7566484873041367,
+    "p_holm": 0.982907974576784
+   },
+   {
+    "task": "Insert Hole",
+    "diff_pp": 4.999999999999999,
+    "newcombe95_pp": [
+     -6.42299655816846,
+     16.282485738728543
+    ],
+    "p_fisher": 0.491453987288392,
+    "p_holm": 0.982907974576784
+   },
+   {
+    "task": "Insert HDMI",
+    "diff_pp": 13.000000000000004,
+    "newcombe95_pp": [
+     1.5806344239156653,
+     24.06546403398807
+    ],
+    "p_fisher": 0.038098545003646865,
+    "p_holm": 0.19049272501823433
+   },
+   {
+    "task": "Insert Tube",
+    "diff_pp": 11.000000000000004,
+    "newcombe95_pp": [
+     -2.80788587489961,
+     24.23245960243139
+    ],
+    "p_fisher": 0.15711108284469366,
+    "p_holm": 0.6284443313787746
+   },
+   {
+    "task": "Grasp Classify",
+    "diff_pp": 49.0,
+    "newcombe95_pp": [
+     38.404059082157744,
+     58.652020445165455
+    ],
+    "p_fisher": 1.5264392291627324e-17,
+    "p_holm": 1.221151383330186e-16
+   }
+  ],
+  "ours_vs_vital_per_task": [
+   {
+    "task": "Lift Bottle",
+    "diff_pp": -1.0000000000000009,
+    "newcombe95_pp": [
+     -13.360218274533292,
+     11.401029767424484
+    ],
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "task": "Pull-out Key",
+    "diff_pp": -0.9999999999999953,
+    "newcombe95_pp": [
+     -14.542696980592758,
+     12.594760870955907
+    ],
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "task": "Lift Can",
+    "diff_pp": 20.999999999999996,
+    "newcombe95_pp": [
+     10.382261947725333,
+     31.301826727396566
+    ],
+    "p_fisher": 0.0002008453409005197,
+    "p_holm": 0.001405917386303638
+   },
+   {
+    "task": "Put Bottle in Shelf",
+    "diff_pp": -1.0000000000000009,
+    "newcombe95_pp": [
+     -13.686196388217251,
+     11.730438228994004
+    ],
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "task": "Insert Hole",
+    "diff_pp": -1.0000000000000009,
+    "newcombe95_pp": [
+     -12.831727101706,
+     10.866335167425866
+    ],
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "task": "Insert HDMI",
+    "diff_pp": 22.000000000000004,
+    "newcombe95_pp": [
+     11.815026332815904,
+     32.019981461765774
+    ],
+    "p_fisher": 4.732117540029806e-05,
+    "p_holm": 0.0003785694032023845
+   },
+   {
+    "task": "Insert Tube",
+    "diff_pp": 22.000000000000004,
+    "newcombe95_pp": [
+     8.2154979076378,
+     34.64581814709904
+    ],
+    "p_fisher": 0.002742802705474563,
+    "p_holm": 0.016456816232847376
+   },
+   {
+    "task": "Grasp Classify",
+    "diff_pp": -1.0000000000000009,
+    "newcombe95_pp": [
+     -5.4486196749006455,
+     2.78984712925448
+    ],
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   }
+  ],
+  "ours_vs_act_average": {
+   "diff_pp": 17.125,
+   "ci95_pp": [
+    12.811260294129928,
+    21.43873970587007
+   ],
+   "z": 7.780951630977007,
+   "p_two_sided": 7.105427357601002e-15
+  },
+  "ours_vs_vital_average": {
+   "diff_pp": 7.500000000000001,
+   "ci95_pp": [
+    3.4559412096261526,
+    11.54405879037385
+   ],
+   "z": 3.6349619928846475,
+   "p_two_sided": 0.00027802162020118537
+  },
+  "ours_vs_act_naive_pooled": {
+   "chi2": 49.11430248970053,
+   "p": 2.4147308420832485e-12
+  },
+  "ours_vs_vital_naive_pooled": {
+   "chi2": 9.120620202173747,
+   "p": 0.0025274426068072416
+  },
+  "table2_ablation_average": {
+   "contact_vs_scratch": {
+    "diff_pp": 7.874999999999998,
+    "ci95_pp": [
+     3.6181294064770997,
+     12.131870593522898
+    ],
+    "z": 3.625903033906019,
+    "p_two_sided": 0.0002879533997075523
+   },
+   "shape_vs_scratch": {
+    "diff_pp": 7.624999999999998,
+    "ci95_pp": [
+     3.336520111974406,
+     11.913479888025591
+    ],
+    "z": 3.484917824082567,
+    "p_two_sided": 0.0004922882042355248
+   },
+   "full_vs_scratch": {
+    "diff_pp": 13.999999999999998,
+    "ci95_pp": [
+     9.682991545062713,
+     18.317008454937284
+    ],
+    "z": 6.3562534765521175,
+    "p_two_sided": 2.067337412370307e-10
+   },
+   "full_vs_contact_shape": {
+    "diff_pp": 4.125,
+    "ci95_pp": [
+     -0.06163352229449359,
+     8.311633522294494
+    ],
+    "z": 1.9311458614531414,
+    "p_two_sided": 0.05346501687167815
+   },
+   "contact_shape_vs_scratch": {
+    "diff_pp": 9.874999999999998,
+    "ci95_pp": [
+     5.634234709395012,
+     14.115765290604987
+    ],
+    "z": 4.564034713941647,
+    "p_two_sided": 5.01797759788758e-06
+   }
+  },
+  "full_vs_contact_shape_per_task": [
+   {
+    "task": "Lift Bottle",
+    "diff_pp": 8.999999999999996,
+    "newcombe95_pp": [
+     -4.047727257288503,
+     21.633754069768397
+    ],
+    "p_fisher": 0.23060246292492692,
+    "p_holm": 1.0
+   },
+   {
+    "task": "Pull-out Key",
+    "diff_pp": 18.0,
+    "newcombe95_pp": [
+     4.616389447987657,
+     30.512293771142602
+    ],
+    "p_fisher": 0.012531096557596263,
+    "p_holm": 0.1002487724607701
+   },
+   {
+    "task": "Lift Can",
+    "diff_pp": 10.999999999999998,
+    "newcombe95_pp": [
+     -0.7849884053696049,
+     22.43143060320859
+    ],
+    "p_fisher": 0.09474948709134172,
+    "p_holm": 0.6632464096393921
+   },
+   {
+    "task": "Put Bottle in Shelf",
+    "diff_pp": -8.000000000000002,
+    "newcombe95_pp": [
+     -20.788833230258827,
+     5.166529687929803
+    ],
+    "p_fisher": 0.2993757379928734,
+    "p_holm": 1.0
+   },
+   {
+    "task": "Insert Hole",
+    "diff_pp": 3.0,
+    "newcombe95_pp": [
+     -8.578279858605137,
+     14.486701917276202
+    ],
+    "p_fisher": 0.73513131491636,
+    "p_holm": 1.0
+   },
+   {
+    "task": "Insert HDMI",
+    "diff_pp": 5.000000000000002,
+    "newcombe95_pp": [
+     -7.065955386473265,
+     16.88450816143015
+    ],
+    "p_fisher": 0.5166309004449287,
+    "p_holm": 1.0
+   },
+   {
+    "task": "Insert Tube",
+    "diff_pp": -3.9999999999999925,
+    "newcombe95_pp": [
+     -17.325584804502792,
+     9.529450097924805
+    ],
+    "p_fisher": 0.6674630305154597,
+    "p_holm": 1.0
+   },
+   {
+    "task": "Grasp Classify",
+    "diff_pp": -1.0000000000000009,
+    "newcombe95_pp": [
+     -5.4486196749006455,
+     2.78984712925448
+    ],
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   }
+  ],
+  "table3_scaling": {
+   "monotone_steps_per_task": {
+    "Lift Bottle": {
+     "down_steps": 2,
+     "fraction_down_steps": 0.3333333333333333
+    },
+    "Pull-out Key": {
+     "down_steps": 2,
+     "fraction_down_steps": 0.3333333333333333
+    },
+    "Lift Can": {
+     "down_steps": 3,
+     "fraction_down_steps": 0.5
+    },
+    "Put Bottle in Shelf": {
+     "down_steps": 3,
+     "fraction_down_steps": 0.5
+    },
+    "Insert Hole": {
+     "down_steps": 2,
+     "fraction_down_steps": 0.3333333333333333
+    },
+    "Insert HDMI": {
+     "down_steps": 2,
+     "fraction_down_steps": 0.3333333333333333
+    },
+    "Insert Tube": {
+     "down_steps": 1,
+     "fraction_down_steps": 0.16666666666666666
+    },
+    "Grasp Classify": {
+     "down_steps": 2,
+     "fraction_down_steps": 0.3333333333333333
+    }
+   },
+   "0_vs_200K_per_task": [
+    {
+     "task": "Lift Bottle",
+     "0": 56,
+     "200K": 71,
+     "p_fisher": 0.03940729832445656,
+     "p_holm": 0.23644378994673937
+    },
+    {
+     "task": "Pull-out Key",
+     "0": 40,
+     "200K": 46,
+     "p_fisher": 0.4752454158971638,
+     "p_holm": 1.0
+    },
+    {
+     "task": "Lift Can",
+     "0": 33,
+     "200K": 29,
+     "p_fisher": 0.6466614642285309,
+     "p_holm": 1.0
+    },
+    {
+     "task": "Put Bottle in Shelf",
+     "0": 34,
+     "200K": 31,
+     "p_fisher": 0.762839051449734,
+     "p_holm": 1.0
+    },
+    {
+     "task": "Insert Hole",
+     "0": 3,
+     "200K": 24,
+     "p_fisher": 1.4451473562409538e-05,
+     "p_holm": 0.00010116031493686676
+    },
+    {
+     "task": "Insert HDMI",
+     "0": 16,
+     "200K": 28,
+     "p_fisher": 0.05966086527618755,
+     "p_holm": 0.29830432638093773
+    },
+    {
+     "task": "Insert Tube",
+     "0": 45,
+     "200K": 56,
+     "p_fisher": 0.15711108284469366,
+     "p_holm": 0.6284443313787746
+    },
+    {
+     "task": "Grasp Classify",
+     "0": 45,
+     "200K": 99,
+     "p_fisher": 6.198877738612894e-20,
+     "p_holm": 4.959102190890315e-19
+    }
+   ],
+   "spearman_avg_1K_to_200K": {
+    "rho": 0.9276336570439175,
+    "p": 0.007665844187473165,
+    "n_points": 6
+   },
+   "avg_step_100K_to_50K_pp": -0.75
+  },
+  "table4_real": {
+   "per_task": [
+    {
+     "task": "Insert Tube",
+     "vision_x": 11,
+     "vision_plus_x": 17,
+     "diff_pp": 29.999999999999993,
+     "newcombe95_pp": [
+      1.5282312660029829,
+      52.96962500280928
+     ],
+     "p_fisher": 0.08235877701951116,
+     "vision_wilson95": [
+      34.20853410191274,
+      74.18021429623597
+     ],
+     "plus_wilson95": [
+      63.95811333571358,
+      94.76312545132734
+     ],
+     "p_holm": 0.16471755403902233
+    },
+    {
+     "task": "Insert USB",
+     "vision_x": 3,
+     "vision_plus_x": 5,
+     "diff_pp": 10.0,
+     "newcombe95_pp": [
+      -15.171072518422893,
+      33.950352086123324
+     ],
+     "p_fisher": 0.6947646947646948,
+     "vision_wilson95": [
+      5.236874548672649,
+      36.04188666428642
+     ],
+     "plus_wilson95": [
+      11.186170069997626,
+      46.870087939258866
+     ],
+     "p_holm": 0.6947646947646948
+    },
+    {
+     "task": "Bottle Upright",
+     "vision_x": 12,
+     "vision_plus_x": 19,
+     "diff_pp": 35.0,
+     "newcombe95_pp": [
+      9.023877303429833,
+      56.73434878934813
+     ],
+     "p_fisher": 0.019656019656019656,
+     "vision_wilson95": [
+      38.65814992347542,
+      78.11934687282198
+     ],
+     "plus_wilson95": [
+      76.38688045357189,
+      99.11185512976645
+     ],
+     "p_holm": 0.05896805896805897
+    }
+   ],
+   "average_diff": {
+    "diff_pp": 24.999999999999996,
+    "ci95_pp": [
+     10.556308566636357,
+     39.44369143336364
+    ],
+    "z": 3.392484547739255,
+    "p_two_sided": 0.0006926183847562051
+   },
+   "pooled_60_vs_60_fisher_p": 0.009756242199421835,
+   "pooled_counts": [
+    26,
+    41
+   ]
+  }
+ }
+}
