@@ -1,0 +1,259 @@
+{
+  "table1_consistency": {
+    "ACT": {
+      "sum_sizes_equals_overall": true,
+      "failures_match": true
+    },
+    "DTR": {
+      "sum_sizes_equals_overall": true,
+      "failures_match": true
+    },
+    "TacPilot": {
+      "sum_sizes_equals_overall": true,
+      "failures_match": true
+    }
+  },
+  "table1_tests": [
+    {
+      "pair": "TacPilot vs DTR",
+      "size": "4x8",
+      "rate_a": 0.8125,
+      "rate_b": 0.8125,
+      "diff_pp": 0.0,
+      "newcombe95_pp": [
+        -27.1,
+        27.1
+      ],
+      "fisher_p": 1.0,
+      "paired_min_p_mcnemar": 1.0
+    },
+    {
+      "pair": "TacPilot vs DTR",
+      "size": "5x10",
+      "rate_a": 0.9286,
+      "rate_b": 0.5714,
+      "diff_pp": 35.7,
+      "newcombe95_pp": [
+        3.3,
+        61.0
+      ],
+      "fisher_p": 0.0768,
+      "paired_min_p_mcnemar": 0.0625
+    },
+    {
+      "pair": "TacPilot vs DTR",
+      "size": "all",
+      "rate_a": 0.8667,
+      "rate_b": 0.7,
+      "diff_pp": 16.7,
+      "newcombe95_pp": [
+        -4.4,
+        36.3
+      ],
+      "fisher_p": 0.2092,
+      "paired_min_p_mcnemar": 0.0625
+    },
+    {
+      "pair": "TacPilot vs ACT",
+      "size": "4x8",
+      "rate_a": 0.8125,
+      "rate_b": 0.4375,
+      "diff_pp": 37.5,
+      "newcombe95_pp": [
+        4.0,
+        61.5
+      ],
+      "fisher_p": 0.0659,
+      "paired_min_p_mcnemar": 0.03125
+    },
+    {
+      "pair": "TacPilot vs ACT",
+      "size": "5x10",
+      "rate_a": 0.9286,
+      "rate_b": 0.5714,
+      "diff_pp": 35.7,
+      "newcombe95_pp": [
+        3.3,
+        61.0
+      ],
+      "fisher_p": 0.0768,
+      "paired_min_p_mcnemar": 0.0625
+    },
+    {
+      "pair": "TacPilot vs ACT",
+      "size": "all",
+      "rate_a": 0.8667,
+      "rate_b": 0.5,
+      "diff_pp": 36.7,
+      "newcombe95_pp": [
+        13.2,
+        55.3
+      ],
+      "fisher_p": 0.0048,
+      "paired_min_p_mcnemar": 0.00098
+    },
+    {
+      "pair": "DTR vs ACT",
+      "size": "4x8",
+      "rate_a": 0.8125,
+      "rate_b": 0.4375,
+      "diff_pp": 37.5,
+      "newcombe95_pp": [
+        4.0,
+        61.5
+      ],
+      "fisher_p": 0.0659,
+      "paired_min_p_mcnemar": 0.03125
+    },
+    {
+      "pair": "DTR vs ACT",
+      "size": "5x10",
+      "rate_a": 0.5714,
+      "rate_b": 0.5714,
+      "diff_pp": 0.0,
+      "newcombe95_pp": [
+        -32.6,
+        32.6
+      ],
+      "fisher_p": 1.0,
+      "paired_min_p_mcnemar": 1.0
+    },
+    {
+      "pair": "DTR vs ACT",
+      "size": "all",
+      "rate_a": 0.7,
+      "rate_b": 0.5,
+      "diff_pp": 20.0,
+      "newcombe95_pp": [
+        -4.6,
+        41.5
+      ],
+      "fisher_p": 0.1872,
+      "paired_min_p_mcnemar": 0.03125
+    }
+  ],
+  "table1_wilson95": {
+    "ACT": {
+      "4x8": [
+        0.231,
+        0.668
+      ],
+      "5x10": [
+        0.326,
+        0.786
+      ],
+      "all": [
+        0.332,
+        0.668
+      ]
+    },
+    "DTR": {
+      "4x8": [
+        0.57,
+        0.934
+      ],
+      "5x10": [
+        0.326,
+        0.786
+      ],
+      "all": [
+        0.521,
+        0.833
+      ]
+    },
+    "TacPilot": {
+      "4x8": [
+        0.57,
+        0.934
+      ],
+      "5x10": [
+        0.685,
+        0.987
+      ],
+      "all": [
+        0.703,
+        0.947
+      ]
+    }
+  },
+  "power_n_per_arm_for_observed_effect": 95,
+  "table2B_overall_check": {
+    "G/G": {
+      "mean_of_phases": 0.947851,
+      "reported": 0.947851,
+      "match": true
+    },
+    "A/G": {
+      "mean_of_phases": 0.861627,
+      "reported": 0.861627,
+      "match": true
+    },
+    "G/A": {
+      "mean_of_phases": 1.037262,
+      "reported": 1.037262,
+      "match": true
+    },
+    "A/A": {
+      "mean_of_phases": 0.951038,
+      "reported": 0.951039,
+      "match": true
+    }
+  },
+  "table2B_A_over_G_gripper_gate_reduction_pct": 79.9,
+  "table2B_AG_vs_GG_overall_pct": 9.1,
+  "table2C_overall_check": {
+    "Full": {
+      "mean_of_phases": 0.947851,
+      "reported": 0.947851,
+      "match": true
+    },
+    "No rich": {
+      "mean_of_phases": 7.295912,
+      "reported": 7.295912,
+      "match": true
+    },
+    "No events": {
+      "mean_of_phases": 0.976991,
+      "reported": 0.976991,
+      "match": true
+    },
+    "Neither": {
+      "mean_of_phases": 7.487956,
+      "reported": 7.487956,
+      "match": true
+    }
+  },
+  "table2C_no_rich_ratio": 7.7,
+  "table2C_no_events_overall_pct": 3.07,
+  "table2C_no_events_grasp_pct": 18.2,
+  "table2A_costs": {
+    "Periodic/Full": {
+      "regions_reduction_pct": 0.0,
+      "enc_reduction_pct": 0.0,
+      "regions_per_call": 32.0
+    },
+    "Event/Full": {
+      "regions_reduction_pct": 14.07,
+      "enc_reduction_pct": 14.51,
+      "regions_per_call": 32.0
+    },
+    "Periodic/Local": {
+      "regions_reduction_pct": 56.42,
+      "enc_reduction_pct": 35.23,
+      "regions_per_call": 22.28
+    },
+    "Event/Local": {
+      "regions_reduction_pct": 56.42,
+      "enc_reduction_pct": 37.35,
+      "regions_per_call": 22.28
+    }
+  },
+  "table2A_event_full_regions_claim_14.1pct": 14.07,
+  "table2A_event_local_enc_s_claim_37.3pct": 37.35,
+  "table2A_ms_per_call_check": {
+    "Periodic/Full": 2.062,
+    "Event/Full": 2.051,
+    "Periodic/Local": 2.133,
+    "Event/Local": 2.064
+  }
+}
