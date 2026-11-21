@@ -1,0 +1,509 @@
+{
+  "generated_by": "analysis/recompute.py",
+  "source": "arXiv:2611.25683 v1, Tables 1-3",
+  "table1_mean_check": {
+    "ACT (Vision Only)": {
+      "mean_recomputed": 30.875,
+      "paper_avg": 30.9,
+      "match": true
+    },
+    "π0.5 (Without Tactile)": {
+      "mean_recomputed": 41.375,
+      "paper_avg": 41.4,
+      "match": true
+    },
+    "LingBot-VA": {
+      "mean_recomputed": 31.375,
+      "paper_avg": 31.4,
+      "match": true
+    },
+    "ACT + UniVTAC": {
+      "mean_recomputed": 48.0,
+      "paper_avg": 48.0,
+      "match": true
+    },
+    "VITaL": {
+      "mean_recomputed": 40.5,
+      "paper_avg": 40.5,
+      "match": true
+    },
+    "FTP-1": {
+      "mean_recomputed": 64.75,
+      "paper_avg": 64.8,
+      "match": true
+    },
+    "T-Rex": {
+      "mean_recomputed": 81.25,
+      "paper_avg": 81.3,
+      "match": false
+    },
+    "N0-VTLA": {
+      "mean_recomputed": 83.125,
+      "paper_avg": 83.1,
+      "match": true
+    },
+    "TipDex-VTLA": {
+      "mean_recomputed": 84.875,
+      "paper_avg": 84.9,
+      "match": true
+    }
+  },
+  "table1_pairwise": {
+    "N0-VTLA": {
+      "tipdex_success": "679/800",
+      "baseline_success": "665/800",
+      "diff_pp": 1.75,
+      "fisher_p_pooled_800": 0.3754,
+      "caveat": "과제 간 독립 가정, 같은 시드·초기 상태 여부 불명. 지표로만 사용"
+    },
+    "T-Rex": {
+      "tipdex_success": "679/800",
+      "baseline_success": "650/800",
+      "diff_pp": 3.63,
+      "fisher_p_pooled_800": 0.0619,
+      "caveat": "과제 간 독립 가정, 같은 시드·초기 상태 여부 불명. 지표로만 사용"
+    },
+    "π0.5 (Without Tactile)": {
+      "tipdex_success": "679/800",
+      "baseline_success": "331/800",
+      "diff_pp": 43.5,
+      "fisher_p_pooled_800": 0.0,
+      "caveat": "과제 간 독립 가정, 같은 시드·초기 상태 여부 불명. 지표로만 사용"
+    }
+  },
+  "table1_tipdex_task_wilson95": {
+    "Lift Bottle": {
+      "k": 100,
+      "n": 100,
+      "wilson95_pct": [
+        96.3,
+        100.0
+      ]
+    },
+    "Pull-out Key": {
+      "k": 97,
+      "n": 100,
+      "wilson95_pct": [
+        91.5,
+        99.0
+      ]
+    },
+    "Lift Can": {
+      "k": 87,
+      "n": 100,
+      "wilson95_pct": [
+        79.0,
+        92.2
+      ]
+    },
+    "Put Bottle": {
+      "k": 80,
+      "n": 100,
+      "wilson95_pct": [
+        71.1,
+        86.7
+      ]
+    },
+    "Insert Hole": {
+      "k": 89,
+      "n": 100,
+      "wilson95_pct": [
+        81.4,
+        93.7
+      ]
+    },
+    "Insert HDMI": {
+      "k": 30,
+      "n": 100,
+      "wilson95_pct": [
+        21.9,
+        39.6
+      ]
+    },
+    "Insert Tube": {
+      "k": 96,
+      "n": 100,
+      "wilson95_pct": [
+        90.2,
+        98.4
+      ]
+    },
+    "Grasp Classify": {
+      "k": 100,
+      "n": 100,
+      "wilson95_pct": [
+        96.3,
+        100.0
+      ]
+    }
+  },
+  "table2": {
+    "normal": {
+      "ACT": {
+        "k_per_task": [
+          0,
+          6,
+          4,
+          5
+        ],
+        "k_total": "15/80",
+        "mean_pct_recomputed": 18.75,
+        "paper_avg": 18.8,
+        "match": true,
+        "wilson95_pct": [
+          11.7,
+          28.7
+        ]
+      },
+      "π0.5": {
+        "k_per_task": [
+          4,
+          16,
+          8,
+          16
+        ],
+        "k_total": "44/80",
+        "mean_pct_recomputed": 55.0,
+        "paper_avg": 55.0,
+        "match": true,
+        "wilson95_pct": [
+          44.1,
+          65.4
+        ]
+      },
+      "T-Rex": {
+        "k_per_task": [
+          13,
+          16,
+          12,
+          16
+        ],
+        "k_total": "57/80",
+        "mean_pct_recomputed": 71.25,
+        "paper_avg": 71.3,
+        "match": false,
+        "wilson95_pct": [
+          60.5,
+          80.0
+        ]
+      },
+      "N0-VTLA": {
+        "k_per_task": [
+          12,
+          17,
+          14,
+          12
+        ],
+        "k_total": "55/80",
+        "mean_pct_recomputed": 68.75,
+        "paper_avg": 68.8,
+        "match": true,
+        "wilson95_pct": [
+          57.9,
+          77.8
+        ]
+      },
+      "TipDex-VTLA": {
+        "k_per_task": [
+          18,
+          19,
+          15,
+          18
+        ],
+        "k_total": "70/80",
+        "mean_pct_recomputed": 87.5,
+        "paper_avg": 87.5,
+        "match": true,
+        "wilson95_pct": [
+          78.5,
+          93.1
+        ]
+      },
+      "tests_vs_tipdex_fisher": {
+        "ACT": {
+          "p_raw": 0.0,
+          "p_holm": 0.0,
+          "diff_pp": 68.75
+        },
+        "π0.5": {
+          "p_raw": 8e-06,
+          "p_holm": 2.5e-05,
+          "diff_pp": 32.5
+        },
+        "T-Rex": {
+          "p_raw": 0.018156,
+          "p_holm": 0.018156,
+          "diff_pp": 16.25
+        },
+        "N0-VTLA": {
+          "p_raw": 0.006868,
+          "p_holm": 0.013736,
+          "diff_pp": 18.75
+        }
+      }
+    },
+    "unseen": {
+      "ACT": {
+        "k_per_task": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "k_total": "0/80",
+        "mean_pct_recomputed": 0.0,
+        "paper_avg": 0.0,
+        "match": true,
+        "wilson95_pct": [
+          0.0,
+          4.6
+        ]
+      },
+      "π0.5": {
+        "k_per_task": [
+          4,
+          6,
+          5,
+          4
+        ],
+        "k_total": "19/80",
+        "mean_pct_recomputed": 23.75,
+        "paper_avg": 23.8,
+        "match": true,
+        "wilson95_pct": [
+          15.8,
+          34.1
+        ]
+      },
+      "T-Rex": {
+        "k_per_task": [
+          4,
+          6,
+          6,
+          2
+        ],
+        "k_total": "18/80",
+        "mean_pct_recomputed": 22.5,
+        "paper_avg": 22.5,
+        "match": true,
+        "wilson95_pct": [
+          14.7,
+          32.8
+        ]
+      },
+      "N0-VTLA": {
+        "k_per_task": [
+          6,
+          4,
+          7,
+          8
+        ],
+        "k_total": "25/80",
+        "mean_pct_recomputed": 31.25,
+        "paper_avg": 31.3,
+        "match": false,
+        "wilson95_pct": [
+          22.2,
+          42.1
+        ]
+      },
+      "TipDex-VTLA": {
+        "k_per_task": [
+          14,
+          18,
+          12,
+          15
+        ],
+        "k_total": "59/80",
+        "mean_pct_recomputed": 73.75,
+        "paper_avg": 73.8,
+        "match": true,
+        "wilson95_pct": [
+          63.2,
+          82.1
+        ]
+      },
+      "tests_vs_tipdex_fisher": {
+        "ACT": {
+          "p_raw": 0.0,
+          "p_holm": 0.0,
+          "diff_pp": 73.75
+        },
+        "π0.5": {
+          "p_raw": 0.0,
+          "p_holm": 0.0,
+          "diff_pp": 50.0
+        },
+        "T-Rex": {
+          "p_raw": 0.0,
+          "p_holm": 0.0,
+          "diff_pp": 51.25
+        },
+        "N0-VTLA": {
+          "p_raw": 0.0,
+          "p_holm": 0.0,
+          "diff_pp": 42.5
+        }
+      }
+    }
+  },
+  "table2_text_claim_42_5pp": {
+    "computed_diff_pp_unseen_vs_N0": 42.5,
+    "paper_text": 42.5
+  },
+  "table3": {
+    "normal": {
+      "Full": {
+        "k_per_task": [
+          18,
+          19,
+          15,
+          18
+        ],
+        "k_total": "70/80",
+        "mean_pct_recomputed": 87.5,
+        "paper_avg": 87.5,
+        "match": true,
+        "wilson95_pct": [
+          78.5,
+          93.1
+        ]
+      },
+      "w/o VASE": {
+        "k_per_task": [
+          17,
+          19,
+          14,
+          18
+        ],
+        "k_total": "68/80",
+        "mean_pct_recomputed": 85.0,
+        "paper_avg": 85.0,
+        "match": true,
+        "wilson95_pct": [
+          75.6,
+          91.2
+        ],
+        "fisher_p_vs_full": 0.818946,
+        "diff_vs_full_pp": -2.5
+      },
+      "w/o Tactile Verification": {
+        "k_per_task": [
+          16,
+          17,
+          12,
+          18
+        ],
+        "k_total": "63/80",
+        "mean_pct_recomputed": 78.75,
+        "paper_avg": 78.8,
+        "match": true,
+        "wilson95_pct": [
+          68.6,
+          86.3
+        ],
+        "fisher_p_vs_full": 0.204801,
+        "diff_vs_full_pp": -8.75
+      },
+      "w/o Gate Head": {
+        "k_per_task": [
+          16,
+          17,
+          13,
+          17
+        ],
+        "k_total": "63/80",
+        "mean_pct_recomputed": 78.75,
+        "paper_avg": 78.8,
+        "match": true,
+        "wilson95_pct": [
+          68.6,
+          86.3
+        ],
+        "fisher_p_vs_full": 0.204801,
+        "diff_vs_full_pp": -8.75
+      }
+    },
+    "unseen": {
+      "Full": {
+        "k_per_task": [
+          14,
+          18,
+          12,
+          15
+        ],
+        "k_total": "59/80",
+        "mean_pct_recomputed": 73.75,
+        "paper_avg": 73.8,
+        "match": true,
+        "wilson95_pct": [
+          63.2,
+          82.1
+        ]
+      },
+      "w/o VASE": {
+        "k_per_task": [
+          9,
+          8,
+          11,
+          6
+        ],
+        "k_total": "34/80",
+        "mean_pct_recomputed": 42.5,
+        "paper_avg": 42.5,
+        "match": true,
+        "wilson95_pct": [
+          32.3,
+          53.4
+        ],
+        "fisher_p_vs_full": 0.000105,
+        "diff_vs_full_pp": -31.25
+      },
+      "w/o Tactile Verification": {
+        "k_per_task": [
+          13,
+          16,
+          9,
+          12
+        ],
+        "k_total": "50/80",
+        "mean_pct_recomputed": 62.5,
+        "paper_avg": 62.5,
+        "match": true,
+        "wilson95_pct": [
+          51.5,
+          72.3
+        ],
+        "fisher_p_vs_full": 0.174421,
+        "diff_vs_full_pp": -11.25
+      },
+      "w/o Gate Head": {
+        "k_per_task": [
+          6,
+          9,
+          8,
+          9
+        ],
+        "k_total": "32/80",
+        "mean_pct_recomputed": 40.0,
+        "paper_avg": 40.0,
+        "match": true,
+        "wilson95_pct": [
+          30.0,
+          51.0
+        ],
+        "fisher_p_vs_full": 2.8e-05,
+        "diff_vs_full_pp": -33.75
+      }
+    },
+    "claim_11_3pp": {
+      "diff_pp": 11.25,
+      "fisher_p_two_sided": 0.1744,
+      "note": "논문은 11.3 pp 이득을 주장하지만 검정 결과를 제시하지 않음"
+    }
+  },
+  "power_11_3pp": {
+    "n_per_arm_for_80pct_power": 269,
+    "trials_per_arm_in_paper": 80
+  }
+}
