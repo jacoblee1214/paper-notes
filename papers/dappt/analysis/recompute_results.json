@@ -1,0 +1,202 @@
+{
+  "table4_improvement_factor": {
+    "Scoop": {
+      "factor": 3.819,
+      "pct_diff_best_vs_avg": 281.9
+    },
+    "Rod-Roll": {
+      "factor": 1.839,
+      "pct_diff_best_vs_avg": 83.9
+    },
+    "Scrape": {
+      "factor": 1.941,
+      "pct_diff_best_vs_avg": -48.5
+    },
+    "Mouse-Wheel": {
+      "factor": 1.609,
+      "pct_diff_best_vs_avg": 60.9
+    },
+    "Dispenser": {
+      "factor": 2.33,
+      "pct_diff_best_vs_avg": 133.0
+    },
+    "Spray": {
+      "factor": 1.617,
+      "pct_diff_best_vs_avg": 61.7
+    }
+  },
+  "claim_1_5_to_3_8_check": {
+    "reported_range": [
+      1.5,
+      3.8
+    ],
+    "computed_min": 1.609,
+    "computed_max": 3.819,
+    "min_task": "Mouse-Wheel",
+    "note": "상한 3.8은 Scoop(3.82)과 일치. 하한 1.5는 어떤 과제도 만들지 않음(최솟값 Mouse-Wheel 1.61)."
+  },
+  "table1_vs_simtoolreal": {
+    "Scrape (남은 %, 낮을수록 좋음)": {
+      "ours_best": 17,
+      "simtoolreal": 95,
+      "ratio_ours_over_base": 0.179
+    },
+    "Rod-Roll (cm)": {
+      "ours_best": 2.85,
+      "simtoolreal": 0,
+      "ratio_ours_over_base": "기준선 0이라 비율 없음"
+    },
+    "Scoop (g)": {
+      "ours_best": 13.9,
+      "simtoolreal": 9.2,
+      "ratio_ours_over_base": 1.511
+    },
+    "Mouse-Wheel (rad)": {
+      "ours_best": 0.37,
+      "simtoolreal": 0.19,
+      "ratio_ours_over_base": 1.947
+    },
+    "Dispenser (#)": {
+      "ours_best": 2260.0,
+      "simtoolreal": 0,
+      "ratio_ours_over_base": "기준선 0이라 비율 없음"
+    },
+    "Spray (#)": {
+      "ours_best": 9120.0,
+      "simtoolreal": 0,
+      "ratio_ours_over_base": "기준선 0이라 비율 없음"
+    }
+  },
+  "table1_vs_table4_best_match": {
+    "Scoop": [
+      13.9,
+      13.9
+    ],
+    "Rod-Roll": [
+      2.85,
+      2.85
+    ],
+    "Scrape": [
+      17,
+      17.0
+    ],
+    "Mouse-Wheel": [
+      0.37,
+      0.37
+    ],
+    "Dispenser": [
+      2260.0,
+      2260.0
+    ],
+    "Spray": [
+      9120.0,
+      9120.0
+    ]
+  },
+  "table2_drop_pct": {
+    "Mouse-Wheel": {
+      "computed": 48.65
+    },
+    "Dispenser": {
+      "computed": 57.52
+    },
+    "Scoop": {
+      "computed": 97.7
+    }
+  },
+  "table2_reported_drop_pct": {
+    "Mouse-Wheel": 48.6,
+    "Dispenser": 57.5,
+    "Scoop": 97.7
+  },
+  "table2_note": "Mouse-Wheel 고정 도메인 값 0.19 rad가 표 I의 SimToolReal 값 0.19 rad와 같습니다. 우연일 수도 있고 복사일 수도 있어 저자 확인이 필요합니다.",
+  "table3_real_world": {
+    "Scooping": {
+      "motion": "20/20 = 100%",
+      "motion_wilson95": [
+        83.9,
+        100.0
+      ],
+      "task": "14/20 = 70%",
+      "task_wilson95": [
+        48.1,
+        85.5
+      ],
+      "task_binom_p_vs_0.5": 0.0577,
+      "metric": 7.7
+    },
+    "Rod-Rolling": {
+      "motion": "16/20 = 80%",
+      "motion_wilson95": [
+        58.4,
+        91.9
+      ],
+      "task": "11/20 = 55%",
+      "task_wilson95": [
+        34.2,
+        74.2
+      ],
+      "task_binom_p_vs_0.5": 0.4119,
+      "metric": 2.7
+    },
+    "Scraping": {
+      "motion": "19/20 = 95%",
+      "motion_wilson95": [
+        76.4,
+        99.1
+      ],
+      "task": "19/20 = 95%",
+      "task_wilson95": [
+        76.4,
+        99.1
+      ],
+      "task_binom_p_vs_0.5": 0.0,
+      "metric": 29
+    },
+    "Mouse-Wheel": {
+      "motion": "19/20 = 95%",
+      "motion_wilson95": [
+        76.4,
+        99.1
+      ],
+      "task": "19/20 = 95%",
+      "task_wilson95": [
+        76.4,
+        99.1
+      ],
+      "task_binom_p_vs_0.5": 0.0,
+      "metric": 0.33
+    },
+    "Dispenser": {
+      "motion": "18/20 = 90%",
+      "motion_wilson95": [
+        69.9,
+        97.2
+      ],
+      "task": "14/20 = 70%",
+      "task_wilson95": [
+        48.1,
+        85.5
+      ],
+      "task_binom_p_vs_0.5": 0.0577,
+      "metric": null
+    },
+    "Spray": {
+      "motion": "16/20 = 80%",
+      "motion_wilson95": [
+        58.4,
+        91.9
+      ],
+      "task": "10/20 = 50%",
+      "task_wilson95": [
+        29.9,
+        70.1
+      ],
+      "task_binom_p_vs_0.5": 0.5881,
+      "metric": null
+    }
+  },
+  "table3_note": "기준선(실로봇 SimToolReal 등)이 없어 두 집단 검정은 불가합니다. 작업 지표 평균의 SD와 시행별 값이 없어 평균의 신뢰구간도 못 만듭니다. 0.5 기준은 임의입니다.",
+  "table3_metric_ci": "불가: SD 또는 시행별 값 없음",
+  "sim_ci": "불가: 에피소드 수, 시드 수, 분산 모두 미기재"
+}
