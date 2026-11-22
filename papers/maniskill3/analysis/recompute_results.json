@@ -1,0 +1,129 @@
+{
+  "sim2real_cube": {
+    "k": 22,
+    "n": 24,
+    "rate_exact": 0.9167,
+    "reported": 0.916,
+    "wilson95": [
+      0.742,
+      0.977
+    ],
+    "note": "보고 91.6%는 22/24=91.67%의 절삭 표기. 실험 간 분산은 원자료 없음"
+  },
+  "peract": {
+    "assumed_n_per_setting": 100,
+    "rows": {
+      "PushCube": {
+        "no_aug_no_mv": {
+          "k": 96,
+          "n": 100,
+          "wilson95": [
+            0.902,
+            0.984
+          ]
+        },
+        "aug_no_mv": {
+          "k": 98,
+          "n": 100,
+          "wilson95": [
+            0.93,
+            0.994
+          ]
+        },
+        "aug_mv": {
+          "k": 100,
+          "n": 100,
+          "wilson95": [
+            0.963,
+            1.0
+          ]
+        }
+      },
+      "StackCube": {
+        "no_aug_no_mv": {
+          "k": 38,
+          "n": 100,
+          "wilson95": [
+            0.291,
+            0.478
+          ]
+        },
+        "aug_no_mv": {
+          "k": 47,
+          "n": 100,
+          "wilson95": [
+            0.375,
+            0.567
+          ]
+        },
+        "aug_mv": {
+          "k": 55,
+          "n": 100,
+          "wilson95": [
+            0.452,
+            0.644
+          ]
+        }
+      }
+    },
+    "stack_no_aug_vs_aug_mv": {
+      "diff": 0.17,
+      "z": 2.41,
+      "p_two_sided": 0.0159
+    },
+    "push_no_aug_vs_aug_mv": {
+      "diff": 0.04,
+      "z": 2.02,
+      "p_two_sided": 0.0434
+    }
+  },
+  "lfd_1000demo_bc_identical_positions": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "lfd_note": "Table II(state)와 III(RGB)의 BC 1000 demos 행이 네 과제 모두 같음(0.03, 0.81, 0.00, 0.00). 복사 오류 가능성, 저자 확인 필요",
+  "lfd_rgb_dp_1000_wilson_if_n100": {
+    "PickCube": [
+      0.963,
+      1.0
+    ],
+    "PushCube": [
+      0.779,
+      0.915
+    ],
+    "StackCube": [
+      0.722,
+      0.875
+    ],
+    "PegInsertion": [
+      0.0,
+      0.037
+    ]
+  },
+  "memory_ratios": {
+    "fig2_128env_isaac_over_ms3": 4.03,
+    "appendix_min_camera_isaac_over_ms3": 2.82,
+    "abstract_claim_range": "2-3x",
+    "fig31_32_text_claim": 24,
+    "note": "본문 III-B 3.5 대 14.1 GB는 약 4.0배, 부록 1.7 대 4.8 GB는 약 2.8배. 초록 2-3배와 맞고, 부록 XI-C의 '24x'는 위 두 비율과 맞지 않음"
+  },
+  "real2sim_corr": {
+    "r": 0.9284,
+    "p_two_sided_by_n_points": {
+      "4": 0.0716,
+      "8": 0.00087
+    },
+    "note": "점 개수(과제 4 x 정책 2 = 8 가정 등) 미보고. 정책 간 평균이면 n=4가 맞음"
+  },
+  "speedup_claims": {
+    "state_claim_x": 15,
+    "state_ms3_min": 1,
+    "state_implied_ms2_min": 15,
+    "rgb_claim_x": 8,
+    "rgb_ms3_min": 10,
+    "rgb_implied_ms2_min": 80,
+    "note": "그림 11에서 읽은 값이 아니라 본문 서술값. 그림 재판독은 하지 않음. v1은 '약 5x'(v1 결과 절)"
+  }
+}
