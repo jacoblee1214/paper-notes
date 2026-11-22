@@ -1,0 +1,495 @@
+{
+  "V1_table1_average_check": [
+    {
+      "block": "block1",
+      "method": "Diffusion Policy (scratch)",
+      "mean_of_suites": 72.4,
+      "reported": 72.4,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block1",
+      "method": "Octo (fine-tuned)",
+      "mean_of_suites": 75.075,
+      "reported": 75.1,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block1",
+      "method": "DiT Policy (fine-tuned)",
+      "mean_of_suites": 82.425,
+      "reported": 82.4,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block1",
+      "method": "OpenVLA (fine-tuned)",
+      "mean_of_suites": 76.5,
+      "reported": 76.5,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block1",
+      "method": "OpenVLA + PD&AC",
+      "mean_of_suites": 90.25,
+      "reported": 90.2,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block1",
+      "method": "OpenVLA + PD&AC, Cont-Diffusion",
+      "mean_of_suites": 95.4,
+      "reported": 95.4,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block1",
+      "method": "OpenVLA-OFT (제3자 영상만)",
+      "mean_of_suites": 95.35,
+      "reported": 95.3,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block2",
+      "method": "MDT (scratch, 언어 2%)",
+      "mean_of_suites": 76.075,
+      "reported": 76.1,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block2",
+      "method": "OpenVLA-OFT (원본 데이터)",
+      "mean_of_suites": 94.45,
+      "reported": 94.5,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block3",
+      "method": "pi0+FAST (fine-tuned)",
+      "mean_of_suites": 85.5,
+      "reported": 85.5,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block3",
+      "method": "pi0 (fine-tuned)",
+      "mean_of_suites": 94.15,
+      "reported": 94.2,
+      "ok_within_rounding": true
+    },
+    {
+      "block": "block3",
+      "method": "OpenVLA-OFT",
+      "mean_of_suites": 97.1,
+      "reported": 97.1,
+      "ok_within_rounding": true
+    }
+  ],
+  "V1_all_ok": true,
+  "V2_trial_count_granularity": {
+    "n=500": {
+      "cells_not_fitting": 27,
+      "examples": [
+        {
+          "method": "Diffusion Policy (scratch)",
+          "suite": "Spatial",
+          "sr": 78.3,
+          "n": 500,
+          "k_expected": 391.5
+        },
+        {
+          "method": "Diffusion Policy (scratch)",
+          "suite": "Object",
+          "sr": 92.5,
+          "n": 500,
+          "k_expected": 462.5
+        },
+        {
+          "method": "Diffusion Policy (scratch)",
+          "suite": "Goal",
+          "sr": 68.3,
+          "n": 500,
+          "k_expected": 341.5
+        },
+        {
+          "method": "Diffusion Policy (scratch)",
+          "suite": "Long",
+          "sr": 50.5,
+          "n": 500,
+          "k_expected": 252.5
+        },
+        {
+          "method": "Octo (fine-tuned)",
+          "suite": "Spatial",
+          "sr": 78.9,
+          "n": 500,
+          "k_expected": 394.5
+        },
+        {
+          "method": "Octo (fine-tuned)",
+          "suite": "Object",
+          "sr": 85.7,
+          "n": 500,
+          "k_expected": 428.5
+        },
+        {
+          "method": "Octo (fine-tuned)",
+          "suite": "Long",
+          "sr": 51.1,
+          "n": 500,
+          "k_expected": 255.5
+        },
+        {
+          "method": "DiT Policy (fine-tuned)",
+          "suite": "Object",
+          "sr": 96.3,
+          "n": 500,
+          "k_expected": 481.5
+        }
+      ]
+    },
+    "n=1500": {
+      "cells_not_fitting": 0,
+      "examples": []
+    }
+  },
+  "V3_efficiency": {
+    "table2": [
+      {
+        "row": "OpenVLA",
+        "throughput_reported": 4.2,
+        "K_over_latency": 4.17,
+        "ok": true
+      },
+      {
+        "row": "+ PD",
+        "throughput_reported": 15.9,
+        "K_over_latency": 15.9,
+        "ok": true
+      },
+      {
+        "row": "+ PD&AC",
+        "throughput_reported": 108.8,
+        "K_over_latency": 108.84,
+        "ok": true
+      },
+      {
+        "row": "+ PD&AC, Cont-L1",
+        "throughput_reported": 109.7,
+        "K_over_latency": 109.74,
+        "ok": true
+      },
+      {
+        "row": "+ PD&AC, Cont-Diffusion T=50",
+        "throughput_reported": 4.2,
+        "K_over_latency": 4.2,
+        "ok": true
+      },
+      {
+        "row": "+ PD&AC, Cont-Diffusion T=10",
+        "throughput_reported": 19.3,
+        "K_over_latency": 19.3,
+        "ok": true
+      },
+      {
+        "row": "+ PD&AC, Cont-Diffusion T=5",
+        "throughput_reported": 35.1,
+        "K_over_latency": 35.1,
+        "ok": true
+      },
+      {
+        "row": "+ PD&AC, Cont-Diffusion T=2",
+        "throughput_reported": 80.3,
+        "K_over_latency": 80.32,
+        "ok": true
+      },
+      {
+        "row": "+ PD&AC, Cont-Diffusion T=1",
+        "throughput_reported": 109.4,
+        "K_over_latency": 109.44,
+        "ok": true
+      },
+      {
+        "row": "+ 추가 입력 (손목, 자세)",
+        "throughput_reported": 71.4,
+        "K_over_latency": 71.43,
+        "ok": true
+      }
+    ],
+    "table3": [
+      {
+        "row": "OpenVLA (K=1)",
+        "throughput_reported": 1.8,
+        "K_over_latency": 1.84,
+        "ok": true
+      },
+      {
+        "row": "OpenVLA-OFT+",
+        "throughput_reported": 77.9,
+        "K_over_latency": 77.88,
+        "ok": true
+      },
+      {
+        "row": "RDT-1B",
+        "throughput_reported": 84.1,
+        "K_over_latency": 84.18,
+        "ok": true
+      },
+      {
+        "row": "Diffusion Policy",
+        "throughput_reported": 267.4,
+        "K_over_latency": 266.67,
+        "ok": true
+      },
+      {
+        "row": "pi0 (JAX)",
+        "throughput_reported": 291.6,
+        "K_over_latency": 290.7,
+        "ok": true
+      },
+      {
+        "row": "ACT",
+        "throughput_reported": 432.8,
+        "K_over_latency": 431.03,
+        "ok": true
+      }
+    ],
+    "all_ok": true,
+    "ratios": {
+      "PD&AC_vs_base_throughput": 25.9,
+      "Cont-L1_vs_base_throughput": 26.12,
+      "PD_vs_base_throughput": 3.79,
+      "PD_vs_base_latency_speedup": 3.81,
+      "AC_latency_increase_pct": 16.9,
+      "OFTplus_vs_base_aloha_throughput": 43.28,
+      "OFTplus_vs_RDT_throughput_pct": 7.4,
+      "OFT_latency_vs_base_speedup": 3.29,
+      "diff_T50_v1_vs_v2_throughput_ratio": 0.42
+    }
+  },
+  "V4_libero_tests": {
+    "assumption": "스위트당 500 시도 (논문 표 I 주석). 베이스라인도 500으로 가정 (원 논문 확인 불가)",
+    "n_per_suite=500": {
+      "pi0": {
+        "oft_minus_base_pp": 2.9,
+        "z": 4.5,
+        "p_two_sided": 6.93e-06
+      },
+      "OpenVLA-FT": {
+        "oft_minus_base_pp": 20.6,
+        "z": 19.25,
+        "p_two_sided": 0.0
+      },
+      "OpenVLA+PD&AC": {
+        "oft_minus_base_pp": 6.9,
+        "z": 8.95,
+        "p_two_sided": 0.0
+      },
+      "OFT_wilson95_pct": [
+        96.27,
+        97.75
+      ]
+    },
+    "n_per_suite=1500": {
+      "pi0": {
+        "oft_minus_base_pp": 2.9,
+        "z": 7.79,
+        "p_two_sided": 6.88e-15
+      },
+      "OpenVLA-FT": {
+        "oft_minus_base_pp": 20.6,
+        "z": 33.33,
+        "p_two_sided": 0.0
+      },
+      "OpenVLA+PD&AC": {
+        "oft_minus_base_pp": 6.9,
+        "z": 15.5,
+        "p_two_sided": 0.0
+      },
+      "OFT_wilson95_pct": [
+        96.64,
+        97.5
+      ]
+    },
+    "per_suite_oft_vs_pi0_n500": [
+      {
+        "suite": "Spatial",
+        "oft": 97.6,
+        "pi0": 96.8,
+        "diff_pp": 0.8,
+        "p_two_sided": 0.443
+      },
+      {
+        "suite": "Object",
+        "oft": 98.4,
+        "pi0": 98.8,
+        "diff_pp": -0.4,
+        "p_two_sided": 0.59
+      },
+      {
+        "suite": "Goal",
+        "oft": 97.9,
+        "pi0": 95.8,
+        "diff_pp": 2.1,
+        "p_two_sided": 0.0573
+      },
+      {
+        "suite": "Long",
+        "oft": 94.5,
+        "pi0": 85.2,
+        "diff_pp": 9.3,
+        "p_two_sided": 1.12e-06
+      }
+    ],
+    "oft_third_person_vs_openvla_ft_pp": 18.8,
+    "oft_third_person_vs_openvla_ft_p": 0.0,
+    "cont_L1_minus_discrete_pp": 5.1,
+    "PDAC_minus_base_pp": 13.7,
+    "L1_minus_diffusion_pp": -0.1,
+    "L1_vs_diffusion_p_n500perSuite": 0.881,
+    "filtered_minus_unfiltered_OFT_pp": 2.6
+  },
+  "V5_aloha": {
+    "tasks": {
+      "fold shorts": {
+        "trials": 10,
+        "scores": {
+          "ACT": 100,
+          "Diffusion Policy": 100,
+          "RDT-1B": 100,
+          "pi0": 100,
+          "OpenVLA-OFT+": 100
+        }
+      },
+      "fold shirt": {
+        "trials": 10,
+        "scores": {
+          "ACT": 94,
+          "Diffusion Policy": 100,
+          "RDT-1B": 96,
+          "pi0": 100,
+          "OpenVLA-OFT+": 100
+        }
+      },
+      "scoop X into bowl": {
+        "trials": 12,
+        "scores": {
+          "ACT": 71.25,
+          "Diffusion Policy": 79.17,
+          "RDT-1B": 73.33,
+          "pi0": 93.33,
+          "OpenVLA-OFT+": 100.0
+        }
+      },
+      "put X into pot": {
+        "trials": 24,
+        "scores": {
+          "ACT": 23.75,
+          "Diffusion Policy": 30.83,
+          "RDT-1B": 44.17,
+          "pi0": 42.08,
+          "OpenVLA-OFT+": 51.25
+        }
+      }
+    },
+    "unweighted_task_mean": {
+      "ACT": 72.25,
+      "Diffusion Policy": 77.5,
+      "RDT-1B": 78.38,
+      "pi0": 83.85,
+      "OpenVLA-OFT+": 87.81
+    },
+    "oft_plus_minus": {
+      "ACT": 15.56,
+      "Diffusion Policy": 10.31,
+      "RDT-1B": 9.43,
+      "pi0": 3.96
+    },
+    "per_task_oft_plus_minus_pi0": {
+      "fold shorts": 0,
+      "fold shirt": 0,
+      "scoop X into bowl": 6.67,
+      "put X into pot": 9.17
+    },
+    "row_sum_checks": {
+      "scoop": true,
+      "pot": true
+    },
+    "no_film_scoop_pot": {
+      "scoop": 35.0,
+      "pot": 31.67
+    },
+    "note": "점수는 부분 점수의 평균이라 시도별 이진 결과가 없다. 구간 추정 불가. 과제당 시도 10–24회."
+  },
+  "V6_bridge": {
+    "mean_openvla": 65.83,
+    "mean_oft": 69.17,
+    "mean_diff_pp": 3.33,
+    "wins_losses_ties": [
+      3,
+      3,
+      0
+    ],
+    "paired_t_p": 0.675,
+    "note": "과제당 10회 평균 점수 6개. 논문 본문 '평균 우위' 주장은 과제 수준에서 확인되지 않는다."
+  },
+  "V7_table14_15": {
+    "t14_oft_minus_single": -0.3,
+    "t14_oftplus_minus_oft_single": 0.2,
+    "t15_oft_minus_scratch_avg": 5.2,
+    "t15_per_suite_diff": {
+      "Spatial": 3.3,
+      "Object": 3.2,
+      "Goal": 6.2,
+      "Long": 8.0,
+      "Average": 5.2
+    },
+    "t15_per_suite_test_n500": [
+      {
+        "suite": "Spatial",
+        "diff": 3.3,
+        "p": 0.00812
+      },
+      {
+        "suite": "Object",
+        "diff": 3.2,
+        "p": 0.00404
+      },
+      {
+        "suite": "Goal",
+        "diff": 6.2,
+        "p": 1.01e-05
+      },
+      {
+        "suite": "Long",
+        "diff": 8.0,
+        "p": 1.6e-05
+      }
+    ]
+  },
+  "V8_v1_v2_diffusion": {
+    "v1": {
+      "throughput_hz": 10.1,
+      "latency_s": 0.792,
+      "K_over_latency": 10.1
+    },
+    "v2": {
+      "throughput_hz": 4.2,
+      "latency_s": 1.907,
+      "K_over_latency": 4.2
+    },
+    "note": "두 판본 모두 내부적으로는 K/지연과 맞지만 같은 행의 값이 4.8배 다르다. 본문 문장은 v1에서 '2배 높다', v2에서 '같다'로 바뀌었다."
+  },
+  "V9_params": {
+    "reported_libero_total_M": 279.0,
+    "sum_of_reported_parts_libero_M": 279.0,
+    "head_libero_computed_M": 151.12,
+    "head_aloha_computed_M": 268.64,
+    "film_aloha_computed_M": 456.24,
+    "reported_aloha_total_M": 853.0,
+    "sum_of_reported_parts_aloha_M": 853.0,
+    "lora_all_linear_estimate_M": 107.9,
+    "lora_reported_M": 111,
+    "note": "LoRA 111M은 구조 추정 약 108M과 약 3% 차이. 투영기 크기와 PEFT의 대상 모듈 정의에 따라 달라진다 (추정)."
+  }
+}
