@@ -1,0 +1,393 @@
+{
+  "V1_libero_table1_avg": {
+    "LoopedWAM": {
+      "recomputed": 96.1,
+      "reported": 96.1,
+      "match": true
+    },
+    "LoopedWAM-E (Ka=4,N=2)": {
+      "recomputed": 95.625,
+      "reported": 95.6,
+      "match": true
+    },
+    "LoopedWAM-E (Ka=2,N=2)": {
+      "recomputed": 95.975,
+      "reported": 96.0,
+      "match": true
+    },
+    "Fast-WAM* (re-eval)": {
+      "recomputed": 96.65,
+      "reported": 96.6,
+      "match": false
+    },
+    "Faster-WAM* (re-eval)": {
+      "recomputed": 98.725,
+      "reported": 98.7,
+      "match": true
+    },
+    "Light-WAM* (re-eval)": {
+      "recomputed": 95.775,
+      "reported": 95.8,
+      "match": true
+    }
+  },
+  "V2_libero_uncertainty": {
+    "LoopedWAM": {
+      "avg": 96.1,
+      "half_width_95": 0.48
+    },
+    "LoopedWAM-E (Ka=4,N=2)": {
+      "avg": 95.6,
+      "half_width_95": 0.51
+    },
+    "LoopedWAM-E (Ka=2,N=2)": {
+      "avg": 96.0,
+      "half_width_95": 0.49
+    },
+    "Fast-WAM* (re-eval)": {
+      "avg": 96.6,
+      "half_width_95": 0.45
+    },
+    "Faster-WAM* (re-eval)": {
+      "avg": 98.7,
+      "half_width_95": 0.28
+    },
+    "Light-WAM* (re-eval)": {
+      "avg": 95.8,
+      "half_width_95": 0.5
+    },
+    "differences_vs_LoopedWAM": {
+      "Fast-WAM* (re-eval)": {
+        "diff_pts": -0.5,
+        "se_pts": 0.337,
+        "z": -1.48,
+        "p_two_sided_unpaired": 0.1378
+      },
+      "Faster-WAM* (re-eval)": {
+        "diff_pts": -2.6,
+        "se_pts": 0.285,
+        "z": -9.12,
+        "p_two_sided_unpaired": 0.0
+      },
+      "Light-WAM* (re-eval)": {
+        "diff_pts": 0.3,
+        "se_pts": 0.355,
+        "z": 0.84,
+        "p_two_sided_unpaired": 0.3986
+      }
+    }
+  },
+  "V3_table5_elastic": {
+    "Ka1_N2": {
+      "avg_recomputed": 95.185,
+      "avg_reported": 95.18,
+      "gain_recomputed": 0.85,
+      "gain_reported": 0.85
+    },
+    "Ka2_N2": {
+      "avg_recomputed": 95.983,
+      "avg_reported": 95.98,
+      "gain_recomputed": 1.45,
+      "gain_reported": 1.45
+    },
+    "Ka4_N2": {
+      "avg_recomputed": 95.632,
+      "avg_reported": 95.63,
+      "gain_recomputed": 0.66,
+      "gain_reported": 0.67
+    },
+    "Ka1_N5": {
+      "avg_recomputed": 95.233,
+      "avg_reported": 95.23,
+      "gain_recomputed": 0.7,
+      "gain_reported": 0.7
+    },
+    "Ka2_N5": {
+      "avg_recomputed": 95.55,
+      "avg_reported": 95.55,
+      "gain_recomputed": 0.7,
+      "gain_reported": 0.7
+    },
+    "Ka1_N10": {
+      "avg_recomputed": 95.335,
+      "avg_reported": 95.33,
+      "gain_recomputed": 1.65,
+      "gain_reported": 1.65
+    },
+    "Ka4_N5": {
+      "avg_recomputed": 96.1,
+      "avg_reported": 96.1,
+      "gain_recomputed": 0.65,
+      "gain_reported": 0.65
+    },
+    "Ka2_N10": {
+      "avg_recomputed": 95.665,
+      "avg_reported": 95.67,
+      "gain_recomputed": 1.84,
+      "gain_reported": 1.83
+    },
+    "Ka4_N10": {
+      "avg_recomputed": 96.218,
+      "avg_reported": 96.22,
+      "gain_recomputed": 1.35,
+      "gain_reported": 1.35
+    },
+    "summary": {
+      "all_avgs_match": true,
+      "mean_gain_reported": 1.094,
+      "gain_min": 0.65,
+      "gain_max": 1.83,
+      "mean_of_nine_avgs": 95.654
+    },
+    "latency_fit": {
+      "intercept_ms": 19.83,
+      "slope_ms_per_call": 0.2234,
+      "r2": 0.9986
+    },
+    "per_step_cost_ms": {
+      "Ka1": 2.9,
+      "Ka2": 4.04,
+      "Ka4": 6.62
+    }
+  },
+  "V4_table4_efficiency": {
+    "Fast-WAM* 10 steps": {
+      "speedup": 1.0,
+      "mem_ratio_vs_fastwam": 1.0
+    },
+    "Faster-WAM* 10": {
+      "speedup": 1.48,
+      "mem_ratio_vs_fastwam": 1.2
+    },
+    "Light-WAM*": {
+      "speedup": 4.93,
+      "mem_ratio_vs_fastwam": 3.48
+    },
+    "Dense-30 10": {
+      "speedup": 1.19,
+      "mem_ratio_vs_fastwam": 4.02
+    },
+    "Dense-12 10": {
+      "speedup": 2.63,
+      "mem_ratio_vs_fastwam": 7.3
+    },
+    "LoopedWAM 4/10": {
+      "speedup": 1.17,
+      "mem_ratio_vs_fastwam": 7.44
+    },
+    "LoopedWAM 4/2": {
+      "speedup": 3.07,
+      "mem_ratio_vs_fastwam": 7.3
+    },
+    "LoopedWAM-E (4,2)": {
+      "speedup": 3.24,
+      "mem_ratio_vs_fastwam": 5.49
+    },
+    "LoopedWAM-E (2,2)": {
+      "speedup": 3.89,
+      "mem_ratio_vs_fastwam": 5.69
+    },
+    "LoopedWAM-E (1,2)": {
+      "speedup": 4.35,
+      "mem_ratio_vs_fastwam": 5.91
+    },
+    "Fast-WAM* 2 steps": {
+      "speedup": 2.9,
+      "mem_ratio_vs_fastwam": 1.0
+    },
+    "claim_7.4x_memory": 7.44,
+    "claim_1.8x_memory_vs_dense30": 1.85,
+    "claim_1.2x_full_depth_vs_fastwam": 1.17,
+    "claim_1.3x_at_matched_2steps_loopedwam_E_vs_fastwam_2steps": 1.34,
+    "claim_5.7x_less_memory_at_2steps": 5.72,
+    "saving_ms_2steps_vs_10steps_at_Ka4": 53.0,
+    "saving_ms_Ka4_to_Ka2_at_N2": 5.6,
+    "param_ratio_dense30_over_loopedwam": 2.43
+  },
+  "V5_params": {
+    "video_M": 479.2,
+    "action_M": 105.3,
+    "sum_M": 584.5,
+    "reported_total_M": 584.5,
+    "match": true
+  },
+  "V6_robotwin_table_E2": {
+    "n_tasks": 50,
+    "clean_mean": 92.06,
+    "rand_mean": 91.68,
+    "avg_mean": 91.87,
+    "reported": {
+      "clean": 92.1,
+      "rand": 91.7,
+      "avg": 91.9
+    },
+    "per_task_avg_consistent": true,
+    "episodes_total": 10000,
+    "wilson95_avg_pct": [
+      91.32,
+      92.39
+    ],
+    "vs_fastwam_diff": {
+      "diff": 0.1,
+      "z": 0.26,
+      "p": 0.796
+    }
+  },
+  "V7_robocasa": {
+    "LoopedWAM": {
+      "task_mean": 52.17,
+      "n_tasks": 24
+    },
+    "LoopedWAM-E (4,2)": {
+      "task_mean": 52.42,
+      "n_tasks": 24
+    },
+    "LoopedWAM-E (2,2)": {
+      "task_mean": 51.58,
+      "n_tasks": 24
+    },
+    "reported_avg": {
+      "LoopedWAM": 52.2,
+      "E42": 52.4,
+      "E22": 51.6
+    },
+    "wilson95_LoopedWAM_pct": [
+      49.37,
+      55.01
+    ],
+    "half_width_pts": 2.82,
+    "vs_StarVLA-GR00T": {
+      "diff": 4.4,
+      "z": 2.16,
+      "p_two_sided": 0.031
+    },
+    "vs_DiT4DiT": {
+      "diff": 1.4,
+      "z": 0.69,
+      "p_two_sided": 0.493
+    }
+  },
+  "V8_robocasa_group_weighting": {
+    "loopedwam_task_weighted": 52.175,
+    "reported": 52.2
+  },
+  "V9_robotwin10_table_D1": {
+    "columns": {
+      "Dense-12": {
+        "recomputed": 77.25,
+        "reported": 77.25
+      },
+      "1/4": {
+        "recomputed": 79.55,
+        "reported": 79.55
+      },
+      "2/2": {
+        "recomputed": 78.9,
+        "reported": 78.9
+      },
+      "4/1": {
+        "recomputed": 80.95,
+        "reported": 80.95
+      },
+      "4/2": {
+        "recomputed": 82.4,
+        "reported": 82.4
+      },
+      "4/4": {
+        "recomputed": 81.4,
+        "reported": 81.4
+      },
+      "Dense-30": {
+        "recomputed": 83.6,
+        "reported": 83.6
+      }
+    },
+    "all_match": true,
+    "diff_4_1_vs_1_4": 1.4
+  },
+  "V10_ablation_tests_LIBERO_unpaired": {
+    "video_loops_4/1_vs_action_loops_1/4 (본문 2.3)": {
+      "diff": 2.3,
+      "se_pts": 0.47,
+      "z": 4.89,
+      "p_two_sided": 0.0
+    },
+    "late_alignment_KVmix_vs_deepest (본문 +0.45)": {
+      "diff": 0.45,
+      "se_pts": 0.426,
+      "z": 1.06,
+      "p_two_sided": 0.29067
+    },
+    "random_core_vs_default (본문 -12.7)": {
+      "diff": -12.7,
+      "se_pts": 0.57,
+      "z": -22.29,
+      "p_two_sided": 0.0
+    },
+    "elastic_specialist_12_vs_elastic_student (본문 -0.6, CI -1.3..+0.1)": {
+      "diff": -0.56,
+      "se_pts": 0.432,
+      "z": -1.3,
+      "p_two_sided": 0.19473
+    },
+    "distill_teacher_traj_vs_elastic (본문 -0.21, 표 8)": {
+      "diff": -0.21,
+      "se_pts": 0.377,
+      "z": -0.56,
+      "p_two_sided": 0.57717
+    }
+  },
+  "V10_note": "표 8의 차이(-0.15~-0.33)는 같은 에피소드 짝지음 검정이라 보고되지 않은 짝지음 SE가 필요함. 비짝지음 근사로는 판정 불가. 표 5 이득의 유의성(9개 중 7개)도 에피소드 단위 데이터가 없어 재현 불가.",
+  "V11_real_robot": {
+    "Fast-WAM*": {
+      "successes": 57,
+      "trials": 80,
+      "pct": 71.25,
+      "wilson95": [
+        60.54,
+        80.01
+      ],
+      "per_task_sum_ok": true
+    },
+    "LoopedWAM": {
+      "successes": 57,
+      "trials": 80,
+      "pct": 71.25,
+      "wilson95": [
+        60.54,
+        80.01
+      ],
+      "per_task_sum_ok": true
+    },
+    "LoopedWAM-E (4,2)": {
+      "successes": 55,
+      "trials": 80,
+      "pct": 68.75,
+      "wilson95": [
+        57.93,
+        77.85
+      ],
+      "per_task_sum_ok": true
+    },
+    "LoopedWAM-E (2,2)": {
+      "successes": 54,
+      "trials": 80,
+      "pct": 67.5,
+      "wilson95": [
+        56.64,
+        76.76
+      ],
+      "per_task_sum_ok": true
+    },
+    "fisher_p_LoopedWAM_vs_FastWAM": 1.0,
+    "fisher_p_LoopedWAM_vs_E42": 0.8632,
+    "fisher_p_LoopedWAM_vs_E22": 0.7318,
+    "failures_LoopedWAM": {
+      "total": 23,
+      "contact": 19,
+      "non_contact": 4
+    },
+    "memory_ratio_fast_over_loopedwam": 3.43,
+    "latency_loopedwam_minus_fastwam_ms": 10
+  }
+}
