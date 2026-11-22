@@ -1,0 +1,238 @@
+{
+  "table1_counts": {
+    "Raw DP": {
+      "n": 20,
+      "motion_k": 16.0,
+      "motion_k_is_integer": true,
+      "len10_k": 11.0,
+      "len10_k_is_integer": true,
+      "motion_wilson95": [
+        0.584,
+        0.919
+      ],
+      "motion_cp95": [
+        0.563,
+        0.943
+      ],
+      "len10_wilson95": [
+        0.342,
+        0.742
+      ],
+      "len10_cp95": [
+        0.315,
+        0.769
+      ]
+    },
+    "Force DP": {
+      "n": 10,
+      "motion_k": 6.0,
+      "motion_k_is_integer": true,
+      "len10_k": 1.0,
+      "len10_k_is_integer": true,
+      "motion_wilson95": [
+        0.313,
+        0.832
+      ],
+      "motion_cp95": [
+        0.262,
+        0.878
+      ],
+      "len10_wilson95": [
+        0.018,
+        0.404
+      ],
+      "len10_cp95": [
+        0.003,
+        0.445
+      ]
+    },
+    "Force+Hybrid DP": {
+      "n": 10,
+      "motion_k": 8.0,
+      "motion_k_is_integer": true,
+      "len10_k": 2.0,
+      "len10_k_is_integer": true,
+      "motion_wilson95": [
+        0.49,
+        0.943
+      ],
+      "motion_cp95": [
+        0.444,
+        0.975
+      ],
+      "len10_wilson95": [
+        0.057,
+        0.51
+      ],
+      "len10_cp95": [
+        0.025,
+        0.556
+      ]
+    },
+    "HybridIL": {
+      "n": 20,
+      "motion_k": 20.0,
+      "motion_k_is_integer": true,
+      "len10_k": 17.0,
+      "len10_k_is_integer": true,
+      "motion_wilson95": [
+        0.839,
+        1.0
+      ],
+      "motion_cp95": [
+        0.832,
+        1.0
+      ],
+      "len10_wilson95": [
+        0.64,
+        0.948
+      ],
+      "len10_cp95": [
+        0.621,
+        0.968
+      ]
+    }
+  },
+  "fisher": {
+    "HybridIL_vs_RawDP": {
+      "motion": {
+        "table": [
+          [
+            20,
+            0
+          ],
+          [
+            16,
+            4
+          ]
+        ],
+        "p_two_sided": 0.106
+      },
+      "len10": {
+        "table": [
+          [
+            17,
+            3
+          ],
+          [
+            11,
+            9
+          ]
+        ],
+        "p_two_sided": 0.0824
+      }
+    },
+    "HybridIL_vs_ForceHybridDP": {
+      "motion": {
+        "table": [
+          [
+            20,
+            0
+          ],
+          [
+            8,
+            2
+          ]
+        ],
+        "p_two_sided": 0.1034
+      },
+      "len10": {
+        "table": [
+          [
+            17,
+            3
+          ],
+          [
+            2,
+            8
+          ]
+        ],
+        "p_two_sided": 0.001
+      }
+    },
+    "RawDP_vs_ForceDP": {
+      "motion": {
+        "table": [
+          [
+            16,
+            4
+          ],
+          [
+            6,
+            4
+          ]
+        ],
+        "p_two_sided": 0.3841
+      },
+      "len10": {
+        "table": [
+          [
+            11,
+            9
+          ],
+          [
+            1,
+            9
+          ]
+        ],
+        "p_two_sided": 0.0235
+      }
+    }
+  },
+  "relative_gain": {
+    "len10_HybridIL_vs_RawDP_pct": 54.55,
+    "motion_HybridIL_vs_RawDP_pct": 25.0,
+    "note": "초록의 '54.5% relatively'는 >10cm 기준 Raw DP 대비 상대 향상과 일치. 동작 성공 기준은 25%"
+  },
+  "dataset": {
+    "zucchinis": 15,
+    "segments": 438,
+    "action_sequences": 30199,
+    "segments_per_zucchini": 29.2,
+    "sequences_per_segment": 68.95,
+    "note": "시퀀스/구간 평균 약 69. 학습 샘플 정의(20스텝 창, 겹침 여부)는 본문에 없음"
+  },
+  "teleop_time": {
+    "fig5b_minutes_per_zucchini": {
+      "Human": 2.9,
+      "ForceCapture": 4.5,
+      "Teleoperation": 13
+    },
+    "ratio_teleop_over_forcecapture_fig": 2.89,
+    "ratio_teleop_over_forcecapture_abstract_5min": 2.6,
+    "note": "Fig. 5(b) 막대에 오차 막대 없음, 각 방법 1회 측정으로 보임. 본문의 '약 3배'는 Fig 값(2.9)과 맞음"
+  },
+  "force_levels_N": {
+    "HybridIL_mean_v1": 7.5,
+    "HybridIL_mean_v3": 9.0,
+    "dataset_typical_v1": 6.0,
+    "dataset_typical_v3": 10.0,
+    "RawDP_typical": 20.0,
+    "note": "v1과 v3의 본문 힘 수치가 다름: HybridIL 평균 7.5 → 9 N, 데이터 힘 6 → 10 N. Raw DP 20 N과 40 N 이상은 두 버전 같음"
+  },
+  "training_claims": {
+    "epochs_paper": 500,
+    "epochs_config_train_json": 1000,
+    "epochs_deploy_checkpoint": 1000,
+    "ratio_samples_per_epoch_note": "config의 num_epochs 1000과 본문 500이 다름",
+    "force_threshold_N": 6,
+    "horizon_pred_act_obs": [
+      20,
+      10,
+      1
+    ],
+    "loss_weights_arm_hand": [
+      0.7,
+      0.3
+    ]
+  },
+  "power_len10_85_vs_55_n20": 0.443,
+  "power_motion_100_vs_80_n20": 0.37,
+  "power_len10_85_vs_55_by_n": {
+    "10": 0.141,
+    "20": 0.443,
+    "30": 0.645,
+    "40": 0.793,
+    "60": 0.938
+  }
+}
