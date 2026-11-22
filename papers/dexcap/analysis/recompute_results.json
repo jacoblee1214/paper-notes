@@ -1,0 +1,760 @@
+{
+  "K1_table1_overall": {
+    "BC-RNN-img": {
+      "per_task": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "overall_k_of_60": 0,
+      "overall_recomputed": 0.0,
+      "overall_reported": 0.0,
+      "match_2dp": true,
+      "wilson95_overall": [
+        0.0,
+        0.06
+      ]
+    },
+    "BC-RNN-img-mask": {
+      "per_task": [
+        0.25,
+        0.1,
+        0.1
+      ],
+      "overall_k_of_60": 9,
+      "overall_recomputed": 0.15,
+      "overall_reported": 0.15,
+      "match_2dp": true,
+      "wilson95_overall": [
+        0.081,
+        0.261
+      ]
+    },
+    "BC-RNN-point": {
+      "per_task": [
+        0.45,
+        0.3,
+        0.25
+      ],
+      "overall_k_of_60": 20,
+      "overall_recomputed": 0.333,
+      "overall_reported": 0.33,
+      "match_2dp": true,
+      "wilson95_overall": [
+        0.227,
+        0.459
+      ]
+    },
+    "BC-RNN-prec": {
+      "per_task": [
+        0.5,
+        0.3,
+        0.35
+      ],
+      "overall_k_of_60": 23,
+      "overall_recomputed": 0.383,
+      "overall_reported": 0.38,
+      "match_2dp": true,
+      "wilson95_overall": [
+        0.271,
+        0.51
+      ]
+    },
+    "DP-img": {
+      "per_task": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "overall_k_of_60": 0,
+      "overall_recomputed": 0.0,
+      "overall_reported": 0.0,
+      "match_2dp": true,
+      "wilson95_overall": [
+        0.0,
+        0.06
+      ]
+    },
+    "DP-img-mask": {
+      "per_task": [
+        0.55,
+        0.4,
+        0.3
+      ],
+      "overall_k_of_60": 25,
+      "overall_recomputed": 0.417,
+      "overall_reported": 0.42,
+      "match_2dp": true,
+      "wilson95_overall": [
+        0.301,
+        0.543
+      ]
+    },
+    "DP-point-raw": {
+      "per_task": [
+        0.7,
+        0.7,
+        0.4
+      ],
+      "overall_k_of_60": 36,
+      "overall_recomputed": 0.6,
+      "overall_reported": 0.6,
+      "match_2dp": true,
+      "wilson95_overall": [
+        0.474,
+        0.714
+      ]
+    },
+    "DP-point": {
+      "per_task": [
+        0.75,
+        0.65,
+        0.5
+      ],
+      "overall_k_of_60": 38,
+      "overall_recomputed": 0.633,
+      "overall_reported": 0.63,
+      "match_2dp": true,
+      "wilson95_overall": [
+        0.507,
+        0.744
+      ]
+    },
+    "Ours (DP-perc)": {
+      "per_task": [
+        0.85,
+        0.6,
+        0.7
+      ],
+      "overall_k_of_60": 43,
+      "overall_recomputed": 0.717,
+      "overall_reported": 0.72,
+      "match_2dp": true,
+      "wilson95_overall": [
+        0.592,
+        0.815
+      ]
+    }
+  },
+  "K1_table2_integer_check": {
+    "BC-RNN-img-mask|data|sub": {
+      "count": 0,
+      "den": 30,
+      "reported": 0.0,
+      "consistent": true
+    },
+    "BC-RNN-img-mask|data|all": {
+      "count": 0,
+      "den": 30,
+      "reported": 0.0,
+      "consistent": true
+    },
+    "BC-RNN-img-mask|data|unseen": {
+      "count": 0,
+      "den": 45,
+      "reported": 0.0,
+      "consistent": true
+    },
+    "BC-RNN-img-mask|corr|sub": {
+      "count": 7,
+      "den": 30,
+      "reported": 0.23,
+      "consistent": true
+    },
+    "BC-RNN-img-mask|corr|all": {
+      "count": 2,
+      "den": 30,
+      "reported": 0.07,
+      "consistent": true
+    },
+    "BC-RNN-img-mask|corr|unseen": {
+      "count": 0,
+      "den": 45,
+      "reported": 0.0,
+      "consistent": true
+    },
+    "BC-RNN-point|data|sub": {
+      "count": 10,
+      "den": 30,
+      "reported": 0.33,
+      "consistent": true
+    },
+    "BC-RNN-point|data|all": {
+      "count": 7,
+      "den": 30,
+      "reported": 0.23,
+      "consistent": true
+    },
+    "BC-RNN-point|data|unseen": {
+      "count": 7,
+      "den": 45,
+      "reported": 0.16,
+      "consistent": true
+    },
+    "BC-RNN-point|corr|sub": {
+      "count": 12,
+      "den": 30,
+      "reported": 0.4,
+      "consistent": true
+    },
+    "BC-RNN-point|corr|all": {
+      "count": 8,
+      "den": 30,
+      "reported": 0.27,
+      "consistent": true
+    },
+    "BC-RNN-point|corr|unseen": {
+      "count": 10,
+      "den": 45,
+      "reported": 0.22,
+      "consistent": true
+    },
+    "DP-img-mask|data|sub": {
+      "count": 5,
+      "den": 30,
+      "reported": 0.17,
+      "consistent": true
+    },
+    "DP-img-mask|data|all": {
+      "count": 0,
+      "den": 30,
+      "reported": 0.0,
+      "consistent": true
+    },
+    "DP-img-mask|data|unseen": {
+      "count": 0,
+      "den": 45,
+      "reported": 0.0,
+      "consistent": true
+    },
+    "DP-img-mask|corr|sub": {
+      "count": 14,
+      "den": 30,
+      "reported": 0.47,
+      "consistent": true
+    },
+    "DP-img-mask|corr|all": {
+      "count": 10,
+      "den": 30,
+      "reported": 0.33,
+      "consistent": true
+    },
+    "DP-img-mask|corr|unseen": {
+      "count": 0,
+      "den": 45,
+      "reported": 0.0,
+      "consistent": true
+    },
+    "Ours (DP-perc)|data|sub": {
+      "count": 21,
+      "den": 30,
+      "reported": 0.7,
+      "consistent": true
+    },
+    "Ours (DP-perc)|data|all": {
+      "count": 14,
+      "den": 30,
+      "reported": 0.47,
+      "consistent": true
+    },
+    "Ours (DP-perc)|data|unseen": {
+      "count": 18,
+      "den": 45,
+      "reported": 0.4,
+      "consistent": true
+    },
+    "Ours (DP-perc)|corr|sub": {
+      "count": 25,
+      "den": 30,
+      "reported": 0.83,
+      "consistent": true
+    },
+    "Ours (DP-perc)|corr|all": {
+      "count": 17,
+      "den": 30,
+      "reported": 0.57,
+      "consistent": true
+    },
+    "Ours (DP-perc)|corr|unseen": {
+      "count": 19,
+      "den": 45,
+      "reported": 0.42,
+      "consistent": true
+    }
+  },
+  "K1_table34_counts": {
+    "T3|BC-RNN-point|data": {
+      "subtask": "0/20=0.00",
+      "all": "0/20=0.00"
+    },
+    "T3|BC-RNN-point|corr": {
+      "subtask": "2/20=0.10",
+      "all": "0/20=0.00"
+    },
+    "T3|Ours (DP-perc)|data": {
+      "subtask": "0/20=0.00",
+      "all": "0/20=0.00"
+    },
+    "T3|Ours (DP-perc)|corr": {
+      "subtask": "9/20=0.45",
+      "all": "4/20=0.20"
+    },
+    "T4|Ours (DP-perc)|data": {
+      "subtask": "6/20=0.30",
+      "all": "0/20=0.00"
+    },
+    "T4|Ours (DP-perc)|corr": {
+      "subtask": "13/20=0.65",
+      "all": "5/20=0.25"
+    }
+  },
+  "T1_pooled_tests": [
+    {
+      "comparison": "Ours vs DP-point (pooled 60)",
+      "k1": 43,
+      "n1": 60,
+      "k2": 38,
+      "n2": 60,
+      "diff_pp": 8.3,
+      "newcombe95_pp": [
+        -8.3,
+        24.4
+      ],
+      "fisher_p": 0.4358
+    },
+    {
+      "comparison": "Ours vs DP-point-raw (pooled 60)",
+      "k1": 43,
+      "n1": 60,
+      "k2": 36,
+      "n2": 60,
+      "diff_pp": 11.7,
+      "newcombe95_pp": [
+        -5.2,
+        27.7
+      ],
+      "fisher_p": 0.248
+    },
+    {
+      "comparison": "Ours vs DP-img-mask (pooled 60)",
+      "k1": 43,
+      "n1": 60,
+      "k2": 25,
+      "n2": 60,
+      "diff_pp": 30.0,
+      "newcombe95_pp": [
+        12.3,
+        45.2
+      ],
+      "fisher_p": 0.0016
+    },
+    {
+      "comparison": "Ours vs BC-RNN-point (pooled 60)",
+      "k1": 43,
+      "n1": 60,
+      "k2": 20,
+      "n2": 60,
+      "diff_pp": 38.3,
+      "newcombe95_pp": [
+        20.6,
+        52.8
+      ],
+      "fisher_p": 0.0
+    },
+    {
+      "comparison": "DP-point vs BC-RNN-point (pooled 60)",
+      "k1": 38,
+      "n1": 60,
+      "k2": 20,
+      "n2": 60,
+      "diff_pp": 30.0,
+      "newcombe95_pp": [
+        12.1,
+        45.3
+      ],
+      "fisher_p": 0.0018
+    },
+    {
+      "comparison": "DP-img-mask vs BC-RNN-img-mask (pooled 60)",
+      "k1": 25,
+      "n1": 60,
+      "k2": 9,
+      "n2": 60,
+      "diff_pp": 26.7,
+      "newcombe95_pp": [
+        10.6,
+        41.0
+      ],
+      "fisher_p": 0.0021
+    },
+    {
+      "comparison": "DP-point vs DP-img-mask (pooled 60)",
+      "k1": 38,
+      "n1": 60,
+      "k2": 25,
+      "n2": 60,
+      "diff_pp": 21.7,
+      "newcombe95_pp": [
+        3.8,
+        37.7
+      ],
+      "fisher_p": 0.0278
+    },
+    {
+      "comparison": "DP-point-raw vs DP-point (pooled 60)",
+      "k1": 36,
+      "n1": 60,
+      "k2": 38,
+      "n2": 60,
+      "diff_pp": -3.3,
+      "newcombe95_pp": [
+        -20.1,
+        13.7
+      ],
+      "fisher_p": 0.8512
+    }
+  ],
+  "T1_per_task_tests": [
+    {
+      "comparison": "Plate: Ours vs DP-point",
+      "k1": 14,
+      "n1": 20,
+      "k2": 10,
+      "n2": 20,
+      "diff_pp": 20.0,
+      "newcombe95_pp": [
+        -9.7,
+        45.3
+      ],
+      "fisher_p": 0.3332
+    },
+    {
+      "comparison": "Plate: Ours vs DP-point-raw",
+      "k1": 14,
+      "n1": 20,
+      "k2": 8,
+      "n2": 20,
+      "diff_pp": 30.0,
+      "newcombe95_pp": [
+        -0.6,
+        53.8
+      ],
+      "fisher_p": 0.111
+    },
+    {
+      "comparison": "Plate: DP-point vs DP-point-raw",
+      "k1": 10,
+      "n1": 20,
+      "k2": 8,
+      "n2": 20,
+      "diff_pp": 10.0,
+      "newcombe95_pp": [
+        -19.3,
+        37.0
+      ],
+      "fisher_p": 0.7512
+    },
+    {
+      "comparison": "Ball: Ours vs DP-point-raw",
+      "k1": 12,
+      "n1": 20,
+      "k2": 14,
+      "n2": 20,
+      "diff_pp": -10.0,
+      "newcombe95_pp": [
+        -36.3,
+        18.4
+      ],
+      "fisher_p": 0.7411
+    },
+    {
+      "comparison": "Ball: Ours vs DP-point",
+      "k1": 12,
+      "n1": 20,
+      "k2": 13,
+      "n2": 20,
+      "diff_pp": -5.0,
+      "newcombe95_pp": [
+        -32.2,
+        23.3
+      ],
+      "fisher_p": 1.0
+    },
+    {
+      "comparison": "Sponge: Ours vs DP-point",
+      "k1": 17,
+      "n1": 20,
+      "k2": 15,
+      "n2": 20,
+      "diff_pp": 10.0,
+      "newcombe95_pp": [
+        -15.2,
+        34.0
+      ],
+      "fisher_p": 0.6948
+    },
+    {
+      "comparison": "Sponge: Ours vs DP-img-mask",
+      "k1": 17,
+      "n1": 20,
+      "k2": 11,
+      "n2": 20,
+      "diff_pp": 30.0,
+      "newcombe95_pp": [
+        1.5,
+        53.0
+      ],
+      "fisher_p": 0.0824
+    }
+  ],
+  "T2_tests": [
+    {
+      "comparison": "Packaging data-only all(30): Ours vs BC-RNN-point",
+      "k1": 14,
+      "n1": 30,
+      "k2": 7,
+      "n2": 30,
+      "diff_pp": 23.3,
+      "newcombe95_pp": [
+        -0.7,
+        44.0
+      ],
+      "fisher_p": 0.1033
+    },
+    {
+      "comparison": "Packaging data-only unseen(45): Ours vs BC-RNN-point",
+      "k1": 18,
+      "n1": 45,
+      "k2": 7,
+      "n2": 45,
+      "diff_pp": 24.4,
+      "newcombe95_pp": [
+        5.9,
+        41.0
+      ],
+      "fisher_p": 0.0176
+    },
+    {
+      "comparison": "Packaging data-only all(30): Ours vs DP-img-mask",
+      "k1": 14,
+      "n1": 30,
+      "k2": 0,
+      "n2": 30,
+      "diff_pp": 46.7,
+      "newcombe95_pp": [
+        26.7,
+        63.9
+      ],
+      "fisher_p": 0.0
+    },
+    {
+      "comparison": "Packaging data-only subtask(30): Ours vs BC-RNN-point",
+      "k1": 21,
+      "n1": 30,
+      "k2": 10,
+      "n2": 30,
+      "diff_pp": 36.7,
+      "newcombe95_pp": [
+        11.4,
+        56.1
+      ],
+      "fisher_p": 0.0092
+    },
+    {
+      "comparison": "Correction effect DP-img-mask all(30): corr vs data",
+      "k1": 10,
+      "n1": 30,
+      "k2": 0,
+      "n2": 30,
+      "diff_pp": 33.3,
+      "newcombe95_pp": [
+        15.2,
+        51.2
+      ],
+      "fisher_p": 0.0008
+    },
+    {
+      "comparison": "Correction effect Ours all(30): corr vs data",
+      "k1": 17,
+      "n1": 30,
+      "k2": 14,
+      "n2": 30,
+      "diff_pp": 10.0,
+      "newcombe95_pp": [
+        -14.5,
+        32.9
+      ],
+      "fisher_p": 0.6058
+    },
+    {
+      "comparison": "Correction effect Ours subtask(30): corr vs data",
+      "k1": 25,
+      "n1": 30,
+      "k2": 21,
+      "n2": 30,
+      "diff_pp": 13.3,
+      "newcombe95_pp": [
+        -8.2,
+        33.5
+      ],
+      "fisher_p": 0.3604
+    },
+    {
+      "comparison": "Correction effect Ours unseen(45): corr vs data",
+      "k1": 19,
+      "n1": 45,
+      "k2": 18,
+      "n2": 45,
+      "diff_pp": 2.2,
+      "newcombe95_pp": [
+        -17.5,
+        21.7
+      ],
+      "fisher_p": 1.0
+    },
+    {
+      "comparison": "Correction effect BC-RNN-point all(30): corr vs data",
+      "k1": 8,
+      "n1": 30,
+      "k2": 7,
+      "n2": 30,
+      "diff_pp": 3.3,
+      "newcombe95_pp": [
+        -18.2,
+        24.5
+      ],
+      "fisher_p": 1.0
+    }
+  ],
+  "T2_tests_corrected": [
+    {
+      "comparison": "Corrected: Ours all(30) vs DP-img-mask all(30)",
+      "k1": 17,
+      "n1": 30,
+      "k2": 10,
+      "n2": 30,
+      "diff_pp": 23.3,
+      "newcombe95_pp": [
+        -1.7,
+        44.6
+      ],
+      "fisher_p": 0.1188
+    }
+  ],
+  "T34_tests": [
+    {
+      "comparison": "Scissor corrected all(20): Ours vs BC-RNN-point",
+      "k1": 4,
+      "n1": 20,
+      "k2": 0,
+      "n2": 20,
+      "diff_pp": 20.0,
+      "newcombe95_pp": [
+        -0.1,
+        41.6
+      ],
+      "fisher_p": 0.106
+    },
+    {
+      "comparison": "Scissor corrected subtask(20): Ours vs BC-RNN-point",
+      "k1": 9,
+      "n1": 20,
+      "k2": 2,
+      "n2": 20,
+      "diff_pp": 35.0,
+      "newcombe95_pp": [
+        7.2,
+        57.0
+      ],
+      "fisher_p": 0.031
+    },
+    {
+      "comparison": "Tea uncapping subtask(20): corrected vs data-only (Ours)",
+      "k1": 13,
+      "n1": 20,
+      "k2": 6,
+      "n2": 20,
+      "diff_pp": 35.0,
+      "newcombe95_pp": [
+        4.2,
+        57.9
+      ],
+      "fisher_p": 0.0562
+    },
+    {
+      "comparison": "Tea all(20): corrected vs data-only (Ours)",
+      "k1": 5,
+      "n1": 20,
+      "k2": 0,
+      "n2": 20,
+      "diff_pp": 25.0,
+      "newcombe95_pp": [
+        3.8,
+        46.9
+      ],
+      "fisher_p": 0.0471
+    },
+    {
+      "comparison": "Scissor subtask(20): corrected vs data-only (Ours)",
+      "k1": 9,
+      "n1": 20,
+      "k2": 0,
+      "n2": 20,
+      "diff_pp": 45.0,
+      "newcombe95_pp": [
+        20.0,
+        65.8
+      ],
+      "fisher_p": 0.0012
+    },
+    {
+      "comparison": "Scissor all(20): corrected vs data-only (Ours)",
+      "k1": 4,
+      "n1": 20,
+      "k2": 0,
+      "n2": 20,
+      "diff_pp": 20.0,
+      "newcombe95_pp": [
+        -0.1,
+        41.6
+      ],
+      "fisher_p": 0.106
+    }
+  ],
+  "mde_pp": {
+    "n=20": 37.6,
+    "n=30": 32.3,
+    "n=45": 27.3,
+    "n=60": 24.1
+  },
+  "T8_imu_sensitivity": {
+    "Trajectory 1": {
+      "n=3": {
+        "welch_t": 4.24,
+        "p": 0.0507
+      },
+      "n=5": {
+        "welch_t": 5.47,
+        "p": 0.0053
+      },
+      "n=10": {
+        "welch_t": 7.74,
+        "p": 2.76e-05
+      }
+    },
+    "Trajectory 2": {
+      "n=3": {
+        "welch_t": 3.86,
+        "p": 0.0602
+      },
+      "n=5": {
+        "welch_t": 4.99,
+        "p": 0.00741
+      },
+      "n=10": {
+        "welch_t": 7.05,
+        "p": 5.74e-05
+      }
+    }
+  }
+}
