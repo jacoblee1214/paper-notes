@@ -1,0 +1,145 @@
+{
+  "table2_sum_checks": {
+    "EnerVerse_FT": {
+      "mot": -0.0,
+      "sem": 0.0,
+      "overall": 0.0
+    },
+    "LTX_FT": {
+      "mot": -0.0,
+      "sem": -0.0,
+      "overall": 0.0
+    },
+    "Kling": {
+      "mot": 0.0,
+      "sem": 0.0,
+      "overall": -0.0
+    },
+    "Hailuo": {
+      "mot": 0.0,
+      "sem": 0.0,
+      "overall": 0.0
+    },
+    "COSMOS": {
+      "mot": 0.0,
+      "sem": 0.0,
+      "overall": 0.0
+    },
+    "OpenSora": {
+      "mot": -0.0,
+      "sem": 0.0001,
+      "overall": -0.0001
+    },
+    "LTX": {
+      "mot": 0.0,
+      "sem": 0.0,
+      "overall": 0.0
+    },
+    "_max_abs_dev": 0.0001,
+    "_all_within_tol": true
+  },
+  "logics_denominator": {
+    "smallest_d": 90,
+    "numerators": {
+      "EnerVerse_FT": 88,
+      "LTX_FT": 85,
+      "Kling": 87,
+      "Hailuo": 82,
+      "COSMOS": 66,
+      "OpenSora": 74,
+      "LTX": 66
+    }
+  },
+  "ranking": {
+    "table2_overall_ranks": {
+      "LTX_FT": 1,
+      "Kling": 2,
+      "Hailuo": 3,
+      "OpenSora": 4
+    },
+    "fig6b_ewm_ranks": {
+      "LTX_FT": 1,
+      "Kling": 2,
+      "Hailuo": 3,
+      "OpenSora": 4
+    },
+    "fig6b_vbench_ranks": {
+      "Hailuo": 1,
+      "Kling": 2,
+      "LTX_FT": 3,
+      "OpenSora": 4
+    },
+    "human_ranks": {
+      "LTX_FT": 1,
+      "Kling": 2,
+      "Hailuo": 3,
+      "OpenSora": 4
+    },
+    "tau_human_vs_table2_overall": 1.0,
+    "tau_human_vs_fig6b_ewm": 1.0,
+    "tau_human_vs_fig6b_vbench": 0.0,
+    "pairs_concordant_disconcordant_vbench": [
+      3,
+      3
+    ],
+    "p_perfect_agreement_random_n4": 0.0417,
+    "fig6b_minus_table2_overall": {
+      "LTX_FT": 0.9407,
+      "Kling": 0.8802,
+      "Hailuo": 1.0875,
+      "OpenSora": 0.9108
+    }
+  },
+  "sensitivity_n100": {
+    "n_episodes_assumed": 100,
+    "se_overall_worst_case": 0.1414,
+    "half_width95_single_model": 0.2772,
+    "half_width95_difference_unpaired": 0.392,
+    "adjacent_pairs": [
+      {
+        "pair": "EnerVerse_FT - LTX_FT",
+        "diff": 0.1517,
+        "resolvable_worst_case": false
+      },
+      {
+        "pair": "LTX_FT - Kling",
+        "diff": 0.6795,
+        "resolvable_worst_case": true
+      },
+      {
+        "pair": "Kling - Hailuo",
+        "diff": 0.4573,
+        "resolvable_worst_case": true
+      },
+      {
+        "pair": "Hailuo - COSMOS",
+        "diff": 0.1253,
+        "resolvable_worst_case": false
+      },
+      {
+        "pair": "COSMOS - OpenSora",
+        "diff": 0.148,
+        "resolvable_worst_case": false
+      },
+      {
+        "pair": "OpenSora - LTX",
+        "diff": 0.1716,
+        "resolvable_worst_case": false
+      }
+    ],
+    "note": "쌍 비교는 같은 에피소드를 쓰므로 실제 표준오차는 이보다 작을 수 있음. 에피소드별 값이 없어 최악 가정으로만 계산."
+  },
+  "video_count": {
+    "models": 7,
+    "tasks": 10,
+    "episodes_per_task": 10,
+    "trials": 3,
+    "computed": 2100,
+    "reported": 2100
+  },
+  "yolo_val_recall": {
+    "reported": 0.91667,
+    "as_fraction_guess": "11/12",
+    "value": 0.91667
+  }
+}
