@@ -1,0 +1,209 @@
+{
+  "table1_recomputed": {
+    "CD": {
+      "mean": 1.6105,
+      "sd": 0.521,
+      "ci95_t_n6": [
+        1.063,
+        2.158
+      ],
+      "reported_mean": 1.61,
+      "match_at_reported_precision": true
+    },
+    "EMD": {
+      "mean": 7.7383,
+      "sd": 1.194,
+      "ci95_t_n6": [
+        6.485,
+        8.992
+      ],
+      "reported_mean": 7.738,
+      "match_at_reported_precision": true
+    },
+    "F": {
+      "mean": 95.0,
+      "sd": 5.308,
+      "ci95_t_n6": [
+        89.43,
+        100.57
+      ],
+      "reported_mean": 95.0,
+      "match_at_reported_precision": true
+    },
+    "time": {
+      "mean": 49.9933,
+      "sd": 42.341,
+      "ci95_t_n6": [
+        5.559,
+        94.428
+      ],
+      "reported_mean": 49.99,
+      "match_at_reported_precision": true
+    }
+  },
+  "table4_recomputed": {
+    "Single-scale GPIS": {
+      "mean": 3.7658,
+      "sd": 0.657,
+      "reported_mean": 3.766,
+      "match_at_reported_precision": true
+    },
+    "Multi-scale GPIS": {
+      "mean": 1.7058,
+      "sd": 0.485,
+      "reported_mean": 1.706,
+      "match_at_reported_precision": true
+    },
+    "Multi-scale GPIS+PCG": {
+      "mean": 1.6915,
+      "sd": 0.487,
+      "reported_mean": 1.691,
+      "match_at_reported_precision": true
+    },
+    "Multi-scale GPIS+CSP": {
+      "mean": 1.6347,
+      "sd": 0.518,
+      "reported_mean": 1.635,
+      "match_at_reported_precision": true
+    },
+    "Ours (CSP+PCG)": {
+      "mean": 1.6323,
+      "sd": 0.52,
+      "reported_mean": 1.632,
+      "match_at_reported_precision": true
+    }
+  },
+  "table1_vs_table4_ours_CD_diff": {
+    "O1": -0.001,
+    "O2": -0.052,
+    "O3": -0.078,
+    "O4": 0.0,
+    "O5": 0.0,
+    "O6": 0.0
+  },
+  "table1_vs_table4_ours_CD_mean": {
+    "table1": 1.61,
+    "table4_ours": 1.632
+  },
+  "implied_observed_fraction_ours": {
+    "CD": 0.505,
+    "EMD": 0.505,
+    "F": 0.488
+  },
+  "overall_within_obs_unobs_range": {
+    "CD": true,
+    "EMD": true,
+    "F": true
+  },
+  "text_claims_tables23": {
+    "unobs_CD_multi_to_ours_rel_change_pct": -6.61,
+    "unobs_F_multi_to_ours_pt": 2.9,
+    "unobs_EMD_csp_vs_ours_pct": 3.37,
+    "unobs_CD_csp_vs_ours_mm": -0.011,
+    "fill_CD_ours_vs_csp_mm": -0.003,
+    "pcg_alone_unobs_CD_pct": -1.45,
+    "pcg_alone_fill_CD_pct": -0.88
+  },
+  "paired_CD_fill_table4": {
+    "Multi-scale vs Single-scale": {
+      "mean_diff_mm": -2.06,
+      "ci95_t": [
+        -2.6101,
+        -1.5099
+      ],
+      "p_paired_t": 0.0002,
+      "p_signflip_exact": 0.0312,
+      "objects_a_lower": "6/6",
+      "diff_per_object": [
+        -2.783,
+        -1.449,
+        -2.533,
+        -2.169,
+        -1.686,
+        -1.74
+      ]
+    },
+    "Ours vs Multi-scale": {
+      "mean_diff_mm": -0.0735,
+      "ci95_t": [
+        -0.1985,
+        0.0515
+      ],
+      "p_paired_t": 0.1909,
+      "p_signflip_exact": 0.1562,
+      "objects_a_lower": "5/6",
+      "diff_per_object": [
+        -0.083,
+        -0.276,
+        -0.111,
+        -0.027,
+        -0.025,
+        0.081
+      ]
+    },
+    "Ours vs CSP only": {
+      "mean_diff_mm": -0.0023,
+      "ci95_t": [
+        -0.0275,
+        0.0228
+      ],
+      "p_paired_t": 0.8209,
+      "p_signflip_exact": 0.875,
+      "objects_a_lower": "3/6",
+      "diff_per_object": [
+        0.021,
+        -0.045,
+        -0.004,
+        0.016,
+        -0.01,
+        0.008
+      ]
+    },
+    "CSP only vs Multi-scale": {
+      "mean_diff_mm": -0.0712,
+      "ci95_t": [
+        -0.1788,
+        0.0365
+      ],
+      "p_paired_t": 0.1501,
+      "p_signflip_exact": 0.1562,
+      "objects_a_lower": "5/6",
+      "diff_per_object": [
+        -0.104,
+        -0.231,
+        -0.107,
+        -0.043,
+        -0.015,
+        0.073
+      ]
+    },
+    "PCG only vs Multi-scale": {
+      "mean_diff_mm": -0.0143,
+      "ci95_t": [
+        -0.0449,
+        0.0162
+      ],
+      "p_paired_t": 0.2822,
+      "p_signflip_exact": 0.3125,
+      "objects_a_lower": "3/6",
+      "diff_per_object": [
+        0.001,
+        -0.062,
+        -0.033,
+        0.012,
+        -0.016,
+        0.012
+      ]
+    }
+  },
+  "CD_relative_to_object_size": {
+    "CD_mean_over_90mm_pct": 1.79,
+    "CD_over_input_noise_sd_0.5mm": 3.22,
+    "note": "입력 접촉에 더한 노이즈 표준편차 0.5 mm 대비 평균 CD 1.61 mm (3.2배). 노이즈 자체가 CD 바닥의 주된 원인인지는 논문이 검증하지 않음."
+  },
+  "time_check": {
+    "sum_table1_s": 299.96,
+    "mean": 49.993,
+    "note": "보고값 49.99 s와 일치"
+  }
+}
