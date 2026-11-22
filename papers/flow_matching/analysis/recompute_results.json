@@ -1,0 +1,144 @@
+{
+  "nfe_ratio_ot_over_fmdif": {
+    "CIFAR-10": 0.776,
+    "ImageNet-32": 0.632,
+    "ImageNet-64": 0.738
+  },
+  "nfe_reduction_pct_vs_fmdif": {
+    "CIFAR-10": 22.4,
+    "ImageNet-32": 36.8,
+    "ImageNet-64": 26.2
+  },
+  "nfe_ratio_ot_over_ddpm": {
+    "CIFAR-10": 0.518,
+    "ImageNet-32": 0.466,
+    "ImageNet-64": 0.523
+  },
+  "fid_rel_change_pct_ot_vs_ddpm": {
+    "CIFAR-10": -15.1,
+    "ImageNet-32": -28.2,
+    "ImageNet-64": -16.8
+  },
+  "nll_gap_ot_minus_ddpm_bpd": {
+    "CIFAR-10": -0.13,
+    "ImageNet-32": -0.01,
+    "ImageNet-64": -0.01
+  },
+  "nll_gap_ot_minus_fmdif_bpd": {
+    "CIFAR-10": -0.11,
+    "ImageNet-32": -0.01,
+    "ImageNet-64": -0.02
+  },
+  "best_nll_model": {
+    "CIFAR-10": "FM-OT",
+    "ImageNet-32": "FM-OT",
+    "ImageNet-64": "FM-OT"
+  },
+  "best_fid_model": {
+    "CIFAR-10": "FM-OT",
+    "ImageNet-32": "FM-OT",
+    "ImageNet-64": "FM-OT"
+  },
+  "best_nfe_model": {
+    "CIFAR-10": "FM-OT",
+    "ImageNet-32": "FM-OT",
+    "ImageNet-64": "FM-OT"
+  },
+  "claim_fmot_best_all_measures": {
+    "CIFAR-10": true,
+    "ImageNet-32": true,
+    "ImageNet-64": true
+  },
+  "nll_K_span_bpd": {
+    "CIFAR-10": {
+      "DDPM": 0.12,
+      "SM": 0.12,
+      "ScoreFlow": 0.12,
+      "FM-Dif": 0.13,
+      "FM-OT": 0.12
+    },
+    "ImageNet-32": {
+      "DDPM": 0.08,
+      "SM": 0.08,
+      "ScoreFlow": 0.08,
+      "FM-Dif": 0.08,
+      "FM-OT": 0.09
+    },
+    "ImageNet-64": {
+      "DDPM": 0.04,
+      "SM": 0.03,
+      "ScoreFlow": 0.03,
+      "FM-Dif": 0.04,
+      "FM-OT": 0.04
+    }
+  },
+  "nll_K_span_max_over_methods_bpd": {
+    "CIFAR-10": 0.13,
+    "ImageNet-32": 0.09,
+    "ImageNet-64": 0.04
+  },
+  "ImageNet32_fmot_vs_ddpm_at_maxK": -0.01,
+  "CIFAR_fmot_vs_ddpm_at_maxK": -0.13,
+  "T1_vs_T4_maxK_mismatch": {
+    "ImageNet-32/SM": {
+      "T1": 3.56,
+      "T4_maxK": 3.57,
+      "diff": -0.01
+    },
+    "ImageNet-32/FM-Dif": {
+      "T1": 3.54,
+      "T4_maxK": 3.56,
+      "diff": -0.02
+    }
+  },
+  "T1_vs_T4_check_note": "T1 NLL과 T4 마지막 열 비교. 불일치는 ImageNet-32 SM, FM-Dif 두 항목",
+  "T3_iteration_consistency": {
+    "CIFAR-10": {
+      "listed_iters": 391000,
+      "implied_iters_from_epochs": 196000,
+      "ratio_listed_over_implied": 1.995
+    },
+    "ImageNet-32": {
+      "listed_iters": 250000,
+      "implied_iters_from_epochs": 250400,
+      "ratio_listed_over_implied": 0.998
+    },
+    "ImageNet-64": {
+      "listed_iters": 157000,
+      "implied_iters_from_epochs": 156500,
+      "ratio_listed_over_implied": 1.003
+    },
+    "ImageNet-128": {
+      "listed_iters": 500000,
+      "implied_iters_from_epochs": 476785,
+      "ratio_listed_over_implied": 1.049
+    }
+  },
+  "in128_throughput_fm_over_dn_pct": 68.8,
+  "in128_throughput_less_pct": 31.2,
+  "in128_dn_images_e9": 1.116,
+  "in128_fm_images_e9": 0.768,
+  "sr_fm_minus_sr3": {
+    "FID": -1.8,
+    "PSNR": -1.7,
+    "SSIM": -0.015
+  },
+  "v1_vs_v2_nfe_ratio": {
+    "v1": {
+      "IN32_FMOT_over_FMDif": 0.994,
+      "IN64_FMOT_over_FMDif": 0.905
+    },
+    "v2": {
+      "IN32_FMOT_over_FMDif": 0.632,
+      "IN64_FMOT_over_FMDif": 0.738
+    }
+  },
+  "v1_vs_v2_in128": {
+    "v1_NLL": 2.88,
+    "v2_NLL": 2.9,
+    "v1_FID": 21.52,
+    "v2_FID": 20.9,
+    "v1_FM_vs_BigGAN_fid": true,
+    "v2_FM_vs_BigGAN_fid": true
+  }
+}
