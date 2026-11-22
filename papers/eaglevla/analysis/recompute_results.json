@@ -1,0 +1,825 @@
+{
+  "assumption_K1_trials_per_suite": 500,
+  "V1_table3_paper_vs_readme_mismatches": [],
+  "V1_readme_rows_found": 9,
+  "T3_avg_row_check": [
+    {
+      "suite": "SPATIAL",
+      "method": "VLASH",
+      "mean9": 74.444,
+      "reported": 74.4,
+      "ok": true
+    },
+    {
+      "suite": "SPATIAL",
+      "method": "RTC",
+      "mean9": 92.644,
+      "reported": 92.6,
+      "ok": true
+    },
+    {
+      "suite": "SPATIAL",
+      "method": "Ours",
+      "mean9": 96.967,
+      "reported": 97.0,
+      "ok": true
+    },
+    {
+      "suite": "SPATIAL",
+      "method": "Sched",
+      "mean9": 97.4,
+      "reported": 97.4,
+      "ok": true
+    },
+    {
+      "suite": "OBJECT",
+      "method": "VLASH",
+      "mean9": 86.122,
+      "reported": 86.1,
+      "ok": true
+    },
+    {
+      "suite": "OBJECT",
+      "method": "RTC",
+      "mean9": 96.6,
+      "reported": 96.6,
+      "ok": true
+    },
+    {
+      "suite": "OBJECT",
+      "method": "Ours",
+      "mean9": 98.022,
+      "reported": 98.0,
+      "ok": true
+    },
+    {
+      "suite": "OBJECT",
+      "method": "Sched",
+      "mean9": 98.578,
+      "reported": 98.6,
+      "ok": true
+    },
+    {
+      "suite": "GOAL",
+      "method": "VLASH",
+      "mean9": 84.233,
+      "reported": 84.2,
+      "ok": true
+    },
+    {
+      "suite": "GOAL",
+      "method": "RTC",
+      "mean9": 94.056,
+      "reported": 94.1,
+      "ok": true
+    },
+    {
+      "suite": "GOAL",
+      "method": "Ours",
+      "mean9": 96.522,
+      "reported": 96.5,
+      "ok": true
+    },
+    {
+      "suite": "GOAL",
+      "method": "Sched",
+      "mean9": 96.844,
+      "reported": 96.8,
+      "ok": true
+    },
+    {
+      "suite": "LIBERO10",
+      "method": "VLASH",
+      "mean9": 81.267,
+      "reported": 81.3,
+      "ok": true
+    },
+    {
+      "suite": "LIBERO10",
+      "method": "RTC",
+      "mean9": 86.389,
+      "reported": 86.4,
+      "ok": true
+    },
+    {
+      "suite": "LIBERO10",
+      "method": "Ours",
+      "mean9": 92.2,
+      "reported": 92.2,
+      "ok": true
+    },
+    {
+      "suite": "LIBERO10",
+      "method": "Sched",
+      "mean9": 92.511,
+      "reported": 92.5,
+      "ok": true
+    }
+  ],
+  "T3_claims": {
+    "Ours_minus_VLASH_pp": 14.41,
+    "Sched_minus_VLASH_pp": 14.82,
+    "Ours_minus_RTC_pp": 3.51,
+    "Sched_minus_RTC_pp": 3.91,
+    "Sched_mean4": 96.33,
+    "VLASH_mean4": 81.52,
+    "RTC_mean4": 92.42,
+    "Ours_mean4": 95.93,
+    "delta9": {
+      "Ours": {
+        "mean4": 95.7,
+        "minus_VLASH": 45.42,
+        "minus_RTC": 6.85
+      },
+      "Sched": {
+        "mean4": 95.9,
+        "minus_VLASH": 45.62,
+        "minus_RTC": 7.05
+      }
+    },
+    "Sched_minus_VLASH_approx95CI_pp": [
+      14.24,
+      15.4
+    ],
+    "Sched_minus_RTC_approx95CI_pp": [
+      3.44,
+      4.38
+    ]
+  },
+  "T3_text_claims_reported": {
+    "outperforms_VLASH_pp": 14.8,
+    "outperforms_RTC_pp": 3.9,
+    "delta9_VLASH_pp": 45.6,
+    "delta9_RTC_pp": 7.0
+  },
+  "T3_cells_VLASH_ge_Sched": [
+    [
+      "SPATIAL",
+      1,
+      98.8,
+      98.6
+    ],
+    [
+      "OBJECT",
+      1,
+      99.2,
+      98.8
+    ],
+    [
+      "OBJECT",
+      3,
+      98.8,
+      98.4
+    ],
+    [
+      "LIBERO10",
+      1,
+      94.4,
+      93.1
+    ],
+    [
+      "LIBERO10",
+      2,
+      94.6,
+      92.9
+    ],
+    [
+      "LIBERO10",
+      3,
+      91.9,
+      91.9
+    ]
+  ],
+  "T3_count_cells": 36,
+  "T3_Sched_minus_Ours_by_delta": [
+    0.3,
+    0.65,
+    0.15,
+    0.7,
+    0.77,
+    0.38,
+    0.2,
+    0.3,
+    0.2
+  ],
+  "T3_Sched_minus_Sync_by_suite": {
+    "SPATIAL": 0.1,
+    "OBJECT": -1.02,
+    "GOAL": 0.14,
+    "LIBERO10": -0.99
+  },
+  "T3_mean_by_delta": {
+    "VLASH": [
+      97.28,
+      97.07,
+      94.6,
+      93.07,
+      87.2,
+      80.67,
+      71.45,
+      62.02,
+      50.27
+    ],
+    "RTC": [
+      96.1,
+      95.5,
+      93.7,
+      92.33,
+      91.4,
+      91.93,
+      91.67,
+      90.33,
+      88.85
+    ],
+    "Ours": [
+      96.7,
+      96.12,
+      95.83,
+      95.55,
+      95.08,
+      96.05,
+      96.18,
+      96.15,
+      95.7
+    ],
+    "Sched": [
+      97.0,
+      96.78,
+      95.97,
+      96.25,
+      95.85,
+      96.43,
+      96.38,
+      96.45,
+      95.9
+    ]
+  },
+  "T3_sync_mean4": 96.77,
+  "K1_values_not_on_n500_grid": {
+    "count": 85,
+    "total": 148,
+    "examples": [
+      [
+        "SPATIAL",
+        "VLASH",
+        2,
+        97.5
+      ],
+      [
+        "SPATIAL",
+        "VLASH",
+        4,
+        92.5
+      ],
+      [
+        "SPATIAL",
+        "VLASH",
+        5,
+        84.3
+      ],
+      [
+        "SPATIAL",
+        "VLASH",
+        7,
+        51.3
+      ],
+      [
+        "SPATIAL",
+        "VLASH",
+        8,
+        46.7
+      ],
+      [
+        "SPATIAL",
+        "VLASH",
+        9,
+        30.1
+      ],
+      [
+        "SPATIAL",
+        "RTC",
+        1,
+        97.1
+      ],
+      [
+        "SPATIAL",
+        "RTC",
+        3,
+        94.5
+      ]
+    ]
+  },
+  "K1_fisher_Sched_vs_VLASH_cells": {
+    "counts": {
+      "Sched_gt_VLASH": 25,
+      "Sched_lt_VLASH": 0,
+      "ns": 11
+    },
+    "significant_cells": [
+      [
+        "SPATIAL",
+        3,
+        "Sched_gt_VLASH",
+        0.039235
+      ],
+      [
+        "SPATIAL",
+        4,
+        "Sched_gt_VLASH",
+        0.001657
+      ],
+      [
+        "SPATIAL",
+        5,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "SPATIAL",
+        6,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "SPATIAL",
+        7,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "SPATIAL",
+        8,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "SPATIAL",
+        9,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "OBJECT",
+        4,
+        "Sched_gt_VLASH",
+        0.039405
+      ],
+      [
+        "OBJECT",
+        5,
+        "Sched_gt_VLASH",
+        0.000407
+      ],
+      [
+        "OBJECT",
+        6,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "OBJECT",
+        7,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "OBJECT",
+        8,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "OBJECT",
+        9,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "GOAL",
+        3,
+        "Sched_gt_VLASH",
+        0.031741
+      ],
+      [
+        "GOAL",
+        4,
+        "Sched_gt_VLASH",
+        0.007764
+      ],
+      [
+        "GOAL",
+        5,
+        "Sched_gt_VLASH",
+        0.000271
+      ],
+      [
+        "GOAL",
+        6,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "GOAL",
+        7,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "GOAL",
+        8,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "GOAL",
+        9,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "LIBERO10",
+        5,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "LIBERO10",
+        6,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "LIBERO10",
+        7,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "LIBERO10",
+        8,
+        "Sched_gt_VLASH",
+        0.0
+      ],
+      [
+        "LIBERO10",
+        9,
+        "Sched_gt_VLASH",
+        0.0
+      ]
+    ]
+  },
+  "K1_fisher_Sched_vs_Ours_cells": {
+    "Sched_gt_Ours": 0,
+    "Sched_lt_Ours": 0,
+    "ns": 36
+  },
+  "T1_sum_check": [
+    {
+      "model": "pi0",
+      "device": "Orin-30W",
+      "sum_components": 2268.8,
+      "total": 2268.8,
+      "gap_ms": 0.0
+    },
+    {
+      "model": "pi0",
+      "device": "Orin-50W",
+      "sum_components": 1303.0,
+      "total": 1403.0,
+      "gap_ms": 100.0
+    },
+    {
+      "model": "pi0",
+      "device": "Thor",
+      "sum_components": 447.9,
+      "total": 447.9,
+      "gap_ms": 0.0
+    },
+    {
+      "model": "pi0",
+      "device": "A6000",
+      "sum_components": 113.8,
+      "total": 116.1,
+      "gap_ms": 2.3
+    },
+    {
+      "model": "pi0",
+      "device": "4090",
+      "sum_components": 67.7,
+      "total": 69.5,
+      "gap_ms": 1.8
+    },
+    {
+      "model": "pi05",
+      "device": "Orin-30W",
+      "sum_components": 2289.4,
+      "total": 2289.4,
+      "gap_ms": 0.0
+    },
+    {
+      "model": "pi05",
+      "device": "Orin-50W",
+      "sum_components": 1320.1,
+      "total": 1420.8,
+      "gap_ms": 100.7
+    },
+    {
+      "model": "pi05",
+      "device": "Thor",
+      "sum_components": 457.9,
+      "total": 457.9,
+      "gap_ms": 0.0
+    },
+    {
+      "model": "pi05",
+      "device": "A6000",
+      "sum_components": 125.2,
+      "total": 128.2,
+      "gap_ms": 3.0
+    },
+    {
+      "model": "pi05",
+      "device": "4090",
+      "sum_components": 74.3,
+      "total": 76.4,
+      "gap_ms": 2.1
+    }
+  ],
+  "T4_v7_rows": {
+    "Orin": [
+      {
+        "row": "Naive PI05",
+        "sum_components": 1320.1,
+        "total": 1420.8,
+        "gap_ms": 100.7,
+        "Hz_from_RT": 0.7,
+        "Hz_reported": 0.7,
+        "hz_ok": true
+      },
+      {
+        "row": "+Schedule opt.",
+        "sum_components": 1320.1,
+        "total": 1420.8,
+        "gap_ms": 100.7,
+        "Hz_from_RT": 1.48,
+        "Hz_reported": 1.48,
+        "hz_ok": true
+      },
+      {
+        "row": "+Graph reuse",
+        "sum_components": 412.7,
+        "total": 412.9,
+        "gap_ms": 0.2,
+        "Hz_from_RT": 5.43,
+        "Hz_reported": 5.43,
+        "hz_ok": true
+      },
+      {
+        "row": "+Intermediate Buffer & Unroll",
+        "sum_components": 271.2,
+        "total": 271.1,
+        "gap_ms": -0.1,
+        "Hz_from_RT": 10.3,
+        "Hz_reported": 10.3,
+        "hz_ok": true
+      }
+    ],
+    "Thor": [
+      {
+        "row": "Naive PI05",
+        "sum_components": 457.9,
+        "total": 457.9,
+        "gap_ms": 0.0,
+        "Hz_from_RT": 2.18,
+        "Hz_reported": 2.18,
+        "hz_ok": true
+      },
+      {
+        "row": "+Schedule opt.",
+        "sum_components": 457.9,
+        "total": 457.9,
+        "gap_ms": 0.0,
+        "Hz_from_RT": 4.09,
+        "Hz_reported": 4.08,
+        "hz_ok": true
+      },
+      {
+        "row": "+Graph reuse",
+        "sum_components": 240.0,
+        "total": 240.0,
+        "gap_ms": 0.0,
+        "Hz_from_RT": 7.43,
+        "Hz_reported": 7.43,
+        "hz_ok": true
+      },
+      {
+        "row": "+Intermediate Buffer & Unroll",
+        "sum_components": 132.8,
+        "total": 132.8,
+        "gap_ms": 0.0,
+        "Hz_from_RT": 16.37,
+        "Hz_reported": 16.37,
+        "hz_ok": true
+      }
+    ]
+  },
+  "T4_speedups_v7": {
+    "Orin": {
+      "sched_vs_naive": 2.105201,
+      "graph_vs_sched": 3.667935,
+      "buffer_unroll_vs_graph": 1.894954,
+      "overall_RT_ratio": 14.632338,
+      "headline_from_rounded_Hz": 14.714286,
+      "headline_from_rounded_Hz_vs_ms": 14.632,
+      "vs_vla_cpp_ms": 9.196704,
+      "vs_vla_cpp_Hz": 9.198
+    },
+    "Thor": {
+      "sched_vs_naive": 1.871271,
+      "graph_vs_sched": 1.817979,
+      "buffer_unroll_vs_graph": 2.202946,
+      "overall_RT_ratio": 7.494272,
+      "headline_from_rounded_Hz": 7.509174,
+      "headline_from_rounded_Hz_vs_ms": 7.494
+    }
+  },
+  "T4_text_claims_v7": {
+    "sched_orin": 2.11,
+    "sched_thor": 1.87,
+    "graph_orin": 3.67,
+    "graph_thor": 1.82,
+    "buf_orin": 1.89,
+    "buf_thor": 2.2,
+    "headline_orin": 14.71,
+    "headline_thor": 7.51,
+    "vs_vla_cpp": 9.2
+  },
+  "H1_version_headlines": {
+    "v1-v5": {
+      "orin_final_total": 412.9,
+      "orin_final_RT": 165.1,
+      "orin_final_Hz": 6.06,
+      "thor_final_total": 309.5,
+      "thor_final_RT": 131.8,
+      "thor_final_Hz": 7.59,
+      "headline_orin": 8.66,
+      "headline_vla_cpp": 5.41,
+      "orin_graph_total": 476.1,
+      "orin_graph_RT": 227.0,
+      "thor_graph_total": 372.1,
+      "thor_graph_RT": 191.4
+    },
+    "v6": {
+      "orin_final_total": 374.5,
+      "orin_final_RT": 144.3,
+      "orin_final_Hz": 6.93,
+      "thor_final_total": 202.8,
+      "thor_final_RT": 97.6,
+      "thor_final_Hz": 10.25,
+      "headline_orin": 9.85,
+      "headline_vla_cpp": 6.19,
+      "orin_graph_total": 412.9,
+      "orin_graph_RT": 184.0,
+      "thor_graph_total": 240.0,
+      "thor_graph_RT": 134.6,
+      "text_1_33_1_46": {
+        "orin_RT_ratio_184_over_144.3": 1.275,
+        "thor_RT_ratio_134.6_over_97.6": 1.379
+      }
+    },
+    "v7": {
+      "orin_final_total": 271.1,
+      "orin_final_RT": 97.1,
+      "orin_final_Hz": 10.3,
+      "thor_final_total": 132.8,
+      "thor_final_RT": 61.1,
+      "thor_final_Hz": 16.37,
+      "headline_orin": 14.71,
+      "headline_vla_cpp": 9.2,
+      "orin_graph_total": 412.9,
+      "orin_graph_RT": 184.0,
+      "thor_graph_total": 240.0,
+      "thor_graph_RT": 134.6
+    }
+  },
+  "H1_ratio_v7_vs_v1_orin": 1.699,
+  "H1_orin_final_Hz_change_v6_to_v7_pct": 48.6,
+  "H1_orin_final_component_change_v6_to_v7_ms": {
+    "ViT": -5.3,
+    "LLM": -57.8,
+    "AE": -40.2,
+    "total": -103.4
+  },
+  "T4_sched_implied_VLM_fraction_ASSUMED_MODEL": {
+    "Orin": 0.176,
+    "Thor": 0.143
+  },
+  "T2_balance_factor": {
+    "RTX4090": {
+      "TOPS_over_BW_x1000": 301.8,
+      "reported": 618,
+      "ratio_reported_to_raw": 2.048
+    },
+    "A6000": {
+      "TOPS_over_BW_x1000": 402.3,
+      "reported": 804,
+      "ratio_reported_to_raw": 1.998
+    },
+    "Orin32": {
+      "TOPS_over_BW_x1000": 976.6,
+      "reported": 1953,
+      "ratio_reported_to_raw": 2.0
+    },
+    "Orin64": {
+      "TOPS_over_BW_x1000": 1342.8,
+      "reported": 2685,
+      "ratio_reported_to_raw": 2.0
+    },
+    "Thor": {
+      "TOPS_over_BW_x1000": 1868.1,
+      "reported": 3736,
+      "ratio_reported_to_raw": 2.0
+    }
+  },
+  "T2_roofline_check_ASSUMED": {
+    "RTX4090": {
+      "VLM_M800": [
+        "compute",
+        0.0217,
+        0.0114
+      ],
+      "AE_M10": [
+        "bandwidth",
+        0.0001,
+        0.0021
+      ]
+    },
+    "Orin32": {
+      "VLM_M800": [
+        "bandwidth",
+        0.0336,
+        0.057
+      ],
+      "AE_M10": [
+        "bandwidth",
+        0.0001,
+        0.0103
+      ]
+    },
+    "Thor": {
+      "VLM_M800": [
+        "bandwidth",
+        0.0132,
+        0.0427
+      ],
+      "AE_M10": [
+        "bandwidth",
+        0.0,
+        0.0078
+      ]
+    }
+  },
+  "F7_real_world": {
+    "counts": {
+      "RTX4090": {
+        "success": 27,
+        "of": 30,
+        "rate": 0.9,
+        "wilson95": [
+          0.744,
+          0.965
+        ]
+      },
+      "Orin_naive": {
+        "success": 11,
+        "of": 30,
+        "rate": 0.367,
+        "wilson95": [
+          0.219,
+          0.545
+        ]
+      },
+      "EagleVLA": {
+        "success": 27,
+        "of": 30,
+        "rate": 0.9,
+        "wilson95": [
+          0.744,
+          0.965
+        ]
+      }
+    },
+    "fisher": {
+      "EagleVLA_vs_Orin_naive": {
+        "fisher_p_two_sided": 3.3e-05
+      },
+      "EagleVLA_vs_4090": {
+        "fisher_p_two_sided": 1.0
+      },
+      "Orin_naive_vs_4090": {
+        "fisher_p_two_sided": 3.3e-05
+      }
+    },
+    "note": "과제 3개를 독립 시행 30회로 합산. 과제 군집과 시행 순서는 무시."
+  }
+}
