@@ -1,0 +1,289 @@
+{
+  "t1_best_per_sigma": {
+    "a": [
+      "DCT Encoding",
+      "DCT Encoding",
+      "DCT Encoding",
+      "DCT Encoding",
+      "DCT Encoding"
+    ],
+    "b": [
+      "Unified Meta-Frame",
+      "Unified Meta-Frame",
+      "Unified Meta-Frame",
+      "Unified Meta-Frame",
+      "Unified Meta-Frame"
+    ]
+  },
+  "t1_unified_lowest_in_b_all_sigma": true,
+  "t1_dct_lowest_in_a_sigma_le_5": true,
+  "wan21_check": {
+    "dct_lower_than_vae_per_sigma": [
+      false,
+      true,
+      true,
+      true,
+      true
+    ],
+    "dct_lower_than_spatial_per_sigma": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "unified_lowest_per_sigma": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "wan22_check": {
+    "dct_lower_than_vae_per_sigma": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "dct_lower_than_spatial_per_sigma": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "unified_lowest_per_sigma": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "t2_robocasa": {
+    "n_per_method_assumed": 3600,
+    "metawam_k": 2480,
+    "cosmos_k": 2416,
+    "diff_pp": 1.8,
+    "wilson_metawam": [
+      67.36,
+      70.38
+    ],
+    "wilson_cosmos": [
+      65.56,
+      68.63
+    ],
+    "z": 1.617,
+    "p_two_sided_independent": 0.1059,
+    "mde_pp_80pct": 3.08,
+    "note": "시도가 독립이라는 가정. 시드 3개와 과제 24개에 묶인 분산은 반영하지 않았다."
+  },
+  "t3_baseline_rows_compared": 12,
+  "t3_row_mismatch_vs_source": {},
+  "t3_rows_in_source_not_in_paper_table": [
+    "π0 (rerun)",
+    "π0.5"
+  ],
+  "t3_total_vs_unweighted_mean": {
+    "π0": {
+      "total_reported": 53.6,
+      "unweighted_mean_7": 56.13
+    },
+    "π0-FAST": {
+      "total_reported": 61.6,
+      "unweighted_mean_7": 62.47
+    },
+    "OpenVLA-OFT": {
+      "total_reported": 67.9,
+      "unweighted_mean_7": 69.9
+    },
+    "UniVLA": {
+      "total_reported": 42.9,
+      "unweighted_mean_7": 45.81
+    },
+    "RIPT-VLA": {
+      "total_reported": 68.4,
+      "unweighted_mean_7": 70.24
+    },
+    "X-VLA": {
+      "total_reported": 71.4,
+      "unweighted_mean_7": 72.5
+    },
+    "HoloBrain0-GD": {
+      "total_reported": 74.0,
+      "unweighted_mean_7": 75.31
+    },
+    "ABot-M0": {
+      "total_reported": 80.5,
+      "unweighted_mean_7": 81.64
+    },
+    "VLA-JEPA": {
+      "total_reported": 77.9,
+      "unweighted_mean_7": 79.27
+    },
+    "GE-Act": {
+      "total_reported": 80.3,
+      "unweighted_mean_7": 81.14
+    },
+    "Cosmos Policy": {
+      "total_reported": 82.2,
+      "unweighted_mean_7": 83.01
+    },
+    "Fast-WAM": {
+      "total_reported": 51.5,
+      "unweighted_mean_7": 51.44
+    },
+    "MetaWAM": {
+      "total_reported": 83.4,
+      "unweighted_mean_7": 83.46
+    },
+    "π0 (rerun)": {
+      "total_reported": 69.4,
+      "unweighted_mean_7": 70.74
+    },
+    "π0.5": {
+      "total_reported": 85.7,
+      "unweighted_mean_7": 86.49
+    }
+  },
+  "t3_margin_vs_cosmos_reported_pp": 1.2,
+  "t3_margin_vs_cosmos_text_pp": 1.24,
+  "t3_margin_vs_cosmos_unweighted_pp": 0.45,
+  "t3_pi05_total_vs_metawam_pp": 2.3,
+  "t4_counts": {
+    "π0": {
+      "id_counts": [
+        9,
+        10,
+        11
+      ],
+      "id_total": 30,
+      "id_mean_check": 50.0,
+      "id_reported": 50.0,
+      "ood_counts": [
+        7,
+        7,
+        8
+      ],
+      "ood_total": 22,
+      "ood_mean_check": 36.67,
+      "ood_reported": 36.7
+    },
+    "π0.5": {
+      "id_counts": [
+        14,
+        14,
+        15
+      ],
+      "id_total": 43,
+      "id_mean_check": 71.67,
+      "id_reported": 71.7,
+      "ood_counts": [
+        9,
+        9,
+        10
+      ],
+      "ood_total": 28,
+      "ood_mean_check": 46.67,
+      "ood_reported": 46.7
+    },
+    "Cosmos Policy": {
+      "id_counts": [
+        15,
+        16,
+        16
+      ],
+      "id_total": 47,
+      "id_mean_check": 78.33,
+      "id_reported": 78.3,
+      "ood_counts": [
+        12,
+        12,
+        14
+      ],
+      "ood_total": 38,
+      "ood_mean_check": 63.33,
+      "ood_reported": 63.3
+    },
+    "MetaWAM": {
+      "id_counts": [
+        16,
+        17,
+        18
+      ],
+      "id_total": 51,
+      "id_mean_check": 85.0,
+      "id_reported": 85.0,
+      "ood_counts": [
+        13,
+        13,
+        15
+      ],
+      "ood_total": 41,
+      "ood_mean_check": 68.33,
+      "ood_reported": 68.3
+    }
+  },
+  "t4_fisher": {
+    "id_metawam_vs_cosmos": {
+      "k": [
+        51,
+        47
+      ],
+      "n": 60,
+      "p_fisher_two_sided": 0.48
+    },
+    "ood_metawam_vs_cosmos": {
+      "k": [
+        41,
+        38
+      ],
+      "n": 60,
+      "p_fisher_two_sided": 0.701
+    },
+    "pooled_metawam_vs_cosmos": {
+      "k": [
+        92,
+        85
+      ],
+      "n": 120,
+      "p_fisher_two_sided": 0.379
+    },
+    "mde_pp_80pct_n60": 22.1,
+    "id_wilson_metawam_pct": [
+      73.9,
+      91.9
+    ],
+    "id_wilson_cosmos_pct": [
+      66.4,
+      86.9
+    ],
+    "id_pi05_vs_metawam_fisher_p": 0.12
+  },
+  "t8_suite_mean_check": {
+    "MetaWAM": 98.05,
+    "Cosmos Policy": 98.475
+  },
+  "t8_libero_avg": {
+    "diff_pp": -0.4,
+    "n_assumed": 6000,
+    "z": -1.695,
+    "p_two_sided_independent": 0.09,
+    "mde_pp_80pct": 0.72
+  },
+  "t5_latency_reduction_pct": 39.2,
+  "t5_attention_reduction_pct_11_to_8": 47.1,
+  "t5_attention_reduction_note": "지연을 T^2로 가정(토큰 수에 비례하는 전체 어텐션, 프레임당 토큰 동일)",
+  "t5_rank_sr": [
+    "Unified",
+    "Meta-Compact",
+    "Separate",
+    "Meta-Quadrants"
+  ],
+  "t5_rank_gain_same_as_sr": true,
+  "t5_rank_l2_same_as_sr": true,
+  "t5_n_layouts": 4
+}
