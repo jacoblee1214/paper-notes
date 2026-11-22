@@ -1,0 +1,1292 @@
+{
+ "V1_table5_means": {
+  "Pi0.5": {
+   "clean_mean": 54.88,
+   "clean_reported_avg_row": 54.9,
+   "rand_mean": 27.72,
+   "rand_reported_avg_row": 27.7,
+   "max_abs_diff_vs_avg_row": 0.02
+  },
+  "Robot-only": {
+   "clean_mean": 62.22,
+   "clean_reported_avg_row": 62.2,
+   "rand_mean": 50.9,
+   "rand_reported_avg_row": 50.9,
+   "table1_clean": 62.2,
+   "table1_rand": 50.9,
+   "max_abs_diff_vs_avg_row": 0.02
+  },
+  "Ego2R(1:3)": {
+   "clean_mean": 61.36,
+   "clean_reported_avg_row": 61.4,
+   "rand_mean": 50.92,
+   "rand_reported_avg_row": 51.0,
+   "table1_clean": 61.4,
+   "table1_rand": 51.0,
+   "max_abs_diff_vs_avg_row": 0.08
+  },
+  "Ego2R(3:1)": {
+   "clean_mean": 64.04,
+   "clean_reported_avg_row": 64.1,
+   "rand_mean": 49.2,
+   "rand_reported_avg_row": 49.2,
+   "table1_clean": 64.1,
+   "table1_rand": 49.2,
+   "max_abs_diff_vs_avg_row": 0.06
+  },
+  "Ego2R(1:1)": {
+   "clean_mean": 68.02,
+   "clean_reported_avg_row": 68.1,
+   "rand_mean": 53.5,
+   "rand_reported_avg_row": 53.5,
+   "table1_clean": 68.1,
+   "table1_rand": 53.5,
+   "max_abs_diff_vs_avg_row": 0.08
+  }
+ },
+ "V2_parity": {
+  "n_values": 500,
+  "n_non_integer": 0,
+  "n_odd": 182,
+  "share_odd": 0.364,
+  "per_model": {
+   "Pi0.5": {
+    "clean_odd": 0,
+    "rand_odd": 0
+   },
+   "Robot-only": {
+    "clean_odd": 23,
+    "rand_odd": 27
+   },
+   "Ego2R(1:3)": {
+    "clean_odd": 0,
+    "rand_odd": 26
+   },
+   "Ego2R(3:1)": {
+    "clean_odd": 28,
+    "rand_odd": 28
+   },
+   "Ego2R(1:1)": {
+    "clean_odd": 25,
+    "rand_odd": 25
+   }
+  },
+  "pi05_all_even": true,
+  "note": "50에피소드 이진 성공이면 모든 값이 짝수여야 한다. 홀수가 있으면 분모가 50이 아니다(예: 100).",
+  "pi05_odd_count": 0
+ },
+ "V3_table1_delta_mismatch": [],
+ "V3_table2_delta_mismatch": [],
+ "V4_group_means": [
+  {
+   "model": "Robot-only",
+   "group": "Visual",
+   "computed": 61.4,
+   "reported": 61.4,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Robot-only",
+   "group": "Scene",
+   "computed": 52.93,
+   "reported": 52.9,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Robot-only",
+   "group": "Embody",
+   "computed": 23.77,
+   "reported": 23.8,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Robot-only",
+   "group": "Task",
+   "computed": 46.2,
+   "reported": 46.2,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(1:3)",
+   "group": "Visual",
+   "computed": 61.2,
+   "reported": 61.2,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(1:3)",
+   "group": "Scene",
+   "computed": 52.5,
+   "reported": 52.5,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(1:3)",
+   "group": "Embody",
+   "computed": 21.93,
+   "reported": 21.9,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(1:3)",
+   "group": "Task",
+   "computed": 49.5,
+   "reported": 49.5,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(3:1)",
+   "group": "Visual",
+   "computed": 62.73,
+   "reported": 62.7,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(3:1)",
+   "group": "Scene",
+   "computed": 54.27,
+   "reported": 54.3,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(3:1)",
+   "group": "Embody",
+   "computed": 28.2,
+   "reported": 28.2,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(3:1)",
+   "group": "Task",
+   "computed": 51.55,
+   "reported": 51.6,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(1:1)",
+   "group": "Visual",
+   "computed": 67.3,
+   "reported": 67.3,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(1:1)",
+   "group": "Scene",
+   "computed": 56.9,
+   "reported": 56.9,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(1:1)",
+   "group": "Embody",
+   "computed": 27.17,
+   "reported": 27.2,
+   "ok_to_0.1": true
+  },
+  {
+   "model": "Ego2R(1:1)",
+   "group": "Task",
+   "computed": 54.05,
+   "reported": 54.1,
+   "ok_to_0.1": true
+  }
+ ],
+ "V4_group_mismatch": [],
+ "V5_text_claims": {
+  "table1_best_per_column": {
+   "Clean": "Ego2R(1:1)",
+   "Rand": "Ego2R(1:1)",
+   "Visual": "Ego2R(1:1)",
+   "Scene": "Ego2R(1:1)",
+   "Embody": "Ego2R(3:1)",
+   "Task": "Ego2R(1:1)",
+   "EBench": "Ego2R(3:1)"
+  },
+  "1:1_leads_in": [
+   "Clean",
+   "Rand",
+   "Visual",
+   "Scene",
+   "Task"
+  ],
+  "1:1_leads_count": 5,
+  "table2_delta_1:1": {
+   "BG": 3.7,
+   "Light": 7.6,
+   "Color": 6.4,
+   "Height": 2.3,
+   "Clutter": 3.7,
+   "Camera": 5.9,
+   "ARX": 7.1,
+   "UR5": 4.8,
+   "Franka": -1.7,
+   "Obj": 10.3,
+   "Lang": 5.4
+  },
+  "table2_n_positive_of_11": {
+   "Ego2R(1:3)": 4,
+   "Ego2R(3:1)": 8,
+   "Ego2R(1:1)": 10
+  },
+  "table1_n_positive_of_7": {
+   "Ego2R(1:3)": 3,
+   "Ego2R(3:1)": 6,
+   "Ego2R(1:1)": 7
+  },
+  "text_bg_light_color_1:1": [
+   3.7,
+   7.6,
+   6.4
+  ],
+  "text_camera_1:1": 5.9,
+  "text_obj_3:1": 10.7,
+  "text_lang_1:1_value": 68.5,
+  "franka_values": [
+   7.0,
+   4.5,
+   5.6,
+   5.3
+  ],
+  "franka_text": "Franka remains below 7%: 로봇 전용 7.0은 7 미만이 아니다(같다)"
+ },
+ "V6_two_proportion_z": {
+  "table1": {
+   "Ego2R(1:3)": {
+    "Clean": {
+     "delta": -0.8,
+     "z": -0.58,
+     "p": 0.5605,
+     "se_diff_pp": 1.37
+    },
+    "Rand": {
+     "delta": 0.1,
+     "z": 0.07,
+     "p": 0.9436,
+     "se_diff_pp": 1.41
+    },
+    "Visual": {
+     "delta": -0.2,
+     "z": -0.25,
+     "p": 0.8015,
+     "se_diff_pp": 0.8
+    },
+    "Scene": {
+     "delta": -0.4,
+     "z": -0.49,
+     "p": 0.6237,
+     "se_diff_pp": 0.82
+    },
+    "Embody": {
+     "delta": -1.9,
+     "z": -2.77,
+     "p": 0.0056,
+     "se_diff_pp": 0.69
+    },
+    "Task": {
+     "delta": 3.3,
+     "z": 3.3,
+     "p": 0.001,
+     "se_diff_pp": 1.0
+    }
+   },
+   "Ego2R(3:1)": {
+    "Clean": {
+     "delta": 1.9,
+     "z": 1.39,
+     "p": 0.1638,
+     "se_diff_pp": 1.36
+    },
+    "Rand": {
+     "delta": -1.7,
+     "z": -1.2,
+     "p": 0.2293,
+     "se_diff_pp": 1.41
+    },
+    "Visual": {
+     "delta": 1.3,
+     "z": 1.64,
+     "p": 0.1009,
+     "se_diff_pp": 0.79
+    },
+    "Scene": {
+     "delta": 1.4,
+     "z": 1.72,
+     "p": 0.0856,
+     "se_diff_pp": 0.81
+    },
+    "Embody": {
+     "delta": 4.4,
+     "z": 6.14,
+     "p": 0.0,
+     "se_diff_pp": 0.72
+    },
+    "Task": {
+     "delta": 5.4,
+     "z": 5.4,
+     "p": 0.0,
+     "se_diff_pp": 1.0
+    }
+   },
+   "Ego2R(1:1)": {
+    "Clean": {
+     "delta": 5.9,
+     "z": 4.38,
+     "p": 0.0,
+     "se_diff_pp": 1.35
+    },
+    "Rand": {
+     "delta": 2.6,
+     "z": 1.84,
+     "p": 0.0657,
+     "se_diff_pp": 1.41
+    },
+    "Visual": {
+     "delta": 5.9,
+     "z": 7.54,
+     "p": 0.0,
+     "se_diff_pp": 0.78
+    },
+    "Scene": {
+     "delta": 4.0,
+     "z": 4.92,
+     "p": 0.0,
+     "se_diff_pp": 0.81
+    },
+    "Embody": {
+     "delta": 3.4,
+     "z": 4.78,
+     "p": 0.0,
+     "se_diff_pp": 0.71
+    },
+    "Task": {
+     "delta": 7.9,
+     "z": 7.9,
+     "p": 0.0,
+     "se_diff_pp": 1.0
+    }
+   }
+  },
+  "table2": {
+   "Ego2R(1:3)": {
+    "BG": {
+     "delta": -1.6,
+     "z": -1.19,
+     "p": 0.2331
+    },
+    "Light": {
+     "delta": 0.1,
+     "z": 0.07,
+     "p": 0.9428
+    },
+    "Color": {
+     "delta": 0.9,
+     "z": 0.65,
+     "p": 0.5163
+    },
+    "Height": {
+     "delta": -1.5,
+     "z": -1.08,
+     "p": 0.2803
+    },
+    "Clutter": {
+     "delta": 1.0,
+     "z": 0.71,
+     "p": 0.4794
+    },
+    "Camera": {
+     "delta": -0.8,
+     "z": -0.57,
+     "p": 0.5716
+    },
+    "ARX": {
+     "delta": -0.4,
+     "z": -0.28,
+     "p": 0.7757
+    },
+    "UR5": {
+     "delta": -2.6,
+     "z": -2.35,
+     "p": 0.0189
+    },
+    "Franka": {
+     "delta": -2.5,
+     "z": -3.8,
+     "p": 0.0001
+    },
+    "Obj": {
+     "delta": 7.5,
+     "z": 5.64,
+     "p": 0.0
+    },
+    "Lang": {
+     "delta": -0.9,
+     "z": -0.66,
+     "p": 0.5107
+    }
+   },
+   "Ego2R(3:1)": {
+    "BG": {
+     "delta": -1.1,
+     "z": -0.82,
+     "p": 0.4115
+    },
+    "Light": {
+     "delta": 2.7,
+     "z": 1.94,
+     "p": 0.0518
+    },
+    "Color": {
+     "delta": 2.4,
+     "z": 1.74,
+     "p": 0.0825
+    },
+    "Height": {
+     "delta": 1.9,
+     "z": 1.38,
+     "p": 0.1683
+    },
+    "Clutter": {
+     "delta": 0.9,
+     "z": 0.64,
+     "p": 0.5244
+    },
+    "Camera": {
+     "delta": 1.2,
+     "z": 0.85,
+     "p": 0.396
+    },
+    "ARX": {
+     "delta": 3.5,
+     "z": 2.48,
+     "p": 0.013
+    },
+    "UR5": {
+     "delta": 11.2,
+     "z": 9.05,
+     "p": 0.0
+    },
+    "Franka": {
+     "delta": -1.4,
+     "z": -2.04,
+     "p": 0.0416
+    },
+    "Obj": {
+     "delta": 10.7,
+     "z": 7.95,
+     "p": 0.0
+    },
+    "Lang": {
+     "delta": 0.0,
+     "z": 0.0,
+     "p": 1.0
+    }
+   },
+   "Ego2R(1:1)": {
+    "BG": {
+     "delta": 3.7,
+     "z": 2.81,
+     "p": 0.0049
+    },
+    "Light": {
+     "delta": 7.6,
+     "z": 5.54,
+     "p": 0.0
+    },
+    "Color": {
+     "delta": 6.4,
+     "z": 4.68,
+     "p": 0.0
+    },
+    "Height": {
+     "delta": 2.3,
+     "z": 1.67,
+     "p": 0.0951
+    },
+    "Clutter": {
+     "delta": 3.7,
+     "z": 2.62,
+     "p": 0.0089
+    },
+    "Camera": {
+     "delta": 5.9,
+     "z": 4.18,
+     "p": 0.0
+    },
+    "ARX": {
+     "delta": 7.1,
+     "z": 5.03,
+     "p": 0.0
+    },
+    "UR5": {
+     "delta": 4.8,
+     "z": 4.06,
+     "p": 0.0
+    },
+    "Franka": {
+     "delta": -1.7,
+     "z": -2.5,
+     "p": 0.0124
+    },
+    "Obj": {
+     "delta": 10.3,
+     "z": 7.66,
+     "p": 0.0
+    },
+    "Lang": {
+     "delta": 5.4,
+     "z": 4.02,
+     "p": 0.0001
+    }
+   }
+  }
+ },
+ "V6_table2_multiple_comparison": {
+  "n_tests": 33,
+  "p_lt_0.05_raw": 17,
+  "p_lt_0.05_bonferroni": 11,
+  "p_lt_0.05_BH": 16,
+  "survivors_BH": [
+   "Ego2R(1:3)|UR5",
+   "Ego2R(1:3)|Franka",
+   "Ego2R(1:3)|Obj",
+   "Ego2R(3:1)|ARX",
+   "Ego2R(3:1)|UR5",
+   "Ego2R(3:1)|Obj",
+   "Ego2R(1:1)|BG",
+   "Ego2R(1:1)|Light",
+   "Ego2R(1:1)|Color",
+   "Ego2R(1:1)|Clutter",
+   "Ego2R(1:1)|Camera",
+   "Ego2R(1:1)|ARX",
+   "Ego2R(1:1)|UR5",
+   "Ego2R(1:1)|Franka",
+   "Ego2R(1:1)|Obj",
+   "Ego2R(1:1)|Lang"
+  ],
+  "survivors_raw": [
+   "Ego2R(1:3)|UR5",
+   "Ego2R(1:3)|Franka",
+   "Ego2R(1:3)|Obj",
+   "Ego2R(3:1)|ARX",
+   "Ego2R(3:1)|UR5",
+   "Ego2R(3:1)|Franka",
+   "Ego2R(3:1)|Obj",
+   "Ego2R(1:1)|BG",
+   "Ego2R(1:1)|Light",
+   "Ego2R(1:1)|Color",
+   "Ego2R(1:1)|Clutter",
+   "Ego2R(1:1)|Camera",
+   "Ego2R(1:1)|ARX",
+   "Ego2R(1:1)|UR5",
+   "Ego2R(1:1)|Franka",
+   "Ego2R(1:1)|Obj",
+   "Ego2R(1:1)|Lang"
+  ]
+ },
+ "V6_se_diff_by_base": {
+  "20": 1.13,
+  "50": 1.41,
+  "65": 1.35
+ },
+ "V7_paired_over_tasks": {
+  "Ego2R(1:3)": {
+   "clean": {
+    "mean_diff": -0.86,
+    "sd_diff": 13.59,
+    "se_mean_diff": 1.92,
+    "t": -0.45,
+    "p_t": 0.6566,
+    "p_wilcoxon": 0.9505,
+    "boot95": [
+     -4.58,
+     2.78
+    ],
+    "n_tasks_up": 23,
+    "n_tasks_down": 22,
+    "n_tie": 5
+   },
+   "rand": {
+    "mean_diff": 0.02,
+    "sd_diff": 12.97,
+    "se_mean_diff": 1.83,
+    "t": 0.01,
+    "p_t": 0.9913,
+    "p_wilcoxon": 0.8989,
+    "boot95": [
+     -3.52,
+     3.56
+    ],
+    "n_tasks_up": 24,
+    "n_tasks_down": 23,
+    "n_tie": 3
+   }
+  },
+  "Ego2R(3:1)": {
+   "clean": {
+    "mean_diff": 1.82,
+    "sd_diff": 13.07,
+    "se_mean_diff": 1.85,
+    "t": 0.98,
+    "p_t": 0.3295,
+    "p_wilcoxon": 0.2442,
+    "boot95": [
+     -1.86,
+     5.36
+    ],
+    "n_tasks_up": 28,
+    "n_tasks_down": 21,
+    "n_tie": 1
+   },
+   "rand": {
+    "mean_diff": -1.7,
+    "sd_diff": 11.81,
+    "se_mean_diff": 1.67,
+    "t": -1.02,
+    "p_t": 0.3137,
+    "p_wilcoxon": 0.1889,
+    "boot95": [
+     -4.88,
+     1.62
+    ],
+    "n_tasks_up": 19,
+    "n_tasks_down": 30,
+    "n_tie": 1
+   }
+  },
+  "Ego2R(1:1)": {
+   "clean": {
+    "mean_diff": 5.8,
+    "sd_diff": 14.42,
+    "se_mean_diff": 2.04,
+    "t": 2.84,
+    "p_t": 0.0065,
+    "p_wilcoxon": 0.0114,
+    "boot95": [
+     1.88,
+     9.82
+    ],
+    "n_tasks_up": 29,
+    "n_tasks_down": 17,
+    "n_tie": 4
+   },
+   "rand": {
+    "mean_diff": 2.6,
+    "sd_diff": 11.91,
+    "se_mean_diff": 1.68,
+    "t": 1.54,
+    "p_t": 0.129,
+    "p_wilcoxon": 0.1208,
+    "boot95": [
+     -0.54,
+     5.96
+    ],
+    "n_tasks_up": 26,
+    "n_tasks_down": 21,
+    "n_tie": 3
+   }
+  }
+ },
+ "V8_binomial_se_of_average": {
+  "Pi0.5": {
+   "clean_se": 0.85,
+   "rand_se": 0.76
+  },
+  "Robot-only": {
+   "clean_se": 0.83,
+   "rand_se": 0.89
+  },
+  "Ego2R(1:3)": {
+   "clean_se": 0.85,
+   "rand_se": 0.86
+  },
+  "Ego2R(3:1)": {
+   "clean_se": 0.82,
+   "rand_se": 0.88
+  },
+  "Ego2R(1:1)": {
+   "clean_se": 0.81,
+   "rand_se": 0.88
+  }
+ },
+ "V8_diff_z_binomial": {
+  "Ego2R(1:3)|clean": {
+   "diff": -0.86,
+   "se": 1.19,
+   "z": -0.72,
+   "p": 0.4705
+  },
+  "Ego2R(1:3)|rand": {
+   "diff": 0.02,
+   "se": 1.24,
+   "z": 0.02,
+   "p": 0.9871
+  },
+  "Ego2R(3:1)|clean": {
+   "diff": 1.82,
+   "se": 1.17,
+   "z": 1.56,
+   "p": 0.1195
+  },
+  "Ego2R(3:1)|rand": {
+   "diff": -1.7,
+   "se": 1.25,
+   "z": -1.36,
+   "p": 0.1741
+  },
+  "Ego2R(1:1)|clean": {
+   "diff": 5.8,
+   "se": 1.16,
+   "z": 5.0,
+   "p": 0.0
+  },
+  "Ego2R(1:1)|rand": {
+   "diff": 2.6,
+   "se": 1.25,
+   "z": 2.08,
+   "p": 0.0372
+  }
+ },
+ "V8_diff_z_binomial_n100": {
+  "Ego2R(1:3)|clean": {
+   "diff": -0.86,
+   "se": 0.84,
+   "z": -1.02,
+   "p": 0.3074
+  },
+  "Ego2R(1:3)|rand": {
+   "diff": 0.02,
+   "se": 0.87,
+   "z": 0.02,
+   "p": 0.9817
+  },
+  "Ego2R(3:1)|clean": {
+   "diff": 1.82,
+   "se": 0.83,
+   "z": 2.2,
+   "p": 0.0277
+  },
+  "Ego2R(3:1)|rand": {
+   "diff": -1.7,
+   "se": 0.88,
+   "z": -1.92,
+   "p": 0.0546
+  },
+  "Ego2R(1:1)|clean": {
+   "diff": 5.8,
+   "se": 0.82,
+   "z": 7.07,
+   "p": 0.0
+  },
+  "Ego2R(1:1)|rand": {
+   "diff": 2.6,
+   "se": 0.88,
+   "z": 2.95,
+   "p": 0.0032
+  }
+ },
+ "V9_rand_gt_clean": {
+  "Pi0.5": {
+   "n_tasks_rand_gt_clean": 2,
+   "n_tasks_rand_ge_clean": 2,
+   "max_rand_minus_clean": 12.0,
+   "task_of_max": "click alarmclock"
+  },
+  "Robot-only": {
+   "n_tasks_rand_gt_clean": 13,
+   "n_tasks_rand_ge_clean": 14,
+   "max_rand_minus_clean": 19.0,
+   "task_of_max": "dump bin bigbin"
+  },
+  "Ego2R(1:3)": {
+   "n_tasks_rand_gt_clean": 13,
+   "n_tasks_rand_ge_clean": 13,
+   "max_rand_minus_clean": 15.0,
+   "task_of_max": "place phone stand"
+  },
+  "Ego2R(3:1)": {
+   "n_tasks_rand_gt_clean": 5,
+   "n_tasks_rand_ge_clean": 5,
+   "max_rand_minus_clean": 43.0,
+   "task_of_max": "move can pot"
+  },
+  "Ego2R(1:1)": {
+   "n_tasks_rand_gt_clean": 8,
+   "n_tasks_rand_ge_clean": 13,
+   "max_rand_minus_clean": 18.0,
+   "task_of_max": "move can pot"
+  }
+ },
+ "V10_dose_response": {
+  "Clean": {
+   "0.00": 62.2,
+   "0.25": 61.4,
+   "0.50": 68.1,
+   "0.75": 64.1
+  },
+  "Rand": {
+   "0.00": 50.9,
+   "0.25": 51.0,
+   "0.50": 53.5,
+   "0.75": 49.2
+  },
+  "Visual": {
+   "0.00": 61.4,
+   "0.25": 61.2,
+   "0.50": 67.3,
+   "0.75": 62.7
+  },
+  "Scene": {
+   "0.00": 52.9,
+   "0.25": 52.5,
+   "0.50": 56.9,
+   "0.75": 54.3
+  },
+  "Embody": {
+   "0.00": 23.8,
+   "0.25": 21.9,
+   "0.50": 27.2,
+   "0.75": 28.2
+  },
+  "Task": {
+   "0.00": 46.2,
+   "0.25": 49.5,
+   "0.50": 54.1,
+   "0.75": 51.6
+  },
+  "EBench": {
+   "0.00": 39.6,
+   "0.25": 47.4,
+   "0.50": 49.8,
+   "0.75": 51.7
+  }
+ },
+ "V10_nonmonotone_cols": [
+  "Clean",
+  "Rand",
+  "Visual",
+  "Scene",
+  "Task"
+ ],
+ "V11_data_and_exposure": {
+  "ego_sources_sum_h": 1942,
+  "paper_says_approx_h": 1940,
+  "robot_sum_h": 6565,
+  "paper_says_h": 6565,
+  "frames_per_run": 19200000,
+  "amplification_18561_over_ego": 9.558,
+  "amplification_vs_1940": 9.568,
+  "ideal_15x_hours": 29130,
+  "kept_fraction_of_15x": 0.637,
+  "per_morph_hours": 1237.4,
+  "ablation_hours_if_linear": {
+   "1": 1237.0,
+   "5": 6187.0,
+   "10": 12374.0,
+   "15": 18561.0
+  },
+  "ablation_hours_reported": {
+   "1": 1237,
+   "5": 6187,
+   "10": 12374,
+   "15": 18561
+  },
+  "raw_plus_15": 20501,
+  "raw_plus_15_reported": 20501,
+  "exposure": {
+   "10": {
+    "robot_only_epochs": 0.0812,
+    "1:1_robot_epochs": 0.0406,
+    "1:1_ego_epochs": 0.0144,
+    "3:1_ego_epochs": 0.0216,
+    "1:3_ego_epochs": 0.0072,
+    "1:1_ego_hours_seen": 267.0
+   },
+   "15": {
+    "robot_only_epochs": 0.0542,
+    "1:1_robot_epochs": 0.0271,
+    "1:1_ego_epochs": 0.0096,
+    "3:1_ego_epochs": 0.0144,
+    "1:3_ego_epochs": 0.0048,
+    "1:1_ego_hours_seen": 178.0
+   },
+   "30": {
+    "robot_only_epochs": 0.0271,
+    "1:1_robot_epochs": 0.0135,
+    "1:1_ego_epochs": 0.0048,
+    "3:1_ego_epochs": 0.0072,
+    "1:3_ego_epochs": 0.0024,
+    "1:1_ego_hours_seen": 89.0
+   }
+  }
+ },
+ "V12_ablation": {
+  "values": {
+   "Ego(raw)": 28.1,
+   "Ego2R(1)": 31.7,
+   "Ego2R(5)": 32.3,
+   "Ego2R(10)": 33.1,
+   "Ego2R(15)": 33.5,
+   "Ego2R(15)+Ego": 37.3
+  },
+  "pipeline_value_1_vs_raw": {
+   "diff": 3.6,
+   "z": 2.78,
+   "p": 0.0054
+  },
+  "morph_1_to_15": {
+   "diff": 1.8,
+   "z": 1.36,
+   "p": 0.1746
+  },
+  "morph_5_to_15": {
+   "diff": 1.2,
+   "z": 0.9,
+   "p": 0.3665
+  },
+  "raw_added": {
+   "diff": 3.8,
+   "z": 2.81,
+   "p": 0.005
+  },
+  "text_pipeline_gain_check": 3.6,
+  "increments": [
+   0.6,
+   0.8,
+   0.4
+  ],
+  "slope_pp_per_morphology": 0.131
+ },
+ "V13_real_robot_feasibility": {
+  "cells": {
+   "Put Fruits|Scratch": {
+    "value": 3,
+    "feasible": true,
+    "nearest_means": [
+     3.33
+    ]
+   },
+   "Put Fruits|Robot-only": {
+    "value": 23,
+    "feasible": true,
+    "nearest_means": [
+     23.31
+    ]
+   },
+   "Put Fruits|Mix": {
+    "value": 25,
+    "feasible": true,
+    "nearest_means": [
+     24.97
+    ]
+   },
+   "Put Fruits|Mix+Play": {
+    "value": 31,
+    "feasible": false,
+    "nearest_means": [
+     31.63
+    ]
+   },
+   "Put Blocks|Scratch": {
+    "value": 12,
+    "feasible": true,
+    "nearest_means": [
+     12.5
+    ]
+   },
+   "Put Blocks|Robot-only": {
+    "value": 35,
+    "feasible": true,
+    "nearest_means": [
+     35.0
+    ]
+   },
+   "Put Blocks|Mix": {
+    "value": 38,
+    "feasible": true,
+    "nearest_means": [
+     37.5
+    ]
+   },
+   "Put Blocks|Mix+Play": {
+    "value": 49,
+    "feasible": true,
+    "nearest_means": [
+     48.75
+    ]
+   },
+   "Fold Towel|Scratch": {
+    "value": 0,
+    "feasible": true,
+    "nearest_means": [
+     0.0
+    ]
+   },
+   "Fold Towel|Robot-only": {
+    "value": 25,
+    "feasible": true,
+    "nearest_means": [
+     25.0
+    ]
+   },
+   "Fold Towel|Mix": {
+    "value": 25,
+    "feasible": true,
+    "nearest_means": [
+     25.0
+    ]
+   },
+   "Fold Towel|Mix+Play": {
+    "value": 30,
+    "feasible": true,
+    "nearest_means": [
+     30.0
+    ]
+   },
+   "Sweep Trash|Scratch": {
+    "value": 0,
+    "feasible": true,
+    "nearest_means": [
+     0.0
+    ]
+   },
+   "Sweep Trash|Robot-only": {
+    "value": 1,
+    "feasible": true,
+    "nearest_means": [
+     1.25
+    ]
+   },
+   "Sweep Trash|Mix": {
+    "value": 5,
+    "feasible": true,
+    "nearest_means": [
+     5.0
+    ]
+   },
+   "Sweep Trash|Mix+Play": {
+    "value": 14,
+    "feasible": true,
+    "nearest_means": [
+     13.75
+    ]
+   },
+   "Insert Screw|Scratch": {
+    "value": 0,
+    "feasible": true,
+    "nearest_means": [
+     0.0
+    ]
+   },
+   "Insert Screw|Robot-only": {
+    "value": 2,
+    "feasible": true,
+    "nearest_means": [
+     2.5
+    ]
+   },
+   "Insert Screw|Mix": {
+    "value": 6,
+    "feasible": true,
+    "nearest_means": [
+     6.25
+    ]
+   },
+   "Insert Screw|Mix+Play": {
+    "value": 15,
+    "feasible": true,
+    "nearest_means": [
+     15.0
+    ]
+   }
+  },
+  "infeasible": [
+   {
+    "cell": "Put Fruits|Mix+Play",
+    "value": 31,
+    "nearest_attainable": 31.63
+   }
+  ]
+ },
+ "V13_real_robot_diffs": {
+  "play_minus_robot": {
+   "Put Fruits": 8,
+   "Put Blocks": 14,
+   "Fold Towel": 5,
+   "Sweep Trash": 13,
+   "Insert Screw": 13
+  },
+  "play_minus_mix": {
+   "Put Fruits": 6,
+   "Put Blocks": 11,
+   "Fold Towel": 5,
+   "Sweep Trash": 9,
+   "Insert Screw": 9
+  },
+  "mix_minus_robot": {
+   "Put Fruits": 2,
+   "Put Blocks": 3,
+   "Fold Towel": 0,
+   "Sweep Trash": 4,
+   "Insert Screw": 4
+  },
+  "pooled_play_vs_robot": {
+   "30": {
+    "mean_diff": 10.6,
+    "se_with_sd30": 4.24,
+    "z": 2.5,
+    "p": 0.0125
+   },
+   "40": {
+    "mean_diff": 10.6,
+    "se_with_sd40": 5.66,
+    "z": 1.87,
+    "p": 0.061
+   },
+   "50": {
+    "mean_diff": 10.6,
+    "se_with_sd50": 7.07,
+    "z": 1.5,
+    "p": 0.1339
+   }
+  },
+  "pooled_mix_vs_robot": {
+   "30": {
+    "mean_diff": 2.6,
+    "se_with_sd30": 4.24,
+    "z": 0.61,
+    "p": 0.54
+   },
+   "40": {
+    "mean_diff": 2.6,
+    "se_with_sd40": 5.66,
+    "z": 0.46,
+    "p": 0.6458
+   },
+   "50": {
+    "mean_diff": 2.6,
+    "se_with_sd50": 7.07,
+    "z": 0.37,
+    "p": 0.7131
+   }
+  },
+  "per_task_se_diff": {
+   "30": 9.5,
+   "40": 12.6,
+   "50": 15.8
+  },
+  "sign_test_p_5of5_one_sided": 0.0312,
+  "text_check": {
+   "put_blocks_gain_text": 14,
+   "computed": 14,
+   "insert_screw_gain_text": 13,
+   "computed2": 13
+  },
+  "largest_gain_task": "Put Blocks",
+  "mean_play": 27.8,
+  "mean_robot": 17.2,
+  "mean_mix": 19.8,
+  "mean_scratch": 3.0
+ },
+ "V13_table4_step_sums": {
+  "Put Fruits": 99.9,
+  "Put Blocks": 100.0,
+  "Fold Towel": 100.0,
+  "Sweep Trash": 100.0,
+  "Insert Screw": 100.0
+ },
+ "V14_misc": {
+  "episodes_eval_cell": 2500,
+  "real_robot_ego_play_minutes_per_episode_s": 3.11,
+  "finetune_demos_robotwin": 2500,
+  "ebench_finetune_demos": 2800,
+  "speed_align_factors": {
+   "60%": 1.67,
+   "45%": 2.22,
+   "25%": 4.0
+  },
+  "pretrain_batch": 96,
+  "frames_200k_x_96": 19200000,
+  "table3_panda_equals_fr3_reach": true
+ },
+ "Pi05_vs_robot_only": {
+  "clean": [
+   54.9,
+   62.2
+  ],
+  "rand": [
+   27.7,
+   50.9
+  ],
+  "tasks_pi05_better_clean": 20,
+  "tasks_pi05_better_rand": 3
+ },
+ "task_corr_clean_rand": {
+  "Pi0.5": 0.767,
+  "Robot-only": 0.778,
+  "Ego2R(1:3)": 0.773,
+  "Ego2R(3:1)": 0.739,
+  "Ego2R(1:1)": 0.745
+ },
+ "tasks_best_by_model": {
+  "clean": {
+   "Robot-only": 15,
+   "Ego2R(1:3)": 4,
+   "Ego2R(3:1)": 12,
+   "Ego2R(1:1)": 19
+  },
+  "rand": {
+   "Robot-only": 14,
+   "Ego2R(1:3)": 13,
+   "Ego2R(3:1)": 9,
+   "Ego2R(1:1)": 14
+  }
+ },
+ "rand_1:1_vs_robot_extremes": {
+  "up": [
+   [
+    "beat block hammer",
+    44.0
+   ],
+   [
+    "move pillbottle pad",
+    22.0
+   ],
+   [
+    "rotate qrcode",
+    20.0
+   ],
+   [
+    "put bottles dustbin",
+    19.0
+   ],
+   [
+    "lift pot",
+    16.0
+   ]
+  ],
+  "down": [
+   [
+    "open microwave",
+    -34.0
+   ],
+   [
+    "place dual shoes",
+    -11.0
+   ],
+   [
+    "place a2b left",
+    -11.0
+   ],
+   [
+    "place cans plasticbox",
+    -9.0
+   ],
+   [
+    "place can basket",
+    -9.0
+   ]
+  ]
+ },
+ "rand_1:1_gain_without_top5_tasks": 0.2,
+ "rand_1:1_gain_median_task": 2.5
+}
