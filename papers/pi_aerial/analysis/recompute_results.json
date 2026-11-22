@@ -1,0 +1,892 @@
+{
+ "table1_counts": {
+  "naive": {
+   "pick_place": [
+    [
+     10,
+     20
+    ],
+    [
+     0,
+     10
+    ]
+   ],
+   "nav_nonsyn": [
+    [
+     10,
+     20
+    ],
+    [
+     6,
+     10
+    ]
+   ],
+   "nav_syn": [
+    [
+     9,
+     20
+    ],
+    [
+     9,
+     9
+    ]
+   ]
+  },
+  "rtc": {
+   "pick_place": [
+    [
+     17,
+     20
+    ],
+    [
+     4,
+     17
+    ]
+   ],
+   "nav_nonsyn": [
+    [
+     16,
+     20
+    ],
+    [
+     13,
+     16
+    ]
+   ],
+   "nav_syn": [
+    [
+     19,
+     20
+    ],
+    [
+     19,
+     19
+    ]
+   ]
+  },
+  "guide": {
+   "pick_place": [
+    [
+     20,
+     20
+    ],
+    [
+     10,
+     20
+    ]
+   ]
+  },
+  "act": {
+   "pick_place": [
+    [
+     0,
+     20
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "nav_nonsyn": [
+    [
+     0,
+     20
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "nav_syn": [
+    [
+     0,
+     20
+    ],
+    [
+     0,
+     0
+    ]
+   ]
+  },
+  "dp": {
+   "pick_place": [
+    [
+     2,
+     20
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "nav_nonsyn": [
+    [
+     3,
+     20
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "nav_syn": [
+    [
+     0,
+     20
+    ],
+    [
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "table1_issues": [],
+ "table2_counts": {
+  "nosyn/naive": [
+   [
+    7,
+    20
+   ],
+   [
+    6,
+    7
+   ],
+   [
+    null,
+    6
+   ]
+  ],
+  "nosyn/rtc": [
+   [
+    16,
+    20
+   ],
+   [
+    16,
+    16
+   ],
+   [
+    13,
+    16
+   ],
+   [
+    2,
+    13
+   ]
+  ],
+  "nosyn/guide": [
+   [
+    14,
+    20
+   ],
+   [
+    14,
+    14
+   ],
+   [
+    14,
+    14
+   ],
+   [
+    5,
+    14
+   ]
+  ],
+  "nosyn/act": [
+   [
+    0,
+    20
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "nosyn/dp": [
+   [
+    1,
+    20
+   ],
+   [
+    0,
+    1
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "syn/naive": [
+   [
+    14,
+    20
+   ],
+   [
+    12,
+    14
+   ],
+   [
+    3,
+    12
+   ],
+   [
+    0,
+    3
+   ]
+  ],
+  "syn/rtc": [
+   [
+    19,
+    20
+   ],
+   [
+    18,
+    19
+   ],
+   [
+    15,
+    18
+   ],
+   [
+    3,
+    15
+   ]
+  ],
+  "syn/guide": [
+   [
+    17,
+    20
+   ],
+   [
+    17,
+    17
+   ],
+   [
+    16,
+    17
+   ],
+   [
+    10,
+    16
+   ]
+  ],
+  "syn/act": [
+   [
+    5,
+    20
+   ],
+   [
+    0,
+    5
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "syn/dp": [
+   [
+    0,
+    20
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ]
+ },
+ "table2_issues": [
+  "II/nosyn/naive: 단계 3: 분모 6로 42.9%를 만들 수 없음 (어떤 n<=분모로도 불가)"
+ ],
+ "table2_nosyn_naive_pick_429_feasible_kn_le20": [
+  [
+   3,
+   7
+  ],
+  [
+   6,
+   14
+  ]
+ ],
+ "trial_counts": {
+  "table1_pick_place": 100,
+  "table1_nav_nonsyn": 80,
+  "table1_nav_syn": 80,
+  "table2": 200,
+  "main_total": 460,
+  "ood_objects": 30,
+  "ood_gate": 15,
+  "grand_total_with_ood": 505
+ },
+ "end_to_end_successes_out_of_20": {
+  "pickplace_naive_place": 0,
+  "pickplace_rtc_place": 4,
+  "pickplace_guide_place": 10,
+  "nav_nonsyn_naive_hover": 6,
+  "nav_nonsyn_rtc_hover": 13,
+  "nav_syn_naive_hover": 9,
+  "nav_syn_rtc_hover": 19,
+  "comp_nosyn_rtc_place": 2,
+  "comp_nosyn_guide_place": 5,
+  "comp_nosyn_act_place": 0,
+  "comp_nosyn_dp_place": 0,
+  "comp_syn_naive_place": 0,
+  "comp_syn_rtc_place": 3,
+  "comp_syn_guide_place": 10,
+  "comp_syn_act_place": 0,
+  "comp_syn_dp_place": 0
+ },
+ "end_to_end_pct_and_wilson": {
+  "pickplace_naive_place": {
+   "k": 0,
+   "pct": 0.0,
+   "wilson95": [
+    0.0,
+    16.1
+   ]
+  },
+  "pickplace_rtc_place": {
+   "k": 4,
+   "pct": 20.0,
+   "wilson95": [
+    8.1,
+    41.6
+   ]
+  },
+  "pickplace_guide_place": {
+   "k": 10,
+   "pct": 50.0,
+   "wilson95": [
+    29.9,
+    70.1
+   ]
+  },
+  "nav_nonsyn_naive_hover": {
+   "k": 6,
+   "pct": 30.0,
+   "wilson95": [
+    14.5,
+    51.9
+   ]
+  },
+  "nav_nonsyn_rtc_hover": {
+   "k": 13,
+   "pct": 65.0,
+   "wilson95": [
+    43.3,
+    81.9
+   ]
+  },
+  "nav_syn_naive_hover": {
+   "k": 9,
+   "pct": 45.0,
+   "wilson95": [
+    25.8,
+    65.8
+   ]
+  },
+  "nav_syn_rtc_hover": {
+   "k": 19,
+   "pct": 95.0,
+   "wilson95": [
+    76.4,
+    99.1
+   ]
+  },
+  "comp_nosyn_rtc_place": {
+   "k": 2,
+   "pct": 10.0,
+   "wilson95": [
+    2.8,
+    30.1
+   ]
+  },
+  "comp_nosyn_guide_place": {
+   "k": 5,
+   "pct": 25.0,
+   "wilson95": [
+    11.2,
+    46.9
+   ]
+  },
+  "comp_nosyn_act_place": {
+   "k": 0,
+   "pct": 0.0,
+   "wilson95": [
+    0.0,
+    16.1
+   ]
+  },
+  "comp_nosyn_dp_place": {
+   "k": 0,
+   "pct": 0.0,
+   "wilson95": [
+    0.0,
+    16.1
+   ]
+  },
+  "comp_syn_naive_place": {
+   "k": 0,
+   "pct": 0.0,
+   "wilson95": [
+    0.0,
+    16.1
+   ]
+  },
+  "comp_syn_rtc_place": {
+   "k": 3,
+   "pct": 15.0,
+   "wilson95": [
+    5.2,
+    36.0
+   ]
+  },
+  "comp_syn_guide_place": {
+   "k": 10,
+   "pct": 50.0,
+   "wilson95": [
+    29.9,
+    70.1
+   ]
+  },
+  "comp_syn_act_place": {
+   "k": 0,
+   "pct": 0.0,
+   "wilson95": [
+    0.0,
+    16.1
+   ]
+  },
+  "comp_syn_dp_place": {
+   "k": 0,
+   "pct": 0.0,
+   "wilson95": [
+    0.0,
+    16.1
+   ]
+  }
+ },
+ "claims_vs_tables": {
+  "abstract_23_to_50": {
+   "reported_conditional": {
+    "rtc": "4/17=23.5%",
+    "guide": "10/20=50%"
+   },
+   "end_to_end": {
+    "rtc": "4/20=20%",
+    "guide": "10/20=50%"
+   },
+   "fisher_conditional_p": 0.17338562143901412,
+   "fisher_end_to_end_p": 0.09584556748071764
+  },
+  "abstract_62_overall": {
+   "chain": [
+    [
+     17,
+     20
+    ],
+    [
+     17,
+     17
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     10,
+     16
+    ]
+   ],
+   "conditional_place": "10/16=62.5%",
+   "end_to_end": "10/20=50.0%",
+   "wilson95_end_to_end": [
+    29.9,
+    70.1
+   ],
+   "wilson95_conditional": [
+    38.6,
+    81.5
+   ]
+  },
+  "abstract_81_to_100_nav": {
+   "hover_given_gate": {
+    "nonsyn": "13/16=81.2%",
+    "syn": "19/19=100%"
+   },
+   "gate": {
+    "nonsyn": "16/20=80%",
+    "syn": "19/20=95%"
+   },
+   "end_to_end": {
+    "nonsyn": "13/20=65%",
+    "syn": "19/20=95%"
+   },
+   "fisher_hover_given_gate_p": 0.08556149732620318,
+   "fisher_gate_p": 0.3416493416493417,
+   "fisher_end_to_end_p": 0.0435960435960436,
+   "wilson95_hover_nonsyn_13of16": [
+    57.0,
+    93.4
+   ],
+   "wilson95_hover_syn_19of19": [
+    83.2,
+    100.0
+   ]
+  },
+  "contrib_guidance_10_40": {
+   "tableI_pick": 15.0,
+   "tableI_place_cond": 26.5,
+   "tableII_nosyn_pick": 18.799999999999997,
+   "tableII_nosyn_place": 20.300000000000004,
+   "tableII_syn_pick": 10.799999999999997,
+   "tableII_syn_place": 42.5,
+   "tableI_place_end_to_end_pp": 30.0,
+   "tableII_nosyn_place_end_to_end_pp": 15.0,
+   "tableII_syn_place_end_to_end_pp": 35.0
+  }
+ },
+ "tests": {
+  "pickplace_end2end: guide vs rtc (10/20 vs 4/20)": {
+   "k1": 10,
+   "n1": 20,
+   "k2": 4,
+   "n2": 20,
+   "p1": 0.5,
+   "p2": 0.2,
+   "fisher_p": 0.0958
+  },
+  "pickplace_end2end: rtc vs naive (4/20 vs 0/20)": {
+   "k1": 4,
+   "n1": 20,
+   "k2": 0,
+   "n2": 20,
+   "p1": 0.2,
+   "p2": 0.0,
+   "fisher_p": 0.106
+  },
+  "pickplace_end2end: guide vs naive (10/20 vs 0/20)": {
+   "k1": 10,
+   "n1": 20,
+   "k2": 0,
+   "n2": 20,
+   "p1": 0.5,
+   "p2": 0.0,
+   "fisher_p": 0.0004
+  },
+  "pick only: guide vs rtc (20/20 vs 17/20)": {
+   "k1": 20,
+   "n1": 20,
+   "k2": 17,
+   "n2": 20,
+   "p1": 1.0,
+   "p2": 0.85,
+   "fisher_p": 0.2308
+  },
+  "pick only: rtc vs naive (17/20 vs 10/20)": {
+   "k1": 17,
+   "n1": 20,
+   "k2": 10,
+   "n2": 20,
+   "p1": 0.85,
+   "p2": 0.5,
+   "fisher_p": 0.0407
+  },
+  "compositional place e2e synth: guide vs rtc (10/20 vs 3/20)": {
+   "k1": 10,
+   "n1": 20,
+   "k2": 3,
+   "n2": 20,
+   "p1": 0.5,
+   "p2": 0.15,
+   "fisher_p": 0.0407
+  },
+  "compositional place e2e nosyn: guide vs rtc (5/20 vs 2/20)": {
+   "k1": 5,
+   "n1": 20,
+   "k2": 2,
+   "n2": 20,
+   "p1": 0.25,
+   "p2": 0.1,
+   "fisher_p": 0.4075
+  },
+  "place e2e pooled 3 settings: guide vs rtc (25/60 vs 9/60)": {
+   "k1": 25,
+   "n1": 60,
+   "k2": 9,
+   "n2": 60,
+   "p1": 0.417,
+   "p2": 0.15,
+   "fisher_p": 0.0021
+  },
+  "nav gate nonsyn: rtc vs naive (16/20 vs 10/20)": {
+   "k1": 16,
+   "n1": 20,
+   "k2": 10,
+   "n2": 20,
+   "p1": 0.8,
+   "p2": 0.5,
+   "fisher_p": 0.0958
+  },
+  "nav gate syn: rtc vs naive (19/20 vs 9/20)": {
+   "k1": 19,
+   "n1": 20,
+   "k2": 9,
+   "n2": 20,
+   "p1": 0.95,
+   "p2": 0.45,
+   "fisher_p": 0.0012
+  },
+  "nav gate: syn vs nonsyn, rtc (19/20 vs 16/20)": {
+   "k1": 19,
+   "n1": 20,
+   "k2": 16,
+   "n2": 20,
+   "p1": 0.95,
+   "p2": 0.8,
+   "fisher_p": 0.3416
+  },
+  "nav gate: syn vs nonsyn, naive (9/20 vs 10/20)": {
+   "k1": 9,
+   "n1": 20,
+   "k2": 10,
+   "n2": 20,
+   "p1": 0.45,
+   "p2": 0.5,
+   "fisher_p": 1.0
+  },
+  "nav e2e: syn vs nonsyn, rtc (19/20 vs 13/20)": {
+   "k1": 19,
+   "n1": 20,
+   "k2": 13,
+   "n2": 20,
+   "p1": 0.95,
+   "p2": 0.65,
+   "fisher_p": 0.0436
+  },
+  "nav e2e: syn vs nonsyn, naive (9/20 vs 6/20)": {
+   "k1": 9,
+   "n1": 20,
+   "k2": 6,
+   "n2": 20,
+   "p1": 0.45,
+   "p2": 0.3,
+   "fisher_p": 0.5145
+  },
+  "compositional gate, nosyn: guide vs rtc (14/20 vs 16/20) [동일 절차여야 함]": {
+   "k1": 14,
+   "n1": 20,
+   "k2": 16,
+   "n2": 20,
+   "p1": 0.7,
+   "p2": 0.8,
+   "fisher_p": 0.7164
+  },
+  "compositional gate, syn: guide vs rtc (17/20 vs 19/20) [동일 절차여야 함]": {
+   "k1": 17,
+   "n1": 20,
+   "k2": 19,
+   "n2": 20,
+   "p1": 0.85,
+   "p2": 0.95,
+   "fisher_p": 0.605
+  },
+  "compositional gate: syn vs nosyn, rtc (19/20 vs 16/20)": {
+   "k1": 19,
+   "n1": 20,
+   "k2": 16,
+   "n2": 20,
+   "p1": 0.95,
+   "p2": 0.8,
+   "fisher_p": 0.3416
+  },
+  "compositional place e2e guide: syn vs nosyn (10/20 vs 5/20) [합성 데이터는 항법 전용]": {
+   "k1": 10,
+   "n1": 20,
+   "k2": 5,
+   "n2": 20,
+   "p1": 0.5,
+   "p2": 0.25,
+   "fisher_p": 0.1908
+  },
+  "compositional place|pick guide: syn vs nosyn (10/16 vs 5/14)": {
+   "k1": 10,
+   "n1": 16,
+   "k2": 5,
+   "n2": 14,
+   "p1": 0.625,
+   "p2": 0.357,
+   "fisher_p": 0.2723
+  },
+  "place e2e guide: single task vs compositional syn (10/20 vs 10/20)": {
+   "k1": 10,
+   "n1": 20,
+   "k2": 10,
+   "n2": 20,
+   "p1": 0.5,
+   "p2": 0.5,
+   "fisher_p": 1.0
+  },
+  "OOD pick: sandwich vs chips (7/10 vs 1/10)": {
+   "k1": 7,
+   "n1": 10,
+   "k2": 1,
+   "n2": 10,
+   "p1": 0.7,
+   "p2": 0.1,
+   "fisher_p": 0.0198
+  },
+  "OOD gate right vs in-distribution rtc nonsyn (2/5 vs 16/20)": {
+   "k1": 2,
+   "n1": 5,
+   "k2": 16,
+   "n2": 20,
+   "p1": 0.4,
+   "p2": 0.8,
+   "fisher_p": 0.113
+  }
+ },
+ "table3": {
+  "chips": {
+   "pick_k_of_10": 1,
+   "place_given_pick": 0.0,
+   "place_feasible_kn": [
+    [
+     0,
+     1
+    ]
+   ]
+  },
+  "sandwich": {
+   "pick_k_of_10": 7,
+   "place_given_pick": 57.1,
+   "place_feasible_kn": [
+    [
+     4,
+     7
+    ]
+   ]
+  },
+  "box": {
+   "pick_k_of_10": 3,
+   "place_given_pick": 33.3,
+   "place_feasible_kn": [
+    [
+     1,
+     3
+    ]
+   ]
+  },
+  "gate_k_of_5": {
+   "front": 0,
+   "left": 0,
+   "right": 2
+  },
+  "gate_pooled": {
+   "k": 2,
+   "n": 15,
+   "pct": 13.3,
+   "wilson95": [
+    3.7,
+    37.9
+   ]
+  },
+  "object_end_to_end_k_of_10": {
+   "chips": 0,
+   "sandwich": 4,
+   "box": 1
+  },
+  "object_end_to_end_wilson95": {
+   "chips": [
+    0.0,
+    27.8
+   ],
+   "sandwich": [
+    16.8,
+    68.7
+   ],
+   "box": [
+    1.8,
+    40.4
+   ]
+  },
+  "sandwich_57_is": "4/7 조건부; 종단은 4/10 = 40%",
+  "pooled_objects_end_to_end": {
+   "k": 5,
+   "n": 30,
+   "pct": 16.7,
+   "wilson95": [
+    7.3,
+    33.6
+   ]
+  }
+ },
+ "sample_size_per_arm_80pct_power": {
+  "20% vs 50% (pick-and-place e2e)": 39,
+  "65% vs 95% (nav e2e)": 27,
+  "15% vs 50% (compositional place e2e synth)": 27,
+  "80% vs 95% (gate only)": 76
+ },
+ "wilson_width_n20": {
+  "10/20": [
+   29.9,
+   70.1
+  ],
+  "4/20": [
+   8.1,
+   41.6
+  ],
+  "19/20": [
+   76.4,
+   99.1
+  ],
+  "0/20": [
+   0.0,
+   16.1
+  ]
+ },
+ "data_scale": {
+  "teleop_demos": 270,
+  "hours_claimed": 10.0,
+  "sec_per_demo": 133.3,
+  "frames_at_10Hz": 360000,
+  "samples_seen": 960000,
+  "epochs_over_frames": 2.67,
+  "manip_120_plus_nav_150": 270,
+  "nav_synth_fraction": 0.25,
+  "note": "10시간이 270개 전체인지 조작 120개만인지 부록 문장이 모호하다. 후자면 epoch 수는 더 커진다."
+ },
+ "timing": {
+  "naive_open_loop_seconds": 5.0,
+  "naive_inference_hz": 0.2,
+  "rtc_chunk_H": 25,
+  "rtc_horizon_seconds_at_10Hz": 2.5,
+  "camera_hz": 5,
+  "actions_per_image": 2.0
+ }
+}
