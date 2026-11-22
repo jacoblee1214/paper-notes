@@ -1,0 +1,30 @@
+{
+ "attention_table": {
+  "P": {
+   "P": true,
+   "H": false,
+   "F": false,
+   "A": false
+  },
+  "H": {
+   "P": true,
+   "H": true,
+   "F": false,
+   "A": false
+  },
+  "F": {
+   "P": true,
+   "H": true,
+   "F": true,
+   "A": false
+  },
+  "A": {
+   "P": true,
+   "H": true,
+   "F": true,
+   "A": true
+  }
+ },
+ "reading": "P는 P만, H는 P·H, F는 P·H·F, A는 전부를 본다. VLM 접두부는 월드 모델 토큰을 못 본다(조건화 방향이 한쪽).",
+ "note": "논문 그림 3의 'w/ attention' 패턴과 같은 블록 하삼각이다. 단, 학습 때 F 블록은 첫 번째 통과의 예측값을 되먹여 만든 토큰이다(정답 미래가 아님)."
+}

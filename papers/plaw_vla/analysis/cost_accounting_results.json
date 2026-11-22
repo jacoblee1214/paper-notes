@@ -1,0 +1,24 @@
+{
+ "wm_expert_params_M": 311.4,
+ "added_params_B": {
+  "vitl-256": 0.618,
+  "vith-256": 0.947,
+  "vitg-256": 1.327
+ },
+ "paper_claim_added_params_B": 0.9,
+ "note_params": "공식 기본값 vitl-256으로 세면 약 0.62B이고 논문 4.4절의 0.9B와 맞지 않는다. vith-256으로 세면 약 0.94B로 0.9B에 가깝다. 논문은 V-JEPA 2의 크기를 적지 않는다. HF 체크포인트의 예측기(predictor) 헤드를 포함하면 수십 M이 더해질 수 있다.",
+ "tokens": {
+  "tokens_per_tubelet": 256,
+  "history_tokens": 768,
+  "future_slot_tokens": 768,
+  "future_units_in_code": 3,
+  "future_units_in_paper_K": 2
+ },
+ "wm_expert_tokens_per_forward_pass": 1536,
+ "wm_expert_passes_per_control_step": 2,
+ "approx_GFLOPs_wm_expert_2_passes": 1913.4,
+ "approx_GFLOPs_vjepa_l_history_only": 466.3,
+ "note_flops": "어텐션 비용과 KV 캐시 재사용을 무시한 근사다. 실제 지연은 측정하지 않았다.",
+ "history_buffer_s": 1.0,
+ "history_frame_spacing_s": 0.2
+}
