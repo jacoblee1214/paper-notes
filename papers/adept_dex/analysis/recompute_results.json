@@ -1,0 +1,492 @@
+{
+ "V1_table4": {
+  "Kuka vision / FMB star": {
+   "monotone_nonincreasing": true,
+   "drops": {
+    "Grasp": 1,
+    "Lifting": 1,
+    "Reorient": 0,
+    "Align": 1,
+    "Insert": 2
+   },
+   "conditional_pass": {
+    "Grasp": 0.9,
+    "Lifting": 0.89,
+    "Reorient": 1.0,
+    "Align": 0.88,
+    "Insert": 0.71
+   },
+   "insert_wilson95_pct": [
+    23.7,
+    76.3
+   ],
+   "grasp_wilson95_pct": [
+    59.6,
+    98.2
+   ]
+  },
+  "Kuka vision / FMB square-round": {
+   "monotone_nonincreasing": true,
+   "drops": {
+    "Grasp": 2,
+    "Lifting": 2,
+    "Reorient": 2,
+    "Align": 1,
+    "Insert": 0
+   },
+   "conditional_pass": {
+    "Grasp": 0.8,
+    "Lifting": 0.75,
+    "Reorient": 0.67,
+    "Align": 0.75,
+    "Insert": 1.0
+   },
+   "insert_wilson95_pct": [
+    10.8,
+    60.3
+   ],
+   "grasp_wilson95_pct": [
+    49.0,
+    94.3
+   ]
+  },
+  "Flexiv vision / FMB square-round": {
+   "monotone_nonincreasing": true,
+   "drops": {
+    "Grasp": 3,
+    "Lifting": 2,
+    "Reorient": 2,
+    "Align": 0,
+    "Insert": 0
+   },
+   "conditional_pass": {
+    "Grasp": 0.7,
+    "Lifting": 0.71,
+    "Reorient": 0.6,
+    "Align": 1.0,
+    "Insert": 1.0
+   },
+   "insert_wilson95_pct": [
+    10.8,
+    60.3
+   ],
+   "grasp_wilson95_pct": [
+    39.7,
+    89.2
+   ]
+  },
+  "Flexiv visuo-tactile / FMB square-round": {
+   "monotone_nonincreasing": true,
+   "drops": {
+    "Grasp": 0,
+    "Lifting": 0,
+    "Reorient": 1,
+    "Align": 1,
+    "Insert": 0
+   },
+   "conditional_pass": {
+    "Grasp": 1.0,
+    "Lifting": 1.0,
+    "Reorient": 0.9,
+    "Align": 0.89,
+    "Insert": 1.0
+   },
+   "insert_wilson95_pct": [
+    49.0,
+    94.3
+   ],
+   "grasp_wilson95_pct": [
+    72.2,
+    100.0
+   ]
+  },
+  "Kuka vision / dish": {
+   "monotone_nonincreasing": true,
+   "drops": {
+    "Grasp": 0,
+    "Lifting": 2,
+    "Reorient": 1,
+    "Align": 1,
+    "Insert": 0
+   },
+   "conditional_pass": {
+    "Grasp": 1.0,
+    "Lifting": 0.8,
+    "Reorient": 0.88,
+    "Align": 0.86,
+    "Insert": 1.0
+   },
+   "insert_wilson95_pct": [
+    31.3,
+    83.2
+   ],
+   "grasp_wilson95_pct": [
+    72.2,
+    100.0
+   ]
+  },
+  "pooled": {
+   "Kuka vision FMB (star+sq/round) insert": [
+    8,
+    20,
+    40.0,
+    [
+     21.9,
+     61.3
+    ]
+   ],
+   "Kuka vision all three tasks insert": [
+    14,
+    30,
+    46.7,
+    [
+     30.2,
+     63.9
+    ]
+   ],
+   "all 50 real trials with insert success": [
+    25,
+    50,
+    50.0,
+    [
+     36.6,
+     63.4
+    ]
+   ],
+   "total_real_trials": 50
+  }
+ },
+ "V2_pairwise": {
+  "Flexiv 촉각 대 비전 (Insert 8 대 3)": {
+   "diff_pp": 50.0,
+   "newcombe95_pp": [
+    6.7,
+    73.9
+   ],
+   "fisher_p": 0.0698
+  },
+  "Flexiv 촉각 대 비전 (Grasp 10 대 7)": {
+   "diff_pp": 30.0,
+   "newcombe95_pp": [
+    -3.8,
+    60.3
+   ],
+   "fisher_p": 0.2105
+  },
+  "Flexiv 촉각 대 비전 (Lifting 10 대 5)": {
+   "diff_pp": 50.0,
+   "newcombe95_pp": [
+    11.7,
+    76.3
+   ],
+   "fisher_p": 0.0325
+  },
+  "Flexiv 촉각 대 비전 (Reorient 9 대 3)": {
+   "diff_pp": 60.0,
+   "newcombe95_pp": [
+    17.1,
+    80.9
+   ],
+   "fisher_p": 0.0198
+  },
+  "Kuka star 대 square/round (Insert 5 대 3)": {
+   "diff_pp": 20.0,
+   "newcombe95_pp": [
+    -20.1,
+    52.6
+   ],
+   "fisher_p": 0.6499
+  },
+  "Kuka sq/round 대 Flexiv 비전 sq/round (Insert 3 대 3)": {
+   "diff_pp": 0.0,
+   "newcombe95_pp": [
+    -35.9,
+    35.9
+   ],
+   "fisher_p": 1.0
+  },
+  "Kuka dish 대 Kuka sq/round (Insert 6 대 3)": {
+   "diff_pp": 30.0,
+   "newcombe95_pp": [
+    -11.7,
+    60.1
+   ],
+   "fisher_p": 0.3698
+  },
+  "power_n10": {
+   "0.8 대 0.3": 0.426,
+   "0.8 대 0.5": 0.132,
+   "0.5 대 0.3": 0.055
+  },
+  "n_for_halfwidth_10pp_at_p05": 97
+ },
+ "V3_sim_vs_real": {
+  "Kuka vision sq/round: 실 3/10 대 시뮬 학생 46.7%": {
+   "exact_binomial_two_sided_p": 0.354,
+   "P(X<=k)": 0.231
+  },
+  "Kuka vision star: 실 5/10 대 시뮬 학생 65.2%": {
+   "exact_binomial_two_sided_p": 0.332,
+   "P(X<=k)": 0.244
+  },
+  "Flexiv vision/tactile, dish: 시뮬 학생 수치 없음(보고 안 됨)": null
+ },
+ "V4_table2": {
+  "monotone": {
+   "Kuka": true,
+   "Flexiv": true
+  },
+  "n=1024로 표기 정밀도에서 불가능한 칸": {
+   "Flexiv ADR 50: 0.7": {
+    "n=1024 가능한 k": [],
+    "n=1000 가능한 k": [
+     7
+    ]
+   }
+  },
+  "Flexiv ADR50 0.70 의 후보": {
+   "7/1024": 0.6836,
+   "8/1024": 0.7812,
+   "7/1000": 0.7
+  },
+  "첫 칸 평균 하락(Kuka)": {
+   "ADR0->25": 30.7,
+   "ADR35->50": 52.5
+  },
+  "sim_eval_pct_feasible_n1024": {
+   "85.0": [
+    870
+   ],
+   "89.2": [
+    913
+   ],
+   "46.7": [
+    478
+   ],
+   "65.2": [
+    668
+   ]
+  }
+ },
+ "V5_table1": {
+  "Kuka fmb - primitive": {
+   "diff": 0.03,
+   "diff_in_pooled_sd_units": 10.0
+  },
+  "Kuka visdex - primitive": {
+   "diff": 0.04,
+   "diff_in_pooled_sd_units": 5.0
+  },
+  "Flexiv fmb - primitive": {
+   "diff": -0.06,
+   "diff_in_pooled_sd_units": -6.5
+  },
+  "Flexiv visdex - primitive": {
+   "diff": -0.03,
+   "diff_in_pooled_sd_units": -2.6
+  },
+  "note": "시드 수와 ±의 종류(SD 또는 SEM)가 표에 없어 검정 불가. 단위만 환산."
+ },
+ "V6_table3": {
+  "text_arithmetic": {
+   "critic warm-up SR gain (a-c)": 17.6,
+   "BC time ratio 19.9/35.2": 0.565,
+   "BC time reduction %": 43.5,
+   "loose clip time ratio 17.6/19.9": 0.884,
+   "loose clip SR diff (f-a)": 0.8
+  },
+  "welch_p": {
+   "SR: (a) 대 (c) 워밍업 제거": {
+    "± 가 SD 일 때": 0.0002,
+    "± 가 SEM 일 때": 0.007
+   },
+   "SR: (a) 대 (b) BC 제거": {
+    "± 가 SD 일 때": 0.0,
+    "± 가 SEM 일 때": 0.0018
+   },
+   "SR: (a) 대 (f) 느슨한 클립": {
+    "± 가 SD 일 때": 0.462,
+    "± 가 SEM 일 때": 0.7375
+   },
+   "시간: (a) 대 (b) BC 제거": {
+    "± 가 SD 일 때": 0.0072,
+    "± 가 SEM 일 때": 0.0495
+   },
+   "시간: (a) 대 (c) 워밍업 제거": {
+    "± 가 SD 일 때": 0.7451,
+    "± 가 SEM 일 때": 0.8738
+   },
+   "시간: (a) 대 (f) 느슨한 클립": {
+    "± 가 SD 일 때": 0.0451,
+    "± 가 SEM 일 때": 0.3051
+   }
+  },
+  "fisher_adr50_counts": {
+   "5/5 대 4/5 (b 또는 c)": 1.0,
+   "5/5 대 0/5 (d,e,g,h,i)": 0.0079
+  },
+  "ablation_structure": {
+   "행 수": 10,
+   "LR=1e-5 인 행": [
+    "a",
+    "b",
+    "c",
+    "f",
+    "g",
+    "g+"
+   ],
+   "LR=1e-3 인 행": [
+    "d",
+    "e",
+    "h",
+    "i"
+   ],
+   "중간 LR(1e-4 등) 행": 0,
+   "LR=1e-5 에서 KL β=1 행(본문 0/5 주장)": "표에 없음",
+   "표의 LR=1e-3 에서 BC·WU 없이 클립 .05 행": "없음"
+  }
+ },
+ "V7_obs_dims": {
+  "table6_kuka": {
+   "S1 actor": {
+    "sum": 391,
+    "claimed": 391,
+    "match": true
+   },
+   "S1 critic": {
+    "sum": 438,
+    "claimed": 438,
+    "match": true
+   },
+   "S2 actor": {
+    "sum": 392,
+    "claimed": 392,
+    "match": true
+   },
+   "S2 critic": {
+    "sum": 280,
+    "claimed": 280,
+    "match": true
+   },
+   "S3 teacher": {
+    "sum": 392,
+    "claimed": 392,
+    "match": true
+   },
+   "S3 student": {
+    "sum": 206,
+    "claimed": 206,
+    "match": true
+   }
+  },
+  "table7_flexiv": {
+   "S1 actor": {
+    "sum": 436,
+    "claimed": 436,
+    "match": true
+   },
+   "S1 critic": {
+    "sum": 477,
+    "claimed": 477,
+    "match": true
+   },
+   "S2 actor": {
+    "sum": 437,
+    "claimed": 437,
+    "match": true
+   },
+   "S2 critic": {
+    "sum": 487,
+    "claimed": 487,
+    "match": true
+   },
+   "S3 teacher": {
+    "sum": 437,
+    "claimed": 437,
+    "match": true
+   },
+   "S3 student": {
+    "sum": 196,
+    "claimed": 196,
+    "match": true
+   }
+  },
+  "actor_swap_kuka": {
+   "removed": 9,
+   "added": 10,
+   "391-9+10": 392
+  },
+  "actor_swap_flexiv": {
+   "removed": 9,
+   "added": 10,
+   "436-9+10": 437
+  }
+ },
+ "V8_compute": {
+  "eq29_flexiv_years": 228.31,
+  "eq29_transitions": 432000000000,
+  "eq30_kuka_years": 57.08,
+  "eq30_kuka_transitions": 108000000000.0,
+  "75000x16": 1200000,
+  "kuka_per_member_B": 6.75,
+  "flexiv_per_member_B": 27.0,
+  "8B_x16_hours_at_1.2M_per_s": 29.6,
+  "ablation_throughput_steps_per_s_4gpu": 41876,
+  "ablation_throughput_per_gpu": 10469,
+  "fig3_8B_steps_at_ablation_rate_hours": 53.1
+ },
+ "K1_breakeven": {
+  "논문 표기 (PBT 구성원 1개 = 8B)": {
+   "scratch 9B": 1.3,
+   "scratch 20B": 0.5,
+   "scratch 50B": 0.2
+  },
+  "누적(Kuka 25 h 합산 ≈ 1.08e11)": {
+   "scratch 9B": 18.0,
+   "scratch 20B": 6.4,
+   "scratch 50B": 2.3
+  },
+  "누적(Flexiv 100 h 합산 ≈ 4.32e11)": {
+   "scratch 9B": 72.0,
+   "scratch 20B": 25.4,
+   "scratch 50B": 9.2
+  },
+  "note": "scratch 가 ADR 50 에 도달하는 데 필요한 스텝 S(논문은 9B 에서 ADR 6 에 그침). N > 사전학습/(S-3B)."
+ },
+ "V9_hparams": {
+  "actor_lr_ratio": 100.0,
+  "clip_ratio": 4.0,
+  "warmup_steps_per_gpu_20iter_4096env_h16": 1310720,
+  "batch_per_gpu_post (4096 env x 16)": 65536,
+  "batch_per_gpu_pre (4096 env x 32)": 131072,
+  "minibatch_post 24576 나누어짐": false,
+  "65536/24576": 2.667,
+  "minibatch_pre 16384 나누어짐": true,
+  "24576 = 4096 x": 6.0,
+  "3B step 에서 epoch 수 (GPU 1개)": 45776,
+  "그때까지 선형 감쇠 진행률 % (GPU 1개, 200k epoch 기준)": 22.9,
+  "그때 LR (최종 0 가정) ×1e-5 (GPU 1개)": 0.771,
+  "3B step 에서 epoch 수 (GPU 4개)": 11444,
+  "그때까지 선형 감쇠 진행률 % (GPU 4개, 200k epoch 기준)": 5.7,
+  "그때 LR (최종 0 가정) ×1e-5 (GPU 4개)": 0.943
+ },
+ "V10_speedup": {
+  "극단 짝 20/10": 2.0,
+  "극단 짝 70/5": 14.0,
+  "교차 짝 20/5": 4.0,
+  "교차 짝 70/10": 7.0,
+  "프로젝트 페이지 짝 70/9": 7.8,
+  "프로젝트 페이지 짝 20/5": 4.0
+ },
+ "V11_bc_loss": {
+  "sigma_student/teacher=1.0": {
+   "식 31 (두 항 모두 제곱근)": 39.287,
+   "알고리즘 1 (둘째 항 제곱 노름)": 39.287
+  },
+  "sigma_student/teacher=1.5": {
+   "식 31 (두 항 모두 제곱근)": 41.685,
+   "알고리즘 1 (둘째 항 제곱 노름)": 39.399
+  },
+  "note": "부록 H 는 학생의 log-std 가 고정이라고 쓴다. 고정이면 σ 항은 기울기가 0 이라 두 정의의 차이는 학습에 영향이 없다."
+ }
+}
