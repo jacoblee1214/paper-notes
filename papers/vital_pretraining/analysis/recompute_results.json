@@ -1,0 +1,404 @@
+{
+  "n_trials": 20,
+  "reads": {
+    "USB|tactile+vision|ACT|False": {
+      "successes": 18,
+      "rate": 0.9,
+      "wilson95": [
+        0.699,
+        0.972
+      ]
+    },
+    "USB|tactile+vision|ACT|True": {
+      "successes": 19,
+      "rate": 0.95,
+      "wilson95": [
+        0.764,
+        0.991
+      ]
+    },
+    "USB|tactile+vision|DP|False": {
+      "successes": 14,
+      "rate": 0.7,
+      "wilson95": [
+        0.481,
+        0.855
+      ]
+    },
+    "USB|tactile+vision|DP|True": {
+      "successes": 15,
+      "rate": 0.75,
+      "wilson95": [
+        0.531,
+        0.888
+      ]
+    },
+    "USB|vision|ACT|False": {
+      "successes": 4,
+      "rate": 0.2,
+      "wilson95": [
+        0.081,
+        0.416
+      ]
+    },
+    "USB|vision|ACT|True": {
+      "successes": 17,
+      "rate": 0.85,
+      "wilson95": [
+        0.64,
+        0.948
+      ]
+    },
+    "USB|vision|DP|False": {
+      "successes": 9,
+      "rate": 0.45,
+      "wilson95": [
+        0.258,
+        0.658
+      ]
+    },
+    "USB|vision|DP|True": {
+      "successes": 15,
+      "rate": 0.75,
+      "wilson95": [
+        0.531,
+        0.888
+      ]
+    },
+    "USB|tactile|ACT|False": {
+      "successes": 14,
+      "rate": 0.7,
+      "wilson95": [
+        0.481,
+        0.855
+      ]
+    },
+    "USB|tactile|ACT|True": {
+      "successes": 9,
+      "rate": 0.45,
+      "wilson95": [
+        0.258,
+        0.658
+      ]
+    },
+    "USB|tactile|DP|False": {
+      "successes": 0,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.161
+      ]
+    },
+    "USB|tactile|DP|True": {
+      "successes": 0,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.161
+      ]
+    },
+    "RECT|tactile+vision|ACT|False": {
+      "successes": 14,
+      "rate": 0.7,
+      "wilson95": [
+        0.481,
+        0.855
+      ]
+    },
+    "RECT|tactile+vision|ACT|True": {
+      "successes": 16,
+      "rate": 0.8,
+      "wilson95": [
+        0.584,
+        0.919
+      ]
+    },
+    "RECT|tactile+vision|DP|False": {
+      "successes": 7,
+      "rate": 0.35,
+      "wilson95": [
+        0.181,
+        0.567
+      ]
+    },
+    "RECT|tactile+vision|DP|True": {
+      "successes": 11,
+      "rate": 0.55,
+      "wilson95": [
+        0.342,
+        0.742
+      ]
+    },
+    "RECT|vision|ACT|False": {
+      "successes": 2,
+      "rate": 0.1,
+      "wilson95": [
+        0.028,
+        0.301
+      ]
+    },
+    "RECT|vision|ACT|True": {
+      "successes": 15,
+      "rate": 0.75,
+      "wilson95": [
+        0.531,
+        0.888
+      ]
+    },
+    "RECT|vision|DP|False": {
+      "successes": 7,
+      "rate": 0.35,
+      "wilson95": [
+        0.181,
+        0.567
+      ]
+    },
+    "RECT|vision|DP|True": {
+      "successes": 12,
+      "rate": 0.6,
+      "wilson95": [
+        0.387,
+        0.781
+      ]
+    },
+    "CUBE|tactile+vision|ACT|False": {
+      "successes": 6,
+      "rate": 0.3,
+      "wilson95": [
+        0.145,
+        0.519
+      ]
+    },
+    "CUBE|tactile+vision|ACT|True": {
+      "successes": 19,
+      "rate": 0.95,
+      "wilson95": [
+        0.764,
+        0.991
+      ]
+    },
+    "CUBE|tactile+vision|DP|False": {
+      "successes": 11,
+      "rate": 0.55,
+      "wilson95": [
+        0.342,
+        0.742
+      ]
+    },
+    "CUBE|tactile+vision|DP|True": {
+      "successes": 14,
+      "rate": 0.7,
+      "wilson95": [
+        0.481,
+        0.855
+      ]
+    },
+    "CUBE|vision|ACT|False": {
+      "successes": 19,
+      "rate": 0.95,
+      "wilson95": [
+        0.764,
+        0.991
+      ]
+    },
+    "CUBE|vision|ACT|True": {
+      "successes": 20,
+      "rate": 1.0,
+      "wilson95": [
+        0.839,
+        1.0
+      ]
+    },
+    "CUBE|vision|DP|False": {
+      "successes": 15,
+      "rate": 0.75,
+      "wilson95": [
+        0.531,
+        0.888
+      ]
+    },
+    "CUBE|vision|DP|True": {
+      "successes": 19,
+      "rate": 0.95,
+      "wilson95": [
+        0.764,
+        0.991
+      ]
+    }
+  },
+  "pretrain_effect": [
+    {
+      "task": "USB",
+      "input": "tactile+vision",
+      "model": "ACT",
+      "not_pre": 18,
+      "pre": 19,
+      "diff_pp": 5,
+      "p_fisher": 1.0,
+      "p_holm": 1.0
+    },
+    {
+      "task": "USB",
+      "input": "tactile+vision",
+      "model": "DP",
+      "not_pre": 14,
+      "pre": 15,
+      "diff_pp": 5,
+      "p_fisher": 1.0,
+      "p_holm": 1.0
+    },
+    {
+      "task": "USB",
+      "input": "vision",
+      "model": "ACT",
+      "not_pre": 4,
+      "pre": 17,
+      "diff_pp": 65,
+      "p_fisher": 0.0001,
+      "p_holm": 0.001
+    },
+    {
+      "task": "USB",
+      "input": "vision",
+      "model": "DP",
+      "not_pre": 9,
+      "pre": 15,
+      "diff_pp": 30,
+      "p_fisher": 0.1053,
+      "p_holm": 1.0
+    },
+    {
+      "task": "USB",
+      "input": "tactile",
+      "model": "ACT",
+      "not_pre": 14,
+      "pre": 9,
+      "diff_pp": -25,
+      "p_fisher": 0.2003,
+      "p_holm": 1.0
+    },
+    {
+      "task": "RECT",
+      "input": "tactile+vision",
+      "model": "ACT",
+      "not_pre": 14,
+      "pre": 16,
+      "diff_pp": 10,
+      "p_fisher": 0.7164,
+      "p_holm": 1.0
+    },
+    {
+      "task": "RECT",
+      "input": "tactile+vision",
+      "model": "DP",
+      "not_pre": 7,
+      "pre": 11,
+      "diff_pp": 20,
+      "p_fisher": 0.3406,
+      "p_holm": 1.0
+    },
+    {
+      "task": "RECT",
+      "input": "vision",
+      "model": "ACT",
+      "not_pre": 2,
+      "pre": 15,
+      "diff_pp": 65,
+      "p_fisher": 0.0001,
+      "p_holm": 0.0008
+    },
+    {
+      "task": "RECT",
+      "input": "vision",
+      "model": "DP",
+      "not_pre": 7,
+      "pre": 12,
+      "diff_pp": 25,
+      "p_fisher": 0.2049,
+      "p_holm": 1.0
+    },
+    {
+      "task": "CUBE",
+      "input": "tactile+vision",
+      "model": "ACT",
+      "not_pre": 6,
+      "pre": 19,
+      "diff_pp": 65,
+      "p_fisher": 0.0,
+      "p_holm": 0.0005
+    },
+    {
+      "task": "CUBE",
+      "input": "tactile+vision",
+      "model": "DP",
+      "not_pre": 11,
+      "pre": 14,
+      "diff_pp": 15,
+      "p_fisher": 0.5145,
+      "p_holm": 1.0
+    },
+    {
+      "task": "CUBE",
+      "input": "vision",
+      "model": "ACT",
+      "not_pre": 19,
+      "pre": 20,
+      "diff_pp": 5,
+      "p_fisher": 1.0,
+      "p_holm": 1.0
+    },
+    {
+      "task": "CUBE",
+      "input": "vision",
+      "model": "DP",
+      "not_pre": 15,
+      "pre": 19,
+      "diff_pp": 20,
+      "p_fisher": 0.1818,
+      "p_holm": 1.0
+    }
+  ],
+  "checks": {
+    "USB_ACT_vis_pre_vs_tv_nopre": {
+      "a": 17,
+      "b": 18,
+      "p_fisher": 1.0
+    },
+    "USB_ACT_vis_pre_vs_tv_pre": {
+      "a": 17,
+      "b": 19,
+      "p_fisher": 0.605
+    },
+    "USB_DP_vis_pre_vs_tv_pre": {
+      "a": 15,
+      "b": 15,
+      "p_fisher": 1.0
+    },
+    "usb_failure_reduction": {
+      "ACT": {
+        "fail_before": 2,
+        "fail_after": 1,
+        "relative_reduction": 0.5
+      },
+      "DP": {
+        "fail_before": 6,
+        "fail_after": 5,
+        "relative_reduction": 0.167
+      }
+    },
+    "n_per_arm_for_0.70_vs_0.85": 121,
+    "n_per_arm_for_0.90_vs_0.95": 435,
+    "n_per_arm_for_0.45_vs_0.75": 41,
+    "text_claims": {
+      "abstract_USB_vision_20_to_85": true,
+      "USB_tv_5pp_increase_both": true,
+      "cube_tv_30_to_95_ACT": true,
+      "DP_vision_45_to_75": true,
+      "tactile_only_ACT_pre_lower": true
+    },
+    "loss_floor_tau1": {
+      "5": 0.4327,
+      "7": 0.5944
+    }
+  }
+}
