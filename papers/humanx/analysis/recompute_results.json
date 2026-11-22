@@ -1,0 +1,537 @@
+{
+ "V1": {
+  "final_GSR_per_task": {
+   "basketball": 64.7,
+   "badminton": 90.6,
+   "cargo": 96.3
+  },
+  "final_GSR_mean": 83.86666666666666,
+  "HDMI_GSR_mean": 9.833333333333334,
+  "ratio_of_means_vs_HDMI": 8.528813559322034,
+  "best_baseline_GSR_per_task": {
+   "basketball": 2.4,
+   "badminton": 30.9,
+   "cargo": 1.8
+  },
+  "best_baseline_GSR_mean": 11.700000000000001,
+  "ratio_of_means_vs_best_baseline": 7.168091168091167,
+  "per_task_ratio_vs_HDMI": {
+   "basketball": 26.958333333333336,
+   "badminton": 3.5810276679841895,
+   "cargo": 53.5
+  },
+  "per_task_ratio_vs_best_baseline": {
+   "basketball": 26.958333333333336,
+   "badminton": 2.9320388349514563,
+   "cargo": 53.5
+  },
+  "mean_of_per_task_ratios_vs_HDMI": 28.01312033377251
+ },
+ "V2_best_per_column": {
+  "basketball.SR": {
+   "best": 93.4,
+   "winners": [
+    "XMimic(Base)",
+    "+IVT"
+   ],
+   "final": 86.8,
+   "final_is_best": false,
+   "HDMI": 53.1
+  },
+  "basketball.GSR": {
+   "best": 64.7,
+   "winners": [
+    "+TeaStu"
+   ],
+   "final": 64.7,
+   "final_is_best": true,
+   "HDMI": 2.4
+  },
+  "basketball.Eo": {
+   "best": 0.69,
+   "winners": [
+    "XMimic(Base)"
+   ],
+   "final": 0.85,
+   "final_is_best": false,
+   "HDMI": 0.7
+  },
+  "basketball.Eh": {
+   "best": 6.36,
+   "winners": [
+    "XMimic(Base)"
+   ],
+   "final": 7.83,
+   "final_is_best": false,
+   "HDMI": 10.8
+  },
+  "badminton.SR": {
+   "best": 100.0,
+   "winners": [
+    "+IVT",
+    "+DataAug",
+    "+TeaStu"
+   ],
+   "final": 100.0,
+   "final_is_best": true,
+   "HDMI": 90.0
+  },
+  "badminton.GSR": {
+   "best": 90.6,
+   "winners": [
+    "+TeaStu"
+   ],
+   "final": 90.6,
+   "final_is_best": true,
+   "HDMI": 25.3
+  },
+  "badminton.Eo": {
+   "best": 0.9,
+   "winners": [
+    "+TeaStu"
+   ],
+   "final": 0.9,
+   "final_is_best": true,
+   "HDMI": 1.64
+  },
+  "badminton.Eh": {
+   "best": 0.07,
+   "winners": [
+    "HDMI"
+   ],
+   "final": 0.09,
+   "final_is_best": false,
+   "HDMI": 0.07
+  },
+  "cargo.SR": {
+   "best": 100.0,
+   "winners": [
+    "XMimic(Base)",
+    "+IP"
+   ],
+   "final": 99.3,
+   "final_is_best": false,
+   "HDMI": 95.8
+  },
+  "cargo.GSR": {
+   "best": 96.3,
+   "winners": [
+    "+TeaStu"
+   ],
+   "final": 96.3,
+   "final_is_best": true,
+   "HDMI": 1.8
+  },
+  "cargo.Eo": {
+   "best": 1.38,
+   "winners": [
+    "+TeaStu"
+   ],
+   "final": 1.38,
+   "final_is_best": true,
+   "HDMI": 1.79
+  },
+  "cargo.Eh": {
+   "best": 6.58,
+   "winners": [
+    "XMimic(Base)"
+   ],
+   "final": 8.67,
+   "final_is_best": false,
+   "HDMI": 13.1
+  }
+ },
+ "V3_ablation_deltas": {
+  "basketball.SR": [
+   [
+    "+IP",
+    -6.6
+   ],
+   [
+    "+IVT",
+    6.6
+   ],
+   [
+    "+DataAug",
+    -15.8
+   ],
+   [
+    "+TeaStu",
+    9.2
+   ]
+  ],
+  "basketball.GSR": [
+   [
+    "+IP",
+    8.6
+   ],
+   [
+    "+IVT",
+    -2.6
+   ],
+   [
+    "+DataAug",
+    49.7
+   ],
+   [
+    "+TeaStu",
+    4.1
+   ]
+  ],
+  "badminton.SR": [
+   [
+    "+IP",
+    -3.1
+   ],
+   [
+    "+IVT",
+    6.0
+   ],
+   [
+    "+DataAug",
+    0.0
+   ],
+   [
+    "+TeaStu",
+    0.0
+   ]
+  ],
+  "badminton.GSR": [
+   [
+    "+IP",
+    18.9
+   ],
+   [
+    "+IVT",
+    6.7
+   ],
+   [
+    "+DataAug",
+    17.2
+   ],
+   [
+    "+TeaStu",
+    6.2
+   ]
+  ],
+  "cargo.SR": [
+   [
+    "+IP",
+    0.0
+   ],
+   [
+    "+IVT",
+    -0.4
+   ],
+   [
+    "+TeaStu",
+    -0.3
+   ]
+  ],
+  "cargo.GSR": [
+   [
+    "+IP",
+    43.6
+   ],
+   [
+    "+IVT",
+    -0.2
+   ],
+   [
+    "+TeaStu",
+    2.0
+   ]
+  ]
+ },
+ "V3b_ablation_pvalues_if_n": {
+  "basketball: XMimic(Base) -> +IP": {
+   "delta_pts": 8.6,
+   "p_n100": 0.0354,
+   "p_n500": 2.54e-06,
+   "p_n4096": 2.49e-41
+  },
+  "basketball: +IP -> +IVT": {
+   "delta_pts": -2.6,
+   "p_n100": 0.574,
+   "p_n500": 0.209,
+   "p_n4096": 0.000324
+  },
+  "basketball: +IVT -> +DataAug": {
+   "delta_pts": 49.7,
+   "p_n100": 2.25e-13,
+   "p_n500": 2.02e-60,
+   "p_n4096": 0.0
+  },
+  "basketball: +DataAug -> +TeaStu": {
+   "delta_pts": 4.1,
+   "p_n100": 0.549,
+   "p_n500": 0.18,
+   "p_n4096": 0.000125
+  },
+  "badminton: XMimic(Base) -> +IP": {
+   "delta_pts": 18.9,
+   "p_n100": 0.00751,
+   "p_n500": 2.26e-09,
+   "p_n4096": 1.25e-65
+  },
+  "badminton: +IP -> +IVT": {
+   "delta_pts": 6.7,
+   "p_n100": 0.324,
+   "p_n500": 0.0275,
+   "p_n4096": 2.77e-10
+  },
+  "badminton: +IVT -> +DataAug": {
+   "delta_pts": 17.2,
+   "p_n100": 0.00452,
+   "p_n500": 2.16e-10,
+   "p_n4096": 8.29e-74
+  },
+  "badminton: +DataAug -> +TeaStu": {
+   "delta_pts": 6.2,
+   "p_n100": 0.185,
+   "p_n500": 0.00304,
+   "p_n4096": 2.18e-17
+  },
+  "cargo: XMimic(Base) -> +IP": {
+   "delta_pts": 43.6,
+   "p_n100": 4.51e-12,
+   "p_n500": 5.18e-54,
+   "p_n4096": 0.0
+  },
+  "cargo: +IP -> +IVT": {
+   "delta_pts": -0.2,
+   "p_n100": 0.951,
+   "p_n500": 0.891,
+   "p_n4096": 0.694
+  },
+  "cargo: +IVT -> +TeaStu": {
+   "delta_pts": 2.0,
+   "p_n100": 0.504,
+   "p_n500": 0.135,
+   "p_n4096": 1.9e-05
+  }
+ },
+ "V4_duplicate_cells_same_column": [
+  {
+   "cell": [
+    "basketball",
+    "Eo",
+    0.7
+   ],
+   "methods": [
+    "HDMI",
+    "+IP"
+   ]
+  },
+  {
+   "cell": [
+    "basketball",
+    "Eh",
+    7.83
+   ],
+   "methods": [
+    "OmniRetarget",
+    "+TeaStu"
+   ]
+  },
+  {
+   "cell": [
+    "badminton",
+    "Eh",
+    0.1
+   ],
+   "methods": [
+    "+IP",
+    "+IVT",
+    "+DataAug"
+   ]
+  }
+ ],
+ "V4_note": "basketball Eh: OmniRetarget 7.83 (±0.95) = +TeaStu 7.83 (±0.95), 평균과 표준편차가 둘 다 같다 (v1 Table I도 동일)",
+ "V5_table2_wilson": {
+  "Basketball Catch-Pass (MoCap)": {
+   "k": 41,
+   "n": 50,
+   "rate": 0.82,
+   "wilson95": [
+    0.692,
+    0.902
+   ],
+   "in_v2": true
+  },
+  "Cargo Pickup (MoCap)": {
+   "k": 43,
+   "n": 50,
+   "rate": 0.86,
+   "wilson95": [
+    0.738,
+    0.93
+   ],
+   "in_v2": true
+  },
+  "Football Kicking (MoCap)": {
+   "k": 42,
+   "n": 50,
+   "rate": 0.84,
+   "wilson95": [
+    0.715,
+    0.917
+   ],
+   "in_v2": true
+  },
+  "Reactive Fighting (MoCap)": {
+   "k": 37,
+   "n": 50,
+   "rate": 0.74,
+   "wilson95": [
+    0.604,
+    0.841
+   ],
+   "in_v2": true
+  },
+  "Jumpshot (NEP)": {
+   "k": 8,
+   "n": 10,
+   "rate": 0.8,
+   "wilson95": [
+    0.49,
+    0.943
+   ],
+   "in_v2": true
+  },
+  "Dribble (NEP)": {
+   "k": 8,
+   "n": 10,
+   "rate": 0.8,
+   "wilson95": [
+    0.49,
+    0.943
+   ],
+   "in_v2": true
+  },
+  "Pump-fake (NEP)": {
+   "k": 9,
+   "n": 10,
+   "rate": 0.9,
+   "wilson95": [
+    0.596,
+    0.982
+   ],
+   "in_v2": true
+  },
+  "Layup (NEP)": {
+   "k": 7,
+   "n": 10,
+   "rate": 0.7,
+   "wilson95": [
+    0.397,
+    0.892
+   ],
+   "in_v2": true
+  },
+  "Basketball Pickup (NEP)": {
+   "k": 10,
+   "n": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ],
+   "in_v2": true
+  },
+  "Spin Move (NEP)": {
+   "k": 9,
+   "n": 10,
+   "rate": 0.9,
+   "wilson95": [
+    0.596,
+    0.982
+   ],
+   "in_v2": false
+  }
+ },
+ "V6_pooled": {
+  "MoCap": {
+   "k": 163,
+   "n": 200,
+   "rate": 0.815,
+   "wilson95": [
+    0.755,
+    0.863
+   ]
+  },
+  "NEP_v2": {
+   "k": 42,
+   "n": 50,
+   "rate": 0.84,
+   "wilson95": [
+    0.715,
+    0.917
+   ]
+  },
+  "NEP_v1_with_spin": {
+   "k": 51,
+   "n": 60,
+   "rate": 0.85,
+   "wilson95": [
+    0.739,
+    0.919
+   ]
+  },
+  "all_v2": {
+   "k": 205,
+   "n": 250,
+   "rate": 0.82,
+   "wilson95": [
+    0.768,
+    0.863
+   ]
+  },
+  "mean_of_skill_rates_unweighted_v2": 0.8288888888888889,
+  "fisher_MoCap_vs_NEP_p": 0.8374640549035944,
+  "claim_NEP_avg_over_80pct": true,
+  "claim_MoCap_over_80pct": true
+ },
+ "V7_mocap_homogeneity": {
+  "chi2": 2.7524456972309723,
+  "df": 3,
+  "p": 0.43138814492104816
+ },
+ "V8_lower_bounds_vs_80": {
+  "Basketball Catch-Pass (MoCap)": false,
+  "Cargo Pickup (MoCap)": false,
+  "Football Kicking (MoCap)": false,
+  "Reactive Fighting (MoCap)": false,
+  "Jumpshot (NEP)": false,
+  "Dribble (NEP)": false,
+  "Pump-fake (NEP)": false,
+  "Layup (NEP)": false,
+  "Basketball Pickup (NEP)": false,
+  "Spin Move (NEP)": false
+ },
+ "V9_pairwise_fisher": {
+  "Layup 7/10 vs Pickup 10/10": 0.21052631578947367,
+  "Fighting 37/50 vs Cargo 43/50": 0.2107066827647145
+ },
+ "V10_table3_gains_pts": {
+  "football": 18.9,
+  "badminton": 31.9
+ },
+ "V10_single_pattern_gains_pts": {
+  "badminton +DataAug->+TeaStu": 6.2,
+  "basketball +DataAug->+TeaStu": 4.1
+ },
+ "V10_note": "다중 패턴 w/o Tea-Stu(52.4)는 단일 패턴 +Data Aug(84.4)보다 32.0점 낮고, w/ Tea-Stu(84.3)는 단일 패턴 +Tea-Stu(90.6)보다 6.3점 낮다. 다중 패턴의 학습 데이터 양(3편×증강 수)은 명시되지 않았다.",
+ "V11_skill_and_domain_counts": {
+  "v2_skills_in_Table2": 9,
+  "v2_domains_in_Table2": 4,
+  "domains_in_Table2": [
+   "basketball(6)",
+   "football(1)",
+   "cargo(1)",
+   "fighting(1)"
+  ],
+  "abstract_claim": "5 domains, 9 skills transferred zero-shot to physical G1 (v1: 10 skills)",
+  "badminton_real_robot_rows": 0
+ }
+}
