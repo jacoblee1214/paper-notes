@@ -1,0 +1,887 @@
+{
+ "V1_table1_aggregates": {
+  "unc_KALM": {
+   "successes": [
+    4,
+    7,
+    6,
+    6
+   ],
+   "total": 23,
+   "of": 40,
+   "rate_exact_pct": 57.49999999999999,
+   "rounded_half_up": 58,
+   "reported": 58,
+   "match": true,
+   "wilson95": [
+    0.422,
+    0.7149
+   ]
+  },
+  "unc_WACL": {
+   "successes": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "total": 30,
+   "of": 40,
+   "rate_exact_pct": 75.0,
+   "rounded_half_up": 75,
+   "reported": 75,
+   "match": true,
+   "wilson95": [
+    0.5981,
+    0.8581
+   ]
+  },
+  "unc_FR3": {
+   "successes": [
+    5,
+    8,
+    8,
+    9
+   ],
+   "total": 30,
+   "of": 40,
+   "rate_exact_pct": 75.0,
+   "rounded_half_up": 75,
+   "reported": 75,
+   "match": true,
+   "wilson95": [
+    0.5981,
+    0.8581
+   ]
+  },
+  "con_KALM": {
+   "successes": [
+    2,
+    5,
+    3,
+    3
+   ],
+   "total": 13,
+   "of": 40,
+   "rate_exact_pct": 32.5,
+   "rounded_half_up": 33,
+   "reported": 33,
+   "match": true,
+   "wilson95": [
+    0.2008,
+    0.4798
+   ]
+  },
+  "con_WACL": {
+   "successes": [
+    7,
+    8,
+    7,
+    9
+   ],
+   "total": 31,
+   "of": 40,
+   "rate_exact_pct": 77.5,
+   "rounded_half_up": 78,
+   "reported": 78,
+   "match": true,
+   "wilson95": [
+    0.625,
+    0.8768
+   ]
+  },
+  "con_FR3": {
+   "successes": [
+    4,
+    7,
+    8,
+    8
+   ],
+   "total": 27,
+   "of": 40,
+   "rate_exact_pct": 67.5,
+   "rounded_half_up": 68,
+   "reported": 68,
+   "match": true,
+   "wilson95": [
+    0.5202,
+    0.7992
+   ]
+  }
+ },
+ "V2_text_claims": {
+  "KALM_con_over_unc_per_task": [
+   0.5,
+   0.7142857142857143,
+   0.5,
+   0.5
+  ],
+  "KALM_half_or_less_count": 3,
+  "claim_half_on_three_of_four": "OK",
+  "KALM_drops_every_task": true,
+  "WACL_unc_to_con_per_task": [
+   [
+    6,
+    7
+   ],
+   [
+    7,
+    8
+   ],
+   [
+    8,
+    7
+   ],
+   [
+    9,
+    9
+   ]
+  ],
+  "WACL_agg_change_pp": 2.5,
+  "WACL_ge_KALM_unconstrained_all_tasks": true,
+  "ratio_con_WACL_over_KALM": 2.3846153846153846,
+  "claim_more_than_doubles": true,
+  "FR3_minus_xArm_con_per_task": [
+   -3,
+   -1,
+   1,
+   -1
+  ]
+ },
+ "V3_mcnemar": {
+  "constrained_pooled": {
+   "b_WACL_only": 19,
+   "c_KALM_only": 1,
+   "both_success": 12,
+   "both_success_from_KALM_margin": 12,
+   "consistent": true,
+   "both_fail": 8,
+   "p_exact": 4.00543212890625e-05,
+   "reported_p": 4e-05
+  },
+  "unconstrained_pooled": {
+   "b_WACL_only": 11,
+   "c_KALM_only": 4,
+   "both_success": 19,
+   "both_success_from_KALM_margin": 19,
+   "consistent": true,
+   "both_fail": 6,
+   "p_exact": 0.11846923828124999,
+   "reported_p": 0.12
+  },
+  "constrained_per_task_inverse": [
+   {
+    "task": "OpenCoffee",
+    "wacl": 7,
+    "kalm": 2,
+    "reported_p": 0.125,
+    "solutions": [
+     {
+      "b": 6,
+      "c": 1,
+      "p": 0.125
+     }
+    ]
+   },
+   {
+    "task": "CloseCabinet",
+    "wacl": 8,
+    "kalm": 5,
+    "reported_p": 0.25,
+    "solutions": [
+     {
+      "b": 3,
+      "c": 0,
+      "p": 0.25
+     }
+    ]
+   },
+   {
+    "task": "CloseFaucet",
+    "wacl": 7,
+    "kalm": 3,
+    "reported_p": 0.125,
+    "solutions": [
+     {
+      "b": 4,
+      "c": 0,
+      "p": 0.125
+     }
+    ]
+   },
+   {
+    "task": "PressButton",
+    "wacl": 9,
+    "kalm": 3,
+    "reported_p": 0.031,
+    "solutions": [
+     {
+      "b": 6,
+      "c": 0,
+      "p": 0.0312
+     }
+    ]
+   }
+  ],
+  "constrained_per_task_unique_solutions": true,
+  "constrained_per_task_sum_b_c": [
+   19,
+   1
+  ],
+  "matches_pooled_19_1": true,
+  "constrained_per_task_p_raw": [
+   0.125,
+   0.25,
+   0.125,
+   0.0312
+  ],
+  "constrained_per_task_p_holm": [
+   0.375,
+   0.375,
+   0.375,
+   0.125
+  ]
+ },
+ "V4_paired_t": {
+  "constrained": {
+   "t": 5.1523022511684,
+   "df": 39,
+   "p": 7.736752780154574e-06
+  },
+  "reported_con": 7.7e-06,
+  "unconstrained": {
+   "t": 1.8623210154074705,
+   "df": 39,
+   "p": 0.07010413538106663
+  },
+  "reported_unc": 0.07
+ },
+ "V5_wilson": {
+  "unc_KALM_per_task": [
+   [
+    0.1682,
+    0.6873
+   ],
+   [
+    0.3968,
+    0.8922
+   ],
+   [
+    0.3127,
+    0.8318
+   ],
+   [
+    0.3127,
+    0.8318
+   ]
+  ],
+  "unc_WACL_per_task": [
+   [
+    0.3127,
+    0.8318
+   ],
+   [
+    0.3968,
+    0.8922
+   ],
+   [
+    0.4902,
+    0.9433
+   ],
+   [
+    0.5958,
+    0.9821
+   ]
+  ],
+  "unc_aggregate": {
+   "KALM": [
+    0.422,
+    0.7149
+   ],
+   "WACL": [
+    0.5981,
+    0.8581
+   ],
+   "disjoint": false
+  },
+  "con_KALM_per_task": [
+   [
+    0.0567,
+    0.5098
+   ],
+   [
+    0.2366,
+    0.7634
+   ],
+   [
+    0.1078,
+    0.6032
+   ],
+   [
+    0.1078,
+    0.6032
+   ]
+  ],
+  "con_WACL_per_task": [
+   [
+    0.3968,
+    0.8922
+   ],
+   [
+    0.4902,
+    0.9433
+   ],
+   [
+    0.3968,
+    0.8922
+   ],
+   [
+    0.5958,
+    0.9821
+   ]
+  ],
+  "con_aggregate": {
+   "KALM": [
+    0.2008,
+    0.4798
+   ],
+   "WACL": [
+    0.625,
+    0.8768
+   ],
+   "disjoint": true
+  }
+ },
+ "V6_unpaired_fisher": {
+  "unc_fisher_agg_WACL_vs_KALM": 0.15540740571526196,
+  "unc_fisher_per_task": [
+   0.6562817986966593,
+   1.0,
+   0.628482972136223,
+   0.3034055727554179
+  ],
+  "con_fisher_agg_WACL_vs_KALM": 0.0001040830912448866,
+  "con_fisher_per_task": [
+   0.06977851869492736,
+   0.34984520123839014,
+   0.1788954079975752,
+   0.019766611097880443
+  ]
+ },
+ "V7_fragility": {
+  "constrained_pooled_p_vs_c": {
+   "0": 3.814697265625e-06,
+   "1": 4.00543212890625e-05,
+   "2": 0.00022125244140625,
+   "3": 0.0008554458618164062,
+   "4": 0.002599477767944336,
+   "5": 0.006610751152038574,
+   "6": 0.01463329792022705,
+   "7": 0.028959274291992188,
+   "8": 0.052238985896110535
+  },
+  "flips_needed_b_to_c_for_p_gt_0.05": 5,
+  "unconstrained_p_if_b11_c4": 0.11846923828124999,
+  "unconstrained_extra_b_wins_needed_for_p_lt_0.05": 1
+ },
+ "V8_min_mcnemar_p_n10_pairs_by_success_difference": {
+  "diff_1": 1.0,
+  "diff_2": 0.5,
+  "diff_3": 0.25,
+  "diff_4": 0.125,
+  "diff_5": 0.0625,
+  "diff_6": 0.03125,
+  "diff_7": 0.015625,
+  "diff_8": 0.0078125,
+  "diff_9": 0.00390625,
+  "diff_10": 0.001953125
+ },
+ "V9_table2_ablation": [
+  {
+   "variant": "second_constraint",
+   "task": "CloseFaucet",
+   "variant_succ": 7,
+   "full_succ": 7,
+   "diff": 0,
+   "fisher_p": 1.0,
+   "best_case_mcnemar_p": 1.0,
+   "wilson_variant": [
+    0.3968,
+    0.8922
+   ],
+   "wilson_full": [
+    0.3968,
+    0.8922
+   ]
+  },
+  {
+   "variant": "no_sliding_anchor",
+   "task": "OpenCoffee",
+   "variant_succ": 3,
+   "full_succ": 7,
+   "diff": 4,
+   "fisher_p": 0.1788954079975752,
+   "best_case_mcnemar_p": 0.125,
+   "wilson_variant": [
+    0.1078,
+    0.6032
+   ],
+   "wilson_full": [
+    0.3968,
+    0.8922
+   ]
+  },
+  {
+   "variant": "link5_only",
+   "task": "PressButton",
+   "variant_succ": 6,
+   "full_succ": 9,
+   "diff": 3,
+   "fisher_p": 0.3034055727554179,
+   "best_case_mcnemar_p": 0.25,
+   "wilson_variant": [
+    0.3127,
+    0.8318
+   ],
+   "wilson_full": [
+    0.5958,
+    0.9821
+   ]
+  },
+  {
+   "variant": "link6_only",
+   "task": "PressButton",
+   "variant_succ": 7,
+   "full_succ": 9,
+   "diff": 2,
+   "fisher_p": 0.5820433436532508,
+   "best_case_mcnemar_p": 0.5,
+   "wilson_variant": [
+    0.3968,
+    0.8922
+   ],
+   "wilson_full": [
+    0.5958,
+    0.9821
+   ]
+  },
+  {
+   "variant": "geometric_arc",
+   "task": "OpenCoffee",
+   "variant_succ": 4,
+   "full_succ": 7,
+   "diff": 3,
+   "fisher_p": 0.36984996427720884,
+   "best_case_mcnemar_p": 0.25,
+   "wilson_variant": [
+    0.1682,
+    0.6873
+   ],
+   "wilson_full": [
+    0.3968,
+    0.8922
+   ]
+  },
+  {
+   "variant": "geometric_line",
+   "task": "PressButton",
+   "variant_succ": 7,
+   "full_succ": 9,
+   "diff": 2,
+   "fisher_p": 0.5820433436532508,
+   "best_case_mcnemar_p": 0.5,
+   "wilson_variant": [
+    0.3968,
+    0.8922
+   ],
+   "wilson_full": [
+    0.5958,
+    0.9821
+   ]
+  },
+  {
+   "variant": "registered_replay",
+   "task": "OpenCoffee",
+   "variant_succ": 6,
+   "full_succ": 7,
+   "diff": 1,
+   "fisher_p": 1.0,
+   "best_case_mcnemar_p": 1.0,
+   "wilson_variant": [
+    0.3127,
+    0.8318
+   ],
+   "wilson_full": [
+    0.3968,
+    0.8922
+   ]
+  }
+ ],
+ "V10_link_search": {
+  "pairs": {
+   "both": 4,
+   "only_link5": 2,
+   "only_link6": 3,
+   "neither": 1
+  },
+  "sum": 10,
+  "link5_successes": 6,
+  "link6_successes": 7,
+  "union_oracle": 9,
+  "multilink_reported": 9,
+  "union_equals_multilink": true,
+  "pinned_failures_total_runs": 7,
+  "claim_seven_pinned_failures_all_execution": true,
+  "note": "7은 링크 5의 실패 4회와 링크 6의 실패 3회를 합한 실행 횟수이며 서로 다른 배치 수가 아니다",
+  "distinct_placements_with_a_pinned_failure": 6
+ },
+ "V11_table4_audit": {
+  "column_sums": [
+   100,
+   100,
+   94,
+   6,
+   0,
+   8
+  ],
+  "reported_totals": [
+   100,
+   100,
+   94,
+   6,
+   0,
+   8
+  ],
+  "match": true,
+  "fully_correct_plus_over_plus_looser": 100,
+  "fully_correct_wilson": [
+   0.8752,
+   0.9722
+  ],
+  "looser_0_of_100_upper95_wilson": 0.037,
+  "looser_rule_of_three_upper": 0.03,
+  "pressbutton_fully_correct_wilson": [
+   0.6396,
+   0.9476
+  ],
+  "two_constraint_fully_correct_wilson": [
+   0.6396,
+   0.9476
+  ],
+  "note": "20 시드는 설정마다 같은 저장 관측 위의 샘플이라 장면 다양성이 아니라 VLM 샘플링 분산만 잰다"
+ },
+ "V12_planner_failures": {
+  "attempts": 74,
+  "success_attempts": 69,
+  "rate_pct": 93.24324324324324,
+  "candidates": 148,
+  "candidate_success": 124,
+  "candidate_fail": 24,
+  "candidates_per_attempt": 2.0,
+  "failure_causes_sum": 24,
+  "failure_cause_pct": [
+   45.8,
+   33.3,
+   16.7,
+   4.2
+  ],
+  "reported_pct": [
+   46,
+   33,
+   17,
+   4
+  ],
+  "pct_sum_reported": 100,
+  "failed_attempts": 5,
+  "failed_attempts_wilson_upper": 0.1486,
+  "wacl_con_xarm_nonsuccess_rollouts": 9,
+  "note": "74회 시도가 어느 세션(xArm WACL 40회, FR3 40회, 절제 포함 여부)인지 본문에 없다"
+ },
+ "V13_table5_replay": {
+  "rows": [
+   {
+    "row": "OpenCoffee_on",
+    "KALM": 2,
+    "WACL": 26,
+    "reported_p": 1.2e-07,
+    "p_if_c0": 1.1920928955078125e-07,
+    "solutions_matching_reported_p": [
+     {
+      "b": 24,
+      "c": 0,
+      "p": 1.1920928955078125e-07
+     }
+    ]
+   },
+   {
+    "row": "OpenCoffee_off",
+    "KALM": 7,
+    "WACL": 30,
+    "reported_p": 2.4e-07,
+    "p_if_c0": 2.384185791015625e-07,
+    "solutions_matching_reported_p": [
+     {
+      "b": 23,
+      "c": 0,
+      "p": 2.384185791015625e-07
+     }
+    ]
+   },
+   {
+    "row": "CloseFaucet_on",
+    "KALM": 3,
+    "WACL": 30,
+    "reported_p": 1.5e-08,
+    "p_if_c0": 1.4901161193847656e-08,
+    "solutions_matching_reported_p": [
+     {
+      "b": 27,
+      "c": 0,
+      "p": 1.4901161193847656e-08
+     }
+    ]
+   },
+   {
+    "row": "CloseFaucet_off",
+    "KALM": 29,
+    "WACL": 30,
+    "reported_p": 1.0,
+    "p_if_c0": 1.0,
+    "solutions_matching_reported_p": [
+     {
+      "b": 1,
+      "c": 0,
+      "p": 1.0
+     },
+     {
+      "b": 2,
+      "c": 1,
+      "p": 1.0
+     },
+     {
+      "b": 3,
+      "c": 2,
+      "p": 1.0
+     },
+     {
+      "b": 4,
+      "c": 3,
+      "p": 1.0
+     },
+     {
+      "b": 5,
+      "c": 4,
+      "p": 1.0
+     },
+     {
+      "b": 6,
+      "c": 5,
+      "p": 1.0
+     },
+     {
+      "b": 7,
+      "c": 6,
+      "p": 1.0
+     },
+     {
+      "b": 8,
+      "c": 7,
+      "p": 1.0
+     },
+     {
+      "b": 9,
+      "c": 8,
+      "p": 1.0
+     },
+     {
+      "b": 10,
+      "c": 9,
+      "p": 1.0
+     },
+     {
+      "b": 11,
+      "c": 10,
+      "p": 1.0
+     },
+     {
+      "b": 12,
+      "c": 11,
+      "p": 1.0
+     },
+     {
+      "b": 13,
+      "c": 12,
+      "p": 1.0
+     },
+     {
+      "b": 14,
+      "c": 13,
+      "p": 1.0
+     },
+     {
+      "b": 15,
+      "c": 14,
+      "p": 1.0
+     },
+     {
+      "b": 16,
+      "c": 15,
+      "p": 1.0
+     },
+     {
+      "b": 17,
+      "c": 16,
+      "p": 1.0
+     },
+     {
+      "b": 18,
+      "c": 17,
+      "p": 1.0
+     },
+     {
+      "b": 19,
+      "c": 18,
+      "p": 1.0
+     },
+     {
+      "b": 20,
+      "c": 19,
+      "p": 1.0
+     },
+     {
+      "b": 21,
+      "c": 20,
+      "p": 1.0
+     },
+     {
+      "b": 22,
+      "c": 21,
+      "p": 1.0
+     },
+     {
+      "b": 23,
+      "c": 22,
+      "p": 1.0
+     },
+     {
+      "b": 24,
+      "c": 23,
+      "p": 1.0
+     },
+     {
+      "b": 25,
+      "c": 24,
+      "p": 1.0
+     },
+     {
+      "b": 26,
+      "c": 25,
+      "p": 1.0
+     },
+     {
+      "b": 27,
+      "c": 26,
+      "p": 1.0
+     },
+     {
+      "b": 28,
+      "c": 27,
+      "p": 1.0
+     },
+     {
+      "b": 29,
+      "c": 28,
+      "p": 1.0
+     },
+     {
+      "b": 30,
+      "c": 29,
+      "p": 1.0
+     }
+    ]
+   }
+  ],
+  "all_c_zero": true,
+  "online_vs_offline_KALM_con": {
+   "OpenCoffee": {
+    "online_rollouts_success": "2/10",
+    "offline_plan_success": "2/30"
+   },
+   "CloseFaucet": {
+    "online_rollouts_success": "3/10",
+    "offline_plan_success": "3/30"
+   }
+  },
+  "note": "표 1의 KALM 구속 실행 성공(2/10, 3/10)이 장면 30개 재생의 계획 성공(2/30, 3/30)과 같은 개수다. 30개 장면의 출처(세션 3개x10 배치?)가 본문에 없어 독립성을 판단할 수 없다.",
+  "pseudoreplication_if_10_placements": "고유 배치가 10개라면 유효 n=10이고 같은 관찰이 세 번 세어진 셈이다"
+ },
+ "V14_runtime_and_beam": {
+  "constraint_chain_sum": 28.32,
+  "reported_barrier": 28.31,
+  "chain_minus_barrier": 0.01,
+  "barrier_plus_post": 34.63,
+  "reported_total": 34.63,
+  "anchor_prep_s": 6.32,
+  "post_barrier_s": 6.32,
+  "identical_values_flag": true,
+  "vlm_share_of_total_pct": 73.8,
+  "vlm_plus_sam3_share_pct": 81.8,
+  "beam_candidates_per_step": 640,
+  "reported_beam_candidates": 640,
+  "H_per_task": {
+   "CloseCabinet": 4,
+   "PressButton": 4,
+   "OpenCoffee": 8,
+   "CloseFaucet": 8
+  },
+  "policy_trajectory_length_appendix_a2": 16,
+  "section_3_1_horizon_H": "H (본문 기호) vs A.2 길이 16 vs A.5 H=4/8"
+ },
+ "V15_cross_embodiment": {
+  "unc_FR3_vs_xArm_fisher": 1.0,
+  "con_FR3_vs_xArm_fisher": 0.45306016202113236,
+  "con_OpenCoffee_FR3_vs_xArm_fisher": 0.36984996427720884,
+  "con_FR3_vs_KALM_fisher": 0.0033887101527464653
+ },
+ "V16_training_scale": {
+  "samples_seen": 51200000,
+  "samples_per_demo_if_10_pairs": 5120000.0,
+  "if_views_triple_pairs": 1706666.6666666667,
+  "note": "10개 시연(또는 최대 30개 뷰별 쌍)을 5.1천만 샘플로 학습한다. 보강 기법이 본문에 없다면 사실상 암기 모델이다."
+ },
+ "V17_sample_size": {
+  "unc_75_vs_57.5": 115,
+  "con_77.5_vs_32.5": 20,
+  "ablation_70_vs_30": 25,
+  "replay_70_vs_60": 358,
+  "primitive_90_vs_70": 63,
+  "arc_70_vs_40": 44,
+  "note": "비쌍체 정규근사 80% 검정력, 조건당 필요한 롤아웃 수(쌍체이면 더 적을 수 있다)"
+ },
+ "V18_rollout_budget": {
+  "table1_cells": 24,
+  "table1_rollouts": 240,
+  "table2_rows": 7,
+  "table2_rollouts": 70,
+  "total_reported_robot_rollouts": 310,
+  "demos_total_wacl": 40,
+  "demos_total_kalm": 40
+ },
+ "V19_abstract_vs_table": {
+  "abstract_78_vs_33": [
+   78,
+   33
+  ],
+  "exact": [
+   77.5,
+   32.5
+  ],
+  "abstract_rounding_note": "13/40 = 32.5%, 31/40 = 77.5%는 둘 다 정확히 .5라서 반올림 방향(올림)이 결과를 정한다",
+  "gap_pp_exact": 45.0,
+  "gap_pp_from_rounded": 45
+ },
+ "V20_task_mean_vs_pooled": {
+  "task_mean_equals_pooled": true,
+  "reason": "과제마다 롤아웃이 10회라 과제 평균과 합산 비율이 같다"
+ }
+}
