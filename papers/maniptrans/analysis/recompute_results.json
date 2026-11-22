@@ -1,0 +1,297 @@
+{
+  "table1_feasible_denominators": {
+    "single": {
+      "Retarget-Only": [
+        65,
+        87,
+        108,
+        109,
+        130,
+        131,
+        151,
+        152,
+        153,
+        173,
+        174,
+        175,
+        194,
+        195,
+        196,
+        197
+      ],
+      "RL-Only": [
+        35,
+        67,
+        70,
+        99,
+        102,
+        105,
+        108,
+        134,
+        137,
+        140,
+        143,
+        166,
+        169,
+        172,
+        175,
+        178,
+        181,
+        198
+      ],
+      "Retarget+Residual": [
+        23,
+        46,
+        67,
+        69,
+        90,
+        92,
+        113,
+        115,
+        134,
+        136,
+        138,
+        157,
+        159,
+        161,
+        178,
+        180,
+        182,
+        184,
+        186
+      ],
+      "ManipTrans": [
+        31,
+        43,
+        62,
+        74,
+        86,
+        93,
+        105,
+        117,
+        124,
+        129,
+        136,
+        148,
+        155,
+        160,
+        167,
+        172,
+        179,
+        186,
+        191,
+        198
+      ]
+    },
+    "bimanual": {
+      "RL-Only": [
+        33,
+        58,
+        66,
+        91,
+        99,
+        107,
+        116,
+        124,
+        132,
+        140,
+        141,
+        149,
+        157,
+        165,
+        173,
+        174,
+        182,
+        190,
+        198,
+        199
+      ],
+      "Retarget+Residual": [
+        36,
+        72,
+        79,
+        101,
+        108,
+        115,
+        122,
+        137,
+        144,
+        151,
+        158,
+        165,
+        166,
+        173,
+        180,
+        187,
+        194
+      ],
+      "ManipTrans": [
+        38,
+        43,
+        76,
+        81,
+        86,
+        114,
+        119,
+        124,
+        129,
+        147,
+        152,
+        157,
+        162,
+        167,
+        172,
+        177,
+        185,
+        190,
+        195,
+        200
+      ]
+    }
+  },
+  "table1_common_denominators": {
+    "single_all4_rows": [],
+    "single_3rows": [],
+    "bimanual_3rows": []
+  },
+  "table1_pairs_sum_40_160": [],
+  "table2_common_denominators_20_to_2000": [
+    320,
+    640,
+    960,
+    1280,
+    1600,
+    1920
+  ],
+  "table2_check": {
+    "320": {
+      "IBC": [
+        15
+      ],
+      "BET": [
+        31
+      ],
+      "DP-UNet": [
+        59
+      ],
+      "DP-Trans": [
+        47
+      ]
+    },
+    "420": {
+      "IBC": [],
+      "BET": [],
+      "DP-UNet": [],
+      "DP-Trans": []
+    },
+    "300": {
+      "IBC": [],
+      "BET": [],
+      "DP-UNet": [],
+      "DP-Trans": []
+    },
+    "280": {
+      "IBC": [],
+      "BET": [],
+      "DP-UNet": [],
+      "DP-Trans": []
+    },
+    "140": {
+      "IBC": [],
+      "BET": [],
+      "DP-UNet": [],
+      "DP-Trans": []
+    }
+  },
+  "table4_nonmonotone_bimanual": [
+    true
+  ],
+  "single_task_n_first_match": null,
+  "comparisons_assumed_n": {},
+  "dataset_avg_frames_per_episode": 406.06060606060606,
+  "dataset_avg_seconds_per_episode": 6.767676767676767,
+  "bimanual_seq_fraction_claim": 0.18181818181818182,
+  "quasisim_total_h_from_stages": [
+    30,
+    60
+  ],
+  "maniptrans_pretrain_h": 36.0,
+  "maniptrans_residual_min": 15,
+  "table7_obs_dim": 52,
+  "table7_act_dim": 19,
+  "sig_table1_range_over_feasible_n": {
+    "single_ManipTrans_58.1_vs_RetRes_47.8": {
+      "n_feasible_count": 2,
+      "p_min": 0.06136704440464359,
+      "p_max": 0.11412093740165263
+    },
+    "bimanual_ManipTrans_39.5_vs_RetRes_13.9": null,
+    "bimanual_ManipTrans_39.5_vs_RL_12.1": {
+      "n_feasible_count": 3,
+      "p_min": 1.1072916139952242e-09,
+      "p_max": 1.0828595514588549e-06
+    }
+  },
+  "table2_counts_n320": {
+    "IBC": 15,
+    "BET": 31,
+    "DP-UNet": 59,
+    "DP-Trans": 47
+  },
+  "table2_pairwise_n320": {
+    "DP-UNet_vs_BET": {
+      "p_fisher": 0.0020121021508339347,
+      "wilson_a": [
+        0.14571718497892308,
+        0.23052107471346975
+      ],
+      "wilson_b": [
+        0.06908826722855449,
+        0.13422594564588783
+      ]
+    },
+    "DP-UNet_vs_IBC": {
+      "p_fisher": 4.6971207674059265e-08,
+      "wilson_a": [
+        0.14571718497892308,
+        0.23052107471346975
+      ],
+      "wilson_b": [
+        0.02860944936482258,
+        0.07589102247079087
+      ]
+    },
+    "DP-Trans_vs_BET": {
+      "p_fisher": 0.06938742319953872,
+      "wilson_a": [
+        0.11228302231316231,
+        0.18984493160010887
+      ],
+      "wilson_b": [
+        0.06908826722855449,
+        0.13422594564588783
+      ]
+    },
+    "DP-UNet_vs_DP-Trans": {
+      "p_fisher": 0.24204666973509875,
+      "wilson_a": [
+        0.14571718497892308,
+        0.23052107471346975
+      ],
+      "wilson_b": [
+        0.11228302231316231,
+        0.18984493160010887
+      ]
+    }
+  },
+  "wilson_example_n43": {
+    "single_25of43": [
+      0.43328315755711777,
+      0.7161566566251477
+    ],
+    "bimanual_17of43": [
+      0.263651061984564,
+      0.5442120340668091
+    ]
+  }
+}
