@@ -1,0 +1,231 @@
+{
+  "assumptions": {
+    "table2_n_per_method": 95880,
+    "table2_n_note": "본문 V.C.1 '95,880 grasps per method'. 물체·스케일·파지 수로 재확인 (2397 x 4 x 10).",
+    "independence": "파지는 독립이라고 가정. 같은 물체의 4개 스케일과 10개 파지는 상관이 있을 수 있어 실제 구간은 더 넓다.",
+    "table3_n": "ablation 시도 수는 본문에 없음. 표 II와 같은 95,880을 가정 (V 검정은 이 가정에 의존).",
+    "table4_n": "테스트 시도 수 미기재. 검정 불가."
+  },
+  "V1_counts": {
+    "scaled_objects": 9588,
+    "expected_table2_grasps": 95880,
+    "v1_scaled_objects": 9760,
+    "v1_table2_grasps": 97600,
+    "note": "v3 9,588 스케일 물체와 95,880 파지는 본문과 일치. v1은 2,440물체와 97,600 파지."
+  },
+  "V2_table2_ssr": {
+    "DexGraspNet": {
+      "SSR": 37.0,
+      "k_implied": 35476,
+      "wilson95": [
+        36.7,
+        37.31
+      ],
+      "diff_vs_ours_pp": 42.9,
+      "z": 190.6,
+      "p": 0.0
+    },
+    "SpringGrasp": {
+      "SSR": 12.1,
+      "k_implied": 11601,
+      "wilson95": [
+        11.89,
+        12.31
+      ],
+      "diff_vs_ours_pp": 67.8,
+      "z": 297.85,
+      "p": 0.0
+    },
+    "FRoGGeR": {
+      "SSR": 17.2,
+      "k_implied": 16491,
+      "wilson95": [
+        16.96,
+        17.44
+      ],
+      "diff_vs_ours_pp": 62.7,
+      "z": 274.68,
+      "p": 0.0
+    },
+    "BODex (Ours)": {
+      "SSR": 79.9,
+      "k_implied": 76608,
+      "wilson95": [
+        79.65,
+        80.15
+      ]
+    }
+  },
+  "V3_table2_best_per_metric": {
+    "SSR": {
+      "best": "BODex (Ours)",
+      "best_value": 79.9,
+      "ours": 79.9
+    },
+    "S": {
+      "best": "BODex (Ours)",
+      "best_value": 61.5,
+      "ours": 61.5
+    },
+    "PD": {
+      "best": "BODex (Ours)",
+      "best_value": 0.51,
+      "ours": 0.51
+    },
+    "CDC": {
+      "best": "BODex (Ours)",
+      "best_value": 2.98,
+      "ours": 2.98
+    },
+    "SPD": {
+      "best": "FRoGGeR",
+      "best_value": 0.01,
+      "ours": 0.01
+    },
+    "FVR": {
+      "best": "FRoGGeR",
+      "best_value": 28.9,
+      "ours": 33.2
+    }
+  },
+  "V3_speed_ratio_vs_frogger": 51.25,
+  "V3_speed_note": "속도는 기준선이 원 논문 보고값이라 하드웨어가 다르다 (본문 V.B).",
+  "V4_table3_ablation": {
+    "Shadow: pregrasp 제거 (C2F만)": {
+      "full_SSR": 75.8,
+      "ablated_SSR": 57.8,
+      "diff_pp": 18.0,
+      "z": 83.69,
+      "p": 0.0,
+      "n_per_arm_for_80pct_power_at_0.05": 107
+    },
+    "Shadow: C2F 제거 (pregrasp만)": {
+      "full_SSR": 75.8,
+      "ablated_SSR": 68.4,
+      "diff_pp": 7.4,
+      "z": 36.13,
+      "p": 9.1e-286,
+      "n_per_arm_for_80pct_power_at_0.05": 576
+    },
+    "Allegro: pregrasp 제거 (C2F만)": {
+      "full_SSR": 79.9,
+      "ablated_SSR": 68.2,
+      "diff_pp": 11.7,
+      "z": 58.44,
+      "p": 0.0,
+      "n_per_arm_for_80pct_power_at_0.05": 220
+    },
+    "Allegro: C2F 제거 (pregrasp만)": {
+      "full_SSR": 79.9,
+      "ablated_SSR": 78.1,
+      "diff_pp": 1.8,
+      "z": 9.68,
+      "p": 3.81e-22,
+      "n_per_arm_for_80pct_power_at_0.05": 8037
+    },
+    "missing_cell": "두 요인 모두 끈 행(✗✗)이 표에 없음. 상호작용과 기준선 크기를 알 수 없음."
+  },
+  "V5_allegro_full_is_best": true,
+  "V6_table4": {
+    "ratio_ours_F_UDG_to_DGN_UDG": 1.88,
+    "gap_pp": 37.5,
+    "note": "본문 '40%에서 80%' (초록)는 DGN 42.6 → 80.1로 맞음. 시도 수가 없어 신뢰구간 불가.",
+    "n_needed_for_+-3pp_halfwidth_at_p0.8": 683
+  },
+  "V7_real_world": {
+    "trials": 100,
+    "successes": 81,
+    "wilson95": [
+      72.2,
+      87.5
+    ],
+    "note": "물체별 결과는 본문에 없다. 물체로 묶으면 구간이 넓어진다 (군집 효과 미확인).",
+    "binom_p_vs_75pct_two_sided": 0.203
+  },
+  "V8_table1": {
+    "floating_grasps_per_scaled_object": 426.6,
+    "tabletop_grasps_per_scaled_object": 321.2,
+    "tabletop_trajectories_equal_grasps": true,
+    "v1_floating_grasps_per_scaled_object": 370.9,
+    "note": "표 II 설정(물체당 10개)과 데이터셋 설정(물체당 약 427개)이 다르다. 본문에 시드 수가 없다."
+  },
+  "V9_internal_match": {
+    "table2_ours_vs_table3_allegro_full": {
+      "SSR": [
+        79.9,
+        79.9
+      ],
+      "S": [
+        61.5,
+        61.5
+      ],
+      "PD": [
+        0.51,
+        0.51
+      ],
+      "CDC": [
+        2.98,
+        2.98
+      ]
+    },
+    "abstract_49_per_s_vs_shadow_full": 49.8
+  },
+  "V10_v1_to_v3_table2_ssr": {
+    "DexGraspNet": {
+      "SSR_v1": 31.37,
+      "SSR_v3": 37.0,
+      "delta_pp": 5.63
+    },
+    "SpringGrasp": {
+      "SSR_v1": 37.24,
+      "SSR_v3": 12.1,
+      "delta_pp": -25.14
+    },
+    "FRoGGeR": {
+      "SSR_v1": 41.97,
+      "SSR_v3": 17.2,
+      "delta_pp": -24.77
+    },
+    "BODex (Ours)": {
+      "SSR_v1": 89.55,
+      "SSR_v3": 79.9,
+      "delta_pp": -9.65
+    }
+  },
+  "V10_note": "v1의 CD(평균 최소 거리, 관통 시 0)와 v3의 CDC(손가락 간 부호거리 최댓값-최솟값)는 다른 지표다. 두 버전의 PD·FVR·SPD 값도 같은 기준이 아니다.",
+  "V11_abstract_claims": {
+    "Shadow_SSR_above_75": true,
+    "Allegro_SSR_above_75": true,
+    "Leap_SSR_reported_in_tables": false
+  },
+  "V12_cluster_sensitivity": {
+    "rho=0.05": {
+      "design_effect": 1.45,
+      "table2_ours_wilson95_adjusted": [
+        79.59,
+        80.2
+      ],
+      "table3_allegro_full_vs_no_c2f_z": 8.04,
+      "table3_allegro_full_vs_no_c2f_p": 9.32e-16
+    },
+    "rho=0.1": {
+      "design_effect": 1.9,
+      "table2_ours_wilson95_adjusted": [
+        79.55,
+        80.25
+      ],
+      "table3_allegro_full_vs_no_c2f_z": 7.02,
+      "table3_allegro_full_vs_no_c2f_p": 2.22e-12
+    },
+    "rho=0.2": {
+      "design_effect": 2.8,
+      "table2_ours_wilson95_adjusted": [
+        79.47,
+        80.32
+      ],
+      "table3_allegro_full_vs_no_c2f_z": 5.78,
+      "table3_allegro_full_vs_no_c2f_p": 7.36e-09
+    }
+  },
+  "V12_note": "n을 유효 표본 수 n/DE로 줄여 본 값. 표 III 두 칸(79.9, 78.1)의 차이는 n이 95,880이면 군집을 고려해도 유의하게 남지만, 실제 n은 본문에 없다."
+}
