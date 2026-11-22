@@ -1,0 +1,414 @@
+{
+  "T1_k_over_37": {
+    "GPT-3 6.7B": {
+      "flat_k_candidates": [
+        1
+      ],
+      "hier_k_candidates": [
+        2
+      ]
+    },
+    "GPT-3 175B": {
+      "flat_k_candidates": [
+        25
+      ],
+      "hier_k_candidates": [
+        31
+      ]
+    },
+    "cushman": {
+      "flat_k_candidates": [
+        20
+      ],
+      "hier_k_candidates": [
+        21
+      ]
+    },
+    "code-davinci-002": {
+      "flat_k_candidates": [
+        30
+      ],
+      "hier_k_candidates": [
+        35
+      ]
+    }
+  },
+  "T1_notebook_vs_paper": {
+    "text-curie-001 (6.7B)": {
+      "notebook_hier_hier_k": 2,
+      "notebook_hier_hier_pct": 5.4,
+      "paper_hier": 5,
+      "notebook_flat_flat_k": 1,
+      "notebook_flat_flat_pct": 2.7,
+      "paper_flat": 3,
+      "notebook_flat_cg_hier_prompt_k": 2,
+      "notebook_hier_cg_flat_prompt_k": 1
+    },
+    "text-davinci-002 (175B)": {
+      "notebook_hier_hier_k": 31,
+      "notebook_hier_hier_pct": 83.8,
+      "paper_hier": 84,
+      "notebook_flat_flat_k": 25,
+      "notebook_flat_flat_pct": 67.6,
+      "paper_flat": 68,
+      "notebook_flat_cg_hier_prompt_k": 26,
+      "notebook_hier_cg_flat_prompt_k": 28
+    },
+    "code-cushman-001": {
+      "notebook_hier_hier_k": 21,
+      "notebook_hier_hier_pct": 56.8,
+      "paper_hier": 57,
+      "notebook_flat_flat_k": 22,
+      "notebook_flat_flat_pct": 59.5,
+      "paper_flat": 54,
+      "notebook_flat_cg_hier_prompt_k": 20,
+      "notebook_hier_cg_flat_prompt_k": 21
+    },
+    "code-davinci-002": {
+      "notebook_hier_hier_k": 36,
+      "notebook_hier_hier_pct": 97.3,
+      "paper_hier": 95,
+      "notebook_flat_flat_k": 30,
+      "notebook_flat_flat_pct": 81.1,
+      "paper_flat": 81,
+      "notebook_flat_cg_hier_prompt_k": 26,
+      "notebook_hier_cg_flat_prompt_k": 32
+    }
+  },
+  "T1_fisher_unpaired_hier_vs_flat": {
+    "GPT-3 6.7B": 1.0,
+    "GPT-3 175B": 0.1746,
+    "cushman": 1.0,
+    "code-davinci-002": 0.1522
+  },
+  "T2_k_over_164": {
+    "greedy_flat_45.7": 45.73,
+    "greedy_hier_53.0": 53.05,
+    "T5_flatprompt_greedy_50.6": 50.61
+  },
+  "HE_6.5pct_integer_candidates": [],
+  "HE_44_56_integer_N_below_164": [
+    25,
+    50,
+    75,
+    100,
+    125,
+    150
+  ],
+  "HE_44_56_smallest_N_share_pct": 15.2,
+  "T6_recomputed_means": {
+    "SA_SI_LH": {
+      "CLIPort_oracle": 78.8,
+      "CLIPort_no_oracle": 18.4,
+      "NL_planner": 86.4,
+      "CaP": 97.2
+    },
+    "SA_SI_SG": {
+      "CLIPort_oracle": 97.33,
+      "CLIPort_no_oracle": 57.33,
+      "CaP": 89.33
+    },
+    "UA_SI_LH": {
+      "CLIPort_oracle": 36.8,
+      "CLIPort_no_oracle": 8.8,
+      "NL_planner": 88.0,
+      "CaP": 97.6
+    },
+    "UA_SI_SG": {
+      "CLIPort_oracle": 0.0,
+      "CLIPort_no_oracle": 0.0,
+      "CaP": 73.33
+    },
+    "UA_UI_LH": {
+      "CLIPort_oracle": 0.0,
+      "CLIPort_no_oracle": 0.0,
+      "NL_planner": 64.0,
+      "CaP": 80.0
+    },
+    "UA_UI_SG": {
+      "CLIPort_oracle": 1.33,
+      "CLIPort_no_oracle": 0.0,
+      "CaP": 62.0
+    }
+  },
+  "T6_vs_T3": {
+    "SA_SI_LH": {
+      "table3_paper": {
+        "CLIPort_oracle": 78.8,
+        "NL_planner": 86.4,
+        "CaP": 97.2
+      },
+      "recomputed_from_table6": {
+        "CLIPort_oracle": 78.8,
+        "NL_planner": 86.4,
+        "CaP": 97.2
+      }
+    },
+    "SA_SI_SG": {
+      "table3_paper": {
+        "CLIPort_oracle": 97.33,
+        "NL_planner": null,
+        "CaP": 89.3
+      },
+      "recomputed_from_table6": {
+        "CLIPort_oracle": 97.33,
+        "NL_planner": null,
+        "CaP": 89.33
+      }
+    },
+    "UA_SI_LH": {
+      "table3_paper": {
+        "CLIPort_oracle": 36.8,
+        "NL_planner": 88.0,
+        "CaP": 97.6
+      },
+      "recomputed_from_table6": {
+        "CLIPort_oracle": 36.8,
+        "NL_planner": 88.0,
+        "CaP": 97.6
+      }
+    },
+    "UA_SI_SG": {
+      "table3_paper": {
+        "CLIPort_oracle": 0.0,
+        "NL_planner": null,
+        "CaP": 73.33
+      },
+      "recomputed_from_table6": {
+        "CLIPort_oracle": 0.0,
+        "NL_planner": null,
+        "CaP": 73.33
+      }
+    },
+    "UA_UI_LH": {
+      "table3_paper": {
+        "CLIPort_oracle": 0.0,
+        "NL_planner": 64.0,
+        "CaP": 80.0
+      },
+      "recomputed_from_table6": {
+        "CLIPort_oracle": 0.0,
+        "NL_planner": 64.0,
+        "CaP": 80.0
+      }
+    },
+    "UA_UI_SG": {
+      "table3_paper": {
+        "CLIPort_oracle": 0.01,
+        "NL_planner": null,
+        "CaP": 62.0
+      },
+      "recomputed_from_table6": {
+        "CLIPort_oracle": 1.33,
+        "NL_planner": null,
+        "CaP": 62.0
+      }
+    }
+  },
+  "T6_totals_recomputed": {
+    "CLIPort_oracle": {
+      "SA_SI_total": 85.75,
+      "UA_SI_total": 23.0,
+      "UA_UI_total": 0.67
+    },
+    "CLIPort_no_oracle": {
+      "SA_SI_total": 33.0,
+      "UA_SI_total": 5.5,
+      "UA_UI_total": 0.0
+    },
+    "NL_planner": {
+      "SA_SI_total": 86.4,
+      "UA_SI_total": 88.0,
+      "UA_UI_total": 64.0
+    },
+    "CaP": {
+      "SA_SI_total": 94.25,
+      "UA_SI_total": 88.5,
+      "UA_UI_total": 71.0
+    }
+  },
+  "T6_totals_paper": {
+    "SA_SI": {
+      "CLIPort_oracle": 85.8,
+      "CLIPort_no_oracle": 33.0,
+      "NL_planner": 86.4,
+      "CaP": 94.3
+    },
+    "UA_SI": {
+      "CLIPort_oracle": 23.0,
+      "CLIPort_no_oracle": 5.5,
+      "NL_planner": 88.0,
+      "CaP": 88.5
+    },
+    "UA_UI": {
+      "CLIPort_oracle": 0.7,
+      "CLIPort_no_oracle": 0.0,
+      "NL_planner": 64.0,
+      "CaP": 71.0
+    }
+  },
+  "CaP_family_ci": {
+    "SA_SI_LH": {
+      "tasks": 5,
+      "trials": 250,
+      "successes": 243,
+      "wilson95_pooled": [
+        94.3,
+        98.6
+      ],
+      "task_t95": [
+        92.4,
+        102.0
+      ]
+    },
+    "SA_SI_SG": {
+      "tasks": 3,
+      "trials": 150,
+      "successes": 134,
+      "wilson95_pooled": [
+        83.4,
+        93.3
+      ],
+      "task_t95": [
+        52.0,
+        126.6
+      ]
+    },
+    "UA_SI_LH": {
+      "tasks": 5,
+      "trials": 250,
+      "successes": 244,
+      "wilson95_pooled": [
+        94.9,
+        98.9
+      ],
+      "task_t95": [
+        93.2,
+        102.0
+      ]
+    },
+    "UA_SI_SG": {
+      "tasks": 3,
+      "trials": 150,
+      "successes": 110,
+      "wilson95_pooled": [
+        65.7,
+        79.8
+      ],
+      "task_t95": [
+        16.0,
+        130.7
+      ]
+    },
+    "UA_UI_LH": {
+      "tasks": 3,
+      "trials": 150,
+      "successes": 120,
+      "wilson95_pooled": [
+        72.9,
+        85.6
+      ],
+      "task_t95": [
+        32.6,
+        127.4
+      ]
+    },
+    "UA_UI_SG": {
+      "tasks": 3,
+      "trials": 150,
+      "successes": 93,
+      "wilson95_pooled": [
+        54.0,
+        69.4
+      ],
+      "task_t95": [
+        -3.2,
+        127.2
+      ]
+    }
+  },
+  "T6_fisher_tests": [
+    {
+      "family": "SA_SI LH",
+      "CaP": "243/250",
+      "baseline": "216/250",
+      "baseline_name": "NL_planner",
+      "fisher_p": 1.2e-05
+    },
+    {
+      "family": "SA_SI LH",
+      "CaP": "243/250",
+      "baseline": "197/250",
+      "baseline_name": "CLIPort_oracle",
+      "fisher_p": 0.0
+    },
+    {
+      "family": "UA_SI LH",
+      "CaP": "244/250",
+      "baseline": "92/250",
+      "baseline_name": "CLIPort_oracle",
+      "fisher_p": 0.0
+    },
+    {
+      "family": "UA_UI LH",
+      "CaP": "120/150",
+      "baseline": "96/150",
+      "baseline_name": "NL_planner",
+      "fisher_p": 0.002975
+    },
+    {
+      "family": "UA_UI LH",
+      "CaP": "120/150",
+      "baseline": "0/150",
+      "baseline_name": "CLIPort_oracle",
+      "fisher_p": 0.0
+    },
+    {
+      "family": "SA_SI SG",
+      "CaP": "134/150",
+      "baseline": "146/150",
+      "baseline_name": "CLIPort_oracle",
+      "fisher_p": 0.009251
+    },
+    {
+      "family": "UA_UI SG",
+      "CaP": "93/150",
+      "baseline": "2/150",
+      "baseline_name": "CLIPort_oracle",
+      "fisher_p": 0.0
+    }
+  ],
+  "T4": {
+    "vanilla": {
+      "obj_k_of_28": 11,
+      "pos_k_of_23": 7,
+      "unweighted_mean_of_rows": 34.5,
+      "pooled_pct_51_items": 35.29
+    },
+    "cot": {
+      "obj_k_of_28": 19,
+      "pos_k_of_23": 11,
+      "unweighted_mean_of_rows": 58.0,
+      "pooled_pct_51_items": 58.82
+    },
+    "lmp": {
+      "obj_k_of_28": 27,
+      "pos_k_of_23": 23,
+      "unweighted_mean_of_rows": 98.0,
+      "pooled_pct_51_items": 98.04
+    }
+  },
+  "T4_notebook_check": {
+    "vanilla_obj": "0.39285714 = 11/28",
+    "cot_obj": "0.67857143 = 19/28",
+    "lmp_obj": "0.96428571 = 27/28",
+    "vanilla_pos": "0.30434783 = 7/23",
+    "cot_pos": "0.47826087 = 11/23",
+    "lmp_pos": "1.0 = 23/23"
+  },
+  "T4_fisher_lmp_vs_cot_pooled_51": {
+    "lmp_vs_cot": 1e-06,
+    "lmp_vs_vanilla": 0.0,
+    "note": "표 IV 행 단위 대신 노트북의 28+23 항목을 합쳐 계산. 과제 내 군집을 무시한 참고값"
+  }
+}
