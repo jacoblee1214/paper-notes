@@ -1,0 +1,64 @@
+{
+ "assumptions": {
+  "render_interval": 4,
+  "half_span": 2,
+  "success_scaler": 5.0,
+  "step_cost": 0.5
+ },
+ "isolated_and_runs": {
+  "1": {
+   "rm_sum": 12.0,
+   "rm_per_event": 12.0
+  },
+  "2": {
+   "rm_sum": 16.0,
+   "rm_per_event": 8.0
+  },
+  "3": {
+   "rm_sum": 20.0,
+   "rm_per_event": 6.67
+  },
+  "5": {
+   "rm_sum": 28.0,
+   "rm_per_event": 5.6
+  },
+  "10": {
+   "rm_sum": 48.0,
+   "rm_per_event": 4.8
+  },
+  "20": {
+   "rm_sum": 88.0,
+   "rm_per_event": 4.4
+  }
+ },
+ "density": {
+  "0.05": {
+   "rm_sum_mean": 40.3,
+   "total_return_mean": -104.7,
+   "events_mean": 3.6
+  },
+  "0.1": {
+   "rm_sum_mean": 79.6,
+   "total_return_mean": -65.4,
+   "events_mean": 7.1
+  },
+  "0.3": {
+   "rm_sum_mean": 191.0,
+   "total_return_mean": 46.0,
+   "events_mean": 21.3
+  },
+  "0.6": {
+   "rm_sum_mean": 274.4,
+   "total_return_mean": 129.4,
+   "events_mean": 42.6
+  },
+  "0.9": {
+   "rm_sum_mean": 297.9,
+   "total_return_mean": 152.9,
+   "events_mean": 63.9
+  }
+ },
+ "step_cost_total_300_steps": -150.0,
+ "success_reward_one_step": 5.0,
+ "ratio_rm_sum_to_success_at_lambda_0.3": 38.2
+}
