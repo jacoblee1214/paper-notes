@@ -1,0 +1,135 @@
+{
+  "planning_delta_consistency_5_trials": {
+    "push_fruits": {
+      "reported_pp": 10,
+      "possible_as_absolute_5_trials": false,
+      "possible_as_relative_5_trials": false
+    },
+    "reach_push": {
+      "reported_pp": 35,
+      "possible_as_absolute_5_trials": false,
+      "possible_as_relative_5_trials": false
+    },
+    "wipe_cloth": {
+      "reported_pp": 31,
+      "possible_as_absolute_5_trials": false,
+      "possible_as_relative_5_trials": false
+    },
+    "stack_cubes": {
+      "reported_pp": 11,
+      "possible_as_absolute_5_trials": false,
+      "possible_as_relative_5_trials": false
+    }
+  },
+  "abs_possible_5_trials": [
+    -100.0,
+    -80.0,
+    -60.0,
+    -40.0,
+    -20.0,
+    0.0,
+    20.0,
+    40.0,
+    60.0,
+    80.0,
+    100.0
+  ],
+  "novel_task_77pct_possible_10_trials": false,
+  "novel_task_nearest_k_of_10": 7.7,
+  "implied_df": {
+    "object_permanence": {
+      "place_fruits": {
+        "t": 4.38,
+        "p_reported": 0.001,
+        "op": "<",
+        "df_range_consistent": [
+          12,
+          200
+        ]
+      },
+      "push_fruits": {
+        "t": 6.06,
+        "p_reported": 1e-06,
+        "op": "<",
+        "df_range_consistent": [
+          32,
+          200
+        ]
+      },
+      "cube_stacking": {
+        "t": 2.4,
+        "p_reported": 0.05,
+        "op": "<",
+        "df_range_consistent": [
+          7,
+          200
+        ]
+      }
+    },
+    "causal_compliance": {
+      "place_fruits": {
+        "t": 3.66,
+        "p_reported": 0.001,
+        "op": "<",
+        "df_range_consistent": [
+          29,
+          200
+        ]
+      },
+      "push_fruits": {
+        "t": 2.28,
+        "p_reported": 0.05,
+        "op": "<",
+        "df_range_consistent": [
+          9,
+          200
+        ]
+      },
+      "wipe_cloth": {
+        "t": 2.99,
+        "p_reported": 0.01,
+        "op": "<",
+        "df_range_consistent": [
+          14,
+          200
+        ]
+      },
+      "cube_stacking": {
+        "t": 1.75,
+        "p_reported": 0.09,
+        "op": "=",
+        "df_range_consistent": [
+          21,
+          62
+        ]
+      },
+      "scribble_marker": {
+        "t": -1.22,
+        "p_reported": 0.23,
+        "op": "=",
+        "df_range_consistent": [
+          23,
+          113
+        ]
+      }
+    }
+  },
+  "causal_compliance_mean_check": {
+    "known_three_mean": 42.03,
+    "sum_needed_for_29pct_over_5_tasks": 145,
+    "remaining_two_must_sum_to": 18.9,
+    "note": "stack은 '작은 개선', scribble은 '악화'라 두 값 합이 18.9 이상이어야 평균 29%가 된다. 그림 6 막대 값 없이는 확인 불가."
+  },
+  "object_permanence_range_check": {
+    "min": 18,
+    "max": 47,
+    "mean": 33,
+    "feasible_bounds": true
+  },
+  "dataset_datapoints_check": {
+    "train_112k_per_demo": 903.2,
+    "val_17k_per_demo": 653.8,
+    "frames_per_demo_6fps_40s": 240,
+    "note": "1 demo당 datapoint 평균이 학습(약 903)과 검증(약 654)에서 다르다. datapoint 정의가 본문에 없다."
+  }
+}
