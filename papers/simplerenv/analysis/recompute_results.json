@@ -1,0 +1,841 @@
+{
+ "table_I_vismatch_mmrv_avg": 0.0565,
+ "table_I_drawer_mmrv_from_IV": 0.0275,
+ "oc_avg_check_real": [
+  -0.0005,
+  -0.0005,
+  0.0,
+  -0.0005,
+  -0.0005,
+  0.0002
+ ],
+ "oc_avg_check_sim": [
+  -0.001,
+  -0.0,
+  0.0035,
+  0.0,
+  0.0005,
+  0.0
+ ],
+ "table_iv": {
+  "grid_real": [
+   {
+    "col": "Pick H",
+    "n": 25,
+    "off_grid": []
+   },
+   {
+    "col": "Pick V",
+    "n": 25,
+    "off_grid": []
+   },
+   {
+    "col": "Pick S",
+    "n": 25,
+    "off_grid": []
+   },
+   {
+    "col": "Pick Avg",
+    "n": 75,
+    "off_grid": []
+   },
+   {
+    "col": "Move Near",
+    "n": 60,
+    "off_grid": []
+   },
+   {
+    "col": "Open",
+    "n": 27,
+    "off_grid": []
+   },
+   {
+    "col": "Close",
+    "n": 27,
+    "off_grid": []
+   },
+   {
+    "col": "Open/Close Avg",
+    "n": 54,
+    "off_grid": []
+   },
+   {
+    "col": "Apple Avg",
+    "n": 27,
+    "off_grid": []
+   }
+  ],
+  "grid_sim": [
+   {
+    "col": "Pick H",
+    "n": 100,
+    "off_grid_vm": []
+   },
+   {
+    "col": "Pick V",
+    "n": 100,
+    "off_grid_vm": []
+   },
+   {
+    "col": "Pick S",
+    "n": 100,
+    "off_grid_vm": []
+   },
+   {
+    "col": "Pick Avg",
+    "n": 300,
+    "off_grid_vm": []
+   },
+   {
+    "col": "Move Near",
+    "n": 240,
+    "off_grid_vm": []
+   },
+   {
+    "col": "Open",
+    "n": 108,
+    "off_grid_vm": [
+     [
+      "RT-1 (Converged)",
+      0.601,
+      65
+     ]
+    ]
+   },
+   {
+    "col": "Close",
+    "n": 108,
+    "off_grid_vm": [
+     [
+      "RT-1-X",
+      0.891,
+      96
+     ]
+    ]
+   },
+   {
+    "col": "Open/Close Avg",
+    "n": 216,
+    "off_grid_vm": [
+     [
+      "RT-1 (Converged)",
+      0.73,
+      158
+     ]
+    ]
+   },
+   {
+    "col": "Apple Avg",
+    "n": 108,
+    "off_grid_vm": []
+   }
+  ],
+  "mmrv_check": [
+   {
+    "col": "Pick H",
+    "mmrv_paper_rule": 0.0267,
+    "mmrv_repo_rule": 0.0267,
+    "printed": 0.027
+   },
+   {
+    "col": "Pick V",
+    "mmrv_paper_rule": 0.0267,
+    "mmrv_repo_rule": 0.0267,
+    "printed": 0.027
+   },
+   {
+    "col": "Pick S",
+    "mmrv_paper_rule": 0.0533,
+    "mmrv_repo_rule": 0.0533,
+    "printed": 0.053
+   },
+   {
+    "col": "Pick Avg",
+    "mmrv_paper_rule": 0.0313,
+    "mmrv_repo_rule": 0.0313,
+    "printed": 0.031
+   },
+   {
+    "col": "Move Near",
+    "mmrv_paper_rule": 0.111,
+    "mmrv_repo_rule": 0.111,
+    "printed": 0.111
+   },
+   {
+    "col": "Open",
+    "mmrv_paper_rule": 0.0,
+    "mmrv_repo_rule": 0.0,
+    "printed": 0.0
+   },
+   {
+    "col": "Close",
+    "mmrv_paper_rule": 0.1233,
+    "mmrv_repo_rule": 0.1233,
+    "printed": 0.123
+   },
+   {
+    "col": "Open/Close Avg",
+    "mmrv_paper_rule": 0.0553,
+    "mmrv_repo_rule": 0.0553,
+    "printed": 0.055
+   },
+   {
+    "col": "Apple Avg",
+    "mmrv_paper_rule": 0.0,
+    "mmrv_repo_rule": 0.0,
+    "printed": 0.0
+   }
+  ],
+  "pearson_check": [
+   {
+    "col": "Pick H",
+    "r": 0.9815,
+    "printed": 0.981
+   },
+   {
+    "col": "Pick V",
+    "r": 0.9637,
+    "printed": 0.964
+   },
+   {
+    "col": "Pick S",
+    "r": 0.9421,
+    "printed": 0.942
+   },
+   {
+    "col": "Pick Avg",
+    "r": 0.9754,
+    "printed": 0.976
+   },
+   {
+    "col": "Move Near",
+    "r": 0.8561,
+    "printed": 0.855
+   },
+   {
+    "col": "Open",
+    "r": 0.9832,
+    "printed": 0.983
+   },
+   {
+    "col": "Close",
+    "r": 0.7712,
+    "printed": 0.768
+   },
+   {
+    "col": "Open/Close Avg",
+    "r": 0.9154,
+    "printed": 0.915
+   },
+   {
+    "col": "Apple Avg",
+    "r": 0.9692,
+    "printed": 0.969
+   }
+  ],
+  "va_check": [
+   {
+    "col": "Pick H",
+    "mmrv_va": 0.0933,
+    "printed_va": 0.093,
+    "r_va": 0.947,
+    "printed_r_va": 0.947
+   },
+   {
+    "col": "Pick V",
+    "mmrv_va": 0.1333,
+    "printed_va": 0.133,
+    "r_va": 0.9367,
+    "printed_r_va": 0.937
+   },
+   {
+    "col": "Pick S",
+    "mmrv_va": 0.14,
+    "printed_va": 0.14,
+    "r_va": 0.9328,
+    "printed_r_va": 0.933
+   },
+   {
+    "col": "Pick Avg",
+    "mmrv_va": 0.0847,
+    "printed_va": 0.084,
+    "r_va": 0.9598,
+    "printed_r_va": 0.96
+   },
+   {
+    "col": "Move Near",
+    "mmrv_va": 0.111,
+    "printed_va": 0.111,
+    "r_va": 0.8862,
+    "printed_r_va": 0.887
+   },
+   {
+    "col": "Open",
+    "mmrv_va": 0.3028,
+    "printed_va": 0.303,
+    "r_va": 0.63,
+    "printed_r_va": 0.629
+   },
+   {
+    "col": "Close",
+    "mmrv_va": 0.321,
+    "printed_va": 0.3213,
+    "r_va": 0.613,
+    "printed_r_va": 0.613
+   },
+   {
+    "col": "Open/Close Avg",
+    "mmrv_va": 0.3208,
+    "printed_va": 0.321,
+    "r_va": 0.7363,
+    "printed_r_va": 0.737
+   },
+   {
+    "col": "Apple Avg",
+    "mmrv_va": 0.148,
+    "printed_va": 0.148,
+    "r_va": 0.2374,
+    "printed_r_va": 0.235
+   }
+  ]
+ },
+ "pick_avg_real_wilson": [
+  {
+   "policy": "RT-1 (Converged)",
+   "k_of_75": 64,
+   "rate": 0.853,
+   "wilson95": [
+    0.756,
+    0.916
+   ]
+  },
+  {
+   "policy": "RT-1 (15%)",
+   "k_of_75": 69,
+   "rate": 0.92,
+   "wilson95": [
+    0.836,
+    0.963
+   ]
+  },
+  {
+   "policy": "RT-1-X",
+   "k_of_75": 57,
+   "rate": 0.76,
+   "wilson95": [
+    0.652,
+    0.842
+   ]
+  },
+  {
+   "policy": "RT-2-X",
+   "k_of_75": 68,
+   "rate": 0.907,
+   "wilson95": [
+    0.82,
+    0.954
+   ]
+  },
+  {
+   "policy": "Octo-Base",
+   "k_of_75": 22,
+   "rate": 0.293,
+   "wilson95": [
+    0.202,
+    0.404
+   ]
+  },
+  {
+   "policy": "RT-1 (Begin)",
+   "k_of_75": 10,
+   "rate": 0.133,
+   "wilson95": [
+    0.074,
+    0.228
+   ]
+  }
+ ],
+ "pick_avg_real_fisher": [
+  {
+   "pair": "RT-1 (Converged) vs RT-1 (15%)",
+   "k": [
+    64,
+    69
+   ],
+   "p_fisher": 0.303
+  },
+  {
+   "pair": "RT-1 (Converged) vs RT-2-X",
+   "k": [
+    64,
+    68
+   ],
+   "p_fisher": 0.452
+  },
+  {
+   "pair": "RT-1 (15%) vs RT-1-X",
+   "k": [
+    69,
+    57
+   ],
+   "p_fisher": 0.013
+  },
+  {
+   "pair": "RT-1 (15%) vs RT-2-X",
+   "k": [
+    69,
+    68
+   ],
+   "p_fisher": 1.0
+  },
+  {
+   "pair": "RT-1-X vs RT-1 (Converged)",
+   "k": [
+    57,
+    64
+   ],
+   "p_fisher": 0.214
+  },
+  {
+   "pair": "RT-2-X vs RT-1 (Converged)",
+   "k": [
+    68,
+    64
+   ],
+   "p_fisher": 0.452
+  },
+  {
+   "pair": "RT-1 (Converged) vs Octo-Base",
+   "k": [
+    64,
+    22
+   ],
+   "p_fisher": 0.0
+  }
+ ],
+ "pick_avg_pair_ratio": [
+  {
+   "pair": "RT-1 (Converged) / RT-1 (15%)",
+   "real_diff": 0.067,
+   "se_diff": 0.052,
+   "ratio": 1.3
+  },
+  {
+   "pair": "RT-1 (Converged) / RT-1-X",
+   "real_diff": 0.093,
+   "se_diff": 0.064,
+   "ratio": 1.45
+  },
+  {
+   "pair": "RT-1 (Converged) / RT-2-X",
+   "real_diff": 0.054,
+   "se_diff": 0.053,
+   "ratio": 1.02
+  },
+  {
+   "pair": "RT-1 (Converged) / Octo-Base",
+   "real_diff": 0.56,
+   "se_diff": 0.067,
+   "ratio": 8.41
+  },
+  {
+   "pair": "RT-1 (Converged) / RT-1 (Begin)",
+   "real_diff": 0.72,
+   "se_diff": 0.057,
+   "ratio": 12.71
+  },
+  {
+   "pair": "RT-1 (15%) / RT-1-X",
+   "real_diff": 0.16,
+   "se_diff": 0.058,
+   "ratio": 2.74
+  },
+  {
+   "pair": "RT-1 (15%) / RT-2-X",
+   "real_diff": 0.013,
+   "se_diff": 0.046,
+   "ratio": 0.28
+  },
+  {
+   "pair": "RT-1 (15%) / Octo-Base",
+   "real_diff": 0.627,
+   "se_diff": 0.061,
+   "ratio": 10.25
+  },
+  {
+   "pair": "RT-1 (15%) / RT-1 (Begin)",
+   "real_diff": 0.787,
+   "se_diff": 0.05,
+   "ratio": 15.68
+  },
+  {
+   "pair": "RT-1-X / RT-2-X",
+   "real_diff": 0.147,
+   "se_diff": 0.06,
+   "ratio": 2.46
+  },
+  {
+   "pair": "RT-1-X / Octo-Base",
+   "real_diff": 0.467,
+   "se_diff": 0.072,
+   "ratio": 6.48
+  },
+  {
+   "pair": "RT-1-X / RT-1 (Begin)",
+   "real_diff": 0.627,
+   "se_diff": 0.063,
+   "ratio": 9.95
+  },
+  {
+   "pair": "RT-2-X / Octo-Base",
+   "real_diff": 0.614,
+   "se_diff": 0.062,
+   "ratio": 9.85
+  },
+  {
+   "pair": "RT-2-X / RT-1 (Begin)",
+   "real_diff": 0.774,
+   "se_diff": 0.052,
+   "ratio": 15.0
+  },
+  {
+   "pair": "Octo-Base / RT-1 (Begin)",
+   "real_diff": 0.16,
+   "se_diff": 0.066,
+   "ratio": 2.44
+  }
+ ],
+ "mc_mmrv_real_noise": [
+  {
+   "col": "Pick Avg",
+   "mmrv_point": 0.031,
+   "mc_median": 0.036,
+   "mc_95": [
+    0.0,
+    0.082
+   ]
+  },
+  {
+   "col": "Move Near",
+   "mmrv_point": 0.111,
+   "mc_median": 0.117,
+   "mc_95": [
+    0.072,
+    0.178
+   ]
+  },
+  {
+   "col": "Open/Close Avg",
+   "mmrv_point": 0.055,
+   "mc_median": 0.056,
+   "mc_95": [
+    0.0,
+    0.12
+   ]
+  },
+  {
+   "col": "Apple Avg",
+   "mmrv_point": 0.0,
+   "mc_median": 0.012,
+   "mc_95": [
+    0.0,
+    0.074
+   ]
+  }
+ ],
+ "pearson_ci_google": [
+  {
+   "col": "Pick Avg",
+   "r": 0.975,
+   "fisher95": [
+    0.786,
+    0.997
+   ]
+  },
+  {
+   "col": "Move Near",
+   "r": 0.856,
+   "fisher95": [
+    0.146,
+    0.984
+   ]
+  },
+  {
+   "col": "Open/Close Avg",
+   "r": 0.915,
+   "fisher95": [
+    0.404,
+    0.991
+   ]
+  },
+  {
+   "col": "Apple Avg",
+   "r": 0.969,
+   "fisher95": [
+    0.738,
+    0.997
+   ]
+  }
+ ],
+ "widowx_n3_note": "N=3 정책이면 Fisher 구간이 [-1, 1]에 가깝다",
+ "widowx_mmrv": {
+  "calc": [
+   0.0,
+   0.0,
+   0.0,
+   0.111,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "printed": [
+   0,
+   0,
+   0,
+   0.111,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "widowx_pearson": {
+  "calc": [
+   0.777,
+   0.827,
+   0.995,
+   0.571,
+   0.965,
+   1.0,
+   0.972,
+   0.97
+  ],
+  "printed": [
+   0.778,
+   0.827,
+   0.995,
+   0.575,
+   0.964,
+   1.0,
+   0.995,
+   0.99
+  ]
+ },
+ "widowx_real_grid_offs": [],
+ "egg_success_times_24": [
+  [
+   "RT-1-X",
+   0.0,
+   0.0
+  ],
+  [
+   "Octo-Base",
+   0.233,
+   5.59
+  ],
+  [
+   "Octo-Small",
+   0.433,
+   10.39
+  ]
+ ],
+ "egg_success_times_30": [
+  [
+   "RT-1-X",
+   0.0,
+   0.0
+  ],
+  [
+   "Octo-Base",
+   0.233,
+   6.99
+  ],
+  [
+   "Octo-Small",
+   0.433,
+   12.99
+  ]
+ ],
+ "egg_success_repo_vs_paper": {
+  "repo_real": [
+   0.0,
+   0.25,
+   0.4
+  ],
+  "paper_real": [
+   0.0,
+   0.233,
+   0.433
+  ],
+  "sim": [
+   0.0,
+   0.431,
+   0.569
+  ],
+  "mmrv_repo_real": 0.0,
+  "mmrv_paper_real": 0.0,
+  "r_repo_real": 0.989,
+  "r_paper_real": 0.97
+ },
+ "widowx_carrot_succ_mc": {
+  "mc_95": [
+   0.0,
+   0.25
+  ]
+ },
+ "widowx_pairs_octo": [
+  {
+   "col": "Spoon succ",
+   "pair": "Octo-Base vs Octo-Small",
+   "k": [
+    8,
+    10
+   ],
+   "n": 24,
+   "p_fisher": 0.766
+  },
+  {
+   "col": "Carrot succ",
+   "pair": "Octo-Base vs Octo-Small",
+   "k": [
+    6,
+    2
+   ],
+   "n": 24,
+   "p_fisher": 0.245
+  },
+  {
+   "col": "Stack succ",
+   "pair": "Octo-Base vs Octo-Small",
+   "k": [
+    0,
+    3
+   ],
+   "n": 24,
+   "p_fisher": 0.234
+  },
+  {
+   "col": "Eggplant succ",
+   "pair": "Octo-Base vs Octo-Small",
+   "k": [
+    7,
+    13
+   ],
+   "n": 30,
+   "p_fisher": 0.17
+  }
+ ],
+ "repo_vs_paper_pick_avg": {
+  "real_equal": true,
+  "sim_equal": true
+ },
+ "table_vii_to_vi": [
+  {
+   "factor": "Background",
+   "pick_calc": 0.013,
+   "pick_printed": 0.013,
+   "mn_calc": 0.083,
+   "mn_printed": 0.083
+  },
+  {
+   "factor": "Lighting",
+   "pick_calc": 0.04,
+   "pick_printed": 0.04,
+   "mn_calc": 0.074,
+   "mn_printed": 0.075
+  },
+  {
+   "factor": "Distractors",
+   "pick_calc": 0.03,
+   "pick_printed": 0.027,
+   "mn_calc": 0.133,
+   "mn_printed": 0.133
+  },
+  {
+   "factor": "Table Texture",
+   "pick_calc": 0.113,
+   "pick_printed": 0.113,
+   "mn_calc": 0.175,
+   "mn_printed": 0.175
+  },
+  {
+   "factor": "Camera Pose",
+   "pick_calc": 0.754,
+   "pick_printed": 0.753,
+   "mn_calc": 0.192,
+   "mn_printed": 0.192
+  }
+ ],
+ "table_vi_recalc": {
+  "wo_aug_avg_mmrv": 0.0,
+  "wo_aug_avg_r": 0.832,
+  "wo_aug_pick_mmrv": 0.011,
+  "wo_aug_pick_r": 0.779,
+  "w_aug_avg_mmrv": 0.016,
+  "w_aug_avg_r": 0.97,
+  "w_aug_pick_mmrv": 0.008,
+  "w_aug_pick_r": 0.984,
+  "printed": {
+   "wo_aug_avg": [
+    0.0,
+    0.831
+   ],
+   "wo_aug_pick": [
+    0.0,
+    0.779
+   ],
+   "w_aug_avg": [
+    0.041,
+    0.97
+   ],
+   "w_aug_pick": [
+    0.041,
+    0.984
+   ]
+  }
+ },
+ "table_texture_text_vs_vi": {
+  "text_solid_pct": 4,
+  "text_patterned_pct": 25,
+  "text_mean": 14.5,
+  "table_vi_real_wo_aug": 38.9
+ },
+ "sim_table_texture_from_VII": {
+  "solid_mean_pp": 1.5,
+  "patterned_mean_pp": -22.0
+ },
+ "kruskal_google_vm": {
+  "calc": [
+   0,
+   0,
+   2,
+   4,
+   3,
+   1,
+   2,
+   3,
+   0
+  ],
+  "printed": [
+   0,
+   0,
+   2,
+   3,
+   3,
+   1,
+   2,
+   2,
+   0
+  ],
+  "note": "공식 저장소와 같이 시뮬 n = 실로봇 n (정책별 반올림), 이진 시행"
+ },
+ "tie_pairs_table_iv_vm": 2,
+ "real_trials": {
+  "google_per_policy": 216,
+  "google_6_policies": 1296,
+  "widowx_per_policy_24egg": 96,
+  "widowx_per_policy_30egg": 102,
+  "widowx_total_3_policies_30egg": 306
+ }
+}
