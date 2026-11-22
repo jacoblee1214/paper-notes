@@ -1,0 +1,1125 @@
+{
+ "V1_table1_aggregate": {
+  "VLA Pooled adaLN": {
+   "strict": {
+    "recomputed": 32.77,
+    "reported": 32.8,
+    "match": true
+   },
+   "progress": {
+    "recomputed": 61.4,
+    "reported": 61.4,
+    "match": true
+   }
+  },
+  "VLA FAST+X-Attn": {
+   "strict": {
+    "recomputed": 3.6,
+    "reported": 3.6,
+    "match": true
+   },
+   "progress": {
+    "recomputed": 32.57,
+    "reported": 32.6,
+    "match": true
+   }
+  },
+  "VLA X-Attn": {
+   "strict": {
+    "recomputed": 0.0,
+    "reported": 0.0,
+    "match": true
+   },
+   "progress": {
+    "recomputed": 11.73,
+    "reported": 11.7,
+    "match": true
+   }
+  },
+  "DiT DINOv3-xattn": {
+   "strict": {
+    "recomputed": 32.9,
+    "reported": 32.9,
+    "match": true
+   },
+   "progress": {
+    "recomputed": 67.5,
+    "reported": 67.5,
+    "match": true
+   }
+  },
+  "DiT CLIP-adaln": {
+   "strict": {
+    "recomputed": 13.47,
+    "reported": 13.4,
+    "match": false
+   },
+   "progress": {
+    "recomputed": 47.27,
+    "reported": 47.3,
+    "match": true
+   }
+  },
+  "DiT CLIP-xattn": {
+   "strict": {
+    "recomputed": 24.53,
+    "reported": 24.5,
+    "match": true
+   },
+   "progress": {
+    "recomputed": 58.8,
+    "reported": 58.8,
+    "match": true
+   }
+  }
+ },
+ "V2_trial_count_feasibility": {
+  "strict_cells": [
+   {
+    "task": "Bottles",
+    "model": "VLA Pooled adaLN",
+    "reported": 67.3,
+    "feasible_at_n50": false,
+    "feasible_n_in_30_70": [
+     49,
+     52,
+     55
+    ]
+   },
+   {
+    "task": "Bottles",
+    "model": "VLA FAST+X-Attn",
+    "reported": 8.0,
+    "feasible_at_n50": true,
+    "feasible_n_in_30_70": [
+     50
+    ]
+   },
+   {
+    "task": "Bottles",
+    "model": "VLA X-Attn",
+    "reported": 0.0,
+    "feasible_at_n50": true,
+    "feasible_n_in_30_70": [
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40,
+     41,
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51,
+     52,
+     53,
+     54,
+     55,
+     56,
+     57,
+     58,
+     59,
+     60,
+     61,
+     62,
+     63,
+     64,
+     65,
+     66,
+     67,
+     68,
+     69,
+     70
+    ]
+   },
+   {
+    "task": "Bottles",
+    "model": "DiT DINOv3-xattn",
+    "reported": 73.5,
+    "feasible_at_n50": false,
+    "feasible_n_in_30_70": [
+     34,
+     49,
+     68
+    ]
+   },
+   {
+    "task": "Bottles",
+    "model": "DiT CLIP-adaln",
+    "reported": 11.8,
+    "feasible_at_n50": false,
+    "feasible_n_in_30_70": [
+     34,
+     51,
+     68
+    ]
+   },
+   {
+    "task": "Bottles",
+    "model": "DiT CLIP-xattn",
+    "reported": 38.9,
+    "feasible_at_n50": false,
+    "feasible_n_in_30_70": [
+     36,
+     54
+    ]
+   },
+   {
+    "task": "Dishrack",
+    "model": "VLA Pooled adaLN",
+    "reported": 30.0,
+    "feasible_at_n50": true,
+    "feasible_n_in_30_70": [
+     30,
+     40,
+     50,
+     60,
+     70
+    ]
+   },
+   {
+    "task": "Dishrack",
+    "model": "VLA FAST+X-Attn",
+    "reported": 2.8,
+    "feasible_at_n50": false,
+    "feasible_n_in_30_70": [
+     36
+    ]
+   },
+   {
+    "task": "Dishrack",
+    "model": "VLA X-Attn",
+    "reported": 0.0,
+    "feasible_at_n50": true,
+    "feasible_n_in_30_70": [
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40,
+     41,
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51,
+     52,
+     53,
+     54,
+     55,
+     56,
+     57,
+     58,
+     59,
+     60,
+     61,
+     62,
+     63,
+     64,
+     65,
+     66,
+     67,
+     68,
+     69,
+     70
+    ]
+   },
+   {
+    "task": "Dishrack",
+    "model": "DiT DINOv3-xattn",
+    "reported": 23.2,
+    "feasible_at_n50": false,
+    "feasible_n_in_30_70": [
+     56,
+     69
+    ]
+   },
+   {
+    "task": "Dishrack",
+    "model": "DiT CLIP-adaln",
+    "reported": 28.6,
+    "feasible_at_n50": false,
+    "feasible_n_in_30_70": [
+     35,
+     42,
+     49,
+     56,
+     63,
+     70
+    ]
+   },
+   {
+    "task": "Dishrack",
+    "model": "DiT CLIP-xattn",
+    "reported": 34.7,
+    "feasible_at_n50": false,
+    "feasible_n_in_30_70": [
+     49
+    ]
+   },
+   {
+    "task": "Mugs",
+    "model": "VLA Pooled adaLN",
+    "reported": 1.0,
+    "feasible_at_n50": false,
+    "feasible_n_in_30_70": []
+   },
+   {
+    "task": "Mugs",
+    "model": "VLA FAST+X-Attn",
+    "reported": 0.0,
+    "feasible_at_n50": true,
+    "feasible_n_in_30_70": [
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40,
+     41,
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51,
+     52,
+     53,
+     54,
+     55,
+     56,
+     57,
+     58,
+     59,
+     60,
+     61,
+     62,
+     63,
+     64,
+     65,
+     66,
+     67,
+     68,
+     69,
+     70
+    ]
+   },
+   {
+    "task": "Mugs",
+    "model": "VLA X-Attn",
+    "reported": 0.0,
+    "feasible_at_n50": true,
+    "feasible_n_in_30_70": [
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40,
+     41,
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51,
+     52,
+     53,
+     54,
+     55,
+     56,
+     57,
+     58,
+     59,
+     60,
+     61,
+     62,
+     63,
+     64,
+     65,
+     66,
+     67,
+     68,
+     69,
+     70
+    ]
+   },
+   {
+    "task": "Mugs",
+    "model": "DiT DINOv3-xattn",
+    "reported": 2.0,
+    "feasible_at_n50": true,
+    "feasible_n_in_30_70": [
+     49,
+     50,
+     51
+    ]
+   },
+   {
+    "task": "Mugs",
+    "model": "DiT CLIP-adaln",
+    "reported": 0.0,
+    "feasible_at_n50": true,
+    "feasible_n_in_30_70": [
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40,
+     41,
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51,
+     52,
+     53,
+     54,
+     55,
+     56,
+     57,
+     58,
+     59,
+     60,
+     61,
+     62,
+     63,
+     64,
+     65,
+     66,
+     67,
+     68,
+     69,
+     70
+    ]
+   },
+   {
+    "task": "Mugs",
+    "model": "DiT CLIP-xattn",
+    "reported": 0.0,
+    "feasible_at_n50": true,
+    "feasible_n_in_30_70": [
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40,
+     41,
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51,
+     52,
+     53,
+     54,
+     55,
+     56,
+     57,
+     58,
+     59,
+     60,
+     61,
+     62,
+     63,
+     64,
+     65,
+     66,
+     67,
+     68,
+     69,
+     70
+    ]
+   }
+  ],
+  "progress_cells_bottles_dishrack": [
+   {
+    "task": "Bottles",
+    "model": "VLA Pooled adaLN",
+    "reported": 83.0,
+    "feasible_at_n50": true
+   },
+   {
+    "task": "Bottles",
+    "model": "VLA FAST+X-Attn",
+    "reported": 44.0,
+    "feasible_at_n50": true
+   },
+   {
+    "task": "Bottles",
+    "model": "VLA X-Attn",
+    "reported": 5.2,
+    "feasible_at_n50": false
+   },
+   {
+    "task": "Bottles",
+    "model": "DiT DINOv3-xattn",
+    "reported": 93.1,
+    "feasible_at_n50": false
+   },
+   {
+    "task": "Bottles",
+    "model": "DiT CLIP-adaln",
+    "reported": 53.6,
+    "feasible_at_n50": false
+   },
+   {
+    "task": "Bottles",
+    "model": "DiT CLIP-xattn",
+    "reported": 74.1,
+    "feasible_at_n50": false
+   },
+   {
+    "task": "Dishrack",
+    "model": "VLA Pooled adaLN",
+    "reported": 75.7,
+    "feasible_at_n50": true
+   },
+   {
+    "task": "Dishrack",
+    "model": "VLA FAST+X-Attn",
+    "reported": 47.2,
+    "feasible_at_n50": false
+   },
+   {
+    "task": "Dishrack",
+    "model": "VLA X-Attn",
+    "reported": 25.0,
+    "feasible_at_n50": true
+   },
+   {
+    "task": "Dishrack",
+    "model": "DiT DINOv3-xattn",
+    "reported": 74.1,
+    "feasible_at_n50": false
+   },
+   {
+    "task": "Dishrack",
+    "model": "DiT CLIP-adaln",
+    "reported": 72.3,
+    "feasible_at_n50": true
+   },
+   {
+    "task": "Dishrack",
+    "model": "DiT CLIP-xattn",
+    "reported": 81.3,
+    "feasible_at_n50": true
+   }
+  ],
+  "strict_infeasible_at_n50": 9,
+  "strict_cells_total": 18,
+  "progress_infeasible_at_n50": 6,
+  "progress_cells_total": 12
+ },
+ "V3_dino_vs_clip_per_task": [
+  {
+   "task": "Bottles",
+   "metric": "strict",
+   "dinov3_xattn": 73.5,
+   "clip_xattn": 38.9,
+   "diff": 34.6,
+   "fisher_p_assumed_n50": 0.0005
+  },
+  {
+   "task": "Bottles",
+   "metric": "progress",
+   "dinov3_xattn": 93.1,
+   "clip_xattn": 74.1,
+   "diff": 19.0
+  },
+  {
+   "task": "Dishrack",
+   "metric": "strict",
+   "dinov3_xattn": 23.2,
+   "clip_xattn": 34.7,
+   "diff": -11.5,
+   "fisher_p_assumed_n50": 0.3783
+  },
+  {
+   "task": "Dishrack",
+   "metric": "progress",
+   "dinov3_xattn": 74.1,
+   "clip_xattn": 81.3,
+   "diff": -7.2
+  },
+  {
+   "task": "Mugs",
+   "metric": "strict",
+   "dinov3_xattn": 2.0,
+   "clip_xattn": 0.0,
+   "diff": 2.0,
+   "fisher_p_assumed_n50": 1.0
+  },
+  {
+   "task": "Mugs",
+   "metric": "progress",
+   "dinov3_xattn": 35.3,
+   "clip_xattn": 21.0,
+   "diff": 14.3
+  }
+ ],
+ "V4_fig8_offline_vs_real": [
+  {
+   "metric": "train loss",
+   "target": "strict",
+   "n": 16,
+   "r": -0.84,
+   "p_reported": 4.1e-05,
+   "p_recomputed": 4.66e-05,
+   "r_ci95_fisher_z": [
+    -0.943,
+    -0.59
+   ],
+   "rho": -0.83,
+   "p_rho_reported": 7.9e-05,
+   "p_rho_from_t_approx": 6.93e-05
+  },
+  {
+   "metric": "val loss",
+   "target": "strict",
+   "n": 16,
+   "r": -0.04,
+   "p_reported": 0.886,
+   "p_recomputed": 0.883,
+   "r_ci95_fisher_z": [
+    -0.525,
+    0.465
+   ],
+   "rho": 0.0,
+   "p_rho_reported": 1.0,
+   "p_rho_from_t_approx": 1.0
+  },
+  {
+   "metric": "val action error",
+   "target": "strict",
+   "n": 16,
+   "r": -0.89,
+   "p_reported": 3.8e-06,
+   "p_recomputed": 3.89e-06,
+   "r_ci95_fisher_z": [
+    -0.962,
+    -0.706
+   ],
+   "rho": -0.93,
+   "p_rho_reported": 1.5e-07,
+   "p_rho_from_t_approx": 1.83e-07
+  },
+  {
+   "metric": "train loss",
+   "target": "progress",
+   "n": 16,
+   "r": -0.78,
+   "p_reported": 0.00039,
+   "p_recomputed": 0.000365,
+   "r_ci95_fisher_z": [
+    -0.92,
+    -0.464
+   ],
+   "rho": -0.84,
+   "p_rho_reported": 5e-05,
+   "p_rho_from_t_approx": 4.66e-05
+  },
+  {
+   "metric": "val loss",
+   "target": "progress",
+   "n": 16,
+   "r": 0.14,
+   "p_reported": 0.599,
+   "p_recomputed": 0.605,
+   "r_ci95_fisher_z": [
+    -0.382,
+    0.594
+   ],
+   "rho": 0.09,
+   "p_rho_reported": 0.737,
+   "p_rho_from_t_approx": 0.74
+  },
+  {
+   "metric": "val action error",
+   "target": "progress",
+   "n": 16,
+   "r": -0.85,
+   "p_reported": 2.9e-05,
+   "p_recomputed": 3.05e-05,
+   "r_ci95_fisher_z": [
+    -0.947,
+    -0.612
+   ],
+   "rho": -0.93,
+   "p_rho_reported": 1.9e-07,
+   "p_rho_from_t_approx": 1.83e-07
+  }
+ ],
+ "V4_fig8_effective_n_sensitivity": {
+  "16": {
+   "val_action_error_strict_r-0.89_p": 3.89e-06,
+   "train_loss_strict_r-0.84_p": 4.66e-05,
+   "val_loss_r-0.04_p": 0.883
+  },
+  "12": {
+   "val_action_error_strict_r-0.89_p": 0.000105,
+   "train_loss_strict_r-0.84_p": 0.000627,
+   "val_loss_r-0.04_p": 0.902
+  },
+  "8": {
+   "val_action_error_strict_r-0.89_p": 0.00306,
+   "train_loss_strict_r-0.84_p": 0.00905,
+   "val_loss_r-0.04_p": 0.925
+  },
+  "6": {
+   "val_action_error_strict_r-0.89_p": 0.0175,
+   "train_loss_strict_r-0.84_p": 0.0364,
+   "val_loss_r-0.04_p": 0.94
+  }
+ },
+ "V5_fig9_sim_real": [
+  {
+   "metric": "strict",
+   "n": 12,
+   "r": 0.85,
+   "p_reported": 0.00042,
+   "p_recomputed": 0.000462,
+   "r_ci95_fisher_z": [
+    0.539,
+    0.957
+   ],
+   "r2": 0.722
+  },
+  {
+   "metric": "progress",
+   "n": 12,
+   "r": 0.91,
+   "p_reported": 5e-05,
+   "p_recomputed": 3.99e-05,
+   "r_ci95_fisher_z": [
+    0.704,
+    0.975
+   ],
+   "r2": 0.828
+  }
+ ],
+ "V5_fig9_effective_n_sensitivity": {
+  "12": {
+   "strict_r0.85_p": 0.000462,
+   "progress_r0.91_p": 3.99e-05
+  },
+  "8": {
+   "strict_r0.85_p": 0.00752,
+   "progress_r0.91_p": 0.0017
+  },
+  "6": {
+   "strict_r0.85_p": 0.0321,
+   "progress_r0.91_p": 0.0118
+  },
+  "5": {
+   "strict_r0.85_p": 0.0681,
+   "progress_r0.91_p": 0.032
+  }
+ },
+ "V6_table2_params_flops": {
+  "table2_dit_total_tflops": {
+   "reported": 0.678,
+   "sum": 0.678
+  },
+  "table2_vla_total_tflops": {
+   "reported": 7.02,
+   "sum": 7.02
+  },
+  "vla_over_dit_tflops_per_sample": 10.35,
+  "dit_head_params_est_from_code": 1.924,
+  "dit_head_params_reported_B": 1.93,
+  "dit_total_params_reported_B": 2.016,
+  "fig21_xL_total_params_B": 1.93,
+  "vla_head_params_est_M": 43.5,
+  "vla_head_params_reported_M": {
+   "table2": 44.7,
+   "sec3.2_text": 42,
+   "project_page": 45
+  },
+  "gemma3_lm_nonembed_params_B": 3.209,
+  "gemma3_embedding_params_B": 0.671,
+  "siglip_params_M": 411.1,
+  "vla_backbone_params_est_B": 4.29,
+  "vla_backbone_params_reported_B": 4.3,
+  "vla_backbone_tflops_est": 6.82,
+  "vla_backbone_tflops_reported": 6.957,
+  "vla_head_tflops_est": 0.064,
+  "vla_head_tflops_reported": 0.063,
+  "dit_head_tflops_est": 0.347,
+  "dit_head_tflops_reported": 0.349,
+  "dit_backbone_implied_tokens": 640.0
+ },
+ "V7_compute_budget": {
+  "dit_batch_arith": 9216,
+  "vla_batch_arith": 9216,
+  "batch_ratio": [
+   1536,
+   4608,
+   9216
+  ],
+  "samples_seen_200k_bs9216": 1843200000,
+  "frames_in_abc130k_at_30fps": 383724000,
+  "epochs_over_frames_abc130k": 4.8,
+  "epochs_over_frames_internal_7000h": 2.44,
+  "dit_train_flops_200k_bs9216": 1.25e+21,
+  "vla_train_flops_200k_bs9216": 1.29e+22,
+  "dit_train_flops_100k_bs1536": 1.04e+20,
+  "vla_train_flops_100k_bs1536": 1.08e+21,
+  "vla_k8_overhead_pct": 1.49,
+  "vla_h200_gpu_hours_200k_assuming_64gpu_1.366s": 4857
+ },
+ "V8_dataset_stats": {
+  "tasks_sum": 195,
+  "tasks_reported": 195,
+  "hours_sum": 3554,
+  "hours_reported": 3553,
+  "episodes": 134806,
+  "mean_episode_sec": 94.9,
+  "subtask_hours": 1552,
+  "subtask_share_pct": 43.7,
+  "subtask_share_reported_pct": 44,
+  "hours_per_task_by_category": {
+   "Pick-and-Place": 11.8,
+   "Fine Pick-and-Place": 18.9,
+   "Folding": 24.5,
+   "Insertion/Ejection": 23.2,
+   "Tool Use": 20.1,
+   "Sorting": 25.6,
+   "Tying/Untying": 17.5
+  },
+  "share_pct": {
+   "Pick-and-Place": 22.3,
+   "Fine Pick-and-Place": 20.7,
+   "Folding": 24.9,
+   "Insertion/Ejection": 12.4,
+   "Tool Use": 9.0,
+   "Sorting": 5.8,
+   "Tying/Untying": 4.9
+  },
+  "tshirt_hours": 268.64,
+  "tshirt_share_pct": 7.6,
+  "op0_hours_per_episode_s": 59.3,
+  "op0_mean_episode_reported_s": 59
+ },
+ "V9_appendix_H": {
+  "table4_completions": {
+   "all_task_only": 4,
+   "op0_filtered": 2,
+   "op0_cond": 8,
+   "marginalize": 6,
+   "op1_cond": 5
+  },
+  "fisher_p": {
+   "op0_cond_vs_all_task_only": 0.1698,
+   "op0_cond_vs_op0_filtered": 0.023,
+   "op0_cond_vs_op1_cond": 0.3498,
+   "marginalize_vs_all_task_only": 0.6563,
+   "op1_cond_vs_all_task_only": 1.0,
+   "prefix1_vs_prefix4": 0.3498,
+   "h3_reflatten_5of10_vs_0of10": 0.0325
+  },
+  "wilson_95_completions": {
+   "op0_cond": [
+    49.0,
+    94.3
+   ],
+   "all_task_only": [
+    16.8,
+    68.7
+   ],
+   "marginalize": [
+    31.3,
+    83.2
+   ],
+   "op1_cond": [
+    23.7,
+    76.3
+   ],
+   "op0_filtered": [
+    5.7,
+    51.0
+   ]
+  },
+  "implied_completed_time": {
+   "all_task_only": {
+    "completions": 4,
+    "mean_time_s": 302,
+    "implied_mean_time_of_completed_s": 170.0,
+    "feasible": true
+   },
+   "op0_filtered": {
+    "completions": 2,
+    "mean_time_s": 369,
+    "implied_mean_time_of_completed_s": 285.0,
+    "feasible": true
+   },
+   "op0_cond": {
+    "completions": 8,
+    "mean_time_s": 237,
+    "implied_mean_time_of_completed_s": 198.8,
+    "feasible": true
+   },
+   "marginalize": {
+    "completions": 6,
+    "mean_time_s": 247,
+    "implied_mean_time_of_completed_s": 151.7,
+    "feasible": true
+   },
+   "op1_cond": {
+    "completions": 5,
+    "mean_time_s": 277,
+    "implied_mean_time_of_completed_s": 164.0,
+    "feasible": true
+   },
+   "prefix4": {
+    "completions": 5,
+    "mean_time_s": 309,
+    "implied_mean_time_of_completed_s": 228.0,
+    "feasible": true
+   }
+  },
+  "hml_sum_matches": {
+   "all_task_only": true,
+   "op0_filtered": true,
+   "op0_cond": true,
+   "marginalize": true,
+   "op1_cond": true,
+   "prefix4": true,
+   "prefix1": true
+  },
+  "table4_op0_row_equals_table5_prefix1_row": true
+ },
+ "V10_dagger_mix": {
+  "round1": {
+   "natural_intervention_share_in_round": 0.3,
+   "mix_share_in_round_portion": 0.5,
+   "oversample_factor": 1.67
+  },
+  "round2": {
+   "natural_intervention_share_in_round": 0.15,
+   "mix_share_in_round_portion": 0.5,
+   "oversample_factor": 3.33
+  },
+  "round_portion_of_mix": 0.2,
+  "collapsed_data_hours": 10,
+  "round_hours": [
+   1.0,
+   1.5
+  ],
+  "round_natural_share_of_all_data_pct": [
+   9.1,
+   13.0
+  ]
+ },
+ "V11_latency": {
+  "dit_hz_from_ms": [
+   15.9,
+   21.1,
+   24.2,
+   27.5
+  ],
+  "dit_hz_reported": [
+   15.9,
+   21.0,
+   24.2,
+   27.6
+  ],
+  "vla_hz_from_ms": [
+   20.9,
+   44.2,
+   57.1
+  ],
+  "vla_hz_reported": [
+   20.9,
+   44.2,
+   57.2
+  ],
+  "dit_speedup": 1.74,
+  "vla_speedup": 2.73,
+  "table1_vs_fig23_dit_ms": {
+   "table1": 37.4,
+   "fig23": 36.3,
+   "diff_pct": 3.0
+  },
+  "table1_vs_fig24_vla_ms": {
+   "table1": 17.24,
+   "fig24": 17.5,
+   "diff_pct": 1.5
+  },
+  "fig19_read_reduction": 69.6,
+  "chunk_exec_budget_ms_15_actions_30hz": 500
+ },
+ "V12_fig12_sim_progress_from_project_page": {
+  "note": "abc.bot SVG 폴리라인에서 y 픽셀을 0-100%로 역산 (y=148 -> 0, y=22 -> 100). 20점, 체크포인트 간격 10k 스텝으로 가정(축 눈금 0-200k).",
+  "dit": [
+   12.4,
+   25.2,
+   45.8,
+   51.0,
+   55.6,
+   54.8,
+   55.2,
+   64.0,
+   62.1,
+   63.7,
+   63.2,
+   64.9,
+   68.6,
+   65.0,
+   68.7,
+   68.9,
+   70.2,
+   66.1,
+   69.4,
+   72.7
+  ],
+  "vla": [
+   24.8,
+   43.6,
+   58.8,
+   66.6,
+   68.9,
+   67.8,
+   68.5,
+   74.6,
+   73.4,
+   71.7,
+   74.4,
+   75.0,
+   75.0,
+   72.8,
+   74.6,
+   75.2,
+   73.8,
+   74.8,
+   78.1,
+   76.9
+  ],
+  "final_dit": 72.7,
+  "final_vla": 76.9,
+  "gain_last_10_points_dit": 9.0,
+  "gain_last_10_points_vla": 5.2,
+  "gain_first_5_points_dit": 43.2,
+  "gain_first_5_points_vla": 44.1,
+  "vla_minus_dit_at_each_point": [
+   12.4,
+   18.4,
+   13.0,
+   15.6,
+   13.3,
+   13.0,
+   13.3,
+   10.6,
+   11.3,
+   8.0,
+   11.2,
+   10.1,
+   6.4,
+   7.8,
+   5.9,
+   6.3,
+   3.6,
+   8.7,
+   8.7,
+   4.2
+  ]
+ },
+ "V13_throughput_from_readme": {
+  "readme_it_per_s": [
+   2.6,
+   3.0
+  ],
+  "dit_tflops_per_gpu_achieved": [
+   159.0,
+   183.0
+  ],
+  "mfu_vs_989_dense_bf16_pct": [
+   16.0,
+   18.5
+  ],
+  "hours_200k_steps_at_readme_speed": [
+   21.4,
+   18.5
+  ],
+  "gpu_hours_96gpu_200k_steps": [
+   2051,
+   1778
+  ],
+  "note": "배치 90/GPU 기준으로 논문의 96 GPU x 96 = 9216 과 GPU당 배치가 비슷하다는 가정. 실제 학습 시간은 논문에 없다."
+ },
+ "V16_power": {
+  "min_detectable_diff_at_p0.5": {
+   "10": 0.59,
+   "20": 0.43,
+   "50": 0.28,
+   "100": 0.2,
+   "200": 0.14
+  },
+  "n_per_group_sim_engine_0.71_vs_0.54": 126,
+  "n_per_group_table1_strict_dishrack_34.7_vs_23.2": 242,
+  "n_per_group_table1_bottles_progress_like_73.5_vs_67.3": 849
+ }
+}
