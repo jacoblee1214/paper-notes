@@ -1,0 +1,781 @@
+{
+  "V1_fig4_means_and_claim": {
+    "Original": {
+      "mean_of_5_domains": 41.2,
+      "printed_mean": 41
+    },
+    "RT-1": {
+      "mean_of_5_domains": 44.8,
+      "printed_mean": 44
+    },
+    "RT-1-X": {
+      "mean_of_5_domains": 63.2,
+      "printed_mean": 63
+    },
+    "claim_50pct": {
+      "RT-1-X over Original (printed means 63 vs 41)": 53.7,
+      "RT-1-X over RT-1 (printed means 63 vs 44)": 43.2,
+      "RT-1-X over Original (unrounded mean of 5 = 63.2 vs 41.2)": 53.4,
+      "RT-1-X over RT-1 (unrounded mean of 5 = 63.2 vs 44.8)": 41.1
+    },
+    "wins_vs_original_per_domain": {
+      "count": 4,
+      "of": 5,
+      "two_sided_sign_test_p": 0.375
+    },
+    "per_domain_ratio_RT1X_over_Original": [
+      1.47,
+      2.33,
+      1.51,
+      0.85,
+      2.18
+    ],
+    "per_domain_ratio_RT1X_over_RT1": [
+      1.31,
+      3.11,
+      1.23,
+      1.8,
+      1.06
+    ],
+    "note": "그림 4 캡션 '50% higher'는 평균 기준으로 Original 대비 +54%, RT-1 대비 +43%입니다. Autolab UR5에서는 RT-1-X(45)가 Original(53)보다 낮습니다. 막대 라벨은 정수이고 n은 없습니다."
+  },
+  "V2_table1_caption_text_check": {
+    "caption_claim": "캡션: 'RT-1-X underfits and performs worse than the Original Method and RT-1'",
+    "RT-1-X_vs_Original": {
+      "Bridge IRIS (WidowX)": 14,
+      "Bridge RAIL (WidowX)": 14
+    },
+    "RT-1-X_vs_RT-1": {
+      "Bridge IRIS (WidowX)": -13,
+      "Bridge RAIL (WidowX)": -3,
+      "RT-1 paper 6 skills (Google Robot)": -19
+    },
+    "RT-2-X_vs_RT-1": {
+      "Bridge IRIS (WidowX)": 10,
+      "Bridge RAIL (WidowX)": 0,
+      "RT-1 paper 6 skills (Google Robot)": -1
+    },
+    "reading": "표 I에서 RT-1-X는 두 Bridge 열에서 Original(13%)보다 높습니다(+14, +14). 캡션의 'worse than the Original Method'는 이 두 열과 맞지 않습니다. 본문 'RT-2-X outperforms both the Original Method and RT-1'는 IRIS 열에서만 성립합니다. RAIL 열은 30 대 30으로 같고, RT-1 논문 열은 91 대 92로 낮습니다. Original Method의 13%가 두 Bridge 열에 같은 값으로 들어 있어 복사 오류일 수 있습니다."
+  },
+  "V3_table2_ratios_and_n": {
+    "ratio_emergent_row2_over_row1": 2.777,
+    "ratio_emergent_row2_over_row1_note": "본문 '~3x' 또는 project page '3x'는 2.78배를 올림한 값입니다.",
+    "diff_emergent_row2_minus_row3": 33.0,
+    "diff_emergent_row4_minus_row5": 29.9,
+    "diff_emergent_row4_minus_row7_codft_vs_ft": -4.3,
+    "diff_general_row4_minus_row5": 22,
+    "note_42_8": "42.8%는 반올림 기준으로 n <= 137인 k/n이 없습니다(가장 작은 n = 138). 버림 기준이면 3/7 = 42.857이 42.8로 적힙니다. 다른 셀은 반올림과 맞습니다. 따라서 이 셀은 다른 n이거나 다른 집계(예: 과제 평균)일 가능성이 있습니다.",
+    "candidate_n": {
+      "1": {
+        "emergent_pct": 27.3,
+        "emergent_n_round_le200": [
+          11,
+          22,
+          33,
+          44,
+          55,
+          66,
+          77,
+          88,
+          99,
+          110,
+          121,
+          128,
+          132,
+          139,
+          143,
+          150,
+          154,
+          161,
+          165,
+          172,
+          176,
+          183,
+          187,
+          194,
+          198
+        ],
+        "emergent_n_floor_le200": [
+          73,
+          84,
+          95,
+          106,
+          117,
+          128,
+          139,
+          146,
+          150,
+          157,
+          161,
+          168,
+          172,
+          179,
+          183,
+          190,
+          194
+        ],
+        "general_pct": 62
+      },
+      "2": {
+        "emergent_pct": 75.8,
+        "emergent_n_round_le200": [
+          33,
+          62,
+          66,
+          91,
+          95,
+          99,
+          120,
+          124,
+          128,
+          132,
+          149,
+          153,
+          157,
+          161,
+          165,
+          178,
+          182,
+          186,
+          190,
+          194,
+          198
+        ],
+        "emergent_n_floor_le200": [
+          29,
+          58,
+          62,
+          87,
+          91,
+          112,
+          116,
+          120,
+          124,
+          141,
+          145,
+          149,
+          153,
+          170,
+          174,
+          178,
+          182,
+          186,
+          195,
+          199
+        ],
+        "general_pct": 61
+      },
+      "3": {
+        "emergent_pct": 42.8,
+        "emergent_n_round_le200": [
+          138,
+          145,
+          152,
+          159,
+          166,
+          173,
+          180,
+          187,
+          194
+        ],
+        "emergent_n_floor_le200": [
+          7,
+          14,
+          21,
+          28,
+          35,
+          42,
+          49,
+          56,
+          63,
+          70,
+          77,
+          84,
+          91,
+          98,
+          105,
+          112,
+          119,
+          126,
+          133,
+          140,
+          147,
+          154,
+          161,
+          168,
+          175,
+          182,
+          189,
+          196
+        ],
+        "general_pct": 54
+      },
+      "4": {
+        "emergent_pct": 44.4,
+        "emergent_n_round_le200": [
+          9,
+          18,
+          27,
+          36,
+          45,
+          54,
+          63,
+          72,
+          81,
+          90,
+          99,
+          108,
+          117,
+          124,
+          126,
+          133,
+          135,
+          142,
+          144,
+          151,
+          153,
+          160,
+          162,
+          169,
+          171,
+          178,
+          180,
+          187,
+          189,
+          196,
+          198
+        ],
+        "emergent_n_floor_le200": [
+          9,
+          18,
+          27,
+          36,
+          45,
+          54,
+          63,
+          72,
+          81,
+          90,
+          99,
+          108,
+          117,
+          126,
+          135,
+          144,
+          153,
+          162,
+          171,
+          180,
+          189,
+          198
+        ],
+        "general_pct": 52
+      },
+      "5": {
+        "emergent_pct": 14.5,
+        "emergent_n_round_le200": [
+          55,
+          62,
+          69,
+          76,
+          83,
+          110,
+          117,
+          124,
+          131,
+          138,
+          145,
+          152,
+          159,
+          165,
+          166,
+          172,
+          173,
+          179,
+          186,
+          193,
+          200
+        ],
+        "emergent_n_floor_le200": [
+          48,
+          55,
+          62,
+          96,
+          103,
+          110,
+          117,
+          124,
+          131,
+          137,
+          144,
+          151,
+          158,
+          165,
+          172,
+          179,
+          185,
+          186,
+          192,
+          193,
+          199,
+          200
+        ],
+        "general_pct": 30
+      },
+      "6": {
+        "emergent_pct": 0.0,
+        "emergent_n_round_le200": "any (k=0)",
+        "emergent_n_floor_le200": "any (k=0)",
+        "general_pct": 1
+      },
+      "7": {
+        "emergent_pct": 48.7,
+        "emergent_n_round_le200": [
+          39,
+          76,
+          78,
+          113,
+          115,
+          117,
+          119,
+          150,
+          152,
+          154,
+          156,
+          158,
+          187,
+          189,
+          191,
+          193,
+          195,
+          197,
+          199
+        ],
+        "emergent_n_floor_le200": [
+          39,
+          41,
+          78,
+          80,
+          82,
+          117,
+          119,
+          121,
+          123,
+          154,
+          156,
+          158,
+          160,
+          162,
+          164,
+          166,
+          193,
+          195,
+          197,
+          199
+        ],
+        "general_pct": 47
+      }
+    },
+    "common_n_for_all_emergent_rows_le200": []
+  },
+  "V4_table1_assumed_n_tests": {
+    "bridge_common_n_candidates_le200": [
+      30,
+      60,
+      70,
+      82,
+      84,
+      86,
+      90,
+      92,
+      94,
+      98,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200
+    ],
+    "assumed_n30_pairs": [
+      {
+        "comparison": "RT-1-X vs Original (IRIS)",
+        "a": "8/30",
+        "b": "4/30",
+        "a_wilson95": [
+          14.2,
+          44.4
+        ],
+        "b_wilson95": [
+          5.3,
+          29.7
+        ],
+        "diff_pp": 13.3,
+        "fisher_p_two_sided": 0.333
+      },
+      {
+        "comparison": "RT-1-X vs RT-1 (IRIS)",
+        "a": "8/30",
+        "b": "12/30",
+        "a_wilson95": [
+          14.2,
+          44.4
+        ],
+        "b_wilson95": [
+          24.6,
+          57.7
+        ],
+        "diff_pp": -13.3,
+        "fisher_p_two_sided": 0.412
+      },
+      {
+        "comparison": "RT-2-X vs RT-1 (IRIS)",
+        "a": "15/30",
+        "b": "12/30",
+        "a_wilson95": [
+          33.2,
+          66.8
+        ],
+        "b_wilson95": [
+          24.6,
+          57.7
+        ],
+        "diff_pp": 10.0,
+        "fisher_p_two_sided": 0.604
+      },
+      {
+        "comparison": "RT-2-X vs Original (IRIS)",
+        "a": "15/30",
+        "b": "4/30",
+        "a_wilson95": [
+          33.2,
+          66.8
+        ],
+        "b_wilson95": [
+          5.3,
+          29.7
+        ],
+        "diff_pp": 36.7,
+        "fisher_p_two_sided": 0.005
+      },
+      {
+        "comparison": "RT-1-X vs Original (RAIL)",
+        "a": "8/30",
+        "b": "4/30",
+        "a_wilson95": [
+          14.2,
+          44.4
+        ],
+        "b_wilson95": [
+          5.3,
+          29.7
+        ],
+        "diff_pp": 13.3,
+        "fisher_p_two_sided": 0.333
+      },
+      {
+        "comparison": "RT-2-X vs RT-1 (RAIL)",
+        "a": "9/30",
+        "b": "9/30",
+        "a_wilson95": [
+          16.7,
+          47.9
+        ],
+        "b_wilson95": [
+          16.7,
+          47.9
+        ],
+        "diff_pp": 0.0,
+        "fisher_p_two_sided": 1.0
+      }
+    ]
+  },
+  "V5_table2_pairwise_fisher_over_candidate_n": {
+    "note": "n이 논문에 없으므로 각 셀의 k/n 후보를 모두 넣고 p의 범위를 봅니다. 범위에 0.05가 들어가면 그 비교는 시행 수 가정 없이 결론을 내릴 수 없습니다.",
+    "results": {
+      "row2_vs_row1_emergent (RT-2-X 55B vs RT-2 55B)": {
+        "p_min": 0.0,
+        "p_max": 0.0089,
+        "pairs_tested": 150
+      },
+      "row2_vs_row3_emergent (Bridge removal; row3 n>=138 under rounding)": {
+        "p_min": 0.0,
+        "p_max": 0.0009,
+        "pairs_tested": 54
+      },
+      "row4_vs_row5_emergent (history 2 vs none, 5B)": {
+        "p_min": 0.0,
+        "p_max": 0.0553,
+        "pairs_tested": 231
+      },
+      "row4_vs_row7_emergent (co-fine-tune vs fine-tune, 5B)": {
+        "p_min": 0.52,
+        "p_max": 1.0,
+        "pairs_tested": 209
+      },
+      "row2_vs_row4_emergent (55B vs 5B; history confounded)": {
+        "p_min": 0.0,
+        "p_max": 0.1067,
+        "pairs_tested": 186
+      }
+    }
+  },
+  "V6_dataset_sheet_recount": {
+    "sheet_total_rows_datasets": 72,
+    "sheet_v1_0_datasets": 60,
+    "sheet_v1_1_added_datasets": 12,
+    "sheet_total_episodes_all": 2419193,
+    "sheet_total_episodes_v1_0": 1403481,
+    "paper_claim_v1_0": "60 datasets, 1M+ trajectories (paper III-A)",
+    "distinct_embodiment_strings_v1_0_excl_multirobot": 22,
+    "paper_claim_embodiments": 22,
+    "franka_datasets_v1_0": 23,
+    "top_embodiments_by_episodes_v1_0": [
+      {
+        "robot": "Kuka iiwa",
+        "datasets": 2,
+        "episodes": 583392,
+        "share_pct": 41.6
+      },
+      {
+        "robot": "xArm",
+        "datasets": 7,
+        "episodes": 444390,
+        "share_pct": 31.7
+      },
+      {
+        "robot": "Google Robot",
+        "datasets": 3,
+        "episodes": 174002,
+        "share_pct": 12.4
+      },
+      {
+        "robot": "Multi-Robot",
+        "datasets": 1,
+        "episodes": 82432,
+        "share_pct": 5.9
+      },
+      {
+        "robot": "Franka",
+        "datasets": 23,
+        "episodes": 55515,
+        "share_pct": 4.0
+      },
+      {
+        "robot": "WidowX",
+        "datasets": 1,
+        "episodes": 25460,
+        "share_pct": 1.8
+      }
+    ],
+    "top5_datasets_share_pct": 88.3,
+    "mixture_sources_matched": 12,
+    "mixture_embodiments": 9,
+    "mixture_episodes": 1131788,
+    "mixture_share_of_v1_0_pct": 80.6,
+    "mixture_QTOpt_plus_LanguageTable_share_of_mixture_pct": 90.4,
+    "mixture_bridge_share_of_mixture_pct": 2.25,
+    "mixture_robots": [
+      "Franka",
+      "Google Robot",
+      "Hello Stretch",
+      "Jaco 2",
+      "Kuka iiwa",
+      "Sawyer",
+      "UR5",
+      "WidowX",
+      "xArm"
+    ],
+    "sheet_header_claim_total_gb": 8964.94,
+    "sheet_sum_gb_all": 8964.94,
+    "gb_missing_rows_v1_0": [
+      "QUT Dynamic Grasping",
+      "QUT Dexterous Manpulation",
+      "MPI Muscular Proprioception",
+      "RoboVQA",
+      "ALOHA"
+    ],
+    "colab_DATASETS_list_count": 53,
+    "fig2c_check": "논문 그림 2(c) 파이 조각은 눈으로 읽었을 때 xArm이 가장 큽니다. 스프레드시트 v1.0 기준 1위는 Kuka iiwa(QT-Opt 580,392, 41.6%)이고 xArm은 31.7%입니다. 스냅샷 시점 차이이거나 집계 기준 차이일 수 있으며, 논문은 집계 방법을 밝히지 않습니다."
+  },
+  "V7_mixture_weighting_arithmetic": {
+    "note": "논문은 혼합 가중치와 샘플링 방식을 밝히지 않습니다(본문·표·부록 모두 없음). 아래는 세 가지 가정 가중치에서 데이터셋별 점유율의 산술입니다. 학습 없음.",
+    "episode_proportional_share_pct": {
+      "QT-Opt": 51.28,
+      "Language Table": 39.07,
+      "RT-1 Robot Action": 6.49,
+      "Berkeley Bridge": 2.25,
+      "Freiburg Franka Play": 0.29,
+      "Roboturk": 0.19,
+      "Berkeley Cable Routing": 0.13,
+      "USC Jaco Play": 0.09,
+      "TOTO Benchmark": 0.08,
+      "Berkeley Autolab UR5": 0.08,
+      "NYU VINN": 0.04,
+      "Austin VIOLA": 0.01
+    },
+    "uniform_over_datasets_share_pct": {
+      "RT-1 Robot Action": 8.33,
+      "QT-Opt": 8.33,
+      "Berkeley Bridge": 8.33,
+      "Freiburg Franka Play": 8.33,
+      "USC Jaco Play": 8.33,
+      "Berkeley Cable Routing": 8.33,
+      "Roboturk": 8.33,
+      "NYU VINN": 8.33,
+      "Austin VIOLA": 8.33,
+      "Berkeley Autolab UR5": 8.33,
+      "TOTO Benchmark": 8.33,
+      "Language Table": 8.33
+    },
+    "bridge_share_episode_pct": 2.25,
+    "bridge_share_uniform_pct": 8.33
+  },
+  "V7b_public_example_weights_arithmetic": {
+    "note": "공식 저장소 학습 예제(콜랩)의 가중치입니다. 주석에 'for example'이라고 되어 있고 학습 스텝도 1,000입니다. 논문 혼합의 가중치가 이것이라는 근거는 없습니다. 활성 10개이며 QT-Opt와 Language Table은 빠져 있습니다.",
+    "sum": 273,
+    "share_pct": {
+      "rt_1": 54.9,
+      "bridge": 18.3,
+      "taco_play": 1.8,
+      "jaco_play": 7.3,
+      "berkeley_cable_routing": 7.3,
+      "roboturk": 3.7,
+      "nyu_door_opening_surprising_effectiveness": 1.8,
+      "viola": 1.1,
+      "berkeley_autolab_ur5": 1.8,
+      "toto": 1.8
+    }
+  },
+  "V8_fig2a_vs_sheet": {
+    "figure_reading_sum": 62,
+    "sheet_sum_excl_multirobot": 59,
+    "mismatches_eyeballed": {
+      "Baxter": {
+        "figure_reading": 1,
+        "sheet_v1_0": 0
+      },
+      "Kuka iiwa": {
+        "figure_reading": 3,
+        "sheet_v1_0": 2
+      },
+      "Sawyer": {
+        "figure_reading": 4,
+        "sheet_v1_0": 3
+      },
+      "ViperX Bimanual": {
+        "figure_reading": 0,
+        "sheet_v1_0": 1
+      },
+      "WidowX": {
+        "figure_reading": 2,
+        "sheet_v1_0": 1
+      }
+    },
+    "note": "그림 값은 막대 높이를 눈으로 읽은 것이라 ±1 오차가 있을 수 있습니다. 합이 60이 아니라 62로 읽힙니다."
+  },
+  "V9_trial_budget": {
+    "paper_claim": "3600 evaluation trials across 6 robots (V 절 서두)",
+    "reported_cells": {
+      "Table I cells x trials": "셀당 n 미보고 (Bridge 열 n=30 가정 시 8셀 x 30 = 240)",
+      "Table II cells": "7행 x 2지표, 행마다 n 후보가 다름 (V3, V5)",
+      "Fig 4": "5도메인 x 3모델, n 미보고"
+    },
+    "verdict": "셀별 시행 수가 없어서 3600을 재계산할 수 없습니다. 보고된 셀 수로 보면 n이 수백에서 수천 사이여야 합니다."
+  }
+}
