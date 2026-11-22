@@ -1,0 +1,43 @@
+{
+ "no_stabilization": {
+  "static_median_mm": 48.8376,
+  "static_pass_threshold_frac": 0.9939,
+  "moving_pass_threshold_frac": 0.9973,
+  "precision_of_kept": 0.0801,
+  "moving_flow_err_mm": 50.6225
+ },
+ "vio_exact": {
+  "static_median_mm": 0.0,
+  "static_pass_threshold_frac": 0.0,
+  "moving_pass_threshold_frac": 1.0,
+  "precision_of_kept": 1.0,
+  "moving_flow_err_mm": 0.0
+ },
+ "rgb_only_pose": {
+  "static_median_mm": 23.9825,
+  "static_pass_threshold_frac": 0.9458,
+  "moving_pass_threshold_frac": 0.9998,
+  "precision_of_kept": 0.0852,
+  "moving_flow_err_mm": 24.7528
+ },
+ "dino_patch_shift_for_head_rotation": {
+  "assumed_hfov_deg": 110,
+  "input_px": 224,
+  "patch_px": 14,
+  "shift_px_4.7deg": 9.6,
+  "shift_in_patches": 0.68
+ },
+ "settings": {
+  "anchors": 1120,
+  "depth_m": 0.5,
+  "move_frac": 0.08,
+  "move_dist_m": 0.05,
+  "head_rot_deg": 4.7,
+  "head_trans_m": 0.025,
+  "rot_err_deg": 1.9,
+  "trans_err_m": 0.018,
+  "threshold_m": 0.01,
+  "trials": 300,
+  "seed": 0
+ }
+}
