@@ -1,0 +1,430 @@
+{
+  "table1_avg_check": {
+    "INTACT": {
+      "avg_recomputed": 95.582,
+      "avg_reported": 95.58
+    },
+    "INTACT Guarded A": {
+      "avg_recomputed": 96.332,
+      "avg_reported": 96.33
+    },
+    "Fast-JEPA": {
+      "avg_recomputed": 96.5,
+      "avg_reported": 96.5
+    }
+  },
+  "table1_speedup_INTACT_over_FastJEPA": 2.407,
+  "table1_speedup_GuardedA_over_FastJEPA": 11.68,
+  "table1_pub_IMWM_avg_check": 92.6,
+  "table2_avg_check": {
+    "INTACT": {
+      "recomputed": 56.25,
+      "reported": 56.25
+    },
+    "INTACT Guarded A": {
+      "recomputed": 35.25,
+      "reported": 35.25
+    },
+    "Fast-JEPA": {
+      "recomputed": 73.832,
+      "reported": 73.83
+    }
+  },
+  "table3_avg_check": {
+    "INTACT": {
+      "recomputed": 75.335,
+      "reported": 75.33
+    },
+    "INTACT Guarded A": {
+      "recomputed": 58.75,
+      "reported": 58.75
+    },
+    "Fast-JEPA": {
+      "recomputed": 87.665,
+      "reported": 87.67
+    }
+  },
+  "table4_avg_check": {
+    "w/o refinement": {
+      "recomputed": 93.835,
+      "reported": 93.83
+    },
+    "w/o proposal": {
+      "recomputed": 68.168,
+      "reported": 68.17
+    },
+    "Fast-JEPA (Table 4 행)": {
+      "recomputed": 96.332,
+      "reported": 96.33
+    }
+  },
+  "fastjepa_inconsistency": {
+    "table1": {
+      "PushT": 90.0,
+      "TwoRoom": 99.67,
+      "avg": 96.5,
+      "latency_ms": 10.88
+    },
+    "table4_5": {
+      "PushT": 89.0,
+      "TwoRoom": 100.0,
+      "avg": 96.33,
+      "latency_ms": 10.78
+    }
+  },
+  "scoring_ratio_recursive_over_direct": 4.81,
+  "scoring_ratio_expected_H5": 5,
+  "latency_ratio_recursive_over_direct": 1.91,
+  "table7_latency_check": {
+    "LeWM": {
+      "shift_mean": 767.51,
+      "table2_reported": 767.51,
+      "deadline_mean": 767.5,
+      "table3_reported": 767.5
+    },
+    "Fast-LeWM": {
+      "shift_mean": 404.43,
+      "table2_reported": 404.43,
+      "deadline_mean": 404.14,
+      "table3_reported": 404.14
+    },
+    "Fast-LeWM + SC": {
+      "shift_mean": 618.62,
+      "table2_reported": 618.62,
+      "deadline_mean": 624.14,
+      "table3_reported": 624.14
+    },
+    "GC-IDM*": {
+      "shift_mean": 170.42,
+      "table2_reported": 170.42,
+      "deadline_mean": 167.12,
+      "table3_reported": 167.12
+    },
+    "INTACT": {
+      "shift_mean": 24.62,
+      "table2_reported": 24.62,
+      "deadline_mean": 24.87,
+      "table3_reported": 24.87
+    },
+    "INTACT Guarded A": {
+      "shift_mean": 115.42,
+      "table2_reported": 115.43,
+      "deadline_mean": 111.4,
+      "table3_reported": 111.4
+    },
+    "Fast-JEPA": {
+      "shift_mean": 13.42,
+      "table2_reported": 13.42,
+      "deadline_mean": 13.75,
+      "table3_reported": 13.75
+    }
+  },
+  "figure4_vs_table2_delay0": {
+    "INTACT": {
+      "PushT": {
+        "figure_delay0_approx": 48,
+        "table2_shift": 50.67,
+        "diff": -2.7
+      },
+      "Reacher": {
+        "figure_delay0_approx": 81,
+        "table2_shift": 73.0,
+        "diff": 8.0
+      },
+      "Cube": {
+        "figure_delay0_approx": 77,
+        "table2_shift": 56.0,
+        "diff": 21.0
+      },
+      "TwoRoom": {
+        "figure_delay0_approx": 47,
+        "table2_shift": 45.33,
+        "diff": 1.7
+      }
+    },
+    "INTACT Guarded A": {
+      "PushT": {
+        "figure_delay0_approx": 30,
+        "table2_shift": 36.33,
+        "diff": -6.3
+      },
+      "Reacher": {
+        "figure_delay0_approx": 84,
+        "table2_shift": 48.67,
+        "diff": 35.3
+      },
+      "Cube": {
+        "figure_delay0_approx": 96,
+        "table2_shift": 15.0,
+        "diff": 81.0
+      },
+      "TwoRoom": {
+        "figure_delay0_approx": 42,
+        "table2_shift": 41.0,
+        "diff": 1.0
+      }
+    },
+    "Fast-JEPA": {
+      "PushT": {
+        "figure_delay0_approx": 71,
+        "table2_shift": 57.33,
+        "diff": 13.7
+      },
+      "Reacher": {
+        "figure_delay0_approx": 96,
+        "table2_shift": 80.67,
+        "diff": 15.3
+      },
+      "Cube": {
+        "figure_delay0_approx": 93,
+        "table2_shift": 72.0,
+        "diff": 21.0
+      },
+      "TwoRoom": {
+        "figure_delay0_approx": 90,
+        "table2_shift": 85.33,
+        "diff": 4.7
+      }
+    }
+  },
+  "welch_tests_n3": {
+    "Table1 avg: Fast-JEPA vs INTACT": {
+      "mean_diff": 0.92,
+      "t": 1.81,
+      "df": 3.94,
+      "p_two_sided": 0.1451
+    },
+    "Table1 avg: Fast-JEPA vs INTACT Guarded A": {
+      "mean_diff": 0.17,
+      "t": 0.39,
+      "df": 3.19,
+      "p_two_sided": 0.7234
+    },
+    "Table2 Shift avg: Fast-JEPA vs INTACT": {
+      "mean_diff": 17.58,
+      "t": 6.81,
+      "df": 2.61,
+      "p_two_sided": 0.01
+    },
+    "Table2 Shift avg: Fast-JEPA vs INTACT Guarded A": {
+      "mean_diff": 38.58,
+      "t": 15.04,
+      "df": 2.55,
+      "p_two_sided": 0.0015
+    },
+    "Table3 Deadline avg: Fast-JEPA vs INTACT": {
+      "mean_diff": 12.34,
+      "t": 17.24,
+      "df": 2.41,
+      "p_two_sided": 0.0014
+    },
+    "Table4 refinement effect (w/o refinement vs Fast-JEPA row)": {
+      "mean_diff": 2.5,
+      "t": 5.3,
+      "df": 3.86,
+      "p_two_sided": 0.0067
+    },
+    "Table2 Shift PushT: Fast-JEPA vs INTACT": {
+      "mean_diff": 6.66,
+      "t": 1.3,
+      "df": 2.23,
+      "p_two_sided": 0.3113
+    }
+  },
+  "table1_pooled300_binomial": {
+    "PushT": {
+      "fastjepa_k": 270,
+      "guardedA_k": 274,
+      "fastjepa_wilson95": [
+        86.1,
+        92.9
+      ],
+      "guardedA_wilson95": [
+        87.6,
+        94.0
+      ],
+      "fisher_p_pooled300": 0.674
+    },
+    "Reacher": {
+      "fastjepa_k": 289,
+      "guardedA_k": 291,
+      "fastjepa_wilson95": [
+        93.6,
+        97.9
+      ],
+      "guardedA_wilson95": [
+        94.4,
+        98.4
+      ],
+      "fisher_p_pooled300": 0.821
+    },
+    "Cube": {
+      "fastjepa_k": 300,
+      "guardedA_k": 299,
+      "fastjepa_wilson95": [
+        98.7,
+        100.0
+      ],
+      "guardedA_wilson95": [
+        98.1,
+        99.9
+      ],
+      "fisher_p_pooled300": 1.0
+    },
+    "TwoRoom": {
+      "fastjepa_k": 299,
+      "guardedA_k": 292,
+      "fastjepa_wilson95": [
+        98.1,
+        99.9
+      ],
+      "guardedA_wilson95": [
+        94.8,
+        98.6
+      ],
+      "fisher_p_pooled300": 0.038
+    }
+  },
+  "grim_feasibility_3seeds": {
+    "T1 Fast-JEPA PushT": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          87,
+          90,
+          93
+        ]
+      ]
+    },
+    "T1 Fast-JEPA Reacher": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          95,
+          97,
+          97
+        ]
+      ]
+    },
+    "T1 Fast-JEPA Cube": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          100,
+          100,
+          100
+        ]
+      ]
+    },
+    "T1 Fast-JEPA TwoRoom": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          99,
+          100,
+          100
+        ]
+      ]
+    },
+    "T1 INTACT Guarded A PushT": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          90,
+          91,
+          93
+        ]
+      ]
+    },
+    "T2 Fast-JEPA PushT-shift": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          48,
+          59,
+          65
+        ]
+      ]
+    },
+    "T2 Fast-JEPA Reacher-shift": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          76,
+          82,
+          84
+        ]
+      ]
+    },
+    "T2 Fast-JEPA Cube-shift": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          69,
+          72,
+          75
+        ]
+      ]
+    },
+    "T2 Fast-JEPA TwoRoom-shift": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          81,
+          84,
+          91
+        ]
+      ]
+    },
+    "T2 INTACT PushT-shift": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          49,
+          50,
+          53
+        ]
+      ]
+    },
+    "T2 INTACT Guarded A Cube-shift": {
+      "feasible_integer_triples_count": 1,
+      "example": [
+        [
+          14,
+          15,
+          16
+        ]
+      ]
+    },
+    "T4 w/o proposal PushT": {
+      "feasible_integer_triples_count": 2,
+      "example": [
+        [
+          41,
+          47,
+          47
+        ],
+        [
+          43,
+          43,
+          49
+        ]
+      ]
+    },
+    "T4 Fast-JEPA PushT": {
+      "feasible_integer_triples_count": 2,
+      "example": [
+        [
+          87,
+          90,
+          90
+        ],
+        [
+          88,
+          88,
+          91
+        ]
+      ]
+    }
+  }
+}
