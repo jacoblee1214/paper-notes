@@ -1,0 +1,210 @@
+{
+  "V1_table2_vs_table5_ours": {
+    "match": true,
+    "note": "표 II와 표 V의 Ours 행은 소수 첫째 자리까지 같다"
+  },
+  "V2_speed_ratio": {
+    "ours_vs_bodex_pct": -19.9,
+    "note": "본문은 '약간 낮다(slightly lower)'고 쓰지만 약 20% 낮다"
+  },
+  "V3_table3_attempts": {
+    "BODex_DGN": {
+      "dGSR_pp": 0.01,
+      "dOSR_pp": 18.54
+    },
+    "BODex_Obj": {
+      "dGSR_pp": -0.01,
+      "dOSR_pp": 30.05
+    },
+    "Ours_DGN": {
+      "dGSR_pp": 0.02,
+      "dOSR_pp": 3.85
+    },
+    "Ours_Obj": {
+      "dGSR_pp": 0.09,
+      "dOSR_pp": 10.46
+    },
+    "note": "BODex의 GSR은 거의 같지만 OSR은 30 pp(Obj)와 18.5 pp(DGN) 오른다. 본문 '변화 없음(unchanged)'은 GSR에만 맞는다. Ours의 GSR 증가는 0.02와 0.09 pp뿐이다."
+  },
+  "V4_bodex_fail_obj_100": {
+    "fail_pct": 26.47
+  },
+  "V5_table5_ablation_pp": {
+    "global_wo_opt": 14.8,
+    "global_wo_filter": 41.9,
+    "local_wo_opt": 42.7,
+    "local_wo_filter": -2.3,
+    "template_wo_update": 19.0,
+    "note": "global_wo_opt 감소는 14.8 pp로 본문의 '약간의 개선(slight improvement)'과 맞지 않는다. local_wo_filter는 Ours보다 2.3 pp 높다(본문의 '성공률을 낮춘다'와 맞음)."
+  },
+  "V6_table4_friction_drop": {
+    "Power": {
+      "abs_pp": 11.4,
+      "rel_pct": 47.1
+    },
+    "Intermediate": {
+      "abs_pp": 16.4,
+      "rel_pct": 71.3
+    },
+    "Precision": {
+      "abs_pp": 24.6,
+      "rel_pct": 68.3
+    },
+    "note": "절대 감소는 정밀(24.6 pp)이 가장 크다. 상대 감소는 중간(71.3%)이 정밀(68.3%)보다 크다. 본문 '정밀이 더 빨리 떨어진다'는 힘 절대치와 동력 비교에서 맞다."
+  },
+  "V7_table6_vs_table4_normal": {
+    "Power": {
+      "t6": 24.23,
+      "t4": 24.2
+    },
+    "Intermediate": {
+      "t6": 23.03,
+      "t4": 23.0
+    },
+    "Precision": {
+      "t6": 36.0,
+      "t4": 36.0
+    },
+    "match": true
+  },
+  "V8_table6_control_pp": {
+    "Shadow_Power": {
+      "ours_minus_prepose": -1.62,
+      "ours_minus_grasponly": 6.59
+    },
+    "Shadow_Intermediate": {
+      "ours_minus_prepose": 3.1,
+      "ours_minus_grasponly": 13.22
+    },
+    "Shadow_Precision": {
+      "ours_minus_prepose": 1.44,
+      "ours_minus_grasponly": 22.21
+    },
+    "Allegro_Fingertip": {
+      "ours_minus_prepose": 15.42,
+      "ours_minus_grasponly": 35.9
+    }
+  },
+  "V9_realworld": {
+    "assumption": "분모 n = 3 시물체 x 12 유형 x 3회 + 10 시물체 x 3 유형 x 3회 = 198",
+    "successes_matching_82.3pct": [
+      163
+    ],
+    "wilson95_at_163_of_198": [
+      82.32,
+      76.41,
+      87.01
+    ],
+    "wilson95_pct_range_text": "76.41–87.01%"
+  },
+  "V10_table8": {
+    "typecond_minus_bodex_pp": 9.9,
+    "type1_minus_bodex_pp": 1.5,
+    "assumption": "테스트 객체 수 약 2140 (10.7k의 1/5) 또는 객체x크기 약 12840로 가정, 독립 표본 근사",
+    "sensitivity": {
+      "n_2140": {
+        "type1_vs_bodex": [
+          0.99,
+          0.324
+        ]
+      },
+      "n_12840": {
+        "type1_vs_bodex": [
+          2.41,
+          0.0157
+        ]
+      }
+    },
+    "note": "Ours-type1 대 BODex 1.5 pp 차이는 객체 수준 가정에서 유의하지 않을 수 있다"
+  },
+  "V11_table7": {
+    "assumption": "1000 객체 x 100 시도 = 100000 (시도 단위 상한), 객체 수준 n=1000 민감도",
+    "rows": [
+      {
+        "cell": "6.Prismatic4F_T1",
+        "delta_pp": 11.5,
+        "z_attempt_level": 51.45,
+        "z_object_level_n1000": 5.14,
+        "p_object_level": 2.68e-07
+      },
+      {
+        "cell": "6.Prismatic4F_T2",
+        "delta_pp": 44.7,
+        "z_attempt_level": 210.48,
+        "z_object_level_n1000": 21.05,
+        "p_object_level": 2.38e-98
+      },
+      {
+        "cell": "6.Prismatic4F_T3",
+        "delta_pp": 44.5,
+        "z_attempt_level": 233.15,
+        "z_object_level_n1000": 23.32,
+        "p_object_level": 3.1e-120
+      },
+      {
+        "cell": "1.LargeDiam_T1",
+        "delta_pp": 7.2,
+        "z_attempt_level": 36.48,
+        "z_object_level_n1000": 3.65,
+        "p_object_level": 0.000264
+      },
+      {
+        "cell": "1.LargeDiam_T2",
+        "delta_pp": 12.2,
+        "z_attempt_level": 60.37,
+        "z_object_level_n1000": 6.04,
+        "p_object_level": 1.57e-09
+      },
+      {
+        "cell": "1.LargeDiam_T3",
+        "delta_pp": 19.6,
+        "z_attempt_level": 116.67,
+        "z_object_level_n1000": 11.67,
+        "p_object_level": 1.87e-31
+      }
+    ],
+    "note": "모든 차이가 객체 수준 근사에서도 유의하다. 분산은 시드 한 번으로 보고되지 않음"
+  },
+  "V12_shared_values": {
+    "table10_type1_eq_table8_type1": true,
+    "table9_flow_mlp_eq_table8_type1": true,
+    "table11_classifierB_eq_table8_typecond": true,
+    "table11_top1_ge_classifierB": true,
+    "note": "표 XI의 Classifier B(63.9)는 표 VIII 본 모델 값과 같다. 본문은 어느 설정을 쓴 것인지 명시하지 않는다"
+  },
+  "V13_dataset": {
+    "objects_sum": 10697,
+    "grasps_per_object_avg": 888.0,
+    "note": "5697 + 5000 = 10697 ≈ 10.7k. 객체당 평균 약 888 파지 (유효 기준 통과분 기준)"
+  },
+  "V14_table2_attempts": {
+    "assumption": "시도 수 = 20 x 5697 객체 x 6 크기 = 683640 (상한, 유효 결과 기준이면 더 적음)",
+    "gsr_ours_vs_bodex_pp": 11.27,
+    "wilson_ours_gsr": [
+      60.5,
+      60.38,
+      60.62
+    ],
+    "note": "시도 단위 구간은 좁지만 객체 간 군집을 무시한다. 객체 수준 민감도는 V11과 같은 방식으로 본다"
+  },
+  "V15_intro_links": {
+    "table4_power_cln_mean": 9.1,
+    "claim": "> 10 hand links within 2 mm (power grasps)",
+    "note": "평균 9.1이라 '10개 초과'는 개별 예시이거나 다른 집계일 가능성이 있다"
+  },
+  "V16_appendixB": {
+    "epochs": 10,
+    "attempts_per_epoch": 10,
+    "total_per_object": 100,
+    "note": "본문 설명과 맞다. 공식 설정 기본값(epoch 5)과는 다르다 (04 D1)"
+  },
+  "V17_osr_tie": {
+    "ours": 96.53,
+    "bodex": 96.56,
+    "diff_pp": -0.03
+  },
+  "V18_objaverse_osr100": {
+    "ours_osr_pct": 94.63,
+    "claim_ok": true
+  }
+}
