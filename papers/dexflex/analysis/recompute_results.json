@@ -1,0 +1,702 @@
+{
+ "table2": {
+  "V1_avg_recompute": {
+   "Raw": {
+    "recomputed": 29.17,
+    "reported": 29.2,
+    "match": true
+   },
+   "Filter": {
+    "recomputed": 39.17,
+    "reported": 39.2,
+    "match": true
+   },
+   "DexGen": {
+    "recomputed": 52.5,
+    "reported": 52.5,
+    "match": true
+   },
+   "DexFLEX w/o Tactile": {
+    "recomputed": 59.17,
+    "reported": 59.2,
+    "match": true
+   },
+   "DexFLEX": {
+    "recomputed": 78.33,
+    "reported": 78.3,
+    "match": true
+   }
+  },
+  "V2_integer_feasible": {
+   "cells_multiple_of_5": true,
+   "avg_is_multiple_of_5/6": true
+  },
+  "V3_pooled": {
+   "Raw": {
+    "k": 35,
+    "n": 120,
+    "rate": 0.2917,
+    "wilson95": [
+     0.2178,
+     0.3784
+    ]
+   },
+   "Filter": {
+    "k": 47,
+    "n": 120,
+    "rate": 0.3917,
+    "wilson95": [
+     0.309,
+     0.4811
+    ]
+   },
+   "DexGen": {
+    "k": 63,
+    "n": 120,
+    "rate": 0.525,
+    "wilson95": [
+     0.4363,
+     0.6122
+    ]
+   },
+   "DexFLEX w/o Tactile": {
+    "k": 71,
+    "n": 120,
+    "rate": 0.5917,
+    "wilson95": [
+     0.5022,
+     0.6754
+    ]
+   },
+   "DexFLEX": {
+    "k": 94,
+    "n": 120,
+    "rate": 0.7833,
+    "wilson95": [
+     0.7015,
+     0.8476
+    ]
+   }
+  },
+  "V4_text_claims": {
+   "gain_over_DexGen_pp": 25.8,
+   "gain_over_DexGen_exact": 25.83,
+   "gain_tactile_pp_text_19.1": 19.1,
+   "gain_tactile_exact": 19.17,
+   "SR_ratio_vs_raw": 2.69,
+   "NHT_ratio": 2.02,
+   "wo_tactile_over_DexGen_pp": 6.67
+  },
+  "V5_pairwise_pooled": [
+   {
+    "a": "DexFLEX",
+    "b": "Raw",
+    "ka": 94,
+    "kb": 35,
+    "diff_pp": 49.2,
+    "diff_ci95_pp": [
+     38.2,
+     60.1
+    ],
+    "fisher_p": 1.6987277995273117e-14
+   },
+   {
+    "a": "DexFLEX",
+    "b": "Filter",
+    "ka": 94,
+    "kb": 47,
+    "diff_pp": 39.2,
+    "diff_ci95_pp": [
+     27.7,
+     50.6
+    ],
+    "fisher_p": 9.273596061618461e-10
+   },
+   {
+    "a": "DexFLEX",
+    "b": "DexGen",
+    "ka": 94,
+    "kb": 63,
+    "diff_pp": 25.8,
+    "diff_ci95_pp": [
+     14.3,
+     37.4
+    ],
+    "fisher_p": 4.0602459786059976e-05
+   },
+   {
+    "a": "DexFLEX",
+    "b": "DexFLEX w/o Tactile",
+    "ka": 94,
+    "kb": 71,
+    "diff_pp": 19.2,
+    "diff_ci95_pp": [
+     7.7,
+     30.6
+    ],
+    "fisher_p": 0.002077423321630328
+   },
+   {
+    "a": "DexFLEX w/o Tactile",
+    "b": "DexGen",
+    "ka": 71,
+    "kb": 63,
+    "diff_pp": 6.7,
+    "diff_ci95_pp": [
+     -5.9,
+     19.2
+    ],
+    "fisher_p": 0.3629057667283581
+   },
+   {
+    "a": "DexGen",
+    "b": "Filter",
+    "ka": 63,
+    "kb": 47,
+    "diff_pp": 13.3,
+    "diff_ci95_pp": [
+     0.8,
+     25.8
+    ],
+    "fisher_p": 0.05175479765601545
+   },
+   {
+    "a": "DexGen",
+    "b": "Raw",
+    "ka": 63,
+    "kb": 35,
+    "diff_pp": 23.3,
+    "diff_ci95_pp": [
+     11.3,
+     35.4
+    ],
+    "fisher_p": 0.00036750635367466966
+   }
+  ],
+  "V6_per_task_tests": {
+   "DexFLEX vs Raw": {
+    "per_task_p": [
+     0.0138,
+     0.0036,
+     0.0079,
+     0.0036,
+     0.0011,
+     0.0008
+    ],
+    "holm_p": [
+     0.0158,
+     0.0146,
+     0.0158,
+     0.0146,
+     0.0053,
+     0.0046
+    ],
+    "n_sig_raw": 6,
+    "n_sig_holm": 6,
+    "cmh": {
+     "chi2": 59.832,
+     "p": 1.0330544797923963e-14,
+     "or_mh": 10.52
+    },
+    "task_wins": 6,
+    "sign_test_two_sided_p": 0.03125
+   },
+   "DexFLEX vs Filter": {
+    "per_task_p": [
+     0.0648,
+     0.0225,
+     0.0407,
+     0.0225,
+     0.0104,
+     0.0095
+    ],
+    "holm_p": [
+     0.0899,
+     0.0899,
+     0.0899,
+     0.0899,
+     0.0572,
+     0.0572
+    ],
+    "n_sig_raw": 5,
+    "n_sig_holm": 0,
+    "cmh": {
+     "chi2": 39.0,
+     "p": 4.2380554260794454e-10,
+     "or_mh": 6.34
+    },
+    "task_wins": 6,
+    "sign_test_two_sided_p": 0.03125
+   },
+   "DexFLEX vs DexGen": {
+    "per_task_p": [
+     0.2351,
+     0.176,
+     0.1552,
+     0.176,
+     0.111,
+     0.1128
+    ],
+    "holm_p": [
+     0.6658,
+     0.6658,
+     0.6658,
+     0.6658,
+     0.6658,
+     0.6658
+    ],
+    "n_sig_raw": 0,
+    "n_sig_holm": 0,
+    "cmh": {
+     "chi2": 18.08,
+     "p": 2.1185975798941237e-05,
+     "or_mh": 3.49
+    },
+    "task_wins": 6,
+    "sign_test_two_sided_p": 0.03125
+   },
+   "DexFLEX vs DexFLEX w/o Tactile": {
+    "per_task_p": [
+     0.4075,
+     0.3008,
+     0.2733,
+     0.3008,
+     0.3332,
+     0.3406
+    ],
+    "holm_p": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "n_sig_raw": 0,
+    "n_sig_holm": 0,
+    "cmh": {
+     "chi2": 10.404,
+     "p": 0.001257471710865969,
+     "or_mh": 2.6
+    },
+    "task_wins": 6,
+    "sign_test_two_sided_p": 0.03125
+   },
+   "DexFLEX w/o Tactile vs DexGen": {
+    "per_task_p": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     0.7512,
+     0.7475
+    ],
+    "holm_p": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "n_sig_raw": 0,
+    "n_sig_holm": 0,
+    "cmh": {
+     "chi2": 1.106,
+     "p": 0.292869562322555,
+     "or_mh": 1.33
+    },
+    "task_wins": 6,
+    "sign_test_two_sided_p": 0.03125
+   },
+   "DexGen vs Filter": {
+    "per_task_p": [
+     0.7411,
+     0.5273,
+     0.7512,
+     0.5273,
+     0.5006,
+     0.4801
+    ],
+    "holm_p": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "n_sig_raw": 0,
+    "n_sig_holm": 0,
+    "cmh": {
+     "chi2": 4.481,
+     "p": 0.0342706735478042,
+     "or_mh": 1.78
+    },
+    "task_wins": 6,
+    "sign_test_two_sided_p": 0.03125
+   },
+   "DexGen vs Raw": {
+    "per_task_p": [
+     0.3332,
+     0.2003,
+     0.3431,
+     0.2003,
+     0.1552,
+     0.1274
+    ],
+    "holm_p": [
+     0.8011,
+     0.8011,
+     0.8011,
+     0.8011,
+     0.7759,
+     0.7643
+    ],
+    "n_sig_raw": 0,
+    "n_sig_holm": 0,
+    "cmh": {
+     "chi2": 14.129,
+     "p": 0.00017065651022066033,
+     "or_mh": 2.9
+    },
+    "task_wins": 6,
+    "sign_test_two_sided_p": 0.03125
+   }
+  },
+  "V7_CT_selection": {
+   "Raw": {
+    "successes": 35,
+    "CT_s": 27.5,
+    "NHT": 0.42,
+    "NHT_minus_SRrate_if_fail_zero": 0.13
+   },
+   "Filter": {
+    "successes": 47,
+    "CT_s": 33.8,
+    "NHT": 0.55,
+    "NHT_minus_SRrate_if_fail_zero": 0.16
+   },
+   "DexGen": {
+    "successes": 63,
+    "CT_s": 31.2,
+    "NHT": 0.65,
+    "NHT_minus_SRrate_if_fail_zero": 0.12
+   },
+   "DexFLEX w/o Tactile": {
+    "successes": 71,
+    "CT_s": 30.8,
+    "NHT": 0.71,
+    "NHT_minus_SRrate_if_fail_zero": 0.12
+   },
+   "DexFLEX": {
+    "successes": 94,
+    "CT_s": 32.0,
+    "NHT": 0.85,
+    "NHT_minus_SRrate_if_fail_zero": 0.07
+   },
+   "note": "CT는 성공 시행 평균. Raw 35회 대 DexFLEX 94회처럼 모집단이 달라 CT 비교는 선택 편향이 있고, 분산이 보고되지 않아 CT 차이(27.5–33.8 s)의 유의성은 계산할 수 없다.",
+   "corr_SR_CT": 0.4,
+   "corr_SR_NHT": 0.994
+  }
+ },
+ "fig5_policy": {
+  "totals": {
+   "Direct": {
+    "k": 8,
+    "n": 60,
+    "rate": 0.1333,
+    "wilson95": [
+     0.0691,
+     0.2417
+    ]
+   },
+   "DexGen": {
+    "k": 18,
+    "n": 60,
+    "rate": 0.3,
+    "wilson95": [
+     0.199,
+     0.4251
+    ]
+   },
+   "DexFLEX": {
+    "k": 28,
+    "n": 60,
+    "rate": 0.4667,
+    "wilson95": [
+     0.3463,
+     0.5911
+    ]
+   }
+  },
+  "ratios": {
+   "DexFLEX/Direct": 3.5,
+   "DexFLEX/DexGen": 1.556,
+   "reported_text": {
+    "vs_direct": 3.5,
+    "vs_dexgen": 1.56
+   }
+  },
+  "tests": {
+   "DexFLEX vs Direct": {
+    "pooled_fisher_p": 0.00011654422847179145,
+    "per_task_p": [
+     0.0536,
+     0.0824,
+     0.0083
+    ],
+    "holm_p": [
+     0.1071,
+     0.1071,
+     0.0249
+    ],
+    "cmh": {
+     "chi2": 16.284,
+     "p": 5.4524552855166495e-05,
+     "or_mh": 6.48
+    }
+   },
+   "DexFLEX vs DexGen": {
+    "pooled_fisher_p": 0.090562745260815,
+    "per_task_p": [
+     0.7512,
+     0.5145,
+     0.1274
+    ],
+    "holm_p": [
+     1.0,
+     1.0,
+     0.3822
+    ],
+    "cmh": {
+     "chi2": 3.714,
+     "p": 0.053948702805049924,
+     "or_mh": 2.16
+    }
+   },
+   "DexGen vs Direct": {
+    "pooled_fisher_p": 0.044809664160076416,
+    "per_task_p": [
+     0.1908,
+     0.4506,
+     0.4872
+    ],
+    "holm_p": [
+     0.5724,
+     0.9012,
+     0.9012
+    ],
+    "cmh": {
+     "chi2": 5.342,
+     "p": 0.020812014953788857,
+     "or_mh": 3.17
+    }
+   }
+  },
+  "ratio_bootstrap": {
+   "DexFLEX/Direct": {
+    "ci95": [
+     1.93,
+     8.5
+    ],
+    "frac_infinite": 0.0
+   },
+   "DexFLEX/DexGen": {
+    "ci95": [
+     1.0,
+     2.54
+    ],
+    "frac_infinite": 0.0
+   }
+  },
+  "order_all_three_tasks": true
+ },
+ "table1_vs_fig3": {
+  "DexFLEX": {
+   "duration_s": {
+    "mean4": 23.375,
+    "mean5": 24.4,
+    "max4": 25.5,
+    "table1": 0.86
+   },
+   "progress": {
+    "mean4": 0.688,
+    "mean5": 0.72,
+    "max4": 0.75,
+    "table1": 0.78
+   },
+   "intent_error": {
+    "mean4": 0.165,
+    "mean5": 0.14,
+    "max4": 0.2,
+    "table1": 0.18
+   },
+   "duration_norm_by_clean_expert_mean4": 0.82,
+   "duration_norm_by_clean_expert_mean5": 0.856
+  },
+  "w/o tactile/contact": {
+   "duration_s": {
+    "mean4": 19.125,
+    "mean5": 20.92,
+    "max4": 22.0,
+    "table1": 0.62
+   },
+   "progress": {
+    "mean4": 0.552,
+    "mean5": 0.61,
+    "max4": 0.64,
+    "table1": 0.55
+   },
+   "intent_error": {
+    "mean4": 0.258,
+    "mean5": 0.218,
+    "max4": 0.31,
+    "table1": 0.36
+   },
+   "duration_norm_by_clean_expert_mean4": 0.681,
+   "duration_norm_by_clean_expert_mean5": 0.744
+  },
+  "clean_duration_s": {
+   "raw": 28.6,
+   "filter": 27.0,
+   "dexgen": 28.1,
+   "notactile": 28.1,
+   "dexflex": 28.5
+  },
+  "progress_table1_minus_fig3_mean4": 0.092,
+  "ratio_wo_tactile_over_full": {
+   "table1_duration": 0.721,
+   "fig3_duration_mean4": 0.818,
+   "table1_intent": 2.0,
+   "fig3_intent_mean4": 1.56
+  },
+  "errorbar_overlap_DexFLEX_vs_DexGen": {
+   "duration_s": {
+    "additive_noise": false,
+    "command_scaling": true,
+    "delayed_command": false,
+    "support_finger_removal": false
+   },
+   "progress": {
+    "additive_noise": false,
+    "command_scaling": true,
+    "delayed_command": false,
+    "support_finger_removal": false
+   },
+   "intent_error": {
+    "additive_noise": false,
+    "command_scaling": false,
+    "delayed_command": false,
+    "support_finger_removal": false
+   }
+  },
+  "errorbar_overlap_DexFLEX_vs_woTactile": {
+   "duration_s": {
+    "additive_noise": true,
+    "command_scaling": true,
+    "delayed_command": false,
+    "support_finger_removal": false
+   },
+   "progress": {
+    "additive_noise": false,
+    "command_scaling": false,
+    "delayed_command": false,
+    "support_finger_removal": false
+   },
+   "intent_error": {
+    "additive_noise": false,
+    "command_scaling": false,
+    "delayed_command": false,
+    "support_finger_removal": false
+   }
+  },
+  "order_table1_dur_vs_text": "w/o predictive score가 가장 낮음(0.52): 본문 '가장 큰 하락'과 일치",
+  "table1_ablation_means_not_ranked_by_contact_critical": "Table 1은 네 조건 평균이라 본문의 '접촉 결정적 손상에서 특히'를 확인할 수 없음"
+ },
+ "power": {
+  "per_task_n20_DexFLEX_0.78_vs_DexGen_0.53": 0.301,
+  "per_task_n20_DexFLEX_0.78_vs_woTactile_0.59": 0.178,
+  "pooled_n120_DexFLEX_vs_woTactile": 0.872,
+  "policy_n60_0.467_vs_0.30": 0.409,
+  "policy_per_task_n20_0.60_vs_0.50": 0.05,
+  "n_per_arm_for_80pct_power_0.467_vs_0.30": 155
+ },
+ "K1_per_event_survival": {
+  "events=3": {
+   "Raw": 0.663,
+   "Filter": 0.732,
+   "DexGen": 0.807,
+   "DexFLEX w/o Tactile": 0.84,
+   "DexFLEX": 0.922
+  },
+  "events=5": {
+   "Raw": 0.782,
+   "Filter": 0.829,
+   "DexGen": 0.879,
+   "DexFLEX w/o Tactile": 0.9,
+   "DexFLEX": 0.952
+  },
+  "events=8": {
+   "Raw": 0.857,
+   "Filter": 0.889,
+   "DexGen": 0.923,
+   "DexFLEX w/o Tactile": 0.937,
+   "DexFLEX": 0.97
+  },
+  "events=12": {
+   "Raw": 0.902,
+   "Filter": 0.925,
+   "DexGen": 0.948,
+   "DexFLEX w/o Tactile": 0.957,
+   "DexFLEX": 0.98
+  }
+ },
+ "K2_selection_toy": {
+  "N=4,acc=0.5": {
+   "nearest_safe": 0.234,
+   "consequence_safe": 0.353,
+   "random_safe": 0.501
+  },
+  "N=4,acc=0.7": {
+   "nearest_safe": 0.227,
+   "consequence_safe": 0.548,
+   "random_safe": 0.498
+  },
+  "N=4,acc=0.9": {
+   "nearest_safe": 0.232,
+   "consequence_safe": 0.792,
+   "random_safe": 0.502
+  },
+  "N=16,acc=0.5": {
+   "nearest_safe": 0.104,
+   "consequence_safe": 0.159,
+   "random_safe": 0.503
+  },
+  "N=16,acc=0.7": {
+   "nearest_safe": 0.103,
+   "consequence_safe": 0.343,
+   "random_safe": 0.501
+  },
+  "N=16,acc=0.9": {
+   "nearest_safe": 0.104,
+   "consequence_safe": 0.702,
+   "random_safe": 0.5
+  },
+  "N=64,acc=0.5": {
+   "nearest_safe": 0.059,
+   "consequence_safe": 0.074,
+   "random_safe": 0.498
+  },
+  "N=64,acc=0.7": {
+   "nearest_safe": 0.061,
+   "consequence_safe": 0.181,
+   "random_safe": 0.501
+  },
+  "N=64,acc=0.9": {
+   "nearest_safe": 0.065,
+   "consequence_safe": 0.533,
+   "random_safe": 0.497
+  }
+ }
+}
