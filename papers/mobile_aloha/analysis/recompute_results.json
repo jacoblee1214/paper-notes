@@ -1,0 +1,219 @@
+{
+  "A_whole_task": {
+    "Wipe Wine": {
+      "N": 20,
+      "co": "19/20",
+      "co_pct": 95.0,
+      "co_wilson95": [
+        76.4,
+        99.1
+      ],
+      "no": "10/20",
+      "no_pct": 50.0,
+      "no_wilson95": [
+        29.9,
+        70.1
+      ],
+      "fisher_p_raw": 0.003342,
+      "fisher_p_holm": 0.013368
+    },
+    "Cook Shrimp": {
+      "N": 5,
+      "co": "2/5",
+      "co_pct": 40.0,
+      "co_wilson95": [
+        11.8,
+        76.9
+      ],
+      "no": "1/5",
+      "no_pct": 20.0,
+      "no_wilson95": [
+        3.6,
+        62.4
+      ],
+      "fisher_p_raw": 1.0,
+      "fisher_p_holm": 1.0
+    },
+    "Rinse Pan": {
+      "N": 20,
+      "co": "16/20",
+      "co_pct": 80.0,
+      "co_wilson95": [
+        58.4,
+        91.9
+      ],
+      "no": "0/20",
+      "no_pct": 0.0,
+      "no_wilson95": [
+        0.0,
+        16.1
+      ],
+      "fisher_p_raw": 0.0,
+      "fisher_p_holm": 1e-06
+    },
+    "Use Cabinet": {
+      "N": 20,
+      "co": "17/20",
+      "co_pct": 85.0,
+      "co_wilson95": [
+        64.0,
+        94.8
+      ],
+      "no": "17/20",
+      "no_pct": 85.0,
+      "no_wilson95": [
+        64.0,
+        94.8
+      ],
+      "fisher_p_raw": 1.0,
+      "fisher_p_holm": 1.0
+    },
+    "Call Elevator": {
+      "N": 20,
+      "co": "19/20",
+      "co_pct": 95.0,
+      "co_wilson95": [
+        76.4,
+        99.1
+      ],
+      "no": "0/20",
+      "no_pct": 0.0,
+      "no_wilson95": [
+        0.0,
+        16.1
+      ],
+      "fisher_p_raw": 0.0,
+      "fisher_p_holm": 0.0
+    },
+    "Push Chairs (5 chairs)": {
+      "N": 20,
+      "co": "16/20",
+      "co_pct": 80.0,
+      "co_wilson95": [
+        58.4,
+        91.9
+      ],
+      "no": "0/20",
+      "no_pct": 0.0,
+      "no_wilson95": [
+        0.0,
+        16.1
+      ],
+      "fisher_p_raw": 0.0,
+      "fisher_p_holm": 1e-06
+    },
+    "High Five": {
+      "N": 20,
+      "co": "17/20",
+      "co_pct": 85.0,
+      "co_wilson95": [
+        64.0,
+        94.8
+      ],
+      "no": "17/20",
+      "no_pct": 85.0,
+      "no_wilson95": [
+        64.0,
+        94.8
+      ],
+      "fisher_p_raw": 1.0,
+      "fisher_p_holm": 1.0
+    }
+  },
+  "B_mean_gain": {
+    "tasks": [
+      "Wipe Wine",
+      "Cook Shrimp",
+      "Rinse Pan",
+      "Use Cabinet",
+      "Call Elevator",
+      "Push Chairs",
+      "High Five"
+    ],
+    "co_mean": 80.0,
+    "no_mean": 34.29,
+    "mean_gain_pp": 45.71,
+    "gains_pp": [
+      45,
+      20,
+      80,
+      0,
+      95,
+      80,
+      0
+    ],
+    "max_gain_pp": 95,
+    "paper_intro_claim_pct": 34,
+    "paper_abstract_up_to_pct": 90
+  },
+  "C_chain": {
+    "Wipe Wine | co": "정확 일치",
+    "Wipe Wine | no": "반올림 차이 (1%p 이내)",
+    "Cook Shrimp | co": "정확 일치",
+    "Cook Shrimp | no": "정확 일치",
+    "Rinse Pan | co": "정확 일치",
+    "Rinse Pan | no": "0회 이후 Place Pan의 분모가 0이라 정의되지 않음 (표는 100 표시)",
+    "Use Cabinet | co": "반올림 차이 (1%p 이내)",
+    "Use Cabinet | no": "반올림 차이 (1%p 이내)",
+    "Call Elevator | co": "정확 일치",
+    "Call Elevator | no": "정확 일치",
+    "Push Chairs (5 chairs) | co": "불일치 (1%p 초과)",
+    "Push Chairs (5 chairs) | no": "정확 일치",
+    "High Five | co / no": "전체 85 = 17/20 (정수 가능), 하위 조건은 사슬 아님",
+    "Cook Shrimp | co (N=5)": "정확 일치",
+    "Cook Shrimp | no (N=5)": "정확 일치"
+  },
+  "C_push_chairs_5th": {
+    "4th_success_of_20": 17,
+    "5th_closest_k_of_17": 15,
+    "5th_closest_pct": 88.2,
+    "whole_implied_pct": 75.0,
+    "reported_whole_pct": 80
+  },
+  "D_table2_chain": {
+    "VINN Wipe Wine co": "정확 일치",
+    "VINN Wipe Wine no": "정확 일치",
+    "DP Wipe Wine co": "정확 일치",
+    "DP Wipe Wine no": "정확 일치",
+    "ACT Wipe Wine co": "정확 일치",
+    "ACT Wipe Wine no": "반올림 차이 (1%p 이내)",
+    "VINN Push co (1-3 chair)": "정확 일치",
+    "VINN Push no (1-3 chair)": "정확 일치",
+    "DP Push co (1-3 chair)": "정확 일치",
+    "DP Push no (1-3 chair)": "정확 일치",
+    "ACT Push co (1-3 chair)": "정확 일치",
+    "ACT Push no (1-3 chair)": "정확 일치"
+  },
+  "T3_T4": {
+    "30%": {
+      "reported_pct": 95,
+      "k_of_20": 19,
+      "exact_integer": true
+    },
+    "50% (기본)": {
+      "reported_pct": 95,
+      "k_of_20": 19,
+      "exact_integer": true
+    },
+    "70%": {
+      "reported_pct": 90,
+      "k_of_20": 18,
+      "exact_integer": true
+    },
+    "Co-train": {
+      "reported_pct": 95,
+      "k_of_20": 19,
+      "exact_integer": true
+    },
+    "Pre-train": {
+      "reported_pct": 40,
+      "k_of_20": 8,
+      "exact_integer": true
+    },
+    "No pre-train": {
+      "reported_pct": 50,
+      "k_of_20": 10,
+      "exact_integer": true
+    }
+  }
+}
