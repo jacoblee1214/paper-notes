@@ -1,0 +1,444 @@
+{
+  "T1_sim_success": {
+    "assumed_N": {
+      "base": 14000,
+      "lo": 13000,
+      "hi": 15000
+    },
+    "rows": [
+      {
+        "comparison": "OmniH2O vs H2O",
+        "diff_pp_reported": 6.58,
+        "newcombe95_pp_Nbase": [
+          5.91,
+          7.25
+        ],
+        "fisher_p_Nbase": 2.26e-82,
+        "newcombe95_pp_Nlo": [
+          5.88,
+          7.28
+        ],
+        "fisher_p_Nlo": 1.41e-76,
+        "newcombe95_pp_Nhi": [
+          5.93,
+          7.23
+        ],
+        "fisher_p_Nhi": 3.64e-88
+      },
+      {
+        "comparison": "OmniH2O vs 교사(privileged)",
+        "diff_pp_reported": -0.67,
+        "newcombe95_pp_Nbase": [
+          -1.21,
+          -0.13
+        ],
+        "fisher_p_Nbase": 0.0153,
+        "newcombe95_pp_Nlo": [
+          -1.23,
+          -0.11
+        ],
+        "fisher_p_Nlo": 0.02,
+        "newcombe95_pp_Nhi": [
+          -1.19,
+          -0.15
+        ],
+        "fisher_p_Nhi": 0.0118
+      },
+      {
+        "comparison": "OmniH2O vs RL만(w/o DAgger)",
+        "diff_pp_reported": 46.99,
+        "newcombe95_pp_Nbase": [
+          46.07,
+          47.9
+        ],
+        "fisher_p_Nbase": 0.0,
+        "newcombe95_pp_Nlo": [
+          46.04,
+          47.93
+        ],
+        "fisher_p_Nlo": 0.0,
+        "newcombe95_pp_Nhi": [
+          46.1,
+          47.87
+        ],
+        "fisher_p_Nhi": 0.0
+      },
+      {
+        "comparison": "OmniH2O vs History0",
+        "diff_pp_reported": 0.3,
+        "newcombe95_pp_Nbase": [
+          -0.26,
+          0.86
+        ],
+        "fisher_p_Nbase": 0.304,
+        "newcombe95_pp_Nlo": [
+          -0.28,
+          0.88
+        ],
+        "fisher_p_Nlo": 0.323,
+        "newcombe95_pp_Nhi": [
+          -0.24,
+          0.84
+        ],
+        "fisher_p_Nhi": 0.287
+      },
+      {
+        "comparison": "OmniH2O vs GRU",
+        "diff_pp_reported": 1.25,
+        "newcombe95_pp_Nbase": [
+          0.67,
+          1.83
+        ],
+        "fisher_p_Nbase": 2.52e-05,
+        "newcombe95_pp_Nlo": [
+          0.65,
+          1.86
+        ],
+        "fisher_p_Nlo": 4.7e-05,
+        "newcombe95_pp_Nhi": [
+          0.69,
+          1.81
+        ],
+        "fisher_p_Nhi": 1.35e-05
+      },
+      {
+        "comparison": "OmniH2O vs LSTM",
+        "diff_pp_reported": 3.07,
+        "newcombe95_pp_Nbase": [
+          2.46,
+          3.69
+        ],
+        "fisher_p_Nbase": 1.08e-22,
+        "newcombe95_pp_Nlo": [
+          2.43,
+          3.71
+        ],
+        "fisher_p_Nlo": 3.73e-21,
+        "newcombe95_pp_Nhi": [
+          2.48,
+          3.67
+        ],
+        "fisher_p_Nhi": 3.12e-24
+      },
+      {
+        "comparison": "OmniH2O vs 22점",
+        "diff_pp_reported": -0.62,
+        "newcombe95_pp_Nbase": [
+          -1.16,
+          -0.08
+        ],
+        "fisher_p_Nbase": 0.0252,
+        "newcombe95_pp_Nlo": [
+          -1.18,
+          -0.06
+        ],
+        "fisher_p_Nlo": 0.0307,
+        "newcombe95_pp_Nhi": [
+          -1.14,
+          -0.1
+        ],
+        "fisher_p_Nhi": 0.0207
+      },
+      {
+        "comparison": "OmniH2O vs 선속도 입력",
+        "diff_pp_reported": 0.3,
+        "newcombe95_pp_Nbase": [
+          -0.26,
+          0.86
+        ],
+        "fisher_p_Nbase": 0.304,
+        "newcombe95_pp_Nlo": [
+          -0.28,
+          0.88
+        ],
+        "fisher_p_Nlo": 0.323,
+        "newcombe95_pp_Nhi": [
+          -0.24,
+          0.84
+        ],
+        "fisher_p_Nhi": 0.287
+      }
+    ]
+  },
+  "T1_implied_failed_mean_eg_mpjpe": {
+    "Privileged policy": 195.4,
+    "H2O [3]": 252.3,
+    "OmniH2O": 230.7,
+    "OmniH2O-History0": 236.7,
+    "OmniH2O-22points": 196.6
+  },
+  "T2_real_sensitivity": {
+    "assumed_n": 20,
+    "rows": [
+      {
+        "comparison": "OmniH2O vs H2O (Eg-mpjpe)",
+        "diff_mm": -39.39,
+        "welch_p_cv10": 3.04e-17,
+        "welch_p_cv20": 8.61e-10,
+        "welch_p_cv30": 2e-06,
+        "welch_p_cv50": 0.00136
+      },
+      {
+        "comparison": "OmniH2O vs MLP+linvel (Eg-mpjpe)",
+        "diff_mm": -2.99,
+        "welch_p_cv10": 0.0635,
+        "welch_p_cv20": 0.345,
+        "welch_p_cv30": 0.528,
+        "welch_p_cv50": 0.704
+      },
+      {
+        "comparison": "OmniH2O vs GRU+linvel (Eg-mpjpe)",
+        "diff_mm": -1.81,
+        "welch_p_cv10": 0.249,
+        "welch_p_cv20": 0.561,
+        "welch_p_cv30": 0.698,
+        "welch_p_cv50": 0.816
+      },
+      {
+        "comparison": "OmniH2O vs History0 (Eg-mpjpe)",
+        "diff_mm": -35.32,
+        "welch_p_cv10": 1.16e-16,
+        "welch_p_cv20": 3.25e-09,
+        "welch_p_cv30": 5.79e-06,
+        "welch_p_cv50": 0.00255
+      },
+      {
+        "comparison": "OmniH2O vs History50 (Eg-mpjpe)",
+        "diff_mm": -2.3,
+        "welch_p_cv10": 0.147,
+        "welch_p_cv20": 0.463,
+        "welch_p_cv30": 0.624,
+        "welch_p_cv50": 0.769
+      },
+      {
+        "comparison": "OmniH2O vs History5 (Eg-mpjpe)",
+        "diff_mm": -14.24,
+        "welch_p_cv10": 1.29e-09,
+        "welch_p_cv20": 0.000259,
+        "welch_p_cv30": 0.0104,
+        "welch_p_cv50": 0.114
+      },
+      {
+        "comparison": "OmniH2O vs LSTM (Eg-mpjpe)",
+        "diff_mm": -39.06,
+        "welch_p_cv10": 3.34e-17,
+        "welch_p_cv20": 9.51e-10,
+        "welch_p_cv30": 2.17e-06,
+        "welch_p_cv50": 0.00143
+      }
+    ],
+    "cv_at_p05_vs_MLP_linvel": 0.094,
+    "cv_at_p05_vs_H2O": 0.865
+  },
+  "T3_recompute_from_T17": {
+    "data/25%": {
+      "succ_sum_of_40": 16,
+      "succ_mean_per_10": 4.0,
+      "reported_succ_per_10": 4.0,
+      "succ_diff": 0.0,
+      "mse_mean_recomputed": 0.013,
+      "mse_reported": 0.013,
+      "mse_rel_diff_pct": 0.3
+    },
+    "data/50%": {
+      "succ_sum_of_40": 28,
+      "succ_mean_per_10": 7.0,
+      "reported_succ_per_10": 6.5,
+      "succ_diff": 0.5,
+      "mse_mean_recomputed": 0.00748,
+      "mse_reported": 0.00748,
+      "mse_rel_diff_pct": -0.0
+    },
+    "data/100%": {
+      "succ_sum_of_40": 32,
+      "succ_mean_per_10": 8.0,
+      "reported_succ_per_10": 8.0,
+      "succ_diff": 0.0,
+      "mse_mean_recomputed": 0.000525,
+      "mse_reported": 0.000525,
+      "mse_rel_diff_pct": -0.1
+    },
+    "obs_act/Si-O-Si-A": {
+      "succ_sum_of_40": 28,
+      "succ_mean_per_10": 7.0,
+      "reported_succ_per_10": 6.5,
+      "succ_diff": 0.5,
+      "mse_mean_recomputed": 0.000489,
+      "mse_reported": 0.000489,
+      "mse_rel_diff_pct": -0.0
+    },
+    "obs_act/Se-O-Se-A": {
+      "succ_sum_of_40": 35,
+      "succ_mean_per_10": 8.75,
+      "reported_succ_per_10": 8.75,
+      "succ_diff": 0.0,
+      "mse_mean_recomputed": 0.000991,
+      "mse_reported": 0.000991,
+      "mse_rel_diff_pct": 0.0
+    },
+    "obs_act/Si-O-Se-A": {
+      "succ_sum_of_40": 32,
+      "succ_mean_per_10": 8.0,
+      "reported_succ_per_10": 8.0,
+      "succ_diff": 0.0,
+      "mse_mean_recomputed": 0.000525,
+      "mse_reported": 0.000525,
+      "mse_rel_diff_pct": -0.1
+    },
+    "arch/BC": {
+      "succ_sum_of_40": 4,
+      "succ_mean_per_10": 1.0,
+      "reported_succ_per_10": 1.0,
+      "succ_diff": 0.0,
+      "mse_mean_recomputed": 0.00528,
+      "mse_reported": 0.00563,
+      "mse_rel_diff_pct": -6.2
+    },
+    "arch/DP-DDIM": {
+      "succ_sum_of_40": 31,
+      "succ_mean_per_10": 7.75,
+      "reported_succ_per_10": 7.75,
+      "succ_diff": 0.0,
+      "mse_mean_recomputed": 0.000718,
+      "mse_reported": 0.0019,
+      "mse_rel_diff_pct": -62.2
+    },
+    "arch/DP-DDPM": {
+      "succ_sum_of_40": 32,
+      "succ_mean_per_10": 8.0,
+      "reported_succ_per_10": 8.0,
+      "succ_diff": 0.0,
+      "mse_mean_recomputed": 0.000525,
+      "mse_reported": 0.000525,
+      "mse_rel_diff_pct": -0.1
+    }
+  },
+  "T3_tests": [
+    {
+      "comparison": "DP-DDPM 대 BC",
+      "succ_a": "32/40",
+      "succ_b": "4/40",
+      "diff_pp": 70.0,
+      "newcombe95_pp": [
+        50.3,
+        81.3
+      ],
+      "fisher_p": 1.99e-10,
+      "cmh_chi2": 41.61,
+      "cmh_p": 1.11e-10
+    },
+    {
+      "comparison": "DP-DDIM 대 BC",
+      "succ_a": "31/40",
+      "succ_b": "4/40",
+      "diff_pp": 67.5,
+      "newcombe95_pp": [
+        47.6,
+        79.3
+      ],
+      "fisher_p": 8.9e-10,
+      "cmh_chi2": 39.69,
+      "cmh_p": 2.98e-10
+    },
+    {
+      "comparison": "DP-DDPM 대 DP-DDIM",
+      "succ_a": "32/40",
+      "succ_b": "31/40",
+      "diff_pp": 2.5,
+      "newcombe95_pp": [
+        -15.4,
+        20.3
+      ],
+      "fisher_p": 1.0,
+      "cmh_chi2": 0.1,
+      "cmh_p": 0.755
+    },
+    {
+      "comparison": "Se-O-Se-A 대 Si-O-Si-A",
+      "succ_a": "35/40",
+      "succ_b": "28/40",
+      "diff_pp": 17.5,
+      "newcombe95_pp": [
+        -0.6,
+        34.5
+      ],
+      "fisher_p": 0.0993,
+      "cmh_chi2": 4.59,
+      "cmh_p": 0.0322
+    },
+    {
+      "comparison": "Si-O-Se-A 대 Si-O-Si-A",
+      "succ_a": "32/40",
+      "succ_b": "28/40",
+      "diff_pp": 10.0,
+      "newcombe95_pp": [
+        -9.0,
+        28.1
+      ],
+      "fisher_p": 0.439,
+      "cmh_chi2": 1.54,
+      "cmh_p": 0.215
+    },
+    {
+      "comparison": "100%데이터 대 25%데이터",
+      "succ_a": "32/40",
+      "succ_b": "16/40",
+      "diff_pp": 40.0,
+      "newcombe95_pp": [
+        18.7,
+        56.6
+      ],
+      "fisher_p": 0.000519,
+      "cmh_chi2": 16.21,
+      "cmh_p": 5.66e-05
+    },
+    {
+      "comparison": "100%데이터 대 50%데이터",
+      "succ_a": "32/40",
+      "succ_b": "28/40",
+      "diff_pp": 10.0,
+      "newcombe95_pp": [
+        -9.0,
+        28.1
+      ],
+      "fisher_p": 0.439,
+      "cmh_chi2": 1.42,
+      "cmh_p": 0.233
+    }
+  ],
+  "J_dataset": {
+    "frames_total": 73462,
+    "minutes_at_30hz": 40.8,
+    "minutes_per_task_at_30hz": {
+      "Catch-Release": 7.4,
+      "Squat": 4.7,
+      "Hammer-Catch": 7.1,
+      "RPS": 5.2,
+      "Boxing": 6.2,
+      "Basket-Pick-Place": 10.2
+    },
+    "text_claim_minutes": {
+      "Catch-Release": 5,
+      "Squat": 5,
+      "RPS": 5,
+      "Hammer-Catch": 10,
+      "Basket-Pick-Place": 10,
+      "Boxing": null
+    }
+  },
+  "dims": {
+    "표 4 privileged 합": 913,
+    "표 5 H2O 합": 138,
+    "표 6 OmniH2O 단일 스텝(3점)": 90,
+    "표 6 히스토리 1스텝": 63,
+    "표 12 22점 단일 스텝": 261,
+    "표 13 8점 단일 스텝": 135,
+    "표 14 선속도 단일 스텝": 93,
+    "표 14 선속도 히스토리 1스텝": 66,
+    "OmniH2O 총 (63×25 + 90)": 1665,
+    "22점 총 (63×25 + 261)": 1836,
+    "8점 총 (63×25 + 135)": 1710,
+    "선속도 총 (66×25 + 93)": 1743,
+    "Fig.3 표기 26프레임 (63×26 + 27)": 1665
+  }
+}
