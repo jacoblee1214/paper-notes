@@ -1,0 +1,290 @@
+{
+  "assumed_trials_per_suite": 500,
+  "checks": {
+    "K1_table3_rows": {
+      "pi05_sync": {
+        "avg_succ_recomputed": 96.4,
+        "avg_succ_reported": 96.4,
+        "qa_recomputed": 25.62,
+        "qa_reported": 25.62,
+        "resid_recomputed": 1.0,
+        "resid_reported": 1.0,
+        "speedup_vs_pi05sync_recomputed": 1.0,
+        "speedup_reported": 1.0
+      },
+      "oft_sync": {
+        "avg_succ_recomputed": 97.1,
+        "avg_succ_reported": 97.1,
+        "qa_recomputed": 16.9,
+        "qa_reported": 16.9,
+        "resid_recomputed": 1.055,
+        "resid_reported": 1.06,
+        "speedup_vs_pi05sync_recomputed": 1.516,
+        "speedup_reported": 1.52
+      },
+      "vlash_pi05": {
+        "avg_succ_recomputed": 96.6,
+        "avg_succ_reported": 96.6,
+        "qa_recomputed": 12.05,
+        "qa_reported": 12.05,
+        "resid_recomputed": 0.47,
+        "resid_reported": 0.47,
+        "speedup_vs_pi05sync_recomputed": 2.126,
+        "speedup_reported": 2.13
+      },
+      "vla_cache_oft": {
+        "avg_succ_recomputed": 97.375,
+        "avg_succ_reported": 97.4,
+        "qa_recomputed": 15.23,
+        "qa_reported": 15.24,
+        "resid_recomputed": 0.951,
+        "resid_reported": 0.95,
+        "speedup_vs_pi05sync_recomputed": 1.681,
+        "speedup_reported": 1.68
+      },
+      "srvla_pi05": {
+        "avg_succ_recomputed": 96.9,
+        "avg_succ_reported": 96.9,
+        "qa_recomputed": 9.59,
+        "qa_reported": 9.59,
+        "resid_recomputed": 0.374,
+        "resid_reported": 0.37,
+        "speedup_vs_pi05sync_recomputed": 2.672,
+        "speedup_reported": 2.67
+      },
+      "srvla_oft": {
+        "avg_succ_recomputed": 97.2,
+        "avg_succ_reported": 97.2,
+        "qa_recomputed": 13.27,
+        "qa_reported": 13.27,
+        "resid_recomputed": 0.829,
+        "resid_reported": 0.83,
+        "speedup_vs_pi05sync_recomputed": 1.931,
+        "speedup_reported": 1.93
+      }
+    },
+    "K2_claims": {
+      "srvla_pi05_vs_sync": 2.672,
+      "srvla_oft_vs_oft_sync": 1.274,
+      "srvla_pi05_vs_vlash": 1.257,
+      "srvla_oft_vs_vla_cache_oft": 1.148,
+      "srvla_pi05_success_gain_vs_sync_pp": 0.5
+    },
+    "K3_table4_means": {
+      "tau_img": 0.63,
+      "tau_p": 0.51,
+      "Cmax": 22.0,
+      "ke": 148.0,
+      "alpha_r": 0.0225,
+      "repair_rate": 35.98,
+      "kv_update": 20.48
+    },
+    "K4_spatial_repair_table2_vs_table4": {
+      "table2_full_repair": 31.68,
+      "table4_spatial": 31.68,
+      "table2_full_kv": 27.37,
+      "table4_spatial_kv": 27.37
+    },
+    "K5_delay_exposure": {
+      "srvla_exposed_ms": 26.41,
+      "text_says": 26.41,
+      "vlash_exposed_ms": 40.0,
+      "injected_ms": 40,
+      "srvla_exposed_fraction": 0.66
+    },
+    "K6_text_stall_vs_table3": {
+      "text_sync_ms": 139.72,
+      "table3_sync_ms": 128.11,
+      "text_full_recompute_ms": 60.44,
+      "text_selective_ms": 54.78,
+      "table3_srvla_pi05_ms": 47.95,
+      "note": "표 II 문단은 Spatial 기준으로 보이나 범위가 명시되지 않음. 재현 불가."
+    },
+    "K7_target_motion_speedups": {
+      "abstract_range": [
+        1.52,
+        1.93
+      ],
+      "table_values": "없음 (그림 5(c)에서만 확인 가능)",
+      "coincides_with_srvla_oft_table3": 1.93
+    }
+  },
+  "suite_tests": {
+    "srvla_pi05_vs_pi05_sync": {
+      "Spatial": {
+        "diff_pp": 0.0,
+        "ci95_pp": [
+          -1.95,
+          1.95
+        ],
+        "p_two_sided": 1.0
+      },
+      "Object": {
+        "diff_pp": 1.8,
+        "ci95_pp": [
+          0.16,
+          3.66
+        ],
+        "p_two_sided": 0.0277
+      },
+      "Goal": {
+        "diff_pp": 0.2,
+        "ci95_pp": [
+          -1.99,
+          2.4
+        ],
+        "p_two_sided": 0.8505
+      },
+      "Long": {
+        "diff_pp": 0.0,
+        "ci95_pp": [
+          -3.14,
+          3.14
+        ],
+        "p_two_sided": 1.0
+      },
+      "avg_of_4_suites": {
+        "diff_pp": 0.5,
+        "ci95_pp_approx": [
+          -0.61,
+          1.61
+        ],
+        "p_two_sided_approx": 0.3767
+      }
+    },
+    "srvla_pi05_vs_vlash": {
+      "Spatial": {
+        "diff_pp": 0.6,
+        "ci95_pp": [
+          -1.44,
+          2.68
+        ],
+        "p_two_sided": 0.5434
+      },
+      "Object": {
+        "diff_pp": -0.4,
+        "ci95_pp": [
+          -1.67,
+          0.75
+        ],
+        "p_two_sided": 0.4128
+      },
+      "Goal": {
+        "diff_pp": 1.6,
+        "ci95_pp": [
+          -0.76,
+          4.05
+        ],
+        "p_two_sided": 0.1745
+      },
+      "Long": {
+        "diff_pp": -0.6,
+        "ci95_pp": [
+          -3.68,
+          2.47
+        ],
+        "p_two_sided": 0.6962
+      },
+      "avg_of_4_suites": {
+        "diff_pp": 0.3,
+        "ci95_pp_approx": [
+          -0.79,
+          1.39
+        ],
+        "p_two_sided_approx": 0.59
+      }
+    },
+    "srvla_oft_vs_oft_sync": {
+      "Spatial": {
+        "diff_pp": 1.2,
+        "ci95_pp": [
+          -0.53,
+          3.06
+        ],
+        "p_two_sided": 0.1535
+      },
+      "Object": {
+        "diff_pp": -0.2,
+        "ci95_pp": [
+          -1.97,
+          1.55
+        ],
+        "p_two_sided": 0.8067
+      },
+      "Goal": {
+        "diff_pp": -0.3,
+        "ci95_pp": [
+          -2.28,
+          1.66
+        ],
+        "p_two_sided": 0.7491
+      },
+      "Long": {
+        "diff_pp": -0.3,
+        "ci95_pp": [
+          -3.23,
+          2.63
+        ],
+        "p_two_sided": 0.8372
+      },
+      "avg_of_4_suites": {
+        "diff_pp": 0.1,
+        "ci95_pp_approx": [
+          -0.93,
+          1.13
+        ],
+        "p_two_sided_approx": 0.8485
+      }
+    },
+    "srvla_oft_vs_vla_cache_oft": {
+      "Spatial": {
+        "diff_pp": 0.5,
+        "ci95_pp": [
+          -1.12,
+          2.19
+        ],
+        "p_two_sided": 0.5084
+      },
+      "Object": {
+        "diff_pp": 0.7,
+        "ci95_pp": [
+          -1.2,
+          2.67
+        ],
+        "p_two_sided": 0.4454
+      },
+      "Goal": {
+        "diff_pp": -0.7,
+        "ci95_pp": [
+          -2.63,
+          1.16
+        ],
+        "p_two_sided": 0.4348
+      },
+      "Long": {
+        "diff_pp": -1.2,
+        "ci95_pp": [
+          -4.04,
+          1.61
+        ],
+        "p_two_sided": 0.3928
+      },
+      "avg_of_4_suites": {
+        "diff_pp": -0.18,
+        "ci95_pp_approx": [
+          -1.18,
+          0.83
+        ],
+        "p_two_sided_approx": 0.7322
+      }
+    }
+  },
+  "derived": {
+    "n_per_arm_for_0.5pp_power80_base97": 18272,
+    "n_per_arm_for_1.0pp_power80_base97": 4568,
+    "r_stall_pi05_sync": 0.435,
+    "r_stall_srvla_pi05": 0.223,
+    "texec_ms_pi05_K5_30Hz": 166.67,
+    "note_r_stall": "식 (2) 근사. 논문은 Texec을 명시하지 않음. 30 Hz와 K=5를 가정한 값."
+  }
+}
