@@ -1,0 +1,537 @@
+{
+  "table1_domain_check": {
+    "Adroit": {
+      "n": 3,
+      "dp3_calc": 68.33,
+      "dp3_paper": 68.3,
+      "dp_calc": 31.67,
+      "dp_paper": 31.7
+    },
+    "Bi-DexHands": {
+      "n": 6,
+      "dp3_calc": 70.17,
+      "dp3_paper": 70.2,
+      "dp_calc": 61.33,
+      "dp_paper": 61.3
+    },
+    "DexArt": {
+      "n": 4,
+      "dp3_calc": 68.5,
+      "dp3_paper": 68.5,
+      "dp_calc": 49.0,
+      "dp_paper": 49.0
+    },
+    "DexDeform": {
+      "n": 6,
+      "dp3_calc": 87.83,
+      "dp3_paper": 87.8,
+      "dp_calc": 90.5,
+      "dp_paper": 90.5
+    },
+    "DexMV": {
+      "n": 2,
+      "dp3_calc": 99.5,
+      "dp3_paper": 99.5,
+      "dp_calc": 95.0,
+      "dp_paper": 95.0
+    },
+    "HORA": {
+      "n": 1,
+      "dp3_calc": 71.0,
+      "dp3_paper": 71.0,
+      "dp_calc": 49.0,
+      "dp_paper": 49.0
+    },
+    "MW-Easy": {
+      "n": 28,
+      "dp3_calc": 90.86,
+      "dp3_paper": 90.9,
+      "dp_calc": 83.57,
+      "dp_paper": 83.6
+    },
+    "MW-Medium": {
+      "n": 11,
+      "dp3_calc": 61.64,
+      "dp3_paper": 61.6,
+      "dp_calc": 31.09,
+      "dp_paper": 31.1
+    },
+    "MW-Hard": {
+      "n": 6,
+      "dp3_calc": 31.67,
+      "dp3_paper": 31.7,
+      "dp_calc": 9.0,
+      "dp_paper": 9.0
+    },
+    "MW-VeryHard": {
+      "n": 5,
+      "dp3_calc": 49.0,
+      "dp3_paper": 49.0,
+      "dp_calc": 26.6,
+      "dp_paper": 26.6
+    }
+  },
+  "table1_overall": {
+    "dp3_mean_calc": 74.361,
+    "dp3_mean_paper": 74.4,
+    "dp_mean_calc": 59.861,
+    "dp_mean_paper": 59.8,
+    "rel_improvement_from_calc_means_pct": 24.22,
+    "rel_improvement_from_paper_rounded_pct": 24.41,
+    "rel_improvement_paper_pct": 24.2,
+    "dp3_sd_ddof0": 29.91,
+    "dp3_sd_ddof1": 30.12,
+    "dp3_sd_paper": 29.9,
+    "dp_sd_ddof0": 35.87,
+    "dp_sd_ddof1": 36.12,
+    "dp_sd_paper": 35.9
+  },
+  "text_claims_72": {
+    "dp3_tasks_ge90": 35,
+    "dp_tasks_ge90": 26,
+    "paper_says": "DP3 nearly 30 (>=90%), DP fewer than 15",
+    "dp3_tasks_lt10": 1,
+    "dp3_lt10_names": [
+      "Push Back"
+    ],
+    "dp_tasks_lt10": 6,
+    "paper_says_lt10": "DP3 none below 10%; DP more than 10 tasks below 10%",
+    "dp3_zero_tasks": [
+      "Push Back"
+    ]
+  },
+  "paired_72": {
+    "mean_diff_pp": 14.5,
+    "boot95_mean_diff_pp": [
+      10.44,
+      19.11
+    ],
+    "boot95_rel_improvement_pct": [
+      15.6,
+      35.3
+    ],
+    "tasks_dp3_better": 52,
+    "tasks_dp_better": 4,
+    "ties": 16,
+    "sign_test_p": 0.0,
+    "wilcoxon_p": 1.61e-09,
+    "paired_t_p": 1.95e-08
+  },
+  "paired_72_excluding_metaworld": {
+    "n": 22,
+    "dp3_mean": 77.14,
+    "dp_mean": 65.5,
+    "wilcoxon_p": 0.00417
+  },
+  "table2_mean_check": {
+    "DP3": {
+      "calc": 74.4,
+      "paper": 74.4
+    },
+    "DP": {
+      "calc": 44.0,
+      "paper": 44.0
+    },
+    "BCRNN": {
+      "calc": 9.8,
+      "paper": 9.8
+    },
+    "BCRNN+3D": {
+      "calc": 14.5,
+      "paper": 14.5
+    },
+    "IBC": {
+      "calc": 5.0,
+      "paper": 5.0
+    },
+    "IBC+3D": {
+      "calc": 10.4,
+      "paper": 10.4
+    }
+  },
+  "table2_vs_table18_mismatch": {
+    "DP_table2_xvii": {
+      "Hammer": 48,
+      "Door": 50,
+      "Pen": 25,
+      "Assembly": 15,
+      "Disassemble": 43,
+      "Stick-Push": 63,
+      "Laptop": 69,
+      "Faucet": 23,
+      "Toilet": 58,
+      "Bucket": 46
+    },
+    "DP_table18": {
+      "Hammer": 15,
+      "Door": 37,
+      "Pen": 13
+    },
+    "note": "Table II/XVII의 DP 열과 Table XVIII의 DP 값이 Adroit 세 과제(Hammer, Door, Pen)에서 다름. 나머지 7개는 일치",
+    "dp10_mean_with_table18_values": 38.2,
+    "dp3_10_mean_table18": 72.0
+  },
+  "table17_simple_dp3": {
+    "mean_simple": 70.2,
+    "mean_dp3": 74.4,
+    "mean_dp_t17": 44.0,
+    "simple_minus_dp3_pp": -4.2,
+    "simple_minus_dp3_per_task": {
+      "Hammer": 0,
+      "Door": -4,
+      "Pen": 3,
+      "Assembly": -20,
+      "Disassemble": -19,
+      "Stick-Push": 0,
+      "Laptop": 1,
+      "Faucet": 0,
+      "Toilet": -1,
+      "Bucket": -2
+    }
+  },
+  "paired_10_table2": {
+    "mean_diff_pp": 30.4,
+    "paired_t_p": 0.0031,
+    "wilcoxon_p": 0.00769,
+    "tasks_dp3_better": 9,
+    "tasks_equal": 1
+  },
+  "paired_10_table18_values": {
+    "mean_diff_pp": 33.8,
+    "dp_mean": 38.2
+  },
+  "ablation_mean_check": {
+    "Table IV Oracle state": {
+      "calc": 76.83,
+      "paper": 76.8,
+      "ok": true
+    },
+    "Table IV Point cloud (DP3)": {
+      "calc": 78.33,
+      "paper": 78.3,
+      "ok": true
+    },
+    "Table IV Image": {
+      "calc": 40.67,
+      "paper": 40.7,
+      "ok": true
+    },
+    "Table IV Depth": {
+      "calc": 32.0,
+      "paper": 32.0,
+      "ok": true
+    },
+    "Table IV RGB-D": {
+      "calc": 34.67,
+      "paper": 34.7,
+      "ok": true
+    },
+    "Table IV Voxel": {
+      "calc": 32.33,
+      "paper": 32.3,
+      "ok": true
+    },
+    "Table V PointNet": {
+      "calc": 15.67,
+      "paper": 15.7,
+      "ok": true
+    },
+    "Table V PointNet++": {
+      "calc": 2.17,
+      "paper": 2.2,
+      "ok": true
+    },
+    "Table V PointNeXt": {
+      "calc": 2.33,
+      "paper": 2.3,
+      "ok": true
+    },
+    "Table V Point Transformer": {
+      "calc": 1.0,
+      "paper": 1.0,
+      "ok": true
+    },
+    "Table V PointNet++ pre": {
+      "calc": 6.83,
+      "paper": 6.8,
+      "ok": true
+    },
+    "Table V PointNeXt pre": {
+      "calc": 8.83,
+      "paper": 8.8,
+      "ok": true
+    },
+    "Table VII w/o cropping": {
+      "calc": 45.33,
+      "paper": 45.3,
+      "ok": true
+    },
+    "Table XV DP3 long horizon": {
+      "calc": 78.17,
+      "paper": 78.2,
+      "ok": true
+    },
+    "Table XV DP long horizon": {
+      "calc": 33.0,
+      "paper": 33.0,
+      "ok": true
+    },
+    "Table XV DP short horizon": {
+      "calc": 40.67,
+      "paper": 40.7,
+      "ok": true
+    }
+  },
+  "table8_real": {
+    "DP3": {
+      "success": 34,
+      "trials": 40,
+      "rate_pct": 85.0,
+      "wilson95_pct": [
+        70.9,
+        92.9
+      ],
+      "per_task_pct": [
+        90,
+        70,
+        80,
+        100
+      ],
+      "sd_across_tasks_pop": 11.2,
+      "sd_across_tasks_sample": 12.9,
+      "mean_across_tasks": 85.0
+    },
+    "DP": {
+      "success": 14,
+      "trials": 40,
+      "rate_pct": 35.0,
+      "wilson95_pct": [
+        22.1,
+        50.5
+      ],
+      "per_task_pct": [
+        0,
+        30,
+        70,
+        40
+      ],
+      "sd_across_tasks_pop": 25.0,
+      "sd_across_tasks_sample": 28.9,
+      "mean_across_tasks": 35.0
+    },
+    "DP-Depth": {
+      "success": 8,
+      "trials": 40,
+      "rate_pct": 20.0,
+      "wilson95_pct": [
+        10.5,
+        34.8
+      ],
+      "per_task_pct": [
+        40,
+        20,
+        10,
+        10
+      ],
+      "sd_across_tasks_pop": 12.2,
+      "sd_across_tasks_sample": 14.1,
+      "mean_across_tasks": 20.0
+    }
+  },
+  "table8_fisher": {
+    "DP3_vs_DP_overall_p": 8.9e-06,
+    "DP3_vs_Depth_overall_p": 6.32e-09,
+    "DP3_vs_DP_per_task_p": [
+      0.000119,
+      0.179,
+      1.0,
+      0.0108
+    ],
+    "power_note": "과제당 10회라 과제 단위 차이는 대부분 검정력이 낮음"
+  },
+  "generalization_tables": {
+    "IX spatial (Pour, 5 positions)": {
+      "DP3": {
+        "k": 4,
+        "n": 5,
+        "wilson95_pct": [
+          37.6,
+          96.4
+        ]
+      },
+      "DP": {
+        "k": 0,
+        "n": 5,
+        "wilson95_pct": [
+          -0.0,
+          43.4
+        ]
+      },
+      "DP-Depth": {
+        "k": 0,
+        "n": 5,
+        "wilson95_pct": [
+          -0.0,
+          43.4
+        ]
+      }
+    },
+    "X appearance (Drill, 5 colors)": {
+      "DP3": {
+        "k": 5,
+        "n": 5,
+        "wilson95_pct": [
+          56.6,
+          100.0
+        ]
+      },
+      "DP": {
+        "k": 0,
+        "n": 5,
+        "wilson95_pct": [
+          -0.0,
+          43.4
+        ]
+      },
+      "DP-Depth": {
+        "k": 0,
+        "n": 5,
+        "wilson95_pct": [
+          -0.0,
+          43.4
+        ]
+      }
+    },
+    "XI instance (Drill, 5 objects)": {
+      "DP3": {
+        "k": 5,
+        "n": 5,
+        "wilson95_pct": [
+          56.6,
+          100.0
+        ]
+      },
+      "DP": {
+        "k": 1,
+        "n": 5,
+        "wilson95_pct": [
+          3.6,
+          62.4
+        ]
+      },
+      "DP-Depth": {
+        "k": 1,
+        "n": 5,
+        "wilson95_pct": [
+          3.6,
+          62.4
+        ]
+      }
+    },
+    "XII view (Roll-Up, 3 views)": {
+      "DP3": {
+        "k": 3,
+        "n": 3,
+        "wilson95_pct": [
+          43.8,
+          100.0
+        ]
+      },
+      "DP": {
+        "k": 0,
+        "n": 3,
+        "wilson95_pct": [
+          0.0,
+          56.2
+        ]
+      },
+      "DP-Depth": {
+        "k": 0,
+        "n": 3,
+        "wilson95_pct": [
+          0.0,
+          56.2
+        ]
+      }
+    },
+    "XIII clutter (train color, 10)": {
+      "DP3": {
+        "k": 8,
+        "n": 10,
+        "wilson95_pct": [
+          49.0,
+          94.3
+        ]
+      },
+      "DP": {
+        "k": 6,
+        "n": 10,
+        "wilson95_pct": [
+          31.3,
+          83.2
+        ]
+      },
+      "DP3+PointNeXt": {
+        "k": 0,
+        "n": 10,
+        "wilson95_pct": [
+          -0.0,
+          27.8
+        ]
+      },
+      "DP3+color": {
+        "k": 8,
+        "n": 10,
+        "wilson95_pct": [
+          49.0,
+          94.3
+        ]
+      }
+    }
+  },
+  "generalization_fisher_p": {
+    "X_DP3_vs_DP": 0.00794,
+    "IX_DP3_vs_DP": 0.0476,
+    "XIII_DP3_vs_DP": 0.628,
+    "XI_DP3_vs_DP": 0.0476,
+    "XII_DP3_vs_DP": 0.1
+  },
+  "table14_safety": {
+    "DP": {
+      "mean_pct_calc": 32.5,
+      "counts_if_n10": [
+        9,
+        2,
+        2,
+        0
+      ]
+    },
+    "DP-Depth": {
+      "mean_pct_calc": 25.0,
+      "counts_if_n10": [
+        2,
+        3,
+        3,
+        2
+      ]
+    },
+    "DP3": {
+      "mean_pct_calc": 0.0,
+      "counts_if_n10": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "note": "논문은 분모를 밝히지 않음. 평균 32.5, 25.0, 0.0은 과제 4개 단순 평균과 일치하고 10회 가정과 맞음"
+  },
+  "table16_speed": {
+    "dp_fps": 12.3,
+    "dp3_fps": 12.7,
+    "simple_fps": 25.3,
+    "simple_over_dp3_pct": 99.2,
+    "dp3_over_dp_pct": 3.3,
+    "note": "논문 본문의 DP3 추론 속도는 DP보다 약 3% 빠름 (같은 장치 측정 조건 미상)"
+  }
+}
