@@ -1,0 +1,203 @@
+{
+  "fota_total": {
+    "sum": 3083452,
+    "paper": 3083452,
+    "match": true
+  },
+  "fota_share": {
+    "GelSight17 family": 0.489,
+    "ObjectFolder GelSight var2": 0.46
+  },
+  "params": {
+    "tiny": {
+      "paper_M": 12,
+      "ckpt_all_fp32_M": 22.8,
+      "ckpt_8enc_trunk_M": 16.2,
+      "ckpt_4enc_trunk_1pose_M": 11.6,
+      "enc_sizes_M": [
+        1.52
+      ],
+      "block_12D2_M": 0.442,
+      "trunk9_theory_M": 4.0
+    },
+    "small": {
+      "paper_M": 45,
+      "ckpt_all_fp32_M": 85.3,
+      "ckpt_8enc_trunk_M": 61.6,
+      "ckpt_4enc_trunk_1pose_M": 44.4,
+      "enc_sizes_M": [
+        5.7
+      ],
+      "block_12D2_M": 1.769,
+      "trunk9_theory_M": 15.9
+    },
+    "medium": {
+      "paper_M": 174,
+      "ckpt_all_fp32_M": 331.2,
+      "ckpt_8enc_trunk_M": 239.9,
+      "ckpt_4enc_trunk_1pose_M": 174.2,
+      "enc_sizes_M": [
+        22.01
+      ],
+      "block_12D2_M": 7.078,
+      "trunk9_theory_M": 63.7
+    },
+    "large": {
+      "paper_M": 308,
+      "ckpt_all_fp32_M": 735.8,
+      "ckpt_8enc_trunk_M": 574.8,
+      "ckpt_4enc_trunk_1pose_M": 308.1,
+      "enc_sizes_M": [
+        38.78,
+        76.57
+      ],
+      "block_12D2_M": 12.583,
+      "trunk9_theory_M": 113.2
+    }
+  },
+  "params_note": "논문 표 1의 파라미터 수는 '모든 인코더와 디코더' 포함이라고 적혀 있으나, 체크포인트의 인코더 8개와 포즈 디코더 4개를 모두 넣으면 medium 331M으로 맞지 않는다. 4개 인코더 + 트렁크 + 포즈 디코더 1개 조합이 네 크기 모두에서 논문 값과 1M 안에서 맞는다(가설).",
+  "insertion_counts_assumed": {
+    "none": {
+      "USB": 0,
+      "Switch": 2,
+      "VGA": 0
+    },
+    "scratch": {
+      "USB": 5,
+      "Switch": 5,
+      "VGA": 6
+    },
+    "T3": {
+      "USB": 8,
+      "Switch": 10,
+      "VGA": 9
+    }
+  },
+  "insertion_wilson": {
+    "none": {
+      "USB": [
+        -0.0,
+        0.204
+      ],
+      "Switch": [
+        0.037,
+        0.379
+      ],
+      "VGA": [
+        -0.0,
+        0.204
+      ]
+    },
+    "scratch": {
+      "USB": [
+        0.152,
+        0.583
+      ],
+      "Switch": [
+        0.152,
+        0.583
+      ],
+      "VGA": [
+        0.198,
+        0.643
+      ]
+    },
+    "T3": {
+      "USB": [
+        0.301,
+        0.752
+      ],
+      "Switch": [
+        0.417,
+        0.848
+      ],
+      "VGA": [
+        0.357,
+        0.802
+      ]
+    }
+  },
+  "insertion_fisher_per_part": {
+    "USB T3 vs scratch": 0.4621,
+    "USB T3 vs none": 0.0022,
+    "Switch T3 vs scratch": 0.1431,
+    "Switch T3 vs none": 0.0078,
+    "VGA T3 vs scratch": 0.4661,
+    "VGA T3 vs none": 0.0007
+  },
+  "insertion_pooled_T3_vs_scratch": {
+    "k_T3": 27,
+    "k_ref": 16,
+    "n_per_arm": 45,
+    "fisher_p": 0.0343
+  },
+  "insertion_pooled_T3_vs_none": {
+    "k_T3": 27,
+    "k_ref": 2,
+    "n_per_arm": 45,
+    "fisher_p": 0.0
+  },
+  "insertion_means": {
+    "none": 0.046,
+    "scratch": 0.345,
+    "T3": 0.594
+  },
+  "insertion_pp_diff": {
+    "T3_minus_scratch": 0.249,
+    "T3_minus_none": 0.548
+  },
+  "insertion_rel_gain": {
+    "T3_over_scratch": 0.722,
+    "T3_over_none": 12.0
+  },
+  "steps_read": {
+    "none_Switch": 23.5,
+    "scratch": {
+      "USB": 14.4,
+      "Switch": 14.3,
+      "VGA": 11.4
+    },
+    "T3": {
+      "USB": 15.5,
+      "Switch": 3.6,
+      "VGA": 8.7
+    }
+  },
+  "steps_T3_minus_scratch": {
+    "USB": 1.1,
+    "Switch": -10.7,
+    "VGA": -2.7
+  },
+  "caption_lowest_steps_check": "USB에서 T3 15.5 대 scratch 14.4: 캡션 '가장 낮은 평균 에피소드 길이'는 USB에서 성립하지 않음",
+  "masking_sensitivity": {
+    "n=330": {
+      "z": 1.53,
+      "p": 0.126,
+      "diff_95CI": [
+        -0.011,
+        0.091
+      ]
+    },
+    "n=660": {
+      "z": 2.16,
+      "p": 0.03,
+      "diff_95CI": [
+        0.004,
+        0.076
+      ]
+    },
+    "n=1000": {
+      "z": 2.66,
+      "p": 0.008,
+      "diff_95CI": [
+        0.011,
+        0.069
+      ]
+    }
+  },
+  "fig3a_reading_check": {
+    "median_abs_pp": 25.5,
+    "median_rel_gain": 0.52,
+    "note": "본문 '중앙값 24%'는 상대 증가가 아니라 %p 차이와 맞음 (판독 근사)"
+  }
+}
