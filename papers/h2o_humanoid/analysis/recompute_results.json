@@ -1,0 +1,537 @@
+{
+ "V1_implied_failure_means": {
+  "Privileged policy": {
+   "Eg-mpjpe": {
+    "fail_mean": 73.6,
+    "range": [
+     72.9,
+     74.3
+    ],
+    "ratio_fail_over_ok": 1.6,
+    "fail_gt_ok": true
+   },
+   "Empjpe": {
+    "fail_mean": 59.5,
+    "range": [
+     58.8,
+     60.2
+    ],
+    "ratio_fail_over_ok": 1.46,
+    "fail_gt_ok": true
+   },
+   "Eacc": {
+    "fail_mean": 16.9,
+    "range": [
+     16.2,
+     17.6
+    ],
+    "ratio_fail_over_ok": 3.25,
+    "fail_gt_ok": true
+   },
+   "Evel": {
+    "fail_mean": 17.2,
+    "range": [
+     16.6,
+     17.9
+    ],
+    "ratio_fail_over_ok": 2.78,
+    "fail_gt_ok": true
+   }
+  },
+  "H2O-reduced": {
+   "Eg-mpjpe": {
+    "fail_mean": 220.3,
+    "range": [
+     220.1,
+     220.5
+    ],
+    "ratio_fail_over_ok": 1.21,
+    "fail_gt_ok": true
+   },
+   "Empjpe": {
+    "fail_mean": 121.3,
+    "range": [
+     121.1,
+     121.4
+    ],
+    "ratio_fail_over_ok": 1.09,
+    "fail_gt_ok": true
+   },
+   "Eacc": {
+    "fail_mean": 20.5,
+    "range": [
+     20.3,
+     20.7
+    ],
+    "ratio_fail_over_ok": 6.84,
+    "fail_gt_ok": true
+   },
+   "Evel": {
+    "fail_mean": 20.3,
+    "range": [
+     20.1,
+     20.5
+    ],
+    "ratio_fail_over_ok": 2.5,
+    "fail_gt_ok": true
+   }
+  },
+  "H2O-w/o-sim2data": {
+   "Eg-mpjpe": {
+    "fail_mean": 205.2,
+    "range": [
+     204.8,
+     205.5
+    ],
+    "ratio_fail_over_ok": 1.26,
+    "fail_gt_ok": true
+   },
+   "Empjpe": {
+    "fail_mean": 97.5,
+    "range": [
+     97.3,
+     97.8
+    ],
+    "ratio_fail_over_ok": 1.04,
+    "fail_gt_ok": true
+   },
+   "Eacc": {
+    "fail_mean": 25.4,
+    "range": [
+     25.1,
+     25.7
+    ],
+    "ratio_fail_over_ok": 8.48,
+    "fail_gt_ok": true
+   },
+   "Evel": {
+    "fail_mean": 22.1,
+    "range": [
+     21.9,
+     22.4
+    ],
+    "ratio_fail_over_ok": 2.95,
+    "fail_gt_ok": true
+   }
+  },
+  "H2O": {
+   "Eg-mpjpe": {
+    "fail_mean": 208.1,
+    "range": [
+     207.7,
+     208.5
+    ],
+    "ratio_fail_over_ok": 1.38,
+    "fail_gt_ok": true
+   },
+   "Empjpe": {
+    "fail_mean": 99.3,
+    "range": [
+     99.0,
+     99.7
+    ],
+    "ratio_fail_over_ok": 1.12,
+    "fail_gt_ok": true
+   },
+   "Eacc": {
+    "fail_mean": 24.7,
+    "range": [
+     24.4,
+     25.1
+    ],
+    "ratio_fail_over_ok": 8.52,
+    "fail_gt_ok": true
+   },
+   "Evel": {
+    "fail_mean": 21.5,
+    "range": [
+     21.2,
+     21.9
+    ],
+    "ratio_fail_over_ok": 3.08,
+    "fail_gt_ok": true
+   }
+  }
+ },
+ "V2_dims": {
+  "proprio": 66,
+  "goal_full": 72,
+  "total_full": 138,
+  "goal_reduced": 24,
+  "total_reduced": 90,
+  "priv_self": 298,
+  "priv_task_1sample": 480,
+  "priv_total_1sample": 778,
+  "priv_total_3samples_as_shipped": 1738,
+  "paper": {
+   "full": 138,
+   "reduced": 90,
+   "privileged": 778
+  },
+  "code_readme": {
+   "H2O": 138,
+   "H2O_privileged_critic": 215
+  }
+ },
+ "V3_counts": {
+  "retargeted": 10000,
+  "privileged_success": 8550,
+  "removed": 1450,
+  "paper_text": "약 8.5k / 10k",
+  "amass_total_paper": "13k, 40 h",
+  "readme_retarget_log": 15886,
+  "note": "N=10000이면 85.5%는 8,550개로 본문 8.5k와 맞음. 13k 대 15,886은 같은 집합이 아니거나 필터 단계가 다름"
+ },
+ "V4_success_rate_inference": {
+  "ci": {
+   "Privileged": {
+    "rate": 85.5,
+    "lo": 84.8,
+    "hi": 86.18,
+    "half_width": 0.69
+   },
+   "H2O-reduced": {
+    "rate": 53.2,
+    "lo": 52.22,
+    "hi": 54.18,
+    "half_width": 0.98
+   },
+   "H2O-w/o-sim2data": {
+    "rate": 67.9,
+    "lo": 66.98,
+    "hi": 68.81,
+    "half_width": 0.91
+   },
+   "H2O": {
+    "rate": 72.5,
+    "lo": 71.62,
+    "hi": 73.37,
+    "half_width": 0.88
+   },
+   "0.1%": {
+    "rate": 52.0,
+    "lo": 51.02,
+    "hi": 52.98,
+    "half_width": 0.98
+   },
+   "1%": {
+    "rate": 58.8,
+    "lo": 57.83,
+    "hi": 59.76,
+    "half_width": 0.96
+   },
+   "10%": {
+    "rate": 61.3,
+    "lo": 60.34,
+    "hi": 62.25,
+    "half_width": 0.95
+   }
+  },
+  "diff": {
+   "H2O - H2O-w/o-sim2data": {
+    "diff_pp": 4.6,
+    "lo": 3.33,
+    "hi": 5.87,
+    "z": 7.1,
+    "p": 1.1472130603350976e-12
+   },
+   "H2O - H2O-reduced": {
+    "diff_pp": 19.3,
+    "lo": 17.98,
+    "hi": 20.61,
+    "z": 28.2,
+    "p": 1.7367558162588847e-175
+   },
+   "H2O - Privileged": {
+    "diff_pp": -13.0,
+    "lo": -14.11,
+    "hi": -11.88,
+    "z": -22.6,
+    "p": 8.813818110243849e-113
+   },
+   "H2O - 10%": {
+    "diff_pp": 11.2,
+    "lo": 9.9,
+    "hi": 12.49,
+    "z": 16.8,
+    "p": 1.478885327020517e-63
+   },
+   "10% - 1%": {
+    "diff_pp": 2.5,
+    "lo": 1.14,
+    "hi": 3.86,
+    "z": 3.6,
+    "p": 0.0003071509680262089
+   },
+   "1% - 0.1%": {
+    "diff_pp": 6.8,
+    "lo": 5.42,
+    "hi": 8.17,
+    "z": 9.7,
+    "p": 3.918050505964535e-22
+   },
+   "H2O-reduced - 0.1%": {
+    "diff_pp": 1.2,
+    "lo": -0.18,
+    "hi": 2.58,
+    "z": 1.7,
+    "p": 0.08925224784645265
+   },
+   "H2O-w/o-sim2data - 10%": {
+    "diff_pp": 6.6,
+    "lo": 5.28,
+    "hi": 7.92,
+    "z": 9.8,
+    "p": 1.68597351259256e-22
+   }
+  },
+  "h2o_vs_wo_sim2data_by_N": {
+   "500": [
+    -1.07,
+    10.23
+   ],
+   "1000": [
+    0.59,
+    8.59
+   ],
+   "2000": [
+    1.77,
+    7.42
+   ],
+   "5000": [
+    2.81,
+    6.39
+   ],
+   "10000": [
+    3.33,
+    5.87
+   ]
+  }
+ },
+ "V5_dataset_size_curve": {
+  "seqs_train": {
+   "0.1%": 8.55,
+   "1%": 85.5,
+   "10%": 855.0,
+   "100%": 8550.0
+  },
+  "step_gain_pp": {
+   "0.1% -> 1%": 6.8,
+   "1% -> 10%": 2.5,
+   "10% -> 100%": 11.2
+  },
+  "log10_slope_pp_per_decade": 6.4,
+  "r2": 0.939,
+  "empjpe": [
+   107.9,
+   96.4,
+   92.3,
+   91.7
+  ],
+  "succ": [
+   52.0,
+   58.8,
+   61.3,
+   72.5
+  ],
+  "note": "마지막 구간(10% -> 100%)이 +11.2%p로 가장 크고 중간 두 구간은 +6.8, +2.5. 로그 선형이 아니라 마지막에서 가속. 0.1%는 학습 시퀀스 약 9개인데 H2O-reduced(전체 데이터, 축소 목표 상태)와 성공률이 같은 수준(52.0 대 53.2).",
+  "empjpe_flat": "Empjpe는 10%(92.3)와 100%(91.7)가 사실상 같은데 성공률은 61.3에서 72.5로 +11.2%p. 성공률이 꼬리 시퀀스에 민감함을 시사"
+ },
+ "V6_mixture": {
+  "H2O": {
+   "removed_success=0.0": 84.8,
+   "removed_success=0.1": 83.1,
+   "removed_success=0.25": 80.6,
+   "removed_success=0.5": 76.3
+  },
+  "H2O-reduced": {
+   "removed_success=0.0": 62.2,
+   "removed_success=0.1": 60.5,
+   "removed_success=0.25": 58.0,
+   "removed_success=0.5": 53.7
+  },
+  "note": "정리 집합이 특권 정책이 성공한 시퀀스(85.5%)와 같다고 보면(필터와 표 III의 85.5%가 같은 평가라는 가정), 특권 정책의 정리 집합 성공률은 정의상 100%입니다. H2O가 지운 시퀀스를 하나도 못 맞춘다고 해도 정리 집합 성공률은 84.8%이므로, 정리 집합에서도 최소 15%는 실패합니다. 지운 시퀀스에서 일부 성공하면 정리 집합 성공률은 더 낮아집니다.",
+  "max_clean_success_pp": 84.8
+ },
+ "V7_reward_weights": {
+  "task_sum": 224,
+  "termination": 200,
+  "feet_air_time": 800,
+  "termination_over_task_sum": 0.893,
+  "note": "종료 벌점 200은 한 스텝 최대 과제 보상 합(224)보다 작습니다. 공식 코드는 모든 보상 척도에 dt(0.02)를 곱하므로 (legged_robot.py _prepare_reward_function) 표의 가중치가 dt 곱 전인지 후인지는 논문에 없습니다."
+ },
+ "V8_config_numbers": {
+  "paper": {
+   "push_v": 0.5,
+   "friction": [
+    0.2,
+    1.1
+   ],
+   "delay_ms": [
+    20,
+    60
+   ],
+   "term_dist": 0.5,
+   "rfi": 0.1
+  },
+  "code": {
+   "push_v": 1.0,
+   "friction": [
+    -0.6,
+    1.2
+   ],
+   "delay_steps": [
+    0,
+    3
+   ],
+   "dt_policy_ms": 20,
+   "term_dist": 1.5,
+   "rfi": 0.1
+  },
+  "code_delay_ms_support": [
+   0,
+   20,
+   40,
+   60
+  ],
+  "friction_range_len": {
+   "paper": 0.9,
+   "code": 1.8
+  },
+  "friction_negative_mass": 0.333,
+  "term_dist_ratio": 3.0,
+  "push_ratio": 2.0,
+  "note": "마찰 범위 [-0.6, 1.2]에서 음수 구간은 33%. PhysX가 음수를 어떻게 처리하는지는 확인하지 못함(이슈 #39에도 질문)."
+ },
+ "V9_reward_kernel_toy": {
+  "values": {
+   "joint_pos": {
+    "0.05": {
+     "paper_sum": 0.9882,
+     "paper_mean": 0.9994,
+     "code": 0.9932
+    },
+    "0.1": {
+     "paper_sum": 0.9536,
+     "paper_mean": 0.9975,
+     "code": 0.973
+    },
+    "0.2": {
+     "paper_sum": 0.827,
+     "paper_mean": 0.99,
+     "code": 0.8963
+    },
+    "0.4": {
+     "paper_sum": 0.4677,
+     "paper_mean": 0.9608,
+     "code": 0.6454
+    }
+   },
+   "body_pos": {
+    "0.02": {
+     "paper_sum": 0.9956,
+     "paper_mean": 0.9998,
+     "code_upper": 0.9956,
+     "code_lower": 0.9997
+    },
+    "0.05": {
+     "paper_sum": 0.9729,
+     "paper_mean": 0.9988,
+     "code_upper": 0.9726,
+     "code_lower": 0.9983
+    },
+    "0.1": {
+     "paper_sum": 0.8958,
+     "paper_mean": 0.995,
+     "code_upper": 0.8948,
+     "code_lower": 0.9934
+    },
+    "0.2": {
+     "paper_sum": 0.644,
+     "paper_mean": 0.9802,
+     "code_upper": 0.6412,
+     "code_lower": 0.9737
+    },
+    "0.5": {
+     "paper_sum": 0.0639,
+     "paper_mean": 0.8825,
+     "code_upper": 0.0622,
+     "code_lower": 0.8465
+    }
+   },
+   "body_vel": {
+    "0.05": {
+     "paper_sum": 0.5769,
+     "paper_mean": 0.9753,
+     "code": 0.9999
+    },
+    "0.1": {
+     "paper_sum": 0.1108,
+     "paper_mean": 0.9048,
+     "code": 0.9997
+    },
+    "0.3": {
+     "paper_sum": 0.0,
+     "paper_mean": 0.4066,
+     "code": 0.997
+    },
+    "1.0": {
+     "paper_sum": 0.0,
+     "paper_mean": 0.0,
+     "code": 0.9672
+    }
+   }
+  },
+  "half_reward_error": {
+   "joint_pos_rad": {
+    "paper_sum": 0.382,
+    "paper_mean": 1.665,
+    "code": 0.503
+   },
+   "body_pos_m_per_body": {
+    "paper_sum": 0.251,
+    "paper_mean": 1.177,
+    "code_upper": 0.25,
+    "code_lower": 1.02
+   },
+   "body_vel_m_s_per_body": {
+    "paper_sum": 0.056,
+    "paper_mean": 0.263,
+    "code": 4.56
+   }
+  },
+  "vel_half_error_ratio_code_over_paper_sum": 81.4,
+  "vel_half_error_ratio_code_over_paper_mean": 17.3,
+  "note": "논문 식의 노름을 몸체 합으로 읽으면 관절 위치(반감 오차 0.38 대 0.50 rad)와 상체 몸체 위치(0.251 대 0.25 m)는 코드와 같은 크기입니다. 속도 커널은 어느 해석으로도 코드가 17-81배 완만합니다(반감 오차 4.6 m/s). 코드의 속도 보상은 현실적인 오차 범위에서 거의 1에 붙어 있어 학습 신호가 약합니다."
+ },
+ "V10_seed_sensitivity": {
+  "diff_pp": 4.6,
+  "table": {
+   "sd=1.0,n=3": {
+    "t": 5.63,
+    "p": 0.0049
+   },
+   "sd=1.0,n=5": {
+    "t": 7.27,
+    "p": 0.0001
+   },
+   "sd=2.0,n=3": {
+    "t": 2.82,
+    "p": 0.048
+   },
+   "sd=2.0,n=5": {
+    "t": 3.64,
+    "p": 0.0066
+   },
+   "sd=3.0,n=3": {
+    "t": 1.88,
+    "p": 0.1336
+   },
+   "sd=3.0,n=5": {
+    "t": 2.42,
+    "p": 0.0416
+   }
+  },
+  "note": "시드 SD 1%p면 3시드에서도 p = 0.005, 2%p면 3시드 p = 0.048(경계), 3%p면 3시드 p = 0.13, 5시드 p = 0.04. 논문은 시드 수와 변동을 보고하지 않아 판단 불가."
+ }
+}
