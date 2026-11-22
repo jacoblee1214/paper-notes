@@ -1,0 +1,494 @@
+{
+  "table1_ci_asr": {
+    "Wiping": {
+      "ACT": {
+        "grasp_ci": [
+          0.433,
+          0.819
+        ],
+        "task_ci": [
+          0.299,
+          0.701
+        ]
+      },
+      "Diffusion Policy": {
+        "grasp_ci": [
+          0.531,
+          0.888
+        ],
+        "task_ci": [
+          0.387,
+          0.781
+        ]
+      },
+      "RISE": {
+        "grasp_ci": [
+          0.839,
+          1.0
+        ],
+        "task_ci": [
+          0.531,
+          0.888
+        ]
+      },
+      "RISE (force-token)": {
+        "grasp_ci": [
+          0.64,
+          0.948
+        ],
+        "task_ci": [
+          0.584,
+          0.919
+        ]
+      },
+      "RISE (force-concat)": {
+        "grasp_ci": [
+          0.839,
+          1.0
+        ],
+        "task_ci": [
+          0.433,
+          0.819
+        ]
+      },
+      "FoAR (3D-cls)": {
+        "grasp_ci": [
+          0.219,
+          0.613
+        ],
+        "task_ci": [
+          0.181,
+          0.567
+        ]
+      },
+      "FoAR": {
+        "grasp_ci": [
+          0.839,
+          1.0
+        ],
+        "task_ci": [
+          0.839,
+          1.0
+        ]
+      }
+    },
+    "Wiping (General)": {
+      "ACT": {
+        "grasp_ci": [
+          0.433,
+          0.819
+        ],
+        "task_ci": [
+          0.299,
+          0.701
+        ]
+      },
+      "Diffusion Policy": {
+        "grasp_ci": [
+          0.531,
+          0.888
+        ],
+        "task_ci": [
+          0.299,
+          0.701
+        ]
+      },
+      "RISE": {
+        "grasp_ci": [
+          0.699,
+          0.972
+        ],
+        "task_ci": [
+          0.584,
+          0.919
+        ]
+      },
+      "RISE (force-token)": {
+        "grasp_ci": [
+          0.699,
+          0.972
+        ],
+        "task_ci": [
+          0.584,
+          0.919
+        ]
+      },
+      "RISE (force-concat)": {
+        "grasp_ci": [
+          0.839,
+          1.0
+        ],
+        "task_ci": [
+          0.764,
+          0.991
+        ]
+      },
+      "FoAR (3D-cls)": {
+        "grasp_ci": [
+          0.219,
+          0.613
+        ],
+        "task_ci": [
+          0.219,
+          0.613
+        ]
+      },
+      "FoAR": {
+        "grasp_ci": [
+          0.839,
+          1.0
+        ],
+        "task_ci": [
+          0.839,
+          1.0
+        ]
+      }
+    },
+    "Peeling": {
+      "ACT": {
+        "grasp_ci": [
+          0.764,
+          0.991
+        ],
+        "task_ci": [
+          0.112,
+          0.469
+        ]
+      },
+      "Diffusion Policy": {
+        "grasp_ci": [
+          0.64,
+          0.948
+        ],
+        "task_ci": [
+          0.481,
+          0.855
+        ]
+      },
+      "RISE": {
+        "grasp_ci": [
+          0.839,
+          1.0
+        ],
+        "task_ci": [
+          0.299,
+          0.701
+        ]
+      },
+      "RISE (force-token)": {
+        "grasp_ci": [
+          0.764,
+          0.991
+        ],
+        "task_ci": [
+          0.531,
+          0.888
+        ]
+      },
+      "RISE (force-concat)": {
+        "grasp_ci": [
+          0.839,
+          1.0
+        ],
+        "task_ci": [
+          0.584,
+          0.919
+        ]
+      },
+      "FoAR (3D-cls)": {
+        "grasp_ci": [
+          0.764,
+          0.991
+        ],
+        "task_ci": [
+          0.219,
+          0.613
+        ]
+      },
+      "FoAR": {
+        "grasp_ci": [
+          0.839,
+          1.0
+        ],
+        "task_ci": [
+          0.839,
+          1.0
+        ]
+      }
+    }
+  },
+  "table1_tests": {
+    "Wiping": {
+      "score_vs_best_baseline": {
+        "baseline": "RISE (force-token)",
+        "diff": 0.3,
+        "t": 2.2,
+        "df": 33.2,
+        "p": 0.035
+      },
+      "score_vs_RISE": {
+        "baseline": "RISE",
+        "diff": 0.375,
+        "t": 2.73,
+        "df": 33.0,
+        "p": 0.0102
+      },
+      "task_ASR_fisher_vs_RISE": 0.0471,
+      "task_ASR_fisher_vs_best_baseline": 0.106,
+      "grasp_ASR_fisher_vs_RISE": 1.0
+    },
+    "Wiping (General)": {
+      "score_vs_best_baseline": {
+        "baseline": "RISE (force-concat)",
+        "diff": 0.175,
+        "t": 1.3,
+        "df": 35.5,
+        "p": 0.2036
+      },
+      "score_vs_RISE": {
+        "baseline": "RISE",
+        "diff": 0.35,
+        "t": 2.48,
+        "df": 34.4,
+        "p": 0.0181
+      },
+      "task_ASR_fisher_vs_RISE": 0.106,
+      "task_ASR_fisher_vs_best_baseline": 1.0,
+      "grasp_ASR_fisher_vs_RISE": 0.4872
+    },
+    "Peeling": {
+      "score_vs_best_baseline": {
+        "baseline": "RISE (force-concat)",
+        "diff": 0.232,
+        "t": 1.54,
+        "df": 37.2,
+        "p": 0.1332
+      },
+      "score_vs_RISE": {
+        "baseline": "RISE",
+        "diff": 0.379,
+        "t": 2.55,
+        "df": 37.5,
+        "p": 0.0149
+      },
+      "task_ASR_fisher_vs_RISE": 0.0004,
+      "task_ASR_fisher_vs_best_baseline": 0.106,
+      "grasp_ASR_fisher_vs_RISE": 1.0
+    }
+  },
+  "table1_holm_scores": [
+    {
+      "test": "T1 score Wiping FoAR vs ACT",
+      "p": 0.0,
+      "holm": 0.0
+    },
+    {
+      "test": "T1 score Wiping FoAR vs FoAR (3D-cls)",
+      "p": 0.0,
+      "holm": 0.0
+    },
+    {
+      "test": "T1 score Wiping (General) FoAR vs ACT",
+      "p": 0.0,
+      "holm": 0.0
+    },
+    {
+      "test": "T1 score Wiping (General) FoAR vs FoAR (3D-cls)",
+      "p": 0.0,
+      "holm": 0.0
+    },
+    {
+      "test": "T1 score Peeling FoAR vs ACT",
+      "p": 0.0,
+      "holm": 0.0
+    },
+    {
+      "test": "T1 score Wiping (General) FoAR vs Diffusion Policy",
+      "p": 0.0008,
+      "holm": 0.0104
+    },
+    {
+      "test": "T1 score Wiping FoAR vs Diffusion Policy",
+      "p": 0.0013,
+      "holm": 0.0156
+    },
+    {
+      "test": "T1 score Peeling FoAR vs FoAR (3D-cls)",
+      "p": 0.0015,
+      "holm": 0.0165
+    },
+    {
+      "test": "T1 score Wiping FoAR vs RISE (force-concat)",
+      "p": 0.0064,
+      "holm": 0.064
+    },
+    {
+      "test": "T1 score Wiping FoAR vs RISE",
+      "p": 0.0102,
+      "holm": 0.0918
+    },
+    {
+      "test": "T1 score Peeling FoAR vs RISE",
+      "p": 0.0149,
+      "holm": 0.1192
+    },
+    {
+      "test": "T1 score Peeling FoAR vs Diffusion Policy",
+      "p": 0.0176,
+      "holm": 0.1232
+    },
+    {
+      "test": "T1 score Wiping (General) FoAR vs RISE",
+      "p": 0.0181,
+      "holm": 0.1232
+    },
+    {
+      "test": "T1 score Wiping FoAR vs RISE (force-token)",
+      "p": 0.035,
+      "holm": 0.175
+    },
+    {
+      "test": "T1 score Wiping (General) FoAR vs RISE (force-token)",
+      "p": 0.0809,
+      "holm": 0.3236
+    },
+    {
+      "test": "T1 score Peeling FoAR vs RISE (force-token)",
+      "p": 0.0834,
+      "holm": 0.3236
+    },
+    {
+      "test": "T1 score Peeling FoAR vs RISE (force-concat)",
+      "p": 0.1332,
+      "holm": 0.3236
+    },
+    {
+      "test": "T1 score Wiping (General) FoAR vs RISE (force-concat)",
+      "p": 0.2036,
+      "holm": 0.3236
+    }
+  ],
+  "table2": {
+    "segments_welch_sd": {
+      "diff": 2.1,
+      "t": 6.14,
+      "p": 1.56e-05
+    },
+    "avg_norm_length_welch_sd": {
+      "diff": -0.374,
+      "t": -2.81,
+      "p": 0.0187
+    },
+    "place_asr_fisher": 0.1789,
+    "place_ci": {
+      "FoAR": [
+        0.397,
+        0.892
+      ],
+      "RISE": [
+        0.108,
+        0.603
+      ]
+    },
+    "oracle_segments": 5.0,
+    "ratio_segments": 2.17,
+    "ratio_avg_len": 0.486
+  },
+  "table3_tests": {
+    "100Hz, reactive only": {
+      "diff": 0.225,
+      "t": 1.69,
+      "df": 33.8,
+      "p": 0.1003,
+      "wipe_fisher": 0.2308
+    },
+    "100Hz, predictor only": {
+      "diff": 0.225,
+      "t": 1.69,
+      "df": 33.8,
+      "p": 0.1003,
+      "wipe_fisher": 0.106
+    },
+    "2Hz, predictor + reactive": {
+      "diff": 0.25,
+      "t": 1.86,
+      "df": 33.6,
+      "p": 0.0719,
+      "wipe_fisher": 0.2308
+    },
+    "10Hz, predictor + reactive": {
+      "diff": 0.075,
+      "t": 0.63,
+      "df": 36.7,
+      "p": 0.5327,
+      "wipe_fisher": 1.0
+    }
+  },
+  "table3_ci_wipe": {
+    "100Hz, reactive only": [
+      0.64,
+      0.948
+    ],
+    "100Hz, predictor only": [
+      0.584,
+      0.919
+    ],
+    "2Hz, predictor + reactive": [
+      0.64,
+      0.948
+    ],
+    "10Hz, predictor + reactive": [
+      0.839,
+      1.0
+    ],
+    "100Hz, predictor + reactive (FoAR)": [
+      0.839,
+      1.0
+    ]
+  },
+  "table4_tests": {
+    "RISE_RM_vs_original_score": {
+      "diff": 0.0,
+      "t": 0.0,
+      "df": 38.0,
+      "p": 1.0
+    },
+    "forcetoken_RM_vs_original_score": {
+      "diff": 0.0,
+      "t": 0.0,
+      "df": 38.0,
+      "p": 1.0
+    },
+    "forcetoken_RM_vs_RISE_RM_fisher_wipe": 0.0202,
+    "FoAR_RM_vs_RISE_RM_score": {
+      "diff": 0.3,
+      "t": 2.04,
+      "df": 36.3,
+      "p": 0.0485
+    },
+    "FoAR_RM_vs_RISE_RM_wipe_fisher": 0.0202,
+    "RISE_Move_vs_Original_score": {
+      "diff": 0.1,
+      "t": 0.62,
+      "df": 38.0,
+      "p": 0.5372
+    }
+  },
+  "consistency": {
+    "K_text_0.875_0.850_0.756_match_table1": true,
+    "K_tableIII_FoAR_equals_tableI_wiping": true,
+    "K_tableIV_original_equals_tableI_WG": true,
+    "K_tableIV_original_grasp_wipe_equal_tableI": true,
+    "K_forcetoken_RM_not_worse_than_original": true,
+    "K_force_concat_wiping_below_RISE": true,
+    "K_text_segments_ratio_over_2": true,
+    "K_score_granularity_n20_multiple_of_0.025": true,
+    "K_claim_forcetoken_struggles_in_RM_supported": false,
+    "K_claim_RISE_Move_worse_supported": false
+  },
+  "mde_scores_n20_sd0.33": 0.292,
+  "mde_scores_n20_sd0.40": 0.354,
+  "mde_scores_n10_sd0.40": 0.501,
+  "mde_rate_n20_p0.5": 0.443,
+  "mde_rate_n20_p0.9": 0.266
+}
