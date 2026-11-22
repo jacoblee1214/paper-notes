@@ -1,0 +1,190 @@
+{
+  "table1_delta_check": {
+    "mismatches": [],
+    "n_checked": 16
+  },
+  "table6_delta_check": {
+    "mismatches": [
+      {
+        "row": "w/o Universal Sensor Tokens",
+        "col": "Feel",
+        "calc_drop": 1.5,
+        "table_drop": 1.53
+      }
+    ],
+    "drops_calc": {
+      "w/o Text Modality": [
+        4.91,
+        1.6,
+        0.75,
+        0.5
+      ],
+      "w/o Vision Modality": [
+        6.27,
+        3.23,
+        1.5,
+        0.8
+      ],
+      "w/o Text in TacQuad": [
+        0.12,
+        0.34,
+        0.41,
+        0.11
+      ],
+      "w/o Stage 1": [
+        2.48,
+        1.91,
+        0.87,
+        -0.06
+      ],
+      "w/o Stage 2": [
+        12.18,
+        8.14,
+        3.12,
+        2.93
+      ],
+      "w/o Cross-Sensor Matching": [
+        0.28,
+        1.1,
+        0.37,
+        0.22
+      ],
+      "w/o Dynamic Perception": [
+        2.89,
+        1.25,
+        1.0,
+        0.32
+      ],
+      "w/o Universal Sensor Tokens": [
+        0.03,
+        1.5,
+        1.22,
+        0.62
+      ]
+    }
+  },
+  "seen_vs_unseen_ablation": {
+    "w/o Cross-Sensor Matching": {
+      "seen_mean_drop(TAG,Feel)": 0.69,
+      "unseen_mean_drop(OF1,OF2)": 0.295,
+      "largest_drop_dataset": "Feel"
+    },
+    "w/o Universal Sensor Tokens": {
+      "seen_mean_drop(TAG,Feel)": 0.765,
+      "unseen_mean_drop(OF1,OF2)": 0.92,
+      "largest_drop_dataset": "Feel"
+    }
+  },
+  "data_size": {
+    "table5_sum_k": 2909.5,
+    "table5_TAG_VisGel_Cloth_k": 1424,
+    "table1_first_row_cum_k": 996,
+    "table1_last_row_cum_k": 2427,
+    "table1_last_row_plus_tacquad_k": 2482,
+    "appendix_A1_total_frames": 2481703,
+    "tacquad_fine_plus_coarse": 72606,
+    "intro_tacquad_frames": 72606
+  },
+  "table2_uni_comparison": {
+    "TAG material": {
+      "UniTouch": 61.3,
+      "AnyTouch(same data)": 82.74,
+      "comparable": true
+    },
+    "TAG roughness": {
+      "UniTouch": null,
+      "AnyTouch(same data)": 86.01,
+      "comparable": false
+    },
+    "TAG hardness": {
+      "UniTouch": null,
+      "AnyTouch(same data)": 94.24,
+      "comparable": false
+    },
+    "Feel grasp": {
+      "UniTouch": 82.3,
+      "AnyTouch(same data)": 87.17,
+      "comparable": true
+    }
+  },
+  "table3_differences_pp": {
+    "OF1 AnyTouch(UniTouch data) - UniTouch": 5.2,
+    "OF1 AnyTouch(full) - UniTouch+": 2.37,
+    "OF2 AnyTouch(UniTouch data) - UniTouch(seen)": 0.47,
+    "OF2 AnyTouch(full) - UniTouch+": 0.73
+  },
+  "table7_rel_mse_reduction_pct": {
+    "GelSight Mini->DuraGel": 4.51,
+    "GelSight Mini->Tac3D": 9.58,
+    "DIGIT->Tac3D": 7.1
+  },
+  "binomial_sensitivity": {
+    "p=0.5,n=500": {
+      "ci95_halfwidth_pp": 4.38,
+      "min_detectable_diff_pp_unpaired": 8.85
+    },
+    "p=0.5,n=1000": {
+      "ci95_halfwidth_pp": 3.1,
+      "min_detectable_diff_pp_unpaired": 6.26
+    },
+    "p=0.5,n=2000": {
+      "ci95_halfwidth_pp": 2.19,
+      "min_detectable_diff_pp_unpaired": 4.43
+    },
+    "p=0.5,n=5000": {
+      "ci95_halfwidth_pp": 1.39,
+      "min_detectable_diff_pp_unpaired": 2.8
+    },
+    "p=0.5,n=10000": {
+      "ci95_halfwidth_pp": 0.98,
+      "min_detectable_diff_pp_unpaired": 1.98
+    },
+    "p=0.8,n=500": {
+      "ci95_halfwidth_pp": 3.51,
+      "min_detectable_diff_pp_unpaired": 7.08
+    },
+    "p=0.8,n=1000": {
+      "ci95_halfwidth_pp": 2.48,
+      "min_detectable_diff_pp_unpaired": 5.01
+    },
+    "p=0.8,n=2000": {
+      "ci95_halfwidth_pp": 1.75,
+      "min_detectable_diff_pp_unpaired": 3.54
+    },
+    "p=0.8,n=5000": {
+      "ci95_halfwidth_pp": 1.11,
+      "min_detectable_diff_pp_unpaired": 2.24
+    },
+    "p=0.8,n=10000": {
+      "ci95_halfwidth_pp": 0.78,
+      "min_detectable_diff_pp_unpaired": 1.58
+    }
+  },
+  "pouring_sensitivity": {
+    "tcrit_df18": 2.1009,
+    "rows": {
+      "AnyTouch dyn (FT) vs AnyTouch static (FT)": {
+        "delta_g": 0.89,
+        "max_sd_for_p_lt_0.05_g": 0.947
+      },
+      "AnyTouch static (FT) vs T3 (FT)": {
+        "delta_g": 0.12,
+        "max_sd_for_p_lt_0.05_g": 0.128
+      },
+      "AnyTouch dyn (Freeze) vs T3 (Freeze)": {
+        "delta_g": 1.52,
+        "max_sd_for_p_lt_0.05_g": 1.618
+      },
+      "AnyTouch static (Freeze) vs T3 (Freeze)": {
+        "delta_g": 0.14,
+        "max_sd_for_p_lt_0.05_g": 0.149
+      }
+    }
+  },
+  "clip_value_consistency": {
+    "TAG material 52.96 (T1,T2)": true,
+    "Feel 72.37 (T1,T2)": true,
+    "OF1 41.00 (T1,T3)": true,
+    "OF2 73.16 (T1,T3)": true
+  }
+}
