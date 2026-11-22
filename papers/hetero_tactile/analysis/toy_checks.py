@@ -5,7 +5,7 @@
 토이 2: Procrustes 교차 센서 검색(논문 그림 3)이 에피소드별 대응이 없고 객체 정보만 공유되는 합성 임베딩에서도
         R@1/R@5가 어느 정도 나오는지 본다. 객체 정보만 공유하는 경우와 에피소드 정보도 공유하는 경우를 비교한다.
 
-실행: .venv/bin/python analysis/toy_checks.py   (torch는 토이 1에만 쓴다. 없으면 토이 1을 건너뛴다)
+실행: python3 analysis/toy_checks.py   (torch는 토이 1에만 쓴다. 없으면 토이 1을 건너뛴다)
 """
 import json
 from pathlib import Path
