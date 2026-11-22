@@ -1,0 +1,753 @@
+{
+ "trials_per_cell": 150,
+ "checks": {
+  "non_integer_k": [],
+  "seed_std_feasibility": {
+   "ddof0": 16,
+   "ddof1": 109,
+   "n": 110
+  },
+  "avg_row": [
+   {
+    "model": "DP-T rand-obj",
+    "mean_of_task_means": 50.36,
+    "reported": 50.4,
+    "diff": -0.04,
+    "std_across_tasks": 30.3,
+    "reported_avg_std": 1.4
+   },
+   {
+    "model": "DP-T rand-full",
+    "mean_of_task_means": 20.0,
+    "reported": 20.0,
+    "diff": 0.0,
+    "std_across_tasks": 20.4,
+    "reported_avg_std": 1.4
+   },
+   {
+    "model": "DP-C rand-obj",
+    "mean_of_task_means": 47.57,
+    "reported": 47.6,
+    "diff": -0.03,
+    "std_across_tasks": 23.5,
+    "reported_avg_std": 2.0
+   },
+   {
+    "model": "DP-C rand-full",
+    "mean_of_task_means": 28.43,
+    "reported": 28.4,
+    "diff": 0.03,
+    "std_across_tasks": 23.5,
+    "reported_avg_std": 1.5
+   },
+   {
+    "model": "ACT rand-obj",
+    "mean_of_task_means": 35.44,
+    "reported": 35.5,
+    "diff": -0.06,
+    "std_across_tasks": 25.5,
+    "reported_avg_std": 2.0
+   },
+   {
+    "model": "ACT rand-full",
+    "mean_of_task_means": 22.67,
+    "reported": 22.7,
+    "diff": -0.03,
+    "std_across_tasks": 21.1,
+    "reported_avg_std": 1.3
+   },
+   {
+    "model": "pi05 rand-obj",
+    "mean_of_task_means": 54.07,
+    "reported": 54.1,
+    "diff": -0.03,
+    "std_across_tasks": 28.8,
+    "reported_avg_std": 1.8
+   },
+   {
+    "model": "pi05 rand-full",
+    "mean_of_task_means": 40.3,
+    "reported": 40.3,
+    "diff": 0.0,
+    "std_across_tasks": 25.9,
+    "reported_avg_std": 2.9
+   },
+   {
+    "model": "GR00T rand-obj",
+    "mean_of_task_means": 40.25,
+    "reported": 40.2,
+    "diff": 0.05,
+    "std_across_tasks": 31.2,
+    "reported_avg_std": 0.3
+   },
+   {
+    "model": "GR00T rand-full",
+    "mean_of_task_means": 30.55,
+    "reported": 30.5,
+    "diff": 0.05,
+    "std_across_tasks": 29.1,
+    "reported_avg_std": 1.1
+   }
+  ]
+ },
+ "wilson_cells_sample": [
+  {
+   "model": "DP-T rand-obj",
+   "task": "Unlock iPad /B",
+   "mean": 8.0,
+   "wilson95": [
+    4.6,
+    13.5
+   ]
+  },
+  {
+   "model": "DP-T rand-full",
+   "task": "Unlock iPad /B",
+   "mean": 2.0,
+   "wilson95": [
+    0.7,
+    5.7
+   ]
+  },
+  {
+   "model": "DP-C rand-obj",
+   "task": "Unlock iPad /B",
+   "mean": 52.0,
+   "wilson95": [
+    44.1,
+    59.8
+   ]
+  },
+  {
+   "model": "DP-C rand-full",
+   "task": "Unlock iPad /B",
+   "mean": 12.0,
+   "wilson95": [
+    7.7,
+    18.2
+   ]
+  },
+  {
+   "model": "ACT rand-obj",
+   "task": "Unlock iPad /B",
+   "mean": 9.3,
+   "wilson95": [
+    5.6,
+    15.1
+   ]
+  },
+  {
+   "model": "ACT rand-full",
+   "task": "Unlock iPad /B",
+   "mean": 0.7,
+   "wilson95": [
+    0.1,
+    3.7
+   ]
+  },
+  {
+   "model": "pi05 rand-obj",
+   "task": "Unlock iPad /B",
+   "mean": 36.0,
+   "wilson95": [
+    28.8,
+    43.9
+   ]
+  },
+  {
+   "model": "pi05 rand-full",
+   "task": "Unlock iPad /B",
+   "mean": 32.7,
+   "wilson95": [
+    25.7,
+    40.5
+   ]
+  },
+  {
+   "model": "GR00T rand-obj",
+   "task": "Unlock iPad /B",
+   "mean": 12.7,
+   "wilson95": [
+    8.3,
+    18.9
+   ]
+  },
+  {
+   "model": "GR00T rand-full",
+   "task": "Unlock iPad /B",
+   "mean": 0.0,
+   "wilson95": [
+    0.0,
+    2.5
+   ]
+  }
+ ],
+ "tests": {
+  "unlock_ipad_DPC_vs_pi05_rand_obj": {
+   "k": [
+    78,
+    54
+   ],
+   "p_fisher": 0.0074
+  },
+  "pinch_tongs_DPC_vs_pi05_rand_obj": {
+   "k": [
+    86,
+    36
+   ],
+   "p_fisher": 0.0
+  },
+  "pooled_pi05_rand-obj_vs_DP-T_rand-obj": {
+   "k": [
+    892,
+    831
+   ],
+   "rate": [
+    54.06,
+    50.36
+   ],
+   "p_fisher_pooled_caveat": 0.036514
+  },
+  "pooled_pi05_rand-full_vs_DP-T_rand-full": {
+   "k": [
+    665,
+    330
+   ],
+   "rate": [
+    40.3,
+    20.0
+   ],
+   "p_fisher_pooled_caveat": 0.0
+  },
+  "pooled_pi05_rand-obj_vs_DP-C_rand-obj": {
+   "k": [
+    892,
+    785
+   ],
+   "rate": [
+    54.06,
+    47.58
+   ],
+   "p_fisher_pooled_caveat": 0.000222
+  },
+  "pooled_GR00T_rand-obj_vs_pi05_rand-obj": {
+   "k": [
+    664,
+    892
+   ],
+   "rate": [
+    40.24,
+    54.06
+   ],
+   "p_fisher_pooled_caveat": 0.0
+  },
+  "sign_task_pi05_rand-obj_vs_DP-T_rand-obj": {
+   "pos": 7,
+   "neg": 4,
+   "ties": 0,
+   "p_two_sided": 0.548828125
+  },
+  "sign_task_pi05_rand-obj_vs_DP-C_rand-obj": {
+   "pos": 7,
+   "neg": 4,
+   "ties": 0,
+   "p_two_sided": 0.548828125
+  },
+  "sign_task_pi05_rand-obj_vs_ACT_rand-obj": {
+   "pos": 9,
+   "neg": 2,
+   "ties": 0,
+   "p_two_sided": 0.0654296875
+  },
+  "sign_task_pi05_rand-full_vs_DP-T_rand-full": {
+   "pos": 9,
+   "neg": 1,
+   "ties": 1,
+   "p_two_sided": 0.021484375
+  },
+  "rand_AH_vs_partial_AH_avg": {
+   "rand_AH": 53.6,
+   "partial_AH": 54.1,
+   "diff": -0.5
+  },
+  "seed_level_welch": {
+   "Unlock iPad /B_DPC_vs_pi05_rand_obj": {
+    "diff": 16.0,
+    "t": 1.91,
+    "df": 2.08
+   },
+   "Pinch Tongs_DPC_vs_pi05_rand_obj": {
+    "diff": 33.3,
+    "t": 6.13,
+    "df": 3.98
+   },
+   "Avg_pi05_vs_DPT_rand_obj": {
+    "diff": 3.7,
+    "t": 2.81,
+    "df": 3.77
+   },
+   "Avg_pi05_vs_DPT_rand_full": {
+    "diff": 20.3,
+    "t": 10.92,
+    "df": 2.88
+   }
+  }
+ },
+ "language_probe_fig7": {
+  "mean_js_log2": 0.023,
+  "max_js_log2": [
+   0.0403,
+   "4",
+   "one plus one"
+  ],
+  "nmi_sqrt": 0.0153,
+  "chi2_n150_per_row": 52.8,
+  "chi2_df": 30,
+  "note": "행 n=150 가정. 논문의 p=6.37e-3과 비교용"
+ },
+ "latency_vs_chunk_ms": {
+  "DP-T": {
+   "chunk_exec_ms": 1500.0,
+   "latency_1arm_2arm_ms": [
+    33.6,
+    36.1
+   ]
+  },
+  "DP-C": {
+   "chunk_exec_ms": 1433.0,
+   "latency_1arm_2arm_ms": [
+    37.7,
+    42.3
+   ]
+  },
+  "ACT": {
+   "chunk_exec_ms": 3333.0,
+   "latency_1arm_2arm_ms": [
+    7.0,
+    7.4
+   ]
+  },
+  "pi05": {
+   "chunk_exec_ms": 1000.0,
+   "latency_1arm_2arm_ms": [
+    85.1,
+    83.9
+   ]
+  },
+  "GR00T": {
+   "chunk_exec_ms": 1667.0,
+   "latency_1arm_2arm_ms": [
+    80.0,
+    90.0
+   ]
+  }
+ },
+ "v1_to_v2_changed_cells": {
+  "n": 31,
+  "cells": [
+   {
+    "table": "Table II",
+    "row": "Unlock iPad /B",
+    "col_index": 6,
+    "v1": [
+     12.0,
+     3.5
+    ],
+    "v2": [
+     36.0,
+     14.4
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Unlock iPad /B",
+    "col_index": 7,
+    "v1": [
+     0.0,
+     0.0
+    ],
+    "v2": [
+     32.7,
+     5.0
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Hanoi /B",
+    "col_index": 6,
+    "v1": [
+     15.3,
+     3.1
+    ],
+    "v2": [
+     23.3,
+     7.0
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Hanoi /B",
+    "col_index": 7,
+    "v1": [
+     15.3,
+     2.3
+    ],
+    "v2": [
+     33.3,
+     2.3
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Assembly /B",
+    "col_index": 6,
+    "v1": [
+     5.3,
+     1.2
+    ],
+    "v2": [
+     2.7,
+     2.3
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Assembly /B",
+    "col_index": 7,
+    "v1": [
+     0.0,
+     0.0
+    ],
+    "v2": [
+     0.7,
+     1.2
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Microwave /B",
+    "col_index": 6,
+    "v1": [
+     70.0,
+     3.5
+    ],
+    "v2": [
+     60.0,
+     5.3
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Microwave /B",
+    "col_index": 7,
+    "v1": [
+     54.7,
+     6.1
+    ],
+    "v2": [
+     69.3,
+     8.1
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Photograph /B",
+    "col_index": 6,
+    "v1": [
+     56.7,
+     5.0
+    ],
+    "v2": [
+     54.7,
+     8.1
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Photograph /B",
+    "col_index": 7,
+    "v1": [
+     21.3,
+     2.3
+    ],
+    "v2": [
+     23.3,
+     4.6
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Avg.",
+    "col_index": 6,
+    "v1": [
+     52.5,
+     1.4
+    ],
+    "v2": [
+     54.1,
+     1.8
+    ]
+   },
+   {
+    "table": "Table II",
+    "row": "Avg.",
+    "col_index": 7,
+    "v1": [
+     34.1,
+     2.9
+    ],
+    "v2": [
+     40.3,
+     2.9
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Hammer Nail",
+    "col_index": 1,
+    "v1": [
+     86.7,
+     3.1
+    ],
+    "v2": [
+     74.7,
+     2.3
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Click Mouse",
+    "col_index": 1,
+    "v1": [
+     80.7,
+     3.1
+    ],
+    "v2": [
+     48.0,
+     6.9
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Pick Bucket",
+    "col_index": 1,
+    "v1": [
+     83.3,
+     8.1
+    ],
+    "v2": [
+     60.7,
+     2.3
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Pinch Tongs",
+    "col_index": 1,
+    "v1": [
+     45.3,
+     6.1
+    ],
+    "v2": [
+     44.0,
+     15.9
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Fold Glasses",
+    "col_index": 1,
+    "v1": [
+     42.0,
+     6.0
+    ],
+    "v2": [
+     28.0,
+     4.0
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Water Plant",
+    "col_index": 1,
+    "v1": [
+     84.0,
+     4.0
+    ],
+    "v2": [
+     79.3,
+     9.5
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Unlock iPad /B",
+    "col_index": 1,
+    "v1": [
+     0.7,
+     1.2
+    ],
+    "v2": [
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Unlock iPad /B",
+    "col_index": 3,
+    "v1": [
+     0.7,
+     1.2
+    ],
+    "v2": [
+     34.0,
+     5.3
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Unlock iPad /B",
+    "col_index": 4,
+    "v1": [
+     2.7,
+     3.1
+    ],
+    "v2": [
+     36.0,
+     2.0
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Hanoi /B",
+    "col_index": 1,
+    "v1": [
+     6.0,
+     0.0
+    ],
+    "v2": [
+     4.7,
+     3.1
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Hanoi /B",
+    "col_index": 3,
+    "v1": [
+     11.3,
+     3.1
+    ],
+    "v2": [
+     22.7,
+     12.2
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Hanoi /B",
+    "col_index": 4,
+    "v1": [
+     20.7,
+     1.2
+    ],
+    "v2": [
+     20.7,
+     4.6
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Assembly /B",
+    "col_index": 1,
+    "v1": [
+     3.3,
+     2.3
+    ],
+    "v2": [
+     4.0,
+     5.3
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Assembly /B",
+    "col_index": 3,
+    "v1": [
+     2.7,
+     1.2
+    ],
+    "v2": [
+     5.3,
+     4.2
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Assembly /B",
+    "col_index": 4,
+    "v1": [
+     3.3,
+     4.2
+    ],
+    "v2": [
+     8.0,
+     5.3
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Avg.",
+    "col_index": 0,
+    "v1": [
+     33.2,
+     2.4
+    ],
+    "v2": [
+     28.2,
+     2.2
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Avg.",
+    "col_index": 1,
+    "v1": [
+     45.5,
+     1.5
+    ],
+    "v2": [
+     35.0,
+     2.8
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Avg.",
+    "col_index": 3,
+    "v1": [
+     46.5,
+     2.6
+    ],
+    "v2": [
+     52.5,
+     2.7
+    ]
+   },
+   {
+    "table": "Table IV",
+    "row": "Avg.",
+    "col_index": 4,
+    "v1": [
+     48.7,
+     0.9
+    ],
+    "v2": [
+     53.6,
+     1.9
+    ]
+   }
+  ]
+ }
+}
