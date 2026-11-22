@@ -1,0 +1,452 @@
+{
+  "simpler_google_overall": {
+    "RT-1 (Begin)": {
+      "VA_6cell_mean": 4.05,
+      "VA_reported": 4.2,
+      "VM_6cell_mean": 6.8,
+      "VM_reported": 6.8
+    },
+    "RT-1 (15%)": {
+      "VA_6cell_mean": 56.97,
+      "VA_reported": 56.2,
+      "VM_6cell_mean": 60.23,
+      "VM_reported": 60.2
+    },
+    "RT-1 (Converged)": {
+      "VA_6cell_mean": 63.98,
+      "VA_reported": 63.3,
+      "VM_6cell_mean": 74.57,
+      "VM_reported": 74.6
+    },
+    "RT-1-X": {
+      "VA_6cell_mean": 39.7,
+      "VA_reported": 39.6,
+      "VM_6cell_mean": 53.4,
+      "VM_reported": 53.4
+    },
+    "RT-2-X": {
+      "VA_6cell_mean": 66.1,
+      "VA_reported": 64.3,
+      "VM_6cell_mean": 60.65,
+      "VM_reported": 60.7
+    },
+    "Octo-Base": {
+      "VA_6cell_mean": 1.17,
+      "VA_reported": 1.1,
+      "VM_6cell_mean": 16.75,
+      "VM_reported": 16.8
+    },
+    "OpenVLA": {
+      "VA_6cell_mean": 41.08,
+      "VA_reported": 39.8,
+      "VM_6cell_mean": 27.73,
+      "VM_reported": 27.7
+    },
+    "RoboVLM (zero-shot)": {
+      "VA_6cell_mean": 46.3,
+      "VA_reported": 46.3,
+      "VM_6cell_mean": 56.33,
+      "VM_reported": 56.3
+    },
+    "RoboVLM (fine-tuning)": {
+      "VA_6cell_mean": 51.3,
+      "VA_reported": 51.3,
+      "VM_6cell_mean": 63.35,
+      "VM_reported": 63.4
+    },
+    "SpatialVLA (zero-shot)": {
+      "VA_6cell_mean": 68.77,
+      "VA_reported": 68.8,
+      "VM_6cell_mean": 71.85,
+      "VM_reported": 71.9
+    },
+    "SpatialVLA (fine-tuning)": {
+      "VA_6cell_mean": 70.03,
+      "VA_reported": 70.7,
+      "VM_6cell_mean": 75.12,
+      "VM_reported": 75.1
+    }
+  },
+  "widowx_simpler_overall": {
+    "RT-1-X": {
+      "successes": [
+        0,
+        3,
+        0,
+        0
+      ],
+      "overall_recomputed": 1.04,
+      "overall_reported": 1.1,
+      "diff": -0.06
+    },
+    "Octo-Base": {
+      "successes": [
+        9,
+        6,
+        0,
+        31
+      ],
+      "overall_recomputed": 15.97,
+      "overall_reported": 16.0,
+      "diff": -0.03
+    },
+    "Octo-Small": {
+      "successes": [
+        34,
+        7,
+        3,
+        41
+      ],
+      "overall_recomputed": 29.51,
+      "overall_reported": 30.0,
+      "diff": -0.49
+    },
+    "OpenVLA": {
+      "successes": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "overall_recomputed": 1.04,
+      "overall_reported": 1.0,
+      "diff": 0.04
+    },
+    "RoboVLM (zero-shot)": {
+      "successes": [
+        15,
+        18,
+        6,
+        0
+      ],
+      "overall_recomputed": 13.54,
+      "overall_reported": 13.5,
+      "diff": 0.04
+    },
+    "RoboVLM (fine-tuning)": {
+      "successes": [
+        21,
+        18,
+        9,
+        42
+      ],
+      "overall_recomputed": 31.25,
+      "overall_reported": 31.3,
+      "diff": -0.05
+    },
+    "SpatialVLA (zero-shot)": {
+      "successes": [
+        15,
+        15,
+        18,
+        51
+      ],
+      "overall_recomputed": 34.38,
+      "overall_reported": 34.4,
+      "diff": -0.02
+    },
+    "SpatialVLA (fine-tuning)": {
+      "successes": [
+        12,
+        18,
+        21,
+        72
+      ],
+      "overall_recomputed": 42.71,
+      "overall_reported": 42.7,
+      "diff": 0.01
+    }
+  },
+  "widowx_real_zeroshot": {
+    "SpatialVLA": {
+      "successes": 56,
+      "n": 77,
+      "rate": 72.7,
+      "wilson95": [
+        61.9,
+        81.4
+      ]
+    },
+    "OpenVLA": {
+      "successes": 40,
+      "n": 77,
+      "rate": 51.9,
+      "wilson95": [
+        41.0,
+        62.7
+      ]
+    },
+    "RoboVLM": {
+      "successes": 18,
+      "n": 77,
+      "rate": 23.4,
+      "wilson95": [
+        15.3,
+        34.0
+      ]
+    },
+    "Octo-Base": {
+      "successes": 15,
+      "n": 77,
+      "rate": 19.5,
+      "wilson95": [
+        12.2,
+        29.7
+      ]
+    },
+    "RT-1-X": {
+      "successes": 14,
+      "n": 77,
+      "rate": 18.2,
+      "wilson95": [
+        11.2,
+        28.2
+      ]
+    },
+    "p_SpatialVLA_vs_OpenVLA_fisher": 0.012293460060019952,
+    "p_SpatialVLA_vs_RoboVLM_fisher": 1.123744416384292e-09,
+    "p_SpatialVLA_vs_OpenVLA_mcnemar_note": "쌍 구조는 논문에 없음 (같은 시도 쌍 미보고), Fisher로만 계산",
+    "per_task_successes": {
+      "SpatialVLA": {
+        "microwave": 11,
+        "chili": 8,
+        "eggplant": 8,
+        "purple_white": 5,
+        "green_stove": 9,
+        "purple_sink": 10,
+        "carrot": 5
+      },
+      "OpenVLA": {
+        "microwave": 11,
+        "chili": 8,
+        "eggplant": 7,
+        "purple_white": 2,
+        "green_stove": 4,
+        "purple_sink": 6,
+        "carrot": 2
+      },
+      "RoboVLM": {
+        "microwave": 8,
+        "chili": 0,
+        "eggplant": 1,
+        "purple_white": 3,
+        "green_stove": 2,
+        "purple_sink": 1,
+        "carrot": 3
+      },
+      "Octo-Base": {
+        "microwave": 6,
+        "chili": 5,
+        "eggplant": 1,
+        "purple_white": 0,
+        "green_stove": 1,
+        "purple_sink": 2,
+        "carrot": 0
+      },
+      "RT-1-X": {
+        "microwave": 6,
+        "chili": 4,
+        "eggplant": 0,
+        "purple_white": 1,
+        "green_stove": 2,
+        "purple_sink": 0,
+        "carrot": 1
+      }
+    }
+  },
+  "table9_depth": {
+    "OpenVLA": {
+      "avg_recomputed": 54.55,
+      "avg_reported": 54.5,
+      "successes": 24,
+      "n": 44
+    },
+    "SpatialVLA w/o D": {
+      "avg_recomputed": 45.45,
+      "avg_reported": 45.4,
+      "successes": 20,
+      "n": 44
+    },
+    "SpatialVLA sensor D": {
+      "avg_recomputed": 70.45,
+      "avg_reported": 70.5,
+      "successes": 31,
+      "n": 44
+    },
+    "SpatialVLA zoe D": {
+      "avg_recomputed": 72.73,
+      "avg_reported": 72.7,
+      "successes": 32,
+      "n": 44
+    },
+    "p_zoeD_vs_OpenVLA_fisher": 0.12022764623279794,
+    "p_zoeD_vs_sensorD_fisher": 1.0
+  },
+  "franka": {
+    "single": {
+      "successes_total": {
+        "Diffusion Policy": 35,
+        "Octo": 29,
+        "OpenVLA": 32,
+        "SpatialVLA": 36
+      },
+      "n": {
+        "Diffusion Policy": 44,
+        "Octo": 44,
+        "OpenVLA": 44,
+        "SpatialVLA": 44
+      },
+      "mean_of_task_rates": {
+        "Diffusion Policy": 79.55,
+        "Octo": 65.91,
+        "OpenVLA": 72.73,
+        "SpatialVLA": 81.82
+      },
+      "p_SpatialVLA_vs_OpenVLA_fisher": 0.4459977263821635
+    },
+    "multi": {
+      "successes_total": {
+        "Diffusion Policy": 11,
+        "Octo": 14,
+        "OpenVLA": 23,
+        "SpatialVLA": 25
+      },
+      "n": {
+        "Diffusion Policy": 44,
+        "Octo": 44,
+        "OpenVLA": 44,
+        "SpatialVLA": 44
+      },
+      "mean_of_task_rates": {
+        "Diffusion Policy": 25.0,
+        "Octo": 31.82,
+        "OpenVLA": 52.27,
+        "SpatialVLA": 56.82
+      },
+      "p_SpatialVLA_vs_OpenVLA_fisher": 0.8306486344331028
+    },
+    "instruction": {
+      "successes_total": {
+        "Diffusion Policy": 4,
+        "Octo": 21,
+        "OpenVLA": 20,
+        "SpatialVLA": 30
+      },
+      "n": {
+        "Diffusion Policy": 55,
+        "Octo": 55,
+        "OpenVLA": 55,
+        "SpatialVLA": 55
+      },
+      "mean_of_task_rates": {
+        "Diffusion Policy": 7.27,
+        "Octo": 38.18,
+        "OpenVLA": 36.36,
+        "SpatialVLA": 54.55
+      },
+      "p_SpatialVLA_vs_OpenVLA_fisher": 0.08435350687744106,
+      "p_SpatialVLA_vs_OpenVLA_fisher_note": "같은 55회 기준"
+    }
+  },
+  "spatial_table15": {
+    "SpatialVLA_zero_shot_widowx_mean_success": 72.7,
+    "OpenVLA_zero_shot_widowx_success_rates": [
+      27.3,
+      45.5,
+      54.5
+    ],
+    "xi_vs_xv_stove_mismatch": {
+      "SpatialVLA": {
+        "table_XI": 9,
+        "table_XV": 8
+      },
+      "OpenVLA": {
+        "table_XI": 4,
+        "table_XV": 3
+      }
+    },
+    "text_73pct_is_grasp": "표 XV 플러시 과제 SpatialVLA 파지 72.72%, 성공 63.63% (본문 73%는 파지)"
+  },
+  "libero": {
+    "averages": {
+      "Diffusion Policy": {
+        "avg_recomputed": 72.4,
+        "avg_reported": 72.4
+      },
+      "Octo": {
+        "avg_recomputed": 75.08,
+        "avg_reported": 75.1
+      },
+      "OpenVLA": {
+        "avg_recomputed": 76.5,
+        "avg_reported": 76.5
+      },
+      "TraceVLA": {
+        "avg_recomputed": 74.75,
+        "avg_reported": 74.8
+      },
+      "SpatialVLA": {
+        "avg_recomputed": 78.05,
+        "avg_reported": 78.1
+      }
+    },
+    "z_tests": {
+      "Spatial_vs_OpenVLA_z_(SE_assumed)": 3.4,
+      "Spatial_vs_Octo_z_(SE_assumed)": 8.32,
+      "Spatial_vs_TraceVLA_z_(SE_assumed)": 6.69,
+      "Object_vs_OpenVLA_z_(SE_assumed)": 1.41,
+      "Object_vs_Octo_z_(SE_assumed)": 3.68,
+      "Object_vs_TraceVLA_z_(SE_assumed)": 5.83,
+      "Goal_vs_OpenVLA_z_(SE_assumed)": -0.51,
+      "Goal_vs_Octo_z_(SE_assumed)": -5.55,
+      "Goal_vs_TraceVLA_z_(SE_assumed)": 5.22,
+      "Long_vs_OpenVLA_z_(SE_assumed)": 1.1,
+      "Long_vs_Octo_z_(SE_assumed)": 3.11,
+      "Long_vs_TraceVLA_z_(SE_assumed)": 0.99
+    },
+    "note": "± 를 표준오차로 가정한 근사. 3시드 평균이라 자유도가 작아 z 근사는 과대평가 가능"
+  },
+  "table4_ablation": {
+    "delta_VA_grid_vs_linear_mean_of_Google_cols": 36.5,
+    "reported_VA": 36.5,
+    "delta_VM_grid_vs_linear_mean_of_Google_cols": 42.1,
+    "reported_VM": 42.1,
+    "delta_move_near_VM_1_vs_4": 31.2,
+    "reported_move_near": 31.2,
+    "delta_eggplant_success_1_vs_4": 33.3,
+    "reported_eggplant": 33.3,
+    "ego3d_drop_VA_pick_81.6_to_68.9": 12.7,
+    "ego3d_drop_VA_move_79.2_to_66.7": 12.5,
+    "note": "시행 수 24는 셀 값이 1/24 격자에 맞아서 가정. 단일 실행, 시드 분산 미보고",
+    "MDE_pp_at_n24_p0.5_80pct": 40.4
+  },
+  "table5_ablation": {
+    "move_near_VM_gain_fullFT_to_gaussian": 2.9,
+    "reported": 2.9,
+    "libero_gain_spatial_emb_adapt": {
+      "Spatial": 4.6,
+      "Object": 5.1,
+      "Goal": 2.2,
+      "Long": 5.4
+    },
+    "libero_reported_gains": {
+      "Spatial": 4.6,
+      "Object": 5.1,
+      "Goal": 2.2,
+      "Long": 5.4
+    }
+  },
+  "claims": {
+    "franka_single_SpatialVLA_avg_success": 81.8,
+    "franka_single_DP_avg_success": 79.5,
+    "franka_single_text": "SpatialVLA 82% 대 DP 81% (본문)",
+    "franka_instruction_SpatialVLA_avg": 54.5,
+    "franka_instruction_OpenVLA_avg": 36.4,
+    "franka_instruction_DP_avg": 7.3,
+    "franka_instruction_text": "본문: SpatialVLA가 OpenVLA보다 +12%, DP는 26%",
+    "franka_multi_SpatialVLA_avg": 56.8,
+    "franka_multi_text": "본문 57% (부록 표 XIII 평균 56.8%와 일치)",
+    "widowx_real_text_SOTA_all_7": "표 XI 전 과제 최고 주장, 그러나 close microwave는 OpenVLA와 동률(11/11)",
+    "widowx_real_text_fig5": "7개 과제 x 11회 = 77회 (본문과 일치)"
+  }
+}
