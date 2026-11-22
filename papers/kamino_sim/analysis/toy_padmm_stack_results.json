@@ -1,0 +1,323 @@
+{
+  "settings": {
+    "n_boxes": 5,
+    "tol": 1e-06,
+    "max_it": 20000,
+    "eta": 1e-05,
+    "rho": 1.0
+  },
+  "cases": [
+    {
+      "dist": "heavy_top",
+      "R": 1.0,
+      "lambda_exact": [
+        5.0,
+        4.0,
+        3.0,
+        2.0,
+        1.0
+      ],
+      "PGS_up": {
+        "iterations": 127,
+        "rel_err_vs_analytic": 2.4407986096264265e-06
+      },
+      "PGS_down": {
+        "iterations": 126,
+        "rel_err_vs_analytic": 2.6984805750807083e-06
+      },
+      "PADMM_plain_rho1_f64": {
+        "iterations": 261,
+        "rel_err_vs_analytic": 3.134170934160352e-06
+      },
+      "PADMM_nesterov_rho1_f64": {
+        "iterations": 53,
+        "rel_err_vs_analytic": 3.2204778021238668e-06
+      },
+      "PADMM_nesterov_rho1e-2_f64": {
+        "iterations": 9,
+        "rel_err_vs_analytic": 9.172300893922625e-07
+      },
+      "PADMM_nesterov_rho1e-4_f64": {
+        "iterations": 3,
+        "rel_err_vs_analytic": 1.0430201873745659e-06
+      },
+      "PADMM_nesterov_rho1e-2_f32": {
+        "iterations": 9,
+        "rel_err_vs_analytic": 1.239776611328125e-06
+      }
+    },
+    {
+      "dist": "heavy_top",
+      "R": 10.0,
+      "lambda_exact": [
+        14.0,
+        13.0,
+        12.0,
+        11.0,
+        10.0
+      ],
+      "PGS_up": {
+        "iterations": 569,
+        "rel_err_vs_analytic": 3.484291912389129e-06
+      },
+      "PGS_down": {
+        "iterations": 567,
+        "rel_err_vs_analytic": 3.640551480467634e-06
+      },
+      "PADMM_plain_rho1_f64": {
+        "iterations": 1142,
+        "rel_err_vs_analytic": 3.7997254408291984e-06
+      },
+      "PADMM_nesterov_rho1_f64": {
+        "iterations": 194,
+        "rel_err_vs_analytic": 3.3362297681297344e-06
+      },
+      "PADMM_nesterov_rho1e-2_f64": {
+        "iterations": 16,
+        "rel_err_vs_analytic": 2.4374386610657795e-07
+      },
+      "PADMM_nesterov_rho1e-4_f64": {
+        "iterations": 4,
+        "rel_err_vs_analytic": 6.668115619033545e-07
+      },
+      "PADMM_nesterov_rho1e-2_f32": {
+        "iterations": 19,
+        "rel_err_vs_analytic": 2.0435878208705356e-07
+      }
+    },
+    {
+      "dist": "heavy_top",
+      "R": 100.0,
+      "lambda_exact": [
+        104.0,
+        103.0,
+        102.0,
+        101.0,
+        100.0
+      ],
+      "PGS_up": {
+        "iterations": 5042,
+        "rel_err_vs_analytic": 3.934508285806915e-06
+      },
+      "PGS_down": {
+        "iterations": 5039,
+        "rel_err_vs_analytic": 3.96372409656902e-06
+      },
+      "PADMM_plain_rho1_f64": {
+        "iterations": 10087,
+        "rel_err_vs_analytic": 3.978525818536783e-06
+      },
+      "PADMM_nesterov_rho1_f64": {
+        "iterations": 914,
+        "rel_err_vs_analytic": 3.6339299830464492e-06
+      },
+      "PADMM_nesterov_rho1e-2_f64": {
+        "iterations": 40,
+        "rel_err_vs_analytic": 3.7542565112748716e-06
+      },
+      "PADMM_nesterov_rho1e-4_f64": {
+        "iterations": 5,
+        "rel_err_vs_analytic": 2.7807352454855252e-08
+      },
+      "PADMM_nesterov_rho1e-2_f32": {
+        "iterations": null,
+        "rel_err_vs_analytic": 6.822439340444712e-06
+      }
+    },
+    {
+      "dist": "heavy_top",
+      "R": 10000.0,
+      "lambda_exact": [
+        10004.0,
+        10003.0,
+        10002.0,
+        10001.0,
+        10000.0
+      ],
+      "PGS_up": {
+        "iterations": null,
+        "rel_err_vs_analytic": 0.6064965703514259
+      },
+      "PGS_down": {
+        "iterations": null,
+        "rel_err_vs_analytic": 0.6064965703514259
+      },
+      "PADMM_plain_rho1_f64": {
+        "iterations": null,
+        "rel_err_vs_analytic": 0.7787297583116687
+      },
+      "PADMM_nesterov_rho1_f64": {
+        "iterations": null,
+        "rel_err_vs_analytic": 0.7786739060793479
+      },
+      "PADMM_nesterov_rho1e-2_f64": {
+        "iterations": 938,
+        "rel_err_vs_analytic": 3.490304806757372e-06
+      },
+      "PADMM_nesterov_rho1e-4_f64": {
+        "iterations": 40,
+        "rel_err_vs_analytic": 2.4178772192982604e-06
+      },
+      "PADMM_nesterov_rho1e-2_f32": {
+        "iterations": null,
+        "rel_err_vs_analytic": 0.0007697116465913634
+      }
+    },
+    {
+      "dist": "heavy_bottom",
+      "R": 1.0,
+      "lambda_exact": [
+        5.0,
+        4.0,
+        3.0,
+        2.0,
+        1.0
+      ],
+      "PGS_up": {
+        "iterations": 127,
+        "rel_err_vs_analytic": 2.4407986096264265e-06
+      },
+      "PGS_down": {
+        "iterations": 126,
+        "rel_err_vs_analytic": 2.6984805750807083e-06
+      },
+      "PADMM_plain_rho1_f64": {
+        "iterations": 261,
+        "rel_err_vs_analytic": 3.134170934160352e-06
+      },
+      "PADMM_nesterov_rho1_f64": {
+        "iterations": 53,
+        "rel_err_vs_analytic": 3.2204778021238668e-06
+      },
+      "PADMM_nesterov_rho1e-2_f64": {
+        "iterations": 9,
+        "rel_err_vs_analytic": 9.172300893922625e-07
+      },
+      "PADMM_nesterov_rho1e-4_f64": {
+        "iterations": 3,
+        "rel_err_vs_analytic": 1.0430201873745659e-06
+      },
+      "PADMM_nesterov_rho1e-2_f32": {
+        "iterations": 9,
+        "rel_err_vs_analytic": 1.239776611328125e-06
+      }
+    },
+    {
+      "dist": "heavy_bottom",
+      "R": 10.0,
+      "lambda_exact": [
+        14.0,
+        4.0,
+        3.0,
+        2.0,
+        1.0
+      ],
+      "PGS_up": {
+        "iterations": 79,
+        "rel_err_vs_analytic": 2.040067652459803e-06
+      },
+      "PGS_down": {
+        "iterations": 79,
+        "rel_err_vs_analytic": 2.040067652459803e-06
+      },
+      "PADMM_plain_rho1_f64": {
+        "iterations": 165,
+        "rel_err_vs_analytic": 2.762152755662685e-06
+      },
+      "PADMM_nesterov_rho1_f64": {
+        "iterations": 70,
+        "rel_err_vs_analytic": 1.66398572901524e-06
+      },
+      "PADMM_nesterov_rho1e-2_f64": {
+        "iterations": 8,
+        "rel_err_vs_analytic": 3.6689157185370344e-07
+      },
+      "PADMM_nesterov_rho1e-4_f64": {
+        "iterations": 2,
+        "rel_err_vs_analytic": 6.539999783632717e-07
+      },
+      "PADMM_nesterov_rho1e-2_f32": {
+        "iterations": 8,
+        "rel_err_vs_analytic": 3.8014183375726217e-07
+      }
+    },
+    {
+      "dist": "heavy_bottom",
+      "R": 100.0,
+      "lambda_exact": [
+        104.0,
+        4.0,
+        3.0,
+        2.0,
+        1.0
+      ],
+      "PGS_up": {
+        "iterations": 63,
+        "rel_err_vs_analytic": 1.8899484549669191e-06
+      },
+      "PGS_down": {
+        "iterations": 63,
+        "rel_err_vs_analytic": 1.88994845500962e-06
+      },
+      "PADMM_plain_rho1_f64": {
+        "iterations": 131,
+        "rel_err_vs_analytic": 2.605643289645452e-06
+      },
+      "PADMM_nesterov_rho1_f64": {
+        "iterations": 57,
+        "rel_err_vs_analytic": 2.536576108406271e-06
+      },
+      "PADMM_nesterov_rho1e-2_f64": {
+        "iterations": 5,
+        "rel_err_vs_analytic": 2.3054136732980623e-06
+      },
+      "PADMM_nesterov_rho1e-4_f64": {
+        "iterations": 2,
+        "rel_err_vs_analytic": 9.003957934794471e-08
+      },
+      "PADMM_nesterov_rho1e-2_f32": {
+        "iterations": 5,
+        "rel_err_vs_analytic": 2.2558065561147837e-06
+      }
+    },
+    {
+      "dist": "heavy_bottom",
+      "R": 10000.0,
+      "lambda_exact": [
+        10004.0,
+        4.0,
+        3.0,
+        2.0,
+        1.0
+      ],
+      "PGS_up": {
+        "iterations": 34,
+        "rel_err_vs_analytic": 1.8359538743851055e-06
+      },
+      "PGS_down": {
+        "iterations": 34,
+        "rel_err_vs_analytic": 1.8359538743851055e-06
+      },
+      "PADMM_plain_rho1_f64": {
+        "iterations": 69,
+        "rel_err_vs_analytic": 2.436522184335259e-06
+      },
+      "PADMM_nesterov_rho1_f64": {
+        "iterations": 32,
+        "rel_err_vs_analytic": 2.379026561223562e-06
+      },
+      "PADMM_nesterov_rho1e-2_f64": {
+        "iterations": 4,
+        "rel_err_vs_analytic": 1.1740807285921492e-06
+      },
+      "PADMM_nesterov_rho1e-4_f64": {
+        "iterations": 2,
+        "rel_err_vs_analytic": 1.2898234578134564e-08
+      },
+      "PADMM_nesterov_rho1e-2_f32": {
+        "iterations": 4,
+        "rel_err_vs_analytic": 1.1531032118402638e-06
+      }
+    }
+  ]
+}
