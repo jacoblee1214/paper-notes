@@ -1,0 +1,483 @@
+{
+  "K1_calvin_avg_len": {
+    "sum_of_rates": 4.638,
+    "reported": 4.64,
+    "match_within_0.005": true
+  },
+  "K1_gr1_implied_mean_p2_4": 84.3,
+  "K2_unseen_avg_gr2_400": 66.3,
+  "K2_da_bg_plus_manip": 137.1,
+  "K3_data": {
+    "multitask_trajs_per_task_from_40k": 381.0,
+    "multitask_trajs_per_task_from_105x400": 42000,
+    "one_eighth_of_40k_per_task": 47.6,
+    "bin_pick_trajs_per_object": 1709.0,
+    "tokens_per_clip_50B_over_38M": 1316.0,
+    "pretrain_scale_ratio_38M_over_0.8M": 47.5
+  },
+  "K4_params_note": "기본 모델 230M 중 95M 학습 가능(3절). 3.5절은 같은 95M을 사전학습의 학습 가능 파라미터로 쓰고, 파인튜닝 때 사전학습 파라미터는 동결한다고 적었다. 파인튜닝의 학습 가능 수는 적히지 않았다.",
+  "B1_fig6_reading_check": [
+    {
+      "item": "Simple GR-2 50 vs 본문 73.9",
+      "read": 72.8,
+      "text": 73.9,
+      "diff": -1.1
+    },
+    {
+      "item": "Simple GR-2 400 vs 본문 97.7",
+      "read": 96.8,
+      "text": 97.7,
+      "diff": -0.9
+    },
+    {
+      "item": "Unseen Env GR-2 400 vs 본문 71.7",
+      "read": 71.2,
+      "text": 71.7,
+      "diff": -0.5
+    },
+    {
+      "item": "Unseen Env DA vs 본문 87.0",
+      "read": 86.4,
+      "text": 87.0,
+      "diff": -0.6
+    },
+    {
+      "item": "Unseen Avg DA vs 본문 74.7",
+      "read": 73.6,
+      "text": 74.7,
+      "diff": -1.1
+    }
+  ],
+  "B1_fig6_mean_bias": -0.84,
+  "B2_fig9_read_mean": {
+    "GR-1": 32.8,
+    "GR-2": 77.4,
+    "text_GR-1": 33.3,
+    "text_GR-2": 79.0
+  },
+  "C1_multitask_bin_sensitivity": [
+    {
+      "comparison": "Unseen BG: GR-2(400) 71.4 vs GR-1 32.8(읽기)",
+      "n_per_arm": 20,
+      "p1": 71.4,
+      "p2": 32.8,
+      "diff_pp": 35.0,
+      "newcombe95_pp": [
+        4.2,
+        57.9
+      ],
+      "z": 2.22,
+      "p": 0.0267
+    },
+    {
+      "comparison": "Unseen Env: GR-2(400) 71.7 vs GR-1 33.6(읽기)",
+      "n_per_arm": 20,
+      "p1": 71.7,
+      "p2": 33.6,
+      "diff_pp": 35.0,
+      "newcombe95_pp": [
+        4.2,
+        57.9
+      ],
+      "z": 2.22,
+      "p": 0.0267
+    },
+    {
+      "comparison": "Unseen Manip: GR-2(400) 55.8 vs GR-1 48.0(읽기)",
+      "n_per_arm": 20,
+      "p1": 55.8,
+      "p2": 48.0,
+      "diff_pp": 5.0,
+      "newcombe95_pp": [
+        -23.9,
+        32.8
+      ],
+      "z": 0.32,
+      "p": 0.7515
+    },
+    {
+      "comparison": "Unseen Manip: GR-2(50) 55.2 vs GR-2(400) 55.8(읽기)",
+      "n_per_arm": 20,
+      "p1": 55.2,
+      "p2": 55.8,
+      "diff_pp": 0.0,
+      "newcombe95_pp": [
+        -28.3,
+        28.3
+      ],
+      "z": 0.0,
+      "p": 1.0
+    },
+    {
+      "comparison": "Simple: GR-2(400) 97.7 vs DA 90.4(읽기)",
+      "n_per_arm": 20,
+      "p1": 97.7,
+      "p2": 90.4,
+      "diff_pp": 10.0,
+      "newcombe95_pp": [
+        -7.7,
+        30.1
+      ],
+      "z": 1.45,
+      "p": 0.1468
+    },
+    {
+      "comparison": "Bin picking 전체 Seen: GR-2 80.4 vs GR-1 48.4(읽기)",
+      "n_per_arm": 20,
+      "p1": 80.4,
+      "p2": 48.4,
+      "diff_pp": 30.0,
+      "newcombe95_pp": [
+        0.5,
+        53.4
+      ],
+      "z": 1.99,
+      "p": 0.0467
+    },
+    {
+      "comparison": "Bin picking Seen 80 vs Unseen 76 (읽기, 본문 '비슷하다')",
+      "n_per_arm": 20,
+      "p1": 80.4,
+      "p2": 76.3,
+      "diff_pp": 5.0,
+      "newcombe95_pp": [
+        -20.6,
+        29.9
+      ],
+      "z": 0.38,
+      "p": 0.705
+    },
+    {
+      "comparison": "Unseen BG: GR-2(400) 71.4 vs GR-1 32.8(읽기)",
+      "n_per_arm": 50,
+      "p1": 71.4,
+      "p2": 32.8,
+      "diff_pp": 40.0,
+      "newcombe95_pp": [
+        20.6,
+        55.4
+      ],
+      "z": 4.0,
+      "p": 0.0001
+    },
+    {
+      "comparison": "Unseen Env: GR-2(400) 71.7 vs GR-1 33.6(읽기)",
+      "n_per_arm": 50,
+      "p1": 71.7,
+      "p2": 33.6,
+      "diff_pp": 38.0,
+      "newcombe95_pp": [
+        18.5,
+        53.6
+      ],
+      "z": 3.81,
+      "p": 0.0001
+    },
+    {
+      "comparison": "Unseen Manip: GR-2(400) 55.8 vs GR-1 48.0(읽기)",
+      "n_per_arm": 50,
+      "p1": 55.8,
+      "p2": 48.0,
+      "diff_pp": 8.0,
+      "newcombe95_pp": [
+        -11.2,
+        26.4
+      ],
+      "z": 0.8,
+      "p": 0.4233
+    },
+    {
+      "comparison": "Unseen Manip: GR-2(50) 55.2 vs GR-2(400) 55.8(읽기)",
+      "n_per_arm": 50,
+      "p1": 55.2,
+      "p2": 55.8,
+      "diff_pp": 0.0,
+      "newcombe95_pp": [
+        -18.8,
+        18.8
+      ],
+      "z": 0.0,
+      "p": 1.0
+    },
+    {
+      "comparison": "Simple: GR-2(400) 97.7 vs DA 90.4(읽기)",
+      "n_per_arm": 50,
+      "p1": 97.7,
+      "p2": 90.4,
+      "diff_pp": 8.0,
+      "newcombe95_pp": [
+        -2.2,
+        19.5
+      ],
+      "z": 1.68,
+      "p": 0.0921
+    },
+    {
+      "comparison": "Bin picking 전체 Seen: GR-2 80.4 vs GR-1 48.4(읽기)",
+      "n_per_arm": 50,
+      "p1": 80.4,
+      "p2": 48.4,
+      "diff_pp": 32.0,
+      "newcombe95_pp": [
+        13.2,
+        47.8
+      ],
+      "z": 3.33,
+      "p": 0.0009
+    },
+    {
+      "comparison": "Bin picking Seen 80 vs Unseen 76 (읽기, 본문 '비슷하다')",
+      "n_per_arm": 50,
+      "p1": 80.4,
+      "p2": 76.3,
+      "diff_pp": 4.0,
+      "newcombe95_pp": [
+        -12.3,
+        20.0
+      ],
+      "z": 0.48,
+      "p": 0.6292
+    },
+    {
+      "comparison": "Unseen BG: GR-2(400) 71.4 vs GR-1 32.8(읽기)",
+      "n_per_arm": 100,
+      "p1": 71.4,
+      "p2": 32.8,
+      "diff_pp": 38.0,
+      "newcombe95_pp": [
+        24.4,
+        49.6
+      ],
+      "z": 5.38,
+      "p": 0.0
+    },
+    {
+      "comparison": "Unseen Env: GR-2(400) 71.7 vs GR-1 33.6(읽기)",
+      "n_per_arm": 100,
+      "p1": 71.7,
+      "p2": 33.6,
+      "diff_pp": 38.0,
+      "newcombe95_pp": [
+        24.4,
+        49.6
+      ],
+      "z": 5.38,
+      "p": 0.0
+    },
+    {
+      "comparison": "Unseen Manip: GR-2(400) 55.8 vs GR-1 48.0(읽기)",
+      "n_per_arm": 100,
+      "p1": 55.8,
+      "p2": 48.0,
+      "diff_pp": 8.0,
+      "newcombe95_pp": [
+        -5.8,
+        21.3
+      ],
+      "z": 1.13,
+      "p": 0.2575
+    },
+    {
+      "comparison": "Unseen Manip: GR-2(50) 55.2 vs GR-2(400) 55.8(읽기)",
+      "n_per_arm": 100,
+      "p1": 55.2,
+      "p2": 55.8,
+      "diff_pp": -1.0,
+      "newcombe95_pp": [
+        -14.5,
+        12.5
+      ],
+      "z": -0.14,
+      "p": 0.8869
+    },
+    {
+      "comparison": "Simple: GR-2(400) 97.7 vs DA 90.4(읽기)",
+      "n_per_arm": 100,
+      "p1": 97.7,
+      "p2": 90.4,
+      "diff_pp": 8.0,
+      "newcombe95_pp": [
+        1.3,
+        15.6
+      ],
+      "z": 2.38,
+      "p": 0.0172
+    },
+    {
+      "comparison": "Bin picking 전체 Seen: GR-2 80.4 vs GR-1 48.4(읽기)",
+      "n_per_arm": 100,
+      "p1": 80.4,
+      "p2": 48.4,
+      "diff_pp": 32.0,
+      "newcombe95_pp": [
+        18.9,
+        43.6
+      ],
+      "z": 4.71,
+      "p": 0.0
+    },
+    {
+      "comparison": "Bin picking Seen 80 vs Unseen 76 (읽기, 본문 '비슷하다')",
+      "n_per_arm": 100,
+      "p1": 80.4,
+      "p2": 76.3,
+      "diff_pp": 4.0,
+      "newcombe95_pp": [
+        -7.5,
+        15.4
+      ],
+      "z": 0.68,
+      "p": 0.4947
+    }
+  ],
+  "C2_single_wilson": [
+    {
+      "item": "GR-2(400) Unseen Manip 55.8",
+      "n": 20,
+      "wilson95_pp": [
+        34.2,
+        74.2
+      ]
+    },
+    {
+      "item": "GR-2(400) Unseen BG 71.4",
+      "n": 20,
+      "wilson95_pp": [
+        48.1,
+        85.5
+      ]
+    },
+    {
+      "item": "Bin GR-2 Avg 79.0",
+      "n": 20,
+      "wilson95_pp": [
+        58.4,
+        91.9
+      ]
+    },
+    {
+      "item": "GR-2(400) Unseen Manip 55.8",
+      "n": 50,
+      "wilson95_pp": [
+        42.3,
+        68.8
+      ]
+    },
+    {
+      "item": "GR-2(400) Unseen BG 71.4",
+      "n": 50,
+      "wilson95_pp": [
+        58.3,
+        82.5
+      ]
+    },
+    {
+      "item": "Bin GR-2 Avg 79.0",
+      "n": 50,
+      "wilson95_pp": [
+        67.0,
+        88.8
+      ]
+    },
+    {
+      "item": "GR-2(400) Unseen Manip 55.8",
+      "n": 100,
+      "wilson95_pp": [
+        46.2,
+        65.3
+      ]
+    },
+    {
+      "item": "GR-2(400) Unseen BG 71.4",
+      "n": 100,
+      "wilson95_pp": [
+        61.5,
+        79.0
+      ]
+    },
+    {
+      "item": "Bin GR-2 Avg 79.0",
+      "n": 100,
+      "wilson95_pp": [
+        70.0,
+        85.8
+      ]
+    }
+  ],
+  "C3_calvin": [
+    {
+      "tasks_in_row": 1,
+      "GR-2_pct": 98.6,
+      "wilson95_pp": [
+        97.7,
+        99.2
+      ],
+      "GR-1_pct": 94.9,
+      "diff_pp": 3.7,
+      "newcombe95_pp": [
+        2.2,
+        5.3
+      ],
+      "z": 4.67,
+      "p": 3.08e-06
+    },
+    {
+      "tasks_in_row": 2,
+      "GR-2_pct": 96.1,
+      "wilson95_pp": [
+        94.7,
+        97.1
+      ]
+    },
+    {
+      "tasks_in_row": 3,
+      "GR-2_pct": 93.1,
+      "wilson95_pp": [
+        91.4,
+        94.5
+      ]
+    },
+    {
+      "tasks_in_row": 4,
+      "GR-2_pct": 90.1,
+      "wilson95_pp": [
+        88.1,
+        91.8
+      ]
+    },
+    {
+      "tasks_in_row": 5,
+      "GR-2_pct": 85.9,
+      "wilson95_pp": [
+        83.6,
+        87.9
+      ],
+      "GR-1_pct": 73.1,
+      "diff_pp": 12.8,
+      "newcombe95_pp": [
+        9.3,
+        16.3
+      ],
+      "z": 7.09,
+      "p": 1.34e-12
+    }
+  ],
+  "D1_scaling": {
+    "params_M": [
+      30.0,
+      95.0,
+      312.0,
+      719.0
+    ],
+    "succ_read_pct": [
+      38.0,
+      42.0,
+      57.0,
+      60.0
+    ],
+    "slope_pp_per_doubling": 5.27,
+    "doublings_S_to_XL": 4.58,
+    "note": "네 점, 오차막대 없음, 읽기 오차 ±3 pp. 기울기는 참고용"
+  },
+  "E1_video_metrics": "본문에 FVD, PSNR, FID 등 정량 지표가 없음. 3.4절은 정성 시각화만 제시"
+}
