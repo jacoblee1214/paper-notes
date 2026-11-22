@@ -1,0 +1,577 @@
+{
+  "A_table7_counts": {
+    "GR00T N1.5": [
+      15,
+      8,
+      10,
+      16,
+      10,
+      18,
+      12
+    ],
+    "InternVL3": [
+      11,
+      11,
+      10,
+      10,
+      5,
+      11,
+      9
+    ],
+    "Being-H0": [
+      15,
+      13,
+      12,
+      17,
+      12,
+      20,
+      15
+    ]
+  },
+  "A_totals": {
+    "GR00T N1.5": [
+      89,
+      140
+    ],
+    "InternVL3": [
+      67,
+      140
+    ],
+    "Being-H0": [
+      104,
+      140
+    ]
+  },
+  "A_real_robot_tests": [
+    {
+      "vs": "InternVL3",
+      "per_task": [
+        {
+          "task": "Pick-Place-Toy Seen",
+          "being_h0": "15/20",
+          "other": "11/20",
+          "diff_pp": 20.0,
+          "newcombe95_pp": [
+            -9.1,
+            45.0
+          ],
+          "fisher_p": 0.3203,
+          "holm_p": 0.9608
+        },
+        {
+          "task": "Pick-Place-Toy Unseen",
+          "being_h0": "13/20",
+          "other": "11/20",
+          "diff_pp": 10.0,
+          "newcombe95_pp": [
+            -19.0,
+            36.8
+          ],
+          "fisher_p": 0.7475,
+          "holm_p": 1.0
+        },
+        {
+          "task": "Pick-Place-Toy Clutter",
+          "being_h0": "12/20",
+          "other": "10/20",
+          "diff_pp": 10.0,
+          "newcombe95_pp": [
+            -19.3,
+            37.0
+          ],
+          "fisher_p": 0.7512,
+          "holm_p": 1.0
+        },
+        {
+          "task": "Close-Toolbox",
+          "being_h0": "17/20",
+          "other": "10/20",
+          "diff_pp": 35.0,
+          "newcombe95_pp": [
+            5.9,
+            57.3
+          ],
+          "fisher_p": 0.0407,
+          "holm_p": 0.2445
+        },
+        {
+          "task": "Close-Lid",
+          "being_h0": "12/20",
+          "other": "5/20",
+          "diff_pp": 35.0,
+          "newcombe95_pp": [
+            4.4,
+            57.8
+          ],
+          "fisher_p": 0.0536,
+          "holm_p": 0.2678
+        },
+        {
+          "task": "Pour-Cup",
+          "being_h0": "20/20",
+          "other": "11/20",
+          "diff_pp": 45.0,
+          "newcombe95_pp": [
+            20.0,
+            65.8
+          ],
+          "fisher_p": 0.0012,
+          "holm_p": 0.0086
+        },
+        {
+          "task": "Unfold-Clothes",
+          "being_h0": "15/20",
+          "other": "9/20",
+          "diff_pp": 30.0,
+          "newcombe95_pp": [
+            -0.2,
+            53.6
+          ],
+          "fisher_p": 0.1053,
+          "holm_p": 0.4214
+        }
+      ],
+      "pooled": {
+        "being_h0": "104/140",
+        "other": "67/140",
+        "diff_pp": 26.4,
+        "newcombe95_pp": [
+          15.1,
+          36.8
+        ],
+        "fisher_p": 8.89e-06
+      }
+    },
+    {
+      "vs": "GR00T N1.5",
+      "per_task": [
+        {
+          "task": "Pick-Place-Toy Seen",
+          "being_h0": "15/20",
+          "other": "15/20",
+          "diff_pp": 0.0,
+          "newcombe95_pp": [
+            -25.9,
+            25.9
+          ],
+          "fisher_p": 1.0,
+          "holm_p": 1.0
+        },
+        {
+          "task": "Pick-Place-Toy Unseen",
+          "being_h0": "13/20",
+          "other": "8/20",
+          "diff_pp": 25.0,
+          "newcombe95_pp": [
+            -5.4,
+            49.8
+          ],
+          "fisher_p": 0.2049,
+          "holm_p": 1.0
+        },
+        {
+          "task": "Pick-Place-Toy Clutter",
+          "being_h0": "12/20",
+          "other": "10/20",
+          "diff_pp": 10.0,
+          "newcombe95_pp": [
+            -19.3,
+            37.0
+          ],
+          "fisher_p": 0.7512,
+          "holm_p": 1.0
+        },
+        {
+          "task": "Close-Toolbox",
+          "being_h0": "17/20",
+          "other": "16/20",
+          "diff_pp": 5.0,
+          "newcombe95_pp": [
+            -19.2,
+            28.7
+          ],
+          "fisher_p": 1.0,
+          "holm_p": 1.0
+        },
+        {
+          "task": "Close-Lid",
+          "being_h0": "12/20",
+          "other": "10/20",
+          "diff_pp": 10.0,
+          "newcombe95_pp": [
+            -19.3,
+            37.0
+          ],
+          "fisher_p": 0.7512,
+          "holm_p": 1.0
+        },
+        {
+          "task": "Pour-Cup",
+          "being_h0": "20/20",
+          "other": "18/20",
+          "diff_pp": 10.0,
+          "newcombe95_pp": [
+            -7.7,
+            30.1
+          ],
+          "fisher_p": 0.4872,
+          "holm_p": 1.0
+        },
+        {
+          "task": "Unfold-Clothes",
+          "being_h0": "15/20",
+          "other": "12/20",
+          "diff_pp": 15.0,
+          "newcombe95_pp": [
+            -13.4,
+            40.4
+          ],
+          "fisher_p": 0.5006,
+          "holm_p": 1.0
+        }
+      ],
+      "pooled": {
+        "being_h0": "104/140",
+        "other": "89/140",
+        "diff_pp": 10.7,
+        "newcombe95_pp": [
+          -0.1,
+          21.2
+        ],
+        "fisher_p": 0.0703
+      }
+    }
+  ],
+  "A_power": {
+    "n_per_arm_for_0.25_gap_at_0.5_vs_0.75": 58,
+    "n_per_arm_for_0.10_gap_at_0.6_vs_0.7": 356,
+    "n_per_arm_for_0.15_gap_at_0.55_vs_0.70": 163,
+    "note": "정규 근사, 양측 alpha 0.05, 검정력 0.8. 과제당 20회로는 0.25 차이도 확실히 잡기 어렵다."
+  },
+  "A_wilson_20_at_half": [
+    0.299,
+    0.701
+  ],
+  "B_unihand": {
+    "sum_inst_M": 166.4,
+    "table_inst_M": 166.5,
+    "sum_seq_K": 444.0,
+    "table_seq_K": 444.1,
+    "sum_frames_M": 123.9,
+    "table_frames_M": 130,
+    "sum_hours": 1154.8,
+    "table_hours": 1155,
+    "frame_rate_check_fps": {
+      "ARCTIC": 29.6,
+      "FPHA": 29.2,
+      "HoloAssist": 28.6,
+      "H2O": 29.0,
+      "HOI4D": 30.2,
+      "HOT3D": 29.9,
+      "OAKINK2": 29.7,
+      "TACO": 29.5,
+      "DexYCB": 30.0,
+      "Taste-Rob": 29.9,
+      "EgoDex": 30.0
+    },
+    "egodex_share_of_inst_pct": 42.4,
+    "egodex_share_of_hours_pct": 71.8,
+    "note": "프레임 합계는 표의 130M과 약 5% 어긋난다. 시간 합계와 시퀀스 합계는 맞는다."
+  },
+  "C_table3_scale_monotone_vg": {
+    "MPJPE head": {
+      "1B_8B_14B": [
+        9.71,
+        7.2,
+        6.87
+      ],
+      "monotone_in_scale": true
+    },
+    "MPJPE tail": {
+      "1B_8B_14B": [
+        17.21,
+        9.02,
+        8.11
+      ],
+      "monotone_in_scale": true
+    },
+    "MWTE head": {
+      "1B_8B_14B": [
+        8.25,
+        5.69,
+        5.19
+      ],
+      "monotone_in_scale": true
+    },
+    "MWTE tail": {
+      "1B_8B_14B": [
+        12.04,
+        8.11,
+        7.41
+      ],
+      "monotone_in_scale": true
+    },
+    "PA-MPJPE head": {
+      "1B_8B_14B": [
+        1.5,
+        1.09,
+        1.03
+      ],
+      "monotone_in_scale": true
+    },
+    "PA-MPJPE tail": {
+      "1B_8B_14B": [
+        1.55,
+        1.32,
+        1.2
+      ],
+      "monotone_in_scale": true
+    },
+    "M2T R@3 head": {
+      "1B_8B_14B": [
+        12.1,
+        15.9,
+        17.2
+      ],
+      "monotone_in_scale": true
+    },
+    "M2T R@3 tail": {
+      "1B_8B_14B": [
+        15.3,
+        18.7,
+        20.5
+      ],
+      "monotone_in_scale": true
+    },
+    "FID head": {
+      "1B_8B_14B": [
+        12.2,
+        11.5,
+        10.3
+      ],
+      "monotone_in_scale": true
+    },
+    "FID tail": {
+      "1B_8B_14B": [
+        13.1,
+        13.4,
+        11.8
+      ],
+      "monotone_in_scale": false
+    }
+  },
+  "C_table3_scale_monotone_ctx": {
+    "MPJPE head": {
+      "1B_8B_14B": [
+        8.73,
+        6.67,
+        6.21
+      ],
+      "monotone_in_scale": true
+    },
+    "MPJPE tail": {
+      "1B_8B_14B": [
+        11.34,
+        7.98,
+        7.33
+      ],
+      "monotone_in_scale": true
+    },
+    "MWTE head": {
+      "1B_8B_14B": [
+        7.88,
+        5.03,
+        4.89
+      ],
+      "monotone_in_scale": true
+    },
+    "MWTE tail": {
+      "1B_8B_14B": [
+        10.67,
+        6.93,
+        6.52
+      ],
+      "monotone_in_scale": true
+    },
+    "PA-MPJPE head": {
+      "1B_8B_14B": [
+        1.17,
+        0.9,
+        0.92
+      ],
+      "monotone_in_scale": false
+    },
+    "PA-MPJPE tail": {
+      "1B_8B_14B": [
+        1.38,
+        1.03,
+        1.04
+      ],
+      "monotone_in_scale": false
+    },
+    "M2T R@3 head": {
+      "1B_8B_14B": [
+        15.4,
+        19.7,
+        20.1
+      ],
+      "monotone_in_scale": true
+    },
+    "M2T R@3 tail": {
+      "1B_8B_14B": [
+        20.6,
+        21.4,
+        23.5
+      ],
+      "monotone_in_scale": true
+    },
+    "FID head": {
+      "1B_8B_14B": [
+        14.7,
+        10.1,
+        9.8
+      ],
+      "monotone_in_scale": true
+    },
+    "FID tail": {
+      "1B_8B_14B": [
+        15.6,
+        11.7,
+        10.1
+      ],
+      "monotone_in_scale": true
+    }
+  },
+  "C_table6_vs_base": {
+    "MANO-D114 + 4-Groups": {
+      "worse_than_base": 10,
+      "better_or_equal_than_base": 0,
+      "better_items": []
+    },
+    "MANO-D162 + 4-Groups": {
+      "worse_than_base": 8,
+      "better_or_equal_than_base": 1,
+      "better_items": [
+        "MWTE head"
+      ]
+    },
+    "MANO-D114 + Part-Level": {
+      "worse_than_base": 9,
+      "better_or_equal_than_base": 1,
+      "better_items": [
+        "FID tail"
+      ]
+    },
+    "w/o Translate": {
+      "worse_than_base": 9,
+      "better_or_equal_than_base": 1,
+      "better_items": [
+        "MWTE head"
+      ]
+    },
+    "w/o Context": {
+      "worse_than_base": 9,
+      "better_or_equal_than_base": 1,
+      "better_items": [
+        "FID head"
+      ]
+    },
+    "w/o Balance": {
+      "worse_than_base": 10,
+      "better_or_equal_than_base": 0,
+      "better_items": []
+    }
+  },
+  "C_table6_claims": {
+    "w/o Context: '모든 지표가 떨어진다' (본문 6.4.2)": "FID head 11.1 < 기준 11.5 (더 낫다). 전 지표 하락은 아님.",
+    "MANO-D162가 '일관되게 우수' (6.4.1)": "MANO-D114 + Part-Level은 FID tail 12.3 < 13.4 (기준보다 낫다). 전 항목 우위는 아님."
+  },
+  "D_table4_mpjpe_degradation": {
+    "values": {
+      "VG 1B": [
+        8.97,
+        9.96,
+        9.12,
+        11.24
+      ],
+      "VG 8B": [
+        7.55,
+        8.45,
+        8.21,
+        9.98
+      ],
+      "VG 14B": [
+        7.43,
+        8.39,
+        7.98,
+        9.72
+      ],
+      "CTX 1B": [
+        8.44,
+        9.52,
+        9.01,
+        10.98
+      ],
+      "CTX 8B": [
+        7.67,
+        8.2,
+        8.23,
+        9.67
+      ],
+      "CTX 14B": [
+        7.39,
+        8.51,
+        8.01,
+        9.45
+      ]
+    },
+    "increase_short_to_long_cm": {
+      "VG 1B": {
+        "head_increase": 0.15,
+        "tail_increase": 1.28
+      },
+      "VG 8B": {
+        "head_increase": 0.66,
+        "tail_increase": 1.53
+      },
+      "VG 14B": {
+        "head_increase": 0.55,
+        "tail_increase": 1.33
+      },
+      "CTX 1B": {
+        "head_increase": 0.57,
+        "tail_increase": 1.46
+      },
+      "CTX 8B": {
+        "head_increase": 0.56,
+        "tail_increase": 1.47
+      },
+      "CTX 14B": {
+        "head_increase": 0.62,
+        "tail_increase": 0.94
+      }
+    },
+    "note": "소프트 모드는 매 블록에서 GT와 평균을 낸 뒤 재양자화한다(코드 alpha 0.5). 표 3(블록 모드, 1초)과 직접 비교할 수 없다."
+  },
+  "E_table2": {
+    "gt_T2M_head_tail": [
+      33.5,
+      42.7
+    ],
+    "best_model_share_of_gt_pct": {
+      "head": 56.7,
+      "tail": 51.8
+    },
+    "monotone_T2M": true,
+    "note": "유효율은 시행 수가 보고되지 않아 신뢰구간을 계산할 수 없다."
+  },
+  "F_table5_mm": {
+    "default_D162_part_MPJPE_mm": 5.7,
+    "default_D162_part_PAMPJPE_mm": 1.3,
+    "note": "본문 '밀리미터 수준'은 MPJPE 약 5.7 mm, PA-MPJPE 약 1.3 mm로 맞다. 다만 같은 표에서 D114 part-level MPJPE 5.2 mm가 더 낮다."
+  },
+  "G_claim_checks": {
+    "highest_in_all_tasks": "Being-H0가 모든 과제에서 가장 높다(6.6) 대 Seen에서 GR00T와 0.75로 동점.",
+    "far_less_post_training_data": "6.6은 GR00T가 '훨씬 적은 후처리 데이터'로 졌다고 하지만 6.1.3은 모든 모델이 '동일한 후처리 데이터'를 받았다고 한다."
+  }
+}
