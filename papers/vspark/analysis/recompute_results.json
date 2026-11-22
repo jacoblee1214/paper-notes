@@ -1,0 +1,622 @@
+{
+  "checks": {
+    "V1_table1_avg": {
+      "ok": true,
+      "detail": "표 1 Avg 열과 4 suite 산술평균의 최대 차이 0.0075"
+    },
+    "V2_table3_avg": {
+      "ok": true,
+      "detail": "표 3 Avg 열과 8 suite 평균의 최대 차이 0.0050"
+    },
+    "V3_table2_avg": {
+      "ok": true,
+      "detail": {
+        "과제 단순 평균 τ 대 보고 Avg 차이": {
+          "EAGLE3": 0.005,
+          "P-EAGLE": 0.005,
+          "DFlash": 0.005,
+          "DFlash2": -0.0025,
+          "DSpark": -0.005,
+          "VSpark": 0.0075
+        },
+        "VSpark 단순 평균 τ": 3.9075,
+        "보고 값": 3.9
+      }
+    },
+    "V4_table1_best_everywhere": {
+      "ok": true,
+      "detail": {
+        "VSpark가 이기지 못한 셀": [],
+        "최소 격차": 0.06
+      }
+    },
+    "V5_table3_best_everywhere": {
+      "ok": true,
+      "detail": {
+        "VSpark가 이기지 못한 셀": []
+      }
+    },
+    "V6_table2_best_per_task": {
+      "ok": true,
+      "detail": {
+        "실패": []
+      }
+    },
+    "V7_text_vs_table1": {
+      "ok": true,
+      "detail": "본문 3.16→3.94, 2.26→2.72, 3.69→4.21, 2.33→2.99와 표 1 Avg 일치"
+    },
+    "V8_text_vs_table3": {
+      "ok": true,
+      "detail": "본문 2.92→3.56(π0), 3.08→3.73(ActionCodec)와 표 3 일치"
+    },
+    "V9_speedup_decomposition": {
+      "ok": true,
+      "detail": "spd 비 = τ 비 ÷ 사이클 비용 비 (항등식)"
+    },
+    "V10_table5_delta": {
+      "ok": true,
+      "detail": {
+        "Δ 불일치 행": [],
+        "Overall 차이 π0": 18.33,
+        "AC": 18.53
+      }
+    },
+    "V11_table7": {
+      "ok": true,
+      "detail": {
+        "pi0-FAST": {
+          "monotone": true,
+          "final_matches_table1": true,
+          "tau_increments": [
+            0.06,
+            0.65,
+            0.07
+          ],
+          "tau_increment_fraction_CR_FA_noise": null,
+          "largest_step": "FA"
+        },
+        "ActionCodec": {
+          "monotone": true,
+          "final_matches_table1": true,
+          "tau_increments": [
+            0.35,
+            0.06,
+            0.11
+          ],
+          "tau_increment_fraction_CR_FA_noise": null,
+          "largest_step": "CR"
+        }
+      }
+    },
+    "V12_chunk_count": {
+      "ok": true,
+      "detail": {
+        "pi0-FAST": 27548,
+        "StarVLA-FAST": 27548,
+        "ActionCodec": 27548
+      }
+    },
+    "V13_noise_units": {
+      "ok": true,
+      "detail": "표 A.6 σ와 config σ × (50 mm, 28.65°) 의 소수 둘째 자리 일치 18/18"
+    },
+    "V14_eval_counts": {
+      "ok": true,
+      "detail": {
+        "LIBERO": 2000,
+        "LIBERO-Plus": 10030,
+        "LIBERO-Pro": 10000,
+        "SimplerEnv": 96
+      }
+    },
+    "V15_table_b7_avg": {
+      "ok": true,
+      "detail": {
+        "pi0-FAST": {
+          "AR_bf16": -0.002,
+          "VS_bf16": 0.002,
+          "agree_bf16": -0.002,
+          "AR_fp32": 0.0,
+          "VS_fp32": 0.0
+        },
+        "ActionCodec": {
+          "AR_bf16": 0.0,
+          "VS_bf16": 0.0,
+          "agree_bf16": 0.0,
+          "AR_fp32": 0.0,
+          "VS_fp32": 0.0
+        }
+      }
+    },
+    "V16_table_b7_ci": {
+      "ok": true,
+      "detail": {
+        "pi0-FAST": {
+          "Goal": {
+            "sd_AR": 1.74,
+            "sd_VSpark": 0.999
+          },
+          "Spatial": {
+            "sd_AR": 0.83,
+            "sd_VSpark": 0.894
+          },
+          "Object": {
+            "sd_AR": 0.201,
+            "sd_VSpark": 0.266
+          },
+          "Long": {
+            "sd_AR": 0.612,
+            "sd_VSpark": 2.412
+          },
+          "Avg": {
+            "sd_AR": 0.431,
+            "sd_VSpark": 0.467
+          },
+          "Avg_difference": {
+            "diff_pp": -0.49,
+            "se": 0.284,
+            "df": 7.9,
+            "ci95": [
+              -1.15,
+              0.17
+            ],
+            "p_welch": 0.123,
+            "note": "두 방법 독립 가정 (쌍 정보 없음)"
+          }
+        },
+        "ActionCodec": {
+          "Goal": {
+            "sd_AR": 1.723,
+            "sd_VSpark": 1.305
+          },
+          "Spatial": {
+            "sd_AR": 0.862,
+            "sd_VSpark": 2.521
+          },
+          "Object": {
+            "sd_AR": 0.089,
+            "sd_VSpark": 0.258
+          },
+          "Long": {
+            "sd_AR": 0.87,
+            "sd_VSpark": 1.893
+          },
+          "Avg": {
+            "sd_AR": 0.596,
+            "sd_VSpark": 1.152
+          },
+          "Avg_difference": {
+            "diff_pp": 0.31,
+            "se": 0.58,
+            "df": 6.0,
+            "ci95": [
+              -1.11,
+              1.73
+            ],
+            "p_welch": 0.612,
+            "note": "두 방법 독립 가정 (쌍 정보 없음)"
+          }
+        }
+      }
+    },
+    "V17_fp32_identical": {
+      "ok": true,
+      "detail": "FP32에서 AR과 VSpark SR 동일, 일치율 100%"
+    },
+    "V18_table4_tests": {
+      "ok": true,
+      "detail": {
+        "SR 70.5 vs 91.7 p": 0.0
+      }
+    },
+    "V19_sign_counts": {
+      "ok": true,
+      "detail": {
+        "pi0-FAST": {
+          "tau_table3_wins": "8/8",
+          "tau_table1_wins": "4/4"
+        },
+        "StarVLA-FAST": {
+          "tau_table3_wins": "8/8",
+          "tau_table1_wins": "4/4"
+        },
+        "ActionCodec": {
+          "tau_table3_wins": "8/8",
+          "tau_table1_wins": "4/4"
+        },
+        "G0.5": {
+          "tau_table3_wins": "8/8",
+          "tau_table1_wins": "4/4"
+        }
+      }
+    },
+    "V20_text_table3_speedups": {
+      "ok": true,
+      "detail": "본문 평균 속도 향상과 표 3 일치"
+    },
+    "V21_text_table2": {
+      "ok": true,
+      "detail": "본문 일치"
+    },
+    "V22_sr_source": {
+      "ok": true,
+      "detail": {
+        "table4_pi0_SR": 91.7,
+        "tableB7_pi0_AR_bf16_avg": 92.71,
+        "tableB7_pi0_AR_fp32_seed0": 92.1,
+        "note": "표 4의 SR이 어느 실행인지 본문에 없음 (표 B.7과 1.0pp 차이)"
+      }
+    }
+  },
+  "implied_cycle_cost": {
+    "EAGLE3": {
+      "pi0-FAST": 2.52,
+      "StarVLA-FAST": 1.96,
+      "ActionCodec": 2.45,
+      "G0.5": 2.88
+    },
+    "P-EAGLE": {
+      "pi0-FAST": 2.01,
+      "StarVLA-FAST": 1.65,
+      "ActionCodec": 1.96,
+      "G0.5": 2.23
+    },
+    "DFlash": {
+      "pi0-FAST": 1.68,
+      "StarVLA-FAST": 1.38,
+      "ActionCodec": 1.77,
+      "G0.5": 1.85
+    },
+    "DFlash2": {
+      "pi0-FAST": 2.01,
+      "StarVLA-FAST": 1.51,
+      "ActionCodec": 1.99,
+      "G0.5": 2.22
+    },
+    "DSpark": {
+      "pi0-FAST": 1.98,
+      "StarVLA-FAST": 1.63,
+      "ActionCodec": 1.91,
+      "G0.5": 2.22
+    },
+    "VSpark": {
+      "pi0-FAST": 2.04,
+      "StarVLA-FAST": 1.69,
+      "ActionCodec": 2.0,
+      "G0.5": 2.34
+    }
+  },
+  "decomposition_VSpark_vs_DSpark": {
+    "pi0-FAST": {
+      "tau_gain_pct": 24.7,
+      "cycle_cost_change_pct": 3.4,
+      "speedup_gain_pct": 20.6,
+      "cycle_cost_VSpark": 2.041,
+      "cycle_cost_DSpark": 1.975
+    },
+    "StarVLA-FAST": {
+      "tau_gain_pct": 20.4,
+      "cycle_cost_change_pct": 3.9,
+      "speedup_gain_pct": 15.8,
+      "cycle_cost_VSpark": 1.689,
+      "cycle_cost_DSpark": 1.626
+    },
+    "ActionCodec": {
+      "tau_gain_pct": 14.1,
+      "cycle_cost_change_pct": 4.9,
+      "speedup_gain_pct": 8.8,
+      "cycle_cost_VSpark": 2.005,
+      "cycle_cost_DSpark": 1.912
+    },
+    "G0.5": {
+      "tau_gain_pct": 28.3,
+      "cycle_cost_change_pct": 5.3,
+      "speedup_gain_pct": 21.9,
+      "cycle_cost_VSpark": 2.336,
+      "cycle_cost_DSpark": 2.219
+    }
+  },
+  "table7": {
+    "pi0-FAST": {
+      "monotone": true,
+      "final_matches_table1": true,
+      "tau_increments": [
+        0.06,
+        0.65,
+        0.07
+      ],
+      "tau_increment_fraction_CR_FA_noise": null,
+      "largest_step": "FA"
+    },
+    "ActionCodec": {
+      "monotone": true,
+      "final_matches_table1": true,
+      "tau_increments": [
+        0.35,
+        0.06,
+        0.11
+      ],
+      "tau_increment_fraction_CR_FA_noise": null,
+      "largest_step": "CR"
+    }
+  },
+  "config_chunks": {
+    "pi0-FAST": {
+      "total": 27548,
+      "per_suite": {
+        "libero_goal": 5260,
+        "libero_spatial": 5382,
+        "libero_object": 6795,
+        "libero_10": 10111
+      }
+    },
+    "StarVLA-FAST": {
+      "total": 27548,
+      "per_suite": {
+        "libero_goal": 5260,
+        "libero_spatial": 5382,
+        "libero_object": 6795,
+        "libero_10": 10111
+      }
+    },
+    "ActionCodec": {
+      "total": 27548,
+      "per_suite": {
+        "libero_goal": 5260,
+        "libero_spatial": 5382,
+        "libero_object": 6795,
+        "libero_10": 10111
+      }
+    }
+  },
+  "noise_scale": {
+    "pi0-FAST": {
+      "predicted": [
+        3.88,
+        7.1,
+        3.08,
+        0.24,
+        0.66,
+        0.9
+      ],
+      "paper": [
+        3.88,
+        7.1,
+        3.08,
+        0.24,
+        0.66,
+        0.9
+      ],
+      "exact_2dp_matches": 6
+    },
+    "StarVLA-FAST": {
+      "predicted": [
+        4.88,
+        6.49,
+        6.17,
+        0.42,
+        1.36,
+        1.67
+      ],
+      "paper": [
+        4.88,
+        6.49,
+        6.17,
+        0.42,
+        1.36,
+        1.67
+      ],
+      "exact_2dp_matches": 6
+    },
+    "ActionCodec": {
+      "predicted": [
+        2.94,
+        2.73,
+        3.31,
+        0.33,
+        0.49,
+        0.34
+      ],
+      "paper": [
+        2.94,
+        2.73,
+        3.31,
+        0.33,
+        0.49,
+        0.34
+      ],
+      "exact_2dp_matches": 6
+    }
+  },
+  "table_b7_tests": {
+    "pi0-FAST": {
+      "Goal": {
+        "sd_AR": 1.74,
+        "sd_VSpark": 0.999
+      },
+      "Spatial": {
+        "sd_AR": 0.83,
+        "sd_VSpark": 0.894
+      },
+      "Object": {
+        "sd_AR": 0.201,
+        "sd_VSpark": 0.266
+      },
+      "Long": {
+        "sd_AR": 0.612,
+        "sd_VSpark": 2.412
+      },
+      "Avg": {
+        "sd_AR": 0.431,
+        "sd_VSpark": 0.467
+      },
+      "Avg_difference": {
+        "diff_pp": -0.49,
+        "se": 0.284,
+        "df": 7.9,
+        "ci95": [
+          -1.15,
+          0.17
+        ],
+        "p_welch": 0.123,
+        "note": "두 방법 독립 가정 (쌍 정보 없음)"
+      }
+    },
+    "ActionCodec": {
+      "Goal": {
+        "sd_AR": 1.723,
+        "sd_VSpark": 1.305
+      },
+      "Spatial": {
+        "sd_AR": 0.862,
+        "sd_VSpark": 2.521
+      },
+      "Object": {
+        "sd_AR": 0.089,
+        "sd_VSpark": 0.258
+      },
+      "Long": {
+        "sd_AR": 0.87,
+        "sd_VSpark": 1.893
+      },
+      "Avg": {
+        "sd_AR": 0.596,
+        "sd_VSpark": 1.152
+      },
+      "Avg_difference": {
+        "diff_pp": 0.31,
+        "se": 0.58,
+        "df": 6.0,
+        "ci95": [
+          -1.11,
+          1.73
+        ],
+        "p_welch": 0.612,
+        "note": "두 방법 독립 가정 (쌍 정보 없음)"
+      }
+    }
+  },
+  "precision_effect": {
+    "pi0_AR_bf16_minus_fp32": 0.61,
+    "AC_AR_bf16_minus_fp32": 3.55,
+    "pi0_VSpark_minus_AR_bf16": -0.49,
+    "AC_VSpark_minus_AR_bf16": 0.31,
+    "note": "FP32 값은 시드 0 한 번 실행, BF16 값은 시드 0–4 평균. 서로 다른 실행 조건이므로 엄밀한 비교가 아님"
+  },
+  "table4": {
+    "rows": [
+      {
+        "distance": null,
+        "relaxed_pct": 0.0,
+        "tau": 3.16,
+        "speedup": 1.6,
+        "sr": 91.7,
+        "sr_wilson95": [
+          90.4,
+          92.8
+        ]
+      },
+      {
+        "distance": 0.011,
+        "relaxed_pct": 2.05,
+        "tau": 3.18,
+        "speedup": 1.62,
+        "sr": 91.7,
+        "sr_wilson95": [
+          90.4,
+          92.8
+        ]
+      },
+      {
+        "distance": 0.012,
+        "relaxed_pct": 12.7,
+        "tau": 3.31,
+        "speedup": 1.67,
+        "sr": 91.0,
+        "sr_wilson95": [
+          89.7,
+          92.2
+        ]
+      },
+      {
+        "distance": 0.013,
+        "relaxed_pct": 23.72,
+        "tau": 3.47,
+        "speedup": 1.74,
+        "sr": 89.2,
+        "sr_wilson95": [
+          87.8,
+          90.5
+        ]
+      },
+      {
+        "distance": 0.015,
+        "relaxed_pct": 35.79,
+        "tau": 3.7,
+        "speedup": 1.82,
+        "sr": 83.8,
+        "sr_wilson95": [
+          82.1,
+          85.3
+        ]
+      },
+      {
+        "distance": 0.02,
+        "relaxed_pct": 45.97,
+        "tau": 4.02,
+        "speedup": 1.9,
+        "sr": 71.4,
+        "sr_wilson95": [
+          69.4,
+          73.3
+        ]
+      },
+      {
+        "distance": 0.025,
+        "relaxed_pct": 47.56,
+        "tau": 4.08,
+        "speedup": 1.93,
+        "sr": 70.5,
+        "sr_wilson95": [
+          68.5,
+          72.5
+        ]
+      }
+    ],
+    "p_vs_baseline_unpaired": {
+      "SR 91.7 vs 91.7 (speedup 1.62)": 1.0,
+      "SR 91.0 vs 91.7 (speedup 1.67)": 0.431005,
+      "SR 89.2 vs 91.7 (speedup 1.74)": 0.007148,
+      "SR 83.8 vs 91.7 (speedup 1.82)": 0.0,
+      "SR 71.4 vs 91.7 (speedup 1.9)": 0.0,
+      "SR 70.5 vs 91.7 (speedup 1.93)": 0.0
+    },
+    "sr_drop_per_speedup_unit": -67.3,
+    "note": "n = 2000 가정 (표 A.1), 쌍 정보 없음, 비쌍 근사"
+  },
+  "sign_counts": {
+    "pi0-FAST": {
+      "tau_table3_wins": "8/8",
+      "tau_table1_wins": "4/4"
+    },
+    "StarVLA-FAST": {
+      "tau_table3_wins": "8/8",
+      "tau_table1_wins": "4/4"
+    },
+    "ActionCodec": {
+      "tau_table3_wins": "8/8",
+      "tau_table1_wins": "4/4"
+    },
+    "G0.5": {
+      "tau_table3_wins": "8/8",
+      "tau_table1_wins": "4/4"
+    }
+  },
+  "sr_consistency": {
+    "table4_pi0_SR": 91.7,
+    "tableB7_pi0_AR_bf16_avg": 92.71,
+    "tableB7_pi0_AR_fp32_seed0": 92.1,
+    "note": "표 4의 SR이 어느 실행인지 본문에 없음 (표 B.7과 1.0pp 차이)"
+  }
+}
