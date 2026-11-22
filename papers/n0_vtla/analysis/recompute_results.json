@@ -1,0 +1,562 @@
+{
+  "K1_table_means": {
+    "ACT (Vision Only)": {
+      "univtac_mean": 30.875,
+      "univtac_paper": 30.9
+    },
+    "ACT + UniVTAC": {
+      "univtac_mean": 48.0,
+      "univtac_paper": 48.0
+    },
+    "VITaL": {
+      "univtac_mean": 40.5,
+      "univtac_paper": 40.5
+    },
+    "pi0.5": {
+      "univtac_mean": 41.375,
+      "univtac_paper": 41.4,
+      "single_mean": 68.75,
+      "single_paper": 68.8,
+      "dual_mean": 34.25,
+      "dual_paper": 34.3,
+      "neosim_mean": 45.75,
+      "neosim_paper": 45.8
+    },
+    "StarVLA-alpha": {
+      "univtac_mean": 56.125,
+      "univtac_paper": 56.1,
+      "single_mean": 49.25,
+      "single_paper": 49.3,
+      "dual_mean": 10.125,
+      "dual_paper": 10.1,
+      "neosim_mean": 23.167,
+      "neosim_paper": 23.2
+    },
+    "InternVLA-A1": {
+      "univtac_mean": 67.125,
+      "univtac_paper": 67.1,
+      "single_mean": 23.75,
+      "single_paper": 23.8,
+      "dual_mean": 1.0,
+      "dual_paper": 1.0,
+      "neosim_mean": 8.583,
+      "neosim_paper": 8.6
+    },
+    "Xiaomi-Robotics-0": {
+      "univtac_mean": 54.25,
+      "univtac_paper": 54.3,
+      "single_mean": 42.0,
+      "single_paper": 42.0,
+      "dual_mean": 14.125,
+      "dual_paper": 14.1,
+      "neosim_mean": 23.417,
+      "neosim_paper": 23.4
+    },
+    "GigaWorld-Policy": {
+      "univtac_mean": 16.5,
+      "univtac_paper": 16.5,
+      "single_mean": 27.0,
+      "single_paper": 27.0,
+      "dual_mean": 2.625,
+      "dual_paper": 2.6,
+      "neosim_mean": 10.75,
+      "neosim_paper": 10.8
+    },
+    "N0-VTLA": {
+      "univtac_mean": 83.125,
+      "univtac_paper": 83.1,
+      "single_mean": 73.75,
+      "single_paper": 73.8,
+      "dual_mean": 39.375,
+      "dual_paper": 39.4,
+      "neosim_mean": 50.833,
+      "neosim_paper": 50.8
+    }
+  },
+  "K1_mismatches": [
+    [
+      "pi0.5",
+      "dual_mean",
+      34.25,
+      34.3
+    ],
+    [
+      "StarVLA-alpha",
+      "single_mean",
+      49.25,
+      49.3
+    ],
+    [
+      "Xiaomi-Robotics-0",
+      "univtac_mean",
+      54.25,
+      54.3
+    ]
+  ],
+  "K2_avg20_tasks": {
+    "pi0.5": 44.0,
+    "StarVLA-alpha": 36.35,
+    "InternVLA-A1": 32.0,
+    "Xiaomi-Robotics-0": 35.75,
+    "GigaWorld-Policy": 13.05,
+    "N0-VTLA": 63.75
+  },
+  "K2_strongest_external_avg20": "pi0.5",
+  "K3_univtac_best_per_task": [
+    {
+      "task": "Lift Bottle",
+      "n0": 99,
+      "best_external": "pi0.5",
+      "best_external_value": 100,
+      "n0_is_max_or_tied": false
+    },
+    {
+      "task": "Pull-out Key",
+      "n0": 99,
+      "best_external": "Xiaomi-Robotics-0",
+      "best_external_value": 80,
+      "n0_is_max_or_tied": true
+    },
+    {
+      "task": "Lift Can",
+      "n0": 88,
+      "best_external": "InternVLA-A1",
+      "best_external_value": 90,
+      "n0_is_max_or_tied": false
+    },
+    {
+      "task": "Put Bottle",
+      "n0": 60,
+      "best_external": "StarVLA-alpha",
+      "best_external_value": 88,
+      "n0_is_max_or_tied": false
+    },
+    {
+      "task": "Insert Hole",
+      "n0": 95,
+      "best_external": "Xiaomi-Robotics-0",
+      "best_external_value": 96,
+      "n0_is_max_or_tied": false
+    },
+    {
+      "task": "Insert HDMI",
+      "n0": 25,
+      "best_external": "Xiaomi-Robotics-0",
+      "best_external_value": 69,
+      "n0_is_max_or_tied": false
+    },
+    {
+      "task": "Insert Tube",
+      "n0": 99,
+      "best_external": "Xiaomi-Robotics-0",
+      "best_external_value": 98,
+      "n0_is_max_or_tied": true
+    },
+    {
+      "task": "Grasp Classify",
+      "n0": 100,
+      "best_external": "VITaL",
+      "best_external_value": 100,
+      "n0_is_max_or_tied": true
+    }
+  ],
+  "K3_n0_max_or_tied_count": 3,
+  "C_paired_20tasks_vs_pi05": {
+    "mean_diff_pp": 19.75,
+    "ci95_pp": [
+      7.65,
+      31.85
+    ],
+    "t_p": 0.002890124003550391,
+    "wilcoxon_p": 8.20159912109375e-05,
+    "n0_higher_tasks": 17,
+    "n0_lower_tasks": 3,
+    "lower_tasks": [
+      "Lift Bottle",
+      "Insert Screw",
+      "Stack Plates"
+    ],
+    "per_task_diff": {
+      "Lift Bottle": -1.0,
+      "Pull-out Key": 64.0,
+      "Lift Can": 82.0,
+      "Put Bottle": 26.0,
+      "Insert Hole": 70.0,
+      "Insert HDMI": 17.0,
+      "Insert Tube": 25.0,
+      "Grasp Classify": 51.0,
+      "Pour Ball": 4.0,
+      "Unplug and Plug Charger": 7.0,
+      "Plug USB": 7.0,
+      "Grasp Chip": 2.0,
+      "Insert Screw": -2.0,
+      "Place Gears": 11.0,
+      "Unstack Bowl": 14.0,
+      "Cup Handover": 9.0,
+      "Stack Cups": 1.0,
+      "Stack Plates": -2.0,
+      "Stack Bowls": 3.0,
+      "Unstack Cup": 7.0
+    },
+    "note": "과제를 표본으로 본 검정. 과제 내부 시도 수 변동은 포함되지 않는다."
+  },
+  "K4_neoreal_means": {
+    "ACT": {
+      "success_mean": 0.0,
+      "progress_mean": 10.22
+    },
+    "pi0.5": {
+      "success_mean": 29.44,
+      "progress_mean": 42.33
+    },
+    "N0-VTLA": {
+      "success_mean": 47.22,
+      "progress_mean": 56.77
+    }
+  },
+  "K4_neoreal_paper": {
+    "success": {
+      "pi0.5": 29.4,
+      "N0-VTLA": 47.2
+    },
+    "progress": {
+      "pi0.5": 42.3,
+      "N0-VTLA": 56.8,
+      "ACT": 10.2
+    }
+  },
+  "K4_progress_lead_count": 8,
+  "C_neoreal_n20": {
+    "per_task": [
+      {
+        "task": "Cup Stacking",
+        "n0_k": 15,
+        "pi_k": 10,
+        "n0_ci95": [
+          53.1,
+          88.8
+        ],
+        "fisher_p": 0.1908
+      },
+      {
+        "task": "Fruit Collection",
+        "n0_k": 12,
+        "pi_k": 10,
+        "n0_ci95": [
+          38.7,
+          78.1
+        ],
+        "fisher_p": 0.7512
+      },
+      {
+        "task": "Board Wiping",
+        "n0_k": 9,
+        "pi_k": 8,
+        "n0_ci95": [
+          25.8,
+          65.8
+        ],
+        "fisher_p": 1.0
+      },
+      {
+        "task": "Bottle Standing",
+        "n0_k": 6,
+        "pi_k": 0,
+        "n0_ci95": [
+          14.5,
+          51.9
+        ],
+        "fisher_p": 0.0202
+      },
+      {
+        "task": "Towel Folding",
+        "n0_k": 10,
+        "pi_k": 8,
+        "n0_ci95": [
+          29.9,
+          70.1
+        ],
+        "fisher_p": 0.7512
+      },
+      {
+        "task": "Socket Plugging",
+        "n0_k": 17,
+        "pi_k": 12,
+        "n0_ci95": [
+          64.0,
+          94.8
+        ],
+        "fisher_p": 0.1552
+      },
+      {
+        "task": "Board Insertion",
+        "n0_k": 5,
+        "pi_k": 0,
+        "n0_ci95": [
+          11.2,
+          46.9
+        ],
+        "fisher_p": 0.0471
+      },
+      {
+        "task": "Cardboard Box Folding",
+        "n0_k": 4,
+        "pi_k": 1,
+        "n0_ci95": [
+          8.1,
+          41.6
+        ],
+        "fisher_p": 0.3416
+      },
+      {
+        "task": "Bag Packing",
+        "n0_k": 7,
+        "pi_k": 4,
+        "n0_ci95": [
+          18.1,
+          56.7
+        ],
+        "fisher_p": 0.4801
+      }
+    ],
+    "wins_of_9": 9,
+    "sign_test_one_sided_p": 0.00195,
+    "pooled_fisher_p_assumes_independence": 0.00075
+  },
+  "C_neoreal_n40": {
+    "per_task": [
+      {
+        "task": "Cup Stacking",
+        "n0_k": 30,
+        "pi_k": 20,
+        "n0_ci95": [
+          59.8,
+          85.8
+        ],
+        "fisher_p": 0.0368
+      },
+      {
+        "task": "Fruit Collection",
+        "n0_k": 24,
+        "pi_k": 20,
+        "n0_ci95": [
+          44.6,
+          73.7
+        ],
+        "fisher_p": 0.5005
+      },
+      {
+        "task": "Board Wiping",
+        "n0_k": 18,
+        "pi_k": 16,
+        "n0_ci95": [
+          30.7,
+          60.2
+        ],
+        "fisher_p": 0.8213
+      },
+      {
+        "task": "Bottle Standing",
+        "n0_k": 12,
+        "pi_k": 0,
+        "n0_ci95": [
+          18.1,
+          45.4
+        ],
+        "fisher_p": 0.0002
+      },
+      {
+        "task": "Towel Folding",
+        "n0_k": 20,
+        "pi_k": 16,
+        "n0_ci95": [
+          35.2,
+          64.8
+        ],
+        "fisher_p": 0.5005
+      },
+      {
+        "task": "Socket Plugging",
+        "n0_k": 34,
+        "pi_k": 24,
+        "n0_ci95": [
+          70.9,
+          92.9
+        ],
+        "fisher_p": 0.023
+      },
+      {
+        "task": "Board Insertion",
+        "n0_k": 10,
+        "pi_k": 0,
+        "n0_ci95": [
+          14.2,
+          40.2
+        ],
+        "fisher_p": 0.001
+      },
+      {
+        "task": "Cardboard Box Folding",
+        "n0_k": 8,
+        "pi_k": 2,
+        "n0_ci95": [
+          10.5,
+          34.8
+        ],
+        "fisher_p": 0.0872
+      },
+      {
+        "task": "Bag Packing",
+        "n0_k": 14,
+        "pi_k": 8,
+        "n0_ci95": [
+          22.1,
+          50.5
+        ],
+        "fisher_p": 0.2101
+      }
+    ],
+    "wins_of_9": 9,
+    "sign_test_one_sided_p": 0.00195,
+    "pooled_fisher_p_assumes_independence": 1e-06
+  },
+  "C_key_pairs_n20": {
+    "socket_plugging_85_vs_60": 0.1552,
+    "board_insertion_25_vs_0": 0.0471,
+    "bottle_standing_30_vs_0": 0.0202
+  },
+  "C_figure9_sft_alter": {
+    "Towel Folding": {
+      "SFT_diff_pp": 10,
+      "SFT_fisher_p_n20": 0.7512,
+      "ALTER_diff_pp": 5,
+      "ALTER_fisher_p_n20": 1.0,
+      "ALTER_pi05_vs_chi0_fisher_p_n20": 0.6614
+    },
+    "Bag Packing": {
+      "SFT_diff_pp": 15,
+      "SFT_fisher_p_n20": 0.4801,
+      "ALTER_diff_pp": 5,
+      "ALTER_fisher_p_n20": 1.0,
+      "ALTER_pi05_vs_chi0_fisher_p_n20": 0.7311
+    },
+    "Cardboard Box Folding": {
+      "SFT_diff_pp": 15,
+      "SFT_fisher_p_n20": 0.3416,
+      "ALTER_diff_pp": 15,
+      "ALTER_fisher_p_n20": 0.5006,
+      "ALTER_pi05_vs_chi0_fisher_p_n20": 1.0
+    }
+  },
+  "K5_sft_lead_points": [
+    10,
+    15,
+    15
+  ],
+  "K6_throughput_implied_attempts_per_h": {
+    "Towel Folding": {
+      "pi0.5-SFT": {
+        "throughput_per_h": 18,
+        "success_pct": 40,
+        "implied_attempts_per_h": 45.0
+      },
+      "N0-SFT": {
+        "throughput_per_h": 23,
+        "success_pct": 50,
+        "implied_attempts_per_h": 46.0
+      },
+      "pi0.5+chi0": {
+        "throughput_per_h": 36,
+        "success_pct": 80,
+        "implied_attempts_per_h": 45.0
+      },
+      "pi0.5+ALTER": {
+        "throughput_per_h": 41,
+        "success_pct": 90,
+        "implied_attempts_per_h": 45.6
+      },
+      "N0+ALTER": {
+        "throughput_per_h": 43,
+        "success_pct": 95,
+        "implied_attempts_per_h": 45.3
+      }
+    },
+    "Bag Packing": {
+      "pi0.5-SFT": {
+        "throughput_per_h": 4,
+        "success_pct": 20,
+        "implied_attempts_per_h": 20.0
+      },
+      "N0-SFT": {
+        "throughput_per_h": 7,
+        "success_pct": 35,
+        "implied_attempts_per_h": 20.0
+      },
+      "pi0.5+chi0": {
+        "throughput_per_h": 12,
+        "success_pct": 65,
+        "implied_attempts_per_h": 18.5
+      },
+      "pi0.5+ALTER": {
+        "throughput_per_h": 14,
+        "success_pct": 75,
+        "implied_attempts_per_h": 18.7
+      },
+      "N0+ALTER": {
+        "throughput_per_h": 15,
+        "success_pct": 80,
+        "implied_attempts_per_h": 18.8
+      }
+    },
+    "Cardboard Box Folding": {
+      "pi0.5-SFT": {
+        "throughput_per_h": 4,
+        "success_pct": 5,
+        "implied_attempts_per_h": 80.0
+      },
+      "N0-SFT": {
+        "throughput_per_h": 8,
+        "success_pct": 20,
+        "implied_attempts_per_h": 40.0
+      },
+      "pi0.5+chi0": {
+        "throughput_per_h": 22,
+        "success_pct": 55,
+        "implied_attempts_per_h": 40.0
+      },
+      "pi0.5+ALTER": {
+        "throughput_per_h": 24,
+        "success_pct": 60,
+        "implied_attempts_per_h": 40.0
+      },
+      "N0+ALTER": {
+        "throughput_per_h": 30,
+        "success_pct": 75,
+        "implied_attempts_per_h": 40.0
+      }
+    }
+  },
+  "K6_cardboard_pi05_sft_range_attempts_per_h": [
+    70.0,
+    90.0
+  ],
+  "K6_cardboard_other_variants_attempts_per_h": [
+    40.0,
+    40.0,
+    40.0,
+    40.0
+  ],
+  "C_representation": {
+    "top1_k": 349,
+    "n": 378,
+    "top1_pct": 92.33,
+    "top1_wilson95_pct": [
+      89.2,
+      94.6
+    ],
+    "chance_pool32_binom_p": 0.0,
+    "current_touch_top1_vs_pred_fisher_p_assumes_n378": 0.0,
+    "pool128_predictor_81_vs_current_40_note": "시험 수 미보고 (n 가정 불가)",
+    "sensitivity_ratio_claimed_4_3_from_0_9_over_0_2": 4.5
+  }
+}
