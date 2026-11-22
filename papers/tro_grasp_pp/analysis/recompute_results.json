@@ -1,0 +1,521 @@
+{
+ "V1_table2": {
+  "sr_mean_recomputed": 87.955,
+  "sr_mean_reported": 87.96,
+  "div_mean_recomputed": 0.4133,
+  "div_mean_reported": 0.413,
+  "sr_min_max": [
+   85.93,
+   90.39
+  ],
+  "sr_range_pp": 4.46,
+  "wilson95_halfwidth_pp_per_hand_n20000": 0.45,
+  "wilson95_pooled_160000_pp": [
+   87.79,
+   88.11
+  ]
+ },
+ "V2_table6": {
+  "full_avg_recomputed": 87.155,
+  "full_avg_reported": 87.16,
+  "wo_avg_recomputed": 9.61,
+  "wo_avg_reported": 9.61,
+  "full_vs_table2_8hand": [
+   87.16,
+   87.96
+  ],
+  "note": "표 6 Full Model 평균은 4개 손(87.16)이며 표 2의 8개 손 평균(87.96)과 다른 집합이다. 4개 손 값은 표 2와 같다."
+ },
+ "V3_table1_counts": {
+  "objects_sum": [
+   53675,
+   53675
+  ],
+  "train_test_sum": [
+   53675,
+   53675
+  ],
+  "ours_per_obj_hand_if_444M_all_objects": 1034.0,
+  "ours_per_obj_hand_train_objects_only": 1163.0,
+  "abstract_0p5B_vs_444M_ratio": 1.126,
+  "dgn2_per_obj_(427M/1319)": 323730.0,
+  "multigripper_per_obj_hand_(30.4M/(345*11))": 8011.0,
+  "ratio_objects_ours_vs_dgn2": 40.7,
+  "ratio_grasps_ours_vs_dgn2": 1.04,
+  "ratio_grasps_per_obj_hand_dgn2_vs_ours": 313.0,
+  "hf_release_train_objects": 25228,
+  "hf_release_source_objects": 31166,
+  "hf_release_eval_objects_excluded": 5938,
+  "hf_release_vs_paper_train_objects_pct": 52.8,
+  "hf_release_vs_paper_total_objects_pct": 58.1,
+  "hf_zarr_tib": 6.19,
+  "hf_zarr_bytes": 6806567178240,
+  "hf_bytes_per_object_MB": 270.0
+ },
+ "V4_same_hand_gaps": {
+  "fig1_gap_8hand_avg_vs_anydexgrasp_pp": 33.52,
+  "same_hand_allegro_gap_pp": 34.35,
+  "same_hand_allegro_ratio": 1.631,
+  "same_hand_leap_gap_pp": 33.84,
+  "same_hand_leap_ratio": 1.65,
+  "8hand_avg_vs_dgn2_gap_pp": 35.87,
+  "relative_gain_pct_fig1_vs_anydexgrasp": 61.6,
+  "diversity_allegro_ours_vs_anydexgrasp": [
+   0.369,
+   0.387
+  ],
+  "diversity_leap_ours_vs_dgn2": [
+   0.404,
+   0.303
+  ],
+  "allegro_vs_anydexgrasp_z": 76.2,
+  "allegro_vs_anydexgrasp_p": 0.0,
+  "leap_vs_dgn2_z": 73.2,
+  "leap_vs_dgn2_p": 0.0
+ },
+ "V5_scaling_table5": {
+  "assumed_n": 160000,
+  "se_pp_at_88": 0.081,
+  "params_steps": [
+   {
+    "from": "10M",
+    "to": "50M",
+    "diff_pp": 7.14,
+    "z": 54.0,
+    "p": 0.0
+   },
+   {
+    "from": "50M",
+    "to": "200M",
+    "diff_pp": 1.19,
+    "z": 10.1,
+    "p": 0.0
+   },
+   {
+    "from": "200M",
+    "to": "1B",
+    "diff_pp": 0.11,
+    "z": 1.0,
+    "p": 0.3380907849036654
+   }
+  ],
+  "objects_steps": [
+   {
+    "from": "12K",
+    "to": "24K",
+    "diff_pp": 0.5,
+    "z": 3.8,
+    "p": 0.00011914628105436087
+   },
+   {
+    "from": "24K",
+    "to": "36K",
+    "diff_pp": 1.14,
+    "z": 9.0,
+    "p": 0.0
+   },
+   {
+    "from": "36K",
+    "to": "48K",
+    "diff_pp": 0.95,
+    "z": 7.7,
+    "p": 1.4654943925052066e-14
+   }
+  ],
+  "objects_gain_12K_to_48K_pp": 2.59,
+  "objects_gain_per_doubling_pp": 1.29,
+  "objects_log_slope_check": "12K→24K→48K: +0.50, +(1.14+0.95)=2.09 (12K→24K, 24K→48K)",
+  "objects_48K_vs_table2_full": {
+   "table5_48K": 86.24,
+   "table2_default_200M": 87.96,
+   "diff_pp": 1.72,
+   "train_objects_in_text": 47737,
+   "note": "본문 3.1절의 학습 객체는 47,737개(약 48K)인데 표 5의 48K 행(86.24)은 기본 모델(87.96)과 1.72 %p 다르다."
+  },
+  "params_log10_slope_pp_per_decade_10_50_200": 6.5
+ },
+ "V6_table3_bounds": {
+  "ours": {
+   "levels": [
+    80.32,
+    77.72,
+    77.81,
+    75.37
+   ],
+   "level_mean_unweighted": 77.81,
+   "orig20k_sr": 87.96,
+   "dense20k_sr_if_combined_equals_weighted_avg_bounds": [
+    62.78,
+    72.68
+   ],
+   "level1_to_level4_drop_pp": 4.95
+  },
+  "anydexgrasp": {
+   "levels": [
+    53.09,
+    50.82,
+    48.73,
+    44.27
+   ],
+   "level_mean_unweighted": 49.23,
+   "orig20k_sr": 54.44,
+   "dense20k_sr_if_combined_equals_weighted_avg_bounds": [
+    34.1,
+    51.74
+   ],
+   "level1_to_level4_drop_pp": 8.82
+  },
+  "dgn2": {
+   "levels": [
+    55.28,
+    54.76,
+    51.83,
+    50.56
+   ],
+   "level_mean_unweighted": 53.11,
+   "orig20k_sr": 52.09,
+   "dense20k_sr_if_combined_equals_weighted_avg_bounds": [
+    49.03,
+    58.47
+   ],
+   "level1_to_level4_drop_pp": 4.72
+  },
+  "ours_monotone": [
+   true,
+   false,
+   true
+  ],
+  "gap_ours_minus_anydexgrasp_by_level": [
+   27.23,
+   26.9,
+   29.08,
+   31.1
+  ],
+  "gap_ours_minus_dgn2_by_level": [
+   25.04,
+   22.96,
+   25.98,
+   24.81
+  ],
+  "diversity_ours_levels": [
+   0.408,
+   0.418,
+   0.423,
+   0.412
+  ],
+  "note": "표 3은 40,000 장면(원래 20,000 + 밀집 20,000)을 D_env로 나눈 것이다. 가중 평균은 수준별 값의 최소와 최대 사이에 있으므로, 원래 세트가 87.96 %라면 밀집 세트는 62.8–72.7 %여야 한다(우리 방법). 수준별 장면 수는 보고되지 않았다."
+ },
+ "V7_efficiency": {
+  "fps_from_latency": {
+   "TRO-Grasp": 4.762,
+   "AnyDexGrasp": 1.198,
+   "DexGraspNet2": 0.584,
+   "Ours": 2.976
+  },
+  "fig1_fps_reported": {
+   "AnyDexGrasp": 1.2,
+   "DexGraspNet2": 0.58,
+   "Ours": 2.98
+  },
+  "fig1_speedup_x2p5_check": {
+   "ours_over_anydexgrasp": 2.49,
+   "ours_over_dgn2": 5.1
+  },
+  "implied_items_per_call_(throughput*latency)": {
+   "TRO-Grasp": 3.56,
+   "AnyDexGrasp": 1.07,
+   "DexGraspNet2": 8.49,
+   "Ours": 21.94
+  },
+  "inv_pps": {
+   "AnyDexGrasp": 0.0379,
+   "DexGraspNet2": 0.075,
+   "Ours": 0.8696
+  },
+  "fig1_inv_pps_reported": {
+   "DexGraspNet2": 0.07,
+   "AnyDexGrasp": 0.04,
+   "Ours": 0.87
+  },
+  "fig1_x12p4_check_reported_rounded": 12.43,
+  "pps_ratio_exact_vs_dgn2": 11.6,
+  "pps_ratio_exact_vs_anydexgrasp": 22.95,
+  "implied_per_proposal_success_pct": {
+   "AnyDexGrasp": 3.79,
+   "DexGraspNet2": 7.5,
+   "Ours": 86.96
+  },
+  "ours_pps_vs_1_over_sr": {
+   "1/0.8796": 1.137,
+   "reported": 1.15,
+   "implied_sr_pct": 86.96
+  },
+  "params_default_M": 176.53,
+  "params_table5_nominal_M": 200,
+  "latency_intro_text_s": 0.34,
+  "latency_table4_s": 0.336,
+  "latency_abstract_s": 0.3,
+  "inference_speed_text_fps_3": 2.98
+ },
+ "V8_multi_trial": {
+  "observed_fail_pct": [
+   12.04,
+   4.42,
+   2.39,
+   1.54
+  ],
+  "independent_pred_fail_pct": [
+   12.04,
+   1.45,
+   0.175,
+   0.021
+  ],
+  "observed_over_independent": [
+   1.0,
+   3.0,
+   13.7,
+   73.3
+  ],
+  "conditional_fail_given_prev_fail": [
+   0.367,
+   0.541,
+   0.644
+  ],
+  "beta_fit": {
+   "a": 2.1303,
+   "b": 0.2916,
+   "pred_fail_pct_k1_to_4": [
+    12.04,
+    4.545,
+    2.355,
+    1.43
+   ],
+   "frac_scenes_theta_below_0.1_pct": 0.14,
+   "frac_scenes_theta_below_0.5_pct": 5.64,
+   "frac_scenes_theta_above_0.95_pct": 54.4
+  },
+  "note": "장면별 성공 확률이 균일하면 4회 실패율은 0.021 %여야 하는데 보고값은 1.54 %(73배)다. 실패가 장면에 묶여 있다 (같은 장면을 다시 뽑아도 같은 이유로 실패). 베타 혼합 적합은 한 자유 매개변수의 사후 해석이다."
+ },
+ "V9_table11": {
+  "link_drop_pp": [
+   0.0,
+   0.68,
+   1.47,
+   1.52
+  ],
+  "joint_drop_pp": [
+   0.0,
+   1.99,
+   3.1,
+   4.3
+  ],
+  "link_slope_pp_per_0.1": 0.54,
+  "joint_slope_pp_per_0.1": 1.4,
+  "min_sr": 81.73,
+  "note": "S=1.0 행은 표 2 XHand(86.03/0.418)와 같다. 유사도 0.7에서도 80 % 이상이라는 문장은 맞지만, 변형 손은 학습 손의 링크 길이·관절 범위만 바꾼 것이다(위상 같음)."
+ },
+ "V10_real_world": {
+  "XHand": {
+   "in_box": 43,
+   "on_table": 42,
+   "total": 85,
+   "n": 100,
+   "claimed_pct": 85,
+   "matches_claim": true,
+   "wilson95_pct": [
+    76.7,
+    90.7
+   ]
+  },
+  "LEAP": {
+   "in_box": 42,
+   "on_table": 41,
+   "total": 83,
+   "n": 100,
+   "claimed_pct": 82,
+   "matches_claim": false,
+   "wilson95_pct": [
+    74.5,
+    89.1
+   ]
+  },
+  "xhand_vs_leap_fisher_p": 0.847,
+  "xhand_vs_leap_fisher_p_if_82": 0.704,
+  "xhand_object_heterogeneity_chi2_p": 0.251,
+  "table8": {
+   "Wuji": {
+    "fail_sum": 74,
+    "n": 414,
+    "success_pct": 82.13,
+    "wilson95_success_pct": [
+     78.1,
+     85.5
+    ],
+    "instability_share_pct": 59.5,
+    "shares_pct": [
+     17.6,
+     6.8,
+     16.2,
+     59.5
+    ]
+   },
+   "XHand": {
+    "fail_sum": 92,
+    "n": 548,
+    "success_pct": 83.21,
+    "wilson95_success_pct": [
+     79.9,
+     86.1
+    ],
+    "instability_share_pct": 31.5,
+    "shares_pct": [
+     23.9,
+     15.2,
+     29.3,
+     31.5
+    ]
+   },
+   "pooled_instability_share_pct": 44.0
+  },
+  "text_xhandpro_90p6": {
+   "integer_k_giving_90.6_at_n548": [],
+   "nearest_values_pct": [
+    90.51,
+    90.69
+   ],
+   "table8_xhand_success_pct": 83.21,
+   "note": "본문 5.6절은 XHandPro 90.6 %, 표 8은 XHand 실패 92/548(성공 83.2 %). n = 548에서 90.6 %는 정수 개수가 없다."
+  },
+  "wuji_82p1": {
+   "k_340_of_414_pct": 82.13
+  },
+  "gripper_98p5_feasible_n_with_10_per_obj": [
+   400,
+   401,
+   402,
+   403,
+   404,
+   405
+  ]
+ },
+ "V11_fig8_digitized": {
+  "grid_rows_found": [
+   25,
+   103,
+   182,
+   260
+  ],
+  "bar_heights_M": {
+   "Dobj": [
+    0.0,
+    0.0,
+    0.0,
+    44.7,
+    184.7,
+    140.6,
+    24.3,
+    7.7,
+    4.5,
+    8.9
+   ],
+   "Denv": [
+    5.8,
+    4.5,
+    10.9,
+    23.6,
+    44.1,
+    72.2,
+    91.4,
+    87.5,
+    52.4,
+    19.2
+   ],
+   "Davg": [
+    0.0,
+    0.0,
+    6.4,
+    21.7,
+    76.7,
+    150.8,
+    118.8,
+    31.9,
+    6.4,
+    0.0
+   ]
+  },
+  "sum_M": {
+   "Dobj": 415.3,
+   "Denv": 411.5,
+   "Davg": 412.8
+  },
+  "claimed_total_M_table1": 444,
+  "ratio_sum_to_444": {
+   "Dobj": 0.935,
+   "Denv": 0.927,
+   "Davg": 0.93
+  },
+  "mean_from_bin_centers": {
+   "Dobj": 0.505,
+   "Denv": 0.63,
+   "Davg": 0.565
+  },
+  "mean_check_Davg_vs_avg_of_Dobj_Denv": {
+   "Davg": 0.565,
+   "(Dobj+Denv)/2": 0.568
+  },
+  "Dobj_share_last_bin_pct": 2.15,
+  "Denv_share_by_table3_level_pct": {
+   "L1 [0,0.5)": 21.6,
+   "L2 [0.5,0.75) (0.7–0.8 bin 절반 가정)": 50.4,
+   "L3+L4 (>=0.75)": 28.0
+  },
+  "note": "세 분포의 합은 서로 1 % 안에서 일치하고(약 413 M) 표 1의 444 M보다 약 7 % 작다. 막대 높이 읽기 오차는 막대당 약 0.6 M이다."
+ },
+ "V12_param_count": {
+  "layers_M": 169.44,
+  "input_encoders_M": 0.526,
+  "wide_fc_M": 5.309,
+  "output_mlps_M": 1.133,
+  "denoiser_total_M": 176.41,
+  "joint_space_and_pos_encoders_M": 0.119,
+  "graph_model_total_M": 176.53,
+  "table4_reported_M": 176.53,
+  "diff_M": -0.0,
+  "note": "공식 config/train.yaml 값(768, 8층, 12헤드, 임베딩 128)으로 numpy 없이 산술 계산. VQ-VAE(고정)는 제외. 이 계산은 코드를 실행하지 않은 정적 추정이다."
+ },
+ "V13_ddim_schedule": {
+  "inference_step_config": 20,
+  "step": 50,
+  "start_t": 949,
+  "num_denoise_steps_code": 19,
+  "ddim_t_first_last": [
+   949,
+   49
+  ],
+  "alpha_bar_at_start": 0.00606,
+  "alpha_bar_at_999": 2.4287669070348542e-09,
+  "sigma_eta1_first_mid_last": [
+   0.8573,
+   0.3392,
+   0.0
+  ],
+  "noise_lambda_scale": 0.2,
+  "paper_steps": 20,
+  "paper_eta": 1.0,
+  "note": "코드의 DDIM은 t = 949, 899, …, 49의 19단계이고 마지막 단계는 a_bar_prev = 1로 x0를 낸다. 확률 항에 λ = 0.2를 곱한다(논문에 없음)."
+ },
+ "V14_training_scale": {
+  "samples_seen_if_1M_steps_8gpu_bs48": 384000000,
+  "fraction_of_444M": 0.865,
+  "coverage_if_uniform_with_replacement_pct": 57.9,
+  "timesteps_per_sample": 5,
+  "denoiser_evals_total": 1920000000,
+  "readme_example_ckpt_step": 820000,
+  "samples_seen_at_820k": 314880000,
+  "note": "공식 train.yaml total_steps = 1,000,000. 논문은 '학습 데이터 전체를 덮도록' 스텝 수를 정했다고만 쓴다. GPU 수는 논문(8×A100)을 가정."
+ },
+ "V15_table9": {
+  "max_entropy_bits_6_dirs": 2.585,
+  "normalized_reported": 0.9933
+ }
+}
