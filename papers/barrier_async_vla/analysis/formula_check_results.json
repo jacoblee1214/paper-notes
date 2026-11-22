@@ -1,0 +1,247 @@
+{
+  "weights_robocasa_setting": {
+    "paper_eq11": [
+      1.0,
+      1.0,
+      1.0,
+      0.3679,
+      0.1353,
+      0.0498,
+      0.0
+    ],
+    "code": [
+      1.0,
+      1.0,
+      1.0,
+      0.4724,
+      0.2231,
+      0.1054,
+      0.0
+    ],
+    "max_abs_diff": 0.10448711156957236,
+    "note": "i=h에서 두 식 모두 0이 되지만 i=h-1의 값이 조금 다름"
+  },
+  "energy_w_vs_w2": {
+    "E_paper_eq2": 1.7765,
+    "E_code_h_total": 1.642,
+    "ratio_code_over_paper": 0.9243,
+    "note": "코드의 g는 w̃ (선형)에서 나오므로 g는 식 (3)과 같고 b만 다르다. 식 (2)의 ∇B와 코드의 g가 일치하지 않는다"
+  },
+  "tau_schedule": {
+    "GR00T (K=4, cap=10)": {
+      "t": [
+        0.0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "tau_paper": [
+        1.0,
+        0.75,
+        0.5,
+        0.25
+      ],
+      "tau_code": [
+        1.0,
+        0.75,
+        0.5,
+        0.25
+      ],
+      "floor_active": false
+    },
+    "Kinetix (K=5, cap=5)": {
+      "t": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ],
+      "tau_paper": [
+        1.0,
+        0.8,
+        0.6,
+        0.4,
+        0.2
+      ],
+      "tau_code": [
+        1.0,
+        0.8,
+        0.6,
+        0.4,
+        0.2
+      ],
+      "floor_active": false
+    },
+    "실로봇 (K=10, cap=10 가정)": {
+      "t": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9
+      ],
+      "tau_paper": [
+        1.0,
+        0.9,
+        0.8,
+        0.7,
+        0.6,
+        0.5,
+        0.4,
+        0.3,
+        0.2,
+        0.1
+      ],
+      "tau_code": [
+        1.0,
+        0.9,
+        0.8,
+        0.7,
+        0.6,
+        0.5,
+        0.4,
+        0.3,
+        0.2,
+        0.1
+      ],
+      "floor_active": false
+    }
+  },
+  "lambda_cap_note": "코드: clamp(λ, 0, cap). 논문 본문: 보정 크기 상한 10(GR00T). 상한의 대상이 λ인지 λ‖g‖인지 논문에 명시되지 않음",
+  "closed_form_constraint_check": {
+    "trials_with_lambda_positive": 477,
+    "all_satisfied": true
+  },
+  "kinetix_zero_padding_weight": {
+    "H": 8,
+    "note": "RTC는 prefix_attention_horizon=H-h 이후를 0으로 막는다. FreeBAR는 막지 않는다. 0 목표에 실린 가중치 비율을 적었다",
+    "rows_with_padding_weight": [
+      {
+        "d": 0,
+        "h": 5,
+        "pad_indices_with_weight": [
+          3,
+          4
+        ],
+        "share_of_weight_on_zero_targets": 0.154,
+        "max_weight_on_zero_target": 0.135
+      },
+      {
+        "d": 0,
+        "h": 6,
+        "pad_indices_with_weight": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "share_of_weight_on_zero_targets": 0.377,
+        "max_weight_on_zero_target": 0.276
+      },
+      {
+        "d": 0,
+        "h": 7,
+        "pad_indices_with_weight": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "share_of_weight_on_zero_targets": 0.663,
+        "max_weight_on_zero_target": 0.472
+      },
+      {
+        "d": 0,
+        "h": 8,
+        "pad_indices_with_weight": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "share_of_weight_on_zero_targets": 1.0,
+        "max_weight_on_zero_target": 0.717
+      },
+      {
+        "d": 1,
+        "h": 5,
+        "pad_indices_with_weight": [
+          3,
+          4
+        ],
+        "share_of_weight_on_zero_targets": 0.122,
+        "max_weight_on_zero_target": 0.165
+      },
+      {
+        "d": 1,
+        "h": 6,
+        "pad_indices_with_weight": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "share_of_weight_on_zero_targets": 0.335,
+        "max_weight_on_zero_target": 0.368
+      },
+      {
+        "d": 1,
+        "h": 7,
+        "pad_indices_with_weight": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "share_of_weight_on_zero_targets": 0.633,
+        "max_weight_on_zero_target": 0.651
+      },
+      {
+        "d": 2,
+        "h": 5,
+        "pad_indices_with_weight": [
+          3,
+          4
+        ],
+        "share_of_weight_on_zero_targets": 0.117,
+        "max_weight_on_zero_target": 0.223
+      },
+      {
+        "d": 2,
+        "h": 6,
+        "pad_indices_with_weight": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "share_of_weight_on_zero_targets": 0.356,
+        "max_weight_on_zero_target": 0.549
+      },
+      {
+        "d": 3,
+        "h": 5,
+        "pad_indices_with_weight": [
+          3,
+          4
+        ],
+        "share_of_weight_on_zero_targets": 0.144,
+        "max_weight_on_zero_target": 0.368
+      }
+    ]
+  }
+}

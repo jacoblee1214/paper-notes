@@ -1,0 +1,525 @@
+{
+  "robocasa_gain_vs_naive": {
+    "FreeBar-Naive GR00T d=1": 4.8,
+    "FreeBar-RTC GR00T d=1": 3.2,
+    "FreeBar-Naive GR00T d=2": 2.7,
+    "FreeBar-RTC GR00T d=2": 1.8,
+    "FreeBar-Naive GR00T d=3": 2.8,
+    "FreeBar-RTC GR00T d=3": 1.4,
+    "FreeBar-Naive pi0 d=1": 2.2,
+    "FreeBar-RTC pi0 d=1": 4.7,
+    "FreeBar-Naive pi0 d=2": 3.8,
+    "FreeBar-RTC pi0 d=2": 3.8,
+    "FreeBar-Naive pi0 d=3": 5.1,
+    "FreeBar-RTC pi0 d=3": 4.6
+  },
+  "robocasa_mean_gain_vs_naive_pp": 3.57,
+  "hyperparam_sensitivity": {
+    "RoboCasa RTC (A5)": {
+      "n_configs": 6,
+      "mean": 65.93,
+      "std_ddof0": 5.98,
+      "std_ddof1": 6.55,
+      "reported_mean_std": [
+        65.93,
+        6.55
+      ],
+      "grid_used": [
+        "0.1",
+        "0.5",
+        "5",
+        "10",
+        "30",
+        "50"
+      ]
+    },
+    "RoboCasa FreeBar (A5)": {
+      "n_configs": 6,
+      "mean": 69.63,
+      "std_ddof0": 1.61,
+      "std_ddof1": 1.77,
+      "reported_mean_std": [
+        69.63,
+        1.77
+      ],
+      "grid_used": [
+        "0.1",
+        "1",
+        "5",
+        "10",
+        "30",
+        "50"
+      ]
+    },
+    "Conveyor pi0 RTC (A6)": {
+      "n_configs": 5,
+      "mean": 55.53,
+      "std_ddof0": 6.88,
+      "std_ddof1": 7.7,
+      "reported_mean_std": [
+        55.53,
+        7.7
+      ],
+      "grid_used": [
+        "0.1",
+        "0.5",
+        "1",
+        "3",
+        "8"
+      ]
+    },
+    "Conveyor pi0 FreeBar (A6)": {
+      "n_configs": 5,
+      "mean": 74.67,
+      "std_ddof0": 5.41,
+      "std_ddof1": 6.05,
+      "reported_mean_std": [
+        74.67,
+        6.04
+      ],
+      "grid_used": [
+        "0.1",
+        "1",
+        "3",
+        "5",
+        "10"
+      ]
+    },
+    "Conveyor pi0.5 RTC (A7)": {
+      "n_configs": 5,
+      "mean": 59.33,
+      "std_ddof0": 8.27,
+      "std_ddof1": 9.25,
+      "reported_mean_std": [
+        59.33,
+        9.25
+      ],
+      "grid_used": [
+        "0.1",
+        "0.5",
+        "1",
+        "3",
+        "8"
+      ]
+    },
+    "Conveyor pi0.5 FreeBar (A7)": {
+      "n_configs": 5,
+      "mean": 75.99,
+      "std_ddof0": 3.89,
+      "std_ddof1": 4.35,
+      "reported_mean_std": [
+        75.99,
+        4.35
+      ],
+      "grid_used": [
+        "0.1",
+        "1",
+        "3",
+        "5",
+        "10"
+      ]
+    },
+    "Whack pi0 RTC (A8)": {
+      "n_configs": 5,
+      "mean": 7.81,
+      "std_ddof0": 1.74,
+      "std_ddof1": 1.94,
+      "reported_mean_std": [
+        7.8,
+        1.92
+      ],
+      "grid_used": [
+        "0.1",
+        "0.5",
+        "1",
+        "3",
+        "8"
+      ]
+    },
+    "Whack pi0 FreeBar (A8)": {
+      "n_configs": 5,
+      "mean": 10.41,
+      "std_ddof0": 1.04,
+      "std_ddof1": 1.16,
+      "reported_mean_std": [
+        10.4,
+        1.14
+      ],
+      "grid_used": [
+        "0.1",
+        "1",
+        "3",
+        "5",
+        "10"
+      ]
+    },
+    "RoboCasa RTC without beta=50": {
+      "mean": 68.56,
+      "std_ddof1": 1.35
+    },
+    "RoboCasa var ratio RTC/FreeBar (reported std)": 13.69
+  },
+  "conveyor_table3": {
+    "pi0": {
+      "counts_out_of_30": {
+        "Naive": [
+          17,
+          21,
+          20,
+          19
+        ],
+        "RTC": [
+          22,
+          25,
+          24,
+          23
+        ],
+        "Ours": [
+          27,
+          26,
+          26,
+          23
+        ]
+      },
+      "Ours_vs_RTC": {
+        "per_h": [
+          {
+            "h": 6,
+            "ours": 27,
+            "rtc": 22,
+            "diff_pp": 16.7,
+            "fisher_p": 0.1806
+          },
+          {
+            "h": 8,
+            "ours": 26,
+            "rtc": 25,
+            "diff_pp": 3.3,
+            "fisher_p": 1.0
+          },
+          {
+            "h": 10,
+            "ours": 26,
+            "rtc": 24,
+            "diff_pp": 6.7,
+            "fisher_p": 0.7306
+          },
+          {
+            "h": 12,
+            "ours": 23,
+            "rtc": 23,
+            "diff_pp": 0.0,
+            "fisher_p": 1.0
+          }
+        ],
+        "pooled": {
+          "ours": 102,
+          "rtc": 94,
+          "n_each": 120,
+          "diff_pp": 6.7,
+          "fisher_p": 0.2427
+        }
+      },
+      "Ours_vs_Naive": {
+        "per_h": [
+          {
+            "h": 6,
+            "ours": 27,
+            "naive": 17,
+            "diff_pp": 33.3,
+            "fisher_p": 0.0074
+          },
+          {
+            "h": 8,
+            "ours": 26,
+            "naive": 21,
+            "diff_pp": 16.7,
+            "fisher_p": 0.2092
+          },
+          {
+            "h": 10,
+            "ours": 26,
+            "naive": 20,
+            "diff_pp": 20.0,
+            "fisher_p": 0.1253
+          },
+          {
+            "h": 12,
+            "ours": 23,
+            "naive": 19,
+            "diff_pp": 13.3,
+            "fisher_p": 0.3985
+          }
+        ],
+        "pooled": {
+          "ours": 102,
+          "naive": 77,
+          "n_each": 120,
+          "diff_pp": 20.8,
+          "fisher_p": 0.0003
+        }
+      },
+      "mean_pct": {
+        "Naive": 64.17,
+        "RTC": 78.33,
+        "Ours": 85.0
+      },
+      "mean_gain_vs_naive_pp": 20.84,
+      "mean_gain_vs_RTC_pp": 6.67
+    },
+    "pi0.5": {
+      "counts_out_of_30": {
+        "Naive": [
+          19,
+          20,
+          23,
+          19
+        ],
+        "RTC": [
+          23,
+          24,
+          25,
+          24
+        ],
+        "Ours": [
+          28,
+          27,
+          27,
+          25
+        ]
+      },
+      "Ours_vs_RTC": {
+        "per_h": [
+          {
+            "h": 6,
+            "ours": 28,
+            "rtc": 23,
+            "diff_pp": 16.7,
+            "fisher_p": 0.1455
+          },
+          {
+            "h": 8,
+            "ours": 27,
+            "rtc": 24,
+            "diff_pp": 10.0,
+            "fisher_p": 0.4716
+          },
+          {
+            "h": 10,
+            "ours": 27,
+            "rtc": 25,
+            "diff_pp": 6.7,
+            "fisher_p": 0.7065
+          },
+          {
+            "h": 12,
+            "ours": 25,
+            "rtc": 24,
+            "diff_pp": 3.3,
+            "fisher_p": 1.0
+          }
+        ],
+        "pooled": {
+          "ours": 107,
+          "rtc": 96,
+          "n_each": 120,
+          "diff_pp": 9.2,
+          "fisher_p": 0.0728
+        }
+      },
+      "Ours_vs_Naive": {
+        "per_h": [
+          {
+            "h": 6,
+            "ours": 28,
+            "naive": 19,
+            "diff_pp": 30.0,
+            "fisher_p": 0.0102
+          },
+          {
+            "h": 8,
+            "ours": 27,
+            "naive": 20,
+            "diff_pp": 23.3,
+            "fisher_p": 0.0575
+          },
+          {
+            "h": 10,
+            "ours": 27,
+            "naive": 23,
+            "diff_pp": 13.3,
+            "fisher_p": 0.299
+          },
+          {
+            "h": 12,
+            "ours": 25,
+            "naive": 19,
+            "diff_pp": 20.0,
+            "fisher_p": 0.1432
+          }
+        ],
+        "pooled": {
+          "ours": 107,
+          "naive": 81,
+          "n_each": 120,
+          "diff_pp": 21.7,
+          "fisher_p": 0.0001
+        }
+      },
+      "mean_pct": {
+        "Naive": 67.5,
+        "RTC": 80.0,
+        "Ours": 89.16
+      },
+      "mean_gain_vs_naive_pp": 21.66,
+      "mean_gain_vs_RTC_pp": 9.16
+    }
+  },
+  "conveyor_values_not_k_over_30": [
+    [
+      "Conveyor pi0 RTC (A6)",
+      67.67
+    ]
+  ],
+  "latency_sim_ms": {
+    "freebar_over_naive_pct": 7.7,
+    "rtc_over_naive_pct": 98.3,
+    "freebar_reduction_vs_rtc_pct": 45.7
+  },
+  "latency_real_ms": {
+    "pi0": 35.3,
+    "pi0.5": 38.0
+  },
+  "whack": {
+    "hit_rate_increase_pct_from_means": 33.3,
+    "std_decrease_pct": 40.6
+  },
+  "whack_table3": {
+    "naive_mean": 5.02,
+    "rtc_mean": 9.52,
+    "freebar_mean": 11.46,
+    "freebar_lt_rtc_h": [
+      6
+    ]
+  },
+  "kinetix_tests": {
+    "d4_freebar_vs_rtc": {
+      "n100_per_config": {
+        "diff_pp": 6.9,
+        "z": 1.02,
+        "p": 0.3068
+      },
+      "n1200_if_12_tasks_x100": {
+        "diff_pp": 6.9,
+        "z": 3.54,
+        "p": 0.0004
+      }
+    },
+    "h7_freebar_vs_rtc": {
+      "n100_per_config": {
+        "diff_pp": 2.0,
+        "z": 0.35,
+        "p": 0.7237
+      },
+      "n1200_if_12_tasks_x100": {
+        "diff_pp": 2.0,
+        "z": 1.22,
+        "p": 0.2207
+      }
+    },
+    "h7_freebar_vs_naive": {
+      "n100_per_config": {
+        "diff_pp": 10.0,
+        "z": 1.66,
+        "p": 0.0978
+      },
+      "n1200_if_12_tasks_x100": {
+        "diff_pp": 10.0,
+        "z": 5.74,
+        "p": 0.0
+      }
+    },
+    "d4_freebar_vs_naive": {
+      "n100_per_config": {
+        "diff_pp": 19.3,
+        "z": 2.77,
+        "p": 0.0056
+      },
+      "n1200_if_12_tasks_x100": {
+        "diff_pp": 19.3,
+        "z": 9.6,
+        "p": 0.0
+      }
+    },
+    "wilson_95_freebar_d4_n100": [
+      58.6,
+      76.6
+    ],
+    "wilson_95_freebar_d4_n1200": [
+      65.6,
+      70.9
+    ]
+  },
+  "robocasa_tests_assumed_n": {
+    "FreeBar vs RTC GR00T d=1 (n=550)": {
+      "diff_pp": 3.2,
+      "z": 1.17,
+      "p": 0.2412
+    },
+    "FreeBar vs Naive GR00T d=1 (n=550)": {
+      "diff_pp": 4.8,
+      "z": 1.74,
+      "p": 0.0812
+    },
+    "FreeBar vs RTC GR00T d=2 (n=550)": {
+      "diff_pp": 1.8,
+      "z": 0.66,
+      "p": 0.5089
+    },
+    "FreeBar vs Naive GR00T d=2 (n=550)": {
+      "diff_pp": 2.7,
+      "z": 0.99,
+      "p": 0.324
+    },
+    "FreeBar vs RTC GR00T d=3 (n=550)": {
+      "diff_pp": 1.4,
+      "z": 0.51,
+      "p": 0.61
+    },
+    "FreeBar vs Naive GR00T d=3 (n=550)": {
+      "diff_pp": 2.8,
+      "z": 1.01,
+      "p": 0.3109
+    },
+    "FreeBar vs RTC pi0 d=1 (n=550)": {
+      "diff_pp": 4.7,
+      "z": 1.65,
+      "p": 0.099
+    },
+    "FreeBar vs Naive pi0 d=1 (n=550)": {
+      "diff_pp": 2.2,
+      "z": 0.77,
+      "p": 0.444
+    },
+    "FreeBar vs RTC pi0 d=2 (n=550)": {
+      "diff_pp": 3.8,
+      "z": 1.32,
+      "p": 0.1853
+    },
+    "FreeBar vs Naive pi0 d=2 (n=550)": {
+      "diff_pp": 3.8,
+      "z": 1.32,
+      "p": 0.1853
+    },
+    "FreeBar vs RTC pi0 d=3 (n=550)": {
+      "diff_pp": 4.6,
+      "z": 1.61,
+      "p": 0.1073
+    },
+    "FreeBar vs Naive pi0 d=3 (n=550)": {
+      "diff_pp": 5.1,
+      "z": 1.79,
+      "p": 0.0737
+    }
+  }
+}
