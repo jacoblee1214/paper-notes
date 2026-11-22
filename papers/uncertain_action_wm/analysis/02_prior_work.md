@@ -34,7 +34,7 @@
 | **공식 코드** | 없음 (검색 범위에서 찾지 못함) | — | — | — | `04_claim_verification.md`로 대조 |
 | **프로젝트 페이지** | 없음 (arXiv 링크에 없음, `osupcvlab.github.io`에 항목 없음) | — | — | — | — |
 | [lucas-maes/le-wm](https://github.com/lucas-maes/le-wm) | LeWM 공식 코드 (ACTUS가 쓰는 세계모델, [25]) | MIT | 2026-05-26 | 4654 | 복제하지 않음. ACTUS 구현에 필요할 때 읽기 |
-| [galilai-group/stable-worldmodel](https://github.com/galilai-group/stable-worldmodel) (LeWM README가 가리킴) | 환경과 계획 도구 ([24]). 메타데이터는 `lucas-maes/stable-worldmodel`(스타 1, 2025-10-17 push, MIT)로 확인. galilai 저장소 자체는 API 확인 안 함 | MIT (확인한 사본) | 2025-10-17 (사본) | 1 (사본) | 설치하지 않음 |
+| [galilai-group/stable-worldmodel](https://github.com/galilai-group/stable-worldmodel) (LeWM README가 가리킴) | 환경과 계획 도구 ([24]). 공식 저장소는 `galilai-group/stable-worldmodel`(MIT, 스타 2,316, 2026-10-02 push, 2026-11-22 확인)이고 `lucas-maes/stable-worldmodel`은 그 fork다. | MIT | 2026-10-02 | 2,316 | 설치하지 않음 |
 | arXiv:2611.23620 저자 페이지, 소스(TeX) | arXiv 소스 링크(`/src/2611.23620`)는 있으나 내용을 받지 않음 | — | — | — | — |
 
 - **코드를 복제하지 않았습니다.** 공식 ACTUS 코드가 없어서 "정적 읽기"할 대상이 없습니다. LeWM과 DINO-WM은 세계모델 자체의 코드이므로 이 분석의 범위 밖입니다. 구현 가능성 판단에 필요한 LeWM README의 사양만 확인했습니다(`04` §4).
