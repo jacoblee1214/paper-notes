@@ -1,0 +1,341 @@
+{
+  "n": 25,
+  "가정": "모든 비율은 k/25. 0.75는 k/25가 아니므로 V1로 표시",
+  "T1_k25": {
+    "Hand Inpaint": [
+      23,
+      18,
+      16,
+      18,
+      22,
+      20,
+      18,
+      10
+    ],
+    "Hand Mask": [
+      23,
+      13,
+      15,
+      19,
+      19,
+      19,
+      18,
+      17
+    ]
+  },
+  "T1_비정수": [
+    [
+      "Grasp Brush",
+      "Hand Mask",
+      0.75
+    ],
+    [
+      "Sweep>0",
+      "Hand Mask",
+      0.75
+    ]
+  ],
+  "T1_inpaint_vs_mask": [
+    {
+      "비교": "Pick/Place Book: Inpaint vs Mask",
+      "k1/n1": "23/25",
+      "k2/n2": "23/25",
+      "차이_pp": 0.0,
+      "Fisher_p": 1.0,
+      "출처": "Table 1"
+    },
+    {
+      "비교": "Stack Cups: Inpaint vs Mask",
+      "k1/n1": "18/25",
+      "k2/n2": "13/25",
+      "차이_pp": 20.0,
+      "Fisher_p": 0.2436,
+      "출처": "Table 1"
+    },
+    {
+      "비교": "Tie Rope: Inpaint vs Mask",
+      "k1/n1": "16/25",
+      "k2/n2": "15/25",
+      "차이_pp": 4.0,
+      "Fisher_p": 1.0,
+      "출처": "Table 1"
+    },
+    {
+      "비교": "Rotate Box: Inpaint vs Mask",
+      "k1/n1": "18/25",
+      "k2/n2": "19/25",
+      "차이_pp": -4.0,
+      "Fisher_p": 1.0,
+      "출처": "Table 1"
+    },
+    {
+      "비교": "Grasp Brush: Inpaint vs Mask (Mask=18/25)",
+      "k1/n1": "22/25",
+      "k2/n2": "18/25",
+      "차이_pp": 16.0,
+      "Fisher_p": 0.289,
+      "출처": "Table 1",
+      "비고": "V1: 0.75는 25회에서 불가능. 18/25 가정"
+    },
+    {
+      "비교": "Grasp Brush: Inpaint vs Mask (Mask=19/25)",
+      "k1/n1": "22/25",
+      "k2/n2": "19/25",
+      "차이_pp": 12.0,
+      "Fisher_p": 0.4635,
+      "출처": "Table 1",
+      "비고": "V1: 19/25 가정"
+    },
+    {
+      "비교": "Sweep>0: Inpaint vs Mask (Mask=18/25)",
+      "k1/n1": "20/25",
+      "k2/n2": "18/25",
+      "차이_pp": 8.0,
+      "Fisher_p": 0.7416,
+      "출처": "Table 1",
+      "비고": "V1: 0.75는 25회에서 불가능. 18/25 가정"
+    },
+    {
+      "비교": "Sweep>0: Inpaint vs Mask (Mask=19/25)",
+      "k1/n1": "20/25",
+      "k2/n2": "19/25",
+      "차이_pp": 4.0,
+      "Fisher_p": 1.0,
+      "출처": "Table 1",
+      "비고": "V1: 19/25 가정"
+    },
+    {
+      "비교": "Sweep>2: Inpaint vs Mask",
+      "k1/n1": "18/25",
+      "k2/n2": "18/25",
+      "차이_pp": 0.0,
+      "Fisher_p": 1.0,
+      "출처": "Table 1"
+    },
+    {
+      "비교": "Sweep>4: Inpaint vs Mask",
+      "k1/n1": "10/25",
+      "k2/n2": "17/25",
+      "차이_pp": -28.0,
+      "Fisher_p": 0.0877,
+      "출처": "Table 1"
+    }
+  ],
+  "T2_k25": {
+    "Hand Inpaint": [
+      18,
+      21,
+      16
+    ],
+    "Hand Mask": [
+      13,
+      19,
+      17
+    ]
+  },
+  "T2_inpaint_vs_mask": [
+    {
+      "비교": "Outdoor Lawn: Inpaint 18 vs Mask 13",
+      "k1/n1": "18/25",
+      "k2/n2": "13/25",
+      "차이_pp": 20.0,
+      "Fisher_p": 0.2436,
+      "출처": "Table 2"
+    },
+    {
+      "비교": "Indoor Lounge: Inpaint 21 vs Mask 19",
+      "k1/n1": "21/25",
+      "k2/n2": "19/25",
+      "차이_pp": 8.0,
+      "Fisher_p": 0.7252,
+      "출처": "Table 2"
+    },
+    {
+      "비교": "OOD surface: Inpaint 16 vs Mask 17",
+      "k1/n1": "16/25",
+      "k2/n2": "17/25",
+      "차이_pp": -4.0,
+      "Fisher_p": 1.0,
+      "출처": "Table 2"
+    }
+  ],
+  "T2_inpaint_surface_drop_pp": 20.0,
+  "T3_k25": {
+    "E2FGVI": 21,
+    "OpenCV": 19,
+    "Mask only": 15
+  },
+  "T3_pairs": [
+    {
+      "비교": "E2FGVI 21 vs OpenCV 19",
+      "k1/n1": "21/25",
+      "k2/n2": "19/25",
+      "차이_pp": 8.0,
+      "Fisher_p": 0.7252,
+      "출처": "Table 3"
+    },
+    {
+      "비교": "E2FGVI 21 vs Mask only 15",
+      "k1/n1": "21/25",
+      "k2/n2": "15/25",
+      "차이_pp": 24.0,
+      "Fisher_p": 0.1137,
+      "출처": "Table 3"
+    },
+    {
+      "비교": "OpenCV 19 vs Mask only 15",
+      "k1/n1": "19/25",
+      "k2/n2": "15/25",
+      "차이_pp": 16.0,
+      "Fisher_p": 0.3635,
+      "출처": "Table 3"
+    }
+  ],
+  "T5_pairs": [
+    {
+      "비교": "Robot-only 22 (in-dist) vs Robot-only 0 (OOD)",
+      "k1/n1": "22/25",
+      "k2/n2": "0/25",
+      "차이_pp": 88.0,
+      "Fisher_p": 0.0,
+      "출처": "Table 5"
+    },
+    {
+      "비교": "Robot+Human 20 (OOD) vs Robot-only 0 (OOD)",
+      "k1/n1": "20/25",
+      "k2/n2": "0/25",
+      "차이_pp": 80.0,
+      "Fisher_p": 0.0,
+      "출처": "Table 5"
+    }
+  ],
+  "T6_pairs": [
+    {
+      "비교": "50 demos: Robot 13 vs Human 11",
+      "k1/n1": "13/25",
+      "k2/n2": "11/25",
+      "차이_pp": 8.0,
+      "Fisher_p": 0.7775,
+      "출처": "Table 6",
+      "논문_p": 0.778
+    },
+    {
+      "비교": "100 demos: Robot 22 vs Human 16",
+      "k1/n1": "22/25",
+      "k2/n2": "16/25",
+      "차이_pp": 24.0,
+      "Fisher_p": 0.0955,
+      "출처": "Table 6",
+      "논문_p": 0.095
+    },
+    {
+      "비교": "Human 300 (21) vs Robot 100 (22)",
+      "k1/n1": "21/25",
+      "k2/n2": "22/25",
+      "차이_pp": -4.0,
+      "Fisher_p": 1.0,
+      "출처": "Table 6 (300 vs 100 robot, 참고)"
+    },
+    {
+      "비교": "Human 100 (16) vs Human 300 (21)",
+      "k1/n1": "16/25",
+      "k2/n2": "21/25",
+      "차이_pp": -20.0,
+      "Fisher_p": 0.1963,
+      "출처": "Table 6 (human 스케일링, 참고)"
+    }
+  ],
+  "T6_mde_gap_pp": {
+    "n25_per_arm_base50pct": 36.9
+  },
+  "T10_pairs": [
+    {
+      "비교": "Pick/Place Book: Mask 23 vs Mask no-aug 22",
+      "k1/n1": "23/25",
+      "k2/n2": "22/25",
+      "차이_pp": 4.0,
+      "Fisher_p": 1.0,
+      "출처": "Table 10"
+    },
+    {
+      "비교": "Stack Cups: Mask 13 vs Mask no-aug 10",
+      "k1/n1": "13/25",
+      "k2/n2": "10/25",
+      "차이_pp": 12.0,
+      "Fisher_p": 0.5709,
+      "출처": "Table 10"
+    }
+  ],
+  "T1_mean_first5cols_inpaint_vs_mask": {
+    "inpaint_mean": 0.776,
+    "mask_mean": 0.71
+  },
+  "C_extra_pairs": [
+    {
+      "비교": "Pick/Place Book: Inpaint 23 vs Red Line 0",
+      "k1/n1": "23/25",
+      "k2/n2": "0/25",
+      "차이_pp": 92.0,
+      "Fisher_p": 0.0,
+      "출처": "Table 1"
+    },
+    {
+      "비교": "OOD: Indoor Lounge 21 vs OOD surface 16 (Inpaint)",
+      "k1/n1": "21/25",
+      "k2/n2": "16/25",
+      "차이_pp": 20.0,
+      "Fisher_p": 0.1963,
+      "출처": "Table 2 (본문 '20 %p 하락')"
+    },
+    {
+      "비교": "Sweep>4: Inpaint 10 vs Mask 17",
+      "k1/n1": "10/25",
+      "k2/n2": "17/25",
+      "차이_pp": -28.0,
+      "Fisher_p": 0.0877,
+      "출처": "Table 1 (v2 본문에 언급 없음)"
+    }
+  ],
+  "CI_examples": {
+    "Inpaint Stack Cups": {
+      "k/n": "18/25",
+      "p": 0.72,
+      "wilson95": [
+        0.524,
+        0.857
+      ]
+    },
+    "Mask Stack Cups": {
+      "k/n": "13/25",
+      "p": 0.52,
+      "wilson95": [
+        0.335,
+        0.7
+      ]
+    },
+    "Robot 50 demos": {
+      "k/n": "13/25",
+      "p": 0.52,
+      "wilson95": [
+        0.335,
+        0.7
+      ]
+    },
+    "Human 50 demos": {
+      "k/n": "11/25",
+      "p": 0.44,
+      "wilson95": [
+        0.267,
+        0.629
+      ]
+    },
+    "Human 300 demos": {
+      "k/n": "21/25",
+      "p": 0.84,
+      "wilson95": [
+        0.653,
+        0.936
+      ]
+    }
+  }
+}
