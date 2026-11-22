@@ -1,0 +1,238 @@
+{
+  "v1_success": {
+    "held_out": {
+      "pose": {
+        "k": 17,
+        "n": 20,
+        "rate": 0.85,
+        "wilson95": [
+          0.6396,
+          0.9476
+        ],
+        "clopper_pearson95": [
+          0.6211,
+          0.9679
+        ]
+      },
+      "vision": {
+        "k": 15,
+        "n": 20,
+        "rate": 0.75,
+        "wilson95": [
+          0.5313,
+          0.8881
+        ],
+        "clopper_pearson95": [
+          0.509,
+          0.9134
+        ]
+      },
+      "touch": {
+        "k": 20,
+        "n": 20,
+        "rate": 1.0,
+        "wilson95": [
+          0.8389,
+          1.0
+        ],
+        "clopper_pearson95": [
+          0.8316,
+          1.0
+        ]
+      },
+      "pairwise_fisher": [
+        {
+          "a": "touch",
+          "b": "pose",
+          "diff_pp": 15.0,
+          "p_raw": 0.2308,
+          "p_holm": 0.4615
+        },
+        {
+          "a": "touch",
+          "b": "vision",
+          "diff_pp": 25.0,
+          "p_raw": 0.0471,
+          "p_holm": 0.1414
+        },
+        {
+          "a": "vision",
+          "b": "pose",
+          "diff_pp": -10.0,
+          "p_raw": 0.6948,
+          "p_holm": 0.6948
+        }
+      ]
+    },
+    "sim_test": {
+      "pose": {
+        "k": 26,
+        "n": 36,
+        "rate": 0.7222,
+        "wilson95": [
+          0.5601,
+          0.8415
+        ],
+        "clopper_pearson95": [
+          0.5481,
+          0.858
+        ]
+      },
+      "vision": {
+        "k": 33,
+        "n": 36,
+        "rate": 0.9167,
+        "wilson95": [
+          0.7817,
+          0.9713
+        ],
+        "clopper_pearson95": [
+          0.7753,
+          0.9825
+        ]
+      },
+      "touch": {
+        "k": 35,
+        "n": 36,
+        "rate": 0.9722,
+        "wilson95": [
+          0.8583,
+          0.9951
+        ],
+        "clopper_pearson95": [
+          0.8547,
+          0.9993
+        ]
+      },
+      "pairwise_fisher": [
+        {
+          "a": "touch",
+          "b": "pose",
+          "diff_pp": 25.0,
+          "p_raw": 0.0065,
+          "p_holm": 0.0194
+        },
+        {
+          "a": "touch",
+          "b": "vision",
+          "diff_pp": 5.6,
+          "p_raw": 0.6142,
+          "p_holm": 0.6142
+        },
+        {
+          "a": "vision",
+          "b": "pose",
+          "diff_pp": 19.4,
+          "p_raw": 0.0632,
+          "p_holm": 0.1264
+        }
+      ]
+    }
+  },
+  "v1_power": {
+    "held_out_touch_vs_vision_20_vs_15": {
+      "p1": 1.0,
+      "p2": 0.75,
+      "n_per_group_80pct": 27
+    },
+    "held_out_touch_vs_pose_20_vs_17": {
+      "p1": 1.0,
+      "p2": 0.85,
+      "n_per_group_80pct": 48
+    },
+    "sim_test_touch_vs_pose_35_vs_26": {
+      "p1": 0.972,
+      "p2": 0.722,
+      "n_per_group_80pct": 32
+    },
+    "sim_test_touch_vs_vision_35_vs_33": {
+      "p1": 0.972,
+      "p2": 0.917,
+      "n_per_group_80pct": 266
+    }
+  },
+  "v2_grip_and_text": {
+    "grip_ratio_table3": {
+      "pose": 0.31,
+      "vision": 1.55,
+      "touch": 0.99
+    },
+    "mug_holding_force": {
+      "ratio": 1.3173,
+      "increase_pct": 31.73,
+      "text_claim_pct": 31,
+      "implied_empty_mass_kg_if_proportional": 0.945,
+      "note": "머그 질량은 논문에 없음. 비례 모델이면 빈 머그가 약 0.95 kg이어야 함 (일반 세라믹 머그보다 큼). 동적 하중과 마찰 모델이 섞여 있을 수 있어 확정은 못 함"
+    }
+  },
+  "v3_contact_power": {
+    "miss_rate": {
+      "vision": 0.322,
+      "touch": 0.131
+    },
+    "independent_frames_needed_per_group_80pct_power": 75,
+    "note": "프레임 간 상관을 무시한 값. 클립 단위 무작위 효과를 고려하면 더 큼. 논문은 n을 보고하지 않음",
+    "press_duration_error": {
+      "vision_s": 1.01,
+      "touch_s": 0.61,
+      "test": "not possible (no SD, no n)"
+    },
+    "f1": {
+      "vision": 0.778,
+      "touch": 0.89,
+      "test": "not possible (no n, no precision/recall)"
+    },
+    "illustrative_wilson_if_n_frames": {
+      "200": {
+        "touch_rate_wilson95": [
+          0.09,
+          0.184
+        ]
+      },
+      "500": {
+        "touch_rate_wilson95": [
+          0.105,
+          0.164
+        ]
+      },
+      "1000": {
+        "touch_rate_wilson95": [
+          0.111,
+          0.153
+        ]
+      }
+    }
+  },
+  "v4_consistency": [
+    {
+      "check": "초록·그림 1: 0.31× 등 grip 비율 = 표 3",
+      "value": "0.31, 1.55, 0.99",
+      "result": "일치"
+    },
+    {
+      "check": "초록: 20/20 (held-out), 35/36 (시뮬 테스트) = 표 3",
+      "value": "20/20, 35/36",
+      "result": "일치"
+    },
+    {
+      "check": "초록: 13% 대 32% = 표 2 (13.1%, 32.2%)",
+      "value": "13.1, 32.2",
+      "result": "일치 (반올림)"
+    },
+    {
+      "check": "본문 300 g 물: 27.4/20.8 N = +31%",
+      "value": 31.73,
+      "result": "불일치 소폭 (계산 +31.7%, 반올림 +32%)"
+    },
+    {
+      "check": "프로젝트 페이지: 'held-out objects' 대 논문 'held-out recordings'",
+      "value": "-",
+      "result": "문구 불일치 (대상이 물체인지 기록인지)"
+    },
+    {
+      "check": "논문 날짜 November 16, 2026 대 arXiv v1 제출 13 Nov 2026",
+      "value": "-",
+      "result": "제출 뒤 날짜 (사소)"
+    }
+  ]
+}
