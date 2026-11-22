@@ -1,0 +1,151 @@
+{
+  "V1_table1": {
+    "gsr_gain_pp_vs_wo_classifier": 47.4,
+    "gsr_gain_relative_pct_vs_wo_classifier": 164.0,
+    "gsr_gain_pp_vs_w_classifier": 12.4,
+    "gsr_gain_relative_pct_vs_w_classifier": 19.4,
+    "note": "초록은 '47.4%'라고 쓰지만 47.4는 퍼센트 포인트(pp)이고 상대 증가는 약 164%다."
+  },
+  "V2_test_grid": {
+    "objects": 2139,
+    "scales": 6,
+    "proposals": 10,
+    "grasps": 128340,
+    "paper_IK_attempts": 128340,
+    "match": true
+  },
+  "V3_gsr_wilson_assumed_n": {
+    "gsr_pct": 76.3,
+    "wilson95_pct": [
+      76.07,
+      76.53
+    ],
+    "assumption": "분모 = 128,340 (IK 시도 수와 같은 격자로 가정). 학습 시드 분산은 포함하지 않음."
+  },
+  "V4_table3_keypoint_row_equals_table1": true,
+  "V5_table2_average_check": {
+    "rows_checked": 12,
+    "mismatches_gt_0.05": []
+  },
+  "V6_table6_average_check": {
+    "KPGrasp_each_dataset_mean": 47.98,
+    "KPGrasp_each_dataset_reported": 47.8,
+    "original_DGA_datasets_mean": 42.82,
+    "original_DGA_datasets_reported": 42.8,
+    "KPGrasp_on_Dexonomy_mean": 63.78,
+    "KPGrasp_on_Dexonomy_reported": 63.8,
+    "DGA_model_mean": 58.48
+  },
+  "V7_table6_dexonomy_row_equals_table2": true,
+  "V8_text_only_numbers": {
+    "DGA_retrained_on_Dexonomy_avg": 59.1,
+    "DGA_no_refinement_original": 46.6,
+    "DGA_no_refinement_on_Dexonomy": 46.8,
+    "status": "표 없음, 검산 불가"
+  },
+  "V9_ablation": {
+    "rank_gain_pp": 9.3,
+    "best_poseJoint_gsr": 66.1,
+    "keypoint_minus_best_poseJoint_pp": 10.2,
+    "note_v1_vs_v2": "v1 표 3의 'Multi-Token' 행(66.1/95.1/9.5/3.2/25.7)은 v2의 34-token 행과 같다. v2는 24-token 행(63.5)을 추가했다.",
+    "seed_variance_reported": false
+  },
+  "V10_rank_gain_two_prop_z_assumed_n": {
+    "z": 52.27,
+    "p": 0.0,
+    "caveat": "학습 시드 분산과 객체 군집을 무시한 하한 수준의 불확실성"
+  },
+  "V11_keypoint_vs_34tok_two_prop": {
+    "z": -57.06,
+    "p": 0.0,
+    "caveat": "같은 시드 조건 비교만 반영"
+  },
+  "V12_speed": {
+    "speedup_vs_DGA": 87.5,
+    "paper_says": "around 87",
+    "kp_valid_per_s": 23.8,
+    "paper_says_kp_valid": "approximately 24",
+    "dexonomy_per_gpu_per_s": 6.87,
+    "paper_says_dexonomy": "less than 7",
+    "ratio_kp_over_dexonomy": 3.47,
+    "caveat": "Dexonomy 수치는 전체 9.5M 생성 격자를 전부 '유효'로 간주한 값이고, GPU 종류와 IK·필터 시간이 다르다. 비교 조건이 같지 않다."
+  },
+  "V13_realworld": {
+    "successes": 83,
+    "trials": 100,
+    "rate_pct": 83,
+    "wilson95_pct": [
+      74.45,
+      89.11
+    ],
+    "binomial_p_vs_50pct_one_sided": 6.55e-12,
+    "caveat": "객체 20개 × 5회. 같은 객체의 시도는 독립이 아니다. 객체별 결과가 없어 군집 구간은 계산하지 못했다."
+  },
+  "V14_ik": {
+    "stated_objects_x_scales_x_proposals": 128340,
+    "stated_IK_attempts": 128340,
+    "fraction_max_err_gt_5mm_pct": 2.63,
+    "fraction_clear_failures_pct": 0.2,
+    "note": "5 mm 기준으로 2.63%가 실패로 분류되지만 본문의 '명확한 실패' 0.2%와 기준이 다르다. 두 값은 다른 임계값이다.",
+    "text_0_7mm_vs_table": {
+      "reported_avg_mean_err_mm": 0.669,
+      "main_text_rounded_mm": 0.7,
+      "ok": true
+    }
+  },
+  "V15_training_samples": {
+    "main_200k_x_4096": 819200000,
+    "scaling_1p6M_x_512": 819200000,
+    "equal": true,
+    "sec_per_step_main_2days": 0.864,
+    "sec_per_step_512_13days": 0.702,
+    "caveat": "배치가 8배 작은데 스텝당 시간은 약 0.81배다. GPU 수나 병렬 설정이 다를 가능성이 있어 확인이 필요하다."
+  },
+  "V16_sampling_steps": {
+    "5step_gsr_equal_main": 76.3,
+    "7step_gsr": 76.0,
+    "7step_minus_5step_pp": -0.3,
+    "ok_no_gain_beyond_5": true,
+    "time_per_grasp_s": {
+      "1step": 0.01,
+      "3step": 0.024,
+      "5step": 0.032,
+      "7step": 0.04
+    }
+  },
+  "V18_fig5_read": {
+    "gap_KP_minus_PJ": {
+      "data": [
+        1.2,
+        11.1,
+        17.6,
+        13.8
+      ],
+      "model": [
+        7.7,
+        13.3,
+        13.8,
+        12.3
+      ],
+      "batch": [
+        14.0,
+        22.3,
+        16.9,
+        13.8
+      ]
+    },
+    "batch512_figure_KP": 70.3,
+    "batch512_text_KP": 73.5,
+    "batch512_diff_pp": -3.2,
+    "KP_4096_matches_table1": true,
+    "PJ_4096_matches_table3_euclid": true,
+    "gap_widens_monotonic_batch": false,
+    "gap_widens_monotonic_model": false,
+    "note": "그림 판독값이다. 본문은 '모든 설정에서 gap이 규모와 함께 벌어진다'고 쓴다. batch 축은 512에서 16.9 pp, 64에서 22.3 pp로 중간에 최대이고 4096에서 13.8 pp로 줄어든다. model 축도 M=8 이후 줄어든다."
+  },
+  "V17_wording": {
+    "KPGrasp_vs_classifier_text": "outperforms the classifier-based Dexonomy variant by 12.4% in GSR",
+    "correct_unit": "12.4 percentage points (상대 증가 약 19.4%)",
+    "relative_vs_classifier_pct": 19.4
+  }
+}
