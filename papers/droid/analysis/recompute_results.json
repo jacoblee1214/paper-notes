@@ -1,0 +1,400 @@
+{
+  "fig8_id": {
+    "setting": "in-distribution",
+    "tasks": [
+      "Close Waffle Maker",
+      "Put Chips in Plate",
+      "Put Apple in Pot",
+      "Toasting",
+      "Clean up Desk",
+      "Cook Lentils"
+    ],
+    "methods": {
+      "noco": {
+        "per_task_counts": [
+          8,
+          6,
+          3,
+          7,
+          7,
+          1
+        ],
+        "mean_recomputed": 0.5333,
+        "paper_avg": 0.53,
+        "mean_matches_paper": true,
+        "se_task_level": 0.1116,
+        "pooled_success": 32,
+        "pooled_n": 60,
+        "pooled_rate": 0.5333,
+        "pooled_wilson95": [
+          0.4089,
+          0.6537
+        ]
+      },
+      "oxe": {
+        "per_task_counts": [
+          7,
+          4,
+          1,
+          7,
+          6,
+          1
+        ],
+        "mean_recomputed": 0.4333,
+        "paper_avg": 0.43,
+        "mean_matches_paper": true,
+        "se_task_level": 0.1145,
+        "pooled_success": 26,
+        "pooled_n": 60,
+        "pooled_rate": 0.4333,
+        "pooled_wilson95": [
+          0.3157,
+          0.559
+        ]
+      },
+      "droid": {
+        "per_task_counts": [
+          9,
+          7,
+          4,
+          8,
+          10,
+          7
+        ],
+        "mean_recomputed": 0.75,
+        "paper_avg": 0.75,
+        "mean_matches_paper": true,
+        "se_task_level": 0.0847,
+        "pooled_success": 45,
+        "pooled_n": 60,
+        "pooled_rate": 0.75,
+        "pooled_wilson95": [
+          0.6277,
+          0.8422
+        ]
+      }
+    },
+    "comparisons": {
+      "droid_minus_noco": {
+        "mean_diff": 0.2167,
+        "per_task_diffs": [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.3,
+          0.6
+        ],
+        "paired_t_p": 0.0482495,
+        "paired_ci95": [
+          0.0025,
+          0.4309
+        ],
+        "pooled_fisher_p": 0.0218107,
+        "per_task_fisher_p": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.210526,
+          0.0197666
+        ],
+        "per_task_fisher_p_holm": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.1186
+        ],
+        "tasks_droid_higher": 6,
+        "tasks_tied": 0,
+        "tasks_base_higher": 0
+      },
+      "droid_minus_oxe": {
+        "mean_diff": 0.3167,
+        "per_task_diffs": [
+          0.2,
+          0.3,
+          0.3,
+          0.1,
+          0.4,
+          0.6
+        ],
+        "paired_t_p": 0.00637934,
+        "paired_ci95": [
+          0.1359,
+          0.4974
+        ],
+        "pooled_fisher_p": 0.000748998,
+        "per_task_fisher_p": [
+          0.582043,
+          0.36985,
+          0.303406,
+          1.0,
+          0.0866873,
+          0.0197666
+        ],
+        "per_task_fisher_p_holm": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.433437,
+          0.1186
+        ],
+        "tasks_droid_higher": 6,
+        "tasks_tied": 0,
+        "tasks_base_higher": 0
+      }
+    }
+  },
+  "fig8_ood": {
+    "setting": "out-of-distribution",
+    "tasks": [
+      "Close Waffle Maker (distractors)",
+      "Put Chips in Plate (distractors)",
+      "Put Chips in Plate (novel chips)",
+      "Put Apple in Pot (distractors)",
+      "Toasting (novel objects)",
+      "Clean up Desk (distractors)",
+      "Cook Lentils (distractors + camera shift)"
+    ],
+    "methods": {
+      "noco": {
+        "per_task_counts": [
+          4,
+          1,
+          2,
+          0,
+          2,
+          0,
+          3
+        ],
+        "mean_recomputed": 0.1714,
+        "paper_avg": 0.17,
+        "mean_matches_paper": true,
+        "se_task_level": 0.0565,
+        "pooled_success": 12,
+        "pooled_n": 70,
+        "pooled_rate": 0.1714,
+        "pooled_wilson95": [
+          0.1009,
+          0.2762
+        ]
+      },
+      "oxe": {
+        "per_task_counts": [
+          5,
+          4,
+          6,
+          1,
+          3,
+          6,
+          0
+        ],
+        "mean_recomputed": 0.3571,
+        "paper_avg": 0.36,
+        "mean_matches_paper": true,
+        "se_task_level": 0.0896,
+        "pooled_success": 25,
+        "pooled_n": 70,
+        "pooled_rate": 0.3571,
+        "pooled_wilson95": [
+          0.255,
+          0.4741
+        ]
+      },
+      "droid": {
+        "per_task_counts": [
+          7,
+          4,
+          3,
+          2,
+          7,
+          8,
+          6
+        ],
+        "mean_recomputed": 0.5286,
+        "paper_avg": 0.53,
+        "mean_matches_paper": true,
+        "se_task_level": 0.0865,
+        "pooled_success": 37,
+        "pooled_n": 70,
+        "pooled_rate": 0.5286,
+        "pooled_wilson95": [
+          0.4132,
+          0.641
+        ]
+      }
+    },
+    "comparisons": {
+      "droid_minus_noco": {
+        "mean_diff": 0.3571,
+        "per_task_diffs": [
+          0.3,
+          0.3,
+          0.1,
+          0.2,
+          0.5,
+          0.8,
+          0.3
+        ],
+        "paired_t_p": 0.00628654,
+        "paired_ci95": [
+          0.1445,
+          0.5698
+        ],
+        "pooled_fisher_p": 1.57245e-05,
+        "per_task_fisher_p": [
+          0.36985,
+          0.303406,
+          1.0,
+          0.473684,
+          0.0697785,
+          0.000714456,
+          0.36985
+        ],
+        "per_task_fisher_p_holm": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.418671,
+          0.00500119,
+          1.0
+        ],
+        "tasks_droid_higher": 7,
+        "tasks_tied": 0,
+        "tasks_base_higher": 0
+      },
+      "droid_minus_oxe": {
+        "mean_diff": 0.1714,
+        "per_task_diffs": [
+          0.2,
+          0.0,
+          -0.3,
+          0.1,
+          0.4,
+          0.2,
+          0.6
+        ],
+        "paired_t_p": 0.165137,
+        "paired_ci95": [
+          -0.094,
+          0.4369
+        ],
+        "pooled_fisher_p": 0.0608604,
+        "per_task_fisher_p": [
+          0.649917,
+          1.0,
+          0.36985,
+          1.0,
+          0.178895,
+          0.628483,
+          0.0108359
+        ],
+        "per_task_fisher_p_holm": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0758514
+        ],
+        "tasks_droid_higher": 5,
+        "tasks_tied": 1,
+        "tasks_base_higher": 1
+      }
+    }
+  },
+  "fig10_scene_diversity": {
+    "setting": "OOD, 20 scenes vs diverse",
+    "tasks": [
+      "Toasting (novel objects)",
+      "Clean up Desk (distractors)",
+      "Cook Lentils (distractors + camera shift)"
+    ],
+    "methods": {
+      "20_scenes": {
+        "per_task_counts": [
+          3,
+          7,
+          2
+        ],
+        "mean_recomputed": 0.4,
+        "paper_avg": 0.4,
+        "mean_matches_paper": true,
+        "se_task_level": 0.1528,
+        "pooled_success": 12,
+        "pooled_n": 30,
+        "pooled_rate": 0.4,
+        "pooled_wilson95": [
+          0.2459,
+          0.5768
+        ]
+      },
+      "diverse": {
+        "per_task_counts": [
+          6,
+          8,
+          4
+        ],
+        "mean_recomputed": 0.6,
+        "paper_avg": 0.6,
+        "mean_matches_paper": true,
+        "se_task_level": 0.1155,
+        "pooled_success": 18,
+        "pooled_n": 30,
+        "pooled_rate": 0.6,
+        "pooled_wilson95": [
+          0.4232,
+          0.7541
+        ]
+      }
+    },
+    "comparisons": {
+      "diverse_minus_20_scenes": {
+        "mean_diff": 0.2,
+        "per_task_diffs": [
+          0.3,
+          0.1,
+          0.2
+        ],
+        "paired_t_p": 0.0741799,
+        "paired_ci95": [
+          -0.0484,
+          0.4484
+        ],
+        "pooled_fisher_p": 0.196363,
+        "per_task_fisher_p": [
+          0.36985,
+          1.0,
+          0.628483
+        ],
+        "per_task_fisher_p_holm": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "tasks_droid_higher": 3,
+        "tasks_tied": 0,
+        "tasks_base_higher": 0
+      }
+    }
+  },
+  "power": {
+    "cell_n10_mde_p05": 0.626,
+    "pooled_id_n60_mde_p05": 0.256,
+    "pooled_ood_n70_mde_p05": 0.237,
+    "pooled_sd_n30_mde_p05": 0.362,
+    "note": "두 비율의 최소 검출 차이(alpha 0.05 양측, 검정력 0.8, 정규 근사, p=0.5 가정)"
+  },
+  "rollout_count": {
+    "fig8_cells": 39,
+    "fig8_rollouts": 390,
+    "fig10_rollouts": 60,
+    "total": 450
+  }
+}
