@@ -1,0 +1,1262 @@
+{
+ "V1_table_consistency": {
+  "table9_eps10_equals_table1_recall": {
+   "GMR": {
+    "table9": 0.4,
+    "table1": 0.42
+   },
+   "OmniRetarget": {
+    "table9": 22.1,
+    "table1": 22.13
+   },
+   "Ours w/o Stage 2 co-opt": {
+    "table9": 13.4,
+    "table1": 13.39
+   },
+   "Ours w/o VLM filtering": {
+    "table9": 58.0,
+    "table1": 58.02
+   },
+   "Ours": {
+    "table9": 59.4,
+    "table1": 59.43
+   }
+  },
+  "table10_total_equals_table1": {
+   "GMR": {
+    "t10_R": 0.4,
+    "t1_R": 0.42,
+    "t10_P": 2.3,
+    "t1_P": 2.26
+   },
+   "OmniRetarget": {
+    "t10_R": 22.1,
+    "t1_R": 22.13,
+    "t10_P": 12.5,
+    "t1_P": 12.51
+   },
+   "Ours w/o Stage 2 co-opt": {
+    "t10_R": 13.4,
+    "t1_R": 13.39,
+    "t10_P": 11.8,
+    "t1_P": 11.79
+   },
+   "Ours w/o VLM filtering": {
+    "t10_R": 58.0,
+    "t1_R": 58.02,
+    "t10_P": 11.6,
+    "t1_P": 11.6
+   },
+   "Ours": {
+    "t10_R": 59.4,
+    "t1_R": 59.43,
+    "t10_P": 14.2,
+    "t1_P": 14.17
+   }
+  },
+  "table10_mean_of_actions": {
+   "GMR": {
+    "R_mean": 0.42,
+    "R_total": 0.4,
+    "diff_R": -0.02,
+    "P_mean": 2.16,
+    "P_total": 2.3,
+    "diff_P": 0.14
+   },
+   "OmniRetarget": {
+    "R_mean": 23.7,
+    "R_total": 22.1,
+    "diff_R": -1.6,
+    "P_mean": 12.36,
+    "P_total": 12.5,
+    "diff_P": 0.14
+   },
+   "Ours w/o Stage 2 co-opt": {
+    "R_mean": 13.4,
+    "R_total": 13.4,
+    "diff_R": 0.0,
+    "P_mean": 13.36,
+    "P_total": 11.8,
+    "diff_P": -1.56
+   },
+   "Ours w/o VLM filtering": {
+    "R_mean": 57.78,
+    "R_total": 58.0,
+    "diff_R": 0.22,
+    "P_mean": 11.8,
+    "P_total": 11.6,
+    "diff_P": -0.2
+   },
+   "Ours": {
+    "R_mean": 59.08,
+    "R_total": 59.4,
+    "diff_R": 0.32,
+    "P_mean": 14.18,
+    "P_total": 14.2,
+    "diff_P": 0.02
+   }
+  },
+  "note": "재현율은 행동당 GT 클립 16개로 가중이 같으므로 총합 = 행동별 평균이어야 한다(OmniRetarget은 58개라 예외). Ours 59.08 대 59.4, w/o VLM 57.78 대 58.0처럼 0.2–0.35 어긋난다. 정밀도는 예측이 있는 클립만 평균하므로 어긋나도 된다.",
+  "events": {
+   "pred": 1740,
+   "gt": 203,
+   "ratio": 8.57,
+   "gt_per_clip": 2.54
+  }
+ },
+ "V2_text_vs_table1": {
+  "stage2_recall_jump": [
+   13.39,
+   58.02
+  ],
+  "vlm_precision": [
+   11.6,
+   14.17
+  ],
+  "vlm_recall": [
+   58.02,
+   59.43
+  ],
+  "user_rank_gain": 0.3,
+  "omni_infeasible_clips": {
+   "feasible": 766,
+   "total": 1100,
+   "infeasible_frac": 0.304
+  },
+  "omni_gt_clips": {
+   "feasible": 58,
+   "total": 80,
+   "infeasible_frac": 0.275
+  },
+  "stage1_vs_omni": {
+   "pen": [
+    1.31,
+    1.31
+   ],
+   "prec": [
+    11.79,
+    12.51
+   ],
+   "jitter": [
+    153.7,
+    134.1
+   ]
+  }
+ },
+ "V3_user_study": {
+  "rank_sum_per_question": [
+   10.0,
+   10.0,
+   10.0
+  ],
+  "table1_user_equals_table11_q3": {
+   "GMR": [
+    [
+     3.61,
+     0.04
+    ],
+    [
+     3.61,
+     0.04
+    ]
+   ],
+   "OmniRetarget": [
+    [
+     2.57,
+     0.04
+    ],
+    [
+     2.57,
+     0.04
+    ]
+   ],
+   "Ours w/o VLM filter": [
+    [
+     2.06,
+     0.03
+    ],
+    [
+     2.06,
+     0.03
+    ]
+   ],
+   "Ours": [
+    [
+     1.76,
+     0.03
+    ],
+    [
+     1.76,
+     0.03
+    ]
+   ]
+  },
+  "implied_participant_sd": {
+   "GMR": [
+    0.37,
+    0.37,
+    0.212
+   ],
+   "OmniRetarget": [
+    0.212,
+    0.265,
+    0.212
+   ],
+   "Ours w/o VLM filtering": [
+    0.212,
+    0.265,
+    0.159
+   ],
+   "Ours": [
+    0.212,
+    0.265,
+    0.159
+   ]
+  },
+  "adjacent_gaps": [
+   {
+    "q": 1,
+    "a": "GMR",
+    "b": "OmniRetarget",
+    "gap": 0.88,
+    "z_independent": 10.9
+   },
+   {
+    "q": 1,
+    "a": "OmniRetarget",
+    "b": "Ours w/o VLM filtering",
+    "gap": 0.59,
+    "z_independent": 10.4
+   },
+   {
+    "q": 1,
+    "a": "Ours w/o VLM filtering",
+    "b": "Ours",
+    "gap": 0.26,
+    "z_independent": 4.6
+   },
+   {
+    "q": 2,
+    "a": "GMR",
+    "b": "OmniRetarget",
+    "gap": 0.96,
+    "z_independent": 11.2
+   },
+   {
+    "q": 2,
+    "a": "OmniRetarget",
+    "b": "Ours w/o VLM filtering",
+    "gap": 0.31,
+    "z_independent": 4.4
+   },
+   {
+    "q": 2,
+    "a": "Ours w/o VLM filtering",
+    "b": "Ours",
+    "gap": 0.3,
+    "z_independent": 4.2
+   },
+   {
+    "q": 3,
+    "a": "GMR",
+    "b": "OmniRetarget",
+    "gap": 1.04,
+    "z_independent": 18.4
+   },
+   {
+    "q": 3,
+    "a": "OmniRetarget",
+    "b": "Ours w/o VLM filtering",
+    "gap": 0.51,
+    "z_independent": 10.2
+   },
+   {
+    "q": 3,
+    "a": "Ours w/o VLM filtering",
+    "b": "Ours",
+    "gap": 0.3,
+    "z_independent": 7.1
+   }
+  ],
+  "note": "한 참가자의 순위 합은 항상 10이므로 방법 사이 순위는 음의 상관이다. 독립 가정 z는 짝 비교의 보수적 값이 아니라 대략치이다. 참가자 40명 중 28명(70%)만 80시행을 끝냈다."
+ },
+ "V4_table1_tests": {
+  "recall_ours_vs_noVLM_n80": {
+   "diff": 1.41,
+   "t": 0.22,
+   "p": 0.825
+  },
+  "precision_ours_vs_noVLM_n80_upper": {
+   "diff": 2.57,
+   "t": 1.09,
+   "p": 0.278
+  },
+  "recall_ours_vs_omni_n80_58": {
+   "diff": 37.3,
+   "t": 5.96,
+   "p": 2.18e-08
+  },
+  "precision_ours_vs_omni_n58_upper": {
+   "diff": 1.66,
+   "t": 0.52,
+   "p": 0.601
+  },
+  "jitter_ours_vs_noVLM_n1100": {
+   "diff": -6.3,
+   "t": -2.01,
+   "p": 0.0447
+  },
+  "penetration_ours_vs_noVLM_n1100": {
+   "diff": -0.08,
+   "t": -1.7,
+   "p": 0.0897
+  },
+  "jitter_ours_vs_omni_n1100_766": {
+   "diff": -405.0,
+   "t": -32.39,
+   "p": 2.42e-148
+  },
+  "penetration_ours_vs_omni_n1100_766": {
+   "diff": -0.35,
+   "t": -4.69,
+   "p": 3.06e-06
+  },
+  "note": "같은 클립을 쓰는 비교라 짝 검정이 더 강하지만 클립별 값이 없어 독립(Welch)로 근사했다. 정밀도의 n은 상한이다(예측이 없는 클립 제외). 재현율 +1.4%p(VLM)는 독립 근사로 구분되지 않는다."
+ },
+ "V5_teacher_table2": {
+  "deltas_mesh_reward": {
+   "high-five": 31.4,
+   "hug": 21.7,
+   "link-arms": 34.3
+  },
+  "deltas_vlm_filter": {
+   "high-five": 3.2,
+   "hug": 7.0,
+   "link-arms": 1.4
+  },
+  "mpjpe_vlm_filter_delta_cm": {
+   "high-five": 0.1,
+   "hug": -0.2,
+   "link-arms": 0.5
+  },
+  "sd_range": [
+   0.1,
+   0.5
+  ],
+  "z_vs_sd_link_vlm": 3.4,
+  "note": "±는 '3 seeds'. C.5에 따르면 교사 체크포인트는 하나이고 평가 시드만 바뀌므로 학습 변동은 포함하지 않는다. MPJPE는 한 값만 있고 변동이 없다. 교사 표에는 3개 행동만 있고 handshake, pat-on-back은 없다."
+ },
+ "V6_student_table3": {
+  "ours_minus_variant": {
+   "(-) future generation": {
+    "hug": -8.7,
+    "high-five": -0.9,
+    "hand-shake": 6.8,
+    "link-arms": 25.3,
+    "pat-on-back": 6.9
+   },
+   "generation → regression": {
+    "hug": 3.2,
+    "high-five": -20.8,
+    "hand-shake": 6.8,
+    "link-arms": 23.3,
+    "pat-on-back": 6.7
+   },
+   "(-) pose prediction": {
+    "hug": 14.1,
+    "high-five": -1.9,
+    "hand-shake": 17.7,
+    "link-arms": 20.9,
+    "pat-on-back": 12.7
+   }
+  },
+  "wins_of_ours": {
+   "(-) future generation": 3,
+   "generation → regression": 4,
+   "(-) pose prediction": 4
+  },
+  "text_claims": {
+   "pose_removal_drops_hug_hs_link_pat": [
+    14.1,
+    17.7,
+    20.9,
+    12.7
+   ],
+   "future_gen_adds_hs_link_pat": [
+    6.8,
+    25.3,
+    6.9
+   ],
+   "gen_vs_reg_current_past": {
+    "hug": 11.9,
+    "high-five": -19.9,
+    "hand-shake": 0.0,
+    "link-arms": -2.0,
+    "pat-on-back": -0.2
+   }
+  },
+  "ours_best_actions": [
+   "hand-shake",
+   "link-arms",
+   "pat-on-back"
+  ],
+  "note": "초록과 4.3절의 '5개 중 4개 향상'은 (-) pose prediction과 generation→regression 기준에서는 맞다. (-) future generation 기준에서는 3개뿐이고 hug는 -8.7%p다. 전체 모델이 최고인 행동은 3개(hand-shake, link-arms, pat-on-back)다. 표 3은 변동(±) 없이 방 배치 5개 평균이며, 체크포인트는 변형당 하나다."
+ },
+ "V7_table6_paired": {
+  "hug": {
+   "means_po": 6.93,
+   "means_other": 2.7,
+   "paper_means": [
+    6.9,
+    2.7
+   ],
+   "seed_diffs": [
+    5.1,
+    1.5,
+    6.1
+   ],
+   "t_df2": 3.03,
+   "p_two_sided": 0.094,
+   "paper_t": 3.1,
+   "share_weighted_gain": 3.8
+  },
+  "pat-on-back": {
+   "means_po": 10.23,
+   "means_other": 1.03,
+   "paper_means": [
+    10.2,
+    1.0
+   ],
+   "seed_diffs": [
+    12.3,
+    13.7,
+    1.6
+   ],
+   "t_df2": 2.41,
+   "p_two_sided": 0.138,
+   "paper_t": 2.4,
+   "share_weighted_gain": 3.1
+  },
+  "link-arms": {
+   "means_po": 33.8,
+   "means_other": 4.13,
+   "paper_means": [
+    33.8,
+    4.1
+   ],
+   "seed_diffs": [
+    25.0,
+    40.2,
+    23.8
+   ],
+   "t_df2": 5.62,
+   "p_two_sided": 0.03,
+   "paper_t": 5.6,
+   "share_weighted_gain": 24.9
+  },
+  "table3_gain_vs_regression": {
+   "hug": 3.2,
+   "pat-on-back": 6.7,
+   "link-arms": 23.3
+  },
+  "note": "t(2)는 평가 시드 3개이고 체크포인트는 변형당 하나다. 시드 간 변동은 평가 잡음이지 학습 변동이 아니다. 구간 PO와 기타의 차이는 모든 시드에서 양수이나, p < 0.05는 link-arms 하나뿐이다. 임계값(0.8, 0.4)은 분포를 본 뒤 정했다(C.4)."
+ },
+ "V8_teacher_student": {
+  "computed_ratio15": {
+   "Hug": 34.6,
+   "High-five": 34.4,
+   "Hand-shake": 83.7,
+   "Link-arms": 60.8,
+   "Pat-on-back": 44.1
+  },
+  "computed_ratio30": {
+   "Hug": 62.2,
+   "High-five": 70.8,
+   "Hand-shake": 94.2,
+   "Link-arms": 82.4,
+   "Pat-on-back": 65.4
+  },
+  "mean_of_ratios": [
+   51.5,
+   75.0
+  ],
+  "ratio_of_means": [
+   54.1,
+   75.5
+  ],
+  "column_means_check": {
+   "T15": [
+    75.04,
+    75.0
+   ],
+   "S15": [
+    40.62,
+    40.6
+   ],
+   "T30": [
+    89.68,
+    89.7
+   ],
+   "S30": [
+    67.72,
+    67.7
+   ]
+  },
+  "student_train_split_vs_heldout_30cm": {
+   "hug": {
+    "train_split_table7": 49.9,
+    "heldout_table3": 34.5,
+    "gap": 15.4
+   },
+   "high-five": {
+    "train_split_table7": 62.1,
+    "heldout_table3": 13.1,
+    "gap": 49.0
+   },
+   "hand-shake": {
+    "train_split_table7": 91.1,
+    "heldout_table3": 82.0,
+    "gap": 9.1
+   },
+   "link-arms": {
+    "train_split_table7": 74.1,
+    "heldout_table3": 67.8,
+    "gap": 6.3
+   },
+   "pat-on-back": {
+    "train_split_table7": 61.4,
+    "heldout_table3": 51.1,
+    "gap": 10.3
+   }
+  },
+  "heldout_student_over_teacher_train_30cm": {
+   "per_action": {
+    "hug": 43.0,
+    "high-five": 14.9,
+    "hand-shake": 84.8,
+    "link-arms": 75.4,
+    "pat-on-back": 54.4
+   },
+   "mean": 54.5
+  },
+  "note": "서론과 4.3절의 '교사의 75%'는 부록 C.5 표 7로, 학생의 훈련 분할에서 계산한 값이다. 보류 분할(표 3)을 같은 교사값으로 나누면 평균 약 54%이다(교사는 보류 모션을 학습했으므로 근사). 학생의 훈련 대 보류 격차는 high-five에서 49%p로 가장 크다."
+ },
+ "V9_table5": {
+  "ext_hmr2": {
+   "hug": 5.7,
+   "hand-shake": 8.2,
+   "pat-on-back": 1.3,
+   "link-arms": 3.9,
+   "high-five": 5.4
+  },
+  "e2e_earlier_setting": {
+   "hug": 38.0,
+   "hand-shake": 78.6,
+   "pat-on-back": 23.8,
+   "link-arms": 30.1,
+   "high-five": 15.3
+  },
+  "table3_ours_current": {
+   "hug": 34.5,
+   "hand-shake": 82.0,
+   "pat-on-back": 51.1,
+   "link-arms": 67.8,
+   "high-five": 13.1
+  },
+  "e2e_minus_current": {
+   "hug": 3.5,
+   "hand-shake": -3.4,
+   "pat-on-back": -27.3,
+   "link-arms": -37.7,
+   "high-five": 2.2
+  },
+  "table7_student_30cm_train_split": {
+   "hug": 49.9,
+   "high-five": 62.1,
+   "hand-shake": 91.1,
+   "link-arms": 74.1,
+   "pat-on-back": 61.4
+  },
+  "duplicate_value_78.6": "표 5 hand-shake E2E 30 cm = 78.6, 표 7 hand-shake 학생 15 cm = 78.6 (서로 다른 설정·임계값)",
+  "note": "표 5의 E2E 열(이전 설정)은 현재 표 3과 pat-on-back 23.8 대 51.1, link-arms 30.1 대 67.8로 크게 다르다. HMR2.0 기준선은 이전 설정이라 현재 모델과 직접 비교는 아니다. 실로봇 결과도 이전 설정(3층 CNN)이다."
+ },
+ "V10_real_robot_table4": {
+  "sum": 31,
+  "reported_total": 31,
+  "wilson95": {
+   "high-five": [
+    5,
+    10,
+    0.5,
+    0.237,
+    0.763
+   ],
+   "hug": [
+    8,
+    10,
+    0.8,
+    0.49,
+    0.943
+   ],
+   "hand-shake": [
+    5,
+    10,
+    0.5,
+    0.237,
+    0.763
+   ],
+   "link-arms": [
+    5,
+    10,
+    0.5,
+    0.237,
+    0.763
+   ],
+   "pat-on-back": [
+    8,
+    10,
+    0.8,
+    0.49,
+    0.943
+   ],
+   "total": [
+    31,
+    50,
+    0.62,
+    0.482,
+    0.741
+   ]
+  },
+  "fisher_hug_pat_vs_others": {
+   "table": [
+    [
+     16,
+     4
+    ],
+    [
+     15,
+     15
+    ]
+   ],
+   "p": 0.041
+  },
+  "fisher_8of10_vs_5of10": 0.35,
+  "spearman_sim_heldout_vs_real": {
+   "rho": -0.29,
+   "p": 0.638,
+   "n": 5
+  },
+  "tests_vs_50pct": {
+   "high-five": 1.0,
+   "hug": 0.109,
+   "hand-shake": 1.0,
+   "link-arms": 1.0,
+   "pat-on-back": 0.109
+  },
+  "note": "성공 기준이 행동마다 다르다(handshake, high-five는 손이 약 15 cm 안, 나머지는 접근과 완료). 이전 설정의 학생이다. 시험당 10회라 구간이 매우 넓고(5/10는 [24, 76]%), 8/10 대 5/10 두 칸만 비교하면 Fisher p = 0.35이고, hug+pat 16/20 대 나머지 15/30으로 묶으면 p = 0.04이나 묶음이 사후 선택이다."
+ },
+ "V11_table8_label_quality": {
+  "rows": {},
+  "bound_checks": {
+   "Hug_distance": {
+    "P": 0.06,
+    "R": 0.241,
+    "F1_reported": 0.127,
+    "harmonic_of_means": 0.096,
+    "max_possible_mean_F1": 0.113,
+    "infeasible": true
+   },
+   "Hug_vlm": {
+    "P": 0.081,
+    "R": 0.201,
+    "F1_reported": 0.181,
+    "harmonic_of_means": 0.115,
+    "max_possible_mean_F1": 0.15,
+    "infeasible": true
+   },
+   "Hand-shake_distance": {
+    "P": 0.275,
+    "R": 0.785,
+    "F1_reported": 0.495,
+    "harmonic_of_means": 0.407,
+    "max_possible_mean_F1": 0.431,
+    "infeasible": true
+   },
+   "Hand-shake_vlm": {
+    "P": 0.442,
+    "R": 0.661,
+    "F1_reported": 0.674,
+    "harmonic_of_means": 0.53,
+    "max_possible_mean_F1": 0.613,
+    "infeasible": true
+   },
+   "Pat-on-back_distance": {
+    "P": 0.107,
+    "R": 0.824,
+    "F1_reported": 0.212,
+    "harmonic_of_means": 0.189,
+    "max_possible_mean_F1": 0.193,
+    "infeasible": true
+   },
+   "Pat-on-back_vlm": {
+    "P": 0.227,
+    "R": 0.76,
+    "F1_reported": 0.387,
+    "harmonic_of_means": 0.35,
+    "max_possible_mean_F1": 0.37,
+    "infeasible": true
+   },
+   "High-five_distance": {
+    "P": 0.26,
+    "R": 0.866,
+    "F1_reported": 0.417,
+    "harmonic_of_means": 0.4,
+    "max_possible_mean_F1": 0.413,
+    "infeasible": true
+   },
+   "High-five_vlm": {
+    "P": 0.336,
+    "R": 0.66,
+    "F1_reported": 0.626,
+    "harmonic_of_means": 0.445,
+    "max_possible_mean_F1": 0.503,
+    "infeasible": true
+   },
+   "Link-arms_distance": {
+    "P": 0.257,
+    "R": 0.6,
+    "F1_reported": 0.374,
+    "harmonic_of_means": 0.36,
+    "max_possible_mean_F1": 0.409,
+    "infeasible": false
+   },
+   "Link-arms_vlm": {
+    "P": 0.339,
+    "R": 0.549,
+    "F1_reported": 0.453,
+    "harmonic_of_means": 0.419,
+    "max_possible_mean_F1": 0.506,
+    "infeasible": false
+   },
+   "Total_distance": {
+    "P": 0.192,
+    "R": 0.663,
+    "F1_reported": 0.33,
+    "harmonic_of_means": 0.298,
+    "max_possible_mean_F1": 0.322,
+    "infeasible": true
+   },
+   "Total_vlm": {
+    "P": 0.285,
+    "R": 0.567,
+    "F1_reported": 0.468,
+    "harmonic_of_means": 0.379,
+    "max_possible_mean_F1": 0.444,
+    "infeasible": true
+   }
+  },
+  "n_infeasible": 10,
+  "relative_gains": {
+   "precision": 0.484,
+   "f1": 0.418,
+   "recall_drop": 0.096
+  },
+  "per_action_precision_gain_x": {
+   "Hug": 1.35,
+   "Hand-shake": 1.61,
+   "Pat-on-back": 2.12,
+   "High-five": 1.29,
+   "Link-arms": 1.32
+  },
+  "per_action_recall_drop": {
+   "Hug": 0.04,
+   "Hand-shake": 0.124,
+   "Pat-on-back": 0.064,
+   "High-five": 0.206,
+   "Link-arms": 0.051
+  },
+  "total_vs_mean_of_actions": {
+   "P_d": [
+    0.192,
+    0.192
+   ],
+   "R_d": [
+    0.663,
+    0.663
+   ],
+   "F_d": [
+    0.325,
+    0.33
+   ],
+   "P_v": [
+    0.285,
+    0.285
+   ],
+   "R_v": [
+    0.566,
+    0.567
+   ],
+   "F_v": [
+    0.464,
+    0.468
+   ]
+  },
+  "note": "클립별 F1 = 2PR/(P+R)이고 P, R이 [0,1]이면 평균 F1은 2P/(1+P)(P는 평균 정밀도)(옌센 부등식)를 넘을 수 없다. 표 8의 12개 행 중 일부가 이 상한을 넘는다(예: 총 VLM 0.468 > 0.444, high-five VLM 0.626 > 0.503). 정밀도를 예측이 있는 클립만 평균했거나 F1을 다른 방식(사건 수준)으로 계산했다면 가능하지만 본문은 설명하지 않는다."
+ },
+ "V12_dataset_arithmetic": {
+  "master_pool": {
+   "per_action": [
+    282,
+    278,
+    275,
+    252,
+    268
+   ],
+   "sum": 1355,
+   "reported": 1355
+  },
+  "teacher_pool": {
+   "per_action": [
+    244,
+    233,
+    196,
+    205,
+    222
+   ],
+   "sum": 1100,
+   "reported": 1100
+  },
+  "dropped": {
+   "n": 255,
+   "reported": 255,
+   "frac": 0.1882,
+   "reported_frac": 0.188
+  },
+  "per_action_dropped": {
+   "hug": 38,
+   "high-five": 45,
+   "hand-shake": 79,
+   "link-arms": 47,
+   "pat-on-back": 46
+  },
+  "gt_clips": {
+   "n": 80,
+   "per_action": 16,
+   "frac_of_teacher_pool": 0.073
+  },
+  "user_study": {
+   "participants": 40,
+   "analysed": 28,
+   "frac": 0.7
+  },
+  "student_pool": {
+   "note": "학생 풀의 클립 수(두 평가자 3점, FOV 필터)는 논문에 숫자로 없다. 9:1 분할만 기재"
+  }
+ },
+ "V13_reward_shapes": {
+  "gate_phi": {
+   "0": 0.368,
+   "0.5": 0.607,
+   "1": 1.0,
+   "2": 1.0,
+   "5": 1.0
+  },
+  "dist_reward_by_cm": {
+   "0": 1.0,
+   "2": 0.9802,
+   "5": 0.8825,
+   "10": 0.6065,
+   "15": 0.3247,
+   "20": 0.1353,
+   "30": 0.0111
+  },
+  "force_reward_label1": {
+   "0": 0.082,
+   "1": 0.135,
+   "2.5": 0.287,
+   "5": 1.0,
+   "20": 1.0,
+   "50": 1.0,
+   "80": 0.223,
+   "120": 0.03
+  },
+  "force_penalty_label0": {
+   "0": 0.0,
+   "5": 0.0,
+   "20": -0.1,
+   "50": -0.25,
+   "100": -0.5
+  },
+  "aggregate_weights": {
+   "dir": 3,
+   "dist": 5,
+   "force": 0.5
+  },
+  "note": "σ_d = 50 m⁻²이면 15 cm에서 거리 보상이 0.32, 30 cm에서 0.011이다. 학생을 30 cm로 평가하는 '접촉 재현율'은 보상이 거의 0인 거리까지 허용한다. 힘 게이트 φ는 F ≥ 1 N이면 1이고 τ = 1 N은 단위가 맞는 힘 임계값이다(식 5의 exp(F-τ)는 단위 없는 형태). 힘 보상의 하한 5 N, 상한 50 N은 시뮬 접촉력이며 실로봇 측정 힘과의 대응은 보고되지 않았다."
+ },
+ "V14_training_arithmetic": {
+  "depth_pixels": 20736,
+  "five_frames_dim": 5,
+  "short_proprio_dim": 540,
+  "long_proprio_steps": 100,
+  "long_seconds": 2.0,
+  "action_dim": {
+   "homie_cmds": 4,
+   "residual_arm": 14,
+   "total": 18
+  },
+  "gate_pixels_15pct": 3110.0,
+  "lambda_note": "C.3은 'combined pose loss enters the total loss with weight 0.5, i.e. λgen = λpose = 0.5'라고 쓴다. DDIM 예측과 단일 단계 추정이 '같은 비율'로 합쳐진다면 각 0.25인지 0.5인지 문장만으로 정할 수 없다. 합이면 1.0이다.",
+  "gate_note": "부분 관측 구간이 link-arms에서 점유율 0.4 미만(파트너가 시야를 벗어남)인데, 학습은 파트너 픽셀 15% 이하인 프레임의 기울기를 끈다. 점유율은 로봇 몸 픽셀을 포함하므로 두 기준은 같은 양이 아니다. 두 기준의 겹침은 보고되지 않았다.",
+  "kl_ramp": "λKL 1e-4 -> 1e-2, epoch 500–2000",
+  "teacher_ppo": {
+   "envs": 8192,
+   "steps_per_iter": 24,
+   "batch": 196608,
+   "lr": 1e-05
+  },
+  "student_envs": 128
+ },
+ "V15_fig3_vs_table6": {
+  "hug": {
+   "fig3_po": 6.9,
+   "fig3_other": 2.7
+  },
+  "pat-on-back": {
+   "fig3_po": 10.2,
+   "fig3_other": 1.0
+  },
+  "link-arms": {
+   "fig3_po": 33.8,
+   "fig3_other": 4.1
+  }
+ },
+ "V16_threshold_sensitivity": {
+  "table9": {
+   "GMR": {
+    "3": 0.0,
+    "5": 0.0,
+    "10": 0.4,
+    "15": 0.6,
+    "20": 1.3,
+    "25": 4.9,
+    "30": 10.6
+   },
+   "OmniRetarget": {
+    "3": 2.7,
+    "5": 4.9,
+    "10": 22.1,
+    "15": 43.3,
+    "20": 58.4,
+    "25": 77.3,
+    "30": 86.2
+   },
+   "Ours w/o Stage 2 co-opt": {
+    "3": 1.7,
+    "5": 5.0,
+    "10": 13.4,
+    "15": 33.6,
+    "20": 54.4,
+    "25": 72.4,
+    "30": 79.4
+   },
+   "Ours w/o VLM filtering": {
+    "3": 12.1,
+    "5": 23.1,
+    "10": 58.0,
+    "15": 79.3,
+    "20": 87.2,
+    "25": 91.3,
+    "30": 97.2
+   },
+   "Ours": {
+    "3": 12.1,
+    "5": 27.1,
+    "10": 59.4,
+    "15": 80.0,
+    "20": 92.0,
+    "25": 94.3,
+    "30": 95.9
+   }
+  },
+  "ours_minus_noVLM_by_eps": {
+   "3": 0.0,
+   "5": 4.0,
+   "10": 1.4,
+   "15": 0.7,
+   "20": 4.8,
+   "25": 3.0,
+   "30": -1.3
+  },
+  "ours_minus_omni_by_eps": {
+   "3": 9.4,
+   "5": 22.2,
+   "10": 37.3,
+   "15": 36.7,
+   "20": 33.6,
+   "25": 17.0,
+   "30": 9.7
+  },
+  "note": "VLM 필터의 재현율 이득은 ε = 10 cm에서 +1.4, 15 cm +0.7, 20 cm +4.8, 25 cm +3.0이고 30 cm에서는 -1.3이다. VLM 필터의 주 효과는 재현율이 아니라 정밀도(+2.6%p)와 사용자 선호이다. OmniRetarget은 가능한 58개 클립만 채점되어 큰 ε에서 유리하다(E.4)."
+ },
+ "parsed_tables": {
+  "table1": {
+   "GMR": {
+    "jit": [
+     134.1,
+     96.0
+    ],
+    "pen": [
+     2.14,
+     3.05
+    ],
+    "rec": [
+     0.42,
+     3.7
+    ],
+    "prec": [
+     2.26,
+     9.72
+    ],
+    "user": [
+     3.61,
+     0.04
+    ]
+   },
+   "OmniRetarget": {
+    "jit": [
+     560.4,
+     341.0
+    ],
+    "pen": [
+     1.31,
+     1.85
+    ],
+    "rec": [
+     22.13,
+     34.24
+    ],
+    "prec": [
+     12.51,
+     18.47
+    ],
+    "user": [
+     2.57,
+     0.04
+    ]
+   },
+   "Ours w/o Stage 2 co-opt": {
+    "jit": [
+     153.7,
+     71.0
+    ],
+    "pen": [
+     1.31,
+     1.73
+    ],
+    "rec": [
+     13.39,
+     26.56
+    ],
+    "prec": [
+     11.79,
+     19.58
+    ],
+    "user": null
+   },
+   "Ours w/o VLM filter": {
+    "jit": [
+     161.7,
+     76.0
+    ],
+    "pen": [
+     1.04,
+     1.11
+    ],
+    "rec": [
+     58.02,
+     41.71
+    ],
+    "prec": [
+     11.6,
+     14.39
+    ],
+    "user": [
+     2.06,
+     0.03
+    ]
+   },
+   "Ours": {
+    "jit": [
+     155.4,
+     71.0
+    ],
+    "pen": [
+     0.96,
+     1.1
+    ],
+    "rec": [
+     59.43,
+     38.91
+    ],
+    "prec": [
+     14.17,
+     15.46
+    ],
+    "user": [
+     1.76,
+     0.03
+    ]
+   }
+  },
+  "table2": {
+   "Ours": {
+    "high-five": {
+     "mpjpe": 6.5,
+     "contact": 70.9,
+     "sd": 0.3
+    },
+    "hug": {
+     "mpjpe": 8.3,
+     "contact": 53.1,
+     "sd": 0.5
+    },
+    "link-arms": {
+     "mpjpe": 7.2,
+     "contact": 74.8,
+     "sd": 0.1
+    }
+   },
+   "(-) mesh contact reward": {
+    "high-five": {
+     "mpjpe": 6.5,
+     "contact": 39.5,
+     "sd": 0.3
+    },
+    "hug": {
+     "mpjpe": 9.5,
+     "contact": 31.4,
+     "sd": 0.1
+    },
+    "link-arms": {
+     "mpjpe": 8.6,
+     "contact": 40.5,
+     "sd": 0.4
+    }
+   },
+   "(-) VLM contact filtering": {
+    "high-five": {
+     "mpjpe": 6.6,
+     "contact": 67.7,
+     "sd": 0.2
+    },
+    "hug": {
+     "mpjpe": 8.1,
+     "contact": 46.1,
+     "sd": 0.2
+    },
+    "link-arms": {
+     "mpjpe": 7.7,
+     "contact": 73.4,
+     "sd": 0.4
+    }
+   }
+  },
+  "table3": {
+   "Ours": {
+    "hug": 34.5,
+    "high-five": 13.1,
+    "hand-shake": 82.0,
+    "link-arms": 67.8,
+    "pat-on-back": 51.1
+   },
+   "(-) future generation": {
+    "hug": 43.2,
+    "high-five": 14.0,
+    "hand-shake": 75.2,
+    "link-arms": 42.5,
+    "pat-on-back": 44.2
+   },
+   "generation → regression": {
+    "hug": 31.3,
+    "high-five": 33.9,
+    "hand-shake": 75.2,
+    "link-arms": 44.5,
+    "pat-on-back": 44.4
+   },
+   "(-) pose prediction": {
+    "hug": 20.4,
+    "high-five": 15.0,
+    "hand-shake": 64.3,
+    "link-arms": 46.9,
+    "pat-on-back": 38.4
+   }
+  },
+  "table7": {
+   "Hug": {
+    "T15": 52.3,
+    "S15": 18.1,
+    "rec15": 35.0,
+    "T30": 80.2,
+    "S30": 49.9,
+    "rec30": 62.0
+   },
+   "High-five": {
+    "T15": 69.5,
+    "S15": 23.9,
+    "rec15": 34.0,
+    "T30": 87.7,
+    "S30": 62.1,
+    "rec30": 71.0
+   },
+   "Hand-shake": {
+    "T15": 93.9,
+    "S15": 78.6,
+    "rec15": 84.0,
+    "T30": 96.7,
+    "S30": 91.1,
+    "rec30": 94.0
+   },
+   "Link-arms": {
+    "T15": 72.5,
+    "S15": 44.1,
+    "rec15": 61.0,
+    "T30": 89.9,
+    "S30": 74.1,
+    "rec30": 82.0
+   },
+   "Pat-on-back": {
+    "T15": 87.0,
+    "S15": 38.4,
+    "rec15": 44.0,
+    "T30": 93.9,
+    "S30": 61.4,
+    "rec30": 65.0
+   },
+   "Mean": {
+    "T15": 75.0,
+    "S15": 40.6,
+    "rec15": 52.0,
+    "T30": 89.7,
+    "S30": 67.7,
+    "rec30": 75.0
+   }
+  },
+  "table5": {
+   "ext": {
+    "hug": 5.7,
+    "hand-shake": 8.2,
+    "pat-on-back": 1.3,
+    "link-arms": 3.9,
+    "high-five": 5.4
+   },
+   "e2e": {
+    "hug": 38.0,
+    "hand-shake": 78.6,
+    "pat-on-back": 23.8,
+    "link-arms": 30.1,
+    "high-five": 15.3
+   }
+  }
+ }
+}
