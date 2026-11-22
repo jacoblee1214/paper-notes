@@ -1,0 +1,89 @@
+{
+ "toy1_state_dict_alias": {
+  "weight_changed_after_50_steps": 0.31325915455818176,
+  "shallow_snapshot_equals_current": true,
+  "shallow_snapshot_equals_snapshot_time": false,
+  "deep_snapshot_equals_snapshot_time": true,
+  "same_storage_as_live_param": true,
+  "meaning": "load_state_dict(shallow)는 아무 일도 하지 않는다: 헤드는 early-stop 시점(마지막 스텝)의 가중치로 남고, 인코더·트렁크만 best-val 스텝으로 되돌아간다.",
+  "torch": "2.15.0"
+ },
+ "toy2_procrustes_retrieval": {
+  "setup": "에피소드 99개, 객체 30개(균등 무작위 배정), 창 8개 평균, d=192, 절반(50)으로 Procrustes를 맞추고 나머지 49개에서 검색 (갤러리 49), 40번 반복",
+  "chance_pct_gallery49": {
+   "R@1": 2.0,
+   "R@5": 10.2
+  },
+  "paper_fig3_reported_pct_gallery99": {
+   "random_init": [
+    3,
+    20
+   ],
+   "MAE_only": [
+    20,
+    61
+   ],
+   "HTT": [
+    41,
+    82
+   ]
+  },
+  "rows": [
+   {
+    "episode_code_shared_lambda": 0.0,
+    "window_noise_sigma": 1.5,
+    "R@1_pct": 41.0,
+    "R@5_pct": 88.2
+   },
+   {
+    "episode_code_shared_lambda": 0.0,
+    "window_noise_sigma": 2.5,
+    "R@1_pct": 39.4,
+    "R@5_pct": 84.8
+   },
+   {
+    "episode_code_shared_lambda": 0.0,
+    "window_noise_sigma": 3.5,
+    "R@1_pct": 32.0,
+    "R@5_pct": 74.1
+   },
+   {
+    "episode_code_shared_lambda": 0.5,
+    "window_noise_sigma": 1.5,
+    "R@1_pct": 59.7,
+    "R@5_pct": 93.5
+   },
+   {
+    "episode_code_shared_lambda": 0.5,
+    "window_noise_sigma": 2.5,
+    "R@1_pct": 44.7,
+    "R@5_pct": 86.1
+   },
+   {
+    "episode_code_shared_lambda": 0.5,
+    "window_noise_sigma": 3.5,
+    "R@1_pct": 32.0,
+    "R@5_pct": 73.0
+   },
+   {
+    "episode_code_shared_lambda": 1.0,
+    "window_noise_sigma": 1.5,
+    "R@1_pct": 80.1,
+    "R@5_pct": 97.5
+   },
+   {
+    "episode_code_shared_lambda": 1.0,
+    "window_noise_sigma": 2.5,
+    "R@1_pct": 60.4,
+    "R@5_pct": 89.3
+   },
+   {
+    "episode_code_shared_lambda": 1.0,
+    "window_noise_sigma": 3.5,
+    "R@1_pct": 35.2,
+    "R@5_pct": 69.7
+   }
+  ],
+  "caveat": "토이는 실제 임베딩이 아니다. 갤러리 크기(49 대 99)와 객체 분포가 논문과 다르다. 객체 정보만 공유하는 행(lambda=0)이 논문 수치 범위의 R@K를 만들 수 있는지만 본다."
+ }
+}
