@@ -1,0 +1,174 @@
+{
+  "sr_wilson_fisher": {
+    "Laundry (n=40)": {
+      "rows": {
+        "ACT": {
+          "k": 22,
+          "n": 40,
+          "sr": 55.0,
+          "wilson95": [
+            39.8,
+            69.3
+          ]
+        },
+        "MimicPlay": {
+          "k": 20,
+          "n": 40,
+          "sr": 50.0,
+          "wilson95": [
+            35.2,
+            64.8
+          ]
+        },
+        "EgoMimic w/o human": {
+          "k": 29,
+          "n": 40,
+          "sr": 72.5,
+          "wilson95": [
+            57.2,
+            83.9
+          ]
+        },
+        "EgoMimic": {
+          "k": 35,
+          "n": 40,
+          "sr": 87.5,
+          "wilson95": [
+            73.9,
+            94.5
+          ]
+        }
+      },
+      "fisher_p_two_sided": {
+        "EgoMimic vs ACT": 0.0026,
+        "EgoMimic vs MimicPlay": 0.0006,
+        "EgoMimic vs EgoMimic w/o human": 0.161
+      }
+    },
+    "Groceries SR (n=50)": {
+      "rows": {
+        "ACT": {
+          "k": 11,
+          "n": 50,
+          "sr": 22.0,
+          "wilson95": [
+            12.8,
+            35.2
+          ]
+        },
+        "MimicPlay": {
+          "k": 4,
+          "n": 50,
+          "sr": 8.0,
+          "wilson95": [
+            3.2,
+            18.8
+          ]
+        },
+        "EgoMimic w/o human": {
+          "k": 14,
+          "n": 50,
+          "sr": 28.0,
+          "wilson95": [
+            17.5,
+            41.7
+          ]
+        },
+        "EgoMimic": {
+          "k": 15,
+          "n": 50,
+          "sr": 30.0,
+          "wilson95": [
+            19.1,
+            43.8
+          ]
+        }
+      },
+      "fisher_p_two_sided": {
+        "EgoMimic vs ACT": 0.4945,
+        "EgoMimic vs MimicPlay": 0.0095,
+        "EgoMimic vs EgoMimic w/o human": 1.0
+      }
+    },
+    "Groceries Open Bag (n=50)": {
+      "rows": {
+        "ACT": {
+          "k": 27,
+          "n": 50,
+          "sr": 54.0,
+          "wilson95": [
+            40.4,
+            67.0
+          ]
+        },
+        "MimicPlay": {
+          "k": 20,
+          "n": 50,
+          "sr": 40.0,
+          "wilson95": [
+            27.6,
+            53.8
+          ]
+        },
+        "EgoMimic w/o human": {
+          "k": 30,
+          "n": 50,
+          "sr": 60.0,
+          "wilson95": [
+            46.2,
+            72.4
+          ]
+        },
+        "EgoMimic": {
+          "k": 35,
+          "n": 50,
+          "sr": 70.0,
+          "wilson95": [
+            56.2,
+            80.9
+          ]
+        }
+      },
+      "fisher_p_two_sided": {
+        "EgoMimic vs ACT": 0.1488,
+        "EgoMimic vs MimicPlay": 0.0046,
+        "EgoMimic vs EgoMimic w/o human": 0.4019
+      }
+    }
+  },
+  "score_checks": {
+    "Bowl (Table III)": {
+      "EgoMimic_vs_ACT_rel_pct": 228.2,
+      "EgoMimic_vs_w_o_human_rel_pct": 88.2
+    },
+    "Laundry (Table III)": {
+      "EgoMimic_vs_ACT_rel_pct": 39.0,
+      "EgoMimic_vs_w_o_human_rel_pct": 9.6
+    },
+    "Groceries (Table III)": {
+      "EgoMimic_vs_ACT_rel_pct": 34.1,
+      "EgoMimic_vs_w_o_human_rel_pct": 19.6
+    },
+    "ablation_drop_pct": {
+      "w/o line": 12.5,
+      "w/o line and mask": 25.8,
+      "w/o action norm": 38.3,
+      "w/o hand data": 46.9
+    }
+  },
+  "claim_checks": {
+    "본문 228%: 대 ACT 점수 상대향상 (Bowl)": 228.2,
+    "본문 34–228% 범위의 하한 (Groceries 상대향상)": 34.1,
+    "본문 8–33%p: Laundry SR 절대차": 32.5,
+    "본문 8–33%p: Groceries SR 절대차": 8.0,
+    "본문 10–88%: Bowl 대 w/o human 상대향상": 88.2,
+    "본문 2–15%p: Groceries SR 절대차 (대 w/o human)": 2.0,
+    "본문 2–15%p: Laundry SR 절대차 (대 w/o human)": 15.0,
+    "본문 scaling 128 대 74 (ACT 3h): 상대차 %": 73.0,
+    "표 II 인간 1h 데모 수 (1400/60min)*60": 1400,
+    "표 II 로봇 1h 데모 수 (270/120min)*60": 135,
+    "Fig 7 unseen color: 대 ACT 25% vs 85% (n 미보고)": "n 미보고 → 검정 불가",
+    "Fig 8 scaling: 128 vs 74 (n 미보고)": "n 미보고 → 검정 불가",
+    "Bowl Pts (45 rollouts) 평균 pts/rollout EgoMimic": 2.84
+  }
+}
