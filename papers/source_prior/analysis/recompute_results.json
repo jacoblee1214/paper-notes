@@ -1,0 +1,1202 @@
+{
+ "V1": {
+  "LeaP": {
+   "recomputed": 81.57,
+   "reported": 81.6,
+   "diff": -0.03
+  },
+  "A2A": {
+   "recomputed": 73.84,
+   "reported": 73.8,
+   "diff": 0.04
+  },
+  "VITA": {
+   "recomputed": 75.11,
+   "reported": 75.1,
+   "diff": 0.01
+  },
+  "NoPrior": {
+   "recomputed": 56.13,
+   "reported": 56.1,
+   "diff": 0.03
+  },
+  "BridgePolicy": {
+   "recomputed": 61.39,
+   "reported": 61.4,
+   "diff": -0.01
+  },
+  "gaps_pp_from_recomputed": {
+   "A2A": 7.73,
+   "VITA": 6.47,
+   "NoPrior": 25.44,
+   "BridgePolicy": 20.19
+  }
+ },
+ "V2": {
+  "cells": 75,
+  "infeasible_pop": [
+   "beat_block_hammer/LeaP: 94.0+-2.6",
+   "beat_block_hammer/A2A: 89.3+-2.3",
+   "dump_bin_bigbin/LeaP: 92.3+-6.7",
+   "dump_bin_bigbin/A2A: 88.0+-6.0",
+   "dump_bin_bigbin/VITA: 89.0+-1.7",
+   "dump_bin_bigbin/NoPrior: 70.7+-6.4",
+   "click_bell/A2A: 94.7+-1.5",
+   "click_bell/VITA: 98.0+-2.6",
+   "click_bell/NoPrior: 92.0+-13.9",
+   "handover_block/LeaP: 91.7+-1.5",
+   "handover_block/VITA: 83.0+-6.6",
+   "place_phone_stand/A2A: 61.0+-4.6",
+   "place_phone_stand/BridgePolicy: 37.0+-1.0",
+   "lift_pot/LeaP: 98.3+-1.5",
+   "lift_pot/NoPrior: 87.0+-2.0",
+   "move_playingcard_away/LeaP: 75.0+-4.4",
+   "move_playingcard_away/A2A: 72.0+-2.0",
+   "open_laptop/LeaP: 86.0+-6.9",
+   "open_laptop/NoPrior: 46.3+-3.5",
+   "open_laptop/BridgePolicy: 50.3+-3.5",
+   "pick_diverse_bottles/LeaP: 77.0+-6.1",
+   "pick_diverse_bottles/A2A: 43.3+-5.5",
+   "pick_diverse_bottles/VITA: 63.0+-4.6",
+   "pick_diverse_bottles/BridgePolicy: 34.0+-3.0",
+   "click_alarmclock/LeaP: 97.0+-1.0",
+   "place_empty_cup/A2A: 88.3+-3.5",
+   "place_empty_cup/VITA: 88.0+-1.7",
+   "press_stapler/A2A: 56.0+-5.3",
+   "press_stapler/NoPrior: 68.0+-8.7",
+   "press_stapler/BridgePolicy: 49.7+-6.7",
+   "place_can_basket/BridgePolicy: 77.0+-2.6",
+   "stack_blocks_two/LeaP: 33.7+-0.6",
+   "stack_blocks_two/A2A: 31.0+-2.0",
+   "place_object_basket/A2A: 65.7+-3.2",
+   "place_object_basket/VITA: 62.3+-5.5",
+   "place_object_basket/NoPrior: 27.0+-6.6",
+   "place_object_basket/BridgePolicy: 63.3+-5.5"
+  ],
+  "infeasible_samp": [],
+  "infeasible_mean_only": [],
+  "n_infeasible": {
+   "pop": 37,
+   "samp": 0,
+   "mean_only": 0
+  }
+ },
+ "V3": {
+  "A2A": {
+   "mean_diff": 7.73,
+   "wins": 12,
+   "ties": 0,
+   "losses": 3,
+   "sign_p": 0.0352,
+   "wilcoxon_p": 0.00085,
+   "t_p": 0.00527,
+   "boot95": [
+    3.79,
+    12.69
+   ],
+   "welch_by_task": {
+    "samp": {
+     "leap_sig_better": 4,
+     "leap_sig_worse": 0
+    },
+    "pop": {
+     "leap_sig_better": 3,
+     "leap_sig_worse": 0
+    }
+   },
+   "median_diff": 5.3
+  },
+  "VITA": {
+   "mean_diff": 6.47,
+   "wins": 12,
+   "ties": 0,
+   "losses": 3,
+   "sign_p": 0.0352,
+   "wilcoxon_p": 0.00153,
+   "t_p": 0.00323,
+   "boot95": [
+    3.21,
+    10.08
+   ],
+   "welch_by_task": {
+    "samp": {
+     "leap_sig_better": 3,
+     "leap_sig_worse": 0
+    },
+    "pop": {
+     "leap_sig_better": 2,
+     "leap_sig_worse": 0
+    }
+   },
+   "median_diff": 4.3
+  },
+  "NoPrior": {
+   "mean_diff": 25.44,
+   "wins": 15,
+   "ties": 0,
+   "losses": 0,
+   "sign_p": 0.0001,
+   "wilcoxon_p": 6e-05,
+   "t_p": 2e-05,
+   "boot95": [
+    17.99,
+    33.07
+   ],
+   "welch_by_task": {
+    "samp": {
+     "leap_sig_better": 11,
+     "leap_sig_worse": 0
+    },
+    "pop": {
+     "leap_sig_better": 10,
+     "leap_sig_worse": 0
+    }
+   },
+   "median_diff": 21.6
+  },
+  "BridgePolicy": {
+   "mean_diff": 20.19,
+   "wins": 15,
+   "ties": 0,
+   "losses": 0,
+   "sign_p": 0.0001,
+   "wilcoxon_p": 6e-05,
+   "t_p": 3e-05,
+   "boot95": [
+    13.91,
+    26.67
+   ],
+   "welch_by_task": {
+    "samp": {
+     "leap_sig_better": 11,
+     "leap_sig_worse": 0
+    },
+    "pop": {
+     "leap_sig_better": 9,
+     "leap_sig_worse": 0
+    }
+   },
+   "median_diff": 19.7
+  },
+  "leap_best_tasks": 10,
+  "leap_not_best": [
+   "handover_block: A2A 92.3 > LeaP 91.7",
+   "move_playingcard_away: VITA 76.3 > LeaP 75.0",
+   "place_empty_cup: A2A 88.3 > LeaP 86.7",
+   "stack_blocks_two: VITA 35.0 > LeaP 33.7",
+   "place_object_basket: A2A 65.7 > LeaP 64.3"
+  ],
+  "gap_vs_noprior_range": [
+   3.3,
+   53.0
+  ],
+  "mean_gap_without_top3_tasks": {
+   "A2A": 4.27,
+   "VITA": 3.76,
+   "NoPrior": 20.13,
+   "BridgePolicy": 15.51
+  }
+ },
+ "V4": {
+  "LeaP/samp": {
+   "indep_sd": 1.14,
+   "reported": 0.4,
+   "p_leq_reported": 0.118
+  },
+  "LeaP/pop": {
+   "indep_sd": 1.39,
+   "reported": 0.4,
+   "p_leq_reported": 0.113
+  },
+  "A2A/samp": {
+   "indep_sd": 1.09,
+   "reported": 2.2,
+   "p_leq_reported": 0.984
+  },
+  "A2A/pop": {
+   "indep_sd": 1.33,
+   "reported": 2.2,
+   "p_leq_reported": 0.984
+  },
+  "VITA/samp": {
+   "indep_sd": 1.4,
+   "reported": 0.9,
+   "p_leq_reported": 0.334
+  },
+  "VITA/pop": {
+   "indep_sd": 1.72,
+   "reported": 0.9,
+   "p_leq_reported": 0.351
+  },
+  "NoPrior/samp": {
+   "indep_sd": 2.55,
+   "reported": 2.5,
+   "p_leq_reported": 0.61
+  },
+  "NoPrior/pop": {
+   "indep_sd": 3.13,
+   "reported": 2.5,
+   "p_leq_reported": 0.613
+  },
+  "BridgePolicy/samp": {
+   "indep_sd": 1.32,
+   "reported": 1.3,
+   "p_leq_reported": 0.614
+  },
+  "BridgePolicy/pop": {
+   "indep_sd": 1.62,
+   "reported": 1.3,
+   "p_leq_reported": 0.62
+  }
+ },
+ "V5": {
+  "bar_values": {
+   "Pick Cube": [
+    70,
+    45,
+    50,
+    60
+   ],
+   "Close Box": [
+    80,
+    80,
+    85,
+    35
+   ],
+   "Pick & Place Sandbags": [
+    90,
+    45,
+    70,
+    55
+   ]
+  },
+  "avg_from_bars": {
+   "LeaP": 80.0,
+   "VITA": 56.7,
+   "A2A": 68.3,
+   "NoPrior": 50.0
+  },
+  "avg_reported": {
+   "LeaP": 80.0,
+   "A2A": 68.3,
+   "VITA": 56.7,
+   "NoPrior": 46.7
+  },
+  "successes_of_20": {
+   "LeaP": [
+    14,
+    16,
+    18
+   ],
+   "VITA": [
+    9,
+    16,
+    9
+   ],
+   "A2A": [
+    10,
+    17,
+    14
+   ],
+   "NoPrior": [
+    12,
+    7,
+    11
+   ]
+  },
+  "pooled_successes_of_60": {
+   "LeaP": 48,
+   "VITA": 34,
+   "A2A": 41,
+   "NoPrior": 30
+  },
+  "noprior_total_needed_for_46.7": 28,
+  "tests_leap_vs": {
+   "VITA": {
+    "per_task_fisher_p": {
+     "Pick Cube": 0.2,
+     "Close Box": 1.0,
+     "Pick & Place Sandbags": 0.006
+    },
+    "pooled_fisher_p": 0.0102,
+    "cmh_p": 0.0056,
+    "pooled_diff_pp": 23.3
+   },
+   "A2A": {
+    "per_task_fisher_p": {
+     "Pick Cube": 0.333,
+     "Close Box": 1.0,
+     "Pick & Place Sandbags": 0.235
+    },
+    "pooled_fisher_p": 0.2105,
+    "cmh_p": 0.1385,
+    "pooled_diff_pp": 11.7
+   },
+   "NoPrior": {
+    "per_task_fisher_p": {
+     "Pick Cube": 0.741,
+     "Close Box": 0.01,
+     "Pick & Place Sandbags": 0.031
+    },
+    "pooled_fisher_p": 0.001,
+    "cmh_p": 0.0006,
+    "pooled_diff_pp": 30.0
+   }
+  },
+  "pooled_fisher_p_vs_noprior_if_28of60": 0.0003,
+  "wilson95_pooled": {
+   "LeaP": [
+    0.682,
+    0.882
+   ],
+   "VITA": [
+    0.441,
+    0.684
+   ],
+   "A2A": [
+    0.558,
+    0.787
+   ],
+   "NoPrior": [
+    0.377,
+    0.623
+   ]
+  },
+  "wilson95_per_task_leap": {
+   "Pick Cube": [
+    0.481,
+    0.855
+   ],
+   "Close Box": [
+    0.584,
+    0.919
+   ],
+   "Pick & Place Sandbags": [
+    0.699,
+    0.972
+   ]
+  },
+  "task_leap_best": {
+   "Pick Cube": true,
+   "Close Box": false,
+   "Pick & Place Sandbags": true
+  },
+  "task_leap_strict_best": {
+   "Pick Cube": true,
+   "Close Box": false,
+   "Pick & Place Sandbags": true
+  },
+  "task_noprior_last": {
+   "Pick Cube": false,
+   "Close Box": true,
+   "Pick & Place Sandbags": false
+  },
+  "needed_n_per_arm_80pct_power": {
+   "LeaP80_vs_A2A68.3": 219,
+   "LeaP80_vs_VITA56.7": 61,
+   "LeaP80_vs_NoPrior46.7": 32
+  }
+ },
+ "V6": {
+  "T6": {
+   "state (LeaP)": {
+    "recomputed_avg": 85.33,
+    "reported_avg": 85.3,
+    "match": true
+   },
+   "vision": {
+    "recomputed_avg": 66.0,
+    "reported_avg": 66.0,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 4.3e-08,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.28,
+     "open_laptop": 0.021,
+     "handover_block": 2.4e-09
+    }
+   },
+   "v+s FiLM": {
+    "recomputed_avg": 70.33,
+    "reported_avg": 70.3,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 1.3e-05,
+    "tasks_where_variant_ge_ref": [
+     "pick_diverse_bottles"
+    ],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.74,
+     "open_laptop": 0.15,
+     "handover_block": 1.9e-10
+    }
+   },
+   "v+s MLP": {
+    "recomputed_avg": 69.33,
+    "reported_avg": 69.3,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 3.9e-06,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.87,
+     "open_laptop": 0.073,
+     "handover_block": 5.4e-09
+    }
+   },
+   "v+s CrossAttn": {
+    "recomputed_avg": 59.33,
+    "reported_avg": 59.3,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 1e-12,
+    "tasks_where_variant_ge_ref": [
+     "pick_diverse_bottles"
+    ],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.87,
+     "open_laptop": 0.00037,
+     "handover_block": 6.8e-19
+    }
+   }
+  },
+  "T7": {
+   "NLL (LeaP)": {
+    "recomputed_avg": 85.33,
+    "reported_avg": 85.3,
+    "match": true
+   },
+   "mu+full Sigma": {
+    "recomputed_avg": 79.67,
+    "reported_avg": 79.7,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 0.085,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.44,
+     "open_laptop": 0.39,
+     "handover_block": 0.26
+    }
+   },
+   "GMM k=8": {
+    "recomputed_avg": 78.67,
+    "reported_avg": 78.7,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 0.043,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.64,
+     "open_laptop": 0.39,
+     "handover_block": 0.037
+    }
+   },
+   "only mu": {
+    "recomputed_avg": 78.0,
+    "reported_avg": 78.0,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 0.026,
+    "tasks_where_variant_ge_ref": [
+     "handover_block"
+    ],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.13,
+     "open_laptop": 0.033,
+     "handover_block": 1.0
+    }
+   },
+   "MSE": {
+    "recomputed_avg": 74.67,
+    "reported_avg": 74.7,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 0.0015,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.00075,
+     "open_laptop": 0.66,
+     "handover_block": 0.36
+    }
+   },
+   "mu+fixed sigma": {
+    "recomputed_avg": 62.67,
+    "reported_avg": 62.7,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 2.7e-10,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.00015,
+     "open_laptop": 9.5e-06,
+     "handover_block": 0.0092
+    }
+   },
+   "no prior": {
+    "recomputed_avg": 47.67,
+    "reported_avg": 47.7,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 4.3e-23,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 3.8e-06,
+     "open_laptop": 5.5e-10,
+     "handover_block": 1.9e-10
+    }
+   }
+  },
+  "T8": {
+   "Full (LeaP)": {
+    "recomputed_avg": 85.33,
+    "reported_avg": 85.3,
+    "match": true
+   },
+   "w/o Align": {
+    "recomputed_avg": 74.67,
+    "reported_avg": 74.7,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 0.0015,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.44,
+     "open_laptop": 0.51,
+     "handover_block": 0.00011
+    }
+   },
+   "w/o NLL": {
+    "recomputed_avg": 74.33,
+    "reported_avg": 74.3,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 0.0011,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.13,
+     "open_laptop": 0.049,
+     "handover_block": 0.037
+    }
+   },
+   "w/o Align&NLL": {
+    "recomputed_avg": 59.67,
+    "reported_avg": 59.7,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 1.8e-12,
+    "tasks_where_variant_ge_ref": [
+     "pick_diverse_bottles"
+    ],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.5,
+     "open_laptop": 0.049,
+     "handover_block": 4.6e-26
+    }
+   },
+   "direct mu": {
+    "recomputed_avg": 0.0,
+    "reported_avg": 0.0,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 1.3e-123,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 1.4e-32,
+     "open_laptop": 1e-45,
+     "handover_block": 7.8e-48
+    }
+   }
+  },
+  "T9": {
+   "FM": {
+    "recomputed_avg": 47.67,
+    "reported_avg": 47.7,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 4.3e-23,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 3.8e-06,
+     "open_laptop": 5.5e-10,
+     "handover_block": 1.9e-10
+    }
+   },
+   "FM+LeaP": {
+    "recomputed_avg": 85.33,
+    "reported_avg": 85.3,
+    "match": true
+   },
+   "Bridge (mu)": {
+    "recomputed_avg": 68.67,
+    "reported_avg": 68.7,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 1.6e-06,
+    "tasks_where_variant_ge_ref": [],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 0.17,
+     "open_laptop": 1.4e-07,
+     "handover_block": 0.18
+    }
+   },
+   "Bridge+LeaP": {
+    "recomputed_avg": 76.67,
+    "reported_avg": 76.7,
+    "match": true,
+    "fisher_p_300trials_vs_ref": 0.0091,
+    "tasks_where_variant_ge_ref": [
+     "pick_diverse_bottles",
+     "handover_block"
+    ],
+    "per_task_fisher_p": {
+     "pick_diverse_bottles": 1.0,
+     "open_laptop": 4.9e-06,
+     "handover_block": 0.78
+    }
+   }
+  },
+  "T9_bridge_vs_bridgeleap": {
+   "pooled_p": 0.035,
+   "per_task_p": {
+    "pick_diverse_bottles": 0.17,
+    "open_laptop": 0.56,
+    "handover_block": 0.063
+   }
+  },
+  "T6_handover_share_of_gap": {
+   "vision": 0.64,
+   "v+s FiLM": 0.89,
+   "v+s MLP": 0.75,
+   "v+s CrossAttn": 0.76
+  },
+  "T8_handover_share_of_gap": {
+   "w/o Align": 0.69,
+   "w/o NLL": 0.33,
+   "w/o Align&NLL": 0.92,
+   "direct mu": 0.36
+  }
+ },
+ "V7": {
+  "LeaP": {
+   "table1_3task_mean": 84.9,
+   "seed0_3task_mean": 85.3,
+   "z_per_task": [
+    -0.49,
+    0.58,
+    0.2
+   ]
+  },
+  "NoPrior": {
+   "table1_3task_mean": 40.8,
+   "seed0_3task_mean": 47.7,
+   "z_per_task": [
+    0.46,
+    1.06,
+    1.15
+   ]
+  },
+  "BridgePolicy_vs_BridgeMu": {
+   "table1_3task_mean": 48.2,
+   "seed0_3task_mean": 68.7,
+   "z_per_task": [
+    10.0,
+    1.91,
+    6.5
+   ]
+  },
+  "gap_3task_table1_LeaP_minus_NoPrior": 44.1,
+  "gap_3task_ablation_LeaP_minus_NoPrior": 37.6
+ },
+ "V8": {
+  "prior_head_share_pct": 1.59,
+  "leap_minus_noprior_M": 0.21,
+  "A2A_over_LeaP_pct": 28.0,
+  "VITA_over_LeaP_pct": 27.7,
+  "ratio_vs_LeaP": {
+   "NoPrior": 0.98,
+   "LeaP": 1.0,
+   "A2A": 1.28,
+   "VITA": 1.28,
+   "ACT": 6.35,
+   "DP3": 19.85,
+   "BridgePolicy": 20.5
+  }
+ },
+ "data": {
+  "T1": {
+   "beat_block_hammer": [
+    [
+     94.0,
+     2.6
+    ],
+    [
+     89.3,
+     2.3
+    ],
+    [
+     89.7,
+     2.9
+    ],
+    [
+     46.7,
+     4.0
+    ],
+    [
+     79.3,
+     3.1
+    ]
+   ],
+   "dump_bin_bigbin": [
+    [
+     92.3,
+     6.7
+    ],
+    [
+     88.0,
+     6.0
+    ],
+    [
+     89.0,
+     1.7
+    ],
+    [
+     70.7,
+     6.4
+    ],
+    [
+     77.3,
+     9.5
+    ]
+   ],
+   "click_bell": [
+    [
+     100.0,
+     0.0
+    ],
+    [
+     94.7,
+     1.5
+    ],
+    [
+     98.0,
+     2.6
+    ],
+    [
+     92.0,
+     13.9
+    ],
+    [
+     77.7,
+     4.0
+    ]
+   ],
+   "handover_block": [
+    [
+     91.7,
+     1.5
+    ],
+    [
+     92.3,
+     2.1
+    ],
+    [
+     83.0,
+     6.6
+    ],
+    [
+     38.7,
+     11.6
+    ],
+    [
+     60.3,
+     3.8
+    ]
+   ],
+   "place_phone_stand": [
+    [
+     75.0,
+     0.0
+    ],
+    [
+     61.0,
+     4.6
+    ],
+    [
+     64.3,
+     2.1
+    ],
+    [
+     50.3,
+     4.0
+    ],
+    [
+     37.0,
+     1.0
+    ]
+   ],
+   "lift_pot": [
+    [
+     98.3,
+     1.5
+    ],
+    [
+     92.7,
+     4.2
+    ],
+    [
+     97.0,
+     0.0
+    ],
+    [
+     87.0,
+     2.0
+    ],
+    [
+     91.3,
+     2.5
+    ]
+   ],
+   "move_playingcard_away": [
+    [
+     75.0,
+     4.4
+    ],
+    [
+     72.0,
+     2.0
+    ],
+    [
+     76.3,
+     4.0
+    ],
+    [
+     59.0,
+     5.0
+    ],
+    [
+     67.3,
+     5.0
+    ]
+   ],
+   "open_laptop": [
+    [
+     86.0,
+     6.9
+    ],
+    [
+     70.3,
+     4.0
+    ],
+    [
+     62.7,
+     3.8
+    ],
+    [
+     46.3,
+     3.5
+    ],
+    [
+     50.3,
+     3.5
+    ]
+   ],
+   "pick_diverse_bottles": [
+    [
+     77.0,
+     6.1
+    ],
+    [
+     43.3,
+     5.5
+    ],
+    [
+     63.0,
+     4.6
+    ],
+    [
+     37.3,
+     8.1
+    ],
+    [
+     34.0,
+     3.0
+    ]
+   ],
+   "click_alarmclock": [
+    [
+     97.0,
+     1.0
+    ],
+    [
+     89.7,
+     4.0
+    ],
+    [
+     88.3,
+     8.0
+    ],
+    [
+     81.3,
+     6.1
+    ],
+    [
+     67.3,
+     10.0
+    ]
+   ],
+   "place_empty_cup": [
+    [
+     86.7,
+     4.2
+    ],
+    [
+     88.3,
+     3.5
+    ],
+    [
+     88.0,
+     1.7
+    ],
+    [
+     74.7,
+     21.7
+    ],
+    [
+     67.0,
+     3.6
+    ]
+   ],
+   "press_stapler": [
+    [
+     71.3,
+     9.5
+    ],
+    [
+     56.0,
+     5.3
+    ],
+    [
+     56.7,
+     5.8
+    ],
+    [
+     68.0,
+     8.7
+    ],
+    [
+     49.7,
+     6.7
+    ]
+   ],
+   "place_can_basket": [
+    [
+     81.3,
+     2.1
+    ],
+    [
+     73.3,
+     7.6
+    ],
+    [
+     73.3,
+     11.7
+    ],
+    [
+     46.3,
+     17.8
+    ],
+    [
+     77.0,
+     2.6
+    ]
+   ],
+   "stack_blocks_two": [
+    [
+     33.7,
+     0.6
+    ],
+    [
+     31.0,
+     2.0
+    ],
+    [
+     35.0,
+     7.5
+    ],
+    [
+     16.7,
+     3.8
+    ],
+    [
+     22.0,
+     3.6
+    ]
+   ],
+   "place_object_basket": [
+    [
+     64.3,
+     4.0
+    ],
+    [
+     65.7,
+     3.2
+    ],
+    [
+     62.3,
+     5.5
+    ],
+    [
+     27.0,
+     6.6
+    ],
+    [
+     63.3,
+     5.5
+    ]
+   ]
+  },
+  "T1_avg": [
+   [
+    81.6,
+    0.4
+   ],
+   [
+    73.8,
+    2.2
+   ],
+   [
+    75.1,
+    0.9
+   ],
+   [
+    56.1,
+    2.5
+   ],
+   [
+    61.4,
+    1.3
+   ]
+  ],
+  "ablation": {
+   "T6": {
+    "state (LeaP)": [
+     74,
+     90,
+     92
+    ],
+    "vision": [
+     66,
+     77,
+     55
+    ],
+    "v+s FiLM": [
+     77,
+     82,
+     52
+    ],
+    "v+s MLP": [
+     72,
+     80,
+     56
+    ],
+    "v+s CrossAttn": [
+     76,
+     69,
+     33
+    ]
+   },
+   "T7": {
+    "NLL (LeaP)": [
+     74,
+     90,
+     92
+    ],
+    "mu+full Sigma": [
+     68,
+     85,
+     86
+    ],
+    "GMM k=8": [
+     70,
+     85,
+     81
+    ],
+    "only mu": [
+     63,
+     78,
+     93
+    ],
+    "MSE": [
+     50,
+     87,
+     87
+    ],
+    "mu+fixed sigma": [
+     47,
+     63,
+     78
+    ],
+    "no prior": [
+     41,
+     50,
+     52
+    ]
+   },
+   "T8": {
+    "Full (LeaP)": [
+     74,
+     90,
+     92
+    ],
+    "w/o Align": [
+     68,
+     86,
+     70
+    ],
+    "w/o NLL": [
+     63,
+     79,
+     81
+    ],
+    "w/o Align&NLL": [
+     79,
+     79,
+     21
+    ],
+    "direct mu": [
+     0,
+     0,
+     0
+    ]
+   },
+   "T9": {
+    "FM": [
+     41,
+     50,
+     52
+    ],
+    "FM+LeaP": [
+     74,
+     90,
+     92
+    ],
+    "Bridge (mu)": [
+     64,
+     57,
+     85
+    ],
+    "Bridge+LeaP": [
+     74,
+     62,
+     94
+    ]
+   }
+  },
+  "real_robot_bars": {
+   "Pick Cube": [
+    70,
+    45,
+    50,
+    60
+   ],
+   "Close Box": [
+    80,
+    80,
+    85,
+    35
+   ],
+   "Pick & Place Sandbags": [
+    90,
+    45,
+    70,
+    55
+   ]
+  }
+ }
+}
