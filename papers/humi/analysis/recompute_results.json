@@ -1,0 +1,612 @@
+{
+ "K1_cells": {
+  "knee_humi": {
+   "k": 17,
+   "n": 20,
+   "reported_pct": 85,
+   "computed_pct": 85.0,
+   "match": true,
+   "wilson": [
+    0.6396,
+    0.9476
+   ],
+   "clopper": [
+    0.6211,
+    0.9679
+   ],
+   "where": "§4.1.1, 그림 6c"
+  },
+  "knee_no_hil": {
+   "k": 1,
+   "n": 10,
+   "reported_pct": 10,
+   "computed_pct": 10.0,
+   "match": true,
+   "wilson": [
+    0.0179,
+    0.4042
+   ],
+   "clopper": [
+    0.0025,
+    0.445
+   ],
+   "where": "§4.1.1"
+  },
+  "knee_ee_only": {
+   "k": 0,
+   "n": 10,
+   "reported_pct": 0,
+   "computed_pct": 0.0,
+   "match": true,
+   "wilson": [
+    0.0,
+    0.2775
+   ],
+   "clopper": [
+    0.0,
+    0.3085
+   ],
+   "where": "§4.1.1"
+  },
+  "sword_humi": {
+   "k": 17,
+   "n": 20,
+   "reported_pct": 85,
+   "computed_pct": 85.0,
+   "match": true,
+   "wilson": [
+    0.6396,
+    0.9476
+   ],
+   "clopper": [
+    0.6211,
+    0.9679
+   ],
+   "where": "§4.1.2"
+  },
+  "sword_no_varspeed": {
+   "k": 5,
+   "n": 10,
+   "reported_pct": 50,
+   "computed_pct": 50.0,
+   "match": true,
+   "wilson": [
+    0.2366,
+    0.7634
+   ],
+   "clopper": [
+    0.1871,
+    0.8129
+   ],
+   "where": "§4.1.2"
+  },
+  "toss_humi": {
+   "k": 15,
+   "n": 20,
+   "reported_pct": 75,
+   "computed_pct": 75.0,
+   "match": true,
+   "wilson": [
+    0.5313,
+    0.8881
+   ],
+   "clopper": [
+    0.509,
+    0.9134
+   ],
+   "where": "§4.1.3"
+  },
+  "toss_executed_ref": {
+   "k": 4,
+   "n": 10,
+   "reported_pct": 40,
+   "computed_pct": 40.0,
+   "match": true,
+   "wilson": [
+    0.1682,
+    0.6873
+   ],
+   "clopper": [
+    0.1216,
+    0.7376
+   ],
+   "where": "§4.1.3"
+  },
+  "walk_ee_pelvis": {
+   "k": 15,
+   "n": 20,
+   "reported_pct": 75,
+   "computed_pct": 75.0,
+   "match": true,
+   "wilson": [
+    0.5313,
+    0.8881
+   ],
+   "clopper": [
+    0.509,
+    0.9134
+   ],
+   "where": "§4.1.4"
+  },
+  "walk_ee_only": {
+   "k": 6,
+   "n": 10,
+   "reported_pct": 60,
+   "computed_pct": 60.0,
+   "match": true,
+   "wilson": [
+    0.3127,
+    0.8318
+   ],
+   "clopper": [
+    0.2624,
+    0.8784
+   ],
+   "where": "§4.1.4"
+  },
+  "walk_ee_pelvis_feet": {
+   "k": 7,
+   "n": 10,
+   "reported_pct": 70,
+   "computed_pct": 70.0,
+   "match": true,
+   "wilson": [
+    0.3968,
+    0.8922
+   ],
+   "clopper": [
+    0.3475,
+    0.9333
+   ],
+   "where": "§4.1.4"
+  },
+  "walk_absolute_pelvis": {
+   "k": 0,
+   "n": 10,
+   "reported_pct": 0,
+   "computed_pct": 0.0,
+   "match": true,
+   "wilson": [
+    0.0,
+    0.2775
+   ],
+   "clopper": [
+    0.0,
+    0.3085
+   ],
+   "where": "§4.1.4"
+  },
+  "squat_gen_unseen": {
+   "k": 14,
+   "n": 20,
+   "reported_pct": 70,
+   "computed_pct": 70.0,
+   "match": true,
+   "wilson": [
+    0.481,
+    0.8545
+   ],
+   "clopper": [
+    0.4572,
+    0.8811
+   ],
+   "where": "§4.2"
+  },
+  "squat_in_domain_C1": {
+   "k": 17,
+   "n": 20,
+   "reported_pct": 85,
+   "computed_pct": 85.0,
+   "match": true,
+   "wilson": [
+    0.6396,
+    0.9476
+   ],
+   "clopper": [
+    0.6211,
+    0.9679
+   ],
+   "where": "부록 C.1"
+  },
+  "squat_no_adaptive_ee": {
+   "k": 5,
+   "n": 10,
+   "reported_pct": 50,
+   "computed_pct": 50.0,
+   "match": true,
+   "wilson": [
+    0.2366,
+    0.7634
+   ],
+   "clopper": [
+    0.1871,
+    0.8129
+   ],
+   "where": "부록 C.1"
+  }
+ },
+ "K2_ablations": [
+  {
+   "label": "knee: 인간 개입 없음",
+   "humi": "17/20",
+   "ablation": "1/10",
+   "diff_pp": 75.0,
+   "diff_ci_pp": [
+    38.0,
+    87.8
+   ],
+   "fisher_p": 0.00013399893459863476,
+   "holm_p": 0.0008039936075918085
+  },
+  {
+   "label": "knee: 전신 명세 없음(EE-only)",
+   "humi": "17/20",
+   "ablation": "0/10",
+   "diff_pp": 85.0,
+   "diff_ci_pp": [
+    50.2,
+    94.8
+   ],
+   "fisher_p": 9.519049998810119e-06,
+   "holm_p": 6.663334999167083e-05
+  },
+  {
+   "label": "sword: 가변 속도 없음",
+   "humi": "17/20",
+   "ablation": "5/10",
+   "diff_pp": 35.0,
+   "diff_ci_pp": [
+    1.3,
+    63.1
+   ],
+   "fisher_p": 0.07784056689603915,
+   "holm_p": 0.3113622675841566
+  },
+  {
+   "label": "toss: 실행 자세 참조",
+   "humi": "15/20",
+   "ablation": "4/10",
+   "diff_pp": 35.0,
+   "diff_ci_pp": [
+    -1.1,
+    62.0
+   ],
+   "fisher_p": 0.1081140748307165,
+   "holm_p": 0.3113622675841566
+  },
+  {
+   "label": "walk: EE-only",
+   "humi": "15/20",
+   "ablation": "6/10",
+   "diff_pp": 15.0,
+   "diff_ci_pp": [
+    -16.9,
+    46.9
+   ],
+   "fisher_p": 0.43108166196621966,
+   "holm_p": 0.43108166196621966
+  },
+  {
+   "label": "walk: EE+pelvis+feet",
+   "humi": "15/20",
+   "ablation": "7/10",
+   "diff_pp": 5.0,
+   "diff_ci_pp": [
+    -24.1,
+    38.3
+   ],
+   "fisher_p": 1.0,
+   "holm_p": null
+  },
+  {
+   "label": "walk: 절대 골반 추적",
+   "humi": "15/20",
+   "ablation": "0/10",
+   "diff_pp": 75.0,
+   "diff_ci_pp": [
+    39.7,
+    88.8
+   ],
+   "fisher_p": 0.00019990004997501247,
+   "holm_p": 0.0009995002498750624
+  },
+  {
+   "label": "squat: 적응형 EE 보상 없음",
+   "humi": "17/20",
+   "ablation": "5/10",
+   "diff_pp": 35.0,
+   "diff_ci_pp": [
+    1.3,
+    63.1
+   ],
+   "fisher_p": 0.07784056689603915,
+   "holm_p": 0.3113622675841566
+  }
+ ],
+ "K3_keypoint_interfaces": [
+  {
+   "label": "EE+pelvis 대 EE+pelvis+feet",
+   "a": "15/20",
+   "b": "7/10",
+   "fisher_p": 1.0,
+   "diff_ci_pp": [
+    -24.1,
+    38.3
+   ]
+  },
+  {
+   "label": "EE-only 대 EE+pelvis",
+   "a": "6/10",
+   "b": "15/20",
+   "fisher_p": 0.43108166196621966,
+   "diff_ci_pp": [
+    -46.9,
+    16.9
+   ]
+  },
+  {
+   "label": "EE-only 대 EE+pelvis+feet",
+   "a": "6/10",
+   "b": "7/10",
+   "fisher_p": 1.0,
+   "diff_ci_pp": [
+    -44.6,
+    28.2
+   ]
+  }
+ ],
+ "K3_power_75_vs_60_n20_n10": 0.10785,
+ "K3_power_75_vs_60_n20_n20": 0.1094,
+ "K3_power_85_vs_50_n20_n10": 0.4678,
+ "K3_n_per_arm_for_80pct_power_75_vs_60": 165,
+ "K4_generalization": {
+  "wilson": [
+   0.481,
+   0.855
+  ],
+  "clopper": [
+   0.457,
+   0.881
+  ],
+  "vs_in_domain_17_20_fisher_p": 0.45057645057645057,
+  "vs_in_domain_diff_ci_pp": [
+   -39.0,
+   11.1
+  ],
+  "icc_0.0_n_eff": 20.0,
+  "icc_0.0_wilson": [
+   0.481,
+   0.855
+  ],
+  "icc_0.1_n_eff": 14.3,
+  "icc_0.1_wilson": [
+   0.454,
+   0.883
+  ],
+  "icc_0.3_n_eff": 9.1,
+  "icc_0.3_wilson": [
+   0.354,
+   0.879
+  ]
+ },
+ "K5_data_efficiency": {
+  "v3_valid_demos": {
+   "humi": 60,
+   "twist2": 18,
+   "ratio": 3.333
+  },
+  "v1v2_episodes": {
+   "humi": 62,
+   "twist2": 28,
+   "ratio_raw": 2.214
+  },
+  "acceptance_v1v2_reported": {
+   "humi": 96.7,
+   "twist2": 64.3
+  },
+  "acceptance_recomputed_60_62": 96.774,
+  "acceptance_recomputed_18_28": 64.286,
+  "acceptance_29_30": 96.667,
+  "acceptance_note": "96.7%는 60/62=96.77%를 올림하면 96.8%라 맞지 않고 내림(절단)이거나 다른 분모. 64.3%는 18/28과 일치",
+  "time_per_valid_demo_ratio": 0.3,
+  "time_per_valid_demo_reported_pct": 30.0,
+  "humi_valid_per_min": 4.0,
+  "twist2_valid_per_min": 1.2,
+  "main_exp_100_demos_minutes_at_session_rate": 25.0,
+  "main_exp_reported_minutes": 22,
+  "main_exp_implied_rate_per_min": 4.545,
+  "twist2_expected_demos_in_22min": 26.4,
+  "bimanual_pnp_100demos": {
+   "humi_min": 6.3,
+   "twist2_min": 18.5,
+   "ratio": 2.937,
+   "humi_per_min": 15.87
+  },
+  "knee_50_demos_15min_seconds_per_demo": 18.0,
+  "knee_twist2": 0,
+  "poisson_conditional_binom_p_60_of_78": 1.9730209111390334e-06,
+  "poisson_rate_ratio_exact_ci": [
+   1.94,
+   6.0
+  ],
+  "matched_budget_fisher": {
+   "20대 10(17/20 대 5/10)": {
+    "fisher_p": 0.07784056689603915
+   },
+   "20대 20(17/20 대 10/20)": {
+    "fisher_p": 0.040742395024931176
+   },
+   "10대 10(9/10 대 5/10)": {
+    "fisher_p": 0.14086687306501547
+   }
+  }
+ },
+ "K6_tracking_error": {
+  "성공 롤아웃만 17 대 5 (SD 가정)": {
+   "t": -1.622,
+   "p": 0.1456
+  },
+  "성공 롤아웃만 17 대 5 (SE 가정)": {
+   "t": -0.558,
+   "p": 0.585
+  },
+  "전체 20 대 10 (SD 가정)": {
+   "t": -2.093,
+   "p": 0.0488
+  },
+  "전체 20 대 10 (SE 가정)": {
+   "t": -0.558,
+   "p": 0.5816
+  },
+  "cohen_d_sd_assumed": 0.789,
+  "relative_sd_humi": 0.478
+ },
+ "K7_ik_preview": {
+  "feasible_without_preview_6_of_20_wilson": [
+   0.145,
+   0.519
+  ],
+  "infeasible_14_20_pct": 70.0,
+  "hand_pelvis_distance_cm": {
+   "before": 76.7,
+   "after": 90.7,
+   "change_cm": 14.0,
+   "change_pct": 18.3
+  },
+  "with_preview_100pct_n": "미기재 (그림 10a)"
+ },
+ "K8_reward_shape": {
+  "전신 위치(σ=0.3 m)": {
+   "0.5cm": 0.9997222607988971,
+   "1cm": 0.9988895059442793,
+   "2cm": 0.9955654174830928,
+   "3cm": 0.9900498337491681,
+   "5cm": 0.9726044771163483,
+   "10cm": 0.8948393168143698
+  },
+  "EE 최대 허용(σ=0.1 m)": {
+   "0.5cm": 0.9975031223974601,
+   "1cm": 0.9900498337491681,
+   "2cm": 0.9607894391523232,
+   "3cm": 0.9139311852712282,
+   "5cm": 0.7788007830714049,
+   "10cm": 0.36787944117144233
+  },
+  "EE 최소 허용(σ=0.01 m)": {
+   "0.5cm": 0.7788007830714049,
+   "1cm": 0.36787944117144233,
+   "2cm": 0.01831563888873418,
+   "3cm": 0.00012340980408667956,
+   "5cm": 1.3887943864963971e-11,
+   "10cm": 3.720075976020783e-44
+  },
+  "sigma_p(v) m": {
+   "0m/s": 0.01,
+   "0.05m/s": 0.01,
+   "0.075m/s": 0.055,
+   "0.1m/s": 0.1,
+   "0.3m/s": 0.1
+  },
+  "sigma_theta(v) deg": {
+   "0m/s": 5.0,
+   "0.05m/s": 5.0,
+   "0.075m/s": 12.499999999999998,
+   "0.1m/s": 20.0,
+   "0.3m/s": 20.0
+  },
+  "note": "σ=0.3 m에서는 5 cm 오차의 보상이 0.97이라 센티미터 정밀도를 밀어 주지 못한다. σ=0.01 m에서는 3 cm부터 보상이 1e-4 미만이라 신호가 사라진다."
+ },
+ "K9_variable_speed": {
+  "sd=0.0001": {
+   "mean_rate": 1.0,
+   "sd_rate": 0.0001,
+   "p_rate_ge_0p9": 1.0,
+   "p_rate_le_0p5": 0.0
+  },
+  "sd=0.3": {
+   "mean_rate": 0.8998,
+   "sd_rate": 0.2197,
+   "p_rate_ge_0p9": 0.5411,
+   "p_rate_le_0p5": 0.0525
+  },
+  "sd=1": {
+   "mean_rate": 0.7701,
+   "sd_rate": 0.2835,
+   "p_rate_ge_0p9": 0.3723,
+   "p_rate_le_0p5": 0.2201
+  },
+  "window_1s_avg_rate_resample_0.02s": {
+   "mean": 0.77,
+   "sd": 0.04
+  },
+  "window_1s_avg_rate_resample_0.25s_interp": {
+   "mean": 0.772,
+   "sd": 0.134
+  },
+  "note": "논문 부록 E는 0.02 s마다 뽑는다고 쓰지만 공식 코드(playback_rate_delta=0.25)는 0.25 s 간격 격자를 선형 보간한다. 1초 구간 평균 속도의 산포가 달라진다."
+ },
+ "K10_training_budget": {
+  "teacher_iters": 50000,
+  "steps_per_env": 24,
+  "num_envs": 4096,
+  "teacher_env_steps": 4915200000,
+  "student_env_steps": 491520000,
+  "curriculum_iters_teacher": [
+   10000,
+   15000
+  ],
+  "curriculum_frac_of_teacher_run": [
+   0.2,
+   0.3
+  ],
+  "curriculum_iters_student_in_code": [
+   1000,
+   1500
+  ],
+  "control_hz": 50.0,
+  "teacher_sim_hours_at_50Hz": 27307.0
+ },
+ "K11_timing": {
+  "highlevel_action_horizon_s": 2.4,
+  "client_chunk_length_s": 2.0,
+  "waypoint_spacing_s": 0.2,
+  "waypoint_spacing_control_steps": 10.0,
+  "policy_period_s": 0.2,
+  "history_proprio_span_s": 0.75,
+  "lowlevel_history_s": 0.5,
+  "dataset_hz": 59.94,
+  "obs_hz_from_downsample3": 19.98
+ },
+ "K12_hf_dataset_counts": {
+  "proposal(=single-knee)": {
+   "hf_episodes": 103,
+   "paper": 100,
+   "extra": 3
+  },
+  "walk_clean_table": {
+   "hf_episodes": 105,
+   "paper": 100,
+   "extra": 5
+  },
+  "unsheathe": {
+   "hf_episodes": 105,
+   "paper": 100,
+   "extra": 5
+  },
+  "toss": {
+   "hf_episodes": 104,
+   "paper": 100,
+   "extra": 4
+  },
+  "squat_pick_ground": {
+   "hf_episodes": 410,
+   "paper": 350,
+   "extra": 60
+  }
+ },
+ "K13_triple_17_of_20": {
+  "p_single_cell_equals_17_given_p085": 0.2428,
+  "p_three_cells_all_17_given_p085": 0.01432,
+  "note": "독립이고 참값 85%라면 가능한 일(낮은 증거). 본문이 같은 17/20을 세 과제에서 쓰므로 표기만 확인."
+ }
+}
