@@ -1,0 +1,335 @@
+{
+ "table1_from_table8": {
+  "R1.0 Vanilla": {
+   "recomputed": 47.4,
+   "reported": 47.4,
+   "match": true
+  },
+  "R1.0 + FB": {
+   "recomputed": 60.4,
+   "reported": 60.4,
+   "match": true
+  },
+  "R1.0 + MM FB": {
+   "recomputed": 63.9,
+   "reported": 63.9,
+   "match": true
+  },
+  "R2.0 Vanilla": {
+   "recomputed": 62.1,
+   "reported": 62.1,
+   "match": true
+  },
+  "R2.0 + FB": {
+   "recomputed": 66.7,
+   "reported": 66.7,
+   "match": true
+  },
+  "R2.0 + MM FB": {
+   "recomputed": 71.3,
+   "reported": 71.3,
+   "match": true
+  }
+ },
+ "abstract_10.9_candidates": {
+  "R2.0MMFB_minus_R1.0FB": 10.9,
+  "R2.0MMFB_minus_R1.0MMFB_pts": 7.4,
+  "R2.0Vanilla_minus_R1.0Vanilla_pts": 14.7
+ },
+ "MMFB_minus_FB_per_task": {
+  "R1.0": {
+   "deltas": [
+    8,
+    4,
+    -1,
+    1,
+    12,
+    3,
+    10,
+    0,
+    2,
+    -4
+   ],
+   "n_decrease": 2,
+   "n_increase": 7
+  },
+  "R2.0": {
+   "deltas": [
+    19,
+    -23,
+    2,
+    0,
+    -2,
+    20,
+    24,
+    0,
+    6,
+    0
+   ],
+   "n_decrease": 2,
+   "n_increase": 5
+  }
+ },
+ "table9_n_tasks": 50,
+ "table9_mean_50tasks": 43.34,
+ "table9_reported_avg": 43.34,
+ "table10_n_tasks": 50,
+ "table10_mean_50": {
+  "RDT_easy": 34.5,
+  "RDT_hard": 13.72,
+  "Pi0_easy": 46.42,
+  "Pi0_hard": 16.34,
+  "ACT_easy": 29.74,
+  "ACT_hard": 1.74,
+  "DP_easy": 28.04,
+  "DP_hard": 0.64,
+  "DP3_easy": 55.24,
+  "DP3_hard": 4.96
+ },
+ "table10_reported_avg": {
+  "RDT_easy": 34.5,
+  "RDT_hard": 13.7,
+  "Pi0_easy": 46.4,
+  "Pi0_hard": 16.3,
+  "ACT_easy": 29.7,
+  "ACT_hard": 1.7,
+  "DP_easy": 28.0,
+  "DP_hard": 0.6,
+  "DP3_easy": 55.2,
+  "DP3_hard": 5.0
+ },
+ "table10_drop_pts": {
+  "RDT": 20.78,
+  "Pi0": 30.08
+ },
+ "table10_wilcoxon_easy_vs_hard_p": {
+  "RDT": 2.3772715905953887e-09,
+  "Pi0": 8.881784197001252e-15,
+  "ACT": 1.1048339266531258e-08,
+  "DP": 2.3833687922337194e-09,
+  "DP3": 1.7763568394002505e-15
+ },
+ "table11_n_tasks": 50,
+ "table11_mean_50": {
+  "R1_Aloha": 65.28,
+  "R1_ARX": 68.82,
+  "R1_Franka": 67.64,
+  "R1_Piper": 2.34,
+  "R1_UR5": 57.74,
+  "R2_Aloha": 78.76,
+  "R2_ARX": 74.24,
+  "R2_Franka": 67.24,
+  "R2_Piper": 25.08,
+  "R2_UR5": 57.06
+ },
+ "table11_reported_avg": {
+  "R1_Aloha": 65.3,
+  "R1_ARX": 68.8,
+  "R1_Franka": 67.6,
+  "R1_Piper": 2.3,
+  "R1_UR5": 57.7,
+  "R2_Aloha": 78.8,
+  "R2_ARX": 74.2,
+  "R2_Franka": 67.2,
+  "R2_Piper": 25.1,
+  "R2_UR5": 57.1
+ },
+ "table2_reported": {
+  "R1.0 Aloha": 65.1,
+  "R1.0 Piper": 2.4,
+  "R1.0 Franka": 67.3,
+  "R1.0 UR5": 57.6,
+  "R1.0 ARX": 68.6,
+  "R1.0 avg": 52.2,
+  "R2.0 Aloha": 78.8,
+  "R2.0 Piper": 25.1,
+  "R2.0 Franka": 67.2,
+  "R2.0 UR5": 57.1,
+  "R2.0 ARX": 74.2,
+  "R2.0 avg": 60.5
+ },
+ "text_aloha_gain_claim": "text 13.5% vs Table 2 +13.7%; Table 11 gives 78.8-65.3=13.5",
+ "table2_avg_check": {
+  "R1.0": 52.2,
+  "R2.0": 60.48
+ },
+ "table3_means": {
+  "ACT": {
+   "recomputed": 1.5,
+   "reported": 2.0
+  },
+  "DP": {
+   "recomputed": 0.12,
+   "reported": 0.0
+  },
+  "RDT": {
+   "recomputed": 18.75,
+   "reported": 18.8
+  },
+  "Pi0": {
+   "recomputed": 22.5,
+   "reported": 22.5
+  },
+  "RDT+Clean": {
+   "recomputed": 14.62,
+   "reported": 14.6
+  },
+  "Pi0+Clean": {
+   "recomputed": 24.88,
+   "reported": 24.9
+  },
+  "RDT+Rand": {
+   "recomputed": 24.75,
+   "reported": 24.8
+  },
+  "Pi0+Rand": {
+   "recomputed": 29.12,
+   "reported": 29.1
+  }
+ },
+ "table3_rel_gain": {
+  "RDT_rand_vs_RDT_pct": 31.9,
+  "Pi0_rand_vs_Pi0_pct": 29.3,
+  "RDT_clean_vs_RDT_pct": -22.3
+ },
+ "table3_n_tasks": 8,
+ "table4_pooled": {
+  "Seen-F": {
+   "10real": {
+    "k": 59,
+    "n": 200,
+    "pct": 29.5,
+    "wilson95": [
+     23.6,
+     36.2
+    ]
+   },
+   "real1k": {
+    "k": 86,
+    "n": 200,
+    "pct": 43.0,
+    "wilson95": [
+     36.3,
+     49.9
+    ]
+   }
+  },
+  "Seen-T": {
+   "10real": {
+    "k": 28,
+    "n": 200,
+    "pct": 14.0,
+    "wilson95": [
+     9.9,
+     19.5
+    ]
+   },
+   "real1k": {
+    "k": 83,
+    "n": 200,
+    "pct": 41.5,
+    "wilson95": [
+     34.9,
+     48.4
+    ]
+   }
+  },
+  "Unseen-F": {
+   "10real": {
+    "k": 31,
+    "n": 200,
+    "pct": 15.5,
+    "wilson95": [
+     11.1,
+     21.2
+    ]
+   },
+   "real1k": {
+    "k": 78,
+    "n": 200,
+    "pct": 39.0,
+    "wilson95": [
+     32.5,
+     45.9
+    ]
+   },
+   "zs": {
+    "k": 73,
+    "n": 200,
+    "pct": 36.5,
+    "wilson95": [
+     30.1,
+     43.4
+    ]
+   }
+  },
+  "Unseen-T": {
+   "10real": {
+    "k": 18,
+    "n": 200,
+    "pct": 9.0,
+    "wilson95": [
+     5.8,
+     13.8
+    ]
+   },
+   "real1k": {
+    "k": 84,
+    "n": 200,
+    "pct": 42.0,
+    "wilson95": [
+     35.4,
+     48.9
+    ]
+   },
+   "zs": {
+    "k": 59,
+    "n": 200,
+    "pct": 29.5,
+    "wilson95": [
+     23.6,
+     36.2
+    ]
+   }
+  }
+ },
+ "abstract_367_check": 366.7,
+ "abstract_228_check": 227.8,
+ "all_cells_mean_10real": 17.0,
+ "all_cells_mean_real1k": 41.38,
+ "all_cells_rel_gain_pct": 143.4,
+ "text_24.4_check": 24.38,
+ "fisher_unseenT_10real_vs_real1k": {
+  "OR": null,
+  "p": 1.5419870353884063e-14
+ },
+ "fisher_unseenT_10real_vs_zs": {
+  "p": 2.3074999885081947e-07
+ },
+ "fisher_SeenF_10real_vs_real1k": {
+  "p": 0.006748150736711776
+ },
+ "vlm_detection": {
+  "n": 130,
+  "acc": 0.431,
+  "prec": 0.208,
+  "rec": 0.552,
+  "f1": 0.302,
+  "reported_acc": 0.431,
+  "reported_prec": 0.208,
+  "reported_rec": 0.552,
+  "reported_f1": 0.302,
+  "localization_12_of_40": 0.3
+ },
+ "cluster_bootstrap_ratio_1k_vs_10real_CI95": [
+  3.17,
+  13.67,
+  0.9954
+ ],
+ "cluster_bootstrap_ratio_zs_vs_10real_CI95": [
+  1.32,
+  9.33,
+  0.997
+ ],
+ "cluster_bootstrap_note": "resample 4 tasks with replacement; ratio of mean success rates; 20000 draws, seed 0"
+}
