@@ -1,0 +1,616 @@
+{
+  "table1_columns": [
+    "LIBERO Goal",
+    "LIBERO Object",
+    "Pick 1D",
+    "Pick 2D",
+    "Drop Ball",
+    "Catch Block*",
+    "1D Speed*",
+    "Ball Color*",
+    "Ball Speed*"
+  ],
+  "table1_n_assumed": [
+    200,
+    200,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40
+  ],
+  "table1_integer_feasible": {
+    "OpenVLA": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "FiS-VLA": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "GR00T": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "VLA-Feedback": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "table1_all_feasible": true,
+  "libero_N100_feasible_for_x.5": false,
+  "table1_means": {
+    "OpenVLA": {
+      "dyn3_mean": 21.67,
+      "unseen4_mean": 0.0,
+      "dyn7_mean": 9.29,
+      "libero2_mean": 83.25
+    },
+    "FiS-VLA": {
+      "dyn3_mean": 49.17,
+      "unseen4_mean": 15.0,
+      "dyn7_mean": 29.64,
+      "libero2_mean": 47.5
+    },
+    "GR00T": {
+      "dyn3_mean": 27.5,
+      "unseen4_mean": 15.62,
+      "dyn7_mean": 20.71,
+      "libero2_mean": 94.75
+    },
+    "VLA-Feedback": {
+      "dyn3_mean": 85.0,
+      "unseen4_mean": 68.12,
+      "dyn7_mean": 75.36,
+      "libero2_mean": 93.75
+    }
+  },
+  "gr00t_vs_vlafb": [
+    {
+      "col": "LIBERO Goal",
+      "n": 200,
+      "gr00t": "184/200",
+      "vlafb": "184/200",
+      "diff_pp": 0,
+      "fisher_p": 1.0,
+      "wilson_gr00t": [
+        87.4,
+        95.0
+      ],
+      "wilson_vlafb": [
+        87.4,
+        95.0
+      ],
+      "holm_p": 1.0
+    },
+    {
+      "col": "LIBERO Object",
+      "n": 200,
+      "gr00t": "195/200",
+      "vlafb": "191/200",
+      "diff_pp": -2.0,
+      "fisher_p": 0.4155335222430817,
+      "wilson_gr00t": [
+        94.3,
+        98.9
+      ],
+      "wilson_vlafb": [
+        91.7,
+        97.6
+      ],
+      "holm_p": 1.0
+    },
+    {
+      "col": "Pick 1D",
+      "n": 40,
+      "gr00t": "19/40",
+      "vlafb": "32/40",
+      "diff_pp": 32.5,
+      "fisher_p": 0.004827424752786166,
+      "wilson_gr00t": [
+        32.9,
+        62.5
+      ],
+      "wilson_vlafb": [
+        65.2,
+        89.5
+      ],
+      "holm_p": 0.019309699011144665
+    },
+    {
+      "col": "Pick 2D",
+      "n": 40,
+      "gr00t": "8/40",
+      "vlafb": "30/40",
+      "diff_pp": 55,
+      "fisher_p": 1.4496841483528036e-06,
+      "wilson_gr00t": [
+        10.5,
+        34.8
+      ],
+      "wilson_vlafb": [
+        59.8,
+        85.8
+      ],
+      "holm_p": 7.2484207417640175e-06
+    },
+    {
+      "col": "Drop Ball",
+      "n": 40,
+      "gr00t": "6/40",
+      "vlafb": "40/40",
+      "diff_pp": 85,
+      "fisher_p": 1.7425471483002994e-16,
+      "wilson_gr00t": [
+        7.1,
+        29.1
+      ],
+      "wilson_vlafb": [
+        91.2,
+        100.0
+      ],
+      "holm_p": 1.3940377186402396e-15
+    },
+    {
+      "col": "Catch Block*",
+      "n": 40,
+      "gr00t": "24/40",
+      "vlafb": "27/40",
+      "diff_pp": 7.5,
+      "fisher_p": 0.6422302566530366,
+      "wilson_gr00t": [
+        44.6,
+        73.7
+      ],
+      "wilson_vlafb": [
+        52.0,
+        79.9
+      ],
+      "holm_p": 1.0
+    },
+    {
+      "col": "1D Speed*",
+      "n": 40,
+      "gr00t": "0/40",
+      "vlafb": "20/40",
+      "diff_pp": 50,
+      "fisher_p": 7.798257540483745e-08,
+      "wilson_gr00t": [
+        -0.0,
+        8.8
+      ],
+      "wilson_vlafb": [
+        35.2,
+        64.8
+      ],
+      "holm_p": 4.678954524290247e-07
+    },
+    {
+      "col": "Ball Color*",
+      "n": 40,
+      "gr00t": "1/40",
+      "vlafb": "39/40",
+      "diff_pp": 95.0,
+      "fisher_p": 2.9784049253314057e-20,
+      "wilson_gr00t": [
+        0.4,
+        12.9
+      ],
+      "wilson_vlafb": [
+        87.1,
+        99.6
+      ],
+      "holm_p": 2.6805644327982653e-19
+    },
+    {
+      "col": "Ball Speed*",
+      "n": 40,
+      "gr00t": "0/40",
+      "vlafb": "23/40",
+      "diff_pp": 57.5,
+      "fisher_p": 2.5978999404300033e-09,
+      "wilson_gr00t": [
+        -0.0,
+        8.8
+      ],
+      "wilson_vlafb": [
+        42.2,
+        71.5
+      ],
+      "holm_p": 1.8185299583010024e-08
+    }
+  ],
+  "pooled_dyn7": {
+    "gr00t": "58/280",
+    "vlafb": "211/280",
+    "fisher_p": 7.390297923480652e-40
+  },
+  "vlafb_vs_best_baseline": [
+    {
+      "col": "LIBERO Goal",
+      "best_baseline": "GR00T",
+      "value": 92,
+      "vlafb": 92,
+      "fisher_p": 1.0
+    },
+    {
+      "col": "LIBERO Object",
+      "best_baseline": "GR00T",
+      "value": 97.5,
+      "vlafb": 95.5,
+      "fisher_p": 0.4155335222430817
+    },
+    {
+      "col": "Pick 1D",
+      "best_baseline": "GR00T",
+      "value": 47.5,
+      "vlafb": 80,
+      "fisher_p": 0.004827424752786166
+    },
+    {
+      "col": "Pick 2D",
+      "best_baseline": "FiS-VLA",
+      "value": 67.5,
+      "vlafb": 75,
+      "fisher_p": 0.6218552222390594
+    },
+    {
+      "col": "Drop Ball",
+      "best_baseline": "FiS-VLA",
+      "value": 80,
+      "vlafb": 100,
+      "fisher_p": 0.005306051673313682
+    },
+    {
+      "col": "Catch Block*",
+      "best_baseline": "GR00T",
+      "value": 60,
+      "vlafb": 67.5,
+      "fisher_p": 0.6422302566530366
+    },
+    {
+      "col": "1D Speed*",
+      "best_baseline": "OpenVLA",
+      "value": 0,
+      "vlafb": 50,
+      "fisher_p": 7.798257540483745e-08
+    },
+    {
+      "col": "Ball Color*",
+      "best_baseline": "FiS-VLA",
+      "value": 60,
+      "vlafb": 97.5,
+      "fisher_p": 5.1292191335842674e-05
+    },
+    {
+      "col": "Ball Speed*",
+      "best_baseline": "OpenVLA",
+      "value": 0,
+      "vlafb": 57.5,
+      "fisher_p": 2.5978999404300033e-09
+    }
+  ],
+  "real_bars": {
+    "GR00T": {
+      "counts": {
+        "bread": 16,
+        "lemon": 9,
+        "can": 7
+      },
+      "mean_of_three": 53.33,
+      "reported_average": 51.0,
+      "gap_pp": -2.33
+    },
+    "VLA-Feedback": {
+      "counts": {
+        "bread": 18,
+        "lemon": 13,
+        "can": 13
+      },
+      "mean_of_three": 73.33,
+      "reported_average": 73.0,
+      "gap_pp": -0.33
+    }
+  },
+  "real_gr00t_avg51_requires_sum": 153,
+  "real_gr00t_sum_options": {
+    "150": 50.0,
+    "155": 51.67
+  },
+  "real_per_task": [
+    {
+      "task": "bread",
+      "gr00t": "16/20",
+      "vlafb": "18/20",
+      "fisher_p": 0.6614196614196614,
+      "wilson_gr00t": [
+        58.4,
+        91.9
+      ],
+      "wilson_vlafb": [
+        69.9,
+        97.2
+      ]
+    },
+    {
+      "task": "lemon",
+      "gr00t": "9/20",
+      "vlafb": "13/20",
+      "fisher_p": 0.3406437147598824,
+      "wilson_gr00t": [
+        25.8,
+        65.8
+      ],
+      "wilson_vlafb": [
+        43.3,
+        81.9
+      ]
+    },
+    {
+      "task": "can",
+      "gr00t": "7/20",
+      "vlafb": "13/20",
+      "fisher_p": 0.112833775483096,
+      "wilson_gr00t": [
+        18.1,
+        56.7
+      ],
+      "wilson_vlafb": [
+        43.3,
+        81.9
+      ]
+    }
+  ],
+  "real_pooled": {
+    "dynamic_2tasks": {
+      "gr00t": "16/40",
+      "vlafb": "26/40",
+      "fisher_p": 0.043238204146275286
+    },
+    "all_3tasks": {
+      "gr00t": "32/60",
+      "vlafb": "44/60",
+      "fisher_p": 0.03660810515776513,
+      "gr00t_pct": 53.33,
+      "vlafb_pct": 73.33
+    }
+  },
+  "table3": [
+    {
+      "row": "Original",
+      "speed_mps": 0.05,
+      "gr00t": "6/40",
+      "vlafb": "40/40",
+      "fisher_p": 1.7425471483002994e-16,
+      "wilson_vlafb": [
+        91.2,
+        100.0
+      ]
+    },
+    {
+      "row": "+10%",
+      "speed_mps": 0.055,
+      "gr00t": "2/40",
+      "vlafb": "37/40",
+      "fisher_p": 1.475451012717197e-16,
+      "wilson_vlafb": [
+        80.1,
+        97.4
+      ]
+    },
+    {
+      "row": "+20%",
+      "speed_mps": 0.06,
+      "gr00t": "2/40",
+      "vlafb": "34/40",
+      "fisher_p": 8.346295754228492e-14,
+      "wilson_vlafb": [
+        70.9,
+        92.9
+      ]
+    },
+    {
+      "row": "+30%",
+      "speed_mps": 0.065,
+      "gr00t": "0/40",
+      "vlafb": "23/40",
+      "fisher_p": 2.5978999404300033e-09,
+      "wilson_vlafb": [
+        42.2,
+        71.5
+      ]
+    },
+    {
+      "row": "+40%",
+      "speed_mps": 0.07,
+      "gr00t": "0/40",
+      "vlafb": "2/40",
+      "fisher_p": 0.49367088607594933,
+      "wilson_vlafb": [
+        1.4,
+        16.5
+      ]
+    }
+  ],
+  "table3_ratio_of_0.066": 1.32,
+  "table3_vs_table1": {
+    "Original_equals_Drop_Ball": true,
+    "plus30_equals_Ball_Speed": true,
+    "note": "Table 1 Drop Ball Speed는 0.066 m/s(+32%), Table 3 +30%는 0.065 m/s인데 두 줄의 값이 같다"
+  },
+  "table2_at_10Hz": {
+    "OpenVLA": {
+      "T_update_ms": 160,
+      "R": 1,
+      "formula": "160 + 0.5dt",
+      "at_dt100_ms": 210.0
+    },
+    "GR00T": {
+      "T_update_ms": 80,
+      "R": 16,
+      "formula": "80 + 8.0dt",
+      "at_dt100_ms": 880.0
+    },
+    "FiS-VLA": {
+      "T_update_ms": 40,
+      "R": 1,
+      "formula": "40 + 0.5dt",
+      "at_dt100_ms": 90.0
+    },
+    "VLA-Feedback": {
+      "T_update_ms": 2,
+      "R": 1,
+      "formula": "2 + 0.5dt",
+      "at_dt100_ms": 52.0
+    }
+  },
+  "table2_ratio_to_vlafb": {
+    "OpenVLA": 4.04,
+    "GR00T": 16.92,
+    "FiS-VLA": 1.73,
+    "VLA-Feedback": 1.0
+  },
+  "table5": {
+    "sim_sum": 2.04,
+    "sim_reported": 2.04,
+    "hw_sum": 71.01,
+    "hw_reported": 71.01,
+    "hw_non_inference_ms": 69.06,
+    "hw_reaction_with_sensing_ms": 121.01,
+    "formula_reaction_ms": 52.0
+  },
+  "planner_hz": 0.625,
+  "stale_displacement_cm": {
+    "Pick 1D (0.04 m/s)": {
+      "OpenVLA": 0.84,
+      "GR00T": 3.52,
+      "FiS-VLA": 0.36,
+      "VLA-Feedback": 0.21,
+      "GR00T_chunk_end_cm": 6.72
+    },
+    "Drop Ball (0.05 m/s)": {
+      "OpenVLA": 1.05,
+      "GR00T": 4.4,
+      "FiS-VLA": 0.45,
+      "VLA-Feedback": 0.26,
+      "GR00T_chunk_end_cm": 8.4
+    }
+  },
+  "code_cup_xy_tol_cm": 3.0,
+  "fig5a_dynamic_static": {
+    "Delta-a (direct residual)": [
+      63,
+      92
+    ],
+    "No Obs": [
+      53,
+      91
+    ],
+    "Transformer->MLP": [
+      77,
+      91
+    ],
+    "VLA-Feedback": [
+      85,
+      94
+    ]
+  },
+  "fig5b_dynamic_static": {
+    "1:2": [
+      62,
+      90
+    ],
+    "1:4": [
+      67,
+      90
+    ],
+    "1:8": [
+      67,
+      92
+    ],
+    "1:16": [
+      85,
+      94
+    ]
+  },
+  "fig5_checks": {
+    "full_dynamic_equals_table1_mean": [
+      85,
+      85.0
+    ],
+    "full_static_vs_libero2_mean": [
+      94,
+      93.75
+    ],
+    "gr00t_dyn3_mean": 27.5,
+    "gr00t_static_mean": 94.75,
+    "no_obs_gain_over_gr00t_pp": 25.5,
+    "full_gain_over_gr00t_pp": 57.5,
+    "no_obs_share_of_gain": 0.443,
+    "obs_gain_over_no_obs_pp": 32,
+    "freq_1_2_gain_over_gr00t_pp": 34.5,
+    "freq_1_2_share_of_gain": 0.6
+  },
+  "param_count": {
+    "1024": {
+      "trainable": 1186312,
+      "trainable_M": 1.186,
+      "total_M": 12.36
+    },
+    "1536": {
+      "trainable": 1317384,
+      "trainable_M": 1.317,
+      "total_M": 12.49
+    }
+  },
+  "param_reported": {
+    "trainable_M": 1.19,
+    "total_M": 12.4,
+    "resnet_M": 11.2
+  },
+  "resnet_tokens": {
+    "native_224": 49,
+    "after_adaptive_pool_8x8": 64,
+    "sim_input_128_resized_to": 224
+  },
+  "mde_pp_at_p50": {
+    "n20": 44.3,
+    "n40": 31.3,
+    "n200": 14.0
+  },
+  "need_n_per_arm": {
+    "45_vs_65": 96,
+    "35_vs_65": 43,
+    "80_vs_90": 199
+  }
+}
