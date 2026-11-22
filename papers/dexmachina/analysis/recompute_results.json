@@ -1,0 +1,843 @@
+{
+  "source": "dexmachina/eval/stats/dexmachina_main_stats_AUC.json",
+  "checks": {
+    "V1_json_vs_fig3_ours": {
+      "n_seeds_values": [
+        5
+      ],
+      "n_cells": 28,
+      "mismatches": []
+    },
+    "V2_hand_pairs_paired_over_7_objects": [
+      {
+        "pair": "Allegro - XHand",
+        "mean_diff": 1.31,
+        "t": 0.38,
+        "p": 0.7204,
+        "df": 6
+      },
+      {
+        "pair": "Schunk - Inspire",
+        "mean_diff": 10.64,
+        "t": 1.91,
+        "p": 0.1053,
+        "df": 6
+      },
+      {
+        "pair": "XHand - Schunk",
+        "mean_diff": 8.71,
+        "t": 1.52,
+        "p": 0.1781,
+        "df": 6
+      },
+      {
+        "pair": "Allegro - Schunk",
+        "mean_diff": 10.02,
+        "t": 1.8,
+        "p": 0.1227,
+        "df": 6
+      },
+      {
+        "pair": "Allegro - Inspire",
+        "mean_diff": 20.65,
+        "t": 2.31,
+        "p": 0.0602,
+        "df": 6
+      }
+    ],
+    "V3_ours_vs_baselines": [
+      {
+        "baseline": "Kinematic",
+        "hand": "Inspire",
+        "n_objects": 7,
+        "mean_diff": 51.31,
+        "ours_wins": 7,
+        "t": 6.82,
+        "p": 0.0005,
+        "df": 6
+      },
+      {
+        "baseline": "Kinematic",
+        "hand": "Allegro",
+        "n_objects": 7,
+        "mean_diff": 69.74,
+        "ours_wins": 7,
+        "t": 14.54,
+        "p": 0.0,
+        "df": 6
+      },
+      {
+        "baseline": "Kinematic",
+        "hand": "XHand",
+        "n_objects": 7,
+        "mean_diff": 71.3,
+        "ours_wins": 7,
+        "t": 23.12,
+        "p": 0.0,
+        "df": 6
+      },
+      {
+        "baseline": "Kinematic",
+        "hand": "Schunk",
+        "n_objects": 7,
+        "mean_diff": 61.73,
+        "ours_wins": 7,
+        "t": 12.87,
+        "p": 0.0,
+        "df": 6
+      },
+      {
+        "baseline": "ObjDex-re",
+        "hand": "Inspire",
+        "n_objects": 7,
+        "mean_diff": 16.44,
+        "ours_wins": 5,
+        "t": 2.21,
+        "p": 0.0688,
+        "df": 6
+      },
+      {
+        "baseline": "ObjDex-re",
+        "hand": "Allegro",
+        "n_objects": 7,
+        "mean_diff": 16.86,
+        "ours_wins": 5,
+        "t": 2.05,
+        "p": 0.0864,
+        "df": 6
+      },
+      {
+        "baseline": "ObjDex-re",
+        "hand": "XHand",
+        "n_objects": 7,
+        "mean_diff": 20.96,
+        "ours_wins": 7,
+        "t": 3.46,
+        "p": 0.0134,
+        "df": 6
+      },
+      {
+        "baseline": "ObjDex-re",
+        "hand": "Schunk",
+        "n_objects": 7,
+        "mean_diff": 31.1,
+        "ours_wins": 7,
+        "t": 3.28,
+        "p": 0.0168,
+        "df": 6
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "Inspire",
+        "n_objects": 7,
+        "mean_diff": 12.56,
+        "ours_wins": 5,
+        "t": 1.7,
+        "p": 0.1408,
+        "df": 6
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "Allegro",
+        "n_objects": 7,
+        "mean_diff": 15.57,
+        "ours_wins": 5,
+        "t": 2.22,
+        "p": 0.0683,
+        "df": 6
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "XHand",
+        "n_objects": 7,
+        "mean_diff": 22.16,
+        "ours_wins": 6,
+        "t": 3.94,
+        "p": 0.0076,
+        "df": 6
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "Schunk",
+        "n_objects": 7,
+        "mean_diff": 19.7,
+        "ours_wins": 5,
+        "t": 2.56,
+        "p": 0.0428,
+        "df": 6
+      },
+      {
+        "baseline": "ManipTrans",
+        "hand": "Inspire",
+        "n_objects": 4,
+        "mean_diff": 43.75,
+        "ours_wins": 4,
+        "t": 4.38,
+        "p": 0.0221,
+        "df": 3
+      },
+      {
+        "baseline": "ManipTrans",
+        "hand": "Allegro",
+        "n_objects": 4,
+        "mean_diff": 35.53,
+        "ours_wins": 4,
+        "t": 3.21,
+        "p": 0.0491,
+        "df": 3
+      },
+      {
+        "baseline": "ManipTrans",
+        "hand": "XHand",
+        "n_objects": 4,
+        "mean_diff": 48.83,
+        "ours_wins": 4,
+        "t": 10.67,
+        "p": 0.0018,
+        "df": 3
+      },
+      {
+        "baseline": "ManipTrans",
+        "hand": "Schunk",
+        "n_objects": 4,
+        "mean_diff": 36.2,
+        "ours_wins": 4,
+        "t": 4.05,
+        "p": 0.0272,
+        "df": 3
+      }
+    ],
+    "V3_ours_below_baseline_cells": [
+      {
+        "baseline": "ObjDex-re",
+        "hand": "Inspire",
+        "object": "Mixer-300",
+        "diff": -2.3
+      },
+      {
+        "baseline": "ObjDex-re",
+        "hand": "Inspire",
+        "object": "Waffleiron-300",
+        "diff": -0.7
+      },
+      {
+        "baseline": "ObjDex-re",
+        "hand": "Allegro",
+        "object": "Ketchup-100",
+        "diff": -0.2
+      },
+      {
+        "baseline": "ObjDex-re",
+        "hand": "Allegro",
+        "object": "Mixer-300",
+        "diff": -5.2
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "Inspire",
+        "object": "Ketchup-100",
+        "diff": -17.1
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "Inspire",
+        "object": "Waffleiron-300",
+        "diff": -5.9
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "Allegro",
+        "object": "Ketchup-100",
+        "diff": -0.6
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "Allegro",
+        "object": "Mixer-170",
+        "diff": -1.3
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "XHand",
+        "object": "Ketchup-100",
+        "diff": -1.1
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "Schunk",
+        "object": "Ketchup-100",
+        "diff": -0.3
+      },
+      {
+        "baseline": "TaskAux",
+        "hand": "Schunk",
+        "object": "Notebook-300",
+        "diff": -11.5
+      }
+    ],
+    "V4_appendix_B3_objdex_claim": {
+      "ketchup100_objdex_values": [
+        68.8,
+        91.6,
+        89.9,
+        88.6
+      ],
+      "n_over_90": 1,
+      "mixer170_objdex_values": [
+        63.2,
+        74.1,
+        70.7,
+        21.0
+      ],
+      "n_over_70": 2,
+      "note": "부록 B.3 문장(모든 손 90% 초과, 세 손 70% 초과)과 그림 3 막대 값이 맞지 않는다."
+    },
+    "V5_note": "seed 수준 자료가 없어 셀 신뢰구간은 집계 err에서 역산한 값이다. 기준선 막대의 오차막대는 그림에서 판독하지 않았다."
+  },
+  "cells": {
+    "inspire_hand|Ketchup-100": {
+      "mean": 70.71,
+      "sem_ddof0": 9.6,
+      "sem_ddof1": 10.74,
+      "ci95": [
+        40.9,
+        100.52
+      ],
+      "n": 5,
+      "fig_ours": 70.7
+    },
+    "inspire_hand|Box-200": {
+      "mean": 87.07,
+      "sem_ddof0": 1.75,
+      "sem_ddof1": 1.96,
+      "ci95": [
+        81.63,
+        92.52
+      ],
+      "n": 5,
+      "fig_ours": 87.1
+    },
+    "inspire_hand|Mixer-170": {
+      "mean": 89.82,
+      "sem_ddof0": 1.03,
+      "sem_ddof1": 1.15,
+      "ci95": [
+        86.63,
+        93.0
+      ],
+      "n": 5,
+      "fig_ours": 89.8
+    },
+    "inspire_hand|Ketchup-300": {
+      "mean": 32.34,
+      "sem_ddof0": 13.83,
+      "sem_ddof1": 15.46,
+      "ci95": [
+        -10.59,
+        75.26
+      ],
+      "n": 5,
+      "fig_ours": 32.3
+    },
+    "inspire_hand|Mixer-300": {
+      "mean": 64.33,
+      "sem_ddof0": 7.76,
+      "sem_ddof1": 8.67,
+      "ci95": [
+        40.26,
+        88.41
+      ],
+      "n": 5,
+      "fig_ours": 64.3
+    },
+    "inspire_hand|Notebook-300": {
+      "mean": 71.24,
+      "sem_ddof0": 12.86,
+      "sem_ddof1": 14.38,
+      "ci95": [
+        31.33,
+        111.16
+      ],
+      "n": 5,
+      "fig_ours": 71.2
+    },
+    "inspire_hand|Waffleiron-300": {
+      "mean": 23.81,
+      "sem_ddof0": 7.54,
+      "sem_ddof1": 8.44,
+      "ci95": [
+        0.39,
+        47.23
+      ],
+      "n": 5,
+      "fig_ours": 23.8
+    },
+    "allegro_hand|Ketchup-100": {
+      "mean": 91.4,
+      "sem_ddof0": 0.03,
+      "sem_ddof1": 0.04,
+      "ci95": [
+        91.3,
+        91.5
+      ],
+      "n": 5,
+      "fig_ours": 91.4
+    },
+    "allegro_hand|Box-200": {
+      "mean": 88.64,
+      "sem_ddof0": 0.94,
+      "sem_ddof1": 1.05,
+      "ci95": [
+        85.71,
+        91.56
+      ],
+      "n": 5,
+      "fig_ours": 88.6
+    },
+    "allegro_hand|Mixer-170": {
+      "mean": 77.32,
+      "sem_ddof0": 12.59,
+      "sem_ddof1": 14.08,
+      "ci95": [
+        38.22,
+        116.41
+      ],
+      "n": 5,
+      "fig_ours": 77.3
+    },
+    "allegro_hand|Ketchup-300": {
+      "mean": 82.99,
+      "sem_ddof0": 2.17,
+      "sem_ddof1": 2.43,
+      "ci95": [
+        76.26,
+        89.72
+      ],
+      "n": 5,
+      "fig_ours": 83.0
+    },
+    "allegro_hand|Mixer-300": {
+      "mean": 81.12,
+      "sem_ddof0": 0.99,
+      "sem_ddof1": 1.11,
+      "ci95": [
+        78.05,
+        84.2
+      ],
+      "n": 5,
+      "fig_ours": 81.1
+    },
+    "allegro_hand|Notebook-300": {
+      "mean": 87.08,
+      "sem_ddof0": 0.99,
+      "sem_ddof1": 1.1,
+      "ci95": [
+        84.02,
+        90.14
+      ],
+      "n": 5,
+      "fig_ours": 87.1
+    },
+    "allegro_hand|Waffleiron-300": {
+      "mean": 75.36,
+      "sem_ddof0": 2.97,
+      "sem_ddof1": 3.32,
+      "ci95": [
+        66.13,
+        84.59
+      ],
+      "n": 5,
+      "fig_ours": 75.4
+    },
+    "xhand|Ketchup-100": {
+      "mean": 90.38,
+      "sem_ddof0": 0.21,
+      "sem_ddof1": 0.23,
+      "ci95": [
+        89.74,
+        91.03
+      ],
+      "n": 5,
+      "fig_ours": 90.4
+    },
+    "xhand|Box-200": {
+      "mean": 86.53,
+      "sem_ddof0": 1.44,
+      "sem_ddof1": 1.61,
+      "ci95": [
+        82.07,
+        90.98
+      ],
+      "n": 5,
+      "fig_ours": 86.5
+    },
+    "xhand|Mixer-170": {
+      "mean": 89.85,
+      "sem_ddof0": 0.53,
+      "sem_ddof1": 0.59,
+      "ci95": [
+        88.22,
+        91.49
+      ],
+      "n": 5,
+      "fig_ours": 89.9
+    },
+    "xhand|Ketchup-300": {
+      "mean": 72.35,
+      "sem_ddof0": 4.4,
+      "sem_ddof1": 4.92,
+      "ci95": [
+        58.69,
+        86.02
+      ],
+      "n": 5,
+      "fig_ours": 72.4
+    },
+    "xhand|Mixer-300": {
+      "mean": 66.23,
+      "sem_ddof0": 6.95,
+      "sem_ddof1": 7.77,
+      "ci95": [
+        44.66,
+        87.81
+      ],
+      "n": 5,
+      "fig_ours": 66.2
+    },
+    "xhand|Notebook-300": {
+      "mean": 89.05,
+      "sem_ddof0": 1.23,
+      "sem_ddof1": 1.37,
+      "ci95": [
+        85.24,
+        92.85
+      ],
+      "n": 5,
+      "fig_ours": 89.0
+    },
+    "xhand|Waffleiron-300": {
+      "mean": 80.32,
+      "sem_ddof0": 1.27,
+      "sem_ddof1": 1.42,
+      "ci95": [
+        76.37,
+        84.28
+      ],
+      "n": 5,
+      "fig_ours": 80.3
+    },
+    "schunk_hand|Ketchup-100": {
+      "mean": 89.72,
+      "sem_ddof0": 0.85,
+      "sem_ddof1": 0.95,
+      "ci95": [
+        87.1,
+        92.35
+      ],
+      "n": 5,
+      "fig_ours": 89.7
+    },
+    "schunk_hand|Box-200": {
+      "mean": 85.88,
+      "sem_ddof0": 0.54,
+      "sem_ddof1": 0.61,
+      "ci95": [
+        84.2,
+        87.56
+      ],
+      "n": 5,
+      "fig_ours": 85.9
+    },
+    "schunk_hand|Mixer-170": {
+      "mean": 90.31,
+      "sem_ddof0": 1.38,
+      "sem_ddof1": 1.54,
+      "ci95": [
+        86.02,
+        94.59
+      ],
+      "n": 5,
+      "fig_ours": 90.3
+    },
+    "schunk_hand|Ketchup-300": {
+      "mean": 70.01,
+      "sem_ddof0": 4.83,
+      "sem_ddof1": 5.4,
+      "ci95": [
+        55.02,
+        85.01
+      ],
+      "n": 5,
+      "fig_ours": 70.0
+    },
+    "schunk_hand|Mixer-300": {
+      "mean": 66.83,
+      "sem_ddof0": 3.27,
+      "sem_ddof1": 3.66,
+      "ci95": [
+        56.68,
+        76.98
+      ],
+      "n": 5,
+      "fig_ours": 66.8
+    },
+    "schunk_hand|Notebook-300": {
+      "mean": 69.64,
+      "sem_ddof0": 8.99,
+      "sem_ddof1": 10.05,
+      "ci95": [
+        41.73,
+        97.55
+      ],
+      "n": 5,
+      "fig_ours": 69.6
+    },
+    "schunk_hand|Waffleiron-300": {
+      "mean": 41.38,
+      "sem_ddof0": 10.48,
+      "sem_ddof1": 11.71,
+      "ci95": [
+        8.85,
+        73.9
+      ],
+      "n": 5,
+      "fig_ours": 41.4
+    }
+  },
+  "fig3_labels": {
+    "inspire_hand": [
+      [
+        13.6,
+        68.8,
+        87.8,
+        70.7,
+        42.6
+      ],
+      [
+        19.8,
+        37.0,
+        64.3,
+        87.1,
+        19.3
+      ],
+      [
+        23.0,
+        63.2,
+        71.8,
+        89.8,
+        37.2
+      ],
+      [
+        3.7,
+        22.6,
+        13.3,
+        32.3,
+        5.8
+      ],
+      [
+        7.4,
+        66.6,
+        55.6,
+        64.3,
+        null
+      ],
+      [
+        6.5,
+        41.4,
+        28.8,
+        71.2,
+        null
+      ],
+      [
+        6.0,
+        24.5,
+        29.7,
+        23.8,
+        null
+      ]
+    ],
+    "allegro_hand": [
+      [
+        11.7,
+        91.6,
+        92.0,
+        91.4,
+        82.2
+      ],
+      [
+        40.6,
+        53.0,
+        77.7,
+        88.6,
+        56.3
+      ],
+      [
+        20.1,
+        74.1,
+        78.6,
+        77.3,
+        39.9
+      ],
+      [
+        3.8,
+        28.1,
+        31.2,
+        83.0,
+        19.8
+      ],
+      [
+        8.3,
+        86.3,
+        72.4,
+        81.1,
+        null
+      ],
+      [
+        5.6,
+        66.2,
+        60.1,
+        87.1,
+        null
+      ],
+      [
+        5.6,
+        66.6,
+        62.9,
+        75.4,
+        null
+      ]
+    ],
+    "xhand": [
+      [
+        12.3,
+        89.9,
+        91.5,
+        90.4,
+        54.6
+      ],
+      [
+        19.6,
+        42.0,
+        65.5,
+        86.5,
+        29.8
+      ],
+      [
+        20.3,
+        70.7,
+        54.9,
+        89.9,
+        36.7
+      ],
+      [
+        3.4,
+        33.1,
+        31.0,
+        72.4,
+        22.8
+      ],
+      [
+        8.3,
+        59.4,
+        58.9,
+        66.2,
+        null
+      ],
+      [
+        6.1,
+        73.2,
+        61.6,
+        89.0,
+        null
+      ],
+      [
+        5.6,
+        59.7,
+        56.2,
+        80.3,
+        null
+      ]
+    ],
+    "schunk_hand": [
+      [
+        14.2,
+        88.6,
+        90.0,
+        89.7,
+        76.0
+      ],
+      [
+        24.2,
+        42.4,
+        51.7,
+        85.9,
+        54.0
+      ],
+      [
+        20.1,
+        21.0,
+        62.0,
+        90.3,
+        34.5
+      ],
+      [
+        3.9,
+        22.6,
+        25.0,
+        70.0,
+        26.6
+      ],
+      [
+        8.0,
+        41.6,
+        55.2,
+        66.8,
+        null
+      ],
+      [
+        5.6,
+        69.4,
+        81.1,
+        69.6,
+        null
+      ],
+      [
+        5.6,
+        10.4,
+        10.8,
+        41.4,
+        null
+      ]
+    ]
+  },
+  "hand_avg": {
+    "Inspire": {
+      "mean": 62.76,
+      "ci95": [
+        39.17,
+        86.35
+      ]
+    },
+    "Allegro": {
+      "mean": 83.42,
+      "ci95": [
+        77.92,
+        88.91
+      ]
+    },
+    "XHand": {
+      "mean": 82.1,
+      "ci95": [
+        73.28,
+        90.93
+      ]
+    },
+    "Schunk": {
+      "mean": 73.4,
+      "ci95": [
+        57.37,
+        89.42
+      ]
+    }
+  }
+}
