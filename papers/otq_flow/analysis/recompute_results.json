@@ -1,0 +1,422 @@
+{
+ "V1_table1_avg": {
+  "FAWAC": {
+   "recomputed": 0.105,
+   "reported": 0.11,
+   "diff": -0.005
+  },
+  "DSRL": {
+   "recomputed": 0.4763,
+   "reported": 0.48,
+   "diff": -0.0037
+  },
+  "QSM": {
+   "recomputed": 0.47,
+   "reported": 0.47,
+   "diff": 0.0
+  },
+  "CGQL": {
+   "recomputed": 0.3413,
+   "reported": 0.34,
+   "diff": 0.0013
+  },
+  "FEdit": {
+   "recomputed": 0.36,
+   "reported": 0.36,
+   "diff": 0.0
+  },
+  "QAM": {
+   "recomputed": 0.5513,
+   "reported": 0.55,
+   "diff": 0.0012
+  },
+  "IFQL": {
+   "recomputed": 0.4275,
+   "reported": 0.43,
+   "diff": -0.0025
+  },
+  "FQL": {
+   "recomputed": 0.4375,
+   "reported": 0.44,
+   "diff": -0.0025
+  },
+  "QAM-F": {
+   "recomputed": 0.5425,
+   "reported": 0.54,
+   "diff": 0.0025
+  },
+  "OTQL": {
+   "recomputed": 0.5975,
+   "reported": 0.59,
+   "diff": 0.0075
+  }
+ },
+ "V1b_best_per_env": {
+  "antmaze-large": {
+   "max": 0.9,
+   "winners": [
+    "QSM"
+   ]
+  },
+  "antmaze-giant": {
+   "max": 0.24,
+   "winners": [
+    "QSM"
+   ]
+  },
+  "humanoidmaze-medium": {
+   "max": 0.86,
+   "winners": [
+    "IFQL"
+   ]
+  },
+  "humanoidmaze-large": {
+   "max": 0.24,
+   "winners": [
+    "IFQL"
+   ]
+  },
+  "cube-double": {
+   "max": 0.74,
+   "winners": [
+    "DSRL"
+   ]
+  },
+  "cube-triple": {
+   "max": 0.08,
+   "winners": [
+    "CGQL"
+   ]
+  },
+  "scene": {
+   "max": 0.99,
+   "winners": [
+    "DSRL",
+    "OTQL"
+   ]
+  },
+  "puzzle-3x3": {
+   "max": 1.0,
+   "winners": [
+    "QAM",
+    "IFQL"
+   ]
+  }
+ },
+ "V1c_otql_wins": 1,
+ "V1d_margin_vs_fast": {
+  "QAM-F": 0.055,
+  "FQL": 0.16
+ },
+ "V1e_sign_vs_QAMF": {
+  "wins": 7,
+  "losses": 0,
+  "ties": 1,
+  "binom_p_two_sided": 0.0156
+ },
+ "V1f_bootstrap_envs_diff_vs_QAMF": [
+  0.025,
+  0.0925
+ ],
+ "V2_table2": {
+  "tape in penholder": {
+   "sft": "14/30=0.467",
+   "otql": "24/30=0.800",
+   "wilson_sft": [
+    0.3023,
+    0.6386
+   ],
+   "wilson_otql": [
+    0.6269,
+    0.9049
+   ],
+   "fisher_p_two_sided": 0.015,
+   "diff_pp": 33.33
+  },
+  "move knight": {
+   "sft": "9/30=0.300",
+   "otql": "22/30=0.733",
+   "wilson_sft": [
+    0.1666,
+    0.4788
+   ],
+   "wilson_otql": [
+    0.5555,
+    0.8582
+   ],
+   "fisher_p_two_sided": 0.0017,
+   "diff_pp": 43.33
+  },
+  "pooled": {
+   "sft": "23/60=0.3833",
+   "otql": "46/60=0.7667",
+   "wilson_sft": [
+    0.2709,
+    0.5098
+   ],
+   "wilson_otql": [
+    0.6456,
+    0.8556
+   ],
+   "fisher_p_two_sided": 0.0,
+   "diff_pp": 38.33,
+   "text_claims": {
+    "abstract": "38% -> 76%",
+    "sec4.3": "increase by an average of 37%"
+   }
+  },
+  "rounding": {
+   "sft_pooled_pct": 38.33,
+   "otql_pooled_pct": 76.67,
+   "paper_floor_or_round": "SFT 38.33->38 (둘 다 동일), OTQL 76.67->76 (반올림이면 77, 버림이면 76)"
+  }
+ },
+ "V3_fig5": {
+  "final_points": {
+   "stack cups": 0.8,
+   "tape in penholder": 0.9,
+   "close door": 0.9
+  },
+  "base": {
+   "stack cups": 0.4,
+   "tape in penholder": 0.4,
+   "close door": 0.3
+  },
+  "mean_final": 0.8667,
+  "mean_base": 0.3667,
+  "paper_claim": "36% -> 86%",
+  "mean_last3_each_task": {
+   "stack cups": 0.667,
+   "tape in penholder": 0.7,
+   "close door": 0.9
+  },
+  "mean_last3_all": 0.7556,
+  "mean_all_points_excl_first": 0.6733,
+  "mean_first_point": 0.4333,
+  "all_values_multiples_of_0.1": true,
+  "pooled_assumed_n10_each": {
+   "otql_final": "26/30",
+   "base": "11/30",
+   "wilson_otql": [
+    0.7032,
+    0.9469
+   ],
+   "wilson_base": [
+    0.2187,
+    0.5449
+   ],
+   "fisher_p_two_sided": 0.00014
+  },
+  "per_task_assumed_n10": {
+   "stack cups": {
+    "otql_final": "8/10",
+    "base": "4/10",
+    "fisher_p": 0.1698,
+    "wilson_otql": [
+     0.4902,
+     0.9433
+    ],
+    "wilson_base": [
+     0.1682,
+     0.6873
+    ]
+   },
+   "tape in penholder": {
+    "otql_final": "9/10",
+    "base": "4/10",
+    "fisher_p": 0.0573,
+    "wilson_otql": [
+     0.5958,
+     0.9821
+    ],
+    "wilson_base": [
+     0.1682,
+     0.6873
+    ]
+   },
+   "close door": {
+    "otql_final": "9/10",
+    "base": "3/10",
+    "fisher_p": 0.0198,
+    "wilson_otql": [
+     0.5958,
+     0.9821
+    ],
+    "wilson_base": [
+     0.1078,
+     0.6032
+    ]
+   }
+  },
+  "paper_rounding": {
+   "otql_86.67": "paper 86 (버림)",
+   "base_36.67": "paper 36 (버림)"
+  }
+ },
+ "V4_fig3": {
+  "OpenMicrowave-v0": {
+   "FQL": {
+    "max": 0.57,
+    "final": 0.56,
+    "mean": 0.53
+   },
+   "QC": {
+    "max": 0.9,
+    "final": 0.87,
+    "mean": 0.776
+   },
+   "EWFM": {
+    "max": 0.76,
+    "final": 0.72,
+    "mean": 0.585
+   },
+   "OTQL": {
+    "max": 0.93,
+    "final": 0.81,
+    "mean": 0.682
+   }
+  },
+  "ArrangeBoxes-v0": {
+   "FQL": {
+    "max": 0.49,
+    "final": 0.36,
+    "mean": 0.325
+   },
+   "QC": {
+    "max": 0.58,
+    "final": 0.38,
+    "mean": 0.391
+   },
+   "EWFM": {
+    "max": 0.1,
+    "final": 0.08,
+    "mean": 0.042
+   },
+   "OTQL": {
+    "max": 0.59,
+    "final": 0.59,
+    "mean": 0.396
+   }
+  },
+  "OTQL_minus_FQL": {
+   "max_each": [
+    0.36,
+    0.1
+   ],
+   "max_avg_pp": 23.0,
+   "final_each": [
+    0.25,
+    0.23
+   ],
+   "final_avg_pp": 24.0,
+   "curve_mean_each": [
+    0.152,
+    0.071
+   ],
+   "curve_mean_avg_pp": 11.2,
+   "relative_max_each": [
+    0.632,
+    0.204
+   ],
+   "paper_claim": "평균 15% 높음"
+  },
+  "OTQL_vs_QC_max": {
+   "OpenMicrowave-v0": [
+    0.93,
+    0.9
+   ],
+   "ArrangeBoxes-v0": [
+    0.59,
+    0.58
+   ]
+  },
+  "n_eval_points": 8
+ },
+ "V5_fig2": {
+  "cube-double-task4": {
+   "DSRL": {
+    "max_offline_phase(first10pts)": 0.26,
+    "max_all": 0.97,
+    "final": 0.95,
+    "max_online_phase": 0.97,
+    "n_points": 20
+   },
+   "QAM-F": {
+    "max_offline_phase(first10pts)": 0.3,
+    "max_all": 1.0,
+    "final": 0.98,
+    "max_online_phase": 1.0,
+    "n_points": 20
+   },
+   "FQL": {
+    "max_offline_phase(first10pts)": 0.01,
+    "max_all": 0.01,
+    "final": 0.01,
+    "max_online_phase": 0.01,
+    "n_points": 20
+   },
+   "OTQL": {
+    "max_offline_phase(first10pts)": 0.26,
+    "max_all": 1.0,
+    "final": 0.94,
+    "max_online_phase": 1.0,
+    "n_points": 20
+   }
+  },
+  "humanoidmaze-task1": {
+   "DSRL": {
+    "max_offline_phase(first10pts)": 0.47,
+    "max_all": 0.9,
+    "final": 0.76,
+    "max_online_phase": 0.9,
+    "n_points": 20
+   },
+   "QAM-F": {
+    "max_offline_phase(first10pts)": 0.25,
+    "max_all": 0.5,
+    "final": 0.5,
+    "max_online_phase": 0.5,
+    "n_points": 20
+   },
+   "FQL": {
+    "max_offline_phase(first10pts)": 0.01,
+    "max_all": 0.04,
+    "final": -0.0,
+    "max_online_phase": 0.04,
+    "n_points": 20
+   },
+   "OTQL": {
+    "max_offline_phase(first10pts)": 0.88,
+    "max_all": 0.97,
+    "final": 0.97,
+    "max_online_phase": 0.97,
+    "n_points": 20
+   }
+  }
+ },
+ "V6_budget": {
+  "abstract": "50-60 episodes",
+  "sec4.3": "10 demos + 10 initial rollouts + 10/iter until buffer = 50 episodes",
+  "D.3_single_task": "10 expert demos + 50 total rollouts (60 episodes)",
+  "D.3_vla": "10 demos + 30 rollouts (40 episodes)",
+  "train_steps_single_task_each_iter": 20000,
+  "iterations_if_50_rollouts": "initial 10 + 4x10 -> 5 fits, or +5x10 -> 6 fits (Fig 5 has 6 points)",
+  "fig5_points": 6
+ },
+ "V7_nfe": {
+  "10_to_3": 0.7,
+  "10_to_2": 0.8,
+  "paper_claim_vla": "70%",
+  "ok": true
+ },
+ "V8_wilson_check": {
+  "24/30": [
+   0.6269,
+   0.9049
+  ],
+  "scipy_binomtest_ci": [
+   0.6269,
+   0.9049
+  ]
+ }
+}
