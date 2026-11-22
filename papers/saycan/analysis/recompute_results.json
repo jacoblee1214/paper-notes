@@ -1,0 +1,351 @@
+{
+  "checks": {
+    "mock_plan": {
+      "row_sum": 85,
+      "row_sum_pct": 84.2,
+      "reported_total_pct": 84,
+      "rounded_from_rows": 84,
+      "match": true,
+      "reported_total_count_candidates": [
+        85
+      ]
+    },
+    "mock_exec": {
+      "row_sum": 75,
+      "row_sum_pct": 74.3,
+      "reported_total_pct": 74,
+      "rounded_from_rows": 74,
+      "match": true,
+      "reported_total_count_candidates": [
+        75
+      ]
+    },
+    "kit_plan": {
+      "row_sum": 80,
+      "row_sum_pct": 79.2,
+      "reported_total_pct": 81,
+      "rounded_from_rows": 79,
+      "match": false,
+      "reported_total_count_candidates": [
+        82
+      ]
+    },
+    "kit_exec": {
+      "row_sum": 59,
+      "row_sum_pct": 58.4,
+      "reported_total_pct": 60,
+      "rounded_from_rows": 58,
+      "match": false,
+      "reported_total_count_candidates": [
+        61
+      ]
+    },
+    "novf_plan": {
+      "row_sum": 68,
+      "row_sum_pct": 67.3,
+      "reported_total_pct": 67,
+      "rounded_from_rows": 67,
+      "match": true,
+      "reported_total_count_candidates": [
+        68
+      ]
+    },
+    "gen_plan": {
+      "row_sum": 75,
+      "row_sum_pct": 74.3,
+      "reported_total_pct": 74,
+      "rounded_from_rows": 74,
+      "match": true,
+      "reported_total_count_candidates": [
+        75
+      ]
+    },
+    "bcusE_exec": {
+      "row_sum": 9,
+      "row_sum_pct": 8.9,
+      "reported_total_pct": 9,
+      "rounded_from_rows": 9,
+      "match": true,
+      "reported_total_count_candidates": [
+        9
+      ]
+    },
+    "bcnl_exec": {
+      "row_sum": 0,
+      "row_sum_pct": 0.0,
+      "reported_total_pct": 0,
+      "rounded_from_rows": 0,
+      "match": true,
+      "reported_total_count_candidates": [
+        0
+      ]
+    },
+    "T3_FLAN_plan": {
+      "row_sum": 71,
+      "implied_pct": 70,
+      "reported_total_pct": 70,
+      "match": true
+    },
+    "T3_FLAN_exec": {
+      "row_sum": 62,
+      "implied_pct": 61,
+      "reported_total_pct": 61,
+      "match": true
+    },
+    "T6_PaLM 540B": {
+      "row_sum": 75,
+      "implied_pct": 74,
+      "reported_total_pct": 74,
+      "match": true
+    },
+    "T6_PaLM 62B": {
+      "row_sum": 73,
+      "implied_pct": 72,
+      "reported_total_pct": 72,
+      "match": true
+    },
+    "T6_PaLM 8B": {
+      "row_sum": 38,
+      "implied_pct": 38,
+      "reported_total_pct": 38,
+      "match": true
+    },
+    "T6_FLAN 137B": {
+      "row_sum": 43,
+      "implied_pct": 43,
+      "reported_total_pct": 43,
+      "match": true
+    },
+    "T5_sim": {
+      "0 examples (no termination)": {
+        "pct": 52,
+        "count_of_50": 26.0
+      },
+      "0 examples (termination)": {
+        "pct": 10,
+        "count_of_50": 5.0
+      },
+      "1 example (no termination)": {
+        "pct": 74,
+        "count_of_50": 37.0
+      },
+      "1 example (termination)": {
+        "pct": 64,
+        "count_of_50": 32.0
+      },
+      "2 examples (no termination)": {
+        "pct": 76,
+        "count_of_50": 38.0
+      },
+      "2 examples (termination)": {
+        "pct": 68,
+        "count_of_50": 34.0
+      },
+      "4 examples (no termination)": {
+        "pct": 84,
+        "count_of_50": 42.0
+      },
+      "4 examples (termination)": {
+        "pct": 82,
+        "count_of_50": 41.0
+      },
+      "8 examples (no termination)": {
+        "pct": 80,
+        "count_of_50": 40.0
+      },
+      "8 examples (termination)": {
+        "pct": 80,
+        "count_of_50": 40.0
+      },
+      "17 examples (no termination)": {
+        "pct": 88,
+        "count_of_50": 44.0
+      },
+      "17 examples (termination)": {
+        "pct": 88,
+        "count_of_50": 44.0
+      }
+    },
+    "T7_drawer": {
+      "mean_of_three": 0.333,
+      "trials_if_6_each": 18,
+      "successes_if_6_each": 6,
+      "text_claim_queries": 21,
+      "divisible_21_by_3": true,
+      "note": "0.83 ≈ 5/6, 0.17 ≈ 1/6. 본문 '21 queries'는 이 값과 맞지 않는다(7회씩이면 0.14, 0.86)."
+    },
+    "T8_multilingual": {
+      "english_3": "3/3",
+      "non_english_9": "8/9",
+      "fisher_p_english_vs_nonenglish": 1.0
+    },
+    "error_split": {
+      "plan_failures_mock": 16,
+      "exec_failures_mock": 26,
+      "65pct_of_plan_failures": 10.4,
+      "decomp_17_9_of_exec": {
+        "17/26": 65.4,
+        "9/26": 34.6
+      },
+      "note": "계획 실패 16건으로는 65/35가 정수로 안 나온다. 실행 실패 26건 중 17+9면 65.4/34.6으로 맞는다. 원자료 없음"
+    },
+    "error_reduction_vs_FLAN": {
+      "plan_errors_palm_vs_flan": [
+        16,
+        30
+      ],
+      "plan_error_reduction_pct": 46.7,
+      "exec_errors_palm_vs_flan": [
+        26,
+        39
+      ],
+      "exec_error_reduction_pct": 33.3
+    }
+  },
+  "tests": {
+    "mock_plan_PaLM_vs_NoVF": {
+      "k1": 85,
+      "k2": 68,
+      "p_fisher": 0.0082
+    },
+    "mock_plan_PaLM_vs_Gen": {
+      "k1": 85,
+      "k2": 75,
+      "p_fisher": 0.118
+    },
+    "mock_plan_PaLM_vs_FLAN": {
+      "k1": 85,
+      "k2": 71,
+      "p_fisher": 0.0285
+    },
+    "mock_exec_PaLM_vs_FLAN": {
+      "k1": 75,
+      "k2": 62,
+      "p_fisher": 0.0703
+    },
+    "mock_vs_kitchen_exec_reported": {
+      "k1": 75,
+      "k2": 61,
+      "p_fisher": 0.0507
+    },
+    "mock_vs_kitchen_exec_family_sum": {
+      "k1": 75,
+      "k2": 59,
+      "p_fisher": 0.0252
+    },
+    "mock_vs_kitchen_plan_reported": {
+      "k1": 85,
+      "k2": 82,
+      "p_fisher": 0.7105
+    },
+    "mock_vs_kitchen_plan_family_sum": {
+      "k1": 85,
+      "k2": 80,
+      "p_fisher": 0.4672
+    },
+    "mock_exec_vs_BC_USE": {
+      "k1": 75,
+      "k2": 9,
+      "p_fisher": 0.0
+    },
+    "family_verbs_vs_nouns_plan": {
+      "p_fisher": 0.0421
+    },
+    "family_embodiment_vs_rest_plan": {
+      "k_emb": "7/11",
+      "k_rest": "78/90",
+      "p_fisher": 0.0703
+    },
+    "family_structured_vs_verbs_plan": {
+      "p_fisher": 1.0
+    }
+  },
+  "wilson": {
+    "mock_plan": {
+      "k": 85,
+      "pct": 84.2,
+      "ci95": [
+        75.8,
+        90.0
+      ]
+    },
+    "mock_exec": {
+      "k": 75,
+      "pct": 74.3,
+      "ci95": [
+        65.0,
+        81.8
+      ]
+    },
+    "kit_plan_reported": {
+      "k": 82,
+      "pct": 81.2,
+      "ci95": [
+        72.5,
+        87.6
+      ]
+    },
+    "kit_exec_reported": {
+      "k": 61,
+      "pct": 60.4,
+      "ci95": [
+        50.6,
+        69.4
+      ]
+    },
+    "novf_plan": {
+      "k": 68,
+      "pct": 67.3,
+      "ci95": [
+        57.7,
+        75.7
+      ]
+    },
+    "gen_plan": {
+      "k": 75,
+      "pct": 74.3,
+      "ci95": [
+        65.0,
+        81.8
+      ]
+    },
+    "flan_plan": {
+      "k": 71,
+      "pct": 70.3,
+      "ci95": [
+        60.8,
+        78.3
+      ]
+    },
+    "flan_exec": {
+      "k": 62,
+      "pct": 61.4,
+      "ci95": [
+        51.6,
+        70.3
+      ]
+    },
+    "bc_usE_exec": {
+      "k": 9,
+      "pct": 8.9,
+      "ci95": [
+        4.8,
+        16.1
+      ]
+    }
+  },
+  "notes": {
+    "T5_text_vs_table": "본문 0예시 무종료 54%(27/50 가정) 대 표 5의 52%(26/50)",
+    "nearly_doubles_claim": {
+      "plan_vs_NoVF_ratio": 1.25,
+      "plan_vs_Gen_ratio": 1.13,
+      "exec_vs_BCUSE_ratio": 8.33,
+      "note": "계획 성공률 기준 상대 차이는 1.13–1.25배다. '거의 두 배'는 실행 대 BC USE(9%)에서만 성립한다."
+    }
+  },
+  "power_mde_pp": {
+    "at_p0.75": 17.1,
+    "at_p0.84": 14.5,
+    "at_p0.50": 19.7
+  }
+}
