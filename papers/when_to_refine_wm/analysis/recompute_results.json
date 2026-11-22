@@ -1,0 +1,403 @@
+{
+ "mixture": {
+  "IG workload": {
+   "q": 0.8,
+   "mixture": 80.625,
+   "diff_pp": 0.625
+  },
+  "IG+P workload": {
+   "q": 0.828571,
+   "mixture": 81.607,
+   "diff_pp": 2.768
+  },
+  "SCR workload": {
+   "q": 0.571429,
+   "mixture": 72.768,
+   "diff_pp": 5.357
+  },
+  "IG time": {
+   "q": 0.858639,
+   "mixture": 82.641,
+   "diff_pp": -1.391
+  },
+  "IG+P time": {
+   "q": 0.839442,
+   "mixture": 81.981,
+   "diff_pp": 2.394
+  },
+  "SCR time": {
+   "q": 0.570681,
+   "mixture": 72.742,
+   "diff_pp": 5.383
+  }
+ },
+ "retention_SCR_vs_F15": {
+  "num": 25,
+  "den": 28,
+  "pct": 89.29
+ },
+ "mcnemar": {
+  "SCR vs Fixed-15": {
+   "b_F15only": 3,
+   "c_SCRonly": 0,
+   "p_exact": 0.25
+  },
+  "SCR vs Fixed-5": {
+   "b_F5only": 1,
+   "c_SCRonly": 9,
+   "p_exact": 0.0215
+  }
+ },
+ "trial_bootstrap_SCR_workload_pp": {
+  "mean": 5.357,
+  "ci95": [
+   -4.91,
+   15.18
+  ],
+  "note": "iid 궤적 부트스트랩, q=4/7 고정. 논문 장면 군집 구간 [-6.70, +16.07]과 비교"
+ },
+ "wilson95": {
+  "Fixed-5": [
+   36.4,
+   69.1
+  ],
+  "Fixed-15": [
+   71.9,
+   95.0
+  ],
+  "IG": [
+   64.7,
+   91.1
+  ],
+  "IG+P": [
+   68.2,
+   93.1
+  ],
+  "SCR": [
+   61.2,
+   89.0
+  ]
+ },
+ "welch_time": {
+  "SCR vs Fixed-15": {
+   "t": -1.979,
+   "p": 0.1189
+  },
+  "SCR vs IG+P": {
+   "t": -1.733,
+   "p": 0.1427
+  },
+  "IG+P vs Fixed-15": {
+   "t": -0.671,
+   "p": 0.5312
+  }
+ },
+ "table8_implied_q": {
+  "42": {
+   "S5": 50.0,
+   "S15": 93.75,
+   "SCR": 87.5,
+   "implied_q": 0.5946,
+   "note": "보고된 시드별 q 없이 차이를 맞추는 q"
+  },
+  "99": {
+   "S5": 56.25,
+   "S15": 81.25,
+   "SCR": 68.75,
+   "implied_q": 0.5454,
+   "note": "보고된 시드별 q 없이 차이를 맞추는 q"
+  }
+ },
+ "dev_fisher": {
+  "p_5_vs_15": 6.8e-05,
+  "p_15_vs_30": 1.0
+ },
+ "cube_mcnemar_p": 1.0,
+ "gate_threshold_logit": -0.4196,
+ "checks": [
+  {
+   "name": "Fixed-5 R = 5*N5 + 15*N15",
+   "paper": 280,
+   "recomputed": 280.0,
+   "ok": true
+  },
+  {
+   "name": "Fixed-5 W = 300*R",
+   "paper": 84000,
+   "recomputed": 84000.0,
+   "ok": true
+  },
+  {
+   "name": "Fixed-15 R = 5*N5 + 15*N15",
+   "paper": 630,
+   "recomputed": 630.0,
+   "ok": true
+  },
+  {
+   "name": "Fixed-15 W = 300*R",
+   "paper": 189000,
+   "recomputed": 189000.0,
+   "ok": true
+  },
+  {
+   "name": "IG R = 5*N5 + 15*N15",
+   "paper": 560,
+   "recomputed": 560.0,
+   "ok": true
+  },
+  {
+   "name": "IG W = 300*R",
+   "paper": 168000,
+   "recomputed": 168000.0,
+   "ok": true
+  },
+  {
+   "name": "IG+P R = 5*N5 + 15*N15",
+   "paper": 570,
+   "recomputed": 570.0,
+   "ok": true
+  },
+  {
+   "name": "IG+P W = 300*R",
+   "paper": 171000,
+   "recomputed": 171000.0,
+   "ok": true
+  },
+  {
+   "name": "SCR R = 5*N5 + 15*N15",
+   "paper": 480,
+   "recomputed": 480.0,
+   "ok": true
+  },
+  {
+   "name": "SCR W = 300*R",
+   "paper": 144000,
+   "recomputed": 144000.0,
+   "ok": true
+  },
+  {
+   "name": "Fixed-5 W0+W25 = W (표 4)",
+   "paper": 84000,
+   "recomputed": 84000.0,
+   "ok": true
+  },
+  {
+   "name": "Fixed-5 solves at t=25 + t=0 = N (표 4)",
+   "paper": 56,
+   "recomputed": 56.0,
+   "ok": true
+  },
+  {
+   "name": "Fixed-15 W0+W25 = W (표 4)",
+   "paper": 189000,
+   "recomputed": 189000.0,
+   "ok": true
+  },
+  {
+   "name": "Fixed-15 solves at t=25 + t=0 = N (표 4)",
+   "paper": 42,
+   "recomputed": 42.0,
+   "ok": true
+  },
+  {
+   "name": "IG W0+W25 = W (표 4)",
+   "paper": 168000,
+   "recomputed": 168000.0,
+   "ok": true
+  },
+  {
+   "name": "IG solves at t=25 + t=0 = N (표 4)",
+   "paper": 46,
+   "recomputed": 46.0,
+   "ok": true
+  },
+  {
+   "name": "IG+P W0+W25 = W (표 4)",
+   "paper": 171000,
+   "recomputed": 171000.0,
+   "ok": true
+  },
+  {
+   "name": "IG+P solves at t=25 + t=0 = N (표 4)",
+   "paper": 46,
+   "recomputed": 46.0,
+   "ok": true
+  },
+  {
+   "name": "SCR W0+W25 = W (표 4)",
+   "paper": 144000,
+   "recomputed": 144000.0,
+   "ok": true
+  },
+  {
+   "name": "SCR solves at t=25 + t=0 = N (표 4)",
+   "paper": 46,
+   "recomputed": 46.0,
+   "ok": true
+  },
+  {
+   "name": "SCR early-exit saving 9*10*300",
+   "paper": 27000,
+   "recomputed": 27000.0,
+   "ok": true
+  },
+  {
+   "name": "SCR 45,000 fewer than Fixed-15 (W)",
+   "paper": 45000,
+   "recomputed": 45000.0,
+   "ok": true
+  },
+  {
+   "name": "SCR % fewer candidates vs Fixed-15",
+   "paper": 23.81,
+   "recomputed": 23.8095,
+   "ok": true
+  },
+  {
+   "name": "SCR % less controller time vs Fixed-15",
+   "paper": 17.22,
+   "recomputed": 17.2189,
+   "ok": true
+  },
+  {
+   "name": "Replan work 63000 -> 36000 (%)",
+   "paper": 42.86,
+   "recomputed": 42.8571,
+   "ok": true
+  },
+  {
+   "name": "Total 171000 -> 144000 (%)",
+   "paper": 15.79,
+   "recomputed": 15.7895,
+   "ok": true
+  },
+  {
+   "name": "Five-controller total W",
+   "paper": 756000,
+   "recomputed": 756000.0,
+   "ok": true
+  },
+  {
+   "name": "Eq.12 R_SCR from Fixed-15",
+   "paper": 480,
+   "recomputed": 480.0,
+   "ok": true
+  },
+  {
+   "name": "SCR workload-matched diff (pp)",
+   "paper": 5.357,
+   "recomputed": 5.357,
+   "ok": true
+  },
+  {
+   "name": "SCR time-matched diff (pp)",
+   "paper": 5.379,
+   "recomputed": 5.383,
+   "ok": true
+  },
+  {
+   "name": "IG workload-matched diff (pp)",
+   "paper": 0.625,
+   "recomputed": 0.625,
+   "ok": true
+  },
+  {
+   "name": "IG+P workload-matched diff (pp)",
+   "paper": 2.768,
+   "recomputed": 2.768,
+   "ok": true
+  },
+  {
+   "name": "IG time-matched diff (pp)",
+   "paper": -1.394,
+   "recomputed": -1.391,
+   "ok": true
+  },
+  {
+   "name": "paired groups total trials",
+   "paper": 32,
+   "recomputed": 32.0,
+   "ok": true
+  },
+  {
+   "name": "F5 successes from groups",
+   "paper": 17,
+   "recomputed": 17.0,
+   "ok": true
+  },
+  {
+   "name": "F15 successes from groups",
+   "paper": 28,
+   "recomputed": 28.0,
+   "ok": true
+  },
+  {
+   "name": "SCR successes from groups",
+   "paper": 25,
+   "recomputed": 25.0,
+   "ok": true
+  },
+  {
+   "name": "SCR successes shared with F15 (retention numerator)",
+   "paper": 25,
+   "recomputed": 25.0,
+   "ok": true
+  },
+  {
+   "name": "paired retention 25/28 (%)",
+   "paper": 89.29,
+   "recomputed": 89.2857,
+   "ok": true
+  },
+  {
+   "name": "trial-level mean diff equals 12/7 over 32 (pp)",
+   "paper": 5.357,
+   "recomputed": 5.3571,
+   "ok": true
+  },
+  {
+   "name": "seed 42 + seed 99 F5 = pooled 17",
+   "paper": 17,
+   "recomputed": 17.0,
+   "ok": true
+  },
+  {
+   "name": "seed 42 + seed 99 F15 = pooled 28",
+   "paper": 28,
+   "recomputed": 28.0,
+   "ok": true
+  },
+  {
+   "name": "seed 42 + seed 99 SCR = pooled 25",
+   "paper": 25,
+   "recomputed": 25.0,
+   "ok": true
+  },
+  {
+   "name": "Cube time ratio 30/5 (%)",
+   "paper": 30.0,
+   "recomputed": 30.0287,
+   "ok": true
+  },
+  {
+   "name": "Table 3 PushT 30-15 time difference",
+   "paper": 2.82,
+   "recomputed": 2.82,
+   "ok": true
+  },
+  {
+   "name": "Cube total trials",
+   "paper": 32,
+   "recomputed": 32.0,
+   "ok": true
+  },
+  {
+   "name": "Cube 5 successes",
+   "paper": 25,
+   "recomputed": 25.0,
+   "ok": true
+  }
+ ],
+ "n_checks": 47,
+ "n_fail": 0
+}
