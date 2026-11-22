@@ -1,0 +1,903 @@
+{
+  "K1_table_cell_matches_v2": [
+    {
+      "table": "II D0",
+      "task": "Piece Assembly",
+      "policy": "BC-RNN-GMM",
+      "table2": [
+        74.0,
+        2.8
+      ],
+      "table1_v2": [
+        74.0,
+        2.8
+      ],
+      "match": true
+    },
+    {
+      "table": "II D0",
+      "task": "Box Cleanup",
+      "policy": "BC-RNN",
+      "table2": [
+        96.7,
+        2.5
+      ],
+      "table1_v2": [
+        94.7,
+        0.9
+      ],
+      "match": false
+    },
+    {
+      "table": "II D0",
+      "task": "Pouring",
+      "policy": "DP",
+      "table2": [
+        79.3,
+        0.9
+      ],
+      "table1_v2": [
+        79.3,
+        0.9
+      ],
+      "match": true
+    },
+    {
+      "table": "III DexMG",
+      "task": "Piece Assembly",
+      "policy": "BC-RNN-GMM",
+      "table3": [
+        74.0,
+        2.8
+      ],
+      "table1_v2": [
+        74.0,
+        2.8
+      ],
+      "match": true
+    },
+    {
+      "table": "III DexMG",
+      "task": "Tray Lift",
+      "policy": "BC-RNN",
+      "table3": [
+        75.3,
+        7.5
+      ],
+      "table1_v2": [
+        78.0,
+        2.0
+      ],
+      "match": false
+    },
+    {
+      "table": "III DexMG",
+      "task": "Pouring",
+      "policy": "DP",
+      "table3": [
+        79.3,
+        0.9
+      ],
+      "table1_v2": [
+        79.3,
+        0.9
+      ],
+      "match": true
+    }
+  ],
+  "K2_bcrnn_column_v1_vs_v2": [
+    {
+      "task": "Piece Assembly",
+      "v1": [
+        74.7,
+        2.5
+      ],
+      "v2": [
+        66.0,
+        2.0
+      ],
+      "diff_pp": -8.7,
+      "changed": true
+    },
+    {
+      "task": "Threading",
+      "v1": [
+        55.3,
+        5.0
+      ],
+      "v2": [
+        68.0,
+        1.6
+      ],
+      "diff_pp": 12.7,
+      "changed": true
+    },
+    {
+      "task": "Transport",
+      "v1": [
+        60.0,
+        0.0
+      ],
+      "v2": [
+        57.3,
+        4.1
+      ],
+      "diff_pp": -2.7,
+      "changed": true
+    },
+    {
+      "task": "Box Cleanup",
+      "v1": [
+        96.7,
+        2.5
+      ],
+      "v2": [
+        94.7,
+        0.9
+      ],
+      "diff_pp": -2.0,
+      "changed": true
+    },
+    {
+      "task": "Drawer Cleanup",
+      "v1": [
+        56.7,
+        4.1
+      ],
+      "v2": [
+        80.0,
+        0.0
+      ],
+      "diff_pp": 23.3,
+      "changed": true
+    },
+    {
+      "task": "Tray Lift",
+      "v1": [
+        75.3,
+        7.5
+      ],
+      "v2": [
+        78.0,
+        2.0
+      ],
+      "diff_pp": 2.7,
+      "changed": true
+    },
+    {
+      "task": "Pouring",
+      "v1": [
+        86.0,
+        3.3
+      ],
+      "v2": [
+        62.0,
+        7.5
+      ],
+      "diff_pp": -24.0,
+      "changed": true
+    },
+    {
+      "task": "Coffee",
+      "v1": [
+        73.3,
+        12.3
+      ],
+      "v2": [
+        84.7,
+        4.9
+      ],
+      "diff_pp": 11.4,
+      "changed": true
+    },
+    {
+      "task": "Can Sorting",
+      "v1": [
+        96.0,
+        1.6
+      ],
+      "v2": [
+        96.0,
+        4.3
+      ],
+      "diff_pp": 0.0,
+      "changed": true
+    }
+  ],
+  "K2_summary": {
+    "changed_cells": 9,
+    "of": 9,
+    "mean_abs_change_pp": 9.7
+  },
+  "K3_text_vs_table": {
+    "drawer_same_source_text_vs_table_bcrnn_v2": {
+      "text": 56.7,
+      "table_v2": 80.0,
+      "table_v1": 56.7
+    },
+    "pouring_same_source_text_vs_table_dp": {
+      "text": 79.3,
+      "table_dp": 79.3
+    },
+    "transport_replay_text_vs_table_gmm_default": {
+      "text": 63.3,
+      "table_gmm": 64.0
+    },
+    "cansort_replay_text_vs_table_dp": {
+      "text": 97.3,
+      "table_dp": 97.3
+    },
+    "pouring_ordering_text_vs_table_dp": {
+      "text": 88.7,
+      "table_dp": 79.3
+    }
+  },
+  "K4_counts": {
+    "source_total": 60,
+    "stated_source_total": 60,
+    "default_1000_each": 9000,
+    "variant_1000_each": 6000,
+    "bigym_1000_each": 3000,
+    "sum_of_stated_1000_blocks": 18000,
+    "stated_total": 21000,
+    "unexplained_remainder": 3000
+  },
+  "K5_architecture_counts": {
+    "gmm_below_bcrnn": [
+      "Threading",
+      "Box Cleanup",
+      "Drawer Cleanup",
+      "Tray Lift",
+      "Coffee",
+      "Can Sorting"
+    ],
+    "n_gmm_below_bcrnn": 6,
+    "gmm_above_bcrnn": [
+      "Piece Assembly",
+      "Transport",
+      "Pouring"
+    ],
+    "n_gmm_above_bcrnn": 3,
+    "gmm_below_bcrnn_among_dex_tasks": [
+      "Box Cleanup",
+      "Drawer Cleanup",
+      "Tray Lift",
+      "Coffee",
+      "Can Sorting"
+    ],
+    "n_dex_tasks": 6,
+    "dp_above_gmm_n": 9,
+    "dp_above_bcrnn": [
+      "Piece Assembly",
+      "Threading",
+      "Transport",
+      "Tray Lift",
+      "Pouring",
+      "Can Sorting"
+    ],
+    "n_dp_above_bcrnn": 6,
+    "dp_below_bcrnn": [
+      "Box Cleanup",
+      "Drawer Cleanup",
+      "Coffee"
+    ]
+  },
+  "C1_vs_source": [
+    {
+      "task": "Piece Assembly",
+      "policy": "BC-RNN-GMM",
+      "source": 3.3,
+      "policy_value": 74.0,
+      "diff_pp": 70.7
+    },
+    {
+      "task": "Piece Assembly",
+      "policy": "BC-RNN",
+      "source": 3.3,
+      "policy_value": 66.0,
+      "diff_pp": 62.7
+    },
+    {
+      "task": "Piece Assembly",
+      "policy": "DP",
+      "source": 3.3,
+      "policy_value": 80.7,
+      "diff_pp": 77.4
+    },
+    {
+      "task": "Threading",
+      "policy": "BC-RNN-GMM",
+      "source": 1.3,
+      "policy_value": 54.0,
+      "diff_pp": 52.7
+    },
+    {
+      "task": "Threading",
+      "policy": "BC-RNN",
+      "source": 1.3,
+      "policy_value": 68.0,
+      "diff_pp": 66.7
+    },
+    {
+      "task": "Threading",
+      "policy": "DP",
+      "source": 1.3,
+      "policy_value": 69.3,
+      "diff_pp": 68.0
+    },
+    {
+      "task": "Transport",
+      "policy": "BC-RNN-GMM",
+      "source": 52.7,
+      "policy_value": 64.0,
+      "diff_pp": 11.3
+    },
+    {
+      "task": "Transport",
+      "policy": "BC-RNN",
+      "source": 52.7,
+      "policy_value": 57.3,
+      "diff_pp": 4.6
+    },
+    {
+      "task": "Transport",
+      "policy": "DP",
+      "source": 52.7,
+      "policy_value": 83.3,
+      "diff_pp": 30.6
+    },
+    {
+      "task": "Box Cleanup",
+      "policy": "BC-RNN-GMM",
+      "source": 62.0,
+      "policy_value": 64.0,
+      "diff_pp": 2.0
+    },
+    {
+      "task": "Box Cleanup",
+      "policy": "BC-RNN",
+      "source": 62.0,
+      "policy_value": 94.7,
+      "diff_pp": 32.7
+    },
+    {
+      "task": "Box Cleanup",
+      "policy": "DP",
+      "source": 62.0,
+      "policy_value": 92.0,
+      "diff_pp": 30.0
+    },
+    {
+      "task": "Drawer Cleanup",
+      "policy": "BC-RNN-GMM",
+      "source": 0.7,
+      "policy_value": 30.7,
+      "diff_pp": 30.0
+    },
+    {
+      "task": "Drawer Cleanup",
+      "policy": "BC-RNN",
+      "source": 0.7,
+      "policy_value": 80.0,
+      "diff_pp": 79.3
+    },
+    {
+      "task": "Drawer Cleanup",
+      "policy": "DP",
+      "source": 0.7,
+      "policy_value": 76.0,
+      "diff_pp": 75.3
+    },
+    {
+      "task": "Tray Lift",
+      "policy": "BC-RNN-GMM",
+      "source": 3.3,
+      "policy_value": 66.0,
+      "diff_pp": 62.7
+    },
+    {
+      "task": "Tray Lift",
+      "policy": "BC-RNN",
+      "source": 3.3,
+      "policy_value": 78.0,
+      "diff_pp": 74.7
+    },
+    {
+      "task": "Tray Lift",
+      "policy": "DP",
+      "source": 3.3,
+      "policy_value": 88.7,
+      "diff_pp": 85.4
+    },
+    {
+      "task": "Pouring",
+      "policy": "BC-RNN-GMM",
+      "source": 0.7,
+      "policy_value": 74.0,
+      "diff_pp": 73.3
+    },
+    {
+      "task": "Pouring",
+      "policy": "BC-RNN",
+      "source": 0.7,
+      "policy_value": 62.0,
+      "diff_pp": 61.3
+    },
+    {
+      "task": "Pouring",
+      "policy": "DP",
+      "source": 0.7,
+      "policy_value": 79.3,
+      "diff_pp": 78.6
+    },
+    {
+      "task": "Coffee",
+      "policy": "BC-RNN-GMM",
+      "source": 14.7,
+      "policy_value": 12.0,
+      "diff_pp": -2.7
+    },
+    {
+      "task": "Coffee",
+      "policy": "BC-RNN",
+      "source": 14.7,
+      "policy_value": 84.7,
+      "diff_pp": 70.0
+    },
+    {
+      "task": "Coffee",
+      "policy": "DP",
+      "source": 14.7,
+      "policy_value": 77.3,
+      "diff_pp": 62.6
+    },
+    {
+      "task": "Can Sorting",
+      "policy": "BC-RNN-GMM",
+      "source": 0.7,
+      "policy_value": 75.3,
+      "diff_pp": 74.6
+    },
+    {
+      "task": "Can Sorting",
+      "policy": "BC-RNN",
+      "source": 0.7,
+      "policy_value": 96.0,
+      "diff_pp": 95.3
+    },
+    {
+      "task": "Can Sorting",
+      "policy": "DP",
+      "source": 0.7,
+      "policy_value": 97.3,
+      "diff_pp": 96.6
+    }
+  ],
+  "C1_summary": {
+    "policies_below_source": [
+      "Coffee/BC-RNN-GMM"
+    ]
+  },
+  "C2_demonoise_gap": [
+    {
+      "task": "Piece Assembly",
+      "policy": "BC-RNN-GMM",
+      "demonoise": 12.7,
+      "dexmg": 74.0,
+      "diff_pp": 61.3,
+      "ratio": 5.83
+    },
+    {
+      "task": "Tray Lift",
+      "policy": "BC-RNN",
+      "demonoise": 16.7,
+      "dexmg": 75.3,
+      "diff_pp": 58.6,
+      "ratio": 4.51
+    },
+    {
+      "task": "Pouring",
+      "policy": "DP",
+      "demonoise": 26.7,
+      "dexmg": 79.3,
+      "diff_pp": 52.6,
+      "ratio": 2.97
+    }
+  ],
+  "S1_welch_summary_stats": [
+    {
+      "label": "Threading DP vs BC-RNN",
+      "a": [
+        69.3,
+        1.9
+      ],
+      "b": [
+        68.0,
+        1.6
+      ],
+      "p_sd": 0.417329,
+      "p_sem": 0.629135
+    },
+    {
+      "label": "Coffee BC-RNN-GMM vs BC-RNN",
+      "a": [
+        12.0,
+        1.6
+      ],
+      "b": [
+        84.7,
+        4.9
+      ],
+      "p_sd": 0.000587,
+      "p_sem": 0.002203
+    },
+    {
+      "label": "Drawer BC-RNN-GMM vs BC-RNN",
+      "a": [
+        30.7,
+        5.0
+      ],
+      "b": [
+        80.0,
+        0.0
+      ],
+      "p_sd": null,
+      "p_sem": null,
+      "note": "±0.0 셀 포함: 검정 정의 안 됨"
+    },
+    {
+      "label": "Box Cleanup BC-RNN-GMM vs BC-RNN",
+      "a": [
+        64.0,
+        10.0
+      ],
+      "b": [
+        94.7,
+        0.9
+      ],
+      "p_sd": 0.032706,
+      "p_sem": 0.090564
+    },
+    {
+      "label": "Drawer DP vs BC-RNN",
+      "a": [
+        76.0,
+        0.0
+      ],
+      "b": [
+        80.0,
+        0.0
+      ],
+      "p_sd": null,
+      "p_sem": null,
+      "note": "±0.0 셀 포함: 검정 정의 안 됨"
+    },
+    {
+      "label": "Pouring BC-RNN v1 vs v2 (same policy, two versions)",
+      "a": [
+        86.0,
+        3.3
+      ],
+      "b": [
+        62.0,
+        7.5
+      ],
+      "p_sd": 0.018257,
+      "p_sem": 0.068019
+    },
+    {
+      "label": "Pouring DP vs BC-RNN-GMM",
+      "a": [
+        79.3,
+        0.9
+      ],
+      "b": [
+        74.0,
+        8.6
+      ],
+      "p_sd": 0.39761,
+      "p_sem": 0.601161
+    },
+    {
+      "label": "Transport DP vs BC-RNN",
+      "a": [
+        83.3,
+        0.9
+      ],
+      "b": [
+        57.3,
+        4.1
+      ],
+      "p_sd": 0.00618,
+      "p_sem": 0.019983
+    },
+    {
+      "label": "Transport BC-RNN vs source demos",
+      "a": [
+        57.3,
+        4.1
+      ],
+      "b": [
+        52.7,
+        7.7
+      ],
+      "p_sd": 0.427417,
+      "p_sem": 0.633937
+    },
+    {
+      "label": "Transport BC-RNN-GMM vs source demos",
+      "a": [
+        64.0,
+        3.3
+      ],
+      "b": [
+        52.7,
+        7.7
+      ],
+      "p_sd": 0.110864,
+      "p_sem": 0.278985
+    },
+    {
+      "label": "Coffee BC-RNN-GMM vs source demos",
+      "a": [
+        12.0,
+        1.6
+      ],
+      "b": [
+        14.7,
+        0.9
+      ],
+      "p_sd": 0.080152,
+      "p_sem": 0.233523
+    }
+  ],
+  "S2_ci_half_width_if_sd_dp": {
+    "Piece Assembly": 2.24,
+    "Threading": 4.72,
+    "Transport": 2.24,
+    "Box Cleanup": 10.68,
+    "Drawer Cleanup": "SD=0",
+    "Tray Lift": 2.24,
+    "Pouring": 2.24,
+    "Coffee": 2.24,
+    "Can Sorting": 2.24
+  },
+  "B1_pm_vs_binomial_n50_assumed": [
+    {
+      "task": "Piece Assembly",
+      "policy": "BC-RNN-GMM",
+      "mean": 74.0,
+      "reported_pm": 2.8,
+      "binom_se_n50": 6.2,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Piece Assembly",
+      "policy": "BC-RNN",
+      "mean": 66.0,
+      "reported_pm": 2.0,
+      "binom_se_n50": 6.7,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Piece Assembly",
+      "policy": "DP",
+      "mean": 80.7,
+      "reported_pm": 0.9,
+      "binom_se_n50": 5.58,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Threading",
+      "policy": "BC-RNN-GMM",
+      "mean": 54.0,
+      "reported_pm": 4.3,
+      "binom_se_n50": 7.05,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Threading",
+      "policy": "BC-RNN",
+      "mean": 68.0,
+      "reported_pm": 1.6,
+      "binom_se_n50": 6.6,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Threading",
+      "policy": "DP",
+      "mean": 69.3,
+      "reported_pm": 1.9,
+      "binom_se_n50": 6.52,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Transport",
+      "policy": "BC-RNN-GMM",
+      "mean": 64.0,
+      "reported_pm": 3.3,
+      "binom_se_n50": 6.79,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Transport",
+      "policy": "BC-RNN",
+      "mean": 57.3,
+      "reported_pm": 4.1,
+      "binom_se_n50": 7.0,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Transport",
+      "policy": "DP",
+      "mean": 83.3,
+      "reported_pm": 0.9,
+      "binom_se_n50": 5.27,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Box Cleanup",
+      "policy": "BC-RNN-GMM",
+      "mean": 64.0,
+      "reported_pm": 10.0,
+      "binom_se_n50": 6.79,
+      "pm_below_binom": false
+    },
+    {
+      "task": "Box Cleanup",
+      "policy": "BC-RNN",
+      "mean": 94.7,
+      "reported_pm": 0.9,
+      "binom_se_n50": 3.17,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Box Cleanup",
+      "policy": "DP",
+      "mean": 92.0,
+      "reported_pm": 4.3,
+      "binom_se_n50": 3.84,
+      "pm_below_binom": false
+    },
+    {
+      "task": "Drawer Cleanup",
+      "policy": "BC-RNN-GMM",
+      "mean": 30.7,
+      "reported_pm": 5.0,
+      "binom_se_n50": 6.52,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Drawer Cleanup",
+      "policy": "BC-RNN",
+      "mean": 80.0,
+      "reported_pm": 0.0,
+      "binom_se_n50": 5.66,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Drawer Cleanup",
+      "policy": "DP",
+      "mean": 76.0,
+      "reported_pm": 0.0,
+      "binom_se_n50": 6.04,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Tray Lift",
+      "policy": "BC-RNN-GMM",
+      "mean": 66.0,
+      "reported_pm": 8.2,
+      "binom_se_n50": 6.7,
+      "pm_below_binom": false
+    },
+    {
+      "task": "Tray Lift",
+      "policy": "BC-RNN",
+      "mean": 78.0,
+      "reported_pm": 2.0,
+      "binom_se_n50": 5.86,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Tray Lift",
+      "policy": "DP",
+      "mean": 88.7,
+      "reported_pm": 0.9,
+      "binom_se_n50": 4.48,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Pouring",
+      "policy": "BC-RNN-GMM",
+      "mean": 74.0,
+      "reported_pm": 8.6,
+      "binom_se_n50": 6.2,
+      "pm_below_binom": false
+    },
+    {
+      "task": "Pouring",
+      "policy": "BC-RNN",
+      "mean": 62.0,
+      "reported_pm": 7.5,
+      "binom_se_n50": 6.86,
+      "pm_below_binom": false
+    },
+    {
+      "task": "Pouring",
+      "policy": "DP",
+      "mean": 79.3,
+      "reported_pm": 0.9,
+      "binom_se_n50": 5.73,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Coffee",
+      "policy": "BC-RNN-GMM",
+      "mean": 12.0,
+      "reported_pm": 1.6,
+      "binom_se_n50": 4.6,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Coffee",
+      "policy": "BC-RNN",
+      "mean": 84.7,
+      "reported_pm": 4.9,
+      "binom_se_n50": 5.09,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Coffee",
+      "policy": "DP",
+      "mean": 77.3,
+      "reported_pm": 0.9,
+      "binom_se_n50": 5.92,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Can Sorting",
+      "policy": "BC-RNN-GMM",
+      "mean": 75.3,
+      "reported_pm": 1.9,
+      "binom_se_n50": 6.1,
+      "pm_below_binom": true
+    },
+    {
+      "task": "Can Sorting",
+      "policy": "BC-RNN",
+      "mean": 96.0,
+      "reported_pm": 4.3,
+      "binom_se_n50": 2.77,
+      "pm_below_binom": false
+    },
+    {
+      "task": "Can Sorting",
+      "policy": "DP",
+      "mean": 97.3,
+      "reported_pm": 0.9,
+      "binom_se_n50": 2.29,
+      "pm_below_binom": true
+    }
+  ],
+  "B1_summary": {
+    "cells": 27,
+    "pm_below_binom_if_sd": 21,
+    "pm_below_binom_if_sem": 17
+  },
+  "W1_realworld": {
+    "n_per_policy_assumed": 20,
+    "dexmg_successes": 18,
+    "dexmg_wilson95": [
+      0.699,
+      0.972
+    ],
+    "source_wilson95": [
+      0.0,
+      0.161
+    ],
+    "fisher_two_sided_p": 3.3515533829892784e-09,
+    "note": "논문은 '90%', '0%' 만 보고. 20회 가정은 'two cups x 10 trials' 문장에서 온 것"
+  },
+  "version": "arXiv 2410.24185v2 (2025-03-06); v1 은 BC-RNN 열만 다름 (K2)"
+}
