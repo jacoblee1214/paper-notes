@@ -1,0 +1,191 @@
+{
+  "user_study": {
+    "overall": {
+      "n_judgments": 1540,
+      "ours_count": 1091,
+      "ours_pct_recomputed": 70.84,
+      "reported_pct_matches": true,
+      "wilson95": [
+        68.5,
+        73.1
+      ],
+      "binom_p_two_sided": 8.917318472857904e-62,
+      "cohen_h_vs_50": 0.43,
+      "cohen_h_ours_vs_unitree": 0.86,
+      "cohen_h_reported": 0.859
+    },
+    "walking": {
+      "n_judgments": 770,
+      "ours_count": 439,
+      "ours_pct_recomputed": 57.01,
+      "reported_pct_matches": true,
+      "wilson95": [
+        53.5,
+        60.5
+      ],
+      "binom_p_two_sided": 0.00011253592663464063,
+      "cohen_h_vs_50": 0.141,
+      "cohen_h_ours_vs_unitree": 0.281,
+      "cohen_h_reported": 0.281
+    },
+    "running": {
+      "n_judgments": 770,
+      "ours_count": 652,
+      "ours_pct_recomputed": 84.68,
+      "reported_pct_matches": true,
+      "wilson95": [
+        82.0,
+        87.0
+      ],
+      "binom_p_two_sided": 2.6388061777459443e-90,
+      "cohen_h_vs_50": 0.766,
+      "cohen_h_ours_vs_unitree": 1.533,
+      "cohen_h_reported": 1.532
+    }
+  },
+  "velocity_error_pct": {
+    "walking": 12.14,
+    "running": 13.65,
+    "note": "n·분산 미보고, 재계산 불가"
+  },
+  "latent_ablation_if_n": {
+    "n=20": {
+      "baseline_5pct_k=round(0.05n)": {
+        "k": 1,
+        "wilson95": [
+          0.9,
+          23.6
+        ]
+      },
+      "proposed_95pct_k=round(0.95n)": {
+        "k": 19,
+        "wilson95": [
+          76.4,
+          99.1
+        ]
+      }
+    },
+    "n=50": {
+      "baseline_5pct_k=round(0.05n)": {
+        "k": 2,
+        "wilson95": [
+          1.1,
+          13.5
+        ]
+      },
+      "proposed_95pct_k=round(0.95n)": {
+        "k": 48,
+        "wilson95": [
+          86.5,
+          98.9
+        ]
+      }
+    },
+    "n=100": {
+      "baseline_5pct_k=round(0.05n)": {
+        "k": 5,
+        "wilson95": [
+          2.2,
+          11.2
+        ]
+      },
+      "proposed_95pct_k=round(0.95n)": {
+        "k": 95,
+        "wilson95": [
+          88.8,
+          97.8
+        ]
+      }
+    }
+  },
+  "pelvic_angvel": {
+    "robot_mean": 7.01,
+    "robot_peak": 20,
+    "human_mean_ref50": 7.75,
+    "ratio_mean": 0.905,
+    "note": "측정 조건·정의가 인간 값과 같은지 보고되지 않음"
+  },
+  "tableS3": [
+    {
+      "actuator": "5020-16",
+      "total_recomputed": 0.0036186265599999997,
+      "total_reported": 0.00361,
+      "rel_diff_pct": 0.24
+    },
+    {
+      "actuator": "7520-14.3",
+      "total_recomputed": 0.01016595281,
+      "total_reported": 0.01018,
+      "rel_diff_pct": -0.14
+    },
+    {
+      "actuator": "7520-22.5",
+      "total_recomputed": 0.025101924999999997,
+      "total_reported": 0.0251,
+      "rel_diff_pct": 0.01
+    },
+    {
+      "actuator": "4010-25",
+      "total_recomputed": 0.00425,
+      "total_reported": 0.00425,
+      "rel_diff_pct": 0.0
+    }
+  ],
+  "tableS4": [
+    {
+      "joint": "left shoulder pitch",
+      "armature_pct_recomputed": 2.0,
+      "armature_pct_reported": 2.0,
+      "match_0.2pct": true
+    },
+    {
+      "joint": "left shoulder yaw",
+      "armature_pct_recomputed": 11.6,
+      "armature_pct_reported": 11.6,
+      "match_0.2pct": true
+    },
+    {
+      "joint": "left wrist roll",
+      "armature_pct_recomputed": 90.8,
+      "armature_pct_reported": 90.8,
+      "match_0.2pct": true
+    },
+    {
+      "joint": "left wrist pitch",
+      "armature_pct_recomputed": 46.9,
+      "armature_pct_reported": 46.9,
+      "match_0.2pct": true
+    },
+    {
+      "joint": "left hip pitch",
+      "armature_pct_recomputed": 1.2,
+      "armature_pct_reported": 1.2,
+      "match_0.2pct": true
+    },
+    {
+      "joint": "left knee",
+      "armature_pct_recomputed": 18.4,
+      "armature_pct_reported": 18.4,
+      "match_0.2pct": true
+    },
+    {
+      "joint": "left ankle pitch",
+      "armature_pct_recomputed": 72.2,
+      "armature_pct_reported": 72.2,
+      "match_0.2pct": true
+    },
+    {
+      "joint": "left ankle roll",
+      "armature_pct_recomputed": 94.9,
+      "armature_pct_reported": 94.9,
+      "match_0.2pct": true
+    }
+  ],
+  "horizon_s": {
+    "H": 16,
+    "f_Hz": 25,
+    "H_over_f": 0.64,
+    "reported_s": 0.64
+  },
+  "tableS8_note": "수작업 집계: 실로봇 행 21개(짧은 시퀀스 7 + LAFAN1 14), 구간 기준 약 32개; 본문 '30 clips'와 정의가 불명확"
+}
