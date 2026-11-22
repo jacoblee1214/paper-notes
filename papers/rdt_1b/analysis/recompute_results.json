@@ -1,0 +1,398 @@
+{
+  "table3_overall_recompute": {
+    "ACT": {
+      "overall": 12.17,
+      "dims": {
+        "obj": 0.0,
+        "scene": 16.67,
+        "fewshot": 0.0,
+        "dex": 32.0
+      },
+      "n_dims": 4
+    },
+    "OpenVLA": {
+      "overall": 1.67,
+      "dims": {
+        "obj": 0.0,
+        "scene": 0.0,
+        "instr": 8.33,
+        "fewshot": 0.0,
+        "dex": 0.0
+      },
+      "n_dims": 5
+    },
+    "Octo": {
+      "overall": 1.63,
+      "dims": {
+        "obj": 0.0,
+        "scene": 4.17,
+        "instr": 0.0,
+        "fewshot": 2.0,
+        "dex": 2.0
+      },
+      "n_dims": 5
+    },
+    "RDT_scratch": {
+      "overall": 34.78,
+      "dims": {
+        "obj": 0.0,
+        "scene": 41.67,
+        "instr": 56.25,
+        "fewshot": 28.0,
+        "dex": 48.0
+      },
+      "n_dims": 5
+    },
+    "RDT": {
+      "overall": 68.2,
+      "dims": {
+        "obj": 58.33,
+        "scene": 75.0,
+        "instr": 91.67,
+        "fewshot": 54.0,
+        "dex": 62.0
+      },
+      "n_dims": 5
+    }
+  },
+  "overall_bootstrap_95ci": {
+    "ACT": [
+      7.6,
+      16.8
+    ],
+    "OpenVLA": [
+      0.4,
+      2.9
+    ],
+    "Octo": [
+      0.0,
+      3.7
+    ],
+    "RDT_scratch": [
+      29.1,
+      40.1
+    ],
+    "RDT": [
+      61.7,
+      74.4
+    ]
+  },
+  "gap_rdt_minus_act_bootstrap_95ci": [
+    48.0,
+    63.7
+  ],
+  "gap_rdt_minus_scratch_bootstrap_95ci": [
+    24.8,
+    41.7
+  ],
+  "gap_definitions": {
+    "gap_as_paper_5dim_vs_ACT_4dim": 56.0,
+    "gap_4dim_both": 50.2,
+    "gap_5dim_ACT_instr_zero": 58.5
+  },
+  "fisher_contrasts": [
+    {
+      "label": "Handover 전체 (RDT 대 RDT scratch)",
+      "a": "RDT 10/25",
+      "b": "RDT_scratch 4/25",
+      "a_pct": 40.0,
+      "b_pct": 16.0,
+      "wilson_a": [
+        23.4,
+        59.3
+      ],
+      "wilson_b": [
+        6.4,
+        34.7
+      ],
+      "p_fisher": 0.1137
+    },
+    {
+      "label": "Handover 전체 (RDT 대 ACT)",
+      "a": "RDT 10/25",
+      "b": "ACT 0/25",
+      "a_pct": 40.0,
+      "b_pct": 0.0,
+      "wilson_a": [
+        23.4,
+        59.3
+      ],
+      "wilson_b": [
+        0.0,
+        13.3
+      ],
+      "p_fisher": 0.0006
+    },
+    {
+      "label": "Fold Shorts (RDT 대 RDT scratch)",
+      "a": "RDT 17/25",
+      "b": "RDT_scratch 10/25",
+      "a_pct": 68.0,
+      "b_pct": 40.0,
+      "wilson_a": [
+        48.4,
+        82.8
+      ],
+      "wilson_b": [
+        23.4,
+        59.3
+      ],
+      "p_fisher": 0.0877
+    },
+    {
+      "label": "Robot Dog 밀기 (RDT 대 ACT)",
+      "a": "RDT 19/25",
+      "b": "ACT 8/25",
+      "a_pct": 76.0,
+      "b_pct": 32.0,
+      "wilson_a": [
+        56.6,
+        88.5
+      ],
+      "wilson_b": [
+        17.2,
+        51.6
+      ],
+      "p_fisher": 0.0041
+    },
+    {
+      "label": "Robot Dog 밀기 (RDT 대 RDT scratch)",
+      "a": "RDT 19/25",
+      "b": "RDT_scratch 16/25",
+      "a_pct": 76.0,
+      "b_pct": 64.0,
+      "wilson_a": [
+        56.6,
+        88.5
+      ],
+      "wilson_b": [
+        44.5,
+        79.8
+      ],
+      "p_fisher": 0.538
+    },
+    {
+      "label": "Robot Dog 직진 (RDT 대 RDT scratch)",
+      "a": "RDT 12/25",
+      "b": "RDT_scratch 8/25",
+      "a_pct": 48.0,
+      "b_pct": 32.0,
+      "wilson_a": [
+        30.0,
+        66.5
+      ],
+      "wilson_b": [
+        17.2,
+        51.6
+      ],
+      "p_fisher": 0.3868
+    },
+    {
+      "label": "Robot Dog 직진 (RDT 대 ACT)",
+      "a": "RDT 12/25",
+      "b": "ACT 8/25",
+      "a_pct": 48.0,
+      "b_pct": 32.0,
+      "wilson_a": [
+        30.0,
+        66.5
+      ],
+      "wilson_b": [
+        17.2,
+        51.6
+      ],
+      "p_fisher": 0.3868
+    },
+    {
+      "label": "Wash Cup 세 컵 합산 (RDT 대 RDT scratch)",
+      "a": "RDT 14/24",
+      "b": "RDT_scratch 0/24",
+      "a_pct": 58.3,
+      "b_pct": 0.0,
+      "wilson_a": [
+        38.8,
+        75.5
+      ],
+      "wilson_b": [
+        0.0,
+        13.8
+      ],
+      "p_fisher": 0.0
+    },
+    {
+      "label": "Pour Water 세 방 합산 (RDT 대 RDT scratch)",
+      "a": "RDT 18/24",
+      "b": "RDT_scratch 10/24",
+      "a_pct": 75.0,
+      "b_pct": 41.7,
+      "wilson_a": [
+        55.1,
+        88.0
+      ],
+      "wilson_b": [
+        24.5,
+        61.2
+      ],
+      "p_fisher": 0.0392
+    },
+    {
+      "label": "Pour Water 세 방 합산 (RDT 대 ACT)",
+      "a": "RDT 18/24",
+      "b": "ACT 4/24",
+      "a_pct": 75.0,
+      "b_pct": 16.7,
+      "wilson_a": [
+        55.1,
+        88.0
+      ],
+      "wilson_b": [
+        6.7,
+        35.9
+      ],
+      "p_fisher": 0.0001
+    },
+    {
+      "label": "지시 L 정확한 양 (RDT 대 RDT scratch)",
+      "a": "RDT 8/8",
+      "b": "RDT_scratch 5/8",
+      "a_pct": 100.0,
+      "b_pct": 62.5,
+      "wilson_a": [
+        67.6,
+        100.0
+      ],
+      "wilson_b": [
+        30.6,
+        86.3
+      ],
+      "p_fisher": 0.2
+    },
+    {
+      "label": "지시 R 정확한 양 (RDT 대 RDT scratch)",
+      "a": "RDT 6/8",
+      "b": "RDT_scratch 1/8",
+      "a_pct": 75.0,
+      "b_pct": 12.5,
+      "wilson_a": [
+        40.9,
+        92.9
+      ],
+      "wilson_b": [
+        2.2,
+        47.1
+      ],
+      "p_fisher": 0.0406
+    }
+  ],
+  "table2_ablation_vs_ours": [
+    {
+      "column": "unseen_object_cup2",
+      "variant": "RDT (regress)",
+      "ours": "4/8",
+      "variant_count": "1/8",
+      "p_fisher": 0.282
+    },
+    {
+      "column": "unseen_object_cup2",
+      "variant": "RDT (small)",
+      "ours": "4/8",
+      "variant_count": "3/8",
+      "p_fisher": 1.0
+    },
+    {
+      "column": "unseen_object_cup2",
+      "variant": "RDT (scratch)",
+      "ours": "4/8",
+      "variant_count": "0/8",
+      "p_fisher": 0.077
+    },
+    {
+      "column": "unseen_scene_room3",
+      "variant": "RDT (regress)",
+      "ours": "5/8",
+      "variant_count": "4/8",
+      "p_fisher": 1.0
+    },
+    {
+      "column": "unseen_scene_room3",
+      "variant": "RDT (small)",
+      "ours": "5/8",
+      "variant_count": "5/8",
+      "p_fisher": 1.0
+    },
+    {
+      "column": "unseen_scene_room3",
+      "variant": "RDT (scratch)",
+      "ours": "5/8",
+      "variant_count": "2/8",
+      "p_fisher": 0.315
+    },
+    {
+      "column": "instruction_L_amount",
+      "variant": "RDT (regress)",
+      "ours": "8/8",
+      "variant_count": "1/8",
+      "p_fisher": 0.001
+    },
+    {
+      "column": "instruction_L_amount",
+      "variant": "RDT (small)",
+      "ours": "8/8",
+      "variant_count": "2/8",
+      "p_fisher": 0.007
+    },
+    {
+      "column": "instruction_L_amount",
+      "variant": "RDT (scratch)",
+      "ours": "8/8",
+      "variant_count": "5/8",
+      "p_fisher": 0.2
+    }
+  ],
+  "power_n_per_arm": {
+    "25%p 차이 (50% 대 25%)": 58,
+    "25%p 차이 (40% 대 16%)": 54,
+    "12.5%p 차이 (62.5% 대 50%)": 247
+  },
+  "consistency": {
+    "integer_counts_all_cells": true,
+    "table2_vs_table3_consistency": {
+      "unseen_object_ours_T2_vs_T3": [
+        50.0,
+        50.0
+      ],
+      "unseen_scene_ours_T2_vs_T3": [
+        62.5,
+        62.5
+      ],
+      "instr_L_amount_ours_T2_vs_T3": [
+        100.0,
+        100.0
+      ],
+      "unseen_object_scratch_T2_vs_T3": [
+        0.0,
+        0
+      ],
+      "unseen_scene_scratch_T2_vs_T3": [
+        25.0,
+        25.0
+      ],
+      "instr_L_amount_scratch_T2_vs_T3": [
+        62.5,
+        62.5
+      ]
+    },
+    "inference_rate": {
+      "chunk_hz_claim": 6,
+      "action_hz_claim": 381,
+      "chunk_len": 64,
+      "implied_chunk_hz": 5.95
+    },
+    "pretrain_weights_vs_table5": {
+      "paper_rows": 46,
+      "code_rows": 46,
+      "sum_paper_pct": 100.01,
+      "sorted_mismatches_over_0.01": 0
+    }
+  }
+}
