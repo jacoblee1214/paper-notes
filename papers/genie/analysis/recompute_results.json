@@ -1,0 +1,67 @@
+{
+  "V1_table2": {
+    "platformers_dPSNR_pixel_minus_token": 0.58,
+    "robotics_dPSNR_pixel_minus_token": 0.42,
+    "platformers_dFVD_pixel_minus_token": 1.3,
+    "platformers_dFVD_rel_pct": 3.4,
+    "robotics_dFVD_pixel_minus_token": -121.4,
+    "robotics_dFVD_rel_pct": -47.1,
+    "platformers_param_mismatch_pct": 8.7
+  },
+  "V2_table3": {
+    "ST_vs_ViT_dFVD_rel_pct": -28.9,
+    "ST_vs_CViViT_dFVD_rel_pct": -70.2,
+    "ST_vs_ViT_dPSNR": 0.27,
+    "ST_vs_CViViT_dPSNR": 0.29,
+    "param_range_pct": 12.2,
+    "ST_vs_ViT_memory_ratio": 3.0,
+    "CViViT_vs_ST_memory_ratio": 1.78
+  },
+  "V3_table4": {
+    "dFVD": -6.6,
+    "dFVD_rel_pct": -10.7,
+    "curated_fraction_of_original_pct": 12.4
+  },
+  "V4_dataset_hours": {
+    "original_55M_clips_hours": 244400.0,
+    "curated_6p8M_clips_hours": 30200.0
+  },
+  "V5_tokens": {
+    "tokens_per_frame_implied_from_batch_tokens": {
+      "128": 928,
+      "256": 928,
+      "448": 921
+    },
+    "batch128_tokens_check_M": 1.88,
+    "final_genie_total_tokens_B": 942.1,
+    "paper_final_tokens_B": 942,
+    "scaling_200k_x256_tokens_B": 753.7,
+    "paper_scaling_tokens_B": 750
+  },
+  "V6_flops_vs_6ND": {
+    "ratio_table_over_6ND_by_model": [
+      1.11,
+      0.83,
+      0.74,
+      0.66,
+      0.6,
+      0.56,
+      0.57
+    ],
+    "min_ratio": 0.56,
+    "max_ratio": 1.11,
+    "final_model_6ND_e22": 5.71,
+    "final_model_table12_e22": 6.6,
+    "final_model_ratio": 1.16
+  },
+  "V7_param_sum": {
+    "components_sum_B": 10.6,
+    "paper_total_B": 10.7,
+    "abstract_B": 11
+  },
+  "V8_tokenizer_batch_scaling": {
+    "flops_ratio": 6.09,
+    "psnr_gain_db": 0.8
+  },
+  "V9_significance": "not computable: no seeds, SD, CI or per-sample values for FVD and dPSNR in the paper text"
+}
