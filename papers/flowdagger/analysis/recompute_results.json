@@ -1,0 +1,1407 @@
+{
+ "table1": {
+  "mean": {
+   "Base": 0.5333333333333333,
+   "SFT": 0.7091666666666668,
+   "LoRA-DAg": 0.6808333333333333,
+   "Res-DAg": 0.6425,
+   "DSRL": 0.5524999999999999,
+   "FlowDAgger": 0.7833333333333333
+  },
+  "mean_rep": {
+   "Base": 0.53,
+   "SFT": 0.71,
+   "LoRA-DAg": 0.68,
+   "Res-DAg": 0.64,
+   "DSRL": 0.55,
+   "FlowDAgger": 0.78
+  },
+  "mean_match": {
+   "Base": true,
+   "SFT": true,
+   "LoRA-DAg": true,
+   "Res-DAg": true,
+   "DSRL": true,
+   "FlowDAgger": true
+  },
+  "delta": {
+   "SFT": 0.1758333333333335,
+   "LoRA-DAg": 0.14749999999999996,
+   "Res-DAg": 0.10916666666666663,
+   "DSRL": 0.019166666666666554,
+   "FlowDAgger": 0.25
+  },
+  "delta_rep": {
+   "SFT": 0.18,
+   "LoRA-DAg": 0.15,
+   "Res-DAg": 0.11,
+   "DSRL": 0.02,
+   "FlowDAgger": 0.25
+  },
+  "delta_match": {
+   "SFT": true,
+   "LoRA-DAg": true,
+   "Res-DAg": true,
+   "DSRL": true,
+   "FlowDAgger": true
+  },
+  "row_best_incl_ties": {
+   "SFT": 2,
+   "LoRA-DAg": 1,
+   "Res-DAg": 1,
+   "DSRL": 1,
+   "FlowDAgger": 8
+  },
+  "row_best_sole": {
+   "SFT": 1,
+   "LoRA-DAg": 1,
+   "Res-DAg": 1,
+   "DSRL": 0,
+   "FlowDAgger": 8
+  },
+  "fd_loses_rows": [
+   "Bin Picking",
+   "Box Close",
+   "Dial Turn",
+   "Door Lock"
+  ],
+  "paired_across_tasks": {
+   "SFT": {
+    "mean_diff": 0.07416666666666664,
+    "fd_better_tasks": 10,
+    "ties": 0,
+    "paired_t_p": 0.029572418546146152,
+    "wilcoxon_p": 0.04248046875,
+    "sign_p": 0.03857421875,
+    "boot95": [
+     0.018333333333333326,
+     0.12999999999999998
+    ]
+   },
+   "LoRA-DAg": {
+    "mean_diff": 0.10249999999999997,
+    "fd_better_tasks": 10,
+    "ties": 0,
+    "paired_t_p": 0.013575743120787303,
+    "wilcoxon_p": 0.02099609375,
+    "sign_p": 0.03857421875,
+    "boot95": [
+     0.036666666666666646,
+     0.16752083333333148
+    ]
+   },
+   "Res-DAg": {
+    "mean_diff": 0.14083333333333334,
+    "fd_better_tasks": 10,
+    "ties": 0,
+    "paired_t_p": 0.006088597740773476,
+    "wilcoxon_p": 0.00927734375,
+    "sign_p": 0.03857421875,
+    "boot95": [
+     0.06083333333333335,
+     0.21666666666666665
+    ]
+   },
+   "DSRL": {
+    "mean_diff": 0.2308333333333333,
+    "fd_better_tasks": 11,
+    "ties": 0,
+    "paired_t_p": 0.000777927891248325,
+    "wilcoxon_p": 0.00146484375,
+    "sign_p": 0.00634765625,
+    "boot95": [
+     0.1383333333333333,
+     0.32749999999999996
+    ]
+   }
+  },
+  "fisher_fd_vs": {
+   "SFT": {
+    "n25": {
+     "p_per_task": [
+      1.0,
+      0.7536,
+      0.5512,
+      1.0,
+      0.538,
+      0.0792,
+      1.0,
+      0.2347,
+      0.3961,
+      1.0,
+      0.7733,
+      0.1099
+     ],
+     "n_sig_p05": 0
+    },
+    "n75": {
+     "p_per_task": [
+      0.6244,
+      0.4639,
+      0.2336,
+      0.245,
+      0.2149,
+      0.0013,
+      0.6714,
+      0.0175,
+      0.0494,
+      0.5182,
+      0.4048,
+      0.0003
+     ],
+     "n_sig_p05": 4
+    }
+   },
+   "LoRA-DAg": {
+    "n25": {
+     "p_per_task": [
+      0.7019,
+      1.0,
+      0.7761,
+      0.004,
+      0.4635,
+      1.0,
+      0.3209,
+      0.0096,
+      0.7761,
+      0.3209,
+      0.5607,
+      0.4898
+     ],
+     "n_sig_p05": 2
+    },
+    "n75": {
+     "p_per_task": [
+      0.2482,
+      1.0,
+      0.5114,
+      0.0,
+      0.058,
+      1.0,
+      0.0346,
+      0.0,
+      0.3229,
+      0.0197,
+      0.1782,
+      0.0282
+     ],
+     "n_sig_p05": 5
+    }
+   },
+   "Res-DAg": {
+    "n25": {
+     "p_per_task": [
+      0.0121,
+      1.0,
+      0.7688,
+      1.0,
+      0.3635,
+      0.7252,
+      0.0622,
+      0.0096,
+      0.1564,
+      0.4962,
+      0.3772,
+      0.1099
+     ],
+     "n_sig_p05": 2
+    },
+    "n75": {
+     "p_per_task": [
+      0.0,
+      0.4907,
+      0.2336,
+      0.12,
+      0.0562,
+      0.1523,
+      0.0003,
+      0.0,
+      0.0053,
+      0.0477,
+      0.0608,
+      0.0003
+     ],
+     "n_sig_p05": 6
+    }
+   },
+   "DSRL": {
+    "n25": {
+     "p_per_task": [
+      0.0955,
+      0.7536,
+      0.5709,
+      0.1099,
+      0.0421,
+      0.0016,
+      0.0001,
+      0.4898,
+      0.1564,
+      0.1137,
+      0.5607,
+      0.0096
+     ],
+     "n_sig_p05": 4
+    },
+    "n75": {
+     "p_per_task": [
+      0.0004,
+      0.4639,
+      0.2519,
+      0.0003,
+      0.0001,
+      0.0,
+      0.0,
+      0.1162,
+      0.0018,
+      0.0008,
+      0.2404,
+      0.0
+     ],
+     "n_sig_p05": 8
+    }
+   },
+   "Base": {
+    "n25": {
+     "p_per_task": [
+      0.0955,
+      0.5607,
+      0.1564,
+      0.1099,
+      0.0002,
+      0.0421,
+      0.0031,
+      0.1099,
+      0.045,
+      0.7252,
+      0.2321,
+      0.1099
+     ],
+     "n_sig_p05": 4
+    },
+    "n75": {
+     "p_per_task": [
+      0.0004,
+      0.1284,
+      0.0087,
+      0.0003,
+      0.0,
+      0.0002,
+      0.0,
+      0.0023,
+      0.0001,
+      0.2144,
+      0.0154,
+      0.0003
+     ],
+     "n_sig_p05": 10
+    }
+   }
+  },
+  "fisher_mixed_assumption": {
+   "Base": {
+    "n_other": 25,
+    "p_per_task": [
+     0.0108,
+     0.2337,
+     0.0648,
+     0.0032,
+     0.0,
+     0.0069,
+     0.0001,
+     0.0133,
+     0.0052,
+     0.3566,
+     0.0986,
+     0.0032
+    ],
+    "n_sig_p05": 8
+   },
+   "SFT": {
+    "n_other": 25,
+    "p_per_task": [
+     0.4883,
+     0.6167,
+     0.3415,
+     0.25,
+     0.3146,
+     0.0243,
+     0.7592,
+     0.0472,
+     0.1635,
+     0.5381,
+     0.6405,
+     0.0032
+    ],
+    "n_sig_p05": 3
+   },
+   "LoRA-DAg": {
+    "n_other": 25,
+    "p_per_task": [
+     0.3018,
+     1.0,
+     0.6431,
+     0.0,
+     0.264,
+     1.0,
+     0.0925,
+     0.0002,
+     0.4838,
+     0.0768,
+     0.352,
+     0.0606
+    ],
+    "n_sig_p05": 2
+   },
+   "Res-DAg": {
+    "n_other": 75,
+    "p_per_task": [
+     0.0,
+     0.4907,
+     0.2336,
+     0.12,
+     0.0562,
+     0.1523,
+     0.0003,
+     0.0,
+     0.0053,
+     0.0477,
+     0.0608,
+     0.0003
+    ],
+    "n_sig_p05": 6
+   },
+   "DSRL": {
+    "n_other": 75,
+    "p_per_task": [
+     0.0004,
+     0.4639,
+     0.2519,
+     0.0003,
+     0.0001,
+     0.0,
+     0.0,
+     0.1162,
+     0.0018,
+     0.0008,
+     0.2404,
+     0.0
+    ],
+    "n_sig_p05": 8
+   }
+  },
+  "grid": {
+   "Base": {
+    "k25_round": 12,
+    "k75_round": 12,
+    "only25_cells": [],
+    "only75_cells": [],
+    "neither_cells": []
+   },
+   "SFT": {
+    "k25_round": 10,
+    "k75_round": 11,
+    "only25_cells": [],
+    "only75_cells": [
+     "Assembly"
+    ],
+    "neither_cells": [
+     "Box Close"
+    ]
+   },
+   "LoRA-DAg": {
+    "k25_round": 11,
+    "k75_round": 12,
+    "only25_cells": [],
+    "only75_cells": [
+     "Assembly"
+    ],
+    "neither_cells": []
+   },
+   "Res-DAg": {
+    "k25_round": 3,
+    "k75_round": 12,
+    "only25_cells": [],
+    "only75_cells": [
+     "Assembly",
+     "Bin Picking",
+     "Box Close",
+     "Coffee Pull",
+     "Dial Turn",
+     "Door Lock",
+     "Hand Insert",
+     "Lever Pull",
+     "Pick Place"
+    ],
+    "neither_cells": []
+   },
+   "DSRL": {
+    "k25_round": 7,
+    "k75_round": 12,
+    "only25_cells": [],
+    "only75_cells": [
+     "Dial Turn",
+     "Hammer",
+     "Lever Pull",
+     "Soccer",
+     "Stick Push"
+    ],
+    "neither_cells": []
+   },
+   "FlowDAgger": {
+    "k25_round": 4,
+    "k75_round": 12,
+    "only25_cells": [],
+    "only75_cells": [
+     "Assembly",
+     "Bin Picking",
+     "Box Close",
+     "Dial Turn",
+     "Door Lock",
+     "Hand Insert",
+     "Lever Pull",
+     "Pick Place"
+    ],
+    "neither_cells": []
+   }
+  },
+  "multiple_of_004_cells": {
+   "Base": 12,
+   "SFT": 10,
+   "LoRA-DAg": 11,
+   "Res-DAg": 3,
+   "DSRL": 7,
+   "FlowDAgger": 4
+  },
+  "multiple_of_004_binom_p_ge": {
+   "Base": 1.8816764231589195e-06,
+   "SFT": 0.0005438044862929279,
+   "LoRA-DAg": 4.704191057897299e-05,
+   "Res-DAg": 0.8188773542124148,
+   "DSRL": 0.06644763953101097,
+   "FlowDAgger": 0.6069253219077937
+  }
+ },
+ "table2": {
+  "mean": {
+   "pi05_base": 0.5314285714285714,
+   "pi05_fd": 0.7885714285714286,
+   "cos_base": 0.5257142857142858,
+   "cos_fd": 0.7371428571428572
+  },
+  "delta_pi05": [
+   0.25,
+   0.13,
+   0.23,
+   0.55,
+   0.15,
+   0.33,
+   0.16
+  ],
+  "delta_cos": [
+   0.4,
+   0.16,
+   0.28,
+   0.24,
+   0.12,
+   0.08,
+   0.2
+  ],
+  "delta_pi05_match": true,
+  "delta_cos_match": true,
+  "mean_delta": {
+   "pi05": 0.2571428571428572,
+   "cos": 0.21142857142857147
+  },
+  "mean_match": {
+   "pi05_base": true,
+   "pi05_fd": true,
+   "cos_base": true,
+   "cos_fd": true
+  },
+  "pi05_matches_table1": true,
+  "pi05_fd_mean_table1_12": 0.7833333333333333,
+  "delta_gap_paired_t_p": 0.5022850871609108,
+  "delta_gap_wilcoxon_p": 1.0,
+  "cos_gain_positive_tasks": 7,
+  "cos_each_task_fisher_n25": [
+   0.0036,
+   0.3772,
+   0.0887,
+   0.1536,
+   0.4635,
+   0.7733,
+   0.0983
+  ],
+  "cos_pooled_k": {
+   "base": 92,
+   "fd": 129,
+   "n": 175,
+   "p": 6.132338431553782e-05
+  },
+  "cos_grid_k25_all": true,
+  "cos_values_multiple_of_004": true
+ },
+ "table3": {
+  "heldout_mean": {
+   "Base": 0.96,
+   "FlowDAgger": 0.8800000000000001,
+   "Res-DAg": 0.6880000000000001,
+   "LoRA-DAg": 0.304,
+   "SFT": 0.024
+  },
+  "heldout_mean_match": {
+   "Base": true,
+   "FlowDAgger": true,
+   "Res-DAg": true,
+   "LoRA-DAg": true,
+   "SFT": true
+  },
+  "delta": {
+   "FlowDAgger": -0.07999999999999985,
+   "Res-DAg": -0.2719999999999999,
+   "LoRA-DAg": -0.6559999999999999,
+   "SFT": -0.9359999999999999
+  },
+  "delta_match": {
+   "FlowDAgger": true,
+   "Res-DAg": true,
+   "LoRA-DAg": true,
+   "SFT": true
+  },
+  "all_k25": true,
+  "hammer_matches_table1": {
+   "Base": true,
+   "FlowDAgger": true,
+   "Res-DAg": true,
+   "LoRA-DAg": true,
+   "SFT": true
+  },
+  "heldout_change_fisher_n25": {
+   "FlowDAgger": {
+    "Door": {
+     "delta": -0.12,
+     "p": 0.2347
+    },
+    "Drawer": {
+     "delta": 0.0,
+     "p": 1.0
+    },
+    "Faucet": {
+     "delta": 0.0,
+     "p": 1.0
+    },
+    "Plate": {
+     "delta": 0.12,
+     "p": 0.2347
+    },
+    "Push": {
+     "delta": -0.4,
+     "p": 0.0019
+    }
+   },
+   "Res-DAg": {
+    "Door": {
+     "delta": -0.12,
+     "p": 0.2347
+    },
+    "Drawer": {
+     "delta": -0.32,
+     "p": 0.004
+    },
+    "Faucet": {
+     "delta": -0.16,
+     "p": 0.1895
+    },
+    "Plate": {
+     "delta": 0.12,
+     "p": 0.2347
+    },
+    "Push": {
+     "delta": -0.88,
+     "p": 0.0
+    }
+   },
+   "LoRA-DAg": {
+    "Door": {
+     "delta": -0.2,
+     "p": 0.0502
+    },
+    "Drawer": {
+     "delta": -1.0,
+     "p": 0.0
+    },
+    "Faucet": {
+     "delta": -0.6,
+     "p": 0.0
+    },
+    "Plate": {
+     "delta": -0.88,
+     "p": 0.0
+    },
+    "Push": {
+     "delta": -0.6,
+     "p": 0.0
+    }
+   },
+   "SFT": {
+    "Door": {
+     "delta": -0.88,
+     "p": 0.0
+    },
+    "Drawer": {
+     "delta": -1.0,
+     "p": 0.0
+    },
+    "Faucet": {
+     "delta": -0.96,
+     "p": 0.0
+    },
+    "Plate": {
+     "delta": -0.88,
+     "p": 0.0
+    },
+    "Push": {
+     "delta": -0.96,
+     "p": 0.0
+    }
+   }
+  },
+  "fd_heldout_sig_drops": [
+   "Push"
+  ],
+  "fd_push_drop": -0.3999999999999999,
+  "hammer_fd_vs_sft_p": 1.0,
+  "hammer_gain": {
+   "FlowDAgger": 0.44,
+   "Res-DAg": 0.16,
+   "LoRA-DAg": 0.28,
+   "SFT": 0.4
+  },
+  "fd_vs_res_heldout_paired_t_p": 0.10870095132492352
+ },
+ "table4": {
+  "grid_n30": {
+   "Base": [
+    [
+     true,
+     true
+    ],
+    [
+     false,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     false,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     false,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     true,
+     true
+    ]
+   ],
+   "SFT": [
+    [
+     true,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     false,
+     true
+    ]
+   ],
+   "FD": [
+    [
+     true,
+     true
+    ],
+    [
+     false,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     false,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     false,
+     true
+    ],
+    [
+     true,
+     true
+    ],
+    [
+     false,
+     false
+    ]
+   ]
+  },
+  "infeasible_n30": [
+   [
+    "FD",
+    "Plug Insertion",
+    0.72
+   ]
+  ],
+  "truncated_only_cells": [
+   [
+    "Base",
+    "Glassware Stacking",
+    0.26
+   ],
+   [
+    "Base",
+    "Slider",
+    0.36
+   ],
+   [
+    "Base",
+    "Jenga Stacking",
+    0.76
+   ],
+   [
+    "SFT",
+    "Plug Insertion",
+    0.66
+   ],
+   [
+    "FD",
+    "Glassware Stacking",
+    0.76
+   ],
+   [
+    "FD",
+    "Slider",
+    0.66
+   ],
+   [
+    "FD",
+    "Jenga Stacking",
+    0.86
+   ]
+  ],
+  "round_only_cells": [],
+  "plug_fd_feasible_n25": [
+   true,
+   true
+  ],
+  "delta_fd_base": [
+   0.17,
+   0.5,
+   0.13,
+   0.3,
+   0.3,
+   0.1,
+   0.67,
+   0.12
+  ],
+  "delta_match": true,
+  "delta_fd_sft": [
+   0.1,
+   0.23,
+   0.0,
+   0.23,
+   0.17,
+   -0.04,
+   0.17,
+   0.06
+  ],
+  "fd_beats_sft_tasks": 6,
+  "fd_ties_sft": [
+   "Button Push"
+  ],
+  "fd_loses_sft": [
+   "Jenga Stacking"
+  ],
+  "means": {
+   "Base": 0.48,
+   "SFT": 0.6512500000000001,
+   "FD": 0.7662500000000001
+  },
+  "plug_fd_21_n_sig_vs_base_raw": 4,
+  "plug_fd_21_n_sig_vs_base_holm": 2,
+  "plug_fd_21_n_sig_vs_sft_raw": 0,
+  "plug_fd_21_pooled": {
+   "fd": 184,
+   "base": 116,
+   "sft": 157,
+   "n": 240,
+   "p_fd_vs_base": 1.8481688693722726e-10,
+   "p_fd_vs_sft": 0.008756377070621088
+  },
+  "plug_fd_22_n_sig_vs_base_raw": 4,
+  "plug_fd_22_n_sig_vs_base_holm": 2,
+  "plug_fd_22_n_sig_vs_sft_raw": 0,
+  "plug_fd_22_pooled": {
+   "fd": 185,
+   "base": 116,
+   "sft": 157,
+   "n": 240,
+   "p_fd_vs_base": 9.274229058798134e-11,
+   "p_fd_vs_sft": 0.006358999342247902
+  },
+  "fisher": {
+   "plug_fd_21": [
+    {
+     "task": "Block Pick",
+     "k_fd": 27,
+     "k_base": 22,
+     "k_sft": 24,
+     "p_vs_base": 0.1805804037737829,
+     "p_vs_sft": 0.47164455896551566,
+     "wilson_fd": [
+      0.744,
+      0.965
+     ],
+     "holm_vs_base": 0.7223216150951316
+    },
+    {
+     "task": "Glassware Stacking",
+     "k_fd": 23,
+     "k_base": 8,
+     "k_sft": 16,
+     "p_vs_base": 0.00023089337753119202,
+     "p_vs_sft": 0.10333511717207271,
+     "wilson_fd": [
+      0.591,
+      0.882
+     ],
+     "holm_vs_base": 0.001616253642718344
+    },
+    {
+     "task": "Button Push",
+     "k_fd": 22,
+     "k_base": 18,
+     "k_sft": 22,
+     "p_vs_base": 0.41175659704810597,
+     "p_vs_sft": 1.0,
+     "wilson_fd": [
+      0.556,
+      0.858
+     ],
+     "holm_vs_base": 1.0
+    },
+    {
+     "task": "Slider",
+     "k_fd": 20,
+     "k_base": 11,
+     "k_sft": 13,
+     "p_vs_base": 0.0378872128952835,
+     "p_vs_sft": 0.11876489919201856,
+     "wilson_fd": [
+      0.488,
+      0.808
+     ],
+     "holm_vs_base": 0.22195437564306658
+    },
+    {
+     "task": "Wire Pull",
+     "k_fd": 21,
+     "k_base": 12,
+     "k_sft": 16,
+     "p_vs_base": 0.0369923959405111,
+     "p_vs_sft": 0.28817964270091767,
+     "wilson_fd": [
+      0.521,
+      0.833
+     ],
+     "holm_vs_base": 0.22195437564306658
+    },
+    {
+     "task": "Jenga Stacking",
+     "k_fd": 26,
+     "k_base": 23,
+     "k_sft": 27,
+     "p_vs_base": 0.5061775943272465,
+     "p_vs_sft": 1.0,
+     "wilson_fd": [
+      0.703,
+      0.947
+     ],
+     "holm_vs_base": 1.0
+    },
+    {
+     "task": "Toolbox Packing",
+     "k_fd": 24,
+     "k_base": 4,
+     "k_sft": 19,
+     "p_vs_base": 3.251644909673094e-07,
+     "p_vs_sft": 0.25156918928788474,
+     "wilson_fd": [
+      0.627,
+      0.905
+     ],
+     "holm_vs_base": 2.6013159277384753e-06
+    },
+    {
+     "task": "Plug Insertion",
+     "k_fd": 21,
+     "k_base": 18,
+     "k_sft": 20,
+     "p_vs_base": 0.5888821858925749,
+     "p_vs_sft": 1.0,
+     "wilson_fd": [
+      0.521,
+      0.833
+     ],
+     "holm_vs_base": 1.0
+    }
+   ],
+   "plug_fd_22": [
+    {
+     "task": "Block Pick",
+     "k_fd": 27,
+     "k_base": 22,
+     "k_sft": 24,
+     "p_vs_base": 0.1805804037737829,
+     "p_vs_sft": 0.47164455896551566,
+     "wilson_fd": [
+      0.744,
+      0.965
+     ],
+     "holm_vs_base": 0.7223216150951316
+    },
+    {
+     "task": "Glassware Stacking",
+     "k_fd": 23,
+     "k_base": 8,
+     "k_sft": 16,
+     "p_vs_base": 0.00023089337753119202,
+     "p_vs_sft": 0.10333511717207271,
+     "wilson_fd": [
+      0.591,
+      0.882
+     ],
+     "holm_vs_base": 0.001616253642718344
+    },
+    {
+     "task": "Button Push",
+     "k_fd": 22,
+     "k_base": 18,
+     "k_sft": 22,
+     "p_vs_base": 0.41175659704810597,
+     "p_vs_sft": 1.0,
+     "wilson_fd": [
+      0.556,
+      0.858
+     ],
+     "holm_vs_base": 1.0
+    },
+    {
+     "task": "Slider",
+     "k_fd": 20,
+     "k_base": 11,
+     "k_sft": 13,
+     "p_vs_base": 0.0378872128952835,
+     "p_vs_sft": 0.11876489919201856,
+     "wilson_fd": [
+      0.488,
+      0.808
+     ],
+     "holm_vs_base": 0.22195437564306658
+    },
+    {
+     "task": "Wire Pull",
+     "k_fd": 21,
+     "k_base": 12,
+     "k_sft": 16,
+     "p_vs_base": 0.0369923959405111,
+     "p_vs_sft": 0.28817964270091767,
+     "wilson_fd": [
+      0.521,
+      0.833
+     ],
+     "holm_vs_base": 0.22195437564306658
+    },
+    {
+     "task": "Jenga Stacking",
+     "k_fd": 26,
+     "k_base": 23,
+     "k_sft": 27,
+     "p_vs_base": 0.5061775943272465,
+     "p_vs_sft": 1.0,
+     "wilson_fd": [
+      0.703,
+      0.947
+     ],
+     "holm_vs_base": 1.0
+    },
+    {
+     "task": "Toolbox Packing",
+     "k_fd": 24,
+     "k_base": 4,
+     "k_sft": 19,
+     "p_vs_base": 3.251644909673094e-07,
+     "p_vs_sft": 0.25156918928788474,
+     "wilson_fd": [
+      0.627,
+      0.905
+     ],
+     "holm_vs_base": 2.6013159277384753e-06
+    },
+    {
+     "task": "Plug Insertion",
+     "k_fd": 22,
+     "k_base": 18,
+     "k_sft": 20,
+     "p_vs_base": 0.41175659704810597,
+     "p_vs_sft": 0.7787156770945833,
+     "wilson_fd": [
+      0.556,
+      0.858
+     ],
+     "holm_vs_base": 1.0
+    }
+   ]
+  },
+  "sign_fd_gt_base": 8,
+  "sign_test_fd_vs_sft_p": 0.125,
+  "toolbox_text": {
+   "base": "4/30 = 13.3%",
+   "fd": "24/30 = 80%"
+  },
+  "eps_vs_delta_corr": -0.17353130039882272,
+  "base_vs_delta_spearman": -0.9156626506024095
+ },
+ "table5_6": {
+  "claimed_ratios": {
+   "euler_over_ps5_x(~20)": 19.583,
+   "trajfp_over_ps5_x(~14)": 13.571,
+   "adam_over_ps5_x": 16.369,
+   "time_trajfp_over_ps5_x(~3)": 3.645,
+   "time_adam_over_ps5_x(~3)": 2.961,
+   "time_ps5_over_euler_x": 1.448,
+   "mse_ps3_over_ps5_x(2.4)": 2.363,
+   "mse_ps5_over_ps10_x(1.1)": 1.143,
+   "time_ps10_over_ps5_x(1.3)": 1.346,
+   "matched_mse_k5_over_m10_x(15)": 15.51,
+   "matched_time_k5_over_m10_x(2.7)": 2.707,
+   "trajfp_k20_over_k5_mse": 1.039
+  },
+  "evals_table6_vs_formula": {
+   "per_step": {
+    "M=3": {
+     "table6": 40,
+     "K*M": 30,
+     "K*(M+1)": 40
+    },
+    "M=5": {
+     "table6": 60,
+     "K*M": 50,
+     "K*(M+1)": 60
+    },
+    "M=10": {
+     "table6": 110,
+     "K*M": 100,
+     "K*(M+1)": 110
+    }
+   },
+   "trajectory": {
+    "k=5": {
+     "table6": 110,
+     "K+2*K*k": 110
+    },
+    "k=20": {
+     "table6": 410,
+     "K+2*K*k": 410
+    }
+   }
+  },
+  "time_model": {
+   "c_ms_per_call": 99.42873849992208,
+   "e_ms_per_eval": 3.56209730235459,
+   "pred": {
+    "Euler reverse": 270.1,
+    "Per-step FP (M=3)": 377.0,
+    "Per-step FP (M=5)": 448.2,
+    "Per-step FP (M=10)": 626.3,
+    "Trajectory FP (k=5)": 1620.6,
+    "Trajectory FP (k=20)": 5672.1
+   },
+   "obs": {
+    "Euler reverse": 315,
+    "Per-step FP (M=3)": 405,
+    "Per-step FP (M=5)": 456,
+    "Per-step FP (M=10)": 614,
+    "Trajectory FP (k=5)": 1662,
+    "Trajectory FP (k=20)": 5657
+   },
+   "trajfp_k5_if_2_calls_ms": 626.309153282395
+  },
+  "sr_k75": {
+   "Euler reverse": {
+    "assembly_k75": 44,
+    "hammer_k75": 53
+   },
+   "Optimization (Adam)": {
+    "assembly_k75": 59,
+    "hammer_k75": 56
+   },
+   "Trajectory FP (k=5)": {
+    "assembly_k75": 58,
+    "hammer_k75": 51
+   },
+   "Per-step FP (M=5)": {
+    "assembly_k75": 65,
+    "hammer_k75": 72
+   }
+  },
+  "sr_fisher_vs_perstep_n75": {
+   "Euler reverse": {
+    "assembly_p": 0.00019896873890561464,
+    "hammer_p": 3.9218627825201145e-05
+   },
+   "Optimization (Adam)": {
+    "assembly_p": 0.2807109039045412,
+    "hammer_p": 0.00033017307032375193
+   },
+   "Trajectory FP (k=5)": {
+    "assembly_p": 0.20171581424708507,
+    "hammer_p": 8.770758034181985e-06
+   }
+  },
+  "sr_grid_k75_round_ok": {
+   "Euler reverse": [
+    true,
+    true
+   ],
+   "Optimization (Adam)": [
+    true,
+    true
+   ],
+   "Trajectory FP (k=5)": [
+    true,
+    true
+   ],
+   "Per-step FP (M=5)": [
+    true,
+    true
+   ]
+  },
+  "table5_vs_table1": {
+   "assembly": {
+    "t5_k75": 65,
+    "t1": 0.89,
+    "t1_k75": 67,
+    "p": 0.8023326246493825
+   },
+   "hammer": {
+    "t5_k75": 72,
+    "t1": 0.84,
+    "t1_k25": 21,
+    "t1_k75_if_3seeds": 63,
+    "p_n75": 0.026598086822259327,
+    "p_vs_k25": 0.06343191274963016
+   }
+  },
+  "euler_below_base_assembly_p": 0.8140744453684993
+ },
+ "fig5_6": {
+  "fig5_base_60pct_k15": true,
+  "fig6_base_48pct_n15_possible": false,
+  "fig6_base_48pct_n25": true,
+  "fig6_dsrl_plateau_80_k15": true,
+  "fig6_fd_97pct_k15_possible": false,
+  "fig6_fd_97pct_closest_k15": [
+   93.3,
+   100.0
+  ],
+  "fig5_dsrl_70_k15": [
+   66.7,
+   73.3
+  ],
+  "fig5_fd_100_wilson_k15": [
+   0.796,
+   1.0
+  ],
+  "fig5_dsrl_70_wilson_k15": [
+   0.417,
+   0.848
+  ],
+  "fig5_gap_fisher_if_15_vs_10_k15": 0.0421455938697318,
+  "fig5_gap_fisher_if_15_vs_11_k15": 0.09961685823754789,
+  "fig6_gap_fisher_14_vs_12": 0.5977011494252873,
+  "fig5_dsrl_gap_pp": {
+   "claimed": 25,
+   "read_from_text": "100 - 70 = 30"
+  }
+ },
+ "arith": {
+  "cosmos_joint_latent_dim": 112896,
+  "pi0_chunk_noise_dim": 1600,
+  "groot_noise_dim": 5280,
+  "groot_dct_k10_dim": 1320,
+  "pi05_dct_k10_dim_code": 320,
+  "fig4_vram_ratio": {
+   "lora_over_fd": 2.8125,
+   "sft_over_fd": 8.75
+  },
+  "real_world_toolbox": {
+   "base_k": 4,
+   "fd_k": 24,
+   "n": 30,
+   "base_pct": 13.333333333333334,
+   "fd_pct": 80.0
+  }
+ },
+ "toy_inversion": {
+  "L3_K10": {
+   "euler_reverse": 0.000625823509868064,
+   "traj_fp_k1": 6.156560212460068e-07,
+   "traj_fp_k5": 5.65150658799016e-06,
+   "traj_fp_k20": 0.0007315732309250784,
+   "perstep_code_M1": 1.3396954426791684e-06,
+   "perstep_paper_M1": 0.000625823509868064,
+   "perstep_code_M3": 7.558137892503279e-12,
+   "perstep_paper_M3": 3.2250938300549173e-09,
+   "perstep_code_M5": 5.34645200868115e-17,
+   "perstep_paper_M5": 1.925481751816922e-14,
+   "perstep_code_M10": 2.862185087107248e-29,
+   "perstep_paper_M10": 7.471209610450425e-27
+  },
+  "lipschitz_sweep_K10": {
+   "1.0": {
+    "euler": 8.99750804136104e-06,
+    "perstep_code_M5": 2.1462608961043823e-23,
+    "perstep_paper_M5": 6.148102138674412e-20,
+    "traj_k5": 1.0561056044715908e-09
+   },
+   "3.0": {
+    "euler": 0.0006713882360835957,
+    "perstep_code_M5": 6.75927624671467e-17,
+    "perstep_paper_M5": 2.331422511423146e-14,
+    "traj_k5": 6.733030439416595e-06
+   },
+   "6.0": {
+    "euler": 0.010659470189302985,
+    "perstep_code_M5": 8.490956964304945e-13,
+    "perstep_paper_M5": 7.519535358575765e-11,
+    "traj_k5": 0.001987503419361099
+   },
+   "9.0": {
+    "euler": 0.058328029479958875,
+    "perstep_code_M5": 2.445376973337489e-10,
+    "perstep_paper_M5": 1.088081240724381e-08,
+    "traj_k5": 0.07060749695304838
+   },
+   "12.0": {
+    "euler": 0.20475032595489712,
+    "perstep_code_M5": 1.5650702530739354e-08,
+    "perstep_paper_M5": 4.2127951435925506e-07,
+    "traj_k5": 0.7173610695538455
+   },
+   "20.0": {
+    "euler": 1.6649239895722918,
+    "perstep_code_M5": 2.2480831226031428e-05,
+    "perstep_paper_M5": 0.00017511724995966839,
+    "traj_k5": 8.322644004512735
+   }
+  },
+  "step_sweep_L6": {
+   "5": {
+    "euler": 0.043433040078827194,
+    "perstep_code_M5": 4.069314612891414e-09,
+    "traj_k5": 0.04086466977299303
+   },
+   "10": {
+    "euler": 0.010659470189302985,
+    "perstep_code_M5": 8.490956964304945e-13,
+    "traj_k5": 0.001987503419361099
+   },
+   "20": {
+    "euler": 0.0026349878974579527,
+    "perstep_code_M5": 1.909488798799486e-16,
+    "traj_k5": 0.00011172796641146406
+   },
+   "50": {
+    "euler": 0.0004190316269245646,
+    "perstep_code_M5": 3.0478724413205573e-21,
+    "traj_k5": 2.8103477393733125e-06
+   },
+   "100": {
+    "euler": 0.00010456763925344222,
+    "perstep_code_M5": 7.318411465795737e-25,
+    "traj_k5": 1.7640107876645712e-07
+   }
+  }
+ },
+ "toy_dct": {
+  "K1": {
+   "energy_fraction_of_white_noise": 0.020000000000000004,
+   "rowvar_of_expanded_N01_coeffs_mean": 0.02,
+   "orthonormal_columns": true
+  },
+  "K5": {
+   "energy_fraction_of_white_noise": 0.10000000000000002,
+   "rowvar_of_expanded_N01_coeffs_mean": 0.1,
+   "orthonormal_columns": true
+  },
+  "K10": {
+   "energy_fraction_of_white_noise": 0.2,
+   "rowvar_of_expanded_N01_coeffs_mean": 0.2,
+   "orthonormal_columns": true
+  },
+  "K20": {
+   "energy_fraction_of_white_noise": 0.4,
+   "rowvar_of_expanded_N01_coeffs_mean": 0.4000000000000001,
+   "orthonormal_columns": true
+  },
+  "K50": {
+   "energy_fraction_of_white_noise": 0.9999999999999999,
+   "rowvar_of_expanded_N01_coeffs_mean": 0.9999999999999999,
+   "orthonormal_columns": true
+  },
+  "k10_relative_residual_energy": {
+   "white_noise": 0.7969635030763708,
+   "random_walk_smooth": 0.028393195794286088
+  }
+ }
+}
