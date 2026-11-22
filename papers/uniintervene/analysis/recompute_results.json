@@ -1,0 +1,743 @@
+{
+  "t1_counts": {
+    "pi0.5 SFT": [
+      19,
+      6,
+      2,
+      13,
+      14
+    ],
+    "HiL-SERL": [
+      18,
+      12,
+      17,
+      17,
+      17
+    ],
+    "HiL-SERL+FA-RL": [
+      17,
+      12,
+      15,
+      16,
+      17
+    ],
+    "HiL-SERL+Uni": [
+      19,
+      14,
+      19,
+      18,
+      18
+    ]
+  },
+  "t1_integer_feasible": true,
+  "t1_sr_avg_recomputed": {
+    "pi0.5 SFT": 54.0,
+    "HiL-SERL": 81.0,
+    "HiL-SERL+FA-RL": 77.0,
+    "HiL-SERL+Uni": 88.0
+  },
+  "t1_sr_avg_matches_paper": {
+    "pi0.5 SFT": true,
+    "HiL-SERL": true,
+    "HiL-SERL+FA-RL": true,
+    "HiL-SERL+Uni": true
+  },
+  "t1_ir_avg_recomputed": {
+    "HiL-SERL": 34.3,
+    "HiL-SERL+FA-RL": 24.64,
+    "HiL-SERL+Uni": 14.58
+  },
+  "t1_ir_avg_matches_paper": {
+    "HiL-SERL": true,
+    "HiL-SERL+FA-RL": true,
+    "HiL-SERL+Uni": true
+  },
+  "headline": {
+    "sr_gain_abs_pp_vs_hilserl": 7.0,
+    "sr_gain_rel_pct_vs_hilserl": 8.641975308641975,
+    "sr_gain_abs_pp_vs_fa": 11.0,
+    "sr_gain_rel_pct_vs_fa": 14.285714285714286,
+    "ir_cut_rel_pct_vs_hilserl_ratio_of_means": 57.492711370262384,
+    "ir_cut_rel_pct_vs_hilserl_mean_of_taskratios": 58.24926682111321,
+    "ir_cut_rel_pct_vs_fa": 40.82792207792208,
+    "ir_cut_abs_pp_vs_hilserl": 19.719999999999995,
+    "ir_ratio_uni_over_hilserl": 0.42507288629737616,
+    "ir_cut_per_task_pct_vs_hilserl": [
+      65.2,
+      47.7,
+      62.5,
+      64.3,
+      51.6
+    ]
+  },
+  "t1_wilson95_pct": {
+    "pi0.5 SFT": [
+      [
+        76.4,
+        99.1
+      ],
+      [
+        14.5,
+        51.9
+      ],
+      [
+        2.8,
+        30.1
+      ],
+      [
+        43.3,
+        81.9
+      ],
+      [
+        48.1,
+        85.5
+      ]
+    ],
+    "HiL-SERL": [
+      [
+        69.9,
+        97.2
+      ],
+      [
+        38.7,
+        78.1
+      ],
+      [
+        64.0,
+        94.8
+      ],
+      [
+        64.0,
+        94.8
+      ],
+      [
+        64.0,
+        94.8
+      ]
+    ],
+    "HiL-SERL+FA-RL": [
+      [
+        64.0,
+        94.8
+      ],
+      [
+        38.7,
+        78.1
+      ],
+      [
+        53.1,
+        88.8
+      ],
+      [
+        58.4,
+        91.9
+      ],
+      [
+        64.0,
+        94.8
+      ]
+    ],
+    "HiL-SERL+Uni": [
+      [
+        76.4,
+        99.1
+      ],
+      [
+        48.1,
+        85.5
+      ],
+      [
+        76.4,
+        99.1
+      ],
+      [
+        69.9,
+        97.2
+      ],
+      [
+        69.9,
+        97.2
+      ]
+    ]
+  },
+  "t1_per_task": [
+    {
+      "task": "Pick Eggplant",
+      "uni_vs_hilserl": {
+        "comparison": "Pick Eggplant",
+        "k1": 19,
+        "n1": 20,
+        "k2": 18,
+        "n2": 20,
+        "diff_pp": 5.0,
+        "newcombe95_pp": [
+          -15.0,
+          25.5
+        ],
+        "fisher_p": 1.0
+      },
+      "uni_vs_fa": {
+        "comparison": "Pick Eggplant",
+        "k1": 19,
+        "n1": 20,
+        "k2": 17,
+        "n2": 20,
+        "diff_pp": 10.0,
+        "newcombe95_pp": [
+          -11.0,
+          31.4
+        ],
+        "fisher_p": 0.605
+      },
+      "uni_vs_sft": {
+        "comparison": "Pick Eggplant",
+        "k1": 19,
+        "n1": 20,
+        "k2": 19,
+        "n2": 20,
+        "diff_pp": 0.0,
+        "newcombe95_pp": [
+          -19.1,
+          19.1
+        ],
+        "fisher_p": 1.0
+      }
+    },
+    {
+      "task": "Tube Insertion",
+      "uni_vs_hilserl": {
+        "comparison": "Tube Insertion",
+        "k1": 14,
+        "n1": 20,
+        "k2": 12,
+        "n2": 20,
+        "diff_pp": 10.0,
+        "newcombe95_pp": [
+          -18.4,
+          36.3
+        ],
+        "fisher_p": 0.7411
+      },
+      "uni_vs_fa": {
+        "comparison": "Tube Insertion",
+        "k1": 14,
+        "n1": 20,
+        "k2": 12,
+        "n2": 20,
+        "diff_pp": 10.0,
+        "newcombe95_pp": [
+          -18.4,
+          36.3
+        ],
+        "fisher_p": 0.7411
+      },
+      "uni_vs_sft": {
+        "comparison": "Tube Insertion",
+        "k1": 14,
+        "n1": 20,
+        "k2": 6,
+        "n2": 20,
+        "diff_pp": 40.0,
+        "newcombe95_pp": [
+          9.0,
+          61.9
+        ],
+        "fisher_p": 0.0256
+      }
+    },
+    {
+      "task": "RAM Insertion",
+      "uni_vs_hilserl": {
+        "comparison": "RAM Insertion",
+        "k1": 19,
+        "n1": 20,
+        "k2": 17,
+        "n2": 20,
+        "diff_pp": 10.0,
+        "newcombe95_pp": [
+          -11.0,
+          31.4
+        ],
+        "fisher_p": 0.605
+      },
+      "uni_vs_fa": {
+        "comparison": "RAM Insertion",
+        "k1": 19,
+        "n1": 20,
+        "k2": 15,
+        "n2": 20,
+        "diff_pp": 20.0,
+        "newcombe95_pp": [
+          -3.2,
+          42.3
+        ],
+        "fisher_p": 0.1818
+      },
+      "uni_vs_sft": {
+        "comparison": "RAM Insertion",
+        "k1": 19,
+        "n1": 20,
+        "k2": 2,
+        "n2": 20,
+        "diff_pp": 85.0,
+        "newcombe95_pp": [
+          57.6,
+          93.3
+        ],
+        "fisher_p": 0.0
+      }
+    },
+    {
+      "task": "Wipe Whiteboard",
+      "uni_vs_hilserl": {
+        "comparison": "Wipe Whiteboard",
+        "k1": 18,
+        "n1": 20,
+        "k2": 17,
+        "n2": 20,
+        "diff_pp": 5.0,
+        "newcombe95_pp": [
+          -17.3,
+          27.2
+        ],
+        "fisher_p": 1.0
+      },
+      "uni_vs_fa": {
+        "comparison": "Wipe Whiteboard",
+        "k1": 18,
+        "n1": 20,
+        "k2": 16,
+        "n2": 20,
+        "diff_pp": 10.0,
+        "newcombe95_pp": [
+          -13.4,
+          32.8
+        ],
+        "fisher_p": 0.6614
+      },
+      "uni_vs_sft": {
+        "comparison": "Wipe Whiteboard",
+        "k1": 18,
+        "n1": 20,
+        "k2": 13,
+        "n2": 20,
+        "diff_pp": 25.0,
+        "newcombe95_pp": [
+          -1.3,
+          47.9
+        ],
+        "fisher_p": 0.1274
+      }
+    },
+    {
+      "task": "Fold Towel",
+      "uni_vs_hilserl": {
+        "comparison": "Fold Towel",
+        "k1": 18,
+        "n1": 20,
+        "k2": 17,
+        "n2": 20,
+        "diff_pp": 5.0,
+        "newcombe95_pp": [
+          -17.3,
+          27.2
+        ],
+        "fisher_p": 1.0
+      },
+      "uni_vs_fa": {
+        "comparison": "Fold Towel",
+        "k1": 18,
+        "n1": 20,
+        "k2": 17,
+        "n2": 20,
+        "diff_pp": 5.0,
+        "newcombe95_pp": [
+          -17.3,
+          27.2
+        ],
+        "fisher_p": 1.0
+      },
+      "uni_vs_sft": {
+        "comparison": "Fold Towel",
+        "k1": 18,
+        "n1": 20,
+        "k2": 14,
+        "n2": 20,
+        "diff_pp": 20.0,
+        "newcombe95_pp": [
+          -5.4,
+          43.1
+        ],
+        "fisher_p": 0.2351
+      }
+    }
+  ],
+  "t1_pooled_counts_of_100": {
+    "pi0.5 SFT": 54,
+    "HiL-SERL": 81,
+    "HiL-SERL+FA-RL": 77,
+    "HiL-SERL+Uni": 88
+  },
+  "t1_pooled": [
+    {
+      "comparison": "Uni vs HiL-SERL (100 vs 100)",
+      "k1": 88,
+      "n1": 100,
+      "k2": 81,
+      "n2": 100,
+      "diff_pp": 7.0,
+      "newcombe95_pp": [
+        -3.2,
+        17.1
+      ],
+      "fisher_p": 0.2408
+    },
+    {
+      "comparison": "Uni vs FA-RL (100 vs 100)",
+      "k1": 88,
+      "n1": 100,
+      "k2": 77,
+      "n2": 100,
+      "diff_pp": 11.0,
+      "newcombe95_pp": [
+        0.4,
+        21.4
+      ],
+      "fisher_p": 0.0617
+    },
+    {
+      "comparison": "HiL-SERL vs FA-RL (100 vs 100)",
+      "k1": 81,
+      "n1": 100,
+      "k2": 77,
+      "n2": 100,
+      "diff_pp": 4.0,
+      "newcombe95_pp": [
+        -7.3,
+        15.2
+      ],
+      "fisher_p": 0.6029
+    },
+    {
+      "comparison": "Uni vs pi0.5 SFT (100 vs 100)",
+      "k1": 88,
+      "n1": 100,
+      "k2": 54,
+      "n2": 100,
+      "diff_pp": 34.0,
+      "newcombe95_pp": [
+        21.7,
+        44.9
+      ],
+      "fisher_p": 0.0
+    }
+  ],
+  "t1_mh_uni_vs_HiL-SERL": {
+    "chi2": 1.972,
+    "p": 0.1602,
+    "common_odds_ratio": 1.8
+  },
+  "t1_mh_uni_vs_HiL-SERL+FA-RL": {
+    "chi2": 4.325,
+    "p": 0.0375,
+    "common_odds_ratio": 2.29
+  },
+  "t1_sign": {
+    "uni_ge_hilserl_tasks": 5,
+    "uni_gt_hilserl_tasks": 5,
+    "uni_gt_fa_tasks": 5,
+    "tie_with_sft_on_eggplant": true,
+    "sign_test_p_5of5_one_sided": 0.03125
+  },
+  "t1_sft_vs_hilserl_eggplant_drop_pp": 5,
+  "t1_power": {
+    "n_per_arm_88_vs_81": 416,
+    "n_per_arm_95_vs_90": 432,
+    "n_per_arm_95_vs_85": 138,
+    "n_per_arm_70_vs_60": 354,
+    "n_per_arm_88_vs_77": 184
+  },
+  "t1_ir_sd_sensitivity": [
+    {
+      "task": "Pick Eggplant",
+      "vs": "HiL-SERL",
+      "diff_pp": 18.7,
+      "max_pooled_sd_for_p05": 8.25
+    },
+    {
+      "task": "Pick Eggplant",
+      "vs": "HiL-SERL+FA-RL",
+      "diff_pp": 10.4,
+      "max_pooled_sd_for_p05": 4.59
+    },
+    {
+      "task": "Tube Insertion",
+      "vs": "HiL-SERL",
+      "diff_pp": 14.4,
+      "max_pooled_sd_for_p05": 6.35
+    },
+    {
+      "task": "Tube Insertion",
+      "vs": "HiL-SERL+FA-RL",
+      "diff_pp": 6.3,
+      "max_pooled_sd_for_p05": 2.78
+    },
+    {
+      "task": "RAM Insertion",
+      "vs": "HiL-SERL",
+      "diff_pp": 20.2,
+      "max_pooled_sd_for_p05": 8.91
+    },
+    {
+      "task": "RAM Insertion",
+      "vs": "HiL-SERL+FA-RL",
+      "diff_pp": 15.8,
+      "max_pooled_sd_for_p05": 6.97
+    },
+    {
+      "task": "Wipe Whiteboard",
+      "vs": "HiL-SERL",
+      "diff_pp": 19.6,
+      "max_pooled_sd_for_p05": 8.65
+    },
+    {
+      "task": "Wipe Whiteboard",
+      "vs": "HiL-SERL+FA-RL",
+      "diff_pp": 11.0,
+      "max_pooled_sd_for_p05": 4.85
+    },
+    {
+      "task": "Fold Towel",
+      "vs": "HiL-SERL",
+      "diff_pp": 25.7,
+      "max_pooled_sd_for_p05": 11.34
+    },
+    {
+      "task": "Fold Towel",
+      "vs": "HiL-SERL+FA-RL",
+      "diff_pp": 6.8,
+      "max_pooled_sd_for_p05": 3.0
+    }
+  ],
+  "t1_ir_note": "IR 표준편차와 개별 실행 값이 논문에 없어 검정 불가. 위 값은 'SD가 이 값 이하면 Welch p<0.05'의 상한(양측, df=4 근사).",
+  "t2_table": {
+    "w/o Future Pred.": {
+      "qloss": 0.005,
+      "f1": 0.878,
+      "sr": 90,
+      "ir": 15.8
+    },
+    "w/o Value Pred.": {
+      "qloss": null,
+      "f1": 0.845,
+      "sr": 85,
+      "ir": 18.7
+    },
+    "w/o TVR": {
+      "qloss": 0.004,
+      "f1": 0.832,
+      "sr": 85,
+      "ir": 16.9
+    },
+    "w/o Memory Goal": {
+      "qloss": 0.004,
+      "f1": 0.882,
+      "sr": 85,
+      "ir": 16.1
+    },
+    "UniIntervene": {
+      "qloss": 0.004,
+      "f1": 0.882,
+      "sr": 95,
+      "ir": 11.1
+    }
+  },
+  "t2_consistency_with_t1": {
+    "SR_mean_two_tasks": 95.0,
+    "IR_mean_two_tasks": 11.05,
+    "table2_full_sr": 95,
+    "table2_full_ir": 11.1,
+    "ir_exact_half_rounding": "11.05 -> 11.1 (반올림 규칙에 따라 11.0 또는 11.1)"
+  },
+  "t2_text_checks": {
+    "text_says_w/o_value_pred_has_lowest_F1_0.845": false,
+    "actual_lowest_F1_variant": "w/o TVR",
+    "actual_lowest_F1": 0.832,
+    "text_says_w/o_value_pred_has_highest_IR_18.7": true,
+    "text_says_future_and_memory_keep_F1_nearly_intact": [
+      0.878,
+      0.882
+    ],
+    "text_says_SR_drops_95_to_90_and_85": [
+      90,
+      85
+    ],
+    "full_best_on_all_metrics_strict": {
+      "qloss_tie": true,
+      "f1_tie_with_w/o_Memory": true
+    },
+    "three_variants_share_SR_85": [
+      "w/o Value Pred.",
+      "w/o TVR",
+      "w/o Memory Goal"
+    ]
+  },
+  "t2_counts_of_40": {
+    "w/o Future Pred.": 36,
+    "w/o Value Pred.": 34,
+    "w/o TVR": 34,
+    "w/o Memory Goal": 34,
+    "UniIntervene": 38
+  },
+  "t2_vs_full": [
+    {
+      "comparison": "Full vs w/o Future Pred.",
+      "k1": 38,
+      "n1": 40,
+      "k2": 36,
+      "n2": 40,
+      "diff_pp": 5.0,
+      "newcombe95_pp": [
+        -8.0,
+        18.5
+      ],
+      "fisher_p": 0.6752
+    },
+    {
+      "comparison": "Full vs w/o Value Pred.",
+      "k1": 38,
+      "n1": 40,
+      "k2": 34,
+      "n2": 40,
+      "diff_pp": 10.0,
+      "newcombe95_pp": [
+        -4.0,
+        24.5
+      ],
+      "fisher_p": 0.2633
+    },
+    {
+      "comparison": "Full vs w/o TVR",
+      "k1": 38,
+      "n1": 40,
+      "k2": 34,
+      "n2": 40,
+      "diff_pp": 10.0,
+      "newcombe95_pp": [
+        -4.0,
+        24.5
+      ],
+      "fisher_p": 0.2633
+    },
+    {
+      "comparison": "Full vs w/o Memory Goal",
+      "k1": 38,
+      "n1": 40,
+      "k2": 34,
+      "n2": 40,
+      "diff_pp": 10.0,
+      "newcombe95_pp": [
+        -4.0,
+        24.5
+      ],
+      "fisher_p": 0.2633
+    }
+  ],
+  "t2_wilson95_full_pct": [
+    83.5,
+    98.6
+  ],
+  "t2_power": {
+    "n_per_arm_95_vs_85": 138,
+    "n_per_arm_95_vs_90": 432
+  },
+  "t2_vs_baselines_two_task_mean": {
+    "hilserl_sr": 87.5,
+    "hilserl_ir": 30.5,
+    "fa_sr": 80.0,
+    "fa_ir": 24.15,
+    "ir_cut_pct_vs_hilserl": {
+      "w/o Future Pred.": 48.2,
+      "w/o Value Pred.": 38.7,
+      "w/o TVR": 44.6,
+      "w/o Memory Goal": 47.2,
+      "UniIntervene": 63.6
+    },
+    "sr_minus_hilserl_pp": {
+      "w/o Future Pred.": 2.5,
+      "w/o Value Pred.": -2.5,
+      "w/o TVR": -2.5,
+      "w/o Memory Goal": -2.5,
+      "UniIntervene": 7.5
+    }
+  },
+  "t5_items_equal_bins_x_quota": {
+    "Pick Eggplant": true,
+    "Tube Insertion": true,
+    "RAM Insertion": true,
+    "Wipe Whiteboard": true,
+    "Fold Towel": true
+  },
+  "t5_candidates_range": [
+    3574,
+    40742
+  ],
+  "t5_items_over_candidates_pct": {
+    "Pick Eggplant": 1.01,
+    "Tube Insertion": 0.81,
+    "RAM Insertion": 0.29,
+    "Wipe Whiteboard": 0.68,
+    "Fold Towel": 6.72
+  },
+  "fig7_vs_t5_fold_candidates": {
+    "fig7_caption": 3973,
+    "table5": 3574,
+    "diff": 399,
+    "items_over_candidates_fig7_pct": 6.04
+  },
+  "t6_text_checks": {
+    "top1_sim_all_above_0.95": true,
+    "top1_sim_0.99_on_insertion_and_pick": true,
+    "value_lift_range": [
+      0.339,
+      0.563
+    ],
+    "text_range_0.34_to_0.56": true,
+    "total_queries": 28419,
+    "queries_per_memory_item_insertion": 62.3,
+    "queries_per_memory_item_pick": 46.5,
+    "queries_per_memory_item_fold": 9.8,
+    "note": "Table 6의 Insertion은 RAM과 Tube를 합쳤지만 Table 5는 각각 120개 기억을 따로 적었다."
+  },
+  "c4_mean_value_success_ramp": {
+    "linear_ramp_mean_T42": 0.5,
+    "linear_ramp_mean_T95": 0.5000000000000001,
+    "paper_success_mean_insertion_and_eggplant": 0.53
+  },
+  "eq9_weights": {
+    "lambda": [
+      1.0,
+      0.3,
+      1.0,
+      0.05
+    ],
+    "main_text_form": "L_TD + L_prog + 0.05 L_CQL",
+    "note": "본문식은 L_label의 0.3을 L_prog 안에 묶어 쓴다. 가중치 자체는 표 3과 일치."
+  },
+  "fig3_claims": {
+    "ram_insertion_horizon_steps": 42,
+    "ram_trigger_step": 13,
+    "ram_trigger_frac": 0.31,
+    "fold_horizon_steps": 95,
+    "fold_trigger_step": 8,
+    "fold_trigger_frac": 0.084,
+    "window_K": 8,
+    "note": "Fold Towel의 트리거 8단계는 K=8 창이 처음 가득 차는 시점과 같다."
+  },
+  "tvr_scale": {
+    "sum_gamma_r_pow": 5.6953279000000006,
+    "R_flat_window_V0": 0.028476639500000005,
+    "sigmoid_of_that": 0.5071186788255103,
+    "eps_equiv_episode_len_steps": 200.0
+  }
+}

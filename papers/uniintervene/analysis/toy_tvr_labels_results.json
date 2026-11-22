@@ -1,0 +1,147 @@
+{
+  "A_healthy_linear_ramp": {
+    "20": {
+      "step_dV": 0.05263,
+      "mined_positive_frac": 0.0,
+      "R_positive_frac(sign)": 0.05,
+      "R_min": -0.1571,
+      "R_max": 0.0285
+    },
+    "30": {
+      "step_dV": 0.03448,
+      "mined_positive_frac": 0.0,
+      "R_positive_frac(sign)": 0.033,
+      "R_min": -0.1216,
+      "R_max": 0.0285
+    },
+    "42": {
+      "step_dV": 0.02439,
+      "mined_positive_frac": 0.095,
+      "R_positive_frac(sign)": 0.048,
+      "R_min": -0.0889,
+      "R_max": 0.0285
+    },
+    "60": {
+      "step_dV": 0.01695,
+      "mined_positive_frac": 0.983,
+      "R_positive_frac(sign)": 0.033,
+      "R_min": -0.0588,
+      "R_max": 0.0285
+    },
+    "95": {
+      "step_dV": 0.01064,
+      "mined_positive_frac": 0.989,
+      "R_positive_frac(sign)": 0.032,
+      "R_min": -0.0294,
+      "R_max": 0.0285
+    },
+    "150": {
+      "step_dV": 0.00671,
+      "mined_positive_frac": 0.993,
+      "R_positive_frac(sign)": 0.04,
+      "R_min": -0.0092,
+      "R_max": 0.0285
+    },
+    "200": {
+      "step_dV": 0.00503,
+      "mined_positive_frac": 0.995,
+      "R_positive_frac(sign)": 0.04,
+      "R_min": -0.0001,
+      "R_max": 0.0285
+    },
+    "300": {
+      "step_dV": 0.00334,
+      "mined_positive_frac": 0.997,
+      "R_positive_frac(sign)": 0.997,
+      "R_min": 0.0,
+      "R_max": 0.0285
+    }
+  },
+  "A_plateau_all_positive_min_T": 60,
+  "A_eps_matches_episode_len": 200.0,
+  "B_score_range": {
+    "R_min": -1.68,
+    "R_max": 1.737,
+    "sigmoid_min": 0.157,
+    "sigmoid_max": 0.85,
+    "threshold_0.5_equals_R_sign": true,
+    "R_zero_when_window_mean_dV_equals_eps": true
+  },
+  "C_noisy_ramp_with_stall": {
+    "42": {
+      "stall_len": 8,
+      "mined_vs_truth_stall": {
+        "tp": 814,
+        "fp": 1155,
+        "fn": 786,
+        "tn": 5645,
+        "precision": 0.413,
+        "recall": 0.509,
+        "pos_rate": 0.234
+      },
+      "R_sign_vs_truth_stall": {
+        "tp": 273,
+        "fp": 665,
+        "fn": 1327,
+        "tn": 6135,
+        "precision": 0.291,
+        "recall": 0.171,
+        "pos_rate": 0.112
+      },
+      "R_sign_vs_mined": {
+        "tp": 630,
+        "fp": 308,
+        "fn": 1339,
+        "tn": 6123,
+        "precision": 0.672,
+        "recall": 0.32,
+        "pos_rate": 0.112
+      }
+    },
+    "95": {
+      "stall_len": 14,
+      "mined_vs_truth_stall": {
+        "tp": 2800,
+        "fp": 15999,
+        "fn": 0,
+        "tn": 201,
+        "precision": 0.149,
+        "recall": 1.0,
+        "pos_rate": 0.989
+      },
+      "R_sign_vs_truth_stall": {
+        "tp": 1904,
+        "fp": 1449,
+        "fn": 896,
+        "tn": 14751,
+        "precision": 0.568,
+        "recall": 0.68,
+        "pos_rate": 0.176
+      },
+      "R_sign_vs_mined": {
+        "tp": 3153,
+        "fp": 200,
+        "fn": 15646,
+        "tn": 1,
+        "precision": 0.94,
+        "recall": 0.168,
+        "pos_rate": 0.176
+      }
+    }
+  },
+  "D_early_steps_with_padding": {
+    "42": {
+      "R_sign_positive_steps_in_first_10": [
+        0,
+        1
+      ]
+    },
+    "95": {
+      "R_sign_positive_steps_in_first_10": [
+        0,
+        1,
+        2
+      ]
+    }
+  }
+}
