@@ -1,0 +1,403 @@
+{
+  "V1_table4_overall": {
+    "DINO-WM": {
+      "recomputed_mean_of_8_rows": [
+        1.389,
+        0.72,
+        0.295,
+        0.792
+      ],
+      "reported_overall": [
+        1.162,
+        0.725,
+        0.29,
+        0.799
+      ],
+      "diff": [
+        0.227,
+        -0.005,
+        0.006,
+        -0.007
+      ]
+    },
+    "PLDM": {
+      "recomputed_mean_of_8_rows": [
+        0.59,
+        0.478,
+        0.506,
+        0.583
+      ],
+      "reported_overall": [
+        0.611,
+        0.464,
+        0.503,
+        0.6
+      ],
+      "diff": [
+        -0.021,
+        0.014,
+        0.003,
+        -0.017
+      ]
+    },
+    "LeWM": {
+      "recomputed_mean_of_8_rows": [
+        0.564,
+        0.5,
+        0.511,
+        0.588
+      ],
+      "reported_overall": [
+        0.592,
+        0.477,
+        0.525,
+        0.584
+      ],
+      "diff": [
+        -0.028,
+        0.023,
+        -0.014,
+        0.004
+      ]
+    }
+  },
+  "V2_table1_checks": {
+    "Agent Location": {
+      "LeWM_better_than_PLDM_all_4": true,
+      "LeWM_linear_r_beats_DINO": false,
+      "DINO_linear_MSE_lower_than_LeWM": false
+    },
+    "Block Location": {
+      "LeWM_better_than_PLDM_all_4": true,
+      "LeWM_linear_r_beats_DINO": false,
+      "DINO_linear_MSE_lower_than_LeWM": true
+    },
+    "Block Angle": {
+      "LeWM_better_than_PLDM_all_4": true,
+      "LeWM_linear_r_beats_DINO": false,
+      "DINO_linear_MSE_lower_than_LeWM": true
+    }
+  },
+  "V3_fig6_tests": {
+    "assumption": "그림 6 값을 k/50 비율로 본다(표 5의 50 궤적). 시드 3개 합산이면 n = 150으로 본다.",
+    "cells": {
+      "Two-Room: LeWM vs PLDM": {
+        "n50": {
+          "diff_pp": -10.0,
+          "z": -1.88,
+          "p": 0.0608
+        },
+        "n150": {
+          "diff_pp": -10.0,
+          "z": -3.25,
+          "p": 0.0012
+        }
+      },
+      "Two-Room: LeWM vs DINO-WM": {
+        "n50": {
+          "diff_pp": -13.0,
+          "z": -2.73,
+          "p": 0.0063
+        },
+        "n150": {
+          "diff_pp": -13.0,
+          "z": -4.73,
+          "p": 0.0
+        }
+      },
+      "Reacher: LeWM vs PLDM": {
+        "n50": {
+          "diff_pp": 8.0,
+          "z": 1.05,
+          "p": 0.2952
+        },
+        "n150": {
+          "diff_pp": 8.0,
+          "z": 1.81,
+          "p": 0.0698
+        }
+      },
+      "Reacher: LeWM vs DINO-WM": {
+        "n50": {
+          "diff_pp": 7.0,
+          "z": 0.93,
+          "p": 0.3549
+        },
+        "n150": {
+          "diff_pp": 7.0,
+          "z": 1.6,
+          "p": 0.1091
+        }
+      },
+      "Push-T: LeWM vs PLDM": {
+        "n50": {
+          "diff_pp": 18.0,
+          "z": 2.78,
+          "p": 0.0055
+        },
+        "n150": {
+          "diff_pp": 18.0,
+          "z": 4.81,
+          "p": 0.0
+        }
+      },
+      "Push-T: LeWM vs DINO-WM+prop": {
+        "n50": {
+          "diff_pp": 4.0,
+          "z": 0.85,
+          "p": 0.398
+        },
+        "n150": {
+          "diff_pp": 4.0,
+          "z": 1.46,
+          "p": 0.1432
+        }
+      },
+      "Push-T: LeWM vs DINO-WM": {
+        "n50": {
+          "diff_pp": 22.0,
+          "z": 3.24,
+          "p": 0.0012
+        },
+        "n150": {
+          "diff_pp": 22.0,
+          "z": 5.61,
+          "p": 0.0
+        }
+      },
+      "OGBench-Cube: LeWM vs DINO-WM": {
+        "n50": {
+          "diff_pp": -12.0,
+          "z": -1.52,
+          "p": 0.1292
+        },
+        "n150": {
+          "diff_pp": -12.0,
+          "z": -2.63,
+          "p": 0.0086
+        }
+      },
+      "OGBench-Cube: LeWM vs PLDM": {
+        "n50": {
+          "diff_pp": 9.0,
+          "z": 0.98,
+          "p": 0.3261
+        },
+        "n150": {
+          "diff_pp": 9.0,
+          "z": 1.7,
+          "p": 0.0889
+        }
+      }
+    },
+    "wilson95_n50": {
+      "Two-Room/LeWM": [
+        75.0,
+        93.7
+      ],
+      "Two-Room/PLDM": [
+        88.0,
+        99.3
+      ],
+      "Two-Room/DINO-WM": [
+        92.9,
+        100.0
+      ],
+      "Reacher/LeWM": [
+        73.8,
+        93.0
+      ],
+      "Reacher/PLDM": [
+        64.8,
+        87.2
+      ],
+      "Reacher/DINO-WM": [
+        65.9,
+        88.0
+      ],
+      "Push-T/LeWM": [
+        86.5,
+        98.9
+      ],
+      "Push-T/PLDM": [
+        64.8,
+        87.2
+      ],
+      "Push-T/DINO-WM": [
+        60.4,
+        84.1
+      ],
+      "OGBench-Cube/LeWM": [
+        60.4,
+        84.1
+      ],
+      "OGBench-Cube/PLDM": [
+        51.1,
+        76.7
+      ],
+      "OGBench-Cube/DINO-WM": [
+        73.8,
+        93.0
+      ]
+    },
+    "k_over_50_feasible": {
+      "Two-Room": {
+        "LeWM": false,
+        "PLDM": false
+      },
+      "Reacher": {
+        "DINO-WM": false
+      },
+      "Push-T": {
+        "GCBC": false,
+        "GCIVL": false
+      },
+      "OGBench-Cube": {
+        "PLDM": false
+      }
+    }
+  },
+  "V4_seed_welch": {
+    "LeWM_vs_PLDM_pushT_ddof0": [
+      4.43,
+      3.16,
+      0.0191
+    ],
+    "LeWM_vs_PLDM_pushT_ddof1": [
+      5.43,
+      3.16,
+      0.0107
+    ],
+    "LeWM_vs_DINOWMprop_pushT_ddof0": [
+      1.73,
+      3.2,
+      0.176
+    ],
+    "LeWM_vs_DINOWMprop_pushT_ddof1": [
+      2.12,
+      3.2,
+      0.1185
+    ],
+    "note": "시드 3개뿐이라 검정력이 매우 낮다. SD 정의를 모르므로 두 경우를 함께 적는다."
+  },
+  "V5_granularity": {
+    "T5 LeWM PushT": {
+      "reported": "96.0 ± 2.83",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": true,
+        "ddof1": false
+      }
+    },
+    "T5 DINO-WM PushT(+prop?)": {
+      "reported": "92.0 ± 1.63",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": true,
+        "ddof1": false
+      }
+    },
+    "T5 PLDM PushT": {
+      "reported": "78.0 ± 5.0",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": false,
+        "ddof1": false
+      }
+    },
+    "T6 tiny": {
+      "reported": "80.67 ± 6.54",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": false,
+        "ddof1": false
+      }
+    },
+    "T6 small": {
+      "reported": "96.0 ± 2.83",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": true,
+        "ddof1": false
+      }
+    },
+    "T6 base": {
+      "reported": "86.7 ± 3.06",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": false,
+        "ddof1": true
+      }
+    },
+    "T7 with decoder": {
+      "reported": "86.0 ± 7.54",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": false,
+        "ddof1": false
+      }
+    },
+    "T8 ResNet-18": {
+      "reported": "94.0 ± 3.27",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": true,
+        "ddof1": false
+      }
+    },
+    "T9 p=0.0": {
+      "reported": "78 ± 6.54",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": false,
+        "ddof1": false
+      }
+    },
+    "T9 p=0.2": {
+      "reported": "85.33 ± 5.74",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": false,
+        "ddof1": false
+      }
+    },
+    "T9 p=0.5": {
+      "reported": "66.67 ± 4.11",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": true,
+        "ddof1": false
+      }
+    },
+    "T10 SGD LeWM": {
+      "reported": "26 ± 4.32",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": true,
+        "ddof1": false
+      }
+    },
+    "T10 PLDM SGD": {
+      "reported": "4.67 ± 0.06",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": false,
+        "ddof1": false
+      }
+    },
+    "T10 RMSProp LeWM": {
+      "reported": "67.33 ± 2.49",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": true,
+        "ddof1": false
+      }
+    },
+    "T10 Adam LeWM": {
+      "reported": "84 ± 7.12",
+      "feasible_with_2pp_grid_3seeds_50ep": {
+        "ddof0": true,
+        "ddof1": false
+      }
+    }
+  },
+  "V6_speedup": {
+    "dino_full_planning_s": 47,
+    "lewm_full_planning_s": 0.98,
+    "ratio": 47.96,
+    "reported": "48x"
+  },
+  "V7_sigreg_check": {
+    "setting": "T=4, B=128, D=192, 투영 1024, 매듭 17",
+    "isotropic_gaussian": 1.0473,
+    "collapsed_near_constant": 51.4721,
+    "anisotropic_gaussian": 35.1285,
+    "note": "논문 식 (EP)에는 배치 크기 N 곱셈이 없고 t 구간은 [0.2, 4]로 적혀 있으나, 공식 코드는 [0, 3]과 N 배 곱셈을 쓴다(04 D4)."
+  }
+}
