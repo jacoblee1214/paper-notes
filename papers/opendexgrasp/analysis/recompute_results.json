@@ -1,0 +1,214 @@
+{
+  "t1_scale_functional_ratio_pct": 44.93,
+  "t1_align_functional_ratio_pct": 68.02,
+  "t1_align_total_grasps": 27425,
+  "t1_align_total_vs_table_27.42k": 27.425,
+  "b1_category_size_pairs": 185,
+  "b1_categories": 105,
+  "b2_teleop_grasps_check": 1590,
+  "t2_ours_lower_SIV_PD_SD_all_splits": true,
+  "t2_SR_gain_pp": {
+    "func-seen": 17.19,
+    "func-unseen": 19.74,
+    "nonfunc-seen": 12.19,
+    "nonfunc-unseen": 12.24
+  },
+  "t2_SIV_reduction_pct": {
+    "func-seen": 75.0,
+    "func-unseen": 79.7,
+    "nonfunc-seen": 73.3,
+    "nonfunc-unseen": 74.8
+  },
+  "t2_weighted_avg_by_instance_75_15_138_15": {
+    "DGN2star_SIV": 5.15,
+    "DGN2star_PD": 0.976,
+    "DGN2star_SD": 2.407,
+    "DGN2star_SR": 57.666,
+    "DGN2star_Sty": 1.054,
+    "Ours_SIV": 1.316,
+    "Ours_PD": 0.416,
+    "Ours_SD": 1.209,
+    "Ours_SR": 71.869,
+    "Ours_Sty": 1.473
+  },
+  "t3_full_minus_weighted_inst": {
+    "SIV": -0.006,
+    "PD": -0.006,
+    "SD": -0.009,
+    "SR": -0.219,
+    "Sty": -0.003
+  },
+  "t3_noVLM_minus_DGN2star_weighted_inst": {
+    "SIV": 0.0,
+    "PD": 0.004,
+    "SD": -0.087,
+    "SR": -0.406,
+    "Sty": -0.004
+  },
+  "t2_SR_z_with_instance_n": {
+    "func-seen": {
+      "z_instance_n": 2.18,
+      "p_two_sided": 0.0294
+    },
+    "func-unseen": {
+      "z_instance_n": 1.11,
+      "p_two_sided": 0.2691
+    },
+    "nonfunc-seen": {
+      "z_instance_n": 2.22,
+      "p_two_sided": 0.0267
+    },
+    "nonfunc-unseen": {
+      "z_instance_n": 0.69,
+      "p_two_sided": 0.4893
+    }
+  },
+  "t2_SR_z_if_trials_independent_upper_bound": {
+    "func-seen": {
+      "z": 6.89,
+      "p": 5.7e-12
+    },
+    "func-unseen": {
+      "z": 3.49,
+      "p": 0.000475
+    },
+    "nonfunc-seen": {
+      "z": 7.01,
+      "p": 2.42e-12
+    },
+    "nonfunc-unseen": {
+      "z": 2.19,
+      "p": 0.0288
+    }
+  },
+  "t2_SR_integer_check_10trials": {
+    "DGN2star_func-seen": {
+      "N": 75,
+      "successes_expected": 381.6,
+      "distance_to_integer": 0.4
+    },
+    "DGN2star_func-unseen": {
+      "N": 15,
+      "successes_expected": 64.83,
+      "distance_to_integer": 0.17
+    },
+    "DGN2star_nonfunc-seen": {
+      "N": 138,
+      "successes_expected": 873.13,
+      "distance_to_integer": 0.13
+    },
+    "DGN2star_nonfunc-unseen": {
+      "N": 15,
+      "successes_expected": 81.74,
+      "distance_to_integer": 0.26
+    },
+    "Ours_func-seen": {
+      "N": 75,
+      "successes_expected": 510.52,
+      "distance_to_integer": 0.48
+    },
+    "Ours_func-unseen": {
+      "N": 15,
+      "successes_expected": 94.44,
+      "distance_to_integer": 0.44
+    },
+    "Ours_nonfunc-seen": {
+      "N": 138,
+      "successes_expected": 1041.35,
+      "distance_to_integer": 0.35
+    },
+    "Ours_nonfunc-unseen": {
+      "N": 15,
+      "successes_expected": 100.09,
+      "distance_to_integer": 0.09
+    }
+  },
+  "t3_SR_diff_pp_and_z_n243_clusters": {
+    "w/o affordance grounding": {
+      "diff_pp": 4.16,
+      "z_p": [
+        1.0,
+        0.3185
+      ]
+    },
+    "w/o OpenDex-Align": {
+      "diff_pp": 2.27,
+      "z_p": [
+        0.55,
+        0.5831
+      ]
+    },
+    "reduced OpenDex-Scale": {
+      "diff_pp": 11.13,
+      "z_p": [
+        2.61,
+        0.0091
+      ]
+    },
+    "w/o pretrained VLM": {
+      "diff_pp": 14.39,
+      "z_p": [
+        3.35,
+        0.0008
+      ]
+    }
+  },
+  "t4_avg_check": {
+    "SR_dgn_mean": 59.0,
+    "SR_our_mean": 72.0,
+    "GPT_dgn_mean": 6.68,
+    "GPT_our_mean": 7.46,
+    "HUM_dgn_mean": 6.53,
+    "HUM_our_mean": 7.72
+  },
+  "t4_success_counts_of_100": {
+    "dgn2star": 59,
+    "ours": 72
+  },
+  "t4_fisher_exact_72_vs_59_of_100": {
+    "odds_ratio": 1.787,
+    "p_two_sided": 0.0739
+  },
+  "t4_chi2_72_vs_59": {
+    "p": 0.0531
+  },
+  "t4_wilson95_ci_pct": {
+    "dgn2star": [
+      49.2,
+      68.1
+    ],
+    "ours": [
+      62.5,
+      79.9
+    ]
+  },
+  "t4_per_object_SR_diff": {
+    "wins": 8,
+    "ties": 2,
+    "losses": 0,
+    "sign_test_p_two_sided": 0.0078,
+    "mean_diff_pp": 13.0,
+    "paired_t_p": 0.0037,
+    "wilcoxon_p": 0.0097
+  },
+  "t4_per_object_GPT5_diff": {
+    "wins": 9,
+    "ties": 0,
+    "losses": 1,
+    "mean_diff": 0.78,
+    "wilcoxon_p": 0.0059,
+    "paired_t_p": 0.0032
+  },
+  "t4_per_object_Human_diff": {
+    "wins": 9,
+    "ties": 0,
+    "losses": 1,
+    "mean_diff": 1.19,
+    "wilcoxon_p": 0.0098,
+    "paired_t_p": 0.0024
+  },
+  "t7_speedup_vs_opt_baseline": 3.05,
+  "t7_ours_time_s": 0.93,
+  "success_threshold_m": 0.2,
+  "ratio_threshold_to_SD_ours_functional_seen": 14.6
+}
