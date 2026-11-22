@@ -1,0 +1,171 @@
+{
+ "T1_dct_layout": {
+  "chunk_shape": [
+   10,
+   8
+  ],
+  "gamma": 10,
+  "quantized_dc_row": [
+   -9,
+   -1,
+   -17,
+   -1,
+   -9,
+   0,
+   -21,
+   0
+  ],
+  "nonzero_in_k_ge_1": 0,
+  "flat_len": 80,
+  "flat_nonzero_positions": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   6
+  ],
+  "first_position_of_k1_block": 8,
+  "positions_touched_by_b0to3_w2": [
+   0,
+   4
+  ],
+  "conclusion": "b=0..3, w=2는 평탄화 위치 0–4 = 관절 1–5의 직류 계수. 고주파(k>=1)는 위치 8부터라 건드리지 않는다."
+ },
+ "T2_prefix_information": {
+  "ee_pos_m": [
+   0.36,
+   -0.0,
+   0.387
+  ],
+  "qdot_per_direction_rad_s": {
+   "forward": [
+    -0.0,
+    3.426,
+    -0.0,
+    2.382,
+    -0.0,
+    1.043,
+    -0.0
+   ],
+   "back": [
+    0.0,
+    -3.426,
+    0.0,
+    -2.382,
+    0.0,
+    -1.043,
+    0.0
+   ],
+   "left": [
+    0.909,
+    -0.0,
+    1.567,
+    -0.0,
+    0.969,
+    -0.0,
+    1.878
+   ],
+   "right": [
+    -0.909,
+    0.0,
+    -1.567,
+    0.0,
+    -0.969,
+    0.0,
+    -1.878
+   ]
+  },
+  "window_sweep_b0": {
+   "w1": {
+    "direction_recovered_fraction": 0.5,
+    "cos_with_intent": {
+     "forward": 0.0,
+     "back": 0.0,
+     "left": 1.0,
+     "right": 1.0
+    }
+   },
+   "w2": {
+    "direction_recovered_fraction": 1.0,
+    "cos_with_intent": {
+     "forward": 0.148,
+     "back": 0.148,
+     "left": 1.0,
+     "right": 1.0
+    }
+   },
+   "w4": {
+    "direction_recovered_fraction": 1.0,
+    "cos_with_intent": {
+     "forward": 0.993,
+     "back": 0.993,
+     "left": 1.0,
+     "right": 1.0
+    }
+   },
+   "w6": {
+    "direction_recovered_fraction": 1.0,
+    "cos_with_intent": {
+     "forward": 1.0,
+     "back": 1.0,
+     "left": 1.0,
+     "right": 1.0
+    }
+   }
+  },
+  "start_sweep_w2": {
+   "b0": {
+    "direction_recovered_fraction": 1.0,
+    "cos_with_intent": {
+     "forward": 0.148,
+     "back": 0.148,
+     "left": 1.0,
+     "right": 1.0
+    }
+   },
+   "b1": {
+    "direction_recovered_fraction": 1.0,
+    "cos_with_intent": {
+     "forward": 0.148,
+     "back": 0.148,
+     "left": 1.0,
+     "right": 1.0
+    }
+   },
+   "b2": {
+    "direction_recovered_fraction": 1.0,
+    "cos_with_intent": {
+     "forward": 0.463,
+     "back": 0.463,
+     "left": 1.0,
+     "right": 1.0
+    }
+   },
+   "b3": {
+    "direction_recovered_fraction": 1.0,
+    "cos_with_intent": {
+     "forward": 0.463,
+     "back": 0.463,
+     "left": 1.0,
+     "right": 1.0
+    }
+   }
+  },
+  "paper_reference": {
+   "Table1_SIR": {
+    "w1": 0.38,
+    "w2": 1.0,
+    "w4": 1.0,
+    "w6": 0.94
+   },
+   "Fig3b_SIR_w2": {
+    "b0": 1.0,
+    "b1": 0.88,
+    "b2": 0.88,
+    "b3": "0.14 (프로젝트 페이지 0.12)"
+   }
+  },
+  "caveat": "정책이 나머지 토큰을 채우므로 prefix가 방향을 '완전히 복원'해야 조향이 되는 것은 아니다. 이 값은 prefix 자체의 방향 정보량이며 SIR의 예측값이 아니다."
+ }
+}
