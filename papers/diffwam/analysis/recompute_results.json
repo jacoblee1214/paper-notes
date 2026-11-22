@@ -1,0 +1,270 @@
+{
+  "tables": {
+    "T3 pi0": {
+      "calc": 31.35,
+      "reported": 31.35,
+      "diff": 0.0
+    },
+    "T3 X-VLA": {
+      "calc": 44.45,
+      "reported": 44.45,
+      "diff": 0.0
+    },
+    "T3 pi0.5": {
+      "calc": 58.35,
+      "reported": 58.35,
+      "diff": 0.0
+    },
+    "T3 StarVLA": {
+      "calc": 24.85,
+      "reported": 24.85,
+      "diff": 0.0
+    },
+    "T3 AHA-WAM": {
+      "calc": 33.75,
+      "reported": 33.75,
+      "diff": 0.0
+    },
+    "T3 FastWAM": {
+      "calc": 35.85,
+      "reported": 35.85,
+      "diff": 0.0
+    },
+    "T3 DiffWAM": {
+      "calc": 37.485,
+      "reported": 37.47,
+      "diff": 0.015
+    },
+    "T10 RoboTwin full": {
+      "mean": 92.523,
+      "reported_mean": 92.52,
+      "sd": 0.114,
+      "reported_sd": 0.11,
+      "max_run": 92.65
+    },
+    "T10 LIBERO": {
+      "mean": 98.667,
+      "reported_mean": 98.67,
+      "sd": 0.115,
+      "reported_sd": 0.12,
+      "max_run": 98.8
+    },
+    "T10 RoboTwin clean-only (Clean/Random 평균)": {
+      "mean": 37.4,
+      "reported_mean": 37.4,
+      "sd": 0.07,
+      "reported_sd": 0.07,
+      "max_run": 37.47
+    }
+  },
+  "table12": {
+    "n_tasks": 50,
+    "task_means": {
+      "pi0.5": {
+        "clean_mean_over_tasks": 82.74,
+        "random_mean_over_tasks": 76.76,
+        "avg_mean_over_tasks": 79.75
+      },
+      "Motus": {
+        "clean_mean_over_tasks": 88.66,
+        "random_mean_over_tasks": 87.02,
+        "avg_mean_over_tasks": 87.84
+      },
+      "LingBot-VA": {
+        "clean_mean_over_tasks": 92.9,
+        "random_mean_over_tasks": 91.5,
+        "avg_mean_over_tasks": 92.2
+      },
+      "GigaWorld-Policy": {
+        "clean_mean_over_tasks": 86.36,
+        "random_mean_over_tasks": 85.04,
+        "avg_mean_over_tasks": 85.7
+      },
+      "X-WAM": {
+        "clean_mean_over_tasks": 89.76,
+        "random_mean_over_tasks": 90.68,
+        "avg_mean_over_tasks": 90.22
+      },
+      "FastWAM": {
+        "clean_mean_over_tasks": 91.88,
+        "random_mean_over_tasks": 90.32,
+        "avg_mean_over_tasks": 91.1
+      },
+      "DiffWAM-L": {
+        "clean_mean_over_tasks": 93.28,
+        "random_mean_over_tasks": 92.02,
+        "avg_mean_over_tasks": 92.65
+      }
+    },
+    "diffwam_L_best_or_tied": {
+      "clean": 25,
+      "random": 23,
+      "of": 50
+    },
+    "pair_clean": {
+      "wins": 24,
+      "losses": 17,
+      "ties": 9,
+      "sign_test_p": 0.3489,
+      "mean_diff_pp": 1.4,
+      "wilcoxon_p": 0.4036
+    },
+    "pair_random": {
+      "wins": 18,
+      "losses": 9,
+      "ties": 23,
+      "sign_test_p": 0.1221,
+      "mean_diff_pp": 1.7,
+      "wilcoxon_p": 0.0214
+    },
+    "robustness": {
+      "clean_mean": 1.4,
+      "clean_median": 0.0,
+      "clean_trimmed10": 1.27,
+      "clean_mean_without_top1": 0.57,
+      "clean_largest_gain": [
+        "Lift Pot +42",
+        "Pick Diverse Bottles +31",
+        "Place Cans Plasticbox +29"
+      ],
+      "clean_largest_loss": [
+        "Hanging Mug -37",
+        "Place Can Basket -27",
+        "Move Stapler Pad -27"
+      ],
+      "random_mean": 1.7,
+      "random_median": 0.0,
+      "random_trimmed10": 1.07,
+      "random_largest_loss": [
+        "Scan Object -6",
+        "Place Bread Skillet -4",
+        "Place Fan -4"
+      ]
+    }
+  },
+  "real_world": [
+    {
+      "comparison": "실로봇 DiffWAM-S 대 FastWAM",
+      "k1": 53,
+      "n1": 60,
+      "k2": 44,
+      "n2": 60,
+      "diff_pp": 15.0,
+      "newcombe95_pp": [
+        0.81,
+        28.68
+      ],
+      "fisher_p": 0.062
+    }
+  ],
+  "real_world_per_task_fisher": {
+    "Place Pens": 0.661,
+    "Store Block": 0.451,
+    "Stack Cups": 0.235
+  },
+  "libero_trial_level": [
+    {
+      "comparison": "LIBERO DiffWAM-S 대 FastWAM (시도 단위)",
+      "k1": 3952,
+      "n1": 4000,
+      "k2": 3882,
+      "n2": 4000,
+      "diff_pp": 1.75,
+      "newcombe95_pp": [
+        1.13,
+        2.39
+      ],
+      "fisher_p": 0.0
+    }
+  ],
+  "libero_run_level_one_sample": {
+    "t": 23.38,
+    "p": 0.0018
+  },
+  "robotwin_full_run_level_one_sample": {
+    "t": 22.36,
+    "p": 0.002
+  },
+  "robotwin_full_trial_level": {
+    "클린": {
+      "comparison": "RoboTwin full 클린 DiffWAM-L 대 FastWAM (시도 단위, 5000회)",
+      "k1": 4664,
+      "n1": 5000,
+      "k2": 4594,
+      "n2": 5000,
+      "diff_pp": 1.4,
+      "newcombe95_pp": [
+        0.37,
+        2.43
+      ],
+      "fisher_p": 0.0084
+    },
+    "랜덤": {
+      "comparison": "RoboTwin full 랜덤 DiffWAM-L 대 FastWAM (시도 단위, 5000회)",
+      "k1": 4601,
+      "n1": 5000,
+      "k2": 4516,
+      "n2": 5000,
+      "diff_pp": 1.7,
+      "newcombe95_pp": [
+        0.59,
+        2.81
+      ],
+      "fisher_p": 0.0031
+    }
+  },
+  "clean_to_random": {
+    "clean_k_over_n": "1045/1500 = 69.67%",
+    "random_k_over_n": "79/1500 = 5.27%",
+    "avg_k_over_n": "1124/3000 = 37.47%"
+  },
+  "clean_to_random_fastwam_sensitivity": [
+    {
+      "comparison": "랜덤 DiffWAM 79/1500 대 FastWAM 45/3000 (가정)",
+      "k1": 79,
+      "n1": 1500,
+      "k2": 45,
+      "n2": 3000,
+      "diff_pp": 3.77,
+      "newcombe95_pp": [
+        2.63,
+        5.07
+      ],
+      "fisher_p": 0.0
+    },
+    {
+      "comparison": "랜덤 DiffWAM 79/1500 대 FastWAM 75/5000 (가정)",
+      "k1": 79,
+      "n1": 1500,
+      "k2": 75,
+      "n2": 5000,
+      "diff_pp": 3.77,
+      "newcombe95_pp": [
+        2.68,
+        5.05
+      ],
+      "fisher_p": 0.0
+    }
+  ],
+  "ablation_effects_pp": {
+    "diff_loss": 0.7,
+    "diff_expert_over_loss": 1.05
+  },
+  "efficiency": {
+    "reduction_pct_point": 28.12,
+    "range_with_0p1k_reading_error": [
+      26.3,
+      29.9
+    ]
+  },
+  "table4_diffs": {
+    "S-L LIBERO": 1.1,
+    "S-L Clean": 5.41,
+    "L-S Full": 0.68
+  },
+  "headline_is_max_run": {
+    "LIBERO": true,
+    "RoboTwin_full": true,
+    "clean_only": true
+  }
+}
