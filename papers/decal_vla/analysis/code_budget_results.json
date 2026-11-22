@@ -1,0 +1,46 @@
+{
+ "params": {
+  "und_expert_qwen3vl2b": 2123104256,
+  "gen_expert": 440401920,
+  "act_expert": 440401920,
+  "tactile_cross_attn_28_layers": 469762048,
+  "tactile_gate": 4196352,
+  "tactile_encoder": 101558144,
+  "tactile_gen_branch_incl_decoders": 7979520,
+  "tactile_encoder_recon_decoder": 25806336,
+  "cosmos_proj_and_down_up": 134250496,
+  "action_io": 3317760,
+  "total": 3750778752,
+  "total_B": 3.75,
+  "note": "Cosmos 토크나이저(CI8x8, 동결, jit)와 위치 임베딩은 제외. 논문 부록 B는 InternVLA-A1-3B 초기화라고 쓴다."
+ },
+ "memory_GB": {
+  "weights_bf16": 7.5,
+  "weights_fp32_deploy": 15.0,
+  "train_full_adamw_fp32_states_rough": 45.0,
+  "note": "배포 스크립트는 policy.to(torch.float32)로 올린다(deploy_policy_tac_server.py). 학습 메모리는 bf16 가중치 + bf16 기울기 + fp32 Adam 두 상태 가정의 하한 어림이며 활성값 제외.",
+  "mac_unified_memory_GiB": 24
+ },
+ "tokens": {
+  "cosmos_tokens_per_frame": 16,
+  "gen_image_tokens": 96,
+  "gen_tactile_tokens": 10,
+  "prefix_tokens_est": 201,
+  "suffix_tokens(chunk50)": 101,
+  "total_seq_est": 408,
+  "note": "Qwen3-VL 이미지 토큰 수는 프로세서 리사이즈 규칙에 따라 달라질 수 있어 어림(224/32)^2 = 49로 둠."
+ },
+ "flops_per_chunk_G": {
+  "und": 921.7,
+  "gen": 93.4,
+  "act_10steps": 889.6,
+  "total": 1904.7,
+  "note": "어텐션 점수 계산과 Cosmos 인코더 FLOPs 제외 어림. 논문 보고: RTX 4090에서 0.27 s/청크(부록 A.2)."
+ },
+ "mac_latency_guess_s": {
+  "at_3_TFLOPS": 0.63,
+  "at_8_TFLOPS": 0.24,
+  "note": "가정값이다. 측정하지 않았다. 메모리 대역폭(약 270 GB/s)이 아니라 연산 대역으로 단순화."
+ },
+ "effective_tflops_implied_by_paper_latency": 7.05
+}
