@@ -1,0 +1,806 @@
+{
+ "V1_libero_means": {
+  "ELASTIC": {
+   "counts": [
+    19,
+    20,
+    19,
+    19,
+    19,
+    20,
+    20,
+    20,
+    13,
+    19
+   ],
+   "total_of_200": 188,
+   "mean_pct": 94.0,
+   "paper_mean": 94.0,
+   "matches_paper": true,
+   "wilson95": [
+    89.8,
+    96.5
+   ]
+  },
+  "pi0.5": {
+   "counts": [
+    19,
+    20,
+    19,
+    20,
+    20,
+    20,
+    18,
+    20,
+    10,
+    17
+   ],
+   "total_of_200": 183,
+   "mean_pct": 91.5,
+   "paper_mean": 91.5,
+   "matches_paper": true,
+   "wilson95": [
+    86.8,
+    94.6
+   ]
+  },
+  "BoN(10,10)": {
+   "counts": [
+    20,
+    20,
+    20,
+    19,
+    20,
+    20,
+    19,
+    20,
+    13,
+    20
+   ],
+   "total_of_200": 191,
+   "mean_pct": 95.5,
+   "paper_mean": 95.5,
+   "matches_paper": true,
+   "wilson95": [
+    91.7,
+    97.6
+   ]
+  },
+  "Sequential(18,1)": {
+   "counts": [
+    17,
+    20,
+    19,
+    19,
+    20,
+    20,
+    20,
+    20,
+    14,
+    19
+   ],
+   "total_of_200": 188,
+   "mean_pct": 94.0,
+   "paper_mean": 94.0,
+   "matches_paper": true,
+   "wilson95": [
+    89.8,
+    96.5
+   ]
+  },
+  "Fixed(3,7)": {
+   "counts": [
+    19,
+    20,
+    19,
+    19,
+    19,
+    20,
+    19,
+    20,
+    12,
+    18
+   ],
+   "total_of_200": 185,
+   "mean_pct": 92.5,
+   "paper_mean": 92.5,
+   "matches_paper": true,
+   "wilson95": [
+    88.0,
+    95.4
+   ]
+  }
+ },
+ "V1_libero_tests": {
+  "ELASTIC vs pi0.5": {
+   "diff_pp": 2.5,
+   "fisher_p": 0.441,
+   "newcombe95": [
+    -2.7,
+    7.8
+   ]
+  },
+  "BoN(10,10) vs pi0.5": {
+   "diff_pp": 4.0,
+   "fisher_p": 0.155,
+   "newcombe95": [
+    -0.9,
+    9.1
+   ]
+  },
+  "Sequential(18,1) vs pi0.5": {
+   "diff_pp": 2.5,
+   "fisher_p": 0.441,
+   "newcombe95": [
+    -2.7,
+    7.8
+   ]
+  },
+  "Fixed(3,7) vs pi0.5": {
+   "diff_pp": 1.0,
+   "fisher_p": 0.854,
+   "newcombe95": [
+    -4.5,
+    6.5
+   ]
+  },
+  "ELASTIC vs BoN(10,10)": {
+   "diff_pp": -1.5,
+   "fisher_p": 0.655
+  },
+  "ELASTIC vs Sequential(18,1)": {
+   "diff_pp": 0.0,
+   "fisher_p": 1.0
+  },
+  "ELASTIC vs Fixed(3,7)": {
+   "diff_pp": 1.5,
+   "fisher_p": 0.691
+  }
+ },
+ "V1_libero_signflip": {
+  "per_task_diff_trials": [
+   0,
+   0,
+   0,
+   -1,
+   -1,
+   0,
+   2,
+   0,
+   3,
+   2
+  ],
+  "sum": 5,
+  "two_sided_p_signflip": 0.375,
+  "n_nonzero_tasks": 5
+ },
+ "V1_libero_task8": {
+  "ELASTIC": 13,
+  "pi0.5": 10,
+  "BoN(10,10)": 13,
+  "Sequential(18,1)": 14,
+  "Fixed(3,7)": 12,
+  "fisher_ELASTIC_vs_base_20trials": 0.523
+ },
+ "V2_libero_latency": {
+  "ELASTIC": {
+   "pct_vs_base": -6.11,
+   "range_given_rounding": [
+    -6.25,
+    -5.97
+   ]
+  },
+  "BoN(10,10)": {
+   "pct_vs_base": 36.83,
+   "range_given_rounding": [
+    36.65,
+    37.0
+   ]
+  },
+  "Sequential(18,1)": {
+   "pct_vs_base": 40.47,
+   "range_given_rounding": [
+    40.29,
+    40.64
+   ]
+  },
+  "Fixed(3,7)": {
+   "pct_vs_base": -1.46,
+   "range_given_rounding": [
+    -1.6,
+    -1.31
+   ]
+  },
+  "paper_text": {
+   "BoN": "+36.8%",
+   "Sequential": "+40.3%",
+   "ELASTIC": "-6.1%"
+  }
+ },
+ "V3_libero_cost_match": {
+  "ELASTIC(2.6,6.9)": {
+   "alphaL_plus_beta(P-1)": 0.928,
+   "alphaL_plus_betaP": 1.028
+  },
+  "pi0.5(10,1)": {
+   "alphaL_plus_beta(P-1)": 1.3,
+   "alphaL_plus_betaP": 1.4
+  },
+  "BoN(10,10)": {
+   "alphaL_plus_beta(P-1)": 2.2,
+   "alphaL_plus_betaP": 2.3
+  },
+  "Sequential(18,1)": {
+   "alphaL_plus_beta(P-1)": 2.34,
+   "alphaL_plus_betaP": 2.44
+  },
+  "Fixed(3,7)": {
+   "alphaL_plus_beta(P-1)": 0.99,
+   "alphaL_plus_betaP": 1.09
+  },
+  "sequential_L_by_App7.2.1_formula": 7.14
+ },
+ "V4_hw_counts": {
+  "pi0.5 (10,1)": {
+   "k": 9,
+   "pct": 45.0,
+   "wilson95": [
+    25.8,
+    65.8
+   ]
+  },
+  "ELASTIC (2.6,5.6)": {
+   "k": 16,
+   "pct": 80.0,
+   "wilson95": [
+    58.4,
+    91.9
+   ]
+  },
+  "ELASTIC (3.6,2.9)": {
+   "k": 16,
+   "pct": 80.0,
+   "wilson95": [
+    58.4,
+    91.9
+   ]
+  },
+  "ELASTIC (1.9,3.5)": {
+   "k": 13,
+   "pct": 65.0,
+   "wilson95": [
+    43.3,
+    81.9
+   ]
+  },
+  "BoN (10,10)": {
+   "k": 16,
+   "pct": 80.0,
+   "wilson95": [
+    58.4,
+    91.9
+   ]
+  },
+  "Fixed (2,10)": {
+   "k": 14,
+   "pct": 70.0,
+   "wilson95": [
+    48.1,
+    85.5
+   ]
+  },
+  "Fixed (2,4)": {
+   "k": 9,
+   "pct": 45.0,
+   "wilson95": [
+    25.8,
+    65.8
+   ]
+  },
+  "Fixed (2,3)": {
+   "k": 8,
+   "pct": 40.0,
+   "wilson95": [
+    21.9,
+    61.3
+   ]
+  }
+ },
+ "V4_hw_tests": {
+  "ELASTIC (2.6,5.6) vs pi0.5 (10,1)": {
+   "diff_pp": 35.0,
+   "fisher_p": 0.048,
+   "newcombe95": [
+    5.0,
+    57.6
+   ]
+  },
+  "ELASTIC (3.6,2.9) vs pi0.5 (10,1)": {
+   "diff_pp": 35.0,
+   "fisher_p": 0.048,
+   "newcombe95": [
+    5.0,
+    57.6
+   ]
+  },
+  "ELASTIC (1.9,3.5) vs pi0.5 (10,1)": {
+   "diff_pp": 20.0,
+   "fisher_p": 0.341,
+   "newcombe95": [
+    -10.1,
+    45.6
+   ]
+  },
+  "BoN (10,10) vs pi0.5 (10,1)": {
+   "diff_pp": 35.0,
+   "fisher_p": 0.048,
+   "newcombe95": [
+    5.0,
+    57.6
+   ]
+  },
+  "ELASTIC (2.6,5.6) vs BoN (10,10)": {
+   "diff_pp": 0.0,
+   "fisher_p": 1.0,
+   "newcombe95": [
+    -24.7,
+    24.7
+   ]
+  },
+  "ELASTIC (2.6,5.6) vs Fixed (2,10)": {
+   "diff_pp": 10.0,
+   "fisher_p": 0.716,
+   "newcombe95": [
+    -16.6,
+    34.9
+   ]
+  },
+  "ELASTIC (1.9,3.5) vs Fixed (2,4)": {
+   "diff_pp": 20.0,
+   "fisher_p": 0.341,
+   "newcombe95": [
+    -10.1,
+    45.6
+   ]
+  },
+  "ELASTIC (1.9,3.5) vs Fixed (2,3)": {
+   "diff_pp": 25.0,
+   "fisher_p": 0.205,
+   "newcombe95": [
+    -5.4,
+    49.8
+   ]
+  },
+  "Fixed (2,10) vs pi0.5 (10,1)": {
+   "diff_pp": 25.0,
+   "fisher_p": 0.2,
+   "newcombe95": [
+    -5.2,
+    49.6
+   ]
+  }
+ },
+ "V4_hw_power": {
+  "n_per_arm_80_vs_45_power80": 28,
+  "n_per_arm_80_vs_70_power80": 292,
+  "n_per_arm_65_vs_45_power80": 96,
+  "power_n20_80_vs_45": 0.65,
+  "power_n20_80_vs_70": 0.11
+ },
+ "V4_hw_elastic_vs_bon_ci": [
+  -24.7,
+  24.7
+ ],
+ "V5_hw_latency_reduction": {
+  "ELASTIC (2.6,5.6)": {
+   "latency_ms": 62.5,
+   "reduction_vs_BoN_pct": 34.6,
+   "range_pm0.7ms": [
+    33.3,
+    35.8
+   ],
+   "reduction_vs_base_pct": 9.6
+  },
+  "ELASTIC (3.6,2.9)": {
+   "latency_ms": 64.6,
+   "reduction_vs_BoN_pct": 32.4,
+   "range_pm0.7ms": [
+    31.1,
+    33.6
+   ],
+   "reduction_vs_base_pct": 6.5
+  },
+  "ELASTIC (1.9,3.5)": {
+   "latency_ms": 58.0,
+   "reduction_vs_BoN_pct": 39.3,
+   "range_pm0.7ms": [
+    38.1,
+    40.4
+   ],
+   "reduction_vs_base_pct": 16.1
+  },
+  "Fixed (2,10)": {
+   "latency_ms": 63.6,
+   "reduction_vs_BoN_pct": 33.4,
+   "range_pm0.7ms": [
+    32.2,
+    34.6
+   ],
+   "reduction_vs_base_pct": 8.0
+  },
+  "Fixed (2,4)": {
+   "latency_ms": 60.0,
+   "reduction_vs_BoN_pct": 37.2,
+   "range_pm0.7ms": [
+    36.0,
+    38.4
+   ],
+   "reduction_vs_base_pct": 13.2
+  },
+  "Fixed (2,3)": {
+   "latency_ms": 60.0,
+   "reduction_vs_BoN_pct": 37.2,
+   "range_pm0.7ms": [
+    36.0,
+    38.4
+   ],
+   "reduction_vs_base_pct": 13.2
+  }
+ },
+ "V6_latency_model": {
+  "ms_per_step_single_sample": 2.42,
+  "ms_per_sample_at_one_step": 0.52,
+  "ms_per_sample_at_ten_steps": 2.0,
+  "ratio_step_to_sample_one_step": 4.6,
+  "ratio_step_to_sample_ten_steps": 1.2,
+  "alpha_over_beta_paper": 1.3,
+  "fig5_vs_fig14": {
+   "pi0.5 (10,1)": {
+    "fig5_ms": 69.1,
+    "fig14_interp_ms": 84.8,
+    "gap_ms": -15.7
+   },
+   "BoN (10,10)": {
+    "fig5_ms": 95.5,
+    "fig14_interp_ms": 102.8,
+    "gap_ms": -7.3
+   },
+   "ELASTIC (2.6,5.6)": {
+    "fig5_ms": 62.5,
+    "fig14_interp_ms": 71.5,
+    "gap_ms": -9.0
+   },
+   "ELASTIC (3.6,2.9)": {
+    "fig5_ms": 64.6,
+    "fig14_interp_ms": 72.4,
+    "gap_ms": -7.8
+   },
+   "ELASTIC (1.9,3.5)": {
+    "fig5_ms": 58.0,
+    "fig14_interp_ms": 68.0,
+    "gap_ms": -10.0
+   }
+  },
+  "BoN_reduction_if_fig14_model": {
+   "ELASTIC (2.6,5.6)": 30.5,
+   "ELASTIC (3.6,2.9)": 29.6,
+   "ELASTIC (1.9,3.5)": 33.8
+  },
+  "fig11_base_ms_4090": 68.7,
+  "fig11_BoN_ms_4090": 94.0
+ },
+ "V7_dp_elastic_vs_fixed": [
+  {
+   "task": "PushT",
+   "L": 3.5,
+   "fixed": 75.5,
+   "elastic": 80.2,
+   "gain_pp": 4.7,
+   "fisher_p": 0.3362,
+   "note": "Fixed 한 점이 두 ELASTIC 점(L=3.5)과 공유된다고 가정"
+  },
+  {
+   "task": "PushT",
+   "L": 3.5,
+   "fixed": 75.5,
+   "elastic": 82.1,
+   "gain_pp": 6.6,
+   "fisher_p": 0.1422,
+   "note": "위와 같음"
+  },
+  {
+   "task": "PushT",
+   "L": 6.0,
+   "fixed": 88.4,
+   "elastic": 90.3,
+   "gain_pp": 1.9,
+   "fisher_p": 0.6251,
+   "note": ""
+  },
+  {
+   "task": "PushT Obstacle",
+   "L": 4.8,
+   "fixed": 85.3,
+   "elastic": 85.3,
+   "gain_pp": 0.0,
+   "fisher_p": 1.0,
+   "note": "Fixed가 ELASTIC 아래에 가려짐: 같은 값으로 가정"
+  },
+  {
+   "task": "PushT Obstacle",
+   "L": 6.3,
+   "fixed": 89.1,
+   "elastic": 91.6,
+   "gain_pp": 2.5,
+   "fisher_p": 0.5006,
+   "note": ""
+  },
+  {
+   "task": "PushT Obstacle",
+   "L": 8.0,
+   "fixed": 87.4,
+   "elastic": 90.3,
+   "gain_pp": 2.9,
+   "fisher_p": 0.4246,
+   "note": ""
+  },
+  {
+   "task": "Square PH",
+   "L": 5.3,
+   "fixed": 93.9,
+   "elastic": 92.8,
+   "gain_pp": -1.1,
+   "fisher_p": 0.8397,
+   "note": "Fixed가 일부만 보임: 상단 가장자리로 추정"
+  },
+  {
+   "task": "Square PH",
+   "L": 5.7,
+   "fixed": 89.5,
+   "elastic": 93.5,
+   "gain_pp": 4.0,
+   "fisher_p": 0.209,
+   "note": ""
+  },
+  {
+   "task": "Square PH",
+   "L": 7.6,
+   "fixed": 88.5,
+   "elastic": 95.0,
+   "gain_pp": 6.5,
+   "fisher_p": 0.0279,
+   "note": ""
+  },
+  {
+   "task": "Square MH",
+   "L": 6.0,
+   "fixed": 74.0,
+   "elastic": 81.0,
+   "gain_pp": 7.0,
+   "fisher_p": 0.1193,
+   "note": ""
+  },
+  {
+   "task": "Square MH",
+   "L": 6.8,
+   "fixed": 76.0,
+   "elastic": 81.6,
+   "gain_pp": 5.6,
+   "fisher_p": 0.2215,
+   "note": ""
+  },
+  {
+   "task": "Square MH",
+   "L": 7.9,
+   "fixed": 79.5,
+   "elastic": 85.5,
+   "gain_pp": 6.0,
+   "fisher_p": 0.1474,
+   "note": ""
+  },
+  {
+   "task": "Can Paired",
+   "L": 2.7,
+   "fixed": 45.5,
+   "elastic": 74.5,
+   "gain_pp": 29.0,
+   "fisher_p": 0.0,
+   "note": ""
+  },
+  {
+   "task": "Can Paired",
+   "L": 2.8,
+   "fixed": 70.8,
+   "elastic": 78.9,
+   "gain_pp": 8.1,
+   "fisher_p": 0.083,
+   "note": ""
+  },
+  {
+   "task": "Can Paired",
+   "L": 4.1,
+   "fixed": 50.5,
+   "elastic": 76.4,
+   "gain_pp": 25.9,
+   "fisher_p": 0.0,
+   "note": ""
+  },
+  {
+   "task": "Can Reverse",
+   "L": 2.8,
+   "fixed": 33.0,
+   "elastic": 43.4,
+   "gain_pp": 10.4,
+   "fisher_p": 0.0395,
+   "note": ""
+  },
+  {
+   "task": "Can Reverse",
+   "L": 2.9,
+   "fixed": 56.5,
+   "elastic": 61.4,
+   "gain_pp": 4.9,
+   "fisher_p": 0.3602,
+   "note": ""
+  },
+  {
+   "task": "Can Reverse",
+   "L": 3.7,
+   "fixed": 33.5,
+   "elastic": 60.9,
+   "gain_pp": 27.4,
+   "fisher_p": 0.0,
+   "note": ""
+  }
+ ],
+ "V7_summary": {
+  "n_pairs": 18,
+  "n_elastic_higher": 16,
+  "n_equal": 1,
+  "n_lower": 1,
+  "n_p_lt_0.05": 5,
+  "n_p_lt_0.05_excluding_assumed": 5,
+  "n_pairs_without_assumption": 14,
+  "mean_gain_pp": 8.5,
+  "median_gain_pp": 5.8,
+  "per_task_mean_gain": {
+   "PushT": 4.4,
+   "PushT Obstacle": 1.8,
+   "Square PH": 3.1,
+   "Square MH": 6.2,
+   "Can Paired": 21.0,
+   "Can Reverse": 14.2
+  }
+ },
+ "V8_dp_vs_bon_dp_learnedfixed": {
+  "PushT": {
+   "BoN": 91.9,
+   "DP": 90.8,
+   "ELASTIC_best": 90.3,
+   "ELASTIC_L": 6.0,
+   "LearnedFixed_best": 87.6,
+   "LearnedFixed_L": 5.9,
+   "E_minus_BoN_pp": -1.6,
+   "fisher_E_vs_BoN": 0.724,
+   "E_minus_DP_pp": -0.5,
+   "fisher_E_vs_DP": 1.0,
+   "E_minus_LearnedFixed_pp": 2.7,
+   "fisher_E_vs_LF": 0.425
+  },
+  "PushT Obstacle": {
+   "BoN": 91.3,
+   "DP": 86.2,
+   "ELASTIC_best": 91.6,
+   "ELASTIC_L": 6.3,
+   "LearnedFixed_best": 90.1,
+   "LearnedFixed_L": 10.5,
+   "E_minus_BoN_pp": 0.3,
+   "fisher_E_vs_BoN": 1.0,
+   "E_minus_DP_pp": 5.4,
+   "fisher_E_vs_DP": 0.1128,
+   "E_minus_LearnedFixed_pp": 1.5,
+   "fisher_E_vs_LF": 0.73
+  },
+  "Square PH": {
+   "BoN": 94.0,
+   "DP": 91.0,
+   "ELASTIC_best": 95.0,
+   "ELASTIC_L": 7.6,
+   "LearnedFixed_best": 92.3,
+   "LearnedFixed_L": 10.0,
+   "E_minus_BoN_pp": 1.0,
+   "fisher_E_vs_BoN": 0.827,
+   "E_minus_DP_pp": 4.0,
+   "fisher_E_vs_DP": 0.1692,
+   "E_minus_LearnedFixed_pp": 2.7,
+   "fisher_E_vs_LF": 0.409
+  },
+  "Square MH": {
+   "BoN": 86.0,
+   "DP": 81.0,
+   "ELASTIC_best": 85.5,
+   "ELASTIC_L": 7.9,
+   "LearnedFixed_best": 81.6,
+   "LearnedFixed_L": 14.2,
+   "E_minus_BoN_pp": -0.5,
+   "fisher_E_vs_BoN": 1.0,
+   "E_minus_DP_pp": 4.5,
+   "fisher_E_vs_DP": 0.284,
+   "E_minus_LearnedFixed_pp": 3.9,
+   "fisher_E_vs_LF": 0.346
+  },
+  "Can Paired": {
+   "BoN": 77.9,
+   "DP": 47.4,
+   "ELASTIC_best": 79.0,
+   "ELASTIC_L": 2.8,
+   "LearnedFixed_best": 65.1,
+   "LearnedFixed_L": 3.1,
+   "E_minus_BoN_pp": 1.1,
+   "fisher_E_vs_BoN": 0.903,
+   "E_minus_DP_pp": 31.6,
+   "fisher_E_vs_DP": 0.0,
+   "E_minus_LearnedFixed_pp": 13.9,
+   "fisher_E_vs_LF": 0.003
+  },
+  "Can Reverse": {
+   "BoN": 67.9,
+   "DP": 30.0,
+   "ELASTIC_best": 61.5,
+   "ELASTIC_L": 2.9,
+   "LearnedFixed_best": 61.1,
+   "LearnedFixed_L": 4.9,
+   "E_minus_BoN_pp": -6.4,
+   "fisher_E_vs_BoN": 0.209,
+   "E_minus_DP_pp": 31.5,
+   "fisher_E_vs_DP": 0.0,
+   "E_minus_LearnedFixed_pp": 0.4,
+   "fisher_E_vs_LF": 1.0
+  }
+ },
+ "V9_integer_feasibility": {
+  "n_values": 48,
+  "max_dev_from_0.5pp_grid": 0.2,
+  "mean_dev": 0.07,
+  "note": "모든 읽은 값이 0.5 %p 격자(200회 이항)에서 0.25 %p 이내. 읽기 오차보다 작아 이항이 아님을 시사하는 값은 없음"
+ },
+ "V10_power_n200": {
+  "min_detectable_diff_pp_at_power80_by_baseline": {
+   "0.5": 14.0,
+   "0.75": 11.0,
+   "0.9": 7.0
+  }
+ },
+ "V11_sequential_L_bound": {
+  "PushT": {
+   "seq_L_max_read": 9.7,
+   "upper_bound_from_formula": 16.0,
+   "exceeds_bound": false
+  },
+  "PushT Obstacle": {
+   "seq_L_max_read": 16.7,
+   "upper_bound_from_formula": 18.0,
+   "exceeds_bound": false
+  },
+  "Square PH": {
+   "seq_L_max_read": 15.3,
+   "upper_bound_from_formula": 17.6,
+   "exceeds_bound": false
+  },
+  "Square MH": {
+   "seq_L_max_read": 17.6,
+   "upper_bound_from_formula": 17.9,
+   "exceeds_bound": false
+  },
+  "Can Paired": {
+   "seq_L_max_read": 17.1,
+   "upper_bound_from_formula": 14.1,
+   "exceeds_bound": true
+  },
+  "Can Reverse": {
+   "seq_L_max_read": 16.8,
+   "upper_bound_from_formula": 27.0,
+   "exceeds_bound": false
+  }
+ }
+}
