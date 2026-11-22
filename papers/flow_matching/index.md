@@ -5,6 +5,7 @@ venue: "ICLR 2023"
 venue_note: "포스터, top 25% (iclr.cc 공식 채택 목록)"
 tags: [generative-modeling, flow-matching, continuous-normalizing-flow, diffusion, paper-review]
 paper: https://arxiv.org/abs/2210.02747
+code_status: none
 summary: "Flow Matching 논문의 조건부 목표와 OT 경로를 손으로 유도하고 수치로 확인했습니다. 표 값의 방향은 맞지만 시드가 없어 우도 차이는 구별되지 않고, 공식 코드와 σ_min 값이 없어 재현에는 가정이 필요합니다."
 ---
 
