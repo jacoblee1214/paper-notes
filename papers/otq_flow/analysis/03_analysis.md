@@ -36,7 +36,7 @@
 
 ### V9. 기준선 값은 QAM 논문의 값과 같다
 
-QAM 논문(arXiv:2601.14234, ICLR 2026) 표 1의 환경별 값과 OTQL 표 1의 기준선 9개 × 8환경 = **72칸을 모두 대조했고 72칸이 전부 일치**했습니다(예: QAM-F antmaze-large 0.83, FQL cube-double 0.46, DSRL cube-double 0.74). 즉 기준선은 새로 돌린 것이 아니라 QAM 논문에서 가져온 값입니다(OTQL §4.1은 "같은 실험 설정"이라고만 씁니다).
+QAM 논문(arXiv:2601.14234, ICLR 2026) 표 1의 환경별 값과 OTQL 표 1의 기준선 9개 × 8환경 = **72칸을 모두 대조했고 72칸이 전부 일치**했습니다(예: QAM-F antmaze-large 0.83, FQL cube-double 0.46, DSRL cube-double 0.74). 즉 기준선 값은 QAM 논문의 값을 인용한 것으로 보입니다(OTQL §4.1은 "같은 실험 설정"이라고만 씁니다).
 
 - QAM 논문은 12 시드, 환경별 5과제입니다. OTQL의 시드 수는 본문과 부록 어디에도 없습니다.
 - OTQL은 QAM 표의 ReBRAC(antmaze-giant 0.57, antmaze-large 0.94 등 가우시안 기준선)과 QAM-E, BAM, DAC, RLPD를 표에서 뺐습니다. 이 저장소의 목표는 flow 정책 후훈련이라 선택 자체는 합리적이지만, antmaze-giant에서는 ReBRAC(0.57)가 OTQL(0.19)보다 훨씬 높습니다. 이 열에서 OTQL이 앞선다는 서술은 없고, 표에도 없는 비교입니다.

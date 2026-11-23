@@ -41,7 +41,7 @@
 
 ## V3. 초록 "62% 전체 성공"
 
-표 II 합성 + 가이던스는 Gate 17/20, Hover 17/17, Pick 16/17, Place 10/16으로 복원됩니다. 62.5%는 **Pick에 성공한 16회 중 10회**(조건부)입니다. 4단계를 모두 통과한 종단 성공은 **10/20 = 50%** (Wilson 95% 29.9–70.1)입니다. 본문 §IV-E는 "62% overall conditioned success rate"라고 "conditioned"를 적었지만 초록은 "62% overall success rate"입니다. 초록의 표현은 종단 성공으로 읽히므로 과장입니다. §V의 "85% gate traversal and up to 62.5% place success"는 정확한 서술입니다.
+표 II 합성 + 가이던스는 Gate 17/20, Hover 17/17, Pick 16/17, Place 10/16으로 복원됩니다. 62.5%는 **Pick에 성공한 16회 중 10회**(조건부)입니다. 4단계를 모두 통과한 종단 성공은 **10/20 = 50%** (Wilson 95% 29.9–70.1)입니다. 본문 §IV-E는 "62% overall conditioned success rate"라고 "conditioned"를 적었지만 초록은 "62% overall success rate"입니다. 초록의 표현은 종단 성공으로 읽히지만 종단 값은 50%입니다. §V의 "85% gate traversal and up to 62.5% place success"는 정확한 서술입니다.
 
 ## V4. 초록 "합성 데이터: 100% 대 81%"
 

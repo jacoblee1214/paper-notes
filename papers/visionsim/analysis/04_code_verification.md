@@ -26,7 +26,7 @@
 | D13 | 데이터셋과 자산 배포 | 100개 리깅 장면, 체크섬, 재생성 스크립트, 자산 CC BY 4.0 (Sec. 7, S.7) | 저장소 장면은 `tests/test_files/scenes/cube.blend` 하나. 체크섬, 장면 목록, 센서 설정 파일 없음. 프로젝트 페이지는 "Coming soon. The prerelease is available in the meantime." HTCondor 제출 스크립트도 없음(Docker 이미지와 CI는 `.github/workflows/`에 있음) | 없음 |
 | D14 | IMU | Crassidis 랜덤 워크, Leutenegger 표 I 값, 250 Hz 데이터셋 (S.3) | `emulate/imu.py`: 같은 모델과 같은 값(`std_acc=8e-3`, `std_gyro=1.2e-3`, `std_bias_acc=5.5e-5`, `std_bias_gyro=2e-5`). 기본 `dt = 1/800`(`:106`)이고 250 Hz는 인자로 지정. 각가속도 미구현(`imu_integration_step` 주석 `:65`, `roadmap.rst:16`) | 일치 (기본값만 다름) |
 | D15 | 구현 언어 | "implemented entirely in PyTorch", GPU 벡터화 (S.5.2.1, L1708) | 센서 에뮬레이션(`rgb`, `spc`, `imu`, `itof`, `dvs`)은 numpy와 scipy. torch는 열 솔버, RIFE, `Dataset`(`torch.utils.data.Dataset`), `spc_avg_to_rgb`에만. 해당 문장은 dToF(외부 SPCSim, PR #39)에만 맞을 수 있음 | 차이 |
-| D16 | 수동 SPAD 파라미터 | Table 2: 노출 파라미터에 "Exposure, dark count rate, fill factor", 본문은 양자 효율, 암계수 | `emulate/spc.py` `emulate_spc(img, factor)` = `Binomial(1, 1 − exp(−img x factor))`. 암계수, 충전율, 양자 효율은 `factor` 하나에 흡수(논문 S.5.1도 f에 흡수한다고 함) | 일치 (Table 2 표기만 과장) |
+| D16 | 수동 SPAD 파라미터 | Table 2: 노출 파라미터에 "Exposure, dark count rate, fill factor", 본문은 양자 효율, 암계수 | `emulate/spc.py` `emulate_spc(img, factor)` = `Binomial(1, 1 − exp(−img x factor))`. 암계수, 충전율, 양자 효율은 `factor` 하나에 흡수(논문 S.5.1도 f에 흡수한다고 함) | 일치 (Table 2만 별개 파라미터처럼 표기) |
 | D17 | 저장과 로더 | 비트팩 numpy 8배, `transforms.json`, 센서별 SQLite, PyTorch와 TensorFlow용 로더 (S.4, S.7) | `Data.bitpack_dim`과 `_slice_bitpacked_array`(`dataset.py:208`) 구현, `transforms.json`과 peewee SQLite(`transforms.db`) 있음. `Dataset`은 `torch.utils.data.Dataset`이고 TensorFlow 로더는 없음 | 일치 (TensorFlow 제외) |
 | D18 | 분산 렌더링 | RPC 클라이언트/서버, UDP 레지스트리, 풀 (S.2.2) | `simulate/blender.py`: `rpyc`, `rpyc.utils.registry.UDPRegistryClient`, `BlenderClients.pool` 구현 | 일치 |
 | D19 | 라이선스 | "free and open-source library" (S.2.2) | `LICENSE.md`는 GPL-3.0-or-later이며 "A commercial license is available for those who cannot comply with the GPL" 문구가 붙은 이중 라이선스 형태. 기여는 MIT로 받음 | 일치 (GPL 전염성 주의) |
@@ -34,7 +34,7 @@
 ## 3. 일치하는 부분과 판단
 
 - **구조(분리 설계)는 일치합니다.** Blender 렌더(`blender.render-animation`) → 정답 패스(깊이, 법선, 광류, 분할, 재질, 점, 확산, 정반사, 열) → 센서 에뮬(`emulate.spad`, `events`, `rgb`, `imu`, `itof`) → `transforms.json` 데이터셋이라는 흐름이 코드에 그대로 있습니다. 스테레오 문서(`tutorials/stereo.rst`), HDR, 가우시안 스플랫 튜토리얼도 있습니다.
-- **가장 큰 간격은 dToF입니다.** 논문의 제일 큰 사례(디지털 트윈)와 초록의 "pileup and glare for LiDAR"가 공개 main에 없습니다(D1, D2). 이슈 트래커와 로드맵이 이를 인정하고 있어 숨기는 것은 아니지만, 논문이 "플랫폼을 공개한다"고 쓴 문장은 이 모달리티에 대해서는 아직 성립하지 않습니다.
+- **가장 큰 간격은 dToF입니다.** 논문의 제일 큰 사례(디지털 트윈)와 초록의 "pileup and glare for LiDAR"가 공개 main에 없습니다(D1, D2). 이슈 트래커와 로드맵에 이 상태가 적혀 있지만, 논문이 "플랫폼을 공개한다"고 쓴 문장은 이 모달리티에 대해서는 아직 성립하지 않습니다.
 - **열은 정적 모드만 논문 시점에 있었고 모델이 단순합니다.** 열 솔버는 0.2.0(2026-11-03)에 들어 있었고 PR #40(2026-11-04 병합)이 굽기와 렌더링을 고쳤으며, 과도 모드는 PR #41(2026-11-21 병합)로 논문 뒤에 왔습니다(D6). 방출 모델은 단순 σT⁴이며(D4), 마이크로볼로미터 관성이 없습니다(D5). 논문의 "history-dependent emission"은 솔버의 과도 열수송에는 맞지만 센서 응답에는 아직 해당하지 않습니다.
 - **iToF는 이상형입니다.** 논문 그림 2의 다섯 실패 모드 중 위상 접힘과 주변광만 코드가 다룹니다(D3).
 - **문서 사이에 낡은 문장이 있습니다.** `roadmap.rst`의 "Add dynamic thermal simulation; only steady state has shipped so far"는 PR #41 이후 사실과 다릅니다(D6).

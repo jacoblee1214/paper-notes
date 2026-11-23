@@ -70,7 +70,7 @@ UniIntervene 행(95%, IR 11.1)은 표 1의 Pick Eggplant(95, 10.0)와 RAM Insert
 
 ### V10. 본문 문장 오류: "가장 낮은 F1"
 
-§4.4는 "removing value prediction yields the lowest F1 (0.845) and highest IR (18.7%)"라고 씁니다. 표의 F1은 0.878 / **0.845** / **0.832** / 0.882 / 0.882이고, 가장 낮은 것은 **w/o TVR의 0.832**입니다. 0.845는 둘째로 낮습니다. IR 18.7이 가장 높다는 부분은 맞습니다. 바로 뒤 문장 "TVR 제거는 comparable drop (F1 0.832, IR 16.9)"과도 어긋납니다(0.832 < 0.845). 표나 문장 한쪽이 틀렸습니다.
+§4.4는 "removing value prediction yields the lowest F1 (0.845) and highest IR (18.7%)"라고 씁니다. 표의 F1은 0.878 / **0.845** / **0.832** / 0.882 / 0.882이고, 가장 낮은 것은 **w/o TVR의 0.832**입니다. 0.845는 둘째로 낮습니다. IR 18.7이 가장 높다는 부분은 맞습니다. 바로 뒤 문장 "TVR 제거는 comparable drop (F1 0.832, IR 16.9)"과도 어긋납니다(0.832 < 0.845). 표와 문장 중 어느 쪽이 맞는지 저자 확인이 필요합니다.
 
 본문은 "Value-Risk Critic is the most critical module"이라고 하지만 SR은 w/o Value, w/o TVR, w/o Memory 모두 85로 같아 SR로는 순위가 없고(V9), F1 차이(0.832–0.882)는 오프라인 라벨 대비 지표입니다(C6, C8).
 
