@@ -1,0 +1,217 @@
+{
+ "assumed": {
+  "foot_len": 0.22,
+  "foot_wid": 0.09,
+  "F": 343.0,
+  "eta_n": 0.8,
+  "beta": 2.0,
+  "gap_min": 0.0,
+  "gap_max": 0.05,
+  "alpha": 0.3,
+  "k": 4,
+  "eps_f": 1.0,
+  "eps": 1e-06,
+  "step_h": 0.15
+ },
+ "M1_edge_overhang": [
+  {
+   "overhang": 0.0,
+   "true_contact_frac": 1.0,
+   "A_tac_eps0.2": 1.0,
+   "A_tac_eps1.0": 1.0,
+   "force_on_void_taxels_frac": 0.0,
+   "cop_x_mm": 0.0,
+   "cop_margin_mm": 45.0,
+   "A_tac_eps3.0": 1.0
+  },
+  {
+   "overhang": 0.1,
+   "true_contact_frac": 0.9,
+   "A_tac_eps0.2": 1.0,
+   "A_tac_eps1.0": 1.0,
+   "force_on_void_taxels_frac": 0.0022,
+   "cop_x_mm": -9.93,
+   "cop_margin_mm": 45.0,
+   "A_tac_eps3.0": 0.9
+  },
+  {
+   "overhang": 0.2,
+   "true_contact_frac": 0.8,
+   "A_tac_eps0.2": 0.9,
+   "A_tac_eps1.0": 0.8,
+   "force_on_void_taxels_frac": 0.005,
+   "cop_x_mm": -21.37,
+   "cop_margin_mm": 44.94,
+   "A_tac_eps3.0": 0.8
+  },
+  {
+   "overhang": 0.3,
+   "true_contact_frac": 0.7,
+   "A_tac_eps0.2": 0.8,
+   "A_tac_eps1.0": 0.717,
+   "force_on_void_taxels_frac": 0.0085,
+   "cop_x_mm": -31.91,
+   "cop_margin_mm": 44.93,
+   "A_tac_eps3.0": 0.7
+  },
+  {
+   "overhang": 0.4,
+   "true_contact_frac": 0.6,
+   "A_tac_eps0.2": 0.7,
+   "A_tac_eps1.0": 0.6,
+   "force_on_void_taxels_frac": 0.0132,
+   "cop_x_mm": -42.29,
+   "cop_margin_mm": 45.0,
+   "A_tac_eps3.0": 0.6
+  },
+  {
+   "overhang": 0.5,
+   "true_contact_frac": 0.5,
+   "A_tac_eps0.2": 1.0,
+   "A_tac_eps1.0": 0.6,
+   "force_on_void_taxels_frac": 0.0196,
+   "cop_x_mm": -52.32,
+   "cop_margin_mm": 44.91,
+   "A_tac_eps3.0": 0.5
+  },
+  {
+   "overhang": 0.6,
+   "true_contact_frac": 0.4,
+   "A_tac_eps0.2": 1.0,
+   "A_tac_eps1.0": 0.5,
+   "force_on_void_taxels_frac": 0.0291,
+   "cop_x_mm": -62.25,
+   "cop_margin_mm": 44.89,
+   "A_tac_eps3.0": 0.4
+  }
+ ],
+ "M2_layout": {
+  "M=30": [
+   {
+    "overhang": 0.0,
+    "M": 30,
+    "true_contact_frac": 1.0,
+    "A_tac": 1.0
+   },
+   {
+    "overhang": 0.3,
+    "M": 30,
+    "true_contact_frac": 0.667,
+    "A_tac": 0.767
+   }
+  ],
+  "M=60": [
+   {
+    "overhang": 0.0,
+    "M": 60,
+    "true_contact_frac": 1.0,
+    "A_tac": 1.0
+   },
+   {
+    "overhang": 0.3,
+    "M": 60,
+    "true_contact_frac": 0.7,
+    "A_tac": 0.717
+   }
+  ],
+  "M=120": [
+   {
+    "overhang": 0.0,
+    "M": 120,
+    "true_contact_frac": 1.0,
+    "A_tac": 1.0
+   },
+   {
+    "overhang": 0.3,
+    "M": 120,
+    "true_contact_frac": 0.733,
+    "A_tac": 0.733
+   }
+  ]
+ },
+ "M3_force_dependence": [
+  {
+   "F_N": 50,
+   "A_tac": 0.7,
+   "true_contact_frac": 0.7
+  },
+  {
+   "F_N": 100,
+   "A_tac": 0.7,
+   "true_contact_frac": 0.7
+  },
+  {
+   "F_N": 200,
+   "A_tac": 0.7,
+   "true_contact_frac": 0.7
+  },
+  {
+   "F_N": 343,
+   "A_tac": 0.717,
+   "true_contact_frac": 0.7
+  },
+  {
+   "F_N": 600,
+   "A_tac": 0.8,
+   "true_contact_frac": 0.7
+  }
+ ],
+ "M4_table10_noise": {
+  "full_contact": {
+   "F_mean": 343.0,
+   "F_sd": 2.66,
+   "A_mean": 1.0,
+   "A_sd": 0.0,
+   "margin_mm_mean": 44.86,
+   "margin_mm_sd": 0.108,
+   "cop_x_mm_sd": 1.584
+  },
+  "partial_edge_0.3": {
+   "F_mean": 342.5,
+   "F_sd": 3.04,
+   "A_mean": 0.7167,
+   "A_sd": 0.0,
+   "margin_mm_mean": 44.82,
+   "margin_mm_sd": 0.136,
+   "cop_x_mm_sd": 1.552
+  }
+ },
+ "M5_sampling": [
+  {
+   "pulse_width_ms": 30,
+   "mean_peak_ratio_25Hz": 0.477,
+   "p5_25Hz": 0.0,
+   "mean_peak_ratio_100Hz": 0.955,
+   "expected_100_over_25": 2.002
+  },
+  {
+   "pulse_width_ms": 50,
+   "mean_peak_ratio_25Hz": 0.758,
+   "p5_25Hz": 0.365,
+   "mean_peak_ratio_100Hz": 0.984,
+   "expected_100_over_25": 1.298
+  },
+  {
+   "pulse_width_ms": 80,
+   "mean_peak_ratio_25Hz": 0.9,
+   "p5_25Hz": 0.734,
+   "mean_peak_ratio_100Hz": 0.994,
+   "expected_100_over_25": 1.104
+  },
+  {
+   "pulse_width_ms": 120,
+   "mean_peak_ratio_25Hz": 0.956,
+   "p5_25Hz": 0.88,
+   "mean_peak_ratio_100Hz": 0.997,
+   "expected_100_over_25": 1.044
+  },
+  {
+   "pulse_width_ms": 200,
+   "mean_peak_ratio_25Hz": 0.984,
+   "p5_25Hz": 0.956,
+   "mean_peak_ratio_100Hz": 0.999,
+   "expected_100_over_25": 1.015
+  }
+ ],
+ "note": "A_tac의 최소 눈금은 1/M (M=60이면 0.0167). 표 3의 실로봇 A_c 표준편차(0.011-0.044)는 인솔 타셀 수가 미기재라 눈금과 비교하지 못한다."
+}
