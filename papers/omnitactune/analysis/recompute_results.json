@@ -1,0 +1,1262 @@
+{
+ "assumptions": {
+  "n_final": 20,
+  "t2_t5_n_assumed": 20,
+  "wilson_z": 1.959963984540054
+ },
+ "V1_averages": {
+  "PLD*": {
+   "recomputed": 52.5,
+   "reported": 52.5,
+   "match": true
+  },
+  "PLD (Visual Only)": {
+   "recomputed": 37.5,
+   "reported": 37.5,
+   "match": true
+  },
+  "ViTAL": {
+   "recomputed": 43.75,
+   "reported": 43.75,
+   "match": true
+  },
+  "Ours": {
+   "recomputed": 93.75,
+   "reported": 93.75,
+   "match": true
+  }
+ },
+ "V2_integer_counts_n20": {
+  "PLD*": [
+   13.0,
+   12.0,
+   10.0,
+   7.0
+  ],
+  "PLD (Visual Only)": [
+   12.0,
+   6.0,
+   8.0,
+   4.0
+  ],
+  "ViTAL": [
+   10.0,
+   10.0,
+   9.0,
+   6.0
+  ],
+  "Ours": [
+   20.0,
+   20.0,
+   18.0,
+   17.0
+  ],
+  "BASE:base": [
+   8.0,
+   2.0,
+   1.0,
+   1.0
+  ],
+  "T2:t2": [
+   5.0,
+   12.0,
+   6.0,
+   13.0,
+   3.0,
+   9.0,
+   16.0,
+   18.0,
+   15.0,
+   20.0
+  ],
+  "F5:f5": [
+   3.0,
+   15.0,
+   6.0,
+   18.0,
+   5.0,
+   16.0,
+   10.0,
+   18.0,
+   8.0,
+   20.0
+  ],
+  "F6:f6": [
+   20.0,
+   20.0,
+   18.0,
+   20.0,
+   8.0,
+   20.0,
+   16.0,
+   14.0,
+   20.0,
+   2.0
+  ]
+ },
+ "V2_all_integer": true,
+ "V2_n10_feasible": {
+  "T1_cells_multiple_of_10": {
+   "PLD*": [
+    false,
+    true,
+    true,
+    false
+   ],
+   "PLD (Visual Only)": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "ViTAL": [
+    true,
+    true,
+    false,
+    true
+   ],
+   "Ours": [
+    true,
+    true,
+    true,
+    false
+   ]
+  }
+ },
+ "V3_wilson": {
+  "PLD*": [
+   [
+    0.4329,
+    0.8188
+   ],
+   [
+    0.3866,
+    0.7812
+   ],
+   [
+    0.2993,
+    0.7007
+   ],
+   [
+    0.1812,
+    0.5671
+   ]
+  ],
+  "PLD (Visual Only)": [
+   [
+    0.3866,
+    0.7812
+   ],
+   [
+    0.1455,
+    0.519
+   ],
+   [
+    0.2188,
+    0.6134
+   ],
+   [
+    0.0807,
+    0.416
+   ]
+  ],
+  "ViTAL": [
+   [
+    0.2993,
+    0.7007
+   ],
+   [
+    0.2993,
+    0.7007
+   ],
+   [
+    0.2582,
+    0.6579
+   ],
+   [
+    0.1455,
+    0.519
+   ]
+  ],
+  "Ours": [
+   [
+    0.8389,
+    1.0
+   ],
+   [
+    0.8389,
+    1.0
+   ],
+   [
+    0.699,
+    0.9721
+   ],
+   [
+    0.6396,
+    0.9476
+   ]
+  ],
+  "base": [
+   [
+    0.2188,
+    0.6134
+   ],
+   [
+    0.0279,
+    0.301
+   ],
+   [
+    0.0089,
+    0.2361
+   ],
+   [
+    0.0089,
+    0.2361
+   ]
+  ]
+ },
+ "V4_ours_vs_baselines": [
+  {
+   "baseline": "PLD*",
+   "task": "Peg-in-Hole",
+   "ours": 20,
+   "base": 13,
+   "diff_pp": 35.0,
+   "newcombe_95": [
+    11.7,
+    56.7
+   ],
+   "fisher_p": 0.008316008316008316,
+   "holm_p": 0.018338694645702435
+  },
+  {
+   "baseline": "PLD*",
+   "task": "Charger Insertion",
+   "ours": 20,
+   "base": 12,
+   "diff_pp": 40.0,
+   "newcombe_95": [
+    15.8,
+    61.3
+   ],
+   "fisher_p": 0.003276003276003276,
+   "holm_p": 0.018338694645702435
+  },
+  {
+   "baseline": "PLD*",
+   "task": "Cap Opening",
+   "ours": 18,
+   "base": 10,
+   "diff_pp": 40.0,
+   "newcombe_95": [
+    11.6,
+    61.3
+   ],
+   "fisher_p": 0.013814147851967653,
+   "holm_p": 0.018338694645702435
+  },
+  {
+   "baseline": "PLD*",
+   "task": "Box Opening",
+   "ours": 17,
+   "base": 7,
+   "diff_pp": 50.0,
+   "newcombe_95": [
+    19.8,
+    69.5
+   ],
+   "fisher_p": 0.0030564491076170725,
+   "holm_p": 0.018338694645702435
+  },
+  {
+   "baseline": "PLD (Visual Only)",
+   "task": "Peg-in-Hole",
+   "ours": 20,
+   "base": 12,
+   "diff_pp": 40.0,
+   "newcombe_95": [
+    15.8,
+    61.3
+   ],
+   "fisher_p": 0.003276003276003276,
+   "holm_p": 0.018338694645702435
+  },
+  {
+   "baseline": "PLD (Visual Only)",
+   "task": "Charger Insertion",
+   "ours": 20,
+   "base": 6,
+   "diff_pp": 70.0,
+   "newcombe_95": [
+    42.8,
+    85.5
+   ],
+   "fisher_p": 3.3403815383793145e-06,
+   "holm_p": 4.0084578460551775e-05
+  },
+  {
+   "baseline": "PLD (Visual Only)",
+   "task": "Cap Opening",
+   "ours": 18,
+   "base": 8,
+   "diff_pp": 50.0,
+   "newcombe_95": [
+    20.7,
+    69.5
+   ],
+   "fisher_p": 0.002199641243022778,
+   "holm_p": 0.015397488701159447
+  },
+  {
+   "baseline": "PLD (Visual Only)",
+   "task": "Box Opening",
+   "ours": 17,
+   "base": 4,
+   "diff_pp": 65.0,
+   "newcombe_95": [
+    34.8,
+    80.4
+   ],
+   "fisher_p": 8.75017463497417e-05,
+   "holm_p": 0.0009625192098471586
+  },
+  {
+   "baseline": "ViTAL",
+   "task": "Peg-in-Hole",
+   "ours": 20,
+   "base": 10,
+   "diff_pp": 50.0,
+   "newcombe_95": [
+    24.3,
+    70.1
+   ],
+   "fisher_p": 0.00043591979075850045,
+   "holm_p": 0.004359197907585004
+  },
+  {
+   "baseline": "ViTAL",
+   "task": "Charger Insertion",
+   "ours": 20,
+   "base": 10,
+   "diff_pp": 50.0,
+   "newcombe_95": [
+    24.3,
+    70.1
+   ],
+   "fisher_p": 0.00043591979075850045,
+   "holm_p": 0.004359197907585004
+  },
+  {
+   "baseline": "ViTAL",
+   "task": "Cap Opening",
+   "ours": 18,
+   "base": 9,
+   "diff_pp": 45.0,
+   "newcombe_95": [
+    16.1,
+    65.5
+   ],
+   "fisher_p": 0.005735673700078594,
+   "holm_p": 0.018338694645702435
+  },
+  {
+   "baseline": "ViTAL",
+   "task": "Box Opening",
+   "ours": 17,
+   "base": 6,
+   "diff_pp": 55.00000000000001,
+   "newcombe_95": [
+    24.6,
+    73.3
+   ],
+   "fisher_p": 0.0010645539010388843,
+   "holm_p": 0.008516431208311075
+  }
+ ],
+ "V4_n_holm_sig": 12,
+ "V4_n_raw_sig": 12,
+ "V5_pooled_vs_baselines": {
+  "PLD*": {
+   "ours": 75,
+   "base": 42,
+   "n": 80,
+   "fisher_p": 2.5602503944018863e-09,
+   "newcombe_95": [
+    28.3,
+    52.6
+   ],
+   "mh": {
+    "or": 17.097560975609756,
+    "cmh_chi2": 35.18724109362055,
+    "cmh_p": 2.99479214913705e-09
+   }
+  },
+  "PLD (Visual Only)": {
+   "ours": 75,
+   "base": 30,
+   "n": 80,
+   "fisher_p": 1.2916213604621384e-14,
+   "newcombe_95": [
+    42.9,
+    66.7
+   ],
+   "mh": {
+    "or": 33.142857142857146,
+    "cmh_chi2": 57.10412147505422,
+    "cmh_p": 4.1333854635053734e-14
+   }
+  },
+  "ViTAL": {
+   "ours": 75,
+   "base": 35,
+   "n": 80,
+   "fisher_p": 3.0005121880418406e-12,
+   "newcombe_95": [
+    36.7,
+    60.9
+   ],
+   "mh": {
+    "or": 23.22222222222222,
+    "cmh_chi2": 46.497764530551414,
+    "cmh_p": 9.172303350796133e-12
+   }
+  }
+ },
+ "V5_ours_pooled": {
+  "k": 75,
+  "n": 80,
+  "wilson": [
+   0.8619,
+   0.973
+  ]
+ },
+ "V6_ours_vs_base": [
+  {
+   "task": "Peg-in-Hole",
+   "base": 8,
+   "ours": 20,
+   "fisher_p": 4.5095150768120733e-05,
+   "newcombe_95": [
+    33.3,
+    78.1
+   ]
+  },
+  {
+   "task": "Charger Insertion",
+   "base": 2,
+   "ours": 20,
+   "fisher_p": 3.351553382989278e-09,
+   "newcombe_95": [
+    64.2,
+    97.2
+   ]
+  },
+  {
+   "task": "Cap Opening",
+   "base": 1,
+   "ours": 18,
+   "fisher_p": 5.81951541955411e-08,
+   "newcombe_95": [
+    57.6,
+    93.3
+   ]
+  },
+  {
+   "task": "Box Opening",
+   "base": 1,
+   "ours": 17,
+   "fisher_p": 4.0553795934170275e-07,
+   "newcombe_95": [
+    51.9,
+    90.6
+   ]
+  }
+ ],
+ "V6_pooled": {
+  "base": 12,
+  "ours": 75,
+  "n": 80,
+  "fisher_p": 5.855471301601227e-26,
+  "newcombe_95": [
+   66.7,
+   85.9
+  ]
+ },
+ "V6_baselines_vs_base_policy": {
+  "PLD*": [
+   {
+    "task": "Peg-in-Hole",
+    "base_pol": 8,
+    "method": 13,
+    "fisher_p": 0.20492715519073304
+   },
+   {
+    "task": "Charger Insertion",
+    "base_pol": 2,
+    "method": 12,
+    "fisher_p": 0.002199641243022778
+   },
+   {
+    "task": "Cap Opening",
+    "base_pol": 1,
+    "method": 10,
+    "fisher_p": 0.0033420517291485033
+   },
+   {
+    "task": "Box Opening",
+    "base_pol": 1,
+    "method": 7,
+    "fisher_p": 0.04359604359604359
+   },
+   {
+    "task": "합산",
+    "base_pol": 12,
+    "method": 42,
+    "fisher_p": 7.748996042727681e-07
+   }
+  ],
+  "PLD (Visual Only)": [
+   {
+    "task": "Peg-in-Hole",
+    "base_pol": 8,
+    "method": 12,
+    "fisher_p": 0.3430672247521887
+   },
+   {
+    "task": "Charger Insertion",
+    "base_pol": 2,
+    "method": 6,
+    "fisher_p": 0.23511623511623514
+   },
+   {
+    "task": "Cap Opening",
+    "base_pol": 1,
+    "method": 8,
+    "fisher_p": 0.019656019656019652
+   },
+   {
+    "task": "Box Opening",
+    "base_pol": 1,
+    "method": 4,
+    "fisher_p": 0.3416493416493417
+   },
+   {
+    "task": "합산",
+    "base_pol": 12,
+    "method": 30,
+    "fisher_p": 0.002036343231121467
+   }
+  ],
+  "ViTAL": [
+   {
+    "task": "Peg-in-Hole",
+    "base_pol": 8,
+    "method": 10,
+    "fisher_p": 0.7511863074565595
+   },
+   {
+    "task": "Charger Insertion",
+    "base_pol": 2,
+    "method": 10,
+    "fisher_p": 0.013814147851967652
+   },
+   {
+    "task": "Cap Opening",
+    "base_pol": 1,
+    "method": 9,
+    "fisher_p": 0.00836173416818578
+   },
+   {
+    "task": "Box Opening",
+    "base_pol": 1,
+    "method": 6,
+    "fisher_p": 0.09147609147609148
+   },
+   {
+    "task": "합산",
+    "base_pol": 12,
+    "method": 35,
+    "fisher_p": 0.00010805532912424981
+   }
+  ]
+ },
+ "V7_gap_vs_best_baseline": {
+  "Peg-in-Hole": {
+   "ours": 100,
+   "best_baseline": 65,
+   "gap_pp": 35
+  },
+  "Charger Insertion": {
+   "ours": 100,
+   "best_baseline": 60,
+   "gap_pp": 40
+  },
+  "Cap Opening": {
+   "ours": 90,
+   "best_baseline": 50,
+   "gap_pp": 40
+  },
+  "Box Opening": {
+   "ours": 85,
+   "best_baseline": 35,
+   "gap_pp": 50
+  }
+ },
+ "V7_mean_gap_vs_best": 41.25,
+ "V7_min_gap": 35,
+ "V7_mean_gap_vs_each_baseline_avg": {
+  "PLD*": 41.25,
+  "PLD (Visual Only)": 56.25,
+  "ViTAL": 50.0
+ },
+ "V8_fig4_end_vs_table1": {
+  "PLD*": [
+   {
+    "task": "Peg-in-Hole",
+    "fig4_read": 60,
+    "table1": 65,
+    "diff": -5
+   },
+   {
+    "task": "Charger Insertion",
+    "fig4_read": 60,
+    "table1": 60,
+    "diff": 0
+   },
+   {
+    "task": "Cap Opening",
+    "fig4_read": 50,
+    "table1": 50,
+    "diff": 0
+   },
+   {
+    "task": "Box Opening",
+    "fig4_read": 40,
+    "table1": 35,
+    "diff": 5
+   }
+  ],
+  "PLD (Visual Only)": [
+   {
+    "task": "Peg-in-Hole",
+    "fig4_read": 60,
+    "table1": 60,
+    "diff": 0
+   },
+   {
+    "task": "Charger Insertion",
+    "fig4_read": 30,
+    "table1": 30,
+    "diff": 0
+   },
+   {
+    "task": "Cap Opening",
+    "fig4_read": 40,
+    "table1": 40,
+    "diff": 0
+   },
+   {
+    "task": "Box Opening",
+    "fig4_read": 20,
+    "table1": 20,
+    "diff": 0
+   }
+  ],
+  "ViTAL": [
+   {
+    "task": "Peg-in-Hole",
+    "fig4_read": 50,
+    "table1": 50,
+    "diff": 0
+   },
+   {
+    "task": "Charger Insertion",
+    "fig4_read": 50,
+    "table1": 50,
+    "diff": 0
+   },
+   {
+    "task": "Cap Opening",
+    "fig4_read": 45,
+    "table1": 45,
+    "diff": 0
+   },
+   {
+    "task": "Box Opening",
+    "fig4_read": 30,
+    "table1": 30,
+    "diff": 0
+   }
+  ],
+  "Ours": [
+   {
+    "task": "Peg-in-Hole",
+    "fig4_read": 100,
+    "table1": 100,
+    "diff": 0
+   },
+   {
+    "task": "Charger Insertion",
+    "fig4_read": 100,
+    "table1": 100,
+    "diff": 0
+   },
+   {
+    "task": "Cap Opening",
+    "fig4_read": 90,
+    "table1": 90,
+    "diff": 0
+   },
+   {
+    "task": "Box Opening",
+    "fig4_read": 80,
+    "table1": 85,
+    "diff": -5
+   }
+  ]
+ },
+ "V8_n_cells_differ": 3,
+ "V9_fig5": {
+  "pi0.5 (TeleOp)": {
+   "fig5_before": 15,
+   "fig5_after": 75,
+   "fig5_delta_label": 60,
+   "delta_recomputed": 60,
+   "delta_match": true,
+   "text42_initial": 20,
+   "text_equals_fig": false,
+   "fisher_p_before_vs_after": 0.00032841871599911934
+  },
+  "DP (TeleOp)": {
+   "fig5_before": 30,
+   "fig5_after": 90,
+   "fig5_delta_label": 60,
+   "delta_recomputed": 60,
+   "delta_match": true,
+   "text42_initial": 30,
+   "text_equals_fig": true,
+   "fisher_p_before_vs_after": 0.00024436175715374824
+  },
+  "ACT (TeleOp)": {
+   "fig5_before": 25,
+   "fig5_after": 80,
+   "fig5_delta_label": 55,
+   "delta_recomputed": 55,
+   "delta_match": true,
+   "text42_initial": 20,
+   "text_equals_fig": false,
+   "fisher_p_before_vs_after": 0.0012318573521842853
+  },
+  "Flow (TeleOp)": {
+   "fig5_before": 50,
+   "fig5_after": 90,
+   "fig5_delta_label": 40,
+   "delta_recomputed": 40,
+   "delta_match": true,
+   "text42_initial": 50,
+   "text_equals_fig": true,
+   "fisher_p_before_vs_after": 0.013814147851967653
+  },
+  "Flow (Human)": {
+   "fig5_before": 40,
+   "fig5_after": 100,
+   "fig5_delta_label": 60,
+   "delta_recomputed": 60,
+   "delta_match": true,
+   "text42_initial": 40,
+   "text_equals_fig": true,
+   "fisher_p_before_vs_after": 4.5095150768120733e-05
+  }
+ },
+ "V9_table2_vs_fig5": {
+  "ACT": [
+   25,
+   25
+  ],
+  "DP": [
+   30,
+   30
+  ],
+  "pi0.5": [
+   15,
+   15
+  ],
+  "Ours(ACT)": [
+   80,
+   80
+  ],
+  "Ours(DP)": [
+   90,
+   90
+  ],
+  "Ours(pi0.5)": [
+   75,
+   75
+  ],
+  "Ours": [
+   100,
+   100
+  ]
+ },
+ "V9_range_claim": {
+  "text": "15-50% -> 75-100%",
+  "before_min_max": [
+   15,
+   50
+  ],
+  "after_min_max": [
+   75,
+   100
+  ]
+ },
+ "V10_table2_pairs": [
+  {
+   "ours": "Ours (ACT)",
+   "baseline": "ACT + Tactile",
+   "k_ours": 16,
+   "k_base": 12,
+   "diff_pp": 20,
+   "fisher_p": 0.30084478249105606,
+   "newcombe_95": [
+    -8.2,
+    44.5
+   ]
+  },
+  {
+   "ours": "Ours (ACT)",
+   "baseline": "ACT",
+   "k_ours": 16,
+   "k_base": 5,
+   "diff_pp": 55,
+   "fisher_p": 0.0012318573521842853,
+   "newcombe_95": [
+    24.3,
+    73.3
+   ]
+  },
+  {
+   "ours": "Ours (DP)",
+   "baseline": "RDP",
+   "k_ours": 18,
+   "k_base": 13,
+   "diff_pp": 25,
+   "fisher_p": 0.12738612738612737,
+   "newcombe_95": [
+    -1.3,
+    47.9
+   ]
+  },
+  {
+   "ours": "Ours (DP)",
+   "baseline": "DP",
+   "k_ours": 18,
+   "k_base": 6,
+   "diff_pp": 60,
+   "fisher_p": 0.00024436175715374824,
+   "newcombe_95": [
+    30.3,
+    77.1
+   ]
+  },
+  {
+   "ours": "Ours (pi0.5)",
+   "baseline": "pi0.5 + Tactile",
+   "k_ours": 15,
+   "k_base": 9,
+   "diff_pp": 30,
+   "fisher_p": 0.10534026796540702,
+   "newcombe_95": [
+    -0.2,
+    53.6
+   ]
+  },
+  {
+   "ours": "Ours (pi0.5)",
+   "baseline": "pi0.5",
+   "k_ours": 15,
+   "k_base": 3,
+   "diff_pp": 60,
+   "fisher_p": 0.00032841871599911934,
+   "newcombe_95": [
+    29.7,
+    76.9
+   ]
+  },
+  {
+   "ours": "Ours",
+   "baseline": "RDP",
+   "k_ours": 20,
+   "k_base": 13,
+   "diff_pp": 35,
+   "fisher_p": 0.008316008316008316,
+   "newcombe_95": [
+    11.7,
+    56.7
+   ]
+  },
+  {
+   "ours": "Ours",
+   "baseline": "ACT + Tactile",
+   "k_ours": 20,
+   "k_base": 12,
+   "diff_pp": 40,
+   "fisher_p": 0.003276003276003276,
+   "newcombe_95": [
+    15.8,
+    61.3
+   ]
+  },
+  {
+   "ours": "Ours",
+   "baseline": "pi0.5 + Tactile",
+   "k_ours": 20,
+   "k_base": 9,
+   "diff_pp": 55,
+   "fisher_p": 0.00014530659691950015,
+   "newcombe_95": [
+    28.7,
+    74.2
+   ]
+  }
+ ],
+ "V10_claim_20_30": {
+  "ACT backbone": 20,
+  "DP backbone": 25,
+  "pi0.5 backbone": 30
+ },
+ "V10_pooled_3backbones": {
+  "ours": 49,
+  "best_imitation": 34,
+  "n": 60,
+  "fisher_p": 0.005270707430617674,
+  "newcombe_95": [
+   8.5,
+   39.8
+  ]
+ },
+ "V11_fig6": {
+  "Peg-in-Hole": {
+   "AnyTouch2": {
+    "pct": 100,
+    "k": 20,
+    "wilson": [
+     0.839,
+     1.0
+    ],
+    "fisher_vs_baseline": 4.5095150768120733e-05
+   },
+   "Sparsh": {
+    "pct": 100,
+    "k": 20,
+    "wilson": [
+     0.839,
+     1.0
+    ],
+    "fisher_vs_baseline": 4.5095150768120733e-05
+   },
+   "T3": {
+    "pct": 90,
+    "k": 18,
+    "wilson": [
+     0.699,
+     0.972
+    ],
+    "fisher_vs_baseline": 0.002199641243022778
+   },
+   "Marker": {
+    "pct": 100,
+    "k": 20,
+    "wilson": [
+     0.839,
+     1.0
+    ],
+    "fisher_vs_baseline": 4.5095150768120733e-05
+   },
+   "AnyTouch2_vs_Sparsh_p": 1.0,
+   "AnyTouch2_vs_T3_p": 0.48717948717948717,
+   "AnyTouch2_vs_Marker_p": 1.0
+  },
+  "Charger Insertion": {
+   "AnyTouch2": {
+    "pct": 100,
+    "k": 20,
+    "wilson": [
+     0.839,
+     1.0
+    ],
+    "fisher_vs_baseline": 3.351553382989278e-09
+   },
+   "Sparsh": {
+    "pct": 80,
+    "k": 16,
+    "wilson": [
+     0.584,
+     0.919
+    ],
+    "fisher_vs_baseline": 1.6643814099924754e-05
+   },
+   "T3": {
+    "pct": 70,
+    "k": 14,
+    "wilson": [
+     0.481,
+     0.855
+    ],
+    "fisher_vs_baseline": 0.0002443617571537482
+   },
+   "Marker": {
+    "pct": 100,
+    "k": 20,
+    "wilson": [
+     0.839,
+     1.0
+    ],
+    "fisher_vs_baseline": 3.351553382989278e-09
+   },
+   "AnyTouch2_vs_Sparsh_p": 0.10602910602910606,
+   "AnyTouch2_vs_T3_p": 0.020196020196020202,
+   "AnyTouch2_vs_Marker_p": 1.0
+  }
+ },
+ "V12_budget": {
+  "Peg-in-Hole": {
+   "total_min": 50,
+   "warmstart_min": 12,
+   "online_min": 38,
+   "max_steps_warmstart": 7200,
+   "max_steps_online": 22800,
+   "min_episodes_if_full_length_warmstart": 24.0,
+   "min_episodes_if_full_length_online": 76.0
+  },
+  "Charger Insertion": {
+   "total_min": 40,
+   "warmstart_min": 12,
+   "online_min": 28,
+   "max_steps_warmstart": 7200,
+   "max_steps_online": 16800,
+   "min_episodes_if_full_length_warmstart": 24.0,
+   "min_episodes_if_full_length_online": 56.0
+  },
+  "Cap Opening": {
+   "total_min": 60,
+   "warmstart_min": 12,
+   "online_min": 48,
+   "max_steps_warmstart": 7200,
+   "max_steps_online": 28800,
+   "min_episodes_if_full_length_warmstart": 24.0,
+   "min_episodes_if_full_length_online": 96.0
+  },
+  "Box Opening": {
+   "total_min": 80,
+   "warmstart_min": 12,
+   "online_min": 68,
+   "max_steps_warmstart": 7200,
+   "max_steps_online": 40800,
+   "min_episodes_if_full_length_warmstart": 24.0,
+   "min_episodes_if_full_length_online": 136.0
+  }
+ },
+ "V12_replay_buffer_vs_steps": {
+  "buffer_max": 10000,
+  "steps_warmstart_upper": 7200,
+  "steps_online_upper_peg": 22800,
+  "note": "ControlTac이 궤적당 2개를 더 만들므로 웜스타트 전이는 최대 3배(상한)"
+ },
+ "V12_scale_schedule": {
+  "schedule": [
+   0.05,
+   0.1,
+   0.15
+  ],
+  "interval_online_steps": 500,
+  "steps_to_reach_max": 1000,
+  "seconds_at_10hz": 100.0,
+  "fraction_of_peg_online_budget": 0.043859649122807015
+ },
+ "V12_total_eval_trials_peg_min": {
+  "checkpoints_10_trials": "0(기반 20회), 12, 15, 20, 30, 40 -> 5개 체크포인트 x 10회 + 최종 20회",
+  "trials": 70,
+  "note": "평가 시행의 시간이 '훈련 시간'에 들어가는지 논문에 적혀 있지 않다."
+ },
+ "V13_reward": {
+  "normalizer": 3.5,
+  "max_positive_all_terms": 1.0,
+  "max_if_reach_term_zero_after_grasp": 0.7142857142857143,
+  "max_if_grasp_term_zero": 0.8571428571428571,
+  "flow_reward_when_l_equals_L_main_text": 1.0333333333333334,
+  "flow_reward_max_appendix_l_le_L_minus_1": 1.0,
+  "safety_penalty_range_table4": [
+   -1,
+   0
+  ]
+ },
+ "V14_smoothness": {
+  "Human Demos": {
+   "M-SPARC": -2.889,
+   "M-LDLJ": -18.03
+  },
+  "Teleop Demos": {
+   "M-SPARC": -7.32,
+   "M-LDLJ": -19.7
+  },
+  "Human Policy": {
+   "M-SPARC": -2.664,
+   "M-LDLJ": -17.29
+  },
+  "TeleOp Policy": {
+   "M-SPARC": -9.521,
+   "M-LDLJ": -20.89
+  }
+ },
+ "V14_ldlj_ratio": {
+  "demos_teleop_over_human_exp": 5.312167797181157,
+  "policy_teleop_over_human_exp": 36.59823444367804,
+  "note": "LDLJ는 -log(무차원 저크)라 차이 1은 저크 비용 e배"
+ },
+ "V14_policy_minus_demos": {
+  "human": {
+   "SPARC": 0.22499999999999964,
+   "LDLJ": 0.740000000000002
+  },
+  "teleop": {
+   "SPARC": -2.2010000000000005,
+   "LDLJ": -1.1900000000000013
+  }
+ },
+ "V15_power_n20": {
+  "0.50_vs_0.50": 0.020447087263164597,
+  "0.85_vs_0.35": 0.8753834839707841,
+  "0.65_vs_0.35": 0.3365976861031746,
+  "0.80_vs_0.60": 0.19222546794429818,
+  "0.90_vs_0.65": 0.3607279627673767,
+  "0.75_vs_0.45": 0.3755771722744252,
+  "0.85_vs_0.50": 0.5733893084630479,
+  "0.95_vs_0.75": 0.2992165944641092
+ },
+ "V15_n_for_80pct_power": {
+  "0.80_vs_0.60": 90,
+  "0.90_vs_0.65": 50,
+  "0.75_vs_0.45": 50
+ },
+ "V16_checkpoint_se_pp": {
+  "p=0.1": 9.486832980505138,
+  "p=0.3": 14.491376746189438,
+  "p=0.5": 15.811388300841896,
+  "p=0.7": 14.491376746189438,
+  "p=0.9": 9.486832980505138
+ },
+ "V16_peg_ours_curve_read": {
+  "minutes": [
+   0,
+   12,
+   15,
+   20,
+   30,
+   40,
+   50
+  ],
+  "pct": [
+   40,
+   30,
+   30,
+   50,
+   90,
+   90,
+   100
+  ],
+  "note": "그림 판독. 12분(웜스타트 끝)과 15분 사이 평가는 각 10회, 0분은 20회"
+ },
+ "V17_ablation_end_n10": {
+  "보상(그림 15)": {
+   "No Reaching Reward": {
+    "pct": 80,
+    "k_of_10": 8,
+    "fisher_p_vs_ours_10_of_10": 0.4736842105263158
+   },
+   "No dense reward": {
+    "pct": 70,
+    "k_of_10": 7,
+    "fisher_p_vs_ours_10_of_10": 0.21052631578947367
+   },
+   "No Flow Reward": {
+    "pct": 70,
+    "k_of_10": 7,
+    "fisher_p_vs_ours_10_of_10": 0.21052631578947367
+   },
+   "No tactile reward": {
+    "pct": 90,
+    "k_of_10": 9,
+    "fisher_p_vs_ours_10_of_10": 1.0
+   }
+  },
+  "잔차 설계(그림 16)": {
+   "ACT + Ours": {
+    "pct": 50,
+    "k_of_10": 5,
+    "fisher_p_vs_ours_10_of_10": 0.032507739938080496
+   },
+   "Keypoints + per-step": {
+    "pct": 90,
+    "k_of_10": 9,
+    "fisher_p_vs_ours_10_of_10": 1.0
+   },
+   "ACT + per-step": {
+    "pct": 30,
+    "k_of_10": 3,
+    "fisher_p_vs_ours_10_of_10": 0.0030959752321981426
+   },
+   "No gating": {
+    "pct": 80,
+    "k_of_10": 8,
+    "fisher_p_vs_ours_10_of_10": 0.4736842105263158
+   },
+   "Visual-Tactile": {
+    "pct": 40,
+    "k_of_10": 4,
+    "fisher_p_vs_ours_10_of_10": 0.010835913312693499
+   }
+  },
+  "웜스타트(그림 17)": {
+   "w/o optimization (PLD*)": {
+    "pct": 60,
+    "k_of_10": 6,
+    "fisher_p_vs_ours_10_of_10": 0.08668730650154799
+   },
+   "w/o ControlTac": {
+    "pct": 80,
+    "k_of_10": 8,
+    "fisher_p_vs_ours_10_of_10": 0.4736842105263158
+   },
+   "w/o critic loss": {
+    "pct": 90,
+    "k_of_10": 9,
+    "fisher_p_vs_ours_10_of_10": 1.0
+   },
+   "w/o reconstruction loss": {
+    "pct": 90,
+    "k_of_10": 9,
+    "fisher_p_vs_ours_10_of_10": 1.0
+   }
+  },
+  "행동 공간(그림 18)": {
+   "No Scheduler": {
+    "pct": 90,
+    "k_of_10": 9,
+    "fisher_p_vs_ours_10_of_10": 1.0
+   },
+   "No Action Scale": {
+    "pct": 50,
+    "k_of_10": 5,
+    "fisher_p_vs_ours_10_of_10": 0.032507739938080496
+   },
+   "Action Scale = 0.5": {
+    "pct": 70,
+    "k_of_10": 7,
+    "fisher_p_vs_ours_10_of_10": 0.21052631578947367
+   }
+  }
+ },
+ "V17_n_sig_005": 4,
+ "V17_n_total": 16,
+ "V17_cell_unit_note": "10회 가정이면 값은 10%p 단위. Fig. 16 'ACT + Ours' 50%는 Fig. 5/표 2의 Ours (ACT) 80%와 다른 값"
+}
