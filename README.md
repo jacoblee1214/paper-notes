@@ -2,9 +2,9 @@
 
 로봇 학습(VLA, 제어, 물리 기반 학습) 논문을 깊게 읽고, 공개된 수치를 재계산하거나 코드와 대조하며 정리한 노트입니다.
 
-학회별로 묶었습니다(330편). 학회는 arXiv Comments·Journal ref, 원문, 프로젝트 페이지의 표기를 따랐고 각 글 머리말의 `venue`(묶음)와 `venue_note`(근거)에 적었습니다. 묶음 안에서는 날짜 역순입니다.
+학회별로 묶었습니다(331편). 학회는 arXiv Comments·Journal ref, 원문, 프로젝트 페이지의 표기를 따랐고 각 글 머리말의 `venue`(묶음)와 `venue_note`(근거)에 적었습니다. 묶음 안에서는 날짜 역순입니다.
 
-CoRL 2026 (101) · CoRL 2026 워크숍 (3) · IROS 2026 (23) · IROS 2026 워크숍 (2) · ICLR 2026 (6) · ICML 2026 (4) · NeurIPS 2026 (4) · RSS 2026 (4) · CVPR 2026 (2) · ECCV 2026 (1) · ICRA 2026 (1) · RA-L 2026 (1) · Robot Learning 2026 (1) · Science Robotics 2026 (1) · RSS 2025 (11) · ICRA 2025 (6) · CoRL 2025 (4) · ICCV 2025 (3) · ICLR 2025 (3) · NeurIPS 2025 (3) · ICML 2025 (2) · RA-L 2025 (2) · BMVC 2025 (1) · CVPR 2025 (1) · IEEE T-RO 2025 (1) · Nature 2025 (1) · CoRL 2024 (8) · RSS 2024 (6) · ICLR 2024 (2) · ICML 2024 (2) · IROS 2024 (2) · ICRA 2024 (1) · IJRR 2024 (1) · NeurIPS 2024 (1) · CoRL 2023 (3) · RSS 2023 (3) · ICRA 2023 (2) · ICLR 2023 (1) · ICML 2023 (1) · NeurIPS 2023 (1) · CoRL 2022 (1) · ICLR 2016 (1) · 학회 표기 없음 (arXiv) (89) · 기술 보고서·블로그 (13)
+CoRL 2026 (101) · CoRL 2026 워크숍 (3) · IROS 2026 (23) · IROS 2026 워크숍 (2) · ICLR 2026 (6) · ICML 2026 (4) · NeurIPS 2026 (4) · RSS 2026 (4) · CVPR 2026 (2) · ECCV 2026 (1) · ICRA 2026 (1) · RA-L 2026 (1) · Robot Learning 2026 (1) · Science Robotics 2026 (1) · RSS 2025 (11) · ICRA 2025 (6) · CoRL 2025 (4) · ICCV 2025 (3) · ICLR 2025 (3) · NeurIPS 2025 (3) · ICML 2025 (2) · RA-L 2025 (2) · BMVC 2025 (1) · CVPR 2025 (1) · IEEE T-RO 2025 (1) · Nature 2025 (1) · CoRL 2024 (8) · RSS 2024 (6) · ICLR 2024 (2) · ICML 2024 (2) · IROS 2024 (2) · ICRA 2024 (1) · IJRR 2024 (1) · NeurIPS 2024 (1) · CoRL 2023 (3) · RSS 2023 (3) · ICRA 2023 (2) · ICLR 2023 (1) · ICML 2023 (1) · NeurIPS 2023 (1) · CoRL 2022 (1) · ICLR 2016 (1) · 학회 표기 없음 (arXiv) (90) · 기술 보고서·블로그 (13)
 
 ## CoRL 2026 (101)
 
@@ -444,10 +444,11 @@ CoRL 2026 (101) · CoRL 2026 워크숍 (3) · IROS 2026 (23) · IROS 2026 워크
 |---|---|---|
 | 2026-10-28 | [DDPG 다시 읽기: 표적망은 확실하고, 나머지는 구현마다 다르다](papers/ddpg/) | 연속 제어 off-policy RL의 출발점인 DDPG를 Table 1 재계산, 주요 구현 4종 대조, numpy toy로 다시 읽었습니다. |
 
-## 학회 표기 없음 (arXiv) (89)
+## 학회 표기 없음 (arXiv) (90)
 
 | 날짜 | 글 | 요약 |
 |---|---|---|
+| 2026-11-23 | [휴머노이드 도구 사용 벤치마크 읽기: 도구를 집은 뒤에는 무엇이 막힐까](papers/humanoid_toolbench/) | HumanoidToolBench(arXiv v1)를 표 재계산과 공식 코드 정적 대조로 읽었습니다. 강한 정책과 나머지의 격차, 정지 사용에서 이동 사용으로 갈 때의 큰 낙폭은 분명합니다. 디코이 효과는 방향만 일관되고 칸별로는 구별되지 않으며(칸당 100 에피소드 가정), 실로봇의 두 강한 정책은 18/40 대 18/40입니다. 시뮬 L1·L2 성공은 올바른 도구 사용을 요구하지 않는 조건입니다. |
 | 2026-11-22 | [학습 없이 WAM을 빠르게: WAMotor 읽기](papers/wamotor/) | 월드 액션 모델의 다단계 denoising을 학습 없이 줄이는 WAMotor를 표 재계산과 공식 코드 정적 대조로 읽었습니다. 속도비는 표와 맞고, Vanilla 대비 성공률 차이는 검출되지 않으며, LIBERO 평가 코드와 기준선 구현은 저장소에 없습니다. |
 | 2026-11-22 | [표는 맞지만 주장은 조심해서: DiffWAM 읽기](papers/diffwam/) | DiffWAM의 표 값을 모두 다시 계산했습니다. 평균은 맞지만 본문 값은 학습 3회 중 최댓값이고, 실로봇 +15.0 pp와 RoboTwin의 '일관된 개선'은 통계적으로 약합니다. 공식 코드는 아직 없습니다. |
 | 2026-11-22 | [탐색을 언제 멈출까: When to Refine 읽기](papers/when_to_refine_wm/) | 동결된 LeWorldModel 위의 CEM 계획에서 5회째에 탐색을 더 할지 정하는 게이트를 읽었습니다. 산술은 모두 맞고 계산량은 줄지만, 같은 작업량에서의 이득 +5.4pp는 구간이 0을 포함하고 부호도 시드마다 다릅니다. |
