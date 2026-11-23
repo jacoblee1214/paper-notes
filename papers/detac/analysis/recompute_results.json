@@ -1,0 +1,296 @@
+{
+ "V1_split": {
+  "total": 1080,
+  "unseen_object_images": 100,
+  "unseen_pose_images": 49,
+  "train_images": 931,
+  "sum_check": 1080,
+  "steps_per_epoch_bs2": 466,
+  "total_steps_300_epochs": 139800,
+  "aux_loss_steps_after_100_epochs": 93200,
+  "fid_cov_rank_max_pose": 48,
+  "fid_cov_rank_max_object": 99,
+  "inception_feature_dim": 2048
+ },
+ "V2_psnr_gain_vs_tacdiff": {
+  "pose": 7.93,
+  "obj": 7.67
+ },
+ "V2_psnr_gain_vs_unet": {
+  "pose": 0.89,
+  "obj": 0.04
+ },
+ "V2_psnr_gain_vs_best_deterministic": {
+  "pose": 0.89,
+  "obj": 0.04
+ },
+ "V3_column_best": {
+  "pose_FID": {
+   "best": "DeTac Full",
+   "second": "DeTac w/o Lcon",
+   "gap": 2.21
+  },
+  "pose_KID": {
+   "best": "DeTac Full",
+   "second": "DeTac w/o Lcon",
+   "gap": 0.006
+  },
+  "pose_PSNR": {
+   "best": "DeTac Full",
+   "second": "U-Net",
+   "gap": 0.89
+  },
+  "pose_SSIM": {
+   "best": "DeTac Full",
+   "second": "Pix2Pix",
+   "gap": 0.002
+  },
+  "obj_FID": {
+   "best": "DeTac Full",
+   "second": "DeTac w/o Lcon",
+   "gap": 2.38
+  },
+  "obj_KID": {
+   "best": "DeTac Full",
+   "second": "DeTac w/o Lcon",
+   "gap": 0.061
+  },
+  "obj_PSNR": {
+   "best": "DeTac Full",
+   "second": "U-Net",
+   "gap": 0.04
+  },
+  "obj_SSIM": {
+   "best": "DeTac Full",
+   "second": "Pix2Pix",
+   "gap": 0.002
+  }
+ },
+ "V4_ablation_delta_vs_full": {
+  "DeTac w/o Lsur|pose": {
+   "FID": 5.34,
+   "KID": 0.05,
+   "PSNR": -4.81,
+   "SSIM": -0.007,
+   "FID_ratio": 1.26
+  },
+  "DeTac w/o Lsur|obj": {
+   "FID": 5.53,
+   "KID": 0.125,
+   "PSNR": -4.02,
+   "SSIM": -0.005,
+   "FID_ratio": 1.32
+  },
+  "DeTac w/o Lcon|pose": {
+   "FID": 2.21,
+   "KID": 0.006,
+   "PSNR": -1.68,
+   "SSIM": -0.004,
+   "FID_ratio": 1.11
+  },
+  "DeTac w/o Lcon|obj": {
+   "FID": 2.38,
+   "KID": 0.061,
+   "PSNR": -0.79,
+   "SSIM": -0.002,
+   "FID_ratio": 1.14
+  }
+ },
+ "V4_wo_Lsur_psnr_below_deterministic": {
+  "pose": {
+   "U-Net": 38.56,
+   "Pix2Pix": 38.53,
+   "dual-head": 37.99,
+   "w/o Lsur": 34.64
+  },
+  "obj": {
+   "U-Net": 39.03,
+   "Pix2Pix": 38.98,
+   "dual-head": 38.37,
+   "w/o Lsur": 35.05
+  }
+ },
+ "V5_enlarged_mask_vs_original": {
+  "TacDiff|pose": {
+   "FID": 13.07,
+   "KID": 0.451,
+   "PSNR": -0.59,
+   "SSIM": -0.014,
+   "improved_metrics": []
+  },
+  "TacDiff|obj": {
+   "FID": 25.33,
+   "KID": 1.73,
+   "PSNR": -0.56,
+   "SSIM": -0.016,
+   "improved_metrics": []
+  },
+  "LaMa|pose": {
+   "FID": -28.03,
+   "KID": -4.781,
+   "PSNR": 1.14,
+   "SSIM": 0.036,
+   "improved_metrics": [
+    "FID",
+    "KID",
+    "PSNR",
+    "SSIM"
+   ]
+  },
+  "LaMa|obj": {
+   "FID": -29.7,
+   "KID": -4.766,
+   "PSNR": 1.11,
+   "SSIM": 0.036,
+   "improved_metrics": [
+    "FID",
+    "KID",
+    "PSNR",
+    "SSIM"
+   ]
+  }
+ },
+ "V6_mcle": {
+  "ratio_uvtac_over_full": 27.6,
+  "ratio_sam_over_full": 53.8,
+  "wo_Lsur_rel_increase_pct": 10.1,
+  "wo_Lcon_rel_increase_pct": 9.2,
+  "wo_Lsur_minus_wo_Lcon_pct_of_full": 0.9,
+  "full_in_um": 7.62,
+  "mm_per_px_for_1px_error_equals_full": 0.00762
+ },
+ "V7_force_surface": {
+  "force_rel_reduction_vs_mixed_pct": 55.9,
+  "force_rel_reduction_vs_uvtac_pct": 25.2,
+  "force_sam_over_mixed_ratio": 2.39,
+  "chamfer_rel_reduction_pct": 31.5,
+  "rmse_rel_reduction_pct": 36.0,
+  "chamfer_abs_diff_um": 52.0,
+  "rmse_abs_diff_um": 40.0
+ },
+ "V8_tableA1": {
+  "feasible_counts": {
+   "raw": [
+    [
+     5
+    ],
+    [
+     13
+    ],
+    [
+     27
+    ]
+   ],
+   "deTac": [
+    [
+     25
+    ],
+    [
+     22
+    ],
+    [
+     29
+    ]
+   ]
+  },
+  "counts": {
+   "raw": [
+    5,
+    13,
+    27
+   ],
+   "raw_overall": 45,
+   "deTac": [
+    25,
+    22,
+    29
+   ],
+   "deTac_overall": 76
+  },
+  "wilson": {
+   "raw": [
+    [
+     7.3,
+     33.6
+    ],
+    [
+     27.4,
+     60.8
+    ],
+    [
+     74.4,
+     96.5
+    ],
+    [
+     39.9,
+     60.1
+    ]
+   ],
+   "deTac": [
+    [
+     66.4,
+     92.7
+    ],
+    [
+     55.6,
+     85.8
+    ],
+    [
+     83.3,
+     99.4
+    ],
+    [
+     75.6,
+     90.5
+    ]
+   ]
+  },
+  "fisher_p": {
+   "A": 3.564155473790975e-07,
+   "B": 0.03521738569492147,
+   "C": 0.6119536128456735,
+   "overall": 1.2688809789450017e-06
+  },
+  "overall_pct_recomputed_raw": 50.0,
+  "overall_pct_recomputed_deTac": 84.44,
+  "holm_adjusted_three_fabrics": {
+   "A": 1.0692466421372925e-06,
+   "B": 0.07043477138984294,
+   "C": 0.6119536128456735
+  },
+  "chance_if_k_classes_pct": {
+   "3": 33.3,
+   "4": 25.0,
+   "5": 20.0
+  }
+ },
+ "V9_force_variation_mae": {
+  "mae_0_255": 3.072,
+  "psnr_upper_bound_db_if_rmse_ge_mae": 38.38,
+  "note": "RMSE >= MAE 이므로 같은 두 이미지의 PSNR은 이 값 이하"
+ },
+ "V10_training_cost": {
+  "total_steps": 139800,
+  "hours_reported": 14,
+  "sec_per_step_implied": 0.361
+ },
+ "V11_mean_rank_over_8_columns": {
+  "DeTac Full": 1.0,
+  "DeTac w/o Lcon": 3.0,
+  "Pix2Pix": 4.12,
+  "dual-head": 4.12,
+  "DeTac w/o Lsur": 4.38,
+  "U-Net": 4.75,
+  "TacDiff": 7.75,
+  "SD 1.5": 8.38,
+  "TELEA": 8.75,
+  "TacDiff (enl.)": 9.12,
+  "LaMa (enl.)": 10.62,
+  "LaMa": 11.75
+ },
+ "V12_fid_ratio": {
+  "deterministic_best_over_full_pose": 5.1,
+  "deterministic_best_over_full_obj": 6.17,
+  "sd15_over_full_pose": 5.95
+ }
+}
