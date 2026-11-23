@@ -1,0 +1,874 @@
+{
+ "n_trial_per_task": 16,
+ "V1_table1_means": {
+  "ViTacFormer": {
+   "mean": 2.5,
+   "reported": 3,
+   "rounded_ok": true
+  },
+  "RDP": {
+   "mean": 5.583,
+   "reported": 6,
+   "rounded_ok": true
+  },
+  "Tactile-VLA": {
+   "mean": 14.5,
+   "reported": 15,
+   "rounded_ok": true
+  },
+  "EgoScale": {
+   "mean": 34.5,
+   "reported": 35,
+   "rounded_ok": true
+  },
+  "pi0.5": {
+   "mean": 16.833,
+   "reported": 17,
+   "rounded_ok": true
+  },
+  "pi0.5 + tactile": {
+   "mean": 6.333,
+   "reported": 6,
+   "rounded_ok": true
+  },
+  "Ours": {
+   "mean": 64.583,
+   "reported": 65,
+   "rounded_ok": true
+  }
+ },
+ "V2_binary_grid_feasibility": {
+  "cells_total": 84,
+  "cells_not_on_k_over_16_grid": 63,
+  "examples": [
+   [
+    "ViTacFormer",
+    "Flip Page",
+    9
+   ],
+   [
+    "ViTacFormer",
+    "Wipe Plate",
+    4
+   ],
+   [
+    "ViTacFormer",
+    "Apply Paste",
+    1
+   ],
+   [
+    "ViTacFormer",
+    "Split Cup",
+    4
+   ],
+   [
+    "ViTacFormer",
+    "Sort Mahjong",
+    7
+   ],
+   [
+    "ViTacFormer",
+    "Extract Card",
+    2
+   ],
+   [
+    "ViTacFormer",
+    "Deal Poker",
+    2
+   ],
+   [
+    "ViTacFormer",
+    "Screw Bulb",
+    1
+   ],
+   [
+    "RDP",
+    "Transfer Egg",
+    8
+   ],
+   [
+    "RDP",
+    "Wipe Plate",
+    18
+   ],
+   [
+    "RDP",
+    "Apply Paste",
+    2
+   ],
+   [
+    "RDP",
+    "Sort Mahjong",
+    9
+   ]
+  ]
+ },
+ "V3_table2": {
+  "Full": {
+   "mean": 65.333,
+   "reported": 65,
+   "rounded_ok": true,
+   "delta_vs_full_pts": 0.0,
+   "delta_reported": null,
+   "delta_ok": true,
+   "tasks_below_full": 0
+  },
+  "w/o Tactile": {
+   "mean": 41.667,
+   "reported": 42,
+   "rounded_ok": true,
+   "delta_vs_full_pts": -23.67,
+   "delta_reported": -23,
+   "delta_ok": true,
+   "tasks_below_full": 6
+  },
+  "MLP Force + Deform": {
+   "mean": 58.333,
+   "reported": 58,
+   "rounded_ok": true,
+   "delta_vs_full_pts": -7.0,
+   "delta_reported": -7,
+   "delta_ok": true,
+   "tasks_below_full": 6
+  },
+  "Deform": {
+   "mean": 54.333,
+   "reported": 54,
+   "rounded_ok": true,
+   "delta_vs_full_pts": -11.0,
+   "delta_reported": -11,
+   "delta_ok": true,
+   "tasks_below_full": 6
+  },
+  "MLP Force + VQVAE Force": {
+   "mean": 58.833,
+   "reported": 59,
+   "rounded_ok": true,
+   "delta_vs_full_pts": -6.5,
+   "delta_reported": -6,
+   "delta_ok": true,
+   "tasks_below_full": 6
+  },
+  "w/o Async": {
+   "mean": 60.0,
+   "reported": 60,
+   "rounded_ok": true,
+   "delta_vs_full_pts": -5.33,
+   "delta_reported": -5,
+   "delta_ok": true,
+   "tasks_below_full": 6
+  }
+ },
+ "V3_table3": {
+  "pre-, mid-": {
+   "mean": 17.833,
+   "reported": 18,
+   "rounded_ok": true
+  },
+  "pre-, mid+": {
+   "mean": 34.167,
+   "reported": 34,
+   "rounded_ok": true
+  },
+  "pre+, mid-": {
+   "mean": 44.667,
+   "reported": 45,
+   "rounded_ok": true
+  },
+  "pre+, mid+": {
+   "mean": 65.333,
+   "reported": 65,
+   "rounded_ok": true
+  }
+ },
+ "V4_cross_table_consistency": {
+  "T1_Ours_six_equals_T2_Full": true,
+  "T3_full_row_equals_T2_Full": true,
+  "F6_T-Rex_dataset_equals_T2_Full": true,
+  "F5_blue_at_100_equals_T2_Full(3 tasks)": true,
+  "F4_Kslow6_equals_T2_Full(3 tasks)": true,
+  "F6_w/o_mid_equals_T3_pre+_mid-": true,
+  "F5_green_at_100_vs_T3_pre+_mid-": {
+   "Apply Toothpaste": [
+    34,
+    40
+   ],
+   "Split Cup": [
+    52,
+    52
+   ],
+   "Extract Card": [
+    46,
+    46
+   ]
+  },
+  "F5_green_at_100_vs_T3_pre-_mid+": {
+   "Apply Toothpaste": [
+    34,
+    34
+   ],
+   "Split Cup": [
+    52,
+    45
+   ],
+   "Extract Card": [
+    46,
+    32
+   ]
+  }
+ },
+ "V5_rubric_sums": {
+  "Flip Page": 1.0,
+  "Transfer Egg": 1.0,
+  "Wipe Plate": 1.0,
+  "Apply Paste": 1.0,
+  "Split Cup": 1.0,
+  "Sort Mahjong": 1.0,
+  "Open Lock": 1.0,
+  "Refill Tablet": 1.0,
+  "Acid-Base Neut.": 1.0,
+  "Extract Card": 1.0,
+  "Deal Poker": 1.0,
+  "Screw Bulb": 1.0
+ },
+ "V6_table1_mean_uncertainty": {
+  "ViTacFormer": {
+   "mean_pct": 2.5,
+   "se_bernoulli_pts": 1.11,
+   "ci95_half_pts": 2.17
+  },
+  "RDP": {
+   "mean_pct": 5.58,
+   "se_bernoulli_pts": 1.61,
+   "ci95_half_pts": 3.16
+  },
+  "Tactile-VLA": {
+   "mean_pct": 14.5,
+   "se_bernoulli_pts": 2.41,
+   "ci95_half_pts": 4.73
+  },
+  "EgoScale": {
+   "mean_pct": 34.5,
+   "se_bernoulli_pts": 3.28,
+   "ci95_half_pts": 6.42
+  },
+  "pi0.5": {
+   "mean_pct": 16.83,
+   "se_bernoulli_pts": 2.59,
+   "ci95_half_pts": 5.07
+  },
+  "pi0.5 + tactile": {
+   "mean_pct": 6.33,
+   "se_bernoulli_pts": 1.67,
+   "ci95_half_pts": 3.28
+  },
+  "Ours": {
+   "mean_pct": 64.58,
+   "se_bernoulli_pts": 3.24,
+   "ci95_half_pts": 6.35
+  },
+  "worst_case_se_pts(0.5/sqrt(192))": 3.61
+ },
+ "V7_table1_ours_vs_baselines": {
+  "ViTacFormer": {
+   "mean_diff_pts": 62.08,
+   "wins": 12,
+   "min_task_diff": 34,
+   "task_of_min": "Screw Bulb",
+   "fisher_p_by_task_unadj": [
+    8.55e-07,
+    1.61e-05,
+    0.000635,
+    6.77e-05,
+    0.000171,
+    0.00205,
+    0.00245,
+    0.0068,
+    1.61e-05,
+    6.77e-05,
+    0.000816,
+    0.0177
+   ],
+   "n_tasks_p<0.05_unadj": 12,
+   "n_tasks_p<0.05_holm": 12,
+   "tasks_not_sig_holm": [],
+   "z_bernoulli_p_by_task": [
+    0.0,
+    4.26e-12,
+    2.26e-07,
+    7.81e-08,
+    1.05e-10,
+    1.8e-05,
+    0.000165,
+    0.000855,
+    1.09e-12,
+    1.37e-08,
+    1.9e-05,
+    0.00525
+   ],
+   "n_tasks_z_p<0.05_unadj": 12,
+   "pooled_fisher_p_binary_approx": 1.73e-44,
+   "sign_test_p": 0.000488,
+   "wilcoxon_p": 0.000488
+  },
+  "RDP": {
+   "mean_diff_pts": 59.0,
+   "wins": 12,
+   "min_task_diff": 28,
+   "task_of_min": "Screw Bulb",
+   "fisher_p_by_task_unadj": [
+    6.84e-06,
+    0.000171,
+    0.0113,
+    6.77e-05,
+    0.000171,
+    0.00205,
+    0.00245,
+    0.0068,
+    1.61e-05,
+    6.77e-05,
+    0.000816,
+    0.0829
+   ],
+   "n_tasks_p<0.05_unadj": 11,
+   "n_tasks_p<0.05_holm": 11,
+   "tasks_not_sig_holm": [
+    "Screw Bulb"
+   ],
+   "z_bernoulli_p_by_task": [
+    0.0,
+    1.56e-07,
+    0.000691,
+    2.19e-07,
+    1.62e-09,
+    5.65e-05,
+    0.000516,
+    0.000855,
+    1.09e-12,
+    3.96e-09,
+    1.9e-05,
+    0.0384
+   ],
+   "n_tasks_z_p<0.05_unadj": 12,
+   "pooled_fisher_p_binary_approx": 9.42e-39,
+   "sign_test_p": 0.000488,
+   "wilcoxon_p": 0.000488
+  },
+  "Tactile-VLA": {
+   "mean_diff_pts": 50.08,
+   "wins": 12,
+   "min_task_diff": 17,
+   "task_of_min": "Screw Bulb",
+   "fisher_p_by_task_unadj": [
+    0.00205,
+    0.000965,
+    0.032,
+    6.77e-05,
+    0.00385,
+    0.0732,
+    0.0155,
+    0.0068,
+    0.000171,
+    0.000635,
+    0.0233,
+    0.433
+   ],
+   "n_tasks_p<0.05_unadj": 10,
+   "n_tasks_p<0.05_holm": 7,
+   "tasks_not_sig_holm": [
+    "Wipe Plate",
+    "Sort Mahjong",
+    "Open Lock",
+    "Deal Poker",
+    "Screw Bulb"
+   ],
+   "z_bernoulli_p_by_task": [
+    9.33e-06,
+    1.1e-05,
+    0.00425,
+    2.5e-08,
+    8.69e-05,
+    0.0197,
+    0.00603,
+    0.000855,
+    1.86e-07,
+    1.18e-07,
+    0.00168,
+    0.267
+   ],
+   "n_tasks_z_p<0.05_unadj": 11,
+   "pooled_fisher_p_binary_approx": 5.18e-25,
+   "sign_test_p": 0.000488,
+   "wilcoxon_p": 0.000488
+  },
+  "EgoScale": {
+   "mean_diff_pts": 30.08,
+   "wins": 12,
+   "min_task_diff": 17,
+   "task_of_min": "Screw Bulb",
+   "fisher_p_by_task_unadj": [
+    0.172,
+    0.149,
+    0.0756,
+    0.156,
+    0.032,
+    0.289,
+    0.135,
+    0.113,
+    0.149,
+    0.285,
+    0.149,
+    0.433
+   ],
+   "n_tasks_p<0.05_unadj": 1,
+   "n_tasks_p<0.05_holm": 0,
+   "tasks_not_sig_holm": [
+    "Flip Page",
+    "Transfer Egg",
+    "Wipe Plate",
+    "Apply Paste",
+    "Split Cup",
+    "Sort Mahjong",
+    "Open Lock",
+    "Refill Tablet",
+    "Acid-Base Neut.",
+    "Extract Card",
+    "Deal Poker",
+    "Screw Bulb"
+   ],
+   "z_bernoulli_p_by_task": [
+    0.0269,
+    0.0598,
+    0.0345,
+    0.0987,
+    0.00407,
+    0.0865,
+    0.0777,
+    0.0491,
+    0.0435,
+    0.0844,
+    0.0826,
+    0.267
+   ],
+   "n_tasks_z_p<0.05_unadj": 5,
+   "pooled_fisher_p_binary_approx": 4.61e-09,
+   "sign_test_p": 0.000488,
+   "wilcoxon_p": 0.000488
+  },
+  "pi0.5": {
+   "mean_diff_pts": 47.75,
+   "wins": 12,
+   "min_task_diff": 24,
+   "task_of_min": "Screw Bulb",
+   "fisher_p_by_task_unadj": [
+    0.00205,
+    0.00385,
+    0.032,
+    0.00319,
+    0.00385,
+    0.156,
+    0.0155,
+    0.0068,
+    0.0121,
+    0.000635,
+    0.00592,
+    0.22
+   ],
+   "n_tasks_p<0.05_unadj": 10,
+   "n_tasks_p<0.05_holm": 7,
+   "tasks_not_sig_holm": [
+    "Wipe Plate",
+    "Sort Mahjong",
+    "Open Lock",
+    "Acid-Base Neut.",
+    "Screw Bulb"
+   ],
+   "z_bernoulli_p_by_task": [
+    3.67e-06,
+    5.18e-05,
+    0.011,
+    0.000263,
+    2.16e-05,
+    0.0479,
+    0.00204,
+    0.00143,
+    0.000574,
+    3.21e-06,
+    0.000786,
+    0.0924
+   ],
+   "n_tasks_z_p<0.05_unadj": 11,
+   "pooled_fisher_p_binary_approx": 3.32e-22,
+   "sign_test_p": 0.000488,
+   "wilcoxon_p": 0.000488
+  },
+  "pi0.5 + tactile": {
+   "mean_diff_pts": 58.25,
+   "wins": 12,
+   "min_task_diff": 35,
+   "task_of_min": "Screw Bulb",
+   "fisher_p_by_task_unadj": [
+    8.55e-07,
+    0.000171,
+    0.032,
+    6.77e-05,
+    0.000171,
+    0.00915,
+    0.00245,
+    0.0068,
+    0.000171,
+    6.77e-05,
+    0.000816,
+    0.0177
+   ],
+   "n_tasks_p<0.05_unadj": 12,
+   "n_tasks_p<0.05_holm": 12,
+   "tasks_not_sig_holm": [],
+   "z_bernoulli_p_by_task": [
+    0.0,
+    3.65e-07,
+    0.00878,
+    2.19e-07,
+    1.05e-10,
+    0.000543,
+    0.000516,
+    0.000855,
+    2.89e-08,
+    4.23e-08,
+    4.12e-06,
+    0.00333
+   ],
+   "n_tasks_z_p<0.05_unadj": 12,
+   "pooled_fisher_p_binary_approx": 9.23e-38,
+   "sign_test_p": 0.000488,
+   "wilcoxon_p": 0.000488
+  }
+ },
+ "V8_relative": {
+  "abs_gain_vs_EgoScale_pts": 30.08,
+  "relative_gain_vs_EgoScale_pct": 87.2,
+  "ratio_vs_EgoScale": 1.87,
+  "tasks_where_ours_below_50": [
+   "Open Lock",
+   "Refill Tablet",
+   "Screw Bulb"
+  ],
+  "pi05_tactile_minus_pi05_pts": -10.5,
+  "pi05_tactile_worse_in_tasks": 12,
+  "min_diff_task_vs_EgoScale": {
+   "task": "Screw Bulb",
+   "diff": 17
+  }
+ },
+ "V9_six_task_decomposition": {
+  "EgoScale_six_mean": 36.17,
+  "T-Rex_w/o_tactile_six_mean": 41.67,
+  "T-Rex_full_six_mean": 65.33,
+  "full_minus_EgoScale": 29.17,
+  "wo_tactile_minus_EgoScale": 5.5,
+  "full_minus_wo_tactile": 23.67,
+  "share_of_gap_from_tactile_pct": 81.1,
+  "ours_12task_mean": 64.58,
+  "ours_other6_mean": 63.83,
+  "EgoScale_other6_mean": 32.83
+ },
+ "V10_table2_ablation_tests": {
+  "w/o Tactile": {
+   "delta_pts": 23.67,
+   "z_bernoulli": 3.38,
+   "p_z": 0.000714,
+   "p_fisher_binary_approx": 0.00139,
+   "tasks_full_higher": 6,
+   "sign_test_p": 0.0312,
+   "p_z_holm_over_5": 0.00357
+  },
+  "MLP Force + Deform": {
+   "delta_pts": 7.0,
+   "z_bernoulli": 1.0,
+   "p_z": 0.317,
+   "p_fisher_binary_approx": 0.372,
+   "tasks_full_higher": 6,
+   "sign_test_p": 0.0312,
+   "p_z_holm_over_5": 0.951
+  },
+  "Deform": {
+   "delta_pts": 11.0,
+   "z_bernoulli": 1.56,
+   "p_z": 0.118,
+   "p_fisher_binary_approx": 0.141,
+   "tasks_full_higher": 6,
+   "sign_test_p": 0.0312,
+   "p_z_holm_over_5": 0.471
+  },
+  "MLP Force + VQVAE Force": {
+   "delta_pts": 6.5,
+   "z_bernoulli": 0.93,
+   "p_z": 0.352,
+   "p_fisher_binary_approx": 0.372,
+   "tasks_full_higher": 6,
+   "sign_test_p": 0.0312,
+   "p_z_holm_over_5": 0.951
+  },
+  "w/o Async": {
+   "delta_pts": 5.33,
+   "z_bernoulli": 0.77,
+   "p_z": 0.444,
+   "p_fisher_binary_approx": 0.55,
+   "tasks_full_higher": 6,
+   "sign_test_p": 0.0312,
+   "p_z_holm_over_5": 0.951
+  }
+ },
+ "V10_minimum_detectable_diff_pts": {
+  "single_task_16_vs_16": 49.5,
+  "six_tasks_96_vs_96": 20.2,
+  "twelve_tasks_192_vs_192": 14.3
+ },
+ "V11_table3_additivity": {
+  "pre_gain": 26.83,
+  "mid_gain": 16.33,
+  "both_gain": 47.5,
+  "sum_of_single": 43.17,
+  "interaction": 4.33,
+  "pre+mid-_vs_EgoScale_six": 8.5
+ },
+ "V12_figure4_split_step": {
+  "Apply Toothpaste": {
+   "max_minus_min": 4,
+   "argmax_K": [
+    4,
+    6
+   ],
+   "se_per_point_bernoulli_pts": 12.0
+  },
+  "Split Cup": {
+   "max_minus_min": 7,
+   "argmax_K": [
+    6
+   ],
+   "se_per_point_bernoulli_pts": 10.9
+  },
+  "Extract Card": {
+   "max_minus_min": 5,
+   "argmax_K": [
+    6
+   ],
+   "se_per_point_bernoulli_pts": 11.7
+  },
+  "w/o_Async_values": {
+   "Apply Toothpaste": 61,
+   "Split Cup": 73,
+   "Extract Card": 59
+  },
+  "pooled_range_over_K_(mean of 3 tasks)": [
+   66.33,
+   68.0,
+   69.67,
+   71.33,
+   68.33
+  ]
+ },
+ "V13_figure5_data_efficiency": {
+  "gap_blue_minus_green": {
+   "Apply Toothpaste": [
+    20,
+    33,
+    30,
+    32,
+    35
+   ],
+   "Split Cup": [
+    19,
+    26,
+    28,
+    26,
+    30
+   ],
+   "Extract Card": [
+    14,
+    28,
+    24,
+    24,
+    28
+   ]
+  },
+  "blue_wins": 15,
+  "pairs": 15,
+  "blue20_vs_green200": {
+   "Apply Toothpaste": [
+    51,
+    36
+   ],
+   "Split Cup": [
+    59,
+    55
+   ],
+   "Extract Card": [
+    48,
+    50
+   ]
+  },
+  "blue50_vs_green200": {
+   "Apply Toothpaste": [
+    60,
+    36
+   ],
+   "Split Cup": [
+    70,
+    55
+   ],
+   "Extract Card": [
+    60,
+    50
+   ]
+  },
+  "mean_gap_by_N": [
+   17.67,
+   29.0,
+   27.33,
+   27.33,
+   31.0
+  ],
+  "sign_test_p_15_of_15": 6.1e-05,
+  "per_point_z_N10": {
+   "Apply Toothpaste": 1.49,
+   "Split Cup": 1.25,
+   "Extract Card": 1.03
+  },
+  "per_point_p_N10": {
+   "Apply Toothpaste": 0.136,
+   "Split Cup": 0.212,
+   "Extract Card": 0.305
+  }
+ },
+ "V14_figure6_midtraining": {
+  "post": {
+   "means": {
+    "T-Rex dataset": 65.33,
+    "Task-specific": 57.5,
+    "w/o mid-training": 44.67
+   },
+   "trex_minus_task_specific_by_task": [
+    5,
+    16,
+    6,
+    8,
+    6,
+    6
+   ],
+   "trex_beats_task_specific_in": 6,
+   "n_tasks": 6
+  },
+  "zero_shot": {
+   "means": {
+    "T-Rex dataset": 27.5,
+    "Task-specific": 7.5,
+    "w/o mid-training": 2.5
+   },
+   "trex_minus_task_specific_by_task": [
+    30,
+    15,
+    25,
+    10
+   ],
+   "trex_beats_task_specific_in": 4,
+   "n_tasks": 4
+  },
+  "post_task_specific_vs_wo_mid_gain": 12.83,
+  "post_trex_vs_task_specific_gain": 7.83
+ },
+ "V15_dataset_arithmetic": {
+  "pairs_207x22": 4554,
+  "episodes_per_pair": 15.45,
+  "mean_episode_sec_from_100h_7755": 46.42,
+  "paper_median_sec": 29.8,
+  "paper_q1_q3_sec": [
+   21.0,
+   41.1
+  ],
+  "released_episodes": 5464,
+  "released_frames": 5473459,
+  "released_hours_at_30fps": 50.68,
+  "released_mean_episode_sec": 33.39,
+  "released_share_of_episodes_pct": 70.5,
+  "released_share_of_hours_vs_100h_pct": 50.7,
+  "implied_unreleased_episodes": 2291,
+  "implied_unreleased_hours_if_100h": 49.32,
+  "implied_unreleased_mean_episode_sec_if_100h": 77.5,
+  "collection_hours_per_week_10_weeks": 10.0,
+  "dataset_tb_hf_usedStorage": 1.55
+ },
+ "V16_param_count": {
+  "assumed_config": {
+   "hidden": 2048,
+   "layers": 28,
+   "heads": 16,
+   "kv_heads": 8,
+   "head_dim": 128,
+   "intermediate": 6144,
+   "vocab": 151936,
+   "vit_params_assumed": 400000000.0
+  },
+  "latent_expert_nonembed_B": 1.409,
+  "action_expert_nonembed_B": 1.409,
+  "tactile_expert_B": 0.617,
+  "embedding_table_B": 0.311,
+  "deform_proj_M": 63.2,
+  "approx_total_B": 4.21,
+  "bf16_GB": 8.42,
+  "hf_midtrain_repo_usedStorage_GB": 8.52,
+  "adamw_fp32_full_finetune_GB_(16 B/param, rough)": 67.4
+ },
+ "V16_fast_tick_cost": {
+  "tactile_tokens_per_tick": 47,
+  "tactile_expert_matmul_GFLOPs_per_euler_step": 58.0,
+  "per_tick_4_steps_GFLOPs": 231.9,
+  "note": "KV 캐시에 대한 어텐션과 임베더는 제외한 하한. 측정하지 않음"
+ },
+ "V17_timestep": {
+  "tau_split": 0.4,
+  "action_eval_taus": [
+   1.0,
+   0.9,
+   0.8,
+   0.7,
+   0.6,
+   0.5
+  ],
+  "tactile_eval_taus": [
+   0.4,
+   0.3,
+   0.2,
+   0.1
+  ],
+  "P_action_train_tau_in_[0.4,1]": 0.747,
+  "P_action_train_tau_<0.4": 0.253,
+  "P_tactile_train_tau_<0.1": 0.125,
+  "P_tactile_train_tau_>0.3": 0.35,
+  "action_expert_eval_mass_in_trained_range": "추론은 [0.5, 1]에서만 평가하고 훈련은 (0, 1]에 걸침"
+ },
+ "V18_rates": {
+  "paper_slow_hz": 5,
+  "paper_fast_hz": 20,
+  "paper_ratio": 4,
+  "config_command_hz": 30.0,
+  "config_chunk": 16,
+  "config_refine_offsets_with_slow": [
+   0,
+   4,
+   8,
+   12
+  ],
+  "slow_hz_if_chunk_fully_executed": 1.875,
+  "fast_hz_nominal": 7.5,
+  "chunk_duration_s": 0.533,
+  "chunk_steps_per_s_needed_for_5hz_slow": 80
+ },
+ "V19_mahjong_chance": {
+  "guess_expected_score_pct": 40.0,
+  "EgoScale": 36,
+  "Tactile-VLA": 27,
+  "Ours": 65,
+  "assumption": "세 상자를 균등 확률로 고르고 나머지 단계는 모두 성공한다고 가정한 상한"
+ }
+}
