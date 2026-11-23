@@ -1,0 +1,571 @@
+{
+ "V1_integer_feasibility": {
+  "cells": 90,
+  "mean_is_k_over_3": 90,
+  "std_feasible_population": 90,
+  "std_feasible_sample": 21,
+  "mean_infeasible": [],
+  "pop_std_infeasible": []
+ },
+ "V2_method_means_pct": {
+  "all30": {
+   "Vision": 27.5,
+   "Binary": 24.633333333333333,
+   "TactX": 45.866666666666674
+  },
+  "without_ood_24": {
+   "Vision": 29.916666666666668,
+   "Binary": 26.333333333333332,
+   "TactX": 51.083333333333336
+  },
+  "paper": {
+   "Vision": 27.5,
+   "TactX": 45.9
+  }
+ },
+ "V2_pp_gain": 18.366666666666674,
+ "V2_relative_gain_pct": 66.78787878787882,
+ "V2_by_task": {
+  "Vision": {
+   "P&P": 55.5,
+   "P&P(OOD)": 17.83,
+   "Insertion": 27.17,
+   "Wiping": 9.33,
+   "Reorient": 27.67
+  },
+  "Binary": {
+   "P&P": 31.5,
+   "P&P(OOD)": 17.83,
+   "Insertion": 21.17,
+   "Wiping": 12.67,
+   "Reorient": 40.0
+  },
+  "TactX": {
+   "P&P": 64.33,
+   "P&P(OOD)": 25.0,
+   "Insertion": 46.67,
+   "Wiping": 39.33,
+   "Reorient": 54.0
+  }
+ },
+ "V2_by_pair": {
+  "Vision": {
+   "D>E": 26.0,
+   "D>F": 19.8,
+   "E>D": 36.8,
+   "E>F": 7.8,
+   "F>D": 48.6,
+   "F>E": 26.0
+  },
+  "Binary": {
+   "D>E": 23.4,
+   "D>F": 28.0,
+   "E>D": 13.8,
+   "E>F": 24.6,
+   "F>D": 42.6,
+   "F>E": 15.4
+  },
+  "TactX": {
+   "D>E": 42.0,
+   "D>F": 31.2,
+   "E>D": 53.4,
+   "E>F": 22.6,
+   "F>D": 77.2,
+   "F>E": 48.8
+  }
+ },
+ "V2_gain_by_task_pp": {
+  "P&P": 8.83,
+  "P&P(OOD)": 7.17,
+  "Insertion": 19.5,
+  "Wiping": 30.0,
+  "Reorient": 26.33
+ },
+ "V2_gain_by_pair_pp": {
+  "D>E": 16.0,
+  "D>F": 11.4,
+  "E>D": 16.6,
+  "E>F": 14.8,
+  "F>D": 28.6,
+  "F>E": 22.8
+ },
+ "V2_by_source_deploy": {
+  "Vision": {
+   "deploy": {
+    "D": 42.7,
+    "E": 26.0,
+    "F": 13.8
+   },
+   "source": {
+    "D": 22.9,
+    "E": 22.3,
+    "F": 37.3
+   }
+  },
+  "Binary": {
+   "deploy": {
+    "D": 28.2,
+    "E": 19.4,
+    "F": 26.3
+   },
+   "source": {
+    "D": 25.7,
+    "E": 19.2,
+    "F": 29.0
+   }
+  },
+  "TactX": {
+   "deploy": {
+    "D": 65.3,
+    "E": 45.4,
+    "F": 26.9
+   },
+   "source": {
+    "D": 36.6,
+    "E": 38.0,
+    "F": 63.0
+   }
+  }
+ },
+ "V3_pooled": {
+  "Vision": {
+   "successes": 248,
+   "trials": 900,
+   "rate": 0.27555555555555555,
+   "wilson95": [
+    0.24736546810317767,
+    0.30565355646926945
+   ]
+  },
+  "Binary": {
+   "successes": 222,
+   "trials": 900,
+   "rate": 0.24666666666666667,
+   "wilson95": [
+    0.2196193990255923,
+    0.27586742078885307
+   ]
+  },
+  "TactX": {
+   "successes": 413,
+   "trials": 900,
+   "rate": 0.4588888888888889,
+   "wilson95": [
+    0.4265763558319266,
+    0.49155089124322454
+   ]
+  }
+ },
+ "V3_fisher_tactx_vs_vision": 8.264736406813714e-16,
+ "V3_fisher_tactx_vs_binary": 4.269937817279588e-21,
+ "V3_fisher_binary_vs_vision": 0.17971229262945887,
+ "V4_cell_paired": {
+  "n": 30,
+  "mean_diff_pp": 18.366666666666667,
+  "sd": 22.65100033314101,
+  "t_p": 0.00011942549294489405,
+  "wilcoxon_p": 0.0002641443246982557,
+  "wins": 21,
+  "ties": 4,
+  "losses": 5,
+  "sign_test_p": 0.002493917942047119,
+  "bootstrap95": [
+   10.666666666666666,
+   26.366666666666667
+  ]
+ },
+ "V4_by_task_clusters": {
+  "cluster_means": [
+   8.83,
+   7.17,
+   19.5,
+   30.0,
+   26.33
+  ],
+  "boot95": [
+   10.300000000000002,
+   26.43333333333333
+  ],
+  "t_p": 0.0157966129126654
+ },
+ "V4_by_direction_clusters": {
+  "cluster_means": [
+   16.0,
+   11.4,
+   16.6,
+   14.8,
+   28.6,
+   22.8
+  ],
+  "boot95": [
+   14.16666666666667,
+   23.333333333333332
+  ],
+  "t_p": 0.0007968476912525957
+ },
+ "V4_source_policy_units": {
+  "n": 15,
+  "mean_diff_pp": 18.366666666666667,
+  "t_p": 0.0010521420003316482,
+  "wilcoxon_p": 0.0022090203462313877
+ },
+ "V5_best_cells": {
+  "counts_incl_ties": {
+   "TactX": 21,
+   "Binary": 6,
+   "Vision": 5
+  },
+  "cells_with_tie_for_top": 2,
+  "tactx_best_or_tied": 21,
+  "tactx_strictly_best": 19
+ },
+ "V5_EF_weakest": {
+  "Vision": 7.8,
+  "Binary": 24.6,
+  "TactX": 22.6
+ },
+ "V6_table1_vs_table8": {
+  "Vision": {
+   "table1": [
+    8.33,
+    6.67,
+    4.0,
+    4.33,
+    8.0
+   ],
+   "from_table8": [
+    8.33,
+    6.67,
+    4.0,
+    4.33,
+    8.0
+   ],
+   "max_abs_diff": 0.0033333333333338544
+  },
+  "GT": {
+   "table1": [
+    9.33,
+    8.0,
+    7.33,
+    8.33,
+    9.33
+   ],
+   "from_table8": [
+    9.33,
+    8.0,
+    7.33,
+    8.33,
+    9.33
+   ],
+   "max_abs_diff": 0.0033333333333338544
+  },
+  "TactX": {
+   "table1": [
+    10.0,
+    7.33,
+    6.0,
+    7.33,
+    9.67
+   ],
+   "from_table8": [
+    10.0,
+    7.33,
+    6.0,
+    7.33,
+    9.67
+   ],
+   "max_abs_diff": 0.0033333333333338544
+  }
+ },
+ "V6_in_domain_avg_pct": {
+  "Vision": 62.666666666666664,
+  "GT": 84.66666666666667,
+  "TactX": 80.66666666666666
+ },
+ "V6_retention_tactx": {
+  "P&P": 1.666666666666666,
+  "P&P(OOD)": 0.49999999999999967,
+  "Insertion": 0.6000000000000001,
+  "Wiping": 0.7499999999999999,
+  "Reorient": 1.2499999999999991
+ },
+ "V6_table8_cells": [
+  {
+   "sensor": "D",
+   "task": "P&P",
+   "tactx": 10,
+   "vision": 9,
+   "gt": 9,
+   "p_tactx_vs_vision": 1.0,
+   "p_tactx_vs_gt": 1.0
+  },
+  {
+   "sensor": "D",
+   "task": "P&P(OOD)",
+   "tactx": 5,
+   "vision": 8,
+   "gt": 7,
+   "p_tactx_vs_vision": 0.34984520123839014,
+   "p_tactx_vs_gt": 0.6499166468206717
+  },
+  {
+   "sensor": "D",
+   "task": "Insertion",
+   "tactx": 5,
+   "vision": 2,
+   "gt": 7,
+   "p_tactx_vs_vision": 0.34984520123839014,
+   "p_tactx_vs_gt": 0.6499166468206717
+  },
+  {
+   "sensor": "D",
+   "task": "Wiping",
+   "tactx": 5,
+   "vision": 4,
+   "gt": 10,
+   "p_tactx_vs_vision": 1.0,
+   "p_tactx_vs_gt": 0.032507739938080496
+  },
+  {
+   "sensor": "D",
+   "task": "Reorient",
+   "tactx": 10,
+   "vision": 9,
+   "gt": 8,
+   "p_tactx_vs_vision": 1.0,
+   "p_tactx_vs_gt": 0.4736842105263158
+  },
+  {
+   "sensor": "E",
+   "task": "P&P",
+   "tactx": 10,
+   "vision": 9,
+   "gt": 10,
+   "p_tactx_vs_vision": 1.0,
+   "p_tactx_vs_gt": 1.0
+  },
+  {
+   "sensor": "E",
+   "task": "P&P(OOD)",
+   "tactx": 8,
+   "vision": 6,
+   "gt": 9,
+   "p_tactx_vs_vision": 0.628482972136223,
+   "p_tactx_vs_gt": 1.0
+  },
+  {
+   "sensor": "E",
+   "task": "Insertion",
+   "tactx": 5,
+   "vision": 2,
+   "gt": 7,
+   "p_tactx_vs_vision": 0.34984520123839014,
+   "p_tactx_vs_gt": 0.6499166468206717
+  },
+  {
+   "sensor": "E",
+   "task": "Wiping",
+   "tactx": 8,
+   "vision": 0,
+   "gt": 6,
+   "p_tactx_vs_vision": 0.000714455822814956,
+   "p_tactx_vs_gt": 0.628482972136223
+  },
+  {
+   "sensor": "E",
+   "task": "Reorient",
+   "tactx": 9,
+   "vision": 8,
+   "gt": 10,
+   "p_tactx_vs_vision": 1.0,
+   "p_tactx_vs_gt": 1.0
+  },
+  {
+   "sensor": "F",
+   "task": "P&P",
+   "tactx": 10,
+   "vision": 7,
+   "gt": 9,
+   "p_tactx_vs_vision": 0.21052631578947367,
+   "p_tactx_vs_gt": 1.0
+  },
+  {
+   "sensor": "F",
+   "task": "P&P(OOD)",
+   "tactx": 9,
+   "vision": 6,
+   "gt": 8,
+   "p_tactx_vs_vision": 0.3034055727554179,
+   "p_tactx_vs_gt": 1.0
+  },
+  {
+   "sensor": "F",
+   "task": "Insertion",
+   "tactx": 8,
+   "vision": 8,
+   "gt": 8,
+   "p_tactx_vs_vision": 1.0,
+   "p_tactx_vs_gt": 1.0
+  },
+  {
+   "sensor": "F",
+   "task": "Wiping",
+   "tactx": 9,
+   "vision": 9,
+   "gt": 9,
+   "p_tactx_vs_vision": 1.0,
+   "p_tactx_vs_gt": 1.0
+  },
+  {
+   "sensor": "F",
+   "task": "Reorient",
+   "tactx": 10,
+   "vision": 7,
+   "gt": 10,
+   "p_tactx_vs_vision": 0.21052631578947367,
+   "p_tactx_vs_gt": 1.0
+  }
+ ],
+ "V6_table8_min_p_vision": 0.000714455822814956,
+ "V6_table8_n_p_lt_005_vision": 1,
+ "V6_table8_pooled_150": {
+  "Vision": {
+   "k": 94,
+   "n": 150,
+   "rate": 0.6266666666666667,
+   "wilson95": [
+    0.5470043657114055,
+    0.7000029457050124
+   ]
+  },
+  "GT": {
+   "k": 127,
+   "n": 150,
+   "rate": 0.8466666666666667,
+   "wilson95": [
+    0.7804188029480452,
+    0.8956012072442565
+   ]
+  },
+  "TactX": {
+   "k": 121,
+   "n": 150,
+   "rate": 0.8066666666666666,
+   "wilson95": [
+    0.7361357242542107,
+    0.8618819770697485
+   ]
+  }
+ },
+ "V6_table8_pooled_fisher_tactx_vs_vision": 0.0008087018591061594,
+ "V6_table8_pooled_fisher_tactx_vs_gt": 0.44592408272613593,
+ "V6_vision_only_by_sensor": {
+  "D": 64.0,
+  "E": 50.0,
+  "F": 74.0
+ },
+ "V6_tactx_by_sensor": {
+  "D": 70.0,
+  "E": 80.0,
+  "F": 92.0
+ },
+ "V6_gt_by_sensor": {
+  "D": 82.0,
+  "E": 84.0,
+  "F": 88.0
+ },
+ "V7_vision_same_vs_cross_pct": {
+  "same_sensor_table8": 62.666666666666664,
+  "cross_table2": 27.5,
+  "drop_pp": 35.166666666666664
+ },
+ "V7_tactx_same_vs_cross_pct": {
+  "same_sensor_table8": 80.66666666666666,
+  "cross_table2": 45.866666666666674,
+  "drop_pp": 34.79999999999998
+ },
+ "V7_tactx_cross_vs_vision_same": -16.79999999999999,
+ "V7_vision_by_task_same_vs_cross": {
+  "P&P": {
+   "same": 83.33333333333334,
+   "cross": 55.50000000000001
+  },
+  "P&P(OOD)": {
+   "same": 66.66666666666667,
+   "cross": 17.833333333333332
+  },
+  "Insertion": {
+   "same": 40.0,
+   "cross": 27.166666666666668
+  },
+  "Wiping": {
+   "same": 43.33333333333333,
+   "cross": 9.333333333333332
+  },
+  "Reorient": {
+   "same": 80.0,
+   "cross": 27.66666666666667
+  }
+ },
+ "V8_sd": {
+  "mean_observed_pop_sd": 0.85,
+  "mean_expected_pop_sd_iid_binomial": 0.8340658825850342,
+  "observed_zero_sd_cells": 13,
+  "expected_zero_sd_cells": 13.074750000000002,
+  "note": "칸 평균을 성공확률로 두고 독립 이항 3회를 모의한 값. 관측과 가까우면 3회 반복의 변동이 독립 시행 수준"
+ },
+ "V9_table3": {
+  "configs": 6,
+  "traj_per_config": [
+   442,
+   448
+  ],
+  "traj_total_reported": 2670,
+  "range_total": [
+   2652,
+   2688
+  ],
+  "frames_per_traj": 54.30711610486891,
+  "frames_per_config_range": [
+   20000,
+   31000
+  ],
+  "frames_6config_range": [
+   120000,
+   186000
+  ]
+ },
+ "V9_hf_dataset": {
+  "train": 482,
+  "val": 62,
+  "total": 544,
+  "per_sensor_total": {
+   "daimon": 180,
+   "eflesh": 181,
+   "flexitac": 183
+  },
+  "per_cell_total_min_max": [
+   33,
+   50
+  ],
+  "mean_per_cell": 45.333333333333336,
+  "paper_says": "~50 episodes per task"
+ },
+ "V9_val_ids": {
+  "sum": 177,
+  "if_20pct_total_episodes": 885.0,
+  "times3_pairs_vs_2670": 2655.0
+ },
+ "V10_chance": {
+  "sensor_chance": 0.3333333333333333,
+  "object_chance": 0.1,
+  "tactx_sensor_acc": 0.475,
+  "tactx_obj_self": 0.608,
+  "tactx_obj_cross": 0.562,
+  "note": "그림 4 막대는 그림 판독 값: recon 약 67.5, contr 약 42, L2 약 57.5, TactX 47.5 (본문은 67.5와 47.5만 명시)"
+ },
+ "V10_intro_20pct": {
+  "pp": 18.366666666666674,
+  "relative_pct": 66.78787878787882
+ }
+}
