@@ -2,8 +2,10 @@
 title: "Geometric Entropy 읽기: 시연 궤적의 다양성은 언제 도움이 되고 언제 해로운가"
 date: 2026-11-10
 venue: "IROS 2026"
+venue_note: "IROS 2026 채택 (arXiv 댓글 표기, 공식 목록 미확인)"
 tags: [robotics, imitation-learning, data-curation, diffusion-policy, act, vla, paper-review]
 paper: https://arxiv.org/abs/2606.20871
+project: https://geometric-entropy.github.io/
 summary: "IROS 2026 Geometric Entropy(H_G)를 재계산, 그림 판독 검정, 합성 궤적 toy로 읽었습니다. 표 I의 방향은 재현되지만, 역U는 일부 조건에서만 유의했고, 공식 코드는 없습니다."
 ---
 
@@ -68,7 +70,7 @@ summary: "IROS 2026 Geometric Entropy(H_G)를 재계산, 그림 판독 검정, �
 
 ## 결론
 
-H_G는 데이터 감사에 쓸 수 있는 흥미로운 도구입니다. 하지만 최적 다양성을 정하는 규칙으로 쓰려면, 우리 정책 클래스에서 직접 곡선을 그려야 합니다. 논문의 "일관된 역U"는 과장된 부분이 있습니다.
+H_G는 데이터 감사에 쓸 수 있는 흥미로운 도구입니다. 하지만 최적 다양성을 정하는 규칙으로 쓰려면, 우리 정책 클래스에서 직접 곡선을 그려야 합니다. 논문의 "일관된 역U"는 그림 판독 값으로 보면 일부 구조와 데이터 수에서만 나타납니다.
 
 ## 자료
 

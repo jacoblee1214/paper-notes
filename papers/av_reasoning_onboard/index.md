@@ -2,8 +2,9 @@
 title: "Alpamayo 2 Edge와 AlpaJudge: 온보드 지연 예산으로 블로그 수치를 점검하다"
 date: 2026-11-12
 venue: "기술 보고서·블로그"
+venue_note: "NVIDIA 기술 블로그 (2026-11-10 게시, 동료심사 논문 아님)"
 tags: [autonomous-driving, vla, edge-inference, speculative-decoding, judge-model]
-paper: "NVIDIA 기술 블로그: Running AV Reasoning Models Within Onboard Compute and Latency Limits (2026-11-10)"
+paper: "https://developer.nvidia.com/blog/running-av-reasoning-models-within-onboard-compute-and-latency-limits/"
 project: "https://developer.nvidia.com/blog/running-av-reasoning-models-within-onboard-compute-and-latency-limits/"
 code: "https://github.com/NVlabs/alpamayo2-edge"
 summary: "NVIDIA 블로그의 2B 추론 VLA(Alpamayo 2 Edge)와 판정기(AlpaJudge) 주장을 공개 config·코드·레시피와 대조했다. 지연 160–190 ms에는 측정 조건이 빠져 있고, 이 맥에서는 Thor 시스템을 구현할 수 없다."
@@ -40,7 +41,7 @@ summary: "NVIDIA 블로그의 2B 추론 VLA(Alpamayo 2 Edge)와 판정기(AlpaJu
 
 **판정기 점수.** AlpaJudge RF의 식(action = p_match(1+p_safe)/2, overall = 0.6·action + 0.4·component)은 공개 소스와 같습니다. 노트북에 기록된 부분점수로 다시 계산하면 overall은 0.8412이고, 노트북의 0.842와 표시 반올림 범위 안에서 맞습니다. RB 0.999는 체크포인트를 실행해야 해서 확인하지 못했습니다.
 
-**보상과 RL.** 블로그는 AlpaGym의 폐루프 RL로 성능이 48.9% 좋아졌다고 씁니다. 수치의 기준선과 실험 조건은 공개되지 않았습니다. 공개 저장소의 AlpaGym 정책은 Alpamayo 1.5 10B뿐이고, Edge용 RL 경로는 보이지 않습니다. 블로그의 그림은 자체 평가와 사람 평가를 나란히 보여 줍니다. 기준선 보상은 자체 평가 13.4%, 사람 평가 1.8%로 크게 어긋납니다. 판정기가 보상에 맞춰지는 현상을 의심해 볼 만한 패턴입니다.
+**보상과 RL.** 블로그는 AlpaGym의 폐루프 RL로 성능이 48.9% 좋아졌다고 씁니다. 수치의 기준선과 실험 조건은 공개되지 않았습니다. 공개 저장소의 AlpaGym 정책은 Alpamayo 1.5 10B뿐이고, Edge용 RL 경로는 보이지 않습니다. 블로그의 그림은 자체 평가와 사람 평가를 나란히 보여 줍니다. 기준선 보상은 자체 평가 13.4%, 사람 평가 1.8%(그림 판독 값)로 크게 어긋납니다. 이 차이가 보상 설계의 효과인지 판정기 편향인지는 이 그림만으로 알 수 없습니다.
 
 ## 로봇 VLA에 옮길 수 있는 것
 

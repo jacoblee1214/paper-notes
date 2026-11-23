@@ -2,6 +2,7 @@
 title: "Motion-Focused Latent Action 읽기: 움직임만 담는 잠재 행동은 얼마나 분리되었나"
 date: 2026-11-10
 venue: "IROS 2026"
+venue_note: "IROS 2026 채택 (arXiv 댓글 표기, 공식 목록 미확인)"
 tags: [robotics, vla, latent-action, human-video, cross-embodiment, paper-review]
 paper: https://arxiv.org/abs/2606.18955
 code: https://github.com/shuiyigong/Motion-Focused-Latent-Action
@@ -31,7 +32,7 @@ summary: "IROS 2026 논문 Motion-Focused Latent Action을 표 재계산, 통계
 
 ## 2. 기준선 하나는 원 논문보다 약하게 재현되었다
 
-UniVLA(Bridge) 행은 저자가 재현한 값(88.1)입니다. UniVLA 원 논문의 Bridge 행은 92.5입니다. 또한 LIBERO 기준선 칸 가운데 200회 가정에서 정수가 되지 않는 칸이 17개 있어, 다른 평가 프로토콜에서 가져온 값으로 보입니다. 공정한 비교에는 같은 프로토콜로 다시 돌린 기준선이 필요합니다.
+UniVLA(Bridge) 행은 논문이 직접 재현했다고 밝힌 값(88.1)입니다. UniVLA 원 논문의 Bridge 행은 92.5입니다. 또한 LIBERO 기준선 칸 가운데 17개는 200회 가정에서 정수 성공 수가 되지 않습니다. 평가 프로토콜이 다른 값일 가능성이 있어 저자 확인이 필요합니다. 공정한 비교에는 같은 프로토콜로 다시 돌린 기준선이 필요합니다.
 
 ## 3. "사람 영상만"은 헤드라인 실험과 맞지 않는다
 

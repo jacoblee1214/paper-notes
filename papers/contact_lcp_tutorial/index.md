@@ -5,7 +5,8 @@ venue: "학회 표기 없음 (arXiv)"
 venue_note: "확인 불가 (arXiv 댓글과 journal-ref에 학회 표기 없음)"
 tags: [robotics, contact-dynamics, complementarity, simulation, tutorial, paper-review]
 paper: https://arxiv.org/abs/2611.26600
-summary: "접촉 역학의 상보성 표현 다섯 개와 볼록 완화 두 개를 한 표기법으로 묶은 튜토리얼을 읽었습니다. 식은 대체로 맞고, 볼록 완화가 미끄럼 접촉을 들어 올리며 접선 힘도 바꾼다는 것을 작은 numpy 토이로 확인했습니다. 두 문장(네 모서리 상자의 힘, 정규화의 최소 노름 선택)은 과장되었습니다."
+code_status: none
+summary: "접촉 역학의 상보성 표현 다섯 개와 볼록 완화 두 개를 한 표기법으로 묶은 튜토리얼을 읽었습니다. 식은 대체로 맞고, 볼록 완화가 미끄럼 접촉을 들어 올리며 접선 힘도 바꾼다는 것을 작은 numpy 토이로 확인했습니다. 두 문장(네 모서리 상자의 힘, 정규화의 최소 노름 선택)은 계산 결과와 다르거나 극한에서만 맞습니다."
 ---
 
 > **논문:** Onur Beker, A. René Geist, Michael Posa, Marc Toussaint, Justin Carpentier, Georg Martius. *A Tutorial on Complementarity-Based Contact Models for Robotics.* arXiv:2611.26600 (v1, 2026-11-19).
@@ -59,7 +60,7 @@ Signorini–Coulomb 조건(비관통, 마찰 한계, 최대 소산)을 출발점
 
 <p class="cap">그림: 벌점 모형의 정지 관통 깊이(mg/k)와 접촉 강성의 관계. 로그-로그 축입니다. 우리가 그린 그래프입니다.</p>
 
-## 과장되었거나 틀린 문장
+## 계산 결과와 맞지 않는 두 문장
 
 - **네 모서리에 놓인 상자.** 논문은 "네 접촉력 가운데 합만 유일하게 정해진다"고 씁니다. 6자유도 강체에서 법선 행의 랭크를 세면 3입니다. 그러면 합과 두 모멘트가 운동으로 정해지고, 힘의 자유 방향은 1개만 남습니다. 평면 상자라면 자유 방향은 2개입니다. 어느 쪽이든 "합만"과는 맞지 않습니다.
 - **정규화가 "최소 노름 해를 고른다".** 정규화 ε를 1e-1에서 1e-7까지 줄이면 정규화 해는 최소 노름 선택 해에 가까워집니다. 거리는 2.0에서 7e-6이 됩니다. 즉 극한에서만 맞고, 실제로 쓰는 유한한 정규화에서는 다른 해를 줍니다.

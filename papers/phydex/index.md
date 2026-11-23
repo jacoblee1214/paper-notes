@@ -1,10 +1,11 @@
 ---
-title: "던지기로 물리를 묻는 VLA 벤치마크: 표는 맞고, 본문 두 곳은 틀렸다"
+title: "던지기로 물리를 묻는 VLA 벤치마크: 표는 맞고, 본문 두 곳은 다시 확인이 필요하다"
 date: 2026-11-21
 venue: "학회 표기 없음 (arXiv)"
 venue_note: "확인 불가 (arXiv 댓글과 저널 참조 없음, 본문에 학회 표기 없음, 프로젝트 페이지 404)"
 tags: [robotics, vla, benchmark, dynamic-manipulation, physical-reasoning, paper-review]
 paper: https://arxiv.org/abs/2611.26565
+code_status: none
 summary: "로봇이 물체의 질량과 무게중심, 마찰을 추정해 목적지로 던지는 PhyDEX 벤치마크를 읽었습니다. 세 VLA의 성공률 0.2–2.4%는 표로 재계산됩니다. 그러나 '물리량을 주면 두 배'는 점 추정이고, 본문의 21.24%는 그림과 맞지 않습니다. 공식 코드는 없습니다."
 ---
 
