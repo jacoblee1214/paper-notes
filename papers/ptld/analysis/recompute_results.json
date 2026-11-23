@@ -1,0 +1,383 @@
+{
+ "V1_ratio": {
+  "goals_gain_pct": 57.14,
+  "ttf_gain_pct": 22.11,
+  "goals_per_s_proprio": 0.1911,
+  "goals_per_s_tactile": 0.2459,
+  "goal_rate_gain_pct": 28.69,
+  "decomposition_check": 1.5714
+ },
+ "V2_ngoals_proprio": {
+  "mean": 2.1,
+  "sd": 2.14,
+  "by_n": [
+   {
+    "n": 10,
+    "pairs_ddof0": 0,
+    "pairs_ddof1": 0,
+    "example_ddof0": [],
+    "example_ddof1": []
+   },
+   {
+    "n": 20,
+    "pairs_ddof0": 1,
+    "pairs_ddof1": 0,
+    "example_ddof0": [
+     [
+      42,
+      180
+     ]
+    ],
+    "example_ddof1": []
+   },
+   {
+    "n": 30,
+    "pairs_ddof0": 2,
+    "pairs_ddof1": 1,
+    "example_ddof0": [
+     [
+      62,
+      266
+     ]
+    ],
+    "example_ddof1": [
+     [
+      63,
+      265
+     ]
+    ]
+   }
+  ],
+  "parity_note": "정수 x에서 x^2 와 x 는 홀짝이 같으므로 합과 제곱합의 홀짝도 같아야 한다"
+ },
+ "V2_ngoals_tactile": {
+  "mean": 3.3,
+  "sd": 1.55,
+  "by_n": [
+   {
+    "n": 10,
+    "pairs_ddof0": 1,
+    "pairs_ddof1": 0,
+    "example_ddof0": [
+     [
+      33,
+      133
+     ]
+    ],
+    "example_ddof1": []
+   },
+   {
+    "n": 20,
+    "pairs_ddof0": 1,
+    "pairs_ddof1": 0,
+    "example_ddof0": [
+     [
+      66,
+      266
+     ]
+    ],
+    "example_ddof1": []
+   },
+   {
+    "n": 30,
+    "pairs_ddof0": 2,
+    "pairs_ddof1": 1,
+    "example_ddof0": [
+     [
+      98,
+      392
+     ]
+    ],
+    "example_ddof1": [
+     [
+      98,
+      390
+     ]
+    ]
+   }
+  ],
+  "parity_note": "정수 x에서 x^2 와 x 는 홀짝이 같으므로 합과 제곱합의 홀짝도 같아야 한다"
+ },
+ "V3_table4_tests": {
+  "ngoals": {
+   "welch_sd_assumed": {
+    "t": 1.436,
+    "df": 16.4,
+    "p": 0.1698
+   },
+   "welch_sem_assumed": {
+    "t": 0.454,
+    "df": 16.4,
+    "p": 0.6557
+   },
+   "cohen_d": 0.642,
+   "n_per_group_80pct_power": 39
+  },
+  "ttf": {
+   "welch_sd_assumed": {
+    "t": 0.535,
+    "df": 18.0,
+    "p": 0.5995
+   },
+   "welch_sem_assumed": {
+    "t": 0.169,
+    "df": 18.0,
+    "p": 0.8677
+   },
+   "cohen_d": 0.239,
+   "n_per_group_80pct_power": 275
+  },
+  "ratio_goals_mc_95ci_sd_assumed": [
+   0.86,
+   4.23
+  ]
+ },
+ "V4_182_candidates_pct": {
+  "CW 회전, 대 RMA": 511.7,
+  "CW 회전, 대 AAC": 183.7,
+  "CW 회전, 대 PD": 861.2,
+  "CW 회전, 대 TA": 447.7,
+  "CCW 회전, 대 RMA": 476.6,
+  "CCW 회전, 대 AAC": 48.5,
+  "CCW 회전, 대 PD": 332.4,
+  "CCW 회전, 대 TA": 315.6,
+  "CW·CCW 평균 회전, 대 RMA": 491.0,
+  "CW·CCW 평균 회전, 대 AAC": 86.1,
+  "CW·CCW 평균 회전, 대 PD": 464.0,
+  "CW·CCW 평균 회전, 대 TA": 362.9,
+  "CW 회전, 대 기준선 4개 평균": 398.4,
+  "CCW 회전, 대 기준선 4개 평균": 203.3,
+  "CW+CCW 합, 대 기준선 4개 평균 합": 263.7,
+  "CW 회전, 대 최고 기준선": 183.7,
+  "CCW 회전, 대 최고 기준선": 48.5,
+  "CW+CCW 합, 대 최고 기준선 합": 86.1
+ },
+ "V4_near_182": [
+  "CW 회전, 대 AAC",
+  "CW 회전, 대 최고 기준선"
+ ],
+ "V4b_rotation_per_second_ratio_of_means": {
+  "CW": {
+   "RMA": 0.33,
+   "AAC": 0.61,
+   "PD": 0.14,
+   "TA": 0.31,
+   "PTLD": 0.41
+  },
+  "CCW": {
+   "RMA": 0.3,
+   "AAC": 0.54,
+   "PD": 0.69,
+   "TA": 0.4,
+   "PTLD": 0.65
+  }
+ },
+ "V4b_ttf_over_cap": {
+  "PTLD_CW_TTF_over_120": 0.954,
+  "PTLD_CCW_TTF_over_120": 0.821
+ },
+ "V4c_pd_vs_aac": {
+  "CW rotation PD/AAC": 0.3,
+  "CCW rotation PD/AAC": 0.34,
+  "CW rotation PTLD/PD": 9.6,
+  "CCW rotation PTLD/PD": 4.3
+ },
+ "V5_fig6_vs_AAC": {
+  "rotation_cw": {
+   "PTLD": 47.1,
+   "AAC": 16.6,
+   "half_width_PTLD": 8.6,
+   "half_width_AAC": 8.6,
+   "SD": {
+    "z": 7.93,
+    "p_approx": 0.0
+   },
+   "SEM": {
+    "z": 2.51,
+    "p_approx": 0.0121
+   },
+   "CI95": {
+    "z": 5.67,
+    "p_approx": 0.0
+   }
+  },
+  "rotation_ccw": {
+   "PTLD": 64.0,
+   "AAC": 43.1,
+   "half_width_PTLD": 21.5,
+   "half_width_AAC": 12.0,
+   "SD": {
+    "z": 2.68,
+    "p_approx": 0.0073
+   },
+   "SEM": {
+    "z": 0.85,
+    "p_approx": 0.396
+   },
+   "CI95": {
+    "z": 1.92,
+    "p_approx": 0.0548
+   }
+  },
+  "ttf_cw": {
+   "PTLD": 114.5,
+   "AAC": 27.1,
+   "half_width_PTLD": 13.5,
+   "half_width_AAC": 15.7,
+   "SD": {
+    "z": 13.35,
+    "p_approx": 0.0
+   },
+   "SEM": {
+    "z": 4.22,
+    "p_approx": 0.0
+   },
+   "CI95": {
+    "z": 9.55,
+    "p_approx": 0.0
+   }
+  },
+  "ttf_ccw": {
+   "PTLD": 98.5,
+   "AAC": 80.0,
+   "half_width_PTLD": 31.0,
+   "half_width_AAC": 20.6,
+   "SD": {
+    "z": 1.57,
+    "p_approx": 0.116
+   },
+   "SEM": {
+    "z": 0.5,
+    "p_approx": 0.6192
+   },
+   "CI95": {
+    "z": 1.12,
+    "p_approx": 0.2609
+   }
+  }
+ },
+ "V6_table1": {
+  "RMA pose vs prop (RotR, TTF, RotP) %": [
+   10.1,
+   8.9,
+   9.0
+  ],
+  "AAC pose vs prop %": [
+   18.8,
+   10.0,
+   -4.8
+  ],
+  "AAC vs RMA (prop) %": [
+   2.1,
+   1.3,
+   -2.5
+  ],
+  "AAC vs RMA (pose) %": [
+   10.1,
+   2.3,
+   -14.8
+  ],
+  "AAC pose vs Oracle %": [
+   5.8,
+   -1.1,
+   -16.8
+  ],
+  "v1·v2 전용 행: AAC(no distillation)+Pose 대비 AAC+Pose (RotR, TTF, RotP) %": [
+   4.4,
+   3.5,
+   -10.9
+  ],
+  "note": "RotP는 ↓(낮을수록 좋음). RMA에서 Pose를 더하면 RotP는 28.53 → 31.09로 올라간다(표의 화살표 기준 악화)."
+ },
+ "V7_table2": {
+  "abs_reduction_pct": 51.2,
+  "rel_reduction_pct": 72.6,
+  "ratio_abs": 2.05,
+  "ratio_rel": 3.65,
+  "welch_abs_n5_sd": [
+   -4.315,
+   4.6,
+   0.0092
+  ],
+  "welch_rel_n5_sd": [
+   -14.986,
+   6.3,
+   0.0
+  ],
+  "welch_abs_n10_sd": [
+   -6.102,
+   10.3,
+   0.0001
+  ],
+  "welch_rel_n10_sd": [
+   -21.193,
+   14.1,
+   0.0
+  ],
+  "welch_abs_n30_sd": [
+   -10.568,
+   33.3,
+   0.0
+  ],
+  "welch_rel_n30_sd": [
+   -36.708,
+   45.3,
+   0.0
+  ],
+  "tactile_rel_minus_abs": 0.05
+ },
+ "V8_table3_cube": {
+  "Tactile vs AAC RotR": {
+   "ratio": 0.26,
+   "t": -4.45,
+   "df": 10.2,
+   "p_sd_n10": 0.0012
+  },
+  "Tactile vs Proprio RotR": {
+   "ratio": 9.0,
+   "t": 5.374,
+   "df": 9.8,
+   "p_sd_n10": 0.0003
+  },
+  "Tactile vs AAC TTF": {
+   "ratio": 1.03,
+   "t": 0.123,
+   "df": 16.3,
+   "p_sd_n10": 0.904
+  },
+  "Tactile vs Proprio TTF": {
+   "ratio": 3.09,
+   "t": 3.429,
+   "df": 9.4,
+   "p_sd_n10": 0.0071
+  },
+  "Tactile vs AAC RotP": {
+   "ratio": 9.24,
+   "t": 5.057,
+   "df": 9.3,
+   "p_sd_n10": 0.0006
+  },
+  "Tactile vs Proprio RotP": {
+   "ratio": 39.08,
+   "t": 5.568,
+   "df": 9.0,
+   "p_sd_n10": 0.0003
+  }
+ },
+ "V9_arith": {
+  "0.25 rad in deg": 14.32,
+  "20 deg in rad": 0.349,
+  "30 deg in rad": 0.524,
+  "DAgger 데이터 분량 (30 궤적 x 2분 x 3회) 분": 180,
+  "30 inference steps at 20 Hz s": 1.5,
+  "100 steps at 20 Hz s": 5.0,
+  "4.5 s at 20 Hz steps": 90.0,
+  "4.5 s / 30 steps = s per step": 0.15,
+  "30-step history at 20 Hz s": 1.5,
+  "0.5 s history at 100 Hz samples": 50.0,
+  "368 taxel / 18 pad": 20.44,
+  "그림 6 캡션의 124 s, 220 s vs 그림 6 막대의 최대 에피소드 120 s": "124 > 120, 220 > 120",
+  "Fig.6 PTLD CW TTF 판독 114.5 s vs 최대 에피소드 120 s 비율": 0.954,
+  "teacher AAC 대비 Tactile 정육면체 RotR 비": 0.26
+ }
+}
