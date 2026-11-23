@@ -7,7 +7,7 @@ tags: [robotics, benchmark, lifelong-learning, manipulation, evaluation, paper-r
 paper: https://arxiv.org/abs/2306.03310
 code: https://github.com/Lifelong-Robot-Learning/LIBERO
 project: https://libero-project.github.io
-summary: "LIBERO 논문(NeurIPS 2023 D&B)의 표 수치를 다시 맞추고 검정했습니다. 표끼리는 모두 일치하지만, 본문이 말하는 차이 중 일부만 시드 3개의 검정에서 유의합니다. 체크포인트를 평가 집합에서 최댓값으로 고르고 그 값을 보고하는 방식은 성공률을 크게 부풀릴 수 있습니다. 공식 코드는 논문 설정을 대부분 따릅니다."
+summary: "LIBERO 논문(NeurIPS 2023 D&B)의 표 수치를 다시 맞추고 검정했습니다. 표끼리는 모두 일치하지만, 본문이 말하는 차이 중 일부만 시드 3개의 검정에서 유의합니다. 체크포인트를 평가 집합에서 최댓값으로 고르고 그 값을 보고하는 방식은 선택 편향으로 성공률을 실제보다 높게 보이게 할 수 있습니다(정책 능력 고정 가정의 모의 실험). 공식 코드는 논문 설정을 대부분 따릅니다."
 ---
 
 > **논문:** Bo Liu, Yifeng Zhu, Chongkai Gao, Yihao Feng, Qiang Liu, Yuke Zhu, Peter Stone. *LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning.* NeurIPS 2023 Datasets and Benchmarks 트랙, arXiv:2306.03310 (v2, 2023-10-14).
@@ -33,7 +33,7 @@ summary: "LIBERO 논문(NeurIPS 2023 D&B)의 표 수치를 다시 맞추고 검�
 
 *그림 1 (우리가 그림). 표 2와 표 8의 AUC. 오차 막대는 시드 3개의 평균 ± 4.303·SE입니다. 원자료 출처: arXiv:2306.03310 v2.*
 
-**3. 최댓값을 보고하면 성공률이 부풀려집니다.** 코드는 과제마다 5 epoch마다 같은 20개 초기 상태로 평가하고, 가장 높은 체크포인트를 저장하고 보고합니다. 별도의 검증 집합이 없습니다. 정책 능력이 학습 내내 고정되어 있다고 가정하고 몬테카를로로 보면, 11번 중 최댓값은 진짜 성공률보다 약 0.15–0.18 높게 나옵니다. 마지막 평가는 편향이 없습니다.
+**3. 최댓값을 보고하면 성공률이 위로 치우칩니다.** 코드는 과제마다 5 epoch마다 같은 20개 초기 상태로 평가하고, 가장 높은 체크포인트를 저장하고 보고합니다. 별도의 검증 집합이 없습니다. 정책 능력이 학습 내내 고정되어 있다고 가정하고 몬테카를로로 보면, 11번 중 최댓값은 진짜 성공률보다 약 0.15–0.18 높게 나옵니다. 마지막 평가는 편향이 없습니다.
 
 ![최댓값 보고의 편향과 마지막 평가의 편향](images/own_max_bias.png)
 

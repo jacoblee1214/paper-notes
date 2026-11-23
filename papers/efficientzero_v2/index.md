@@ -6,7 +6,7 @@ venue_note: "PMLR 235 공식 목록(proceedings.mlr.press/v235)과 PDF 1쪽 머�
 tags: [reinforcement-learning, model-based-rl, continuous-control, sample-efficiency, mcts, paper-review]
 paper: https://arxiv.org/abs/2403.00564
 code: https://github.com/Shengjiewang-Jason/EfficientZeroV2
-summary: "EfficientZero V2를 표 값으로 다시 세었습니다. DreamerV3보다 낫다는 방향은 강하게 지지되지만, Atari 정규화 평균과 '66개 중 50개'는 표에서 재현되지 않았습니다. 공식 코드는 설정이 논문 Table 3과 다르고 CUDA 전제라 이 노트북에서는 그대로 돌릴 수 없습니다."
+summary: "EfficientZero V2를 표 값으로 다시 세었습니다. DreamerV3보다 낫다는 방향은 강하게 지지되지만, Atari 정규화 평균과 '66개 중 50개'는 표 값으로 다시 계산한 값과 다릅니다. 공식 코드는 설정이 논문 Table 3과 다르고 CUDA 전제라 이 노트북에서는 그대로 돌릴 수 없습니다."
 ---
 
 > **논문:** Shengjie Wang, Shaohuai Liu, Weirui Ye, Jiacheng You, Yang Gao. *EfficientZero V2: Mastering Discrete and Continuous Control with Limited Data.* ICML 2024 (PMLR 235), arXiv:2403.00564 (v2, 2024-09-12).
@@ -27,7 +27,7 @@ summary: "EfficientZero V2를 표 값으로 다시 세었습니다. DreamerV3보
 
 **1. DreamerV3보다 낫다는 방향은 강하게 지지됩니다.** Atari 25게임에서 21승 1무 3패입니다. DMC 40과제에서는 35승 5패입니다. DMC의 부호 검정 p는 1.4×10⁻⁶입니다. 과제 사이 변동만 보면 그렇습니다. 시드별 점수가 없으므로 시드 간 잡음은 계산할 수 없습니다.
 
-**2. Atari 정규화 평균은 재현되지 않습니다.** 표 1의 EZ-V2 열에서 계산하면 평균 2.680이고 중앙값은 1.235입니다. 논문 보고값은 2.428과 1.286입니다. EfficientZero와 BBF 열은 같은 정의로 논문 값과 맞으므로 정의 문제는 아닙니다. 원인은 표만으로 확정하지 못했습니다.
+**2. Atari 정규화 평균은 표 1로 다시 계산한 값과 다릅니다.** 표 1의 EZ-V2 열에서 계산하면 평균 2.680이고 중앙값은 1.235입니다. 논문 보고값은 2.428과 1.286입니다. EfficientZero와 BBF 열은 같은 정의로 논문 값과 맞으므로 정의 문제는 아닙니다. 원인은 표만으로 확정하지 못했습니다.
 
 ![Atari 정규화 점수: 보고값, 재계산값, 상위 게임 제외](images/own_atari_sensitivity.png)
 
@@ -43,7 +43,7 @@ summary: "EfficientZero V2를 표 값으로 다시 세었습니다. DreamerV3보
 
 *그래프 2: 우리가 그린 그래프. Table 2의 과제별 차이와 블록 평균입니다.*
 
-**6. 계산량 "1000배"는 과장입니다.** Table 7 값으로 FLOPs 비율은 약 770배입니다. 파라미터는 3.8배입니다. "1000배"는 조금 넘친 표현입니다.
+**6. 계산량 "1000배"는 Table 7 값과 다릅니다.** Table 7 값으로 FLOPs 비율은 약 770배입니다. 파라미터는 3.8배입니다. "1000배"는 표 값보다 큰 어림입니다.
 
 **7. 절제 실험은 대체로 일관됩니다.** 샘플 MCTS에는 Proprio와 Vision 모두에서 거의 이깁니다. GAE에는 Proprio에서 7/7이고 Vision에서는 5/7이며 p=0.22입니다. 과제는 7개뿐이고 Atari는 3게임뿐입니다.
 
@@ -66,7 +66,7 @@ summary: "EfficientZero V2를 표 값으로 다시 세었습니다. DreamerV3보
 
 ## 정리
 
-EfficientZero V2는 연속 제어에서 DreamerV3보다 낫다는 방향을 잘 보여 줍니다. 다만 정규화 평균과 승패 숫자는 표에서 그대로 재현되지 않습니다. 그래서 "평균 2.428"보다는 중앙값과 과제별 차이를 함께 보는 것을 권합니다. 재현은 GPU 없이는 어렵고, 설정 파일 차이와 연속 정책 손실의 결합 방식부터 확인하는 것이 순서입니다.
+EfficientZero V2는 연속 제어에서 DreamerV3보다 낫다는 방향을 잘 보여 줍니다. 다만 정규화 평균과 승패 숫자는 표로 다시 계산한 값과 다릅니다. 그래서 "평균 2.428"보다는 중앙값과 과제별 차이를 함께 보는 것을 권합니다. 재현은 GPU 없이는 어렵고, 설정 파일 차이와 연속 정책 손실의 결합 방식부터 확인하는 것이 순서입니다.
 
 *분석 파일과 재계산 스크립트는 `publish/git/`에 있습니다. 원문 PDF는 arXiv에서 받을 수 있습니다.*
 

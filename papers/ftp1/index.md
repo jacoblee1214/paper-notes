@@ -7,7 +7,7 @@ tags: [robotics, tactile, vla, foundation-model, manipulation, paper-review]
 paper: https://arxiv.org/abs/2606.13102
 code: https://github.com/michaelyuancb/ftp1-policy
 project: https://ftp1-policy.github.io/
-summary: "CoRL 2026 포스터 FTP-1을 표 재계산과 공식 코드 정적 대조로 읽었습니다. seen 센서의 향상은 방향과 유의성이 맞지만 보고값의 기준이 틀렸습니다. 학습 없던 센서의 +31.6%p는 소표본입니다. 사전학습 효과는 시뮬 전체 평균에서만 뚜렷합니다."
+summary: "CoRL 2026 포스터 FTP-1을 표 재계산과 공식 코드 정적 대조로 읽었습니다. seen 센서의 향상은 방향과 유의성이 맞지만, 보고값의 기준선 평균은 표의 과제별 값으로 다시 계산한 평균과 다릅니다. 학습 없던 센서의 +31.6%p는 소표본입니다. 사전학습 효과는 시뮬 전체 평균에서만 뚜렷합니다."
 ---
 
 > **논문:** Chengbo Yuan 외 16명. *FTP-1: A Generalist Foundation Tactile Policy Across Tactile Sensors for Contact-Rich Manipulation.* CoRL 2026 포스터, arXiv:2606.13102 (v4, 2026-10-27).

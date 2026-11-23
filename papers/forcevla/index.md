@@ -7,7 +7,7 @@ tags: [robotics, vla, force-control, contact-rich, mixture-of-experts, paper-rev
 paper: https://arxiv.org/abs/2505.22159
 code: https://github.com/ft-robotic/ForceVLA
 project: https://sites.google.com/view/forcevla2025/
-summary: "ForceVLA는 6축 힘을 VLM 뒤에서 MoE 블록으로 융합해 접촉 작업 성공률을 높였다고 주장합니다. 공식 코드는 논문 구조와 맞지만, 평균 60.5%의 정의와 23.2%의 기준선 라벨이 흐리고, 일부 막대 값이 본문 시행 수로 재현되지 않습니다. 이 맥에서 학습 재현은 불가능합니다."
+summary: "ForceVLA는 6축 힘을 VLM 뒤에서 MoE 블록으로 융합해 접촉 작업 성공률을 높였다고 주장합니다. 공식 코드는 논문 구조와 맞지만, 평균 60.5%의 정의와 23.2%의 기준선 라벨이 흐리고, 일부 막대 값(그림 5 라벨)은 본문 시행 수로 나누어 떨어지지 않습니다. 이 맥에서 학습 재현은 불가능합니다."
 ---
 
 > **논문:** Jiawen Yu, Hairuo Liu, Qiaojun Yu, Jieji Ren, Ce Hao, Haitong Ding, Guangyu Huang, Guofan Huang, Yan Song, Panpan Cai, Wenqiang Zhang, Cewu Lu. *ForceVLA: Enhancing VLA Models with a Force-aware MoE for Contact-rich Manipulation.* NeurIPS 2025 포스터, arXiv:2505.22159 (v3, 2025-09-18).
