@@ -19,7 +19,7 @@ summary: "CoRL 2026 포스터 SimFoundry를 표 재계산, 통계 검정, 시행
 
 ## 이 글에서 확인한 것
 
-**1. 평균 r 0.911과 MMRV 0.018은 표에서 정확히 재현됩니다.** 표 G.1의 과제별 r과 MMRV 14개 값이 모두 맞고, PolaRiS(표 G.2) 13개 값도 맞습니다. PolaRiS와의 평균 r 차이는 0.598입니다(본문 "over 0.59"). 셀마다 25회 시행의 이항 잡음을 넣어 부트스트랩하면 평균 r이 SimFoundry 0.84 [0.68, 0.93], PolaRiS 0.24 [−0.01, 0.46]로 구간이 겹치지 않습니다. 우위는 시행 잡음으로 설명되지 않습니다. 다만 비교는 저자들이 자기 장면에 PolaRiS를 영샷으로 적용한 것입니다.
+**1. 평균 r 0.911과 MMRV 0.018은 표에서 정확히 재현됩니다.** 표 G.1의 과제별 r과 MMRV 14개 값이 모두 맞고, PolaRiS(표 G.2) 13개 값도 맞습니다. PolaRiS와의 평균 r 차이는 0.598입니다(본문 "over 0.59"). 셀마다 25회 시행의 이항 잡음을 넣어 부트스트랩하면 평균 r이 SimFoundry 0.84 [0.68, 0.93], PolaRiS 0.24 [−0.01, 0.46]로 구간이 겹치지 않습니다. 우위는 시행 잡음으로 설명되지 않습니다. 다만 비교는 논문이 자기 장면에 PolaRiS를 영샷으로 적용한 것입니다.
 
 ![실제 대 시뮬 성공률 산점도, SimFoundry와 PolaRiS: 우리가 그린 그래프](images/own_sim_real.png)
 
@@ -39,7 +39,7 @@ summary: "CoRL 2026 포스터 SimFoundry를 표 재계산, 통계 검정, 시행
 
 *그래프 (우리가 그림). 토이 T1: 7과제 평균 r의 분포. 파랑은 시뮬 = 실제인 이상적 환경, 회색은 시뮬 점수를 섞은 귀무, 주황 선은 관측값입니다.*
 
-**5. 초록의 "실제 로봇 영샷 17%, 21%, 40%"는 한 가지만 실제입니다.** 초록은 "When evaluating sim-trained policies zero-shot in the real world, ... object, scene, and task cousins ... 17%, 21%, and 40%"라고 씁니다. 표 G.5와 G.6을 다시 계산하면 장면 cousin 21.3%와 작업 cousin 40.0%는 재현되지만 둘 다 **DROID 시뮬레이션 평가**입니다(그림 5B, 5C의 제목도 "DROID, sim"). 실제 로봇 평가는 객체 cousin 17%뿐이고, 이마저 그림 5A에 실린 4개 과제 8셀의 평균이 정확히 17.0입니다. 같은 표의 6개 과제 12셀 평균은 15.1%p입니다. 개별 DROID 실제 셀은 대부분 유의하지 않고(Throw Away Trash twin 0→20은 p = 0.050), 12셀 평균의 방향이 일관된 것이 근거입니다.
+**5. 초록의 "실제 로봇 영샷 17%, 21%, 40%"는 한 가지만 실제입니다.** 초록은 "When evaluating sim-trained policies zero-shot in the real world, ... object, scene, and task cousins ... 17%, 21%, and 40%"라고 씁니다. 표 G.5와 G.6을 다시 계산하면 장면 cousin 21.3%와 작업 cousin 40.0%는 재현되지만 둘 다 **DROID 시뮬레이션 평가**입니다(그림 5B, 5C의 제목도 "DROID, sim"). 실제 로봇 평가는 객체 cousin 17%뿐이고, 17.0은 그림 5A에 실린 4개 과제 8셀의 평균입니다. 같은 표의 6개 과제 12셀 평균은 15.1%p입니다. 개별 DROID 실제 셀은 대부분 유의하지 않고(Throw Away Trash twin 0→20은 p = 0.050), 12셀 평균의 방향이 일관된 것이 근거입니다.
 
 ![객체 cousin 셀별 향상과 초록의 17/21/40 평가 방식: 우리가 그린 그래프](images/own_cousin_claims.png)
 

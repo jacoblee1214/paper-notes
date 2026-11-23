@@ -7,7 +7,7 @@ tags: [robotics, tactile-sensing, representation-learning, manipulation, paper-r
 paper: https://arxiv.org/abs/2606.29948
 code: https://github.com/jxbi1010/HTT
 project: https://jxbi1010.github.io/htt-gh-page/
-summary: "CoRL 2026 포스터 HTT를 수치 재계산, 공식 코드 정적 대조, CPU 토이로 읽었습니다. 개선의 대부분은 구조에서 오고 정렬 손실의 유의한 효과는 12칸 중 2칸입니다. 실로봇 screw는 확실하지만 tofu는 wrench와 구분되지 않고, 1.6M 쌍 프레임은 같은 데이터를 두 번 센 값입니다."
+summary: "CoRL 2026 포스터 HTT를 수치 재계산, 공식 코드 정적 대조, CPU 토이로 읽었습니다. 개선의 대부분은 구조에서 오고 정렬 손실의 유의한 효과는 12칸 중 2칸입니다(시드 3개 가정). 실로봇 screw는 확실하지만 tofu는 wrench와 구분되지 않고, 1.6M 쌍 프레임은 같은 데이터를 두 번 센 값입니다."
 ---
 
 > **논문:** Jianxin Bi, Qiang Wang, Jayaram Reddy, Kelvin Lin, Soibkhon Khajikhanov, Ruihan Gao, Harold Soh. *Heterogeneous Tactile Transformer.* CoRL 2026 포스터, arXiv:2606.29948 (v2, 2026-10-13).
@@ -29,7 +29,7 @@ summary: "CoRL 2026 포스터 HTT를 수치 재계산, 공식 코드 정적 대�
 
 *그래프 (우리가 그림). 표 1과 표 2의 센서 평균입니다.*
 
-**2. 정렬 손실의 효과는 시드 3개로는 구분하기 어렵습니다.** HTT 대 MAE를 시드 3개 Welch로 비교하면 12칸 중 보정 전 p < 0.05가 5칸, Holm 보정 후 2칸입니다. 그중 9DTact 힘에서는 오히려 MAE가 낫습니다(0.574 대 0.606 N, p = 0.0024). 본문이 강조한 TAC-02 슬립 +12.0은 p = 0.10입니다(HTT 쪽 시드 SD 7.27).
+**2. 정렬 손실의 효과는 시드 3개로는 구분하기 어렵습니다.** HTT 대 MAE를 시드 3개(가정) Welch로 비교하면 12칸 중 보정 전 p < 0.05가 5칸, Holm 보정 후 2칸입니다. 그중 9DTact 힘에서는 오히려 MAE가 낫습니다(0.574 대 0.606 N, p = 0.0024). 본문이 강조한 TAC-02 슬립 +12.0은 p = 0.10입니다(HTT 쪽 시드 SD 7.27).
 
 ![HTT 대 MAE 12칸의 Welch p](images/own_align_pvalues.png)
 

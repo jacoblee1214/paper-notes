@@ -1,4 +1,4 @@
-"""토이 T1: 논문 식 (2)의 거리 게이트 금속(metric)이 만드는 coarse-to-fine 접근을 평면 로봇에서 본다.
+"""토이 T1: 논문 식 (2)의 거리 게이트 메트릭이 만드는 coarse-to-fine 접근을 평면 로봇에서 본다.
 
 논문 3.1절과 표 4의 주장: 가중 IK는 먼 목표로 팔을 쭉 뻗어 조작성이 낮아지고,
 기준 어트랙터(BA, mmin = 0)와 말단 어트랙터(EEA, mfar = 0)의 게이트는 먼 곳은 기저가, 가까운 곳은 팔이 맡게 한다.
@@ -103,7 +103,7 @@ def run_fabric(q0, target, r_base=1.0, r_ee=0.9, k=6.0, d_gain=4.0, eta=1.0):
         a_e = -k * np.tanh(2.0 * rho_e) * e_e / rho_e - d_gain * (J @ qd)
         M = Jb.T @ (m_ba * np.eye(2)) @ Jb + J.T @ (m_ee * np.eye(2)) @ J
         f = Jb.T @ (-(m_ba * np.eye(2)) @ a_b) + J.T @ (-(m_ee * np.eye(2)) @ a_e)
-        # PR: 팔 관절만, 작은 등방 금속
+        # PR: 팔 관절만, 작은 등방 메트릭
         eta_pr = 0.02
         Mpr = np.diag([0, 0, eta_pr, eta_pr])
         a_pr = np.zeros(4); a_pr[2:] = -2.0 * (q[2:] - q_nom[2:]) - 2.0 * qd[2:]
