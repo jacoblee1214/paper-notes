@@ -1,0 +1,534 @@
+{
+ "V1_table1": {
+  "per_task": {
+   "Bottle": {
+    "closed_align": [
+     18,
+     20,
+     90.0,
+     [
+      69.9,
+      97.2
+     ]
+    ],
+    "closed_assembly": [
+     15,
+     20,
+     75.0,
+     [
+      53.1,
+      88.8
+     ]
+    ],
+    "open_align": [
+     2,
+     20,
+     10.0,
+     [
+      2.8,
+      30.1
+     ]
+    ],
+    "open_assembly": [
+     2,
+     20,
+     10.0,
+     [
+      2.8,
+      30.1
+     ]
+    ],
+    "fisher_assembly_closed_vs_open_p": 6.860629774979052e-05,
+    "fisher_align_closed_vs_open_p": 5.295889611796174e-07,
+    "assembly_le_align": true
+   },
+   "Syringe": {
+    "closed_align": [
+     18,
+     20,
+     90.0,
+     [
+      69.9,
+      97.2
+     ]
+    ],
+    "closed_assembly": [
+     17,
+     20,
+     85.0,
+     [
+      64.0,
+      94.8
+     ]
+    ],
+    "open_align": [
+     1,
+     20,
+     5.0,
+     [
+      0.9,
+      23.6
+     ]
+    ],
+    "open_assembly": [
+     0,
+     20,
+     0.0,
+     [
+      0.0,
+      16.1
+     ]
+    ],
+    "fisher_assembly_closed_vs_open_p": 2.5695242602917798e-08,
+    "fisher_align_closed_vs_open_p": 5.81951541955411e-08,
+    "assembly_le_align": true
+   },
+   "Marker": {
+    "closed_align": [
+     16,
+     20,
+     80.0,
+     [
+      58.4,
+      91.9
+     ]
+    ],
+    "closed_assembly": [
+     16,
+     20,
+     80.0,
+     [
+      58.4,
+      91.9
+     ]
+    ],
+    "open_align": [
+     0,
+     20,
+     0.0,
+     [
+      0.0,
+      16.1
+     ]
+    ],
+    "open_assembly": [
+     0,
+     20,
+     0.0,
+     [
+      0.0,
+      16.1
+     ]
+    ],
+    "fisher_assembly_closed_vs_open_p": 1.5417145561750679e-07,
+    "fisher_align_closed_vs_open_p": 1.5417145561750679e-07,
+    "assembly_le_align": true
+   }
+  },
+  "pooled": {
+   "closed_align": [
+    52,
+    60,
+    86.7,
+    [
+     75.8,
+     93.1
+    ]
+   ],
+   "closed_assembly": [
+    48,
+    60,
+    80.0,
+    [
+     68.2,
+     88.2
+    ]
+   ],
+   "open_align": [
+    3,
+    60,
+    5.0,
+    [
+     1.7,
+     13.7
+    ]
+   ],
+   "open_assembly": [
+    2,
+    60,
+    3.3,
+    [
+     0.9,
+     11.4
+    ]
+   ],
+   "fisher_assembly_p": 2.7203325505160824e-19,
+   "text_open_loop_alignment_total_claim": 3,
+   "open_loop_alignment_total_recount": 3
+  },
+  "wilson_halfwidth_at_80pct_n20": [
+   16.8
+  ]
+ },
+ "V2_video_counters": {
+  "project_page_counter": {
+   "Bottle": 14,
+   "Syringe": 19,
+   "Marker": 16
+  },
+  "table1_assembly": {
+   "Bottle": 15,
+   "Syringe": 17,
+   "Marker": 16
+  },
+  "table1_align": {
+   "Bottle": 18,
+   "Syringe": 18,
+   "Marker": 16
+  },
+  "diff_vs_assembly": {
+   "Bottle": -1,
+   "Syringe": 2,
+   "Marker": 0
+  },
+  "diff_vs_align": {
+   "Bottle": -4,
+   "Syringe": 1,
+   "Marker": 0
+  },
+  "total_counter": 49,
+  "total_table1_assembly": 48,
+  "wilson_counter": {
+   "Bottle": [
+    48.1,
+    85.5
+   ],
+   "Syringe": [
+    76.4,
+    99.1
+   ],
+   "Marker": [
+    58.4,
+    91.9
+   ]
+  },
+  "note": "프로젝트 페이지가 스스로 '논문 표와 다르다'고 적은 값. 영상 카운터의 성공 기준은 알 수 없다."
+ },
+ "V3_marker_success": {
+  "rows": {
+   "Ours": {
+    "reward": 1280.1,
+    "success_pct": 65,
+    "count": 325,
+    "wilson": [
+     60.7,
+     69.1
+    ]
+   },
+   "Proprioception-only": {
+    "reward": 338.0,
+    "success_pct": 11,
+    "count": 55,
+    "wilson": [
+     8.5,
+     14.0
+    ]
+   },
+   "History-MLP": {
+    "reward": 995.3,
+    "success_pct": 49,
+    "count": 245,
+    "wilson": [
+     44.6,
+     53.4
+    ]
+   },
+   "w/o finger reward": {
+    "reward": 629.4,
+    "success_pct": 27,
+    "count": 135,
+    "wilson": [
+     23.3,
+     31.1
+    ]
+   },
+   "w/o pose reward": {
+    "reward": 981.8,
+    "success_pct": 40,
+    "count": 200,
+    "wilson": [
+     35.8,
+     44.4
+    ]
+   }
+  },
+  "integer_feasible_for_500": {
+   "Ours": true,
+   "Proprioception-only": true,
+   "History-MLP": true,
+   "w/o finger reward": true,
+   "w/o pose reward": true
+  },
+  "fisher_full_vs_variant_p": {
+   "Proprioception-only": 4.79488090519111e-74,
+   "History-MLP": 4.251836872404671e-07,
+   "w/o finger reward": 5.958692057339114e-34,
+   "w/o pose reward": 2.9430988276785767e-15
+  },
+  "fisher_history_vs_wo_pose_p": 0.005087004614773397,
+  "reward_vs_success": {
+   "spearman_rho": 0.9999999999999999,
+   "pearson_r2": 0.9718933339825825,
+   "slope_pct_per_reward": 0.05566869634129651,
+   "intercept_pct": -8.63559491268824
+  },
+  "sim_vs_real_marker": {
+   "sim_success_pct": 65,
+   "sim_wilson_n500": [
+    60.7,
+    69.1
+   ],
+   "real_closed_loop": [
+    16,
+    20,
+    80.0,
+    [
+     58.4,
+     91.9
+    ]
+   ],
+   "fisher_sim_vs_real_p": 0.23060072320488934,
+   "sim_inside_real_wilson": true
+  }
+ },
+ "V4_fig5_fig6": {
+  "rel_to_full_pct": {
+   "Bottle": {
+    "Ours": 100.0,
+    "Proprioception-only": 56.4,
+    "History-MLP": 76.2,
+    "w/o finger reward": 67.2,
+    "w/o pose reward": 85.6
+   },
+   "Syringe": {
+    "Ours": 100.0,
+    "Proprioception-only": 85.4,
+    "History-MLP": 69.3,
+    "w/o finger reward": 68.4,
+    "w/o pose reward": 85.8
+   }
+  },
+  "visual_bar_ratio_vs_value_ratio": {
+   "Bottle": {
+    "Proprioception-only": {
+     "value_ratio": 0.564,
+     "drawn_height_ratio": 0.29
+    },
+    "History-MLP": {
+     "value_ratio": 0.762,
+     "drawn_height_ratio": 0.612
+    },
+    "w/o finger reward": {
+     "value_ratio": 0.672,
+     "drawn_height_ratio": 0.467
+    },
+    "w/o pose reward": {
+     "value_ratio": 0.856,
+     "drawn_height_ratio": 0.766
+    }
+   },
+   "Syringe": {
+    "Proprioception-only": {
+     "value_ratio": 0.854,
+     "drawn_height_ratio": 0.681
+    },
+    "History-MLP": {
+     "value_ratio": 0.693,
+     "drawn_height_ratio": 0.329
+    },
+    "w/o finger reward": {
+     "value_ratio": 0.684,
+     "drawn_height_ratio": 0.309
+    },
+    "w/o pose reward": {
+     "value_ratio": 0.858,
+     "drawn_height_ratio": 0.689
+    }
+   }
+  },
+  "tests": {
+   "Bottle": {
+    "Proprioception-only": {
+     "bar_is_SD": 0.001,
+     "bar_is_SE": 0.0058,
+     "bar_is_95CI_t": 0.0
+    },
+    "History-MLP": {
+     "bar_is_SD": 0.0101,
+     "bar_is_SE": 0.0564,
+     "bar_is_95CI_t": 0.0003
+    },
+    "w/o finger reward": {
+     "bar_is_SD": 0.0028,
+     "bar_is_SE": 0.0195,
+     "bar_is_95CI_t": 0.0001
+    },
+    "w/o pose reward": {
+     "bar_is_SD": 0.0664,
+     "bar_is_SE": 0.2176,
+     "bar_is_95CI_t": 0.0038
+    }
+   },
+   "Syringe": {
+    "Proprioception-only": {
+     "bar_is_SD": 0.1004,
+     "bar_is_SE": 0.2702,
+     "bar_is_95CI_t": 0.0095
+    },
+    "History-MLP": {
+     "bar_is_SD": 0.0021,
+     "bar_is_SE": 0.0152,
+     "bar_is_95CI_t": 0.0001
+    },
+    "w/o finger reward": {
+     "bar_is_SD": 0.0018,
+     "bar_is_SE": 0.0127,
+     "bar_is_95CI_t": 0.0001
+    },
+    "w/o pose reward": {
+     "bar_is_SD": 0.0234,
+     "bar_is_SE": 0.1063,
+     "bar_is_95CI_t": 0.001
+    }
+   }
+  },
+  "fig6_fig_read": {
+   "Bottle_gauss_3cm": {
+    "value_fig_read": 1252,
+    "pct_of_full_policy": 87.6,
+    "pct_of_step_ceiling": 41.7,
+    "vision_benefit_retained": 0.72
+   },
+   "Syringe_gauss_3cm": {
+    "value_fig_read": 788,
+    "pct_of_full_policy": 85.5,
+    "pct_of_step_ceiling": 52.5,
+    "vision_benefit_retained": 0.01
+   },
+   "Bottle_offset_3cm": {
+    "value_fig_read": 1037,
+    "pct_of_full_policy": 72.6,
+    "pct_of_step_ceiling": 34.6,
+    "vision_benefit_retained": 0.37
+   },
+   "Syringe_offset_3cm": {
+    "value_fig_read": 543,
+    "pct_of_full_policy": 58.9,
+    "pct_of_step_ceiling": 36.2,
+    "vision_benefit_retained": -1.82
+   },
+   "Marker_gauss_3cm": {
+    "value_paper_text": 963.7,
+    "pct_of_full_policy": 75.3,
+    "pct_of_step_ceiling": 32.1,
+    "vision_benefit_retained": 0.66
+   },
+   "Marker_offset_3cm": {
+    "value_paper_text": 670.9,
+    "pct_of_full_policy": 52.4,
+    "pct_of_step_ceiling": 22.4,
+    "vision_benefit_retained": 0.35
+   }
+  }
+ },
+ "V5_reward": {
+  "per_step_reward": {
+   "xy0mm_z0mm_0deg": 10.0,
+   "xy2mm_z2mm_0deg": 6.57,
+   "xy3mm_z3mm_0deg": 5.403,
+   "xy5mm_z5mm_0deg": 3.754,
+   "xy10mm_z10mm_0deg": 1.71,
+   "xy10mm_z10mm_5deg": 1.659,
+   "xy20mm_z20mm_10deg": 0.426,
+   "xy5mm_z5mm_20deg": 2.195
+  },
+  "implied_error_mm": {
+   "Bottle": {
+    "per_step_mean": 4.76,
+    "equal_xy_z_error_mm": 3.67
+   },
+   "Syringe": {
+    "per_step_mean": 6.14,
+    "equal_xy_z_error_mm": 2.34
+   },
+   "Marker": {
+    "per_step_mean": 4.27,
+    "equal_xy_z_error_mm": 4.27
+   }
+  },
+  "ceiling": {
+   "Bottle": {
+    "steps": 300,
+    "max_cumulative": 3000,
+    "reported_pct_of_ceiling": 47.6
+   },
+   "Syringe": {
+    "steps": 150,
+    "max_cumulative": 1500,
+    "reported_pct_of_ceiling": 61.4
+   },
+   "Marker": {
+    "steps": 300,
+    "max_cumulative": 3000,
+    "reported_pct_of_ceiling": 42.7
+   }
+  },
+  "time_in_seconds": {
+   "Bottle": 20,
+   "Syringe": 10,
+   "Marker": 20,
+   "control_hz": 15
+  }
+ },
+ "V6_arithmetic": {
+  "obs_dim": {
+   "formula": "3+3+3+3+22",
+   "sum": 34,
+   "paper": 34
+  },
+  "samples_per_rollout": {
+   "fixed": 32768,
+   "paper_fixed": 32768,
+   "tilt": 131072,
+   "paper_tilt": 131072
+  },
+  "minibatches_per_epoch": {
+   "ppo_fixed": 16.0,
+   "ppo_tilt": 16.0,
+   "critic_fixed": 64.0,
+   "critic_tilt": 64.0
+  },
+  "samples_at_epoch_600": {
+   "fixed": 19660800,
+   "tilt": 78643200,
+   "robot_days_at_15hz_fixed": 15.2
+  },
+  "gamma_horizon_steps": 200,
+  "gamma_horizon_seconds_at_15hz": 13.3,
+  "max_joint_speed_rad_s": 1.5,
+  "physics_substeps_per_policy_step": 8.0,
+  "gravity_mean": 9.809999999999999,
+  "noise_1cm_matches_sec44": true,
+  "reset_perturbation": {
+   "c": 4800.0,
+   "displacement_after_N_steps_per_unit_dp": 1.0
+  },
+  "policy_params": {
+   "lstm_backbone": 12738560,
+   "mlp_head": 600150,
+   "recurrent_total": 13338710,
+   "history_mlp_total_assumed_input_448": 1059926,
+   "ratio": 12.6
+  }
+ }
+}
