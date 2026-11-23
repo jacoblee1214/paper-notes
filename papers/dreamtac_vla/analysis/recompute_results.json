@@ -1,0 +1,1967 @@
+{
+ "V1_real_text_vs_table": {
+  "Full avg": {
+   "text": 84.1,
+   "computed": 84.1,
+   "match": true
+  },
+  "pi0 avg": {
+   "text": 48.6,
+   "computed": 48.6,
+   "match": true
+  },
+  "Full - pi0": {
+   "text": 35.5,
+   "computed": 35.5,
+   "match": true
+  },
+  "Peg gain over pi0": {
+   "text": 46.3,
+   "computed": 46.3,
+   "match": true
+  },
+  "ACT avg": {
+   "text": 34.9,
+   "computed": 34.9,
+   "match": true
+  },
+  "ACT+Tactile avg": {
+   "text": 47.0,
+   "computed": 47.0,
+   "match": true
+  },
+  "HSA-only avg": {
+   "text": 54.7,
+   "computed": 54.7,
+   "match": true
+  },
+  "Dream-only avg": {
+   "text": 71.0,
+   "computed": 71.0,
+   "match": true
+  },
+  "Full - HSA-only": {
+   "text": 29.4,
+   "computed": 29.4,
+   "match": true
+  },
+  "Full - Dream-only": {
+   "text": 13.1,
+   "computed": 13.1,
+   "match": true
+  }
+ },
+ "V1_real_row_means": {
+  "ACT": 34.9,
+  "Diffusion Policy": 38.8,
+  "pi0": 48.6,
+  "ACT (w/ Tactile)": 47.0,
+  "HSA-Only": 54.7,
+  "Dream-Only": 71.0,
+  "Full (HSA & Dream)": 84.1
+ },
+ "V1_sim_text_vs_table": {
+  "Full avg": {
+   "text": 96.6,
+   "computed": 96.6,
+   "match": true
+  },
+  "HSA-only avg": {
+   "text": 86.7,
+   "computed": 86.7,
+   "match": true
+  },
+  "Dream-only avg": {
+   "text": 91.9,
+   "computed": 91.9,
+   "match": true
+  }
+ },
+ "V1_sim_row_means": {
+  "ACT": 69.4,
+  "Diffusion Policy": 72.8,
+  "pi0": 80.3,
+  "HSA-Only": 86.7,
+  "Dream-Only": 91.9,
+  "Full (HSA & Dream)": 96.6
+ },
+ "V1_ordering_pi0_to_full_violations_real": [],
+ "V1_acttactile_vs_act_gain": {
+  "Peg-in-Hole": 10.4,
+  "USB Insert": 0.5,
+  "Gear Assembly": 17.8,
+  "Tool Stabilize": 19.8
+ },
+ "V2_mean_feasible_3runs_x100": {
+  "n_cells": 28,
+  "n_infeasible": 21,
+  "infeasible": [
+   "ACT|Peg-in-Hole=35.2",
+   "ACT|USB Insert=62.6",
+   "ACT|Gear Assembly=22.4",
+   "Diffusion Policy|Peg-in-Hole=35.5",
+   "Diffusion Policy|Gear Assembly=33.1",
+   "Diffusion Policy|Tool Stabilize=30.4",
+   "pi0|USB Insert=59.4",
+   "pi0|Gear Assembly=45.2",
+   "ACT (w/ Tactile)|Peg-in-Hole=45.6",
+   "ACT (w/ Tactile)|USB Insert=63.1",
+   "ACT (w/ Tactile)|Gear Assembly=40.2",
+   "ACT (w/ Tactile)|Tool Stabilize=39.1",
+   "HSA-Only|Peg-in-Hole=60.8",
+   "HSA-Only|Gear Assembly=51.5",
+   "HSA-Only|Tool Stabilize=42.9",
+   "Dream-Only|Peg-in-Hole=75.4",
+   "Dream-Only|USB Insert=75.2",
+   "Dream-Only|Gear Assembly=64.9",
+   "Dream-Only|Tool Stabilize=68.5",
+   "Full (HSA & Dream)|Gear Assembly=81.1",
+   "Full (HSA & Dream)|Tool Stabilize=74.6"
+  ]
+ },
+ "V2_cells_feasible_if_runs": {
+  "1": false,
+  "3": false,
+  "5": false,
+  "10": true
+ },
+ "V3_min_nonzero_sd_of_3_integer_runs": {
+  "sample_sd_ddof1": 0.5773502691896257,
+  "population_sd_ddof0": 0.4714045207910317
+ },
+ "V3_sd_joint_feasibility_3runs_x100": {
+  "n_cells": 28,
+  "n_mean_feasible": 7,
+  "n_joint_feasible_either_sd_def": 3,
+  "n_cells_sd_below_0.47": 5,
+  "cells": {
+   "ACT|Peg-in-Hole": {
+    "mean": 35.2,
+    "sd": 0.7,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "ACT|USB Insert": {
+    "mean": 62.6,
+    "sd": 0.5,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "ACT|Gear Assembly": {
+    "mean": 22.4,
+    "sd": 0.8,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "ACT|Tool Stabilize": {
+    "mean": 19.3,
+    "sd": 0.6,
+    "mean_feasible": true,
+    "joint_feasible_ddof1": true,
+    "joint_feasible_ddof0": false
+   },
+   "Diffusion Policy|Peg-in-Hole": {
+    "mean": 35.5,
+    "sd": 0.9,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "Diffusion Policy|USB Insert": {
+    "mean": 56.3,
+    "sd": 0.8,
+    "mean_feasible": true,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "Diffusion Policy|Gear Assembly": {
+    "mean": 33.1,
+    "sd": 0.7,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "Diffusion Policy|Tool Stabilize": {
+    "mean": 30.4,
+    "sd": 0.9,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "pi0|Peg-in-Hole": {
+    "mean": 48.7,
+    "sd": 1.0,
+    "mean_feasible": true,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "pi0|USB Insert": {
+    "mean": 59.4,
+    "sd": 0.9,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "pi0|Gear Assembly": {
+    "mean": 45.2,
+    "sd": 1.1,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "pi0|Tool Stabilize": {
+    "mean": 41.0,
+    "sd": 0.8,
+    "mean_feasible": true,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": true
+   },
+   "ACT (w/ Tactile)|Peg-in-Hole": {
+    "mean": 45.6,
+    "sd": 0.3,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "ACT (w/ Tactile)|USB Insert": {
+    "mean": 63.1,
+    "sd": 0.4,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "ACT (w/ Tactile)|Gear Assembly": {
+    "mean": 40.2,
+    "sd": 0.2,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "ACT (w/ Tactile)|Tool Stabilize": {
+    "mean": 39.1,
+    "sd": 0.7,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "HSA-Only|Peg-in-Hole": {
+    "mean": 60.8,
+    "sd": 0.9,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "HSA-Only|USB Insert": {
+    "mean": 63.7,
+    "sd": 0.8,
+    "mean_feasible": true,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "HSA-Only|Gear Assembly": {
+    "mean": 51.5,
+    "sd": 1.0,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "HSA-Only|Tool Stabilize": {
+    "mean": 42.9,
+    "sd": 0.7,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "Dream-Only|Peg-in-Hole": {
+    "mean": 75.4,
+    "sd": 0.8,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "Dream-Only|USB Insert": {
+    "mean": 75.2,
+    "sd": 0.7,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "Dream-Only|Gear Assembly": {
+    "mean": 64.9,
+    "sd": 0.6,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "Dream-Only|Tool Stabilize": {
+    "mean": 68.5,
+    "sd": 0.9,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "Full (HSA & Dream)|Peg-in-Hole": {
+    "mean": 95.0,
+    "sd": 0.2,
+    "mean_feasible": true,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "Full (HSA & Dream)|USB Insert": {
+    "mean": 85.7,
+    "sd": 0.6,
+    "mean_feasible": true,
+    "joint_feasible_ddof1": true,
+    "joint_feasible_ddof0": false
+   },
+   "Full (HSA & Dream)|Gear Assembly": {
+    "mean": 81.1,
+    "sd": 0.4,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   },
+   "Full (HSA & Dream)|Tool Stabilize": {
+    "mean": 74.6,
+    "sd": 0.5,
+    "mean_feasible": false,
+    "joint_feasible_ddof1": false,
+    "joint_feasible_ddof0": false
+   }
+  }
+ },
+ "V4_table4_100_trials": {
+  "n_cells": 24,
+  "n_integer_valued": 0,
+  "feasible_if_runs": {
+   "1": false,
+   "3": false,
+   "5": false,
+   "10": true
+  },
+  "n_feasible_3runs": 4
+ },
+ "V5_wilson_and_sd": {
+  "ACT|Peg-in-Hole": {
+   "mean": 35.2,
+   "reported_sd": 0.7,
+   "binomial_sd_per_100": 4.78,
+   "binomial_se_n300": 2.76,
+   "ratio_reported_to_binomial": 0.15,
+   "wilson95_n300": [
+    30.1,
+    40.9
+   ],
+   "wilson95_n100": [
+    26.4,
+    44.7
+   ]
+  },
+  "ACT|USB Insert": {
+   "mean": 62.6,
+   "reported_sd": 0.5,
+   "binomial_sd_per_100": 4.84,
+   "binomial_se_n300": 2.79,
+   "ratio_reported_to_binomial": 0.1,
+   "wilson95_n300": [
+    57.1,
+    67.9
+   ],
+   "wilson95_n100": [
+    53.2,
+    71.8
+   ]
+  },
+  "ACT|Gear Assembly": {
+   "mean": 22.4,
+   "reported_sd": 0.8,
+   "binomial_sd_per_100": 4.17,
+   "binomial_se_n300": 2.41,
+   "ratio_reported_to_binomial": 0.19,
+   "wilson95_n300": [
+    18.0,
+    27.4
+   ],
+   "wilson95_n100": [
+    15.0,
+    31.1
+   ]
+  },
+  "ACT|Tool Stabilize": {
+   "mean": 19.3,
+   "reported_sd": 0.6,
+   "binomial_sd_per_100": 3.95,
+   "binomial_se_n300": 2.28,
+   "ratio_reported_to_binomial": 0.15,
+   "wilson95_n300": [
+    15.3,
+    24.2
+   ],
+   "wilson95_n100": [
+    12.5,
+    27.8
+   ]
+  },
+  "Diffusion Policy|Peg-in-Hole": {
+   "mean": 35.5,
+   "reported_sd": 0.9,
+   "binomial_sd_per_100": 4.79,
+   "binomial_se_n300": 2.76,
+   "ratio_reported_to_binomial": 0.19,
+   "wilson95_n300": [
+    30.1,
+    40.9
+   ],
+   "wilson95_n100": [
+    27.3,
+    45.8
+   ]
+  },
+  "Diffusion Policy|USB Insert": {
+   "mean": 56.3,
+   "reported_sd": 0.8,
+   "binomial_sd_per_100": 4.96,
+   "binomial_se_n300": 2.86,
+   "ratio_reported_to_binomial": 0.16,
+   "wilson95_n300": [
+    50.7,
+    61.8
+   ],
+   "wilson95_n100": [
+    46.2,
+    65.3
+   ]
+  },
+  "Diffusion Policy|Gear Assembly": {
+   "mean": 33.1,
+   "reported_sd": 0.7,
+   "binomial_sd_per_100": 4.71,
+   "binomial_se_n300": 2.72,
+   "ratio_reported_to_binomial": 0.15,
+   "wilson95_n300": [
+    27.9,
+    38.5
+   ],
+   "wilson95_n100": [
+    24.6,
+    42.7
+   ]
+  },
+  "Diffusion Policy|Tool Stabilize": {
+   "mean": 30.4,
+   "reported_sd": 0.9,
+   "binomial_sd_per_100": 4.6,
+   "binomial_se_n300": 2.66,
+   "ratio_reported_to_binomial": 0.2,
+   "wilson95_n300": [
+    25.4,
+    35.8
+   ],
+   "wilson95_n100": [
+    21.9,
+    39.6
+   ]
+  },
+  "pi0|Peg-in-Hole": {
+   "mean": 48.7,
+   "reported_sd": 1.0,
+   "binomial_sd_per_100": 5.0,
+   "binomial_se_n300": 2.89,
+   "ratio_reported_to_binomial": 0.2,
+   "wilson95_n300": [
+    43.1,
+    54.3
+   ],
+   "wilson95_n100": [
+    39.4,
+    58.7
+   ]
+  },
+  "pi0|USB Insert": {
+   "mean": 59.4,
+   "reported_sd": 0.9,
+   "binomial_sd_per_100": 4.91,
+   "binomial_se_n300": 2.84,
+   "ratio_reported_to_binomial": 0.18,
+   "wilson95_n300": [
+    53.7,
+    64.7
+   ],
+   "wilson95_n100": [
+    49.2,
+    68.1
+   ]
+  },
+  "pi0|Gear Assembly": {
+   "mean": 45.2,
+   "reported_sd": 1.1,
+   "binomial_sd_per_100": 4.98,
+   "binomial_se_n300": 2.87,
+   "ratio_reported_to_binomial": 0.22,
+   "wilson95_n300": [
+    39.8,
+    51.0
+   ],
+   "wilson95_n100": [
+    35.6,
+    54.8
+   ]
+  },
+  "pi0|Tool Stabilize": {
+   "mean": 41.0,
+   "reported_sd": 0.8,
+   "binomial_sd_per_100": 4.92,
+   "binomial_se_n300": 2.84,
+   "ratio_reported_to_binomial": 0.16,
+   "wilson95_n300": [
+    35.6,
+    46.6
+   ],
+   "wilson95_n100": [
+    31.9,
+    50.8
+   ]
+  },
+  "ACT (w/ Tactile)|Peg-in-Hole": {
+   "mean": 45.6,
+   "reported_sd": 0.3,
+   "binomial_sd_per_100": 4.98,
+   "binomial_se_n300": 2.88,
+   "ratio_reported_to_binomial": 0.06,
+   "wilson95_n300": [
+    40.1,
+    51.3
+   ],
+   "wilson95_n100": [
+    36.6,
+    55.7
+   ]
+  },
+  "ACT (w/ Tactile)|USB Insert": {
+   "mean": 63.1,
+   "reported_sd": 0.4,
+   "binomial_sd_per_100": 4.83,
+   "binomial_se_n300": 2.79,
+   "ratio_reported_to_binomial": 0.08,
+   "wilson95_n300": [
+    57.4,
+    68.3
+   ],
+   "wilson95_n100": [
+    53.2,
+    71.8
+   ]
+  },
+  "ACT (w/ Tactile)|Gear Assembly": {
+   "mean": 40.2,
+   "reported_sd": 0.2,
+   "binomial_sd_per_100": 4.9,
+   "binomial_se_n300": 2.83,
+   "ratio_reported_to_binomial": 0.04,
+   "wilson95_n300": [
+    34.9,
+    46.0
+   ],
+   "wilson95_n100": [
+    30.9,
+    49.8
+   ]
+  },
+  "ACT (w/ Tactile)|Tool Stabilize": {
+   "mean": 39.1,
+   "reported_sd": 0.7,
+   "binomial_sd_per_100": 4.88,
+   "binomial_se_n300": 2.82,
+   "ratio_reported_to_binomial": 0.14,
+   "wilson95_n300": [
+    33.7,
+    44.6
+   ],
+   "wilson95_n100": [
+    30.0,
+    48.8
+   ]
+  },
+  "HSA-Only|Peg-in-Hole": {
+   "mean": 60.8,
+   "reported_sd": 0.9,
+   "binomial_sd_per_100": 4.88,
+   "binomial_se_n300": 2.82,
+   "ratio_reported_to_binomial": 0.18,
+   "wilson95_n300": [
+    55.0,
+    66.0
+   ],
+   "wilson95_n100": [
+    51.2,
+    70.0
+   ]
+  },
+  "HSA-Only|USB Insert": {
+   "mean": 63.7,
+   "reported_sd": 0.8,
+   "binomial_sd_per_100": 4.81,
+   "binomial_se_n300": 2.78,
+   "ratio_reported_to_binomial": 0.17,
+   "wilson95_n300": [
+    58.1,
+    68.9
+   ],
+   "wilson95_n100": [
+    54.2,
+    72.7
+   ]
+  },
+  "HSA-Only|Gear Assembly": {
+   "mean": 51.5,
+   "reported_sd": 1.0,
+   "binomial_sd_per_100": 5.0,
+   "binomial_se_n300": 2.89,
+   "ratio_reported_to_binomial": 0.2,
+   "wilson95_n300": [
+    45.7,
+    56.9
+   ],
+   "wilson95_n100": [
+    42.3,
+    61.5
+   ]
+  },
+  "HSA-Only|Tool Stabilize": {
+   "mean": 42.9,
+   "reported_sd": 0.7,
+   "binomial_sd_per_100": 4.95,
+   "binomial_se_n300": 2.86,
+   "ratio_reported_to_binomial": 0.14,
+   "wilson95_n300": [
+    37.5,
+    48.7
+   ],
+   "wilson95_n100": [
+    33.7,
+    52.8
+   ]
+  },
+  "Dream-Only|Peg-in-Hole": {
+   "mean": 75.4,
+   "reported_sd": 0.8,
+   "binomial_sd_per_100": 4.31,
+   "binomial_se_n300": 2.49,
+   "ratio_reported_to_binomial": 0.19,
+   "wilson95_n300": [
+    70.2,
+    79.9
+   ],
+   "wilson95_n100": [
+    65.7,
+    82.5
+   ]
+  },
+  "Dream-Only|USB Insert": {
+   "mean": 75.2,
+   "reported_sd": 0.7,
+   "binomial_sd_per_100": 4.32,
+   "binomial_se_n300": 2.49,
+   "ratio_reported_to_binomial": 0.16,
+   "wilson95_n300": [
+    70.2,
+    79.9
+   ],
+   "wilson95_n100": [
+    65.7,
+    82.5
+   ]
+  },
+  "Dream-Only|Gear Assembly": {
+   "mean": 64.9,
+   "reported_sd": 0.6,
+   "binomial_sd_per_100": 4.77,
+   "binomial_se_n300": 2.76,
+   "ratio_reported_to_binomial": 0.13,
+   "wilson95_n300": [
+    59.4,
+    70.2
+   ],
+   "wilson95_n100": [
+    55.3,
+    73.6
+   ]
+  },
+  "Dream-Only|Tool Stabilize": {
+   "mean": 68.5,
+   "reported_sd": 0.9,
+   "binomial_sd_per_100": 4.65,
+   "binomial_se_n300": 2.68,
+   "ratio_reported_to_binomial": 0.19,
+   "wilson95_n300": [
+    63.2,
+    73.7
+   ],
+   "wilson95_n100": [
+    58.3,
+    76.3
+   ]
+  },
+  "Full (HSA & Dream)|Peg-in-Hole": {
+   "mean": 95.0,
+   "reported_sd": 0.2,
+   "binomial_sd_per_100": 2.18,
+   "binomial_se_n300": 1.26,
+   "ratio_reported_to_binomial": 0.09,
+   "wilson95_n300": [
+    91.9,
+    96.9
+   ],
+   "wilson95_n100": [
+    88.8,
+    97.8
+   ]
+  },
+  "Full (HSA & Dream)|USB Insert": {
+   "mean": 85.7,
+   "reported_sd": 0.6,
+   "binomial_sd_per_100": 3.5,
+   "binomial_se_n300": 2.02,
+   "ratio_reported_to_binomial": 0.17,
+   "wilson95_n300": [
+    81.2,
+    89.2
+   ],
+   "wilson95_n100": [
+    77.9,
+    91.5
+   ]
+  },
+  "Full (HSA & Dream)|Gear Assembly": {
+   "mean": 81.1,
+   "reported_sd": 0.4,
+   "binomial_sd_per_100": 3.92,
+   "binomial_se_n300": 2.26,
+   "ratio_reported_to_binomial": 0.1,
+   "wilson95_n300": [
+    76.2,
+    85.0
+   ],
+   "wilson95_n100": [
+    72.2,
+    87.5
+   ]
+  },
+  "Full (HSA & Dream)|Tool Stabilize": {
+   "mean": 74.6,
+   "reported_sd": 0.5,
+   "binomial_sd_per_100": 4.35,
+   "binomial_se_n300": 2.51,
+   "ratio_reported_to_binomial": 0.11,
+   "wilson95_n300": [
+    69.5,
+    79.3
+   ],
+   "wilson95_n100": [
+    65.7,
+    82.5
+   ]
+  }
+ },
+ "V5_sd_ratio_summary": {
+  "min": 0.041,
+  "median": 0.162,
+  "max": 0.221
+ },
+ "V6_pairwise_real": {
+  "n300_assumed_3x100": [
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "pi0",
+    "task": "Peg-in-Hole",
+    "a_pct": 95.0,
+    "b_pct": 48.7,
+    "ka": 285,
+    "kb": 146,
+    "n": 300,
+    "p": 4.548043232353214e-40,
+    "p_holm": 1.2734521050589e-38
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "pi0",
+    "task": "USB Insert",
+    "a_pct": 85.7,
+    "b_pct": 59.4,
+    "ka": 257,
+    "kb": 178,
+    "n": 300,
+    "p": 4.488694566365715e-13,
+    "p_holm": 9.875128046004573e-12
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "pi0",
+    "task": "Gear Assembly",
+    "a_pct": 81.1,
+    "b_pct": 45.2,
+    "ka": 243,
+    "kb": 136,
+    "n": 300,
+    "p": 8.16342168099543e-20,
+    "p_holm": 2.122489637058812e-18
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "pi0",
+    "task": "Tool Stabilize",
+    "a_pct": 74.6,
+    "b_pct": 41.0,
+    "ka": 224,
+    "kb": 123,
+    "n": 300,
+    "p": 6.450563440508469e-17,
+    "p_holm": 1.6126408601271172e-15
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "Dream-Only",
+    "task": "Peg-in-Hole",
+    "a_pct": 95.0,
+    "b_pct": 75.4,
+    "ka": 285,
+    "kb": 226,
+    "n": 300,
+    "p": 5.2439039533315856e-12,
+    "p_holm": 1.101219830199633e-10
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "Dream-Only",
+    "task": "USB Insert",
+    "a_pct": 85.7,
+    "b_pct": 75.2,
+    "ka": 257,
+    "kb": 226,
+    "n": 300,
+    "p": 0.0019099285940598427,
+    "p_holm": 0.022919143128718112
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "Dream-Only",
+    "task": "Gear Assembly",
+    "a_pct": 81.1,
+    "b_pct": 64.9,
+    "ka": 243,
+    "kb": 195,
+    "n": 300,
+    "p": 1.3951716701943335e-05,
+    "p_holm": 0.00022322746723109336
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "Dream-Only",
+    "task": "Tool Stabilize",
+    "a_pct": 74.6,
+    "b_pct": 68.5,
+    "ka": 224,
+    "kb": 206,
+    "n": 300,
+    "p": 0.12338452802674349,
+    "p_holm": 0.8636916961872044
+   },
+   {
+    "a": "Dream-Only",
+    "b": "HSA-Only",
+    "task": "Peg-in-Hole",
+    "a_pct": 75.4,
+    "b_pct": 60.8,
+    "ka": 226,
+    "kb": 182,
+    "n": 300,
+    "p": 0.0001603842514193821,
+    "p_holm": 0.0024057637712907314
+   },
+   {
+    "a": "Dream-Only",
+    "b": "HSA-Only",
+    "task": "USB Insert",
+    "a_pct": 75.2,
+    "b_pct": 63.7,
+    "ka": 226,
+    "kb": 191,
+    "n": 300,
+    "p": 0.0025219328381729075,
+    "p_holm": 0.027741261219901982
+   },
+   {
+    "a": "Dream-Only",
+    "b": "HSA-Only",
+    "task": "Gear Assembly",
+    "a_pct": 64.9,
+    "b_pct": 51.5,
+    "ka": 195,
+    "kb": 154,
+    "n": 300,
+    "p": 0.0009145990919995626,
+    "p_holm": 0.011889788195994313
+   },
+   {
+    "a": "Dream-Only",
+    "b": "HSA-Only",
+    "task": "Tool Stabilize",
+    "a_pct": 68.5,
+    "b_pct": 42.9,
+    "ka": 206,
+    "kb": 129,
+    "n": 300,
+    "p": 3.3037648998638593e-10,
+    "p_holm": 6.607529799727719e-09
+   },
+   {
+    "a": "HSA-Only",
+    "b": "pi0",
+    "task": "Peg-in-Hole",
+    "a_pct": 60.8,
+    "b_pct": 48.7,
+    "ka": 182,
+    "kb": 146,
+    "n": 300,
+    "p": 0.004062526014935623,
+    "p_holm": 0.04062526014935623
+   },
+   {
+    "a": "HSA-Only",
+    "b": "pi0",
+    "task": "USB Insert",
+    "a_pct": 63.7,
+    "b_pct": 59.4,
+    "ka": 191,
+    "kb": 178,
+    "n": 300,
+    "p": 0.31403692253294097,
+    "p_holm": 1.0
+   },
+   {
+    "a": "HSA-Only",
+    "b": "pi0",
+    "task": "Gear Assembly",
+    "a_pct": 51.5,
+    "b_pct": 45.2,
+    "ka": 154,
+    "kb": 136,
+    "n": 300,
+    "p": 0.16483463291834566,
+    "p_holm": 0.989007797510074
+   },
+   {
+    "a": "HSA-Only",
+    "b": "pi0",
+    "task": "Tool Stabilize",
+    "a_pct": 42.9,
+    "b_pct": 41.0,
+    "ka": 129,
+    "kb": 123,
+    "n": 300,
+    "p": 0.6792234920352214,
+    "p_holm": 1.0
+   },
+   {
+    "a": "HSA-Only",
+    "b": "ACT (w/ Tactile)",
+    "task": "Peg-in-Hole",
+    "a_pct": 60.8,
+    "b_pct": 45.6,
+    "ka": 182,
+    "kb": 137,
+    "n": 300,
+    "p": 0.00031103538048189537,
+    "p_holm": 0.004354495326746535
+   },
+   {
+    "a": "HSA-Only",
+    "b": "ACT (w/ Tactile)",
+    "task": "USB Insert",
+    "a_pct": 63.7,
+    "b_pct": 63.1,
+    "ka": 191,
+    "kb": 189,
+    "n": 300,
+    "p": 0.932498368552298,
+    "p_holm": 1.0
+   },
+   {
+    "a": "HSA-Only",
+    "b": "ACT (w/ Tactile)",
+    "task": "Gear Assembly",
+    "a_pct": 51.5,
+    "b_pct": 40.2,
+    "ka": 154,
+    "kb": 121,
+    "n": 300,
+    "p": 0.008687488552375998,
+    "p_holm": 0.07818739697138398
+   },
+   {
+    "a": "HSA-Only",
+    "b": "ACT (w/ Tactile)",
+    "task": "Tool Stabilize",
+    "a_pct": 42.9,
+    "b_pct": 39.1,
+    "ka": 129,
+    "kb": 117,
+    "n": 300,
+    "p": 0.3612247116506825,
+    "p_holm": 1.0
+   },
+   {
+    "a": "ACT (w/ Tactile)",
+    "b": "ACT",
+    "task": "Peg-in-Hole",
+    "a_pct": 45.6,
+    "b_pct": 35.2,
+    "ka": 137,
+    "kb": 106,
+    "n": 300,
+    "p": 0.012524025040916632,
+    "p_holm": 0.10019220032733306
+   },
+   {
+    "a": "ACT (w/ Tactile)",
+    "b": "ACT",
+    "task": "USB Insert",
+    "a_pct": 63.1,
+    "b_pct": 62.6,
+    "ka": 189,
+    "kb": 188,
+    "n": 300,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "a": "ACT (w/ Tactile)",
+    "b": "ACT",
+    "task": "Gear Assembly",
+    "a_pct": 40.2,
+    "b_pct": 22.4,
+    "ka": 121,
+    "kb": 67,
+    "n": 300,
+    "p": 2.765833088488805e-06,
+    "p_holm": 4.701916250430968e-05
+   },
+   {
+    "a": "ACT (w/ Tactile)",
+    "b": "ACT",
+    "task": "Tool Stabilize",
+    "a_pct": 39.1,
+    "b_pct": 19.3,
+    "ka": 117,
+    "kb": 58,
+    "n": 300,
+    "p": 1.5574570352519995e-07,
+    "p_holm": 2.803422663453599e-06
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "HSA-Only",
+    "task": "Peg-in-Hole",
+    "a_pct": 95.0,
+    "b_pct": 60.8,
+    "ka": 285,
+    "kb": 182,
+    "n": 300,
+    "p": 5.979794018647822e-26,
+    "p_holm": 1.6145443850349118e-24
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "HSA-Only",
+    "task": "USB Insert",
+    "a_pct": 85.7,
+    "b_pct": 63.7,
+    "ka": 257,
+    "kb": 191,
+    "n": 300,
+    "p": 6.54886255914158e-10,
+    "p_holm": 1.2442838862369002e-08
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "HSA-Only",
+    "task": "Gear Assembly",
+    "a_pct": 81.1,
+    "b_pct": 51.5,
+    "ka": 243,
+    "kb": 154,
+    "n": 300,
+    "p": 1.5088634899856075e-14,
+    "p_holm": 3.4703860269668973e-13
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "HSA-Only",
+    "task": "Tool Stabilize",
+    "a_pct": 74.6,
+    "b_pct": 42.9,
+    "ka": 224,
+    "kb": 129,
+    "n": 300,
+    "p": 3.4230384539029118e-15,
+    "p_holm": 8.215292289366989e-14
+   }
+  ],
+  "n100_single_run": [
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "pi0",
+    "task": "Peg-in-Hole",
+    "a_pct": 95.0,
+    "b_pct": 48.7,
+    "ka": 95,
+    "kb": 49,
+    "n": 100,
+    "p": 7.83230243078072e-14,
+    "p_holm": 2.1930446806186017e-12
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "pi0",
+    "task": "USB Insert",
+    "a_pct": 85.7,
+    "b_pct": 59.4,
+    "ka": 86,
+    "kb": 59,
+    "n": 100,
+    "p": 2.9490070352269722e-05,
+    "p_holm": 0.0006487815477499339
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "pi0",
+    "task": "Gear Assembly",
+    "a_pct": 81.1,
+    "b_pct": 45.2,
+    "ka": 81,
+    "kb": 45,
+    "n": 100,
+    "p": 1.978715378893019e-07,
+    "p_holm": 5.144659985121849e-06
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "pi0",
+    "task": "Tool Stabilize",
+    "a_pct": 74.6,
+    "b_pct": 41.0,
+    "ka": 75,
+    "kb": 41,
+    "n": 100,
+    "p": 1.7821519013614078e-06,
+    "p_holm": 4.45537975340352e-05
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "Dream-Only",
+    "task": "Peg-in-Hole",
+    "a_pct": 95.0,
+    "b_pct": 75.4,
+    "ka": 95,
+    "kb": 75,
+    "n": 100,
+    "p": 0.00010416826021386083,
+    "p_holm": 0.0021875334644910773
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "Dream-Only",
+    "task": "USB Insert",
+    "a_pct": 85.7,
+    "b_pct": 75.2,
+    "ka": 86,
+    "kb": 75,
+    "n": 100,
+    "p": 0.07341933574108377,
+    "p_holm": 0.954451364634089
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "Dream-Only",
+    "task": "Gear Assembly",
+    "a_pct": 81.1,
+    "b_pct": 64.9,
+    "ka": 81,
+    "kb": 65,
+    "n": 100,
+    "p": 0.01643955436040315,
+    "p_holm": 0.2630328697664504
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "Dream-Only",
+    "task": "Tool Stabilize",
+    "a_pct": 74.6,
+    "b_pct": 68.5,
+    "ka": 75,
+    "kb": 68,
+    "n": 100,
+    "p": 0.34735214595943004,
+    "p_holm": 1.0
+   },
+   {
+    "a": "Dream-Only",
+    "b": "HSA-Only",
+    "task": "Peg-in-Hole",
+    "a_pct": 75.4,
+    "b_pct": 60.8,
+    "ka": 75,
+    "kb": 61,
+    "n": 100,
+    "p": 0.04833791512316368,
+    "p_holm": 0.7034454122716594
+   },
+   {
+    "a": "Dream-Only",
+    "b": "HSA-Only",
+    "task": "USB Insert",
+    "a_pct": 75.2,
+    "b_pct": 63.7,
+    "ka": 75,
+    "kb": 64,
+    "n": 100,
+    "p": 0.12422131626616004,
+    "p_holm": 1.0
+   },
+   {
+    "a": "Dream-Only",
+    "b": "HSA-Only",
+    "task": "Gear Assembly",
+    "a_pct": 64.9,
+    "b_pct": 51.5,
+    "ka": 65,
+    "kb": 52,
+    "n": 100,
+    "p": 0.08476498087791615,
+    "p_holm": 1.0
+   },
+   {
+    "a": "Dream-Only",
+    "b": "HSA-Only",
+    "task": "Tool Stabilize",
+    "a_pct": 68.5,
+    "b_pct": 42.9,
+    "ka": 68,
+    "kb": 43,
+    "n": 100,
+    "p": 0.0006011841412820172,
+    "p_holm": 0.011422498684358327
+   },
+   {
+    "a": "HSA-Only",
+    "b": "pi0",
+    "task": "Peg-in-Hole",
+    "a_pct": 60.8,
+    "b_pct": 48.7,
+    "ka": 61,
+    "kb": 49,
+    "n": 100,
+    "p": 0.11771632499937339,
+    "p_holm": 1.0
+   },
+   {
+    "a": "HSA-Only",
+    "b": "pi0",
+    "task": "USB Insert",
+    "a_pct": 63.7,
+    "b_pct": 59.4,
+    "ka": 64,
+    "kb": 59,
+    "n": 100,
+    "p": 0.5611990243364816,
+    "p_holm": 1.0
+   },
+   {
+    "a": "HSA-Only",
+    "b": "pi0",
+    "task": "Gear Assembly",
+    "a_pct": 51.5,
+    "b_pct": 45.2,
+    "ka": 52,
+    "kb": 45,
+    "n": 100,
+    "p": 0.3959937478317463,
+    "p_holm": 1.0
+   },
+   {
+    "a": "HSA-Only",
+    "b": "pi0",
+    "task": "Tool Stabilize",
+    "a_pct": 42.9,
+    "b_pct": 41.0,
+    "ka": 43,
+    "kb": 41,
+    "n": 100,
+    "p": 0.8861322322064682,
+    "p_holm": 1.0
+   },
+   {
+    "a": "HSA-Only",
+    "b": "ACT (w/ Tactile)",
+    "task": "Peg-in-Hole",
+    "a_pct": 60.8,
+    "b_pct": 45.6,
+    "ka": 61,
+    "kb": 46,
+    "n": 100,
+    "p": 0.046896360818110626,
+    "p_holm": 0.7034454122716594
+   },
+   {
+    "a": "HSA-Only",
+    "b": "ACT (w/ Tactile)",
+    "task": "USB Insert",
+    "a_pct": 63.7,
+    "b_pct": 63.1,
+    "ka": 64,
+    "kb": 63,
+    "n": 100,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "a": "HSA-Only",
+    "b": "ACT (w/ Tactile)",
+    "task": "Gear Assembly",
+    "a_pct": 51.5,
+    "b_pct": 40.2,
+    "ka": 52,
+    "kb": 40,
+    "n": 100,
+    "p": 0.118388137804041,
+    "p_holm": 1.0
+   },
+   {
+    "a": "HSA-Only",
+    "b": "ACT (w/ Tactile)",
+    "task": "Tool Stabilize",
+    "a_pct": 42.9,
+    "b_pct": 39.1,
+    "ka": 43,
+    "kb": 39,
+    "n": 100,
+    "p": 0.666369998146135,
+    "p_holm": 1.0
+   },
+   {
+    "a": "ACT (w/ Tactile)",
+    "b": "ACT",
+    "task": "Peg-in-Hole",
+    "a_pct": 45.6,
+    "b_pct": 35.2,
+    "ka": 46,
+    "kb": 35,
+    "n": 100,
+    "p": 0.14953578439426468,
+    "p_holm": 1.0
+   },
+   {
+    "a": "ACT (w/ Tactile)",
+    "b": "ACT",
+    "task": "USB Insert",
+    "a_pct": 63.1,
+    "b_pct": 62.6,
+    "ka": 63,
+    "kb": 63,
+    "n": 100,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "a": "ACT (w/ Tactile)",
+    "b": "ACT",
+    "task": "Gear Assembly",
+    "a_pct": 40.2,
+    "b_pct": 22.4,
+    "ka": 40,
+    "kb": 22,
+    "n": 100,
+    "p": 0.00905977836332488,
+    "p_holm": 0.15401623217652297
+   },
+   {
+    "a": "ACT (w/ Tactile)",
+    "b": "ACT",
+    "task": "Tool Stabilize",
+    "a_pct": 39.1,
+    "b_pct": 19.3,
+    "ka": 39,
+    "kb": 19,
+    "n": 100,
+    "p": 0.0028898038531662436,
+    "p_holm": 0.05201646935699238
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "HSA-Only",
+    "task": "Peg-in-Hole",
+    "a_pct": 95.0,
+    "b_pct": 60.8,
+    "ka": 95,
+    "kb": 61,
+    "n": 100,
+    "p": 3.7064857833712092e-09,
+    "p_holm": 1.0007511615102265e-07
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "HSA-Only",
+    "task": "USB Insert",
+    "a_pct": 85.7,
+    "b_pct": 63.7,
+    "ka": 86,
+    "kb": 64,
+    "n": 100,
+    "p": 0.0005252723147081234,
+    "p_holm": 0.010505446294162469
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "HSA-Only",
+    "task": "Gear Assembly",
+    "a_pct": 81.1,
+    "b_pct": 51.5,
+    "ka": 81,
+    "kb": 52,
+    "n": 100,
+    "p": 2.2284425141082592e-05,
+    "p_holm": 0.0005125417782448997
+   },
+   {
+    "a": "Full (HSA & Dream)",
+    "b": "HSA-Only",
+    "task": "Tool Stabilize",
+    "a_pct": 74.6,
+    "b_pct": 42.9,
+    "ka": 75,
+    "kb": 43,
+    "n": 100,
+    "p": 6.84516131697765e-06,
+    "p_holm": 0.0001642838716074636
+   }
+  ]
+ },
+ "V6_nonsignificant_holm_n300": [
+  [
+   "Full (HSA & Dream)",
+   "Dream-Only",
+   "Tool Stabilize",
+   "0.864"
+  ],
+  [
+   "HSA-Only",
+   "pi0",
+   "USB Insert",
+   "1"
+  ],
+  [
+   "HSA-Only",
+   "pi0",
+   "Gear Assembly",
+   "0.989"
+  ],
+  [
+   "HSA-Only",
+   "pi0",
+   "Tool Stabilize",
+   "1"
+  ],
+  [
+   "HSA-Only",
+   "ACT (w/ Tactile)",
+   "USB Insert",
+   "1"
+  ],
+  [
+   "HSA-Only",
+   "ACT (w/ Tactile)",
+   "Gear Assembly",
+   "0.0782"
+  ],
+  [
+   "HSA-Only",
+   "ACT (w/ Tactile)",
+   "Tool Stabilize",
+   "1"
+  ],
+  [
+   "ACT (w/ Tactile)",
+   "ACT",
+   "Peg-in-Hole",
+   "0.1"
+  ],
+  [
+   "ACT (w/ Tactile)",
+   "ACT",
+   "USB Insert",
+   "1"
+  ]
+ ],
+ "V6_nonsignificant_holm_n100": [
+  [
+   "Full (HSA & Dream)",
+   "Dream-Only",
+   "USB Insert",
+   "0.954"
+  ],
+  [
+   "Full (HSA & Dream)",
+   "Dream-Only",
+   "Gear Assembly",
+   "0.263"
+  ],
+  [
+   "Full (HSA & Dream)",
+   "Dream-Only",
+   "Tool Stabilize",
+   "1"
+  ],
+  [
+   "Dream-Only",
+   "HSA-Only",
+   "Peg-in-Hole",
+   "0.703"
+  ],
+  [
+   "Dream-Only",
+   "HSA-Only",
+   "USB Insert",
+   "1"
+  ],
+  [
+   "Dream-Only",
+   "HSA-Only",
+   "Gear Assembly",
+   "1"
+  ],
+  [
+   "HSA-Only",
+   "pi0",
+   "Peg-in-Hole",
+   "1"
+  ],
+  [
+   "HSA-Only",
+   "pi0",
+   "USB Insert",
+   "1"
+  ],
+  [
+   "HSA-Only",
+   "pi0",
+   "Gear Assembly",
+   "1"
+  ],
+  [
+   "HSA-Only",
+   "pi0",
+   "Tool Stabilize",
+   "1"
+  ],
+  [
+   "HSA-Only",
+   "ACT (w/ Tactile)",
+   "Peg-in-Hole",
+   "0.703"
+  ],
+  [
+   "HSA-Only",
+   "ACT (w/ Tactile)",
+   "USB Insert",
+   "1"
+  ],
+  [
+   "HSA-Only",
+   "ACT (w/ Tactile)",
+   "Gear Assembly",
+   "1"
+  ],
+  [
+   "HSA-Only",
+   "ACT (w/ Tactile)",
+   "Tool Stabilize",
+   "1"
+  ],
+  [
+   "ACT (w/ Tactile)",
+   "ACT",
+   "Peg-in-Hole",
+   "1"
+  ],
+  [
+   "ACT (w/ Tactile)",
+   "ACT",
+   "USB Insert",
+   "1"
+  ],
+  [
+   "ACT (w/ Tactile)",
+   "ACT",
+   "Gear Assembly",
+   "0.154"
+  ],
+  [
+   "ACT (w/ Tactile)",
+   "ACT",
+   "Tool Stabilize",
+   "0.052"
+  ]
+ ],
+ "V6_pooled_four_tasks_n1200": {
+  "Full (HSA & Dream) vs pi0": {
+   "ka": 1009,
+   "kb": 583,
+   "n": 1200,
+   "p": 4.2231740046821155e-78
+  },
+  "Full (HSA & Dream) vs Dream-Only": {
+   "ka": 1009,
+   "kb": 853,
+   "n": 1200,
+   "p": 2.3656631480899747e-14
+  },
+  "Dream-Only vs HSA-Only": {
+   "ka": 853,
+   "kb": 656,
+   "n": 1200,
+   "p": 9.876321805853872e-17
+  },
+  "HSA-Only vs pi0": {
+   "ka": 656,
+   "kb": 583,
+   "n": 1200,
+   "p": 0.0032638811569141194
+  },
+  "HSA-Only vs ACT (w/ Tactile)": {
+   "ka": 656,
+   "kb": 564,
+   "n": 1200,
+   "p": 0.00020141701879875182
+  },
+  "ACT (w/ Tactile) vs ACT": {
+   "ka": 564,
+   "kb": 419,
+   "n": 1200,
+   "p": 2.1565057522852758e-09
+  },
+  "Full (HSA & Dream) vs HSA-Only": {
+   "ka": 1009,
+   "kb": 656,
+   "n": 1200,
+   "p": 1.876581644649051e-56
+  }
+ },
+ "V7_pairwise_sim_n100_rounded_counts": [
+  {
+   "a": "Full (HSA & Dream)",
+   "b": "Dream-Only",
+   "task": "Peg-in-Hole",
+   "ka": 99,
+   "kb": 94,
+   "p": 0.11840538106385107,
+   "p_holm": 1.0
+  },
+  {
+   "a": "Full (HSA & Dream)",
+   "b": "Dream-Only",
+   "task": "USB Insert",
+   "ka": 98,
+   "kb": 95,
+   "p": 0.4447540317754331,
+   "p_holm": 1.0
+  },
+  {
+   "a": "Full (HSA & Dream)",
+   "b": "Dream-Only",
+   "task": "Gear Assembly",
+   "ka": 95,
+   "kb": 89,
+   "p": 0.19127192001781568,
+   "p_holm": 1.0
+  },
+  {
+   "a": "Full (HSA & Dream)",
+   "b": "Dream-Only",
+   "task": "Tool Stabilize",
+   "ka": 95,
+   "kb": 90,
+   "p": 0.2827638303777807,
+   "p_holm": 1.0
+  },
+  {
+   "a": "Dream-Only",
+   "b": "HSA-Only",
+   "task": "Peg-in-Hole",
+   "ka": 94,
+   "kb": 89,
+   "p": 0.31060919440037876,
+   "p_holm": 1.0
+  },
+  {
+   "a": "Dream-Only",
+   "b": "HSA-Only",
+   "task": "USB Insert",
+   "ka": 95,
+   "kb": 90,
+   "p": 0.2827638303777807,
+   "p_holm": 1.0
+  },
+  {
+   "a": "Dream-Only",
+   "b": "HSA-Only",
+   "task": "Gear Assembly",
+   "ka": 89,
+   "kb": 85,
+   "p": 0.5288600231927079,
+   "p_holm": 1.0
+  },
+  {
+   "a": "Dream-Only",
+   "b": "HSA-Only",
+   "task": "Tool Stabilize",
+   "ka": 90,
+   "kb": 83,
+   "p": 0.213885784297075,
+   "p_holm": 1.0
+  },
+  {
+   "a": "Full (HSA & Dream)",
+   "b": "pi0",
+   "task": "Peg-in-Hole",
+   "ka": 99,
+   "kb": 84,
+   "p": 0.00015428665574731095,
+   "p_holm": 0.002314299836209664
+  },
+  {
+   "a": "Full (HSA & Dream)",
+   "b": "pi0",
+   "task": "USB Insert",
+   "ka": 98,
+   "kb": 86,
+   "p": 0.002901581594829497,
+   "p_holm": 0.037720560732783466
+  },
+  {
+   "a": "Full (HSA & Dream)",
+   "b": "pi0",
+   "task": "Gear Assembly",
+   "ka": 95,
+   "kb": 77,
+   "p": 0.00036766571207595466,
+   "p_holm": 0.005147319969063365
+  },
+  {
+   "a": "Full (HSA & Dream)",
+   "b": "pi0",
+   "task": "Tool Stabilize",
+   "ka": 95,
+   "kb": 75,
+   "p": 0.00010416826021386083,
+   "p_holm": 0.0016666921634217733
+  },
+  {
+   "a": "HSA-Only",
+   "b": "pi0",
+   "task": "Peg-in-Hole",
+   "ka": 89,
+   "kb": 84,
+   "p": 0.4082568190552029,
+   "p_holm": 1.0
+  },
+  {
+   "a": "HSA-Only",
+   "b": "pi0",
+   "task": "USB Insert",
+   "ka": 90,
+   "kb": 86,
+   "p": 0.5146242828800005,
+   "p_holm": 1.0
+  },
+  {
+   "a": "HSA-Only",
+   "b": "pi0",
+   "task": "Gear Assembly",
+   "ka": 85,
+   "kb": 77,
+   "p": 0.20668430363538393,
+   "p_holm": 1.0
+  },
+  {
+   "a": "HSA-Only",
+   "b": "pi0",
+   "task": "Tool Stabilize",
+   "ka": 83,
+   "kb": 75,
+   "p": 0.22402214610476937,
+   "p_holm": 1.0
+  }
+ ],
+ "V8_sim_minus_real": {
+  "pi0": [
+   34.8,
+   26.5,
+   32.0,
+   33.6
+  ],
+  "HSA-Only": [
+   28.3,
+   26.7,
+   33.1,
+   39.8
+  ],
+  "Dream-Only": [
+   18.4,
+   19.4,
+   24.0,
+   21.6
+  ],
+  "Full (HSA & Dream)": [
+   3.6,
+   12.2,
+   14.1,
+   20.1
+  ]
+ },
+ "V8_full_minus_pi0_real_vs_sim": {
+  "real": [
+   46.3,
+   26.3,
+   35.9,
+   33.6
+  ],
+  "sim": [
+   15.1,
+   12.0,
+   18.0,
+   20.1
+  ]
+ },
+ "V8_sim_order_violations": [],
+ "V9_fig4": {
+  "size_gains": [
+   10.7,
+   5.9
+  ],
+  "data_gains": [
+   17.6,
+   15.7,
+   4.6,
+   3.3
+  ],
+  "text_claim_gain_300M_to_600M": 10.7,
+  "text_claim_matches": true,
+  "table1_full_avg": 84.1,
+  "table1_dream_only_avg": 71.0,
+  "fig4_300M": 68.5,
+  "fig4_100pct": 86.4,
+  "fig4_1B": 85.1,
+  "note": "그림 4 점들이 어느 과제·프로토콜인지 본문에 없음. 300M(본 모델 ViT-L)은 68.5, 표 1 전체 모델 평균은 84.1"
+ },
+ "V10_adapter_params": {
+  "vit_l_d1024": {
+   "adapter_total": 1314817,
+   "mlp_only": 1312768,
+   "pool_total": 4201472,
+   "sum": 5516289
+  },
+  "vit_g_d1408": {
+   "adapter_total": 1709185,
+   "mlp_only": 1706368,
+   "pool_total": 7939712,
+   "sum": 9648897
+  },
+  "overhead_pct_of_300M_vitl": 1.84,
+  "paper_text": {
+   "5.5M, 1.8% of 300M": [
+    5500000.0,
+    1.8
+   ],
+   "~1.5M per tactile encoder (B.1)": 1500000.0
+  },
+  "note": "5.5M는 어댑터 + 어텐션 풀링 합, 1.5M은 어댑터 MLP만(약 1.3M)과 가까움(추정)"
+ },
+ "V11_camera": {
+  "det_rotation_block": -1.0,
+  "cx_cy": [
+   653.0,
+   364.0
+  ],
+  "table5_rgb_resolution": [
+   640,
+   480
+  ],
+  "cx_exceeds_width": true,
+  "example_projection_if_world_to_camera": {
+   "(0.3,0,0.1)": {
+    "cam_xyz": [
+     1.0,
+     -0.49,
+     1.24
+    ],
+    "uv": [
+     1174.8,
+     109.5
+    ]
+   },
+   "(0.0,-0.4,0.05)": {
+    "cam_xyz": [
+     0.7,
+     -0.09,
+     1.19
+    ],
+    "uv": [
+     1033.6,
+     315.3
+    ]
+   }
+  },
+  "patch_grid": {
+   "224/16": 14,
+   "tokens_16": 196,
+   "224/14": 16.0,
+   "appendix_C3_formula_divides_by": 14,
+   "appendix_C3_text_patch_size": 16
+  },
+  "note": "C.3은 patch14, patch size 16, 격자 16x16을 함께 서술. 224/14=16, 224/16=14"
+ },
+ "V12_dataset_composition": {
+  "sim_demos_1000_per_task_x4": 4000,
+  "real_demos_100_per_task_x4": 400,
+  "sim_share_by_demo_count": 90.9,
+  "paper_sim_share_pct": 80,
+  "paper_total_tactile_frames": 2000000,
+  "hf_dataset_episodes": {
+   "usb": 50,
+   "gearassemb": 50,
+   "peginhole": 52
+  },
+  "note": "시연 수 기준으로는 sim 약 91%. 80/20은 프레임 수 기준일 수 있음(논문에 기준 없음, 추정)"
+ },
+ "V12_hf_frames_upper_bound": {
+  "episode_len_in_repo_constants": {
+   "peginhole": 350,
+   "gearassemb": 700,
+   "usb": 500
+  },
+  "frames_at_max_len": {
+   "usb": 25000,
+   "gearassemb": 35000,
+   "peginhole": 18200
+  },
+  "total": 78200,
+  "seconds_per_episode_at_50Hz": {
+   "peginhole": 7.0,
+   "gearassemb": 14.0,
+   "usb": 10.0
+  }
+ }
+}
