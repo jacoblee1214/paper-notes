@@ -1,0 +1,1412 @@
+{
+ "V1_sim_means": {
+  "W": {
+   "mean_recomputed": 26.73,
+   "mean_reported": 26.7,
+   "match": true
+  },
+  "W+M": {
+   "mean_recomputed": 59.1,
+   "mean_reported": 59.1,
+   "match": true
+  },
+  "W+FE": {
+   "mean_recomputed": 65.87,
+   "mean_reported": 65.9,
+   "match": true
+  },
+  "W+T": {
+   "mean_recomputed": 24.13,
+   "mean_reported": 24.1,
+   "match": true
+  },
+  "FEnc+FDec": {
+   "mean_recomputed": 48.5,
+   "mean_reported": 48.5,
+   "match": true
+  },
+  "NoEnc+FDec": {
+   "mean_recomputed": 51.97,
+   "mean_reported": 52.0,
+   "match": true
+  },
+  "NoEnc+GDec": {
+   "mean_recomputed": 59.1,
+   "mean_reported": 59.1,
+   "match": true
+  },
+  "GEnc+FDec": {
+   "mean_recomputed": 59.83,
+   "mean_reported": 59.8,
+   "match": true
+  },
+  "GEnc+GDec": {
+   "mean_recomputed": 65.87,
+   "mean_reported": 65.9,
+   "match": true
+  }
+ },
+ "V1_sim_gains_unrounded": {
+  "W+M-W": 32.37,
+  "W+FE-W": 39.13,
+  "W+FE-W+M": 6.77,
+  "GEnc+FDec-FEnc+FDec": 11.33,
+  "NoEnc+GDec-NoEnc+FDec": 7.13,
+  "GEnc+GDec-NoEnc+FDec": 13.9
+ },
+ "V1_sim_gains": {
+  "W+M-W": 32.4,
+  "W+FE-W (반올림 평균끼리 39.2, 보고 39.1은 비반올림 평균 차)": 39.2,
+  "W+FE-W+M": 6.8,
+  "GEnc+FDec-FEnc+FDec": 11.3,
+  "NoEnc+GDec-NoEnc+FDec": 7.1,
+  "GEnc+GDec-NoEnc+FDec": 13.9,
+  "GEnc+GDec-GEnc+FDec": 6.1,
+  "nut W+FE-W": 49.5
+ },
+ "V2_real_counts": {
+  "W": [
+   5,
+   7,
+   6,
+   12
+  ],
+  "W+M": [
+   10,
+   11,
+   9,
+   15
+  ],
+  "W+FE": [
+   13,
+   14,
+   13,
+   17
+  ]
+ },
+ "V2_real_means": {
+  "W": {
+   "mean": 37.5,
+   "reported": 37.5
+  },
+  "W+M": {
+   "mean": 56.25,
+   "reported": 56.3
+  },
+  "W+FE": {
+   "mean": 71.25,
+   "reported": 71.3
+  }
+ },
+ "V2_real_gains": {
+  "W+M-W": 18.75,
+  "W+FE-W": 33.75,
+  "W+FE-W+M": 15.0
+ },
+ "V2_integer_feasible_n20": true,
+ "V3_real_W_vs_WFE": {
+  "per_task": {
+   "Coin": {
+    "W+FE": "13/20",
+    "W": "5/20",
+    "diff_pp": 40,
+    "fisher_p": 0.0248,
+    "wilson_b": [
+     43.3,
+     81.9
+    ],
+    "wilson_a": [
+     11.2,
+     46.9
+    ],
+    "holm_p": 0.0994
+   },
+   "Chip": {
+    "W+FE": "14/20",
+    "W": "7/20",
+    "diff_pp": 35,
+    "fisher_p": 0.0562,
+    "wilson_b": [
+     48.1,
+     85.5
+    ],
+    "wilson_a": [
+     18.1,
+     56.7
+    ],
+    "holm_p": 0.1685
+   },
+   "Letter": {
+    "W+FE": "13/20",
+    "W": "6/20",
+    "diff_pp": 35,
+    "fisher_p": 0.0562,
+    "wilson_b": [
+     43.3,
+     81.9
+    ],
+    "wilson_a": [
+     14.5,
+     51.9
+    ],
+    "holm_p": 0.1685
+   },
+   "Syringe": {
+    "W+FE": "17/20",
+    "W": "12/20",
+    "diff_pp": 25,
+    "fisher_p": 0.1552,
+    "wilson_b": [
+     64.0,
+     94.8
+    ],
+    "wilson_a": [
+     38.7,
+     78.1
+    ],
+    "holm_p": 0.1685
+   }
+  },
+  "tables": null,
+  "pooled": {
+   "W+FE": "57/80",
+   "W": "30/80",
+   "diff_pp": 33.75,
+   "fisher_p_pooled": 3e-05,
+   "cmh_chi2": 18.791,
+   "cmh_p": 1e-05,
+   "wilson_b": [
+    60.5,
+    80.0
+   ],
+   "wilson_a": [
+    27.7,
+    48.5
+   ]
+  }
+ },
+ "V3_real_WM_vs_WFE": {
+  "per_task": {
+   "Coin": {
+    "W+FE": "13/20",
+    "W+M": "10/20",
+    "diff_pp": 15,
+    "fisher_p": 0.5231,
+    "wilson_b": [
+     43.3,
+     81.9
+    ],
+    "wilson_a": [
+     29.9,
+     70.1
+    ],
+    "holm_p": 1.0
+   },
+   "Chip": {
+    "W+FE": "14/20",
+    "W+M": "11/20",
+    "diff_pp": 15,
+    "fisher_p": 0.5145,
+    "wilson_b": [
+     48.1,
+     85.5
+    ],
+    "wilson_a": [
+     34.2,
+     74.2
+    ],
+    "holm_p": 1.0
+   },
+   "Letter": {
+    "W+FE": "13/20",
+    "W+M": "9/20",
+    "diff_pp": 20,
+    "fisher_p": 0.3406,
+    "wilson_b": [
+     43.3,
+     81.9
+    ],
+    "wilson_a": [
+     25.8,
+     65.8
+    ],
+    "holm_p": 1.0
+   },
+   "Syringe": {
+    "W+FE": "17/20",
+    "W+M": "15/20",
+    "diff_pp": 10,
+    "fisher_p": 0.6948,
+    "wilson_b": [
+     64.0,
+     94.8
+    ],
+    "wilson_a": [
+     53.1,
+     88.8
+    ],
+    "holm_p": 1.0
+   }
+  },
+  "tables": null,
+  "pooled": {
+   "W+FE": "57/80",
+   "W+M": "45/80",
+   "diff_pp": 15.0,
+   "fisher_p_pooled": 0.07001,
+   "cmh_chi2": 3.961,
+   "cmh_p": 0.04658,
+   "wilson_b": [
+    60.5,
+    80.0
+   ],
+   "wilson_a": [
+    45.3,
+    66.6
+   ]
+  }
+ },
+ "V3_real_W_vs_WM": {
+  "per_task": {
+   "Coin": {
+    "W+M": "10/20",
+    "W": "5/20",
+    "diff_pp": 25,
+    "fisher_p": 0.1908,
+    "wilson_b": [
+     29.9,
+     70.1
+    ],
+    "wilson_a": [
+     11.2,
+     46.9
+    ],
+    "holm_p": 0.7632
+   },
+   "Chip": {
+    "W+M": "11/20",
+    "W": "7/20",
+    "diff_pp": 20,
+    "fisher_p": 0.3406,
+    "wilson_b": [
+     34.2,
+     74.2
+    ],
+    "wilson_a": [
+     18.1,
+     56.7
+    ],
+    "holm_p": 1.0
+   },
+   "Letter": {
+    "W+M": "9/20",
+    "W": "6/20",
+    "diff_pp": 15,
+    "fisher_p": 0.5145,
+    "wilson_b": [
+     25.8,
+     65.8
+    ],
+    "wilson_a": [
+     14.5,
+     51.9
+    ],
+    "holm_p": 1.0
+   },
+   "Syringe": {
+    "W+M": "15/20",
+    "W": "12/20",
+    "diff_pp": 15,
+    "fisher_p": 0.5006,
+    "wilson_b": [
+     53.1,
+     88.8
+    ],
+    "wilson_a": [
+     38.7,
+     78.1
+    ],
+    "holm_p": 1.0
+   }
+  },
+  "tables": null,
+  "pooled": {
+   "W+M": "45/80",
+   "W": "30/80",
+   "diff_pp": 18.75,
+   "fisher_p_pooled": 0.02625,
+   "cmh_chi2": 5.862,
+   "cmh_p": 0.01547,
+   "wilson_b": [
+    45.3,
+    66.6
+   ],
+   "wilson_a": [
+    27.7,
+    48.5
+   ]
+  }
+ },
+ "V3_power": {
+  "n20_65_vs_45": 0.241,
+  "n20_71_vs_56": 0.505,
+  "n_per_group_for_80pct_power_65_vs_45": 96,
+  "n_per_group_for_80pct_power_pooled_71_vs_56": 161
+ },
+ "V4_table2_real": {
+  "Chip": {
+   "W+FE vs W+T fisher_p": 0.2003,
+   "W+T vs W fisher_p": 0.7475
+  },
+  "Syringe": {
+   "W+FE vs W+T fisher_p": 0.2733,
+   "W+T vs W fisher_p": 1.0
+  },
+  "pooled_W+FE_vs_W+T": {
+   "counts": "31/40 vs 22/40",
+   "fisher_p": 0.0576
+  },
+  "pooled_W+T_vs_W": {
+   "counts": "22/40 vs 19/40",
+   "fisher_p": 0.6549
+  }
+ },
+ "V4_real_group_fusion": {
+  "GEnc+GDec": "26/40 (65.0%)",
+  "NoEnc+FDec": "21/40 (52.5%)",
+  "diff_pp": 12.5,
+  "fisher_p": 0.3638,
+  "wilson_G": [
+   49.5,
+   77.9
+  ],
+  "wilson_N": [
+   37.5,
+   67.1
+  ],
+  "note": "52.5%는 40회 중 21회로 정수 가능. Coin 65, Letter 65는 표 1과 일치"
+ },
+ "V5_sim_sd_vs_binomial": {
+  "W": [
+   {
+    "task": "Coin",
+    "mean": 25.5,
+    "sd_reported": 8.3,
+    "binom_sd_n64": 5.45,
+    "binom_sd_n192": 3.15,
+    "ratio_to_n64": 1.52,
+    "ratio_to_n192": 2.64
+   },
+   {
+    "task": "Nut",
+    "mean": 38.7,
+    "sd_reported": 23.2,
+    "binom_sd_n64": 6.09,
+    "binom_sd_n192": 3.52,
+    "ratio_to_n64": 3.81,
+    "ratio_to_n192": 6.6
+   },
+   {
+    "task": "Peg",
+    "mean": 16.0,
+    "sd_reported": 6.6,
+    "binom_sd_n64": 4.58,
+    "binom_sd_n192": 2.65,
+    "ratio_to_n64": 1.44,
+    "ratio_to_n192": 2.49
+   }
+  ],
+  "W+M": [
+   {
+    "task": "Coin",
+    "mean": 56.4,
+    "sd_reported": 3.7,
+    "binom_sd_n64": 6.2,
+    "binom_sd_n192": 3.58,
+    "ratio_to_n64": 0.6,
+    "ratio_to_n192": 1.03
+   },
+   {
+    "task": "Nut",
+    "mean": 84.4,
+    "sd_reported": 5.2,
+    "binom_sd_n64": 4.54,
+    "binom_sd_n192": 2.62,
+    "ratio_to_n64": 1.15,
+    "ratio_to_n192": 1.99
+   },
+   {
+    "task": "Peg",
+    "mean": 36.5,
+    "sd_reported": 5.5,
+    "binom_sd_n64": 6.02,
+    "binom_sd_n192": 3.47,
+    "ratio_to_n64": 0.91,
+    "ratio_to_n192": 1.58
+   }
+  ],
+  "W+FE": [
+   {
+    "task": "Coin",
+    "mean": 65.6,
+    "sd_reported": 4.8,
+    "binom_sd_n64": 5.94,
+    "binom_sd_n192": 3.43,
+    "ratio_to_n64": 0.81,
+    "ratio_to_n192": 1.4
+   },
+   {
+    "task": "Nut",
+    "mean": 88.2,
+    "sd_reported": 4.2,
+    "binom_sd_n64": 4.03,
+    "binom_sd_n192": 2.33,
+    "ratio_to_n64": 1.04,
+    "ratio_to_n192": 1.8
+   },
+   {
+    "task": "Peg",
+    "mean": 43.8,
+    "sd_reported": 4.2,
+    "binom_sd_n64": 6.2,
+    "binom_sd_n192": 3.58,
+    "ratio_to_n64": 0.68,
+    "ratio_to_n192": 1.17
+   }
+  ],
+  "W+T": [
+   {
+    "task": "Coin",
+    "mean": 27.3,
+    "sd_reported": 6.8,
+    "binom_sd_n64": 5.57,
+    "binom_sd_n192": 3.22,
+    "ratio_to_n64": 1.22,
+    "ratio_to_n192": 2.12
+   },
+   {
+    "task": "Nut",
+    "mean": 28.6,
+    "sd_reported": 5.1,
+    "binom_sd_n64": 5.65,
+    "binom_sd_n192": 3.26,
+    "ratio_to_n64": 0.9,
+    "ratio_to_n192": 1.56
+   },
+   {
+    "task": "Peg",
+    "mean": 16.5,
+    "sd_reported": 7.4,
+    "binom_sd_n64": 4.64,
+    "binom_sd_n192": 2.68,
+    "ratio_to_n64": 1.59,
+    "ratio_to_n192": 2.76
+   }
+  ],
+  "FEnc+FDec": [
+   {
+    "task": "Coin",
+    "mean": 43.6,
+    "sd_reported": 8.3,
+    "binom_sd_n64": 6.2,
+    "binom_sd_n192": 3.58,
+    "ratio_to_n64": 1.34,
+    "ratio_to_n192": 2.32
+   },
+   {
+    "task": "Nut",
+    "mean": 83.7,
+    "sd_reported": 6.1,
+    "binom_sd_n64": 4.62,
+    "binom_sd_n192": 2.67,
+    "ratio_to_n64": 1.32,
+    "ratio_to_n192": 2.29
+   },
+   {
+    "task": "Peg",
+    "mean": 18.2,
+    "sd_reported": 7.5,
+    "binom_sd_n64": 4.82,
+    "binom_sd_n192": 2.78,
+    "ratio_to_n64": 1.56,
+    "ratio_to_n192": 2.69
+   }
+  ],
+  "NoEnc+FDec": [
+   {
+    "task": "Coin",
+    "mean": 48.6,
+    "sd_reported": 8.3,
+    "binom_sd_n64": 6.25,
+    "binom_sd_n192": 3.61,
+    "ratio_to_n64": 1.33,
+    "ratio_to_n192": 2.3
+   },
+   {
+    "task": "Nut",
+    "mean": 80.7,
+    "sd_reported": 11.3,
+    "binom_sd_n64": 4.93,
+    "binom_sd_n192": 2.85,
+    "ratio_to_n64": 2.29,
+    "ratio_to_n192": 3.97
+   },
+   {
+    "task": "Peg",
+    "mean": 26.6,
+    "sd_reported": 7.6,
+    "binom_sd_n64": 5.52,
+    "binom_sd_n192": 3.19,
+    "ratio_to_n64": 1.38,
+    "ratio_to_n192": 2.38
+   }
+  ],
+  "NoEnc+GDec": [
+   {
+    "task": "Coin",
+    "mean": 54.9,
+    "sd_reported": 7.5,
+    "binom_sd_n64": 6.22,
+    "binom_sd_n192": 3.59,
+    "ratio_to_n64": 1.21,
+    "ratio_to_n192": 2.09
+   },
+   {
+    "task": "Nut",
+    "mean": 88.9,
+    "sd_reported": 4.1,
+    "binom_sd_n64": 3.93,
+    "binom_sd_n192": 2.27,
+    "ratio_to_n64": 1.04,
+    "ratio_to_n192": 1.81
+   },
+   {
+    "task": "Peg",
+    "mean": 33.5,
+    "sd_reported": 8.0,
+    "binom_sd_n64": 5.9,
+    "binom_sd_n192": 3.41,
+    "ratio_to_n64": 1.36,
+    "ratio_to_n192": 2.35
+   }
+  ],
+  "GEnc+FDec": [
+   {
+    "task": "Coin",
+    "mean": 60.2,
+    "sd_reported": 9.1,
+    "binom_sd_n64": 6.12,
+    "binom_sd_n192": 3.53,
+    "ratio_to_n64": 1.49,
+    "ratio_to_n192": 2.58
+   },
+   {
+    "task": "Nut",
+    "mean": 85.4,
+    "sd_reported": 5.5,
+    "binom_sd_n64": 4.41,
+    "binom_sd_n192": 2.55,
+    "ratio_to_n64": 1.25,
+    "ratio_to_n192": 2.16
+   },
+   {
+    "task": "Peg",
+    "mean": 33.9,
+    "sd_reported": 5.3,
+    "binom_sd_n64": 5.92,
+    "binom_sd_n192": 3.42,
+    "ratio_to_n64": 0.9,
+    "ratio_to_n192": 1.55
+   }
+  ]
+ },
+ "V5_sd_ratio_summary": {
+  "median_ratio_n64": 1.29,
+  "median_ratio_n192": 2.23,
+  "cells": 24,
+  "cells_below_n64_binomial": 6,
+  "cells_below_n192_binomial": 0
+ },
+ "V5_grid_576_infeasible_means": [],
+ "V5_grid_hits": {
+  "n64": [
+   6,
+   27
+  ],
+  "n192": [
+   13,
+   27
+  ],
+  "n576": [
+   27,
+   27
+  ],
+  "chance_per_value_on_576_grid": 0.576,
+  "chance_all_24_on_576_grid": 1.778851122450436e-06
+ },
+ "V5_note": "평균이 9개 평가(학습 3 x 평가 3, 각 64회)의 단순 평균이면 100k/576 격자 위의 값이어야 한다. 격자 밖 값이 있으면 평균 정의(가중, 시드 선택)가 다르다.",
+ "V5_sim_welch": {
+  "W+FE vs W": {
+   "Coin": {
+    "diff": 40.1,
+    "welch_n3(t,p)": [
+     7.24,
+     0.0043
+    ],
+    "welch_n9(t,p)": [
+     12.55,
+     0.0
+    ]
+   },
+   "Nut": {
+    "diff": 49.5,
+    "welch_n3(t,p)": [
+     3.64,
+     0.0618
+    ],
+    "welch_n9(t,p)": [
+     6.3,
+     0.0002
+    ]
+   },
+   "Peg": {
+    "diff": 27.8,
+    "welch_n3(t,p)": [
+     6.16,
+     0.006
+    ],
+    "welch_n9(t,p)": [
+     10.66,
+     0.0
+    ]
+   },
+   "mean_of_3_tasks": {
+    "diff": 39.1,
+    "sd_a": 2.55,
+    "sd_b": 8.5,
+    "welch_n3(t,p)": [
+     7.64,
+     0.0103
+    ],
+    "welch_n9(t,p)": [
+     13.23,
+     0.0
+    ]
+   }
+  },
+  "W+FE vs W+M": {
+   "Coin": {
+    "diff": 9.2,
+    "welch_n3(t,p)": [
+     2.63,
+     0.0621
+    ],
+    "welch_n9(t,p)": [
+     4.55,
+     0.0004
+    ]
+   },
+   "Nut": {
+    "diff": 3.8,
+    "welch_n3(t,p)": [
+     0.98,
+     0.3828
+    ],
+    "welch_n9(t,p)": [
+     1.71,
+     0.1083
+    ]
+   },
+   "Peg": {
+    "diff": 7.3,
+    "welch_n3(t,p)": [
+     1.83,
+     0.1467
+    ],
+    "welch_n9(t,p)": [
+     3.16,
+     0.0064
+    ]
+   },
+   "mean_of_3_tasks": {
+    "diff": 6.8,
+    "sd_a": 2.55,
+    "sd_b": 2.81,
+    "welch_n3(t,p)": [
+     3.09,
+     0.037
+    ],
+    "welch_n9(t,p)": [
+     5.36,
+     0.0001
+    ]
+   }
+  },
+  "W+M vs W": {
+   "Coin": {
+    "diff": 30.9,
+    "welch_n3(t,p)": [
+     5.89,
+     0.0122
+    ],
+    "welch_n9(t,p)": [
+     10.2,
+     0.0
+    ]
+   },
+   "Nut": {
+    "diff": 45.7,
+    "welch_n3(t,p)": [
+     3.33,
+     0.0698
+    ],
+    "welch_n9(t,p)": [
+     5.77,
+     0.0003
+    ]
+   },
+   "Peg": {
+    "diff": 20.5,
+    "welch_n3(t,p)": [
+     4.13,
+     0.0154
+    ],
+    "welch_n9(t,p)": [
+     7.16,
+     0.0
+    ]
+   },
+   "mean_of_3_tasks": {
+    "diff": 32.4,
+    "sd_a": 2.81,
+    "sd_b": 8.5,
+    "welch_n3(t,p)": [
+     6.26,
+     0.0149
+    ],
+    "welch_n9(t,p)": [
+     10.84,
+     0.0
+    ]
+   }
+  },
+  "W+FE vs W+T": {
+   "Coin": {
+    "diff": 38.3,
+    "welch_n3(t,p)": [
+     7.97,
+     0.0021
+    ],
+    "welch_n9(t,p)": [
+     13.8,
+     0.0
+    ]
+   },
+   "Nut": {
+    "diff": 59.6,
+    "welch_n3(t,p)": [
+     15.62,
+     0.0001
+    ],
+    "welch_n9(t,p)": [
+     27.06,
+     0.0
+    ]
+   },
+   "Peg": {
+    "diff": 27.3,
+    "welch_n3(t,p)": [
+     5.56,
+     0.0099
+    ],
+    "welch_n9(t,p)": [
+     9.63,
+     0.0
+    ]
+   },
+   "mean_of_3_tasks": {
+    "diff": 41.7,
+    "sd_a": 2.55,
+    "sd_b": 3.76,
+    "welch_n3(t,p)": [
+     15.93,
+     0.0002
+    ],
+    "welch_n9(t,p)": [
+     27.59,
+     0.0
+    ]
+   }
+  },
+  "GEnc+GDec vs NoEnc+FDec": {
+   "Coin": {
+    "diff": 17.0,
+    "welch_n3(t,p)": [
+     3.07,
+     0.05
+    ],
+    "welch_n9(t,p)": [
+     5.32,
+     0.0001
+    ]
+   },
+   "Nut": {
+    "diff": 7.5,
+    "welch_n3(t,p)": [
+     1.08,
+     0.3727
+    ],
+    "welch_n9(t,p)": [
+     1.87,
+     0.0911
+    ]
+   },
+   "Peg": {
+    "diff": 17.2,
+    "welch_n3(t,p)": [
+     3.43,
+     0.0391
+    ],
+    "welch_n9(t,p)": [
+     5.94,
+     0.0001
+    ]
+   },
+   "mean_of_3_tasks": {
+    "diff": 13.9,
+    "sd_a": 2.55,
+    "sd_b": 5.32,
+    "welch_n3(t,p)": [
+     4.08,
+     0.0288
+    ],
+    "welch_n9(t,p)": [
+     7.07,
+     0.0
+    ]
+   }
+  },
+  "GEnc+GDec vs GEnc+FDec": {
+   "Coin": {
+    "diff": 5.4,
+    "welch_n3(t,p)": [
+     0.91,
+     0.4297
+    ],
+    "welch_n9(t,p)": [
+     1.57,
+     0.1411
+    ]
+   },
+   "Nut": {
+    "diff": 2.8,
+    "welch_n3(t,p)": [
+     0.7,
+     0.5246
+    ],
+    "welch_n9(t,p)": [
+     1.21,
+     0.2436
+    ]
+   },
+   "Peg": {
+    "diff": 9.9,
+    "welch_n3(t,p)": [
+     2.54,
+     0.0675
+    ],
+    "welch_n9(t,p)": [
+     4.39,
+     0.0005
+    ]
+   },
+   "mean_of_3_tasks": {
+    "diff": 6.0,
+    "sd_a": 2.55,
+    "sd_b": 3.96,
+    "welch_n3(t,p)": [
+     2.22,
+     0.1023
+    ],
+    "welch_n9(t,p)": [
+     3.84,
+     0.0019
+    ]
+   }
+  },
+  "GEnc+GDec vs NoEnc+GDec": {
+   "Coin": {
+    "diff": 10.7,
+    "welch_n3(t,p)": [
+     2.08,
+     0.118
+    ],
+    "welch_n9(t,p)": [
+     3.6,
+     0.003
+    ]
+   },
+   "Nut": {
+    "diff": -0.7,
+    "welch_n3(t,p)": [
+     -0.21,
+     0.8464
+    ],
+    "welch_n9(t,p)": [
+     -0.36,
+     0.7252
+    ]
+   },
+   "Peg": {
+    "diff": 10.3,
+    "welch_n3(t,p)": [
+     1.97,
+     0.1421
+    ],
+    "welch_n9(t,p)": [
+     3.42,
+     0.005
+    ]
+   },
+   "mean_of_3_tasks": {
+    "diff": 6.8,
+    "sd_a": 2.55,
+    "sd_b": 3.9,
+    "welch_n3(t,p)": [
+     2.52,
+     0.0758
+    ],
+    "welch_n9(t,p)": [
+     4.36,
+     0.0007
+    ]
+   }
+  },
+  "GEnc+FDec vs FEnc+FDec": {
+   "Coin": {
+    "diff": 16.6,
+    "welch_n3(t,p)": [
+     2.33,
+     0.0804
+    ],
+    "welch_n9(t,p)": [
+     4.04,
+     0.001
+    ]
+   },
+   "Nut": {
+    "diff": 1.7,
+    "welch_n3(t,p)": [
+     0.36,
+     0.7383
+    ],
+    "welch_n9(t,p)": [
+     0.62,
+     0.5435
+    ]
+   },
+   "Peg": {
+    "diff": 15.7,
+    "welch_n3(t,p)": [
+     2.96,
+     0.0474
+    ],
+    "welch_n9(t,p)": [
+     5.13,
+     0.0001
+    ]
+   },
+   "mean_of_3_tasks": {
+    "diff": 11.3,
+    "sd_a": 3.96,
+    "sd_b": 4.25,
+    "welch_n3(t,p)": [
+     3.38,
+     0.028
+    ],
+    "welch_n9(t,p)": [
+     5.85,
+     0.0
+    ]
+   }
+  },
+  "NoEnc+GDec vs NoEnc+FDec": {
+   "Coin": {
+    "diff": 6.3,
+    "welch_n3(t,p)": [
+     0.98,
+     0.3851
+    ],
+    "welch_n9(t,p)": [
+     1.69,
+     0.1107
+    ]
+   },
+   "Nut": {
+    "diff": 8.2,
+    "welch_n3(t,p)": [
+     1.18,
+     0.3369
+    ],
+    "welch_n9(t,p)": [
+     2.05,
+     0.0677
+    ]
+   },
+   "Peg": {
+    "diff": 6.9,
+    "welch_n3(t,p)": [
+     1.08,
+     0.3398
+    ],
+    "welch_n9(t,p)": [
+     1.88,
+     0.0791
+    ]
+   },
+   "mean_of_3_tasks": {
+    "diff": 7.1,
+    "sd_a": 3.9,
+    "sd_b": 5.32,
+    "welch_n3(t,p)": [
+     1.87,
+     0.1407
+    ],
+    "welch_n9(t,p)": [
+     3.25,
+     0.0056
+    ]
+   }
+  }
+ },
+ "V5_welch_note": "±를 3 학습 시드의 표준편차(n=3) 또는 9회 평가의 표준편차(n=9)로 읽은 두 해석. 과제 간 독립 가정으로 3과제 평균의 표준편차를 합성(근사).",
+ "V6_table7_mass_sums": {
+  "Coin/NoEnc+FDec": 100.1,
+  "Coin/FEnc+FDec": 99.9,
+  "Nut/NoEnc+FDec": 100.1,
+  "Nut/FEnc+FDec": 100.1,
+  "Peg/NoEnc+FDec": 100.1,
+  "Peg/FEnc+FDec": 100.0
+ },
+ "V6_table7_ranges": {
+  "prop_min": 35.6,
+  "prop_max": 59.0,
+  "wrist_min": 7.8,
+  "wrist_max": 12.9,
+  "uniform_ref_prop_pct": 16.7,
+  "uniform_ref_FE_pct": 66.7,
+  "uniform_ref_wrist_pct": 16.7
+ },
+ "V6_sr_vs_fe_mass_sign_agreement": {
+  "pairs": 3,
+  "agree": 3,
+  "sign_test_p_two_sided_if_random": 0.25,
+  "note": "세 쌍 모두 같은 방향이어도 쌍 수가 3이라 부호 검정으로는 p = 0.25(양측)"
+ },
+ "V6_flat_dec_win_rate_vs_SR": {
+  "corr_prop_win_vs_SR": 0.23,
+  "n": 6,
+  "note": "과제가 섞인 6점의 상관(참고용)"
+ },
+ "V7_sensitivity": {
+  "dl_min_mm": 0.01351,
+  "dtheta_min_rad": 0.01355,
+  "pixels_per_mm_if_tag_37px_2mm": 18.5,
+  "fov120_working_dist10mm_width_mm": 34.6,
+  "px_per_mm_for_640px_across_fov": 18.5,
+  "implied_stiffness_N_per_m_and_Nm_per_rad": [
+   318.2,
+   312.28,
+   734.82,
+   0.0236,
+   0.0096,
+   0.6309
+  ],
+  "sim_holder_gain_code": [
+   70.0,
+   29.17,
+   100.0,
+   0.5,
+   0.2,
+   13.33
+  ],
+  "sim_over_paper_implied": [
+   0.22,
+   0.093,
+   0.136,
+   21.175,
+   20.85,
+   21.129
+  ],
+  "force_rmse_N": [
+   0.013,
+   0.009,
+   0.047
+  ],
+  "force_rmse_over_Fmin": [
+   3.02,
+   2.13,
+   4.73
+  ],
+  "z_sensitivity_single_tag_perspective_mm": 0.0676,
+  "z_over_lateral": 5.0
+ },
+ "V7_note": "F_min = (보정 행렬) x ΔL_min 이므로 대각 강성 F_min/ΔL_min은 비대각 항이 있으면 근사. z 병진 감도는 단일 태그의 원근 투영(Δz = Z·δ/w)이라는 단순 모델이며 다중 태그 PnP는 이보다 정밀할 수 있다.",
+ "V8_thresholds": {
+  "pencil lead": {
+   "paper_mm": 0.02,
+   "code_mm": 0.02,
+   "frames": 15,
+   "paper_over_dl_min": 1.48,
+   "code_over_dl_min": 1.48,
+   "paper_over_jitter35": 1.67,
+   "code_over_jitter35": 1.67
+  },
+  "chip": {
+   "paper_mm": 0.1,
+   "code_mm": 0.1,
+   "frames": 30,
+   "paper_over_dl_min": 7.4,
+   "code_over_dl_min": 7.4,
+   "paper_over_jitter35": 8.33,
+   "code_over_jitter35": 8.33
+  },
+  "dessert cup": {
+   "paper_mm": 0.05,
+   "code_mm": 0.005,
+   "frames": 10,
+   "paper_over_dl_min": 3.7,
+   "code_over_dl_min": 0.37,
+   "paper_over_jitter35": 4.17,
+   "code_over_jitter35": 0.42
+  },
+  "seaweed": {
+   "paper_mm": 0.01,
+   "code_mm": 0.01,
+   "frames": 150,
+   "paper_over_dl_min": 0.74,
+   "code_over_dl_min": 0.74,
+   "paper_over_jitter35": 0.83,
+   "code_over_jitter35": 0.83
+  },
+  "grape": {
+   "paper_mm": 0.06,
+   "code_mm": 0.006,
+   "frames": 10,
+   "paper_over_dl_min": 4.44,
+   "code_over_dl_min": 0.44,
+   "paper_over_jitter35": 5.0,
+   "code_over_jitter35": 0.5
+  },
+  "cone": {
+   "paper_mm": 0.1,
+   "code_mm": 0.1,
+   "frames": 20,
+   "paper_over_dl_min": 7.4,
+   "code_over_dl_min": 7.4,
+   "paper_over_jitter35": 8.33,
+   "code_over_jitter35": 8.33
+  },
+  "egg shell": {
+   "paper_mm": 0.05,
+   "code_mm": 0.05,
+   "frames": 20,
+   "paper_over_dl_min": 3.7,
+   "code_over_dl_min": 3.7,
+   "paper_over_jitter35": 4.17,
+   "code_over_jitter35": 4.17
+  },
+  "wafer": {
+   "paper_mm": 0.05,
+   "code_mm": 0.05,
+   "frames": 5,
+   "paper_over_dl_min": 3.7,
+   "code_over_dl_min": 3.7,
+   "paper_over_jitter35": 4.17,
+   "code_over_jitter35": 4.17
+  },
+  "balloon": {
+   "paper_mm": 0.05,
+   "code_mm": 0.05,
+   "frames": 3,
+   "paper_over_dl_min": 3.7,
+   "code_over_dl_min": 3.7,
+   "paper_over_jitter35": 4.17,
+   "code_over_jitter35": 4.17
+  }
+ },
+ "V8_summary": {
+  "dl_min_mm": 0.0135,
+  "jitter_35tag_mm": 0.012,
+  "paper_below_dl_min": [
+   "seaweed"
+  ],
+  "code_below_dl_min": [
+   "dessert cup",
+   "seaweed",
+   "grape"
+  ],
+  "code_below_jitter": [
+   "dessert cup",
+   "seaweed",
+   "grape"
+  ],
+  "code_differs_from_paper_by_10x": [
+   "dessert cup",
+   "grape"
+  ],
+  "seconds_per_motion": {
+   "pencil lead": 0.3,
+   "chip": 0.6,
+   "dessert cup": 0.2,
+   "seaweed": 3.0,
+   "grape": 0.2,
+   "cone": 0.4,
+   "egg shell": 0.4,
+   "wafer": 0.1,
+   "balloon": 0.06
+  }
+ },
+ "V9_bom_sum": {
+  "sum": 60.19,
+  "reported": 60.19,
+  "camera_share_pct": 93.9,
+  "per_camera_usd": 28.25,
+  "mold_share_pct": 3.0
+ },
+ "V9_tag_table5": {
+  "detected_fraction": {
+   "1": 0.85,
+   "5": 0.73,
+   "20": 0.593,
+   "35": 0.566
+  },
+  "jitter_ratio_1_to_35_mm": 35.5,
+  "jitter_ratio_5_to_35_mm": 17.2,
+  "jitter_ratio_20_to_35_mm": 1.25,
+  "sr_20tag_vs_35tag_pp": 2.4
+ },
+ "V9_durability": {
+  "hyst_frac_before_pct": 13.0,
+  "hyst_frac_after_pct": 15.3,
+  "hours_for_10000_cycles_1Hz": 2.78,
+  "rms_diff_mm_over_3mm_pct": 4.3,
+  "task_recheck_trials": "Coin 20회 변화 없음, Chip 20회 중 성공 1 감소(기준 14/20 가정 시 13/20)"
+ },
+ "V9_time": {
+  "chunk_seconds_Tp16_at10Hz": 1.6,
+  "replan_seconds_Ta8": 0.8,
+  "replan_seconds_Ta16": 1.6,
+  "sim_peg_coin_Ta16_means_open_loop_seconds": 1.6
+ },
+ "V9_cams_params": {
+  "policy_dim": 512,
+  "radio_summary": 2304,
+  "images_hw_paper": [
+   192,
+   256
+  ]
+ },
+ "V10_version_real": {
+  "v1_fig13_FE (그림 판독)": {
+   "Coin 65.0 (20회)": 13,
+   "Chip 66.7 (18회)": "12/18",
+   "Letter 66.7 (12회)": "8/12",
+   "Syringe 85.0 (20회)": 17,
+   "avg": 70.9
+  },
+  "v1_fig13_Mono": {
+   "Coin 50.0": "10/20",
+   "Chip 55.6": "10/18",
+   "Letter 50.0": "6/12",
+   "Syringe 75.0": "15/20",
+   "avg": 57.7
+  },
+  "v1_fig13_Wrist": {
+   "Coin 25.0": "5/20",
+   "Chip 38.9": "7/18",
+   "Letter 33.3": "4/12",
+   "Syringe 60.0": "12/20",
+   "avg": 39.3
+  },
+  "v4_table1": {
+   "W+FE": [
+    65,
+    70,
+    65,
+    85,
+    71.3
+   ],
+   "W+M": [
+    50,
+    55,
+    45,
+    75,
+    56.3
+   ],
+   "W": [
+    25,
+    35,
+    30,
+    60,
+    37.5
+   ]
+  }
+ },
+ "V10_v1_avg_check": {
+  "FE": 70.85,
+  "Mono": 57.65,
+  "Wrist": 39.3,
+  "FE-Wrist_pp": 31.5
+ },
+ "V10_v1_sim_coin": {
+  "v1 (30 demos, 64 trials; 그림 판독)": {
+   "FE": 60.2,
+   "Mono": 50.0,
+   "Wrist": 39.1
+  },
+  "v4 (50 demos, 3x3x64)": {
+   "W+FE": 65.6,
+   "W+M": 56.4,
+   "W": 25.5
+  },
+  "gain_FE_minus_W_v1": 21.1,
+  "gain_FE_minus_W_v4": 40.1,
+  "v1_percent_on_64_grid": {
+   "39.1": "25/64 = 39.06",
+   "50.0": "32/64",
+   "60.2": "격자 밖 (38/64=59.4, 39/64=60.9)"
+  }
+ },
+ "V10_wilson_v1": {
+  "Letter FE 8/12": [
+   39.1,
+   86.2
+  ],
+  "Chip FE 12/18": [
+   43.7,
+   83.7
+  ],
+  "Letter FE v4 13/20": [
+   43.3,
+   81.9
+  ],
+  "Chip FE v4 14/20": [
+   48.1,
+   85.5
+  ]
+ },
+ "V11_param_counts_estimate": {
+  "NoEnc+FDec": 31665416,
+  "GEnc+FDec": 44274952,
+  "NoEnc+GDec": 40078600,
+  "GEnc+GDec": 52688136
+ },
+ "V11_param_ratio_to_NoEnc+FDec": {
+  "NoEnc+FDec": 1.0,
+  "GEnc+FDec": 1.398,
+  "NoEnc+GDec": 1.266,
+  "GEnc+GDec": 1.664
+ },
+ "V11_note": "코드 구조(공식 저장소 정적 읽기)와 표 8의 차원(512, FF 2048, 4+4층)으로 센 추정치. 코드는 실행하지 않았고 FEnc 변형은 저장소에 없어 제외."
+}

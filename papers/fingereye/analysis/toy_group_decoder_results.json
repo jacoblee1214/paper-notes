@@ -1,0 +1,41 @@
+{
+ "cross_attn_1_key": {
+  "max_abs_dev_across_16_queries": 2.384185791015625e-07,
+  "attn_weight_min": 1.0,
+  "attn_weight_max": 1.0
+ },
+ "cross_attn_2_key": {
+  "max_abs_dev_across_16_queries": 0.3428429067134857,
+  "attn_weight_min": 0.3969747722148895,
+  "attn_weight_max": 0.6030251979827881
+ },
+ "cross_attn_4_key": {
+  "max_abs_dev_across_16_queries": 0.33937084674835205,
+  "attn_weight_min": 0.2081160843372345,
+  "attn_weight_max": 0.3077147603034973
+ },
+ "group_residual_variance_across_queries": {
+  "joint(1 token)": 0.0,
+  "wrist(1 token)": 0.0,
+  "fe(4 tokens)": 0.0077796634286642075
+ },
+ "group_mean_query_dependent_share": 1.0,
+ "fe_residual_weight_in_mean": 0.3333333333333333,
+ "flat_6_token_init_attention_mass": {
+  "FE(4)": 0.6671191453933716,
+  "wrist": 0.16811619699001312,
+  "joint": 0.1647646129131317
+ },
+ "param_counts": {
+  "NoEnc+FDec": 31665416,
+  "GEnc+FDec": 44274952,
+  "NoEnc+GDec": 40078600,
+  "GEnc+GDec": 52688136
+ },
+ "param_ratio_to_NoEnc+FDec": {
+  "NoEnc+FDec": 1.0,
+  "GEnc+FDec": 1.398,
+  "NoEnc+GDec": 1.266,
+  "GEnc+GDec": 1.664
+ }
+}
