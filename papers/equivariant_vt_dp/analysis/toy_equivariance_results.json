@@ -1,0 +1,64 @@
+{
+ "T1_attention_permutation_max_abs_err": 0.0,
+ "T1_concat_permutation_max_abs_err_same_perm_on_visual_only": 3.137818173181553,
+ "T1_note": "concat은 인덱스 i끼리 짝짓는 연산이라 시각 토큰만 순열하면 순열 가환이 아님 (오차가 큼). 교차 주의는 촉각 토큰 전체를 보므로 가환.",
+ "T2_equivariance_rel_err_attention": {
+  "mean": 8.023088422443411e-16,
+  "max": 3.3495628540749322e-15
+ },
+ "T2_equivariance_rel_err_concat": {
+  "mean": 7.883547847795057e-16,
+  "max": 3.472967225596128e-15
+ },
+ "T3_beta_sweep": {
+  "betas": [
+   0.0,
+   0.01,
+   0.03,
+   0.1,
+   0.3,
+   1.0
+  ],
+  "attention_mean_rel_err": [
+   8.111520216566068e-16,
+   0.010977605229643948,
+   0.03289837357670018,
+   0.1089440044031259,
+   0.3141550498213225,
+   0.8217926495501898
+  ],
+  "concat_mean_rel_err": [
+   7.861090791822983e-16,
+   0.009330096467545202,
+   0.02782763319235266,
+   0.0905667762105972,
+   0.2542997564039357,
+   0.7037051409470051
+  ]
+ },
+ "T4_center_shift": {
+  "mean_err_rotate_about_origin_I60like": 1.0335121692379912,
+  "mean_err_rotate_about_c": 2.5925442348473383e-17,
+  "err_yaw_rotation_about_z_axis_c_on_axis": 0.0
+ },
+ "T5_healpix_nside8": {
+  "tokens_z_gt_0": 368,
+  "tokens_z_ge_0": 400,
+  "total_pixels": 768,
+  "tactile_proj_logits_params_49xP": [
+   18032,
+   19600
+  ]
+ },
+ "T5_coeff_dims": {
+  "(lmax+1)^2": 49,
+  "so3_dim": 455,
+  "channels_obs_out": 128,
+  "obs_coeff_numbers_per_frame": 58240
+ },
+ "T5_fusion_params_static": {
+  "cross_attention_block": 5249536,
+  "concat_block": 2100224,
+  "ratio": 2.499512432959532
+ }
+}
