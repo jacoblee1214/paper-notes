@@ -1,0 +1,1302 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TeleDexter 분석</title><style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+:root { --ink:#1b1b1a; --ink2:#55544f; --line:#dcdad3; --accent:#1f5fae; --soft:#eef3fa; --code:#f4f3ef; }
+html { font-family: "Noto Sans CJK KR", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; color: var(--ink); background:#fff; }
+body { font-size: 10.2pt; line-height: 1.62; max-width: 820px; margin: 0 auto; padding: 0 4px; }
+h1 { font-size: 19pt; margin: 0 0 6px; color: var(--accent); }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.2pt; margin: 14px 0 6px; }
+section.chapter { break-before: page; }
+section.chapter:first-of-type { break-before: auto; }
+p.meta { color: var(--ink2); font-size: 9pt; margin-top: 0; }
+p.cap { color: var(--ink2); font-size: 8.6pt; margin-top: -4px; }
+img { max-width: 100%; display: block; margin: 8px auto; }
+img[src*="paper_fig1"] { max-width: 70%; }
+img[src*="paper_fig5"] { max-width: 80%; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; }
+tr { break-inside: avoid; }
+h2, h3 { break-after: avoid; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: var(--soft); }
+code { background: var(--code); padding: 0 3px; border-radius: 3px; font-size: 8.8pt; font-family: "DejaVu Sans Mono", Menlo, monospace; }
+pre { background: var(--code); padding: 8px 10px; border-radius: 5px; font-size: 8.2pt; line-height: 1.45; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 8px 0; padding: 4px 12px; background: var(--soft); border-radius: 4px; }
+hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+ol, ul { padding-left: 22px; }
+li { margin: 2px 0; }
+</style></head><body><section class="chapter"><h1>TeleDexter: 분석 리포트</h1>
+<p class="meta">게시용 버전: 논문 그림은 라이선스(arXiv 비독점 배포) 때문에 제외했습니다. 원문 https://arxiv.org/abs/2607.11481 · arXiv:2607.11481 v1 (단일 버전) · CoRL 2026 포스터(공식 채택 목록) · Puhao Li 외 (Tsinghua, BIGAI, Peking University) · 공식 코드 미발견 · 분석일 2026-11-24</p>
+
+<h2>핵심 요약</h2>
+<ol>
+<li><strong>무엇을 하는가:</strong> 조작자가 손끝 위치와 물체 자세를 목표로 주면, 시뮬레이션 RL로 학습한 저수준 제어기가 접촉을 맡습니다. 참조 궤적을 프레임별로 따르지 않고 연속 부분목표를 순서대로 도달하게 학습합니다(식 1–2).</li>
+<li><strong>표 산술은 일치합니다:</strong> 표 1의 34칸 정수 조건과 평균 행이 모두 맞습니다(V1, V2). Fig. 6의 단계별 시행 수를 PDF 벡터에서 복원하면 22칸 중 20칸의 SR·TP가 정확히 일치하고, 두 칸(BrushSweep SimToolReal† TP 41.9 대 그림 40.0, ScrewdriverUse GeoRT TP 25.3 대 26.7)은 다릅니다(V3, K1).</li>
+<li><strong>격차는 큽니다:</strong> 합산 79/105 대 DexRT 6/105, GeoRT·DexGen 0/105. 과제별 최고 기준선과는 Cuboid 12/15 대 4/15 (p = 0.009)이고, SimToolReal 포함 시 Hammer·Brush는 Holm 후 p = 0.051입니다. 칸마다 15회라 칸 단위 순위는 구분되지 않습니다(V5).</li>
+<li><strong>행동 마스킹:</strong> Screwdriver 11/15 대 0/15, Cuboid 12 대 4, Hammer 10 대 5 (p = 0.14). 절제한 것은 마스킹 하나뿐이라 &quot;가장 영향이 큰 sim-to-real 요소&quot;라는 서술은 표로 확인되지 않습니다(V7, C6).</li>
+<li><strong>any-to-any 지표:</strong> 목표당 성공률 97.6, 92.3%는 평균 연속 성공 41.1, 12.1에서 m/(m+1)로 결정되어 독립 정보가 아닙니다. 목표 풀은 학습에 쓴 참조 프레임 전체입니다(V10, C11).</li>
+<li><strong>학습 곡선(Fig. 5):</strong> 복원 곡선에서 커리큘럼 없음은 모든 점에서 Ours 아래이고, Ours는 1.8×10¹⁰ 스텝에서도 상승 중입니다(10¹⁰에서 끝값의 약 36%). 본문의 &quot;초기 진행이 더 빠름&quot;, &quot;약 10¹⁰ 스텝에 수렴&quot;과 다릅니다(V12, K8, K9).</li>
+<li><strong>&quot;human-level&quot;은 사람과 비교해 측정하지 않았습니다.</strong> 7과제 완주율 75%, 단계 진행률 87%입니다(C2).</li>
+<li><strong>구현 가능성:</strong> 코드 미공개, 학습(4 × RTX 5090, 물체당 약 1일)·실로봇·시연은 이 맥에서 불가능합니다. 보상·커리큘럼·마스킹 모듈과 소형 MuJoCo 축소판은 가능합니다(<code>04</code> §4).</li>
+</ol>
+
+</section>
+<section class="chapter"><h1>01. 논문 분석: Towards Human-level Dexterous Teleoperation (TeleDexter)</h1>
+<p>출처는 모두 arXiv:2607.11481 v1의 절·식·표 번호입니다. &quot;부록 X.Y&quot;는 같은 PDF의 Supplementary Materials입니다.</p>
+<h2>0. 서지, 버전, 라이선스, 학회</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>제목</td>
+<td>Towards Human-level Dexterous Teleoperation</td>
+</tr>
+<tr>
+<td>저자</td>
+<td>Puhao Li*, Zeyuan Chen*, Yingying Wu*, Pengkun Wei, Yuyang Li, Tianyu Wang, Jiaxiao Shi, Mingrui Yu, Baoxiong Jia, Song-Chun Zhu, Tengyu Liu†, Siyuan Huang† (칭화대, BIGAI, 북경대). * 공동 기여, † 교신</td>
+</tr>
+<tr>
+<td>arXiv</td>
+<td>2607.11481 [cs.RO], <strong>v1 하나뿐</strong>(2026-07-13 제출, 27쪽, 본문 9쪽 + 부록). 2026-11-24 abs 페이지에서 버전 이력을 확인했고 v2 이상은 없습니다. 그래서 버전 간 차이는 없습니다</td>
+</tr>
+<tr>
+<td>프로젝트 페이지</td>
+<td>https://bigai-dex.github.io/blog/teledexter/ (2026-07-12 날짜, 영상과 표 1 복사본)</td>
+</tr>
+<tr>
+<td>코드</td>
+<td>공식 코드를 찾지 못했습니다(<code>02</code> §2)</td>
+</tr>
+<tr>
+<td>라이선스</td>
+<td>arXiv abs 페이지의 &quot;view license&quot;가 <code>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</code>(arXiv 비독점 배포)를 가리킵니다. <strong>CC BY가 아닙니다.</strong> PDF 첫·끝 쪽에서 ©, copyright, All rights reserved 같은 권리 표기는 찾지 못했습니다</td>
+</tr>
+<tr>
+<td>학회</td>
+<td><strong>CoRL 2026 포스터</strong>. 저장소의 <code>conferences/corl2026/papers.json</code>(corl.org 공식 채택 목록, 2026-11-14 수집)에서 poster, 세션 &quot;Poster post-p3&quot;(2026-11-11 10:30–12:00), 포스터 번호 44로 확인했습니다. 논문 PDF에는 학회 서식 표기가 없고 arXiv comments에는 프로젝트 주소만 있습니다</td>
+</tr>
+</tbody>
+</table>
+
+<h2>1. 문제와 주장</h2>
+<p><strong>문제.</strong> 사람은 한 손 안에서 물체를 돌리고 잡는 방식을 바꾸고 손가락을 번갈아 움직여(finger gaiting) 도구를 씁니다. 기존 텔레옵은 (a) 사람 손 관절을 로봇 관절로 옮기는 <strong>운동학 리타게팅</strong>(DexPilot, AnyTeleop 등)이라 접촉력과 물체 관성을 무시해 물체를 떨어뜨리고, (b) DexGen([13])은 시뮬레이션에서 만든 파지 전이를 학습 목표로 쓰는 <strong>생성형 행동 사전분포</strong>라 물리적으로 맞지 않을 수 있고 폐루프에서 오차가 누적된다고 지적합니다(1절, 2절).</p>
+<p><strong>주장.</strong> 조작자가 손끝 위치와 물체 자세를 목표로 주고(hand-object co-tracking), 시뮬레이션에서 RL로 학습한 저수준 제어기가 접촉 동역학을 맡습니다. 세 가지가 핵심입니다(1절).</p>
+<ol>
+<li><strong>연속 부분목표(consecutive subgoal) co-tracking:</strong> 사람 참조 궤적을 프레임별로 따라가지 않고, 일정하지 않은 간격으로 뽑은 부분목표를 순서대로 도달하게 학습합니다. 희소 목표 도달 보상과 밀집 추적 보상을 섞은 하이브리드 보상(식 2)입니다.</li>
+<li><strong>기하 인식 리타게팅:</strong> MoCap으로 잰 사람 손-물체 궤적을 로봇 손으로 옮길 때 물체 메시의 SDF로 접촉 인력과 관통 벌칙을 넣는 2단계 최적화(식 4).</li>
+<li><strong>무작위 행동 마스킹(random action masking)과 도메인 무작위화</strong>로 제로샷 sim-to-real.</li>
+</ol>
+<p><strong>결과 요약.</strong> SharpaWave(22자유도, 5손가락) 7개 과제에서 평균 SR 75.2%, TP 87.1%(표 1). 기준선(DexRT, GeoRT, DexGen)은 평균 SR 5.7%, 0%, 0%. LeapHand(16자유도, 4손가락)에서도 같은 파이프라인이 동작(표 2). 수집한 시연 50개로 확산 정책을 학습해 3개 과제를 자율 수행(표 3).</p>
+<h2>2. 방법 (3절, 부록 C)</h2>
+<h3>2.1 문제 정식화 (3절 서두)</h3>
+<p>모든 양은 손목 프레임에서 표현합니다. 팔은 사람 손목 자세를 IK로 따라갑니다. 정책은 a_t = π_θ(o_t, g_t)이고 g_t = (p̂_tip, T̂_obj)는 목표 손끝 위치(N_f × 3)와 목표 물체 자세(SE(3))입니다. 텔레옵 중에는 MoCap이 실시간으로 잰 사람 손끝과 물체 자세가 g_t가 됩니다.</p>
+<h3>2.2 연속 부분목표와 도달 판정 (식 1, 3.1절, 부록 C.2, C.4)</h3>
+<ul>
+<li>오차: 손끝 e_f = ‖p_tip,f − p̂_tip,f‖₂, 물체 위치 e_pos = ‖x − x̂‖₂, 물체 회전 e_rot = ‖Log(R̂ᵀR)‖₂ (식 1).</li>
+<li>도달: N_stay 연속 프레임 동안 max_f e_f &lt; ε_tip, e_pos &lt; ε_pos, e_rot &lt; ε_rot. 표 8의 값은 ε_pos = 1 cm, ε_tip = 3 cm, ε_rot = 10°, N_stay ~ U{5, 15}(도달할 때마다 재추출).</li>
+<li>다음 부분목표: 확률 0.9로 같은 궤적의 k + Δk(범위는 커리큘럼으로 확장), 확률 0.1로 같은 물체의 다른 궤적에서 같은 프레임 번호를 고르는 <strong>교차 궤적 전환</strong>(식 9, &quot;Any2Any&quot;).</li>
+<li>실패 종료: 속도 한계, 물체 위치 오차 15 cm 초과, 또는 허용 밖 프레임이 n_max = η_fail·|Δk|를 넘을 때(η_fail = 1.5, 교차 궤적 직후는 300프레임 고정). 종료 뒤에는 참조 상태 초기화(RSI)로 궤적 앞 90% 안의 임의 프레임에서 시작합니다.</li>
+</ul>
+<h3>2.3 보상 (식 2, 3, 5–8, 표 8)</h3>
+<pre><code>r_t = 1_reach(t) · w_step(t) · r_score(t) + α_dense · r_dense(t) − c_time
+</code></pre>
+<ul>
+<li>r_score = α_s [ w_tip Σ_f ρ_f + w_obj (ρ_pos + ρ_rot) ], ρ = exp(−β e) (식 6, 7). α_s = 1.5, w_tip = 0.5, w_obj = 2.0. 손가락 5개면 최댓값은 1.5 × (2.5 + 4.0) = 9.75입니다(<code>03</code> V11).</li>
+<li>w_step: 궤적 안 전환은 |Δk| + 5, 교차 궤적 전환은 100. 큰 점프일수록 큰 보상입니다.</li>
+<li>r_dense: 손끝 5개와 MCP·근위 관절 평균에 지수 커널, 물체 항은 (1 − σ_t)로 가중 (식 8). α_dense = 0.1.</li>
+<li>c_time = 0.1.</li>
+<li>본문 식 3은 α_s를 쓰지 않고 가중치를 w_f, w_pos, w_rot로 적었고, 부록 식 6은 α_s와 w^s로 다시 씁니다. 값은 부록 표 8에만 있습니다.</li>
+</ul>
+<h3>2.4 관측과 행동 (부록 C.1, 표 7)</h3>
+<ul>
+<li>관측 차원: SharpaWave 142, LeapHand 112(항목 합이 일치합니다, <code>03</code> V11). 관절 속도와 접촉력은 <strong>의도적으로 제외</strong>했고, 중력 방향은 손목 프레임에서 유일한 세계 기준 단서입니다. 촉각은 없습니다.</li>
+<li>행동: HORA식 잔차 관절 목표에 소프트 데드존 deadzone_τ(a) = sign(a)·max(|a| − τ, 0), α_a = 0.1, τ = 0.1. 0을 정확히 내기 어려운 가우시안 정책에 &quot;가만히 있기&quot; 구간을 줍니다.</li>
+</ul>
+<h3>2.5 커리큘럼 (3.1절, 부록 C.3)</h3>
+<ul>
+<li>본문은 <strong>세 축</strong>(중력 감소 → 완전 중력, 추적 허용오차 완화 → 엄격, 부분목표 간격 작음 → 큼)이라고 쓰고, 부록은 <strong>네 노브</strong>(부분목표 간격 상한 40 → 80프레임, 행동 마스킹 지속 1 → 10프레임, 밀집 물체 보상 가중 (1 − σ_t), 중력 0 → −9.8 m/s²)를 적습니다. 허용오차 완화 일정은 부록 목록에 없습니다(<code>03</code> K5).</li>
+<li>σ_t는 1에서 σ_min = 0.7까지 T_σ = 25,600 환경 프레임(환경당)에 걸쳐 선형으로 줄고, 상한은 3차식으로 확장합니다. 중력은 환경당 32 K 프레임에 걸쳐 선형.</li>
+</ul>
+<h3>2.6 무작위 행동 마스킹 (3.1절, 부록 C.8)</h3>
+<p>각 스텝에서 마스크가 켜져 있지 않으면 확률 p_mask = 0.15로 새 마스크를 뽑습니다. 관절 3개를 비복원 추출하고 지속 시간 d ~ U{1, d_max} 동안 그 관절들의 실행 행동을 직전 명령으로 고정합니다: ã_t = m_t ⊙ a_t + (1 − m_t) ⊙ ã_(t−1). 의도는 &quot;일부 관절이 낡은 명령을 유지해도 성공&quot;하도록 하는 행동 공간 정규화입니다.</p>
+<h3>2.7 sim-to-real와 학습 설정 (3.1절, 부록 C.7, C.9, 표 9, 10)</h3>
+<ul>
+<li>도메인 무작위화(표 9): 손 질량 ×U[0.9,1.2], 마찰 U[1,4], Kp·Kd ×U[0.8,1.2], 물체 질량 ×U[0.5,2], 마찰 U[0.5,4], 메시 스케일 ×U[0.95,1.05], 물체에 가하는 외력(Visual Dexterity 방식), 관측 잡음(관절 σ=0.1, 손끝·물체 위치 ±5 mm, 자세 ±2°), 관측 지연(큐 2프레임), 초기 손목 방향 ±30°.</li>
+<li>Isaac Gym, SAPG(블록 6개), LSTM 512 + MLP [512,1024,1024,512,512], 4 × RTX 5090에서 약 62,400 환경, 약 10¹⁰ 환경 스텝, 약 1일(C.9, 표 10). 물체 하나당 참조 궤적 150개 × 20 s = 약 50분(C.6).</li>
+</ul>
+<h3>2.8 기하 인식 리타게팅 (3.2절, 식 4, 부록 C.5)</h3>
+<pre><code>q*(1:T) = argmin_q Σ_t [ L_vec(t) + λ_surf L_surf(t) + λ_pen L_pen(t) + λ_col L_col(t) ] + λ_smooth L_smooth
+</code></pre>
+<p>1단계는 벡터 리타게팅(Adam, lr 10⁻³, 6,000회), 2단계는 SDF 기반 표면 인력(임계 τ_surf 안의 손 표면점을 물체 표면으로), 관통 벌칙, 손가락 간 구-구 자기충돌, cuRobo 평활 에너지(Adam, lr 3×10⁻³, 160회, 기울기 노름 1.0 클립). λ_surf = 10, λ_pen = 2, λ_col = 10, λ_smooth = 0.1. τ_surf는 &quot;2&quot;로만 적혀 있고 단위가 없습니다(<code>03</code> K13).</p>
+<h3>2.9 텔레옵 배치 (3.3절, 부록 B.3)</h3>
+<p>NOKOV 광학 MoCap이 30 Hz로 손목, 손끝(실시간용 간이 장갑), 물체 6D 자세를 줍니다. 파지 전 접근과 첫 접촉은 <strong>운동학 벡터 리타게팅</strong>이 맡고, 안정 접촉이 생기면 <strong>조작자가 co-tracking 정책으로 전환</strong>합니다(3.3절, B.3.2). 전환 방법(버튼 등)은 적혀 있지 않습니다.</p>
+<h2>3. 실험 (4절, 부록 A)</h2>
+<h3>3.1 설정 (4.1절, 4.2절, 부록 B, D)</h3>
+<ul>
+<li>로봇: Franka FR3 + SharpaWave(5손가락, 22자유도) 또는 LeapHand(4손가락, 16자유도). 모든 텔레옵 평가는 30 Hz.</li>
+<li>과제 7개(그림 3, 부록 B.1): 재배향 3개(Cylinder, Cuboid, Bunny; 3단계씩)와 도구 사용 4개(HammerUse 7단계, BrushSweep 7단계, ScrewdriverUse 5단계, BulbReplace 6단계). 물체는 마찰을 위해 의료용 붕대 테이프를 감았습니다(B.1).</li>
+<li>지표: <strong>SR</strong> = 모든 단계를 마친 시행 비율, <strong>TP</strong> = 시행별 (마친 단계 수 / 전체 단계 수)의 평균. 과제·방법당 <strong>15회</strong>(4.2절).</li>
+<li>기준선(부록 D): DexRT(dex-retargeting, 운동학), GeoRT(신경 리타게팅, 공식 구현), DexGen(<strong>공식 구현이 없어 재구현</strong>; 핵심 중간 단계인 AnyGrasp-to-AnyGrasp RL 정책을 TeleDexter의 co-tracking 제어기로 <strong>대체</strong>해 시뮬 롤아웃을 만들고 이후 확산 사전분포 학습·배치는 원 논문을 따름), SimToolReal(공식 구현으로 FR3 + SharpaWave에서 재학습; 텔레옵이 아니라 추론 시 사람 참조 동작이 필요한 방법; 도구별 정책 †, 전 도구 단일 정책 ‡, 세 과제만).</li>
+</ul>
+
+<h3>3.2 표 1: SharpaWave 텔레옵 (SR / TP %)</h3>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>DexRT</th>
+<th>GeoRT</th>
+<th>DexGen</th>
+<th>SimToolReal†</th>
+<th>SimToolReal‡</th>
+<th>TeleDexter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CylinderReorient</td>
+<td>6.7 / 37.8</td>
+<td>0.0 / 24.4</td>
+<td>0.0 / 31.1</td>
+<td>—</td>
+<td>—</td>
+<td>80.0 / 86.7</td>
+</tr>
+<tr>
+<td>CuboidReorient</td>
+<td>26.7 / 51.1</td>
+<td>0.0 / 33.3</td>
+<td>0.0 / 28.9</td>
+<td>—</td>
+<td>—</td>
+<td>80.0 / 86.7</td>
+</tr>
+<tr>
+<td>BunnyReorient</td>
+<td>0.0 / 35.6</td>
+<td>0.0 / 31.1</td>
+<td>0.0 / 26.7</td>
+<td>—</td>
+<td>—</td>
+<td>66.7 / 77.8</td>
+</tr>
+<tr>
+<td>HammerUse</td>
+<td>0.0 / 26.7</td>
+<td>0.0 / 30.5</td>
+<td>0.0 / 26.7</td>
+<td>0.0 / 27.6</td>
+<td>20.0 / 36.2</td>
+<td>66.7 / 86.7</td>
+</tr>
+<tr>
+<td>BrushSweep</td>
+<td>0.0 / 39.0</td>
+<td>0.0 / 29.5</td>
+<td>0.0 / 8.6</td>
+<td>26.7 / 41.9</td>
+<td>0.0 / 5.7</td>
+<td>73.3 / 89.5</td>
+</tr>
+<tr>
+<td>ScrewdriverUse</td>
+<td>6.7 / 37.3</td>
+<td>0.0 / 25.3</td>
+<td>0.0 / 33.3</td>
+<td>0.0 / 17.3</td>
+<td>0.0 / 20.0</td>
+<td>73.3 / 86.7</td>
+</tr>
+<tr>
+<td>BulbReplace</td>
+<td>0.0 / 35.6</td>
+<td>0.0 / 25.6</td>
+<td>0.0 / 20.0</td>
+<td>—</td>
+<td>—</td>
+<td>86.7 / 95.6</td>
+</tr>
+<tr>
+<td>평균</td>
+<td>5.7 / 37.6</td>
+<td>0.0 / 28.5</td>
+<td>0.0 / 25.0</td>
+<td>8.9 / 28.9</td>
+<td>6.7 / 20.6</td>
+<td>75.2 / 87.1</td>
+</tr>
+</tbody>
+</table>
+<p>SimToolReal 평균은 세 과제 평균이고, 같은 세 과제의 TeleDexter 평균은 SR 71.1, TP 87.6입니다(<code>03</code> V2). 표 2(LeapHand, TeleDexter만): CylinderReorient 60.0 / 73.3, CuboidReorient 73.3 / 82.2.</p>
+<p><strong>본문 해석(4.2절, 부록 A.3).</strong> SR–TP 간격이 좁으므로(75.2 대 87.1) 실패는 늦은 단계에서 생기고, 기준선은 처음으로 손 안 재배향·finger gaiting이 필요한 단계에서 무너진다고 서술합니다. Fig. 6이 단계별 생존 시행 수를 보여 주고, 저는 이 값을 PDF 벡터에서 정수로 복원해 표 1과 대조했습니다(<code>03</code> V3).</p>
+
+<h3>3.3 자율 정책: 텔레옵에서 자율로 (4.3절, 표 3, 부록 B.2, E)</h3>
+<p>과제 3개(BulbInstall 4단계, HammerDriver 3단계, BrushForward 3단계)에서 시연 50개로 Conv-UNet 확산 정책(DINOv2 ViT-S/14 고정 인코더 2개, 관측 2프레임, 행동 청크 16, DDIM 16스텝)을 학습하고 15회 평가합니다. 단계별 성공: BulbInstall 13/15 → 12/13 → 8/12 → 7/8 (SR 46.7%), HammerDriver 15/15 → 15/15 → 11/15 (73.3%), BrushForward 7/15 → 7/7 → 6/7 (40.0%). HammerDriver는 텔레옵 HammerUse보다 큰 못과 폼 표적을 쓰는 단순화 과제입니다(B.2). 비교 대상은 없습니다. &quot;기존 텔레옵으로는 같은 데이터를 모을 수 없다&quot;는 것이 이유로 적혀 있습니다(4.3절).</p>
+<h3>3.4 절제 (4.4절, 표 4, 5, 부록 A.2)</h3>
+<ul>
+<li><strong>표 4 (시뮬, 보류 참조 동작 3개 물체):</strong> 연속 부분목표 학습 대 밀집 프레임 추적. 밀집 평가(참조가 매 스텝 진행)에서 에피소드 길이 Cuboid 378.6 대 115.8, Hammer 376.9 대 131.2, Screwdriver 373.2 대 88.7. 희소 평가(목표 도달 후 진행)에서 도달 부분목표 수 32.6 대 2.6, 186.6 대 2.7, 178.5 대 2.7.</li>
+<li><strong>표 5 (실로봇, SR / TP):</strong> 행동 마스킹 있음 대 없음. HammerUse 66.7 / 86.7 대 33.3 / 57.1, ScrewdriverUse 73.3 / 86.7 대 0.0 / 36.0, CuboidReorient 80.0 / 86.7 대 26.7 / 51.1.</li>
+<li><strong>그림 5 (Hammer, 학습 곡선):</strong> 커리큘럼 없음과 SAPG 대신 PPO가 보상과 연속 성공에서 모두 낮음. 곡선의 끝값은 <code>03</code> V12.</li>
+</ul>
+
+<h3>3.5 부록 A.1: any-to-any 재위치 시험 (LeapHand, 표 6)</h3>
+<p>참조 집합의 모든 프레임을 목표 풀로 삼아, 직전 목표에 도달할 때마다 새 목표를 뽑아 이어서 줍니다. 도달 기준은 물체 위치 오차 2 cm 미만, 회전 오차 20° 미만. 시행은 물체 이탈 또는 20초 동안 목표 미도달 시 종료. 15회: Cylinder 연속 성공 평균 41.1, 목표당 성공률 97.6%. Cuboid 12.1, 92.3%.</p>
+<h3>3.6 부록 A.4: 실패 유형 (그림 7)</h3>
+<p>(1) 상호작용 교란(못 치기 같은 충격으로 손 안 자세가 바뀜), (2) 접촉 전환 걸림(올라가야 할 손가락이 물체에 끼어 물체가 튕겨 나감, BunnyReorient에서 가장 잦음), (3) 추적 정체(재파지가 실패해 진전이 없음; 촉각이 없기 때문이라고 귀속). 실패 유형별 횟수는 보고되지 않았습니다.</p>
+<h2>4. 한계 (6절)와 이 분석이 본 한계</h2>
+<p><strong>저자가 적은 한계(6절).</strong> 물체별 제어기(새 물체마다 사람 시연 수집과 학습 필요), MoCap 의존(손과 물체 자세).</p>
+<p><strong>이 분석이 본 점(자세한 근거는 <code>03</code>, <code>04</code>).</strong></p>
+<ul>
+<li>시행 수는 칸당 15회라 Wilson 95% 구간이 대략 ±20 %p입니다. 격차가 큰 칸(80 대 0)은 확실하지만 최고 기준선이 SimToolReal인 Hammer, Brush 칸은 Fisher p가 0.025, 0.027이고 Holm 보정 후 0.051입니다(<code>03</code> V5).</li>
+<li>조작자 수, 시행 순서, 시도 간 독립성(물체 재배치, 장갑 재보정)은 적혀 있지 않습니다.</li>
+<li>&quot;human-level&quot;은 사람과의 직접 비교(성공률, 소요 시간, 지연)로 측정하지 않았습니다(<code>04</code> C2).</li>
+<li>행동 마스킹 외의 sim-to-real 요소(도메인 무작위화, 지연, 외력)와 기하 인식 리타게팅은 절제하지 않았습니다(<code>04</code> C6, C7).</li>
+<li>DexGen 기준선은 TeleDexter의 제어기로 시뮬 롤아웃을 만든 재구현이라 원 시스템과 같다고 볼 수 없습니다(<code>04</code> C12).</li>
+<li>학습·평가에 쓰는 시뮬 제어 주파수, PD 이득, 시뮬 손 모델 파일은 논문에 없습니다(<code>04</code> §4).</li>
+</ul>
+</section>
+<section class="chapter"><h1>03. 수치 재계산과 일관성 점검 (V1–V14, K1–K14)</h1>
+<p>이 문서는 논문 표·부록의 숫자를 시행 수로 되돌려 다시 계산하고, 표·본문·그림 사이의 일관성을 점검한 결과입니다. 재실행은 <code>python3 analysis/recompute.py</code>(수 초)이고 결과는 <code>analysis/recompute_results.json</code>에 있습니다. 코드는 공개되어 있지 않아 코드 대조는 없고, 논문 주장 판정은 <code>04</code>에 있습니다.</p>
+<p><strong>가정과 방법.</strong></p>
+<ul>
+<li>시행 수는 4.2절의 &quot;과제·방법당 15회&quot;를 씁니다(표 3, 6, A.1도 15회). 조작자 수, 시행 순서, 시도 간 독립성은 논문에 없어 시행을 독립으로 가정합니다.</li>
+<li>비율 구간은 Wilson 95%, 두 비율은 양측 Fisher 정확 검정, 다중 비교는 Holm입니다.</li>
+<li><strong>Fig. 6과 Fig. 5의 값은 PDF 벡터 경로의 좌표에서 복원했습니다.</strong> Fig. 6은 정수 시행 수가 격자에 정확히 놓여 모든 점이 정수로 복원됩니다(축 눈금 15, 0에 맞춘 선형 변환, 오차 0.02 미만). Fig. 5는 곡선 끝 10점 평균이고 오차는 약 ±0.02(보상, ×10⁴ 단위)와 ±0.1(연속 성공)입니다. 그림에서 읽은 값이므로 표 수치와 같은 지위가 아닙니다.</li>
+<li>단계 정의(부록 B.1): TP는 시행별 (마친 단계 수 k / 전체 단계 수 N)의 평균이고 단계 0은 &quot;집지 못함&quot;입니다. 그래서 칸마다 TP × 15N은 정수여야 하고, Fig. 6의 각 곡선은 &quot;단계 s를 마친 시행 수&quot;로 읽힙니다. 이렇게 읽을 때 TP × 15N은 곡선 값의 합과 같아야 합니다.</li>
+</ul>
+<h2>1. V1. 표 1·2의 정수 조건</h2>
+<p>SR은 k/15, TP는 (단계 합)/(15N)이어야 합니다. 표 1(34칸: 과제 7 × DexRT·GeoRT·DexGen·TeleDexter, SimToolReal 3과제 × 2)에서 모든 칸이 정수 조건을 만족하고, 칸마다 TP가 가능한 범위 [k·N, k·N + (15−k)(N−1)] 안에 있습니다. 표 2도 만족합니다(CylinderReorient 33/45, CuboidReorient 37/45 단위). <strong>산술 불일치는 없습니다.</strong></p>
+<h2>2. V2. 평균 행</h2>
+<p>평균 행은 모두 일치합니다. DexRT 5.73 / 37.59, GeoRT 0 / 28.53, DexGen 0 / 25.04, SimToolReal† 8.9 / 28.93, SimToolReal‡ 6.67 / 20.63, TeleDexter 75.24 / 87.10 (보고값 5.7 / 37.6, 0 / 28.5, 0 / 25.0, 8.9 / 28.9, 6.7 / 20.6, 75.2 / 87.1).</p>
+<p>SimToolReal 평균은 세 과제의 평균입니다(표 1 캡션). 같은 세 과제(Hammer, Brush, Screwdriver)의 TeleDexter 평균은 <strong>SR 71.1, TP 87.6</strong>입니다. 프로젝트 페이지의 막대 그림(Figure 2)은 SimToolReal 8.9%를 7과제 평균인 TeleDexter 75.2% 옆에 놓습니다(프로젝트 페이지, 논문에는 해당 그림 없음).</p>
+<p><img src="figures/own_stage_survival.png" alt="own_stage_survival.png" /></p>
+<p class="cap">Fig. 6의 단계별 생존 시행 수를 PDF 벡터에서 복원한 정수로 다시 그린 그림.</p>
+<h2>3. V3, V4. Fig. 6의 단계별 시행 수와 표 1, 본문 서술</h2>
+<p>복원한 곡선 값(단계 1…N을 마친 시행 수)에서 SR = 마지막 값/15, TP = 합/(15N)을 계산해 표 1과 비교했습니다(22칸).</p>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>방법</th>
+<th>복원한 시행 수 (단계 1…N)</th>
+<th>SR 그림/표</th>
+<th>TP 그림/표</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HammerUse</td>
+<td>TeleDexter</td>
+<td>15 15 15 13 13 10 10</td>
+<td>66.7 / 66.7</td>
+<td>86.7 / 86.7</td>
+</tr>
+<tr>
+<td>HammerUse</td>
+<td>DexRT</td>
+<td>15 6 5 1 1 0 0</td>
+<td>0 / 0</td>
+<td>26.7 / 26.7</td>
+</tr>
+<tr>
+<td>HammerUse</td>
+<td>DexGen</td>
+<td>14 10 4 0 0 0 0</td>
+<td>0 / 0</td>
+<td>26.7 / 26.7</td>
+</tr>
+<tr>
+<td>BrushSweep</td>
+<td>TeleDexter</td>
+<td>15 15 15 13 13 12 11</td>
+<td>73.3 / 73.3</td>
+<td>89.5 / 89.5</td>
+</tr>
+<tr>
+<td>BrushSweep</td>
+<td><strong>SimToolReal†</strong></td>
+<td>13 7 6 4 4 4 4</td>
+<td>26.7 / 26.7</td>
+<td><strong>40.0 / 41.9</strong></td>
+</tr>
+<tr>
+<td>ScrewdriverUse</td>
+<td>TeleDexter</td>
+<td>15 13 13 13 11</td>
+<td>73.3 / 73.3</td>
+<td>86.7 / 86.7</td>
+</tr>
+<tr>
+<td>ScrewdriverUse</td>
+<td><strong>GeoRT</strong></td>
+<td>14 4 1 1 0</td>
+<td>0 / 0</td>
+<td><strong>26.7 / 25.3</strong></td>
+</tr>
+<tr>
+<td>BulbReplace</td>
+<td>TeleDexter</td>
+<td>15 15 15 15 13 13</td>
+<td>86.7 / 86.7</td>
+<td>95.6 / 95.6</td>
+</tr>
+</tbody>
+</table>
+<p>(전체 22칸의 값은 <code>recompute_results.json</code>의 <code>V3_fig6_vs_table1</code>에 있습니다.)</p>
+<ul>
+<li><strong>22칸 중 20칸에서 SR과 TP가 표와 정확히 일치합니다.</strong> 일치하는 칸이 20개이므로 곡선 복원 방법이 맞다는 근거가 됩니다.</li>
+<li><strong>두 칸은 TP가 1–2 단계 단위 다릅니다.</strong> BrushSweep SimToolReal†는 그림 합 42 (40.0%), 표 41.9% = 44/105 (2 단위 차이). ScrewdriverUse GeoRT는 그림 합 20 (26.7%), 표 25.3% = 19/75 (1 단위 차이). SR은 두 칸 모두 일치합니다. 저자 확인이 필요합니다. 어느 쪽이 맞는지는 이 문서로 정할 수 없습니다.</li>
+</ul>
+<p><strong>본문 서술과 그림(V4).</strong></p>
+<table>
+<thead>
+<tr>
+<th>서술</th>
+<th>위치</th>
+<th>그림 복원값</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HammerUse에서 DexRT 15 → 6, DexGen 14 → 10</td>
+<td>A.3</td>
+<td>15 → 6, 14 → 10</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>&quot;all methods pick up the hammer (stage 1)&quot;</td>
+<td>A.3</td>
+<td>단계 1을 마친 수: DexGen 14, GeoRT 14, SimToolReal‡ 10, 나머지 15</td>
+<td>모든 방법이 15/15는 아님 (<code>K3</code>)</td>
+</tr>
+<tr>
+<td>&quot;By stage 4 no teleoperation baseline retains any trial&quot;</td>
+<td>A.3</td>
+<td>단계 4: DexRT 1 (단계 5도 1)</td>
+<td>DexRT 한 시행이 단계 5까지 남음 (<code>K2</code>)</td>
+</tr>
+<tr>
+<td>SimToolReal‡ 3/15 완주</td>
+<td>A.3</td>
+<td>3</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>BrushSweep DexGen 5/15 집기, DexRT·GeoRT 단계 3에서 8/15</td>
+<td>A.3</td>
+<td>5, 8, 8</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>SimToolReal† 4/15 완주</td>
+<td>A.3</td>
+<td>4</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>ScrewdriverUse DexGen 10/15 → 0, DexRT 1/15 완주, TeleDexter 13 → 11</td>
+<td>4.2절, A.3</td>
+<td>10 → 0, 1, 13 → 11</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>BulbReplace DexRT 12 → 2, GeoRT·DexGen 0 (단계 3)</td>
+<td>A.3</td>
+<td>12 → 2, 0, 0</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>BulbReplace &quot;15/15 through stage 4&quot;, &quot;only failures at final placement (13/15)&quot;</td>
+<td>4.2절</td>
+<td>15,15,15,15,13,13</td>
+<td>두 시행이 <strong>단계 5(배치를 위한 회전)</strong> 에서 빠짐 (<code>K4</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/own_sr_ci.png" alt="own_sr_ci.png" /></p>
+<p class="cap">표 1 과제별 성공 횟수(15회)와 Wilson 95% 구간.</p>
+<h2>4. V5. TeleDexter 대 기준선 (SR, 15회)</h2>
+<p>과제별로 해당 과제의 가장 높은 SR의 기준선과 비교했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>TeleDexter</th>
+<th>최고 기준선 (SR)</th>
+<th>Fisher p</th>
+<th>Holm 보정 p</th>
+<th>TeleDexter Wilson 95%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CylinderReorient</td>
+<td>12/15</td>
+<td>DexRT 1/15</td>
+<td>1.2×10⁻⁴</td>
+<td>6.9×10⁻⁴</td>
+<td>[54.8, 93.0]</td>
+</tr>
+<tr>
+<td>CuboidReorient</td>
+<td>12/15</td>
+<td>DexRT 4/15</td>
+<td>0.0092</td>
+<td>0.028</td>
+<td>[54.8, 93.0]</td>
+</tr>
+<tr>
+<td>BunnyReorient</td>
+<td>10/15</td>
+<td>DexRT 0/15</td>
+<td>2.0×10⁻⁴</td>
+<td>1.0×10⁻³</td>
+<td>[41.7, 84.8]</td>
+</tr>
+<tr>
+<td>HammerUse</td>
+<td>10/15</td>
+<td><strong>SimToolReal‡ 3/15</strong></td>
+<td><strong>0.025</strong></td>
+<td><strong>0.051</strong></td>
+<td>[41.7, 84.8]</td>
+</tr>
+<tr>
+<td>BrushSweep</td>
+<td>11/15</td>
+<td><strong>SimToolReal† 4/15</strong></td>
+<td><strong>0.027</strong></td>
+<td><strong>0.051</strong></td>
+<td>[48.0, 89.1]</td>
+</tr>
+<tr>
+<td>ScrewdriverUse</td>
+<td>11/15</td>
+<td>DexRT 1/15</td>
+<td>4.8×10⁻⁴</td>
+<td>1.9×10⁻³</td>
+<td>[48.0, 89.1]</td>
+</tr>
+<tr>
+<td>BulbReplace</td>
+<td>13/15</td>
+<td>DexRT 0/15</td>
+<td>1.8×10⁻⁶</td>
+<td>1.2×10⁻⁵</td>
+<td>[62.1, 96.3]</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>합산(7과제 × 15 = 105회):</strong> TeleDexter 79/105 (75.2%, Wilson [66.2, 82.5]), DexRT 6/105 ([2.6, 11.9]), GeoRT 0/105, DexGen 0/105 ([0, 3.5]). 두 군의 차이는 모든 기준선에 대해 p &lt; 10⁻²⁶입니다.</li>
+<li><strong>SimToolReal(3과제 45회):</strong> TeleDexter 32/45 ([56.6, 82.3]) 대 † 4/45, ‡ 3/45. p = 1.3×10⁻⁹, 1.9×10⁻¹⁰.</li>
+<li>기준선이 텔레옵 방법이면 7과제 모두 TeleDexter가 큽니다. SimToolReal은 텔레옵 방법이 아니고 추론 시 참조 동작이 필요하므로(4.1절) 같은 선상의 기준선이 아닙니다. 이를 포함하면 Hammer, Brush 두 칸의 Fisher p가 0.025, 0.027이고 Holm 후 0.051입니다. <strong>칸마다 15회라 구간이 ±20 %p 안팎이므로, 칸 단위 순위(예: 66.7 대 73.3)는 구분되지 않습니다.</strong></li>
+</ul>
+<h2>5. V6. LeapHand 대 SharpaWave</h2>
+<p>TeleDexter의 CylinderReorient 9/15 (LeapHand, Wilson [35.7, 80.2]) 대 12/15 (SharpaWave): p = 0.43. CuboidReorient 11/15 ([48.0, 89.1]) 대 12/15: p = 1.0. 두 손의 차이는 이 시행 수로 구분되지 않습니다. LeapHand에는 기준선이 없습니다(표 2). &quot;다른 손(embodiment) 사이 일반화&quot;(4.2절)를 두 물체, 기준선 없이 보였다는 점은 <code>04</code> C9.</p>
+<p><img src="figures/own_ablation_ci.png" alt="own_ablation_ci.png" /></p>
+<p class="cap">표 5(행동 마스킹)와 표 3(자율 정책)의 Wilson 구간.</p>
+<h2>6. V7. 행동 마스킹 절제 (표 5)</h2>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>있음</th>
+<th>없음</th>
+<th>Fisher p</th>
+<th>Holm 보정 p</th>
+<th>없음 Wilson</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HammerUse</td>
+<td>10/15</td>
+<td>5/15</td>
+<td>0.14</td>
+<td>0.14</td>
+<td>[15.2, 58.3]</td>
+</tr>
+<tr>
+<td>ScrewdriverUse</td>
+<td>11/15</td>
+<td>0/15</td>
+<td>5.0×10⁻⁵</td>
+<td>1.5×10⁻⁴</td>
+<td>[0, 20.4]</td>
+</tr>
+<tr>
+<td>CuboidReorient</td>
+<td>12/15</td>
+<td>4/15</td>
+<td>0.0092</td>
+<td>0.018</td>
+<td>[10.9, 52.0]</td>
+</tr>
+<tr>
+<td>합산</td>
+<td>33/45</td>
+<td>9/45</td>
+<td>6.5×10⁻⁷</td>
+<td></td>
+<td>[10.9, 33.8]</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>&quot;있음&quot; 열의 SR/TP 세 쌍은 표 1의 TeleDexter 값과 같습니다(66.7 / 86.7, 73.3 / 86.7, 80.0 / 86.7). 같은 시행을 재사용한 것으로 읽힙니다(논문에 서술 없음).</li>
+<li>본문 &quot;substantial degradation across all evaluated tasks&quot;는 방향은 세 과제 모두 같지만, HammerUse는 10/15 대 5/15로 p = 0.14입니다.</li>
+<li><strong>Fig. 2의 &quot;86% in real world ... 57%&quot;:</strong> 표 5의 HammerUse TP(86.7 대 57.1)와 맞습니다(86.7이 86으로 적힘). 세 과제 평균은 TP 86.7 대 48.1, SR 73.3 대 20.0이므로 Fig. 2의 두 숫자는 한 과제의 TP입니다(<code>K10</code>).</li>
+<li>표 5의 &quot;w/o AM&quot; CuboidReorient 칸 (26.7 / 51.1)은 표 1의 DexRT CuboidReorient 칸 (26.7 / 51.1)과 같은 쌍입니다. 둘 다 SR 4/15, TP 23/45에 해당하는 가능한 값입니다. 저자 확인이 필요합니다(<code>K11</code>).</li>
+</ul>
+<h2>7. V8. 자율 정책 (표 3)</h2>
+<table>
+<thead>
+<tr>
+<th>과제</th>
+<th>단계별 (성공/분모)</th>
+<th>SR 재계산</th>
+<th>Wilson 95%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BulbInstall</td>
+<td>13/15, 12/13, 8/12, 7/8</td>
+<td>7/15 = 46.7%</td>
+<td>[24.8, 69.9]</td>
+</tr>
+<tr>
+<td>HammerDriver</td>
+<td>15/15, 15/15, 11/15</td>
+<td>11/15 = 73.3%</td>
+<td>[48.0, 89.1]</td>
+</tr>
+<tr>
+<td>BrushForward</td>
+<td>7/15, 7/7, 6/7</td>
+<td>6/15 = 40.0%</td>
+<td>[19.8, 64.3]</td>
+</tr>
+</tbody>
+</table>
+<p>분모 사슬(앞 단계 분자 = 다음 단계 분모)과 SR은 모두 일치합니다. 세 과제 합산 24/45 (53.3%, [39.1, 67.1])입니다. 본문의 병목 서술(BulbInstall 정렬 8/12, BrushForward 집기 7/15, HammerDriver 못 박기 11/15)은 표와 일치합니다. 칸마다 15회와 단계 분모 7–13이라 단계별 비율의 구간은 넓습니다(BrushForward 단계 2 7/7의 Wilson 하한 64.6%). 비교 기준선이 없어 &quot;비자명한 성공&quot;의 크기는 정의되지 않습니다(<code>04</code> C10).</p>
+<h2>8. V9. 표 4 (시뮬 연속 부분목표 대 밀집)</h2>
+<table>
+<thead>
+<tr>
+<th>물체</th>
+<th>EpLen 비 (Ours/Dense)</th>
+<th>도달 부분목표 비</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cuboid</td>
+<td>378.6 / 115.8 = 3.3</td>
+<td>32.6 / 2.6 = 12.5</td>
+</tr>
+<tr>
+<td>Hammer</td>
+<td>376.9 / 131.2 = 2.9</td>
+<td>186.6 / 2.7 = 69</td>
+</tr>
+<tr>
+<td>Screwdriver</td>
+<td>373.2 / 88.7 = 4.2</td>
+<td>178.5 / 2.7 = 66</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>본문은 희소 평가에서 &quot;orders of magnitude more&quot;라고 쓰는데, 비율은 12.5–69배(약 1–2자리)입니다.</li>
+<li>Ours의 EpLen 세 값이 373.2–378.6의 좁은 구간입니다. 에피소드 최대 길이는 논문에 적혀 있지 않아, 값이 상한에 가까울 가능성이 있습니다(<code>K7</code>).</li>
+<li>평가 에피소드 수, 시드, 분산, 밀집 기준선의 보상·커리큘럼·학습 길이는 논문에 없습니다. 보류 참조 동작은 3개 물체에 대해서만 쓰였고 같은 학습 예산을 썼는지도 적혀 있지 않습니다.</li>
+<li>표 4의 Hammer 도달 부분목표 186.6은 그림 5(b)의 Hammer 학습 연속 성공 약 55와 같은 양인지 적혀 있지 않아 비교하지 않았습니다.</li>
+</ul>
+<p><img src="figures/own_consistency.png" alt="own_consistency.png" /></p>
+<p class="cap">표 6의 목표당 성공률과 평균 연속 성공의 관계(왼쪽), 그림 5 끝값(오른쪽, 곡선 좌표에서 복원).</p>
+<h2>9. V10. 표 6: 목표당 성공률과 연속 성공 평균</h2>
+<p>부록 A.1의 시행은 물체 이탈 또는 20초 정체로 끝납니다. 한 시행에서 성공한 목표 수가 s_i, 마지막 시도가 실패 1회라면 목표당 성공률은 Σs_i / (Σs_i + 15)이고, 평균 연속 성공을 m이라 하면 <code>m/(m+1)</code>입니다.</p>
+<table>
+<thead>
+<tr>
+<th>물체</th>
+<th>m (보고)</th>
+<th>보고된 목표당 SR</th>
+<th>m/(m+1)</th>
+<th>총 성공 수 추정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cylinder</td>
+<td>41.1</td>
+<td>97.6%</td>
+<td>97.62%</td>
+<td>약 617</td>
+</tr>
+<tr>
+<td>Cuboid</td>
+<td>12.1</td>
+<td>92.3%</td>
+<td>92.37%</td>
+<td>약 182</td>
+</tr>
+</tbody>
+</table>
+<p>두 값이 이 관계와 일치합니다(Cuboid는 12.1이 반올림이므로 92.3–92.4). 따라서 <strong>두 지표는 독립된 정보가 아닙니다.</strong> 목표당 성공률은 평균 연속 성공에서 정해집니다. 평균 12.1과 41.1에서 시행 간 편차(15회)와 구간은 보고되어 있지 않습니다. 도달 판정은 물체 위치 오차 2 cm와 회전 오차 20° 미만으로, 학습의 부분목표 허용오차(1 cm, 10°; 표 8)보다 느슨하고 손끝 오차 조건은 적혀 있지 않습니다. 목표 풀은 참조 집합의 모든 프레임이라 학습에 쓴 프레임에서 뽑습니다(<code>04</code> C11).</p>
+<h2>10. V11. 부록 산술</h2>
+<table>
+<thead>
+<tr>
+<th>점검</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>표 7 관측 차원 합</td>
+<td>SharpaWave 142, LeapHand 112로 보고값과 일치</td>
+</tr>
+<tr>
+<td>환경 수</td>
+<td>4 GPU × 15,600 = 62,400 (본문 &quot;약 62,000&quot;)</td>
+</tr>
+<tr>
+<td>미니배치</td>
+<td>15,600 환경 × 32 / 31,200 = 16 미니배치</td>
+</tr>
+<tr>
+<td>참조 데이터</td>
+<td>150 궤적 × 20 s = 50분, 600프레임 = 20 s × 30 Hz</td>
+</tr>
+<tr>
+<td>커리큘럼 창</td>
+<td>T_σ 25,600 프레임 × 62,400 = 1.6×10⁹, 중력 32 K × 62,400 = 2.0×10⁹ 스텝 (&quot;first 2×10⁹&quot;과 일치)</td>
+</tr>
+<tr>
+<td>부분목표 간격</td>
+<td>40, 80프레임 = 0.67, 1.33 s (60 Hz 가정); 30 Hz이면 1.33, 2.67 s</td>
+</tr>
+<tr>
+<td>학습 속도</td>
+<td>10¹⁰ 스텝 / 1일 = 초당 약 11.6만 환경 스텝</td>
+</tr>
+<tr>
+<td>점수 보상 최댓값</td>
+<td>1.5 × (5 × 0.5 + 2 × 2.0) = 9.75</td>
+</tr>
+<tr>
+<td>부분목표당 희소 보상 최댓값</td>
+<td>(80 + 5) × 9.75 = 약 829 (시간 벌칙 0.1/스텝의 약 8,300스텝분)</td>
+</tr>
+<tr>
+<td>밀집 보상 최댓값 (후반)</td>
+<td>0.1 × (1.0 + 4 × 0.8 + 0.6 + 0.4 + 0.3 × 3.0) = 0.61</td>
+</tr>
+<tr>
+<td>밀집 물체 항 배율 최댓값</td>
+<td>1 − σ_min = 0.3 (본문 &quot;its full value late&quot;)</td>
+</tr>
+</tbody>
+</table>
+<p>산술은 대부분 맞습니다. 해석이 갈리는 곳은 <code>K5</code>(커리큘럼 노브), <code>K6</code>(주파수), <code>K14</code>(밀집 물체 항 배율)입니다. 한 부분목표의 희소 보상(최대 약 829)은 스텝당 밀집 보상(최대 0.61)과 규모가 크게 달라, &quot;희소 신호가 지배적&quot;(3.1절 &quot;The dominant learning signal&quot;)이라는 서술과 같은 방향입니다.</p>
+<h2>11. V12. 그림 5 (Hammer, 학습 곡선)</h2>
+<p>곡선 좌표에서 복원한 값(곡선 약 830점, x축 단위 10⁹ 환경 스텝):</p>
+<table>
+<thead>
+<tr>
+<th>지표</th>
+<th>Ours</th>
+<th>커리큘럼 없음</th>
+<th>PPO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>보상 (×10⁴), 끝</td>
+<td>1.51</td>
+<td>0.57</td>
+<td>0.20</td>
+</tr>
+<tr>
+<td>연속 성공, 끝</td>
+<td>54.8</td>
+<td>24.2</td>
+<td>12.4</td>
+</tr>
+<tr>
+<td>보상 x = 1 / 3 / 9 / 12 / 15 / 18</td>
+<td>0.14 / 0.31 / 0.48 / 0.68 / 1.16 / 1.52</td>
+<td>0.09 / 0.21 / 0.30 / 0.40 / 0.50 / 0.57</td>
+<td>0.04 / 0.08 / 0.19 / 0.20 / 0.19 / 0.20</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>끝값의 배율: 보상 Ours / 커리큘럼 없음 = 2.65, Ours / PPO = 7.6, 연속 성공 2.3, 4.4.</li>
+<li><strong>&quot;w/o curriculum이 faster initial progress&quot;(A.2)와 달리, 복원한 곡선에서 커리큘럼 없음이 Ours 위에 있는 점은 0개입니다</strong>(보상과 연속 성공 모두, 약 830점 중). 초기(x ≤ 3)에도 Ours가 높습니다(<code>K9</code>).</li>
+<li>Ours 곡선은 x = 18에서도 상승 중이고(x = 12 → 18에서 0.68 → 1.52), x = 10에서의 보상은 끝값의 약 36%입니다. 본문(3.1절, C.9)의 &quot;converges within ∼10¹⁰ steps&quot;와 비교할 때, 그림은 1.8×10¹⁰ 스텝까지 그려져 있습니다(<code>K8</code>).</li>
+<li>시드 수, 곡선의 분산 표시는 없습니다. 한 번의 실행으로 보입니다.</li>
+</ul>
+<h2>12. V13. 15회 대 15회의 구별 한계 (정확 Fisher, 양측 p &lt; 0.05)</h2>
+<p>기준선이 0/15이면 TeleDexter가 5/15 (33%) 이상이어야 구분됩니다. 3/15 (20%)이면 10/15 (67%) 이상, 8/15 (53%)이면 14/15 (93%) 이상입니다. 그러므로 15회 칸에서는 큰 격차(표 1의 대부분)만 확실하고, 중간 격차(예: LeapHand 대 SharpaWave 60 대 80)는 구분되지 않습니다.</p>
+<h2>13. V14. 복원한 시행 분포로 본 TP</h2>
+<p>Fig. 6 복원 정수에서 시행별 마친 단계 수 k를 되살려(계단 수의 차) TP 평균에 부트스트랩 95% 구간(1만 회)을 붙였습니다. 도구 사용 4개 과제에서 TeleDexter의 TP는 HammerUse 86.7 [75.2, 96.2], BrushSweep 89.5 [79.0, 99.0], ScrewdriverUse 86.7 [72.0, 98.7], BulbReplace 95.6 [88.9, 100]입니다. 각 과제에서 TP 평균이 가장 높은 기준선(HammerUse SimToolReal‡ 36.2, BrushSweep SimToolReal† 40.0(그림 기준), ScrewdriverUse DexRT 37.3, BulbReplace DexRT 35.6)과 단계 수 분포를 비교하면 Mann–Whitney 단측 p는 각각 2.9×10⁻⁴, 6.6×10⁻⁴, 1.9×10⁻⁴, 7.2×10⁻⁷입니다. TP 기준으로도 구분은 확실합니다.</p>
+<h2>14. K. 내부 일관성 (표, 본문, 그림, 부록)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>위치</th>
+<th>관측</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K1</td>
+<td>표 1 ↔ Fig. 6</td>
+<td>BrushSweep SimToolReal† TP 41.9 (44/105)는 그림 합 42 (40.0%), ScrewdriverUse GeoRT TP 25.3 (19/75)은 그림 합 20 (26.7%). 22칸 중 20칸은 일치</td>
+<td>V3. 저자 확인 필요</td>
+</tr>
+<tr>
+<td>K2</td>
+<td>A.3 HammerUse</td>
+<td>&quot;By stage 4 no teleoperation baseline retains any trial&quot; 서술에 대해 그림에서 DexRT가 단계 4, 5에서 1/15</td>
+<td>한 시행 차이</td>
+</tr>
+<tr>
+<td>K3</td>
+<td>A.3 HammerUse</td>
+<td>&quot;all methods pick up the hammer&quot;에 대해 단계 1을 마친 수가 DexGen 14, GeoRT 14, SimToolReal‡ 10</td>
+<td>같은 문단에서 DexGen &quot;14 to 10&quot; 서술은 14를 전제</td>
+</tr>
+<tr>
+<td>K4</td>
+<td>4.2절 BulbReplace</td>
+<td>&quot;the only failures at final placement (13/15)&quot;: 그림상 단계 5(배치를 위한 회전)에서 2시행이 빠지고 단계 6(배치)에서는 빠지지 않음</td>
+<td>단계 이름이 &quot;rotate for placement&quot;이므로 서술 범위의 문제</td>
+</tr>
+<tr>
+<td>K5</td>
+<td>3.1절 대 부록 C.3</td>
+<td>본문은 커리큘럼 세 축(중력, 허용오차, 부분목표 간격), 부록은 네 노브(간격, 마스킹 지속, 밀집 물체 가중, 중력). 허용오차 완화 일정은 부록 목록과 표 8(고정값 1 cm, 3 cm, 10°)에 없음</td>
+<td>시작값과 종료값이 없어 재구현 시 정해야 함</td>
+</tr>
+<tr>
+<td>K6</td>
+<td>C.3 대 C.6, 4.1절</td>
+<td>부분목표 간격을 &quot;60 Hz 참조 속도&quot;에서 40–80프레임(0.67–1.33 s)로 쓰고, 참조 데이터는 30 Hz MoCap(600프레임 = 20 s), 배치는 30 Hz. 시뮬 제어 주파수는 적혀 있지 않음</td>
+<td>프레임 단위가 어느 속도인지 불명확. 재샘플링 했을 가능성</td>
+</tr>
+<tr>
+<td>K7</td>
+<td>표 4</td>
+<td>Ours EpLen이 세 물체에서 373.2–378.6, 최대 에피소드 길이 미기재</td>
+<td>상한 근처일 가능성</td>
+</tr>
+<tr>
+<td>K8</td>
+<td>3.1절, C.9 대 그림 5</td>
+<td>&quot;약 10¹⁰ 스텝에 수렴, 약 1일&quot;에 대해 그림 5는 1.8×10¹⁰까지, Ours 보상은 끝까지 상승</td>
+<td>다른 실행·다른 물체일 가능성</td>
+</tr>
+<tr>
+<td>K9</td>
+<td>A.2 대 그림 5</td>
+<td>&quot;disabling the curriculum produces faster initial progress&quot;에 대해 복원 곡선은 커리큘럼 없음이 항상 아래</td>
+<td>곡선의 색 매핑은 범례 순서(Ours, w/o curriculum, PPO)로 해석</td>
+</tr>
+<tr>
+<td>K10</td>
+<td>그림 2</td>
+<td>&quot;86% in real world ... 57%&quot;는 HammerUse TP (86.7 대 57.1). 세 과제 평균은 TP 86.7 대 48.1</td>
+<td>그림에 어떤 지표·과제인지 표기 없음</td>
+</tr>
+<tr>
+<td>K11</td>
+<td>표 5 대 표 1</td>
+<td>&quot;w/o AM&quot; CuboidReorient (26.7 / 51.1)와 DexRT CuboidReorient (26.7 / 51.1)가 같은 쌍</td>
+<td>가능한 값. 저자 확인 필요</td>
+</tr>
+<tr>
+<td>K12</td>
+<td>초록, 4.2절</td>
+<td>초록 &quot;all baselines consistently fail&quot;에 대해 표 1의 DexRT CuboidReorient 26.7%, SimToolReal† BrushSweep 26.7%. 4.2절은 &quot;near-uniformly fail&quot;</td>
+<td>서술 강도 차이</td>
+</tr>
+<tr>
+<td>K13</td>
+<td>부록 C.5</td>
+<td><code>τ surf</code> = &quot;2&quot;로 단위 없음. 학습 허용오차 <code>ε pos</code>는 cm</td>
+<td>단위가 mm인지 cm인지 불명</td>
+</tr>
+<tr>
+<td>K14</td>
+<td>3.1절, 부록 C.2, C.3</td>
+<td>밀집 물체 항은 (1 − σ_t)로 가중되고 &quot;growing from zero ... to its full value late&quot;라고 쓰지만 σ_min = 0.7이므로 배율의 최댓값은 0.3</td>
+<td>&quot;full value&quot;가 가중치 × 0.3을 뜻하는 것으로 읽힘</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="chapter"><h1>04. 주장 검증과 구현 가능성</h1>
+<p>TeleDexter의 공식 코드를 찾지 못했습니다(<code>02</code> §2). 그래서 코드 대조 대신, 논문의 주장 C1–C17을 표·그림 재계산(<code>03</code>)과 본문 서술에 비춰 판정합니다. 판정 표기: <strong>지지</strong>(재계산·본문이 일치하고 해석에 큰 틈이 없음), <strong>부분</strong>(수치는 맞으나 해석이 더 좁거나 조건이 붙음), <strong>방향만</strong>(방향은 같고 크기는 이 시행 수로 확정되지 않음), <strong>미검증</strong>(근거 자료가 논문에 없음). 시행 수는 칸당 15회, 독립 가정입니다.</p>
+<h2>1. 주장별 판정</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>주장 (출처)</th>
+<th>근거와 재계산</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>7개 과제 평균 SR 75%에서 기준선은 모두 실패한다 (초록, 4.2절, 표 1)</td>
+<td>평균과 정수 조건은 모두 일치(V1, V2). 합산 79/105 대 DexRT 6/105, GeoRT·DexGen 0/105. 과제별로도 텔레옵 기준선(DexRT, GeoRT, DexGen)만 비교하면 Holm 후 p ≤ 0.009(V5의 최고 기준선 표는 SimToolReal을 포함해 Hammer, Brush가 0.051). 기준선 최고값은 DexRT 26.7%(Cuboid). 초록의 &quot;all baselines consistently fail&quot;은 이 표에서 0–27%로 읽힘(K12)</td>
+<td>지지 (서술 강도만 조정 필요)</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>&quot;human-level in-hand dexterity&quot;를 달성 (제목, 초록, 4.2절 &quot;enables human-level in-hand dexterity&quot;, 결론)</td>
+<td>사람과의 직접 비교(성공률, 소요 시간, 지연, 조작 부담)가 없습니다. 측정된 것은 7개 과제의 완주율 75%와 단계 진행률 87%이고 최고 SR은 86.7%입니다. 과제 완료 시간, 시행당 개입 횟수, 숙련도에 따른 변화는 보고되지 않았습니다</td>
+<td>미검증</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>단일 단계 RL, 과제별 보상 설계 없이 다양한 상호작용 양상을 학습 (초록, 1절, 3.1절)</td>
+<td>부록 C.2의 보상과 표 8 값이 모든 물체에 같은 식으로 쓰이고 과제별 항이 없습니다. 다만 물체마다 제어기를 따로 학습하고(6절), 커리큘럼·하이퍼파라미터·참조 데이터 수집 설계(150궤적 × 3범주)가 사실상 설계 변수입니다. 물체별로 같은 설정을 썼는지는 &quot;same training recipe&quot;(3.1절)로만 적혀 있음</td>
+<td>부분</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>연속 부분목표 추적이 밀집 프레임 추적보다 낫다 (4.4절, 표 4)</td>
+<td>시뮬 3개 물체에서 EpLen 2.9–4.2배, 도달 부분목표 12.5–69배(V9). 단 밀집 기준선의 보상·학습 길이·시드, 평가 에피소드 수가 없고 Ours EpLen이 상한 근처일 가능성(K7). 실로봇에서는 밀집 프레임 추적과 비교하지 않았음. 본문 &quot;orders of magnitude&quot;는 12.5–69배</td>
+<td>부분 (시뮬, 단일 설정)</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>행동 마스킹은 제로샷 sim-to-real에 결정적이다 (4.4절, 표 5)</td>
+<td>과제 3개에서 방향이 같고 합산 33/45 대 9/45 (p = 6.5×10⁻⁷). 과제별로는 Screwdriver 11 대 0 (p = 5×10⁻⁵), Cuboid 12 대 4 (p = 0.009)이고 Hammer는 10 대 5 (p = 0.14)(V7). &quot;있음&quot; 열은 표 1과 같은 값</td>
+<td>지지 (Hammer는 방향만)</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>행동 마스킹은 &quot;the single most impactful sim-to-real intervention we tested&quot; (부록 C.8, 프로젝트 페이지)</td>
+<td>절제한 것은 마스킹 하나뿐입니다. 도메인 무작위화 항목, 관측 지연, 외력, 데드존 행동 매개변수화는 따로 빼고 비교한 결과가 없어, 마스킹이 &quot;가장 크다&quot;는 순위는 논문의 표로 확인할 수 없습니다</td>
+<td>미검증</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>기하 인식(SDF) 리타게팅이 물리적으로 타당한 참조를 만든다 (1절, 3.2절, 식 4)</td>
+<td>2단계 최적화의 효과를 운동학 리타게팅만 쓴 참조와 비교한 절제가 없습니다(표 4, 5는 훈련 레시피와 마스킹만). 부록 그림 9는 정성적 시각화</td>
+<td>미검증</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>커리큘럼과 SAPG가 최종 성능에 기여한다 (A.2, 그림 5)</td>
+<td>Hammer 한 물체의 곡선에서 끝값이 커리큘럼 없음의 2.65배(보상), PPO의 7.6배(V12). 시드·분산 없음. &quot;w/o curriculum이 초기에 더 빠르다&quot;는 서술은 복원 곡선에서 확인되지 않음(K9)</td>
+<td>방향만 (단일 곡선)</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>같은 파이프라인이 다른 손에서도 동작한다 (4.2절, 표 2)</td>
+<td>LeapHand에서 CylinderReorient 9/15, CuboidReorient 11/15. SharpaWave와 구분되지 않음(p = 0.43, 1.0)(V6). 두 물체뿐이고 LeapHand에는 기준선이 없음. &quot;minimal embodiment-specific tuning&quot;의 조정 내용은 적혀 있지 않음</td>
+<td>부분</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>수집된 시연은 자율 정책 학습에 쓸 만한 고품질 데이터이며 확장 가능한 데이터 수집 파이프라인이다 (4.3절, 결론)</td>
+<td>시연 50개로 SR 46.7, 73.3, 40.0%(Wilson [25, 70], [48, 89], [20, 64])(V8). 비교 데이터 소스가 없어(&quot;no baseline can complete these tasks&quot;) 품질의 비교 기준이 없고, 시연 수집 시간·성공률·조작자 수와 제거한 시연 수도 없음. 과제는 텔레옵 과제의 단순화판(B.2)</td>
+<td>부분</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>컨트롤러는 참조 궤적을 넘어 일반화한다: 임의 목표 전환을 이어서 소화 (A.1, 표 6)</td>
+<td>41.1 / 12.1 연속 성공, 목표당 97.6 / 92.3%이지만 목표당 성공률은 평균 연속 성공에서 결정되어 독립 정보가 아님(V10). 목표 풀이 학습에 쓴 참조 프레임 전체라 보류 목표가 아님. 학습 중 교차 궤적 전환(확률 0.1)과 같은 종류의 쌍을 시험한 것. 도달 판정(2 cm, 20°)이 학습 허용오차(1 cm, 10°)보다 느슨함. 15회 평균의 구간 없음</td>
+<td>부분</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>운동학 방법은 동역학 사전분포가 없어서, DexGen은 생성 모델의 누적 오차로 실패한다 (4.2절, 서론)</td>
+<td>단계별 생존(Fig. 6)은 실패가 첫 재배향·finger gaiting 단계에서 생김을 보이지만(V3), <strong>원인</strong>을 가리는 진단(오류 분해, 롤아웃 오차 측정)은 없습니다. DexGen은 공식 구현이 없어 재구현했고 AnyGrasp-to-AnyGrasp RL을 TeleDexter의 제어기로 대체해 데이터를 만들었음(부록 D). 따라서 DexGen의 실패는 &quot;원 시스템의 실패&quot;가 아니라 &quot;이 재구현의 실패&quot;로 읽어야 함</td>
+<td>미검증 (메커니즘). 결과 자체는 지지</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>실패는 세 유형(상호작용 교란, 접촉 전환 걸림, 추적 정체)이고 촉각 부재와 컴플라이언스 불일치가 원인이다 (A.4)</td>
+<td>유형별 횟수가 없습니다. 촉각, 컴플라이언스 시뮬레이션 절제도 없음. 현재 서술은 가설</td>
+<td>미검증</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>제로샷으로 실로봇에 배치된다 (초록, 3.3절)</td>
+<td>훈련은 시뮬 전용이고 실로봇 미세조정이 서술되지 않음. 다만 접근·초기 접촉은 운동학 리타게팅이 맡고 조작자가 co-tracking으로 <strong>수동 전환</strong>하며, 전환 방법과 시점의 일관성은 적혀 있지 않음(3.3절, B.3.2). 단계 1(집기)에는 정책이 쓰이지 않을 수 있음</td>
+<td>부분</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>약 10¹⁰ 스텝에서 수렴하고 학습은 약 1일 (3.1절, C.9)</td>
+<td>그림 5의 Hammer 곡선은 1.8×10¹⁰ 스텝까지 상승 중이고 10¹⁰ 시점 보상이 끝값의 약 36% (V12, K8). 다른 물체·실행의 값일 수 있음</td>
+<td>부분</td>
+</tr>
+<tr>
+<td>C16</td>
+<td>새 물체, 손, 상호작용 양상으로 직접 확장된다 (3.1절 &quot;scales directly&quot;)</td>
+<td>한계(6절)가 &quot;물체별 제어기, 새 물체마다 사람 시연 수집과 학습&quot;을 인정합니다. 손은 2개, 물체는 7개(원통, 육면체, 토끼, 도구 4)에서만 확인</td>
+<td>부분 (서술이 한계와 긴장)</td>
+</tr>
+<tr>
+<td>C17</td>
+<td>표 1의 SimToolReal은 &quot;strong reference for learned dexterous tool use&quot;다 (4.1절)</td>
+<td>공식 구현을 FR3 + SharpaWave로 이식해 재학습했고(부록 D) 평균은 3과제 기준. 이식 후 성능이 원 논문의 시뮬·실로봇 수치와 어떻게 다른지 보고되지 않음</td>
+<td>부분</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 코드 부재와 논문만으로 정해지지 않는 것</h2>
+<p>공식 코드가 없어(<code>02</code> §2) 아래는 코드가 아니라 <strong>논문 본문과 부록에서 값이 정해지지 않는 항목</strong>입니다. 재구현 시 직접 정해야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>논문에 있는 것</th>
+<th>비어 있는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>허용오차 일정</td>
+<td>표 8의 고정값 (1 cm, 3 cm, 10°), 본문의 &quot;permissive → tightened&quot;</td>
+<td>시작값, 종료값, 완화 일정 (K5)</td>
+</tr>
+<tr>
+<td>제어 주파수</td>
+<td>배치 30 Hz, 참조 60 Hz 표기와 30 Hz 수집</td>
+<td>시뮬 제어 dt, 프레임 단위 (K6)</td>
+</tr>
+<tr>
+<td>손 모델과 PD</td>
+<td>LeapHand, SharpaWave 관절 수</td>
+<td>시뮬 자산(URDF), PD 이득, 토크 한계 (Kp, Kd는 ×[0.8, 1.2] 배율만)</td>
+</tr>
+<tr>
+<td>에피소드</td>
+<td>15 cm 이탈, 속도 한계 안전 경계 존재</td>
+<td>속도 한계 값, 최대 길이 (K7), 물체 질량·형상</td>
+</tr>
+<tr>
+<td>참조 데이터</td>
+<td>물체당 150궤적 × 20 s, 3범주</td>
+<td>물체 메시, 조작자 수, 범주별 비율</td>
+</tr>
+<tr>
+<td>정책 구조</td>
+<td>표 10의 LSTM + MLP, SAPG 6블록</td>
+<td>블록 간 가중치, 행동 정규화 상세</td>
+</tr>
+<tr>
+<td>배치</td>
+<td>NOKOV 30 Hz, 손목 IK</td>
+<td>정책 전환 방법, IK 이득, 안전 한계</td>
+</tr>
+<tr>
+<td>리타게팅</td>
+<td>가중치 4개, Adam 반복</td>
+<td>τ_surf 단위 (K13), 벡터 리타게팅 가중치</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 공개 저장소 확인</h2>
+<p><code>02</code> §2에 기록한 대로 공식 저장소는 없습니다. 이름이 같은 <code>ice4133/TeleDexter</code>는 WUJI Hand 운동학 리타게팅 코드(README, 2026-08-20 생성)로 이 논문과 관계가 확인되지 않아 읽지 않았습니다. 기준선 구현인 <code>dexsuite/dex-retargeting</code>, <code>facebookresearch/GeoRT</code>, <code>tylerlum/simtoolreal</code>은 공개되어 있으나 이번에는 읽지 않았고(코드 읽기 범위 밖), DexGen 공식 구현은 논문 부록 D에서 &quot;없음&quot;이라고 합니다.</p>
+<h2>4. 구현 가능성 (이 맥: Apple M4 Pro, 약 24 GiB, MPS, CUDA 없음)</h2>
+<p><strong>판정: 논문 수치(표 1–6)의 재현은 이 맥에서 불가능합니다. 방법의 핵심 구성요소(보상, 커리큘럼, 행동 마스킹)는 소형 CPU 환경에서 구현할 수 있고, 표·그림 재계산은 이미 끝냈습니다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>내용</th>
+<th>이 맥</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>표·그림 재계산</td>
+<td>표 1–6, 부록 산술, Fig. 5·6 복원</td>
+<td><strong>완료</strong> (<code>recompute.py</code>, 수 초)</td>
+<td><code>03</code></td>
+</tr>
+<tr>
+<td>논문 학습</td>
+<td>Isaac Gym, SAPG, 약 62,400 환경, 4 × RTX 5090, 물체당 약 1일 (C.9)</td>
+<td><strong>불가</strong> (NVIDIA GPU, Linux 전제. 합쳐 약 96 GPU-시간/물체)</td>
+<td>3.1절, C.9</td>
+</tr>
+<tr>
+<td>리타게팅 전체</td>
+<td>물체당 150궤적, SDF(Kaolin), Adam 6,000 + 160회</td>
+<td>조건부: Kaolin은 CUDA 확장이라 직접 짠 해석적 SDF(원기둥·육면체)로 대체해야 함</td>
+<td>C.5</td>
+</tr>
+<tr>
+<td>실로봇</td>
+<td>Franka FR3 + SharpaWave 또는 LeapHand, NOKOV MoCap</td>
+<td><strong>불가</strong></td>
+<td>4.1절, B.3</td>
+</tr>
+<tr>
+<td>시연 수집·자율 정책</td>
+<td>확산 정책(DINOv2 ViT-S/14 2개), 시연 50개</td>
+<td>시연 데이터가 없어 <strong>불가</strong>. 구조만 소형으로 가능</td>
+<td>4.3절, E</td>
+</tr>
+<tr>
+<td>보상·커리큘럼·마스킹 모듈</td>
+<td>식 2, 5–8, 표 8, 식 9, C.3, C.8</td>
+<td><strong>가능</strong>: numpy 또는 torch로 단위 구현·검증</td>
+<td>이 문서 §2, <code>03</code> V11</td>
+</tr>
+<tr>
+<td>소형 co-tracking 환경</td>
+<td>MuJoCo 2–3 손가락 평면 손과 원판·막대 물체, PPO(CPU/MPS)</td>
+<td><strong>조건부 가능</strong>: 연속 부분목표 대 밀집 추적, 마스킹 유무 비교의 축소판. 결과는 논문과 비교 불가</td>
+<td>mujoco 4.0, torch 2.15 (이미 설치)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>노력 추정(측정 전, 추정).</strong></p>
+<ul>
+<li>보상·판정·교차 궤적 전환·마스킹·커리큘럼 모듈과 단위 검증: 1–2일.</li>
+<li>소형 MuJoCo 환경과 PPO로 &quot;연속 부분목표 대 밀집 추적&quot; 축소 비교: 2–3주(환경 설계와 보상 조정이 대부분). 이 맥의 MuJoCo는 CPU이고 PPO는 소형이라 학습은 수 시간 규모로 예상.</li>
+<li>해석적 SDF 리타게팅 2단계의 소형 재구현: 약 1주.</li>
+<li>논문 그대로의 재현: 이 맥에서는 불가능하고, GPU 4장급과 두 종류 로봇 손, MoCap이 필요합니다.</li>
+</ul>
+<p>공식 코드가 공개되고 NVIDIA GPU가 생기면 학습 재현은 코드 대조(D 항목)부터 시작할 수 있습니다. 코드 공개 여부는 저자 프로젝트 페이지로 추적합니다.</p>
+</section>
+<section class="chapter"><h1>02. 선행연구와 관련 자료: TeleDexter (arXiv:2607.11481)</h1>
+<p>이 문서의 계보와 구성요소 출처는 논문 본문과 참고문헌([n])에서 가져온 것입니다. 각 선행 논문을 이번에 다시 읽지는 않았고, 요약은 참고문헌의 제목과 본문 서술, 그리고 이 저장소에서 이미 분석한 논문의 결과에 근거합니다. 확인하지 않은 부분은 &quot;미확인&quot;으로 적었습니다.</p>
+<h2>1. 계보</h2>
+<h3>1.1 운동학 리타게팅 텔레옵</h3>
+<p>사람 손 관절(또는 키포인트)을 로봇 손 관절로 최적화로 옮기는 계열입니다(1절, 2절).</p>
+<ul>
+<li>비전 기반: DexPilot [6], AnyTeleop [5] (dex-retargeting의 벡터 정렬 손실; TeleDexter의 DexRT 기준선과 1단계 리타게팅이 이것), Bunny-VisionPro [7], Open-TeleVision [8], ACE [18].</li>
+<li>착용형: DOGlove [9], DexOP [10], DexExo [11], DexCap <a href="MoCap">19</a>.</li>
+<li>신경 매핑: GeoRT [12](기하 목적 함수로 학습한 리타게팅 네트워크; TeleDexter의 GeoRT 기준선).</li>
+</ul>
+<p>한계는 접촉력과 물체 관성을 모델링하지 않는다는 점이고, TeleDexter는 이를 &quot;물체를 떨어뜨리는 원인&quot;으로 지목합니다(1절). 이 계열의 같은 연도 후속은 DexFLEX 등에서 보입니다(§3).</p>
+<h3>1.2 학습한 동역학 사전분포로 텔레옵 보정</h3>
+<ul>
+<li><strong>DexterityGen (DexGen)</strong> [13]: 시뮬레이션의 AnyGrasp-to-AnyGrasp RL 정책 롤아웃으로 생성 모델(확산)을 학습해 거친 텔레옵 명령을 접촉이 풍부한 손 행동으로 바꿉니다. TeleDexter가 가장 가까운 대안으로 지목하고(2절) 기준선으로 쓰지만, 공식 구현이 없어 재구현했습니다(부록 D). 차이는 (a) TeleDexter는 생성 모델 없이 RL 정책이 직접 저수준 제어기, (b) 훈련 목표가 합성 파지 전이가 아니라 사람 손-물체 참조 모션입니다(1절).</li>
+</ul>
+<h3>1.3 시뮬레이션 RL 손 안 조작</h3>
+<ul>
+<li>과제별 정책: OpenAI Dactyl [24], Rubik's cube [25], Dextreme [26], HORA [27], Visual Dexterity [28], AnyRotate [29], DexNDM [30], simple-to-complex 재배향 [31], 펜 돌리기 [32].</li>
+<li>TeleDexter는 이들의 한계를 &quot;과제별 보상 설계&quot;로 요약하고(2절), 행동 공간 잔차 매개변수화는 HORA, 외력 무작위화는 Visual Dexterity, 커리큘럼·밀집 보상 모양은 ManipTrans [23]에서 가져옵니다(부록 C.1, C.2, C.3, C.7).</li>
+</ul>
+<h3>1.4 사람 손-물체 참조로 RL 가이드</h3>
+<ul>
+<li>ManipTrans [23] (같은 연구실, 잔차 학습), PQS [33] (준물리 시뮬레이터 전이), 물체 중심 사람 모션 [34], DexTrack [35] (신경 추적 제어).</li>
+<li>이 계열은 궤적당 하나의 정책이나 프레임별 추적이라 손 안 재배향·finger gaiting이 드물다고 서술하고(2절), TeleDexter는 <strong>연속 부분목표 + 희소/밀집 하이브리드 보상</strong>을 차별점으로 둡니다. 이 차별이 실제로 효과가 있는지는 시뮬 표 4에서만 비교됩니다(<code>04</code> C4).</li>
+</ul>
+<h3>1.5 도구 사용과 도구 조작 정책</h3>
+<ul>
+<li>SimToolReal [42] (물체 중심 정책, 추론 시 참조 동작 필요): TeleDexter의 기준선(표 1의 † 카테고리별, ‡ 전체). 텔레옵 방법이 아니라 &quot;학습된 도구 조작의 참고선&quot;으로 쓴다고 명시합니다(4.1절).</li>
+</ul>
+<h3>1.6 자율 정책 학습</h3>
+<p>Diffusion Policy [43] (Conv-UNet, 부록 E)로 텔레옵 시연 50개를 모방합니다. DINOv2 ViT-S/14 인코더 두 개는 고정입니다.</p>
+<h2>2. 코드와 저장소 (2026-11-24 확인)</h2>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>관계</th>
+<th>라이선스</th>
+<th>별 · 마지막 push</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(공식 코드 없음)</td>
+<td>TeleDexter 구현</td>
+<td>—</td>
+<td>—</td>
+<td>논문 abs, 프로젝트 페이지, GitHub 검색(<code>teledexter</code>, <code>bigai-dex</code>)에서 코드 링크·저장소를 찾지 못함</td>
+</tr>
+<tr>
+<td><a href="https://github.com/bigai-dex/bigai-dex.github.io">bigai-dex/bigai-dex.github.io</a></td>
+<td>프로젝트 페이지 소스(정적, 영상 포함 약 217 MB)</td>
+<td>없음</td>
+<td>0 · 2026-07-16</td>
+<td>코드 아님. 복제하지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ice4133/TeleDexter">ice4133/TeleDexter</a></td>
+<td>이름만 같은 별개 프로젝트(WUJI Hand 운동학 리타게팅 코드, 2026-08-20 생성)</td>
+<td>없음</td>
+<td>0 · 2026-08-21</td>
+<td>이 논문과 관계 미확인. 읽지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/dexsuite/dex-retargeting">dexsuite/dex-retargeting</a></td>
+<td>기준선 DexRT와 1단계 리타게팅의 구현 [5][6]</td>
+<td>MIT</td>
+<td>1,321 · 2025-08-21</td>
+<td>이번엔 읽지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/facebookresearch/GeoRT">facebookresearch/GeoRT</a></td>
+<td>기준선 GeoRT 공식 구현 [12]</td>
+<td>NOASSERTION(라이선스 파일 확인 필요)</td>
+<td>241 · 2025-09-02</td>
+<td>이번엔 읽지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/tylerlum/simtoolreal">tylerlum/simtoolreal</a></td>
+<td>기준선 SimToolReal 공식 구현 [42]</td>
+<td>MIT</td>
+<td>439 · 2026-09-21</td>
+<td>이번엔 읽지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ManipTrans/ManipTrans">ManipTrans/ManipTrans</a></td>
+<td>커리큘럼·밀집 보상 출처 [23] (같은 연구실)</td>
+<td>GPL-3.0</td>
+<td>350 · 2025-10-10</td>
+<td>이번엔 읽지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jayeshs999/sapg">jayeshs999/sapg</a></td>
+<td>최적화기 SAPG [38]</td>
+<td>MIT</td>
+<td>88 · 2024-09-17</td>
+<td>이번엔 읽지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/real-stanford/diffusion_policy">real-stanford/diffusion_policy</a></td>
+<td>자율 정책 구조 [43]</td>
+<td>MIT</td>
+<td>4,743 · 2024-12-24</td>
+<td>이번엔 읽지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/NVIDIAGameWorks/kaolin">NVIDIAGameWorks/kaolin</a></td>
+<td>리타게팅 SDF [39]</td>
+<td>Apache-2.0</td>
+<td>5,199 · 2026-11-21</td>
+<td>이번엔 읽지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/NVlabs/curobo">NVlabs/curobo</a></td>
+<td>평활 에너지 [40]</td>
+<td>Apache-2.0</td>
+<td>2,039 · 2026-11-21</td>
+<td>이번엔 읽지 않음</td>
+</tr>
+<tr>
+<td><a href="https://github.com/leap-hand/LEAP_Hand_API">leap-hand/LEAP_Hand_API</a></td>
+<td>LeapHand 하드웨어 API [41]</td>
+<td>NOASSERTION</td>
+<td>179 · 2025-10-20</td>
+<td>이번엔 읽지 않음</td>
+</tr>
+<tr>
+<td>DexterityGen 공식 저장소</td>
+<td>DexGen [13]</td>
+<td>—</td>
+<td>—</td>
+<td>찾지 못함. 부록 D도 &quot;No official implementation is available&quot;이라고 적음</td>
+</tr>
+</tbody>
+</table>
+<p>복제한 저장소는 없습니다(<code>repo/</code>는 gitignore 대상으로만 둠). 공식 코드가 공개되는지는 프로젝트 페이지와 GitHub 검색으로 다시 확인해야 합니다.</p>
+<h2>4. 구성요소별 출처</h2>
+<table>
+<thead>
+<tr>
+<th>구성요소</th>
+<th>출처</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>연속 부분목표 + 희소/밀집 하이브리드 보상</td>
+<td>본 논문</td>
+<td>점수 보상의 지수 커널과 가중치는 ManipTrans [23]를 따름 (C.2)</td>
+</tr>
+<tr>
+<td>커리큘럼(중력, 간격, 허용오차)</td>
+<td>ManipTrans [23]</td>
+<td>허용오차 일정은 부록에 없음 (<code>03</code> K5)</td>
+</tr>
+<tr>
+<td>RSI(참조 상태 초기화)</td>
+<td>[23]</td>
+<td>C.4</td>
+</tr>
+<tr>
+<td>행동 매개변수화(잔차 + 데드존)</td>
+<td>HORA [27] + 소프트 데드존(본 논문)</td>
+<td>C.1</td>
+</tr>
+<tr>
+<td>외력 무작위화</td>
+<td>Visual Dexterity [28]</td>
+<td>C.7</td>
+</tr>
+<tr>
+<td>무작위 행동 마스킹</td>
+<td>본 논문</td>
+<td>3.1절, C.8</td>
+</tr>
+<tr>
+<td>최적화기</td>
+<td>SAPG [38] (6블록)</td>
+<td>표 10</td>
+</tr>
+<tr>
+<td>시뮬레이터</td>
+<td>Isaac Gym [37]</td>
+<td></td>
+</tr>
+<tr>
+<td>벡터 리타게팅 1단계</td>
+<td>AnyTeleop [5], DexPilot [6]</td>
+<td>C.5</td>
+</tr>
+<tr>
+<td>SDF 표면·관통 손실</td>
+<td>Kaolin [39]</td>
+<td>C.5</td>
+</tr>
+<tr>
+<td>평활 에너지</td>
+<td>cuRobo [40]</td>
+<td>C.5</td>
+</tr>
+<tr>
+<td>자율 정책</td>
+<td>Diffusion Policy [43], DINOv2</td>
+<td>부록 E</td>
+</tr>
+<tr>
+<td>손</td>
+<td>LeapHand [41], SharpaWave (참고문헌 없음)</td>
+<td>4.1절</td>
+</tr>
+</tbody>
+</table>
+</section></body></html>
