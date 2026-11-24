@@ -1,0 +1,1527 @@
+{
+ "V1_table8_real_world": {
+  "env_avg_recomputed_pct": {
+   "Workroom": {
+    "MolmoBot(H=1)": [
+     27,
+     90.0
+    ],
+    "MolmoBot-Img": [
+     23,
+     76.67
+    ],
+    "MolmoBot-Pi0": [
+     18,
+     60.0
+    ],
+    "pi0.5-DROID": [
+     8,
+     26.67
+    ],
+    "pi0-DROID": [
+     1,
+     3.33
+    ]
+   },
+   "Kitchen": {
+    "MolmoBot(H=1)": [
+     21,
+     70.0
+    ],
+    "MolmoBot-Img": [
+     26,
+     86.67
+    ],
+    "MolmoBot-Pi0": [
+     16,
+     53.33
+    ],
+    "pi0.5-DROID": [
+     19,
+     63.33
+    ],
+    "pi0-DROID": [
+     6,
+     20.0
+    ]
+   },
+   "Bedroom": {
+    "MolmoBot(H=1)": [
+     26,
+     86.67
+    ],
+    "MolmoBot-Img": [
+     20,
+     66.67
+    ],
+    "MolmoBot-Pi0": [
+     7,
+     23.33
+    ],
+    "pi0.5-DROID": [
+     3,
+     10.0
+    ],
+    "pi0-DROID": [
+     0,
+     0.0
+    ]
+   },
+   "Office": {
+    "MolmoBot(H=1)": [
+     21,
+     70.0
+    ],
+    "MolmoBot-Img": [
+     18,
+     60.0
+    ],
+    "MolmoBot-Pi0": [
+     15,
+     50.0
+    ],
+    "pi0.5-DROID": [
+     17,
+     56.67
+    ],
+    "pi0-DROID": [
+     4,
+     13.33
+    ]
+   }
+  },
+  "env_avg_mismatch": [],
+  "total": {
+   "MolmoBot(H=1)": {
+    "k": 95,
+    "n": 120,
+    "pct": 79.17,
+    "wilson95": [
+     71.1,
+     85.5
+    ]
+   },
+   "MolmoBot-Img": {
+    "k": 87,
+    "n": 120,
+    "pct": 72.5,
+    "wilson95": [
+     63.9,
+     79.7
+    ]
+   },
+   "MolmoBot-Pi0": {
+    "k": 56,
+    "n": 120,
+    "pct": 46.67,
+    "wilson95": [
+     38.0,
+     55.6
+    ]
+   },
+   "pi0.5-DROID": {
+    "k": 47,
+    "n": 120,
+    "pct": 39.17,
+    "wilson95": [
+     30.9,
+     48.1
+    ]
+   },
+   "pi0-DROID": {
+    "k": 11,
+    "n": 120,
+    "pct": 9.17,
+    "wilson95": [
+     5.2,
+     15.7
+    ]
+   }
+  }
+ },
+ "V2_table8_pairwise": {
+  "MolmoBot(H=1) vs pi0.5-DROID": {
+   "k": [
+    95,
+    47
+   ],
+   "fisher_p": 3.604833383142955e-10,
+   "task_paired_wilcoxon_p": 0.0001019303001340978,
+   "tasks_a_better": 28,
+   "tasks_b_better": 4,
+   "tasks_tie": 8
+  },
+  "MolmoBot(H=1) vs MolmoBot-Img": {
+   "k": [
+    95,
+    87
+   ],
+   "fisher_p": 0.29116885698430456,
+   "task_paired_wilcoxon_p": 0.31349994558358807,
+   "tasks_a_better": 14,
+   "tasks_b_better": 9,
+   "tasks_tie": 17
+  },
+  "MolmoBot-Img vs MolmoBot-Pi0": {
+   "k": [
+    87,
+    56
+   ],
+   "fisher_p": 7.19181912021302e-05,
+   "task_paired_wilcoxon_p": 0.002598340905585314,
+   "tasks_a_better": 18,
+   "tasks_b_better": 6,
+   "tasks_tie": 16
+  },
+  "MolmoBot-Pi0 vs pi0.5-DROID": {
+   "k": [
+    56,
+    47
+   ],
+   "fisher_p": 0.29679046368923456,
+   "task_paired_wilcoxon_p": 0.2720210461530119,
+   "tasks_a_better": 15,
+   "tasks_b_better": 13,
+   "tasks_tie": 12
+  },
+  "MolmoBot-Pi0 vs pi0-DROID": {
+   "k": [
+    56,
+    11
+   ],
+   "fisher_p": 6.406985689120253e-11,
+   "task_paired_wilcoxon_p": 1.5022307538721656e-05,
+   "tasks_a_better": 24,
+   "tasks_b_better": 1,
+   "tasks_tie": 15
+  },
+  "MolmoBot-Img vs pi0.5-DROID": {
+   "k": [
+    87,
+    47
+   ],
+   "fisher_p": 3.0971932449702144e-07,
+   "task_paired_wilcoxon_p": 8.367419563967025e-05,
+   "tasks_a_better": 25,
+   "tasks_b_better": 3,
+   "tasks_tie": 12
+  },
+  "pi0.5-DROID vs pi0-DROID": {
+   "k": [
+    47,
+    11
+   ],
+   "fisher_p": 6.034239396460399e-08,
+   "task_paired_wilcoxon_p": 5.773322666475622e-05,
+   "tasks_a_better": 21,
+   "tasks_b_better": 1,
+   "tasks_tie": 18
+  }
+ },
+ "V3_stratified_bootstrap": {
+  "MolmoBot(H=1)": {
+   "total_40_tasks_halfwidth_pct": 4.6,
+   "wilson_120_halfwidth_pct": 7.2,
+   "workroom_10_tasks_halfwidth_pct": 6.7,
+   "workroom_wilson_30_halfwidth_pct": 11.1
+  },
+  "MolmoBot-Img": {
+   "total_40_tasks_halfwidth_pct": 5.0,
+   "wilson_120_halfwidth_pct": 7.9,
+   "workroom_10_tasks_halfwidth_pct": 10.0,
+   "workroom_wilson_30_halfwidth_pct": 14.6
+  },
+  "MolmoBot-Pi0": {
+   "total_40_tasks_halfwidth_pct": 5.0,
+   "wilson_120_halfwidth_pct": 8.8
+  },
+  "pi0.5-DROID": {
+   "total_40_tasks_halfwidth_pct": 5.8,
+   "wilson_120_halfwidth_pct": 8.6
+  },
+  "pi0-DROID": {
+   "total_40_tasks_halfwidth_pct": 3.8,
+   "wilson_120_halfwidth_pct": 5.2
+  },
+  "table12_reported_halfwidth_pct": {
+   "MolmoBot-Img": 10.0,
+   "MolmoBot-Img+": 13.3,
+   "MolmoBot(H=1)": 6.7,
+   "MolmoBot(H=2)": 13.3
+  }
+ },
+ "V4_table11_vs_table8": {
+  "kitchen_col_vs_table8_row": {
+   "MolmoBot(H=1)": {
+    "table11": 70.0,
+    "table8_k_of_30": 21,
+    "table8_pct": 70.0
+   },
+   "MolmoBot-Img": {
+    "table11": 86.6,
+    "table8_k_of_30": 26,
+    "table8_pct": 86.67
+   },
+   "MolmoBot-Pi0": {
+    "table11": 53.3,
+    "table8_k_of_30": 16,
+    "table8_pct": 53.33
+   },
+   "pi0.5-DROID": {
+    "table11": 63.3,
+    "table8_k_of_30": 19,
+    "table8_pct": 63.33
+   },
+   "pi0-DROID": {
+    "table11": 20.0,
+    "table8_k_of_30": 6,
+    "table8_pct": 20.0
+   }
+  },
+  "all_scene_vs_table8_total": {
+   "MolmoBot(H=1)": {
+    "table11": 79.2,
+    "table8_pct": 79.17
+   },
+   "MolmoBot-Img": {
+    "table11": 72.5,
+    "table8_pct": 72.5
+   },
+   "MolmoBot-Pi0": {
+    "table11": 46.7,
+    "table8_pct": 46.67
+   },
+   "pi0.5-DROID": {
+    "table11": 39.2,
+    "table8_pct": 39.17
+   },
+   "pi0-DROID": {
+    "table11": 9.2,
+    "table8_pct": 9.17
+   }
+  },
+  "kitchen_vs_rest": {
+   "MolmoBot(H=1)": {
+    "kitchen": [
+     21,
+     30
+    ],
+    "rest": [
+     74,
+     90
+    ],
+    "rest_pct": 82.2,
+    "fisher_p": 0.1943963007699867
+   },
+   "MolmoBot-Img": {
+    "kitchen": [
+     26,
+     30
+    ],
+    "rest": [
+     61,
+     90
+    ],
+    "rest_pct": 67.8,
+    "fisher_p": 0.05853926659466124
+   },
+   "MolmoBot-Pi0": {
+    "kitchen": [
+     16,
+     30
+    ],
+    "rest": [
+     40,
+     90
+    ],
+    "rest_pct": 44.4,
+    "fisher_p": 0.40814402506518166
+   },
+   "pi0.5-DROID": {
+    "kitchen": [
+     19,
+     30
+    ],
+    "rest": [
+     28,
+     90
+    ],
+    "rest_pct": 31.1,
+    "fisher_p": 0.002434398113941567
+   },
+   "pi0-DROID": {
+    "kitchen": [
+     6,
+     30
+    ],
+    "rest": [
+     5,
+     90
+    ],
+    "rest_pct": 5.6,
+    "fisher_p": 0.02760919765255476
+   }
+  },
+  "pi0.5_31.3_check": {
+   "env_avg_rounded_pct": {
+    "Workroom": 27,
+    "Kitchen": 63,
+    "Bedroom": 10,
+    "Office": 57
+   },
+   "mean_of_three_non_kitchen_env_avgs": 31.33,
+   "mean_of_four_env_avgs": 39.25
+  }
+ },
+ "V5_table1_avg_and_implied_n": {
+  "avg": {
+   "pi0.5": {
+    "printed": 10.0,
+    "oracle_basis": 9.971,
+    "final_basis": 8.571,
+    "matches": "oracle"
+   },
+   "pi0.5-Finetune": {
+    "printed": 36.0,
+    "oracle_basis": 36.0,
+    "final_basis": 31.829,
+    "matches": "oracle"
+   },
+   "StereoVLA": {
+    "printed": 1.7,
+    "oracle_basis": 1.714,
+    "final_basis": 1.714,
+    "matches": "oracle"
+   },
+   "LAP-VLA": {
+    "printed": 4.8,
+    "oracle_basis": 5.856,
+    "final_basis": 4.871,
+    "matches": "final"
+   },
+   "X-VLA": {
+    "printed": 1.2,
+    "oracle_basis": 1.171,
+    "final_basis": 0.986,
+    "matches": "oracle"
+   },
+   "MolmoBot-Pi0": {
+    "printed": 41.5,
+    "oracle_basis": 41.514,
+    "final_basis": 38.071,
+    "matches": "oracle"
+   },
+   "MolmoBot-Img": {
+    "printed": 61.6,
+    "oracle_basis": 61.571,
+    "final_basis": 58.7,
+    "matches": "oracle"
+   },
+   "MolmoBot(H=1)": {
+    "printed": 64.1,
+    "oracle_basis": 64.086,
+    "final_basis": 60.843,
+    "matches": "oracle"
+   },
+   "MolmoBot(H=2)": {
+    "printed": 62.4,
+    "oracle_basis": 62.371,
+    "final_basis": 58.9,
+    "matches": "oracle"
+   }
+  },
+  "implied_n": {
+   "pi0.5": {
+    "Pick v1": [
+     989
+    ],
+    "Pick v2": [
+     1023
+    ],
+    "Pick v2 (F)": [
+     977
+    ],
+    "Pick v2 RC (F)": [
+     783
+    ],
+    "PnP Into (F)": [
+     900,
+     933
+    ],
+    "PnP Next-To (F)": [
+     597,
+     619
+    ],
+    "PnP Color": [
+     992,
+     938
+    ]
+   },
+   "pi0.5-Finetune": {
+    "Pick v1": [
+     998
+    ],
+    "Pick v2": [
+     994
+    ],
+    "Pick v2 (F)": [
+     1009
+    ],
+    "Pick v2 RC (F)": [
+     954
+    ],
+    "PnP Into (F)": [
+     262,
+     267
+    ],
+    "PnP Next-To (F)": [
+     763,
+     771
+    ],
+    "PnP Color": [
+     998,
+     1014
+    ]
+   },
+   "StereoVLA": {
+    "Pick v1": [
+     350
+    ],
+    "Pick v2": [
+     703
+    ],
+    "Pick v2 (F)": [
+     418
+    ]
+   },
+   "LAP-VLA": {
+    "Pick v1": [
+     1043
+    ],
+    "Pick v2": [
+     900
+    ],
+    "Pick v2 (F)": [
+     954
+    ],
+    "Pick v2 RC (F)": [
+     1009
+    ],
+    "PnP Into (F)": [
+     626,
+     601
+    ],
+    "PnP Next-To (F)": [
+     297,
+     287
+    ],
+    "PnP Color": [
+     954,
+     887
+    ]
+   },
+   "X-VLA": {
+    "Pick v1": [
+     1226
+    ],
+    "Pick v2": [
+     764
+    ],
+    "Pick v2 (F)": [
+     1068
+    ],
+    "Pick v2 RC (F)": [
+     1219
+    ],
+    "PnP Into (F)": [
+     959,
+     959
+    ],
+    "PnP Next-To (F)": [
+     884,
+     776
+    ],
+    "PnP Color": [
+     952,
+     764
+    ]
+   },
+   "MolmoBot-Pi0": {
+    "Pick v1": [
+     1022
+    ],
+    "Pick v2": [
+     980
+    ],
+    "Pick v2 (F)": [
+     1015
+    ],
+    "Pick v2 RC (F)": [
+     958
+    ],
+    "PnP Into (F)": [
+     988,
+     944
+    ],
+    "PnP Next-To (F)": [
+     698,
+     709
+    ],
+    "PnP Color": [
+     994,
+     959
+    ]
+   },
+   "MolmoBot-Img": {
+    "Pick v1": [
+     956
+    ],
+    "Pick v2": [
+     989
+    ],
+    "Pick v2 (F)": [
+     1012
+    ],
+    "Pick v2 RC (F)": [
+     1005
+    ],
+    "PnP Into (F)": [
+     995,
+     989
+    ],
+    "PnP Next-To (F)": [
+     1020,
+     996
+    ],
+    "PnP Color": [
+     997,
+     1022
+    ]
+   },
+   "MolmoBot(H=1)": {
+    "Pick v1": [
+     1038
+    ],
+    "Pick v2": [
+     1013
+    ],
+    "Pick v2 (F)": [
+     983
+    ],
+    "Pick v2 RC (F)": [
+     987
+    ],
+    "PnP Into (F)": [
+     1019,
+     1042
+    ],
+    "PnP Next-To (F)": [
+     1024,
+     991
+    ],
+    "PnP Color": [
+     997,
+     1024
+    ]
+   },
+   "MolmoBot(H=2)": {
+    "Pick v1": [
+     942
+    ],
+    "Pick v2": [
+     986
+    ],
+    "Pick v2 (F)": [
+     1032
+    ],
+    "Pick v2 RC (F)": [
+     998
+    ],
+    "PnP Into (F)": [
+     1034,
+     987
+    ],
+    "PnP Next-To (F)": [
+     994,
+     994
+    ],
+    "PnP Color": [
+     1024,
+     978
+    ]
+   }
+  }
+ },
+ "V6_integer_feasibility": {
+  "3.81": {
+   "n=1000": [],
+   "n=200": [],
+   "n_in_[50,1000]_count": 50,
+   "n_in_[580,660]": [
+    603,
+    604,
+    630,
+    656,
+    657
+   ],
+   "n_in_[270,320]": [
+    289,
+    315
+   ]
+  },
+  "1.59": {
+   "n=1000": [],
+   "n=200": [],
+   "n_in_[50,1000]_count": 49,
+   "n_in_[580,660]": [
+    627,
+    628,
+    629,
+    630
+   ],
+   "n_in_[270,320]": [
+    314,
+    315
+   ]
+  },
+  "6.48": {
+   "n=1000": [],
+   "n=200": [],
+   "n_in_[50,1000]_count": 47,
+   "n_in_[580,660]": [
+    586,
+    602,
+    617,
+    633,
+    648
+   ],
+   "n_in_[270,320]": [
+    293
+   ]
+  },
+  "3.41": {
+   "n=1000": [],
+   "n=200": [],
+   "n_in_[50,1000]_count": 52,
+   "n_in_[580,660]": [
+    586,
+    587,
+    615,
+    616,
+    645,
+    646
+   ],
+   "n_in_[270,320]": [
+    293
+   ]
+  },
+  "n200_feasible_pick_v2_row_values": {
+   "pi0.5": [
+    6.4
+   ],
+   "pi0.5-Finetune": [
+    28.3,
+    25.8,
+    29.7
+   ],
+   "StereoVLA": [
+    4.3,
+    1.1
+   ],
+   "LAP-VLA": [
+    2.4,
+    3.1,
+    2.7
+   ],
+   "X-VLA": [
+    0.7,
+    0.8
+   ],
+   "MolmoBot-Pi0": [
+    35.7,
+    33.3,
+    39.8
+   ],
+   "MolmoBot-Img": [
+    61.4,
+    62.1
+   ],
+   "MolmoBot(H=1)": [
+    66.8,
+    63.7
+   ],
+   "MolmoBot(H=2)": [
+    63.8,
+    62.7
+   ]
+  },
+  "StereoVLA_filtered": {
+   "Pick v2 4.3 at n=92": [
+    4
+   ],
+   "Pick v2 (F) 1.1 at n=91": [
+    1
+   ],
+   "reported_halfwidths": {
+    "4.3": 1.5,
+    "1.1": 1.0
+   },
+   "wilson_halfwidth_n92_k4": 4.5,
+   "wilson_halfwidth_n91_k1": 2.9
+  },
+  "joint_feasible_n_from_two_values": {
+   "LAP-VLA PnP Into (3.81, 1.59), n in [550,700]": [
+    630
+   ],
+   "LAP-VLA PnP Next-To (6.48, 3.41), n in [250,340]": [
+    293
+   ],
+   "pi0.5-Finetune PnP Into (43.5, 37.4), n in [240,290]": [
+    246,
+    262,
+    278
+   ]
+  }
+ },
+ "V7_table1_pairs_n1000_assumed": {
+  "Pick v1: MolmoBot(H=1) vs MolmoBot-Img": {
+   "diff_pp": 1.3,
+   "p_assuming_n1000": 0.25923734598405224
+  },
+  "Pick v1: MolmoBot(H=2) vs MolmoBot-Img": {
+   "diff_pp": -0.9,
+   "p_assuming_n1000": 0.4644911124867681
+  },
+  "Pick v1: MolmoBot-Pi0 vs pi0.5-Finetune": {
+   "diff_pp": 18.2,
+   "p_assuming_n1000": 2.220446049250313e-16
+  },
+  "Pick v1: MolmoBot-Img vs MolmoBot-Pi0": {
+   "diff_pp": 26.0,
+   "p_assuming_n1000": 0.0
+  },
+  "Pick v2: MolmoBot(H=1) vs MolmoBot-Img": {
+   "diff_pp": 3.3,
+   "p_assuming_n1000": 0.12147697458073892
+  },
+  "Pick v2: MolmoBot(H=2) vs MolmoBot-Img": {
+   "diff_pp": 0.3,
+   "p_assuming_n1000": 0.8890853468922166
+  },
+  "Pick v2: MolmoBot-Pi0 vs pi0.5-Finetune": {
+   "diff_pp": 7.4,
+   "p_assuming_n1000": 0.0003893295768981897
+  },
+  "Pick v2: MolmoBot-Img vs MolmoBot-Pi0": {
+   "diff_pp": 27.8,
+   "p_assuming_n1000": 0.0
+  },
+  "Pick v2 (F): MolmoBot(H=1) vs MolmoBot-Img": {
+   "diff_pp": 2.6,
+   "p_assuming_n1000": 0.2292930830620059
+  },
+  "Pick v2 (F): MolmoBot(H=2) vs MolmoBot-Img": {
+   "diff_pp": -2.4,
+   "p_assuming_n1000": 0.27291763936983804
+  },
+  "Pick v2 (F): MolmoBot-Pi0 vs pi0.5-Finetune": {
+   "diff_pp": 7.5,
+   "p_assuming_n1000": 0.00023730065599214534
+  },
+  "Pick v2 (F): MolmoBot-Img vs MolmoBot-Pi0": {
+   "diff_pp": 28.1,
+   "p_assuming_n1000": 0.0
+  },
+  "Pick v2 RC (F): MolmoBot(H=1) vs MolmoBot-Img": {
+   "diff_pp": 1.6,
+   "p_assuming_n1000": 0.45892669992241153
+  },
+  "Pick v2 RC (F): MolmoBot(H=2) vs MolmoBot-Img": {
+   "diff_pp": 0.6,
+   "p_assuming_n1000": 0.7817946678083809
+  },
+  "Pick v2 RC (F): MolmoBot-Pi0 vs pi0.5-Finetune": {
+   "diff_pp": 10.1,
+   "p_assuming_n1000": 2.1073999221243866e-06
+  },
+  "Pick v2 RC (F): MolmoBot-Img vs MolmoBot-Pi0": {
+   "diff_pp": 22.3,
+   "p_assuming_n1000": 0.0
+  },
+  "PnP Into (F): MolmoBot(H=1) vs MolmoBot-Img": {
+   "diff_pp": 3.4,
+   "p_assuming_n1000": 0.11164730033451042
+  },
+  "PnP Into (F): MolmoBot(H=2) vs MolmoBot-Img": {
+   "diff_pp": 2.4,
+   "p_assuming_n1000": 0.26296742732129275
+  },
+  "PnP Into (F): MolmoBot-Pi0 vs pi0.5-Finetune": {
+   "diff_pp": 1.2,
+   "p_assuming_n1000": 0.5888991504143732
+  },
+  "PnP Into (F): MolmoBot-Img vs MolmoBot-Pi0": {
+   "diff_pp": 18.3,
+   "p_assuming_n1000": 2.220446049250313e-16
+  },
+  "PnP Next-To (F): MolmoBot(H=1) vs MolmoBot-Img": {
+   "diff_pp": 5.4,
+   "p_assuming_n1000": 0.004518388121364625
+  },
+  "PnP Next-To (F): MolmoBot(H=2) vs MolmoBot-Img": {
+   "diff_pp": 7.3,
+   "p_assuming_n1000": 0.000152143292307505
+  },
+  "PnP Next-To (F): MolmoBot-Pi0 vs pi0.5-Finetune": {
+   "diff_pp": -3.7,
+   "p_assuming_n1000": 0.06099647679444087
+  },
+  "PnP Next-To (F): MolmoBot-Img vs MolmoBot-Pi0": {
+   "diff_pp": -3.7,
+   "p_assuming_n1000": 0.04878150038218276
+  },
+  "PnP Color: MolmoBot(H=1) vs MolmoBot-Img": {
+   "diff_pp": 0.0,
+   "p_assuming_n1000": 1.0
+  },
+  "PnP Color: MolmoBot(H=2) vs MolmoBot-Img": {
+   "diff_pp": -1.7,
+   "p_assuming_n1000": 0.4190246694599553
+  },
+  "PnP Color: MolmoBot-Pi0 vs pi0.5-Finetune": {
+   "diff_pp": -2.1,
+   "p_assuming_n1000": 0.34692411153600045
+  },
+  "PnP Color: MolmoBot-Img vs MolmoBot-Pi0": {
+   "diff_pp": 21.6,
+   "p_assuming_n1000": 0.0
+  }
+ },
+ "V8_text_vs_table": {
+  "C.3 'pi0.5 zero-shot avg 10.1' vs table 10.0 (oracle-basis recomputed 9.971)": true,
+  "C.3 'MolmoBot-Pi0 41.8' vs table 41.5 (recomputed 41.514)": true,
+  "C.3 'Pick v2 RC: our models 40-66%' vs table row (min, max over MolmoBot rows)": [
+   39.8,
+   63.7
+  ],
+  "C.3 'pi0.5 variants reach only 8-30%' vs rows": [
+   8.0,
+   29.7
+  ],
+  "C.3 'MolmoBot 63-67% oracle on PnP Into' vs rows (H=1,H=2,Img)": [
+   63.0,
+   66.4,
+   65.4
+  ],
+  "abstract/intro MolmoBot-Pi0 46.5% vs Table 8 total": 46.67,
+  "C.3 'pi0.5 31.3% real' vs Table 8 total": 39.17
+ },
+ "V9_table3_dataset_and_throughput": {
+  "rows": [
+   {
+    "task": "Door-open",
+    "robot": "RBY1",
+    "hours_from_ep_len": 430.1,
+    "hours_printed": 429,
+    "implied_fps": 9.9
+   },
+   {
+    "task": "Open",
+    "robot": "RBY1",
+    "hours_from_ep_len": 191.6,
+    "hours_printed": 192,
+    "implied_fps": 10.0
+   },
+   {
+    "task": "Pick",
+    "robot": "RBY1",
+    "hours_from_ep_len": 185.2,
+    "hours_printed": 184,
+    "implied_fps": 11.1
+   },
+   {
+    "task": "Pick",
+    "robot": "Franka",
+    "hours_from_ep_len": 1042.4,
+    "hours_printed": 1042,
+    "implied_fps": 15.2
+   },
+   {
+    "task": "PnP",
+    "robot": "RBY1",
+    "hours_from_ep_len": 57.6,
+    "hours_printed": 58,
+    "implied_fps": 11.6
+   },
+   {
+    "task": "PnP",
+    "robot": "Franka",
+    "hours_from_ep_len": 2632.4,
+    "hours_printed": 2638,
+    "implied_fps": 15.2
+   },
+   {
+    "task": "PnP Next-To",
+    "robot": "Franka",
+    "hours_from_ep_len": 1020.1,
+    "hours_printed": 1022,
+    "implied_fps": 14.9
+   },
+   {
+    "task": "PnP Color",
+    "robot": "Franka",
+    "hours_from_ep_len": 138.2,
+    "hours_printed": 138,
+    "implied_fps": 15.1
+   }
+  ],
+  "sum_episodes_k": 1750.0,
+  "sum_hours": 5703,
+  "sum_frames_M_v2": 295.1,
+  "avg_len_s_from_sums": 11.73,
+  "printed_total": {
+   "episodes": "1.7M",
+   "hours": 5704,
+   "avg_len_s": 11.7,
+   "frames_M_v2": 295.2
+  },
+  "hf_dataset_storage_TB": 8.87,
+  "paper_says_TB_of_robot_experience": 12,
+  "throughput": {
+   "robot_hours_per_wall_hour_avg": 84.5,
+   "robot_hours_per_wall_hour_peak": 214.5,
+   "paper_says": ">88",
+   "eps_per_gpu_h_implied_by_88": 270.8,
+   "gpu_hours_if_260": 6731,
+   "gpu_hours_if_660": 2652,
+   "paper_gpu_hours": 6500,
+   "episodes_per_gpu_h_implied_by_6500": 269.2,
+   "v2_text_660_per_gpu_h_gives_robot_h_per_wall_h": 214.5,
+   "v1": {
+    "eps_per_gpu_h": 1024,
+    "robot_h_per_wall_h_printed": 130,
+    "gpu_hours": 4500,
+    "episodes_M": 1.8,
+    "robot_h_per_wall_h_from_1024": 335.6,
+    "eps_per_gpu_h_implied_by_130": 396.6,
+    "episodes_per_gpu_h_from_1.8M_over_4500": 400.0
+   },
+   "speedup_vs_human_realtime_1_over_3": {
+    "v3_88_over_100/3": 2.64,
+    "paper": 2.6,
+    "v1_130_over_100/3": 3.9,
+    "v1_paper": 4
+   },
+   "cost_per_traj_0.01-0.02_to_per_robot_hour": [
+    3.08,
+    6.15
+   ],
+   "paper_cost_per_robot_hour": [
+    2,
+    5
+   ],
+   "gpu_hour_price_implied_by_0.01-0.02_at_260": [
+    2.6,
+    5.2
+   ]
+  },
+  "v1_vs_v2_table": {
+   "v1": {
+    "episodes_k": [
+     99.3,
+     46.6,
+     62.7,
+     781.8,
+     14.8,
+     554.2,
+     182.7,
+     28.6
+    ],
+    "sum_k": 1770.7,
+    "hours_printed_total": 5817
+   },
+   "v3_door_open_drop_pct": -20.4
+  }
+ },
+ "V10_table11_12_13_14": {
+  "table12_k_of_30": {
+   "MolmoBot-Img": 23,
+   "MolmoBot-Img+": 25,
+   "MolmoBot(H=1)": 27,
+   "MolmoBot(H=2)": 23
+  },
+  "pct": {
+   "MolmoBot-Img": 76.7,
+   "MolmoBot-Img+": 83.3,
+   "MolmoBot(H=1)": 90.0,
+   "MolmoBot(H=2)": 76.7
+  },
+  "pairs": {
+   "MolmoBot(H=1) vs MolmoBot-Img+": 0.7064691994252865,
+   "MolmoBot(H=1) vs MolmoBot-Img": 0.29897938215686065,
+   "MolmoBot-Img+ vs MolmoBot-Img": 0.7480497930241055,
+   "MolmoBot(H=1) vs MolmoBot(H=2)": 0.29897938215686065
+  },
+  "table11_truncation": {
+   "86.6 vs 26/30": 86.67,
+   "36.6 vs 11/30": 36.67
+  },
+  "table14_avg": {
+   "MolmoBot-Img": {
+    "std": 8.0,
+    "nodist": 36.6,
+    "printed": [
+     8,
+     36.6
+    ]
+   },
+   "MolmoBot-Pi0": {
+    "std": 0.8,
+    "nodist": 3.8,
+    "printed": [
+     0.8,
+     3.8
+    ]
+   },
+   "pi0.5-DROID": {
+    "std": 1.0,
+    "nodist": 2.4,
+    "printed": [
+     1,
+     2.4
+    ]
+   },
+   "pi0-DROID": {
+    "std": 0.0,
+    "nodist": 0.2,
+    "printed": [
+     0,
+     0.2
+    ]
+   }
+  },
+  "table14_all_even_multiples_of_2": true,
+  "table14_img_vs_pi0_nodist_n500_assumed": 3.529204680240153e-42,
+  "table13_carrot_45.8_is_k_over_24": [
+   11
+  ]
+ },
+ "V11_figures_5_8_read": {
+  "note": "그림에서 읽은 근사값(±3 pp). 시행 수는 5.3절의 6개 물체 x 5회 = 30 가정, C.6의 3 그룹 x 3 물체 x 5회 = 45도 병기",
+  "tests": {
+   "a_trajectories_real: 10k vs 25k": {
+    "n=30": {
+     "k": [
+      7,
+      16
+     ],
+     "fisher_p": 0.032594202939933606
+    },
+    "n=45": {
+     "k": [
+      10,
+      24
+     ],
+     "fisher_p": 0.004368824909442259
+    }
+   },
+   "a_trajectories_real: 10k vs 50k": {
+    "n=30": {
+     "k": [
+      7,
+      24
+     ],
+     "fisher_p": 2.2672724439932294e-05
+    },
+    "n=45": {
+     "k": [
+      10,
+      36
+     ],
+     "fisher_p": 5.962772654103446e-08
+    }
+   },
+   "a_trajectories_real: 25k vs 50k": {
+    "n=30": {
+     "k": [
+      16,
+      24
+     ],
+     "fisher_p": 0.05389720578282903
+    },
+    "n=45": {
+     "k": [
+      24,
+      36
+     ],
+     "fisher_p": 0.013231439110622958
+    }
+   },
+   "b_object_classes_real: 10 vs 25": {
+    "n=30": {
+     "k": [
+      8,
+      20
+     ],
+     "fisher_p": 0.004025455501528387
+    },
+    "n=45": {
+     "k": [
+      11,
+      30
+     ],
+     "fisher_p": 0.00011242726913889204
+    }
+   },
+   "b_object_classes_real: 10 vs 50": {
+    "n=30": {
+     "k": [
+      8,
+      19
+     ],
+     "fisher_p": 0.008869577361950338
+    },
+    "n=45": {
+     "k": [
+      11,
+      29
+     ],
+     "fisher_p": 0.0002615239739455521
+    }
+   },
+   "b_object_classes_real: 10 vs 100": {
+    "n=30": {
+     "k": [
+      8,
+      18
+     ],
+     "fisher_p": 0.018243850221470598
+    },
+    "n=45": {
+     "k": [
+      11,
+      27
+     ],
+     "fisher_p": 0.0012261736571937709
+    }
+   },
+   "b_object_classes_real: 25 vs 50": {
+    "n=30": {
+     "k": [
+      20,
+      19
+     ],
+     "fisher_p": 1.0
+    },
+    "n=45": {
+     "k": [
+      30,
+      29
+     ],
+     "fisher_p": 1.0
+    }
+   },
+   "b_object_classes_real: 25 vs 100": {
+    "n=30": {
+     "k": [
+      20,
+      18
+     ],
+     "fisher_p": 0.789170351739782
+    },
+    "n=45": {
+     "k": [
+      30,
+      27
+     ],
+     "fisher_p": 0.6621067958174462
+    }
+   },
+   "b_object_classes_real: 50 vs 100": {
+    "n=30": {
+     "k": [
+      19,
+      18
+     ],
+     "fisher_p": 1.0
+    },
+    "n=45": {
+     "k": [
+      29,
+      27
+     ],
+     "fisher_p": 0.8280894224334377
+    }
+   },
+   "c_environments_real: 50 vs 100": {
+    "n=30": {
+     "k": [
+      21,
+      21
+     ],
+     "fisher_p": 1.0
+    },
+    "n=45": {
+     "k": [
+      32,
+      32
+     ],
+     "fisher_p": 1.0
+    }
+   },
+   "c_environments_real: 50 vs 5k": {
+    "n=30": {
+     "k": [
+      21,
+      24
+     ],
+     "fisher_p": 0.5520034313650507
+    },
+    "n=45": {
+     "k": [
+      32,
+      36
+     ],
+     "fisher_p": 0.46239247636895486
+    }
+   },
+   "c_environments_real: 50 vs 50k": {
+    "n=30": {
+     "k": [
+      21,
+      19
+     ],
+     "fisher_p": 0.7846525735627771
+    },
+    "n=45": {
+     "k": [
+      32,
+      28
+     ],
+     "fisher_p": 0.5027128624665368
+    }
+   },
+   "c_environments_real: 100 vs 5k": {
+    "n=30": {
+     "k": [
+      21,
+      24
+     ],
+     "fisher_p": 0.5520034313650507
+    },
+    "n=45": {
+     "k": [
+      32,
+      36
+     ],
+     "fisher_p": 0.46239247636895486
+    }
+   },
+   "c_environments_real: 100 vs 50k": {
+    "n=30": {
+     "k": [
+      21,
+      19
+     ],
+     "fisher_p": 0.7846525735627771
+    },
+    "n=45": {
+     "k": [
+      32,
+      28
+     ],
+     "fisher_p": 0.5027128624665368
+    }
+   },
+   "c_environments_real: 5k vs 50k": {
+    "n=30": {
+     "k": [
+      24,
+      19
+     ],
+     "fisher_p": 0.25156918928788474
+    },
+    "n=45": {
+     "k": [
+      36,
+      28
+     ],
+     "fisher_p": 0.10257932383805896
+    }
+   }
+  },
+  "min_detectable_diff_pp_80power": {
+   "n=30,p0=0.5": 34.0,
+   "n=30,p0=0.7": 27.0,
+   "n=45,p0=0.5": 28.0,
+   "n=45,p0=0.7": 23.0
+  },
+  "fig8_real_n30": {
+   "delta_vs_absolute": 0.032594202939933606,
+   "T4_vs_T8": 0.3985089768298216,
+   "k": {
+    "delta": 14,
+    "absolute": 23,
+    "T4": 23,
+    "T8": 19
+   }
+  },
+  "same_config_points_real": {
+   "fig5b_100classes": 60,
+   "fig5c_50k_env": 63,
+   "fig8a_T8": 63
+  },
+  "same_config_points_sim": {
+   "fig5b_100classes": 37,
+   "fig5c_50k_env": 38,
+   "fig8a_T8": 38
+  },
+  "fig5a_50k_vs_fig5c_5k_real": {
+   "fig5a_50k": 80,
+   "fig5c_5k_env": 80
+  }
+ },
+ "V12_sim_real_rank": {
+  "pickv1_sim_vs_allscene_real": {
+   "n": 6,
+   "spearman": 0.943,
+   "exact_perm_p": 0.0167,
+   "pearson": 0.932,
+   "pearson_p": 0.0068,
+   "models": [
+    "pi0-DROID",
+    "pi0.5-DROID",
+    "MolmoBot-Pi0",
+    "MolmoBot-Img",
+    "MolmoBot(H=1)",
+    "MolmoBot(H=2)"
+   ]
+  },
+  "avg_sim_vs_allscene_real": {
+   "n": 5,
+   "spearman": 1.0,
+   "exact_perm_p": 0.0167,
+   "pearson": 0.934,
+   "pearson_p": 0.0203,
+   "models": [
+    "pi0.5-DROID",
+    "MolmoBot-Pi0",
+    "MolmoBot-Img",
+    "MolmoBot(H=1)",
+    "MolmoBot(H=2)"
+   ]
+  },
+  "pickv1_sim_vs_kitchen_real": {
+   "n": 7,
+   "spearman": 0.75,
+   "exact_perm_p": 0.0663,
+   "pearson": 0.656,
+   "pearson_p": 0.1093,
+   "models": [
+    "pi0-DROID",
+    "pi0.5-DROID",
+    "MolmoBot-Pi0",
+    "MolmoBot-Img",
+    "MolmoBot(H=1)",
+    "MolmoBot(H=2)",
+    "MolmoBot-SPOC"
+   ]
+  }
+ },
+ "V13_rby1": {
+  "assumed_n_v1_text": {
+   "Pick": 2000,
+   "PnP Into": 1000,
+   "Open": 2000,
+   "Open (Door)": 2000
+  },
+  "wilson_halfwidth_pp": {
+   "MB Multitask": [
+    2.2,
+    2.6,
+    1.9,
+    2.0
+   ],
+   "MB Door": [
+    null,
+    null,
+    null,
+    1.8
+   ],
+   "MB-SPOC Rigid": [
+    1.3,
+    0.8,
+    null,
+    null
+   ],
+   "MB-SPOC Artic.": [
+    null,
+    null,
+    1.8,
+    2.2
+   ]
+  },
+  "pairs": {
+   "Door: Door specialist 77.7 vs Multitask 70.2 (n=2000 each)": 6.529332097215956e-08,
+   "Open: Multitask 25.2 vs SPOC Artic 21.8 (n=2000 each)": 0.011219215138935201,
+   "Door: Multitask 70.2 vs SPOC Artic 58.8": 4.929390229335695e-14
+  },
+  "table9": {
+   "grasp": 4,
+   "opened": 2,
+   "n": 9,
+   "wilson_grasp": [
+    18.9,
+    73.3
+   ],
+   "wilson_open": [
+    6.3,
+    54.7
+   ],
+   "door2_vs_others_grasp_fisher": 0.04761904761904762,
+   "hw_fault_trials": 6
+  }
+ },
+ "V14_spoc_params": {
+  "dim": 512,
+  "layers": 24,
+  "swiglu_hidden": 1536,
+  "per_block_params": 4456448,
+  "decoder_total_M": 107.0,
+  "paper_trainable_M": 108,
+  "code_docstring_M": 150,
+  "note": "교차 주의가 모든 블록에 있다고 가정한 추정(norm, 임베딩, 병렬 디코더 제외)"
+ },
+ "V15_mixtures": {
+  "table5_sum": 100,
+  "table6_rows_sum": [
+   100,
+   100,
+   100,
+   100
+  ],
+  "readme_rates_sum": 1.0,
+  "task_horizon_steps_at_66ms_s": [
+   20.0,
+   40.0
+  ],
+  "task_horizon_steps_at_200ms_s": [
+   60.6,
+   121.2
+  ],
+  "rby1_horizon_400_at_100ms_s": 40.0
+ },
+ "V17_samples_vs_frames": {
+  "samples_total": 204800000,
+  "multiframe_extra_samples": 51200000,
+  "per_task_samples_over_frames": {
+   "Pick": 0.72,
+   "PnP": 0.64,
+   "Next-To": 0.75,
+   "Color": 4.1
+  },
+  "franka_frames_total_M": 263.0,
+  "overall_samples_over_franka_frames": 0.78,
+  "note": "README의 part 선택이 전체의 일부면 비율은 더 커진다. v2 표 1의 프레임 수 기준"
+ }
+}
