@@ -1,0 +1,598 @@
+{
+ "V1_policy_means": {
+  "pi0_fast_droid": {
+   "n": 1168,
+   "mean": 0.4554,
+   "sd": 0.3511,
+   "table3": 0.455,
+   "diff3": 0.0,
+   "table1": 0.459,
+   "diff1": -0.0036
+  },
+  "paligemma_fast_droid": {
+   "n": 1387,
+   "mean": 0.4317,
+   "sd": 0.3311,
+   "table3": 0.432,
+   "diff3": 0.0,
+   "table1": 0.43,
+   "diff1": 0.0017
+  },
+  "paligemma_fast_specialist_droid": {
+   "n": 1392,
+   "mean": 0.4285,
+   "sd": 0.3294,
+   "table3": 0.429,
+   "diff3": 0.0,
+   "table1": 0.428,
+   "diff1": 0.0005
+  },
+  "paligemma_vq_droid": {
+   "n": 1198,
+   "mean": 0.4176,
+   "sd": 0.3329,
+   "table3": 0.418,
+   "diff3": 0.0,
+   "table1": 0.419,
+   "diff1": -0.0014
+  },
+  "paligemma_diffusion_droid": {
+   "n": 1171,
+   "mean": 0.4044,
+   "sd": 0.3151,
+   "table3": 0.404,
+   "diff3": 0.0,
+   "table1": 0.403,
+   "diff1": 0.0014
+  },
+  "pi0_droid": {
+   "n": 1431,
+   "mean": 0.351,
+   "sd": 0.3086,
+   "table3": 0.351,
+   "diff3": 0.0,
+   "table1": 0.35,
+   "diff1": 0.001
+  },
+  "paligemma_binning_droid": {
+   "n": 1068,
+   "mean": 0.0474,
+   "sd": 0.1576,
+   "table3": 0.047,
+   "diff3": 0.0,
+   "table1": 0.051,
+   "diff1": -0.0036
+  },
+  "dreaming_zebra": {
+   "n": 58,
+   "mean": 0.6059,
+   "sd": 0.3568,
+   "table3": 0.606,
+   "diff3": 0.0,
+   "table1": null,
+   "diff1": null
+  },
+  "floppy_bagel_195k_temp1p0": {
+   "n": 8,
+   "mean": 0.4788,
+   "sd": 0.3083,
+   "table3": 0.479,
+   "diff3": 0.0,
+   "table1": null,
+   "diff1": null
+  },
+  "floppy_bagel_525k_temp1p0": {
+   "n": 33,
+   "mean": 0.3797,
+   "sd": 0.3314,
+   "table3": 0.38,
+   "diff3": 0.0,
+   "table1": null,
+   "diff1": null
+  },
+  "dam": {
+   "n": 60,
+   "mean": 0.3368,
+   "sd": 0.252,
+   "table3": 0.337,
+   "diff3": 0.0,
+   "table1": null,
+   "diff1": null
+  },
+  "floppy_bagel_420k": {
+   "n": 29,
+   "mean": 0.3259,
+   "sd": 0.2576,
+   "table3": 0.326,
+   "diff3": 0.0,
+   "table1": null,
+   "diff1": null
+  },
+  "floppy_bagel_285k_temp1p0": {
+   "n": 12,
+   "mean": 0.4417,
+   "sd": 0.3197,
+   "table3": 0.442,
+   "diff3": 0.0,
+   "table1": null,
+   "diff1": null
+  },
+  "floppy_bagel_90k_temp1p0": {
+   "n": 10,
+   "mean": 0.291,
+   "sd": 0.1875,
+   "table3": 0.291,
+   "diff3": 0.0,
+   "table1": null,
+   "diff1": null
+  }
+ },
+ "V1_total_trials_14_policies": 9025,
+ "V2_wm_real_r": {
+  "A-F": 0.017,
+  "A-G": 0.813,
+  "spearman_A-F": -0.2,
+  "spearman_A-G": 0.25,
+  "paper": {
+   "A-F": 0.05
+  }
+ },
+ "V3_alpha_allocation_7pol_wm": {
+  "0": {
+   "alpha_max": 0.0048,
+   "alpha_min": 0.0048,
+   "ratio": 1.0
+  },
+  "1": {
+   "alpha_max": 0.0068,
+   "alpha_min": 0.0039,
+   "ratio": 1.76
+  },
+  "10": {
+   "alpha_max": 0.0493,
+   "alpha_min": 0.0002,
+   "ratio": 277.27
+  }
+ },
+ "V3_K": 21,
+ "V3_sampling_weight_ratio_alpha_0.1_vs_0.01": {
+  "paper_exp_alpha": 1.094,
+  "code_exp2alpha_minus1": 10.96
+ },
+ "V4_fixed_welch_holm": {
+  "4pol_300each": {
+   "n_each": 300,
+   "K": 6,
+   "decided": 6,
+   "undecided": []
+  },
+  "4pol_all": {
+   "n_each": 1000000,
+   "K": 6,
+   "decided": 6,
+   "undecided": []
+  },
+  "7pol_730each": {
+   "n_each": 730,
+   "K": 21,
+   "decided": 12,
+   "undecided": [
+    "pi0_fast_d|paligemma_",
+    "pi0_fast_d|paligemma_",
+    "pi0_fast_d|paligemma_",
+    "paligemma_|paligemma_",
+    "paligemma_|paligemma_",
+    "paligemma_|paligemma_",
+    "paligemma_|paligemma_",
+    "paligemma_|paligemma_",
+    "paligemma_|paligemma_"
+   ]
+  },
+  "7pol_all": {
+   "n_each": 1000000,
+   "K": 21,
+   "decided": 13,
+   "undecided": [
+    "pi0_fast_d|paligemma_",
+    "pi0_fast_d|paligemma_",
+    "paligemma_|paligemma_",
+    "paligemma_|paligemma_",
+    "paligemma_|paligemma_",
+    "paligemma_|paligemma_",
+    "paligemma_|paligemma_",
+    "paligemma_|paligemma_"
+   ]
+  }
+ },
+ "V5_table2_N500": {
+  "5": {
+   "K": 10,
+   "K_check": 10,
+   "reduction_pct": 5.8,
+   "rej_any": 9,
+   "rej_bon": 9
+  },
+  "10": {
+   "K": 45,
+   "K_check": 45,
+   "reduction_pct": 13.1,
+   "rej_any": 44,
+   "rej_bon": 43
+  },
+  "15": {
+   "K": 105,
+   "K_check": 105,
+   "reduction_pct": 0.5,
+   "rej_any": 98,
+   "rej_bon": 93
+  },
+  "20": {
+   "K": 190,
+   "K_check": 190,
+   "reduction_pct": 1.6,
+   "rej_any": 182,
+   "rej_bon": 175
+  }
+ },
+ "V5_table2_N5000_reduction_pct(Bonferroni 값은 하한 '>' 표기: 최소 감소율)": {
+  "5": 7.7,
+  "10": 37.2,
+  "15": 9.5,
+  "20": 9.5
+ },
+ "V6_binom_5of6_vs_0.05": 1.7968750000000005e-06,
+ "V6_HO_I_error_9of200_wilson": [
+  0.0239,
+  0.0833
+ ],
+ "V6_counterexample_win_prob": {
+  "p2_beats_p3": 0.7,
+  "p2_beats_p1": 0.489,
+  "p2_ties_p1": 0.421,
+  "p3_beats_p1": 0.699
+ },
+ "V7_R3": {
+  "anyrank_204_vs_195_rel_pct": 4.4,
+  "vs_188": 7.8
+ },
+ "V8_table3_comparisons_sum": 6568,
+ "V8_pref_rows_per_policy_data2": {
+  "pi0_fast_droid": 739,
+  "paligemma_fast_droid": 951,
+  "paligemma_fast_specialist_droid": 953,
+  "paligemma_vq_droid": 762,
+  "paligemma_diffusion_droid": 751,
+  "pi0_droid": 1009
+ },
+ "V9_lbm_fixed_batch": {
+  "experiment_A": {
+   "n": [
+    50,
+    50,
+    50
+   ],
+   "rates": {
+    "LBM finetuned": 0.34,
+    "LBM zeroshot": 0.14,
+    "Single Task": 0.12
+   },
+   "wilson": {
+    "LBM finetuned": [
+     0.2244,
+     0.4785
+    ],
+    "LBM zeroshot": [
+     0.0695,
+     0.2619
+    ],
+    "Single Task": [
+     0.0562,
+     0.238
+    ]
+   },
+   "fisher_p": {
+    "LBM finetuned|LBM zeroshot": 0.0338,
+    "LBM finetuned|Single Task": 0.0163,
+    "LBM zeroshot|Single Task": 1.0
+   },
+   "holm_decided": 2,
+   "K": 3
+  },
+  "experiment_B_DistShift": {
+   "n": [
+    50,
+    50,
+    50
+   ],
+   "rates": {
+    "LBM finetuned (DistShift)": 0.1,
+    "LBM zeroshot (DistShift)": 0.1,
+    "Single Task (DistShift)": 0.06
+   },
+   "wilson": {
+    "LBM finetuned (DistShift)": [
+     0.0435,
+     0.2136
+    ],
+    "LBM zeroshot (DistShift)": [
+     0.0435,
+     0.2136
+    ],
+    "Single Task (DistShift)": [
+     0.0206,
+     0.1622
+    ]
+   },
+   "fisher_p": {
+    "LBM finetuned (DistShift)|LBM zeroshot (DistShift)": 1.0,
+    "LBM finetuned (DistShift)|Single Task (DistShift)": 0.715,
+    "LBM zeroshot (DistShift)|Single Task (DistShift)": 0.715
+   },
+   "holm_decided": 0,
+   "K": 3
+  },
+  "experiment_B_Nominal": {
+   "n": [
+    50,
+    50,
+    50
+   ],
+   "rates": {
+    "LBM finetuned (Nominal)": 0.88,
+    "LBM zeroshot (Nominal)": 0.56,
+    "Single Task (Nominal)": 0.84
+   },
+   "wilson": {
+    "LBM finetuned (Nominal)": [
+     0.762,
+     0.9438
+    ],
+    "LBM zeroshot (Nominal)": [
+     0.4231,
+     0.6884
+    ],
+    "Single Task (Nominal)": [
+     0.7149,
+     0.9166
+    ]
+   },
+   "fisher_p": {
+    "LBM finetuned (Nominal)|LBM zeroshot (Nominal)": 0.0007,
+    "LBM finetuned (Nominal)|Single Task (Nominal)": 0.7742,
+    "LBM zeroshot (Nominal)|Single Task (Nominal)": 0.0041
+   },
+   "holm_decided": 2,
+   "K": 3
+  },
+  "experiment_C_DistShift": {
+   "n": [
+    150,
+    150,
+    150
+   ],
+   "rates": {
+    "LBM finetuned (DistShift)": 0.3,
+    "LBM zeroshot (DistShift)": 0.16,
+    "Single Task (DistShift)": 0.14
+   },
+   "wilson": {
+    "LBM finetuned (DistShift)": [
+     0.2324,
+     0.3776
+    ],
+    "LBM zeroshot (DistShift)": [
+     0.1099,
+     0.227
+    ],
+    "Single Task (DistShift)": [
+     0.0934,
+     0.2046
+    ]
+   },
+   "fisher_p": {
+    "LBM finetuned (DistShift)|LBM zeroshot (DistShift)": 0.0058,
+    "LBM finetuned (DistShift)|Single Task (DistShift)": 0.0012,
+    "LBM zeroshot (DistShift)|Single Task (DistShift)": 0.7467
+   },
+   "holm_decided": 2,
+   "K": 3
+  },
+  "experiment_C_Nominal": {
+   "n": [
+    150,
+    150,
+    150
+   ],
+   "rates": {
+    "LBM finetuned (Nominal)": 0.68,
+    "LBM zeroshot (Nominal)": 0.3,
+    "Single Task (Nominal)": 0.467
+   },
+   "wilson": {
+    "LBM finetuned (Nominal)": [
+     0.6017,
+     0.7494
+    ],
+    "LBM zeroshot (Nominal)": [
+     0.2324,
+     0.3776
+    ],
+    "Single Task (Nominal)": [
+     0.3887,
+     0.5463
+    ]
+   },
+   "fisher_p": {
+    "LBM finetuned (Nominal)|LBM zeroshot (Nominal)": 0.0,
+    "LBM finetuned (Nominal)|Single Task (Nominal)": 0.0003,
+    "LBM zeroshot (Nominal)|Single Task (Nominal)": 0.0043
+   },
+   "holm_decided": 3,
+   "K": 3
+  },
+  "experiment_C_NovelStation": {
+   "n": [
+    100,
+    100,
+    100
+   ],
+   "rates": {
+    "LBM finetuned (NovelStation)": 0.81,
+    "LBM zeroshot (NovelStation)": 0.19,
+    "Single Task (NovelStation)": 0.47
+   },
+   "wilson": {
+    "LBM finetuned (NovelStation)": [
+     0.7222,
+     0.8749
+    ],
+    "LBM zeroshot (NovelStation)": [
+     0.1251,
+     0.2778
+    ],
+    "Single Task (NovelStation)": [
+     0.3751,
+     0.5671
+    ]
+   },
+   "fisher_p": {
+    "LBM finetuned (NovelStation)|LBM zeroshot (NovelStation)": 0.0,
+    "LBM finetuned (NovelStation)|Single Task (NovelStation)": 0.0,
+    "LBM zeroshot (NovelStation)|Single Task (NovelStation)": 0.0
+   },
+   "holm_decided": 3,
+   "K": 3
+  }
+ },
+ "V10_droid_task_prior_r(paper: towel 0.89, carrot 0.18)": {
+  "towel": {
+   "real_mean": {
+    "pi0": 0.6333333333333333,
+    "pi05": 0.975,
+    "v2_30demo": 0.45666666666666667,
+    "v2_half": 0.26666666666666666,
+    "v2_miss2": 0.04
+   },
+   "wm_means": {
+    "pi0": {
+     "base wm success old init": 0.7291666666666666,
+     "specialist wm success old init": 0.75,
+     "base wm success new condition": 0.725,
+     "specialist wm success new condition": 0.75
+    },
+    "pi05": {
+     "base wm success old init": 0.78125,
+     "specialist wm success old init": 0.90625,
+     "base wm success new condition": 0.75,
+     "specialist wm success new condition": 0.95
+    },
+    "v2_30demo": {
+     "base wm success old init": 0.7291666666666666,
+     "specialist wm success old init": 0.9583333333333334,
+     "base wm success new condition": 0.525,
+     "specialist wm success new condition": 0.7
+    },
+    "v2_half": {
+     "base wm success old init": 0.4479166666666667,
+     "specialist wm success old init": 0.6145833333333334,
+     "base wm success new condition": 0.525,
+     "specialist wm success new condition": 0.525
+    },
+    "v2_miss2": {
+     "base wm success old init": 0.09375,
+     "specialist wm success old init": 0.4270833333333333,
+     "base wm success new condition": 0.05,
+     "specialist wm success new condition": 0.125
+    }
+   },
+   "n_real": {
+    "v2_30demo": 75,
+    "pi0": 75,
+    "v2_miss2": 50,
+    "v2_half": 75,
+    "pi05": 50
+   },
+   "r_by_wm_column": {
+    "base wm success old init": 0.872,
+    "specialist wm success old init": 0.785,
+    "base wm success new condition": 0.876,
+    "specialist wm success new condition": 0.947
+   }
+  },
+  "carrot": {
+   "real_mean": {
+    "pi05": 1.0,
+    "v0_10demo": 0.06,
+    "v0_30demo": 0.49333333333333335,
+    "v0_miss_grasp": 0.41333333333333333,
+    "v0_tip": 0.56
+   },
+   "wm_means": {
+    "pi05": {
+     "base wm success old condition": 0.9772727272727273,
+     "specialist wm success old condition": 0.9090909090909091,
+     "base wm success new init": 0.9545454545454546,
+     "specialist wm success new init": 0.9090909090909091
+    },
+    "v0_10demo": {
+     "base wm success old condition": 0.2727272727272727,
+     "specialist wm success old condition": 1.0,
+     "base wm success new init": 0.36363636363636365,
+     "specialist wm success new init": 0.36363636363636365
+    },
+    "v0_30demo": {
+     "base wm success old condition": 0.6818181818181818,
+     "specialist wm success old condition": 0.7272727272727273,
+     "base wm success new init": 0.6363636363636364,
+     "specialist wm success new init": 0.7272727272727273
+    },
+    "v0_miss_grasp": {
+     "base wm success old condition": 0.7727272727272727,
+     "specialist wm success old condition": 0.5909090909090909,
+     "base wm success new init": 0.5454545454545454,
+     "specialist wm success new init": 0.18181818181818182
+    },
+    "v0_tip": {
+     "base wm success old condition": 0.5454545454545454,
+     "specialist wm success old condition": 0.06818181818181818,
+     "base wm success new init": 0.7727272727272727,
+     "specialist wm success new init": 0.6363636363636364
+    }
+   },
+   "n_real": {
+    "v0_tip": 75,
+    "v0_30demo": 75,
+    "v0_miss_grasp": 75,
+    "pi05": 75,
+    "v0_10demo": 75
+   },
+   "r_by_wm_column": {
+    "base wm success old condition": 0.882,
+    "specialist wm success old condition": -0.111,
+    "base wm success new init": 0.975,
+    "specialist wm success new init": 0.759
+   }
+  }
+ },
+ "V10b_all_init_r (논문 towel 0.89, carrot 0.18)": {
+  "towel": {
+   "base_all": 0.885,
+   "specialist_all": 0.868
+  },
+  "carrot": {
+   "base_all": 0.957,
+   "specialist_all": 0.174
+  }
+ },
+ "V11_fig4_read": {
+  "values": {
+   "AnyRank": 1275,
+   "AnyRank0": 1276,
+   "AnyRank_inf": 1251,
+   "Bonferroni": 2487,
+   "W.Bonferroni(5/6)": 2920
+  },
+  "reduction_vs_bonf_pct": 48.7,
+  "best_vs_bonf_pct": 49.7
+ }
+}

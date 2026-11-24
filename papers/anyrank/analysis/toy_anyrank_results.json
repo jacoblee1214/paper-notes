@@ -1,0 +1,42 @@
+{
+ "bonferroni_uniform": {
+  "runs": 20,
+  "K": 6,
+  "mean_decided": 5.75,
+  "mean_total_samples": 2053.7,
+  "full_ranking_runs": 15
+ },
+ "graphical_uniform": {
+  "runs": 20,
+  "K": 6,
+  "mean_decided": 6.0,
+  "mean_total_samples": 1424.75,
+  "full_ranking_runs": 20
+ },
+ "graphical_paper_eq4": {
+  "runs": 20,
+  "K": 6,
+  "mean_decided": 5.95,
+  "mean_total_samples": 2198.95,
+  "full_ranking_runs": 19
+ },
+ "graphical_code_rule": {
+  "runs": 20,
+  "K": 6,
+  "mean_decided": 5.95,
+  "mean_total_samples": 1530.0,
+  "full_ranking_runs": 19
+ },
+ "null_check": {
+  "bonferroni": {
+   "runs": 150,
+   "any_decision_rate": 0.12,
+   "note": "동률이라 어떤 판정도 오류. ranking_no_ties 모드는 동률에서 2*alpha=0.2까지 허용"
+  },
+  "graphical": {
+   "runs": 150,
+   "any_decision_rate": 0.10666666666666667,
+   "note": "동률이라 어떤 판정도 오류. ranking_no_ties 모드는 동률에서 2*alpha=0.2까지 허용"
+  }
+ }
+}
