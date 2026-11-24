@@ -1,0 +1,787 @@
+{
+ "V1_fwd_table_text_consistency": {
+  "checked": 15,
+  "mismatch": []
+ },
+ "V2_bwd_table_text_consistency": {
+  "checked": 8,
+  "mismatch": []
+ },
+ "V3_fig3_labels": {
+  "checked": 18,
+  "mismatch": [
+   {
+    "set": "fwd",
+    "task": "peg",
+    "method": "MuSe",
+    "fig_label_pct": 93,
+    "calc_pct": 86.67,
+    "ok": false
+   }
+  ],
+  "v1_muse_peg_label": 87,
+  "v1_ok": true,
+  "k_if_93": {
+   "score_needed_of_15": 13.95,
+   "calc_pct_for_14": 93.33
+  }
+ },
+ "V4_fig1_pooled": {
+  "backward_pooled_pct": {
+   "Pretraining Only": 55.0,
+   "No ER": 20.0,
+   "Diffusion Policy": 43.75,
+   "MuSe": 72.5
+  },
+  "forward_pooled_pct": {
+   "No F/T": 53.75,
+   "No Pretrain": 47.5,
+   "Diffusion Policy": 65.0,
+   "MuSe": 80.0
+  },
+  "fig1": {
+   "bwd_muse": 72.5,
+   "bwd_pre": 55.0,
+   "bwd_delta": 17.5,
+   "fwd_muse": 80.0,
+   "fwd_noft": 54.0
+  },
+  "bwd_delta_pp": 17.5,
+  "bwd_relative_gain_pct": 31.8,
+  "fwd_noft_calc": 53.75,
+  "fwd_muse_if_peg_93": 82.5,
+  "ok_bwd": true,
+  "ok_fwd": true,
+  "note": "그림 1 합산(80%, 72.5%)은 표 3·4의 점수 합/40과 일치. 그림 3의 peg 93%는 14/15에 해당해 합산 80%와는 맞지 않음",
+  "mean_of_task_pct_bwd_muse": 71.67
+ },
+ "V5_table5": {
+  "pretrain_rows": 21,
+  "pretrain_sum": 1271,
+  "reported_pretrain_total": 1271,
+  "ok_pretrain": true,
+  "finetune_rows": 5,
+  "finetune_sum": 434,
+  "reported_finetune_total": 434,
+  "ok_finetune": true,
+  "pretrain_share_of_uniform_mix_pct": 74.5,
+  "finetune_share_pct": 25.5,
+  "largest_pretrain_task_eps": 278,
+  "wipe_related_eps": {
+   "pretrain_erase_the_drawing": 278,
+   "finetune_vase_erase": 160
+  },
+  "peg_related_eps": {
+   "pretrain_rect+white+green+small_purple": 192,
+   "finetune_peg": 144
+  }
+ },
+ "V6_trial_composition": {
+  "sums": {
+   "wipe_bwd 10+5": 15,
+   "peg_bwd 7+3+5": 15,
+   "pp_bwd 4+2+4": 10,
+   "wipe_fwd 4+11": 15,
+   "wipe_fwd eraser 3+12": 15,
+   "pp_fwd 3+7": 10,
+   "peg_fwd": 15
+  },
+  "expected": {
+   "wipe": 15,
+   "peg": 15,
+   "pp": 10
+  },
+  "ok": true
+ },
+ "V7_fig4_table2": {
+  "fig4_vs_text": {
+   "MuSe": {
+    "fig": 8.42,
+    "text": 8.424,
+    "ok": true
+   },
+   "No VP": {
+    "fig": 9.9,
+    "text": 9.9,
+    "ok": true
+   },
+   "No ER": {
+    "fig": 12.38,
+    "text": 12.376,
+    "ok": true
+   },
+   "late-only = No Early": {
+    "fig": 12.06,
+    "text": 12.061,
+    "ok": true
+   },
+   "Linear": {
+    "fig": 11.8,
+    "text": 11.518,
+    "ok": false,
+    "note": "본문 11.518은 그림에서 No Late(11.52)와 일치"
+   },
+   "Additive": {
+    "fig": 11.8,
+    "text": 11.8,
+    "ok": true
+   }
+  },
+  "relative_to_muse_pct": {
+   "No VP": 17.6,
+   "No ER": 47.0,
+   "No Early": 43.2,
+   "No Late": 36.8,
+   "Linear": 40.1,
+   "Additive": 40.1
+  },
+  "text_says_no_er_highest": true,
+  "text_has_no_late_value": false,
+  "dp_vs_muse_ratio": 2.17,
+  "dp_pretrain_over_finetune_ratio": 3.025,
+  "dp_vs_no_er_ratio": 1.476
+ },
+ "V8_arithmetic": {
+  "tokens_per_frame_256/16=16 -> 16*16": 256,
+  "video_tokens_4x256": 1024,
+  "ft_per_action_step_6x6": 36,
+  "ft_hist_4x36": 144,
+  "ft_future_samples_per_finger_16x6": 96,
+  "ft_head_dim_2_fingers_x_36": 72,
+  "action_steps_per_frame_20/5": 4,
+  "ft_samples_per_action_step_120/20": 6,
+  "horizon_s_16_steps_at_20Hz": 0.8,
+  "per_gpu_batch_40/8": 5.0,
+  "ft_force_limit_note": "종료 조건 20 N, 6 Nm (6.4절); L2 오차 8.42는 N과 Nm을 섞은 6D 노름이라 단위 없음"
+ },
+ "V9_per_task_fisher": {
+  "n_tests": 18,
+  "holm_family": "전진 9 + 후진 9 = 18 비교, p_max 기준 Holm",
+  "tests": [
+   {
+    "set": "fwd",
+    "task": "wipe",
+    "vs": "No F/T",
+    "muse": 11.5,
+    "base": 5,
+    "n": 15,
+    "p_min": 0.0253,
+    "p_max": 0.0656,
+    "muse_ci": [
+     0.514,
+     0.911
+    ],
+    "base_ci": [
+     0.152,
+     0.583
+    ],
+    "holm_p_on_p_max": 0.9839
+   },
+   {
+    "set": "fwd",
+    "task": "peg",
+    "vs": "No F/T",
+    "muse": 13,
+    "base": 9,
+    "n": 15,
+    "p_min": 0.2148,
+    "p_max": 0.2148,
+    "muse_ci": [
+     0.621,
+     0.963
+    ],
+    "base_ci": [
+     0.357,
+     0.802
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "fwd",
+    "task": "pp",
+    "vs": "No F/T",
+    "muse": 7.5,
+    "base": 7.5,
+    "n": 10,
+    "p_min": 1.0,
+    "p_max": 1.0,
+    "muse_ci": [
+     0.442,
+     0.919
+    ],
+    "base_ci": [
+     0.442,
+     0.919
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "fwd",
+    "task": "wipe",
+    "vs": "No Pretrain",
+    "muse": 11.5,
+    "base": 8,
+    "n": 15,
+    "p_min": 0.2451,
+    "p_max": 0.4497,
+    "muse_ci": [
+     0.514,
+     0.911
+    ],
+    "base_ci": [
+     0.301,
+     0.752
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "fwd",
+    "task": "peg",
+    "vs": "No Pretrain",
+    "muse": 13,
+    "base": 6,
+    "n": 15,
+    "p_min": 0.0209,
+    "p_max": 0.0209,
+    "muse_ci": [
+     0.621,
+     0.963
+    ],
+    "base_ci": [
+     0.198,
+     0.643
+    ],
+    "holm_p_on_p_max": 0.335
+   },
+   {
+    "set": "fwd",
+    "task": "pp",
+    "vs": "No Pretrain",
+    "muse": 7.5,
+    "base": 5,
+    "n": 10,
+    "p_min": 0.3498,
+    "p_max": 0.6499,
+    "muse_ci": [
+     0.442,
+     0.919
+    ],
+    "base_ci": [
+     0.237,
+     0.763
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "fwd",
+    "task": "wipe",
+    "vs": "Diffusion Policy",
+    "muse": 11.5,
+    "base": 10,
+    "n": 15,
+    "p_min": 0.6817,
+    "p_max": 1.0,
+    "muse_ci": [
+     0.514,
+     0.911
+    ],
+    "base_ci": [
+     0.417,
+     0.848
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "fwd",
+    "task": "peg",
+    "vs": "Diffusion Policy",
+    "muse": 13,
+    "base": 10,
+    "n": 15,
+    "p_min": 0.3898,
+    "p_max": 0.3898,
+    "muse_ci": [
+     0.621,
+     0.963
+    ],
+    "base_ci": [
+     0.417,
+     0.848
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "fwd",
+    "task": "pp",
+    "vs": "Diffusion Policy",
+    "muse": 7.5,
+    "base": 6,
+    "n": 10,
+    "p_min": 0.6285,
+    "p_max": 1.0,
+    "muse_ci": [
+     0.442,
+     0.919
+    ],
+    "base_ci": [
+     0.313,
+     0.832
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "bwd",
+    "task": "wipe",
+    "vs": "Pretraining Only",
+    "muse": 12.5,
+    "base": 8.5,
+    "n": 15,
+    "p_min": 0.1086,
+    "p_max": 0.427,
+    "muse_ci": [
+     0.584,
+     0.947
+    ],
+    "base_ci": [
+     0.329,
+     0.777
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "bwd",
+    "task": "peg",
+    "vs": "Pretraining Only",
+    "muse": 10,
+    "base": 8,
+    "n": 15,
+    "p_min": 0.7104,
+    "p_max": 0.7104,
+    "muse_ci": [
+     0.417,
+     0.848
+    ],
+    "base_ci": [
+     0.301,
+     0.752
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "bwd",
+    "task": "pp",
+    "vs": "Pretraining Only",
+    "muse": 6.5,
+    "base": 5.5,
+    "n": 10,
+    "p_min": 0.6499,
+    "p_max": 1.0,
+    "muse_ci": [
+     0.354,
+     0.863
+    ],
+    "base_ci": [
+     0.274,
+     0.799
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "bwd",
+    "task": "wipe",
+    "vs": "No ER",
+    "muse": 12.5,
+    "base": 0.5,
+    "n": 15,
+    "p_min": 0.0,
+    "p_max": 0.0001,
+    "muse_ci": [
+     0.584,
+     0.947
+    ],
+    "base_ci": [
+     0.003,
+     0.253
+    ],
+    "holm_p_on_p_max": 0.0021
+   },
+   {
+    "set": "bwd",
+    "task": "peg",
+    "vs": "No ER",
+    "muse": 10,
+    "base": 2,
+    "n": 15,
+    "p_min": 0.0078,
+    "p_max": 0.0078,
+    "muse_ci": [
+     0.417,
+     0.848
+    ],
+    "base_ci": [
+     0.037,
+     0.379
+    ],
+    "holm_p_on_p_max": 0.1322
+   },
+   {
+    "set": "bwd",
+    "task": "pp",
+    "vs": "No ER",
+    "muse": 6.5,
+    "base": 5.5,
+    "n": 10,
+    "p_min": 0.6499,
+    "p_max": 1.0,
+    "muse_ci": [
+     0.354,
+     0.863
+    ],
+    "base_ci": [
+     0.274,
+     0.799
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "bwd",
+    "task": "wipe",
+    "vs": "Diffusion Policy",
+    "muse": 12.5,
+    "base": 6.5,
+    "n": 15,
+    "p_min": 0.0209,
+    "p_max": 0.1281,
+    "muse_ci": [
+     0.584,
+     0.947
+    ],
+    "base_ci": [
+     0.223,
+     0.671
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "bwd",
+    "task": "peg",
+    "vs": "Diffusion Policy",
+    "muse": 10,
+    "base": 5,
+    "n": 15,
+    "p_min": 0.1431,
+    "p_max": 0.1431,
+    "muse_ci": [
+     0.417,
+     0.848
+    ],
+    "base_ci": [
+     0.152,
+     0.583
+    ],
+    "holm_p_on_p_max": 1.0
+   },
+   {
+    "set": "bwd",
+    "task": "pp",
+    "vs": "Diffusion Policy",
+    "muse": 6.5,
+    "base": 6,
+    "n": 10,
+    "p_min": 1.0,
+    "p_max": 1.0,
+    "muse_ci": [
+     0.354,
+     0.863
+    ],
+    "base_ci": [
+     0.313,
+     0.832
+    ],
+    "holm_p_on_p_max": 1.0
+   }
+  ]
+ },
+ "V10_table1_compliance_tests": [
+  {
+   "task": "wipe",
+   "a": "MuSe",
+   "b": "MuSe w/o Compliance",
+   "a_score": 11.5,
+   "b_score": 8,
+   "p_min": 0.2451,
+   "p_max": 0.4497
+  },
+  {
+   "task": "wipe",
+   "a": "MuSe w/o Compliance",
+   "b": "No F/T",
+   "a_score": 8,
+   "b_score": 5,
+   "p_min": 0.4621,
+   "p_max": 0.4621
+  },
+  {
+   "task": "wipe",
+   "a": "MuSe w/o Compliance",
+   "b": "No Pretrain",
+   "a_score": 8,
+   "b_score": 8,
+   "p_min": 1.0,
+   "p_max": 1.0
+  },
+  {
+   "task": "peg",
+   "a": "MuSe",
+   "b": "MuSe w/o Compliance",
+   "a_score": 13,
+   "b_score": 11,
+   "p_min": 0.6513,
+   "p_max": 0.6513
+  },
+  {
+   "task": "peg",
+   "a": "MuSe w/o Compliance",
+   "b": "No F/T",
+   "a_score": 11,
+   "b_score": 9,
+   "p_min": 0.6999,
+   "p_max": 0.6999
+  },
+  {
+   "task": "peg",
+   "a": "MuSe w/o Compliance",
+   "b": "No Pretrain",
+   "a_score": 11,
+   "b_score": 6,
+   "p_min": 0.1394,
+   "p_max": 0.1394
+  }
+ ],
+ "V11_pooled_fisher_n40": {
+  "note": "과제 풀링은 과제 간 이질성과 같은 과제 내 상관을 무시한 근사",
+  "tests": [
+   {
+    "set": "fwd",
+    "vs": "No F/T",
+    "muse": 32.0,
+    "base": 21.5,
+    "n": 40,
+    "pct": [
+     80.0,
+     53.8
+    ],
+    "p_min": 0.0172,
+    "p_max": 0.0307,
+    "muse_ci": [
+     0.652,
+     0.895
+    ],
+    "base_ci": [
+     0.387,
+     0.682
+    ],
+    "diff_pp": 26.2,
+    "diff_ci_pp": [
+     5.6,
+     44.1
+    ]
+   },
+   {
+    "set": "fwd",
+    "vs": "No Pretrain",
+    "muse": 32.0,
+    "base": 19,
+    "n": 40,
+    "pct": [
+     80.0,
+     47.5
+    ],
+    "p_min": 0.0048,
+    "p_max": 0.0048,
+    "muse_ci": [
+     0.652,
+     0.895
+    ],
+    "base_ci": [
+     0.329,
+     0.625
+    ],
+    "diff_pp": 32.5,
+    "diff_ci_pp": [
+     11.5,
+     49.9
+    ]
+   },
+   {
+    "set": "fwd",
+    "vs": "Diffusion Policy",
+    "muse": 32.0,
+    "base": 26,
+    "n": 40,
+    "pct": [
+     80.0,
+     65.0
+    ],
+    "p_min": 0.2101,
+    "p_max": 0.2101,
+    "muse_ci": [
+     0.652,
+     0.895
+    ],
+    "base_ci": [
+     0.495,
+     0.779
+    ],
+    "diff_pp": 15.0,
+    "diff_ci_pp": [
+     -4.6,
+     33.2
+    ]
+   },
+   {
+    "set": "bwd",
+    "vs": "Pretraining Only",
+    "muse": 29.0,
+    "base": 22.0,
+    "n": 40,
+    "pct": [
+     72.5,
+     55.0
+    ],
+    "p_min": 0.1624,
+    "p_max": 0.1624,
+    "muse_ci": [
+     0.572,
+     0.839
+    ],
+    "base_ci": [
+     0.398,
+     0.693
+    ],
+    "diff_pp": 17.5,
+    "diff_ci_pp": [
+     -3.5,
+     36.5
+    ]
+   },
+   {
+    "set": "bwd",
+    "vs": "No ER",
+    "muse": 29.0,
+    "base": 8.0,
+    "n": 40,
+    "pct": [
+     72.5,
+     20.0
+    ],
+    "p_min": 0.0,
+    "p_max": 0.0,
+    "muse_ci": [
+     0.572,
+     0.839
+    ],
+    "base_ci": [
+     0.105,
+     0.348
+    ],
+    "diff_pp": 52.5,
+    "diff_ci_pp": [
+     31.2,
+     67.3
+    ]
+   },
+   {
+    "set": "bwd",
+    "vs": "Diffusion Policy",
+    "muse": 29.0,
+    "base": 17.5,
+    "n": 40,
+    "pct": [
+     72.5,
+     43.8
+    ],
+    "p_min": 0.0123,
+    "p_max": 0.0225,
+    "muse_ci": [
+     0.572,
+     0.839
+    ],
+    "base_ci": [
+     0.296,
+     0.59
+    ],
+    "diff_pp": 28.8,
+    "diff_ci_pp": [
+     7.1,
+     46.9
+    ]
+   }
+  ]
+ },
+ "V12_cmh_task_stratified": {
+  "tests": [
+   {
+    "set": "fwd",
+    "vs": "No F/T",
+    "p_floor": 0.035,
+    "p_ceil": 0.0155
+   },
+   {
+    "set": "fwd",
+    "vs": "No Pretrain",
+    "p_floor": 0.0127,
+    "p_ceil": 0.0028
+   },
+   {
+    "set": "fwd",
+    "vs": "Diffusion Policy",
+    "p_floor": 0.33,
+    "p_ceil": 0.1341
+   },
+   {
+    "set": "bwd",
+    "vs": "Pretraining Only",
+    "p_floor": 0.1748,
+    "p_ceil": 0.1608
+   },
+   {
+    "set": "bwd",
+    "vs": "No ER",
+    "p_floor": 0.0,
+    "p_ceil": 0.0
+   },
+   {
+    "set": "bwd",
+    "vs": "Diffusion Policy",
+    "p_floor": 0.0263,
+    "p_ceil": 0.0126
+   }
+  ]
+ },
+ "V13_power": {
+  "wipe_fwd_muse_vs_nopretrain_(76.7% vs 53.3%)": 65,
+  "peg_fwd_muse_vs_dp_(86.7% vs 66.7%)": 70,
+  "pp_bwd_muse_vs_pretrain_(65% vs 55%)": 376,
+  "peg_bwd_muse_vs_pretrain_(66.7% vs 53.3%)": 211,
+  "wipe_bwd_muse_vs_pretrain_(83.3% vs 56.7%)": 46,
+  "note": "시행당 두 표본 비율 비교, 양측 α=0.05, 검정력 0.8, 정규근사. 각 값은 한 방법당 필요한 시행 수"
+ },
+ "V14_compliance_decomposition": {
+  "wipe": {
+   "full_minus_wo_compliance": 3.5,
+   "wo_compliance_minus_no_ft": 3,
+   "wo_compliance_minus_no_pretrain": 0
+  },
+  "peg": {
+   "full_minus_wo_compliance": 2,
+   "wo_compliance_minus_no_ft": 2,
+   "wo_compliance_minus_no_pretrain": 5
+  },
+  "share_of_full_gain_over_no_ft_from_compliance_pct": {
+   "wipe": 53.8,
+   "peg": 50.0
+  },
+  "note": "보상 제어를 켜고 끄는 비교는 전진 과제 두 개에만 있고 후진 과제에는 없음"
+ }
+}
