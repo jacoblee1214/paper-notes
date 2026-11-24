@@ -1,0 +1,18 @@
+{
+ "device": "mps",
+ "torch": "2.15.0",
+ "encoder_params_M": 303.1,
+ "predictor_blocks_params_M": 85.1,
+ "encoder_fwd_s_per_batch16": 0.46,
+ "encoder_ms_per_image": 28.72,
+ "predictor_fwd_bwd_s_per_batch32": 3.794,
+ "predictor_ms_per_sample": 118.55,
+ "estimate_6000_steps_batch384_hours": {
+  "encoder": 18.4,
+  "predictor": 75.9,
+  "total_lower_bound": 94.3
+ },
+ "inference_ms_50_steps_no_cache_upper_bound": 664.9,
+ "memory_note": "랜덤 가중치, 데이터 증강·로딩·정밀도 차이 제외. 논문의 RTX Pro 6000 지연과 비교할 수 없다.",
+ "driver_allocated_GiB": 9.37
+}
