@@ -1,0 +1,39 @@
+{
+ "K1_table_equals_bruteforce": {
+  "trials": 300,
+  "equal": 300
+ },
+ "K2_validity": {
+  "LIBERO형(B=11, C=28)": {
+   "constrained_valid_rate": 1.0,
+   "unconstrained_valid_rate": 0.029666666666666668,
+   "table_shape": [
+    12,
+    29
+   ],
+   "table_build_ms": 0.031,
+   "feasible_at_all": true
+  },
+  "DROID형(B=20, C=48)": {
+   "constrained_valid_rate": 1.0,
+   "unconstrained_valid_rate": 0.198,
+   "table_shape": [
+    21,
+    49
+   ],
+   "table_build_ms": 0.056,
+   "feasible_at_all": true
+  }
+ },
+ "K3_local_vs_global_normalization": {
+  "n_problems": 60,
+  "tv_mean": 0.3201,
+  "tv_median": 0.3029,
+  "tv_max": 0.7705,
+  "kl_global_to_local_mean": 0.3429
+ },
+ "K3b_argmax": {
+  "n_problems": 199,
+  "same_argmax": 102
+ }
+}
