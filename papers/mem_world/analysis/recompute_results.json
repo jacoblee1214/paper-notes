@@ -1,0 +1,511 @@
+{
+ "V1_table1_gains": {
+  "third_Mem_vs_Ctrl": {
+   "psnr": {
+    "abs": 2.13,
+    "rel_pct": 9.2
+   },
+   "ssim": {
+    "abs": 0.05,
+    "rel_pct": 6.0
+   },
+   "lpips": {
+    "abs": 0.022,
+    "rel_pct": 28.9
+   },
+   "obj": {
+    "abs": 0.046,
+    "rel_pct": 8.0
+   }
+  },
+  "third_Mem_vs_Cosmos": {
+   "psnr": {
+    "abs": 2.5,
+    "rel_pct": 11.0
+   },
+   "ssim": {
+    "abs": 0.059,
+    "rel_pct": 7.2
+   },
+   "lpips": {
+    "abs": 0.035,
+    "rel_pct": 39.3
+   },
+   "obj": {
+    "abs": 0.04,
+    "rel_pct": 6.9
+   }
+  },
+  "wrist_Mem_vs_Ctrl": {
+   "psnr": {
+    "abs": 1.87,
+    "rel_pct": 10.8
+   },
+   "ssim": {
+    "abs": 0.068,
+    "rel_pct": 10.9
+   },
+   "lpips": {
+    "abs": 0.045,
+    "rel_pct": 16.0
+   },
+   "obj": {
+    "abs": 0.048,
+    "rel_pct": 10.1
+   }
+  }
+ },
+ "V2_table2_gains": {
+  "third_WVMem_vs_Stride": {
+   "psnr": {
+    "abs": 2.2,
+    "rel_pct": 9.7
+   },
+   "ssim": {
+    "abs": 0.055,
+    "rel_pct": 6.8
+   },
+   "lpips": {
+    "abs": 0.017,
+    "rel_pct": 21.5
+   },
+   "obj": {
+    "abs": 0.053,
+    "rel_pct": 9.7
+   }
+  },
+  "third_WVMem_vs_Short": {
+   "psnr": {
+    "abs": 3.53,
+    "rel_pct": 16.6
+   },
+   "ssim": {
+    "abs": 0.067,
+    "rel_pct": 8.4
+   },
+   "lpips": {
+    "abs": 0.02,
+    "rel_pct": 24.4
+   },
+   "obj": {
+    "abs": 0.071,
+    "rel_pct": 13.5
+   }
+  },
+  "wrist_WVMem_vs_Stride": {
+   "psnr": {
+    "abs": 1.91,
+    "rel_pct": 11.2
+   },
+   "ssim": {
+    "abs": 0.066,
+    "rel_pct": 10.7
+   },
+   "lpips": {
+    "abs": 0.047,
+    "rel_pct": 15.9
+   },
+   "obj": {
+    "abs": 0.039,
+    "rel_pct": 8.4
+   }
+  },
+  "wrist_WVMem_vs_Short": {
+   "psnr": {
+    "abs": 3.93,
+    "rel_pct": 26.1
+   },
+   "ssim": {
+    "abs": 0.154,
+    "rel_pct": 29.3
+   },
+   "lpips": {
+    "abs": 0.105,
+    "rel_pct": 29.7
+   },
+   "obj": {
+    "abs": 0.101,
+    "rel_pct": 25.2
+   }
+  }
+ },
+ "V2b_table1_vs_table2": {
+  "third_psnr_gain_T1_vs_T2": [
+   2.13,
+   2.2
+  ],
+  "wrist_psnr_gain_T1_vs_T2": [
+   1.87,
+   1.91
+  ],
+  "Mem_minus_WVMem_third_psnr": 0.52,
+  "Mem_minus_WVMem_wrist_psnr": 0.24,
+  "Ctrl_minus_Stride_third_psnr": 0.59,
+  "Ctrl_minus_Stride_wrist_psnr": 0.28
+ },
+ "V3_psnr_paired_sd_sensitivity_n34": {
+  "third_psnr_Mem_vs_Ctrl": {
+   "mean_diff_dB": 2.13,
+   "paired_sd_for_p05_dB": 6.1
+  },
+  "wrist_psnr_Mem_vs_Ctrl": {
+   "mean_diff_dB": 1.87,
+   "paired_sd_for_p05_dB": 5.36
+  },
+  "third_psnr_WVMem_vs_Stride": {
+   "mean_diff_dB": 2.2,
+   "paired_sd_for_p05_dB": 6.31
+  },
+  "wrist_psnr_WVMem_vs_Stride": {
+   "mean_diff_dB": 1.91,
+   "paired_sd_for_p05_dB": 5.47
+  }
+ },
+ "V4_fig4_memworld_refit": {
+  "r": 0.9704,
+  "slope": 0.934,
+  "intercept": -0.122,
+  "p": 3.243541336467882e-06,
+  "reported": {
+   "r": 0.9704,
+   "slope": 0.934,
+   "intercept": -0.122
+  },
+  "note": "그림 판독 점 10개로 그림에 적힌 r, 기울기, 절편이 재현됨"
+ },
+ "V5_fig4_ctrlworld_hidden_points": {
+  "hidden_pi0_wipe": 0.55,
+  "hidden_pi05_pickplace": 0.7,
+  "refit": {
+   "r": 0.8476,
+   "slope": 1.046,
+   "intercept": -0.282
+  },
+  "reported": {
+   "r": 0.8476,
+   "slope": 1.046,
+   "intercept": -0.282
+  },
+  "same_as_memworld": true,
+  "note": "가려진 두 점은 Mem-World 점과 같은 값에서 회귀식이 정확히 재현됨(두 모델이 같은 성공률)"
+ },
+ "V6_fig4_inference": {
+  "n_points": 10,
+  "p_memworld_n10": 3.24354133646787e-06,
+  "p_ctrlworld_n10": 0.0019568863068662344,
+  "fisher95_memworld": [
+   0.876,
+   0.993
+  ],
+  "fisher95_ctrlworld": [
+   0.467,
+   0.963
+  ],
+  "rel_gain_pct": 14.5,
+  "abs_gain": 0.1228,
+  "r_between_worldmodels": 0.931,
+  "meng_z": 2.75,
+  "meng_p": 0.006,
+  "note": "n = 10은 5과제 × 2정책. 같은 과제의 두 정책은 독립이 아니므로 p는 낙관적"
+ },
+ "V6b_task_level_n5": {
+  "r_mem": 0.9823,
+  "r_ctrl": 0.9175,
+  "p_mem": 0.002828388275233921,
+  "p_ctrl": 0.02806599973495024
+ },
+ "V6c_per_policy_n5": {
+  "pi0": {
+   "r_mem": 0.991,
+   "r_ctrl": 0.944
+  },
+  "pi05": {
+   "r_mem": 0.964,
+   "r_ctrl": 0.875
+  }
+ },
+ "V7_rank_and_gap": {
+  "spearman": {
+   "mem": 0.96,
+   "ctrl": 0.975
+  },
+  "kendall": {
+   "mem": 0.892,
+   "ctrl": 0.93
+  },
+  "mean_gap_real_minus_wm": {
+   "mem": 0.16,
+   "ctrl": 0.255
+  },
+  "sd_gap": {
+   "mem": 0.052,
+   "ctrl": 0.14
+  },
+  "mae": {
+   "mem": 0.16,
+   "ctrl": 0.255
+  },
+  "gap_by_task_mem": [
+   0.175,
+   0.1,
+   0.175,
+   0.2,
+   0.15
+  ],
+  "gap_by_task_ctrl": [
+   0.15,
+   0.125,
+   0.375,
+   0.4,
+   0.225
+  ],
+  "wm_over_real_count": {
+   "mem": 0,
+   "ctrl": 0
+  }
+ },
+ "V7b_short_vs_long": {
+  "mean_gap_short": {
+   "mem": 0.138,
+   "ctrl": 0.138
+  },
+  "mean_gap_long": {
+   "mem": 0.175,
+   "ctrl": 0.333
+  },
+  "r_short4": {
+   "mem": 0.911,
+   "ctrl": 0.99
+  },
+  "r_long6": {
+   "mem": 0.993,
+   "ctrl": 0.957
+  },
+  "n_cells_equal": 2
+ },
+ "V7c_within_task_policy_order": {
+  "pairs": 5,
+  "memworld_agree": 5,
+  "ctrlworld_agree": 5,
+  "real_pi05_gt_pi0_all": true
+ },
+ "V8_cluster_bootstrap_tasks": {
+  "n_valid": 20000,
+  "diff_mean": 0.115,
+  "diff_ci95": [
+   0.017,
+   0.219
+  ],
+  "p_diff_le_0": 0.014,
+  "r_mem_ci95": [
+   0.93,
+   0.994
+  ],
+  "r_ctrl_ci95": [
+   0.719,
+   0.975
+  ]
+ },
+ "V8b_leave_one_task_out": [
+  {
+   "left_out": "pick&place",
+   "r_mem": 0.959,
+   "r_ctrl": 0.777
+  },
+  {
+   "left_out": "wipe table",
+   "r_mem": 0.984,
+   "r_ctrl": 0.833
+  },
+  {
+   "left_out": "pick 1 to 2",
+   "r_mem": 0.97,
+   "r_ctrl": 0.868
+  },
+  {
+   "left_out": "pick 2 to 1",
+   "r_mem": 0.979,
+   "r_ctrl": 0.903
+  },
+  {
+   "left_out": "pick 2 to 2",
+   "r_mem": 0.957,
+   "r_ctrl": 0.836
+  }
+ ],
+ "V9_noise_only_null_n20": {
+  "setting": "두 세계모델의 참 성공률이 같고(실로봇 − gap), 모든 셀을 n = 20 이항 측정으로 가정, 20,000회, 시드 1",
+  "results": [
+   {
+    "true_gap": 0.0,
+    "mean_r_if_perfect_truth": 0.828,
+    "sd_of_r_diff": 0.106,
+    "p_diff_ge_observed_0123": 0.111,
+    "p_abs_diff_ge_observed": 0.225,
+    "p_r_ge_0p9704": 0.0046,
+    "p_r_ge_0p8476": 0.472
+   },
+   {
+    "true_gap": 0.15,
+    "mean_r_if_perfect_truth": 0.827,
+    "sd_of_r_diff": 0.105,
+    "p_diff_ge_observed_0123": 0.115,
+    "p_abs_diff_ge_observed": 0.226,
+    "p_r_ge_0p9704": 0.0051,
+    "p_r_ge_0p8476": 0.467
+   }
+  ]
+ },
+ "V10_fig5_policy_improvement": {
+  "avg_base_exact": 0.5833,
+  "avg_ft_exact": 0.7167,
+  "avg_diff_exact_pp": 13.3,
+  "reported_avg": [
+   0.58,
+   0.72
+  ],
+  "reported_diff_pp": 14,
+  "per_task": [
+   {
+    "task": "pick 1 to 2",
+    "base": "12/20",
+    "ft": "15/20",
+    "diff_pp": 15,
+    "fisher_p": 0.501,
+    "wilson_base": [
+     0.387,
+     0.781
+    ],
+    "wilson_ft": [
+     0.531,
+     0.888
+    ]
+   },
+   {
+    "task": "pick 2 to 1",
+    "base": "14/20",
+    "ft": "17/20",
+    "diff_pp": 15,
+    "fisher_p": 0.451,
+    "wilson_base": [
+     0.481,
+     0.855
+    ],
+    "wilson_ft": [
+     0.64,
+     0.948
+    ]
+   },
+   {
+    "task": "pick 2 to 2",
+    "base": "9/20",
+    "ft": "11/20",
+    "diff_pp": 10,
+    "fisher_p": 0.752,
+    "wilson_base": [
+     0.258,
+     0.658
+    ],
+    "wilson_ft": [
+     0.342,
+     0.742
+    ]
+   }
+  ],
+  "pooled": {
+   "base": "35/60",
+   "ft": "43/60",
+   "fisher_p": 0.18,
+   "wilson_base": [
+    0.457,
+    0.699
+   ],
+   "wilson_ft": [
+    0.592,
+    0.815
+   ]
+  },
+  "mde_pp_n20_power80": 36.5,
+  "mde_pp_n60_power80": 23.5,
+  "kept_fraction_if_all_successes_kept": [
+   0.1,
+   0.15
+  ],
+  "fig4_pi05_long_horizon_worldmodel_success": [
+   0.4,
+   0.45,
+   0.25
+  ],
+  "fig4_pi05_long_horizon_real_success": [
+   0.6,
+   0.7,
+   0.45
+  ],
+  "fig4_real_equals_fig5_base": true
+ },
+ "V11_eq2": {
+  "temporal_factor_vs_age": [
+   {
+    "age_over_Tmax": 0.0,
+    "temporal_factor": 1.0
+   },
+   {
+    "age_over_Tmax": 0.1,
+    "temporal_factor": 0.814
+   },
+   {
+    "age_over_Tmax": 0.3,
+    "temporal_factor": 0.55
+   },
+   {
+    "age_over_Tmax": 0.5,
+    "temporal_factor": 0.383
+   },
+   {
+    "age_over_Tmax": 0.7,
+    "temporal_factor": 0.279
+   },
+   {
+    "age_over_Tmax": 1.0,
+    "temporal_factor": 0.189
+   }
+  ],
+  "limit_age_large": 0.1,
+  "manip_flag_factor": {
+   "m0": 1.0,
+   "m1": 1.313,
+   "ratio": 1.313
+  },
+  "depth_factor": [
+   {
+    "d": 0.2,
+    "v": 0.833
+   },
+   {
+    "d": 0.5,
+    "v": 0.667
+   },
+   {
+    "d": 1.0,
+    "v": 0.5
+   },
+   {
+    "d": 2.0,
+    "v": 0.333
+   }
+  ],
+  "note": "식 2에서 task 플래그는 최대 1.313배, 시간 감쇠는 0.19–1배, 깊이 항은 d = 0.2–2에서 0.83–0.33배"
+ },
+ "V12_scale_arithmetic": {
+  "droid_traj": 95599,
+  "sampled_traj": 11000,
+  "sampled_fraction_pct": 11.5,
+  "train_gpu_hours_h100": 384,
+  "train_batch": 32,
+  "note": "2일 = 48시간 가정(논문은 'approximately 2 days')",
+  "rollout_len_s": 20,
+  "steps": 20,
+  "secs_per_step": 1.0,
+  "real_episodes_posttrain": 250
+ }
+}
