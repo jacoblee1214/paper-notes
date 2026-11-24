@@ -1,0 +1,881 @@
+{
+ "V1_training_arithmetic": {
+  "stage1_hours": 20.833333333333332,
+  "stage2_hours": 4.583333333333333,
+  "total_hours": 25.416666666666664,
+  "params_sum_M": 370.46000000000004,
+  "stage2_minus_stage1_M": 75.4,
+  "steps": 75000,
+  "implied_steps_per_epoch_stage1": 1500.0,
+  "implied_steps_per_epoch_stage2": 2500.0,
+  "implied_sec_per_step_stage1": 1.0,
+  "implied_sec_per_step_stage2": 0.22,
+  "dataset_epochs_if_batch4_stage1": 15.0,
+  "dataset_epochs_if_batch4_stage2": 42.857142857142854,
+  "dataset_epochs_if_16_pairs_stage1": 60.0,
+  "step_time_ratio_stage1_over_stage2": 4.545454545454546
+ },
+ "V2_table1_vs_reference_copy": {
+  "ref_copy_vs_ours": {
+   "FAF_unseen": {
+    "mse_ratio_refcopy_over_ours": 8.961538461538462,
+    "ssim_diff_ours_minus_refcopy": 0.01,
+    "ssim_cohen_d": 0.22
+   },
+   "AnyTouch2": {
+    "mse_ratio_refcopy_over_ours": 2.793103448275862,
+    "ssim_diff_ours_minus_refcopy": 0.01,
+    "ssim_cohen_d": 0.39
+   }
+  },
+  "ssim_below_refcopy": {
+   "FAF_unseen": [
+    "Simulator",
+    "Sim2Real",
+    "Hybrid",
+    "Separate"
+   ],
+   "AnyTouch2": [
+    "Simulator",
+    "Sim2Real"
+   ]
+  },
+  "mse_ratio_vs_ours": {
+   "FAF_unseen": {
+    "Simulator": 41.0,
+    "Sim2Real": 9.7,
+    "Hybrid": 1.4,
+    "Separate": 7.7,
+    "Ours": 1.0
+   },
+   "AnyTouch2": {
+    "Simulator": 74.4,
+    "Sim2Real": 18.8,
+    "Ours": 1.0
+   }
+  },
+  "mse_gt_refcopy_methods_FAF_unseen": [
+   "Simulator",
+   "Sim2Real"
+  ],
+  "note": "표 1의 SD가 어떤 단위(시험 영상)의 SD인지와 n은 본문에 없어 검정은 하지 않고 비와 효과 크기만 낸다."
+ },
+ "V3_mask_perturbation": {
+  "mse_rel_increase_pct_table4": {
+   "S0.8": 4.3,
+   "S0.9": 0.0,
+   "S1.1": 0.0,
+   "S1.2": 4.3,
+   "T2": 0.0,
+   "T4": 4.3,
+   "T6": 8.7,
+   "R2": 0.0,
+   "R4": 8.7,
+   "R6": 17.4
+  },
+  "mse_rel_increase_pct_table5": {
+   "S0.9+T4+R2": 0.0,
+   "S1.1+T4+R4": 13.0,
+   "S0.8+T6+R6": 21.7,
+   "S1.1+T6+R6": 21.7
+  },
+  "baseline_matches_table1_seen": true,
+  "alignment_precision_stated": {
+   "v3_main_3.2": "±3 px, ±1°",
+   "v3_E.5_typical_max": "4 px, 2°",
+   "v1_3.1": "1 px, 1°"
+  },
+  "worst_single_R6_vs_base_SD_units": 2.0,
+  "worst_combined_vs_base_SD_units": 2.5
+ },
+ "V4_table6_force_mae": {
+  "assumed_n": "Fig. 6 캡션의 N = 1200을 표 6에도 적용(독립 Welch, 같은 시험 표본이면 쌍체가 더 민감)",
+  "real_best_k": 13,
+  "real_nonmonotone_after_13k": true,
+  "real15_vs_real15_plus_gen15": {
+   "diff": 0.002,
+   "cohen_d": 0.12,
+   "welch_p_if_independent": 0.004222940601093252
+  },
+  "real13_vs_real15": {
+   "diff": 0.002,
+   "cohen_d": 0.15,
+   "welch_p_if_independent": 0.0001759168147510468
+  },
+  "real10_vs_real15": {
+   "diff": -0.008,
+   "cohen_d": -0.54,
+   "welch_p_if_independent": 6.02088164651058e-39
+  },
+  "mix15_vs_mix60": {
+   "diff": 0.006,
+   "cohen_d": 0.34,
+   "welch_p_if_independent": 3.122484072699239e-16
+  },
+  "interpretation": "n=1200 독립 가정에서는 0.002 N 차이도 p<0.01이 나오므로 p보다 효과 크기(d)를 본다. 차이 0.002–0.008 N은 SD 0.012–0.021의 0.1–0.5배",
+  "gen_only_vs_real15_ratio": {
+   "15": 3.96,
+   "30": 3.21,
+   "45": 3.4,
+   "60": 3.02
+  },
+  "gen_only_nonmonotone": [
+   [
+    30,
+    45
+   ]
+  ],
+  "mix_nonmonotone_pairs": [
+   [
+    30,
+    45
+   ]
+  ]
+ },
+ "V5_fig6b_force_scaling": {
+  "figure_read": true,
+  "figure_values_N": {
+   "Gen only": [
+    null,
+    0.27,
+    0.23
+   ],
+   "1/20": [
+    0.53,
+    0.24,
+    0.21
+   ],
+   "1/4": [
+    0.37,
+    0.18,
+    0.16
+   ],
+   "1/3": [
+    0.29,
+    0.12,
+    0.1
+   ],
+   "1/2": [
+    0.24,
+    0.1,
+    0.08
+   ],
+   "Full": [
+    0.06,
+    0.065,
+    0.065
+   ]
+  },
+  "one_third_plus30k_over_full_real": 1.67,
+  "one_third_plus15k_over_full_real": 2.0,
+  "half_plus30k_over_full_real": 1.33,
+  "gen_only_values_three_sources": {
+   "table6_v3_(Ours 15k/30k)": [
+    0.21,
+    0.17
+   ],
+   "fig6b_read_(Gen only 15k/30k)": [
+    0.27,
+    0.23
+   ],
+   "v1_table5_(1-10N 15k/30k)": [
+    0.35,
+    0.33
+   ],
+   "v1_table5_(4-10N 15k/30k)": [
+    0.21,
+    0.17
+   ]
+  },
+  "real_full_values": {
+   "table6_real15k": 0.053,
+   "fig6b_full_read": 0.06,
+   "E1_real_pairs": 0.05,
+   "E1_generated_pairs": 0.23
+  },
+  "E1_generated_over_real_ratio": 4.6,
+  "range_statement": {
+   "v3_main_4.2": "1-10 N, 0.1 N precision",
+   "v1_4.2": "4-10 N for the full-framework test (real 20,000 -> 15,000)",
+   "v3_E.3": "Fz in [1,10] N"
+  }
+ },
+ "V6_table2_pose": {
+  "assumed_n": "객체당 시험 자세 30개(본문 4.2)를 독립 표본으로 가정, 정수 반올림 값이라 p는 대략적",
+  "welch": {
+   "cyl:unfixed_vs_Real:X": {
+    "diff": -4,
+    "p": 4.4777542093407305e-08
+   },
+   "cyl:unfixed_vs_Real:Y": {
+    "diff": -3,
+    "p": 4.238612635541228e-09
+   },
+   "cyl:unfixed_vs_Real:Angle": {
+    "diff": -1,
+    "p": 0.01849064290566295
+   },
+   "cyl:fixed_vs_Real:X": {
+    "diff": 1,
+    "p": 0.1349683337075175
+   },
+   "cyl:fixed_vs_Real:Y": {
+    "diff": 0,
+    "p": 1.0
+   },
+   "cyl:fixed_vs_Real:Angle": {
+    "diff": 1,
+    "p": 0.01849064290566295
+   },
+   "cyl:unfixed+Real_vs_unfixed:X": {
+    "diff": -1,
+    "p": 0.000275702692825899
+   },
+   "cyl:unfixed+Real_vs_unfixed:Y": {
+    "diff": -1,
+    "p": 0.000275702692825899
+   },
+   "cyl:unfixed+Real_vs_unfixed:Angle": {
+    "diff": 0,
+    "p": 1.0
+   },
+   "cyl:Sim+Real_vs_Real:X": {
+    "diff": 4,
+    "p": 3.093272569942935e-06
+   },
+   "cyl:Sim+Real_vs_Real:Y": {
+    "diff": 5,
+    "p": 6.622507535567711e-10
+   },
+   "cyl:Sim+Real_vs_Real:Angle": {
+    "diff": 2,
+    "p": 0.003761154466306134
+   },
+   "cross:unfixed_vs_Real:X": {
+    "diff": -3,
+    "p": 4.238612635541228e-09
+   },
+   "cross:unfixed_vs_Real:Y": {
+    "diff": -2,
+    "p": 1.431812298137778e-05
+   },
+   "cross:unfixed_vs_Real:Angle": {
+    "diff": -1,
+    "p": 0.01849064290566295
+   },
+   "cross:fixed_vs_Real:X": {
+    "diff": 1,
+    "p": 0.0576847642604754
+   },
+   "cross:fixed_vs_Real:Y": {
+    "diff": 3,
+    "p": 2.8033518285923e-07
+   },
+   "cross:fixed_vs_Real:Angle": {
+    "diff": 2,
+    "p": 0.000275702692825899
+   },
+   "cross:unfixed+Real_vs_unfixed:X": {
+    "diff": -1,
+    "p": 0.01849064290566295
+   },
+   "cross:unfixed+Real_vs_unfixed:Y": {
+    "diff": 0,
+    "p": 1.0
+   },
+   "cross:unfixed+Real_vs_unfixed:Angle": {
+    "diff": 0,
+    "p": 1.0
+   },
+   "cross:Sim+Real_vs_Real:X": {
+    "diff": 11,
+    "p": 5.772283930352931e-17
+   },
+   "cross:Sim+Real_vs_Real:Y": {
+    "diff": 10,
+    "p": 1.7864337300574857e-20
+   },
+   "cross:Sim+Real_vs_Real:Angle": {
+    "diff": 2,
+    "p": 0.003761154466306134
+   }
+  },
+  "cells_unfixed_better_than_real_p_lt_0.05": 6,
+  "cells_unfixed_vs_real_total": 6,
+  "cells_fixed_vs_real": {
+   "cyl:fixed_vs_Real:X": {
+    "diff": 1,
+    "p": 0.1349683337075175
+   },
+   "cyl:fixed_vs_Real:Y": {
+    "diff": 0,
+    "p": 1.0
+   },
+   "cyl:fixed_vs_Real:Angle": {
+    "diff": 1,
+    "p": 0.01849064290566295
+   },
+   "cross:fixed_vs_Real:X": {
+    "diff": 1,
+    "p": 0.0576847642604754
+   },
+   "cross:fixed_vs_Real:Y": {
+    "diff": 3,
+    "p": 2.8033518285923e-07
+   },
+   "cross:fixed_vs_Real:Angle": {
+    "diff": 2,
+    "p": 0.000275702692825899
+   }
+  },
+  "v1_to_v3_changes": {
+   "cyl real X": [
+    "9",
+    "8±3"
+   ],
+   "cross unfixed Y": [
+    "5",
+    "4±1"
+   ],
+   "note": "v1 표 2는 값만(정수), v3는 평균±SD. 위 두 칸은 같은 칸에서 정수가 달라짐"
+  },
+  "pairs_per_pose_E1": {
+   "cyl_600_pairs/(3 types x 30 poses)": 6.666666666666667,
+   "cross_200_pairs/30 poses": 6.666666666666667
+  },
+  "unit_conflict": {
+   "table2_caption_v3": "X/Y in mm",
+   "E.1_and_Fig13_15": "pixels",
+   "E.11": "1 pixel = 1/20 mm",
+   "cyl_real_X_8_px_in_mm": 0.4,
+   "cyl_real_X_8_if_mm_vs_insertion_tolerance_3mm": "8 mm > 3 mm"
+  }
+ },
+ "V7_table7_pushing": {
+  "signed_err_real": [
+   0.14,
+   0.12,
+   0.12,
+   0.06
+  ],
+  "signed_err_ours": [
+   0.12,
+   0.15,
+   0.11,
+   0.08
+  ],
+  "mae_real": 0.10999999999999988,
+  "mae_ours": 0.11499999999999988,
+  "ours_minus_real": [
+   -0.02,
+   0.03,
+   -0.01,
+   0.02
+  ],
+  "max_abs_ours_minus_real": 0.030000000000000027,
+  "ours_over_gt_all": true,
+  "real_over_gt_all": true,
+  "ours_minus_real_over_sd_real": [
+   0.06,
+   0.21,
+   0.06,
+   0.09
+  ],
+  "relative_err_ours_pct": [
+   5.4,
+   15.6,
+   10.4,
+   7.4
+  ],
+  "assumed_n": "v1 4.5: 물체당 5회 밀기(약 15 s); v3에는 n 없음. 평균 차이는 SD의 14% 이하라 n과 무관하게 구별되지 않는 크기"
+ },
+ "V8_insertion": {
+  "counts": {
+   "cylinder": [
+    18,
+    20
+   ],
+   "cross": [
+    17,
+    20
+   ],
+   "T-shape": [
+    17,
+    20
+   ],
+   "Type-C": [
+    15,
+    20
+   ]
+  },
+  "wilson95": {
+   "cylinder": [
+    69.9,
+    97.2
+   ],
+   "cross": [
+    64.0,
+    94.8
+   ],
+   "T-shape": [
+    64.0,
+    94.8
+   ],
+   "Type-C": [
+    53.1,
+    88.8
+   ]
+  },
+  "pooled_3_printed": {
+   "k": 52,
+   "n": 60,
+   "wilson95": [
+    75.8,
+    93.1
+   ]
+  },
+  "fisher_cyl_vs_typec": 0.4074844074844075,
+  "note": "삽입 실험에는 증강 없음 대조군이 없다(본문 4.3, 부록 E.11). 성공률은 절대 수치만 보고된다."
+ },
+ "V9_imitation_learning": {
+  "figure_read": "그림 8 막대 위 숫자",
+  "n_per_cell_assumed_from_text": 25,
+  "all_values_multiple_of_4": true,
+  "counts": {
+   "No Aug": [
+    6,
+    7,
+    12,
+    14,
+    15
+   ],
+   "Aug(1)": [
+    5,
+    8,
+    14,
+    16,
+    17
+   ],
+   "Aug(2)": [
+    4,
+    7,
+    15,
+    16,
+    16
+   ],
+   "Aug(4)": [
+    6,
+    9,
+    17,
+    17,
+    18
+   ],
+   "Aug(9)": [
+    5,
+    11,
+    18,
+    17,
+    18
+   ]
+  },
+  "wilson95_noaug": {
+   "20": [
+    11.5,
+    43.4
+   ],
+   "35": [
+    14.3,
+    47.6
+   ],
+   "50": [
+    30.0,
+    66.5
+   ],
+   "70": [
+    37.1,
+    73.3
+   ],
+   "100": [
+    40.7,
+    76.6
+   ]
+  },
+  "fisher_vs_noaug": {
+   "Aug(1)@20": {
+    "succ": "5/25 vs 6/25",
+    "diff_pp": -4,
+    "p": 1.0,
+    "p_holm_20": 1.0
+   },
+   "Aug(1)@35": {
+    "succ": "8/25 vs 7/25",
+    "diff_pp": 4,
+    "p": 1.0,
+    "p_holm_20": 1.0
+   },
+   "Aug(1)@50": {
+    "succ": "14/25 vs 12/25",
+    "diff_pp": 8,
+    "p": 0.7775119850607677,
+    "p_holm_20": 1.0
+   },
+   "Aug(1)@70": {
+    "succ": "16/25 vs 14/25",
+    "diff_pp": 8,
+    "p": 0.7732872791870324,
+    "p_holm_20": 1.0
+   },
+   "Aug(1)@100": {
+    "succ": "17/25 vs 15/25",
+    "diff_pp": 8,
+    "p": 0.7688126860130922,
+    "p_holm_20": 1.0
+   },
+   "Aug(2)@20": {
+    "succ": "4/25 vs 6/25",
+    "diff_pp": -8,
+    "p": 0.725202447472273,
+    "p_holm_20": 1.0
+   },
+   "Aug(2)@35": {
+    "succ": "7/25 vs 7/25",
+    "diff_pp": 0,
+    "p": 1.0,
+    "p_holm_20": 1.0
+   },
+   "Aug(2)@50": {
+    "succ": "15/25 vs 12/25",
+    "diff_pp": 12,
+    "p": 0.5709159711886231,
+    "p_holm_20": 1.0
+   },
+   "Aug(2)@70": {
+    "succ": "16/25 vs 14/25",
+    "diff_pp": 8,
+    "p": 0.7732872791870324,
+    "p_holm_20": 1.0
+   },
+   "Aug(2)@100": {
+    "succ": "16/25 vs 15/25",
+    "diff_pp": 4,
+    "p": 1.0,
+    "p_holm_20": 1.0
+   },
+   "Aug(4)@20": {
+    "succ": "6/25 vs 6/25",
+    "diff_pp": 0,
+    "p": 1.0,
+    "p_holm_20": 1.0
+   },
+   "Aug(4)@35": {
+    "succ": "9/25 vs 7/25",
+    "diff_pp": 8,
+    "p": 0.7624130371830049,
+    "p_holm_20": 1.0
+   },
+   "Aug(4)@50": {
+    "succ": "17/25 vs 12/25",
+    "diff_pp": 20,
+    "p": 0.25159039322537385,
+    "p_holm_20": 1.0
+   },
+   "Aug(4)@70": {
+    "succ": "17/25 vs 14/25",
+    "diff_pp": 12,
+    "p": 0.5607441034248751,
+    "p_holm_20": 1.0
+   },
+   "Aug(4)@100": {
+    "succ": "18/25 vs 15/25",
+    "diff_pp": 12,
+    "p": 0.5512246257901203,
+    "p_holm_20": 1.0
+   },
+   "Aug(9)@20": {
+    "succ": "5/25 vs 6/25",
+    "diff_pp": -4,
+    "p": 1.0,
+    "p_holm_20": 1.0
+   },
+   "Aug(9)@35": {
+    "succ": "11/25 vs 7/25",
+    "diff_pp": 16,
+    "p": 0.3771541776117425,
+    "p_holm_20": 1.0
+   },
+   "Aug(9)@50": {
+    "succ": "18/25 vs 12/25",
+    "diff_pp": 24,
+    "p": 0.14816029165127598,
+    "p_holm_20": 1.0
+   },
+   "Aug(9)@70": {
+    "succ": "17/25 vs 14/25",
+    "diff_pp": 12,
+    "p": 0.5607441034248751,
+    "p_holm_20": 1.0
+   },
+   "Aug(9)@100": {
+    "succ": "18/25 vs 15/25",
+    "diff_pp": 12,
+    "p": 0.5512246257901203,
+    "p_holm_20": 1.0
+   }
+  },
+  "n_comparisons": 20,
+  "min_p_raw": 0.14816029165127598,
+  "min_p_holm": 1.0,
+  "cmh_pooled_over_5_settings": {
+   "Aug(1)": {
+    "chi2": 0.6405228758169935,
+    "p": 0.4235215196809612,
+    "excess_successes": 3.0,
+    "pooled_rate_aug": 48.0,
+    "pooled_rate_noaug": 43.2
+   },
+   "Aug(2)": {
+    "chi2": 0.2888725128960943,
+    "p": 0.5909439580009339,
+    "excess_successes": 2.0,
+    "pooled_rate_aug": 46.4,
+    "pooled_rate_noaug": 43.2
+   },
+   "Aug(4)": {
+    "chi2": 3.00144980065241,
+    "p": 0.08319004241125906,
+    "excess_successes": 6.5,
+    "pooled_rate_aug": 53.6,
+    "pooled_rate_noaug": 43.2
+   },
+   "Aug(9)": {
+    "chi2": 4.001814882032668,
+    "p": 0.04545129805425135,
+    "excess_successes": 7.5,
+    "pooled_rate_aug": 55.2,
+    "pooled_rate_noaug": 43.2
+   }
+  },
+  "any_aug_arms_note": "네 증강 팔을 하나로 합친 CMH는 같은 대조군을 4번 재사용하므로 독립이 아니다. 참고용으로 두지 않는다.",
+  "E2_claims": {
+   "20 demos 5/25 vs 6/25": {
+    "wilson_5": [
+     8.9,
+     39.1
+    ],
+    "wilson_6": [
+     11.5,
+     43.4
+    ],
+    "fisher_p": 1.0
+   },
+   "35 demos 44% vs 28%": {
+    "11/25 vs 7/25 fisher_p": 0.3771541776117425,
+    "wilson_11": [
+     26.7,
+     62.9
+    ],
+    "wilson_7": [
+     14.3,
+     47.6
+    ]
+   },
+   "50 demos 72% vs 48%": {
+    "18/25 vs 12/25 fisher_p": 0.14816029165127598,
+    "wilson_18": [
+     52.4,
+     85.7
+    ],
+    "wilson_12": [
+     30.0,
+     66.5
+    ]
+   }
+  },
+  "aug_monotone_in_copies": {
+   "20": [
+    24,
+    20,
+    16,
+    24,
+    20
+   ],
+   "35": [
+    28,
+    32,
+    28,
+    36,
+    44
+   ],
+   "50": [
+    48,
+    56,
+    60,
+    68,
+    72
+   ],
+   "70": [
+    56,
+    64,
+    64,
+    68,
+    68
+   ],
+   "100": [
+    60,
+    68,
+    64,
+    72,
+    72
+   ]
+  },
+  "aug9_minus_noaug_pp": {
+   "20": -4,
+   "35": 16,
+   "50": 24,
+   "70": 12,
+   "100": 12
+  },
+  "aug_best_minus_noaug_pp": {
+   "20": 0,
+   "35": 16,
+   "50": 24,
+   "70": 12,
+   "100": 12
+  },
+  "noaug_curve_20_to_100": [
+   24,
+   28,
+   48,
+   56,
+   60
+  ],
+  "power_25_per_arm": {
+   "0.28->0.44": 0.15625,
+   "0.48->0.72": 0.33225,
+   "0.56->0.68": 0.09375
+  },
+  "n_per_arm_for_80pct_power": {
+   "0.28->0.44": 141,
+   "0.48->0.72": 65,
+   "0.56->0.68": 256
+  }
+ },
+ "V10_classification": {
+  "chance_6_classes": 0.16666666666666666,
+  "text2tac_below_chance": [
+   "ViT-scratch",
+   "ViT-ImageNet"
+  ],
+  "fig6a_geo_col_equals_v1_table3_4800_GC": true,
+  "fig6a_ours_equals_v1_table3_4800_gen": true,
+  "v1_geometric_aug_count": {
+   "8x4x3x9": 864,
+   "with_6_hue_variants": 5184
+  },
+  "text2tac_prompt_combos": 4800,
+  "real_200_per_object_samples": 1200,
+  "ours_vit_imagenet_vs_real_200_per_object_ref_0.80": 0.18999999999999995,
+  "accuracy_granularity": "시험 표본 수가 본문에 없어 0.01 단위가 몇 개 표본인지 정할 수 없다",
+  "ours_minus_simulator": [
+   0.08,
+   0.1,
+   0.07
+  ],
+  "ours_minus_geocol": [
+   0.18,
+   0.3,
+   0.2
+  ]
+ },
+ "V11_throughput_scale": {
+  "images_per_s": 6.5,
+  "batch": 128,
+  "sec_per_batch": 19.692307692307693,
+  "hours_per_million": 42.73504273504273,
+  "hours_for_60k": 2.564102564102564,
+  "hours_for_30k": 1.282051282051282,
+  "hybrid_images_per_s": 7,
+  "separate_images_per_s": 3.7,
+  "separate_over_ours_time": 1.7567567567567566,
+  "gpu_mem_gb": 29.97,
+  "ratio_gen_to_train_stage1": 3.0,
+  "mask_prep_min_per_object": 3,
+  "align_s": 10
+ },
+ "V12_cross_sensor": {
+  "figure_read": true,
+  "mse_0": 40,
+  "mse_2000": 16,
+  "ssim_0": 0.8,
+  "ssim_2000": 0.85,
+  "mse_500": 23,
+  "table1_seen_mse": 23,
+  "table1_unseen_faf_mse": 26,
+  "note": "9DTact 미세 조정 2000장의 MSE(약 16)는 표 1의 학습 센서 값(23)보다 낮다. 데이터셋이 달라 직접 비교하지 않는다. 영벡터 시점 SSIM 약 0.80은 FeelAnyForce의 참조 복사 SSIM 0.78과 가깝다(데이터셋이 달라 참고용)."
+ },
+ "V13_version_diff": {
+  "v1_v2_text_identical_except_date": true,
+  "v1_table1": {
+   "Hybrid": [
+    31,
+    0.81
+   ],
+   "Separate": [
+    157,
+    0.79
+   ],
+   "Ours_first_stage": [
+    18,
+    0.84
+   ],
+   "Ours": [
+    23,
+    0.83
+   ]
+  },
+  "v3_table1_has_same_Hybrid_Separate_Ours": true,
+  "v3_drops_ours_first_stage_row": true,
+  "v1_table2_vs_v3": "정수 → 평균±SD, USB 추가, 칸 2곳 정수 차이(V6)",
+  "v1_table5_dropped_in_v3": {
+   "1-10N": [
+    0.35,
+    0.33
+   ],
+   "4-10N": [
+    0.21,
+    0.17
+   ]
+  },
+  "v1_table7_dropped_in_v3": {
+   "100pos": [
+    0.272,
+    0.077
+   ],
+   "200pos": [
+    0.207,
+    0.067
+   ],
+   "300pos": [
+    0.174,
+    0.06
+   ]
+  },
+  "v1_real_experiments": 3,
+  "v3_real_experiments": 4,
+  "v1_title": "ControlTac: Force- and Position-Controlled Tactile Data Augmentation with a Single Reference Image",
+  "v3_title": "ControlTac: Scaling Tactile Data with Physically Controlled Tactile Image Generation",
+  "v1_mask_precision": "1 px, 1 degree",
+  "v3_mask_precision": "±3 px, ±1 degree",
+  "added_in_v3": [
+   "Simulator/Sim2Real 기준선",
+   "AnyTouch2 미관측 평가",
+   "참조 복사 기준선(E.1)",
+   "9DTact 교차 센서(그림 5)",
+   "모방학습(그림 8, E.2, E.12)",
+   "Type-C 삽입과 자세 추정",
+   "실패 분석(부록 F)",
+   "마스크 섭동(표 4, 5)",
+   "학습 시간·추론 속도(B.2, B.3)"
+  ]
+ }
+}
