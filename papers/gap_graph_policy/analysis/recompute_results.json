@@ -1,0 +1,609 @@
+{
+ "table1": {
+  "cells": 55,
+  "trials_if_100_each": 5500,
+  "all_values_integer_counts_of_100": true,
+  "gap_vs_best_pure_baseline": [
+   {
+    "column": "LIBERO object",
+    "gap": 0.95,
+    "best_baseline": "MolmoAct2",
+    "best_value": 0.97,
+    "diff_pp": -2.0,
+    "fisher_p": 0.7209,
+    "wilson_gap": [
+     0.8882,
+     0.9785
+    ],
+    "wilson_best": [
+     0.9155,
+     0.9897
+    ]
+   },
+   {
+    "column": "LIBERO-Pro object swap",
+    "gap": 0.95,
+    "best_baseline": "MolmoAct2",
+    "best_value": 0.43,
+    "diff_pp": 52.0,
+    "fisher_p": 0.0,
+    "wilson_gap": [
+     0.8882,
+     0.9785
+    ],
+    "wilson_best": [
+     0.3373,
+     0.5278
+    ]
+   },
+   {
+    "column": "XY 20x20",
+    "gap": 0.95,
+    "best_baseline": "MolmoAct2",
+    "best_value": 0.9,
+    "diff_pp": 5.0,
+    "fisher_p": 0.2828,
+    "wilson_gap": [
+     0.8882,
+     0.9785
+    ],
+    "wilson_best": [
+     0.8256,
+     0.9448
+    ]
+   },
+   {
+    "column": "basket swap",
+    "gap": 0.97,
+    "best_baseline": "MolmoAct2",
+    "best_value": 0.26,
+    "diff_pp": 71.0,
+    "fisher_p": 0.0,
+    "wilson_gap": [
+     0.9155,
+     0.9897
+    ],
+    "wilson_best": [
+     0.184,
+     0.3537
+    ]
+   },
+   {
+    "column": "permutation",
+    "gap": 0.93,
+    "best_baseline": "TipTop",
+    "best_value": 0.31,
+    "diff_pp": 62.0,
+    "fisher_p": 0.0,
+    "wilson_gap": [
+     0.8625,
+     0.9657
+    ],
+    "wilson_best": [
+     0.2278,
+     0.4063
+    ]
+   },
+   {
+    "column": "mixed all",
+    "gap": 0.97,
+    "best_baseline": "TipTop",
+    "best_value": 0.24,
+    "diff_pp": 73.0,
+    "fisher_p": 0.0,
+    "wilson_gap": [
+     0.9155,
+     0.9897
+    ],
+    "wilson_best": [
+     0.1669,
+     0.3323
+    ]
+   },
+   {
+    "column": "pack fixed",
+    "gap": 0.99,
+    "best_baseline": "TipTop",
+    "best_value": 0.34,
+    "diff_pp": 65.0,
+    "fisher_p": 0.0,
+    "wilson_gap": [
+     0.9455,
+     0.9982
+    ],
+    "wilson_best": [
+     0.2546,
+     0.4372
+    ]
+   },
+   {
+    "column": "pack varied",
+    "gap": 0.98,
+    "best_baseline": "TipTop",
+    "best_value": 0.46,
+    "diff_pp": 52.0,
+    "fisher_p": 0.0,
+    "wilson_gap": [
+     0.93,
+     0.9945
+    ],
+    "wilson_best": [
+     0.3656,
+     0.5574
+    ]
+   }
+  ],
+  "vla_min_by_column": {
+   "LIBERO object": 0.96,
+   "LIBERO-Pro object swap": 0.24,
+   "XY 20x20": 0.78,
+   "basket swap": 0.15,
+   "permutation": 0.1,
+   "mixed all": 0.2,
+   "pack fixed": 0.17,
+   "pack varied": 0.18
+  },
+  "vla_overall_min": 0.1,
+  "hybrid_over_vla_ratio": {
+   "columns": [
+    "LIBERO object",
+    "LIBERO-Pro object swap",
+    "XY 20x20",
+    "basket swap",
+    "permutation",
+    "mixed all",
+    "pack fixed",
+    "pack varied"
+   ],
+   "pi0.5": [
+    0.89,
+    2.5,
+    1.01,
+    2.13,
+    2.5,
+    1.95,
+    3.94,
+    3.67
+   ],
+   "MolmoAct2": [
+    0.72,
+    1.44,
+    0.93,
+    2.23,
+    3.9,
+    3.3,
+    3.28,
+    3.28
+   ]
+  },
+  "hybrid_ratio_ge_2_count": {
+   "pi0.5": 5,
+   "MolmoAct2": 5
+  },
+  "hybrid_lower_than_vla_columns": {
+   "pi0.5": [
+    "LIBERO object"
+   ],
+   "MolmoAct2": [
+    "LIBERO object",
+    "XY 20x20"
+   ]
+  },
+  "min_detectable_diff_n100_at_p": {
+   "0.5": 0.198,
+   "0.8": 0.158,
+   "0.9": 0.119,
+   "0.95": 0.086
+  },
+  "cross_check_table3": {
+   "I_TiPToP_table3": 0.24,
+   "I_TiPToP_table1_mixed_all": 0.24,
+   "II_TiPToP_table3": 0.34,
+   "II_TiPToP_table1_pack_fixed": 0.34,
+   "I_GaP_table3": 0.97,
+   "I_GaP_table1_mixed_all": 0.97,
+   "II_GaP_table3": 0.97,
+   "II_GaP_table1_pack_fixed_varied": [
+    0.99,
+    0.98
+   ]
+  }
+ },
+ "table2": {
+  "Fulfill Grocery Orders": {
+   "tiptop": "8/25",
+   "gap": "25/25",
+   "tiptop_wilson": [
+    0.172,
+    0.5159
+   ],
+   "gap_wilson": [
+    0.8668,
+    1.0
+   ],
+   "fisher_p": 0.0
+  },
+  "object": {
+   "tiptop": "3/5",
+   "gap": "5/5",
+   "tiptop_wilson": [
+    0.2307,
+    0.8824
+   ],
+   "gap_wilson": [
+    0.5655,
+    1.0
+   ],
+   "fisher_p": 0.444444
+  },
+  "20x20": {
+   "tiptop": "2/5",
+   "gap": "5/5",
+   "tiptop_wilson": [
+    0.1176,
+    0.7693
+   ],
+   "gap_wilson": [
+    0.5655,
+    1.0
+   ],
+   "fisher_p": 0.166667
+  },
+  "basket swap": {
+   "tiptop": "1/5",
+   "gap": "5/5",
+   "tiptop_wilson": [
+    0.0362,
+    0.6245
+   ],
+   "gap_wilson": [
+    0.5655,
+    1.0
+   ],
+   "fisher_p": 0.047619
+  },
+  "tall basket": {
+   "tiptop": "0/5",
+   "gap": "5/5",
+   "tiptop_wilson": [
+    0.0,
+    0.4345
+   ],
+   "gap_wilson": [
+    0.5655,
+    1.0
+   ],
+   "fisher_p": 0.007937
+  },
+  "permutation": {
+   "tiptop": "2/5",
+   "gap": "5/5",
+   "tiptop_wilson": [
+    0.1176,
+    0.7693
+   ],
+   "gap_wilson": [
+    0.5655,
+    1.0
+   ],
+   "fisher_p": 0.166667
+  },
+  "Pack Grocery Items": {
+   "tiptop": "10/30",
+   "gap": "28/30",
+   "tiptop_wilson": [
+    0.1923,
+    0.5122
+   ],
+   "gap_wilson": [
+    0.7868,
+    0.9815
+   ],
+   "fisher_p": 2e-06
+  },
+  "Make Popcorn": {
+   "tiptop": "0/20",
+   "gap": "18/20",
+   "tiptop_wilson": [
+    0.0,
+    0.1611
+   ],
+   "gap_wilson": [
+    0.699,
+    0.9721
+   ],
+   "fisher_p": 0.0
+  },
+  "subrows_sum_tiptop": 8,
+  "subrows_sum_gap": 25,
+  "gap_pooled_real_trials": {
+   "k": 71,
+   "n": 75,
+   "wilson": [
+    0.8707,
+    0.9791
+   ]
+  },
+  "time_check_s": {
+   "perceive+execute": 50.5,
+   "caption_avg_gap": 67,
+   "gap_unexplained_s": 16.5
+  },
+  "popcorn_real_failures_text": 2
+ },
+ "table3_fig3": {
+  "I": {
+   "implied_ct_initial_s": 72.4,
+   "implied_ct_learned_s": 29.0,
+   "fig3_read_initial_s": 72.5,
+   "fig3_read_learned_s": 29.3,
+   "ct_reduction_pct_from_table3": 60.0,
+   "ct_reduction_pct_from_fig3_read": 59.6,
+   "throughput_gain_x": 2.5
+  },
+  "II": {
+   "implied_ct_initial_s": 493.2,
+   "implied_ct_learned_s": 222.2,
+   "fig3_read_initial_s": 490.0,
+   "fig3_read_learned_s": 218.0,
+   "ct_reduction_pct_from_table3": 54.9,
+   "ct_reduction_pct_from_fig3_read": 55.5,
+   "throughput_gain_x": 2.22
+  },
+  "III": {
+   "implied_ct_initial_s": 118.0,
+   "implied_ct_learned_s": 47.0,
+   "fig3_read_initial_s": 118.0,
+   "fig3_read_learned_s": 47.0,
+   "ct_reduction_pct_from_table3": 60.2,
+   "ct_reduction_pct_from_fig3_read": 60.2,
+   "throughput_gain_x": 2.51
+  },
+  "text_claim_up_to_pct": 57,
+  "mean_reduction_table3_pct": 58.4,
+  "III_if_success_weighted": {
+   "initial_throughput_if_sr_weighted": 10.1,
+   "reported_initial": 30.5,
+   "learned_if_sr_weighted": 72.0,
+   "reported_learned": 76.6
+  }
+ },
+ "fig2": {
+  "read_percent": [
+   30,
+   30,
+   43,
+   30,
+   80,
+   70,
+   80,
+   90,
+   93,
+   94
+  ],
+  "k_over_30_matches": [
+   {
+    "read": 30,
+    "nearest_k": 9,
+    "k/30_pct": 30.0
+   },
+   {
+    "read": 30,
+    "nearest_k": 9,
+    "k/30_pct": 30.0
+   },
+   {
+    "read": 43,
+    "nearest_k": 13,
+    "k/30_pct": 43.3
+   },
+   {
+    "read": 30,
+    "nearest_k": 9,
+    "k/30_pct": 30.0
+   },
+   {
+    "read": 80,
+    "nearest_k": 24,
+    "k/30_pct": 80.0
+   },
+   {
+    "read": 70,
+    "nearest_k": 21,
+    "k/30_pct": 70.0
+   },
+   {
+    "read": 80,
+    "nearest_k": 24,
+    "k/30_pct": 80.0
+   },
+   {
+    "read": 90,
+    "nearest_k": 27,
+    "k/30_pct": 90.0
+   },
+   {
+    "read": 93,
+    "nearest_k": 28,
+    "k/30_pct": 93.3
+   },
+   {
+    "read": 94,
+    "nearest_k": 28,
+    "k/30_pct": 93.3
+   }
+  ],
+  "iter10_94pct_as_k_of_30": [
+   93.33333333333333,
+   96.66666666666667
+  ],
+  "iter10_94pct_as_k_of_100": 94.0,
+  "text_initial_33pct_as_k_of_30": 33.3,
+  "phases_text": {
+   "grasp": "iter 1-3",
+   "perception_prompt_to_handle": "iter 4",
+   "placement_offset": "iter 4-8"
+  },
+  "phases_figure_shading": {
+   "Grasp Improvement": "iter 1-3",
+   "Transport Adjustment": "iter 4-5",
+   "Placement Improvement": "iter 6-10"
+  },
+  "time_check": {
+   "15min_x_10iter": 150,
+   "text_total_min": 150,
+   "fig3_popcorn_iterations_incl_rejected_approx": 7
+  },
+  "appendix_E2_iter1": {
+   "grasp_25_of_30": 0.833,
+   "place_17_of_30": 0.567,
+   "text_all_placements_fail": true,
+   "terminal_coverage": 0.0,
+   "fig2_iter1_on_burner_pct": 30
+  }
+ },
+ "table4": {
+  "goal_condition_sum": "103/110",
+  "position_orientation_sum": "18/20",
+  "total": "121/130",
+  "text_total": "121/130",
+  "rate": 0.9308,
+  "wilson": [
+   0.8737,
+   0.9632
+  ],
+  "per_condition_wilson": {
+   "Individual port": [
+    0.5655,
+    1.0
+   ],
+   "Ascending": [
+    0.7762,
+    0.9704
+   ],
+   "Descending": [
+    0.7762,
+    0.9704
+   ],
+   "Odd": [
+    0.8389,
+    1.0
+   ],
+   "Even": [
+    0.7018,
+    0.9881
+   ],
+   "-15deg": [
+    0.3755,
+    0.9638
+   ],
+   "15deg": [
+    0.5655,
+    1.0
+   ],
+   "-5cm": [
+    0.5655,
+    1.0
+   ],
+   "5cm": [
+    0.3755,
+    0.9638
+   ]
+  },
+  "seconds_per_insertion": {
+   "Individual port": 26.0,
+   "Ascending": 35.3,
+   "Descending": 31.9,
+   "Odd": 34.2,
+   "Even": 34.9
+  },
+  "text_seconds_per_insertion": 30,
+  "sequence_consistency": {
+   "Ascending": {
+    "failed_insertions": 3,
+    "failed_sequences": 3,
+    "feasible": true
+   },
+   "Descending": {
+    "failed_insertions": 3,
+    "failed_sequences": 1,
+    "feasible": true
+   },
+   "Odd": {
+    "failed_insertions": 0,
+    "failed_sequences": 0,
+    "feasible": true
+   },
+   "Even": {
+    "failed_insertions": 1,
+    "failed_sequences": 1,
+    "feasible": true
+   }
+  },
+  "note_sequence_level": {
+   "complete_sequences": "15/20",
+   "wilson": [
+    0.5313,
+    0.8881
+   ]
+  }
+ },
+ "table5": {
+  "gap_150": {
+   "k": 143,
+   "n": 150,
+   "rate": 0.9533,
+   "wilson": [
+    0.9068,
+    0.9772
+   ]
+  },
+  "hand_150": {
+   "k": 148,
+   "n": 150,
+   "rate": 0.9867,
+   "wilson": [
+    0.9527,
+    0.9963
+   ]
+  },
+  "fisher_p": 0.1731,
+  "diff_pp": -3.33,
+  "3h_run": {
+   "gap": "55/59",
+   "hand": "58/59",
+   "gap_rate": 0.9322,
+   "hand_rate": 0.9831,
+   "fisher_p": 0.3642,
+   "per_hour": [
+    18.33,
+    19.33
+   ],
+   "table_rounded": [
+    18,
+    19
+   ]
+  },
+  "time_budget": {
+   "gap_59x179.13_s": 10569.0,
+   "hand_59x176.47_s": 10412.0,
+   "window_s": 10800,
+   "implied_overhead_per_trial_gap_s": 3.9,
+   "implied_overhead_per_trial_hand_s": 6.6
+  },
+  "steady_state_throughput_per_h": {
+   "gap": 19.16,
+   "hand": 20.13
+  },
+  "cycle_time_diff_s": 2.66,
+  "diff_wald_ci_pp": [
+   -7.2,
+   0.5
+  ]
+ },
+ "counts": {
+  "morsl_skills_sum": 51,
+  "morsl_claimed": 51,
+  "industry_unit_per_hour_to_s": 7.2
+ }
+}
