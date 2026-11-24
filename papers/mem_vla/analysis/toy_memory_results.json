@@ -1,0 +1,84 @@
+{
+ "T1_video_attention_K1": {
+  "K1_max_abs_diff_vs_standard": {
+   "a_additive_diagonal_included": 1.2517905235290527,
+   "b_eq3_composition_diagonal_included": 0.27442944049835205,
+   "c_additive_strictly_past": 0.0,
+   "standard_output_scale": 0.12880994379520416
+  },
+  "K4_strict_temporal_term_mean_abs_by_timestep": [
+   0.0,
+   0.20380045473575592,
+   0.18828582763671875,
+   0.1614970713853836
+  ],
+  "sinusoid_at_t0_standard_sin_cos": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "sinusoid_at_t0_sin_only": [
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "note": "t=0에서 0이 되려면 사인 성분만 쓰거나 코사인에서 1을 빼는 변형이 필요. 이것만으로는 시간 어텐션 항이 K=1에서 사라지지 않음(마스크 규약이 따로 필요)."
+ },
+ "T2_naive_language_history_shift": {
+  "S": 8,
+  "rows": [
+   {
+    "f": 0.05,
+    "p_any_retry_closed_form": 0.3366,
+    "p_any_retry_mc": 0.3376,
+    "mean_history_len_naive": 8.42,
+    "history_len_training_style": 8,
+    "p_history_len_over_1.5S": 0.0002,
+    "p_same_instruction_3plus_times": 0.02
+   },
+   {
+    "f": 0.1,
+    "p_any_retry_closed_form": 0.5695,
+    "p_any_retry_mc": 0.5683,
+    "mean_history_len_naive": 8.88,
+    "history_len_training_style": 8,
+    "p_history_len_over_1.5S": 0.0042,
+    "p_same_instruction_3plus_times": 0.076
+   },
+   {
+    "f": 0.2,
+    "p_any_retry_closed_form": 0.8322,
+    "p_any_retry_mc": 0.8313,
+    "mean_history_len_naive": 10.0,
+    "history_len_training_style": 8,
+    "p_history_len_over_1.5S": 0.0718,
+    "p_same_instruction_3plus_times": 0.2778
+   },
+   {
+    "f": 0.3,
+    "p_any_retry_closed_form": 0.9424,
+    "p_any_retry_mc": 0.9423,
+    "mean_history_len_naive": 11.42,
+    "history_len_training_style": 8,
+    "p_history_len_over_1.5S": 0.2745,
+    "p_same_instruction_3plus_times": 0.529
+   },
+   {
+    "f": 0.4,
+    "p_any_retry_closed_form": 0.9832,
+    "p_any_retry_mc": 0.983,
+    "mean_history_len_naive": 13.33,
+    "history_len_training_style": 8,
+    "p_history_len_over_1.5S": 0.5618,
+    "p_same_instruction_3plus_times": 0.7525
+   }
+  ],
+  "note": "f는 가정. 압축된 기억은 재시도가 일어나도 '완료한 하위 과제 집합'만 담으므로 같은 상태로 남는다는 설계를 가정한 계산이며, 학습된 모델이 실제로 그렇게 동작하는지는 다루지 않음."
+ }
+}
