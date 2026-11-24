@@ -1,0 +1,361 @@
+{
+ "settings": {
+  "H": 50,
+  "K": 5,
+  "S": 10,
+  "sigma_a": 0.3,
+  "episodes": 400,
+  "T": 600,
+  "euler_steps_chunk": 10,
+  "betas": [
+   1.0,
+   0.3,
+   0.1,
+   0.03,
+   0.01,
+   0.0
+  ]
+ },
+ "sigma_o=0.5": {
+  "H50E50": {
+   "accuracy": 0.8699,
+   "block_sign_flips_per_episode": 2.8,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 23.5,
+   "mean_lag_steps": 24.4,
+   "missed_fraction": 0.088
+  },
+  "H50E10": {
+   "accuracy": 0.95,
+   "block_sign_flips_per_episode": 5.86,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 5.0,
+   "mean_lag_steps": 4.7,
+   "missed_fraction": 0.01
+  },
+  "REACT|beta=1.0": {
+   "accuracy": 0.5506,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.55
+  },
+  "REACT|beta=0.3": {
+   "accuracy": 0.5726,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.587
+  },
+  "REACT|beta=0.1": {
+   "accuracy": 0.6073,
+   "block_sign_flips_per_episode": 0.41,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 34.0,
+   "missed_fraction": 0.527
+  },
+  "REACT|beta=0.03": {
+   "accuracy": 0.9268,
+   "block_sign_flips_per_episode": 2.6,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 18.0,
+   "mean_lag_steps": 19.4,
+   "missed_fraction": 0.043
+  },
+  "REACT|beta=0.01": {
+   "accuracy": 0.9383,
+   "block_sign_flips_per_episode": 2.64,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 16.0,
+   "mean_lag_steps": 16.5,
+   "missed_fraction": 0.035
+  },
+  "REACT|beta=0.0": {
+   "accuracy": 0.9405,
+   "block_sign_flips_per_episode": 2.71,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 15.0,
+   "mean_lag_steps": 15.8,
+   "missed_fraction": 0.033
+  },
+  "REACT_stale|beta=1.0": {
+   "accuracy": 0.5506,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.55
+  },
+  "REACT_stale|beta=0.3": {
+   "accuracy": 0.5726,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.587
+  },
+  "REACT_stale|beta=0.1": {
+   "accuracy": 0.6007,
+   "block_sign_flips_per_episode": 0.4,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 34.6,
+   "missed_fraction": 0.539
+  },
+  "REACT_stale|beta=0.03": {
+   "accuracy": 0.8827,
+   "block_sign_flips_per_episode": 2.54,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 28.0,
+   "mean_lag_steps": 29.8,
+   "missed_fraction": 0.063
+  },
+  "REACT_stale|beta=0.01": {
+   "accuracy": 0.8956,
+   "block_sign_flips_per_episode": 2.58,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 26.0,
+   "mean_lag_steps": 26.3,
+   "missed_fraction": 0.06
+  },
+  "REACT_stale|beta=0.0": {
+   "accuracy": 0.8979,
+   "block_sign_flips_per_episode": 2.65,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 25.0,
+   "mean_lag_steps": 25.6,
+   "missed_fraction": 0.058
+  }
+ },
+ "sigma_o=1.0": {
+  "H50E50": {
+   "accuracy": 0.7281,
+   "block_sign_flips_per_episode": 4.37,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 20.0,
+   "mean_lag_steps": 25.8,
+   "missed_fraction": 0.116
+  },
+  "H50E10": {
+   "accuracy": 0.7818,
+   "block_sign_flips_per_episode": 20.07,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 5.0,
+   "mean_lag_steps": 6.5,
+   "missed_fraction": 0.014
+  },
+  "REACT|beta=1.0": {
+   "accuracy": 0.5111,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.522
+  },
+  "REACT|beta=0.3": {
+   "accuracy": 0.5434,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.539
+  },
+  "REACT|beta=0.1": {
+   "accuracy": 0.5597,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.562
+  },
+  "REACT|beta=0.03": {
+   "accuracy": 0.7161,
+   "block_sign_flips_per_episode": 1.85,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 51.0,
+   "mean_lag_steps": 57.8,
+   "missed_fraction": 0.3
+  },
+  "REACT|beta=0.01": {
+   "accuracy": 0.8892,
+   "block_sign_flips_per_episode": 3.53,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 25.0,
+   "mean_lag_steps": 27.0,
+   "missed_fraction": 0.061
+  },
+  "REACT|beta=0.0": {
+   "accuracy": 0.8839,
+   "block_sign_flips_per_episode": 5.9,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 18.0,
+   "mean_lag_steps": 20.2,
+   "missed_fraction": 0.041
+  },
+  "REACT_stale|beta=1.0": {
+   "accuracy": 0.5111,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.522
+  },
+  "REACT_stale|beta=0.3": {
+   "accuracy": 0.5434,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.539
+  },
+  "REACT_stale|beta=0.1": {
+   "accuracy": 0.5597,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.562
+  },
+  "REACT_stale|beta=0.03": {
+   "accuracy": 0.6869,
+   "block_sign_flips_per_episode": 1.82,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 60.0,
+   "mean_lag_steps": 65.3,
+   "missed_fraction": 0.338
+  },
+  "REACT_stale|beta=0.01": {
+   "accuracy": 0.8494,
+   "block_sign_flips_per_episode": 3.51,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 34.0,
+   "mean_lag_steps": 36.5,
+   "missed_fraction": 0.09
+  },
+  "REACT_stale|beta=0.0": {
+   "accuracy": 0.8463,
+   "block_sign_flips_per_episode": 5.87,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 28.0,
+   "mean_lag_steps": 30.1,
+   "missed_fraction": 0.063
+  }
+ },
+ "sigma_o=2.0": {
+  "H50E50": {
+   "accuracy": 0.5921,
+   "block_sign_flips_per_episode": 5.23,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 11.0,
+   "mean_lag_steps": 25.6,
+   "missed_fraction": 0.142
+  },
+  "H50E10": {
+   "accuracy": 0.6171,
+   "block_sign_flips_per_episode": 28.15,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 6.0,
+   "mean_lag_steps": 9.7,
+   "missed_fraction": 0.017
+  },
+  "REACT|beta=1.0": {
+   "accuracy": 0.5087,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.513
+  },
+  "REACT|beta=0.3": {
+   "accuracy": 0.5091,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.521
+  },
+  "REACT|beta=0.1": {
+   "accuracy": 0.5262,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.528
+  },
+  "REACT|beta=0.03": {
+   "accuracy": 0.5466,
+   "block_sign_flips_per_episode": 0.03,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.544
+  },
+  "REACT|beta=0.01": {
+   "accuracy": 0.7615,
+   "block_sign_flips_per_episode": 5.33,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 42.0,
+   "mean_lag_steps": 46.2,
+   "missed_fraction": 0.19
+  },
+  "REACT|beta=0.0": {
+   "accuracy": 0.7229,
+   "block_sign_flips_per_episode": 12.56,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 27.0,
+   "mean_lag_steps": 33.4,
+   "missed_fraction": 0.117
+  },
+  "REACT_stale|beta=1.0": {
+   "accuracy": 0.5087,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.513
+  },
+  "REACT_stale|beta=0.3": {
+   "accuracy": 0.5091,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.521
+  },
+  "REACT_stale|beta=0.1": {
+   "accuracy": 0.5262,
+   "block_sign_flips_per_episode": 0.0,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.528
+  },
+  "REACT_stale|beta=0.03": {
+   "accuracy": 0.5466,
+   "block_sign_flips_per_episode": 0.03,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 0.0,
+   "mean_lag_steps": 0.0,
+   "missed_fraction": 0.544
+  },
+  "REACT_stale|beta=0.01": {
+   "accuracy": 0.7301,
+   "block_sign_flips_per_episode": 5.25,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 50.0,
+   "mean_lag_steps": 54.3,
+   "missed_fraction": 0.23
+  },
+  "REACT_stale|beta=0.0": {
+   "accuracy": 0.7009,
+   "block_sign_flips_per_episode": 12.55,
+   "true_switches_per_episode": 2.65,
+   "median_lag_steps": 35.0,
+   "mean_lag_steps": 41.0,
+   "missed_fraction": 0.146
+  }
+ }
+}
