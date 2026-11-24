@@ -1,0 +1,50 @@
+{
+ "setup": {
+  "window": 240,
+  "K": 8,
+  "dz": 16,
+  "width": 48,
+  "steps": 1500,
+  "batch": 32,
+  "seeds": [
+   0
+  ],
+  "pretrain_pool": 1500,
+  "probe_train_n": 1000,
+  "probe_test_n": 1000
+ },
+ "runs": {
+  "paper_beta1e-3_free0.5": {
+   "probe_acc_pretrained_mean_over_seeds": 0.839,
+   "per_seed": [
+    0.839
+   ],
+   "probe_acc_random_init_encoder": 0.742,
+   "probe_acc_raw_summary_features": 0.863,
+   "final_train_mse": 0.0082,
+   "final_mean_kl_nats_per_dim": 1.567
+  },
+  "no_kl": {
+   "probe_acc_pretrained_mean_over_seeds": 0.848,
+   "per_seed": [
+    0.848
+   ],
+   "probe_acc_random_init_encoder": 0.742,
+   "probe_acc_raw_summary_features": 0.863,
+   "final_train_mse": 0.0086,
+   "final_mean_kl_nats_per_dim": 5.412
+  },
+  "strong_kl_beta0.1": {
+   "probe_acc_pretrained_mean_over_seeds": 0.74,
+   "per_seed": [
+    0.74
+   ],
+   "probe_acc_random_init_encoder": 0.742,
+   "probe_acc_raw_summary_features": 0.863,
+   "final_train_mse": 0.0466,
+   "final_mean_kl_nats_per_dim": 0.074
+  }
+ },
+ "chance": 0.3333333333333333,
+ "elapsed_s": 120.0
+}
