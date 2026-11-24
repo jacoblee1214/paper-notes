@@ -1,0 +1,85 @@
+{
+ "a_endpoints": {
+  "w0_at_t0": 1.0,
+  "w0_at_t1": 0.0,
+  "Sigma_t0": 0.0,
+  "Sigma_t1": 0.0,
+  "argmax_Sigma_t": 0.5,
+  "max_Sigma": 0.03751250000000007,
+  "sigma1_sq_total": 0.15005000000000027,
+  "max_Sigma_equals_sigma1_sq_over_4": true
+ },
+ "b_eq5_start_noise": {
+  "sigma1_sq": 0.15005000000000027,
+  "train_Sigma_at_t_to_1": 0.0,
+  "ratio_sigma1_sq_to_max_intermediate_Sigma": 4.0,
+  "note": "식 5가 쓰는 sigma_1^2 를 누적 분산 전체로 읽으면 중간 분산 최대값의 4배이고, 식 3의 t = 1 분산(0)과 다르다. 논문은 sigma_1 값을 적지 않았다"
+ },
+ "c_exact_denoiser_steps": {
+  "1": {
+   "bridge_from_X1": {
+    "resid_mean": 0.0,
+    "resid_std": 0.0,
+    "mse_to_x0": 0.33
+   },
+   "gaussian_init_same_condition": {
+    "resid_mean": 0.0,
+    "resid_std": 0.0,
+    "mse_to_x0": 0.33
+   }
+  },
+  "2": {
+   "bridge_from_X1": {
+    "resid_mean": -0.001,
+    "resid_std": 0.467,
+    "mse_to_x0": 0.403
+   },
+   "gaussian_init_same_condition": {
+    "resid_mean": 0.001,
+    "resid_std": 0.466,
+    "mse_to_x0": 0.401
+   }
+  },
+  "5": {
+   "bridge_from_X1": {
+    "resid_mean": 0.003,
+    "resid_std": 0.697,
+    "mse_to_x0": 0.496
+   },
+   "gaussian_init_same_condition": {
+    "resid_mean": -0.003,
+    "resid_std": 0.691,
+    "mse_to_x0": 0.486
+   }
+  },
+  "10": {
+   "bridge_from_X1": {
+    "resid_mean": 0.01,
+    "resid_std": 0.82,
+    "mse_to_x0": 0.55
+   },
+   "gaussian_init_same_condition": {
+    "resid_mean": -0.003,
+    "resid_std": 0.815,
+    "mse_to_x0": 0.548
+   }
+  },
+  "20": {
+   "bridge_from_X1": {
+    "resid_mean": 0.002,
+    "resid_std": 0.898,
+    "mse_to_x0": 0.601
+   },
+   "gaussian_init_same_condition": {
+    "resid_mean": -0.004,
+    "resid_std": 0.909,
+    "mse_to_x0": 0.601
+   }
+  }
+ },
+ "c_reference": {
+  "posterior_var": 0.329,
+  "mse_floor_if_sampling_exact_posterior": 0.658,
+  "mse_posterior_mean_only": 0.329
+ }
+}
