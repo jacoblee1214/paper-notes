@@ -1,0 +1,691 @@
+{
+ "V1_table1": {
+  "pooled": {
+   "RoboTTT": {
+    "k": 24,
+    "n": 50,
+    "rate": 0.48,
+    "wilson95": [
+     0.348,
+     0.6149
+    ]
+   },
+   "GR00T N1.7": {
+    "k": 6,
+    "n": 50,
+    "rate": 0.12,
+    "wilson95": [
+     0.0562,
+     0.238
+    ]
+   },
+   "GR00T N1.7 Hist.": {
+    "k": 8,
+    "n": 50,
+    "rate": 0.16,
+    "wilson95": [
+     0.0834,
+     0.2851
+    ]
+   },
+   "GDN": {
+    "k": 11,
+    "n": 50,
+    "rate": 0.22,
+    "wilson95": [
+     0.1275,
+     0.3524
+    ]
+   }
+  },
+  "per_task_fisher": {
+   "GR00T N1.7": {
+    "Pup Go Car": 0.0824,
+    "Circuit": 0.0031,
+    "Gear Bot": 0.4737
+   },
+   "GR00T N1.7 Hist.": {
+    "Pup Go Car": 0.0012,
+    "Circuit": 0.2049,
+    "Gear Bot": 0.4737
+   },
+   "GDN": {
+    "Pup Go Car": 0.0824,
+    "Circuit": 0.2049,
+    "Gear Bot": 0.4737
+   }
+  },
+  "pooled_fisher_vs_RoboTTT": {
+   "GR00T N1.7": 0.00015,
+   "GR00T N1.7 Hist.": 0.00112,
+   "GDN": 0.01134
+  },
+  "per_task_holm_adjusted": {
+   "GR00T N1.7 Hist. / Pup Go Car": 0.0108,
+   "GR00T N1.7 / Circuit": 0.0248,
+   "GDN / Pup Go Car": 0.5768,
+   "GR00T N1.7 / Pup Go Car": 0.5768,
+   "GDN / Circuit": 1.0,
+   "GR00T N1.7 Hist. / Circuit": 1.0,
+   "GDN / Gear Bot": 1.0,
+   "GR00T N1.7 / Gear Bot": 1.0,
+   "GR00T N1.7 Hist. / Gear Bot": 1.0
+  },
+  "gear_bot_baseline_upper95_if_0_of_10": 0.308,
+  "gear_bot_RoboTTT_wilson": [
+   0.0567,
+   0.5098
+  ]
+ },
+ "V2_table2": {
+  "RoboTTT_wilson": [
+   0.3127,
+   0.8318
+  ],
+  "GDN_clopper_upper": 0.308,
+  "fisher_two_sided": 0.01084
+ },
+ "V3_table3": {
+  "pooled_rate": {
+   "RoboTTT": {
+    "k": 33,
+    "n": 40,
+    "rate": 0.825,
+    "wilson95": [
+     0.6805,
+     0.9125
+    ]
+   },
+   "GR00T N1.7": {
+    "k": 21,
+    "n": 40,
+    "rate": 0.525,
+    "wilson95": [
+     0.375,
+     0.6706
+    ]
+   },
+   "GR00T N1.7 Hist.": {
+    "k": 8,
+    "n": 40,
+    "rate": 0.2,
+    "wilson95": [
+     0.105,
+     0.3476
+    ]
+   },
+   "GDN": {
+    "k": 31,
+    "n": 40,
+    "rate": 0.775,
+    "wilson95": [
+     0.625,
+     0.8768
+    ]
+   }
+  },
+  "fisher_vs_RoboTTT": {
+   "GR00T N1.7": {
+    "roof": 0.1908,
+    "tire": 0.031,
+    "pooled": 0.008
+   },
+   "GR00T N1.7 Hist.": {
+    "roof": 0.0003,
+    "tire": 0.0001,
+    "pooled": 0.0
+   },
+   "GDN": {
+    "roof": 0.7311,
+    "tire": 1.0,
+    "pooled": 0.7806
+   }
+  }
+ },
+ "F7_read_values": {
+  "RoboTTT": [
+   0.789,
+   0.886,
+   0.775,
+   0.705
+  ],
+  "GR00T N1.7": [
+   0.421,
+   0.566,
+   0.23,
+   0.467
+  ],
+  "GR00T N1.7 Hist.": [
+   0.489,
+   0.392,
+   0.539,
+   0.536
+  ],
+  "GDN": [
+   0.558,
+   0.564,
+   0.526,
+   0.586
+  ]
+ },
+ "V4_F7_mean_of_tasks": {
+  "RoboTTT": 0.789,
+  "GR00T N1.7": 0.421,
+  "GR00T N1.7 Hist.": 0.489,
+  "GDN": 0.559
+ },
+ "V4_text_vs_recomputed": {
+  "RoboTTT vs GR00T (text 87%)": 88.1,
+  "RoboTTT vs GR00T (F7 read)": 87.4,
+  "RoboTTT vs GDN (text 41%)": 41.1,
+  "8K vs 1K (text abstract 62%, intro 63%)": 62.9,
+  "8K vs short ctx (text 57%)": 56.8,
+  "Pup Hist vs GR00T (text 39.5 vs 57)": -30.7,
+  "tire/roof robustness 83% vs 53% (RoboTTT 33/40, GR00T 21/40)": [
+   82.5,
+   52.5
+  ]
+ },
+ "V5_score_feasible_given_table1": {
+  "RoboTTT / Pup Go Car": {
+   "k": 9,
+   "n": 20,
+   "score_read": 0.886,
+   "lo": 0.45,
+   "hi": 0.945,
+   "inside": true
+  },
+  "RoboTTT / Circuit": {
+   "k": 13,
+   "n": 20,
+   "score_read": 0.775,
+   "lo": 0.65,
+   "hi": 0.912,
+   "inside": true
+  },
+  "RoboTTT / Gear Bot": {
+   "k": 2,
+   "n": 10,
+   "score_read": 0.705,
+   "lo": 0.2,
+   "hi": 0.92,
+   "inside": true
+  },
+  "GR00T N1.7 / Pup Go Car": {
+   "k": 3,
+   "n": 20,
+   "score_read": 0.566,
+   "lo": 0.15,
+   "hi": 0.915,
+   "inside": true
+  },
+  "GR00T N1.7 / Circuit": {
+   "k": 3,
+   "n": 20,
+   "score_read": 0.23,
+   "lo": 0.15,
+   "hi": 0.787,
+   "inside": true
+  },
+  "GR00T N1.7 / Gear Bot": {
+   "k": 0,
+   "n": 10,
+   "score_read": 0.467,
+   "lo": 0.0,
+   "hi": 0.9,
+   "inside": true
+  },
+  "GR00T N1.7 Hist. / Pup Go Car": {
+   "k": 0,
+   "n": 20,
+   "score_read": 0.392,
+   "lo": 0.0,
+   "hi": 0.9,
+   "inside": true
+  },
+  "GR00T N1.7 Hist. / Circuit": {
+   "k": 8,
+   "n": 20,
+   "score_read": 0.539,
+   "lo": 0.4,
+   "hi": 0.85,
+   "inside": true
+  },
+  "GR00T N1.7 Hist. / Gear Bot": {
+   "k": 0,
+   "n": 10,
+   "score_read": 0.536,
+   "lo": 0.0,
+   "hi": 0.9,
+   "inside": true
+  },
+  "GDN / Pup Go Car": {
+   "k": 3,
+   "n": 20,
+   "score_read": 0.564,
+   "lo": 0.15,
+   "hi": 0.915,
+   "inside": true
+  },
+  "GDN / Circuit": {
+   "k": 8,
+   "n": 20,
+   "score_read": 0.526,
+   "lo": 0.4,
+   "hi": 0.85,
+   "inside": true
+  },
+  "GDN / Gear Bot": {
+   "k": 0,
+   "n": 10,
+   "score_read": 0.586,
+   "lo": 0.0,
+   "hi": 0.9,
+   "inside": true
+  }
+ },
+ "V5_pup_RoboTTT_nonfull_mean": 0.793,
+ "V5_pup_RoboTTT_min_trials_reaching_0p75_of_11": 7,
+ "V6_score_diff_z": {
+  "RoboTTT vs GR00T N1.7 / Pup Go Car": {
+   "diff": 0.32,
+   "z_upperbound_sd": 2.43,
+   "z_sd0.3": 3.37
+  },
+  "RoboTTT vs GR00T N1.7 / Circuit": {
+   "diff": 0.545,
+   "z_upperbound_sd": 4.11,
+   "z_sd0.3": 5.74
+  },
+  "RoboTTT vs GR00T N1.7 / Gear Bot": {
+   "diff": 0.238,
+   "z_upperbound_sd": 1.11,
+   "z_sd0.3": 1.77
+  },
+  "RoboTTT vs GR00T N1.7 Hist. / Pup Go Car": {
+   "diff": 0.494,
+   "z_upperbound_sd": 3.79,
+   "z_sd0.3": 5.21
+  },
+  "RoboTTT vs GR00T N1.7 Hist. / Circuit": {
+   "diff": 0.236,
+   "z_upperbound_sd": 1.62,
+   "z_sd0.3": 2.49
+  },
+  "RoboTTT vs GR00T N1.7 Hist. / Gear Bot": {
+   "diff": 0.169,
+   "z_upperbound_sd": 0.79,
+   "z_sd0.3": 1.26
+  },
+  "RoboTTT vs GDN / Pup Go Car": {
+   "diff": 0.322,
+   "z_upperbound_sd": 2.44,
+   "z_sd0.3": 3.39
+  },
+  "RoboTTT vs GDN / Circuit": {
+   "diff": 0.249,
+   "z_upperbound_sd": 1.71,
+   "z_sd0.3": 2.62
+  },
+  "RoboTTT vs GDN / Gear Bot": {
+   "diff": 0.119,
+   "z_upperbound_sd": 0.56,
+   "z_sd0.3": 0.89
+  }
+ },
+ "F8_read_values": {
+  "RoboTTT": [
+   0.306,
+   0.288,
+   0.392,
+   0.438,
+   0.543,
+   0.604,
+   0.716
+  ],
+  "GDN": [
+   0.011,
+   0.177,
+   0.401,
+   0.344,
+   0.425,
+   0.354,
+   0.442
+  ],
+  "single_step_ref": 0.375,
+  "short_ctx_ref": 0.456
+ },
+ "V7_fit": {
+  "128-8K": {
+   "slope_per_doubling": 0.0719,
+   "r2": 0.959,
+   "p": 0.0001
+  },
+  "1K-8K": {
+   "slope_per_doubling": 0.0895,
+   "r2": 0.989,
+   "p": 0.0057
+  },
+  "GDN_128-8K": {
+   "slope_per_doubling": 0.0597,
+   "r2": 0.669,
+   "p": 0.025
+  },
+  "GDN_512-8K": {
+   "slope_per_doubling": 0.0092,
+   "r2": 0.114,
+   "p": 0.578
+  }
+ },
+ "V7_increments_RoboTTT": [
+  -0.018,
+  0.104,
+  0.046,
+  0.105,
+  0.061,
+  0.112
+ ],
+ "V7_RoboTTT_minus_short_ctx": {
+  "128": -0.15,
+  "256": -0.168,
+  "512": -0.064,
+  "1024": -0.018,
+  "2048": 0.087,
+  "4096": 0.148,
+  "8192": 0.26
+ },
+ "V7_RoboTTT_minus_GDN": {
+  "128": 0.295,
+  "256": 0.111,
+  "512": -0.009,
+  "1024": 0.094,
+  "2048": 0.118,
+  "4096": 0.25,
+  "8192": 0.274
+ },
+ "V7_se_assumed_sd": {
+  "0.25": {
+   "se_avg": 0.0373,
+   "se_diff": 0.0527,
+   "z_1K_to_8K": 5.27,
+   "z_1K_vs_short": -0.34,
+   "z_adjacent_mean": 1.76
+  },
+  "0.3": {
+   "se_avg": 0.0447,
+   "se_diff": 0.0632,
+   "z_1K_to_8K": 4.4,
+   "z_1K_vs_short": -0.28,
+   "z_adjacent_mean": 1.47
+  },
+  "0.4": {
+   "se_avg": 0.0596,
+   "se_diff": 0.0843,
+   "z_1K_to_8K": 3.3,
+   "z_1K_vs_short": -0.21,
+   "z_adjacent_mean": 1.1
+  }
+ },
+ "F10_read_values": {
+  "RoboTTT": {
+   "before": 0.65,
+   "human_only": 0.72,
+   "distill": 0.886
+  },
+  "GDN": {
+   "before": 0.437,
+   "human_only": 0.506,
+   "distill": 0.563
+  },
+  "GR00T N1.7": {
+   "before": 0.524,
+   "human_only": 0.566,
+   "full_traj": 0.566
+  },
+  "GR00T N1.7 Hist.": {
+   "before": 0.385,
+   "human_only": 0.392
+  }
+ },
+ "V7_F8_vs_F7_F10_consistency": {
+  "RoboTTT": {
+   "F8_value": 0.716,
+   "mean(F10_before, F7_circuit, F7_gear)": 0.71,
+   "gap": 0.006,
+   "implied_pup_from_F8": 0.668,
+   "F10_before_pup": 0.65
+  },
+  "GR00T N1.7": {
+   "F8_value": 0.375,
+   "mean(F10_before, F7_circuit, F7_gear)": 0.407,
+   "gap": -0.032,
+   "implied_pup_from_F8": 0.428,
+   "F10_before_pup": 0.524
+  },
+  "GR00T N1.7 Hist.": {
+   "F8_value": 0.456,
+   "mean(F10_before, F7_circuit, F7_gear)": 0.487,
+   "gap": -0.031,
+   "implied_pup_from_F8": 0.293,
+   "F10_before_pup": 0.385
+  },
+  "GDN": {
+   "F8_value": 0.442,
+   "mean(F10_before, F7_circuit, F7_gear)": 0.516,
+   "gap": -0.074,
+   "implied_pup_from_F8": 0.214,
+   "F10_before_pup": 0.437
+  }
+ },
+ "V8_dagger_relative_gain_pct": {
+  "RoboTTT": {
+   "human_only": 10.8,
+   "distill": 36.3
+  },
+  "GDN": {
+   "human_only": 15.8,
+   "distill": 28.8
+  },
+  "GR00T N1.7": {
+   "human_only": 8.0,
+   "full_traj": 8.0
+  },
+  "GR00T N1.7 Hist.": {
+   "human_only": 1.8
+  }
+ },
+ "V8_text_check": {
+  "human_only_avg4 (text 9)": 9.1,
+  "human_only_seq2 (text 13)": 13.3,
+  "distill_avg2 (text 33)": 32.5,
+  "distill_RoboTTT (text 36)": 36.3,
+  "distill_GDN (text 29)": 28.8
+ },
+ "V8_absolute_gain": {
+  "RoboTTT": {
+   "human_only": 0.07,
+   "distill": 0.236
+  },
+  "GDN": {
+   "human_only": 0.069,
+   "distill": 0.126
+  },
+  "GR00T N1.7": {
+   "human_only": 0.042,
+   "full_traj": 0.042
+  },
+  "GR00T N1.7 Hist.": {
+   "human_only": 0.007
+  }
+ },
+ "V8_F7_pup_equals_F10_after": {
+  "RoboTTT F7 .886 vs F10 distill": 0.886,
+  "GDN F7 .564 vs distill": 0.563,
+  "GR00T F7 .566 vs human_only": 0.566,
+  "Hist F7 .392 vs human_only": 0.392
+ },
+ "F12_read_values_scaled_to_full_0.65": {
+  "No Seq. Action Forcing": 0.01,
+  "TTT Linear": 0.477,
+  "State Tokens": 0.447,
+  "+ Action Tokens": 0.551,
+  "+ Register Tokens (full)": 0.65,
+  "GR00T N1.7 w/ Register Tokens": 0.434
+ },
+ "V9_text_check": {
+  "action_vs_state (text 23)": 23.3,
+  "register_vs_action (text 18)": 18.0,
+  "linear_vs_MLP deficit % (text 27)": 26.6,
+  "full F12 vs F10 before (RoboTTT Pup)": [
+   0.65,
+   0.65
+  ],
+  "GR00T+reg vs GR00T F10 before": [
+   0.434,
+   0.524
+  ]
+ },
+ "V10_time": {
+  "128 steps s": 4.3,
+  "1K steps s": 34.1,
+  "8K steps s": 273.1,
+  "8K min": 4.55,
+  "Pup Go Car 2min steps": 3600,
+  "Circuit 1min steps": 1800,
+  "Gear Bot 5min steps": 9000,
+  "Gear Bot episode / 8K": 1.1,
+  "post-train 1K / Gear Bot episode": 0.11,
+  "Circuit human video 1min + robot 1min steps": 3600
+ },
+ "V10_pretrain_batches": {
+  "128": {
+   "global_batch": 64,
+   "timesteps_per_update": 8192,
+   "sequences_total_30k": 1920000,
+   "timesteps_total_30k_M": 245.8
+  },
+  "256": {
+   "global_batch": 64,
+   "timesteps_per_update": 16384,
+   "sequences_total_30k": 1920000,
+   "timesteps_total_30k_M": 491.5
+  },
+  "512": {
+   "global_batch": 64,
+   "timesteps_per_update": 32768,
+   "sequences_total_30k": 1920000,
+   "timesteps_total_30k_M": 983.0
+  },
+  "1024": {
+   "global_batch": 64,
+   "timesteps_per_update": 65536,
+   "sequences_total_30k": 1920000,
+   "timesteps_total_30k_M": 1966.1
+  },
+  "2048": {
+   "global_batch": 64,
+   "timesteps_per_update": 131072,
+   "sequences_total_30k": 1920000,
+   "timesteps_total_30k_M": 3932.2
+  },
+  "4096": {
+   "global_batch": 64,
+   "timesteps_per_update": 262144,
+   "sequences_total_30k": 1920000,
+   "timesteps_total_30k_M": 7864.3
+  },
+  "8192": {
+   "global_batch": 16,
+   "timesteps_per_update": 131072,
+   "sequences_total_30k": 480000,
+   "timesteps_total_30k_M": 3932.2
+  }
+ },
+ "V10_figA1": {
+  "bins": [
+   "<512",
+   "512-1K",
+   "1K-2K",
+   "2K-4K",
+   ">4K"
+  ],
+  "share_pct": [
+   3.1,
+   12.5,
+   25.9,
+   41.4,
+   17.1
+  ],
+  "count_est": [
+   6800,
+   26900,
+   55900,
+   89500,
+   37000
+  ],
+  "total_est": 216000,
+  "sum_of_labels": 100.0,
+  "epochs_at_64x30k_of_total": 8.89,
+  "epochs_at_16x30k_of_total": 2.22
+ },
+ "V10_params": {
+  "DiT 538M + 16 x 10M": 698,
+  "stated total 690M -> per TTT layer M": 9.5,
+  "public GR00T N1.7 DiT inner dim (32 heads x 48)": 1536,
+  "fast MLP d x d hidden params (M)": 4.72,
+  "fast MLP hidden d/2 (M)": 2.36,
+  "q,k,v proj d x d (M)": 7.08
+ },
+ "V10_gpu": {
+  "pretrain GPUs": 16,
+  "per-device batch<=4K": 4,
+  "global<=4K": 64,
+  "per-device >4K": 1,
+  "global >4K": 16,
+  "post-train GPUs": 8,
+  "post-train global batch (1 per device)": 8
+ },
+ "V11_cost_model_assumptions": "d=1536(공개 N1.7 설정), 16층, bf16, 고속 MLP 은닉=d 또는 d/2(논문 미기재, 가정), 토큰=레지스터16+상태1+행동H",
+ "V11_cost_model": {
+  "H=16": {
+   "tokens_per_timestep": 33,
+   "kv_cache_GB_8K_all_tokens": 26.6,
+   "kv_cache_GB_8K_per_chunk_stride": 1.66,
+   "fast_weights_MB_hidden_d": 151.0,
+   "fast_weights_MB_hidden_d_half": 75.5,
+   "updates_over_8K_if_one_per_chunk": 512,
+   "fast_update_GFLOP_per_chunk_6PT": 14.9
+  },
+  "H=40": {
+   "tokens_per_timestep": 57,
+   "kv_cache_GB_8K_all_tokens": 45.9,
+   "kv_cache_GB_8K_per_chunk_stride": 1.14,
+   "fast_weights_MB_hidden_d": 151.0,
+   "fast_weights_MB_hidden_d_half": 75.5,
+   "updates_over_8K_if_one_per_chunk": 204,
+   "fast_update_GFLOP_per_chunk_6PT": 25.8
+  }
+ },
+ "V12_demo_counts_est": {
+  "Pup Go Car": 240,
+  "Circuit": 360,
+  "Gear Bot": 60
+ },
+ "V12_dagger_share_of_pup_demos": 0.294,
+ "V13_pre_dagger_average_read": {
+  "RoboTTT": 0.71,
+  "GDN": 0.516,
+  "GR00T N1.7": 0.407,
+  "GR00T N1.7 Hist.": 0.487
+ },
+ "V13_relative_RoboTTT_vs_pre": {
+  "GDN": 37.6,
+  "GR00T N1.7": 74.4,
+  "GR00T N1.7 Hist.": 45.8
+ },
+ "V13_relative_RoboTTT_post_vs_baseline_post": {
+  "GR00T N1.7": 87.4,
+  "GR00T N1.7 Hist.": 61.3,
+  "GDN": 41.4
+ }
+}
