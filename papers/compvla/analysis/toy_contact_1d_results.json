@@ -1,0 +1,152 @@
+{
+ "label_map": {
+  "0.5": {
+   "k_low": 500.0,
+   "d_mm": 0.0,
+   "K_times_d": 0.0
+  },
+  "1": {
+   "k_low": 500.0,
+   "d_mm": 2.0,
+   "K_times_d": 1.0
+  },
+  "5": {
+   "k_low": 414.3,
+   "d_mm": 12.1,
+   "K_times_d": 5.0
+  },
+  "10": {
+   "k_low": 307.1,
+   "d_mm": 32.6,
+   "K_times_d": 10.0
+  },
+  "15": {
+   "k_low": 200.0,
+   "d_mm": 75.0,
+   "K_times_d": 15.0
+  },
+  "30": {
+   "k_low": 200.0,
+   "d_mm": 150.0,
+   "K_times_d": 30.0
+  },
+  "50": {
+   "k_low": 200.0,
+   "d_mm": 250.0,
+   "K_times_d": 50.0
+  }
+ },
+ "cases": [
+  {
+   "ke": 2000.0,
+   "F_target": 10.0,
+   "A_penetration_cmd_mm": 25.0,
+   "B_k_low": 307.1,
+   "B_d_mm": 32.56,
+   "A": {
+    "F_nominal": 10.0,
+    "dF_per_mm": 0.4,
+    "force_change_for_error": {
+     "-5mm": -2.0,
+     "+5mm": 2.0,
+     "+10mm": 4.0
+    },
+    "contact_loss_if_error_above_mm": 25.0
+   },
+   "B": {
+    "F_nominal": 8.67,
+    "dF_per_mm": 0.266,
+    "force_change_for_error": {
+     "-5mm": -1.33,
+     "+5mm": 1.33,
+     "+10mm": 2.66
+    },
+    "contact_loss_if_error_above_mm": 32.6
+   },
+   "C": {
+    "F_nominal": 13.02,
+    "dF_per_mm": 0.4,
+    "force_change_for_error": {
+     "-5mm": -2.0,
+     "+5mm": 2.0,
+     "+10mm": 4.0
+    },
+    "contact_loss_if_error_above_mm": 32.6
+   }
+  },
+  {
+   "ke": 5000.0,
+   "F_target": 10.0,
+   "A_penetration_cmd_mm": 22.0,
+   "B_k_low": 307.1,
+   "B_d_mm": 32.56,
+   "A": {
+    "F_nominal": 10.0,
+    "dF_per_mm": 0.455,
+    "force_change_for_error": {
+     "-5mm": -2.27,
+     "+5mm": 2.27,
+     "+10mm": 4.55
+    },
+    "contact_loss_if_error_above_mm": 22.0
+   },
+   "B": {
+    "F_nominal": 9.42,
+    "dF_per_mm": 0.289,
+    "force_change_for_error": {
+     "-5mm": -1.45,
+     "+5mm": 1.45,
+     "+10mm": 2.89
+    },
+    "contact_loss_if_error_above_mm": 32.6
+   },
+   "C": {
+    "F_nominal": 14.8,
+    "dF_per_mm": 0.455,
+    "force_change_for_error": {
+     "-5mm": -2.27,
+     "+5mm": 2.27,
+     "+10mm": 4.55
+    },
+    "contact_loss_if_error_above_mm": 32.6
+   }
+  },
+  {
+   "ke": 20000.0,
+   "F_target": 10.0,
+   "A_penetration_cmd_mm": 20.5,
+   "B_k_low": 307.1,
+   "B_d_mm": 32.56,
+   "A": {
+    "F_nominal": 10.0,
+    "dF_per_mm": 0.488,
+    "force_change_for_error": {
+     "-5mm": -2.44,
+     "+5mm": 2.44,
+     "+10mm": 4.88
+    },
+    "contact_loss_if_error_above_mm": 20.5
+   },
+   "B": {
+    "F_nominal": 9.85,
+    "dF_per_mm": 0.302,
+    "force_change_for_error": {
+     "-5mm": -1.51,
+     "+5mm": 1.51,
+     "+10mm": 3.02
+    },
+    "contact_loss_if_error_above_mm": 32.6
+   },
+   "C": {
+    "F_nominal": 15.88,
+    "dF_per_mm": 0.488,
+    "force_change_for_error": {
+     "-5mm": -2.44,
+     "+5mm": 2.44,
+     "+10mm": 4.88
+    },
+    "contact_loss_if_error_above_mm": 32.6
+   }
+  }
+ ]
+}
