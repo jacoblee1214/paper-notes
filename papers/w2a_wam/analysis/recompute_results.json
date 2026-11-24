@@ -1,0 +1,783 @@
+{
+ "V1_V2_means": {
+  "values": {
+   "Diffusion Policy": 72.4,
+   "Octo": 75.075,
+   "OpenVLA": 76.5,
+   "pi0.5": 96.85,
+   "mimic-video": 91.625,
+   "DreamZero-5B": 88.65,
+   "W2A": 95.925,
+   "calvin_Diffusion Policy": 0.559,
+   "calvin_UniPi": 0.92,
+   "calvin_OpenVLA": 3.267,
+   "calvin_GR-1": 3.06,
+   "calvin_VPP": 4.329,
+   "calvin_W2A": 4.298
+  },
+  "mismatch": [
+   [
+    "T1",
+    "pi0.5",
+    96.85,
+    96.9
+   ]
+  ]
+ },
+ "real_world": {
+  "totals_450": {
+   "Diffusion Policy": 59,
+   "OpenVLA": 154,
+   "W2A": 294
+  },
+  "totals_pct": {
+   "Diffusion Policy": 13.11,
+   "OpenVLA": 34.22,
+   "W2A": 65.33
+  },
+  "by_type": {
+   "PnP": {
+    "Diffusion Policy": 29.17,
+    "OpenVLA": 50.83,
+    "W2A": 78.33
+   },
+   "Cube": {
+    "Diffusion Policy": 10.0,
+    "OpenVLA": 35.0,
+    "W2A": 65.0
+   },
+   "Long": {
+    "Diffusion Policy": 2.5,
+    "OpenVLA": 18.33,
+    "W2A": 54.17
+   },
+   "Practical": {
+    "Diffusion Policy": 10.0,
+    "OpenVLA": 32.22,
+    "W2A": 63.33
+   }
+  },
+  "table3_matches_table16": true,
+  "w2a_vs_openvla_by_type": [
+   {
+    "comparison": "PnP W2A 대 OpenVLA",
+    "k1": 94,
+    "n1": 120,
+    "k2": 61,
+    "n2": 120,
+    "diff_pp": 27.5,
+    "newcombe95_pp": [
+     15.5,
+     38.42
+    ],
+    "fisher_p": 1.32e-05
+   },
+   {
+    "comparison": "Cube W2A 대 OpenVLA",
+    "k1": 78,
+    "n1": 120,
+    "k2": 42,
+    "n2": 120,
+    "diff_pp": 30.0,
+    "newcombe95_pp": [
+     17.44,
+     41.24
+    ],
+    "fisher_p": 5.37e-06
+   },
+   {
+    "comparison": "Long W2A 대 OpenVLA",
+    "k1": 65,
+    "n1": 120,
+    "k2": 22,
+    "n2": 120,
+    "diff_pp": 35.83,
+    "newcombe95_pp": [
+     23.95,
+     46.3
+    ],
+    "fisher_p": 1.02e-08
+   },
+   {
+    "comparison": "Practical W2A 대 OpenVLA",
+    "k1": 57,
+    "n1": 90,
+    "k2": 29,
+    "n2": 90,
+    "diff_pp": 31.11,
+    "newcombe95_pp": [
+     16.6,
+     43.83
+    ],
+    "fisher_p": 4.94e-05
+   }
+  ],
+  "w2a_vs_openvla_all": {
+   "comparison": "전체 W2A 대 OpenVLA",
+   "k1": 294,
+   "n1": 450,
+   "k2": 154,
+   "n2": 450,
+   "diff_pp": 31.11,
+   "newcombe95_pp": [
+    24.74,
+    37.11
+   ],
+   "fisher_p": 9.43e-21
+  },
+  "w2a_vs_dp_all": {
+   "comparison": "전체 W2A 대 DP",
+   "k1": 294,
+   "n1": 450,
+   "k2": 59,
+   "n2": 450,
+   "diff_pp": 52.22,
+   "newcombe95_pp": [
+    46.55,
+    57.32
+   ],
+   "fisher_p": 3.29e-61
+  },
+  "subtask": [
+   {
+    "type": "PnP",
+    "task": "당근 -> 바구니",
+    "dp": 12,
+    "openvla": 15,
+    "w2a": 25,
+    "fisher_p_vs_openvla": 0.0127,
+    "holm_p": 0.0889
+   },
+   {
+    "type": "PnP",
+    "task": "바나나 -> 바구니",
+    "dp": 6,
+    "openvla": 15,
+    "w2a": 28,
+    "fisher_p_vs_openvla": 0.000372,
+    "holm_p": 0.00483
+   },
+   {
+    "type": "PnP",
+    "task": "흰 그릇 -> 접시",
+    "dp": 9,
+    "openvla": 22,
+    "w2a": 19,
+    "fisher_p_vs_openvla": 0.58,
+    "holm_p": 1.0
+   },
+   {
+    "type": "PnP",
+    "task": "파란 컵 -> 접시",
+    "dp": 8,
+    "openvla": 9,
+    "w2a": 22,
+    "fisher_p_vs_openvla": 0.00169,
+    "holm_p": 0.0186
+   },
+   {
+    "type": "Cube",
+    "task": "초록 -> 빨강",
+    "dp": 0,
+    "openvla": 10,
+    "w2a": 21,
+    "fisher_p_vs_openvla": 0.00921,
+    "holm_p": 0.0798
+   },
+   {
+    "type": "Cube",
+    "task": "보라 -> 빨강",
+    "dp": 4,
+    "openvla": 10,
+    "w2a": 15,
+    "fisher_p_vs_openvla": 0.295,
+    "holm_p": 0.885
+   },
+   {
+    "type": "Cube",
+    "task": "초록 -> 보라",
+    "dp": 8,
+    "openvla": 6,
+    "w2a": 27,
+    "fisher_p_vs_openvla": 5.62e-08,
+    "holm_p": 8.43e-07
+   },
+   {
+    "type": "Cube",
+    "task": "빨강 -> 파랑",
+    "dp": 0,
+    "openvla": 16,
+    "w2a": 15,
+    "fisher_p_vs_openvla": 1.0,
+    "holm_p": 1.0
+   },
+   {
+    "type": "Long",
+    "task": "서랍 + 당근",
+    "dp": 1,
+    "openvla": 6,
+    "w2a": 21,
+    "fisher_p_vs_openvla": 0.000213,
+    "holm_p": 0.00299
+   },
+   {
+    "type": "Long",
+    "task": "서랍 + 바나나",
+    "dp": 1,
+    "openvla": 3,
+    "w2a": 14,
+    "fisher_p_vs_openvla": 0.00342,
+    "holm_p": 0.0342
+   },
+   {
+    "type": "Long",
+    "task": "서랍 + 흰 그릇",
+    "dp": 1,
+    "openvla": 0,
+    "w2a": 10,
+    "fisher_p_vs_openvla": 0.000797,
+    "holm_p": 0.00956
+   },
+   {
+    "type": "Long",
+    "task": "당근과 바나나 -> 바구니",
+    "dp": 0,
+    "openvla": 13,
+    "w2a": 20,
+    "fisher_p_vs_openvla": 0.119,
+    "holm_p": 0.475
+   },
+   {
+    "type": "Practical",
+    "task": "Towel folding",
+    "dp": 7,
+    "openvla": 15,
+    "w2a": 23,
+    "fisher_p_vs_openvla": 0.0596,
+    "holm_p": 0.298
+   },
+   {
+    "type": "Practical",
+    "task": "Table clearing",
+    "dp": 2,
+    "openvla": 8,
+    "w2a": 19,
+    "fisher_p_vs_openvla": 0.00887,
+    "holm_p": 0.0798
+   },
+   {
+    "type": "Practical",
+    "task": "USB insertion",
+    "dp": 0,
+    "openvla": 6,
+    "w2a": 15,
+    "fisher_p_vs_openvla": 0.0292,
+    "holm_p": 0.175
+   }
+  ],
+  "subtask_summary": {
+   "w2a_wins": 13,
+   "w2a_losses": 2,
+   "raw_p_lt_0.05": 10,
+   "holm_p_lt_0.05": 6
+  },
+  "sign_test_p_vs_openvla": 0.00739,
+  "wilson95_overall": {
+   "Diffusion Policy": [
+    10.3,
+    16.5
+   ],
+   "OpenVLA": [
+    30.0,
+    38.7
+   ],
+   "W2A": [
+    60.8,
+    69.6
+   ]
+  }
+ },
+ "libero": {
+  "w2a_vs_baselines": [
+   {
+    "baseline": "pi0.5",
+    "suites": {
+     "Spatial": {
+      "diff_pp": -2.5,
+      "z": -2.8,
+      "p_z": 0.00504
+     },
+     "Object": {
+      "diff_pp": 0.6,
+      "z": 1.01,
+      "p_z": 0.314
+     },
+     "Goal": {
+      "diff_pp": -3.0,
+      "z": -2.88,
+      "p_z": 0.00398
+     },
+     "Long": {
+      "diff_pp": 1.2,
+      "z": 0.93,
+      "p_z": 0.353
+     }
+    },
+    "average": {
+     "diff_pp": -0.92,
+     "z": -1.86,
+     "p_z": 0.0624
+    }
+   },
+   {
+    "baseline": "mimic-video",
+    "suites": {
+     "Spatial": {
+      "diff_pp": 2.1,
+      "z": 2.02,
+      "p_z": 0.0432
+     },
+     "Object": {
+      "diff_pp": 2.0,
+      "z": 3.0,
+      "p_z": 0.00274
+     },
+     "Goal": {
+      "diff_pp": 4.4,
+      "z": 3.56,
+      "p_z": 0.000371
+     },
+     "Long": {
+      "diff_pp": 8.7,
+      "z": 6.02,
+      "p_z": 1.78e-09
+     }
+    },
+    "average": {
+     "diff_pp": 4.3,
+     "z": 7.54,
+     "p_z": 4.88e-14
+    }
+   },
+   {
+    "baseline": "DreamZero-5B",
+    "suites": {
+     "Spatial": {
+      "diff_pp": 5.9,
+      "z": 5.16,
+      "p_z": 2.5e-07
+     },
+     "Object": {
+      "diff_pp": 4.0,
+      "z": 5.28,
+      "p_z": 1.29e-07
+     },
+     "Goal": {
+      "diff_pp": 7.8,
+      "z": 5.94,
+      "p_z": 2.86e-09
+     },
+     "Long": {
+      "diff_pp": 11.4,
+      "z": 7.62,
+      "p_z": 2.55e-14
+     }
+    },
+    "average": {
+     "diff_pp": 7.27,
+     "z": 11.96,
+     "p_z": 5.49e-33
+    }
+   }
+  ],
+  "integer_feasible_N500": {
+   "Diffusion Policy": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "Octo": [
+    false,
+    false,
+    true,
+    false
+   ],
+   "OpenVLA": [
+    false,
+    true,
+    true,
+    false
+   ],
+   "pi0.5": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "mimic-video": [
+    true,
+    true,
+    true,
+    false
+   ],
+   "DreamZero-5B": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "W2A": [
+    false,
+    true,
+    true,
+    true
+   ]
+  },
+  "seed_avg_libero": [
+   94.25,
+   97.1,
+   96.45
+  ],
+  "seed_avg_sd": 1.494,
+  "seed_avg_mean": 95.933,
+  "seed_values_integer_N500": {
+   "Spatial": [
+    true,
+    true,
+    true
+   ],
+   "Object": [
+    true,
+    true,
+    true
+   ],
+   "Goal": [
+    true,
+    true,
+    true
+   ],
+   "Long": [
+    true,
+    true,
+    true
+   ]
+  }
+ },
+ "table15": {
+  "Spatial": {
+   "mean_calc": 96.333,
+   "sd_calc_ddof1": 1.973,
+   "sd_calc_ddof0": 1.611,
+   "table_mean": 96.3,
+   "table_sd": 1.97,
+   "match": true
+  },
+  "Object": {
+   "mean_calc": 98.8,
+   "sd_calc_ddof1": 0.529,
+   "sd_calc_ddof0": 0.432,
+   "table_mean": 98.8,
+   "table_sd": 0.53,
+   "match": true
+  },
+  "Goal": {
+   "mean_calc": 95.0,
+   "sd_calc_ddof1": 3.027,
+   "sd_calc_ddof0": 2.471,
+   "table_mean": 95.0,
+   "table_sd": 3.03,
+   "match": true
+  },
+  "Long": {
+   "mean_calc": 93.6,
+   "sd_calc_ddof1": 2.358,
+   "sd_calc_ddof0": 1.925,
+   "table_mean": 93.6,
+   "table_sd": 2.36,
+   "match": true
+  },
+  "CALVIN Avg.Len": {
+   "mean_calc": 4.3,
+   "sd_calc_ddof1": 0.04,
+   "sd_calc_ddof0": 0.033,
+   "table_mean": 4.3,
+   "table_sd": 0.04,
+   "match": true
+  }
+ },
+ "calvin": {
+  "1/5": {
+   "w2a": 95.3,
+   "vpp": 96.5,
+   "diff_pp": -1.2,
+   "z": -1.6,
+   "p": 0.109
+  },
+  "2/5": {
+   "w2a": 91.7,
+   "vpp": 90.9,
+   "diff_pp": 0.8,
+   "z": 0.79,
+   "p": 0.432
+  },
+  "3/5": {
+   "w2a": 85.5,
+   "vpp": 86.6,
+   "diff_pp": -1.1,
+   "z": -0.86,
+   "p": 0.388
+  },
+  "4/5": {
+   "w2a": 80.2,
+   "vpp": 82.0,
+   "diff_pp": -1.8,
+   "z": -1.25,
+   "p": 0.212
+  },
+  "5/5": {
+   "w2a": 77.1,
+   "vpp": 76.9,
+   "diff_pp": 0.2,
+   "z": 0.13,
+   "p": 0.896
+  },
+  "avg_len_vs_VPP": {
+   "w2a_mean": 4.3,
+   "seed_sd": 0.04,
+   "vpp": 4.33,
+   "t": -1.3,
+   "p": 0.324
+  }
+ },
+ "ablations": {
+  "w/o distill": {
+   "avg_calc": 84.425,
+   "avg_table": 84.4,
+   "drops_consistent_with_w2a_row": true,
+   "avg_ok": true,
+   "avg_drop_ok": true,
+   "drop_pp": 11.52,
+   "z_N6000_vs_N2000": 17.5,
+   "p_z": 6.5e-69
+  },
+  "w/o PCA": {
+   "avg_calc": 88.575,
+   "avg_table": 88.6,
+   "drops_consistent_with_w2a_row": true,
+   "avg_ok": true,
+   "avg_drop_ok": true,
+   "drop_pp": 7.33,
+   "z_N6000_vs_N2000": 12.0,
+   "p_z": 2.3e-33
+  },
+  "Shuffled Teacher": {
+   "avg_calc": 78.225,
+   "avg_table": 78.2,
+   "drops_consistent_with_w2a_row": true,
+   "avg_ok": true,
+   "avg_drop_ok": true,
+   "drop_pp": 17.72,
+   "z_N6000_vs_N2000": 24.6,
+   "p_z": 1.1e-133
+  },
+  "Random Teacher": {
+   "avg_calc": 69.2,
+   "avg_table": 69.2,
+   "drops_consistent_with_w2a_row": true,
+   "avg_ok": true,
+   "avg_drop_ok": true,
+   "drop_pp": 26.72,
+   "z_N6000_vs_N2000": 33.4,
+   "p_z": 1.1e-244
+  },
+  "Token0 Teacher": {
+   "avg_calc": 86.65,
+   "avg_table": 86.7,
+   "drops_consistent_with_w2a_row": true,
+   "avg_ok": true,
+   "avg_drop_ok": true,
+   "drop_pp": 9.22,
+   "z_N6000_vs_N2000": 14.6,
+   "p_z": 2.2e-48
+  },
+  "Current Feature": {
+   "avg_calc": 82.175,
+   "avg_table": 82.2,
+   "drops_consistent_with_w2a_row": true,
+   "avg_ok": true,
+   "avg_drop_ok": true,
+   "drop_pp": 13.72,
+   "z_N6000_vs_N2000": 20.2,
+   "p_z": 1.7e-90
+  },
+  "Future Feature": {
+   "avg_calc": 87.85,
+   "avg_table": 87.8,
+   "drops_consistent_with_w2a_row": true,
+   "avg_ok": true,
+   "avg_drop_ok": true,
+   "drop_pp": 8.12,
+   "z_N6000_vs_N2000": 13.1,
+   "p_z": 1.9e-39
+  },
+  "Global MLP": {
+   "avg_calc": 82.7,
+   "avg_table": 82.7,
+   "drops_consistent_with_w2a_row": true,
+   "avg_ok": true,
+   "avg_drop_ok": true,
+   "drop_pp": 13.22,
+   "z_N6000_vs_N2000": 19.6,
+   "p_z": 1.9e-85
+  },
+  "Grouped MLP": {
+   "avg_calc": 87.725,
+   "avg_table": 87.7,
+   "drops_consistent_with_w2a_row": true,
+   "avg_ok": true,
+   "avg_drop_ok": true,
+   "drop_pp": 8.22,
+   "z_N6000_vs_N2000": 13.3,
+   "p_z": 3.1e-40
+  },
+  "detect_limit_note": {
+   "seed_sd_of_suite_average": 1.49,
+   "two_single_seed_runs_diff_sd": 2.11,
+   "approx_2sd_diff": 4.22
+  },
+  "pairs": {
+   "Future Feature 대 w/o distill": {
+    "diff_pp": 3.4,
+    "z_N2000each": 3.11,
+    "p_z": 0.0019,
+    "diff_over_seed_diff_sd": 1.61
+   },
+   "Token0 Teacher 대 w/o distill": {
+    "diff_pp": 2.3,
+    "z_N2000each": 2.07,
+    "p_z": 0.039,
+    "diff_over_seed_diff_sd": 1.09
+   },
+   "Current Feature 대 w/o distill": {
+    "diff_pp": -2.2,
+    "z_N2000each": -1.87,
+    "p_z": 0.062,
+    "diff_over_seed_diff_sd": -1.04
+   },
+   "Global MLP 대 w/o distill": {
+    "diff_pp": -1.7,
+    "z_N2000each": -1.45,
+    "p_z": 0.15,
+    "diff_over_seed_diff_sd": -0.8
+   },
+   "Grouped MLP 대 w/o distill": {
+    "diff_pp": 3.3,
+    "z_N2000each": 3.01,
+    "p_z": 0.0026,
+    "diff_over_seed_diff_sd": 1.56
+   },
+   "Grouped MLP 대 Global MLP": {
+    "diff_pp": 5.0,
+    "z_N2000each": 4.45,
+    "p_z": 8.5e-06,
+    "diff_over_seed_diff_sd": 2.37
+   },
+   "w/o PCA(K=2048) 대 K=94(그림 판독)": {
+    "diff_pp": -5.1,
+    "z_N2000each": -5.68,
+    "p_z": 1.4e-08,
+    "diff_over_seed_diff_sd": -2.41
+   },
+   "K=482 대 K=94(그림 판독)": {
+    "diff_pp": 2.1,
+    "z_N2000each": 2.98,
+    "p_z": 0.0029,
+    "diff_over_seed_diff_sd": 0.99
+   },
+   "깊이 50% 대 30%(그림 판독)": {
+    "diff_pp": 2.0,
+    "z_N2000each": 2.87,
+    "p_z": 0.004,
+    "diff_over_seed_diff_sd": 0.95
+   }
+  }
+ },
+ "misc": {
+  "latency_ratio": {
+   "W2A": 1.0,
+   "pi0": 3.6,
+   "pi0.5": 3.64,
+   "OpenVLA": 5.27,
+   "mimic-video": 21.13
+  },
+  "probe_reduction_pct": [
+   7.8,
+   40.1,
+   45.0
+  ],
+  "probe_diff_px": [
+   0.5,
+   5.5,
+   10.7
+  ],
+  "shape_arithmetic": {
+   "teacher_T": 24,
+   "G_groups": 4,
+   "H": 16,
+   "r_t": 4,
+   "Hv": 14,
+   "Wv": 14,
+   "Dv": 2048,
+   "K": 482,
+   "M_aligned_positions": 784,
+   "tokens_per_group": 4,
+   "pca_ratio_pct": 23.5,
+   "latent_T_for_93_frames": 24,
+   "latent_T_for_17_frames": 5,
+   "teacher_numel_per_sample_MB_fp16": 19.3,
+   "selected_teacher_numel_after_pca": 377888
+  },
+  "pca_thresholds": {
+   "90%": 65,
+   "95%": 94,
+   "99%": 482,
+   "ratio_482_over_94": 5.13
+  },
+  "fig9_fig10_read": {
+   "K": {
+    "32": 64.3,
+    "64": 71.1,
+    "94": 93.7,
+    "482": 95.8,
+    "2048": 88.6
+   },
+   "depth": {
+    "10%": 92.5,
+    "30%": 93.9,
+    "50%": 95.9,
+    "70%": 90.1,
+    "90%": 87.9
+   }
+  },
+  "action_dit_param_estimate_M": 129.8,
+  "resnet18_x2_M": 22.4,
+  "total_estimate_M": 152.2,
+  "student_flops_estimate_GFLOP": 83.0,
+  "control_arithmetic": {
+   "actions_per_prediction": 8,
+   "latency_ms": 55,
+   "actions_per_second_if_back_to_back": 145.5,
+   "real_robot_hz": 15,
+   "prediction_period_at_15hz_ms": 533.3
+  },
+  "teacher_depth": {
+   "block": 14,
+   "of": 28,
+   "pct": 50.0,
+   "student_block": 5,
+   "student_of": 10,
+   "student_pct": 50.0
+  }
+ }
+}
