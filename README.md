@@ -2,14 +2,15 @@
 
 로봇 학습(VLA, 제어, 물리 기반 학습) 논문을 깊게 읽고, 공개된 수치를 재계산하거나 코드와 대조하며 정리한 노트입니다.
 
-학회별로 묶었습니다(375편). 학회는 arXiv Comments·Journal ref, 원문, 프로젝트 페이지의 표기를 따랐고 각 글 머리말의 `venue`(묶음)와 `venue_note`(근거)에 적었습니다. 묶음 안에서는 날짜 역순입니다.
+학회별로 묶었습니다(376편). 학회는 arXiv Comments·Journal ref, 원문, 프로젝트 페이지의 표기를 따랐고 각 글 머리말의 `venue`(묶음)와 `venue_note`(근거)에 적었습니다. 묶음 안에서는 날짜 역순입니다.
 
-CoRL 2026 (145) · CoRL 2026 워크숍 (3) · IROS 2026 (23) · IROS 2026 워크숍 (2) · ICLR 2026 (6) · ICML 2026 (4) · NeurIPS 2026 (4) · RSS 2026 (4) · CVPR 2026 (2) · ECCV 2026 (1) · ICRA 2026 (1) · RA-L 2026 (1) · Robot Learning 2026 (1) · Science Robotics 2026 (1) · RSS 2025 (11) · ICRA 2025 (6) · CoRL 2025 (4) · ICCV 2025 (3) · ICLR 2025 (3) · NeurIPS 2025 (3) · ICML 2025 (2) · RA-L 2025 (2) · BMVC 2025 (1) · CVPR 2025 (1) · IEEE T-RO 2025 (1) · Nature 2025 (1) · CoRL 2024 (8) · RSS 2024 (6) · ICLR 2024 (2) · ICML 2024 (2) · IROS 2024 (2) · ICRA 2024 (1) · IJRR 2024 (1) · NeurIPS 2024 (1) · CoRL 2023 (3) · RSS 2023 (3) · ICRA 2023 (2) · ICLR 2023 (1) · ICML 2023 (1) · NeurIPS 2023 (1) · CoRL 2022 (1) · ICLR 2016 (1) · 학회 표기 없음 (arXiv) (90) · 기술 보고서·블로그 (13)
+CoRL 2026 (146) · CoRL 2026 워크숍 (3) · IROS 2026 (23) · IROS 2026 워크숍 (2) · ICLR 2026 (6) · ICML 2026 (4) · NeurIPS 2026 (4) · RSS 2026 (4) · CVPR 2026 (2) · ECCV 2026 (1) · ICRA 2026 (1) · RA-L 2026 (1) · Robot Learning 2026 (1) · Science Robotics 2026 (1) · RSS 2025 (11) · ICRA 2025 (6) · CoRL 2025 (4) · ICCV 2025 (3) · ICLR 2025 (3) · NeurIPS 2025 (3) · ICML 2025 (2) · RA-L 2025 (2) · BMVC 2025 (1) · CVPR 2025 (1) · IEEE T-RO 2025 (1) · Nature 2025 (1) · CoRL 2024 (8) · RSS 2024 (6) · ICLR 2024 (2) · ICML 2024 (2) · IROS 2024 (2) · ICRA 2024 (1) · IJRR 2024 (1) · NeurIPS 2024 (1) · CoRL 2023 (3) · RSS 2023 (3) · ICRA 2023 (2) · ICLR 2023 (1) · ICML 2023 (1) · NeurIPS 2023 (1) · CoRL 2022 (1) · ICLR 2016 (1) · 학회 표기 없음 (arXiv) (90) · 기술 보고서·블로그 (13)
 
-## CoRL 2026 (145)
+## CoRL 2026 (146)
 
 | 날짜 | 글 | 요약 |
 |---|---|---|
+| 2026-11-25 | [시각 없이 손으로 집기: Real2Sim2Real 촉각 파지 읽기](papers/blind_dex_grasp/) | CoRL 2026 포스터 'Blind Dexterous Grasping via Real2Sim2Real Tactile Policy Learning'을 표 재계산과 합성 토이로 읽었습니다. 실로봇 성공률 27/100과 사전학습 효과는 산술이 맞고 효과도 큽니다. 보정(Real2Sim)의 정책 수준 효과와 표 5의 조건 표기는 저자 확인이 필요합니다. 공식 코드는 아직 공개되어 있지 않습니다. |
 | 2026-11-24 | [힘 이력을 8토큰 기억으로: FM-VLA 읽기](papers/fm_vla/) | CoRL 2026 포스터 FM-VLA를 표 1·2와 그림 3의 수치로 다시 계산했습니다. 표의 산술은 맞고, 상태 이력만 대비 결합 효과가 가장 분명합니다. 시각 기억 기준선과의 과제별 차이는 과제당 18회로는 확정하기 어렵습니다. 공식 저장소에는 아직 코드 파일이 없어 실험은 재현하지 않았습니다. |
 | 2026-11-24 | [한 손으로 두 부품 조립하기: Assembling Two Parts in One Hand 읽기](papers/two_parts_one_hand/) | CoRL 2026 포스터 'Assembling Two Parts in One Hand'를 표·그림 재계산과 주장 검증으로 읽었습니다. 닫힌 루프 조립 48/60 대 열린 루프 2/60의 차이는 매우 크고, 절제 결과의 일부는 오차 막대의 종류에 따라 해석이 달라지며, '성능 60% 이상 유지'의 기준과 프로젝트 페이지 영상 카운터와 표 1의 차이는 저자 확인이 필요합니다. 공개 저장소에는 아직 구현이 없습니다. |
 | 2026-11-24 | [큰 확산 세계모델 안에서 1차 기울기 RL 하기: Coupled Local and Global World Models 읽기](papers/coupled_wm_rl/) | CoRL 2026 포스터 논문을 표 재계산, 그림 판독, 토이로 읽었습니다. 분리형 1차 기울기의 설계는 명확하고, 효율 비교는 세계모델 표본 기준이며 하드웨어를 곱하면 폭이 줄어듭니다. 실로봇 10회로 구분되는 비교는 DMO 대 PPO입니다. 공식 코드는 아직 없습니다. |
