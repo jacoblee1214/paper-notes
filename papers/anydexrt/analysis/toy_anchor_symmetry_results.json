@@ -1,0 +1,90 @@
+{
+ "partial_noanchor": {
+  "config": {
+   "redundant_branch": false,
+   "full_chamfer": false,
+   "anchors": false
+  },
+  "seeds": 5,
+  "flipped_seeds": 2,
+  "corr_param_per_seed": [
+   1.0,
+   -1.0,
+   1.0,
+   -1.0,
+   1.0
+  ],
+  "seed_std_of_mapped_positions": 0.1656,
+  "on_redundant_frac_mean": 0.0,
+  "dist_rel_err_mean": 0.012,
+  "span_ratio_mean": 0.952
+ },
+ "partial_anchor": {
+  "config": {
+   "redundant_branch": false,
+   "full_chamfer": false,
+   "anchors": true
+  },
+  "seeds": 5,
+  "flipped_seeds": 0,
+  "corr_param_per_seed": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "seed_std_of_mapped_positions": 0.0038,
+  "on_redundant_frac_mean": 0.0,
+  "dist_rel_err_mean": 0.006,
+  "span_ratio_mean": 0.991
+ },
+ "full_chamfer_anchor_redundant": {
+  "config": {
+   "redundant_branch": true,
+   "full_chamfer": true,
+   "anchors": true
+  },
+  "seeds": 5,
+  "flipped_seeds": 0,
+  "corr_param_per_seed": [
+   1.0,
+   1.0,
+   1.0,
+   0.984,
+   1.0
+  ],
+  "seed_std_of_mapped_positions": 0.0139,
+  "on_redundant_frac_mean": 0.005,
+  "dist_rel_err_mean": 0.015,
+  "span_ratio_mean": 0.986
+ },
+ "partial_anchor_redundant": {
+  "config": {
+   "redundant_branch": true,
+   "full_chamfer": false,
+   "anchors": true
+  },
+  "seeds": 5,
+  "flipped_seeds": 0,
+  "corr_param_per_seed": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "seed_std_of_mapped_positions": 0.0038,
+  "on_redundant_frac_mean": 0.0,
+  "dist_rel_err_mean": 0.006,
+  "span_ratio_mean": 0.991
+ },
+ "meta": {
+  "steps": 600,
+  "batch": 512,
+  "seeds": 5,
+  "anchors": 8,
+  "z_offset": 1.2,
+  "elapsed_sec": 159.6
+ }
+}
