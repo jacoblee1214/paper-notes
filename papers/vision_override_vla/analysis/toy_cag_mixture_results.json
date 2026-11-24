@@ -1,0 +1,652 @@
+{
+ "setup": {
+  "modes": "A=-1 (훈련 과제), B=+1 (지시된 과제)",
+  "s": 0.1,
+  "samples": 40000,
+  "euler_steps": 10,
+  "note": "ω=1이면 네 방법 모두 조건부 정책 p_c를 준다(행동 외삽은 a_c). 로봇 증거가 아니라 1차원 혼합의 닫힌 형식 점검."
+ },
+ "case1_w_u=(0.9,0.1)_w_c=(0.6,0.4)": {
+  "1": {
+   "exact_tilt": {
+    "P_B": 0.400375,
+    "P_A": 0.599625,
+    "P_off_mode": 5.551115123125783e-17,
+    "P_positive_side": 0.400375,
+    "P_beyond_1.25": 0.006525,
+    "P_wrong_sign_overshoot": 0.004325,
+    "mean_a": -0.19911420044806052
+   },
+   "velocity_cfg": {
+    "P_B": 0.395375,
+    "P_A": 0.603975,
+    "P_off_mode": 0.0006499999999999839,
+    "P_positive_side": 0.395725,
+    "P_beyond_1.25": 5e-05,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": -0.2079439096885837
+   },
+   "action_shared_noise": {
+    "P_B": 0.395375,
+    "P_A": 0.603975,
+    "P_off_mode": 0.0006499999999999839,
+    "P_positive_side": 0.395725,
+    "P_beyond_1.25": 5e-05,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": -0.2079439096885837
+   },
+   "action_independent_noise": {
+    "P_B": 0.395375,
+    "P_A": 0.603975,
+    "P_off_mode": 0.0006499999999999839,
+    "P_positive_side": 0.395725,
+    "P_beyond_1.25": 5e-05,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": -0.2079439096885837
+   },
+   "exact_weight_B": 0.4
+  },
+  "1.5": {
+   "exact_tilt": {
+    "P_B": 0.6217,
+    "P_A": 0.3783,
+    "P_off_mode": -1.1102230246251565e-16,
+    "P_positive_side": 0.6217,
+    "P_beyond_1.25": 0.0066,
+    "P_wrong_sign_overshoot": 0.002775,
+    "mean_a": 0.24317214609086332
+   },
+   "velocity_cfg": {
+    "P_B": 0.549175,
+    "P_A": 0.45075,
+    "P_off_mode": 7.500000000004725e-05,
+    "P_positive_side": 0.549175,
+    "P_beyond_1.25": 2.5e-05,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": 0.10570192217491325
+   },
+   "action_shared_noise": {
+    "P_B": 0.08935,
+    "P_A": 0.603675,
+    "P_off_mode": 0.30697500000000005,
+    "P_positive_side": 0.393925,
+    "P_beyond_1.25": 0.30755,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": 0.09530550984473393
+   },
+   "action_independent_noise": {
+    "P_B": 0.03715,
+    "P_A": 0.5507,
+    "P_off_mode": 0.41215,
+    "P_positive_side": 0.3939,
+    "P_beyond_1.25": 0.415325,
+    "P_wrong_sign_overshoot": 0.0561,
+    "mean_a": 0.0940610734282039
+   },
+   "exact_weight_B": 0.6202041028867288
+  },
+  "2": {
+   "exact_tilt": {
+    "P_B": 0.8011,
+    "P_A": 0.1989,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.8011,
+    "P_beyond_1.25": 0.006,
+    "P_wrong_sign_overshoot": 0.00105,
+    "mean_a": 0.6028495786577657
+   },
+   "velocity_cfg": {
+    "P_B": 0.667575,
+    "P_A": 0.332375,
+    "P_off_mode": 4.999999999999449e-05,
+    "P_positive_side": 0.667575,
+    "P_beyond_1.25": 2.5e-05,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 0.3567082840863417
+   },
+   "action_shared_noise": {
+    "P_B": 0.084625,
+    "P_A": 0.5989,
+    "P_off_mode": 0.316475,
+    "P_positive_side": 0.395525,
+    "P_beyond_1.25": 0.31695,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 0.4090546763734277
+   },
+   "action_independent_noise": {
+    "P_B": 0.03475,
+    "P_A": 0.546175,
+    "P_off_mode": 0.41907500000000003,
+    "P_positive_side": 0.39555,
+    "P_beyond_1.25": 0.4343,
+    "P_wrong_sign_overshoot": 0.071925,
+    "mean_a": 0.4053625131540763
+   },
+   "exact_weight_B": 0.7999999999999999
+  },
+  "3": {
+   "exact_tilt": {
+    "P_B": 0.9589,
+    "P_A": 0.0411,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.9589,
+    "P_beyond_1.25": 0.006825,
+    "P_wrong_sign_overshoot": 0.00035,
+    "mean_a": 0.9183135568792894
+   },
+   "velocity_cfg": {
+    "P_B": 0.8272,
+    "P_A": 0.17275,
+    "P_off_mode": 4.999999999999449e-05,
+    "P_positive_side": 0.8272,
+    "P_beyond_1.25": 0.00015,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 0.7107061801274925
+   },
+   "action_shared_noise": {
+    "P_B": 0.0844,
+    "P_A": 0.58895,
+    "P_off_mode": 0.32665,
+    "P_positive_side": 0.3961,
+    "P_beyond_1.25": 0.352525,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 1.004898548490214
+   },
+   "action_independent_noise": {
+    "P_B": 0.0317,
+    "P_A": 0.517175,
+    "P_off_mode": 0.45112499999999994,
+    "P_positive_side": 0.3964,
+    "P_beyond_1.25": 0.486875,
+    "P_wrong_sign_overshoot": 0.120875,
+    "mean_a": 1.0161717152454144
+   },
+   "exact_weight_B": 0.96
+  }
+ },
+ "case2_w_u=(0.9,0.1)_w_c=(0.1,0.9)": {
+  "1": {
+   "exact_tilt": {
+    "P_B": 0.900675,
+    "P_A": 0.099325,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.900675,
+    "P_beyond_1.25": 0.00585,
+    "P_wrong_sign_overshoot": 0.0006,
+    "mean_a": 0.8014857995519394
+   },
+   "velocity_cfg": {
+    "P_B": 0.914775,
+    "P_A": 0.084925,
+    "P_off_mode": 0.00029999999999996696,
+    "P_positive_side": 0.914925,
+    "P_beyond_1.25": 2.5e-05,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 0.8271377559995974
+   },
+   "action_shared_noise": {
+    "P_B": 0.914775,
+    "P_A": 0.084925,
+    "P_off_mode": 0.00029999999999996696,
+    "P_positive_side": 0.914925,
+    "P_beyond_1.25": 2.5e-05,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 0.8271377559995974
+   },
+   "action_independent_noise": {
+    "P_B": 0.914775,
+    "P_A": 0.084925,
+    "P_off_mode": 0.00029999999999996696,
+    "P_positive_side": 0.914925,
+    "P_beyond_1.25": 2.5e-05,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 0.8271377559995974
+   },
+   "exact_weight_B": 0.9
+  },
+  "1.5": {
+   "exact_tilt": {
+    "P_B": 0.987225,
+    "P_A": 0.012775,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.987225,
+    "P_beyond_1.25": 0.006,
+    "P_wrong_sign_overshoot": 7.5e-05,
+    "mean_a": 0.9742221460908633
+   },
+   "velocity_cfg": {
+    "P_B": 0.986725,
+    "P_A": 0.013225,
+    "P_off_mode": 4.999999999999449e-05,
+    "P_positive_side": 0.986725,
+    "P_beyond_1.25": 5e-05,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 1.02173974606712
+   },
+   "action_shared_noise": {
+    "P_B": 0.087525,
+    "P_A": 0.084925,
+    "P_off_mode": 0.82755,
+    "P_positive_side": 0.913575,
+    "P_beyond_1.25": 0.8292,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 1.6496260196815933
+   },
+   "action_independent_noise": {
+    "P_B": 0.0821,
+    "P_A": 0.0787,
+    "P_off_mode": 0.8392,
+    "P_positive_side": 0.913575,
+    "P_beyond_1.25": 0.840925,
+    "P_wrong_sign_overshoot": 0.00725,
+    "mean_a": 1.648381583265063
+   },
+   "exact_weight_B": 0.9878048780487805
+  },
+  "2": {
+   "exact_tilt": {
+    "P_B": 0.998375,
+    "P_A": 0.001625,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.998375,
+    "P_beyond_1.25": 0.006275,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 0.9973995786577657
+   },
+   "velocity_cfg": {
+    "P_B": 0.998475,
+    "P_A": 0.001525,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.998475,
+    "P_beyond_1.25": 0.0003,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 1.082870016401583
+   },
+   "action_shared_noise": {
+    "P_B": 0.083675,
+    "P_A": 0.080375,
+    "P_off_mode": 0.83595,
+    "P_positive_side": 0.91605,
+    "P_beyond_1.25": 0.859675,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 2.485760723872648
+   },
+   "action_independent_noise": {
+    "P_B": 0.078725,
+    "P_A": 0.07425,
+    "P_off_mode": 0.8470249999999999,
+    "P_positive_side": 0.915975,
+    "P_beyond_1.25": 0.8532,
+    "P_wrong_sign_overshoot": 0.00935,
+    "mean_a": 2.4820685606532957
+   },
+   "exact_weight_B": 0.9986301369863013
+  },
+  "3": {
+   "exact_tilt": {
+    "P_B": 1.0,
+    "P_A": 0.0,
+    "P_off_mode": 0.0,
+    "P_positive_side": 1.0,
+    "P_beyond_1.25": 0.0068,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 1.0005135568792893
+   },
+   "velocity_cfg": {
+    "P_B": 0.99995,
+    "P_A": 5e-05,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.99995,
+    "P_beyond_1.25": 0.004,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 1.1399062519112264
+   },
+   "action_shared_noise": {
+    "P_B": 0.074875,
+    "P_A": 0.069475,
+    "P_off_mode": 0.85565,
+    "P_positive_side": 0.91595,
+    "P_beyond_1.25": 0.9139,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": 4.115543166822584
+   },
+   "action_independent_noise": {
+    "P_B": 0.0722,
+    "P_A": 0.069875,
+    "P_off_mode": 0.8579249999999999,
+    "P_positive_side": 0.914625,
+    "P_beyond_1.25": 0.86975,
+    "P_wrong_sign_overshoot": 0.0161,
+    "mean_a": 4.126816333577784
+   },
+   "exact_weight_B": 0.999983065198984
+  }
+ },
+ "case3_w_u=(0.95,0.05)_w_c=(0.75,0.25)": {
+  "1": {
+   "exact_tilt": {
+    "P_B": 0.250325,
+    "P_A": 0.749675,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.250325,
+    "P_beyond_1.25": 0.00645,
+    "P_wrong_sign_overshoot": 0.0052,
+    "mean_a": -0.49921420044806053
+   },
+   "velocity_cfg": {
+    "P_B": 0.2373,
+    "P_A": 0.762125,
+    "P_off_mode": 0.0005749999999999367,
+    "P_positive_side": 0.23755,
+    "P_beyond_1.25": 5e-05,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": -0.5227926419369376
+   },
+   "action_shared_noise": {
+    "P_B": 0.2373,
+    "P_A": 0.762125,
+    "P_off_mode": 0.0005749999999999367,
+    "P_positive_side": 0.23755,
+    "P_beyond_1.25": 5e-05,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": -0.5227926419369376
+   },
+   "action_independent_noise": {
+    "P_B": 0.2373,
+    "P_A": 0.762125,
+    "P_off_mode": 0.0005749999999999367,
+    "P_positive_side": 0.23755,
+    "P_beyond_1.25": 5e-05,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": -0.5227926419369376
+   },
+   "exact_weight_B": 0.25
+  },
+  "1.5": {
+   "exact_tilt": {
+    "P_B": 0.461275,
+    "P_A": 0.538725,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.461275,
+    "P_beyond_1.25": 0.006675,
+    "P_wrong_sign_overshoot": 0.0039,
+    "mean_a": -0.0776778539091367
+   },
+   "velocity_cfg": {
+    "P_B": 0.350025,
+    "P_A": 0.649625,
+    "P_off_mode": 0.00035000000000001696,
+    "P_positive_side": 0.350125,
+    "P_beyond_1.25": 2.5e-05,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": -0.2931082411308216
+   },
+   "action_shared_noise": {
+    "P_B": 0.0424,
+    "P_A": 0.761325,
+    "P_off_mode": 0.19627499999999998,
+    "P_positive_side": 0.237,
+    "P_beyond_1.25": 0.19715,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": -0.3268903212434127
+   },
+   "action_independent_noise": {
+    "P_B": 0.011725,
+    "P_A": 0.729175,
+    "P_off_mode": 0.2591,
+    "P_positive_side": 0.237,
+    "P_beyond_1.25": 0.263075,
+    "P_wrong_sign_overshoot": 0.035825,
+    "mean_a": -0.3282577218034543
+   },
+   "exact_weight_B": 0.45618791322653107
+  },
+  "2": {
+   "exact_tilt": {
+    "P_B": 0.6777,
+    "P_A": 0.3223,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.6777,
+    "P_beyond_1.25": 0.0062,
+    "P_wrong_sign_overshoot": 0.001925,
+    "mean_a": 0.35604957865776576
+   },
+   "velocity_cfg": {
+    "P_B": 0.4536,
+    "P_A": 0.5461,
+    "P_off_mode": 0.00029999999999996696,
+    "P_positive_side": 0.4537,
+    "P_beyond_1.25": 2.5e-05,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": -0.07785729299100008
+   },
+   "action_shared_noise": {
+    "P_B": 0.040275,
+    "P_A": 0.7619,
+    "P_off_mode": 0.19782499999999997,
+    "P_positive_side": 0.234125,
+    "P_beyond_1.25": 0.19855,
+    "P_wrong_sign_overshoot": 0.0,
+    "mean_a": -0.14142969417458984
+   },
+   "action_independent_noise": {
+    "P_B": 0.0099,
+    "P_A": 0.72845,
+    "P_off_mode": 0.26164999999999994,
+    "P_positive_side": 0.23415,
+    "P_beyond_1.25": 0.2817,
+    "P_wrong_sign_overshoot": 0.057025,
+    "mean_a": -0.14252646338445063
+   },
+   "exact_weight_B": 0.6785714285714286
+  },
+  "3": {
+   "exact_tilt": {
+    "P_B": 0.92745,
+    "P_A": 0.07255,
+    "P_off_mode": 0.0,
+    "P_positive_side": 0.92745,
+    "P_beyond_1.25": 0.006725,
+    "P_wrong_sign_overshoot": 0.00055,
+    "mean_a": 0.8554135568792893
+   },
+   "velocity_cfg": {
+    "P_B": 0.6211,
+    "P_A": 0.3788,
+    "P_off_mode": 9.999999999998899e-05,
+    "P_positive_side": 0.621125,
+    "P_beyond_1.25": 0.000225,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": 0.2829651574877321
+   },
+   "action_shared_noise": {
+    "P_B": 0.040275,
+    "P_A": 0.752425,
+    "P_off_mode": 0.20729999999999998,
+    "P_positive_side": 0.2366,
+    "P_beyond_1.25": 0.224775,
+    "P_wrong_sign_overshoot": 2.5e-05,
+    "mean_a": 0.2421654686532892
+   },
+   "action_independent_noise": {
+    "P_B": 0.008575,
+    "P_A": 0.6941,
+    "P_off_mode": 0.29732499999999995,
+    "P_positive_side": 0.2374,
+    "P_beyond_1.25": 0.35095,
+    "P_wrong_sign_overshoot": 0.1233,
+    "mean_a": 0.2577796726149889
+   },
+   "exact_weight_B": 0.9304123711340206
+  }
+ },
+ "closed_loop_random_walk": {
+  "note": "행동 외삽은 평균 행동을 (1−ω)E[a_u] + ωE[a_c]로 바꾸므로 닫힌 루프에서 표류(drift)가 ω에 따라 커진다. 모드 선택 확률이 위치와 무관한 최소 가정이다.",
+  "cases": {
+   "w_u=(0.9,0.1)_w_c=(0.6,0.4)": {
+    "1": {
+     "exact_tilt": {
+      "P_reach_B": 0.01425,
+      "P_reach_A": 0.98575,
+      "P_timeout": 0.0,
+      "mean_steps": 51.358
+     },
+     "action_shared": {
+      "P_reach_B": 0.01425,
+      "P_reach_A": 0.98575,
+      "P_timeout": 0.0,
+      "mean_steps": 51.358
+     },
+     "action_independent": {
+      "P_reach_B": 0.01425,
+      "P_reach_A": 0.98575,
+      "P_timeout": 0.0,
+      "mean_steps": 51.358
+     }
+    },
+    "1.5": {
+     "exact_tilt": {
+      "P_reach_B": 0.99375,
+      "P_reach_A": 0.00625,
+      "P_timeout": 0.0,
+      "mean_steps": 43.3645
+     },
+     "action_shared": {
+      "P_reach_B": 0.75475,
+      "P_reach_A": 0.24525,
+      "P_timeout": 0.0,
+      "mean_steps": 54.96575
+     },
+     "action_independent": {
+      "P_reach_B": 0.72525,
+      "P_reach_A": 0.27475,
+      "P_timeout": 0.0,
+      "mean_steps": 47.3405
+     }
+    },
+    "2": {
+     "exact_tilt": {
+      "P_reach_B": 1.0,
+      "P_reach_A": 0.0,
+      "P_timeout": 0.0,
+      "mean_steps": 17.41025
+     },
+     "action_shared": {
+      "P_reach_B": 0.9485,
+      "P_reach_A": 0.0515,
+      "P_timeout": 0.0,
+      "mean_steps": 24.76575
+     },
+     "action_independent": {
+      "P_reach_B": 0.898,
+      "P_reach_A": 0.102,
+      "P_timeout": 0.0,
+      "mean_steps": 22.0795
+     }
+    },
+    "3": {
+     "exact_tilt": {
+      "P_reach_B": 1.0,
+      "P_reach_A": 0.0,
+      "P_timeout": 0.0,
+      "mean_steps": 11.377
+     },
+     "action_shared": {
+      "P_reach_B": 0.9845,
+      "P_reach_A": 0.0155,
+      "P_timeout": 0.0,
+      "mean_steps": 11.5015
+     },
+     "action_independent": {
+      "P_reach_B": 0.9255,
+      "P_reach_A": 0.0745,
+      "P_timeout": 0.0,
+      "mean_steps": 10.1785
+     }
+    }
+   },
+   "w_u=(0.95,0.05)_w_c=(0.75,0.25)": {
+    "1": {
+     "exact_tilt": {
+      "P_reach_B": 0.0,
+      "P_reach_A": 1.0,
+      "P_timeout": 0.0,
+      "mean_steps": 21.04975
+     },
+     "action_shared": {
+      "P_reach_B": 0.0,
+      "P_reach_A": 1.0,
+      "P_timeout": 0.0,
+      "mean_steps": 21.04975
+     },
+     "action_independent": {
+      "P_reach_B": 0.0,
+      "P_reach_A": 1.0,
+      "P_timeout": 0.0,
+      "mean_steps": 21.04975
+     }
+    },
+    "1.5": {
+     "exact_tilt": {
+      "P_reach_B": 0.13875,
+      "P_reach_A": 0.86125,
+      "P_timeout": 0.0,
+      "mean_steps": 85.28675
+     },
+     "action_shared": {
+      "P_reach_B": 0.02575,
+      "P_reach_A": 0.97425,
+      "P_timeout": 0.0,
+      "mean_steps": 33.037
+     },
+     "action_independent": {
+      "P_reach_B": 0.03325,
+      "P_reach_A": 0.96675,
+      "P_timeout": 0.0,
+      "mean_steps": 32.71175
+     }
+    },
+    "2": {
+     "exact_tilt": {
+      "P_reach_B": 0.99925,
+      "P_reach_A": 0.00075,
+      "P_timeout": 0.0,
+      "mean_steps": 29.2435
+     },
+     "action_shared": {
+      "P_reach_B": 0.30175,
+      "P_reach_A": 0.69825,
+      "P_timeout": 0.0,
+      "mean_steps": 39.6175
+     },
+     "action_independent": {
+      "P_reach_B": 0.33325,
+      "P_reach_A": 0.66675,
+      "P_timeout": 0.0,
+      "mean_steps": 34.351
+     }
+    },
+    "3": {
+     "exact_tilt": {
+      "P_reach_B": 1.0,
+      "P_reach_A": 0.0,
+      "P_timeout": 0.0,
+      "mean_steps": 12.1215
+     },
+     "action_shared": {
+      "P_reach_B": 0.7805,
+      "P_reach_A": 0.2195,
+      "P_timeout": 0.0,
+      "mean_steps": 22.302
+     },
+     "action_independent": {
+      "P_reach_B": 0.7095,
+      "P_reach_A": 0.2905,
+      "P_timeout": 0.0,
+      "mean_steps": 17.2895
+     }
+    }
+   }
+  }
+ }
+}

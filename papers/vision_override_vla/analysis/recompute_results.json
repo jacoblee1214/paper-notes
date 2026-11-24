@@ -1,0 +1,2683 @@
+{
+ "V1_table1_avg": {
+  "OpenVLA-OFT V+L": {
+   "reported": 97.1,
+   "recomputed": 97.1,
+   "match": true
+  },
+  "OpenVLA-OFT V-only": {
+   "reported": 69.1,
+   "recomputed": 69.1,
+   "match": true
+  },
+  "pi0 V+L": {
+   "reported": 94.2,
+   "recomputed": 94.15,
+   "match": true
+  },
+  "pi0 V-only": {
+   "reported": 18.5,
+   "recomputed": 18.45,
+   "match": true
+  },
+  "pi0.5 V+L": {
+   "reported": 96.9,
+   "recomputed": 96.85,
+   "match": true
+  },
+  "pi0.5 V-only": {
+   "reported": 51.7,
+   "recomputed": 51.65,
+   "match": true
+  }
+ },
+ "V1b_table1_integer_500": {
+  "OpenVLA-OFT V+L": [
+   true,
+   true,
+   false,
+   false
+  ],
+  "OpenVLA-OFT V-only": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "pi0 V+L": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "pi0 V-only": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "pi0.5 V+L": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "pi0.5 V-only": [
+   true,
+   true,
+   true,
+   true
+  ]
+ },
+ "V2_table2_avg": {
+  "reported": {
+   "g": [
+    39.0,
+    64.4
+   ],
+   "s": [
+    20.0,
+    40.0
+   ]
+  },
+  "recomputed": {
+   "grounding_spatial": 39.0,
+   "grounding_focused": 64.37,
+   "success_spatial": 19.97,
+   "success_focused": 39.97
+  }
+ },
+ "V3_table2_vs_table3": {
+  "OpenVLA-OFT": {
+   "table2_g": 6.8,
+   "table3_g": 6.8,
+   "table2_s": 1.1,
+   "table3_s": 1.1,
+   "match": true
+  },
+  "pi0": {
+   "table2_g": 70.9,
+   "table3_g": 70.9,
+   "table2_s": 34.4,
+   "table3_s": 34.4,
+   "match": true
+  },
+  "pi0.5": {
+   "table2_g": 39.3,
+   "table3_g": 39.3,
+   "table2_s": 24.4,
+   "table3_s": 24.4,
+   "match": true
+  }
+ },
+ "V4_average_column": {
+  "cells": 48,
+  "simple_mean_mismatch": 0,
+  "mismatches": [],
+  "note": "평균 열은 네 스위트 값의 단순 평균(가중 아님). 과제 수 가중(15/10/10/15)이면 값이 달라진다."
+ },
+ "V4_weighted_vs_simple_examples": [
+  {
+   "model": "pi0.5",
+   "metric": "grounding",
+   "cag": "base",
+   "side": "F",
+   "reported": 30.8,
+   "simple_mean": 30.75,
+   "task_weighted": 30.6,
+   "simple_match": true
+  },
+  {
+   "model": "pi0.5",
+   "metric": "grounding",
+   "cag": "TF",
+   "side": "F",
+   "reported": 40.5,
+   "simple_mean": 40.53,
+   "task_weighted": 40.1,
+   "simple_match": true
+  },
+  {
+   "model": "pi0.5",
+   "metric": "grounding",
+   "cag": "VA",
+   "side": "F",
+   "reported": 46.3,
+   "simple_mean": 46.33,
+   "task_weighted": 45.77,
+   "simple_match": true
+  }
+ ],
+ "V5_integer_feasibility": {
+  "assumed_N": {
+   "CF-Spatial": 750,
+   "CF-Object": 500,
+   "CF-Long": 500,
+   "CF-OOD": 750
+  },
+  "by_suite": {
+   "CF-Spatial": {
+    "n_values": 48,
+    "n_infeasible_at_assumed_N": 0,
+    "infeasible_examples": [],
+    "denominators_1to3000_consistent_with_all": [
+     750,
+     800,
+     911,
+     946,
+     950,
+     960,
+     962,
+     965,
+     967,
+     970,
+     974,
+     975
+    ],
+    "n_such_denominators": 2029,
+    "multiples_of_50_consistent": [
+     750,
+     800,
+     950,
+     1000,
+     1050,
+     1100,
+     1150,
+     1200,
+     1250,
+     1300,
+     1350,
+     1400
+    ]
+   },
+   "CF-Object": {
+    "n_values": 48,
+    "n_infeasible_at_assumed_N": 0,
+    "infeasible_examples": [],
+    "denominators_1to3000_consistent_with_all": [
+     500,
+     800,
+     900,
+     946,
+     949,
+     954,
+     956,
+     959,
+     960,
+     966,
+     967,
+     972
+    ],
+    "n_such_denominators": 2032,
+    "multiples_of_50_consistent": [
+     500,
+     800,
+     900,
+     1000,
+     1050,
+     1100,
+     1150,
+     1200,
+     1250,
+     1300,
+     1350,
+     1400
+    ]
+   },
+   "CF-Long": {
+    "n_values": 48,
+    "n_infeasible_at_assumed_N": 24,
+    "infeasible_examples": [
+     [
+      "OpenVLA-OFT",
+      "grounding",
+      "base",
+      "B",
+      62.9
+     ],
+     [
+      "OpenVLA-OFT",
+      "grounding",
+      "TF",
+      "F",
+      4.9
+     ],
+     [
+      "OpenVLA-OFT",
+      "grounding",
+      "TF",
+      "B",
+      61.1
+     ],
+     [
+      "OpenVLA-OFT",
+      "grounding",
+      "VA",
+      "F",
+      6.9
+     ],
+     [
+      "OpenVLA-OFT",
+      "success",
+      "VA",
+      "B",
+      48.9
+     ],
+     [
+      "pi0",
+      "grounding",
+      "base",
+      "B",
+      83.1
+     ]
+    ],
+    "denominators_1to3000_consistent_with_all": [
+     450,
+     550,
+     800,
+     850,
+     890,
+     900,
+     910,
+     933,
+     950,
+     952,
+     960,
+     965
+    ],
+    "n_such_denominators": 2034,
+    "multiples_of_50_consistent": [
+     450,
+     550,
+     800,
+     850,
+     900,
+     950,
+     1000,
+     1050,
+     1100,
+     1150,
+     1200,
+     1250
+    ]
+   },
+   "CF-OOD": {
+    "n_values": 48,
+    "n_infeasible_at_assumed_N": 0,
+    "infeasible_examples": [],
+    "denominators_1to3000_consistent_with_all": [
+     750,
+     800,
+     932,
+     939,
+     947,
+     950,
+     951,
+     956,
+     957,
+     960,
+     963,
+     968
+    ],
+    "n_such_denominators": 2031,
+    "multiples_of_50_consistent": [
+     750,
+     800,
+     950,
+     1000,
+     1050,
+     1100,
+     1150,
+     1200,
+     1250,
+     1300,
+     1350,
+     1400
+    ]
+   }
+  }
+ },
+ "V6_logical_bounds": {
+  "success_gt_grounding": [],
+  "sum_success_gt_100": []
+ },
+ "V6b_touch_sum_gt_100": [
+  [
+   "OpenVLA-OFT",
+   "base",
+   1,
+   2.0,
+   99.6
+  ],
+  [
+   "OpenVLA-OFT",
+   "TF",
+   1,
+   1.6,
+   100.0
+  ],
+  [
+   "pi0",
+   "base",
+   0,
+   70.9,
+   37.1
+  ],
+  [
+   "pi0",
+   "base",
+   2,
+   20.4,
+   83.1
+  ],
+  [
+   "pi0",
+   "TF",
+   0,
+   74.5,
+   32.5
+  ],
+  [
+   "pi0",
+   "TF",
+   2,
+   19.6,
+   81.8
+  ],
+  [
+   "pi0",
+   "VA",
+   0,
+   85.2,
+   24.4
+  ],
+  [
+   "pi0",
+   "VA",
+   2,
+   22.7,
+   82.2
+  ],
+  [
+   "pi0.5",
+   "base",
+   0,
+   39.3,
+   61.3
+  ],
+  [
+   "pi0.5",
+   "base",
+   2,
+   51.6,
+   58.4
+  ],
+  [
+   "pi0.5",
+   "TF",
+   2,
+   60.7,
+   56.7
+  ],
+  [
+   "pi0.5",
+   "TF",
+   4,
+   40.5,
+   59.8
+  ],
+  [
+   "pi0.5",
+   "VA",
+   2,
+   64.2,
+   61.1
+  ],
+  [
+   "X-VLA",
+   "base",
+   2,
+   98.2,
+   23.3
+  ],
+  [
+   "X-VLA",
+   "TF",
+   2,
+   95.6,
+   12.2
+  ],
+  [
+   "X-VLA",
+   "TF",
+   3,
+   40.9,
+   63.7
+  ],
+  [
+   "X-VLA",
+   "VA",
+   2,
+   96.7,
+   17.6
+  ],
+  [
+   "X-VLA",
+   "VA",
+   3,
+   40.8,
+   60.5
+  ]
+ ],
+ "V7_text_claims": {
+  "OFT grounding F 4.7": {
+   "recomputed": 4.7,
+   "text": 4.7,
+   "match": true
+  },
+  "OFT success F 0.4": {
+   "recomputed": 0.4,
+   "text": 0.4,
+   "match": true
+  },
+  "pi0.5 grounding F 30.8": {
+   "recomputed": 30.8,
+   "text": 30.8,
+   "match": true
+  },
+  "pi0.5 success F 13.2": {
+   "recomputed": 13.2,
+   "text": 13.2,
+   "match": true
+  },
+  "OFT grounding B 83.6": {
+   "recomputed": 83.6,
+   "text": 83.6,
+   "match": true
+  },
+  "OFT success B 78.6": {
+   "recomputed": 78.6,
+   "text": 78.6,
+   "match": true
+  },
+  "pi0.5 grounding B 65.6": {
+   "recomputed": 65.6,
+   "text": 65.6,
+   "match": true
+  },
+  "pi0.5 success B 60.9": {
+   "recomputed": 60.9,
+   "text": 60.9,
+   "match": true
+  },
+  "TF grounding gain 9.7": {
+   "recomputed": 9.7,
+   "text": 9.7,
+   "match": true
+  },
+  "TF success gain 3.6": {
+   "recomputed": 3.6,
+   "text": 3.6,
+   "match": true
+  },
+  "VA grounding gain 15.5": {
+   "recomputed": 15.5,
+   "text": 15.5,
+   "match": true
+  },
+  "VA success gain 8.5": {
+   "recomputed": 8.5,
+   "text": 8.5,
+   "match": true
+  },
+  "VA biased grounding drop 13.4": {
+   "recomputed": 13.4,
+   "text": 13.4,
+   "match": true
+  },
+  "VA biased success drop 24.7": {
+   "recomputed": 24.7,
+   "text": 24.7,
+   "match": true
+  },
+  "OOD VA grounding 36.4": {
+   "recomputed": 36.4,
+   "text": 36.4,
+   "match": true
+  },
+  "OOD VA success 10.3": {
+   "recomputed": 10.3,
+   "text": 10.3,
+   "match": true
+  },
+  "X-VLA TF grounding 37.3->39.7": {
+   "recomputed": 39.7,
+   "text": 39.7,
+   "match": true
+  },
+  "X-VLA TF success 13.8->19.5": {
+   "recomputed": 19.5,
+   "text": 19.5,
+   "match": true
+  },
+  "X-VLA VA grounding 41.0": {
+   "recomputed": 41.0,
+   "text": 41.0,
+   "match": true
+  },
+  "X-VLA VA success 17.1": {
+   "recomputed": 17.1,
+   "text": 17.1,
+   "match": true
+  }
+ },
+ "V8_table4_fig4": {
+  "strat1==base": true,
+  "strat3==TF": true,
+  "strat5==VA": true,
+  "strat5-strat3 success CF-Spatial (text 4.3)": 4.3,
+  "strat5-strat4 success CF-Spatial": 3.9,
+  "fig4_pi0.5_w1.5 == Table4 strat5 CF-Spatial (VA)": true,
+  "fig4_OFT_w3.0 == Table3 OFT VA CF-Spatial": true,
+  "fig4_w1.0 == base (pi0.5, OFT)": true,
+  "fig4_pi0.5_best_success_w": 1.5,
+  "fig4_OFT_best_success_w": 3.0,
+  "fig4_note": "그림 4의 두 곡선은 CF-Spatial의 VA-CAG 값이다(표 3, 표 4와 일치). 같은 스위트가 보고 표에도 들어간다."
+ },
+ "FIG4_values_read_from_figure_labels": {
+  "pi0.5_grounding": {
+   "w": [
+    1.0,
+    1.5,
+    2.0,
+    3.0
+   ],
+   "v": [
+    39.3,
+    50.7,
+    56.8,
+    58.4
+   ]
+  },
+  "pi0.5_success": {
+   "w": [
+    1.0,
+    1.5,
+    2.0,
+    3.0
+   ],
+   "v": [
+    24.4,
+    31.6,
+    28.8,
+    16.4
+   ]
+  },
+  "OFT_grounding": {
+   "w": [
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0
+   ],
+   "v": [
+    6.8,
+    11.6,
+    18.4,
+    26.5,
+    30.4
+   ]
+  },
+  "OFT_success": {
+   "w": [
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0
+   ],
+   "v": [
+    1.1,
+    2.9,
+    5.9,
+    7.9,
+    4.1
+   ]
+  }
+ },
+ "V9_table3_tests": {
+  "assumption": "스위트당 에피소드 수 = 과제 수 x 50 (750/500/500/750), 같은 초기 상태를 쓰는 쌍체 구조는 반영하지 못해 비쌍 Fisher",
+  "n_tests": 48,
+  "n_p_lt_0.05": 20,
+  "n_holm_lt_0.05": 14,
+  "tests": [
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 6.8,
+    "cag_%": 11.1,
+    "diff_pp": 4.3,
+    "p_fisher": 0.004856220968606312,
+    "p_holm": 0.15054285002679568
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 2.0,
+    "cag_%": 1.6,
+    "diff_pp": -0.4,
+    "p_fisher": 0.8128381632763642,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 4.0,
+    "cag_%": 4.9,
+    "diff_pp": 0.9,
+    "p_fisher": 0.6441528075547247,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 6.0,
+    "cag_%": 5.6,
+    "diff_pp": -0.4,
+    "p_fisher": 0.8252925282441846,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 6.8,
+    "cag_%": 26.5,
+    "diff_pp": 19.7,
+    "p_fisher": 1.2352628605164093e-25,
+    "p_holm": 5.9292617304787645e-24
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 2.0,
+    "cag_%": 3.8,
+    "diff_pp": 1.8,
+    "p_fisher": 0.13034424610939427,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 4.0,
+    "cag_%": 6.9,
+    "diff_pp": 2.9,
+    "p_fisher": 0.06804131444589794,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 6.0,
+    "cag_%": 7.9,
+    "diff_pp": 1.9,
+    "p_fisher": 0.18614761119855128,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 1.1,
+    "cag_%": 3.3,
+    "diff_pp": 2.2,
+    "p_fisher": 0.004131722234695696,
+    "p_holm": 0.13544474063702044
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 0.0,
+    "cag_%": 0.0,
+    "diff_pp": 0.0,
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 0.2,
+    "cag_%": 0.2,
+    "diff_pp": 0.0,
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 0.1,
+    "cag_%": 0.1,
+    "diff_pp": 0.0,
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 1.1,
+    "cag_%": 7.9,
+    "diff_pp": 6.8,
+    "p_fisher": 4.156426900494928e-11,
+    "p_holm": 1.8288278362177682e-09
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 0.0,
+    "cag_%": 0.0,
+    "diff_pp": 0.0,
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 0.2,
+    "cag_%": 0.4,
+    "diff_pp": 0.2,
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "model": "OpenVLA-OFT",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 0.1,
+    "cag_%": 0.1,
+    "diff_pp": 0.0,
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 70.9,
+    "cag_%": 74.5,
+    "diff_pp": 3.6,
+    "p_fisher": 0.13163795227944786,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 6.0,
+    "cag_%": 12.2,
+    "diff_pp": 6.2,
+    "p_fisher": 0.0008866874699000341,
+    "p_holm": 0.031034061446501192
+   },
+   {
+    "model": "pi0",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 20.4,
+    "cag_%": 19.6,
+    "diff_pp": -0.8,
+    "p_fisher": 0.812571786558639,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 18.0,
+    "cag_%": 21.1,
+    "diff_pp": 3.1,
+    "p_fisher": 0.15183920728678113,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 70.9,
+    "cag_%": 85.2,
+    "diff_pp": 14.3,
+    "p_fisher": 2.728223247667162e-11,
+    "p_holm": 1.227700461450223e-09
+   },
+   {
+    "model": "pi0",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 6.0,
+    "cag_%": 13.8,
+    "diff_pp": 7.8,
+    "p_fisher": 4.747478869027221e-05,
+    "p_holm": 0.0017565671815400717
+   },
+   {
+    "model": "pi0",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 20.4,
+    "cag_%": 22.7,
+    "diff_pp": 2.3,
+    "p_fisher": 0.39798039958747394,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 18.0,
+    "cag_%": 27.6,
+    "diff_pp": 9.6,
+    "p_fisher": 1.178593992108855e-05,
+    "p_holm": 0.000471437596843542
+   },
+   {
+    "model": "pi0",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 34.4,
+    "cag_%": 33.5,
+    "diff_pp": -0.9,
+    "p_fisher": 0.7435415678026714,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 0.0,
+    "cag_%": 0.6,
+    "diff_pp": 0.6,
+    "p_fisher": 0.24924924924924924,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 1.1,
+    "cag_%": 2.0,
+    "diff_pp": 0.9,
+    "p_fisher": 0.45079732408397094,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 2.7,
+    "cag_%": 2.1,
+    "diff_pp": -0.6,
+    "p_fisher": 0.6133948097416603,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 34.4,
+    "cag_%": 36.7,
+    "diff_pp": 2.3,
+    "p_fisher": 0.3880616336488901,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 0.0,
+    "cag_%": 0.0,
+    "diff_pp": 0.0,
+    "p_fisher": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 1.1,
+    "cag_%": 2.9,
+    "diff_pp": 1.8,
+    "p_fisher": 0.1116869267457712,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 2.7,
+    "cag_%": 2.1,
+    "diff_pp": -0.6,
+    "p_fisher": 0.6133948097416603,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0.5",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 39.3,
+    "cag_%": 52.0,
+    "diff_pp": 12.7,
+    "p_fisher": 1.0670488550079625e-06,
+    "p_holm": 4.374900305532646e-05
+   },
+   {
+    "model": "pi0.5",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 11.4,
+    "cag_%": 24.6,
+    "diff_pp": 13.2,
+    "p_fisher": 6.699306849609337e-08,
+    "p_holm": 2.8137088768359214e-06
+   },
+   {
+    "model": "pi0.5",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 51.6,
+    "cag_%": 60.7,
+    "diff_pp": 9.1,
+    "p_fisher": 0.004104386079909711,
+    "p_holm": 0.13544474063702044
+   },
+   {
+    "model": "pi0.5",
+    "metric": "grounding",
+    "cag": "TF",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 20.7,
+    "cag_%": 24.8,
+    "diff_pp": 4.1,
+    "p_fisher": 0.06447742579541614,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0.5",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 39.3,
+    "cag_%": 50.7,
+    "diff_pp": 11.4,
+    "p_fisher": 1.2761624163110166e-05,
+    "p_holm": 0.0004977033423612965
+   },
+   {
+    "model": "pi0.5",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 11.4,
+    "cag_%": 34.0,
+    "diff_pp": 22.6,
+    "p_fisher": 7.798223437387715e-18,
+    "p_holm": 3.665165015572226e-16
+   },
+   {
+    "model": "pi0.5",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 51.6,
+    "cag_%": 64.2,
+    "diff_pp": 12.6,
+    "p_fisher": 6.992869121401047e-05,
+    "p_holm": 0.0025174328837043766
+   },
+   {
+    "model": "pi0.5",
+    "metric": "grounding",
+    "cag": "VA",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 20.7,
+    "cag_%": 36.4,
+    "diff_pp": 15.7,
+    "p_fisher": 1.7975823418955482e-11,
+    "p_holm": 8.268878772719521e-10
+   },
+   {
+    "model": "pi0.5",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 24.4,
+    "cag_%": 27.3,
+    "diff_pp": 2.9,
+    "p_fisher": 0.21560587051435287,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0.5",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 5.8,
+    "cag_%": 9.2,
+    "diff_pp": 3.4,
+    "p_fisher": 0.054113328676863,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0.5",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 15.8,
+    "cag_%": 20.9,
+    "diff_pp": 5.1,
+    "p_fisher": 0.049469790796907574,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0.5",
+    "metric": "success",
+    "cag": "TF",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 6.9,
+    "cag_%": 9.9,
+    "diff_pp": 3.0,
+    "p_fisher": 0.050252240323316336,
+    "p_holm": 1.0
+   },
+   {
+    "model": "pi0.5",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-Spatial",
+    "n_assumed": 750,
+    "base_%": 24.4,
+    "cag_%": 31.6,
+    "diff_pp": 7.2,
+    "p_fisher": 0.002284188555269349,
+    "p_holm": 0.07766241087915787
+   },
+   {
+    "model": "pi0.5",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-Object",
+    "n_assumed": 500,
+    "base_%": 5.8,
+    "cag_%": 18.0,
+    "diff_pp": 12.2,
+    "p_fisher": 2.2628777467377465e-09,
+    "p_holm": 9.73037431097231e-08
+   },
+   {
+    "model": "pi0.5",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-Long",
+    "n_assumed": 500,
+    "base_%": 15.8,
+    "cag_%": 26.7,
+    "diff_pp": 10.9,
+    "p_fisher": 2.8133382512885153e-05,
+    "p_holm": 0.0010690685354896358
+   },
+   {
+    "model": "pi0.5",
+    "metric": "success",
+    "cag": "VA",
+    "suite": "CF-OOD",
+    "n_assumed": 750,
+    "base_%": 6.9,
+    "cag_%": 10.3,
+    "diff_pp": 3.4,
+    "p_fisher": 0.026763756205601393,
+    "p_holm": 0.8029126861680418
+   }
+  ]
+ },
+ "V10_pooled_rates": [
+  {
+   "model": "OpenVLA-OFT",
+   "metric": "grounding",
+   "cag": "base",
+   "k": 126,
+   "n": 2500,
+   "pooled_%": 5.04,
+   "wilson95_%": [
+    4.25,
+    5.97
+   ],
+   "reported_avg_%": 4.7
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "metric": "grounding",
+   "cag": "TF",
+   "k": 157,
+   "n": 2500,
+   "pooled_%": 6.28,
+   "wilson95_%": [
+    5.39,
+    7.3
+   ],
+   "reported_avg_%": 5.8
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "metric": "grounding",
+   "cag": "VA",
+   "k": 311,
+   "n": 2500,
+   "pooled_%": 12.44,
+   "wilson95_%": [
+    11.2,
+    13.79
+   ],
+   "reported_avg_%": 11.3
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "metric": "success",
+   "cag": "base",
+   "k": 10,
+   "n": 2500,
+   "pooled_%": 0.4,
+   "wilson95_%": [
+    0.22,
+    0.73
+   ],
+   "reported_avg_%": 0.4
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "metric": "success",
+   "cag": "TF",
+   "k": 27,
+   "n": 2500,
+   "pooled_%": 1.08,
+   "wilson95_%": [
+    0.74,
+    1.57
+   ],
+   "reported_avg_%": 0.9
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "metric": "success",
+   "cag": "VA",
+   "k": 62,
+   "n": 2500,
+   "pooled_%": 2.48,
+   "wilson95_%": [
+    1.94,
+    3.17
+   ],
+   "reported_avg_%": 2.1
+  },
+  {
+   "model": "pi0",
+   "metric": "grounding",
+   "cag": "base",
+   "k": 799,
+   "n": 2500,
+   "pooled_%": 31.96,
+   "wilson95_%": [
+    30.16,
+    33.81
+   ],
+   "reported_avg_%": 28.8
+  },
+  {
+   "model": "pi0",
+   "metric": "grounding",
+   "cag": "TF",
+   "k": 876,
+   "n": 2500,
+   "pooled_%": 35.04,
+   "wilson95_%": [
+    33.19,
+    36.93
+   ],
+   "reported_avg_%": 31.9
+  },
+  {
+   "model": "pi0",
+   "metric": "grounding",
+   "cag": "VA",
+   "k": 1029,
+   "n": 2500,
+   "pooled_%": 41.16,
+   "wilson95_%": [
+    39.25,
+    43.1
+   ],
+   "reported_avg_%": 37.3
+  },
+  {
+   "model": "pi0",
+   "metric": "success",
+   "cag": "base",
+   "k": 284,
+   "n": 2500,
+   "pooled_%": 11.36,
+   "wilson95_%": [
+    10.17,
+    12.66
+   ],
+   "reported_avg_%": 9.6
+  },
+  {
+   "model": "pi0",
+   "metric": "success",
+   "cag": "TF",
+   "k": 280,
+   "n": 2500,
+   "pooled_%": 11.2,
+   "wilson95_%": [
+    10.02,
+    12.5
+   ],
+   "reported_avg_%": 9.6
+  },
+  {
+   "model": "pi0",
+   "metric": "success",
+   "cag": "VA",
+   "k": 305,
+   "n": 2500,
+   "pooled_%": 12.2,
+   "wilson95_%": [
+    10.97,
+    13.54
+   ],
+   "reported_avg_%": 10.4
+  },
+  {
+   "model": "pi0.5",
+   "metric": "grounding",
+   "cag": "base",
+   "k": 765,
+   "n": 2500,
+   "pooled_%": 30.6,
+   "wilson95_%": [
+    28.82,
+    32.44
+   ],
+   "reported_avg_%": 30.8
+  },
+  {
+   "model": "pi0.5",
+   "metric": "grounding",
+   "cag": "TF",
+   "k": 1003,
+   "n": 2500,
+   "pooled_%": 40.12,
+   "wilson95_%": [
+    38.22,
+    42.06
+   ],
+   "reported_avg_%": 40.5
+  },
+  {
+   "model": "pi0.5",
+   "metric": "grounding",
+   "cag": "VA",
+   "k": 1144,
+   "n": 2500,
+   "pooled_%": 45.76,
+   "wilson95_%": [
+    43.82,
+    47.72
+   ],
+   "reported_avg_%": 46.3
+  },
+  {
+   "model": "pi0.5",
+   "metric": "success",
+   "cag": "base",
+   "k": 343,
+   "n": 2500,
+   "pooled_%": 13.72,
+   "wilson95_%": [
+    12.43,
+    15.12
+   ],
+   "reported_avg_%": 13.2
+  },
+  {
+   "model": "pi0.5",
+   "metric": "success",
+   "cag": "TF",
+   "k": 429,
+   "n": 2500,
+   "pooled_%": 17.16,
+   "wilson95_%": [
+    15.73,
+    18.69
+   ],
+   "reported_avg_%": 16.8
+  },
+  {
+   "model": "pi0.5",
+   "metric": "success",
+   "cag": "VA",
+   "k": 538,
+   "n": 2500,
+   "pooled_%": 21.52,
+   "wilson95_%": [
+    19.95,
+    23.17
+   ],
+   "reported_avg_%": 21.7
+  }
+ ],
+ "V10_pooled_tests": [
+  {
+   "model": "OpenVLA-OFT",
+   "metric": "grounding",
+   "cag": "TF",
+   "k_base": 126,
+   "k_cag": 157,
+   "n": 2500,
+   "diff_pp": 1.24,
+   "p_fisher": 0.06618404372465499
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "metric": "grounding",
+   "cag": "VA",
+   "k_base": 126,
+   "k_cag": 311,
+   "n": 2500,
+   "diff_pp": 7.4,
+   "p_fisher": 9.159335991820518e-21
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "metric": "success",
+   "cag": "TF",
+   "k_base": 10,
+   "k_cag": 27,
+   "n": 2500,
+   "diff_pp": 0.68,
+   "p_fisher": 0.0074147045955240435
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "metric": "success",
+   "cag": "VA",
+   "k_base": 10,
+   "k_cag": 62,
+   "n": 2500,
+   "diff_pp": 2.08,
+   "p_fisher": 2.0509527213818885e-10
+  },
+  {
+   "model": "pi0",
+   "metric": "grounding",
+   "cag": "TF",
+   "k_base": 799,
+   "k_cag": 876,
+   "n": 2500,
+   "diff_pp": 3.08,
+   "p_fisher": 0.022761984991585486
+  },
+  {
+   "model": "pi0",
+   "metric": "grounding",
+   "cag": "VA",
+   "k_base": 799,
+   "k_cag": 1029,
+   "n": 2500,
+   "diff_pp": 9.2,
+   "p_fisher": 1.6835827534172846e-11
+  },
+  {
+   "model": "pi0",
+   "metric": "success",
+   "cag": "TF",
+   "k_base": 284,
+   "k_cag": 280,
+   "n": 2500,
+   "diff_pp": -0.16,
+   "p_fisher": 0.8933253792524873
+  },
+  {
+   "model": "pi0",
+   "metric": "success",
+   "cag": "VA",
+   "k_base": 284,
+   "k_cag": 305,
+   "n": 2500,
+   "diff_pp": 0.84,
+   "p_fisher": 0.3802913302824096
+  },
+  {
+   "model": "pi0.5",
+   "metric": "grounding",
+   "cag": "TF",
+   "k_base": 765,
+   "k_cag": 1003,
+   "n": 2500,
+   "diff_pp": 9.52,
+   "p_fisher": 2.2441666842333998e-12
+  },
+  {
+   "model": "pi0.5",
+   "metric": "grounding",
+   "cag": "VA",
+   "k_base": 765,
+   "k_cag": 1144,
+   "n": 2500,
+   "diff_pp": 15.16,
+   "p_fisher": 2.710808054987286e-28
+  },
+  {
+   "model": "pi0.5",
+   "metric": "success",
+   "cag": "TF",
+   "k_base": 343,
+   "k_cag": 429,
+   "n": 2500,
+   "diff_pp": 3.44,
+   "p_fisher": 0.0008702690285515585
+  },
+  {
+   "model": "pi0.5",
+   "metric": "success",
+   "cag": "VA",
+   "k_base": 343,
+   "k_cag": 538,
+   "n": 2500,
+   "diff_pp": 7.8,
+   "p_fisher": 4.998692088783557e-13
+  }
+ ],
+ "V11_table5": {
+  "by_demos": {
+   "0": {
+    "base_k_of_40": 3,
+    "cag_k_of_40": 8,
+    "base_%": 7.5,
+    "cag_%": 20.0,
+    "fisher_p_unpaired": 0.19266080268676386
+   },
+   "1": {
+    "base_k_of_40": 8,
+    "cag_k_of_40": 20,
+    "base_%": 20.0,
+    "cag_%": 50.0,
+    "fisher_p_unpaired": 0.00931061072179976
+   },
+   "2": {
+    "base_k_of_40": 22,
+    "cag_k_of_40": 30,
+    "base_%": 55.0,
+    "cag_%": 75.0,
+    "fisher_p_unpaired": 0.10002666043053654
+   }
+  },
+  "non_monotone_cells_base": [
+   [
+    "Right",
+    2
+   ],
+   [
+    "Plate",
+    1
+   ]
+  ],
+  "non_monotone_cells_cag": [
+   [
+    "Plate",
+    1
+   ]
+  ],
+  "one_demo_equals_main_experiment": {
+   "Left": [
+    1,
+    3
+   ],
+   "Right": [
+    3,
+    4
+   ],
+   "Plate": [
+    2,
+    7
+   ],
+   "Basket": [
+    2,
+    6
+   ]
+  }
+ },
+ "V12_table6": {
+  "latency_ratio_TF": 1.583,
+  "latency_ratio_VA": 1.657,
+  "memory_ratio_VA": 1.941,
+  "note": "표기 1.6x, 1.7x, 1.9x와 일치. TF 126.6 ms는 같은 GPU에서 순차 두 번 호출한 값으로 보이지만 논문은 병렬이라고 적는다(코드 D 항목 참조)"
+ },
+ "V13_realworld_row_sums_not_10": [],
+ "V14_tables9_10_vs_fig5_fig7_averages": {
+  "Coke/Sprite/Fanta": {
+   "table_9_10": [
+    96.7,
+    66.7,
+    100.0,
+    80.0
+   ],
+   "figure_read": [
+    96.7,
+    66.7,
+    100.0,
+    80.0
+   ],
+   "match": true
+  },
+  "Tape/Mustard/Pringles": {
+   "table_9_10": [
+    80.0,
+    50.0,
+    100.0,
+    63.3
+   ],
+   "figure_read": [
+    80.0,
+    50.0,
+    100.0,
+    63.3
+   ],
+   "match": true
+  },
+  "Middle/Left/Right": {
+   "table_9_10": [
+    50.0,
+    43.3,
+    56.7,
+    56.7
+   ],
+   "figure_read": [
+    50.0,
+    43.3,
+    56.7,
+    56.7
+   ],
+   "match": true
+  },
+  "Table/Plate/Bowl": {
+   "table_9_10": [
+    73.3,
+    56.7,
+    76.7,
+    70.0
+   ],
+   "figure_read": [
+    73.3,
+    56.7,
+    76.7,
+    70.0
+   ],
+   "match": true
+  },
+  "Stack/Plate/Basket": {
+   "table_9_10": [
+    86.7,
+    30.0,
+    96.7,
+    66.7
+   ],
+   "figure_read": [
+    86.7,
+    30.0,
+    96.7,
+    66.7
+   ],
+   "match": true
+  },
+  "Cup/Cube/Basketball": {
+   "table_9_10": [
+    76.7,
+    66.7,
+    90.0,
+    80.0
+   ],
+   "figure_read": [
+    76.7,
+    66.7,
+    90.0,
+    80.0
+   ],
+   "match": true
+  },
+  "Move and Pour": {
+   "table_9_10": [
+    80.0,
+    43.3,
+    93.3,
+    46.7
+   ],
+   "figure_read": [
+    80.0,
+    43.3,
+    93.3,
+    46.7
+   ],
+   "match": true
+  },
+  "Apple and Banana": {
+   "table_9_10": [
+    60.0,
+    53.3,
+    80.0,
+    63.3
+   ],
+   "figure_read": [
+    60.0,
+    53.3,
+    80.0,
+    63.3
+   ],
+   "match": true
+  }
+ },
+ "V15_realworld_claims": {
+  "6 main scenes": {
+   "grounding_base": 77.23,
+   "grounding_cag": 86.68,
+   "success_base": 52.23,
+   "success_cag": 69.45,
+   "grounding_gain": 9.45,
+   "success_gain": 17.22
+  },
+  "8 scenes (+ long-horizon)": {
+   "grounding_base": 75.42,
+   "grounding_cag": 86.67,
+   "success_base": 51.25,
+   "success_cag": 65.84,
+   "grounding_gain": 11.25,
+   "success_gain": 14.59
+  },
+  "text_claims": {
+   "abstract/Fig.1d: grounding +9.4, success +17.2 (52.2 -> 69.4)": "6개 주요 장면의 세 지시 평균(in-domain 포함)과 일치"
+  },
+  "under_observed_pooled_8_scenes_n160": {
+   "success_base_k": 61,
+   "success_cag_k": 92,
+   "n": 160,
+   "p_fisher_success": 0.0007613768033436816,
+   "grounding_base_k": 104,
+   "grounding_cag_k": 129,
+   "p_fisher_grounding": 0.0024553256895398358,
+   "wilson95_success_base": [
+    0.31,
+    0.458
+   ],
+   "wilson95_success_cag": [
+    0.498,
+    0.649
+   ]
+  },
+  "under_observed_pooled_6_main_n120": {
+   "success_base_k": 46,
+   "success_cag_k": 73,
+   "n": 120,
+   "p_fisher_success": 0.0007548296676792172,
+   "grounding_base_k": 81,
+   "grounding_cag_k": 96,
+   "p_fisher_grounding": 0.03950401614493594
+  },
+  "in_domain_pooled_8_scenes_n80": {
+   "success_base_k": 62,
+   "success_cag_k": 66,
+   "n": 80,
+   "p_fisher_success": 0.5537073284860219
+  }
+ },
+ "V16_scene_tests_under_observed": {
+  "Coke/Sprite/Fanta": {
+   "success": [
+    12,
+    15
+   ],
+   "grounding": [
+    19,
+    20
+   ],
+   "n": 20,
+   "p_success": 0.5006034160650401,
+   "p_grounding": 1.0
+  },
+  "Tape/Mustard/Pringles": {
+   "success": [
+    5,
+    10
+   ],
+   "grounding": [
+    14,
+    20
+   ],
+   "n": 20,
+   "p_success": 0.19079257232761124,
+   "p_grounding": 0.020196020196020202
+  },
+  "Middle/Left/Right": {
+   "success": [
+    4,
+    7
+   ],
+   "grounding": [
+    5,
+    7
+   ],
+   "n": 20,
+   "p_success": 0.48011535108309306,
+   "p_grounding": 0.7310941471119446
+  },
+  "Table/Plate/Bowl": {
+   "success": [
+    10,
+    13
+   ],
+   "grounding": [
+    13,
+    13
+   ],
+   "n": 20,
+   "p_success": 0.523107089291739,
+   "p_grounding": 1.0
+  },
+  "Stack/Plate/Basket": {
+   "success": [
+    4,
+    13
+   ],
+   "grounding": [
+    17,
+    19
+   ],
+   "n": 20,
+   "p_success": 0.009530108528996183,
+   "p_grounding": 0.6049896049896051
+  },
+  "Cup/Cube/Basketball": {
+   "success": [
+    11,
+    15
+   ],
+   "grounding": [
+    13,
+    17
+   ],
+   "n": 20,
+   "p_success": 0.3202657607551934,
+   "p_grounding": 0.273343047536596
+  },
+  "Move and Pour": {
+   "success": [
+    8,
+    8
+   ],
+   "grounding": [
+    15,
+    19
+   ],
+   "n": 20,
+   "p_success": 1.0,
+   "p_grounding": 0.18176418176418174
+  },
+  "Apple and Banana": {
+   "success": [
+    7,
+    11
+   ],
+   "grounding": [
+    8,
+    14
+   ],
+   "n": 20,
+   "p_success": 0.34064371475988253,
+   "p_grounding": 0.11096953702747578
+  }
+ },
+ "V17_realworld_text_checks": {
+  "Spatial: 'Plate 60% and Bowl 40% grounding' -> recomputed pi0.5 grounding Plate/Bowl, success Plate/Bowl": {
+   "grounding_Plate_Bowl_%": [
+    80,
+    50
+   ],
+   "success_Plate_Bowl_%": [
+    60,
+    40
+   ]
+  },
+  "Spatial: 'Left 20% and Right 30% grounding'": {
+   "grounding_Left_Right_%": [
+    20,
+    30
+   ]
+  },
+  "Spatial: 'grounding +16.6, success +13.3' (두 장면 평균 증가)": {
+   "grounding_gain_each_scene": [
+    6.7,
+    3.4
+   ],
+   "success_gain_each_scene": [
+    13.4,
+    13.3
+   ],
+   "mean_grounding_gain": 5.05,
+   "mean_success_gain": 13.35
+  },
+  "Spatial: under-observed 지시만의 증가 (탐색)": {
+   "Middle/Left/Right": {
+    "under_only_grounding_gain": 10.0,
+    "under_only_success_gain": 15.0
+   },
+   "Table/Plate/Bowl": {
+    "under_only_grounding_gain": 0.0,
+    "under_only_success_gain": 15.0
+   }
+  },
+  "Goal: 'grounding 96.7%, success +36.7'": {
+   "cag_grounding_avg": 96.7,
+   "success_gain": 36.7
+  },
+  "Object: 'CAG 100% avg grounding, success +13.3 in both scenes'": {
+   "Coke": [
+    100.0,
+    13.3
+   ],
+   "Tape": [
+    100.0,
+    13.3
+   ]
+  },
+  "OOD: 'Cube 50%, Basketball 60% success; 4 of 5 Cube failures counterfactual'": {
+   "success_Cube_Basketball_%": [
+    50,
+    60
+   ],
+   "Cube row: wrong-object attempts (cup 1 + basketball 3)": 4,
+   "Cube row failures (10 - 5 successes)": 5
+  },
+  "Long: 'Move and Pour failures more frequent than Coke/Sprite/Fanta'": {
+   "Move&Pour base success_avg/grounding_avg": [
+    43.3,
+    80.0
+   ],
+   "Coke/Sprite/Fanta base success_avg/grounding_avg": [
+    66.7,
+    96.7
+   ],
+   "Move&Pour CAG success_avg": 46.7,
+   "Coke/Sprite/Fanta CAG success_avg": 80.0,
+   "Move&Pour in-domain (Coke) base success %": 50
+  },
+  "Fig.1d real-world 'Biased 18.9 -> 10.6' 후보 정의 (참고, 확정 못 함)": {
+   "base": {
+    "wrong_target_success_under_observed_k_of_120": 32,
+    "wrong_target_attempts_under_observed_k_of_120": 37,
+    "wrong_target_success_all_instr_k_of_180": 34,
+    "pct_under_120": 26.7,
+    "pct_all_180": 18.9,
+    "pct_attempts_under_120": 30.8
+   },
+   "cag": {
+    "wrong_target_success_under_observed_k_of_120": 19,
+    "wrong_target_attempts_under_observed_k_of_120": 23,
+    "wrong_target_success_all_instr_k_of_180": 19,
+    "pct_under_120": 15.8,
+    "pct_all_180": 10.6,
+    "pct_attempts_under_120": 19.2
+   }
+  }
+ },
+ "real_world_per_scene_rows": {
+  "Coke/Sprite/Fanta": {
+   "base": {
+    "grounding_k": [
+     10,
+     10,
+     9
+    ],
+    "success_k": [
+     8,
+     6,
+     6
+    ],
+    "grounding_avg_%": 96.7,
+    "success_avg_%": 66.7,
+    "wrong_target_success_k": [
+     0,
+     0,
+     1
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     0,
+     1
+    ]
+   },
+   "cag": {
+    "grounding_k": [
+     10,
+     10,
+     10
+    ],
+    "success_k": [
+     9,
+     8,
+     7
+    ],
+    "grounding_avg_%": 100.0,
+    "success_avg_%": 80.0,
+    "wrong_target_success_k": [
+     0,
+     0,
+     0
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  "Tape/Mustard/Pringles": {
+   "base": {
+    "grounding_k": [
+     10,
+     6,
+     8
+    ],
+    "success_k": [
+     10,
+     3,
+     2
+    ],
+    "grounding_avg_%": 80.0,
+    "success_avg_%": 50.0,
+    "wrong_target_success_k": [
+     0,
+     3,
+     1
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     4,
+     2
+    ]
+   },
+   "cag": {
+    "grounding_k": [
+     10,
+     10,
+     10
+    ],
+    "success_k": [
+     9,
+     6,
+     4
+    ],
+    "grounding_avg_%": 100.0,
+    "success_avg_%": 63.3,
+    "wrong_target_success_k": [
+     0,
+     0,
+     0
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  "Middle/Left/Right": {
+   "base": {
+    "grounding_k": [
+     10,
+     2,
+     3
+    ],
+    "success_k": [
+     9,
+     1,
+     3
+    ],
+    "grounding_avg_%": 50.0,
+    "success_avg_%": 43.3,
+    "wrong_target_success_k": [
+     0,
+     8,
+     7
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     8,
+     7
+    ]
+   },
+   "cag": {
+    "grounding_k": [
+     10,
+     3,
+     4
+    ],
+    "success_k": [
+     10,
+     3,
+     4
+    ],
+    "grounding_avg_%": 56.7,
+    "success_avg_%": 56.7,
+    "wrong_target_success_k": [
+     0,
+     6,
+     5
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     7,
+     6
+    ]
+   }
+  },
+  "Table/Plate/Bowl": {
+   "base": {
+    "grounding_k": [
+     9,
+     8,
+     5
+    ],
+    "success_k": [
+     7,
+     6,
+     4
+    ],
+    "grounding_avg_%": 73.3,
+    "success_avg_%": 56.7,
+    "wrong_target_success_k": [
+     1,
+     2,
+     4
+    ],
+    "wrong_target_attempts_k": [
+     1,
+     2,
+     5
+    ]
+   },
+   "cag": {
+    "grounding_k": [
+     10,
+     7,
+     6
+    ],
+    "success_k": [
+     8,
+     7,
+     6
+    ],
+    "grounding_avg_%": 76.7,
+    "success_avg_%": 70.0,
+    "wrong_target_success_k": [
+     0,
+     3,
+     3
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     3,
+     4
+    ]
+   }
+  },
+  "Stack/Plate/Basket": {
+   "base": {
+    "grounding_k": [
+     9,
+     7,
+     10
+    ],
+    "success_k": [
+     5,
+     2,
+     2
+    ],
+    "grounding_avg_%": 86.7,
+    "success_avg_%": 30.0,
+    "wrong_target_success_k": [
+     1,
+     0,
+     0
+    ],
+    "wrong_target_attempts_k": [
+     1,
+     1,
+     0
+    ]
+   },
+   "cag": {
+    "grounding_k": [
+     10,
+     10,
+     9
+    ],
+    "success_k": [
+     7,
+     7,
+     6
+    ],
+    "grounding_avg_%": 96.7,
+    "success_avg_%": 66.7,
+    "wrong_target_success_k": [
+     0,
+     0,
+     0
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  "Cup/Cube/Basketball": {
+   "base": {
+    "grounding_k": [
+     10,
+     6,
+     7
+    ],
+    "success_k": [
+     9,
+     5,
+     6
+    ],
+    "grounding_avg_%": 76.7,
+    "success_avg_%": 66.7,
+    "wrong_target_success_k": [
+     0,
+     3,
+     3
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     4,
+     3
+    ]
+   },
+   "cag": {
+    "grounding_k": [
+     10,
+     9,
+     8
+    ],
+    "success_k": [
+     9,
+     8,
+     7
+    ],
+    "grounding_avg_%": 90.0,
+    "success_avg_%": 80.0,
+    "wrong_target_success_k": [
+     0,
+     1,
+     1
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     1,
+     2
+    ]
+   }
+  },
+  "Move and Pour": {
+   "base": {
+    "grounding_k": [
+     9,
+     8,
+     7
+    ],
+    "success_k": [
+     5,
+     5,
+     3
+    ],
+    "grounding_avg_%": 80.0,
+    "success_avg_%": 43.3,
+    "wrong_target_success_k": [
+     0,
+     1,
+     2
+    ],
+    "wrong_target_attempts_k": [
+     1,
+     2,
+     3
+    ]
+   },
+   "cag": {
+    "grounding_k": [
+     9,
+     10,
+     9
+    ],
+    "success_k": [
+     6,
+     5,
+     3
+    ],
+    "grounding_avg_%": 93.3,
+    "success_avg_%": 46.7,
+    "wrong_target_success_k": [
+     1,
+     0,
+     1
+    ],
+    "wrong_target_attempts_k": [
+     1,
+     0,
+     1
+    ]
+   }
+  },
+  "Apple and Banana": {
+   "base": {
+    "grounding_k": [
+     10,
+     6,
+     2
+    ],
+    "success_k": [
+     9,
+     5,
+     2
+    ],
+    "grounding_avg_%": 60.0,
+    "success_avg_%": 53.3,
+    "wrong_target_success_k": [
+     0,
+     4,
+     8
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     4,
+     8
+    ]
+   },
+   "cag": {
+    "grounding_k": [
+     10,
+     7,
+     7
+    ],
+    "success_k": [
+     8,
+     4,
+     7
+    ],
+    "grounding_avg_%": 80.0,
+    "success_avg_%": 63.3,
+    "wrong_target_success_k": [
+     0,
+     2,
+     3
+    ],
+    "wrong_target_attempts_k": [
+     0,
+     3,
+     3
+    ]
+   }
+  }
+ },
+ "V18_fig1d": {
+  "sim_faithful_success_13.2->21.7": [
+   13.2,
+   21.7
+  ],
+  "sim_biased_success_60.9->36.2": [
+   60.9,
+   36.2
+  ],
+  "real_faithful_success_52.2->69.4(6 main scenes, 3 instructions incl in-domain)": [
+   52.2,
+   69.5
+  ],
+  "note": "시뮬은 VA-CAG, 실세계 faithful은 in-domain 지시를 포함한 6개 장면 평균"
+ },
+ "V19_F_plus_B_success": {
+  "values": {
+   "OpenVLA-OFT": {
+    "base": {
+     "CF-Spatial": 81.8,
+     "CF-Object": 97.6,
+     "CF-Long": 54.6,
+     "CF-OOD": 81.8,
+     "avg": 79.0
+    },
+    "TF": {
+     "CF-Spatial": 76.6,
+     "CF-Object": 94.4,
+     "CF-Long": 54.2,
+     "CF-OOD": 83.6,
+     "avg": 77.2
+    },
+    "VA": {
+     "CF-Spatial": 43.1,
+     "CF-Object": 57.0,
+     "CF-Long": 49.3,
+     "CF-OOD": 22.8,
+     "avg": 43.1
+    }
+   },
+   "pi0": {
+    "base": {
+     "CF-Spatial": 53.5,
+     "CF-Object": 45.0,
+     "CF-Long": 64.2,
+     "CF-OOD": 55.6,
+     "avg": 54.6
+    },
+    "TF": {
+     "CF-Spatial": 47.9,
+     "CF-Object": 15.6,
+     "CF-Long": 40.7,
+     "CF-OOD": 44.4,
+     "avg": 37.2
+    },
+    "VA": {
+     "CF-Spatial": 42.8,
+     "CF-Object": 29.2,
+     "CF-Long": 51.6,
+     "CF-OOD": 21.3,
+     "avg": 36.2
+    }
+   },
+   "pi0.5": {
+    "base": {
+     "CF-Spatial": 81.3,
+     "CF-Object": 72.6,
+     "CF-Long": 66.2,
+     "CF-OOD": 76.5,
+     "avg": 74.1
+    },
+    "TF": {
+     "CF-Spatial": 60.6,
+     "CF-Object": 50.6,
+     "CF-Long": 57.6,
+     "CF-OOD": 72.6,
+     "avg": 60.3
+    },
+    "VA": {
+     "CF-Spatial": 67.6,
+     "CF-Object": 47.8,
+     "CF-Long": 68.5,
+     "CF-OOD": 47.4,
+     "avg": 57.9
+    }
+   },
+   "X-VLA": {
+    "base": {
+     "CF-Spatial": 62.1,
+     "CF-Object": 50.2,
+     "CF-Long": 56.7,
+     "CF-OOD": 43.2,
+     "avg": 53.1
+    },
+    "TF": {
+     "CF-Spatial": 71.2,
+     "CF-Object": 56.6,
+     "CF-Long": 62.9,
+     "CF-OOD": 58.0,
+     "avg": 62.1
+    },
+    "VA": {
+     "CF-Spatial": 62.4,
+     "CF-Object": 31.6,
+     "CF-Long": 52.0,
+     "CF-OOD": 46.8,
+     "avg": 48.2
+    }
+   }
+  },
+  "note": "성공 합 = F 성공 + B 성공. CAG가 F를 올리면서 합을 낮추면 기존 과제 완수가 줄어든 만큼 지시 과제로 옮겨 가지 못한 것이다."
+ },
+ "V19_counts_model_suite_cells": {
+  "TF": {
+   "drops": 11,
+   "cells": 16
+  },
+  "VA": {
+   "drops": 13,
+   "cells": 16
+  }
+ },
+ "V19_cells_where_sum_drops_with_CAG": [
+  {
+   "model": "OpenVLA-OFT",
+   "suite": "CF-Spatial",
+   "base": 81.8,
+   "TF": 76.6,
+   "VA": 43.1
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "suite": "CF-Object",
+   "base": 97.6,
+   "TF": 94.4,
+   "VA": 57.0
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "suite": "CF-Long",
+   "base": 54.6,
+   "TF": 54.2,
+   "VA": 49.3
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "suite": "CF-OOD",
+   "base": 81.8,
+   "TF": 83.6,
+   "VA": 22.8
+  },
+  {
+   "model": "OpenVLA-OFT",
+   "suite": "avg",
+   "base": 79.0,
+   "TF": 77.2,
+   "VA": 43.1
+  },
+  {
+   "model": "pi0",
+   "suite": "CF-Spatial",
+   "base": 53.5,
+   "TF": 47.9,
+   "VA": 42.8
+  },
+  {
+   "model": "pi0",
+   "suite": "CF-Object",
+   "base": 45.0,
+   "TF": 15.6,
+   "VA": 29.2
+  },
+  {
+   "model": "pi0",
+   "suite": "CF-Long",
+   "base": 64.2,
+   "TF": 40.7,
+   "VA": 51.6
+  },
+  {
+   "model": "pi0",
+   "suite": "CF-OOD",
+   "base": 55.6,
+   "TF": 44.4,
+   "VA": 21.3
+  },
+  {
+   "model": "pi0",
+   "suite": "avg",
+   "base": 54.6,
+   "TF": 37.2,
+   "VA": 36.2
+  },
+  {
+   "model": "pi0.5",
+   "suite": "CF-Spatial",
+   "base": 81.3,
+   "TF": 60.6,
+   "VA": 67.6
+  },
+  {
+   "model": "pi0.5",
+   "suite": "CF-Object",
+   "base": 72.6,
+   "TF": 50.6,
+   "VA": 47.8
+  },
+  {
+   "model": "pi0.5",
+   "suite": "CF-Long",
+   "base": 66.2,
+   "TF": 57.6,
+   "VA": 68.5
+  },
+  {
+   "model": "pi0.5",
+   "suite": "CF-OOD",
+   "base": 76.5,
+   "TF": 72.6,
+   "VA": 47.4
+  },
+  {
+   "model": "pi0.5",
+   "suite": "avg",
+   "base": 74.1,
+   "TF": 60.3,
+   "VA": 57.9
+  },
+  {
+   "model": "X-VLA",
+   "suite": "CF-Object",
+   "base": 50.2,
+   "TF": 56.6,
+   "VA": 31.6
+  },
+  {
+   "model": "X-VLA",
+   "suite": "CF-Long",
+   "base": 56.7,
+   "TF": 62.9,
+   "VA": 52.0
+  },
+  {
+   "model": "X-VLA",
+   "suite": "avg",
+   "base": 53.1,
+   "TF": 62.1,
+   "VA": 48.2
+  }
+ ]
+}
