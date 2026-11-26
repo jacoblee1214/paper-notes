@@ -1,0 +1,928 @@
+{
+ "V1_table1": {
+  "rows": [
+   {
+    "name": "Ego4D",
+    "episodes": 948683,
+    "frames": 23396157,
+    "hours": 216.6,
+    "implied_fps": 30.0,
+    "mean_episode_seconds": 0.82,
+    "mean_episode_frames": 24.7,
+    "max_episodes_if_min_4s": 194940,
+    "listed_over_max": 4.87
+   },
+   {
+    "name": "EgoExo4D",
+    "episodes": 41414,
+    "frames": 1110275,
+    "hours": 10.3,
+    "implied_fps": 29.94,
+    "mean_episode_seconds": 0.9,
+    "mean_episode_frames": 26.8,
+    "max_episodes_if_min_4s": 9270,
+    "listed_over_max": 4.47
+   },
+   {
+    "name": "EPIC-KITCHENS-100",
+    "episodes": 74788,
+    "frames": 3486432,
+    "hours": 32.3,
+    "implied_fps": 29.98,
+    "mean_episode_seconds": 1.55,
+    "mean_episode_frames": 46.6,
+    "max_episodes_if_min_4s": 29069,
+    "listed_over_max": 2.57
+   },
+   {
+    "name": "HOI4D",
+    "episodes": 2966,
+    "frames": 774275,
+    "hours": 7.2,
+    "implied_fps": 29.87,
+    "mean_episode_seconds": 8.74,
+    "mean_episode_frames": 261.1,
+    "max_episodes_if_min_4s": 6480,
+    "listed_over_max": 0.46
+   },
+   {
+    "name": "EgoDex",
+    "episodes": 327317,
+    "frames": 83894075,
+    "hours": 776.8,
+    "implied_fps": 30.0,
+    "mean_episode_seconds": 8.54,
+    "mean_episode_frames": 256.3,
+    "max_episodes_if_min_4s": 699120,
+    "listed_over_max": 0.47
+   },
+   {
+    "name": "Xperience-10M",
+    "episodes": 99027,
+    "frames": 31370900,
+    "hours": 435.7,
+    "implied_fps": 20.0,
+    "mean_episode_seconds": 15.84,
+    "mean_episode_frames": 316.8,
+    "max_episodes_if_min_4s": 392130,
+    "listed_over_max": 0.25
+   },
+   {
+    "name": "AgiBot Alpha/Beta",
+    "episodes": 116013,
+    "frames": 209284239,
+    "hours": 1937.8,
+    "implied_fps": 30.0,
+    "mean_episode_seconds": 60.13,
+    "mean_episode_frames": 1804.0
+   },
+   {
+    "name": "Galaxea R1Lite",
+    "episodes": 20662,
+    "frames": 26358560,
+    "hours": 488.1,
+    "implied_fps": 15.0,
+    "mean_episode_seconds": 85.04,
+    "mean_episode_frames": 1275.7
+   },
+   {
+    "name": "AgiBot DigitalWorld",
+    "episodes": 47910,
+    "frames": 24333788,
+    "hours": 225.3,
+    "implied_fps": 30.0,
+    "mean_episode_seconds": 16.93,
+    "mean_episode_frames": 507.9
+   },
+   {
+    "name": "RoboCasa Tabletop",
+    "episodes": 24000,
+    "frames": 6020058,
+    "hours": 83.6,
+    "implied_fps": 20.0,
+    "mean_episode_seconds": 12.54,
+    "mean_episode_frames": 250.8
+   },
+   {
+    "name": "Galbot self-collected",
+    "episodes": 60000,
+    "frames": 194000000,
+    "hours": 1800.0,
+    "implied_fps": 29.94,
+    "mean_episode_seconds": 108.0,
+    "mean_episode_frames": 3233.3
+   }
+  ],
+  "human_hours_sum": 1478.9,
+  "reported_human_subtotal": 1478.9,
+  "human_frames_sum": 144032114,
+  "reported_human_frames": 144032114,
+  "human_episodes_sum": 1494195,
+  "reported_human_episodes": 1494195,
+  "robot_hours_sum": 4534.8,
+  "reported_robot_hours": 4534.8,
+  "robot_frames_sum_approx": 459996645,
+  "robot_episodes_sum": 268585,
+  "reported_robot_episodes": 268585,
+  "total_hours": 6013.7,
+  "reported_total_hours": 6013.7,
+  "total_frames_approx": 604028759,
+  "share_human_hours_pct": 24.59,
+  "share_sim_hours_pct": 5.14,
+  "share_real_robot_hours_pct": 70.27,
+  "fig1_pie_pct": {
+   "human": 24.9,
+   "sim": 3.4,
+   "robot": 71.6
+  },
+  "fig3_raw_hours": 5929,
+  "fig3_kept_hours": 1478,
+  "fig3_retention_pct": 24.93
+ },
+ "V1b_pretrain_passes": {
+  "samples_seen_assumed": 204800000,
+  "total_frames_approx": 604028759,
+  "passes_over_frames": 0.339,
+  "note": "샘플 = 프레임 하나, 데이터 그룹 가중치 무시, 반복 확산(4회)은 같은 샘플의 재사용이라 제외"
+ },
+ "V2_table9_means": {
+  "GR00T-N1.6": {
+   "mean_recomputed": 47.613,
+   "mean_reported": 47.6,
+   "cells_not_integer_of_50": 22,
+   "cells_total": 24
+  },
+  "Qwen3PI": {
+   "mean_recomputed": 43.917,
+   "mean_reported": 43.9,
+   "cells_not_integer_of_50": 0,
+   "cells_total": 24
+  },
+  "FLARE": {
+   "mean_recomputed": 55.083,
+   "mean_reported": 55.0,
+   "cells_not_integer_of_50": 0,
+   "cells_total": 24
+  },
+  "ABot-M0": {
+   "mean_recomputed": 58.25,
+   "mean_reported": 58.3,
+   "cells_not_integer_of_50": 0,
+   "cells_total": 24
+  },
+  "JoyAI-RA": {
+   "mean_recomputed": 63.167,
+   "mean_reported": 63.2,
+   "cells_not_integer_of_50": 0,
+   "cells_total": 24
+  },
+  "ACE-Ego-0": {
+   "mean_recomputed": 72.833,
+   "mean_reported": 72.8,
+   "cells_not_integer_of_50": 0,
+   "cells_total": 24
+  }
+ },
+ "V2b_table3_vs_table9_rows_match": true,
+ "V3_robocasa_paired_tasks": {
+  "GR00T-N1.6": {
+   "mean_diff_pp": 25.22,
+   "wins": 24,
+   "losses": 0,
+   "ties": 0,
+   "sign_test_p": 0.0,
+   "wilcoxon_p": 0.0,
+   "bootstrap95_task_mean_diff": [
+    21.39,
+    29.59
+   ]
+  },
+  "Qwen3PI": {
+   "mean_diff_pp": 28.92,
+   "wins": 23,
+   "losses": 1,
+   "ties": 0,
+   "sign_test_p": 0.0,
+   "wilcoxon_p": 0.0,
+   "bootstrap95_task_mean_diff": [
+    22.83,
+    34.84
+   ]
+  },
+  "FLARE": {
+   "mean_diff_pp": 17.75,
+   "wins": 21,
+   "losses": 2,
+   "ties": 1,
+   "sign_test_p": 7e-05,
+   "wilcoxon_p": 5e-05,
+   "bootstrap95_task_mean_diff": [
+    12.92,
+    22.42
+   ]
+  },
+  "ABot-M0": {
+   "mean_diff_pp": 14.58,
+   "wins": 20,
+   "losses": 4,
+   "ties": 0,
+   "sign_test_p": 0.00154,
+   "wilcoxon_p": 5e-05,
+   "bootstrap95_task_mean_diff": [
+    9.08,
+    19.92
+   ]
+  },
+  "JoyAI-RA": {
+   "mean_diff_pp": 9.67,
+   "wins": 16,
+   "losses": 7,
+   "ties": 1,
+   "sign_test_p": 0.09314,
+   "wilcoxon_p": 0.03308,
+   "bootstrap95_task_mean_diff": [
+    2.33,
+    17.08
+   ]
+  }
+ },
+ "V3b_ace_below_joyai": [
+  [
+   "CupToDrawerClose",
+   36.0,
+   48.0
+  ],
+  [
+   "PotatoToMicrowaveClose",
+   58.0,
+   70.0
+  ],
+  [
+   "MilkToMicrowaveClose",
+   56.0,
+   84.0
+  ],
+  [
+   "BottleToCabinetClose",
+   78.0,
+   84.0
+  ],
+  [
+   "CanToDrawerClose",
+   70.0,
+   90.0
+  ],
+  [
+   "CuttingboardToBasket",
+   84.0,
+   88.0
+  ],
+  [
+   "TrayToCardboardbox",
+   78.0,
+   82.0
+  ]
+ ],
+ "V4_robocasa_pooled": {
+  "vs_DIAL_70.2": {
+   "p1": 72.8,
+   "p2": 70.2,
+   "n_each_assumed": 1200,
+   "diff_pp": 2.6,
+   "se_pp": 1.84,
+   "z": 1.41,
+   "fisher_p": 0.161,
+   "ci95_diff_pp": [
+    -1.01,
+    6.21
+   ]
+  },
+  "vs_JoyAI_63.2": {
+   "p1": 72.8,
+   "p2": 63.2,
+   "n_each_assumed": 1200,
+   "diff_pp": 9.6,
+   "se_pp": 1.89,
+   "z": 5.07,
+   "fisher_p": 0.0,
+   "ci95_diff_pp": [
+    5.89,
+    13.31
+   ]
+  },
+  "note": "DIAL은 평균만 있고 과제별 값, 시행 수가 표에 없다. n = 24 x 50 = 1,200 가정"
+ },
+ "V5_ablation_pooled": {
+  "full_vs_robot_only(72.8-68.3)": {
+   "p1": 72.8,
+   "p2": 68.3,
+   "n_each_assumed": 1200,
+   "diff_pp": 4.5,
+   "se_pp": 1.86,
+   "z": 2.42,
+   "fisher_p": 0.0176,
+   "ci95_diff_pp": [
+    0.86,
+    8.14
+   ]
+  },
+  "robot_only_vs_from_qwen(68.3-65.4)": {
+   "p1": 68.3,
+   "p2": 65.4,
+   "n_each_assumed": 1200,
+   "diff_pp": 2.9,
+   "se_pp": 1.92,
+   "z": 1.51,
+   "fisher_p": 0.1403,
+   "ci95_diff_pp": [
+    -0.87,
+    6.67
+   ]
+  },
+  "full_vs_from_qwen(72.8-65.4)": {
+   "p1": 72.8,
+   "p2": 65.4,
+   "n_each_assumed": 1200,
+   "diff_pp": 7.4,
+   "se_pp": 1.88,
+   "z": 3.94,
+   "fisher_p": 0.0001,
+   "ci95_diff_pp": [
+    3.71,
+    11.09
+   ]
+  },
+  "full_vs_wo_chunking(72.8-71.7)": {
+   "p1": 72.8,
+   "p2": 71.7,
+   "n_each_assumed": 1200,
+   "diff_pp": 1.1,
+   "se_pp": 1.83,
+   "z": 0.6,
+   "fisher_p": 0.5534,
+   "ci95_diff_pp": [
+    -2.48,
+    4.68
+   ]
+  },
+  "full_vs_wo_urdf(72.8-70.9)": {
+   "p1": 72.8,
+   "p2": 70.9,
+   "n_each_assumed": 1200,
+   "diff_pp": 1.9,
+   "se_pp": 1.84,
+   "z": 1.04,
+   "fisher_p": 0.3179,
+   "ci95_diff_pp": [
+    -1.7,
+    5.5
+   ]
+  },
+  "full_vs_wo_human_loss(72.8-69.2)": {
+   "p1": 72.8,
+   "p2": 69.2,
+   "n_each_assumed": 1200,
+   "diff_pp": 3.6,
+   "se_pp": 1.85,
+   "z": 1.94,
+   "fisher_p": 0.053,
+   "ci95_diff_pp": [
+    -0.03,
+    7.23
+   ]
+  }
+ },
+ "V5b_headline_decomposition_vs_joyai": {
+  "ace_minus_joyai": 9.6,
+  "from_qwen_minus_joyai": 2.2,
+  "robot_pretrain_gain": 2.9,
+  "human_gain": 4.5,
+  "from_qwen_beats": [
+   "GR00T-N1.6",
+   "Qwen3PI",
+   "FLARE",
+   "ABot-M0",
+   "JoyAI-RA"
+  ]
+ },
+ "V5c_integer_feasibility_n1200": {
+  "72.8": false,
+  "68.3": false,
+  "65.4": false,
+  "71.7": false,
+  "70.9": false,
+  "69.2": false
+ },
+ "V5d_ace_mean_se_stratified_pp": 1.198,
+ "V6_robotwin_means": {
+  "pi0/Easy": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 65.92,
+   "mean_reported": 65.92,
+   "match_to_0.01": true
+  },
+  "pi0/Hard": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 58.4,
+   "mean_reported": 58.4,
+   "match_to_0.01": true
+  },
+  "pi0.5/Easy": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 82.74,
+   "mean_reported": 82.74,
+   "match_to_0.01": true
+  },
+  "pi0.5/Hard": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 76.76,
+   "mean_reported": 76.76,
+   "match_to_0.01": true
+  },
+  "Motus/Easy": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 88.66,
+   "mean_reported": 88.66,
+   "match_to_0.01": true
+  },
+  "Motus/Hard": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 87.02,
+   "mean_reported": 87.02,
+   "match_to_0.01": true
+  },
+  "LingBot/Easy": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 88.56,
+   "mean_reported": 88.56,
+   "match_to_0.01": true
+  },
+  "LingBot/Hard": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 86.68,
+   "mean_reported": 86.68,
+   "match_to_0.01": true
+  },
+  "ABot-M0/Easy": {
+   "n_tasks_listed": 20,
+   "mean_over_listed": 80.65,
+   "mean_reported": 86.06,
+   "match_to_0.01": false
+  },
+  "ABot-M0/Hard": {
+   "n_tasks_listed": 20,
+   "mean_over_listed": 79.25,
+   "mean_reported": 85.08,
+   "match_to_0.01": false
+  },
+  "JoyAI-RA/Easy": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 90.48,
+   "mean_reported": 90.48,
+   "match_to_0.01": true
+  },
+  "JoyAI-RA/Hard": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 89.28,
+   "mean_reported": 89.28,
+   "match_to_0.01": true
+  },
+  "ACE-Ego-0/Easy": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 91.12,
+   "mean_reported": 91.12,
+   "match_to_0.01": true
+  },
+  "ACE-Ego-0/Hard": {
+   "n_tasks_listed": 50,
+   "mean_over_listed": 90.62,
+   "mean_reported": 90.62,
+   "match_to_0.01": true
+  }
+ },
+ "V6b_reported_avg_is_multiple_of_0.02": {
+  "pi0/Easy": true,
+  "pi0/Hard": true,
+  "pi0.5/Easy": true,
+  "pi0.5/Hard": true,
+  "Motus/Easy": true,
+  "Motus/Hard": true,
+  "LingBot/Easy": true,
+  "LingBot/Hard": true,
+  "ABot-M0/Easy": true,
+  "ABot-M0/Hard": true,
+  "JoyAI-RA/Easy": true,
+  "JoyAI-RA/Hard": true,
+  "ACE-Ego-0/Easy": true,
+  "ACE-Ego-0/Hard": true
+ },
+ "V7_robotwin_paired_tasks": {
+  "ACE vs JoyAI-RA / Easy": {
+   "mean_diff_pp": 0.64,
+   "wins": 24,
+   "losses": 17,
+   "ties": 9,
+   "sign_test_p": 0.3489,
+   "wilcoxon_p": 0.4712,
+   "bootstrap95_task_mean_diff": [
+    -1.08,
+    2.46
+   ]
+  },
+  "ACE vs JoyAI-RA / Hard": {
+   "mean_diff_pp": 1.34,
+   "wins": 28,
+   "losses": 13,
+   "ties": 9,
+   "sign_test_p": 0.0275,
+   "wilcoxon_p": 0.1387,
+   "bootstrap95_task_mean_diff": [
+    -0.76,
+    3.48
+   ]
+  },
+  "ACE vs Motus / Easy": {
+   "mean_diff_pp": 2.46,
+   "wins": 29,
+   "losses": 14,
+   "ties": 7,
+   "sign_test_p": 0.0315,
+   "wilcoxon_p": 0.0376,
+   "bootstrap95_task_mean_diff": [
+    -1.58,
+    6.74
+   ]
+  },
+  "ACE vs Motus / Hard": {
+   "mean_diff_pp": 3.6,
+   "wins": 35,
+   "losses": 11,
+   "ties": 4,
+   "sign_test_p": 0.0005,
+   "wilcoxon_p": 0.0022,
+   "bootstrap95_task_mean_diff": [
+    -0.7,
+    7.42
+   ]
+  },
+  "ACE vs LingBot / Easy": {
+   "mean_diff_pp": 2.56,
+   "wins": 31,
+   "losses": 10,
+   "ties": 9,
+   "sign_test_p": 0.0015,
+   "wilcoxon_p": 0.0038,
+   "bootstrap95_task_mean_diff": [
+    -0.3,
+    5.0
+   ]
+  },
+  "ACE vs LingBot / Hard": {
+   "mean_diff_pp": 3.94,
+   "wins": 30,
+   "losses": 11,
+   "ties": 9,
+   "sign_test_p": 0.0043,
+   "wilcoxon_p": 0.0095,
+   "bootstrap95_task_mean_diff": [
+    1.1,
+    6.94
+   ]
+  },
+  "ACE vs pi0.5 / Easy": {
+   "mean_diff_pp": 8.38,
+   "wins": 40,
+   "losses": 7,
+   "ties": 3,
+   "sign_test_p": 0.0,
+   "wilcoxon_p": 0.0,
+   "bootstrap95_task_mean_diff": [
+    3.82,
+    12.94
+   ]
+  },
+  "ACE vs pi0.5 / Hard": {
+   "mean_diff_pp": 13.86,
+   "wins": 43,
+   "losses": 3,
+   "ties": 4,
+   "sign_test_p": 0.0,
+   "wilcoxon_p": 0.0,
+   "bootstrap95_task_mean_diff": [
+    8.98,
+    18.8
+   ]
+  }
+ },
+ "V7b_ace_biggest_deficits_vs_joyai_easy": [
+  [
+   "Click Bell",
+   66,
+   81,
+   -15
+  ],
+  [
+   "Click Alarmclock",
+   52,
+   64,
+   -12
+  ],
+  [
+   "Turn Switch",
+   59,
+   71,
+   -12
+  ],
+  [
+   "Handover Mic",
+   91,
+   100,
+   -9
+  ],
+  [
+   "Place A2B Right",
+   90,
+   97,
+   -7
+  ]
+ ],
+ "V7c_ace_best_or_tied_easy_tasks": 25,
+ "V8_robotwin_pooled": {
+  "Easy ACE vs JoyAI": {
+   "p1": 91.12,
+   "p2": 90.48,
+   "n_each_assumed": 5000,
+   "diff_pp": 0.64,
+   "se_pp": 0.58,
+   "z": 1.11,
+   "fisher_p": 0.2835,
+   "ci95_diff_pp": [
+    -0.49,
+    1.77
+   ]
+  },
+  "Hard ACE vs JoyAI": {
+   "p1": 90.62,
+   "p2": 89.28,
+   "n_each_assumed": 5000,
+   "diff_pp": 1.34,
+   "se_pp": 0.6,
+   "z": 2.23,
+   "fisher_p": 0.0281,
+   "ci95_diff_pp": [
+    0.16,
+    2.52
+   ]
+  },
+  "Easy ACE vs Hy-VLA(90.9)": {
+   "p1": 91.12,
+   "p2": 90.9,
+   "n_each_assumed": 5000,
+   "diff_pp": 0.22,
+   "se_pp": 0.57,
+   "z": 0.38,
+   "fisher_p": 0.7267,
+   "ci95_diff_pp": [
+    -0.9,
+    1.34
+   ]
+  },
+  "Hard ACE vs Hy-VLA(90.1)": {
+   "p1": 90.62,
+   "p2": 90.1,
+   "n_each_assumed": 5000,
+   "diff_pp": 0.52,
+   "se_pp": 0.59,
+   "z": 0.88,
+   "fisher_p": 0.397,
+   "ci95_diff_pp": [
+    -0.64,
+    1.68
+   ]
+  },
+  "note": "n = 100 x 50 = 5,000 시행 가정. 과제 쌍체 검정(V7)이 이 표보다 적절"
+ },
+ "V8b_fig1_robotwin_bars": {
+  "fig1": {
+   "ACE": 90.6,
+   "JoyAI-RA": 89.3,
+   "ABot-M0": 86.1
+  },
+  "table_easy": {
+   "ACE": 91.12,
+   "JoyAI-RA": 90.48,
+   "ABot-M0": 86.06
+  },
+  "table_hard": {
+   "ACE": 90.62,
+   "JoyAI-RA": 89.28,
+   "ABot-M0": 85.08
+  },
+  "reading": "ACE 90.6와 JoyAI-RA 89.3는 Hard 값, ABot-M0 86.1은 Easy 값(Hard는 85.08)과 일치"
+ },
+ "V9_real_robot": {
+  "counts_from_figure_values": {
+   "ACE-Ego": [
+    26,
+    25,
+    26,
+    22,
+    24,
+    18
+   ],
+   "pi0.5": [
+    26,
+    20,
+    23,
+    21,
+    23,
+    16
+   ],
+   "GR00T-N1.7": [
+    1,
+    11,
+    25,
+    2,
+    22,
+    3
+   ]
+  },
+  "integer_ok": {
+   "ACE-Ego": true,
+   "pi0.5": true,
+   "GR00T-N1.7": true
+  },
+  "avg_recomputed": {
+   "ACE-Ego": 78.33,
+   "pi0.5": 71.67,
+   "GR00T-N1.7": 35.56
+  },
+  "avg_reported_in_figure": {
+   "ACE-Ego": 78.3,
+   "pi0.5": 71.7,
+   "GR00T-N1.7": 35.6
+  },
+  "text_vs_figure": [
+   {
+    "where": "5.3절, Scoop Coffee ACE",
+    "text": 86.7,
+    "figure": 83.3
+   },
+   {
+    "where": "5.3절, Scoop Coffee pi0.5",
+    "text": 70.0,
+    "figure": 66.7
+   },
+   {
+    "where": "5.3절, Category Sorting ACE",
+    "text": 90.0,
+    "figure": 86.7
+   },
+   {
+    "where": "5.3절, Category Sorting pi0.5",
+    "text": 80.0,
+    "figure": 76.7
+   },
+   {
+    "where": "5.3절, Category Sorting GR00T",
+    "text": 83.3,
+    "figure": 83.3
+   },
+   {
+    "where": "5.3절, Scoop Coffee GR00T",
+    "text": 36.7,
+    "figure": 36.7
+   },
+   {
+    "where": "5.3절, Stack Bowls GR00T",
+    "text": 73.3,
+    "figure": 73.3
+   },
+   {
+    "where": "5.3절, Sweep Cubes GR00T",
+    "text": 6.7,
+    "figure": 6.7
+   }
+  ],
+  "avg_if_text_values_used": {
+   "ACE-Ego": 79.45,
+   "pi0.5": 72.78
+  },
+  "pooled_counts_of_180": {
+   "ACE-Ego": 141,
+   "pi0.5": 129,
+   "GR00T-N1.7": 64
+  },
+  "wilson95_pooled": {
+   "ACE-Ego": [
+    0.718,
+    0.837
+   ],
+   "pi0.5": [
+    0.647,
+    0.777
+   ],
+   "GR00T-N1.7": [
+    0.289,
+    0.428
+   ]
+  },
+  "fisher_pooled_ace_vs_pi05": {
+   "counts": [
+    141,
+    129
+   ],
+   "p": 0.1804
+  },
+  "fisher_pooled_ace_vs_gr00t": {
+   "counts": [
+    141,
+    64
+   ],
+   "p": 1.85933400630304e-16
+  },
+  "per_task_fisher_ace_vs_pi05": [
+   {
+    "task": "Pick Tea",
+    "ace": 26,
+    "pi05": 26,
+    "fisher_p": 1.0
+   },
+   {
+    "task": "Scoop Coffee",
+    "ace": 25,
+    "pi05": 20,
+    "fisher_p": 0.233
+   },
+   {
+    "task": "Category Sorting",
+    "ace": 26,
+    "pi05": 23,
+    "fisher_p": 0.506
+   },
+   {
+    "task": "Sweep Cubes",
+    "ace": 22,
+    "pi05": 21,
+    "fisher_p": 1.0
+   },
+   {
+    "task": "Stack Bowls",
+    "ace": 24,
+    "pi05": 23,
+    "fisher_p": 1.0
+   },
+   {
+    "task": "Pack Shoes",
+    "ace": 18,
+    "pi05": 16,
+    "fisher_p": 0.795
+   }
+  ],
+  "sign_test_ace_vs_pi05": {
+   "wins": 5,
+   "losses": 0,
+   "ties": 1,
+   "p_two_sided": 0.0625
+  }
+ },
+ "V10_sweep_cubes_ft": {
+  "robot_only": {
+   "k": 1,
+   "n": 10,
+   "wilson95": [
+    0.018,
+    0.404
+   ]
+  },
+  "robot_plus_human": {
+   "k": 4,
+   "n": 10,
+   "wilson95": [
+    0.168,
+    0.687
+   ]
+  },
+  "fisher_p_two_sided": 0.3034,
+  "ratio": 4.0,
+  "hull_ratio_reported": 4.8,
+  "hull_ratio_recomputed": 4.774,
+  "frames_per_robot_demo": 1347.1,
+  "frames_per_human_episode": 280.4,
+  "note": "시행 10회: 4배는 1/10 대 4/10. 정확 검정으로 구분되지 않음. 그림 5(a)의 Sweep Cubes 73.3%(22/30)는 다른 미세조정 설정으로 보임(데이터 양 미기재)"
+ },
+ "V11_channel_weight_share": {
+  "position_channels": 6,
+  "low_channels": 16,
+  "rho_low": 0.001,
+  "weight_share_on_position_pct": 99.73,
+  "note": "식 8의 분모 Z가 표본별 합이면 위치 채널이 보조 손실 가중의 99.7%를 차지한다. 활동 플래그 포함 16개를 낮은 채널로 센 값(마스크에 따라 달라짐)"
+ },
+ "V12_dataset_prior_cancels": {
+  "loss_wdata_1.0_1.0": 0.27028,
+  "loss_wdata_0.25_0.25": 0.27028,
+  "loss_wdata_0.5_0.5": 0.27028,
+  "loss_wdata_left0.25_right1.0": 0.270717,
+  "reading": "표본별 정규화(식 21)에서는 한 표본 안에서 상수인 w_data가 약분된다. 값이 달라지는 것은 왼손/오른손 비율이 다를 때뿐이다"
+ }
+}
