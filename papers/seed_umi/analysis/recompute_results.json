@@ -1,0 +1,510 @@
+{
+ "assumptions": {
+  "n_per_cell": 20
+ },
+ "integer_feasible_all_cells": true,
+ "counts": {
+  "ACT": {
+   "T": [
+    16,
+    13,
+    12,
+    15,
+    18
+   ],
+   "P-": [
+    11,
+    13,
+    12,
+    10,
+    14
+   ],
+   "P+": [
+    14,
+    15,
+    14,
+    13,
+    17
+   ]
+  },
+  "DP": {
+   "T": [
+    13,
+    11,
+    10,
+    12,
+    14
+   ],
+   "P-": [
+    8,
+    11,
+    10,
+    8,
+    9
+   ],
+   "P+": [
+    11,
+    12,
+    11,
+    11,
+    12
+   ]
+  },
+  "pi0.5": {
+   "T": [
+    18,
+    15,
+    14,
+    17,
+    17
+   ],
+   "P-": [
+    12,
+    15,
+    14,
+    12,
+    13
+   ],
+   "P+": [
+    16,
+    17,
+    16,
+    15,
+    16
+   ]
+  }
+ },
+ "mean_by_task": {
+  "T": [
+   78.33,
+   65.0,
+   60.0,
+   73.33,
+   81.67
+  ],
+  "P-": [
+   51.67,
+   65.0,
+   60.0,
+   50.0,
+   60.0
+  ],
+  "P+": [
+   68.33,
+   73.33,
+   68.33,
+   65.0,
+   75.0
+  ]
+ },
+ "mean_by_policy": {
+  "T": {
+   "ACT": 74.0,
+   "DP": 60.0,
+   "pi0.5": 81.0
+  },
+  "P-": {
+   "ACT": 60.0,
+   "DP": 46.0,
+   "pi0.5": 66.0
+  },
+  "P+": {
+   "ACT": 73.0,
+   "DP": 57.0,
+   "pi0.5": 80.0
+  }
+ },
+ "mean_overall": {
+  "T": 71.67,
+  "P-": 57.33,
+  "P+": 70.0
+ },
+ "overall_vs_reported": {
+  "T": {
+   "recomputed": 71.67,
+   "reported": 71.7,
+   "match_1dp": true
+  },
+  "P-": {
+   "recomputed": 57.33,
+   "reported": 57.3,
+   "match_1dp": true
+  },
+  "P+": {
+   "recomputed": 70.0,
+   "reported": 70.0,
+   "match_1dp": true
+  }
+ },
+ "lift_P+_minus_P-_by_task": {
+  "Screw Driving": 16.67,
+  "AirPods Case": 8.33,
+  "Ball Throwing": 8.33,
+  "Table Cleaning": 15.0,
+  "Air Freshener": 15.0
+ },
+ "lift_P+_minus_P-_overall": 12.67,
+ "P+_minus_T_by_task": {
+  "Screw Driving": -10.0,
+  "AirPods Case": 8.33,
+  "Ball Throwing": 8.33,
+  "Table Cleaning": -8.33,
+  "Air Freshener": -6.67
+ },
+ "P-_minus_T_by_task": {
+  "Screw Driving": -26.67,
+  "AirPods Case": 0.0,
+  "Ball Throwing": 0.0,
+  "Table Cleaning": -23.33,
+  "Air Freshener": -21.67
+ },
+ "P+_minus_T_overall": -1.67,
+ "P-_equals_T_in_all_three_policies": {
+  "Screw Driving": false,
+  "AirPods Case": true,
+  "Ball Throwing": true,
+  "Table Cleaning": false,
+  "Air Freshener": false
+ },
+ "cells_P-_equals_T": 6,
+ "cells_P+_gt_T": 6,
+ "cells_P+_lt_T": 9,
+ "cells_P+_gt_P-": 15,
+ "P+_minus_P-_by_cell": {
+  "ACT": [
+   15,
+   10,
+   10,
+   15,
+   15
+  ],
+  "DP": [
+   15,
+   5,
+   5,
+   15,
+   15
+  ],
+  "pi0.5": [
+   20,
+   10,
+   10,
+   15,
+   15
+  ]
+ },
+ "P+_minus_T_by_cell": {
+  "ACT": [
+   -10,
+   10,
+   10,
+   -10,
+   -5
+  ],
+  "DP": [
+   -10,
+   5,
+   5,
+   -5,
+   -10
+  ],
+  "pi0.5": [
+   -10,
+   10,
+   10,
+   -10,
+   -5
+  ]
+ },
+ "pooled_task": {
+  "Screw Driving": {
+   "k_T": 47,
+   "k_P-": 31,
+   "k_P+": 41,
+   "n": 60,
+   "P+_vs_T": {
+    "diff_pp": -10.0,
+    "ci95_pp": [
+     -25.2,
+     5.8
+    ],
+    "fisher_p": 0.302
+   },
+   "P+_vs_P-": {
+    "diff_pp": 16.7,
+    "ci95_pp": [
+     -0.8,
+     32.8
+    ],
+    "fisher_p": 0.0931,
+    "cmh_by_policy": {
+     "or_mh": 2.0753,
+     "chi2": 3.5135,
+     "p": 0.0609
+    },
+    "holm_p_over_5_tasks": 0.4653
+   },
+   "P-_vs_T_fisher_p": 0.0038
+  },
+  "AirPods Case": {
+   "k_T": 39,
+   "k_P-": 39,
+   "k_P+": 44,
+   "n": 60,
+   "P+_vs_T": {
+    "diff_pp": 8.3,
+    "ci95_pp": [
+     -8.1,
+     24.2
+    ],
+    "fisher_p": 0.4294
+   },
+   "P+_vs_P-": {
+    "diff_pp": 8.3,
+    "ci95_pp": [
+     -8.1,
+     24.2
+    ],
+    "fisher_p": 0.4294,
+    "cmh_by_policy": {
+     "or_mh": 1.5051,
+     "chi2": 0.9919,
+     "p": 0.3193
+    },
+    "holm_p_over_5_tasks": 0.8587
+   },
+   "P-_vs_T_fisher_p": 1.0
+  },
+  "Ball Throwing": {
+   "k_T": 36,
+   "k_P-": 36,
+   "k_P+": 41,
+   "n": 60,
+   "P+_vs_T": {
+    "diff_pp": 8.3,
+    "ci95_pp": [
+     -8.7,
+     24.7
+    ],
+    "fisher_p": 0.4466
+   },
+   "P+_vs_P-": {
+    "diff_pp": 8.3,
+    "ci95_pp": [
+     -8.7,
+     24.7
+    ],
+    "fisher_p": 0.4466,
+    "cmh_by_policy": {
+     "or_mh": 1.4587,
+     "chi2": 0.9172,
+     "p": 0.3382
+    },
+    "holm_p_over_5_tasks": 0.8587
+   },
+   "P-_vs_T_fisher_p": 1.0
+  },
+  "Table Cleaning": {
+   "k_T": 44,
+   "k_P-": 30,
+   "k_P+": 39,
+   "n": 60,
+   "P+_vs_T": {
+    "diff_pp": -8.3,
+    "ci95_pp": [
+     -24.2,
+     8.1
+    ],
+    "fisher_p": 0.4294
+   },
+   "P+_vs_P-": {
+    "diff_pp": 15.0,
+    "ci95_pp": [
+     -2.6,
+     31.4
+    ],
+    "fisher_p": 0.1393,
+    "cmh_by_policy": {
+     "or_mh": 1.8911,
+     "chi2": 2.7686,
+     "p": 0.0961
+    },
+    "holm_p_over_5_tasks": 0.4736
+   },
+   "P-_vs_T_fisher_p": 0.0142
+  },
+  "Air Freshener": {
+   "k_T": 49,
+   "k_P-": 36,
+   "k_P+": 45,
+   "n": 60,
+   "P+_vs_T": {
+    "diff_pp": -6.7,
+    "ci95_pp": [
+     -21.2,
+     8.1
+    ],
+    "fisher_p": 0.5068
+   },
+   "P+_vs_P-": {
+    "diff_pp": 15.0,
+    "ci95_pp": [
+     -1.7,
+     30.6
+    ],
+    "fisher_p": 0.1184,
+    "cmh_by_policy": {
+     "or_mh": 2.0843,
+     "chi2": 3.1685,
+     "p": 0.0751
+    },
+    "holm_p_over_5_tasks": 0.4736
+   },
+   "P-_vs_T_fisher_p": 0.0153
+  }
+ },
+ "pooled_overall": {
+  "k": {
+   "T": 215,
+   "P-": 172,
+   "P+": 210
+  },
+  "n": 300,
+  "P+_vs_T": {
+   "diff_pp": -1.7,
+   "ci95_pp": [
+    -8.9,
+    5.6
+   ],
+   "fisher_p": 0.719
+  },
+  "P+_vs_P-": {
+   "diff_pp": 12.7,
+   "ci95_pp": [
+    5.0,
+    20.2
+   ],
+   "fisher_p": 0.00166
+  },
+  "P-_vs_T": {
+   "diff_pp": -14.3,
+   "ci95_pp": [
+    -21.8,
+    -6.7
+   ],
+   "fisher_p": 0.000329
+  },
+  "P+_vs_P-_cmh_15_strata": {
+   "or_mh": 1.784,
+   "chi2": 10.64,
+   "p": 0.001108
+  },
+  "P+_vs_T_cmh_15_strata": {
+   "or_mh": 0.9189,
+   "chi2": 0.208,
+   "p": 0.6483
+  }
+ },
+ "sign_test_P+_vs_T_15_cells": {
+  "gt": 6,
+  "lt": 9,
+  "p_two_sided": 0.6072387695312499
+ },
+ "F2_heterogeneity": {
+  "contact_tasks": [
+   "Screw Driving",
+   "Table Cleaning",
+   "Air Freshener"
+  ],
+  "other_tasks": [
+   "AirPods Case",
+   "Ball Throwing"
+  ],
+  "lift_contact_pp": 15.6,
+  "lift_other_pp": 8.3,
+  "diff_pp": 7.2,
+  "wald_z": 0.91,
+  "p_two_sided": 0.36
+ },
+ "policy_P+_totals_of_100": {
+  "ACT": 73,
+  "DP": 57,
+  "pi0.5": 80
+ },
+ "policy_P+_fisher_p": {
+  "pi0.5_vs_DP": 0.000743,
+  "pi0.5_vs_ACT": 0.317,
+  "ACT_vs_DP": 0.026
+ },
+ "policy_rank_same_in_all_conditions": true,
+ "power": {
+  "cell_n20_base0.6_diff0.10": 0.05925,
+  "cell_n20_base0.6_diff0.20": 0.193,
+  "cell_n20_base0.6_diff0.30": 0.4965,
+  "pooled_n60_base0.6_diff0.083": 0.11125,
+  "pooled_n60_base0.6_diff0.15": 0.349
+ },
+ "n_per_arm_for_80pct_power": {
+  "0.65_vs_0.733 (AirPods P+ vs T)": 510,
+  "0.60_vs_0.683 (Ball P+ vs T)": 540
+ },
+ "efficiency": {
+  "demos": {
+   "T": 18,
+   "SEED-UMI": 52
+  },
+  "ratio": 2.889,
+  "seconds_per_demo": {
+   "T": 100.0,
+   "SEED-UMI": 34.6
+  },
+  "poisson_rate_ratio_exact_ci95": [
+   1.66,
+   5.25
+  ],
+  "binomial_p_equal_rate": 5.85e-05,
+  "paper_text": {
+   "raw": "almost 3.0x",
+   "normalized": "approximately 2.9x"
+  },
+  "normalized_ratio_with_overall_success (P+ 70.0 / T 71.7)": 2.82,
+  "normalized_ratio_with_AirPods_success (P+ 73.3 / T 65.0)": 3.259,
+  "normalized_ratio_with_AirPods_success_P- (65.0 / 65.0)": 2.889,
+  "rounding_of_ratio_to_1dp": 2.9,
+  "calibration_amortization_assumed": {
+   "cal_30s_per_episode": {
+    "calibration_min": 125.0,
+    "saved_per_task_min": 109.0,
+    "tasks_to_break_even": 1.15
+   },
+   "cal_60s_per_episode": {
+    "calibration_min": 250.0,
+    "saved_per_task_min": 109.0,
+    "tasks_to_break_even": 2.29
+   },
+   "cal_120s_per_episode": {
+    "calibration_min": 500.0,
+    "saved_per_task_min": 109.0,
+    "tasks_to_break_even": 4.59
+   }
+  },
+  "demo_time_100_eps_min": {
+   "T": 166.7,
+   "SEED-UMI": 57.7
+  }
+ },
+ "check_text_vs_table": {
+  "P+ AirPods 73.3 vs T 65.0": [
+   73.3,
+   65.0
+  ],
+  "P+ Ball 68.3 vs T 60.0": [
+   68.3,
+   60.0
+  ],
+  "lift Screw +16.7": 16.7,
+  "lift Table +15.0": 15.0,
+  "lift Air +15.0": 15.0,
+  "lift overall +12.7": 12.7
+ }
+}
