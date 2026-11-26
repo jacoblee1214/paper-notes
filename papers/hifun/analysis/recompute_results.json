@@ -1,0 +1,901 @@
+{
+  "V1_table1_means": {
+    "il_min": {
+      "reported": 95.0,
+      "recomputed": 95.0,
+      "match": true
+    },
+    "rl_data": {
+      "reported": 18.8,
+      "recomputed": 18.83,
+      "match": true
+    },
+    "rl_online": {
+      "reported": 46.2,
+      "recomputed": 46.17,
+      "match": true
+    },
+    "glove": {
+      "reported": 4.5,
+      "recomputed": 4.5,
+      "match": true
+    },
+    "interv_fin": {
+      "reported": 13.7,
+      "recomputed": 13.67,
+      "match": true
+    },
+    "hifun": {
+      "reported": 98.3,
+      "recomputed": 98.33,
+      "match": true
+    },
+    "bc": {
+      "reported": 23.7,
+      "recomputed": 23.67,
+      "match": true
+    },
+    "dp": {
+      "reported": 41.7,
+      "recomputed": 41.67,
+      "match": true
+    },
+    "interv_app_mean": 46.67,
+    "glove_mean_over_reported_cells": 13.5
+  },
+  "V2_table5": {
+    "dmp_equals_table1": true,
+    "coord_equals_table1": true,
+    "classifier_sum_min": 52.5,
+    "classifier_mean_min": 8.75,
+    "classifier_range": [
+      4,
+      13
+    ],
+    "per_task_robot_plus_attended": [
+      98,
+      81,
+      88,
+      50,
+      84,
+      41.5
+    ],
+    "mean_total_reported_components": 73.75,
+    "mean_attended_online_plus_classifier": 54.92
+  },
+  "V3_half_credit_needed_if_n50": {
+    "odd_percent_values": {
+      "glove": [
+        15
+      ],
+      "interv_app": [],
+      "interv_fin": [],
+      "hifun": [],
+      "bc": [
+        15,
+        35
+      ],
+      "dp": [],
+      "table6": {
+        "bc_human": [
+          15,
+          35
+        ],
+        "bc_hifun": [],
+        "dp_human": [],
+        "dp_hifun": []
+      },
+      "table2_ablation": {
+        "Angle-Spreader Retrieval": {
+          "no_multihead": 85
+        },
+        "Power-Drill Bit Removal": {
+          "no_multihead": 75
+        }
+      },
+      "table2_data": {
+        "Angle-Spreader Retrieval": 85
+      }
+    },
+    "table2_integer_at_n20": {
+      "table2_all_multiples_of_5": true
+    },
+    "note": "n=50에서 홀수 %는 성공 수가 xx.5라 0.5 크레딧 시행이 1회 이상 필요"
+  },
+  "V4_hifun_wilson": {
+    "counts_n50": {
+      "Power-Drill Actuation": 50,
+      "Angle-Spreader Retrieval": 50,
+      "Thin-Handle Retrieval": 50,
+      "Power-Drill Bit Removal": 50,
+      "Pipette Dispensing": 45,
+      "Thin-Shaft Tool Retrieval": 50
+    },
+    "wilson95_pct": {
+      "Power-Drill Actuation": [
+        92.9,
+        100.0
+      ],
+      "Angle-Spreader Retrieval": [
+        92.9,
+        100.0
+      ],
+      "Thin-Handle Retrieval": [
+        92.9,
+        100.0
+      ],
+      "Power-Drill Bit Removal": [
+        92.9,
+        100.0
+      ],
+      "Pipette Dispensing": [
+        78.6,
+        95.7
+      ],
+      "Thin-Shaft Tool Retrieval": [
+        92.9,
+        100.0
+      ]
+    },
+    "pooled": [
+      295,
+      300
+    ],
+    "pooled_pct": 98.33,
+    "pooled_wilson95_pct": [
+      96.2,
+      99.3
+    ],
+    "all100_wilson_lower_n50": 92.9
+  },
+  "V5_fisher_table1": {
+    "interv_fin": [
+      {
+        "task": "Power-Drill Actuation",
+        "hifun": 100,
+        "base": 30,
+        "p_cons": 4.110852140103697e-15,
+        "p_min": 4.110852140103697e-15,
+        "holm_p": 8.221704280207394e-15
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "hifun": 100,
+        "base": 0,
+        "p_cons": 1.9823306042836675e-29,
+        "p_min": 1.9823306042836675e-29,
+        "holm_p": 1.1893983625702005e-28
+      },
+      {
+        "task": "Thin-Handle Retrieval",
+        "hifun": 100,
+        "base": 0,
+        "p_cons": 1.9823306042836675e-29,
+        "p_min": 1.9823306042836675e-29,
+        "holm_p": 1.1893983625702005e-28
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "hifun": 100,
+        "base": 20,
+        "p_cons": 1.4945588822428829e-18,
+        "p_min": 1.4945588822428829e-18,
+        "holm_p": 4.4836766467286486e-18
+      },
+      {
+        "task": "Pipette Dispensing",
+        "hifun": 90,
+        "base": 32,
+        "p_cons": 2.4338579691445525e-09,
+        "p_min": 2.4338579691445525e-09,
+        "holm_p": 2.4338579691445525e-09
+      },
+      {
+        "task": "Thin-Shaft Tool Retrieval",
+        "hifun": 100,
+        "base": 0,
+        "p_cons": 1.9823306042836675e-29,
+        "p_min": 1.9823306042836675e-29,
+        "holm_p": 1.1893983625702005e-28
+      }
+    ],
+    "bc": [
+      {
+        "task": "Power-Drill Actuation",
+        "hifun": 100,
+        "base": 15,
+        "p_cons": 3.799725971803939e-20,
+        "p_min": 5.241001340419226e-21,
+        "holm_p": 2.2798355830823634e-19
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "hifun": 100,
+        "base": 30,
+        "p_cons": 4.110852140103697e-15,
+        "p_min": 4.110852140103697e-15,
+        "holm_p": 1.2332556420311092e-14
+      },
+      {
+        "task": "Thin-Handle Retrieval",
+        "hifun": 100,
+        "base": 35,
+        "p_cons": 2.52474835604702e-13,
+        "p_min": 6.683157413065642e-14,
+        "holm_p": 2.52474835604702e-13
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "hifun": 100,
+        "base": 30,
+        "p_cons": 4.110852140103697e-15,
+        "p_min": 4.110852140103697e-15,
+        "holm_p": 1.2332556420311092e-14
+      },
+      {
+        "task": "Pipette Dispensing",
+        "hifun": 90,
+        "base": 12,
+        "p_cons": 6.907290100349439e-16,
+        "p_min": 6.907290100349439e-16,
+        "holm_p": 2.7629160401397758e-15
+      },
+      {
+        "task": "Thin-Shaft Tool Retrieval",
+        "hifun": 100,
+        "base": 20,
+        "p_cons": 1.4945588822428829e-18,
+        "p_min": 1.4945588822428829e-18,
+        "holm_p": 7.472794411214413e-18
+      }
+    ],
+    "dp": [
+      {
+        "task": "Power-Drill Actuation",
+        "hifun": 100,
+        "base": 30,
+        "p_cons": 4.110852140103697e-15,
+        "p_min": 4.110852140103697e-15,
+        "holm_p": 2.4665112840622184e-14
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "hifun": 100,
+        "base": 60,
+        "p_cons": 1.7586072571039983e-07,
+        "p_min": 1.7586072571039983e-07,
+        "holm_p": 1.7586072571039983e-07
+      },
+      {
+        "task": "Thin-Handle Retrieval",
+        "hifun": 100,
+        "base": 40,
+        "p_cons": 3.2090880420281863e-12,
+        "p_min": 3.2090880420281863e-12,
+        "holm_p": 1.2836352168112745e-11
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "hifun": 100,
+        "base": 36,
+        "p_cons": 2.52474835604702e-13,
+        "p_min": 2.52474835604702e-13,
+        "holm_p": 1.2623741780235101e-12
+      },
+      {
+        "task": "Pipette Dispensing",
+        "hifun": 90,
+        "base": 26,
+        "p_cons": 5.524418656326438e-11,
+        "p_min": 5.524418656326438e-11,
+        "holm_p": 1.6573255968979314e-10
+      },
+      {
+        "task": "Thin-Shaft Tool Retrieval",
+        "hifun": 100,
+        "base": 58,
+        "p_cons": 6.594777214139992e-08,
+        "p_min": 6.594777214139992e-08,
+        "holm_p": 1.3189554428279984e-07
+      }
+    ],
+    "vs_best_per_task": [
+      {
+        "task": "Power-Drill Actuation",
+        "hifun": 100,
+        "best_baseline": 30,
+        "p_cons": 4.110852140103697e-15
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "hifun": 100,
+        "best_baseline": 60,
+        "p_cons": 1.7586072571039983e-07
+      },
+      {
+        "task": "Thin-Handle Retrieval",
+        "hifun": 100,
+        "best_baseline": 40,
+        "p_cons": 3.2090880420281863e-12
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "hifun": 100,
+        "best_baseline": 36,
+        "p_cons": 2.52474835604702e-13
+      },
+      {
+        "task": "Pipette Dispensing",
+        "hifun": 90,
+        "best_baseline": 32,
+        "p_cons": 2.4338579691445525e-09
+      },
+      {
+        "task": "Thin-Shaft Tool Retrieval",
+        "hifun": 100,
+        "best_baseline": 58,
+        "p_cons": 6.594777214139992e-08
+      }
+    ],
+    "interv_fin_pooled": {
+      "hifun": [
+        295,
+        300
+      ],
+      "base_k": 41.0,
+      "p": 1.3615821412269122e-116,
+      "newcombe_diff_pp": [
+        84.7,
+        79.8,
+        88.2
+      ]
+    },
+    "bc_pooled": {
+      "hifun": [
+        295,
+        300
+      ],
+      "base_k": 71.0,
+      "p": 6.9127694615280505e-93,
+      "newcombe_diff_pp": [
+        74.7,
+        69.1,
+        79.2
+      ]
+    },
+    "dp_pooled": {
+      "hifun": [
+        295,
+        300
+      ],
+      "base_k": 125.0,
+      "p": 1.0733115437444115e-60,
+      "newcombe_diff_pp": [
+        56.7,
+        50.6,
+        62.2
+      ]
+    }
+  },
+  "V6_table2": {
+    "ablation_n20": [
+      {
+        "task": "Angle-Spreader Retrieval",
+        "variant": "no_multihead",
+        "full": 100,
+        "var": 85,
+        "p_cons": 0.23076923076923084,
+        "holm_p": 0.23076923076923084
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "variant": "uniform_bc",
+        "full": 100,
+        "var": 60,
+        "p_cons": 0.003276003276003276,
+        "holm_p": 0.013104013104013105
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "variant": "no_interv_bc",
+        "full": 100,
+        "var": 40,
+        "p_cons": 4.5095150768120733e-05,
+        "holm_p": 0.0002705709046087244
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "variant": "no_multihead",
+        "full": 100,
+        "var": 75,
+        "p_cons": 0.047124047124047136,
+        "holm_p": 0.09424809424809427
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "variant": "uniform_bc",
+        "full": 100,
+        "var": 60,
+        "p_cons": 0.003276003276003276,
+        "holm_p": 0.013104013104013105
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "variant": "no_interv_bc",
+        "full": 100,
+        "var": 40,
+        "p_cons": 4.5095150768120733e-05,
+        "holm_p": 0.0002705709046087244
+      }
+    ],
+    "data_source_n20": [
+      {
+        "task": "Angle-Spreader Retrieval",
+        "dmp": 100,
+        "human": 85,
+        "p_cons": 0.23076923076923084
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "dmp": 100,
+        "human": 100,
+        "p_cons": 1.0
+      }
+    ],
+    "ablation_n50": [
+      {
+        "task": "Angle-Spreader Retrieval",
+        "variant": "no_multihead",
+        "full": 100,
+        "var": 85,
+        "p_cons": 0.012479652740097668,
+        "holm_p": 0.012479652740097668
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "variant": "uniform_bc",
+        "full": 100,
+        "var": 60,
+        "p_cons": 1.7586072571039983e-07,
+        "holm_p": 7.034429028415993e-07
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "variant": "no_interv_bc",
+        "full": 100,
+        "var": 40,
+        "p_cons": 3.2090880420281863e-12,
+        "holm_p": 1.925452825216912e-11
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "variant": "no_multihead",
+        "full": 100,
+        "var": 75,
+        "p_cons": 0.000231144741381746,
+        "holm_p": 0.000462289482763492
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "variant": "uniform_bc",
+        "full": 100,
+        "var": 60,
+        "p_cons": 1.7586072571039983e-07,
+        "holm_p": 7.034429028415993e-07
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "variant": "no_interv_bc",
+        "full": 100,
+        "var": 40,
+        "p_cons": 3.2090880420281863e-12,
+        "holm_p": 1.925452825216912e-11
+      }
+    ],
+    "data_source_n50": [
+      {
+        "task": "Angle-Spreader Retrieval",
+        "dmp": 100,
+        "human": 85,
+        "p_cons": 0.012479652740097668
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "dmp": 100,
+        "human": 100,
+        "p_cons": 1.0
+      }
+    ],
+    "n_needed_100_vs_85_80pct_power": 52,
+    "n_needed_100_vs_75_80pct_power": 25
+  },
+  "V7_data_time": {
+    "ratio_total": {
+      "Angle-Spreader Retrieval": 4.62,
+      "Power-Drill Bit Removal": 3.81
+    },
+    "per_trajectory_min_dmp_n100": {
+      "Angle-Spreader Retrieval": 0.13,
+      "Power-Drill Bit Removal": 0.21
+    },
+    "per_trajectory_min_human_n200": {
+      "Angle-Spreader Retrieval": 0.3,
+      "Power-Drill Bit Removal": 0.4
+    },
+    "ratio_per_trajectory_if_human200_dmp100": {
+      "Angle-Spreader Retrieval": 2.31,
+      "Power-Drill Bit Removal": 1.9
+    },
+    "table1_il_equals_table2_human_time": true
+  },
+  "V8_table3": {
+    "rows": [
+      {
+        "task": "Power-Drill Actuation",
+        "alt": "replay",
+        "ours": 20,
+        "alt_k": 0,
+        "p": 1.4508889103849688e-11,
+        "holm_p": 2.611600038692944e-10
+      },
+      {
+        "task": "Power-Drill Actuation",
+        "alt": "dexpilot",
+        "ours": 20,
+        "alt_k": 18,
+        "p": 0.48717948717948717,
+        "holm_p": 1.0
+      },
+      {
+        "task": "Power-Drill Actuation",
+        "alt": "anyteleop",
+        "ours": 20,
+        "alt_k": 19,
+        "p": 1.0,
+        "holm_p": 1.0
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "alt": "replay",
+        "ours": 20,
+        "alt_k": 0,
+        "p": 1.4508889103849688e-11,
+        "holm_p": 2.611600038692944e-10
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "alt": "dexpilot",
+        "ours": 20,
+        "alt_k": 7,
+        "p": 1.2884328790891637e-05,
+        "holm_p": 6.442164395445818e-05
+      },
+      {
+        "task": "Angle-Spreader Retrieval",
+        "alt": "anyteleop",
+        "ours": 20,
+        "alt_k": 5,
+        "p": 7.708572780875339e-07,
+        "holm_p": 5.396000946612737e-06
+      },
+      {
+        "task": "Thin-Handle Retrieval",
+        "alt": "replay",
+        "ours": 20,
+        "alt_k": 0,
+        "p": 1.4508889103849688e-11,
+        "holm_p": 2.611600038692944e-10
+      },
+      {
+        "task": "Thin-Handle Retrieval",
+        "alt": "dexpilot",
+        "ours": 20,
+        "alt_k": 0,
+        "p": 1.4508889103849688e-11,
+        "holm_p": 2.611600038692944e-10
+      },
+      {
+        "task": "Thin-Handle Retrieval",
+        "alt": "anyteleop",
+        "ours": 20,
+        "alt_k": 0,
+        "p": 1.4508889103849688e-11,
+        "holm_p": 2.611600038692944e-10
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "alt": "replay",
+        "ours": 20,
+        "alt_k": 5,
+        "p": 7.708572780875339e-07,
+        "holm_p": 5.396000946612737e-06
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "alt": "dexpilot",
+        "ours": 20,
+        "alt_k": 3,
+        "p": 2.5695242602917804e-08,
+        "holm_p": 2.3125718342626024e-07
+      },
+      {
+        "task": "Power-Drill Bit Removal",
+        "alt": "anyteleop",
+        "ours": 20,
+        "alt_k": 3,
+        "p": 2.5695242602917804e-08,
+        "holm_p": 2.3125718342626024e-07
+      },
+      {
+        "task": "Pipette Dispensing",
+        "alt": "replay",
+        "ours": 20,
+        "alt_k": 0,
+        "p": 1.4508889103849688e-11,
+        "holm_p": 2.611600038692944e-10
+      },
+      {
+        "task": "Pipette Dispensing",
+        "alt": "dexpilot",
+        "ours": 20,
+        "alt_k": 20,
+        "p": 1.0,
+        "holm_p": 1.0
+      },
+      {
+        "task": "Pipette Dispensing",
+        "alt": "anyteleop",
+        "ours": 20,
+        "alt_k": 20,
+        "p": 1.0,
+        "holm_p": 1.0
+      },
+      {
+        "task": "Thin-Shaft Tool Retrieval",
+        "alt": "replay",
+        "ours": 20,
+        "alt_k": 0,
+        "p": 1.4508889103849688e-11,
+        "holm_p": 2.611600038692944e-10
+      },
+      {
+        "task": "Thin-Shaft Tool Retrieval",
+        "alt": "dexpilot",
+        "ours": 20,
+        "alt_k": 0,
+        "p": 1.4508889103849688e-11,
+        "holm_p": 2.611600038692944e-10
+      },
+      {
+        "task": "Thin-Shaft Tool Retrieval",
+        "alt": "anyteleop",
+        "ours": 20,
+        "alt_k": 0,
+        "p": 1.4508889103849688e-11,
+        "holm_p": 2.611600038692944e-10
+      }
+    ],
+    "ours_total": [
+      120,
+      120
+    ],
+    "ours_wilson95_pct": [
+      96.9,
+      100.0
+    ],
+    "zero_of_20_wilson_upper_pct": 16.1,
+    "column_totals_of_120": {
+      "replay": 5,
+      "dexpilot": 48,
+      "anyteleop": 47
+    }
+  },
+  "V9_table6": {
+    "bc": {
+      "rows": [
+        {
+          "task": "Power-Drill Actuation",
+          "human": 15,
+          "hifun_data": 12,
+          "p": 1.0
+        },
+        {
+          "task": "Angle-Spreader Retrieval",
+          "human": 30,
+          "hifun_data": 32,
+          "p": 1.0
+        },
+        {
+          "task": "Thin-Handle Retrieval",
+          "human": 35,
+          "hifun_data": 32,
+          "p": 1.0
+        },
+        {
+          "task": "Power-Drill Bit Removal",
+          "human": 30,
+          "hifun_data": 28,
+          "p": 1.0
+        }
+      ],
+      "avg_human": 27.5,
+      "avg_hifun_data": 26.0,
+      "avg_reported_match": [
+        true,
+        true
+      ],
+      "pooled_diff_pp_hifun_data_minus_human": -1.5,
+      "newcombe95_pp": [
+        -10.1,
+        7.2
+      ],
+      "pooled_fisher_p": 0.8213465738422574
+    },
+    "dp": {
+      "rows": [
+        {
+          "task": "Power-Drill Actuation",
+          "human": 30,
+          "hifun_data": 26,
+          "p": 0.8240473585397343
+        },
+        {
+          "task": "Angle-Spreader Retrieval",
+          "human": 60,
+          "hifun_data": 64,
+          "p": 0.8369464893157667
+        },
+        {
+          "task": "Thin-Handle Retrieval",
+          "human": 40,
+          "hifun_data": 40,
+          "p": 1.0
+        },
+        {
+          "task": "Power-Drill Bit Removal",
+          "human": 36,
+          "hifun_data": 40,
+          "p": 0.8369464893157665
+        }
+      ],
+      "avg_human": 41.5,
+      "avg_hifun_data": 42.5,
+      "avg_reported_match": [
+        true,
+        true
+      ],
+      "pooled_diff_pp_hifun_data_minus_human": 1.0,
+      "newcombe95_pp": [
+        -8.6,
+        10.6
+      ],
+      "pooled_fisher_p": 0.9193269267826867
+    },
+    "table6_matches_table1_human_columns": true
+  },
+  "V10_skill_hil": {
+    "doubling_35_of_50_pct": 70.0,
+    "angle_35_vs_50_p": 1.7769346780422187e-05,
+    "pooled_92_of_200_vs_200_of_200_p": 1.0149593712810375e-41,
+    "skill_avg46_wilson_n200_pct": [
+      39.2,
+      52.9
+    ]
+  },
+  "V11_robustness": {
+    "sum": [
+      116,
+      120
+    ],
+    "pct": 96.67,
+    "wilson95_pct": [
+      91.7,
+      98.7
+    ],
+    "angle_19_of_20_wilson": [
+      76.4,
+      99.1
+    ],
+    "bit_18_of_20_wilson": [
+      69.9,
+      97.2
+    ],
+    "table1_vs_robust_note": "표 1 Power-Drill Actuation 50/50 대 교란 18/20, Pipette 45/50 대 18/20 (서로 다른 조건)"
+  },
+  "V12_fig8A": {
+    "claim": "multi-head: 95% of activations within 2.00 cm (본문 4.3), p95=2.00 cm, outside-2cm=3.7% (부록 D.4)",
+    "consistent_ours": "밖 3.7% < 5%이면 p95 ≤ 2.00 cm → 일치",
+    "consistent_single": "밖 6.0% > 5%이면 p95 > 2.00 cm → 4.58 cm와 모순 없음"
+  },
+  "V13_iaw_temperature": {
+    "note": "Norm(A)를 z-점수, 정규 분포로 가정. 논문은 τ_I와 Norm의 정의를 쓰지 않는다. 보고된 두 평균은 0.175와 0.884.",
+    "table": [
+      {
+        "tau": 0.1,
+        "mean_w_all": 0.5,
+        "mean_w_bottom_quartile": 0.0,
+        "mean_w_top_quartile": 1.0,
+        "mean_w_bottom_half": 0.055,
+        "mean_w_top_half": 0.946
+      },
+      {
+        "tau": 0.2,
+        "mean_w_all": 0.5,
+        "mean_w_bottom_quartile": 0.007,
+        "mean_w_top_quartile": 0.993,
+        "mean_w_bottom_half": 0.106,
+        "mean_w_top_half": 0.895
+      },
+      {
+        "tau": 0.3,
+        "mean_w_all": 0.5,
+        "mean_w_bottom_quartile": 0.03,
+        "mean_w_top_quartile": 0.97,
+        "mean_w_bottom_half": 0.151,
+        "mean_w_top_half": 0.85
+      },
+      {
+        "tau": 0.5,
+        "mean_w_all": 0.5,
+        "mean_w_bottom_quartile": 0.096,
+        "mean_w_top_quartile": 0.904,
+        "mean_w_bottom_half": 0.222,
+        "mean_w_top_half": 0.778
+      },
+      {
+        "tau": 1.0,
+        "mean_w_all": 0.5,
+        "mean_w_bottom_quartile": 0.23,
+        "mean_w_top_quartile": 0.77,
+        "mean_w_bottom_half": 0.325,
+        "mean_w_top_half": 0.675
+      }
+    ]
+  },
+  "V14_power": {
+    "n_per_arm_100_vs_90": 100,
+    "n_per_arm_100_vs_85": 52,
+    "n_per_arm_90_vs_60": 30
+  },
+  "V15_cost_accounting": {
+    "mean_il_demo_minutes": 95.0,
+    "mean_hifun_reported": 73.75,
+    "mean_hifun_human_attended_reported": 54.92,
+    "unreported": [
+      "손 기술 잔차 RL 시간",
+      "기준 시연 1회 (Gello)",
+      "손 기술 교시 5분 미만(기준 시연당, 부록 C.1)",
+      "리셋 인력",
+      "분류기 정확도 95% 검증"
+    ]
+  },
+  "V16_glove_vs_interv": {
+    "rows": [
+      {
+        "task": "Power-Drill Actuation",
+        "interv": 30,
+        "glove": 15,
+        "p_cons": 0.1530623396236175,
+        "p_min": 0.08967259812681824
+      },
+      {
+        "task": "Pipette Dispensing",
+        "interv": 32,
+        "glove": 12,
+        "p_cons": 0.02834670867875204,
+        "p_min": 0.02834670867875204
+      }
+    ],
+    "pooled_2tasks": {
+      "interv": [
+        31,
+        100
+      ],
+      "glove": [
+        "13 또는 14 (13.5)",
+        100
+      ],
+      "p_cons": 0.006338400263756397
+    }
+  }
+}
