@@ -1,0 +1,737 @@
+{
+  "table2_text_check": {
+    "found_in_text": 10,
+    "expected": 10,
+    "all_found": true
+  },
+  "table2_success_lines_parsed": [
+    [
+      "84.4",
+      "56.2",
+      "75.0",
+      "75.0",
+      "75.0"
+    ],
+    [
+      "87.5",
+      "46.9",
+      "21.9",
+      "40.6",
+      "31.2"
+    ]
+  ],
+  "table2": {
+    "Ho-cap": {
+      "TopoRetarget": {
+        "k": 27,
+        "n": 32,
+        "rate_exact": 84.375,
+        "reported": "84.4",
+        "round_half_even": "84.4",
+        "round_half_up": "84.4",
+        "wilson95": [
+          68.24585025525295,
+          93.13557976092527
+        ],
+        "pos_err_cm": 0.87,
+        "rot_err_deg": 5.76,
+        "matches_reported_half_even": true,
+        "matches_reported_half_up": true
+      },
+      "OmniRetarget": {
+        "k": 18,
+        "n": 32,
+        "rate_exact": 56.25,
+        "reported": "56.2",
+        "round_half_even": "56.2",
+        "round_half_up": "56.3",
+        "wilson95": [
+          39.32559101275063,
+          71.83466899019088
+        ],
+        "pos_err_cm": 1.07,
+        "rot_err_deg": 7.87,
+        "matches_reported_half_even": true,
+        "matches_reported_half_up": false
+      },
+      "Mink": {
+        "k": 24,
+        "n": 32,
+        "rate_exact": 75.0,
+        "reported": "75.0",
+        "round_half_even": "75.0",
+        "round_half_up": "75.0",
+        "wilson95": [
+          57.89344086290853,
+          86.74759914885746
+        ],
+        "pos_err_cm": 0.91,
+        "rot_err_deg": 5.55,
+        "matches_reported_half_even": true,
+        "matches_reported_half_up": true
+      },
+      "DexPilot": {
+        "k": 24,
+        "n": 32,
+        "rate_exact": 75.0,
+        "reported": "75.0",
+        "round_half_even": "75.0",
+        "round_half_up": "75.0",
+        "wilson95": [
+          57.89344086290853,
+          86.74759914885746
+        ],
+        "pos_err_cm": 0.92,
+        "rot_err_deg": 4.99,
+        "matches_reported_half_even": true,
+        "matches_reported_half_up": true
+      },
+      "GeoRT": {
+        "k": 24,
+        "n": 32,
+        "rate_exact": 75.0,
+        "reported": "75.0",
+        "round_half_even": "75.0",
+        "round_half_up": "75.0",
+        "wilson95": [
+          57.89344086290853,
+          86.74759914885746
+        ],
+        "pos_err_cm": 0.9,
+        "rot_err_deg": 6.07,
+        "matches_reported_half_even": true,
+        "matches_reported_half_up": true
+      }
+    },
+    "Pen-Spin": {
+      "TopoRetarget": {
+        "k": 28,
+        "n": 32,
+        "rate_exact": 87.5,
+        "reported": "87.5",
+        "round_half_even": "87.5",
+        "round_half_up": "87.5",
+        "wilson95": [
+          71.93169437055494,
+          95.02986564709404
+        ],
+        "pos_err_cm": 0.98,
+        "rot_err_deg": 9.25,
+        "matches_reported_half_even": true,
+        "matches_reported_half_up": true
+      },
+      "OmniRetarget": {
+        "k": 15,
+        "n": 32,
+        "rate_exact": 46.875,
+        "reported": "46.9",
+        "round_half_even": "46.9",
+        "round_half_up": "46.9",
+        "wilson95": [
+          30.869386997660413,
+          63.55048300086883
+        ],
+        "pos_err_cm": 1.45,
+        "rot_err_deg": 14.26,
+        "matches_reported_half_even": true,
+        "matches_reported_half_up": true
+      },
+      "Mink": {
+        "k": 7,
+        "n": 32,
+        "rate_exact": 21.875,
+        "reported": "21.9",
+        "round_half_even": "21.9",
+        "round_half_up": "21.9",
+        "wilson95": [
+          11.023836192799005,
+          38.75499379396427
+        ],
+        "pos_err_cm": 1.61,
+        "rot_err_deg": 15.25,
+        "matches_reported_half_even": true,
+        "matches_reported_half_up": true
+      },
+      "DexPilot": {
+        "k": 13,
+        "n": 32,
+        "rate_exact": 40.625,
+        "reported": "40.6",
+        "round_half_even": "40.6",
+        "round_half_up": "40.6",
+        "wilson95": [
+          25.5196347429215,
+          57.739975252666255
+        ],
+        "pos_err_cm": 1.29,
+        "rot_err_deg": 17.66,
+        "matches_reported_half_even": true,
+        "matches_reported_half_up": true
+      },
+      "GeoRT": {
+        "k": 10,
+        "n": 32,
+        "rate_exact": 31.25,
+        "reported": "31.2",
+        "round_half_even": "31.2",
+        "round_half_up": "31.3",
+        "wilson95": [
+          17.95254155225751,
+          48.566678438918004
+        ],
+        "pos_err_cm": 1.19,
+        "rot_err_deg": 18.62,
+        "matches_reported_half_even": true,
+        "matches_reported_half_up": false
+      }
+    }
+  },
+  "table2_tests": [
+    {
+      "dataset": "Ho-cap",
+      "baseline": "OmniRetarget",
+      "k_topo": 27,
+      "k_base": 18,
+      "diff_pp": 28.125,
+      "newcombe95_pp": [
+        5.696638958178621,
+        47.18237068210672
+      ],
+      "fisher_p": 0.027192259617654556,
+      "odds_ratio": 4.2,
+      "holm_p_8tests": 0.10876903847061822,
+      "holm_p_4tests_in_dataset": 0.10876903847061822
+    },
+    {
+      "dataset": "Ho-cap",
+      "baseline": "Mink",
+      "k_topo": 27,
+      "k_base": 24,
+      "diff_pp": 9.375,
+      "newcombe95_pp": [
+        -10.57883565259347,
+        28.594316409756647
+      ],
+      "fisher_p": 0.535640623995466,
+      "odds_ratio": 1.8,
+      "holm_p_8tests": 1.0,
+      "holm_p_4tests_in_dataset": 1.0
+    },
+    {
+      "dataset": "Ho-cap",
+      "baseline": "DexPilot",
+      "k_topo": 27,
+      "k_base": 24,
+      "diff_pp": 9.375,
+      "newcombe95_pp": [
+        -10.57883565259347,
+        28.594316409756647
+      ],
+      "fisher_p": 0.535640623995466,
+      "odds_ratio": 1.8,
+      "holm_p_8tests": 1.0,
+      "holm_p_4tests_in_dataset": 1.0
+    },
+    {
+      "dataset": "Ho-cap",
+      "baseline": "GeoRT",
+      "k_topo": 27,
+      "k_base": 24,
+      "diff_pp": 9.375,
+      "newcombe95_pp": [
+        -10.57883565259347,
+        28.594316409756647
+      ],
+      "fisher_p": 0.535640623995466,
+      "odds_ratio": 1.8,
+      "holm_p_8tests": 1.0,
+      "holm_p_4tests_in_dataset": 1.0
+    },
+    {
+      "dataset": "Pen-Spin",
+      "baseline": "OmniRetarget",
+      "k_topo": 28,
+      "k_base": 15,
+      "diff_pp": 40.625,
+      "newcombe95_pp": [
+        17.811761004099477,
+        58.31337257194535
+      ],
+      "fisher_p": 0.0011122585883249693,
+      "odds_ratio": 7.933333333333334,
+      "holm_p_8tests": 0.0055612929416248465,
+      "holm_p_4tests_in_dataset": 0.0011122585883249693
+    },
+    {
+      "dataset": "Pen-Spin",
+      "baseline": "Mink",
+      "k_topo": 28,
+      "k_base": 7,
+      "diff_pp": 65.625,
+      "newcombe95_pp": [
+        42.661848416297836,
+        78.83282467456301
+      ],
+      "fisher_p": 1.809191781700896e-07,
+      "odds_ratio": 25.0,
+      "holm_p_8tests": 1.4473534253607169e-06,
+      "holm_p_4tests_in_dataset": 7.236767126803584e-07
+    },
+    {
+      "dataset": "Pen-Spin",
+      "baseline": "DexPilot",
+      "k_topo": 28,
+      "k_base": 13,
+      "diff_pp": 46.875,
+      "newcombe95_pp": [
+        23.73856730022562,
+        63.75312004380349
+      ],
+      "fisher_p": 0.0001864427841173187,
+      "odds_ratio": 10.23076923076923,
+      "holm_p_8tests": 0.0011186567047039122,
+      "holm_p_4tests_in_dataset": 0.0003728855682346374
+    },
+    {
+      "dataset": "Pen-Spin",
+      "baseline": "GeoRT",
+      "k_topo": 28,
+      "k_base": 10,
+      "diff_pp": 56.25,
+      "newcombe95_pp": [
+        32.96396357623954,
+        71.53140300603073
+      ],
+      "fisher_p": 8.19308691914932e-06,
+      "odds_ratio": 15.4,
+      "holm_p_8tests": 5.735160843404524e-05,
+      "holm_p_4tests_in_dataset": 2.457926075744796e-05
+    }
+  ],
+  "table2_pooled64": {
+    "TopoRetarget": {
+      "k": 55,
+      "n": 64,
+      "rate": 85.9375,
+      "wilson95": [
+        75.3837181611304,
+        92.42142748069227
+      ]
+    },
+    "OmniRetarget": {
+      "k": 33,
+      "n": 64,
+      "rate": 51.5625,
+      "wilson95": [
+        39.58160138876424,
+        63.36644842174978
+      ]
+    },
+    "Mink": {
+      "k": 31,
+      "n": 64,
+      "rate": 48.4375,
+      "wilson95": [
+        36.63355157825022,
+        60.418398611235745
+      ]
+    },
+    "DexPilot": {
+      "k": 37,
+      "n": 64,
+      "rate": 57.8125,
+      "wilson95": [
+        45.61003144586589,
+        69.13021760670425
+      ]
+    },
+    "GeoRT": {
+      "k": 34,
+      "n": 64,
+      "rate": 53.125,
+      "wilson95": [
+        41.07208696044617,
+        64.82401266058189
+      ]
+    }
+  },
+  "table2_pooled64_tests": [
+    {
+      "baseline": "OmniRetarget",
+      "k_topo": 55,
+      "k_base": 33,
+      "fisher_p": 4.575252429290532e-05
+    },
+    {
+      "baseline": "Mink",
+      "k_topo": 55,
+      "k_base": 31,
+      "fisher_p": 1.0074799885850737e-05
+    },
+    {
+      "baseline": "DexPilot",
+      "k_topo": 55,
+      "k_base": 37,
+      "fisher_p": 0.0007023598129554497
+    },
+    {
+      "baseline": "GeoRT",
+      "k_topo": 55,
+      "k_base": 34,
+      "fisher_p": 9.391250609200787e-05
+    }
+  ],
+  "claim_40_6pp": {
+    "pen_topo_minus_each": {
+      "OmniRetarget": 40.625,
+      "Mink": 65.625,
+      "DexPilot": 46.875,
+      "GeoRT": 56.25
+    },
+    "hocap_topo_minus_each": {
+      "OmniRetarget": 28.125,
+      "Mink": 9.375,
+      "DexPilot": 9.375,
+      "GeoRT": 9.375
+    },
+    "exact_pen_gap_vs_best": 40.625,
+    "gap_from_rounded_values": 40.6
+  },
+  "min_detectable_gap_n32": {
+    "7": {
+      "baseline_k": 7,
+      "topo_min_k_for_p_lt_005": 16,
+      "needed_gap_pp": 28.125
+    },
+    "10": {
+      "baseline_k": 10,
+      "topo_min_k_for_p_lt_005": 19,
+      "needed_gap_pp": 28.125
+    },
+    "13": {
+      "baseline_k": 13,
+      "topo_min_k_for_p_lt_005": 22,
+      "needed_gap_pp": 28.125
+    },
+    "15": {
+      "baseline_k": 15,
+      "topo_min_k_for_p_lt_005": 24,
+      "needed_gap_pp": 28.125
+    },
+    "18": {
+      "baseline_k": 18,
+      "topo_min_k_for_p_lt_005": 27,
+      "needed_gap_pp": 28.125
+    },
+    "24": {
+      "baseline_k": 24,
+      "topo_min_k_for_p_lt_005": 31,
+      "needed_gap_pp": 21.875
+    }
+  },
+  "table2_error_ranks": {
+    "Ho-cap:pos_err_cm": {
+      "order_low_to_high": [
+        "TopoRetarget",
+        "GeoRT",
+        "Mink",
+        "DexPilot",
+        "OmniRetarget"
+      ],
+      "topo_rank": 1,
+      "topo_vs_best_pct": 0.0
+    },
+    "Ho-cap:rot_err_deg": {
+      "order_low_to_high": [
+        "DexPilot",
+        "Mink",
+        "TopoRetarget",
+        "GeoRT",
+        "OmniRetarget"
+      ],
+      "topo_rank": 3,
+      "topo_vs_best_pct": 15.430861723446876
+    },
+    "Pen-Spin:pos_err_cm": {
+      "order_low_to_high": [
+        "TopoRetarget",
+        "GeoRT",
+        "DexPilot",
+        "OmniRetarget",
+        "Mink"
+      ],
+      "topo_rank": 1,
+      "topo_vs_best_pct": 0.0
+    },
+    "Pen-Spin:rot_err_deg": {
+      "order_low_to_high": [
+        "TopoRetarget",
+        "OmniRetarget",
+        "Mink",
+        "DexPilot",
+        "GeoRT"
+      ],
+      "topo_rank": 1,
+      "topo_vs_best_pct": 0.0
+    }
+  },
+  "table1_text_parse": {
+    "Contact precision (mm)": {
+      "parsed": [
+        7.71,
+        14.15,
+        14.12,
+        14.13,
+        26.77
+      ],
+      "equals_transcribed": true
+    },
+    "Contact alignment (deg)": {
+      "parsed": [
+        15.67,
+        30.8,
+        37.36,
+        33.71,
+        25.74
+      ],
+      "equals_transcribed": true
+    },
+    "Max penetration (mm)": {
+      "parsed": [
+        1.07,
+        1.15,
+        20.12,
+        11.87,
+        22.22
+      ],
+      "equals_transcribed": true
+    },
+    "Frames pen > 2 mm (%)": {
+      "parsed": [
+        0.0,
+        0.0,
+        84.0,
+        88.0,
+        96.0
+      ],
+      "equals_transcribed": true
+    },
+    "Solve time (ms/frame)": {
+      "parsed": [
+        4.7,
+        40.96,
+        4.37,
+        1.74,
+        1.17
+      ],
+      "equals_transcribed": true
+    }
+  },
+  "table1": {
+    "Contact precision (mm)": {
+      "values": {
+        "TopoRetarget": 7.71,
+        "OmniRetarget": 14.15,
+        "Mink": 14.12,
+        "DexPilot": 14.13,
+        "GeoRT": 26.77
+      },
+      "baseline_mean": 17.2925,
+      "topo_vs_baseline_mean_reduction_pct": 55.414196906173196,
+      "topo_vs_best_baseline_reduction_pct": 45.39660056657223,
+      "best_baseline": "Mink",
+      "topo_rank": 1,
+      "baseline_median": 14.14
+    },
+    "Contact alignment (deg)": {
+      "values": {
+        "TopoRetarget": 15.67,
+        "OmniRetarget": 30.8,
+        "Mink": 37.36,
+        "DexPilot": 33.71,
+        "GeoRT": 25.74
+      },
+      "baseline_mean": 31.9025,
+      "topo_vs_baseline_mean_reduction_pct": 50.88159235169658,
+      "topo_vs_best_baseline_reduction_pct": 39.12198912198912,
+      "best_baseline": "GeoRT",
+      "topo_rank": 1,
+      "baseline_median": 32.255
+    },
+    "Max penetration (mm)": {
+      "values": {
+        "TopoRetarget": 1.07,
+        "OmniRetarget": 1.15,
+        "Mink": 20.12,
+        "DexPilot": 11.87,
+        "GeoRT": 22.22
+      },
+      "baseline_mean": 13.84,
+      "topo_vs_baseline_mean_reduction_pct": 92.26878612716763,
+      "topo_vs_best_baseline_reduction_pct": 6.956521739130422,
+      "best_baseline": "OmniRetarget",
+      "topo_rank": 1,
+      "baseline_median": 15.995000000000001
+    },
+    "Frames pen > 2 mm (%)": {
+      "values": {
+        "TopoRetarget": 0.0,
+        "OmniRetarget": 0.0,
+        "Mink": 84.0,
+        "DexPilot": 88.0,
+        "GeoRT": 96.0
+      },
+      "baseline_mean": 67.0,
+      "topo_vs_baseline_mean_reduction_pct": 100.0,
+      "topo_vs_best_baseline_reduction_pct": null,
+      "best_baseline": "OmniRetarget",
+      "topo_rank": 1,
+      "baseline_median": 86.0
+    },
+    "Solve time (ms/frame)": {
+      "values": {
+        "TopoRetarget": 4.7,
+        "OmniRetarget": 40.96,
+        "Mink": 4.37,
+        "DexPilot": 1.74,
+        "GeoRT": 1.17
+      },
+      "baseline_mean": 12.06,
+      "topo_vs_baseline_mean_reduction_pct": 61.02819237147595,
+      "topo_vs_best_baseline_reduction_pct": -301.70940170940173,
+      "best_baseline": "GeoRT",
+      "topo_rank": 4,
+      "baseline_median": 3.055
+    }
+  },
+  "project_page_claims": {
+    "precision_reduction_55pct_vs_baseline_avg": 55.414196906173196,
+    "penetration_reduction_92pct_vs_baseline_avg": 92.26878612716763,
+    "alignment_reduction_vs_baseline_avg": 50.88159235169658
+  },
+  "solve_time": {
+    "topo_hz": 212.7659574468085,
+    "omni_hz": 24.4140625,
+    "omni_over_topo": 8.714893617021277,
+    "topo_over_geort": 4.017094017094018,
+    "topo_over_dexpilot": 2.7011494252873565,
+    "topo_over_mink": 1.0755148741418765,
+    "budget_ms_at_20hz": 50.0,
+    "budget_ms_at_50hz": 20.0,
+    "budget_ms_at_100hz": 10.0,
+    "readme_pen_spin_029": {
+      "frames": 231,
+      "claimed_wall_s": 30,
+      "implied_ms_per_frame_upper": 129.87012987012986
+    }
+  },
+  "penetration_rate_feasible_n_le_300": [
+    25,
+    50,
+    75,
+    100,
+    125,
+    150,
+    175,
+    200,
+    225,
+    250,
+    275,
+    300
+  ],
+  "penetration_counts_if_n25": {
+    "TopoRetarget": 0,
+    "OmniRetarget": 0,
+    "Mink": 21,
+    "DexPilot": 22,
+    "GeoRT": 24
+  },
+  "penetration_zero_wilson_n25": {
+    "upper95_pct": 13.319225276039095
+  },
+  "penetration_fisher_topo_vs_mink_n25": 3.757754300735142e-10,
+  "penetration_max_vs_rate_consistent": {
+    "TopoRetarget": true,
+    "OmniRetarget": true,
+    "Mink": true,
+    "DexPilot": true,
+    "GeoRT": true
+  },
+  "project_page_real_5of5_wilson95_pct": [
+    56.55175313406071,
+    100.0
+  ],
+  "params": {
+    "Nv": 71,
+    "lambda_IM": 500,
+    "lambda_IM_over_Nv": 7.042253521126761,
+    "samples_per_ppo_iter": 163840,
+    "stated_samples_per_iter": 163840,
+    "control_hz": 20.0,
+    "episode_steps": 400,
+    "minibatch_size": 5120.0,
+    "tau_mm": 1.0,
+    "b_mm": 30.0,
+    "slack_max_mm": 29.0,
+    "topo_max_pen_minus_tau_mm": 0.07000000000000006,
+    "kappa_weight_at_cm": {
+      "1": 0.7408182206817179,
+      "2": 0.5488116360940264,
+      "3": 0.4065696597405991,
+      "5": 0.22313016014842982,
+      "10": 0.049787068367863944,
+      "20": 0.0024787521766663585
+    },
+    "kappa_inverse_cm": 3.3333333333333335
+  },
+  "reward_kernel": {
+    "object_sigma_0.04": {
+      "0.0087": 0.9537952530617734,
+      "0.0098": 0.941740989765208,
+      "0.0145": 0.8768614770479952,
+      "0.0161": 0.8504358892993148,
+      "0.05": 0.2096113871510978
+    },
+    "link_sigma_0.025": {
+      "0.005": 0.9607894391523232,
+      "0.01": 0.8521437889662113,
+      "0.02": 0.5272924240430487,
+      "0.05": 0.01831563888873418
+    },
+    "joint_sigma_0.1_normalized": {
+      "0.02": 0.9607894391523232,
+      "0.05": 0.7788007830714049,
+      "0.1": 0.36787944117144233,
+      "0.2": 0.01831563888873418
+    },
+    "max_total_reward_per_step_without_smooth": 10.0,
+    "reward_weight_share_object": 0.8
+  },
+  "dataset": {
+    "pen_spin_mean_s": 12.4,
+    "ref_hz": 20,
+    "frames_at_20hz": 248.0,
+    "frames_at_50hz": 620.0,
+    "episode_20s_covers_mean_clip": true,
+    "contactpose_grasps_used": 25,
+    "contactpose_total_grasps": 28
+  },
+  "table3_text_found": {
+    "lambda_IM": true,
+    "kappa": true,
+    "tau": true,
+    "b": true,
+    "ws": true,
+    "lambda_bone": true,
+    "lambda_smooth": true
+  },
+  "v1_v2_diff": {
+    "changed_lines": 28,
+    "substantive_lines": [
+      "+Acknowledgments",
+      "+We would like to thank Fan Yang, Chaoyi Pan, Cunxi Dai, and Xiaofeng Guo for valuable discus-",
+      "+sions and helpful feedback on the paper. We are also grateful to Tongbin Liu and Wenkai Nie for",
+      "+their support in preparing the experimental setup."
+    ]
+  }
+}
