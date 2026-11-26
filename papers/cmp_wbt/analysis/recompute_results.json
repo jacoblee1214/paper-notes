@@ -1,0 +1,253 @@
+{
+ "table2": {
+  "V1_geo_sr_ratio_R2_vs_umi": 9.979,
+  "V1_sensor_sr_ratio_R2_vs_umi": 5.841,
+  "V1_geo_sr_ratio_R1_vs_umi": 17.55,
+  "V1_best_baseline_geo_sr_ratio": 6.61,
+  "V1_sensor_sr_ratio_latent_shielding_vs_umi": 2.57,
+  "V1_sensor_sr_ratio_neural_cbf_vs_umi": 2.87,
+  "V1_geo_sr_gain_pp_latent_shielding_neural_cbf": [
+   0.9,
+   2.4
+  ],
+  "V1_ID_sr_neural_cbf_minus_cmp_R2_pp": 1.2,
+  "V2_ID_ep_change_vs_umi_pct": -8.2,
+  "V2_ID_er_change_vs_umi_pct": 1.0,
+  "V2_ID_ep_change_vs_latent_shielding_pct": 2.3,
+  "V2_ID_er_change_vs_latent_shielding_pct": 10.4,
+  "V2_ID_ep_change_vs_R100_pct": 28.6,
+  "V2_ID_er_change_vs_R100_pct": 23.3,
+  "V2_R100_vs_umi_ID_ep_pct": -28.6,
+  "V2_R100_vs_umi_ID_sr_pp": 9.6,
+  "V2_R100_vs_umi_geo_sr_pp": 0.4,
+  "V2_R100_vs_umi_sensor_sr_pp": 9.2,
+  "V3_omission_rule_violations": [],
+  "V4_grid_all_feasible_n7000": true,
+  "V4_binomial_se_pp": {
+   "p=0.05": 0.26,
+   "p=0.47": 0.6,
+   "p=0.85": 0.43,
+   "p=0.95": 0.26
+  },
+  "V4_stated_repeat_sd_pp": 3.0,
+  "V4_ID_SR_R2.5_vs_R2.0_diff_pp": -3.4,
+  "V4_ID_SR_R2.5_vs_R2.0_diff_in_sd3": 1.13,
+  "V5_er_margin_ratio_appendixK_to_table2note": 10.0,
+  "V6_traj_seconds_appendixF": 12.5
+ },
+ "table4": {
+  "counts_n15": {
+   "UMI-on-Legs": {
+    "ID": 12,
+    "Mod": 0,
+    "Ext": 0
+   },
+   "Latent Shielding": {
+    "ID": 11,
+    "Mod": 5,
+    "Ext": 3
+   },
+   "Neural CBF": {
+    "ID": 12,
+    "Mod": 9,
+    "Ext": 6
+   },
+   "CMP": {
+    "ID": 15,
+    "Mod": 14,
+    "Ext": 13
+   }
+  },
+  "V7_all_percent_match_k_over_15": true,
+  "V7_cmp_total_successes": 42,
+  "V7_cmp_total_failures": 3,
+  "V7_cmp_total_wilson95": [
+   82.1,
+   97.7
+  ],
+  "V8_wilson95_cmp": {
+   "ID": [
+    79.6,
+    100.0
+   ],
+   "Mod": [
+    70.2,
+    98.8
+   ],
+   "Ext": [
+    62.1,
+    96.3
+   ]
+  },
+  "V9_fisher_two_sided": {
+   "ID: CMP vs UMI-on-Legs (15/15 vs 12/15)": 0.2241,
+   "ID: CMP vs Latent Shielding (15/15 vs 11/15)": 0.0996,
+   "ID: CMP vs Neural CBF (15/15 vs 12/15)": 0.2241,
+   "Mod: CMP vs UMI-on-Legs (14/15 vs 0/15)": 0.0,
+   "Mod: CMP vs Latent Shielding (14/15 vs 5/15)": 0.0017,
+   "Mod: CMP vs Neural CBF (14/15 vs 9/15)": 0.0801,
+   "Ext: CMP vs UMI-on-Legs (13/15 vs 0/15)": 0.0,
+   "Ext: CMP vs Latent Shielding (13/15 vs 3/15)": 0.0007,
+   "Ext: CMP vs Neural CBF (13/15 vs 6/15)": 0.0209
+  },
+  "V9_holm_adjusted_9_tests": {
+   "ID: CMP vs UMI-on-Legs": 0.4483,
+   "ID: CMP vs Latent Shielding": 0.3203,
+   "ID: CMP vs Neural CBF": 0.4483,
+   "Mod: CMP vs UMI-on-Legs": 0.0,
+   "Mod: CMP vs Latent Shielding": 0.0102,
+   "Mod: CMP vs Neural CBF": 0.3203,
+   "Ext: CMP vs UMI-on-Legs": 0.0,
+   "Ext: CMP vs Latent Shielding": 0.0048,
+   "Ext: CMP vs Neural CBF": 0.1047
+  },
+  "V10_OOD_pooled_30_trials": {
+   "UMI-on-Legs": {
+    "cmp": "27/30",
+    "base": "0/30",
+    "fisher_p": 9.23e-14
+   },
+   "Latent Shielding": {
+    "cmp": "27/30",
+    "base": "8/30",
+    "fisher_p": 9.5e-07
+   },
+   "Neural CBF": {
+    "cmp": "27/30",
+    "base": "15/30",
+    "fisher_p": 0.00151
+   }
+  },
+  "V11_trials_per_arm_for_95_vs_80_power80": 76,
+  "V12_ep_welch_survivors_n_assumed": {
+   "ID: CMP 5.1 vs UMI-on-Legs 4.9": {
+    "n_assumed": "15 vs 12",
+    "welch_p": 0.763
+   },
+   "ID: CMP 5.1 vs Neural CBF 4.8": {
+    "n_assumed": "15 vs 12",
+    "welch_p": 0.68
+   },
+   "Mod: CMP 9.6 vs Neural CBF 7.0": {
+    "n_assumed": "14 vs 9",
+    "welch_p": 0.291
+   },
+   "Ext: CMP 19.2 vs Neural CBF 19.3": {
+    "n_assumed": "13 vs 6",
+    "welch_p": 0.986
+   }
+  },
+  "V12_ext_er_ratio_cmp_vs_cbf": 3.62,
+  "V13_latency_vs_umi": {
+   "Latent Shielding": {
+    "diff_ms": 0.92,
+    "cohen_d": 2.54
+   },
+   "Neural CBF": {
+    "diff_ms": 2.39,
+    "cohen_d": 6.03
+   },
+   "CMP": {
+    "diff_ms": 0.02,
+    "cohen_d": 0.14
+   }
+  },
+  "V13_cmp_over_umi_pct": 0.67,
+  "V13_cbf_over_umi_pct": 80.5
+ },
+ "table5": {
+  "counts_500": {
+   "Salvageable": [
+    2,
+    46,
+    289
+   ],
+   "Unsalvageable": [
+    84,
+    72,
+    7
+   ]
+  },
+  "sum_pct": 100.0,
+  "V14_all_on_grid_of_0.2pct": true,
+  "V14_total_count": 500,
+  "V15_precision_low_bin": {
+   "value_pct": 97.7,
+   "n": 86,
+   "wilson95": [
+    91.9,
+    99.4
+   ]
+  },
+  "V15_precision_high_bin": {
+   "value_pct": 97.6,
+   "n": 296,
+   "wilson95": [
+    95.2,
+    98.8
+   ]
+  },
+  "V16_middle_bin": {
+   "n": 118,
+   "share_of_500_pct": 23.6,
+   "unsalvageable_pct": 61.0,
+   "wilson95_unsalvageable": [
+    52.0,
+    69.3
+   ]
+  },
+  "V16_bin_share_pct": [
+   17.2,
+   23.6,
+   59.2
+  ],
+  "V17_binary_at_0.8": {
+   "tp": 289,
+   "fn": 48,
+   "fp": 7,
+   "tn": 156,
+   "accuracy": 0.89,
+   "cohen_kappa": 0.765,
+   "sensitivity": 0.858,
+   "specificity": 0.957
+  },
+  "V17_auc_from_three_bins": 0.941
+ },
+ "table8": {
+  "V18_rear_aug_ID_er_change_pct": 23.8,
+  "V18_text_says_nearly_30pct": true,
+  "V19_geo_sr_clip_minus_cmp_pp": 43.3,
+  "V19_geo_sr_clip_over_cmp_ratio": 1.92,
+  "V19_rev_sr_cmp_over_clip_ratio": 1.98,
+  "V19_rev_sr_cmp_over_umi_ratio": 3.43,
+  "V19_geo_diff_in_sd3": 14.4,
+  "V20_mean_of_two_OOD_sr[UMI-on-Legs]": 11.8,
+  "V20_mean_of_two_OOD_sr[Command Clipping]": 61.6,
+  "V20_mean_of_two_OOD_sr[Rear-augmented]": 58.6,
+  "V20_mean_of_two_OOD_sr[CMP R=2]": 56.0,
+  "V21_table8_umi_cmp_match_table2": true
+ },
+ "dataset_training": {
+  "V22_fig3_shares_expected_pct": {
+   "tossing": 6.21,
+   "cup": 22.36,
+   "random": 71.43
+  },
+  "V22_fig3_shares_reported_pct": {
+   "tossing": 6.2,
+   "cup": 22.4,
+   "random": 71.4
+  },
+  "V23_train_per_iter_seconds": 4.5,
+  "V23_gradient_steps_per_iter": 128,
+  "V23_gradient_steps_total": 256000
+ },
+ "latent_shell_chi6": {
+  "latent_dim_from_table6": 6,
+  "chi_mean": 2.35,
+  "chi_sd": 0.691,
+  "relative_sd": 0.294,
+  "sqrt_d": 2.449,
+  "P(norm > 2.0) when z~N(0,I_6)": 0.677
+ }
+}
