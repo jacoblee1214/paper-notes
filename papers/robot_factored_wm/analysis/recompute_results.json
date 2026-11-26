@@ -1,0 +1,392 @@
+{
+ "V1_table1_deltas": {
+  "svd_droid_ours_minus_ctrlworld": [
+   1.9,
+   0.015,
+   -0.013
+  ],
+  "wan_droid_ours_minus_adaln": [
+   3.3,
+   0.035,
+   -0.046
+  ],
+  "wan_gr1_ours_minus_adaln": [
+   6.94,
+   0.054,
+   -0.063
+  ],
+  "lpips_rel_reduction_pct": {
+   "svd_droid": 12.5,
+   "wan_droid": 20.5,
+   "wan_gr1": 32.5
+  },
+  "note": "SVD 행(192x320)과 Wan 행(480x832)은 해상도가 달라 절대값 비교 불가(표 1 캡션). 차이는 같은 백본 안에서만 본다."
+ },
+ "V2_table2_task_outcome": {
+  "robocasa_n160": {
+   "adaln": {
+    "reported_pct": 70.6,
+    "integer_k": [
+     113
+    ],
+    "wilson95": [
+     63.2,
+     77.1
+    ]
+   },
+   "ours": {
+    "reported_pct": 75.0,
+    "integer_k": [
+     120
+    ],
+    "wilson95": [
+     67.8,
+     81.1
+    ]
+   },
+   "fisher_unpaired_p": 0.451,
+   "mcnemar_p_by_discordant_count(ours_only - adaln_only = 7)": {
+    "7": 0.0156,
+    "9": 0.0391,
+    "11": 0.0654,
+    "13": 0.0923,
+    "15": 0.1185,
+    "17": 0.1435,
+    "19": 0.1671,
+    "21": 0.1892,
+    "23": 0.21,
+    "25": 0.2295,
+    "27": 0.2478,
+    "29": 0.2649,
+    "31": 0.281,
+    "33": 0.2962,
+    "35": 0.3105,
+    "37": 0.324,
+    "39": 0.3368,
+    "41": 0.3489,
+    "43": 0.3604,
+    "45": 0.3713,
+    "47": 0.3817,
+    "49": 0.3916,
+    "51": 0.4011,
+    "53": 0.4101,
+    "55": 0.4188,
+    "57": 0.427,
+    "59": 0.435
+   },
+   "max_discordant_for_p_lt_0.05": 9
+  },
+  "robolab_n100": {
+   "adaln": {
+    "confusion_TP_TN_FP_FN": [
+     0,
+     49,
+     1,
+     50
+    ],
+    "n": 100,
+    "accuracy_pct": 49.0,
+    "wilson95": [
+     39.4,
+     58.7
+    ],
+    "recall_success_pct": 0.0,
+    "specificity_pct": 98.0,
+    "balanced_accuracy_pct": 49.0,
+    "predicted_success_rate_pct": 1.0
+   },
+   "ours": {
+    "confusion_TP_TN_FP_FN": [
+     18,
+     48,
+     2,
+     32
+    ],
+    "n": 100,
+    "accuracy_pct": 66.0,
+    "wilson95": [
+     56.3,
+     74.5
+    ],
+    "recall_success_pct": 36.0,
+    "specificity_pct": 96.0,
+    "balanced_accuracy_pct": 66.0,
+    "predicted_success_rate_pct": 20.0
+   },
+   "fisher_unpaired_p": 0.0218,
+   "paired_mcnemar_bounds": [
+    {
+     "both_correct_on_negatives": 47,
+     "adaln_only": 2,
+     "ours_only": 19,
+     "mcnemar_exact_p": 0.000221
+    },
+    {
+     "both_correct_on_negatives": 48,
+     "adaln_only": 1,
+     "ours_only": 18,
+     "mcnemar_exact_p": 7.63e-05
+    }
+   ],
+   "note": "AdaLN은 100개 중 1개만 '성공'이라고 답했다. 정확도 49.0%는 '항상 실패' 응답(50.0%)보다 낮다."
+  },
+  "robocasa_full_n256": {
+   "adaln": {
+    "reported_pct": 64.5,
+    "integer_k": [
+     165
+    ],
+    "wilson95": [
+     58.4,
+     70.1
+    ]
+   },
+   "ours": {
+    "reported_pct": 66.4,
+    "integer_k": [
+     170
+    ],
+    "wilson95": [
+     60.4,
+     71.9
+    ]
+   },
+   "gt_video_judge": {
+    "reported_pct": 81.6,
+    "integer_k": [
+     209
+    ],
+    "wilson95": [
+     76.4,
+     85.9
+    ]
+   },
+   "fisher_unpaired_p": 0.7102,
+   "note": "209/256 = 81.64%. 선택 부분집합(160개)은 판정자가 정답 영상에서 결과를 맞힌 209개 안에서 고른 것이다."
+  },
+  "selection_effect_pct_points": {
+   "gap_selected_160": 4.4,
+   "gap_full_256": 1.9
+  }
+ },
+ "V3_table7_vs_table1": {
+  "droid_full_equals_table1": true,
+  "droid": {
+   "full_gain_psnr_ssim_lpips": [
+    3.3,
+    0.035,
+    -0.046
+   ],
+   "robot_excluded_gain": [
+    2.84,
+    0.021,
+    -0.026
+   ],
+   "psnr_gain_retained_pct": 86.1,
+   "lpips_gain_retained_pct": 56.5
+  },
+  "gr1": {
+   "full_gain_psnr_ssim_lpips": [
+    6.84,
+    0.048,
+    -0.055
+   ],
+   "robot_excluded_gain": [
+    5.57,
+    0.021,
+    -0.024
+   ],
+   "psnr_gain_retained_pct": 81.4,
+   "lpips_gain_retained_pct": 43.6
+  },
+  "gr1_subset82_vs_table1_n128": {
+   "adaln_psnr": [
+    18.05,
+    17.67
+   ],
+   "ours_psnr": [
+    24.89,
+    24.61
+   ],
+   "note": "n = 82 부분집합(로봇 마스크 있는 클립)과 n = 128 전체의 값이 다르다. 부분집합 선택 규칙은 마스크 유무뿐이라고 부록 C가 쓴다."
+  }
+ },
+ "V4_ablation_consistency": {
+  "v2_nominal_minus_raw": [
+   0.42,
+   0.01,
+   -0.008
+  ],
+  "v2_depth_minus_nominal": [
+   0.2,
+   -0.002,
+   0.0
+  ],
+  "v1_nominal_minus_raw": [
+   0.87,
+   0.012,
+   -0.011
+  ],
+  "v1_depth_minus_nominal": [
+   0.64,
+   0.002,
+   -0.003
+  ],
+  "v2_minus_v1_same_row": {
+   "raw": [
+    -0.23,
+    -0.012,
+    0.012
+   ],
+   "nominal": [
+    -0.68,
+    -0.014,
+    0.015
+   ],
+   "depth": [
+    -1.12,
+    -0.018,
+    0.018
+   ]
+  },
+  "table3_nominal_row_vs_table4_droid_nom_nom": {
+   "v2": [
+    0.02,
+    0.002,
+    0.0
+   ],
+   "v1": [
+    0.7,
+    0.016,
+    -0.015
+   ],
+   "note": "둘 다 DROID에서 학습, 메시 RGB만, nominal/nominal이다. v1에서는 PSNR 0.70 dB 차이, v2에서는 0.02 dB 차이. 부록 B는 표 4의 DROID nominal 모델만 15,010 스텝이고 나머지는 10,000 스텝이라고 쓴다."
+  },
+  "depth_row_vs_table1_wan_droid_ours": [
+   0.09,
+   -0.003,
+   0.001
+  ],
+  "gr1_table4_mesh_only_vs_table1_joint_depth": {
+   "table4_nom_nom_psnr": 25.7,
+   "table1_ours_psnr": 24.61,
+   "diff": 1.09,
+   "note": "표 4는 데이터셋별 학습, 메시만. 표 1은 DROID+RoboCasa 합동 학습, 메시+깊이. 학습 데이터, 깊이, 스텝 수가 함께 다르다."
+  },
+  "sensitivity_max_sd_of_paired_diff_for_2se": {
+   "delta_psnr_0.2": 1.6,
+   "delta_psnr_0.42": 3.36
+  },
+  "sensitivity_note": "클립 256개 가정. 쌍 차이의 SD가 이 값 이하면 해당 PSNR 차이가 약 2 SE 이상이다. 논문은 클립별 SD, 시드 수, 신뢰구간을 주지 않는다."
+ },
+ "V5_table4_oracle_gap": {
+  "droid": {
+   "oracle_logged_logged_minus_nominal_nominal": [
+    0.63,
+    0.005,
+    -0.005
+   ],
+   "nominal_nominal_minus_logged_nominal": [
+    0.62,
+    0.01,
+    -0.008
+   ],
+   "oracle_minus_logged_nominal": [
+    1.25,
+    0.015,
+    -0.013
+   ],
+   "share_of_oracle_gap_recovered_by_training_on_nominal_psnr_pct": 49.6
+  },
+  "gr1": {
+   "oracle_logged_logged_minus_nominal_nominal": [
+    2.56,
+    0.014,
+    -0.008
+   ],
+   "nominal_nominal_minus_logged_nominal": [
+    1.01,
+    0.007,
+    -0.006
+   ],
+   "oracle_minus_logged_nominal": [
+    3.57,
+    0.021,
+    -0.014
+   ],
+   "share_of_oracle_gap_recovered_by_training_on_nominal_psnr_pct": 28.3
+  }
+ },
+ "V6_table5_transfer": {
+  "ur5_ours_minus_adaln": [
+   3.98,
+   0.016,
+   -0.035
+  ],
+  "arx_ours_minus_adaln": [
+   5.44,
+   0.035,
+   -0.064
+  ],
+  "hrd_ours_ft_minus_adaln_ft": [
+   3.72,
+   0.048,
+   -0.057
+  ],
+  "hrd_ours_zs_minus_adaln_ft": [
+   1.71,
+   0.02,
+   -0.02
+  ],
+  "hrd_ours_ft_minus_ours_zs": [
+   2.01,
+   0.028,
+   -0.037
+  ],
+  "robotwin_clips_8x5": 40,
+  "hrdexdb_train_clips_192ep_x3_offsets": 576,
+  "hrdexdb_train_clips_reported": 575,
+  "note": "HRDexDB 학습 클립 575 = 192 에피소드 x 오프셋 3개(0, -2, -4초)의 최대 576에서 1개 모자란다(부록 D). 클립 하나가 빠진 이유는 서술에 없다."
+ },
+ "V7_scale_and_epochs": {
+  "gr1_episodes_24tasks_x50": 1200,
+  "gr1_clips_per_episode_train_only": 7.82,
+  "gr1_clips_incl_eval_128_and_256": 9764,
+  "joint_train_clips": 51022,
+  "assumed_gpus_for_epoch_estimate": 4,
+  "assumption_note": "논문 표 6은 GPU당 배치 1, 누적 4만 쓰고 GPU 수는 쓰지 않는다. 저장소 README 예시가 4 GPU라서 4로 가정했다(유효 배치 16).",
+  "effective_batch": 16,
+  "joint_epoch_steps_at_batch16": 3189,
+  "epochs_at_10000_steps": 3.14,
+  "epochs_at_8000_steps_released": 2.51,
+  "droid_only_epochs_at_8000_steps": 3.07
+ },
+ "V8_dimensions": {
+  "wan_base_in_channels": 36,
+  "claimed_base_36": 36,
+  "mesh_only_total_in": 52,
+  "mesh_depth_total_in": 84,
+  "streams_in_depth_variant": 3,
+  "channels_per_stream": 16,
+  "adaln_input_union": 46,
+  "adaln_stacked_184": 184,
+  "gr1_action_29": 29,
+  "gr1_state_39": 39,
+  "hrdexdb_adaln_12d_x4": 48,
+  "hrdexdb_adaln_note": "EEF 이동 3 + 회전 벡터 3 + 손 관절 6 = 12, 네 프레임 델타 = 48"
+ },
+ "V9_inference_speedup": {
+  "stated_reduction": 10,
+  "from_50_steps_to_4": 12.5,
+  "from_40_steps_to_4": 10.0,
+  "nfe_50steps_cfg_vs_4steps_no_cfg": 25.0,
+  "note": "논문 부록 B는 '디노이징 스텝을 10x 줄인다'고 쓴다. 저장소 README의 기본 추론은 50 스텝(CFG 6), 증류본은 4 스텝(CFG 1)이라서 50 대 4면 12.5x, CFG 두 번 호출을 센 NFE로는 25x이다. 기준 스텝 수가 40이면 10x이다."
+ },
+ "V10_memory_for_mac": {
+  "wan14b_weights_bf16_gib": 26.1,
+  "mac_unified_memory_gib": 24,
+  "fits_weights_alone": false,
+  "svd_1p5b_fp16_gib": 2.8,
+  "note": "Wan 2.1 14B 가중치만 bf16으로 약 26 GiB. 24 GiB 통합 메모리에 올릴 수 없다(양자화 없이). 파라미터 수 14e9는 모델 이름 기준 근사."
+ }
+}
