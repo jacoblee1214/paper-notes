@@ -1,0 +1,1522 @@
+{
+ "table1": {
+  "sum_check": {
+   "Sim-only": {
+    "P": [
+     46,
+     46,
+     true
+    ],
+    "S": [
+     34,
+     34,
+     true
+    ],
+    "I": [
+     40,
+     40,
+     true
+    ]
+   },
+   "Real-only": {
+    "P": [
+     44,
+     44,
+     true
+    ],
+    "S": [
+     31,
+     31,
+     true
+    ],
+    "I": [
+     37,
+     37,
+     true
+    ]
+   },
+   "Sim+Real": {
+    "P": [
+     76,
+     76,
+     true
+    ],
+    "S": [
+     50,
+     50,
+     true
+    ],
+    "I": [
+     60,
+     60,
+     true
+    ]
+   }
+  },
+  "order_checks": {
+   "success_gt_progress": [],
+   "success_gt_integrity": [
+    [
+     "Sim-only",
+     "Potato",
+     12,
+     11
+    ],
+    [
+     "Sim+Real",
+     "Apple",
+     8,
+     7
+    ]
+   ],
+   "integrity_gt_progress": []
+  },
+  "pooled_wilson95": {
+   "Sim-only": {
+    "P": [
+     46,
+     100,
+     [
+      36.6,
+      55.7
+     ]
+    ],
+    "S": [
+     34,
+     100,
+     [
+      25.5,
+      43.7
+     ]
+    ],
+    "I": [
+     40,
+     100,
+     [
+      30.9,
+      49.8
+     ]
+    ]
+   },
+   "Real-only": {
+    "P": [
+     44,
+     100,
+     [
+      34.7,
+      53.8
+     ]
+    ],
+    "S": [
+     31,
+     100,
+     [
+      22.8,
+      40.6
+     ]
+    ],
+    "I": [
+     37,
+     100,
+     [
+      28.2,
+      46.8
+     ]
+    ]
+   },
+   "Sim+Real": {
+    "P": [
+     76,
+     100,
+     [
+      66.8,
+      83.3
+     ]
+    ],
+    "S": [
+     50,
+     100,
+     [
+      40.4,
+      59.6
+     ]
+    ],
+    "I": [
+     60,
+     100,
+     [
+      50.2,
+      69.1
+     ]
+    ]
+   }
+  },
+  "per_food_success_wilson95": {
+   "Sim-only": {
+    "Strawberry": [
+     6,
+     25,
+     [
+      11.5,
+      43.4
+     ]
+    ],
+    "Apple": [
+     4,
+     25,
+     [
+      6.4,
+      34.7
+     ]
+    ],
+    "Banana": [
+     12,
+     25,
+     [
+      30.0,
+      66.5
+     ]
+    ],
+    "Potato": [
+     12,
+     25,
+     [
+      30.0,
+      66.5
+     ]
+    ]
+   },
+   "Real-only": {
+    "Strawberry": [
+     8,
+     25,
+     [
+      17.2,
+      51.6
+     ]
+    ],
+    "Apple": [
+     4,
+     25,
+     [
+      6.4,
+      34.7
+     ]
+    ],
+    "Banana": [
+     12,
+     25,
+     [
+      30.0,
+      66.5
+     ]
+    ],
+    "Potato": [
+     7,
+     25,
+     [
+      14.3,
+      47.6
+     ]
+    ]
+   },
+   "Sim+Real": {
+    "Strawberry": [
+     12,
+     25,
+     [
+      30.0,
+      66.5
+     ]
+    ],
+    "Apple": [
+     8,
+     25,
+     [
+      17.2,
+      51.6
+     ]
+    ],
+    "Banana": [
+     18,
+     25,
+     [
+      52.4,
+      85.7
+     ]
+    ],
+    "Potato": [
+     12,
+     25,
+     [
+      30.0,
+      66.5
+     ]
+    ]
+   }
+  },
+  "pooled_comparisons": [
+   {
+    "name": "P: Sim+Real vs Real-only",
+    "k1": 76,
+    "n1": 100,
+    "k2": 44,
+    "n2": 100,
+    "diff_pp": 32.0,
+    "newcombe95_pp": [
+     18.6,
+     43.9
+    ],
+    "fisher_p": 6.25e-06
+   },
+   {
+    "name": "P: Sim+Real vs Sim-only",
+    "k1": 76,
+    "n1": 100,
+    "k2": 46,
+    "n2": 100,
+    "diff_pp": 30.0,
+    "newcombe95_pp": [
+     16.6,
+     41.9
+    ],
+    "fisher_p": 2.23e-05
+   },
+   {
+    "name": "P: Sim-only vs Real-only",
+    "k1": 46,
+    "n1": 100,
+    "k2": 44,
+    "n2": 100,
+    "diff_pp": 2.0,
+    "newcombe95_pp": [
+     -11.6,
+     15.5
+    ],
+    "fisher_p": 0.887
+   },
+   {
+    "name": "S: Sim+Real vs Real-only",
+    "k1": 50,
+    "n1": 100,
+    "k2": 31,
+    "n2": 100,
+    "diff_pp": 19.0,
+    "newcombe95_pp": [
+     5.4,
+     31.7
+    ],
+    "fisher_p": 0.00932
+   },
+   {
+    "name": "S: Sim+Real vs Sim-only",
+    "k1": 50,
+    "n1": 100,
+    "k2": 34,
+    "n2": 100,
+    "diff_pp": 16.0,
+    "newcombe95_pp": [
+     2.3,
+     28.9
+    ],
+    "fisher_p": 0.0314
+   },
+   {
+    "name": "S: Sim-only vs Real-only",
+    "k1": 34,
+    "n1": 100,
+    "k2": 31,
+    "n2": 100,
+    "diff_pp": 3.0,
+    "newcombe95_pp": [
+     -9.9,
+     15.7
+    ],
+    "fisher_p": 0.763
+   },
+   {
+    "name": "I: Sim+Real vs Real-only",
+    "k1": 60,
+    "n1": 100,
+    "k2": 37,
+    "n2": 100,
+    "diff_pp": 23.0,
+    "newcombe95_pp": [
+     9.2,
+     35.6
+    ],
+    "fisher_p": 0.00178
+   },
+   {
+    "name": "I: Sim+Real vs Sim-only",
+    "k1": 60,
+    "n1": 100,
+    "k2": 40,
+    "n2": 100,
+    "diff_pp": 20.0,
+    "newcombe95_pp": [
+     6.1,
+     32.8
+    ],
+    "fisher_p": 0.00706
+   },
+   {
+    "name": "I: Sim-only vs Real-only",
+    "k1": 40,
+    "n1": 100,
+    "k2": 37,
+    "n2": 100,
+    "diff_pp": 3.0,
+    "newcombe95_pp": [
+     -10.3,
+     16.2
+    ],
+    "fisher_p": 0.771
+   }
+  ],
+  "per_food_success_aug_vs_real": [
+   {
+    "name": "S Strawberry: Sim+Real vs Real-only",
+    "k1": 12,
+    "n1": 25,
+    "k2": 8,
+    "n2": 25,
+    "diff_pp": 16.0,
+    "newcombe95_pp": [
+     -10.6,
+     39.7
+    ],
+    "fisher_p": 0.387,
+    "holm_p": 0.732
+   },
+   {
+    "name": "S Apple: Sim+Real vs Real-only",
+    "k1": 8,
+    "n1": 25,
+    "k2": 4,
+    "n2": 25,
+    "diff_pp": 16.0,
+    "newcombe95_pp": [
+     -7.8,
+     37.8
+    ],
+    "fisher_p": 0.321,
+    "holm_p": 0.732
+   },
+   {
+    "name": "S Banana: Sim+Real vs Real-only",
+    "k1": 18,
+    "n1": 25,
+    "k2": 12,
+    "n2": 25,
+    "diff_pp": 24.0,
+    "newcombe95_pp": [
+     -2.9,
+     46.6
+    ],
+    "fisher_p": 0.148,
+    "holm_p": 0.592
+   },
+   {
+    "name": "S Potato: Sim+Real vs Real-only",
+    "k1": 12,
+    "n1": 25,
+    "k2": 7,
+    "n2": 25,
+    "diff_pp": 20.0,
+    "newcombe95_pp": [
+     -6.6,
+     43.0
+    ],
+    "fisher_p": 0.244,
+    "holm_p": 0.732
+   }
+  ],
+  "per_food_progress_integrity_aug_vs_real": [
+   {
+    "name": "P Strawberry: Sim+Real vs Real-only",
+    "k1": 19,
+    "n1": 25,
+    "k2": 12,
+    "n2": 25,
+    "diff_pp": 28.0,
+    "newcombe95_pp": [
+     1.2,
+     49.9
+    ],
+    "fisher_p": 0.0792
+   },
+   {
+    "name": "I Strawberry: Sim+Real vs Real-only",
+    "k1": 14,
+    "n1": 25,
+    "k2": 10,
+    "n2": 25,
+    "diff_pp": 16.0,
+    "newcombe95_pp": [
+     -11.0,
+     40.0
+    ],
+    "fisher_p": 0.396
+   },
+   {
+    "name": "P Apple: Sim+Real vs Real-only",
+    "k1": 14,
+    "n1": 25,
+    "k2": 6,
+    "n2": 25,
+    "diff_pp": 32.0,
+    "newcombe95_pp": [
+     4.9,
+     53.4
+    ],
+    "fisher_p": 0.0421
+   },
+   {
+    "name": "I Apple: Sim+Real vs Real-only",
+    "k1": 7,
+    "n1": 25,
+    "k2": 4,
+    "n2": 25,
+    "diff_pp": 12.0,
+    "newcombe95_pp": [
+     -11.2,
+     33.8
+    ],
+    "fisher_p": 0.496
+   },
+   {
+    "name": "P Banana: Sim+Real vs Real-only",
+    "k1": 24,
+    "n1": 25,
+    "k2": 17,
+    "n2": 25,
+    "diff_pp": 28.0,
+    "newcombe95_pp": [
+     6.5,
+     47.9
+    ],
+    "fisher_p": 0.0232
+   },
+   {
+    "name": "I Banana: Sim+Real vs Real-only",
+    "k1": 23,
+    "n1": 25,
+    "k2": 14,
+    "n2": 25,
+    "diff_pp": 36.0,
+    "newcombe95_pp": [
+     11.7,
+     55.8
+    ],
+    "fisher_p": 0.0083
+   },
+   {
+    "name": "P Potato: Sim+Real vs Real-only",
+    "k1": 19,
+    "n1": 25,
+    "k2": 9,
+    "n2": 25,
+    "diff_pp": 40.0,
+    "newcombe95_pp": [
+     12.5,
+     60.1
+    ],
+    "fisher_p": 0.0096
+   },
+   {
+    "name": "I Potato: Sim+Real vs Real-only",
+    "k1": 16,
+    "n1": 25,
+    "k2": 9,
+    "n2": 25,
+    "diff_pp": 28.0,
+    "newcombe95_pp": [
+     0.4,
+     50.3
+    ],
+    "fisher_p": 0.0887
+   }
+  ],
+  "cmh_success_aug_vs_real": {
+   "common_OR": 2.37,
+   "OR_ci95": [
+    1.3,
+    4.33
+   ],
+   "p": 0.005,
+   "breslow_day_p": 0.981
+  },
+  "cmh_success_sim_vs_real": {
+   "p": 0.643
+  },
+  "sign_test_4of4_two_sided": 0.125
+ },
+ "table2": {
+  "delta_check": {
+   "w/o Quality Control": {
+    "calc": [
+     -4,
+     -4,
+     -5
+    ],
+    "paper": [
+     -4,
+     -4,
+     -5
+    ],
+    "match": true
+   },
+   "w/o Physical Randomization": {
+    "calc": [
+     -4,
+     -6,
+     -9
+    ],
+    "paper": [
+     -4,
+     -6,
+     -9
+    ],
+    "match": true
+   },
+   "w/o Trajectory Refinement": {
+    "calc": [
+     -11,
+     -11,
+     -7
+    ],
+    "paper": [
+     -11,
+     -11,
+     -7
+    ],
+    "match": true
+   },
+   "w/o Tactile Observation": {
+    "calc": [
+     -3,
+     -7,
+     -15
+    ],
+    "paper": [
+     -3,
+     -7,
+     -15
+    ],
+    "match": true
+   },
+   "w/o Generated Assets": {
+    "calc": [
+     -9,
+     -8,
+     -10
+    ],
+    "paper": [
+     -9,
+     -8,
+     -10
+    ],
+    "match": true
+   }
+  },
+  "vs_full": [
+   {
+    "name": "P: w/o Quality Control vs Full",
+    "k1": 72,
+    "n1": 100,
+    "k2": 76,
+    "n2": 100,
+    "diff_pp": -4.0,
+    "newcombe95_pp": [
+     -16.0,
+     8.1
+    ],
+    "fisher_p": 0.629,
+    "holm_p_over_5": 1.0
+   },
+   {
+    "name": "S: w/o Quality Control vs Full",
+    "k1": 46,
+    "n1": 100,
+    "k2": 50,
+    "n2": 100,
+    "diff_pp": -4.0,
+    "newcombe95_pp": [
+     -17.5,
+     9.7
+    ],
+    "fisher_p": 0.671,
+    "holm_p_over_5": 1.0
+   },
+   {
+    "name": "I: w/o Quality Control vs Full",
+    "k1": 55,
+    "n1": 100,
+    "k2": 60,
+    "n2": 100,
+    "diff_pp": -5.0,
+    "newcombe95_pp": [
+     -18.3,
+     8.6
+    ],
+    "fisher_p": 0.567,
+    "holm_p_over_5": 0.804
+   },
+   {
+    "name": "P: w/o Physical Randomization vs Full",
+    "k1": 72,
+    "n1": 100,
+    "k2": 76,
+    "n2": 100,
+    "diff_pp": -4.0,
+    "newcombe95_pp": [
+     -16.0,
+     8.1
+    ],
+    "fisher_p": 0.629,
+    "holm_p_over_5": 1.0
+   },
+   {
+    "name": "S: w/o Physical Randomization vs Full",
+    "k1": 44,
+    "n1": 100,
+    "k2": 50,
+    "n2": 100,
+    "diff_pp": -6.0,
+    "newcombe95_pp": [
+     -19.4,
+     7.7
+    ],
+    "fisher_p": 0.479,
+    "holm_p_over_5": 1.0
+   },
+   {
+    "name": "I: w/o Physical Randomization vs Full",
+    "k1": 51,
+    "n1": 100,
+    "k2": 60,
+    "n2": 100,
+    "diff_pp": -9.0,
+    "newcombe95_pp": [
+     -22.2,
+     4.7
+    ],
+    "fisher_p": 0.255,
+    "holm_p_over_5": 0.804
+   },
+   {
+    "name": "P: w/o Trajectory Refinement vs Full",
+    "k1": 65,
+    "n1": 100,
+    "k2": 76,
+    "n2": 100,
+    "diff_pp": -11.0,
+    "newcombe95_pp": [
+     -23.2,
+     1.6
+    ],
+    "fisher_p": 0.121,
+    "holm_p_over_5": 0.605
+   },
+   {
+    "name": "S: w/o Trajectory Refinement vs Full",
+    "k1": 39,
+    "n1": 100,
+    "k2": 50,
+    "n2": 100,
+    "diff_pp": -11.0,
+    "newcombe95_pp": [
+     -24.2,
+     2.7
+    ],
+    "fisher_p": 0.155,
+    "holm_p_over_5": 0.775
+   },
+   {
+    "name": "I: w/o Trajectory Refinement vs Full",
+    "k1": 53,
+    "n1": 100,
+    "k2": 60,
+    "n2": 100,
+    "diff_pp": -7.0,
+    "newcombe95_pp": [
+     -20.3,
+     6.6
+    ],
+    "fisher_p": 0.392,
+    "holm_p_over_5": 0.804
+   },
+   {
+    "name": "P: w/o Tactile Observation vs Full",
+    "k1": 73,
+    "n1": 100,
+    "k2": 76,
+    "n2": 100,
+    "diff_pp": -3.0,
+    "newcombe95_pp": [
+     -14.9,
+     9.0
+    ],
+    "fisher_p": 0.746,
+    "holm_p_over_5": 1.0
+   },
+   {
+    "name": "S: w/o Tactile Observation vs Full",
+    "k1": 43,
+    "n1": 100,
+    "k2": 50,
+    "n2": 100,
+    "diff_pp": -7.0,
+    "newcombe95_pp": [
+     -20.4,
+     6.7
+    ],
+    "fisher_p": 0.395,
+    "holm_p_over_5": 1.0
+   },
+   {
+    "name": "I: w/o Tactile Observation vs Full",
+    "k1": 45,
+    "n1": 100,
+    "k2": 60,
+    "n2": 100,
+    "diff_pp": -15.0,
+    "newcombe95_pp": [
+     -28.0,
+     -1.2
+    ],
+    "fisher_p": 0.0472,
+    "holm_p_over_5": 0.236
+   },
+   {
+    "name": "P: w/o Generated Assets vs Full",
+    "k1": 67,
+    "n1": 100,
+    "k2": 76,
+    "n2": 100,
+    "diff_pp": -9.0,
+    "newcombe95_pp": [
+     -21.1,
+     3.5
+    ],
+    "fisher_p": 0.21,
+    "holm_p_over_5": 0.84
+   },
+   {
+    "name": "S: w/o Generated Assets vs Full",
+    "k1": 42,
+    "n1": 100,
+    "k2": 50,
+    "n2": 100,
+    "diff_pp": -8.0,
+    "newcombe95_pp": [
+     -21.3,
+     5.7
+    ],
+    "fisher_p": 0.321,
+    "holm_p_over_5": 1.0
+   },
+   {
+    "name": "I: w/o Generated Assets vs Full",
+    "k1": 50,
+    "n1": 100,
+    "k2": 60,
+    "n2": 100,
+    "diff_pp": -10.0,
+    "newcombe95_pp": [
+     -23.2,
+     3.7
+    ],
+    "fisher_p": 0.201,
+    "holm_p_over_5": 0.804
+   }
+  ],
+  "vs_real_only": [
+   {
+    "name": "S: w/o Quality Control vs Real-only(31/100)",
+    "k1": 46,
+    "n1": 100,
+    "k2": 31,
+    "n2": 100,
+    "diff_pp": 15.0,
+    "newcombe95_pp": [
+     1.5,
+     27.7
+    ],
+    "fisher_p": 0.0416
+   },
+   {
+    "name": "S: w/o Physical Randomization vs Real-only(31/100)",
+    "k1": 44,
+    "n1": 100,
+    "k2": 31,
+    "n2": 100,
+    "diff_pp": 13.0,
+    "newcombe95_pp": [
+     -0.4,
+     25.8
+    ],
+    "fisher_p": 0.0793
+   },
+   {
+    "name": "S: w/o Trajectory Refinement vs Real-only(31/100)",
+    "k1": 39,
+    "n1": 100,
+    "k2": 31,
+    "n2": 100,
+    "diff_pp": 8.0,
+    "newcombe95_pp": [
+     -5.2,
+     20.8
+    ],
+    "fisher_p": 0.299
+   },
+   {
+    "name": "S: w/o Tactile Observation vs Real-only(31/100)",
+    "k1": 43,
+    "n1": 100,
+    "k2": 31,
+    "n2": 100,
+    "diff_pp": 12.0,
+    "newcombe95_pp": [
+     -1.4,
+     24.8
+    ],
+    "fisher_p": 0.107
+   },
+   {
+    "name": "S: w/o Generated Assets vs Real-only(31/100)",
+    "k1": 42,
+    "n1": 100,
+    "k2": 31,
+    "n2": 100,
+    "diff_pp": 11.0,
+    "newcombe95_pp": [
+     -2.3,
+     23.8
+    ],
+    "fisher_p": 0.142
+   }
+  ],
+  "max_drop_S_pp": 11
+ },
+ "table3_scaling": {
+  "sum_check": {
+   "10": [
+    36,
+    36,
+    true
+   ],
+   "50": [
+    50,
+    50,
+    true
+   ],
+   "100": [
+    56,
+    56,
+    true
+   ],
+   "300": [
+    63,
+    63,
+    true
+   ]
+  },
+  "n50_equals_table1": {
+   "Strawberry": [
+    12,
+    12
+   ],
+   "Apple": [
+    8,
+    8
+   ],
+   "Banana": [
+    18,
+    18
+   ],
+   "Potato": [
+    12,
+    12
+   ]
+  },
+  "pooled_wilson95": {
+   "10": [
+    36,
+    100,
+    [
+     27.3,
+     45.8
+    ]
+   ],
+   "50": [
+    50,
+    100,
+    [
+     40.4,
+     59.6
+    ]
+   ],
+   "100": [
+    56,
+    100,
+    [
+     46.2,
+     65.3
+    ]
+   ],
+   "300": [
+    63,
+    100,
+    [
+     53.2,
+     71.8
+    ]
+   ]
+  },
+  "trend_log10N": {
+   "z": 3.96,
+   "p_two_sided": 7.38e-05
+  },
+  "segments": [
+   {
+    "from": 10,
+    "to": 50,
+    "delta_pp": 14,
+    "per_decade_pp": 20.0
+   },
+   {
+    "from": 50,
+    "to": 100,
+    "delta_pp": 6,
+    "per_decade_pp": 19.9
+   },
+   {
+    "from": 100,
+    "to": 300,
+    "delta_pp": 7,
+    "per_decade_pp": 14.7
+   }
+  ],
+  "comparisons": [
+   {
+    "name": "N=300 vs N=10",
+    "k1": 63,
+    "n1": 100,
+    "k2": 36,
+    "n2": 100,
+    "diff_pp": 27.0,
+    "newcombe95_pp": [
+     13.2,
+     39.4
+    ],
+    "fisher_p": 0.000218
+   },
+   {
+    "name": "N=300 vs N=50",
+    "k1": 63,
+    "n1": 100,
+    "k2": 50,
+    "n2": 100,
+    "diff_pp": 13.0,
+    "newcombe95_pp": [
+     -0.7,
+     26.0
+    ],
+    "fisher_p": 0.0867
+   },
+   {
+    "name": "N=100 vs N=50",
+    "k1": 56,
+    "n1": 100,
+    "k2": 50,
+    "n2": 100,
+    "diff_pp": 6.0,
+    "newcombe95_pp": [
+     -7.7,
+     19.4
+    ],
+    "fisher_p": 0.479
+   },
+   {
+    "name": "N=300 vs N=100",
+    "k1": 63,
+    "n1": 100,
+    "k2": 56,
+    "n2": 100,
+    "diff_pp": 7.0,
+    "newcombe95_pp": [
+     -6.5,
+     20.2
+    ],
+    "fisher_p": 0.388
+   },
+   {
+    "name": "N=10 vs Real-only",
+    "k1": 36,
+    "n1": 100,
+    "k2": 31,
+    "n2": 100,
+    "diff_pp": 5.0,
+    "newcombe95_pp": [
+     -8.0,
+     17.8
+    ],
+    "fisher_p": 0.549
+   },
+   {
+    "name": "N=10 vs Sim-only",
+    "k1": 36,
+    "n1": 100,
+    "k2": 34,
+    "n2": 100,
+    "diff_pp": 2.0,
+    "newcombe95_pp": [
+     -11.1,
+     15.0
+    ],
+    "fisher_p": 0.882
+   },
+   {
+    "name": "N=300 vs Real-only",
+    "k1": 63,
+    "n1": 100,
+    "k2": 31,
+    "n2": 100,
+    "diff_pp": 32.0,
+    "newcombe95_pp": [
+     18.3,
+     44.1
+    ],
+    "fisher_p": 9.55e-06
+   }
+  ],
+  "per_food_monotone": {
+   "Strawberry": true,
+   "Banana": true,
+   "Potato": true,
+   "Apple": true
+  },
+  "abstract_gt60": {
+   "k": 63,
+   "n": 100,
+   "wilson95_pct": [
+    53.2,
+    71.8
+   ]
+  }
+ },
+ "supp_table2_baseline": {
+  "sum": [
+   12,
+   23
+  ],
+  "paper_sum": [
+   12,
+   23
+  ],
+  "ratio": 1.917,
+  "diff_pp": 27.5,
+  "pooled": {
+   "name": "Ours vs RoboNinja",
+   "k1": 23,
+   "n1": 40,
+   "k2": 12,
+   "n2": 40,
+   "diff_pp": 27.5,
+   "newcombe95_pp": [
+    5.8,
+    45.9
+   ],
+   "fisher_p": 0.0236
+  },
+  "wilson95": {
+   "RoboNinja": [
+    18.1,
+    45.4
+   ],
+   "Ours": [
+    42.2,
+    71.5
+   ]
+  },
+  "per_food": [
+   {
+    "name": "Strawberry: Ours vs RoboNinja",
+    "k1": 6,
+    "n1": 10,
+    "k2": 1,
+    "n2": 10,
+    "diff_pp": 50.0,
+    "newcombe95_pp": [
+     8.2,
+     74.6
+    ],
+    "fisher_p": 0.0573,
+    "holm_p": 0.172
+   },
+   {
+    "name": "Potato: Ours vs RoboNinja",
+    "k1": 5,
+    "n1": 10,
+    "k2": 2,
+    "n2": 10,
+    "diff_pp": 30.0,
+    "newcombe95_pp": [
+     -10.7,
+     60.0
+    ],
+    "fisher_p": 0.35,
+    "holm_p": 0.358
+   },
+   {
+    "name": "Banana: Ours vs RoboNinja",
+    "k1": 9,
+    "n1": 10,
+    "k2": 2,
+    "n2": 10,
+    "diff_pp": 70.0,
+    "newcombe95_pp": [
+     26.6,
+     86.5
+    ],
+    "fisher_p": 0.00548,
+    "holm_p": 0.022
+   },
+   {
+    "name": "Apple: Ours vs RoboNinja",
+    "k1": 3,
+    "n1": 10,
+    "k2": 7,
+    "n2": 10,
+    "diff_pp": -40.0,
+    "newcombe95_pp": [
+     -67.2,
+     2.9
+    ],
+    "fisher_p": 0.179,
+    "holm_p": 0.358
+   }
+  ],
+  "cmh": {
+   "p": 0.014,
+   "breslow_day_p": 0.002
+  }
+ },
+ "supp_table4_heads_chunk": {
+  "sum_check": {
+   "Universal Head": [
+    11,
+    11,
+    true
+   ],
+   "Separate Heads": [
+    21,
+    21,
+    true
+   ],
+   "Fixed Action Chunk": [
+    13,
+    13,
+    true
+   ],
+   "Full System": [
+    24,
+    24,
+    true
+   ]
+  },
+  "wilson95": {
+   "Universal Head": [
+    16.1,
+    42.8
+   ],
+   "Separate Heads": [
+    37.5,
+    67.1
+   ],
+   "Fixed Action Chunk": [
+    20.1,
+    48.0
+   ],
+   "Full System": [
+    44.6,
+    73.7
+   ]
+  },
+  "comparisons": [
+   {
+    "name": "Full vs Universal",
+    "k1": 24,
+    "n1": 40,
+    "k2": 11,
+    "n2": 40,
+    "diff_pp": 32.5,
+    "newcombe95_pp": [
+     10.8,
+     50.3
+    ],
+    "fisher_p": 0.00645
+   },
+   {
+    "name": "Full vs Separate",
+    "k1": 24,
+    "n1": 40,
+    "k2": 21,
+    "n2": 40,
+    "diff_pp": 7.5,
+    "newcombe95_pp": [
+     -13.7,
+     27.8
+    ],
+    "fisher_p": 0.652
+   },
+   {
+    "name": "Full vs Fixed",
+    "k1": 24,
+    "n1": 40,
+    "k2": 13,
+    "n2": 40,
+    "diff_pp": 27.5,
+    "newcombe95_pp": [
+     5.7,
+     46.0
+    ],
+    "fisher_p": 0.0243
+   },
+   {
+    "name": "Separate vs Universal",
+    "k1": 21,
+    "n1": 40,
+    "k2": 11,
+    "n2": 40,
+    "diff_pp": 25.0,
+    "newcombe95_pp": [
+     3.5,
+     43.5
+    ],
+    "fisher_p": 0.0392
+   },
+   {
+    "name": "Separate vs Fixed",
+    "k1": 21,
+    "n1": 40,
+    "k2": 13,
+    "n2": 40,
+    "diff_pp": 20.0,
+    "newcombe95_pp": [
+     -1.6,
+     39.1
+    ],
+    "fisher_p": 0.113
+   }
+  ]
+ },
+ "cross_table_same_system": {
+  "per_food": {
+   "Strawberry": {
+    "counts": [
+     "12/25",
+     "6/10",
+     "7/10"
+    ],
+    "rates_pct": [
+     48.0,
+     60.0,
+     70.0
+    ],
+    "chi2_p": 0.472
+   },
+   "Apple": {
+    "counts": [
+     "8/25",
+     "3/10",
+     "5/10"
+    ],
+    "rates_pct": [
+     32.0,
+     30.0,
+     50.0
+    ],
+    "chi2_p": 0.553
+   },
+   "Banana": {
+    "counts": [
+     "18/25",
+     "9/10",
+     "7/10"
+    ],
+    "rates_pct": [
+     72.0,
+     90.0,
+     70.0
+    ],
+    "chi2_p": 0.48
+   },
+   "Potato": {
+    "counts": [
+     "12/25",
+     "5/10",
+     "5/10"
+    ],
+    "rates_pct": [
+     48.0,
+     50.0,
+     50.0
+    ],
+    "chi2_p": 0.991
+   }
+  },
+  "pooled": {
+   "table1": [
+    50,
+    100
+   ],
+   "supp2": [
+    23,
+    40
+   ],
+   "supp4": [
+    24,
+    40
+   ],
+   "table1_vs_supp2_supp4_fisher": 0.293,
+   "supp2_vs_supp4_fisher": 1.0,
+   "combined_47_80_pct": 58.8
+  }
+ },
+ "lemon": {
+  "wilson95": {
+   "single": [
+    49.0,
+    94.3
+   ],
+   "two": [
+    39.7,
+    89.2
+   ],
+   "multi": [
+    10.8,
+    60.3
+   ]
+  },
+  "single_vs_two_fisher": 1.0,
+  "two_vs_multi_fisher": 0.179,
+  "single_vs_multi_fisher": 0.07
+ },
+ "asset_funnel": {
+  "column_sums": [
+   1670,
+   1513,
+   1344,
+   1200
+  ],
+  "paper_totals": [
+   1670,
+   1513,
+   1344,
+   1200
+  ],
+  "match": true,
+  "stage_pass_rates_pct": {
+   "Strawberry": [
+    90.9,
+    90.3,
+    92.0
+   ],
+   "Apple": [
+    92.8,
+    92.0,
+    93.5
+   ],
+   "Banana": [
+    89.8,
+    87.0,
+    84.7
+   ],
+   "Potato": [
+    89.2,
+    86.6,
+    87.5
+   ]
+  },
+  "total_stage_pass_rates_pct": [
+   90.6,
+   88.8,
+   89.3
+  ],
+  "accepted_over_proposed_pct": 71.9,
+  "accepted_equals_300_each": true,
+  "surplus_after_3d_qc": {
+   "Strawberry": 26,
+   "Apple": 21,
+   "Banana": 54,
+   "Potato": 43
+  }
+ },
+ "failure_table": {
+  "sum": 50,
+  "failed_trials_expected": 50,
+  "match": true,
+  "progress_failures": 24,
+  "progress_but_not_success": 26,
+  "note": "Progress 실패 24회는 지각·파지·운동학 원인 합 33회 안에 들어가고, Progress 후 실패 26회에는 물리 불일치 17회가 포함될 수 있다(모순 없음)."
+ },
+ "trial_budget": {
+  "items": {
+   "Table 1 (3 regimes x 100)": 300,
+   "Table 2 ablations (5 variants x 100, Full is Table 1)": 500,
+   "Supp Table 3 scaling (N=10,100,300 x 100; N=50 is Table 1)": 300,
+   "Supp Table 2 (RoboNinja 40 + Ours 40)": 80,
+   "Supp Table 4 (4 rows x 40)": 160,
+   "Lemon (3 x 10)": 30
+  },
+  "total_if_all_distinct": 1370
+ },
+ "power": {
+  "success_0.50_vs_0.31_n100": 0.79,
+  "success_0.50_vs_0.31_n_for_80pct": 104,
+  "success_0.48_vs_0.32_n25": 0.21,
+  "success_0.48_vs_0.32_n_for_80pct": 146,
+  "success_0.50_vs_0.43_n100": 0.17,
+  "success_0.50_vs_0.43_n_for_80pct": 796,
+  "success_0.50_vs_0.39_n100": 0.35,
+  "success_0.60_vs_0.525_n40": 0.1,
+  "success_0.575_vs_0.30_n40": 0.71
+ },
+ "cost_formula": {
+  "gpu_hours_per_single_cut_episode": 0.16666666666666666,
+  "formula_N_over_6": [
+   1.67,
+   8.33,
+   16.67,
+   50.0
+  ],
+  "memory_GB_M1_M2": [
+   20,
+   30
+  ],
+  "paper_memory_GB": [
+   20,
+   30
+  ],
+  "time_min_M1_M2": [
+   10,
+   20
+  ],
+  "paper_time_min": [
+   10,
+   20
+  ]
+ },
+ "abstract_claims": {
+  "gain_pp_main": 19,
+  "gain_relative_pct_main": 61.3,
+  "gain_pp_N300_vs_real_only": 32,
+  "abstract_says": "more than 20% (real-only 대비)",
+  "main_success_pct": 50,
+  "scaling_success_pct": 63
+ }
+}
