@@ -1,0 +1,46 @@
+{
+ "action_expert_params": {
+  "computed": 436422688,
+  "paper_D4_Table5_M": 436.4
+ },
+ "feature_mixer_params": {
+  "gated_mixer": 18892801,
+  "gripper_proj_and_pos": 1705984,
+  "sum": 20598785,
+  "paper_D4_Table5_M": 20.6
+ },
+ "trainable_head_total_M": 457.021473,
+ "trace_backbone_params_B": {
+  "with_lm_head": 2.582183246,
+  "without_lm_head": 2.481257806,
+  "paper_B": 2.59,
+  "note": "근사. 비전 hidden, 헤드 수는 기본값 가정, 깊이 LoRA·스템 제외"
+ },
+ "days_by_dataset_launcher_preset": {
+  "EgoDex": 4.745370370370369,
+  "EgoVerse": 3.125,
+  "Agibot": 8.564814814814815,
+  "DROID": 5.787037037037037,
+  "human_total": 7.870370370370369,
+  "robot_total": 14.351851851851851,
+  "paper_A7": {
+   "human": 16,
+   "robot": 7,
+   "total": 23
+  }
+ },
+ "code_constants": {
+  "history_dropout": {
+   "full_mask_prob": 0.5,
+   "kp_dropout_prob": 0.3,
+   "effective_per_kp": 0.65
+  },
+  "flow_time_sampling": "Beta(1.5, 1.0) * 0.999 + 0.001 (modeling_smolvla.py sample_time)",
+  "policy_query_grid": "20x20 = 400 uniform keypoints, 2x2 avg-pooled to 100 tokens (mu0_policy.py GRID_SIZE, _reduce_expert)",
+  "mixer_gate_init": "g = 0.0 -> sigmoid(0) = 0.5",
+  "policy_train_steps_script": 60000,
+  "paper_Table6_steps": 50000,
+  "policy_effective_batch_script": "8 per GPU x 4 GPUs = 32",
+  "paper_Table6_batch": 32
+ }
+}
