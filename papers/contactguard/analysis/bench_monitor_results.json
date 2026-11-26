@@ -1,0 +1,35 @@
+{
+ "params_M": {
+  "encoder_vit_s14": 21.62,
+  "fixed_projection": 0.148,
+  "trainable_total": 13.01,
+  "blocks": 10.64,
+  "head": 1.18,
+  "action_embedder": 1.19,
+  "monitor_total": 34.78
+ },
+ "paper_params_M": {
+  "trainable": 13.2,
+  "frozen_encoder": 21.8,
+  "total": 35.0
+ },
+ "timing": [
+  {
+   "device": "cpu",
+   "full_ms_median": 214.8,
+   "full_ms_p90": 276.9,
+   "encoder_only_ms_median": 109.9
+  },
+  {
+   "device": "mps",
+   "full_ms_median": 46.3,
+   "full_ms_p90": 46.5,
+   "encoder_only_ms_median": 35.7
+  }
+ ],
+ "paper_table5_rtx5090_ms": {
+  "rollout_K30": 17.2,
+  "full_K30": 21.48
+ },
+ "note": "랜덤 가중치, FP32, 배치 1, 인코딩 9장(3시점 x 3카메라, 캐시 없음) + 30스텝 롤아웃(KV 캐시 없음, 맥락 3). 논문의 구현 세부와 다를 수 있음."
+}
