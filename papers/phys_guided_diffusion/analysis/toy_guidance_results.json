@@ -1,0 +1,776 @@
+{
+ "config": {
+  "K": 30,
+  "N": 1000,
+  "modes": 6,
+  "radius": 2.0,
+  "mode_std": 0.15,
+  "eps_tol": 0.01,
+  "seeds": [
+   0,
+   1,
+   2
+  ]
+ },
+ "mean_over_seeds": {
+  "c=1.0": {
+   "U": {
+    "spread_ratio": 0.783,
+    "feasible": 0.331,
+    "on_manifold": 0.998,
+    "valid": 0.331,
+    "tv_to_conditional_prior": 0.044,
+    "mean_J": 1.189,
+    "median_dist_to_mode": 0.142,
+    "valid_seed_range": [
+     0.328,
+     0.335
+    ]
+   },
+   "P": {
+    "spread_ratio": 0.774,
+    "feasible": 1.0,
+    "on_manifold": 0.999,
+    "valid": 0.999,
+    "tv_to_conditional_prior": 0.092,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.135,
+    "valid_seed_range": [
+     0.998,
+     1.0
+    ]
+   },
+   "G(g=0.2)": {
+    "spread_ratio": 0.808,
+    "feasible": 0.737,
+    "on_manifold": 0.74,
+    "valid": 0.735,
+    "tv_to_conditional_prior": 0.133,
+    "mean_J": 0.409,
+    "median_dist_to_mode": 0.182,
+    "valid_seed_range": [
+     0.721,
+     0.743
+    ]
+   },
+   "G(g=0.8)": {
+    "spread_ratio": 0.947,
+    "feasible": 1.0,
+    "on_manifold": 0.946,
+    "valid": 0.946,
+    "tv_to_conditional_prior": 0.02,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.171,
+    "valid_seed_range": [
+     0.94,
+     0.952
+    ]
+   },
+   "G(g=1.6)": {
+    "spread_ratio": 0.92,
+    "feasible": 1.0,
+    "on_manifold": 0.898,
+    "valid": 0.898,
+    "tv_to_conditional_prior": 0.095,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.175,
+    "valid_seed_range": [
+     0.887,
+     0.907
+    ]
+   },
+   "S(g=1.0)": {
+    "spread_ratio": 0.061,
+    "feasible": 1.0,
+    "on_manifold": 1.0,
+    "valid": 1.0,
+    "tv_to_conditional_prior": 0.5,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.013,
+    "valid_seed_range": [
+     1.0,
+     1.0
+    ]
+   },
+   "S(g=4.0)": {
+    "spread_ratio": 0.025,
+    "feasible": 1.0,
+    "on_manifold": 1.0,
+    "valid": 1.0,
+    "tv_to_conditional_prior": 0.5,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.006,
+    "valid_seed_range": [
+     1.0,
+     1.0
+    ]
+   },
+   "O1(x_K 자유)": {
+    "spread_ratio": 0.592,
+    "feasible": 1.0,
+    "on_manifold": 0.995,
+    "valid": 0.995,
+    "tv_to_conditional_prior": 0.047,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.098,
+    "mean_abs_delta": 0.214,
+    "valid_seed_range": [
+     0.992,
+     0.997
+    ]
+   },
+   "O2(x_K에 사전항)": {
+    "spread_ratio": 0.578,
+    "feasible": 1.0,
+    "on_manifold": 0.996,
+    "valid": 0.996,
+    "tv_to_conditional_prior": 0.017,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.085,
+    "mean_abs_delta": 0.232,
+    "valid_seed_range": [
+     0.994,
+     0.997
+    ]
+   }
+  },
+  "c=1.5": {
+   "U": {
+    "spread_ratio": 0.796,
+    "feasible": 0.163,
+    "on_manifold": 0.998,
+    "valid": 0.163,
+    "tv_to_conditional_prior": 0.001,
+    "mean_J": 1.593,
+    "median_dist_to_mode": 0.142,
+    "valid_seed_range": [
+     0.153,
+     0.18
+    ]
+   },
+   "P": {
+    "spread_ratio": 0.786,
+    "feasible": 1.0,
+    "on_manifold": 0.522,
+    "valid": 0.522,
+    "tv_to_conditional_prior": 0.001,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.294,
+    "valid_seed_range": [
+     0.512,
+     0.529
+    ]
+   },
+   "G(g=0.2)": {
+    "spread_ratio": 0.778,
+    "feasible": 0.714,
+    "on_manifold": 0.328,
+    "valid": 0.305,
+    "tv_to_conditional_prior": 0.001,
+    "mean_J": 0.516,
+    "median_dist_to_mode": 0.563,
+    "valid_seed_range": [
+     0.289,
+     0.324
+    ]
+   },
+   "G(g=0.8)": {
+    "spread_ratio": 0.805,
+    "feasible": 1.0,
+    "on_manifold": 0.591,
+    "valid": 0.591,
+    "tv_to_conditional_prior": 0.001,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.234,
+    "valid_seed_range": [
+     0.578,
+     0.604
+    ]
+   },
+   "G(g=1.6)": {
+    "spread_ratio": 0.837,
+    "feasible": 1.0,
+    "on_manifold": 0.7,
+    "valid": 0.7,
+    "tv_to_conditional_prior": 0.001,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.195,
+    "valid_seed_range": [
+     0.689,
+     0.71
+    ]
+   },
+   "S(g=1.0)": {
+    "spread_ratio": 0.016,
+    "feasible": 1.0,
+    "on_manifold": 1.0,
+    "valid": 1.0,
+    "tv_to_conditional_prior": 0.001,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.003,
+    "valid_seed_range": [
+     1.0,
+     1.0
+    ]
+   },
+   "S(g=4.0)": {
+    "spread_ratio": 0.073,
+    "feasible": 1.0,
+    "on_manifold": 1.0,
+    "valid": 1.0,
+    "tv_to_conditional_prior": 0.001,
+    "mean_J": 0.0,
+    "median_dist_to_mode": 0.001,
+    "valid_seed_range": [
+     1.0,
+     1.0
+    ]
+   },
+   "O1(x_K 자유)": {
+    "spread_ratio": 0.772,
+    "feasible": 0.895,
+    "on_manifold": 0.878,
+    "valid": 0.878,
+    "tv_to_conditional_prior": 0.001,
+    "mean_J": 0.003,
+    "median_dist_to_mode": 0.106,
+    "mean_abs_delta": 0.317,
+    "valid_seed_range": [
+     0.867,
+     0.885
+    ]
+   },
+   "O2(x_K에 사전항)": {
+    "spread_ratio": 0.777,
+    "feasible": 0.896,
+    "on_manifold": 0.879,
+    "valid": 0.879,
+    "tv_to_conditional_prior": 0.001,
+    "mean_J": 0.003,
+    "median_dist_to_mode": 0.105,
+    "mean_abs_delta": 0.32,
+    "valid_seed_range": [
+     0.866,
+     0.891
+    ]
+   }
+  }
+ },
+ "per_seed": {
+  "c=1.0": {
+   "0": {
+    "U": {
+     "spread_ratio": 0.803,
+     "feasible": 0.328,
+     "on_manifold": 0.998,
+     "valid": 0.328,
+     "tv_to_conditional_prior": 0.043,
+     "mean_J": 1.2269,
+     "median_dist_to_mode": 0.141
+    },
+    "P": {
+     "spread_ratio": 0.767,
+     "feasible": 1.0,
+     "on_manifold": 0.998,
+     "valid": 0.998,
+     "tv_to_conditional_prior": 0.084,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.136
+    },
+    "G(g=0.2)": {
+     "spread_ratio": 0.801,
+     "feasible": 0.724,
+     "on_manifold": 0.727,
+     "valid": 0.721,
+     "tv_to_conditional_prior": 0.139,
+     "mean_J": 0.4269,
+     "median_dist_to_mode": 0.183
+    },
+    "G(g=0.8)": {
+     "spread_ratio": 0.938,
+     "feasible": 1.0,
+     "on_manifold": 0.94,
+     "valid": 0.94,
+     "tv_to_conditional_prior": 0.013,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.17
+    },
+    "G(g=1.6)": {
+     "spread_ratio": 0.919,
+     "feasible": 1.0,
+     "on_manifold": 0.887,
+     "valid": 0.887,
+     "tv_to_conditional_prior": 0.103,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.174
+    },
+    "S(g=1.0)": {
+     "spread_ratio": 0.062,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.5,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.013
+    },
+    "S(g=4.0)": {
+     "spread_ratio": 0.024,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.5,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.006
+    },
+    "O1(x_K 자유)": {
+     "spread_ratio": 0.601,
+     "feasible": 1.0,
+     "on_manifold": 0.992,
+     "valid": 0.992,
+     "tv_to_conditional_prior": 0.036,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.1,
+     "mean_abs_delta": 0.221
+    },
+    "O2(x_K에 사전항)": {
+     "spread_ratio": 0.588,
+     "feasible": 1.0,
+     "on_manifold": 0.994,
+     "valid": 0.994,
+     "tv_to_conditional_prior": 0.014,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.087,
+     "mean_abs_delta": 0.24
+    }
+   },
+   "1": {
+    "U": {
+     "spread_ratio": 0.774,
+     "feasible": 0.331,
+     "on_manifold": 0.997,
+     "valid": 0.331,
+     "tv_to_conditional_prior": 0.029,
+     "mean_J": 1.1724,
+     "median_dist_to_mode": 0.145
+    },
+    "P": {
+     "spread_ratio": 0.776,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.106,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.134
+    },
+    "G(g=0.2)": {
+     "spread_ratio": 0.815,
+     "feasible": 0.743,
+     "on_manifold": 0.748,
+     "valid": 0.743,
+     "tv_to_conditional_prior": 0.15,
+     "mean_J": 0.4051,
+     "median_dist_to_mode": 0.184
+    },
+    "G(g=0.8)": {
+     "spread_ratio": 0.953,
+     "feasible": 1.0,
+     "on_manifold": 0.945,
+     "valid": 0.945,
+     "tv_to_conditional_prior": 0.028,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.174
+    },
+    "G(g=1.6)": {
+     "spread_ratio": 0.937,
+     "feasible": 1.0,
+     "on_manifold": 0.899,
+     "valid": 0.899,
+     "tv_to_conditional_prior": 0.082,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.18
+    },
+    "S(g=1.0)": {
+     "spread_ratio": 0.061,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.5,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.013
+    },
+    "S(g=4.0)": {
+     "spread_ratio": 0.025,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.5,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.006
+    },
+    "O1(x_K 자유)": {
+     "spread_ratio": 0.595,
+     "feasible": 1.0,
+     "on_manifold": 0.997,
+     "valid": 0.997,
+     "tv_to_conditional_prior": 0.021,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.096,
+     "mean_abs_delta": 0.216
+    },
+    "O2(x_K에 사전항)": {
+     "spread_ratio": 0.575,
+     "feasible": 1.0,
+     "on_manifold": 0.997,
+     "valid": 0.997,
+     "tv_to_conditional_prior": 0.005,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.083,
+     "mean_abs_delta": 0.231
+    }
+   },
+   "2": {
+    "U": {
+     "spread_ratio": 0.771,
+     "feasible": 0.335,
+     "on_manifold": 1.0,
+     "valid": 0.335,
+     "tv_to_conditional_prior": 0.059,
+     "mean_J": 1.1691,
+     "median_dist_to_mode": 0.141
+    },
+    "P": {
+     "spread_ratio": 0.779,
+     "feasible": 1.0,
+     "on_manifold": 0.999,
+     "valid": 0.999,
+     "tv_to_conditional_prior": 0.087,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.135
+    },
+    "G(g=0.2)": {
+     "spread_ratio": 0.809,
+     "feasible": 0.743,
+     "on_manifold": 0.744,
+     "valid": 0.741,
+     "tv_to_conditional_prior": 0.111,
+     "mean_J": 0.3953,
+     "median_dist_to_mode": 0.179
+    },
+    "G(g=0.8)": {
+     "spread_ratio": 0.949,
+     "feasible": 1.0,
+     "on_manifold": 0.952,
+     "valid": 0.952,
+     "tv_to_conditional_prior": 0.018,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.17
+    },
+    "G(g=1.6)": {
+     "spread_ratio": 0.904,
+     "feasible": 1.0,
+     "on_manifold": 0.907,
+     "valid": 0.907,
+     "tv_to_conditional_prior": 0.101,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.172
+    },
+    "S(g=1.0)": {
+     "spread_ratio": 0.061,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.5,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.013
+    },
+    "S(g=4.0)": {
+     "spread_ratio": 0.025,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.5,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.006
+    },
+    "O1(x_K 자유)": {
+     "spread_ratio": 0.579,
+     "feasible": 1.0,
+     "on_manifold": 0.996,
+     "valid": 0.996,
+     "tv_to_conditional_prior": 0.084,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.097,
+     "mean_abs_delta": 0.206
+    },
+    "O2(x_K에 사전항)": {
+     "spread_ratio": 0.57,
+     "feasible": 1.0,
+     "on_manifold": 0.997,
+     "valid": 0.997,
+     "tv_to_conditional_prior": 0.032,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.084,
+     "mean_abs_delta": 0.224
+    }
+   }
+  },
+  "c=1.5": {
+   "0": {
+    "U": {
+     "spread_ratio": 0.835,
+     "feasible": 0.153,
+     "on_manifold": 0.998,
+     "valid": 0.153,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 1.6352,
+     "median_dist_to_mode": 0.141
+    },
+    "P": {
+     "spread_ratio": 0.765,
+     "feasible": 1.0,
+     "on_manifold": 0.524,
+     "valid": 0.524,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.279
+    },
+    "G(g=0.2)": {
+     "spread_ratio": 0.779,
+     "feasible": 0.697,
+     "on_manifold": 0.319,
+     "valid": 0.289,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.5378,
+     "median_dist_to_mode": 0.566
+    },
+    "G(g=0.8)": {
+     "spread_ratio": 0.798,
+     "feasible": 1.0,
+     "on_manifold": 0.592,
+     "valid": 0.592,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.231
+    },
+    "G(g=1.6)": {
+     "spread_ratio": 0.826,
+     "feasible": 1.0,
+     "on_manifold": 0.701,
+     "valid": 0.701,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.195
+    },
+    "S(g=1.0)": {
+     "spread_ratio": 0.016,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.003
+    },
+    "S(g=4.0)": {
+     "spread_ratio": 0.075,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.001
+    },
+    "O1(x_K 자유)": {
+     "spread_ratio": 0.784,
+     "feasible": 0.881,
+     "on_manifold": 0.867,
+     "valid": 0.867,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0031,
+     "median_dist_to_mode": 0.113,
+     "mean_abs_delta": 0.327
+    },
+    "O2(x_K에 사전항)": {
+     "spread_ratio": 0.78,
+     "feasible": 0.882,
+     "on_manifold": 0.866,
+     "valid": 0.866,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0031,
+     "median_dist_to_mode": 0.111,
+     "mean_abs_delta": 0.331
+    }
+   },
+   "1": {
+    "U": {
+     "spread_ratio": 0.785,
+     "feasible": 0.156,
+     "on_manifold": 0.997,
+     "valid": 0.156,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 1.5793,
+     "median_dist_to_mode": 0.145
+    },
+    "P": {
+     "spread_ratio": 0.816,
+     "feasible": 1.0,
+     "on_manifold": 0.512,
+     "valid": 0.512,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.329
+    },
+    "G(g=0.2)": {
+     "spread_ratio": 0.794,
+     "feasible": 0.718,
+     "on_manifold": 0.327,
+     "valid": 0.301,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.5127,
+     "median_dist_to_mode": 0.565
+    },
+    "G(g=0.8)": {
+     "spread_ratio": 0.817,
+     "feasible": 1.0,
+     "on_manifold": 0.578,
+     "valid": 0.578,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.244
+    },
+    "G(g=1.6)": {
+     "spread_ratio": 0.853,
+     "feasible": 1.0,
+     "on_manifold": 0.689,
+     "valid": 0.689,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.199
+    },
+    "S(g=1.0)": {
+     "spread_ratio": 0.016,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.003
+    },
+    "S(g=4.0)": {
+     "spread_ratio": 0.072,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.001
+    },
+    "O1(x_K 자유)": {
+     "spread_ratio": 0.783,
+     "feasible": 0.897,
+     "on_manifold": 0.881,
+     "valid": 0.881,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0027,
+     "median_dist_to_mode": 0.103,
+     "mean_abs_delta": 0.317
+    },
+    "O2(x_K에 사전항)": {
+     "spread_ratio": 0.793,
+     "feasible": 0.895,
+     "on_manifold": 0.88,
+     "valid": 0.88,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0027,
+     "median_dist_to_mode": 0.103,
+     "mean_abs_delta": 0.32
+    }
+   },
+   "2": {
+    "U": {
+     "spread_ratio": 0.767,
+     "feasible": 0.18,
+     "on_manifold": 1.0,
+     "valid": 0.18,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 1.5659,
+     "median_dist_to_mode": 0.141
+    },
+    "P": {
+     "spread_ratio": 0.776,
+     "feasible": 1.0,
+     "on_manifold": 0.529,
+     "valid": 0.529,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.273
+    },
+    "G(g=0.2)": {
+     "spread_ratio": 0.761,
+     "feasible": 0.728,
+     "on_manifold": 0.338,
+     "valid": 0.324,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.4977,
+     "median_dist_to_mode": 0.558
+    },
+    "G(g=0.8)": {
+     "spread_ratio": 0.801,
+     "feasible": 1.0,
+     "on_manifold": 0.604,
+     "valid": 0.604,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.227
+    },
+    "G(g=1.6)": {
+     "spread_ratio": 0.833,
+     "feasible": 1.0,
+     "on_manifold": 0.71,
+     "valid": 0.71,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.192
+    },
+    "S(g=1.0)": {
+     "spread_ratio": 0.016,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.003
+    },
+    "S(g=4.0)": {
+     "spread_ratio": 0.072,
+     "feasible": 1.0,
+     "on_manifold": 1.0,
+     "valid": 1.0,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0,
+     "median_dist_to_mode": 0.001
+    },
+    "O1(x_K 자유)": {
+     "spread_ratio": 0.748,
+     "feasible": 0.908,
+     "on_manifold": 0.885,
+     "valid": 0.885,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0026,
+     "median_dist_to_mode": 0.102,
+     "mean_abs_delta": 0.308
+    },
+    "O2(x_K에 사전항)": {
+     "spread_ratio": 0.757,
+     "feasible": 0.911,
+     "on_manifold": 0.891,
+     "valid": 0.891,
+     "tv_to_conditional_prior": 0.001,
+     "mean_J": 0.0023,
+     "median_dist_to_mode": 0.101,
+     "mean_abs_delta": 0.309
+    }
+   }
+  }
+ },
+ "seconds": 60.7
+}

@@ -1,0 +1,1229 @@
+{
+ "V1_integer_feasibility": {
+  "n150_infeasible_cells": [
+   "Dynaarm/DDIM/SR1/n150",
+   "Dynaarm/DDIM/SRIK/n150",
+   "Dynaarm/DDIM†/SR1/n150",
+   "Dynaarm/Gradient/SR1/n150",
+   "Dynaarm/IPOPT/SR1/n150",
+   "Dynaarm/IPOPT/SRIK/n150",
+   "Dynaarm/Projection/SR1/n150",
+   "Dynaarm/Projection/SRIK/n150",
+   "Dynaarm/Theseus/SR1/n150",
+   "Dynaarm/Theseus/SRIK/n150",
+   "Franka/DDIM/SR1/n150",
+   "Franka/DDIM/SRIK/n150",
+   "Franka/Gradient/SR1/n150",
+   "Franka/Gradient/SRIK/n150",
+   "Franka/IPOPT/SR1/n150",
+   "Franka/IPOPT/SRIK/n150",
+   "Franka/Projection/SR1/n150",
+   "Franka/Theseus/SR1/n150",
+   "Franka/Theseus/SRIK/n150"
+  ],
+  "n1200_infeasible_cells": []
+ },
+ "V2_easy_hard_vs_table1": {
+  "Franka/Gradient": {
+   "easy": 70,
+   "hard": 23,
+   "weighted_3to2": 51.2,
+   "table1": 50.9,
+   "diff": 0.3
+  },
+  "Franka/Projection": {
+   "easy": 57,
+   "hard": 9,
+   "weighted_3to2": 37.8,
+   "table1": 37.4,
+   "diff": 0.4
+  },
+  "Franka/IPOPT": {
+   "easy": 72,
+   "hard": 70,
+   "weighted_3to2": 71.2,
+   "table1": 71.0,
+   "diff": 0.2
+  },
+  "Franka/Theseus": {
+   "easy": 65,
+   "hard": 56,
+   "weighted_3to2": 61.4,
+   "table1": 61.0,
+   "diff": 0.4
+  },
+  "Dynaarm/Gradient": {
+   "easy": 59,
+   "hard": 58,
+   "weighted_3to2": 58.6,
+   "table1": 58.8,
+   "diff": -0.2
+  },
+  "Dynaarm/Projection": {
+   "easy": 28,
+   "hard": 17,
+   "weighted_3to2": 23.6,
+   "table1": 23.7,
+   "diff": -0.1
+  },
+  "Dynaarm/IPOPT": {
+   "easy": 71,
+   "hard": 68,
+   "weighted_3to2": 69.8,
+   "table1": 69.8,
+   "diff": 0.0
+  },
+  "Dynaarm/Theseus": {
+   "easy": 61,
+   "hard": 67,
+   "weighted_3to2": 63.4,
+   "table1": 63.5,
+   "diff": -0.1
+  }
+ },
+ "V2_max_abs_diff": 0.4,
+ "V3_runtime_ratio": {
+  "Theseus/DDIM": 45.8,
+  "IPOPT/DDIM": 69.0,
+  "gradient/DDIM": 1.062,
+  "projection/DDIM": 1.061
+ },
+ "V4_gain_claims": {
+  "grasp_Dynaarm_IPOPT_minus_Gradient": 11.0,
+  "grasp_Franka_IPOPT_minus_Gradient": 20.1,
+  "visuomotor_Franka_PP_ours_minus_best_baseline": 23.0,
+  "visuomotor_Dynaarm_PP_ours_minus_best_baseline": 12.5,
+  "visuomotor_Drawer_Dynaarm_ours_minus_best_baseline": 2.0,
+  "visuomotor_Drawer_Franka_ours_minus_best_baseline": 2.0
+ },
+ "V5_table2_vs_table3_diff_cells": [
+  {
+   "task": "PickPlace",
+   "arm": "Dynaarm",
+   "method": "DDIM",
+   "table2": [
+    26.0,
+    2.0,
+    63.3,
+    3.3
+   ],
+   "table3": [
+    26.0,
+    2.0,
+    63.2,
+    3.3
+   ]
+  },
+  {
+   "task": "PickPlace",
+   "arm": "Dynaarm",
+   "method": "Grad(xt)",
+   "table2": [
+    26.3,
+    3.4,
+    63.3,
+    5.0
+   ],
+   "table3": [
+    26.3,
+    3.4,
+    63.2,
+    5.0
+   ]
+  }
+ ],
+ "V6_four_run_granularity": {
+  "cells": 40,
+  "mean_not_multiple_of_0.25": [],
+  "sd_infeasible_ddof0": [
+   "Drawer/Dynaarm/DDIM†/task",
+   "Drawer/Dynaarm/DDIM/task",
+   "Drawer/Dynaarm/DDIM/sub",
+   "Drawer/Dynaarm/Grad(σ)/task",
+   "Drawer/Franka/DDIM†/task",
+   "PickPlace/Dynaarm/DDIM†/sub",
+   "PickPlace/Franka/DDIM†/sub",
+   "PickPlace/Franka/Grad(xt)/task"
+  ],
+  "sd_infeasible_ddof1": [],
+  "sd_infeasible_both": []
+ },
+ "V7_visuomotor_tests": {
+  "Drawer/Dynaarm/task": {
+   "ours": [
+    81.8,
+    2.9
+   ],
+   "best_baseline": "Grad(σ)",
+   "baseline": [
+    79.8,
+    1.7
+   ],
+   "diff_pp": 2.0,
+   "welch_p_runs_n4": 0.2891,
+   "two_prop_p_n400_assumed": 0.473
+  },
+  "Drawer/Dynaarm/sub": {
+   "ours": [
+    87.3,
+    2.9
+   ],
+   "best_baseline": "Grad(σ)",
+   "baseline": [
+    85.0,
+    1.6
+   ],
+   "diff_pp": 2.3,
+   "welch_p_runs_n4": 0.2274,
+   "two_prop_p_n400_assumed": 0.346
+  },
+  "Drawer/Franka/task": {
+   "ours": [
+    60.0,
+    3.4
+   ],
+   "best_baseline": "Grad(xt)",
+   "baseline": [
+    58.0,
+    2.4
+   ],
+   "diff_pp": 2.0,
+   "welch_p_runs_n4": 0.3776,
+   "two_prop_p_n400_assumed": 0.565
+  },
+  "Drawer/Franka/sub": {
+   "ours": [
+    70.0,
+    1.6
+   ],
+   "best_baseline": "Grad(xt)",
+   "baseline": [
+    67.0,
+    2.8
+   ],
+   "diff_pp": 3.0,
+   "welch_p_runs_n4": 0.1247,
+   "two_prop_p_n400_assumed": 0.361
+  },
+  "PickPlace/Dynaarm/task": {
+   "ours": [
+    41.8,
+    3.8
+   ],
+   "best_baseline": "Grad(σ)",
+   "baseline": [
+    29.3,
+    4.3
+   ],
+   "diff_pp": 12.5,
+   "welch_p_runs_n4": 0.005,
+   "two_prop_p_n400_assumed": 0.000222
+  },
+  "PickPlace/Dynaarm/sub": {
+   "ours": [
+    66.0,
+    3.6
+   ],
+   "best_baseline": "Grad(σ)",
+   "baseline": [
+    69.3,
+    4.6
+   ],
+   "diff_pp": -3.3,
+   "welch_p_runs_n4": 0.304,
+   "two_prop_p_n400_assumed": 0.318
+  },
+  "PickPlace/Franka/task": {
+   "ours": [
+    67.0,
+    3.4
+   ],
+   "best_baseline": "DDIM",
+   "baseline": [
+    44.0,
+    4.5
+   ],
+   "diff_pp": 23.0,
+   "welch_p_runs_n4": 0.0003,
+   "two_prop_p_n400_assumed": 5.95e-11
+  },
+  "PickPlace/Franka/sub": {
+   "ours": [
+    98.3,
+    1.3
+   ],
+   "best_baseline": "Grad(σ)",
+   "baseline": [
+    92.3,
+    1.3
+   ],
+   "diff_pp": 6.0,
+   "welch_p_runs_n4": 0.0006,
+   "two_prop_p_n400_assumed": 6.09e-05
+  }
+ },
+ "V8_table1_tests": {
+  "Dynaarm/IPOPT-Gradient": {
+   "diff_pp": 11.0,
+   "p_n150": 0.0468,
+   "p_n1200": 1.87e-08
+  },
+  "Dynaarm/Theseus-Gradient": {
+   "diff_pp": 4.7,
+   "p_n150": 0.404,
+   "p_n1200": 0.0182
+  },
+  "Dynaarm/IPOPT-Theseus": {
+   "diff_pp": 6.3,
+   "p_n150": 0.247,
+   "p_n1200": 0.00106
+  },
+  "Franka/IPOPT-Gradient": {
+   "diff_pp": 20.1,
+   "p_n150": 0.00036,
+   "p_n1200": 0.0
+  },
+  "Franka/Theseus-Gradient": {
+   "diff_pp": 10.1,
+   "p_n150": 0.0781,
+   "p_n1200": 6.25e-07
+  },
+  "Franka/IPOPT-Theseus": {
+   "diff_pp": 10.0,
+   "p_n150": 0.0675,
+   "p_n1200": 2.33e-07
+  },
+  "wilson95_IPOPT_Dynaarm_n150": [
+   62.2,
+   76.8
+  ],
+  "wilson95_Gradient_Dynaarm_n150": [
+   50.7,
+   66.2
+  ]
+ },
+ "V9_table5": {
+  "denominators": {
+   "n40_values_not_integer_count": 60,
+   "n160_values_not_integer_count": 1,
+   "n320_values_not_integer_count": 1,
+   "n400_values_not_integer_count": 43,
+   "n640_values_not_integer_count": 1,
+   "total_values": 160
+  },
+  "truncation": [
+   "Dynaarm/DDIM/Clutter: 4.37 (n=160의 7/160 = 4.375)",
+   "Dynaarm/Gradient/Floor: 33.12 (n=160의 53/160 = 33.125)",
+   "Dynaarm/Gradient/Clutter: 28.12 (n=160의 45/160 = 28.125)",
+   "Dynaarm/Projection/Tunnels: 14.37 (n=160의 23/160 = 14.375)",
+   "Dynaarm/Theseus/Tunnels: 24.37 (n=160의 39/160 = 24.375)",
+   "Franka/DDIM/Floor: 11.87 (n=160의 19/160 = 11.875)",
+   "Franka/Gradient/Walls: 20.62 (n=160의 33/160 = 20.625)",
+   "Franka/Gradient/Tunnels: 18.12 (n=160의 29/160 = 18.125)",
+   "Franka/Theseus/Walls: 50.62 (n=160의 81/160 = 50.625)",
+   "Franka/Theseus/Clutter: 26.87 (n=160의 43/160 = 26.875)",
+   "Franka/IPOPT/Floor: 65.62 (n=160의 105/160 = 65.625)",
+   "Franka/IPOPT/Walls: 60.62 (n=160의 97/160 = 60.625)"
+  ],
+  "SRTot_gt_SR1": [],
+  "SRTot_gt_100_minus_CR": [],
+  "per_arm_best": {
+   "Dynaarm/Floor": [
+    "IPOPT",
+    46.88
+   ],
+   "Dynaarm/Walls": [
+    "Theseus",
+    35.63
+   ],
+   "Dynaarm/Clutter": [
+    "IPOPT",
+    31.25
+   ],
+   "Dynaarm/Tunnels": [
+    "Gradient",
+    30.63
+   ],
+   "Franka/Floor": [
+    "IPOPT",
+    65.62
+   ],
+   "Franka/Walls": [
+    "IPOPT",
+    60.62
+   ],
+   "Franka/Clutter": [
+    "IPOPT",
+    55.63
+   ],
+   "Franka/Tunnels": [
+    "IPOPT",
+    61.88
+   ]
+  },
+  "mean_over_envs": {
+   "Dynaarm/DDIM": 2.97,
+   "Dynaarm/Gradient": 27.34,
+   "Dynaarm/Projection": 8.59,
+   "Dynaarm/Theseus": 30.0,
+   "Dynaarm/IPOPT": 31.09,
+   "Franka/DDIM": 8.9,
+   "Franka/Gradient": 21.09,
+   "Franka/Projection": 36.56,
+   "Franka/Theseus": 43.75,
+   "Franka/IPOPT": 60.94
+  }
+ },
+ "V9b_table5_tests": {
+  "Dynaarm/Floor": {
+   "ours": [
+    "IPOPT",
+    46.88
+   ],
+   "best_baseline": [
+    "Gradient",
+    33.12
+   ],
+   "diff_pp": 13.76,
+   "p_n160_assumed": 0.012,
+   "p_n40_literal": 0.209
+  },
+  "Dynaarm/Walls": {
+   "ours": [
+    "Theseus",
+    35.63
+   ],
+   "best_baseline": [
+    "Gradient",
+    17.5
+   ],
+   "diff_pp": 18.13,
+   "p_n160_assumed": 0.000241,
+   "p_n40_literal": 0.0664
+  },
+  "Dynaarm/Clutter": {
+   "ours": [
+    "IPOPT",
+    31.25
+   ],
+   "best_baseline": [
+    "Gradient",
+    28.12
+   ],
+   "diff_pp": 3.13,
+   "p_n160_assumed": 0.54,
+   "p_n40_literal": 0.759
+  },
+  "Dynaarm/Tunnels": {
+   "ours": [
+    "Theseus",
+    24.37
+   ],
+   "best_baseline": [
+    "Gradient",
+    30.63
+   ],
+   "diff_pp": -6.26,
+   "p_n160_assumed": 0.21,
+   "p_n40_literal": 0.531
+  },
+  "Franka/Floor": {
+   "ours": [
+    "IPOPT",
+    65.62
+   ],
+   "best_baseline": [
+    "Projection",
+    58.13
+   ],
+   "diff_pp": 7.49,
+   "p_n160_assumed": 0.168,
+   "p_n40_literal": 0.49
+  },
+  "Franka/Walls": {
+   "ours": [
+    "IPOPT",
+    60.62
+   ],
+   "best_baseline": [
+    "Projection",
+    43.13
+   ],
+   "diff_pp": 17.49,
+   "p_n160_assumed": 0.00174,
+   "p_n40_literal": 0.117
+  },
+  "Franka/Clutter": {
+   "ours": [
+    "IPOPT",
+    55.63
+   ],
+   "best_baseline": [
+    "Gradient",
+    23.13
+   ],
+   "diff_pp": 32.5,
+   "p_n160_assumed": 2.69e-09,
+   "p_n40_literal": 0.00293
+  },
+  "Franka/Tunnels": {
+   "ours": [
+    "IPOPT",
+    61.88
+   ],
+   "best_baseline": [
+    "Projection",
+    45.0
+   ],
+   "diff_pp": 16.88,
+   "p_n160_assumed": 0.00247,
+   "p_n40_literal": 0.13
+  }
+ },
+ "V10_surrogate_params": {
+  "dof6": 218384,
+  "dof7": 218513,
+  "paper": {
+   "Dynaarm_6dof": "≈218k",
+   "Franka_7dof": "≈219k",
+   "total": "≈2.2e5"
+  }
+ },
+ "V11_ours_vs_upper_bound": [
+  {
+   "task": "PickPlace",
+   "arm": "Franka",
+   "SRtask": {
+    "DDIM†": [
+     62.5,
+     6.2
+    ],
+    "ours": [
+     67.0,
+     3.4
+    ]
+   },
+   "SRsub": {
+    "DDIM†": [
+     95.3,
+     2.1
+    ],
+    "ours": [
+     98.3,
+     1.3
+    ]
+   },
+   "welch_p_task": 0.263,
+   "welch_p_sub": 0.059
+  },
+  {
+   "task": "PickPlace",
+   "arm": "Dynaarm",
+   "SRtask": {
+    "DDIM†": [
+     62.5,
+     6.2
+    ],
+    "ours": [
+     41.8,
+     3.8
+    ]
+   },
+   "SRsub": {
+    "DDIM†": [
+     95.3,
+     2.1
+    ],
+    "ours": [
+     66.0,
+     3.6
+    ]
+   },
+   "welch_p_task": 0.002,
+   "welch_p_sub": 0.0
+  }
+ ],
+ "V12_Q1_claim": {
+  "snap_DDIM_Q1": [
+   6.5,
+   7.1
+  ],
+  "ours_Q1": [
+   14.5,
+   15.2,
+   14.1,
+   15.7
+  ],
+  "projection_Q1": [
+   6.8,
+   8.1
+  ],
+  "projection_Efc_vs_DDIM": {
+   "Dynaarm": [
+    0.72,
+    2.37
+   ],
+   "Franka": [
+    1.19,
+    2.02
+   ]
+  }
+ },
+ "V13_fig6_strict_metric": {
+  "Dynaarm/DDIM†": {
+   "SR1_weighted_3to2": 75.0,
+   "SRall_weighted_3to2": 41.0
+  },
+  "Dynaarm/DDIM": {
+   "SR1_weighted_3to2": 27.0,
+   "SRall_weighted_3to2": 12.8
+  },
+  "Dynaarm/Projection": {
+   "SR1_weighted_3to2": 23.6,
+   "SRall_weighted_3to2": 7.4
+  },
+  "Dynaarm/Gradient": {
+   "SR1_weighted_3to2": 58.6,
+   "SRall_weighted_3to2": 27.6
+  },
+  "Dynaarm/Theseus": {
+   "SR1_weighted_3to2": 63.4,
+   "SRall_weighted_3to2": 30.8
+  },
+  "Dynaarm/IPOPT": {
+   "SR1_weighted_3to2": 69.8,
+   "SRall_weighted_3to2": 33.2
+  },
+  "Dynaarm/Theseus_minus_Gradient": {
+   "SR1_gap_pp": 4.8,
+   "SRall_gap_pp": 3.2
+  },
+  "Dynaarm/IPOPT_minus_Gradient": {
+   "SR1_gap_pp": 11.2,
+   "SRall_gap_pp": 5.6
+  },
+  "Franka/DDIM†": {
+   "SR1_weighted_3to2": 76.0,
+   "SRall_weighted_3to2": 40.0
+  },
+  "Franka/DDIM": {
+   "SR1_weighted_3to2": 33.8,
+   "SRall_weighted_3to2": 17.2
+  },
+  "Franka/Projection": {
+   "SR1_weighted_3to2": 37.8,
+   "SRall_weighted_3to2": 16.2
+  },
+  "Franka/Gradient": {
+   "SR1_weighted_3to2": 51.2,
+   "SRall_weighted_3to2": 26.4
+  },
+  "Franka/Theseus": {
+   "SR1_weighted_3to2": 61.4,
+   "SRall_weighted_3to2": 30.2
+  },
+  "Franka/IPOPT": {
+   "SR1_weighted_3to2": 71.2,
+   "SRall_weighted_3to2": 35.4
+  },
+  "Franka/Theseus_minus_Gradient": {
+   "SR1_gap_pp": 10.2,
+   "SRall_gap_pp": 3.8
+  },
+  "Franka/IPOPT_minus_Gradient": {
+   "SR1_gap_pp": 20.0,
+   "SRall_gap_pp": 9.0
+  }
+ },
+ "data": {
+  "T1": {
+   "Dynaarm": {
+    "DDIM†": [
+     75.0,
+     null,
+     0.01,
+     16.0
+    ],
+    "DDIM": [
+     27.0,
+     54.6,
+     2.37,
+     6.5
+    ],
+    "Projection": [
+     23.7,
+     99.9,
+     0.72,
+     6.8
+    ],
+    "Gradient": [
+     58.8,
+     99.3,
+     0.97,
+     12.8
+    ],
+    "Theseus": [
+     63.5,
+     95.8,
+     0.26,
+     14.5
+    ],
+    "IPOPT": [
+     69.8,
+     96.4,
+     0.2,
+     15.2
+    ]
+   },
+   "Franka": {
+    "DDIM": [
+     33.7,
+     83.7,
+     2.02,
+     7.1
+    ],
+    "Projection": [
+     37.4,
+     100.0,
+     1.19,
+     8.1
+    ],
+    "Gradient": [
+     50.9,
+     97.9,
+     1.04,
+     11.1
+    ],
+    "Theseus": [
+     61.0,
+     98.3,
+     0.23,
+     14.1
+    ],
+    "IPOPT": [
+     71.0,
+     99.8,
+     0.06,
+     15.7
+    ]
+   }
+  },
+  "T2": {
+   "Drawer": {
+    "Dynaarm": [
+     [
+      99.5,
+      1.0,
+      100.0,
+      0.0
+     ],
+     [
+      79.5,
+      1.9,
+      84.0,
+      0.8
+     ],
+     [
+      79.8,
+      1.7,
+      85.0,
+      1.6
+     ],
+     [
+      79.8,
+      3.3,
+      83.8,
+      3.0
+     ],
+     [
+      81.8,
+      2.9,
+      87.3,
+      2.9
+     ]
+    ],
+    "Franka": [
+     [
+      99.5,
+      1.0,
+      100.0,
+      0.0
+     ],
+     [
+      57.8,
+      2.2,
+      66.3,
+      3.1
+     ],
+     [
+      57.8,
+      7.8,
+      66.8,
+      6.8
+     ],
+     [
+      58.0,
+      2.4,
+      67.0,
+      2.8
+     ],
+     [
+      60.0,
+      3.4,
+      70.0,
+      1.6
+     ]
+    ]
+   },
+   "PickPlace": {
+    "Dynaarm": [
+     [
+      62.5,
+      6.2,
+      95.3,
+      2.1
+     ],
+     [
+      26.0,
+      2.0,
+      63.3,
+      3.3
+     ],
+     [
+      29.3,
+      4.3,
+      69.3,
+      4.6
+     ],
+     [
+      26.3,
+      3.4,
+      63.3,
+      5.0
+     ],
+     [
+      41.8,
+      3.8,
+      66.0,
+      3.6
+     ]
+    ],
+    "Franka": [
+     [
+      62.5,
+      6.2,
+      95.3,
+      2.1
+     ],
+     [
+      44.0,
+      4.5,
+      89.0,
+      3.4
+     ],
+     [
+      41.0,
+      1.4,
+      92.3,
+      1.3
+     ],
+     [
+      43.3,
+      1.7,
+      90.3,
+      3.8
+     ],
+     [
+      67.0,
+      3.4,
+      98.3,
+      1.3
+     ]
+    ]
+   }
+  },
+  "T5": {
+   "Dynaarm": {
+    "DDIM": [
+     [
+      5.0,
+      16.25,
+      32.5,
+      60.0
+     ],
+     [
+      2.5,
+      16.25,
+      32.5,
+      62.5
+     ],
+     [
+      4.37,
+      19.99,
+      32.5,
+      67.5
+     ],
+     [
+      0.0,
+      16.25,
+      32.5,
+      80.0
+     ]
+    ],
+    "Gradient": [
+     [
+      33.12,
+      33.12,
+      100,
+      0.0
+     ],
+     [
+      17.5,
+      19.99,
+      100,
+      25.0
+     ],
+     [
+      28.12,
+      28.12,
+      100,
+      0.0
+     ],
+     [
+      30.63,
+      30.62,
+      100,
+      0.0
+     ]
+    ],
+    "Projection": [
+     [
+      19.38,
+      22.49,
+      100,
+      20.0
+     ],
+     [
+      0.63,
+      5.62,
+      100,
+      20.0
+     ],
+     [
+      0.0,
+      0.0,
+      75.0,
+      0.0
+     ],
+     [
+      14.37,
+      19.37,
+      100,
+      22.5
+     ]
+    ],
+    "Theseus": [
+     [
+      36.88,
+      36.87,
+      77.5,
+      0.0
+     ],
+     [
+      35.63,
+      44.36,
+      77.5,
+      17.5
+     ],
+     [
+      23.13,
+      28.37,
+      82.5,
+      37.5
+     ],
+     [
+      24.37,
+      46.24,
+      80.0,
+      32.5
+     ]
+    ],
+    "IPOPT": [
+     [
+      46.88,
+      51.24,
+      75.0,
+      10.0
+     ],
+     [
+      22.5,
+      43.74,
+      75.0,
+      32.5
+     ],
+     [
+      31.25,
+      39.99,
+      65.0,
+      20.0
+     ],
+     [
+      23.75,
+      26.24,
+      52.5,
+      32.5
+     ]
+    ]
+   },
+   "Franka": {
+    "DDIM": [
+     [
+      11.87,
+      68.73,
+      100,
+      82.5
+     ],
+     [
+      10.0,
+      68.73,
+      100,
+      85.0
+     ],
+     [
+      6.25,
+      60.61,
+      100,
+      90.0
+     ],
+     [
+      7.5,
+      68.73,
+      100,
+      87.5
+     ]
+    ],
+    "Gradient": [
+     [
+      22.5,
+      22.49,
+      100,
+      0.0
+     ],
+     [
+      20.62,
+      20.62,
+      100,
+      30.0
+     ],
+     [
+      23.13,
+      23.74,
+      100,
+      17.5
+     ],
+     [
+      18.12,
+      18.12,
+      100,
+      5.0
+     ]
+    ],
+    "Projection": [
+     [
+      58.13,
+      60.61,
+      100,
+      2.5
+     ],
+     [
+      43.13,
+      45.61,
+      100,
+      2.5
+     ],
+     [
+      0.0,
+      0.0,
+      57.5,
+      0.0
+     ],
+     [
+      45.0,
+      47.49,
+      100,
+      10.0
+     ]
+    ],
+    "Theseus": [
+     [
+      58.75,
+      58.74,
+      100,
+      0.0
+     ],
+     [
+      50.62,
+      55.61,
+      100,
+      17.5
+     ],
+     [
+      26.87,
+      38.12,
+      97.5,
+      27.5
+     ],
+     [
+      38.75,
+      59.36,
+      100,
+      30.0
+     ]
+    ],
+    "IPOPT": [
+     [
+      65.62,
+      69.98,
+      100,
+      12.5
+     ],
+     [
+      60.62,
+      76.86,
+      100,
+      20.0
+     ],
+     [
+      55.63,
+      70.61,
+      100,
+      27.5
+     ],
+     [
+      61.88,
+      68.11,
+      100,
+      17.5
+     ]
+    ]
+   }
+  },
+  "FIG6": {
+   "Dynaarm": {
+    "easy": {
+     "DDIM†": [
+      75,
+      41
+     ],
+     "DDIM": [
+      31,
+      14
+     ],
+     "Projection": [
+      28,
+      9
+     ],
+     "Gradient": [
+      59,
+      28
+     ],
+     "Theseus": [
+      61,
+      30
+     ],
+     "IPOPT": [
+      71,
+      34
+     ]
+    },
+    "hard": {
+     "DDIM†": [
+      75,
+      41
+     ],
+     "DDIM": [
+      21,
+      11
+     ],
+     "Projection": [
+      17,
+      5
+     ],
+     "Gradient": [
+      58,
+      27
+     ],
+     "Theseus": [
+      67,
+      32
+     ],
+     "IPOPT": [
+      68,
+      32
+     ]
+    }
+   },
+   "Franka": {
+    "easy": {
+     "DDIM†": [
+      76,
+      40
+     ],
+     "DDIM": [
+      51,
+      26
+     ],
+     "Projection": [
+      57,
+      25
+     ],
+     "Gradient": [
+      70,
+      36
+     ],
+     "Theseus": [
+      65,
+      33
+     ],
+     "IPOPT": [
+      72,
+      37
+     ]
+    },
+    "hard": {
+     "DDIM†": [
+      76,
+      40
+     ],
+     "DDIM": [
+      8,
+      4
+     ],
+     "Projection": [
+      9,
+      3
+     ],
+     "Gradient": [
+      23,
+      12
+     ],
+     "Theseus": [
+      56,
+      26
+     ],
+     "IPOPT": [
+      70,
+      33
+     ]
+    }
+   }
+  }
+ },
+ "V14_box_vs_gaussian": {
+  "p_coord_in_box": 0.6827,
+  "p_xK_in_box_d21": 0.00033,
+  "p_xK_in_box_d9": 0.0322,
+  "p_one_step_delta_in_box_d21": 0.00033,
+  "note": "표본 x_K ~ N(0,I)가 상자 안에 있을 확률. 확산 모델의 정규화 공간이 N(0,I)라고 가정(논문은 정규화를 밝히지 않음)"
+ }
+}
