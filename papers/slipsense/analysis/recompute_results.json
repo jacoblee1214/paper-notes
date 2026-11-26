@@ -1,0 +1,667 @@
+{
+ "V1": {
+  "frames_total_K": 1432,
+  "frames_test_K": 585,
+  "train_share_pct": 59.1,
+  "train_vs_ID_28obj_share_pct": 70.1,
+  "heldout_object_frames_K": 224,
+  "frames_per_train_object_K": 43.1,
+  "frames_per_heldout_object_K_UMI_OOD": 8.0,
+  "class_pct_sum": 100.1,
+  "trivial_no_contact_share_pct": 57.6
+ },
+ "V2": {
+  "density_taxel_cm2": 155.3,
+  "array_area_cm2": 6.59,
+  "density_from_1024_over_area": 155.3,
+  "active_fraction_pct": 92.0,
+  "density_ratio_38p8_implies_prior_density_cm2": 4.0,
+  "density_ratio_6p2_implies_prior_density_cm2": 25.05,
+  "implied_pitch_mm_for_38p8": 5.0,
+  "implied_pitch_mm_for_6p2": 2.0,
+  "pressure_force_N_on_1cm2": 500.0,
+  "pressure_resolution_kPa": 1.221,
+  "element_fill_ratio_pct": 31.4
+ },
+ "V3": {
+  "frame_ms": 4.167,
+  "five_frames_ms": 20.83,
+  "five_frames_plus_2p3ms": 23.13,
+  "four_frames_ms_if_onset_frame_is_latency_1": 16.67,
+  "xl_samples_per_frame": 33.33,
+  "xl_window_samples_16ms": 128,
+  "xl_window_frames": 3.84,
+  "xl_window_overlap_with_prev_frame_pct": 74.0,
+  "window_T60_ms": 250.00000000000003,
+  "window_T120_ms": 500.00000000000006,
+  "window_T6_ms": 25.0,
+  "label_threshold_time_ms": {
+   "2 mm/s": 35.0,
+   "5 mm/s": 14.0,
+   "10 mm/s": 7.0,
+   "15 mm/s": 4.7,
+   "18 mm/s": 3.9
+  },
+  "label_threshold_time_frames": {
+   "2 mm/s": 8.4,
+   "5 mm/s": 3.36,
+   "10 mm/s": 1.68,
+   "15 mm/s": 1.12,
+   "18 mm/s": 0.93
+  },
+  "displacement_in_250ms_mm": {
+   "2 mm/s": 0.5,
+   "5 mm/s": 1.25,
+   "10 mm/s": 2.5,
+   "15 mm/s": 3.75,
+   "18 mm/s": 4.5
+  },
+  "time_for_one_taxel_ms_pitch_0.92": 460,
+  "time_for_one_taxel_ms_pitch_0.70": 350,
+  "max_lat_2mm_s_106fr_ms": 441.7,
+  "max_lat_2mm_s_106fr_extra_displacement_mm": 0.883,
+  "extra_displacement_at_median_3fr_2mm_s_mm": 0.025,
+  "extra_displacement_at_5fr_18mm_s_mm": 0.375,
+  "extra_displacement_at_21fr_5mm_s_mm": 0.438
+ },
+ "V4": {
+  "n_events": 167,
+  "pooled_mean_frames": 6.88,
+  "pooled_mean_ms": 28.7,
+  "pooled_mean_ms_plus_2p3": 31.0,
+  "fig7a_pct_sum": 100,
+  "fig7a_counts_if_n167": {
+   "1": 71.8,
+   "2-5": 55.1,
+   "6-21": 25.1,
+   ">21": 15.0
+  },
+  "k_for_76pct": 126.9,
+  "76pct_is_127_of_167": 76.05,
+  "43pct_is_72_of_167": 43.11,
+  "wilson_95_127of167": [
+   69.0,
+   81.9
+  ],
+  "wilson_95_72of167": [
+   35.8,
+   50.7
+  ],
+  "wilson_95_gt21_15of167": [
+   5.5,
+   14.3
+  ],
+  "latency_min_1": {
+   "per_speed_range_of_events_within_5fr": {
+    "2 mm/s": [
+     19,
+     32
+    ],
+    "5 mm/s": [
+     16,
+     28
+    ],
+    "10 mm/s": [
+     24,
+     36
+    ],
+    "15 mm/s": [
+     17,
+     29
+    ],
+    "18 mm/s": [
+     22,
+     30
+    ]
+   },
+   "pooled_range": [
+    98,
+    155
+   ],
+   "pooled_range_pct": [
+    58.7,
+    92.8
+   ],
+   "127_inside": true
+  },
+  "latency_min_0": {
+   "per_speed_range_of_events_within_5fr": {
+    "2 mm/s": [
+     18,
+     32
+    ],
+    "5 mm/s": [
+     16,
+     28
+    ],
+    "10 mm/s": [
+     20,
+     36
+    ],
+    "15 mm/s": [
+     17,
+     29
+    ],
+    "18 mm/s": [
+     19,
+     30
+    ]
+   },
+   "pooled_range": [
+    90,
+    155
+   ],
+   "pooled_range_pct": [
+    53.9,
+    92.8
+   ],
+   "127_inside": true
+  },
+  "18mm_s_over90pct_needs_at_least": "28/31"
+ },
+ "V5": {
+  "all_on_k_over_6_grid": true,
+  "off_grid": [],
+  "note": "3 시드 중앙값(정수 또는 .5)의 평균은 k/6 격자 위. 표 1·3·4·5 값은 모두 격자와 맞음"
+ },
+ "V6": {
+  "assumption": "시험 분할의 클래스 비율 = 전체 데이터 비율(접촉 없음 57.6, 슬립 없음 18.8, 슬립 23.7 %, 합 100.1을 정규화). 분할별 비율은 논문에 없음. FPR 정의 두 가지: neg = 슬립이 아닌 프레임 중 슬립으로 예측된 비율, all = 전체 프레임 중 슬립 아닌 것을 슬립으로 예측한 비율",
+  "rows": {
+   "T1 base Piezo ID": {
+    "neg": {
+     "feasible": true,
+     "residual": 1.29e-10,
+     "slip_recall_range": [
+      0.55,
+      0.732
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 1.03e-11,
+     "slip_recall_range": [
+      0.766,
+      1.0
+     ]
+    }
+   },
+   "T1 base XL ID": {
+    "neg": {
+     "feasible": true,
+     "residual": 1.84e-10,
+     "slip_recall_range": [
+      0.867,
+      0.947
+     ]
+    },
+    "all": {
+     "feasible": false,
+     "residual": 2.86
+    }
+   },
+   "T1 base AND ID": {
+    "neg": {
+     "feasible": true,
+     "residual": 1.57e-13,
+     "slip_recall_range": [
+      0.5,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 3.58e-13,
+     "slip_recall_range": [
+      0.592,
+      1.0
+     ]
+    }
+   },
+   "T1 SS Piezo ID": {
+    "neg": {
+     "feasible": true,
+     "residual": 2.32e-12,
+     "slip_recall_range": [
+      0.59,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 2.82e-14,
+     "slip_recall_range": [
+      0.665,
+      1.0
+     ]
+    }
+   },
+   "T1 SS XL ID": {
+    "neg": {
+     "feasible": true,
+     "residual": 7.38e-14,
+     "slip_recall_range": [
+      0.478,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 2.03e-12,
+     "slip_recall_range": [
+      0.458,
+      1.0
+     ]
+    }
+   },
+   "T1 SS fused ID": {
+    "neg": {
+     "feasible": true,
+     "residual": 1.86e-12,
+     "slip_recall_range": [
+      0.912,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 1.51e-12,
+     "slip_recall_range": [
+      0.924,
+      1.0
+     ]
+    }
+   },
+   "T1 base Piezo OOD": {
+    "neg": {
+     "feasible": true,
+     "residual": 3.98e-11,
+     "slip_recall_range": [
+      0.571,
+      0.798
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 6.55e-13,
+     "slip_recall_range": [
+      0.781,
+      1.0
+     ]
+    }
+   },
+   "T1 base XL OOD": {
+    "neg": {
+     "feasible": true,
+     "residual": 1.79e-11,
+     "slip_recall_range": [
+      0.9,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": false,
+     "residual": 2.65
+    }
+   },
+   "T1 base AND OOD": {
+    "neg": {
+     "feasible": true,
+     "residual": 1.85e-12,
+     "slip_recall_range": [
+      0.533,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 1.15e-12,
+     "slip_recall_range": [
+      0.604,
+      1.0
+     ]
+    }
+   },
+   "T1 SS Piezo OOD": {
+    "neg": {
+     "feasible": true,
+     "residual": 4.92e-14,
+     "slip_recall_range": [
+      0.555,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 7.05e-12,
+     "slip_recall_range": [
+      0.621,
+      1.0
+     ]
+    }
+   },
+   "T1 SS XL OOD": {
+    "neg": {
+     "feasible": true,
+     "residual": 5.79e-11,
+     "slip_recall_range": [
+      0.456,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 4.11e-13,
+     "slip_recall_range": [
+      0.488,
+      1.0
+     ]
+    }
+   },
+   "T1 SS fused OOD": {
+    "neg": {
+     "feasible": true,
+     "residual": 3.61e-12,
+     "slip_recall_range": [
+      0.878,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 2.27e-12,
+     "slip_recall_range": [
+      0.893,
+      1.0
+     ]
+    }
+   },
+   "T2 palm": {
+    "neg": {
+     "feasible": true,
+     "residual": 1.45e-10,
+     "slip_recall_range": [
+      0.842,
+      0.993
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 1.18e-12,
+     "slip_recall_range": [
+      0.861,
+      1.0
+     ]
+    }
+   },
+   "T2 Tesollo 2F": {
+    "neg": {
+     "feasible": true,
+     "residual": 1.07e-14,
+     "slip_recall_range": [
+      0.859,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 4.59e-13,
+     "slip_recall_range": [
+      0.87,
+      1.0
+     ]
+    }
+   },
+   "T2 Tesollo 3F": {
+    "neg": {
+     "feasible": true,
+     "residual": 3.16e-12,
+     "slip_recall_range": [
+      0.71,
+      1.0
+     ]
+    },
+    "all": {
+     "feasible": true,
+     "residual": 2.38e-14,
+     "slip_recall_range": [
+      0.741,
+      1.0
+     ]
+    }
+   }
+  },
+  "fpr_all_frames_reading_needs_FPR_le_100_minus_Acc": {
+   "T1 base Piezo ID": {
+    "fpr": 21.69,
+    "100_minus_acc": 27.13,
+    "holds": true
+   },
+   "T1 base XL ID": {
+    "fpr": 22.98,
+    "100_minus_acc": 20.59,
+    "holds": false
+   },
+   "T1 base AND ID": {
+    "fpr": 9.28,
+    "100_minus_acc": 18.84,
+    "holds": true
+   },
+   "T1 SS Piezo ID": {
+    "fpr": 7.54,
+    "100_minus_acc": 15.37,
+    "holds": true
+   },
+   "T1 SS XL ID": {
+    "fpr": 2.14,
+    "100_minus_acc": 15.79,
+    "holds": true
+   },
+   "T1 SS fused ID": {
+    "fpr": 1.33,
+    "100_minus_acc": 3.02,
+    "holds": true
+   },
+   "T1 base Piezo OOD": {
+    "fpr": 21.08,
+    "100_minus_acc": 26.16,
+    "holds": true
+   },
+   "T1 base XL OOD": {
+    "fpr": 19.31,
+    "100_minus_acc": 17.01,
+    "holds": false
+   },
+   "T1 base AND OOD": {
+    "fpr": 7.4,
+    "100_minus_acc": 16.67,
+    "holds": true
+   },
+   "T1 SS Piezo OOD": {
+    "fpr": 8.43,
+    "100_minus_acc": 17.31,
+    "holds": true
+   },
+   "T1 SS XL OOD": {
+    "fpr": 3.24,
+    "100_minus_acc": 15.26,
+    "holds": true
+   },
+   "T1 SS fused OOD": {
+    "fpr": 1.57,
+    "100_minus_acc": 4.01,
+    "holds": true
+   },
+   "T2 palm": {
+    "fpr": 1.99,
+    "100_minus_acc": 5.17,
+    "holds": true
+   },
+   "T2 Tesollo 2F": {
+    "fpr": 1.14,
+    "100_minus_acc": 4.11,
+    "holds": true
+   },
+   "T2 Tesollo 3F": {
+    "fpr": 3.12,
+    "100_minus_acc": 9.15,
+    "holds": true
+   }
+  },
+  "fpr_all_frames_reading_violations": [
+   "T1 base XL ID",
+   "T1 base XL OOD"
+  ]
+ },
+ "V7": {
+  "definition": "프레임마다 독립으로 확률 p로 슬립을 내는 검출기(정보 없음)의 첫 검출 지연 중앙값(프레임) = ceil(ln 0.5 / ln(1-p)); 사건 시작 직전 상태 영향과 시간 상관은 무시",
+  "rows": {
+   "T1 base Piezo ID": {
+    "fpr_pct": 21.69,
+    "chance_median_frames": 3
+   },
+   "T1 base XL ID": {
+    "fpr_pct": 22.98,
+    "chance_median_frames": 3
+   },
+   "T1 base AND ID": {
+    "fpr_pct": 9.28,
+    "chance_median_frames": 8
+   },
+   "T1 SS Piezo ID": {
+    "fpr_pct": 7.54,
+    "chance_median_frames": 9
+   },
+   "T1 SS XL ID": {
+    "fpr_pct": 2.14,
+    "chance_median_frames": 33
+   },
+   "T1 SS fused ID": {
+    "fpr_pct": 1.33,
+    "chance_median_frames": 52
+   },
+   "T1 base Piezo OOD": {
+    "fpr_pct": 21.08,
+    "chance_median_frames": 3
+   },
+   "T1 base XL OOD": {
+    "fpr_pct": 19.31,
+    "chance_median_frames": 4
+   },
+   "T1 base AND OOD": {
+    "fpr_pct": 7.4,
+    "chance_median_frames": 10
+   },
+   "T1 SS Piezo OOD": {
+    "fpr_pct": 8.43,
+    "chance_median_frames": 8
+   },
+   "T1 SS XL OOD": {
+    "fpr_pct": 3.24,
+    "chance_median_frames": 22
+   },
+   "T1 SS fused OOD": {
+    "fpr_pct": 1.57,
+    "chance_median_frames": 44
+   },
+   "T2 palm": {
+    "fpr_pct": 1.99,
+    "chance_median_frames": 35
+   },
+   "T2 Tesollo 2F": {
+    "fpr_pct": 1.14,
+    "chance_median_frames": 61
+   },
+   "T2 Tesollo 3F": {
+    "fpr_pct": 3.12,
+    "chance_median_frames": 22
+   }
+  }
+ },
+ "V8": {
+  "detect_100_of_100": {
+   "wilson95_pct": [
+    96.3,
+    100.0
+   ],
+   "clopper_pearson95_pct": [
+    96.4,
+    100.0
+   ]
+  },
+  "prevent_95_of_100": {
+   "wilson95_pct": [
+    88.8,
+    97.8
+   ],
+   "clopper_pearson95_pct": [
+    88.7,
+    98.4
+   ]
+  },
+  "failures_5_of_100": {
+   "wilson95_pct": [
+    2.2,
+    11.2
+   ],
+   "clopper_pearson95_pct": [
+    1.6,
+    11.3
+   ]
+  },
+  "rule_of_three_upper_miss_rate_pct": 3.0,
+  "frame_fpr_per_second": {
+   "T1 SS fused ID": {
+    "fp_frames_per_s_if_FPR_is_per_nonslip_frame": 3.19,
+    "prob_zero_fp_frames_in_2s_if_independent": 0.00162
+   },
+   "T1 SS fused OOD": {
+    "fp_frames_per_s_if_FPR_is_per_nonslip_frame": 3.77,
+    "prob_zero_fp_frames_in_2s_if_independent": 0.000503
+   },
+   "T2 Tesollo 2F": {
+    "fp_frames_per_s_if_FPR_is_per_nonslip_frame": 2.74,
+    "prob_zero_fp_frames_in_2s_if_independent": 0.00407
+   },
+   "T2 palm": {
+    "fp_frames_per_s_if_FPR_is_per_nonslip_frame": 4.78,
+    "prob_zero_fp_frames_in_2s_if_independent": 6.45e-05
+   },
+   "T2 Tesollo 3F": {
+    "fp_frames_per_s_if_FPR_is_per_nonslip_frame": 7.49,
+    "prob_zero_fp_frames_in_2s_if_independent": 2.47e-07
+   }
+  },
+  "note": "독립 가정은 비현실적(오류는 시간적으로 군집). 실로봇 '오탐 없음' 관찰은 군집 또는 제어기 쪽 필터를 시사하는 가능성이며, 정의는 논문에 없음"
+ },
+ "V9": {
+  "identical_rows": [
+   "T1 fused OOD == T3 CNN+SSAST == T4 SlipSense == T5 cross-attn (lat, FPR, acc, F1)",
+   "T2 Tesollo2F == T4 SlipSense == T5 cross-attn"
+  ],
+  "all_match_as_printed": true,
+  "text_vs_table": {
+   "MLP median latency": {
+    "text_appendix_D": 29,
+    "table3": 30.0
+   },
+   "abstract_macroF1": {
+    "abstract": 96.7,
+    "table1_ID": 96.77,
+    "rounded_2sig": 96.8
+   }
+  },
+  "fusion_gain_pp": {
+   "ID_vs_best_single": 13.23,
+   "OOD_vs_best_single": 13.84
+  },
+  "ID_to_OOD_drop_pp": {
+   "F1": 1.02,
+   "acc": 0.99
+  },
+  "table5_gap_pp_F1_vs_concat": {
+   "OOD": 0.47,
+   "T2F": 1.32
+  },
+  "table3_F1_CNN_minus_ViTfreeze_pp": 0.24
+ }
+}

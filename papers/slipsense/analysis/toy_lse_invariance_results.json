@@ -1,0 +1,21 @@
+{
+ "T1_single_source": {
+  "max_abs_dev_of_LSE_across_200_directions": 2.22e-15,
+  "std_across_directions_of_x_axis_logmel_ln_mean_over_frames_bins": 1.696,
+  "note": "축별 log-mel은 방향에 따라 변하고(ln 단위 표준편차), 합치면 편차는 반올림 수준"
+ },
+ "T2_two_sources_rotate_one": {
+  "max_abs_dev_ln": 1.521,
+  "note": "두 원천이 독립이면 파워 합의 교차항 기대값은 0이지만 짧은 창(16 ms)의 표본 교차항이 남아 편차가 생김"
+ },
+ "T3_rigid_rotation_two_sources": {
+  "max_abs_dev_ln": 1.78e-15,
+  "note": "축별 파워의 합 = 3-벡터 노름의 제곱이라 직교 회전에 불변. 단일 원천 가정(가정 4)이 없어도 성립"
+ },
+ "T4_window": {
+  "win_samples": 128,
+  "hop_samples": 33.333333333333336,
+  "overlap_pct_between_consecutive_frames": 74.0,
+  "frames_spanned_by_one_window": 3.84
+ }
+}
