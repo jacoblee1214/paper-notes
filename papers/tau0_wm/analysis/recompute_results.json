@@ -1,0 +1,850 @@
+{
+ "V1_data_mix": {
+  "sum_hours": 27.3,
+  "claimed": 27.3,
+  "share_pct": {
+   "robot": 65.2,
+   "umi": 23.8,
+   "ego": 11.0
+  },
+  "fig1_labels_pct": {
+   "robot": 65,
+   "umi": 24,
+   "ego": 11
+  },
+  "labels_sum": 100
+ },
+ "V2_fig4_means": {
+  "Fast-WAM": {
+   "sr_mean": 0.2,
+   "sr_rounded": 0.2,
+   "sr_label": 0.2,
+   "sr_match": true,
+   "prog_mean": 0.4,
+   "prog_rounded": 0.4,
+   "prog_label": 0.4,
+   "prog_match": true
+  },
+  "pi0.5": {
+   "sr_mean": 0.4375,
+   "sr_rounded": 0.44,
+   "sr_label": 0.44,
+   "sr_match": true,
+   "prog_mean": 0.6025,
+   "prog_rounded": 0.6,
+   "prog_label": 0.6,
+   "prog_match": true
+  },
+  "tau0-WM": {
+   "sr_mean": 0.6375,
+   "sr_rounded": 0.64,
+   "sr_label": 0.64,
+   "sr_match": true,
+   "prog_mean": 0.7225,
+   "prog_rounded": 0.72,
+   "prog_label": 0.72,
+   "prog_match": true
+  }
+ },
+ "V3_table_means_and_integrality": {
+  "table1": {
+   "zs/Robot": {
+    "mean_of_two": 0.14,
+    "rounded": 0.14,
+    "label": 0.14,
+    "match": true
+   },
+   "zs/Robot+UMI+Ego": {
+    "mean_of_two": 0.545,
+    "rounded": 0.55,
+    "label": 0.55,
+    "match": true
+   },
+   "sft/Robot": {
+    "mean_of_two": 0.7,
+    "rounded": 0.7,
+    "label": 0.7,
+    "match": true
+   },
+   "sft/Robot+UMI+Ego": {
+    "mean_of_two": 0.825,
+    "rounded": 0.83,
+    "label": 0.83,
+    "match": true
+   }
+  },
+  "table2": {
+   "w/o TTC": {
+    "mean_of_two": 0.42500000000000004,
+    "rounded": 0.43,
+    "label": 0.43,
+    "match": true,
+    "tie_at_half": true
+   },
+   "w. CFG": {
+    "mean_of_two": 0.2,
+    "rounded": 0.2,
+    "label": 0.2,
+    "match": true,
+    "tie_at_half": false
+   },
+   "w. ACG": {
+    "mean_of_two": 0.375,
+    "rounded": 0.38,
+    "label": 0.38,
+    "match": true,
+    "tie_at_half": true
+   },
+   "w. RCS": {
+    "mean_of_two": 0.5,
+    "rounded": 0.5,
+    "label": 0.5,
+    "match": true,
+    "tie_at_half": false
+   },
+   "w. RCS+LAR": {
+    "mean_of_two": 0.6,
+    "rounded": 0.6,
+    "label": 0.6,
+    "match": true,
+    "tie_at_half": false
+   }
+  },
+  "n_feasible": {
+   "table1_zero_shot_cells(.22,.06,.56,.53)": [
+    32,
+    36,
+    64,
+    68,
+    72,
+    77,
+    78,
+    79
+   ],
+   "table1_sft_cells(.85,.55,.90,.75)": [
+    20,
+    40,
+    60,
+    67,
+    71,
+    73,
+    80,
+    84
+   ],
+   "table2_cells": [
+    20,
+    40,
+    60,
+    80,
+    84,
+    88,
+    92,
+    96
+   ],
+   "fig4_sr_cells": [
+    20,
+    40,
+    60,
+    80,
+    84,
+    87,
+    88,
+    91
+   ]
+  },
+  "zero_shot_n32_pooled": {
+   "Robot": 0.140625,
+   "Robot+UMI+Ego": 0.546875
+  }
+ },
+ "V4_progress_vs_sr": {
+  "cells": [
+   {
+    "method": "Fast-WAM",
+    "task": "Toolbox",
+    "sr": 0.2,
+    "progress": 0.35,
+    "progress_ge_sr": true
+   },
+   {
+    "method": "Fast-WAM",
+    "task": "School Bag",
+    "sr": 0.3,
+    "progress": 0.4,
+    "progress_ge_sr": true
+   },
+   {
+    "method": "Fast-WAM",
+    "task": "Badminton",
+    "sr": 0.25,
+    "progress": 0.55,
+    "progress_ge_sr": true
+   },
+   {
+    "method": "Fast-WAM",
+    "task": "Faucet",
+    "sr": 0.05,
+    "progress": 0.3,
+    "progress_ge_sr": true
+   },
+   {
+    "method": "pi0.5",
+    "task": "Toolbox",
+    "sr": 0.6,
+    "progress": 0.65,
+    "progress_ge_sr": true
+   },
+   {
+    "method": "pi0.5",
+    "task": "School Bag",
+    "sr": 0.6,
+    "progress": 0.58,
+    "progress_ge_sr": false
+   },
+   {
+    "method": "pi0.5",
+    "task": "Badminton",
+    "sr": 0.4,
+    "progress": 0.73,
+    "progress_ge_sr": true
+   },
+   {
+    "method": "pi0.5",
+    "task": "Faucet",
+    "sr": 0.15,
+    "progress": 0.45,
+    "progress_ge_sr": true
+   },
+   {
+    "method": "tau0-WM",
+    "task": "Toolbox",
+    "sr": 0.55,
+    "progress": 0.63,
+    "progress_ge_sr": true
+   },
+   {
+    "method": "tau0-WM",
+    "task": "School Bag",
+    "sr": 0.8,
+    "progress": 0.73,
+    "progress_ge_sr": false
+   },
+   {
+    "method": "tau0-WM",
+    "task": "Badminton",
+    "sr": 0.8,
+    "progress": 0.93,
+    "progress_ge_sr": true
+   },
+   {
+    "method": "tau0-WM",
+    "task": "Faucet",
+    "sr": 0.4,
+    "progress": 0.6,
+    "progress_ge_sr": true
+   }
+  ],
+  "violations": [
+   {
+    "method": "pi0.5",
+    "task": "School Bag",
+    "sr": 0.6,
+    "progress": 0.58,
+    "progress_ge_sr": false
+   },
+   {
+    "method": "tau0-WM",
+    "task": "School Bag",
+    "sr": 0.8,
+    "progress": 0.73,
+    "progress_ge_sr": false
+   }
+  ]
+ },
+ "V4b_progress_grid": {
+  "Fast-WAM": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "pi0.5": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "tau0-WM": [
+   true,
+   true,
+   true,
+   true
+  ]
+ },
+ "V4b_progress_values_x80": {
+  "Fast-WAM": [
+   28.0,
+   32.0,
+   44.0,
+   24.0
+  ],
+  "pi0.5": [
+   52.0,
+   46.4,
+   58.4,
+   36.0
+  ],
+  "tau0-WM": [
+   50.4,
+   58.4,
+   74.4,
+   48.0
+  ]
+ },
+ "V5_fig4_tests": {
+  "assumed_n": 20,
+  "counts": {
+   "Fast-WAM": [
+    4,
+    6,
+    5,
+    1
+   ],
+   "pi0.5": [
+    12,
+    12,
+    8,
+    3
+   ],
+   "tau0-WM": [
+    11,
+    16,
+    16,
+    8
+   ]
+  },
+  "wilson": {
+   "Fast-WAM": [
+    [
+     0.081,
+     0.416
+    ],
+    [
+     0.145,
+     0.519
+    ],
+    [
+     0.112,
+     0.469
+    ],
+    [
+     0.009,
+     0.236
+    ]
+   ],
+   "pi0.5": [
+    [
+     0.387,
+     0.781
+    ],
+    [
+     0.387,
+     0.781
+    ],
+    [
+     0.219,
+     0.613
+    ],
+    [
+     0.052,
+     0.36
+    ]
+   ],
+   "tau0-WM": [
+    [
+     0.342,
+     0.742
+    ],
+    [
+     0.584,
+     0.919
+    ],
+    [
+     0.584,
+     0.919
+    ],
+    [
+     0.219,
+     0.613
+    ]
+   ]
+  },
+  "pairs": {
+   "tau0-WM vs pi0.5": {
+    "per_task": [
+     {
+      "task": "Toolbox",
+      "k": [
+       11,
+       12
+      ],
+      "p_fisher": 1.0
+     },
+     {
+      "task": "School Bag",
+      "k": [
+       16,
+       12
+      ],
+      "p_fisher": 0.3008
+     },
+     {
+      "task": "Badminton",
+      "k": [
+       16,
+       8
+      ],
+      "p_fisher": 0.0225
+     },
+     {
+      "task": "Faucet",
+      "k": [
+       8,
+       3
+      ],
+      "p_fisher": 0.1552
+     }
+    ],
+    "pooled_k": [
+     51,
+     35
+    ],
+    "pooled_n": 80,
+    "pooled_p_fisher": 0.01711,
+    "n_task_p_lt_0.05": 1,
+    "holm_adjusted_sorted": [
+     0.09,
+     0.4656,
+     0.6016,
+     1.0
+    ]
+   },
+   "tau0-WM vs Fast-WAM": {
+    "per_task": [
+     {
+      "task": "Toolbox",
+      "k": [
+       11,
+       4
+      ],
+      "p_fisher": 0.0484
+     },
+     {
+      "task": "School Bag",
+      "k": [
+       16,
+       6
+      ],
+      "p_fisher": 0.0036
+     },
+     {
+      "task": "Badminton",
+      "k": [
+       16,
+       5
+      ],
+      "p_fisher": 0.0012
+     },
+     {
+      "task": "Faucet",
+      "k": [
+       8,
+       1
+      ],
+      "p_fisher": 0.0197
+     }
+    ],
+    "pooled_k": [
+     51,
+     16
+    ],
+    "pooled_n": 80,
+    "pooled_p_fisher": 0.0,
+    "n_task_p_lt_0.05": 4,
+    "holm_adjusted_sorted": [
+     0.0048,
+     0.0108,
+     0.0394,
+     0.0484
+    ]
+   },
+   "pi0.5 vs Fast-WAM": {
+    "per_task": [
+     {
+      "task": "Toolbox",
+      "k": [
+       12,
+       4
+      ],
+      "p_fisher": 0.0225
+     },
+     {
+      "task": "School Bag",
+      "k": [
+       12,
+       6
+      ],
+      "p_fisher": 0.111
+     },
+     {
+      "task": "Badminton",
+      "k": [
+       8,
+       5
+      ],
+      "p_fisher": 0.5006
+     },
+     {
+      "task": "Faucet",
+      "k": [
+       3,
+       1
+      ],
+      "p_fisher": 0.605
+     }
+    ],
+    "pooled_k": [
+     35,
+     16
+    ],
+    "pooled_n": 80,
+    "pooled_p_fisher": 0.0021,
+    "n_task_p_lt_0.05": 1,
+    "holm_adjusted_sorted": [
+     0.09,
+     0.333,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  "tau0_wins_by_sr": 3,
+  "tau0_wins_by_progress": 3,
+  "pooled_wilson": {
+   "Fast-WAM": [
+    0.127,
+    0.3
+   ],
+   "pi0.5": [
+    0.334,
+    0.547
+   ],
+   "tau0-WM": [
+    0.528,
+    0.734
+   ]
+  },
+  "sr_gain_tau0_minus_pi05_pp": 20.0,
+  "relative_gain_tau0_over_pi05": 0.457
+ },
+ "V6_table1_tests": {
+  "zs": {
+   "assumed_n": 32,
+   "robot_k": [
+    7,
+    2
+   ],
+   "full_k": [
+    18,
+    17
+   ],
+   "p_clean": 0.00973,
+   "p_clut": 7e-05,
+   "pooled": [
+    35,
+    64,
+    9,
+    64
+   ],
+   "p_pooled": 2e-06,
+   "wilson_robot": [
+    [
+     0.11,
+     0.388
+    ],
+    [
+     0.017,
+     0.201
+    ]
+   ],
+   "wilson_full": [
+    [
+     0.393,
+     0.718
+    ],
+    [
+     0.364,
+     0.691
+    ]
+   ]
+  },
+  "sft": {
+   "assumed_n": 20,
+   "robot_k": [
+    17,
+    11
+   ],
+   "full_k": [
+    18,
+    15
+   ],
+   "p_clean": 1.0,
+   "p_clut": 0.32027,
+   "pooled": [
+    33,
+    40,
+    28,
+    40
+   ],
+   "p_pooled": 0.293306,
+   "wilson_robot": [
+    [
+     0.64,
+     0.948
+    ],
+    [
+     0.342,
+     0.742
+    ]
+   ],
+   "wilson_full": [
+    [
+     0.699,
+     0.972
+    ],
+    [
+     0.531,
+     0.888
+    ]
+   ]
+  },
+  "zs_ratio": 3.93,
+  "zs_alt_n100": {
+   "p_clean": 1.3e-06,
+   "p_clut": 0.0
+  }
+ },
+ "V7_table2_tests": {
+  "assumed_n": 20,
+  "counts": {
+   "w/o TTC": [
+    11,
+    6
+   ],
+   "w. CFG": [
+    5,
+    3
+   ],
+   "w. ACG": [
+    8,
+    7
+   ],
+   "w. RCS": [
+    13,
+    7
+   ],
+   "w. RCS+LAR": [
+    14,
+    10
+   ]
+  },
+  "pairs": {
+   "w. RCS vs w/o TTC": {
+    "k": [
+     20,
+     17
+    ],
+    "per_task_p": [
+     0.7475,
+     1.0
+    ],
+    "pooled_p": 0.6541
+   },
+   "w. RCS+LAR vs w. RCS": {
+    "k": [
+     24,
+     20
+    ],
+    "per_task_p": [
+     1.0,
+     0.5231
+    ],
+    "pooled_p": 0.5005
+   },
+   "w. RCS+LAR vs w/o TTC": {
+    "k": [
+     24,
+     17
+    ],
+    "per_task_p": [
+     0.5145,
+     0.3332
+    ],
+    "pooled_p": 0.1793
+   },
+   "w. RCS+LAR vs w. ACG": {
+    "k": [
+     24,
+     15
+    ],
+    "per_task_p": [
+     0.111,
+     0.5231
+    ],
+    "pooled_p": 0.0729
+   },
+   "w. RCS+LAR vs w. CFG": {
+    "k": [
+     24,
+     8
+    ],
+    "per_task_p": [
+     0.0104,
+     0.0407
+    ],
+    "pooled_p": 0.0005
+   },
+   "w. CFG vs w/o TTC": {
+    "k": [
+     8,
+     17
+    ],
+    "per_task_p": [
+     0.1053,
+     0.4506
+    ],
+    "pooled_p": 0.0525
+   },
+   "w. ACG vs w/o TTC": {
+    "k": [
+     15,
+     17
+    ],
+    "per_task_p": [
+     0.5273,
+     1.0
+    ],
+    "pooled_p": 0.8197
+   }
+  },
+  "wilson": {
+   "w/o TTC": [
+    [
+     0.342,
+     0.742
+    ],
+    [
+     0.145,
+     0.519
+    ]
+   ],
+   "w. CFG": [
+    [
+     0.112,
+     0.469
+    ],
+    [
+     0.052,
+     0.36
+    ]
+   ],
+   "w. ACG": [
+    [
+     0.219,
+     0.613
+    ],
+    [
+     0.181,
+     0.567
+    ]
+   ],
+   "w. RCS": [
+    [
+     0.433,
+     0.819
+    ],
+    [
+     0.181,
+     0.567
+    ]
+   ],
+   "w. RCS+LAR": [
+    [
+     0.481,
+     0.855
+    ],
+    [
+     0.299,
+     0.701
+    ]
+   ]
+  },
+  "oracle_best_of_4_if_iid": {
+   "p_single": 0.425,
+   "upper_bound": 0.891,
+   "per_task": [
+    0.959,
+    0.76
+   ]
+  },
+  "gain_pp_vs_wo_TTC": {
+   "w/o TTC": 0.0,
+   "w. CFG": -22.5,
+   "w. ACG": -5.0,
+   "w. RCS": 7.5,
+   "w. RCS+LAR": 17.5
+  },
+  "min_detectable_pp_n20": {
+   "0": 25,
+   "1": 30,
+   "2": 35,
+   "3": 35,
+   "4": 35,
+   "5": 40,
+   "6": 40,
+   "7": 40,
+   "8": 40,
+   "9": 35,
+   "10": 35,
+   "11": 35,
+   "12": 35,
+   "13": 30,
+   "14": 30,
+   "15": 25
+  }
+ },
+ "V8_latency": {
+  "standard_ms": 220,
+  "text_cache_ms": 180,
+  "compile_ms": 140,
+  "cache_saving_pct": 18.2,
+  "compile_saving_pct": 22.2,
+  "total_saving_pct": 36.4,
+  "chunk_executed": 30,
+  "queries_per_s_at_180ms": 5.56,
+  "queries_per_s_at_140ms": 7.14
+ },
+ "V9_compute_arith": {
+  "latent_frames": 3,
+  "video_tokens_per_forward": 288,
+  "video_fwd_tflop_est": 2.88,
+  "sim_tokens_with_memory": 576,
+  "acvs_all_candidates_tflop_est": 115.2,
+  "acvs_over_vam_ratio": 40.0,
+  "note": "2*파라미터*토큰 근사. 어텐션 항, VAE, 텍스트 인코더, 행동·보상 가지 제외. 설정값은 공개 코드 yaml과 기본 인자 기준이고 논문에는 해상도가 없음"
+ },
+ "V10_rcs_gain_se": {
+  "diff_pp": 7.5,
+  "se_pp_n40_pooled": 11.2
+ }
+}
