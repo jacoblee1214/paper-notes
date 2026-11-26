@@ -1,0 +1,606 @@
+{
+ "example_l4_2s_composition_benchmark": {
+  "family": "l4_2s",
+  "instruction": "full",
+  "seeds": [
+   0
+  ],
+  "sets": [
+   "pairwise_min",
+   "pairwise_cover",
+   "threewise_cover",
+   "random_coverage_B16_s0"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 3600,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "example_l4_2s_full": {
+  "family": "l4_2s",
+  "instruction": "full",
+  "seeds": [
+   0
+  ],
+  "sets": [
+   "s0_full__s1_full",
+   "s0_L_cor__s1_S"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 3600,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "example_l4_2s_open_cont": {
+  "family": "l4_2s",
+  "instruction": "open_cont",
+  "seeds": [
+   0
+  ],
+  "sets": [
+   "s0_full__s1_full",
+   "s0_L_cor__s1_S"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 3600,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "example_l4_design_mask_sweep": {
+  "family": "l4",
+  "instruction": "full",
+  "seeds": [
+   11,
+   22,
+   33
+  ],
+  "sets": [
+   "diag",
+   "diag_cor",
+   "S",
+   "L_cor",
+   "rand_cov_B6_s0"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 2000,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": false,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 6,
+  "matrix": {
+   "policy.fusion.mask": [
+    "none",
+    "query"
+   ]
+  },
+  "finetune": false
+ },
+ "example_l4_image_improved_mean_flow": {
+  "family": "l4",
+  "instruction": "full",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 2000,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": false,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 6,
+  "matrix": {},
+  "finetune": false
+ },
+ "example_l4_state_improved_mean_flow": {
+  "family": "l4",
+  "instruction": "full",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 2000,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": false,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 6,
+  "matrix": {},
+  "finetune": false
+ },
+ "example_l5_designs": {
+  "family": "l5",
+  "instruction": "full",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "diag_B4",
+   "final_B10",
+   "final_B12",
+   "logopt_B10",
+   "orthogonal"
+  ],
+  "max_updates": 100000,
+  "batch_size": 64,
+  "max_demos": 1800,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "l4_container_latents": {
+  "family": "l4",
+  "instruction": "container_latents",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 2000,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": false,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 6,
+  "matrix": {
+   "training.max_updates": [
+    50000,
+    100000
+   ]
+  },
+  "finetune": false
+ },
+ "l4_container_only": {
+  "family": "l4",
+  "instruction": "container_only",
+  "seeds": [
+   11,
+   22,
+   33
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 2000,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": false,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 6,
+  "matrix": {},
+  "finetune": false
+ },
+ "l4_full": {
+  "family": "l4",
+  "instruction": "full",
+  "seeds": [
+   11,
+   22,
+   33
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 2000,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": false,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 6,
+  "matrix": {},
+  "finetune": false
+ },
+ "l4_infer_cont0_cov9_B16": {
+  "family": "l4_2s",
+  "instruction": "infer_cont0",
+  "seeds": [
+   0
+  ],
+  "sets": [
+   "obj0_cont1_cov9_B16"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 3600,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "l4_infer_cont0_full": {
+  "family": "l4_2s",
+  "instruction": "infer_cont0",
+  "seeds": [
+   3,
+   4
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 3600,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "l4_infer_cont0_orthogonal": {
+  "family": "l4_2s",
+  "instruction": "infer_cont0",
+  "seeds": [
+   3,
+   4
+  ],
+  "sets": [
+   "orthogonal"
+  ],
+  "max_updates": 150000,
+  "batch_size": 64,
+  "max_demos": 3600,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "l4_object_only": {
+  "family": "l4",
+  "instruction": "object_only",
+  "seeds": [
+   11,
+   22,
+   33
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 2000,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": false,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 6,
+  "matrix": {},
+  "finetune": false
+ },
+ "l5_demo_budgets": {
+  "family": "l5",
+  "instruction": "full",
+  "seeds": [
+   44,
+   55
+  ],
+  "sets": [
+   "full",
+   "orthogonal"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 64,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {
+   "dataset.selection.max_demos": [
+    64,
+    128,
+    256,
+    512,
+    1024
+   ]
+  },
+  "finetune": false
+ },
+ "l5_finetune_full": {
+  "family": "l5",
+  "instruction": "full",
+  "seeds": [
+   11,
+   22,
+   33
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 5000,
+  "batch_size": 64,
+  "max_demos": 64,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {
+   "dataset.selection.max_demos": [
+    64,
+    128
+   ]
+  },
+  "finetune": true
+ },
+ "l5_finetune_random_B16": {
+  "family": "l5",
+  "instruction": "full",
+  "seeds": [
+   11,
+   22,
+   33
+  ],
+  "sets": [
+   "random_coverage_s0_B16",
+   "random_coverage_s1_B16",
+   "random_coverage_s2_B16",
+   "random_coverage_s3_B16",
+   "random_coverage_s4_B16"
+  ],
+  "max_updates": 5000,
+  "batch_size": 64,
+  "max_demos": 16,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": true
+ },
+ "l5_finetune_random_B32": {
+  "family": "l5",
+  "instruction": "full",
+  "seeds": [
+   11,
+   22,
+   33
+  ],
+  "sets": [
+   "random_coverage_s0_B32",
+   "random_coverage_s1_B32",
+   "random_coverage_s2_B32",
+   "random_coverage_s3_B32",
+   "random_coverage_s4_B32"
+  ],
+  "max_updates": 5000,
+  "batch_size": 64,
+  "max_demos": 32,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": true
+ },
+ "l5_orthogonal_smoke_30updates": {
+  "family": "l5",
+  "instruction": "full",
+  "seeds": [
+   11,
+   22,
+   33
+  ],
+  "sets": [
+   "orthogonal"
+  ],
+  "max_updates": 30,
+  "batch_size": 64,
+  "max_demos": 1800,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "l5_pretrain_diag_B4": {
+  "family": "l5",
+  "instruction": "full",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "diag_B4"
+  ],
+  "max_updates": 100000,
+  "batch_size": 64,
+  "max_demos": 1800,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "l5_pretrain_final_B10": {
+  "family": "l5",
+  "instruction": "full",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "final_B10"
+  ],
+  "max_updates": 100000,
+  "batch_size": 64,
+  "max_demos": 1800,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "pilot_l4_2s_active_imf": {
+  "family": "l4_2s",
+  "instruction": "infer_cont0",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "orthogonal"
+  ],
+  "max_updates": 1000,
+  "batch_size": 64,
+  "max_demos": 256,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 1,
+  "horizon": 400,
+  "head_layers": 6,
+  "matrix": {},
+  "finetune": false
+ },
+ "pilot_l5_active_imf": {
+  "family": "l5",
+  "instruction": "full",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "diag_B4"
+  ],
+  "max_updates": 1000,
+  "batch_size": 64,
+  "max_demos": 256,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 1,
+  "horizon": 400,
+  "head_layers": 6,
+  "matrix": {},
+  "finetune": false
+ },
+ "release_2s_full_100k": {
+  "family": "l4_2s",
+  "instruction": "full",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 100000,
+  "batch_size": 64,
+  "max_demos": 3600,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 800,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "release_2s_pp_100k": {
+  "family": "l4_2s",
+  "instruction": "infer_cont0",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 100000,
+  "batch_size": 64,
+  "max_demos": 3600,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 800,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ },
+ "release_pp_50k": {
+  "family": "l4",
+  "instruction": "full",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 2000,
+  "max_demos_per_task": null,
+  "balance_demos_across_tasks": false,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 6,
+  "matrix": {},
+  "finetune": false
+ },
+ "release_ppp_50k": {
+  "family": "l5",
+  "instruction": "full",
+  "seeds": [
+   11
+  ],
+  "sets": [
+   "full"
+  ],
+  "max_updates": 50000,
+  "batch_size": 64,
+  "max_demos": 6400,
+  "max_demos_per_task": 100,
+  "balance_demos_across_tasks": true,
+  "n_trials_per_task": 25,
+  "horizon": 400,
+  "head_layers": 8,
+  "matrix": {},
+  "finetune": false
+ }
+}
