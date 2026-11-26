@@ -1,0 +1,116 @@
+{
+ "S_selection": {
+  "bias_curve": {
+   "0.3": {
+    "expected_max_rate": 0.422,
+    "bias": 0.122
+   },
+   "0.4": {
+    "expected_max_rate": 0.53,
+    "bias": 0.13
+   },
+   "0.5": {
+    "expected_max_rate": 0.632,
+    "bias": 0.132
+   },
+   "0.6": {
+    "expected_max_rate": 0.728,
+    "bias": 0.128
+   },
+   "0.7": {
+    "expected_max_rate": 0.819,
+    "bias": 0.119
+   },
+   "0.8": {
+    "expected_max_rate": 0.901,
+    "bias": 0.101
+   },
+   "0.9": {
+    "expected_max_rate": 0.97,
+    "bias": 0.07
+   }
+  },
+  "tasks": {
+   "tomato": {
+    "rounds": [
+     6,
+     6,
+     7
+    ],
+    "pooled_p": 0.633,
+    "expected_max_rate_if_equal_rounds": 0.759,
+    "p_best_of_3_ge_observed_max": 0.85,
+    "observed_spread": 1,
+    "p_spread_ge_observed_if_equal_rounds": 0.9616,
+    "trend_z": 0.464,
+    "trend_p": 0.6426
+   },
+   "marker": {
+    "rounds": [
+     7,
+     6,
+     9
+    ],
+    "pooled_p": 0.733,
+    "expected_max_rate_if_equal_rounds": 0.847,
+    "p_best_of_3_ge_observed_max": 0.504,
+    "observed_spread": 3,
+    "p_spread_ge_observed_if_equal_rounds": 0.4071,
+    "trend_z": 1.011,
+    "trend_p": 0.3119
+   },
+   "wine": {
+    "rounds": [
+     0,
+     0,
+     9
+    ],
+    "pooled_p": 0.3,
+    "expected_max_rate_if_equal_rounds": 0.422,
+    "p_best_of_3_ge_observed_max": 0.0,
+    "observed_spread": 9,
+    "p_spread_ge_observed_if_equal_rounds": 0.0,
+    "trend_z": 4.392,
+    "trend_p": 0.0
+   }
+  }
+ },
+ "F_code_constants": {
+  "F1_plate_differential": {
+   "carry_differential_gain": 0.03,
+   "height_clamp_activates_when_raw_height_diff_exceeds_m": 0.2667,
+   "separation_clamp_activates_when_raw_xy_change_exceeds_m": 0.6667,
+   "note": "half_delta = gain * (raw_half_sep - init_half_sep); 클램프는 half_delta 에 걸린다. 조작자 입력의 좌우 높이 차 d 는 로봇에서 gain * d 로 나타난다(클램프 전).",
+   "commanded_height_diff_for_raw_5cm_m": 0.0015,
+   "commanded_height_diff_for_raw_10cm_m": 0.003
+  },
+  "F2_min_lift_time_s": {
+   "0.1": 1.82,
+   "0.22": 4.0,
+   "0.3": 5.45
+  },
+  "F3_marker_release_min_s": {
+   "gripper_release_delay_s": 0.15,
+   "open_070_to_020_s": 0.56,
+   "retreat_hold_after_open_s": 1.05,
+   "ee_pinned_at_least_s": 0.55,
+   "total_s": 1.76,
+   "note": "논문 표 4는 0.55 s 고정과 50%·20% 기준을 적었고, 1.05 s 유지 시간은 적지 않았다."
+  },
+  "F4_wine_tilt_boost": {
+   "operator_deg_to_reach_pour_intent_36": 32.3,
+   "operator_deg_to_reach_90": 61.5,
+   "operator_deg_to_hit_135_cap": 85.8,
+   "samples": {
+    "20": 20,
+    "28": 28,
+    "40": 50.2,
+    "60": 87.2,
+    "80": 124.2,
+    "90": 135.0,
+    "103": 135.0
+   },
+   "note": "분석 D의 로그: 조작자 손목 약 103도, 로봇 병 기울기 약 88도에서 멈춤(증폭 도입 전 90도 한계). 증폭 뒤에는 103도가 135도 상한에 걸림."
+  }
+ }
+}
