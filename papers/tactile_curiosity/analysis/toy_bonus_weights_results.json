@@ -1,0 +1,54 @@
+{
+ "C1_tactile_only_invariance": {
+  "max_abs_change": 0.0,
+  "mean_bonus": 0.34688196845381475
+ },
+ "C2_modality_share_equal_per_dim_std": {
+  "latent": {
+   "eq4_norm_term": 0.007039846259557966,
+   "code_mean_log_term": 0.14967969323752806,
+   "eq4_share": 0.306,
+   "code_share": 0.281
+  },
+  "image": {
+   "eq4_norm_term": 0.007966338579583319,
+   "code_mean_log_term": 0.19131495349866068,
+   "eq4_share": 0.347,
+   "code_share": 0.359
+  },
+  "tactile": {
+   "eq4_norm_term": 0.007963651478893967,
+   "code_mean_log_term": 0.19125292604627028,
+   "eq4_share": 0.347,
+   "code_share": 0.359
+  }
+ },
+ "C3_expressible_weight_patterns": {
+  "tactile": {
+   "latent": 0.0,
+   "image": 0.0,
+   "tactile": 2.797
+  },
+  "image+tactile": {
+   "latent": 0.0,
+   "image": 1.398,
+   "tactile": 1.398
+  },
+  "latent+tactile": {
+   "latent": 1.57,
+   "image": 0.0,
+   "tactile": 1.57
+  },
+  "latent+image+tactile": {
+   "latent": 1.006,
+   "image": 1.006,
+   "tactile": 1.006
+  }
+ },
+ "C3_note": "선택한 모달리티는 모두 같은 값(전체 차원/선택 차원)이다. omega_tactile = 5, omega_vision = 1 같은 비율은 표현되지 않는다.",
+ "C4_standardized_bonus": {
+  "fraction_negative": 0.52425,
+  "raw_mean": 0.8800970323904297,
+  "note": "실행 평균과 표준편차로 표준화하면 보너스의 평균이 0이 되어 상당수가 음수 보상이 된다(코드의 info_gain_normalizer)."
+ }
+}
