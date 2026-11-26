@@ -1,0 +1,249 @@
+{
+ "table1_checks": {
+  "naive": {
+   "bias_minus(exc-dfc)": 0.0,
+   "mae_minus(exc+dfc)": 0.01,
+   "implied_mean_opt_mae/wape": 1.033,
+   "n_eff_from_success_ci": 764,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 0.22
+  },
+  "class_prior": {
+   "bias_minus(exc-dfc)": 0.0,
+   "mae_minus(exc+dfc)": 0.0,
+   "implied_mean_opt_mae/wape": 1.029,
+   "n_eff_from_success_ci": 28,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 2.5
+  },
+  "direct": {
+   "bias_minus(exc-dfc)": 0.0,
+   "mae_minus(exc+dfc)": 0.01,
+   "implied_mean_opt_mae/wape": 1.032,
+   "n_eff_from_success_ci": 59,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 0.94
+  },
+  "slip_shear": {
+   "bias_minus(exc-dfc)": 0.0,
+   "mae_minus(exc+dfc)": -0.01,
+   "implied_mean_opt_mae/wape": 1.028,
+   "n_eff_from_success_ci": 73,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 0.54
+  },
+  "slip_area": {
+   "bias_minus(exc-dfc)": -0.01,
+   "mae_minus(exc+dfc)": 0.0,
+   "implied_mean_opt_mae/wape": 1.029,
+   "n_eff_from_success_ci": 59,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 3.4
+  },
+  "slip_gbm": {
+   "bias_minus(exc-dfc)": 0.01,
+   "mae_minus(exc+dfc)": 0.0,
+   "implied_mean_opt_mae/wape": 1.029,
+   "n_eff_from_success_ci": 59,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 3.64
+  },
+  "slip_images": {
+   "bias_minus(exc-dfc)": 0.1,
+   "mae_minus(exc+dfc)": 0.0,
+   "implied_mean_opt_mae/wape": 1.035,
+   "n_eff_from_success_ci": 91,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 1.5
+  },
+  "ours": {
+   "bias_minus(exc-dfc)": 0.07,
+   "mae_minus(exc+dfc)": -0.03,
+   "implied_mean_opt_mae/wape": 0.981,
+   "n_eff_from_success_ci": 90,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 3.82
+  },
+  "no_prior": {
+   "bias_minus(exc-dfc)": 0.01,
+   "mae_minus(exc+dfc)": 0.0,
+   "implied_mean_opt_mae/wape": 1.034,
+   "n_eff_from_success_ci": 34,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 2.11
+  },
+  "wrong_prior": {
+   "bias_minus(exc-dfc)": -0.01,
+   "mae_minus(exc+dfc)": 0.01,
+   "implied_mean_opt_mae/wape": 1.051,
+   "n_eff_from_success_ci": 44,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 2.29
+  },
+  "coulomb_only": {
+   "bias_minus(exc-dfc)": -0.02,
+   "mae_minus(exc+dfc)": 0.0,
+   "implied_mean_opt_mae/wape": 1.016,
+   "n_eff_from_success_ci": 87,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 2.29
+  },
+  "ours_margin": {
+   "bias_minus(exc-dfc)": 0.0,
+   "mae_minus(exc+dfc)": 0.0,
+   "implied_mean_opt_mae/wape": 1.031,
+   "n_eff_from_success_ci": 95,
+   "mae_ci_halfwidth_over_wape_ci_halfwidth": 1.07
+  }
+ },
+ "table1_naive_mean_opt_from_bias": 1.03,
+ "table1_naive_overload_S1_vs_excess": {
+  "overload_S1": 2.01,
+  "excess_T1": 2.07,
+  "diff": 0.06
+ },
+ "table1_5k_wilson_if_independent_success0.95": [
+  0.9436,
+  0.9557
+ ],
+ "table1_ours_vs_class_prior_excess_ratio": 1.05,
+ "table1_ours_vs_naive_excess_ratio": 9.9,
+ "table1_mae_ratio_class_prior_over_ours": {
+  "mae_0.51": 1.37,
+  "mae_0.54(exc+dfc)": 1.3
+ },
+ "S4_percent_sum": 100.0,
+ "fig6e": {
+  "ours": {
+   "n87": {
+    "k": 84,
+    "rate": 0.9655,
+    "wilson": [
+     0.9035,
+     0.9882
+    ]
+   },
+   "n29": {
+    "k": 28,
+    "rate": 0.9655,
+    "wilson": [
+     0.8282,
+     0.9939
+    ]
+   }
+  },
+  "class_prior": {
+   "n87": {
+    "k": 63,
+    "rate": 0.7241,
+    "wilson": [
+     0.6223,
+     0.8071
+    ]
+   },
+   "n29": {
+    "k": 21,
+    "rate": 0.7241,
+    "wilson": [
+     0.5428,
+     0.853
+    ]
+   }
+  },
+  "fisher_ours_vs_prior_n87": {
+   "odds": 10.67,
+   "p": 1.1631785782458015e-05
+  },
+  "fisher_ours_vs_prior_n29": {
+   "odds": 10.67,
+   "p": 0.025258484724575037
+  },
+  "integer_feasible_0.97_n87": [
+   84
+  ],
+  "integer_feasible_0.97_n29": [
+   28
+  ],
+  "integer_feasible_0.72_n87": [
+   63
+  ],
+  "integer_feasible_0.72_n29": [
+   21
+  ],
+  "welch_MAE_ours_vs_class_prior_n29": {
+   "t": -3.18,
+   "p": 0.0031192113346201963
+  },
+  "welch_MAE_ours_vs_naive_n29": {
+   "t": -26.74,
+   "p": 3.823817518221406e-26
+  },
+  "welch_MAE_ours_vs_class_prior_n87": {
+   "t": -5.5,
+   "p": 2.5928225943046735e-07
+  },
+  "welch_MAE_ours_vs_naive_n87": {
+   "t": -46.32,
+   "p": 1.1856125158562403e-76
+  },
+  "mae_ratio_class_prior_over_ours": 2.19,
+  "naive_mean_opt_from_MAE": 1.01,
+  "naive_harmonic_mean_opt_from_MAPE": 0.872,
+  "objects_vs_bars": {
+   "text_objects": 29,
+   "bars_in_fig6d": 25
+  }
+ },
+ "training_arithmetic": {
+  "optimizer_steps_if_all_200k": 12500000.0,
+  "steps_per_sec_over_48h": 72.3,
+  "steps_if_85pct": 10625000.0,
+  "note": "배치 8이 GPU당인지 전체인지, 200k 중 학습 비율은 논문에 없음"
+ },
+ "sim_timing": {
+  "dt_ms": 4,
+  "control_hz_real": 250,
+  "gelsight_hz": 25,
+  "interp_factor": 10,
+  "max_servo_s": 0.4,
+  "dwell_s": 0.1,
+  "lift_s": 0.2,
+  "fig6c_lift_starts_s_read": 0.32
+ },
+ "S1_mape_ratio_prior_over_ours": {
+  "E": 1.91,
+  "m": 3.06,
+  "mu": 2.16,
+  "tau": 1.75
+ },
+ "S1_mape_vs_pearson": {
+  "r": {
+   "E": 0.65,
+   "m": 0.88,
+   "mu": 0.28,
+   "tau": 0.57
+  },
+  "mape_ours": {
+   "E": 0.56,
+   "m": 0.49,
+   "mu": 0.56,
+   "tau": 0.44
+  }
+ },
+ "fig6c_read": {
+  "E_true_kPa": 42,
+  "E_end_kPa": 37,
+  "m_true_g": 192,
+  "m_end_g": 181,
+  "mu_true": 0.59,
+  "mu_end": 0.62,
+  "E_err_%": -11.9,
+  "m_err_%": -5.7,
+  "mu_err_%": 5.1,
+  "m_prior_g_read": 142,
+  "mu_prior_read": 0.23,
+  "E_prior_read": 83
+ },
+ "fig6d_read_22bars": {
+  "ours_MAE": 0.124,
+  "ours_bias": 0.097,
+  "ours_max_over": 0.42,
+  "ours_n_below_opt_by_>0.02": 7,
+  "class_prior_MAE": 0.548,
+  "mean_opt": 0.97,
+  "excluded_bars_1based": [
+   17,
+   18,
+   24
+  ]
+ }
+}
