@@ -1,0 +1,815 @@
+{
+ "table6_means": {
+  "n_tasks": 50,
+  "col_means": {
+   "X-VLA": {
+    "clean": 72.88,
+    "rand": 72.84,
+    "avg": 72.86,
+    "reported_clean": 72.88,
+    "reported_rand": 72.84
+   },
+   "Motus": {
+    "clean": 88.66,
+    "rand": 87.02,
+    "avg": 87.84,
+    "reported_clean": 88.66,
+    "reported_rand": 87.02
+   },
+   "FACT w/o video": {
+    "clean": 82.54,
+    "rand": 80.98,
+    "avg": 81.76,
+    "reported_clean": 82.54,
+    "reported_rand": 80.98
+   },
+   "FACT": {
+    "clean": 86.34,
+    "rand": 84.92,
+    "avg": 85.63,
+    "reported_clean": 86.34,
+    "reported_rand": 84.92
+   },
+   "FACT w/ failure": {
+    "clean": 88.36,
+    "rand": 86.56,
+    "avg": 87.46,
+    "reported_clean": 88.36,
+    "reported_rand": 86.56
+   }
+  }
+ },
+ "table1_vs_table6": {
+  "X-VLA": {
+   "table1": [
+    72.9,
+    72.8,
+    72.9
+   ],
+   "from_table6": [
+    72.88,
+    72.84,
+    72.86
+   ]
+  },
+  "Motus": {
+   "table1": [
+    88.7,
+    87.0,
+    87.8
+   ],
+   "from_table6": [
+    88.66,
+    87.02,
+    87.84
+   ]
+  },
+  "FACT w/o video": {
+   "table1": [
+    82.5,
+    81.0,
+    81.8
+   ],
+   "from_table6": [
+    82.54,
+    80.98,
+    81.76
+   ]
+  },
+  "FACT": {
+   "table1": [
+    86.3,
+    84.9,
+    85.6
+   ],
+   "from_table6": [
+    86.34,
+    84.92,
+    85.63
+   ]
+  },
+  "FACT w/ failure": {
+   "table1": [
+    88.4,
+    86.6,
+    87.5
+   ],
+   "from_table6": [
+    88.36,
+    86.56,
+    87.46
+   ]
+  }
+ },
+ "table6_paired_tasks": {
+  "FACT vs FACT w/o video": {
+   "mean_diff": 3.87,
+   "ci95": [
+    2.479,
+    5.261
+   ],
+   "wins": 42,
+   "losses": 5,
+   "ties": 3,
+   "sign_p": 0.0,
+   "paired_t_p": 0.0,
+   "wilcoxon_p": 0.0
+  },
+  "FACT w/ failure vs FACT": {
+   "mean_diff": 1.83,
+   "ci95": [
+    0.62,
+    3.04
+   ],
+   "wins": 31,
+   "losses": 15,
+   "ties": 4,
+   "sign_p": 0.0259,
+   "paired_t_p": 0.00381,
+   "wilcoxon_p": 0.00188
+  },
+  "FACT w/ failure vs Motus": {
+   "mean_diff": -0.38,
+   "ci95": [
+    -3.423,
+    2.663
+   ],
+   "wins": 25,
+   "losses": 21,
+   "ties": 4,
+   "sign_p": 0.6587,
+   "paired_t_p": 0.80288,
+   "wilcoxon_p": 0.9782
+  },
+  "FACT vs Motus": {
+   "mean_diff": -2.21,
+   "ci95": [
+    -5.346,
+    0.926
+   ],
+   "wins": 20,
+   "losses": 28,
+   "ties": 2,
+   "sign_p": 0.3123,
+   "paired_t_p": 0.16307,
+   "wilcoxon_p": 0.09242
+  },
+  "FACT w/ failure vs X-VLA": {
+   "mean_diff": 14.6,
+   "ci95": [
+    7.544,
+    21.656
+   ],
+   "wins": 35,
+   "losses": 13,
+   "ties": 2,
+   "sign_p": 0.0021,
+   "paired_t_p": 0.00013,
+   "wilcoxon_p": 8e-05
+  }
+ },
+ "table6_paired_clean": {
+  "FACT vs FACT w/o video": {
+   "mean_diff": 3.8,
+   "ci95": [
+    1.895,
+    5.705
+   ],
+   "wins": 31,
+   "losses": 10,
+   "ties": 9,
+   "sign_p": 0.0015,
+   "paired_t_p": 0.00021,
+   "wilcoxon_p": 0.00021
+  },
+  "FACT w/ failure vs FACT": {
+   "mean_diff": 2.02,
+   "ci95": [
+    0.383,
+    3.657
+   ],
+   "wins": 27,
+   "losses": 13,
+   "ties": 10,
+   "sign_p": 0.0385,
+   "paired_t_p": 0.01661,
+   "wilcoxon_p": 0.01342
+  },
+  "FACT w/ failure vs Motus": {
+   "mean_diff": -0.3,
+   "ci95": [
+    -3.582,
+    2.982
+   ],
+   "wins": 23,
+   "losses": 19,
+   "ties": 8,
+   "sign_p": 0.644,
+   "paired_t_p": 0.85503,
+   "wilcoxon_p": 0.69801
+  }
+ },
+ "table6_paired_rand": {
+  "FACT vs FACT w/o video": {
+   "mean_diff": 3.94,
+   "ci95": [
+    2.384,
+    5.496
+   ],
+   "wins": 38,
+   "losses": 7,
+   "ties": 5,
+   "sign_p": 0.0,
+   "paired_t_p": 1e-05,
+   "wilcoxon_p": 0.0
+  },
+  "FACT w/ failure vs FACT": {
+   "mean_diff": 1.64,
+   "ci95": [
+    0.524,
+    2.756
+   ],
+   "wins": 25,
+   "losses": 15,
+   "ties": 10,
+   "sign_p": 0.1539,
+   "paired_t_p": 0.00482,
+   "wilcoxon_p": 0.00621
+  },
+  "FACT w/ failure vs Motus": {
+   "mean_diff": -0.46,
+   "ci95": [
+    -3.733,
+    2.813
+   ],
+   "wins": 20,
+   "losses": 25,
+   "ties": 5,
+   "sign_p": 0.5515,
+   "paired_t_p": 0.77882,
+   "wilcoxon_p": 0.94595
+  }
+ },
+ "table6_trial_level": {
+  "FACT vs FACT w/o video": {
+   "k_a": 8563,
+   "k_b": 8176,
+   "n": 10000,
+   "pct_a": 85.63,
+   "pct_b": 81.76,
+   "fisher_p": 1.4058386972201773e-13
+  },
+  "FACT w/ failure vs FACT": {
+   "k_a": 8746,
+   "k_b": 8563,
+   "n": 10000,
+   "pct_a": 87.46,
+   "pct_b": 85.63,
+   "fisher_p": 0.00016163010753974857
+  },
+  "FACT w/ failure vs Motus": {
+   "k_a": 8746,
+   "k_b": 8784,
+   "n": 10000,
+   "pct_a": 87.46,
+   "pct_b": 87.84,
+   "fisher_p": 0.4265006245296625
+  },
+  "FACT vs Motus": {
+   "k_a": 8563,
+   "k_b": 8784,
+   "n": 10000,
+   "pct_a": 85.63,
+   "pct_b": 87.84,
+   "fisher_p": 4.466021203388633e-06
+  },
+  "FACT w/ failure vs X-VLA": {
+   "k_a": 8746,
+   "k_b": 7286,
+   "n": 10000,
+   "pct_a": 87.46,
+   "pct_b": 72.86,
+   "fisher_p": 2.2240129221847485e-150
+  }
+ },
+ "table6_bootstrap_task_cluster_ci": {
+  "FACT vs FACT w/o video": [
+   2.57,
+   5.25
+  ],
+  "FACT w/ failure vs FACT": [
+   0.69,
+   3.03
+  ],
+  "FACT w/ failure vs Motus": [
+   -3.28,
+   2.6
+  ]
+ },
+ "failure_effect_per_task": {
+  "most_negative": [
+   [
+    "Click Bell",
+    -7.0
+   ],
+   [
+    "Click Alarmclock",
+    -6.5
+   ],
+   [
+    "Turn Switch",
+    -5.0
+   ],
+   [
+    "Put Object Cabinet",
+    -4.0
+   ],
+   [
+    "Place Bread Basket",
+    -2.5
+   ]
+  ],
+  "most_positive": [
+   [
+    "Handover Block",
+    14.5
+   ],
+   [
+    "Pick Diverse Bottles",
+    11.5
+   ],
+   [
+    "Place Mouse Pad",
+    11.0
+   ],
+   [
+    "Pick Dual Bottles",
+    9.5
+   ],
+   [
+    "Stamp Seal",
+    8.5
+   ]
+  ],
+  "share_ge_10pp": 3,
+  "share_le_minus5": 3,
+  "top5_gain_sum_share": 0.601,
+  "mean_excluding_top5": 0.811
+ },
+ "fig6_tasks_in_table6_clean": {
+  "FACT": [
+   65.0,
+   91.0,
+   73.0
+  ],
+  "FACT_mean": 76.33333333333333,
+  "FACT w/ failure": [
+   84.0,
+   98.0,
+   83.0
+  ],
+  "FACT w/ failure_mean": 88.33333333333333
+ },
+ "real_world": {
+  "table2_avg_check": {
+   "Cosmos": {
+    "computed": 25.0,
+    "reported": 25,
+    "ok": true
+   },
+   "pi0": {
+    "computed": 48.0,
+    "reported": 48,
+    "ok": true
+   },
+   "pi0.5": {
+    "computed": 88.0,
+    "reported": 88,
+    "ok": true
+   },
+   "Motus": {
+    "computed": 64.0,
+    "reported": 64,
+    "ok": true
+   },
+   "Ours": {
+    "computed": 82.0,
+    "reported": 82,
+    "ok": true
+   },
+   "Ours w/ failure": {
+    "computed": 89.0,
+    "reported": 89,
+    "ok": true
+   },
+   "Ours w/ failure + scoring": {
+    "computed": 92.0,
+    "reported": 92,
+    "ok": true
+   },
+   "Ours + scoring": {
+    "computed": 79.0,
+    "reported": 79,
+    "ok": true
+   },
+   "Ours w/o causal mask": {
+    "computed": 77.0,
+    "reported": 77,
+    "ok": true
+   },
+   "Ours w/ failed-action loss": {
+    "computed": 63.0,
+    "reported": 63,
+    "ok": true
+   },
+   "Ours w/o video co-train": {
+    "computed": 58.0,
+    "reported": 58,
+    "ok": true
+   }
+  },
+  "table3_avg_check": {
+   "Cosmos": {
+    "computed": 8.33,
+    "reported": 8,
+    "ok": true
+   },
+   "pi0": {
+    "computed": 56.67,
+    "reported": 57,
+    "ok": true
+   },
+   "pi0.5": {
+    "computed": 85.0,
+    "reported": 85,
+    "ok": true
+   },
+   "Motus": {
+    "computed": 61.67,
+    "reported": 62,
+    "ok": true
+   },
+   "Ours": {
+    "computed": 66.67,
+    "reported": 67,
+    "ok": true
+   },
+   "Ours w/ failure": {
+    "computed": 76.67,
+    "reported": 77,
+    "ok": true
+   },
+   "Ours w/ failure + scoring": {
+    "computed": 81.67,
+    "reported": 82,
+    "ok": true
+   }
+  },
+  "table2_pooled_fisher_n100": {
+   "Ours vs Ours w/ failure": {
+    "k_a": 82,
+    "k_b": 89,
+    "fisher_p": 0.2278
+   },
+   "Ours w/ failure vs Ours w/ failure + scoring": {
+    "k_a": 89,
+    "k_b": 92,
+    "fisher_p": 0.6306
+   },
+   "Ours vs Motus": {
+    "k_a": 82,
+    "k_b": 64,
+    "fisher_p": 0.0065
+   },
+   "Ours w/ failure vs pi0.5": {
+    "k_a": 89,
+    "k_b": 88,
+    "fisher_p": 1.0
+   },
+   "Ours vs Ours w/o video co-train": {
+    "k_a": 82,
+    "k_b": 58,
+    "fisher_p": 0.0003
+   },
+   "Ours vs Ours w/o causal mask": {
+    "k_a": 82,
+    "k_b": 77,
+    "fisher_p": 0.4839
+   },
+   "Ours w/ failure vs Ours w/ failed-action loss": {
+    "k_a": 89,
+    "k_b": 63,
+    "fisher_p": 0.0
+   },
+   "Ours vs Ours + scoring": {
+    "k_a": 82,
+    "k_b": 79,
+    "fisher_p": 0.7215
+   },
+   "Ours w/ failure vs Motus": {
+    "k_a": 89,
+    "k_b": 64,
+    "fisher_p": 0.0
+   }
+  },
+  "table2_wilson_n100": {
+   "Cosmos": [
+    17.5,
+    34.3
+   ],
+   "pi0": [
+    38.5,
+    57.7
+   ],
+   "pi0.5": [
+    80.2,
+    93.0
+   ],
+   "Motus": [
+    54.2,
+    72.7
+   ],
+   "Ours": [
+    73.3,
+    88.3
+   ],
+   "Ours w/ failure": [
+    81.4,
+    93.7
+   ],
+   "Ours w/ failure + scoring": [
+    85.0,
+    95.9
+   ],
+   "Ours + scoring": [
+    70.0,
+    85.8
+   ],
+   "Ours w/o causal mask": [
+    67.8,
+    84.2
+   ],
+   "Ours w/ failed-action loss": [
+    53.2,
+    71.8
+   ],
+   "Ours w/o video co-train": [
+    48.2,
+    67.2
+   ]
+  },
+  "table3_pooled_fisher_n60": {
+   "Ours vs Ours w/ failure": {
+    "k_a": 40,
+    "k_b": 46,
+    "fisher_p": 0.3111
+   },
+   "Ours w/ failure vs Ours w/ failure + scoring": {
+    "k_a": 46,
+    "k_b": 49,
+    "fisher_p": 0.6536
+   },
+   "Ours w/ failure vs pi0.5": {
+    "k_a": 46,
+    "k_b": 51,
+    "fisher_p": 0.3538
+   },
+   "Ours vs Motus": {
+    "k_a": 40,
+    "k_b": 37,
+    "fisher_p": 0.7036
+   },
+   "Ours w/ failure + scoring vs pi0.5": {
+    "k_a": 49,
+    "k_b": 51,
+    "fisher_p": 0.8071
+   }
+  },
+  "table3_wilson_n60": {
+   "Cosmos": [
+    3.6,
+    18.1
+   ],
+   "pi0": [
+    44.1,
+    68.4
+   ],
+   "pi0.5": [
+    73.9,
+    91.9
+   ],
+   "Motus": [
+    49.0,
+    72.9
+   ],
+   "Ours": [
+    54.1,
+    77.3
+   ],
+   "Ours w/ failure": [
+    64.6,
+    85.6
+   ],
+   "Ours w/ failure + scoring": [
+    70.1,
+    89.4
+   ]
+  },
+  "min_detectable_diff_pp": {
+   "n20_base80": null,
+   "n20_base50": 35.0,
+   "n60_base70": 16.666666666666668,
+   "n100_base80": 11.0,
+   "n10000_base85": 0.99
+  },
+  "failure_effect_cells_table2": {
+   "diffs": [
+    5,
+    10,
+    -5,
+    15,
+    10
+   ],
+   "pos": 4,
+   "neg": 1,
+   "cube_tasks_sum": 15,
+   "non_cube_sum": 20
+  },
+  "scoring_effect_cells": {
+   "with_failure": [
+    10,
+    5,
+    0,
+    5,
+    -5
+   ],
+   "without_failure": [
+    10,
+    -5,
+    -20,
+    10,
+    -10
+   ],
+   "mean_with": 3.0,
+   "mean_without": -3.0
+  },
+  "scoring_diff_in_diff": {
+   "dd_pp": 6.0,
+   "z": 0.8615497903412856,
+   "p_two_sided": 0.38893531091236566
+  }
+ },
+ "future_metrics": {
+  "PSNR": {
+   "ours": {
+    "all_computed": 22.815,
+    "all_reported": 22.82
+   },
+   "fail": {
+    "all_computed": 26.0,
+    "all_reported": 26.0
+   }
+  },
+  "SSIM": {
+   "ours": {
+    "all_computed": 0.7873,
+    "all_reported": 0.7873
+   },
+   "fail": {
+    "all_computed": 0.8288,
+    "all_reported": 0.8288
+   }
+  },
+  "psnr_gain_failure_windows_db": 6.41,
+  "mse_ratio_failure_windows": 4.38,
+  "psnr_change_success_windows_db": -0.04,
+  "samples_per_subset_assumed": 256
+ },
+ "table7": {
+  "speedup_vs_motus": 3.21,
+  "speedup_vs_cosmos": 1.63,
+  "slower_than_pi05": 8.09,
+  "consistency_with_tables": {
+   "sim": [
+    79.8,
+    62.2,
+    87.8,
+    87.5
+   ],
+   "real_seen": [
+    88,
+    48,
+    64,
+    25,
+    89
+   ],
+   "real_unseen": [
+    85,
+    57,
+    62,
+    8,
+    77
+   ]
+  }
+ },
+ "fig6_read": {
+  "values_pct_read": {
+   "Handover Block": [
+    14,
+    38,
+    46
+   ],
+   "Open Microwave": [
+    62,
+    80,
+    90
+   ],
+   "Put Bottles Dustbin": [
+    22,
+    16,
+    36
+   ]
+  },
+  "avg_from_read": [
+   32.7,
+   44.7,
+   57.3
+  ],
+  "text_avg": [
+   32.7,
+   57.3
+  ],
+  "implied_total_successes_p0": 98.10000000000001,
+  "implied_total_successes_p100": 171.89999999999998,
+  "non_monotone_tasks": [
+   "Put Bottles Dustbin"
+  ]
+ },
+ "fig7_read": {
+  "N": [
+   1,
+   2,
+   4,
+   8
+  ],
+  "rel_completion_read": [
+   0.8,
+   0.89,
+   1.0,
+   0.945
+  ],
+  "latency_ms_read": [
+   370,
+   815,
+   925,
+   1270
+  ]
+ },
+ "eq6": {
+  "lambda": 1.0,
+  "T": 200,
+  "H": 48,
+  "distinct_values_failed_windows": [
+   0.0
+  ],
+  "n_windows_with_value_0": 201,
+  "n_windows": 201
+ },
+ "code_value_target": {
+  "success_norm_range": [
+   -0.3333,
+   0.1725
+  ],
+  "failure_norm_range": [
+   0.3333,
+   0.8392
+  ],
+  "success_never_exceeds_failure": true,
+  "corr_success_vs_1minus_p": 1.0
+ },
+ "failure_flag_mismatch": {
+  "onset": 100,
+  "H": 48,
+  "windows_paper_only": 48
+ },
+ "loss_weights": {
+  "paper": {
+   "wa": 20,
+   "wv": 1,
+   "wI": 1
+  },
+  "code": {
+   "action": 10.0,
+   "value": 0.4,
+   "visual": 1.0,
+   "future_state": 0.4
+  },
+  "ratio_action_to_visual_paper": 20.0,
+  "ratio_action_to_visual_code": 10.0
+ },
+ "sim_data_share": {
+  "demos": 27500,
+  "failures": 1300,
+  "failure_share_pct": 4.51
+ }
+}
