@@ -1,0 +1,2786 @@
+{
+ "table1_parsed_rows": 11,
+ "V1_text_percent_claims": {
+  "AIM500 BC joint vs PPO-3K (+69%)": 69.46,
+  "AIM500 BC joint vs PPO-300K (+54%)": 53.57,
+  "Recovery-3K+AIM500 BC joint vs Recovery-3K (+36%)": 35.71,
+  "w/o re-estimation BC joint vs AIM500 (+10%)": 10.17,
+  "w/o MI(novelty only) Push-Away joint vs AIM500 (+16%)": 16.36,
+  "w/o Novelty(MI only) BC Elo vs AIM500 (+16%)": 15.63,
+  "w/o Novelty(MI only) BC-Failure Elo vs AIM500 (+8%)": 7.53
+ },
+ "V1_85x": {
+  "300000/3500": 85.71428571428571,
+  "300000/3505": 85.59201141226819,
+  "300000/500": 600.0
+ },
+ "V1_model_counts": {
+  "PushT 8 scales x4 + FourRooms 9 scales x4": 68,
+  "4.2 collection models: FourRooms 5 methods x 4 rounds + PushT 8 methods x 5 rounds": 60,
+  "paper says total": 73
+ },
+ "V1_arena": {
+  "comparisons": 1545,
+  "annotators": 20,
+  "per_annotator": 77.25,
+  "per_distribution_if_even": 515.0
+ },
+ "V2_H33_expert_scaling_EE_BC": {
+  "PPO-300K": [
+   0.275,
+   0.013
+  ],
+  "PPO-3K": [
+   0.267,
+   0.011
+  ],
+  "diff": 0.008,
+  "z_eval_noise_only": 0.92,
+  "p_two_sided": 0.3571838934365742
+ },
+ "V2_AIM500_vs_PPO300K_by_dist": {
+  "BC": {
+   "ee": {
+    "PPO-300K": 0.275,
+    "AIM500": 0.485,
+    "ratio": 1.764
+   },
+   "tee": {
+    "PPO-300K": 0.4,
+    "AIM500": 0.403,
+    "ratio": 1.008
+   },
+   "joint": {
+    "PPO-300K": 0.224,
+    "AIM500": 0.344,
+    "ratio": 1.536
+   }
+  },
+  "BC-Failure": {
+   "ee": {
+    "PPO-300K": 0.554,
+    "AIM500": 0.564,
+    "ratio": 1.018
+   },
+   "tee": {
+    "PPO-300K": 0.491,
+    "AIM500": 0.454,
+    "ratio": 0.925
+   },
+   "joint": {
+    "PPO-300K": 0.432,
+    "AIM500": 0.411,
+    "ratio": 0.951
+   }
+  },
+  "Push-Away": {
+   "ee": {
+    "PPO-300K": 0.332,
+    "AIM500": 0.375,
+    "ratio": 1.13
+   },
+   "tee": {
+    "PPO-300K": 0.282,
+    "AIM500": 0.201,
+    "ratio": 0.713
+   },
+   "joint": {
+    "PPO-300K": 0.198,
+    "AIM500": 0.165,
+    "ratio": 0.833
+   }
+  }
+ },
+ "V3_site_structure": {
+  "datasets": [
+   {
+    "id": "bc--1e2894aba387",
+    "label": "Behavior cloning",
+    "windows": 299,
+    "trajectories": 100
+   },
+   {
+    "id": "bc-failures-geom23-uniform2-15--c5028b662e66",
+    "label": "BC failures",
+    "windows": 300,
+    "trajectories": 100
+   },
+   {
+    "id": "pushaway--1a56fe455dea",
+    "label": "Push away",
+    "windows": 300,
+    "trajectories": 100
+   }
+  ],
+  "models": 16,
+  "seed": 1,
+  "frames_per_window": 33
+ },
+ "V3_table1_vs_site": {
+  "n_cells": 99,
+  "mean_abs_diff": 0.0017,
+  "max_abs_diff": 0.0083,
+  "mean_diff": -0.0006,
+  "within_0.01": 99,
+  "within_paper_halfwidth": 99,
+  "site_ci_halfwidth_over_paper_halfwidth_median": 1.0,
+  "site_ci_halfwidth_over_paper_halfwidth_min_max": [
+   0.9,
+   1.09
+  ],
+  "rows": [
+   {
+    "row": "PPO-300K",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.275,
+    "paper_hw": 0.013,
+    "site_seed1": 0.2774,
+    "site_ci": [
+     0.2637,
+     0.2912
+    ],
+    "diff": 0.0024
+   },
+   {
+    "row": "PPO-300K",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.4,
+    "paper_hw": 0.024,
+    "site_seed1": 0.4005,
+    "site_ci": [
+     0.3744,
+     0.4266
+    ],
+    "diff": 0.0005
+   },
+   {
+    "row": "PPO-300K",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.224,
+    "paper_hw": 0.012,
+    "site_seed1": 0.2262,
+    "site_ci": [
+     0.2138,
+     0.2384
+    ],
+    "diff": 0.0022
+   },
+   {
+    "row": "PPO-300K",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.554,
+    "paper_hw": 0.019,
+    "site_seed1": 0.5552,
+    "site_ci": [
+     0.5349,
+     0.5742
+    ],
+    "diff": 0.0012
+   },
+   {
+    "row": "PPO-300K",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.491,
+    "paper_hw": 0.028,
+    "site_seed1": 0.4925,
+    "site_ci": [
+     0.4641,
+     0.5213
+    ],
+    "diff": 0.0015
+   },
+   {
+    "row": "PPO-300K",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.432,
+    "paper_hw": 0.026,
+    "site_seed1": 0.4334,
+    "site_ci": [
+     0.4069,
+     0.4612
+    ],
+    "diff": 0.0014
+   },
+   {
+    "row": "PPO-300K",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.332,
+    "paper_hw": 0.023,
+    "site_seed1": 0.3322,
+    "site_ci": [
+     0.3075,
+     0.3569
+    ],
+    "diff": 0.0002
+   },
+   {
+    "row": "PPO-300K",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.282,
+    "paper_hw": 0.026,
+    "site_seed1": 0.2842,
+    "site_ci": [
+     0.26,
+     0.3121
+    ],
+    "diff": 0.0022
+   },
+   {
+    "row": "PPO-300K",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.198,
+    "paper_hw": 0.018,
+    "site_seed1": 0.2007,
+    "site_ci": [
+     0.184,
+     0.2189
+    ],
+    "diff": 0.0027
+   },
+   {
+    "row": "PPO-3K",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.267,
+    "paper_hw": 0.011,
+    "site_seed1": 0.2658,
+    "site_ci": [
+     0.2548,
+     0.2764
+    ],
+    "diff": -0.0012
+   },
+   {
+    "row": "PPO-3K",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.322,
+    "paper_hw": 0.022,
+    "site_seed1": 0.3226,
+    "site_ci": [
+     0.3019,
+     0.3442
+    ],
+    "diff": 0.0006
+   },
+   {
+    "row": "PPO-3K",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.203,
+    "paper_hw": 0.011,
+    "site_seed1": 0.2019,
+    "site_ci": [
+     0.1906,
+     0.2124
+    ],
+    "diff": -0.0011
+   },
+   {
+    "row": "PPO-3K",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.517,
+    "paper_hw": 0.02,
+    "site_seed1": 0.5162,
+    "site_ci": [
+     0.497,
+     0.5371
+    ],
+    "diff": -0.0008
+   },
+   {
+    "row": "PPO-3K",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.424,
+    "paper_hw": 0.03,
+    "site_seed1": 0.4231,
+    "site_ci": [
+     0.395,
+     0.4533
+    ],
+    "diff": -0.0009
+   },
+   {
+    "row": "PPO-3K",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.378,
+    "paper_hw": 0.028,
+    "site_seed1": 0.3763,
+    "site_ci": [
+     0.349,
+     0.4022
+    ],
+    "diff": -0.0017
+   },
+   {
+    "row": "PPO-3K",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.297,
+    "paper_hw": 0.023,
+    "site_seed1": 0.2991,
+    "site_ci": [
+     0.2776,
+     0.3216
+    ],
+    "diff": 0.0021
+   },
+   {
+    "row": "PPO-3K",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.19,
+    "paper_hw": 0.017,
+    "site_seed1": 0.1919,
+    "site_ci": [
+     0.176,
+     0.2083
+    ],
+    "diff": 0.0019
+   },
+   {
+    "row": "PPO-3K",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.147,
+    "paper_hw": 0.015,
+    "site_seed1": 0.1481,
+    "site_ci": [
+     0.1338,
+     0.1636
+    ],
+    "diff": 0.0011
+   },
+   {
+    "row": "PPO-3K+AIM500",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.485,
+    "paper_hw": 0.014,
+    "site_seed1": 0.481,
+    "site_ci": [
+     0.4681,
+     0.495
+    ],
+    "diff": -0.004
+   },
+   {
+    "row": "PPO-3K+AIM500",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.403,
+    "paper_hw": 0.023,
+    "site_seed1": 0.4044,
+    "site_ci": [
+     0.3848,
+     0.4262
+    ],
+    "diff": 0.0014
+   },
+   {
+    "row": "PPO-3K+AIM500",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.344,
+    "paper_hw": 0.018,
+    "site_seed1": 0.344,
+    "site_ci": [
+     0.3268,
+     0.3633
+    ],
+    "diff": -0.0
+   },
+   {
+    "row": "PPO-3K+AIM500",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.564,
+    "paper_hw": 0.018,
+    "site_seed1": 0.5614,
+    "site_ci": [
+     0.5438,
+     0.5796
+    ],
+    "diff": -0.0026
+   },
+   {
+    "row": "PPO-3K+AIM500",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.454,
+    "paper_hw": 0.031,
+    "site_seed1": 0.4519,
+    "site_ci": [
+     0.4211,
+     0.4827
+    ],
+    "diff": -0.0021
+   },
+   {
+    "row": "PPO-3K+AIM500",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.411,
+    "paper_hw": 0.029,
+    "site_seed1": 0.4085,
+    "site_ci": [
+     0.3798,
+     0.4367
+    ],
+    "diff": -0.0025
+   },
+   {
+    "row": "PPO-3K+AIM500",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.375,
+    "paper_hw": 0.016,
+    "site_seed1": 0.373,
+    "site_ci": [
+     0.3565,
+     0.3895
+    ],
+    "diff": -0.002
+   },
+   {
+    "row": "PPO-3K+AIM500",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.201,
+    "paper_hw": 0.02,
+    "site_seed1": 0.1998,
+    "site_ci": [
+     0.1796,
+     0.2205
+    ],
+    "diff": -0.0012
+   },
+   {
+    "row": "PPO-3K+AIM500",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.165,
+    "paper_hw": 0.016,
+    "site_seed1": 0.1643,
+    "site_ci": [
+     0.1477,
+     0.1813
+    ],
+    "diff": -0.0007
+   },
+   {
+    "row": "PPO-3K+Recovery500",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.272,
+    "paper_hw": 0.012,
+    "site_seed1": 0.2678,
+    "site_ci": [
+     0.2556,
+     0.28
+    ],
+    "diff": -0.0042
+   },
+   {
+    "row": "PPO-3K+Recovery500",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.378,
+    "paper_hw": 0.026,
+    "site_seed1": 0.379,
+    "site_ci": [
+     0.3515,
+     0.4038
+    ],
+    "diff": 0.001
+   },
+   {
+    "row": "PPO-3K+Recovery500",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.215,
+    "paper_hw": 0.012,
+    "site_seed1": 0.2118,
+    "site_ci": [
+     0.2004,
+     0.2241
+    ],
+    "diff": -0.0032
+   },
+   {
+    "row": "PPO-3K+Recovery500",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.545,
+    "paper_hw": 0.022,
+    "site_seed1": 0.5436,
+    "site_ci": [
+     0.5232,
+     0.5633
+    ],
+    "diff": -0.0014
+   },
+   {
+    "row": "PPO-3K+Recovery500",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.455,
+    "paper_hw": 0.03,
+    "site_seed1": 0.4516,
+    "site_ci": [
+     0.4248,
+     0.4811
+    ],
+    "diff": -0.0034
+   },
+   {
+    "row": "PPO-3K+Recovery500",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.406,
+    "paper_hw": 0.027,
+    "site_seed1": 0.4038,
+    "site_ci": [
+     0.3754,
+     0.4318
+    ],
+    "diff": -0.0022
+   },
+   {
+    "row": "PPO-3K+Recovery500",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.314,
+    "paper_hw": 0.023,
+    "site_seed1": 0.311,
+    "site_ci": [
+     0.2876,
+     0.3348
+    ],
+    "diff": -0.003
+   },
+   {
+    "row": "PPO-3K+Recovery500",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.216,
+    "paper_hw": 0.02,
+    "site_seed1": 0.2167,
+    "site_ci": [
+     0.1967,
+     0.2381
+    ],
+    "diff": 0.0007
+   },
+   {
+    "row": "PPO-3K+Recovery500",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.169,
+    "paper_hw": 0.016,
+    "site_seed1": 0.1684,
+    "site_ci": [
+     0.153,
+     0.184
+    ],
+    "diff": -0.0006
+   },
+   {
+    "row": "PPO-3K+ICM500",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.222,
+    "paper_hw": 0.011,
+    "site_seed1": 0.2228,
+    "site_ci": [
+     0.2115,
+     0.2345
+    ],
+    "diff": 0.0008
+   },
+   {
+    "row": "PPO-3K+ICM500",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.393,
+    "paper_hw": 0.025,
+    "site_seed1": 0.3949,
+    "site_ci": [
+     0.3672,
+     0.4207
+    ],
+    "diff": 0.0019
+   },
+   {
+    "row": "PPO-3K+ICM500",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.186,
+    "paper_hw": 0.011,
+    "site_seed1": 0.1859,
+    "site_ci": [
+     0.1755,
+     0.1973
+    ],
+    "diff": -0.0001
+   },
+   {
+    "row": "PPO-3K+ICM500",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.506,
+    "paper_hw": 0.022,
+    "site_seed1": 0.5034,
+    "site_ci": [
+     0.4805,
+     0.5265
+    ],
+    "diff": -0.0026
+   },
+   {
+    "row": "PPO-3K+ICM500",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.441,
+    "paper_hw": 0.029,
+    "site_seed1": 0.4401,
+    "site_ci": [
+     0.4112,
+     0.4698
+    ],
+    "diff": -0.0009
+   },
+   {
+    "row": "PPO-3K+ICM500",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.383,
+    "paper_hw": 0.027,
+    "site_seed1": 0.3822,
+    "site_ci": [
+     0.3543,
+     0.4123
+    ],
+    "diff": -0.0008
+   },
+   {
+    "row": "PPO-3K+ICM500",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.267,
+    "paper_hw": 0.02,
+    "site_seed1": 0.2703,
+    "site_ci": [
+     0.2489,
+     0.2917
+    ],
+    "diff": 0.0033
+   },
+   {
+    "row": "PPO-3K+ICM500",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.242,
+    "paper_hw": 0.023,
+    "site_seed1": 0.2408,
+    "site_ci": [
+     0.2168,
+     0.263
+    ],
+    "diff": -0.0012
+   },
+   {
+    "row": "PPO-3K+ICM500",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.158,
+    "paper_hw": 0.016,
+    "site_seed1": 0.1591,
+    "site_ci": [
+     0.1435,
+     0.1756
+    ],
+    "diff": 0.0011
+   },
+   {
+    "row": "PPO-3K+DIAYN500",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.233,
+    "paper_hw": 0.009,
+    "site_seed1": 0.2349,
+    "site_ci": [
+     0.2256,
+     0.2441
+    ],
+    "diff": 0.0019
+   },
+   {
+    "row": "PPO-3K+DIAYN500",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.364,
+    "paper_hw": 0.027,
+    "site_seed1": 0.364,
+    "site_ci": [
+     0.3352,
+     0.394
+    ],
+    "diff": -0.0
+   },
+   {
+    "row": "PPO-3K+DIAYN500",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.186,
+    "paper_hw": 0.01,
+    "site_seed1": 0.1866,
+    "site_ci": [
+     0.1764,
+     0.1957
+    ],
+    "diff": 0.0006
+   },
+   {
+    "row": "PPO-3K+DIAYN500",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.522,
+    "paper_hw": 0.021,
+    "site_seed1": 0.5199,
+    "site_ci": [
+     0.4994,
+     0.5401
+    ],
+    "diff": -0.0021
+   },
+   {
+    "row": "PPO-3K+DIAYN500",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.438,
+    "paper_hw": 0.031,
+    "site_seed1": 0.4366,
+    "site_ci": [
+     0.4074,
+     0.4658
+    ],
+    "diff": -0.0014
+   },
+   {
+    "row": "PPO-3K+DIAYN500",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.388,
+    "paper_hw": 0.029,
+    "site_seed1": 0.3869,
+    "site_ci": [
+     0.3612,
+     0.4155
+    ],
+    "diff": -0.0011
+   },
+   {
+    "row": "PPO-3K+DIAYN500",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.31,
+    "paper_hw": 0.024,
+    "site_seed1": 0.3072,
+    "site_ci": [
+     0.2858,
+     0.3301
+    ],
+    "diff": -0.0028
+   },
+   {
+    "row": "PPO-3K+DIAYN500",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.186,
+    "paper_hw": 0.018,
+    "site_seed1": 0.1863,
+    "site_ci": [
+     0.1695,
+     0.2047
+    ],
+    "diff": 0.0003
+   },
+   {
+    "row": "PPO-3K+DIAYN500",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.143,
+    "paper_hw": 0.015,
+    "site_seed1": 0.1436,
+    "site_ci": [
+     0.1285,
+     0.1576
+    ],
+    "diff": 0.0006
+   },
+   {
+    "row": "Recovery-3K",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.315,
+    "paper_hw": 0.013,
+    "site_seed1": 0.3142,
+    "site_ci": [
+     0.3015,
+     0.328
+    ],
+    "diff": -0.0008
+   },
+   {
+    "row": "Recovery-3K",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.422,
+    "paper_hw": 0.026,
+    "site_seed1": 0.4207,
+    "site_ci": [
+     0.3935,
+     0.4475
+    ],
+    "diff": -0.0013
+   },
+   {
+    "row": "Recovery-3K",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.266,
+    "paper_hw": 0.014,
+    "site_seed1": 0.265,
+    "site_ci": [
+     0.2517,
+     0.2796
+    ],
+    "diff": -0.001
+   },
+   {
+    "row": "Recovery-3K",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.598,
+    "paper_hw": 0.018,
+    "site_seed1": 0.596,
+    "site_ci": [
+     0.5776,
+     0.6129
+    ],
+    "diff": -0.002
+   },
+   {
+    "row": "Recovery-3K",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.512,
+    "paper_hw": 0.029,
+    "site_seed1": 0.5126,
+    "site_ci": [
+     0.4846,
+     0.5415
+    ],
+    "diff": 0.0006
+   },
+   {
+    "row": "Recovery-3K",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.466,
+    "paper_hw": 0.026,
+    "site_seed1": 0.4658,
+    "site_ci": [
+     0.4409,
+     0.4926
+    ],
+    "diff": -0.0002
+   },
+   {
+    "row": "Recovery-3K",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.396,
+    "paper_hw": 0.018,
+    "site_seed1": 0.3949,
+    "site_ci": [
+     0.3781,
+     0.4135
+    ],
+    "diff": -0.0011
+   },
+   {
+    "row": "Recovery-3K",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.276,
+    "paper_hw": 0.026,
+    "site_seed1": 0.2747,
+    "site_ci": [
+     0.2501,
+     0.3004
+    ],
+    "diff": -0.0013
+   },
+   {
+    "row": "Recovery-3K",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.226,
+    "paper_hw": 0.018,
+    "site_seed1": 0.226,
+    "site_ci": [
+     0.2074,
+     0.2445
+    ],
+    "diff": 0.0
+   },
+   {
+    "row": "Recovery-3K+AIM500",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.511,
+    "paper_hw": 0.014,
+    "site_seed1": 0.5087,
+    "site_ci": [
+     0.4949,
+     0.5232
+    ],
+    "diff": -0.0023
+   },
+   {
+    "row": "Recovery-3K+AIM500",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.417,
+    "paper_hw": 0.024,
+    "site_seed1": 0.4175,
+    "site_ci": [
+     0.3943,
+     0.4422
+    ],
+    "diff": 0.0005
+   },
+   {
+    "row": "Recovery-3K+AIM500",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.361,
+    "paper_hw": 0.019,
+    "site_seed1": 0.3602,
+    "site_ci": [
+     0.3404,
+     0.3787
+    ],
+    "diff": -0.0008
+   },
+   {
+    "row": "Recovery-3K+AIM500",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.613,
+    "paper_hw": 0.016,
+    "site_seed1": 0.6071,
+    "site_ci": [
+     0.5912,
+     0.6233
+    ],
+    "diff": -0.0059
+   },
+   {
+    "row": "Recovery-3K+AIM500",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.498,
+    "paper_hw": 0.028,
+    "site_seed1": 0.4986,
+    "site_ci": [
+     0.472,
+     0.5261
+    ],
+    "diff": 0.0006
+   },
+   {
+    "row": "Recovery-3K+AIM500",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.459,
+    "paper_hw": 0.026,
+    "site_seed1": 0.4572,
+    "site_ci": [
+     0.4297,
+     0.4828
+    ],
+    "diff": -0.0018
+   },
+   {
+    "row": "Recovery-3K+AIM500",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.421,
+    "paper_hw": 0.019,
+    "site_seed1": 0.4211,
+    "site_ci": [
+     0.4021,
+     0.4394
+    ],
+    "diff": 0.0001
+   },
+   {
+    "row": "Recovery-3K+AIM500",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.264,
+    "paper_hw": 0.024,
+    "site_seed1": 0.2626,
+    "site_ci": [
+     0.239,
+     0.2891
+    ],
+    "diff": -0.0014
+   },
+   {
+    "row": "Recovery-3K+AIM500",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.223,
+    "paper_hw": 0.018,
+    "site_seed1": 0.2225,
+    "site_ci": [
+     0.204,
+     0.2406
+    ],
+    "diff": -0.0005
+   },
+   {
+    "row": "AIM w/o re-estimation",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.526,
+    "paper_hw": 0.013,
+    "site_seed1": 0.5247,
+    "site_ci": [
+     0.5117,
+     0.537
+    ],
+    "diff": -0.0013
+   },
+   {
+    "row": "AIM w/o re-estimation",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.428,
+    "paper_hw": 0.023,
+    "site_seed1": 0.4263,
+    "site_ci": [
+     0.4049,
+     0.4487
+    ],
+    "diff": -0.0017
+   },
+   {
+    "row": "AIM w/o re-estimation",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.379,
+    "paper_hw": 0.019,
+    "site_seed1": 0.378,
+    "site_ci": [
+     0.3599,
+     0.3959
+    ],
+    "diff": -0.001
+   },
+   {
+    "row": "AIM w/o re-estimation",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.552,
+    "paper_hw": 0.02,
+    "site_seed1": 0.5464,
+    "site_ci": [
+     0.5275,
+     0.5647
+    ],
+    "diff": -0.0056
+   },
+   {
+    "row": "AIM w/o re-estimation",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.464,
+    "paper_hw": 0.031,
+    "site_seed1": 0.4656,
+    "site_ci": [
+     0.4347,
+     0.4989
+    ],
+    "diff": 0.0016
+   },
+   {
+    "row": "AIM w/o re-estimation",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.416,
+    "paper_hw": 0.029,
+    "site_seed1": 0.4151,
+    "site_ci": [
+     0.3862,
+     0.4453
+    ],
+    "diff": -0.0009
+   },
+   {
+    "row": "AIM w/o re-estimation",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.357,
+    "paper_hw": 0.017,
+    "site_seed1": 0.3581,
+    "site_ci": [
+     0.3402,
+     0.3747
+    ],
+    "diff": 0.0011
+   },
+   {
+    "row": "AIM w/o re-estimation",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.226,
+    "paper_hw": 0.022,
+    "site_seed1": 0.2269,
+    "site_ci": [
+     0.2044,
+     0.2505
+    ],
+    "diff": 0.0009
+   },
+   {
+    "row": "AIM w/o re-estimation",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.183,
+    "paper_hw": 0.018,
+    "site_seed1": 0.184,
+    "site_ci": [
+     0.1674,
+     0.2024
+    ],
+    "diff": 0.001
+   },
+   {
+    "row": "AIM w/o MI reward",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.481,
+    "paper_hw": 0.013,
+    "site_seed1": 0.4802,
+    "site_ci": [
+     0.4673,
+     0.495
+    ],
+    "diff": -0.0008
+   },
+   {
+    "row": "AIM w/o MI reward",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.405,
+    "paper_hw": 0.024,
+    "site_seed1": 0.4005,
+    "site_ci": [
+     0.3782,
+     0.4243
+    ],
+    "diff": -0.0045
+   },
+   {
+    "row": "AIM w/o MI reward",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.344,
+    "paper_hw": 0.019,
+    "site_seed1": 0.3393,
+    "site_ci": [
+     0.321,
+     0.3585
+    ],
+    "diff": -0.0047
+   },
+   {
+    "row": "AIM w/o MI reward",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.566,
+    "paper_hw": 0.017,
+    "site_seed1": 0.5628,
+    "site_ci": [
+     0.5455,
+     0.5791
+    ],
+    "diff": -0.0032
+   },
+   {
+    "row": "AIM w/o MI reward",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.458,
+    "paper_hw": 0.03,
+    "site_seed1": 0.4582,
+    "site_ci": [
+     0.4304,
+     0.4879
+    ],
+    "diff": 0.0002
+   },
+   {
+    "row": "AIM w/o MI reward",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.416,
+    "paper_hw": 0.028,
+    "site_seed1": 0.4156,
+    "site_ci": [
+     0.3896,
+     0.4423
+    ],
+    "diff": -0.0004
+   },
+   {
+    "row": "AIM w/o MI reward",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.389,
+    "paper_hw": 0.016,
+    "site_seed1": 0.3898,
+    "site_ci": [
+     0.3737,
+     0.4067
+    ],
+    "diff": 0.0008
+   },
+   {
+    "row": "AIM w/o MI reward",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.231,
+    "paper_hw": 0.023,
+    "site_seed1": 0.2318,
+    "site_ci": [
+     0.2088,
+     0.2573
+    ],
+    "diff": 0.0008
+   },
+   {
+    "row": "AIM w/o MI reward",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.192,
+    "paper_hw": 0.019,
+    "site_seed1": 0.1923,
+    "site_ci": [
+     0.1737,
+     0.211
+    ],
+    "diff": 0.0003
+   },
+   {
+    "row": "AIM w/o Novelty reward",
+    "dist": "BC",
+    "metric": "ee",
+    "paper": 0.483,
+    "paper_hw": 0.014,
+    "site_seed1": 0.4837,
+    "site_ci": [
+     0.4704,
+     0.4974
+    ],
+    "diff": 0.0007
+   },
+   {
+    "row": "AIM w/o Novelty reward",
+    "dist": "BC",
+    "metric": "tee",
+    "paper": 0.401,
+    "paper_hw": 0.025,
+    "site_seed1": 0.3927,
+    "site_ci": [
+     0.3691,
+     0.4172
+    ],
+    "diff": -0.0083
+   },
+   {
+    "row": "AIM w/o Novelty reward",
+    "dist": "BC",
+    "metric": "joint",
+    "paper": 0.34,
+    "paper_hw": 0.019,
+    "site_seed1": 0.3353,
+    "site_ci": [
+     0.3155,
+     0.3552
+    ],
+    "diff": -0.0047
+   },
+   {
+    "row": "AIM w/o Novelty reward",
+    "dist": "BC-Failure",
+    "metric": "ee",
+    "paper": 0.559,
+    "paper_hw": 0.018,
+    "site_seed1": 0.5566,
+    "site_ci": [
+     0.5384,
+     0.5744
+    ],
+    "diff": -0.0024
+   },
+   {
+    "row": "AIM w/o Novelty reward",
+    "dist": "BC-Failure",
+    "metric": "tee",
+    "paper": 0.457,
+    "paper_hw": 0.03,
+    "site_seed1": 0.4565,
+    "site_ci": [
+     0.4261,
+     0.487
+    ],
+    "diff": -0.0005
+   },
+   {
+    "row": "AIM w/o Novelty reward",
+    "dist": "BC-Failure",
+    "metric": "joint",
+    "paper": 0.411,
+    "paper_hw": 0.028,
+    "site_seed1": 0.4107,
+    "site_ci": [
+     0.3837,
+     0.4397
+    ],
+    "diff": -0.0003
+   },
+   {
+    "row": "AIM w/o Novelty reward",
+    "dist": "Push-Away",
+    "metric": "ee",
+    "paper": 0.377,
+    "paper_hw": 0.016,
+    "site_seed1": 0.3769,
+    "site_ci": [
+     0.3605,
+     0.393
+    ],
+    "diff": -0.0001
+   },
+   {
+    "row": "AIM w/o Novelty reward",
+    "dist": "Push-Away",
+    "metric": "tee",
+    "paper": 0.224,
+    "paper_hw": 0.023,
+    "site_seed1": 0.2294,
+    "site_ci": [
+     0.2056,
+     0.2534
+    ],
+    "diff": 0.0054
+   },
+   {
+    "row": "AIM w/o Novelty reward",
+    "dist": "Push-Away",
+    "metric": "joint",
+    "paper": 0.182,
+    "paper_hw": 0.019,
+    "site_seed1": 0.1845,
+    "site_ci": [
+     0.1661,
+     0.2043
+    ],
+    "diff": 0.0025
+   }
+  ]
+ },
+ "V3_extra_models_not_in_table1": {
+  "PPO1 + Uniform Random500": {
+   "BC": {
+    "ee": 0.291,
+    "tee": 0.318,
+    "joint": 0.208
+   },
+   "BC-Failure": {
+    "ee": 0.507,
+    "tee": 0.43,
+    "joint": 0.382
+   },
+   "Push-Away": {
+    "ee": 0.309,
+    "tee": 0.176,
+    "joint": 0.14
+   }
+  },
+  "PPO1 + Random Walk500": {
+   "BC": {
+    "ee": 0.297,
+    "tee": 0.342,
+    "joint": 0.21
+   },
+   "BC-Failure": {
+    "ee": 0.526,
+    "tee": 0.43,
+    "joint": 0.385
+   },
+   "Push-Away": {
+    "ee": 0.345,
+    "tee": 0.231,
+    "joint": 0.178
+   }
+  },
+  "PPO1 + DADS500": {
+   "BC": {
+    "ee": 0.221,
+    "tee": 0.399,
+    "joint": 0.189
+   },
+   "BC-Failure": {
+    "ee": 0.52,
+    "tee": 0.442,
+    "joint": 0.392
+   },
+   "Push-Away": {
+    "ee": 0.33,
+    "tee": 0.228,
+    "joint": 0.172
+   }
+  },
+  "PPO1 + METRA500": {
+   "BC": {
+    "ee": 0.274,
+    "tee": 0.401,
+    "joint": 0.217
+   },
+   "BC-Failure": {
+    "ee": 0.531,
+    "tee": 0.435,
+    "joint": 0.388
+   },
+   "Push-Away": {
+    "ee": 0.329,
+    "tee": 0.251,
+    "joint": 0.183
+   }
+  },
+  "Recovery100": {
+   "BC": {
+    "ee": 0.42,
+    "tee": 0.44,
+    "joint": 0.314
+   },
+   "BC-Failure": {
+    "ee": 0.64,
+    "tee": 0.551,
+    "joint": 0.499
+   },
+   "Push-Away": {
+    "ee": 0.431,
+    "tee": 0.36,
+    "joint": 0.292
+   }
+  }
+ },
+ "V4_paired_bootstrap_seed1": {
+  "PPO1 + AIM500  -  PPO1": {
+   "BC": {
+    "ee": {
+     "diff": 0.2152,
+     "ci": [
+      0.2012,
+      0.23
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0819,
+     "ci": [
+      0.0647,
+      0.0998
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.1421,
+     "ci": [
+      0.1291,
+      0.1551
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "BC-Failure": {
+    "ee": {
+     "diff": 0.0452,
+     "ci": [
+      0.0348,
+      0.0551
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0288,
+     "ci": [
+      0.0206,
+      0.0369
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.0322,
+     "ci": [
+      0.0249,
+      0.0397
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "Push-Away": {
+    "ee": {
+     "diff": 0.0739,
+     "ci": [
+      0.0528,
+      0.0943
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0079,
+     "ci": [
+      -0.0048,
+      0.0212
+     ],
+     "boot_p_two_sided": 0.2265
+    },
+    "joint": {
+     "diff": 0.0162,
+     "ci": [
+      0.0078,
+      0.0247
+     ],
+     "boot_p_two_sided": 0.0005
+    }
+   }
+  },
+  "PPO1 + AIM500  -  PPO100": {
+   "BC": {
+    "ee": {
+     "diff": 0.2035,
+     "ci": [
+      0.1873,
+      0.2196
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0039,
+     "ci": [
+      -0.0129,
+      0.02
+     ],
+     "boot_p_two_sided": 0.65
+    },
+    "joint": {
+     "diff": 0.1178,
+     "ci": [
+      0.1051,
+      0.1304
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "BC-Failure": {
+    "ee": {
+     "diff": 0.0062,
+     "ci": [
+      -0.0055,
+      0.0172
+     ],
+     "boot_p_two_sided": 0.314
+    },
+    "tee": {
+     "diff": -0.0406,
+     "ci": [
+      -0.0505,
+      -0.0311
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": -0.0249,
+     "ci": [
+      -0.0336,
+      -0.0164
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "Push-Away": {
+    "ee": {
+     "diff": 0.0408,
+     "ci": [
+      0.02,
+      0.063
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": -0.0844,
+     "ci": [
+      -0.0972,
+      -0.0717
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": -0.0364,
+     "ci": [
+      -0.0457,
+      -0.0267
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   }
+  },
+  "PPO1 + AIM500  -  Recovery1": {
+   "BC": {
+    "ee": {
+     "diff": 0.1668,
+     "ci": [
+      0.1508,
+      0.182
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": -0.0163,
+     "ci": [
+      -0.0319,
+      -0.002
+     ],
+     "boot_p_two_sided": 0.0275
+    },
+    "joint": {
+     "diff": 0.079,
+     "ci": [
+      0.0652,
+      0.0932
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "BC-Failure": {
+    "ee": {
+     "diff": -0.0346,
+     "ci": [
+      -0.0481,
+      -0.0216
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": -0.0606,
+     "ci": [
+      -0.0723,
+      -0.0495
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": -0.0573,
+     "ci": [
+      -0.0684,
+      -0.0467
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "Push-Away": {
+    "ee": {
+     "diff": -0.0219,
+     "ci": [
+      -0.0412,
+      -0.0027
+     ],
+     "boot_p_two_sided": 0.023
+    },
+    "tee": {
+     "diff": -0.0749,
+     "ci": [
+      -0.0936,
+      -0.0566
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": -0.0617,
+     "ci": [
+      -0.0746,
+      -0.0491
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   }
+  },
+  "PPO1 + AIM500  -  PPO1 + AIM500 (novelty only)": {
+   "BC": {
+    "ee": {
+     "diff": 0.0008,
+     "ci": [
+      -0.0105,
+      0.0115
+     ],
+     "boot_p_two_sided": 0.8525
+    },
+    "tee": {
+     "diff": 0.004,
+     "ci": [
+      -0.011,
+      0.0195
+     ],
+     "boot_p_two_sided": 0.602
+    },
+    "joint": {
+     "diff": 0.0047,
+     "ci": [
+      -0.0057,
+      0.0154
+     ],
+     "boot_p_two_sided": 0.3795
+    }
+   },
+   "BC-Failure": {
+    "ee": {
+     "diff": -0.0014,
+     "ci": [
+      -0.0099,
+      0.0062
+     ],
+     "boot_p_two_sided": 0.7675
+    },
+    "tee": {
+     "diff": -0.0063,
+     "ci": [
+      -0.0136,
+      0.0008
+     ],
+     "boot_p_two_sided": 0.078
+    },
+    "joint": {
+     "diff": -0.0072,
+     "ci": [
+      -0.0143,
+      -0.0
+     ],
+     "boot_p_two_sided": 0.049
+    }
+   },
+   "Push-Away": {
+    "ee": {
+     "diff": -0.0168,
+     "ci": [
+      -0.0299,
+      -0.0038
+     ],
+     "boot_p_two_sided": 0.0125
+    },
+    "tee": {
+     "diff": -0.0319,
+     "ci": [
+      -0.0431,
+      -0.0215
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": -0.028,
+     "ci": [
+      -0.0379,
+      -0.0185
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   }
+  },
+  "PPO1 + AIM500  -  PPO1 + AIM500 (MI only)": {
+   "BC": {
+    "ee": {
+     "diff": -0.0027,
+     "ci": [
+      -0.0144,
+      0.0085
+     ],
+     "boot_p_two_sided": 0.6225
+    },
+    "tee": {
+     "diff": 0.0117,
+     "ci": [
+      -0.0028,
+      0.0267
+     ],
+     "boot_p_two_sided": 0.1135
+    },
+    "joint": {
+     "diff": 0.0087,
+     "ci": [
+      -0.0021,
+      0.0199
+     ],
+     "boot_p_two_sided": 0.114
+    }
+   },
+   "BC-Failure": {
+    "ee": {
+     "diff": 0.0048,
+     "ci": [
+      -0.0039,
+      0.0139
+     ],
+     "boot_p_two_sided": 0.2935
+    },
+    "tee": {
+     "diff": -0.0046,
+     "ci": [
+      -0.0121,
+      0.003
+     ],
+     "boot_p_two_sided": 0.2345
+    },
+    "joint": {
+     "diff": -0.0022,
+     "ci": [
+      -0.0096,
+      0.0054
+     ],
+     "boot_p_two_sided": 0.5735
+    }
+   },
+   "Push-Away": {
+    "ee": {
+     "diff": -0.0039,
+     "ci": [
+      -0.0203,
+      0.012
+     ],
+     "boot_p_two_sided": 0.62
+    },
+    "tee": {
+     "diff": -0.0296,
+     "ci": [
+      -0.0411,
+      -0.0173
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": -0.0202,
+     "ci": [
+      -0.0295,
+      -0.0108
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   }
+  },
+  "PPO1 + fixed-policy AIM500  -  PPO1 + AIM500": {
+   "BC": {
+    "ee": {
+     "diff": 0.0437,
+     "ci": [
+      0.0323,
+      0.0561
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0219,
+     "ci": [
+      0.0081,
+      0.0357
+     ],
+     "boot_p_two_sided": 0.0015
+    },
+    "joint": {
+     "diff": 0.034,
+     "ci": [
+      0.023,
+      0.0448
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "BC-Failure": {
+    "ee": {
+     "diff": -0.015,
+     "ci": [
+      -0.0226,
+      -0.0068
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0137,
+     "ci": [
+      0.005,
+      0.022
+     ],
+     "boot_p_two_sided": 0.0025
+    },
+    "joint": {
+     "diff": 0.0067,
+     "ci": [
+      -0.001,
+      0.0144
+     ],
+     "boot_p_two_sided": 0.0855
+    }
+   },
+   "Push-Away": {
+    "ee": {
+     "diff": -0.0148,
+     "ci": [
+      -0.0301,
+      0.0001
+     ],
+     "boot_p_two_sided": 0.053
+    },
+    "tee": {
+     "diff": 0.0271,
+     "ci": [
+      0.0153,
+      0.0389
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.0197,
+     "ci": [
+      0.0109,
+      0.0285
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   }
+  },
+  "PPO100  -  PPO1": {
+   "BC": {
+    "ee": {
+     "diff": 0.0117,
+     "ci": [
+      0.0014,
+      0.0221
+     ],
+     "boot_p_two_sided": 0.0215
+    },
+    "tee": {
+     "diff": 0.0779,
+     "ci": [
+      0.0627,
+      0.0936
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.0243,
+     "ci": [
+      0.0155,
+      0.0338
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "BC-Failure": {
+    "ee": {
+     "diff": 0.039,
+     "ci": [
+      0.0289,
+      0.0491
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0694,
+     "ci": [
+      0.0589,
+      0.0799
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.0571,
+     "ci": [
+      0.0488,
+      0.0654
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "Push-Away": {
+    "ee": {
+     "diff": 0.0331,
+     "ci": [
+      0.0188,
+      0.0475
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0923,
+     "ci": [
+      0.0753,
+      0.1094
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.0526,
+     "ci": [
+      0.0437,
+      0.0617
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   }
+  },
+  "Recovery1 + transferred AIM500  -  Recovery1": {
+   "BC": {
+    "ee": {
+     "diff": 0.1945,
+     "ci": [
+      0.1786,
+      0.2102
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": -0.0033,
+     "ci": [
+      -0.0188,
+      0.0121
+     ],
+     "boot_p_two_sided": 0.6765
+    },
+    "joint": {
+     "diff": 0.0952,
+     "ci": [
+      0.0815,
+      0.11
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "BC-Failure": {
+    "ee": {
+     "diff": 0.0111,
+     "ci": [
+      0.003,
+      0.0189
+     ],
+     "boot_p_two_sided": 0.009
+    },
+    "tee": {
+     "diff": -0.014,
+     "ci": [
+      -0.0224,
+      -0.0055
+     ],
+     "boot_p_two_sided": 0.0005
+    },
+    "joint": {
+     "diff": -0.0086,
+     "ci": [
+      -0.0161,
+      -0.0014
+     ],
+     "boot_p_two_sided": 0.0165
+    }
+   },
+   "Push-Away": {
+    "ee": {
+     "diff": 0.0262,
+     "ci": [
+      0.0148,
+      0.0376
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": -0.0121,
+     "ci": [
+      -0.0231,
+      -0.0012
+     ],
+     "boot_p_two_sided": 0.026
+    },
+    "joint": {
+     "diff": -0.0036,
+     "ci": [
+      -0.0121,
+      0.0049
+     ],
+     "boot_p_two_sided": 0.4
+    }
+   }
+  },
+  "PPO1 + AIM500  -  PPO1 + Uniform Random500": {
+   "BC": {
+    "ee": {
+     "diff": 0.19,
+     "ci": [
+      0.1759,
+      0.2047
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.086,
+     "ci": [
+      0.0696,
+      0.1028
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.1357,
+     "ci": [
+      0.1234,
+      0.1479
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "BC-Failure": {
+    "ee": {
+     "diff": 0.0542,
+     "ci": [
+      0.0429,
+      0.0654
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0221,
+     "ci": [
+      0.0133,
+      0.031
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.0266,
+     "ci": [
+      0.0183,
+      0.0346
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "Push-Away": {
+    "ee": {
+     "diff": 0.0643,
+     "ci": [
+      0.0443,
+      0.084
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0233,
+     "ci": [
+      0.0101,
+      0.0365
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.0245,
+     "ci": [
+      0.015,
+      0.0339
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   }
+  },
+  "Recovery100  -  PPO1 + AIM500": {
+   "BC": {
+    "ee": {
+     "diff": -0.061,
+     "ci": [
+      -0.0789,
+      -0.0423
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0359,
+     "ci": [
+      0.0153,
+      0.0562
+     ],
+     "boot_p_two_sided": 0.0005
+    },
+    "joint": {
+     "diff": -0.0298,
+     "ci": [
+      -0.045,
+      -0.0145
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "BC-Failure": {
+    "ee": {
+     "diff": 0.0786,
+     "ci": [
+      0.0639,
+      0.0942
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.0989,
+     "ci": [
+      0.0835,
+      0.1139
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.0908,
+     "ci": [
+      0.0766,
+      0.105
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   },
+   "Push-Away": {
+    "ee": {
+     "diff": 0.0585,
+     "ci": [
+      0.0357,
+      0.0816
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "tee": {
+     "diff": 0.1603,
+     "ci": [
+      0.1427,
+      0.1798
+     ],
+     "boot_p_two_sided": 0.0
+    },
+    "joint": {
+     "diff": 0.1278,
+     "ci": [
+      0.1146,
+      0.1413
+     ],
+     "boot_p_two_sided": 0.0
+    }
+   }
+  }
+ },
+ "V5_fig3": {
+  "points": 36,
+  "series": [
+   "Oracle PPO",
+   "Early Stop PPO",
+   "POMDP PPO (full)",
+   "Uniform Random"
+  ],
+  "pooled_r": 0.9787,
+  "fisher_ci_95": [
+   0.9584,
+   0.9892
+  ],
+  "paper_r": 0.979,
+  "paper_ci": [
+   0.96,
+   0.99
+  ],
+  "within_series_r": {
+   "Oracle PPO": 0.9891,
+   "Early Stop PPO": 0.9884,
+   "POMDP PPO (full)": 0.9893,
+   "Uniform Random": 0.9424
+  },
+  "x_range": [
+   0.302,
+   1.098
+  ],
+  "uniform_random_x_range": [
+   1.0967,
+   1.0983
+  ],
+  "uniform_random_y_range": [
+   98.91,
+   99.6
+  ],
+  "leave_one_series_out_r": {
+   "Oracle PPO": 0.9756,
+   "Early Stop PPO": 0.9852,
+   "POMDP PPO (full)": 0.9744,
+   "Uniform Random": 0.9797
+  },
+  "series_cluster_bootstrap_r_2.5_50_97.5": [
+   0.969,
+   0.979,
+   0.99
+  ],
+  "monotone_pairs": {
+   "Oracle PPO": true,
+   "Early Stop PPO": false,
+   "POMDP PPO (full)": true,
+   "Uniform Random": false
+  }
+ },
+ "V6_fig5_site_json": {
+  "Push-T BC": {
+   "refs": {
+    "300k expert": 32.33,
+    "3k expert": 20.35
+   },
+   "series": {
+    "AIM (active)": {
+     "y0": 20.35,
+     "y_last": 32.54,
+     "min": 20.35,
+     "max": 32.54,
+     "change": 12.2
+    },
+    "Uniform Random": {
+     "y0": 20.35,
+     "y_last": 18.27,
+     "min": 17.39,
+     "max": 20.35,
+     "change": -2.08
+    },
+    "Random Walk": {
+     "y0": 20.35,
+     "y_last": 18.71,
+     "min": 17.2,
+     "max": 20.35,
+     "change": -1.64
+    },
+    "Recovery": {
+     "y0": 20.35,
+     "y_last": 18.37,
+     "min": 17.79,
+     "max": 20.35,
+     "change": -1.98
+    },
+    "DADS": {
+     "y0": 20.35,
+     "y_last": 18.75,
+     "min": 17.86,
+     "max": 20.35,
+     "change": -1.6
+    },
+    "DIAYN": {
+     "y0": 20.35,
+     "y_last": 17.32,
+     "min": 17.32,
+     "max": 20.35,
+     "change": -3.03
+    },
+    "ICM": {
+     "y0": 20.35,
+     "y_last": 17.62,
+     "min": 17.62,
+     "max": 20.35,
+     "change": -2.73
+    },
+    "METRA": {
+     "y0": 20.35,
+     "y_last": 18.84,
+     "min": 16.6,
+     "max": 20.35,
+     "change": -1.5
+    }
+   }
+  },
+  "Push-T Push Away": {
+   "refs": {
+    "300k expert": 41.69,
+    "3k expert": 18.25
+   },
+   "series": {
+    "AIM (active)": {
+     "y0": 18.25,
+     "y_last": 28.16,
+     "min": 18.25,
+     "max": 28.16,
+     "change": 9.91
+    },
+    "Uniform Random": {
+     "y0": 18.25,
+     "y_last": 17.02,
+     "min": 16.18,
+     "max": 18.25,
+     "change": -1.23
+    },
+    "Random Walk": {
+     "y0": 18.25,
+     "y_last": 20.04,
+     "min": 17.74,
+     "max": 20.68,
+     "change": 1.8
+    },
+    "Recovery": {
+     "y0": 18.25,
+     "y_last": 17.49,
+     "min": 16.86,
+     "max": 18.25,
+     "change": -0.76
+    },
+    "DADS": {
+     "y0": 18.25,
+     "y_last": 21.26,
+     "min": 17.15,
+     "max": 21.26,
+     "change": 3.02
+    },
+    "DIAYN": {
+     "y0": 18.25,
+     "y_last": 16.9,
+     "min": 16.53,
+     "max": 18.25,
+     "change": -1.35
+    },
+    "ICM": {
+     "y0": 18.25,
+     "y_last": 15.92,
+     "min": 15.92,
+     "max": 18.25,
+     "change": -2.33
+    },
+    "METRA": {
+     "y0": 18.25,
+     "y_last": 20.44,
+     "min": 17.5,
+     "max": 20.44,
+     "change": 2.19
+    }
+   }
+  }
+ },
+ "V6_claims": {
+  "BC: AIM500 vs 300k expert (paper: 'matches')": [
+   32.54,
+   32.33
+  ],
+  "PushAway: AIM500 vs 300k expert": [
+   28.16,
+   41.69
+  ],
+  "BC AIM gain over 3k expert (pp)": 12.19,
+  "baselines with y_last <= 3k expert (BC)": [
+   "Uniform Random",
+   "Random Walk",
+   "Recovery",
+   "DADS",
+   "DIAYN",
+   "ICM",
+   "METRA"
+  ],
+  "baselines total (BC)": 7
+ },
+ "V7_fig6_read_values_BC_EE": {
+  "note": "그림 판독 값(논문 19쪽 그림 6, 확대 판독, 오차 약 ±0.7p). 값은 논문 본문에 없음",
+  "x_trajectories": [
+   1500,
+   4700,
+   9400,
+   18800,
+   37500,
+   75000,
+   150000,
+   300000
+  ],
+  "PPO expert": [
+   20.2,
+   20.5,
+   22.3,
+   27.0,
+   28.9,
+   31.0,
+   32.3,
+   32.3
+  ],
+  "Random Walk": [
+   26.7,
+   37.9,
+   41.8,
+   42.1,
+   43.1,
+   42.6,
+   43.1,
+   43.2
+  ],
+  "Uniform Random": [
+   20.9,
+   39.1,
+   41.7,
+   42.2,
+   43.4,
+   43.1,
+   43.3,
+   43.6
+  ],
+  "Recovery": [
+   19.5,
+   30.9,
+   37.2,
+   40.1,
+   40.5,
+   42.5,
+   42.0,
+   42.5
+  ]
+ },
+ "V7_fig6_read_values_PushAway_EE": {
+  "note": "그림 판독 값 (그림 6 오른쪽 패널)",
+  "x_trajectories": [
+   1500,
+   4700,
+   9400,
+   18800,
+   37500,
+   75000,
+   150000,
+   300000
+  ],
+  "PPO expert": [
+   18.0,
+   18.8,
+   21.4,
+   27.7,
+   36.7,
+   39.1,
+   41.1,
+   41.6
+  ],
+  "Random Walk": [
+   35.3,
+   43.7,
+   45.4,
+   47.3,
+   47.8,
+   47.2,
+   48.1,
+   47.6
+  ],
+  "Uniform Random": [
+   18.0,
+   38.4,
+   39.0,
+   41.2,
+   40.2,
+   41.0,
+   41.1,
+   40.4
+  ],
+  "Recovery": [
+   18.0,
+   38.0,
+   45.6,
+   49.0,
+   50.0,
+   48.8,
+   49.8,
+   50.0
+  ]
+ },
+ "V7_first_size_reaching_AIM_BC": {
+  "AIM value": 32.54,
+  "first read size": {
+   "PPO expert": 150000,
+   "Random Walk": 4700,
+   "Uniform Random": 4700,
+   "Recovery": 9400
+  },
+  "ratio to 3500 (AIM total)": {
+   "PPO expert": 42.9,
+   "Random Walk": 1.3,
+   "Uniform Random": 1.3,
+   "Recovery": 2.7
+  }
+ },
+ "V8_spearman_elo_recall": {
+  "BC Elo vs ee": {
+   "rho": 0.909,
+   "p": 0.0001
+  },
+  "BC Elo vs joint": {
+   "rho": 0.904,
+   "p": 0.0001
+  },
+  "BC-Failure Elo vs ee": {
+   "rho": 0.755,
+   "p": 0.0073
+  },
+  "BC-Failure Elo vs joint": {
+   "rho": 0.712,
+   "p": 0.0139
+  },
+  "Push-Away Elo vs ee": {
+   "rho": 0.791,
+   "p": 0.0037
+  },
+  "Push-Away Elo vs joint": {
+   "rho": 0.673,
+   "p": 0.0233
+  }
+ },
+ "V8_elo_pairs": {
+  "AIM500 vs PPO-3K, BC": {
+   "diff": 458.0,
+   "z": 3.94,
+   "p": 0.0001
+  },
+  "AIM500 vs PPO-300K, BC": {
+   "diff": 347.0,
+   "z": 2.98,
+   "p": 0.0028
+  },
+  "AIM500 vs Recovery-3K, BC": {
+   "diff": 131.0,
+   "z": 1.12,
+   "p": 0.2641
+  },
+  "AIM500 vs PPO-3K, BC-Failure": {
+   "diff": 225.0,
+   "z": 1.75,
+   "p": 0.08
+  },
+  "AIM500 vs Recovery-3K, BC-Failure": {
+   "diff": -50.0,
+   "z": -0.36,
+   "p": 0.7205
+  },
+  "AIM500 vs PPO-3K, Push-Away": {
+   "diff": 140.0,
+   "z": 1.46,
+   "p": 0.1446
+  },
+  "AIM500 vs Recovery-3K, Push-Away": {
+   "diff": -221.0,
+   "z": -2.18,
+   "p": 0.0294
+  },
+  "w/o Novelty(MI only) vs AIM500, BC": {
+   "diff": 186.0,
+   "z": 1.08,
+   "p": 0.2822
+  },
+  "w/o Novelty(MI only) vs AIM500, BC-Failure": {
+   "diff": 79.0,
+   "z": 0.58,
+   "p": 0.5604
+  },
+  "w/o re-estimation vs AIM500, BC": {
+   "diff": 198.0,
+   "z": 1.61,
+   "p": 0.1076
+  }
+ },
+ "V8_elo_ci_nonoverlap_pairs": {
+  "non_overlapping": 40,
+  "pairs": 165
+ },
+ "V8_elo_ci_simulation": {
+  "note": "가정: 비교 쌍이 모델 사이에서 무작위, 무승부 없음, 참 점수는 표 1 BC Elo. 반폭은 적합 점수의 2.5-97.5% 구간 반폭 근사(1.96 SD)",
+  "reported_halfwidths_BC": [
+   155.0,
+   155.0,
+   167.0,
+   155.0,
+   145.0,
+   145.0,
+   158.0,
+   183.0,
+   174.0,
+   208.0,
+   295.0
+  ],
+  "sim_11_models_515_games": [
+   82.0,
+   112.0,
+   91.0,
+   94.0,
+   106.0,
+   133.0,
+   90.0,
+   109.0,
+   113.0,
+   94.0,
+   102.0
+  ],
+  "sim_11_models_1545_games": [
+   54.0,
+   60.0,
+   53.0,
+   50.0,
+   50.0,
+   61.0,
+   56.0,
+   72.0,
+   53.0,
+   51.0,
+   54.0
+  ],
+  "median_sim_515": 102.0,
+  "median_sim_1545": 54.0,
+  "median_reported_BC": 158.0
+ },
+ "V9_site_vs_paper_elo_cells": {
+  "cells": 33,
+  "mismatch": 0
+ },
+ "V10_param_estimates": {
+  "note": "표준 트랜스포머 층 계산 (어텐션 4d^2 + SwiGLU 3*d*(ratio*d)), 임베딩·정규화·MLP 헤드 제외. 표에 없는 모듈이 있으면 차이가 날 수 있음",
+  "DF_WM_d512_12layers_ratio3": {
+   "estimate_M": 40.9,
+   "paper_M": 44.5
+  },
+  "LatentDiffusion_WM_d512_12enc+12dec_ratio3": {
+   "estimate_M": 94.4,
+   "paper_M": 97.8
+  },
+  "SoftmaxBC_d256_6layers_ratio4": {
+   "estimate_M": 6.3,
+   "paper_M": 19.5
+  },
+  "DiffusionBC_d256_12layers_ratio3": {
+   "estimate_M": 10.2,
+   "paper_M": 30.6
+  }
+ }
+}

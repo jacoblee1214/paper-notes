@@ -1,0 +1,201 @@
+{
+ "A_theorem1_scope": {
+  "setting": {
+   "sig_eta": 0.01,
+   "sig_e": 0.5,
+   "n_train": 4000,
+   "knn_k": 10,
+   "eval": "\uc120\ud615 3000\uc810 x \uaca9\uc790 3000, kNN 700\uc810 x \uaca9\uc790 900 (\ud589\ub3d9 \uad6c\uc801)"
+  },
+  "rows": [
+   {
+    "sigma_a": 0.0,
+    "I_D": 0.0,
+    "I_eval_true": 3.912,
+    "linear": {
+     "sigma_hat": 0.0098,
+     "I_hat_on_data_distribution": 0.0,
+     "I_hat_on_eval_policy": -2957.09
+    },
+    "knn": {
+     "sigma_hat": 0.0128,
+     "I_hat_on_data_distribution": 0.0,
+     "I_hat_on_eval_policy": -1622.808
+    },
+    "linear_w_s_w_a": [
+     0.4,
+     -0.2
+    ]
+   },
+   {
+    "sigma_a": 0.001,
+    "I_D": 0.005,
+    "I_eval_true": 3.912,
+    "linear": {
+     "sigma_hat": 0.0099,
+     "I_hat_on_data_distribution": 0.006,
+     "I_hat_on_eval_policy": -44.488
+    },
+    "knn": {
+     "sigma_hat": 0.0131,
+     "I_hat_on_data_distribution": 0.001,
+     "I_hat_on_eval_policy": -1615.691
+    },
+    "linear_w_s_w_a": [
+     0.931,
+     0.863
+    ]
+   },
+   {
+    "sigma_a": 0.003,
+    "I_D": 0.043,
+    "I_eval_true": 3.912,
+    "linear": {
+     "sigma_hat": 0.0098,
+     "I_hat_on_data_distribution": 0.044,
+     "I_hat_on_eval_policy": -4.726
+    },
+    "knn": {
+     "sigma_hat": 0.0115,
+     "I_hat_on_data_distribution": 0.009,
+     "I_hat_on_eval_policy": -1965.19
+    },
+    "linear_w_s_w_a": [
+     1.029,
+     1.059
+    ]
+   },
+   {
+    "sigma_a": 0.01,
+    "I_D": 0.347,
+    "I_eval_true": 3.912,
+    "linear": {
+     "sigma_hat": 0.01,
+     "I_hat_on_data_distribution": 0.34,
+     "I_hat_on_eval_policy": 3.691
+    },
+    "knn": {
+     "sigma_hat": 0.0135,
+     "I_hat_on_data_distribution": 0.154,
+     "I_hat_on_eval_policy": -1455.098
+    },
+    "linear_w_s_w_a": [
+     0.995,
+     0.991
+    ]
+   },
+   {
+    "sigma_a": 0.03,
+    "I_D": 1.151,
+    "I_eval_true": 3.912,
+    "linear": {
+     "sigma_hat": 0.0098,
+     "I_hat_on_data_distribution": 1.158,
+     "I_hat_on_eval_policy": 3.901
+    },
+    "knn": {
+     "sigma_hat": 0.0187,
+     "I_hat_on_data_distribution": 0.701,
+     "I_hat_on_eval_policy": -619.114
+    },
+    "linear_w_s_w_a": [
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "sigma_a": 0.1,
+    "I_D": 2.308,
+    "I_eval_true": 3.912,
+    "linear": {
+     "sigma_hat": 0.01,
+     "I_hat_on_data_distribution": 2.318,
+     "I_hat_on_eval_policy": 3.916
+    },
+    "knn": {
+     "sigma_hat": 0.0261,
+     "I_hat_on_data_distribution": 1.603,
+     "I_hat_on_eval_policy": -78.477
+    },
+    "linear_w_s_w_a": [
+     1.0,
+     0.999
+    ]
+   },
+   {
+    "sigma_a": 0.3,
+    "I_D": 3.402,
+    "I_eval_true": 3.912,
+    "linear": {
+     "sigma_hat": 0.0101,
+     "I_hat_on_data_distribution": 3.368,
+     "I_hat_on_eval_policy": 3.919
+    },
+    "knn": {
+     "sigma_hat": 0.0459,
+     "I_hat_on_data_distribution": 2.136,
+     "I_hat_on_eval_policy": -1.119
+    },
+    "linear_w_s_w_a": [
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "sigma_a": 1.0,
+    "I_D": 4.605,
+    "I_eval_true": 3.912,
+    "linear": {
+     "sigma_hat": 0.0103,
+     "I_hat_on_data_distribution": 4.613,
+     "I_hat_on_eval_policy": 3.885
+    },
+    "knn": {
+     "sigma_hat": 0.0879,
+     "I_hat_on_data_distribution": 2.804,
+     "I_hat_on_eval_policy": 1.752
+    },
+    "linear_w_s_w_a": [
+     1.0,
+     1.0
+    ]
+   }
+  ],
+  "check_bound_on_data_distribution": true,
+  "linear_exceeds_I_D_on_eval_policy_rows": [
+   0.01,
+   0.03,
+   0.1,
+   0.3
+  ],
+  "knn_exceeds_I_D_on_eval_policy_rows": [],
+  "check_bound_vs_true_eval_MI": true
+ },
+ "B_theorem2_tabular": {
+  "instances": 2000,
+  "exact_q_I_increases_and_L_below_I": 2000,
+  "L_beta_equals_I_beta": 2000,
+  "noisy_q_hat": {
+   "5": {
+    "fraction_I_decreases": 0.7035,
+    "mean_delta_I_nats": -0.0337,
+    "p05_delta": -0.1412
+   },
+   "20": {
+    "fraction_I_decreases": 0.61,
+    "mean_delta_I_nats": -0.0116,
+    "p05_delta": -0.0928
+   },
+   "100": {
+    "fraction_I_decreases": 0.092,
+    "mean_delta_I_nats": 0.0378,
+    "p05_delta": -0.0073
+   },
+   "1000": {
+    "fraction_I_decreases": 0.0,
+    "mean_delta_I_nats": 0.062,
+    "p05_delta": 0.0179
+   }
+  }
+ }
+}
