@@ -1,0 +1,190 @@
+{
+ "assumptions": {
+  "matches_per_pair": 223,
+  "rollouts_per_policy": 350,
+  "lambda": 0.001,
+  "eps": 0.01,
+  "matching": "무작위 일대일",
+  "TP_distribution": "Beta(mean=표 1 TP, concentration=kappa)"
+ },
+ "runs": [
+  {
+   "kappa": 0.7,
+   "per_rollout_sd_TP_pp(mean over policies)": 32.4,
+   "mean_elo": [
+    1582.4,
+    1539.0,
+    1488.6,
+    1439.5,
+    1420.6
+   ],
+   "mean_adjacent_gap": [
+    43.4,
+    50.4,
+    49.1,
+    18.9
+   ],
+   "gap_if_ELO_ln_TP_ratio": [
+    39.3,
+    48.7,
+    51.0,
+    19.1
+   ],
+   "mean_hessian_se": [
+    15.3,
+    0.0,
+    15.0,
+    15.2,
+    15.3
+   ],
+   "empirical_sd_over_datasets": [
+    14.9,
+    0.0,
+    16.4,
+    16.7,
+    17.3
+   ],
+   "sd_ratio_empirical_over_hessian": [
+    0.98,
+    1.09,
+    1.1,
+    1.13
+   ],
+   "bootstrap_sd_one_dataset(rollout resampling)": [
+    16.0,
+    0.0,
+    17.6,
+    16.7,
+    16.9
+   ],
+   "P(MolmoAct2 > GR00T N1.6)": 0.89,
+   "P(order equals reported order)": 0.885,
+   "sd_of_MA2_minus_N16_gap": 16.691723187833635,
+   "match_reuse": "롤아웃당 평균 재사용 횟수 = 2.55"
+  },
+  {
+   "kappa": 1.5,
+   "per_rollout_sd_TP_pp(mean over policies)": 26.7,
+   "mean_elo": [
+    1582.4,
+    1539.0,
+    1487.8,
+    1435.1,
+    1415.6
+   ],
+   "mean_adjacent_gap": [
+    43.4,
+    51.2,
+    52.7,
+    19.5
+   ],
+   "gap_if_ELO_ln_TP_ratio": [
+    39.3,
+    48.7,
+    51.0,
+    19.1
+   ],
+   "mean_hessian_se": [
+    15.3,
+    0.0,
+    15.1,
+    15.3,
+    15.4
+   ],
+   "empirical_sd_over_datasets": [
+    13.7,
+    0.0,
+    13.9,
+    15.1,
+    14.9
+   ],
+   "sd_ratio_empirical_over_hessian": [
+    0.9,
+    0.93,
+    0.99,
+    0.97
+   ],
+   "bootstrap_sd_one_dataset(rollout resampling)": [
+    12.3,
+    0.0,
+    13.6,
+    15.9,
+    15.5
+   ],
+   "P(MolmoAct2 > GR00T N1.6)": 0.89,
+   "P(order equals reported order)": 0.885,
+   "sd_of_MA2_minus_N16_gap": 15.73178187678721,
+   "match_reuse": "롤아웃당 평균 재사용 횟수 = 2.55"
+  },
+  {
+   "kappa": 3.0,
+   "per_rollout_sd_TP_pp(mean over policies)": 21.1,
+   "mean_elo": [
+    1582.3,
+    1539.0,
+    1487.8,
+    1434.0,
+    1413.0
+   ],
+   "mean_adjacent_gap": [
+    43.3,
+    51.2,
+    53.7,
+    21.0
+   ],
+   "gap_if_ELO_ln_TP_ratio": [
+    39.3,
+    48.7,
+    51.0,
+    19.1
+   ],
+   "mean_hessian_se": [
+    15.3,
+    0.0,
+    15.1,
+    15.3,
+    15.4
+   ],
+   "empirical_sd_over_datasets": [
+    10.6,
+    0.0,
+    12.3,
+    12.9,
+    12.6
+   ],
+   "sd_ratio_empirical_over_hessian": [
+    0.69,
+    0.82,
+    0.85,
+    0.82
+   ],
+   "bootstrap_sd_one_dataset(rollout resampling)": [
+    11.0,
+    0.0,
+    12.0,
+    14.0,
+    12.0
+   ],
+   "P(MolmoAct2 > GR00T N1.6)": 0.95,
+   "P(order equals reported order)": 0.95,
+   "sd_of_MA2_minus_N16_gap": 13.489552229983575,
+   "match_reuse": "롤아웃당 평균 재사용 횟수 = 2.55"
+  }
+ ],
+ "reported": {
+  "BT": [
+   1580.0,
+   1539.0,
+   1500.0,
+   1456.0,
+   1453.0
+  ],
+  "hessian_SE": [
+   16,
+   0,
+   17,
+   16,
+   16
+  ]
+ }
+}

@@ -1,0 +1,925 @@
+{
+ "V1_integer_feasibility": {
+  "sr_balanced_n350": {
+   "DreamZero": {
+    "reported": 13.1,
+    "k_over_350": [
+     46
+    ]
+   },
+   "pi0.5": {
+    "reported": 7.7,
+    "k_over_350": [
+     27
+    ]
+   },
+   "GR00T N1.7": {
+    "reported": 3.4,
+    "k_over_350": [
+     12
+    ]
+   },
+   "MolmoAct2": {
+    "reported": 2.6,
+    "k_over_350": [
+     9
+    ]
+   },
+   "GR00T N1.6": {
+    "reported": 0.6,
+    "k_over_350": [
+     2
+    ]
+   }
+  },
+  "sr_manual": {
+   "DreamZero": {
+    "reported": 31.6,
+    "n": 38,
+    "k": [
+     12
+    ]
+   },
+   "pi0.5": {
+    "reported": 12.5,
+    "n": 40,
+    "k": [
+     5
+    ]
+   },
+   "GR00T N1.7": {
+    "reported": 10.0,
+    "n": 40,
+    "k": [
+     4
+    ]
+   },
+   "MolmoAct2": {
+    "reported": 5.0,
+    "n": 40,
+    "k": [
+     2
+    ]
+   },
+   "GR00T N1.6": {
+    "reported": 12.5,
+    "n": 40,
+    "k": [
+     5
+    ]
+   }
+  },
+  "sr_b100_n100": {
+   "DreamZero": {
+    "reported": 14.0,
+    "k_over_100": [
+     14
+    ],
+    "note": "정수 k/100이 아니면 K=40 부트스트랩 중앙값(두 값의 평균)일 수 있음"
+   },
+   "pi0.5": {
+    "reported": 8.0,
+    "k_over_100": [
+     8
+    ],
+    "note": "정수 k/100이 아니면 K=40 부트스트랩 중앙값(두 값의 평균)일 수 있음"
+   },
+   "GR00T N1.7": {
+    "reported": 4.0,
+    "k_over_100": [
+     4
+    ],
+    "note": "정수 k/100이 아니면 K=40 부트스트랩 중앙값(두 값의 평균)일 수 있음"
+   },
+   "MolmoAct2": {
+    "reported": 2.5,
+    "k_over_100": [],
+    "note": "정수 k/100이 아니면 K=40 부트스트랩 중앙값(두 값의 평균)일 수 있음"
+   },
+   "GR00T N1.6": {
+    "reported": 0.0,
+    "k_over_100": [
+     0
+    ],
+    "note": "정수 k/100이 아니면 K=40 부트스트랩 중앙값(두 값의 평균)일 수 있음"
+   }
+  }
+ },
+ "V2_correlation_n5": {
+  "table1_values": {
+   "pearson_BT_vs_manualTP": {
+    "r": 0.9389566651004602,
+    "p_t_df3": 0.017938005854012163,
+    "reported": "r=0.94, p=0.018",
+    "fisher95": [
+     0.3303818394545127,
+     0.996069344273715
+    ]
+   },
+   "pearson_rawTP_vs_manualTP": {
+    "r": 0.9149692856670287,
+    "p_t_df3": 0.029381867422511893,
+    "reported": "r=0.92, p=0.029",
+    "fisher95": [
+     0.16966172189289402,
+     0.9944606510965985
+    ]
+   },
+   "spearman_BT_vs_manualTP": {
+    "rho": 0.8999999999999998,
+    "p_exact_perm": 0.08333333333333333,
+    "reported": "rho=0.90 (abstract에서 p=0.018 옆에 표기)"
+   },
+   "kendall_tau": {
+    "tau": 0.7999999999999999,
+    "p_scipy": 0.08333333333333333
+   }
+  },
+  "p_from_reported_r_n5": {
+   "0.94": 0.017482881230970342,
+   "0.92": 0.026834129112705482,
+   "0.93": 0.021997205536973808,
+   "0.9": 0.03738607346849863,
+   "0.99": 0.001198619511402008
+  },
+  "p_from_reported_r_n4_YAM": {
+   "r=0.839": 0.161,
+   "fisher95_r0.839_n4": "n-3=1이라 구간 계산 불가(자유도 부족)"
+  },
+  "spearman_n4_rho0.80_exact_p": 0.3333333333333333,
+  "spearman_n5_rho1.0_exact_p": 0.016666666666666666,
+  "fisher95_reported_r_n5": {
+   "0.94": [
+    0.33827692730881503,
+    0.9961384699549869
+   ],
+   "0.92": [
+    0.2003748859989921,
+    0.9948011462466436
+   ],
+   "0.99": [
+    0.8512703563706672,
+    0.9993715660074504
+   ],
+   "0.93": [
+    0.26593672526438034,
+    0.9954730486137748
+   ],
+   "0.9": [
+    0.08610194023847766,
+    0.9934375159687521
+   ]
+  }
+ },
+ "V3_table7_means": {
+  "column_mean_from_rows": {
+   "GR00T N1.6": 0.3435,
+   "GR00T N1.7": 0.439,
+   "pi0.5": 0.41,
+   "DreamZero": 0.5442,
+   "MolmoAct2": 0.263
+  },
+  "reported_mean_row": {
+   "GR00T N1.6": 0.34,
+   "GR00T N1.7": 0.44,
+   "pi0.5": 0.41,
+   "DreamZero": 0.54,
+   "MolmoAct2": 0.26
+  },
+  "table1_manual_TP": {
+   "DreamZero": 54.4,
+   "pi0.5": 45.0,
+   "GR00T N1.7": 43.9,
+   "MolmoAct2": 27.0,
+   "GR00T N1.6": 34.3
+  },
+  "tasks_with_value": [
+   20,
+   20,
+   20,
+   19,
+   20
+  ],
+  "manual_TP_from_table7_in_POL_order": {
+   "DreamZero": 54.42,
+   "pi0.5": 41.0,
+   "GR00T N1.7": 43.9,
+   "MolmoAct2": 26.3,
+   "GR00T N1.6": 34.35
+  },
+  "diff_table1_minus_table7": {
+   "DreamZero": -0.02,
+   "pi0.5": 4.0,
+   "GR00T N1.7": 0.0,
+   "MolmoAct2": 0.7,
+   "GR00T N1.6": -0.05
+  },
+  "pearson_BT_vs_table7_means": {
+   "r": 0.8965814552415545,
+   "p": 0.039298599489481584
+  },
+  "spearman_BT_vs_table7_means": {
+   "rho": 0.7999999999999999
+  },
+  "rank_by_table7_means": [
+   "DreamZero",
+   "GR00T N1.7",
+   "pi0.5",
+   "GR00T N1.6",
+   "MolmoAct2"
+  ],
+  "rank_by_table1_manual": [
+   "DreamZero",
+   "pi0.5",
+   "GR00T N1.7",
+   "GR00T N1.6",
+   "MolmoAct2"
+  ]
+ },
+ "V4_manual_SR_lower_bound": {
+  "GR00T N1.6": {
+   "cells_equal_1.00": 1,
+   "min_perfect_trials": 2,
+   "n_trials": 40,
+   "reported_SR_pct": 12.5,
+   "reported_perfect_trials": 5,
+   "consistent_with_lower_bound": true
+  },
+  "GR00T N1.7": {
+   "cells_equal_1.00": 2,
+   "min_perfect_trials": 4,
+   "n_trials": 40,
+   "reported_SR_pct": 10.0,
+   "reported_perfect_trials": 4,
+   "consistent_with_lower_bound": true
+  },
+  "pi0.5": {
+   "cells_equal_1.00": 2,
+   "min_perfect_trials": 4,
+   "n_trials": 40,
+   "reported_SR_pct": 12.5,
+   "reported_perfect_trials": 5,
+   "consistent_with_lower_bound": true
+  },
+  "DreamZero": {
+   "cells_equal_1.00": 3,
+   "min_perfect_trials": 6,
+   "n_trials": 38,
+   "reported_SR_pct": 31.6,
+   "reported_perfect_trials": 12,
+   "consistent_with_lower_bound": true
+  },
+  "MolmoAct2": {
+   "cells_equal_1.00": 1,
+   "min_perfect_trials": 2,
+   "n_trials": 40,
+   "reported_SR_pct": 5.0,
+   "reported_perfect_trials": 2,
+   "consistent_with_lower_bound": true
+  }
+ },
+ "V5_manual_noise": {
+  "paired_t_by_task": {
+   "DreamZero - pi0.5": {
+    "n_tasks": 19,
+    "mean_diff_pp": 13.894736842105262,
+    "t": 1.6999701074739988,
+    "p_t": 0.10635075944719756,
+    "p_wilcoxon": 0.19081914224294794
+   },
+   "pi0.5 - GR00T N1.7": {
+    "n_tasks": 20,
+    "mean_diff_pp": -2.9,
+    "t": -0.44611494651531847,
+    "p_t": 0.66055661467169,
+    "p_wilcoxon": 0.6482369914669115
+   },
+   "GR00T N1.7 - GR00T N1.6": {
+    "n_tasks": 20,
+    "mean_diff_pp": 9.55,
+    "t": 1.2937729801418767,
+    "p_t": 0.21125110572736364,
+    "p_wilcoxon": 0.22064015434996465
+   },
+   "GR00T N1.6 - MolmoAct2": {
+    "n_tasks": 20,
+    "mean_diff_pp": 8.049999999999999,
+    "t": 0.9435265663497369,
+    "p_t": 0.3572558094466767,
+    "p_wilcoxon": 0.3651155709852768
+   },
+   "pi0.5 - MolmoAct2": {
+    "n_tasks": 20,
+    "mean_diff_pp": 14.700000000000003,
+    "t": 2.3350369826882345,
+    "p_t": 0.03066357659989745,
+    "p_wilcoxon": 0.030604161983234873
+   },
+   "DreamZero - MolmoAct2": {
+    "n_tasks": 19,
+    "mean_diff_pp": 27.368421052631582,
+    "t": 3.066028497892186,
+    "p_t": 0.006655528353210701,
+    "p_wilcoxon": 0.009947529707590604
+   }
+  },
+  "bootstrap": {
+   "B": 20000,
+   "pearson_r_BT_vs_bootstrapped_manual": {
+    "median": 0.8455115028956252,
+    "p5": 0.5750598848401911,
+    "p95": 0.9749702672760838,
+    "frac_ge_0.94": 0.16875
+   },
+   "spearman_rho": {
+    "median": 0.7999999999999999,
+    "p5": 0.3,
+    "p95": 0.9999999999999999,
+    "frac_eq_1.0": 0.06015,
+    "frac_ge_0.9": 0.33755
+   },
+   "frac_bootstrap_ranking_equals_ScaleEvals_order": 0.0608,
+   "pearson_r_hist": {
+    "edges": [
+     0.0,
+     0.05,
+     0.1,
+     0.15,
+     0.2,
+     0.25,
+     0.3,
+     0.35,
+     0.4,
+     0.45,
+     0.5,
+     0.55,
+     0.6,
+     0.65,
+     0.7,
+     0.75,
+     0.8,
+     0.85,
+     0.9,
+     0.95,
+     1.0
+    ],
+    "counts": [
+     5,
+     1,
+     9,
+     10,
+     20,
+     20,
+     50,
+     77,
+     90,
+     175,
+     336,
+     496,
+     831,
+     1184,
+     1705,
+     2305,
+     2961,
+     3476,
+     3622,
+     2619
+    ]
+   },
+   "note": "수동 평균은 표 7 열 평균(표 1 값과 다름, V3). 과제 20개를 재표집, DreamZero는 19개 과제"
+  },
+  "leave_one_policy_out_pearson_table1": {
+   "drop DreamZero": 0.8707171953692986,
+   "drop pi0.5": 0.9428334575406122,
+   "drop GR00T N1.7": 0.9616585722954927,
+   "drop MolmoAct2": 0.9702603785685302,
+   "drop GR00T N1.6": 0.9506112759362728
+  },
+  "excluding_pour_fold_mix_17_tasks": {
+   "means_in_POL_order": {
+    "DreamZero": 51.5,
+    "pi0.5": 40.82,
+    "GR00T N1.7": 42.65,
+    "MolmoAct2": 28.76,
+    "GR00T N1.6": 38.35
+   },
+   "pearson_BT": 0.8464298986672072,
+   "p": 0.07055500752306322,
+   "spearman_BT": 0.7999999999999999,
+   "rank": [
+    "DreamZero",
+    "GR00T N1.7",
+    "pi0.5",
+    "GR00T N1.6",
+    "MolmoAct2"
+   ],
+   "three_task_means_in_POL_order": {
+    "DreamZero": 70.0,
+    "pi0.5": 42.0,
+    "GR00T N1.7": 51.0,
+    "MolmoAct2": 12.33,
+    "GR00T N1.6": 11.67
+   }
+  }
+ },
+ "V6_BT_vs_log_TP": {
+  "elo_per_ln_ratio": 173.71779276130073,
+  "adjacent_pairs": [
+   "DreamZero - pi0.5",
+   "pi0.5 - GR00T N1.7",
+   "GR00T N1.7 - MolmoAct2",
+   "MolmoAct2 - GR00T N1.6"
+  ],
+  "gap_reported_elo": [
+   41.0,
+   39.0,
+   44.0,
+   3.0
+  ],
+  "gap_if_BT_equals_ELO_ln_TP": [
+   39.3,
+   48.7,
+   51.0,
+   19.1
+  ],
+  "gap_from_soft_target_of_means": [
+   39.3,
+   48.6,
+   51.0,
+   19.1
+  ],
+  "pearson_BT_vs_lnTP": 0.9945164430184416,
+  "pearson_BT_vs_TP": 0.9973260654893618,
+  "fit_BT_on_lnTP": {
+   "slope": 142.24260292718648,
+   "intercept": 1055.8112599963686,
+   "slope_expected_ELO": 173.71779276130073
+  },
+  "adjacent_gap_z_independent_SE": [
+   2.56,
+   2.29,
+   1.88,
+   0.13
+  ],
+  "adjacent_gap_two_sided_p_z": [
+   0.010392158764182318,
+   0.02178374197170685,
+   0.05946320363672646,
+   0.8945235562182204
+  ],
+  "vs_anchor": {
+   "DreamZero": {
+    "gap": 41.0,
+    "se": 16.0,
+    "z": 2.5625
+   },
+   "pi0.5": {
+    "gap": 0.0,
+    "se": 0.0,
+    "z": null
+   },
+   "GR00T N1.7": {
+    "gap": -39.0,
+    "se": 17.0,
+    "z": -2.2941176470588234
+   },
+   "MolmoAct2": {
+    "gap": -83.0,
+    "se": 16.0,
+    "z": -5.1875
+   },
+   "GR00T N1.6": {
+    "gap": -86.0,
+    "se": 16.0,
+    "z": -5.375
+   }
+  },
+  "MA2_vs_N16": {
+   "gap": 3.0,
+   "z_if_corr_0": 0.13258252147247765,
+   "z_if_corr_0.5": 0.1875,
+   "z_if_corr_0.9": 0.41926274578121064
+  },
+  "fig16_log_ratio_elo_gaps_auto": [
+   52.9,
+   53.8,
+   51.7,
+   21.0
+  ],
+  "fig16_log_ratio_elo_gaps_human": [
+   44.3,
+   98.7,
+   82.1,
+   136.6
+  ]
+ },
+ "V7_tables_consistency": {
+  "full_n_sum": 2486,
+  "full_n_reported_2486": 2486,
+  "balanced_total": 1750,
+  "B100_minus_B350_BT": [
+   14.0,
+   -15.0,
+   0.0,
+   14.0,
+   0.0
+  ],
+  "B100_minus_B350_TP": [
+   0.6,
+   -0.7,
+   0.1,
+   0.2,
+   -0.8
+  ],
+  "B100_minus_B350_SR": [
+   0.9,
+   0.3,
+   0.6,
+   -0.1,
+   -0.6
+  ],
+  "max_abs_BT_shift": 15.0,
+  "max_abs_TP_shift": 0.8000000000000007,
+  "max_abs_SR_shift": 0.9000000000000004,
+  "caption_claims": "BT 이동 최대 15 Elo, TP·SR 이동 1 %p 미만",
+  "anchor_rows": {
+   "table1_pi05_BT": 1539,
+   "table4_pi05_BT": 1524,
+   "table4_pi05_SE": 30,
+   "table4_N17_BT": 1500,
+   "table4_N17_SE": 5,
+   "note": "표 4는 π0.5를 앵커로 표시하지만 값이 1539가 아니고 SE가 0이 아님. N1.7이 1500 ± 5(그림 4의 N1.7 = 1500 재중심과 같은 모양)"
+  },
+  "rollout_share_kept_in_balanced_350": {
+   "DreamZero": 0.909,
+   "pi0.5": 0.514,
+   "GR00T N1.7": 0.582,
+   "MolmoAct2": 0.795,
+   "GR00T N1.6": 0.923
+  },
+  "pairs_sum": 4466,
+  "comparisons_implied": 2233,
+  "max_matches_one_to_one_per_policy_pair": 350,
+  "max_comparisons_10_pairs": 3500,
+  "pairs_share_of_max_per_policy": {
+   "DreamZero": 0.706,
+   "pi0.5": 0.534,
+   "GR00T N1.7": 0.578,
+   "MolmoAct2": 0.679,
+   "GR00T N1.6": 0.693
+  },
+  "ratio_1750_over_198": 8.83838383838384,
+  "ratio_2486_over_198": 12.555555555555555,
+  "ratio_reported_8.75_12.4_equals_over_200": [
+   8.75,
+   12.43
+  ],
+  "manual_rollouts": {
+   "4x40+38": 198
+  },
+  "yam_rollouts": 1000,
+  "total_physical_reported_gt_3000": {
+   "2486+1000": 3486,
+   "plus_240_prospective": 3726,
+   "plus_530_drift": 4256,
+   "note": "530 interleaved 롤아웃이 2,486에 들어 있는지 논문에 없음"
+  },
+  "audit_cells": {
+   "policies x tags x 15": 525
+  }
+ },
+ "V8_throughput_labor": {
+  "net_rollouts_per_h": {
+   "scaleevals": 23.0,
+   "manual": 14.8,
+   "ratio": 1.554054054054054
+  },
+  "human_minutes_per_100": {
+   "manual": 240,
+   "scaleevals": 5,
+   "reduction": 0.9791666666666666,
+   "reported": "98%"
+  },
+  "station_hours_per_100": {
+   "manual": 6.756756756756756,
+   "scaleevals": 4.3478260869565215
+  },
+  "manual_active_human_share_of_station_time": 0.5920000000000001,
+  "seconds_per_rollout_net": {
+   "manual": 243.24324324324323,
+   "scaleevals": 156.52173913043478
+  },
+  "human_hours_for_corpus": {
+   "scaleevals_2486": 2.0716666666666668,
+   "manual_equivalent_2486": 99.44,
+   "manual_suite_198": 7.92
+  },
+  "interventions_per_530_rollouts": {
+   "count": 5,
+   "per_100": 0.9433962264150944,
+   "minutes_per_intervention_if_5min_per_100": 5.3
+  },
+  "audit_labor_not_in_5min": {
+   "rubric_judgments": 1454,
+   "rollouts": 525,
+   "share_of_2486": 0.21118262268704746,
+   "note": "5 min/100은 운영 중 개입 시간으로 읽히며, AutoGrader 감사(525 롤아웃)와 장면 구성 시간이 포함되는지 논문에 없음"
+  }
+ },
+ "V9_anova": [
+  {
+   "tag": "transfer",
+   "n": 707,
+   "F": 22.0,
+   "eta2_from_F": 0.1114,
+   "eta2_reported": 0.11,
+   "eta2_rounds_to_reported": true,
+   "p_from_F": 3.984262811486972e-17,
+   "p_reported": "<0.001",
+   "fig9_pct": 28,
+   "n_over_2486_pct": 28.4,
+   "fig18b_eta2": 0.11
+  },
+  {
+   "tag": "contact_rich",
+   "n": 298,
+   "F": 9.0,
+   "eta2_from_F": 0.1094,
+   "eta2_reported": 0.11,
+   "eta2_rounds_to_reported": true,
+   "p_from_F": 7.213267810029569e-07,
+   "p_reported": "<0.001",
+   "fig9_pct": 12,
+   "n_over_2486_pct": 12.0,
+   "fig18b_eta2": 0.11
+  },
+  {
+   "tag": "state_flip",
+   "n": 952,
+   "F": 17.2,
+   "eta2_from_F": 0.0677,
+   "eta2_reported": 0.07,
+   "eta2_rounds_to_reported": true,
+   "p_from_F": 1.2515947909866266e-13,
+   "p_reported": "<0.001",
+   "fig9_pct": 38,
+   "n_over_2486_pct": 38.3,
+   "fig18b_eta2": 0.07
+  },
+  {
+   "tag": "long_horizon",
+   "n": 996,
+   "F": 19.5,
+   "eta2_from_F": 0.073,
+   "eta2_reported": 0.07,
+   "eta2_rounds_to_reported": true,
+   "p_from_F": 1.8452386079051777e-15,
+   "p_reported": "<0.001"
+  },
+  {
+   "tag": "articulation",
+   "n": 448,
+   "F": 7.9,
+   "eta2_from_F": 0.0666,
+   "eta2_reported": 0.07,
+   "eta2_rounds_to_reported": true,
+   "p_from_F": 3.707299420805121e-06,
+   "p_reported": "<0.001",
+   "fig9_pct": 18,
+   "n_over_2486_pct": 18.0,
+   "fig18b_eta2": 0.07
+  },
+  {
+   "tag": "spatial",
+   "n": 761,
+   "F": 13.3,
+   "eta2_from_F": 0.0657,
+   "eta2_reported": 0.07,
+   "eta2_rounds_to_reported": true,
+   "p_from_F": 1.772552812895507e-10,
+   "p_reported": "<0.001",
+   "fig9_pct": 31,
+   "n_over_2486_pct": 30.6,
+   "fig18b_eta2": 0.06
+  },
+  {
+   "tag": "precision",
+   "n": 333,
+   "F": 5.4,
+   "eta2_from_F": 0.0618,
+   "eta2_reported": 0.06,
+   "eta2_rounds_to_reported": true,
+   "p_from_F": 0.00031929950592234253,
+   "p_reported": "<0.001",
+   "fig9_pct": 13,
+   "n_over_2486_pct": 13.4,
+   "fig18b_eta2": 0.06
+  },
+  {
+   "tag": "reposing",
+   "n": 272,
+   "F": 3.3,
+   "eta2_from_F": 0.0471,
+   "eta2_reported": 0.05,
+   "eta2_rounds_to_reported": true,
+   "p_from_F": 0.01161262979667846,
+   "p_reported": 0.011,
+   "fig9_pct": 11,
+   "n_over_2486_pct": 10.9,
+   "fig18b_eta2": 0.05
+  }
+ ],
+ "V9_bh_q": {
+  "transfer": 3.1874102491895775e-16,
+  "contact_rich": 1.154122849604731e-06,
+  "state_flip": 3.337586109297671e-13,
+  "long_horizon": 7.380954431620711e-15,
+  "articulation": 4.943065894406828e-06,
+  "spatial": 3.545105625791014e-10,
+  "precision": 0.00036491372105410577,
+  "reposing": 0.01161262979667846
+ },
+ "V9_note_7_tags_BH": {
+  "reposing_q_if_7_tests": 0.01161262979667846
+ },
+ "V10_autograder_audit": {
+  "per_policy": {
+   "DreamZero": {
+    "criteria": 290,
+    "wrong": 30,
+    "accuracy_pct": 89.66
+   },
+   "GR00T N1.6": {
+    "criteria": 299,
+    "wrong": 34,
+    "accuracy_pct": 88.63
+   },
+   "GR00T N1.7": {
+    "criteria": 303,
+    "wrong": 30,
+    "accuracy_pct": 90.1
+   },
+   "MolmoAct2": {
+    "criteria": 296,
+    "wrong": 21,
+    "accuracy_pct": 92.91
+   },
+   "pi0.5": {
+    "criteria": 316,
+    "wrong": 33,
+    "accuracy_pct": 89.56
+   }
+  },
+  "cells": 35,
+  "total_criteria_from_fig14": 1504,
+  "total_wrong_from_fig14": 148,
+  "overall_accuracy_pct_from_fig14": 90.16,
+  "reported_total_judgments": 1454,
+  "reported_accuracy_pct": 90.7,
+  "cell_accuracy_mismatch(not floor/round)": [],
+  "mean_criteria_per_rollout": 2.8647619047619046,
+  "implied_confusion_matrix(assume 'pass' is positive, N=1454)": {
+   "TP": 242.6,
+   "FN": 14.1,
+   "FP": 121.1,
+   "TN": 1076.2,
+   "human_positive_rate": 0.1765,
+   "grader_positive_rate": 0.2501,
+   "F1_pass": 0.782,
+   "F1_fail": 0.9409,
+   "macro_F1": 0.8615,
+   "reported_macro_F1": 0.862,
+   "always_fail_baseline_accuracy": 0.8235,
+   "cohen_kappa": 0.7251,
+   "FP_to_FN_ratio": 8.58
+  },
+  "fig16": {
+   "auto": [
+    43.8,
+    32.3,
+    23.7,
+    17.6,
+    15.6
+   ],
+   "human": [
+    36.9,
+    28.6,
+    16.2,
+    10.1,
+    4.6
+   ],
+   "pearson_r": 0.9874188473518515,
+   "reported_r": 0.99,
+   "spearman_rho": 0.9999999999999999,
+   "exact_perm_p_rho1": 0.016666666666666666,
+   "drop_pp": [
+    6.9,
+    3.7,
+    7.5,
+    7.5,
+    11.0
+   ],
+   "ratio_auto_over_human": [
+    1.19,
+    1.13,
+    1.46,
+    1.74,
+    3.39
+   ],
+   "gaps_auto": [
+    11.5,
+    8.6,
+    6.1,
+    2.0
+   ],
+   "gaps_human": [
+    8.3,
+    12.4,
+    6.1,
+    5.5
+   ]
+  },
+  "fig16_auto_vs_table1_TP": [
+   5.3,
+   1.6,
+   0.5,
+   0.3,
+   0.1
+  ],
+  "fig13_mean_F1_pass_by_policy": {
+   "DreamZero": 80.4,
+   "GR00T N1.6": 22.6,
+   "GR00T N1.7": 77.3,
+   "MolmoAct2": 64.0,
+   "pi0.5": 75.1
+  }
+ },
+ "V11_prospective": {
+  "mean_rho": 0.8870000000000001,
+  "place_mean": 0.974,
+  "rotate_mean": 0.8,
+  "reported": {
+   "overall": 0.887,
+   "place": 0.974,
+   "rotate": 0.8,
+   "intro": "ρ=0.88"
+  },
+  "rollouts": 240,
+  "rho_with_one_tie_n3": 0.8660254037844387,
+  "rho_red5": 0.0,
+  "pairwise": {
+   "pairs_total": 30,
+   "concordant": 27,
+   "discordant": 1,
+   "tied": 2,
+   "ties_excluded": 0.9642857142857143,
+   "ties_half_credit": 0.9333333333333333,
+   "ties_as_miss": 0.9,
+   "reported": "96%",
+   "k_over_30_that_rounds_to_96": []
+  },
+  "exact_order": {
+   "reported": "9/10",
+   "strict_no_ties": 8,
+   "note": "blue bowl은 동점(ρ=0.87)인데 Exact ✓로 표기"
+  },
+  "baseline_global_rank": {
+   "order": "pi0.5 > N1.7 > N1.6",
+   "place_exact": "5/5 (예측과 동일)",
+   "rotate_exact": "0/5 (관측 4/5는 N1.7 > π0.5)"
+  },
+  "fisher_rotate_4of5_vs_0of5_two_sided": 0.04761904761904762,
+  "chance_exact_order_3policies_per_prompt": 0.16666666666666666,
+  "binom_P(>=9_of_10)_if_p=1/6": 8.4344675608393e-07
+ },
+ "V12_yam": {
+  "pearson_p_n4": 0.161,
+  "spearman_exact_p_n4_rho0.8": 0.3333333333333333,
+  "rollouts": 1000,
+  "note": "BT와 평균 TP는 같은 롤아웃에서 나온 두 요약이라 독립 검증이 아님(V6). 수동 평가 기준 없음(논문 그림 7 캡션)"
+ },
+ "V13_text_consistency": {
+  "items": [
+   {
+    "what": "서론의 ρ=0.88과 표 6 ρ̄=0.887",
+    "diff": "소수 셋째 자리 반올림(0.887 → 0.89)과 '감사 전' 표기가 다름"
+   },
+   {
+    "what": "표 7 캡션의 'Figure 6 calibration, Figure 7 radar'",
+    "diff": "그림 7은 YAM, 수동 평가 레이더는 그림 6과 18a"
+   },
+   {
+    "what": "본문 3.3 '일곱 개 주요 태그'와 부록 표 11b 여덟 행",
+    "diff": "여덟째는 long horizon(이분 변수)으로 표 캡션에 설명"
+   },
+   {
+    "what": "AutoGrader 지표: '그림 13과 6절'(4.2절)",
+    "diff": "그림 13은 정책×태그 F1(통과), 일반 정확도는 그림 14"
+   },
+   {
+    "what": "그림 17 캡션 8.75배, 12.4배",
+    "diff": "1750/198 = 8.84, 2486/198 = 12.56 (200 기준이면 8.75, 12.43)"
+   }
+  ]
+ }
+}
