@@ -1,0 +1,85 @@
+{
+ "Q1_Q2_linear_layer": {
+  "shape": {
+   "out": 512,
+   "in": 1024,
+   "tokens": 256
+  },
+  "cases": {
+   "가우시안 활성": {
+    "rel_err_W1.58A8": 0.5139966545526526,
+    "cos_W1.58A8": 0.8864130869401615,
+    "rel_err_W1.58_only": 0.5139848515642204,
+    "rel_err_A8_only": 0.007830558154755283,
+    "rel_err_literal_eq4": 948.487363270348,
+    "literal_over_correct_median": 1420.1704799417075,
+    "expected_(127/beta)^2_median": 1418.9786047092089,
+    "alpha": 0.015977694279012907,
+    "beta_median": 3.371443703754728,
+    "zero_fraction": 0.3094806671142578
+   },
+   "이상치 채널 1% x 30": {
+    "rel_err_W1.58A8": 0.5155531178835645,
+    "cos_W1.58A8": 0.8860746857413677,
+    "rel_err_W1.58_only": 0.5148265679809143,
+    "rel_err_A8_only": 0.04242678051151007,
+    "rel_err_literal_eq4": 3.1726491179884464,
+    "literal_over_correct_median": 5.1925179996065145,
+    "expected_(127/beta)^2_median": 5.19120212206948,
+    "alpha": 0.015936217628758294,
+    "beta_median": 55.740359075246296,
+    "zero_fraction": 0.3101463317871094
+   }
+  }
+ },
+ "Q3_ternary_stats": {
+  "가우시안": {
+   "p(-1),p(0),p(+1)": [
+    0.3453,
+    0.3103,
+    0.3444
+   ],
+   "entropy_bits": 1.5832,
+   "log2(3)": 1.585
+  },
+  "라플라스": {
+   "p(-1),p(0),p(+1)": [
+    0.3034,
+    0.3938,
+    0.3028
+   ],
+   "entropy_bits": 1.5734,
+   "log2(3)": 1.585
+  },
+  "균등(-1,1)": {
+   "p(-1),p(0),p(+1)": [
+    0.3751,
+    0.2499,
+    0.375
+   ],
+   "entropy_bits": 1.5612,
+   "log2(3)": 1.585
+  },
+  "학생 t(3)": {
+   "p(-1),p(0),p(+1)": [
+    0.3098,
+    0.38,
+    0.3102
+   ],
+   "entropy_bits": 1.578,
+   "log2(3)": 1.585
+  }
+ },
+ "Q4_packing": {
+  "n_weights": 17697280,
+  "pack2_roundtrip_exact": true,
+  "pack2_bits_per_weight": 2.0,
+  "pack243_roundtrip_exact": true,
+  "pack243_bits_per_weight": 1.6,
+  "ideal_log2_3": 1.585,
+  "llm_linear_params_(공개 config 기준)": 2084044800,
+  "llm_linear_gb_2bit": 0.521,
+  "llm_linear_gb_1.6bit(243묶음)": 0.417,
+  "llm_linear_gb_1.58bit(이론)": 0.413
+ }
+}
