@@ -1,0 +1,4099 @@
+{
+ "V1_top3_real": {
+  "n_rows_per_metric": 12,
+  "summary": {
+   "ACE": {
+    "top3_PR": 2,
+    "top3_PDT": 4,
+    "best_PR": 1,
+    "best_PDT": 1
+   },
+   "Diff": {
+    "top3_PR": 4,
+    "top3_PDT": 6,
+    "best_PR": 0,
+    "best_PDT": 2
+   },
+   "STAC": {
+    "top3_PR": 5,
+    "top3_PDT": 2,
+    "best_PR": 2,
+    "best_PDT": 0
+   },
+   "ACC": {
+    "top3_PR": 10,
+    "top3_PDT": 8,
+    "best_PR": 5,
+    "best_PDT": 3
+   },
+   "LLMD": {
+    "top3_PR": 6,
+    "top3_PDT": 10,
+    "best_PR": 2,
+    "best_PDT": 6
+   },
+   "FAIL": {
+    "top3_PR": 10,
+    "top3_PDT": 11,
+    "best_PR": 5,
+    "best_PDT": 4
+   }
+  }
+ },
+ "V1_top3_libero": {
+  "n_rows_per_metric": 8,
+  "summary": {
+   "ACE": {
+    "top3_PR": 4,
+    "top3_PDT": 7,
+    "best_PR": 1,
+    "best_PDT": 4
+   },
+   "Diff": {
+    "top3_PR": 0,
+    "top3_PDT": 1,
+    "best_PR": 0,
+    "best_PDT": 1
+   },
+   "STAC": {
+    "top3_PR": 4,
+    "top3_PDT": 0,
+    "best_PR": 4,
+    "best_PDT": 0
+   },
+   "ACC": {
+    "top3_PR": 7,
+    "top3_PDT": 5,
+    "best_PR": 3,
+    "best_PDT": 1
+   },
+   "LLMD": {
+    "top3_PR": 1,
+    "top3_PDT": 3,
+    "best_PR": 0,
+    "best_PDT": 0
+   },
+   "FAIL": {
+    "top3_PR": 8,
+    "top3_PDT": 8,
+    "best_PR": 0,
+    "best_PDT": 4
+   }
+  }
+ },
+ "V1_both_top3_real": {
+  "ACE": [
+   2,
+   12
+  ],
+  "Diff": [
+   2,
+   12
+  ],
+  "STAC": [
+   2,
+   12
+  ],
+  "ACC": [
+   8,
+   12
+  ],
+  "LLMD": [
+   6,
+   12
+  ],
+  "FAIL": [
+   10,
+   12
+  ]
+ },
+ "V1_both_top3_libero": {
+  "ACE": [
+   4,
+   8
+  ],
+  "Diff": [
+   0,
+   8
+  ],
+  "STAC": [
+   0,
+   8
+  ],
+  "ACC": [
+   4,
+   8
+  ],
+  "LLMD": [
+   0,
+   8
+  ],
+  "FAIL": [
+   8,
+   8
+  ]
+ },
+ "V1_fail_not_top3": [
+  {
+   "task": "Blocks",
+   "vla": "pi0.5",
+   "metric": "PR",
+   "rank": 4,
+   "FAIL": 0.81,
+   "best": 0.95
+  },
+  {
+   "task": "Kitchen",
+   "vla": "pi0.5",
+   "metric": "PR",
+   "rank": 5,
+   "FAIL": 0.74,
+   "best": 0.99
+  },
+  {
+   "task": "Kitchen",
+   "vla": "pi0.5",
+   "metric": "PDT",
+   "rank": 4,
+   "FAIL": 0.28,
+   "best": 0.17
+  }
+ ],
+ "V2_fail_vs_single_real": {
+  "cells": [
+   {
+    "task": "Blocks",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "gap_vs_best_single": -0.06,
+    "better_than_both": false
+   },
+   {
+    "task": "Blocks",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "gap_vs_best_single": -0.01,
+    "better_than_both": false
+   },
+   {
+    "task": "Blocks",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "gap_vs_best_single": -0.14,
+    "better_than_both": false
+   },
+   {
+    "task": "Blocks",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "gap_vs_best_single": -0.03,
+    "better_than_both": false
+   },
+   {
+    "task": "Drawer",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "gap_vs_best_single": 0.01,
+    "better_than_both": true
+   },
+   {
+    "task": "Drawer",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "gap_vs_best_single": -0.03,
+    "better_than_both": false
+   },
+   {
+    "task": "Drawer",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "gap_vs_best_single": -0.01,
+    "better_than_both": false
+   },
+   {
+    "task": "Drawer",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "gap_vs_best_single": -0.02,
+    "better_than_both": false
+   },
+   {
+    "task": "Cups",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "gap_vs_best_single": -0.04,
+    "better_than_both": false
+   },
+   {
+    "task": "Cups",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.0,
+    "better_than_both": false
+   },
+   {
+    "task": "Cups",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "gap_vs_best_single": 0.03,
+    "better_than_both": true
+   },
+   {
+    "task": "Cups",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.02,
+    "better_than_both": true
+   },
+   {
+    "task": "Kitchen",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "gap_vs_best_single": 0.0,
+    "better_than_both": false
+   },
+   {
+    "task": "Kitchen",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "gap_vs_best_single": -0.01,
+    "better_than_both": false
+   },
+   {
+    "task": "Kitchen",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "gap_vs_best_single": -0.25,
+    "better_than_both": false
+   },
+   {
+    "task": "Kitchen",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "gap_vs_best_single": -0.11,
+    "better_than_both": false
+   },
+   {
+    "task": "Stack T",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "gap_vs_best_single": 0.0,
+    "better_than_both": false
+   },
+   {
+    "task": "Stack T",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.0,
+    "better_than_both": false
+   },
+   {
+    "task": "Stack T",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "gap_vs_best_single": 0.01,
+    "better_than_both": true
+   },
+   {
+    "task": "Stack T",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.0,
+    "better_than_both": false
+   },
+   {
+    "task": "Mixer",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "gap_vs_best_single": -0.01,
+    "better_than_both": false
+   },
+   {
+    "task": "Mixer",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.0,
+    "better_than_both": false
+   },
+   {
+    "task": "Mixer",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "gap_vs_best_single": -0.06,
+    "better_than_both": false
+   },
+   {
+    "task": "Mixer",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.01,
+    "better_than_both": true
+   }
+  ],
+  "n_better_than_both": 5,
+  "n": 24,
+  "worst_gap": -0.25
+ },
+ "V2_fail_vs_single_libero": {
+  "cells": [
+   {
+    "task": "Object",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "gap_vs_best_single": -0.03,
+    "better_than_both": false
+   },
+   {
+    "task": "Object",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.01,
+    "better_than_both": true
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "gap_vs_best_single": -0.12,
+    "better_than_both": false
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "gap_vs_best_single": -0.05,
+    "better_than_both": false
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "gap_vs_best_single": -0.02,
+    "better_than_both": false
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.02,
+    "better_than_both": true
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "gap_vs_best_single": -0.02,
+    "better_than_both": false
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "gap_vs_best_single": -0.02,
+    "better_than_both": false
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "gap_vs_best_single": -0.02,
+    "better_than_both": false
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.02,
+    "better_than_both": true
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "gap_vs_best_single": 0.01,
+    "better_than_both": true
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.02,
+    "better_than_both": true
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "gap_vs_best_single": -0.02,
+    "better_than_both": false
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.03,
+    "better_than_both": true
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "gap_vs_best_single": -0.01,
+    "better_than_both": false
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "gap_vs_best_single": 0.0,
+    "better_than_both": false
+   }
+  ],
+  "n_better_than_both": 6,
+  "n": 16,
+  "worst_gap": -0.12
+ },
+ "V3_fail_lowest_pdt_claim": {
+  "cells": [
+   {
+    "set": "real",
+    "task": "Cups",
+    "vla": "X-VLA",
+    "FAIL": 0.28,
+    "best": 0.27,
+    "FAIL_is_best": false,
+    "best_method": [
+     "Diff"
+    ]
+   },
+   {
+    "set": "real",
+    "task": "Cups",
+    "vla": "pi0.5",
+    "FAIL": 0.49,
+    "best": 0.49,
+    "FAIL_is_best": true,
+    "best_method": [
+     "FAIL"
+    ]
+   },
+   {
+    "set": "real",
+    "task": "Stack T",
+    "vla": "X-VLA",
+    "FAIL": 0.08,
+    "best": 0.08,
+    "FAIL_is_best": true,
+    "best_method": [
+     "Diff",
+     "LLMD",
+     "FAIL"
+    ]
+   },
+   {
+    "set": "real",
+    "task": "Stack T",
+    "vla": "pi0.5",
+    "FAIL": 0.1,
+    "best": 0.1,
+    "FAIL_is_best": true,
+    "best_method": [
+     "LLMD",
+     "FAIL"
+    ]
+   },
+   {
+    "set": "real",
+    "task": "Mixer",
+    "vla": "X-VLA",
+    "FAIL": 0.11,
+    "best": 0.11,
+    "FAIL_is_best": true,
+    "best_method": [
+     "LLMD",
+     "FAIL"
+    ]
+   },
+   {
+    "set": "real",
+    "task": "Mixer",
+    "vla": "pi0.5",
+    "FAIL": 0.27,
+    "best": 0.24,
+    "FAIL_is_best": false,
+    "best_method": [
+     "ACE"
+    ]
+   },
+   {
+    "set": "libero",
+    "task": "Object",
+    "vla": "X-VLA",
+    "FAIL": 0.14,
+    "best": 0.12,
+    "FAIL_is_best": false,
+    "best_method": [
+     "ACE",
+     "Diff"
+    ]
+   },
+   {
+    "set": "libero",
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "FAIL": 0.18,
+    "best": 0.18,
+    "FAIL_is_best": true,
+    "best_method": [
+     "FAIL"
+    ]
+   },
+   {
+    "set": "libero",
+    "task": "Goal",
+    "vla": "X-VLA",
+    "FAIL": 0.2,
+    "best": 0.2,
+    "FAIL_is_best": true,
+    "best_method": [
+     "FAIL"
+    ]
+   },
+   {
+    "set": "libero",
+    "task": "10",
+    "vla": "X-VLA",
+    "FAIL": 0.19,
+    "best": 0.19,
+    "FAIL_is_best": true,
+    "best_method": [
+     "FAIL"
+    ]
+   }
+  ],
+  "n_best": 7,
+  "n": 10
+ },
+ "V4_acc_vs_stac_real": {
+  "PR_acc_better": 9,
+  "PDT_acc_better": 11,
+  "n": 12,
+  "detail": [
+   {
+    "task": "Blocks",
+    "vla": "X-VLA",
+    "PR_ACC": 0.92,
+    "PR_STAC": 0.35,
+    "PDT_ACC": 0.24,
+    "PDT_STAC": 0.46
+   },
+   {
+    "task": "Blocks",
+    "vla": "pi0.5",
+    "PR_ACC": 0.95,
+    "PR_STAC": 0.84,
+    "PDT_ACC": 0.24,
+    "PDT_STAC": 0.36
+   },
+   {
+    "task": "Drawer",
+    "vla": "X-VLA",
+    "PR_ACC": 0.83,
+    "PR_STAC": 0.18,
+    "PDT_ACC": 0.33,
+    "PDT_STAC": 0.71
+   },
+   {
+    "task": "Drawer",
+    "vla": "pi0.5",
+    "PR_ACC": 0.62,
+    "PR_STAC": 0.72,
+    "PDT_ACC": 0.53,
+    "PDT_STAC": 0.5
+   },
+   {
+    "task": "Cups",
+    "vla": "X-VLA",
+    "PR_ACC": 0.97,
+    "PR_STAC": 0.98,
+    "PDT_ACC": 0.28,
+    "PDT_STAC": 0.42
+   },
+   {
+    "task": "Cups",
+    "vla": "pi0.5",
+    "PR_ACC": 0.6,
+    "PR_STAC": 0.61,
+    "PDT_ACC": 0.51,
+    "PDT_STAC": 0.52
+   },
+   {
+    "task": "Kitchen",
+    "vla": "X-VLA",
+    "PR_ACC": 1.0,
+    "PR_STAC": 0.3,
+    "PDT_ACC": 0.25,
+    "PDT_STAC": 0.55
+   },
+   {
+    "task": "Kitchen",
+    "vla": "pi0.5",
+    "PR_ACC": 0.99,
+    "PR_STAC": 0.92,
+    "PDT_ACC": 0.17,
+    "PDT_STAC": 0.26
+   },
+   {
+    "task": "Stack T",
+    "vla": "X-VLA",
+    "PR_ACC": 0.98,
+    "PR_STAC": 0.59,
+    "PDT_ACC": 0.09,
+    "PDT_STAC": 0.21
+   },
+   {
+    "task": "Stack T",
+    "vla": "pi0.5",
+    "PR_ACC": 0.95,
+    "PR_STAC": 0.87,
+    "PDT_ACC": 0.12,
+    "PDT_STAC": 0.17
+   },
+   {
+    "task": "Mixer",
+    "vla": "X-VLA",
+    "PR_ACC": 0.97,
+    "PR_STAC": 0.46,
+    "PDT_ACC": 0.14,
+    "PDT_STAC": 0.34
+   },
+   {
+    "task": "Mixer",
+    "vla": "pi0.5",
+    "PR_ACC": 0.85,
+    "PR_STAC": 0.7,
+    "PDT_ACC": 0.28,
+    "PDT_STAC": 0.43
+   }
+  ]
+ },
+ "V4_acc_vs_stac_libero": {
+  "PR_acc_better": 4,
+  "PDT_acc_better": 8,
+  "n": 8,
+  "detail": [
+   {
+    "task": "Object",
+    "vla": "X-VLA",
+    "PR_ACC": 0.97,
+    "PR_STAC": 1.0,
+    "PDT_ACC": 0.24,
+    "PDT_STAC": 0.31
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "PR_ACC": 0.66,
+    "PR_STAC": 0.4,
+    "PDT_ACC": 0.55,
+    "PDT_STAC": 0.73
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "PR_ACC": 0.94,
+    "PR_STAC": 0.99,
+    "PDT_ACC": 0.31,
+    "PDT_STAC": 0.36
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "PR_ACC": 0.78,
+    "PR_STAC": 0.45,
+    "PDT_ACC": 0.5,
+    "PDT_STAC": 0.72
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "PR_ACC": 0.96,
+    "PR_STAC": 1.0,
+    "PDT_ACC": 0.28,
+    "PDT_STAC": 0.3
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "PR_ACC": 0.77,
+    "PR_STAC": 0.5,
+    "PDT_ACC": 0.41,
+    "PDT_STAC": 0.6
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "PR_ACC": 0.96,
+    "PR_STAC": 1.0,
+    "PDT_ACC": 0.26,
+    "PDT_STAC": 0.3
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "PR_ACC": 0.8,
+    "PR_STAC": 0.46,
+    "PDT_ACC": 0.39,
+    "PDT_STAC": 0.62
+   }
+  ]
+ },
+ "V4_acc_vs_stac_libero_by_vla": {
+  "X-VLA": {
+   "PR_STAC_better": 4,
+   "PDT_ACC_better": 4
+  },
+  "pi0.5": {
+   "PR_STAC_better": 0,
+   "PDT_ACC_better": 4
+  }
+ },
+ "V5_ci_T1": {
+  "n_mean_outside_ci": 0,
+  "n_cells_with_ci": 120,
+  "widest": [
+   [
+    0.41,
+    "Kitchen",
+    "pi0.5",
+    "PR",
+    "LLMD"
+   ],
+   [
+    0.26,
+    "Kitchen",
+    "pi0.5",
+    "PDT",
+    "LLMD"
+   ],
+   [
+    0.26,
+    "Drawer",
+    "pi0.5",
+    "PR",
+    "Diff"
+   ],
+   [
+    0.23,
+    "Kitchen",
+    "pi0.5",
+    "PDT",
+    "FAIL"
+   ],
+   [
+    0.2,
+    "Kitchen",
+    "pi0.5",
+    "PR",
+    "FAIL"
+   ],
+   [
+    0.19,
+    "Kitchen",
+    "pi0.5",
+    "PR",
+    "Diff"
+   ]
+  ],
+  "median_width": 0.01,
+  "frac_width_le_0.01": 0.6
+ },
+ "V5_fail_vs_baselines_disjoint_ci": {
+  "n_pairs": 120,
+  "clearly_better": 71,
+  "clearly_worse": 16,
+  "vs_baselines_only(ACE,Diff,STAC)": {
+   "pairs": 72,
+   "better": 50,
+   "worse": 7
+  }
+ },
+ "K1_T4_tokenwise_vs_T1_LLMD": {
+  "name": "표 4 token-wise vs 표 1 LLMD",
+  "n_cells": 24,
+  "n_diff": 2,
+  "diff": [
+   {
+    "task": "Cups",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "A": 0.78,
+    "B": 0.58
+   },
+   {
+    "task": "Cups",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "A": 0.28,
+    "B": 0.52
+   }
+  ]
+ },
+ "K1_T5_velnorm_vs_T1_ACC": {
+  "name": "표 5 vel norm vs 표 1 ACC",
+  "n_cells": 24,
+  "n_diff": 3,
+  "diff": [
+   {
+    "task": "Kitchen",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "A": 0.2,
+    "B": 0.25
+   },
+   {
+    "task": "Mixer",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "A": 0.98,
+    "B": 0.97
+   },
+   {
+    "task": "Mixer",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "A": 0.11,
+    "B": 0.14
+   }
+  ]
+ },
+ "K1_T6_velnorm_vs_T2_ACC": {
+  "name": "표 6 vel norm vs 표 2 ACC",
+  "n_cells": 16,
+  "n_diff": 14,
+  "diff": [
+   {
+    "task": "Object",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "A": 0.22,
+    "B": 0.24
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "A": 0.65,
+    "B": 0.66
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "A": 0.58,
+    "B": 0.55
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "A": 0.95,
+    "B": 0.94
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "A": 0.28,
+    "B": 0.31
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "A": 0.8,
+    "B": 0.78
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "A": 0.49,
+    "B": 0.5
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "A": 0.95,
+    "B": 0.96
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "A": 0.26,
+    "B": 0.28
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "A": 0.91,
+    "B": 0.77
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "A": 0.33,
+    "B": 0.41
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "A": 0.23,
+    "B": 0.26
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "A": 0.79,
+    "B": 0.8
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "A": 0.4,
+    "B": 0.39
+   }
+  ]
+ },
+ "K1_T7_LLMD_vs_T1_LLMD": {
+  "name": "표 7 LLMD vs 표 1 LLMD",
+  "n_cells": 24,
+  "n_diff": 0,
+  "diff": []
+ },
+ "K1_T8_FAIL_vs_T1_FAIL": {
+  "name": "표 8 FAIL vs 표 1 FAIL",
+  "n_cells": 16,
+  "n_diff": 0,
+  "diff": []
+ },
+ "K1b_T6_vs_v1": [
+  {
+   "task": "Object",
+   "vla": "X-VLA",
+   "metric": "PR",
+   "v2_T2_ACC": 0.97,
+   "v2_T6_velnorm": 0.97,
+   "v1_T2_ACC": 0.97
+  },
+  {
+   "task": "Object",
+   "vla": "X-VLA",
+   "metric": "PDT",
+   "v2_T2_ACC": 0.24,
+   "v2_T6_velnorm": 0.22,
+   "v1_T2_ACC": 0.22
+  },
+  {
+   "task": "Object",
+   "vla": "pi0.5",
+   "metric": "PR",
+   "v2_T2_ACC": 0.66,
+   "v2_T6_velnorm": 0.65,
+   "v1_T2_ACC": 0.65
+  },
+  {
+   "task": "Object",
+   "vla": "pi0.5",
+   "metric": "PDT",
+   "v2_T2_ACC": 0.55,
+   "v2_T6_velnorm": 0.58,
+   "v1_T2_ACC": 0.58
+  },
+  {
+   "task": "Spatial",
+   "vla": "X-VLA",
+   "metric": "PR",
+   "v2_T2_ACC": 0.94,
+   "v2_T6_velnorm": 0.95,
+   "v1_T2_ACC": 0.95
+  },
+  {
+   "task": "Spatial",
+   "vla": "X-VLA",
+   "metric": "PDT",
+   "v2_T2_ACC": 0.31,
+   "v2_T6_velnorm": 0.28,
+   "v1_T2_ACC": 0.28
+  },
+  {
+   "task": "Spatial",
+   "vla": "pi0.5",
+   "metric": "PR",
+   "v2_T2_ACC": 0.78,
+   "v2_T6_velnorm": 0.8,
+   "v1_T2_ACC": 0.8
+  },
+  {
+   "task": "Spatial",
+   "vla": "pi0.5",
+   "metric": "PDT",
+   "v2_T2_ACC": 0.5,
+   "v2_T6_velnorm": 0.49,
+   "v1_T2_ACC": 0.49
+  },
+  {
+   "task": "Goal",
+   "vla": "X-VLA",
+   "metric": "PR",
+   "v2_T2_ACC": 0.96,
+   "v2_T6_velnorm": 0.95,
+   "v1_T2_ACC": 0.95
+  },
+  {
+   "task": "Goal",
+   "vla": "X-VLA",
+   "metric": "PDT",
+   "v2_T2_ACC": 0.28,
+   "v2_T6_velnorm": 0.26,
+   "v1_T2_ACC": 0.26
+  },
+  {
+   "task": "Goal",
+   "vla": "pi0.5",
+   "metric": "PR",
+   "v2_T2_ACC": 0.77,
+   "v2_T6_velnorm": 0.91,
+   "v1_T2_ACC": 0.91
+  },
+  {
+   "task": "Goal",
+   "vla": "pi0.5",
+   "metric": "PDT",
+   "v2_T2_ACC": 0.41,
+   "v2_T6_velnorm": 0.33,
+   "v1_T2_ACC": 0.33
+  },
+  {
+   "task": "10",
+   "vla": "X-VLA",
+   "metric": "PR",
+   "v2_T2_ACC": 0.96,
+   "v2_T6_velnorm": 0.96,
+   "v1_T2_ACC": 0.96
+  },
+  {
+   "task": "10",
+   "vla": "X-VLA",
+   "metric": "PDT",
+   "v2_T2_ACC": 0.26,
+   "v2_T6_velnorm": 0.23,
+   "v1_T2_ACC": 0.23
+  },
+  {
+   "task": "10",
+   "vla": "pi0.5",
+   "metric": "PR",
+   "v2_T2_ACC": 0.8,
+   "v2_T6_velnorm": 0.79,
+   "v1_T2_ACC": 0.79
+  },
+  {
+   "task": "10",
+   "vla": "pi0.5",
+   "metric": "PDT",
+   "v2_T2_ACC": 0.39,
+   "v2_T6_velnorm": 0.4,
+   "v1_T2_ACC": 0.4
+  }
+ ],
+ "K1b_T6_matches_v1_count": 14,
+ "K1b_T6_matches_v2T2_count": 2,
+ "K2_T2_average": {
+  "label": "표 2 Average = 4개 스위트 평균",
+  "n": 24,
+  "n_off_by_gt_0.005": 1,
+  "off": [
+   {
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "col": 2,
+    "mean_of_tasks": 0.318,
+    "reported": 0.31,
+    "diff": -0.007
+   }
+  ]
+ },
+ "K2_T7_average": {
+  "label": "표 7 Average = 6개 과제 평균",
+  "n": 12,
+  "n_off_by_gt_0.005": 0,
+  "off": []
+ },
+ "K2_T8_average": {
+  "label": "표 8 Average = 4개 과제 평균(표 8에 실린 과제)",
+  "n": 8,
+  "n_off_by_gt_0.005": 7,
+  "off": [
+   {
+    "vla": "X-VLA",
+    "metric": "PR",
+    "col": 1,
+    "mean_of_tasks": 0.965,
+    "reported": 0.94,
+    "diff": -0.025
+   },
+   {
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "col": 0,
+    "mean_of_tasks": 0.263,
+    "reported": 0.28,
+    "diff": 0.018
+   },
+   {
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "col": 1,
+    "mean_of_tasks": 0.155,
+    "reported": 0.19,
+    "diff": 0.035
+   },
+   {
+    "vla": "pi0.5",
+    "metric": "PR",
+    "col": 0,
+    "mean_of_tasks": 0.763,
+    "reported": 0.71,
+    "diff": -0.052
+   },
+   {
+    "vla": "pi0.5",
+    "metric": "PR",
+    "col": 1,
+    "mean_of_tasks": 0.793,
+    "reported": 0.77,
+    "diff": -0.022
+   },
+   {
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "col": 0,
+    "mean_of_tasks": 0.315,
+    "reported": 0.38,
+    "diff": 0.065
+   },
+   {
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "col": 1,
+    "mean_of_tasks": 0.28,
+    "reported": 0.31,
+    "diff": 0.03
+   }
+  ]
+ },
+ "K2_T8_fail_avg_ref": {
+  "over_all_6_tasks_from_T1": {
+   "X-VLA": {
+    "PR": 0.942,
+    "PDT": 0.192
+   },
+   "pi0.5": {
+    "PR": 0.768,
+    "PDT": 0.313
+   }
+  },
+  "over_4_tasks_from_T1": {
+   "X-VLA": {
+    "PR": 0.965,
+    "PDT": 0.155
+   },
+   "pi0.5": {
+    "PR": 0.793,
+    "PDT": 0.28
+   }
+  },
+  "reported_T8_FAIL": {
+   "X-VLA": {
+    "PR": 0.94,
+    "PDT": 0.19
+   },
+   "pi0.5": {
+    "PR": 0.77,
+    "PDT": 0.31
+   }
+  }
+ },
+ "K3_text_numbers": {
+  "global_to_token_xvla_drawer_PDT(0.19->0.24)": [
+   0.24,
+   0.19
+  ],
+  "velnorm_xvla_spatial_PDT(0.38->0.28)": [
+   0.38,
+   0.28
+  ],
+  "LL-RND_pi05_AUCPR 0.73->0.49 / PDT 0.35->0.51 (표 7 pi0.5 평균 LL-RND)": [
+   0.73,
+   0.35
+  ]
+ },
+ "V6_T4_token_minus_global": {
+  "PR": {
+   "mean": 0.143,
+   "min": 0.03,
+   "max": 0.33,
+   "n_worse": 0,
+   "n": 12
+  },
+  "PDT": {
+   "mean": -0.117,
+   "min": -0.22,
+   "max": -0.04,
+   "n_worse": 0,
+   "n": 12
+  }
+ },
+ "V6_T5_velnorm_minus_none": {
+  "PR": {
+   "mean": 0.013,
+   "min": -0.07,
+   "max": 0.06,
+   "n_worse": 1,
+   "n": 12
+  },
+  "PDT": {
+   "mean": -0.019,
+   "min": -0.04,
+   "max": 0.0,
+   "n_worse": 0,
+   "n": 12
+  }
+ },
+ "V6_T6_velnorm_minus_none": {
+  "PR": {
+   "mean": 0.055,
+   "min": -0.03,
+   "max": 0.21,
+   "n_worse": 1,
+   "n": 8
+  },
+  "PDT": {
+   "mean": -0.037,
+   "min": -0.16,
+   "max": 0.06,
+   "n_worse": 2,
+   "n": 8
+  }
+ },
+ "V6_T5_exceptions": [
+  {
+   "task": "Drawer",
+   "vla": "X-VLA",
+   "m": "PR",
+   "none": 0.9,
+   "vel": 0.83
+  }
+ ],
+ "V6_T6_exceptions": [
+  {
+   "task": "Object",
+   "vla": "pi0.5",
+   "m": "PR",
+   "none": 0.68,
+   "vel": 0.65
+  },
+  {
+   "task": "Object",
+   "vla": "pi0.5",
+   "m": "PDT",
+   "none": 0.52,
+   "vel": 0.58
+  },
+  {
+   "task": "Spatial",
+   "vla": "pi0.5",
+   "m": "PDT",
+   "none": 0.48,
+   "vel": 0.49
+  }
+ ],
+ "V7_table3": {
+  "X-VLA": {
+   "lat_pct": 2.21,
+   "lat_reported": 2.2,
+   "mem_pct": 0.11,
+   "mem_reported": 0.1
+  },
+  "pi0.5": {
+   "lat_pct": 1.3,
+   "lat_reported": 1.3,
+   "mem_pct": 0.41,
+   "mem_reported": 0.4
+  }
+ },
+ "V7_note": "메모리 단위가 MB로 표기됨(X-VLA 0.9B, pi0.5 3.6B 매개변수 모델의 가중치만으로 수 GB). 표기 단위 확인 필요.",
+ "V7_latency_resolution": {
+  "pi0.5_1ms_is_pct": 1.3,
+  "X-VLA_3ms_is_pct": 2.21
+ },
+ "V8": {
+  "rollouts": {
+   "pi0.5/Blocks": {
+    "ID": 40,
+    "OOD": 35,
+    "calib": 20,
+    "test_total": 75,
+    "with_calib": 95,
+    "success_rate": 0.56,
+    "succ_counts_if_test_only": [
+     42
+    ],
+    "succ_counts_if_with_calib": [
+     53
+    ],
+    "overlap_vs_H_minus_R": [
+     10,
+     10
+    ]
+   },
+   "pi0.5/Drawer": {
+    "ID": 80,
+    "OOD": 41,
+    "calib": 20,
+    "test_total": 121,
+    "with_calib": 141,
+    "success_rate": 0.72,
+    "succ_counts_if_test_only": [
+     87
+    ],
+    "succ_counts_if_with_calib": [
+     101,
+     102
+    ],
+    "overlap_vs_H_minus_R": [
+     10,
+     10
+    ]
+   },
+   "pi0.5/Cups": {
+    "ID": 181,
+    "OOD": 54,
+    "calib": 20,
+    "test_total": 235,
+    "with_calib": 255,
+    "success_rate": 0.69,
+    "succ_counts_if_test_only": [
+     161,
+     162,
+     163
+    ],
+    "succ_counts_if_with_calib": [
+     175,
+     176,
+     177
+    ],
+    "overlap_vs_H_minus_R": [
+     15,
+     15
+    ]
+   },
+   "pi0.5/Kitchen": {
+    "ID": 41,
+    "OOD": 31,
+    "calib": 20,
+    "test_total": 72,
+    "with_calib": 92,
+    "success_rate": 0.47,
+    "succ_counts_if_test_only": [
+     34
+    ],
+    "succ_counts_if_with_calib": [
+     43
+    ],
+    "overlap_vs_H_minus_R": [
+     10,
+     10
+    ]
+   },
+   "pi0.5/Stack T": {
+    "ID": 50,
+    "OOD": 51,
+    "calib": 20,
+    "test_total": 101,
+    "with_calib": 121,
+    "success_rate": 0.32,
+    "succ_counts_if_test_only": [
+     32
+    ],
+    "succ_counts_if_with_calib": [
+     39
+    ],
+    "overlap_vs_H_minus_R": [
+     10,
+     10
+    ]
+   },
+   "pi0.5/Mixer": {
+    "ID": 50,
+    "OOD": 30,
+    "calib": 20,
+    "test_total": 80,
+    "with_calib": 100,
+    "success_rate": 0.64,
+    "succ_counts_if_test_only": [
+     51
+    ],
+    "succ_counts_if_with_calib": [
+     64
+    ],
+    "overlap_vs_H_minus_R": [
+     10,
+     10
+    ]
+   },
+   "X-VLA/Blocks": {
+    "ID": 50,
+    "OOD": 34,
+    "calib": 20,
+    "test_total": 84,
+    "with_calib": 104,
+    "success_rate": 0.46,
+    "succ_counts_if_test_only": [
+     39
+    ],
+    "succ_counts_if_with_calib": [
+     48
+    ],
+    "overlap_vs_H_minus_R": [
+     10,
+     20
+    ]
+   },
+   "X-VLA/Drawer": {
+    "ID": 49,
+    "OOD": 38,
+    "calib": 20,
+    "test_total": 87,
+    "with_calib": 107,
+    "success_rate": 0.71,
+    "succ_counts_if_test_only": [
+     62
+    ],
+    "succ_counts_if_with_calib": [
+     76
+    ],
+    "overlap_vs_H_minus_R": [
+     10,
+     20
+    ]
+   },
+   "X-VLA/Cups": {
+    "ID": 65,
+    "OOD": 40,
+    "calib": 20,
+    "test_total": 105,
+    "with_calib": 125,
+    "success_rate": 0.53,
+    "succ_counts_if_test_only": [
+     56
+    ],
+    "succ_counts_if_with_calib": [
+     66
+    ],
+    "overlap_vs_H_minus_R": [
+     20,
+     20
+    ]
+   },
+   "X-VLA/Kitchen": {
+    "ID": 41,
+    "OOD": 21,
+    "calib": 20,
+    "test_total": 62,
+    "with_calib": 82,
+    "success_rate": 0.55,
+    "succ_counts_if_test_only": [
+     34
+    ],
+    "succ_counts_if_with_calib": [
+     45
+    ],
+    "overlap_vs_H_minus_R": [
+     10,
+     20
+    ]
+   },
+   "X-VLA/Stack T": {
+    "ID": 53,
+    "OOD": 51,
+    "calib": 20,
+    "test_total": 104,
+    "with_calib": 124,
+    "success_rate": 0.21,
+    "succ_counts_if_test_only": [
+     22
+    ],
+    "succ_counts_if_with_calib": [
+     26
+    ],
+    "overlap_vs_H_minus_R": [
+     10,
+     20
+    ]
+   },
+   "X-VLA/Mixer": {
+    "ID": 51,
+    "OOD": 30,
+    "calib": 20,
+    "test_total": 81,
+    "with_calib": 101,
+    "success_rate": 0.34,
+    "succ_counts_if_test_only": [],
+    "succ_counts_if_with_calib": [
+     34
+    ],
+    "overlap_vs_H_minus_R": [
+     10,
+     20
+    ]
+   }
+  },
+  "roughly_80_claim": {
+   "X-VLA": {
+    "min": 62,
+    "max": 105,
+    "by_task": {
+     "Blocks": 84,
+     "Drawer": 87,
+     "Cups": 105,
+     "Kitchen": 62,
+     "Stack T": 104,
+     "Mixer": 81
+    }
+   },
+   "pi0.5": {
+    "min": 72,
+    "max": 235,
+    "by_task": {
+     "Blocks": 75,
+     "Drawer": 121,
+     "Cups": 235,
+     "Kitchen": 72,
+     "Stack T": 101,
+     "Mixer": 80
+    }
+   }
+  },
+  "calib_plus_test": {
+   "X-VLA": {
+    "Blocks": 104,
+    "Drawer": 107,
+    "Cups": 125,
+    "Kitchen": 82,
+    "Stack T": 124,
+    "Mixer": 101
+   },
+   "pi0.5": {
+    "Blocks": 95,
+    "Drawer": 141,
+    "Cups": 255,
+    "Kitchen": 92,
+    "Stack T": 121,
+    "Mixer": 100
+   }
+  },
+  "avg_ID_OOD": {
+   "X-VLA": [
+    51.5,
+    35.7
+   ],
+   "pi0.5": [
+    73.7,
+    40.3
+   ]
+  },
+  "stac_xvla_infer_failure_rate": {
+   "Blocks": {
+    "STAC_PDT": 0.46,
+    "pi_from_PDT": 0.54,
+    "pi_from_T16_success_rate": 0.54,
+    "STAC_AUCPR": 0.35,
+    "AUCPR_over_pi": 0.65,
+    "pi_if_calib_included": [
+     0.538
+    ]
+   },
+   "Drawer": {
+    "STAC_PDT": 0.71,
+    "pi_from_PDT": 0.29,
+    "pi_from_T16_success_rate": 0.29,
+    "STAC_AUCPR": 0.18,
+    "AUCPR_over_pi": 0.62,
+    "pi_if_calib_included": [
+     0.29
+    ]
+   },
+   "Cups": {
+    "STAC_PDT": 0.42,
+    "pi_from_PDT": 0.58,
+    "pi_from_T16_success_rate": 0.47,
+    "STAC_AUCPR": 0.98,
+    "AUCPR_over_pi": 2.09,
+    "pi_if_calib_included": [
+     0.472
+    ]
+   },
+   "Kitchen": {
+    "STAC_PDT": 0.55,
+    "pi_from_PDT": 0.45,
+    "pi_from_T16_success_rate": 0.45,
+    "STAC_AUCPR": 0.3,
+    "AUCPR_over_pi": 0.67,
+    "pi_if_calib_included": [
+     0.451
+    ]
+   },
+   "Stack T": {
+    "STAC_PDT": 0.21,
+    "pi_from_PDT": 0.79,
+    "pi_from_T16_success_rate": 0.79,
+    "STAC_AUCPR": 0.59,
+    "AUCPR_over_pi": 0.75,
+    "pi_if_calib_included": [
+     0.79
+    ]
+   },
+   "Mixer": {
+    "STAC_PDT": 0.34,
+    "pi_from_PDT": 0.66,
+    "pi_from_T16_success_rate": 0.66,
+    "STAC_AUCPR": 0.46,
+    "AUCPR_over_pi": 0.7,
+    "pi_if_calib_included": [
+     0.663
+    ]
+   }
+  },
+  "stac_pi05": {
+   "Blocks": {
+    "STAC_PDT": 0.36,
+    "one_minus_success": 0.44
+   },
+   "Drawer": {
+    "STAC_PDT": 0.5,
+    "one_minus_success": 0.28
+   },
+   "Cups": {
+    "STAC_PDT": 0.52,
+    "one_minus_success": 0.31
+   },
+   "Kitchen": {
+    "STAC_PDT": 0.26,
+    "one_minus_success": 0.53
+   },
+   "Stack T": {
+    "STAC_PDT": 0.17,
+    "one_minus_success": 0.68
+   },
+   "Mixer": {
+    "STAC_PDT": 0.43,
+    "one_minus_success": 0.36
+   }
+  }
+ },
+ "V8_normalized_pdt_real": {
+  "X-VLA/Blocks": {
+   "pi": 0.54,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.7,
+    "Diff": 0.61,
+    "STAC": 1.0,
+    "ACC": 0.52,
+    "LLMD": 0.57,
+    "FAIL": 0.54
+   }
+  },
+  "pi0.5/Blocks": {
+   "pi": 0.44,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.8,
+    "Diff": 0.55,
+    "STAC": 0.64,
+    "ACC": 0.43,
+    "LLMD": 0.55,
+    "FAIL": 0.48
+   }
+  },
+  "X-VLA/Drawer": {
+   "pi": 0.29,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.32,
+    "Diff": 0.35,
+    "STAC": 1.0,
+    "ACC": 0.46,
+    "LLMD": 0.27,
+    "FAIL": 0.31
+   }
+  },
+  "pi0.5/Drawer": {
+   "pi": 0.28,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.94,
+    "Diff": 0.68,
+    "STAC": 0.69,
+    "ACC": 0.74,
+    "LLMD": 0.63,
+    "FAIL": 0.65
+   }
+  },
+  "X-VLA/Cups": {
+   "pi": 0.47,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.53,
+    "Diff": 0.51,
+    "STAC": 0.79,
+    "ACC": 0.53,
+    "LLMD": 0.62,
+    "FAIL": 0.53
+   }
+  },
+  "pi0.5/Cups": {
+   "pi": 0.31,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.88,
+    "Diff": 0.83,
+    "STAC": 0.75,
+    "ACC": 0.74,
+    "LLMD": 0.75,
+    "FAIL": 0.71
+   }
+  },
+  "X-VLA/Kitchen": {
+   "pi": 0.45,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.44,
+    "Diff": 0.38,
+    "STAC": 1.0,
+    "ACC": 0.45,
+    "LLMD": 0.36,
+    "FAIL": 0.38
+   }
+  },
+  "pi0.5/Kitchen": {
+   "pi": 0.53,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.43,
+    "Diff": 0.64,
+    "STAC": 0.55,
+    "ACC": 0.36,
+    "LLMD": 0.7,
+    "FAIL": 0.6
+   }
+  },
+  "X-VLA/Stack T": {
+   "pi": 0.79,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.43,
+    "Diff": 0.38,
+    "STAC": 1.0,
+    "ACC": 0.43,
+    "LLMD": 0.38,
+    "FAIL": 0.38
+   }
+  },
+  "pi0.5/Stack T": {
+   "pi": 0.68,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.75,
+    "Diff": 0.41,
+    "STAC": 0.53,
+    "ACC": 0.38,
+    "LLMD": 0.31,
+    "FAIL": 0.31
+   }
+  },
+  "X-VLA/Mixer": {
+   "pi": 0.66,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.47,
+    "Diff": 0.41,
+    "STAC": 1.0,
+    "ACC": 0.41,
+    "LLMD": 0.32,
+    "FAIL": 0.32
+   }
+  },
+  "pi0.5/Mixer": {
+   "pi": 0.36,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.38,
+    "Diff": 0.7,
+    "STAC": 0.67,
+    "ACC": 0.44,
+    "LLMD": 0.44,
+    "FAIL": 0.42
+   }
+  }
+ },
+ "V8_normalized_pdt_libero": {
+  "pi0.5/Object": {
+   "pi": 0.12,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.58,
+    "Diff": 0.76,
+    "STAC": 0.83,
+    "ACC": 0.63,
+    "LLMD": 0.75,
+    "FAIL": 0.68
+   }
+  },
+  "X-VLA/Object": {
+   "pi": 0.37,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.19,
+    "Diff": 0.19,
+    "STAC": 0.49,
+    "ACC": 0.38,
+    "LLMD": 0.24,
+    "FAIL": 0.22
+   }
+  },
+  "pi0.5/Spatial": {
+   "pi": 0.1,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.5,
+    "Diff": 0.66,
+    "STAC": 0.8,
+    "ACC": 0.56,
+    "LLMD": 0.63,
+    "FAIL": 0.58
+   }
+  },
+  "X-VLA/Spatial": {
+   "pi": 0.33,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.28,
+    "Diff": 0.34,
+    "STAC": 0.54,
+    "ACC": 0.46,
+    "LLMD": 0.3,
+    "FAIL": 0.27
+   }
+  },
+  "pi0.5/Goal": {
+   "pi": 0.21,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.42,
+    "Diff": 0.58,
+    "STAC": 0.76,
+    "ACC": 0.52,
+    "LLMD": 0.53,
+    "FAIL": 0.49
+   }
+  },
+  "X-VLA/Goal": {
+   "pi": 0.34,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.33,
+    "Diff": 0.58,
+    "STAC": 0.45,
+    "ACC": 0.42,
+    "LLMD": 0.33,
+    "FAIL": 0.3
+   }
+  },
+  "pi0.5/10": {
+   "pi": 0.23,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.55,
+    "Diff": 0.64,
+    "STAC": 0.81,
+    "ACC": 0.51,
+    "LLMD": 0.56,
+    "FAIL": 0.51
+   }
+  },
+  "X-VLA/10": {
+   "pi": 0.41,
+   "AUCPDT_over_(1-pi)": {
+    "ACE": 0.47,
+    "Diff": 0.47,
+    "STAC": 0.51,
+    "ACC": 0.44,
+    "LLMD": 0.37,
+    "FAIL": 0.32
+   }
+  }
+ },
+ "V8_libero_counts": {
+  "total_rollouts": 9608,
+  "avg_success_pi05": 0.834,
+  "avg_success_xvla": 0.637,
+  "n_failures": {
+   "Object": {
+    "pi0.5": 290,
+    "X-VLA": 893
+   },
+   "Spatial": {
+    "pi0.5": 230,
+    "X-VLA": 759
+   },
+   "Goal": {
+    "pi0.5": 517,
+    "X-VLA": 837
+   },
+   "10": {
+    "pi0.5": 559,
+    "X-VLA": 997
+   }
+  }
+ },
+ "V9_threshold_dependent_real": {
+  "wacc_check": [],
+  "f1_check": [],
+  "ci_gt1": [
+   {
+    "task": "Drawer",
+    "vla": "X-VLA",
+    "method": "ACE",
+    "metric": "Prec",
+    "mean": 0.95,
+    "lo": 0.89,
+    "hi": 1.01
+   },
+   {
+    "task": "Drawer",
+    "vla": "X-VLA",
+    "method": "ACE",
+    "metric": "TNR",
+    "mean": 0.97,
+    "lo": 0.93,
+    "hi": 1.01
+   },
+   {
+    "task": "Kitchen",
+    "vla": "pi0.5",
+    "method": "Diff",
+    "metric": "Prec",
+    "mean": 0.67,
+    "lo": 0.01,
+    "hi": 1.32
+   },
+   {
+    "task": "Stack T",
+    "vla": "pi0.5",
+    "method": "ACE",
+    "metric": "TNR",
+    "mean": 0.92,
+    "lo": 0.82,
+    "hi": 1.01
+   },
+   {
+    "task": "Stack T",
+    "vla": "pi0.5",
+    "method": "Diff",
+    "metric": "Prec",
+    "mean": 0.99,
+    "lo": 0.97,
+    "hi": 1.01
+   },
+   {
+    "task": "Stack T",
+    "vla": "pi0.5",
+    "method": "Diff",
+    "metric": "TNR",
+    "mean": 0.97,
+    "lo": 0.92,
+    "hi": 1.03
+   },
+   {
+    "task": "Stack T",
+    "vla": "pi0.5",
+    "method": "STAC",
+    "metric": "Prec",
+    "mean": 0.97,
+    "lo": 0.92,
+    "hi": 1.03
+   },
+   {
+    "task": "Stack T",
+    "vla": "pi0.5",
+    "method": "STAC",
+    "metric": "TNR",
+    "mean": 0.97,
+    "lo": 0.92,
+    "hi": 1.03
+   },
+   {
+    "task": "Mixer",
+    "vla": "pi0.5",
+    "method": "ACE",
+    "metric": "Prec",
+    "mean": 0.99,
+    "lo": 0.96,
+    "hi": 1.01
+   },
+   {
+    "task": "Mixer",
+    "vla": "pi0.5",
+    "method": "ACE",
+    "metric": "TNR",
+    "mean": 0.99,
+    "lo": 0.97,
+    "hi": 1.01
+   },
+   {
+    "task": "Mixer",
+    "vla": "pi0.5",
+    "method": "Diff",
+    "metric": "Prec",
+    "mean": 0.87,
+    "lo": 0.67,
+    "hi": 1.06
+   }
+  ],
+  "class_counts": {
+   "X-VLA/Blocks": {
+    "n_test_rollouts": 84,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      39
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      48
+     ]
+    },
+    "STAC_success_share_of_test": 0.3,
+    "ACC_row": {
+     "Rec": 0.47,
+     "Prec": 1.0,
+     "Acc": 0.62,
+     "WACC": 0.73,
+     "F1": 0.64,
+     "TNR": 1.0
+    }
+   },
+   "pi0.5/Blocks": {
+    "n_test_rollouts": 75,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      42
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      53
+     ]
+    },
+    "ACC_row": {
+     "Rec": 0.82,
+     "Prec": 0.9,
+     "Acc": 0.84,
+     "WACC": 0.84,
+     "F1": 0.86,
+     "TNR": 0.86
+    }
+   },
+   "X-VLA/Drawer": {
+    "n_test_rollouts": 87,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      62
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      76
+     ]
+    },
+    "STAC_success_share_of_test": 0.631,
+    "ACC_row": {
+     "Rec": 0.4,
+     "Prec": 1.0,
+     "Acc": 0.78,
+     "WACC": 0.7,
+     "F1": 0.57,
+     "TNR": 1.0
+    }
+   },
+   "pi0.5/Drawer": {
+    "n_test_rollouts": 121,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      87
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      101,
+      102
+     ]
+    },
+    "ACC_row": {
+     "Rec": 0.5,
+     "Prec": 0.52,
+     "Acc": 0.67,
+     "WACC": 0.63,
+     "F1": 0.51,
+     "TNR": 0.75
+    }
+   },
+   "X-VLA/Cups": {
+    "n_test_rollouts": 105,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      56
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      66
+     ]
+    },
+    "ACC_row": {
+     "Rec": 0.94,
+     "Prec": 0.98,
+     "Acc": 0.95,
+     "WACC": 0.96,
+     "F1": 0.96,
+     "TNR": 0.97
+    }
+   },
+   "pi0.5/Cups": {
+    "n_test_rollouts": 235,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      161,
+      162,
+      163
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      175,
+      176,
+      177
+     ]
+    },
+    "ACC_row": {
+     "Rec": 0.94,
+     "Prec": 0.98,
+     "Acc": 0.95,
+     "WACC": 0.96,
+     "F1": 0.96,
+     "TNR": 0.97
+    }
+   },
+   "X-VLA/Kitchen": {
+    "n_test_rollouts": 62,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      34
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      45
+     ]
+    },
+    "STAC_success_share_of_test": 0.333,
+    "ACC_row": {
+     "Rec": 1.0,
+     "Prec": 0.93,
+     "Acc": 0.95,
+     "WACC": 0.93,
+     "F1": 0.97,
+     "TNR": 0.86
+    }
+   },
+   "pi0.5/Kitchen": {
+    "n_test_rollouts": 72,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      34
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      43
+     ]
+    },
+    "ACC_row": {
+     "Rec": 0.89,
+     "Prec": 0.97,
+     "Acc": 0.9,
+     "WACC": 0.91,
+     "F1": 0.93,
+     "TNR": 0.93
+    }
+   },
+   "X-VLA/Stack T": {
+    "n_test_rollouts": 104,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      22
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      26
+     ]
+    },
+    "STAC_success_share_of_test": 0.02,
+    "ACC_row": {
+     "Rec": 0.89,
+     "Prec": 1.0,
+     "Acc": 0.89,
+     "WACC": 0.95,
+     "F1": 0.94,
+     "TNR": 1.0
+    }
+   },
+   "pi0.5/Stack T": {
+    "n_test_rollouts": 101,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      32
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      39
+     ]
+    },
+    "ACC_row": {
+     "Rec": 0.35,
+     "Prec": 1.0,
+     "Acc": 0.44,
+     "WACC": 0.67,
+     "F1": 0.52,
+     "TNR": 1.0
+    }
+   },
+   "X-VLA/Mixer": {
+    "n_test_rollouts": 81,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": []
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      34
+     ]
+    },
+    "STAC_success_share_of_test": 0.11,
+    "ACC_row": {
+     "Rec": 0.9,
+     "Prec": 0.98,
+     "Acc": 0.89,
+     "WACC": 0.87,
+     "F1": 0.94,
+     "TNR": 0.83
+    }
+   },
+   "pi0.5/Mixer": {
+    "n_test_rollouts": 80,
+    "calib": 20,
+    "H_a_total=ID+OOD,calib in it": {
+     "succ_total_options": [
+      51
+     ]
+    },
+    "H_b_total=calib+ID+OOD": {
+     "succ_total_options": [
+      64
+     ]
+    },
+    "ACC_row": {
+     "Rec": 0.17,
+     "Prec": 1.0,
+     "Acc": 0.6,
+     "WACC": 0.59,
+     "F1": 0.29,
+     "TNR": 1.0
+    }
+   }
+  },
+  "acc_check": [],
+  "acc_integer_solutions": {
+   "X-VLA/Blocks": {
+    "n_test": 84,
+    "n_solutions": 1,
+    "matching_success_rate": [
+     [
+      19,
+      45,
+      21,
+      19
+     ]
+    ],
+    "success_total_options": [
+     39
+    ],
+    "solutions_sample": [
+     [
+      19,
+      45,
+      21,
+      19
+     ]
+    ]
+   },
+   "pi0.5/Blocks": {
+    "n_test": 75,
+    "n_solutions": 2,
+    "matching_success_rate": [
+     [
+      22,
+      33,
+      27,
+      19
+     ]
+    ],
+    "success_total_options": [
+     42
+    ],
+    "solutions_sample": [
+     [
+      21,
+      34,
+      28,
+      18
+     ],
+     [
+      22,
+      33,
+      27,
+      19
+     ]
+    ]
+   },
+   "X-VLA/Drawer": {
+    "n_test": 87,
+    "n_solutions": 1,
+    "matching_success_rate": [
+     [
+      42,
+      25,
+      10,
+      42
+     ]
+    ],
+    "success_total_options": [
+     62
+    ],
+    "solutions_sample": [
+     [
+      42,
+      25,
+      10,
+      42
+     ]
+    ]
+   },
+   "pi0.5/Drawer": {
+    "n_test": 121,
+    "n_solutions": 0,
+    "matching_success_rate": [],
+    "success_total_options": [
+     87
+    ],
+    "solutions_sample": []
+   },
+   "X-VLA/Cups": {
+    "n_test": 105,
+    "n_solutions": 8,
+    "matching_success_rate": [
+     [
+      36,
+      49,
+      46,
+      35
+     ]
+    ],
+    "success_total_options": [
+     56
+    ],
+    "solutions_sample": [
+     [
+      31,
+      54,
+      51,
+      30
+     ],
+     [
+      32,
+      53,
+      50,
+      31
+     ],
+     [
+      33,
+      52,
+      49,
+      32
+     ]
+    ]
+   },
+   "pi0.5/Cups": {
+    "n_test": 235,
+    "n_solutions": 18,
+    "matching_success_rate": [],
+    "success_total_options": [
+     161,
+     162,
+     163
+    ],
+    "solutions_sample": [
+     [
+      74,
+      141,
+      132,
+      72
+     ],
+     [
+      75,
+      140,
+      131,
+      73
+     ],
+     [
+      75,
+      140,
+      132,
+      73
+     ]
+    ]
+   },
+   "X-VLA/Kitchen": {
+    "n_test": 62,
+    "n_solutions": 1,
+    "matching_success_rate": [
+     [
+      14,
+      28,
+      28,
+      12
+     ]
+    ],
+    "success_total_options": [
+     34
+    ],
+    "solutions_sample": [
+     [
+      14,
+      28,
+      28,
+      12
+     ]
+    ]
+   },
+   "pi0.5/Kitchen": {
+    "n_test": 72,
+    "n_solutions": 2,
+    "matching_success_rate": [
+     [
+      14,
+      38,
+      34,
+      13
+     ]
+    ],
+    "success_total_options": [
+     34
+    ],
+    "solutions_sample": [
+     [
+      14,
+      38,
+      34,
+      13
+     ],
+     [
+      15,
+      37,
+      33,
+      14
+     ]
+    ]
+   },
+   "X-VLA/Stack T": {
+    "n_test": 104,
+    "n_solutions": 5,
+    "matching_success_rate": [
+     [
+      2,
+      82,
+      73,
+      2
+     ]
+    ],
+    "success_total_options": [
+     22
+    ],
+    "solutions_sample": [
+     [
+      1,
+      83,
+      74,
+      1
+     ],
+     [
+      2,
+      82,
+      73,
+      2
+     ],
+     [
+      3,
+      81,
+      72,
+      3
+     ]
+    ]
+   },
+   "pi0.5/Stack T": {
+    "n_test": 101,
+    "n_solutions": 1,
+    "matching_success_rate": [
+     [
+      12,
+      69,
+      24,
+      12
+     ]
+    ],
+    "success_total_options": [
+     32
+    ],
+    "solutions_sample": [
+     [
+      12,
+      69,
+      24,
+      12
+     ]
+    ]
+   },
+   "X-VLA/Mixer": {
+    "n_test": 81,
+    "n_solutions": 0,
+    "matching_success_rate": [],
+    "success_total_options": [],
+    "solutions_sample": []
+   },
+   "pi0.5/Mixer": {
+    "n_test": 80,
+    "n_solutions": 1,
+    "matching_success_rate": [
+     [
+      31,
+      29,
+      5,
+      31
+     ]
+    ],
+    "success_total_options": [
+     51
+    ],
+    "solutions_sample": [
+     [
+      31,
+      29,
+      5,
+      31
+     ]
+    ]
+   }
+  },
+  "cal_lt_success_check": {
+   "X-VLA/Blocks": [
+    39,
+    20
+   ],
+   "X-VLA/Drawer": [
+    62,
+    20
+   ],
+   "X-VLA/Cups": [
+    56,
+    20
+   ],
+   "X-VLA/Kitchen": [
+    34,
+    20
+   ],
+   "X-VLA/Stack T": [
+    22,
+    20
+   ],
+   "X-VLA/Mixer": [
+    null,
+    20
+   ],
+   "pi0.5/Blocks": [
+    42,
+    20
+   ],
+   "pi0.5/Drawer": [
+    87,
+    20
+   ],
+   "pi0.5/Cups": [
+    161,
+    20
+   ],
+   "pi0.5/Kitchen": [
+    34,
+    20
+   ],
+   "pi0.5/Stack T": [
+    32,
+    20
+   ],
+   "pi0.5/Mixer": [
+    51,
+    20
+   ]
+  },
+  "tnr_mean": {
+   "ACE": 0.929,
+   "Diff": 0.947,
+   "STAC": 0.948,
+   "ACC": 0.931,
+   "LLMD": 0.947,
+   "FAIL": 0.906
+  },
+  "tnr_target_single": 0.952,
+  "tnr_target_or": 0.907,
+  "tnr_below_0.95_count": {
+   "ACE": 6,
+   "Diff": 4,
+   "STAC": 5,
+   "ACC": 5,
+   "LLMD": 6,
+   "FAIL": 8
+  },
+  "tnr_rows": [
+   {
+    "task": "Blocks",
+    "vla": "X-VLA",
+    "ACC": 1.0,
+    "LLMD": 1.0,
+    "FAIL": 1.0,
+    "ACE": 1.0,
+    "Diff": 1.0,
+    "STAC": 1.0
+   },
+   {
+    "task": "Blocks",
+    "vla": "pi0.5",
+    "ACC": 0.86,
+    "LLMD": 1.0,
+    "FAIL": 0.86,
+    "ACE": 0.88,
+    "Diff": 0.92,
+    "STAC": 0.94
+   },
+   {
+    "task": "Drawer",
+    "vla": "X-VLA",
+    "ACC": 1.0,
+    "LLMD": 0.93,
+    "FAIL": 0.93,
+    "ACE": 0.97,
+    "Diff": 1.0,
+    "STAC": 0.84
+   },
+   {
+    "task": "Drawer",
+    "vla": "pi0.5",
+    "ACC": 0.75,
+    "LLMD": 0.88,
+    "FAIL": 0.67,
+    "ACE": 0.93,
+    "Diff": 0.83,
+    "STAC": 0.83
+   },
+   {
+    "task": "Cups",
+    "vla": "X-VLA",
+    "ACC": 0.97,
+    "LLMD": 0.92,
+    "FAIL": 0.92,
+    "ACE": 0.96,
+    "Diff": 0.97,
+    "STAC": 0.97
+   },
+   {
+    "task": "Cups",
+    "vla": "pi0.5",
+    "ACC": 0.97,
+    "LLMD": 0.92,
+    "FAIL": 0.92,
+    "ACE": 0.96,
+    "Diff": 0.97,
+    "STAC": 0.97
+   },
+   {
+    "task": "Kitchen",
+    "vla": "X-VLA",
+    "ACC": 0.86,
+    "LLMD": 0.93,
+    "FAIL": 0.86,
+    "ACE": 0.88,
+    "Diff": 0.9,
+    "STAC": 0.93
+   },
+   {
+    "task": "Kitchen",
+    "vla": "pi0.5",
+    "ACC": 0.93,
+    "LLMD": 0.95,
+    "FAIL": 0.88,
+    "ACE": 0.88,
+    "Diff": 1.0,
+    "STAC": 0.93
+   },
+   {
+    "task": "Stack T",
+    "vla": "X-VLA",
+    "ACC": 1.0,
+    "LLMD": 1.0,
+    "FAIL": 1.0,
+    "ACE": 1.0,
+    "Diff": 1.0,
+    "STAC": 1.0
+   },
+   {
+    "task": "Stack T",
+    "vla": "pi0.5",
+    "ACC": 1.0,
+    "LLMD": 1.0,
+    "FAIL": 1.0,
+    "ACE": 0.92,
+    "Diff": 0.97,
+    "STAC": 0.97
+   },
+   {
+    "task": "Mixer",
+    "vla": "X-VLA",
+    "ACC": 0.83,
+    "LLMD": 0.83,
+    "FAIL": 0.83,
+    "ACE": 0.78,
+    "Diff": 0.83,
+    "STAC": 1.0
+   },
+   {
+    "task": "Mixer",
+    "vla": "pi0.5",
+    "ACC": 1.0,
+    "LLMD": 1.0,
+    "FAIL": 1.0,
+    "ACE": 0.99,
+    "Diff": 0.97,
+    "STAC": 1.0
+   }
+  ],
+  "wilson_reconstructed": {
+   "X-VLA/Blocks": {
+    "N": 19,
+    "P": 45,
+    "TP": 21,
+    "TN": 19,
+    "Rec": 0.467,
+    "Rec_wilson": [
+     0.329,
+     0.609
+    ],
+    "TNR": 1.0,
+    "TNR_wilson": [
+     0.832,
+     1.0
+    ]
+   },
+   "pi0.5/Blocks": {
+    "N": 22,
+    "P": 33,
+    "TP": 27,
+    "TN": 19,
+    "Rec": 0.818,
+    "Rec_wilson": [
+     0.656,
+     0.914
+    ],
+    "TNR": 0.864,
+    "TNR_wilson": [
+     0.667,
+     0.953
+    ]
+   },
+   "X-VLA/Drawer": {
+    "N": 42,
+    "P": 25,
+    "TP": 10,
+    "TN": 42,
+    "Rec": 0.4,
+    "Rec_wilson": [
+     0.234,
+     0.593
+    ],
+    "TNR": 1.0,
+    "TNR_wilson": [
+     0.916,
+     1.0
+    ]
+   },
+   "X-VLA/Cups": {
+    "N": 36,
+    "P": 49,
+    "TP": 46,
+    "TN": 35,
+    "Rec": 0.939,
+    "Rec_wilson": [
+     0.835,
+     0.979
+    ],
+    "TNR": 0.972,
+    "TNR_wilson": [
+     0.858,
+     0.995
+    ]
+   },
+   "X-VLA/Kitchen": {
+    "N": 14,
+    "P": 28,
+    "TP": 28,
+    "TN": 12,
+    "Rec": 1.0,
+    "Rec_wilson": [
+     0.879,
+     1.0
+    ],
+    "TNR": 0.857,
+    "TNR_wilson": [
+     0.601,
+     0.96
+    ]
+   },
+   "pi0.5/Kitchen": {
+    "N": 14,
+    "P": 38,
+    "TP": 34,
+    "TN": 13,
+    "Rec": 0.895,
+    "Rec_wilson": [
+     0.759,
+     0.958
+    ],
+    "TNR": 0.929,
+    "TNR_wilson": [
+     0.685,
+     0.987
+    ]
+   },
+   "X-VLA/Stack T": {
+    "N": 2,
+    "P": 82,
+    "TP": 73,
+    "TN": 2,
+    "Rec": 0.89,
+    "Rec_wilson": [
+     0.804,
+     0.941
+    ],
+    "TNR": 1.0,
+    "TNR_wilson": [
+     0.342,
+     1.0
+    ]
+   },
+   "pi0.5/Stack T": {
+    "N": 12,
+    "P": 69,
+    "TP": 24,
+    "TN": 12,
+    "Rec": 0.348,
+    "Rec_wilson": [
+     0.246,
+     0.466
+    ],
+    "TNR": 1.0,
+    "TNR_wilson": [
+     0.757,
+     1.0
+    ]
+   },
+   "pi0.5/Mixer": {
+    "N": 31,
+    "P": 29,
+    "TP": 5,
+    "TN": 31,
+    "Rec": 0.172,
+    "Rec_wilson": [
+     0.076,
+     0.345
+    ],
+    "TNR": 1.0,
+    "TNR_wilson": [
+     0.89,
+     1.0
+    ]
+   }
+  }
+ },
+ "V9b_mean_threshold_dependent": {
+  "X-VLA/Rec": {
+   "ACE": 0.773,
+   "Diff": 0.725,
+   "STAC": 0.167,
+   "ACC": 0.767,
+   "LLMD": 0.705,
+   "FAIL": 0.875
+  },
+  "X-VLA/Prec": {
+   "ACE": 0.97,
+   "Diff": 0.983,
+   "STAC": 0.163,
+   "ACC": 0.982,
+   "LLMD": 0.953,
+   "FAIL": 0.957
+  },
+  "X-VLA/F1": {
+   "ACE": 0.843,
+   "Diff": 0.803,
+   "STAC": 0.165,
+   "ACC": 0.837,
+   "LLMD": 0.747,
+   "FAIL": 0.902
+  },
+  "X-VLA/WACC": {
+   "ACE": 0.853,
+   "Diff": 0.838,
+   "STAC": 0.562,
+   "ACC": 0.857,
+   "LLMD": 0.818,
+   "FAIL": 0.9
+  },
+  "pi0.5/Rec": {
+   "ACE": 0.498,
+   "Diff": 0.427,
+   "STAC": 0.543,
+   "ACC": 0.612,
+   "LLMD": 0.31,
+   "FAIL": 0.725
+  },
+  "pi0.5/Prec": {
+   "ACE": 0.863,
+   "Diff": 0.845,
+   "STAC": 0.925,
+   "ACC": 0.895,
+   "LLMD": 0.797,
+   "FAIL": 0.885
+  },
+  "pi0.5/F1": {
+   "ACE": 0.605,
+   "Diff": 0.522,
+   "STAC": 0.605,
+   "ACC": 0.678,
+   "LLMD": 0.398,
+   "FAIL": 0.77
+  },
+  "pi0.5/WACC": {
+   "ACE": 0.713,
+   "Diff": 0.683,
+   "STAC": 0.74,
+   "ACC": 0.767,
+   "LLMD": 0.635,
+   "FAIL": 0.808
+  }
+ },
+ "V10_table11": {
+  "f1_mismatch": [],
+  "implied": {
+   "pi0.5/Object": {
+    "P": 290.0,
+    "N": 2023.0,
+    "pi_test": 0.125,
+    "rows": [
+     {
+      "method": "ACE",
+      "TNR_implied": 0.979,
+      "Prec_reported": 0.583,
+      "Prec_from_prevalence": 0.59,
+      "diff": -0.007
+     },
+     {
+      "method": "Diff",
+      "TNR_implied": 0.913,
+      "Prec_reported": 0.472,
+      "Prec_from_prevalence": 0.492,
+      "diff": -0.02
+     },
+     {
+      "method": "STAC",
+      "TNR_implied": 0.937,
+      "Prec_reported": 0.599,
+      "Prec_from_prevalence": 0.617,
+      "diff": -0.018
+     },
+     {
+      "method": "ACC",
+      "TNR_implied": 0.963,
+      "Prec_reported": 0.679,
+      "Prec_from_prevalence": 0.691,
+      "diff": -0.012
+     },
+     {
+      "method": "LLMD",
+      "TNR_implied": 0.943,
+      "Prec_reported": 0.418,
+      "Prec_from_prevalence": 0.434,
+      "diff": -0.016
+     },
+     {
+      "method": "FAIL",
+      "TNR_implied": 0.889,
+      "Prec_reported": 0.481,
+      "Prec_from_prevalence": 0.5,
+      "diff": -0.019
+     }
+    ]
+   },
+   "X-VLA/Object": {
+    "P": 893.0,
+    "N": 1420.0,
+    "pi_test": 0.386,
+    "rows": [
+     {
+      "method": "ACE",
+      "TNR_implied": 0.985,
+      "Prec_reported": 0.965,
+      "Prec_from_prevalence": 0.966,
+      "diff": -0.001
+     },
+     {
+      "method": "Diff",
+      "TNR_implied": 0.962,
+      "Prec_reported": 0.898,
+      "Prec_from_prevalence": 0.903,
+      "diff": -0.005
+     },
+     {
+      "method": "STAC",
+      "TNR_implied": 0.98,
+      "Prec_reported": 0.952,
+      "Prec_from_prevalence": 0.953,
+      "diff": -0.001
+     },
+     {
+      "method": "ACC",
+      "TNR_implied": 0.956,
+      "Prec_reported": 0.922,
+      "Prec_from_prevalence": 0.926,
+      "diff": -0.004
+     },
+     {
+      "method": "LLMD",
+      "TNR_implied": 0.988,
+      "Prec_reported": 0.979,
+      "Prec_from_prevalence": 0.981,
+      "diff": -0.002
+     },
+     {
+      "method": "FAIL",
+      "TNR_implied": 0.927,
+      "Prec_reported": 0.878,
+      "Prec_from_prevalence": 0.885,
+      "diff": -0.007
+     }
+    ]
+   },
+   "pi0.5/Spatial": {
+    "P": 230.0,
+    "N": 1971.0,
+    "pi_test": 0.105,
+    "rows": [
+     {
+      "method": "ACE",
+      "TNR_implied": 0.972,
+      "Prec_reported": 0.674,
+      "Prec_from_prevalence": 0.678,
+      "diff": -0.004
+     },
+     {
+      "method": "Diff",
+      "TNR_implied": 0.955,
+      "Prec_reported": 0.61,
+      "Prec_from_prevalence": 0.611,
+      "diff": -0.001
+     },
+     {
+      "method": "STAC",
+      "TNR_implied": 0.925,
+      "Prec_reported": 0.582,
+      "Prec_from_prevalence": 0.582,
+      "diff": -0.0
+     },
+     {
+      "method": "ACC",
+      "TNR_implied": 0.939,
+      "Prec_reported": 0.642,
+      "Prec_from_prevalence": 0.641,
+      "diff": 0.001
+     },
+     {
+      "method": "LLMD",
+      "TNR_implied": 0.949,
+      "Prec_reported": 0.502,
+      "Prec_from_prevalence": 0.502,
+      "diff": -0.0
+     },
+     {
+      "method": "FAIL",
+      "TNR_implied": 0.911,
+      "Prec_reported": 0.548,
+      "Prec_from_prevalence": 0.552,
+      "diff": -0.004
+     }
+    ]
+   },
+   "X-VLA/Spatial": {
+    "P": 759.0,
+    "N": 1442.0,
+    "pi_test": 0.345,
+    "rows": [
+     {
+      "method": "ACE",
+      "TNR_implied": 0.899,
+      "Prec_reported": 0.769,
+      "Prec_from_prevalence": 0.783,
+      "diff": -0.014
+     },
+     {
+      "method": "Diff",
+      "TNR_implied": 0.96,
+      "Prec_reported": 0.875,
+      "Prec_from_prevalence": 0.886,
+      "diff": -0.011
+     },
+     {
+      "method": "STAC",
+      "TNR_implied": 0.946,
+      "Prec_reported": 0.858,
+      "Prec_from_prevalence": 0.867,
+      "diff": -0.009
+     },
+     {
+      "method": "ACC",
+      "TNR_implied": 0.905,
+      "Prec_reported": 0.833,
+      "Prec_from_prevalence": 0.845,
+      "diff": -0.012
+     },
+     {
+      "method": "LLMD",
+      "TNR_implied": 0.928,
+      "Prec_reported": 0.872,
+      "Prec_from_prevalence": 0.88,
+      "diff": -0.008
+     },
+     {
+      "method": "FAIL",
+      "TNR_implied": 0.879,
+      "Prec_reported": 0.799,
+      "Prec_from_prevalence": 0.811,
+      "diff": -0.012
+     }
+    ]
+   },
+   "pi0.5/Goal": {
+    "P": 517.0,
+    "N": 1846.0,
+    "pi_test": 0.219,
+    "rows": [
+     {
+      "method": "ACE",
+      "TNR_implied": 0.976,
+      "Prec_reported": 0.82,
+      "Prec_from_prevalence": 0.833,
+      "diff": -0.013
+     },
+     {
+      "method": "Diff",
+      "TNR_implied": 0.974,
+      "Prec_reported": 0.835,
+      "Prec_from_prevalence": 0.836,
+      "diff": -0.001
+     },
+     {
+      "method": "STAC",
+      "TNR_implied": 0.964,
+      "Prec_reported": 0.835,
+      "Prec_from_prevalence": 0.837,
+      "diff": -0.002
+     },
+     {
+      "method": "ACC",
+      "TNR_implied": 0.955,
+      "Prec_reported": 0.833,
+      "Prec_from_prevalence": 0.841,
+      "diff": -0.008
+     },
+     {
+      "method": "LLMD",
+      "TNR_implied": 0.961,
+      "Prec_reported": 0.575,
+      "Prec_from_prevalence": 0.586,
+      "diff": -0.011
+     },
+     {
+      "method": "FAIL",
+      "TNR_implied": 0.935,
+      "Prec_reported": 0.787,
+      "Prec_from_prevalence": 0.793,
+      "diff": -0.006
+     }
+    ]
+   },
+   "X-VLA/Goal": {
+    "P": 837.0,
+    "N": 1526.0,
+    "pi_test": 0.354,
+    "rows": [
+     {
+      "method": "ACE",
+      "TNR_implied": 0.92,
+      "Prec_reported": 0.716,
+      "Prec_from_prevalence": 0.729,
+      "diff": -0.013
+     },
+     {
+      "method": "Diff",
+      "TNR_implied": 0.969,
+      "Prec_reported": 0.896,
+      "Prec_from_prevalence": 0.906,
+      "diff": -0.01
+     },
+     {
+      "method": "STAC",
+      "TNR_implied": 0.935,
+      "Prec_reported": 0.838,
+      "Prec_from_prevalence": 0.849,
+      "diff": -0.011
+     },
+     {
+      "method": "ACC",
+      "TNR_implied": 0.958,
+      "Prec_reported": 0.923,
+      "Prec_from_prevalence": 0.928,
+      "diff": -0.005
+     },
+     {
+      "method": "LLMD",
+      "TNR_implied": 0.938,
+      "Prec_reported": 0.893,
+      "Prec_from_prevalence": 0.899,
+      "diff": -0.006
+     },
+     {
+      "method": "FAIL",
+      "TNR_implied": 0.94,
+      "Prec_reported": 0.894,
+      "Prec_from_prevalence": 0.901,
+      "diff": -0.007
+     }
+    ]
+   },
+   "pi0.5/10": {
+    "P": 559.0,
+    "N": 1772.0,
+    "pi_test": 0.24,
+    "rows": [
+     {
+      "method": "ACE",
+      "TNR_implied": 0.939,
+      "Prec_reported": 0.731,
+      "Prec_from_prevalence": 0.742,
+      "diff": -0.011
+     },
+     {
+      "method": "Diff",
+      "TNR_implied": 0.93,
+      "Prec_reported": 0.703,
+      "Prec_from_prevalence": 0.712,
+      "diff": -0.009
+     },
+     {
+      "method": "STAC",
+      "TNR_implied": 0.948,
+      "Prec_reported": 0.777,
+      "Prec_from_prevalence": 0.788,
+      "diff": -0.011
+     },
+     {
+      "method": "ACC",
+      "TNR_implied": 0.904,
+      "Prec_reported": 0.717,
+      "Prec_from_prevalence": 0.73,
+      "diff": -0.013
+     },
+     {
+      "method": "LLMD",
+      "TNR_implied": 0.945,
+      "Prec_reported": 0.594,
+      "Prec_from_prevalence": 0.61,
+      "diff": -0.016
+     },
+     {
+      "method": "FAIL",
+      "TNR_implied": 0.857,
+      "Prec_reported": 0.648,
+      "Prec_from_prevalence": 0.662,
+      "diff": -0.014
+     }
+    ]
+   },
+   "X-VLA/10": {
+    "P": 997.0,
+    "N": 1334.0,
+    "pi_test": 0.428,
+    "rows": [
+     {
+      "method": "ACE",
+      "TNR_implied": 0.952,
+      "Prec_reported": 0.845,
+      "Prec_from_prevalence": 0.859,
+      "diff": -0.014
+     },
+     {
+      "method": "Diff",
+      "TNR_implied": 0.927,
+      "Prec_reported": 0.863,
+      "Prec_from_prevalence": 0.873,
+      "diff": -0.01
+     },
+     {
+      "method": "STAC",
+      "TNR_implied": 0.955,
+      "Prec_reported": 0.846,
+      "Prec_from_prevalence": 0.856,
+      "diff": -0.01
+     },
+     {
+      "method": "ACC",
+      "TNR_implied": 0.967,
+      "Prec_reported": 0.897,
+      "Prec_from_prevalence": 0.907,
+      "diff": -0.01
+     },
+     {
+      "method": "LLMD",
+      "TNR_implied": 0.98,
+      "Prec_reported": 0.973,
+      "Prec_from_prevalence": 0.974,
+      "diff": -0.001
+     },
+     {
+      "method": "FAIL",
+      "TNR_implied": 0.905,
+      "Prec_reported": 0.841,
+      "Prec_from_prevalence": 0.853,
+      "diff": -0.012
+     }
+    ]
+   }
+  },
+  "n_cells": 48,
+  "tnr_gt1": [],
+  "prec_diff_abs_gt_0.03": [],
+  "prec_diff_abs_max": 0.02
+ },
+ "V10_best_methods": {
+  "X-VLA/Object": {
+   "best_WACC": "LLMD",
+   "best_F1": "LLMD",
+   "best_AUCPR_T2": "STAC",
+   "best_AUCPDT_T2": "ACE"
+  },
+  "pi0.5/Object": {
+   "best_WACC": "FAIL",
+   "best_F1": "STAC",
+   "best_AUCPR_T2": "ACC",
+   "best_AUCPDT_T2": "ACE"
+  },
+  "X-VLA/Spatial": {
+   "best_WACC": "LLMD",
+   "best_F1": "LLMD",
+   "best_AUCPR_T2": "STAC",
+   "best_AUCPDT_T2": "FAIL"
+  },
+  "pi0.5/Spatial": {
+   "best_WACC": "ACC",
+   "best_F1": "ACC",
+   "best_AUCPR_T2": "ACC",
+   "best_AUCPDT_T2": "ACE"
+  },
+  "X-VLA/Goal": {
+   "best_WACC": "ACC",
+   "best_F1": "ACC",
+   "best_AUCPR_T2": "STAC",
+   "best_AUCPDT_T2": "FAIL"
+  },
+  "pi0.5/Goal": {
+   "best_WACC": "FAIL",
+   "best_F1": "ACC",
+   "best_AUCPR_T2": "ACE",
+   "best_AUCPDT_T2": "ACE"
+  },
+  "X-VLA/10": {
+   "best_WACC": "LLMD",
+   "best_F1": "LLMD",
+   "best_AUCPR_T2": "STAC",
+   "best_AUCPDT_T2": "FAIL"
+  },
+  "pi0.5/10": {
+   "best_WACC": "FAIL",
+   "best_F1": "ACC",
+   "best_AUCPR_T2": "ACC",
+   "best_AUCPDT_T2": "ACC"
+  }
+ },
+ "V10_llmd_xvla_10": {
+  "T2_PR": [
+   0.75,
+   0.77,
+   1.0,
+   0.96,
+   0.86,
+   0.94
+  ],
+  "T2_PDT": [
+   0.28,
+   0.28,
+   0.3,
+   0.26,
+   0.22,
+   0.19
+  ],
+  "T11_WACC": [
+   0.672,
+   0.799,
+   0.656,
+   0.699,
+   0.99,
+   0.821
+  ],
+  "T11_Rec": [
+   0.392,
+   0.671,
+   0.357,
+   0.431,
+   1.0,
+   0.737
+  ]
+ },
+ "V11_v1_vs_v2_T1": {
+  "label": "표 1",
+  "n_cells": 144,
+  "n_changed": 0,
+  "changed": []
+ },
+ "V11_v1_vs_v2_T2": {
+  "label": "표 2",
+  "n_cells": 96,
+  "n_changed": 58,
+  "changed": [
+   {
+    "task": "Object",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "method": "ACE",
+    "v1": 0.9,
+    "v2": 0.89
+   },
+   {
+    "task": "Object",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "Diff",
+    "v1": 0.11,
+    "v2": 0.12
+   },
+   {
+    "task": "Object",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "ACC",
+    "v1": 0.22,
+    "v2": 0.24
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "Diff",
+    "v1": 0.49,
+    "v2": 0.46
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "ACC",
+    "v1": 0.65,
+    "v2": 0.66
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "LLMD",
+    "v1": 0.44,
+    "v2": 0.43
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "FAIL",
+    "v1": 0.55,
+    "v2": 0.54
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "Diff",
+    "v1": 0.66,
+    "v2": 0.67
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "ACC",
+    "v1": 0.58,
+    "v2": 0.55
+   },
+   {
+    "task": "Object",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "FAIL",
+    "v1": 0.61,
+    "v2": 0.6
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "method": "ACE",
+    "v1": 0.83,
+    "v2": 0.84
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "method": "Diff",
+    "v1": 0.81,
+    "v2": 0.82
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "method": "ACC",
+    "v1": 0.95,
+    "v2": 0.94
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "method": "FAIL",
+    "v1": 0.94,
+    "v2": 0.92
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "Diff",
+    "v1": 0.24,
+    "v2": 0.23
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "ACC",
+    "v1": 0.28,
+    "v2": 0.31
+   },
+   {
+    "task": "Spatial",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "FAIL",
+    "v1": 0.17,
+    "v2": 0.18
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "ACE",
+    "v1": 0.75,
+    "v2": 0.74
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "Diff",
+    "v1": 0.657,
+    "v2": 0.64
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "STAC",
+    "v1": 0.51,
+    "v2": 0.45
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "ACC",
+    "v1": 0.8,
+    "v2": 0.78
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "LLMD",
+    "v1": 0.65,
+    "v2": 0.67
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "ACE",
+    "v1": 0.44,
+    "v2": 0.45
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "Diff",
+    "v1": 0.571,
+    "v2": 0.59
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "STAC",
+    "v1": 0.69,
+    "v2": 0.72
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "ACC",
+    "v1": 0.49,
+    "v2": 0.5
+   },
+   {
+    "task": "Spatial",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "FAIL",
+    "v1": 0.51,
+    "v2": 0.52
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "method": "ACC",
+    "v1": 0.95,
+    "v2": 0.96
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "method": "LLMD",
+    "v1": 0.88,
+    "v2": 0.87
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "Diff",
+    "v1": 0.37,
+    "v2": 0.38
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "STAC",
+    "v1": 0.29,
+    "v2": 0.3
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "ACC",
+    "v1": 0.26,
+    "v2": 0.28
+   },
+   {
+    "task": "Goal",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "FAIL",
+    "v1": 0.19,
+    "v2": 0.2
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "ACE",
+    "v1": 0.85,
+    "v2": 0.84
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "Diff",
+    "v1": 0.747,
+    "v2": 0.74
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "ACC",
+    "v1": 0.91,
+    "v2": 0.77
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "FAIL",
+    "v1": 0.88,
+    "v2": 0.79
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "ACE",
+    "v1": 0.32,
+    "v2": 0.33
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "ACC",
+    "v1": 0.33,
+    "v2": 0.41
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "FAIL",
+    "v1": 0.34,
+    "v2": 0.39
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "method": "ACE",
+    "v1": 0.74,
+    "v2": 0.75
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "method": "LLMD",
+    "v1": 0.88,
+    "v2": 0.86
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PR",
+    "method": "FAIL",
+    "v1": 0.95,
+    "v2": 0.94
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "ACE",
+    "v1": 0.29,
+    "v2": 0.28
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "STAC",
+    "v1": 0.29,
+    "v2": 0.3
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "ACC",
+    "v1": 0.23,
+    "v2": 0.26
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "LLMD",
+    "v1": 0.21,
+    "v2": 0.22
+   },
+   {
+    "task": "10",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "method": "FAIL",
+    "v1": 0.18,
+    "v2": 0.19
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "ACE",
+    "v1": 0.76,
+    "v2": 0.75
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "Diff",
+    "v1": 0.69,
+    "v2": 0.7
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "STAC",
+    "v1": 0.47,
+    "v2": 0.46
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "ACC",
+    "v1": 0.79,
+    "v2": 0.8
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "LLMD",
+    "v1": 0.71,
+    "v2": 0.7
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "method": "FAIL",
+    "v1": 0.77,
+    "v2": 0.79
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "ACE",
+    "v1": 0.41,
+    "v2": 0.42
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "Diff",
+    "v1": 0.48,
+    "v2": 0.49
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "ACC",
+    "v1": 0.4,
+    "v2": 0.39
+   },
+   {
+    "task": "10",
+    "vla": "pi0.5",
+    "metric": "PDT",
+    "method": "FAIL",
+    "v1": 0.4,
+    "v2": 0.39
+   }
+  ]
+ },
+ "V11_T2_change_stats": {
+  "max_abs": 0.14,
+  "median_abs": 0.01,
+  "changed_by_method": {
+   "ACE": 10,
+   "Diff": 11,
+   "STAC": 5,
+   "ACC": 14,
+   "LLMD": 6,
+   "FAIL": 12
+  },
+  "winner_change_cells": [
+   {
+    "task": "Object",
+    "vla": "X-VLA",
+    "metric": "PDT",
+    "v1_best": "Diff",
+    "v2_best": "ACE"
+   },
+   {
+    "task": "Goal",
+    "vla": "pi0.5",
+    "metric": "PR",
+    "v1_best": "ACC",
+    "v2_best": "ACE"
+   }
+  ]
+ },
+ "V11_top3_libero_v1": {
+  "ACE": {
+   "top3_PR": 4,
+   "top3_PDT": 7,
+   "best_PR": 0,
+   "best_PDT": 3
+  },
+  "Diff": {
+   "top3_PR": 0,
+   "top3_PDT": 1,
+   "best_PR": 0,
+   "best_PDT": 1
+  },
+  "STAC": {
+   "top3_PR": 4,
+   "top3_PDT": 0,
+   "best_PR": 4,
+   "best_PDT": 0
+  },
+  "ACC": {
+   "top3_PR": 8,
+   "top3_PDT": 5,
+   "best_PR": 4,
+   "best_PDT": 1
+  },
+  "LLMD": {
+   "top3_PR": 0,
+   "top3_PDT": 3,
+   "best_PR": 0,
+   "best_PDT": 0
+  },
+  "FAIL": {
+   "top3_PR": 8,
+   "top3_PDT": 8,
+   "best_PR": 0,
+   "best_PDT": 4
+  }
+ },
+ "V11_top3_libero_v2": {
+  "ACE": {
+   "top3_PR": 4,
+   "top3_PDT": 7,
+   "best_PR": 1,
+   "best_PDT": 4
+  },
+  "Diff": {
+   "top3_PR": 0,
+   "top3_PDT": 1,
+   "best_PR": 0,
+   "best_PDT": 1
+  },
+  "STAC": {
+   "top3_PR": 4,
+   "top3_PDT": 0,
+   "best_PR": 4,
+   "best_PDT": 0
+  },
+  "ACC": {
+   "top3_PR": 7,
+   "top3_PDT": 5,
+   "best_PR": 3,
+   "best_PDT": 1
+  },
+  "LLMD": {
+   "top3_PR": 1,
+   "top3_PDT": 3,
+   "best_PR": 0,
+   "best_PDT": 0
+  },
+  "FAIL": {
+   "top3_PR": 8,
+   "top3_PDT": 8,
+   "best_PR": 0,
+   "best_PDT": 4
+  }
+ }
+}
