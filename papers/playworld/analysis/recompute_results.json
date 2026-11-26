@@ -1,0 +1,606 @@
+{
+ "V1": {
+  "sum_by_source": 533,
+  "sum_by_category": 533,
+  "source_share": {
+   "Human-collected": 0.182,
+   "pi0": 0.159,
+   "pi0.5": 0.229,
+   "Diffusion Policies": 0.43
+  },
+  "note": "본문 '500+ clips'와 합계 533은 일치"
+ },
+ "V2": {
+  "Human Demo (6h)": {
+   "lpips_mean6": 0.0897,
+   "ssim_mean6": 0.8548,
+   "lpips_mean5_fail": 0.0908,
+   "ssim_mean5_fail": 0.8524,
+   "lpips_weighted": 0.0896,
+   "lpips_rel_change_vs_demo_pct": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ssim_diff_vs_demo": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Human Play (6h)": {
+   "lpips_mean6": 0.0857,
+   "ssim_mean6": 0.8608,
+   "lpips_mean5_fail": 0.0856,
+   "ssim_mean5_fail": 0.8608,
+   "lpips_weighted": 0.0856,
+   "lpips_rel_change_vs_demo_pct": [
+    2.4,
+    -11.3,
+    -1.1,
+    -2.2,
+    -7.4,
+    -7.0
+   ],
+   "ssim_diff_vs_demo": [
+    -0.006,
+    -0.006,
+    0.014,
+    0.002,
+    0.011,
+    0.021
+   ]
+  },
+  "Robot Play (6h)": {
+   "lpips_mean6": 0.0793,
+   "ssim_mean6": 0.868,
+   "lpips_mean5_fail": 0.0788,
+   "ssim_mean5_fail": 0.8676,
+   "lpips_weighted": 0.0795,
+   "lpips_rel_change_vs_demo_pct": [
+    -2.4,
+    -17.5,
+    -14.4,
+    -13.3,
+    -8.3,
+    -14.0
+   ],
+   "ssim_diff_vs_demo": [
+    0.003,
+    0.008,
+    0.015,
+    0.006,
+    0.011,
+    0.036
+   ]
+  },
+  "Robot Play (30h)": {
+   "lpips_mean6": 0.075,
+   "ssim_mean6": 0.8718,
+   "lpips_mean5_fail": 0.0758,
+   "ssim_mean5_fail": 0.8716,
+   "lpips_weighted": 0.075,
+   "lpips_rel_change_vs_demo_pct": [
+    -15.5,
+    -20.0,
+    -18.9,
+    -20.0,
+    -13.0,
+    -11.6
+   ],
+   "ssim_diff_vs_demo": [
+    0.006,
+    0.012,
+    0.026,
+    0.014,
+    0.013,
+    0.031
+   ]
+  },
+  "Robot Play (Curriculum)": {
+   "lpips_mean6": 0.0737,
+   "ssim_mean6": 0.8788,
+   "lpips_mean5_fail": 0.0744,
+   "ssim_mean5_fail": 0.8786,
+   "lpips_weighted": 0.0737,
+   "lpips_rel_change_vs_demo_pct": [
+    -16.7,
+    -17.5,
+    -21.1,
+    -22.2,
+    -13.9,
+    -16.3
+   ],
+   "ssim_diff_vs_demo": [
+    0.013,
+    0.015,
+    0.04,
+    0.019,
+    0.016,
+    0.041
+   ]
+  },
+  "curriculum_vs_30h": {
+   "lpips_diff": [
+    -0.001,
+    0.002,
+    -0.002,
+    -0.002,
+    -0.001,
+    -0.004
+   ],
+   "ssim_diff": [
+    0.007,
+    0.003,
+    0.014,
+    0.005,
+    0.003,
+    0.01
+   ],
+   "lpips_ties_or_worse_count": 1,
+   "note": "표 1의 곡선 행은 데이터 규모가 30h인지 표에 적혀 있지 않다 (본문은 same training data)"
+  },
+  "success_col_lpips_range_6h": [
+   0.082,
+   0.086
+  ],
+  "largest_lpips_gain_vs_demo": {
+   "Robot Play (6h)": {
+    "category": "Missed Grasp",
+    "rel_pct": -17.5
+   },
+   "Robot Play (30h)": {
+    "category": "Slip",
+    "rel_pct": -20.0
+   },
+   "Robot Play (Curriculum)": {
+    "category": "Slip",
+    "rel_pct": -22.2
+   }
+  }
+ },
+ "V3": {
+  "Human Demo 6h": {
+   "norm_from_table1_mean6": 0.368,
+   "norm_from_table1_mean5_fail": 0.329
+  },
+  "Human Play 6h": {
+   "norm_from_table1_mean6": 0.511,
+   "norm_from_table1_mean5_fail": 0.514
+  },
+  "Robot Play 6h": {
+   "norm_from_table1_mean6": 0.739,
+   "norm_from_table1_mean5_fail": 0.757
+  },
+  "Robot Play 30h": {
+   "norm_from_table1_mean6": 0.893,
+   "norm_from_table1_mean5_fail": 0.864
+  },
+  "Robot Play Curriculum": {
+   "norm_from_table1_mean6": 0.939,
+   "norm_from_table1_mean5_fail": 0.914
+  },
+  "fig10_read": {
+   "Human Demo 6h": 0.37,
+   "Human Play 6h": 0.51,
+   "Robot Play 6h": 0.74,
+   "Robot Play 30h": 0.89
+  },
+  "eq7_as_written_sign": {
+   "example_s=0.0751": -0.111,
+   "note": "식 7의 부호대로면 값은 [-1, 0] 범위, 그림 10 축은 0-1 (1에서 뺀 형태와 일치)"
+  },
+  "fig10_mean6_matches_within": 0.0030000000000000027,
+  "demo_plateau_hours": "0.6h부터 0.37-0.40 (그림 판독)",
+  "playworld_plateau_1p5_to_3h": [
+   0.58,
+   0.58
+  ]
+ },
+ "V4": {
+  "psnr_mean6": {
+   "Human Demo": 24.01,
+   "Human Play": 23.95,
+   "Robot Play": 24.58,
+   "Robot Play (Curriculum)": 24.71
+  },
+  "mse_mean6": {
+   "Human Demo": 334.9,
+   "Human Play": 315.1,
+   "Robot Play": 286.7,
+   "Robot Play (Curriculum)": 278.2
+  },
+  "robot_play_psnr_wins_vs_demo": 5,
+  "robot_play_mse_wins_vs_demo": 6,
+  "curriculum_psnr_wins_vs_robot_play": 4,
+  "curriculum_mse_wins_vs_robot_play": 5,
+  "psnr_mse_order_disagree": [
+   "Slide: Human Demo vs Human Play",
+   "Slip: Human Demo vs Human Play",
+   "Slip: Robot Play vs Robot Play (Curriculum)",
+   "Collision: Human Demo vs Robot Play",
+   "Collision: Human Play vs Robot Play"
+  ]
+ },
+ "V5": {
+  "n_policies": 18,
+  "reported": {
+   "Human Demo": [
+    0.6636,
+    0.275
+   ],
+   "Human Play": [
+    0.6619,
+    0.297
+   ],
+   "PlayWorld": [
+    0.8766,
+    0.171
+   ]
+  },
+  "ci95_fisher_z": {
+   "Human Demo": [
+    0.285,
+    0.863
+   ],
+   "Human Play": [
+    0.282,
+    0.862
+   ],
+   "PlayWorld": [
+    0.694,
+    0.953
+   ]
+  },
+  "independent_z_test_PlayWorld_vs_Human Demo": {
+   "z": 1.54,
+   "p_two_sided": 0.124,
+   "note": "같은 정책 18개를 쓰는 종속 상관이라 독립 가정은 보수적이고, 예측 간 상관이 없어 Steiger 검정은 못 냄"
+  },
+  "independent_z_test_PlayWorld_vs_Human Play": {
+   "z": 1.55,
+   "p_two_sided": 0.122,
+   "note": "같은 정책 18개를 쓰는 종속 상관이라 독립 가정은 보수적이고, 예측 간 상관이 없어 Steiger 검정은 못 냄"
+  },
+  "relative_change_vs_demo": {
+   "rmse_pct": -37.8,
+   "r_pct": 32.1
+  },
+  "relative_change_vs_play": {
+   "rmse_pct": -42.4,
+   "r_pct": 32.4
+  },
+  "figure_read": {
+   "PlayWorld": {
+    "n_points_read": 18,
+    "r": 0.8755,
+    "rmse": 0.17,
+    "mean_bias_pred_minus_real": -0.079
+   },
+   "Human Demo": {
+    "n_points_read": 18,
+    "r": 0.5989,
+    "rmse": 0.313,
+    "mean_bias_pred_minus_real": 0.133
+   },
+   "Human Play": {
+    "n_points_read": 19,
+    "r": 0.571,
+    "rmse": 0.307,
+    "mean_bias_pred_minus_real": -0.133
+   }
+  },
+  "figure_read_PlayWorld_within_task": {
+   "task1": {
+    "n": 7,
+    "r": 0.858,
+    "rmse": 0.179
+   },
+   "task2": {
+    "n": 5,
+    "r": 0.654,
+    "rmse": 0.23
+   },
+   "task3": {
+    "n": 6,
+    "r": 0.976,
+    "rmse": 0.072
+   }
+  },
+  "figure_read_point_count_note": "PlayWorld 패널 보이는 점 18개(과제별 7/5/6). 사람 놀이 패널은 19개로 보임(겹침). 본문은 정책 18개"
+ },
+ "V6": {
+  "label_sums": {
+   "Real": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "PlayWorld": [
+    50,
+    50,
+    50,
+    50,
+    48,
+    50
+   ],
+   "Baseline": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50
+   ]
+  },
+  "success_rate": {
+   "Real": [
+    0.0,
+    0.15,
+    0.3,
+    0.5,
+    0.65,
+    1.0
+   ],
+   "PlayWorld": [
+    0.08,
+    0.2,
+    0.14,
+    0.44,
+    0.62,
+    0.94
+   ],
+   "Baseline": [
+    0.2,
+    0.9,
+    0.36,
+    0.78,
+    0.92,
+    1.0
+   ]
+  },
+  "mean_bias_pred_minus_real": {
+   "PlayWorld": -0.03,
+   "Baseline": 0.26
+  },
+  "rmse_vs_real": {
+   "PlayWorld": 0.084,
+   "Baseline": 0.355
+  },
+  "fisher_p_real_vs_PlayWorld": [
+   0.3186,
+   0.7443,
+   0.1727,
+   0.7915,
+   1.0,
+   0.5524
+  ],
+  "fisher_p_real_vs_Baseline": [
+   0.0526,
+   0.0,
+   0.7824,
+   0.0409,
+   0.0095,
+   1.0
+  ],
+  "n_policies_differ_p05": {
+   "PlayWorld": 0,
+   "Baseline": 3
+  },
+  "failure_mode_tvd_vs_real": {
+   "PlayWorld": [
+    0.11,
+    0.22,
+    0.25,
+    0.36,
+    0.125,
+    0.06
+   ],
+   "Baseline": [
+    0.26,
+    0.75,
+    0.44,
+    0.38,
+    0.29,
+    0.0
+   ]
+  },
+  "failure_mode_tvd_mean": {
+   "PlayWorld": 0.188,
+   "Baseline": 0.353
+  },
+  "spearman_real_vs": {
+   "PlayWorld": 0.943,
+   "Baseline": 0.829
+  },
+  "pearson_real_vs_six": {
+   "PlayWorld": 0.973,
+   "Baseline": 0.712
+  },
+  "fig7_demo_panel_point_at_real0": {
+   "read_pred": 0.3,
+   "pie_pred": 0.2,
+   "note": "실제 SR 0.0 정책: 그림 7 사람 시연 패널 판독 0.30, 그림 6 Baseline 원 10/50 = 0.20"
+  },
+  "PlayWorld_pie5_sum_note": "다섯째 원 표기 합 48 (31+6+10+1), 나머지 원은 50"
+ },
+ "V7": {
+  "trials_per_checkpoint_assumed": 20,
+  "source": "그림 9 판독 + 부록 D 'With each checkpoint, we perform 20 hardware trials'",
+  "carrot": {
+   "per_checkpoint": [
+    {
+     "step": 0,
+     "playworld": "6/20",
+     "baseline": "6/20",
+     "fisher_p_pw_vs_baseline": 1.0,
+     "wilson_pw": [
+      0.1455,
+      0.519
+     ]
+    },
+    {
+     "step": 200,
+     "playworld": "10/20",
+     "baseline": "6/20",
+     "fisher_p_pw_vs_baseline": 0.333,
+     "wilson_pw": [
+      0.2993,
+      0.7007
+     ]
+    },
+    {
+     "step": 400,
+     "playworld": "13/20",
+     "baseline": "8/20",
+     "fisher_p_pw_vs_baseline": 0.205,
+     "wilson_pw": [
+      0.4329,
+      0.8188
+     ]
+    },
+    {
+     "step": 800,
+     "playworld": "15/20",
+     "baseline": "9/20",
+     "fisher_p_pw_vs_baseline": 0.105,
+     "wilson_pw": [
+      0.5313,
+      0.8881
+     ]
+    },
+    {
+     "step": 1200,
+     "playworld": "15/20",
+     "baseline": "5/20",
+     "fisher_p_pw_vs_baseline": 0.004,
+     "wilson_pw": [
+      0.5313,
+      0.8881
+     ]
+    }
+   ],
+   "summary": {
+    "best_step": 800,
+    "best": "15/20",
+    "fisher_p_best_vs_initial": 0.0104,
+    "abs_gain_pp": 45.0,
+    "last_checkpoint": "15/20",
+    "last_abs_gain_pp": 45.0,
+    "last_fisher_p_vs_initial": 0.01
+   }
+  },
+  "towel": {
+   "per_checkpoint": [
+    {
+     "step": 0,
+     "playworld": "2/20",
+     "baseline": "2/20",
+     "fisher_p_pw_vs_baseline": 1.0,
+     "wilson_pw": [
+      0.0279,
+      0.301
+     ]
+    },
+    {
+     "step": 800,
+     "playworld": "8/20",
+     "baseline": "5/20",
+     "fisher_p_pw_vs_baseline": 0.501,
+     "wilson_pw": [
+      0.2188,
+      0.6134
+     ]
+    },
+    {
+     "step": 1200,
+     "playworld": "10/20",
+     "baseline": "8/20",
+     "fisher_p_pw_vs_baseline": 0.751,
+     "wilson_pw": [
+      0.2993,
+      0.7007
+     ]
+    },
+    {
+     "step": 2000,
+     "playworld": "15/20",
+     "baseline": "7/20",
+     "fisher_p_pw_vs_baseline": 0.025,
+     "wilson_pw": [
+      0.5313,
+      0.8881
+     ]
+    },
+    {
+     "step": 4000,
+     "playworld": "10/20",
+     "baseline": "5/20",
+     "fisher_p_pw_vs_baseline": 0.191,
+     "wilson_pw": [
+      0.2993,
+      0.7007
+     ]
+    }
+   ],
+   "summary": {
+    "best_step": 2000,
+    "best": "15/20",
+    "fisher_p_best_vs_initial": 0.0001,
+    "abs_gain_pp": 65.0,
+    "last_checkpoint": "10/20",
+    "last_abs_gain_pp": 40.0,
+    "last_fisher_p_vs_initial": 0.014
+   }
+  },
+  "abstract_65_percent": "수건: 초기 2/20 대 최고 체크포인트(2000스텝) 15/20 → 절대 +65%p(상대 7.5배). 당근: +45%p. 두 값 모두 '최고 체크포인트' 기준",
+  "max_over_checkpoints_selection": "체크포인트 4-5개 중 최댓값을 보고. 같은 20회 시행으로 고르고 보고하면 선택 편향 가능(별도 평가 시행 언급 없음)"
+ },
+ "V8": {
+  "Fruit": {
+   "lpips_monotone": true,
+   "ssim_monotone": true,
+   "lpips_rel_change_0_to_100_pct": -28.9,
+   "share_of_gain_in_first_step_pct": 68.9
+  },
+  "Blocks": {
+   "lpips_monotone": true,
+   "ssim_monotone": true,
+   "lpips_rel_change_0_to_100_pct": -34.6,
+   "share_of_gain_in_first_step_pct": 78.4
+  },
+  "note": "0%→33% 구간에 LPIPS 이득의 대부분(share_of_gain_in_first_step_pct). 33→100%는 완만. 시드·시행 수 표기 없음",
+  "compare_with_table1_30h": "표 11의 100% 행(0.0705, 0.0640)은 표 1의 30h LPIPS 평균(0.075)과 다른 시험 집합이므로 직접 비교 불가"
+ },
+ "V9": {
+  "p0_sum": 1.0,
+  "p1_sum": 1.0,
+  "rank5_mass_ratio": 5.0,
+  "rank1_mass_ratio": 0.2,
+  "ranks_4_5_mass_start_end": [
+   0.1,
+   0.5
+  ],
+  "unspecified": [
+   "갱신 간격 5000스텝은 있으나 총 스텝 수와 보간 방식(선형 가정)은 표 2에 없음",
+   "거리 임곗값 δ_r 값 없음",
+   "표 1 곡선 행의 데이터 규모 표기 없음"
+  ]
+ },
+ "V10": {
+  "abstract_up_to_40pct": "본문에 '40%'가 나오는 곳은 초록뿐(grep). 그림 7의 RMSE 감소 37.8%(대 사람 시연), 42.4%(대 사람 놀이), r 증가 32%와 맞는 정의는 어느 것도 명시되지 않음",
+  "five_x_claim": "5배 이상 규모 주장: 사람 시연 곡선이 약 0.6-1.5h에서 평탄(그림 판독 0.38-0.40), PlayWorld는 30h까지(0.89). 사람 데이터는 6h까지만 수집(그림 10 x축)",
+  "human_hours_max": 6,
+  "robot_hours_max": 30,
+  "benchmark_sources_share_pi05": 0.229
+ }
+}
