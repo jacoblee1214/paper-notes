@@ -1,0 +1,1019 @@
+{
+ "V1_percent_claims": {
+  "tab6_rotr_gain_pct": {
+   "x": 8.56,
+   "y": 89.15,
+   "z": 20.98,
+   "paper": {
+    "x": 8.6,
+    "y": 89.2,
+    "z": 20.9
+   }
+  },
+  "tab6_return_gain_pct": {
+   "x": 35.61,
+   "y": 5.44,
+   "z": 76.7,
+   "paper": {
+    "x": 35.6,
+    "y": 5.4,
+    "z": 76.7
+   }
+  },
+  "tab4_y": {
+   "rotr_gain_pct": 88.07,
+   "eplen_gain_pct": 11.75,
+   "paper": {
+    "rotr": 88.1,
+    "eplen": 11.7
+   }
+  },
+  "tab6_recovery": {
+   "abs_gain_pp_from_rounded": 7.9,
+   "abs_gain_pp_from_counts": 7.81,
+   "time_reduction_s": 0.58,
+   "paper": {
+    "pp": 7.9,
+    "s": 0.58
+   }
+  },
+  "tab2_clean_vs_noisy_return": 45.3
+ },
+ "V2_recovery_integer_check": {
+  "Blind RL": {
+   "n_k_matching_both_pct_and_ci_(n<600)": [
+    [
+     127,
+     6
+    ],
+    [
+     128,
+     6
+    ]
+   ],
+   "k_at_n128": 6,
+   "pct_at_n128": 4.69,
+   "normal_ci_half_at_n128": 3.66,
+   "paper_ci_half": 3.7
+  },
+  "Touch Dexterity": {
+   "n_k_matching_both_pct_and_ci_(n<600)": [
+    [
+     128,
+     8
+    ],
+    [
+     129,
+     8
+    ]
+   ],
+   "k_at_n128": 8,
+   "pct_at_n128": 6.25,
+   "normal_ci_half_at_n128": 4.19,
+   "paper_ci_half": 4.2
+  },
+  "RL (no tactile)": {
+   "n_k_matching_both_pct_and_ci_(n<600)": [
+    [
+     127,
+     7
+    ]
+   ],
+   "k_at_n128": 7,
+   "pct_at_n128": 5.47,
+   "normal_ci_half_at_n128": 3.94,
+   "paper_ci_half": 4.0
+  },
+  "In-Hand Rotation": {
+   "n_k_matching_both_pct_and_ci_(n<600)": [
+    [
+     20,
+     0
+    ],
+    [
+     21,
+     0
+    ],
+    [
+     22,
+     0
+    ],
+    [
+     23,
+     0
+    ],
+    [
+     24,
+     0
+    ],
+    [
+     25,
+     0
+    ],
+    [
+     26,
+     0
+    ],
+    [
+     27,
+     0
+    ],
+    [
+     28,
+     0
+    ],
+    [
+     29,
+     0
+    ],
+    [
+     30,
+     0
+    ],
+    [
+     31,
+     0
+    ]
+   ],
+   "k_at_n128": 0,
+   "pct_at_n128": 0.0,
+   "normal_ci_half_at_n128": 0.0,
+   "paper_ci_half": 0.0
+  },
+  "WM-Craftnet": {
+   "n_k_matching_both_pct_and_ci_(n<600)": [
+    [
+     128,
+     18
+    ]
+   ],
+   "k_at_n128": 18,
+   "pct_at_n128": 14.06,
+   "normal_ci_half_at_n128": 6.02,
+   "paper_ci_half": 6.0
+  }
+ },
+ "V2_recovery_fisher_n128": {
+  "WM vs Touch Dexterity": {
+   "k": "18/128 vs 8/128",
+   "fisher_p": 0.0608866393691138
+  },
+  "WM vs RL (no tactile)": {
+   "k": "18/128 vs 7/128",
+   "fisher_p": 0.033503518645225404
+  },
+  "WM vs Blind RL": {
+   "k": "18/128 vs 6/128",
+   "fisher_p": 0.016774921257540865
+  },
+  "WM vs In-Hand Rotation": {
+   "k": "18/128 vs 0/128",
+   "fisher_p": 4.014550876012964e-06
+  }
+ },
+ "V2_recovery_wilson_n128": {
+  "WM-Craftnet": [
+   0.0908,
+   0.2114
+  ],
+  "Touch Dexterity": [
+   0.032,
+   0.1185
+  ],
+  "RL (no tactile)": [
+   0.0267,
+   0.1086
+  ],
+  "Blind RL": [
+   0.0217,
+   0.0985
+  ],
+  "In-Hand Rotation": [
+   0.0,
+   0.0291
+  ]
+ },
+ "V3_recovery_time_welch": {
+  "WM vs RL (no tactile) (pm_is_SD)": {
+   "t": -1.66,
+   "p": 0.126
+  },
+  "WM vs RL (no tactile) (pm_is_CI95)": {
+   "t": -1.03,
+   "p": 0.317
+  },
+  "WM vs Touch Dexterity (pm_is_SD)": {
+   "t": -1.45,
+   "p": 0.181
+  },
+  "WM vs Touch Dexterity (pm_is_CI95)": {
+   "t": -0.94,
+   "p": 0.367
+  },
+  "WM vs Blind RL (pm_is_SD)": {
+   "t": -1.13,
+   "p": 0.305
+  },
+  "WM vs Blind RL (pm_is_CI95)": {
+   "t": -0.87,
+   "p": 0.415
+  }
+ },
+ "V4_real_table6": {
+  "Blind RL": {
+   "rate": 0.205,
+   "wilson95": [
+    0.1549,
+    0.2663
+   ],
+   "fisher_p_vs_WM": 2.618039004397783e-44
+  },
+  "Touch Dexterity": {
+   "rate": 0.165,
+   "wilson95": [
+    0.12,
+    0.2227
+   ],
+   "fisher_p_vs_WM": 7.510824649477704e-50
+  },
+  "RL (no tactile)": {
+   "rate": 0.225,
+   "wilson95": [
+    0.1726,
+    0.2877
+   ],
+   "fisher_p_vs_WM": 9.300185782041547e-42
+  },
+  "In-Hand Rotation": {
+   "rate": 0.265,
+   "wilson95": [
+    0.2087,
+    0.3302
+   ],
+   "fisher_p_vs_WM": 4.99622556725612e-37
+  },
+  "WM-Craftnet": {
+   "rate": 0.875,
+   "wilson95": [
+    0.822,
+    0.9139
+   ]
+  },
+  "IHR_vs_TD_fisher_p": 0.02041435430241256,
+  "RLnoTac_vs_TD_fisher_p": 0.16481059433485862
+ },
+ "V5_table3_feasibility_halfspin_pi": [
+  {
+   "method": "OlR",
+   "object": "duck",
+   "RR": 2.32,
+   "k": 6,
+   "min_mean_RR_if_halfspin_is_pi": 1.885,
+   "feasible": true
+  },
+  {
+   "method": "OlR",
+   "object": "cross",
+   "RR": 3.04,
+   "k": 6,
+   "min_mean_RR_if_halfspin_is_pi": 1.885,
+   "feasible": true
+  },
+  {
+   "method": "OlR",
+   "object": "corner",
+   "RR": 5.19,
+   "k": 7,
+   "min_mean_RR_if_halfspin_is_pi": 2.199,
+   "feasible": true
+  },
+  {
+   "method": "OlR",
+   "object": "double-notched(unseen)",
+   "RR": 0.23,
+   "k": 0,
+   "min_mean_RR_if_halfspin_is_pi": 0.0,
+   "feasible": true
+  },
+  {
+   "method": "TD",
+   "object": "duck",
+   "RR": 1.54,
+   "k": 4,
+   "min_mean_RR_if_halfspin_is_pi": 1.257,
+   "feasible": true
+  },
+  {
+   "method": "TD",
+   "object": "cross",
+   "RR": 0.34,
+   "k": 2,
+   "min_mean_RR_if_halfspin_is_pi": 0.628,
+   "feasible": false
+  },
+  {
+   "method": "TD",
+   "object": "corner",
+   "RR": 0.22,
+   "k": 0,
+   "min_mean_RR_if_halfspin_is_pi": 0.0,
+   "feasible": true
+  },
+  {
+   "method": "TD",
+   "object": "double-notched(unseen)",
+   "RR": 0.27,
+   "k": 0,
+   "min_mean_RR_if_halfspin_is_pi": 0.0,
+   "feasible": true
+  },
+  {
+   "method": "IHR",
+   "object": "duck",
+   "RR": 1.83,
+   "k": 5,
+   "min_mean_RR_if_halfspin_is_pi": 1.571,
+   "feasible": true
+  },
+  {
+   "method": "IHR",
+   "object": "cross",
+   "RR": 0.45,
+   "k": 1,
+   "min_mean_RR_if_halfspin_is_pi": 0.314,
+   "feasible": true
+  },
+  {
+   "method": "IHR",
+   "object": "corner",
+   "RR": 0.36,
+   "k": 1,
+   "min_mean_RR_if_halfspin_is_pi": 0.314,
+   "feasible": true
+  },
+  {
+   "method": "IHR",
+   "object": "double-notched(unseen)",
+   "RR": 0.39,
+   "k": 0,
+   "min_mean_RR_if_halfspin_is_pi": 0.0,
+   "feasible": true
+  },
+  {
+   "method": "IHR+WSM-denoised",
+   "object": "duck",
+   "RR": 2.76,
+   "k": 8,
+   "min_mean_RR_if_halfspin_is_pi": 2.513,
+   "feasible": true
+  },
+  {
+   "method": "IHR+WSM-denoised",
+   "object": "cross",
+   "RR": 1.21,
+   "k": 8,
+   "min_mean_RR_if_halfspin_is_pi": 2.513,
+   "feasible": false
+  },
+  {
+   "method": "IHR+WSM-denoised",
+   "object": "corner",
+   "RR": 2.43,
+   "k": 10,
+   "min_mean_RR_if_halfspin_is_pi": 3.142,
+   "feasible": false
+  },
+  {
+   "method": "IHR+WSM-denoised",
+   "object": "double-notched(unseen)",
+   "RR": 0.8,
+   "k": 0,
+   "min_mean_RR_if_halfspin_is_pi": 0.0,
+   "feasible": true
+  },
+  {
+   "method": "Ours",
+   "object": "duck",
+   "RR": 16.179,
+   "k": 10,
+   "min_mean_RR_if_halfspin_is_pi": 3.142,
+   "feasible": true
+  },
+  {
+   "method": "Ours",
+   "object": "cross",
+   "RR": 8.01,
+   "k": 10,
+   "min_mean_RR_if_halfspin_is_pi": 3.142,
+   "feasible": true
+  },
+  {
+   "method": "Ours",
+   "object": "corner",
+   "RR": 8.48,
+   "k": 10,
+   "min_mean_RR_if_halfspin_is_pi": 3.142,
+   "feasible": true
+  },
+  {
+   "method": "Ours",
+   "object": "double-notched(unseen)",
+   "RR": 4.32,
+   "k": 8,
+   "min_mean_RR_if_halfspin_is_pi": 2.513,
+   "feasible": true
+  }
+ ],
+ "V5_table3_infeasible_cells": [
+  {
+   "method": "TD",
+   "object": "cross",
+   "RR": 0.34,
+   "k": 2,
+   "min_mean_RR_if_halfspin_is_pi": 0.628,
+   "feasible": false
+  },
+  {
+   "method": "IHR+WSM-denoised",
+   "object": "cross",
+   "RR": 1.21,
+   "k": 8,
+   "min_mean_RR_if_halfspin_is_pi": 2.513,
+   "feasible": false
+  },
+  {
+   "method": "IHR+WSM-denoised",
+   "object": "corner",
+   "RR": 2.43,
+   "k": 10,
+   "min_mean_RR_if_halfspin_is_pi": 3.142,
+   "feasible": false
+  }
+ ],
+ "V5_table3_fisher_per_object": {
+  "duck: Ours vs OlR": {
+   "k": "10/10 vs 6/10",
+   "fisher_p": 0.0867
+  },
+  "duck: Ours vs TD": {
+   "k": "10/10 vs 4/10",
+   "fisher_p": 0.0108
+  },
+  "duck: Ours vs IHR": {
+   "k": "10/10 vs 5/10",
+   "fisher_p": 0.0325
+  },
+  "duck: Ours vs IHR+WSM-denoised": {
+   "k": "10/10 vs 8/10",
+   "fisher_p": 0.4737
+  },
+  "cross: Ours vs OlR": {
+   "k": "10/10 vs 6/10",
+   "fisher_p": 0.0867
+  },
+  "cross: Ours vs TD": {
+   "k": "10/10 vs 2/10",
+   "fisher_p": 0.0007
+  },
+  "cross: Ours vs IHR": {
+   "k": "10/10 vs 1/10",
+   "fisher_p": 0.0001
+  },
+  "cross: Ours vs IHR+WSM-denoised": {
+   "k": "10/10 vs 8/10",
+   "fisher_p": 0.4737
+  },
+  "corner: Ours vs OlR": {
+   "k": "10/10 vs 7/10",
+   "fisher_p": 0.2105
+  },
+  "corner: Ours vs TD": {
+   "k": "10/10 vs 0/10",
+   "fisher_p": 0.0
+  },
+  "corner: Ours vs IHR": {
+   "k": "10/10 vs 1/10",
+   "fisher_p": 0.0001
+  },
+  "corner: Ours vs IHR+WSM-denoised": {
+   "k": "10/10 vs 10/10",
+   "fisher_p": 1.0
+  },
+  "double-notched(unseen): Ours vs OlR": {
+   "k": "8/10 vs 0/10",
+   "fisher_p": 0.0007
+  },
+  "double-notched(unseen): Ours vs TD": {
+   "k": "8/10 vs 0/10",
+   "fisher_p": 0.0007
+  },
+  "double-notched(unseen): Ours vs IHR": {
+   "k": "8/10 vs 0/10",
+   "fisher_p": 0.0007
+  },
+  "double-notched(unseen): Ours vs IHR+WSM-denoised": {
+   "k": "8/10 vs 0/10",
+   "fisher_p": 0.0007
+  }
+ },
+ "V5_table3_pooled_4objects": {
+  "OlR": {
+   "k": "38/40 vs 19/40",
+   "fisher_p": 3.1334471380913957e-06
+  },
+  "TD": {
+   "k": "38/40 vs 6/40",
+   "fisher_p": 8.346295754228493e-14
+  },
+  "IHR": {
+   "k": "38/40 vs 7/40",
+   "fisher_p": 5.076342894676736e-13
+  },
+  "IHR+WSM-denoised": {
+   "k": "38/40 vs 26/40",
+   "fisher_p": 0.0014669566722051001
+  }
+ },
+ "V5_denoised_depth_effect": {
+  "duck": {
+   "k": "8/10 vs 5/10",
+   "fisher_p": 0.3498
+  },
+  "cross": {
+   "k": "8/10 vs 1/10",
+   "fisher_p": 0.0055
+  },
+  "corner": {
+   "k": "10/10 vs 1/10",
+   "fisher_p": 0.0001
+  },
+  "pooled_3_seen_objects": {
+   "k": "26/30 vs 7/30",
+   "fisher_p": 1.3241241459778504e-06
+  },
+  "Ours_vs_IHR+WSM_pooled_3_seen_objects": {
+   "k": "30/30 vs 26/30",
+   "fisher_p": 0.1124
+  }
+ },
+ "V5_table3_vs_table6": {
+  "TD": {
+   "table3_pooled": "6/40=15.0%",
+   "table6": "33/200=16.5%"
+  },
+  "IHR": {
+   "table3_pooled": "7/40=17.5%",
+   "table6": "53/200=26.5%"
+  },
+  "Ours": {
+   "table3_pooled": "38/40=95.0%",
+   "table6": "175/200=87.5%",
+   "rest_160_trials_if_table3_is_subset": "137/160=85.6% (Table 3의 네 물체가 Table 6의 부분집합이라고 가정)"
+  }
+ },
+ "V6_implied_SD_from_CI_table1": {
+  "Blind RL": {
+   "n128": {
+    "Return_SD": 21.9,
+    "Return_CV_pct": 7.2,
+    "EpLen_SD": 13.3
+   },
+   "n1024": {
+    "Return_SD": 62.0,
+    "Return_CV_pct": 20.4,
+    "EpLen_SD": 37.6
+   }
+  },
+  "Touch Dexterity": {
+   "n128": {
+    "Return_SD": 17.9,
+    "Return_CV_pct": 4.6,
+    "EpLen_SD": 13.3
+   },
+   "n1024": {
+    "Return_SD": 50.6,
+    "Return_CV_pct": 13.1,
+    "EpLen_SD": 37.6
+   }
+  },
+  "RL (depth, no tactile)": {
+   "n128": {
+    "Return_SD": 27.1,
+    "Return_CV_pct": 7.5,
+    "EpLen_SD": 20.8
+   },
+   "n1024": {
+    "Return_SD": 76.7,
+    "Return_CV_pct": 21.2,
+    "EpLen_SD": 58.8
+   }
+  },
+  "In-Hand Rotation": {
+   "n128": {
+    "Return_SD": 15.6,
+    "Return_CV_pct": 6.6,
+    "EpLen_SD": 16.2
+   },
+   "n1024": {
+    "Return_SD": 44.1,
+    "Return_CV_pct": 18.7,
+    "EpLen_SD": 45.7
+   }
+  },
+  "WM scratch": {
+   "n128": {
+    "Return_SD": 90.6,
+    "Return_CV_pct": 21.9,
+    "EpLen_SD": 50.8
+   },
+   "n1024": {
+    "Return_SD": 256.3,
+    "Return_CV_pct": 61.9,
+    "EpLen_SD": 143.7
+   }
+  },
+  "WM all-zero tactile": {
+   "n128": {
+    "Return_SD": 25.4,
+    "Return_CV_pct": 3.5,
+    "EpLen_SD": 16.2
+   },
+   "n1024": {
+    "Return_SD": 71.8,
+    "Return_CV_pct": 9.9,
+    "EpLen_SD": 45.7
+   }
+  },
+  "WM 75% tactile dropout": {
+   "n128": {
+    "Return_SD": 23.7,
+    "Return_CV_pct": 3.2,
+    "EpLen_SD": 15.6
+   },
+   "n1024": {
+    "Return_SD": 66.9,
+    "Return_CV_pct": 9.1,
+    "EpLen_SD": 44.1
+   }
+  },
+  "WM 50% tactile dropout": {
+   "n128": {
+    "Return_SD": 25.4,
+    "Return_CV_pct": 3.4,
+    "EpLen_SD": 20.8
+   },
+   "n1024": {
+    "Return_SD": 71.8,
+    "Return_CV_pct": 9.7,
+    "EpLen_SD": 58.8
+   }
+  },
+  "WM 25% tactile dropout": {
+   "n128": {
+    "Return_SD": 24.2,
+    "Return_CV_pct": 3.3,
+    "EpLen_SD": 18.5
+   },
+   "n1024": {
+    "Return_SD": 68.6,
+    "Return_CV_pct": 9.2,
+    "EpLen_SD": 52.2
+   }
+  },
+  "WM pretrained prop-only": {
+   "n128": {
+    "Return_SD": 24.8,
+    "Return_CV_pct": 3.6,
+    "EpLen_SD": 12.7
+   },
+   "n1024": {
+    "Return_SD": 70.2,
+    "Return_CV_pct": 10.3,
+    "EpLen_SD": 35.9
+   }
+  },
+  "WM pretrained prop+tac": {
+   "n128": {
+    "Return_SD": 24.8,
+    "Return_CV_pct": 3.6,
+    "EpLen_SD": 11.0
+   },
+   "n1024": {
+    "Return_SD": 70.2,
+    "Return_CV_pct": 10.0,
+    "EpLen_SD": 31.0
+   }
+  },
+  "WM full WSM": {
+   "n128": {
+    "Return_SD": 20.8,
+    "Return_CV_pct": 2.8,
+    "EpLen_SD": 11.0
+   },
+   "n1024": {
+    "Return_SD": 58.8,
+    "Return_CV_pct": 7.8,
+    "EpLen_SD": 31.0
+   }
+  }
+ },
+ "V6_note": "공식 코드의 평가 집계기는 1.96*SD/sqrt(n)로 CI를 만들고 기본 창(window)이 1024 에피소드다. 논문은 128 에피소드라고 쓴다. 두 가정에서 복원되는 에피소드 SD가 다르다.",
+ "V7_pairwise_from_CI": {
+  "T1 full vs scratch": {
+   "Return": {
+    "diff": 339.0,
+    "se": 8.2181,
+    "z": 41.25,
+    "p": 0.0
+   }
+  },
+  "T1 full vs all-zero tactile": {
+   "Return": {
+    "diff": 28.4,
+    "se": 2.9005,
+    "z": 9.79,
+    "p": 1.227523148537602e-22
+   }
+  },
+  "T1 full vs 25% dropout": {
+   "Return": {
+    "diff": 9.9,
+    "se": 2.8223,
+    "z": 3.51,
+    "p": 0.00045188718302310166
+   }
+  },
+  "T1 25% vs all-zero": {
+   "Return": {
+    "diff": 18.5,
+    "se": 3.1035,
+    "z": 5.96,
+    "p": 2.5053441190481237e-09
+   }
+  },
+  "T1 prop+tac vs prop-only": {
+   "Return": {
+    "diff": 14.4,
+    "se": 3.1026,
+    "z": 4.64,
+    "p": 3.4630518287089006e-06
+   }
+  },
+  "T1 full vs prop+tac": {
+   "Return": {
+    "diff": 54.4,
+    "se": 2.8612,
+    "z": 19.01,
+    "p": 1.3378593088893714e-80
+   }
+  },
+  "T1 scratch vs Touch Dexterity (Return)": {
+   "Return": {
+    "diff": 27.4,
+    "se": 8.1649,
+    "z": 3.36,
+    "p": 0.000791230074052928
+   }
+  },
+  "T1 scratch vs Touch Dexterity (AngVar)": {
+   "AngVar": {
+    "diff": -0.029,
+    "se": 0.0379,
+    "z": -0.77,
+    "p": 0.44395825648457965
+   }
+  },
+  "T1 full vs all-zero tactile (OffAxis)": {
+   "OffAxis": {
+    "diff": 0.001,
+    "se": 0.0043,
+    "z": 0.23,
+    "p": 0.8173239574044306
+   }
+  },
+  "T2 full vs noisy-depth": {
+   "Return": {
+    "diff": 45.3,
+    "se": 2.5617,
+    "z": 17.68,
+    "p": 5.621205068919093e-70
+   }
+  },
+  "T2 full vs no h_{t-1}": {
+   "Return": {
+    "diff": 47.9,
+    "se": 2.8612,
+    "z": 16.74,
+    "p": 6.587802265061112e-63
+   }
+  },
+  "T2 full vs enc-dec z_t": {
+   "Return": {
+    "diff": 85.7,
+    "se": 3.0206,
+    "z": 28.37,
+    "p": 4.4570967065937805e-177
+   }
+  },
+  "T2 no h_{t-1} vs full (RotR)": {
+   "RotR": {
+    "diff": -0.011,
+    "se": 0.0033,
+    "z": -3.37,
+    "p": 0.0007596140028148432
+   }
+  },
+  "T9 full vs LSTM": {
+   "Return": {
+    "diff": 132.3,
+    "se": 2.8612,
+    "z": 46.24,
+    "p": 0.0
+   }
+  },
+  "T9 full vs GRU (AngVar)": {
+   "AngVar": {
+    "diff": -0.033,
+    "se": 0.0153,
+    "z": -2.16,
+    "p": 0.030896780259876144
+   }
+  },
+  "T9 full vs LSTM (AngVar)": {
+   "AngVar": {
+    "diff": -0.068,
+    "se": 0.0198,
+    "z": -3.43,
+    "p": 0.000611506418351419
+   }
+  },
+  "T10 only value vs no-aux": {
+   "Return": {
+    "diff": 48.9,
+    "se": 3.1327,
+    "z": 15.61,
+    "p": 6.254092751535413e-55
+   }
+  },
+  "T10 full vs only value": {
+   "Return": {
+    "diff": 16.3,
+    "se": 3.1022,
+    "z": 5.25,
+    "p": 1.4854862283132167e-07
+   }
+  },
+  "T10 only pose vs no-aux": {
+   "Return": {
+    "diff": 1.9,
+    "se": 3.51,
+    "z": 0.54,
+    "p": 0.5882979060720019
+   }
+  },
+  "T10 only shape vs no-aux": {
+   "Return": {
+    "diff": 1.1,
+    "se": 2.8558,
+    "z": 0.39,
+    "p": 0.7001008862916017
+   }
+  },
+  "T10 only value vs full (RotR)": {
+   "RotR": {
+    "diff": -0.002,
+    "se": 0.0026,
+    "z": -0.78,
+    "p": 0.4330401103068837
+   }
+  }
+ },
+ "V7_note": "SE는 표의 95% CI 반폭/1.96으로 복원했다. 이 SE는 한 번 학습한 정책의 평가 에피소드 변동만 담는다. 학습 시드 수와 시드 간 변동은 논문에 없다.",
+ "V8_cross_table": {
+  "full_WSM_identical_across_T1_T2_T9_T10": true,
+  "held_out_over_train_ratio": {
+   "x:Blind RL": {
+    "return_held/train": 3.06,
+    "rotr_held/train": 0.98
+   },
+   "x:Touch Dexterity": {
+    "return_held/train": 0.95,
+    "rotr_held/train": 0.9
+   },
+   "x:RL (no tactile)": {
+    "return_held/train": 0.88,
+    "rotr_held/train": 0.79
+   },
+   "x:In-Hand Rotation": {
+    "return_held/train": 0.83,
+    "rotr_held/train": 0.87
+   },
+   "x:WM-Craftnet": {
+    "return_held/train": 0.77,
+    "rotr_held/train": 0.9
+   },
+   "y:Blind RL": {
+    "return_held/train": 0.76,
+    "rotr_held/train": 0.55
+   },
+   "y:Touch Dexterity": {
+    "return_held/train": 0.75,
+    "rotr_held/train": 0.59
+   },
+   "y:RL (no tactile)": {
+    "return_held/train": 1.09,
+    "rotr_held/train": 1.31
+   },
+   "y:In-Hand Rotation": {
+    "return_held/train": 1.35,
+    "rotr_held/train": 0.82
+   },
+   "y:WM-Craftnet": {
+    "return_held/train": 0.75,
+    "rotr_held/train": 0.7
+   },
+   "z:Blind RL": {
+    "return_held/train": 0.91,
+    "rotr_held/train": 0.7
+   },
+   "z:Touch Dexterity": {
+    "return_held/train": 0.63,
+    "rotr_held/train": 0.59
+   },
+   "z:RL (no tactile)": {
+    "return_held/train": 0.83,
+    "rotr_held/train": 0.71
+   },
+   "z:In-Hand Rotation": {
+    "return_held/train": 0.66,
+    "rotr_held/train": 0.53
+   },
+   "z:WM-Craftnet": {
+    "return_held/train": 0.71,
+    "rotr_held/train": 0.65
+   }
+  },
+  "held_out_return_ratio_gt_1": [
+   "x:Blind RL",
+   "y:RL (no tactile)",
+   "y:In-Hand Rotation"
+  ]
+ },
+ "V9_rotr_units": {
+  "Full WSM (T1)": {
+   "RotR": 1.293,
+   "rad_per_s_at_10Hz": 0.646,
+   "rad_per_20s": 12.93,
+   "rad_per_500step_episode": 32.33
+  },
+  "scratch (T1)": {
+   "RotR": 0.742,
+   "rad_per_s_at_10Hz": 0.371,
+   "rad_per_20s": 7.42,
+   "rad_per_500step_episode": 18.55
+  },
+  "y WM (T4)": {
+   "RotR": 1.025,
+   "rad_per_s_at_10Hz": 0.512,
+   "rad_per_20s": 10.25,
+   "rad_per_500step_episode": 25.62
+  },
+  "x WM (T5)": {
+   "RotR": 1.114,
+   "rad_per_s_at_10Hz": 0.557,
+   "rad_per_20s": 11.14,
+   "rad_per_500step_episode": 27.85
+  },
+  "note": "RotR*0.5 = rad/s (제어 10 Hz, 20배 스케일 가정, 클립 영향 무시). 실로봇 Table 3의 'RR'은 20 s당 rad. 49개 물체 결과 '9.37 rad per episode'는 에피소드 길이(20 s 또는 500 스텝=50 s)가 본문에 없어 비교 보류."
+ },
+ "V9_replay_memory": {
+  "ring_rows": 256,
+  "envs_paper": 1024,
+  "depth_96x72_float32_bytes_each": 7247757312,
+  "GiB_each(image, image_clean)": 6.75,
+  "GiB_both": 13.5,
+  "envs_256_GiB_both": 3.38,
+  "env_steps_per_PPO_epoch(1024x16)": 16384,
+  "wm_frames_per_epoch(10x16x32)": 5120,
+  "3000_epochs_env_steps": 49152000
+ },
+ "V10_49obj": {
+  "ratio_prior_over_noprior": 2.86,
+  "fall_6pct_to_0.3pct_factor": 20.0,
+  "five_block_RotR_gain_pct": {
+   "9obj_vs_scratch": 21.8,
+   "49obj_vs_scratch": 32.7
+  }
+ },
+ "V11_corl_counts": {
+  "spotlight": 72,
+  "oral": 21,
+  "poster": 594,
+  "total": 687,
+  "spotlight_share_of_accepted_pct": 10.5,
+  "oral_plus_spotlight_share_pct": 13.5,
+  "claimed_top_pct": 4.4,
+  "implied_submissions_if_spotlight_is_top4.4pct": 1636,
+  "implied_submissions_if_oral_plus_spotlight_is_top4.4pct": 2114
+ }
+}
