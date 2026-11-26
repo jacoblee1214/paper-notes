@@ -1,0 +1,112 @@
+{
+ "abc": {
+  "identity_max_abs_err": 3.885780586188048e-16,
+  "path_dependence": {
+   "n_states_total": 25600,
+   "sign_disagree_fraction": 0.1327,
+   "pearson_cross_expert_first_vs_router_first": 0.8998,
+   "note": "교차항 부호가 경로(전문가 먼저/라우터 먼저)에 따라 달라지는 상태의 비율"
+  },
+  "interaction_over_total_change_by_param_scale": {
+   "0.01": 0.0225,
+   "0.02": 0.0459,
+   "0.05": 0.1151,
+   "0.1": 0.224
+  },
+  "mean_measured_kl_by_param_scale": {
+   "0.01": 0.00121,
+   "0.02": 0.00478,
+   "0.05": 0.03075,
+   "0.1": 0.14577
+  },
+  "interaction_note": "MAPO의 두 성분 변화(옛 값 기준)의 합이 놓치는 상호작용 항 Σ Δw_e Δμ_e의 상대 크기. 갱신 크기에 거의 비례하면 2차 항이다."
+ },
+ "d_gradient_equivalence": {
+  "0.0": {
+   "router_cos": 1.0,
+   "expert_cos": 1.0,
+   "router_norm_ratio": 1.0,
+   "expert_norm_ratio": 1.0,
+   "router_cos_min": 1.0,
+   "expert_cos_min": 1.0
+  },
+  "0.005": {
+   "router_cos": 0.99878,
+   "expert_cos": 0.99985,
+   "router_norm_ratio": 1.00267,
+   "expert_norm_ratio": 1.00028,
+   "router_cos_min": 0.99803,
+   "expert_cos_min": 0.99964
+  },
+  "0.01": {
+   "router_cos": 0.99607,
+   "expert_cos": 0.99944,
+   "router_norm_ratio": 0.99235,
+   "expert_norm_ratio": 1.0002,
+   "router_cos_min": 0.99462,
+   "expert_cos_min": 0.999
+  },
+  "0.02": {
+   "router_cos": 0.97659,
+   "expert_cos": 0.99827,
+   "router_norm_ratio": 0.9637,
+   "expert_norm_ratio": 1.00162,
+   "router_cos_min": 0.95803,
+   "expert_cos_min": 0.99769
+  },
+  "0.05": {
+   "router_cos": 0.88321,
+   "expert_cos": 0.9868,
+   "router_norm_ratio": 0.90632,
+   "expert_norm_ratio": 0.98537,
+   "router_cos_min": 0.81773,
+   "expert_cos_min": 0.98065
+  },
+  "0.1": {
+   "router_cos": 0.65479,
+   "expert_cos": 0.94316,
+   "router_norm_ratio": 0.7275,
+   "expert_norm_ratio": 0.93224,
+   "router_cos_min": 0.23909,
+   "expert_cos_min": 0.92332
+  }
+ },
+ "e_expert_block_scale": [
+  {
+   "k": 0,
+   "measured_ratio": 0.720143,
+   "w_old_over_w": 0.720143,
+   "cos": 1.0
+  },
+  {
+   "k": 1,
+   "measured_ratio": 0.860364,
+   "w_old_over_w": 0.860364,
+   "cos": 1.0
+  },
+  {
+   "k": 2,
+   "measured_ratio": 1.096116,
+   "w_old_over_w": 1.096116,
+   "cos": 1.0
+  },
+  {
+   "k": 3,
+   "measured_ratio": 1.218631,
+   "w_old_over_w": 1.218631,
+   "cos": 1.0
+  },
+  {
+   "k": 4,
+   "measured_ratio": 1.452721,
+   "w_old_over_w": 1.452721,
+   "cos": 1.0
+  },
+  {
+   "k": 5,
+   "measured_ratio": 1.237014,
+   "w_old_over_w": 1.237014,
+   "cos": 1.0
+  }
+ ]
+}

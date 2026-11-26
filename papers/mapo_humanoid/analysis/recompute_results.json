@@ -1,0 +1,592 @@
+{
+ "V1_denominators": {
+  "train": {
+   "n_values": 10,
+   "min_denominator": 6016,
+   "first10_denominators": [
+    6016,
+    6017,
+    6253,
+    6535,
+    6552,
+    6559,
+    6620,
+    6626,
+    6635,
+    6641
+   ],
+   "all_ok_from": null
+  },
+  "test": {
+   "n_values": 6,
+   "min_denominator": 3293,
+   "first10_denominators": [
+    3293,
+    4130,
+    4233,
+    4496,
+    4558,
+    4605,
+    4617,
+    4942,
+    4949,
+    5051
+   ],
+   "all_ok_from": null
+  },
+  "train+test": {
+   "n_values": 16,
+   "min_denominator": 7195,
+   "first10_denominators": [
+    7195,
+    7443,
+    7449,
+    7507,
+    7532,
+    7652,
+    7737,
+    7748,
+    7760,
+    7822
+   ],
+   "all_ok_from": null
+  },
+  "note": "분모가 약 10,000 이상이면 소수 둘째 자리 성공률은 어떤 값도 정수 비율로 가능해 이 검사로는 걸러지지 않는다."
+ },
+ "V2_deltas": {
+  "train_N6": {
+   "success": {
+    "mapo": 86.6,
+    "ppo_moe": 83.38,
+    "diff": 3.22,
+    "rel_pct": 3.86
+   },
+   "eg_pos": {
+    "mapo": 147.4,
+    "ppo_moe": 153.1,
+    "diff": -5.7,
+    "rel_pct": -3.72
+   },
+   "el_pos": {
+    "mapo": 78.1,
+    "ppo_moe": 87.98,
+    "diff": -9.88,
+    "rel_pct": -11.23
+   },
+   "eacc": {
+    "mapo": 4.576,
+    "ppo_moe": 5.499,
+    "diff": -0.923,
+    "rel_pct": -16.78
+   },
+   "evel": {
+    "mapo": 11.78,
+    "ppo_moe": 14.3,
+    "diff": -2.52,
+    "rel_pct": -17.62
+   },
+   "ert_h": {
+    "mapo": 0.048,
+    "ppo_moe": 0.058,
+    "diff": -0.01,
+    "rel_pct": -17.24
+   },
+   "ert_vel": {
+    "mapo": 0.406,
+    "ppo_moe": 0.501,
+    "diff": -0.095,
+    "rel_pct": -18.96
+   },
+   "ert_r": {
+    "mapo": 0.138,
+    "ppo_moe": 0.12,
+    "diff": 0.018,
+    "rel_pct": 15.0
+   },
+   "ert_p": {
+    "mapo": 0.117,
+    "ppo_moe": 0.105,
+    "diff": 0.012,
+    "rel_pct": 11.43
+   }
+  },
+  "train_N": {
+   "4": {
+    "success": 2.91,
+    "eg_pos": -12.9,
+    "el_pos": -10.4,
+    "eacc": -0.629,
+    "evel": -2.15,
+    "ert_h": -0.004,
+    "ert_vel": -0.083,
+    "ert_r": -0.012,
+    "ert_p": -0.011
+   },
+   "8": {
+    "success": 5.57,
+    "eg_pos": -29.6,
+    "el_pos": -21.82,
+    "eacc": -1.721,
+    "evel": -5.45,
+    "ert_h": -0.019,
+    "ert_vel": -0.178,
+    "ert_r": 0.012,
+    "ert_p": 0.005
+   },
+   "16": {
+    "success": 4.78,
+    "eg_pos": -22.7,
+    "el_pos": -21.5,
+    "eacc": -1.626,
+    "evel": -4.52,
+    "ert_h": -0.013,
+    "ert_vel": -0.153,
+    "ert_r": 0.01,
+    "ert_p": 0.003
+   }
+  },
+  "test": {
+   "PPO with MoE": {
+    "success": 2.67,
+    "eg_pos": -15.6,
+    "el_pos": -8.61,
+    "eacc": -0.687,
+    "evel": -2.01,
+    "ert_h": -0.011,
+    "ert_vel": -0.071,
+    "ert_r": 0.011,
+    "ert_p": -0.001
+   },
+   "Monolithic PPO": {
+    "success": 1.09,
+    "eg_pos": -1.4,
+    "el_pos": -1.14,
+    "eacc": -0.25,
+    "evel": -0.68,
+    "ert_h": -0.005,
+    "ert_vel": -0.03,
+    "ert_r": -0.006,
+    "ert_p": -0.005
+   },
+   "MAPO with fixed router": {
+    "success": 0.24,
+    "eg_pos": 4.2,
+    "el_pos": -1.72,
+    "eacc": -0.173,
+    "evel": -0.54,
+    "ert_h": -0.001,
+    "ert_vel": -0.005,
+    "ert_r": -0.002,
+    "ert_p": -0.007
+   },
+   "HOVER": {
+    "success": 2.06,
+    "eg_pos": -46.4,
+    "el_pos": -37.52,
+    "eacc": -0.237,
+    "evel": -0.7,
+    "ert_h": -0.028,
+    "ert_vel": -0.056,
+    "ert_r": -0.042,
+    "ert_p": -0.034
+   },
+   "TWIST 2": {
+    "success": 27.6,
+    "eg_pos": -160.8,
+    "el_pos": -19.43,
+    "eacc": 1.103,
+    "evel": -0.11,
+    "ert_h": -0.012,
+    "ert_vel": -0.029,
+    "ert_r": 0.071,
+    "ert_p": 0.055
+   }
+  }
+ },
+ "V3_best_cells": {
+  "train": {
+   "best_cells_per_method": {
+    "MAPO": 7,
+    "PPO with MoE": 2
+   },
+   "mapo_error_metric_wins_of_8": 6,
+   "mapo_success_best": true,
+   "bold_mismatch_vs_computed": []
+  },
+  "test": {
+   "best_cells_per_method": {
+    "MAPO": 5,
+    "MAPO with fixed router": 1,
+    "TWIST 2": 3
+   },
+   "mapo_error_metric_wins_of_8": 4,
+   "mapo_success_best": true,
+   "bold_mismatch_vs_computed": []
+  },
+  "test_four_rows": {
+   "mapo_error_metric_wins_of_8": 6
+  }
+ },
+ "V4_n_ablation_claim": [
+  {
+   "N": 4,
+   "metrics_where_mapo_is_worse": []
+  },
+  {
+   "N": 6,
+   "metrics_where_mapo_is_worse": [
+    "ert_r",
+    "ert_p"
+   ]
+  },
+  {
+   "N": 8,
+   "metrics_where_mapo_is_worse": [
+    "ert_r",
+    "ert_p"
+   ]
+  },
+  {
+   "N": 16,
+   "metrics_where_mapo_is_worse": [
+    "ert_r",
+    "ert_p"
+   ]
+  }
+ ],
+ "V5_seed_variance": {
+  "success": {
+   "sample_sd_reading": {
+    "diff": 4.14,
+    "t": 9.3,
+    "df": 3.5,
+    "p": 0.0013708923704965081,
+    "ci95": [
+     2.831,
+     5.449
+    ]
+   },
+   "population_sd_reading": {
+    "diff": 4.14,
+    "t": 7.593,
+    "df": 3.5,
+    "p": 0.0027111779125291702,
+    "ci95": [
+     2.537,
+     5.743
+    ]
+   }
+  },
+  "eg_pos": {
+   "sample_sd_reading": {
+    "diff": -6.2,
+    "t": -4.737,
+    "df": 3.94,
+    "p": 0.009407129596921669,
+    "ci95": [
+     -9.857,
+     -2.543
+    ]
+   },
+   "population_sd_reading": {
+    "diff": -6.2,
+    "t": -3.867,
+    "df": 3.94,
+    "p": 0.018561052547989218,
+    "ci95": [
+     -10.678,
+     -1.722
+    ]
+   }
+  },
+  "table1_vs_seed_stats": {
+   "MAPO.success": {
+    "table1_value": 86.6,
+    "seed_mean": 87.03,
+    "seed_sd": 0.64,
+    "other_two_mean": 87.245,
+    "min_possible_sd_ddof1": 0.372,
+    "consistent": true
+   },
+   "MAPO.eg_pos": {
+    "table1_value": 147.4,
+    "seed_mean": 147.9,
+    "seed_sd": 1.5,
+    "other_two_mean": 148.15,
+    "min_possible_sd_ddof1": 0.433,
+    "consistent": true
+   },
+   "PPO with MoE.success": {
+    "table1_value": 83.38,
+    "seed_mean": 82.89,
+    "seed_sd": 0.43,
+    "other_two_mean": 82.645,
+    "min_possible_sd_ddof1": 0.424,
+    "consistent": true
+   },
+   "PPO with MoE.eg_pos": {
+    "table1_value": 153.1,
+    "seed_mean": 154.1,
+    "seed_sd": 1.7,
+    "other_two_mean": 154.6,
+    "min_possible_sd_ddof1": 0.866,
+    "consistent": true
+   }
+  },
+  "other_two_seed_gap_given_rounded_sd": {
+   "MAPO.success": {
+    "other_two_seed_gap_range": [
+     1.029,
+     1.053
+    ]
+   },
+   "MAPO.eg_pos": {
+    "other_two_seed_gap_range": [
+     2.768,
+     2.977
+    ]
+   },
+   "PPO with MoE.success": {
+    "other_two_seed_gap_range": [
+     0.047,
+     0.191
+    ]
+   },
+   "PPO with MoE.eg_pos": {
+    "other_two_seed_gap_range": [
+     2.809,
+     3.041
+    ]
+   }
+  },
+  "table1_z_vs_seed_mean": {
+   "MAPO.success": -0.67,
+   "MAPO.eg_pos": -0.33,
+   "PPO with MoE.success": 1.14,
+   "PPO with MoE.eg_pos": -0.59
+  }
+ },
+ "V6_counts": {
+  "mapo_only_counts": [
+   182,
+   155,
+   191
+  ],
+  "mean": 176.0,
+  "sd_ddof1": 18.73,
+  "net_counts": [
+   181,
+   154,
+   191
+  ],
+  "assumed_N_grid": {
+   "3000": {
+    "table1_single_seed": {
+     "net_gap_motions": 96.6,
+     "share_explained_by_consistent_set": 1.87
+    },
+    "three_seed_mean": {
+     "net_gap_motions": 124.2,
+     "share_explained_by_consistent_set": 1.46
+    }
+   },
+   "5000": {
+    "table1_single_seed": {
+     "net_gap_motions": 161.0,
+     "share_explained_by_consistent_set": 1.12
+    },
+    "three_seed_mean": {
+     "net_gap_motions": 207.0,
+     "share_explained_by_consistent_set": 0.87
+    }
+   },
+   "8000": {
+    "table1_single_seed": {
+     "net_gap_motions": 257.6,
+     "share_explained_by_consistent_set": 0.7
+    },
+    "three_seed_mean": {
+     "net_gap_motions": 331.2,
+     "share_explained_by_consistent_set": 0.55
+    }
+   },
+   "11000": {
+    "table1_single_seed": {
+     "net_gap_motions": 354.2,
+     "share_explained_by_consistent_set": 0.51
+    },
+    "three_seed_mean": {
+     "net_gap_motions": 455.4,
+     "share_explained_by_consistent_set": 0.4
+    }
+   },
+   "12000": {
+    "table1_single_seed": {
+     "net_gap_motions": 386.4,
+     "share_explained_by_consistent_set": 0.47
+    },
+    "three_seed_mean": {
+     "net_gap_motions": 496.8,
+     "share_explained_by_consistent_set": 0.36
+    }
+   }
+  },
+  "N_where_consistent_set_equals_gap": {
+   "table1_single_seed": 5621.0,
+   "three_seed_mean": 4372.0
+  },
+  "note": "AMASS 원논문(arXiv:1904.03278)은 11,000개 이상 모션이라고 쓴다. 이 논문이 쓴 모션 수는 본문에 없다. 일관된 승리 집합(182 - 1 = 181개)이 성공률 차이로 설명되는 몫은 N이 작을수록 커진다.",
+  "poisson_sd_if_independent": 13.27
+ },
+ "V7_figure_reads": {
+  "reward_ratio_fig4a": {
+   "mapo": 28.0,
+   "ppo_moe": 15.5,
+   "ratio": 1.81,
+   "note": "프로젝트 페이지는 'about 1.8x'라고 쓴다. 그림 판독 값 기준 1.8배와 맞는다."
+  },
+  "pairwise_distance_diff_fig4c": {
+   "pairs": 15,
+   "positive": 11,
+   "negative": 4,
+   "mean": 1.75,
+   "median": 2.1,
+   "pairs_with_E1_negative": 4,
+   "note": "그림 판독 값. 단위와 색 막대 눈금(±4)을 넘는 5.3이 있다."
+  },
+  "mixing_weights_fig4b": {
+   "top1_top2": {
+    "MAPO": [
+     0.62,
+     0.18
+    ],
+    "PPO": [
+     0.42,
+     0.31
+    ]
+   },
+   "remaining_four_sum": {
+    "MAPO": 0.2,
+    "PPO": 0.27
+   },
+   "uniform_weight_1_over_6": 0.167,
+   "note": "그림 판독 값(눈금 0.2 간격)"
+  },
+  "clip_fractions_text": {
+   "vanilla_pg_mapo_router_criterion": 0.05,
+   "vanilla_pg_ppo_criterion": 0.5,
+   "mapo_training_mapo_router_criterion": 0.02,
+   "mapo_training_ppo_criterion": 0.24,
+   "ratio_vanilla": 10.0,
+   "ratio_mapo_training": 12.0,
+   "mapo_training_expert_criterion_fig_read": 0.2
+  }
+ },
+ "V8_compute": {
+  "batch_per_iter": 98304,
+  "minibatch_size": 24576,
+  "grad_updates_per_iter": 20,
+  "grad_updates_main_run": 600000,
+  "env_steps_main_run": 2949120000,
+  "env_steps_ablation_run": 1474560000,
+  "assumption": "그림 4의 'Training steps' 30,000을 PPO 반복(iteration) 횟수로 가정(rsl_rl 관행, 논문에 정의 없음)",
+  "wallclock_hours_main_run_if_env_steps_per_s": {
+   "20000": 41.0,
+   "40000": 20.5,
+   "60000": 13.7
+  },
+  "run_count_lower_bound": {
+   "table1_main_teacher_runs": 11,
+   "extra_seeds_mapo_and_ppo_moe": 4,
+   "fig5_curves_lower_bound": 22
+  },
+  "run_count_total_approx": 37
+ },
+ "V9_reward_table": {
+  "positive_weight_sum": 24.0,
+  "negative_weights": {
+   "action_rate": -0.2,
+   "joint_limit": -10.0,
+   "undesired_contact": -0.1
+  },
+  "rel_body_pos_share_of_positive_weight": 0.833,
+  "rel_body_pos_reward_at_error_m": {
+   "0.05": 0.9512,
+   "0.1": 0.8187,
+   "0.2": 0.4493,
+   "0.3": 0.1653,
+   "0.5": 0.0067
+  },
+  "success_threshold_m": 0.5,
+  "note": "같은 크기(0.5 m)의 루트 상대 몸체 오차에서 이 보상 항은 0.007이다. 성공 기준의 오차(평균 위치 오차, 전역인지 루트 상대인지 본문에 없음)와 보상 항의 오차(루트 상대)는 정의가 같다고 볼 수 없어 크기 비교만 한다."
+ },
+ "V10_test_power": {
+  "Monolithic PPO": {
+   "diff_pp": 1.09,
+   "required_N_by_discordant_fraction": {
+    "0.05": 3304,
+    "0.1": 6607,
+    "0.2": 13213
+   }
+  },
+  "PPO with MoE": {
+   "diff_pp": 2.67,
+   "required_N_by_discordant_fraction": {
+    "0.05": 551,
+    "0.1": 1101,
+    "0.2": 2202
+   }
+  },
+  "MAPO with fixed router": {
+   "diff_pp": 0.24,
+   "required_N_by_discordant_fraction": {
+    "0.05": 68133,
+    "0.1": 136266,
+    "0.2": 272531
+   }
+  },
+  "assumed_p_discordant_0.10": {
+   "500": {
+    "Monolithic PPO": 0.4406,
+    "PPO with MoE": 0.0581
+   },
+   "1000": {
+    "Monolithic PPO": 0.2754,
+    "PPO with MoE": 0.0074
+   },
+   "2000": {
+    "Monolithic PPO": 0.123,
+    "PPO with MoE": 0.0002
+   },
+   "5000": {
+    "Monolithic PPO": 0.0147,
+    "PPO with MoE": 0.0
+   }
+  },
+  "assumption": "N(시험 모션 수)와 d(두 정책의 성공·실패가 갈리는 모션 비율)는 논문에 없다. d = 0.05, 0.10, 0.20을 가정."
+ },
+ "V11_param_count": {
+  "obs_dim_200": {
+   "2": 439484,
+   "4": 546040,
+   "6": 652596,
+   "8": 759152,
+   "16": 1185376
+  },
+  "obs_dim_300": {
+   "2": 490684,
+   "4": 597240,
+   "6": 703796,
+   "8": 810352,
+   "16": 1236576
+  },
+  "obs_dim_400": {
+   "2": 541884,
+   "4": 648440,
+   "6": 754996,
+   "8": 861552,
+   "16": 1287776
+  },
+  "note": "표 C.2의 층 크기에서 계산. 관측 차원 O, 행동 차원 29(G1)는 가정. 전문가 수를 키우면 파라미터가 선형 증가해 표 1의 N 절제는 용량과 섞여 있다. 단일 정책(Monolithic PPO)의 층 크기는 논문에 없다."
+ }
+}
