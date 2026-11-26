@@ -1,0 +1,732 @@
+{
+ "V1_table1_means": {
+  "NovaFlow": {
+   "SR_mean": 0.345,
+   "TP_mean": 0.4483,
+   "reported": [
+    0.345,
+    0.448
+   ],
+   "SR_match": true,
+   "TP_match": true
+  },
+  "LVP": {
+   "SR_mean": 0.1433,
+   "TP_mean": 0.3733,
+   "reported": [
+    0.143,
+    0.373
+   ],
+   "SR_match": true,
+   "TP_match": true
+  },
+  "NovaFlow-CL": {
+   "SR_mean": 0.4367,
+   "TP_mean": 0.6083,
+   "reported": [
+    0.437,
+    0.608
+   ],
+   "SR_match": true,
+   "TP_match": true
+  },
+  "Dex4D": {
+   "SR_mean": 0.6,
+   "TP_mean": 0.7117,
+   "reported": [
+    0.6,
+    0.712
+   ],
+   "SR_match": true,
+   "TP_match": true
+  }
+ },
+ "V2_tp_sr_grid": {
+  "TP_ge_SR_violations": [],
+  "SR_avg_on_1_over_600_grid": {
+   "NovaFlow": true,
+   "LVP": true,
+   "NovaFlow-CL": true,
+   "Dex4D": true
+  },
+  "SR_avg_times_600": {
+   "NovaFlow": 207.0,
+   "LVP": 85.8,
+   "NovaFlow-CL": 262.2,
+   "Dex4D": 360.0
+  },
+  "table2_SR_times_600": {
+   "MLP Point Encoding": 34.2,
+   "Decoupled Point Encoding": 121.8,
+   "w/o Self-Attention": 294.0,
+   "w/o Dynamics Modeling": 342.0,
+   "Dex4D": 360.0
+  },
+  "table2_last_row_equals_table1_dex4d": true
+ },
+ "V3_gain_definitions": {
+  "sim_abs_gain_vs_NovaFlowCL_SR_pp": 16.3,
+  "sim_abs_gain_vs_NovaFlowCL_TP_pp": 10.4,
+  "sim_rel_gain_vs_NovaFlowCL_SR_pct": 37.3,
+  "sim_closed_vs_open_NovaFlow_SR_pp": 9.2,
+  "sim_closed_vs_open_NovaFlow_TP_pp": 16.0,
+  "real_rel_gain_vs_best_baseline_pct": 87.5,
+  "real_abs_gain_vs_best_baseline_pp": 26.25,
+  "real_rel_gain_vs_LVP_pct": 104.5,
+  "real_rel_gain_vs_pi05_pct": 125.0,
+  "v1_text_gain_22p5_is_abs_pp": 22.5,
+  "v1_rel_gain_pct": 90.0
+ },
+ "V4_real_world": {
+  "row_sums": {
+   "LVP": {
+    "sum_tasks": 22,
+    "reported_total": 22,
+    "match": true
+   },
+   "NovaFlow-CL": {
+    "sum_tasks": 24,
+    "reported_total": 24,
+    "match": true
+   },
+   "pi0.5-DROID": {
+    "sum_tasks": 20,
+    "reported_total": 20,
+    "match": true
+   },
+   "Dex4D": {
+    "sum_tasks": 45,
+    "reported_total": 45,
+    "match": true
+   }
+  },
+  "wilson_appendixF": {
+   "LiftToy": {
+    "k": 14,
+    "n": 20,
+    "p": 0.7,
+    "wilson": [
+     0.481,
+     0.855
+    ],
+    "reported": [
+     0.48,
+     0.86
+    ],
+    "match": true
+   },
+   "Broccoli2Plate": {
+    "k": 10,
+    "n": 20,
+    "p": 0.5,
+    "wilson": [
+     0.299,
+     0.701
+    ],
+    "reported": [
+     0.3,
+     0.7
+    ],
+    "match": true
+   },
+   "Meat2Bowl": {
+    "k": 13,
+    "n": 20,
+    "p": 0.65,
+    "wilson": [
+     0.433,
+     0.819
+    ],
+    "reported": [
+     0.43,
+     0.82
+    ],
+    "match": true
+   },
+   "Pour": {
+    "k": 8,
+    "n": 20,
+    "p": 0.4,
+    "wilson": [
+     0.219,
+     0.613
+    ],
+    "reported": [
+     0.22,
+     0.61
+    ],
+    "match": true
+   },
+   "Total": {
+    "k": 45,
+    "n": 80,
+    "p": 0.5625,
+    "wilson": [
+     0.453,
+     0.666
+    ],
+    "reported": [
+     0.45,
+     0.67
+    ],
+    "match": true
+   }
+  },
+  "fisher_total": {
+   "LVP": {
+    "baseline": "22/80",
+    "dex4d": "45/80",
+    "p": 0.00038614824421602127
+   },
+   "NovaFlow-CL": {
+    "baseline": "24/80",
+    "dex4d": "45/80",
+    "p": 0.0013299120554992909
+   },
+   "pi0.5-DROID": {
+    "baseline": "20/80",
+    "dex4d": "45/80",
+    "p": 9.74944989896558e-05
+   }
+  },
+  "fisher_per_task": {
+   "LVP|LiftToy": {
+    "p": 0.2002872728123007,
+    "holm12": 1.0
+   },
+   "LVP|Broccoli2Plate": {
+    "p": 0.3332130795979517,
+    "holm12": 1.0
+   },
+   "LVP|Meat2Bowl": {
+    "p": 0.112833775483096,
+    "holm12": 0.902670203864768
+   },
+   "LVP|Pour": {
+    "p": 0.003276003276003276,
+    "holm12": 0.03931203931203932
+   },
+   "NovaFlow-CL|LiftToy": {
+    "p": 0.3332130795979517,
+    "holm12": 1.0
+   },
+   "NovaFlow-CL|Broccoli2Plate": {
+    "p": 0.5231070892917389,
+    "holm12": 1.0
+   },
+   "NovaFlow-CL|Meat2Bowl": {
+    "p": 0.112833775483096,
+    "holm12": 0.902670203864768
+   },
+   "NovaFlow-CL|Pour": {
+    "p": 0.003276003276003276,
+    "holm12": 0.03931203931203932
+   },
+   "pi0.5-DROID|LiftToy": {
+    "p": 0.010386702198860637,
+    "holm12": 0.09348031978974573
+   },
+   "pi0.5-DROID|Broccoli2Plate": {
+    "p": 0.3332130795979517,
+    "holm12": 1.0
+   },
+   "pi0.5-DROID|Meat2Bowl": {
+    "p": 0.3406437147598824,
+    "holm12": 1.0
+   },
+   "pi0.5-DROID|Pour": {
+    "p": 0.003276003276003276,
+    "holm12": 0.03931203931203932
+   }
+  },
+  "n_sig_raw_p05": 4,
+  "n_sig_holm_p05": 3,
+  "baselines_pairwise_fisher": {
+   "LVP vs NovaFlow-CL": 0.8614728836720951,
+   "LVP vs pi0.5-DROID": 0.857567847323651,
+   "NovaFlow-CL vs pi0.5-DROID": 0.5956049922821955
+  },
+  "rel_gain_ci95_approx_pct": [
+   27.4,
+   176.0
+  ]
+ },
+ "V5_sim_tests": {
+  "assumption": "과제당 100회(논문 4.1), 시도 독립 가정. 같은 초기 자세 공유 여부 미기재",
+  "per_task_fisher": {
+   "Dex4D vs NovaFlow-CL": {
+    "Apple2Plate": {
+     "a": 86,
+     "b": 58,
+     "p": 1.5829099094058148e-05
+    },
+    "Pour": {
+     "a": 86,
+     "b": 73,
+     "p": 0.034734476465598206
+    },
+    "Hammer": {
+     "a": 28,
+     "b": 27,
+     "p": 1.0
+    },
+    "StackCup": {
+     "a": 60,
+     "b": 44,
+     "p": 0.03349189369802435
+    },
+    "RotateBox": {
+     "a": 44,
+     "b": 33,
+     "p": 0.14595372153245484
+    },
+    "Sponge2Bowl": {
+     "a": 56,
+     "b": 27,
+     "p": 5.1726058376091266e-05
+    }
+   },
+   "Dex4D vs NovaFlow": {
+    "Apple2Plate": {
+     "a": 86,
+     "b": 44,
+     "p": 4.883000463263805e-10
+    },
+    "Pour": {
+     "a": 86,
+     "b": 66,
+     "p": 0.0014913707850574937
+    },
+    "Hammer": {
+     "a": 28,
+     "b": 12,
+     "p": 0.007487547270404461
+    },
+    "StackCup": {
+     "a": 60,
+     "b": 42,
+     "p": 0.01597617224099105
+    },
+    "RotateBox": {
+     "a": 44,
+     "b": 25,
+     "p": 0.007199535831520758
+    },
+    "Sponge2Bowl": {
+     "a": 56,
+     "b": 18,
+     "p": 3.6046546028762446e-08
+    }
+   },
+   "Dex4D vs LVP": {
+    "Apple2Plate": {
+     "a": 86,
+     "b": 26,
+     "p": 3.039269563965234e-18
+    },
+    "Pour": {
+     "a": 86,
+     "b": 39,
+     "p": 5.241427250378202e-12
+    },
+    "Hammer": {
+     "a": 28,
+     "b": 0,
+     "p": 8.250032922358661e-10
+    },
+    "StackCup": {
+     "a": 60,
+     "b": 10,
+     "p": 5.0331096963115915e-14
+    },
+    "RotateBox": {
+     "a": 44,
+     "b": 0,
+     "p": 2.486901971102843e-16
+    },
+    "Sponge2Bowl": {
+     "a": 56,
+     "b": 11,
+     "p": 1.0606919949449965e-11
+    }
+   },
+   "NovaFlow-CL vs NovaFlow": {
+    "Apple2Plate": {
+     "a": 58,
+     "b": 44,
+     "p": 0.06567185288496313
+    },
+    "Pour": {
+     "a": 73,
+     "b": 66,
+     "p": 0.35685648296487504
+    },
+    "Hammer": {
+     "a": 27,
+     "b": 12,
+     "p": 0.01181000629287146
+    },
+    "StackCup": {
+     "a": 44,
+     "b": 42,
+     "p": 0.8864776349399172
+    },
+    "RotateBox": {
+     "a": 33,
+     "b": 25,
+     "p": 0.2752938623791823
+    },
+    "Sponge2Bowl": {
+     "a": 27,
+     "b": 18,
+     "p": 0.17512947605074147
+    }
+   }
+  },
+  "holm6_dex4d_vs_novaflowcl": {
+   "Apple2Plate": 9.497459456434889e-05,
+   "Pour": 0.1339675747920974,
+   "Hammer": 1.0,
+   "StackCup": 0.1339675747920974,
+   "RotateBox": 0.2919074430649097,
+   "Sponge2Bowl": 0.0002586302918804563
+  },
+  "tasks_sig_holm_dex4d_vs_novaflowcl": [
+   "Apple2Plate",
+   "Sponge2Bowl"
+  ],
+  "tasks_sig_dex4d_vs_novaflowcl_raw": [
+   "Apple2Plate",
+   "Pour",
+   "StackCup",
+   "Sponge2Bowl"
+  ],
+  "pooled_600": {
+   "Dex4D vs NovaFlow-CL": {
+    "a": 360,
+    "b": 262,
+    "p": 1.9534279296651314e-08
+   },
+   "Dex4D vs NovaFlow": {
+    "a": 360,
+    "b": 207,
+    "p": 9.807270605128772e-19
+   },
+   "Dex4D vs LVP": {
+    "a": 360,
+    "b": 86,
+    "p": 5.586660137709814e-63
+   },
+   "NovaFlow-CL vs NovaFlow": {
+    "a": 262,
+    "b": 207,
+    "p": 0.0013875510092054592
+   }
+  },
+  "ablation_pooled_600": {
+   "MLP Point Encoding": {
+    "k_600": 34,
+    "dex4d_k_600": 360,
+    "diff_pp": 54.33,
+    "p_fisher": 3.2290735021839235e-99,
+    "wilson_ablation": [
+     0.041,
+     0.078
+    ]
+   },
+   "Decoupled Point Encoding": {
+    "k_600": 122,
+    "dex4d_k_600": 360,
+    "diff_pp": 39.67,
+    "p_fisher": 1.0157559660321516e-45,
+    "wilson_ablation": [
+     0.173,
+     0.237
+    ]
+   },
+   "w/o Self-Attention": {
+    "k_600": 294,
+    "dex4d_k_600": 360,
+    "diff_pp": 11.0,
+    "p_fisher": 0.00016217170401101538,
+    "wilson_ablation": [
+     0.45,
+     0.53
+    ]
+   },
+   "w/o Dynamics Modeling": {
+    "k_600": 342,
+    "dex4d_k_600": 360,
+    "diff_pp": 3.0,
+    "p_fisher": 0.31925404260867707,
+    "wilson_ablation": [
+     0.53,
+     0.609
+    ]
+   }
+  },
+  "ablation_note": "합산 600은 6과제 x 100회 가정. 학생 학습이 1회(시드 1)이면 이 p는 평가 표본 변동만 반영",
+  "dex4d_task_wilson": {
+   "Apple2Plate": [
+    0.779,
+    0.915
+   ],
+   "Pour": [
+    0.779,
+    0.915
+   ],
+   "Hammer": [
+    0.201,
+    0.375
+   ],
+   "StackCup": [
+    0.502,
+    0.691
+   ],
+   "RotateBox": [
+    0.347,
+    0.538
+   ],
+   "Sponge2Bowl": [
+    0.462,
+    0.653
+   ]
+  }
+ },
+ "V6_sim_vs_real": {
+  "pour_sim_dex4d": "86/100",
+  "pour_real_dex4d": "8/20",
+  "fisher_p": 4.038428014929412e-05,
+  "pour_sim_novaflowcl": "73/100",
+  "pour_real_novaflowcl": "0/20",
+  "fisher_p_nf": 3.313557927112209e-10,
+  "note": "시뮬 Pour는 사전 정의 waypoint, 실로봇 Pour는 생성 영상 점 궤적이라 조건이 다름(논문 4.1 대 3.4)"
+ },
+ "V7_v1_v2_real": {
+  "v1": {
+   "NovaFlow-CL": [
+    4,
+    3,
+    3,
+    0,
+    10
+   ],
+   "Dex4D": [
+    6,
+    4,
+    5,
+    4,
+    19
+   ]
+  },
+  "v2_dex4d": [
+   14,
+   10,
+   13,
+   8,
+   45
+  ],
+  "v2_novaflowcl": [
+   10,
+   7,
+   7,
+   0,
+   24
+  ],
+  "v2_minus_v1_per_task_if_v1_is_subset": {
+   "Dex4D": [
+    8,
+    6,
+    8,
+    4
+   ],
+   "NovaFlow-CL": [
+    6,
+    4,
+    4,
+    0
+   ]
+  },
+  "v2_minus_v1_total": {
+   "Dex4D": 26,
+   "NovaFlow-CL": 14
+  },
+  "nonneg_all_cells": true,
+  "added_trials_n_each": 10,
+  "v1_vs_added_dex4d_fisher": {
+   "v1": "19/40",
+   "added": "26/40",
+   "p": 0.1759397441511181
+  },
+  "v1_vs_added_novaflowcl_fisher": {
+   "v1": "10/40",
+   "added": "14/40",
+   "p": 0.46467763580131355
+  },
+  "note": "v1의 10회가 v2 20회의 부분집합이라는 가정은 논문에 없음. 모든 셀에서 v2 >= v1이라 모순은 없음"
+ },
+ "V8_failure_flow": {
+  "flow": {
+   "total": 80,
+   "planning_success": 72,
+   "video_failure": 8,
+   "grasp_success": 58,
+   "grasp_failure": 14,
+   "task_success": 45,
+   "online_tracking_failure": 10,
+   "execution_failure": 3
+  },
+  "conservation": [
+   true,
+   true,
+   true
+  ],
+  "task_success_matches_table3": true,
+  "failure_total": 35,
+  "failure_shares_pct": {
+   "video_failure": 22.9,
+   "grasp_failure": 40.0,
+   "online_tracking_failure": 28.6,
+   "execution_failure": 8.6
+  },
+  "grasp_stage_success_rate": 0.806,
+  "post_grasp_success_rate": 0.776,
+  "video_failure_wilson": [
+   0.052,
+   0.185
+  ],
+  "note": "그림 5 숫자는 그림 판독 값. 비디오 실패 8은 80회 중 생성 영상이 계획으로 쓸 수 없었던 횟수(정의는 본문에 없음)"
+ },
+ "V9_point_robustness_figure": {
+  "fig4_read": {
+   "points": [
+    64,
+    48,
+    32,
+    16,
+    8
+   ],
+   "SR": [
+    0.6,
+    0.58,
+    0.52,
+    0.365,
+    0.21
+   ],
+   "TP": [
+    0.71,
+    0.7,
+    0.635,
+    0.495,
+    0.35
+   ]
+  },
+  "sr_ratio_to_64": [
+   1.0,
+   0.97,
+   0.87,
+   0.61,
+   0.35
+  ],
+  "drop_pp_to_32": 8.0,
+  "drop_pp_to_8": 39.0,
+  "fig4_64_matches_table2": true,
+  "note": "그림 판독 값(오차 약 ±0.01). 0점으로 이어진 점선은 측정점이 아니라 연결선. 본문 '48과 32에서 한계적 저하'는 SR 0.60 → 0.52(-8 pp)"
+ },
+ "V10_training_scale": {
+  "teacher_iters": 50000,
+  "teacher_samples_assuming_nsteps8": 1638400000,
+  "teacher_samples_per_sec_range": [
+   6321,
+   9481
+  ],
+  "student_samples_assuming_nsteps1": 80000000,
+  "student_samples_per_sec_20h": 1111,
+  "teacher_stage_sum_ok": true,
+  "stage12_iters_text_vs_table4": "본문 15k + 10k + 25k = 50k, 표 4 구간 0-15k, 15-25k, 25-50k 일치",
+  "note": "nsteps는 논문에 없고 공식 코드 설정값. 처리량은 2–3일, 20시간 보고 시간에서 역산한 값"
+ },
+ "V11_reward_units": {
+  "r_goal_vs_d": {
+   "0.0": 1.4,
+   "0.05": 1.25,
+   "0.1": 1.1,
+   "0.3": 0.5,
+   "0.4667": -0.0,
+   "0.5": -0.1
+  },
+  "r_goal_zero_at_d_m": 0.4667,
+  "bonus_at_success_edge_d0.05": 3.333,
+  "bonus_at_d0": 5.0,
+  "stay_bonus": 10.0,
+  "r_action_stage3_weight5_clamp_note": "공식 코드는 -0.01*||a||^2를 -0.5에서 자름(가중치 곱 전)",
+  "note": "r_goal은 접촉 시 d_t=0.4667 m 이상에서 음수. 성공 문턱 d_t < 0.05 m에서 1.25"
+ },
+ "V12_object_set_from_code": {
+  "train_entries": 3200,
+  "train_unique_meshes": 2145,
+  "train_unique_pairs": 3200,
+  "train_categories": 94,
+  "train_top_categories": [
+   [
+    "bottle",
+    735
+   ],
+   [
+    "jar",
+    255
+   ],
+   [
+    "cellphone",
+    228
+   ],
+   [
+    "camera",
+    169
+   ],
+   [
+    "mug",
+    158
+   ],
+   [
+    "pistol",
+    127
+   ]
+  ],
+  "bottle_entries": 735,
+  "paper_says": "3,200 objects (3.1, 부록 C)",
+  "seen_entries": 141,
+  "seen_unique_meshes": 137,
+  "seen_meshes_also_in_train": 79,
+  "unseen_entries": 100,
+  "unseen_unique_meshes": 43,
+  "unseen_meshes_in_train": 0,
+  "unseen_categories": 22,
+  "unseen_categories_in_train": [
+   "mug"
+  ],
+  "scale_values": [
+   "0.06",
+   "0.08",
+   "0.1",
+   "0.12",
+   "0.15"
+  ]
+ },
+ "V13_reference_spot_check": {
+  "[30] 2602.16863": "SimToolReal: An Object-Centric Policy for Zero-Shot Dexterous Tool Manipulation",
+  "[39] 2609.38172": "Counterfactual Video Generation Enables Scalable Humanoid Loco-Manipulation",
+  "note": "두 번호 모두 abs 페이지가 열리고 제목이 참고문헌과 같음"
+ },
+ "V14_hparam_labels": {
+  "paper_table7": {
+   "Discount Factor (lambda)": 0.95,
+   "GAE parameter (gamma)": 0.96
+  },
+  "code_ppo_config": {
+   "gamma": 0.96,
+   "lam": 0.95
+  },
+  "note": "표 7은 할인율을 0.95, GAE를 0.96으로 적었고 코드는 gamma(할인) 0.96, lam(GAE) 0.95. 기호도 관례(λ=GAE, γ=할인)와 반대"
+ }
+}

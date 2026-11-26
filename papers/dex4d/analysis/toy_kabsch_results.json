@@ -1,0 +1,111 @@
+{
+ "setup": {
+  "trials": 2000,
+  "object_std_cm": [
+   4,
+   3,
+   2
+  ],
+  "outlier_radius_cm": 5
+ },
+ "gauss": {
+  "sigma2mm_n64": {
+   "median_deg": 0.65,
+   "p90_deg": 1.07
+  },
+  "sigma2mm_n32": {
+   "median_deg": 0.92,
+   "p90_deg": 1.53
+  },
+  "sigma2mm_n16": {
+   "median_deg": 1.35,
+   "p90_deg": 2.3
+  },
+  "sigma2mm_n8": {
+   "median_deg": 2.03,
+   "p90_deg": 3.69
+  },
+  "sigma5mm_n64": {
+   "median_deg": 1.63,
+   "p90_deg": 2.65
+  },
+  "sigma5mm_n32": {
+   "median_deg": 2.27,
+   "p90_deg": 3.78
+  },
+  "sigma5mm_n16": {
+   "median_deg": 3.39,
+   "p90_deg": 5.79
+  },
+  "sigma5mm_n8": {
+   "median_deg": 5.14,
+   "p90_deg": 9.27
+  },
+  "sigma10mm_n64": {
+   "median_deg": 3.16,
+   "p90_deg": 5.23
+  },
+  "sigma10mm_n32": {
+   "median_deg": 4.67,
+   "p90_deg": 7.69
+  },
+  "sigma10mm_n16": {
+   "median_deg": 6.83,
+   "p90_deg": 11.37
+  },
+  "sigma10mm_n8": {
+   "median_deg": 10.25,
+   "p90_deg": 18.82
+  }
+ },
+ "outlier": {
+  "q0.0_n32": {
+   "kabsch_median_deg": 2.3,
+   "kabsch_p90_deg": 3.8,
+   "ransac_median_deg": 2.45,
+   "ransac_p90_deg": 3.99
+  },
+  "q0.0_n16": {
+   "kabsch_median_deg": 3.38,
+   "kabsch_p90_deg": 5.79,
+   "ransac_median_deg": 3.47,
+   "ransac_p90_deg": 5.82
+  },
+  "q0.1_n32": {
+   "kabsch_median_deg": 4.59,
+   "kabsch_p90_deg": 7.87,
+   "ransac_median_deg": 2.56,
+   "ransac_p90_deg": 4.16
+  },
+  "q0.1_n16": {
+   "kabsch_median_deg": 7.52,
+   "kabsch_p90_deg": 13.19,
+   "ransac_median_deg": 3.67,
+   "ransac_p90_deg": 6.25
+  },
+  "q0.2_n32": {
+   "kabsch_median_deg": 6.13,
+   "kabsch_p90_deg": 10.16,
+   "ransac_median_deg": 2.65,
+   "ransac_p90_deg": 4.51
+  },
+  "q0.2_n16": {
+   "kabsch_median_deg": 8.98,
+   "kabsch_p90_deg": 15.69,
+   "ransac_median_deg": 3.78,
+   "ransac_p90_deg": 6.64
+  },
+  "q0.3_n32": {
+   "kabsch_median_deg": 7.8,
+   "kabsch_p90_deg": 12.88,
+   "ransac_median_deg": 2.81,
+   "ransac_p90_deg": 4.79
+  },
+  "q0.3_n16": {
+   "kabsch_median_deg": 11.73,
+   "kabsch_p90_deg": 19.53,
+   "ransac_median_deg": 4.23,
+   "ransac_p90_deg": 7.32
+  }
+ }
+}
