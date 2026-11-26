@@ -1,0 +1,225 @@
+{
+ "flow_time_beta": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 209,
+  "text": "time_beta = sample_beta(1.5, 1.0, bsize, device)"
+ },
+ "flow_xt_convention": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 380,
+  "text": "x_t = time_expanded * noise + (1 - time_expanded) * actions     # [bs, frame, dim]"
+ },
+ "flow_target_noise_minus_action": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 381,
+  "text": "u_t = noise - actions                                           # [bs, frame, dim]"
+ },
+ "train_gaze_embed_scale_sqrt_dim": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 258,
+  "text": "return gaze_emb * math.sqrt(gaze_emb_dim)"
+ },
+ "infer_gaze_token_num_3": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 548,
+  "text": "gaze_token_num = 3"
+ },
+ "infer_gaze_init_scale": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 554,
+  "text": "gaze_init_emb = gaze_init_emb * math.sqrt(gaze_token_num)"
+ },
+ "infer_prev_token_scale": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 575,
+  "text": "prev_token_emb = prev_token_emb * math.sqrt(gaze_token_num)"
+ },
+ "infer_prefix_len_includes_padding": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 547,
+  "text": "current_prefix_len = prefix_pad_masks.shape[1]"
+ },
+ "train_position_ids_valid_only": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 407,
+  "text": "position_ids = torch.cumsum(pad_masks, dim=1) - 1       # [bs, L]"
+ },
+ "infer_gaze_att_mask_all_zero": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 557,
+  "text": "new_att_mask = torch.zeros("
+ },
+ "gaze_head_linear_224": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 120,
+  "text": "self.gaze_head = nn.Linear(paligemma_hidden_size, config.gaze_vocab_size)"
+ },
+ "gaze_init_token_param": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 119,
+  "text": "self.gaze_init_token = nn.Parameter(torch.randn(1, paligemma_hidden_size))  # [1, 2048]"
+ },
+ "gaze_greedy_argmax": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 595,
+  "text": "predicted_bin_id = torch.argmax(gaze_logits, dim=-1)"
+ },
+ "action_loss_mse_masked": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 453,
+  "text": "action_loss_per_element = F.mse_loss(u_t, v_t, reduction=\"none\")        # [bs, T, action_dim]"
+ },
+ "data_action_dim_mask": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 445,
+  "text": "data_action_dim = self.config.data_action_dim if self.config.data_action_dim else action_dim"
+ },
+ "tkinter_import": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 3,
+  "text": "from tkinter.constants import FALSE"
+ },
+ "compile_sample_actions": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 131,
+  "text": "self.sample_actions = torch.compile(self.sample_actions, mode=\"max-autotune\")"
+ },
+ "denoise_steps_default_10": {
+  "file": "src/openpi/models_pytorch/VLIA_pytorch.py",
+  "line": 512,
+  "text": "def sample_actions(self, device, observation, noise=None, num_steps=10) -> Tensor:"
+ },
+ "config_default_gaze_loss_weight": {
+  "file": "src/openpi/models/VLIA_config.py",
+  "line": 39,
+  "text": "gaze_loss_weight: float = 1e-2"
+ },
+ "config_default_gemma_2b": {
+  "file": "src/openpi/models/VLIA_config.py",
+  "line": 22,
+  "text": "paligemma_variant: _gemma.Variant = \"gemma_2b\""
+ },
+ "config_action_expert_300m": {
+  "file": "src/openpi/models/VLIA_config.py",
+  "line": 23,
+  "text": "action_expert_variant: _gemma.Variant = \"gemma_300m\""
+ },
+ "config_default_freeze_all_hot": {
+  "file": "src/openpi/models/VLIA_config.py",
+  "line": 60,
+  "text": "\"vlm\": \"hot\","
+ },
+ "config_lfa_gaze_loss_weight_0.1": {
+  "file": "src/openpi/training/config.py",
+  "line": 874,
+  "text": "gaze_loss_weight=0.1,"
+ },
+ "config_lfa_action_dim_48": {
+  "file": "src/openpi/training/config.py",
+  "line": 869,
+  "text": "action_dim=48,"
+ },
+ "config_lfa_steps_100000": {
+  "file": "src/openpi/training/config.py",
+  "line": 895,
+  "text": "num_train_steps=100000,"
+ },
+ "config_lfa_decay_steps_50000": {
+  "file": "src/openpi/training/config.py",
+  "line": 889,
+  "text": "decay_steps=50000,"
+ },
+ "config_lfa_peak_lr_1e-4": {
+  "file": "src/openpi/training/config.py",
+  "line": 888,
+  "text": "peak_lr=1e-4,"
+ },
+ "config_lfa_batch_32": {
+  "file": "src/openpi/training/config.py",
+  "line": 897,
+  "text": "batch_size=32,"
+ },
+ "config_lfa_pi0_base_weights": {
+  "file": "src/openpi/training/config.py",
+  "line": 893,
+  "text": "weight_loader=weight_loaders.CheckpointWeightLoader(\"s3://openpi-assets/checkpoints/pi0_base/params\"),"
+ },
+ "config_lfa_single_camera": {
+  "file": "src/openpi/training/config.py",
+  "line": 875,
+  "text": "image_keys=(\"base_0_rgb\",),"
+ },
+ "sim_gaze_mask_always_1": {
+  "file": "examples/process_data_2.py",
+  "line": 199,
+  "text": "\"gaze_mask\": np.array([1], dtype=np.int64)"
+ },
+ "sim_gaze_from_vr_eyes": {
+  "file": "examples/process_data_1.py",
+  "line": 66,
+  "text": "avg_x = (left_eye[0] + right_eye[0]) / 2"
+ },
+ "sim_action_is_next_state": {
+  "file": "examples/process_data_1.py",
+  "line": 109,
+  "text": "action = states[1:]"
+ },
+ "aug_crop_scale": {
+  "file": "src/openpi/models_pytorch/preprocessing_human.py",
+  "line": 18,
+  "text": "AUG_CROP_SCALE = 0.95       # 0.95"
+ },
+ "aug_rotation_deg": {
+  "file": "src/openpi/models_pytorch/preprocessing_human.py",
+  "line": 19,
+  "text": "AUG_ROTATION_ANGLE = 5      # 5"
+ },
+ "gaze_clamp_after_aug": {
+  "file": "src/openpi/models_pytorch/preprocessing_human.py",
+  "line": 176,
+  "text": "processed_gaze = torch.clamp(processed_gaze, 0.0, 1.0)"
+ },
+ "optimizer_adamw_betas": {
+  "file": "src/openpi/training/optimizer.py",
+  "line": 70,
+  "text": "b2: float = 0.95"
+ },
+ "lr_schedule_cosine_floor": {
+  "file": "scripts/train/train.py",
+  "line": 912,
+  "text": "progress = min(1.0, (step - warmup_steps) / max(1, decay_steps - warmup_steps))"
+ },
+ "freeze_warmup_uses_lr_warmup": {
+  "file": "scripts/train/train.py",
+  "line": 869,
+  "text": "warmup_steps_for_freeze = config.lr_schedule.warmup_steps"
+ },
+ "human_config_no_named_instance": {
+  "file": "src/openpi/training/config.py",
+  "line": 644,
+  "text": "class HumanRLDSDataConfig(DataConfigFactory):"
+ },
+ "data_egodex_gaze_zero_mask": {
+  "file": "data/GazeVLA-Data/src/dataset/EgoDex.py",
+  "line": 126,
+  "text": "data[\"mask\"][\"gaze\"] = np.zeros((num_frames, 1), dtype=np.int32)"
+ },
+ "data_hot3d_gaze_from_aria": {
+  "file": "data/GazeVLA-Data/src/dataset/HOT3D.py",
+  "line": 244,
+  "text": "gaze_xy = aria_provider.get_eye_gaze_in_camera(stream_id, timestamp_ns)"
+ },
+ "_arith": {
+  "train_gaze_token_embed_scale": 45.254833995939045,
+  "infer_gaze_token_embed_scale": 1.7320508075688772,
+  "ratio_train_over_infer": 26.127890589687237,
+  "text_len_padded_to": 48,
+  "rope_position_shift_for_prompt_len": {
+   "8": 40,
+   "12": 36,
+   "20": 28,
+   "30": 18
+  },
+  "note": "학습의 position_ids는 유효 토큰만 센다(cumsum(pad_mask)-1). 추론의 시선 토큰 위치는 패딩 포함 길이(256+48)에서 시작한다. 프롬프트 토큰 수 n은 가정(8–30)"
+ }
+}

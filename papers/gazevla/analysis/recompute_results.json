@@ -1,0 +1,1331 @@
+{
+ "V1_table1_averages": {
+  "ID/LFA": {
+   "mean": 43.333,
+   "reported": 43,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 260
+  },
+  "ID/HRDT": {
+   "mean": 38.5,
+   "reported": 39,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 231
+  },
+  "ID/pi0.5": {
+   "mean": 41.667,
+   "reported": 41,
+   "rounds_to_reported": false,
+   "sum_counts_of_600": 250
+  },
+  "ID/Ours": {
+   "mean": 48.667,
+   "reported": 49,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 292
+  },
+  "OOD-D/LFA": {
+   "mean": 13.667,
+   "reported": 14,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 82
+  },
+  "OOD-D/HRDT": {
+   "mean": 14.333,
+   "reported": 14,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 86
+  },
+  "OOD-D/pi0.5": {
+   "mean": 22.0,
+   "reported": 22,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 132
+  },
+  "OOD-D/Ours": {
+   "mean": 27.5,
+   "reported": 28,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 165
+  },
+  "OOD-L/LFA": {
+   "mean": 0.0,
+   "reported": 0,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 0
+  },
+  "OOD-L/HRDT": {
+   "mean": 6.333,
+   "reported": 6,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 38
+  },
+  "OOD-L/pi0.5": {
+   "mean": 23.0,
+   "reported": 23,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 138
+  },
+  "OOD-L/Ours": {
+   "mean": 27.333,
+   "reported": 27,
+   "rounds_to_reported": true,
+   "sum_counts_of_600": 164
+  }
+ },
+ "V2_ood_relative_gain": {
+  "OOD-D": {
+   "ours": 27.5,
+   "pi05": 22.0,
+   "relative_gain_pct": 25.0
+  },
+  "OOD-L": {
+   "ours": 27.333333333333332,
+   "pi05": 23.0,
+   "relative_gain_pct": 18.840579710144922
+  },
+  "OOD pooled (12 cells)": {
+   "ours": 27.416666666666668,
+   "pi05": 22.5,
+   "relative_gain_pct": 21.851851851851855
+  },
+  "from reported rounded averages (28+27)/(22+23)": {
+   "relative_gain_pct": 22.222222222222232
+  },
+  "ID relative gain": {
+   "relative_gain_pct": 16.799999999999994
+  }
+ },
+ "V3_table1_cell_wins": {
+  "ours_strict_best": 14,
+  "ours_tied_best": 1,
+  "ours_not_best": [
+   "ID/Pour Test Tube: Ours 39 < 41",
+   "ID/Thread Needle: Ours 43 < 56",
+   "OOD-L/Pour Test Tube: Ours 22 < 25"
+  ],
+  "cells": [
+   {
+    "setting": "ID",
+    "task": "Cube Transfer",
+    "ours": 100,
+    "best_baseline": 94,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   },
+   {
+    "setting": "ID",
+    "task": "Hook Package",
+    "ours": 32,
+    "best_baseline": 23,
+    "best_baseline_name": [
+     "LFA"
+    ]
+   },
+   {
+    "setting": "ID",
+    "task": "Peg Insertion",
+    "ours": 18,
+    "best_baseline": 17,
+    "best_baseline_name": [
+     "HRDT"
+    ]
+   },
+   {
+    "setting": "ID",
+    "task": "Pour Test Tube",
+    "ours": 39,
+    "best_baseline": 41,
+    "best_baseline_name": [
+     "LFA"
+    ]
+   },
+   {
+    "setting": "ID",
+    "task": "Slot Insertion",
+    "ours": 60,
+    "best_baseline": 54,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   },
+   {
+    "setting": "ID",
+    "task": "Thread Needle",
+    "ours": 43,
+    "best_baseline": 56,
+    "best_baseline_name": [
+     "LFA"
+    ]
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Cube Transfer",
+    "ours": 35,
+    "best_baseline": 28,
+    "best_baseline_name": [
+     "HRDT"
+    ]
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Hook Package",
+    "ours": 14,
+    "best_baseline": 11,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Peg Insertion",
+    "ours": 9,
+    "best_baseline": 7,
+    "best_baseline_name": [
+     "LFA"
+    ]
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Pour Test Tube",
+    "ours": 28,
+    "best_baseline": 24,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Slot Insertion",
+    "ours": 56,
+    "best_baseline": 47,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Thread Needle",
+    "ours": 23,
+    "best_baseline": 23,
+    "best_baseline_name": [
+     "HRDT"
+    ]
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Cube Transfer",
+    "ours": 36,
+    "best_baseline": 32,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Hook Package",
+    "ours": 19,
+    "best_baseline": 10,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Peg Insertion",
+    "ours": 16,
+    "best_baseline": 7,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Pour Test Tube",
+    "ours": 22,
+    "best_baseline": 25,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Slot Insertion",
+    "ours": 50,
+    "best_baseline": 44,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Thread Needle",
+    "ours": 21,
+    "best_baseline": 20,
+    "best_baseline_name": [
+     "pi0.5"
+    ]
+   }
+  ]
+ },
+ "V4_table1_cell_tests_assumed_n100": {
+  "cells": [
+   {
+    "setting": "ID",
+    "task": "Cube Transfer",
+    "ours": 100,
+    "pi05": 94,
+    "diff_pp": 6,
+    "fisher_p": 0.028930282023157568,
+    "ours_wilson": [
+     96.3,
+     100.0
+    ],
+    "holm_p": 0.5207450764168362
+   },
+   {
+    "setting": "ID",
+    "task": "Hook Package",
+    "ours": 32,
+    "pi05": 20,
+    "diff_pp": 12,
+    "fisher_p": 0.07561017566065202,
+    "ours_wilson": [
+     23.7,
+     41.7
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "ID",
+    "task": "Peg Insertion",
+    "ours": 18,
+    "pi05": 15,
+    "diff_pp": 3,
+    "fisher_p": 0.7036570008579521,
+    "ours_wilson": [
+     11.7,
+     26.7
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "ID",
+    "task": "Pour Test Tube",
+    "ours": 39,
+    "pi05": 34,
+    "diff_pp": 5,
+    "fisher_p": 0.5570142153129808,
+    "ours_wilson": [
+     30.0,
+     48.8
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "ID",
+    "task": "Slot Insertion",
+    "ours": 60,
+    "pi05": 54,
+    "diff_pp": 6,
+    "fisher_p": 0.4752454158971638,
+    "ours_wilson": [
+     50.2,
+     69.1
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "ID",
+    "task": "Thread Needle",
+    "ours": 43,
+    "pi05": 33,
+    "diff_pp": 10,
+    "fisher_p": 0.18966243262213728,
+    "ours_wilson": [
+     33.7,
+     52.8
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Cube Transfer",
+    "ours": 35,
+    "pi05": 25,
+    "diff_pp": 10,
+    "fisher_p": 0.1646366738452582,
+    "ours_wilson": [
+     26.4,
+     44.7
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Hook Package",
+    "ours": 14,
+    "pi05": 11,
+    "diff_pp": 3,
+    "fisher_p": 0.6696356773961458,
+    "ours_wilson": [
+     8.5,
+     22.1
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Peg Insertion",
+    "ours": 9,
+    "pi05": 6,
+    "diff_pp": 3,
+    "fisher_p": 0.5927638929527532,
+    "ours_wilson": [
+     4.8,
+     16.2
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Pour Test Tube",
+    "ours": 28,
+    "pi05": 24,
+    "diff_pp": 4,
+    "fisher_p": 0.6289102631102844,
+    "ours_wilson": [
+     20.1,
+     37.5
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Slot Insertion",
+    "ours": 56,
+    "pi05": 47,
+    "diff_pp": 9,
+    "fisher_p": 0.25763592421527004,
+    "ours_wilson": [
+     46.2,
+     65.3
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-D",
+    "task": "Thread Needle",
+    "ours": 23,
+    "pi05": 19,
+    "diff_pp": 4,
+    "fisher_p": 0.6028516588747911,
+    "ours_wilson": [
+     15.8,
+     32.2
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Cube Transfer",
+    "ours": 36,
+    "pi05": 32,
+    "diff_pp": 4,
+    "fisher_p": 0.654453941148917,
+    "ours_wilson": [
+     27.3,
+     45.8
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Hook Package",
+    "ours": 19,
+    "pi05": 10,
+    "diff_pp": 9,
+    "fisher_p": 0.10697861560483957,
+    "ours_wilson": [
+     12.5,
+     27.8
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Peg Insertion",
+    "ours": 16,
+    "pi05": 7,
+    "diff_pp": 9,
+    "fisher_p": 0.07439747905014307,
+    "ours_wilson": [
+     10.1,
+     24.4
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Pour Test Tube",
+    "ours": 22,
+    "pi05": 25,
+    "diff_pp": -3,
+    "fisher_p": 0.7389761829256387,
+    "ours_wilson": [
+     15.0,
+     31.1
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Slot Insertion",
+    "ours": 50,
+    "pi05": 44,
+    "diff_pp": 6,
+    "fisher_p": 0.4788069730811104,
+    "ours_wilson": [
+     40.4,
+     59.6
+    ],
+    "holm_p": 1.0
+   },
+   {
+    "setting": "OOD-L",
+    "task": "Thread Needle",
+    "ours": 21,
+    "pi05": 20,
+    "diff_pp": 1,
+    "fisher_p": 1.0,
+    "ours_wilson": [
+     14.2,
+     30.0
+    ],
+    "holm_p": 1.0
+   }
+  ],
+  "n_cells_p_lt_0.05": 1.0,
+  "n_cells_holm_lt_0.05": 0
+ },
+ "V4_table1_pooled_assumed_n100": {
+  "ID Ours vs pi0.5": {
+   "ours": 292,
+   "base": 250,
+   "n_each": 600,
+   "diff_pp": 7.0,
+   "fisher_p": 0.017356260735387534
+  },
+  "ID Ours vs HRDT": {
+   "ours": 292,
+   "base": 231,
+   "n_each": 600,
+   "diff_pp": 10.166666666666666,
+   "fisher_p": 0.0004724753091723507
+  },
+  "ID Ours vs LFA": {
+   "ours": 292,
+   "base": 260,
+   "n_each": 600,
+   "diff_pp": 5.333333333333333,
+   "fisher_p": 0.07252238856432794
+  },
+  "OOD-D Ours vs pi0.5": {
+   "ours": 165,
+   "base": 132,
+   "n_each": 600,
+   "diff_pp": 5.5,
+   "fisher_p": 0.0322111370205727
+  },
+  "OOD-D Ours vs HRDT": {
+   "ours": 165,
+   "base": 86,
+   "n_each": 600,
+   "diff_pp": 13.166666666666666,
+   "fisher_p": 2.5149740909138657e-08
+  },
+  "OOD-D Ours vs LFA": {
+   "ours": 165,
+   "base": 82,
+   "n_each": 600,
+   "diff_pp": 13.833333333333334,
+   "fisher_p": 3.6631872027353485e-09
+  },
+  "OOD-L Ours vs pi0.5": {
+   "ours": 164,
+   "base": 138,
+   "n_each": 600,
+   "diff_pp": 4.333333333333333,
+   "fisher_p": 0.09622081495335223
+  },
+  "OOD-L Ours vs HRDT": {
+   "ours": 164,
+   "base": 38,
+   "n_each": 600,
+   "diff_pp": 21.0,
+   "fisher_p": 2.676514489039383e-23
+  },
+  "OOD-L Ours vs LFA": {
+   "ours": 164,
+   "base": 0,
+   "n_each": 600,
+   "diff_pp": 27.333333333333332,
+   "fisher_p": 2.0336957093807297e-55
+  },
+  "all 18 cells Ours vs pi0.5 (CMH over cells)": {
+   "chi2": 16.31530344068219,
+   "p": 5.362909790679183e-05,
+   "or_mh": 1.3846593289408542
+  }
+ },
+ "V5_figure6_real_world": {
+  "label_means": {
+   "EgoMimic": 38.333333333333336,
+   "HRDT": 37.0,
+   "pi0.5": 40.833333333333336,
+   "Ours": 53.0
+  },
+  "mean_range_from_grid_k_of_40": {
+   "EgoMimic": [
+    38.333333333333336,
+    38.333333333333336
+   ],
+   "HRDT": [
+    37.083333333333336,
+    37.083333333333336
+   ],
+   "pi0.5": [
+    40.833333333333336,
+    40.833333333333336
+   ],
+   "Ours": [
+    52.916666666666664,
+    52.916666666666664
+   ]
+  },
+  "diff_ours_vs_pi05_pp_label": 12.166666666666664,
+  "diff_ours_vs_pi05_pp_range": [
+   12.083333333333329,
+   12.083333333333329
+  ],
+  "grid_check": {
+   "Collect Fruit/EgoMimic": {
+    "label": 50,
+    "feasible_k_of_40": [
+     20
+    ],
+    "on_half_boundary": false
+   },
+   "Collect Fruit/HRDT": {
+    "label": 45,
+    "feasible_k_of_40": [
+     18
+    ],
+    "on_half_boundary": false
+   },
+   "Collect Fruit/pi0.5": {
+    "label": 55,
+    "feasible_k_of_40": [
+     22
+    ],
+    "on_half_boundary": false
+   },
+   "Collect Fruit/Ours": {
+    "label": 68,
+    "feasible_k_of_40": [
+     27
+    ],
+    "on_half_boundary": true
+   },
+   "Place Remote/EgoMimic": {
+    "label": 38,
+    "feasible_k_of_40": [
+     15
+    ],
+    "on_half_boundary": true
+   },
+   "Place Remote/HRDT": {
+    "label": 32,
+    "feasible_k_of_40": [
+     13
+    ],
+    "on_half_boundary": true
+   },
+   "Place Remote/pi0.5": {
+    "label": 30,
+    "feasible_k_of_40": [
+     12
+    ],
+    "on_half_boundary": false
+   },
+   "Place Remote/Ours": {
+    "label": 43,
+    "feasible_k_of_40": [
+     17
+    ],
+    "on_half_boundary": true
+   },
+   "Stack Blocks/EgoMimic": {
+    "label": 38,
+    "feasible_k_of_40": [
+     15
+    ],
+    "on_half_boundary": true
+   },
+   "Stack Blocks/HRDT": {
+    "label": 45,
+    "feasible_k_of_40": [
+     18
+    ],
+    "on_half_boundary": false
+   },
+   "Stack Blocks/pi0.5": {
+    "label": 52,
+    "feasible_k_of_40": [
+     21
+    ],
+    "on_half_boundary": true
+   },
+   "Stack Blocks/Ours": {
+    "label": 62,
+    "feasible_k_of_40": [
+     25
+    ],
+    "on_half_boundary": true
+   },
+   "Tighten Screw/EgoMimic": {
+    "label": 2,
+    "feasible_k_of_40": [
+     1
+    ],
+    "on_half_boundary": true
+   },
+   "Tighten Screw/HRDT": {
+    "label": 0,
+    "feasible_k_of_40": [
+     0
+    ],
+    "on_half_boundary": false
+   },
+   "Tighten Screw/pi0.5": {
+    "label": 5,
+    "feasible_k_of_40": [
+     2
+    ],
+    "on_half_boundary": false
+   },
+   "Tighten Screw/Ours": {
+    "label": 12,
+    "feasible_k_of_40": [
+     5
+    ],
+    "on_half_boundary": true
+   },
+   "Grasp Bottle/EgoMimic": {
+    "label": 72,
+    "feasible_k_of_40": [
+     29
+    ],
+    "on_half_boundary": true
+   },
+   "Grasp Bottle/HRDT": {
+    "label": 78,
+    "feasible_k_of_40": [
+     31
+    ],
+    "on_half_boundary": true
+   },
+   "Grasp Bottle/pi0.5": {
+    "label": 68,
+    "feasible_k_of_40": [
+     27
+    ],
+    "on_half_boundary": true
+   },
+   "Grasp Bottle/Ours": {
+    "label": 85,
+    "feasible_k_of_40": [
+     34
+    ],
+    "on_half_boundary": false
+   },
+   "Type Keys/EgoMimic": {
+    "label": 30,
+    "feasible_k_of_40": [
+     12
+    ],
+    "on_half_boundary": false
+   },
+   "Type Keys/HRDT": {
+    "label": 22,
+    "feasible_k_of_40": [
+     9
+    ],
+    "on_half_boundary": true
+   },
+   "Type Keys/pi0.5": {
+    "label": 35,
+    "feasible_k_of_40": [
+     14
+    ],
+    "on_half_boundary": false
+   },
+   "Type Keys/Ours": {
+    "label": 48,
+    "feasible_k_of_40": [
+     19
+    ],
+    "on_half_boundary": true
+   }
+  },
+  "n_labels_on_half_boundary": 14,
+  "mean_of_best_baseline_per_task": 43.833333333333336,
+  "diff_ours_vs_best_per_task_baseline_pp": 9.166666666666664,
+  "strongest_baseline_by_mean": "pi0.5",
+  "per_task_ours_vs_pi05_assumed_n40": {
+   "Collect Fruit": {
+    "ours_k": 27,
+    "pi05_k": 22,
+    "diff_pp": 12.5,
+    "fisher_p": 0.3587895502384514,
+    "holm_p": 1.0
+   },
+   "Place Remote": {
+    "ours_k": 17,
+    "pi05_k": 12,
+    "diff_pp": 12.5,
+    "fisher_p": 0.3523705108858211,
+    "holm_p": 1.0
+   },
+   "Stack Blocks": {
+    "ours_k": 25,
+    "pi05_k": 21,
+    "diff_pp": 10.0,
+    "fisher_p": 0.49776640095960556,
+    "holm_p": 1.0
+   },
+   "Tighten Screw": {
+    "ours_k": 5,
+    "pi05_k": 2,
+    "diff_pp": 7.5,
+    "fisher_p": 0.431530494821634,
+    "holm_p": 1.0
+   },
+   "Grasp Bottle": {
+    "ours_k": 34,
+    "pi05_k": 27,
+    "diff_pp": 17.5,
+    "fisher_p": 0.1135852641271664,
+    "holm_p": 0.6815115847629983
+   },
+   "Type Keys": {
+    "ours_k": 19,
+    "pi05_k": 14,
+    "diff_pp": 12.5,
+    "fisher_p": 0.36379331305742957,
+    "holm_p": 1.0
+   }
+  },
+  "pooled_ours_vs_pi05_assumed_n240": {
+   "ours_k": 127,
+   "pi05_k": 98,
+   "fisher_p": 0.01036040543326478,
+   "diff_pp": 12.083333333333334,
+   "cmh": {
+    "chi2": 8.536425542849802,
+    "p": 0.003481085803876351,
+    "or_mh": 1.8267997148966495
+   }
+  },
+  "pooled_ours_vs_EgoMimic": {
+   "chi2": 12.533998186763373,
+   "p": 0.00039961380877393286,
+   "or_mh": 2.084430673896205
+  },
+  "pooled_ours_vs_HRDT": {
+   "chi2": 15.267130620985013,
+   "p": 9.332645530464481e-05,
+   "or_mh": 2.290322580645161
+  },
+  "wilson_cell_n40_at_50pct": [
+   35.2,
+   64.8
+  ],
+  "wilson_pooled_ours_n240": [
+   46.6,
+   59.1
+  ],
+  "wilson_pooled_pi05_n240": [
+   34.8,
+   47.1
+  ]
+ },
+ "V6_table2_ablation": {
+  "rows": {
+   "Ours": {
+    "total_k": 39,
+    "total_n": 50,
+    "ood_k": 20,
+    "ood_n": 30,
+    "ood_wilson": [
+     48.8,
+     80.8
+    ],
+    "id_wilson": [
+     76.4,
+     99.1
+    ]
+   },
+   "w/o Intention": {
+    "total_k": 32,
+    "total_n": 50,
+    "ood_k": 16,
+    "ood_n": 30,
+    "ood_wilson": [
+     36.1,
+     69.8
+    ],
+    "id_wilson": [
+     58.4,
+     91.9
+    ]
+   },
+   "w/o Human Pretrain": {
+    "total_k": 16,
+    "total_n": 50,
+    "ood_k": 3,
+    "ood_n": 30,
+    "ood_wilson": [
+     3.5,
+     25.6
+    ],
+    "id_wilson": [
+     43.3,
+     81.9
+    ]
+   },
+   "w/o Human Finetune": {
+    "total_k": 27,
+    "total_n": 50,
+    "ood_k": 10,
+    "ood_n": 30,
+    "ood_wilson": [
+     19.2,
+     51.2
+    ],
+    "id_wilson": [
+     64.0,
+     94.8
+    ]
+   }
+  },
+  "Ours vs w/o Intention": {
+   "cells": {
+    "ID": {
+     "ours": "19/20",
+     "w/o Intention": "16/20",
+     "fisher_p": 0.3416493416493417
+    },
+    "OOD-Position": {
+     "ours": "6/10",
+     "w/o Intention": "5/10",
+     "fisher_p": 1.0
+    },
+    "OOD-Object": {
+     "ours": "8/10",
+     "w/o Intention": "6/10",
+     "fisher_p": 0.628482972136223
+    },
+    "OOD-Scene": {
+     "ours": "6/10",
+     "w/o Intention": "5/10",
+     "fisher_p": 1.0
+    }
+   },
+   "cmh_4_strata": {
+    "chi2": 2.535013614466243,
+    "p": 0.111345926134832,
+    "or_mh": 2.1666666666666665
+   },
+   "ood_pooled_30": {
+    "ours": 20,
+    "other": 16,
+    "fisher_p": 0.4295691931947636
+   }
+  },
+  "Ours vs w/o Human Pretrain": {
+   "cells": {
+    "ID": {
+     "ours": "19/20",
+     "w/o Human Pretrain": "13/20",
+     "fisher_p": 0.0435960435960436
+    },
+    "OOD-Position": {
+     "ours": "6/10",
+     "w/o Human Pretrain": "1/10",
+     "fisher_p": 0.057275541795665644
+    },
+    "OOD-Object": {
+     "ours": "8/10",
+     "w/o Human Pretrain": "2/10",
+     "fisher_p": 0.023014137565221155
+    },
+    "OOD-Scene": {
+     "ours": "6/10",
+     "w/o Human Pretrain": "0/10",
+     "fisher_p": 0.010835913312693497
+    }
+   },
+   "cmh_4_strata": {
+    "chi2": 25.1452306113285,
+    "p": 5.317099130289384e-07,
+    "or_mh": 16.862068965517242
+   },
+   "ood_pooled_30": {
+    "ours": 20,
+    "other": 3,
+    "fisher_p": 1.0979873400083272e-05
+   }
+  },
+  "Ours vs w/o Human Finetune": {
+   "cells": {
+    "ID": {
+     "ours": "19/20",
+     "w/o Human Finetune": "17/20",
+     "fisher_p": 0.6049896049896051
+    },
+    "OOD-Position": {
+     "ours": "6/10",
+     "w/o Human Finetune": "3/10",
+     "fisher_p": 0.3698499642772088
+    },
+    "OOD-Object": {
+     "ours": "8/10",
+     "w/o Human Finetune": "5/10",
+     "fisher_p": 0.34984520123839014
+    },
+    "OOD-Scene": {
+     "ours": "6/10",
+     "w/o Human Finetune": "2/10",
+     "fisher_p": 0.16980233388902116
+    }
+   },
+   "cmh_4_strata": {
+    "chi2": 7.682073434125269,
+    "p": 0.0055772050873594695,
+    "or_mh": 4.116883116883118
+   },
+   "ood_pooled_30": {
+    "ours": 20,
+    "other": 10,
+    "fisher_p": 0.01938318826178997
+   }
+  },
+  "id_cells_fisher_min_p_over_all_12_pairs": 0.010835913312693497
+ },
+ "V7_table3_intention_sources": {
+  "table3_labels": {
+   "Predicted (Ours)": 65,
+   "Human Gaze": 65,
+   "VLM Keypoint": 50,
+   "No Intention": 40,
+   "Random Noise": 25
+  },
+  "integer_ok_n20": {
+   "Predicted (Ours)": true,
+   "Human Gaze": true,
+   "VLM Keypoint": true,
+   "No Intention": true,
+   "Random Noise": true
+  },
+  "integer_ok_n40": {
+   "Predicted (Ours)": true,
+   "Human Gaze": true,
+   "VLM Keypoint": true,
+   "No Intention": true,
+   "Random Noise": true
+  },
+  "fig6_collect_fruit_ours_label": 68,
+  "fig6_collect_fruit_ours_grid_pct": 67.5,
+  "table3_vs_fig6_diff_pp": 3,
+  "fisher_vs_predicted_assumed_n20": {
+   "Human Gaze": 1.0,
+   "VLM Keypoint": 0.523107089291739,
+   "No Intention": 0.20492715519073304,
+   "Random Noise": 0.0248417203778233
+  },
+  "fisher_vs_predicted_assumed_n40": {
+   "Human Gaze": 1.0,
+   "VLM Keypoint": 0.25802508576623845,
+   "No Intention": 0.043238204146275286,
+   "Random Noise": 0.0006476793001493335
+  },
+  "fisher_human_gaze_vs_vlm_keypoint_n20": 0.523107089291739
+ },
+ "V8_table6_fig9_data_scaling": {
+  "rows": {
+   "10m robot": {
+    "id": "4/5",
+    "ood": "9/15",
+    "total": "13/20",
+    "pct": 65.0,
+    "fig9_label": 65,
+    "match": true,
+    "wilson": [
+     43.3,
+     81.9
+    ]
+   },
+   "20m robot": {
+    "id": "4/5",
+    "ood": "12/15",
+    "total": "16/20",
+    "pct": 80.0,
+    "fig9_label": 80,
+    "match": true,
+    "wilson": [
+     58.4,
+     91.9
+    ]
+   },
+   "10m human + 10m robot": {
+    "id": "5/5",
+    "ood": "12/15",
+    "total": "17/20",
+    "pct": 85.0,
+    "fig9_label": 85,
+    "match": true,
+    "wilson": [
+     64.0,
+     94.8
+    ]
+   },
+   "30m robot": {
+    "id": "5/5",
+    "ood": "12/15",
+    "total": "17/20",
+    "pct": 85.0,
+    "fig9_label": 85,
+    "match": true,
+    "wilson": [
+     64.0,
+     94.8
+    ]
+   },
+   "20m human + 10m robot": {
+    "id": "5/5",
+    "ood": "13/15",
+    "total": "18/20",
+    "pct": 90.0,
+    "fig9_label": 90,
+    "match": true,
+    "wilson": [
+     69.9,
+     97.2
+    ]
+   }
+  },
+  "fisher_10h10r_vs_20r": 1.0,
+  "fisher_10h10r_vs_30r": 1.0,
+  "fisher_20h10r_vs_30r": 1.0,
+  "fisher_20h10r_vs_10r": 0.12738612738612737,
+  "fisher_20r_vs_10r": 0.4801153510830931,
+  "trajectories_per_10min_robot_vs_human": {
+   "robot": 20,
+   "human": 100,
+   "source": "부록 E.2"
+  },
+  "fig6_grasp_bottle_ours_label": 85,
+  "note": "그림 6 Grasp Bottle Ours 85%(40회 가정 34/40)와 표 6의 10m human + 10m robot 17/20은 같은 데이터 양(로봇 20궤적, 사람 100궤적, 표 5)에 대응"
+ },
+ "V9_intention_error_units": {
+  "image": "224x224",
+  "diagonal_px": 316.7838379715733,
+  "4.8pct_of_diagonal_px": 15.20562422263552,
+  "4.8pct_of_side_px": 10.752,
+  "11px_as_pct_of_diagonal": 3.4723993718982245,
+  "11px_as_pct_of_side": 4.910714285714286,
+  "bin_width_px": 1.0,
+  "max_quantization_error_px": 0.5
+ },
+ "V10_pretraining_budget": {
+  "gpu_hours": 1344,
+  "wall_hours_8gpu": 168.0,
+  "wall_days": 7.0,
+  "sec_per_step_wall": 30.24,
+  "gpu_sec_per_step": 241.92,
+  "samples_seen_if_2048_is_global_batch": 40960000,
+  "epochs_over_150M_frames_if_2048": 0.2730666666666667,
+  "samples_seen_if_2048_per_update_x4_accum": 163840000,
+  "epochs_if_x4": 1.0922666666666667,
+  "per_gpu_batch_if_2048_global": 256.0,
+  "samples_per_sec_if_2048": 67.72486772486772,
+  "samples_per_sec_if_x4": 270.8994708994709
+ },
+ "V11_latency": {
+  "with_intention_ms": 44.384,
+  "direct_ms": 32.205,
+  "diff_ms": 12.179000000000002,
+  "reported_diff_ms": 12.179,
+  "relative_overhead_pct": 37.81710914454277,
+  "budget_ms_at_10hz": 100,
+  "fraction_of_budget_pct": 44.384
+ },
+ "V12_v2_vs_v3": {
+  "v2_fig6_means_DP_ACT_pi05_Ours": [
+   26.666666666666668,
+   41.666666666666664,
+   42.5,
+   55.0
+  ],
+  "v2_ours_minus_pi05_pp": 12.5,
+  "v3_fig6_means": {
+   "EgoMimic": 38.333333333333336,
+   "HRDT": 37.0,
+   "pi0.5": 40.833333333333336,
+   "Ours": 53.0
+  },
+  "v3_ours_minus_pi05_pp": 12.166666666666664,
+  "v2_ours_minus_best_baseline_per_task_pp": 10.833333333333336,
+  "v2_pi05_cells": {
+   "Put fruit": 70,
+   "Stack blocks": 50,
+   "Put remote": 30,
+   "Tighten screw": 10,
+   "Put bottle": 65,
+   "Type VLIA": 30
+  },
+  "v3_pi05_cells": {
+   "Collect Fruit": 55,
+   "Place Remote": 30,
+   "Stack Blocks": 52,
+   "Tighten Screw": 5,
+   "Grasp Bottle": 68,
+   "Type Keys": 35
+  },
+  "v2_ours_cells": {
+   "Put fruit": 85,
+   "Stack blocks": 55,
+   "Put remote": 40,
+   "Tighten screw": 20,
+   "Put bottle": 85,
+   "Type VLIA": 45
+  },
+  "v3_ours_cells": {
+   "Collect Fruit": 68,
+   "Place Remote": 43,
+   "Stack Blocks": 62,
+   "Tighten Screw": 12,
+   "Grasp Bottle": 85,
+   "Type Keys": 48
+  },
+  "table1_dp_column_removed_in_v3": {
+   "DP_avg_ID": 28,
+   "DP_avg_OOD-D": 7,
+   "DP_avg_OOD-L": 0
+  },
+  "table2_ours_rows_identical_v2_v3": true,
+  "table2_v2_baselines_removed_in_v3": {
+   "ACT": "16/20,1/10,4/10,0/10",
+   "DP": "13/20,2/10,3/10,0/10",
+   "pi0.5": "17/20,3/10,4/10,3/10"
+  },
+  "table2_v2_pi05_vs_ours_fisher": {
+   "ID": 0.6049896049896051,
+   "OOD-Position": 0.3698499642772088,
+   "OOD-Object": 0.1698023338890212,
+   "OOD-Scene": 0.3698499642772088
+  },
+  "table2_v2_pi05_vs_ours_cmh": {
+   "chi2": 7.513307984790875,
+   "p": 0.006124478914049259,
+   "or_mh": 3.9629629629629632
+  },
+  "v2_fig6_pooled_ours_vs_pi05_assumed_n20": {
+   "k_ours": 66,
+   "k_pi05": 51,
+   "n_each": 120,
+   "fisher_p": 0.0703929903590911,
+   "cmh": {
+    "chi2": 4.567933368037481,
+    "p": 0.03257584127787326,
+    "or_mh": 1.8797653958944283
+   }
+  }
+ },
+ "V13_power": {
+  "n_10_per_arm_exact_fisher": {
+   "base_0.4": null,
+   "base_0.6": null
+  },
+  "n_20_per_arm_exact_fisher": {
+   "base_0.4": 0.5,
+   "base_0.6": null
+  },
+  "n_40_per_arm_exact_fisher": {
+   "base_0.4": 0.35,
+   "base_0.6": 0.3
+  },
+  "n_100_per_arm_normal_approx": {
+   "base_0.4": 0.2,
+   "base_0.6": 0.18
+  },
+  "n_240_per_arm_normal_approx": {
+   "base_0.4": 0.13,
+   "base_0.6": 0.13
+  },
+  "n_600_per_arm_normal_approx": {
+   "base_0.4": 0.09,
+   "base_0.6": 0.08
+  },
+  "power_example_Table2_OOD_pooled_30_per_arm_ours_vs_wo_intention_(0.67 vs 0.53)": 0.12096236533254799,
+  "power_example_fig6_pooled_240_per_arm_(0.529 vs 0.408)": 0.763015439085413,
+  "power_example_table1_cell_100_per_arm_(0.49 vs 0.41)": 0.2073013239650618
+ },
+ "V14_table5_data_volumes": {
+  "Fruit Collecting": {
+   "robot_traj": 100,
+   "human_traj": 200,
+   "est_robot_min": 50.0,
+   "est_human_min": 20.0,
+   "human_per_robot": 2.0
+  },
+  "Remote Stowing": {
+   "robot_traj": 50,
+   "human_traj": 100,
+   "est_robot_min": 25.0,
+   "est_human_min": 10.0,
+   "human_per_robot": 2.0
+  },
+  "Block Stacking": {
+   "robot_traj": 50,
+   "human_traj": 100,
+   "est_robot_min": 25.0,
+   "est_human_min": 10.0,
+   "human_per_robot": 2.0
+  },
+  "Screw Tightening": {
+   "robot_traj": 100,
+   "human_traj": 200,
+   "est_robot_min": 50.0,
+   "est_human_min": 20.0,
+   "human_per_robot": 2.0
+  },
+  "Bottle Transferring": {
+   "robot_traj": 20,
+   "human_traj": 100,
+   "est_robot_min": 10.0,
+   "est_human_min": 10.0,
+   "human_per_robot": 5.0
+  },
+  "Keyboard Typing": {
+   "robot_traj": 20,
+   "human_traj": 100,
+   "est_robot_min": 10.0,
+   "est_human_min": 10.0,
+   "human_per_robot": 5.0
+  },
+  "note": "10분당 로봇 약 20, 사람 약 100 궤적(부록 E.2)을 모든 과제에 적용한 환산. 과제별 실제 수집 시간은 논문에 없음"
+ }
+}
